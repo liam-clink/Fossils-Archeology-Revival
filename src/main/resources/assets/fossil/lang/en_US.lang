@@ -1,0 +1,395 @@
+﻿#Updated for Build 6 DEV (1.6.4) HEAD19 July 17 2014 
+#English (en_US) Localization File
+
+#Tab Groups
+itemgroup.FArmor=Ancient Armor
+itemgroup.FBlocks=Ancient Blocks
+itemgroup.FCombat=Ancient Weapons
+itemgroup.FFood=Ancient Foods
+itemgroup.FItems=Ancient Items
+itemgroup.FMaterial=Ancient Materials
+itemgroup.FTools=Ancient Tools
+itemgroup.FFigurines=Collectables
+
+#Achievements
+achievement.FirstEgg=First Dinosaur!
+achievement.AllEggs=Gotta Hatch 'Em All!
+achievement.FoundFossils=Digging for Bones
+achievement.pigBossOnEarth=Hail Anu
+achievement.Permafrost=Try not to get a cold!
+achievement.ArchWorkbench=Let's get the party started!
+achievement.Analyzer=For SCIENCE!
+achievement.CultVat=Genetic manipulation.
+achievement.Sifter=Cuz' baby I'm a Gold Digger!
+achievement.Dinopedia=Fill all the pages!
+achievement.IceAge=I do not know how you'll give birth...
+achievement.TheKing=Ruler of the Late Cretaceous.
+
+#Achievement Descriptions
+achievement.FirstEgg.desc=You brought back your first dinosaur!
+achievement.AllEggs.desc=You've found all the dinosaur eggs!
+achievement.FoundFossils.desc=You've found some fossils!
+achievement.pigBossOnEarth.desc=You summoned Anu!
+achievement.Permafrost=What wonders could be inside it?
+achievement.ArchWorkbench=First step in becoming an archaeologist.
+achievement.Analyzer=Discovering the past!
+achievement.CultVat=Bring history back to live!
+achievement.Sifter=Even if I have to go through all the dirt!
+achievement.Dinopedia=Find all the dinos!
+achievement.IceAge=However I want the ice age back!
+achievement.TheKing=Long live the king!
+
+#Enchantments
+enchantment.paleontology=Paleontology
+enchantment.archeology=Archeology
+
+#Blocks
+tile.fossil.name=Fossil
+tile.skullBlock.name=Skull
+tile.skullLantern.name=Skull Lantern
+tile.analyzer.name=Analyzer
+tile.cultureVat.name=Culture Vat
+tile.fossilworkbench.name=Archeology Workbench
+tile.fossil_drum.name=Drum
+tile.feederIdle.name=Feeder
+tile.feederActive.name=Feeder
+tile.permafrost.name=Permafrost
+tile.icedStone.name=Iced Stone
+tile.timeMachine.name=Time Machine
+tile.tar.name=Tar
+tile.palaeorapheLog.name=Palaeoraphe Log
+tile.palaeorapheLeaves.name=Palaeoraphe Leaves
+tile.palaeorapheSapling.name=Palaeoraphe Sapling
+tile.palaeoraphePlanks.name=Palaeoraphe Planks
+tile.palaeorapheSlab.name=Palaeoraphe Slab
+tile.palaeorapheSlabDouble.name=Palaeoraphe Double Slab
+tile.palaeorapheStairs.name=Palaeoraphe Stairs
+tile.volcanicAsh.name=Volcanic Ash
+tile.volcanicRock.name=Volcanic Rock
+tile.volcanicRockHot.name=Hot Volcanic Rock
+tile.sarracina.name=Sarracina
+tile.fernBlock.name=Ancient Fern
+tile.volcanicBrick.name=Volcanic Brick
+tile.amberOre.name=Amber Ore
+tile.ancientStone.name=Ancient Stone
+tile.ancientStonebrick.name=Ancient Stone Brick
+tile.ancientWood.name=Ancient Wood
+tile.ancientWoodPillar.name=Ancient Wood Pillar
+tile.ancientGlass.name=Ancient Glass
+tile.ancientWoodPlate.name=Ancient Wooden Plate
+tile.ancientWoodStairs.name=Ancient Wooden Stairs
+tile.ancientStoneStairs.name=Ancient Stone Stairs
+tile.figurine.name=Wooden Figurine
+tile.sifter.name=Sifter
+tile.volcanicStairs.name=Volcanic Stairs
+tile.volcanicSlab.name=Volcanic Slab
+tile.volcanicSlabDouble.name=Volcanic Double Slab
+
+#Collectables
+tile.figurine.figurine_steve_pristine.name=Pristine Steve Figurine
+tile.figurine.figurine_skeleton_pristine.name=Pristine Skeleton Figurine
+tile.figurine.figurine_zombie_pristine.name=Pristine Zombie Figurine
+tile.figurine.figurine_pigzombie_pristine.name=Pristine Enderman Figurine
+tile.figurine.figurine_enderman_pristine.name=Pristine Zombie Pigman Figurine
+tile.figurine.figurine_steve_damaged.name=Damaged Steve Figurine
+tile.figurine.figurine_skeleton_damaged.name=Damaged Skeleton Figurine
+tile.figurine.figurine_zombie_damaged.name=Damaged Zombie Figurine
+tile.figurine.figurine_pigzombie_damaged.name=Damaged Enderman Figurine
+tile.figurine.figurine_enderman_damaged.name=Damaged Zombie Pigman Figurine
+tile.figurine.figurine_steve_broken.name=Broken Steve Figurine
+tile.figurine.figurine_skeleton_broken.name=Broken Skeleton Figurine
+tile.figurine.figurine_zombie_broken.name=Broken Zombie Figurine
+tile.figurine.figurine_pigzombie_broken.name=Broken Enderman Figurine
+tile.figurine.figurine_enderman_broken.name=Broken Zombie Pigman Figurine
+tile.figurine.figurine_mysterious.name=Mysterious Figurine
+tile.vaseVolute.damaged_volute.name=Broken Volute
+tile.vaseVolute.restored_volute.name=Restored Volute
+tile.vaseVolute.blackFigure_volute.name=Black Figure Volute
+tile.vaseVolute.redFigure_volute.name=Red Figure Volute
+tile.vaseVolute.porcelain_volute.name=Porcelain Volute
+tile.vaseAmphora.damaged_amphora.name=Broken Amphora
+tile.vaseAmphora.restored_amphora.name=Restored Amphora
+tile.vaseAmphora.blackFigure_amphora.name=Black Figure Amphora
+tile.vaseAmphora.redFigure_amphora.name=Red Figure Amphora
+tile.vaseAmphora.porcelain_amphora.name=Porcelain Amphora
+tile.vaseKylix.damaged_kylix.name=Broken Kylix
+tile.vaseKylix.restored_kylix.name=Restored Kylix
+tile.vaseKylix.blackFigure_kylix.name=Black Figure Kylix
+tile.vaseKylix.redFigure_kylix.name=Red Figure Kylix
+tile.vaseKylix.porcelain_kylix.name=Porcelain Kylix
+
+#Items
+item.bioFossil.name=Bio-Fossil
+item.relicScrap.name=Relic Scrap
+item.stoneTablet.name=Stone Tablet
+item.brokenAncientSword.name=Broken Ancient Sword
+item.ancientSword.name=Ancient Sword
+item.fernSeeds.name=Fern Seeds
+item.brokenAncientHelmet.name=Broken Ancient Helmet
+item.ancientHelmet.name=Ancient Helmet
+item.skullStick.name=Skull Stick
+item.scarabGem.name=Scarab Gem
+item.scarabAxe.name=Scarab Axe
+item.scarabPickAxe.name=Scarab PickAxe
+item.scarabSword.name=Scarab Sword
+item.scarabHoe.name=Scarab Hoe
+item.scarabShovel.name=Scarab Shovel
+item.dinoPedia.name=DinoPedia
+item.tooth.name=TRex Tooth
+item.dagger.name=Tooth Dagger
+item.rawChickenSoup.name=Raw Chicken Soup
+item.cookedChickenSoup.name=Cooked Chicken Soup
+item.essenceofChicken.name=Essence of Chicken
+item.emptyShell.name=Empty Shell
+item.sJL.name=Sio-Chiu-Le
+item.icedMeat.name=Frozen Meat
+item.woodJavelin.name=Wooden Javelin
+item.stoneJavelin.name=Stone Javelin
+item.ironJavelin.name=Iron Javelin
+item.goldJavelin.name=Gold Javelin
+item.diamondJavelin.name=Diamond Javelin
+item.ancientJavelin.name=Ancient Javelin
+item.whip.name=Whip
+item.magicConch.name=Magic Conch
+item.legBone.name=Leg Bone
+item.claw.name=Claw
+item.foot.name=Foot
+item.skull.name=Skull
+item.plantFossil.name=Plant Fossil
+item.skullHelmet.name=Skull Helmet
+item.ribCage.name=Rib Cage
+item.shinGuards.name=Shin Guards
+item.feet.name=Feet
+item.amber.name=Amber
+item.ancientVase.name=Ancient Vase
+item.ancientVaseBroken.name=Ancient Broken Vase
+item.boneArrow.name=Bone Arrow
+item.boneBow.name=Bone Bow
+item.boneGlue.name=Bone Glue
+item.boneRod.name=Bone Rod
+item.boneSword.name=Bone Sword
+item.powderyString.name=Powdery String
+item.animalCoin.name=Animal Coin
+item.dinoCoin.name=Dinosaur Coin
+item.dodoWing.name=Raw Dodo Wing
+item.dodoWingCooked.name=Cooked Dodo Wing
+item.dinoSteak.name=Dino Steak
+item.rawTriceratops.name=Triceratops Meat
+item.rawVelociraptor.name=Velociraptor Meat
+item.rawTRex.name=Tyrannosaurus Meat
+item.rawPterosaur.name=Pterosaur Meat
+item.rawNautilus.name=Nautilus Meat
+item.rawPlesiosaur.name=Plesiosaur Meat
+item.rawMosasaurus.name=Mosasaurus Meat
+item.rawStegosaurus.name=Stegosaurus Meat
+item.rawDilophosaurus.name=Dilophosaurus Meat
+item.rawBrachiosaurus.name=Brachiosaurus Meat
+item.rawSpinosaurus.name=Spinosaurus Meat
+item.rawCompsognathus.name=Compsognathus Meat
+item.rawAnkylosaurus.name=Ankylosaurus Meat
+item.rawPachycephalosaurus.name=Pachycephalosaurus Meat
+item.rawDeinonychus.name=Deinonychus Meat
+item.rawGallimimus.name=Gallimimus Meat
+item.eggTriceratops.name=Triceratops Egg
+item.eggVelociraptor.name=Velociraptor Egg
+item.eggTRex.name=Tyrannosaurus Egg
+item.eggPterosaur.name=Pterosaur Egg
+item.eggNautilus.name=Living Nautilus
+item.eggPlesiosaur.name=Plesiosaur Egg
+item.eggMosasaurus.name=Mosasaurus Egg
+item.eggStegosaurus.name=Stegosaurus Egg
+item.eggDilophosaurus.name=Dilophosaurus Egg
+item.eggBrachiosaurus.name=Brachiosaurus Egg
+item.eggSpinosaurus.name=Spinosaurus Egg
+item.eggCompsognathus.name=Compsognathus Egg
+item.eggDodo.name=Dodo Egg
+item.eggCultivatedDodo.name=Cultivated Dodo Egg
+item.eggAnkylosaurus.name=Ankylosaurus Egg
+item.eggPachycephalosaurus.name=Pachycephalosaurus Egg
+item.eggDeinonychus.name=Deinonychus Egg
+item.eggGallimimus.name=Gallimimus Egg
+item.eggCoelacanth.first.name=Ocean Coelacanth
+item.eggCoelacanth.second.name=River Coelacanth
+item.eggCoelacanth.third.name=Swamp Coelacanth
+item.dnaTriceratops.name=Triceratops DNA
+item.dnaVelociraptor.name=Velociraptor DNA
+item.dnaTRex.name=Tyrannosaurus DNA
+item.dnaPterosaur.name=Pterosaur DNA
+item.dnaNautilus.name=Nautilus DNA
+item.dnaPlesiosaur.name=Plesiosaur DNA
+item.dnaMosasaurus.name=Mosasaurus DNA
+item.dnaStegosaurus.name=Stegosaurus DNA
+item.dnaDilophosaurus.name=Dilophosaurus DNA
+item.dnaBrachiosaurus.name=Brachiosaurus DNA
+item.dnaSpinosaurus.name=Spinosaurus DNA
+item.dnaCompsognathus.name=Compsognathus DNA
+item.dnaAnkylosaurus.name=Ankylosaurus DNA
+item.dnaPachycephalosaurus.name=Pachycephalosaurus DNA
+item.dnaDeinonychus.name=Deinonychus DNA
+item.dnaGallimimus.name=Gallimimus DNA
+item.dnaCoelacanth.name=Coelacanth DNA
+item.dnaPig.name=Pig DNA
+item.dnaSheep.name=Sheep DNA
+item.dnaCow.name=Cow DNA
+item.dnaChicken.name=Chicken DNA
+item.dnaSmilodon.name=Smilodon DNA
+item.dnaMammoth.name=Mammoth DNA
+item.dnaDodo.name=Dodo DNA
+item.dnaHorse.name=Horse DNA
+item.embryoPig.name=Pig Embryo
+item.embryoSheep.name=Sheep Embryo
+item.embryoCow.name=Cow Embryo
+item.embryoChicken.name=Chicken Embryo
+item.embryoSmilodon.name=Smilodon Embryo
+item.embryoMammoth.name=Mammoth Embryo
+item.embryoDodo.name=Dodo Embryo
+item.embryoHorse.name=Horse Embryo
+item.archNotebook.name=Archaeology Notebook
+item.potteryShard.name=Pottery Shard
+
+
+#Dinosaur related chat messages
+dnaName.head=DNA of 
+dnaName.tail=
+embryoName.head=Embryo of 
+embryoName.tail=
+meatName.head=Meat of 
+meatName.tail=
+mGCName.head=Magic Conch: 
+mGCName.tail=
+dEggName.head=Egg of 
+dEggName.tail=
+
+#Order chat messages
+order.head=Order: 
+order.Stay=Stay
+order.Follow=Follow
+order.FreeMove=Free Move
+
+#Dinosaur status chat messages
+status.Hungry.head= 
+status.Hungry= is hungry.
+status.Starve.head=
+status.Starve= was starved to death.
+status.LearningChest.head=A 
+status.LearningChest= has learned how to use chests.
+status.Betrayed.head=This 
+status.Betrayed= won't trust mankind anymore.
+status.NoSpace.head=
+status.NoSpace= doesn't have enough space to grow.
+status.StarveEsc.head=
+status.StarveEsc= has escaped because of starvation.
+status.SJLBite= bit the Siu-Jiu-Le and ran away.
+status.ChewTime= needs time to chew.
+status.Full.head= This 
+status.Full= is full.
+status.Nervous.Head=You made the little 
+status.Nervous= too nervous to hunt itself.
+status.GemErrorYoung=This T-Rex is still too young.
+status.GemErrorHealth=The scarab cannot afford such strong life energy.
+status.GemErrorTamed=This T-Rex has already been tamed.
+status.essencefail=Essence of Chicken had no effect.
+
+#Dinosaur Names Clean
+entity.fossil.Triceratops.name=Triceratops
+entity.fossil.Velociraptor.name=Velociraptor
+entity.fossil.TRex.name=Tyrannosaurus
+entity.fossil.Pterosaur.name=Pterosaur
+entity.fossil.Plesiosaur.name=Plesiosaur
+entity.fossil.Mosasaurus.name=Mosasaurus
+entity.fossil.Stegosaurus.name=Stegosaurus
+entity.fossil.Dilophosaurus.name=Dilophosaurus
+entity.fossil.Brachiosaurus.name=Brachiosaurus
+entity.fossil.Nautilus.name=Nautilus
+entity.fossil.Spinosaurus.name=Spinosaurus
+entity.fossil.Compsognathus.name=Compsognathus
+entity.fossil.Ankylosaurus.name=Ankylosaurus
+entity.fossil.Pachycephalosaurus.name=Pachycephalosaurus
+entity.fossil.Deinonychus.name=Deinonychus
+entity.fossil.Gallimimus.name=Gallimimus
+
+#Non-dinosaur names Clean
+entity.fossil.Mammoth.name=Mammoth
+entity.fossil.Smilodon.name=Smilodon
+entity.fossil.PregnantCow.name=Pregnant Cow
+entity.fossil.PregnantPig.name=Pregnant Pig
+entity.fossil.PregnantSheep.name=Pregnant Sheep
+entity.fossil.PregnantHorse.name=Pregnant Horse
+entity.fossil.Dodo.name=Dodo
+entity.fossil.Coelacanth.name=Coelacanth
+
+#Pedia text
+pedia.text.owner=Owner:
+pedia.text.chest=* Chests
+pedia.text.caution=!Dangerous!
+pedia.text.rideable=* Rideable
+pedia.text.weak=Almost Dead
+pedia.text.fly=* Able to fly
+pedia.eggWet=Wet
+pedia.eggDry=Dry
+pedia.eggCold=Cold
+pedia.eggWarm=Warm
+pedia.eggStatus=Status
+pedia.eggProgress=Progress
+pedia.eggDay=Day
+pedia.eggDays=Days
+pedia.embryo.inside=Embryo in:
+pedia.embryo.growing=Progress:
+pedia.embryo.Pig=Pig
+pedia.embryo.Sheep=Sheep
+pedia.embryo.Cow=Cow
+pedia.embryo.Chicken=Chicken
+pedia.embryo.Smilodon=Smilodon
+pedia.embryo.Mammoth=Mammoth
+pedia.embryo.Dodo=Dodo
+pedia.embryo.Horse=Horse
+
+#Anu speaking lines
+anuSpeaker.self=Anu: 
+anuSpeaker.hello=Kneel before me, resistance is futile.
+anuSpeaker.bareHand=Bare hands... Stupid, but brave.
+anuSpeaker.draw=DRAW YOUR SWORD.
+anuSpeaker.coward=Bow using coward! Stop hiding!
+anuSpeaker.leartHere=Look what I learned from here!
+anuSpeaker.leartThere=Look what I learned from there!
+anuSpeaker.unknownRanged=So is that your weapon?
+anuSpeaker.unknownMelee=Ha! Stop playing!
+anuSpeaker.summon=Servants, your Master calls.
+anuSpeaker.trans=Brutes, wake up your wisdom.
+anuSpeaker.qi=Qi-shock!
+anuSpeaker.fireRain=Lets rain some fire!
+
+#Friendly pigmen speaking lines
+fpzSpeaker.self=Pig Zombies: 
+fpzSpeaker.selfKill=We can't live without leader!
+fpzSpeaker.lifeFor.head=My life for 
+fpzSpeaker.lifeFor.tail=!
+fpzSpeaker.anuSommon=All hail Anu!!
+
+#Dinosaur egg chat messages
+dinoegg.hatched=A dinosaur egg has hatched!
+dinoegg.noSpace=This egg cannot spawn here.
+dinoegg.head=An egg of 
+dinoegg.dry= died because it was too dry.	
+dinoegg.cold= died because it was too cold.
+
+#Cultivator chat messages
+cultivate.outBreak=Warning! Cultivating failed!
+
+#Drum chat messages
+drum.trigger=Drum Order: 
+drum.ordering=Ordering 
+drum.tRex1=Ordering T-Rexes to breakfast.
+drum.tRex2=Ordering T-Rexes to lunch.
+drum.tRex3=Ordering T-Rexes to dinner.
+
+#Hostile mob names
+entity.fossil.Bones.name=Bones
+entity.fossil.FriendlyPigZombie.name=Friendly Pig Zombies
+entity.fossil.Failuresaurus.name=Failursaurus
+entity.fossil.PigBoss.name=Anu
+
+#Records
+item.record_bones.name=Fossil Record
+item.record.record_bones_disc.desc=WhiteJoshMan - Bones
+item.record.record_jp_theme.desc=JP Theme

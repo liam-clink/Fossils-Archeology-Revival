@@ -1,0 +1,394 @@
+#Updated for Build 6 DEV (1.6.4) HEAD17 July 17 2014 
+#Simplified Chinese (zh_CN) Localization File
+
+#创造模式标签
+itemgroup.FArmor=古代装备
+itemgroup.FBlocks=古代方块
+itemgroup.FCombat=古代武器
+itemgroup.FFood=古代食物
+itemgroup.FItems=古代物品
+itemgroup.FMaterial=古代材料
+itemgroup.FTools=古代工具
+itemgroup.FFigurines=Collectables
+
+#Achievements
+achievement.FirstEgg=第一只恐龙!
+achievement.AllEggs=龙蛋收藏家
+achievement.FoundFossils=掘骨者
+achievement.pigBossOnEarth=你犯规我要告诉马麻!!
+achievement.Permafrost=尽量不要感冒!
+achievement.ArchWorkbench=让我们开始派对吧!
+achievement.Analyzer=为了科学!
+achievement.CultVat=基因操作.
+achievement.Sifter=宝贝，因为我是一个淘金者!
+achievement.Dinopedia=填补完百科所有条目!
+achievement.IceAge=我不知道你该怎么生仔...
+achievement.TheKing=晚白垩世统治者.
+
+#Achievement Descriptions
+achievement.FirstEgg.desc=你带回了你的第一只恐龙!
+achievement.AllEggs.desc=你已发现所有的恐龙蛋!
+achievement.FoundFossils.desc=你已发现一些化石!
+achievement.pigBossOnEarth.desc=把阿努召唤到地面世界
+achievement.Permafrost=这里面究竟有什么?
+achievement.ArchWorkbench=成为一名考古学家的第一步.
+achievement.Analyzer=探索过去!
+achievement.CultVat=让历史重生!
+achievement.Sifter=即使我必须经受所有污秽!
+achievement.Dinopedia=发现所有恐龙!
+achievement.IceAge=但是我想要冰河时代回来!
+achievement.TheKing=国王万岁!
+
+#Enchantments
+enchantment.paleontology=Paleontology
+enchantment.archeology=Archeology
+
+#方块
+tile.fossil.name=化石
+tile.skullBlock.name=头骨
+tile.skullLantern.name=头骨灯笼
+tile.analyzer.name=分析仪
+tile.cultureVat.name=培养槽
+tile.fossilworkbench.name=考古工作桌
+tile.fossil_drum.name=命令鼓
+tile.feederIdle.name=喂食器
+tile.feederActive.name=喂食器
+tile.permafrost.name=永久冻土
+tile.icedStone.name=冰石
+tile.timeMachine.name=时间机器
+tile.tar.name=焦油
+tile.palaeorapheLog.name=古树原木
+tile.palaeorapheLeaves.name=古树树叶
+tile.palaeorapheSapling.name=古树树苗
+tile.palaeoraphePlanks.name=古树木板
+tile.palaeorapheSlab.name=古树台阶
+tile.palaeorapheSlabDouble.name=古树双层台阶
+tile.palaeorapheStairs.name=古树楼梯
+tile.volcanicAsh.name=火山灰
+tile.volcanicRock.name=火山岩
+tile.volcanicRockHot.name=炙热火山岩
+tile.sarracina.name=瓶子草
+tile.fernBlock.name=古代蕨类
+tile.volcanicBrick.name=火山岩砖
+tile.amberOre.name=琥珀矿石
+tile.ancientStone.name=古代石头
+tile.ancientStonebrick.name=古代石砖
+tile.ancientWood.name=古代木头
+tile.ancientWoodPillar.name=古代木头柱子
+tile.ancientGlass.name=古代玻璃
+tile.ancientWoodPlate.name=古代木板
+tile.ancientWoodStairs.name=古代木头楼梯
+tile.ancientStoneStairs.name=古代石头楼梯
+tile.figurine.name=木质雕像
+tile.sifter.name=筛子
+tile.volcanicStairs.name=Volcanic Stairs
+tile.volcanicSlab.name=Volcanic Slab
+tile.volcanicSlabDouble.name=Volcanic Double Slab
+
+#Collectables
+tile.figurine.figurine_steve_pristine.name=Pristine Steve Figurine
+tile.figurine.figurine_skeleton_pristine.name=Pristine Skeleton Figurine
+tile.figurine.figurine_zombie_pristine.name=Pristine Zombie Figurine
+tile.figurine.figurine_pigzombie_pristine.name=Pristine Enderman Figurine
+tile.figurine.figurine_enderman_pristine.name=Pristine Zombie Pigman Figurine
+tile.figurine.figurine_steve_damaged.name=Damaged Steve Figurine
+tile.figurine.figurine_skeleton_damaged.name=Damaged Skeleton Figurine
+tile.figurine.figurine_zombie_damaged.name=Damaged Zombie Figurine
+tile.figurine.figurine_pigzombie_damaged.name=Damaged Enderman Figurine
+tile.figurine.figurine_enderman_damaged.name=Damaged Zombie Pigman Figurine
+tile.figurine.figurine_steve_broken.name=Broken Steve Figurine
+tile.figurine.figurine_skeleton_broken.name=Broken Skeleton Figurine
+tile.figurine.figurine_zombie_broken.name=Broken Zombie Figurine
+tile.figurine.figurine_pigzombie_broken.name=Broken Enderman Figurine
+tile.figurine.figurine_enderman_broken.name=Broken Zombie Pigman Figurine
+tile.figurine.figurine_mysterious.name=Mysterious Figurine
+tile.vaseVolute.damaged_volute.name=Broken Volute
+tile.vaseVolute.restored_volute.name=Restored Volute
+tile.vaseVolute.blackFigure_volute.name=Black Figure Volute
+tile.vaseVolute.redFigure_volute.name=Red Figure Volute
+tile.vaseVolute.porcelain_volute.name=Porcelain Volute
+tile.vaseAmphora.damaged_amphora.name=Broken Amphora
+tile.vaseAmphora.restored_amphora.name=Restored Amphora
+tile.vaseAmphora.blackFigure_amphora.name=Black Figure Amphora
+tile.vaseAmphora.redFigure_amphora.name=Red Figure Amphora
+tile.vaseAmphora.porcelain_amphora.name=Porcelain Amphora
+tile.vaseKylix.damaged_kylix.name=Broken Kylix
+tile.vaseKylix.restored_kylix.name=Restored Kylix
+tile.vaseKylix.blackFigure_kylix.name=Black Figure Kylix
+tile.vaseKylix.redFigure_kylix.name=Red Figure Kylix
+tile.vaseKylix.porcelain_kylix.name=Porcelain Kylix
+
+#物品
+item.bioFossil.name=活体化石
+item.relicScrap.name=遗跡碎片
+item.stoneTablet.name=石版画
+item.brokenAncientSword.name=破损的古代剑
+item.ancientSword.name=古代剑
+item.fernSeeds.name=蕨类种子
+item.brokenAncientHelmet.name=破损的古代头盔
+item.ancientHelmet.name=古代头盔
+item.skullStick.name=头骨棒
+item.scarabGem.name=圣甲虫宝石
+item.scarabAxe.name=圣宝石斧
+item.scarabPickAxe.name=圣宝石镐
+item.scarabSword.name=圣宝石剑
+item.scarabHoe.name=圣宝石锄
+item.scarabShovel.name=圣宝石铲
+item.dinoPedia.name=恐龙百科
+item.tooth.name=暴龙牙
+item.dagger.name=龙牙匕首
+item.rawChickenSoup.name=生鸡肉糜
+item.cookedChickenSoup.name=鸡汤
+item.essenceofChicken.name=鸡精
+item.emptyShell.name=空贝壳
+item.sJL.name=烧酒螺
+item.icedMeat.name=冰冻肉
+item.woodJavelin.name=木制标枪
+item.stoneJavelin.name=石制标枪
+item.ironJavelin.name=铁制标枪
+item.goldJavelin.name=黄金标枪
+item.diamondJavelin.name=钻石标枪
+item.ancientJavelin.name=古代标枪
+item.whip.name=鞭子
+item.magicConch.name=神奇海螺
+item.legBone.name=腿骨
+item.claw.name=爪子
+item.foot.name=单只脚掌
+item.skull.name=头骨
+item.plantFossil.name=植物化石
+item.skullHelmet.name=颅骨头盔
+item.ribCage.name=肋骨之笼
+item.shinGuards.name=护胫
+item.feet.name=一对脚掌
+item.amber.name=琥珀
+item.ancientVase.name=古代瓶子
+item.ancientVaseBroken.name=破损的古代瓶子
+item.boneArrow.name=骨制箭矢
+item.boneBow.name=骨弓
+item.boneGlue.name=骨胶
+item.boneRod.name=骨头棍
+item.boneSword.name=骨剑
+item.powderyString.name=粉化丝线
+item.animalCoin.name=动物硬币
+item.dinoCoin.name=恐龙硬币
+item.dodoWing.name=生渡渡鸟翅膀
+item.dodoWingCooked.name=烤渡渡鸟翅膀
+item.dinoSteak.name=恐龙肉排
+item.rawTriceratops.name=三角龙肉
+item.rawVelociraptor.name=迅猛龙肉
+item.rawTRex.name=霸王龙肉
+item.rawPterosaur.name=翼龙肉
+item.rawNautilus.name=鹦鹉螺肉
+item.rawPlesiosaur.name=蛇颈龙肉
+item.rawMosasaurus.name=沧龙肉
+item.rawStegosaurus.name=剑龙肉
+item.rawDilophosaurus.name=双脊龙肉
+item.rawBrachiosaurus.name=腕龙肉
+item.rawSpinosaurus.name=脊龙肉
+item.rawCompsognathus.name=美颌龙肉
+item.rawAnkylosaurus.name=背甲龙肉
+item.rawPachycephalosaurus.name=肿头龙肉
+item.rawDeinonychus.name=恐爪龙肉
+item.rawGallimimus.name=似鸡龙肉
+item.eggTriceratops.name=三角龙蛋
+item.eggVelociraptor.name=迅猛龙蛋
+item.eggTRex.name=霸王龙蛋
+item.eggPterosaur.name=翼龙蛋
+item.eggNautilus.name=活体鹦鹉螺
+item.eggPlesiosaur.name=蛇颈龙蛋
+item.eggMosasaurus.name=沧龙蛋
+item.eggStegosaurus.name=剑龙蛋
+item.eggDilophosaurus.name=双脊龙蛋
+item.eggBrachiosaurus.name=腕龙蛋
+item.eggSpinosaurus.name=脊龙蛋
+item.eggCompsognathus.name=美颌龙蛋
+item.eggDodo.name=渡渡鸟蛋
+item.eggCultivatedDodo.name=人工养殖渡渡鸟蛋
+item.eggAnkylosaurus.name=背甲龙蛋
+item.eggPachycephalosaurus.name=肿头龙蛋
+item.eggDeinonychus.name=恐爪龙蛋
+item.eggGallimimus.name=似鸡龙蛋
+item.eggCoelacanth.first.name=Ocean Coelacanth
+item.eggCoelacanth.second.name=River Coelacanth
+item.eggCoelacanth.third.name=Swamp Coelacanth
+item.dnaTriceratops.name=三角龙DNA
+item.dnaVelociraptor.name=迅猛龙DNA
+item.dnaTRex.name=霸王龙DNA
+item.dnaPterosaur.name=翼龙DNA
+item.dnaNautilus.name=鹦鹉螺DNA
+item.dnaPlesiosaur.name=蛇颈龙DNA
+item.dnaMosasaurus.name=沧龙DNA
+item.dnaStegosaurus.name=剑龙DNA
+item.dnaDilophosaurus.name=双脊龙DNA
+item.dnaBrachiosaurus.name=腕龙DNA
+item.dnaSpinosaurus.name=脊龙DNA
+item.dnaCompsognathus.name=美颌龙DNA
+item.dnaAnkylosaurus.name=背甲龙DNA
+item.dnaPachycephalosaurus.name=肿头龙DNA
+item.dnaDeinonychus.name=恐爪龙DNA
+item.dnaGallimimus.name=似鸡龙DNA
+item.dnaCoelacanth.name=腔棘鱼DNA
+item.dnaPig.name=猪DNA
+item.dnaSheep.name=羊DNA
+item.dnaCow.name=牛DNA
+item.dnaChicken.name=鸡DNA
+item.dnaSmilodon.name=剑齿虎DNA
+item.dnaMammoth.name=猛犸象DNA
+item.dnaDodo.name=渡渡鸟DNA
+item.dnaHorse.name=Horse DNA
+item.embryoPig.name=猪胚胎
+item.embryoSheep.name=羊胚胎
+item.embryoCow.name=牛胚胎
+item.embryoChicken.name=鸡胚胎
+item.embryoSmilodon.name=剑齿虎胚胎
+item.embryoMammoth.name=猛犸象胚胎
+item.embryoDodo.name=渡渡鸟胚胎
+item.embryoHorse.name=Horse Embryo
+item.archNotebook.name=考古手册
+item.potteryShard.name=陶片
+
+#前缀/后缀
+dnaName.head=
+dnaName.tail=DNA
+embryoName.head=
+embryoName.tail=胚胎
+meatName.head=
+meatName.tail=肉
+mGCName.head=神奇海螺:
+mGCName.tail=模式
+dEggName.head=
+dEggName.tail=蛋
+
+#命令
+order.head=命令: 
+order.Stay=留在原地
+order.Follow=跟随
+order.FreeMove=自由移动
+
+#恐龙状态
+status.Hungry.head=
+status.Hungry=饿了
+status.Starve.head=
+status.Starve=饿死了
+status.LearningChest.head=
+status.LearningChest=学会了如何开箱子
+status.Betrayed.head=这头
+status.Betrayed=不再相信人类
+status.NoSpace.Head=这头
+status.NoSpace=没有足够的空间成长
+status.StarveEsc.head=
+status.StarveEsc=因为太饿而逃走了
+status.SJLBite=咬了烧酒螺后跑开了
+status.ChewTime=需要时间来咀嚼
+status.Full.head=
+status.Full=吃饱了
+status.Nervous.Head=你让这头小
+status.Nervous=太紧张以至于无法自行猎食
+status.GemErrorYoung=这头霸王龙还太年轻了
+status.GemErrorHealth=圣甲虫宝石无法负荷如此强的生命能量
+status.GemErrorTamed=这头霸王龙已被驯服
+status.EssenceFail=鸡精没有起效
+
+#恐龙名称.
+entity.fossil.Triceratops.name=三角龙
+entity.fossil.Velociraptor.name=迅猛龙
+entity.fossil.TRex.name=霸王龙
+entity.fossil.Pterosaur.name=翼龙
+entity.fossil.Plesiosaur.name=蛇颈龙
+entity.fossil.Mosasaurus.name=沧龙
+entity.fossil.Stegosaurus.name=剑龙
+entity.fossil.Dilophosaurus.name=双脊龙
+entity.fossil.Brachiosaurus.name=腕龙
+entity.fossil.Nautilus.name=鹦鹉螺
+entity.fossil.Spinosaurus.name=脊龙
+entity.fossil.Compsognathus.name=美颌龙
+entity.fossil.Ankylosaurus.name=背甲龙
+entity.fossil.Pachycephalosaurus.name=肿头龙
+entity.fossil.Deinonychus.name=恐爪龙
+entity.fossil.Gallimimus.name=似鸡龙
+
+#动物名称.
+entity.fossil.Mammoth.name=猛犸象
+entity.fossil.Smilodon.name=剑齿虎
+entity.fossil.PregnantCow.name=受孕牛
+entity.fossil.PregnantPig.name=受孕猪
+entity.fossil.PregnantSheep.name=受孕羊
+entity.fossil.PregnantHorse.name=Pregnant Horse
+entity.fossil.Dodo.name=渡渡鸟
+entity.fossil.Coelacanth.name=腔棘鱼
+
+#百科文本.恐龙信息.
+pedia.text.owner=主人:
+pedia.text.chest=* 箱子
+pedia.text.caution=---警告:危险---
+pedia.text.rideable=* 可乘骑
+pedia.text.weak=虚弱垂死
+pedia.text.fly= * 可飞行
+pedia.eggWet=潮湿
+pedia.eggDry=干燥
+pedia.eggCold=寒冷
+pedia.eggWarm=温暖
+pedia.eggStatus=状态
+pedia.eggProgress=孵化进度
+pedia.eggDay=天
+pedia.eggDays=天
+pedia.embryo.inside=怀有胎儿:
+pedia.embryo.growing=成长进度:
+pedia.embryo.Pig=猪
+pedia.embryo.Sheep=羊
+pedia.embryo.Cow=牛
+pedia.embryo.Chicken=鸡
+pedia.embryo.Smilodon=剑齿虎
+pedia.embryo.Mammoth=猛犸象
+pedia.embryo.Dodo=渡渡鸟
+pedia.embryo.Horse=Horse
+
+#阿努对白
+anuSpeaker.self=阿努: 
+anuSpeaker.hello=跪下吧,反抗无用.
+anuSpeaker.bareHand=空手吗... 愚蠢至极,但勇气可嘉.
+anuSpeaker.draw=拔剑吧,勇士.
+anuSpeaker.coward=用弓的胆小鬼!滚出来!
+anuSpeaker.leartHere=尝尝我在这里学会了什么吧!
+anuSpeaker.leartThere=尝尝我在那里学会了什么吧!
+anuSpeaker.unknownRanged=所以那就是你的武器?
+anuSpeaker.unknownMelee=哈!别闹了!
+anuSpeaker.summon=为我卖命吧,我的仆人.
+anuSpeaker.trans=地上的兽啊,显露你的智慧吧.
+anuSpeaker.qi=剑气!
+anuSpeaker.fireRain=来下点火雨吧!
+
+#阿努杂兵对白
+fpzSpeaker.self=僵尸猪人: 
+fpzSpeaker.selfKill=离开了我皇的领导俺们活不了!
+fpzSpeaker.lifeFor.head=为
+fpzSpeaker.lifeFor.tail=而生!
+fpzSpeaker.anuSommon=我皇阿努万岁!!
+
+#恐龙蛋信息        
+dinoegg.hatched=有颗恐龙蛋孵化了!
+dinoegg.noSpace=这颗蛋无法放在这里.                
+dinoegg.head=某颗
+dinoegg.dry=蛋因为太干燥死亡了        
+dinoegg.cold=蛋因为太寒冷死亡了
+
+#培养槽
+cultivate.outBreak=警告!培养槽失控!
+
+#命令鼓
+drum.trigger=命令鼓模式: 
+drum.ordering=正在命令
+drum.tRex1=正在命令半径50格内的暴龙来吃早餐
+drum.tRex2=正在命令半径50格内的暴龙来吃午餐
+drum.tRex3=正在命令半径50格内的暴龙来吃晚餐
+
+#昵称
+entity.fossil.Bones.name=骨架
+entity.fossil.FriendlyPigZombie.name=僵尸猪人伙伴
+entity.fossil.Failuresaurus.name=畸龙
+entity.fossil.PigBoss.name=阿努
+
+#Records
+item.record_bones.name=化石唱片
+item.record.record_bones_disc.desc=WhiteJoshMan - Bones
+item.record.record_jp_theme.desc=和风主题唱片

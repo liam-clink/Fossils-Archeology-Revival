@@ -1,0 +1,16 @@
+[
+{
+  "modid": "fossil",
+  "name": "Fossils and Archeology Revival",
+  "description":"Adding dinosaurs, fossils, and more to Minecraft.",
+  "version": "",
+  "mcversion": "1.6.4-10.13.0.1180",
+  "url": "http://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/1288066",
+  "updateUrl": "",
+  "authorList": ["Microjunk","Shadowbeast007","tyranno66","4f6f3b","Cannibal Vox"],
+  "credits": "Original mod by Flammarilva and Team July!",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

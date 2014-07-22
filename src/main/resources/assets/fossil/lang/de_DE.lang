@@ -1,0 +1,395 @@
+﻿#Updated for Build 6 DEV (1.6.4) HEAD19 July 17 2014 
+#Deutsch (de_DE) Localization File
+
+#Tab Groups
+itemgroup.FArmor=Antike Rüstungen
+itemgroup.FBlocks=Antikes Baumaterial
+itemgroup.FCombat=Antike Waffen
+itemgroup.FFood=Antike Nahrungsmittel
+itemgroup.FItems=Antike Gegenstände
+itemgroup.FMaterial=Antikes Material
+itemgroup.FTools=Antike Hilfsmittel
+itemgroup.FFigurines=Sammlerstücke
+
+#Achievements
+achievement.FirstEgg=Erster Dinosaurier!
+achievement.AllEggs=Alle müssen ausgebrütet werden!
+achievement.FoundFossils=Graben nach Knochen.
+achievement.pigBossOnEarth=Heil Anu
+achievement.Permafrost=Hol die keine Erkältung!
+achievement.ArchWorkbench=Lass die Party beginnen!
+achievement.Analyzer=Für die Wissenschaft!
+achievement.CultVat=Genetische Manipulation.
+achievement.Sifter=Weil ich ein Goldgräber bin, Baby!
+achievement.Dinopedia=Fülle alle Seiten!
+achievement.IceAge=Ich weiss nicht wie man Geburtenhilfe gibt...
+achievement.TheKing=Herrscher der späten Kreidezeit.
+
+#Achievement Descriptions
+achievement.FirstEgg.desc=Du hast deinen ersten Dinosaurier zurückgebracht!
+achievement.AllEggs.desc=Du hast alle Dinosaurier Eier gefunden!
+achievement.FoundFossils.desc=Du hast Fossilien gefunden!
+achievement.pigBossOnEarth.desc=Du hast Anu beschworen!
+achievement.Permafrost=Welche Überraschung ist drinnen?
+achievement.ArchWorkbench=Erste Schritte um ein Archeologe zu werden.
+achievement.Analyzer=Entdecke die Vergangenheit!
+achievement.CultVat=Bringe Geschichte wieder ins Leben zurück!
+achievement.Sifter=Auch wenn man durch den ganzen Dreck muss!
+achievement.Dinopedia=Finde alle Dinos!
+achievement.IceAge=Ich will die Eiszeit zurück!
+achievement.TheKing=Lang lebe der König!
+
+#Enchantments
+enchantment.paleontology=Paläontologie
+enchantment.archeology=Archäologie
+
+#Blocks
+tile.fossil.name=Fossil
+tile.skullBlock.name=Schädel
+tile.skullLantern.name=Schädel Laterne
+tile.analyzer.name=Analysator
+tile.cultureVat.name=Kultivierungsbehälter
+tile.fossilworkbench.name=Archeologie Werkbank
+tile.fossil_drum.name=Trommel
+tile.feederIdle.name=Fütterer
+tile.feederActive.name=Fütterer
+tile.permafrost.name=Dauerfrost
+tile.icedStone.name=Vereister Stein
+tile.timeMachine.name=Zeitmaschine
+tile.tar.name=Teer
+tile.palaeorapheLog.name=Palaeoraphe Holz
+tile.palaeorapheLeaves.name=Palaeoraphe Blätter
+tile.palaeorapheSapling.name=Palaeoraphe Setzling
+tile.palaeoraphePlanks.name=Palaeoraphe Holzbretter
+tile.palaeorapheSlab.name=Palaeoraphe Stufe
+tile.palaeorapheSlabDouble.name=Palaeoraphe Doppelstufe
+tile.palaeorapheStairs.name=Palaeoraphe Treppe
+tile.volcanicAsh.name=Vulkanische Asche
+tile.volcanicRock.name=Vulkanischer Felsen
+tile.volcanicRockHot.name=Heisser vulkanischer Felsen
+tile.sarracina.name=Sarracina
+tile.fernBlock.name=Antiker Farn
+tile.volcanicBrick.name=Vulkanischer Ziegel
+tile.amberOre.name=Amber Erz
+tile.ancientStone.name=Antiker Stein
+tile.ancientStonebrick.name=Antiker Steinziegel
+tile.ancientWood.name=Antikes Holz
+tile.ancientWoodPillar.name=Antike Holzsäule
+tile.ancientGlass.name=Antikes Glas
+tile.ancientWoodPlate.name=Antike Holzstufe
+tile.ancientWoodStairs.name=Antike Holztreppe
+tile.ancientStoneStairs.name=Antike Steintreppe
+tile.figurine.name=Hölzerne Figur
+tile.sifter.name=Sichter
+tile.volcanicStairs.name=Vulkanische Treppe
+tile.volcanicSlab.name=Vulkanische Stufe
+tile.volcanicSlabDouble.name=Vulkanische Doppelstufe
+
+#Collectables
+tile.figurine.figurine_steve_pristine.name=Makellose Steve Figur
+tile.figurine.figurine_skeleton_pristine.name=Makellose Skeleton Figur
+tile.figurine.figurine_zombie_pristine.name=Makellose Zombie Figur
+tile.figurine.figurine_pigzombie_pristine.name=Makellose Enderman Figur
+tile.figurine.figurine_enderman_pristine.name=Makellose Zombie Pigman Figur
+tile.figurine.figurine_steve_damaged.name=Beschädigte Steve Figur
+tile.figurine.figurine_skeleton_damaged.name=Beschädigte Skeleton Figur
+tile.figurine.figurine_zombie_damaged.name=Beschädigte Zombie Figur
+tile.figurine.figurine_pigzombie_damaged.name=Beschädigte Enderman Figur
+tile.figurine.figurine_enderman_damaged.name=Beschädigte Zombie Pigman Figur
+tile.figurine.figurine_steve_broken.name=Zerbrochene Steve Figur
+tile.figurine.figurine_skeleton_broken.name=Zerbrochene Skeleton Figur
+tile.figurine.figurine_zombie_broken.name=Zerbrochene Zombie Figur
+tile.figurine.figurine_pigzombie_broken.name=Zerbrochene Enderman Figur
+tile.figurine.figurine_enderman_broken.name=Zerbrochene Zombie Pigman Figur
+tile.figurine.figurine_mysterious.name=Mysteriöse Figur
+tile.vaseVolute.damaged_volute.name=Zerbrochene Volutenkrater
+tile.vaseVolute.restored_volute.name=Restaurierte Volutenkrater
+tile.vaseVolute.blackFigure_volute.name=Schwarzfigurige Volutenkrater
+tile.vaseVolute.redFigure_volute.name=Rotfigurige Volutenkrater
+tile.vaseVolute.porcelain_volute.name=Porzellan Volutenkrater
+tile.vaseAmphora.damaged_amphora.name=Zerbrochene Amphore
+tile.vaseAmphora.restored_amphora.name=Restaurierte Amphore
+tile.vaseAmphora.blackFigure_amphora.name=Schwarzfigurige Amphore
+tile.vaseAmphora.redFigure_amphora.name=Rotfigurige Amphore
+tile.vaseAmphora.porcelain_amphora.name=Porzellan Amphore
+tile.vaseKylix.damaged_kylix.name=Zerbrochene Kylix
+tile.vaseKylix.restored_kylix.name=Restaurierte Kylix
+tile.vaseKylix.blackFigure_kylix.name=Schwarzfigurige Kylix
+tile.vaseKylix.redFigure_kylix.name=Rotfigurige Kylix
+tile.vaseKylix.porcelain_kylix.name=Porzellan Kylix
+
+#Items
+item.bioFossil.name=Bio-Fossil
+item.relicScrap.name=Reliktscherbe
+item.stoneTablet.name=Steintafel
+item.brokenAncientSword.name=Zerbrochenes antikes Schwert
+item.ancientSword.name=Antikes Schwert
+item.fernSeeds.name=Farn Samen
+item.brokenAncientHelmet.name=Zerbrochener antiker Helm
+item.ancientHelmet.name=Antiker Helm
+item.skullStick.name=Schädelstock
+item.scarabGem.name=Scarabäus Edelstein
+item.scarabAxe.name=Scarabäus Axt
+item.scarabPickAxe.name=Scarabäus Spitzhacke
+item.scarabSword.name=Scarabäus Schwert
+item.scarabHoe.name=Scarabäus Hacke
+item.scarabShovel.name=Scarabäus Schaufel
+item.dinoPedia.name=DinoPedia
+item.tooth.name=TRex Zahn
+item.dagger.name=Zahn Dolch
+item.rawChickenSoup.name=Rohe Hähnchensuppe
+item.cookedChickenSoup.name=Gekochte Hähnchensuppe
+item.essenceofChicken.name=Essenz des Hühnchens
+item.emptyShell.name=Leere Muschel
+item.sJL.name=Sio-Chiu-Le
+item.icedMeat.name=Gefrohrenes Fleisch
+item.woodJavelin.name=Holzspeer
+item.stoneJavelin.name=Steinspeer
+item.ironJavelin.name=Eisenspeer
+item.goldJavelin.name=Goldspeer
+item.diamondJavelin.name=Diamantspeer
+item.ancientJavelin.name=Antiker Speer
+item.whip.name=Peitsche
+item.magicConch.name=Magische Muschelschale
+item.legBone.name=Beinknochen
+item.claw.name=Klaue
+item.foot.name=Beinknochen
+item.skull.name=Schädelknochen
+item.plantFossil.name=Pflanzen-Fossil
+item.skullHelmet.name=Schädelhelm
+item.ribCage.name=Brustkorbplatte
+item.shinGuards.name=Schienbeinschoner
+item.feet.name=Knochenschuhe
+item.amber.name=Amber
+item.ancientVase.name=Antike Vase
+item.ancientVaseBroken.name=zerbrochene antike Vase
+item.boneArrow.name=Knochenpfeil
+item.boneBow.name=Knochenbogen
+item.boneGlue.name=Knochenleim
+item.boneRod.name=Knochenrute
+item.boneSword.name=Knochenschwert
+item.powderyString.name=Bestäubte Schnur
+item.animalCoin.name=Tier Münze
+item.dinoCoin.name=Dinosaurier Münze
+item.dodoWing.name=Roher Dodoflügel
+item.dodoWingCooked.name=Gebratener Dodoflügel
+item.dinoSteak.name=Dino Steak
+item.rawTriceratops.name=Triceratops Fleisch
+item.rawVelociraptor.name=Velociraptor Fleisch
+item.rawTRex.name=TRex Fleisch
+item.rawPterosaur.name=Pterosaur Fleisch
+item.rawNautilus.name=Nautilus Fleisch
+item.rawPlesiosaur.name=Plesiosaur Fleisch
+item.rawMosasaurus.name=Mosasaurus Fleisch
+item.rawStegosaurus.name=Stegosaurus Fleisch
+item.rawDilophosaurus.name=Dilophosaurus Fleisch
+item.rawBrachiosaurus.name=Brachiosaurus Fleisch
+item.rawSpinosaurus.name=Spinosaurus Fleisch
+item.rawCompsognathus.name=Compsognathus Fleisch
+item.rawAnkylosaurus.name=Ankylosaurus Fleisch
+item.rawPachycephalosaurus.name=Pachycephalosaurus Fleisch
+item.rawDeinonychus.name=Deinonychus Fleisch
+item.rawGallimimus.name=Gallimimus Fleisch
+item.eggTriceratops.name=Triceratops Ei
+item.eggVelociraptor.name=Velociraptor Ei
+item.eggTRex.name=TRex Ei
+item.eggPterosaur.name=Pterosaur Ei
+item.eggNautilus.name=Lebendige Nautilus
+item.eggPlesiosaur.name=Plesiosaur Ei
+item.eggMosasaurus.name=Mosasaurus Ei
+item.eggStegosaurus.name=Stegosaurus Ei
+item.eggDilophosaurus.name=Dilophosaurus Ei
+item.eggBrachiosaurus.name=Brachiosaurus Ei
+item.eggSpinosaurus.name=Spinosaurus Ei
+item.eggCompsognathus.name=Compsognathus Ei
+item.eggDodo.name=Dodo Ei
+item.eggCultivatedDodo.name=Kultiviertes Dodo Ei
+item.eggAnkylosaurus.name=Ankylosaurus Ei
+item.eggPachycephalosaurus.name=Pachycephalosaurus Ei
+item.eggDeinonychus.name=Deinonychus Ei
+item.eggGallimimus.name=Gallimimus Ei
+item.eggCoelacanth.first.name=Ozeane Coelacanth
+item.eggCoelacanth.second.name=Fluss Coelacanth
+item.eggCoelacanth.third.name=Sumpf Coelacanth
+item.dnaTriceratops.name=Triceratops DNA
+item.dnaVelociraptor.name=Velociraptor DNA
+item.dnaTRex.name=TRex DNA
+item.dnaPterosaur.name=Pterosaur DNA
+item.dnaNautilus.name=Nautilus DNA
+item.dnaPlesiosaur.name=Plesiosaur DNA
+item.dnaMosasaurus.name=Mosasaurus DNA
+item.dnaStegosaurus.name=Stegosaurus DNA
+item.dnaDilophosaurus.name=Dilophosaurus DNA
+item.dnaBrachiosaurus.name=Brachiosaurus DNA
+item.dnaSpinosaurus.name=Spinosaurus DNA
+item.dnaCompsognathus.name=Compsognathus DNA
+item.dnaAnkylosaurus.name=Ankylosaurus DNA
+item.dnaPachycephalosaurus.name=Pachycephalosaurus DNA
+item.dnaDeinonychus.name=Deinonychus DNA
+item.dnaGallimimus.name=Gallimimus DNA
+item.dnaCoelacanth.name=Coelacanth DNA
+item.dnaPig.name=Schwein DNA
+item.dnaSheep.name=Schaf DNA
+item.dnaCow.name=Kuh DNA
+item.dnaChicken.name=Huhn DNA
+item.dnaSmilodon.name=Smilodon DNA
+item.dnaMammoth.name=Mammut DNA
+item.dnaDodo.name=Dodo DNA
+item.dnaHorse.name=Pferd DNA
+item.embryoPig.name=Schwein Embryo
+item.embryoSheep.name=Schaf Embryo
+item.embryoCow.name=Kuh Embryo
+item.embryoChicken.name=Huhn Embryo
+item.embryoSmilodon.name=Smilodon Embryo
+item.embryoMammoth.name=Mammut Embryo
+item.embryoDodo.name=Dodo Embryo
+item.embryoHorse.name=Pferd Embryo
+item.archNotebook.name=Archaeologie Notizbuch
+item.potteryShard.name=Keramikscherbe
+
+
+#Dinosaur related chat messages
+dnaName.head=DNA von
+dnaName.tail=
+embryoName.head=Embryo von
+embryoName.tail=
+meatName.head=Fleisch von
+meatName.tail=
+mGCName.head=Magische Muschelschale:
+mGCName.tail=
+dEggName.head=Ei von
+dEggName.tail=
+
+#Order chat messages
+order.head=Befehl:
+order.Stay=Bleib
+order.Follow=Folge
+order.FreeMove=Frei bewegen
+
+#Dinosaur status chat messages
+status.Hungry.head=
+status.Hungry= ist hungrig.
+status.Starve.head=
+status.Starve= ist verhungert.
+status.LearningChest.head=Ein
+status.LearningChest= hat gelernt Truhen zu benutzen.
+status.Betrayed.head=Dieser
+status.Betrayed= wird Menschen nicht mehr vertrauen.
+status.NoSpace.head=
+status.NoSpace= hat nicht genug Platz zu wachsen.
+status.StarveEsc.head=
+status.StarveEsc= ist geflohen, da am verhungern.
+status.SJLBite= biss ins Siu-Jiu-Le und lief davon.
+status.ChewTime= braucht zeit zum kauen.
+status.Full.head= Dieser
+status.Full= ist satt.
+status.Nervous.Head=Du machst den kleinen
+status.Nervous= zu nervös sich selbst zu jagen.
+status.GemErrorYoung=Dieser T-Rex ist immer noch zu jung.
+status.GemErrorHealth=Der Scarabäus kann so eine starke Lebensenergie nicht aufbringen.
+status.GemErrorTamed=Dieser T-Rex wurde schon abgerichtet.
+status.essencefail=Essenz des Hühnchens hat keinen Effekt.
+
+#Dinosaur Names
+entity.fossil.Triceratops.name=Triceratops
+entity.fossil.Velociraptor.name=Velociraptor
+entity.fossil.TRex.name=Tyrannosaurus
+entity.fossil.Pterosaur.name=Pterosaur
+entity.fossil.Plesiosaur.name=Plesiosaur
+entity.fossil.Mosasaurus.name=Mosasaurus
+entity.fossil.Stegosaurus.name=Stegosaurus
+entity.fossil.Dilophosaurus.name=Dilophosaurus
+entity.fossil.Brachiosaurus.name=Brachiosaurus
+entity.fossil.Nautilus.name=Nautilus
+entity.fossil.Spinosaurus.name=Spinosaurus
+entity.fossil.Compsognathus.name=Compsognathus
+entity.fossil.Ankylosaurus.name=Ankylosaurus
+entity.fossil.Pachycephalosaurus.name=Pachycephalosaurus
+entity.fossil.Deinonychus.name=Deinonychus
+entity.fossil.Gallimimus.name=Gallimimus
+
+#Non-dinosaur names
+entity.fossil.Mammoth.name=Mammut
+entity.fossil.Smilodon.name=Smilodon
+entity.fossil.PregnantCow.name=Schwangere Kuh
+entity.fossil.PregnantPig.name=Schwangeres Schwein
+entity.fossil.PregnantSheep.name=Schwangeres Schaf
+entity.fossil.PregnantHorse.name=Schwangere Pferd
+entity.fossil.Dodo.name=Dodo
+entity.fossil.Coelacanth.name=Coelacanth
+
+#Pedia text
+pedia.text.owner=Besitzer:
+pedia.text.chest=* Truhen
+pedia.text.caution=!Gefährlich!
+pedia.text.rideable=* Reitbar
+pedia.text.weak=Fast Tod
+pedia.text.fly=* Flugfähig
+pedia.eggWet=Feucht
+pedia.eggDry=Trocken
+pedia.eggCold=Kalt
+pedia.eggWarm=Warm
+pedia.eggStatus=Status
+pedia.eggProgress=Fortschritt
+pedia.eggDay=Tag
+pedia.eggDays=Tage
+pedia.embryo.inside=Embryo in:
+pedia.embryo.growing=Fortschritt:
+pedia.embryo.Pig=Schwein
+pedia.embryo.Sheep=Schaf
+pedia.embryo.Cow=Kuh
+pedia.embryo.Chicken=Huhn
+pedia.embryo.Smilodon=Smilodon
+pedia.embryo.Mammoth=Mammut
+pedia.embryo.Dodo=Dodo
+pedia.embryo.Horse=Pferd
+
+#Anu speaking lines
+anuSpeaker.self=Anu:
+anuSpeaker.hello=Auf die Knie, Widerstand ist zweckslos.
+anuSpeaker.bareHand=Blosse Hände... Dumm, aber tapfer.
+anuSpeaker.draw=ZIEH DEIN SCHWERT.
+anuSpeaker.coward=Bogen nutzen nur Feiglinge! Zeig dich!
+anuSpeaker.leartHere=Ich zeig dir was ich hier gelernt habe!
+anuSpeaker.leartThere=Ich zeig dir was ich dort gelernt habe!
+anuSpeaker.unknownRanged=So, das ist deine Waffe?
+anuSpeaker.unknownMelee=Ha! Hör auf mit den Spielchen!
+anuSpeaker.summon=Untertanen, euer Meister spricht.
+anuSpeaker.trans=Unmenschen, weckt eure Weisheit.
+anuSpeaker.qi=Qi-shock!
+anuSpeaker.fireRain=Lasst es Feuer regnen!
+
+#Friendly pigmen speaking lines
+fpzSpeaker.self=Zombie Pigman:
+fpzSpeaker.selfKill=Wir können nicht ohne Anführer leben!
+fpzSpeaker.lifeFor.head=Mein Leben für
+fpzSpeaker.lifeFor.tail=!
+fpzSpeaker.anuSommon=Heil Anu!!
+
+#Dinosaur egg chat messages
+dinoegg.hatched=Ein Dinosaurier Ei ist geschlüpft!
+dinoegg.noSpace=Das Ei kann hier nicht ausgebrütet werden.
+dinoegg.head=Ein Ei von
+dinoegg.dry= starb, da es zu trocken war.
+dinoegg.cold= starb, da es zu kalt war.
+
+#Cultivator chat messages
+cultivate.outBreak=Warnung! Kultivierung fehlgeschlagen!
+
+#Drum chat messages
+drum.trigger=Trommel Befehl:
+drum.ordering=Ordering
+drum.tRex1=Schicke T-Rexes zum Frühstück.
+drum.tRex2=Schicke T-Rexes zum Mittagessen.
+drum.tRex3=Schicke T-Texes zum Abendessen.
+
+#Hostile mob names
+entity.fossil.Bones.name=Knochen
+entity.fossil.FriendlyPigZombie.name=Freundliche Zombie Pigman
+entity.fossil.Failuresaurus.name=Fehlersaurus
+entity.fossil.PigBoss.name=Anu
+
+#Records
+item.record_bones.name=Fossil Schallplatte
+item.record.record_bones_disc.desc=WhiteJoshMan - Bones
+item.record.record_jp_theme.desc=JP Theme

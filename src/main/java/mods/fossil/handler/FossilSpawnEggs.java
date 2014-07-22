@@ -1,0 +1,78 @@
+package mods.fossil.handler;
+
+import mods.fossil.entity.mob.EntityAnkylosaurus;
+import mods.fossil.entity.mob.EntityBones;
+import mods.fossil.entity.mob.EntityBrachiosaurus;
+import mods.fossil.entity.mob.EntityCoelacanth;
+import mods.fossil.entity.mob.EntityCompsognathus;
+import mods.fossil.entity.mob.EntityDeinonychus;
+import mods.fossil.entity.mob.EntityDilophosaurus;
+import mods.fossil.entity.mob.EntityDodo;
+import mods.fossil.entity.mob.EntityFailuresaurus;
+import mods.fossil.entity.mob.EntityGallimimus;
+import mods.fossil.entity.mob.EntityMammoth;
+import mods.fossil.entity.mob.EntityMosasaurus;
+import mods.fossil.entity.mob.EntityNautilus;
+import mods.fossil.entity.mob.EntityPachycephalosaurus;
+import mods.fossil.entity.mob.EntityPigBoss;
+import mods.fossil.entity.mob.EntityPlesiosaur;
+import mods.fossil.entity.mob.EntityPterosaur;
+import mods.fossil.entity.mob.EntitySmilodon;
+import mods.fossil.entity.mob.EntitySpinosaurus;
+import mods.fossil.entity.mob.EntityStegosaurus;
+import mods.fossil.entity.mob.EntityTRex;
+import mods.fossil.entity.mob.EntityTriceratops;
+import mods.fossil.entity.mob.EntityVelociraptor;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityList;
+
+public class FossilSpawnEggs
+{
+    static int startEntityId = 300;
+
+    public static void addSpawnEggs()
+    {														//bg		//fg
+        registerEntityEgg(EntityTriceratops.class, 			0x62d84e, 0xebffd5);
+        registerEntityEgg(EntityVelociraptor.class, 		0xbfa487, 0x936d2e);
+        registerEntityEgg(EntityTRex.class, 				0x763c11, 0xffebc4);
+        registerEntityEgg(EntityFailuresaurus.class, 		0x61ffbd, 0xf4eee6);
+		registerEntityEgg(EntityPigBoss.class, 				0xffffff, 0x000000);
+//		registerEntityEgg(EntityFriendlyPigZombie.class, 	0xffffff, 0x000000);
+        registerEntityEgg(EntityPterosaur.class, 			0xe4cae2, 0x751075);
+        registerEntityEgg(EntityNautilus.class, 			0xd4aba9, 0x97312f);
+        registerEntityEgg(EntityPlesiosaur.class, 			0xa4362e, 0xcd6052);
+        registerEntityEgg(EntityMosasaurus.class, 			0x9cbd8c, 0x357510);
+        registerEntityEgg(EntityStegosaurus.class, 			0xbfc9a9, 0x5e7510);
+        registerEntityEgg(EntityDilophosaurus.class,		0x474807, 0x9f9e4e);
+        registerEntityEgg(EntitySmilodon.class, 			0xefa745, 0xf9f4df);
+        registerEntityEgg(EntityBones.class, 				0xffffff, 0x000000);
+        registerEntityEgg(EntityBrachiosaurus.class, 		0x5283bf, 0xffffff);
+        registerEntityEgg(EntityMammoth.class, 				0x3d2700, 0xcc9566);
+        registerEntityEgg(EntitySpinosaurus.class, 			0x9f9e4e, 0x474807);
+        registerEntityEgg(EntityCompsognathus.class, 		0x357510, 0x66a24a);
+        registerEntityEgg(EntityDodo.class, 				0x784830, 0xb59586);
+        registerEntityEgg(EntityAnkylosaurus.class, 		0xffebc4, 0x763c11);
+        registerEntityEgg(EntityPachycephalosaurus.class, 	0xdac49d, 0xa86722);
+        registerEntityEgg(EntityDeinonychus.class, 			0x6a6a6a, 0x2f302e);
+        registerEntityEgg(EntityGallimimus.class, 			0x8c5517, 0x544833);
+        registerEntityEgg(EntityCoelacanth.class, 			0x5283bf, 0x66a24a);
+    }
+
+    public static int getUniqueEntityId()
+    {
+        do
+        {
+            startEntityId++;
+        }
+        while (EntityList.getStringFromID(startEntityId) != null);
+
+        return startEntityId;
+    }
+
+    public static void registerEntityEgg(Class <? extends Entity > entity, int primaryColor, int secondaryColor)
+    {
+        int id = getUniqueEntityId();
+        EntityList.IDtoClassMapping.put(id, entity);
+        EntityList.entityEggs.put(id, new EntityList.EntityEggInfo(id, primaryColor, secondaryColor));
+    }
+}
