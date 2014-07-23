@@ -36,6 +36,7 @@ public enum EnumDinoFoodItem
     Egg(Items.egg, 10, 2),
     Sjl(Fossil.sjl, 30, 3), //SioChiuLe
     Nautilus(EnumDinoType.Nautilus.DropItem, 20, 2),
+    Coelacanth(Fossil.livingCoelacanth, 20, 2),
     ChickenSoupRaw(Fossil.rawChickenSoup, 30, 3),
     ChickenSoupCooked(Fossil.cookedChickenSoup, 40, 3),
     Triceratops(EnumDinoType.Triceratops.DropItem, 50, 3),
@@ -56,6 +57,7 @@ public enum EnumDinoFoodItem
     DinoMeatCooked(Fossil.cookedDinoMeat, 50, 5),
     DodoWing(Fossil.dodoWing, 20, 2),
     DodoWingCooked(Fossil.dodoWingCooked, 30, 3),
+    Liopleurodon(EnumDinoType.Liopleurodon.DropItem, 20, 3),
     ;
     public Item item;
     public int FoodValue;

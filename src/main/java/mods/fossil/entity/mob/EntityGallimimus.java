@@ -67,6 +67,7 @@ public class EntityGallimimus extends EntityDinosaur
         this.tasks.addTask(2, new EntityAIAvoidEntity(this, EntityDilophosaurus.class, 16.0F, 0.8D, 1.33D));
         this.tasks.addTask(2, new EntityAIAvoidEntity(this, EntityDeinonychus.class, 16.0F, 0.8D, 1.33D));
         this.tasks.addTask(2, new EntityAIAvoidEntity(this, EntityMosasaurus.class, 16.0F, 0.8D, 1.33D));
+        this.tasks.addTask(2, new EntityAIAvoidEntity(this, EntityLiopleurodon.class, 16.0F, 0.8D, 1.33D));
         this.tasks.addTask(2, new EntityAIAvoidEntity(this, EntityBrachiosaurus.class, 4.0F, 0.8D, 1.33D));
     }
 

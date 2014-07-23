@@ -39,6 +39,7 @@ public enum EnumDinoFoodMob
     Gallimimus(null, 40, 4),
     Dodo(EntityDodo.class, 20, 2),
     Coelacanth(EntityCoelacanth.class, 20, 2),
+    Liopleurodon(null, 50, 3),
     ;
     public Class preyClass;
     public int FoodValue;
@@ -76,5 +77,6 @@ public enum EnumDinoFoodMob
         Ankylosaurus.setDetails(EntityAnkylosaurus.class);
         Pachycephalosaurus.setDetails(EntityPachycephalosaurus.class);
         Deinonychus.setDetails(EntityDeinonychus.class);
+        Liopleurodon.setDetails(EntityLiopleurodon.class);
     }
 }

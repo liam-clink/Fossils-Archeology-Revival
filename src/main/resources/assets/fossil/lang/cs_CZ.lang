@@ -1,0 +1,397 @@
+﻿#Updated for 1.7.10 Build 6.3 HEAD1 July 22 2014 
+#Czech (cs_CZ) Localization File
+
+#Tab Groups
+itemgroup.FArmor=Starodavne zbroje
+itemgroup.FBlocks=Starodavne bloky
+itemgroup.FCombat=Starodavne zbrane
+itemgroup.FFood=Starodavne jidlo
+itemgroup.FItems=Starodavne predmety
+itemgroup.FMaterial=Starodavne materialy
+itemgroup.FTools=Starodavne nastroje
+itemgroup.FFigurines=Collectables
+
+#Achievements
+achievement.FirstEgg=First Dinosaur!
+achievement.AllEggs=Gotta Hatch 'Em All!
+achievement.FoundFossils=Digging for Bones
+achievement.pigBossOnEarth=Hail Anu
+achievement.Permafrost=Try not to get a cold!
+achievement.ArchWorkbench=Let's get the party started!
+achievement.Analyzer=For SCIENCE!
+achievement.CultVat=Genetic manipulation.
+achievement.Sifter=Cuz' baby I'm a Gold Digger!
+achievement.Dinopedia=Fill all the pages!
+achievement.IceAge=I do not know how you'll give birth...
+achievement.TheKing=Ruler of the Late Cretaceous.
+
+#Achievement Descriptions
+achievement.FirstEgg.desc=You brought back your first dinosaur!
+achievement.AllEggs.desc=You've found all the dinosaur eggs!
+achievement.FoundFossils.desc=You've found some fossils!
+achievement.pigBossOnEarth.desc=You summoned Anu!
+achievement.Permafrost=What wonders could be inside it?
+achievement.ArchWorkbench=First step in becoming an archaeologist.
+achievement.Analyzer=Discovering the past!
+achievement.CultVat=Bring history back to live!
+achievement.Sifter=Even if I have to go through all the dirt!
+achievement.Dinopedia=Find all the dinos!
+achievement.IceAge=However I want the ice age back!
+achievement.TheKing=Long live the king!
+
+#Enchantments
+enchantment.paleontology=Paleontology
+enchantment.archeology=Archeology
+
+#Blocks
+tile.fossil.name=Fosilie
+tile.skullBlock.name=Lebka
+tile.skullLantern.name=Lebkova lampa
+tile.analyzer.name=Analyzer
+tile.cultureVat.name=Kultivator
+tile.fossilworkbench.name=Archeologuv pracovni stul
+tile.fossil_drum.name=Buben
+tile.feederIdle.name=Krmitko
+tile.feederActive.name=Krmitko
+tile.permafrost.name=Permafrost
+tile.icedStone.name=Zmrzly kamen
+tile.timeMachine.name=Stroj casu
+tile.tar.name=Dehet
+tile.palaeorapheLog.name=Drevo Palaeoraphe
+tile.palaeorapheLeaves.name=Listi Palaeoraphe
+tile.palaeorapheSapling.name=Sazenice Palaeoraphe
+tile.palaeoraphePlanks.name=Prkna z Palaeoraphe
+tile.palaeorapheSlab.name=Deska z Palaeoraphe
+tile.palaeorapheSlabDouble.name=Dvojita deska z Palaeoraphe
+tile.palaeorapheStairs.name=Schody z Palaeoraphe
+tile.volcanicAsh.name=Sopecny popel
+tile.volcanicRock.name=Sopecny kamen
+tile.volcanicRockHot.name=Zhavy sopecny kamen
+tile.sarracina.name=Masozravka
+tile.fernBlock.name=Kapradina
+tile.volcanicBrick.name=Sopecne cihly
+tile.amberOre.name=Jantarova ruda
+tile.ancientStone.name=Starodavny kamen
+tile.ancientStonebrick.name=Starodavne kamenne cihly
+tile.ancientWood.name=Starodavne drevo
+tile.ancientWoodPillar.name=Starodavny dreveny pilir
+tile.ancientGlass.name=Starodavne sklo
+tile.ancientWoodPlate.name=Starodavna drevena deska
+tile.ancientWoodStairs.name=Starodavne drevene schody
+tile.ancientStoneStairs.name=Starodavne kamenne schody
+tile.figurine.name=Wooden Figurine
+tile.sifter.name=Sifter
+tile.volcanicStairs.name=Volcanic Stairs
+tile.volcanicSlab.name=Volcanic Slab
+tile.volcanicSlabDouble.name=Volcanic Double Slab
+
+#Collectables
+tile.figurine.figurine_steve_pristine.name=Pristine Steve Figurine
+tile.figurine.figurine_skeleton_pristine.name=Pristine Skeleton Figurine
+tile.figurine.figurine_zombie_pristine.name=Pristine Zombie Figurine
+tile.figurine.figurine_pigzombie_pristine.name=Pristine Enderman Figurine
+tile.figurine.figurine_enderman_pristine.name=Pristine Zombie Pigman Figurine
+tile.figurine.figurine_steve_damaged.name=Damaged Steve Figurine
+tile.figurine.figurine_skeleton_damaged.name=Damaged Skeleton Figurine
+tile.figurine.figurine_zombie_damaged.name=Damaged Zombie Figurine
+tile.figurine.figurine_pigzombie_damaged.name=Damaged Enderman Figurine
+tile.figurine.figurine_enderman_damaged.name=Damaged Zombie Pigman Figurine
+tile.figurine.figurine_steve_broken.name=Broken Steve Figurine
+tile.figurine.figurine_skeleton_broken.name=Broken Skeleton Figurine
+tile.figurine.figurine_zombie_broken.name=Broken Zombie Figurine
+tile.figurine.figurine_pigzombie_broken.name=Broken Enderman Figurine
+tile.figurine.figurine_enderman_broken.name=Broken Zombie Pigman Figurine
+tile.figurine.figurine_mysterious.name=Mysterious Figurine
+tile.vaseVolute.damaged_volute.name=Broken Volute
+tile.vaseVolute.restored_volute.name=Restored Volute
+tile.vaseVolute.blackFigure_volute.name=Black Figure Volute
+tile.vaseVolute.redFigure_volute.name=Red Figure Volute
+tile.vaseVolute.porcelain_volute.name=Porcelain Volute
+tile.vaseAmphora.damaged_amphora.name=Broken Amphora
+tile.vaseAmphora.restored_amphora.name=Restored Amphora
+tile.vaseAmphora.blackFigure_amphora.name=Black Figure Amphora
+tile.vaseAmphora.redFigure_amphora.name=Red Figure Amphora
+tile.vaseAmphora.porcelain_amphora.name=Porcelain Amphora
+tile.vaseKylix.damaged_kylix.name=Broken Kylix
+tile.vaseKylix.restored_kylix.name=Restored Kylix
+tile.vaseKylix.blackFigure_kylix.name=Black Figure Kylix
+tile.vaseKylix.redFigure_kylix.name=Red Figure Kylix
+tile.vaseKylix.porcelain_kylix.name=Porcelain Kylix
+
+#Items
+item.bioFossil.name=Bio-Fosilie
+item.relicScrap.name=Zbytky relikvie
+item.stoneTablet.name=Kamenna deska
+item.brokenAncientSword.name=Rozbity starodavny mec
+item.ancientSword.name=Starodavny mec
+item.fernSeeds.name=Semena kapradiny
+item.brokenAncientHelmet.name=Rozbita starodavna helma
+item.ancientHelmet.name=Starodavna helma
+item.skullStick.name=Hul s lebkou
+item.scarabGem.name=Scarabi drahokam
+item.scarabAxe.name=Scarabi sekyra
+item.scarabPickAxe.name=Scarabi krumpac
+item.scarabSword.name=Scarabi mec
+item.scarabHoe.name=Scarabi motyka
+item.scarabShovel.name=Scarabi lopatal
+item.dinoPedia.name=DinoPedie
+item.tooth.name=Zub T-Rexe
+item.dagger.name=Zubata dyka
+item.rawChickenSoup.name=Syrova kureci polevka
+item.cookedChickenSoup.name=Varena kureci polevka
+item.essenceofChicken.name=Kureci esence
+item.emptyShell.name=Prazdna skorapka
+item.sJL.name=Sio-Chiu-Le
+item.icedMeat.name=Zmrzle maso
+item.woodJavelin.name=Dreveny ostep
+item.stoneJavelin.name=kamenny ostep
+item.ironJavelin.name=Zelezny ostep
+item.goldJavelin.name=Zlaty ostep
+item.diamondJavelin.name=Diamantovy ostep
+item.ancientJavelin.name=Starodavny ostep
+item.whip.name=Bic
+item.magicConch.name=Kouzelna lastura
+item.legBone.name=Stehenni kost
+item.claw.name=Parat
+item.foot.name=Tlapa
+item.skull.name=Lebka
+item.plantFossil.name=Rostlinna fosilie
+item.skullHelmet.name=Kostenna helma
+item.ribCage.name=Kostenny hrudnik
+item.shinGuards.name=Kostenne holene
+item.feet.name=Kostenne boty
+item.amber.name=Jantar
+item.ancientVase.name=Starodavna vaza
+item.ancientVaseBroken.name=Rozbita starodavna vaza
+item.boneArrow.name=Kostenny sip
+item.boneBow.name=Kostenny luk
+item.boneGlue.name=Kostni lepidlo
+item.boneRod.name=Kostenna hulka
+item.boneSword.name=Kostenny mec
+item.powderyString.name=Prasna nit
+item.animalCoin.name=Zvireci mince
+item.dinoCoin.name=Dinosauri mince
+item.dodoWing.name=Syrove kridylko Doda
+item.dodoWingCooked.name=Pecene kridylko Doda
+item.dinoSteak.name=Dinosauri steak
+item.rawTriceratops.name=Maso z Triceratopse
+item.rawVelociraptor.name=Maso z Velociraptora
+item.rawTRex.name=Maso z T-Rexe
+item.rawPterosaur.name=Maso z Pterosaura
+item.rawNautilus.name=Maso z Nautila
+item.rawPlesiosaur.name=Maso z Plesiosaura
+item.rawMosasaurus.name=Maso z Mosasaura
+item.rawLiopleurodon.name=Maso z Liopleurodon
+item.rawStegosaurus.name=Maso ze Stegosaura
+item.rawDilophosaurus.name=Maso z Dilophosaura
+item.rawBrachiosaurus.name=Maso z Brachiosaura
+item.rawSpinosaurus.name=Maso ze Spinosaura
+item.rawCompsognathus.name=Maso z Compsognathuse
+item.rawAnkylosaurus.name=Maso z Ankylosaurusa
+item.rawPachycephalosaurus.name=Maso z Pachycephalosaura
+item.rawDeinonychus.name=Maso z Deinonychus
+item.rawGallimimus.name=Maso z Gallimimus
+item.eggTriceratops.name=Vejce Triceratopse
+item.eggVelociraptor.name=Vejce Velociraptora
+item.eggTRex.name=Vejce T-Rexe
+item.eggPterosaur.name=Vejce Pterosaura
+item.eggNautilus.name=Vejce ziveho Nautila
+item.eggPlesiosaur.name=Vejce Plesiosaura
+item.eggMosasaurus.name=Vejce Mosasaurusa
+item.eggLiopleurodon.name=Vejce Liopleurodon
+item.eggStegosaurus.name=Vejce Stegosaura
+item.eggDilophosaurus.name=Vejce Dilophosaurusa
+item.eggBrachiosaurus.name=Vejce Brachiosaura
+item.eggSpinosaurus.name=Vejce Spinosaura
+item.eggCompsognathus.name=Vejce Compsognathuse
+item.eggDodo.name=Vejce Doda
+item.eggCultivatedDodo.name=Kultivovane vejce Doda
+item.eggAnkylosaurus.name=Vejce Ankylosaura
+item.eggPachycephalosaurus.name=Vejce Pachycephalosaura
+item.eggDeinonychus.name=Vejce Deinonychus
+item.eggGallimimus.name=Vejce Gallimimus
+item.eggCoelacanth.first.name=Ocean Coelacanth
+item.eggCoelacanth.second.name=River Coelacanth
+item.eggCoelacanth.third.name=Swamp Coelacanth
+item.dnaTriceratops.name=DNA Triceratopse
+item.dnaVelociraptor.name=DNA Velociraptora
+item.dnaTRex.name=DNA T-Rexe
+item.dnaPterosaur.name=DNA Pterosaura
+item.dnaNautilus.name=DNA Nautiluse
+item.dnaPlesiosaur.name=DNA Plesiosaura
+item.dnaMosasaurus.name=DNA Mosasaura
+item.dnaLiopleurodon.name=DNA Liopleurodon
+item.dnaStegosaurus.name=DNA Stegosaura
+item.dnaDilophosaurus.name=DNA Dilophosaura
+item.dnaBrachiosaurus.name=DNA Brachiosaura
+item.dnaSpinosaurus.name=DNA Spinosaura
+item.dnaCompsognathus.name=DNA Compsognathuse
+item.dnaAnkylosaurus.name=DNA Ankylosaura
+item.dnaPachycephalosaurus.name=DNA Pachycephalosaura
+item.dnaDeinonychus.name=DNA Deinonychus
+item.dnaGallimimus.name=DNA Gallimimus
+item.dnaCoelacanth.name=DNA Coelacanth
+item.dnaPig.name=Praseci DNA
+item.dnaSheep.name=Ovci DNA
+item.dnaCow.name=Kravska DNA
+item.dnaChicken.name=Kureci DNA
+item.dnaSmilodon.name=DNA Smilodona
+item.dnaMammoth.name=Mamuti DNA
+item.dnaDodo.name=DNA Doda
+item.dnaHorse.name=Horse DNA
+item.embryoPig.name=Praseci embryo
+item.embryoSheep.name=Ovci embryo
+item.embryoCow.name=Kravske embryo
+item.embryoChicken.name=Kureci embryo
+item.embryoSmilodon.name=Smilodoni embryo
+item.embryoMammoth.name=Mamuti embryo
+item.embryoDodo.name=Dodi embryo
+item.embryoHorse.name=Horse Embryo
+item.archNotebook.name=Archaeology Notebook
+item.potteryShard.name=Pottery Shard
+
+#Dinosaur related chat messages
+dnaName.head=DNA 
+dnaName.tail=
+embryoName.head=Embryo 
+embryoName.tail=
+meatName.head=Maso z 
+meatName.tail=
+mGCName.head=Kouzelna lastura: 
+mGCName.tail=
+dEggName.head=Vejce 
+dEggName.tail=
+
+#Order chat messages
+order.head=Prikaz: 
+order.Stay=Stuj
+order.Follow=Nasleduj me
+order.FreeMove=Volno
+
+#Dinosaur status chat messages
+status.Hungry.head
+status.Hungry=je hladovy.
+status.Starve.head
+status.Starve=vyhladovel k smrti.
+status.LearningChest.head
+status.LearningChest=se naucil pouzivat bedny.
+status.Betrayed.head
+status.Betrayed=uz nebude nikdy verit lidem.
+status.NoSpace.Head
+status.NoSpace=nema dost prostoru k rustu.
+status.StarveEsc.head=
+status.StarveEsc=utekl z hladu.
+status.SJLBite=kousnul Siu-Jiu-Le a utekl.
+status.ChewTime=potrebuje cas ke zvykani.
+status.Full.head=
+status.Full=je plny.
+status.Nervous.Head=Stvoril jsi mlade
+status.Nervous=prilis nervozni aby lovil sam.
+status.GemErrorYoung=Tento T-Rex je jeste prilis mlady.
+status.GemErrorHealth=Ccarab si nemuze dovolit tak silnou zivotni energii.
+status.GemErrorTamed=Tento T-Rex jiz byl ochocen.
+status.essencefail=Slepici esence nema efekt.
+
+#Dinosaur Names
+entity.fossil.Triceratops.name=Triceratops
+entity.fossil.Velociraptor.name=Velociraptor
+entity.fossil.TRex.name=Tyrannosaurus
+entity.fossil.Pterosaur.name=Pterosaurus
+entity.fossil.Plesiosaur.name=Plesiosaurus
+entity.fossil.Mosasaurus.name=Mosasaurus
+entity.fossil.Liopleurodon.name=Liopleurodon
+entity.fossil.Stegosaurus.name=Stegosaurus
+entity.fossil.Dilophosaurus.name=Dilophosaurus
+entity.fossil.Brachiosaurus.name=Brachiosaurus
+entity.fossil.Nautilus.name=Nautilus
+entity.fossil.Spinosaurus.name=Spinosaurus
+entity.fossil.Compsognathus.name=Compsognathus
+entity.fossil.Ankylosaurus.name=Ankylosaurus
+entity.fossil.Pachycephalosaurus.name=Pachycephalosaurus
+entity.fossil.Deinonychus.name=Deinonychus
+entity.fossil.Gallimimus.name=Gallimimus
+
+#Non-dinosaur names
+entity.fossil.Mammoth.name=Mamut
+entity.fossil.Smilodon.name=Smilodon
+entity.fossil.PregnantCow.name=Oplodnena krava
+entity.fossil.PregnantPig.name=Oplodnene prase
+entity.fossil.PregnantSheep.name=Oplodnena ovce
+entity.fossil.PregnantHorse.name=Pregnant Horse
+entity.fossil.Dodo.name=Dodo
+entity.fossil.Coelacanth.name=Coelacanth
+
+#Pedia text
+pedia.text.owner=Majitel:
+pedia.text.chest=* truhel
+pedia.text.caution=!Nebezpeci!
+pedia.text.rideable=* pojizdny
+pedia.text.weak=temer mrtvy
+pedia.text.fly=* schopny letat
+pedia.eggWet=vlhke
+pedia.eggDry=suche
+pedia.eggCold=chladne
+pedia.eggWarm=teple
+pedia.eggStatus=Stav
+pedia.eggProgress=Postup
+pedia.eggDay=den
+pedia.eggDays=dni
+pedia.embryo.inside=Embryo uvnitr:
+pedia.embryo.growing=Postup:
+pedia.embryo.Pig=Prase
+pedia.embryo.Sheep=Ovce
+pedia.embryo.Cow=Krava
+pedia.embryo.Chicken=Slepice
+pedia.embryo.Smilodon=Smilodon
+pedia.embryo.Mammoth=Mamut
+pedia.embryo.Dodo=Dodo
+pedia.embryo.Horse=Horse
+
+#Anu speaking lines
+anuSpeaker.self=Anu:
+anuSpeaker.hello=pokleknete predemnou, odpor je marny.
+anuSpeaker.bareHand=Holyma rukama... stupidni, ale statecne.
+anuSpeaker.draw=TASTE MECE.
+anuSpeaker.coward=Luk pouziva zbabelec! Prestan se schovavat!
+anuSpeaker.leartHere=Podivej, co jsem se tu naucil!
+anuSpeaker.leartThere=Podivej, co jsem se tam naucil!
+anuSpeaker.unknownRanged=Takze to jsou vase zbrane?
+anuSpeaker.unknownMelee=Ha! Prestan si hrat!
+anuSpeaker.summon=Sluzebnici, vas mistr vola.
+anuSpeaker.trans=Tupci, probudte svou moudrost.
+anuSpeaker.qi=Ry-rana!
+anuSpeaker.fireRain=Co tak ohnivy dest!
+
+#Friendly pigmen speaking lines
+fpzSpeaker.self=Praseci zombici:
+fpzSpeaker.selfKill=Nemuzeme zit bez vudce!
+fpzSpeaker.lifeFor.head=Muj zivot za
+fpzSpeaker.lifeFor.tail=!
+fpzSpeaker.anuSommon=Slava Anu!!
+
+#Dinosaur egg chat messages
+dinoegg.hatched=Dinosauri vejce se vylihlo!
+dinoegg.noSpace=Toto vejce zle nelze polozit.
+dinoegg.head=Vejce
+dinoegg.dry=zemrelo protoze bylo prilis suche.
+dinoegg.cold=zemrelo protoze bylo prilis chladne.
+
+#Cultivator chat messages
+cultivate.outBreak=Pozor! Kultivace selhala!
+
+#Drum chat messages
+drum.trigger=Prikaz bubnu:
+drum.ordering=Prikazuji
+drum.tRex1=Prikaz T-Rexum na snidani.
+drum.tRex2=Prikaz T-Rexum na obed.
+drum.tRex3=Prikaz T-Rexum na veceri.
+
+#Hostile mob names
+entity.fossil.Bones.name=Kostik
+entity.fossil.FriendlyPigZombie.name=Pratelske PigZombie
+entity.fossil.Failuresaurus.name=Selhalosaurus
+entity.fossil.PigBoss.name=Anu
+
+#Records
+item.record_bones.name=Fossil Record
+item.record_jp_theme.name=JP Theme

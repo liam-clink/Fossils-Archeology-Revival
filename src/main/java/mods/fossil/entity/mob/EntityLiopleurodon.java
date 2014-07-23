@@ -6,28 +6,37 @@ import java.util.Random;
 
 import mods.fossil.Fossil;
 import mods.fossil.client.LocalizationStrings;
+import mods.fossil.fossilAI.DinoAIEat;
+import mods.fossil.fossilAI.DinoAIHunt;
 import mods.fossil.fossilAI.WaterDinoAIAttack;
 import mods.fossil.fossilAI.WaterDinoAIEat;
 import mods.fossil.fossilAI.WaterDinoAIHunt;
 import mods.fossil.fossilAI.WaterDinoAIWander;
 import mods.fossil.fossilEnums.EnumDinoType;
+import mods.fossil.handler.FossilAchievementHandler;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.EnchantmentThorns;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
-public class EntityMosasaurus extends EntitySwimmingDino implements IMob
+public class EntityLiopleurodon extends EntitySwimmingDino implements IMob
 {
     private Entity targetedEntity;
 
@@ -40,36 +49,40 @@ public class EntityMosasaurus extends EntitySwimmingDino implements IMob
     private double deltaY;
     private double deltaZ;
     private double length;
-
-    public static final double baseHealth = EnumDinoType.Mosasaurus.Health0;
-    public static final double baseDamage = EnumDinoType.Mosasaurus.Strength0;
-    public static final double baseSpeed = EnumDinoType.Mosasaurus.Speed0;
     
-    public static final double maxHealth = EnumDinoType.Mosasaurus.HealthMax;
-    public static final double maxDamage = EnumDinoType.Mosasaurus.StrengthMax;
-    public static final double maxSpeed = EnumDinoType.Mosasaurus.SpeedMax;
 
-    public EntityMosasaurus(World par1World)
+
+    public static final double baseHealth = EnumDinoType.Liopleurodon.Health0;
+    public static final double baseDamage = EnumDinoType.Liopleurodon.Strength0;
+    public static final double baseSpeed = EnumDinoType.Liopleurodon.Speed0;
+    
+    public static final double maxHealth = EnumDinoType.Liopleurodon.HealthMax;
+    public static final double maxDamage = EnumDinoType.Liopleurodon.StrengthMax;
+    public static final double maxSpeed = EnumDinoType.Liopleurodon.SpeedMax;
+
+    public EntityLiopleurodon(World par1World)
     {
-        super(par1World, EnumDinoType.Mosasaurus);
+        super(par1World, EnumDinoType.Liopleurodon);
         /*
          * EDIT VARIABLES PER DINOSAUR TYPE
          */
-        this.adultAge = EnumDinoType.Mosasaurus.AdultAge;
+        this.adultAge = EnumDinoType.Liopleurodon.AdultAge;
         // Set initial size for hitbox. (length/width, height)
         this.setSize(1.5F, 0.5F);
         // Size of dinosaur at day 0.
-        this.minSize = 1.0F;
+        this.minSize = 0.8F;
         // Size of dinosaur at age Adult.
-        this.maxSize = 3.0F;
+        this.maxSize = 1.8F;
         this.experienceValue = 5;
+        
         
         this.getNavigator().setCanSwim(true);
         this.tasks.addTask(6, new EntityAIAttackOnCollide(this, 1, true));
+      // this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
         this.tasks.addTask(7, new WaterDinoAIWander(this, 1.0D));
-        this.tasks.addTask(3, new WaterDinoAIAttack(this, 0.022D)); // This is a multiplier! Large numbers do not work here. 0.022 is very fast as it is.
+        this.tasks.addTask(3, new WaterDinoAIAttack(this, 0.066D)); // This is a multiplier! Large numbers do not work here. 0.022 is very fast as it is.
         this.tasks.addTask(5, new WaterDinoAIEat(this, 50));
-        this.targetTasks.addTask(5, new WaterDinoAIHunt(this, EntityLiving.class, 50, false, 0.023D));
+        this.targetTasks.addTask(5, new WaterDinoAIHunt(this, EntityLiving.class, 50, false, 0.046D));
     }
 
     public boolean canBreatheUnderwater()
@@ -83,15 +96,7 @@ public class EntityMosasaurus extends EntitySwimmingDino implements IMob
         {
             return super.getModelTexture();
         }
-
-        switch (this.getSubSpecies())
-        {
-        case 1: 
-            return "fossil:textures/mob/Mosasaur_Blue.png";
-
-        case 2: default:
-        	return "fossil:textures/mob/Mosasaur_Green.png";
-        }
+        	return "fossil:textures/mob/Liopleurodon_Black.png";
     }
     
     @Override
@@ -104,11 +109,11 @@ public class EntityMosasaurus extends EntitySwimmingDino implements IMob
     		return null;
     	
     	if(!this.isInWater())
-        return Fossil.modid + ":" + "mosasaurus_living";
-    	else
-    	return Fossil.modid + ":" + "mosasaurus_outside";	
+            return Fossil.modid + ":" + "liopleurodon_living";
+        	else
+        	return Fossil.modid + ":" + "liopleurodon_outside";	
     }
-
+    
     @Override
     public String getAttackSound()
     {
@@ -117,11 +122,9 @@ public class EntityMosasaurus extends EntitySwimmingDino implements IMob
     	
     	return Fossil.modid + ":" + this.SelfType.toString().toLowerCase() + "_attack";
     }
-    
+
     /**
      * Returns true if the Entity AI code should be run
-     *
-     * Overriding because Mosasaur are dumb.
      */
     @Override
     public boolean isAIEnabled()
@@ -162,7 +165,12 @@ public class EntityMosasaurus extends EntitySwimmingDino implements IMob
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(baseHealth);
         this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(baseDamage);
     }
-
+    
+    public float getEyeHeight()
+    {
+        return this.height * 0.8F;
+    }
+    
     @Override
     public boolean attackEntityAsMob(Entity victim)
     {
@@ -187,11 +195,6 @@ public class EntityMosasaurus extends EntitySwimmingDino implements IMob
                 victim.addVelocity(vx, vy, vz);
                 motionX *= 0.6;
                 motionZ *= 0.6;
-            }
-
-            if (victim instanceof EntityLivingBase)
-            {
-                //EnchantmentThorns.func_92096_a(this, (EntityLivingBase) victim, rand);
             }
 
             setLastAttacker(victim);
@@ -224,9 +227,9 @@ public class EntityMosasaurus extends EntitySwimmingDino implements IMob
         return 1;
     }
     
-    public EntityMosasaurus spawnBabyAnimal(EntityAnimal var1)
+    public EntityLiopleurodon spawnBabyAnimal(EntityAnimal var1)
     {
-        return new EntityMosasaurus(this.worldObj);
+        return new EntityLiopleurodon(this.worldObj);
     }
     
     public boolean interact(EntityPlayer var1)
@@ -281,6 +284,18 @@ public class EntityMosasaurus extends EntitySwimmingDino implements IMob
 	        }
     	}
     }
+    
+    @Override
+    public IEntityLivingData onSpawnWithEgg(IEntityLivingData par1EntityLivingData)
+    {
+        par1EntityLivingData = super.onSpawnWithEgg(par1EntityLivingData);
+        Random random = new Random();
+        this.setSubSpecies(random.nextInt(1) + 1);
+        this.setDinoAge(this.SelfType.AdultAge);
+        this.updateSize();
+        this.heal(200);
+        return par1EntityLivingData;
+    }
 
 	@Override
 	public void writeSpawnData(ByteBuf buffer) {
@@ -293,16 +308,4 @@ public class EntityMosasaurus extends EntitySwimmingDino implements IMob
 		// TODO Auto-generated method stub
 		
 	}
-	
-    @Override
-    public IEntityLivingData onSpawnWithEgg(IEntityLivingData par1EntityLivingData)
-    {
-        par1EntityLivingData = super.onSpawnWithEgg(par1EntityLivingData);
-        Random random = new Random();
-        this.setSubSpecies(random.nextInt(2) + 1);
-        this.setDinoAge(this.SelfType.AdultAge);
-        this.updateSize();
-        this.heal(200);
-        return par1EntityLivingData;
-    }
 }
