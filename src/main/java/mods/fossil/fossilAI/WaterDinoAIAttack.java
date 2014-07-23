@@ -72,7 +72,11 @@ public class WaterDinoAIAttack extends EntityAIBase
      */
     public boolean continueExecuting()
     {
-        return this.shouldExecute();
+    	double distance = 64.0D;
+    	this.targetedEntity = this.entity.worldObj.getClosestVulnerablePlayerToEntity(this.entity, 20.0D);
+    	
+        return (this.entity.isInWater() && this.targetedEntity != null && this.targetedEntity.isInWater()
+                &&  this.targetedEntity.getDistanceSqToEntity(this.entity) < distance * distance);
     }
 
     /**
@@ -115,35 +119,26 @@ public class WaterDinoAIAttack extends EntityAIBase
             double d7 = this.targetedEntity.posZ - this.entity.posZ;
             */
             //rotate entity to face target
-            
-            if (this.entity.canEntityBeSeen(this.targetedEntity))
-            {
-            	
             this.entity.renderYawOffset = this.entity.rotationYaw = -((float)Math.atan2(deltaX, deltaZ)) * 180.0F / (float)Math.PI;
+            Vec3 vec3 = this.entity.getLook(1.0F);
  
             
             
-            this.entityVector = this.entity.getPosition(1.0F);
-            this.targetVector = Vec3.createVectorHelper(this.targetedEntity.posX, this.targetedEntity.posY, this.targetedEntity.posZ);
+            //this.entityVector = Vec3.createVectorHelper(this.dinosaur.posX, this.dinosaur.posY, this.dinosaur.posZ);
+            //this.targetVector = Vec3.createVectorHelper(this.destX, this.destY, this.destZ);
             
-            this.moveVector = targetVector.subtract(entityVector);
             
-            this.normalizedVector = this.moveVector.normalize();
+            //this.moveVector = targetVector.subtract(entityVector);
             
-            this.movePosX = normalizedVector.xCoord;
-            this.movePosY = normalizedVector.yCoord;
-            this.movePosZ = normalizedVector.zCoord;
-
+            //this.normalizedVector = this.moveVector.normalize();
+            
             this.movePosX = this.deltaX;
             this.movePosY = this.deltaY;
             this.movePosZ = this.deltaZ;
             
-            this.entity.addVelocity( deltaX * 0.022, deltaY * 0.022,  deltaZ * 0.022);
-            
+            this.entity.addVelocity( deltaX * this.speed, deltaY * this.speed,  deltaZ * this.speed);
+            this.entity.worldObj.playSoundAtEntity(this.entity, this.entity.getAttackSound(), 1F, 1F);
 
-               // this.entity.worldObj.playSoundAtEntity((EntityPlayer)null, "fossil:mosasaurus_attack", 1F, 1F);
-                Vec3 vec3 = this.entity.getLook(1.0F);
-            }
         }
         else
         {

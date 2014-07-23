@@ -38,10 +38,12 @@ public class WaterDinoAIHunt extends EntityAITarget
 	private double movePosY;
 	private double movePosZ;
 	private int SEARCH_RANGE;
+	private double speed;
 
-    public WaterDinoAIHunt(EntityDinosaur dinosaur, Class _class, int range, boolean par4)
+    public WaterDinoAIHunt(EntityDinosaur dinosaur, Class _class, int range, boolean par4, double speed)
     {
         super(dinosaur, par4);
+        this.speed = speed;
         this.dinosaur = dinosaur;
         this.targetClass = _class;
         this.SEARCH_RANGE = range;
@@ -136,14 +138,25 @@ public class WaterDinoAIHunt extends EntityAITarget
             //rotate entity to face target
             this.dinosaur.renderYawOffset = this.dinosaur.rotationYaw = -((float)Math.atan2(deltaX, deltaZ)) * 180.0F / (float)Math.PI;
  
+            
+            
+            //this.entityVector = Vec3.createVectorHelper(this.dinosaur.posX, this.dinosaur.posY, this.dinosaur.posZ);
+            //this.targetVector = Vec3.createVectorHelper(this.destX, this.destY, this.destZ);
+            
+            
+            //this.moveVector = targetVector.subtract(entityVector);
+            
+            //this.normalizedVector = this.moveVector.normalize();
+            
             this.movePosX = this.deltaX;
             this.movePosY = this.deltaY;
             this.movePosZ = this.deltaZ;
             
-            this.dinosaur.addVelocity( deltaX * 0.03, deltaY * 0.03,  deltaZ * 0.03);
+            this.dinosaur.addVelocity( deltaX * this.speed, deltaY * this.speed,  deltaZ * this.speed);
+
             if (this.dinosaur.canEntityBeSeen(this.targetEntity))
             {
-//                this.dinosaur.worldObj.playSoundAtEntity(this.dinosaur, this.dinosaur.getAttackSound(), 1F, 1F);
+                this.dinosaur.worldObj.playSoundAtEntity((EntityPlayer)null, this.dinosaur.getAttackSound(), 1F, 1F);
                 Vec3 vec3 = this.dinosaur.getLook(1.0F);
             }
         }

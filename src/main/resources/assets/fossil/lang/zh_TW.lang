@@ -1,4 +1,4 @@
-﻿#Updated for Build 6 (1.6.4) HEAD7 July 17 2014 
+﻿#Updated for 1.7.10 Build 6.3 HEAD8 July 22 2014 
 #Traditional Chinese (zh_TW) Localization File
 
 #創造模式標簽
@@ -181,6 +181,7 @@ item.rawPterosaur.name=翼龍肉
 item.rawNautilus.name=鹦鹉螺肉
 item.rawPlesiosaur.name=蛇頸龍肉
 item.rawMosasaurus.name=滄龍肉
+item.rawLiopleurodon.name=Raw Liopleurodon
 item.rawStegosaurus.name=劍龍肉
 item.rawDilophosaurus.name=雙脊龍肉
 item.rawBrachiosaurus.name=腕龍肉
@@ -197,6 +198,7 @@ item.eggPterosaur.name=翼龍蛋
 item.eggNautilus.name=活體鹦鹉螺
 item.eggPlesiosaur.name=蛇頸龍蛋
 item.eggMosasaurus.name=滄龍蛋
+item.eggLiopleurodon.name=Liopleurodon Egg
 item.eggStegosaurus.name=劍龍蛋
 item.eggDilophosaurus.name=雙脊龍蛋
 item.eggBrachiosaurus.name=腕龍蛋
@@ -218,6 +220,7 @@ item.dnaPterosaur.name=翼龍DNA
 item.dnaNautilus.name=鹦鹉螺DNA
 item.dnaPlesiosaur.name=蛇頸龍DNA
 item.dnaMosasaurus.name=滄龍DNA
+item.dnaLiopleurodon.name=Liopleurodon DNA
 item.dnaStegosaurus.name=劍龍DNA
 item.dnaDilophosaurus.name=雙脊龍DNA
 item.dnaBrachiosaurus.name=腕龍DNA
@@ -296,6 +299,7 @@ entity.fossil.TRex.name=霸王龍
 entity.fossil.Pterosaur.name=翼龍
 entity.fossil.Plesiosaur.name=蛇頸龍
 entity.fossil.Mosasaurus.name=滄龍
+entity.fossil.Liopleurodon.name=Liopleurodon
 entity.fossil.Stegosaurus.name=劍龍
 entity.fossil.Dilophosaurus.name=雙脊龍
 entity.fossil.Brachiosaurus.name=腕龍
@@ -390,5 +394,4 @@ entity.fossil.PigBoss.name=阿努
 
 #Records
 item.record_bones.name=化石唱片
-item.record.record_bones_disc.desc=WhiteJoshMan - Bones
-item.record.record_jp_theme.desc=和風主題唱片
+item.record_jp_theme.name=和風主題唱片

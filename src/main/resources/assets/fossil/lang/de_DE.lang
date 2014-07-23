@@ -1,4 +1,4 @@
-﻿#Updated for Build 6 DEV (1.6.4) HEAD19 July 17 2014 
+﻿#Updated for 1.7.10 Build 6.3 HEAD20 July 22 2014 
 #Deutsch (de_DE) Localization File
 
 #Tab Groups
@@ -181,6 +181,7 @@ item.rawPterosaur.name=Pterosaur Fleisch
 item.rawNautilus.name=Nautilus Fleisch
 item.rawPlesiosaur.name=Plesiosaur Fleisch
 item.rawMosasaurus.name=Mosasaurus Fleisch
+item.rawLiopleurodon.name=Liopleurodon Fleisch
 item.rawStegosaurus.name=Stegosaurus Fleisch
 item.rawDilophosaurus.name=Dilophosaurus Fleisch
 item.rawBrachiosaurus.name=Brachiosaurus Fleisch
@@ -197,6 +198,7 @@ item.eggPterosaur.name=Pterosaur Ei
 item.eggNautilus.name=Lebendige Nautilus
 item.eggPlesiosaur.name=Plesiosaur Ei
 item.eggMosasaurus.name=Mosasaurus Ei
+item.eggLiopleurodon.name=Liopleurodon Ei
 item.eggStegosaurus.name=Stegosaurus Ei
 item.eggDilophosaurus.name=Dilophosaurus Ei
 item.eggBrachiosaurus.name=Brachiosaurus Ei
@@ -218,6 +220,7 @@ item.dnaPterosaur.name=Pterosaur DNA
 item.dnaNautilus.name=Nautilus DNA
 item.dnaPlesiosaur.name=Plesiosaur DNA
 item.dnaMosasaurus.name=Mosasaurus DNA
+item.dnaLiopleurodon.name=Liopleurodon DNA
 item.dnaStegosaurus.name=Stegosaurus DNA
 item.dnaDilophosaurus.name=Dilophosaurus DNA
 item.dnaBrachiosaurus.name=Brachiosaurus DNA
@@ -297,6 +300,7 @@ entity.fossil.TRex.name=Tyrannosaurus
 entity.fossil.Pterosaur.name=Pterosaur
 entity.fossil.Plesiosaur.name=Plesiosaur
 entity.fossil.Mosasaurus.name=Mosasaurus
+entity.fossil.Liopleurodon.name=Liopleurodon
 entity.fossil.Stegosaurus.name=Stegosaurus
 entity.fossil.Dilophosaurus.name=Dilophosaurus
 entity.fossil.Brachiosaurus.name=Brachiosaurus
@@ -391,5 +395,4 @@ entity.fossil.PigBoss.name=Anu
 
 #Records
 item.record_bones.name=Fossil Schallplatte
-item.record.record_bones_disc.desc=WhiteJoshMan - Bones
-item.record.record_jp_theme.desc=JP Theme
+item.record_jp_theme.name=JP Theme

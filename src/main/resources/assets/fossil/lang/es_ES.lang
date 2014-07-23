@@ -1,4 +1,4 @@
-﻿#Updated for Build 6 (1.6.4) HEAD17 July 17 2014  
+﻿#Updated for 1.7.10 Build 6.3 HEAD18 July 22 2014  
 #Spanish - Spain (es_ES) Localization File
 
 #Tab Groups
@@ -181,6 +181,7 @@ item.rawPterosaur.name=Carne de Pterosaurio
 item.rawNautilus.name=Carne de Nautilus
 item.rawPlesiosaur.name=Carne de Plesiosaurio
 item.rawMosasaurus.name=Carne de Mosasaurio
+item.rawLiopleurodon.name=Carne de Liopleurodon
 item.rawStegosaurus.name=Carne de Estegosaurio
 item.rawDilophosaurus.name=Carne de Dilofosaurio
 item.rawBrachiosaurus.name=Carne de Brachiosaurio
@@ -197,6 +198,7 @@ item.eggPterosaur.name=Huevo de Pterosaurio
 item.eggNautilus.name=Nautilus
 item.eggPlesiosaur.name=Huevo de Plesiosaurio
 item.eggMosasaurus.name=Huevo de Mosasaurio
+item.eggLiopleurodon.name=Huevo de Liopleurodon
 item.eggStegosaurus.name=Huevo de Estegosaurio
 item.eggDilophosaurus.name=Huevo de Dilofosaurio
 item.eggBrachiosaurus.name=Huevo de Brachiosaurio
@@ -218,6 +220,7 @@ item.dnaPterosaur.name=ADN de Pterosaurio
 item.dnaNautilus.name=ADN de Nautilus
 item.dnaPlesiosaur.name=ADN de Plesiosaurio
 item.dnaMosasaurus.name=ADN de Mosasaurio
+item.dnaLiopleurodon.name=ADN de Liopleurodon
 item.dnaStegosaurus.name=ADN de Estegosaurio
 item.dnaDilophosaurus.name=ADN de Dilofosaurio
 item.dnaBrachiosaurus.name=ADN de Brachiosaurio
@@ -296,6 +299,7 @@ entity.fossil.TRex.name=Tiranosaurio
 entity.fossil.Pterosaur.name=Pterosaurio
 entity.fossil.Plesiosaur.name=Plesiosaurio
 entity.fossil.Mosasaurus.name=Mosasaurio
+entity.fossil.Liopleurodon.name=Liopleurodon
 entity.fossil.Stegosaurus.name=Estegosaurio
 entity.fossil.Dilophosaurus.name=Dilofosaurio
 entity.fossil.Brachiosaurus.name=Brachiosaurio
@@ -390,5 +394,4 @@ entity.fossil.PigBoss.name=Anu
 
 #Records
 item.record_bones.name=Fossil Record
-item.record.record_bones_disc.desc=WhiteJoshMan - Bones
-item.record.record_jp_theme.desc=JP Theme
+item.record_jp_theme.name=JP Theme

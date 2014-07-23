@@ -1,28 +1,7 @@
 package mods.fossil.handler;
 
-import mods.fossil.entity.mob.EntityAnkylosaurus;
-import mods.fossil.entity.mob.EntityBones;
-import mods.fossil.entity.mob.EntityBrachiosaurus;
-import mods.fossil.entity.mob.EntityCoelacanth;
-import mods.fossil.entity.mob.EntityCompsognathus;
-import mods.fossil.entity.mob.EntityDeinonychus;
-import mods.fossil.entity.mob.EntityDilophosaurus;
-import mods.fossil.entity.mob.EntityDodo;
-import mods.fossil.entity.mob.EntityFailuresaurus;
-import mods.fossil.entity.mob.EntityGallimimus;
-import mods.fossil.entity.mob.EntityMammoth;
-import mods.fossil.entity.mob.EntityMosasaurus;
-import mods.fossil.entity.mob.EntityNautilus;
-import mods.fossil.entity.mob.EntityPachycephalosaurus;
-import mods.fossil.entity.mob.EntityPigBoss;
-import mods.fossil.entity.mob.EntityPlesiosaur;
-import mods.fossil.entity.mob.EntityPterosaur;
-import mods.fossil.entity.mob.EntitySmilodon;
-import mods.fossil.entity.mob.EntitySpinosaurus;
-import mods.fossil.entity.mob.EntityStegosaurus;
-import mods.fossil.entity.mob.EntityTRex;
-import mods.fossil.entity.mob.EntityTriceratops;
-import mods.fossil.entity.mob.EntityVelociraptor;
+import mods.fossil.entity.mob.*;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 
@@ -56,6 +35,7 @@ public class FossilSpawnEggs
         registerEntityEgg(EntityDeinonychus.class, 			0x6a6a6a, 0x2f302e);
         registerEntityEgg(EntityGallimimus.class, 			0x8c5517, 0x544833);
         registerEntityEgg(EntityCoelacanth.class, 			0x5283bf, 0x66a24a);
+        registerEntityEgg(EntityLiopleurodon.class, 		0x000000, 0xffffff);
     }
 
     public static int getUniqueEntityId()
