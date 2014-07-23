@@ -86,8 +86,7 @@ public class EntityPlesiosaur extends EntitySwimmingDino implements IMob
         this.tasks.addTask(7, new WaterDinoAIWander(this, 1.0D));
         this.tasks.addTask(10, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(11, new EntityAILookIdle(this));
-        tasks.addTask(1, new DinoAIRideGround(this, 1)); // mutex all
-        //this.tasks.addTask(2, this.aiControlledByPlayer = new EntityAIControlledByPlayer(this, 0.3F));
+        tasks.addTask(1, new DinoAIRideGround(this, 2)); // mutex all
         
         this.tasks.addTask(5, new WaterDinoAIEat(this, 50));
         this.targetTasks.addTask(5, new WaterDinoAIHunt(this, EntityLiving.class, 500, false, 0.02D));
@@ -120,6 +119,11 @@ public class EntityPlesiosaur extends EntitySwimmingDino implements IMob
             default:
                 return "fossil:textures/mob/Plesiosaur_adult.png";
         }
+    }
+    
+    @Override
+    public boolean shouldDismountInWater(Entity rider){
+        return false;
     }
 
     public boolean canBreatheUnderwater()
