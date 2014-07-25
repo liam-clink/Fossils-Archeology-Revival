@@ -1,7 +1,6 @@
 package mods.fossil.items;
 
 import mods.fossil.entity.mob.EntityDinosaur;
-import mods.fossil.entity.mob.test.EntityFlyingDinosaur;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemCarrotOnAStick;
@@ -42,30 +41,15 @@ public class ItemWhip extends ItemCarrotOnAStick
     /**
      * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
      */
-    public ItemStack onItemRightClick(ItemStack I, World W, EntityPlayer P)
+    public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer player)
     {
-        if (P.isRiding() && P.ridingEntity instanceof EntityFlyingDinosaur)
+        if (player.isRiding() && player.ridingEntity instanceof EntityDinosaur)
         {
-        	EntityFlyingDinosaur D = (EntityFlyingDinosaur)P.ridingEntity;
-        	
-        	if(!D.isFlying())
-        	{
-        	D.liftOff();
-        	}else {
-        //	D.islanding = !D.islanding;
-        	}
-        	
-        	
-                I.damageItem(1, P);
-                P.swingItem();
-                P.ridingEntity.playSound("fossil:whip", 1.0F, 1.0F);
-        }
-        else if (P.isRiding() && P.ridingEntity instanceof EntityDinosaur)
-        {
-            EntityDinosaur D = (EntityDinosaur)P.ridingEntity;
-                I.damageItem(1, P);
-                P.swingItem();
-                P.ridingEntity.playSound("fossil:whip", 1.0F, 1.0F);
+            EntityDinosaur dinosaur = (EntityDinosaur)player.ridingEntity;
+            	dinosaur.onWhipRightClick();
+                itemstack.damageItem(1, player);
+                player.swingItem();
+                player.ridingEntity.playSound("fossil:whip", 1.0F, 1.0F);
         }
         else
         {
@@ -75,11 +59,11 @@ public class ItemWhip extends ItemCarrotOnAStick
                 W.spawnEntityInWorld(new EntityWhipAttachment(W, P));
             }
             */
-            P.swingItem();
-            W.playSoundAtEntity(P, "fossil:whip", 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 0.8F));
+            player.swingItem();
+            world.playSoundAtEntity(player, "fossil:whip", 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 0.8F));
         }
 
-        return I;
+        return itemstack;
     }
 
     @Override

@@ -120,7 +120,9 @@ public class EntityPachycephalosaurus extends EntityDinosaur
         int offsetX = target.posX > this.posX ? amount : -amount;
         int offsetZ = target.posZ > this.posZ ? amount : -amount;
 
-        target.setVelocity((double)(offsetX), target.motionY, (double)(offsetZ));
+        target.motionZ = (double)(offsetZ);
+        target.motionZ = (double)(offsetX);
+        //target.setVelocity((double)(offsetX), target.motionY, (double)(offsetZ));
     }
 
     /**

@@ -10,6 +10,7 @@ import mods.fossil.fossilAI.DinoAIAttackOnCollide;
 import mods.fossil.fossilAI.DinoAIFishing;
 import mods.fossil.fossilAI.DinoAIFollowOwner;
 import mods.fossil.fossilAI.DinoAIRideGround;
+import mods.fossil.fossilAI.DinoAIWander;
 import mods.fossil.fossilAI.WaterDinoAIEat;
 import mods.fossil.fossilAI.WaterDinoAIHunt;
 import mods.fossil.fossilAI.WaterDinoAIWander;
@@ -61,6 +62,9 @@ public class EntityPlesiosaur extends EntitySwimmingDino implements IMob
     public static final double maxHealth = EnumDinoType.Plesiosaur.HealthMax;
     public static final double maxDamage = EnumDinoType.Plesiosaur.StrengthMax;
     public static final double maxSpeed = EnumDinoType.Plesiosaur.SpeedMax;
+    
+    private WaterDinoAIWander aiWaterDinoWander = new WaterDinoAIWander(this, 1.0D);
+    private DinoAIWander aiDinoWander = new DinoAIWander(this, 1.0D);
 
     public EntityPlesiosaur(World var1)
     {
@@ -73,7 +77,7 @@ public class EntityPlesiosaur extends EntitySwimmingDino implements IMob
          */
         this.adultAge = EnumDinoType.Plesiosaur.AdultAge;
         // Set initial size for hitbox. (length/width, height)
-        this.setSize(1.5F, 1.0F);
+        this.setSize(1.0F, 1.0F);
         // Size of dinosaur at day 0.
         this.minSize = 1.0F;
         // Size of dinosaur at age Adult.
@@ -83,10 +87,9 @@ public class EntityPlesiosaur extends EntitySwimmingDino implements IMob
         this.tasks.addTask(3, new DinoAIAttackOnCollide(this, 1.1D, true));
         this.tasks.addTask(4, new DinoAIFollowOwner(this, 5.0F, 2.0F, 1.0F));
         this.tasks.addTask(8, new DinoAIFishing(this, /*this.HuntLimit,*/ 1));
-        this.tasks.addTask(7, new WaterDinoAIWander(this, 1.0D));
         this.tasks.addTask(10, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(11, new EntityAILookIdle(this));
-        tasks.addTask(1, new DinoAIRideGround(this, 2)); // mutex all
+        tasks.addTask(1, new DinoAIRideGround(this, 3)); // mutex all
         
         this.tasks.addTask(5, new WaterDinoAIEat(this, 50));
         this.targetTasks.addTask(5, new WaterDinoAIHunt(this, EntityLiving.class, 500, false, 0.02D));
@@ -131,32 +134,23 @@ public class EntityPlesiosaur extends EntitySwimmingDino implements IMob
         return true;
     }
 
+    
     protected void updateEntityActionState()
     {
         if (!this.isModelized())
         {
             if (this.riddenByEntity == null)
             {
-                super.updateEntityActionState();
-
-                if (!this.isOnSurface() && (double)this.TargetY < this.posY)
-                {
-                    this.TargetY = (float)(this.posY++);
-                }
-                
+                super.updateEntityActionState();            
 
                 if (!this.isSitting() && !this.hasPath() && (new Random()).nextInt(1000) == 5)
                 {
                     this.FindFish(2);
                 }
-
-                if (!this.worldObj.isRemote)
-                {
-                    this.dataWatcher.updateObject(18, Float.valueOf(this.getHealth()));
-                }
             }
         }
     }
+    
 
     
     public boolean isOnSurface()
@@ -171,6 +165,15 @@ public class EntityPlesiosaur extends EntitySwimmingDino implements IMob
     public void onUpdate()
     {
         super.onUpdate();
+        
+        if(this.isInWater()){
+            	this.tasks.removeTask(this.aiDinoWander);
+            	this.tasks.addTask(6, this.aiWaterDinoWander);
+        }
+        else {
+            	this.tasks.removeTask(this.aiWaterDinoWander);
+            	this.tasks.addTask(6, this.aiDinoWander);
+        }
     }
 
     /**
@@ -354,11 +357,17 @@ public class EntityPlesiosaur extends EntitySwimmingDino implements IMob
         }
     }
 
+    public float getMountHeight()
+    {
+        return this.height/2;
+    }
+    
     public void updateRiderPosition()
     {
         if (this.riddenByEntity != null)
         {
             this.riddenByEntity.setPosition(this.posX, this.posY + (double)this.height * 0.75D + 0.07D * (double)(18 - this.getDinoAge()), this.posZ);
+        	 this.riddenByEntity.setPosition(this.posX, this.posY + this.getMountHeight() + this.riddenByEntity.getYOffset(), this.posZ);
         }
     }
 
@@ -395,6 +404,7 @@ public class EntityPlesiosaur extends EntitySwimmingDino implements IMob
         }
     }
 
+    /*
     public void FaceToCoord(int var1, int var2, int var3)
     {
         double var4 = (double)var1;
@@ -429,6 +439,7 @@ public class EntityPlesiosaur extends EntitySwimmingDino implements IMob
 
         return var1 + var4;
     }
+    */
 
     /**
      * Causes this entity to do an upwards motion (jumping).
@@ -447,7 +458,7 @@ public class EntityPlesiosaur extends EntitySwimmingDino implements IMob
      */
     public boolean isInWater()
     {
-        return this.worldObj.handleMaterialAcceleration(this.boundingBox.expand(0.0D, -0.6000000238418579D, 0.0D), Material.water, this);
+    	return this.worldObj.handleMaterialAcceleration(this.boundingBox.expand(0.0D, -0.4000000059604645D, 0.0D).contract(0.001D, 0.001D, 0.001D), Material.water, this);
     }
 
     public float HandleRiding(float Speed, float SpeedBoosted)
