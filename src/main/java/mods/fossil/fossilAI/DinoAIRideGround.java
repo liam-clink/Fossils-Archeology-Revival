@@ -98,6 +98,15 @@ public class DinoAIRideGround extends DinoAIRide
             if (speedPlayer > 0)
             {
                 dinosaur.getMoveHelper().setMoveTo(dinosaur.posX + look.xCoord, dinosaur.posY, dinosaur.posZ + look.zCoord, speed * speedPlayer);
+
+                //This block checks if the dinosaur can be ridden in water, if so, handle Y velocity. Still looking for elegant way.
+                if(!dinosaur.shouldDismountInWater(rider) && dinosaur.isInWater())
+                {	
+                	if(Math.abs(look.yCoord) > 0.4){
+                		dinosaur.motionY = Math.max(-0.15, Math.min(0.15, look.yCoord));
+                		//dinosaur.setVelocity(dinosaur.motionX, Math.max(-0.15, Math.min(0.15, look.yCoord)), dinosaur.motionZ);
+                	}
+                }            
             }
 
             this.lastTimeSeenWhip++;

@@ -1,4 +1,4 @@
-﻿#Updated for 1.7.10 Build 6.3 HEAD20 July 22 2014 
+﻿#Updated for 1.6.4 Build 6.3 HEAD20 July 22 2014 
 #English (en_US) Localization File
 
 #Tab Groups
@@ -250,7 +250,6 @@ item.embryoHorse.name=Horse Embryo
 item.archNotebook.name=Archaeology Notebook
 item.potteryShard.name=Pottery Shard
 
-
 #Dinosaur related chat messages
 dnaName.head=DNA of 
 dnaName.tail=
@@ -293,7 +292,7 @@ status.GemErrorHealth=The scarab cannot afford such strong life energy.
 status.GemErrorTamed=This T-Rex has already been tamed.
 status.essencefail=Essence of Chicken had no effect.
 
-#Dinosaur Names Clean
+#Dinosaur Names
 entity.fossil.Triceratops.name=Triceratops
 entity.fossil.Velociraptor.name=Velociraptor
 entity.fossil.TRex.name=Tyrannosaurus

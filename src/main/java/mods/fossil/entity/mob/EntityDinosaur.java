@@ -1682,4 +1682,10 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
 
 		return false;
     }
+    
+     /*
+      * Call this function when a player is riding a dinosaur and right clicks with whip.
+      * Override in dinosaur classes to create unique actions.
+      */
+    public void onWhipRightClick() {}
 }

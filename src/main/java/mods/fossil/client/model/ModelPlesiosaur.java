@@ -1,602 +1,224 @@
 package mods.fossil.client.model;
 
 import mods.fossil.entity.mob.EntityDinosaur;
+import mods.fossil.entity.mob.EntityGallimimus;
 import mods.fossil.entity.mob.EntityPlesiosaur;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.MathHelper;
 
 public class ModelPlesiosaur extends ModelDinosaurs
 {
-    ModelRenderer Body = new ModelRenderer(this, 0, 0);
-    ModelRenderer Neck1;
-    ModelRenderer tail3;
-    ModelRenderer tail2;
-    ModelRenderer tail1;
-    ModelRenderer Neck2;
-    ModelRenderer Neck3;
-    ModelRenderer Neck4;
-    ModelRenderer head;
-    ModelRenderer right_arm;
-    ModelRenderer left_arm;
-    ModelRenderer right_leg;
-    ModelRenderer left_leg;
-    public boolean LandFlag = false;
+  //fields
+	private ModelRenderer Body;
+	private ModelRenderer rightleg;
+	private ModelRenderer leftleg;
+	private ModelRenderer leftarm;
+	private ModelRenderer rightarm;
+	private ModelRenderer tail1;
+	private ModelRenderer tail2;
+	private ModelRenderer tail3;
+	private ModelRenderer Neck1;
+	private ModelRenderer Neck2;
+	private ModelRenderer Neck4;
+	private ModelRenderer Neck3;
+	private ModelRenderer head;
+	private float moveRate;
+  
+  public ModelPlesiosaur()
+  {
+    textureWidth = 64;
+    textureHeight = 32;
+    setTextureOffset("Body.Body", 0, 0);
+    setTextureOffset("leftleg.leftleg", 48, 4);
+    setTextureOffset("rightleg.rightleg", 48, 0);
+    setTextureOffset("leftarm.leftarm", 44, 18);
+    setTextureOffset("rightarm.rightarm", 44, 13);
+    setTextureOffset("tail1.tail1", 0, 14);
+    setTextureOffset("tail2.tail2", 18, 14);
+    setTextureOffset("tail3.tail3", 24, 0);
+    setTextureOffset("Neck1.Neck1", 20, 23);
+    setTextureOffset("Neck2.Neck2", 47, 23);
+    setTextureOffset("Neck3.Neck3", 35, 3);
+    setTextureOffset("Neck4.Neck4", 35, 3);
+    setTextureOffset("head.head", 0, 22);
+    
+    Body = new ModelRenderer(this, "Body");
+    Body.setRotationPoint(0F, 19F, -4F);
+    setRotation(Body, 0F, 0F, 0F);
+    Body.mirror = true;
+      Body.addBox("Body", -4F, -3F, 0F, 8, 6, 8);
+    leftleg = new ModelRenderer(this, "leftleg");
+    leftleg.setRotationPoint(4F, 2F, 7F);
+    setRotation(leftleg, 0F, 0F, 0F);
+    leftleg.mirror = true;
+      leftleg.addBox("leftleg", 0F, 0F, -1.5F, 5, 1, 3);
+      Body.addChild(leftleg);
+    rightleg = new ModelRenderer(this, "rightleg");
+    rightleg.setRotationPoint(-3F, 2F, 7F);
+    setRotation(rightleg, 0F, 0F, 0F);
+    rightleg.mirror = true;
+      rightleg.addBox("rightleg", -6F, 0F, -1.5F, 5, 1, 3);
+      Body.addChild(rightleg);
+    leftarm = new ModelRenderer(this, "leftarm");
+    leftarm.setRotationPoint(3F, 2F, 1F);
+    setRotation(leftarm, 0F, 0F, 0F);
+    leftarm.mirror = true;
+      leftarm.addBox("leftarm", 0F, 0F, -4F, 6, 1, 4);
+      Body.addChild(leftarm);
+    rightarm = new ModelRenderer(this, "rightarm");
+    rightarm.setRotationPoint(-3F, 2F, 1F);
+    setRotation(rightarm, 0F, 0F, 0F);
+    rightarm.mirror = true;
+      rightarm.addBox("rightarm", -6F, 0F, -4F, 6, 1, 4);
+      Body.addChild(rightarm);
+    tail1 = new ModelRenderer(this, "tail1");
+    tail1.setRotationPoint(0F, -3F, 8F);
+    setRotation(tail1, 0F, 0F, 0F);
+    tail1.mirror = true;
+      tail1.addBox("tail1", -3F, 0F, 0F, 6, 5, 3);
+    tail2 = new ModelRenderer(this, "tail2");
+    tail2.setRotationPoint(0F, 3F, 2.5F);
+    setRotation(tail2, 0F, 0F, 0F);
+    tail2.mirror = true;
+      tail2.addBox("tail2", -2F, -2F, 0F, 4, 3, 6);
+    tail3 = new ModelRenderer(this, "tail3");
+    tail3.setRotationPoint(0F, -1F, 5.5F);
+    setRotation(tail3, 0F, 0F, 0F);
+    tail3.mirror = true;
+      tail3.addBox("tail3", -1F, -1F, 0F, 2, 2, 6);
+      tail2.addChild(tail3);
+      tail1.addChild(tail2);
+      Body.addChild(tail1);
+    this.Neck1 = new ModelRenderer(this, "Neck1");
+    this.Neck1.setRotationPoint(0F, 0F, 1F);
+    this.setRotation(Neck1, 0F, 0F, 0F);
+    this.Neck1.mirror = true;
+    this.Neck1.addBox("Neck1", -3F, -3F, -4F, 6, 5, 4);
+    Neck2 = new ModelRenderer(this, "Neck2");
+    Neck2.setRotationPoint(0F, 0F, -3F);
+    setRotation(Neck2, (float)Math.toRadians(-60), 0F, 0F);
+    Neck2.mirror = true;
+      Neck2.addBox("Neck2", -2F, -2F, -5F, 4, 4, 5);
+    Neck3 = new ModelRenderer(this, "Neck3");
+    Neck3.setRotationPoint(0F, 1F, -4F);
+    setRotation(Neck3, 0F, 0F, 0F);
+    Neck3.mirror = true;
+      Neck3.addBox("Neck3", -1F, -2F, -5F, 2, 3, 5);
+    Neck4 = new ModelRenderer(this, "Neck4");
+    Neck4.setRotationPoint(0F, 0F, -4F);
+    setRotation(Neck4, 0F, 0F, 0F);
+    Neck4.mirror = true;
+      Neck4.addBox("Neck4", -1F, -2F, -5F, 2, 3, 5);
+    head = new ModelRenderer(this, "head");
+    head.setRotationPoint(0F, -0.5F, -4F);
+    setRotation(head, 0F, 0F, 0F);
+    head.mirror = true;
+      head.addBox("head", -2F, -2F, -6F, 4, 4, 6);
+      Neck4.addChild(head);
+      Neck3.addChild(Neck4);
+      Neck2.addChild(Neck3);
+      Neck1.addChild(Neck2);
+      Body.addChild(Neck1);
+  }
+  
+  @Override
+  public void render(Entity var1, float var2, float var3, float var4, float var5, float var6, float var7)
+  {
+      super.render(var1, var2, var3, var4, var5, var6, var7);
+      this.setRotationAngles(var2, var3, var4, var5, var6, var7, ((EntityDinosaur)var1).isModelized());
+    this.Body.render(var7);
+  }
+  
+  private void setRotation(ModelRenderer model, float x, float y, float z)
+  {
+    model.rotateAngleX = x;
+    model.rotateAngleY = y;
+    model.rotateAngleZ = z;
+  }
 
-    public ModelPlesiosaur()
+  @Override
+protected void setRotationAngles(float var1, float var2, float var3,
+		float var4, float var5, float var6, boolean isModelized) {
+
+	//this.Neck1.rotateAngleX = (float)Math.toRadians(-60);
+	//this.Neck2.rotateAngleX = (float)Math.toRadians(10);
+	//this.Neck3.rotateAngleX = (float)Math.toRadians(10);
+	//this.Neck4.rotateAngleX = (float)Math.toRadians(20);
+	
+    if (!isModelized)
     {
-        this.Body.addBox(-4.0F, -4.0F, -4.0F, 8, 6, 8);
-        this.Body.setRotationPoint(0.0F, 20.0F, 0.0F);
-        this.Body.rotateAngleX = 0.0F;
-        this.Body.rotateAngleY = 0.0F;
-        this.Body.rotateAngleZ = 0.0F;
-        this.Body.mirror = false;
-        this.Neck1 = new ModelRenderer(this, 20, 23);
-        this.Neck1.addBox(-3.0F, 0.0F, -4.0F, 6, 5, 4);
-        this.Neck1.setRotationPoint(0.0F, 17.0F, 0.0F);
-        this.Neck1.rotateAngleX = -0.99446F;
-        this.Neck1.rotateAngleY = 0.0F;
-        this.Neck1.rotateAngleZ = 0.0F;
-        this.Neck1.mirror = false;
-        this.tail3 = new ModelRenderer(this, 24, 0);
-        this.tail3.addBox(-1.0F, -1.0F, 0.0F, 2, 2, 6);
-        this.tail3.setRotationPoint(0.0F, 21.0F, 11.0F);
-        this.tail3.rotateAngleX = -0.18081F;
-        this.tail3.rotateAngleY = 0.0F;
-        this.tail3.rotateAngleZ = 0.0F;
-        this.tail3.mirror = false;
-        this.tail2 = new ModelRenderer(this, 18, 14);
-        this.tail2.addBox(-2.0F, -2.0F, 0.0F, 4, 3, 6);
-        this.tail2.setRotationPoint(0.0F, 20.0F, 5.0F);
-        this.tail2.rotateAngleX = -0.27122F;
-        this.tail2.rotateAngleY = 0.0F;
-        this.tail2.rotateAngleZ = 0.0F;
-        this.tail2.mirror = false;
-        this.tail1 = new ModelRenderer(this, 0, 14);
-        this.tail1.addBox(-3.0F, -5.0F, 2.0F, 6, 5, 3);
-        this.tail1.setRotationPoint(0.0F, 20.0F, 0.0F);
-        this.tail1.rotateAngleX = -0.45203F;
-        this.tail1.rotateAngleY = 0.0F;
-        this.tail1.rotateAngleZ = 0.0F;
-        this.tail1.mirror = false;
-        this.Neck2 = new ModelRenderer(this, 47, 23);
-        this.Neck2.addBox(-2.0F, -2.0F, -6.0F, 4, 4, 5);
-        this.Neck2.setRotationPoint(0.0F, 16.0F, -4.0F);
-        this.Neck2.rotateAngleX = -0.88974F;
-        this.Neck2.rotateAngleY = 0.0F;
-        this.Neck2.rotateAngleZ = 0.0F;
-        this.Neck2.mirror = false;
-        this.Neck3 = new ModelRenderer(this, 35, 3);
-        this.Neck3.addBox(-1.0F, -2.0F, -5.0F, 2, 3, 5);
-        this.Neck3.setRotationPoint(0.0F, 12.73333F, -8.0F);
-        this.Neck3.rotateAngleX = -0.58764F;
-        this.Neck3.rotateAngleY = 0.0F;
-        this.Neck3.rotateAngleZ = 0.0F;
-        this.Neck3.mirror = false;
-        this.Neck4 = new ModelRenderer(this, 35, 3);
-        this.Neck4.addBox(-1.0F, -2.0F, -5.0F, 2, 3, 5);
-        this.Neck4.setRotationPoint(0.0F, 10.0F, -11.0F);
-        this.Neck4.rotateAngleX = -0.13561F;
-        this.Neck4.rotateAngleY = 0.0F;
-        this.Neck4.rotateAngleZ = 0.0F;
-        this.Neck4.mirror = false;
-        this.head = new ModelRenderer(this, 0, 22);
-        this.head.addBox(-2.0F, -2.0F, -6.0F, 4, 4, 6);
-        this.head.setRotationPoint(0.0F, 9.0F, -15.0F);
-        this.head.rotateAngleX = 0.49723F;
-        this.head.rotateAngleY = 0.0F;
-        this.head.rotateAngleZ = 0.0F;
-        this.head.mirror = false;
-        this.right_arm = new ModelRenderer(this, 44, 13);
-        this.right_arm.addBox(0.0F, 0.0F, 0.0F, 6, 1, 4);
-        this.right_arm.setRotationPoint(-3.0F, 21.0F, -3.0F);
-        this.right_arm.rotateAngleX = -0.5236F;
-        this.right_arm.rotateAngleY = -2.35619F;
-        this.right_arm.rotateAngleZ = 0.0F;
-        this.right_arm.mirror = false;
-        this.left_arm = new ModelRenderer(this, 44, 18);
-        this.left_arm.addBox(0.0F, 0.0F, -4.0F, 6, 1, 4);
-        this.left_arm.setRotationPoint(3.0F, 21.0F, -3.0F);
-        this.left_arm.rotateAngleX = 0.5236F;
-        this.left_arm.rotateAngleY = -0.7854F;
-        this.left_arm.rotateAngleZ = 0.0F;
-        this.left_arm.mirror = true;
-        this.right_leg = new ModelRenderer(this, 48, 0);
-        this.right_leg.addBox(0.0F, 0.0F, 0.0F, 5, 1, 3);
-        this.right_leg.setRotationPoint(-3.0F, 21.0F, 4.0F);
-        this.right_leg.rotateAngleX = -0.5236F;
-        this.right_leg.rotateAngleY = -2.0944F;
-        this.right_leg.rotateAngleZ = 0.0F;
-        this.right_leg.mirror = false;
-        this.left_leg = new ModelRenderer(this, 48, 4);
-        this.left_leg.addBox(0.0F, 0.0F, -3.0F, 5, 1, 3);
-        this.left_leg.setRotationPoint(3.0F, 21.0F, 4.0F);
-        this.left_leg.rotateAngleX = 0.5236F;
-        this.left_leg.rotateAngleY = -1.0472F;
-        this.left_leg.rotateAngleZ = 0.0F;
-        this.left_leg.mirror = false;
-    }
+        this.head.rotateAngleX =  (float)Math.toRadians(20) + (var5 / (180F / (float)Math.PI));
+        this.head.rotateAngleY = var4 / (180F / (float)Math.PI);
 
-    /**
-     * Sets the models various rotation angles then renders the model.
-     */
-    public void render(Entity var1, float var2, float var3, float var4, float var5, float var6, float var7)
+        if(this.Neck1.rotateAngleX > (float)Math.toRadians(-10) )
+        {
+        	this.moveRate = 6F;
+        
+		this.Neck1.rotateAngleY = 0.01F * MathHelper.cos((var1 * (float)0.4F) + var2+3);
+	    this.Neck2.rotateAngleY = 0.02F * MathHelper.cos((var1 * (float)0.4F) + var2+2);
+	    this.Neck3.rotateAngleY = 0.03F * MathHelper.cos((var1 * (float)0.4F) + var2+1);
+	    this.Neck4.rotateAngleY = 0.04F * MathHelper.cos((var1 * (float)0.4F) + var2);
+	    this.head.rotateAngleY = -this.Neck4.rotateAngleY;
+        }
+        else
+        	this.moveRate = 2F;
+
+        this.Neck1.rotateAngleX = Math.min(Math.max(( (float)Math.toRadians(-60) + ((this.moveRate) * 1.0F * var2) ), (float)Math.toRadians(-60)), 0);
+        this.Neck2.rotateAngleX = Math.min(Math.max(( (float)Math.toRadians(10) - ((this.moveRate * 0.6F) * 1.0F * var2) ), (float)Math.toRadians(0)), 10);
+        this.Neck3.rotateAngleX = Math.min(Math.max(( (float)Math.toRadians(10) - ((this.moveRate* 0.5F) * 1.0F * var2) ), (float)Math.toRadians(0)), 10);
+        this.Neck4.rotateAngleX = Math.min(Math.max(( (float)Math.toRadians(20) - ((this.moveRate* 0.4F) * 1.0F * var2) ), (float)Math.toRadians(0)), 20);
+
+		this.leftarm.rotateAngleX = (float)Math.toRadians(25);
+    	this.leftarm.rotateAngleY = (float)Math.toRadians(-45);
+		this.leftarm.rotateAngleZ = (float)Math.toRadians(-0) + MathHelper.cos(var1 * 0.15F) * var2;
+		
+		this.rightarm.rotateAngleX = (float)Math.toRadians(25);
+    	this.rightarm.rotateAngleY = (float)Math.toRadians(45);
+		this.rightarm.rotateAngleZ = (float)Math.toRadians(0) + MathHelper.cos(var1 * 0.15F + 3.1415927F) * var2;
+		
+		this.leftleg.rotateAngleX = (float)Math.toRadians(25);
+    	this.leftleg.rotateAngleY = (float)Math.toRadians(-45);
+		this.leftleg.rotateAngleZ = (float)Math.toRadians(-0) - MathHelper.cos(var1 * 0.15F) * var2;
+		
+		this.rightleg.rotateAngleX = (float)Math.toRadians(25);
+    	this.rightleg.rotateAngleY = (float)Math.toRadians(45);
+		this.rightleg.rotateAngleZ = (float)Math.toRadians(0) - MathHelper.cos(var1 * 0.15F + 3.1415927F) * var2;
+		
+    	this.tail1.rotateAngleX = (float)Math.toRadians(-25);
+    	this.tail2.rotateAngleX = (float)Math.toRadians(10);
+    	this.tail3.rotateAngleX = (float)Math.toRadians(10);
+    	
+		this.tail1.rotateAngleY = 0.1F * MathHelper.cos((var1 * (float)0.4F) + var2+3);
+	    this.tail2.rotateAngleY = 0.2F * MathHelper.cos((var1 * (float)0.4F) + var2+2);
+	    this.tail3.rotateAngleY = 0.3F * MathHelper.cos((var1 * (float)0.4F) + var2+1);
+    }
+    else
     {
-        super.render(var1, var2, var3, var4, var5, var6, var7);
-        this.setRotationAngles(var2, var3, var4, var5, var6, var7, ((EntityDinosaur)var1).isModelized());
-        this.Body.render(var7);
-        this.Neck1.render(var7);
-        this.tail3.render(var7);
-        this.tail2.render(var7);
-        this.tail1.render(var7);
-        this.Neck2.render(var7);
-        this.Neck3.render(var7);
-        this.Neck4.render(var7);
-        this.head.render(var7);
-        this.right_arm.render(var7);
-        this.left_arm.render(var7);
-        this.right_leg.render(var7);
-        this.left_leg.render(var7);
+        this.head.rotateAngleX =  0;
+        this.head.rotateAngleY = 0;
+    	this.rightarm.rotateAngleX = (float)Math.toRadians(25.0);
+    	this.rightarm.rotateAngleY = (float)Math.toRadians(45.0);
+    	
+    	this.leftarm.rotateAngleX = (float)Math.toRadians(25.0);
+    	this.leftarm.rotateAngleY = (float)Math.toRadians(-45.0);
+    	
+    	this.rightleg.rotateAngleX = (float)Math.toRadians(25.0);
+    	this.rightleg.rotateAngleY = (float)Math.toRadians(45.0);
+    	
+    	this.leftleg.rotateAngleX = (float)Math.toRadians(25.0);
+    	this.leftleg.rotateAngleY = (float)Math.toRadians(-45.0);
+    	
+    	this.tail1.rotateAngleX = (float)Math.toRadians(-25);
+    	this.tail2.rotateAngleX = (float)Math.toRadians(10);
+    	this.tail3.rotateAngleX = (float)Math.toRadians(10);
+    	
+		this.tail1.rotateAngleY = 0;
+	    this.tail2.rotateAngleY = 0;
+	    this.tail3.rotateAngleY = 0;
     }
+	
+  }
 
-    public boolean WaveTail(float var1, boolean var2, int var3)
-    {
-        boolean var6 = false;
-
-        if (var1 < 0.0F)
-        {
-            return false;
-        }
-        else if (var3 <= 0)
-        {
-            return false;
-        }
-        else
-        {
-            boolean var4;
-            boolean var5;
-            float var7;
-
-            if (var2)
-            {
-                if (this.tail1.rotateAngleY < var1)
-                {
-                    this.tail1.rotateAngleY += var1 / (float)var3;
-                }
-                else
-                {
-                    this.tail1.rotateAngleY = var1;
-                }
-
-                var4 = this.tail1.rotateAngleY >= var1;
-                var7 = var1 + var1;
-
-                if (!var4)
-                {
-                    this.tail2.rotationPointX = (float)((double)(this.tail2.rotationPointX - this.tail1.rotationPointX) * Math.cos((double)(-(var7 / (float)var3))) - (double)(this.tail2.rotationPointZ - this.tail1.rotationPointZ) * Math.sin((double)(-(var7 / (float)var3))) + (double)this.tail1.rotationPointX);
-                    this.tail2.rotationPointZ = (float)((double)(this.tail2.rotationPointX - this.tail1.rotationPointX) * Math.sin((double)(-(var7 / (float)var3))) + (double)(this.tail2.rotationPointZ - this.tail1.rotationPointZ) * Math.cos((double)(-(var7 / (float)var3))) + (double)this.tail1.rotationPointZ);
-                }
-
-                if (this.tail2.rotateAngleY < var7)
-                {
-                    this.tail2.rotateAngleY += var7 / (float)var3;
-                }
-                else
-                {
-                    this.tail2.rotateAngleY = var7;
-                }
-
-                var5 = this.tail2.rotateAngleY >= var7;
-                var7 += var1;
-
-                if (!var5)
-                {
-                    this.tail3.rotationPointX = (float)((double)(this.tail3.rotationPointX - this.tail2.rotationPointX) * Math.cos((double)(-(var7 / (float)var3))) - (double)(this.tail3.rotationPointZ - this.tail2.rotationPointZ) * Math.sin((double)(-(var7 / (float)var3))) + (double)this.tail2.rotationPointX);
-                    this.tail3.rotationPointZ = (float)((double)(this.tail3.rotationPointX - this.tail2.rotationPointX) * Math.sin((double)(-(var7 / (float)var3))) + (double)(this.tail3.rotationPointZ - this.tail2.rotationPointZ) * Math.cos((double)(-(var7 / (float)var3))) + (double)this.tail2.rotationPointZ);
-                }
-
-                if (this.tail3.rotateAngleY < var7)
-                {
-                    this.tail3.rotateAngleY += var7 / (float)var3;
-                }
-                else
-                {
-                    this.tail3.rotateAngleY = var7;
-                }
-
-                var6 = this.tail3.rotateAngleY >= var7;
-            }
-            else
-            {
-                var7 = -var1;
-
-                if (this.tail1.rotateAngleY > var7)
-                {
-                    this.tail1.rotateAngleY += var7 / (float)var3;
-                }
-                else
-                {
-                    this.tail1.rotateAngleY = var7;
-                }
-
-                var4 = this.tail1.rotateAngleY <= var7;
-                var7 -= var1;
-
-                if (!var4)
-                {
-                    this.tail2.rotationPointX = (float)((double)(this.tail2.rotationPointX - this.tail1.rotationPointX) * Math.cos((double)(-(var7 / (float)var3))) - (double)(this.tail2.rotationPointZ - this.tail1.rotationPointZ) * Math.sin((double)(-(var7 / (float)var3))) + (double)this.tail1.rotationPointX);
-                    this.tail2.rotationPointZ = (float)((double)(this.tail2.rotationPointX - this.tail1.rotationPointX) * Math.sin((double)(-(var7 / (float)var3))) + (double)(this.tail2.rotationPointZ - this.tail1.rotationPointZ) * Math.cos((double)(-(var7 / (float)var3))) + (double)this.tail1.rotationPointZ);
-                }
-
-                if (this.tail2.rotateAngleY > var7)
-                {
-                    this.tail2.rotateAngleY += var7 / (float)var3;
-                }
-                else
-                {
-                    this.tail2.rotateAngleY = var7;
-                }
-
-                var5 = this.tail2.rotateAngleY <= var7;
-                var7 -= var1;
-
-                if (!var5)
-                {
-                    this.tail3.rotationPointX = (float)((double)(this.tail3.rotationPointX - this.tail2.rotationPointX) * Math.cos((double)(-(var7 / (float)var3))) - (double)(this.tail3.rotationPointZ - this.tail2.rotationPointZ) * Math.sin((double)(-(var7 / (float)var3))) + (double)this.tail2.rotationPointX);
-                    this.tail3.rotationPointZ = (float)((double)(this.tail3.rotationPointX - this.tail2.rotationPointX) * Math.sin((double)(-(var7 / (float)var3))) + (double)(this.tail3.rotationPointZ - this.tail2.rotationPointZ) * Math.cos((double)(-(var7 / (float)var3))) + (double)this.tail2.rotationPointZ);
-                }
-
-                if (this.tail3.rotateAngleY > var7)
-                {
-                    this.tail3.rotateAngleY += var7 / (float)var3;
-                }
-                else
-                {
-                    this.tail3.rotateAngleY = var7;
-                }
-
-                var6 = this.tail3.rotateAngleY <= var7;
-            }
-
-            return var4 && var5 && var6;
-        }
-    }
-
-    public void ReturnTail()
-    {
-        this.tail1.rotateAngleY = this.tail2.rotateAngleY = this.tail3.rotateAngleY = 0.0F;
-        this.tail1.setRotationPoint(0.0F, 21.0F, 0.0F);
-        this.tail2.setRotationPoint(0.0F, 19.0F, 5.0F);
-        this.tail3.setRotationPoint(0.0F, 19.0F, 11.0F);
-    }
-
-    //public void setRotationAngles(float var1, float var2, float var3, float var4, float var5, float var6) {}
-
-    /**
-     * Used for easily adding entity-dependent animations. The second and third float params here are the same second
-     * and third as in the setRotationAngles method.
-     */
-    public void setLivingAnimations(EntityLivingBase var1, float var2, float var3, float var4)
-    {
-        if (!((EntityDinosaur)var1).isModelized())
-        {
-            EntityPlesiosaur var5 = (EntityPlesiosaur)var1;
-            int var6 = 16 + var5.getDinoAge();
-
-            if (var5.riddenByEntity != null && !var5.isOnSurface())
-            {
-                this.PoseDive(var6);
-            }
-            else
-            {
-                this.PoseSurface(var6);
-            }
-            
-        }
-    }
-
-    public boolean PoseDive(int var1)
-    {
-        boolean var2 = true;
-
-        if (this.Neck1.rotateAngleX < -0.453F)
-        {
-            this.Neck1.rotateAngleX += 0.541F / (float)var1;
-            var2 &= false;
-        }
-        else
-        {
-            this.Neck1.rotateAngleX = -0.453F;
-        }
-
-        if (this.Neck2.rotateAngleX < -0.174F)
-        {
-            this.Neck2.rotateAngleX += 0.71599996F / (float)var1;
-            var2 &= false;
-        }
-        else
-        {
-            this.Neck2.rotateAngleX = -0.174F;
-        }
-
-        if (this.Neck2.rotationPointY < 18.0F)
-        {
-            this.Neck2.rotationPointY += 2.0F / (float)var1;
-            var2 &= false;
-        }
-        else
-        {
-            this.Neck2.rotationPointY = 18.0F;
-        }
-
-        if (this.Neck2.rotationPointZ < -3.0F)
-        {
-            this.Neck2.rotationPointZ += 1.0F / (float)var1;
-            var2 &= false;
-        }
-        else
-        {
-            this.Neck2.rotationPointZ = -3.0F;
-        }
-
-        if (this.Neck3.rotateAngleX < -0.116F)
-        {
-            this.Neck3.rotateAngleX += 0.472F / (float)var1;
-            var2 &= false;
-        }
-        else
-        {
-            this.Neck3.rotateAngleX = -0.116F;
-        }
-
-        if (this.Neck3.rotationPointY < 17.7F)
-        {
-            this.Neck3.rotationPointY += 5.000001F / (float)var1;
-            var2 &= false;
-        }
-        else
-        {
-            this.Neck3.rotationPointY = 17.7F;
-        }
-
-        if (this.Neck3.rotationPointZ > -9.0F)
-        {
-            this.Neck3.rotationPointZ -= 1.0F / (float)var1;
-            var2 &= false;
-        }
-        else
-        {
-            this.Neck3.rotationPointZ = -9.0F;
-        }
-
-        if (this.Neck4.rotateAngleX < -0.013F)
-        {
-            this.Neck4.rotateAngleX += 0.12300001F / (float)var1;
-            var2 &= false;
-        }
-        else
-        {
-            this.Neck4.rotateAngleX = -0.013F;
-        }
-
-        if (this.Neck4.rotationPointY < 17.0F)
-        {
-            this.Neck4.rotationPointY += 7.0F / (float)var1;
-            var2 &= false;
-        }
-        else
-        {
-            this.Neck4.rotationPointY = 17.0F;
-        }
-
-        if (this.Neck4.rotationPointZ > -13.0F)
-        {
-            this.Neck4.rotationPointZ -= 2.0F / (float)var1;
-            var2 &= false;
-        }
-        else
-        {
-            this.Neck4.rotationPointZ = -13.0F;
-        }
-
-        if (this.head.rotateAngleX > 0.009F)
-        {
-            this.head.rotateAngleX -= 0.488F / (float)var1;
-            var2 &= false;
-        }
-        else
-        {
-            this.head.rotateAngleX = 0.009F;
-        }
-
-        if (this.head.rotationPointY < 16.0F)
-        {
-            this.head.rotationPointY += 7.0F / (float)var1;
-            var2 &= false;
-        }
-        else
-        {
-            this.head.rotationPointY = 16.0F;
-        }
-
-        if (this.head.rotationPointZ > -18.0F)
-        {
-            this.head.rotationPointZ -= 3.0F / (float)var1;
-            var2 &= false;
-        }
-        else
-        {
-            this.head.rotationPointZ = -18.0F;
-        }
-
-        return var2;
-    }
-
-    public boolean PoseSurface(int var1)
-    {
-        boolean var2 = true;
-
-        if (this.Neck1.rotateAngleX > -0.994F)
-        {
-            this.Neck1.rotateAngleX -= 0.541F / (float)var1;
-            var2 &= false;
-        }
-        else
-        {
-            this.Neck1.rotateAngleX = -0.994F;
-        }
-
-        if (this.Neck2.rotateAngleX > -0.89F)
-        {
-            this.Neck2.rotateAngleX -= 0.71599996F / (float)var1;
-            var2 &= false;
-        }
-        else
-        {
-            this.Neck2.rotateAngleX = -0.89F;
-        }
-
-        if (this.Neck2.rotationPointY > 16.0F)
-        {
-            this.Neck2.rotationPointY -= 2.0F / (float)var1;
-            var2 &= false;
-        }
-        else
-        {
-            this.Neck2.rotationPointY = 16.0F;
-        }
-
-        if (this.Neck2.rotationPointZ > -4.0F)
-        {
-            this.Neck2.rotationPointZ -= 1.0F / (float)var1;
-            var2 &= false;
-        }
-        else
-        {
-            this.Neck2.rotationPointZ = -4.0F;
-        }
-
-        if (this.Neck3.rotateAngleX > -0.588F)
-        {
-            this.Neck3.rotateAngleX -= 0.472F / (float)var1;
-            var2 &= false;
-        }
-        else
-        {
-            this.Neck3.rotateAngleX = -0.588F;
-        }
-
-        if (this.Neck3.rotationPointY > 12.7F)
-        {
-            this.Neck3.rotationPointY -= 5.000001F / (float)var1;
-            var2 &= false;
-        }
-        else
-        {
-            this.Neck3.rotationPointY = 12.7F;
-        }
-
-        if (this.Neck3.rotationPointZ < -8.0F)
-        {
-            this.Neck3.rotationPointZ += 1.0F / (float)var1;
-            var2 &= false;
-        }
-        else
-        {
-            this.Neck3.rotationPointZ = -8.0F;
-        }
-
-        if (this.Neck4.rotateAngleX > -0.136F)
-        {
-            this.Neck4.rotateAngleX -= 0.12300001F / (float)var1;
-            var2 &= false;
-        }
-        else
-        {
-            this.Neck4.rotateAngleX = -0.136F;
-        }
-
-        if (this.Neck4.rotationPointY > 10.0F)
-        {
-            this.Neck4.rotationPointY -= 7.0F / (float)var1;
-            var2 &= false;
-        }
-        else
-        {
-            this.Neck4.rotationPointY = 10.0F;
-        }
-
-        if (this.Neck4.rotationPointZ < -11.0F)
-        {
-            this.Neck4.rotationPointZ += 2.0F / (float)var1;
-            var2 &= false;
-        }
-        else
-        {
-            this.Neck4.rotationPointZ = -11.0F;
-        }
-
-        if (this.head.rotateAngleX < 0.497F)
-        {
-            this.head.rotateAngleX += 0.488F / (float)var1;
-            var2 &= false;
-        }
-        else
-        {
-            this.head.rotateAngleX = 0.497F;
-        }
-
-        if (this.head.rotationPointY > 9.0F)
-        {
-            this.head.rotationPointY -= 7.0F / (float)var1;
-            var2 &= false;
-        }
-        else
-        {
-            this.head.rotationPointY = 9.0F;
-        }
-
-        if (this.head.rotationPointZ < -15.0F)
-        {
-            this.head.rotationPointZ += 3.0F / (float)var1;
-            var2 &= false;
-        }
-        else
-        {
-            this.head.rotationPointZ = -15.0F;
-        }
-
-        return var2;
-    }
-
-    protected void setRotationAngles(float var1, float var2, float var3, float var4, float var5, float var6, boolean var7)
-    {
-        if (!var7)
-        {
-        	this.head.rotateAngleX = var5 / (180F / (float)Math.PI);
-        	this.head.rotateAngleY = var4 / (180F / (float)Math.PI);
-        	/*
-            this.right_arm.rotateAngleY = (float)((double)MathHelper.cos(var1 / 0.95955384F) * (Math.PI / 4D) * (double)var2 + -2.35619449019234D);
-            this.right_leg.rotateAngleY = (float)((double)MathHelper.cos(var1 / 0.95955384F) * (Math.PI / 4D) * (double)var2 + -2.0943951023932D);
-
-            if (this.LandFlag)
-            {
-                this.left_arm.rotateAngleY = (float)((double)MathHelper.cos(var1 / 0.95955384F) * (Math.PI / 4D) * (double)var2 + -(Math.PI / 4D));
-                this.left_leg.rotateAngleY = (float)((double)MathHelper.cos(var1 / 0.95955384F) * (Math.PI / 4D) * (double)var2 + -1.0471975511966D);
-            }
-            else
-            {
-                this.left_arm.rotateAngleY = (float)((double)MathHelper.cos(var1 / 0.95955384F) * -(Math.PI / 4D) * (double)var2 + -(Math.PI / 4D));
-                this.left_leg.rotateAngleY = (float)((double)MathHelper.cos(var1 / 0.95955384F) * -(Math.PI / 4D) * (double)var2 + -1.0471975511966D);
-            }
-            */
-        }
-        else
-        {
-        	this.head.rotateAngleX = 0;
-        	this.head.rotateAngleY = 0;
-        }
-    }
 }
