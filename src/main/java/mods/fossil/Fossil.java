@@ -70,7 +70,9 @@ import mods.fossil.entity.mob.EntityQuagga;
 import mods.fossil.entity.mob.EntitySmilodon;
 import mods.fossil.fossilEnums.EnumDinoFoodMob;
 import mods.fossil.fossilEnums.EnumDinoType;
+import mods.fossil.gens.AcademyGenerator;
 import mods.fossil.gens.FossilGenerator;
+import mods.fossil.gens.ShipWreckGenerator;
 import mods.fossil.gens.TarGenerator;
 import mods.fossil.gens.VolcanicRockGenerator;
 import mods.fossil.gens.WorldGeneratorPalaeoraphe;
@@ -156,6 +158,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.util.EnumHelper;
 import cpw.mods.fml.client.registry.RenderingRegistry;
+import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
@@ -833,10 +836,10 @@ public class Fossil
         GameRegistry.registerWorldGenerator(new WorldGeneratorPalaeoraphe(), 0);
         
         if(FossilOptions.Gen_Academy)
-        //GameRegistry.registerWorldGenerator(new AcademyGenerator());
+        GameRegistry.registerWorldGenerator(new AcademyGenerator(), 0);
         
         if(FossilOptions.Gen_Ships)
-        //GameRegistry.registerWorldGenerator(new ShipWreckGenerator());
+        GameRegistry.registerWorldGenerator(new ShipWreckGenerator(), 0);
         
         GameRegistry.registerWorldGenerator(new TarGenerator(), 0);
         GameRegistry.registerWorldGenerator(new VolcanicRockGenerator(), 0);
@@ -883,7 +886,7 @@ public class Fossil
     {
         if (DebugMode())
         {
-            System.out.println("[FOSSIL]: " + var0);
+            FMLLog.log(Fossil.modid, org.apache.logging.log4j.Level.INFO, var0);
         }
     }
     
