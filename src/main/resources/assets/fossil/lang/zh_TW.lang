@@ -1,4 +1,4 @@
-﻿#Updated for 1.6.4 Build 6.3 HEAD8 July 22 2014 
+﻿#Updated for 1.7.10 Build 6.3 HEAD9 July 25 2014 
 #Traditional Chinese (zh_TW) Localization File
 
 #創造模式標簽
@@ -239,6 +239,7 @@ item.dnaSmilodon.name=劍齒虎DNA
 item.dnaMammoth.name=猛犸象DNA
 item.dnaDodo.name=渡渡鳥DNA
 item.dnaHorse.name=Horse DNA
+item.dnaQuagga.name=Quagga DNA
 item.embryoPig.name=豬胚胎
 item.embryoSheep.name=羊胚胎
 item.embryoCow.name=牛胚胎
@@ -247,6 +248,7 @@ item.embryoSmilodon.name=劍齒虎胚胎
 item.embryoMammoth.name=猛犸象胚胎
 item.embryoDodo.name=渡渡鳥胚胎
 item.embryoHorse.name=Horse Embryo
+item.embryoQuagga.name=Quagga Embryo
 item.archNotebook.name=考古手冊
 item.potteryShard.name=Pottery Shard
 
@@ -290,7 +292,7 @@ status.Nervous=太緊張以至于無法自行獵食
 status.GemErrorYoung=這頭霸王龍還太年輕了
 status.GemErrorHealth=聖甲蟲寶石無法負荷如此強的生命能量
 status.GemErrorTamed=這頭霸王龍已被馴服
-status.essenceFail=雞精沒有起效
+status.essencefail=雞精沒有起效
 
 #恐龍名稱.
 entity.fossil.Triceratops.name=三角龍
@@ -320,6 +322,7 @@ entity.fossil.PregnantSheep.name=受孕羊
 entity.fossil.PregnantHorse.name=Pregnant Horse
 entity.fossil.Dodo.name=渡渡鳥
 entity.fossil.Coelacanth.name=Coelacanth
+entity.fossil.Quagga.name=Quagga
 
 #百科文本.恐龍信息.
 pedia.text.owner=主人:
@@ -346,6 +349,7 @@ pedia.embryo.Smilodon=劍齒虎
 pedia.embryo.Mammoth=猛犸象
 pedia.embryo.Dodo=渡渡鳥
 pedia.embryo.Horse=Horse
+pedia.embryo.Quagga=Quagga
 
 #阿努對白
 anuSpeaker.self=阿努: 
@@ -395,3 +399,5 @@ entity.fossil.PigBoss.name=阿努
 #Records
 item.record_bones.name=化石唱片
 item.record_jp_theme.name=和風主題唱片
+item.record_bones_disc.name=化石唱片
+item.record.record_bones_disc.desc=WhiteJoshMan - Bones

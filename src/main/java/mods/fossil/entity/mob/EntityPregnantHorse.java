@@ -173,6 +173,10 @@ public class EntityPregnantHorse extends EntityHorse implements IViviparous, IEn
                 case Mammoth:
                     birthEntity = (new EntityMammoth(this.worldObj)).Imprinting(this.posX, this.posY, this.posZ);
                     break;
+                    
+                case Quagga:
+                	birthEntity = new EntityQuagga(this.worldObj);
+                	 break;
 
                 default:
                     birthEntity = new EntityPig(this.worldObj);

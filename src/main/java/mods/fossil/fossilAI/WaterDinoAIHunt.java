@@ -156,7 +156,7 @@ public class WaterDinoAIHunt extends EntityAITarget
 
             if (this.dinosaur.canEntityBeSeen(this.targetEntity))
             {
-                this.dinosaur.worldObj.playSoundAtEntity((EntityPlayer)null, this.dinosaur.getAttackSound(), 1F, 1F);
+//                this.dinosaur.worldObj.playSoundAtEntity((EntityPlayer)null, this.dinosaur.getAttackSound(), 1F, 1F);
                 Vec3 vec3 = this.dinosaur.getLook(1.0F);
             }
         }

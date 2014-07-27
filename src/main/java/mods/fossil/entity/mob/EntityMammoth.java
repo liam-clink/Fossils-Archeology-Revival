@@ -375,8 +375,7 @@ public class EntityMammoth extends EntityPrehistoric implements IShearable
             p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_OWNER), true);
         //    String s0 = this.getOwnerName();
             //this.func_152115_b(player.getUniqueID().toString());
-            if (this.getOwner() == null)
-            {
+
 	            String s0 = this.getOwner().getCommandSenderName();
 	            if (s0.length() > 11)
 	            {
@@ -384,9 +383,6 @@ public class EntityMammoth extends EntityPrehistoric implements IShearable
 	            }
 	            
 	            p0.AddStringLR(s0, true);
-            }
-            
-
 
         }
         //Display if Rideable
@@ -565,6 +561,7 @@ public class EntityMammoth extends EntityPrehistoric implements IShearable
         }
         else
         {
+        	this.func_152115_b(var7.getUniqueID().toString());
          //   this.setOwner(var7.username);
             this.setTamed(true);
             return this;

@@ -123,7 +123,6 @@ public class ModelPlesiosaur extends ModelDinosaurs
       Body.addChild(Neck1);
   }
   
-  @Override
   public void render(Entity var1, float var2, float var3, float var4, float var5, float var6, float var7)
   {
       super.render(var1, var2, var3, var4, var5, var6, var7);
@@ -138,7 +137,6 @@ public class ModelPlesiosaur extends ModelDinosaurs
     model.rotateAngleZ = z;
   }
 
-  @Override
 protected void setRotationAngles(float var1, float var2, float var3,
 		float var4, float var5, float var6, boolean isModelized) {
 
@@ -196,8 +194,14 @@ protected void setRotationAngles(float var1, float var2, float var3,
     }
     else
     {
-        this.head.rotateAngleX =  0;
+        this.head.rotateAngleX =  (float)Math.toRadians(30);
         this.head.rotateAngleY = 0;
+        
+    	this.Neck1.rotateAngleX = (float)Math.toRadians(-60);
+    	this.Neck2.rotateAngleX = (float)Math.toRadians(10);
+    	this.Neck3.rotateAngleX = (float)Math.toRadians(10);
+    	this.Neck4.rotateAngleX = (float)Math.toRadians(20);
+        
     	this.rightarm.rotateAngleX = (float)Math.toRadians(25.0);
     	this.rightarm.rotateAngleY = (float)Math.toRadians(45.0);
     	

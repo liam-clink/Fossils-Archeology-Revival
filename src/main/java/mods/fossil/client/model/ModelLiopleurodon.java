@@ -214,7 +214,7 @@ protected void setRotationAngles(float var1, float var2, float var3,
 	    this.JawBottomBase.rotateAngleX = (float)Math.toRadians(20);
 	    this.LowerBody.rotationPointY = 19F; 
 	    
-	    this.Neck.rotateAngleX = (float)Math.toRadians(-10);
+	    this.Neck.rotateAngleX = (float)Math.toRadians(-30);
 	    this.LowerBody.rotateAngleX = (float)Math.toRadians(5);
 		this.Tail.rotateAngleX = (float)Math.toRadians(-4);
 		this.Tail1.rotateAngleX = (float)Math.toRadians(4);

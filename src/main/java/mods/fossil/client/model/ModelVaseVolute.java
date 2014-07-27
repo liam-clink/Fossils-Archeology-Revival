@@ -7,82 +7,108 @@ import net.minecraft.entity.Entity;
 public class ModelVaseVolute extends ModelBase
 {
   //fields
-    ModelRenderer stand;
-    ModelRenderer body;
-    ModelRenderer lefthandle;
-    ModelRenderer righthandle;
-    ModelRenderer backLip;
-    ModelRenderer frontLip;
-    ModelRenderer leftLip;
-    ModelRenderer rightLip;
+    ModelRenderer Base;
+    ModelRenderer Body;
+    ModelRenderer Neck;
+    ModelRenderer LipF;
+    ModelRenderer LipB;
+    ModelRenderer LipR;
+    ModelRenderer LipL;
+    ModelRenderer HandleL2;
+    ModelRenderer HandleL1;
+    ModelRenderer HandleR1;
+    ModelRenderer HandleR2;
   
   public ModelVaseVolute()
   {
     textureWidth = 64;
-    textureHeight = 32;
+    textureHeight = 64;
     
-      stand = new ModelRenderer(this, 0, 0);
-      stand.addBox(-3F, 0F, -3F, 6, 1, 6);
-      stand.setRotationPoint(0F, 23F, 0F);
-      stand.setTextureSize(64, 32);
-      stand.mirror = true;
-      setRotation(stand, 0F, 0F, 0F);
-      body = new ModelRenderer(this, 0, 13);
-      body.addBox(-4F, -9F, -4F, 8, 9, 8);
-      body.setRotationPoint(0F, 23F, 0F);
-      body.setTextureSize(64, 32);
-      body.mirror = true;
-      setRotation(body, 0F, 0F, 0F);
-      lefthandle = new ModelRenderer(this, 35, 0);
-      lefthandle.addBox(-2F, -8F, 0F, 4, 9, 1);
-      lefthandle.setRotationPoint(0F, 18F, 4F);
-      lefthandle.setTextureSize(64, 32);
-      lefthandle.mirror = true;
-      setRotation(lefthandle, 0F, 0F, 0F);
-      righthandle = new ModelRenderer(this, 35, 0);
-      righthandle.addBox(-2F, -8F, -1F, 4, 9, 1);
-      righthandle.setRotationPoint(0F, 18F, -4F);
-      righthandle.setTextureSize(64, 32);
-      righthandle.mirror = true;
-      setRotation(righthandle, 0F, 0F, 0F);
-      backLip = new ModelRenderer(this, 44, 14);
-      backLip.addBox(-1F, 0F, 0F, 2, 1, 8);
-      backLip.setRotationPoint(3F, 13F, -4F);
-      backLip.setTextureSize(64, 32);
-      backLip.mirror = true;
-      setRotation(backLip, 0F, 0F, 0F);
-      frontLip = new ModelRenderer(this, 44, 14);
-      frontLip.addBox(-1F, 0F, 0F, 2, 1, 8);
-      frontLip.setRotationPoint(-3F, 13F, -4F);
-      frontLip.setTextureSize(64, 32);
-      frontLip.mirror = true;
-      setRotation(frontLip, 0F, 0F, 0F);
-      leftLip = new ModelRenderer(this, 52, 0);
-      leftLip.addBox(-2F, 0F, 0F, 4, 1, 2);
-      leftLip.setRotationPoint(0F, 13F, 2F);
-      leftLip.setTextureSize(64, 32);
-      leftLip.mirror = true;
-      setRotation(leftLip, 0F, 0F, 0F);
-      rightLip = new ModelRenderer(this, 52, 0);
-      rightLip.addBox(-2F, 0F, -2F, 4, 1, 2);
-      rightLip.setRotationPoint(0F, 13F, -2F);
-      rightLip.setTextureSize(64, 32);
-      rightLip.mirror = true;
-      setRotation(rightLip, 0F, 0F, 0F);
+      Base = new ModelRenderer(this, 0, 53);
+      Base.addBox(-5F, 0F, -5F, 10, 1, 10);
+      Base.setRotationPoint(0F, 23F, 0F);
+      Base.setTextureSize(64, 64);
+      Base.mirror = true;
+      setRotation(Base, 0F, 0F, 0F);
+      Body = new ModelRenderer(this, 0, 33);
+      Body.addBox(-6F, 0F, -6F, 12, 7, 12);
+      Body.setRotationPoint(0F, 16F, 0F);
+      Body.setTextureSize(64, 64);
+      Body.mirror = true;
+      setRotation(Body, 0F, 0F, 0F);
+      Neck = new ModelRenderer(this, 0, 17);
+      Neck.addBox(-5F, 0F, -5F, 10, 5, 10);
+      Neck.setRotationPoint(0F, 11F, 0F);
+      Neck.setTextureSize(64, 64);
+      Neck.mirror = true;
+      setRotation(Neck, 0F, 0F, 0F);
+      LipF = new ModelRenderer(this, 0, 12);
+      LipF.addBox(-6F, 0F, -2F, 12, 1, 3);
+      LipF.setRotationPoint(0F, 10F, -4F);
+      LipF.setTextureSize(64, 64);
+      LipF.mirror = true;
+      setRotation(LipF, 0F, 0F, 0F);
+      LipB = new ModelRenderer(this, 0, 12);
+      LipB.addBox(-6F, 0F, -1F, 12, 1, 3);
+      LipB.setRotationPoint(0F, 10F, 4F);
+      LipB.setTextureSize(64, 64);
+      LipB.mirror = true;
+      setRotation(LipB, 0F, 0F, 0F);
+      LipR = new ModelRenderer(this, 0, 4);
+      LipR.addBox(-2F, 0F, -3F, 3, 1, 6);
+      LipR.setRotationPoint(-4F, 10F, 0F);
+      LipR.setTextureSize(64, 64);
+      LipR.mirror = true;
+      setRotation(LipR, 0F, 0F, 0F);
+      LipL = new ModelRenderer(this, 0, 4);
+      LipL.addBox(-1F, 0F, -3F, 3, 1, 6);
+      LipL.setRotationPoint(4F, 10F, 0F);
+      LipL.setTextureSize(64, 64);
+      LipL.mirror = true;
+      setRotation(LipL, 0F, 0F, 0F);
+      HandleL2 = new ModelRenderer(this, 41, 16);
+      HandleL2.addBox(-2F, -2F, -1F, 2, 2, 2);
+      HandleL2.setRotationPoint(7F, 10F, 0F);
+      HandleL2.setTextureSize(64, 64);
+      HandleL2.mirror = true;
+      setRotation(HandleL2, 0F, 0F, 0F);
+      HandleL1 = new ModelRenderer(this, 41, 21);
+      HandleL1.addBox(0F, -5F, -1F, 1, 7, 2);
+      HandleL1.setRotationPoint(6F, 15F, 0F);
+      HandleL1.setTextureSize(64, 64);
+      HandleL1.mirror = true;
+      setRotation(HandleL1, 0F, 0F, 0F);
+      HandleR1 = new ModelRenderer(this, 41, 21);
+      HandleR1.addBox(-1F, -5F, -1F, 1, 7, 2);
+      HandleR1.setRotationPoint(-6F, 15F, 0F);
+      HandleR1.setTextureSize(64, 64);
+      HandleR1.mirror = true;
+      setRotation(HandleR1, 0F, 0F, 0F);
+      HandleR1.mirror = false;
+      HandleR2 = new ModelRenderer(this, 41, 16);
+      HandleR2.addBox(0F, -2F, -1F, 2, 2, 2);
+      HandleR2.setRotationPoint(-7F, 10F, 0F);
+      HandleR2.setTextureSize(64, 64);
+      HandleR2.mirror = true;
+      setRotation(HandleR2, 0F, 0F, 0F);
+      HandleR2.mirror = false;
   }
   
   public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
   {
     super.render(entity, f, f1, f2, f3, f4, f5);
-    setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-    stand.render(f5);
-    body.render(f5);
-    lefthandle.render(f5);
-    righthandle.render(f5);
-    backLip.render(f5);
-    frontLip.render(f5);
-    leftLip.render(f5);
-    rightLip.render(f5);
+    setRotationAngles(f, f1, f2, f3, f4, f5);
+    Base.render(f5);
+    Body.render(f5);
+    Neck.render(f5);
+    LipF.render(f5);
+    LipB.render(f5);
+    LipR.render(f5);
+    LipL.render(f5);
+    HandleL2.render(f5);
+    HandleL1.render(f5);
+    HandleR1.render(f5);
+    HandleR2.render(f5);
   }
   
   private void setRotation(ModelRenderer model, float x, float y, float z)
@@ -92,9 +118,9 @@ public class ModelVaseVolute extends ModelBase
     model.rotateAngleZ = z;
   }
   
-  public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
+  public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5)
   {
-      super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
   }
 
 }
+

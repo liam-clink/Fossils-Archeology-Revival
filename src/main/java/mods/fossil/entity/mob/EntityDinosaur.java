@@ -2,6 +2,7 @@ package mods.fossil.entity.mob;
 
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 import java.util.logging.Level;
 
 import mods.fossil.Fossil;
@@ -42,6 +43,7 @@ import net.minecraft.world.World;
 
 import com.google.common.io.ByteArrayDataInput;
 import com.google.common.io.ByteArrayDataOutput;
+import com.mojang.authlib.GameProfile;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
@@ -551,24 +553,13 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
             p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_OWNER), true);
         //    String s0 = this.getOwnerName();
             //this.func_152115_b(player.getUniqueID().toString());
-            if (this.getOwner() == null)
+            String s0 = this.getOwner().getCommandSenderName();
+            if (s0.length() > 11)
             {
-            	String s0 = this.getOwner().getCommandSenderName();
-                p0.AddStringLR(s0, true);
-            }
-            else
-            {
-	            String s0 = this.getOwner().getCommandSenderName();
-	            if (s0.length() > 11)
-	            {
-	                s0 = this.getOwner().getCommandSenderName().substring(0, 11);
-	            }
-	            
-	            p0.AddStringLR(s0, true);
+                s0 = this.getOwner().getCommandSenderName().substring(0, 11);
             }
             
-
-
+            p0.AddStringLR(s0, true);
         }
 
         //Display if Rideable
@@ -576,7 +567,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
             p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_RIDEABLE), true);
 
         if (this.SelfType.OrderItem != null)
-        p0.AddStringLR(StatCollector.translateToLocal("Order: " + this.SelfType.OrderItem.getUnlocalizedName()), true);
+        p0.AddStringLR(StatCollector.translateToLocal("Order: " + (new ItemStack(this.SelfType.OrderItem)).getDisplayName()), true);
 
         
         for (int i = 0; i < this.SelfType.FoodItemList.index; i++)
@@ -589,7 +580,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
 
         //TODO show all blocks the dino can eat
     }
-
+    
     /**
      * retrieves the itemstack it can eat and returns the number of items not used
      */

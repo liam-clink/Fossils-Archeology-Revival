@@ -1,4 +1,4 @@
-﻿#Updated for 1.6.4 Build 6.3 HEAD20 July 22 2014 
+﻿#Updated for 1.7.10 Build 6.3 HEAD21 July 25 2014 
 #English (en_US) Localization File
 
 #Tab Groups
@@ -239,6 +239,7 @@ item.dnaSmilodon.name=Smilodon DNA
 item.dnaMammoth.name=Mammoth DNA
 item.dnaDodo.name=Dodo DNA
 item.dnaHorse.name=Horse DNA
+item.dnaQuagga.name=Quagga DNA
 item.embryoPig.name=Pig Embryo
 item.embryoSheep.name=Sheep Embryo
 item.embryoCow.name=Cow Embryo
@@ -247,6 +248,7 @@ item.embryoSmilodon.name=Smilodon Embryo
 item.embryoMammoth.name=Mammoth Embryo
 item.embryoDodo.name=Dodo Embryo
 item.embryoHorse.name=Horse Embryo
+item.embryoQuagga.name=Quagga Embryo
 item.archNotebook.name=Archaeology Notebook
 item.potteryShard.name=Pottery Shard
 
@@ -311,7 +313,7 @@ entity.fossil.Pachycephalosaurus.name=Pachycephalosaurus
 entity.fossil.Deinonychus.name=Deinonychus
 entity.fossil.Gallimimus.name=Gallimimus
 
-#Non-dinosaur names Clean
+#Non-dinosaur names
 entity.fossil.Mammoth.name=Mammoth
 entity.fossil.Smilodon.name=Smilodon
 entity.fossil.PregnantCow.name=Pregnant Cow
@@ -320,6 +322,7 @@ entity.fossil.PregnantSheep.name=Pregnant Sheep
 entity.fossil.PregnantHorse.name=Pregnant Horse
 entity.fossil.Dodo.name=Dodo
 entity.fossil.Coelacanth.name=Coelacanth
+entity.fossil.Quagga.name=Quagga
 
 #Pedia text
 pedia.text.owner=Owner:
@@ -346,6 +349,7 @@ pedia.embryo.Smilodon=Smilodon
 pedia.embryo.Mammoth=Mammoth
 pedia.embryo.Dodo=Dodo
 pedia.embryo.Horse=Horse
+pedia.embryo.Quagga=Quagga
 
 #Anu speaking lines
 anuSpeaker.self=Anu: 
@@ -395,3 +399,5 @@ entity.fossil.PigBoss.name=Anu
 #Records
 item.record_bones.name=Fossil Record
 item.record_jp_theme.name=JP Theme
+item.record_bones_disc.name=Fossil Record
+item.record.record_bones_disc.desc=WhiteJoshMan - Bones

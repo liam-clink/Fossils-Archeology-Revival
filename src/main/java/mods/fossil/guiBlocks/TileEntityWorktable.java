@@ -346,7 +346,7 @@ public class TileEntityWorktable extends TileEntity implements IInventory, ISide
 
     private ItemStack CheckSmelt(ItemStack itemstack)
     {
-        ItemStack n = null;
+        ItemStack output = null;
 
         if (itemstack.getItem() == Fossil.brokenSword)
         {
@@ -360,107 +360,125 @@ public class TileEntityWorktable extends TileEntity implements IInventory, ISide
 
         if (itemstack.getItem() == Fossil.ancientSword)
         {
-            n = new ItemStack(Fossil.ancientSword);
+            output = new ItemStack(Fossil.ancientSword);
         }
 
         if (itemstack.getItem() == Fossil.ancienthelmet)
         {
-            n = new ItemStack(Fossil.ancienthelmet);
+            output = new ItemStack(Fossil.ancienthelmet);
         }
 
         if (itemstack.getItem() == Fossil.gemAxe)
         {
-            n = new ItemStack(Fossil.gemAxe);
+            output = new ItemStack(Fossil.gemAxe);
         }
 
         if (itemstack.getItem() == Fossil.gemPickaxe)
         {
-            n = new ItemStack(Fossil.gemPickaxe);
+            output = new ItemStack(Fossil.gemPickaxe);
         }
 
         if (itemstack.getItem() == Fossil.gemSword)
         {
-            n = new ItemStack(Fossil.gemSword);
+            output = new ItemStack(Fossil.gemSword);
         }
 
         if (itemstack.getItem() == Fossil.gemHoe)
         {
-            n = new ItemStack(Fossil.gemHoe);
+            output = new ItemStack(Fossil.gemHoe);
         }
 
         if (itemstack.getItem() == Fossil.gemShovel)
         {
-            n = new ItemStack(Fossil.gemShovel);
+            output = new ItemStack(Fossil.gemShovel);
         }
 
-        if (n != null)
+        if (output != null)
         {
             if (itemstack.getItemDamage() / itemstack.getMaxDamage() >= 0.1F)
             {
-                n.setItemDamage(itemstack.getItemDamage() - (int)(0.1 * itemstack.getMaxDamage()));
+                output.setItemDamage(itemstack.getItemDamage() - (int)(0.1 * itemstack.getMaxDamage()));
             }
             else
             {
-                n.setItemDamage(0);
+                output.setItemDamage(0);
             }
 
-            return n;
+            return output;
         }
 
         if (itemstack.getItem() == Fossil.woodjavelin)
         {
-            n = new ItemStack(Fossil.woodjavelin, 1);
+            output = new ItemStack(Fossil.woodjavelin, 1);
         }
 
         if (itemstack.getItem() == Fossil.stonejavelin)
         {
-            n = new ItemStack(Fossil.stonejavelin, 1);
+            output = new ItemStack(Fossil.stonejavelin, 1);
         }
 
         if (itemstack.getItem() == Fossil.ironjavelin)
         {
-            n = new ItemStack(Fossil.ironjavelin, 1);
+            output = new ItemStack(Fossil.ironjavelin, 1);
         }
 
         if (itemstack.getItem() == Fossil.goldjavelin)
         {
-            n = new ItemStack(Fossil.goldjavelin, 1);
+            output = new ItemStack(Fossil.goldjavelin, 1);
         }
 
         if (itemstack.getItem() == Fossil.diamondjavelin)
         {
-            n = new ItemStack(Fossil.diamondjavelin, 1);
+            output = new ItemStack(Fossil.diamondjavelin, 1);
         }
 
-        if (n != null)
+        if (output != null)
         {
             if (itemstack.getItemDamage() > 5)
             {
-                n.setItemDamage(itemstack.getItemDamage() - 5);
+                output.setItemDamage(itemstack.getItemDamage() - 5);
             }
             else
             {
-                n.setItemDamage(0);
+                output.setItemDamage(0);
             }
 
-            return n;
+            return output;
         }
 
         if (itemstack.getItem() == Fossil.ancientJavelin)
         {
-            n = new ItemStack(Fossil.ancientJavelin, 1);
+            output = new ItemStack(Fossil.ancientJavelin, 1);
 
             if (itemstack.getItemDamage() > 3)
             {
-                n.setItemDamage(itemstack.getItemDamage() - 3);
+                output.setItemDamage(itemstack.getItemDamage() - 3);
             }
             else
             {
-                n.setItemDamage(0);
+                output.setItemDamage(0);
             }
 
-            return n;
-        }
+                return output;
+            }
+            
+            if (itemstack.getItem() == new ItemStack(Fossil.vaseKylixBlock).getItem() && itemstack.getItemDamage() == 0)
+            {
+                output = new ItemStack(Fossil.vaseKylixBlock, 1, 1);
+                return output;
+            }
+            
+            if (itemstack.getItem() == new ItemStack(Fossil.vaseAmphoraBlock).getItem() && itemstack.getItemDamage() == 0)
+            {
+                output = new ItemStack(Fossil.vaseAmphoraBlock, 1, 1);
+                return output;
+            }
+            
+            if (itemstack.getItem() == new ItemStack(Fossil.vaseVoluteBlock).getItem() && itemstack.getItemDamage() == 0)
+            {
+                output = new ItemStack(Fossil.vaseVoluteBlock, 1, 1);
+                return output;
+            }
 
         return null;
     }

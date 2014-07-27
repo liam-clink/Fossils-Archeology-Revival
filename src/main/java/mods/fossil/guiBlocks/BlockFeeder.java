@@ -178,23 +178,24 @@ public class BlockFeeder extends BlockContainer
     /**
      * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
      */
-    public IIcon getIcon(int par1, int par2)
+    public IIcon getIcon(int side, int metadata)
     {
-        if (par1 != 1 && ((par2 & DIRECTION_BITS) + 2) != par1) //Not Top and not Front=>Side
+    	// Side value: 3
+        if (side != 1 && ((metadata & DIRECTION_BITS) + 2) != side) //Not Top and not Front=>Side
         {
-            //System.out.println("FEEDER SIDE VALUE:"+String.valueOf((par2&DIRECTION_BITS)+2));
+            System.out.println("FEEDER SIDE VALUE:"+String.valueOf((metadata&DIRECTION_BITS)+2)+" , " + side);
             return this.blockIcon;
         }
         else
         {
-            if (par1 == 0) //Bottom
+            if (side == 0) //Bottom
             {
                 return this.Bottom;
             }
 
-            if (par1 == 1) //Top
+            if (side == 1) //Top
             {
-                switch (par2 & BOTH_BITS)
+                switch (metadata & BOTH_BITS)
                 {
                     case NO_BIT:
                         return this.Top1;//no food
@@ -211,7 +212,7 @@ public class BlockFeeder extends BlockContainer
             }
             else//Front
             {
-                switch (par2 & BOTH_BITS)
+                switch (metadata & BOTH_BITS)
                 {
                     case NO_BIT:
                         return this.Front1;//no food

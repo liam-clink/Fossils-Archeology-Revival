@@ -44,7 +44,7 @@ public enum EnumDinoType
     //													C.MODEL	| C.TAME	| C.RIDE	| C.HERBIVORE/CARNIVORE | C.CARRY
     Triceratops(EntityTriceratops.class, 				C.MODEL | C.TAME  	| C.RIDE 	| C.HERBIVORE),
     Velociraptor(EntityVelociraptor.class,						  C.TAME  				| C.CARNIVORE),
-    TRex(EntityTRex.class, 								  		  C.TAME    | C.RIDE  	| C.CARNIVORE),
+    TRex(EntityTRex.class, 								C.MODEL | C.TAME    | C.RIDE  	| C.CARNIVORE),
     Pterosaur(EntityPterosaur.class, 					C.MODEL | C.TAME  			 	| C.CARNIVORE),
     Nautilus(EntityNautilus.class, 						C.NOTHING),
     Plesiosaur(EntityPlesiosaur.class, 					C.MODEL | C.TAME  	| C.RIDE 	| C.CARNIVORE),
@@ -59,6 +59,7 @@ public enum EnumDinoType
     Deinonychus(EntityDeinonychus.class,				C.MODEL | C.TAME  				| C.CARNIVORE),
     Gallimimus(EntityGallimimus.class,							  C.TAME	| C.RIDE	| C.HERB_CARN),
     Liopleurodon(EntityLiopleurodon.class, 				C.MODEL |  		  				  C.CARNIVORE),
+    //Gastornis(EntityGastornis.class, 							  C.TAME	| C.RIDE	| C.CARNIVORE),
     ;
 
 
@@ -599,6 +600,16 @@ public enum EnumDinoType
         Gallimimus.FoodBlockList.addblock(EnumDinoFoodBlock.YellowFlower);
         Gallimimus.FoodItemList.addItem(EnumDinoFoodItem.Seeds);
         Gallimimus.FoodItemList.addItem(EnumDinoFoodItem.melonSeeds);
+        
+        /*
+        Gastornis.setItems(Item.arrow);  //,			Fossil.rawGastornis, Fossil.dnaGastornis, Fossil.eggGastornis);
+        Gastornis.setAges(4, 10, -1);
+        Gastornis.setProperties(4.0D, 20.0D, 2.0D, 6.0D, 0.3D, 0.65D, 300);
+        Gastornis.setExperience(0.2F, 0.2F);
+        Gastornis.FoodItemList.addItem(EnumDinoFoodItem.BeefRaw);
+        Gastornis.FoodMobList.addMob(EnumDinoFoodMob.Quagga);
+        Gastornis.FoodMobList.addMob(EnumDinoFoodMob.Horse);
+        */
     }
 
     /**

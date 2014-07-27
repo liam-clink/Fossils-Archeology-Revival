@@ -687,6 +687,12 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
                     		((EntityGallimimus)var5).setSubSpecies(4); //Brown
                     	}
                     	break;
+                    	
+                    	/*
+                    case Gastornis:
+                       var5 = new EntityGastornis(this.worldObj);
+                       break;
+                       */
 
                     default:
                         Fossil.ShowMessage("Bug: Impossible result.", player);
@@ -695,14 +701,16 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
                         return;
                 }
 
-                if (((EntityDinosaur)var5).SelfType.isTameable() && player != null)
-                {
-                	if(((EntityDinosaur)var5).SelfType != EnumDinoType.TRex){
-                    // Tameable and player next to it
-                        ((EntityDinosaur)var5).setTamed(true);
-                		((EntityDinosaur)var5).setOwner(player.getUniqueID().toString());
-
-                	}
+                if(var5 instanceof EntityDinosaur){
+	                if (((EntityDinosaur)var5).SelfType.isTameable() && player != null)
+	                {
+	                	if(((EntityDinosaur)var5).SelfType != EnumDinoType.TRex){
+	                    // Tameable and player next to it
+	                        ((EntityDinosaur)var5).setTamed(true);
+	                		((EntityDinosaur)var5).setOwner(player.getUniqueID().toString());
+	
+	                	}
+	                }
                 }
 
                 ((EntityLiving)var5).setLocationAndAngles((double)((int)Math.floor(this.posX)), (double)((int)Math.floor(this.posY) + 1), (double)((int)Math.floor(this.posZ)), this.worldObj.rand.nextFloat() * 360.0F, 0.0F);
@@ -812,7 +820,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
         }*/
         p0.reset();
         p0.PrintItemXY(it0, 185, 7);
-        p0.PrintStringLR(StatCollector.translateToLocal("entity.fossil." + this.DinoInside.toString()), false, 1, 40, 90, 245);
+        p0.PrintStringLR(StatCollector.translateToLocal("entity.fossil." + this.DinoInside.toString() + ".name"), false, 1, 40, 90, 245);
         int quot = (int)Math.floor(((float)this.getBirthTick() / (float)this.HatchingNeedTime * 100.0F));
         String stat;
 

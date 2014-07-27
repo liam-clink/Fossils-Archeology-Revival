@@ -1,4 +1,4 @@
-#Updated for 1.6.4 Build 6.3 July 23 2014 
+#Updated for 1.7.10 Build 6.3 HEAD1 July 25 2014 
 #Czech (cs_CZ) Localization File
 
 #Tab Groups
@@ -239,6 +239,7 @@ item.dnaSmilodon.name=DNA šavlozubého tygra
 item.dnaMammoth.name=Mamutí DNA
 item.dnaDodo.name=DNA Doda
 item.dnaHorse.name=Horse DNA
+item.dnaQuagga.name=Quagga DNA
 item.embryoPig.name=Prasečí embryo
 item.embryoSheep.name=Ovčí embryo
 item.embryoCow.name=Kraví embryo
@@ -247,6 +248,7 @@ item.embryoSmilodon.name=Embryo šavlozubého tygra
 item.embryoMammoth.name=Mamutí embryo
 item.embryoDodo.name=Embryo Doda
 item.embryoHorse.name=Horse Embryo
+item.embryoQuagga.name=Quagga Embryo
 item.archNotebook.name=Archeologovy poznámky
 item.potteryShard.name=Střep keramiky
 
@@ -320,6 +322,7 @@ entity.fossil.PregnantSheep.name=Březí ovce
 entity.fossil.PregnantHorse.name=Pregnant Horse
 entity.fossil.Dodo.name=Dodo
 entity.fossil.Coelacanth.name=Latimérie
+entity.fossil.Quagga.name=Quagga
 
 #Pedia text
 pedia.text.owner=Majitel:
@@ -346,6 +349,7 @@ pedia.embryo.Smilodon=Šavlozubý tygr
 pedia.embryo.Mammoth=Mamut
 pedia.embryo.Dodo=Dodo
 pedia.embryo.Horse=Horse
+pedia.embryo.Quagga=Quagga
 
 #Anu speaking lines
 anuSpeaker.self=Anu: 
@@ -395,3 +399,5 @@ entity.fossil.Anu.name=Anu
 #Records
 item.record_bones.name=Fosilní nahrávka
 item.record_jp_theme.name=JP Téma
+item.record_bones_disc.name=Fosilní nahrávka
+item.record.record_bones_disc.desc=WhiteJoshMan - Bones

@@ -1,4 +1,4 @@
-﻿#Updated for 1.6.4 Build 6.3 HEAD18 July 22 2014  
+﻿#Updated for 1.7.10 Build 6.3 HEAD19 July 25 2014  
 #Spanish - Spain (es_ES) Localization File
 
 #Tab Groups
@@ -239,6 +239,7 @@ item.dnaSmilodon.name=ADN de Tigre Dientes de Sable
 item.dnaMammoth.name=ADN de Mamút
 item.dnaDodo.name=Dodo DNA
 item.dnaHorse.name=Horse DNA
+item.dnaQuagga.name=Quagga DNA
 item.embryoPig.name=Embrión de Cerdo
 item.embryoSheep.name=Embrión de Oveja
 item.embryoCow.name=Embrión de Vaca
@@ -247,6 +248,7 @@ item.embryoSmilodon.name=Embrión de Tigre Dientes de Sable
 item.embryoMammoth.name=Embrión de Mamút
 item.embryoDodo.name=Embrión de Dodo
 item.embryoHorse.name=Horse Embryo
+item.embryoQuagga.name=Quagga Embryo
 item.archNotebook.name=Cuaderno de Arqueología
 item.potteryShard.name=Pottery Shard
 
@@ -282,7 +284,7 @@ status.NoSpace= no tiene espacio para crecer.
 status.StarveEsc.head=
 status.StarveEsc= te ha dejado por el hambre.
 status.SJLBite= se comió el Siu-Jiu-Le y escapó.
-status.ShewTime= necesita tiempo para masticar.
+status.ChewTime= necesita tiempo para masticar.
 status.Full.head= This 
 status.Full= está lleno.
 status.Nervous.Head=Tú hiciste poco 
@@ -290,7 +292,7 @@ status.Nervous= depende de ti para cazar por sí mismo.
 status.GemErrorYoung=Este tiranosaurio es aún muy joven.
 status.GemErrorHealth=El escarabajo no puede contener una fuerza vital tan grande.
 status.GemErrorTamed=Este Tiranosaurio ya ha sido domado.
-status.essenceFail=El aroma a pollo no tuvo efecto.
+status.essencefail=El aroma a pollo no tuvo efecto.
 
 #Dinosaur Names
 entity.fossil.Triceratops.name=Triceratops
@@ -320,6 +322,7 @@ entity.fossil.PregnantSheep.name=Oveja Embarazada
 entity.fossil.PregnantHorse.name=Pregnant Horse
 entity.fossil.Dodo.name=Dodo
 entity.fossil.Coelacanth.name=Coelacanth
+entity.fossil.Quagga.name=Quagga
 
 #Pedia text
 pedia.text.owner=Dueño:
@@ -346,6 +349,7 @@ pedia.embryo.SaberCat=Tigres Dientes de Sable
 pedia.embryo.Mammoth=Mamút
 pedia.embryo.Dodo=Dodo
 pedia.embryo.Horse=Horse
+pedia.embryo.Quagga=Quagga
 
 #Anu speaking lines
 anuSpeaker.self=Anu: 
@@ -395,3 +399,5 @@ entity.fossil.PigBoss.name=Anu
 #Records
 item.record_bones.name=Fossil Record
 item.record_jp_theme.name=JP Theme
+item.record_bones_disc.name=Fossil Record
+item.record.record_bones_disc.desc=WhiteJoshMan - Bones

@@ -1,4 +1,4 @@
-﻿#Updated for 1.6.4 Build 6.3 HEAD20 July 22 2014 
+﻿#Updated for 1.7.10 Build 6.3 HEAD21 July 25 2014 
 #Deutsch (de_DE) Localization File
 
 #Tab Groups
@@ -239,6 +239,7 @@ item.dnaSmilodon.name=Smilodon DNA
 item.dnaMammoth.name=Mammut DNA
 item.dnaDodo.name=Dodo DNA
 item.dnaHorse.name=Pferd DNA
+item.dnaQuagga.name=Quagga DNA
 item.embryoPig.name=Schwein Embryo
 item.embryoSheep.name=Schaf Embryo
 item.embryoCow.name=Kuh Embryo
@@ -247,6 +248,7 @@ item.embryoSmilodon.name=Smilodon Embryo
 item.embryoMammoth.name=Mammut Embryo
 item.embryoDodo.name=Dodo Embryo
 item.embryoHorse.name=Pferd Embryo
+item.embryoQuagga.name=Quagga Embryo
 item.archNotebook.name=Archaeologie Notizbuch
 item.potteryShard.name=Keramikscherbe
 
@@ -321,6 +323,7 @@ entity.fossil.PregnantSheep.name=Schwangeres Schaf
 entity.fossil.PregnantHorse.name=Schwangere Pferd
 entity.fossil.Dodo.name=Dodo
 entity.fossil.Coelacanth.name=Coelacanth
+entity.fossil.Quagga.name=Quagga
 
 #Pedia text
 pedia.text.owner=Besitzer:
@@ -347,6 +350,7 @@ pedia.embryo.Smilodon=Smilodon
 pedia.embryo.Mammoth=Mammut
 pedia.embryo.Dodo=Dodo
 pedia.embryo.Horse=Pferd
+pedia.embryo.Quagga=Quagga
 
 #Anu speaking lines
 anuSpeaker.self=Anu:
@@ -396,3 +400,5 @@ entity.fossil.PigBoss.name=Anu
 #Records
 item.record_bones.name=Fossil Schallplatte
 item.record_jp_theme.name=JP Theme
+item.record_bones_disc.name=Fossil Schallplatte
+item.record.record_bones_disc.desc=WhiteJoshMan - Bones
