@@ -5,6 +5,8 @@ import io.netty.buffer.ByteBuf;
 import java.util.List;
 import java.util.Random;
 
+import org.lwjgl.input.Keyboard;
+
 import mods.fossil.Fossil;
 import mods.fossil.fossilAI.DinoAIAttackOnCollide;
 import mods.fossil.fossilAI.DinoAIFishing;
@@ -16,13 +18,17 @@ import mods.fossil.fossilAI.WaterDinoAIHunt;
 import mods.fossil.fossilAI.WaterDinoAIWander;
 import mods.fossil.fossilEnums.EnumDinoType;
 import mods.fossil.fossilEnums.EnumOrderType;
+import mods.fossil.util.MathX;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIArrowAttack;
 import net.minecraft.entity.ai.EntityAIAvoidEntity;
+import net.minecraft.entity.ai.EntityAIControlledByPlayer;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.item.EntityItem;
@@ -31,9 +37,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
 public class EntityPlesiosaur extends EntitySwimmingDino implements IMob
@@ -86,6 +94,7 @@ public class EntityPlesiosaur extends EntitySwimmingDino implements IMob
         this.getNavigator().setCanSwim(true);
         this.tasks.addTask(3, new DinoAIAttackOnCollide(this, 1.1D, true));
         this.tasks.addTask(4, new DinoAIFollowOwner(this, 5.0F, 2.0F, 1.0F));
+      //  this.tasks.addTask(7, new DinoAIEat(this, 24));
         this.tasks.addTask(8, new DinoAIFishing(this, /*this.HuntLimit,*/ 1));
         this.tasks.addTask(10, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(11, new EntityAILookIdle(this));
@@ -93,9 +102,10 @@ public class EntityPlesiosaur extends EntitySwimmingDino implements IMob
         
         this.tasks.addTask(5, new WaterDinoAIEat(this, 50));
         this.targetTasks.addTask(5, new WaterDinoAIHunt(this, EntityLiving.class, 500, false, 0.02D));
-        
-        this.tasks.addTask(2, new EntityAIAvoidEntity(this, EntityMosasaurus.class, 16.0F, 0.8D, 1.33D));
-        this.tasks.addTask(2, new EntityAIAvoidEntity(this, EntityLiopleurodon.class, 16.0F, 0.8D, 1.33D));
+
+
+       // this.tasks.addTask(2, new EntityAIAvoidEntity(this, EntityMosasaurus.class, 16.0F, 0.8D, 1.33D));
+      //  this.tasks.addTask(2, new EntityAIAvoidEntity(this, EntityLiopleurodon.class, 16.0F, 0.8D, 1.33D));
     }
 
     protected void applyEntityAttributes()
@@ -106,6 +116,17 @@ public class EntityPlesiosaur extends EntitySwimmingDino implements IMob
         this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(baseDamage);
     }
 
+    @Override
+    public boolean isAIEnabled()
+    {
+        return !this.isModelized();
+    }
+    
+    @Override
+    public boolean shouldDismountInWater(Entity rider){
+        return false;
+    }
+    
     /**
      * Returns the texture's file path as a String.
      */
@@ -123,35 +144,40 @@ public class EntityPlesiosaur extends EntitySwimmingDino implements IMob
                 return "fossil:textures/mob/Plesiosaur_adult.png";
         }
     }
-    
-    @Override
-    public boolean shouldDismountInWater(Entity rider){
-        return false;
-    }
 
     public boolean canBreatheUnderwater()
     {
         return true;
     }
-
     
+    /*
     protected void updateEntityActionState()
     {
         if (!this.isModelized())
         {
             if (this.riddenByEntity == null)
             {
-                super.updateEntityActionState();            
+                super.updateEntityActionState();
+
+                if (!this.isOnSurface() && (double)this.TargetY < this.posY)
+                {
+                    this.TargetY = (float)(this.posY++);
+                }
+                
 
                 if (!this.isSitting() && !this.hasPath() && (new Random()).nextInt(1000) == 5)
                 {
                     this.FindFish(2);
                 }
+
+                if (!this.worldObj.isRemote)
+                {
+                    this.dataWatcher.updateObject(18, Float.valueOf(this.getHealth()));
+                }
             }
         }
     }
-    
-
+*/
     
     public boolean isOnSurface()
     {
@@ -167,12 +193,12 @@ public class EntityPlesiosaur extends EntitySwimmingDino implements IMob
         super.onUpdate();
         
         if(this.isInWater()){
-            	this.tasks.removeTask(this.aiDinoWander);
-            	this.tasks.addTask(6, this.aiWaterDinoWander);
+        	this.tasks.removeTask(this.aiDinoWander);
+        	this.tasks.addTask(6, this.aiWaterDinoWander);
         }
         else {
-            	this.tasks.removeTask(this.aiWaterDinoWander);
-            	this.tasks.addTask(6, this.aiDinoWander);
+        	this.tasks.removeTask(this.aiWaterDinoWander);
+        	this.tasks.addTask(6, this.aiDinoWander);
         }
     }
 
@@ -366,7 +392,6 @@ public class EntityPlesiosaur extends EntitySwimmingDino implements IMob
     {
         if (this.riddenByEntity != null)
         {
-            this.riddenByEntity.setPosition(this.posX, this.posY + (double)this.height * 0.75D + 0.07D * (double)(18 - this.getDinoAge()), this.posZ);
         	 this.riddenByEntity.setPosition(this.posX, this.posY + this.getMountHeight() + this.riddenByEntity.getYOffset(), this.posZ);
         }
     }
@@ -404,43 +429,6 @@ public class EntityPlesiosaur extends EntitySwimmingDino implements IMob
         }
     }
 
-    /*
-    public void FaceToCoord(int var1, int var2, int var3)
-    {
-        double var4 = (double)var1;
-        double var6 = (double)var3;
-        float var8 = (float)(Math.atan2(var6, var4) * 180.0D / Math.PI) - 90.0F;
-        this.rotationYaw = this.updateRotation(this.rotationYaw, var8, 360.0F);
-    }
-
-    private float updateRotation(float var1, float var2, float var3)
-    {
-        float var4;
-
-        for (var4 = var2 - var1; var4 < -180.0F; var4 += 360.0F)
-        {
-            ;
-        }
-
-        while (var4 >= 180.0F)
-        {
-            var4 -= 360.0F;
-        }
-
-        if (var4 > var3)
-        {
-            var4 = var3;
-        }
-
-        if (var4 < -var3)
-        {
-            var4 = -var3;
-        }
-
-        return var1 + var4;
-    }
-    */
-
     /**
      * Causes this entity to do an upwards motion (jumping).
      */
@@ -458,7 +446,7 @@ public class EntityPlesiosaur extends EntitySwimmingDino implements IMob
      */
     public boolean isInWater()
     {
-    	return this.worldObj.handleMaterialAcceleration(this.boundingBox.expand(0.0D, -0.4000000059604645D, 0.0D).contract(0.001D, 0.001D, 0.001D), Material.water, this);
+        return this.worldObj.handleMaterialAcceleration(this.boundingBox.expand(0.0D, -0.4000000059604645D, 0.0D).contract(0.001D, 0.001D, 0.001D), Material.water, this);
     }
 
     public float HandleRiding(float Speed, float SpeedBoosted)
@@ -621,136 +609,6 @@ public class EntityPlesiosaur extends EntitySwimmingDino implements IMob
     public EntityAgeable createChild(EntityAgeable var1)
     {
         return this.spawnBabyAnimal(var1);
-    }
-    /**
-     * Moves the entity based on the specified heading.  Args: strafe, forward
-     */
-    public void moveEntityWithHeading(float par1, float par2)
-    {
-    	if(!this.isModelized()){
-	        double var9;
-	
-	        if (this.isInWater())
-	        {
-	            var9 = this.posY;
-	            this.moveFlying(par1, par2, this.isAIEnabled() ? 0.04F : 0.02F);
-	            this.moveEntity(this.motionX, this.motionY, this.motionZ);
-	            this.motionX *= 0.800000011920929D;
-	            this.motionY *= 0.800000011920929D;
-	            this.motionZ *= 0.800000011920929D;
-	//           if(this.riddenByEntity==null)
-	            this.motionY += 0.02D;//TODO + -> - gravity is on it if not ridden, then handling the riding...going straight forward
-	
-	            if (this.isCollidedHorizontally && this.isOffsetPositionInLiquid(this.motionX, this.motionY + 0.6000000238418579D - this.posY + var9, this.motionZ))
-	            {
-	                this.motionY = 0.30000001192092896D;
-	            }
-	        }
-	        else if (this.handleLavaMovement())
-	        {
-	            var9 = this.posY;
-	            this.moveFlying(par1, par2, 0.02F);
-	            this.moveEntity(this.motionX, this.motionY, this.motionZ);
-	            this.motionX *= 0.5D;
-	            this.motionY *= 0.5D;
-	            this.motionZ *= 0.5D;
-	            this.motionY -= 0.02D;
-	
-	            if (this.isCollidedHorizontally && this.isOffsetPositionInLiquid(this.motionX, this.motionY + 0.6000000238418579D - this.posY + var9, this.motionZ))
-	            {
-	                this.motionY = 0.30000001192092896D;
-	            }
-	        }
-	        else
-	        {
-	            float var3 = 0.91F;
-	
-	            if (this.onGround)
-	            {
-	                var3 = 0.54600006F;
-	                Block var4 = this.worldObj.getBlock(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.boundingBox.minY) - 1, MathHelper.floor_double(this.posZ));
-	
-	                if (var4 != Blocks.air)
-	                {
-	                  //  var3 = var4.get blocksList[var4].slipperiness * 0.91F;
-	                }
-	            }
-	
-	            float var8 = 0.16277136F / (var3 * var3 * var3);
-	            float var5;
-	
-	            if (this.onGround)
-	            {
-	                if (this.isAIEnabled())
-	                {
-	                    var5 = this.getAIMoveSpeed();
-	                }
-	                else
-	                {
-	                    var5 = 1.0F;//this.landMovementFactor;
-	                }
-	
-	                var5 *= var8;
-	            }
-	            else
-	            {
-	                var5 = this.jumpMovementFactor;
-	            }
-	
-	            this.moveFlying(par1, par2, var5);
-	            var3 = 0.91F;
-	
-	            if (this.onGround)
-	            {
-	                var3 = 0.54600006F;
-	                Block var6 = this.worldObj.getBlock(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.boundingBox.minY) - 1, MathHelper.floor_double(this.posZ));
-	
-	                if (var6 != Blocks.air)
-	                {
-	              //      var3 = Block.blocksList[var6].slipperiness * 0.91F;
-	                }
-	            }
-	
-	//            System.out.println(String.valueOf(this.motionY));
-	            this.moveEntity(this.motionX, this.motionY, this.motionZ);
-	
-	            if (this.worldObj.isRemote && (!this.worldObj.blockExists((int)this.posX, 0, (int)this.posZ) || !this.worldObj.getChunkFromBlockCoords((int)this.posX, (int)this.posZ).isChunkLoaded))
-	            {
-	                if (this.posY > 0.0D)
-	                {
-	                    this.motionY = -0.1D;
-	                }
-	                else
-	                {
-	                    this.motionY = 0.0D;
-	                }
-	            }
-	            else
-	            {
-	                if (!this.isInWater())
-	                {
-	                    this.motionY -= 0.08D;
-	                }
-	            }
-	
-	            this.motionY *= 0.9800000190734863D;
-	            this.motionX *= (double)var3;
-	            this.motionZ *= (double)var3;
-	        }
-	
-	        //this.prevLegYaw = this.legYaw;
-	        var9 = this.posX - this.prevPosX;
-	        double var12 = this.posZ - this.prevPosZ;
-	        float var11 = MathHelper.sqrt_double(var9 * var9 + var12 * var12) * 4.0F;
-	
-	        if (var11 > 1.0F)
-	        {
-	            var11 = 1.0F;
-	        }
-	
-	        //this.legYaw += (var11 - this.legYaw) * 0.4F;
-	        //this.legSwing += this.legYaw;
-    	}
     }
     
     /**

@@ -77,7 +77,9 @@ public class ClientProxy extends CommonProxy
         //MinecraftForgeClient.registerItemRenderer(Fossil.blockSifterIdle.blockID, new ItemSifterRenderer());
         RenderingRegistry.registerEntityRenderingHandler(EntityCoelacanth.class, new RenderCoelacanth(new ModelCoelacanth(), 0.5F));
         RenderingRegistry.registerEntityRenderingHandler(EntityLiopleurodon.class, new RenderLiopleurodon(new ModelLiopleurodon(), 0.5F));
-        
+        RenderingRegistry.registerEntityRenderingHandler(EntityQuagga.class, new RenderQuagga(new ModelQuagga(), 0.5F));
+        RenderingRegistry.registerEntityRenderingHandler(EntityGastornis.class, new RenderGastornis(new ModelGastornis(), 0.5F));
+
     	VillagerRegistry.instance().registerVillagerSkin(10, new ResourceLocation("fossil:textures/mob/Archaeologist.png"));
     }
 

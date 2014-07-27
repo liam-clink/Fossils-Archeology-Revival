@@ -2,6 +2,7 @@ package mods.fossil.client;
 
 import cpw.mods.fml.common.network.IGuiHandler;
 import mods.fossil.client.gui.*;
+import mods.fossil.entity.mob.EntityQuagga;
 import mods.fossil.guiBlocks.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -9,6 +10,8 @@ import net.minecraft.world.World;
 
 public class FossilGuiHandler implements IGuiHandler
 {
+    private EntityQuagga quagga;
+    
     @Override
     public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z)
     {
@@ -39,6 +42,10 @@ public class FossilGuiHandler implements IGuiHandler
             
             case 7:
             	return new ContainerSifter(player.inventory, (TileEntitySifter) tile_entity);
+            	
+            case 8:
+            	quagga = (EntityQuagga)world.getEntityByID(x);
+            	return new ContainerQuagga(player.inventory, quagga.quaggaChest, quagga);
         }
 
         return null;
@@ -74,6 +81,10 @@ public class FossilGuiHandler implements IGuiHandler
                 
             case 7:
             	return new GuiSifter(player.inventory, (TileEntitySifter) tile_entity);
+            	
+            case 8:
+            	quagga = (EntityQuagga)world.getEntityByID(x);
+                return new GuiQuagga(player.inventory, quagga.quaggaChest, quagga);
         }
 
         return null;

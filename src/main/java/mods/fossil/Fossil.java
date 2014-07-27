@@ -66,6 +66,7 @@ import mods.fossil.entity.mob.EntityPregnantCow;
 import mods.fossil.entity.mob.EntityPregnantHorse;
 import mods.fossil.entity.mob.EntityPregnantPig;
 import mods.fossil.entity.mob.EntityPregnantSheep;
+import mods.fossil.entity.mob.EntityQuagga;
 import mods.fossil.entity.mob.EntitySmilodon;
 import mods.fossil.fossilEnums.EnumDinoFoodMob;
 import mods.fossil.fossilEnums.EnumDinoType;
@@ -180,7 +181,7 @@ import cpw.mods.fml.relauncher.Side;
 public class Fossil
 {
     public static final String modid = "fossil";
-    public static final String modversion = "1.7.10 Build 6.3a19";
+    public static final String modversion = "1.7.10 Build 6.3b";
 
     /*
      * Set mod state here
@@ -212,7 +213,7 @@ public class Fossil
      */
     //public static boolean DebugMode = FossilOptions.FossilDebug;
     public static boolean DebugMode() {
-        return true;
+        return false;
     }
     
     public static final double MESSAGE_DISTANCE = 25.0D;
@@ -369,6 +370,7 @@ public class Fossil
     public static Item dnaDodo;
     public static Item dnaCoelacanth;
     public static Item dnaHorse;
+    public static Item dnaQuagga;
 
     //Mob DNA
     //public static Item mobDNA;
@@ -391,7 +393,7 @@ public class Fossil
     public static Item embryoSmilodon;
     public static Item embryoMammoth;
     public static Item embryoHorse;
-//    public static Item embryoDodo;
+    public static Item embryoQuagga;
 
     //Item Food
     public static Item cookedChickenSoup;
@@ -441,6 +443,9 @@ public class Fossil
             //FossilOptions.FossilDebug = config.get("debug", "Fossil_Debug", false).getBoolean(false);
             FossilOptions.Debug_Gen_Rate_Academy = config.get("debug", "Debug_Gen_Rate_Academy", 1).getInt(1);
             FossilOptions.Debug_Gen_Rate_Academy = config.get("debug", "Debug_Gen_Rate_Shipwreck", 1).getInt(1);
+            FossilOptions.Anu_Spawn = config.get("option", "Anu_Spawn", false).getBoolean(false);
+            FossilOptions.Anu_Allowed_Overworld = config.get("option", "Anu_Allowed_Overworld", false).getBoolean(false);
+
             
         }
         catch (Exception var7)
@@ -605,7 +610,8 @@ public class Fossil
         dnaDodo = new ForgeItem("Dodo_DNA").setUnlocalizedName(LocalizationStrings.DNA_DODO_NAME).setCreativeTab(this.tabFMaterial);
         dnaCoelacanth = new ForgeItem("Coelacanth_DNA").setUnlocalizedName(LocalizationStrings.DNA_COELACANTH_NAME).setCreativeTab(this.tabFMaterial);
         dnaHorse = new ForgeItem("Horse_DNA").setUnlocalizedName(LocalizationStrings.DNA_HORSE_NAME).setCreativeTab(this.tabFMaterial);
-        
+        dnaQuagga = new ForgeItem("Quagga_DNA").setUnlocalizedName(LocalizationStrings.DNA_QUAGGA_NAME).setCreativeTab(this.tabFMaterial);
+
         //Ebryos
         //embyoSyringe = new ItemEmbryoSyringe(embyoSyringeID);
         embryoPig = new ItemEmbryoSyringe(0).setUnlocalizedName(LocalizationStrings.EMBRYO_PIG_NAME).setCreativeTab(this.tabFItems);
@@ -615,6 +621,7 @@ public class Fossil
         embryoSmilodon = new ItemEmbryoSyringe(4).setUnlocalizedName(LocalizationStrings.EMBRYO_SMILODON_NAME).setCreativeTab(this.tabFItems);
         embryoMammoth = new ItemEmbryoSyringe(5).setUnlocalizedName(LocalizationStrings.EMBRYO_MAMMOTH_NAME).setCreativeTab(this.tabFItems);
         embryoHorse = new ItemEmbryoSyringe(6).setUnlocalizedName(LocalizationStrings.EMBRYO_HORSE_NAME).setCreativeTab(this.tabFItems);
+        embryoQuagga = new ItemEmbryoSyringe(7).setUnlocalizedName(LocalizationStrings.EMBRYO_QUAGGA_NAME).setCreativeTab(this.tabFItems);
 
         //Item Food
         //Moved to fossilEnums.EnumDinoType
@@ -690,6 +697,7 @@ public class Fossil
 		GameRegistry.registerItem(dnaSheep, LocalizationStrings.DNA_SHEEP_NAME);
 		GameRegistry.registerItem(dnaCow, LocalizationStrings.DNA_COW_NAME);
 		GameRegistry.registerItem(dnaHorse, LocalizationStrings.DNA_HORSE_NAME);
+		GameRegistry.registerItem(dnaQuagga, LocalizationStrings.DNA_QUAGGA_NAME);
 		GameRegistry.registerItem(dnaChicken, LocalizationStrings.DNA_CHICKEN_NAME);
 		GameRegistry.registerItem(dnaSmilodon, LocalizationStrings.DNA_SMILODON_NAME);
 		GameRegistry.registerItem(dnaMammoth, LocalizationStrings.DNA_MAMMOTH_NAME);
@@ -699,6 +707,7 @@ public class Fossil
 		GameRegistry.registerItem(embryoSheep, LocalizationStrings.EMBRYO_SHEEP_NAME);
 		GameRegistry.registerItem(embryoCow, LocalizationStrings.EMBRYO_COW_NAME);
 		GameRegistry.registerItem(embryoHorse, LocalizationStrings.EMBRYO_HORSE_NAME);
+		GameRegistry.registerItem(embryoQuagga, LocalizationStrings.EMBRYO_QUAGGA_NAME);
 		GameRegistry.registerItem(embryoChicken, LocalizationStrings.EMBRYO_CHICKEN_NAME);
 		GameRegistry.registerItem(embryoSmilodon, LocalizationStrings.EMBRYO_SMILODON_NAME);
 		GameRegistry.registerItem(embryoMammoth, LocalizationStrings.EMBRYO_MAMMOTH_NAME);
@@ -804,10 +813,11 @@ public class Fossil
         EntityRegistry.registerModEntity(EntityCultivatedDodoEgg.class, "CultivatedDodoEgg",    27, this, 250, 5, true);
         EntityRegistry.registerModEntity(EntityCoelacanth.class, 		"Coelacanth",    		28, this, 250, 5, true);
         EntityRegistry.registerModEntity(EntityPregnantHorse.class, 	"PregnantHorse", 		29, this, 250, 5, true);
+        EntityRegistry.registerModEntity(EntityQuagga.class, 			"Quagga", 				30, this, 250, 3, true);
 
         for (int i = 0; i < EnumDinoType.values().length; i++)
         {
-            EntityRegistry.registerModEntity(EnumDinoType.values()[i].getDinoClass(), EnumDinoType.values()[i].name(), 200 + i, this, 250, 5, true);
+            EntityRegistry.registerModEntity(EnumDinoType.values()[i].getDinoClass(), EnumDinoType.values()[i].name(), 200 + i, this, 250, 4, true);
         }
         
         EntityRegistry.addSpawn(EntityCoelacanth.class, 1, 2, 4, EnumCreatureType.waterCreature, new BiomeGenBase[] {BiomeGenBase.ocean});

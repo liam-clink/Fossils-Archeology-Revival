@@ -10,6 +10,7 @@ import mods.fossil.fossilInterface.IViviparous;
 import mods.fossil.handler.FossilAchievementHandler;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.passive.EntityHorse;
@@ -101,14 +102,18 @@ public class ItemEmbryoSyringe extends Item
         		((EntityHorse)pregnantEntity).func_152120_b(((EntityHorse)thisEntity).func_152119_ch());
         		((EntityHorse)pregnantEntity).setHorseTamed(((EntityHorse)thisEntity).isTame());
         		((EntityHorse)pregnantEntity).setTemper(((EntityHorse)thisEntity).getTemper());
-        		((EntityHorse)pregnantEntity).setHealth(((EntityHorse)thisEntity).getHealth());
+        		((EntityHorse)pregnantEntity).getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue((((EntityHorse)thisEntity).getEntityAttribute(SharedMonsterAttributes.maxHealth).getAttributeValue()));
+        		((EntityHorse)pregnantEntity).getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue((((EntityHorse)thisEntity).getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue()));
         		((EntityHorse)pregnantEntity).setGrowingAge(((EntityHorse)thisEntity).getGrowingAge());
             }
 
             if (pregnantEntity != null)
             {
-                EnumAnimalType e0 = EnumAnimalType.Chicken;
+            	EnumAnimalType e0 = null;
 
+                if (itemstack.getItem() == Fossil.embryoQuagga && pregnantEntity instanceof EntityPregnantHorse)
+                    e0 = EnumAnimalType.Quagga;
+                	 
                 if (itemstack.getItem() == Fossil.embryoChicken)
                 {
                     e0 = EnumAnimalType.Chicken;
@@ -144,17 +149,21 @@ public class ItemEmbryoSyringe extends Item
                     e0 = EnumAnimalType.Sheep;
                 }
 
-//                if(var1==Fossil.embryoDodo)e0=EnumAnimalType.Dodo;
-                ((IViviparous)pregnantEntity).SetEmbryo(e0);
-                ((EntityAnimal)pregnantEntity).setLocationAndAngles(thisEntity.posX, thisEntity.posY, thisEntity.posZ, thisEntity.rotationYaw, thisEntity.rotationPitch);
-                thisEntity.setDead();
-
-                if (!thisEntity.worldObj.isRemote)
+                if (e0 != null)
                 {
-                    thisEntity.worldObj.spawnEntityInWorld((EntityAnimal)pregnantEntity);
+	                ((IViviparous)pregnantEntity).SetEmbryo(e0);
+	                ((EntityAnimal)pregnantEntity).setLocationAndAngles(thisEntity.posX, thisEntity.posY, thisEntity.posZ, thisEntity.rotationYaw, thisEntity.rotationPitch);
+	                thisEntity.setDead();
+	
+	                if (!thisEntity.worldObj.isRemote)
+	                {
+	                    thisEntity.worldObj.spawnEntityInWorld((EntityAnimal)pregnantEntity);
+	                }
+	
+	                --itemstack.stackSize;
                 }
-
-                --itemstack.stackSize;
+                else
+                	return false;
             }
 
             player.triggerAchievement(FossilAchievementHandler.IceAge);

@@ -9,12 +9,14 @@ import mods.fossil.entity.EntityDinoEgg;
 import mods.fossil.entity.mob.EntityCoelacanth;
 import mods.fossil.entity.mob.EntityDinosaur;
 import mods.fossil.entity.mob.EntityDodo;
+import mods.fossil.entity.mob.EntityGastornis;
 import mods.fossil.entity.mob.EntityMammoth;
 import mods.fossil.entity.mob.EntityNautilus;
 import mods.fossil.entity.mob.EntityPregnantCow;
 import mods.fossil.entity.mob.EntityPregnantHorse;
 import mods.fossil.entity.mob.EntityPregnantPig;
 import mods.fossil.entity.mob.EntityPregnantSheep;
+import mods.fossil.entity.mob.EntityQuagga;
 import mods.fossil.entity.mob.EntitySmilodon;
 import mods.fossil.fossilEnums.EnumDinoType;
 import mods.fossil.guiBlocks.ContainerPedia;
@@ -254,6 +256,16 @@ public class GuiPedia extends GuiContainer
         {
             ((EntityNautilus)Fossil.ToPedia).ShowPedia(this);
         }
+        
+        if (Fossil.ToPedia instanceof EntityQuagga)
+            {
+                ((EntityQuagga)Fossil.ToPedia).ShowPedia(this);
+            }
+            
+            if (Fossil.ToPedia instanceof EntityGastornis)
+            {
+                ((EntityGastornis)Fossil.ToPedia).ShowPedia(this);
+            }
     	}
     }
 

@@ -17,6 +17,8 @@ public class FossilOptions
     public static boolean FossilDebug;
     public static int Debug_Gen_Rate_Academy;
     public static int Debug_Gen_Rate_Shipwreck;
+    public static boolean Anu_Spawn;
+    public static boolean Anu_Allowed_Overworld;
 
     public void Load(Configuration config)
     {
@@ -32,6 +34,8 @@ public class FossilOptions
         FossilDebug = config.get("debug", "Fossil_Debug", false).getBoolean(false);
         Debug_Gen_Rate_Academy = config.get("debug", "Debug_Gen_RateAcademy", 1).getInt(1);
         Debug_Gen_Rate_Shipwreck = config.get("debug", "Debug_Gen_RateShipwreck", 1).getInt(1);
+        Anu_Spawn = config.get("option", "Anu_Spawn", false).getBoolean(false);
+        Anu_Allowed_Overworld = config.get("option", "Anu_Allowed_Overworld", false).getBoolean(false);
     }
 
 }

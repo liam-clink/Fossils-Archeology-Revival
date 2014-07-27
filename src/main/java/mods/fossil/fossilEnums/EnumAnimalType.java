@@ -8,9 +8,10 @@ public enum EnumAnimalType
     Sheep(3000),
     Cow(3000),
     Chicken(1000),
-    Smilodon(4000),
+    Smilodon(4500),
     Mammoth(6000),
-    Horse(3500);
+    Horse(3500),
+    Quagga(4000);
 
     public int GrowTime;
 

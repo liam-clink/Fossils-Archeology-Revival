@@ -237,6 +237,7 @@ protected void setRotationAngles(float var1, float var2, float var3, float var4,
 		else
 		{
 			standingPose();
+			this.LowerJaw.rotateAngleX = (float)Math.toRadians(30);
 		}
 
 	 
