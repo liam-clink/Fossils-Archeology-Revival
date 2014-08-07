@@ -51,6 +51,9 @@ public class FossilRecipeHandler
         GameRegistry.addRecipe(new ItemStack(Fossil.chickenEss, 8), new Object[] {"XXX", "XYX", "XXX", 'X', Items.glass_bottle, 'Y', Fossil.cookedChickenSoup});
         GameRegistry.addRecipe(new ItemStack(Fossil.whip, 1), new Object[] {"XXS", "XTS", "TXS", 'T', Items.stick, 'S', Items.string});
         GameRegistry.addRecipe(new ItemStack(Fossil.volcanicBrick, 4), new Object[] {"VV", "VV", 'V', Fossil.volcanicRock});
+        GameRegistry.addRecipe(new ItemStack(Fossil.volcanicSingleSlab, 6), new Object[] {"PPP", 'P', Fossil.volcanicBrick});
+        GameRegistry.addRecipe(new ItemStack(Fossil.volcanicStairs, 4), new Object[] {"P  ", "PP ", "PPP", 'P', Fossil.volcanicBrick});
+        GameRegistry.addRecipe(new ItemStack(Fossil.volcanicStairs, 4), new Object[] {"  P", " PP", "PPP", 'P', Fossil.volcanicBrick});
         GameRegistry.addRecipe(new ItemStack(Fossil.palaePlanks, 4), new Object[] {"P", 'P', Fossil.palmLog});
         GameRegistry.addRecipe(new ItemStack(Blocks.wooden_button, 1), new Object[] {"P", 'P', Fossil.palaePlanks});
         GameRegistry.addRecipe(new ItemStack(Items.stick, 3), new Object[] { "P", "P", 'P', Fossil.palaePlanks});

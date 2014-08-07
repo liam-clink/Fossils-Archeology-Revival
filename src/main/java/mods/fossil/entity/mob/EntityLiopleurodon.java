@@ -19,6 +19,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnchantmentThorns;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityLivingData;
@@ -308,4 +309,12 @@ public class EntityLiopleurodon extends EntitySwimmingDino implements IMob
 		// TODO Auto-generated method stub
 		
 	}
+	
+    @Override
+    public EntityAgeable createChild(EntityAgeable var1)
+    {
+    	EntityLiopleurodon baby = new EntityLiopleurodon(this.worldObj);
+    	baby.setSubSpecies(this.getSubSpecies());
+    	return baby;
+    }
 }

@@ -31,10 +31,15 @@ public class ModelPachycephalosaurus extends ModelDinosaurs
     ModelRenderer Tail;
     ModelRenderer Tail1;
 
+	private ModelRenderer headpivot;
+
+	private ModelRenderer headdummy;
+
     public ModelPachycephalosaurus()
     {
         textureWidth = 64;
         textureHeight = 32;
+        setTextureOffset("headdummy.headdummy", 32, 6);
         setTextureOffset("Body.Body", 32, 6);
         setTextureOffset("UpperBody.UpperBody", 37, 8);
         setTextureOffset("LUpperarm.LUpperarm", 45, 0);
@@ -57,10 +62,10 @@ public class ModelPachycephalosaurus extends ModelDinosaurs
         Body.setRotationPoint(0F, 24F, -5F);
         setRotation(Body, 0F, 0F, 0F);
         Body.mirror = true;
-        Body.addBox("Body", -4F, -14F, 0F, 8, 7, 8);
+        Body.addBox("Body", -4F, -15F, 0F, 8, 7, 8);
         UpperBody = new ModelRenderer(this, "UpperBody");
         UpperBody.setRotationPoint(0F, -14.2F, 1F);
-        setRotation(UpperBody, -0.314F, 0F, 0F);
+        setRotation(UpperBody, 0F, 0F, 0F);
         UpperBody.mirror = true;
         UpperBody.addBox("UpperBody", -2.5F, 0F, -5F, 5, 6, 6);
         LUpperarm = new ModelRenderer(this, "LUpperarm");
@@ -76,23 +81,35 @@ public class ModelPachycephalosaurus extends ModelDinosaurs
         LUpperarm.addChild(LForearm);
         UpperBody.addChild(LUpperarm);
         Neck = new ModelRenderer(this, "Neck");
-        Neck.setRotationPoint(0F, 0.4F, -4.5F);
-        setRotation(Neck, -0.1F, 0F, 0F);
+        Neck.setRotationPoint(0F, 1F, -4.5F);
+        setRotation(Neck, -0.4F, 0F, 0F);
         Neck.mirror = true;
-        Neck.addBox("Neck", -2F, 0F, -4F, 4, 4, 4);
+        Neck.addBox("Neck", -2F, -1F, -3F, 4, 4, 4);
+        
+        headpivot = new ModelRenderer(this, "headpivot");
+        headpivot.setRotationPoint(0F, 0F, 0.0F);
+        setRotation(headpivot, 0F, 0F, 0F);
+        
+        headdummy = new ModelRenderer(this, "headdummy");
+        headdummy.setRotationPoint(0F, 0F, -2.5F);
+        headdummy.addBox("headdummy", 0F, 0F, 0F, 1, 1, 1);
+        setRotation(headpivot, 0F, 0F, 0F);
+        
         Head = new ModelRenderer(this, "Head");
-        Head.setRotationPoint(0F, 0F, -2.5F);
+        Head.setRotationPoint(0F, 0F, 0F);
         setRotation(Head, -0.614F, 0F, 0F);
         Head.mirror = true;
         Head.addBox("HornBumps", -4F, -2F, -4F, 8, 4, 2);
         Head.addBox("Dome", -3.5F, -1F, -6F, 7, 8, 7);
+        
         UpperJaw = new ModelRenderer(this, "UpperJaw");
         UpperJaw.setRotationPoint(0F, 7F, -3F);
         setRotation(UpperJaw, 0.514F, 0F, 0F);
         UpperJaw.mirror = true;
         UpperJaw.addBox("UpperJaw", -2F, -2F, -0.5F, 4, 4, 4);
         Head.addChild(UpperJaw);
-        Neck.addChild(Head);
+        Neck.addChild(headdummy);
+        headpivot.addChild(Head);
         UpperBody.addChild(Neck);
         RUpperarm = new ModelRenderer(this, "RUpperarm");
         RUpperarm.setRotationPoint(-2F, 3F, -4F);
@@ -162,6 +179,7 @@ public class ModelPachycephalosaurus extends ModelDinosaurs
         super.render(entity, f, f1, f2, f3, f4, f5);
         setRotationAngles(f, f1, f2, f3, f4, f5, ((EntityDinosaur)entity).isModelized());
         Body.render(f5);
+        headpivot.render(f5);
     }
 
     private void setRotation(ModelRenderer var1, float var2, float var3, float var4)
@@ -173,31 +191,30 @@ public class ModelPachycephalosaurus extends ModelDinosaurs
 
     protected void setRotationAngles(float var1, float var2, float var3, float var4, float var5, float var6, boolean var7)
     {
-        float PI = (float) Math.PI;
-        float initialOffset = PI / 2;
-        float offset = PI * 2 / 11;
-        float currentAngle = 0;
+    	this.headpivot.rotationPointX = this.headdummy.rotationPointX;
+    	this.headpivot.rotationPointY = this.headdummy.rotationPointY + 9;
+    	this.headpivot.rotationPointZ = this.headdummy.rotationPointZ - 8;
+
+    	
         if (!var7){
-        this.Head.rotateAngleZ = var5 / (180F / (float)Math.PI);
-        this.Head.rotateAngleY = var4 / (180F / (float)Math.PI);
+
+        	
+        this.headpivot.rotateAngleX = var5 / (180F / (float)Math.PI);
+        this.headpivot.rotateAngleY = var4 / (180F / (float)Math.PI);
         this.RUpperThigh.rotateAngleX = MathHelper.cos(var1 * 0.6662F) * 1.0F * var2;
         this.LUpperThigh.rotateAngleX = MathHelper.cos(var1 * 0.6662F + (float)Math.PI) * 1.0F * var2;
         //Tail anim
-        this.Tail.rotateAngleY = ((float) Math.pow(0.25F, 1)) * (MathHelper.cos(-0.6F * var1 + initialOffset));
-        currentAngle = Tail.rotateAngleY;
-        this.Tail1.rotateAngleY = ((float) Math.pow(0.25F, 1)) * (MathHelper.cos(-0.6F * var1 + 1F * offset + initialOffset)) - currentAngle;
-        currentAngle = Tail.rotateAngleY + Tail1.rotateAngleY;
+        this.Tail.rotateAngleY = 0.05F * MathHelper.sin(var3 * (float)0.1F + (var2+1));
+        this.Tail1.rotateAngleY = 0.06F * MathHelper.sin(var3 * (float)0.1F + (var2+0));
         }
         else {
-            this.Head.rotateAngleZ = 0;
-            this.Head.rotateAngleY = 0;
+            this.headpivot.rotateAngleX = 0;
+            this.headpivot.rotateAngleY = 0;
             this.RUpperThigh.rotateAngleX = 0;
             this.LUpperThigh.rotateAngleX = 0;
             //Tail anim
             this.Tail.rotateAngleY = 0;
-            currentAngle = 0;
             this.Tail1.rotateAngleY = 0;
-            currentAngle = 0;
         }
     }
 
@@ -215,8 +232,8 @@ public class ModelPachycephalosaurus extends ModelDinosaurs
         }
         else
         {
-            this.UpperBody.rotateAngleX = -0.314F;
-            this.Head.rotateAngleX = -0.614F;
+            this.UpperBody.rotateAngleX = -0.074F;
+            this.Head.rotateAngleX = -0.914F;
         }
     }
 

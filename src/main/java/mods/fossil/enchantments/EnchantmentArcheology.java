@@ -4,6 +4,7 @@ import mods.fossil.Fossil;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentProtection;
 import net.minecraft.enchantment.EnumEnchantmentType;
+import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
 
 public class EnchantmentArcheology  extends Enchantment {
@@ -40,7 +41,7 @@ public class EnchantmentArcheology  extends Enchantment {
     
     public boolean canApply(ItemStack itemStack)
     {
-        return itemStack.isItemStackDamageable() ? true : super.canApply(itemStack);
+    	return itemStack.isItemStackDamageable() ? true : itemStack.getItem() instanceof ItemPickaxe ? super.canApply(itemStack) : true;
     }
     
     /**

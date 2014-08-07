@@ -1,11 +1,12 @@
 package mods.fossil.entity.mob;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.List;
 import java.util.Random;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import mods.fossil.Fossil;
 import mods.fossil.client.gui.GuiPedia;
 import mods.fossil.fossilEnums.EnumDinoType;
@@ -20,6 +21,12 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+
+import org.lwjgl.opengl.GL11;
+
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class EntityNautilus extends EntityWaterMob
 {
@@ -345,4 +352,33 @@ public class EntityNautilus extends EntityWaterMob
  //       p0.PrintPictXY(ocean, 120, 7, 4, 4);
     }
     
+    @SideOnly(Side.CLIENT)
+    public void ShowPedia2(GuiPedia p0)
+    {
+    	p0.reset();
+		p0.AddStringLR("", 150, false);
+
+    	if(getClass().getClassLoader().getResourceAsStream( "assets/fossil/dinopedia/" + "Nautilus" + ".txt" ) != null)
+    	{
+			InputStream fileReader = getClass().getClassLoader().getResourceAsStream( "assets/fossil/dinopedia/" + "Nautilus" + ".txt" );
+			try {
+			BufferedReader bufferedReader = new BufferedReader( new InputStreamReader(fileReader));
+			StringBuffer stringBuffer = new StringBuffer();
+			String line;
+			while ((line = bufferedReader.readLine()) != null) {
+				GL11.glPushMatrix();
+				GL11.glScalef(0.5F, 0.5F, 0.5F);
+				p0.AddStringLR(line, 150, false);
+				GL11.glPopMatrix();
+			}
+			fileReader.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+    	}
+    	else
+    	{
+    		p0.AddStringLR("File not found.", true);
+    	}
+    }
 }

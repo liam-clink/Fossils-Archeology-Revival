@@ -10,9 +10,11 @@ public class FossilOreDictionary
     {
         OreDictionary.registerOre("plankWood", new ItemStack(Fossil.palaePlanks));
         OreDictionary.registerOre("logWood", new ItemStack(Fossil.palmLog));
-        OreDictionary.registerOre("leavesTree", new ItemStack(Fossil.palmLeaves));
-        //OreDictionary.registerOre("slabWood", new ItemStack(Fossil.palaeSingleSlab));
+        OreDictionary.registerOre("treeLeaves", new ItemStack(Fossil.palmLeaves));
+        OreDictionary.registerOre("slabWood", new ItemStack(Fossil.palaeSingleSlab));
         OreDictionary.registerOre("stairWood", new ItemStack(Fossil.palaeStairs));
-        OreDictionary.registerOre("saplingTree", new ItemStack(Fossil.palmSap));
+        OreDictionary.registerOre("treeSapling", new ItemStack(Fossil.palmSap));
+        OreDictionary.registerOre("record", new ItemStack(Fossil.fossilrecordBones));
+        OreDictionary.registerOre("oreFossil", new ItemStack(Fossil.biofossil));
     }
 }

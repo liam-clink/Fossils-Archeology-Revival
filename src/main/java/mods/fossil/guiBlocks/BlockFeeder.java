@@ -183,7 +183,7 @@ public class BlockFeeder extends BlockContainer
     	// Side value: 3
         if (side != 1 && ((metadata & DIRECTION_BITS) + 2) != side) //Not Top and not Front=>Side
         {
-            System.out.println("FEEDER SIDE VALUE:"+String.valueOf((metadata&DIRECTION_BITS)+2)+" , " + side);
+            //System.out.println("FEEDER SIDE VALUE:"+String.valueOf((metadata&DIRECTION_BITS)+2)+" , " + side);
             return this.blockIcon;
         }
         else

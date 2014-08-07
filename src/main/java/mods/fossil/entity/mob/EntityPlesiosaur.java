@@ -600,15 +600,12 @@ public class EntityPlesiosaur extends EntitySwimmingDino implements IMob
         this.OrderStatus = var1;
     }
 
-    public EntityPlesiosaur spawnBabyAnimal(EntityAgeable var1)
-    {
-        return new EntityPlesiosaur(this.worldObj);
-    }
-
     @Override
     public EntityAgeable createChild(EntityAgeable var1)
     {
-        return this.spawnBabyAnimal(var1);
+    	EntityPlesiosaur baby = new EntityPlesiosaur(this.worldObj);
+    	baby.setSubSpecies(this.getSubSpecies());
+    	return baby;
     }
     
     /**

@@ -1,8 +1,11 @@
 package mods.fossil.entity.mob;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.List;
 import java.util.Random;
-import java.util.UUID;
 import java.util.logging.Level;
 
 import mods.fossil.Fossil;
@@ -17,7 +20,6 @@ import mods.fossil.fossilEnums.EnumSituation;
 import mods.fossil.guiBlocks.TileEntityFeeder;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.EnchantmentThorns;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLivingBase;
@@ -25,7 +27,6 @@ import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIControlledByPlayer;
 import net.minecraft.entity.monster.IMob;
-import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -41,9 +42,10 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
+import org.lwjgl.opengl.GL11;
+
 import com.google.common.io.ByteArrayDataInput;
 import com.google.common.io.ByteArrayDataOutput;
-import com.mojang.authlib.GameProfile;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
@@ -581,6 +583,36 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
         //TODO show all blocks the dino can eat
     }
     
+    @SideOnly(Side.CLIENT)
+    public void ShowPedia2(GuiPedia p0)
+    {
+    	p0.reset();
+		p0.AddStringLR("", 150, false);
+
+    	if(getClass().getClassLoader().getResourceAsStream( "assets/fossil/dinopedia/" + String.valueOf(this.SelfType) + ".txt" ) != null)
+    	{
+			InputStream fileReader = getClass().getClassLoader().getResourceAsStream( "assets/fossil/dinopedia/" + String.valueOf(this.SelfType) + ".txt" );
+			try {
+			BufferedReader bufferedReader = new BufferedReader( new InputStreamReader(fileReader));
+			StringBuffer stringBuffer = new StringBuffer();
+			String line;
+			while ((line = bufferedReader.readLine()) != null) {
+				GL11.glPushMatrix();
+				GL11.glScalef(0.5F, 0.5F, 0.5F);
+				p0.AddStringLR(line, 150, false);
+				GL11.glPopMatrix();
+			}
+			fileReader.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+    	}
+    	else
+    	{
+    		p0.AddStringLR("File not found.", true);
+    	}
+    }
+    
     /**
      * retrieves the itemstack it can eat and returns the number of items not used
      */
@@ -975,31 +1007,43 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
             return;
         }
 
-        int j = (new Random()).nextInt(4);
+        int j = (new Random()).nextInt(7);
         //int var4 = this.isModelized() ? 0 : this.SelfType.ordinal();
-        int id = 0;
+        Item item = null;
 
         switch (j)
         {
             case 0:
-            	dropItem(Fossil.legBone,1);
+            	item = Fossil.legBone;
                 break;
 
             case 1:
-            	dropItem(Fossil.claw,1);
+            	item = Fossil.claw;
                 break;
 
             case 2:
-            	dropItem(Fossil.foot,1);
+            	item = Fossil.foot;
                 break;
 
             case 3:
-            	dropItem(Fossil.skull,1);
+            	item = Fossil.skull;
+                break;
+                
+            case 4:
+            	item = Fossil.vertebrae;
+                break;
+                
+            case 5:
+            	item = Fossil.armBone;
+                break;
+                
+            case 6:
+            	item = Fossil.dinoRibCage;
                 break;
         }
 
- //       this.entityDropItem(new ItemStack(id, 1, 0/*, var4*/), 0.5F);
-
+        this.entityDropItem(new ItemStack(item, 1, this.SelfType.ordinal()), 0.5F);
+        
         if (!this.isAdult())
         {
             return;
@@ -1007,26 +1051,39 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
 
         if ((new Random()).nextInt(10000) < 500)
         {
-        j = (new Random()).nextInt(4);
+        	j = (new Random()).nextInt(7);
 
-        switch (j)
-        {
-            case 0:
-            	dropItem(Fossil.legBone,1);
-                break;
-
-            case 1:
-            	dropItem(Fossil.claw,1);
-                break;
-
-            case 2:
-            	dropItem(Fossil.foot,1);
-                break;
-
-            case 3:
-            	dropItem(Fossil.skull,1);
-                break;
-        }
+	        switch (j)
+	        {
+	            case 0:
+	            	item = Fossil.legBone;
+	                break;
+	
+	            case 1:
+	            	item = Fossil.claw;
+	                break;
+	
+	            case 2:
+	            	item = Fossil.foot;
+	                break;
+	
+	            case 3:
+	            	item = Fossil.skull;
+	                break;
+	                
+	            case 4:
+	            	item = Fossil.vertebrae;
+	                break;
+	                
+	            case 5:
+	            	item = Fossil.armBone;
+	                break;
+	                
+	            case 6:
+	            	item = Fossil.dinoRibCage;
+	                break;
+	        }
+	        this.entityDropItem(new ItemStack(item, 1, this.SelfType.ordinal()), 0.5F);
         }
 
         return;
@@ -1108,7 +1165,14 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
         this.faceEntity(var1, 360.0F, 360.0F);
         ItemStack itemstack = var1.inventory.getCurrentItem();
 
-        if (itemstack != null)
+        if (itemstack == null)
+        {
+        	if(var1.isSneaking())
+        		this.nudgeEntity(var1);
+        	else
+                this.faceEntity(var1, 360.0F, 360.0F);	
+        }
+        else
         {
             if (itemstack.getItem() == Items.bone)
             {
@@ -1127,6 +1191,14 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
         }
 
         return false;
+    }
+    
+    public void nudgeEntity(EntityPlayer player)
+    {
+        double x = player.posX - this.posX;
+        double z = player.posZ - this.posZ;
+        
+        this.setPosition(this.posX + (player.posX - this.posX)*0.01F, this.posY, this.posZ + (player.posZ - this.posZ)*0.01F);
     }
 
     protected void updateEntityActionState()

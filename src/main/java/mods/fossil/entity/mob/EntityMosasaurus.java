@@ -13,6 +13,7 @@ import mods.fossil.fossilAI.WaterDinoAIWander;
 import mods.fossil.fossilEnums.EnumDinoType;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityLivingData;
@@ -304,5 +305,13 @@ public class EntityMosasaurus extends EntitySwimmingDino implements IMob
         this.updateSize();
         this.heal(200);
         return par1EntityLivingData;
+    }
+    
+    @Override
+    public EntityAgeable createChild(EntityAgeable var1)
+    {
+    	EntityMosasaurus baby = new EntityMosasaurus(this.worldObj);
+    	baby.setSubSpecies(this.getSubSpecies());
+    	return baby;
     }
 }

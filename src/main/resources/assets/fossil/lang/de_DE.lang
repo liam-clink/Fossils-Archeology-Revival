@@ -1,4 +1,4 @@
-﻿#Updated for 1.7.10 Build 6.3 HEAD21 July 25 2014 
+﻿#Updated for 1.6.4 Build 6.3 HEAD21 July 25 2014 
 #Deutsch (de_DE) Localization File
 
 #Tab Groups
@@ -400,5 +400,3 @@ entity.fossil.PigBoss.name=Anu
 #Records
 item.record_bones.name=Fossil Schallplatte
 item.record_jp_theme.name=JP Theme
-item.record_bones_disc.name=Fossil Schallplatte
-item.record.record_bones_disc.desc=WhiteJoshMan - Bones

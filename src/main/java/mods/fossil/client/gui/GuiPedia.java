@@ -117,11 +117,21 @@ public class GuiPedia extends GuiContainer
         this.fontRendererObj.drawString(str0, 30 + (left0 ? 0 : 121), 12 * ((left0 ? this.left++ : this.right++) + 1), 4210752);
     }
     
+    /**
+     * Add a String to the left or right side, starting with 0
+     * Also set the offset for margin position. Useful when using odd sized text.
+     */
+    public void AddStringLR(String str0, int marginOffset, boolean left0)
+    {
+        this.fontRendererObj.drawString(str0, 30 + (left0 ? 0+marginOffset : 121+marginOffset), 12 * ((left0 ? this.left++ : this.right++) + 1), 4210752);
+    }
+    
     public void AddStringLR(String str0, boolean left0, int r, int g, int b)
     {
         int col = (r << 16) | (g << 8) | b;
         this.fontRendererObj.drawString(str0, 30 + (left0 ? 0 : 121), 12 * ((left0 ? this.left++ : this.right++) + 1), col);
     }
+    
     /**
      * Print a String to X,Y
      */
@@ -266,6 +276,43 @@ public class GuiPedia extends GuiContainer
             {
                 ((EntityGastornis)Fossil.ToPedia).ShowPedia(this);
             }
+    	}
+     	else
+    	{
+			if (Fossil.ToPedia instanceof EntityDinosaur)
+			{
+			    ((EntityDinosaur)Fossil.ToPedia).ShowPedia2(this);
+			}
+			
+			if (Fossil.ToPedia instanceof EntityMammoth)
+			{
+			    ((EntityMammoth)Fossil.ToPedia).ShowPedia2(this);
+			}
+			
+			if (Fossil.ToPedia instanceof EntitySmilodon)
+			{
+			    ((EntitySmilodon)Fossil.ToPedia).ShowPedia2(this);
+			}
+			
+			if (Fossil.ToPedia instanceof EntityDodo)
+			{
+			    ((EntityDodo)Fossil.ToPedia).ShowPedia2(this);
+			}
+			
+			if (Fossil.ToPedia instanceof EntityCoelacanth)
+			{
+			    ((EntityCoelacanth)Fossil.ToPedia).ShowPedia2(this);
+			}
+			
+			if (Fossil.ToPedia instanceof EntityNautilus)
+			{
+			    ((EntityNautilus)Fossil.ToPedia).ShowPedia2(this);
+			}
+			
+			if (Fossil.ToPedia instanceof EntityQuagga)
+			{
+			    ((EntityQuagga)Fossil.ToPedia).ShowPedia2(this);
+			}
     	}
     }
 

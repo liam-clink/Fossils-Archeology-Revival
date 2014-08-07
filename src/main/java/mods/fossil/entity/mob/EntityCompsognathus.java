@@ -17,6 +17,7 @@ import mods.fossil.fossilEnums.EnumDinoType;
 import mods.fossil.fossilEnums.EnumOrderType;
 import mods.fossil.fossilEnums.EnumSituation;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -402,4 +403,12 @@ public class EntityCompsognathus extends EntityDinosaur
 		// TODO Auto-generated method stub
 		
 	}
+	
+    @Override
+    public EntityAgeable createChild(EntityAgeable var1)
+    {
+    	EntityCompsognathus baby = new EntityCompsognathus(this.worldObj);
+    	baby.setSubSpecies(this.getSubSpecies());
+    	return baby;
+    }
 }
