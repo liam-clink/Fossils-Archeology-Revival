@@ -1,3 +1,4 @@
+package mods.fossil.gens.feature;
 /*package mods.fossil.gens;
 
 import java.util.Random;

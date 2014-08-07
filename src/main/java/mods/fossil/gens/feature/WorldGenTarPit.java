@@ -1,4 +1,4 @@
-package mods.fossil.gens.structure;
+package mods.fossil.gens.feature;
 
 import java.util.Random;
 

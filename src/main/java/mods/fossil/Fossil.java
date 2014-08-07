@@ -74,6 +74,8 @@ import mods.fossil.gens.FossilGenerator;
 import mods.fossil.gens.TarGenerator;
 import mods.fossil.gens.VolcanicRockGenerator;
 import mods.fossil.gens.WorldGeneratorPalaeoraphe;
+import mods.fossil.gens.structure.AcademyGenerator;
+import mods.fossil.gens.structure.ShipWreckGenerator;
 import mods.fossil.guiBlocks.BlockAnalyzer;
 import mods.fossil.guiBlocks.BlockCultivate;
 import mods.fossil.guiBlocks.BlockDrum;
@@ -867,10 +869,10 @@ public class Fossil
         GameRegistry.registerWorldGenerator(new WorldGeneratorPalaeoraphe(), 0);
         
         if(FossilOptions.Gen_Academy)
-        //GameRegistry.registerWorldGenerator(new AcademyGenerator());
+        GameRegistry.registerWorldGenerator(new AcademyGenerator(), 0);
         
         if(FossilOptions.Gen_Ships)
-        //GameRegistry.registerWorldGenerator(new ShipWreckGenerator());
+        GameRegistry.registerWorldGenerator(new ShipWreckGenerator(), 0);
         
         GameRegistry.registerWorldGenerator(new TarGenerator(), 0);
         GameRegistry.registerWorldGenerator(new VolcanicRockGenerator(), 0);
