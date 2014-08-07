@@ -1,6 +1,5 @@
 package mods.fossil.gens.structure.shipwreck;
 
-import mods.fossil.gens.structure.academy.AcademyUtil;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 

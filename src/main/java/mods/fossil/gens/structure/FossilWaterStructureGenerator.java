@@ -265,7 +265,7 @@ public class FossilWaterStructureGenerator extends StructureGeneratorBase
 
             case ShipWreckUtil.CUSTOM_SKULL:
                 // Easily set the skull type or player name if you know it:
-                setSkullData(world, "", customData1, x, y, z);
+                setSkullData(world, customData1, x, y, z);
                 break;
 
             case ShipWreckUtil.ITEM_FRAME:

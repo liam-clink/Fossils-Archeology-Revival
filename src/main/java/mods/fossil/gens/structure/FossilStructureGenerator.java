@@ -342,7 +342,7 @@ public class FossilStructureGenerator extends StructureGeneratorBase
 
             case AcademyUtil.CUSTOM_SKULL:
                 // Easily set the skull type or player name if you know it:
-                setSkullData(world, "", customData1, x, y, z);
+                setSkullData(world, customData1, x, y, z);
                 break;
 
             case AcademyUtil.ITEM_FRAME:

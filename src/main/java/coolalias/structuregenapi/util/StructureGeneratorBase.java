@@ -24,10 +24,6 @@ import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
 
-import org.apache.logging.log4j.Level;
-
-import com.mojang.authlib.GameProfile;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRedstoneRepeater;
 import net.minecraft.block.BlockRedstoneTorch;
@@ -53,6 +49,11 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.common.util.FakePlayer;
+
+import org.apache.logging.log4j.Level;
+
+import com.mojang.authlib.GameProfile;
+
 import cpw.mods.fml.common.FMLCommonHandler;
 
 public abstract class StructureGeneratorBase extends WorldGenerator
@@ -92,6 +93,7 @@ public abstract class StructureGeneratorBase extends WorldGenerator
 	private final List<BlockData> postGenBlocks = new LinkedList<BlockData>();
 	
 	private static final GameProfile generatorName = new GameProfile(UUID.fromString("54acf800-054d-11e4-9191-0800200c9a66"), "fake");
+
 	
 	/**
 	 * Basic constructor. Sets generator to notify other blocks of blocks it changes.
@@ -494,18 +496,18 @@ public abstract class StructureGeneratorBase extends WorldGenerator
 	/**
 	 * Method to set skulls not requiring extra rotation data (i.e. wall-mounted skulls whose rotation is determined by metadata)
 	 */
-	public static final boolean setSkullData(World world, String name, int type, int x, int y, int z) {
-		return setSkullData(world, name, type, -1, x, y, z);
+	public static final boolean setSkullData(World world, int type, int x, int y, int z) {
+		return setSkullData(world, type, -1, x, y, z);
 	}
 	
 	/**
 	 * Sets skull type and name for a TileEntitySkull at x/y/z
-	 * @param name Must be a valid player username
+	 * @param name Must be a valid player GameProfile
 	 * @param type Type of skull: 0 Skeleton, 1 Wither Skeleton, 2 Zombie, 3 Human, 4 Creeper
 	 * @param rot Sets the rotation for the skull if positive value is used
 	 * @return false if errors were encountered (i.e. incorrect tile entity at x/y/z)
 	 */
-	public static final boolean setSkullData(World world, String name, int type, int rot, int x, int y, int z)
+	public static final boolean setSkullData(World world, int type, int rot, int x, int y, int z)
 	{
 		TileEntitySkull skull = (world.getTileEntity(x, y, z) instanceof TileEntitySkull ? (TileEntitySkull) world.getTileEntity(x, y, z) : null);
 		
@@ -516,8 +518,7 @@ public abstract class StructureGeneratorBase extends WorldGenerator
 				type = 0;
 			}
 			
-			skull.func_152107_a(type);
-			//func_152106_a(name);
+			skull.func_152107_a(3);
 			
 			if (rot > -1) { skull.func_145903_a(rot % 16); }
 			

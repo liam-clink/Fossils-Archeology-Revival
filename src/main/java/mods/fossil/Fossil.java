@@ -166,6 +166,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.util.EnumHelper;
 import cpw.mods.fml.client.registry.RenderingRegistry;
+import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
@@ -919,7 +920,7 @@ public class Fossil
     {
         if (DebugMode())
         {
-            System.out.println("[FOSSIL]: " + var0);
+            FMLLog.log(Fossil.modid, org.apache.logging.log4j.Level.INFO, var0);
         }
     }
     
