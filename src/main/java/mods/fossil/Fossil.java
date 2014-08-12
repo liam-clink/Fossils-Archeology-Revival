@@ -167,6 +167,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.util.EnumHelper;
 import cpw.mods.fml.client.registry.RenderingRegistry;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Instance;
@@ -193,7 +194,7 @@ import cpw.mods.fml.relauncher.Side;
 public class Fossil
 {
     public static final String modid = "fossil";
-    public static final String modversion = "1.7.10 Build 6.3.1rc1";
+    public static final String modversion = "1.7.10 Build 6.3.1b RC2";
 
     /*
      * Set mod state here
@@ -201,7 +202,7 @@ public class Fossil
      * 1 = Beta build
      * 2 = Release build
      */
-    public static final int modState = 0;
+    public static final int modState = 1;
 
     @SidedProxy(clientSide = "mods.fossil.client.ClientProxy", serverSide = "mods.fossil.CommonProxy")
     public static CommonProxy proxy;
@@ -911,7 +912,7 @@ public class Fossil
         MinecraftForge.EVENT_BUS.register(new FossilToolEvent());
         MinecraftForge.EVENT_BUS.register(new FossilLivingEvent());
         MinecraftForge.EVENT_BUS.register(new FossilInteractEvent());
-        MinecraftForge.EVENT_BUS.register(new FossilConnectionEvent());
+        FMLCommonHandler.instance().bus().register(new FossilConnectionEvent());
 }
 
     public static void ShowMessage(String var6, EntityPlayer var1)

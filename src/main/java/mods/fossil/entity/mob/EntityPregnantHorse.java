@@ -65,14 +65,15 @@ public class EntityPregnantHorse implements IViviparous, IExtendedEntityProperti
     {
 	    // Here we fetch the unique tag compound we set for this class of Extended Properties
 	    NBTTagCompound properties = (NBTTagCompound) compound.getTag(PREGNANT_HORSE_PROP);
+
 	    // Get our data from the custom tag compound
 	    
-	    if (properties.hasKey("EmbryoProgress"))
+	    if (compound.hasKey("EmbryoProgress"))
 	    {
 	    	this.EmbryoProgress = properties.getInteger("EmbryoProgress");
 	    }
 	    
-	    if (properties.hasKey("Inside"))
+	    if (compound.hasKey("Inside"))
 	    {
 	        this.Embryo = EnumAnimalType.values()[properties.getByte("Inside")];
 	    }
