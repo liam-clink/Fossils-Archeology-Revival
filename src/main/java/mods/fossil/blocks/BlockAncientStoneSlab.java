@@ -17,7 +17,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockAncientStoneSlab extends BlockSlab
 {
-    public static final String[] blockStepTypes = { "anicentStone" };
+    public static final String[] blockStepTypes = { "ancientStone" };
     private IIcon theIcon;
 
     public BlockAncientStoneSlab(boolean par2)
@@ -38,21 +38,6 @@ public class BlockAncientStoneSlab extends BlockSlab
     {
         return Item.getItemFromBlock(Fossil.ancientStoneSingleSlab);
     }
-    /*
-    	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLiving par5EntityLiving)
-    	{
-    		if(par1World.getBlock(par2, par3 - 1, par4) == Fossil.palaeSingleSlab.blockID)
-    		{
-    			par1World.setBlock(par2, par3, par4, 0);
-    			par1World.setBlock(par2, par3 - 1, par4, Fossil.palaeDoubleSlab.blockID);
-    		}
-    		if(par1World.getBlock(par2, par3 + 1, par4) == Fossil.palaeSingleSlab.blockID)
-    		{
-    			par1World.setBlock(par2, par3, par4, 0);
-    			par1World.setBlock(par2, par3 + 1, par4, Fossil.palaeDoubleSlab.blockID);
-    		}
-    	}
-    	*/
 
     protected ItemStack createStackedBlock(int par1)
     {

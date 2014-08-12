@@ -282,7 +282,8 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
                 		|| (var2 == Items.egg) 
                 		|| (var2 == Items.chicken) 
                 		|| (var2 == Item.getItemFromBlock(Blocks.wool)) 
-                		|| (var2 == Fossil.icedMeat))
+                		|| (var2 == Fossil.icedMeat)
+                	|| (var2 == Items.leather) )
                 {
                     this.RawIndex = var1;
                     break;

@@ -94,6 +94,7 @@ import mods.fossil.guiBlocks.TileEntityVase;
 import mods.fossil.guiBlocks.TileEntityWorktable;
 import mods.fossil.handler.FossilAchievementHandler;
 import mods.fossil.handler.FossilConnectionEvent;
+import mods.fossil.handler.FossilInteractEvent;
 import mods.fossil.handler.FossilLivingEvent;
 import mods.fossil.handler.FossilOreDictionary;
 import mods.fossil.handler.FossilRecipeHandler;
@@ -192,7 +193,7 @@ import cpw.mods.fml.relauncher.Side;
 public class Fossil
 {
     public static final String modid = "fossil";
-    public static final String modversion = "1.7.10 Build 6.3.1a1";
+    public static final String modversion = "1.7.10 Build 6.3.1rc1";
 
     /*
      * Set mod state here
@@ -469,6 +470,11 @@ public class Fossil
             FossilOptions.TRexFeathers = config.get("toggle_feathers", "TRex Feathers", false).getBoolean(false);
             FossilOptions.DeinonychusFeathers = config.get("toggle_feathers", "Deinonychus Feathers", true).getBoolean(true);
             FossilOptions.GallimimusFeathers = config.get("toggle_feathers",  "Gallimimus Feathers", false).getBoolean(false);
+            
+            //Enchantment Toggle
+            FossilOptions.AllowTableEnchantments = config.get("option", "Allow Table Enchantments", true).getBoolean(true);
+            FossilOptions.AllowBookEnchantments = config.get("option", "Allow Book Enchantments", true).getBoolean(true);
+
 
         }
         catch (Exception var7)
@@ -500,11 +506,11 @@ public class Fossil
     @Mod.EventHandler
     public void Init(FMLInitializationEvent event)
     {	
-        LanguageRegistry.instance().addStringLocalization("itemGroup." + this.modid, "en_US", this.modid);
+       // LanguageRegistry.instance().addStringLocalization("itemGroup." + this.modid, "en_US", this.modid);
         
         //Enchantments
-        paleontology = new EnchantmentPaleontology(e_paleontologyID, 17, EnumEnchantmentType.digger);
-        archeology = new EnchantmentArcheology(e_archeologyID, 17, EnumEnchantmentType.digger);
+        paleontology = new EnchantmentPaleontology(e_paleontologyID, 2, EnumEnchantmentType.digger);
+        archeology = new EnchantmentArcheology(e_archeologyID, 2, EnumEnchantmentType.digger);
         
         //Blocks
         skullLantern = new BlockFossilSkull(true).setHardness(1.0F).setLightLevel(0.9375F).setStepSound(Block.soundTypeStone).setBlockName(LocalizationStrings.SKULL_LANTERN_NAME).setCreativeTab(this.tabFBlocks);
@@ -719,7 +725,7 @@ public class Fossil
 		GameRegistry.registerItem(skull, LocalizationStrings.SKULL_NAME);
 		GameRegistry.registerItem(dinoRibCage, LocalizationStrings.DINO_RIB_CAGE_NAME);
 		GameRegistry.registerItem(vertebrae, LocalizationStrings.VERTEBRAE_NAME);
-		GameRegistry.registerItem(dinosaurModels, LocalizationStrings.DINOSAUR_MODELS);
+		//GameRegistry.registerItem(dinosaurModels, LocalizationStrings.DINOSAUR_MODELS);
 		GameRegistry.registerItem(brokenSapling, LocalizationStrings.BROKEN_SAPLING_NAME);
 		GameRegistry.registerItem(dodoEgg, LocalizationStrings.DODO_EGG_NAME);
 		GameRegistry.registerItem(cultivatedDodoEgg, LocalizationStrings.CULTIVATED_DODO_EGG_NAME);
@@ -840,16 +846,16 @@ public class Fossil
         EntityRegistry.registerModEntity(EntityDinoEgg.class, 			"DinoEgg", 				8, this, 250, 5, true);
         EntityRegistry.registerModEntity(EntityFriendlyPigZombie.class, "FriendlyPigZombie", 	12, this, 250, 5, true);
         EntityRegistry.registerModEntity(EntityPigBoss.class, 			"PigBoss", 				13, this, 250, 5, true);
-        EntityRegistry.registerModEntity(EntityPregnantSheep.class, 	"PregnantSheep", 		19, this, 250, 5, true);
-        EntityRegistry.registerModEntity(EntityPregnantCow.class, 		"PregnantCow", 			20, this, 250, 5, true);
-        EntityRegistry.registerModEntity(EntityPregnantPig.class, 		"PregnantPig", 			21, this, 250, 5, true);
+        //EntityRegistry.registerModEntity(EntityPregnantSheep.class, 	"PregnantSheep", 		19, this, 250, 5, true);
+        //EntityRegistry.registerModEntity(EntityPregnantCow.class, 		"PregnantCow", 			20, this, 250, 5, true);
+        //EntityRegistry.registerModEntity(EntityPregnantPig.class, 		"PregnantPig", 			21, this, 250, 5, true);
         EntityRegistry.registerModEntity(EntitySmilodon.class, 			"Smilodon", 			22, this, 250, 5, true);
         EntityRegistry.registerModEntity(EntityMammoth.class, 			"Mammoth", 				24, this, 250, 5, true);
         EntityRegistry.registerModEntity(EntityDodo.class,           	"Dodo",             	25, this, 250, 5, true);
         EntityRegistry.registerModEntity(EntityDodoEgg.class,           "DodoEgg",              26, this, 250, 5, true);
         EntityRegistry.registerModEntity(EntityCultivatedDodoEgg.class, "CultivatedDodoEgg",    27, this, 250, 5, true);
         EntityRegistry.registerModEntity(EntityCoelacanth.class, 		"Coelacanth",    		28, this, 250, 5, true);
-        EntityRegistry.registerModEntity(EntityPregnantHorse.class, 	"PregnantHorse", 		29, this, 250, 5, true);
+        //EntityRegistry.registerModEntity(EntityPregnantHorse.class, 	"PregnantHorse", 		29, this, 250, 5, true);
         EntityRegistry.registerModEntity(EntityQuagga.class, 			"Quagga", 				30, this, 250, 3, true);
 
         for (int i = 0; i < EnumDinoType.values().length; i++)
@@ -904,6 +910,7 @@ public class Fossil
         proxy.registerChestLoot();
         MinecraftForge.EVENT_BUS.register(new FossilToolEvent());
         MinecraftForge.EVENT_BUS.register(new FossilLivingEvent());
+        MinecraftForge.EVENT_BUS.register(new FossilInteractEvent());
         MinecraftForge.EVENT_BUS.register(new FossilConnectionEvent());
 }
 

@@ -19,6 +19,8 @@ public class FossilOptions
     public static boolean TRexFeathers;
     public static boolean DeinonychusFeathers;
     public static boolean GallimimusFeathers;
+    public static boolean AllowTableEnchantments;
+    public static boolean AllowBookEnchantments;
 
     public void Load(Configuration config)
     {
@@ -36,6 +38,8 @@ public class FossilOptions
         TRexFeathers = config.get("toggle_feathers",  "Trex Feathers", false).getBoolean(false);
         DeinonychusFeathers = config.get("toggle_feathers",  "Deinonychus Feathers", true).getBoolean(true);
         GallimimusFeathers = config.get("toggle_feathers",  "Gallimimus Feathers", false).getBoolean(false);
+        AllowTableEnchantments = config.get("option", "Allow Table Enchantments", true).getBoolean(true);
+        AllowBookEnchantments = config.get("option", "Allow Book Enchantments", true).getBoolean(true);
     }
 
 }

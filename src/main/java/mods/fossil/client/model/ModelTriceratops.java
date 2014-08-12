@@ -118,9 +118,9 @@ public class ModelTriceratops extends ModelDinosaurs
       upperBody.addChild(headpivot);
       upperBody.addBox("upperBody", -3F, 0F, 0F, 6, 5, 5);
     leftFrontUpperLeg = new ModelRenderer(this, "leftFrontUpperLeg");
+    leftFrontUpperLeg.mirror = false;
     leftFrontUpperLeg.setRotationPoint(1.8F, 3F, 0F);
     setRotation(leftFrontUpperLeg, 0F, 0F, 0F);
-    leftFrontUpperLeg.mirror = true;
       leftFrontUpperLeg.addBox("leftFrontUpperLeg", 0F, 0F, -1F, 2, 2, 2);
     leftFrontLowerLeg = new ModelRenderer(this, "leftFrontLowerLeg");
     leftFrontLowerLeg.setRotationPoint(1F, 1F, 0F);
@@ -130,9 +130,9 @@ public class ModelTriceratops extends ModelDinosaurs
       leftFrontUpperLeg.addChild(leftFrontLowerLeg);
       upperBody.addChild(leftFrontUpperLeg);
     rightFrontUpperLeg = new ModelRenderer(this, "rightFrontUpperLeg");
+    rightFrontUpperLeg.mirror = false;
     rightFrontUpperLeg.setRotationPoint(-1.8F, 3F, 0F);
     setRotation(rightFrontUpperLeg, 0F, 0F, 0F);
-    rightFrontUpperLeg.mirror = true;
       rightFrontUpperLeg.addBox("rightFrontUpperLeg", -2F, 0F, -1F, 2, 2, 2);
     rightFrontLowerLeg = new ModelRenderer(this, "rightFrontLowerLeg");
     rightFrontLowerLeg.setRotationPoint(-1F, 1F, 0F);
@@ -159,9 +159,9 @@ public class ModelTriceratops extends ModelDinosaurs
       tail1.addChild(tail2);
       lowerBody.addChild(tail1);
     leftBackUpperLeg = new ModelRenderer(this, "leftBackUpperLeg");
+    leftBackUpperLeg.mirror = false;
     leftBackUpperLeg.setRotationPoint(2F, 1F, 5F);
     setRotation(leftBackUpperLeg, 0F, 0F, 0F);
-    leftBackUpperLeg.mirror = true;
       leftBackUpperLeg.addBox("leftBackUpperLeg", 0F, 0F, -2F, 2, 4, 4);
     leftBackLowerLeg = new ModelRenderer(this, "leftBackLowerLeg");
     leftBackLowerLeg.setRotationPoint(1F, 3.5F, 0F);
@@ -171,19 +171,20 @@ public class ModelTriceratops extends ModelDinosaurs
       leftBackUpperLeg.addChild(leftBackLowerLeg);
       upperBody.addChild(leftBackUpperLeg);
     rightBackUpperLeg = new ModelRenderer(this, "rightBackUpperLeg");
+    rightBackUpperLeg.mirror = false;
     rightBackUpperLeg.setRotationPoint(-2F, 1F, 5F);
     setRotation(rightBackUpperLeg, 0F, 0F, 0F);
-    rightBackUpperLeg.mirror = true;
       rightBackUpperLeg.addBox("rightBackUpperLeg", -2F, 0F, -2F, 2, 4, 4);
     rightBackLowerLeg = new ModelRenderer(this, "rightBackLowerLeg");
     rightBackLowerLeg.setRotationPoint(-1F, 3.5F, 0F);
     setRotation(rightBackLowerLeg, 0F, 0F, 0F);
-    rightBackLowerLeg.mirror = true;
+    rightBackLowerLeg.mirror = false;
       rightBackLowerLeg.addBox("rightBackLowerLeg", -0.5F, -1F, -3F, 1, 2, 3);
       rightBackUpperLeg.addChild(rightBackLowerLeg);
       upperBody.addChild(rightBackUpperLeg);
       upperBody.addChild(lowerBody);
   }
+	
     /**
      * Sets the models various rotation angles then renders the model.
      */

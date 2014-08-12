@@ -135,6 +135,11 @@ public class EntityPachycephalosaurus extends EntityDinosaur
 
     public String getTexture()
     {
+    	if (this.isModelized())
+    	{
+    		return super.getTexture();
+    	}
+    	
         switch (this.getSubSpecies())
         {
             case 1:

@@ -19,6 +19,7 @@ import mods.fossil.fossilEnums.EnumOrderType;
 import mods.fossil.fossilEnums.EnumSituation;
 import mods.fossil.guiBlocks.TileEntityFeeder;
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
@@ -588,10 +589,17 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
     {
     	p0.reset();
 		p0.AddStringLR("", 150, false);
-
-    	if(getClass().getClassLoader().getResourceAsStream( "assets/fossil/dinopedia/" + String.valueOf(this.SelfType) + ".txt" ) != null)
+		String translatePath = "assets/fossil/dinopedia/" + Minecraft.getMinecraft().gameSettings.language +"/";
+		String bioFile = String.valueOf(this.SelfType) + ".txt";
+		
+		if(getClass().getClassLoader().getResourceAsStream( translatePath ) == null)
+		{
+			translatePath = "assets/fossil/dinopedia/" + "en_US" + "/";
+		}
+		
+    	if(getClass().getClassLoader().getResourceAsStream( translatePath + bioFile ) != null)
     	{
-			InputStream fileReader = getClass().getClassLoader().getResourceAsStream( "assets/fossil/dinopedia/" + String.valueOf(this.SelfType) + ".txt" );
+			InputStream fileReader = getClass().getClassLoader().getResourceAsStream( translatePath + bioFile );
 			try {
 			BufferedReader bufferedReader = new BufferedReader( new InputStreamReader(fileReader));
 			StringBuffer stringBuffer = new StringBuffer();
@@ -609,7 +617,11 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
     	}
     	else
     	{
-    		p0.AddStringLR("File not found.", true);
+    		p0.AddStringLR("File not found.", false);
+			GL11.glPushMatrix();
+			GL11.glScalef(0.5F, 0.5F, 0.5F);
+    		p0.AddStringLR(translatePath + bioFile, 150, false);
+			GL11.glPopMatrix();
     	}
     }
     
@@ -901,7 +913,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
             String Status1 = StatCollector.translateToLocal(("status." + var1.toString() + ".head"));
             String Dino = this.SelfType.toString();
             String Status2 = StatCollector.translateToLocal("status." + var1.toString());
-            Fossil.ShowMessage(Status1 + Dino + Status2, (EntityPlayer)this.getOwner());
+            Fossil.ShowMessage(Status1 + Dino + " " + Status2, (EntityPlayer)this.getOwner());
         }
     }
 
@@ -1160,17 +1172,20 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
         }
     }
     
-    protected boolean modelizedInteract(EntityPlayer var1)
+    protected boolean modelizedInteract(EntityPlayer player)
     {
-        this.faceEntity(var1, 360.0F, 360.0F);
-        ItemStack itemstack = var1.inventory.getCurrentItem();
+        ItemStack itemstack = player.inventory.getCurrentItem();
 
         if (itemstack == null)
         {
-        	if(var1.isSneaking())
-        		this.nudgeEntity(var1);
+        	if(player.isSneaking())
+        	{
+        		this.nudgeEntity(player);
+        	}
         	else
-                this.faceEntity(var1, 360.0F, 360.0F);	
+        	{
+                this.faceEntity(player, 360.0F, 360.0F);
+        	}
         }
         else
         {
@@ -1178,12 +1193,12 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
             {
                 this.increaseDinoAge();
                 
-                if (!var1.capabilities.isCreativeMode)
+                if (!player.capabilities.isCreativeMode)
                 --itemstack.stackSize;
 
                 if (itemstack.stackSize <= 0)
                 {
-                    var1.inventory.setInventorySlotContents(var1.inventory.currentItem, (ItemStack)null);
+                    player.inventory.setInventorySlotContents(player.inventory.currentItem, (ItemStack)null);
                 }
 
                 return true;
@@ -1198,7 +1213,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
         double x = player.posX - this.posX;
         double z = player.posZ - this.posZ;
         
-        this.setPosition(this.posX + (player.posX - this.posX)*0.01F, this.posY, this.posZ + (player.posZ - this.posZ)*0.01F);
+        this.setPositionAndUpdate(this.posX + (player.posX - this.posX)*0.01F, this.posY, this.posZ + (player.posZ - this.posZ)*0.01F);
     }
 
     protected void updateEntityActionState()

@@ -22,4 +22,6 @@ public class FossilGuiButton extends GuiButton
 
         IconIndexWidth = par4;
     }
+    
+    public void drawButton(Minecraft par1Minecraft, int par2, int par3) {}
 }

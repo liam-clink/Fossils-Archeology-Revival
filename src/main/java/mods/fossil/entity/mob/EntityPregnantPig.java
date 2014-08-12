@@ -1,210 +1,113 @@
 package mods.fossil.entity.mob;
 
-import io.netty.buffer.ByteBuf;
-
-import com.google.common.io.ByteArrayDataInput;
-import com.google.common.io.ByteArrayDataOutput;
-
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import mods.fossil.Fossil;
 import mods.fossil.client.LocalizationStrings;
 import mods.fossil.client.gui.GuiPedia;
 import mods.fossil.fossilEnums.EnumAnimalType;
 import mods.fossil.fossilInterface.IViviparous;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.passive.*;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
+import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+import net.minecraftforge.common.IExtendedEntityProperties;
 
-public class EntityPregnantPig extends EntityPig implements IViviparous, IEntityAdditionalSpawnData
+public class EntityPregnantPig implements IViviparous, IExtendedEntityProperties
 {
-    public int EmbryoProgress = 0;
-    //public final int EmbryoGrowTime = 3000;
-    public EnumAnimalType Embryo = null;
-    //public String InsideText = "Embyo inside:";
-    //public String GrowingText = "Growing progress:";
+	public final static String PREGNANT_PIG_PROP = "EntityPregnantPig";
+	private final EntityPig pig;
+	
+    public int EmbryoProgress;
+    public EnumAnimalType Embryo;
+	private World worldObj;
+	
 
-    public EntityPregnantPig(World var1)
+    public EntityPregnantPig(EntityPig pig)
     {
-        super(var1);
+    	this.pig = pig;
+    	this.EmbryoProgress = 0;
+    	this.Embryo = null;
     }
-    private void setPedia()
+    
+    //Register properties.
+    public static final void register(EntityPig entity)
+    {
+    entity.registerExtendedProperties(EntityPregnantPig.PREGNANT_PIG_PROP, new EntityPregnantPig(entity));
+    }
+    
+    //Return EntityPregnant* properties for Vanilla entity mobs.
+    public static final EntityPregnantPig get(EntityPig entity)
+    {
+    return (EntityPregnantPig) entity.getExtendedProperties(PREGNANT_PIG_PROP);
+    }
+    
+ // Save any custom data that needs saving here
+    @Override
+    public void saveNBTData(NBTTagCompound compound)
+    {
+    // We need to create a new tag compound that will save everything for our Extended Properties
+    NBTTagCompound properties = new NBTTagCompound();
+
+    // We only have 2 variables currently; save them both to the new tag
+    properties.setInteger("EmbryoProgress", this.EmbryoProgress);
+    if(this.Embryo != null)
+    properties.setByte("Inside", (byte)this.Embryo.ordinal());
+
+    /*
+    Now add our custom tag to the player's tag with a unique name (our property's name). This will allow you to save multiple types of properties and distinguish between them. If you only have one type, it isn't as important, but it will still avoid conflicts between your tag names and vanilla tag names. For instance, if you add some "Items" tag, that will conflict with vanilla. Not good. So just use a unique tag name.
+    */
+    compound.setTag(PREGNANT_PIG_PROP, properties);
+    }
+    
+ // Load whatever data you saved
+    @Override
+    public void loadNBTData(NBTTagCompound compound)
+    {
+	    // Here we fetch the unique tag compound we set for this class of Extended Properties
+	    NBTTagCompound properties = (NBTTagCompound) compound.getTag(PREGNANT_PIG_PROP);
+	    // Get our data from the custom tag compound
+	    
+	    if (properties.hasKey("EmbryoProgress"))
+	    {
+	    	this.EmbryoProgress = properties.getInteger("EmbryoProgress");
+	    }
+	    
+	    if (properties.hasKey("Inside"))
+	    {
+	        this.Embryo = EnumAnimalType.values()[properties.getByte("Inside")];
+	    }
+    }
+
+	@Override
+	public void init(Entity entity, World world) {}
+
+	public void SetEmbryo(EnumAnimalType animalType)
+    {
+        this.Embryo = animalType;
+    }
+	
+	public void setPedia()
     {
         Fossil.ToPedia = (Object)this;
     }
-
-    /**
-     * (abstract) Protected helper method to write subclass entity data to NBT.
-     */
-    public void writeEntityToNBT(NBTTagCompound var1)
-    {
-        super.writeEntityToNBT(var1);
-        var1.setInteger("EmbryoProgress", this.EmbryoProgress);
-        var1.setByte("Inside", (byte)this.Embryo.ordinal());
-    }
-
-    /**
-     * (abstract) Protected helper method to read subclass entity data from NBT.
-     */
-    public void readEntityFromNBT(NBTTagCompound var1)
-    {
-        super.readEntityFromNBT(var1);
-        this.EmbryoProgress = var1.getInteger("EmbryoProgress");
-
-        if (var1.hasKey("Inside"))
-        {
-            this.Embryo = EnumAnimalType.values()[var1.getByte("Inside")];
-        }
-    }
-
-    public void SetEmbryo(EnumAnimalType var1)
-    {
-        this.Embryo = var1;
-    }
-
-    /**
-     * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
-     */
-    public boolean interact(EntityPlayer var1)
-    {
-        ItemStack var2 = var1.inventory.getCurrentItem();
-
-        if (FMLCommonHandler.instance().getSide().isClient() && var2 != null && var2.getItem() == Fossil.dinoPedia)
-        {
-            this.setPedia();
-            var1.openGui(Fossil.instance, 4, this.worldObj, (int)this.posX, (int)this.posY, (int)this.posZ);
-            return true;
-        }
-
-        return super.interact(var1);
-    }
-
-    /**
-     * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
-     * use this to react to sunlight and start to burn.
-     */
-    public void onLivingUpdate()
-    {
-        EntityPig var1 = new EntityPig(this.worldObj);
-
-        if (this.Embryo == null)
-        {
-            this.setDead();
-            this.worldObj.spawnEntityInWorld(var1);
-        }
-
-        ++this.EmbryoProgress;
-        //int var10000 = this.EmbryoProgress;
-        this.getClass();
-
-        if (this.EmbryoProgress == this.Embryo.GrowTime) //var10000 == 3000)
-        {
-            Object var2;
-
-            switch (this.Embryo)//EntityPregnantPig$1.$SwitchMap$mod_Fossil$EnumEmbyos[this.Embyos.ordinal()])
-            {
-                case Pig:
-                    var2 = new EntityPig(this.worldObj);
-                    break;
-
-                case Sheep:
-                    var2 = new EntitySheep(this.worldObj);
-                    break;
-
-                case Cow:
-                    var2 = new EntityCow(this.worldObj);
-                    break;
-
-                case Chicken:
-                    var2 = new EntityChicken(this.worldObj);
-                    break;
-                    
-                case Horse:
-                	var2 = new EntityHorse(this.worldObj);
-                	break;
-
-                case Smilodon:
-                    var2 = new EntitySmilodon(this.worldObj).Imprinting(this.posX, this.posY, this.posZ);
-                    break;
-
-                case Mammoth:
-                    var2 = new EntityMammoth(this.worldObj).Imprinting(this.posX, this.posY, this.posZ);
-                    break;
-
-                default:
-                    var2 = new EntityPig(this.worldObj);
-            }
-
-            ((EntityAnimal)var2).setGrowingAge(-24000);
-            ((EntityAnimal)var2).setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, this.rotationPitch);
-            var1.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, this.rotationPitch);
-
-            for (int var3 = 0; var3 < 7; ++var3)
-            {
-                double var4 = this.rand.nextGaussian() * 0.02D;
-                double var6 = this.rand.nextGaussian() * 0.02D;
-                double var8 = this.rand.nextGaussian() * 0.02D;
-                this.worldObj.spawnParticle("heart", this.posX + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, this.posY + 0.5D + (double)(this.rand.nextFloat() * this.height), this.posZ + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, var4, var6, var8);
-            }
-
-            this.setDead();
-
-            if (!this.worldObj.isRemote)
-            {
-                this.worldObj.spawnEntityInWorld((Entity)var2);
-                this.worldObj.spawnEntityInWorld(var1);
-            }
-        }
-        else
-        {
-            super.onLivingUpdate();
-        }
-    }
-    @SideOnly(Side.CLIENT)
-    public void ShowPedia(GuiPedia p0)
-    {
-        int quot = (int)Math.floor(((float)this.EmbryoProgress / (float)this.Embryo.GrowTime * 100.0F));
-        p0.reset();
-        p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_EMBRYO_INSIDE), false);
-        p0.AddStringLR(StatCollector.translateToLocal("pedia.embryo." + this.Embryo.toString()), false);
-        p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_EMBRYO_GROWING), false);
-        p0.AddStringLR(String.valueOf(quot) + "/100", false);
-        /*
-        String var2 = "";
-        this.UpdatePediaText();
-        int var3 = (int)Math.floor((double)((float)this.EmbyoProgress / 3000.0F * 100.0F));
-        Fossil.ShowMessage(this.InsideText + Fossil.GetEmbyoName(this.Embyos), var1);
-        Fossil.ShowMessage(this.GrowingText + var3 + "%", var1);
-        */
-    }
-
-    public EntityAnimal spawnBabyAnimal(EntityAnimal var1)
-    {
-        return null;
-    }
-
-    /*public void UpdatePediaText()
-    {
-        String var1 = "PediaText.vivi.";
-        this.InsideText = Fossil.GetLangTextByKey("PediaText.vivi.inside");
-        this.GrowingText = Fossil.GetLangTextByKey("PediaText.vivi.growing");
-    }*/
-
+	
 	@Override
-    public void writeSpawnData(ByteBuf buffer)
-    {
-		buffer.writeInt(this.Embryo.ordinal());
-    }
+	public void ShowPedia(GuiPedia p0) {
+		if(this.Embryo != null) {
+	        int quot = (int)Math.floor(((float)this.EmbryoProgress / (float)this.Embryo.GrowTime * 100.0F));
+	
+	        p0.reset();
+	        p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_EMBRYO_INSIDE), false);
+	        p0.AddStringLR(StatCollector.translateToLocal("pedia.embryo." + this.Embryo.toString()), false, 40, 90, 245);
+	        p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_EMBRYO_GROWING), false);
+	        p0.AddStringLR(String.valueOf(quot) + "/100", false);
+		}
+		else
+		{
+	        p0.reset();
+	        p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_EMBRYO_INSIDE), false);
+	        p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_EMBRYO_GROWING), false);
+		}
+	}
 
-	@Override
-    public void readSpawnData(ByteBuf buffer)
-    {
-        this.Embryo = EnumAnimalType.values()[buffer.readInt()];
-    }
 }

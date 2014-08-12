@@ -63,6 +63,7 @@ public class DinoAIEat extends EntityAIBase
      */
     public DinoAIEat(EntityDinosaur Dino0, int Range0)
     {
+    	this.theWorld = Dino0.worldObj;
         this.targetMob = null;
         this.targetFeeder = null;	
         this.dinosaur = Dino0;
@@ -87,6 +88,12 @@ public class DinoAIEat extends EntityAIBase
     {
         int Range = this.SEARCH_RANGE;// Current Searching range
 
+        if(!theWorld.isRemote)
+        {
+	        if (!Fossil.FossilOptions.Dinos_Starve)
+	        	return false;
+        }
+        
         if (!this.dinosaur.IsHungry() && !this.dinosaur.IsDeadlyHungry())
         {
             this.typeofTarget = NO_TARGET;

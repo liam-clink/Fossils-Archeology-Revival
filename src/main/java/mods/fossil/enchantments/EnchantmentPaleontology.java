@@ -9,10 +9,13 @@ import net.minecraft.item.ItemStack;
 
 public class EnchantmentPaleontology  extends Enchantment {
 	
+	private final int weight;
+	
 	public EnchantmentPaleontology(int effectID, int rarity, EnumEnchantmentType enchantmentType) {
 		super(effectID, rarity, enchantmentType);
 		this.setName("paleontology");
 		this.type = enchantmentType;
+		this.weight = rarity;
 	}
 
     /**
@@ -21,6 +24,11 @@ public class EnchantmentPaleontology  extends Enchantment {
     public int getMinEnchantability(int par1)
     {
         return 5 + (par1 - 1) * 10;
+    }
+    
+    public int getWeight()
+    {
+        return this.weight;
     }
 
     /**
@@ -37,6 +45,34 @@ public class EnchantmentPaleontology  extends Enchantment {
     public int getMaxLevel()
     {
         return 3;
+    }
+    
+    //Allow clients to toggle whether or not they want to allow this enchantment on an enchantment table
+    @Override
+    public boolean canApplyAtEnchantingTable(ItemStack stack)
+    {
+    		if(Fossil.FossilOptions.AllowTableEnchantments)
+    		{
+        		return canApply(stack);
+    		}
+    		else
+    		{
+    			return false;
+    		}
+    }
+    
+    //Allow clients to toggle whether or not they want to allow this enchantment on books on an enchantment table
+    @Override
+    public boolean isAllowedOnBooks()
+    {
+    		if(Fossil.FossilOptions.AllowBookEnchantments)
+    		{
+        		return true;
+    		}
+    		else
+    		{
+    			return false;
+    		}
     }
     
     public boolean canApply(ItemStack itemStack)

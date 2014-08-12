@@ -1,9 +1,9 @@
-﻿#Updated for 1.6.4 Build 6.3 HEAD21 July 25 2014 
+﻿#Updated for 1.7.10 Build 6.3.1 August 11 2014 
 #English (en_US) Localization File
 
 #Tab Groups
-itemgroup.FBlocks=Ancient Blocks
 itemgroup.FCombat=Ancient Equipment
+itemgroup.FBlocks=Ancient Blocks
 itemgroup.FFood=Ancient Foods
 itemgroup.FItems=Ancient Items
 itemgroup.FMaterial=Ancient Materials
@@ -61,8 +61,8 @@ tile.palaeorapheLog.name=Palaeoraphe Log
 tile.palaeorapheLeaves.name=Palaeoraphe Leaves
 tile.palaeorapheSapling.name=Palaeoraphe Sapling
 tile.palaeoraphePlanks.name=Palaeoraphe Planks
-tile.palaeorapheSlab.name=Palaeoraphe Slab
-tile.palaeorapheSlabDouble.name=Palaeoraphe Slab
+tile.palaeorapheSlab.palae.name=Palaeoraphe Slab
+tile.palaeorapheSlabDouble.palae.name=Palaeoraphe Double Slab
 tile.palaeorapheStairs.name=Palaeoraphe Stairs
 tile.volcanicAsh.name=Volcanic Ash
 tile.volcanicRock.name=Volcanic Rock
@@ -82,8 +82,12 @@ tile.ancientStoneStairs.name=Ancient Stone Stairs
 tile.figurine.name=Wooden Figurine
 tile.sifter.name=Sifter
 tile.volcanicStairs.name=Volcanic Stairs
-tile.volcanicSlab.name=Volcanic Slab
-tile.volcanicSlabDouble.name=Volcanic Slab
+tile.volcanicSlab.volcanicBrick.name=Volcanic Slab
+tile.volcanicSlabDouble.volcanicBrick.name=Volcanic Double Slab
+tile.ancientWoodSlab.ancientWood.name=Ancient Wood Slab
+tile.ancientWoodDoubleSlab.ancientWood.name=Ancient Wood Slab
+tile.ancientStoneSlab.ancientStone.name=Ancient Stone Slab
+tile.ancientStoneDoubleSlab.ancientStone.name=Ancient Stone Slab
 
 #Collectables
 tile.figurine.figurine_steve_pristine.name=Pristine Steve Figurine
@@ -187,7 +191,7 @@ item.claw.Triceratops.name=Triceratops Horn
 item.claw.Velociraptor.name=Velociraptor Claw
 item.claw.TRex.name=Tyrannosaurus Tooth
 item.claw.Pterosaur.name=Pterosaur Finger
-item.claw.Plesiosaur.name=Plesiosaur Flipper
+item.claw.Plesiosaur.name=Plesiosaur Teeth
 item.claw.Mosasaurus.name=Mosasaurus Tooth
 item.claw.Liopleurodon.name=Liopleurodon Gastralias
 item.claw.Stegosaurus.name=Stegosaurus Thagomizer
@@ -395,24 +399,24 @@ order.Follow=Follow
 order.FreeMove=Free Move
 
 #Dinosaur status chat messages
-status.Hungry.head= 
-status.Hungry= is hungry.
+status.Hungry.head=
+status.Hungry=is hungry.
 status.Starve.head=
-status.Starve= was starved to death.
+status.Starve=was starved to death.
 status.LearningChest.head=A 
-status.LearningChest= has learned how to use chests.
+status.LearningChest=has learned how to use chests.
 status.Betrayed.head=This 
-status.Betrayed= won't trust mankind anymore.
+status.Betrayed=won't trust mankind anymore.
 status.NoSpace.head=
-status.NoSpace= doesn't have enough space to grow.
+status.NoSpace=doesn't have enough space to grow.
 status.StarveEsc.head=
-status.StarveEsc= has escaped because of starvation.
-status.SJLBite= bit the Siu-Jiu-Le and ran away.
-status.ChewTime= needs time to chew.
-status.Full.head= This 
-status.Full= is full.
+status.StarveEsc=has escaped because of starvation.
+status.SJLBite=bit the Siu-Jiu-Le and ran away.
+status.ChewTime=needs time to chew.
+status.Full.head=This 
+status.Full=is full.
 status.Nervous.Head=You made the little 
-status.Nervous= too nervous to hunt itself.
+status.Nervous=too nervous to hunt itself.
 status.GemErrorYoung=This T-Rex is still too young.
 status.GemErrorHealth=The scarab cannot afford such strong life energy.
 status.GemErrorTamed=This T-Rex has already been tamed.
@@ -501,8 +505,8 @@ fpzSpeaker.anuSommon=All hail Anu!!
 dinoegg.hatched=A dinosaur egg has hatched!
 dinoegg.noSpace=This egg cannot spawn here.
 dinoegg.head=An egg of 
-dinoegg.dry= died because it was too dry.	
-dinoegg.cold= died because it was too cold.
+dinoegg.dry=died because it was too dry.
+dinoegg.cold=died because it was too cold.
 
 #Cultivator chat messages
 cultivate.outBreak=Warning! Cultivating failed!
@@ -522,4 +526,5 @@ entity.fossil.PigBoss.name=Anu
 
 #Records
 item.record_bones.name=Fossil Record
-item.record_jp_theme.name=JP Theme
+item.record_bones_disc.name=Fossil Record
+item.record.record_bones_disc.desc=WhiteJoshMan - Bones

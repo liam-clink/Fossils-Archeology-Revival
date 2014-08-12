@@ -130,21 +130,6 @@ public class ItemDinosaurModels extends Item {
         return var8 != null;
     }
 
-    private EnumDinoType getRandomModel()
-    {
-        EnumDinoType[] var1 = EnumDinoType.values();
-        int var2 = var1.length;
-        Random var4 = new Random();
-        EnumDinoType var3;
-
-        do
-        {
-            var3 = var1[var4.nextInt(var2)];
-        }
-        while (!var3.isModelable());
-
-        return var3;
-    }
     /**
      * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
      */

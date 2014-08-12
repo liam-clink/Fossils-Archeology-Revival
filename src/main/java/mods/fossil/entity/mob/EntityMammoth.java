@@ -416,31 +416,7 @@ public class EntityMammoth extends EntityPrehistoric implements IShearable
     @SideOnly(Side.CLIENT)
     public void ShowPedia2(GuiPedia p0)
     {
-    	p0.reset();
-		p0.AddStringLR("", 150, false);
-
-    	if(getClass().getClassLoader().getResourceAsStream( "assets/fossil/dinopedia/" + "Mammoth" + ".txt" ) != null)
-    	{
-			InputStream fileReader = getClass().getClassLoader().getResourceAsStream( "assets/fossil/dinopedia/" + "Mammoth" + ".txt" );
-			try {
-			BufferedReader bufferedReader = new BufferedReader( new InputStreamReader(fileReader));
-			StringBuffer stringBuffer = new StringBuffer();
-			String line;
-			while ((line = bufferedReader.readLine()) != null) {
-				GL11.glPushMatrix();
-				GL11.glScalef(0.5F, 0.5F, 0.5F);
-				p0.AddStringLR(line, 150, false);
-				GL11.glPopMatrix();
-			}
-			fileReader.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-    	}
-    	else
-    	{
-    		p0.AddStringLR("File not found.", true);
-    	}
+    	super.ShowPedia2(p0, "Mammoth");
     }    
     
     public EntityAnimal spawnBabyAnimal(EntityAnimal var1)

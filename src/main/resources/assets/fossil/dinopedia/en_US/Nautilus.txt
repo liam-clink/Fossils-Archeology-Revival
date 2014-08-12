@@ -2,7 +2,7 @@ Nautilus "Sailor"
 "nawt-i-luhs"
 
 Length: 20cm
-Height:
+Height: 1m
 Area: Indo-Pacific
 Climate: Tropical*
 Period: Triassic - Present

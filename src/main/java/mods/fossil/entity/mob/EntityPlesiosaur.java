@@ -9,6 +9,7 @@ import org.lwjgl.input.Keyboard;
 
 import mods.fossil.Fossil;
 import mods.fossil.fossilAI.DinoAIAttackOnCollide;
+import mods.fossil.fossilAI.DinoAIEat;
 import mods.fossil.fossilAI.DinoAIFishing;
 import mods.fossil.fossilAI.DinoAIFollowOwner;
 import mods.fossil.fossilAI.DinoAIRideGround;
@@ -73,6 +74,11 @@ public class EntityPlesiosaur extends EntitySwimmingDino implements IMob
     
     private WaterDinoAIWander aiWaterDinoWander = new WaterDinoAIWander(this, 1.0D);
     private DinoAIWander aiDinoWander = new DinoAIWander(this, 1.0D);
+    
+    private WaterDinoAIHunt aiWaterDinoHunt = new WaterDinoAIHunt(this, EntityLiving.class, 500, false, 0.02D);
+    
+    private WaterDinoAIEat aiWaterDinoEat = new WaterDinoAIEat(this, 50);
+    private DinoAIEat aiDinoEat = new DinoAIEat(this, 20);
 
     public EntityPlesiosaur(World var1)
     {
@@ -92,16 +98,15 @@ public class EntityPlesiosaur extends EntitySwimmingDino implements IMob
         this.maxSize = 6.0F;
         
         this.getNavigator().setCanSwim(true);
+        this.tasks.addTask(6, this.aiWaterDinoWander);
+        this.tasks.addTask(5, this.aiWaterDinoEat);
+        this.tasks.addTask(5, this.aiWaterDinoHunt);
         this.tasks.addTask(3, new DinoAIAttackOnCollide(this, 1.1D, true));
         this.tasks.addTask(4, new DinoAIFollowOwner(this, 5.0F, 2.0F, 1.0F));
-      //  this.tasks.addTask(7, new DinoAIEat(this, 24));
         this.tasks.addTask(8, new DinoAIFishing(this, /*this.HuntLimit,*/ 1));
         this.tasks.addTask(10, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(11, new EntityAILookIdle(this));
         tasks.addTask(1, new DinoAIRideGround(this, 3)); // mutex all
-        
-        this.tasks.addTask(5, new WaterDinoAIEat(this, 50));
-        this.targetTasks.addTask(5, new WaterDinoAIHunt(this, EntityLiving.class, 500, false, 0.02D));
 
 
        // this.tasks.addTask(2, new EntityAIAvoidEntity(this, EntityMosasaurus.class, 16.0F, 0.8D, 1.33D));
@@ -191,15 +196,22 @@ public class EntityPlesiosaur extends EntitySwimmingDino implements IMob
     public void onUpdate()
     {
         super.onUpdate();
-        
+        /*
         if(this.isInWater()){
         	this.tasks.removeTask(this.aiDinoWander);
+        	this.tasks.removeTask(this.aiDinoEat);
         	this.tasks.addTask(6, this.aiWaterDinoWander);
+        	this.tasks.addTask(5, this.aiWaterDinoEat);
+        	this.tasks.addTask(5, this.aiWaterDinoHunt);
         }
         else {
         	this.tasks.removeTask(this.aiWaterDinoWander);
+        	this.tasks.removeTask(this.aiWaterDinoEat);
+        	this.tasks.removeTask(this.aiWaterDinoHunt);
         	this.tasks.addTask(6, this.aiDinoWander);
+        	this.tasks.addTask(5, this.aiDinoEat);
         }
+        */
     }
 
     /**
