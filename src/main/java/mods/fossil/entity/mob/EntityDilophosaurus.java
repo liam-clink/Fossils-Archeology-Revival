@@ -365,47 +365,47 @@ public class EntityDilophosaurus extends EntityDinosaur
     /**
      * Called when the entity is attacked.
      */
-    public boolean attackEntityFrom(DamageSource var1, float var2)
+    public boolean attackEntityFrom(DamageSource damagesource, float damageamount)
     {
-        Entity var3 = var1.getEntity();
+        Entity entity = damagesource.getEntity();
         boolean var4 = false;
         this.setSitting(false);
 
-        if (var3 != null && !(var3 instanceof EntityPlayer) && !(var3 instanceof EntityArrow))
+        if (entity != null && !(entity instanceof EntityPlayer) && !(entity instanceof EntityArrow))
         {
-            var2 = (var2 + 1) / 2;
+            damageamount = (damageamount + 1) / 2;
         }
 
-        if (super.attackEntityFrom(var1, var2))
+        if (super.attackEntityFrom(damagesource, damageamount))
         {
             if (!this.isAngry())
             {
-                if (var3 instanceof EntityArrow && ((EntityArrow)var3).shootingEntity != null)
+                if (entity instanceof EntityArrow && ((EntityArrow)entity).shootingEntity != null)
                 {
-                    var3 = ((EntityArrow)var3).shootingEntity;
+                    entity = ((EntityArrow)entity).shootingEntity;
                 }
 
-                if (var3 instanceof EntityLiving)
+                if (entity instanceof EntityLiving)
                 {
-                    this.setTarget((EntityLiving)var3);
+                    this.setTarget((EntityLiving)entity);
                 }
 
-                if (var3 instanceof EntityPlayer && this.isTamed() && ((EntityPlayer)var3) == this.getOwner())
+                if (entity instanceof EntityPlayer && this.isTamed() && ((EntityPlayer)entity) == this.getOwner())
                 {
                     //Hit by the owner->untame
-                    this.setTamed(false);
-                    //this.setOwner("");
                     this.SendStatusMessage(EnumSituation.Betrayed);
+                    this.setTamed(false);
+                    this.setOwner("");
                     this.ItemInMouth = null;
                     this.setAngry(true);
-                    this.setTarget((EntityLiving)var3);
+                    this.setTarget(entity);
                     this.PreyChecked = true;
                     var4 = true;
                 }
             }
-            else if (var3 != this && var3 != null)
+            else if (entity != this && entity != null)
             {
-                this.entityToAttack = var3;
+                this.entityToAttack = entity;
             }
 
             return true;

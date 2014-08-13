@@ -258,25 +258,25 @@ public class EntityDeinonychus extends EntityDinosaur
     /**
      * Called when the entity is attacked.
      */
-    public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
+    public boolean attackEntityFrom(DamageSource damagesource, float damageamount)
     {
-    	super.attackEntityFrom(par1DamageSource, par2);
+    	super.attackEntityFrom(damagesource, damageamount);
         if (this.isEntityInvulnerable())
         {
             return false;
         }
         else
         {
-            Entity entity = par1DamageSource.getEntity();
+            Entity entity = damagesource.getEntity();
             this.aiSit.setSitting(false);
             
 
             if (entity != null && !(entity instanceof EntityPlayer) && !(entity instanceof EntityArrow))
             {
-                par2 = (par2 + 1.0F) / 2.0F;
+                damageamount = (damageamount + 1.0F) / 2.0F;
             }
 
-            return super.attackEntityFrom(par1DamageSource, par2);
+            return super.attackEntityFrom(damagesource, damageamount);
         }
     }
 

@@ -35,7 +35,7 @@ public class ItemDinosaurBones extends Item {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIconFromDamage(int damage) {
-	return icons[damage];
+		return icons[damage];
 	}
 	
 	@Override

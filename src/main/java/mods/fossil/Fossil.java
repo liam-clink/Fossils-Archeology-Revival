@@ -194,7 +194,7 @@ import cpw.mods.fml.relauncher.Side;
 public class Fossil
 {
     public static final String modid = "fossil";
-    public static final String modversion = "1.7.10 Build 6.3.1b RC2";
+    public static final String modversion = "1.7.10 Build 6.3.1b RC4";
 
     /*
      * Set mod state here
@@ -609,7 +609,7 @@ public class Fossil
         armBone = new ItemDinosaurBones("armBone").setUnlocalizedName(LocalizationStrings.ARM_BONE_NAME);
         dinoRibCage = new ItemDinosaurBones("dinoRibCage").setUnlocalizedName(LocalizationStrings.DINO_RIB_CAGE_NAME);
         vertebrae = new ItemDinosaurBones("vertebrae").setUnlocalizedName(LocalizationStrings.VERTEBRAE_NAME);
-        dinosaurModels = new ItemDinosaurModels().setUnlocalizedName(LocalizationStrings.DINOSAUR_MODELS).setCreativeTab(this.tabFBones);
+        //dinosaurModels = new ItemDinosaurModels().setUnlocalizedName(LocalizationStrings.DINOSAUR_MODELS).setCreativeTab(this.tabFBones);
         
         brokenSapling = new ForgeItem("Palae_Fossil").setUnlocalizedName(LocalizationStrings.BROKEN_SAPLING_NAME).setCreativeTab(this.tabFMaterial);
         dodoEgg = new ItemDodoEgg().setUnlocalizedName(LocalizationStrings.DODO_EGG_NAME);
@@ -724,8 +724,9 @@ public class Fossil
 		GameRegistry.registerItem(claw, LocalizationStrings.CLAW_NAME);
 		GameRegistry.registerItem(foot, LocalizationStrings.FOOT_NAME);
 		GameRegistry.registerItem(skull, LocalizationStrings.SKULL_NAME);
-		GameRegistry.registerItem(dinoRibCage, LocalizationStrings.DINO_RIB_CAGE_NAME);
 		GameRegistry.registerItem(vertebrae, LocalizationStrings.VERTEBRAE_NAME);
+		GameRegistry.registerItem(armBone, LocalizationStrings.ARM_BONE_NAME);
+		GameRegistry.registerItem(dinoRibCage, LocalizationStrings.DINO_RIB_CAGE_NAME);
 		//GameRegistry.registerItem(dinosaurModels, LocalizationStrings.DINOSAUR_MODELS);
 		GameRegistry.registerItem(brokenSapling, LocalizationStrings.BROKEN_SAPLING_NAME);
 		GameRegistry.registerItem(dodoEgg, LocalizationStrings.DODO_EGG_NAME);

@@ -1210,9 +1210,6 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
     
     public void nudgeEntity(EntityPlayer player)
     {
-        double x = player.posX - this.posX;
-        double z = player.posZ - this.posZ;
-        
         this.setPositionAndUpdate(this.posX + (player.posX - this.posX)*0.01F, this.posY, this.posZ + (player.posZ - this.posZ)*0.01F);
     }
 
