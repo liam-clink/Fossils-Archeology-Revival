@@ -7,7 +7,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
@@ -25,8 +25,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class BlockFeeder extends BlockContainer
 {
     private Random furnaceRand = new Random();
-    //private final boolean isActive;
-    //private static boolean keepFurnaceInventory = false;
     private IIcon Top1;//None
     private IIcon Top2;//Herb
     private IIcon Top3;//Carn
@@ -43,14 +41,18 @@ public class BlockFeeder extends BlockContainer
     private static final int BOTH_BITS = 12;
     
     private static final int DIRECTION_BITS = 3;
-    
-    //MetaDataInfo: &8 == has Herbivore, &16==has Carnivore Food
-    public BlockFeeder()//, boolean var2)
+
+    public BlockFeeder()
     {
-        super(Material.rock);
-       // this.isActive = var2;
+        super(Material.iron);
     }
 
+    @SideOnly(Side.CLIENT)
+    public Item getItem(World world, int x, int y, int z)
+    {
+        return Item.getItemFromBlock(Fossil.feederActive);
+    }
+    
     /**
      * Returns the ID of the items to drop on destruction.
      */
@@ -59,20 +61,19 @@ public class BlockFeeder extends BlockContainer
     {
         return Item.getItemFromBlock(Fossil.feederActive);
     }
-    
-    public int getRenderType()
-    {
-    	return 2303;
-    }
 
     /**
      * Called whenever the block is added into the world. Args: world, x, y, z
      */
-    public void onBlockAdded(World var1, int var2, int var3, int var4)
+    public void onBlockAdded(World world, int x, int y, int z)
     {
-        super.onBlockAdded(var1, var2, var3, var4);
-        this.setDefaultDirection(var1, var2, var3, var4);
+        super.onBlockAdded(world, x, y, z);
+        this.setDefaultDirection(world, x, y, z);
     }
+    
+    public int getRenderType() {
+        return Fossil.feederRenderID;
+       }
 
     /**
      * set a blocks direction
@@ -85,26 +86,27 @@ public class BlockFeeder extends BlockContainer
             Block block1 = world.getBlock(x, y, z + 1);
             Block block2 = world.getBlock(x - 1, y, z);
             Block block3 = world.getBlock(x + 1, y, z);
+            
             byte b0 = 3;
 
             if (block.func_149730_j() && !block1.func_149730_j())
             {
-                b0 = 3 - 2;
+                b0 = 3;
             }
 
             if (block1.func_149730_j() && !block.func_149730_j())
             {
-                b0 = 2 - 2;
+                b0 = 2;
             }
 
             if (block2.func_149730_j() && !block3.func_149730_j())
             {
-                b0 = 5 - 2;
+                b0 = 5;
             }
 
             if (block3.func_149730_j() && !block2.func_149730_j())
             {
-                b0 = 4 - 2;
+                b0 = 4;
             }
 
             world.setBlockMetadataWithNotify(x, y, z, b0, 2);
@@ -112,55 +114,10 @@ public class BlockFeeder extends BlockContainer
     }
 
     /**
-     * A randomly called display update to be able to add particles or other items for display
-     */
-    public void randomDisplayTick(World var1, int var2, int var3, int var4, Random var5)
-    {
-    	int var6 = var1.getBlockMetadata(var2, var3, var4);
-        if ((var6&BOTH_BITS)!=0 && var5.nextInt(25)==0)//this.isActive)
-        {
-            float var7 = (float)var2 + 0.5F;
-            float var8 = (float)var3 + 0.0F + var5.nextFloat() * 6.0F / 16.0F;
-            float var9 = (float)var4 + 0.5F;
-            float var10 = 0.52F;
-            float var11 = var5.nextFloat() * 0.6F - 0.3F;
-
-            if ((var6&DIRECTION_BITS) == 4-2)
-            {
-                var1.spawnParticle("smoke", (double)(var7 - var10), (double)var8, (double)(var9 + var11), 0.0D, 0.0D, 0.0D);
-                //var1.spawnParticle("flame", (double)(var7 - var10), (double)var8, (double)(var9 + var11), 0.0D, 0.0D, 0.0D);
-            }
-            else if ((var6&DIRECTION_BITS) == 5-2)
-            {
-                var1.spawnParticle("smoke", (double)(var7 + var10), (double)var8, (double)(var9 + var11), 0.0D, 0.0D, 0.0D);
-                //var1.spawnParticle("flame", (double)(var7 + var10), (double)var8, (double)(var9 + var11), 0.0D, 0.0D, 0.0D);
-            }
-            else if ((var6&DIRECTION_BITS) == 2-2)
-            {
-                var1.spawnParticle("smoke", (double)(var7 + var11), (double)var8, (double)(var9 - var10), 0.0D, 0.0D, 0.0D);
-                //var1.spawnParticle("flame", (double)(var7 + var11), (double)var8, (double)(var9 - var10), 0.0D, 0.0D, 0.0D);
-            }
-            else if ((var6&DIRECTION_BITS) == 3-2)
-            {
-                var1.spawnParticle("smoke", (double)(var7 + var11), (double)var8, (double)(var9 + var10), 0.0D, 0.0D, 0.0D);
-                //var1.spawnParticle("flame", (double)(var7 + var11), (double)var8, (double)(var9 + var10), 0.0D, 0.0D, 0.0D);
-            }
-        }
-    }
-
-    /**
-     * Returns the block texture based on the side being looked at.  Args: side
-     */
-    /*public int getBlockTextureFromSide(int var1)
-    {
-        return var1 == 1 ? 18 : (var1 == 0 ? 18 : (var1 == 3 ? 34 : 35));
-    }*/
-    @SideOnly(Side.CLIENT)
-
-    /**
      * When this method is called, your block should register all the icons it needs with the given IconRegister. This
      * is the only chance you get to register icons.
      */
+    @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister par1IconRegister)
     {
         this.blockIcon = par1IconRegister.registerIcon("fossil:Feeder_Sides");
@@ -178,24 +135,21 @@ public class BlockFeeder extends BlockContainer
     /**
      * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
      */
-    public IIcon getIcon(int side, int metadata)
+    public IIcon getIcon(int side, int meta)
     {
-    	// Side value: 3
-        if (side != 1 && ((metadata & DIRECTION_BITS) + 2) != side) //Not Top and not Front=>Side
-        {
-            //System.out.println("FEEDER SIDE VALUE:"+String.valueOf((metadata&DIRECTION_BITS)+2)+" , " + side);
-            return this.blockIcon;
-        }
-        else
-        {
-            if (side == 0) //Bottom
-            {
-                return this.Bottom;
-            }
-
-            if (side == 1) //Top
-            {
-                switch (metadata & BOTH_BITS)
+    	if(side == 0)
+    	{
+    		return this.Bottom;
+    	}
+    	else if(side != 1 && ((meta & DIRECTION_BITS) + 2) != side)
+    	{
+    		return this.blockIcon;
+    	}
+    	else
+    	{
+    		if (side == 1)
+    		{
+    			switch (meta & BOTH_BITS)
                 {
                     case NO_BIT:
                         return this.Top1;//no food
@@ -212,7 +166,7 @@ public class BlockFeeder extends BlockContainer
             }
             else//Front
             {
-                switch (metadata & BOTH_BITS)
+                switch (meta & BOTH_BITS)
                 {
                     case NO_BIT:
                         return this.Front1;//no food
@@ -227,60 +181,56 @@ public class BlockFeeder extends BlockContainer
                         return this.Front4;//both
                 }
             }
-        }
-
-        return this.blockIcon;
+    		
+    	}
+    	return this.blockIcon;
     }
 
     /**
      * Called upon block activation (right click on the block.)
      */
-    public boolean onBlockActivated(World var1, int var2, int var3, int var4, EntityPlayer var5, int var6, float var7, float var8, float var9)
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int var6, float var7, float var8, float var9)
     {
-        if (var1.isRemote)
+        if (world.isRemote)
         {
             return true;
         }
         else
         {
-        	var5.openGui(Fossil.instance, 2, var1, var2, var3, var4);
+            TileEntityFeeder tileentity = (TileEntityFeeder)world.getTileEntity(x, y, z);
+
+            if (tileentity != null)
+            {
+                player.openGui(Fossil.instance, 2, world, x, y, z);
+            }
+
             return true;
         }
     }
 
-    public static void updateFurnaceBlockState(boolean herb,boolean carn, World var1, int var2, int var3, int var4)
+    public static void updateFurnaceBlockState(boolean herb, boolean carn, World world, int x, int y, int z)
     {
-    	if(var1.getBlock(var2, var3, var4)==Fossil.feederIdle)//won't be used anymore
-    		var1.setBlock(var2, var3, var4,Fossil.feederActive,0,2);
-        int var5 = var1.getBlockMetadata(var2, var3, var4);
-        //System.out.println("FEEDER INPUT:HERB:"+String.valueOf(herb)+" CARN:"+String.valueOf(carn));
-        //System.out.println("FEEDER BEFORE:"+String.valueOf(var5));
-        if(herb)
-        	var5|=HERB_BIT;
-        else
-        	var5&=~HERB_BIT;
-        if(carn)
-        	var5|=CARN_BIT;
-        else
-        	var5&=~CARN_BIT;
-        //System.out.println("FEEDER AFTER:"+String.valueOf(var5));
-        var1.setBlockMetadataWithNotify(var2, var3, var4, var5, 2);
-        /*TileEntity var6 = var1.getTileEntity(var2, var3, var4);
-        keepFurnaceInventory = true;
+        int meta = world.getBlockMetadata(x, y, z);
+        TileEntity tileentity = world.getTileEntity(x, y, z);
 
-        if (var0)
-        {
-            var1.setBlock(var2, var3, var4, Fossil.feederActive.blockID);
-        }
-        else
-        {
-            var1.setBlock(var2, var3, var4, Fossil.feederIdle.blockID);
-        }
+    	world.setBlock(x, y, z,Fossil.feederActive);
 
-        keepFurnaceInventory = false;
-        var1.setBlock(var2, var3, var4, var5);
-        var6.validate();
-        var1.setBlockTileEntity(var2, var3, var4, var6);*/
+    	if(herb) //If there's VEGGIES
+    		meta |= HERB_BIT;
+        else //If there's NO VEGGIES
+        	meta &= ~HERB_BIT;
+        if(carn) //If there's MEAT
+        	meta |= CARN_BIT;
+        else //If there's NO MEAT
+        	meta &= ~CARN_BIT;
+                
+        world.setBlockMetadataWithNotify(x, y, z, meta, 2);
+
+        if (tileentity != null)
+        {
+            tileentity.validate();
+            world.setTileEntity(x, y, z, tileentity);
+        }
     }
 
     /**
@@ -294,36 +244,36 @@ public class BlockFeeder extends BlockContainer
     /**
      * Called when the block is placed in the world.
      */
-    public void onBlockPlacedBy(World var1, int var2, int var3, int var4, EntityLiving var5, ItemStack par6ItemStack)
+    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLivingBase, ItemStack itemstack)
     {
-        int var6 = MathHelper.floor_double((double)(var5.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+        int entityDirection = MathHelper.floor_double((double)(entityLivingBase.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
 
-        if (var6 == 0)
+        if (entityDirection == 0)
         {
-            var1.setBlockMetadataWithNotify(var2, var3, var4, 2 - 2, 2);
+            world.setBlockMetadataWithNotify(x, y, z, 0, 2);
         }
 
-        if (var6 == 1)
+        if (entityDirection == 1)
         {
-            var1.setBlockMetadataWithNotify(var2, var3, var4, 5 - 2, 2);
+            world.setBlockMetadataWithNotify(x, y, z, 3, 2);
         }
 
-        if (var6 == 2)
+        if (entityDirection == 2)
         {
-            var1.setBlockMetadataWithNotify(var2, var3, var4, 3 - 2, 2);
+            world.setBlockMetadataWithNotify(x, y, z, 1, 2);
         }
 
-        if (var6 == 3)
+        if (entityDirection == 3)
         {
-            var1.setBlockMetadataWithNotify(var2, var3, var4, 4 - 2, 2);
+            world.setBlockMetadataWithNotify(x, y, z, 2, 2);
         }
 
-        if (par6ItemStack.hasDisplayName())
+        if (itemstack.hasDisplayName())
         {
-            ((TileEntityFeeder)var1.getTileEntity(var2, var3, var4)).setGuiDisplayName(par6ItemStack.getDisplayName());
+            ((TileEntityFeeder)world.getTileEntity(x, y, z)).setGuiDisplayName(itemstack.getDisplayName());
         }
     }
-    
+
     /**
      * ejects contained items into the world, and notifies neighbours of an update, as appropriate
      */
@@ -388,11 +338,5 @@ public class BlockFeeder extends BlockContainer
     public int getComparatorInputOverride(World par1World, int par2, int par3, int par4, int par5)
     {
         return Container.calcRedstoneFromInventory((IInventory)par1World.getTileEntity(par2, par3, par4));
-    }
-
-    @SideOnly(Side.CLIENT)
-    public Item getItem(World world, int x, int y, int z)
-    {
-        return Item.getItemFromBlock(Fossil.feederActive);
     }
 }

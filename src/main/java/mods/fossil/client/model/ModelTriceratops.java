@@ -234,6 +234,11 @@ public class ModelTriceratops extends ModelDinosaurs
 	        this.headpivot.rotateAngleX = 0;
 	        this.headpivot.rotateAngleY = 0;
 	        
+	        this.leftFrontUpperLeg.rotateAngleX = 0;
+	        this.rightFrontUpperLeg.rotateAngleX = 0;
+	        this.leftBackUpperLeg.rotateAngleX = 0;
+	        this.rightBackUpperLeg.rotateAngleX = 0;
+	        
 	    	this.leftFrontLowerLeg.rotateAngleX = (float)Math.toRadians(90);
 	    	this.rightFrontLowerLeg.rotateAngleX = (float)Math.toRadians(90);
 	    	

@@ -21,6 +21,8 @@ public class FossilOptions
     public static boolean GallimimusFeathers;
     public static boolean AllowTableEnchantments;
     public static boolean AllowBookEnchantments;
+	public static boolean AllowBreeding;
+
 
     public void Load(Configuration config)
     {
@@ -40,6 +42,7 @@ public class FossilOptions
         GallimimusFeathers = config.get("toggle_feathers",  "Gallimimus Feathers", false).getBoolean(false);
         AllowTableEnchantments = config.get("option", "Allow Table Enchantments", true).getBoolean(true);
         AllowBookEnchantments = config.get("option", "Allow Book Enchantments", true).getBoolean(true);
+        AllowBreeding = config.get("option", "Allow_Dinosaur_Breeding", true).getBoolean(true);
     }
 
 }

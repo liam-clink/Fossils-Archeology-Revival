@@ -69,7 +69,7 @@ public class EntityMosasaurus extends EntitySwimmingDino implements IMob
         this.tasks.addTask(6, new EntityAIAttackOnCollide(this, 1, true));
         this.tasks.addTask(7, new WaterDinoAIWander(this, 1.0D));
         this.tasks.addTask(3, new WaterDinoAIAttack(this, 0.022D)); // This is a multiplier! Large numbers do not work here. 0.022 is very fast as it is.
-        this.tasks.addTask(5, new WaterDinoAIEat(this, 50));
+        this.tasks.addTask(5, new WaterDinoAIEat(this, 50, 0.02D));
         this.targetTasks.addTask(5, new WaterDinoAIHunt(this, EntityLiving.class, 50, false, 0.023D));
     }
 

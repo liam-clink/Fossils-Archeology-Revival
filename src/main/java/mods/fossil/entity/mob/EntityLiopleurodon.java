@@ -82,7 +82,7 @@ public class EntityLiopleurodon extends EntitySwimmingDino implements IMob
       // this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
         this.tasks.addTask(7, new WaterDinoAIWander(this, 1.0D));
         this.tasks.addTask(3, new WaterDinoAIAttack(this, 0.066D)); // This is a multiplier! Large numbers do not work here. 0.022 is very fast as it is.
-        this.tasks.addTask(5, new WaterDinoAIEat(this, 50));
+        this.tasks.addTask(5, new WaterDinoAIEat(this, 50, 0.02D));
         this.targetTasks.addTask(5, new WaterDinoAIHunt(this, EntityLiving.class, 50, false, 0.046D));
     }
 

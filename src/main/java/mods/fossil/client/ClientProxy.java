@@ -9,6 +9,7 @@ import mods.fossil.client.renderer.item.ItemFigurineRenderer;
 import mods.fossil.client.renderer.item.ItemVaseAmphoraRenderer;
 import mods.fossil.client.renderer.item.ItemVaseKylixRenderer;
 import mods.fossil.client.renderer.item.ItemVaseVoluteRenderer;
+import mods.fossil.client.renderer.tileentity.RenderFeeder;
 import mods.fossil.client.renderer.tileentity.RenderTNClock;
 import mods.fossil.client.renderer.tileentity.TileEntityFigurineRenderer;
 import mods.fossil.client.renderer.tileentity.TileEntityVaseRenderer;
@@ -78,6 +79,8 @@ public class ClientProxy extends CommonProxy
         RenderingRegistry.registerEntityRenderingHandler(EntityLiopleurodon.class, new RenderLiopleurodon(new ModelLiopleurodon(), 0.5F));
         RenderingRegistry.registerEntityRenderingHandler(EntityQuagga.class, new RenderQuagga(new ModelQuagga(), 0.5F));
         RenderingRegistry.registerEntityRenderingHandler(EntityGastornis.class, new RenderGastornis(new ModelGastornis(), 0.5F));
+
+        RenderingRegistry.registerBlockHandler(Fossil.feederRenderID, new RenderFeeder());
 
     	VillagerRegistry.instance().registerVillagerSkin(10, new ResourceLocation("fossil:textures/mob/Archaeologist.png"));
     }

@@ -68,15 +68,18 @@ public class WaterDinoAIEat extends EntityAIBase
 
 	private double deltaZ;
 
+	private double speed;
+
     /**
      * Creates The AI, Input: Dino, Speed, searching range
      */
-    public WaterDinoAIEat(EntityDinosaur Dino0, int Range0)
+    public WaterDinoAIEat(EntityDinosaur Dino0, int Range0, double speed)
     {
     	this.theWorld = Dino0.worldObj;
         this.targetMob = null;
         this.targetFeeder = null;	
         this.dinosaur = Dino0;
+        this.speed = speed;
         this.setMutexBits(1);
         this.SEARCH_RANGE = Range0;
         this.targetSorter = new DinoAINearestAttackableTargetSorter(this, this.dinosaur);
@@ -355,7 +358,7 @@ public class WaterDinoAIEat extends EntityAIBase
         this.movePosY = this.deltaY;
         this.movePosZ = this.deltaZ;
         
-        this.dinosaur.addVelocity( deltaX * 0.03, deltaY * 0.03,  deltaZ * 0.03);
+        this.dinosaur.addVelocity( deltaX * this.speed, deltaY * this.speed,  deltaZ * this.speed);
     }
 
 }

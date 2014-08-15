@@ -77,7 +77,7 @@ public class EntityPlesiosaur extends EntitySwimmingDino implements IMob
     
     private WaterDinoAIHunt aiWaterDinoHunt = new WaterDinoAIHunt(this, EntityLiving.class, 500, false, 0.02D);
     
-    private WaterDinoAIEat aiWaterDinoEat = new WaterDinoAIEat(this, 50);
+    private WaterDinoAIEat aiWaterDinoEat = new WaterDinoAIEat(this, 50, 0.017D);
     private DinoAIEat aiDinoEat = new DinoAIEat(this, 20);
 
     public EntityPlesiosaur(World var1)

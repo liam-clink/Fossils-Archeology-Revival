@@ -1380,7 +1380,13 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
     public void onLivingUpdate()
     {
     	if(!this.isModelized()){
-	        this.HandleBreed();
+    		if(!this.worldObj.isRemote)
+    		{
+    			if(Fossil.FossilOptions.AllowBreeding)
+    			{
+    		        this.HandleBreed();
+    			}
+    		}
 	        super.onLivingUpdate();
     	}
     }

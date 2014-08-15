@@ -12,6 +12,9 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.pathfinding.PathEntity;
+import net.minecraft.pathfinding.PathNavigate;
+import net.minecraft.pathfinding.PathPoint;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
@@ -58,6 +61,12 @@ public class DinoAIEat extends EntityAIBase
 
     private World theWorld;
 
+	private int entityPosX;
+
+	private int entityPosY;
+
+	private int entityPosZ;
+
     /**
      * Creates The AI, Input: Dino, Speed, searching range
      */
@@ -103,8 +112,23 @@ public class DinoAIEat extends EntityAIBase
         targetFeeder = this.dinosaur.GetNearestFeeder(Range);
 
         //Feeder has priority over other food sources.
-        if (this.dinosaur.SelfType.useFeeder() && (this.targetFeeder != null))
-        {      	
+        if (this.dinosaur.SelfType.useFeeder())
+        {
+        	PathNavigate pathnavigate = this.dinosaur.getNavigator();
+            PathEntity pathentity = pathnavigate.getPath();
+
+            if (pathentity != null && !pathentity.isFinished())
+            {
+                    PathPoint pathpoint = pathentity.getFinalPathPoint();
+                    this.entityPosX = pathpoint.xCoord;
+                    this.entityPosY = pathpoint.yCoord + 1;
+                    this.entityPosZ = pathpoint.zCoord;
+
+                    if (this.dinosaur.getDistanceSq((double)this.entityPosX, this.dinosaur.posY, (double)this.entityPosZ) <= 2.25D)
+                    {
+                    	targetFeeder = this.dinosaur.GetNearestFeeder(Range/2);
+                    }
+            }    	
             this.destX = this.targetFeeder.xCoord;
             this.destY = this.targetFeeder.yCoord;
             this.destZ = this.targetFeeder.zCoord;
