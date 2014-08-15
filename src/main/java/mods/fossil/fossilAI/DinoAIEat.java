@@ -128,12 +128,15 @@ public class DinoAIEat extends EntityAIBase
                     {
                     	targetFeeder = this.dinosaur.GetNearestFeeder(Range/2);
                     }
-            }    	
+            }
+            if(this.targetFeeder != null)
+            {
             this.destX = this.targetFeeder.xCoord;
             this.destY = this.targetFeeder.yCoord;
             this.destZ = this.targetFeeder.zCoord;
             this.typeofTarget = FEEDER;
             return targetFeeder != null;
+            }
         }
         //After Feeder, check if there are items, THEN blocks on the ground to eat.
         else if (!this.dinosaur.SelfType.FoodItemList.IsEmpty() || !this.dinosaur.SelfType.FoodBlockList.IsEmpty())
