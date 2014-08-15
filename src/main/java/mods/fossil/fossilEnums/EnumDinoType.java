@@ -314,7 +314,7 @@ public enum EnumDinoType
         Velociraptor.setItems(Items.bone);  //,			Fossil.rawVelociraptor, Fossil.dnaVelociraptor, Fossil.eggVelociraptor);
 
         Velociraptor.setAges(3, 6, -1);
-        Velociraptor.setProperties(3.0D, 16.0D, 2.0D, 7.0D, 0.25D, 0.35D, 150);
+        Velociraptor.setProperties(3.0D, 12.0D, 2.0D, 7.0D, 0.25D, 0.35D, 150);
         Velociraptor.setExperience(0.7F, 0.7F);
         Velociraptor.FoodItemList.addItem(EnumDinoFoodItem.PorkRaw);
         Velociraptor.FoodItemList.addItem(EnumDinoFoodItem.PorkCooked);
@@ -397,7 +397,7 @@ public enum EnumDinoType
         TRex.FoodMobList.addMob(EnumDinoFoodMob.Deinonychus);
         TRex.FoodMobList.addMob(EnumDinoFoodMob.Ankylosaurus);
         TRex.FoodMobList.addMob(EnumDinoFoodMob.Pachycephalosaurus);
-        TRex.FoodItemList.addItem(EnumDinoFoodItem.Gallimimus);
+        TRex.FoodMobList.addMob(EnumDinoFoodMob.Gallimimus);
         TRex.FoodMobList.addMob(EnumDinoFoodMob.Dodo);
         
         Pterosaur.setItems(Items.arrow);   //,			Fossil.rawPterosaur, 	Fossil.dnaPterosaur, 	Fossil.eggPterosaur);
@@ -544,7 +544,7 @@ public enum EnumDinoType
         Deinonychus.setItems(Items.bone);  //,			Fossil.rawDeinonychus, Fossil.dnaDeinonychus, Fossil.eggDeinonychus);
 
         Deinonychus.setAges(4, 10, -1);
-        Deinonychus.setProperties(5.0D, 11.0D, 2.0D, 10.0D, 0.23D, 0.35D, 200);
+        Deinonychus.setProperties(5.0D, 16.0D, 2.0D, 10.0D, 0.23D, 0.35D, 200);
         Deinonychus.setExperience(0.7F, 0.7F);
         Deinonychus.FoodItemList.addItem(EnumDinoFoodItem.PorkRaw);
         Deinonychus.FoodItemList.addItem(EnumDinoFoodItem.PorkCooked);

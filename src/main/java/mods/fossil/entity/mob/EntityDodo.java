@@ -1,5 +1,10 @@
 package mods.fossil.entity.mob;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
 import mods.fossil.Fossil;
 import mods.fossil.client.LocalizationStrings;
 import mods.fossil.client.gui.GuiPedia;
@@ -22,6 +27,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+
+import org.lwjgl.opengl.GL11;
+
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -38,6 +46,8 @@ public class EntityDodo extends EntityAnimal
     /** The time until the next egg is spawned. */
     public int timeUntilNextEgg;
 
+    EntityPrehistoric entityPrehistoricClass = new EntityPrehistoric(worldObj);
+    
     public EntityDodo(World par1World)
     {
         super(par1World);
@@ -292,5 +302,12 @@ public class EntityDodo extends EntityAnimal
             p0.AddStringLR("No Despawn", true);
         }
  //       p0.PrintPictXY(ocean, 120, 7, 4, 4);
+    }
+    
+    
+    @SideOnly(Side.CLIENT)
+    public void ShowPedia2(GuiPedia p0)
+    {
+    	entityPrehistoricClass.ShowPedia2(p0, "Dodo");
     }
 }

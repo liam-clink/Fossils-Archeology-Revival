@@ -8,6 +8,7 @@ import mods.fossil.fossilAI.DinoAIRideGround;
 import mods.fossil.fossilAI.DinoAIWander;
 import mods.fossil.fossilEnums.EnumDinoType;
 import net.minecraft.block.Block;
+import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILeapAtTarget;
@@ -267,5 +268,13 @@ public class EntityBrachiosaurus extends EntityDinosaur
 		// TODO Auto-generated method stub
 		
 	}
+	
+    @Override
+    public EntityAgeable createChild(EntityAgeable var1)
+    {
+    	EntityBrachiosaurus baby = new EntityBrachiosaurus(this.worldObj);
+    	baby.setSubSpecies(this.getSubSpecies());
+    	return baby;
+    }
 
 }

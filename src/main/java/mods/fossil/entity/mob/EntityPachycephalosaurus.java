@@ -65,9 +65,9 @@ public class EntityPachycephalosaurus extends EntityDinosaur
         // Set initial size for hitbox. (length/width, height)
         this.setSize(1.0F, 1.5F);
         // Size of dinosaur at day 0.
-        this.minSize = 1.0F;
+        this.minSize = 0.5F;
         // Size of dinosaur at age Adult.
-        this.maxSize = 3.0F;
+        this.maxSize = 2.0F;
         
         //AI Tasks
         this.getNavigator().setAvoidsWater(true);
@@ -135,6 +135,11 @@ public class EntityPachycephalosaurus extends EntityDinosaur
 
     public String getTexture()
     {
+    	if (this.isModelized())
+    	{
+    		return super.getTexture();
+    	}
+    	
         switch (this.getSubSpecies())
         {
             case 1:
@@ -413,7 +418,9 @@ public class EntityPachycephalosaurus extends EntityDinosaur
     @Override
     public EntityAgeable createChild(EntityAgeable var1)
     {
-        return null;
+    	EntityPachycephalosaurus baby = new EntityPachycephalosaurus(this.worldObj);
+    	baby.setSubSpecies(this.getSubSpecies());
+    	return baby;
     }
     
     /**

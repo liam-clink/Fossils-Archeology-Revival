@@ -58,14 +58,6 @@ public class WaterDinoAIEat extends EntityAIBase
 
 	private double deltaX;
 
-	private Vec3 entityVector;
-
-	private Vec3 targetVector;
-
-	private Vec3 moveVector;
-
-	private Vec3 normalizedVector;
-
 	private double movePosX;
 
 	private double movePosY;
@@ -76,14 +68,18 @@ public class WaterDinoAIEat extends EntityAIBase
 
 	private double deltaZ;
 
+	private double speed;
+
     /**
      * Creates The AI, Input: Dino, Speed, searching range
      */
-    public WaterDinoAIEat(EntityDinosaur Dino0, int Range0)
+    public WaterDinoAIEat(EntityDinosaur Dino0, int Range0, double speed)
     {
+    	this.theWorld = Dino0.worldObj;
         this.targetMob = null;
         this.targetFeeder = null;	
         this.dinosaur = Dino0;
+        this.speed = speed;
         this.setMutexBits(1);
         this.SEARCH_RANGE = Range0;
         this.targetSorter = new DinoAINearestAttackableTargetSorter(this, this.dinosaur);
@@ -105,13 +101,19 @@ public class WaterDinoAIEat extends EntityAIBase
     {
         int Range = this.SEARCH_RANGE;// Current Searching range
 
+        if(!theWorld.isRemote)
+        {
+	        if (!Fossil.FossilOptions.Dinos_Starve)
+	        	return false;
+        }
+        
         if (!this.dinosaur.IsHungry() && !this.dinosaur.IsDeadlyHungry())
         {
             this.typeofTarget = NO_TARGET;
             return false;
         }
 
-        targetFeeder = this.dinosaur.GetNearestFeeder(SEARCH_RANGE);
+        //targetFeeder = this.dinosaur.GetNearestFeeder(SEARCH_RANGE);
         //Feeder has priority over other food sources.
         if (this.dinosaur.SelfType.useFeeder() && (this.targetFeeder != null))
         {      	
@@ -124,7 +126,6 @@ public class WaterDinoAIEat extends EntityAIBase
         //After Feeder, check if there are items, THEN blocks on the ground to eat.
         else if (!this.dinosaur.SelfType.FoodItemList.IsEmpty() || !this.dinosaur.SelfType.FoodBlockList.IsEmpty())
         {
-
             this.targetItem = this.getNearestItem2(SEARCH_RANGE);
             if( this.targetItem != null) {
                 this.destX = targetItem.posX;
@@ -133,17 +134,6 @@ public class WaterDinoAIEat extends EntityAIBase
             	this.typeofTarget = ITEM;
             	return true;
             }
-            /*
-            if (targetItem != null)//Found Item, go there and eat it
-            {
-                this.destX = targetItem.xCoord;
-                this.destY = targetItem.yCoord;
-                this.destZ = targetItem.zCoord;
-                this.typeofTarget = ITEM;
-                Log.log(Level.FINEST, "ITEM FOUND!");
-                return targetItem != null;
-            }
-            */
             
             if(!this.dinosaur.SelfType.FoodBlockList.IsEmpty())//Hasn't found anything and has blocks it can look for
             {
@@ -170,7 +160,7 @@ public class WaterDinoAIEat extends EntityAIBase
     public boolean continueExecuting()
     {
     	
-    	if( !(this.dinosaur.IsHungry() || this.dinosaur.IsDeadlyHungry())){
+    	if( !this.dinosaur.IsHungry() || !this.dinosaur.IsDeadlyHungry()){
     		return false;
     	}
     	else
@@ -220,18 +210,16 @@ public class WaterDinoAIEat extends EntityAIBase
         	if(Distance < SEARCH_RANGE) {
         		
         		this.moveToTarget(this.destX, this.destY, this.destZ);
-        	
+                this.TimeAtThisTarget++;
         		if (Distance < 4.5D){
         			if (this.targetFeeder != null) {
 		                int healval = MathHelper.floor_double(this.targetFeeder.Feed(this.dinosaur, this.dinosaur.SelfType) / 15D);
 		                this.dinosaur.heal(healval);
-		                this.TimeAtThisTarget++;
-		
-		                if (this.TimeAtThisTarget == 100){
-		                    endTask();
 		                }
         			}
         		}
+            if (this.TimeAtThisTarget == 100){
+                endTask();
         	}
         	else {
         		endTask();
@@ -370,7 +358,7 @@ public class WaterDinoAIEat extends EntityAIBase
         this.movePosY = this.deltaY;
         this.movePosZ = this.deltaZ;
         
-        this.dinosaur.addVelocity( deltaX * 0.03, deltaY * 0.03,  deltaZ * 0.03);
+        this.dinosaur.addVelocity( deltaX * this.speed, deltaY * this.speed,  deltaZ * this.speed);
     }
 
 }

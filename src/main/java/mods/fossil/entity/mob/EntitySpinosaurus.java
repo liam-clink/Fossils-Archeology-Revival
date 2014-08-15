@@ -570,7 +570,9 @@ public class EntitySpinosaurus extends EntityDinosaur implements IWaterDino
     @Override
     public EntityAgeable createChild(EntityAgeable var1)
     {
-        return null;
+    	EntitySpinosaurus baby = new EntitySpinosaurus(this.worldObj);
+    	baby.setSubSpecies(this.getSubSpecies());
+    	return baby;
     }
 
     @Override

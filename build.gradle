@@ -17,9 +17,9 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "6.3"
+version = ""
 group= "com.fossilgroup.fossil" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "fossil-archeology"
+archivesBaseName = "Fossils_Archeology_Revival-1.7.10"
 
 minecraft {
     version = "1.7.10-10.13.0.1180"

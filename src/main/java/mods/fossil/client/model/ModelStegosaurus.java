@@ -213,7 +213,21 @@ public class ModelStegosaurus extends ModelDinosaurs
 		}
 		else
 		{
+			this.Head.rotateAngleX =  0;
+			this.Head.rotateAngleY = 0;
 			
+			this.UpperLegFrontLeft.rotateAngleX = 0;
+			this.UpperLegFrontRight.rotateAngleX = 0;
+			this.UpperLegBackLeft.rotateAngleX = 0;
+			this.UpperLegBackRight.rotateAngleX = 0;
+			
+			this.Tail1.rotateAngleY = 0;
+			this.Tail2.rotateAngleY = 0;
+			this.Tail3.rotateAngleY = 0;
+			
+			this.Tail1.rotateAngleX = (float)Math.toRadians(-10);
+			this.Tail2.rotateAngleX = (float)Math.toRadians(5);
+			this.Tail3.rotateAngleX = (float)Math.toRadians(5);
 		}
   }
 

@@ -11,7 +11,7 @@ public class ItemAncientHelmet extends ItemArmor
     public ItemAncientHelmet(ArmorMaterial par2ArmorMaterial, int par3, int par4)
     {
         super(par2ArmorMaterial, par3, par4);
-        this.setCreativeTab(Fossil.tabFArmor);
+        this.setCreativeTab(Fossil.tabFCombat);
     }
 
     @Override

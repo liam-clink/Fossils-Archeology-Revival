@@ -4,14 +4,18 @@ import mods.fossil.Fossil;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentProtection;
 import net.minecraft.enchantment.EnumEnchantmentType;
+import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
 
 public class EnchantmentArcheology  extends Enchantment {
 	
+	private final int weight;
+
 	public EnchantmentArcheology(int effectID, int rarity, EnumEnchantmentType enchantmentType) {
 		super(effectID, rarity, enchantmentType);
 		this.setName("archeology");
 		this.type = enchantmentType;
+		this.weight = rarity;
 	}
 
     /**
@@ -20,6 +24,11 @@ public class EnchantmentArcheology  extends Enchantment {
     public int getMinEnchantability(int par1)
     {
         return 5 + (par1 - 1) * 10;
+    }
+    
+    public int getWeight()
+    {
+        return this.weight;
     }
 
     /**
@@ -38,9 +47,35 @@ public class EnchantmentArcheology  extends Enchantment {
         return 3;
     }
     
+    @Override
+    public boolean canApplyAtEnchantingTable(ItemStack stack)
+    {
+    		if(Fossil.FossilOptions.AllowTableEnchantments)
+    		{
+        		return canApply(stack);
+    		}
+    		else
+    		{
+    			return false;
+    		}
+    }
+    
+    @Override
+    public boolean isAllowedOnBooks()
+    {
+    		if(Fossil.FossilOptions.AllowBookEnchantments)
+    		{
+        		return true;
+    		}
+    		else
+    		{
+    			return false;
+    		}
+    }
+    
     public boolean canApply(ItemStack itemStack)
     {
-        return itemStack.isItemStackDamageable() ? true : super.canApply(itemStack);
+    	return itemStack.isItemStackDamageable() ? true : itemStack.getItem() instanceof ItemPickaxe ? super.canApply(itemStack) : true;
     }
     
     /**

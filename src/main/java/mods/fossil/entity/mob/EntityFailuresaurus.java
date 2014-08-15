@@ -20,7 +20,7 @@ public class EntityFailuresaurus extends EntityZombie
     {
         super.entityInit();
         this.dataWatcher.addObject(18, Byte.valueOf((byte)0));
-    	this.setSkin(this.worldObj.rand.nextInt(2));
+    	this.setSkin(this.worldObj.rand.nextInt(3));
     }
     
     public int getSkin()

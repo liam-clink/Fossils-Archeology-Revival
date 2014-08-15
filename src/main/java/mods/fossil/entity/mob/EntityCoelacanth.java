@@ -1,5 +1,9 @@
 package mods.fossil.entity.mob;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.List;
 import java.util.Random;
 
@@ -19,6 +23,9 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+
+import org.lwjgl.opengl.GL11;
+
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -53,6 +60,8 @@ public class EntityCoelacanth extends EntityWaterMob {
     private float randomMotionVecX;
     private float randomMotionVecY;
     private float randomMotionVecZ;
+    
+    EntityPrehistoric entityPrehistoricClass = new EntityPrehistoric(worldObj);
     
     public EntityCoelacanth(World par1World)
     {
@@ -199,6 +208,12 @@ public class EntityCoelacanth extends EntityWaterMob {
              p0.AddStringLR("No Despawn", true);
          }
  //       p0.PrintPictXY(ocean, 120, 7, 4, 4);
+    }
+    
+    @SideOnly(Side.CLIENT)
+    public void ShowPedia2(GuiPedia p0)
+    {
+    	entityPrehistoricClass.ShowPedia2(p0, "Coelacanth");
     }
     
     /**

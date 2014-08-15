@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Random;
 
 import mods.fossil.Fossil;
+import mods.fossil.client.LocalizationStrings;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -23,6 +25,9 @@ public class BlockPalaeSlab extends BlockSlab
         super(par2, Material.wood);
         this.setLightOpacity(0);
         this.useNeighborBrightness = true;
+        this.setHardness(1.4F);
+        this.setResistance(7.5F);
+        this.setStepSound(Block.soundTypeWood);
     }
 
     @Override

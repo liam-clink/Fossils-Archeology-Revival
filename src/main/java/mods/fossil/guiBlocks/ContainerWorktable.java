@@ -17,6 +17,8 @@ public class ContainerWorktable extends Container
     private int burnTime = 0;
     private int itemBurnTime = 0;
 
+    public static final int  FUEL = 1, INPUT_END = 0, OUTPUT_END = 2;
+    
     public ContainerWorktable(InventoryPlayer var1, TileEntity var2)
     {
         this.furnace = (TileEntityWorktable)var2;
@@ -97,68 +99,77 @@ public class ContainerWorktable extends Container
     /**
      * Called when a player shift-clicks on a slot. You must override this or you will crash when someone does that.
      */
-    public ItemStack transferStackInSlot(EntityPlayer var1, int var2)
+    public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
     {
-        ItemStack var3 = null;
-        Slot var4 = (Slot)this.inventorySlots.get(var2);
+        ItemStack itemstack = null;
+        Slot slot = (Slot)this.inventorySlots.get(par2);
 
-        if (var4 != null && var4.getHasStack())
+        if (slot != null && slot.getHasStack())
         {
-            ItemStack var5 = var4.getStack();
-            var3 = var5.copy();
+            ItemStack itemstack1 = slot.getStack();
+            itemstack = itemstack1.copy();
 
-            if (var2 == 2)
+            if (par2 > INPUT_END && par2 < OUTPUT_END+1 && par2 != FUEL) // If slot is equal to Output.
             {
-                if (!this.mergeItemStack(var5, 3, 39, true))
+            	//Place INTO inventory, only check output.
+                if (!this.mergeItemStack(itemstack1, OUTPUT_END+1, OUTPUT_END+36+1, true)) // 13 is first slot after the outputs, 49 is last inventory slot
                 {
                     return null;
                 }
-
-                var4.onSlotChange(var5, var3);
+                
+                slot.onSlotChange(itemstack1, itemstack);
             }
-            else if (var2 != 1 && var2 != 0)
+    		// itemstack is in player inventory, try to place in appropriate furnace slot
+    		else if (par2 > INPUT_END+1) // if it's not in the INPUT
+    		{
+    			// if it can be smelted, place in the input slots
+    			if (itemstack1 != null)
+    			{
+    				// try to place in either Input slot; add 1 to final input slot because mergeItemStack uses < index
+    				if (!this.mergeItemStack(itemstack1, 0, INPUT_END+1, false))
+    				{
+    					return null;
+    				}
+    			}
+    		}
+			// item in player's inventory, but not in action bar
+			else if(par2 >= OUTPUT_END+1 && par2 < OUTPUT_END+28)
+			{
+				// place in action bar
+				if (!this.mergeItemStack(itemstack1, OUTPUT_END+28, OUTPUT_END+37, false))
+				{
+					return null;
+				}
+			}
+			// item in action bar - place in player inventory
+			else if (par2 >= OUTPUT_END+28 && par2 < OUTPUT_END+37 && !this.mergeItemStack(itemstack1, OUTPUT_END+1, OUTPUT_END+28, false))
+			{
+				return null;
+			}
+            
+    		// In one of the output slots; try to place in player inventory / action bar
+			else if (!this.mergeItemStack(itemstack1, OUTPUT_END+1, OUTPUT_END+37, false))
+			{
+				return null;
+			}
+    		
+            if (itemstack1.stackSize == 0)
             {
-                if (FurnaceRecipes.smelting().getSmeltingResult(var5) != null)
-                {
-                    if (!this.mergeItemStack(var5, 0, 1, false))
-                    {
-                        return null;
-                    }
-                }
-                else if (var2 >= 3 && var2 < 30)
-                {
-                    if (!this.mergeItemStack(var5, 30, 39, false))
-                    {
-                        return null;
-                    }
-                }
-                else if (var2 >= 30 && var2 < 39 && !this.mergeItemStack(var5, 3, 30, false))
-                {
-                    return null;
-                }
-            }
-            else if (!this.mergeItemStack(var5, 3, 39, false))
-            {
-                return null;
-            }
-
-            if (var5.stackSize == 0)
-            {
-                var4.putStack((ItemStack)null);
+                slot.putStack((ItemStack)null);
             }
             else
             {
-                var4.onSlotChanged();
+                slot.onSlotChanged();
             }
 
-            if (var5.stackSize == var3.stackSize)
+            if (itemstack1.stackSize == itemstack.stackSize)
             {
                 return null;
             }
 
-            var4.onPickupFromSlot(var1, var5);
+            slot.onPickupFromSlot(par1EntityPlayer, itemstack1);
         }
 
-        return var3;
+        return itemstack;
     }
 }

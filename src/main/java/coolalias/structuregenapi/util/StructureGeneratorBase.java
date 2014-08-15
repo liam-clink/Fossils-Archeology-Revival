@@ -22,6 +22,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.UUID;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRedstoneRepeater;
@@ -34,6 +35,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemHangingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.play.server.S10PacketSpawnPainting;
 import net.minecraft.server.MinecraftServer;
@@ -44,9 +46,13 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Direction;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import net.minecraftforge.common.util.FakePlayer;
 
 import org.apache.logging.log4j.Level;
+
+import com.mojang.authlib.GameProfile;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 
@@ -85,6 +91,9 @@ public abstract class StructureGeneratorBase extends WorldGenerator
 	
 	/** Stores blocks that need to be set post-generation, such as torches */
 	private final List<BlockData> postGenBlocks = new LinkedList<BlockData>();
+	
+	private static final GameProfile generatorName = new GameProfile(UUID.fromString("54acf800-054d-11e4-9191-0800200c9a66"), "fake");
+
 	
 	/**
 	 * Basic constructor. Sets generator to notify other blocks of blocks it changes.
@@ -191,7 +200,7 @@ public abstract class StructureGeneratorBase extends WorldGenerator
 		}
 		
 		if (itemstack.stackSize < 1) {
-			LogHelper.log(Level.WARN, "Trying to add ItemStack of size 0 to Tile Inventory");
+			LogHelper.log(Level.OFF, "Trying to add ItemStack of size 0 to Tile Inventory");
 			return false;
 		}
 		
@@ -343,6 +352,46 @@ public abstract class StructureGeneratorBase extends WorldGenerator
 		}
 		
 		return AxisAlignedBB.getBoundingBox(minX, (double) y, minZ, maxX, (double) y + 1, maxZ);
+	}
+	
+	/**
+	 * Places a hanging item entity in the world at the correct location and facing.
+	 * Note that you MUST use a WALL_MOUNTED type block id (such as torch) for your custom
+	 * block id's getRealBlockID return value in order for orientation to be correct.
+	 * Coordinates x,y,z are the location of the block used to spawn the entity
+	 * NOTE: Automatically removes the dummy block at x/y/z before placing the entity, so the
+	 * metadata stored in the block will no longer be available, but will be returned by this
+	 * method so it can be stored in a local variable for later use.
+	 * @param hanging Must be an instance of ItemHangingEntity, such as Items.painting
+	 * @return Returns direction for further processing such as for ItemFrames, or -1 if no entity set
+	 */
+	public static final int setHangingEntity(World world, ItemStack hanging, int x, int y, int z)
+	{
+		if (hanging.getItem() == null || !(hanging.getItem() instanceof ItemHangingEntity)) {
+			return -1;
+		}
+		
+		if (world.getBlockMetadata(x, y, z) < 1 || world.getBlockMetadata(x, y, z) > 5) {
+			LogHelper.log(Level.WARN, "Hanging entity has invalid metadata of " + world.getBlockMetadata(x, y, z) + ". Valid values are 1,2,3,4");
+			return - 1;
+		}
+		
+		int[] metaToFacing = {5, 4, 3, 2};
+		int direction = metaToFacing[world.getBlockMetadata(x, y, z) - 1];
+		FakePlayer player = new FakePlayer((WorldServer) world, generatorName);
+		
+		world.setBlockToAir(x, y, z);
+		
+		switch(direction) {
+		case 2: ++z; break; // frame facing NORTH
+		case 3: --z; break; // frame facing SOUTH
+		case 4: ++x; break; // frame facing WEST
+		case 5: --x; break; // frame facing EAST
+		}
+		
+		((ItemHangingEntity) hanging.getItem()).onItemUse(hanging, player, world, x, y, z, direction, 0, 0, 0);
+		
+		return direction;
 	}
 	
 	/**

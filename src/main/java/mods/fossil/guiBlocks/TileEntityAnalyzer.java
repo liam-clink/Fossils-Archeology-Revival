@@ -282,7 +282,8 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
                 		|| (var2 == Items.egg) 
                 		|| (var2 == Items.chicken) 
                 		|| (var2 == Item.getItemFromBlock(Blocks.wool)) 
-                		|| (var2 == Fossil.icedMeat))
+                		|| (var2 == Fossil.icedMeat)
+                	|| (var2 == Items.leather) )
                 {
                     this.RawIndex = var1;
                     break;
@@ -394,7 +395,7 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
             
             if (this.analyzerItemStacks[this.RawIndex].getItem() == Items.leather)
             {
-            	if(new Random().nextFloat() > 0.5)
+            	if(new Random().nextInt(10) > 3)
             	itemstack = new ItemStack(Fossil.dnaCow, 1);
             	else
             	itemstack = new ItemStack(Fossil.dnaHorse, 1);

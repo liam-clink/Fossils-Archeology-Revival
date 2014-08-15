@@ -408,7 +408,9 @@ public class EntityStegosaurus extends EntityDinosaur
     @Override
     public EntityAgeable createChild(EntityAgeable var1)
     {
-        return null;
+    	EntityStegosaurus baby = new EntityStegosaurus(this.worldObj);
+    	baby.setSubSpecies(this.getSubSpecies());
+    	return baby;
     }
     
     /**

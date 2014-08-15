@@ -75,7 +75,7 @@ public class RenderFeeder implements ISimpleBlockRenderingHandler
     @Override
     public int getRenderId()
     {
-        return 2303;
+        return 0;
     }
 
 	@Override

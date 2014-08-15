@@ -41,6 +41,15 @@ public class BlockWorktable extends BlockContainer
     {
         return Item.getItemFromBlock(Fossil.blockworktableIdle);
     }
+    
+    /**
+     * Returns the ID of the items to drop on destruction.
+     */
+    @Override
+    public Item getItemDropped(int var1, Random var2, int var3)
+    {
+        return Item.getItemFromBlock(Fossil.blockworktableIdle);
+    }
 
     /**
      * Called whenever the block is added into the world. Args: world, x, y, z

@@ -53,6 +53,8 @@ public class EntityDeinonychus extends EntityDinosaur
     public static final double maxDamage = EnumDinoType.Deinonychus.StrengthMax;
     public static final double maxSpeed = EnumDinoType.Deinonychus.SpeedMax;
     
+	private final String texturePath;
+    
     public EntityDeinonychus(World var1)
     {
         super(var1, EnumDinoType.Deinonychus);
@@ -65,6 +67,11 @@ public class EntityDeinonychus extends EntityDinosaur
         this.minSize = 0.3F;
         // Size of dinosaur at age Adult.
         this.maxSize = 1.0F;
+        
+    	if(Fossil.FossilOptions.DeinonychusFeathers)
+            texturePath = Fossil.modid + ":textures/mob/" + this.SelfType.toString() + "/feathered/" + "Feathered_";
+    	else
+    		texturePath = Fossil.modid + ":textures/mob/" + this.SelfType.toString() + "/";
         
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(0, new EntityAISwimming(this));
@@ -131,33 +138,33 @@ public class EntityDeinonychus extends EntityDinosaur
             switch (this.getSubSpecies())
             {
             default: case 1:
-                    return Fossil.modid + ":" + "textures/mob/Deinonychus_Grey_Adult.png";
+                    return texturePath + "Deinonychus_Grey_Adult.png";
             case 2: 
-            	return Fossil.modid + ":" + "textures/mob/Deinonychus_Black_Adult.png";
+            	return texturePath + "Deinonychus_Black_Adult.png";
             case 3: 
-            	return Fossil.modid + ":" + "textures/mob/Deinonychus_Brown_Adult.png";
+            	return texturePath + "Deinonychus_Brown_Adult.png";
             }
         }
         else if (this.isTeen()) {
             switch (this.getSubSpecies())
             {
             default: case 1:
-                    return Fossil.modid + ":" + "textures/mob/Deinonychus_Grey_Teen.png";
+                    return texturePath + "Deinonychus_Grey_Teen.png";
             case 2: 
-            	return Fossil.modid + ":" + "textures/mob/Deinonychus_Black_Teen.png";
+            	return texturePath + "Deinonychus_Black_Teen.png";
             case 3: 
-            	return Fossil.modid + ":" + "textures/mob/Deinonychus_Brown_Teen.png";
+            	return texturePath + "Deinonychus_Brown_Teen.png";
             }
         }
         else {
             switch (this.getSubSpecies())
             {
             default: case 1:
-                    return Fossil.modid + ":" + "textures/mob/Deinonychus_Grey_Baby.png";
+                    return texturePath + "Deinonychus_Grey_Baby.png";
             case 2: 
-            	return Fossil.modid + ":" + "textures/mob/Deinonychus_Black_Baby.png";
+            	return texturePath + "Deinonychus_Black_Baby.png";
             case 3: 
-            	return Fossil.modid + ":" + "textures/mob/Deinonychus_Brown_Baby.png";
+            	return texturePath + "Deinonychus_Brown_Baby.png";
             }
         }
     }
@@ -251,25 +258,25 @@ public class EntityDeinonychus extends EntityDinosaur
     /**
      * Called when the entity is attacked.
      */
-    public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
+    public boolean attackEntityFrom(DamageSource damagesource, float damageamount)
     {
-    	super.attackEntityFrom(par1DamageSource, par2);
+    	super.attackEntityFrom(damagesource, damageamount);
         if (this.isEntityInvulnerable())
         {
             return false;
         }
         else
         {
-            Entity entity = par1DamageSource.getEntity();
+            Entity entity = damagesource.getEntity();
             this.aiSit.setSitting(false);
             
 
             if (entity != null && !(entity instanceof EntityPlayer) && !(entity instanceof EntityArrow))
             {
-                par2 = (par2 + 1.0F) / 2.0F;
+                damageamount = (damageamount + 1.0F) / 2.0F;
             }
 
-            return super.attackEntityFrom(par1DamageSource, par2);
+            return super.attackEntityFrom(damagesource, damageamount);
         }
     }
 
@@ -369,7 +376,9 @@ public class EntityDeinonychus extends EntityDinosaur
     @Override
     public EntityAgeable createChild(EntityAgeable var1)
     {
-        return null;
+    	EntityDeinonychus baby = new EntityDeinonychus(this.worldObj);
+    	baby.setSubSpecies(this.getSubSpecies());
+    	return baby;
     }
     
     /**

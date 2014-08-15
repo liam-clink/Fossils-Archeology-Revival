@@ -13,6 +13,7 @@ import mods.fossil.fossilAI.WaterDinoAIWander;
 import mods.fossil.fossilEnums.EnumDinoType;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityLivingData;
@@ -68,7 +69,7 @@ public class EntityMosasaurus extends EntitySwimmingDino implements IMob
         this.tasks.addTask(6, new EntityAIAttackOnCollide(this, 1, true));
         this.tasks.addTask(7, new WaterDinoAIWander(this, 1.0D));
         this.tasks.addTask(3, new WaterDinoAIAttack(this, 0.022D)); // This is a multiplier! Large numbers do not work here. 0.022 is very fast as it is.
-        this.tasks.addTask(5, new WaterDinoAIEat(this, 50));
+        this.tasks.addTask(5, new WaterDinoAIEat(this, 50, 0.02D));
         this.targetTasks.addTask(5, new WaterDinoAIHunt(this, EntityLiving.class, 50, false, 0.023D));
     }
 
@@ -304,5 +305,13 @@ public class EntityMosasaurus extends EntitySwimmingDino implements IMob
         this.updateSize();
         this.heal(200);
         return par1EntityLivingData;
+    }
+    
+    @Override
+    public EntityAgeable createChild(EntityAgeable var1)
+    {
+    	EntityMosasaurus baby = new EntityMosasaurus(this.worldObj);
+    	baby.setSubSpecies(this.getSubSpecies());
+    	return baby;
     }
 }

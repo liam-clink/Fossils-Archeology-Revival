@@ -586,7 +586,9 @@ public class EntityVelociraptor extends EntityDinosaur
     @Override
     public EntityAgeable createChild(EntityAgeable var1)
     {
-        return null;
+    	EntityVelociraptor baby = new EntityVelociraptor(this.worldObj);
+    	baby.setSubSpecies(this.getSubSpecies());
+    	return baby;
     }
     
     /**

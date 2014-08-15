@@ -7,6 +7,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAITarget;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.Vec3;
+import net.minecraft.world.World;
 
 import java.util.Collections;
 import java.util.Iterator;
@@ -30,19 +31,17 @@ public class WaterDinoAIHunt extends EntityAITarget
 	private double deltaX;
 	private double deltaY;
 	private double deltaZ;
-	private Vec3 entityVector;
-	private Vec3 targetVector;
-	private Vec3 moveVector;
-	private Vec3 normalizedVector;
 	private double movePosX;
 	private double movePosY;
 	private double movePosZ;
 	private int SEARCH_RANGE;
 	private double speed;
+	private World theWorld;
 
     public WaterDinoAIHunt(EntityDinosaur dinosaur, Class _class, int range, boolean par4, double speed)
     {
         super(dinosaur, par4);
+        this.theWorld = dinosaur.worldObj;
         this.speed = speed;
         this.dinosaur = dinosaur;
         this.targetClass = _class;
@@ -58,7 +57,13 @@ public class WaterDinoAIHunt extends EntityAITarget
     @Override
     public boolean shouldExecute()
     {
-        if (this.dinosaur.IsHungry() &&  !this.dinosaur.SelfType.FoodMobList.IsEmpty())
+        if(!theWorld.isRemote)
+        {
+	        if (!Fossil.FossilOptions.Dinos_Starve)
+	        	return false;
+        }
+        
+        if ((this.dinosaur.IsHungry() || this.dinosaur.IsDeadlyHungry()) &&  !this.dinosaur.SelfType.FoodMobList.IsEmpty())
         {
         double d0 = this.getTargetDistance();
         

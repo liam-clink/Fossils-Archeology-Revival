@@ -7,6 +7,7 @@ import mods.fossil.fossilAI.DinoAIFollowOwner;
 import mods.fossil.fossilAI.DinoAIRideGround;
 import mods.fossil.fossilAI.DinoAIWander;
 import mods.fossil.fossilEnums.EnumDinoType;
+import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILeapAtTarget;
@@ -112,6 +113,14 @@ public class EntityAnkylosaurus extends EntityDinosaur
     {
         //Add special item interaction code here
         return super.interact(var1);
+    }
+    
+    @Override
+    public EntityAgeable createChild(EntityAgeable var1)
+    {
+    	EntityAnkylosaurus baby = new EntityAnkylosaurus(this.worldObj);
+    	baby.setSubSpecies(this.getSubSpecies());
+    	return baby;
     }
 
     public EntityAnkylosaurus spawnBabyAnimal(EntityAnimal var1)

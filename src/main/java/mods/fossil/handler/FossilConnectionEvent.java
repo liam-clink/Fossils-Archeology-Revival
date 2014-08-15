@@ -2,19 +2,27 @@ package mods.fossil.handler;
 
 import mods.fossil.Fossil;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ChatComponentText;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.PlayerEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 
 public class FossilConnectionEvent {
 
 	@SubscribeEvent
-	public void onPlayerLoggedIn(PlayerLoggedInEvent event)
+	public void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event)
 	{
 		EntityPlayer player = event.player;
 
+		if(Fossil.DebugMode())
+		{
+            Fossil.ShowMessage("------- DEBUG MODE IS ON. TURN OFF BEFORE RELEASING! --------",player);
+		}
+		
         switch (Fossil.modState)
         {
             case 0:
+
                 if (Fossil.FossilOptions.LoginMessage)
                 {
                     Fossil.ShowMessage("You are running F/A:Revival Dev Build, " + Fossil.modversion + ".",player);

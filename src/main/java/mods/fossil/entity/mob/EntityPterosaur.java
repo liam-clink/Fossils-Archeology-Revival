@@ -276,15 +276,12 @@ public class EntityPterosaur extends EntityDinosaur
     protected void updateFallState(double par1, boolean par3) {}
       */
 
-    public EntityPterosaur spawnBabyAnimal(EntityAgeable var1)
-    {
-        return new EntityPterosaur(this.worldObj);
-    }
-
     @Override
     public EntityAgeable createChild(EntityAgeable var1)
     {
-        return this.spawnBabyAnimal(var1);
+    	EntityPterosaur baby = new EntityPterosaur(this.worldObj);
+    	baby.setSubSpecies(this.getSubSpecies());
+    	return baby;
     }
     
     public boolean isOwner(EntityPlayer player) {

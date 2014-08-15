@@ -8,6 +8,8 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 
 public class FossilRecipeHandler
 {
@@ -51,6 +53,9 @@ public class FossilRecipeHandler
         GameRegistry.addRecipe(new ItemStack(Fossil.chickenEss, 8), new Object[] {"XXX", "XYX", "XXX", 'X', Items.glass_bottle, 'Y', Fossil.cookedChickenSoup});
         GameRegistry.addRecipe(new ItemStack(Fossil.whip, 1), new Object[] {"XXS", "XTS", "TXS", 'T', Items.stick, 'S', Items.string});
         GameRegistry.addRecipe(new ItemStack(Fossil.volcanicBrick, 4), new Object[] {"VV", "VV", 'V', Fossil.volcanicRock});
+        GameRegistry.addRecipe(new ItemStack(Fossil.volcanicSingleSlab, 6), new Object[] {"PPP", 'P', Fossil.volcanicBrick});
+        GameRegistry.addRecipe(new ItemStack(Fossil.volcanicStairs, 4), new Object[] {"P  ", "PP ", "PPP", 'P', Fossil.volcanicBrick});
+        GameRegistry.addRecipe(new ItemStack(Fossil.volcanicStairs, 4), new Object[] {"  P", " PP", "PPP", 'P', Fossil.volcanicBrick});
         GameRegistry.addRecipe(new ItemStack(Fossil.palaePlanks, 4), new Object[] {"P", 'P', Fossil.palmLog});
         GameRegistry.addRecipe(new ItemStack(Blocks.wooden_button, 1), new Object[] {"P", 'P', Fossil.palaePlanks});
         GameRegistry.addRecipe(new ItemStack(Items.stick, 3), new Object[] { "P", "P", 'P', Fossil.palaePlanks});
@@ -84,10 +89,11 @@ public class FossilRecipeHandler
         //GameRegistry.addRecipe(new ItemStack(Fossil.ancientStoneSingleSlab, 6), new Object[] {"PPP", 'P', Fossil.ancientStone});
         GameRegistry.addRecipe(new ItemStack(Fossil.ancientStoneStairs, 4), new Object[] {"P  ", "PP ", "PPP", 'P', Fossil.ancientStone});
         GameRegistry.addRecipe(new ItemStack(Fossil.ancientStoneStairs, 4), new Object[] {"  P", " PP", "PPP", 'P', Fossil.ancientStone});
-        GameRegistry.addRecipe(new ItemStack(Fossil.feet, 1), new Object[] {"* *", "# #", '#', Fossil.foot, '*', Fossil.claw});
-        GameRegistry.addRecipe(new ItemStack(Fossil.femurs, 1), new Object[] {"###", "* *", "# #", '#', Items.bone, '*', Fossil.legBone});
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Fossil.feet, 1), new Object[] {"* *", "# #", '#', new ItemStack(Fossil.foot,1, OreDictionary.WILDCARD_VALUE), '*', "dinosaurClaw"}));
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Fossil.feet, 1), new Object[] {"   ", "* *", "# #", '#', new ItemStack(Fossil.foot,1, OreDictionary.WILDCARD_VALUE), '*', "dinosaurClaw"}));
+        GameRegistry.addRecipe(new ItemStack(Fossil.femurs, 1), new Object[] {"###", "* *", "# #", '#', Items.bone, '*', new ItemStack(Fossil.legBone,1, OreDictionary.WILDCARD_VALUE)});
         GameRegistry.addRecipe(new ItemStack(Fossil.ribCage, 1), new Object[] {"# #", " # ", "###", '#', Items.bone});
-        GameRegistry.addRecipe(new ItemStack(Fossil.skullHelmet, 1), new Object[] {"#X#", "# #", '#', Items.bone, 'X', Fossil.skull});
+        GameRegistry.addRecipe(new ItemStack(Fossil.skullHelmet, 1), new Object[] {"#X#", "# #", '#', Items.bone, 'X', new ItemStack(Fossil.skull,1, OreDictionary.WILDCARD_VALUE)});
 
         //Craft damaged vases
         GameRegistry.addRecipe(new ItemStack(Fossil.vaseVoluteBlock, 1), new Object[] {"X X", "X X", "XXX", 'X', Fossil.potteryShards});

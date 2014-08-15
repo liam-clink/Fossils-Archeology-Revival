@@ -1,5 +1,10 @@
 package mods.fossil.entity.mob;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
 import mods.fossil.Fossil;
 import mods.fossil.client.LocalizationStrings;
 import mods.fossil.client.gui.GuiPedia;
@@ -42,6 +47,9 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+
+import org.lwjgl.opengl.GL11;
+
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -738,6 +746,12 @@ public class EntitySmilodon extends EntityPrehistoric
         */
 
         //TODO show all blocks the dino can eat
+    }
+    
+    @SideOnly(Side.CLIENT)
+    public void ShowPedia2(GuiPedia p0)
+    {
+    	super.ShowPedia2(p0, "Smilodon");
     }
 
     public boolean isAngry()

@@ -26,13 +26,13 @@ public class ModelCompsognathus extends ModelDinosaurs
         textureHeight = 32;
         Neck = new ModelRenderer(this, 4, 4);
         Neck.addBox(-2F, -6F, -2F, 2, 4, 3);
-        Neck.setRotationPoint(0F, 18F, -4F);
+        Neck.setRotationPoint(0F, 17F, -1F);
         Neck.setTextureSize(64, 32);
         Neck.mirror = true;
         setRotation(Neck, 0F, 0F, 0F);
         Head = new ModelRenderer(this, 14, 0);
-        Head.addBox(-2F, -4F, -4F, 3, 3, 6);
-        Head.setRotationPoint(-0.5F, 13F, -5F);
+        Head.addBox(-2F, -2F, -5F, 3, 3, 6);
+        Head.setRotationPoint(-0.5F, 13F, -6F);
         Head.setTextureSize(64, 32);
         Head.mirror = true;
         setRotation(Head, 0F, 0F, 0F);
@@ -56,16 +56,16 @@ public class ModelCompsognathus extends ModelDinosaurs
         setRotation(LeftLeg, 0F, 0F, 0F);
         RightArm = new ModelRenderer(this, 0, 0);
         RightArm.addBox(0F, 0F, -3F, 1, 3, 1);
-        RightArm.setRotationPoint(-4F, 19F, -1F);
+        RightArm.setRotationPoint(-4F, 18F, 0F);
         RightArm.setTextureSize(64, 32);
         RightArm.mirror = true;
-        setRotation(RightArm, -0.5205006F, 0F, 0F);
+        setRotation(RightArm, -0.185877565F, 0F, 0F);
         LeftArm = new ModelRenderer(this, 0, 0);
         LeftArm.addBox(-1F, 0F, -3F, 1, 3, 1);
-        LeftArm.setRotationPoint(2F, 19F, -1F);
+        LeftArm.setRotationPoint(2F, 18F, 0F);
         LeftArm.setTextureSize(64, 32);
         LeftArm.mirror = true;
-        setRotation(LeftArm, -0.5204921F, 0F, 0F);
+        setRotation(LeftArm, -0.185877565F, 0F, 0F);
         LeftThigh = new ModelRenderer(this, 38, 8);
         LeftThigh.addBox(0F, 0F, 0F, 1, 4, 2);
         LeftThigh.setRotationPoint(1F, 15F, 2F);
@@ -112,6 +112,7 @@ public class ModelCompsognathus extends ModelDinosaurs
     protected void setRotationAngles(float var1, float var2, float var3, float var4, float var5, float var6, boolean var7)
     {
     	if(!var7){
+    		this.Neck.rotateAngleX = (float)Math.toRadians(45);
 	        this.Head.rotateAngleX = var5 / (180F / (float)Math.PI);
 	        this.Head.rotateAngleY = var4 / (180F / (float)Math.PI);
 	        this.RightThigh.rotateAngleX = MathHelper.cos(var1 * 0.6662F + (float)Math.PI) * 1.4F * var2;
@@ -124,6 +125,7 @@ public class ModelCompsognathus extends ModelDinosaurs
 	        this.Tail.rotateAngleX = 0.01F * MathHelper.sin(var3 * (float)0.3F + var2);
     	}
     	else {
+    		this.Neck.rotateAngleX = (float)Math.toRadians(45);
             this.Head.rotateAngleX = 0;
             this.Head.rotateAngleY = 0;
             this.RightThigh.rotateAngleX = 0;
