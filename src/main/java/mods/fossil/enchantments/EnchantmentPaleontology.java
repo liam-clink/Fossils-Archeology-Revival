@@ -77,7 +77,14 @@ public class EnchantmentPaleontology  extends Enchantment {
     
     public boolean canApply(ItemStack itemStack)
     {
-    	return itemStack.isItemStackDamageable() ? true : itemStack.getItem() instanceof ItemPickaxe ? super.canApply(itemStack) : true;
+    	if(itemStack.isItemStackDamageable())
+    	{
+    		if(itemStack.getItem() instanceof ItemPickaxe)
+    		{
+    			return super.canApply(itemStack);
+    		}
+    	}
+    	return false;
     }
     
     /**

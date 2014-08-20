@@ -9,7 +9,7 @@ import mods.fossil.entity.EntityDinoEgg;
 import mods.fossil.entity.mob.EntityCoelacanth;
 import mods.fossil.entity.mob.EntityDinosaur;
 import mods.fossil.entity.mob.EntityDodo;
-import mods.fossil.entity.mob.EntityGastornis;
+import mods.fossil.entity.mob.EntityTerrorBird;
 import mods.fossil.entity.mob.EntityMammoth;
 import mods.fossil.entity.mob.EntityNautilus;
 import mods.fossil.entity.mob.EntityPregnantCow;
@@ -212,70 +212,70 @@ public class GuiPedia extends GuiContainer
     protected void drawGuiContainerForegroundLayer(int var1, int var2)
     {
     	if(BookPages == 0) {
-        if (Fossil.ToPedia instanceof EntityDinosaur)
-        {
-            ((EntityDinosaur)Fossil.ToPedia).ShowPedia(this);
-        }
-
-        if (Fossil.ToPedia instanceof EntityDinoEgg)
-        {
-            ((EntityDinoEgg)Fossil.ToPedia).ShowPedia(this);
-        }
-
-        if (Fossil.ToPedia instanceof EntityPregnantCow)
-        {
-            ((EntityPregnantCow)Fossil.ToPedia).ShowPedia(this);
-        }
-
-        if (Fossil.ToPedia instanceof EntityPregnantPig)
-        {
-            ((EntityPregnantPig)Fossil.ToPedia).ShowPedia(this);
-        }
-                
-        if (Fossil.ToPedia instanceof EntityPregnantHorse)
-        {
-            ((EntityPregnantHorse)Fossil.ToPedia).ShowPedia(this);
-        }
-
-        if (Fossil.ToPedia instanceof EntityPregnantSheep)
-        {
-            ((EntityPregnantSheep)Fossil.ToPedia).ShowPedia(this);
-        }
-
-        if (Fossil.ToPedia instanceof EntityMammoth)
-        {
-            ((EntityMammoth)Fossil.ToPedia).ShowPedia(this);
-        }
-
-        if (Fossil.ToPedia instanceof EntitySmilodon)
-        {
-            ((EntitySmilodon)Fossil.ToPedia).ShowPedia(this);
-        }
-
-        if (Fossil.ToPedia instanceof EntityDodo)
-        {
-            ((EntityDodo)Fossil.ToPedia).ShowPedia(this);
-        }
-        
-        if (Fossil.ToPedia instanceof EntityCoelacanth)
-        {
-            ((EntityCoelacanth)Fossil.ToPedia).ShowPedia(this);
-        }
-        
-        if (Fossil.ToPedia instanceof EntityNautilus)
-        {
-            ((EntityNautilus)Fossil.ToPedia).ShowPedia(this);
-        }
-        
-        if (Fossil.ToPedia instanceof EntityQuagga)
-            {
-                ((EntityQuagga)Fossil.ToPedia).ShowPedia(this);
-            }
-            
-            if (Fossil.ToPedia instanceof EntityGastornis)
-            {
-                ((EntityGastornis)Fossil.ToPedia).ShowPedia(this);
-            }
+	        if (Fossil.ToPedia instanceof EntityDinosaur)
+	        {
+	            ((EntityDinosaur)Fossil.ToPedia).ShowPedia(this);
+	        }
+	
+	        if (Fossil.ToPedia instanceof EntityDinoEgg)
+	        {
+	            ((EntityDinoEgg)Fossil.ToPedia).ShowPedia(this);
+	        }
+	
+	        if (Fossil.ToPedia instanceof EntityPregnantCow)
+	        {
+	            ((EntityPregnantCow)Fossil.ToPedia).ShowPedia(this);
+	        }
+	
+	        if (Fossil.ToPedia instanceof EntityPregnantPig)
+	        {
+	            ((EntityPregnantPig)Fossil.ToPedia).ShowPedia(this);
+	        }
+	                
+	        if (Fossil.ToPedia instanceof EntityPregnantHorse)
+	        {
+	            ((EntityPregnantHorse)Fossil.ToPedia).ShowPedia(this);
+	        }
+	
+	        if (Fossil.ToPedia instanceof EntityPregnantSheep)
+	        {
+	            ((EntityPregnantSheep)Fossil.ToPedia).ShowPedia(this);
+	        }
+	
+	        if (Fossil.ToPedia instanceof EntityMammoth)
+	        {
+	            ((EntityMammoth)Fossil.ToPedia).ShowPedia(this);
+	        }
+	
+	        if (Fossil.ToPedia instanceof EntitySmilodon)
+	        {
+	            ((EntitySmilodon)Fossil.ToPedia).ShowPedia(this);
+	        }
+	
+	        if (Fossil.ToPedia instanceof EntityDodo)
+	        {
+	            ((EntityDodo)Fossil.ToPedia).ShowPedia(this);
+	        }
+	        
+	        if (Fossil.ToPedia instanceof EntityCoelacanth)
+	        {
+	            ((EntityCoelacanth)Fossil.ToPedia).ShowPedia(this);
+	        }
+	        
+	        if (Fossil.ToPedia instanceof EntityNautilus)
+	        {
+	            ((EntityNautilus)Fossil.ToPedia).ShowPedia(this);
+	        }
+	        
+	        if (Fossil.ToPedia instanceof EntityQuagga)
+	        {
+	            ((EntityQuagga)Fossil.ToPedia).ShowPedia(this);
+	        }
+	            
+	        if (Fossil.ToPedia instanceof EntityTerrorBird)
+		    {
+		        ((EntityTerrorBird)Fossil.ToPedia).ShowPedia(this);
+		    }
     	}
      	else
     	{
@@ -312,6 +312,11 @@ public class GuiPedia extends GuiContainer
 			if (Fossil.ToPedia instanceof EntityQuagga)
 			{
 			    ((EntityQuagga)Fossil.ToPedia).ShowPedia2(this);
+			}
+			
+			if (Fossil.ToPedia instanceof EntityTerrorBird)
+			{
+			    ((EntityTerrorBird)Fossil.ToPedia).ShowPedia2(this);
 			}
     	}
     }

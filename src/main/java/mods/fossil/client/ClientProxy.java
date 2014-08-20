@@ -19,6 +19,7 @@ import mods.fossil.entity.EntityDinoEgg;
 import mods.fossil.entity.EntityDodoEgg;
 import mods.fossil.entity.EntityJavelin;
 import mods.fossil.entity.EntityStoneboard;
+import mods.fossil.entity.EntityTerrorBirdEgg;
 import mods.fossil.entity.mob.*;
 import mods.fossil.guiBlocks.TileEntityFigurine;
 import mods.fossil.guiBlocks.TileEntityTimeMachine;
@@ -78,7 +79,8 @@ public class ClientProxy extends CommonProxy
         RenderingRegistry.registerEntityRenderingHandler(EntityCoelacanth.class, new RenderCoelacanth(new ModelCoelacanth(), 0.5F));
         RenderingRegistry.registerEntityRenderingHandler(EntityLiopleurodon.class, new RenderLiopleurodon(new ModelLiopleurodon(), 0.5F));
         RenderingRegistry.registerEntityRenderingHandler(EntityQuagga.class, new RenderQuagga(new ModelQuagga(), 0.5F));
-        RenderingRegistry.registerEntityRenderingHandler(EntityGastornis.class, new RenderGastornis(new ModelGastornis(), 0.5F));
+        RenderingRegistry.registerEntityRenderingHandler(EntityTerrorBird.class, new RenderTerrorBird(new ModelTerrorBird(), 0.5F));
+        RenderingRegistry.registerEntityRenderingHandler(EntityTerrorBirdEgg.class, new RenderSnowball(Fossil.terrorBirdEgg));
 
         RenderingRegistry.registerBlockHandler(Fossil.feederRenderID, new RenderFeeder());
 

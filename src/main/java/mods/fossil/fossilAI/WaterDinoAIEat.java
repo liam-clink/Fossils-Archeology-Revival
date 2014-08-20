@@ -16,6 +16,9 @@ import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.pathfinding.PathEntity;
+import net.minecraft.pathfinding.PathNavigate;
+import net.minecraft.pathfinding.PathPoint;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
@@ -70,6 +73,12 @@ public class WaterDinoAIEat extends EntityAIBase
 
 	private double speed;
 
+	private int entityPosX;
+
+	private int entityPosY;
+
+	private int entityPosZ;
+
     /**
      * Creates The AI, Input: Dino, Speed, searching range
      */
@@ -105,7 +114,7 @@ public class WaterDinoAIEat extends EntityAIBase
         {
 	        if (!Fossil.FossilOptions.Dinos_Starve)
 	        	return false;
-        }
+        }  
         
         if (!this.dinosaur.IsHungry() && !this.dinosaur.IsDeadlyHungry())
         {
@@ -113,20 +122,40 @@ public class WaterDinoAIEat extends EntityAIBase
             return false;
         }
 
-        //targetFeeder = this.dinosaur.GetNearestFeeder(SEARCH_RANGE);
-        //Feeder has priority over other food sources.
-        if (this.dinosaur.SelfType.useFeeder() && (this.targetFeeder != null))
-        {      	
-            this.destX = this.targetFeeder.xCoord;
-            this.destY = this.targetFeeder.yCoord;
-            this.destZ = this.targetFeeder.zCoord;
-            this.typeofTarget = FEEDER;
-            return targetFeeder != null;
-        }
-        //After Feeder, check if there are items, THEN blocks on the ground to eat.
-        else if (!this.dinosaur.SelfType.FoodItemList.IsEmpty() || !this.dinosaur.SelfType.FoodBlockList.IsEmpty())
+    	PathNavigate pathnavigate = this.dinosaur.getNavigator();
+        PathEntity pathentity = pathnavigate.getPath();
+
+        if (pathentity != null && !pathentity.isFinished())
         {
-            this.targetItem = this.getNearestItem2(SEARCH_RANGE);
+                PathPoint pathpoint = pathentity.getFinalPathPoint();
+                this.entityPosX = pathpoint.xCoord;
+                this.entityPosY = pathpoint.yCoord + 1;
+                this.entityPosZ = pathpoint.zCoord;
+
+            if (this.dinosaur.getDistanceSq((double)this.entityPosX, this.dinosaur.posY, (double)this.entityPosZ) <= 5.25D)
+            {
+		        //Feeder has priority over other food sources.
+		        if (this.dinosaur.SelfType.useFeeder())
+		        {
+		        	//targetFeeder = this.dinosaur.GetNearestFeeder(Range/2);
+		        	this.targetFeeder = null;
+		        	
+		            if(this.targetFeeder != null)
+		            {
+		            	Fossil.Console("Found Feeder at: "+ this.targetFeeder.xCoord + ", "+ this.targetFeeder.yCoord + ", "+ this.targetFeeder.zCoord);
+		            this.destX = this.targetFeeder.xCoord;
+		            this.destY = this.targetFeeder.yCoord;
+		            this.destZ = this.targetFeeder.zCoord;
+		            this.typeofTarget = FEEDER;
+		            return true;
+		            }
+		        }
+         	}
+        }
+        //Check for items and then blocks.
+        if (!this.dinosaur.SelfType.FoodItemList.IsEmpty())
+        {
+            this.targetItem = this.getNearestItem2(this.SEARCH_RANGE);
             if( this.targetItem != null) {
                 this.destX = targetItem.posX;
                 this.destY = targetItem.posY;
@@ -134,10 +163,10 @@ public class WaterDinoAIEat extends EntityAIBase
             	this.typeofTarget = ITEM;
             	return true;
             }
-            
+    
             if(!this.dinosaur.SelfType.FoodBlockList.IsEmpty())//Hasn't found anything and has blocks it can look for
             {
-                Vec3 targetBlock = this.dinosaur.getBlockToEat(SEARCH_RANGE/2);
+                Vec3 targetBlock = this.dinosaur.getBlockToEat(this.SEARCH_RANGE);
                 
                 if (targetBlock != null)//Found Item, go there and eat it
                 {
@@ -145,11 +174,11 @@ public class WaterDinoAIEat extends EntityAIBase
                     this.destY = targetBlock.yCoord;
                     this.destZ = targetBlock.zCoord;
                     this.typeofTarget=BLOCK;
-                    //System.out.println("BLOCK FOUND!");
+                    System.out.println("BLOCK FOUND!");
                     return true;
                 }
             }
-        }
+		}
         return false;
     }
 
@@ -159,29 +188,35 @@ public class WaterDinoAIEat extends EntityAIBase
     @Override
     public boolean continueExecuting()
     {
-    	
-    	if( !this.dinosaur.IsHungry() || !this.dinosaur.IsDeadlyHungry()){
+        double Distance = Math.sqrt(Math.pow(this.dinosaur.posX - this.destX, 2.0D) + Math.pow(this.dinosaur.posZ - this.destZ, 2.0D));
+
+    	if( !this.dinosaur.IsHungry())
+    	{
     		return false;
     	}
-    	else
-    	{
-    		switch(this.typeofTarget) {
-	    		case NO_TARGET:
-	    			break;
-	    		case ITEM:
-	    			return targetItem.isEntityAlive();
-	    		case BLOCK:
-	    			return this.dinosaur.SelfType.FoodBlockList.CheckBlock(this.dinosaur.worldObj.getBlock((int)destX, (int)destY, (int)destZ));
-	    		case MOB:
-	    			return targetMob != null;
-	    		case FEEDER:
-	    			return targetFeeder.isInvalid();
-	    			//return targetFeeder != null;
+        
+        if (Distance > this.SEARCH_RANGE)
+        {
+        	Fossil.Console("Target too far, discontinuing task. Distance: "+Distance +", Range: "+this.SEARCH_RANGE);
+        	return false;
+        }
+
+		switch(this.typeofTarget) {
+    		case NO_TARGET:
 	    		default:
-	    			break;
-    		}	
-    	}
-    	return false;
+	    			return false;
+    		case ITEM:
+    			return this.targetItem.isEntityAlive() && this.targetItem != null;
+    		case BLOCK:
+    			return this.dinosaur.SelfType.FoodBlockList.CheckBlock(this.dinosaur.worldObj.getBlock((int)destX, (int)destY, (int)destZ)) && this.targetBlock != null;
+    		case MOB:
+    			return this.targetMob != null && this.targetMob.isEntityAlive();
+    		case FEEDER:
+    			return !this.targetFeeder.isInvalid();
+    			//return targetFeeder != null;
+
+		}	
+    	
         //return ((this.dinosaur.IsHungry() || this.dinosaur.IsDeadlyHungry()) && (this.typeofTarget != -1));
     }
 

@@ -24,10 +24,8 @@ public class FossilRecipeHandler
         GameRegistry.addRecipe(new ItemStack(Fossil.blockSifterIdle, 1), new Object[] {"XYX", "YZY", "YXY", 'X', Items.string, 'Y', Blocks.planks, 'Z', Blocks.iron_bars});
         GameRegistry.addRecipe(new ItemStack(Fossil.ancientWoodPlate, 3), new Object[] {"XX", 'X', Fossil.ancientWood});
 
-        for (int i = 0; i < EnumDinoType.values().length; i++)
-            GameRegistry.addRecipe(new ItemStack(Items.cake, 1), new Object[] {"MMM", "SES", "WWW", 'M', Items.milk_bucket, 'S', Items.sugar, 'W', Items.wheat, 'E', EnumDinoType.values()[i].EggItem});
-        GameRegistry.addRecipe(new ItemStack(Items.cake, 1), new Object[] {"MMM", "SES", "WWW", 'M', Items.milk_bucket, 'S', Items.sugar, 'W', Items.wheat, 'E', Fossil.dodoEgg});
-        GameRegistry.addRecipe(new ItemStack(Items.cake, 1), new Object[] {"MMM", "SES", "WWW", 'M', Items.milk_bucket, 'S', Items.sugar, 'W', Items.wheat, 'E', Fossil.cultivatedDodoEgg});
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.cake, 1), new Object[] {"MMM", "SES", "WWW", 'M', Items.milk_bucket, 'S', Items.sugar, 'W', Items.wheat, 'E', "foodEgg"}));
+ 
         GameRegistry.addRecipe(new ItemStack(Fossil.skullStick, 1), new Object[] {"X", "Y", 'X', Fossil.blockSkull, 'Y', Items.stick});
         GameRegistry.addRecipe(new ItemStack(Fossil.drum, 1), new Object[] {"ZZZ", "XYX", "XXX", 'X', Blocks.planks, 'Y', Items.redstone, 'Z', Items.leather});
         GameRegistry.addRecipe(new ItemStack(Fossil.feederActive, 1), new Object[] {"XYX", "ZAB", "BBB", 'X', Items.iron_ingot, 'Y', Blocks.glass, 'Z', Blocks.stone_button, 'A', Items.bucket, 'B', Blocks.stone});
@@ -126,5 +124,8 @@ public class FossilRecipeHandler
 
         GameRegistry.addSmelting(Fossil.icedMeat, new ItemStack(Items.beef), 3.0F);
         GameRegistry.addSmelting(Fossil.dodoWing, new ItemStack(Fossil.dodoWingCooked), 3.0F);
+        GameRegistry.addSmelting(Fossil.terrorBirdMeat, new ItemStack(Fossil.terrorBirdMeatCooked), 3.0F);
+        GameRegistry.addSmelting(Fossil.quaggaMeat, new ItemStack(Fossil.quaggaMeatCooked), 3.0F);
+
     }
 }

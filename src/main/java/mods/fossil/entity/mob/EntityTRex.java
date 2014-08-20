@@ -241,10 +241,6 @@ public class EntityTRex extends EntityDinosaur
         {
             return false;
         }
-        else if (damageSource.getEntity() == this)
-        {
-            return false;
-        }
         else
         {
             Entity entity = damageSource.getEntity();

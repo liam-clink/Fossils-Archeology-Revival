@@ -98,7 +98,7 @@ public class EntityDilophosaurus extends EntityDinosaur
         this.tasks.addTask(4, new EntityAIOpenDoor(this, true));
         this.tasks.addTask(5, new DinoAIFollowOwner(this, 1.0F, 5.0F, 2.0F));
         this.tasks.addTask(7, new DinoAIWander(this, 1.0D));
-        this.tasks.addTask(7, new DinoAIEat(this, 24));
+        this.tasks.addTask(7, new DinoAIEat(this, 48));
         this.targetTasks.addTask(7, new DinoAIHunt(this, EntityLiving.class, 500, false));
         this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(9, new EntityAILookIdle(this));

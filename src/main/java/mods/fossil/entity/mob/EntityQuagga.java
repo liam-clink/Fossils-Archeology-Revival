@@ -17,6 +17,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.ai.EntityAIAvoidEntity;
 import net.minecraft.entity.ai.EntityAIFollowParent;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIMate;
@@ -105,7 +106,8 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic
         this.tasks.addTask(8, new EntityAILookIdle(this));
         this.func_110226_cD();
         
-        this.targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityMob.class, 100, false));
+        this.targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityMob.class, 100, true, true));
+        this.tasks.addTask(3, new EntityAIAvoidEntity(this, EntityTerrorBird.class, 16.0F, 0.8D, 1.0D));
 
     }
 

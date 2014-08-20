@@ -416,14 +416,19 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
             	itemstack = new ItemStack(Fossil.dnaDodo, 1);
             }
             
-            if (this.analyzerItemStacks[this.RawIndex].getItem() == Fossil.dodoEgg)
+            if (this.analyzerItemStacks[this.RawIndex].getItem() == Fossil.cultivatedDodoEgg)
             {
             	itemstack = new ItemStack(Fossil.dnaDodo, 1);
             }
             
-            if (this.analyzerItemStacks[this.RawIndex].getItem() == Fossil.dodoEgg)
+            if (this.analyzerItemStacks[this.RawIndex].getItem() == Fossil.terrorBirdMeat)
             {
-            	itemstack = new ItemStack(Fossil.dnaDodo, 1);
+            	itemstack = new ItemStack(Fossil.dnaTerrorBird, 1);
+            }
+            
+            if (this.analyzerItemStacks[this.RawIndex].getItem() == Fossil.cultivatedTerrorBirdEgg)
+            {
+            	itemstack = new ItemStack(Fossil.dnaTerrorBird, 1);
             }
             
             if (this.analyzerItemStacks[this.RawIndex].getItem() == Fossil.icedMeat)
@@ -461,6 +466,11 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
                 if (rand >= 60 && rand < 70)
                 {
                 	itemstack = new ItemStack(Fossil.dnaQuagga, 1);
+                }
+                
+                if (rand >= 70 && rand < 80)
+                {
+                	itemstack = new ItemStack(Fossil.dnaTerrorBird, 1);
                 }
 
                 if (itemstack == null)

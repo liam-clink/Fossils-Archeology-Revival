@@ -1,6 +1,7 @@
 package mods.fossil.handler;
 
 import mods.fossil.Fossil;
+import mods.fossil.fossilEnums.EnumDinoType;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -26,7 +27,16 @@ public class FossilOreDictionary
         OreDictionary.registerOre("dinosaurSkull", new ItemStack(Fossil.skull,1, OreDictionary.WILDCARD_VALUE));
         OreDictionary.registerOre("dinosaurLegBone", new ItemStack(Fossil.legBone,1, OreDictionary.WILDCARD_VALUE));
         OreDictionary.registerOre("dinosaurArmBone", new ItemStack(Fossil.armBone,1, OreDictionary.WILDCARD_VALUE));
-        OreDictionary.registerOre("dinosaurVertebrae", new ItemStack(Fossil.vertebrae,1, OreDictionary.WILDCARD_VALUE));       
+        OreDictionary.registerOre("dinosaurVertebrae", new ItemStack(Fossil.vertebrae,1, OreDictionary.WILDCARD_VALUE));
         OreDictionary.registerOre("dinosaurRibCage", new ItemStack(Fossil.ribCage,1, OreDictionary.WILDCARD_VALUE));
+        
+        OreDictionary.registerOre("foodEgg", Fossil.dodoEgg);
+        OreDictionary.registerOre("foodEgg", Fossil.cultivatedDodoEgg);
+        OreDictionary.registerOre("foodEgg", new ItemStack(Fossil.terrorBirdEgg, 1, OreDictionary.WILDCARD_VALUE));
+        
+        for (int i = 0; i < EnumDinoType.values().length; i++)
+        OreDictionary.registerOre("foodEgg", EnumDinoType.values()[i].EggItem);
+
+
     }
 }

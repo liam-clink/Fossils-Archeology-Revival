@@ -6,59 +6,63 @@ import net.minecraft.item.Item;
 
 public enum EnumDinoFoodItem
 {
-    Wheat(Items.wheat, 10, 2), //Veggie Foods
+    Wheat(Items.wheat, 13, 2), //Veggie Foods
     Melon(Items.melon, 10, 2),
-    Apple(Items.apple, 15, 3),
-    Potato(Items.potato, 10, 2),
-    BakedPotato(Items.baked_potato, 15, 3),
-    Cake(Items.cake, 25, 5),
-    Carrot(Items.carrot, 10, 2),
-    Cookie(Items.cookie, 15, 4),
-    PumpkinPie(Items.pumpkin_pie, 20, 4),
-    Sugar(Items.sugar, 10, 2),
+    Apple(Items.apple, 20, 3),
+    Potato(Items.potato, 20, 5),
+    BakedPotato(Items.baked_potato, 35, 6),
+    Cake(Items.cake, 50, 8),
+    Carrot(Items.carrot, 15, 4),
+    Cookie(Items.cookie, 10, 6),
+    PumpkinPie(Items.pumpkin_pie, 25, 8),
+    Sugar(Items.sugar, 7, 2),
     Bread(Items.bread, 25, 2),
     Seeds(Items.wheat_seeds, 5, 1),
     melonSeeds(Items.melon_seeds, 5, 1),
+    pumpkinSeeds(Items.pumpkin_seeds, 5, 1),
 
 	/*
 	 * TODO: Change FoodValue so things higher up on the food chain are worth less in FoodValue,
 	 * but maybe trade off with higher HealValue and vice versa.
 	 */
     
-    FishRaw(Items.fish, 30, 3), //this MUST BE the first carnivore food!
-    FishCooked(Items.cooked_fished, 40, 4),
-    BeefCooked(Items.cooked_beef, 50, 5),
+    FishRaw(Items.fish, 30, 4), //this MUST BE the first carnivore food!
+    FishCooked(Items.cooked_fished, 45, 6),
+    BeefCooked(Items.cooked_beef, 60, 6),
     BeefRaw(Items.beef, 40, 4),
-    ChickenCooked(Items.cooked_chicken, 10, 2),
-    ChickenRaw(Items.chicken, 15, 3),
-    PorkRaw(Items.porkchop, 30, 2),
-    PorkCooked(Items.cooked_porkchop, 50, 3),
-    Egg(Items.egg, 10, 2),
-    Sjl(Fossil.sjl, 30, 3), //SioChiuLe
-    Nautilus(EnumDinoType.Nautilus.DropItem, 20, 2),
-    Coelacanth(Fossil.livingCoelacanth, 20, 2),
-    ChickenSoupRaw(Fossil.rawChickenSoup, 30, 3),
-    ChickenSoupCooked(Fossil.cookedChickenSoup, 40, 3),
-    Triceratops(EnumDinoType.Triceratops.DropItem, 50, 3),
-    Velociraptor(EnumDinoType.Velociraptor.DropItem, 20, 3),
-    TRex(EnumDinoType.TRex.DropItem, 20, 3),
-    Pterosaur(EnumDinoType.Pterosaur.DropItem, 15, 2),
-    Plesiosaur(EnumDinoType.Plesiosaur.DropItem, 30, 3),
-    Mosasaurus(EnumDinoType.Mosasaurus.DropItem, 20, 3),
-    Stegosaurus(EnumDinoType.Stegosaurus.DropItem, 50, 3),
-    Dilophosaurus(EnumDinoType.Dilophosaurus.DropItem, 25, 2),
-    Brachiosaur(EnumDinoType.Brachiosaurus.DropItem, 50, 4),
-    Spinosaurus(EnumDinoType.Spinosaurus.DropItem, 20, 3),
-    Compsognathus(EnumDinoType.Compsognathus.DropItem, 10, 1),
-    Ankylosaurus(EnumDinoType.Ankylosaurus.DropItem, 50, 3),
-    Pachycephalosaurus(EnumDinoType.Pachycephalosaurus.DropItem, 50,3),
-    Deinonychus(EnumDinoType.Deinonychus.DropItem, 30, 3),
-    Gallimimus(EnumDinoType.Gallimimus.DropItem, 35, 4),
-    DinoMeatCooked(Fossil.cookedDinoMeat, 50, 5),
-    DodoWing(Fossil.dodoWing, 20, 2),
-    DodoWingCooked(Fossil.dodoWingCooked, 30, 3),
-    Liopleurodon(EnumDinoType.Liopleurodon.DropItem, 20, 3),
-  //Gastornis(EnumDinoType.Gastornis.DropItem, 40, 4);
+    ChickenCooked(Items.cooked_chicken, 15, 4),
+    ChickenRaw(Items.chicken, 10, 3),
+    PorkRaw(Items.porkchop, 35, 4),
+    PorkCooked(Items.cooked_porkchop, 55, 5),
+    Egg(Items.egg, 7, 2),
+    Sjl(Fossil.sjl, 65, 7), //SioChiuLe
+    Nautilus(EnumDinoType.Nautilus.DropItem, 28, 2),
+    Coelacanth(Fossil.livingCoelacanth, 33, 2),
+    ChickenSoupRaw(Fossil.rawChickenSoup, 25, 1),
+    ChickenSoupCooked(Fossil.cookedChickenSoup, 50, 5),
+    Triceratops(EnumDinoType.Triceratops.DropItem, 55, 5),
+    Velociraptor(EnumDinoType.Velociraptor.DropItem, 28, 3),
+    TRex(EnumDinoType.TRex.DropItem, 60, 7),
+    Pterosaur(EnumDinoType.Pterosaur.DropItem, 35, 2),
+    Plesiosaur(EnumDinoType.Plesiosaur.DropItem, 40, 5),
+    Mosasaurus(EnumDinoType.Mosasaurus.DropItem, 30, 4),
+    Liopleurodon(EnumDinoType.Liopleurodon.DropItem, 28, 3),
+    Stegosaurus(EnumDinoType.Stegosaurus.DropItem, 55, 5),
+    Dilophosaurus(EnumDinoType.Dilophosaurus.DropItem, 28, 4),
+    Brachiosaur(EnumDinoType.Brachiosaurus.DropItem, 80, 9),
+    Spinosaurus(EnumDinoType.Spinosaurus.DropItem, 65, 7),
+    Compsognathus(EnumDinoType.Compsognathus.DropItem, 15, 2),
+    Ankylosaurus(EnumDinoType.Ankylosaurus.DropItem, 53, 3),
+    Pachycephalosaurus(EnumDinoType.Pachycephalosaurus.DropItem, 40,3),
+    Deinonychus(EnumDinoType.Deinonychus.DropItem, 35, 4),
+    Gallimimus(EnumDinoType.Gallimimus.DropItem, 58, 5),
+    DinoMeatCooked(Fossil.cookedDinoMeat, 75, 8),
+    DodoWing(Fossil.dodoWing, 23, 3),
+    DodoWingCooked(Fossil.dodoWingCooked, 40, 5),
+    DodoEgg(Fossil.dodoEgg, 10, 3),
+    TerrorBirdMeat(Fossil.terrorBirdMeat, 11, 4),
+    TerrorBirdMeatCooked(Fossil.terrorBirdMeatCooked, 21, 6),
+    TerrorBirdEgg(Fossil.terrorBirdEgg, 10, 3)
     ;
     public Item item;
     public int FoodValue;
@@ -112,5 +116,43 @@ public enum EnumDinoFoodItem
         }
 
         return 0;
+    }
+    
+    public static void carnivoreItemPreset(EnumDinoType dinoType)
+    {
+    	dinoType.FoodItemList.addItem(BeefCooked);
+    	dinoType.FoodItemList.addItem(BeefRaw);
+    	dinoType.FoodItemList.addItem(ChickenCooked);
+    	dinoType.FoodItemList.addItem(ChickenRaw);
+    	dinoType.FoodItemList.addItem(PorkRaw);
+    	dinoType.FoodItemList.addItem(PorkCooked);
+    	dinoType.FoodItemList.addItem(Triceratops);
+    	dinoType.FoodItemList.addItem(Velociraptor);
+    	dinoType.FoodItemList.addItem(TRex);
+    	dinoType.FoodItemList.addItem(Pterosaur);
+    	dinoType.FoodItemList.addItem(Plesiosaur);
+    	dinoType.FoodItemList.addItem(Mosasaurus);
+    	dinoType.FoodItemList.addItem(Liopleurodon);
+    	dinoType.FoodItemList.addItem(Stegosaurus);
+    	dinoType.FoodItemList.addItem(Dilophosaurus);
+    	dinoType.FoodItemList.addItem(Brachiosaur);
+    	dinoType.FoodItemList.addItem(Spinosaurus);
+    	dinoType.FoodItemList.addItem(Compsognathus);
+    	dinoType.FoodItemList.addItem(Ankylosaurus);
+    	dinoType.FoodItemList.addItem(Pachycephalosaurus);
+    	dinoType.FoodItemList.addItem(Deinonychus);
+    	dinoType.FoodItemList.addItem(Gallimimus);
+    	dinoType.FoodItemList.addItem(DinoMeatCooked);
+    	dinoType.FoodItemList.addItem(DodoWing);
+    	dinoType.FoodItemList.addItem(DodoWingCooked);
+    	dinoType.FoodItemList.addItem(TerrorBirdMeat);
+    	dinoType.FoodItemList.addItem(TerrorBirdMeatCooked);
+    }
+    
+    public static void raptorItemPreset(EnumDinoType dinoType)
+    {
+    	dinoType.FoodItemList.addItem(TerrorBirdEgg);
+    	dinoType.FoodItemList.addItem(DodoEgg);
+    	dinoType.FoodItemList.addItem(Egg);
     }
 }

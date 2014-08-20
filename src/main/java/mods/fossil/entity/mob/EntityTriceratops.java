@@ -63,7 +63,7 @@ public class EntityTriceratops extends EntityDinosaur
         this.tasks.addTask(3, new EntityAILeapAtTarget(this, 0.2F));
         this.tasks.addTask(4, new DinoAIAttackOnCollide(this, 1.1D, true));
         this.tasks.addTask(5, new DinoAIFollowOwner(this, 1.0F, 5.0F, 2.0F));
-        this.tasks.addTask(7, new DinoAIEat(this, 24));
+        this.tasks.addTask(7, new DinoAIEat(this, 48));
         this.tasks.addTask(8, new DinoAIWander(this, 1.0D));
         this.tasks.addTask(9, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(10, new EntityAILookIdle(this));
