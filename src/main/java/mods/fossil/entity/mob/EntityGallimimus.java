@@ -67,7 +67,7 @@ public class EntityGallimimus extends EntityDinosaur
         tasks.addTask(1, new DinoAIRideGround(this, 1)); // mutex all
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
         
-        this.tasks.addTask(6, new DinoAIEat(this, 24));
+        this.tasks.addTask(6, new DinoAIEat(this, 48));
         this.tasks.addTask(7, new DinoAIWander(this, 1.0D));
         
         this.tasks.addTask(2, new EntityAIAvoidEntity(this, EntityTRex.class, 16.0F, 0.8D, 1.33D));

@@ -689,8 +689,8 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
                     	break;
                     	
                     	/*
-                    case Gastornis:
-                       var5 = new EntityGastornis(this.worldObj);
+                    case TerrorBird:
+                       var5 = new EntityTerrorBird(this.worldObj);
                        break;
                        */
 

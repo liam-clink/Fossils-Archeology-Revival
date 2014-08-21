@@ -1,4 +1,4 @@
-﻿#Updated for 1.6.4 Build 6.3 August 11 2014  
+﻿#Build 6.3.2 - Updated August 6 2014
 #Spanish - Spain (es_ES) Localization File
 
 #Tab Groups
@@ -196,7 +196,7 @@ item.claw.Mosasaurus.name=Mosasaurus Tooth
 item.claw.Liopleurodon.name=Liopleurodon Gastralias
 item.claw.Stegosaurus.name=Stegosaurus Thagomizer
 item.claw.Dilophosaurus.name=Dilophosaurus Claw
-item.claw.Brachiosaurus.name=Brachiosaurus Cervical Vertebrae
+item.claw.Brachiosaurus.name=Brachiosaurus Claw
 item.claw.Spinosaurus.name=Spinosaurus Sail
 item.claw.Compsognathus.name=Compsognathus Claw
 item.claw.Ankylosaurus.name=Ankylosaurus Tail Club
@@ -341,6 +341,14 @@ item.eggGallimimus.name=Gallimimus Egg
 item.eggCoelacanth.first.name=Ocean Coelacanth
 item.eggCoelacanth.second.name=River Coelacanth
 item.eggCoelacanth.third.name=Swamp Coelacanth
+item.eggTerrorBird.gastornis.name=Gastornis Egg
+item.eggTerrorBird.phorusrhacos.name=Phorusrhacos Egg
+item.eggTerrorBird.titanis.name=Titanis Egg
+item.eggTerrorBird.kelenken.name=Kelenken Egg
+item.eggCultivatedTerrorBird.gastornis.name=Cultivated Gastornis Egg
+item.eggCultivatedTerrorBird.phorusrhacos.name=Cultivated Phorusrhacos Egg
+item.eggCultivatedTerrorBird.titanis.name=Cultivated Titanis Egg
+item.eggCultivatedTerrorBird.kelenken.name=Cultivated Kelenken Egg
 item.dnaTriceratops.name=ADN de Triceratops
 item.dnaVelociraptor.name=ADN de Velocirraptor
 item.dnaTRex.name=ADN de Tiranosaurio
@@ -368,6 +376,7 @@ item.dnaMammoth.name=ADN de Mamút
 item.dnaDodo.name=Dodo DNA
 item.dnaHorse.name=Horse DNA
 item.dnaQuagga.name=Quagga DNA
+item.dnaTerrorBird.name=Terror Bird DNA
 item.embryoPig.name=Embrión de Cerdo
 item.embryoSheep.name=Embrión de Oveja
 item.embryoCow.name=Embrión de Vaca
@@ -379,6 +388,10 @@ item.embryoHorse.name=Horse Embryo
 item.embryoQuagga.name=Quagga Embryo
 item.archNotebook.name=Cuaderno de Arqueología
 item.potteryShard.name=Pottery Shard
+item.terrorBirdMeat.name=Raw Terror Bird Leg
+item.terrorBirdMeatCooked.name=Cooked Terror Bird Leg
+item.quaggaMeat.name=Raw Quagga Meat
+item.quaggaMeatCooked.name=Cooked Quagga Meat
 
 #Dinosaur related chat messages
 dnaName.head=ADN de 
@@ -400,23 +413,23 @@ order.FreeMove=Moverse libremente
 
 #Dinosaur status chat messages
 status.Hungry.head=Este 
-status.Hungry=tiene hambre.
+status.Hungry= tiene hambre.
 status.Starve.head=Un 
-status.Starve=ha muerto de hambre.
+status.Starve= ha muerto de hambre.
 status.LearningChest.head=Un 
-status.LearningChest=aprendió a usar cofres.
+status.LearningChest= aprendió a usar cofres.
 status.Betrayed.head=Este 
-status.Betrayed=ya no confía en la humanidad.
+status.Betrayed= ya no confía en la humanidad.
 status.NoSpace.head=Este 
-status.NoSpace=no tiene espacio para crecer.
+status.NoSpace= no tiene espacio para crecer.
 status.StarveEsc.head=
-status.StarveEsc=te ha dejado por el hambre.
-status.SJLBite=se comió el Siu-Jiu-Le y escapó.
-status.ChewTime=necesita tiempo para masticar.
-status.Full.head=This 
-status.Full=está lleno.
+status.StarveEsc= te ha dejado por el hambre.
+status.SJLBite= se comió el Siu-Jiu-Le y escapó.
+status.ChewTime= necesita tiempo para masticar.
+status.Full.head= This 
+status.Full= está lleno.
 status.Nervous.Head=Tú hiciste poco 
-status.Nervous=depende de ti para cazar por sí mismo.
+status.Nervous= depende de ti para cazar por sí mismo.
 status.GemErrorYoung=Este tiranosaurio es aún muy joven.
 status.GemErrorHealth=El escarabajo no puede contener una fuerza vital tan grande.
 status.GemErrorTamed=Este Tiranosaurio ya ha sido domado.
@@ -445,12 +458,13 @@ entity.fossil.Gallimimus.name=Gallimimus
 entity.fossil.Mammoth.name=Mamút
 entity.fossil.Smilodon.name=Tigres Dientes de Sable
 entity.fossil.PregnantCow.name=Vaca Embarazada
-entity.fossil.PregnantPig.name=
+entity.fossil.PregnantPig.name=Cerdo Embarazado   
 entity.fossil.PregnantSheep.name=Oveja Embarazada
 entity.fossil.PregnantHorse.name=Pregnant Horse
 entity.fossil.Dodo.name=Dodo
 entity.fossil.Coelacanth.name=Coelacanth
 entity.fossil.Quagga.name=Quagga
+entity.fossil.TerrorBird.name=Terror Bird
 
 #Pedia text
 pedia.text.owner=Dueño:
@@ -505,8 +519,8 @@ fpzSpeaker.anuSommon=¡¡Saludad a Anu!!
 dinoegg.hatched=¡Un huevo de dinosaurio se ha abierto!
 dinoegg.noSpace=Este huevo no puede colocarse aquí. 
 dinoegg.head=Un huevo de 
-dinoegg.dry=
-dinoegg.cold=pereció por congelarse. 
+dinoegg.dry= pereció por secarse.   
+dinoegg.cold= pereció por congelarse. 
 
 #Cultivator chat messages
 cultivate.outBreak=¡Advertencia! ¡Fallo en el proceso de incuvación!

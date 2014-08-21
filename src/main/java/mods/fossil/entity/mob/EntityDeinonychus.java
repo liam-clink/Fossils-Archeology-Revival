@@ -79,7 +79,7 @@ public class EntityDeinonychus extends EntityDinosaur
         this.tasks.addTask(3, new DinoAIAttackOnCollide(this, 1.2D, true));
         this.tasks.addTask(4, new EntityAIOpenDoor(this, true));
         this.tasks.addTask(5, new DinoAIFollowOwner(this, 1.0F, 10.0F, 2.0F));
-        this.tasks.addTask(6, new DinoAIEat(this, 24));
+        this.tasks.addTask(6, new DinoAIEat(this, 48));
         this.tasks.addTask(7, new DinoAIWander(this, 1.0D));
         this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(9, new EntityAILookIdle(this));

@@ -5,6 +5,7 @@ import java.util.Random;
 
 import mods.fossil.Fossil;
 import mods.fossil.client.LocalizationStrings;
+import mods.fossil.fossilEnums.EnumDinoType;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStone;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -16,7 +17,10 @@ import net.minecraft.world.World;
 
 public class BlockFossil extends BlockStone
 {
-    public BlockFossil()
+    private int randomMeta;
+    Random rand = new Random();
+
+	public BlockFossil()
     {
         super();
         this.setHardness(3.0F);
@@ -25,6 +29,7 @@ public class BlockFossil extends BlockStone
         this.setBlockName(LocalizationStrings.BLOCK_FOSSIL_NAME);
         this.setCreativeTab(Fossil.tabFBlocks);
         this.setHarvestLevel("pickaxe", 2);
+        randomMeta = 0;
     }
 
     /**
@@ -51,36 +56,57 @@ public class BlockFossil extends BlockStone
 
         if (i < 13)
         {
+        	int dropRandom = rand.nextInt(EnumDinoType.values().length)+1;
+        	if(dropRandom != 4)
+        		this.randomMeta = dropRandom;
             return Fossil.legBone;
         }
 
         if (i < 15)
         {
+        	int dropRandom = rand.nextInt(EnumDinoType.values().length)+1;
+        	if(dropRandom != 4)
+        		this.randomMeta = dropRandom;
             return Fossil.skull;
         }
 
         if (i < 17)
         {
+        	int dropRandom = rand.nextInt(EnumDinoType.values().length)+1;
+        	if(dropRandom != 4)
+        		this.randomMeta = dropRandom;
             return Fossil.claw;
         }
 
         if (i < 19)
         {
+        	int dropRandom = rand.nextInt(EnumDinoType.values().length)+1;
+        	if(dropRandom != 4)
+        		this.randomMeta = dropRandom;
             return Fossil.foot;
         }
         
         if (i < 21)
         {
+        	int dropRandom = rand.nextInt(EnumDinoType.values().length)+1;
+        	if(dropRandom != 4)
+        		this.randomMeta = dropRandom;
             return Fossil.vertebrae;
         }
         
         if (i < 23)
         {
+        	int dropRandom = rand.nextInt(EnumDinoType.values().length)+1;
+        	if(dropRandom != 4)
+        		this.randomMeta = dropRandom;
             return Fossil.armBone;
         }
         
         if (i < 25)
         {
+        	int dropRandom = rand.nextInt(EnumDinoType.values().length)+1;
+        	if(dropRandom != 4)
+        		this.randomMeta = dropRandom;
             return Fossil.dinoRibCage;
         }
 
@@ -118,8 +144,7 @@ public class BlockFossil extends BlockStone
             Item item = getItemDropped(metadata, world.rand, fortune);
             if (item != null)
             {
-            	ret.add(new ItemStack(item, 1, damageDropped(metadata)));
-                //ret.add(new ItemStack(Fossil.biofossil, 1, 0));
+            	ret.add(new ItemStack(item, 1, randomMeta));
             }
         }
         return ret;

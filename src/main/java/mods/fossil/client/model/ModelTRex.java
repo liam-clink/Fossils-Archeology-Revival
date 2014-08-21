@@ -62,7 +62,7 @@ public ModelTRex()
  setTextureOffset("LowerArmRight.LowerArmRight", 34, 33);
  
  LowerBody = new ModelRenderer(this, "LowerBody");
- LowerBody.setRotationPoint(0F, 9F, -2F);
+ LowerBody.setRotationPoint(0F, 10F, -2F);
  setRotation(LowerBody, 0F, 0F, 0F);
  LowerBody.mirror = true;
    LowerBody.addBox("LowerBody", -4F, -6F, 0F, 8, 11, 12);
@@ -190,7 +190,7 @@ public void render(Entity var1, float var2, float var3, float var4, float var5, 
 {
     super.render(var1, var2, var3, var4, var5, var6, var7);
     this.setRotationAngles(var2, var3, var4, var5, var6, var7, ((EntityDinosaur)var1).isModelized());
- LowerBody.render(var7);
+    this.LowerBody.render(var7);
 }
 
 private void setRotation(ModelRenderer model, float x, float y, float z)

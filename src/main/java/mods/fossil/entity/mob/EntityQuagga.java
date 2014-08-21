@@ -17,6 +17,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.ai.EntityAIAvoidEntity;
 import net.minecraft.entity.ai.EntityAIFollowParent;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIMate;
@@ -105,7 +106,8 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic
         this.tasks.addTask(8, new EntityAILookIdle(this));
         this.func_110226_cD();
         
-        this.targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityMob.class, 100, false));
+        this.targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityMob.class, 100, true, true));
+        this.tasks.addTask(3, new EntityAIAvoidEntity(this, EntityTerrorBird.class, 16.0F, 0.8D, 1.0D));
 
     }
 
@@ -1507,6 +1509,28 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic
     public boolean isOnLadder()
     {
         return false;
+    }
+    
+    /**
+     * Drop 0-2 items of this living's type. @param par1 - Whether this entity has recently been hit by a player. @param
+     * par2 - Level of Looting used to kill this mob.
+     */
+    protected void dropFewItems(boolean hasBeenHit, int looting)
+    {
+        int j = this.rand.nextInt(3) + this.rand.nextInt(1 + looting);
+        int k;
+
+        for (k = 0; k < j; ++k)
+        {
+            if (this.isBurning())
+            {
+                this.dropItem(Fossil.quaggaMeatCooked, 1);
+            }
+            else
+            {
+                this.dropItem(Fossil.quaggaMeat, 1);
+            }
+        }
     }
     
     protected static final ResourceLocation pediaheart = new ResourceLocation("fossil:textures/gui/PediaHeart.png");

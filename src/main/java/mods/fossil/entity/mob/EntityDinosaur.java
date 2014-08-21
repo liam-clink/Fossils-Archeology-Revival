@@ -307,6 +307,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
             this.setHunger(this.getMaxHunger());
         }
 
+        this.worldObj.playSoundAtEntity(this, "random.eat", this.getSoundVolume(), this.getSoundPitch());
         return true;
     }
     /**
@@ -659,6 +660,9 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
 
                 this.setHunger(this.getMaxHunger());
             }
+            
+            this.worldObj.playSoundAtEntity(this, "random.eat", this.getSoundVolume(), this.getSoundPitch());
+
         }
 
         return i;

@@ -81,7 +81,7 @@ public class EntitySpinosaurus extends EntityDinosaur implements IWaterDino
         this.tasks.addTask(3, new DinoAIAttackOnCollide(this, 1.3D, true));
         this.tasks.addTask(6, new DinoAIWander(this, 1.0D));
         this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-        this.tasks.addTask(6, new DinoAIEat(this, 24));
+        this.tasks.addTask(6, new DinoAIEat(this, 48));
         this.tasks.addTask(9, new EntityAILookIdle(this));
         this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
         this.targetTasks.addTask(2, new DinoAITargetNonTamedExceptSelfClass(this, EntityLiving.class, 750, false));
@@ -224,10 +224,6 @@ public class EntitySpinosaurus extends EntityDinosaur implements IWaterDino
     public boolean attackEntityFrom(DamageSource damageSource, float var2)
     {
         if (this.isEntityInvulnerable())
-        {
-            return false;
-        }
-        else if (damageSource.getEntity() == this)
         {
             return false;
         }

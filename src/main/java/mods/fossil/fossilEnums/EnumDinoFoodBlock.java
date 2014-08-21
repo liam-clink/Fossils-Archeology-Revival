@@ -7,22 +7,22 @@ import net.minecraft.item.Item;
 
 public enum EnumDinoFoodBlock
 {
-    Cake(Blocks.cake, 25, 5),
-    Carrot(Blocks.carrots, 25, 3),
+    Cake(Blocks.cake, 50, 8),
+    Carrot(Blocks.carrots, 20, 3),
     Crops(Blocks.wheat, 10, 2),
-    Leaves(Blocks.leaves, 15, 2),
-    Melon(Blocks.melon_block, 60, 4),
-    BrownMushroom(Blocks.brown_mushroom, 15, 1),
-    RedMushroom(Blocks.red_mushroom, 15, 1),
-    RedFlower(Blocks.red_flower, 10, 1),
-    YellowFlower(Blocks.yellow_flower, 10, 1),
-    Potato(Blocks.potatoes, 25, 2),
-    Pumpkin(Blocks.pumpkin, 20, 1),
-    Reed(Blocks.reeds, 10, 1),
-    Sapling(Blocks.sapling, 10, 1),
-    TallGrass(Blocks.tallgrass, 10, 1),
-    Ferns(Fossil.ferns, 50, 3),
-    Palae(Fossil.palmLeaves, 15, 2)
+    Leaves(Blocks.leaves, 20, 4),
+    Melon(Blocks.melon_block, 65, 6),
+    BrownMushroom(Blocks.brown_mushroom, 15, 3),
+    RedMushroom(Blocks.red_mushroom, 15, 3),
+    RedFlower(Blocks.red_flower, 5, 1),
+    YellowFlower(Blocks.yellow_flower, 5, 1),
+    Potato(Blocks.potatoes, 25, 5),
+    Pumpkin(Blocks.pumpkin, 30, 6),
+    Reed(Blocks.reeds, 15, 2),
+    Sapling(Blocks.sapling, 15, 1),
+    TallGrass(Blocks.tallgrass, 5, 1),
+    Ferns(Fossil.ferns, 55, 4),
+    Palae(Fossil.palmLeaves, 40, 4)
     ;
     public Block block;
     public int FoodValue;

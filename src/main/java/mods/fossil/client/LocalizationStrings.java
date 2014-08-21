@@ -139,12 +139,16 @@ public class LocalizationStrings
     public static final String ITEM_FIGURINE_NAME = "itemfigurine";
     public static final String POTTERY_SHARDS = "potteryShard";
     public static final String BROKEN_HEAD_RELIC = "brokenHeadRelic";
-    public static final String GASTORNIS_EGG_NAME = "eggGastornis";
-    public static final String CULTIVATED_GASTORNIS_EGG_NAME = "eggCultivatedGastornis"; 
+    public static final String TERROR_BIRD_EGG_NAME = "eggTerrorBird";
+    public static final String CULTIVATED_TERROR_BIRD_EGG_NAME = "eggCultivatedTerrorBird"; 
     public static final String DINOSAUR_MODELS = "dinosaurModels";
     public static final String ARM_BONE_NAME = "armBone";
     public static final String DINO_RIB_CAGE_NAME = "dinoRibCage";
     public static final String VERTEBRAE_NAME = "vertebrae";
+    public static final String TERROR_BIRD_MEAT = "terrorBirdMeat";
+    public static final String TERROR_BIRD_MEAT_COOKED = "terrorBirdMeatCooked";
+    public static final String QUAGGA_MEAT = "quaggaMeat";
+    public static final String QUAGGA_MEAT_COOKED = "quaggaMeatCooked";
     
     //DNA
     public static final String DNA_PIG_NAME = "dnaPig";
@@ -157,7 +161,7 @@ public class LocalizationStrings
     public static final String DNA_COELACANTH_NAME = "dnaCoelacanth";
     public static final String DNA_HORSE_NAME = "dnaHorse";
     public static final String DNA_QUAGGA_NAME = "dnaQuagga";
-    public static final String DNA_GASTORNIS_NAME = "dnaGastornis";
+    public static final String DNA_TERROR_BIRD_NAME = "dnaTerrorBird";
 
     //Embryo
     public static final String EMBRYO_PIG_NAME = "embryoPig";
@@ -171,7 +175,7 @@ public class LocalizationStrings
     public static final String EMBRYO_QUAGGA_NAME = "embryoQuagga";
     
     //Non Dino Eggs
-    public static final String  EGG_GASTORNIS_NAME = "eggGastornis";
+    public static final String  EGG_TerrorBird_NAME = "eggTerrorBird";
     
     //Other
     public static final String LIVING_COELACANTH_NAME = "eggCoelacanth";
@@ -244,6 +248,7 @@ public class LocalizationStrings
     public static final String ANIMAL_COELACANTH = "entity.fossil.Coelacanth.name";
     public static final String ANIMAL_PREGNANT_HORSE = "entity.fossil.PregnantHorse.name";
     public static final String ANIMAL_QUAGGA = "entity.fossil.Quagga.name";
+    public static final String ANIMAL_TERROR_BIRD = "entity.fossil.TerrorBird.name";
 
     //Trex scarab messages
     public static final String STATUS_GEM_ERROR_YOUNG = "status.GemErrorYoung";

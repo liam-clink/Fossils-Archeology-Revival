@@ -4,7 +4,9 @@ import java.util.Random;
 
 import mods.fossil.Fossil;
 import mods.fossil.client.LocalizationStrings;
+import mods.fossil.entity.mob.EntityTerrorBird;
 import mods.fossil.fossilEnums.EnumDinoType;
+import mods.fossil.items.ItemLivingCoelacanth;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
@@ -345,12 +347,12 @@ public class TileEntityCultivate extends TileEntity implements IInventory, ISide
                 return 1000;
             }
             
-            if (output == Fossil.dodoEgg)
+            if (output == Fossil.dodoEgg || output == Fossil.terrorBirdEgg)
             {
                 return 1000;
             }
             
-            if (output == Fossil.dodoWing)
+            if (output == Fossil.dodoWing || output == Fossil.terrorBirdMeat)
             {
                 return 1500;
             }
@@ -433,6 +435,11 @@ public class TileEntityCultivate extends TileEntity implements IInventory, ISide
         {
             return new ItemStack(Fossil.cultivatedDodoEgg, 1);
         }
+        
+        if (itemstack.getItem() == Fossil.dnaTerrorBird)
+        {
+            return new ItemStack(Fossil.cultivatedTerrorBirdEgg, 1, new Random().nextInt(EntityTerrorBird.names.length));
+        }
 
         if (EnumDinoType.getEgg(itemstack.getItem()) != null)
         {
@@ -440,7 +447,7 @@ public class TileEntityCultivate extends TileEntity implements IInventory, ISide
         }
         
         if (itemstack.getItem() == Fossil.dnaCoelacanth){
-        	return new ItemStack(Fossil.livingCoelacanth, 1);
+        	return new ItemStack(Fossil.livingCoelacanth, 1, new Random().nextInt(ItemLivingCoelacanth.names.length));
         }
 
         return null;

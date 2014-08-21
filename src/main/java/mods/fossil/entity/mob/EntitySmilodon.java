@@ -89,6 +89,7 @@ public class EntitySmilodon extends EntityPrehistoric
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
         this.targetTasks.addTask(4, new EntityAITargetNonTamed(this, EntitySheep.class, 200, false));
         this.targetTasks.addTask(4, new EntityAITargetNonTamed(this, EntityDodo.class, 200, false));
+        this.targetTasks.addTask(4, new EntityAITargetNonTamed(this, EntityTerrorBird.class, 200, false));
         this.targetTasks.addTask(5, new EntityAITargetNonTamed(this, EntityPig.class, 200, false));
         this.targetTasks.addTask(6, new EntityAITargetNonTamed(this, EntityCow.class, 200, false));
         this.targetTasks.addTask(7, new EntityAITargetNonTamed(this, EntityChicken.class, 200, false));
