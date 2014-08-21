@@ -727,8 +727,10 @@ public class EntityTerrorBird extends EntityTameable
         {
             p0.PrintStringXY(this.getCustomNameTag(), p0.rightIndent, 24, 40, 90, 245);
         }
+        String birdName = String.valueOf(this.names[this.getSkin()]);
+        birdName = Character.toString(birdName.charAt(0)).toUpperCase()+birdName.substring(1);
 
-        p0.PrintStringXY(StatCollector.translateToLocal(LocalizationStrings.ANIMAL_TERROR_BIRD), p0.rightIndent, 34, 0, 0, 0);
+        p0.PrintStringXY(birdName, p0.rightIndent, 34, 0, 0, 0);
         p0.PrintPictXY(this.dodoeggicon, ((p0.xGui/2) + (p0.xGui/4)), 7, 16, 16);
 
         if (this.hasCustomNameTag())
@@ -746,6 +748,6 @@ public class EntityTerrorBird extends EntityTameable
     @SideOnly(Side.CLIENT)
     public void ShowPedia2(GuiPedia p0)
     {
-    	entityPrehistoricClass.ShowPedia2(p0, "TerrorBird");
+    	entityPrehistoricClass.ShowPedia2(p0, this.names[this.getSkin()]);
     }
 }

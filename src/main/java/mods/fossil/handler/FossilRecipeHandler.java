@@ -90,7 +90,7 @@ public class FossilRecipeHandler
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Fossil.feet, 1), new Object[] {"* *", "# #", '#', new ItemStack(Fossil.foot,1, OreDictionary.WILDCARD_VALUE), '*', "dinosaurClaw"}));
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Fossil.feet, 1), new Object[] {"   ", "* *", "# #", '#', new ItemStack(Fossil.foot,1, OreDictionary.WILDCARD_VALUE), '*', "dinosaurClaw"}));
         GameRegistry.addRecipe(new ItemStack(Fossil.femurs, 1), new Object[] {"###", "* *", "# #", '#', Items.bone, '*', new ItemStack(Fossil.legBone,1, OreDictionary.WILDCARD_VALUE)});
-        GameRegistry.addRecipe(new ItemStack(Fossil.ribCage, 1), new Object[] {"# #", " # ", "###", '#', Items.bone});
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Fossil.ribCage, 1), new Object[] {"B B", " R ", "BVB", 'B', Items.bone, 'R', "dinosaurRibCage", 'V', "dinosaurVertebrae"}));
         GameRegistry.addRecipe(new ItemStack(Fossil.skullHelmet, 1), new Object[] {"#X#", "# #", '#', Items.bone, 'X', new ItemStack(Fossil.skull,1, OreDictionary.WILDCARD_VALUE)});
 
         //Craft damaged vases

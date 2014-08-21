@@ -1511,6 +1511,28 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic
         return false;
     }
     
+    /**
+     * Drop 0-2 items of this living's type. @param par1 - Whether this entity has recently been hit by a player. @param
+     * par2 - Level of Looting used to kill this mob.
+     */
+    protected void dropFewItems(boolean hasBeenHit, int looting)
+    {
+        int j = this.rand.nextInt(3) + this.rand.nextInt(1 + looting);
+        int k;
+
+        for (k = 0; k < j; ++k)
+        {
+            if (this.isBurning())
+            {
+                this.dropItem(Fossil.quaggaMeatCooked, 1);
+            }
+            else
+            {
+                this.dropItem(Fossil.quaggaMeat, 1);
+            }
+        }
+    }
+    
     protected static final ResourceLocation pediaheart = new ResourceLocation("fossil:textures/gui/PediaHeart.png");
 
     

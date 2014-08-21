@@ -28,7 +28,7 @@ public class FossilOreDictionary
         OreDictionary.registerOre("dinosaurLegBone", new ItemStack(Fossil.legBone,1, OreDictionary.WILDCARD_VALUE));
         OreDictionary.registerOre("dinosaurArmBone", new ItemStack(Fossil.armBone,1, OreDictionary.WILDCARD_VALUE));
         OreDictionary.registerOre("dinosaurVertebrae", new ItemStack(Fossil.vertebrae,1, OreDictionary.WILDCARD_VALUE));
-        OreDictionary.registerOre("dinosaurRibCage", new ItemStack(Fossil.ribCage,1, OreDictionary.WILDCARD_VALUE));
+        OreDictionary.registerOre("dinosaurRibCage", new ItemStack(Fossil.dinoRibCage,1, OreDictionary.WILDCARD_VALUE));
         
         OreDictionary.registerOre("foodEgg", Fossil.dodoEgg);
         OreDictionary.registerOre("foodEgg", Fossil.cultivatedDodoEgg);

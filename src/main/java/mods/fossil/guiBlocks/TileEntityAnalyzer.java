@@ -283,7 +283,10 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
                 		|| (var2 == Items.chicken) 
                 		|| (var2 == Item.getItemFromBlock(Blocks.wool)) 
                 		|| (var2 == Fossil.icedMeat)
-                	|| (var2 == Items.leather) )
+                		|| (var2 == Items.leather)
+                		|| (var2 == Fossil.dodoWing)
+                		|| (var2 == Fossil.terrorBirdMeat)
+                		|| (var2 == Fossil.quaggaMeat))
                 {
                     this.RawIndex = var1;
                     break;
@@ -424,6 +427,11 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
             if (this.analyzerItemStacks[this.RawIndex].getItem() == Fossil.terrorBirdMeat)
             {
             	itemstack = new ItemStack(Fossil.dnaTerrorBird, 1);
+            }
+            
+            if (this.analyzerItemStacks[this.RawIndex].getItem() == Fossil.quaggaMeat)
+            {
+            	itemstack = new ItemStack(Fossil.dnaQuagga, 1);
             }
             
             if (this.analyzerItemStacks[this.RawIndex].getItem() == Fossil.cultivatedTerrorBirdEgg)
