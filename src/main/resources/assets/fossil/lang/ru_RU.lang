@@ -1,7 +1,7 @@
-﻿#Build 6.3.2 - Updated August 20 2014
+#Build 6.3.2 - Updated August 21 2014
 #Russian (ru_RU) Localization File
 
-#Tab Groups#Tab Groups
+#Tab Groups
 itemgroup.FCombat=Древняя броня
 itemgroup.FBlocks=Древние блоки
 itemgroup.FFood=Древняя еда
@@ -9,9 +9,9 @@ itemgroup.FItems=Древние предметы
 itemgroup.FMaterial=Древние материалы
 itemgroup.FTools=Древние инструменты
 itemgroup.FFigurines=Собираемые предметы
-itemgroup.FBones=Кости динозавра
+itemgroup.FBones=Кости динозавров
 
-#Achievements#Achievements
+#Achievements
 achievement.FirstEgg=Первый динозавр!
 achievement.AllEggs=Нужно вывести их всех!
 achievement.FoundFossils=Копаем в поисках костей
@@ -25,8 +25,8 @@ achievement.Dinopedia=Заполняем все страницы!
 achievement.IceAge=Я не знаю, как Вы будете рожать...
 achievement.TheKing=Правитель Позднего мела.
 
-#Achievement Descriptions#Achievement Descriptions
-achievement.FirstEgg.desc=Вы вернули Вашего ​​первого динозавра!
+#Achievement Descriptions
+achievement.FirstEgg.desc=Вы вернули Вашего первого динозавра!
 achievement.AllEggs.desc=Вы нашли все яйца динозавров!
 achievement.FoundFossils.desc=Вы нашли немного ископаемых!
 achievement.pigBossOnEarth.desc=Вы призвали Ану!
@@ -39,11 +39,11 @@ achievement.Dinopedia=Найдите всех динозавров!
 achievement.IceAge=Однако Я хочу вернуть ледниковый период!
 achievement.TheKing=Да здравствует король!
 
-#Enchantments#Enchantments
+#Enchantments
 enchantment.paleontology=Палеонтология
 enchantment.archeology=Археология
 
-#Blocks#Blocks
+#Blocks
 tile.fossil.name=Ископаемое
 tile.skullBlock.name=Череп
 tile.skullLantern.name=Череп-фонарь
@@ -89,7 +89,7 @@ tile.ancientWoodDoubleSlab.ancientWood.name=Древняя деревянная 
 tile.ancientStoneSlab.ancientStone.name=Древняя каменная плита
 tile.ancientStoneDoubleSlab.ancientStone.name=Древняя каменная плита
 
-#Collectables#Collectables
+#Collectables
 tile.figurine.figurine_steve_pristine.name=Древняя статуэтка Стива
 tile.figurine.figurine_skeleton_pristine.name=Древняя статуэтка скелета
 tile.figurine.figurine_zombie_pristine.name=Древняя статуэтка зомби
@@ -122,7 +122,7 @@ tile.vaseKylix.blackFigure_kylix.name=Килик с чёрным рисунко�
 tile.vaseKylix.redFigure_kylix.name=Килик с красным рисунком
 tile.vaseKylix.porcelain_kylix.name=Фарфоровый килик
 
-#Items#Items
+#Items
 item.bioFossil.name=Биоископаемое
 item.relicScrap.name=Реликтовый кусок
 item.stoneTablet.name=Каменный блокнот
@@ -155,134 +155,134 @@ item.diamondJavelin.name=Алмазный дротик
 item.ancientJavelin.name=Древний дротик
 item.whip.name=Плеть
 item.magicConch.name=Магическая раковина
-item.legBone.Triceratops.name=Кость голени Трицератопса
-item.legBone.Velociraptor.name=Кость голени Велоцираптора
-item.legBone.TRex.name=Кость голени Тиранозавра
-item.legBone.Pterosaur.name=Кость голени Птерозавра
-item.legBone.Plesiosaur.name=Кость голени Плезиозавра
-item.legBone.Mosasaurus.name=Кость голени Мозазавра
-item.legBone.Liopleurodon.name=Кость голени Лиоплевродона
-item.legBone.Stegosaurus.name=Кость голени Стегозавра
-item.legBone.Dilophosaurus.name=Кость голени Дилофозавра
-item.legBone.Brachiosaurus.name=Кость голени Брахиозавра
-item.legBone.Spinosaurus.name=Кость голени Спинозавра
-item.legBone.Compsognathus.name=Кость голени Компсогната
-item.legBone.Ankylosaurus.name=Кость голени Анкилозавра
-item.legBone.Pachycephalosaurus.name=Кость голени Пахицефалозавра
-item.legBone.Deinonychus.name=Кость голени Дейнониха
-item.legBone.Gallimimus.name=Кость голени Галлимима
-item.armBone.Triceratops.name=Плечевая кость Трицератопса
-item.armBone.Velociraptor.name=Плечевая кость Велоцираптора
-item.armBone.TRex.name=Плечевая кость Тиранозавра
-item.armBone.Pterosaur.name=Плечевая кость Птерозавра
-item.armBone.Plesiosaur.name=Плечевая кость Плезиозавра
-item.armBone.Mosasaurus.name=Плечевая кость Мозазавра
-item.armBone.Liopleurodon.name=Плечевая кость Лиоплевродона
-item.armBone.Stegosaurus.name=Плечевая кость Стегозавра
-item.armBone.Dilophosaurus.name=Плечевая кость Дилофозавра
-item.armBone.Brachiosaurus.name=Плечевая кость Брахиозавра
-item.armBone.Spinosaurus.name=Плечевая кость Спинозавра
-item.armBone.Compsognathus.name=Плечевая кость Компогната
-item.armBone.Ankylosaurus.name=Плечевая кость Анкилозавра
-item.armBone.Pachycephalosaurus.name=Плечевая кость Пахицефалозавра
-item.armBone.Deinonychus.name=Плечевая кость Дейнониха
-item.armBone.Gallimimus.name=Плечевая кость Галлимима
-item.claw.Triceratops.name=Рог Трицератопса
-item.claw.Velociraptor.name=Коготь Велоцираптора
+item.legBone.Triceratops.name=Кость голени трицератопса
+item.legBone.Velociraptor.name=Кость голени велоцираптора
+item.legBone.TRex.name=Кость голени тиранозавра
+item.legBone.Pterosaur.name=Кость голени птерозавра
+item.legBone.Plesiosaur.name=Кость голени плезиозавра
+item.legBone.Mosasaurus.name=Кость голени мозазавра
+item.legBone.Liopleurodon.name=Кость голени лиоплевродона
+item.legBone.Stegosaurus.name=Кость голени стегозавра
+item.legBone.Dilophosaurus.name=Кость голени дилофозавра
+item.legBone.Brachiosaurus.name=Кость голени брахиозавра
+item.legBone.Spinosaurus.name=Кость голени спинозавра
+item.legBone.Compsognathus.name=Кость голени компсогната
+item.legBone.Ankylosaurus.name=Кость голени анкилозавра
+item.legBone.Pachycephalosaurus.name=Кость голени пахицефалозавра
+item.legBone.Deinonychus.name=Кость голени дейнониха
+item.legBone.Gallimimus.name=Кость голени галлимима
+item.armBone.Triceratops.name=Плечевая кость трицератопса
+item.armBone.Velociraptor.name=Плечевая кость велоцираптора
+item.armBone.TRex.name=Плечевая кость тиранозавра
+item.armBone.Pterosaur.name=Плечевая кость птерозавра
+item.armBone.Plesiosaur.name=Плечевая кость плезиозавра
+item.armBone.Mosasaurus.name=Плечевая кость мозазавра
+item.armBone.Liopleurodon.name=Плечевая кость лиоплевродона
+item.armBone.Stegosaurus.name=Плечевая кость стегозавра
+item.armBone.Dilophosaurus.name=Плечевая кость дилофозавра
+item.armBone.Brachiosaurus.name=Плечевая кость брахиозавра
+item.armBone.Spinosaurus.name=Плечевая кость спинозавра
+item.armBone.Compsognathus.name=Плечевая кость компогната
+item.armBone.Ankylosaurus.name=Плечевая кость анкилозавра
+item.armBone.Pachycephalosaurus.name=Плечевая кость пахицефалозавра
+item.armBone.Deinonychus.name=Плечевая кость дейнониха
+item.armBone.Gallimimus.name=Плечевая кость галлимима
+item.claw.Triceratops.name=Рог трицератопса
+item.claw.Velociraptor.name=Коготь велоцираптора
 item.claw.TRex.name=Зуб тираннозавра
-item.claw.Pterosaur.name=Палец Птерозавра
-item.claw.Plesiosaur.name=Зуб Плезиозавра
-item.claw.Mosasaurus.name=Зуб Мозазавра
-item.claw.Liopleurodon.name=Liopleurodon Gastralias
-item.claw.Stegosaurus.name=Пластина Стегозавра
-item.claw.Dilophosaurus.name=Коготь Дилофозавра
-item.claw.Brachiosaurus.name=Шейный позвонок Брахиозавра
-item.claw.Spinosaurus.name=Спинной хребет Спинозавра
-item.claw.Compsognathus.name=Коготь Компсогната
-item.claw.Ankylosaurus.name=Хвостовая булава Анкилозавра
-item.claw.Pachycephalosaurus.name=Черепной рог Пахицефалозавра
-item.claw.Deinonychus.name=Коготь Дейнониха
-item.claw.Gallimimus.name=Коготь Галлимима
-item.foot.Triceratops.name=Голень Трицератопса
-item.foot.Velociraptor.name=Голень Велоцираптора
-item.foot.TRex.name=Голень Тиранозавра
-item.foot.Pterosaur.name=Голень Птерозавра
-item.foot.Plesiosaur.name=Голень Плезиозавра
-item.foot.Mosasaurus.name=Голень Мозазавра
-item.foot.Liopleurodon.name=Голень Лиоплевродона
-item.foot.Stegosaurus.name=Голень Стегозавра
-item.foot.Dilophosaurus.name=Голень Дилофозавра
-item.foot.Brachiosaurus.name=Голень Брахиозавтра
-item.foot.Spinosaurus.name=Голень Спинозавра
-item.foot.Compsognathus.name=Голень Компсогната
-item.foot.Ankylosaurus.name=Голень Анкилозавра
-item.foot.Pachycephalosaurus.name=Голень Пахицефалозавра
-item.foot.Deinonychus.name=Голень Дейнониха
-item.foot.Gallimimus.name=Голень Галлимима
-item.skull.Triceratops.name=Череп Трицератопса
-item.skull.Velociraptor.name=Череп Велоцираптора
-item.skull.TRex.name=Череп Тираннозавра
-item.skull.Pterosaur.name=Череп Птерозавра
-item.skull.Plesiosaur.name=Череп Плезиозавра
-item.skull.Mosasaurus.name=Череп Мозазавра
-item.skull.Liopleurodon.name=Череп Лиоплевродона
-item.skull.Stegosaurus.name=Череп Стегозавра
-item.skull.Dilophosaurus.name=Череп Дилофозавра
-item.skull.Brachiosaurus.name=Череп Брахиозавра
-item.skull.Spinosaurus.name=Череп Спинозавра
-item.skull.Compsognathus.name=Череп Компсогната
-item.skull.Ankylosaurus.name=Череп Анкилозавра
-item.skull.Pachycephalosaurus.name=Череп Пахицефалозавра
-item.skull.Deinonychus.name=Череп Дейнониха
-item.skull.Gallimimus.name=Череп Галлимима
-item.vertebrae.Triceratops.name=Позвоночник Трицератопса
-item.vertebrae.Velociraptor.name=Позвоночник Велоцираптора
-item.vertebrae.TRex.name=Позвоночник Тираннозавра
-item.vertebrae.Pterosaur.name=Позвоночник Птерозавра
-item.vertebrae.Plesiosaur.name=Позвоночник Плезиозавра
-item.vertebrae.Mosasaurus.name=Позвоночник Мозазавра
-item.vertebrae.Liopleurodon.name=Позвоночник Лиоплевродона
-item.vertebrae.Stegosaurus.name=Позвоночник Стегозавра
-item.vertebrae.Dilophosaurus.name=Позвоночник Дилофозавра
-item.vertebrae.Brachiosaurus.name=Позвоночник Брахиозавра
-item.vertebrae.Spinosaurus.name=Позвоночник Спинозавра
-item.vertebrae.Compsognathus.name=Позвоночник Компсогната
-item.vertebrae.Ankylosaurus.name=Позвоночник Анкилозавра
-item.vertebrae.Pachycephalosaurus.name=Позвоночник Пахицефалозавра
-item.vertebrae.Deinonychus.name=Позвоночник Дейнониха
-item.vertebrae.Gallimimus.name=Позвоночник Галлимима
-item.dinoRibCage.Triceratops.name=Грудная клетка Трицератопса
-item.dinoRibCage.Velociraptor.name=Грудная клетка Велоцираптора
-item.dinoRibCage.TRex.name=Грудная клетка Тираннозавра
-item.dinoRibCage.Pterosaur.name=Грудная клетка Птерозавра
-item.dinoRibCage.Plesiosaur.name=Грудная клетка Плезиозавра
-item.dinoRibCage.Mosasaurus.name=Грудная клетка Мозазавра
-item.dinoRibCage.Liopleurodon.name=Грудная клетка Лиоплевродона
-item.dinoRibCage.Stegosaurus.name=Грудная клетка Стегозавра
-item.dinoRibCage.Dilophosaurus.name=Грудная клетка Дилофозавра
-item.dinoRibCage.Brachiosaurus.name=Грудная клетка Брахиозавра
-item.dinoRibCage.Spinosaurus.name=Грудная клетка Спинозавра
-item.dinoRibCage.Compsognathus.name=Грудная клетка Компсогната
-item.dinoRibCage.Ankylosaurus.name=Грудная клетка Анкилозавра
-item.dinoRibCage.Pachycephalosaurus.name=Грудная клетка Пахицефалозавра
-item.dinoRibCage.Deinonychus.name=Грудная клетка Дейнониха
-item.dinoRibCage.Gallimimus.name=Грудная клетка Галлимима
-item.dinosaurModels.Triceratops.name=Модель Трицератопса
-item.dinosaurModels.Velociraptor.name=Модель Велоцираптора
-item.dinosaurModels.TRex.name=Модель Тираннозавра
-item.dinosaurModels.Pterosaur.name=Модель Птерозавра
-item.dinosaurModels.Plesiosaur.name=Модель Плезиозавра
-item.dinosaurModels.Mosasaurus.name=Модель Мозазавра
-item.dinosaurModels.Liopleurodon.name=Модель Лиоплевродона
-item.dinosaurModels.Stegosaurus.name=Модель Стегозавра
-item.dinosaurModels.Dilophosaurus.name=Модель Дилофозавра
-item.dinosaurModels.Brachiosaurus.name=Модель Брахиозавра
-item.dinosaurModels.Spinosaurus.name=Модель Спинозавра
-item.dinosaurModels.Compsognathus.name=Модель Компсогната
-item.dinosaurModels.Ankylosaurus.name=Модель Анкилозавра
-item.dinosaurModels.Pachycephalosaurus.name=Модель Пахицефалозавра
-item.dinosaurModels.Deinonychus.name=Модель  Дейнониха
-item.dinosaurModels.Gallimimus.name=Модель Галлимима
+item.claw.Pterosaur.name=Палец птерозавра
+item.claw.Plesiosaur.name=Зуб плезиозавра
+item.claw.Mosasaurus.name=Зуб мозазавра
+item.claw.Liopleurodon.name=Брюшные рёбра лиоплевродона
+item.claw.Stegosaurus.name=Пластина стегозавра
+item.claw.Dilophosaurus.name=Коготь дилофозавра
+item.claw.Brachiosaurus.name=Шейный позвонок брахиозавра
+item.claw.Spinosaurus.name=Спинной хребет спинозавра
+item.claw.Compsognathus.name=Коготь компсогната
+item.claw.Ankylosaurus.name=Хвостовая булава анкилозавра
+item.claw.Pachycephalosaurus.name=Черепной рог пахицефалозавра
+item.claw.Deinonychus.name=Коготь дейнониха
+item.claw.Gallimimus.name=Коготь галлимима
+item.foot.Triceratops.name=Голень трицератопса
+item.foot.Velociraptor.name=Голень велоцираптора
+item.foot.TRex.name=Голень тиранозавра
+item.foot.Pterosaur.name=Голень птерозавра
+item.foot.Plesiosaur.name=Голень плезиозавра
+item.foot.Mosasaurus.name=Голень мозазавра
+item.foot.Liopleurodon.name=Голень лиоплевродона
+item.foot.Stegosaurus.name=Голень стегозавра
+item.foot.Dilophosaurus.name=Голень дилофозавра
+item.foot.Brachiosaurus.name=Голень брахиозавтра
+item.foot.Spinosaurus.name=Голень спинозавра
+item.foot.Compsognathus.name=Голень компсогната
+item.foot.Ankylosaurus.name=Голень анкилозавра
+item.foot.Pachycephalosaurus.name=Голень пахицефалозавра
+item.foot.Deinonychus.name=Голень дейнониха
+item.foot.Gallimimus.name=Голень галлимима
+item.skull.Triceratops.name=Череп трицератопса
+item.skull.Velociraptor.name=Череп велоцираптора
+item.skull.TRex.name=Череп тираннозавра
+item.skull.Pterosaur.name=Череп птерозавра
+item.skull.Plesiosaur.name=Череп плезиозавра
+item.skull.Mosasaurus.name=Череп мозазавра
+item.skull.Liopleurodon.name=Череп лиоплевродона
+item.skull.Stegosaurus.name=Череп стегозавра
+item.skull.Dilophosaurus.name=Череп дилофозавра
+item.skull.Brachiosaurus.name=Череп брахиозавра
+item.skull.Spinosaurus.name=Череп спинозавра
+item.skull.Compsognathus.name=Череп компсогната
+item.skull.Ankylosaurus.name=Череп анкилозавра
+item.skull.Pachycephalosaurus.name=Череп пахицефалозавра
+item.skull.Deinonychus.name=Череп дейнониха
+item.skull.Gallimimus.name=Череп галлимима
+item.vertebrae.Triceratops.name=Позвоночник трицератопса
+item.vertebrae.Velociraptor.name=Позвоночник велоцираптора
+item.vertebrae.TRex.name=Позвоночник тираннозавра
+item.vertebrae.Pterosaur.name=Позвоночник птерозавра
+item.vertebrae.Plesiosaur.name=Позвоночник плезиозавра
+item.vertebrae.Mosasaurus.name=Позвоночник мозазавра
+item.vertebrae.Liopleurodon.name=Позвоночник лиоплевродона
+item.vertebrae.Stegosaurus.name=Позвоночник стегозавра
+item.vertebrae.Dilophosaurus.name=Позвоночник дилофозавра
+item.vertebrae.Brachiosaurus.name=Позвоночник брахиозавра
+item.vertebrae.Spinosaurus.name=Позвоночник спинозавра
+item.vertebrae.Compsognathus.name=Позвоночник компсогната
+item.vertebrae.Ankylosaurus.name=Позвоночник анкилозавра
+item.vertebrae.Pachycephalosaurus.name=Позвоночник пахицефалозавра
+item.vertebrae.Deinonychus.name=Позвоночник дейнониха
+item.vertebrae.Gallimimus.name=Позвоночник галлимима
+item.dinoRibCage.Triceratops.name=Грудная клетка трицератопса
+item.dinoRibCage.Velociraptor.name=Грудная клетка велоцираптора
+item.dinoRibCage.TRex.name=Грудная клетка тираннозавра
+item.dinoRibCage.Pterosaur.name=Грудная клетка птерозавра
+item.dinoRibCage.Plesiosaur.name=Грудная клетка плезиозавра
+item.dinoRibCage.Mosasaurus.name=Грудная клетка мозазавра
+item.dinoRibCage.Liopleurodon.name=Грудная клетка лиоплевродона
+item.dinoRibCage.Stegosaurus.name=Грудная клетка стегозавра
+item.dinoRibCage.Dilophosaurus.name=Грудная клетка дилофозавра
+item.dinoRibCage.Brachiosaurus.name=Грудная клетка брахиозавра
+item.dinoRibCage.Spinosaurus.name=Грудная клетка спинозавра
+item.dinoRibCage.Compsognathus.name=Грудная клетка компсогната
+item.dinoRibCage.Ankylosaurus.name=Грудная клетка анкилозавра
+item.dinoRibCage.Pachycephalosaurus.name=Грудная клетка пахицефалозавра
+item.dinoRibCage.Deinonychus.name=Грудная клетка дейнониха
+item.dinoRibCage.Gallimimus.name=Грудная клетка галлимима
+item.dinosaurModels.Triceratops.name=Модель трицератопса
+item.dinosaurModels.Velociraptor.name=Модель велоцираптора
+item.dinosaurModels.TRex.name=Модель тираннозавра
+item.dinosaurModels.Pterosaur.name=Модель птерозавра
+item.dinosaurModels.Plesiosaur.name=Модель плезиозавра
+item.dinosaurModels.Mosasaurus.name=Модель мозазавра
+item.dinosaurModels.Liopleurodon.name=Модель лиоплевродона
+item.dinosaurModels.Stegosaurus.name=Модель стегозавра
+item.dinosaurModels.Dilophosaurus.name=Модель дилофозавра
+item.dinosaurModels.Brachiosaurus.name=Модель брахиозавра
+item.dinosaurModels.Spinosaurus.name=Модель спинозавра
+item.dinosaurModels.Compsognathus.name=Модель компсогната
+item.dinosaurModels.Ankylosaurus.name=Модель анкилозавра
+item.dinosaurModels.Pachycephalosaurus.name=Модель пахицефалозавра
+item.dinosaurModels.Deinonychus.name=Модель дейнониха
+item.dinosaurModels.Gallimimus.name=Модель галлимима
 item.plantFossil.name=Ископаемое растение
 item.skullHelmet.name=Череп-шлем
 item.ribCage.name=Защита для груди
@@ -296,7 +296,7 @@ item.boneBow.name=Костный лук
 item.boneGlue.name=Костный клей
 item.boneRod.name=Костная палка
 item.boneSword.name=Костный меч
-item.powderyString.name=Powdery String
+item.powderyString.name=Мучнистая нитка
 item.animalCoin.name=Монетка животного
 item.dinoCoin.name=Монетка динозавра
 item.dodoWing.name=Сырое крыло дронта
@@ -341,14 +341,14 @@ item.eggGallimimus.name=Яйцо галлимима
 item.eggCoelacanth.first.name=Океанский целакант
 item.eggCoelacanth.second.name=Речной целакант
 item.eggCoelacanth.third.name=Болотный целакант
-item.eggTerrorBird.gastornis.name=Gastornis Egg
-item.eggTerrorBird.phorusrhacos.name=Phorusrhacos Egg
-item.eggTerrorBird.titanis.name=Titanis Egg
-item.eggTerrorBird.kelenken.name=Kelenken Egg
-item.eggCultivatedTerrorBird.gastornis.name=Cultivated Gastornis Egg
-item.eggCultivatedTerrorBird.phorusrhacos.name=Cultivated Phorusrhacos Egg
-item.eggCultivatedTerrorBird.titanis.name=Cultivated Titanis Egg
-item.eggCultivatedTerrorBird.kelenken.name=Cultivated Kelenken Egg
+item.eggTerrorBird.gastornis.name=Яйцо гасторниса
+item.eggTerrorBird.phorusrhacos.name=Яйцо фороракоса
+item.eggTerrorBird.titanis.name=Яйцо титаниса
+item.eggTerrorBird.kelenken.name=Яйцо келенкена
+item.eggCultivatedTerrorBird.gastornis.name=Развитое яйцо гасторниса
+item.eggCultivatedTerrorBird.phorusrhacos.name=Развитое яйцо фороракоса
+item.eggCultivatedTerrorBird.titanis.name=Развитое яйцо титаниса
+item.eggCultivatedTerrorBird.kelenken.name=Развитое яйцо келенкена
 item.dnaTriceratops.name=ДНК трицератопса
 item.dnaVelociraptor.name=ДНК велоцираптора
 item.dnaTRex.name=ДНК тираннозавра
@@ -393,7 +393,7 @@ item.terrorBirdMeatCooked.name=Cooked Terror Bird Leg
 item.quaggaMeat.name=Raw Quagga Meat
 item.quaggaMeatCooked.name=Cooked Quagga Meat
 
-#Dinosaur related chat messages#Dinosaur related chat messages
+#Dinosaur related chat messages
 dnaName.head=ДНК 
 dnaName.tail=
 embryoName.head=Эмбрион 
@@ -405,13 +405,13 @@ mGCName.tail=
 dEggName.head=Яйцо 
 dEggName.tail=
 
-#Order chat messages#Order chat messages
+#Order chat messages
 order.head=Приказ: 
 order.Stay=Стой
 order.Follow=Следуй за мной
 order.FreeMove=Двигайся куда хочешь
 
-#Dinosaur status chat messages#Dinosaur status chat messages
+#Dinosaur status chat messages
 status.Hungry.head= 
 status.Hungry= голоден.
 status.Starve.head=
@@ -425,7 +425,7 @@ status.NoSpace= не имеет достаточно места для рост�
 status.StarveEsc.head=
 status.StarveEsc= сбежал, потому что был голоден.
 status.SJLBite= bit the Siu-Jiu-Le and ran away.
-status.ChewTime=Нужно время, чтобы пережевать.
+status.ChewTime=нужно время, чтобы пережевать.
 status.Full.head=Это
 status.Full= полный.
 status.Nervous.Head=You made the little 
@@ -435,7 +435,7 @@ status.GemErrorHealth=Скарабей не может позволить себ
 status.GemErrorTamed=Этот тираннозавр уже был приручен.
 status.essencefail=Эссенция курицы не имеет эффекта.
 
-#Dinosaur Names#Dinosaur Names
+#Dinosaur Names
 entity.fossil.Triceratops.name=Трицератопс
 entity.fossil.Velociraptor.name=Велоцираптор
 entity.fossil.TRex.name=Тираннозавр
@@ -454,7 +454,7 @@ entity.fossil.Pachycephalosaurus.name=Пахицефалозавр
 entity.fossil.Deinonychus.name=Дейноних
 entity.fossil.Gallimimus.name=Галлимим
 
-#Non-dinosaur names#Non-dinosaur names
+#Non-dinosaur names
 entity.fossil.Mammoth.name=Мамонт
 entity.fossil.Smilodon.name=Смилодон
 entity.fossil.PregnantCow.name=Беременная корова
@@ -466,7 +466,7 @@ entity.fossil.Coelacanth.name=Целакант
 entity.fossil.Quagga.name=Квагга
 entity.fossil.TerrorBird.name=Terror Bird
 
-#Pedia text#Pedia text
+#Pedia text
 pedia.text.owner=Владелец:
 pedia.text.chest=* сундуки
 pedia.text.caution=!Опасный!
@@ -493,7 +493,7 @@ pedia.embryo.Dodo=Дронт
 pedia.embryo.Horse=Лошадь
 pedia.embryo.Quagga=Квагга
 
-#Anu speaking lines#Anu speaking lines
+#Anu speaking lines
 anuSpeaker.self=Ану: 
 anuSpeaker.hello=Встань на колени передо мной, сопротивление бесполезно.
 anuSpeaker.bareHand=Голые руки... Глупый, но храбрый.
@@ -508,37 +508,37 @@ anuSpeaker.trans=Скоты, разбудите вашу мудрость!
 anuSpeaker.qi=Qi-shock!
 anuSpeaker.fireRain=Дайте дождю немного огня!
 
-#Friendly pigmen speaking lines#Friendly pigmen speaking lines
+#Friendly pigmen speaking lines
 fpzSpeaker.self=Свинозомби: 
 fpzSpeaker.selfKill=Мы не можем жить без лидера!
 fpzSpeaker.lifeFor.head=Моя жизнь для 
 fpzSpeaker.lifeFor.tail=!
 fpzSpeaker.anuSommon=Все зовём Ану!!
 
-#Dinosaur egg chat messages#Dinosaur egg chat messages
+#Dinosaur egg chat messages
 dinoegg.hatched=Яйцо динозавра вылупилось!
 dinoegg.noSpace=Это яйцо не может быть выведено здесь.
 dinoegg.head=Яйцо 
 dinoegg.dry= умерло, потому что оно было слишком сухим.
 dinoegg.cold= умерло, потому что оно было слишком холодным.
 
-#Cultivator chat messages#Cultivator chat messages
+#Cultivator chat messages
 cultivate.outBreak=Внимание! Культивирование не удалось!
 
-#Drum chat messages#Drum chat messages
+#Drum chat messages
 drum.trigger=Приказ барабана: 
 drum.ordering=Приказ 
 drum.tRex1=Призываем тираннозавра к завтраку.
 drum.tRex2=Призываем тираннозавра к обеду.
 drum.tRex3=Призываем тираннозавра к ужину.
 
-#Hostile mob names#Hostile mob names
+#Hostile mob names
 entity.fossil.Bones.name=Кости
 entity.fossil.FriendlyPigZombie.name=Дружелюбные свинозомби
 entity.fossil.Failuresaurus.name=Failursaurus
 entity.fossil.PigBoss.name=Ану
 
-#Records#Records
+#Records
 item.record_bones.name=Ископаемая пластинка
 item.record_bones_disc.name=Ископаемая пластинка
 item.record.record_bones_disc.desc=WhiteJoshMan - Кости
