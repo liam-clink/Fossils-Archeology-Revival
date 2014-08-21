@@ -161,7 +161,6 @@ public class DinoAIEat extends EntityAIBase
                     this.destY = targetBlock.yCoord;
                     this.destZ = targetBlock.zCoord;
                     this.typeofTarget=BLOCK;
-                    System.out.println("BLOCK FOUND!");
                     return true;
                 }
             }
