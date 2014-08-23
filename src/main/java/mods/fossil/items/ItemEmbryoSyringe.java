@@ -167,7 +167,9 @@ public class ItemEmbryoSyringe extends Item
         EnumAnimalType e0 = null;
 
         if (itemstack.getItem() == Fossil.embryoQuagga && thisEntity instanceof EntityHorse)
+        {
             e0 = EnumAnimalType.Quagga;
+        }
         
         if (itemstack.getItem() == Fossil.embryoChicken)
         {
