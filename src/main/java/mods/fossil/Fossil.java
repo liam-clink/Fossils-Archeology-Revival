@@ -197,7 +197,7 @@ import cpw.mods.fml.relauncher.Side;
 public class Fossil
 {
     public static final String modid = "fossil";
-    public static final String modversion = "1.7.10 Build 6.3.2";
+    public static final String modversion = "1.7.10 Build 6.3.3a1";
 
     /*
      * Set mod state here
@@ -485,6 +485,9 @@ public class Fossil
             FossilOptions.TRexFeathers = config.get("toggle_feathers", "TRex Feathers", false).getBoolean(false);
             FossilOptions.DeinonychusFeathers = config.get("toggle_feathers", "Deinonychus Feathers", true).getBoolean(true);
             FossilOptions.GallimimusFeathers = config.get("toggle_feathers",  "Gallimimus Feathers", false).getBoolean(false);
+            FossilOptions.CompsognathusFeathers = config.get("toggle_feathers",  "Compsognathus Feathers", false).getBoolean(false);
+            FossilOptions.VelociraptorFeathers = config.get("toggle_feathers",  "Velociraptor Feathers", false).getBoolean(false);
+
             
             //Enchantment Toggle
             FossilOptions.AllowTableEnchantments = config.get("option", "Allow Table Enchantments", true).getBoolean(true);

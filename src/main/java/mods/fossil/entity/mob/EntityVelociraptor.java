@@ -55,6 +55,10 @@ public class EntityVelociraptor extends EntityDinosaur
     public static final double maxDamage = EnumDinoType.Velociraptor.StrengthMax;
     public static final double maxSpeed = EnumDinoType.Velociraptor.SpeedMax;
     
+    
+	private final String texturePath;
+
+    
     public EntityVelociraptor(World var1)
     {
         super(var1, EnumDinoType.Velociraptor);
@@ -65,11 +69,16 @@ public class EntityVelociraptor extends EntityDinosaur
          */
         this.adultAge = EnumDinoType.Velociraptor.AdultAge;
         // Set initial size for hitbox. (length/width, height)
-        this.setSize(1.5F, 1.5F);
+        this.setSize(2F, 2F);
         // Size of dinosaur at day 0.
-        this.minSize = 0.25F;
+        this.minSize = 0.3F;
         // Size of dinosaur at age Adult.
-        this.maxSize = 0.6F;
+        this.maxSize = 0.8F;
+        
+    	if(Fossil.FossilOptions.DeinonychusFeathers)
+            texturePath = Fossil.modid + ":textures/mob/" + this.SelfType.toString() + "/feathered/" + "Feathered_";
+    	else
+    		texturePath = Fossil.modid + ":textures/mob/" + this.SelfType.toString() + "/";
         
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(0, new EntityAISwimming(this));
@@ -130,32 +139,32 @@ public class EntityVelociraptor extends EntityDinosaur
             switch (this.getSubSpecies())
             {
                 case 1:
-                    return Fossil.modid + ":textures/mob/Velociraptor_Blue_Adult.png";
+                    return texturePath + "Velociraptor_Blue_Adult.png";
 
                 case 2:
-                    return Fossil.modid + ":textures/mob/Velociraptor_Green_Adult.png";
+                    return texturePath + "Velociraptor_Green_Adult.png";
 
                 case 3:
-                    return Fossil.modid + ":textures/mob/Velociraptor_River_Adult.png";
+                    return texturePath + "Velociraptor_River_Adult.png";
 
                 default:
-                    return Fossil.modid + ":textures/mob/Velociraptor_Brown_Adult.png";
+                    return texturePath + "Velociraptor_Brown_Adult.png";
             }
         }
 
         switch (this.getSubSpecies())
         {
             case 1:
-                return Fossil.modid + ":textures/mob/Velociraptor_Blue_Baby.png";
+                return texturePath + "Velociraptor_Blue_Baby.png";
 
             case 2:
-                return Fossil.modid + ":textures/mob/Velociraptor_Green_Baby.png";
+                return texturePath + "Velociraptor_Green_Baby.png";
 
             case 3:
-                return Fossil.modid + ":textures/mob/Velociraptor_River_Baby.png";
+                return texturePath + "Velociraptor_River_Baby.png";
 
             default:
-                return Fossil.modid + ":textures/mob/Velociraptor_Brown_Baby.png";
+                return texturePath + "Velociraptor_Brown_Baby.png";
         }
     }
     

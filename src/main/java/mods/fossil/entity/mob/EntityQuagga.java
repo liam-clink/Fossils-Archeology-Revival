@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import mods.fossil.Fossil;
 import mods.fossil.client.LocalizationStrings;
 import mods.fossil.client.gui.GuiPedia;
+import mods.fossil.fossilAI.DinoAINearestAttackableTarget;
 import mods.fossil.fossilAI.QuaggaAITaming;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -106,8 +107,8 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic
         this.tasks.addTask(8, new EntityAILookIdle(this));
         this.func_110226_cD();
         
-        this.targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityMob.class, 100, true, true));
-        this.tasks.addTask(3, new EntityAIAvoidEntity(this, EntityTerrorBird.class, 16.0F, 0.8D, 1.0D));
+        this.targetTasks.addTask(4, new DinoAINearestAttackableTarget(this, EntityMob.class, 40, true, true, false));
+        this.tasks.addTask(3, new EntityAIAvoidEntity(this, EntityTerrorBird.class, 16.0F, 1D, 1.2D));
 
     }
 

@@ -60,6 +60,8 @@ public class EntityCompsognathus extends EntityDinosaur
     public static final double maxHealth = EnumDinoType.Compsognathus.HealthMax;
     public static final double maxDamage = EnumDinoType.Compsognathus.StrengthMax;
     public static final double maxSpeed = EnumDinoType.Compsognathus.SpeedMax;
+    
+    private final String texturePath;
 
     public EntityCompsognathus(World var1)
     {
@@ -76,6 +78,11 @@ public class EntityCompsognathus extends EntityDinosaur
         this.minSize = 0.25F;
         // Size of dinosaur at age Adult.
         this.maxSize = 0.65F;
+        
+    	if(Fossil.FossilOptions.CompsognathusFeathers)
+            texturePath = Fossil.modid + ":textures/mob/" + this.SelfType.toString() + "/feathered/" + "Feathered_";
+    	else
+    		texturePath = Fossil.modid + ":textures/mob/" + this.SelfType.toString() + "/";
         
         this.getNavigator().setAvoidsWater(true);
         this.getNavigator().setCanSwim(true);
@@ -149,13 +156,10 @@ public class EntityCompsognathus extends EntityDinosaur
         switch (this.getSubSpecies())
         {
             case 1:
-                return "fossil:textures/mob/Compsognathus_Purple.png";
+            	return texturePath + "Compsognathus_Purple.png";
 
-            case 2:
-                return "fossil:textures/mob/Compsognathus_Green.png";
-
-            default:
-                return "fossil:textures/mob/Compsognathus_Green.png";
+            case 2: default:
+            	return texturePath + "Compsognathus_Green.png";
         }
     }
 

@@ -38,6 +38,7 @@ public enum EnumDinoFoodMob
     Pachycephalosaurus(null, 50, 3),
     Deinonychus(null, 35, 3),
     Gallimimus(null, 40, 4),
+    Allosaurus(null, 25, 1),
     Dodo(EntityDodo.class, 20, 2),
     Coelacanth(EntityCoelacanth.class, 20, 2),
     Quagga(EntityQuagga.class, 50, 3),
@@ -82,5 +83,6 @@ public enum EnumDinoFoodMob
         Deinonychus.setDetails(EntityDeinonychus.class);
         Liopleurodon.setDetails(EntityLiopleurodon.class);
         Gallimimus.setDetails(EntityGallimimus.class);
+        Allosaurus.setDetails(EntityAllosaurus.class);
     }
 }
