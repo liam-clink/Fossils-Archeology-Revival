@@ -389,7 +389,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
 
     protected String getModelTexture()
     {
-        return Fossil.modid + ":" + "textures/mob/DinoModel" + this.SelfType.toString() + ".png";
+        return Fossil.modid + ":" + "textures/mob/DinosaurModels/DinoModel" + this.SelfType.toString() + ".png";
     }
 
     /**
@@ -538,13 +538,9 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
 
         //Print "Day" after age
         if (this.getDinoAge() == 1)
-        {
             p0.PrintStringXY(String.valueOf(this.getDinoAge()) + " " + StatCollector.translateToLocal(LocalizationStrings.PEDIA_EGG_DAY), p0.rightIndent+12, 46);
-        }
         else
-        {
             p0.PrintStringXY(String.valueOf(this.getDinoAge()) + " " + StatCollector.translateToLocal(LocalizationStrings.PEDIA_EGG_DAYS), p0.rightIndent+12, 46);
-        }
 
         //Display Health
         p0.PrintStringXY(String.valueOf(this.getHealth()) + '/' + this.getMaxHealth(), p0.rightIndent+12, 58);

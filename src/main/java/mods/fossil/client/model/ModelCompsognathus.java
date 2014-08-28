@@ -9,98 +9,104 @@ import net.minecraft.util.MathHelper;
 public class ModelCompsognathus extends ModelDinosaurs
 {
     //fields
-    ModelRenderer Neck;
-    public ModelRenderer Head;
-    ModelRenderer Body;
-    ModelRenderer RightLeg;
-    ModelRenderer LeftLeg;
-    ModelRenderer RightArm;
-    ModelRenderer LeftArm;
-    ModelRenderer LeftThigh;
-    ModelRenderer RightThigh;
-    ModelRenderer Tail;
+	public ModelRenderer neck;
+    public ModelRenderer head;
+    public ModelRenderer body;
+    public ModelRenderer leftLowerLeg;
+    public ModelRenderer rightLowerLeg;
+    public ModelRenderer rightUpperArm;
+    public ModelRenderer leftUpperArm;
+    public ModelRenderer leftUpperLeg;
+    public ModelRenderer rightUpperLeg;
+    public ModelRenderer tail1;
 
     public ModelCompsognathus()
     {
-        textureWidth = 64;
-        textureHeight = 32;
-        
-          Neck = new ModelRenderer(this, 4, 4);
-          Neck.addBox(-2F, -6F, -2F, 2, 4, 3);
-          Neck.setRotationPoint(0F, 17F, -1F);
-          Neck.setTextureSize(64, 32);
-          Neck.mirror = true;
-          setRotation(Neck, 0.7807508F, 0F, 0F);
-          Head = new ModelRenderer(this, 14, 0);
-          Head.addBox(-2F, -4F, -4F, 3, 3, 6);
-          Head.setRotationPoint(-0.5F, 15F, -7F);
-          Head.setTextureSize(64, 32);
-          Head.mirror = true;
-          setRotation(Head, 0F, 0F, 0F);
-          Body = new ModelRenderer(this, 0, 19);
-          Body.addBox(-3F, -4F, -3F, 4, 8, 5);
-          Body.setRotationPoint(0F, 16F, 0F);
-          Body.setTextureSize(64, 32);
-          Body.mirror = true;
-          setRotation(Body, 1.570796F, 0F, 0F);
-          RightLeg = new ModelRenderer(this, 38, 0);
-          RightLeg.addBox(-1F, 4F, -1F, 3, 5, 3);
-          RightLeg.setRotationPoint(-4F, 15F, 2F);
-          RightLeg.setTextureSize(64, 32);
-          RightLeg.mirror = true;
-          setRotation(RightLeg, 0F, 0F, 0F);
-          LeftLeg = new ModelRenderer(this, 38, 0);
-          LeftLeg.addBox(-1F, 4F, -1F, 3, 5, 3);
-          LeftLeg.setRotationPoint(1F, 15F, 2F);
-          LeftLeg.setTextureSize(64, 32);
-          LeftLeg.mirror = true;
-          setRotation(LeftLeg, 0F, 0F, 0F);
-          RightArm = new ModelRenderer(this, 0, 0);
-          RightArm.addBox(0F, 0F, -3F, 1, 3, 1);
-          RightArm.setRotationPoint(-4F, 18F, 0F);
-          RightArm.setTextureSize(64, 32);
-          RightArm.mirror = true;
-          setRotation(RightArm, -0.1858931F, 0F, 0F);
-          LeftArm = new ModelRenderer(this, 0, 0);
-          LeftArm.addBox(-1F, 0F, -3F, 1, 3, 1);
-          LeftArm.setRotationPoint(2F, 18F, 0F);
-          LeftArm.setTextureSize(64, 32);
-          LeftArm.mirror = true;
-          setRotation(LeftArm, -0.1858846F, 0F, 0F);
-          LeftThigh = new ModelRenderer(this, 38, 8);
-          LeftThigh.addBox(0F, 0F, 0F, 1, 4, 2);
-          LeftThigh.setRotationPoint(1F, 15F, 2F);
-          LeftThigh.setTextureSize(64, 32);
-          LeftThigh.mirror = true;
-          setRotation(LeftThigh, 0F, 0F, 0F);
-          RightThigh = new ModelRenderer(this, 38, 8);
-          RightThigh.addBox(0F, 0F, 0F, 1, 4, 2);
-          RightThigh.setRotationPoint(-4F, 15F, 2F);
-          RightThigh.setTextureSize(64, 32);
-          RightThigh.mirror = true;
-          setRotation(RightThigh, 0F, 0F, 0F);
-          Tail = new ModelRenderer(this, 18, 20);
-          Tail.addBox(0F, 0F, 0F, 2, 2, 10);
-          Tail.setRotationPoint(-2F, 14F, 4F);
-          Tail.setTextureSize(64, 32);
-          Tail.mirror = true;
-          setRotation(Tail, -0.0371786F, 0F, 0F);
-      }
+      textureWidth = 64;
+      textureHeight = 32;
+      setTextureOffset("body.body", 0, 18);
+      setTextureOffset("leftUpperArm.leftUpperArm", 0, 0);
+      setTextureOffset("leftUpperArm.leftUpperArmWing", 5, 11);
+      setTextureOffset("leftUpperLeg.leftUpperLeg", 38, 8);
+      setTextureOffset("leftLowerLeg.leftLowerLeg", 38, 0);
+      setTextureOffset("neck.neck", 4, 4);
+      setTextureOffset("head.crest", 9, 13);
+      setTextureOffset("head.head", 14, 0);
+      setTextureOffset("rightUpperLeg.rightUpperLeg", 38, 8);
+      setTextureOffset("rightLowerLeg.rightLowerLeg", 38, 0);
+      setTextureOffset("tail1.tail1", 26, 20);
+      setTextureOffset("rightUpperArm.rightUpperArm", 0, 0);
+      setTextureOffset("rightUpperArm.rightUpperArmWing", 5, 11);
+      
+      head = new ModelRenderer(this, "head");
+      head.setRotationPoint(0F, 13.5F, -4.5F);
+      setRotation(head, 0F, 0F, 0F);
+      head.mirror = false;
+        head.addBox("crest", 0F, -3.5F, 0.5F, 1, 2, 2);
+        head.addBox("head", -1.5F, -3F, -5F, 3, 3, 6);
+      body = new ModelRenderer(this, "body");
+      body.setRotationPoint(0F, 18F, 0F);
+      setRotation(body, 0F, 0F, 0F);
+      body.mirror = true;
+        body.addBox("body", -2F, -4F, -3F, 4, 5, 8);
+      leftUpperArm = new ModelRenderer(this, "leftUpperArm");
+      leftUpperArm.setRotationPoint(2F, -1.5F, -1.5F);
+      setRotation(leftUpperArm, 0F, 0F, 0F);
+      leftUpperArm.mirror = true;
+        leftUpperArm.addBox("leftUpperArm", 0F, 0F, -0.5F, 1, 3, 1);
+        leftUpperArm.addBox("leftUpperArmWing", 0F, 0F, 0.5F, 1, 4, 2);
+        body.addChild(leftUpperArm);
+      leftUpperLeg = new ModelRenderer(this, "leftUpperLeg");
+      leftUpperLeg.setRotationPoint(2F, -3F, 4F);
+      setRotation(leftUpperLeg, 0F, 0F, 0F);
+      leftUpperLeg.mirror = true;
+        leftUpperLeg.addBox("leftUpperLeg", 0F, 0F, -1F, 1, 4, 2);
+      leftLowerLeg = new ModelRenderer(this, "leftLowerLeg");
+      leftLowerLeg.setRotationPoint(0F, 4F, 0F);
+      setRotation(leftLowerLeg, 0F, 0F, 0F);
+      leftLowerLeg.mirror = true;
+        leftLowerLeg.addBox("leftLowerLeg", -1F, 0F, -2.5F, 3, 5, 3);
+        leftUpperLeg.addChild(leftLowerLeg);
+        body.addChild(leftUpperLeg);
+      neck = new ModelRenderer(this, "neck");
+      neck.setRotationPoint(0F, -2.5F, -1.5F);
+      setRotation(neck, 0F, 0F, 0F);
+      neck.mirror = true;
+        neck.addBox("neck", -1F, -4F, -1.5F, 2, 4, 3);
+        body.addChild(neck);
+      rightUpperLeg = new ModelRenderer(this, "rightUpperLeg");
+      rightUpperLeg.setRotationPoint(-2F, -3F, 4F);
+      setRotation(rightUpperLeg, 0F, 0F, 0F);
+      rightUpperLeg.mirror = true;
+        rightUpperLeg.addBox("rightUpperLeg", -1F, 0F, -1F, 1, 4, 2);
+      rightLowerLeg = new ModelRenderer(this, "rightLowerLeg");
+      rightLowerLeg.setRotationPoint(0F, 4F, 0F);
+      setRotation(rightLowerLeg, 0F, 0F, 0F);
+      rightLowerLeg.mirror = true;
+        rightLowerLeg.addBox("rightLowerLeg", -2F, 0F, -2.5F, 3, 5, 3);
+        rightUpperLeg.addChild(rightLowerLeg);
+        body.addChild(rightUpperLeg);
+      tail1 = new ModelRenderer(this, "tail1");
+      tail1.setRotationPoint(0F, -4F, 5F);
+      setRotation(tail1, 0F, 0F, 0F);
+      tail1.mirror = true;
+        tail1.addBox("tail1", -1F, 0F, 0F, 2, 2, 10);
+        body.addChild(tail1);
+      rightUpperArm = new ModelRenderer(this, "rightUpperArm");
+      rightUpperArm.setRotationPoint(-2F, -1.5F, -1.5F);
+      setRotation(rightUpperArm, 0F, 0F, 0F);
+      rightUpperArm.mirror = true;
+        rightUpperArm.addBox("rightUpperArm", -1F, 0F, -0.5F, 1, 3, 1);
+        rightUpperArm.addBox("rightUpperArmWing", -1F, 0F, 0.5F, 1, 4, 2);
+        body.addChild(rightUpperArm);
+    }
 
     public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
     {
         super.render(entity, f, f1, f2, f3, f4, f5);
         setRotationAngles(f, f1, f2, f3, f4, f5, ((EntityDinosaur)entity).isModelized());
-        Neck.render(f5);
-        Head.render(f5);
-        Body.render(f5);
-        RightLeg.render(f5);
-        LeftLeg.render(f5);
-        RightArm.render(f5);
-        LeftArm.render(f5);
-        LeftThigh.render(f5);
-        RightThigh.render(f5);
-        Tail.render(f5);
+        body.render(f5);
+        head.render(f5);
     }
 
     private void setRotation(ModelRenderer var1, float var2, float var3, float var4)
@@ -112,27 +118,28 @@ public class ModelCompsognathus extends ModelDinosaurs
 
     protected void setRotationAngles(float var1, float var2, float var3, float var4, float var5, float var6, boolean var7)
     {
+    	
+        this.leftUpperArm.rotateAngleX = (float)Math.toRadians(-10);
+        this.rightUpperArm.rotateAngleX = (float)Math.toRadians(-10);
+		this.neck.rotateAngleX = (float)Math.toRadians(45);
+        this.tail1.rotateAngleX = (float)Math.toRadians(-5);
+
+        
     	if(!var7){
-    		this.Neck.rotateAngleX = (float)Math.toRadians(45);
-	        this.Head.rotateAngleX = var5 / (180F / (float)Math.PI);
-	        this.Head.rotateAngleY = var4 / (180F / (float)Math.PI);
-	        this.RightThigh.rotateAngleX = MathHelper.cos(var1 * 0.6662F + (float)Math.PI) * 1.4F * var2;
-	        this.LeftThigh.rotateAngleX = MathHelper.cos(var1 * 0.6662F) * 1.4F * var2;
-	        this.RightLeg.rotateAngleX = this.RightThigh.rotateAngleX;
-	        this.LeftLeg.rotateAngleX = this.LeftThigh.rotateAngleX;
-	        this.Tail.rotateAngleY = 0.05F * MathHelper.sin(var3 * (float)0.3F + var2);
-	        this.Tail.rotateAngleX = 0.01F * MathHelper.sin(var3 * (float)0.3F + var2);
+	        this.head.rotateAngleX = var5 / (180F / (float)Math.PI);
+	        this.head.rotateAngleY = var4 / (180F / (float)Math.PI);
+	        this.rightUpperLeg.rotateAngleX = MathHelper.cos(var1 * 0.6662F + (float)Math.PI) * 1.4F * var2;
+	        this.leftUpperLeg.rotateAngleX = MathHelper.cos(var1 * 0.6662F) * 1.4F * var2;
+	        this.tail1.rotateAngleY =  0.05F * MathHelper.sin(var3 * (float)0.3F + var2);
+
     	}
     	else {
-    		this.Neck.rotateAngleX = (float)Math.toRadians(45);
-            this.Head.rotateAngleX = 0;
-            this.Head.rotateAngleY = 0;
-            this.RightThigh.rotateAngleX = 0;
-            this.LeftThigh.rotateAngleX = 0;
-            this.RightLeg.rotateAngleX = 0;
-            this.LeftLeg.rotateAngleX = 0;
-            this.Tail.rotateAngleY = 0;
-            this.Tail.rotateAngleX = 0;
+            this.head.rotateAngleX = 0;
+            this.head.rotateAngleY = 0;
+            this.rightUpperLeg.rotateAngleX = 0;
+            this.leftUpperLeg.rotateAngleX = 0;
+            this.tail1.rotateAngleY = 0;
+            this.tail1.rotateAngleX = 0;
     	}
     }
 }

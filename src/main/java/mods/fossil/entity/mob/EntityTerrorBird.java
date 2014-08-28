@@ -48,7 +48,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class EntityTerrorBird extends EntityTameable
 {
     public static final String[] names = new String[] {"gastornis", "phorusrhacos", "titanis", "kelenken"};
-    private ResourceLocation dodoeggicon = new ResourceLocation(Fossil.modid+":"+"textures/items/TerrorBird/" + "Egg_Cultivated_"+names[this.getSkin()]+".png");
     public float field_70886_e = 0.0F;
     public float destPos = 0.0F;
     public float field_70884_g;
@@ -727,11 +726,9 @@ public class EntityTerrorBird extends EntityTameable
         {
             p0.PrintStringXY(this.getCustomNameTag(), p0.rightIndent, 24, 40, 90, 245);
         }
-        String birdName = String.valueOf(this.names[this.getSkin()]);
-        birdName = Character.toString(birdName.charAt(0)).toUpperCase()+birdName.substring(1);
 
-        p0.PrintStringXY(birdName, p0.rightIndent, 34, 0, 0, 0);
-        p0.PrintPictXY(this.dodoeggicon, ((p0.xGui/2) + (p0.xGui/4)), 7, 16, 16);
+        p0.PrintStringXY(Character.toString(this.names[this.getSkin()].charAt(0)).toUpperCase()+this.names[this.getSkin()].substring(1), p0.rightIndent, 34, 0, 0, 0);
+        p0.PrintPictXY(new ResourceLocation(Fossil.modid+":"+"textures/items/TerrorBird/" + "Egg_Cultivated_"+names[this.getSkin()]+".png"), ((p0.xGui/2) + (p0.xGui/4)), 7, 16, 16);
 
         if (this.hasCustomNameTag())
         {

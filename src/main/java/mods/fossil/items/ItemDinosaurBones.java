@@ -19,6 +19,7 @@ public class ItemDinosaurBones extends Item {
 	public ItemDinosaurBones(String _itemType) {
 		super();
 		this.itemType = _itemType;
+		setMaxDamage(0);
 
 		this.setCreativeTab(Fossil.tabFBones);
 		setHasSubtypes(true);
@@ -35,7 +36,7 @@ public class ItemDinosaurBones extends Item {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIconFromDamage(int damage) {
-		return icons[damage];
+		return icons[damage];	
 	}
 	
 	@Override

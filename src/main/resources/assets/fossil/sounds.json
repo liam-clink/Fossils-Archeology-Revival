@@ -1,4 +1,8 @@
 {
+	"allosaurus_death": {"category": "neutral","sounds": ["allosaurus_death1"]},
+	"allosaurus_hurt": {"category": "neutral","sounds": ["allosaurus_hurt1"]},
+	"allosaurus_living_tamed": {"category": "neutral","sounds": ["allosaurus_living_tamed1"]},
+	"allosaurus_living_untamed": {"category": "neutral","sounds": ["allosaurus_living_untamed1"]},
 	"ankylosaurus_death": {"category": "neutral","sounds": ["ankylosaurus_death"]},
 	"ankylosaurus_hurt": {"category": "neutral","sounds": ["ankylosaurus_hurt1", "ankylosaurus_hurt2"]},
 	"ankylosaurus_living": {"category": "neutral","sounds": ["ankylosaurus_living1", "ankylosaurus_living2", "ankylosaurus_living3"]},

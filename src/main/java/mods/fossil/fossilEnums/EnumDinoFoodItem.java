@@ -62,7 +62,8 @@ public enum EnumDinoFoodItem
     DodoEgg(Fossil.dodoEgg, 10, 3),
     TerrorBirdMeat(Fossil.terrorBirdMeat, 11, 4),
     TerrorBirdMeatCooked(Fossil.terrorBirdMeatCooked, 21, 6),
-    TerrorBirdEgg(Fossil.terrorBirdEgg, 10, 3)
+    TerrorBirdEgg(Fossil.terrorBirdEgg, 10, 3),
+    Allosaurus(EnumDinoType.Allosaurus.DropItem, 28, 4),
     ;
     public Item item;
     public int FoodValue;
@@ -147,6 +148,8 @@ public enum EnumDinoFoodItem
     	dinoType.FoodItemList.addItem(DodoWingCooked);
     	dinoType.FoodItemList.addItem(TerrorBirdMeat);
     	dinoType.FoodItemList.addItem(TerrorBirdMeatCooked);
+    	dinoType.FoodItemList.addItem(Allosaurus);
+
     }
     
     public static void raptorItemPreset(EnumDinoType dinoType)

@@ -19,9 +19,11 @@ public class FossilOptions
     public static boolean TRexFeathers;
     public static boolean DeinonychusFeathers;
     public static boolean GallimimusFeathers;
+    public static boolean CompsognathusFeathers;
     public static boolean AllowTableEnchantments;
     public static boolean AllowBookEnchantments;
 	public static boolean AllowBreeding;
+	public static boolean VelociraptorFeathers;
 
 
     public void Load(Configuration config)
@@ -37,12 +39,15 @@ public class FossilOptions
         LoginMessage = config.get("option", "Display_Login_Message", true).getBoolean(false);
         Anu_Spawn = config.get("option", "Anu_Spawn", false).getBoolean(false);
         Anu_Allowed_Overworld = config.get("option", "Anu_Allowed_Overworld", false).getBoolean(false);
-        TRexFeathers = config.get("toggle_feathers",  "Trex Feathers", false).getBoolean(false);
-        DeinonychusFeathers = config.get("toggle_feathers",  "Deinonychus Feathers", true).getBoolean(true);
-        GallimimusFeathers = config.get("toggle_feathers",  "Gallimimus Feathers", false).getBoolean(false);
         AllowTableEnchantments = config.get("option", "Allow Table Enchantments", true).getBoolean(true);
         AllowBookEnchantments = config.get("option", "Allow Book Enchantments", true).getBoolean(true);
         AllowBreeding = config.get("option", "Allow_Dinosaur_Breeding", true).getBoolean(true);
+        
+        TRexFeathers = config.get("toggle_feathers",  "Trex Feathers", false).getBoolean(false);
+        DeinonychusFeathers = config.get("toggle_feathers",  "Deinonychus Feathers", true).getBoolean(true);
+        GallimimusFeathers = config.get("toggle_feathers",  "Gallimimus Feathers", false).getBoolean(false);
+        CompsognathusFeathers = config.get("toggle_feathers",  "Compsognathus Feathers", false).getBoolean(false);
+        VelociraptorFeathers = config.get("toggle_feathers",  "Velociraptor Feathers", false).getBoolean(false);
     }
 
 }

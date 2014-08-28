@@ -1,5 +1,8 @@
 package mods.fossil.client.gui;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.Icon;
 
 import mods.fossil.Fossil;
@@ -22,6 +25,7 @@ import mods.fossil.fossilEnums.EnumDinoType;
 import mods.fossil.guiBlocks.ContainerPedia;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderItem;
@@ -33,6 +37,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 
+import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.relauncher.Side;
@@ -61,6 +66,10 @@ public class GuiPedia extends GuiContainer
     
     public final int xGui = 256;
     public final int yGui = 174;
+
+	private float mouseX;
+
+	private float mouseY;
     
     public GuiPedia(/*InventoryPlayer var1*/)
     {
@@ -150,10 +159,21 @@ public class GuiPedia extends GuiContainer
      */
     public void PrintItemXY(Item it0, int x0, int y0)
     {
+
         this.PrintItemXY(it0, x0, y0, 1);
     }
     public void PrintItemXY(Item it0, int x0, int y0, int zoom)
     {
+    	
+        ScaledResolution scaledResolution = new ScaledResolution(mc.getMinecraft(), mc.getMinecraft().displayWidth, mc.getMinecraft().displayHeight);
+
+		final int width = scaledResolution.getScaledWidth();
+		final int height = scaledResolution.getScaledHeight();
+		final int guiLeft = (width - this.xSize) / 2;
+		final int guiTop = (height - this.ySize) / 2;
+		final int mouseX = (Mouse.getX() * width / mc.displayWidth) - guiLeft;
+		final int mouseY = (height - Mouse.getY() * height / mc.displayHeight - 1) - guiTop;
+    	
         TextureManager r0 = Minecraft.getMinecraft().renderEngine;
         int i = zoom * 16;
 
@@ -176,17 +196,33 @@ public class GuiPedia extends GuiContainer
         this.mc.getTextureManager().bindTexture(TextureMap.locationItemsTexture);
         RenderItem r = new RenderItem();
         ItemStack it = new ItemStack(it0, 1);
-        IIcon icon = it.getIconIndex();
+        IIcon icon = it.getIconIndex();   	
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.drawTexturedModelRectFromIcon(x0, y0, icon, i, i);
         GL11.glEnable(GL11.GL_LIGHTING);
+        
+    	if (mouseX > x0 && mouseX < x0 + i)
+    	{
+	    	if (mouseY > y0 && mouseY < y0 + i)
+	    	{
+		    	List list = new ArrayList();
+		    	list.add((new ItemStack(it0)).getDisplayName());
+		    	this.drawHoveringText(list, x0, y0, fontRendererObj);
+	    	}
+    	}
+        
     }
+    
+    public void drawToolTip()
+    {}
 
     /**
      * Places a half-sized item at the bottom of dinopedia
      */
     public void AddMiniItem(Item it0)
     {
+
+    	
         this.PrintItemXY(it0, rightIndent + 8 * (items % 8), 130 - 8 * (items / 8), 0);
         items++;
     }
@@ -206,11 +242,23 @@ public class GuiPedia extends GuiContainer
         var9.addVertexWithUV((double)x0				, (double)y0			, 0D, 0D, 0D);
         var9.draw();
     }
+    
+    public void drawScreen(int par1, int par2, float par3)
+    {
+    this.mouseX = (float)par1;
+    this.mouseY = (float)par2;
+    super.drawScreen(par1, par2, par3);
+    this.drawToolTip();
+    }
+    
     /**
      * Draw the foreground layer for the GuiContainer (everything in front of the items)
      */
     protected void drawGuiContainerForegroundLayer(int var1, int var2)
     {
+    	
+
+    	
     	if(BookPages == 0) {
 	        if (Fossil.ToPedia instanceof EntityDinosaur)
 	        {
