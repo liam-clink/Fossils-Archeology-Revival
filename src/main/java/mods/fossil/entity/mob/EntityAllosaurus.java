@@ -166,6 +166,14 @@ public class EntityAllosaurus extends EntityDinosaur
     		return null;
         return this.isTamed() ? Fossil.modid + ":" + "allosaurus_living_tamed" : Fossil.modid + ":" + "allosaurus_living_untamed";
     }
+    
+    /**
+     * Returns the volume for the sounds this mob makes.
+     */
+    protected float getSoundVolume()
+    {
+        return (!this.isAdult() && !this.isTeen()) ? 0.3F : 0.7F;
+    }
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */

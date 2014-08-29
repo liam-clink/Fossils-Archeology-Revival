@@ -267,7 +267,7 @@ public class ModelVelociraptor extends ModelDinosaurs
 	      tail1.addChild(tail2);
 	      lowerBody.addChild(tail1);
 	    rightUpperLeg = new ModelRenderer(this, "rightUpperLeg");
-	    rightUpperLeg.setRotationPoint(-4F, 4F, 3.5F);
+	    rightUpperLeg.setRotationPoint(-4F, 4F, 4F);
 	    setRotation(rightUpperLeg, 0F, 0F, 0F);
 	    rightUpperLeg.mirror = true;
 	      rightUpperLeg.addBox("rightUpperLeg", -3F, 0F, -2.5F, 3, 5, 5);
@@ -297,7 +297,7 @@ public class ModelVelociraptor extends ModelDinosaurs
 	      rightUpperLeg.addChild(rightLowerLeg);
 	      lowerBody.addChild(rightUpperLeg);
 	    leftUpperLeg = new ModelRenderer(this, "leftUpperLeg");
-	    leftUpperLeg.setRotationPoint(4F, 4F, 3.5F);
+	    leftUpperLeg.setRotationPoint(4F, 4F, 4F);
 	    setRotation(leftUpperLeg, 0F, 0F, 0F);
 	    leftUpperLeg.mirror = true;
 	      leftUpperLeg.mirror = true;
@@ -351,7 +351,16 @@ public class ModelVelociraptor extends ModelDinosaurs
     public void setRotationAngles(float var1, float var2, float var3, float var4, float var5, float var6, boolean modelized)
     {
     	
-
+        if (this.isChild)
+        {
+      	  this.upperJaw.rotationPointZ = -5F;
+      	  this.lowerJaw.rotationPointZ = -5F;
+        }
+        else
+        {
+      	  this.upperJaw.rotationPointZ = -7F;
+      	  this.lowerJaw.rotationPointZ = -7F;
+        }
         
   	  if(!modelized){
 		  this.head.rotateAngleX = -var5 / (180F / (float)Math.PI);
