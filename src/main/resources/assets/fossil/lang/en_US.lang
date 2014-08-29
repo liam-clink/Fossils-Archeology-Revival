@@ -1,6 +1,6 @@
-﻿#Build 6.3.2 - Updated August 27 2014
+﻿#Build 6.3.2 - Updated August 28 2014
 #English (en_US) Localization File
-#Keys last updated August 27 2014
+#Keys last updated August 28 2014
 #Tab Groups
 itemgroup.FCombat=Ancient Equipment
 itemgroup.FBlocks=Ancient Blocks
@@ -464,6 +464,7 @@ entity.fossil.Ankylosaurus.name=Ankylosaurus
 entity.fossil.Pachycephalosaurus.name=Pachycephalosaurus
 entity.fossil.Deinonychus.name=Deinonychus
 entity.fossil.Gallimimus.name=Gallimimus
+entity.fossil.Allosaurus.name=Allosaurus
 
 #Non-dinosaur names
 entity.fossil.Mammoth.name=Mammoth

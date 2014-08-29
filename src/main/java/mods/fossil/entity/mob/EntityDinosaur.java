@@ -548,11 +548,12 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
         p0.PrintStringXY(String.valueOf(this.getHunger()) + '/' + this.getMaxHunger(), p0.rightIndent+12, 70);
 
         //Display owner name
-        if (this.SelfType.isTameable() && this.isTamed())
+        if (this.SelfType.isTameable() && this.isTamed() && this.getOwner() != null)
         {
             p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_OWNER), true);
-        //    String s0 = this.getOwnerName();
-            //this.func_152115_b(player.getUniqueID().toString());
+            
+////////////1.7.10 BLOCK //////////////
+            
             String s0 = this.getOwner().getCommandSenderName();
             if (s0.length() > 11)
             {
@@ -560,6 +561,19 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
             }
             
             p0.AddStringLR(s0, true);
+///////////////////////////////////////
+            
+////////////1.7.2 BLOCK //////////////      
+            /*
+            String s0 = this.getOwner().getCommandSenderName();
+            if (s0.length() > 11)
+            {
+                s0 = this.getOwner().getCommandSenderName().substring(0, 11);
+            }
+            
+            p0.AddStringLR(s0, true);
+            */
+///////////////////////////////////////
         }
 
         //Display if Rideable
@@ -825,15 +839,15 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
                     PartnerCount = 20;
                 }
 
-                if ((new Random()).nextInt(60) < PartnerCount)
+                if ((new Random()).nextInt(100) < PartnerCount)
                 {
                     EntityDinoEgg var5 = null;
-                    var5 = new EntityDinoEgg(worldObj, this.SelfType);
+                    var5 = new EntityDinoEgg(this.worldObj, this.SelfType);
                     ((Entity)var5).setLocationAndAngles(this.posX + (double)((new Random()).nextInt(3) - 1), this.posY, this.posZ + (double)((new Random()).nextInt(3) - 1), this.worldObj.rand.nextFloat() * 360.0F, 0.0F);
 
-                    if (worldObj.isRemote && this.worldObj.checkNoEntityCollision(var5.boundingBox) && this.worldObj.getCollidingBoundingBoxes(var5, var5.boundingBox).size() == 0)
+                    if (this.worldObj.isRemote && this.worldObj.checkNoEntityCollision(var5.boundingBox) && this.worldObj.getCollidingBoundingBoxes(var5, var5.boundingBox).size() == 0)
                     {
-                        worldObj.spawnEntityInWorld((Entity)var5);
+                    	this.worldObj.spawnEntityInWorld((Entity)var5);
                     }
 
                     //this.showHeartsOrSmokeFX(true);
