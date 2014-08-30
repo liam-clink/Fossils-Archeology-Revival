@@ -365,7 +365,7 @@ public class ModelVelociraptor extends ModelDinosaurs
   	  if(!modelized){
 		  this.head.rotateAngleX = -var5 / (180F / (float)Math.PI);
           this.head.rotateAngleY = var4 / (180F / (float)Math.PI);
-		  this.tail1.rotateAngleY = this.tail2.rotateAngleY = 0.2F * MathHelper.sin(var3 * (float)0.1F + (var2+1));
+		  this.tail1.rotateAngleY = 0.2F * MathHelper.sin(var3 * (float)0.1F + (var2+1));
 		  this.tail3.rotateAngleY = 0.1F * MathHelper.sin(var3 * (float)0.1F + var2);
 	  }
 	  else {
@@ -425,8 +425,8 @@ public class ModelVelociraptor extends ModelDinosaurs
      	  
      	  this.tail3.rotateAngleX = (float)Math.toRadians(-1.6);
 
-     	  this.rightUpperLeg.rotateAngleX = MathHelper.cos(speed * 0.6662F + (float)Math.PI) * 1.4F * range;
-         this.leftUpperLeg.rotateAngleX = MathHelper.cos(speed * 0.6662F) * 1.4F * range;
+     	  this.rightUpperLeg.rotateAngleX = MathHelper.cos(speed * 0.6662F + (float)Math.PI) * 1.0F * range;
+         this.leftUpperLeg.rotateAngleX = MathHelper.cos(speed * 0.6662F) * 1.0F * range;
          
     }
 

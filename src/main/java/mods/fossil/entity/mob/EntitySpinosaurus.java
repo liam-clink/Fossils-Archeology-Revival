@@ -74,7 +74,7 @@ public class EntitySpinosaurus extends EntityDinosaur implements IWaterDino
         // Size of dinosaur at day 0.
         this.minSize = 1.0F;
         // Size of dinosaur at age Adult.
-        this.maxSize = 7.0F;
+        this.maxSize = 7.75F;
 
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(1, new EntityAISwimming(this));

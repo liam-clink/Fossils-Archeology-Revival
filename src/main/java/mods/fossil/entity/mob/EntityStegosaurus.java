@@ -4,6 +4,7 @@ import io.netty.buffer.ByteBuf;
 
 import java.util.Random;
 
+import mods.fossil.Fossil;
 import mods.fossil.fossilAI.DinoAIAttackOnCollide;
 import mods.fossil.fossilAI.DinoAIEat;
 import mods.fossil.fossilAI.DinoAIFollowOwner;
@@ -46,36 +47,14 @@ public class EntityStegosaurus extends EntityDinosaur
     public static final double maxHealth = EnumDinoType.Stegosaurus.HealthMax;
     public static final double maxDamage = EnumDinoType.Stegosaurus.StrengthMax;
     public static final double maxSpeed = EnumDinoType.Stegosaurus.SpeedMax;
+    
+    private final String texturePath;
 
     public EntityStegosaurus(World var1)
     {
         super(var1, EnumDinoType.Stegosaurus);
         this.looksWithInterest = false;
-        //this.SubSpecies = (new Random()).nextInt(3) + 1;
-        //this.texture = "/mods/fossil/textures/Stegosaurus_Baby.png";
-        //this.CheckSkin();
-        //this.setSize(1.0F, 1.0F);
-        //this.moveSpeed = 0.3F;
-        //this.health = 8;
-        //this.experienceValue=3;
-        /*this.Width0=1.2F;
-        this.WidthInc=0.5F;
-        this.Length0=1.0F;
-        this.LengthInc=0.7F;
-        this.Height0=1.2F;
-        this.HeightInc=0.36F;
-        //this.BaseattackStrength=;
-        //this.AttackStrengthIncrease=;
-        //this.BreedingTime=;
-        //this.BaseSpeed=;
-        //this.SpeedIncrease=;
-        this.MaxAge=13;
-        this.BaseHealth=21;
-        this.HealthIncrease=1;
-        //this.AdultAge=;
-        //this.AgingTicks=;
-        this.MaxHunger=500;
-        this.Hungrylevel=0.9F;*/
+
         this.updateSize();
         this.setSubSpecies((new Random()).nextInt(3) + 1);
         /*
@@ -88,6 +67,8 @@ public class EntityStegosaurus extends EntityDinosaur
         this.minSize = 1.0F;
         // Size of dinosaur at age Adult.
         this.maxSize = 8.0F;
+        
+        texturePath = Fossil.modid + ":textures/mob/" + this.SelfType.toString() + "/";
         
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(1, new EntityAISwimming(this));
@@ -117,12 +98,22 @@ public class EntityStegosaurus extends EntityDinosaur
             return super.getModelTexture();
         }
 
-        if (this.isAdult())
+        switch (this.getSubSpecies())
         {
-            return "fossil:textures/mob/Stegosaurus_Adult.png";
-        }
+        default: case 0:
+            return this.isChild() ? texturePath + "Stegosaurus_Green_Baby.png"
+            		: this.isTeen() ? texturePath + "Stegosaurus_Green_Teen.png"
+            				: texturePath + "Stegosaurus_Green_Adult.png";
+        case 1:
+            return this.isChild() ? texturePath + "Stegosaurus_Brown_Baby.png"
+            		: this.isTeen() ? texturePath + "Stegosaurus_Brown_Teen.png"
+            				: texturePath + "Stegosaurus_Brown_Adult.png";
 
-        return "fossil:textures/mob/Stegosaurus_Baby.png";
+        case 2:
+            return this.isChild() ? texturePath + "Stegosaurus_Yellow_Baby.png"
+            		: this.isTeen() ? texturePath + "Stegosaurus_Yellow_Teen.png"
+            				: texturePath + "Stegosaurus_Yellow_Adult.png";
+        }
     }
     
 

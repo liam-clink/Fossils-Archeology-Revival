@@ -62,7 +62,7 @@ public class EntityDeinonychus extends EntityDinosaur
         
         this.adultAge = EnumDinoType.Deinonychus.AdultAge;
         // Set initial size for hitbox. (length/width, height)
-        this.setSize(1.5F, 1.5F);
+        this.setSize(1.75F, 1.75F);
         // Size of dinosaur at day 0.
         this.minSize = 0.3F;
         // Size of dinosaur at age Adult.

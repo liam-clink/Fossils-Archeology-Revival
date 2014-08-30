@@ -2,8 +2,10 @@ package mods.fossil.entity.mob;
 
 import io.netty.buffer.ByteBuf;
 
+import java.util.Random;
 import java.util.Vector;
 
+import mods.fossil.Fossil;
 import mods.fossil.client.LocalizationStrings;
 import mods.fossil.client.gui.GuiPedia;
 import mods.fossil.fossilAI.DinoAIAttackOnCollide;
@@ -20,6 +22,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAvoidEntity;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
@@ -73,7 +76,7 @@ public class EntityDilophosaurus extends EntityDinosaur
     public static final double maxHealth = EnumDinoType.Dilophosaurus.HealthMax;
     public static final double maxDamage = EnumDinoType.Dilophosaurus.StrengthMax;
     public static final double maxSpeed = EnumDinoType.Dilophosaurus.SpeedMax;
-    
+    private final String texturePath;
 
     public EntityDilophosaurus(World var1)
     {
@@ -90,6 +93,8 @@ public class EntityDilophosaurus extends EntityDinosaur
         this.minSize = 0.5F;
         // Size of dinosaur at age Adult.
         this.maxSize = 2.0F;
+        
+        texturePath = Fossil.modid + ":textures/mob/" + String.valueOf(this.SelfType) + "/";
 
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(0, new EntityAISwimming(this));
@@ -144,8 +149,10 @@ public class EntityDilophosaurus extends EntityDinosaur
 
         switch (this.getSubSpecies())
         {
-            default:
-                return "fossil:textures/mob/Dilophosaurus_Adult.png";
+        case 0: default:
+                return texturePath + "Dilophosaurus_Adult.png";
+        case 1: 
+        	return texturePath + "Dilophosaurus_Lime_Adult.png";
         }
     }
 
@@ -673,6 +680,18 @@ public class EntityDilophosaurus extends EntityDinosaur
 	            this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.0D);
 	        }
     	}
+    }
+    
+    @Override
+    public IEntityLivingData onSpawnWithEgg(IEntityLivingData par1EntityLivingData)
+    {
+        par1EntityLivingData = super.onSpawnWithEgg(par1EntityLivingData);
+        Random random = new Random();
+        this.setSubSpecies(random.nextInt(2));
+        this.setDinoAge(this.SelfType.AdultAge);
+        this.updateSize();
+        this.heal(200);
+        return par1EntityLivingData;
     }
 
 	@Override

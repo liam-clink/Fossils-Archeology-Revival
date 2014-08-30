@@ -107,13 +107,13 @@ public class EntityTriceratops extends EntityDinosaur
         {
             switch (this.getSubSpecies())
             {
-                case 1: default:
+                case 0: default:
                     return texturePath + "Triceratops_Green_Adult.png";
 
-                case 2:
+                case 1:
                     return texturePath + "Triceratops_Brown_Adult.png";
 
-                case 3:
+                case 2:
                     return texturePath + "Triceratops_Grey_Adult.png";
             }
         }
@@ -122,26 +122,26 @@ public class EntityTriceratops extends EntityDinosaur
         {
             switch (this.getSubSpecies())
             {
-                case 1: default:
+                case 0: default:
                     return texturePath + "Triceratops_Green_Teen.png";
 
-                case 2:
+                case 1:
                     return texturePath + "Triceratops_Brown_Teen.png";
 
-                case 3:
+                case 2:
                     return texturePath + "Triceratops_Grey_Teen.png";
             }
         }
 
         switch (this.getSubSpecies())
         {
-            case 1: default:
+            case 0: default:
                 return texturePath + "Triceratops_Green_Baby.png";
 
-            case 2:
+            case 1:
                 return texturePath + "Triceratops_Brown_Baby.png";
 
-            case 3:
+            case 2:
                 return texturePath + "Triceratops_Grey_Baby.png";
         }
     }

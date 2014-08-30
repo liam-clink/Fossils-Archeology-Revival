@@ -124,7 +124,7 @@ public class ModelSpinosaurus extends ModelDinosaurs
     tail2.setRotationPoint(0F, 0.5F, 7.5F);
     setRotation(tail2, 0F, 0F, 0F);
     tail2.mirror = true;
-      tail2.addBox("tail2", -1.5F, -1.5F, 0F, 3, 3, 8);
+      tail2.addBox("tail2", -1.5F, -2F, 0F, 3, 3, 8);
     tail3 = new ModelRenderer(this, "tail3");
     tail3.setRotationPoint(0F, 0F, 7F);
     setRotation(tail3, 0F, 0F, 0F);
@@ -261,13 +261,13 @@ public class ModelSpinosaurus extends ModelDinosaurs
       headpivot.addChild(head);
       upperBody.addChild(neck);
     sail2_upperBody = new ModelRenderer(this, "sail2_upperBody");
-    sail2_upperBody.setRotationPoint(0F, 2.3F, 0F);
+    sail2_upperBody.setRotationPoint(0F, 2.3F, -0.2F);
     setRotation(sail2_upperBody, 0F, 0F, 0F);
     sail2_upperBody.mirror = true;
       sail2_upperBody.addBox("sail2_upperBody", -0.5F, -10F, -1F, 1, 10, 2);
       upperBody.addChild(sail2_upperBody);
     sail1_upperBody = new ModelRenderer(this, "sail1_upperBody");
-    sail1_upperBody.setRotationPoint(0F, 4.5F, -2F);
+    sail1_upperBody.setRotationPoint(0F, 4.5F, -2.4F);
     setRotation(sail1_upperBody, 0F, 0F, 0F);
     sail1_upperBody.mirror = true;
       sail1_upperBody.addBox("sail1_upperBody", -0.5F, -10F, -1F, 1, 10, 2);
