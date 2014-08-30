@@ -280,8 +280,8 @@ public class ModelAllosaurus extends ModelDinosaurs
             this.rightUpperLeg.rotateAngleX = 0;
             this.leftUpperLeg.rotateAngleX = 0;
             this.tail1.rotateAngleY = 0;
-            this.tail1.rotateAngleX = 0;
-            this.tail3.rotateAngleX = 0;
+            this.tail2.rotateAngleY = 0;
+            this.tail3.rotateAngleY = 0;
     	}
     }
 }
