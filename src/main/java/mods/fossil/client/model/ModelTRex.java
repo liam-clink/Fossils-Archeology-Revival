@@ -31,11 +31,15 @@ public class ModelTRex extends ModelDinosaurs
 	 private ModelRenderer LowerArmLeft;
 	 private ModelRenderer UpperArmRight;
 	 private ModelRenderer LowerArmRight;
+	 private ModelRenderer HeadFeathers;
+	 private ModelRenderer HeadFeathers2;
 	private int ringBufferIndex;
 	public double[][] ringBuffer = new double[64][3];
 	private float partialTicks;
 	private boolean isScreaming;
 	private ModelRenderer headpivot;
+	private ModelRenderer TailFeathers;
+	private ModelRenderer TailFeathers2;
 
 public ModelTRex()
 {
@@ -60,6 +64,16 @@ public ModelTRex()
  setTextureOffset("LowerArmLeft.LowerArmLeft", 34, 33);
  setTextureOffset("UpperArmRight.UpperArmRight", 34, 25);
  setTextureOffset("LowerArmRight.LowerArmRight", 34, 33);
+ setTextureOffset("HeadFeathers.HeadFeathers1", 10, 53);
+ setTextureOffset("HeadFeathers.HeadFeathers3", 10, 53);
+ setTextureOffset("HeadFeathers2.HeadFeathers2", 10, 53);
+ setTextureOffset("TailFeathers2.TailFeather", 10, 53);
+ setTextureOffset("TailFeathers.TailFeather2", 10, 53);
+ setTextureOffset("TailFeathers.TailFeather3", 10, 53);
+ setTextureOffset("TailFeathers.TailFeather4", 10, 53);
+ setTextureOffset("LowerArmLeft.LeftLowerArmFeathers", 22, 31);
+ setTextureOffset("LowerArmRight.RightLowerArmFeathers", 22, 31);
+
  
  LowerBody = new ModelRenderer(this, "LowerBody");
  LowerBody.setRotationPoint(0F, 10F, -2F);
@@ -81,6 +95,22 @@ public ModelTRex()
  setRotation(Tail3, 0F, 0F, 0F);
  Tail3.mirror = true;
    Tail3.addBox("Tail3", -1F, -1F, 0F, 2, 3, 8);
+ TailFeathers = new ModelRenderer(this, "TailFeathers");
+ TailFeathers.setRotationPoint(0F, 1F, -1F);
+ setRotation(TailFeathers, 0F, 0F, 0F);
+ TailFeathers.mirror = true;
+   TailFeathers.addBox("TailFeather2", -0.5F, -1.4F, 6F, 1, 4, 6);
+   TailFeathers.addBox("TailFeather3", 0.6F, -1.4F, 0.5333334F, 1, 4, 6);
+   TailFeathers.addBox("TailFeather4", -1.4F, -1.4F, 0.5333334F, 1, 4, 6);
+   
+   TailFeathers2 = new ModelRenderer(this, "TailFeathers2");
+   TailFeathers2.setRotationPoint(0F, 0F, 0F);
+   setRotation(TailFeathers2, 0F, 0F, 0F);
+   TailFeathers2.mirror = true;   
+   TailFeathers2.addBox("TailFeather", -0.5F, -1.7F, 2F, 1, 4, 6);   
+   	
+   TailFeathers.addChild(TailFeathers2);
+   Tail3.addChild(TailFeathers);
    Tail2.addChild(Tail3);
    Tail1.addChild(Tail2);
    LowerBody.addChild(Tail1);
@@ -141,7 +171,20 @@ public ModelTRex()
  Head.setRotationPoint(0F, 0F, 0F);
  setRotation(Head, 0F, 0F, 0F);
  Head.mirror = true;
-   Head.addBox("Head", -3.5F, -2F, -7F, 7, 8, 7);
+ Head.addBox("Head", -3.5F, -2F, -7F, 7, 8, 7);
+ HeadFeathers = new ModelRenderer(this, "HeadFeathers");
+ HeadFeathers.setRotationPoint(0F, -1.5F, -2F);
+ setRotation(HeadFeathers, 0F, 0F, 0F);
+ HeadFeathers.mirror = false;
+ HeadFeathers.addBox("HeadFeathers3", 2F, -0.4F, 1.5F, 1, 4, 6);  
+ HeadFeathers.addBox("HeadFeathers1", -3F, -0.4F, 1.5F, 1, 4, 6);  
+ HeadFeathers2 = new ModelRenderer(this, "HeadFeathers2");
+ HeadFeathers2.setRotationPoint(0F, 0F, 0F);
+ setRotation(HeadFeathers2, 0F, 0F, 0F);
+ HeadFeathers2.mirror = false;
+ HeadFeathers2.addBox("HeadFeathers2", -0.5F, -0.5F, 0F, 1, 4, 6);      
+ HeadFeathers.addChild(HeadFeathers2); 
+ Head.addChild(HeadFeathers);  
  UpperJaw = new ModelRenderer(this, "UpperJaw");
  UpperJaw.setRotationPoint(0F, 1F, -6F);
  setRotation(UpperJaw, 0F, 0F, 0F);
@@ -167,6 +210,7 @@ public ModelTRex()
  setRotation(LowerArmLeft, 0F, 0F, 0F);
  LowerArmLeft.mirror = true;
    LowerArmLeft.addBox("LowerArmLeft", -1F, -1F, -4F, 2, 2, 4);
+   //LowerArmLeft.addBox("LeftLowerArmFeathers", -0.5F, 1.5F, -2.6F, 1, 2, 5);
    UpperArmLeft.addChild(LowerArmLeft);
    UpperBody.addChild(UpperArmLeft);
  UpperArmRight = new ModelRenderer(this, "UpperArmRight");
@@ -181,6 +225,7 @@ public ModelTRex()
  LowerArmRight.setRotationPoint(-1.2F, 0F, 4F);
  setRotation(LowerArmRight, 0F, 0F, 0F);
    LowerArmRight.addBox("LowerArmRight", -1F, -1F, -4F, 2, 2, 4);
+   //LowerArmRight.addBox("RightLowerArmFeathers", -0.5F, 1.5F, -2.6F, 1, 2, 5);
    UpperArmRight.addChild(LowerArmRight);
    UpperBody.addChild(UpperArmRight);
    LowerBody.addChild(UpperBody);
@@ -209,6 +254,8 @@ protected void setRotationAngles(float var1, float var2, float var3, float var4,
 	 this.Neck.rotateAngleX = (float)Math.toRadians(-30);
 	 this.UpperBody.rotateAngleX = (float)Math.toRadians(5);
 	 
+	 this.HeadFeathers2.rotateAngleX = (float)Math.toRadians(17);
+	 
 	 this.UpperArmLeft.rotateAngleX = (float)Math.toRadians(-80);
 	 this.UpperArmRight.rotateAngleX = (float)Math.toRadians(-80);
 	 
@@ -224,6 +271,9 @@ protected void setRotationAngles(float var1, float var2, float var3, float var4,
 	 this.Tail1.rotateAngleX = (float)Math.toRadians(-5);
 	 this.Tail2.rotateAngleX = (float)Math.toRadians(2);
 	 this.Tail3.rotateAngleX = (float)Math.toRadians(-7);
+	 
+	 this.TailFeathers.rotateAngleX = (float)Math.toRadians(7);
+	 this.TailFeathers2.rotateAngleX = (float)Math.toRadians(14);
 	 
 		if(!modelized)
 		{

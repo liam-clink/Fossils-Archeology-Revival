@@ -39,24 +39,24 @@ public class ModelGallimimus extends ModelDinosaurs
   
   public ModelGallimimus()
   {
-	    textureWidth = 64;
-	    textureHeight = 32;
+	    textureWidth = 128;
+	    textureHeight = 64;
 	    setTextureOffset("head.head", 46, 11);
 	    setTextureOffset("crest.crest", 16, -4);
 	    setTextureOffset("lowerJaw.lowerJaw", 52, 0);
 	    setTextureOffset("upperJaw.upperJaw", 52, 5);
-	    setTextureOffset("lowerBody.lowerBody", 0, 15);
+	    setTextureOffset("lowerBody.lowerBody", 3, 36);
 	    setTextureOffset("tail1.tail1", 22, 0);
-	    setTextureOffset("tail2.tail2", 0, 5);
+	    setTextureOffset("tail2.tail2", 0, 12);
 	    setTextureOffset("tailFeather.tailFeather", 16, -4);
-	    setTextureOffset("upperBody.upperBody", 42, 20);
+	    setTextureOffset("upperBody.upperBody", 42, 22);
 	    setTextureOffset("rightUpperArm.rightUpperWing", 32, 13);
-	    setTextureOffset("rightUpperArm.rightUpperArm", 0, 0);
+	    setTextureOffset("rightUpperArm.rightUpperArm", 16, 54);
 	    setTextureOffset("rightLowerArm.rightLowerArm", 8, 0);
 	    setTextureOffset("rightLowerArm.rightLowerWing", 32, 13);
 	    setTextureOffset("neck.neck", 42, 0);
 	    setTextureOffset("leftUpperArm.leftUpperWing", 32, 13);
-	    setTextureOffset("leftUpperArm.leftUpperArm", 0, 0);
+	    setTextureOffset("leftUpperArm.leftUpperArm", 16, 54);
 	    setTextureOffset("leftLowerArm.leftLowerWing", 32, 13);
 	    setTextureOffset("leftLowerArm.leftLowerArm", 8, 0);
 	    setTextureOffset("leftUpperLeg.leftUpperLeg", 0, 12);
@@ -136,7 +136,7 @@ public class ModelGallimimus extends ModelDinosaurs
 	    setRotation(rightLowerArm, 0F, 0F, 0F);
 	    rightLowerArm.mirror = true;
 	      rightLowerArm.addBox("rightLowerArm", -1F, 0F, 0F, 2, 5, 2);
-	      rightLowerArm.addBox("rightLowerWing", -0.5F, 0.5F, 1.5F, 1, 6, 4);
+	      rightLowerArm.addBox("rightLowerWing", -0.5F, -1.5F, 1.5F, 1, 6, 4);
 	      rightUpperArm.addChild(rightLowerArm);
 	      upperBody.addChild(rightUpperArm);
 	    neck = new ModelRenderer(this, "neck");
@@ -160,7 +160,7 @@ public class ModelGallimimus extends ModelDinosaurs
 	    leftLowerArm.setRotationPoint(2.5F, 4F, 0F);
 	    setRotation(leftLowerArm, 0F, 0F, 0F);
 	    leftLowerArm.mirror = true;
-	      leftLowerArm.addBox("leftLowerWing", -0.5F, 0.5F, 1.5F, 1, 6, 4);
+	      leftLowerArm.addBox("leftLowerWing", -0.5F, -1.5F, 1.5F, 1, 6, 4);
 	      leftLowerArm.mirror = true;
 	      leftLowerArm.addBox("leftLowerArm", -1F, 0F, 0F, 2, 5, 2);
 	      leftLowerArm.mirror = false;
@@ -252,6 +252,14 @@ public class ModelGallimimus extends ModelDinosaurs
 
         this.tail1.rotateAngleY = 0.15F * MathHelper.sin(var3 * (float)0.1F + (var2 + 1));
         this.tail2.rotateAngleY = 0.15F * MathHelper.sin(var3  * (float)0.1F + var2);
+		}
+		else
+		{
+	        this.headpivot.rotateAngleX = 0;
+	        this.headpivot.rotateAngleY = 0;
+
+	        this.tail1.rotateAngleY = 0;
+	        this.tail2.rotateAngleY = 0;
 		}
         
 		

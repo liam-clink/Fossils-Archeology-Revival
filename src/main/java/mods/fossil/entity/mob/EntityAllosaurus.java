@@ -116,12 +116,6 @@ public class EntityAllosaurus extends EntityDinosaur
 
     public boolean attackEntityAsMob(Entity var1)
     {
-        if (this.rand.nextInt(16) < 4 && var1 instanceof EntityLiving)
-        {
-            //Has chance to blind the prey, after that handle normal attacking
-            ((EntityLiving)var1).addPotionEffect(new PotionEffect(Potion.blindness.id, this.rand.nextInt(110) + 10, 0));
-        }
-
         return super.attackEntityAsMob(var1);
     }
 

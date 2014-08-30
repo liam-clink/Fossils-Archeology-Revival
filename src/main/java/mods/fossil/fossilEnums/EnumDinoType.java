@@ -59,7 +59,7 @@ public enum EnumDinoType
     Ankylosaurus(EntityAnkylosaurus.class,  			C.MODEL | C.TAME  	| C.RIDE  	| C.HERBIVORE),
     Pachycephalosaurus(EntityPachycephalosaurus.class, 			  C.TAME 				| C.HERBIVORE),
     Deinonychus(EntityDeinonychus.class,				C.MODEL | C.TAME  				| C.CARNIVORE),
-    Gallimimus(EntityGallimimus.class,							  C.TAME	| C.RIDE	| C.HERB_CARN),
+    Gallimimus(EntityGallimimus.class,					C.MODEL | C.TAME	| C.RIDE	| C.HERB_CARN),
     Liopleurodon(EntityLiopleurodon.class, 				C.MODEL |  		  				  C.CARNIVORE),
     Allosaurus(EntityAllosaurus.class, 					C.MODEL | C.TAME  				| C.CARNIVORE),
     ;

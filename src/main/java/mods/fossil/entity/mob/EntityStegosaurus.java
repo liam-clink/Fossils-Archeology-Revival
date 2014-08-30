@@ -66,7 +66,7 @@ public class EntityStegosaurus extends EntityDinosaur
         // Size of dinosaur at day 0.
         this.minSize = 1.0F;
         // Size of dinosaur at age Adult.
-        this.maxSize = 8.0F;
+        this.maxSize = 5.5F;
         
         texturePath = Fossil.modid + ":textures/mob/" + this.SelfType.toString() + "/";
         
@@ -102,16 +102,16 @@ public class EntityStegosaurus extends EntityDinosaur
         {
         default: case 0:
             return this.isChild() ? texturePath + "Stegosaurus_Green_Baby.png"
-            		: this.isTeen() ? texturePath + "Stegosaurus_Green_Teen.png"
+            		: !this.isAdult() ? texturePath + "Stegosaurus_Green_Teen.png"
             				: texturePath + "Stegosaurus_Green_Adult.png";
         case 1:
             return this.isChild() ? texturePath + "Stegosaurus_Brown_Baby.png"
-            		: this.isTeen() ? texturePath + "Stegosaurus_Brown_Teen.png"
+            		: !this.isAdult() ? texturePath + "Stegosaurus_Brown_Teen.png"
             				: texturePath + "Stegosaurus_Brown_Adult.png";
 
         case 2:
             return this.isChild() ? texturePath + "Stegosaurus_Yellow_Baby.png"
-            		: this.isTeen() ? texturePath + "Stegosaurus_Yellow_Teen.png"
+            		: !this.isAdult() ? texturePath + "Stegosaurus_Yellow_Teen.png"
             				: texturePath + "Stegosaurus_Yellow_Adult.png";
         }
     }

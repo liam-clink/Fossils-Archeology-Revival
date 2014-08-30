@@ -103,7 +103,7 @@ public class EntityGallimimus extends EntityDinosaur
         case 1:
         	return texturePath + "Gallimimus_Green.png";
         case 2:
-        	return texturePath + "Gallimimus_Light_Blue.png";
+        	return texturePath + "Gallimimus_LightBlue.png";
         case 3:
         	return texturePath + "Gallimimus_Orange.png";
         case 4:

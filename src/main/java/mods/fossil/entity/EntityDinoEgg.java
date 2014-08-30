@@ -750,12 +750,6 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
                     		((EntityGallimimus)var5).setSubSpecies(4); //Brown
                     	}
                     	break;
-                    	
-                    	/*
-                    case TerrorBird:
-                       var5 = new EntityTerrorBird(this.worldObj);
-                       break;
-                       */
 
                     default:
                         Fossil.ShowMessage("Bug: Impossible result.", player);
