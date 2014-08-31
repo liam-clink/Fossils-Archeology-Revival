@@ -155,6 +155,7 @@ public class EntityTRex extends EntityDinosaur
     	if(this.isWeak()) {
             this.motionX *= 0.0D;
             this.motionZ *= 0.0D;
+            this.rotationPitch = this.rotationYaw = 0;
     	}
     }
     

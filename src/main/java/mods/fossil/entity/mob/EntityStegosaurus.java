@@ -97,22 +97,40 @@ public class EntityStegosaurus extends EntityDinosaur
         {
             return super.getModelTexture();
         }
-
-        switch (this.getSubSpecies())
+        
+        if (this.isAdult())
         {
-        default: case 0:
-            return this.isChild() ? texturePath + "Stegosaurus_Green_Baby.png"
-            		: !this.isAdult() ? texturePath + "Stegosaurus_Green_Teen.png"
-            				: texturePath + "Stegosaurus_Green_Adult.png";
-        case 1:
-            return this.isChild() ? texturePath + "Stegosaurus_Brown_Baby.png"
-            		: !this.isAdult() ? texturePath + "Stegosaurus_Brown_Teen.png"
-            				: texturePath + "Stegosaurus_Brown_Adult.png";
-
-        case 2:
-            return this.isChild() ? texturePath + "Stegosaurus_Yellow_Baby.png"
-            		: !this.isAdult() ? texturePath + "Stegosaurus_Yellow_Teen.png"
-            				: texturePath + "Stegosaurus_Yellow_Adult.png";
+            switch (this.getSubSpecies())
+            {
+            default: case 0:
+                    return texturePath + "Stegosaurus_Green_Adult.png";
+            case 1: 
+            	return texturePath + "Stegosaurus_Brown_Adult.png";
+            case 2: 
+            	return texturePath + "Stegosaurus_Yellow_Adult.png";
+            }
+        }
+        else if (this.isTeen()) {
+            switch (this.getSubSpecies())
+            {
+            default: case 0:
+                    return texturePath + "Stegosaurus_Green_Teen.png";
+            case 1: 
+            	return texturePath + "Stegosaurus_Brown_Teen.png";
+            case 2: 
+            	return texturePath + "Stegosaurus_Yellow_Teen.png";
+            }
+        }
+        else {
+            switch (this.getSubSpecies())
+            {
+            default: case 0:
+                    return texturePath + "Stegosaurus_Green_Baby.png";
+            case 1: 
+            	return texturePath + "Stegosaurus_Brown_Baby.png";
+            case 2: 
+            	return texturePath + "Stegosaurus_Yellow_Baby.png";
+            }
         }
     }
     
@@ -208,11 +226,6 @@ public class EntityStegosaurus extends EntityDinosaur
     {
         Entity var3 = var1.getEntity();
         this.setSitting(false);
-
-        if (var3 != null && !(var3 instanceof EntityPlayer) && !(var3 instanceof EntityArrow))
-        {
-            var2 = (var2 + 1) / 2;
-        }
 
         if (!super.attackEntityFrom(var1, var2))
         {

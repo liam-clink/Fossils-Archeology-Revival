@@ -216,9 +216,10 @@ public class EntitySmilodon extends EntityPrehistoric
     /**
      * Determines if an entity can be despawned, used on idle far away entities
      */
+    @Override
     protected boolean canDespawn()
     {
-        return this.isAngry();
+        return false;
     }
 
     /**
@@ -693,60 +694,26 @@ public class EntitySmilodon extends EntityPrehistoric
         }
 
         p0.PrintStringXY(StatCollector.translateToLocal(LocalizationStrings.ANIMAL_SMILODON), p0.rightIndent, 34, 0, 0, 0);
-        //p0.PrintPictXY(pediaclock, p0.rightIndent, 46, 8, 8);
         p0.PrintPictXY(pediaheart, p0.rightIndent, 58, 9, 9);
-        //p0.PrintPictXY(pediafood, p0.rightIndent, 70, 9, 9);
-
-        //Print "Day" after age
-        /*
-        if (this.getDinoAge() == 1)
-        {
-            p0.PrintStringXY(String.valueOf(this.getDinoAge()) + " " + StatCollector.translateToLocal(LocalizationStrings.PEDIA_EGG_DAY), p0.rightIndent+12, 46);
-        }
-        else
-        {
-            p0.PrintStringXY(String.valueOf(this.getDinoAge()) + " " + StatCollector.translateToLocal(LocalizationStrings.PEDIA_EGG_DAYS), p0.rightIndent+12, 46);
-        }
-        */
 
         //Display Health
         p0.PrintStringXY(String.valueOf(this.getHealth()) + '/' + this.getMaxHealth(), p0.rightIndent+12, 58);
-        //Display Hunger
-        //p0.PrintStringXY(String.valueOf(this.getHunger()) + '/' + this.getMaxHunger(), p0.rightIndent+12, 70);
 
         //Display owner name
-        if (this.isTamed())
+        if (this.isTamed() && this.getOwner() != null)
         {
-            p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_OWNER), true);
-            String s0 = this.func_152113_b();
-
-            if (s0.length() > 11)
-            {
-                s0 = this.func_152113_b();
-            }
-
-            p0.AddStringLR(s0, true);
+	        p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_OWNER), true);
+	        if (this.isTamed())
+	        {
+	            String s0 = String.valueOf(this.getOwner().getCommandSenderName());
+	            if (s0.length() > 11)
+	            {
+	                s0 = this.getOwner().getCommandSenderName().substring(0, 11);
+	            }
+	            
+	            p0.AddStringLR(s0, true);
+	        }
         }
-
-        //Display if Rideable
-        /*
-        if (this.isRideable() && this.isAdult())
-            p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_RIDEABLE), true);
-
-        if (this.SelfType.OrderItem != null)
-        p0.AddStringLR(StatCollector.translateToLocal("Order: " + this.SelfType.OrderItem.getStatName()), true);
-
-        
-        for (int i = 0; i < this.SelfType.FoodItemList.index; i++)
-        {
-            if (this.SelfType.FoodItemList.getItem(i) != null)
-            {
-                p0.AddMiniItem(this.SelfType.FoodItemList.getItem(i));
-            }
-        }
-        */
-
-        //TODO show all blocks the dino can eat
     }
     
     @SideOnly(Side.CLIENT)

@@ -119,7 +119,7 @@ public class ModelTriceratops extends ModelDinosaurs
 	      rightBackUpperLeg.addBox("rightBackUpperLeg", -2F, 0F, -1.5F, 2, 4, 3);
 	      rightBackUpperLeg.mirror = false;
 	    rightBackLowerLeg = new ModelRenderer(this, "rightBackLowerLeg");
-	    rightBackLowerLeg.setRotationPoint(-1F, 3F, 0.0F);
+	    rightBackLowerLeg.setRotationPoint(-1F, 2F, 0.0F);
 	    setRotation(rightBackLowerLeg, 0F, 0F, 0F);
 	    rightBackLowerLeg.mirror = true;
 	      rightBackLowerLeg.mirror = true;
@@ -133,7 +133,7 @@ public class ModelTriceratops extends ModelDinosaurs
 	    setRotation(leftBackUpperLeg, 0F, 0F, 0F);
 	      leftBackUpperLeg.addBox("leftBackUpperLeg", 0F, 0F, -1.5F, 2, 4, 3);
 	    leftBackLowerLeg = new ModelRenderer(this, "leftBackLowerLeg");
-	    leftBackLowerLeg.setRotationPoint(1F, 3F, 0.0F);
+	    leftBackLowerLeg.setRotationPoint(1F, 2F, 0.0F);
 	    setRotation(leftBackLowerLeg, 0F, 0F, 0F);
 	    leftBackLowerLeg.mirror = true;
 	      leftBackLowerLeg.addBox("leftBackLowerLeg", -0.5F, 0F, -4F, 1, 2, 4);
@@ -218,22 +218,8 @@ public class ModelTriceratops extends ModelDinosaurs
     {
         super.render(var1, var2, var3, var4, var5, var6, var7);
         this.setRotationAngles(var2, var3, var4, var5, var6, var7, ((EntityDinosaur)var1).isModelized());
-        
-        if (this.isChild)
-        {
-            GL11.glPushMatrix();
-            GL11.glScalef(1.5F, 1.5F, 1.5F);
-            GL11.glTranslatef(0F, -0.4F, 0.2F);
-            this.headpivot.render(var7);
-            GL11.glPopMatrix();
-
-        }
-        else
-        {
-        	this.headpivot.render(var7);
-        }
-        
         this.triceratops.render(var7);
+        this.headpivot.render(var7);
     }
 
     public void setRotationAngles(float var1, float var2, float var3, float var4, float var5, float var6, boolean isModelized)
@@ -266,10 +252,10 @@ public class ModelTriceratops extends ModelDinosaurs
 	        this.headpivot.rotateAngleX = (var5*0.3F) / (180F / (float)Math.PI);
 	        this.headpivot.rotateAngleY = (var4*0.3F) / (180F / (float)Math.PI);
 	        
-	        this.leftFrontUpperLeg.rotateAngleX = MathHelper.cos((var1) * 0.43330555F + 1) * 1.0F * var2;
-	        this.rightFrontUpperLeg.rotateAngleX = MathHelper.cos((var1) * 0.43330555F + (float)Math.PI) * 1.0F * var2;
-	        this.leftBackUpperLeg.rotateAngleX = MathHelper.cos((var1) * 0.43330555F + (float)Math.PI + 2) * 1.0F * var2;
-	        this.rightBackUpperLeg.rotateAngleX = MathHelper.cos((var1) * 0.43330555F + 1) * 1.0F * var2;
+	        this.leftFrontUpperLeg.rotateAngleX = MathHelper.cos((var1) * 0.63330555F + 1) * 0.7F * var2;
+	        this.rightFrontUpperLeg.rotateAngleX = MathHelper.cos((var1) * 0.63330555F + (float)Math.PI) * 0.7F * var2;
+	        this.leftBackUpperLeg.rotateAngleX = MathHelper.cos((var1) * 0.63330555F + (float)Math.PI + 2) * 0.7F * var2;
+	        this.rightBackUpperLeg.rotateAngleX = MathHelper.cos((var1) * 0.63330555F + 1) * 0.7F * var2;
 	        
 	        this.tail1.rotateAngleY = 0.06F * MathHelper.sin(var3 * (float)0.1F + (var2+2));
 	        this.tail2.rotateAngleY = 0.07F * MathHelper.sin(var3 * (float)0.1F + (var2+1));

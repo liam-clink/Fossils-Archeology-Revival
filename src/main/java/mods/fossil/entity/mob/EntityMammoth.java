@@ -383,7 +383,7 @@ public class EntityMammoth extends EntityPrehistoric implements IShearable
         //    String s0 = this.getOwnerName();
             //this.func_152115_b(player.getUniqueID().toString());
 
-	            String s0 = this.getOwner().getCommandSenderName();
+	            String s0 = String.valueOf(this.getOwner().getCommandSenderName());
 	            if (s0.length() > 11)
 	            {
 	                s0 = this.getOwner().getCommandSenderName().substring(0, 11);

@@ -197,7 +197,7 @@ import cpw.mods.fml.relauncher.Side;
 public class Fossil
 {
     public static final String modid = "fossil";
-    public static final String modversion = "1.7.10 Build 6.3.3a4";
+    public static final String modversion = "1.7.10 Build 6.4rc1";
 
     /*
      * Set mod state here
@@ -895,7 +895,7 @@ public class Fossil
 
         for (int i = 0; i < EnumDinoType.values().length; i++)
         {
-            EntityRegistry.registerModEntity(EnumDinoType.values()[i].getDinoClass(), EnumDinoType.values()[i].name(), 200 + i, this, 250, 4, true);
+            EntityRegistry.registerModEntity(EnumDinoType.values()[i].getDinoClass(), EnumDinoType.values()[i].name(), 200 + i, this, 250, 3, true);
         }
         
         EntityRegistry.addSpawn(EntityCoelacanth.class, 1, 2, 4, EnumCreatureType.waterCreature, new BiomeGenBase[] {BiomeGenBase.ocean});

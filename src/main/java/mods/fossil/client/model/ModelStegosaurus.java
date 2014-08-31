@@ -1,9 +1,12 @@
 package mods.fossil.client.model;
 
+import mods.fossil.entity.mob.EntityDeinonychus;
 import mods.fossil.entity.mob.EntityDinosaur;
+import mods.fossil.entity.mob.EntityStegosaurus;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.MathHelper;
 import scala.util.parsing.combinator.PackratParsers.Head;
 
@@ -273,14 +276,14 @@ public class ModelStegosaurus extends ModelDinosaurs
 		      this.head.rotateAngleX =  var5 / (180F / (float)Math.PI);
 		      this.head.rotateAngleY = var4 / (180F / (float)Math.PI);
 		      
-		      this.leftFrontUpperLeg.rotateAngleX = MathHelper.cos((var1) * 0.63330555F + 1) * 1.0F * var2;
-		      this.rightFrontUpperLeg.rotateAngleX = MathHelper.cos((var1) * 0.63330555F + (float)Math.PI) * 1.0F * var2;
-		      this.leftBackUpperLeg.rotateAngleX = MathHelper.cos((var1) * 0.63330555F + (float)Math.PI + 2) * 1.0F * var2;
-		      this.rightBackUpperLeg.rotateAngleX = MathHelper.cos((var1) * 0.63330555F + 1) * 1.0F * var2;
-		      
 		      this.tail1.rotateAngleY = 0.05F * MathHelper.sin(var3 * (float)0.1F + (var2+2));
 		      this.tail2.rotateAngleY = 0.1F * MathHelper.sin(var3 * (float)0.1F + (var2+1));
 		      this.tail3.rotateAngleY = 0.15F * MathHelper.sin(var3 * (float)0.1F + var2);
+		      
+		      this.leftFrontUpperLeg.rotateAngleX = MathHelper.cos((var1) * 0.63330555F + 1) * 0.7F * var2;
+		      this.rightFrontUpperLeg.rotateAngleX = MathHelper.cos((var1) * 0.63330555F + (float)Math.PI) * 0.7F * var2;
+		      this.leftBackUpperLeg.rotateAngleX = MathHelper.cos((var1) * 0.63330555F + (float)Math.PI + 2) * 0.7F * var2;
+		      this.rightBackUpperLeg.rotateAngleX = MathHelper.cos((var1) * 0.63330555F + 1) * 0.7F * var2;
 		}
 		else
 		{
@@ -297,5 +300,6 @@ public class ModelStegosaurus extends ModelDinosaurs
 			this.tail3.rotateAngleY = 0;
 		}
   }
+  
 
 }

@@ -192,8 +192,8 @@ public class ModelDilophosaurus extends ModelDinosaurs
         this.UpperArm2.render(var7);
         this.LowerArm1.render(var7);
         this.LowerArm2.render(var7);
-        this.Frill2.render(var7);
-        this.Frill1.render(var7);
+        //this.Frill2.render(var7);
+       // this.Frill1.render(var7);
     }
 
     private void setRotation(ModelRenderer var1, float var2, float var3, float var4)

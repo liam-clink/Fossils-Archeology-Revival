@@ -14,6 +14,7 @@ import mods.fossil.fossilEnums.EnumDinoType;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIControlledByPlayer;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
@@ -347,6 +348,18 @@ public class EntityTriceratops extends EntityDinosaur
     	}
     }
 
+    @Override
+    public IEntityLivingData onSpawnWithEgg(IEntityLivingData par1EntityLivingData)
+    {
+        par1EntityLivingData = super.onSpawnWithEgg(par1EntityLivingData);
+        Random random = new Random();
+        this.setSubSpecies(random.nextInt(3));
+        this.setDinoAge(this.SelfType.AdultAge);
+        this.updateSize();
+        this.heal(200);
+        return par1EntityLivingData;
+    }
+    
 	@Override
 	public void writeSpawnData(ByteBuf buffer) {
 		// TODO Auto-generated method stub

@@ -142,17 +142,7 @@ public class WaterDinoAIHunt extends EntityAITarget
             this.deltaZ = this.targetEntity.posZ - this.dinosaur.posZ;
             //rotate entity to face target
             this.dinosaur.renderYawOffset = this.dinosaur.rotationYaw = -((float)Math.atan2(deltaX, deltaZ)) * 180.0F / (float)Math.PI;
- 
-            
-            
-            //this.entityVector = Vec3.createVectorHelper(this.dinosaur.posX, this.dinosaur.posY, this.dinosaur.posZ);
-            //this.targetVector = Vec3.createVectorHelper(this.destX, this.destY, this.destZ);
-            
-            
-            //this.moveVector = targetVector.subtract(entityVector);
-            
-            //this.normalizedVector = this.moveVector.normalize();
-            
+
             this.movePosX = this.deltaX;
             this.movePosY = this.deltaY;
             this.movePosZ = this.deltaZ;
@@ -161,7 +151,6 @@ public class WaterDinoAIHunt extends EntityAITarget
 
             if (this.dinosaur.canEntityBeSeen(this.targetEntity))
             {
-//                this.dinosaur.worldObj.playSoundAtEntity((EntityPlayer)null, this.dinosaur.getAttackSound(), 1F, 1F);
                 Vec3 vec3 = this.dinosaur.getLook(1.0F);
             }
         }

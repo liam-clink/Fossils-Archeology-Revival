@@ -93,7 +93,7 @@ public class ModelVelociraptor extends ModelDinosaurs
 	    setTextureOffset("leftTalon2.leftTalon2", 0, 40);
 	    
 	    headpivot = new ModelRenderer(this, "headpivot");
-	    headpivot.setRotationPoint(0F, 7F, -11F);
+	    headpivot.setRotationPoint(0F, 6F, -11F);
 	    setRotation(headpivot, 0F, 0F, 0F);
 	    headpivot.mirror = true;
 	    head = new ModelRenderer(this, "head");
@@ -129,7 +129,7 @@ public class ModelVelociraptor extends ModelDinosaurs
 	      head.addChild(upperJaw);
 	      headpivot.addChild(head);
 	    velociraptor = new ModelRenderer(this, "velociraptor");
-	    velociraptor.setRotationPoint(0F, 10F, -2F);
+	    velociraptor.setRotationPoint(0F, 9, -2F);
 	    setRotation(velociraptor, 0F, 0F, 0F);
 	    velociraptor.mirror = true;
 	    lowerBody = new ModelRenderer(this, "lowerBody");
@@ -267,7 +267,7 @@ public class ModelVelociraptor extends ModelDinosaurs
 	      tail1.addChild(tail2);
 	      lowerBody.addChild(tail1);
 	    rightUpperLeg = new ModelRenderer(this, "rightUpperLeg");
-	    rightUpperLeg.setRotationPoint(-4F, 4F, 4F);
+	    rightUpperLeg.setRotationPoint(-4F, 4F, 5F);
 	    setRotation(rightUpperLeg, 0F, 0F, 0F);
 	    rightUpperLeg.mirror = true;
 	      rightUpperLeg.addBox("rightUpperLeg", -3F, 0F, -2.5F, 3, 5, 5);
@@ -297,7 +297,7 @@ public class ModelVelociraptor extends ModelDinosaurs
 	      rightUpperLeg.addChild(rightLowerLeg);
 	      lowerBody.addChild(rightUpperLeg);
 	    leftUpperLeg = new ModelRenderer(this, "leftUpperLeg");
-	    leftUpperLeg.setRotationPoint(4F, 4F, 4F);
+	    leftUpperLeg.setRotationPoint(4F, 4F, 5F);
 	    setRotation(leftUpperLeg, 0F, 0F, 0F);
 	    leftUpperLeg.mirror = true;
 	      leftUpperLeg.mirror = true;
@@ -350,17 +350,6 @@ public class ModelVelociraptor extends ModelDinosaurs
 
     public void setRotationAngles(float var1, float var2, float var3, float var4, float var5, float var6, boolean modelized)
     {
-    	
-        if (this.isChild)
-        {
-      	  this.upperJaw.rotationPointZ = -5F;
-      	  this.lowerJaw.rotationPointZ = -5F;
-        }
-        else
-        {
-      	  this.upperJaw.rotationPointZ = -7F;
-      	  this.lowerJaw.rotationPointZ = -7F;
-        }
         
   	  if(!modelized){
 		  this.head.rotateAngleX = -var5 / (180F / (float)Math.PI);
@@ -377,10 +366,23 @@ public class ModelVelociraptor extends ModelDinosaurs
     {
   	  EntityVelociraptor entity = (EntityVelociraptor)par1EntityLiving;
 
+      if (!entity.isAdult() && !entity.isTeen())
+      {
+      	  this.upperJaw.rotationPointZ = -5F;
+      	  this.lowerJaw.rotationPointZ = -5F;
+        }
+        else
+        {
+      	  this.upperJaw.rotationPointZ = -7F;
+      	  this.lowerJaw.rotationPointZ = -7F;
+        }
+      
   	  //if (entity.isSitting() || entity.OrderStatus == EnumOrderType.Stay)
   		//  this.sitPose();
   	  //else
   		  this.standingPose(par2, par3);
+
+
     }
     
     private void modelPose(){
@@ -423,11 +425,10 @@ public class ModelVelociraptor extends ModelDinosaurs
      	  this.rightTalon1.rotateAngleX = (float)Math.toRadians(-50);
      	  this.rightTalon2.rotateAngleX = (float)Math.toRadians(80);
      	  
+    	  this.rightUpperLeg.rotateAngleX = (float)Math.toRadians(10) + MathHelper.cos(speed * 0.6662F + (float)Math.PI) * 1.0F * range;
+          this.leftUpperLeg.rotateAngleX = (float)Math.toRadians(10) + MathHelper.cos(speed * 0.6662F) * 1.0F * range;
+          
      	  this.tail3.rotateAngleX = (float)Math.toRadians(-1.6);
-
-     	  this.rightUpperLeg.rotateAngleX = MathHelper.cos(speed * 0.6662F + (float)Math.PI) * 1.0F * range;
-         this.leftUpperLeg.rotateAngleX = MathHelper.cos(speed * 0.6662F) * 1.0F * range;
-         
     }
 
 }
