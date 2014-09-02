@@ -6,6 +6,7 @@ Height: 3m
 Area: North America and Europe
 Climate: Dry
 Period: Late Jurassic
+Family: Allosauridae
 
 Allosaurus were carnivores, feeding on
  large herbivores such as the Stegosaurus.
@@ -13,6 +14,3 @@ Allosaurus were carnivores, feeding on
 As an iconic predatore of the Jurassic, 
 it is known for its distinct eyebrow 
 ridges and large claws.
-
-Allosaurus is part of the 
-Allosauridae family.

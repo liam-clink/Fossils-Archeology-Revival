@@ -1,7 +1,7 @@
-﻿#Build 6.3.2 - Updated August 20 2014
+﻿#Build 6.4 - Updated August 28 2014
 #Russian (ru_RU) Localization File
-
-#Tab Groups#Tab Groups
+#Keys last updated August 28 2014
+#Tab Groups
 itemgroup.FCombat=Древняя броня
 itemgroup.FBlocks=Древние блоки
 itemgroup.FFood=Древняя еда
@@ -11,7 +11,7 @@ itemgroup.FTools=Древние инструменты
 itemgroup.FFigurines=Собираемые предметы
 itemgroup.FBones=Кости динозавра
 
-#Achievements#Achievements
+#Achievements
 achievement.FirstEgg=Первый динозавр!
 achievement.AllEggs=Нужно вывести их всех!
 achievement.FoundFossils=Копаем в поисках костей
@@ -25,7 +25,7 @@ achievement.Dinopedia=Заполняем все страницы!
 achievement.IceAge=Я не знаю, как Вы будете рожать...
 achievement.TheKing=Правитель Позднего мела.
 
-#Achievement Descriptions#Achievement Descriptions
+#Achievement Descriptions
 achievement.FirstEgg.desc=Вы вернули Вашего ​​первого динозавра!
 achievement.AllEggs.desc=Вы нашли все яйца динозавров!
 achievement.FoundFossils.desc=Вы нашли немного ископаемых!
@@ -39,11 +39,11 @@ achievement.Dinopedia=Найдите всех динозавров!
 achievement.IceAge=Однако Я хочу вернуть ледниковый период!
 achievement.TheKing=Да здравствует король!
 
-#Enchantments#Enchantments
+#Enchantments
 enchantment.paleontology=Палеонтология
 enchantment.archeology=Археология
 
-#Blocks#Blocks
+#Blocks
 tile.fossil.name=Ископаемое
 tile.skullBlock.name=Череп
 tile.skullLantern.name=Череп-фонарь
@@ -89,7 +89,7 @@ tile.ancientWoodDoubleSlab.ancientWood.name=Древняя деревянная 
 tile.ancientStoneSlab.ancientStone.name=Древняя каменная плита
 tile.ancientStoneDoubleSlab.ancientStone.name=Древняя каменная плита
 
-#Collectables#Collectables
+#Collectables
 tile.figurine.figurine_steve_pristine.name=Древняя статуэтка Стива
 tile.figurine.figurine_skeleton_pristine.name=Древняя статуэтка скелета
 tile.figurine.figurine_zombie_pristine.name=Древняя статуэтка зомби
@@ -122,7 +122,7 @@ tile.vaseKylix.blackFigure_kylix.name=Килик с чёрным рисунко�
 tile.vaseKylix.redFigure_kylix.name=Килик с красным рисунком
 tile.vaseKylix.porcelain_kylix.name=Фарфоровый килик
 
-#Items#Items
+#Items
 item.bioFossil.name=Биоископаемое
 item.relicScrap.name=Реликтовый кусок
 item.stoneTablet.name=Каменный блокнот
@@ -171,6 +171,7 @@ item.legBone.Ankylosaurus.name=Кость голени Анкилозавра
 item.legBone.Pachycephalosaurus.name=Кость голени Пахицефалозавра
 item.legBone.Deinonychus.name=Кость голени Дейнониха
 item.legBone.Gallimimus.name=Кость голени Галлимима
+item.legBone.Allosaurus.name=Allosaurus Leg Bone
 item.armBone.Triceratops.name=Плечевая кость Трицератопса
 item.armBone.Velociraptor.name=Плечевая кость Велоцираптора
 item.armBone.TRex.name=Плечевая кость Тиранозавра
@@ -187,6 +188,7 @@ item.armBone.Ankylosaurus.name=Плечевая кость Анкилозавр�
 item.armBone.Pachycephalosaurus.name=Плечевая кость Пахицефалозавра
 item.armBone.Deinonychus.name=Плечевая кость Дейнониха
 item.armBone.Gallimimus.name=Плечевая кость Галлимима
+item.armBone.Allosaurus.name=Allosaurus Arm Bone
 item.claw.Triceratops.name=Рог Трицератопса
 item.claw.Velociraptor.name=Коготь Велоцираптора
 item.claw.TRex.name=Зуб тираннозавра
@@ -203,6 +205,7 @@ item.claw.Ankylosaurus.name=Хвостовая булава Анкилозавр
 item.claw.Pachycephalosaurus.name=Черепной рог Пахицефалозавра
 item.claw.Deinonychus.name=Коготь Дейнониха
 item.claw.Gallimimus.name=Коготь Галлимима
+item.claw.Allosaurus.name=Allosaurus Claw
 item.foot.Triceratops.name=Голень Трицератопса
 item.foot.Velociraptor.name=Голень Велоцираптора
 item.foot.TRex.name=Голень Тиранозавра
@@ -219,6 +222,7 @@ item.foot.Ankylosaurus.name=Голень Анкилозавра
 item.foot.Pachycephalosaurus.name=Голень Пахицефалозавра
 item.foot.Deinonychus.name=Голень Дейнониха
 item.foot.Gallimimus.name=Голень Галлимима
+item.foot.Allosaurus.name=Allosaurus Foot
 item.skull.Triceratops.name=Череп Трицератопса
 item.skull.Velociraptor.name=Череп Велоцираптора
 item.skull.TRex.name=Череп Тираннозавра
@@ -235,6 +239,7 @@ item.skull.Ankylosaurus.name=Череп Анкилозавра
 item.skull.Pachycephalosaurus.name=Череп Пахицефалозавра
 item.skull.Deinonychus.name=Череп Дейнониха
 item.skull.Gallimimus.name=Череп Галлимима
+item.skull.Allosaurus.name=Allosaurus Skull
 item.vertebrae.Triceratops.name=Позвоночник Трицератопса
 item.vertebrae.Velociraptor.name=Позвоночник Велоцираптора
 item.vertebrae.TRex.name=Позвоночник Тираннозавра
@@ -251,6 +256,7 @@ item.vertebrae.Ankylosaurus.name=Позвоночник Анкилозавра
 item.vertebrae.Pachycephalosaurus.name=Позвоночник Пахицефалозавра
 item.vertebrae.Deinonychus.name=Позвоночник Дейнониха
 item.vertebrae.Gallimimus.name=Позвоночник Галлимима
+item.vertebrae.Allosaurus.name=Allosaurus Vertebrae
 item.dinoRibCage.Triceratops.name=Грудная клетка Трицератопса
 item.dinoRibCage.Velociraptor.name=Грудная клетка Велоцираптора
 item.dinoRibCage.TRex.name=Грудная клетка Тираннозавра
@@ -267,6 +273,7 @@ item.dinoRibCage.Ankylosaurus.name=Грудная клетка Анкилоза�
 item.dinoRibCage.Pachycephalosaurus.name=Грудная клетка Пахицефалозавра
 item.dinoRibCage.Deinonychus.name=Грудная клетка Дейнониха
 item.dinoRibCage.Gallimimus.name=Грудная клетка Галлимима
+item.dinoRibCage.Allosaurus.name=Allosaurus Rib Cage
 item.dinosaurModels.Triceratops.name=Модель Трицератопса
 item.dinosaurModels.Velociraptor.name=Модель Велоцираптора
 item.dinosaurModels.TRex.name=Модель Тираннозавра
@@ -283,6 +290,7 @@ item.dinosaurModels.Ankylosaurus.name=Модель Анкилозавра
 item.dinosaurModels.Pachycephalosaurus.name=Модель Пахицефалозавра
 item.dinosaurModels.Deinonychus.name=Модель  Дейнониха
 item.dinosaurModels.Gallimimus.name=Модель Галлимима
+item.dinosaurModels.Allosaurus.name=Allosaurus Model
 item.plantFossil.name=Ископаемое растение
 item.skullHelmet.name=Череп-шлем
 item.ribCage.name=Защита для груди
@@ -319,6 +327,7 @@ item.rawAnkylosaurus.name=Мясо анкилозавра
 item.rawPachycephalosaurus.name=Мясо пахицефалозавра
 item.rawDeinonychus.name=Мясо дейнониха
 item.rawGallimimus.name=Мясо галлимима
+item.rawAllosaurus.name=Allosaurus Meat
 item.eggTriceratops.name=Яйцо трицератопса
 item.eggVelociraptor.name=Яйцо велоцираптора
 item.eggTRex.name=Яйцо тираннозавра
@@ -338,6 +347,7 @@ item.eggAnkylosaurus.name=Яйцо анкилозавра
 item.eggPachycephalosaurus.name=Яйцо пахицефалозавра
 item.eggDeinonychus.name=Яйцо дейнониха
 item.eggGallimimus.name=Яйцо галлимима
+item.eggAllosaurus.name=Allosaurus Egg
 item.eggCoelacanth.first.name=Океанский целакант
 item.eggCoelacanth.second.name=Речной целакант
 item.eggCoelacanth.third.name=Болотный целакант
@@ -377,6 +387,7 @@ item.dnaDodo.name=ДНК дронта
 item.dnaHorse.name=ДНК лошади
 item.dnaQuagga.name=ДНК квагги
 item.dnaTerrorBird.name=Terror Bird DNA
+item.dnaAllosaurus.name=Allosaurus DNA
 item.embryoPig.name=Эмбрион свиньи
 item.embryoSheep.name=Эмбрион овцы
 item.embryoCow.name=Эмбрион коровы
@@ -393,7 +404,7 @@ item.terrorBirdMeatCooked.name=Cooked Terror Bird Leg
 item.quaggaMeat.name=Raw Quagga Meat
 item.quaggaMeatCooked.name=Cooked Quagga Meat
 
-#Dinosaur related chat messages#Dinosaur related chat messages
+#Dinosaur related chat messages
 dnaName.head=ДНК 
 dnaName.tail=
 embryoName.head=Эмбрион 
@@ -405,13 +416,13 @@ mGCName.tail=
 dEggName.head=Яйцо 
 dEggName.tail=
 
-#Order chat messages#Order chat messages
+#Order chat messages
 order.head=Приказ: 
 order.Stay=Стой
 order.Follow=Следуй за мной
 order.FreeMove=Двигайся куда хочешь
 
-#Dinosaur status chat messages#Dinosaur status chat messages
+#Dinosaur status chat messages
 status.Hungry.head= 
 status.Hungry= голоден.
 status.Starve.head=
@@ -435,7 +446,7 @@ status.GemErrorHealth=Скарабей не может позволить себ
 status.GemErrorTamed=Этот тираннозавр уже был приручен.
 status.essencefail=Эссенция курицы не имеет эффекта.
 
-#Dinosaur Names#Dinosaur Names
+#Dinosaur Names
 entity.fossil.Triceratops.name=Трицератопс
 entity.fossil.Velociraptor.name=Велоцираптор
 entity.fossil.TRex.name=Тираннозавр
@@ -453,8 +464,9 @@ entity.fossil.Ankylosaurus.name=Анкилозавр
 entity.fossil.Pachycephalosaurus.name=Пахицефалозавр
 entity.fossil.Deinonychus.name=Дейноних
 entity.fossil.Gallimimus.name=Галлимим
+entity.fossil.Allosaurus.name=Allosaurus
 
-#Non-dinosaur names#Non-dinosaur names
+#Non-dinosaur names
 entity.fossil.Mammoth.name=Мамонт
 entity.fossil.Smilodon.name=Смилодон
 entity.fossil.PregnantCow.name=Беременная корова
@@ -466,7 +478,7 @@ entity.fossil.Coelacanth.name=Целакант
 entity.fossil.Quagga.name=Квагга
 entity.fossil.TerrorBird.name=Terror Bird
 
-#Pedia text#Pedia text
+#Pedia text
 pedia.text.owner=Владелец:
 pedia.text.chest=* сундуки
 pedia.text.caution=!Опасный!
@@ -493,7 +505,7 @@ pedia.embryo.Dodo=Дронт
 pedia.embryo.Horse=Лошадь
 pedia.embryo.Quagga=Квагга
 
-#Anu speaking lines#Anu speaking lines
+#Anu speaking lines
 anuSpeaker.self=Ану: 
 anuSpeaker.hello=Встань на колени передо мной, сопротивление бесполезно.
 anuSpeaker.bareHand=Голые руки... Глупый, но храбрый.
@@ -508,37 +520,37 @@ anuSpeaker.trans=Скоты, разбудите вашу мудрость!
 anuSpeaker.qi=Qi-shock!
 anuSpeaker.fireRain=Дайте дождю немного огня!
 
-#Friendly pigmen speaking lines#Friendly pigmen speaking lines
+#Friendly pigmen speaking lines
 fpzSpeaker.self=Свинозомби: 
 fpzSpeaker.selfKill=Мы не можем жить без лидера!
 fpzSpeaker.lifeFor.head=Моя жизнь для 
 fpzSpeaker.lifeFor.tail=!
 fpzSpeaker.anuSommon=Все зовём Ану!!
 
-#Dinosaur egg chat messages#Dinosaur egg chat messages
+#Dinosaur egg chat messages
 dinoegg.hatched=Яйцо динозавра вылупилось!
 dinoegg.noSpace=Это яйцо не может быть выведено здесь.
 dinoegg.head=Яйцо 
 dinoegg.dry= умерло, потому что оно было слишком сухим.
 dinoegg.cold= умерло, потому что оно было слишком холодным.
 
-#Cultivator chat messages#Cultivator chat messages
+#Cultivator chat messages
 cultivate.outBreak=Внимание! Культивирование не удалось!
 
-#Drum chat messages#Drum chat messages
+#Drum chat messages
 drum.trigger=Приказ барабана: 
 drum.ordering=Приказ 
 drum.tRex1=Призываем тираннозавра к завтраку.
 drum.tRex2=Призываем тираннозавра к обеду.
 drum.tRex3=Призываем тираннозавра к ужину.
 
-#Hostile mob names#Hostile mob names
+#Hostile mob names
 entity.fossil.Bones.name=Кости
 entity.fossil.FriendlyPigZombie.name=Дружелюбные свинозомби
 entity.fossil.Failuresaurus.name=Failursaurus
 entity.fossil.PigBoss.name=Ану
 
-#Records#Records
+#Records
 item.record_bones.name=Ископаемая пластинка
 item.record_bones_disc.name=Ископаемая пластинка
 item.record.record_bones_disc.desc=WhiteJoshMan - Кости

@@ -88,7 +88,7 @@ public class EntityAllosaurus extends EntityDinosaur
          */
         this.adultAge = EnumDinoType.Allosaurus.AdultAge;
         // Set initial size for hitbox. (length/width, height)
-        this.setSize(1.5F, 1.5F);
+        this.setSize(1.4F, 1.3F);
         // Size of dinosaur at day 0.
         this.minSize = 0.55F;
         // Size of dinosaur at age Adult.
