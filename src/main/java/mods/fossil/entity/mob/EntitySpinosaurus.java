@@ -223,6 +223,11 @@ public class EntitySpinosaurus extends EntityDinosaur implements IWaterDino
      */
     public boolean attackEntityFrom(DamageSource damageSource, float var2)
     {
+    	if (this.isModelized())
+    	{
+            return super.attackEntityFrom(damageSource, var2);
+    	}
+    	
         if (this.isEntityInvulnerable())
         {
             return false;

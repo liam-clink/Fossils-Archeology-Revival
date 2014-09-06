@@ -140,9 +140,10 @@ public class ModelDeinonychus extends ModelDinosaurs
 	    setRotation(tail2, 0F, 0F, 0F);
 	    tail2.mirror = true;
 	      tail2.addBox("tail2", -1F, -1.5F, 0F, 2, 3, 17);
-	      tail2.addBox("rightTailFeather", -3F, -0.5F, 11F, 3, 1, 14);
-	      tail2.addBox("leftTailFeather", 0F, -0.5F, 11F, 3, 1, 14);
 	      tail2.addBox("tail3", -0.5F, -1.1F, 17F, 1, 2, 6);
+	      tail2.addBox("leftTailFeather", 0F, -0.5F, 11F, 3, 1, 14);
+	      tail2.mirror = false;
+	      tail2.addBox("rightTailFeather", -3F, -0.5F, 11F, 3, 1, 14);
 	      tail1.addChild(tail2);
 	      lowerBody.addChild(tail1);
 	    rightUpperLeg = new ModelRenderer(this, "rightUpperLeg");
@@ -193,12 +194,12 @@ public class ModelDeinonychus extends ModelDinosaurs
 	    leftFoot.mirror = true;
 	      leftFoot.addBox("leftFoot", -0.6F, 0F, -4F, 3, 2, 4);
 	    leftTalon1 = new ModelRenderer(this, "leftTalon1");
-	    leftTalon1.setRotationPoint(0F, -1F, 0F);
+	    leftTalon1.setRotationPoint(-1F, 0F, -1F);
 	    setRotation(leftTalon1, 0F, 0F, 0F);
 	    leftTalon1.mirror = true;
-	      leftTalon1.addBox("leftTalon1", -1F, 1F, -4F, 1, 1, 3);
+	      leftTalon1.addBox("leftTalon1", 0F, 0F, -3F, 1, 1, 3);
 	    leftTalon2 = new ModelRenderer(this, "leftTalon2");
-	    leftTalon2.setRotationPoint(-1F, 1F, -3F);
+	    leftTalon2.setRotationPoint(0F, 1F, -3F);
 	    setRotation(leftTalon2, 0F, 0F, 0F);
 	    leftTalon2.mirror = true;
 	      leftTalon2.addBox("leftTalon2", 0F, -1F, -1.5F, 1, 1, 2);
@@ -296,17 +297,6 @@ public class ModelDeinonychus extends ModelDinosaurs
 	  this.rightTalon1.rotateAngleX = (float)Math.toRadians(-50);
 	  this.rightTalon2.rotateAngleX = (float)Math.toRadians(80);
 	  
-      if (this.isChild)
-      {
-    	  this.upperJaw.rotationPointZ = -2.5F;
-    	  this.lowerJaw.rotationPointZ = -3;
-      }
-      else
-      {
-    	  this.upperJaw.rotationPointZ = -4.5F;
-    	  this.lowerJaw.rotationPointZ = -5;
-      }
-	  
 	  if(!isModelized){
 		  this.head.rotateAngleX = -var5 / (180F / (float)Math.PI);
           this.head.rotateAngleY = var4 / (180F / (float)Math.PI);
@@ -321,11 +311,26 @@ public class ModelDeinonychus extends ModelDinosaurs
   public void setLivingAnimations(EntityLivingBase par1EntityLiving, float par2, float par3, float par4)
   {
 	  EntityDeinonychus entity = (EntityDeinonychus)par1EntityLiving;
+	  
+      if (!entity.isAdult() && !entity.isTeen())
+      {
+    	  this.upperJaw.rotationPointZ = -2.5F;
+    	  this.lowerJaw.rotationPointZ = -3;
+      }
+      else
+      {
+    	  this.upperJaw.rotationPointZ = -4.5F;
+    	  this.lowerJaw.rotationPointZ = -5;
+      }
 
 	  if (entity.isSitting() || entity.OrderStatus == EnumOrderType.Stay)
 		  this.sitPose();
 	  else
+	  {
 		  this.standingPose(par2, par3);
+
+
+	  }
   }
   
   //////// poses ////////////
@@ -406,13 +411,13 @@ public class ModelDeinonychus extends ModelDinosaurs
 	  this.rightFoot.rotateAngleX = (float)Math.toRadians(-65);
 	  this.leftFoot.rotateAngleX = (float)Math.toRadians(-65);
 	  
-
+	  this.rightUpperLeg.rotateAngleX = MathHelper.cos(speed * 0.6662F + (float)Math.PI) * 1.0F * range;
+      this.leftUpperLeg.rotateAngleX = MathHelper.cos(speed * 0.6662F) * 1.0F * range;
 	  
 	  this.tail1.rotateAngleX = (float)Math.toRadians(7);
 	  this.tail2.rotateAngleX = (float)Math.toRadians(6);
 
-	  this.rightUpperLeg.rotateAngleX = MathHelper.cos(speed * 0.6662F + (float)Math.PI) * 1.4F * range;
-      this.leftUpperLeg.rotateAngleX = MathHelper.cos(speed * 0.6662F) * 1.4F * range;
+
 	  
   }
 

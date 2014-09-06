@@ -195,7 +195,12 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
      */
     public boolean isTeen()
     {
-        return this.getDinoAge() >= this.SelfType.TeenAge;
+        return this.getDinoAge() >= this.SelfType.TeenAge && this.getDinoAge() < this.SelfType.AdultAge;
+    }
+    
+    public boolean isChild()
+    {
+		return this.getDinoAge() < this.SelfType.TeenAge;
     }
 
     /**
@@ -554,7 +559,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
             
 ////////////1.7.10 BLOCK //////////////
             
-            String s0 = this.getOwner().getCommandSenderName();
+            String s0 = String.valueOf(this.getOwner().getCommandSenderName());
             if (s0.length() > 11)
             {
                 s0 = this.getOwner().getCommandSenderName().substring(0, 11);
@@ -565,10 +570,10 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
             
 ////////////1.7.2 BLOCK //////////////      
             /*
-            String s0 = this.getOwner().getCommandSenderName();
+            String s0 = this.getOwnerName();
             if (s0.length() > 11)
             {
-                s0 = this.getOwner().getCommandSenderName().substring(0, 11);
+                s0 = this.getOwnerName().substring(0, 11);
             }
             
             p0.AddStringLR(s0, true);
@@ -845,10 +850,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
                     var5 = new EntityDinoEgg(this.worldObj, this.SelfType);
                     ((Entity)var5).setLocationAndAngles(this.posX + (double)((new Random()).nextInt(3) - 1), this.posY, this.posZ + (double)((new Random()).nextInt(3) - 1), this.worldObj.rand.nextFloat() * 360.0F, 0.0F);
 
-                    if (this.worldObj.isRemote && this.worldObj.checkNoEntityCollision(var5.boundingBox) && this.worldObj.getCollidingBoundingBoxes(var5, var5.boundingBox).size() == 0)
-                    {
                     	this.worldObj.spawnEntityInWorld((Entity)var5);
-                    }
 
                     //this.showHeartsOrSmokeFX(true);
                     this.worldObj.setEntityState(this, HEART_MESSAGE);

@@ -155,6 +155,7 @@ public class EntityTRex extends EntityDinosaur
     	if(this.isWeak()) {
             this.motionX *= 0.0D;
             this.motionZ *= 0.0D;
+            this.rotationPitch = this.rotationYaw = 0;
     	}
     }
     
@@ -237,6 +238,11 @@ public class EntityTRex extends EntityDinosaur
     @Override
     public boolean attackEntityFrom(DamageSource damageSource, float var2)
     {
+    	if (this.isModelized())
+    	{
+            return super.attackEntityFrom(damageSource, var2);
+    	}
+    	
         if (this.isEntityInvulnerable())
         {
             return false;

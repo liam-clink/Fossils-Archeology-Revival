@@ -163,10 +163,10 @@ public class ModelMammoth extends ModelBase
 
     public void setRotationAngles(float var1, float var2, float var3, float var4, float var5, float var6)
     {
-        this.rightArm.rotateAngleX = MathHelper.cos(var1 * 0.6662F) * 1.4F * var2;
-        this.leftArm.rotateAngleX = MathHelper.cos(var1 * 0.6662F + (float)Math.PI) * 1.4F * var2;
-        this.rightLeg.rotateAngleX = MathHelper.cos(var1 * 0.6662F + (float)Math.PI) * 1.4F * var2;
-        this.leftLeg.rotateAngleX = MathHelper.cos(var1 * 0.6662F) * 1.4F * var2;
+        this.rightArm.rotateAngleX = MathHelper.cos(var1 * 0.6662F) * 1.0F * var2;
+        this.leftArm.rotateAngleX = MathHelper.cos(var1 * 0.6662F + (float)Math.PI) * 1.0F * var2;
+        this.rightLeg.rotateAngleX = MathHelper.cos(var1 * 0.6662F + (float)Math.PI) * 1.0F * var2;
+        this.leftLeg.rotateAngleX = MathHelper.cos(var1 * 0.6662F) * 1.0F * var2;
     }
 
     /**

@@ -207,7 +207,7 @@ public class GuiPedia extends GuiContainer
 	    	{
 		    	List list = new ArrayList();
 		    	list.add((new ItemStack(it0)).getDisplayName());
-		    	this.drawHoveringText(list, x0, y0, fontRendererObj);
+		    	this.drawHoveringText(list, rightIndent - 8, 130 + 24, fontRendererObj);
 	    	}
     	}
         

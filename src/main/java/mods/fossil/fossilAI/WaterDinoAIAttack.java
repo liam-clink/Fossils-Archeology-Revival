@@ -103,41 +103,15 @@ public class WaterDinoAIAttack extends EntityAIBase
             this.deltaX = this.targetedEntity.posX - this.entity.posX;
             this.deltaY = this.targetedEntity.posY - this.entity.posY;
             this.deltaZ = this.targetedEntity.posZ - this.entity.posZ;
-            /*
-            this.length = Math.sqrt(deltaX * deltaX + deltaY * deltaY + deltaZ * deltaZ);
-            deltaX /= length + 1.2D;
-            deltaY /= length + 1.2D;
-            deltaZ /= length + 1.2D;
-            
-            //Set waypoint for player's current location.
-            this.waypointX += deltaX;
-            this.waypointY += deltaY;
-            this.waypointZ += deltaZ;
-            //Now move.
-            double d5 = this.targetedEntity.posX - this.entity.posX;
-            double d6 = this.targetedEntity.posY - this.entity.posY;
-            double d7 = this.targetedEntity.posZ - this.entity.posZ;
-            */
-            //rotate entity to face target
+
             this.entity.renderYawOffset = this.entity.rotationYaw = -((float)Math.atan2(deltaX, deltaZ)) * 180.0F / (float)Math.PI;
             Vec3 vec3 = this.entity.getLook(1.0F);
- 
-            
-            
-            //this.entityVector = Vec3.createVectorHelper(this.dinosaur.posX, this.dinosaur.posY, this.dinosaur.posZ);
-            //this.targetVector = Vec3.createVectorHelper(this.destX, this.destY, this.destZ);
-            
-            
-            //this.moveVector = targetVector.subtract(entityVector);
-            
-            //this.normalizedVector = this.moveVector.normalize();
-            
+
             this.movePosX = this.deltaX;
             this.movePosY = this.deltaY;
             this.movePosZ = this.deltaZ;
             
             this.entity.addVelocity( deltaX * this.speed, deltaY * this.speed,  deltaZ * this.speed);
-            this.entity.worldObj.playSoundAtEntity(this.entity, this.entity.getAttackSound(), 1F, 1F);
 
         }
         else

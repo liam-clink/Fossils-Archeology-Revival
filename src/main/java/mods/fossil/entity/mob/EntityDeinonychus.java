@@ -10,6 +10,7 @@ import mods.fossil.fossilAI.DinoAIAttackOnCollide;
 import mods.fossil.fossilAI.DinoAIEat;
 import mods.fossil.fossilAI.DinoAIFollowOwner;
 import mods.fossil.fossilAI.DinoAIHunt;
+import mods.fossil.fossilAI.DinoAIRaptorLeapAtTarget;
 import mods.fossil.fossilAI.DinoAITargetNonTamedExceptSelfClass;
 import mods.fossil.fossilAI.DinoAIWander;
 import mods.fossil.fossilEnums.EnumDinoType;
@@ -75,7 +76,7 @@ public class EntityDeinonychus extends EntityDinosaur
         
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(0, new EntityAISwimming(this));
-        this.tasks.addTask(1, new EntityAILeapAtTarget(this, 0.6F));
+        this.tasks.addTask(1, new DinoAIRaptorLeapAtTarget(this, 0.5F, 0.5F, 0.5F));
         this.tasks.addTask(3, new DinoAIAttackOnCollide(this, 1.2D, true));
         this.tasks.addTask(4, new EntityAIOpenDoor(this, true));
         this.tasks.addTask(5, new DinoAIFollowOwner(this, 1.0F, 10.0F, 2.0F));
@@ -277,23 +278,6 @@ public class EntityDeinonychus extends EntityDinosaur
             }
 
             return super.attackEntityFrom(damagesource, damageamount);
-        }
-    }
-
-    /**
-     * Sets the active target the Task system uses for tracking
-     */
-    public void setAttackTarget(EntityLivingBase par1EntityLivingBase)
-    {
-        super.setAttackTarget(par1EntityLivingBase);
-
-        if (par1EntityLivingBase == null)
-        {
-            this.setAngry(false);
-        }
-        else if (!this.isTamed())
-        {
-            this.setAngry(true);
         }
     }
     

@@ -198,10 +198,8 @@ public class ModelAllosaurus extends ModelDinosaurs
         rightLowerArm = new ModelRenderer(this, "rightLowerArm");
         rightLowerArm.setRotationPoint(1F, 2.5F, 1F);
         setRotation(rightLowerArm, 0F, 0F, 0F);
-        rightLowerArm.mirror = true;
-          rightLowerArm.mirror = true;
+        rightLowerArm.mirror = false;
           rightLowerArm.addBox("rightLowerArm", -1.1F, 0F, 0F, 2, 5, 2);
-          rightLowerArm.mirror = false;
           leftUpperArm.addChild(rightLowerArm);
           upperBody.addChild(leftUpperArm);
         rightUpperArm = new ModelRenderer(this, "rightUpperArm");

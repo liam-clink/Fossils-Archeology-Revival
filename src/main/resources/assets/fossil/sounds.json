@@ -69,6 +69,7 @@
 	"trex_hurt": {"category": "neutral","sounds": ["trex_hurt"]},
 	"trex_living": {"category": "neutral","sounds": ["trex_living1", "trex_living2", "trex_living3"]},
 	"trex_scream": {"category": "neutral","sounds": ["trex_scream1", "trex_scream2", "trex_scream3"]},
+	"trex_weak": {"category": "neutral","sounds": ["trex_weak"]},
 	"triceratops_death": {"category": "neutral","sounds": ["triceratops_death"]},
 	"triceratops_hurt": {"category": "neutral","sounds": ["triceratops_hurt"]},
 	"triceratops_living": {"category": "neutral","sounds": ["triceratops_living1", "triceratops_living2", "triceratops_living3"]},

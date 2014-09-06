@@ -12,11 +12,13 @@ import mods.fossil.fossilAI.DinoAIAttackOnCollide;
 import mods.fossil.fossilAI.DinoAIEat;
 import mods.fossil.fossilAI.DinoAIFollowOwner;
 import mods.fossil.fossilAI.DinoAIHunt;
+import mods.fossil.fossilAI.DinoAIRideGround;
 import mods.fossil.fossilAI.DinoAITargetNonTamedExceptSelfClass;
 import mods.fossil.fossilAI.DinoAIWander;
 import mods.fossil.fossilEnums.EnumDinoType;
 import mods.fossil.fossilEnums.EnumOrderType;
 import mods.fossil.fossilEnums.EnumSituation;
+import mods.fossil.handler.FossilAchievementHandler;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
@@ -35,6 +37,7 @@ import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -85,11 +88,11 @@ public class EntityAllosaurus extends EntityDinosaur
          */
         this.adultAge = EnumDinoType.Allosaurus.AdultAge;
         // Set initial size for hitbox. (length/width, height)
-        this.setSize(1.5F, 1.5F);
+        this.setSize(1.4F, 1.3F);
         // Size of dinosaur at day 0.
         this.minSize = 0.55F;
         // Size of dinosaur at age Adult.
-        this.maxSize = 2.8F;
+        this.maxSize = 3.1F;
         
         texturePath = Fossil.modid + ":textures/mob/" + this.SelfType.toString() + "/";
 
@@ -109,19 +112,24 @@ public class EntityAllosaurus extends EntityDinosaur
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
         this.targetTasks.addTask(4, new DinoAITargetNonTamedExceptSelfClass(this, EntityLiving.class, 750, false));
         
+        tasks.addTask(1, new DinoAIRideGround(this, 1.1)); // mutex all
+        
         this.tasks.addTask(4, new EntityAIAvoidEntity(this, EntityTRex.class, 16.0F, 0.8D, 1.33D));
         this.tasks.addTask(4, new EntityAIAvoidEntity(this, EntitySpinosaurus.class, 16.0F, 0.8D, 1.33D));
         this.tasks.addTask(4, new EntityAIAvoidEntity(this, EntityBrachiosaurus.class, 16.0F, 0.8D, 1.33D));
     }
+    
+    /**
+     * Returns true if the newer Entity AI code should be run
+     */
+    @Override
+    public boolean isAIEnabled()
+    {
+        return !this.isModelized() && !this.isWeak();
+    }
 
     public boolean attackEntityAsMob(Entity var1)
     {
-        if (this.rand.nextInt(16) < 4 && var1 instanceof EntityLiving)
-        {
-            //Has chance to blind the prey, after that handle normal attacking
-            ((EntityLiving)var1).addPotionEffect(new PotionEffect(Potion.blindness.id, this.rand.nextInt(110) + 10, 0));
-        }
-
         return super.attackEntityAsMob(var1);
     }
 
@@ -143,15 +151,29 @@ public class EntityAllosaurus extends EntityDinosaur
         {
             return super.getTexture();
         }
+        
+        if (this.isWeak())
+        {
+            switch (this.getSubSpecies())
+            {
+            case 1: default:
+            	return texturePath + "Allosaurus_Black_Weak.png";
+            case 2: 
+            	return texturePath + "Allosaurus_Red_Weak.png";
+            case 3: 
+            	return texturePath + "Allosaurus_Green_Weak.png";
+            }
+
+        }
 
         switch (this.getSubSpecies())
         {
         default: case 1:
-                return this.isChild() ? texturePath + "Allosaurus_Black_Baby.png" : texturePath + "Allosaurus_Black.png";
+                return this.isChild() ? texturePath + "Allosaurus_Black_Baby.png" : this.isTamed() ? texturePath + "Allosaurus_Black_Tame.png" : texturePath + "Allosaurus_Black.png";
         case 2: 
-        	return this.isChild() ? texturePath + "Allosaurus_Red_Baby.png" : texturePath + "Allosaurus_Red.png";
+        	return this.isChild() ? texturePath + "Allosaurus_Red_Baby.png" : this.isTamed() ? texturePath + "Allosaurus_Red_Tame.png" : texturePath + "Allosaurus_Red.png";
         case 3: 
-        	return this.isChild() ? texturePath + "Allosaurus_Green_Baby.png" : texturePath + "Allosaurus_Green.png";
+        	return this.isChild() ? texturePath + "Allosaurus_Green_Baby.png" : this.isTamed() ? texturePath + "Allosaurus_Green_Tame.png" : texturePath + "Allosaurus_Green.png";
         }
     }
 
@@ -212,58 +234,16 @@ public class EntityAllosaurus extends EntityDinosaur
         return this.worldObj.checkNoEntityCollision(this.boundingBox) && this.worldObj.getCollidingBoundingBoxes(this, this.boundingBox).size() == 0 && !this.worldObj.isAnyLiquid(this.boundingBox);
     }
 
-    protected void updateEntityActionState()
+    public void moveEntityWithHeading(float par1, float par2)
     {
-        //TODO
-        super.updateEntityActionState();
-        EntityLivingBase var1 = this.getOwner();
-
-        if (!this.hasAttacked && !this.hasPath() && this.isTamed() && this.ridingEntity == null)
-        {
-            if (var1 != null)
-            {
-                EnumOrderType var10001 = this.OrderStatus;
-
-                if (this.OrderStatus == EnumOrderType.Follow)
-                {
-                    float var2 = var1.getDistanceToEntity(this);
-
-                    if (var2 > 5.0F)
-                    {
-                        this.getPathOrWalkableBlock(var1, var2);
-                    }
-
-                    if (!this.isAngry())
-                    {
-                        if (var2 < 5.0F)
-                        {
-                            //this.moveSpeed = 2.0F;
-                            this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(2.0D);
-                        }
-                        else
-                        {
-//                	        // Movement Speed - default 0.699D - min 0.0D - max Double.MAX_VALUE
-                            this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(1.0D);
-                        }
-                    }
-                }
-            }
-            else if (!this.isInWater())
-            {
-                this.setSitting(true);
-            }
-        }
-        else if (this.isInWater())
-        {
-            this.setSitting(false);
-        }
-
-        if (!this.worldObj.isRemote)
-        {
-            this.dataWatcher.updateObject(18, Float.valueOf(this.getHealth()));
-        }
+    	super.moveEntityWithHeading(par1, par2);
+    	if(this.isWeak()) {
+            this.motionX *= 0.0D;
+            this.motionZ *= 0.0D;
+            this.rotationPitch = this.rotationYaw = 0;
+    	}
     }
-
+    
     /**
      * Called to update the entity's position/logic.
      */
@@ -291,7 +271,7 @@ public class EntityAllosaurus extends EntityDinosaur
      */
     protected boolean isMovementCeased()
     {
-        return this.isSitting();// || this.field_25052_g;
+        return this.isSitting() || this.isWeak();// || this.field_25052_g;
     }
 
     /**
@@ -322,7 +302,7 @@ public class EntityAllosaurus extends EntityDinosaur
                     this.setTarget((EntityLiving)entity);
                 }
 
-                if (entity instanceof EntityPlayer && this.isTamed() && ((EntityPlayer)entity) == this.getOwner())
+                if (entity instanceof EntityPlayer && this.isTamed() && ((EntityPlayer)entity) == this.getOwner() && this.getRNG().nextInt(6) == 0)
                 {
                     //Hit by the owner->untame
                     this.SendStatusMessage(EnumSituation.Betrayed);
@@ -395,12 +375,83 @@ public class EntityAllosaurus extends EntityDinosaur
     /**
      * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
      */
-    public boolean interact(EntityPlayer var1)
+    public boolean interact(EntityPlayer player)
     {
-        //Add special item interaction code here
-        return super.interact(var1);
+        ItemStack itemStack = player.inventory.getCurrentItem();
+
+        if (itemStack != null)
+        {
+            if (itemStack.getItem() == Fossil.gem)
+            {
+                if (this.isWeak() && !this.isTamed())
+                {
+                    this.heal(200);
+                    this.increaseHunger(500);
+                    this.setTamed(true);
+                    setPathToEntity(null);
+                    setAttackTarget(null);
+                    this.setOwner(player.getUniqueID().toString());
+                    --itemStack.stackSize;
+
+                    if (itemStack.stackSize <= 0)
+                    {
+                        player.inventory.setInventorySlotContents(player.inventory.currentItem, (ItemStack)null);
+                    }
+
+                    return true;
+                }
+                else
+                {
+                    if (!this.isWeak())
+                    {
+                        if (!this.worldObj.isRemote)
+                        {
+                            Fossil.ShowMessage(StatCollector.translateToLocal(LocalizationStrings.STATUS_GEM_ERROR_HEALTH), player);
+                        }
+                    }
+
+                    if (!this.isAdult())
+                    {
+                        if (!this.worldObj.isRemote)
+                        {
+                            Fossil.ShowMessage(StatCollector.translateToLocal(LocalizationStrings.STATUS_GEM_ERROR_YOUNG), player);
+                        }
+                    }
+
+                    return false;
+                }
+            }
+            
+            if (this.SelfType.FoodItemList.CheckItem(itemStack.getItem()) || this.SelfType.FoodBlockList.CheckBlock(Block.getBlockFromItem(itemStack.getItem())))
+            {
+            	return false;
+            }
+
+            if (!Fossil.DebugMode())
+            {
+                if (itemStack.getItem() == Fossil.chickenEss)
+                {
+                    if (!this.worldObj.isRemote)
+                    {
+                        Fossil.ShowMessage(StatCollector.translateToLocal(LocalizationStrings.STATUS_ESSENCE_FAIL), player);
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return super.interact(player);
     }
 
+    /**
+     * Check if the dinosaur is in a weakened state.
+     * @return
+     */
+    public boolean isWeak()
+    {
+        return (this.getHealth() < 8) && (this.getDinoAge() >= this.adultAge) && !this.isTamed();
+    }
+    
     /**
      * Will return how many at most can spawn in a chunk at once.
      */
@@ -462,6 +513,19 @@ public class EntityAllosaurus extends EntityDinosaur
             {
                 this.setPathToEntity(this.worldObj.getEntityPathToXYZ(this, var2, var3, var4, 10.0F, true, false, true, false));
             }
+        }
+    }
+    
+    public float getMountHeight()
+    {
+        return this.height*0.60F;
+    }
+    
+    public void updateRiderPosition()
+    {
+        if (this.riddenByEntity != null)
+        {
+        	 this.riddenByEntity.setPosition(this.posX, this.posY + this.getMountHeight() + this.riddenByEntity.getYOffset(), this.posZ);
         }
     }
 
@@ -538,6 +602,21 @@ public class EntityAllosaurus extends EntityDinosaur
 		// TODO Auto-generated method stub
 		
 	}
+	
+    public void ShowPedia(GuiPedia p0)
+    {
+        super.ShowPedia(p0);
+
+        if (this.isWeak())
+        {
+            p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_WEAK), true, 255, 40, 90);
+        }
+
+        if (!this.isWeak() && !this.isTamed()  && this.isAdult())
+        {
+            p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_CAUTION), true, 255, 40, 90);
+        }
+    }
 	
     @Override
     public IEntityLivingData onSpawnWithEgg(IEntityLivingData par1EntityLivingData)

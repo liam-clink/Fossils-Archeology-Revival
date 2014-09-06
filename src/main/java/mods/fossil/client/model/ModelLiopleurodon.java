@@ -33,10 +33,11 @@ public ModelLiopleurodon()
 	    setTextureOffset("BackFlipper_Right.BackFlipper_Right", 59, 49);
 	    setTextureOffset("Tail.Tail", 80, 28);
 	    setTextureOffset("Tail1.Tail1", 79, 13);
-	    setTextureOffset("Tail2.Tail2", 82, 0);
+	    setTextureOffset("Tail2.Tail2", 84, 2);
 	    setTextureOffset("BackFlipper_Left.BackFlipper_Left", 59, 49);
 	    setTextureOffset("UpperBody.UpperBody", 30, 35);
 	    setTextureOffset("Neck.Neck", 29, 52);
+	    setTextureOffset("Neck.Neck2", 32, 55);
 	    setTextureOffset("Head.Head", 0, 0);
 	    setTextureOffset("JawTop.JawTop", 0, 12);
 	    setTextureOffset("Teeth.Teeth", 0, 51);
@@ -70,7 +71,7 @@ public ModelLiopleurodon()
 	    Tail2.setRotationPoint(0F, -0.5F, 7F);
 	    setRotation(Tail2, 0F, 0F, 0F);
 	    Tail2.mirror = true;
-	      Tail2.addBox("Tail2", -1.5F, -2F, 0F, 3, 4, 8);
+	      Tail2.addBox("Tail2", -1.5F, -2F, 0F, 3, 4, 6);
 	      Tail1.addChild(Tail2);
 	      Tail.addChild(Tail1);
 	      LowerBody.addChild(Tail);
@@ -87,12 +88,13 @@ public ModelLiopleurodon()
 	    UpperBody.mirror = true;
 	      UpperBody.addBox("UpperBody", -4F, -4F, 0F, 8, 8, 6);
 	    Neck = new ModelRenderer(this, "Neck");
-	    Neck.setRotationPoint(0F, 0F, -5F);
+	    Neck.setRotationPoint(0F, 0F, 3F);
 	    setRotation(Neck, 0F, 0F, 0F);
 	    Neck.mirror = true;
-	      Neck.addBox("Neck", -2.5F, -3F, 0F, 5, 6, 5);
+	      Neck.addBox("Neck", -2.5F, -3F, -10F, 5, 6, 5);
+	      Neck.addBox("Neck2", -2.5F, -3F, -5F, 5, 6, 2);
 	    Head = new ModelRenderer(this, "Head");
-	    Head.setRotationPoint(0F, -1.5F, 1F);
+	    Head.setRotationPoint(0F, -1.1F, -9F);
 	    setRotation(Head, 0F, 0F, 0F);
 	    Head.mirror = true;
 	      Head.addBox("Head", -3F, -2F, -8F, 6, 4, 8);
@@ -109,7 +111,7 @@ public ModelLiopleurodon()
 	      JawTop.addChild(Teeth);
 	      Head.addChild(JawTop);
 	    JawBottomBase = new ModelRenderer(this, "JawBottomBase");
-	    JawBottomBase.setRotationPoint(0F, 3F, 0F);
+	    JawBottomBase.setRotationPoint(0F, 3F, -1F);
 	    setRotation(JawBottomBase, 0F, 0F, 0F);
 	    JawBottomBase.mirror = true;
 	      JawBottomBase.addBox("JawBottomBase", -2.5F, -1F, -7F, 5, 3, 7);

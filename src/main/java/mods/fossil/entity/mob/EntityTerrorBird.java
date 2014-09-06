@@ -47,6 +47,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class EntityTerrorBird extends EntityTameable
 {
+    protected static final ResourceLocation pediaheart = new ResourceLocation("fossil:textures/gui/PediaHeart.png");
     public static final String[] names = new String[] {"gastornis", "phorusrhacos", "titanis", "kelenken"};
     public float field_70886_e = 0.0F;
     public float destPos = 0.0F;
@@ -730,6 +731,11 @@ public class EntityTerrorBird extends EntityTameable
         p0.PrintStringXY(Character.toString(this.names[this.getSkin()].charAt(0)).toUpperCase()+this.names[this.getSkin()].substring(1), p0.rightIndent, 34, 0, 0, 0);
         p0.PrintPictXY(new ResourceLocation(Fossil.modid+":"+"textures/items/TerrorBird/" + "Egg_Cultivated_"+names[this.getSkin()]+".png"), ((p0.xGui/2) + (p0.xGui/4)), 7, 16, 16);
 
+        p0.PrintPictXY(pediaheart, p0.rightIndent, 58, 9, 9);
+
+        //Display Health
+        p0.PrintStringXY(String.valueOf(this.getHealth()) + '/' + this.getMaxHealth(), p0.rightIndent+12, 58);
+        
         if (this.hasCustomNameTag())
         {
             p0.AddStringLR("No Despawn", true);
@@ -738,6 +744,22 @@ public class EntityTerrorBird extends EntityTameable
         if (this.isAngry())
         {
             p0.AddStringLR("Is Angry", true);
+        }
+        
+        //Display owner name
+        if (this.isTamed() && this.getOwner() != null)
+        {
+	        p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_OWNER), true);
+	        if (this.isTamed())
+	        {
+	            String s0 = String.valueOf(this.getOwner().getCommandSenderName());
+	            if (s0.length() > 11)
+	            {
+	                s0 = this.getOwner().getCommandSenderName().substring(0, 11);
+	            }
+	            
+	            p0.AddStringLR(s0, true);
+	        }
         }
     }
     
