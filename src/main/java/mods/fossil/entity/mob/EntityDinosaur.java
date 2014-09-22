@@ -588,6 +588,10 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
         if (this.SelfType.OrderItem != null)
         p0.AddStringLR(StatCollector.translateToLocal("Order: " + (new ItemStack(this.SelfType.OrderItem)).getDisplayName()), true);
 
+        if (this.SelfType.OrderItem != null)
+        p0.AddStringLR(StatCollector.translateToLocal("Order Command: " + this.getOrderType()), true);
+        
+
         
         for (int i = 0; i < this.SelfType.FoodItemList.index; i++)
         {
@@ -720,12 +724,12 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
     /**
      * Tells if the dino is sitting
      */
-    /*
+    
     public boolean isSitting()
     {
         return this.OrderStatus == EnumOrderType.Stay;
     }
-    */
+    
     
     public boolean canBePushed(){
     	return !this.isSitting();
@@ -819,7 +823,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
             if (this.BreedTick == 0)
             {
                 int PartnerCount = 0;
-                List list = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.expand(32.0D, 32.0D, 32.0D));
+                List list = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.expand(16.0D, 16.0D, 16.0D));
 
                 for (int i = 0; i < list.size(); i++)
                 {
@@ -832,16 +836,16 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
                             ++PartnerCount;
                         }
 
-                        if (PartnerCount > 30)//There are too many already
+                        if (PartnerCount > 20)//There are too many already
                         {
                             return;
                         }
                     }
                 }
 
-                if (PartnerCount > 20)//More won't help
+                if (PartnerCount > 10)//More won't help
                 {
-                    PartnerCount = 20;
+                    PartnerCount = 10;
                 }
 
                 if ((new Random()).nextInt(100) < PartnerCount)
@@ -1260,17 +1264,17 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
-    public void writeEntityToNBT(NBTTagCompound var1)
+    public void writeEntityToNBT(NBTTagCompound compound)
     {
-        super.writeEntityToNBT(var1);
-        var1.setBoolean("isModelized", this.isModelized());
-        var1.setBoolean("Angry", this.isAngry());
-        var1.setInteger("Hunger", this.getHunger());
-        var1.setInteger("HungerTick", this.getHungerTick());
-        var1.setInteger("DinoAge", this.getDinoAge());
-        var1.setInteger("AgeTick", this.getDinoAgeTick());
-        var1.setInteger("SubSpecies", this.getSubSpecies());
-        var1.setByte("OrderStatus", (byte)this.OrderStatus.ordinal()/*(byte)Fossil.EnumToInt(this.OrderStatus)*/);
+        super.writeEntityToNBT(compound);
+        compound.setBoolean("isModelized", this.isModelized());
+        compound.setBoolean("Angry", this.isAngry());
+        compound.setInteger("Hunger", this.getHunger());
+        compound.setInteger("HungerTick", this.getHungerTick());
+        compound.setInteger("DinoAge", this.getDinoAge());
+        compound.setInteger("AgeTick", this.getDinoAgeTick());
+        compound.setInteger("SubSpecies", this.getSubSpecies());
+        compound.setByte("OrderStatus", (byte)this.OrderStatus.ordinal()/*(byte)Fossil.EnumToInt(this.OrderStatus)*/);
 
         /*
         if (this.ItemInMouth != null)
@@ -1299,11 +1303,11 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
         */
         if (this.func_152113_b() == null)
         {
-            var1.setString("OwnerUUID", "");
+            compound.setString("OwnerUUID", "");
         }
         else
         {
-            var1.setString("OwnerUUID", this.func_152113_b());
+            compound.setString("OwnerUUID", this.func_152113_b());
         }
 
         
@@ -1312,19 +1316,19 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
-    public void readEntityFromNBT(NBTTagCompound var1)
+    public void readEntityFromNBT(NBTTagCompound compound)
     {
-        super.readEntityFromNBT(var1);
-        this.setModelized(var1.getBoolean("isModelized"));
-        this.setAngry(var1.getBoolean("Angry"));
-        this.setDinoAge(var1.getInteger("DinoAge"));
-        this.setDinoAgeTick(var1.getInteger("AgeTick"));
-        this.setHunger(var1.getInteger("Hunger"));
-        this.setHungerTick(var1.getInteger("HungerTick"));
-        this.setSubSpecies(var1.getInteger("SubSpecies"));
-        short var3 = var1.getShort("Itemid");
-        byte var4 = var1.getByte("ItemCount");
-        short var5 = var1.getShort("ItemDamage");
+        super.readEntityFromNBT(compound);
+        this.setModelized(compound.getBoolean("isModelized"));
+        this.setAngry(compound.getBoolean("Angry"));
+        this.setDinoAge(compound.getInteger("DinoAge"));
+        this.setDinoAgeTick(compound.getInteger("AgeTick"));
+        this.setHunger(compound.getInteger("Hunger"));
+        this.setHungerTick(compound.getInteger("HungerTick"));
+        this.setSubSpecies(compound.getInteger("SubSpecies"));
+        short var3 = compound.getShort("Itemid");
+        byte var4 = compound.getByte("ItemCount");
+        short var5 = compound.getShort("ItemDamage");
 
         /*
         if (var3 != -1)
@@ -1341,7 +1345,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
         {
             this.setHunger(this.getMaxHunger());
         }*/
-        this.OrderStatus = EnumOrderType.values()[var1.getByte("OrderStatus")];
+        this.OrderStatus = EnumOrderType.values()[compound.getByte("OrderStatus")];
         
         /*
         String var2 = var1.getString("OwnerUUID");
@@ -1355,13 +1359,13 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
         
         String s = "";
         
-        if (var1.hasKey("OwnerUUID", 8))
+        if (compound.hasKey("OwnerUUID", 8))
         {
-            s = var1.getString("OwnerUUID");
+            s = compound.getString("OwnerUUID");
         }
         else
         {
-            String s1 = var1.getString("Owner");
+            String s1 = compound.getString("Owner");
             s = PreYggdrasilConverter.func_152719_a(s1);
         }
 
@@ -1562,6 +1566,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
                             && this.isAdult() && !this.worldObj.isRemote && this.riddenByEntity == null
                             &&  func_152114_e(player)) {
                     	this.setSitting(false);
+                    	//this.SetOrder(EnumOrderType.FreeMove);
                     	this.OrderStatus = EnumOrderType.FreeMove;
                         setRidingPlayer(player);
                     }
