@@ -225,8 +225,6 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
 //                this.getTexture = this.getModelTexture();
         }
     }
-    
-    
 
     protected void entityInit()
     {
@@ -587,11 +585,6 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
 
         if (this.SelfType.OrderItem != null)
         p0.AddStringLR(StatCollector.translateToLocal("Order: " + (new ItemStack(this.SelfType.OrderItem)).getDisplayName()), true);
-
-        if (this.SelfType.OrderItem != null)
-        p0.AddStringLR(StatCollector.translateToLocal("Order Command: " + this.getOrderType()), true);
-        
-
         
         for (int i = 0; i < this.SelfType.FoodItemList.index; i++)
         {
@@ -643,6 +636,12 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
     		p0.AddStringLR(translatePath + bioFile, 150, false);
 			GL11.glPopMatrix();
     	}
+    	
+    	//Add debug info on left side
+
+        p0.AddStringLR(StatCollector.translateToLocal("Command: " + this.getOrderType()), true);
+
+        p0.AddStringLR(StatCollector.translateToLocal("Sitting: " + this.isSitting()), true);
     }
     
     /**
@@ -727,9 +726,8 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
     
     public boolean isSitting()
     {
-        return this.OrderStatus == EnumOrderType.Stay;
+        return this.getOrderType() == EnumOrderType.Stay;
     }
-    
     
     public boolean canBePushed(){
     	return !this.isSitting();
@@ -740,7 +738,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
      */
     protected boolean isMovementCeased()
     {
-        return this.OrderStatus == EnumOrderType.Stay;
+        return this.getOrderType() == EnumOrderType.Stay;
     }
 
     public Vec3 getBlockToEat(int SEARCH_RANGE)
@@ -1341,11 +1339,8 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
         }
         */
 
-        /*if (this.getHunger() <= 0)
-        {
-            this.setHunger(this.getMaxHunger());
-        }*/
-        this.OrderStatus = EnumOrderType.values()[compound.getByte("OrderStatus")];
+        this.SetOrder(EnumOrderType.values()[compound.getByte("OrderStatus")]);
+        //this.OrderStatus = EnumOrderType.values()[compound.getByte("OrderStatus")];
         
         /*
         String var2 = var1.getString("OwnerUUID");
@@ -1566,8 +1561,8 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
                             && this.isAdult() && !this.worldObj.isRemote && this.riddenByEntity == null
                             &&  func_152114_e(player)) {
                     	this.setSitting(false);
-                    	//this.SetOrder(EnumOrderType.FreeMove);
-                    	this.OrderStatus = EnumOrderType.FreeMove;
+                    	this.SetOrder(EnumOrderType.FreeMove);
+                    	//this.OrderStatus = EnumOrderType.FreeMove;
                         setRidingPlayer(player);
                     }
 
@@ -1578,7 +1573,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
                         {
                             this.isJumping = false;
                             this.setPathToEntity((PathEntity)null);
-                            this.OrderStatus = EnumOrderType.values()[(this.OrderStatus.ordinal() + 1) % 3/*(Fossil.EnumToInt(this.OrderStatus) + 1) % 3*/];
+                            this.OrderStatus = EnumOrderType.values()[(this.OrderStatus.ordinal() + 1) % 3];
 
                             this.SendOrderMessage(this.OrderStatus);
 
@@ -1588,16 +1583,9 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
                                 this.setPathToEntity(null);
                                 this.setSitting(true);
                             }
-                            else if (this.OrderStatus == EnumOrderType.Follow)
-                            {
-                            	this.setSitting(false);
-                            	this.OrderStatus = EnumOrderType.Follow;
-                            }
                             else
                             {
-                            	this.setSitting(false);
-                            	this.OrderStatus = EnumOrderType.FreeMove;
-                            	
+                            	this.setSitting(false);                            	
                             }
                         }
 
@@ -1634,19 +1622,6 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
                     }
                 }
 */
-                if (this.SelfType.OrderItem == null && this.isTamed() && player == this.getOwner())
-                {
-                    //This dino is controlled without a special item
-                    if (!this.worldObj.isRemote)
-                    {
-                        this.isJumping = false;
-                        this.setPathToEntity((PathEntity)null);
-                        this.OrderStatus = EnumOrderType.values()[(this.OrderStatus.ordinal() + 1) % 3/*(Fossil.EnumToInt(this.OrderStatus) + 1) % 3*/];
-                        this.SendOrderMessage(this.OrderStatus);
-                    }
-
-                    return true;
-                }
 
                 /*
                 if (this.isTamed() && this.SelfType.isRideable() && this.isAdult() && !this.worldObj.isRemote && (this.riddenByEntity == null || this.riddenByEntity == player))
