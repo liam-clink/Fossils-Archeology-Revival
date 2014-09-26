@@ -271,7 +271,7 @@ public class LocalizationStrings
     public static final String MOB_BONES = "entity.fossil.Bones.name";
 
     //Fossil records
-    public static final String FOSSIL_RECORD_NAME = "record_bones_disc";
+    public static final String FOSSIL_RECORD_NAME = "record_bones";
     public static final String RECORD_BONES_NAME = "record_bones_disc";
     public static final String FOSSILRECORD2_NAME = "record_jp_theme";
 

@@ -461,24 +461,6 @@ public class EntityAllosaurus extends EntityDinosaur
     }
 
     /**
-     * Called when the mob is falling. Calculates and applies fall damage.
-     */
-    protected void fall(float var1)
-    {
-        if (this.riddenByEntity != null)
-        {
-            this.riddenByEntity.fallDistance = var1;
-        }
-
-        int var2 = (int)Math.ceil((double)(var1 - 3.0F));
-
-        if (var2 > 0)
-        {
-            this.attackEntityFrom(DamageSource.fall, 0);//Like cats, they don't suffer fall damage
-        }
-    }
-
-    /**
      * Time remaining during which the Animal is sped up and flees.
      */
     protected void updateWanderPath()
