@@ -39,6 +39,7 @@ public class FossilSpawnEggs
         registerEntityEgg(EntityQuagga.class, 				0x8c4b2e, 0xc6a999);
         registerEntityEgg(EntityTerrorBird.class, 			0x689d94, 0x151917);
         registerEntityEgg(EntityAllosaurus.class, 			0x813030, 0x24496e);
+        registerEntityEgg(EntityElasmotherium.class, 		0xcc9566, 0x3d2700);
     }
 
     public static int getUniqueEntityId()

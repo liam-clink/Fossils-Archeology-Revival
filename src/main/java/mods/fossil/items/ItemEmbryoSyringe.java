@@ -190,6 +190,11 @@ public class ItemEmbryoSyringe extends Item
         {
             e0 = EnumAnimalType.Mammoth;
         }
+        
+        if (itemstack.getItem() == Fossil.embryoElasmotherium)
+        {
+            e0 = EnumAnimalType.Elasmotherium;
+        }
 
         if (itemstack.getItem() == Fossil.embryoPig)
         {

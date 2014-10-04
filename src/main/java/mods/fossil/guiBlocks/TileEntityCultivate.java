@@ -430,6 +430,11 @@ public class TileEntityCultivate extends TileEntity implements IInventory, ISide
         {
             return new ItemStack(Fossil.embryoMammoth, 1);
         }
+        
+        if (itemstack.getItem() == Fossil.dnaElasmotherium)
+        {
+            return new ItemStack(Fossil.embryoElasmotherium, 1);
+        }
 
         if (itemstack.getItem() == Fossil.dnaDodo)
         {

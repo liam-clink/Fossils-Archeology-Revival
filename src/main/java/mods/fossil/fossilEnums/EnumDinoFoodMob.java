@@ -43,7 +43,8 @@ public enum EnumDinoFoodMob
     Coelacanth(EntityCoelacanth.class, 20, 2),
     Quagga(EntityQuagga.class, 50, 3),
     TerrorBird(EntityTerrorBird.class, 40, 3),
-    Mammoth(EntityMammoth.class,100, 7)
+    Mammoth(EntityMammoth.class,100, 7),
+    Elasmotherium(EntityElasmotherium.class,80, 7),
     ;
     public Class preyClass;
     public int FoodValue;

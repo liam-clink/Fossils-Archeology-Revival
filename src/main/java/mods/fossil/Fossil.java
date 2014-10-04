@@ -58,6 +58,7 @@ import mods.fossil.entity.EntityTerrorBirdEgg;
 import mods.fossil.entity.mob.EntityBones;
 import mods.fossil.entity.mob.EntityCoelacanth;
 import mods.fossil.entity.mob.EntityDodo;
+import mods.fossil.entity.mob.EntityElasmotherium;
 import mods.fossil.entity.mob.EntityFailuresaurus;
 import mods.fossil.entity.mob.EntityFriendlyPigZombie;
 import mods.fossil.entity.mob.EntityMammoth;
@@ -197,7 +198,7 @@ import cpw.mods.fml.relauncher.Side;
 public class Fossil
 {
     public static final String modid = "fossil";
-    public static final String modversion = "1.7.10 Build 7.0a2";
+    public static final String modversion = "1.7.10 Build 7.0a4";
 
     /*
      * Set mod state here
@@ -408,6 +409,7 @@ public class Fossil
     public static Item dnaHorse;
     public static Item dnaQuagga;
     public static Item dnaTerrorBird;
+    public static Item dnaElasmotherium;
 
     //Mob DNA
     //public static Item mobDNA;
@@ -431,6 +433,7 @@ public class Fossil
     public static Item embryoMammoth;
     public static Item embryoHorse;
     public static Item embryoQuagga;
+    public static Item embryoElasmotherium;
 
     //Item Food
     public static Item cookedChickenSoup;
@@ -472,6 +475,7 @@ public class Fossil
             FossilOptions.Gen_Palaeoraphe = config.get("option", "Palaeoraphe", false).getBoolean(false);
             FossilOptions.Gen_Academy = config.get("option", "Academy", true).getBoolean(true);
             FossilOptions.Gen_Ships = config.get("option", "Ships", true).getBoolean(true);
+            FossilOptions.Gen_Temple = config.get("option", "Temple", true).getBoolean(true);
             FossilOptions.Heal_Dinos = config.get("option", "Heal_Dinos", true).getBoolean(true);
             FossilOptions.Dinos_Starve = config.get("option", "Dinos_Starve", true).getBoolean(true);
             FossilOptions.Dino_Block_Breaking = config.get("option", "Dino_Block_Breaking", true).getBoolean(true);
@@ -672,6 +676,7 @@ public class Fossil
         dnaHorse = new ForgeItem("Horse_DNA").setUnlocalizedName(LocalizationStrings.DNA_HORSE_NAME).setCreativeTab(this.tabFMaterial);
         dnaQuagga = new ForgeItem("Quagga_DNA").setUnlocalizedName(LocalizationStrings.DNA_QUAGGA_NAME).setCreativeTab(this.tabFMaterial);
         dnaTerrorBird = new ForgeItem("TerrorBird/TerrorBird_DNA").setUnlocalizedName(LocalizationStrings.DNA_TERROR_BIRD_NAME).setCreativeTab(this.tabFMaterial);
+        dnaElasmotherium = new ForgeItem("Elasmotherium/Elasmotherium_DNA").setUnlocalizedName(LocalizationStrings.DNA_ELASMOTHERIUM_NAME).setCreativeTab(this.tabFMaterial);
 
         //Ebryos
         //embyoSyringe = new ItemEmbryoSyringe(embyoSyringeID);
@@ -683,6 +688,7 @@ public class Fossil
         embryoMammoth = new ItemEmbryoSyringe(5).setUnlocalizedName(LocalizationStrings.EMBRYO_MAMMOTH_NAME).setCreativeTab(this.tabFItems);
         embryoHorse = new ItemEmbryoSyringe(6).setUnlocalizedName(LocalizationStrings.EMBRYO_HORSE_NAME).setCreativeTab(this.tabFItems);
         embryoQuagga = new ItemEmbryoSyringe(7).setUnlocalizedName(LocalizationStrings.EMBRYO_QUAGGA_NAME).setCreativeTab(this.tabFItems);
+        embryoElasmotherium = new ItemEmbryoSyringe(8).setUnlocalizedName(LocalizationStrings.EMBRYO_ELASMOTHERIUM_NAME).setCreativeTab(this.tabFItems);
 
         //Item Food
         //Moved to fossilEnums.EnumDinoType
@@ -773,6 +779,7 @@ public class Fossil
 		GameRegistry.registerItem(dnaCoelacanth, LocalizationStrings.DNA_COELACANTH_NAME);
 		GameRegistry.registerItem(dnaDodo, LocalizationStrings.DNA_DODO_NAME);
 		GameRegistry.registerItem(dnaTerrorBird, LocalizationStrings.DNA_TERROR_BIRD_NAME);
+		GameRegistry.registerItem(dnaElasmotherium, LocalizationStrings.DNA_ELASMOTHERIUM_NAME);
 		GameRegistry.registerItem(embryoPig, LocalizationStrings.EMBRYO_PIG_NAME);
 		GameRegistry.registerItem(embryoSheep, LocalizationStrings.EMBRYO_SHEEP_NAME);
 		GameRegistry.registerItem(embryoCow, LocalizationStrings.EMBRYO_COW_NAME);
@@ -781,6 +788,7 @@ public class Fossil
 		GameRegistry.registerItem(embryoChicken, LocalizationStrings.EMBRYO_CHICKEN_NAME);
 		GameRegistry.registerItem(embryoSmilodon, LocalizationStrings.EMBRYO_SMILODON_NAME);
 		GameRegistry.registerItem(embryoMammoth, LocalizationStrings.EMBRYO_MAMMOTH_NAME);
+		GameRegistry.registerItem(embryoElasmotherium, LocalizationStrings.EMBRYO_ELASMOTHERIUM_NAME);
 		GameRegistry.registerItem(cookedDinoMeat, LocalizationStrings.DINO_STEAK_NAME);
 		GameRegistry.registerItem(cookedChickenSoup, LocalizationStrings.COOKED_CHICKEN_SOUP_NAME);
 		GameRegistry.registerItem(rawChickenSoup, LocalizationStrings.RAW_CHICKEN_SOUP_NAME);
@@ -892,6 +900,8 @@ public class Fossil
         EntityRegistry.registerModEntity(EntityQuagga.class, 				"Quagga", 				30, this, 250, 3, true);
         EntityRegistry.registerModEntity(EntityTerrorBird.class, 			"TerrorBird", 			31, this, 250, 3, true);
         EntityRegistry.registerModEntity(EntityTerrorBirdEgg.class,         "TerrorBirdEgg",        32, this, 250, 5, true);
+        EntityRegistry.registerModEntity(EntityElasmotherium.class, 		"Elasmotherium", 		33, this, 250, 5, true);
+
 
         for (int i = 0; i < EnumDinoType.values().length; i++)
         {

@@ -545,6 +545,7 @@ public enum EnumDinoType
         TRex.FoodMobList.addMob(EnumDinoFoodMob.Triceratops);
         TRex.FoodMobList.addMob(EnumDinoFoodMob.Gallimimus);
         TRex.FoodMobList.addMob(EnumDinoFoodMob.Mammoth);
+        TRex.FoodMobList.addMob(EnumDinoFoodMob.Elasmotherium);
 
         
         Velociraptor.setItems(Items.bone);

@@ -4,8 +4,12 @@ import coolalias.structuregenapi.util.LogHelper;
 import coolalias.structuregenapi.util.Structure;
 import coolalias.structuregenapi.util.StructureGeneratorBase;
 import mods.fossil.Fossil;
+import mods.fossil.client.FossilOptions;
 import mods.fossil.fossilEnums.EnumDinoType;
 import mods.fossil.gens.structure.academy.*;
+import mods.fossil.gens.structure.temple.Temple1;
+import mods.fossil.gens.structure.temple.Temple2;
+import mods.fossil.gens.structure.temple.Temple3;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentData;
@@ -172,7 +176,11 @@ public class FossilStructureGenerator extends StructureGeneratorBase
 
                         if (loot < 80)
                         {
-                            addItemToTileInventory(world, new ItemStack(i0, rand.nextInt(5)), x, y, z);
+                            addItemToTileInventory(world, new ItemStack(i0, rand.nextInt(4)+1), x, y, z);
+                        }
+                        else
+                        {
+                            addItemToTileInventory(world, new ItemStack(i0, 1), x, y, z);
                         }
                     }
                 }
@@ -229,11 +237,11 @@ public class FossilStructureGenerator extends StructureGeneratorBase
                         ItemStack i1 = null;
                         
                         if (i < 3)
-                        addItemToTileInventory(world, new ItemStack(Fossil.dinoPedia, rand.nextInt(2)), x, y, z);
+                        addItemToTileInventory(world, new ItemStack(Fossil.dinoPedia, rand.nextInt(1)+1), x, y, z);
                         else if(i < 7)
-                        	addItemToTileInventory(world, new ItemStack(Fossil.relic, rand.nextInt(10)), x, y, z);
+                        	addItemToTileInventory(world, new ItemStack(Fossil.relic, rand.nextInt(9)+1), x, y, z);
                         else {
-                        	addItemToTileInventory(world, new ItemStack(Fossil.potteryShards, rand.nextInt(10)), x, y, z);
+                        	addItemToTileInventory(world, new ItemStack(Fossil.potteryShards, rand.nextInt(9)+1), x, y, z);
                         }                 
                     }
                 }
@@ -551,6 +559,8 @@ public class FossilStructureGenerator extends StructureGeneratorBase
     static
     {
         Structure structure = new Structure("Academy");
+        if(FossilOptions.Gen_Academy)
+        {
         structure.addBlockArray(Academy1.blockArrayAcademy);
         structure.addBlockArray(Academy2.blockArrayAcademy);
         structure.addBlockArray(Academy3.blockArrayAcademy);
@@ -559,6 +569,19 @@ public class FossilStructureGenerator extends StructureGeneratorBase
         structure.addBlockArray(Academy6.blockArrayAcademy);
         structure.setStructureOffset(0, -1, 0);
         structures.add(structure);
+        }
+        
+
+        structure = new Structure("Temple");
+        if(FossilOptions.Gen_Temple)
+        {   
+        structure.addBlockArray(Temple1.blockArrayTemple);
+        structure.addBlockArray(Temple2.blockArrayTemple);
+        structure.addBlockArray(Temple3.blockArrayTemple);
+        structure.setStructureOffset(0, -1, 0);
+        structures.add(structure);
+        }
+        
         /*Structure structure = new Structure("Hut");
         structure.addBlockArray(StructureArrays.blockArrayNPCHut);
         structure.setFacing(StructureGeneratorBase.EAST);
