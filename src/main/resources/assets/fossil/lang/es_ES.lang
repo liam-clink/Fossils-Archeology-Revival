@@ -1,6 +1,6 @@
-﻿#Build 6.4 - Updated August 6 2014
+﻿#Build 7.0 - Updated August 6 2014
 #Spanish - Spain (es_ES) Localization File
-#Keys last updated August 28 2014
+#Keys last updated October 5 2014
 #Tab Groups
 itemgroup.FCombat=Armadura Antigua
 itemgroup.FBlocks=Bloques Antiguos
@@ -388,6 +388,7 @@ item.dnaHorse.name=Horse DNA
 item.dnaQuagga.name=Quagga DNA
 item.dnaTerrorBird.name=Terror Bird DNA
 item.dnaAllosaurus.name=Allosaurus DNA
+item.dnaElasmotherium.name=Elasmotherium DNA
 item.embryoPig.name=Embrión de Cerdo
 item.embryoSheep.name=Embrión de Oveja
 item.embryoCow.name=Embrión de Vaca
@@ -397,6 +398,7 @@ item.embryoMammoth.name=Embrión de Mamút
 item.embryoDodo.name=Embrión de Dodo
 item.embryoHorse.name=Horse Embryo
 item.embryoQuagga.name=Quagga Embryo
+item.embryoElasmotherium.name=Elasmotherium Embryo
 item.archNotebook.name=Cuaderno de Arqueología
 item.potteryShard.name=Pottery Shard
 item.terrorBirdMeat.name=Raw Terror Bird Leg
@@ -477,6 +479,7 @@ entity.fossil.Dodo.name=Dodo
 entity.fossil.Coelacanth.name=Coelacanth
 entity.fossil.Quagga.name=Quagga
 entity.fossil.TerrorBird.name=Terror Bird
+entity.fossil.Elasmotherium.name=Elasmotherium
 
 #Pedia text
 pedia.text.owner=Dueño:
@@ -504,6 +507,7 @@ pedia.embryo.Mammoth=Mamút
 pedia.embryo.Dodo=Dodo
 pedia.embryo.Horse=Horse
 pedia.embryo.Quagga=Quagga
+pedia.embryo.Elasmotherium=Elasmotherium
 
 #Anu speaking lines
 anuSpeaker.self=Anu: 

@@ -1,6 +1,6 @@
-﻿#Build 6.4 - Updated August 28 2014
+﻿#Build 7.0 - Updated September 14 2014
 #Deutsch (de_DE) Localization File
-#Keys last updated August 28 2014
+#Keys last updated October 5 2014
 #Tab Groups
 itemgroup.FCombat=Antike Rüstungen
 itemgroup.FBlocks=Antikes Baumaterial
@@ -206,23 +206,23 @@ item.claw.Pachycephalosaurus.name=Pachycephalosaurus Schädelhorn
 item.claw.Deinonychus.name=Deinonychus Klaue
 item.claw.Gallimimus.name=Gallimimus Kralle
 item.claw.Allosaurus.name=Allosaurus Kralle
-item.foot.Triceratops.name=Triceratops Fuß
-item.foot.Velociraptor.name=Velociraptor Fuß
-item.foot.TRex.name=Tyrannosaurus Fuß
-item.foot.Pterosaur.name=Pterosaur Fuß
-item.foot.Plesiosaur.name=Plesiosaur Fuß
-item.foot.Mosasaurus.name=Mosasaurus Fuß
-item.foot.Liopleurodon.name=Liopleurodon Fuß
-item.foot.Stegosaurus.name=Stegosaurus Fuß
-item.foot.Dilophosaurus.name=Dilophosaurus Fuß
-item.foot.Brachiosaurus.name=Brachiosaurus Fuß
-item.foot.Spinosaurus.name=Spinosaurus Fuß
-item.foot.Compsognathus.name=Compsognathus Fuß
-item.foot.Ankylosaurus.name=Ankylosaurus Fuß
-item.foot.Pachycephalosaurus.name=Pachycephalosaurus Fuß
-item.foot.Deinonychus.name=Deinonychus Fuß
-item.foot.Gallimimus.name=Gallimimus Fuß
-item.foot.Allosaurus.name=Allosaurus Fuß
+item.foot.Triceratops.name=Triceratops Fuss
+item.foot.Velociraptor.name=Velociraptor Fuss
+item.foot.TRex.name=Tyrannosaurus Fuss
+item.foot.Pterosaur.name=Pterosaur Fuss
+item.foot.Plesiosaur.name=Plesiosaur Fuss
+item.foot.Mosasaurus.name=Mosasaurus Fuss
+item.foot.Liopleurodon.name=Liopleurodon Fuss
+item.foot.Stegosaurus.name=Stegosaurus Fuss
+item.foot.Dilophosaurus.name=Dilophosaurus Fuss
+item.foot.Brachiosaurus.name=Brachiosaurus Fuss
+item.foot.Spinosaurus.name=Spinosaurus Fuss
+item.foot.Compsognathus.name=Compsognathus Fuss
+item.foot.Ankylosaurus.name=Ankylosaurus Fuss
+item.foot.Pachycephalosaurus.name=Pachycephalosaurus Fuss
+item.foot.Deinonychus.name=Deinonychus Fuss
+item.foot.Gallimimus.name=Gallimimus Fuss
+item.foot.Allosaurus.name=Allosaurus Fuss
 item.skull.Triceratops.name=Triceratops Schädel
 item.skull.Velociraptor.name=Velociraptor Schädel
 item.skull.TRex.name=Tyrannosaurus Schädel
@@ -356,7 +356,7 @@ item.eggTerrorBird.phorusrhacos.name=Phorusrhacos Ei
 item.eggTerrorBird.titanis.name=Titanis Ei
 item.eggTerrorBird.kelenken.name=Kelenken Ei
 item.eggCultivatedTerrorBird.gastornis.name=Kultiviertes Gastornis Ei
-item.eggCultivatedTerrorBird.phorusrhacos.name=Kuliviertes Phorusrhacos Ei
+item.eggCultivatedTerrorBird.phorusrhacos.name=Kultiviertes Phorusrhacos Ei
 item.eggCultivatedTerrorBird.titanis.name=Kultiviertes Titanis Ei
 item.eggCultivatedTerrorBird.kelenken.name=Kultiviertes Kelenken Ei
 item.dnaTriceratops.name=Triceratops DNA
@@ -388,6 +388,7 @@ item.dnaHorse.name=Pferd DNA
 item.dnaQuagga.name=Quagga DNA
 item.dnaTerrorBird.name=Terrorvogel DNA
 item.dnaAllosaurus.name=Allosaurus DNA
+item.dnaElasmotherium.name=Elasmotherium DNA
 item.embryoPig.name=Schwein Embryo
 item.embryoSheep.name=Schaf Embryo
 item.embryoCow.name=Kuh Embryo
@@ -397,6 +398,7 @@ item.embryoMammoth.name=Mammut Embryo
 item.embryoDodo.name=Dodo Embryo
 item.embryoHorse.name=Pferd Embryo
 item.embryoQuagga.name=Quagga Embryo
+item.embryoElasmotherium.name=Elasmotherium Embryo
 item.archNotebook.name=Archaeologie Notizbuch
 item.potteryShard.name=Keramikscherbe
 item.terrorBirdMeat.name=Rohes Terrorvogelbein
@@ -477,6 +479,7 @@ entity.fossil.Dodo.name=Dodo
 entity.fossil.Coelacanth.name=Coelacanth
 entity.fossil.Quagga.name=Quagga
 entity.fossil.TerrorBird.name=Terrorvogel
+entity.fossil.Elasmotherium.name=Elasmotherium
 
 #Pedia text
 pedia.text.owner=Besitzer:
@@ -504,6 +507,7 @@ pedia.embryo.Mammoth=Mammut
 pedia.embryo.Dodo=Dodo
 pedia.embryo.Horse=Pferd
 pedia.embryo.Quagga=Quagga
+pedia.embryo.Elasmotherium=Elasmotherium
 
 #Anu speaking lines
 anuSpeaker.self=Anu:

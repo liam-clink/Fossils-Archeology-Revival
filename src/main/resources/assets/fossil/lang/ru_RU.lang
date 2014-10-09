@@ -1,6 +1,6 @@
-﻿#Build 6.4 - Updated August 28 2014
+﻿#Build 7.0 - Updated August 28 2014
 #Russian (ru_RU) Localization File
-#Keys last updated August 28 2014
+#Keys last updated October 5 2014
 #Tab Groups
 itemgroup.FCombat=Древняя броня
 itemgroup.FBlocks=Древние блоки
@@ -388,6 +388,7 @@ item.dnaHorse.name=ДНК лошади
 item.dnaQuagga.name=ДНК квагги
 item.dnaTerrorBird.name=Terror Bird DNA
 item.dnaAllosaurus.name=Allosaurus DNA
+item.dnaElasmotherium.name=Elasmotherium DNA
 item.embryoPig.name=Эмбрион свиньи
 item.embryoSheep.name=Эмбрион овцы
 item.embryoCow.name=Эмбрион коровы
@@ -397,6 +398,7 @@ item.embryoMammoth.name=Эмбрион мамонта
 item.embryoDodo.name=Эмбрион дронта
 item.embryoHorse.name=Эмбрион лошади
 item.embryoQuagga.name=Эмбрион квагги
+item.embryoElasmotherium.name=Elasmotherium Embryo
 item.archNotebook.name=Археологический блокнот
 item.potteryShard.name=Керамический осколок
 item.terrorBirdMeat.name=Raw Terror Bird Leg
@@ -477,6 +479,7 @@ entity.fossil.Dodo.name=Дронт
 entity.fossil.Coelacanth.name=Целакант
 entity.fossil.Quagga.name=Квагга
 entity.fossil.TerrorBird.name=Terror Bird
+entity.fossil.Elasmotherium.name=Elasmotherium
 
 #Pedia text
 pedia.text.owner=Владелец:
@@ -504,6 +507,7 @@ pedia.embryo.Mammoth=Мамонт
 pedia.embryo.Dodo=Дронт
 pedia.embryo.Horse=Лошадь
 pedia.embryo.Quagga=Квагга
+pedia.embryo.Elasmotherium=Elasmotherium
 
 #Anu speaking lines
 anuSpeaker.self=Ану: 
