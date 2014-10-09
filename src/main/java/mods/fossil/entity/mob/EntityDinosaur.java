@@ -1686,6 +1686,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
     /**
      * Determines if an entity can be despawned, used on idle far away entities
      */
+    @Override
     protected boolean canDespawn()
     {
         return false;

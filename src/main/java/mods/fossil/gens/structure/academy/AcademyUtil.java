@@ -14,6 +14,9 @@ public class AcademyUtil
     public static final int COMMON_LOOT_F2 = -4;
     public static final int RARE_LOOT_F3 = -5;
     public static final int COMMON_LOOT_F3 = -6;
+    
+    public static final int TEMPLE_COMMON_LOOT = -7;
+    public static final int TEMPLE_RARE_LOOT = -8;
 
     /** Custom signs */
     public static final int CUSTOM_SIGN_1 = 1;

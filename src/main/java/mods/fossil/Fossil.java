@@ -198,7 +198,7 @@ import cpw.mods.fml.relauncher.Side;
 public class Fossil
 {
     public static final String modid = "fossil";
-    public static final String modversion = "1.7.10 Build 7.0a4";
+    public static final String modversion = "1.7.10 Build 7.0rc1";
 
     /*
      * Set mod state here
@@ -900,7 +900,7 @@ public class Fossil
         EntityRegistry.registerModEntity(EntityQuagga.class, 				"Quagga", 				30, this, 250, 3, true);
         EntityRegistry.registerModEntity(EntityTerrorBird.class, 			"TerrorBird", 			31, this, 250, 3, true);
         EntityRegistry.registerModEntity(EntityTerrorBirdEgg.class,         "TerrorBirdEgg",        32, this, 250, 5, true);
-        EntityRegistry.registerModEntity(EntityElasmotherium.class, 		"Elasmotherium", 		33, this, 250, 5, true);
+        EntityRegistry.registerModEntity(EntityElasmotherium.class, 		"Elasmotherium", 		33, this, 250, 3, true);
 
 
         for (int i = 0; i < EnumDinoType.values().length; i++)

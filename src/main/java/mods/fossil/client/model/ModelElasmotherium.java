@@ -40,6 +40,7 @@ public class ModelElasmotherium extends ModelBase
 	private ModelRenderer upperHorn;
 	private ModelRenderer lowerHorn;
 	private ModelRenderer elasmotherium;
+	private ModelRenderer neckpivot;
 
     public ModelElasmotherium()
     {
@@ -134,13 +135,16 @@ public class ModelElasmotherium extends ModelBase
         setRotation(upperBody, 0F, 0F, 0F);
         upperBody.mirror = true;
           upperBody.addBox("upperBody", -7F, -1F, -11F, 14, 22, 11);
+        neckpivot = new ModelRenderer(this, "neckpivot");
+        neckpivot.setRotationPoint(0F, 10.5F, -7F);
+        setRotation(neckpivot, 0F, 0F, 0F);
         neck = new ModelRenderer(this, "neck");
-        neck.setRotationPoint(0F, 10.5F, -8F);
+        neck.setRotationPoint(0F, 0F, 0F);
         setRotation(neck, 0F, 0F, 0F);
         neck.mirror = true;
           neck.addBox("neck", -5.5F, -8F, -9F, 11, 16, 9);
         head = new ModelRenderer(this, "head");
-        head.setRotationPoint(0F, -4F, -9.5F);
+        head.setRotationPoint(0F, -4F, -10.5F);
         setRotation(head, 0F, 0F, 0F);
         head.mirror = true;
           head.addBox("head", -4.5F, -3F, -4F, 9, 10, 7);
@@ -169,7 +173,8 @@ public class ModelElasmotherium extends ModelBase
           upperJaw.addChild(lowerHorn);
           head.addChild(upperJaw);
           neck.addChild(head);
-          upperBody.addChild(neck);
+          neckpivot.addChild(neck);
+          upperBody.addChild(neckpivot);
           torso.addChild(upperBody);
         lowerBody = new ModelRenderer(this, "lowerBody");
         lowerBody.setRotationPoint(0F, -9.5F, 16F);
@@ -232,7 +237,8 @@ public class ModelElasmotherium extends ModelBase
     	this.upperHorn.rotateAngleX = (float)Math.toRadians(-5);
     	this.tail1.rotateAngleX = (float)Math.toRadians(30);
 
-
+        this.neckpivot.rotateAngleX = (var5*0.3F) / (180F / (float)Math.PI);
+        this.neckpivot.rotateAngleY = (var4*0.3F) / (180F / (float)Math.PI);
     	
         this.leftFrontUpperLeg.rotateAngleX = MathHelper.cos((var1) * 0.63330555F + 1) * 0.7F * var2;
         this.rightFrontUpperLeg.rotateAngleX = MathHelper.cos((var1) * 0.63330555F + (float)Math.PI) * 0.7F * var2;
@@ -250,11 +256,18 @@ public class ModelElasmotherium extends ModelBase
         int attackTimer = elasmotherium.getattackTimer();
         if (attackTimer > 0)
         {
-            this.neck.rotateAngleX = (float)Math.toRadians(-30) + 0.125F * this.swingProgress((float)attackTimer - var4, 10.0F);
+            this.neck.rotateAngleX = (float)Math.toRadians(-15) + 0.125F * this.swingProgress((float)attackTimer - var4, 10.0F);
         }
         else
         {
+        	if(elasmotherium.isAngry())
+        	{
+                this.neck.rotateAngleX = (float)Math.toRadians(30);
+        	}
+        	else
+        	{
                 this.neck.rotateAngleX = (float)Math.toRadians(10);
+        	}
         }
 
     }

@@ -113,5 +113,10 @@ public class EntityPrehistoric extends EntityTameable {
 			GL11.glPopMatrix();
     	}
     }
+
+	public void onWhipRightClick() {
+		// TODO Auto-generated method stub
+		
+	}
     
 }

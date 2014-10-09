@@ -119,7 +119,7 @@ public class ModelTriceratops extends ModelDinosaurs
 	      rightBackUpperLeg.addBox("rightBackUpperLeg", -2F, 0F, -1.5F, 2, 4, 3);
 	      rightBackUpperLeg.mirror = false;
 	    rightBackLowerLeg = new ModelRenderer(this, "rightBackLowerLeg");
-	    rightBackLowerLeg.setRotationPoint(-1F, 2F, 0.0F);
+	    rightBackLowerLeg.setRotationPoint(-1F, 2.5F, 0.0F);
 	    setRotation(rightBackLowerLeg, 0F, 0F, 0F);
 	    rightBackLowerLeg.mirror = true;
 	      rightBackLowerLeg.mirror = true;
@@ -133,7 +133,7 @@ public class ModelTriceratops extends ModelDinosaurs
 	    setRotation(leftBackUpperLeg, 0F, 0F, 0F);
 	      leftBackUpperLeg.addBox("leftBackUpperLeg", 0F, 0F, -1.5F, 2, 4, 3);
 	    leftBackLowerLeg = new ModelRenderer(this, "leftBackLowerLeg");
-	    leftBackLowerLeg.setRotationPoint(1F, 2F, 0.0F);
+	    leftBackLowerLeg.setRotationPoint(1F, 2.5F, 0.0F);
 	    setRotation(leftBackLowerLeg, 0F, 0F, 0F);
 	    leftBackLowerLeg.mirror = true;
 	      leftBackLowerLeg.addBox("leftBackLowerLeg", -0.5F, 0F, -4F, 1, 2, 4);

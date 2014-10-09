@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import mods.fossil.Fossil;
 import mods.fossil.client.LocalizationStrings;
 import mods.fossil.client.gui.GuiPedia;
+import mods.fossil.fossilAI.DinoAIRaptorLeapAtTarget;
 import mods.fossil.fossilAI.DinoAIRideGround;
 import mods.fossil.fossilAI.DinoAITargetNonTamedExceptSelfClass;
 import net.minecraft.entity.Entity;
@@ -38,6 +39,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
@@ -58,31 +60,31 @@ public class EntityElasmotherium extends EntityPrehistoric
 {
     private static final int SKINTYPE = 18;
 	private static final int GROWING_AGE = 12;
+	private static final int ANIMWATCHER = 19;
+	private static final int ANGRYSTATE = 16;
 	
 	private EntityAIEatGrass aiEatGrass = new EntityAIEatGrass(this);
     private int eatGrassTimes = 0;
     private int attackTimer;
 
-    public EntityElasmotherium(World var1)
+    public EntityElasmotherium(World world)
     {
-        super(var1);
+        super(world);
         this.setSize(2F, 2F);
         this.getNavigator().setAvoidsWater(true);
         
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(2, new EntityAIMate(this, 1.0D));
-        this.tasks.addTask(3, new EntityAITempt(this, 1.25D, Items.wheat, false));
-        this.tasks.addTask(1, new EntityAILeapAtTarget(this, 0.4F));
-        this.tasks.addTask(4, new EntityAIAttackOnCollide(this,  1.1D, true));
+        this.tasks.addTask(3, new EntityAITempt(this, 1.1D, Items.wheat, false));
+        this.tasks.addTask(3, new EntityAIAttackOnCollide(this,  1.1D, true));
         this.tasks.addTask(4, new EntityAIFollowParent(this, 1.0D));
         this.tasks.addTask(5, new EntityAIWander(this, 1.0D));
         this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
         this.tasks.addTask(7, new EntityAILookIdle(this));
         this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
         this.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));
-        this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
-        tasks.addTask(1, new DinoAIRideGround(this, 1)); // mutex all
-
+        this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, false));
+        tasks.addTask(1, new DinoAIRideGround(this, 1.2D)); // mutex all
     }
 
     /**
@@ -97,7 +99,7 @@ public class EntityElasmotherium extends EntityPrehistoric
     {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(24.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.27D);
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.3D);
         this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.5D);
         this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(7.0D);
     }
@@ -106,6 +108,7 @@ public class EntityElasmotherium extends EntityPrehistoric
     {
         Fossil.ToPedia = (Object)this;
     }
+    
     public boolean attackEntityAsMob(Entity entity)
     {
 
@@ -116,7 +119,7 @@ public class EntityElasmotherium extends EntityPrehistoric
         {
 	        if (this.rand.nextInt(16) < 8)
 	        {
-	            this.specialAttack(entity, this.rand.nextInt(2)+1);
+	            this.specialAttack(entity, this.rand.nextInt(2));
 	        }
 	        this.setLastAttacker(entity);
         }
@@ -132,22 +135,9 @@ public class EntityElasmotherium extends EntityPrehistoric
         int offsetX = target.posX > this.posX ? amount : -amount;
         int offsetZ = target.posZ > this.posZ ? amount : -amount;
 
-        target.motionZ = (double)(offsetZ)/2;
-        target.motionX = (double)(offsetX)/2;
+        target.motionZ = (double)(offsetZ)/3;
+        target.motionX = (double)(offsetX)/3;
         target.motionY += 0.4000000059604645D;
-    }
-    
-    /**
-     * Basic mob attack. Default to touch of death in EntityCreature. Overridden by each mob to define their attack.
-     */
-    @Override
-    protected void attackEntity(Entity entity, float float1)
-    {
-        if (this.attackTime <= 0 && float1 < 2.0F && entity.boundingBox.maxY > this.boundingBox.minY && entity.boundingBox.minY < this.boundingBox.maxY)
-        {
-            this.attackTime = 20;
-            this.attackEntityAsMob(entity);
-        }
     }
 
     /**
@@ -155,18 +145,34 @@ public class EntityElasmotherium extends EntityPrehistoric
      */
     public int getTalkInterval()
     {
-        return 360;
+        return 600;
     }
     
     @Override
     protected void collideWithEntity(Entity entity)
     {
-        if (entity instanceof IMob && this.getRNG().nextInt(1) == 0)
+        if (this.isAngry() && this.getRNG().nextInt(5) == 0 && this.getEntityToAttack() == null)
         {
-            this.setAttackTarget((EntityLivingBase)entity);
+            this.attackEntityAsMob((EntityLivingBase)entity);
         }
-
         super.collideWithEntity(entity);
+    }
+    
+    /**
+     * Sets the active target the Task system uses for tracking
+     */
+    public void setAttackTarget(EntityLivingBase attackTarget)
+    {
+        super.setAttackTarget(attackTarget);
+
+        if (attackTarget == null)
+        {
+            this.setAngry(false);
+        }
+        else if (!this.isTamed())
+        {
+            this.setAngry(true);
+        }
     }
 
     /**
@@ -203,7 +209,7 @@ public class EntityElasmotherium extends EntityPrehistoric
      */
     protected String getLivingSound()
     {
-        return Fossil.modid + ":" + "mammoth_living";
+        return Fossil.modid + ":" + "elasmotherium_living";
     }
 
     /**
@@ -212,7 +218,7 @@ public class EntityElasmotherium extends EntityPrehistoric
     @Override
     protected String getHurtSound()
     {
-        return Fossil.modid + ":" + "mammoth_hurt";
+        return Fossil.modid + ":" + "elasmotherium_hurt";
     }
     @Override
     /**
@@ -220,7 +226,7 @@ public class EntityElasmotherium extends EntityPrehistoric
      */
     protected String getDeathSound()
     {
-        return Fossil.modid + ":" + "mammoth_death";
+        return Fossil.modid + ":" + "elasmotherium_death";
     }   
 
     /**
@@ -230,6 +236,7 @@ public class EntityElasmotherium extends EntityPrehistoric
     {
         super.writeEntityToNBT(compound);
         compound.setInteger("ElasmotheriumSkin", this.getSkin());
+        compound.setBoolean("Angry", this.isAngry());
 
     }
 
@@ -240,6 +247,7 @@ public class EntityElasmotherium extends EntityPrehistoric
     {
         super.readEntityFromNBT(compound);
         compound.setInteger("ElasmotheriumSkin", this.getSkin());
+        this.setAngry(compound.getBoolean("Angry"));
 
     }
     
@@ -320,8 +328,10 @@ public class EntityElasmotherium extends EntityPrehistoric
     protected void entityInit()
     {
         super.entityInit();
+        this.dataWatcher.addObject(ANIMWATCHER, new Byte((byte)0)); //Bit used for animations.
         this.dataWatcher.addObject(SKINTYPE, Byte.valueOf((byte)0));
         this.setSkin(this.worldObj.rand.nextInt(3));
+        
     }
 
     /**
@@ -437,26 +447,10 @@ public class EntityElasmotherium extends EntityPrehistoric
 	            
 	            p0.AddStringLR(s0, true);
 
+	            //Display if Rideable  
+	            if (this.isAdult())
+	                p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_RIDEABLE), true);
         }
-        //Display if Rideable
-        /*
-        if (this.isRideable() && this.isAdult())
-            p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_RIDEABLE), true);
-
-        if (this.SelfType.OrderItem != null)
-        p0.AddStringLR(StatCollector.translateToLocal("Order: " + this.SelfType.OrderItem.getStatName()), true);
-
-        
-        for (int i = 0; i < this.SelfType.FoodItemList.index; i++)
-        {
-            if (this.SelfType.FoodItemList.getItem(i) != null)
-            {
-                p0.AddMiniItem(this.SelfType.FoodItemList.getItem(i));
-            }
-        }
-        */
-
-        //TODO show all blocks the dino can eat
     }
 
     @SideOnly(Side.CLIENT)
@@ -532,11 +526,16 @@ public class EntityElasmotherium extends EntityPrehistoric
         return this.getEyeHeight() / 2.0F + 0.7F;
     }
     
+    public float getMountHeight()
+    {
+        return (this.height * this.getEntitySize())* 0.8F;
+    }
+    
     public void updateRiderPosition()
     {
         if (this.riddenByEntity != null)
         {
-            this.riddenByEntity.setPosition(this.posX, this.posY + (double)this.getEyeHeight(), this.posZ);
+            this.riddenByEntity.setPosition(this.posX, this.posY + (double)this.getMountHeight(), this.posZ);
         }
     }
 
@@ -581,5 +580,32 @@ public class EntityElasmotherium extends EntityPrehistoric
     public boolean isAdult()
     {
         return !this.isChild();
+    }
+    
+    /**
+     * Determines whether this wolf is angry or not.
+     */
+    public boolean isAngry()
+    {
+        return (this.dataWatcher.getWatchableObjectByte(ANGRYSTATE) & 2) != 0;
+    }
+
+    /**
+     * Sets whether this wolf is angry or not.
+     */
+    public void setAngry(boolean isAngry)
+    {
+        byte b0 = this.dataWatcher.getWatchableObjectByte(ANGRYSTATE);
+
+        if (isAngry)
+        {
+            this.dataWatcher.updateObject(ANGRYSTATE, Byte.valueOf((byte)(b0 | 2)));
+            this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.4D);
+        }
+        else
+        {
+            this.dataWatcher.updateObject(ANGRYSTATE, Byte.valueOf((byte)(b0 & -3)));
+            this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.3D);
+        }
     }
 }

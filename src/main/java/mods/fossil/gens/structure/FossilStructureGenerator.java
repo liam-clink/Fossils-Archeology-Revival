@@ -10,6 +10,9 @@ import mods.fossil.gens.structure.academy.*;
 import mods.fossil.gens.structure.temple.Temple1;
 import mods.fossil.gens.structure.temple.Temple2;
 import mods.fossil.gens.structure.temple.Temple3;
+import mods.fossil.gens.structure.temple.TempleUtil;
+import mods.fossil.guiBlocks.TileEntityFigurine;
+import mods.fossil.guiBlocks.TileEntityVase;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentData;
@@ -149,7 +152,7 @@ public class FossilStructureGenerator extends StructureGeneratorBase
 
         switch (fakeID)
         {
-            case AcademyUtil.CUSTOM_CHEST:
+        case AcademyUtil.CUSTOM_CHEST:
                 Random rand = new Random();
                 ItemStack book = new ItemStack(Items.enchanted_book);
 
@@ -316,6 +319,82 @@ public class FossilStructureGenerator extends StructureGeneratorBase
                         
                     }
                 }
+                
+                if (customData1 == AcademyUtil.TEMPLE_COMMON_LOOT)
+                {
+                    //How many times to iterate through the list for loot
+                    for (int iterate = 0; iterate < rand.nextInt(4); iterate++)
+                    {
+                        int loot = rand.nextInt(100);
+                        
+                        if (loot < 40)
+                        {
+                        	addItemToTileInventory(world, new ItemStack(Items.gold_nugget, rand.nextInt(16)+12), x, y, z);
+                        }
+                        else if (loot < 50)
+                        {
+                            addItemToTileInventory(world, new ItemStack(Fossil.whip, 1), x, y, z);
+                        }
+                        else if (loot < 60)
+                        {
+                        addItemToTileInventory(world, (new ItemStack(Item.getItemFromBlock(Fossil.figurineBlock), rand.nextInt(2), rand.nextInt(15))), x, y, z);
+                        }
+                        else if (loot < 80)
+                        {
+                        	addItemToTileInventory(world, new ItemStack(Items.iron_ingot, rand.nextInt(15)), x, y, z);
+                        }
+                        else if (loot < 90)
+                        {
+                            addItemToTileInventory(world, new ItemStack(Fossil.fossilrecordBones, 1), x, y, z);
+                        }
+                        else if (loot < 101)
+                        {
+                            addItemToTileInventory(world, new ItemStack(Items.name_tag, rand.nextInt(2)), x, y, z);
+                        }
+                        
+                    }
+                }
+                
+                if (customData1 == AcademyUtil.TEMPLE_RARE_LOOT)
+                {
+                    //How many times to iterate through the list for loot
+                    for (int iterate = 0; iterate < rand.nextInt(4); iterate++)
+                    {
+                        int loot = rand.nextInt(100);
+                        
+
+                        
+                        if (loot < 20)
+                        {
+                            addItemToTileInventory(world, new ItemStack(Fossil.ancientGlass, rand.nextInt(10)), x, y, z);
+                        }
+                        else if (loot < 40)
+                        {
+                            addItemToTileInventory(world, new ItemStack(Fossil.ancientWood, rand.nextInt(15)), x, y, z);
+                        }
+                        else if (loot < 50)
+                        {
+                            addItemToTileInventory(world, new ItemStack(Fossil.whip, 1), x, y, z);
+                        }
+                        else if (loot < 60)
+                        {
+                        addItemToTileInventory(world, (new ItemStack(Item.getItemFromBlock(Fossil.figurineBlock), rand.nextInt(2), rand.nextInt(15))), x, y, z);
+                        }
+                        else if (loot < 80)
+                        {
+                        	addItemToTileInventory(world, new ItemStack(Items.iron_ingot, rand.nextInt(15)), x, y, z);
+                        }
+                        else if (loot < 90)
+                        {
+                            addItemToTileInventory(world, new ItemStack(Fossil.fossilrecordBones, 1), x, y, z);
+                        }
+                        else if (loot < 101)
+                        {
+                            addItemToTileInventory(world, new ItemStack(Items.name_tag, rand.nextInt(2)), x, y, z);
+                        }
+                        
+                    }
+                }
 
                 break;
 
@@ -424,6 +503,42 @@ public class FossilStructureGenerator extends StructureGeneratorBase
                 }
 
                 break;
+                
+            case TempleUtil.CUSTOM_RELIC:
+                if (world.rand.nextFloat() < 0.25F) // spawn items
+                {
+                	if (world.rand.nextFloat() < 0.5F) // spawn vanes
+                	{
+	                		int randomMeta = world.rand.nextInt(3);
+	                		int randomVaseType = world.rand.nextInt(2);
+	
+	                		world.setBlock(x, y, z, Fossil.vaseKylixBlock, randomVaseType, 2);
+	                		
+	                		TileEntityVase vase = (world.getTileEntity(x, y, z) instanceof TileEntityVase ? (TileEntityVase) world.getTileEntity(x, y, z) : null);
+	
+	                		if (vase != null)
+	                		{
+	                			vase.setVaseTypeMeta(randomVaseType);
+	                			vase.setVaseType(randomMeta);
+	                		}
+                	}
+                	else // spawn figurines
+                	{
+
+	                		int randomMeta2 = world.rand.nextInt(4);
+	                		int randomFigurineType = world.rand.nextInt(15);
+	                		
+	                		world.setBlock(x, y, z, Fossil.figurineBlock, randomMeta2, 2);
+	                		
+	                		TileEntityFigurine figurine = (world.getTileEntity(x, y, z) instanceof TileEntityFigurine ? (TileEntityFigurine) world.getTileEntity(x, y, z) : null);
+	
+	                		if (figurine != null)
+	                		{
+	                			figurine.setFigurineType(randomFigurineType);
+	                		}
+                	}
+                }
+            break;
 
             case AcademyUtil.SPAWN_VILLAGER:
                 // here I'm using customData as the villagerID
