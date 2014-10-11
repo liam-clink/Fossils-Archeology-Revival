@@ -434,22 +434,42 @@ public class EntityElasmotherium extends EntityPrehistoric
 
         //Display owner name
         if (this.isTamed())
-        {
-            p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_OWNER), true);
-        //    String s0 = this.getOwnerName();
-            //this.func_152115_b(player.getUniqueID().toString());
-
-	            String s0 = String.valueOf(this.getOwner().getCommandSenderName());
+    	{
+        	if(this.getOwnerDisplayName().length() > 0)
+	        {
+	            p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_OWNER), true);
+	            
+	////////////1.7.10 BLOCK //////////////
+	            
+	            String s0 = String.valueOf(this.getOwnerDisplayName());
 	            if (s0.length() > 11)
 	            {
-	                s0 = this.getOwner().getCommandSenderName().substring(0, 11);
+	                s0 = this.getOwnerDisplayName().substring(0, 11);
 	            }
 	            
 	            p0.AddStringLR(s0, true);
-
-	            //Display if Rideable  
-	            if (this.isAdult())
-	                p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_RIDEABLE), true);
+	///////////////////////////////////////
+	            
+	////////////1.7.2 BLOCK //////////////      
+	            /*
+	            String s0 = this.getOwnerName();
+	            if (s0.length() > 11)
+	            {
+	                s0 = this.getOwnerName().substring(0, 11);
+	            }
+	            
+	            p0.AddStringLR(s0, true);
+	            */
+	///////////////////////////////////////
+	        }
+        	else
+        	{
+	            p0.AddStringLR(StatCollector.translateToLocal("Tamed"), true);
+        	}
+    	}
+        else
+        {
+            p0.AddStringLR(StatCollector.translateToLocal("Untamed"), true);
         }
     }
 
@@ -480,17 +500,18 @@ public class EntityElasmotherium extends EntityPrehistoric
 
     public EntityElasmotherium Imprinting(double var1, double var3, double var5)
     {
-        EntityPlayer var7 = this.worldObj.getClosestPlayer(var1, var3, var5, 50.0D);
+        EntityPlayer player = this.worldObj.getClosestPlayer(var1, var3, var5, 50.0D);
 
-        if (var7 == null)
+        if (player == null)
         {
             return this;
         }
         else
         {
-        	this.func_152115_b(var7.getUniqueID().toString());
+        	this.func_152115_b(player.getUniqueID().toString());
          //   this.setOwner(var7.username);
             this.setTamed(true);
+            this.setOwnerDisplayName(player.getCommandSenderName());
             return this;
         }
     }

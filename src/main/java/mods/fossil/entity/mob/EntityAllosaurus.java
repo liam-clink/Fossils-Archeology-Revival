@@ -391,6 +391,7 @@ public class EntityAllosaurus extends EntityDinosaur
                     setPathToEntity(null);
                     setAttackTarget(null);
                     this.setOwner(player.getUniqueID().toString());
+                    this.setOwnerDisplayName(player.getCommandSenderName());
                     --itemStack.stackSize;
 
                     if (itemStack.stackSize <= 0)
