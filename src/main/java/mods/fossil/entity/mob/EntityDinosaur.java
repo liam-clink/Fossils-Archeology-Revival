@@ -649,10 +649,12 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
     	}
     	
     	//Add debug info on left side
-
+    	if(Fossil.DebugMode())
+    	{
         p0.AddStringLR(StatCollector.translateToLocal("Command: " + this.getOrderType()), true);
 
         p0.AddStringLR(StatCollector.translateToLocal("Sitting: " + this.isSitting()), true);
+    	}
     }
     
     /**

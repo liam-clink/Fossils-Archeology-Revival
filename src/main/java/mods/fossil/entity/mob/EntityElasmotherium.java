@@ -466,6 +466,10 @@ public class EntityElasmotherium extends EntityPrehistoric
         	{
 	            p0.AddStringLR(StatCollector.translateToLocal("Tamed"), true);
         	}
+        	
+            //Display if Rideable  
+            if (this.isAdult())
+                p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_RIDEABLE), true);
     	}
         else
         {
@@ -556,7 +560,7 @@ public class EntityElasmotherium extends EntityPrehistoric
     {
         if (this.riddenByEntity != null)
         {
-            this.riddenByEntity.setPosition(this.posX, this.posY + (double)this.getMountHeight(), this.posZ);
+            this.riddenByEntity.setPosition(this.posX, this.posY + (double)this.getMountHeight() + this.riddenByEntity.getYOffset(), this.posZ);
         }
     }
 
