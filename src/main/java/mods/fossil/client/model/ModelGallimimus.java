@@ -329,7 +329,6 @@ public class ModelGallimimus extends ModelDinosaurs
 			
 			this.tail1.rotationPointZ = 10F;
 			this.tail2.rotationPointZ = 6F;
-			this.tail1.rotateAngleX = this.tail2.rotateAngleX = 0;
-	        
+			this.tail1.rotateAngleX = this.tail2.rotateAngleX = 0;   
 	  }
 }

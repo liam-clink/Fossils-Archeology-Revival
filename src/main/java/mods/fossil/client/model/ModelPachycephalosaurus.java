@@ -225,8 +225,6 @@ public class ModelPachycephalosaurus extends ModelDinosaurs
 
         if (i > 0)
         {
-//          this.UpperBody.rotateAngleX = -0.614F + 1.4F * this.func_78172_a((float)i - par4, 10.0F);
-//         this.Head.rotateAngleX = -0.614F + 1.4F * this.func_78172_a((float)i - par4, 10.0F);
             this.UpperBody.rotateAngleX = 0.0F;
             this.Head.rotateAngleX = 0.0F;
         }

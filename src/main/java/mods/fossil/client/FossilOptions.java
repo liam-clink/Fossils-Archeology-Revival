@@ -8,6 +8,7 @@ public class FossilOptions
     public static boolean Gen_Palaeoraphe;
     public static boolean Gen_Academy;
     public static boolean Gen_Ships;
+    public static boolean Gen_Temple;
     public static String  Lang_Server;
     public static boolean Heal_Dinos;
     public static boolean Dinos_Starve;
@@ -31,6 +32,7 @@ public class FossilOptions
         Gen_Palaeoraphe = config.get("option", "Palaeoraphe", false).getBoolean(false);
         Gen_Academy = config.get("option", "Academy", true).getBoolean(true);
         Gen_Ships = config.get("option", "Ships", true).getBoolean(true);
+        Gen_Temple = config.get("option", "Temple", true).getBoolean(true);
         Lang_Server = config.get("option", "Serverlanguage", "en_US").getString();
         Heal_Dinos = config.get("option", "Heal_Dinos", true).getBoolean(true);
         Dinos_Starve = config.get("option", "Dinos_Starve", true).getBoolean(true);

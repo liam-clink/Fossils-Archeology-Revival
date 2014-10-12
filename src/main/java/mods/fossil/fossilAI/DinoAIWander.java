@@ -35,7 +35,7 @@ public class DinoAIWander extends EntityAIBase
         {
             return false;
         }
-        else if (this.entity.getOwner() != null && this.entity.OrderStatus != EnumOrderType.FreeMove)
+        else if (this.entity.isTamed() && this.entity.OrderStatus != EnumOrderType.FreeMove)
         {
             return false;
         }

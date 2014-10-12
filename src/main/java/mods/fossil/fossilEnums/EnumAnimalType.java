@@ -11,7 +11,9 @@ public enum EnumAnimalType
     Smilodon(4500),
     Mammoth(6000),
     Horse(3500),
-    Quagga(4000);
+    Quagga(4000),
+    Elasmotherium(5000),
+    ;
 
     public int GrowTime;
 

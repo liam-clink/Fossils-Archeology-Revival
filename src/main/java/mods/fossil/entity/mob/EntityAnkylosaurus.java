@@ -51,7 +51,6 @@ public class EntityAnkylosaurus extends EntityDinosaur
         
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(1, new EntityAISwimming(this));
-        //this.tasks.addTask(2, this.aiControlledByPlayer = new EntityAIControlledByPlayer(this, 0.3F));
         this.tasks.addTask(3, new EntityAILeapAtTarget(this, 0.0F));
         this.tasks.addTask(4, new DinoAIAttackOnCollide(this, 1.1D, true));
         this.tasks.addTask(5, new DinoAIFollowOwner(this, 1.0D, 10.0F, 2.0F));
@@ -59,7 +58,7 @@ public class EntityAnkylosaurus extends EntityDinosaur
         this.tasks.addTask(7, new DinoAIEat(this, 100));
         this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(9, new EntityAILookIdle(this));
-        tasks.addTask(1, new DinoAIRideGround(this, 1)); // mutex all
+        this.tasks.addTask(1, new DinoAIRideGround(this, 1)); // mutex all
         this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
         //this.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));

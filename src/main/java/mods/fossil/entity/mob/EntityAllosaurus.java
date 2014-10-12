@@ -340,9 +340,9 @@ public class EntityAllosaurus extends EntityDinosaur
     /**
      * Basic mob attack. Default to touch of death in EntityCreature. Overridden by each mob to define their attack.
      */
-    protected void attackEntity(Entity var1, float var2)
+    protected void attackEntity(Entity entity, float var2)
     {
-        if (var1.isDead)
+        if (entity.isDead)
         {
             this.setTarget((Entity)null);
         }
@@ -351,23 +351,23 @@ public class EntityAllosaurus extends EntityDinosaur
         {
             if (this.onGround)
             {
-                double var3 = var1.posX - this.posX;
-                double var5 = var1.posZ - this.posZ;
-                float var7 = MathHelper.sqrt_double(var3 * var3 + var5 * var5);
-                this.motionX = var3 / (double)var7 * 0.5D * 0.800000011920929D + this.motionX * 0.20000000298023224D;
-                this.motionZ = var5 / (double)var7 * 0.5D * 0.800000011920929D + this.motionZ * 0.20000000298023224D;
+                double deltaX = entity.posX - this.posX;
+                double deltaZ = entity.posZ - this.posZ;
+                float horizontalDistance = MathHelper.sqrt_double(deltaX * deltaX + deltaZ * deltaZ);
+                this.motionX = deltaX / (double)horizontalDistance * 0.5D * 0.800000011920929D + this.motionX * 0.20000000298023224D;
+                this.motionZ = deltaZ / (double)horizontalDistance * 0.5D * 0.800000011920929D + this.motionZ * 0.20000000298023224D;
                 this.worldObj.playSoundAtEntity(this, "Raptor_attack", this.getSoundVolume() * 2.0F, 1.0F);
                 this.jump();
             }
         }
-        else if ((double)var2 < 1.899999976158142D && var1.boundingBox.maxY > this.boundingBox.minY && var1.boundingBox.minY < this.boundingBox.maxY)
+        else if ((double)var2 < 1.899999976158142D && entity.boundingBox.maxY > this.boundingBox.minY && entity.boundingBox.minY < this.boundingBox.maxY)
         {
             this.attackTime = 20;
-            var1.attackEntityFrom(DamageSource.causeMobDamage(this), 2 + this.getDinoAge());
+            entity.attackEntityFrom(DamageSource.causeMobDamage(this), 2 + this.getDinoAge());
 
-            if (this.rand.nextInt(16) < 4 && var1 instanceof EntityLiving)
+            if (this.rand.nextInt(16) < 4 && entity instanceof EntityLiving)
             {
-                ((EntityLiving)var1).addPotionEffect(new PotionEffect(Potion.blindness.id, this.rand.nextInt(110) + 10, 0));
+                ((EntityLiving)entity).addPotionEffect(new PotionEffect(Potion.blindness.id, this.rand.nextInt(110) + 10, 0));
             }
         }
     }
@@ -391,6 +391,7 @@ public class EntityAllosaurus extends EntityDinosaur
                     setPathToEntity(null);
                     setAttackTarget(null);
                     this.setOwner(player.getUniqueID().toString());
+                    this.setOwnerDisplayName(player.getCommandSenderName());
                     --itemStack.stackSize;
 
                     if (itemStack.stackSize <= 0)
@@ -461,24 +462,6 @@ public class EntityAllosaurus extends EntityDinosaur
     }
 
     /**
-     * Called when the mob is falling. Calculates and applies fall damage.
-     */
-    protected void fall(float var1)
-    {
-        if (this.riddenByEntity != null)
-        {
-            this.riddenByEntity.fallDistance = var1;
-        }
-
-        int var2 = (int)Math.ceil((double)(var1 - 3.0F));
-
-        if (var2 > 0)
-        {
-            this.attackEntityFrom(DamageSource.fall, 0);//Like cats, they don't suffer fall damage
-        }
-    }
-
-    /**
      * Time remaining during which the Animal is sped up and flees.
      */
     protected void updateWanderPath()
@@ -518,7 +501,7 @@ public class EntityAllosaurus extends EntityDinosaur
     
     public float getMountHeight()
     {
-        return this.height*0.60F;
+        return this.height*0.70F;
     }
     
     public void updateRiderPosition()

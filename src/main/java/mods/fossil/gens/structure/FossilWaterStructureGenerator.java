@@ -4,6 +4,7 @@ import coolalias.structuregenapi.util.LogHelper;
 import coolalias.structuregenapi.util.Structure;
 import coolalias.structuregenapi.util.StructureGeneratorBase;
 import mods.fossil.Fossil;
+import mods.fossil.client.FossilOptions;
 import mods.fossil.fossilEnums.EnumDinoType;
 import mods.fossil.gens.structure.shipwreck.ShipWreck1;
 import mods.fossil.gens.structure.shipwreck.ShipWreck2;
@@ -150,11 +151,11 @@ public class FossilWaterStructureGenerator extends StructureGeneratorBase
                         
                         if (loot < 20)
                         {
-                            addItemToTileInventory(world, new ItemStack(Items.leather, rand.nextInt(20)), x, y, z);
+                            addItemToTileInventory(world, new ItemStack(Items.leather, rand.nextInt(20)+1), x, y, z);
                         }
                         else if (loot < 40)
                         {
-                            addItemToTileInventory(world, new ItemStack(Items.golden_sword, rand.nextInt(2)), x, y, z);
+                            addItemToTileInventory(world, new ItemStack(Items.golden_sword, rand.nextInt(2)+1), x, y, z);
                         }
                         else if (loot < 50)
                         {
@@ -162,19 +163,19 @@ public class FossilWaterStructureGenerator extends StructureGeneratorBase
                         }
                         else if (loot < 60)
                         {
-                        addItemToTileInventory(world, (new ItemStack(Item.getItemFromBlock(Fossil.figurineBlock), rand.nextInt(2), rand.nextInt(15))), x, y, z);
+                        addItemToTileInventory(world, (new ItemStack(Item.getItemFromBlock(Fossil.figurineBlock), rand.nextInt(2)+1, rand.nextInt(15))), x, y, z);
                         }
                         else if (loot < 80)
                         {
-                        	addItemToTileInventory(world, new ItemStack(Items.gold_nugget, rand.nextInt(32)), x, y, z);
+                        	addItemToTileInventory(world, new ItemStack(Items.gold_nugget, rand.nextInt(32)+1), x, y, z);
                         }
                         else if (loot < 90)
                         {
-                        	addItemToTileInventory(world, new ItemStack(Fossil.ironjavelin, rand.nextInt(16)), x, y, z);
+                        	addItemToTileInventory(world, new ItemStack(Fossil.ironjavelin, rand.nextInt(16)+1), x, y, z);
                         }
                         else if (loot < 101)
                         {
-                            addItemToTileInventory(world, new ItemStack(Items.name_tag, rand.nextInt(2)), x, y, z);
+                            addItemToTileInventory(world, new ItemStack(Items.name_tag, rand.nextInt(2)+1), x, y, z);
                         }
                         
                     }
@@ -189,31 +190,31 @@ public class FossilWaterStructureGenerator extends StructureGeneratorBase
 
                         if (loot < 20)
                         {
-                            addItemToTileInventory(world, new ItemStack(Items.leather, rand.nextInt(7)), x, y, z);
+                            addItemToTileInventory(world, new ItemStack(Items.leather, rand.nextInt(6)+1), x, y, z);
                         }
                         else if (loot < 40)
                         {
-                            addItemToTileInventory(world, new ItemStack(Items.book, rand.nextInt(3)), x, y, z);
+                            addItemToTileInventory(world, new ItemStack(Items.book, rand.nextInt(2)+1), x, y, z);
                         }
                         else if (loot < 60)
                         {
-                            addItemToTileInventory(world, new ItemStack(Items.fishing_rod, rand.nextInt(2)), x, y, z);
+                            addItemToTileInventory(world, new ItemStack(Items.fishing_rod, rand.nextInt(1)+1), x, y, z);
                         }
                         else if (loot < 70)
                         {
-                            addItemToTileInventory(world, new ItemStack(Items.gunpowder, rand.nextInt(10)), x, y, z);
+                            addItemToTileInventory(world, new ItemStack(Items.gunpowder, rand.nextInt(10)+1), x, y, z);
                         }
                         else if (loot < 85)
                         {
-                            addItemToTileInventory(world, new ItemStack(Fossil.woodjavelin, rand.nextInt(8)), x, y, z);
+                            addItemToTileInventory(world, new ItemStack(Fossil.woodjavelin, rand.nextInt(8)+1), x, y, z);
                         }
                         else if (loot < 95)
                         {
-                            addItemToTileInventory(world, new ItemStack(Items.iron_sword, rand.nextInt(1)), x, y, z);
+                            addItemToTileInventory(world, new ItemStack(Items.iron_sword, rand.nextInt(1)+1), x, y, z);
                         }
                         else
                         {
-                        	addItemToTileInventory(world, new ItemStack(Items.iron_ingot, rand.nextInt(8)), x, y, z);
+                        	addItemToTileInventory(world, new ItemStack(Items.iron_ingot, rand.nextInt(8)+1), x, y, z);
                         }
                     }
                 }
@@ -326,6 +327,8 @@ public class FossilWaterStructureGenerator extends StructureGeneratorBase
     static
     {
         Structure structure = new Structure("ShipWreck");
+        if(FossilOptions.Gen_Ships)
+        {
         structure.addBlockArray(ShipWreck1.blockArrayShipWreck1);
         structure.addBlockArray(ShipWreck2.blockArrayShipWreck2);
         structure.addBlockArray(ShipWreck3.blockArrayShipWreck3);
@@ -333,6 +336,8 @@ public class FossilWaterStructureGenerator extends StructureGeneratorBase
         // has a buffer layer on the bottom in case no ground; spawn at y-1 for ground level
         structure.setStructureOffset(0, -10, 0);
         structures.add(structure);
+        }
+        
         /*Structure structure = new Structure("Hut");
         structure.addBlockArray(StructureArrays.blockArrayNPCHut);
         structure.setFacing(StructureGeneratorBase.EAST);

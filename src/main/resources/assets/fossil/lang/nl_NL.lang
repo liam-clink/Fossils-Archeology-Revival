@@ -1,6 +1,6 @@
-#Build 6.4 - Updated August 28 2014
+#Build 7.0 - Updated August 28 2014
 #Dutch (nl_NL) Localization File
-#Keys last updated August 28 2014
+#Keys last updated October 5 2014
 #Tab Groups
 itemgroup.FCombat=Prehistorisch Apparatuur
 itemgroup.FBlocks=Prehistorische Blokken
@@ -12,7 +12,7 @@ itemgroup.FFigurines=Verzamelbaren
 itemgroup.FBones=Dinosaurus Botten
 
 #Achievements
-achievement.FirstEgg=Eerste Dinosaurus
+achievement.FirstEgg=Eerste Dinosaurus!
 achievement.AllEggs=Ik moet ze allemaal uitbroeden!
 achievement.FoundFossils=Graven voor Botten
 achievement.pigBossOnEarth=Prijs Anu
@@ -388,6 +388,7 @@ item.dnaHorse.name=Paarden DNA
 item.dnaQuagga.name=Quagga DNA
 item.dnaTerrorBird.name=Schrikvogel DNA
 item.dnaAllosaurus.name=Allosaurus DNA
+item.dnaElasmotherium.name=Elasmotherium DNA
 item.embryoPig.name=Varken Embryo
 item.embryoSheep.name=Schapen Embryo
 item.embryoCow.name=Koeien Embryo
@@ -397,6 +398,7 @@ item.embryoMammoth.name=Mammoet Embryo
 item.embryoDodo.name=Dodo Embryo
 item.embryoHorse.name=Paarden Embryo
 item.embryoQuagga.name=Quagga Embryo
+item.embryoElasmotherium.name=Elasmotherium Embryo
 item.archNotebook.name=Archeologisch Kladblok
 item.potteryShard.name=Aardewerk Scherf
 item.terrorBirdMeat.name=Rauwe Schrikvogel Poot
@@ -477,6 +479,7 @@ entity.fossil.Dodo.name=Dodo
 entity.fossil.Coelacanth.name=Coelacanth
 entity.fossil.Quagga.name=Quagga
 entity.fossil.TerrorBird.name=Schrikvogel
+entity.fossil.Elasmotherium.name=Elasmotherium
 
 #Pedia text
 pedia.text.owner=Eigenaar:
@@ -504,6 +507,7 @@ pedia.embryo.Mammoth=Mammoet
 pedia.embryo.Dodo=Dodo
 pedia.embryo.Horse=Paard
 pedia.embryo.Quagga=Quagga
+pedia.embryo.Elasmotherium=Elasmotherium
 
 #Anu speaking lines
 anuSpeaker.self=Anu:

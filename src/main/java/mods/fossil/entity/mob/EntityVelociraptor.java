@@ -311,6 +311,7 @@ public class EntityVelociraptor extends EntityDinosaur
                 {
                     this.setTamed(false);
                   //  this.setOwner("");
+                    this.setOwnerDisplayName("");
                     this.ItemInMouth = null;
                     this.PreyChecked = true;
                     var4 = true;

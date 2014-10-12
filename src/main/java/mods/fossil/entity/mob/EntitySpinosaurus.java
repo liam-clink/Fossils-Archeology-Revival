@@ -434,6 +434,7 @@ public class EntitySpinosaurus extends EntityDinosaur implements IWaterDino
         }
 
         this.setTamed(false);
+        this.setOwnerDisplayName("");
 //        this.setOwner("");
         this.setPathToEntity(this.worldObj.getEntityPathToXYZ(this, var14, var6, var15, (float)var2, true, false, true, false));
     }

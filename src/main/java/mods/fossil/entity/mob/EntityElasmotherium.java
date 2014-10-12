@@ -9,9 +9,13 @@ import java.util.ArrayList;
 import mods.fossil.Fossil;
 import mods.fossil.client.LocalizationStrings;
 import mods.fossil.client.gui.GuiPedia;
+import mods.fossil.fossilAI.DinoAIRaptorLeapAtTarget;
 import mods.fossil.fossilAI.DinoAIRideGround;
+import mods.fossil.fossilAI.DinoAITargetNonTamedExceptSelfClass;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIEatGrass;
@@ -23,9 +27,11 @@ import net.minecraft.entity.ai.EntityAIMate;
 import net.minecraft.entity.ai.EntityAIOwnerHurtByTarget;
 import net.minecraft.entity.ai.EntityAIOwnerHurtTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAITargetNonTamed;
 import net.minecraft.entity.ai.EntityAITempt;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -33,6 +39,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
@@ -49,45 +56,35 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class EntityMammoth extends EntityPrehistoric implements IShearable
+public class EntityElasmotherium extends EntityPrehistoric
 {
-    private static final int SIZE_MULTIFER = 5;
-    private static final int EATING_TIMES_TO_GROW_FUR = 5;
-    private static final float CHILD_SIZE_Y = 1.3F;
-    private static final float CHILD_SIZE_X = 0.9F;
-    private static final float ADULT_SIZE_Y = 6.5F;
-    private static final float ADULT_SIZE_X = 4.5F;
-    private static final Potion BIOME_SICK = Potion.weakness;
-    private static final PotionEffect BIOME_EFFECT = new PotionEffect(Potion.weakness.id, 60, 1);
-    private static final BiomeGenBase[] COLD_BIOMES = new BiomeGenBase[] {BiomeGenBase.frozenOcean, BiomeGenBase.frozenRiver, BiomeGenBase.iceMountains, BiomeGenBase.icePlains, BiomeGenBase.taiga, BiomeGenBase.taigaHills};
-    private static final BiomeGenBase[] HOT_BIOMES = new BiomeGenBase[] {BiomeGenBase.desert, BiomeGenBase.swampland, BiomeGenBase.jungle, BiomeGenBase.jungleHills, BiomeGenBase.hell, BiomeGenBase.desertHills};
-    private EntityAIEatGrass aiEatGrass = new EntityAIEatGrass(this);
+    private static final int SKINTYPE = 18;
+	private static final int GROWING_AGE = 12;
+	private static final int ANIMWATCHER = 19;
+	private static final int ANGRYSTATE = 16;
+	
+	private EntityAIEatGrass aiEatGrass = new EntityAIEatGrass(this);
     private int eatGrassTimes = 0;
-    private int swingTick;
+    private int attackTimer;
 
-    public EntityMammoth(World var1)
+    public EntityElasmotherium(World world)
     {
-        super(var1);
-        this.setSize(1.0F, 1.0F);
+        super(world);
+        this.setSize(2F, 2F);
         this.getNavigator().setAvoidsWater(true);
         
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(2, new EntityAIMate(this, 1.0D));
-        this.tasks.addTask(3, new EntityAITempt(this, 1.25D, Items.wheat, false));
-        this.tasks.addTask(3, new EntityAILeapAtTarget(this, 0.4F));
-        this.tasks.addTask(4, new EntityAIAttackOnCollide(this,  1.0D, true));
+        this.tasks.addTask(3, new EntityAITempt(this, 1.1D, Items.wheat, false));
+        this.tasks.addTask(3, new EntityAIAttackOnCollide(this,  1.1D, true));
         this.tasks.addTask(4, new EntityAIFollowParent(this, 1.0D));
         this.tasks.addTask(5, new EntityAIWander(this, 1.0D));
         this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
         this.tasks.addTask(7, new EntityAILookIdle(this));
         this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
         this.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));
-        this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
-        
-        tasks.addTask(1, new DinoAIRideGround(this, 1)); // mutex all
-
-        
-        this.experienceValue = 5;
+        this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, false));
+        tasks.addTask(1, new DinoAIRideGround(this, 1.2D)); // mutex all
     }
 
     /**
@@ -102,28 +99,45 @@ public class EntityMammoth extends EntityPrehistoric implements IShearable
     {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(24.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.25D);
-        this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(1.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(2.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.3D);
+        this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.5D);
+        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(7.0D);
     }
 
     private void setPedia()
     {
         Fossil.ToPedia = (Object)this;
     }
-    public boolean attackEntityAsMob(Entity var1)
+    
+    public boolean attackEntityAsMob(Entity entity)
     {
-        this.swingTick = 10;
-        this.worldObj.setEntityState(this, (byte)4);
-        boolean var2 = var1.attackEntityFrom(DamageSource.causeMobDamage(this), this.isChild() ? 2 : 7);
 
-        if (var2)
+        boolean flag = entity.attackEntityFrom(DamageSource.causeMobDamage(this), this.isChild() ? 
+        		2 : (float)this.getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue());
+
+        if (flag)
         {
-            var1.motionY += 0.4000000059604645D;
+	        if (this.rand.nextInt(16) < 8)
+	        {
+	            this.specialAttack(entity, this.rand.nextInt(2));
+	        }
+	        this.setLastAttacker(entity);
         }
+        return flag;
+    }
+    
+    private void specialAttack(Entity target, int amount)
+    {
+        this.attackTimer = 10;
+        this.worldObj.setEntityState(this, (byte)4);
+    	this.playSound("mob.irongolem.throw", 3.0F, 0.2F);
 
-        this.worldObj.playSoundAtEntity(this, "mob.irongolem.throw", 1.0F, 1.0F);
-        return var2;
+        int offsetX = target.posX > this.posX ? amount : -amount;
+        int offsetZ = target.posZ > this.posZ ? amount : -amount;
+
+        target.motionZ = (double)(offsetZ)/3;
+        target.motionX = (double)(offsetX)/3;
+        target.motionY += 0.4000000059604645D;
     }
 
     /**
@@ -131,7 +145,34 @@ public class EntityMammoth extends EntityPrehistoric implements IShearable
      */
     public int getTalkInterval()
     {
-        return 360;
+        return 600;
+    }
+    
+    @Override
+    protected void collideWithEntity(Entity entity)
+    {
+        if (this.isAngry() && this.getRNG().nextInt(5) == 0 && this.getEntityToAttack() == null)
+        {
+            this.attackEntityAsMob((EntityLivingBase)entity);
+        }
+        super.collideWithEntity(entity);
+    }
+    
+    /**
+     * Sets the active target the Task system uses for tracking
+     */
+    public void setAttackTarget(EntityLivingBase attackTarget)
+    {
+        super.setAttackTarget(attackTarget);
+
+        if (attackTarget == null)
+        {
+            this.setAngry(false);
+        }
+        else if (!this.isTamed())
+        {
+            this.setAngry(true);
+        }
     }
 
     /**
@@ -141,25 +182,25 @@ public class EntityMammoth extends EntityPrehistoric implements IShearable
     public void onLivingUpdate()
     {
         super.onLivingUpdate();
-        this.updateSize();
 
-        if (this.swingTick > 0)
+        if (this.attackTimer > 0)
         {
-            --this.swingTick;
-        }
-
-        if (!this.isPotionActive(BIOME_SICK) && this.checkBiomeAndWeakness())
-        {
-            this.addPotionEffect(BIOME_EFFECT);
+            --this.attackTimer;
         }
     }
-
-    /**
-     * Returns the texture's file path as a String.
-     */
-    public String getTexture()
+    
+    @SideOnly(Side.CLIENT)
+    public void handleHealthUpdate(byte updateByte)
     {
-        return this.isChild() ? "fossil:textures/mob/MammothYoung.png" : (!this.getSheared() ? "fossil:textures/mob/MammothAdult.png" : "fossil:textures/mob/MammothFurless.png");
+        if (updateByte == 4)
+        {
+            this.attackTimer = 10;
+            this.playSound("mob.irongolem.throw", 1.0F, 1.0F);
+        }
+        else
+        {
+            super.handleHealthUpdate(updateByte);
+        }
     }
     
     @Override
@@ -168,7 +209,7 @@ public class EntityMammoth extends EntityPrehistoric implements IShearable
      */
     protected String getLivingSound()
     {
-        return Fossil.modid + ":" + "mammoth_living";
+        return Fossil.modid + ":" + "elasmotherium_living";
     }
 
     /**
@@ -177,7 +218,7 @@ public class EntityMammoth extends EntityPrehistoric implements IShearable
     @Override
     protected String getHurtSound()
     {
-        return Fossil.modid + ":" + "mammoth_hurt";
+        return Fossil.modid + ":" + "elasmotherium_hurt";
     }
     @Override
     /**
@@ -185,27 +226,39 @@ public class EntityMammoth extends EntityPrehistoric implements IShearable
      */
     protected String getDeathSound()
     {
-        return Fossil.modid + ":" + "mammoth_death";
+        return Fossil.modid + ":" + "elasmotherium_death";
     }   
 
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
-    public void writeEntityToNBT(NBTTagCompound var1)
+    public void writeEntityToNBT(NBTTagCompound compound)
     {
-        super.writeEntityToNBT(var1);
-        var1.setBoolean("Sheared", this.getSheared());
-        var1.setByte("Color", (byte)this.getFleeceColor());
+        super.writeEntityToNBT(compound);
+        compound.setInteger("ElasmotheriumSkin", this.getSkin());
+        compound.setBoolean("Angry", this.isAngry());
+
     }
 
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
-    public void readEntityFromNBT(NBTTagCompound var1)
+    public void readEntityFromNBT(NBTTagCompound compound)
     {
-        super.readEntityFromNBT(var1);
-        this.setSheared(var1.getBoolean("Sheared"));
-        this.setFleeceColor(var1.getByte("Color"));
+        super.readEntityFromNBT(compound);
+        compound.setInteger("ElasmotheriumSkin", this.getSkin());
+        this.setAngry(compound.getBoolean("Angry"));
+
+    }
+    
+    public int getSkin()
+    {
+        return this.dataWatcher.getWatchableObjectByte(SKINTYPE);
+    }
+    
+    public void setSkin(int par1)
+    {
+        this.dataWatcher.updateObject(SKINTYPE, Byte.valueOf((byte)par1));
     }
     
     /**
@@ -275,7 +328,10 @@ public class EntityMammoth extends EntityPrehistoric implements IShearable
     protected void entityInit()
     {
         super.entityInit();
-        this.dataWatcher.addObject(18, new Byte((byte)3));
+        this.dataWatcher.addObject(ANIMWATCHER, new Byte((byte)0)); //Bit used for animations.
+        this.dataWatcher.addObject(SKINTYPE, Byte.valueOf((byte)0));
+        this.setSkin(this.worldObj.rand.nextInt(3));
+        
     }
 
     /**
@@ -283,25 +339,25 @@ public class EntityMammoth extends EntityPrehistoric implements IShearable
      */
     public boolean interact(EntityPlayer player)
     {
-        ItemStack var2 = player.inventory.getCurrentItem();
+        ItemStack itemstack = player.inventory.getCurrentItem();
 
-        if (var2 != null)
+        if (itemstack != null)
         {
-            if (var2.getItem().equals(Fossil.chickenEss))
+            if (itemstack.getItem().equals(Fossil.chickenEss))
             {
                 this.setGrowingAge(this.getGrowingAge() + 2000);
-                var2.stackSize--;
+                itemstack.stackSize--;
                 return true;
             }
 
-            if (FMLCommonHandler.instance().getSide().isClient() && var2.getItem() == Fossil.dinoPedia)
+            if (FMLCommonHandler.instance().getSide().isClient() && itemstack.getItem() == Fossil.dinoPedia)
             {
                 this.setPedia();
                 player.openGui(Fossil.instance, 4, this.worldObj, (int)this.posX, (int)this.posY, (int)this.posZ);
                 return true;
             }
             
-            if (var2.getItem() == Fossil.whip && this.isTamed() && !this.isChild() && !this.worldObj.isRemote 
+            if (itemstack.getItem() == Fossil.whip && this.isTamed() && !this.isChild() && !this.worldObj.isRemote 
             		&& this.riddenByEntity == null && player == this.getOwner()) {
                 setRidingPlayer(player);
             }
@@ -324,7 +380,7 @@ public class EntityMammoth extends EntityPrehistoric implements IShearable
     
     	
         p0.reset();
-        p0.PrintPictXY(new ResourceLocation(Fossil.modid + ":" + "textures/items/" + "Mammoth" + "_DNA.png"), ((p0.xGui/2) + (p0.xGui/4)), 7, 16, 16); //185
+        p0.PrintPictXY(new ResourceLocation(Fossil.modid + ":" + "textures/items/" + "Elasmotherium/" + "Elasmotherium" + "_DNA.png"), ((p0.xGui/2) + (p0.xGui/4)), 7, 16, 16); //185
 
         
         /* LEFT PAGE
@@ -354,7 +410,7 @@ public class EntityMammoth extends EntityPrehistoric implements IShearable
             p0.PrintStringXY(this.getCustomNameTag(), p0.rightIndent, 24, 40, 90, 245);
         }
 
-        p0.PrintStringXY(StatCollector.translateToLocal(LocalizationStrings.ANIMAL_MAMMOTH), p0.rightIndent, 34, 0, 0, 0);
+        p0.PrintStringXY(StatCollector.translateToLocal(LocalizationStrings.ANIMAL_ELASMOTHERIUM), p0.rightIndent, 34, 0, 0, 0);
         //p0.PrintPictXY(pediaclock, p0.rightIndent, 46, 8, 8);
         p0.PrintPictXY(pediaheart, p0.rightIndent, 58, 9, 9);
         //p0.PrintPictXY(pediafood, p0.rightIndent, 70, 9, 9);
@@ -410,112 +466,22 @@ public class EntityMammoth extends EntityPrehistoric implements IShearable
         	{
 	            p0.AddStringLR(StatCollector.translateToLocal("Tamed"), true);
         	}
+        	
+            //Display if Rideable  
+            if (this.isAdult())
+                p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_RIDEABLE), true);
     	}
         else
         {
             p0.AddStringLR(StatCollector.translateToLocal("Untamed"), true);
         }
-        //Display if Rideable
-        /*
-        if (this.isRideable() && this.isAdult())
-            p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_RIDEABLE), true);
-
-        if (this.SelfType.OrderItem != null)
-        p0.AddStringLR(StatCollector.translateToLocal("Order: " + this.SelfType.OrderItem.getStatName()), true);
-
-        
-        for (int i = 0; i < this.SelfType.FoodItemList.index; i++)
-        {
-            if (this.SelfType.FoodItemList.getItem(i) != null)
-            {
-                p0.AddMiniItem(this.SelfType.FoodItemList.getItem(i));
-            }
-        }
-        */
-
-        //TODO show all blocks the dino can eat
     }
 
     @SideOnly(Side.CLIENT)
     public void ShowPedia2(GuiPedia p0)
     {
-    	super.ShowPedia2(p0, "Mammoth");
+    	super.ShowPedia2(p0, "Elasmotherium");
     }    
-    
-    public EntityAnimal spawnBabyAnimal(EntityAnimal var1)
-    {
-        EntityMammoth var2 = new EntityMammoth(this.worldObj);
-
-        if (this.isTamed())
-        {
-          //  var2.func_146067_o(this.getOwner());
-            var2.setTamed(true);
-        }
-
-        return var2;
-    }
-
-	@Override
-	public boolean isShearable(ItemStack item, IBlockAccess world, int x,int y, int z) {
-        this.eatGrassTimes = 0;
-        return !this.getSheared() && !this.isChild();
-	}
-
-    public void setSheared(boolean var1)
-    {
-        byte var2 = this.dataWatcher.getWatchableObjectByte(18);
-
-        if (var1)
-        {
-            this.dataWatcher.updateObject(18, Byte.valueOf((byte)(var2 | 16)));
-        }
-        else
-        {
-            this.dataWatcher.updateObject(18, Byte.valueOf((byte)(var2 & -17)));
-        }
-    }
-
-	@Override
-	public ArrayList<ItemStack> onSheared(ItemStack item, IBlockAccess world,int x, int y, int z, int fortune) {
-        ArrayList var7 = new ArrayList();
-        int var8 = 1 + this.rand.nextInt(20);
-
-        for (int var9 = 0; var9 < var8; ++var9)
-        {
-            var7.add(new ItemStack(Blocks.wool, 1, 12));
-        }
-
-        this.setSheared(true);
-        return var7;
-	}
-
-    public int getFleeceColor()
-    {
-        return this.dataWatcher.getWatchableObjectByte(18) & 15;
-    }
-
-    public void setFleeceColor(int var1)
-    {
-        byte var2 = this.dataWatcher.getWatchableObjectByte(18);
-        this.dataWatcher.updateObject(18, Byte.valueOf((byte)(var2 & 240 | var1 & 15)));
-    }
-
-    public boolean getSheared()
-    {
-        return (this.dataWatcher.getWatchableObjectByte(18) & 16) != 0;
-    }
-
-    public void updateSize()
-    {
-        if (!this.isChild())
-        {
-            if (this.width != 4.5F || this.height != 6.5F)
-            {
-                this.setSize(4.5F, 6.5F);
-                this.setPosition(this.posX, this.posY, this.posZ);
-            }
-        }
-    }
 
     /**
      * This function applies the benefits of growing back wool and faster growing up to the acting entity. (This
@@ -523,17 +489,6 @@ public class EntityMammoth extends EntityPrehistoric implements IShearable
      */
     public void eatGrassBonus()
     {
-        if (this.getSheared())
-        {
-            ++this.eatGrassTimes;
-
-            if (this.eatGrassTimes >= 5)
-            {
-                this.setSheared(false);
-                this.eatGrassTimes = 0;
-            }
-        }
-
         if (this.isChild())
         {
             int var1 = this.getGrowingAge() + 1200;
@@ -547,45 +502,7 @@ public class EntityMammoth extends EntityPrehistoric implements IShearable
         }
     }
 
-    private boolean checkBiomeAndWeakness()
-    {
-        if (this.isChild())
-        {
-            return false;
-        }
-        else
-        {
-            BiomeGenBase var1 = this.worldObj.getBiomeGenForCoords((int)this.posX, (int)this.posZ);
-            boolean var2 = this.isBiomeCold(var1);
-            boolean var3 = this.isBiomeHot(var1);
-            return this.getSheared() ? var2 : var3;
-        }
-    }
-
-    private boolean isBiomeHot(BiomeGenBase var1)
-    {
-        return this.isBiomeInList(HOT_BIOMES, var1);
-    }
-
-    private boolean isBiomeCold(BiomeGenBase var1)
-    {
-        return this.isBiomeInList(COLD_BIOMES, var1);
-    }
-
-    private boolean isBiomeInList(BiomeGenBase[] var1, BiomeGenBase var2)
-    {
-        for (int var3 = 0; var3 < var1.length; ++var3)
-        {
-            if (var1[var3].equals(var2))
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    public EntityMammoth Imprinting(double var1, double var3, double var5)
+    public EntityElasmotherium Imprinting(double var1, double var3, double var5)
     {
         EntityPlayer player = this.worldObj.getClosestPlayer(var1, var3, var5, 50.0D);
 
@@ -603,15 +520,11 @@ public class EntityMammoth extends EntityPrehistoric implements IShearable
         }
     }
 
-    public int getSwingTick()
+    @SideOnly(Side.CLIENT)
+    public int getattackTimer()
     {
-        return this.swingTick;
+        return this.attackTimer;
     }
-
-    /*public EntityAgeable func_90011_a(EntityAgeable var1)
-    {
-        return null;
-    }*/
 
     public void moveEntityWithHeading(float par1, float par2)
     {
@@ -628,29 +541,96 @@ public class EntityMammoth extends EntityPrehistoric implements IShearable
     @Override
     public EntityAgeable createChild(EntityAgeable var1)
     {
-        EntityAgeable var2 = (new EntityMammoth(this.worldObj)).Imprinting(this.posX, this.posY, this.posZ);
-        var2.setGrowingAge(-24000);
-        var2.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, this.rotationPitch);
-        return var2;
+        EntityAgeable entityChild = new EntityElasmotherium(this.worldObj);
+        entityChild.setGrowingAge(-24000);
+        return entityChild;
     }
     
-    public float getEyeHeight()
-    {
-        return 5.3F;
-    }
-
     public float getHalfHeight()
     {
         return this.getEyeHeight() / 2.0F + 0.7F;
+    }
+    
+    public float getMountHeight()
+    {
+        return (this.height * this.getEntitySize())* 0.8F;
     }
     
     public void updateRiderPosition()
     {
         if (this.riddenByEntity != null)
         {
-            this.riddenByEntity.setPosition(this.posX, this.posY + (double)this.getEyeHeight(), this.posZ);
+            this.riddenByEntity.setPosition(this.posX, this.posY + (double)this.getMountHeight(), this.posZ);
         }
     }
 
+    public float getEntitySize()
+    {
+        int i = this.getGrowingAge();
+        return i >= 0 ? 1.5F : 0.5F + (float)(-48000 - i) / -48000.0F * 0.5F;
+    }
+    
+    /**
+     * "Sets the scale for an ageable entity according to the boolean parameter, which says if it's a child."
+     */
+    public void setScaleForAge(boolean isChild)
+    {
+        if (isChild)
+        {
+            this.setScale(this.getEntitySize());
+        }
+        else
+        {
+            this.setScale(1.5F);
+        }
+    }
 
+    /**
+     * "Adds the value of the parameter times 20 to the age of this entity. If the entity is an adult (if the entity's
+     * age is greater than 0), it will have no effect."
+     */
+    public void addGrowth(int p_110195_1_)
+    {
+        int j = this.getGrowingAge();
+        j += p_110195_1_ * 20;
+
+        if (j > 0)
+        {
+            j = 0;
+        }
+
+        this.setGrowingAge(j);
+    }
+    
+    public boolean isAdult()
+    {
+        return !this.isChild();
+    }
+    
+    /**
+     * Determines whether this wolf is angry or not.
+     */
+    public boolean isAngry()
+    {
+        return (this.dataWatcher.getWatchableObjectByte(ANGRYSTATE) & 2) != 0;
+    }
+
+    /**
+     * Sets whether this wolf is angry or not.
+     */
+    public void setAngry(boolean isAngry)
+    {
+        byte b0 = this.dataWatcher.getWatchableObjectByte(ANGRYSTATE);
+
+        if (isAngry)
+        {
+            this.dataWatcher.updateObject(ANGRYSTATE, Byte.valueOf((byte)(b0 | 2)));
+            this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.4D);
+        }
+        else
+        {
+            this.dataWatcher.updateObject(ANGRYSTATE, Byte.valueOf((byte)(b0 & -3)));
+            this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.3D);
+        }
+    }
 }

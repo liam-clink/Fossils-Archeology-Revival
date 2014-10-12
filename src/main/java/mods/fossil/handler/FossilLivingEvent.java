@@ -2,6 +2,7 @@ package mods.fossil.handler;
 
 import java.util.Random;
 
+import mods.fossil.entity.mob.EntityElasmotherium;
 import mods.fossil.entity.mob.EntityMammoth;
 import mods.fossil.entity.mob.EntityPregnantCow;
 import mods.fossil.entity.mob.EntityPregnantHorse;
@@ -221,6 +222,10 @@ public class FossilLivingEvent {
 
         case Mammoth:
             birthEntity = (new EntityMammoth(event.entityLiving.worldObj)).Imprinting(event.entityLiving.posX, event.entityLiving.posY, event.entityLiving.posZ);
+            break;
+            
+        case Elasmotherium:
+            birthEntity = (new EntityElasmotherium(event.entityLiving.worldObj)).Imprinting(event.entityLiving.posX, event.entityLiving.posY, event.entityLiving.posZ);
             break;
             
         case Quagga:

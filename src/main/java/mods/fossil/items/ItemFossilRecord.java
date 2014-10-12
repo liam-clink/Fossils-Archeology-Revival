@@ -40,7 +40,7 @@ public class ItemFossilRecord extends ItemRecord
      */
     public ResourceLocation getRecordResource(String name)
     {
-        return new ResourceLocation(Fossil.modid + ":" + "record_bones_disc");
+        return new ResourceLocation(Fossil.modid + ":" + "record_bones");
     }
 
 }

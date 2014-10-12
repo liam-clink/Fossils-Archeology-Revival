@@ -481,6 +481,11 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
                 	itemstack = new ItemStack(Fossil.dnaTerrorBird, 1);
                 }
 
+                if (rand >= 80 && rand < 90)
+                {
+                	itemstack = new ItemStack(Fossil.dnaElasmotherium, 1);
+                }
+                
                 if (itemstack == null)
                 {
                     itemstack = new ItemStack(Items.beef);

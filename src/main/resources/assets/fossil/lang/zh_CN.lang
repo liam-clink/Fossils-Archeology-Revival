@@ -1,6 +1,6 @@
-#Build 6.4 - Updated August 28 2014
+#Build 7.0 - Updated September 22 2014
 #Simplified Chinese (zh_CN) Localization File
-#Keys last updated August 28 2014
+#Keys last updated October 5 2014
 #创造模式标签
 itemgroup.FCombat=古代装备
 itemgroup.FBlocks=古代方块
@@ -21,7 +21,7 @@ achievement.ArchWorkbench=让我们开始派对吧!
 achievement.Analyzer=为了科学!
 achievement.CultVat=基因操作.
 achievement.Sifter=宝贝，因为我是一个淘金者!
-achievement.Dinopedia=恐龙百科已经写满了!
+achievement.Dinopedia=写满恐龙百科!
 achievement.IceAge=我不知道你该怎么生仔...
 achievement.TheKing=晚白垩世统治者.
 
@@ -84,10 +84,10 @@ tile.sifter.name=筛子
 tile.volcanicStairs.name=火山岩楼梯
 tile.volcanicSlab.volcanicBrick.name=火山岩台阶
 tile.volcanicSlabDouble.volcanicBrick.name=火山岩台阶
-tile.ancientWoodSlab.ancientWood.name=古代木制台阶
-tile.ancientWoodDoubleSlab.ancientWood.name=古代木制台阶
-tile.ancientStoneSlab.ancientStone.name=古代石制台阶
-tile.ancientStoneDoubleSlab.ancientStone.name=古代石制台阶
+tile.ancientWoodSlab.ancientWood.name=古代木头台阶
+tile.ancientWoodDoubleSlab.ancientWood.name=古代木头台阶
+tile.ancientStoneSlab.ancientStone.name=古代石头台阶
+tile.ancientStoneDoubleSlab.ancientStone.name=古代石头台阶
 
 #Collectables
 tile.figurine.figurine_steve_pristine.name=质朴史蒂夫雕像
@@ -384,10 +384,11 @@ item.dnaChicken.name=鸡DNA
 item.dnaSmilodon.name=剑齿虎DNA
 item.dnaMammoth.name=猛犸象DNA
 item.dnaDodo.name=渡渡鸟DNA
-item.dnaHorse.name=骂胚胎
-item.dnaQuagga.name=斑驴胚胎
+item.dnaHorse.name=马DNA
+item.dnaQuagga.name=斑驴DNA
 item.dnaTerrorBird.name=恐鸟DNA
 item.dnaAllosaurus.name=异特龙DNA
+item.dnaElasmotherium.name=Elasmotherium DNA
 item.embryoPig.name=猪胚胎
 item.embryoSheep.name=羊胚胎
 item.embryoCow.name=牛胚胎
@@ -395,8 +396,9 @@ item.embryoChicken.name=鸡胚胎
 item.embryoSmilodon.name=剑齿虎胚胎
 item.embryoMammoth.name=猛犸象胚胎
 item.embryoDodo.name=渡渡鸟胚胎
-item.embryoHorse.name=骂胚胎
+item.embryoHorse.name=马胚胎
 item.embryoQuagga.name=斑驴胚胎
+item.embryoElasmotherium.name=Elasmotherium Embryo
 item.archNotebook.name=考古手册
 item.potteryShard.name=陶片
 item.terrorBirdMeat.name=生恐鸟腿
@@ -430,7 +432,7 @@ status.Starve=饿死了
 status.LearningChest.head=一头
 status.LearningChest=学会了如何开箱子
 status.Betrayed.head=这头
-status.Betrayed=不会再相信人类了
+status.Betrayed=不再相信人類
 status.NoSpace.head=
 status.NoSpace=没有足够的空间成长
 status.StarveEsc.head=
@@ -477,6 +479,7 @@ entity.fossil.Dodo.name=渡渡鸟
 entity.fossil.Coelacanth.name=腔棘鱼
 entity.fossil.Quagga.name=斑驴
 entity.fossil.TerrorBird.name=恐鸟
+entity.fossil.Elasmotherium.name=Elasmotherium
 
 #百科文本.恐龙信息.
 pedia.text.owner=主人:
@@ -504,6 +507,7 @@ pedia.embryo.Mammoth=猛犸象
 pedia.embryo.Dodo=渡渡鸟
 pedia.embryo.Horse=马
 pedia.embryo.Quagga=斑驴
+pedia.embryo.Elasmotherium=Elasmotherium
 
 #阿努对白
 anuSpeaker.self=阿努: 

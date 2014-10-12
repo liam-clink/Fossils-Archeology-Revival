@@ -12,6 +12,7 @@ import mods.fossil.entity.EntityDinoEgg;
 import mods.fossil.entity.mob.EntityCoelacanth;
 import mods.fossil.entity.mob.EntityDinosaur;
 import mods.fossil.entity.mob.EntityDodo;
+import mods.fossil.entity.mob.EntityElasmotherium;
 import mods.fossil.entity.mob.EntityTerrorBird;
 import mods.fossil.entity.mob.EntityMammoth;
 import mods.fossil.entity.mob.EntityNautilus;
@@ -294,6 +295,11 @@ public class GuiPedia extends GuiContainer
 	        {
 	            ((EntityMammoth)Fossil.ToPedia).ShowPedia(this);
 	        }
+	        
+	        if (Fossil.ToPedia instanceof EntityElasmotherium)
+	        {
+	            ((EntityElasmotherium)Fossil.ToPedia).ShowPedia(this);
+	        }
 	
 	        if (Fossil.ToPedia instanceof EntitySmilodon)
 	        {
@@ -332,10 +338,15 @@ public class GuiPedia extends GuiContainer
 			    ((EntityDinosaur)Fossil.ToPedia).ShowPedia2(this);
 			}
 			
+			if (Fossil.ToPedia instanceof EntityElasmotherium)
+			{
+			    ((EntityElasmotherium)Fossil.ToPedia).ShowPedia2(this);
+			}
+			
 			if (Fossil.ToPedia instanceof EntityMammoth)
 			{
 			    ((EntityMammoth)Fossil.ToPedia).ShowPedia2(this);
-			}
+			}	
 			
 			if (Fossil.ToPedia instanceof EntitySmilodon)
 			{

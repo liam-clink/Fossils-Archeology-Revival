@@ -405,6 +405,7 @@ public class EntityDilophosaurus extends EntityDinosaur
                     this.SendStatusMessage(EnumSituation.Betrayed);
                     this.setTamed(false);
                     this.setOwner("");
+                    this.setOwnerDisplayName("");
                     this.ItemInMouth = null;
                     this.setAngry(true);
                     this.setTarget(entity);

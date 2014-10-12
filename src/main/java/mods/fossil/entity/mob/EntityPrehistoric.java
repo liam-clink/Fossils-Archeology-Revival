@@ -6,11 +6,13 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import mods.fossil.client.gui.GuiPedia;
+import mods.fossil.fossilEnums.EnumOrderType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
@@ -21,6 +23,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class EntityPrehistoric extends EntityTameable {
     
+    public static final int OWNER_DISPLAY_NAME_INDEX = 24;
+    
     protected static final ResourceLocation pediaclock = new ResourceLocation("fossil:textures/gui/PediaClock.png");
     protected static final ResourceLocation pediafood = new ResourceLocation("fossil:textures/gui/PediaFood.png");
     protected static final ResourceLocation pediaheart = new ResourceLocation("fossil:textures/gui/PediaHeart.png");
@@ -29,6 +33,13 @@ public class EntityPrehistoric extends EntityTameable {
 	public EntityPrehistoric(World par1World) {
 		super(par1World);
 	}
+	
+    protected void entityInit()
+    {
+        super.entityInit();
+        this.dataWatcher.addObject(OWNER_DISPLAY_NAME_INDEX, "");
+
+    }
 	
     /**
      * Override this and set temporary variables to the attributes.
@@ -53,6 +64,35 @@ public class EntityPrehistoric extends EntityTameable {
         getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(1.0D);
         getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.0D);
         
+    }
+    
+    /**
+     * (abstract) Protected helper method to write subclass entity data to NBT.
+     */
+    public void writeEntityToNBT(NBTTagCompound compound)
+    {
+        super.writeEntityToNBT(compound);
+        compound.setString("OwnerDisplayName", this.getOwnerDisplayName());  
+    }
+
+    /**
+     * (abstract) Protected helper method to read subclass entity data from NBT.
+     */
+    public void readEntityFromNBT(NBTTagCompound compound)
+    {
+        String s = "";
+        
+        if (compound.hasKey("Owner", 8))
+        {
+            s = compound.getString("Owner");
+            this.setOwnerDisplayName(s);
+        }
+        else
+        {
+            this.setOwnerDisplayName(compound.getString("OwnerDisplayName"));
+        }
+        
+        super.readEntityFromNBT(compound);
     }
 
 	@Override
@@ -112,6 +152,23 @@ public class EntityPrehistoric extends EntityTameable {
     		p0.AddStringLR(translatePath + bioFile, 150, false);
 			GL11.glPopMatrix();
     	}
+    }
+
+	public void onWhipRightClick() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+    
+    public String getOwnerDisplayName()
+    {
+        String s = this.dataWatcher.getWatchableObjectString(OWNER_DISPLAY_NAME_INDEX);
+        return s;
+    }
+
+    public void setOwnerDisplayName(String displayName)
+    {
+        this.dataWatcher.updateObject(OWNER_DISPLAY_NAME_INDEX, displayName);
     }
     
 }

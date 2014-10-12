@@ -341,11 +341,6 @@ public class EntityTRex extends EntityDinosaur
 
         
     }
-
-    public void setOwner(String p_152120_1_)
-    {
-        this.dataWatcher.updateObject(17, p_152120_1_);
-    }
     
     /**
      * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
@@ -367,6 +362,7 @@ public class EntityTRex extends EntityDinosaur
                     setPathToEntity(null);
                     setAttackTarget(null);
                     this.setOwner(player.getUniqueID().toString());
+                    this.setOwnerDisplayName(player.getCommandSenderName());
                     --itemStack.stackSize;
 
                     if (itemStack.stackSize <= 0)

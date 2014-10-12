@@ -51,12 +51,6 @@ public class DinoAIRideGround extends DinoAIRide
         return itemStack.getItem() == item;
     }
     
-    @Override
-    public void startExecuting()
-    {
-        dinosaur.getNavigator().clearPathEntity();
-        this.lastTimeSeenWhip=-1;
-    }
     
     public boolean shouldExecute()
     {
@@ -64,9 +58,17 @@ public class DinoAIRideGround extends DinoAIRide
     	if ( hasEquipped(rider, Fossil.whip) )
     		this.lastTimeSeenWhip=0;
 
-    	return this.lastTimeSeenWhip != -1;
+    	return this.lastTimeSeenWhip != -1 && this.dinosaur.riddenByEntity != null;
     	
     }
+    
+    @Override
+    public void startExecuting()
+    {
+        dinosaur.getNavigator().clearPathEntity();
+        this.lastTimeSeenWhip=-1;
+    }
+
 
     @Override
     public void resetTask()

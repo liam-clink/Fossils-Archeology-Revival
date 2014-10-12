@@ -700,19 +700,43 @@ public class EntitySmilodon extends EntityPrehistoric
         p0.PrintStringXY(String.valueOf(this.getHealth()) + '/' + this.getMaxHealth(), p0.rightIndent+12, 58);
 
         //Display owner name
-        if (this.isTamed() && this.getOwner() != null)
-        {
-	        p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_OWNER), true);
-	        if (this.isTamed())
+        if (this.isTamed())
+    	{
+        	if(this.getOwnerDisplayName().length() > 0)
 	        {
-	            String s0 = String.valueOf(this.getOwner().getCommandSenderName());
+	            p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_OWNER), true);
+	            
+	////////////1.7.10 BLOCK //////////////
+	            
+	            String s0 = String.valueOf(this.getOwnerDisplayName());
 	            if (s0.length() > 11)
 	            {
-	                s0 = this.getOwner().getCommandSenderName().substring(0, 11);
+	                s0 = this.getOwnerDisplayName().substring(0, 11);
 	            }
 	            
 	            p0.AddStringLR(s0, true);
+	///////////////////////////////////////
+	            
+	////////////1.7.2 BLOCK //////////////      
+	            /*
+	            String s0 = this.getOwnerName();
+	            if (s0.length() > 11)
+	            {
+	                s0 = this.getOwnerName().substring(0, 11);
+	            }
+	            
+	            p0.AddStringLR(s0, true);
+	            */
+	///////////////////////////////////////
 	        }
+        	else
+        	{
+	            p0.AddStringLR(StatCollector.translateToLocal("Tamed"), true);
+        	}
+    	}
+        else
+        {
+            p0.AddStringLR(StatCollector.translateToLocal("Untamed"), true);
         }
     }
     
@@ -777,16 +801,17 @@ public class EntitySmilodon extends EntityPrehistoric
 
     public EntityAnimal procreate(EntityAnimal var1)
     {
-        EntitySmilodon var2 = new EntitySmilodon(this.worldObj);
+        EntitySmilodon smilodon = new EntitySmilodon(this.worldObj);
 
         if (this.isTamed())
         {
         	this.func_152115_b(this.getOwner().getUniqueID().toString());
     //        var2.setOwner);
-            var2.setTamed(true);
+            smilodon.setTamed(true);
+
         }
 
-        return var2;
+        return smilodon;
     }
     
     public EntitySmilodon Imprinting(double var1, double var3, double var5)

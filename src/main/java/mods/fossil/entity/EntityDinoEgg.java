@@ -761,11 +761,12 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
                 if(var5 instanceof EntityDinosaur){
 	                if (((EntityDinosaur)var5).SelfType.isTameable() && player != null)
 	                {
-	                	if(((EntityDinosaur)var5).SelfType != EnumDinoType.TRex){
+	                	if(((EntityDinosaur)var5).SelfType != EnumDinoType.TRex || ((EntityDinosaur)var5).SelfType != EnumDinoType.Allosaurus){
 	                    // Tameable and player next to it
 	                        ((EntityDinosaur)var5).setTamed(true);
 	                		((EntityDinosaur)var5).setOwner(player.getUniqueID().toString());
-	
+	                		((EntityDinosaur)var5).setOwnerDisplayName(player.getCommandSenderName());
+
 	                	}
 	                }
                 }

@@ -162,6 +162,7 @@ public class LocalizationStrings
     public static final String DNA_HORSE_NAME = "dnaHorse";
     public static final String DNA_QUAGGA_NAME = "dnaQuagga";
     public static final String DNA_TERROR_BIRD_NAME = "dnaTerrorBird";
+	public static final String DNA_ELASMOTHERIUM_NAME = "dnaElasmotherium";
 
     //Embryo
     public static final String EMBRYO_PIG_NAME = "embryoPig";
@@ -173,6 +174,7 @@ public class LocalizationStrings
     public static final String EMBRYO_DODO_NAME = "embryoDodo";
     public static final String EMBRYO_HORSE_NAME = "embryoHorse";
     public static final String EMBRYO_QUAGGA_NAME = "embryoQuagga";
+    public static final String EMBRYO_ELASMOTHERIUM_NAME = "embryoElasmotherium";
     
     //Non Dino Eggs
     public static final String  EGG_TerrorBird_NAME = "eggTerrorBird";
@@ -221,6 +223,7 @@ public class LocalizationStrings
     public static final String PEDIA_EMBRYO_DODO = "pedia.embryo.dodo";
     public static final String PEDIA_EMBRYO_HORSE = "pedia.embryo.horse";
     public static final String PEDIA_EMBRYO_QUAGGA = "pedia.embryo.quagga";
+    public static final String PEDIA_EMBRYO_ELASMOTHERIUM = "pedia.embryo.elasmotherium";
 
     //Dino Egg Messages
     public static final String DINOEGG_HATCHED = "dinoegg.hatched";
@@ -249,6 +252,7 @@ public class LocalizationStrings
     public static final String ANIMAL_PREGNANT_HORSE = "entity.fossil.PregnantHorse.name";
     public static final String ANIMAL_QUAGGA = "entity.fossil.Quagga.name";
     public static final String ANIMAL_TERROR_BIRD = "entity.fossil.TerrorBird.name";
+    public static final String ANIMAL_ELASMOTHERIUM = "entity.fossil.Elasmotherium.name";
 
     //Trex scarab messages
     public static final String STATUS_GEM_ERROR_YOUNG = "status.GemErrorYoung";
@@ -271,7 +275,7 @@ public class LocalizationStrings
     public static final String MOB_BONES = "entity.fossil.Bones.name";
 
     //Fossil records
-    public static final String FOSSIL_RECORD_NAME = "record_bones_disc";
+    public static final String FOSSIL_RECORD_NAME = "record_bones";
     public static final String RECORD_BONES_NAME = "record_bones_disc";
     public static final String FOSSILRECORD2_NAME = "record_jp_theme";
 

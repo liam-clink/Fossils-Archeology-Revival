@@ -121,7 +121,7 @@ public class EntityPachycephalosaurus extends EntityDinosaur
         int offsetZ = target.posZ > this.posZ ? amount : -amount;
 
         target.motionZ = (double)(offsetZ);
-        target.motionZ = (double)(offsetX);
+        target.motionX = (double)(offsetX);
         //target.setVelocity((double)(offsetX), target.motionY, (double)(offsetZ));
     }
 
@@ -199,6 +199,20 @@ public class EntityPachycephalosaurus extends EntityDinosaur
         if (this.looksWithInterest)
         {
             this.numTicksToChaseTarget = 10;
+        }
+    }
+    
+    /**
+     * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
+     * use this to react to sunlight and start to burn.
+     */
+    public void onLivingUpdate()
+    {
+        super.onLivingUpdate();
+
+        if (this.attackTimer > 0)
+        {
+            --this.attackTimer;
         }
     }
 

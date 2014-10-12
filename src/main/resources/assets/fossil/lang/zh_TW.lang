@@ -1,6 +1,6 @@
-﻿#Build 6.4 - Updated August 6 2014
+﻿#Build 7.0 - Updated August 6 2014
 #Traditional Chinese (zh_TW) Localization File
-#Keys last updated August 28 2014
+#Keys last updated October 5 2014
 #創造模式標簽
 itemgroup.FCombat=古代裝備
 itemgroup.FBlocks=古代方塊
@@ -388,6 +388,7 @@ item.dnaHorse.name=Horse DNA
 item.dnaQuagga.name=Quagga DNA
 item.dnaTerrorBird.name=Terror Bird DNA
 item.dnaAllosaurus.name=Allosaurus DNA
+item.dnaElasmotherium.name=Elasmotherium DNA
 item.embryoPig.name=豬胚胎
 item.embryoSheep.name=羊胚胎
 item.embryoCow.name=牛胚胎
@@ -397,6 +398,7 @@ item.embryoMammoth.name=猛犸象胚胎
 item.embryoDodo.name=渡渡鳥胚胎
 item.embryoHorse.name=Horse Embryo
 item.embryoQuagga.name=Quagga Embryo
+item.embryoElasmotherium.name=Elasmotherium Embryo
 item.archNotebook.name=考古手冊
 item.potteryShard.name=Pottery Shard
 item.terrorBirdMeat.name=Raw Terror Bird Leg
@@ -477,6 +479,7 @@ entity.fossil.Dodo.name=渡渡鳥
 entity.fossil.Coelacanth.name=Coelacanth
 entity.fossil.Quagga.name=Quagga
 entity.fossil.TerrorBird.name=Terror Bird
+entity.fossil.Elasmotherium.name=Elasmotherium
 
 #百科文本.恐龍信息.
 pedia.text.owner=主人:
@@ -504,6 +507,7 @@ pedia.embryo.Mammoth=猛犸象
 pedia.embryo.Dodo=渡渡鳥
 pedia.embryo.Horse=Horse
 pedia.embryo.Quagga=Quagga
+pedia.embryo.Elasmotherium=Elasmotherium
 
 #阿努對白
 anuSpeaker.self=阿努: 

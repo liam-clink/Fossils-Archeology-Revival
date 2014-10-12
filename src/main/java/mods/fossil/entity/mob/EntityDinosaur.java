@@ -55,13 +55,14 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public abstract class EntityDinosaur extends EntityPrehistoric implements IEntityAdditionalSpawnData
 {
-    //public static final int OWNER_NAME_DATA_INDEX = 17;
+    public static final int OWNER_NAME_DATA_INDEX = 17;
     public static final int HUNGER_TICK_DATA_INDEX = 18;
     public static final int HUNGER_DATA_INDEX = 19;
     public static final int AGE_TICK_DATA_INDEX = 20;
     public static final int AGE_DATA_INDEX = 21;
     public static final int SUBSPECIES_INDEX = 22;
     public static final int MODELIZED_INDEX = 23;
+
 
     public static final byte HEART_MESSAGE = 35;
     public static final byte SMOKE_MESSAGE = 36;
@@ -225,8 +226,6 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
 //                this.getTexture = this.getModelTexture();
         }
     }
-    
-    
 
     protected void entityInit()
     {
@@ -553,41 +552,50 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
         p0.PrintStringXY(String.valueOf(this.getHunger()) + '/' + this.getMaxHunger(), p0.rightIndent+12, 70);
 
         //Display owner name
-        if (this.SelfType.isTameable() && this.isTamed() && this.getOwner() != null)
-        {
-            p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_OWNER), true);
-            
-////////////1.7.10 BLOCK //////////////
-            
-            String s0 = String.valueOf(this.getOwner().getCommandSenderName());
-            if (s0.length() > 11)
-            {
-                s0 = this.getOwner().getCommandSenderName().substring(0, 11);
-            }
-            
-            p0.AddStringLR(s0, true);
-///////////////////////////////////////
-            
-////////////1.7.2 BLOCK //////////////      
-            /*
-            String s0 = this.getOwnerName();
-            if (s0.length() > 11)
-            {
-                s0 = this.getOwnerName().substring(0, 11);
-            }
-            
-            p0.AddStringLR(s0, true);
-            */
-///////////////////////////////////////
-        }
-
+        if (this.SelfType.isTameable() && this.isTamed())
+        	{
+	        	if(this.getOwnerDisplayName().length() > 0)
+		        {
+		            p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_OWNER), true);
+		            
+		////////////1.7.10 BLOCK //////////////
+		            
+		            String s0 = String.valueOf(this.getOwnerDisplayName());
+		            if (s0.length() > 11)
+		            {
+		                s0 = this.getOwnerDisplayName().substring(0, 11);
+		            }
+		            
+		            p0.AddStringLR(s0, true);
+		///////////////////////////////////////
+		            
+		////////////1.7.2 BLOCK //////////////      
+		            /*
+		            String s0 = this.getOwnerName();
+		            if (s0.length() > 11)
+		            {
+		                s0 = this.getOwnerName().substring(0, 11);
+		            }
+		            
+		            p0.AddStringLR(s0, true);
+		            */
+		///////////////////////////////////////
+		        }
+	        	else
+	        	{
+		            p0.AddStringLR(StatCollector.translateToLocal("Tamed"), true);
+	        	}
+        	}
+	        else
+	        {
+	            p0.AddStringLR(StatCollector.translateToLocal("Untamed"), true);
+	        }
         //Display if Rideable
         if (this.SelfType.isRideable() && this.isAdult())
             p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_RIDEABLE), true);
 
         if (this.SelfType.OrderItem != null)
         p0.AddStringLR(StatCollector.translateToLocal("Order: " + (new ItemStack(this.SelfType.OrderItem)).getDisplayName()), true);
-
         
         for (int i = 0; i < this.SelfType.FoodItemList.index; i++)
         {
@@ -638,6 +646,14 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
 			GL11.glScalef(0.5F, 0.5F, 0.5F);
     		p0.AddStringLR(translatePath + bioFile, 150, false);
 			GL11.glPopMatrix();
+    	}
+    	
+    	//Add debug info on left side
+    	if(Fossil.DebugMode())
+    	{
+        p0.AddStringLR(StatCollector.translateToLocal("Command: " + this.getOrderType()), true);
+
+        p0.AddStringLR(StatCollector.translateToLocal("Sitting: " + this.isSitting()), true);
     	}
     }
     
@@ -720,12 +736,11 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
     /**
      * Tells if the dino is sitting
      */
-    /*
+    
     public boolean isSitting()
     {
-        return this.OrderStatus == EnumOrderType.Stay;
+        return this.getOrderType() == EnumOrderType.Stay;
     }
-    */
     
     public boolean canBePushed(){
     	return !this.isSitting();
@@ -736,7 +751,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
      */
     protected boolean isMovementCeased()
     {
-        return this.OrderStatus == EnumOrderType.Stay;
+        return this.getOrderType() == EnumOrderType.Stay;
     }
 
     public Vec3 getBlockToEat(int SEARCH_RANGE)
@@ -819,7 +834,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
             if (this.BreedTick == 0)
             {
                 int PartnerCount = 0;
-                List list = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.expand(32.0D, 32.0D, 32.0D));
+                List list = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.expand(16.0D, 16.0D, 16.0D));
 
                 for (int i = 0; i < list.size(); i++)
                 {
@@ -832,16 +847,16 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
                             ++PartnerCount;
                         }
 
-                        if (PartnerCount > 30)//There are too many already
+                        if (PartnerCount > 20)//There are too many already
                         {
                             return;
                         }
                     }
                 }
 
-                if (PartnerCount > 20)//More won't help
+                if (PartnerCount > 10)//More won't help
                 {
-                    PartnerCount = 20;
+                    PartnerCount = 10;
                 }
 
                 if ((new Random()).nextInt(100) < PartnerCount)
@@ -1260,18 +1275,17 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
-    public void writeEntityToNBT(NBTTagCompound var1)
+    public void writeEntityToNBT(NBTTagCompound compound)
     {
-        super.writeEntityToNBT(var1);
-        var1.setBoolean("isModelized", this.isModelized());
-        var1.setBoolean("Angry", this.isAngry());
-        var1.setInteger("Hunger", this.getHunger());
-        var1.setInteger("HungerTick", this.getHungerTick());
-        var1.setInteger("DinoAge", this.getDinoAge());
-        var1.setInteger("AgeTick", this.getDinoAgeTick());
-        var1.setInteger("SubSpecies", this.getSubSpecies());
-        var1.setByte("OrderStatus", (byte)this.OrderStatus.ordinal()/*(byte)Fossil.EnumToInt(this.OrderStatus)*/);
-
+        super.writeEntityToNBT(compound);
+        compound.setBoolean("isModelized", this.isModelized());
+        compound.setBoolean("Angry", this.isAngry());
+        compound.setInteger("Hunger", this.getHunger());
+        compound.setInteger("HungerTick", this.getHungerTick());
+        compound.setInteger("DinoAge", this.getDinoAge());
+        compound.setInteger("AgeTick", this.getDinoAgeTick());
+        compound.setInteger("SubSpecies", this.getSubSpecies());
+        compound.setByte("OrderStatus", (byte)this.OrderStatus.ordinal()/*(byte)Fossil.EnumToInt(this.OrderStatus)*/);
         /*
         if (this.ItemInMouth != null)
         {
@@ -1285,47 +1299,25 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
             var1.setByte("ItemCount", (byte)0);
             var1.setShort("ItemDamage", (short)0);
         }
-        */
-
-        /*
-        if (this.getOwner() == null)
-        {
-            var1.setString("OwnerUUID", "");
-        }
-        else
-        {
-            var1.setString("OwnerUUID", this.getOwnerName());
-        }
-        */
-        if (this.func_152113_b() == null)
-        {
-            var1.setString("OwnerUUID", "");
-        }
-        else
-        {
-            var1.setString("OwnerUUID", this.func_152113_b());
-        }
-
-        
+        */      
     }
 
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
-    public void readEntityFromNBT(NBTTagCompound var1)
+    public void readEntityFromNBT(NBTTagCompound compound)
     {
-        super.readEntityFromNBT(var1);
-        this.setModelized(var1.getBoolean("isModelized"));
-        this.setAngry(var1.getBoolean("Angry"));
-        this.setDinoAge(var1.getInteger("DinoAge"));
-        this.setDinoAgeTick(var1.getInteger("AgeTick"));
-        this.setHunger(var1.getInteger("Hunger"));
-        this.setHungerTick(var1.getInteger("HungerTick"));
-        this.setSubSpecies(var1.getInteger("SubSpecies"));
-        short var3 = var1.getShort("Itemid");
-        byte var4 = var1.getByte("ItemCount");
-        short var5 = var1.getShort("ItemDamage");
-
+        super.readEntityFromNBT(compound);
+        this.setModelized(compound.getBoolean("isModelized"));
+        this.setAngry(compound.getBoolean("Angry"));
+        this.setDinoAge(compound.getInteger("DinoAge"));
+        this.setDinoAgeTick(compound.getInteger("AgeTick"));
+        this.setHunger(compound.getInteger("Hunger"));
+        this.setHungerTick(compound.getInteger("HungerTick"));
+        this.setSubSpecies(compound.getInteger("SubSpecies"));
+        short var3 = compound.getShort("Itemid");
+        byte var4 = compound.getByte("ItemCount");
+        short var5 = compound.getShort("ItemDamage");
         /*
         if (var3 != -1)
         {
@@ -1337,33 +1329,8 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
         }
         */
 
-        /*if (this.getHunger() <= 0)
-        {
-            this.setHunger(this.getMaxHunger());
-        }*/
-        this.OrderStatus = EnumOrderType.values()[var1.getByte("OrderStatus")];
-        
-        /*
-        String var2 = var1.getString("OwnerUUID");
-
-        if (var2.length() > 0)
-        {
-            this.func_152115_b(var2);
-            this.setTamed(true);
-        }
-        */
-        
-        String s = "";
-        
-        if (var1.hasKey("OwnerUUID", 8))
-        {
-            s = var1.getString("OwnerUUID");
-        }
-        else
-        {
-            String s1 = var1.getString("Owner");
-            s = PreYggdrasilConverter.func_152719_a(s1);
-        }
+        this.SetOrder(EnumOrderType.values()[compound.getByte("OrderStatus")]);
+        //this.OrderStatus = EnumOrderType.values()[compound.getByte("OrderStatus")];
 
         //this.updateSize();
         //this.worldObj.setEntityState(this, this.AGING_MESSAGE);//This seems to be in client-> senseless
@@ -1403,6 +1370,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
     		        this.HandleBreed();
     			}
     		}
+            
 	        super.onLivingUpdate();
     	}
     }
@@ -1497,6 +1465,9 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
                             {
                                 this.setTamed(true);
                                 this.setOwner(player.getUniqueID().toString());
+
+                                this.setOwnerDisplayName(player.getCommandSenderName());
+                                    
                                 //showHeartsOrSmokeFX(true);
                                 this.worldObj.setEntityState(this, HEART_MESSAGE);
                             }
@@ -1562,7 +1533,8 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
                             && this.isAdult() && !this.worldObj.isRemote && this.riddenByEntity == null
                             &&  func_152114_e(player)) {
                     	this.setSitting(false);
-                    	this.OrderStatus = EnumOrderType.FreeMove;
+                    	this.SetOrder(EnumOrderType.FreeMove);
+                    	//this.OrderStatus = EnumOrderType.FreeMove;
                         setRidingPlayer(player);
                     }
 
@@ -1573,7 +1545,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
                         {
                             this.isJumping = false;
                             this.setPathToEntity((PathEntity)null);
-                            this.OrderStatus = EnumOrderType.values()[(this.OrderStatus.ordinal() + 1) % 3/*(Fossil.EnumToInt(this.OrderStatus) + 1) % 3*/];
+                            this.OrderStatus = EnumOrderType.values()[(this.OrderStatus.ordinal() + 1) % 3];
 
                             this.SendOrderMessage(this.OrderStatus);
 
@@ -1583,16 +1555,9 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
                                 this.setPathToEntity(null);
                                 this.setSitting(true);
                             }
-                            else if (this.OrderStatus == EnumOrderType.Follow)
-                            {
-                            	this.setSitting(false);
-                            	this.OrderStatus = EnumOrderType.Follow;
-                            }
                             else
                             {
-                            	this.setSitting(false);
-                            	this.OrderStatus = EnumOrderType.FreeMove;
-                            	
+                            	this.setSitting(false);                            	
                             }
                         }
 
@@ -1629,19 +1594,6 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
                     }
                 }
 */
-                if (this.SelfType.OrderItem == null && this.isTamed() && player == this.getOwner())
-                {
-                    //This dino is controlled without a special item
-                    if (!this.worldObj.isRemote)
-                    {
-                        this.isJumping = false;
-                        this.setPathToEntity((PathEntity)null);
-                        this.OrderStatus = EnumOrderType.values()[(this.OrderStatus.ordinal() + 1) % 3/*(Fossil.EnumToInt(this.OrderStatus) + 1) % 3*/];
-                        this.SendOrderMessage(this.OrderStatus);
-                    }
-
-                    return true;
-                }
 
                 /*
                 if (this.isTamed() && this.SelfType.isRideable() && this.isAdult() && !this.worldObj.isRemote && (this.riddenByEntity == null || this.riddenByEntity == player))
@@ -1659,9 +1611,9 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
         }
     }
 
-    public void setOwner(String p_152120_1_)
+    public void setOwner(String ownerName)
     {
-        this.dataWatcher.updateObject(17, p_152120_1_);
+        this.func_152115_b(ownerName);
     }
     
     //public void CheckSkin() {}
@@ -1706,6 +1658,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
     /**
      * Determines if an entity can be despawned, used on idle far away entities
      */
+    @Override
     protected boolean canDespawn()
     {
         return false;
@@ -1785,4 +1738,5 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
       * Override in dinosaur classes to create unique actions.
       */
     public void onWhipRightClick() {}
+
 }
