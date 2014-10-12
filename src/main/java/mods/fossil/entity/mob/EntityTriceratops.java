@@ -31,8 +31,6 @@ public class EntityTriceratops extends EntityDinosaur
 {
     private boolean looksWithInterest;
     public boolean Running = false;
-
-    final EntityAIControlledByPlayer aiControlledByPlayer;
     
     public static final double baseHealth = EnumDinoType.Triceratops.Health0;
     public static final double baseDamage = EnumDinoType.Triceratops.Strength0;
@@ -72,18 +70,9 @@ public class EntityTriceratops extends EntityDinosaur
         this.tasks.addTask(8, new DinoAIWander(this, 1.0D));
         this.tasks.addTask(9, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(10, new EntityAILookIdle(this));
-        tasks.addTask(1, new DinoAIRideGround(this, 1)); // mutex all
-        this.tasks.addTask(2, this.aiControlledByPlayer = new EntityAIControlledByPlayer(this, 0.3F));
+        tasks.addTask(1, new DinoAIRideGround(this, 1.1)); // mutex all
         
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
-    }
-
-    /**
-     * Return the AI task for player control.
-     */
-    public EntityAIControlledByPlayer getAIControlledByPlayer()
-    {
-        return this.aiControlledByPlayer;
     }
 
     protected void applyEntityAttributes()

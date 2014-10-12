@@ -501,7 +501,7 @@ public class EntityAllosaurus extends EntityDinosaur
     
     public float getMountHeight()
     {
-        return this.height*0.60F;
+        return this.height*0.70F;
     }
     
     public void updateRiderPosition()

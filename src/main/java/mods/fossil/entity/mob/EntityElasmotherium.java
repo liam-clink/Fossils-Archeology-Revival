@@ -560,7 +560,7 @@ public class EntityElasmotherium extends EntityPrehistoric
     {
         if (this.riddenByEntity != null)
         {
-            this.riddenByEntity.setPosition(this.posX, this.posY + (double)this.getMountHeight() + this.riddenByEntity.getYOffset(), this.posZ);
+            this.riddenByEntity.setPosition(this.posX, this.posY + (double)this.getMountHeight(), this.posZ);
         }
     }
 
