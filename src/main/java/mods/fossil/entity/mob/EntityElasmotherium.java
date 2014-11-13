@@ -246,7 +246,7 @@ public class EntityElasmotherium extends EntityPrehistoric
     public void readEntityFromNBT(NBTTagCompound compound)
     {
         super.readEntityFromNBT(compound);
-        compound.setInteger("ElasmotheriumSkin", this.getSkin());
+        this.setSkin(compound.getInteger("ElasmotheriumSkin"));
         this.setAngry(compound.getBoolean("Angry"));
 
     }
