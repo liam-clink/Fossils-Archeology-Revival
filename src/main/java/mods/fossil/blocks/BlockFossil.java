@@ -41,16 +41,19 @@ public class BlockFossil extends BlockStone
         
         if (i < 1)
         {
+        	this.randomMeta = 0;
             return Fossil.gem;
         }
 
         if (i < 6)
         {
+        	this.randomMeta = 0;
             return Fossil.brokenSword;
         }
 
         if (i < 11)
         {
+        	this.randomMeta = 0;
             return Fossil.brokenhelmet;
         }
 
@@ -112,24 +115,29 @@ public class BlockFossil extends BlockStone
 
         if (i < 50)
         {
+        	this.randomMeta = 0;
             return Item.getItemFromBlock(Fossil.blockSkull);
         }
 
         if (i < 350)
         {
+        	this.randomMeta = 0;
             return Fossil.biofossil;
         }
 
         if (i < 550)
         {
+        	this.randomMeta = 0;
             return Fossil.relic;
         }
 
         if (i < 900)
         {
+        	this.randomMeta = 0;
             return Items.bone;
         }
 
+        this.randomMeta = 0;
         return Item.getItemFromBlock(Blocks.cobblestone);
     }
     

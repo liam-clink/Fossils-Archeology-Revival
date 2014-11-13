@@ -23,6 +23,7 @@ public class ItemBioFossil extends Item
     {
         super();
         this.maxStackSize = 64;
+        this.setMaxDamage(0);
     }
 
     @Override
