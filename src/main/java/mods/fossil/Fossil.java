@@ -198,7 +198,7 @@ import cpw.mods.fml.relauncher.Side;
 public class Fossil
 {
     public static final String modid = "fossil";
-    public static final String modversion = "1.7.10 Build 7.0";
+    public static final String modversion = "1.7.10 Build 7.0.1a";
 
     /*
      * Set mod state here
@@ -206,7 +206,7 @@ public class Fossil
      * 1 = Beta build
      * 2 = Release build
      */
-    public static final int modState = 1;
+    public static final int modState = 2;
 
     @SidedProxy(clientSide = "mods.fossil.client.ClientProxy", serverSide = "mods.fossil.CommonProxy")
     public static CommonProxy proxy;

@@ -179,7 +179,7 @@ public class ModelSmilodon extends ModelBase
         {
             GL11.glPushMatrix();
             GL11.glScalef(2.0F, 2.0F, 2.0F);
-            GL11.glTranslatef(0.0F, -0.8F, 0.0F);
+            GL11.glTranslatef(0.0F, -0.7F, 0.0F);
             this.Head.render(var7);
             this.Nose.render(var7);
             this.UpperJaw.render(var7);
