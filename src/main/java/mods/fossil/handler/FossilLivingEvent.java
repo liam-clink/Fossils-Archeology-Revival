@@ -62,7 +62,6 @@ public class FossilLivingEvent {
 		 }   
 	}
 	
-	
 	@SubscribeEvent
 	public void onEntityLiving(LivingUpdateEvent event)
 	{

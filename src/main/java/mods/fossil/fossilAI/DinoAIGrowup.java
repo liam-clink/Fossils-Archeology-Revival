@@ -48,9 +48,12 @@ public class DinoAIGrowup extends EntityAIBase
         if (!this.AITarget.worldObj.isRemote)
         {
             this.AITarget.setPosition(this.AITarget.posX, this.AITarget.posY+1, this.AITarget.posZ);
-            if ( (this.AITarget.CheckSpace() && this.AITarget.SelfType != EnumDinoType.Mosasaurus && this.AITarget.SelfType != EnumDinoType.Liopleurodon) 
+            if ( (this.AITarget.CheckSpace() 
+            		&& this.AITarget.SelfType != EnumDinoType.Mosasaurus 
+            		&& this.AITarget.SelfType != EnumDinoType.Liopleurodon) 
             		|| (this.AITarget.isInWater() && this.AITarget.SelfType == EnumDinoType.Mosasaurus)
-            		|| (this.AITarget.isInWater() && this.AITarget.SelfType == EnumDinoType.Liopleurodon)	)
+            		|| (this.AITarget.isInWater() && this.AITarget.SelfType == EnumDinoType.Liopleurodon)
+            		|| (this.AITarget.isInWater() && this.AITarget.SelfType == EnumDinoType.Plesiosaur))
             {
                 this.AITarget.setDinoAgeTick(0);
                 this.AITarget.increaseDinoAge();
