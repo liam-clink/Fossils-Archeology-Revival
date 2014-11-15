@@ -74,6 +74,7 @@ public class FossilLivingEvent {
 			
 			if (props.Embryo != null)
 			{	
+				
 		        ++props.EmbryoProgress;
 		        this.getClass();
 
@@ -82,10 +83,6 @@ public class FossilLivingEvent {
 		        	GrowEntity(props.Embryo, event);
 		            props.EmbryoProgress = 0;
 		            props.SetEmbryo(null);
-		        }
-		        else
-		        {
-		            event.entityLiving.onLivingUpdate();
 		        }
 			}
 		}
@@ -96,6 +93,7 @@ public class FossilLivingEvent {
 			
 			if (props.Embryo != null)
 			{	
+				
 		        ++props.EmbryoProgress;
 		        this.getClass();
 
@@ -104,10 +102,6 @@ public class FossilLivingEvent {
 		        	GrowEntity(props.Embryo, event);
 		            props.EmbryoProgress = 0;
 		            props.SetEmbryo(null);
-		        }
-		        else
-		        {
-		            event.entityLiving.onLivingUpdate();
 		        }
 			}
 		}
@@ -127,10 +121,6 @@ public class FossilLivingEvent {
 		            props.EmbryoProgress = 0;
 		            props.SetEmbryo(null);
 		        }
-		        else
-		        {
-		            event.entityLiving.onLivingUpdate();
-		        }
 			}
 		}
 		
@@ -148,10 +138,6 @@ public class FossilLivingEvent {
 		        	GrowEntity(props.Embryo, event);
 		            props.EmbryoProgress = 0;
 		            props.SetEmbryo(null);
-		        }
-		        else
-		        {
-		            event.entityLiving.onLivingUpdate();
 		        }
 			}
 		}
