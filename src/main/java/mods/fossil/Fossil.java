@@ -198,7 +198,7 @@ import cpw.mods.fml.relauncher.Side;
 public class Fossil
 {
     public static final String modid = "fossil";
-    public static final String modversion = "1.7.10 Build 7.0.1a";
+    public static final String modversion = "1.7.10 Build 7.0.2a";
 
     /*
      * Set mod state here
@@ -366,7 +366,8 @@ public class Fossil
     public static Item terrorBirdMeatCooked;
     public static Item quaggaMeat;
     public static Item quaggaMeatCooked;
-
+    public static Item mammothMeat;
+    public static Item mammothMeatCooked;
     //Bones
     public static Item dinosaurModels;
     public static Item armBone;
@@ -573,7 +574,7 @@ public class Fossil
         ancientWoodStairs = new BlockFossilStairs(ancientWood, 0).setBlockName(LocalizationStrings.ANCIENT_WOOD_STAIRS_NAME);
         ancientWoodDoubleSlab = (BlockSlab) new BlockAncientWoodSlab(true).setHardness(1.4F).setResistance(7.5F).setStepSound(Block.soundTypeWood).setBlockName(LocalizationStrings.ANCIENT_WOOD_DOUBLESLAB_NAME);
         ancientWoodSingleSlab = (BlockSlab)new BlockAncientWoodSlab(false).setHardness(1.4F).setResistance(7.5F).setStepSound(Block.soundTypeWood).setBlockName(LocalizationStrings.ANCIENT_WOOD_SINGLESLAB_NAME).setCreativeTab(this.tabFBlocks);
-        ancientStoneStairs = new BlockFossilStairs(ancientStone, 0).setBlockName(LocalizationStrings.ANCIENT_STONE_STAIRS_NAME);
+        ancientStoneStairs = new BlockFossilStairs(ancientStonebrick, 0).setBlockName(LocalizationStrings.ANCIENT_STONE_STAIRS_NAME);
         ancientStoneDoubleSlab = (BlockSlab)new BlockAncientStoneSlab(true).setHardness(1.4F).setResistance(7.5F).setStepSound(Block.soundTypeWood).setBlockName(LocalizationStrings.ANCIENT_STONE_DOUBLESLAB_NAME);
         ancientStoneSingleSlab = (BlockSlab)new BlockAncientStoneSlab(false).setHardness(1.4F).setResistance(7.5F).setStepSound(Block.soundTypeWood).setBlockName(LocalizationStrings.ANCIENT_STONE_SINGLESLAB_NAME).setCreativeTab(this.tabFBlocks);
         marble  = new BlockMarble().setHardness(2.0F).setHardness(1.5F).setBlockName(LocalizationStrings.MARBLE_NAME);
@@ -708,6 +709,8 @@ public class Fossil
         terrorBirdMeatCooked = new ForgeFood(4, 0.8F, false, "TerrorBird/TerrorBird_Meat_Cooked").setUnlocalizedName(LocalizationStrings.TERROR_BIRD_MEAT_COOKED).setCreativeTab(this.tabFFood);
         quaggaMeat = new ForgeFood(2, 0.8F, false, "Quagga_Meat").setPotionEffect(Potion.hunger.id, 30, 0, 0.3F).setUnlocalizedName(LocalizationStrings.QUAGGA_MEAT).setCreativeTab(this.tabFFood);
         quaggaMeatCooked = new ForgeFood(7, 1F, false, "Quagga_Meat_Cooked").setUnlocalizedName(LocalizationStrings.QUAGGA_MEAT_COOKED).setCreativeTab(this.tabFFood);
+        mammothMeat = new ForgeFood(3, 0.8F, false, "Mammoth_Meat").setPotionEffect(Potion.hunger.id, 30, 0, 0.3F).setUnlocalizedName(LocalizationStrings.MAMMOTH_MEAT).setCreativeTab(this.tabFFood);
+        mammothMeatCooked = new ForgeFood(8, 1F, false, "Mammoth_Meat_Cooked").setUnlocalizedName(LocalizationStrings.MAMMOTH_MEAT_COOKED).setCreativeTab(this.tabFFood);
         
         // Music Discs
         fossilrecordBones = new ItemFossilRecord(LocalizationStrings.RECORD_BONES_NAME).setUnlocalizedName(LocalizationStrings.FOSSIL_RECORD_NAME);
@@ -805,6 +808,8 @@ public class Fossil
 		GameRegistry.registerItem(terrorBirdMeatCooked, LocalizationStrings.TERROR_BIRD_MEAT_COOKED);
 		GameRegistry.registerItem(quaggaMeat,LocalizationStrings.QUAGGA_MEAT);
 		GameRegistry.registerItem(quaggaMeatCooked,LocalizationStrings.QUAGGA_MEAT_COOKED);
+		GameRegistry.registerItem(mammothMeat,LocalizationStrings.MAMMOTH_MEAT);
+		GameRegistry.registerItem(mammothMeatCooked,LocalizationStrings.MAMMOTH_MEAT_COOKED);
 
 	
 		
