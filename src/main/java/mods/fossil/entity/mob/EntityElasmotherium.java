@@ -153,7 +153,10 @@ public class EntityElasmotherium extends EntityPrehistoric
     {
         if (this.isAngry() && this.getRNG().nextInt(5) == 0 && this.getEntityToAttack() == null)
         {
+        	if(entity instanceof EntityLivingBase)
+        	{
             this.attackEntityAsMob((EntityLivingBase)entity);
+        	}
         }
         super.collideWithEntity(entity);
     }
