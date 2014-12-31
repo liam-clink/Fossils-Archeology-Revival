@@ -3,6 +3,7 @@ package mods.fossil.guiBlocks;
 import java.util.Random;
 
 import mods.fossil.Fossil;
+import mods.fossil.client.LocalizationStrings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -32,10 +33,19 @@ public class BlockAnalyzer extends BlockContainer
     @SideOnly(Side.CLIENT)
     private IIcon Front;
 
-    public BlockAnalyzer(boolean var2)
+    public BlockAnalyzer(boolean isActive)
     {
         super(Material.iron);
-        this.isActive = var2;
+        setHardness(3.0F);
+        setStepSound(Block.soundTypeMetal);
+        this.isActive = isActive;
+        if(isActive) {
+        	setLightLevel(0.9375F);
+        	setBlockName(LocalizationStrings.BLOCK_ANALYZER_ACTIVE_NAME);
+        } else {
+        	setBlockName(LocalizationStrings.BLOCK_ANALYZER_IDLE_NAME);
+        	setCreativeTab(Fossil.tabFBlocks);
+        }
         //this.blockIndexInTexture = 45;
     }
 

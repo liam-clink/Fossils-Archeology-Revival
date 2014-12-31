@@ -41,10 +41,19 @@ public class BlockCultivate extends BlockContainer
     @SideOnly(Side.CLIENT)
     private IIcon Bottom;
 
-    public BlockCultivate(boolean var2)
+    public BlockCultivate(boolean isActive)
     {
         super(Material.glass);
-        this.isActive = var2;
+        setLightLevel(0.9375F);
+        setHardness(0.3F);
+        setStepSound(Block.soundTypeGlass);
+        this.isActive = isActive;
+        if(isActive) {
+        	setBlockName(LocalizationStrings.BLOCK_CULTIVATE_ACTIVE_NAME);
+        } else {
+        	setBlockName(LocalizationStrings.BLOCK_CULTIVATE_IDLE_NAME);
+        	setCreativeTab(Fossil.tabFBlocks);
+        }
     }
     
     public Item getItemDropped(int par1, Random rand, int par2)

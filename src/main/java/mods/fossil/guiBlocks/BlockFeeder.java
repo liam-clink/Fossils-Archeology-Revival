@@ -3,6 +3,7 @@ package mods.fossil.guiBlocks;
 import java.util.Random;
 
 import mods.fossil.Fossil;
+import mods.fossil.client.LocalizationStrings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -42,9 +43,17 @@ public class BlockFeeder extends BlockContainer
     
     private static final int DIRECTION_BITS = 3;
 
-    public BlockFeeder()
+    public BlockFeeder(boolean isActive)
     {
         super(Material.iron);
+        setHardness(3.5F);
+        setStepSound(Block.soundTypeStone);
+        if(isActive) {
+        	setBlockName(LocalizationStrings.FEEDER_ACTIVE_NAME);
+        } else {
+        	setBlockName(LocalizationStrings.FEEDER_ACTIVE_NAME);
+        	setCreativeTab(Fossil.tabFBlocks);
+        }
     }
 
     @SideOnly(Side.CLIENT)

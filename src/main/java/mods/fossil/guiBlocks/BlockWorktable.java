@@ -3,6 +3,7 @@ package mods.fossil.guiBlocks;
 import java.util.Random;
 
 import mods.fossil.Fossil;
+import mods.fossil.client.LocalizationStrings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -29,10 +30,18 @@ public class BlockWorktable extends BlockContainer
     private IIcon Bottom;
     private IIcon Side1;
 
-    public BlockWorktable(boolean var2)
+    public BlockWorktable(boolean isActive)
     {
         super(Material.rock);
-        this.isActive = var2;
+        setHardness(2.5F);
+        setStepSound(Block.soundTypeWood);
+        this.isActive = isActive;
+        if(isActive) {
+        	setBlockName(LocalizationStrings.BLOCK_WORKTABLE_ACTIVE_NAME);
+        } else {
+        	setBlockName(LocalizationStrings.BLOCK_WORKTABLE_IDLE_NAME);
+        	setCreativeTab(Fossil.tabFBlocks);
+        }
         //this.blockIndexInTexture = 45;
     }
 

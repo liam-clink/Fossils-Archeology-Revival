@@ -3,6 +3,7 @@ package mods.fossil.guiBlocks;
 import java.util.Random;
 
 import mods.fossil.Fossil;
+import mods.fossil.client.LocalizationStrings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -37,6 +38,14 @@ public class BlockSifter extends BlockContainer
     {
         super(Material.wood);
         this.isActive = isActive;
+        setHardness(3.0F);
+        setStepSound(Block.soundTypeMetal);
+        if(isActive) {
+        	setBlockName(LocalizationStrings.BLOCK_SIFTER_ACTIVE);
+        } else {
+        	setBlockName(LocalizationStrings.BLOCK_SIFTER_IDLE);
+        	setCreativeTab(Fossil.tabFBlocks);
+        }
     }
 
     /**
