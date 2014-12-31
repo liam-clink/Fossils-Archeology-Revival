@@ -23,8 +23,7 @@ public class BlockAncientStone extends Block
 	 * When this method is called, your block should register all the icons it needs with the given IconRegister. This
 	 * is the only chance you get to register icons.
 	 */
-	public void registerBlockIcons(IIconRegister par1IconRegister)
-	{
+	public void registerBlockIcons(IIconRegister par1IconRegister) {
 		this.blockIcon = par1IconRegister.registerIcon("fossil:Ancient_Stone");
 	}
 }
