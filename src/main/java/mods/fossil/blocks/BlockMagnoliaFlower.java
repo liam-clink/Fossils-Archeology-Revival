@@ -2,11 +2,11 @@ package mods.fossil.blocks;
 
 import mods.fossil.Fossil;
 import mods.fossil.client.LocalizationStrings;
-import net.minecraft.block.Block;
+import net.minecraft.block.BlockBush;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 
-public class BlockMagnoliaFlower extends Block {
+public class BlockMagnoliaFlower extends BlockBush {
 
 	public BlockMagnoliaFlower(Material material) {
 		super(material.plants);
