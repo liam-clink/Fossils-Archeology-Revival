@@ -45,6 +45,7 @@ enchantment.archeology=Archeology
 
 #Blocks
 tile.fossil.name=Fossil
+tile.Magnolia.name=Magnolia
 tile.skullBlock.name=Skull
 tile.skullLantern.name=Skull Lantern
 tile.analyzer.name=Analyzer

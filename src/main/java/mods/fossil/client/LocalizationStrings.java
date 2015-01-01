@@ -23,6 +23,7 @@ public class LocalizationStrings
 	
     //Blocks
     public static final String BLOCK_FOSSIL_NAME = "fossil";
+    public static final String BLOCK_MAGNOLIA_NAME = "Magnolia";
     public static final String BLOCK_SKULL_NAME = "skullBlock";
     public static final String SKULL_LANTERN_NAME = "skullLantern";
     public static final String BLOCK_ANALYZER_IDLE_NAME = "analyzer";
