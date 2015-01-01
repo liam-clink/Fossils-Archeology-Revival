@@ -2,7 +2,6 @@ package mods.fossil.fossilAI;
 
 import java.util.Random;
 
-import mods.fossil.entity.mob.DinoHerd;
 import mods.fossil.entity.mob.EntityDinosaur;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.pathfinding.PathNavigate;

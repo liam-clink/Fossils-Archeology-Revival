@@ -14,6 +14,7 @@ import mods.fossil.client.gui.GuiPedia;
 import mods.fossil.entity.EntityDinoEgg;
 import mods.fossil.fossilAI.DinoAIGrowup;
 import mods.fossil.fossilAI.DinoAIStarvation;
+import mods.fossil.fossilAI.DinoHerd;
 import mods.fossil.fossilEnums.EnumDinoType;
 import mods.fossil.fossilEnums.EnumOrderType;
 import mods.fossil.fossilEnums.EnumSituation;

@@ -1,9 +1,10 @@
-package mods.fossil.entity.mob;
+package mods.fossil.fossilAI;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import mods.fossil.entity.mob.EntityDinosaur;
 import mods.fossil.fossilEnums.EnumDinoType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -17,6 +18,12 @@ public class DinoHerd {
 	 * -Specific code fore each mode
 	 *      -Figure out how to do general direction wandering (bodies of water, biome specific, etc)
 	 */
+	
+	public static final int MODE_IDLE = 0;
+	public static final int MODE_WANDER = 1;
+	public static final int MODE_ATTACK = 2;
+	public static final int MODE_CHASE = 3;
+	public static final int MODE_DISPERSE = 4;
 	
 	private ArrayList<EntityDinosaur> herdDinos;
 	private ArrayList<EntityLiving> targets;
@@ -33,12 +40,11 @@ public class DinoHerd {
 	private int maxHerdSize;
 	private int maxTargets;
 	private int totalAge;
+	private int mode;
 	private boolean carnivorous = false;
 	private boolean fleeFromLarger = false;
 	private boolean allowMultipleSpecies = false;
 	private boolean allowCarnivoreHerbivoreMixing = false;
-	
-	private int mode = 0;
 	
 	private Vec3 generalTarget;
 	private Entity fleeFrom;
@@ -123,8 +129,32 @@ public class DinoHerd {
 	 */
 	public void updateHerd() {
 		updateHerdData();
-		if(carnivorous) {
-			removeDeadTargets();
+		if(this.fleeFromLarger && shouldDisperse()) {
+			mode = MODE_DISPERSE;
+		} else {
+			if(carnivorous) {
+				removeDeadTargets();
+				updateTargets();
+				if(targets.isEmpty()) {
+					if(((double)leader.getHunger())/leader.getMaxHunger() < 0.5) {
+						mode = MODE_WANDER;
+					} else {
+						mode = MODE_IDLE;
+					}
+				} else {
+					if(targets.size() < herdDinos.size() / 2) {
+						mode = MODE_CHASE;
+					} else {
+						mode = MODE_ATTACK;
+					}
+				}
+			} else {
+				if(((double)leader.getHunger())/leader.getMaxHunger() < 0.5) {
+					mode = MODE_WANDER;
+				} else {
+					mode = MODE_ATTACK;
+				}
+			}
 		}
 	}
 	
@@ -161,6 +191,30 @@ public class DinoHerd {
 	 */
 	public void modeDisperse() {
 		
+	}
+	
+	/**
+	 * Checks surrounding dinosaurs to see if they are large and carnivorous
+	 * @return If the herd should disperse
+	 */
+	public boolean shouldDisperse() {
+		boolean toDisperse = false;
+		for(Object tempEntity: leader.worldObj.loadedEntityList) {
+			if(tempEntity instanceof EntityDinosaur) {
+				EntityDinosaur tempDino = (EntityDinosaur)tempEntity;
+				if(leader.SelfType.isCarnivore()) {
+					if(tempDino.SelfType.isCarnivore() && tempDino.getDinosaurSize() > leader.getDinosaurSize() + averageSize && tempDino.getAge() > leader.getAge() + averageAge) {
+						toDisperse = true;
+					}
+				} else {
+					if(tempDino.SelfType.isCarnivore() && tempDino.getDinosaurSize() > (leader.getDinosaurSize() + averageSize) / 2 && tempDino.getAge() > (leader.getAge() + averageAge) / 2) {
+						toDisperse = true;
+					}
+				}
+				
+			}
+		}
+		return toDisperse;
 	}
 	
 	/**

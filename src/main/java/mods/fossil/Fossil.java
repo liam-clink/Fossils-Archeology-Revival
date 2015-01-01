@@ -117,6 +117,7 @@ public class Fossil
 	public static CreativeTabs tabFMaterial = new TabFMaterial("Fossil Material");
 	public static CreativeTabs tabFFigurines = new TabFFigurines("Fossil Test");
 	public static CreativeTabs tabFBones = new TabFBones("Fossil Bones");
+	public static CreativeTabs tabFTest = new TabFTest("Pre Release");
 
 	//Render IDs
 	public static int feederRenderID;
