@@ -23,329 +23,312 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockFeeder extends BlockContainer
-{
-    private Random furnaceRand = new Random();
-    private IIcon Top1;//None
-    private IIcon Top2;//Herb
-    private IIcon Top3;//Carn
-    private IIcon Top4;//Both
-    private IIcon Front1;
-    private IIcon Front2;
-    private IIcon Front3;
-    private IIcon Front4;
-    private IIcon Bottom;
-    
-    private static final int NO_BIT = 0;
-    private static final int HERB_BIT = 4;
-    private static final int CARN_BIT = 8;
-    private static final int BOTH_BITS = 12;
-    
-    private static final int DIRECTION_BITS = 3;
+public class BlockFeeder extends BlockContainer {
+	private Random furnaceRand = new Random();
+	private IIcon Top1;// None
+	private IIcon Top2;// Herb
+	private IIcon Top3;// Carn
+	private IIcon Top4;// Both
+	private IIcon Front1;
+	private IIcon Front2;
+	private IIcon Front3;
+	private IIcon Front4;
+	private IIcon Bottom;
 
-    public BlockFeeder(boolean isActive)
-    {
-        super(Material.iron);
-        setHardness(3.5F);
-        setStepSound(Block.soundTypeStone);
-        if(isActive) {
-        	setBlockName(LocalizationStrings.FEEDER_ACTIVE_NAME);
-        } else {
-        	setBlockName(LocalizationStrings.FEEDER_ACTIVE_NAME);
-        	setCreativeTab(Fossil.tabFBlocks);
-        }
-    }
+	private static final int NO_BIT = 0;
+	private static final int HERB_BIT = 4;
+	private static final int CARN_BIT = 8;
+	private static final int BOTH_BITS = 12;
 
-    @SideOnly(Side.CLIENT)
-    public Item getItem(World world, int x, int y, int z)
-    {
-        return Item.getItemFromBlock(Fossil.feederActive);
-    }
-    
-    /**
-     * Returns the ID of the items to drop on destruction.
-     */
-    @Override
-    public Item getItemDropped(int var1, Random var2, int var3)
-    {
-        return Item.getItemFromBlock(Fossil.feederActive);
-    }
+	private static final int DIRECTION_BITS = 3;
 
-    /**
-     * Called whenever the block is added into the world. Args: world, x, y, z
-     */
-    public void onBlockAdded(World world, int x, int y, int z)
-    {
-        super.onBlockAdded(world, x, y, z);
-        this.setDefaultDirection(world, x, y, z);
-    }
-    
-    public int getRenderType() {
-        return Fossil.feederRenderID;
-       }
+	public BlockFeeder(boolean isActive) {
+		super(Material.iron);
+		setHardness(3.5F);
+		setStepSound(Block.soundTypeStone);
+		if (isActive) {
+			setBlockName(LocalizationStrings.FEEDER_ACTIVE_NAME);
+		} else {
+			setBlockName(LocalizationStrings.FEEDER_ACTIVE_NAME);
+			setCreativeTab(Fossil.tabFBlocks);
+		}
+	}
 
-    /**
-     * set a blocks direction
-     */
-    private void setDefaultDirection(World world, int x, int y, int z)
-    {
-        if (!world.isRemote)
-        {
-        	Block block = world.getBlock(x, y, z - 1);
-            Block block1 = world.getBlock(x, y, z + 1);
-            Block block2 = world.getBlock(x - 1, y, z);
-            Block block3 = world.getBlock(x + 1, y, z);
-            
-            byte b0 = 3;
+	@SideOnly(Side.CLIENT)
+	public Item getItem(World world, int x, int y, int z) {
+		return Item.getItemFromBlock(Fossil.feederActive);
+	}
 
-            if (block.func_149730_j() && !block1.func_149730_j())
-            {
-                b0 = 3;
-            }
+	/**
+	 * Returns the ID of the items to drop on destruction.
+	 */
+	@Override
+	public Item getItemDropped(int var1, Random var2, int var3) {
+		return Item.getItemFromBlock(Fossil.feederActive);
+	}
 
-            if (block1.func_149730_j() && !block.func_149730_j())
-            {
-                b0 = 2;
-            }
+	/**
+	 * Called whenever the block is added into the world. Args: world, x, y, z
+	 */
+	public void onBlockAdded(World world, int x, int y, int z) {
+		super.onBlockAdded(world, x, y, z);
+		this.setDefaultDirection(world, x, y, z);
+	}
 
-            if (block2.func_149730_j() && !block3.func_149730_j())
-            {
-                b0 = 5;
-            }
+	public int getRenderType() {
+		return Fossil.feederRenderID;
+	}
 
-            if (block3.func_149730_j() && !block2.func_149730_j())
-            {
-                b0 = 4;
-            }
+	/**
+	 * set a blocks direction
+	 */
+	private void setDefaultDirection(World world, int x, int y, int z) {
+		if (!world.isRemote) {
+			Block block = world.getBlock(x, y, z - 1);
+			Block block1 = world.getBlock(x, y, z + 1);
+			Block block2 = world.getBlock(x - 1, y, z);
+			Block block3 = world.getBlock(x + 1, y, z);
 
-            world.setBlockMetadataWithNotify(x, y, z, b0, 2);
-        }
-    }
+			byte b0 = 3;
 
-    /**
-     * When this method is called, your block should register all the icons it needs with the given IconRegister. This
-     * is the only chance you get to register icons.
-     */
-    @SideOnly(Side.CLIENT)
-    public void registerBlockIcons(IIconRegister par1IconRegister)
-    {
-        this.blockIcon = par1IconRegister.registerIcon("fossil:Feeder_Sides");
-        this.Bottom = par1IconRegister.registerIcon("fossil:Feeder_Bottom");
-        this.Top1 = par1IconRegister.registerIcon("fossil:Feeder_Top1");
-        this.Top2 = par1IconRegister.registerIcon("fossil:Feeder_Top2");
-        this.Top3 = par1IconRegister.registerIcon("fossil:Feeder_Top3");
-        this.Top4 = par1IconRegister.registerIcon("fossil:Feeder_Top4");
-        this.Front1 = par1IconRegister.registerIcon("fossil:Feeder_Front1");
-        this.Front2 = par1IconRegister.registerIcon("fossil:Feeder_Front2");
-        this.Front3 = par1IconRegister.registerIcon("fossil:Feeder_Front3");
-        this.Front4 = par1IconRegister.registerIcon("fossil:Feeder_Front4");
-    }
+			if (block.func_149730_j() && !block1.func_149730_j()) {
+				b0 = 3;
+			}
 
-    /**
-     * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
-     */
-    public IIcon getIcon(int side, int meta)
-    {
-    	if(side == 0)
-    	{
-    		return this.Bottom;
-    	}
-    	else if(side != 1 && ((meta & DIRECTION_BITS) + 2) != side)
-    	{
-    		return this.blockIcon;
-    	}
-    	else
-    	{
-    		if (side == 1)
-    		{
-    			switch (meta & BOTH_BITS)
-                {
-                    case NO_BIT:
-                        return this.Top1;//no food
+			if (block1.func_149730_j() && !block.func_149730_j()) {
+				b0 = 2;
+			}
 
-                    case HERB_BIT:
-                        return this.Top2;//herbivore
+			if (block2.func_149730_j() && !block3.func_149730_j()) {
+				b0 = 5;
+			}
 
-                    case CARN_BIT:
-                        return this.Top3;//carnivore
+			if (block3.func_149730_j() && !block2.func_149730_j()) {
+				b0 = 4;
+			}
 
-                    case BOTH_BITS:
-                        return this.Top4;//both
-                }
-            }
-            else//Front
-            {
-                switch (meta & BOTH_BITS)
-                {
-                    case NO_BIT:
-                        return this.Front1;//no food
+			world.setBlockMetadataWithNotify(x, y, z, b0, 2);
+		}
+	}
 
-                    case HERB_BIT:
-                        return this.Front2;//herbivore
+	/**
+	 * When this method is called, your block should register all the icons it
+	 * needs with the given IconRegister. This is the only chance you get to
+	 * register icons.
+	 */
+	@SideOnly(Side.CLIENT)
+	public void registerBlockIcons(IIconRegister par1IconRegister) {
+		this.blockIcon = par1IconRegister.registerIcon("fossil:Feeder_Sides");
+		this.Bottom = par1IconRegister.registerIcon("fossil:Feeder_Bottom");
+		this.Top1 = par1IconRegister.registerIcon("fossil:Feeder_Top1");
+		this.Top2 = par1IconRegister.registerIcon("fossil:Feeder_Top2");
+		this.Top3 = par1IconRegister.registerIcon("fossil:Feeder_Top3");
+		this.Top4 = par1IconRegister.registerIcon("fossil:Feeder_Top4");
+		this.Front1 = par1IconRegister.registerIcon("fossil:Feeder_Front1");
+		this.Front2 = par1IconRegister.registerIcon("fossil:Feeder_Front2");
+		this.Front3 = par1IconRegister.registerIcon("fossil:Feeder_Front3");
+		this.Front4 = par1IconRegister.registerIcon("fossil:Feeder_Front4");
+	}
 
-                    case CARN_BIT:
-                        return this.Front3;//carnivore
+	/**
+	 * From the specified side and block metadata retrieves the blocks texture.
+	 * Args: side, metadata
+	 */
+	public IIcon getIcon(int side, int meta) {
+		if (side == 0) {
+			return this.Bottom;
+		} else if (side != 1 && ((meta & DIRECTION_BITS) + 2) != side) {
+			return this.blockIcon;
+		} else {
+			if (side == 1) {
+				switch (meta & BOTH_BITS) {
+				case NO_BIT:
+					return this.Top1;// no food
 
-                    case BOTH_BITS:
-                        return this.Front4;//both
-                }
-            }
-    		
-    	}
-    	return this.blockIcon;
-    }
+				case HERB_BIT:
+					return this.Top2;// herbivore
 
-    /**
-     * Called upon block activation (right click on the block.)
-     */
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int var6, float var7, float var8, float var9)
-    {
-        if (world.isRemote)
-        {
-            return true;
-        }
-        else
-        {
-            TileEntityFeeder tileentity = (TileEntityFeeder)world.getTileEntity(x, y, z);
+				case CARN_BIT:
+					return this.Top3;// carnivore
 
-            if (tileentity != null)
-            {
-                player.openGui(Fossil.instance, 2, world, x, y, z);
-            }
+				case BOTH_BITS:
+					return this.Top4;// both
+				}
+			} else// Front
+			{
+				switch (meta & BOTH_BITS) {
+				case NO_BIT:
+					return this.Front1;// no food
 
-            return true;
-        }
-    }
+				case HERB_BIT:
+					return this.Front2;// herbivore
 
-    public static void updateFurnaceBlockState(boolean herb, boolean carn, World world, int x, int y, int z)
-    {
-        int meta = world.getBlockMetadata(x, y, z);
-        TileEntity tileentity = world.getTileEntity(x, y, z);
+				case CARN_BIT:
+					return this.Front3;// carnivore
 
-    	world.setBlock(x, y, z,Fossil.feederActive);
+				case BOTH_BITS:
+					return this.Front4;// both
+				}
+			}
 
-    	if(herb) //If there's VEGGIES
-    		meta |= HERB_BIT;
-        else //If there's NO VEGGIES
-        	meta &= ~HERB_BIT;
-        if(carn) //If there's MEAT
-        	meta |= CARN_BIT;
-        else //If there's NO MEAT
-        	meta &= ~CARN_BIT;
-                
-        world.setBlockMetadataWithNotify(x, y, z, meta, 2);
+		}
+		return this.blockIcon;
+	}
 
-        if (tileentity != null)
-        {
-            tileentity.validate();
-            world.setTileEntity(x, y, z, tileentity);
-        }
-    }
+	/**
+	 * Called upon block activation (right click on the block.)
+	 */
+	public boolean onBlockActivated(World world, int x, int y, int z,
+			EntityPlayer player, int var6, float var7, float var8, float var9) {
+		if (world.isRemote) {
+			return true;
+		} else {
+			TileEntityFeeder tileentity = (TileEntityFeeder) world
+					.getTileEntity(x, y, z);
 
-    /**
-     * Returns a new instance of a block's tile entity class. Called on placing the block.
-     */
-    public TileEntity createNewTileEntity(World world, int par2)
-    {
-        return new TileEntityFeeder();
-    }
+			if (tileentity != null) {
+				player.openGui(Fossil.instance, 2, world, x, y, z);
+			}
 
-    /**
-     * Called when the block is placed in the world.
-     */
-    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLivingBase, ItemStack itemstack)
-    {
-        int entityDirection = MathHelper.floor_double((double)(entityLivingBase.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+			return true;
+		}
+	}
 
-        if (entityDirection == 0)
-        {
-            world.setBlockMetadataWithNotify(x, y, z, 0, 2);
-        }
+	public static void updateFurnaceBlockState(boolean herb, boolean carn,
+			World world, int x, int y, int z) {
+		int meta = world.getBlockMetadata(x, y, z);
+		TileEntity tileentity = world.getTileEntity(x, y, z);
 
-        if (entityDirection == 1)
-        {
-            world.setBlockMetadataWithNotify(x, y, z, 3, 2);
-        }
+		world.setBlock(x, y, z, Fossil.feederActive);
 
-        if (entityDirection == 2)
-        {
-            world.setBlockMetadataWithNotify(x, y, z, 1, 2);
-        }
+		if (herb) // If there's VEGGIES
+			meta |= HERB_BIT;
+		else
+			// If there's NO VEGGIES
+			meta &= ~HERB_BIT;
+		if (carn) // If there's MEAT
+			meta |= CARN_BIT;
+		else
+			// If there's NO MEAT
+			meta &= ~CARN_BIT;
 
-        if (entityDirection == 3)
-        {
-            world.setBlockMetadataWithNotify(x, y, z, 2, 2);
-        }
+		world.setBlockMetadataWithNotify(x, y, z, meta, 2);
 
-        if (itemstack.hasDisplayName())
-        {
-            ((TileEntityFeeder)world.getTileEntity(x, y, z)).setGuiDisplayName(itemstack.getDisplayName());
-        }
-    }
+		if (tileentity != null) {
+			tileentity.validate();
+			world.setTileEntity(x, y, z, tileentity);
+		}
+	}
 
-    /**
-     * ejects contained items into the world, and notifies neighbours of an update, as appropriate
-     */
-    public void breakBlock(World world, int x, int y, int z, Block block, int var6)
-    {
-            TileEntityFeeder tileentity = (TileEntityFeeder)world.getTileEntity(x, y, z);
+	/**
+	 * Returns a new instance of a block's tile entity class. Called on placing
+	 * the block.
+	 */
+	public TileEntity createNewTileEntity(World world, int par2) {
+		return new TileEntityFeeder();
+	}
 
-            if (tileentity != null)
-            {
-                for (int i = 0; i < tileentity.getSizeInventory(); ++i)
-                {
-                    ItemStack itemstack = tileentity.getStackInSlot(i);
+	/**
+	 * Called when the block is placed in the world.
+	 */
+	public void onBlockPlacedBy(World world, int x, int y, int z,
+			EntityLivingBase entityLivingBase, ItemStack itemstack) {
+		int entityDirection = MathHelper
+				.floor_double((double) (entityLivingBase.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
 
-                    if (itemstack != null)
-                    {
-                        float xOffset = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
-                        float yOffset = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
-                        float zOffset = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
+		if (entityDirection == 0) {
+			world.setBlockMetadataWithNotify(x, y, z, 0, 2);
+		}
 
-                        while (itemstack.stackSize > 0)
-                        {
-                            int rand = this.furnaceRand.nextInt(21) + 10;
+		if (entityDirection == 1) {
+			world.setBlockMetadataWithNotify(x, y, z, 3, 2);
+		}
 
-                            if (rand > itemstack.stackSize)
-                            {
-                            	rand = itemstack.stackSize;
-                            }
+		if (entityDirection == 2) {
+			world.setBlockMetadataWithNotify(x, y, z, 1, 2);
+		}
 
-                            itemstack.stackSize -= rand;
-                            EntityItem entityItem = new EntityItem(world, (double)((float)x + xOffset), (double)((float)y + yOffset), (double)((float)z + zOffset), new ItemStack(itemstack.getItem(), rand, itemstack.getItemDamage()));
+		if (entityDirection == 3) {
+			world.setBlockMetadataWithNotify(x, y, z, 2, 2);
+		}
 
-                            if (itemstack.hasTagCompound())
-                            {
-                            	entityItem.getEntityItem().setTagCompound((NBTTagCompound)itemstack.getTagCompound().copy());
-                            }
+		if (itemstack.hasDisplayName()) {
+			((TileEntityFeeder) world.getTileEntity(x, y, z))
+					.setGuiDisplayName(itemstack.getDisplayName());
+		}
+	}
 
-                            float offset = 0.05F;
-                            entityItem.motionX = (double)((float)this.furnaceRand.nextGaussian() * offset);
-                            entityItem.motionY = (double)((float)this.furnaceRand.nextGaussian() * offset + 0.2F);
-                            entityItem.motionZ = (double)((float)this.furnaceRand.nextGaussian() * offset);
-                            world.spawnEntityInWorld(entityItem);
-                        }
-                    }
-                }
-            }
-        super.breakBlock(world, x, y, z, block, var6);
-    }
-    
-    /**
-     * If this returns true, then comparators facing away from this block will use the value from
-     * getComparatorInputOverride instead of the actual redstone signal strength.
-     */
-    public boolean hasComparatorInputOverride()
-    {
-        return true;
-    }
+	/**
+	 * ejects contained items into the world, and notifies neighbours of an
+	 * update, as appropriate
+	 */
+	public void breakBlock(World world, int x, int y, int z, Block block,
+			int var6) {
+		TileEntityFeeder tileentity = (TileEntityFeeder) world.getTileEntity(x,
+				y, z);
 
-    /**
-     * If hasComparatorInputOverride returns true, the return value from this is used instead of the redstone signal
-     * strength when this block inputs to a comparator.
-     */
-    public int getComparatorInputOverride(World par1World, int par2, int par3, int par4, int par5)
-    {
-        return Container.calcRedstoneFromInventory((IInventory)par1World.getTileEntity(par2, par3, par4));
-    }
+		if (tileentity != null) {
+			for (int i = 0; i < tileentity.getSizeInventory(); ++i) {
+				ItemStack itemstack = tileentity.getStackInSlot(i);
+
+				if (itemstack != null) {
+					float xOffset = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
+					float yOffset = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
+					float zOffset = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
+
+					while (itemstack.stackSize > 0) {
+						int rand = this.furnaceRand.nextInt(21) + 10;
+
+						if (rand > itemstack.stackSize) {
+							rand = itemstack.stackSize;
+						}
+
+						itemstack.stackSize -= rand;
+						EntityItem entityItem = new EntityItem(world,
+								(double) ((float) x + xOffset),
+								(double) ((float) y + yOffset),
+								(double) ((float) z + zOffset), new ItemStack(
+										itemstack.getItem(), rand,
+										itemstack.getItemDamage()));
+
+						if (itemstack.hasTagCompound()) {
+							entityItem.getEntityItem().setTagCompound(
+									(NBTTagCompound) itemstack.getTagCompound()
+											.copy());
+						}
+
+						float offset = 0.05F;
+						entityItem.motionX = (double) ((float) this.furnaceRand
+								.nextGaussian() * offset);
+						entityItem.motionY = (double) ((float) this.furnaceRand
+								.nextGaussian() * offset + 0.2F);
+						entityItem.motionZ = (double) ((float) this.furnaceRand
+								.nextGaussian() * offset);
+						world.spawnEntityInWorld(entityItem);
+					}
+				}
+			}
+		}
+		super.breakBlock(world, x, y, z, block, var6);
+	}
+
+	/**
+	 * If this returns true, then comparators facing away from this block will
+	 * use the value from getComparatorInputOverride instead of the actual
+	 * redstone signal strength.
+	 */
+	public boolean hasComparatorInputOverride() {
+		return true;
+	}
+
+	/**
+	 * If hasComparatorInputOverride returns true, the return value from this is
+	 * used instead of the redstone signal strength when this block inputs to a
+	 * comparator.
+	 */
+	public int getComparatorInputOverride(World par1World, int par2, int par3,
+			int par4, int par5) {
+		return Container.calcRedstoneFromInventory((IInventory) par1World
+				.getTileEntity(par2, par3, par4));
+	}
 }
