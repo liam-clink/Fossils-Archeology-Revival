@@ -130,6 +130,7 @@ public class Fossil
 
 	//Blocks
 	public static Block blockFossil;
+	public static Block blockDillhoffia;
 	public static Block blockMagnolia;
 	public static Block blockSkull;
 	public static Block skullLantern;
@@ -413,6 +414,7 @@ public class Fossil
 		//Blocks
 		skullLantern = new BlockFossilSkull(true);
 		blockMagnolia = new BlockMagnoliaFlower(Material.plants);
+		blockDillhoffia = new BlockDillhoffiaFlower(Material.plants);
 		blockanalyzerIdle = new BlockAnalyzer(false);
 		blockanalyzerActive = new BlockAnalyzer(true);
 		blockcultivateIdle = new BlockCultivate(false);
@@ -706,6 +708,7 @@ public class Fossil
 		//Block Registry
 		GameRegistry.registerBlock(blockFossil, LocalizationStrings.BLOCK_FOSSIL_NAME);
 		GameRegistry.registerBlock(blockMagnolia, LocalizationStrings.BLOCK_MAGNOLIA_NAME);
+		GameRegistry.registerBlock(blockDillhoffia, LocalizationStrings.BLOCK_DILLHOFFIA_NAME);
 		GameRegistry.registerBlock(blockSkull, LocalizationStrings.BLOCK_SKULL_NAME);
 		GameRegistry.registerBlock(skullLantern, LocalizationStrings.SKULL_LANTERN_NAME);
 		GameRegistry.registerBlock(blockanalyzerIdle, LocalizationStrings.BLOCK_ANALYZER_IDLE_NAME);

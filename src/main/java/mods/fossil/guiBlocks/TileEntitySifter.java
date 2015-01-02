@@ -292,8 +292,12 @@ public class TileEntitySifter extends TileEntity implements IInventory,
 						result = new ItemStack(Fossil.brokenSapling, 1);
 					}
 
-					if (random < 30) {
+					else if (random < 30) {
 						result = new ItemStack(Fossil.sarracina, 1);
+					}
+
+					else if (random < 40) {
+						result = new ItemStack(Fossil.blockDillhoffia, 1);
 					}
 
 					else if (random < 60) {
