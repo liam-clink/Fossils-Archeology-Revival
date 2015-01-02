@@ -24,6 +24,8 @@ public class LocalizationStrings
     //Blocks
     public static final String BLOCK_FOSSIL_NAME = "fossil";
     public static final String BLOCK_MAGNOLIA_NAME = "Magnolia";
+    public static final String BLOCK_LIMESTONE_NAME = "Limestone";
+    public static final String BLOCK_LIMESTONEBRICK_NAME = "LimestoneBrick";
     public static final String BLOCK_DILLHOFFIA_NAME = "Dillhoffia";
     public static final String BLOCK_SKULL_NAME = "skullBlock";
     public static final String SKULL_LANTERN_NAME = "skullLantern";

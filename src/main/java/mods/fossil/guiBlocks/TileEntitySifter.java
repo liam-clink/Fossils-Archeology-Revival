@@ -258,6 +258,10 @@ public class TileEntitySifter extends TileEntity implements IInventory,
 		}
 	}
 
+	/*
+	 * Where the items that they player can receive are added
+	 */
+
 	public void smeltItem() {
 		if (this.canSmelt()) {
 			ItemStack result = null;

@@ -24,6 +24,10 @@ public class FossilRecipeHandler
         GameRegistry.addRecipe(new ItemStack(Fossil.blockSifterIdle, 1), new Object[] {"XYX", "YZY", "YXY", 'X', Items.string, 'Y', Blocks.planks, 'Z', Blocks.iron_bars});
         GameRegistry.addRecipe(new ItemStack(Fossil.ancientWoodPlate, 3), new Object[] {"XX", 'X', Fossil.ancientWood});
 
+        GameRegistry.addRecipe(new ItemStack(Fossil.LimestoneBrick, 4), new Object[] {"XXA", "XXA", "AAA", 'X', Fossil.Limestone});
+        GameRegistry.addRecipe(new ItemStack(Fossil.LimestoneBrick, 4), new Object[] {"AXX", "AXX", "AAA", 'X', Fossil.Limestone});
+        GameRegistry.addRecipe(new ItemStack(Fossil.LimestoneBrick, 4), new Object[] {"AAA", "AXX", "AXX", 'X', Fossil.Limestone});
+        GameRegistry.addRecipe(new ItemStack(Fossil.LimestoneBrick, 4), new Object[] {"AAA", "AXX", "AXX", 'X', Fossil.Limestone});
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.cake, 1), new Object[] {"MMM", "SES", "WWW", 'M', Items.milk_bucket, 'S', Items.sugar, 'W', Items.wheat, 'E', "foodEgg"}));
  
         GameRegistry.addRecipe(new ItemStack(Fossil.skullStick, 1), new Object[] {"X", "Y", 'X', Fossil.blockSkull, 'Y', Items.stick});

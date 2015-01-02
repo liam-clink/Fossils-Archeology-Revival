@@ -3,6 +3,7 @@ package mods.fossil;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import mods.fossil.blocks.*;
 import mods.fossil.client.FossilGuiHandler;
 import mods.fossil.client.FossilOptions;
@@ -134,6 +135,8 @@ public class Fossil
 	public static Block blockMagnolia;
 	public static Block blockSkull;
 	public static Block skullLantern;
+	public static Block Limestone;
+	public static Block LimestoneBrick;
 	public static Block blockanalyzerIdle;
 	public static Block blockanalyzerActive;
 	public static Block blockcultivateIdle;
@@ -413,6 +416,8 @@ public class Fossil
 
 		//Blocks
 		skullLantern = new BlockFossilSkull(true);
+		Limestone = new BlockLimestone(Material.rock);
+		LimestoneBrick = new BlockLimestoneBrick(Material.rock);
 		blockMagnolia = new BlockMagnoliaFlower(Material.plants);
 		blockDillhoffia = new BlockDillhoffiaFlower(Material.plants);
 		blockanalyzerIdle = new BlockAnalyzer(false);
@@ -708,6 +713,8 @@ public class Fossil
 		//Block Registry
 		GameRegistry.registerBlock(blockFossil, LocalizationStrings.BLOCK_FOSSIL_NAME);
 		GameRegistry.registerBlock(blockMagnolia, LocalizationStrings.BLOCK_MAGNOLIA_NAME);
+		GameRegistry.registerBlock(Limestone, LocalizationStrings.BLOCK_LIMESTONE_NAME);
+		GameRegistry.registerBlock(LimestoneBrick, LocalizationStrings.BLOCK_LIMESTONEBRICK_NAME);
 		GameRegistry.registerBlock(blockDillhoffia, LocalizationStrings.BLOCK_DILLHOFFIA_NAME);
 		GameRegistry.registerBlock(blockSkull, LocalizationStrings.BLOCK_SKULL_NAME);
 		GameRegistry.registerBlock(skullLantern, LocalizationStrings.SKULL_LANTERN_NAME);

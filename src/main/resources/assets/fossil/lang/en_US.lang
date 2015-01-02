@@ -45,6 +45,8 @@ enchantment.archeology=Archeology
 
 #Blocks
 tile.fossil.name=Fossil
+tile.Limestone.name=Limestone
+tile.LimestoneBrick.name=Limestone Brick
 tile.Dillhoffia.name=Dillhoffia
 tile.Magnolia.name=Magnolia
 tile.skullBlock.name=Skull
