@@ -1,12 +1,12 @@
 package mods.fossil.gens;
 
-import cpw.mods.fml.common.IWorldGenerator;
+import java.util.Random;
+
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.BiomeGenSwamp;
 import net.minecraft.world.chunk.IChunkProvider;
-
-import java.util.Random;
+import cpw.mods.fml.common.IWorldGenerator;
 
 public class WorldGeneratorPalaeoraphe implements IWorldGenerator {
 	public void generate(Random random, int chunkX, int chunkZ, World world,

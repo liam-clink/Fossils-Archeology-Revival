@@ -1,12 +1,12 @@
 package mods.fossil.gens;
 
-import cpw.mods.fml.common.IWorldGenerator;
+import java.util.Random;
+
 import mods.fossil.Fossil;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenMinable;
-
-import java.util.Random;
+import cpw.mods.fml.common.IWorldGenerator;
 
 public class FossilGenerator implements IWorldGenerator {
 	@Override

@@ -13,6 +13,7 @@ public class LocalizationStrings
 	public static final String ACHIEVEMENT_ANALYZER = "Analyzer";
 	public static final String ACHIEVEMENT_CULTVAT = "CultVat";
 	public static final String ACHIEVEMENT_SIFTER = "Sifter";
+	public static final String AQUATIC_SCARAB_GEM_NAME = "AquaticScarabGem";
 	public static final String ACHIEVEMENT_DINOPEDIA = "Dinopedia";
 	public static final String ACHIEVEMENT_ICEAGE = "IceAge";
 	public static final String ACHIEVEMENT_THEKING = "TheKing";

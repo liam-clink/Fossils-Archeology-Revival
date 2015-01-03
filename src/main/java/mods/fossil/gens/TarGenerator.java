@@ -1,6 +1,7 @@
 package mods.fossil.gens;
 
-import cpw.mods.fml.common.IWorldGenerator;
+import java.util.Random;
+
 import mods.fossil.Fossil;
 import mods.fossil.gens.feature.WorldGenTarPit;
 import net.minecraft.world.World;
@@ -8,8 +9,7 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.BiomeGenSwamp;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenSwamp;
-
-import java.util.Random;
+import cpw.mods.fml.common.IWorldGenerator;
 
 public class TarGenerator implements IWorldGenerator {
 	public void generate(Random random, int chunkX, int chunkZ, World world,
