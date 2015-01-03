@@ -19,7 +19,7 @@ public class DinoAIHerd extends EntityAIBase {
 	
 	public DinoAIHerd(EntityDinosaur dinosaur, double speed) {
 		this.dinosaur = dinosaur;
-		this.herd = dinosaur.getHerd();
+		//this.herd = dinosaur.getHerd();
 		this.speed = speed;
 		this.pathNavigator = dinosaur.getNavigator();
 		this.world = dinosaur.worldObj;

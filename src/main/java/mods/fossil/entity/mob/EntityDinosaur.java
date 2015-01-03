@@ -102,9 +102,6 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
 
     public double knockbackModValue;
     
-    private boolean inHerd;
-    private DinoHerd herd;
-    
     private static final ResourceLocation pediaclock = new ResourceLocation("fossil:textures/gui/PediaClock.png");
     private static final ResourceLocation pediafood = new ResourceLocation("fossil:textures/gui/PediaFood.png");
     private static final ResourceLocation pediaheart = new ResourceLocation("fossil:textures/gui/PediaHeart.png");
@@ -120,24 +117,6 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
         this.BreedTick = this.SelfType.BreedingTicks;
         this.setHunger(this.SelfType.MaxHunger / 2);
         this.setHealth((float) this.SelfType.Health0);
-    }
-
-    public void addToHerd(DinoHerd herd) {
-    	this.herd = herd;
-    	inHerd = true;
-    }
-    
-    public void leaveHerd() {
-    	this.herd = null;
-    	inHerd = false;
-    }
-    
-    public DinoHerd getHerd() {
-    	return herd;
-    }
-    
-    public boolean isInHerd() {
-    	return inHerd;
     }
 
     /**
@@ -172,6 +151,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
     /**
      * "Sets the scale for an ageable entity according to the boolean parameter, which says if it's a child."
      */
+    @Override
     public void setScaleForAge(boolean par1)
     {
         this.setScale(this.getDinosaurSize());
