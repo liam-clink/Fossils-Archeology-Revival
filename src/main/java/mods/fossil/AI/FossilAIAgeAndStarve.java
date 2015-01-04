@@ -12,6 +12,7 @@ public class FossilAIAgeAndStarve extends EntityAIBase {
 	
 	public FossilAIAgeAndStarve(EntityPrehistoric entity) {
 		this.entity = entity;
+		this.setMutexBits(1);
 	}
 
 	@Override

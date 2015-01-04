@@ -343,7 +343,7 @@ public abstract class EntityPrehistoric extends EntityAgeable {
 	 * @param location
 	 * @return
 	 */
-	private double distanceToLocation(Vec3 location) {
+	public double distanceToLocation(Vec3 location) {
 		return Math.sqrt(Math.pow(posX - location.xCoord + 0.5, 2) + Math.pow(posZ - location.zCoord + 0.5, 2));
 	}
 	
@@ -352,7 +352,7 @@ public abstract class EntityPrehistoric extends EntityAgeable {
 	 * @param entity
 	 * @return
 	 */
-	private double distanceToEntity(Entity entity) {
+	public double distanceToEntity(Entity entity) {
 		return Math.sqrt(Math.pow(posX - entity.posX, 2) + Math.pow(posZ - entity.posZ, 2));
 	}
 	
@@ -361,7 +361,7 @@ public abstract class EntityPrehistoric extends EntityAgeable {
 	 * @param entity
 	 * @return
 	 */
-	private double distanceToFeeder(TileEntityFeeder entity) {
+	public double distanceToFeeder(TileEntityFeeder entity) {
 		return Math.sqrt(Math.pow(posX - entity.xCoord + 0.5, 2) + Math.pow(posY - entity.yCoord + 0.5, 2));
 	}
 	

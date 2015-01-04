@@ -8,7 +8,11 @@ import net.minecraft.item.Item;
 
 public enum EnumEntityPrehistoric {
 	
-	;
+	Allosaurus(EntityAllosaurus.class, true, true, true, false, true, 0),
+	Ankylosaurus(null, true, true, true, false, true, 1),
+	Brachiosaurus(null, true, true, true, true, false, 1),
+	Compsognathus(null, true, false, true, true, true, 2),
+	Deinonychus(null, true, false, true, false, false, 0);
 	
 	public static int FOOD_HABBIT_CARNIVORE = 0;
 	public static int FOOD_HABBIT_HERBIVORE = 1;
@@ -51,15 +55,18 @@ public enum EnumEntityPrehistoric {
 	private boolean tameable;
 	private boolean rideable;
 	private boolean canCarry;
+	private boolean attacksPlayersAsAdult;
+	private boolean territorial;
 	
 	private final Class entityClass;
 	
-	private EnumEntityPrehistoric(Class entityClass, boolean tameable, boolean rideable, boolean canCarry, boolean canFormHerds, int targetFoodHabbit) {
+	private EnumEntityPrehistoric(Class entityClass, boolean tameable, boolean rideable, boolean canCarry, boolean canFormHerds, boolean territorial, int targetFoodHabbit) {
 		this.entityClass = entityClass;
 		this.tameable = tameable;
 		this.rideable = rideable;
 		this.canCarry = canCarry;
 		this.canFormHerds = canFormHerds;
+		this.territorial = territorial;
 		this.targetFoodHabbit = targetFoodHabbit;
 	}
 	
@@ -145,6 +152,10 @@ public enum EnumEntityPrehistoric {
 	private void setHungerProperties(float hungerLevel, int ticksPerHungerDecrement) {
 		this.hungerLevel = hungerLevel;
 		this.ticksPerHungerDecrement = ticksPerHungerDecrement;
+	}
+	
+	private void setAttacksPlayersAsAdult(boolean attacks) {
+		this.attacksPlayersAsAdult = attacks;
 	}
 	
 	public double getBaseHealth() {
@@ -275,6 +286,10 @@ public enum EnumEntityPrehistoric {
 		return canCarry;
 	}
 	
+	public boolean attacksPlayersAsAdult() {
+		return attacksPlayersAsAdult;
+	}
+	
 	public boolean eatsMeat() {
 		return targetFoodHabbit == this.FOOD_HABBIT_CARNIVORE || targetFoodHabbit == this.FOOD_HABBIT_OMNIVORE;
 	}
@@ -282,13 +297,24 @@ public enum EnumEntityPrehistoric {
 	public boolean eatsVegetables() {
 		return targetFoodHabbit == this.FOOD_HABBIT_HERBIVORE || targetFoodHabbit == this.FOOD_HABBIT_OMNIVORE;
 	}
+	
+	public boolean eatsBlocks() {
+		return !foodBlocks.isEmpty();
+	}
 
 	public Class getEntityClass() {
 		return entityClass;
 	}
 
 	public static void init() {
-
+		Allosaurus.setBaseValues(10.0D, 2.0D, 0.25D, 2.0D, 0.55F, 1.0F);
+		Allosaurus.setMaxValues(40.0D, 11.0D, 0.42D, 11.0D, 3.1F);
+		Allosaurus.setDimensions(1.4F, 1.3F, 1.0F); // Fix eye height
+		Allosaurus.setAges(5, 10);
+		Allosaurus.setAttacksPlayersAsAdult(true);
+		Allosaurus.setExpDaily(0.2F);
+		Allosaurus.setSpeedRunMultiplier(2.0D);
+		Allosaurus.setIfEaten(25, 1);
 	}
 	
 }
