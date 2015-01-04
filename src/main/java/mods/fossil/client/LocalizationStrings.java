@@ -83,6 +83,7 @@ public class LocalizationStrings
 
     //Items
     public static final String BIO_FOSSIL_NAME = "bioFossil";
+    public static final String DOMINICAN_AMBER_NAME = "DominicanAmber";
     public static final String RELIC_NAME = "relicScrap";
     public static final String TABLET_NAME = "stoneTablet";
     public static final String BROKEN_SWORD_NAME = "brokenAncientSword";
