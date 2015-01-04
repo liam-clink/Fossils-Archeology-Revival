@@ -16,6 +16,6 @@ public class ItemAquaticScarabGem extends Item {
 
 	@Override
 	public void registerIcons(IIconRegister iconRegister) {
-		itemIcon = iconRegister.registerIcon("fossil:AquaticScarabGem");
+		itemIcon = iconRegister.registerIcon("fossil:scarab_blue");
 	}
 }

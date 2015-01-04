@@ -266,7 +266,7 @@ public class TileEntitySifter extends TileEntity implements IInventory,
 		if (this.canSmelt()) {
 			ItemStack result = null;
 			int randomloot = (new Random()).nextInt(100);
-			int random = (new Random()).nextInt(100);
+			double random = (new Random()).nextInt(100);
 			int var3;
 
 			if (this.sifterItemStacks[this.RawIndex].getItem() == Item
@@ -292,7 +292,10 @@ public class TileEntitySifter extends TileEntity implements IInventory,
 				} else {
 					if (Fossil.DebugMode())
 						Fossil.Console("Sifter successful loot: " + randomloot);
-					if (random < 15) {
+					if (random < 0.1) {
+						result = new ItemStack(Fossil.DominicanAmber, 1);
+					}
+					else if (random < 15) {
 						result = new ItemStack(Fossil.brokenSapling, 1);
 					}
 

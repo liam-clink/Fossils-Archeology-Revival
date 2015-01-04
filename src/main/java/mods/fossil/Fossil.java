@@ -114,6 +114,7 @@ import mods.fossil.items.ItemChickenEss;
 import mods.fossil.items.ItemCultivatedDodoEgg;
 import mods.fossil.items.ItemDinosaurBones;
 import mods.fossil.items.ItemDodoEgg;
+import mods.fossil.items.ItemDominicanAmber;
 import mods.fossil.items.ItemEmbryoSyringe;
 import mods.fossil.items.ItemFeet;
 import mods.fossil.items.ItemFemurs;
@@ -429,7 +430,9 @@ public class Fossil
 
 	//Embryos
 	//public static Item embyoSyringe;
+	
 	public static Item embryoPig;
+	public static Item DominicanAmber;
 	public static Item embryoSheep;
 	public static Item embryoCow;
 	public static Item embryoChicken;
@@ -604,6 +607,7 @@ public class Fossil
 		//   Blocks.fire.setFireInfo(Fossil.ancientWoodStairs, 10, 20);
 		//Items
 		biofossil = new ItemBioFossil();
+		DominicanAmber = new ItemDominicanAmber();
 		AquaticScarabGem = new ItemAquaticScarabGem().setUnlocalizedName(LocalizationStrings.AQUATIC_SCARAB_GEM_NAME);
 		relic = new ForgeItem("Relic_Scrap").setUnlocalizedName(LocalizationStrings.RELIC_NAME).setCreativeTab(this.tabFItems);
 		stoneboard = new ItemStoneBoard();
@@ -733,6 +737,7 @@ public class Fossil
 
 		//Item Registry
 		GameRegistry.registerItem(AquaticScarabGem, LocalizationStrings.AQUATIC_SCARAB_GEM_NAME);
+		GameRegistry.registerItem(DominicanAmber, LocalizationStrings.DOMINICAN_AMBER_NAME);
 		GameRegistry.registerItem(biofossil, LocalizationStrings.BIO_FOSSIL_NAME);
 		GameRegistry.registerItem(relic, LocalizationStrings.RELIC_NAME);
 		GameRegistry.registerItem(stoneboard, LocalizationStrings.TABLET_NAME);
@@ -929,6 +934,11 @@ public class Fossil
 		//make the dino types complete by registering the dinos items
 		EnumDinoType.init();
 		EnumDinoFoodMob.init();
+		
+		/*
+		 * Registering world generators
+		 */
+		
 		GameRegistry.registerWorldGenerator(new FossilGenerator(), 0);
 
 		if(FossilOptions.Gen_Palaeoraphe)
@@ -944,7 +954,7 @@ public class Fossil
 		GameRegistry.registerWorldGenerator(new VolcanicRockGenerator(), 0);
 
 		/*
-        GameRegistry.registerWorldGenerator(new WorldGenWeaponShop());
+         * GameRegistry.registerWorldGenerator(new WorldGenWeaponShop());
 		 */
 
 		feederRenderID = RenderingRegistry.getNextAvailableRenderId();
