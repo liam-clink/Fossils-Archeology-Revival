@@ -12,7 +12,14 @@ public enum EnumEntityPrehistoric {
 	Ankylosaurus(null, true, true, true, false, true, 1),
 	Brachiosaurus(null, true, true, true, true, false, 1),
 	Compsognathus(null, true, false, true, true, true, 2),
-	Deinonychus(null, true, false, true, false, false, 0);
+	Deinonychus(null, true, false, true, false, false, 0),
+	Dilophosaurus(null, true, false, true, true, true, 0),
+	Gallimimus(null, true, true, true, true, false, 2),
+	Liopleurodon(null, true, false, true, false, true, 0),
+	Mosasaurus(null, true, false, true, true, true, 0),
+	Nautilus(null, false, false, false, false, false, 0),
+	Pachycephalosaurus(null, true, false, true, true, true, 1),
+	Plesiosaur(null, true, true, true, true, true, 0);
 	
 	public static int FOOD_HABBIT_CARNIVORE = 0;
 	public static int FOOD_HABBIT_HERBIVORE = 1;
