@@ -15,6 +15,7 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
+import net.minecraft.world.chunk.Chunk;
 
 public abstract class FossilAIWildIndividualBase extends EntityAIBase {
 	
@@ -42,6 +43,22 @@ public abstract class FossilAIWildIndividualBase extends EntityAIBase {
 	private float radiusDimension;
 	private boolean taskDone;
 	
+	private ArrayList<EntityPrehistoric> nearbyPrehistoricEntities = new ArrayList<EntityPrehistoric>();
+	private ArrayList<EntityPrehistoric> nearbyPrehistoricEntitiesOfSameSpecies = new ArrayList<EntityPrehistoric>();
+	private ArrayList<EntityLiving> nearbyLivingEntities = new ArrayList<EntityLiving>();
+	private ArrayList<EntityItem> nearbyItemEntities = new ArrayList<EntityItem>();
+	private ArrayList<EntityPlayer> nearbyPlayers = new ArrayList<EntityPlayer>();
+	private ArrayList<EntityPrehistoric> fleeingTargets = new ArrayList<EntityPrehistoric>();
+	private ArrayList<TileEntityFeeder> feeders = new ArrayList<TileEntityFeeder>();
+	private ArrayList<EntityLiving> possibleFood = new ArrayList<EntityLiving>();
+	private ArrayList<EntityItem> possibleItemFood = new ArrayList<EntityItem>();
+	private ArrayList<Vec3> foodBlocks = new ArrayList<Vec3>();
+	private ArrayList<EntityPrehistoric> possibleFleeTargets = new ArrayList<EntityPrehistoric>();
+	private ArrayList<EntityPlayer> possibleFleeTargetPlayers = new ArrayList<EntityPlayer>();
+	
+	private Chunk currentChunk;
+	private Chunk tempChunk;
+	
 	public FossilAIWildIndividualBase(EntityPrehistoric entity) {
 		this.entity = entity;
 		this.setMutexBits(2);
@@ -53,50 +70,62 @@ public abstract class FossilAIWildIndividualBase extends EntityAIBase {
 	}
 	
 	public boolean continueExecuting() {
-		return !taskDone && shouldExecute();
+		return !taskDone && !entity.hasOwner() && !entity.isInHerd();
 	}
 	
+	// TODO get entities from chunks not world
 	public void startExecuting() {
 		taskDone = false;
 		// ArrayLists to store found entities
-		ArrayList<EntityPrehistoric> nearbyPrehistoricEntities = new ArrayList<EntityPrehistoric>();
-		ArrayList<EntityPrehistoric> nearbyPrehistoricEntitiesOfSameSpecies = new ArrayList<EntityPrehistoric>();
-		ArrayList<EntityLiving> nearbyLivingEntities = new ArrayList<EntityLiving>();
-		ArrayList<EntityItem> nearbyItemEntities = new ArrayList<EntityItem>();
-		ArrayList<EntityPlayer> nearbyPlayers = new ArrayList<EntityPlayer>();
+		nearbyPrehistoricEntities.clear();
+		nearbyPrehistoricEntitiesOfSameSpecies.clear();
+		nearbyLivingEntities.clear();
+		nearbyItemEntities.clear();
+		nearbyPlayers.clear();
+		fleeingTargets.clear();
+		feeders.clear();
+		possibleFood.clear();
+		possibleItemFood.clear();
+		foodBlocks.clear();
 		Vec3 waterBlock = null;
 		boolean checkedForWater = false;
 		
-		// Sift through all entities
-		for(Object tempEntity: entity.worldObj.loadedEntityList) {
-			if(tempEntity == entity) {
-				continue;
-			}
-			if(tempEntity instanceof EntityPrehistoric) {
-				if(entity.canFindEntity((Entity)tempEntity)) {
-					nearbyPrehistoricEntities.add((EntityPrehistoric)tempEntity);
-					if(entity.getClass().equals(tempEntity.getClass())) {
-						nearbyPrehistoricEntitiesOfSameSpecies.add((EntityPrehistoric)tempEntity);
+		int chunkRadius = (int) Math.ceil(entity.getType().getMaxAwarenessRadius() / 16);
+		
+		currentChunk = entity.worldObj.getChunkFromChunkCoords(entity.chunkCoordX, entity.chunkCoordY);
+		
+		for(int i = -chunkRadius; i <= chunkRadius; i++) {
+			for(int j = -chunkRadius; j <= chunkRadius; j++) {
+				tempChunk = entity.worldObj.getChunkFromChunkCoords(currentChunk.xPosition + i, currentChunk.zPosition + j);
+				for(int k = (int)((entity.posY - 4) / 16); k < (int)((entity.posY + 4) / 16) && k >= 0 && k < tempChunk.entityLists.length; k++) {
+					for(Object tempEntity: tempChunk.entityLists[k]) {
+						if(tempEntity.getClass().isAssignableFrom(EntityPrehistoric.class)) {
+							if(entity.canFindEntity((Entity)tempEntity)) {
+								nearbyPrehistoricEntities.add((EntityPrehistoric)tempEntity);
+								if(tempEntity.getClass().isAssignableFrom(entity.getClass())) {
+									nearbyPrehistoricEntitiesOfSameSpecies.add((EntityPrehistoric)tempEntity);
+								}
+							}
+						} else if(tempEntity.getClass().isAssignableFrom(EntityPlayer.class)) {
+							if(entity.canFindEntity((Entity)tempEntity)) {
+								nearbyPlayers.add((EntityPlayer)tempEntity);
+							}
+						} else if(tempEntity.getClass().isAssignableFrom(EntityLiving.class)) {
+							if(entity.canFindEntity((Entity)tempEntity)) {
+								nearbyLivingEntities.add((EntityLiving)tempEntity);
+							}
+						} else if(tempEntity.getClass().isAssignableFrom(EntityItem.class)) {
+							if(entity.canFindEntity((Entity)tempEntity)) {
+								nearbyItemEntities.add((EntityItem)tempEntity);
+							}
+						}
 					}
-				}
-			} else if(tempEntity instanceof EntityLiving) {
-				if(entity.canFindEntity((Entity)tempEntity)) {
-					nearbyLivingEntities.add((EntityLiving)tempEntity);
-				}
-			} else if(tempEntity instanceof EntityItem) {
-				if(entity.canFindEntity((Entity)tempEntity)) {
-					nearbyItemEntities.add((EntityItem)tempEntity);
-				}
-			} else if(tempEntity instanceof EntityPlayer) {
-				if(entity.canFindEntity((Entity)tempEntity)) {
-					nearbyPlayers.add((EntityPlayer)tempEntity);
 				}
 			}
 		}
 		
 		if(!nearbyPrehistoricEntities.isEmpty()) {
 			// Check nearby targets to see if we should flee
-			ArrayList<EntityPrehistoric> fleeingTargets = new ArrayList<EntityPrehistoric>();
 			for(EntityPrehistoric tempEntity: nearbyPrehistoricEntities) {
 				if(entity.getType().shouldRunFromEntity(tempEntity)) {
 					fleeingTargets.add(tempEntity);
@@ -122,10 +151,25 @@ public abstract class FossilAIWildIndividualBase extends EntityAIBase {
 				target = fleeingTargets.get(0);
 				return;
 			}
+		} else if(nearbyPlayers.isEmpty()) {
+			Collections.sort(nearbyPlayers, new Comparator<EntityPlayer>() {
+				@Override
+				public int compare(EntityPlayer arg0, EntityPlayer arg1) {
+					return (int)(entity.distanceToEntity(arg0) - entity.distanceToEntity(arg1));
+				}
+			});
+			switch(entity.distanceStatus(nearbyPlayers.get(0))) {
+			case 1:
+				task = this.taskFleeFar;
+				break;
+			case 2:
+				task = this.taskFleeNear;
+				break;
+			}
+			target = nearbyPlayers.get(0);
 		}
 		
 		if(entity.hungerLevel() > 0) {
-			ArrayList<TileEntityFeeder> feeders = new ArrayList<TileEntityFeeder>();
 			for(Object tempTileEntity: entity.worldObj.loadedTileEntityList) {
 				if(tempTileEntity instanceof TileEntityFeeder) {
 					if(entity.canFindFeeder((TileEntityFeeder)tempTileEntity)) {
@@ -156,7 +200,6 @@ public abstract class FossilAIWildIndividualBase extends EntityAIBase {
 				return;
 			}
 			
-			ArrayList<EntityLiving> possibleFood = new ArrayList<EntityLiving>();
 			for(EntityPrehistoric food: nearbyPrehistoricEntities) {
 				if(entity.getType().willAttack(food)) {
 					possibleFood.add(food);
@@ -181,7 +224,6 @@ public abstract class FossilAIWildIndividualBase extends EntityAIBase {
 				return;
 			}
 			
-			ArrayList<EntityItem> possibleItemFood = new ArrayList<EntityItem>();
 			for(EntityItem item: nearbyItemEntities) {
 				if(entity.getType().willEat(item.getEntityItem().getItem())) {
 					possibleItemFood.add(item);
@@ -202,7 +244,6 @@ public abstract class FossilAIWildIndividualBase extends EntityAIBase {
 			}
 			
 			if(entity.getType().eatsBlocks()) {
-				ArrayList<Vec3> foodBlocks = new ArrayList<Vec3>();
 				for(int i = (int)-entity.getType().getMaxAwarenessRadius(); i <= (int)entity.getType().getMaxAwarenessRadius(); i++) {
 					int bound = (int)Math.sqrt(Math.pow(entity.getType().getMaxAwarenessRadius(), 2) - Math.pow(i, 2));
 					for(int k = -bound; k <= bound; k++) {
@@ -319,11 +360,30 @@ public abstract class FossilAIWildIndividualBase extends EntityAIBase {
 	}
 	
 	public void updateTask() {
+		
 		if(tickCounter % fleeInterruptTicks == 0 && task != taskFleeNear && task != taskFleeFar) {
-			ArrayList<EntityPrehistoric> possibleFleeTargets = new ArrayList<EntityPrehistoric>();
-			for(Object tempEntity: entity.worldObj.loadedEntityList) {
-				if(tempEntity instanceof EntityPrehistoric && entity.getType().shouldRunFromEntity((EntityPrehistoric)tempEntity) && entity.canFindEntity((Entity)tempEntity)) {
-					possibleFleeTargets.add((EntityPrehistoric)tempEntity);
+			int chunkRadius = (int) Math.ceil(entity.getType().getMaxAwarenessRadius() / 16);
+			
+			possibleFleeTargets.clear();
+
+			currentChunk = entity.worldObj.getChunkFromChunkCoords(entity.chunkCoordX, entity.chunkCoordY);
+			
+			for(int i = -chunkRadius; i <= chunkRadius; i++) {
+				for(int j = -chunkRadius; j <= chunkRadius; j++) {
+					tempChunk = entity.worldObj.getChunkFromChunkCoords(currentChunk.xPosition + i, currentChunk.zPosition + j);
+					for(int k = (int)((entity.posY - 4) / 16); k < (int)((entity.posY + 4) / 16) && k >= 0 && k < tempChunk.entityLists.length; k++) {
+						for(Object tempEntity: tempChunk.entityLists[k]) {
+							if(tempEntity.getClass().isAssignableFrom(EntityPrehistoric.class) && entity.getType().shouldRunFromEntity((EntityPrehistoric)tempEntity)) {
+								if(entity.canFindEntity((Entity)tempEntity)) {
+									possibleFleeTargets.add((EntityPrehistoric)tempEntity);
+								}
+							} else if(entity.isChild() && tempEntity.getClass().isAssignableFrom(EntityPlayer.class)) {
+								if(entity.canFindEntity((Entity)tempEntity)) {
+									possibleFleeTargetPlayers.add((EntityPlayer)tempEntity);
+								}
+							}
+						}
+					}
 				}
 			}
 			if(!possibleFleeTargets.isEmpty()) {
@@ -336,10 +396,28 @@ public abstract class FossilAIWildIndividualBase extends EntityAIBase {
 				switch(entity.distanceStatus(possibleFleeTargets.get(0))) {
 				case 1:
 					task = this.taskFleeFar;
+					break;
 				case 2:
 					task = this.taskFleeNear;
+					break;
 				}
 				target = possibleFleeTargets.get(0);
+			} else if(!possibleFleeTargetPlayers.isEmpty()) {
+				Collections.sort(possibleFleeTargetPlayers, new Comparator<EntityPlayer>() {
+					@Override
+					public int compare(EntityPlayer arg0, EntityPlayer arg1) {
+						return (int)(entity.distanceToEntity(arg0) - entity.distanceToEntity(arg1));
+					}
+				});
+				switch(entity.distanceStatus(possibleFleeTargetPlayers.get(0))) {
+				case 1:
+					task = this.taskFleeFar;
+					break;
+				case 2:
+					task = this.taskFleeNear;
+					break;
+				}
+				target = possibleFleeTargetPlayers.get(0);
 			}
 		}
 		tickCounter++;
@@ -387,8 +465,6 @@ public abstract class FossilAIWildIndividualBase extends EntityAIBase {
 			findAndDrinkWater((Vec3)target);
 			break;
 		}
-		
-		
 	}
 	
 	private void taskDone() {

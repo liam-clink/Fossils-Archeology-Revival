@@ -36,6 +36,8 @@ public enum EnumEntityPrehistoric {
 	private ArrayList<EnumEdibleFoodMob> foodMobs = new ArrayList<EnumEdibleFoodMob>();
 	private ArrayList<EnumEntityPrehistoric> fleesFrom = new ArrayList<EnumEntityPrehistoric>();
 	
+	private Item dropItemMeat;
+	
 	private double baseHealth;
 	private double baseDamage;
 	private double baseSpeed;
@@ -56,6 +58,7 @@ public enum EnumEntityPrehistoric {
 	private float immediateAwarenessRadius;
 	private float herdWanderRadius;
 	private float hungerLevel;
+	private float territorialRadius;
 	private int maxHerdSize;
 	private int targetFoodHabbit;
 	private int maxHunger;
@@ -169,6 +172,18 @@ public enum EnumEntityPrehistoric {
 	
 	private void setAttacksPlayersAsAdult(boolean attacks) {
 		this.attacksPlayersAsAdult = attacks;
+	}
+	
+	private void setDropItem(Item item) {
+		this.dropItemMeat = item;
+	}
+	
+	private void setTerritorialRadius(float radius) {
+		this.territorialRadius = radius;
+	}
+	
+	public Item getDropItem() {
+		return dropItemMeat;
 	}
 	
 	public double getBaseHealth() {
@@ -328,6 +343,7 @@ public enum EnumEntityPrehistoric {
 		Allosaurus.setExpDaily(0.2F);
 		Allosaurus.setSpeedRunMultiplier(2.0D);
 		Allosaurus.setIfEaten(25, 1);
+		Allosaurus.setTerritorialRadius(20.0F);
 	}
 	
 }

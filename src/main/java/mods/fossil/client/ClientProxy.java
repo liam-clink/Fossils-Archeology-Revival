@@ -38,7 +38,7 @@ import cpw.mods.fml.common.registry.VillagerRegistry;
 
 public class ClientProxy extends CommonProxy
 {
-    
+	
     @Override
     public void registerRenderThings()
     {

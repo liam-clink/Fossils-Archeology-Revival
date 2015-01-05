@@ -6,7 +6,7 @@ import net.minecraft.world.World;
 public class EntityAllosaurus extends EntityPrehistoric {
 	
 	public EntityAllosaurus(World world) {
-		super(world, EnumEntityPrehistoric.Allosaurus);
+		super(world, EnumEntityPrehistoric.Allosaurus, 0, null);
 	}
 
 	@Override
