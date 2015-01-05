@@ -1,10 +1,18 @@
 package mods.fossil.entity.mobs;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
 import mods.fossil.Fossil;
+import mods.fossil.client.gui.GuiPedia;
 import mods.fossil.guiBlocks.TileEntityFeeder;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -12,6 +20,11 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+
+import org.lwjgl.opengl.GL11;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public abstract class EntityPrehistoric extends EntityAgeable {
 	
@@ -30,18 +43,20 @@ public abstract class EntityPrehistoric extends EntityAgeable {
 	private String ownerDisplayName;
 	private ItemStack itemCarrying;
 	private EntityAIBase aiInControl;
+	private int subSpecies;
 	
-	public EntityPrehistoric(World world, EnumEntityPrehistoric type) {
+	public EntityPrehistoric(World world, EnumEntityPrehistoric type, int subSpecies) {
 		super(world);
 		this.type = type;
 		this.exp = type.getBaseExp();
+		this.subSpecies = subSpecies;
 		this.hunger = type.getMaxHunger() / 2;
 		this.setSize(type.getBaseBoundingBoxHeight(), type.getBaseBoundingBoxWidth());
+		//this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(type.getMaxHealth());
 	}
 	
 	/*
 	 * 	TODO
-	 * 		-Create ShowPedia2 (in EntityPrehistoric old)
 	 * 		-Get sounds
 	 */
 	
@@ -49,6 +64,47 @@ public abstract class EntityPrehistoric extends EntityAgeable {
 	 * Method to add all mob ai
 	 */
 	abstract void addAI();
+	
+	@SideOnly(Side.CLIENT)
+	public void ShowPedia2(GuiPedia p0)
+	{
+		p0.reset();
+		p0.AddStringLR("", 150, false);
+		String translatePath = "assets/fossil/dinopedia/" + Minecraft.getMinecraft().gameSettings.language +"/";
+		String bioFile = type.toString() + ".txt";
+
+		if(getClass().getClassLoader().getResourceAsStream( translatePath ) == null)
+		{
+			translatePath = "assets/fossil/dinopedia/" + "en_US" + "/";
+		}
+
+		if(getClass().getClassLoader().getResourceAsStream( translatePath + bioFile ) != null)
+		{
+			InputStream fileReader = getClass().getClassLoader().getResourceAsStream( translatePath + bioFile );
+			try {
+				BufferedReader bufferedReader = new BufferedReader( new InputStreamReader(fileReader));
+				StringBuffer stringBuffer = new StringBuffer();
+				String line;
+				while ((line = bufferedReader.readLine()) != null) {
+					GL11.glPushMatrix();
+					GL11.glScalef(0.5F, 0.5F, 0.5F);
+					p0.AddStringLR(line, 150, false);
+					GL11.glPopMatrix();
+				}
+				fileReader.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		else
+		{
+			p0.AddStringLR("File not found.", false);
+			GL11.glPushMatrix();
+			GL11.glScalef(0.5F, 0.5F, 0.5F);
+			p0.AddStringLR(translatePath + bioFile, 150, false);
+			GL11.glPopMatrix();
+		}
+	}
 	
 	public void eatFromFeeder(TileEntityFeeder feeder) {
 		
@@ -64,6 +120,17 @@ public abstract class EntityPrehistoric extends EntityAgeable {
 				this.stepHeight = 0.5F;
 			}
 		}
+	}
+	
+	/**
+	 * Gets the riding player
+	 * @return
+	 */
+	public EntityPlayer getRidingPlayer() {
+		if(riddenByEntity instanceof EntityPlayer) {
+			return (EntityPlayer) riddenByEntity;
+		}
+		return null;
 	}
 	
 	/**
@@ -163,6 +230,14 @@ public abstract class EntityPrehistoric extends EntityAgeable {
 	@Override
 	public void setScaleForAge(boolean child) {
 		this.setScale(getSize());
+	}
+	
+	private void setPedia() {
+		Fossil.ToPedia = this;
+	}
+	
+	public int getSubSpecies() {
+		return subSpecies;
 	}
 	
 	/**
