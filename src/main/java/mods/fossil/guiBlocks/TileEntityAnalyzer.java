@@ -277,7 +277,7 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory,
 	public void smeltItem() {
 		if (this.canSmelt()) {
 			ItemStack itemstack = null;
-			int rand = (new Random()).nextInt(100);
+			int rand = new Random().nextInt(100);
 			int var3;
 
 			if (this.analyzerItemStacks[this.RawIndex].getItem() == Fossil.biofossil) {
@@ -298,14 +298,8 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory,
 				}
 
 				if (rand > 85) {
-					int i = (new Random())
-							.nextInt(EnumDinoType.values().length + 2); // +1
-																		// for
-																		// the
-																		// sapling,
-																		// +2
-																		// for
-																		// coelacanth
+					int i = new Random()
+							.nextInt(EnumDinoType.values().length + 2); 
 					Item i0 = null;
 
 					if (i == 0) {
@@ -334,6 +328,7 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory,
 			 * Fossil.rawDinoMeat) { itemstack = new ItemStack(Fossil.dna, 4,
 			 * this.analyzerItemStacks[this.RawIndex].getItemDamage()); }
 			 */
+			
 			if (EnumDinoType.getDNA(this.analyzerItemStacks[this.RawIndex]
 					.getItem()) != null) {
 				itemstack = new ItemStack(
@@ -519,6 +514,7 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory,
 	 * Do not make give this method the name canInteractWith because it clashes
 	 * with Container
 	 */
+	
 	public boolean isUseableByPlayer(EntityPlayer player) {
 		return this.worldObj.getTileEntity(this.xCoord, this.yCoord,
 				this.zCoord) != this ? false : player.getDistanceSq(
@@ -532,15 +528,16 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory,
 	public void closeChest() {
 	}
 
-	/**
+	/*
 	 * Returns true if automation is allowed to insert the given stack (ignoring
 	 * stack size) into the given slot.
 	 */
+	
 	public boolean isStackValidForSlot(int par1, ItemStack par2ItemStack) {
 		return par1 > 8 ? false : (par1 < 8 ? isItemFuel(par2ItemStack) : true);
 	}
 
-	/**
+	/*
 	 * When some containers are closed they call this on each slot, then drop
 	 * whatever it returns as an EntityItem - like when you close a workbench
 	 * GUI.
@@ -549,35 +546,39 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory,
 		return null;
 	}
 
-	/**
+	/*
 	 * Returns true if automation is allowed to insert the given stack (ignoring
 	 * stack size) into the given slot.
 	 */
+	
 	public boolean isItemValidForSlot(int par1, ItemStack par2ItemStack) {
 		return par1 == 2 ? false : (par1 == 1 ? isItemFuel(par2ItemStack)
 				: true);
 	}
 
-	/**
+	/*
 	 * Returns an array containing the indices of the slots that can be accessed
 	 * by automation on the given side of this block.
 	 */
+	
 	public int[] getAccessibleSlotsFromSide(int par1) {
 		return par1 == 0 ? slots_bottom : (par1 == 1 ? slots_top : slots_sides);
 	}
 
-	/**
+	/*
 	 * Returns true if automation can insert the given item in the given slot
 	 * from the given side. Args: Slot, item, side
 	 */
+	
 	public boolean canInsertItem(int par1, ItemStack par2ItemStack, int par3) {
 		return this.isItemValidForSlot(par1, par2ItemStack);
 	}
 
-	/**
+	/*
 	 * Returns true if automation can extract the given item in the given slot
 	 * from the given side. Args: Slot, item, side
 	 */
+	
 	public boolean canExtractItem(int par1, ItemStack itemstack, int par3) {
 		return par3 != 0 || par1 != 1;
 	}

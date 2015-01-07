@@ -7,6 +7,7 @@ import mods.fossil.client.gui.GuiPedia;
 import mods.fossil.fossilAI.DinoAIAttackOnCollide;
 import mods.fossil.fossilAI.DinoAIEat;
 import mods.fossil.fossilAI.DinoAIFollowOwner;
+import mods.fossil.fossilAI.DinoAIRideAir;
 import mods.fossil.fossilAI.DinoAIWander;
 import mods.fossil.fossilEnums.EnumDinoType;
 import net.minecraft.entity.Entity;
@@ -65,6 +66,7 @@ public class EntityPterosaur extends EntityDinosaur
         this.tasks.addTask(3, new EntityAILeapAtTarget(this, 0.4F));
         this.tasks.addTask(3, new DinoAIAttackOnCollide(this, 1.1D, true));
         this.tasks.addTask(5, new DinoAIFollowOwner(this, 1.0F, 10.0F, 2.0F));
+        tasks.addTask(1, new DinoAIRideAir(this, 1.0D));
         this.tasks.addTask(7, new DinoAIEat(this, 48));
         this.tasks.addTask(7, new DinoAIWander(this, 1.0D));
         
@@ -109,7 +111,7 @@ public class EntityPterosaur extends EntityDinosaur
         this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(baseSpeed);
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(baseHealth);
         this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(baseDamage);
-        //this.getEntityAttribute(MOVE_SPEED_AIR).setBaseValue(BASE_SPEED_AIR);
+        //his.getEntityAttribute(MOVE_SPEED_AIR).setBaseValue(BASE_SPEED_AIR);
     }
 
     /**
@@ -128,7 +130,20 @@ public class EntityPterosaur extends EntityDinosaur
     {
         super.writeEntityToNBT(var1);
     }
-
+    
+    public float getMountHeight()
+    {
+        return this.height*0.75F;
+    }
+    
+    public void updateRiderPosition()
+    {
+        if (this.riddenByEntity != null)
+        {
+        	 this.riddenByEntity.setPosition(this.posX, this.posY + this.getMountHeight() + this.riddenByEntity.getYOffset(), this.posZ);
+        }
+    }
+    
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
@@ -214,8 +229,7 @@ public class EntityPterosaur extends EntityDinosaur
     {
         if (var2 > 2.0F && var2 < 5.0F && this.rand.nextInt(10) == 0)
         {
-            if (this.onGround)
-            {
+            if (this.onGround) {
                 double var3 = var1.posX - this.posX;
                 double var5 = var1.posZ - this.posZ;
                 float var7 = MathHelper.sqrt_double(var3 * var3 + var5 * var5);
@@ -224,48 +238,43 @@ public class EntityPterosaur extends EntityDinosaur
                 this.jump();
             }
         }
-        else if ((double)var2 < 1.899999976158142D && var1.boundingBox.maxY > this.boundingBox.minY && var1.boundingBox.minY < this.boundingBox.maxY)
+        else if((double)var2 < 1.899999976158142D && var1.boundingBox.maxY > this.boundingBox.minY && var1.boundingBox.minY < this.boundingBox.maxY)
         {
             this.attackTime = 20;
             var1.attackEntityFrom(DamageSource.causeMobDamage(this), 2 + this.getDinoAge());
         }
     }
 
-    public float getHalfHeight()
-    {
+    public float getHalfHeight() {
         return this.getEyeHeight() / 2.0F;
     }
     
-    public void updateRiderPosition()
+    public boolean interact(EntityPlayer player)
     {
-        if (this.riddenByEntity != null)
-        {
-           // this.riddenByEntity.setPosition(this.posX, this.posY + (double)this.getHalfHeight(), this.posZ);
-           this.riddenByEntity.setPosition(this.posX, this.posY + (double)this.getEyeHeight(), this.posZ);
+        return super.interact(player);
+    }
+
+    public boolean CheckSpace() {
+        if(this.isEntityInsideOpaqueBlock()) {
+        	return true;
+        }
+        else {
+        	return false;
         }
     }
 
-    public boolean CheckSpace()
-    {
-        return !this.isEntityInsideOpaqueBlock();
-    }
-
     @SideOnly(Side.CLIENT)
-    public void ShowPedia(GuiPedia p0)
-    {
-        super.ShowPedia(p0);
-
-        if (this.isAdult())
-        {
-            p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_FLY), true);
+    public void ShowPedia(GuiPedia gui) {
+        super.ShowPedia(gui);
+        if (this.isAdult()) {
+            gui.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_FLY), true);
         }
     }
 
     /**
      * Causes this entity to do an upwards motion (jumping).
      */
-    public void jump()
-    {
+    public void jump() {
         this.motionY = 0.5D;
     }
 
@@ -277,8 +286,7 @@ public class EntityPterosaur extends EntityDinosaur
       */
 
     @Override
-    public EntityAgeable createChild(EntityAgeable var1)
-    {
+    public EntityAgeable createChild(EntityAgeable var1) {
     	EntityPterosaur baby = new EntityPterosaur(this.worldObj);
     	baby.setSubSpecies(this.getSubSpecies());
     	return baby;
@@ -294,8 +302,9 @@ public class EntityPterosaur extends EntityDinosaur
 
     public EntityPlayer getRidingPlayer() {
         if (riddenByEntity instanceof EntityPlayer) {
-            return (EntityPlayer) riddenByEntity;
-        } else {
+            return (EntityPlayer)riddenByEntity;
+        } 
+        else {
             return null;
         }
     }
@@ -310,8 +319,7 @@ public class EntityPterosaur extends EntityDinosaur
      * This gets called when a dinosaur grows naturally or through Chicken Essence.
      */
     @Override
-    public void updateSize()
-    {
+    public void updateSize() {
         double healthStep;
         double attackStep;
         double speedStep;
