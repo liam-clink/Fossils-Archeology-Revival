@@ -18,7 +18,6 @@ public class ModelElasmotherium extends ModelBase
 	private ModelRenderer rightHorn;
 	private ModelRenderer leftHorn;
 	private ModelRenderer crest;
-	private ModelRenderer triceratops;
 	private ModelRenderer rightBackUpperLeg;
 	private ModelRenderer beakHorn;
 	private ModelRenderer beak;

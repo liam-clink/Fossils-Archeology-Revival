@@ -385,14 +385,6 @@ public class Fossil
 	public static Item terrorBirdMeatCooked;
 	public static Item quaggaMeat;
 	public static Item quaggaMeatCooked;
-
-	/*
-	 * All the dinosaur Skeletons
-	 * 
-	 * TO DO TOMORROW!
-	 */
-	
-	
 	
 	/*
 	 * Bones

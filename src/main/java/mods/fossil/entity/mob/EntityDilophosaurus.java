@@ -159,25 +159,6 @@ public class EntityDilophosaurus extends EntityDinosaur
     }
 
     /**
-     * Causes this entity to do an upwards motion (jumping).
-     */
-    /*
-    protected void jump()
-    {
-        this.motionY = 0.41999998688697815D * (double)(1 + this.getDinoAge() / 16);
-
-        if (this.isSprinting())
-        {
-            float var1 = this.rotationYaw * 0.01745329F;
-            this.motionX -= (double)(MathHelper.sin(var1) * 0.2F);
-            this.motionZ += (double)(MathHelper.cos(var1) * 0.2F);
-        }
-
-        this.isAirBorne = true;
-    }
-    */
-
-    /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
     public void writeEntityToNBT(NBTTagCompound var1)
@@ -543,58 +524,12 @@ public class EntityDilophosaurus extends EntityDinosaur
         }
     }
 
-    /*private void InitSize()
-    {
-        this.CheckSkin();
-        this.updateSize();
-        this.setPosition(this.posX, this.posY, this.posZ);
-        this.moveSpeed = this.getSpeed();
-    }
-    public void updateSize()
-    {
-    	this.setSize((float)(0.30000001192092896D + 0.1D * (double)((float)this.getDinoAge())), (float)(0.30000001192092896D + 0.1D * (double)((float)this.getDinoAge())));
-    }
-    public void CheckSkin()
-    {
-        if (this.getEntityToAttack() != null)
-        {
-            this.texture = "/fossil/textures/UtaAttack.png";
-        }
-        else
-        {
-            this.texture = "/fossil/textures/UtaCalm.png";
-        }
-    }*/
     //TODO TEXTURECHECK!!! when attacking!
     public boolean CheckSpace()
     {
         return !this.isEntityInsideOpaqueBlock();
     }
 
-    /*public boolean HandleEating(int var1)
-    {
-        if (this.getHunger() >= this.getHungerLimit())
-        {
-            return false;
-        }
-        else
-        {
-            this.increaseHunger(var1);
-            this.showHeartsOrSmokeFX(false);
-
-            if (this.getHunger() >= this.getHungerLimit())
-            {
-                this.setHunger(this.getHungerLimit());
-            }
-
-            return true;
-        }
-    }*/
-
-    /*public boolean isLearnedChest()
-    {
-        return this.LearningChestTick == 0;
-    }*/
     @SideOnly(Side.CLIENT)
     public void ShowPedia(GuiPedia p0)
     {

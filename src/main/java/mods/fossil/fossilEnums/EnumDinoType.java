@@ -11,18 +11,18 @@ import mods.fossil.entity.mob.EntityCompsognathus;
 import mods.fossil.entity.mob.EntityDeinonychus;
 import mods.fossil.entity.mob.EntityDilophosaurus;
 import mods.fossil.entity.mob.EntityGallimimus;
+import mods.fossil.entity.mob.EntityLiopleurodon;
 import mods.fossil.entity.mob.EntityMosasaurus;
 import mods.fossil.entity.mob.EntityNautilus;
 import mods.fossil.entity.mob.EntityPachycephalosaurus;
 import mods.fossil.entity.mob.EntityPlesiosaur;
 import mods.fossil.entity.mob.EntityPterosaur;
+import mods.fossil.entity.mob.EntitySarcosuchus;
 import mods.fossil.entity.mob.EntitySpinosaurus;
 import mods.fossil.entity.mob.EntityStegosaurus;
 import mods.fossil.entity.mob.EntityTRex;
-import mods.fossil.entity.mob.EntityTerrorBird;
 import mods.fossil.entity.mob.EntityTriceratops;
 import mods.fossil.entity.mob.EntityVelociraptor;
-import mods.fossil.entity.mob.EntityLiopleurodon;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 
@@ -47,7 +47,7 @@ public enum EnumDinoType
     Triceratops(EntityTriceratops.class, 				C.MODEL | C.TAME  	| C.RIDE 	| C.HERBIVORE),
     Velociraptor(EntityVelociraptor.class,						  C.TAME  				| C.CARNIVORE),
     TRex(EntityTRex.class, 								C.MODEL | C.TAME    | C.RIDE  	| C.CARNIVORE),
-    Pterosaur(EntityPterosaur.class, 					C.MODEL | C.TAME  			 	| C.CARNIVORE),
+    Pterosaur(EntityPterosaur.class, 					C.MODEL | C.TAME    | C.RIDE	| C.CARNIVORE),
     Nautilus(EntityNautilus.class, 						C.NOTHING),
     Plesiosaur(EntityPlesiosaur.class, 					C.MODEL | C.TAME  	| C.RIDE 	| C.CARNIVORE),
     Mosasaurus(EntityMosasaurus.class, 					C.MODEL |  		  				  C.CARNIVORE),
@@ -62,8 +62,8 @@ public enum EnumDinoType
     Gallimimus(EntityGallimimus.class,					C.MODEL | C.TAME	| C.RIDE	| C.HERB_CARN),
     Liopleurodon(EntityLiopleurodon.class, 				C.MODEL |  		  				  C.CARNIVORE),
     Allosaurus(EntityAllosaurus.class, 					C.MODEL | C.TAME	| C.RIDE	| C.CARNIVORE),
+    Sarcosuchus(EntitySarcosuchus.class,                C.MODEL | C.TAME    | C.RIDE    | C.CARNIVORE),
     ;
-
 
     private final Class dinoClass;
 
@@ -81,18 +81,6 @@ public enum EnumDinoType
 
     //List of the eatable Mobs with the FoodValue and HealingValue belonging to
     public DinoFoodMobList FoodMobList;
-
-    //Starting width and increase of the Dino - No longer used
-    public float Width0 = 0.5F;
-    public float WidthInc = 0.4F;
-
-    //Starting length and increase of the Dino - No longer used
-    public float Length0 = 0.5F;
-    public float LengthInc = 0.2F;
-
-    //Starting height and increase of the dino - No longer used
-    public float Height0 = 0.5F;
-    public float HeightInc = 0.2F;
 
     //Age Limit of The Dino, arbitrary number, dinosaurs stop growing after hitting adult age.
     public int MaxAge = 999;
@@ -303,6 +291,25 @@ public enum EnumDinoType
         Ankylosaurus.FoodBlockList.addblock(EnumDinoFoodBlock.RedFlower);
         Ankylosaurus.FoodBlockList.addblock(EnumDinoFoodBlock.YellowFlower);
 
+        /*
+         * Sarcosuchus
+         */
+        
+        Sarcosuchus.setItems(Items.bone);
+        Sarcosuchus.setAges(5, 12, -1);
+        Sarcosuchus.setDinoSize(sizeBaby, sizeTeen, sizeAdult);
+        Sarcosuchus.setProperties(25.0D, 70.0D, 2.0D, 9.0D, 0.25D, -1, 500);
+        Sarcosuchus.setExperience(0.5F, 0.2F);
+        Sarcosuchus.FoodItemList.addItem(EnumDinoFoodItem.FishRaw);
+        Sarcosuchus.FoodItemList.addItem(EnumDinoFoodItem.FishCooked);
+        Sarcosuchus.FoodItemList.addItem(EnumDinoFoodItem.BeefCooked);
+        Sarcosuchus.FoodItemList.addItem(EnumDinoFoodItem.BeefRaw);
+        Sarcosuchus.FoodItemList.addItem(EnumDinoFoodItem.PorkCooked);
+        Sarcosuchus.FoodItemList.addItem(EnumDinoFoodItem.PorkRaw);
+        Sarcosuchus.FoodItemList.addItem(EnumDinoFoodItem.ChickenRaw);
+        Sarcosuchus.FoodMobList.addMob(EnumDinoFoodMob.Chicken);
+        Sarcosuchus.FoodMobList.addMob(EnumDinoFoodMob.Dodo);
+        
 
         Brachiosaurus.setItems(Items.stick);
         Brachiosaurus.setAges(9, 20, -1);

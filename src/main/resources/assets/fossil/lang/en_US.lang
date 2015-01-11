@@ -128,6 +128,8 @@ tile.vaseKylix.porcelain_kylix.name=Porcelain Kylix
 
 #Items
 item.bioFossil.name=Bio-Fossil
+item.eggSarcosuchus.name=Sarcosuchus egg
+item.dnaSarcosuchus.name=Sarcosuchus DNA
 item.DominicanAmber.name=Dominican Amber
 item.AquaticScarabGem.name=Aquatic Scarab Gem
 item.relicScrap.name=Relic Scrap
@@ -457,6 +459,7 @@ status.essencefail=Essence of Chicken had no effect.
 #Dinosaur Names
 entity.fossil.Triceratops.name=Triceratops
 entity.fossil.Velociraptor.name=Velociraptor
+entity.fossil.Sarcosuchus.name=Sarcosuchus
 entity.fossil.TRex.name=Tyrannosaurus
 entity.fossil.Pterosaur.name=Pterosaur
 entity.fossil.Plesiosaur.name=Plesiosaur

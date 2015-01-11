@@ -119,34 +119,22 @@ public class EntityTRex extends EntityDinosaur
         this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(baseDamage);
     }
 
-    //protected void updateEntityActionState() {}
-
-    /**
+    /*
      * Checks if the entity's current position is a valid location to spawn this entity.
      */
+    
     public boolean getCanSpawnHere()
     {
         return this.worldObj.checkNoEntityCollision(this.boundingBox) && this.worldObj.getCollidingBoundingBoxes(this, this.boundingBox).size() == 0 && !this.worldObj.isAnyLiquid(this.boundingBox);
     }
 
-    /**
+    /*
      * Called to update the entity's position/logic.
      */
+    
     public void onUpdate()
     {
         super.onUpdate();
-        //this.blockBreakingBehavior.execute();
-        //if(this.isAdult() && Fossil.FossilOptions.Dino_Block_Breaking == true)
-        //    BlockInteractive();
-        /*
-        if (this.getHealth() > 0)
-        {
-            if (this.looksWithInterest)
-            {
-                this.numTicksToChaseTarget = 10;
-            }
-        }
-        */
     }
 
     public void moveEntityWithHeading(float par1, float par2)

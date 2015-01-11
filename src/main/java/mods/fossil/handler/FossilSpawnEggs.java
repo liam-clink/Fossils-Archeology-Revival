@@ -12,6 +12,7 @@ public class FossilSpawnEggs
     public static void addSpawnEggs()
     {														//bg		//fg
         registerEntityEgg(EntityTriceratops.class, 			0x62d84e, 0xebffd5);
+        registerEntityEgg(EntitySarcosuchus.class,          0x0066cc, 0x006699);
         registerEntityEgg(EntityVelociraptor.class, 		0xbfa487, 0x936d2e);
         registerEntityEgg(EntityTRex.class, 				0x763c11, 0xffebc4);
         registerEntityEgg(EntityFailuresaurus.class, 		0x61ffbd, 0xf4eee6);
