@@ -15,7 +15,6 @@ Forked from [Flammarilva](https://github.com/fls81245)'s Fossil And Archeology m
 [Totara](https://github.com/TotaraStudios)
 [Cannibal Vox](https://github.com/CannibalVox)
 [Roomon1](https://github.com/Roomon1)
-[JTGhawk137](https://github.com/JTGhawk137)
 
 ###### Texture/Model Artists  
 [tyranno66](https://github.com/tyranno66)  
