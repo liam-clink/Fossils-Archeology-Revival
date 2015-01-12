@@ -9,13 +9,13 @@ Forked from [Flammarilva](https://github.com/fls81245)'s Fossil And Archeology m
 ## Fossils and Archeology Revival Contributors
 
 ###### Programmers  
-[Shadowbeast007](https://github.com/Shadowbeast)[ -Retired]
-[Microjunk](https://github.com/Microjunk)[ -Retired]  
-[4f6f3b](https://github.com/4f6f3b)[ -Active]
-[Totara](https://github.com/TotaraStudios)[ -Retired]  
-[Cannibal Vox](https://github.com/CannibalVox)[ -Retired]  
-[Roomon1](https://github.com/Roomon1)[ -Retired]
-[JTGhawk137](https://github.com/JTGhawk137)[ -Active]
+[Shadowbeast007](https://github.com/Shadowbeast) -Retired
+[Microjunk](https://github.com/Microjunk) -Retired 
+[4f6f3b](https://github.com/4f6f3b) -Active
+[Totara](https://github.com/TotaraStudios) -Retired
+[Cannibal Vox](https://github.com/CannibalVox) -Retired 
+[Roomon1](https://github.com/Roomon1) -Retired
+[JTGhawk137](https://github.com/JTGhawk137) -Active
 
 ###### Texture/Model Artists  
 [tyranno66](https://github.com/tyranno66)  
