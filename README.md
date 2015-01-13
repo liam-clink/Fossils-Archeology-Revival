@@ -9,12 +9,12 @@ Forked from [Flammarilva](https://github.com/fls81245)'s Fossil And Archeology m
 ## Fossils and Archeology Revival Contributors
 
 ###### Programmers  
-[Shadowbeast007](https://github.com/Shadowbeast)
-[Microjunk](https://github.com/Microjunk)
-[4f6f3b](https://github.com/4f6f3b)
-[Totara](https://github.com/TotaraStudios)
-[Cannibal Vox](https://github.com/CannibalVox)
-[Roomon1](https://github.com/Roomon1)
+[Shadowbeast007](https://github.com/Shadowbeast)  
+[Microjunk](https://github.com/Microjunk)  
+[4f6f3b](https://github.com/4f6f3b)  
+[Totara](https://github.com/TotaraStudios)  
+[Cannibal Vox](https://github.com/CannibalVox)  
+[Roomon1](https://github.com/Roomon1)  
 
 ###### Texture/Model Artists  
 [tyranno66](https://github.com/tyranno66)  
@@ -60,4 +60,3 @@ April 26, 2014 the Fossils and Archeology Revival was put under the Creative Com
 The source is now home in a public organization found here: [https://github.com/FossilsArcheologyRevival](https://github.com/FossilsArcheologyRevival).
 
 You are free to add this to any modpack, or otherwise use it as long as it falls under the CC license. We can only ask that in return you contribute something back to the project or the community.
-
