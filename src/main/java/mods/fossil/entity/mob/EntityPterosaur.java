@@ -1,11 +1,6 @@
 package mods.fossil.entity.mob;
 
 import io.netty.buffer.ByteBuf;
-
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-import java.util.Random;
-
 import mods.fossil.client.LocalizationStrings;
 import mods.fossil.client.gui.GuiPedia;
 import mods.fossil.fossilAI.DinoAIAttackOnCollide;
@@ -15,7 +10,6 @@ import mods.fossil.fossilAI.DinoAIFlying;
 import mods.fossil.fossilAI.DinoAIFollowOwner;
 import mods.fossil.fossilAI.DinoAIWander;
 import mods.fossil.fossilEnums.EnumDinoType;
-import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -32,7 +26,6 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -52,19 +45,24 @@ public class EntityPterosaur extends EntityFlyingDino {
 	public static final double maxHealth = EnumDinoType.Pterosaur.HealthMax;
 	public static final double maxDamage = EnumDinoType.Pterosaur.StrengthMax;
 	public static final double maxSpeed = EnumDinoType.Pterosaur.SpeedMax;
+	public static final int prevLegYaw = 0;
+	public static final float legYaw = 0;
 
 	public ItemStack ItemInMouth = null;
 	public int LearningChestTick = 900;
 	public int SubType = 0;
 	public int BreedTick = 3000;
 	public float AirSpeed = 0.0F;
-	public float AirAngle = 0.0F;
-	public float AirPitch = 0.0F;
 	public float LastAirPitch = .0F;
 	public float moveSpeed = 1.0F;
 	public boolean Landing = false;
 	public float WingState = 0.0F;
 	public int wingpause = 0;
+	public int legSwing;
+	
+    public static float AirAngle = 0.0F;
+	public static float AirPitch = 0.0F;
+	public static float AirRoll = 0;
 
 	public EntityPterosaur(World var1) {
 		super(var1, EnumDinoType.Pterosaur);
@@ -81,13 +79,12 @@ public class EntityPterosaur extends EntityFlyingDino {
 		// Size of dinosaur at age Adult.
 		this.maxSize = 4.0F;
 
-		this.tasks.addTask(0, new EntityAISwimming(this));
+		this.tasks.addTask(1, new EntityAISwimming(this));
 		this.tasks.addTask(3, new EntityAILeapAtTarget(this, 0.4F));
 		this.tasks.addTask(3, new DinoAIAttackOnCollide(this, 1.1D, true));
 		this.tasks.addTask(5, new DinoAIFollowOwner(this, 1.0F, 10.0F, 2.0F));
 		this.tasks.addTask(7, new DinoAIEat(this, 48));
-		this.tasks.addTask(7, new DinoAIFlying(this));
-		this.tasks.addTask(2, new DinoAIControlledByPlayer(this));//, 0.34F));
+		this.tasks.addTask(8, new DinoAIFlying(this));
 		this.tasks.addTask(7, new DinoAIWander(this, 1.0D));
 
 		this.tasks.addTask(4, new EntityAIAvoidEntity(this, EntityTRex.class,
@@ -99,13 +96,6 @@ public class EntityPterosaur extends EntityFlyingDino {
 		this.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));
 		this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
 
-		// this.tasks.addTask(1, new EntityAIRideGround(this, 1)); // mutex all
-
-		// mutex 1: waypointing
-		// mutex 2: continuous waypointing
-		// this.airTasks.addTask(0, new EntityAIRideAir(this)); // mutex all
-		// this.airTasks.addTask(0, new EntityAILand(this)); // mutex 0
-
 	}
 
 	/**
@@ -116,12 +106,16 @@ public class EntityPterosaur extends EntityFlyingDino {
 		if (this.isModelized()) {
 			return super.getTexture();
 		}
-
+		if(this.onGround) {
 		switch (this.getSubSpecies()) {
 		default:
-			return "fossil:textures/mob/Pterosaur2.png";
+			return "fossil:textures/mob/Pterosaur.png";
 		}
 	}
+    	else {
+    		return "fossil:textures/mob/Pterosaur_Flying.png";
+    	}
+}
 
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
@@ -195,6 +189,7 @@ public class EntityPterosaur extends EntityFlyingDino {
 
 	public void onUpdate() {
 		super.onUpdate();
+		
 	}
 
 	public float getEyeHeight() {
@@ -320,6 +315,7 @@ public class EntityPterosaur extends EntityFlyingDino {
 			return null;
 		}
 	}
+	
 
 	public void setRidingPlayer(EntityPlayer player) {
 		player.rotationYaw = this.rotationYaw;
@@ -368,7 +364,7 @@ public class EntityPterosaur extends EntityFlyingDino {
 			}
 		}
 	}
-
+	
 	public float getGLX() {
 		return (float)(0.8F+0.2*(float)this.getDinoAge());
 	}
@@ -386,7 +382,7 @@ public class EntityPterosaur extends EntityFlyingDino {
 		// TODO Auto-generated method stub
 
 	}
-
+	
 	@Override
 	public void readSpawnData(ByteBuf additionalData) {
 		// TODO Auto-generated method stub

@@ -41,13 +41,12 @@ interface C
     public static final int CARRY = 1 << 5; //Bit 5: Dino can Carry Items
 }
 
-public enum EnumDinoType
-{
+public enum EnumDinoType {
     //													C.MODEL	| C.TAME	| C.RIDE	| C.HERBIVORE/CARNIVORE | C.CARRY
     Triceratops(EntityTriceratops.class, 				C.MODEL | C.TAME  	| C.RIDE 	| C.HERBIVORE),
     Velociraptor(EntityVelociraptor.class,						  C.TAME  				| C.CARNIVORE),
     TRex(EntityTRex.class, 								C.MODEL | C.TAME    | C.RIDE  	| C.CARNIVORE),
-    Pterosaur(EntityPterosaur.class, 					C.MODEL | C.TAME    | C.RIDE	| C.CARNIVORE),
+    Pterosaur(EntityPterosaur.class, 					C.MODEL | C.TAME             	| C.CARNIVORE),
     Nautilus(EntityNautilus.class, 						C.NOTHING),
     Plesiosaur(EntityPlesiosaur.class, 					C.MODEL | C.TAME  	| C.RIDE 	| C.CARNIVORE),
     Mosasaurus(EntityMosasaurus.class, 					C.MODEL |  		  				  C.CARNIVORE),
@@ -291,26 +290,6 @@ public enum EnumDinoType
         Ankylosaurus.FoodBlockList.addblock(EnumDinoFoodBlock.RedFlower);
         Ankylosaurus.FoodBlockList.addblock(EnumDinoFoodBlock.YellowFlower);
 
-        /*
-         * Sarcosuchus
-         */
-        
-        Sarcosuchus.setItems(Items.bone);
-        Sarcosuchus.setAges(5, 12, -1);
-        Sarcosuchus.setDinoSize(sizeBaby, sizeTeen, sizeAdult);
-        Sarcosuchus.setProperties(25.0D, 70.0D, 2.0D, 9.0D, 0.25D, -1, 500);
-        Sarcosuchus.setExperience(0.5F, 0.2F);
-        Sarcosuchus.FoodItemList.addItem(EnumDinoFoodItem.FishRaw);
-        Sarcosuchus.FoodItemList.addItem(EnumDinoFoodItem.FishCooked);
-        Sarcosuchus.FoodItemList.addItem(EnumDinoFoodItem.BeefCooked);
-        Sarcosuchus.FoodItemList.addItem(EnumDinoFoodItem.BeefRaw);
-        Sarcosuchus.FoodItemList.addItem(EnumDinoFoodItem.PorkCooked);
-        Sarcosuchus.FoodItemList.addItem(EnumDinoFoodItem.PorkRaw);
-        Sarcosuchus.FoodItemList.addItem(EnumDinoFoodItem.ChickenRaw);
-        Sarcosuchus.FoodMobList.addMob(EnumDinoFoodMob.Chicken);
-        Sarcosuchus.FoodMobList.addMob(EnumDinoFoodMob.Dodo);
-        
-
         Brachiosaurus.setItems(Items.stick);
         Brachiosaurus.setAges(9, 20, -1);
         Brachiosaurus.setDinoSize(sizeBaby, sizeTeen, sizeAdult);
@@ -476,7 +455,15 @@ public enum EnumDinoType
         Pterosaur.FoodItemList.addItem(EnumDinoFoodItem.ChickenRaw);
         Pterosaur.FoodMobList.addMob(EnumDinoFoodMob.Chicken);
         
-
+        Sarcosuchus.setItems(Items.bone);
+        Sarcosuchus.setAges(5, 12, -1);
+        Sarcosuchus.setDinoSize(sizeBaby, sizeTeen, sizeAdult);
+        Sarcosuchus.setProperties(25.0D, 70.0D, 2.0D, 9.0D, 0.25D, -1, 500);
+        Sarcosuchus.setExperience(0.5F, 0.2F);
+        EnumDinoFoodItem.carnivoreItemPreset(Sarcosuchus);
+        Sarcosuchus.FoodMobList.addMob(EnumDinoFoodMob.Chicken);
+        Sarcosuchus.FoodMobList.addMob(EnumDinoFoodMob.Dodo);
+        
         Spinosaurus.setItems(Fossil.skullStick);
         Spinosaurus.setAges(5, 12, -1);
         Spinosaurus.setDinoSize(sizeBaby, sizeTeen, sizeAdult);
@@ -494,7 +481,6 @@ public enum EnumDinoType
         Spinosaurus.FoodMobList.addMob(EnumDinoFoodMob.Dodo);
         Spinosaurus.FoodMobList.addMob(EnumDinoFoodMob.Pig);
         Spinosaurus.FoodMobList.addMob(EnumDinoFoodMob.Cow);
-        TRex.FoodMobList.addMob(EnumDinoFoodMob.Horse);
         Spinosaurus.FoodMobList.addMob(EnumDinoFoodMob.Plesiosaur);
         
         

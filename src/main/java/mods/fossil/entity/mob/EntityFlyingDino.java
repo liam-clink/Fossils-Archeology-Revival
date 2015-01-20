@@ -16,7 +16,7 @@ public class EntityFlyingDino extends EntityDinosaur
     final private float     FLY_TO_POINT_BASE_SPEED = 0.25f;
     final private float     FLY_TO_POINT_SPEED = 0.05f;
     final private float     FLY_TO_POINT_MAX_SPEED = 20.0f;
-     
+    private boolean isFlying;
     // =============
     // MEMBERS
     // =============
@@ -128,14 +128,7 @@ public class EntityFlyingDino extends EntityDinosaur
     public void onLivingUpdate()
     {
         super.onLivingUpdate();
- 
-        // Update flight.
-       // if( this.isAirBorne )
         {
-            //if( this.worldObj.isAirBlock( (int)m_fFlightDestinationX, (int)m_fFlightDestinationY, (int)m_fFlightDestinationZ ) == false  )
-            //{
-            //  return;
-            //}
              
             double dToDestX = m_fFlightDestinationX - posX;
             double dToDestY = m_fFlightDestinationY - posY;
@@ -226,14 +219,9 @@ public class EntityFlyingDino extends EntityDinosaur
     public void SetInWater( boolean _bInWater )
     {
         this.inWater = _bInWater;       
-         
-    }
      
-    public void SetAirborne( boolean _bAirborne )
-    {
-        this.isAirBorne = _bAirborne;
     }
-
+    
 	@Override
 	public void writeSpawnData(ByteBuf buffer) {
 		// TODO Auto-generated method stub

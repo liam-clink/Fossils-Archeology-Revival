@@ -6,6 +6,7 @@ public class FossilOptions
 {
     
     public static boolean Gen_Palaeoraphe;
+    public static boolean Allow_Flying;
     public static boolean Gen_Academy;
     public static boolean Gen_Ships;
     public static boolean Gen_Temple;
@@ -35,6 +36,7 @@ public class FossilOptions
         Gen_Temple = config.get("option", "Temple", true).getBoolean(true);
         Lang_Server = config.get("option", "Serverlanguage", "en_US").getString();
         Heal_Dinos = config.get("option", "Heal_Dinos", true).getBoolean(true);
+        Allow_Flying = config.get("option", "Allow_Flying", false).getBoolean(false);
         Dinos_Starve = config.get("option", "Dinos_Starve", true).getBoolean(true);
         Dino_Block_Breaking = config.get("option", "Dino_Block_Breaking", true).getBoolean(true);
         Skull_Overlay = config.get("option", "Skull_Overlay", false).getBoolean(false);

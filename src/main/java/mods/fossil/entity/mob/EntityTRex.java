@@ -504,7 +504,6 @@ public class EntityTRex extends EntityDinosaur
             return super.getTexture();
         }
 
-
         if (this.isWeak())
         {
             switch (this.getSubSpecies())
@@ -514,7 +513,6 @@ public class EntityTRex extends EntityDinosaur
             default:
             	return texturePath + "TRex_Weak.png";
             }
-
         }
 
         if (this.isAdult() && !this.isTamed())

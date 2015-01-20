@@ -43,6 +43,7 @@ public enum EnumDinoFoodItem
     Triceratops(EnumDinoType.Triceratops.DropItem, 55, 5),
     Velociraptor(EnumDinoType.Velociraptor.DropItem, 28, 3),
     TRex(EnumDinoType.TRex.DropItem, 60, 7),
+    Sarcosuchus(EnumDinoType.Sarcosuchus.DropItem, 60, 7),
     Pterosaur(EnumDinoType.Pterosaur.DropItem, 35, 2),
     Plesiosaur(EnumDinoType.Plesiosaur.DropItem, 40, 5),
     Mosasaurus(EnumDinoType.Mosasaurus.DropItem, 30, 4),
@@ -133,6 +134,7 @@ public enum EnumDinoFoodItem
     	dinoType.FoodItemList.addItem(Pterosaur);
     	dinoType.FoodItemList.addItem(Plesiosaur);
     	dinoType.FoodItemList.addItem(Mosasaurus);
+    	dinoType.FoodItemList.addItem(Sarcosuchus);
     	dinoType.FoodItemList.addItem(Liopleurodon);
     	dinoType.FoodItemList.addItem(Stegosaurus);
     	dinoType.FoodItemList.addItem(Dilophosaurus);
