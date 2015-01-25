@@ -27,6 +27,13 @@ public class RenderPlayer {
 					MinecraftProfileTexture.Type.CAPE, new ResourceLocation(
 							"fossil", "textures/FossilCape.png"));
 		}
+		
+		else if(e.entityPlayer instanceof AbstractClientPlayer
+				&& isDonator(e.entityPlayer.getUniqueID())) {
+			((AbstractClientPlayer) e.entityPlayer).func_152121_a(
+					MinecraftProfileTexture.Type.CAPE, new ResourceLocation(
+							"fossil", "textures/DonatorCape.png"));
+		}
 	}
 	
 	/*
@@ -39,6 +46,15 @@ public class RenderPlayer {
 	public boolean isDeveloper(UUID userid) {
 		for (UUID uuid1 : devuuid) {
 			if (userid.equals(uuid1)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean isDonator(UUID userid) {
+		for(UUID uuid1 : donatoruuid) {
+			if(userid.equals(uuid1)) {
 				return true;
 			}
 		}
@@ -58,4 +74,10 @@ public class RenderPlayer {
 	/*Bluestreak52*/UUID.fromString("5468a8f2-84d6-46e2-b58c-f9d576b67544"),
 	/*Robberto08*/UUID.fromString("05b14ce7-0ff1-4b8e-9ef8-d98502e9bf07")
 	};
+	
+	public UUID[] donatoruuid = new UUID[] {
+	/*ginjaninjas7*/UUID.fromString("18eb6ad8-1656-4e41-89f6-88b708a0474c")
+	};
+	
+	
 }
