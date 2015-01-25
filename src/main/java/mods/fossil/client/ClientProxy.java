@@ -36,12 +36,15 @@ import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 
-public class ClientProxy extends CommonProxy
-{
+public class ClientProxy extends CommonProxy {
 	
     @Override
-    public void registerRenderThings()
-    {
+    public void registerRenderThings() {
+    	
+    	/*
+    	 * Entity Registry
+    	 */
+    	
         RenderingRegistry.registerEntityRenderingHandler(EntityStoneboard.class, new RenderStoneboard());
         RenderingRegistry.registerEntityRenderingHandler(EntityTriceratops.class, new RenderTriceratops(new ModelTriceratops(), 0.5F));
         RenderingRegistry.registerEntityRenderingHandler(EntityVelociraptor.class, new RenderVelociraptor(new ModelVelociraptor(), 0.5F));
@@ -73,35 +76,53 @@ public class ClientProxy extends CommonProxy
         RenderingRegistry.registerEntityRenderingHandler(EntityGallimimus.class, new RenderGallimimus(new ModelGallimimus(), 0.5F));
         RenderingRegistry.registerEntityRenderingHandler(EntitySarcosuchus.class, new RenderSarcosuchus(new ModelSarcosuchus(), 0.5F));
         RenderingRegistry.registerEntityRenderingHandler(EntityAllosaurus.class, new RenderAllosaurus(new ModelAllosaurus(), 0.5F));
-        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(Fossil.figurineBlock), new ItemFigurineRenderer());
-        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(Fossil.vaseVoluteBlock), new ItemVaseVoluteRenderer());
-        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(Fossil.vaseAmphoraBlock), new ItemVaseAmphoraRenderer());
-        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(Fossil.vaseKylixBlock), new ItemVaseKylixRenderer());
-        //MinecraftForgeClient.registerItemRenderer(Fossil.blockSifterIdle.blockID, new ItemSifterRenderer());
         RenderingRegistry.registerEntityRenderingHandler(EntityCoelacanth.class, new RenderCoelacanth(new ModelCoelacanth(), 0.5F));
         RenderingRegistry.registerEntityRenderingHandler(EntityLiopleurodon.class, new RenderLiopleurodon(new ModelLiopleurodon(), 0.5F));
         RenderingRegistry.registerEntityRenderingHandler(EntityQuagga.class, new RenderQuagga(new ModelQuagga(), 0.5F));
         RenderingRegistry.registerEntityRenderingHandler(EntityTerrorBird.class, new RenderTerrorBird(new ModelTerrorBird(), 0.5F));
         RenderingRegistry.registerEntityRenderingHandler(EntityTerrorBirdEgg.class, new RenderSnowball(Fossil.terrorBirdEgg));
         RenderingRegistry.registerEntityRenderingHandler(EntityElasmotherium.class, new RenderElasmotherium(new ModelElasmotherium(), 0.5F));
-
+        
+        /*
+         * Item Registry
+         */
+        
+        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(Fossil.figurineBlock), new ItemFigurineRenderer());
+        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(Fossil.vaseVoluteBlock), new ItemVaseVoluteRenderer());
+        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(Fossil.vaseAmphoraBlock), new ItemVaseAmphoraRenderer());
+        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(Fossil.vaseKylixBlock), new ItemVaseKylixRenderer());
+        
+        /*
+         * Block Registry
+         */
+        
         RenderingRegistry.registerBlockHandler(Fossil.feederRenderID, new RenderFeeder());
 
+        /*
+         * Villager Registry
+         */
+        
     	VillagerRegistry.instance().registerVillagerSkin(10, new ResourceLocation("fossil:textures/mob/Archaeologist.png"));
     }
 
+    /*
+     * TileEntity Registry
+     */
+    
     @Override
-    public void registerTileEntitySpecialRenderer()
-    {
+    public void registerTileEntitySpecialRenderer() {
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTimeMachine.class, new RenderTNClock());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFigurine.class, new TileEntityFigurineRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityVase.class, new TileEntityVaseRenderer()); 
-       // ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySifter.class, new TileEntitySifterRenderer());
     }
 
-    public void registerEvents()
-    {
+    /*
+     * Events Registery
+     */
+    
+    public void registerEvents() {
         MinecraftForge.EVENT_BUS.register(new GuiBoneHelmet(Minecraft.getMinecraft()));
+        MinecraftForge.EVENT_BUS.register(new RenderPlayer());
     }
     
 

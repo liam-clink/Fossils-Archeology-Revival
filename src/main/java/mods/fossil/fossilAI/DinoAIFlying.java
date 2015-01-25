@@ -34,7 +34,7 @@ public class DinoAIFlying extends EntityAIBase {
 	
 	public DinoAIFlying(EntityFlyingDino Dinosaur) {
 		dino = Dinosaur;
-		this.setMutexBits(2);
+		this.setMutexBits(5);
 	}
 	
 	@Override

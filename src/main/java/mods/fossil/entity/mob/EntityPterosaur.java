@@ -75,13 +75,13 @@ public class EntityPterosaur extends EntityFlyingDino {
 		// Size of dinosaur at age Adult.
 		this.maxSize = 4.0F;
 
-		this.tasks.addTask(1, new EntityAISwimming(this));
-		this.tasks.addTask(3, new EntityAILeapAtTarget(this, 0.4F));
-		this.tasks.addTask(4, new DinoAIAttackOnCollide(this, 1.1D, true));
-		this.tasks.addTask(5, new DinoAIFollowOwner(this, 1.0F, 10.0F, 2.0F));
+		this.tasks.addTask(4, new EntityAISwimming(this));
+		this.tasks.addTask(2, new EntityAILeapAtTarget(this, 0.4F));
+		this.tasks.addTask(9, new DinoAIAttackOnCollide(this, 1.1D, true));
+		this.tasks.addTask(3, new DinoAIFollowOwner(this, 1.0F, 10.0F, 2.0F));
 		this.tasks.addTask(7, new DinoAIEat(this, 48));
-		this.tasks.addTask(2, new DinoAIFlying(this));
-		this.tasks.addTask(7, new DinoAIWander(this, 1.0D));
+		this.tasks.addTask(5, new DinoAIFlying(this));
+		this.tasks.addTask(1, new DinoAIWander(this, 1.0D));
 		this.tasks.addTask(4, new EntityAIAvoidEntity(this, EntityTRex.class,
 				16.0F, 0.8D, 1.33D));
 		this.tasks.addTask(4, new EntityAIAvoidEntity(this,
