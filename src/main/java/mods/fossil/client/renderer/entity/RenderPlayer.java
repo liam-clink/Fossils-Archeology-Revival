@@ -34,13 +34,20 @@ public class RenderPlayer {
 					MinecraftProfileTexture.Type.CAPE, new ResourceLocation(
 							"fossil", "textures/DonatorCape.png"));
 		}
+		
+		else if(e.entityPlayer instanceof AbstractClientPlayer
+				&& isContributor(e.entityPlayer.getUniqueID())) {
+			((AbstractClientPlayer) e.entityPlayer).func_152121_a(
+					MinecraftProfileTexture.Type.CAPE, new ResourceLocation(
+							"fossil", "textures/ContributorCape.png"));
+		}
 	}
 	
 	/*
 	 * Checks the players uuid
 	 * to make sure it is in the
 	 * array to confirm they are a
-	 * developer
+	 * developer / Donator / Contributor
 	 */
 	
 	public boolean isDeveloper(UUID userid) {
@@ -54,6 +61,15 @@ public class RenderPlayer {
 	
 	public boolean isDonator(UUID userid) {
 		for(UUID uuid1 : donatoruuid) {
+			if(userid.equals(uuid1)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean isContributor(UUID userid) {
+		for(UUID uuid1 : contributoruuid) {
 			if(userid.equals(uuid1)) {
 				return true;
 			}
@@ -79,5 +95,13 @@ public class RenderPlayer {
 	/*ginjaninjas7*/UUID.fromString("18eb6ad8-1656-4e41-89f6-88b708a0474c")
 	};
 	
-	
+	public UUID[] contributoruuid = new UUID[] {
+	/*Alexthe666*/UUID.fromString("71363abe-fd03-49c9-940d-aae8b8209b7c"),
+	/*cyborx25*/UUID.fromString("c1637beb-4336-42f2-ad0b-a7188cf13042"),
+	/*ExDragonith*/UUID.fromString("a7970406-e0ac-446b-8fe0-d42c94b594ea"),
+	/*duckdude173*/UUID.fromString("12bde8ed-cfe9-49ac-af14-71762a3f49db"),
+	/*whitejoshman*/UUID.fromString("28bcc73a-2726-49e8-ac1b-f02dbbb0c83b"),
+	/*Shadowbeast007*/UUID.fromString("df3d1115-6601-4346-a063-f1254bf5a069"),
+	/*MicroJunk*/UUID.fromString("d1c57f9a-069b-46af-b9ee-44ab0fce1d80")
+	};
 }
