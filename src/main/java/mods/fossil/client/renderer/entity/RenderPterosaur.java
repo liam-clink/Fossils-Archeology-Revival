@@ -41,16 +41,16 @@ public class RenderPterosaur extends RenderLiving {
 	protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2)
     {
         this.preRenderScale((EntityPterosaur)par1EntityLivingBase, par2);
-        if (((EntityPterosaur)par1EntityLivingBase).onGround)
+        if (((EntityPterosaur)par1EntityLivingBase).isFlying)
         	{
-            if (!(this.mainModel instanceof ModelPterosaurGround))
+            if (!(this.mainModel instanceof ModelPterosaurFlying))
             {
-                this.mainModel = new ModelPterosaurGround();
+                this.mainModel = new ModelPterosaurFlying();
             }
         }
-        else if (this.mainModel instanceof ModelPterosaurGround)
+        else if (this.mainModel instanceof ModelPterosaurFlying)
         {
-            this.mainModel = new ModelPterosaurFlying();
+            this.mainModel = new ModelPterosaurGround();
         }
         
     }

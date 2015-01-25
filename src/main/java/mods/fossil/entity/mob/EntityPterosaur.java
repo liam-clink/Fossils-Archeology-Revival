@@ -55,10 +55,6 @@ public class EntityPterosaur extends EntityFlyingDino {
 	public float AirSpeed = 0.0F;
 	public float LastAirPitch = .0F;
 	public float moveSpeed = 1.0F;
-	public boolean Landing = false;
-	public float WingState = 0.0F;
-	public int wingpause = 0;
-	public int legSwing;
 	
     public static float AirAngle = 0.0F;
 	public static float AirPitch = 0.0F;
@@ -81,17 +77,15 @@ public class EntityPterosaur extends EntityFlyingDino {
 
 		this.tasks.addTask(1, new EntityAISwimming(this));
 		this.tasks.addTask(3, new EntityAILeapAtTarget(this, 0.4F));
-		this.tasks.addTask(3, new DinoAIAttackOnCollide(this, 1.1D, true));
+		this.tasks.addTask(4, new DinoAIAttackOnCollide(this, 1.1D, true));
 		this.tasks.addTask(5, new DinoAIFollowOwner(this, 1.0F, 10.0F, 2.0F));
 		this.tasks.addTask(7, new DinoAIEat(this, 48));
-		this.tasks.addTask(8, new DinoAIFlying(this));
+		this.tasks.addTask(2, new DinoAIFlying(this));
 		this.tasks.addTask(7, new DinoAIWander(this, 1.0D));
-
 		this.tasks.addTask(4, new EntityAIAvoidEntity(this, EntityTRex.class,
 				16.0F, 0.8D, 1.33D));
 		this.tasks.addTask(4, new EntityAIAvoidEntity(this,
 				EntitySpinosaurus.class, 16.0F, 0.8D, 1.33D));
-
 		this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
 		this.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));
 		this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
@@ -101,21 +95,20 @@ public class EntityPterosaur extends EntityFlyingDino {
 	/**
 	 * Returns the texture's file path as a String.
 	 */
+	
 	@Override
 	public String getTexture() {
 		if (this.isModelized()) {
 			return super.getTexture();
-		}
-		if(this.onGround) {
-		switch (this.getSubSpecies()) {
-		default:
-			return "fossil:textures/mob/Pterosaur.png";
-		}
+			
+			}
+			if(!this.isFlying) {
+					return "fossil:textures/mob/Pterosaur.png";
+				}
+				else {
+					return "fossil:textures/mob/Pterosaur_Flying.png";
+				}
 	}
-    	else {
-    		return "fossil:textures/mob/Pterosaur_Flying.png";
-    	}
-}
 
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();

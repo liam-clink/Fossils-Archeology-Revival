@@ -7,10 +7,12 @@ import mods.fossil.fossilAI.DinoAIAttackOnCollide;
 import mods.fossil.fossilAI.DinoAIEat;
 import mods.fossil.fossilAI.DinoAIFollowOwner;
 import mods.fossil.fossilAI.DinoAIRideGround;
+import mods.fossil.fossilAI.DinoAITargetNonTamedExceptSelfClass;
 import mods.fossil.fossilAI.DinoAIWander;
 import mods.fossil.fossilEnums.EnumDinoType;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
@@ -47,7 +49,7 @@ public class EntitySarcosuchus extends EntityDinosaur {
 		// Size of dinosaur at day 0.
 		this.minSize = 0.2F;
 		// Size of dinosaur at age Adult.
-		this.maxSize = 2.0F;
+		this.maxSize = 1.3F;
 
 		this.getNavigator().setCanSwim(true);
 		this.tasks.addTask(8, new EntityAISwimming(this));
@@ -58,6 +60,7 @@ public class EntitySarcosuchus extends EntityDinosaur {
 		this.tasks.addTask(9, new EntityAILookIdle(this));
 		tasks.addTask(1, new DinoAIRideGround(this, 1));
 		this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
+		this.targetTasks.addTask(2, new DinoAITargetNonTamedExceptSelfClass(this, EntityLiving.class, 750, false));
 		this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
 	}
 

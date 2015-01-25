@@ -85,7 +85,7 @@ public class EntityTRex extends EntityDinosaur
         this.tasks.addTask(9, new EntityAILookIdle(this));
         this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
         this.targetTasks.addTask(2, new DinoAITargetNonTamedExceptSelfClass(this, EntityLiving.class, 750, false));
-        tasks.addTask(1, new DinoAIRideGround(this, 1)); // mutex all
+        tasks.addTask(1, new DinoAIRideGround(this, 1));
         this.tasks.addTask(2, this.aiControlledByPlayer = new EntityAIControlledByPlayer(this, 0.3F));
 
         this.targetTasks.addTask(5, new DinoAIHunt(this, EntityLiving.class, 200, false));
@@ -146,22 +146,6 @@ public class EntityTRex extends EntityDinosaur
             this.rotationPitch = this.rotationYaw = 0;
     	}
     }
-    
-    /**
-     * Applies a velocity to each of the entities pushing them away from each other. Args: entity
-     */
-    
-   /*
-    public void applyEntityCollision(Entity var1)
-    {
-        if (var1 instanceof EntityLiving && !(var1 instanceof EntityPlayer) && this.getHunger() < this.SelfType.MaxHunger / 2 && this.onGround && this.getDinoAge() > 3)
-        {
-            ((EntityLiving)var1).attackEntityFrom(DamageSource.causeMobDamage(this), 10);
-        }
-    }
-    */
-
-    
 
     public float getEyeHeight()
     {

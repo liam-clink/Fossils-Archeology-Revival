@@ -376,7 +376,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements
 		return this.isModelized() ? this.getModelTexture() : Fossil.modid + ":"
 				+ "textures/mob/DinoModel" + this.SelfType.toString() + ".png";
 	}
-
+	
 	public void moveEntityWithHeading(float par1, float par2) {
 		if (!isModelized()) {
 			super.moveEntityWithHeading(par1, par2);

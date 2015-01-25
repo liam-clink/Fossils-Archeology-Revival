@@ -5,6 +5,7 @@ import io.netty.buffer.ByteBuf;
 import java.util.Random;
 
 import mods.fossil.Fossil;
+import mods.fossil.AI.FossilAIWildIndividualBase;
 import mods.fossil.client.LocalizationStrings;
 import mods.fossil.fossilAI.WaterDinoAIAttack;
 import mods.fossil.fossilAI.WaterDinoAIEat;
@@ -58,11 +59,11 @@ public class EntityMosasaurus extends EntitySwimmingDino implements IMob
          */
         this.adultAge = EnumDinoType.Mosasaurus.AdultAge;
         // Set initial size for hitbox. (length/width, height)
-        this.setSize(1.5F, 0.5F);
+        this.setSize(1.5F, 0.6F);
         // Size of dinosaur at day 0.
-        this.minSize = 1.0F;
+        this.minSize = 1.2F;
         // Size of dinosaur at age Adult.
-        this.maxSize = 3.0F;
+        this.maxSize = 3.4F;
         this.experienceValue = 5;
         
         this.getNavigator().setCanSwim(true);
