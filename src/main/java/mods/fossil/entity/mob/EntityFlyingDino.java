@@ -54,18 +54,17 @@ public class EntityFlyingDino extends EntityDinosaur {
 				if (!worldObj.isRemote) {
 					if (getEntityToAttack() == null) {
 						if (rand.nextInt(400) == 0)
-							if (!isFlying)
-								setFlying(true);
-							else
-								setFlying(false);
+							if(!this.getOrderType().equals(this.OrderStatus.Stay))
+									if(!isFlying)
+									setFlying(true);
+									else
+									setFlying(false);
 
-						if(isFlying)
+						if(isFlying) {
 							flyAround();
-						else if(FossilOptions.Allow_Flying == false) {
-							// Does nothing on ground but normal stuff!
 						}
 						else {
-							// Does nothing on ground but normal stuff!
+
 						}
 
 						if (getEntityToAttack() != null) {
@@ -81,9 +80,7 @@ public class EntityFlyingDino extends EntityDinosaur {
 				}
 			}
 		}
-
 		super.onLivingUpdate();
-
 	}
 
 	public void flyTowardsTarget() {
