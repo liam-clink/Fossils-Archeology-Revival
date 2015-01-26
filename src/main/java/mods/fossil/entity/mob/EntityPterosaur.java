@@ -4,7 +4,6 @@ import io.netty.buffer.ByteBuf;
 import mods.fossil.client.LocalizationStrings;
 import mods.fossil.client.gui.GuiPedia;
 import mods.fossil.fossilAI.DinoAIAttackOnCollide;
-import mods.fossil.fossilAI.DinoAIControlledByPlayer;
 import mods.fossil.fossilAI.DinoAIEat;
 import mods.fossil.fossilAI.DinoAIFlying;
 import mods.fossil.fossilAI.DinoAIFollowOwner;
@@ -22,6 +21,7 @@ import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
@@ -29,7 +29,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class EntityPterosaur extends EntityFlyingDino {
+public class EntityPterosaur extends EntityDinosaur {
 	// base attributes
 	public static final double BASE_SPEED_GROUND = 0.3;
 	public static final double BASE_SPEED_AIR = 1.5;
@@ -45,8 +45,6 @@ public class EntityPterosaur extends EntityFlyingDino {
 	public static final double maxHealth = EnumDinoType.Pterosaur.HealthMax;
 	public static final double maxDamage = EnumDinoType.Pterosaur.StrengthMax;
 	public static final double maxSpeed = EnumDinoType.Pterosaur.SpeedMax;
-	public static final int prevLegYaw = 0;
-	public static final float legYaw = 0;
 
 	public ItemStack ItemInMouth = null;
 	public int LearningChestTick = 900;
@@ -55,10 +53,8 @@ public class EntityPterosaur extends EntityFlyingDino {
 	public float AirSpeed = 0.0F;
 	public float LastAirPitch = .0F;
 	public float moveSpeed = 1.0F;
-	
-    public static float AirAngle = 0.0F;
-	public static float AirPitch = 0.0F;
-	public static float AirRoll = 0;
+	public boolean isFlying;
+	public ChunkCoordinates currentTarget;
 
 	public EntityPterosaur(World var1) {
 		super(var1, EnumDinoType.Pterosaur);
@@ -95,20 +91,19 @@ public class EntityPterosaur extends EntityFlyingDino {
 	/**
 	 * Returns the texture's file path as a String.
 	 */
-	
+
 	@Override
 	public String getTexture() {
 		if (this.isModelized()) {
 			return super.getTexture();
-			
+
+		}
+		if (!this.checkGround(this)) {
+				return "fossil:textures/mob/Pterosaur_Flying.png";
+			} else {
+				return "fossil:textures/mob/Pterosaur.png";
 			}
-			if(!this.isFlying) {
-					return "fossil:textures/mob/Pterosaur.png";
-				}
-				else {
-					return "fossil:textures/mob/Pterosaur_Flying.png";
-				}
-	}
+		}
 
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
@@ -167,22 +162,12 @@ public class EntityPterosaur extends EntityFlyingDino {
 	}
 
 	/**
-	 * Called frequently so the entity can update its state every tick as
-	 * required. For example, zombies and skeletons use this to react to
-	 * sunlight and start to burn.
-	 */
-
-	public void onLivingUpdate() {
-		super.onLivingUpdate();
-	}
-
-	/**
 	 * Called to update the entity's position/logic.
 	 */
 
 	public void onUpdate() {
 		super.onUpdate();
-		
+
 	}
 
 	public float getEyeHeight() {
@@ -278,14 +263,6 @@ public class EntityPterosaur extends EntityFlyingDino {
 		this.motionY = 0.5D;
 	}
 
-	/**
-	 * Takes in the distance the entity has fallen this tick and whether its on
-	 * the ground to update the fall distance and deal fall damage if landing on
-	 * the ground. Args: distanceFallenThisTick, onGround
-	 * 
-	 * protected void updateFallState(double par1, boolean par3) {}
-	 */
-
 	@Override
 	public EntityAgeable createChild(EntityAgeable var1) {
 		EntityPterosaur baby = new EntityPterosaur(this.worldObj);
@@ -308,12 +285,101 @@ public class EntityPterosaur extends EntityFlyingDino {
 			return null;
 		}
 	}
-	
 
 	public void setRidingPlayer(EntityPlayer player) {
 		player.rotationYaw = this.rotationYaw;
 		player.rotationPitch = this.rotationPitch;
 		player.mountEntity(this);
+	}
+
+	/*
+	 * Personal thanks to Alexthe666 for giving us his flying code
+	 */
+
+	protected void updateFallState(double par1, boolean par3) {
+		// Intentionally left blank.
+	}
+
+	@Override
+	protected void fall(float par1) {
+	}
+
+	public void setFlying(boolean state) {
+		isFlying = state;
+
+	}
+
+	public void onLivingUpdate() {
+
+		if (motionY < 0.0D) {
+			motionY *= 0.6D;
+		}
+		if (this.riddenByEntity == null) {
+			if (!this.isSitting()) {
+				if (!worldObj.isRemote) {
+					if (getEntityToAttack() == null) {
+						if (rand.nextInt(400) == 0)
+							if (!this.getOrderType().equals(
+									this.OrderStatus.Stay))
+								if (!isFlying)
+									setFlying(true);
+								else
+									setFlying(false);
+
+						if (isFlying) {
+							flyAround();
+						} else {
+
+						}
+
+						if (getEntityToAttack() != null) {
+							currentTarget = new ChunkCoordinates(
+									(int) getEntityToAttack().posX,
+									(int) ((int) getEntityToAttack().posY + getEntityToAttack()
+											.getEyeHeight()),
+									(int) getEntityToAttack().posZ);
+							setFlying(false);
+							flyTowardsTarget();
+						}
+					}
+				}
+			}
+		}
+		super.onLivingUpdate();
+	}
+
+	public void flyTowardsTarget() {
+		if (currentTarget != null) {
+			double targetX = currentTarget.posX + 0.5D - posX;
+			double targetY = currentTarget.posY + 1D - posY;
+			double targetZ = currentTarget.posZ + 0.5D - posZ;
+			motionX += (Math.signum(targetX) * 0.5D - motionX) * 0.10000000149011612D;
+			motionY += (Math.signum(targetY) * 0.699999988079071D - motionY) * 0.10000000149011612D;
+			motionZ += (Math.signum(targetZ) * 0.5D - motionZ) * 0.10000000149011612D;
+			float angle = (float) (Math.atan2(motionZ, motionX) * 180.0D / Math.PI) - 90.0F;
+			float rotation = MathHelper.wrapAngleTo180_float(angle
+					- rotationYaw);
+			moveForward = 0.5F;
+			rotationYaw += rotation;
+		}
+
+	}
+
+	public void flyAround() {
+		if (currentTarget != null)
+			if (!worldObj.isAirBlock(currentTarget.posX, currentTarget.posY,
+					currentTarget.posZ) || currentTarget.posY < 1)
+				currentTarget = null;
+
+		if (currentTarget == null
+				|| rand.nextInt(30) == 0
+				|| currentTarget.getDistanceSquared((int) posX, (int) posY,
+						(int) posZ) < 10F)
+			currentTarget = new ChunkCoordinates((int) posX + rand.nextInt(90)
+					- rand.nextInt(60), (int) posY + rand.nextInt(60) - 2,
+					(int) posZ + rand.nextInt(90) - rand.nextInt(60));
+
+		flyTowardsTarget();
 	}
 
 	/**
@@ -357,25 +423,35 @@ public class EntityPterosaur extends EntityFlyingDino {
 			}
 		}
 	}
-	
+
+	public boolean checkGround(EntityPterosaur reptile) {
+		reptile = this;
+		if (reptile.worldObj.isAirBlock((int) reptile.posX,
+				(int) reptile.posY - 1, (int) reptile.posZ)) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
 	public float getGLX() {
-		return (float)(0.8F+0.2*(float)this.getDinoAge());
+		return (float) (0.8F + 0.2 * (float) this.getDinoAge());
 	}
 
 	public float getGLY() {
-		return (float)(0.8F+0.2*(float)this.getDinoAge());
+		return (float) (0.8F + 0.2 * (float) this.getDinoAge());
 	}
-	
+
 	public float getGLZ() {
-		return (float)(0.8F+0.2*(float)this.getDinoAge());
+		return (float) (0.8F + 0.2 * (float) this.getDinoAge());
 	}
-	
+
 	@Override
 	public void writeSpawnData(ByteBuf buffer) {
 		// TODO Auto-generated method stub
 
 	}
-	
+
 	@Override
 	public void readSpawnData(ByteBuf additionalData) {
 		// TODO Auto-generated method stub

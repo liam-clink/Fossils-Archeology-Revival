@@ -2,18 +2,10 @@ package mods.fossil.fossilAI;
 
 import java.util.Random;
 
+import mods.fossil.entity.mob.EntityDinosaur;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.RandomPositionGenerator;
-import mods.fossil.client.FossilOptions;
-import mods.fossil.entity.mob.EntityDinosaur;
-import mods.fossil.entity.mob.EntityFlyingDino;
-import mods.fossil.fossilEnums.EnumOrderType;
-import net.minecraft.block.material.Material;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
-import net.minecraft.entity.ai.RandomPositionGenerator;
 
 public class DinoAIFlying extends EntityAIBase {
 
@@ -21,7 +13,7 @@ public class DinoAIFlying extends EntityAIBase {
 		FS_ON_GROUND, FS_IN_AIR, FS_ASCENDING, FS_DESCENDING
 	};
 
-	private EntityFlyingDino dino = null;
+	private EntityDinosaur dino = null;
 	public static eFlyingState currentState = eFlyingState.FS_ON_GROUND;
 	protected eFlyingState previousState = eFlyingState.FS_ON_GROUND;
 	protected boolean isAscending = false;
@@ -32,7 +24,7 @@ public class DinoAIFlying extends EntityAIBase {
 	private float MOTION_VECTOR_SCALE = 100.0f;
 	private float SPEED_IN_AIR = 0.1f;
 	
-	public DinoAIFlying(EntityFlyingDino Dinosaur) {
+	public DinoAIFlying(EntityDinosaur Dinosaur) {
 		dino = Dinosaur;
 		this.setMutexBits(5);
 	}
