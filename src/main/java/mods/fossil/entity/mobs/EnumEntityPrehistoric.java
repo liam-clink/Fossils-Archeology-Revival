@@ -2,30 +2,47 @@ package mods.fossil.entity.mobs;
 
 import java.util.ArrayList;
 
+import mods.fossil.entity.mob.EntityAnkylosaurus;
+import mods.fossil.entity.mob.EntityBrachiosaurus;
+import mods.fossil.entity.mob.EntityCompsognathus;
+import mods.fossil.entity.mob.EntityDeinonychus;
+import mods.fossil.entity.mob.EntityDilophosaurus;
+import mods.fossil.entity.mob.EntityGallimimus;
+import mods.fossil.entity.mob.EntityLiopleurodon;
+import mods.fossil.entity.mob.EntityMosasaurus;
+import mods.fossil.entity.mob.EntityNautilus;
+import mods.fossil.entity.mob.EntityPachycephalosaurus;
+import mods.fossil.entity.mob.EntityPlesiosaur;
+import mods.fossil.entity.mob.EntityPterosaur;
+import mods.fossil.entity.mob.EntitySpinosaurus;
+import mods.fossil.entity.mob.EntityStegosaurus;
+import mods.fossil.entity.mob.EntityTRex;
+import mods.fossil.entity.mob.EntityTriceratops;
+import mods.fossil.entity.mob.EntityVelociraptor;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.item.Item;
 
 public enum EnumEntityPrehistoric {
-	
+	// entityClass tameable rideable canCarry canFormHerds territorial targetFoodHabbit
 	Allosaurus(EntityAllosaurus.class, true, true, true, false, true, 0),
-	Ankylosaurus(null, true, true, true, false, true, 1),
-	Brachiosaurus(null, true, true, true, true, false, 1),
-	Compsognathus(null, true, false, true, true, true, 2),
-	Deinonychus(null, true, false, true, false, false, 0),
-	Dilophosaurus(null, true, false, true, true, true, 0),
-	Gallimimus(null, true, true, true, true, false, 2),
-	Liopleurodon(null, true, false, true, false, true, 0),
-	Mosasaurus(null, true, false, true, true, true, 0),
-	Nautilus(null, false, false, false, false, false, 0),
-	Pachycephalosaurus(null, true, false, true, true, true, 1),
-	Plesiosaur(null, true, true, true, true, true, 0),
-	Pterosaur(null, true, false, true, true, true, 0),
-	Spinosaurus(null, true, false, true, false, true, 0),
-	Stegosaurus(null, true, false, true, true, false, 1),
-	Triceratops(null, true, true, true, true, true, 1),
-	TyrannosaurusRex(null, true, false, true, true, true, 0),
-	Velociraptor(null, true, false, true, true, true, 0);
+	Ankylosaurus(EntityAnkylosaurus.class, true, true, true, false, true, 1),
+	Brachiosaurus(EntityBrachiosaurus.class, true, true, true, true, false, 1),
+	Compsognathus(EntityCompsognathus.class, true, false, true, true, true, 2),
+	Deinonychus(EntityDeinonychus.class, true, false, true, false, false, 0),
+	Dilophosaurus(EntityDilophosaurus.class, true, false, true, true, true, 0),
+	Gallimimus(EntityGallimimus.class, true, true, true, true, false, 2),
+	Liopleurodon(EntityLiopleurodon.class, true, false, true, false, true, 0),
+	Mosasaurus(EntityMosasaurus.class, true, false, true, true, true, 0),
+	Nautilus(EntityNautilus.class, false, false, false, false, false, 0),
+	Pachycephalosaurus(EntityPachycephalosaurus.class, true, false, true, true, true, 1),
+	Plesiosaur(EntityPlesiosaur.class, true, true, true, true, true, 0),
+	Pterosaur(EntityPterosaur.class, true, false, true, true, true, 0),
+	Spinosaurus(EntitySpinosaurus.class, true, false, true, false, true, 0),
+	Stegosaurus(EntityStegosaurus.class, true, false, true, true, false, 1),
+	Triceratops(EntityTriceratops.class, true, true, true, true, true, 1),
+	TyrannosaurusRex(EntityTRex.class, true, false, true, true, true, 0),
+	Velociraptor(EntityVelociraptor.class, true, false, true, true, true, 0);
 	
 	public static int FOOD_HABBIT_CARNIVORE = 0;
 	public static int FOOD_HABBIT_HERBIVORE = 1;
@@ -344,6 +361,7 @@ public enum EnumEntityPrehistoric {
 		Allosaurus.setSpeedRunMultiplier(2.0D);
 		Allosaurus.setIfEaten(25, 1);
 		Allosaurus.setTerritorialRadius(20.0F);
+		
 	}
 	
 }

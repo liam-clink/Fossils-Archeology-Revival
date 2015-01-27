@@ -11,6 +11,7 @@ import mods.fossil.fossilAI.DinoAITargetNonTamedExceptSelfClass;
 import mods.fossil.fossilAI.DinoAIWander;
 import mods.fossil.fossilEnums.EnumDinoType;
 import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -23,6 +24,8 @@ import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.pathfinding.PathEntity;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
@@ -36,6 +39,7 @@ public class EntitySarcosuchus extends EntityDinosaur {
 	public static final double maxHealth = EnumDinoType.Sarcosuchus.HealthMax;
 	public static final double maxDamage = EnumDinoType.Sarcosuchus.StrengthMax;
 	public static final double maxSpeed = EnumDinoType.Sarcosuchus.SpeedMax;
+	public int WeakToDeath = 0;
 
 	public EntitySarcosuchus(World var1) {
 		super(var1, EnumDinoType.Sarcosuchus);
@@ -60,7 +64,8 @@ public class EntitySarcosuchus extends EntityDinosaur {
 		this.tasks.addTask(9, new EntityAILookIdle(this));
 		tasks.addTask(1, new DinoAIRideGround(this, 1));
 		this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
-		this.targetTasks.addTask(2, new DinoAITargetNonTamedExceptSelfClass(this, EntityLiving.class, 750, false));
+		this.targetTasks.addTask(2, new DinoAITargetNonTamedExceptSelfClass(
+				this, EntityLiving.class, 750, false));
 		this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
 	}
 
@@ -74,21 +79,20 @@ public class EntitySarcosuchus extends EntityDinosaur {
 				.setBaseValue(EnumDinoType.Sarcosuchus.Strength0);
 	}
 
-    public boolean isAIEnabled()
-    {
-        return !this.isModelized() && !this.isWeak();
-    }
-    
-    public void moveEntityWithHeading(float par1, float par2)
-    {
-    	super.moveEntityWithHeading(par1, par2);
-    	if(this.isWeak()) {
-            this.motionX *= 0.0D;
-            this.motionZ *= 0.0D;
-            this.rotationPitch = this.rotationYaw = 0;
-    	}
-    }
-    
+	@Override
+	public boolean isAIEnabled() {
+		return !this.isModelized() && !this.isWeak();
+	}
+
+	public void moveEntityWithHeading(float par1, float par2) {
+		super.moveEntityWithHeading(par1, par2);
+		if (this.isWeak()) {
+			this.motionX *= 0.0D;
+			this.motionZ *= 0.0D;
+			this.rotationPitch = this.rotationYaw = 0;
+		}
+	}
+
 	/*
 	 * Returns the texture's file path as a String.
 	 */
@@ -102,45 +106,48 @@ public class EntitySarcosuchus extends EntityDinosaur {
 			switch (this.getSubSpecies()) {
 			default:
 				return "fossil:textures/mob/Sarcosuchus_Wild.png";
-			case 2:
+			case 1:
 				return "fossil:textures/mob/Sarcosuchus/Sarcosuchus_Swamp_Wild.png";
-			case 3:
+			case 2:
 				return "fossil:textures/mob/Sarcosuchus/Sarcosuchus_Desert_Wild.png";
 			}
-		}  if (this.isChild()) {
+		}
+		else if (this.isChild()) {
 			switch (this.getSubSpecies()) {
 			default:
 				return "fossil:textures/mob/Sarcosuchus_baby.png";
-			case 2:
+			case 1:
 				return "fossil:textures/mob/Sarcosuchus/Sarcosuchus_Swamp_baby.png";
-			case 3:
+			case 2:
 				return "fossil:textures/mob/Sarcosuchus/Sarcosuchus_Desert_baby.png";
 			}
-		}  if (this.isTamed()) {
+		}
+		else if (this.isTamed()) {
 			switch (this.getSubSpecies()) {
 			default:
 				return "fossil:textures/mob/Sarcosuchus_tame.png";
-			case 2:
+			case 1:
 				return "fossil:textures/mob/Sarcosuchus/Sarcosuchus_Swamp_tame.png";
-			case 3:
-				return "fossil:textures/mob/Sarcosuchus/Sarcosuchus_Desert_tame.png";	
+			case 2:
+				return "fossil:textures/mob/Sarcosuchus/Sarcosuchus_Desert_tame.png";
 			}
-		} if (this.isWeak()) {
+		}
+		else if (this.isWeak()) {
 			switch (this.getSubSpecies()) {
 			default:
 				return "fossil:textures/mob/Sarcosuchus_Weak.png";
-			case 2:
+			case 1:
 				return "fossil:textures/mob/Sarcosuchus/Sarcosuchus_Swamp_Weak.png";
-			case 3:
-				return "fossil:textures/mob/Sarcosuchus/Sarcosuchus_Desert_Weak.png";	
+			case 2:
+				return "fossil:textures/mob/Sarcosuchus/Sarcosuchus_Desert_Weak.png";
 			}
 		} else {
 			switch (this.getSubSpecies()) {
 			default:
 				return "fossil:textures/mob/Sarcosuchus_Wild.png";
-			case 2:
+			case 1:
 				return "fossil:textures/mob/Sarcosuchus/Sarcosuchus_Swamp_Wild.png";
-			case 3:
+			case 2:
 				return "fossil:textures/mob/Sarcosuchus/Sarcosuchus_Desert_Wild.png";
 			}
 		}
@@ -291,5 +298,6 @@ public class EntitySarcosuchus extends EntityDinosaur {
 		baby.setSubSpecies(this.getSubSpecies());
 		return baby;
 	}
+
 
 }

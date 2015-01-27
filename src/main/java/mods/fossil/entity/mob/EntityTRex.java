@@ -29,17 +29,12 @@ public class EntityTRex extends EntityDinosaur
 {
     private static float health = 10;
     public final int Areas = 15;
-    //public final float HuntLimit = (float)this.getHungerLimit() * 0.8F;
     private boolean looksWithInterest;
-    /*private float field_25048_b;
-    private float field_25054_c;
-    private boolean field_25052_g;*/
     public boolean Screaming;
     public int SkillTick = 0;
     public int WeakToDeath = 0;
     public int TooNearMessageTick = 0;
     public boolean SneakScream = false;
-    //private final BlockBreakingRule blockBreakingBehavior;
     final EntityAIControlledByPlayer aiControlledByPlayer;
 	private int Timer;
 	private final String texturePath;
@@ -55,7 +50,6 @@ public class EntityTRex extends EntityDinosaur
     public EntityTRex(World var1)
     {
         super(var1, EnumDinoType.TRex);
-        //this.blockBreakingBehavior = new BlockBreakingRule(this.worldObj, this, 5.0F);
         this.looksWithInterest = false;
         this.updateSize();
         /*
@@ -70,8 +64,9 @@ public class EntityTRex extends EntityDinosaur
         this.maxSize = 4.5F;
         
     	if(Fossil.FossilOptions.TRexFeathers)
-            texturePath = Fossil.modid + ":textures/mob/" + this.SelfType.toString() + "/feathered/" + "Feathered_";
-    	else
+			texturePath = Fossil.modid + ":textures/mob/"
+					+ this.SelfType.toString() + "/feathered/" + "Feathered_";
+		else
     		texturePath = Fossil.modid + ":textures/mob/" + this.SelfType.toString() + "/";
         
         this.getNavigator().setAvoidsWater(true);
@@ -465,15 +460,6 @@ public class EntityTRex extends EntityDinosaur
         {
             --this.Timer;
         }
-        /*
-        if (!this.worldObj.isRemote)
-        {
-            this.Timer = Math.max(0, this.Timer - 1);
-            
-
-            this.Screaming = this.Timer > 0 ? true :false;
-            }
-            */
         super.onLivingUpdate();
     }
 
@@ -590,77 +576,6 @@ public class EntityTRex extends EntityDinosaur
     {
         return new EntityTRex(this.worldObj);
     }
-
-    /**
-     * This method returns a value to be applied directly to entity speed, this factor is less than 1 when a slowdown
-     * potion effect is applied, more than 1 when a haste potion effect is applied and 2 for fleeing entities.
-     */
-    /*
-    public float getSpeedModifier()
-    {
-        float var1 = 1.0F;
-
-        if (this.IsHungry() || (attackingPlayer != null))
-        {
-            var1 *=1.5F;
-        }
-        else if (this.getDinoAge() < 3)
-        {
-    //           var1 = super.getSpeedModifier();
-
-            if (this.fleeingTick > 0)
-            {
-                var1 *= 3.0F;
-            }
-        }
-        else if (this.riddenByEntity != null && this.riddenByEntity instanceof EntityPlayerSP)
-        {
-            EntityPlayerSP var2 = (EntityPlayerSP)this.riddenByEntity;
-
-            if (var2.movementInput.sneak)
-            {
-                var1 = 5.0F;
-            }
-        }
-
-        return var1;
-    }
-    */
-    /*
-    public int BlockInteractive()
-    {
-        int destroyed=0;
-        for (int var1 = (int)Math.round(this.boundingBox.minX) - 1; var1 <= (int)Math.round(this.boundingBox.maxX) + 1; ++var1)
-        {
-            for (int var2 = (int)Math.round(this.boundingBox.minY); var2 <= (int)Math.round(this.boundingBox.maxY); ++var2)
-            {
-                for (int var3 = (int)Math.round(this.boundingBox.minZ) - 1; var3 <= (int)Math.round(this.boundingBox.maxZ) + 1; ++var3)
-                {
-                    if (!this.worldObj.isAirBlock(var1, var2, var3))
-                    {
-                        int var4 = this.worldObj.getBlockId(var1, var2, var3);
-
-                        if (!this.inWater)
-                        {
-                            if ((double)Block.blocksList[var4].getBlockHardness(this.worldObj, (int)this.posX, (int)this.posY, (int)this.posZ) < 5.0D)
-                            {
-                                if ((new Random()).nextInt(10) < 2)
-                                {
-                                    Block.blocksList[var4].dropBlockAsItem(this.worldObj, var1, var2, var3, 1, 0);
-                                }
-
-                                this.worldObj.setBlock(var1, var2, var3, 0);
-                                destroyed++;
-                                //this.RushTick = 10;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        return destroyed;
-    }
-    */
     
     @Override
     public EntityAgeable createChild(EntityAgeable var1)
@@ -673,6 +588,7 @@ public class EntityTRex extends EntityDinosaur
     /**
      * This gets called when a dinosaur grows naturally or through Chicken Essence.
      */
+    
     @Override
     public void updateSize()
     {
