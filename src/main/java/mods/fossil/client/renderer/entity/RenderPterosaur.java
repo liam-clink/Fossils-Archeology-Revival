@@ -54,16 +54,18 @@ public class RenderPterosaur extends RenderLiving {
         }
         
     }
-	
-	protected ResourceLocation func_110919_a(EntityPterosaur par1Entity) {
-		return new ResourceLocation(par1Entity.getTexture());
-	}
 
-	/**
-	 * Returns the location of an entity's texture. Doesn't seem to be called
-	 * unless you call Render.bindEntityTexture.
-	 */
-	protected ResourceLocation getEntityTexture(Entity par1Entity) {
-		return this.func_110919_a((EntityPterosaur) par1Entity);
+	@Override
+	protected ResourceLocation getEntityTexture(Entity entity)
+	{
+		EntityPterosaur dino = (EntityPterosaur) entity;
+		if (dino.checkGround(dino))
+		{
+			return new ResourceLocation("fossil:textures/mob/Pterosaur.png");
+		}
+		else
+		{
+			return new ResourceLocation("fossil:textures/mob/Pterosaur_Flying.png");
+		}
 	}
 }
