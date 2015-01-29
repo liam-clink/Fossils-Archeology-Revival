@@ -96,14 +96,9 @@ public class EntityPterosaur extends EntityDinosaur {
 	public String getTexture() {
 		if (this.isModelized()) {
 			return super.getTexture();
-
 		}
-		if (!this.checkGround(this)) {
-				return "fossil:textures/mob/Pterosaur_Flying.png";
-			} else {
-				return "fossil:textures/mob/Pterosaur.png";
-			}
-		}
+			return "fossil:textures/mob/Pterosaur.png";
+	}
 
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
@@ -316,6 +311,7 @@ public class EntityPterosaur extends EntityDinosaur {
 		}
 		if (this.riddenByEntity == null) {
 			if (!this.isSitting()) {
+				if(this.isAdult()) {
 				if (!worldObj.isRemote) {
 					if (getEntityToAttack() == null) {
 						if (rand.nextInt(400) == 0)
@@ -344,6 +340,7 @@ public class EntityPterosaur extends EntityDinosaur {
 					}
 				}
 			}
+		}
 		}
 		super.onLivingUpdate();
 	}

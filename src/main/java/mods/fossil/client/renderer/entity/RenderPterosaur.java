@@ -38,34 +38,24 @@ public class RenderPterosaur extends RenderLiving {
 	 * Allows the render to do any OpenGL state modifications necessary before
 	 * the model is rendered. Args: entityLiving, partialTickTime
 	 */
-	protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2)
-    {
-        this.preRenderScale((EntityPterosaur)par1EntityLivingBase, par2);
-        if (!((EntityPterosaur)par1EntityLivingBase).checkGround((EntityPterosaur)par1EntityLivingBase))
-        	{
-            if (!(this.mainModel instanceof ModelPterosaurFlying))
-            {
-                this.mainModel = new ModelPterosaurFlying();
-            }
-        }
-        else if (this.mainModel instanceof ModelPterosaurFlying)
-        {
-            this.mainModel = new ModelPterosaurGround();
-        }
-        
-    }
+	
+	protected void preRenderCallback(EntityLivingBase par1EntityLivingBase,
+			float par2) {
+		this.preRenderScale((EntityPterosaur) par1EntityLivingBase, par2);
+		if (!((EntityPterosaur) par1EntityLivingBase)
+				.checkGround((EntityPterosaur) par1EntityLivingBase)) {
+			if (!(this.mainModel instanceof ModelPterosaurFlying)) {
+				this.mainModel = new ModelPterosaurFlying();
+			}
+		} else if (this.mainModel instanceof ModelPterosaurFlying) {
+			this.mainModel = new ModelPterosaurGround();
+		}
+
+	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity)
-	{
+	protected ResourceLocation getEntityTexture(Entity entity) {
 		EntityPterosaur dino = (EntityPterosaur) entity;
-		if (dino.checkGround(dino))
-		{
-			return new ResourceLocation("fossil:textures/mob/Pterosaur.png");
-		}
-		else
-		{
-			return new ResourceLocation("fossil:textures/mob/Pterosaur_Flying.png");
-		}
+		return new ResourceLocation("fossil:textures/mob/Pterosaur_Flying.png");
 	}
 }
