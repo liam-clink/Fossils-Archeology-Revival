@@ -16,3 +16,7 @@ out/
 minecraft/
 gradlew
 gradlew.bat
+eclipse/
+build/
+.classpath
+.project
