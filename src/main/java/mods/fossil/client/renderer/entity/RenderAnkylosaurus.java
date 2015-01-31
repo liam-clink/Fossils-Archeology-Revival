@@ -31,8 +31,7 @@ public class RenderAnkylosaurus extends RenderLiving
      * Allows the render to do any OpenGL state modifications necessary before the model is rendered. Args:
      * entityLiving, partialTickTime
      */
-    protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2)
-    {
+    protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2) {
         this.preRenderScale((EntityAnkylosaurus)par1EntityLivingBase, par2);
     }
 
