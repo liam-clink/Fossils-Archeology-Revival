@@ -23,7 +23,8 @@ public class RenderAnkylosaurus extends RenderLiving
      *
      * Use this to grow the dinonsaur with age.
      */
-    protected void preRenderScale(EntityAnkylosaurus entitydinosaur, float par2) {
+    protected void preRenderScale(EntityAnkylosaurus entitydinosaur, float par2)
+    {
         GL11.glScalef(entitydinosaur.getDinosaurSize(), entitydinosaur.getDinosaurSize(), entitydinosaur.getDinosaurSize());
     }
 
@@ -31,7 +32,8 @@ public class RenderAnkylosaurus extends RenderLiving
      * Allows the render to do any OpenGL state modifications necessary before the model is rendered. Args:
      * entityLiving, partialTickTime
      */
-    protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2) {
+    protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2)
+    {
         this.preRenderScale((EntityAnkylosaurus)par1EntityLivingBase, par2);
     }
 
