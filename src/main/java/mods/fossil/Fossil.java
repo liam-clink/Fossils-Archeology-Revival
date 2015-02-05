@@ -28,6 +28,7 @@ import mods.fossil.blocks.BlockPalmLog;
 import mods.fossil.blocks.BlockPalmSapling;
 import mods.fossil.blocks.BlockPermafrost;
 import mods.fossil.blocks.BlockSarracenia;
+import mods.fossil.blocks.BlockSlimeTrail;
 import mods.fossil.blocks.BlockTar;
 import mods.fossil.blocks.BlockVaseAmphora;
 import mods.fossil.blocks.BlockVaseAmphoraItem;
@@ -39,6 +40,7 @@ import mods.fossil.blocks.BlockVolcanicAsh;
 import mods.fossil.blocks.BlockVolcanicBrick;
 import mods.fossil.blocks.BlockVolcanicRock;
 import mods.fossil.blocks.BlockVolcanicSlab;
+import mods.fossil.blocks.FossilSoundType;
 import mods.fossil.client.FossilGuiHandler;
 import mods.fossil.client.FossilOptions;
 import mods.fossil.client.LocalizationStrings;
@@ -150,6 +152,7 @@ import mods.fossil.tabs.TabFTools;
 import mods.fossil.util.FossilBonemealEvent;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDispenser;
+import net.minecraft.block.BlockRail;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -261,6 +264,7 @@ public class Fossil
     public static Block blockanalyzerActive;
     public static Block blockcultivateIdle;
     public static Block blockcultivateActive;
+    public static Block blockSlimeTrail;
     public static Block blockworktableIdle;
     public static Block blockworktableActive;
     public static Block blockTimeMachine;
@@ -445,6 +449,9 @@ public class Fossil
 
     //Music Discs
     public static Item fossilrecordBones;
+    
+    //Block SoundTypes
+    public static final FossilSoundType soundTypeSlime = new FossilSoundType(1.0F, 1.0F);
 
     static ArmorMaterial bone = EnumHelper.addArmorMaterial("Bone", 25, new int[] {2, 7, 6, 2}, 15);
     static ToolMaterial scarab = EnumHelper.addToolMaterial("Scarab", 3, 1861, 8.0F, 4.0F, 25);
@@ -540,6 +547,7 @@ public class Fossil
         blockanalyzerActive = new BlockAnalyzer(true).setLightLevel(0.9375F).setHardness(3.0F).setStepSound(Block.soundTypeMetal).setBlockName(LocalizationStrings.BLOCK_ANALYZER_ACTIVE_NAME);
         blockcultivateIdle = new BlockCultivate(false).setLightLevel(0.9375F).setHardness(0.3F).setStepSound(Block.soundTypeGlass).setBlockName(LocalizationStrings.BLOCK_CULTIVATE_IDLE_NAME).setCreativeTab(this.tabFBlocks);
         blockcultivateActive = new BlockCultivate(true).setLightLevel(0.9375F).setHardness(0.3F).setStepSound(Block.soundTypeGlass).setBlockName(LocalizationStrings.BLOCK_CULTIVATE_ACTIVE_NAME);
+        blockSlimeTrail = new BlockSlimeTrail().setHardness(0.3F).setBlockTextureName("fossil:Slime_Trail").setStepSound(soundTypeSlime).setBlockName(LocalizationStrings.BLOCK_SLIME_TRAIL_NAME).setCreativeTab(this.tabFBlocks);
         blockworktableIdle = new BlockWorktable(false).setHardness(2.5F).setStepSound(Block.soundTypeWood).setBlockName(LocalizationStrings.BLOCK_WORKTABLE_IDLE_NAME).setCreativeTab(this.tabFBlocks);
         blockworktableActive = new BlockWorktable(true).setHardness(2.5F).setStepSound(Block.soundTypeWood).setBlockName(LocalizationStrings.BLOCK_WORKTABLE_ACTIVE_NAME);
         feederIdle = new BlockFeeder().setHardness(3.5F).setStepSound(Block.soundTypeStone).setBlockName(LocalizationStrings.FEEDER_IDLE_NAME);
@@ -834,6 +842,7 @@ public class Fossil
         GameRegistry.registerBlock(blockanalyzerActive, LocalizationStrings.BLOCK_ANALYZER_ACTIVE_NAME);
         GameRegistry.registerBlock(blockcultivateIdle, LocalizationStrings.BLOCK_CULTIVATE_IDLE_NAME);
         GameRegistry.registerBlock(blockcultivateActive, LocalizationStrings.BLOCK_CULTIVATE_ACTIVE_NAME);
+        GameRegistry.registerBlock(blockSlimeTrail, LocalizationStrings.BLOCK_SLIME_TRAIL_NAME);
         GameRegistry.registerBlock(blockworktableIdle, LocalizationStrings.BLOCK_WORKTABLE_IDLE_NAME);
         GameRegistry.registerBlock(blockworktableActive, LocalizationStrings.BLOCK_WORKTABLE_ACTIVE_NAME);
         GameRegistry.registerBlock(ferns, LocalizationStrings.FERN_BLOCK_NAME);
