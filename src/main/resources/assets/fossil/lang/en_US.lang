@@ -49,6 +49,7 @@ tile.skullBlock.name=Skull
 tile.skullLantern.name=Skull Lantern
 tile.analyzer.name=Analyzer
 tile.cultureVat.name=Culture Vat
+tile.slimeTrail.name=Failursaurus Trail
 tile.fossilworkbench.name=Archeology Workbench
 tile.fossil_drum.name=Drum
 tile.feederIdle.name=Feeder
