@@ -35,6 +35,10 @@ public class EntityFailuresaurus extends EntityMob
 		this.dataWatcher.addObject(18, Byte.valueOf((byte)0));
 		this.setSkin(this.worldObj.rand.nextInt(3));
 	}
+	protected boolean canDespawn()
+	{
+		return false;
+	}
 	public boolean isOnLadder()
 	{
 		return this.isBesideClimbableBlock();
