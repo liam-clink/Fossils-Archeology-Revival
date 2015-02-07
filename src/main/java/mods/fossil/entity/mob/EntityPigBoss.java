@@ -242,7 +242,7 @@ public class EntityPigBoss extends EntityMob implements IBossDisplayData, IRange
 
             if (!entityList.isEmpty() && entityList.size() >= 5)
             {
-                this.CallSolders(entityList, this.getAITarget());
+                this.CallSoldiers(entityList, this.getAITarget());
             }
         }
 
@@ -300,7 +300,20 @@ public class EntityPigBoss extends EntityMob implements IBossDisplayData, IRange
                     }
                     else
                     {
-                        if (itemstack.getItem() instanceof ItemSword && this.getAttackMode() != 0)
+                    	if (itemstack.getItem() == Fossil.ancientSword && this.getAttackMode() != 0)
+                        {
+
+                        	if (!this.worldObj.isRemote)
+                    		Fossil.ShowMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + 
+                    							StatCollector.translateToLocal("anuSpeaker.mySword"), (EntityPlayer)targetEntity);
+
+                            this.SetAttackMode(0);
+                            this.setCombatTask();
+                            return super.attackEntityFrom(damageSource, var2);
+                        }
+
+                    	
+                    	 if (itemstack.getItem() != Fossil.ancientSword && itemstack.getItem() instanceof ItemSword && this.getAttackMode() != 0)
                         {
 
                         	if (!this.worldObj.isRemote)
@@ -701,7 +714,7 @@ public class EntityPigBoss extends EntityMob implements IBossDisplayData, IRange
         }
     }
     
-    private void CallSolders(List var1, Entity var2)
+    private void CallSoldiers(List var1, Entity var2)
     {
 
 		AxisAlignedBB chatDistance = this.boundingBox.expand(30.0D, 30.0D, 30.0D);
@@ -730,7 +743,7 @@ public class EntityPigBoss extends EntityMob implements IBossDisplayData, IRange
             if (var4 instanceof EntityPigZombie && ((EntityPigZombie)var4).getAITarget() == null)
             {
                 EntityPigZombie var5 = (EntityPigZombie)var4;
-                var5.setAttackTarget((EntityLiving)var2);
+                var5.setAttackTarget((EntityLivingBase)var2);
                 (new PigmenSpeaker((EntityFriendlyPigZombie)null)).SendSpeech(EnumPigmenSpeaks.AnuSommon);
             }
         }
