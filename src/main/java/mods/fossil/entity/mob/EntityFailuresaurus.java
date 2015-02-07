@@ -6,6 +6,7 @@ import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -39,6 +40,10 @@ public class EntityFailuresaurus extends EntityMob
 	{
 		return false;
 	}
+	public boolean allowLeashing()
+    {
+        return true;
+    }
 	public boolean isOnLadder()
 	{
 		return this.isBesideClimbableBlock();
