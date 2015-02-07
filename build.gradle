@@ -17,13 +17,12 @@ buildscript {
 
 apply plugin: 'forge'
 
-<<<<<<< HEAD
 version = "1.0"
 group= "com.yourname.modid" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "modid"
 
 minecraft {
-    version = "1.7.10-10.13.2.1291"
+    version = "1.7.10-10.13.1.1217"
     runDir = "eclipse"
 }
 
@@ -41,20 +40,10 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
 
-=======
-version = "1.7.10-7.1.0"
-group= "mods.fossil" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "Fossils_Archeology_Revival-1.7.10_Build-7.1.0"
-
-minecraft {
-    version = "1.7.10-10.13.2.1291"
-    runDir = "minecraft"
->>>>>>> 3784172b8c29722cd36bfa1a4facafd3c780d680
 }
 
 processResources
 {
-<<<<<<< HEAD
     // this will ensure that this task is redone when the versions change.
     inputs.property "version", project.version
     inputs.property "mcversion", project.minecraft.version
@@ -68,16 +57,6 @@ processResources
     }
         
     // copy everything else, thats not the mcmod.info
-=======
-    inputs.property "version", project.version
-    inputs.property "mcversion", project.minecraft.version
-
-    from(sourceSets.main.resources.srcDirs) {
-        include 'mcmod.info'
-        expand 'version':project.version, 'mcversion':project.minecraft.version
-    }
-        
->>>>>>> 3784172b8c29722cd36bfa1a4facafd3c780d680
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
