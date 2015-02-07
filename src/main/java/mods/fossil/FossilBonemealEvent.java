@@ -6,21 +6,20 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.BonemealEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
-public class FossilBonemealEvent
-{
+public class FossilBonemealEvent {
 	@SubscribeEvent
-    public void onUseBonemeal(BonemealEvent event)
-    {
-        EntityPlayer player = event.entityPlayer;
-        World world = event.world;
+	public void onUseBonemeal(BonemealEvent event) {
+		EntityPlayer player = event.entityPlayer;
+		World world = event.world;
 
-        if (event.block == Fossil.palmSap)
-        {
-            if (!event.world.isRemote)
-            {
-                ((BlockPalmSapling)Fossil.palmSap).generateTree(event.world, event.x, event.y, event.z, event.world.rand, event.world.getBlockMetadata(event.x, event.y, event.z));
-                event.setResult(event.getResult().ALLOW);
-            }
-        }
-    }
+		if (event.block == Fossil.palmSap) {
+			if (!event.world.isRemote) {
+				((BlockPalmSapling) Fossil.palmSap)
+						.generateTree(event.world, event.x, event.y, event.z,
+								event.world.rand, event.world.getBlockMetadata(
+										event.x, event.y, event.z));
+				event.setResult(event.getResult().ALLOW);
+			}
+		}
+	}
 }

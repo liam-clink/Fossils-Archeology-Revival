@@ -127,19 +127,16 @@ public class EntityDeinonychus extends EntityDinosaur
     /**
      * Returns the texture's file path as a String.
      */
-    public String getTexture()
-    {
-        if (this.isModelized())
-        {
+    public String getTexture() {
+        if (this.isModelized()) {
             return super.getModelTexture();
         }
 
-        if (this.isAdult())
-        {
-            switch (this.getSubSpecies())
-            {
-            default: case 1:
-                    return texturePath + "Deinonychus_Grey_Adult.png";
+        if (this.isAdult()) {
+            switch (this.getSubSpecies()) {
+            default: 
+            case 1:
+                return texturePath + "Deinonychus_Grey_Adult.png";
             case 2: 
             	return texturePath + "Deinonychus_Black_Adult.png";
             case 3: 
@@ -149,8 +146,9 @@ public class EntityDeinonychus extends EntityDinosaur
         else if (this.isTeen()) {
             switch (this.getSubSpecies())
             {
-            default: case 1:
-                    return texturePath + "Deinonychus_Grey_Teen.png";
+            default: 
+            case 1:
+                return texturePath + "Deinonychus_Grey_Teen.png";
             case 2: 
             	return texturePath + "Deinonychus_Black_Teen.png";
             case 3: 
@@ -160,8 +158,9 @@ public class EntityDeinonychus extends EntityDinosaur
         else {
             switch (this.getSubSpecies())
             {
-            default: case 1:
-                    return texturePath + "Deinonychus_Grey_Baby.png";
+            default: 
+            case 1:
+                return texturePath + "Deinonychus_Grey_Baby.png";
             case 2: 
             	return texturePath + "Deinonychus_Black_Baby.png";
             case 3: 

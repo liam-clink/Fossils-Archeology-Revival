@@ -1,264 +1,251 @@
 package mods.fossil.client.model;
 
-import mods.fossil.Fossil;
 import mods.fossil.entity.mob.EntityDinosaur;
+import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 
-public class ModelBrachiosaurus extends ModelDinosaurs
-{
-    float yoffset = 0.0F;
-    ModelRenderer Snout = (new ModelRenderer(this, 50, 8)).setTextureSize(64, 32);
-    ModelRenderer Head;
-    ModelRenderer Crest;
-    ModelRenderer Neck;
-    ModelRenderer Neck1;
-    ModelRenderer Neck2;
-    ModelRenderer Neck3;
-    ModelRenderer Neck4;
-    ModelRenderer Neck5;
-    ModelRenderer Neck6;
-    ModelRenderer Neck7;
-    ModelRenderer Lower_Neck;
-    ModelRenderer Lower_Neck1;
-    ModelRenderer Body;
-    ModelRenderer Body2;
-    ModelRenderer Lower_Body;
-    ModelRenderer Front_ThighRight;
-    ModelRenderer Front_ThighLeft;
-    ModelRenderer Back_CalfRight;
-    ModelRenderer Front_CalfRight;
-    ModelRenderer Back_ThighLeft;
-    ModelRenderer Back_ThighRight;
-    ModelRenderer Front_CalfLeft;
-    ModelRenderer Back_CalfLeft;
-    ModelRenderer Tail;
-    ModelRenderer Tail1;
-    ModelRenderer Tail2;
-    ModelRenderer Tail3;
+public class ModelBrachiosaurus extends ModelDinosaurs {
+	private ModelRenderer Snout;
+	private ModelRenderer Crest;
+	private ModelRenderer Brachiosaurus;
+	private ModelRenderer headpivot;
+	private ModelRenderer head;
+	private ModelRenderer tail;
+	private ModelRenderer lowerneck1;
+	private ModelRenderer Lowerneck2;
+	private ModelRenderer neck1;
+	private ModelRenderer neck3;
+	private ModelRenderer frontcalfleft;
+	private ModelRenderer frontthighleft;
+	private ModelRenderer Head;
+	private ModelRenderer neck2;
+	private ModelRenderer tail2;
+	private ModelRenderer tail1;
+	private ModelRenderer lowerbody;
+	private ModelRenderer backcalfright;
+	private ModelRenderer backthighright;
+	private ModelRenderer backthighleft;
+	private ModelRenderer frontcalfright;
+	private ModelRenderer back_calfleft;
+	private ModelRenderer frontthighright;
+	private ModelRenderer Body2;
+	
+	public ModelBrachiosaurus() {
+    textureWidth = 128;
+    textureHeight = 64;
+    setTextureOffset("Brachiosaurus.Body", 44, 48);
+    setTextureOffset("frontthighright.FrontThighright", 50, 21);
+    setTextureOffset("frontcalfright.FrontCalfright", 0, 24);
+    setTextureOffset("Body2.Body2", 44, 34);
+    setTextureOffset("backthighleft.BackThighleft", 50, 21);
+    setTextureOffset("back_calfleft.BackCalfleft", 0, 24);
+    setTextureOffset("backthighright.BackThighright", 50, 21);
+    setTextureOffset("backcalfright.BackCalfright", 0, 24);
+    setTextureOffset("lowerbody.LowerBody", 73, 48);
+    setTextureOffset("tail.Tail", 0, 13);
+    setTextureOffset("tail1.Tail1", 17, 1);
+    setTextureOffset("tail2.Tail2", 34, 10);
+    setTextureOffset("frontthighleft.FrontThighleft", 50, 21);
+    setTextureOffset("frontcalfleft.FrontCalfleft", 0, 24);
+    setTextureOffset("lowerneck1.LowerNeck1", 0, 33);
+    setTextureOffset("Lowerneck2.LowerNeck2", 0, 45);
+    setTextureOffset("neck1.Neck1", 17, 53);
+    setTextureOffset("neck2.Neck2", 18, 41);
+    setTextureOffset("neck3.Neck3", 23, 33);
+    setTextureOffset("Head.Head", 66, 0);
+    setTextureOffset("Snout.Snout", 67, 8);
+    setTextureOffset("Crest.Crest", 52, 0);
+    
+    Brachiosaurus = new ModelRenderer(this, "Brachiosaurus");
+    Brachiosaurus.setRotationPoint(0F, 8F, -4F);
+    setRotation(Brachiosaurus, -0.4833219F, 0F, 0F);
+    Brachiosaurus.mirror = true;
+      Brachiosaurus.addBox("Body", -4F, -0.3F, 0F, 8, 9, 6);
+    frontthighright = new ModelRenderer(this, "frontthighright");
+    frontthighright.setRotationPoint(-4F, 4F, 2F);
+    setRotation(frontthighright, 0F, 0F, 0F);
+    frontthighright.mirror = true;
+      frontthighright.addBox("FrontThighright", -2F, 0F, -1.5F, 3, 7, 4);
+    frontcalfright = new ModelRenderer(this, "frontcalfright");
+    frontcalfright.setRotationPoint(-1F, 7F, 0F);
+    setRotation(frontcalfright, 0F, 0F, 0F);
+    frontcalfright.mirror = true;
+      frontcalfright.addBox("FrontCalfright", -0.5F, 0F, -0.5F, 2, 5, 3);
+      frontthighright.addChild(frontcalfright);
+      Brachiosaurus.addChild(frontthighright);
+    Body2 = new ModelRenderer(this, "Body2");
+    Body2.setRotationPoint(0F, 4F, 6F);
+    setRotation(Body2, 0F, 0F, 0F);
+    Body2.mirror = true;
+      Body2.mirror = true;
+      Body2.addBox("Body2", -4F, -4F, -0.2F, 8, 9, 4);
+      Body2.mirror = false;
+    backthighleft = new ModelRenderer(this, "backthighleft");
+    backthighleft.setRotationPoint(4F, 1F, 5F);
+    setRotation(backthighleft, 0F, 0F, 0F);
+    backthighleft.mirror = true;
+      backthighleft.mirror = true;
+      backthighleft.addBox("BackThighleft", -1F, 0F, -2F, 3, 6, 4);
+      backthighleft.mirror = false;
+    back_calfleft = new ModelRenderer(this, "back_calfleft");
+    back_calfleft.setRotationPoint(0F, 6F, 0F);
+    setRotation(back_calfleft, 0F, 0F, 0F);
+    back_calfleft.mirror = true;
+    back_calfleft.mirror = true;
+      back_calfleft.addBox("BackCalfleft", -0.5F, 0F, -1.5F, 2, 5, 3);
+      back_calfleft.mirror = false;
+      backthighleft.addChild(back_calfleft);
+      Body2.addChild(backthighleft);
+    backthighright = new ModelRenderer(this, "backthighright");
+    backthighright.setRotationPoint(-4F, 1F, 5F);
+    setRotation(backthighright, 0F, 0F, 0F);
+    backthighright.mirror = true;
+      backthighright.addBox("BackThighright", -2F, 0F, -2F, 3, 6, 4);
+    backcalfright = new ModelRenderer(this, "backcalfright");
+    backcalfright.setRotationPoint(0F, 6F, 0F);
+    setRotation(backcalfright, 0F, 0F, 0F);
+    backcalfright.mirror = true;
+      backcalfright.addBox("BackCalfright", -1.5F, 0F, -1.5F, 2, 5, 3);
+      backthighright.addChild(backcalfright);
+      Body2.addChild(backthighright);
+    lowerbody = new ModelRenderer(this, "lowerbody");
+    lowerbody.setRotationPoint(0F, 1F, 4F);
+    setRotation(lowerbody, 0F, 0F, 0F);
+    lowerbody.mirror = true;
+      lowerbody.mirror = true;
+      lowerbody.addBox("LowerBody", -3F, -5F, -2F, 6, 8, 5);
+      lowerbody.mirror = false;
+    tail = new ModelRenderer(this, "tail");
+    tail.setRotationPoint(0F, -1F, 2F);
+    setRotation(tail, 0F, 0F, 0F);
+    tail.mirror = true;
+      tail.mirror = true;
+      tail.addBox("Tail", -2.5F, -3F, 1F, 5, 5, 5);
+      tail.mirror = false;
+    tail1 = new ModelRenderer(this, "tail1");
+    tail1.setRotationPoint(0F, -1F, 5F);
+    setRotation(tail1, 0F, 0F, 0F);
+    tail1.mirror = true;
+      tail1.mirror = true;
+      tail1.addBox("Tail1", -1.5F, -1.5F, 1F, 3, 4, 5);
+      tail1.mirror = false;
+    tail2 = new ModelRenderer(this, "tail2");
+    tail2.setRotationPoint(0F, 0F, 5F);
+    setRotation(tail2, 0F, 0F, 0F);
+    tail2.mirror = true;
+      tail2.mirror = true;
+      tail2.addBox("Tail2", -1F, -1F, 1F, 2, 3, 6);
+      tail2.mirror = false;
+      tail1.addChild(tail2);
+      tail.addChild(tail1);
+      lowerbody.addChild(tail);
+      Body2.addChild(lowerbody);
+      Brachiosaurus.addChild(Body2);
+    frontthighleft = new ModelRenderer(this, "frontthighleft");
+    frontthighleft.setRotationPoint(4F, 4F, 2F);
+    setRotation(frontthighleft, 0F, 0F, 0F);
+    frontthighleft.mirror = true;
+      frontthighleft.mirror = true;
+      frontthighleft.addBox("FrontThighleft", -1F, 0F, -1.5F, 3, 7, 4);
+      frontthighleft.mirror = false;
+    frontcalfleft = new ModelRenderer(this, "frontcalfleft");
+    frontcalfleft.setRotationPoint(1F, 7F, 0F);
+    setRotation(frontcalfleft, 0F, 0F, 0F);
+    frontcalfleft.mirror = true;
+      frontcalfleft.mirror = true;
+      frontcalfleft.addBox("FrontCalfleft", -1.5F, 0F, -0.5F, 2, 5, 3);
+      frontcalfleft.mirror = false;
+      frontthighleft.addChild(frontcalfleft);
+      Brachiosaurus.addChild(frontthighleft);
+    lowerneck1 = new ModelRenderer(this, "lowerneck1");
+    lowerneck1.setRotationPoint(0F, 2F, -2F);
+    setRotation(lowerneck1, 0F, 0F, 0F);
+    lowerneck1.mirror = true;
+      lowerneck1.addBox("LowerNeck1", -3F, -2F, -2.5F, 6, 6, 5);
+    Lowerneck2 = new ModelRenderer(this, "Lowerneck2");
+    Lowerneck2.setRotationPoint(0F, 0F, -2F);
+    setRotation(Lowerneck2, 0F, 0F, 0F);
+    Lowerneck2.mirror = true;
+      Lowerneck2.mirror = true;
+      Lowerneck2.addBox("LowerNeck2", -2F, -1.9F, -4.5F, 4, 5, 4);
+      Lowerneck2.mirror = false;
+    neck1 = new ModelRenderer(this, "neck1");
+    neck1.setRotationPoint(0F, 0F, -4F);
+    setRotation(neck1, 0F, 0F, 0F);
+    neck1.mirror = true;
+      neck1.mirror = true;
+      neck1.addBox("Neck1", -2F, -1.5F, -7F, 4, 4, 7);
+      neck1.mirror = false;
+    neck2 = new ModelRenderer(this, "neck2");
+    neck2.setRotationPoint(0F, 0F, -7F);
+    setRotation(neck2, 0F, 0F, 0F);
+    neck2.mirror = true;
+      neck2.mirror = true;
+      neck2.addBox("Neck2", -1.5F, -1.2F, -6.2F, 3, 3, 7);
+      neck2.mirror = false;
+    neck3 = new ModelRenderer(this, "neck3");
+    neck3.setRotationPoint(0F, 0F, -6F);
+    setRotation(neck3, 0F, 0F, 0F);
+    neck3.mirror = true;
+      neck3.mirror = true;
+      neck3.addBox("Neck3", -1F, -1F, -3.2F, 2, 3, 3);
+      neck3.mirror = false;
+    Head = new ModelRenderer(this, "Head");
+    Head.setRotationPoint(0F, 0F, -3F);
+    setRotation(Head, 0F, 0F, 0F);
+    Head.mirror = true;
+      Head.mirror = true;
+      Head.addBox("Head", -2F, -1F, -3.7F, 4, 3, 4);
+      Head.mirror = false;
+    Snout = new ModelRenderer(this, "Snout");
+    Snout.setRotationPoint(0F, 0F, -3F);
+    setRotation(Snout, 0F, 0F, 0F);
+    Snout.mirror = true;
+      Snout.mirror = true;
+      Snout.addBox("Snout", -1.5F, 0F, -3.3F, 3, 2, 4);
+      Snout.mirror = false;
+      Head.addChild(Snout);
+    Crest = new ModelRenderer(this, "Crest");
+    Crest.setRotationPoint(0F, 0F, -2F);
+    setRotation(Crest, 0F, 0F, 0F);
+    Crest.mirror = true;
+      Crest.mirror = true;
+      Crest.addBox("Crest", -1F, -4F, -1.7F, 2, 4, 4);
+      Crest.mirror = false;
+      Head.addChild(Crest);
+      neck3.addChild(Head);
+      neck2.addChild(neck3);
+      neck1.addChild(neck2);
+      Lowerneck2.addChild(neck1);
+      lowerneck1.addChild(Lowerneck2);
+      Brachiosaurus.addChild(lowerneck1);
+  }
 
-    ModelRenderer dummy;
+	public void render(Entity entity, float f, float f1, float f2, float f3,
+			float f4, float f5) {
+		super.render(entity, f, f1, f2, f3, f4, f5);
+		setRotationAngles(f, f1, f2, f3, f4, f5);
+		Brachiosaurus.render(f5);
+	}
 
-    public ModelBrachiosaurus()
-    {
-        // Head
-        Head = (new ModelRenderer(this, 48, 14)).setTextureSize(64, 32);
-        Head.addBox(-2.0F, -1.0F, -4.0F, 4, 3, 4);
-        Head.setRotationPoint(0.0F, -6.0F, -10.5F);
-        setRotation(Head, 0.0F, 0.0F, 0.0F);
-        Head.mirror = true;
-        Snout.addBox(-1.5F, -1.0F, -6.5F, 3, 2, 4);
-        Snout.setRotationPoint(0.0F, -0.0F, -0.0F);
-        setRotation(Snout, 0.2617994F, 0.0F, 0.0F);
-        Snout.mirror = true;
-        Crest = (new ModelRenderer(this, 52, 0)).setTextureSize(64, 32);
-        Crest.addBox(-1.0F, 0.0F, 0.0F, 2, 4, 4);
-        Crest.setRotationPoint(0.0F, -3.0F, -5.0F);
-        setRotation(Crest, 0.0F, 0.0F, 0.0F);
-        Crest.mirror = true;
-        Head.addChild(Crest);
-        Head.addChild(Snout);
-        Neck = (new ModelRenderer(this, 22, 0)).setTextureSize(64, 32);
-        Neck.addBox(-1.5F, 0.0F, 0.0F, 3, 2, 2);
-        Neck.setRotationPoint(0.0F, -6.0F - yoffset, -10.5F);
-        setRotation(Neck, -((float)Math.PI / 4F), 0.0F, 0.0F);
-        Neck.mirror = true;
-        Neck1 = (new ModelRenderer(this, 22, 0)).setTextureSize(64, 32);
-        Neck1.addBox(-1.5F, 0.0F, 0.0F, 3, 2, 2);
-        Neck1.setRotationPoint(0.0F, -4.5F - yoffset, -9.0F);
-        setRotation(Neck1, -0.9599311F, 0.0F, 0.0F);
-        Neck1.mirror = true;
-        Neck2 = (new ModelRenderer(this, 22, 0)).setTextureSize(64, 32);
-        Neck2.addBox(-1.5F, 0.0F, 0.0F, 3, 2, 2);
-        Neck2.setRotationPoint(0.0F, -3.0F - yoffset, -8.0F);
-        setRotation(Neck2, -1.23464F, 0.0F, 0.0F);
-        Neck2.mirror = true;
-        Neck3 = (new ModelRenderer(this, 22, 0)).setTextureSize(64, 32);
-        Neck3.addBox(-1.5F, 0.0F, 2.0F, 3, 2, 2);
-        Neck3.setRotationPoint(0.0F, -1.5F - yoffset, -7.5F);
-        setRotation(Neck3, -1.343904F, 0.0F, 0.0F);
-        Neck3.mirror = true;
-        Neck4 = (new ModelRenderer(this, 22, 0)).setTextureSize(64, 32);
-        Neck4.addBox(-1.5F, 0.0F, 0.0F, 3, 2, 2);
-        Neck4.setRotationPoint(0.0F, -1.5F - yoffset, -7.5F);
-        setRotation(Neck4, -1.343904F, 0.0F, 0.0F);
-        Neck4.mirror = true;
-        Neck5 = (new ModelRenderer(this, 22, 0)).setTextureSize(64, 32);
-        Neck5.addBox(-1.5F, 0.0F, 4.0F, 3, 2, 2);
-        Neck5.setRotationPoint(0.0F, -1.5F - yoffset, -7.5F);
-        setRotation(Neck5, -1.343904F, 0.0F, 0.0F);
-        Neck5.mirror = true;
-        Neck6 = (new ModelRenderer(this, 22, 0)).setTextureSize(64, 32);
-        Neck6.addBox(-1.5F, 0.0F, 6.0F, 3, 2, 2);
-        Neck6.setRotationPoint(0.0F, -1.5F - yoffset, -7.5F);
-        setRotation(Neck6, -1.343904F, 0.0F, 0.0F);
-        Neck6.mirror = true;
-        Neck7 = (new ModelRenderer(this, 34, 11)).setTextureSize(64, 32);
-        Neck7.addBox(-2.0F, -1.0F, -0.5F, 4, 3, 3);
-        Neck7.setRotationPoint(0.0F, 6.0F - yoffset, -6.5F);
-        setRotation(Neck7, -0.9637522F, 0.0F, 0.0F);
-        Neck7.mirror = true;
-        Lower_Neck = (new ModelRenderer(this, 32, 24)).setTextureSize(64, 32);
-        Lower_Neck.addBox(-2.5F, -0.5F, -0.5F, 5, 4, 4);
-        Lower_Neck.setRotationPoint(0.0F, 7.0F - yoffset, -5.0F);
-        setRotation(Lower_Neck, -0.8377581F, 0.0F, 0.0F);
-        Lower_Neck.mirror = true;
-        //Body
-        Lower_Neck1 = (new ModelRenderer(this, 10, 21)).setTextureSize(64, 32);
-        Lower_Neck1.addBox(-3.0F, -3.0F, -3.0F, 6, 6, 5);
-        Lower_Neck1.setRotationPoint(0.0F, 3.0F, -0.0F);
-        setRotation(Lower_Neck1, -0.5907885F, 0.0F, 0.0F);
-        Lower_Neck1.mirror = true;
-        Body = (new ModelRenderer(this, 0, 0)).setTextureSize(64, 32);
-        Body.addBox(-4.0F, 0.0F, 0.0F, 8, 8, 6);
-        Body.setRotationPoint(0.0F, 9.0F, -3.0F);
-        setRotation(Body, -0.0F, 0.0F, 0.0F);
-        Body.mirror = true;
-        Body2 = (new ModelRenderer(this, 0, 0)).setTextureSize(64, 32);
-        Body2.addBox(-4.0F, 0.0F, 0.0F, 8, 8, 2);
-        Body2.setRotationPoint(0.0F, 0.0F, 6.0F);
-        setRotation(Body2, -0.0F, 0.0F, 0.0F);
-        Body2.mirror = true;
-        Lower_Body = (new ModelRenderer(this, 28, 0)).setTextureSize(64, 32);
-        Lower_Body.addBox(-3.5F, 0.0F, 3.0F, 7, 6, 5);
-        Lower_Body.setRotationPoint(0.0F, 0.0F, 5.0F);
-        setRotation(Lower_Body, -0.3346075F, 0.0F, 0.0F);
-        Lower_Body.mirror = true;
-        //Tail
-        Tail = (new ModelRenderer(this, 0, 13)).setTextureSize(64, 32);
-        Tail.addBox(-2.5F, 0.0F, 3.0F, 5, 4, 5);
-        Tail.setRotationPoint(0.0F, 0.0F, 4.0F);
-        setRotation(Tail, -0.2064018F, 0.0F, 0.0F);
-        Tail.mirror = true;
-        Tail1 = (new ModelRenderer(this, 18, 13)).setTextureSize(64, 32);
-        Tail1.addBox(-2.0F, -1.0F, 4.0F, 4, 3, 6);
-        Tail1.setRotationPoint(0.0F, 0.5F, 4.0F);
-        setRotation(Tail1, -0.2576873F, 0.0F, 0.0F);
-        Tail1.mirror = true;
-        Tail2 = (new ModelRenderer(this, 34, 17)).setTextureSize(64, 32);
-        Tail2.addBox(-1.5F, 1.5F, 5.0F, 3, 2, 3);
-        Tail2.setRotationPoint(0.0F, 0.0F, 4F);
-        setRotation(Tail2, 0.3717943F, 0.0F, 0.0F);
-        Tail2.mirror = true;
-        Tail3 = (new ModelRenderer(this, 34, 17)).setTextureSize(64, 32);
-        Tail3.addBox(-1.5F, 2.F, 0.0F, 3, 1, 3);
-        Tail3.setRotationPoint(0.0F, 0.5F, 6.0F);
-        setRotation(Tail3, 0.3717943F, 0.0F, 0.0F);
-        Tail3.mirror = true;
-        Body.addChild(Lower_Body);
-        Body.addChild(Body2);
-        Body.addChild(Lower_Neck1);
-        Lower_Body.addChild(Tail);
-        Tail.addChild(Tail1);
-        Tail1.addChild(Tail2);
-        Tail2.addChild(Tail3);
-        //Legs
-        Front_ThighRight = (new ModelRenderer(this, 50, 21)).setTextureSize(64, 32);
-        Front_ThighRight.addBox(0.0F, 0.0F, -2.0F, 3, 7, 4);
-        Front_ThighRight.setRotationPoint(2.0F, 3.0F, -0.5F);
-        setRotation(Front_ThighRight, 0.0F, 0.0F, 0.0F);
-        Front_ThighRight.mirror = true;
-        Front_CalfRight = (new ModelRenderer(this, 0, 24)).setTextureSize(64, 32);
-        Front_CalfRight.addBox(1.5F, 7.0F, -0.5F, 2, 5, 3);
-        Front_CalfRight.setRotationPoint(-1.0F, 0.0F, -1.0F);
-        setRotation(Front_CalfRight, 0.0F, 0.0F, 0.0F);
-        Front_CalfRight.mirror = true;
-        Front_ThighRight.addChild(Front_CalfRight);
-        Front_ThighLeft = (new ModelRenderer(this, 50, 21)).setTextureSize(64, 32);
-        Front_ThighLeft.addBox(-3.0F, 0.0F, -2.0F, 3, 7, 4);
-        Front_ThighLeft.setRotationPoint(-2.0F, 3.0F, -0.5F);
-        setRotation(Front_ThighLeft, 0.0F, 0.0F, 0.0F);
-        Front_ThighLeft.mirror = true;
-        Front_CalfLeft = (new ModelRenderer(this, 0, 24)).setTextureSize(64, 32);
-        Front_CalfLeft.addBox(-3.5F, 7.0F, -0.5F, 2, 5, 3);
-        Front_CalfLeft.setRotationPoint(1.0F, 0.0F, -1.0F);
-        setRotation(Front_CalfLeft, 0.0F, 0.0F, 0.0F);
-        Front_CalfLeft.mirror = true;
-        Front_ThighLeft.addChild(Front_CalfLeft);
-        Back_ThighRight = (new ModelRenderer(this, 50, 21)).setTextureSize(64, 32);
-        Back_ThighRight.addBox(-1.0F, 0.0F, -2.0F, 3, 5, 4);
-        Back_ThighRight.setRotationPoint(3.0F, 5.0F, 9.5F);
-        setRotation(Back_ThighRight, 0.0F, 0.0F, 0.0F);
-        Back_ThighRight.mirror = true;
-        Back_CalfRight = (new ModelRenderer(this, 0, 24)).setTextureSize(64, 32);
-        Back_CalfRight.addBox(0.5F, 5.0F, -0.5F, 2, 5, 3);
-        Back_CalfRight.setRotationPoint(-1.0F, 0.0F, -1.0F);
-        setRotation(Back_CalfRight, 0.0F, 0.0F, 0.0F);
-        Back_CalfRight.mirror = true;
-        Back_ThighRight.addChild(Back_CalfRight);
-        Back_ThighLeft = (new ModelRenderer(this, 50, 21)).setTextureSize(64, 32);
-        Back_ThighLeft.addBox(-2.0F, 0.0F, -2.0F, 3, 5, 4);
-        Back_ThighLeft.setRotationPoint(-3.0F, 5.0F, 9.5F);
-        setRotation(Back_ThighLeft, 0.0F, 0.0F, 0.0F);
-        Back_ThighLeft.mirror = true;
-        Back_CalfLeft = (new ModelRenderer(this, 0, 24)).setTextureSize(64, 32);
-        Back_CalfLeft.addBox(-0.5F, 5.0F, -0.5F, 2, 5, 3);
-        Back_CalfLeft.setRotationPoint(-1.0F, 0.0F, -1.0F);
-        setRotation(Back_CalfLeft, 0.0F, 0.0F, 0.0F);
-        Back_CalfLeft.mirror = true;
-        Back_ThighLeft.addChild(Back_CalfLeft);
-        Body.addChild(Back_ThighLeft);
-        Body.addChild(Back_ThighRight);
-        Body.addChild(Front_ThighRight);
-        Body.addChild(Front_ThighLeft);
-        float legspeed = 0.5F;
-        float legRotationLimit = 1.4F;
-    }
+	private void setRotation(ModelRenderer model, float x, float y, float z) {
+		model.rotateAngleX = x;
+		model.rotateAngleY = y;
+		model.rotateAngleZ = z;
+	}
 
-    /**
-     * Sets the models various rotation angles then renders the model.
-     */
-    public void render(Entity var1, float var2, float var3, float var4, float var5, float var6, float var7)
-    {
-        float var14 = 0.0225F;
-        super.render(var1, var2, var3, var4, var5, var6, var7);
-        this.setRotationAngles(var2, var3, var4, var5, var6, var7, ((EntityDinosaur)var1).isModelized());
-        this.Head.render(var7);
-        this.Neck.render(var7);
-        this.Neck1.render(var7);
-        this.Neck2.render(var7);
-        this.Neck3.render(var7);
-        this.Neck4.render(var7);
-        this.Neck5.render(var7);
-        this.Neck6.render(var7);
-        this.Neck7.render(var7);
-        this.Lower_Neck.render(var7);
-        this.Body.render(var7);
-    }
+	public void setRotationAngles(float f, float f1, float f2, float f3,
+			float f4, float f5) {
+		super.setRotationAngles(f, f1, f2, f3, f4, f5);
+	}
 
-    private void setRotation(ModelRenderer var1, float var2, float var3, float var4)
-    {
-        var1.rotateAngleX = var2;
-        var1.rotateAngleY = var3;
-        var1.rotateAngleZ = var4;
-    }
+	@Override
+	protected void setRotationAngles(float var1, float var2, float var3,
+			float var4, float var5, float var6, boolean var7) {
+		// TODO Auto-generated method stub
 
-    protected void setRotationAngles(float var1, float var2, float var3, float var4, float var5, float var6, boolean isModelized)
-    {
+	}
 
-    	if(!isModelized){
-	        this.Head.rotateAngleX = var5 / (180F / (float)Math.PI);
-	        this.Head.rotateAngleY = var4 / (180F / (float)Math.PI);
-	        this.Front_ThighLeft.rotateAngleX = MathHelper.cos((var1) * 0.63330555F + 1) * 1.0F * var2;
-	        this.Front_ThighRight.rotateAngleX = MathHelper.cos((var1) * 0.63330555F + (float)Math.PI) * 1.0F * var2;
-	        this.Back_ThighLeft.rotateAngleX = MathHelper.cos((var1) * 0.63330555F + (float)Math.PI + 2) * 1.0F * var2;
-	        this.Back_ThighRight.rotateAngleX = MathHelper.cos((var1) * 0.63330555F + 1) * 1.0F * var2;
-	        this.Tail.rotateAngleY = 0.05F * MathHelper.sin(var3 * (float)0.1F + (var2+2));
-	        this.Tail1.rotateAngleY = 0.06F * MathHelper.sin(var3 * (float)0.1F + (var2+1));
-	        this.Tail2.rotateAngleY = 0.07F * MathHelper.sin(var3 * (float)0.1F + (var2));
-    	}
-    	else
-    	{
-            this.Head.rotateAngleX = 0;
-            this.Head.rotateAngleY = 0;
-            this.Front_ThighLeft.rotateAngleX = 0;
-            this.Front_ThighRight.rotateAngleX = 0;
-            this.Back_ThighLeft.rotateAngleX = 0;
-            this.Back_ThighRight.rotateAngleX = 0;
-            this.Tail.rotateAngleY =0;
-            this.Tail1.rotateAngleY = 0;
-            this.Tail2.rotateAngleY = 0;
-    	}
-    }
 }

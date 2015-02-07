@@ -45,6 +45,10 @@ enchantment.archeology=Archeology
 
 #Blocks
 tile.fossil.name=Fossil
+tile.Limestone.name=Limestone
+tile.LimestoneBrick.name=Limestone Brick
+tile.Dillhoffia.name=Dillhoffia
+tile.Magnolia.name=Magnolia
 tile.skullBlock.name=Skull
 tile.skullLantern.name=Skull Lantern
 tile.analyzer.name=Analyzer
@@ -125,6 +129,18 @@ tile.vaseKylix.porcelain_kylix.name=Porcelain Kylix
 
 #Items
 item.bioFossil.name=Bio-Fossil
+item.eggSarcosuchus.name=Sarcosuchus egg
+item.dnaSarcosuchus.name=Sarcosuchus DNA
+item.rawSarcosuchus.name=Sarcosuchus Meat
+item.legBone.Sarcosuchus.name=Sarcosuchus Leg Bone
+item.claw.Sarcosuchus.name=Sarcosuchus Spikes
+item.foot.Sarcosuchus.name=Sarcosuchus Foot
+item.vertebrae.Sarcosuchus.name=Sarcosuchus Vertebrae
+item.armBone.Sarcosuchus.name=Sarcosuchus Arm Bone
+item.dinoRibCage.Sarcosuchus.name=Sarcosuchus Rib Cage
+item.skull.Sarcosuchus.name=Sarcosuchus Skull
+item.DominicanAmber.name=Dominican Amber
+item.AquaticScarabGem.name=Aquatic Scarab Gem
 item.relicScrap.name=Relic Scrap
 item.stoneTablet.name=Stone Tablet
 item.brokenAncientSword.name=Broken Ancient Sword
@@ -452,6 +468,7 @@ status.essencefail=Essence of Chicken had no effect.
 #Dinosaur Names
 entity.fossil.Triceratops.name=Triceratops
 entity.fossil.Velociraptor.name=Velociraptor
+entity.fossil.Sarcosuchus.name=Sarcosuchus
 entity.fossil.TRex.name=Tyrannosaurus
 entity.fossil.Pterosaur.name=Pterosaur
 entity.fossil.Plesiosaur.name=Plesiosaur

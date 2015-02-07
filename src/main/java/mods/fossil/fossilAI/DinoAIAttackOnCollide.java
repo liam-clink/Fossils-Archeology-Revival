@@ -36,7 +36,6 @@ public class DinoAIAttackOnCollide extends EntityAIBase
         this.worldObj = par1EntityDinosaur.worldObj;
         this.field_75440_e = par2;
         this.field_75437_f = par4;
-        this.setMutexBits(3);
     }
     /**
      * Returns whether the EntityAIBase should begin execution.

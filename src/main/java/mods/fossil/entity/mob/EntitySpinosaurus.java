@@ -25,7 +25,6 @@ import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
@@ -613,7 +612,7 @@ public class EntitySpinosaurus extends EntityDinosaur implements IWaterDino
 	        }
     	}
     }
-
+    
 	@Override
 	public void writeSpawnData(ByteBuf buffer) {
 		// TODO Auto-generated method stub

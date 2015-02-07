@@ -8,6 +8,6 @@ import net.minecraft.item.ItemSlab;
 public class ItemSlabAncientStone extends ItemSlab{
 	
 	public ItemSlabAncientStone(Block block) {
-		super(block, Fossil.ancientStoneSingleSlab, Fossil.ancientStoneDoubleSlab, false);
+		super(block, (BlockSlab) Fossil.ancientStoneSingleSlab, (BlockSlab) Fossil.ancientStoneDoubleSlab, false);
 	}
 }

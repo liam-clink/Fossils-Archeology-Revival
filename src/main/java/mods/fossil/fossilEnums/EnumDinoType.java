@@ -11,18 +11,18 @@ import mods.fossil.entity.mob.EntityCompsognathus;
 import mods.fossil.entity.mob.EntityDeinonychus;
 import mods.fossil.entity.mob.EntityDilophosaurus;
 import mods.fossil.entity.mob.EntityGallimimus;
+import mods.fossil.entity.mob.EntityLiopleurodon;
 import mods.fossil.entity.mob.EntityMosasaurus;
 import mods.fossil.entity.mob.EntityNautilus;
 import mods.fossil.entity.mob.EntityPachycephalosaurus;
 import mods.fossil.entity.mob.EntityPlesiosaur;
 import mods.fossil.entity.mob.EntityPterosaur;
+import mods.fossil.entity.mob.EntitySarcosuchus;
 import mods.fossil.entity.mob.EntitySpinosaurus;
 import mods.fossil.entity.mob.EntityStegosaurus;
 import mods.fossil.entity.mob.EntityTRex;
-import mods.fossil.entity.mob.EntityTerrorBird;
 import mods.fossil.entity.mob.EntityTriceratops;
 import mods.fossil.entity.mob.EntityVelociraptor;
-import mods.fossil.entity.mob.EntityLiopleurodon;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 
@@ -41,13 +41,12 @@ interface C
     public static final int CARRY = 1 << 5; //Bit 5: Dino can Carry Items
 }
 
-public enum EnumDinoType
-{
+public enum EnumDinoType {
     //													C.MODEL	| C.TAME	| C.RIDE	| C.HERBIVORE/CARNIVORE | C.CARRY
     Triceratops(EntityTriceratops.class, 				C.MODEL | C.TAME  	| C.RIDE 	| C.HERBIVORE),
     Velociraptor(EntityVelociraptor.class,						  C.TAME  				| C.CARNIVORE),
     TRex(EntityTRex.class, 								C.MODEL | C.TAME    | C.RIDE  	| C.CARNIVORE),
-    Pterosaur(EntityPterosaur.class, 					C.MODEL | C.TAME  			 	| C.CARNIVORE),
+    Pterosaur(EntityPterosaur.class, 					C.MODEL | C.TAME             	| C.CARNIVORE),
     Nautilus(EntityNautilus.class, 						C.NOTHING),
     Plesiosaur(EntityPlesiosaur.class, 					C.MODEL | C.TAME  	| C.RIDE 	| C.CARNIVORE),
     Mosasaurus(EntityMosasaurus.class, 					C.MODEL |  		  				  C.CARNIVORE),
@@ -62,8 +61,8 @@ public enum EnumDinoType
     Gallimimus(EntityGallimimus.class,					C.MODEL | C.TAME	| C.RIDE	| C.HERB_CARN),
     Liopleurodon(EntityLiopleurodon.class, 				C.MODEL |  		  				  C.CARNIVORE),
     Allosaurus(EntityAllosaurus.class, 					C.MODEL | C.TAME	| C.RIDE	| C.CARNIVORE),
+    Sarcosuchus(EntitySarcosuchus.class,                C.MODEL | C.TAME    | C.RIDE    | C.CARNIVORE),
     ;
-
 
     private final Class dinoClass;
 
@@ -81,18 +80,6 @@ public enum EnumDinoType
 
     //List of the eatable Mobs with the FoodValue and HealingValue belonging to
     public DinoFoodMobList FoodMobList;
-
-    //Starting width and increase of the Dino - No longer used
-    public float Width0 = 0.5F;
-    public float WidthInc = 0.4F;
-
-    //Starting length and increase of the Dino - No longer used
-    public float Length0 = 0.5F;
-    public float LengthInc = 0.2F;
-
-    //Starting height and increase of the dino - No longer used
-    public float Height0 = 0.5F;
-    public float HeightInc = 0.2F;
 
     //Age Limit of The Dino, arbitrary number, dinosaurs stop growing after hitting adult age.
     public int MaxAge = 999;
@@ -303,7 +290,6 @@ public enum EnumDinoType
         Ankylosaurus.FoodBlockList.addblock(EnumDinoFoodBlock.RedFlower);
         Ankylosaurus.FoodBlockList.addblock(EnumDinoFoodBlock.YellowFlower);
 
-
         Brachiosaurus.setItems(Items.stick);
         Brachiosaurus.setAges(9, 20, -1);
         Brachiosaurus.setDinoSize(sizeBaby, sizeTeen, sizeAdult);
@@ -469,7 +455,15 @@ public enum EnumDinoType
         Pterosaur.FoodItemList.addItem(EnumDinoFoodItem.ChickenRaw);
         Pterosaur.FoodMobList.addMob(EnumDinoFoodMob.Chicken);
         
-
+        Sarcosuchus.setItems(Items.bone);
+        Sarcosuchus.setAges(5, 12, -1);
+        Sarcosuchus.setDinoSize(sizeBaby, sizeTeen, sizeAdult);
+        Sarcosuchus.setProperties(25.0D, 70.0D, 2.0D, 9.0D, 0.25D, -1, 500);
+        Sarcosuchus.setExperience(0.5F, 0.2F);
+        EnumDinoFoodItem.carnivoreItemPreset(Sarcosuchus);
+        Sarcosuchus.FoodMobList.addMob(EnumDinoFoodMob.Chicken);
+        Sarcosuchus.FoodMobList.addMob(EnumDinoFoodMob.Dodo);
+        
         Spinosaurus.setItems(Fossil.skullStick);
         Spinosaurus.setAges(5, 12, -1);
         Spinosaurus.setDinoSize(sizeBaby, sizeTeen, sizeAdult);
@@ -487,7 +481,6 @@ public enum EnumDinoType
         Spinosaurus.FoodMobList.addMob(EnumDinoFoodMob.Dodo);
         Spinosaurus.FoodMobList.addMob(EnumDinoFoodMob.Pig);
         Spinosaurus.FoodMobList.addMob(EnumDinoFoodMob.Cow);
-        TRex.FoodMobList.addMob(EnumDinoFoodMob.Horse);
         Spinosaurus.FoodMobList.addMob(EnumDinoFoodMob.Plesiosaur);
         
         

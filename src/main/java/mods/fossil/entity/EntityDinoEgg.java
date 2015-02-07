@@ -26,6 +26,7 @@ import mods.fossil.entity.mob.EntityTRex;
 import mods.fossil.entity.mob.EntityTriceratops;
 import mods.fossil.entity.mob.EntityVelociraptor;
 import mods.fossil.fossilEnums.EnumDinoType;
+import mods.fossil.fossilEnums.EnumOrderType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityBoat;
@@ -761,12 +762,13 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
                 if(var5 instanceof EntityDinosaur){
 	                if (((EntityDinosaur)var5).SelfType.isTameable() && player != null)
 	                {
-	                	if(((EntityDinosaur)var5).SelfType != EnumDinoType.TRex || ((EntityDinosaur)var5).SelfType != EnumDinoType.Allosaurus){
+	                	if(((EntityDinosaur)var5).SelfType != EnumDinoType.TRex && ((EntityDinosaur)var5).SelfType != EnumDinoType.Allosaurus){
 	                    // Tameable and player next to it
 	                        ((EntityDinosaur)var5).setTamed(true);
 	                		((EntityDinosaur)var5).setOwner(player.getUniqueID().toString());
 	                		((EntityDinosaur)var5).setOwnerDisplayName(player.getCommandSenderName());
-
+	                		// Locked to follow for first day
+	                		((EntityDinosaur)var5).OrderStatus = EnumOrderType.Follow;
 	                	}
 	                }
                 }

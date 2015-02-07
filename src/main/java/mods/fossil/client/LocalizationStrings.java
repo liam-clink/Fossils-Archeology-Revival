@@ -13,6 +13,7 @@ public class LocalizationStrings
 	public static final String ACHIEVEMENT_ANALYZER = "Analyzer";
 	public static final String ACHIEVEMENT_CULTVAT = "CultVat";
 	public static final String ACHIEVEMENT_SIFTER = "Sifter";
+	public static final String AQUATIC_SCARAB_GEM_NAME = "AquaticScarabGem";
 	public static final String ACHIEVEMENT_DINOPEDIA = "Dinopedia";
 	public static final String ACHIEVEMENT_ICEAGE = "IceAge";
 	public static final String ACHIEVEMENT_THEKING = "TheKing";
@@ -23,6 +24,10 @@ public class LocalizationStrings
 	
     //Blocks
     public static final String BLOCK_FOSSIL_NAME = "fossil";
+    public static final String BLOCK_MAGNOLIA_NAME = "Magnolia";
+    public static final String BLOCK_LIMESTONE_NAME = "Limestone";
+    public static final String BLOCK_LIMESTONEBRICK_NAME = "LimestoneBrick";
+    public static final String BLOCK_DILLHOFFIA_NAME = "Dillhoffia";
     public static final String BLOCK_SKULL_NAME = "skullBlock";
     public static final String SKULL_LANTERN_NAME = "skullLantern";
     public static final String BLOCK_ANALYZER_IDLE_NAME = "analyzer";
@@ -79,6 +84,7 @@ public class LocalizationStrings
 
     //Items
     public static final String BIO_FOSSIL_NAME = "bioFossil";
+    public static final String DOMINICAN_AMBER_NAME = "DominicanAmber";
     public static final String RELIC_NAME = "relicScrap";
     public static final String TABLET_NAME = "stoneTablet";
     public static final String BROKEN_SWORD_NAME = "brokenAncientSword";
