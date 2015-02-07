@@ -15,6 +15,7 @@ Forked from [Flammarilva](https://github.com/fls81245)'s Fossil And Archeology m
 [Totara](https://github.com/TotaraStudios)  
 [Cannibal Vox](https://github.com/CannibalVox)  
 [Roomon1](https://github.com/Roomon1)  
+[JTGhawk137](https://github.com/JTGhawk137)  
 [Alexthe666](https://github.com/Alex-the-666)
 
 ###### Texture/Model Artists  
@@ -61,4 +62,3 @@ April 26, 2014 the Fossils and Archeology Revival was put under the Creative Com
 The source is now home in a public organization found here: [https://github.com/FossilsArcheologyRevival](https://github.com/FossilsArcheologyRevival).
 
 You are free to add this to any modpack, or otherwise use it as long as it falls under the CC license. We can only ask that in return you contribute something back to the project or the community.
-

@@ -8,24 +8,24 @@ import net.minecraft.item.ItemStack;
 
 public class BlockVaseVoluteItem extends ItemBlockWithMetadata
 {
-    private Block itemBlock;
+	private Block itemBlock;
 
 	public BlockVaseVoluteItem(Block block)
-    {
-        super(block, block);
-        setHasSubtypes(true);
-    }
+	{
+		super(block, block);
+		setHasSubtypes(true);
+	}
 
-    @Override
-    public String getUnlocalizedName(ItemStack itemstack)
-    {
-        return getUnlocalizedName() + "." + BlockVaseVolute.shortname[itemstack.getItemDamage()];
+	@Override
+	public String getUnlocalizedName(ItemStack itemstack)
+	{
+		return getUnlocalizedName() + "." + BlockVaseVolute.shortname[itemstack.getItemDamage()];
 
-    }
-    
-    @Override
-    public int getMetadata(int meta)
-    {
-    	return meta;
-    }
+	}
+
+	@Override
+	public int getMetadata(int meta)
+	{
+		return meta;
+	}
 }

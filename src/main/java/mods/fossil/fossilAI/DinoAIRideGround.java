@@ -91,7 +91,6 @@ public class DinoAIRideGround extends DinoAIRide
             Vec3 look = rider.getLookVec();
             float dir = Math.min(speedX, 0) * -1;
             dir += speedY / (speedX * 2 + (speedX < 0 ? -2 : 2));
-
             if (dir != 0)
             {
                 look.rotateAroundY((float) Math.PI * dir);

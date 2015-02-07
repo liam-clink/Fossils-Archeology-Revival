@@ -77,7 +77,6 @@ public class DinoAIEat extends EntityAIBase
         this.targetMob = null;
         this.targetFeeder = null;	
         this.dinosaur = Dino0;
-        this.setMutexBits(1);
         this.SEARCH_RANGE = Range0;
         this.targetSorter = new DinoAINearestAttackableTargetSorter(this, this.dinosaur);
         this.TimeAtThisTarget = 0;

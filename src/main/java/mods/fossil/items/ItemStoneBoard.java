@@ -1,5 +1,7 @@
 package mods.fossil.items;
 
+import mods.fossil.Fossil;
+import mods.fossil.client.LocalizationStrings;
 import mods.fossil.entity.EntityStoneboard;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -13,8 +15,9 @@ public class ItemStoneBoard extends Item
 {
     public ItemStoneBoard()
     {
-        super();
         this.setCreativeTab(CreativeTabs.tabDecorations);
+        setUnlocalizedName(LocalizationStrings.TABLET_NAME);
+        setCreativeTab(Fossil.tabFItems);
     }
 
     public boolean onItemUse(ItemStack var1, EntityPlayer var2, World world, int x, int y, int z, int direction, float par8, float par9, float par10)

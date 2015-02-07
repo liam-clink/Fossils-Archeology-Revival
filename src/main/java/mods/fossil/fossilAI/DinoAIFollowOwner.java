@@ -13,18 +13,18 @@ public class DinoAIFollowOwner extends EntityAIBase
     private EntityDinosaur DinoEntity;
     private EntityLivingBase theOwner;
     World theWorld;
-    private double field_75336_f;
+    private double speed;
     private PathNavigate petPathfinder;
-    private int field_75343_h;
+    private int counter;
     float maxDist;
     float minDist;
-    private boolean field_75344_i;
+    private boolean avoidsWater;
 
     public DinoAIFollowOwner(EntityDinosaur par1EntityTameable, double par2, float par4, float par5)
     {
         this.DinoEntity = par1EntityTameable;
         this.theWorld = par1EntityTameable.worldObj;
-        this.field_75336_f = par2;
+        this.speed = par2;
         this.petPathfinder = par1EntityTameable.getNavigator();
         this.minDist = par4;
         this.maxDist = par5;
@@ -81,8 +81,8 @@ public class DinoAIFollowOwner extends EntityAIBase
      */
     public void startExecuting()
     {
-        this.field_75343_h = 0;
-        this.field_75344_i = this.DinoEntity.getNavigator().getAvoidsWater();
+        this.counter = 0;
+        this.avoidsWater = this.DinoEntity.getNavigator().getAvoidsWater();
         this.DinoEntity.getNavigator().setAvoidsWater(false);
     }
 
@@ -93,7 +93,7 @@ public class DinoAIFollowOwner extends EntityAIBase
     {
         this.theOwner = null;
         this.petPathfinder.clearPathEntity();
-        this.DinoEntity.getNavigator().setAvoidsWater(this.field_75344_i);
+        this.DinoEntity.getNavigator().setAvoidsWater(this.avoidsWater);
     }
 
     /**
@@ -105,11 +105,11 @@ public class DinoAIFollowOwner extends EntityAIBase
 
         if (!this.DinoEntity.isSitting())
         {
-            if (--this.field_75343_h <= 0)
+            if (--this.counter <= 0)
             {
-                this.field_75343_h = 10;
+                this.counter = 10;
 
-                if (!this.petPathfinder.tryMoveToEntityLiving(this.theOwner, this.field_75336_f))
+                if (!this.petPathfinder.tryMoveToEntityLiving(this.theOwner, this.speed))
                 {
                     if (!this.DinoEntity.getLeashed())
                     {

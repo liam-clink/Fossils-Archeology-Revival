@@ -8,6 +8,6 @@ import net.minecraft.item.ItemSlab;
 public class ItemSlabPalae extends ItemSlab{
 	
 	public ItemSlabPalae(Block block) {
-		super(block, Fossil.palaeSingleSlab, Fossil.palaeDoubleSlab, false);
+		super(block, (BlockSlab) Fossil.palaeSingleSlab, (BlockSlab) Fossil.palaeDoubleSlab, false);
 	}
 }

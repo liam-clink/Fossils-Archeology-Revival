@@ -29,17 +29,12 @@ public class EntityTRex extends EntityDinosaur
 {
     private static float health = 10;
     public final int Areas = 15;
-    //public final float HuntLimit = (float)this.getHungerLimit() * 0.8F;
     private boolean looksWithInterest;
-    /*private float field_25048_b;
-    private float field_25054_c;
-    private boolean field_25052_g;*/
     public boolean Screaming;
     public int SkillTick = 0;
     public int WeakToDeath = 0;
     public int TooNearMessageTick = 0;
     public boolean SneakScream = false;
-    //private final BlockBreakingRule blockBreakingBehavior;
     final EntityAIControlledByPlayer aiControlledByPlayer;
 	private int Timer;
 	private final String texturePath;
@@ -55,7 +50,6 @@ public class EntityTRex extends EntityDinosaur
     public EntityTRex(World var1)
     {
         super(var1, EnumDinoType.TRex);
-        //this.blockBreakingBehavior = new BlockBreakingRule(this.worldObj, this, 5.0F);
         this.looksWithInterest = false;
         this.updateSize();
         /*
@@ -70,8 +64,9 @@ public class EntityTRex extends EntityDinosaur
         this.maxSize = 4.5F;
         
     	if(Fossil.FossilOptions.TRexFeathers)
-            texturePath = Fossil.modid + ":textures/mob/" + this.SelfType.toString() + "/feathered/" + "Feathered_";
-    	else
+			texturePath = Fossil.modid + ":textures/mob/"
+					+ this.SelfType.toString() + "/feathered/" + "Feathered_";
+		else
     		texturePath = Fossil.modid + ":textures/mob/" + this.SelfType.toString() + "/";
         
         this.getNavigator().setAvoidsWater(true);
@@ -85,7 +80,7 @@ public class EntityTRex extends EntityDinosaur
         this.tasks.addTask(9, new EntityAILookIdle(this));
         this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
         this.targetTasks.addTask(2, new DinoAITargetNonTamedExceptSelfClass(this, EntityLiving.class, 750, false));
-        tasks.addTask(1, new DinoAIRideGround(this, 1)); // mutex all
+        tasks.addTask(1, new DinoAIRideGround(this, 1));
         this.tasks.addTask(2, this.aiControlledByPlayer = new EntityAIControlledByPlayer(this, 0.3F));
 
         this.targetTasks.addTask(5, new DinoAIHunt(this, EntityLiving.class, 200, false));
@@ -119,34 +114,22 @@ public class EntityTRex extends EntityDinosaur
         this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(baseDamage);
     }
 
-    //protected void updateEntityActionState() {}
-
-    /**
+    /*
      * Checks if the entity's current position is a valid location to spawn this entity.
      */
+    
     public boolean getCanSpawnHere()
     {
         return this.worldObj.checkNoEntityCollision(this.boundingBox) && this.worldObj.getCollidingBoundingBoxes(this, this.boundingBox).size() == 0 && !this.worldObj.isAnyLiquid(this.boundingBox);
     }
 
-    /**
+    /*
      * Called to update the entity's position/logic.
      */
+    
     public void onUpdate()
     {
         super.onUpdate();
-        //this.blockBreakingBehavior.execute();
-        //if(this.isAdult() && Fossil.FossilOptions.Dino_Block_Breaking == true)
-        //    BlockInteractive();
-        /*
-        if (this.getHealth() > 0)
-        {
-            if (this.looksWithInterest)
-            {
-                this.numTicksToChaseTarget = 10;
-            }
-        }
-        */
     }
 
     public void moveEntityWithHeading(float par1, float par2)
@@ -158,22 +141,6 @@ public class EntityTRex extends EntityDinosaur
             this.rotationPitch = this.rotationYaw = 0;
     	}
     }
-    
-    /**
-     * Applies a velocity to each of the entities pushing them away from each other. Args: entity
-     */
-    
-   /*
-    public void applyEntityCollision(Entity var1)
-    {
-        if (var1 instanceof EntityLiving && !(var1 instanceof EntityPlayer) && this.getHunger() < this.SelfType.MaxHunger / 2 && this.onGround && this.getDinoAge() > 3)
-        {
-            ((EntityLiving)var1).attackEntityFrom(DamageSource.causeMobDamage(this), 10);
-        }
-    }
-    */
-
-    
 
     public float getEyeHeight()
     {
@@ -493,15 +460,6 @@ public class EntityTRex extends EntityDinosaur
         {
             --this.Timer;
         }
-        /*
-        if (!this.worldObj.isRemote)
-        {
-            this.Timer = Math.max(0, this.Timer - 1);
-            
-
-            this.Screaming = this.Timer > 0 ? true :false;
-            }
-            */
         super.onLivingUpdate();
     }
 
@@ -516,7 +474,6 @@ public class EntityTRex extends EntityDinosaur
             return super.getTexture();
         }
 
-
         if (this.isWeak())
         {
             switch (this.getSubSpecies())
@@ -526,7 +483,6 @@ public class EntityTRex extends EntityDinosaur
             default:
             	return texturePath + "TRex_Weak.png";
             }
-
         }
 
         if (this.isAdult() && !this.isTamed())
@@ -620,77 +576,6 @@ public class EntityTRex extends EntityDinosaur
     {
         return new EntityTRex(this.worldObj);
     }
-
-    /**
-     * This method returns a value to be applied directly to entity speed, this factor is less than 1 when a slowdown
-     * potion effect is applied, more than 1 when a haste potion effect is applied and 2 for fleeing entities.
-     */
-    /*
-    public float getSpeedModifier()
-    {
-        float var1 = 1.0F;
-
-        if (this.IsHungry() || (attackingPlayer != null))
-        {
-            var1 *=1.5F;
-        }
-        else if (this.getDinoAge() < 3)
-        {
-    //           var1 = super.getSpeedModifier();
-
-            if (this.fleeingTick > 0)
-            {
-                var1 *= 3.0F;
-            }
-        }
-        else if (this.riddenByEntity != null && this.riddenByEntity instanceof EntityPlayerSP)
-        {
-            EntityPlayerSP var2 = (EntityPlayerSP)this.riddenByEntity;
-
-            if (var2.movementInput.sneak)
-            {
-                var1 = 5.0F;
-            }
-        }
-
-        return var1;
-    }
-    */
-    /*
-    public int BlockInteractive()
-    {
-        int destroyed=0;
-        for (int var1 = (int)Math.round(this.boundingBox.minX) - 1; var1 <= (int)Math.round(this.boundingBox.maxX) + 1; ++var1)
-        {
-            for (int var2 = (int)Math.round(this.boundingBox.minY); var2 <= (int)Math.round(this.boundingBox.maxY); ++var2)
-            {
-                for (int var3 = (int)Math.round(this.boundingBox.minZ) - 1; var3 <= (int)Math.round(this.boundingBox.maxZ) + 1; ++var3)
-                {
-                    if (!this.worldObj.isAirBlock(var1, var2, var3))
-                    {
-                        int var4 = this.worldObj.getBlockId(var1, var2, var3);
-
-                        if (!this.inWater)
-                        {
-                            if ((double)Block.blocksList[var4].getBlockHardness(this.worldObj, (int)this.posX, (int)this.posY, (int)this.posZ) < 5.0D)
-                            {
-                                if ((new Random()).nextInt(10) < 2)
-                                {
-                                    Block.blocksList[var4].dropBlockAsItem(this.worldObj, var1, var2, var3, 1, 0);
-                                }
-
-                                this.worldObj.setBlock(var1, var2, var3, 0);
-                                destroyed++;
-                                //this.RushTick = 10;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        return destroyed;
-    }
-    */
     
     @Override
     public EntityAgeable createChild(EntityAgeable var1)
@@ -703,6 +588,7 @@ public class EntityTRex extends EntityDinosaur
     /**
      * This gets called when a dinosaur grows naturally or through Chicken Essence.
      */
+    
     @Override
     public void updateSize()
     {
