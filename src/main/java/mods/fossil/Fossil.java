@@ -32,6 +32,7 @@ import mods.fossil.blocks.BlockPalmLog;
 import mods.fossil.blocks.BlockPalmSapling;
 import mods.fossil.blocks.BlockPermafrost;
 import mods.fossil.blocks.BlockSarracenia;
+import mods.fossil.blocks.BlockSlimeTrail;
 import mods.fossil.blocks.BlockTar;
 import mods.fossil.blocks.BlockVaseAmphora;
 import mods.fossil.blocks.BlockVaseAmphoraItem;
@@ -43,6 +44,7 @@ import mods.fossil.blocks.BlockVolcanicAsh;
 import mods.fossil.blocks.BlockVolcanicBrick;
 import mods.fossil.blocks.BlockVolcanicRock;
 import mods.fossil.blocks.BlockVolcanicSlab;
+import mods.fossil.blocks.FossilSoundType;
 import mods.fossil.client.FossilGuiHandler;
 import mods.fossil.client.FossilOptions;
 import mods.fossil.client.LocalizationStrings;
@@ -279,6 +281,7 @@ public class Fossil
 	public static Block blockanalyzerActive;
 	public static Block blockcultivateIdle;
 	public static Block blockcultivateActive;
+    public static Block blockSlimeTrail;
 	public static Block blockworktableIdle;
 	public static Block blockworktableActive;
 	public static Block blockTimeMachine;
@@ -444,6 +447,9 @@ public class Fossil
 	public static Item sjl;
 	public static Item cookedDinoMeat;
 
+	 //Block SoundTypes
+    public static final FossilSoundType soundTypeSlime = new FossilSoundType(1.0F, 1.0F);
+    
 	/*
 	 * Music Discs
 	 */
@@ -557,6 +563,7 @@ public class Fossil
 		blockanalyzerActive = new BlockAnalyzer(true);
 		blockcultivateIdle = new BlockCultivate(false);
 		blockcultivateActive = new BlockCultivate(true);
+		 blockSlimeTrail = new BlockSlimeTrail().setHardness(0.3F).setBlockTextureName("fossil:Slime_Trail").setStepSound(soundTypeSlime).setBlockName(LocalizationStrings.BLOCK_SLIME_TRAIL_NAME).setCreativeTab(this.tabFBlocks);
 		blockworktableIdle = new BlockWorktable(false);
 		blockworktableActive = new BlockWorktable(true);
 		feederIdle = new BlockFeeder(false);
@@ -904,6 +911,7 @@ public class Fossil
 		GameRegistry.registerBlock(blockanalyzerActive, LocalizationStrings.BLOCK_ANALYZER_ACTIVE_NAME);
 		GameRegistry.registerBlock(blockcultivateIdle, LocalizationStrings.BLOCK_CULTIVATE_IDLE_NAME);
 		GameRegistry.registerBlock(blockcultivateActive, LocalizationStrings.BLOCK_CULTIVATE_ACTIVE_NAME);
+		GameRegistry.registerBlock(blockSlimeTrail, LocalizationStrings.BLOCK_SLIME_TRAIL_NAME);
 		GameRegistry.registerBlock(blockworktableIdle, LocalizationStrings.BLOCK_WORKTABLE_IDLE_NAME);
 		GameRegistry.registerBlock(blockworktableActive, LocalizationStrings.BLOCK_WORKTABLE_ACTIVE_NAME);
 		GameRegistry.registerBlock(ferns, LocalizationStrings.FERN_BLOCK_NAME);
