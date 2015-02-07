@@ -150,7 +150,9 @@ public class LocalizationStrings
     public static final String TERROR_BIRD_MEAT_COOKED = "terrorBirdMeatCooked";
     public static final String QUAGGA_MEAT = "quaggaMeat";
     public static final String QUAGGA_MEAT_COOKED = "quaggaMeatCooked";
-    
+	public static String MAMMOTH_MEAT = "mammothMeat";
+	public static String MAMMOTH_MEAT_COOKED = "mammothMeatCooked";
+
     //DNA
     public static final String DNA_PIG_NAME = "dnaPig";
     public static final String DNA_SHEEP_NAME = "dnaSheep";
