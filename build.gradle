@@ -22,7 +22,7 @@ group= "mods.fossil" // http://maven.apache.org/guides/mini/guide-naming-convent
 archivesBaseName = "Fossils_Archeology_Revival-1.7.10_Build-"
 
 minecraft {
-    version = "1.7.10-10.13.1.1291"
+    version = "1.7.10-10.13.2.1291"
     runDir = "eclipse/assets"
 }
 
