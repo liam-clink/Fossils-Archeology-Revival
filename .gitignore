@@ -14,8 +14,6 @@ tmp/
 *.iws
 out/
 minecraft/
-gradlew
-gradlew.bat
 eclipse/
 build/
 .classpath
