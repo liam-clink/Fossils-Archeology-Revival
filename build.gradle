@@ -19,7 +19,7 @@ apply plugin: 'forge'
 
 version = "7.1.0-dev"
 group= "mods.fossil" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "Fossils_Archeology_Revival-1.7.10_Build-"
+archivesBaseName = "Fossils_Archeology_Revival-1.7.10_Build"
 
 minecraft {
     version = "1.7.10-10.13.2.1291"
