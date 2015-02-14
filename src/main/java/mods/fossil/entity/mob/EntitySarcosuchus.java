@@ -190,19 +190,13 @@ public class EntitySarcosuchus extends EntityDinosaur {
 				} else {
 					if (!this.isWeak()) {
 						if (!this.worldObj.isRemote) {
-							Fossil.ShowMessage(
-									StatCollector
-											.translateToLocal(LocalizationStrings.STATUS_GEM_ERROR_HEALTH),
-									player);
+							Fossil.ShowMessage(StatCollector.translateToLocal(LocalizationStrings.STATUS_GEM_ERROR_HEALTH), player);
 						}
 					}
 
 					if (!this.isAdult()) {
 						if (!this.worldObj.isRemote) {
-							Fossil.ShowMessage(
-									StatCollector
-											.translateToLocal(LocalizationStrings.STATUS_GEM_ERROR_YOUNG),
-									player);
+							Fossil.ShowMessage(StatCollector.translateToLocal(LocalizationStrings.STATUS_GEM_ERROR_YOUNG), player);
 						}
 					}
 				}

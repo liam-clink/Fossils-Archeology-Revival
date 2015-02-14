@@ -20,6 +20,7 @@ import mods.fossil.entity.mob.EntityMosasaurus;
 import mods.fossil.entity.mob.EntityPachycephalosaurus;
 import mods.fossil.entity.mob.EntityPlesiosaur;
 import mods.fossil.entity.mob.EntityPterosaur;
+import mods.fossil.entity.mob.EntitySarcosuchus;
 import mods.fossil.entity.mob.EntitySpinosaurus;
 import mods.fossil.entity.mob.EntityStegosaurus;
 import mods.fossil.entity.mob.EntityTRex;
@@ -514,241 +515,258 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
                 }
 
                 BiomeGenBase var3 = this.worldObj.provider.worldChunkMgr.getBiomeGenAt((int)Math.floor(this.posX), (int)Math.floor(this.posZ));
-                Object var5 = null;
+                Object hatchingDinosaur = null;
 
                 switch (this.DinoInside)
                 {
                     case Triceratops:
-                    	var5 = new EntityTriceratops(this.worldObj);
+                    	hatchingDinosaur = new EntityTriceratops(this.worldObj);
                     	
                         if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.SAVANNA)
                         		|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.SANDY)
                         		|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.MESA))
                         {
-                            ((EntityTriceratops)var5).setSubSpecies(1);
+                            ((EntityTriceratops)hatchingDinosaur).setSubSpecies(1);
                         }
                         else if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.COLD)
                         		|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.MOUNTAIN))
                         {
-                            ((EntityTriceratops)var5).setSubSpecies(2);
+                            ((EntityTriceratops)hatchingDinosaur).setSubSpecies(2);
                         }
                         else 
                         {
-                        	((EntityTriceratops)var5).setSubSpecies(0);
+                        	((EntityTriceratops)hatchingDinosaur).setSubSpecies(0);
                         }
                         break;
 
                     case Velociraptor:
-                        var5 = new EntityVelociraptor(this.worldObj);
+                        hatchingDinosaur = new EntityVelociraptor(this.worldObj);
 
                         if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.FOREST)
                         		|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.SWAMP))
                         {
-                            ((EntityVelociraptor)var5).setSubSpecies(2);
+                            ((EntityVelociraptor)hatchingDinosaur).setSubSpecies(2);
                         }
                         else if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.COLD)
                         		|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.MOUNTAIN))
                         {
-                            ((EntityVelociraptor)var5).setSubSpecies(1);
+                            ((EntityVelociraptor)hatchingDinosaur).setSubSpecies(1);
                         }
                         else if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.WATER)
                         		|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.BEACH))
                         {
-                        	((EntityVelociraptor)var5).setSubSpecies(3);
+                        	((EntityVelociraptor)hatchingDinosaur).setSubSpecies(3);
                         }
                         else
                         {
-                            ((EntityVelociraptor)var5).setSubSpecies(0);
+                            ((EntityVelociraptor)hatchingDinosaur).setSubSpecies(0);
                         }
 
                         break;
 
                     case TRex:
-                        var5 = new EntityTRex(this.worldObj);
+                        hatchingDinosaur = new EntityTRex(this.worldObj);
                         
                         if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.FOREST)
                         		|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.SWAMP)
                         		|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.JUNGLE))
                         {
-                        	((EntityTRex)var5).setSubSpecies(1);
+                        	((EntityTRex)hatchingDinosaur).setSubSpecies(1);
                         }
                         else
                         {
-                        	((EntityTRex)var5).setSubSpecies(0);
+                        	((EntityTRex)hatchingDinosaur).setSubSpecies(0);
                         }
                         break;
 
                     case Pterosaur:
-                        var5 = new EntityPterosaur(this.worldObj);
+                        hatchingDinosaur = new EntityPterosaur(this.worldObj);
                         break;
 
                     case Plesiosaur:
-                        var5 = new EntityPlesiosaur(this.worldObj);
+                        hatchingDinosaur = new EntityPlesiosaur(this.worldObj);
+                        break;
+                        
+                    case Sarcosuchus:
+                        hatchingDinosaur = new EntitySarcosuchus(this.worldObj);
+                        
+                        if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.SWAMP))
+                        {
+                            ((EntitySarcosuchus)hatchingDinosaur).setSubSpecies(1);
+                        }
+                        else if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.HOT))
+                        {
+                            ((EntitySarcosuchus)hatchingDinosaur).setSubSpecies(2);
+                        }
+                        else 
+                        {
+                        	((EntitySarcosuchus)hatchingDinosaur).setSubSpecies(0);
+                        }
                         break;
 
                     case Mosasaurus:
-                        var5 = new EntityMosasaurus(this.worldObj);
+                        hatchingDinosaur = new EntityMosasaurus(this.worldObj);
                         
                         if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.COLD)
                         		|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.MOUNTAIN)
                         		|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.WATER))
                         {
-                            ((EntityMosasaurus)var5).setSubSpecies(1);
+                            ((EntityMosasaurus)hatchingDinosaur).setSubSpecies(1);
                         }
                         else
                         {
-                            ((EntityMosasaurus)var5).setSubSpecies(2);
+                            ((EntityMosasaurus)hatchingDinosaur).setSubSpecies(2);
                         }
                         
                         break;
                         
                     case Liopleurodon:
-                        var5 = new EntityLiopleurodon(this.worldObj);
+                        hatchingDinosaur = new EntityLiopleurodon(this.worldObj);
                         break;
 
                     case Stegosaurus:
-                    	var5 = new EntityStegosaurus(this.worldObj);
+                    	hatchingDinosaur = new EntityStegosaurus(this.worldObj);
                     	
                         if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.SAVANNA)
                         		|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.SANDY)
                         		|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.MESA))
                         {
-                            ((EntityStegosaurus)var5).setSubSpecies(2);
+                            ((EntityStegosaurus)hatchingDinosaur).setSubSpecies(2);
                         }
                         else if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.COLD)
                         		|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.MOUNTAIN))
                         {
-                            ((EntityStegosaurus)var5).setSubSpecies(1);
+                            ((EntityStegosaurus)hatchingDinosaur).setSubSpecies(1);
                         }
                         else 
                         {
-                        	((EntityStegosaurus)var5).setSubSpecies(0);
+                        	((EntityStegosaurus)hatchingDinosaur).setSubSpecies(0);
                         }
                         break;
 
                     case Dilophosaurus:
-                        var5 = new EntityDilophosaurus(this.worldObj);
+                        hatchingDinosaur = new EntityDilophosaurus(this.worldObj);
 
                         if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.HOT))
                         {
-                            ((EntityDilophosaurus)var5).setSubSpecies(1);
+                            ((EntityDilophosaurus)hatchingDinosaur).setSubSpecies(1);
                         }
                         else
                         {
-                            ((EntityDilophosaurus)var5).setSubSpecies(0);
+                            ((EntityDilophosaurus)hatchingDinosaur).setSubSpecies(0);
                         }
                         break;
                         
                     case Allosaurus:
-                        var5 = new EntityAllosaurus(this.worldObj);
+                        hatchingDinosaur = new EntityAllosaurus(this.worldObj);
                         
                         if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.HOT)
                         		|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.DRY))
                         {
-                            ((EntityAllosaurus)var5).setSubSpecies(2);
+                            ((EntityAllosaurus)hatchingDinosaur).setSubSpecies(2);
                         }
                         else if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.JUNGLE)
                         		|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.SWAMP)
                         		|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.FOREST))
                         {
-                            ((EntityAllosaurus)var5).setSubSpecies(3);
+                            ((EntityAllosaurus)hatchingDinosaur).setSubSpecies(3);
                         }
                         else
                         {
-                            ((EntityAllosaurus)var5).setSubSpecies(1);
+                            ((EntityAllosaurus)hatchingDinosaur).setSubSpecies(1);
                         }
                         
                         break;
 
                     case Brachiosaurus:
-                        var5 = new EntityBrachiosaurus(this.worldObj);
+                        hatchingDinosaur = new EntityBrachiosaurus(this.worldObj);
                         break;
 
                     case Spinosaurus:
-                        var5 = new EntitySpinosaurus(this.worldObj);
+                        hatchingDinosaur = new EntitySpinosaurus(this.worldObj);
                         break;
 
                     case Pachycephalosaurus:
-                        var5 = new EntityPachycephalosaurus(this.worldObj);
+                        hatchingDinosaur = new EntityPachycephalosaurus(this.worldObj);
 
                         if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.FOREST))
                         {
-                            ((EntityPachycephalosaurus)var5).setSubSpecies(1);
+                            ((EntityPachycephalosaurus)hatchingDinosaur).setSubSpecies(1);
                         }
                         else if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.COLD)
                         		|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.MOUNTAIN))
                         {
-                            ((EntityPachycephalosaurus)var5).setSubSpecies(2);
+                            ((EntityPachycephalosaurus)hatchingDinosaur).setSubSpecies(2);
                         }
                         else
                         {
-                            ((EntityPachycephalosaurus)var5).setSubSpecies(3);
+                            ((EntityPachycephalosaurus)hatchingDinosaur).setSubSpecies(3);
                         }
 
                         break;
 
                     case Compsognathus:
-                        var5 = new EntityCompsognathus(this.worldObj);
+                        hatchingDinosaur = new EntityCompsognathus(this.worldObj);
 
                         if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.COLD)
                         		|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.MOUNTAIN)
                         		|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.HOT))
                         {
-                            ((EntityCompsognathus)var5).setSubSpecies(1);
+                            ((EntityCompsognathus)hatchingDinosaur).setSubSpecies(1);
                         }
                         else
                         {
-                            ((EntityCompsognathus)var5).setSubSpecies(2);
+                            ((EntityCompsognathus)hatchingDinosaur).setSubSpecies(2);
                         }
 
                         break;
 
                     case Ankylosaurus:
-                        var5 = new EntityAnkylosaurus(this.worldObj);
+                        hatchingDinosaur = new EntityAnkylosaurus(this.worldObj);
                         break;
                         
                     case Deinonychus:
-                        var5 = new EntityDeinonychus(this.worldObj);
+                        hatchingDinosaur = new EntityDeinonychus(this.worldObj);
                     	if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.COLD)
                         		|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.MOUNTAIN)
                         		|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.HILLS))
                         		{
-                        			((EntityDeinonychus)var5).setSubSpecies(1); //Grey
+                        			((EntityDeinonychus)hatchingDinosaur).setSubSpecies(1); //Grey
                         		}
                         	else if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.JUNGLE)
                         			|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.SWAMP))
                             	{
-                            		((EntityDeinonychus)var5).setSubSpecies(2); //Black
+                            		((EntityDeinonychus)hatchingDinosaur).setSubSpecies(2); //Black
                             	}
                         	else
                             	{
-                            		((EntityDeinonychus)var5).setSubSpecies(3); //Brown
+                            		((EntityDeinonychus)hatchingDinosaur).setSubSpecies(3); //Brown
                             	}
                         break;
                         
                     case Gallimimus:
-                    	var5 = new EntityGallimimus(this.worldObj);
+                    	hatchingDinosaur = new EntityGallimimus(this.worldObj);
                     	
                     	if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.PLAINS)
                     		|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.HILLS)
                     		|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.FOREST))
                     		{
-                    			((EntityGallimimus)var5).setSubSpecies(1); //Green
+                    			((EntityGallimimus)hatchingDinosaur).setSubSpecies(1); //Green
                     		}
                     	else if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.COLD)
                     			|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.BEACH)
                     		|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.WATER))
                         	{
-                        		((EntityGallimimus)var5).setSubSpecies(2); //Blue
+                        		((EntityGallimimus)hatchingDinosaur).setSubSpecies(2); //Blue
                         	}
                     	else if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.HOT)
                         		|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.WASTELAND))
                         	{
-                        		((EntityGallimimus)var5).setSubSpecies(3); //Orange
+                        		((EntityGallimimus)hatchingDinosaur).setSubSpecies(3); //Orange
                         	}
                     	else
                     	{
-                    		((EntityGallimimus)var5).setSubSpecies(4); //Brown
+                    		((EntityGallimimus)hatchingDinosaur).setSubSpecies(4); //Brown
                     	}
                     	break;
 
@@ -759,30 +777,32 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
                         return;
                 }
 
-                if(var5 instanceof EntityDinosaur){
-	                if (((EntityDinosaur)var5).SelfType.isTameable() && player != null)
+                if(hatchingDinosaur instanceof EntityDinosaur){
+	                if (((EntityDinosaur)hatchingDinosaur).SelfType.isTameable() && player != null)
 	                {
-	                	if(((EntityDinosaur)var5).SelfType != EnumDinoType.TRex && ((EntityDinosaur)var5).SelfType != EnumDinoType.Allosaurus){
+	                	if(((EntityDinosaur)hatchingDinosaur).SelfType != EnumDinoType.TRex 
+	                			&& ((EntityDinosaur)hatchingDinosaur).SelfType != EnumDinoType.Allosaurus
+	                			&& ((EntityDinosaur)hatchingDinosaur).SelfType != EnumDinoType.Sarcosuchus){
 	                    // Tameable and player next to it
-	                        ((EntityDinosaur)var5).setTamed(true);
-	                		((EntityDinosaur)var5).setOwner(player.getUniqueID().toString());
-	                		((EntityDinosaur)var5).setOwnerDisplayName(player.getCommandSenderName());
+	                        ((EntityDinosaur)hatchingDinosaur).setTamed(true);
+	                		((EntityDinosaur)hatchingDinosaur).setOwner(player.getUniqueID().toString());
+	                		((EntityDinosaur)hatchingDinosaur).setOwnerDisplayName(player.getCommandSenderName());
 	                		// Locked to follow for first day
-	                		((EntityDinosaur)var5).OrderStatus = EnumOrderType.Follow;
+	                		((EntityDinosaur)hatchingDinosaur).OrderStatus = EnumOrderType.Follow;
 	                	}
 	                }
                 }
 
-                ((EntityLiving)var5).setLocationAndAngles((double)((int)Math.floor(this.posX)), (double)((int)Math.floor(this.posY) + 1), (double)((int)Math.floor(this.posZ)), this.worldObj.rand.nextFloat() * 360.0F, 0.0F);
+                ((EntityLiving)hatchingDinosaur).setLocationAndAngles((double)((int)Math.floor(this.posX)), (double)((int)Math.floor(this.posY) + 1), (double)((int)Math.floor(this.posZ)), this.worldObj.rand.nextFloat() * 360.0F, 0.0F);
 
-                if (this.worldObj.checkNoEntityCollision(((EntityLiving)var5).boundingBox) 
-                		&& this.worldObj.getCollidingBoundingBoxes((Entity)var5, ((EntityLiving)var5).boundingBox).size() == 0 
-                        && (!this.worldObj.isAnyLiquid(((EntityLiving)var5).boundingBox) 
+                if (this.worldObj.checkNoEntityCollision(((EntityLiving)hatchingDinosaur).boundingBox) 
+                		&& this.worldObj.getCollidingBoundingBoxes((Entity)hatchingDinosaur, ((EntityLiving)hatchingDinosaur).boundingBox).size() == 0 
+                        && (!this.worldObj.isAnyLiquid(((EntityLiving)hatchingDinosaur).boundingBox) 
                         || this.DinoInside == EnumDinoType.Mosasaurus || this.DinoInside == EnumDinoType.Liopleurodon))
                 {
                     //if (!this.worldObj.isRemote)
                     {
-                        this.worldObj.spawnEntityInWorld((Entity)var5);
+                        this.worldObj.spawnEntityInWorld((Entity)hatchingDinosaur);
 
                         if (player != null)
                         {
