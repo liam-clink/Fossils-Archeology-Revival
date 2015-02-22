@@ -1,11 +1,11 @@
 #Build 7.0 - Updated October 5 2014
-#Portugues Brasileiro (pt_BR) Localization File – por: Al-Myr
-#Keys last updated 17 Fevereiro 2015 – por: Al-Myr
+#Português Brasileiro (pt_BR) Localization File – por: Al-Myr
+#Keys last updated 21 Fevereiro 2015 – por: Al-Myr
 #Tab Groups
-itemgroup.FCombat=FAR: Equipamento
+itemgroup.FCombat=FAR: Combate
 itemgroup.FBlocks=FAR: Blocos
-itemgroup.FFood=FAR: Comidas
-itemgroup.FItems=FAR: Itens
+itemgroup.FFood=FAR: Alimentação
+itemgroup.FItems=FAR: Miscelânea
 itemgroup.FMaterial=FAR: Materiais
 itemgroup.FTools=FAR: Ferramentas
 itemgroup.FFigurines=FAR: Coletáveis
@@ -20,7 +20,7 @@ achievement.Permafrost=Tente não pegar um resfriado!
 achievement.ArchWorkbench=Vamos começar a festa!
 achievement.Analyzer=Pela CIÊNCIA!
 achievement.CultVat=Manipulação genética.
-achievement.Sifter=Porque, 'baby', eu sou um Escavador de Ouro!
+achievement.Sifter=Porque, 'baby', eu sou um Escavad'ouro!
 achievement.Dinopedia=Preencha todas as páginas!
 achievement.IceAge=Eu não sei como você vai dar à luz...
 achievement.TheKing=Dominador do Cretáceo Superior
@@ -30,7 +30,7 @@ achievement.FirstEgg.desc=Você trouxe de volta o seu primeiro dinossauro!
 achievement.AllEggs.desc=Você encontrou todos os ovos de dinossauro!
 achievement.FoundFossils.desc=Você encontrou alguns fósseis!
 achievement.pigBossOnEarth.desc=Você invocou Anu!
-achievement.Permafrost=Que maravilhas poderiam ter dentro dele?
+achievement.Permafrost=Que maravilhas podem estar dentro dele?
 achievement.ArchWorkbench=Primeiro passo para se tornar um arqueólogo.
 achievement.Analyzer=Descobrindo o passado!
 achievement.CultVat=Trazer o passado para vida!
@@ -121,7 +121,7 @@ tile.vaseAmphora.restored_amphora.name=Ânfora Restaurada
 tile.vaseAmphora.blackFigure_amphora.name=Ânfora Ornamentada em Vermelho
 tile.vaseAmphora.redFigure_amphora.name=Ânfora Ornamentada em Preto
 tile.vaseAmphora.porcelain_amphora.name=Ânfora Esmaltada
-tile.vaseKylix.damaged_kylix.name=Cílice
+tile.vaseKylix.damaged_kylix.name=Cílice Quebrada
 tile.vaseKylix.restored_kylix.name=Cílice Restaurada
 tile.vaseKylix.blackFigure_kylix.name=Cílice Ornamentada em Vermelho
 tile.vaseKylix.redFigure_kylix.name=Cílice Ornamentada em Preto
@@ -145,7 +145,7 @@ item.relicScrap.name=Relíquia Fragmentada
 item.stoneTablet.name=Tábua de Pedra
 item.brokenAncientSword.name=Espada Antiga Quebrada
 item.ancientSword.name=Espada Antiga
-item.fernSeeds.name=Sementes de Samambaia
+item.fernSeeds.name=Broto de Samambaia
 item.brokenAncientHelmet.name=Elmo Antigo Quebrado
 item.ancientHelmet.name=Elmo Antigo
 item.skullStick.name=Bastão com Crânio
@@ -424,42 +424,42 @@ item.quaggaMeat.name=Carne de Quagga Crua
 item.quaggaMeatCooked.name=Carne de Quagga Assada
 
 #Dinosaur related chat messages
-dnaName.head=DNA de
+dnaName.head=DNA de 
 dnaName.tail=
-embryoName.head=Embrião de
+embryoName.head=Embrião de 
 embryoName.tail=
-meatName.head=Carne de
+meatName.head=Carne de 
 meatName.tail=
-mGCName.head=Concha Mágica:
+mGCName.head=Concha Mágica: 
 mGCName.tail=
-dEggName.head=Ovo de
+dEggName.head=Ovo de 
 dEggName.tail=
 
 #Order chat messages
-order.head=Ordem:
+order.head=Ordem: 
 order.Stay=Fica
 order.Follow=Siga
 order.FreeMove=Solto
 
 #Dinosaur status chat messages
 status.Hungry.head=
-status.Hungry=está com fome.
+status.Hungry= está com fome.
 status.Starve.head=
-status.Starve=morreu de fome.
-status.LearningChest.head=O
-status.LearningChest=aprendeu como usar baús.
-status.Betrayed.head=Isto
-status.Betrayed=não confia na humanidade.
+status.Starve= morreu de fome.
+status.LearningChest.head=O 
+status.LearningChest= aprendeu como usar baús.
+status.Betrayed.head=Isso 
+status.Betrayed= não confia na humanidade.
 status.NoSpace.head=
-status.NoSpace=não tem espaço suficiente para crescer.
+status.NoSpace= não tem espaço suficiente para crescer.
 status.StarveEsc.head=
-status.StarveEsc=fugiu por causa da fome.
-status.SJLBite=mordeu o Siu-Jiu-Le e fugiu.
-status.ChewTime=precisa de tempo para mastigar.
-status.Full.head=Isto
-status.Full=está cheio.
-status.Nervous.Head=Você fez um pouco
-status.Nervous=nervoso demais para caçar em si.
+status.StarveEsc= fugiu por causa da fome.
+status.SJLBite= mordeu o Siu-Jiu-Le e fugiu.
+status.ChewTime= precisa de tempo para mastigar.
+status.Full.head=O 
+status.Full= está satisfeito.
+status.Nervous.Head=Você fez um pouco 
+status.Nervous= nervoso demais para caçar em si.
 status.GemErrorYoung=Este Tiranossauro Rex ainda é muito jovem.
 status.GemErrorHealth=O escaravelho não pagar tal energia de vida forte.
 status.GemErrorTamed=Este Tiranossauro Rex já foi domado.
@@ -500,7 +500,7 @@ entity.fossil.TerrorBird.name=Ave do Terror
 entity.fossil.Elasmotherium.name=Elasmotério
 
 #Pedia text
-pedia.text.owner=Proprietário:
+pedia.text.owner=Proprietário: 
 pedia.text.chest=* Baús
 pedia.text.caution=!Perigoso!
 pedia.text.rideable=* Montável
@@ -514,8 +514,8 @@ pedia.eggStatus=Estado
 pedia.eggProgress=Progresso
 pedia.eggDay=Dia
 pedia.eggDays=Dias
-pedia.embryo.inside=Embrião em:
-pedia.embryo.growing=Progresso:
+pedia.embryo.inside=Embrião de: 
+pedia.embryo.growing=Progresso: 
 pedia.embryo.Pig=Porco
 pedia.embryo.Sheep=Ovelha
 pedia.embryo.Cow=Vaca
@@ -528,7 +528,7 @@ pedia.embryo.Quagga=Quagga
 pedia.embryo.Elasmotherium=Elasmotério
 
 #Anu speaking lines
-anuSpeaker.self=Anu:
+anuSpeaker.self=Anu: 
 anuSpeaker.hello=Ajoelhe-se diante de mim, resistir é inútil.
 anuSpeaker.bareHand=Mãos nuas... Estúpido, mas corajoso.
 anuSpeaker.mySword=Tentando usar minha magia contra mim? Péssima idéia.
@@ -544,24 +544,24 @@ anuSpeaker.qi=Qi-choque!
 anuSpeaker.fireRain=Deixa chover um pouco de fogo!
 
 #Friendly pigmen speaking lines
-fpzSpeaker.self=Homem-Porco Zumbi:
+fpzSpeaker.self=Homem-Porco Zumbi: 
 fpzSpeaker.selfKill=Não podemos viver sem um líder!
-fpzSpeaker.lifeFor.head=Pela minha vida
+fpzSpeaker.lifeFor.head=Pela minha vida 
 fpzSpeaker.lifeFor.tail=!
 fpzSpeaker.anuSommon=Todos saúdem Anu!!!!
 
 #Dinosaur egg chat messages
 dinoegg.hatched=Um ovo de dinossauro chocou!
 dinoegg.noSpace=Este ovo não pode nascer aqui.
-dinoegg.head=Um ovo de
-dinoegg.dry=morreu porque era muito seco.
-dinoegg.cold=morreu porque estava muito frio.
+dinoegg.head=Um ovo de 
+dinoegg.dry= morreu porque era muito seco.
+dinoegg.cold= morreu porque estava muito frio.
 
 #Cultivator chat messages
 cultivate.outBreak=Aviso! Falha no cultivo!
 
 #Drum chat messages
-drum.trigger=Ordem do Tambor:
+drum.trigger=Ordem do Tambor: 
 drum.ordering=Ordenamento
 drum.tRex1=Ordenamento café da manhã para o Tiranossauro Rex
 drum.tRex2=Ordenamento almoço para o Tiranossauro Rex
