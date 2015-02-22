@@ -545,21 +545,22 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
                         if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.FOREST)
                         		|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.SWAMP))
                         {
-                            ((EntityVelociraptor)hatchingDinosaur).setSubSpecies(2);
+                            ((EntityVelociraptor)hatchingDinosaur).setSubSpecies(2); //Green
                         }
                         else if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.COLD)
-                        		|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.MOUNTAIN))
+                        		|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.MOUNTAIN)
+                        		|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.SNOWY))
                         {
-                            ((EntityVelociraptor)hatchingDinosaur).setSubSpecies(1);
+                            ((EntityVelociraptor)hatchingDinosaur).setSubSpecies(1); //Blue
                         }
                         else if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.WATER)
                         		|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.BEACH))
                         {
-                        	((EntityVelociraptor)hatchingDinosaur).setSubSpecies(3);
+                        	((EntityVelociraptor)hatchingDinosaur).setSubSpecies(3); //River
                         }
                         else
                         {
-                            ((EntityVelociraptor)hatchingDinosaur).setSubSpecies(0);
+                            ((EntityVelociraptor)hatchingDinosaur).setSubSpecies(0); //Default Tan
                         }
 
                         break;
@@ -755,7 +756,9 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
                     		}
                     	else if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.COLD)
                     			|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.BEACH)
-                    		|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.WATER))
+                    		|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.WATER)
+                    		|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.MOUNTAIN)
+                    		|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.SNOWY))
                         	{
                         		((EntityGallimimus)hatchingDinosaur).setSubSpecies(2); //Blue
                         	}
