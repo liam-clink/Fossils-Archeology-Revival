@@ -35,7 +35,7 @@ public class EntitySarcosuchus extends EntityDinosaur {
 	public static final double baseHealth = EnumDinoType.Sarcosuchus.Health0;
 	public static final double baseDamage = EnumDinoType.Sarcosuchus.Strength0;
 	public static final double baseSpeed = EnumDinoType.Sarcosuchus.Speed0;
-
+	
 	public static final double maxHealth = EnumDinoType.Sarcosuchus.HealthMax;
 	public static final double maxDamage = EnumDinoType.Sarcosuchus.StrengthMax;
 	public static final double maxSpeed = EnumDinoType.Sarcosuchus.SpeedMax;
@@ -190,13 +190,19 @@ public class EntitySarcosuchus extends EntityDinosaur {
 				} else {
 					if (!this.isWeak()) {
 						if (!this.worldObj.isRemote) {
-							Fossil.ShowMessage(StatCollector.translateToLocal(LocalizationStrings.STATUS_GEM_ERROR_HEALTH), player);
+							Fossil.ShowMessage(
+									StatCollector
+											.translateToLocal(LocalizationStrings.STATUS_GEM_ERROR_HEALTH),
+									player);
 						}
 					}
 
 					if (!this.isAdult()) {
 						if (!this.worldObj.isRemote) {
-							Fossil.ShowMessage(StatCollector.translateToLocal(LocalizationStrings.STATUS_GEM_ERROR_YOUNG), player);
+							Fossil.ShowMessage(
+									StatCollector
+											.translateToLocal(LocalizationStrings.STATUS_GEM_ERROR_YOUNG),
+									player);
 						}
 					}
 				}

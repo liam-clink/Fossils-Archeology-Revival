@@ -1,9 +1,11 @@
 package mods.fossil.client.model;
 
+import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.MathHelper;
 
-public class ModelSarcosuchus extends ModelDinosaurs {
+public class ModelSarcosuchus extends ModelBase {
 	ModelRenderer body;
 	ModelRenderer LowerBody;
 	ModelRenderer leftHindLeg;
@@ -108,7 +110,7 @@ public class ModelSarcosuchus extends ModelDinosaurs {
 		leftHindLeg = new ModelRenderer(this, "leftHindLeg");
 		leftHindLeg.setRotationPoint(5.1F, 4.1F, 1.6F);
 		setRotation(leftHindLeg, 0F, 0F, 0F);
-		leftHindLeg.mirror = false;
+		leftHindLeg.mirror = true;
 		leftHindLeg.addBox("leftHindLeg", -2F, 0F, -2.5F, 4, 7, 5);
 		leftHindFoot = new ModelRenderer(this, "leftHindFoot");
 		leftHindFoot.setRotationPoint(0F, 5.1F, -2F);
@@ -123,7 +125,7 @@ public class ModelSarcosuchus extends ModelDinosaurs {
 		rightLowerBodyOsteoderms.setRotationPoint(-5F, 4F, 5F);
 		setRotation(rightLowerBodyOsteoderms, 0F, 0F, 0F);
 		rightLowerBodyOsteoderms.mirror = true;
-		rightLowerBodyOsteoderms.addBox("rightLowerBodyOsteoderms", -1F, -5F,
+		rightLowerBodyOsteoderms.addBox("rightLowerBodyOsteoderms", 0F, -5F,
 				0F, 1, 5, 9);
 		LowerBody.addChild(rightLowerBodyOsteoderms);
 		leftLowerBodyOsteoderms = new ModelRenderer(this,
@@ -131,7 +133,7 @@ public class ModelSarcosuchus extends ModelDinosaurs {
 		leftLowerBodyOsteoderms.setRotationPoint(5F, 4F, 5F);
 		setRotation(leftLowerBodyOsteoderms, 0F, 0F, 0F);
 		leftLowerBodyOsteoderms.mirror = true;
-		leftLowerBodyOsteoderms.addBox("leftLowerBodyOsteoderms", -1F, -5F, 0F,
+		leftLowerBodyOsteoderms.addBox("leftLowerBodyOsteoderms", 0F, -5F, 0F,
 				1, 5, 9);
 		LowerBody.addChild(leftLowerBodyOsteoderms);
 		middleLowerBodyOsteoderms = new ModelRenderer(this,
@@ -139,7 +141,7 @@ public class ModelSarcosuchus extends ModelDinosaurs {
 		middleLowerBodyOsteoderms.setRotationPoint(0F, 4F, 5F);
 		setRotation(middleLowerBodyOsteoderms, 0F, 0F, 0F);
 		middleLowerBodyOsteoderms.mirror = true;
-		middleLowerBodyOsteoderms.addBox("middleLowerBodyOsteoderms", -1F, -5F,
+		middleLowerBodyOsteoderms.addBox("middleLowerBodyOsteoderms", 0F, -5F,
 				0F, 1, 5, 9);
 		LowerBody.addChild(middleLowerBodyOsteoderms);
 		tail1 = new ModelRenderer(this, "tail1");
@@ -156,7 +158,7 @@ public class ModelSarcosuchus extends ModelDinosaurs {
 		tail2Osteoderms.setRotationPoint(0F, 1F, 3F);
 		setRotation(tail2Osteoderms, 0F, 0F, 0F);
 		tail2Osteoderms.mirror = true;
-		tail2Osteoderms.addBox("tail2Osteoderms", -1F, -5F, 0F, 1, 5, 20);
+		tail2Osteoderms.addBox("tail2Osteoderms", 0F, -5F, 0F, 1, 5, 20);
 		tail2.addChild(tail2Osteoderms);
 		tail3 = new ModelRenderer(this, "tail3");
 		tail3.setRotationPoint(0F, 3F, 24F);
@@ -167,7 +169,7 @@ public class ModelSarcosuchus extends ModelDinosaurs {
 		tail3Osteoderms.setRotationPoint(0F, 1F, 0F);
 		setRotation(tail3Osteoderms, 0F, 0F, 0F);
 		tail3Osteoderms.mirror = true;
-		tail3Osteoderms.addBox("tail3Osteoderms", -1F, -5F, 0F, 1, 5, 24);
+		tail3Osteoderms.addBox("tail3Osteoderms", 0F, -5F, 0F, 1, 5, 24);
 		tail3.addChild(tail3Osteoderms);
 		tail2.addChild(tail3);
 		tail1.addChild(tail2);
@@ -175,7 +177,7 @@ public class ModelSarcosuchus extends ModelDinosaurs {
 		tail1Osteoderms.setRotationPoint(0F, 1F, 0F);
 		setRotation(tail1Osteoderms, 0F, 0F, 0F);
 		tail1Osteoderms.mirror = true;
-		tail1Osteoderms.addBox("tail1Osteoderms", -1F, -5F, 0F, 1, 5, 24);
+		tail1Osteoderms.addBox("tail1Osteoderms", 0F, -5F, 0F, 1, 5, 24);
 		tail1.addChild(tail1Osteoderms);
 		LowerBody.addChild(tail1);
 		rightHindThigh = new ModelRenderer(this, "rightHindThigh");
@@ -256,7 +258,7 @@ public class ModelSarcosuchus extends ModelDinosaurs {
 		leftFrontLeg = new ModelRenderer(this, "leftFrontLeg");
 		leftFrontLeg.setRotationPoint(5.1F, 4.1F, 1.6F);
 		setRotation(leftFrontLeg, 0F, 0F, 0F);
-		leftFrontLeg.mirror = false;
+		leftFrontLeg.mirror = true;
 		leftFrontLeg.addBox("leftFrontLeg", -2F, 0F, -2.5F, 4, 7, 5);
 		leftFrontFoot = new ModelRenderer(this, "leftFrontFoot");
 		leftFrontFoot.setRotationPoint(0F, 5.1F, -2F);
@@ -295,7 +297,7 @@ public class ModelSarcosuchus extends ModelDinosaurs {
 		rightUpperBodyOsteoderms.setRotationPoint(-5F, 4F, -17F);
 		setRotation(rightUpperBodyOsteoderms, 0F, 0F, 0F);
 		rightUpperBodyOsteoderms.mirror = true;
-		rightUpperBodyOsteoderms.addBox("rightUpperBodyOsteoderms", -1F, -5F,
+		rightUpperBodyOsteoderms.addBox("rightUpperBodyOsteoderms", 0F, -5F,
 				0F, 1, 5, 17);
 		upperBody.addChild(rightUpperBodyOsteoderms);
 		leftUpperBodyOsteoderms = new ModelRenderer(this,
@@ -303,7 +305,7 @@ public class ModelSarcosuchus extends ModelDinosaurs {
 		leftUpperBodyOsteoderms.setRotationPoint(5F, 4F, -18F);
 		setRotation(leftUpperBodyOsteoderms, 0F, 0F, 0F);
 		leftUpperBodyOsteoderms.mirror = true;
-		leftUpperBodyOsteoderms.addBox("leftUpperBodyOsteoderms", -1F, -5F, 0F,
+		leftUpperBodyOsteoderms.addBox("leftUpperBodyOsteoderms", 0F, -5F, 0F,
 				1, 5, 17);
 		upperBody.addChild(leftUpperBodyOsteoderms);
 		middleUpperBodyOsteoderms = new ModelRenderer(this,
@@ -311,7 +313,7 @@ public class ModelSarcosuchus extends ModelDinosaurs {
 		middleUpperBodyOsteoderms.setRotationPoint(0F, 3F, -17F);
 		setRotation(middleUpperBodyOsteoderms, 0F, 0F, 0F);
 		middleUpperBodyOsteoderms.mirror = true;
-		middleUpperBodyOsteoderms.addBox("middleUpperBodyOsteoderms", -1F, -5F,
+		middleUpperBodyOsteoderms.addBox("middleUpperBodyOsteoderms", 0F, -5F,
 				0F, 1, 5, 17);
 		upperBody.addChild(middleUpperBodyOsteoderms);
 		body.addChild(upperBody);
@@ -319,7 +321,7 @@ public class ModelSarcosuchus extends ModelDinosaurs {
 		middleBodyOsteoderms.setRotationPoint(0F, 3F, -2F);
 		setRotation(middleBodyOsteoderms, 0F, 0F, 0F);
 		middleBodyOsteoderms.mirror = true;
-		middleBodyOsteoderms.addBox("middleBodyOsteoderms", -1F, -5F, 0F, 1, 5,
+		middleBodyOsteoderms.addBox("middleBodyOsteoderms", 0F, -5F, 0F, 1, 5,
 				24);
 		body.addChild(middleBodyOsteoderms);
 		rightBodyOsteoderms = new ModelRenderer(this, "rightBodyOsteoderms");
@@ -327,20 +329,20 @@ public class ModelSarcosuchus extends ModelDinosaurs {
 		setRotation(rightBodyOsteoderms, 0F, 0F, 0F);
 		rightBodyOsteoderms.mirror = true;
 		rightBodyOsteoderms
-				.addBox("rightBodyOsteoderms", -1F, -5F, 0F, 1, 5, 24);
+		.addBox("rightBodyOsteoderms", 0F, -5F, 0F, 1, 5, 24);
 		body.addChild(rightBodyOsteoderms);
 		leftBodyOsteoderms = new ModelRenderer(this, "leftBodyOsteoderms");
 		leftBodyOsteoderms.setRotationPoint(5F, 4F, -2F);
 		setRotation(leftBodyOsteoderms, 0F, 0F, 0F);
 		leftBodyOsteoderms.mirror = true;
-		leftBodyOsteoderms.addBox("leftBodyOsteoderms", -1F, -5F, 0F, 1, 5, 24);
+		leftBodyOsteoderms.addBox("leftBodyOsteoderms", 0F, -5F, 0F, 1, 5, 24);
 		body.addChild(leftBodyOsteoderms);
 	}
 
 	public void render(Entity entity, float f, float f1, float f2, float f3,
 			float f4, float f5) {
 		super.render(entity, f, f1, f2, f3, f4, f5);
-		setRotationAngles(f, f1, f2, f3, f4, f5);
+		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 		body.render(f5);
 	}
 
@@ -351,15 +353,23 @@ public class ModelSarcosuchus extends ModelDinosaurs {
 	}
 
 	public void setRotationAngles(float f, float f1, float f2, float f3,
-			float f4, float f5) {
-		super.setRotationAngles(f, f1, f2, f3, f4, f5);
+			float f4, float f5, Entity entity) {
+
+		this.LowerBody.rotateAngleY = 0.1F * MathHelper.cos((f * (float)0.4F) + f1+3);
+		this.tail1.rotateAngleY = 0.2F * MathHelper.cos((f * (float)0.4F) + f1+2);
+		this.tail2.rotateAngleY = 0.3F * MathHelper.cos((f * (float)0.4F) + f1+1);
+		this.tail3.rotateAngleY = 0.4F * MathHelper.cos(f * (float)0.4F + f1);
+		this.LowerBody.rotateAngleX = 0;
+		this.tail1.rotateAngleX = 0;
+		this.tail2.rotateAngleX = 0;
+		this.rightHindThigh.rotateAngleX = MathHelper.cos(f * 0.6662F) * 1.4F * f1;
+		this.leftHindThigh.rotateAngleX = MathHelper.cos(f * 0.6662F + (float)Math.PI) * 1.4F * f1;
+		this.rightFrontThigh.rotateAngleX = MathHelper.cos(f * 0.6662F + (float)Math.PI) * 1.4F * f1;
+		this.leftFrontThigh.rotateAngleX = MathHelper.cos(f * 0.6662F) * 1.4F * f1;
+
+
+		super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 	}
 
-	@Override
-	protected void setRotationAngles(float var1, float var2, float var3,
-			float var4, float var5, float var6, boolean var7) {
-		// TODO Auto-generated method stub
-
-	}
 
 }

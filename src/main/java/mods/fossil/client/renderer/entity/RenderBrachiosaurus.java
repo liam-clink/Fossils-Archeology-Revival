@@ -26,6 +26,7 @@ public class RenderBrachiosaurus extends RenderLiving
     protected void preRenderScale(EntityBrachiosaurus entitydinosaur, float par2)
     {
         GL11.glScalef(entitydinosaur.getDinosaurSize(), entitydinosaur.getDinosaurSize(), entitydinosaur.getDinosaurSize());
+        GL11.glTranslatef(0, -0.0625F, 0);
     }
 
     /**

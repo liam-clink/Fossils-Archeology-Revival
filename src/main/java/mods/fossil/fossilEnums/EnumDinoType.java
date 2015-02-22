@@ -442,7 +442,12 @@ public enum EnumDinoType {
         Plesiosaur.FoodMobList.addMob(EnumDinoFoodMob.Nautilus);
         Plesiosaur.FoodMobList.addMob(EnumDinoFoodMob.Chicken);
         Plesiosaur.FoodMobList.addMob(EnumDinoFoodMob.Dodo);   
-        
+        Plesiosaur.FoodMobList.addMob(EnumDinoFoodMob.Coelacanth);   
+        Plesiosaur.FoodMobList.addMob(EnumDinoFoodMob.Compsognathus);   
+        Plesiosaur.FoodMobList.addMob(EnumDinoFoodMob.Cow);   
+        Plesiosaur.FoodMobList.addMob(EnumDinoFoodMob.Sheep);   
+        Plesiosaur.FoodMobList.addMob(EnumDinoFoodMob.Pig);   
+
         
         Pterosaur.setItems(Items.arrow);
         Pterosaur.setAges(4, 9, -1);
@@ -458,11 +463,13 @@ public enum EnumDinoType {
         Sarcosuchus.setItems(Items.bone);
         Sarcosuchus.setAges(5, 12, -1);
         Sarcosuchus.setDinoSize(sizeBaby, sizeTeen, sizeAdult);
-        Sarcosuchus.setProperties(25.0D, 70.0D, 2.0D, 9.0D, 0.25D, -1, 500);
+        Sarcosuchus.setProperties(25.0D, 70.0D, 2.0D, 3.0D, 0.25D, -1, 500);
         Sarcosuchus.setExperience(0.5F, 0.2F);
         EnumDinoFoodItem.carnivoreItemPreset(Sarcosuchus);
         Sarcosuchus.FoodMobList.addMob(EnumDinoFoodMob.Chicken);
         Sarcosuchus.FoodMobList.addMob(EnumDinoFoodMob.Dodo);
+        Sarcosuchus.FoodMobList.addMob(EnumDinoFoodMob.Nautilus);
+
         
         Spinosaurus.setItems(Fossil.skullStick);
         Spinosaurus.setAges(5, 12, -1);
