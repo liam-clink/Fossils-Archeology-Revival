@@ -245,7 +245,7 @@ public class BlockFern extends BlockBush
 	{
 		for (int var4 = var2; var4 <= 128; ++var4)
 		{
-			if (var0.getBlock(var1, var4, var3) == Blocks.leaves || var0.getBlock(var1, var4, var3) == Blocks.leaves2 || var0.getBlock(var1, var4, var3) == Fossil.palmLeaves)
+			if (var0.getBlock(var1, var4, var3).getMaterial() ==Material.leaves)
 			{
 				return true;
 			}
