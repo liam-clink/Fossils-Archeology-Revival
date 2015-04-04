@@ -183,7 +183,8 @@ public class ModelBrachiosaurus extends ModelBase {
 		}
 		else
 		{
-			
+			this.Head.rotateAngleX = 0.7853981633974483F;
+			this.Head.rotateAngleY = 0;
 			this.FrontThighLeft.rotateAngleX = 0;
 			this.FrontThighRight.rotateAngleX = 0;
 			this.BackThighLeft.rotateAngleX = 0;
