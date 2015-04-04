@@ -37,7 +37,7 @@ public class RenderDinoEgg extends Render
         GL11.glScalef(var12, var12, var12);
         GL11.glScalef(1.0F / var12, 1.0F / var12, 1.0F / var12);
         if(var1.DinoInside == EnumDinoType.Compsognathus){
-        	GL11.glTranslatef(0, 0.725F, 0);
+        	GL11.glTranslatef(0, -0.725F, 0);
             GL11.glScalef(0.5F, 0.5F, 0.5F);
         }
         this.renderManager.renderEngine.bindTexture(new ResourceLocation(var1.getTexture()));
