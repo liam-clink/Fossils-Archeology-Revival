@@ -1,6 +1,6 @@
-﻿#Build 7.0 - Updated October 5 2014
+﻿#Build 7.1.0 - Updated April 4 2014
 #English (en_US) Localization File
-#Keys last updated October 5 2014
+#Keys last updated April 4 2015
 #Tab Groups
 itemgroup.FCombat=Ancient Equipment
 itemgroup.FBlocks=Ancient Blocks
@@ -45,15 +45,10 @@ enchantment.archeology=Archeology
 
 #Blocks
 tile.fossil.name=Fossil
-tile.Limestone.name=Limestone
-tile.LimestoneBrick.name=Limestone Brick
-tile.Dillhoffia.name=Dillhoffia
-tile.Magnolia.name=Magnolia
 tile.skullBlock.name=Skull
 tile.skullLantern.name=Skull Lantern
 tile.analyzer.name=Analyzer
 tile.cultureVat.name=Culture Vat
-tile.slimeTrail.name=Failursaurus Trail
 tile.fossilworkbench.name=Archeology Workbench
 tile.fossil_drum.name=Drum
 tile.feederIdle.name=Feeder
@@ -93,6 +88,11 @@ tile.ancientWoodSlab.ancientWood.name=Ancient Wood Slab
 tile.ancientWoodDoubleSlab.ancientWood.name=Ancient Wood Slab
 tile.ancientStoneSlab.ancientStone.name=Ancient Stone Slab
 tile.ancientStoneDoubleSlab.ancientStone.name=Ancient Stone Slab
+tile.Limestone.name=Limestone
+tile.LimestoneBrick.name=Limestone Brick
+tile.Dillhoffia.name=Dillhoffia
+tile.Magnolia.name=Magnolia
+tile.slimeTrail.name=Failuresaurus Trail
 
 #Collectables
 tile.figurine.figurine_steve_pristine.name=Pristine Steve Figurine
@@ -129,18 +129,6 @@ tile.vaseKylix.porcelain_kylix.name=Porcelain Kylix
 
 #Items
 item.bioFossil.name=Bio-Fossil
-item.eggSarcosuchus.name=Sarcosuchus egg
-item.dnaSarcosuchus.name=Sarcosuchus DNA
-item.rawSarcosuchus.name=Sarcosuchus Meat
-item.legBone.Sarcosuchus.name=Sarcosuchus Leg Bone
-item.claw.Sarcosuchus.name=Sarcosuchus Spikes
-item.foot.Sarcosuchus.name=Sarcosuchus Foot
-item.vertebrae.Sarcosuchus.name=Sarcosuchus Vertebrae
-item.armBone.Sarcosuchus.name=Sarcosuchus Arm Bone
-item.dinoRibCage.Sarcosuchus.name=Sarcosuchus Rib Cage
-item.skull.Sarcosuchus.name=Sarcosuchus Skull
-item.DominicanAmber.name=Dominican Amber
-item.AquaticScarabGem.name=Aquatic Scarab Gem
 item.relicScrap.name=Relic Scrap
 item.stoneTablet.name=Stone Tablet
 item.brokenAncientSword.name=Broken Ancient Sword
@@ -175,7 +163,7 @@ item.magicConch.name=Magic Conch
 item.legBone.Triceratops.name=Triceratops Leg Bone
 item.legBone.Velociraptor.name=Velociraptor Leg Bone
 item.legBone.TRex.name=Tyrannosaurus Leg Bone
-item.legBone.Pterosaur.name=Pteranodon Leg Bone
+item.legBone.Pterosaur.name=Pterosaur Leg Bone
 item.legBone.Plesiosaur.name=Plesiosaur Leg Bone
 item.legBone.Mosasaurus.name=Mosasaurus Leg Bone
 item.legBone.Liopleurodon.name=Liopleurodon Leg Bone
@@ -192,7 +180,7 @@ item.legBone.Allosaurus.name=Allosaurus Leg Bone
 item.armBone.Triceratops.name=Triceratops Arm Bone
 item.armBone.Velociraptor.name=Velociraptor Arm Bone
 item.armBone.TRex.name=Tyrannosaurus Arm Bone
-item.armBone.Pterosaur.name=Pteranodon Arm Bone
+item.armBone.Pterosaur.name=Pterosaur Arm Bone
 item.armBone.Plesiosaur.name=Plesiosaur Arm Bone
 item.armBone.Mosasaurus.name=Mosasaurus Arm Bone
 item.armBone.Liopleurodon.name=Liopleurodon Arm Bone
@@ -209,7 +197,7 @@ item.armBone.Allosaurus.name=Allosaurus Arm Bone
 item.claw.Triceratops.name=Triceratops Horn
 item.claw.Velociraptor.name=Velociraptor Talon
 item.claw.TRex.name=Tyrannosaurus Tooth
-item.claw.Pterosaur.name=Pteranodon Finger
+item.claw.Pterosaur.name=Pterosaur Finger
 item.claw.Plesiosaur.name=Plesiosaur Teeth
 item.claw.Mosasaurus.name=Mosasaurus Tooth
 item.claw.Liopleurodon.name=Liopleurodon Gastralias
@@ -226,7 +214,7 @@ item.claw.Allosaurus.name=Allosaurus Claw
 item.foot.Triceratops.name=Triceratops Foot
 item.foot.Velociraptor.name=Velociraptor Foot
 item.foot.TRex.name=Tyrannosaurus Foot
-item.foot.Pterosaur.name=Pteranodon Foot
+item.foot.Pterosaur.name=Pterosaur Foot
 item.foot.Plesiosaur.name=Plesiosaur Foot
 item.foot.Mosasaurus.name=Mosasaurus Foot
 item.foot.Liopleurodon.name=Liopleurodon Foot
@@ -243,7 +231,7 @@ item.foot.Allosaurus.name=Allosaurus Foot
 item.skull.Triceratops.name=Triceratops Skull
 item.skull.Velociraptor.name=Velociraptor Skull
 item.skull.TRex.name=Tyrannosaurus Skull
-item.skull.Pterosaur.name=Pteranodon Skull
+item.skull.Pterosaur.name=Pterosaur Skull
 item.skull.Plesiosaur.name=Plesiosaur Skull
 item.skull.Mosasaurus.name=Mosasaurus Skull
 item.skull.Liopleurodon.name=Liopleurodon Skull
@@ -260,7 +248,7 @@ item.skull.Allosaurus.name=Allosaurus Skull
 item.vertebrae.Triceratops.name=Triceratops Vertebrae
 item.vertebrae.Velociraptor.name=Velociraptor Vertebrae
 item.vertebrae.TRex.name=Tyrannosaurus Vertebrae
-item.vertebrae.Pterosaur.name=Pteranodon Vertebrae
+item.vertebrae.Pterosaur.name=Pterosaur Vertebrae
 item.vertebrae.Plesiosaur.name=Plesiosaur Vertebrae
 item.vertebrae.Mosasaurus.name=Mosasaurus Vertebrae
 item.vertebrae.Liopleurodon.name=Liopleurodon Vertebrae
@@ -277,7 +265,7 @@ item.vertebrae.Allosaurus.name=Allosaurus Vertebrae
 item.dinoRibCage.Triceratops.name=Triceratops Rib Cage
 item.dinoRibCage.Velociraptor.name=Velociraptor Rib Cage
 item.dinoRibCage.TRex.name=Tyrannosaurus Rib Cage
-item.dinoRibCage.Pterosaur.name=Pteranodon Rib Cage
+item.dinoRibCage.Pterosaur.name=Pterosaur Rib Cage
 item.dinoRibCage.Plesiosaur.name=Plesiosaur Rib Cage
 item.dinoRibCage.Mosasaurus.name=Mosasaurus Rib Cage
 item.dinoRibCage.Liopleurodon.name=Liopleurodon Rib Cage
@@ -294,7 +282,7 @@ item.dinoRibCage.Allosaurus.name=Allosaurus Rib Cage
 item.dinosaurModels.Triceratops.name=Triceratops Model
 item.dinosaurModels.Velociraptor.name=Velociraptor Model
 item.dinosaurModels.TRex.name=Tyrannosaurus Model
-item.dinosaurModels.Pterosaur.name=Pteranodon Model
+item.dinosaurModels.Pterosaur.name=Pterosaur Model
 item.dinosaurModels.Plesiosaur.name=Plesiosaur Model
 item.dinosaurModels.Mosasaurus.name=Mosasaurus Model
 item.dinosaurModels.Liopleurodon.name=Liopleurodon Model
@@ -330,7 +318,7 @@ item.dinoSteak.name=Dino Steak
 item.rawTriceratops.name=Triceratops Meat
 item.rawVelociraptor.name=Velociraptor Meat
 item.rawTRex.name=Tyrannosaurus Meat
-item.rawPterosaur.name=Pteranodon Meat
+item.rawPterosaur.name=Pterosaur Meat
 item.rawNautilus.name=Nautilus Meat
 item.rawPlesiosaur.name=Plesiosaur Meat
 item.rawMosasaurus.name=Mosasaurus Meat
@@ -348,7 +336,7 @@ item.rawAllosaurus.name=Allosaurus Meat
 item.eggTriceratops.name=Triceratops Egg
 item.eggVelociraptor.name=Velociraptor Egg
 item.eggTRex.name=Tyrannosaurus Egg
-item.eggPterosaur.name=Pteranodon Egg
+item.eggPterosaur.name=Pterosaur Egg
 item.eggNautilus.name=Living Nautilus
 item.eggPlesiosaur.name=Plesiosaur Egg
 item.eggMosasaurus.name=Mosasaurus Egg
@@ -379,7 +367,7 @@ item.eggCultivatedTerrorBird.kelenken.name=Cultivated Kelenken Egg
 item.dnaTriceratops.name=Triceratops DNA
 item.dnaVelociraptor.name=Velociraptor DNA
 item.dnaTRex.name=Tyrannosaurus DNA
-item.dnaPterosaur.name=Pteranodon DNA
+item.dnaPterosaur.name=Pterosaur DNA
 item.dnaNautilus.name=Nautilus DNA
 item.dnaPlesiosaur.name=Plesiosaur DNA
 item.dnaMosasaurus.name=Mosasaurus DNA
@@ -422,6 +410,18 @@ item.terrorBirdMeat.name=Raw Terror Bird Leg
 item.terrorBirdMeatCooked.name=Cooked Terror Bird Leg
 item.quaggaMeat.name=Raw Quagga Meat
 item.quaggaMeatCooked.name=Cooked Quagga Meat
+item.eggSarcosuchus.name=Sarcosuchus Egg
+item.dnaSarcosuchus.name=Sarcosuchus DNA
+item.rawSarcosuchus.name=Sarcosuchus Meat
+item.legBone.Sarcosuchus.name=Sarcosuchus Leg Bone
+item.claw.Sarcosuchus.name=Sarcosuchus Osteoderms
+item.foot.Sarcosuchus.name=Sarcosuchus Foot
+item.vertebrae.Sarcosuchus.name=Sarcosuchus Vertebrae
+item.armBone.Sarcosuchus.name=Sarcosuchus Arm Bone
+item.dinoRibCage.Sarcosuchus.name=Sarcosuchus Rib Cage
+item.skull.Sarcosuchus.name=Sarcosuchus Skull
+item.DominicanAmber.name=Dominican Amber
+item.AquaticScarabGem.name=Aquatic Scarab Gem
 
 #Dinosaur related chat messages
 dnaName.head=DNA of 
@@ -468,9 +468,8 @@ status.essencefail=Essence of Chicken had no effect.
 #Dinosaur Names
 entity.fossil.Triceratops.name=Triceratops
 entity.fossil.Velociraptor.name=Velociraptor
-entity.fossil.Sarcosuchus.name=Sarcosuchus
 entity.fossil.TRex.name=Tyrannosaurus
-entity.fossil.Pterosaur.name=Pteranodon
+entity.fossil.Pterosaur.name=Pterosaur
 entity.fossil.Plesiosaur.name=Plesiosaur
 entity.fossil.Mosasaurus.name=Mosasaurus
 entity.fossil.Liopleurodon.name=Liopleurodon
@@ -485,6 +484,7 @@ entity.fossil.Pachycephalosaurus.name=Pachycephalosaurus
 entity.fossil.Deinonychus.name=Deinonychus
 entity.fossil.Gallimimus.name=Gallimimus
 entity.fossil.Allosaurus.name=Allosaurus
+entity.fossil.Sarcosuchus.name=Sarcosuchus
 
 #Non-dinosaur names
 entity.fossil.Mammoth.name=Mammoth
@@ -500,7 +500,7 @@ entity.fossil.TerrorBird.name=Terror Bird
 entity.fossil.Elasmotherium.name=Elasmotherium
 
 #Pedia text
-pedia.text.owner=Owner:
+pedia.text.owner=Owner: 
 pedia.text.chest=* Chests
 pedia.text.caution=!Dangerous!
 pedia.text.rideable=* Rideable
@@ -531,17 +531,17 @@ pedia.embryo.Elasmotherium=Elasmotherium
 anuSpeaker.self=Anu: 
 anuSpeaker.hello=Kneel before me, resistance is futile.
 anuSpeaker.bareHand=Bare hands... Stupid, but brave.
-anuSpeaker.mySword=Trying to use my magic against me? Bad Idea.
 anuSpeaker.draw=DRAW YOUR SWORD.
 anuSpeaker.coward=Bow using coward! Stop hiding!
 anuSpeaker.leartHere=Look what I learned from here!
 anuSpeaker.leartThere=Look what I learned from there!
-anuSpeaker.unknownRanged=So, is that your weapon?
+anuSpeaker.unknownRanged=So is that your weapon?
 anuSpeaker.unknownMelee=Ha! Stop playing!
 anuSpeaker.summon=Servants, your Master calls.
 anuSpeaker.trans=Brutes, wake up your wisdom.
 anuSpeaker.qi=Qi-shock!
 anuSpeaker.fireRain=Lets rain some fire!
+anuSpeaker.mySword=Trying to use my magic against me? Bad Idea.
 
 #Friendly pigmen speaking lines
 fpzSpeaker.self=Pig Zombies: 

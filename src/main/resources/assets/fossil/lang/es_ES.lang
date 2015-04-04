@@ -1,6 +1,6 @@
-﻿#Build 7.0 - Updated August 6 2014
+﻿#Build 7.1.0 - Updated August 6 2014
 #Spanish - Spain (es_ES) Localization File
-#Keys last updated October 5 2014
+#Keys last updated April 4 2015
 #Tab Groups
 itemgroup.FCombat=Armadura Antigua
 itemgroup.FBlocks=Bloques Antiguos
@@ -88,6 +88,11 @@ tile.ancientWoodSlab.ancientWood.name=Losa Madera Antigua
 tile.ancientWoodDoubleSlab.ancientWood.name=Losa Doble Madera Antigua
 tile.ancientStoneSlab.ancientStone.name=Losa Piedra Antigua
 tile.ancientStoneDoubleSlab.ancientStone.name=Losa Doble Piedra Antigua
+tile.Limestone.name=Limestone
+tile.LimestoneBrick.name=Limestone Brick
+tile.Dillhoffia.name=Dillhoffia
+tile.Magnolia.name=Magnolia
+tile.slimeTrail.name=Failuresaurus Trail
 
 #Collectables
 tile.figurine.figurine_steve_pristine.name=Pristine Steve Figurine
@@ -405,6 +410,18 @@ item.terrorBirdMeat.name=Raw Terror Bird Leg
 item.terrorBirdMeatCooked.name=Cooked Terror Bird Leg
 item.quaggaMeat.name=Raw Quagga Meat
 item.quaggaMeatCooked.name=Cooked Quagga Meat
+item.eggSarcosuchus.name=Sarcosuchus Egg
+item.dnaSarcosuchus.name=Sarcosuchus DNA
+item.rawSarcosuchus.name=Sarcosuchus Meat
+item.legBone.Sarcosuchus.name=Sarcosuchus Leg Bone
+item.claw.Sarcosuchus.name=Sarcosuchus Osteoderms
+item.foot.Sarcosuchus.name=Sarcosuchus Foot
+item.vertebrae.Sarcosuchus.name=Sarcosuchus Vertebrae
+item.armBone.Sarcosuchus.name=Sarcosuchus Arm Bone
+item.dinoRibCage.Sarcosuchus.name=Sarcosuchus Rib Cage
+item.skull.Sarcosuchus.name=Sarcosuchus Skull
+item.DominicanAmber.name=Dominican Amber
+item.AquaticScarabGem.name=Aquatic Scarab Gem
 
 #Dinosaur related chat messages
 dnaName.head=ADN de 
@@ -467,6 +484,7 @@ entity.fossil.Pachycephalosaurus.name=Paquicefalosaurio
 entity.fossil.Deinonychus.name=Deinonico
 entity.fossil.Gallimimus.name=Gallimimus
 entity.fossil.Allosaurus.name=Allosaurus
+entity.fossil.Sarcosuchus.name=Sarcosuchus
 
 #Non-dinosaur names
 entity.fossil.Mammoth.name=Mamút
@@ -523,6 +541,7 @@ anuSpeaker.summon=Mis sirvientes, el maestro os llama.
 anuSpeaker.trans=Brutos, despierten su sabiduría.
 anuSpeaker.qi=Qi-shock!
 anuSpeaker.fireRain=¡Que llueva fuego!
+anuSpeaker.mySword=Trying to use my magic against me? Bad Idea.
 
 #Friendly pigmen speaking lines
 fpzSpeaker.self=Cerdos Zombis: 

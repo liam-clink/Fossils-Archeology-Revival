@@ -1,6 +1,6 @@
-#Build 7.0 - Updated September 22 2014
+#Build 7.1.0 - Updated September 22 2014
 #Simplified Chinese (zh_CN) Localization File
-#Keys last updated October 5 2014
+#Keys last updated April 4 2015
 #创造模式标签
 itemgroup.FCombat=古代装备
 itemgroup.FBlocks=古代方块
@@ -88,6 +88,11 @@ tile.ancientWoodSlab.ancientWood.name=古代木头台阶
 tile.ancientWoodDoubleSlab.ancientWood.name=古代木头台阶
 tile.ancientStoneSlab.ancientStone.name=古代石头台阶
 tile.ancientStoneDoubleSlab.ancientStone.name=古代石头台阶
+tile.Limestone.name=Limestone
+tile.LimestoneBrick.name=Limestone Brick
+tile.Dillhoffia.name=Dillhoffia
+tile.Magnolia.name=Magnolia
+tile.slimeTrail.name=Failuresaurus Trail
 
 #Collectables
 tile.figurine.figurine_steve_pristine.name=质朴史蒂夫雕像
@@ -405,6 +410,18 @@ item.terrorBirdMeat.name=生恐鸟腿
 item.terrorBirdMeatCooked.name=熟恐鸟腿
 item.quaggaMeat.name=生斑驴肉
 item.quaggaMeatCooked.name=熟斑驴肉
+item.eggSarcosuchus.name=Sarcosuchus Egg
+item.dnaSarcosuchus.name=Sarcosuchus DNA
+item.rawSarcosuchus.name=Sarcosuchus Meat
+item.legBone.Sarcosuchus.name=Sarcosuchus Leg Bone
+item.claw.Sarcosuchus.name=Sarcosuchus Osteoderms
+item.foot.Sarcosuchus.name=Sarcosuchus Foot
+item.vertebrae.Sarcosuchus.name=Sarcosuchus Vertebrae
+item.armBone.Sarcosuchus.name=Sarcosuchus Arm Bone
+item.dinoRibCage.Sarcosuchus.name=Sarcosuchus Rib Cage
+item.skull.Sarcosuchus.name=Sarcosuchus Skull
+item.DominicanAmber.name=Dominican Amber
+item.AquaticScarabGem.name=Aquatic Scarab Gem
 
 #前缀/后缀
 dnaName.head=
@@ -467,6 +484,7 @@ entity.fossil.Pachycephalosaurus.name=肿头龙
 entity.fossil.Deinonychus.name=恐爪龙
 entity.fossil.Gallimimus.name=似鸡龙
 entity.fossil.Allosaurus.name=异特龙
+entity.fossil.Sarcosuchus.name=Sarcosuchus
 
 #动物名称.
 entity.fossil.Mammoth.name=猛犸象
@@ -523,6 +541,7 @@ anuSpeaker.summon=为我卖命吧,我的仆人.
 anuSpeaker.trans=地上的兽啊,显露你的智慧吧.
 anuSpeaker.qi=剑气!
 anuSpeaker.fireRain=来下点火雨吧!
+anuSpeaker.mySword=Trying to use my magic against me? Bad Idea.
 
 #阿努杂兵对白
 fpzSpeaker.self=僵尸猪人: 

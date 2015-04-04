@@ -1,6 +1,6 @@
-﻿#Build 7.0 - Updated August 28 2014
+﻿#Build 7.1.0 - Updated August 28 2014
 #Russian (ru_RU) Localization File
-#Keys last updated October 5 2014
+#Keys last updated April 4 2015
 #Tab Groups
 itemgroup.FCombat=Древняя броня
 itemgroup.FBlocks=Древние блоки
@@ -88,6 +88,11 @@ tile.ancientWoodSlab.ancientWood.name=Древняя деревянная пли
 tile.ancientWoodDoubleSlab.ancientWood.name=Древняя деревянная плита
 tile.ancientStoneSlab.ancientStone.name=Древняя каменная плита
 tile.ancientStoneDoubleSlab.ancientStone.name=Древняя каменная плита
+tile.Limestone.name=Limestone
+tile.LimestoneBrick.name=Limestone Brick
+tile.Dillhoffia.name=Dillhoffia
+tile.Magnolia.name=Magnolia
+tile.slimeTrail.name=Failuresaurus Trail
 
 #Collectables
 tile.figurine.figurine_steve_pristine.name=Древняя статуэтка Стива
@@ -405,6 +410,18 @@ item.terrorBirdMeat.name=Raw Terror Bird Leg
 item.terrorBirdMeatCooked.name=Cooked Terror Bird Leg
 item.quaggaMeat.name=Raw Quagga Meat
 item.quaggaMeatCooked.name=Cooked Quagga Meat
+item.eggSarcosuchus.name=Sarcosuchus Egg
+item.dnaSarcosuchus.name=Sarcosuchus DNA
+item.rawSarcosuchus.name=Sarcosuchus Meat
+item.legBone.Sarcosuchus.name=Sarcosuchus Leg Bone
+item.claw.Sarcosuchus.name=Sarcosuchus Osteoderms
+item.foot.Sarcosuchus.name=Sarcosuchus Foot
+item.vertebrae.Sarcosuchus.name=Sarcosuchus Vertebrae
+item.armBone.Sarcosuchus.name=Sarcosuchus Arm Bone
+item.dinoRibCage.Sarcosuchus.name=Sarcosuchus Rib Cage
+item.skull.Sarcosuchus.name=Sarcosuchus Skull
+item.DominicanAmber.name=Dominican Amber
+item.AquaticScarabGem.name=Aquatic Scarab Gem
 
 #Dinosaur related chat messages
 dnaName.head=ДНК 
@@ -467,6 +484,7 @@ entity.fossil.Pachycephalosaurus.name=Пахицефалозавр
 entity.fossil.Deinonychus.name=Дейноних
 entity.fossil.Gallimimus.name=Галлимим
 entity.fossil.Allosaurus.name=Allosaurus
+entity.fossil.Sarcosuchus.name=Sarcosuchus
 
 #Non-dinosaur names
 entity.fossil.Mammoth.name=Мамонт
@@ -482,7 +500,7 @@ entity.fossil.TerrorBird.name=Terror Bird
 entity.fossil.Elasmotherium.name=Elasmotherium
 
 #Pedia text
-pedia.text.owner=Владелец:
+pedia.text.owner=Владелец: 
 pedia.text.chest=* сундуки
 pedia.text.caution=!Опасный!
 pedia.text.rideable=* можно оседлать
@@ -523,6 +541,7 @@ anuSpeaker.summon=Слуги, Ваш Мастер взывает.
 anuSpeaker.trans=Скоты, разбудите вашу мудрость!
 anuSpeaker.qi=Qi-shock!
 anuSpeaker.fireRain=Дайте дождю немного огня!
+anuSpeaker.mySword=Trying to use my magic against me? Bad Idea.
 
 #Friendly pigmen speaking lines
 fpzSpeaker.self=Свинозомби: 
