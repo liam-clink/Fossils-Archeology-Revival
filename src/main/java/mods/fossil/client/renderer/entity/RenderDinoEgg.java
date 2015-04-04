@@ -21,9 +21,7 @@ public class RenderDinoEgg extends Render
 
     public void renderDinoEgg(EntityDinoEgg var1, double var2, double var4, double var6, float var8, float var9)
     {
-        if(var1.DinoInside == EnumDinoType.Compsognathus){
-            GL11.glScalef(0.5F, 0.5F, 0.5F);
-        }
+       
         GL11.glPushMatrix();
         GL11.glTranslatef((float)var2, (float)var4, (float)var6);
         GL11.glRotatef(180.0F - var8, 0.0F, 1.0F, 0.0F);
@@ -38,6 +36,10 @@ public class RenderDinoEgg extends Render
         float var12 = 0.75F;
         GL11.glScalef(var12, var12, var12);
         GL11.glScalef(1.0F / var12, 1.0F / var12, 1.0F / var12);
+        if(var1.DinoInside == EnumDinoType.Compsognathus){
+        	GL11.glTranslatef(0, 0.725F, 0);
+            GL11.glScalef(0.5F, 0.5F, 0.5F);
+        }
         this.renderManager.renderEngine.bindTexture(new ResourceLocation(var1.getTexture()));
         GL11.glScalef(-1.0F, -1.0F, 1.0F);
  

@@ -153,11 +153,18 @@ public class ModelPteranodon extends ModelBase {
 
 	private void setRotationAngles(Entity entity, float f, float f1, float f2, float f3, float f4, float f5, boolean modelized) {
 		super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-		if(modelized)return ;
+		if(!modelized){
 		this.Leg.rotateAngleX = MathHelper.cos(f * 0.6662F + (float)Math.PI) * 1.4F * f1;
 		this.Leg2.rotateAngleX = MathHelper.cos(f * 0.6662F) * 1.4F * f1;
 		this.WingL1.rotateAngleX = MathHelper.cos(f * 0.6662F + (float)Math.PI) * 1.4F * f1;
 		this.WingR1.rotateAngleX = MathHelper.cos(f * 0.6662F) * 1.4F * f1;
+		}else{
+			this.Leg.rotateAngleX = 0;
+			this.Leg2.rotateAngleX = 0;
+			this.WingL1.rotateAngleX = -0.08726646259971647F;
+			this.WingR1.rotateAngleX = -0.08726646259971647F;
+
+		}
 
 	}
 	public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {

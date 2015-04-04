@@ -203,7 +203,7 @@ public class Fossil
 	
 	//Testing 
 	
-	public static final String modversion = "1.7.10 Build 7.1.0a1";
+	public static final String modversion = "1.7.10 Build 7.1.0";
 
 	/**
 	 * The mod state

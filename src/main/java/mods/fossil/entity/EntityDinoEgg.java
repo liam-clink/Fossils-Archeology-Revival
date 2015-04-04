@@ -588,7 +588,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
 							|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.JUNGLE)
 							|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.HOT))
 					{
-						((EntitySarcosuchus)var5).setSubSpecies(2); //nether
+						((EntityPterosaur)var5).setSubSpecies(2); //nether
 					}
 					else if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.COLD)
 							|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.END)
@@ -599,9 +599,9 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
 							|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.RIVER)
 							|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.WATER))
 					{
-						((EntitySarcosuchus)var5).setSubSpecies(1); //cold
+						((EntityPterosaur)var5).setSubSpecies(1); //cold
 					}else{
-						((EntitySarcosuchus)var5).setSubSpecies(0); 
+						((EntityPterosaur)var5).setSubSpecies(0); 
 
 					}
 					break;
