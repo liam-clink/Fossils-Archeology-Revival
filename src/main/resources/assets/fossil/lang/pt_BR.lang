@@ -1,6 +1,6 @@
-#Build 7.0 - Updated October 5 2014
-#Português Brasileiro (pt_BR) Localization File – por: Al-Myr
-#Keys last updated 21 Fevereiro 2015 – por: Al-Myr
+#Build 7.1.0 - Updated April 4 2015
+#Portuguese (pt_PT) Localization File  – por: Al-Myr
+#Keys last updated April 4 2015
 #Tab Groups
 itemgroup.FCombat=FAR: Combate
 itemgroup.FBlocks=FAR: Blocos
@@ -45,15 +45,10 @@ enchantment.archeology=Arqueologia
 
 #Blocks
 tile.fossil.name=Fóssil
-tile.Limestone.name=Pedra Calcária
-tile.LimestoneBrick.name=Tijolos de Pedra Calcária
-tile.Dillhoffia.name=Dillhoffia
-tile.Magnolia.name=Magnólia
 tile.skullBlock.name=Crânio
 tile.skullLantern.name=Lâmpião de Crânio
 tile.analyzer.name=Analizador
 tile.cultureVat.name=Vaso de Cultura
-tile.slimeTrail.name=Rastro de Falhossauro
 tile.fossilworkbench.name=Bancada de Trabalho de Arqueologia
 tile.fossil_drum.name=Tambor
 tile.feederIdle.name=Comedouro
@@ -93,6 +88,11 @@ tile.ancientWoodSlab.ancientWood.name=Laje de Madeira Antiga
 tile.ancientWoodDoubleSlab.ancientWood.name=Laje de Madeira Antiga
 tile.ancientStoneSlab.ancientStone.name=Laje de Madeira
 tile.ancientStoneDoubleSlab.ancientStone.name=Laje de Madeira
+tile.Limestone.name=Pedra Calcária
+tile.LimestoneBrick.name=Tijolos de Pedra Calcária
+tile.Dillhoffia.name=Dillhoffia
+tile.Magnolia.name=Magnólia
+tile.slimeTrail.name=Rastro de Falhossauro
 
 #Collectables
 tile.figurine.figurine_steve_pristine.name=Estatueta Primitiva do Steve
@@ -129,18 +129,6 @@ tile.vaseKylix.porcelain_kylix.name=Cílice Esmaltada
 
 #Items
 item.bioFossil.name=Bio-Fóssil
-item.eggSarcosuchus.name=Sarcosuco
-item.dnaSarcosuchus.name=DNA de Sarcosuco
-item.rawSarcosuchus.name=Carne de Sarcosuco
-item.legBone.Sarcosuchus.name=Fêmur de Sarcosuco
-item.claw.Sarcosuchus.name=Escamas de Sarcosuco
-item.foot.Sarcosuchus.name=Pata de Sarcosuco
-item.vertebrae.Sarcosuchus.name=Vértebras de Sarcosuco
-item.armBone.Sarcosuchus.name=Úmero de Sarcosuco
-item.dinoRibCage.Sarcosuchus.name=Caixa Torácica de Sarcosuco
-item.skull.Sarcosuchus.name=Crânio de Sarcosuco
-item.DominicanAmber.name=Âmbar Dominicano
-item.AquaticScarabGem.name=Gema de Escaravelho Aquático
 item.relicScrap.name=Relíquia Fragmentada
 item.stoneTablet.name=Tábua de Pedra
 item.brokenAncientSword.name=Espada Antiga Quebrada
@@ -422,6 +410,18 @@ item.terrorBirdMeat.name=Coxa de Ave do Terror Crua
 item.terrorBirdMeatCooked.name=Coxa de Ave do Terror Assada
 item.quaggaMeat.name=Carne de Quagga Crua
 item.quaggaMeatCooked.name=Carne de Quagga Assada
+item.eggSarcosuchus.name=Ovo de Sarcosuco
+item.dnaSarcosuchus.name=DNA de Sarcosuco
+item.rawSarcosuchus.name=Carne de Sarcosuco
+item.legBone.Sarcosuchus.name=Fêmur de Sarcosuco
+item.claw.Sarcosuchus.name=Escamas de Sarcosuco
+item.foot.Sarcosuchus.name=Pata de Sarcosuco
+item.vertebrae.Sarcosuchus.name=Vértebras de Sarcosuco
+item.armBone.Sarcosuchus.name=Úmero de Sarcosuco
+item.dinoRibCage.Sarcosuchus.name=Caixa Torácica de Sarcosuco
+item.skull.Sarcosuchus.name=Crânio de Sarcosuco
+item.DominicanAmber.name=Âmbar Dominicano
+item.AquaticScarabGem.name=Gema de Escaravelho Aquático
 
 #Dinosaur related chat messages
 dnaName.head=DNA de 
@@ -441,8 +441,8 @@ order.Stay=Fica
 order.Follow=Siga
 order.FreeMove=Solto
 
-#Dinosaur status chat messages
-status.Hungry.head=
+#Dinosaur status chat message
+status.Hungry.head= 
 status.Hungry= está com fome.
 status.Starve.head=
 status.Starve= morreu de fome.
@@ -468,7 +468,6 @@ status.essencefail=A essência de frango não teve efeito algum.
 #Dinosaur Names
 entity.fossil.Triceratops.name=Tricerátopo
 entity.fossil.Velociraptor.name=Velociráptor
-entity.fossil.Sarcosuchus.name=Sarcosuco
 entity.fossil.TRex.name=Tiranossauro Rex
 entity.fossil.Pterosaur.name=Pterossauro
 entity.fossil.Plesiosaur.name=Náutilo
@@ -485,6 +484,7 @@ entity.fossil.Pachycephalosaurus.name=Paquicefalossauro
 entity.fossil.Deinonychus.name=Deinonico
 entity.fossil.Gallimimus.name=Galimimo
 entity.fossil.Allosaurus.name=Alossauro
+entity.fossil.Sarcosuchus.name=Sarcosuco
 
 #Non-dinosaur names
 entity.fossil.Mammoth.name=Manute
@@ -531,7 +531,6 @@ pedia.embryo.Elasmotherium=Elasmotério
 anuSpeaker.self=Anu: 
 anuSpeaker.hello=Ajoelhe-se diante de mim, resistir é inútil.
 anuSpeaker.bareHand=Mãos nuas... Estúpido, mas corajoso.
-anuSpeaker.mySword=Tentando usar minha magia contra mim? Péssima idéia.
 anuSpeaker.draw=DESEMBAINHE A SUA ESPADA.
 anuSpeaker.coward=Covarde, usando arco! Pare de se esconder!
 anuSpeaker.leartHere=Olha o que eu aprendi aqui!
@@ -542,6 +541,7 @@ anuSpeaker.summon=Servos, seu mestre vos chama.
 anuSpeaker.trans=Os brutos, despertam a sua sabedoria.
 anuSpeaker.qi=Qi-choque!
 anuSpeaker.fireRain=Deixa chover um pouco de fogo!
+anuSpeaker.mySword=Tentando usar minha magia contra mim? Péssima idéia.
 
 #Friendly pigmen speaking lines
 fpzSpeaker.self=Homem-Porco Zumbi: 
