@@ -152,10 +152,10 @@ public class ModelFlyingPteranodon extends ModelBase {
     private void setRotationAngles(Entity entity, float f, float f1, float f2, float f3, float f4, float f5, boolean modelized) {
 		super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 		if(modelized)return ;
-		this.WingL1.rotateAngleZ =   0.4F * MathHelper.cos(f * (float)0.4F + f1);
-		this.WingR1.rotateAngleZ =   -0.4F * MathHelper.cos(f * (float)0.4F + f1);
-		this.WingL2.rotateAngleZ =   0.4F * MathHelper.cos(f * (float)0.4F + f1);
-		this.WingR2.rotateAngleZ =  - 0.4F * MathHelper.cos(f * (float)0.4F + f1);
+		this.WingL1.rotateAngleZ =   0.4F * -MathHelper.cos(f * (float)0.2F + f1);
+		this.WingR1.rotateAngleZ =   -0.4F * -MathHelper.cos(f * (float)0.2F + f1);
+		this.WingL2.rotateAngleZ =   0.4F * -MathHelper.cos(f * (float)0.2F + f1);
+		this.WingR2.rotateAngleZ =  - 0.4F * -MathHelper.cos(f * (float)0.2F + f1);
 	}
 
     /**
