@@ -24,12 +24,11 @@ public class RenderSarcosuchus extends RenderLiving {
 	/**
 	 * Applies the scale to the transform matrix
 	 *
-	 * Use this to grow the dinonsaur with age.
+	 * Use this to grow the dinosaur with age.
 	 */
 	protected void preRenderScale(EntitySarcosuchus entitydinosaur, float par2) {
-		GL11.glScalef(entitydinosaur.getDinosaurSize(),
-				entitydinosaur.getDinosaurSize(),
-				entitydinosaur.getDinosaurSize());
+		GL11.glScalef(entitydinosaur.getDinosaurSize(),entitydinosaur.getDinosaurSize(),entitydinosaur.getDinosaurSize());
+		GL11.glTranslatef(0, 0, -1);
 	}
 
 	/**

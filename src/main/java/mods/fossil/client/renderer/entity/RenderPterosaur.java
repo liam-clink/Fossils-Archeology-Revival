@@ -1,10 +1,10 @@
 package mods.fossil.client.renderer.entity;
 
-import mods.fossil.client.model.ModelPterosaur;
-import mods.fossil.client.model.ModelPterosaurFlying;
-import mods.fossil.client.model.ModelPterosaurGround;
+import mods.fossil.client.model.ModelFlyingPteranodon;
+import mods.fossil.client.model.ModelPteranodon;
 import mods.fossil.client.model.ModelTRex;
 import mods.fossil.client.model.ModelWeakTRex;
+import mods.fossil.entity.mob.EntityMosasaurus;
 import mods.fossil.entity.mob.EntityPterosaur;
 import mods.fossil.entity.mob.EntityTRex;
 import net.minecraft.client.renderer.entity.RenderLiving;
@@ -19,7 +19,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderPterosaur extends RenderLiving {
-	public RenderPterosaur(ModelPterosaur par1ModelBase, float par2) {
+
+	public RenderPterosaur(ModelPteranodon par1ModelBase, float par2) {
 		super(par1ModelBase, par2);
 	}
 
@@ -29,33 +30,32 @@ public class RenderPterosaur extends RenderLiving {
 	 * Use this to grow the dinonsaur with age.
 	 */
 	protected void preRenderScale(EntityPterosaur entitydinosaur, float par2) {
-		GL11.glScalef(entitydinosaur.getDinosaurSize(),
-				entitydinosaur.getDinosaurSize(),
-				entitydinosaur.getDinosaurSize());
+		GL11.glScalef(entitydinosaur.getDinosaurSize(),entitydinosaur.getDinosaurSize(),entitydinosaur.getDinosaurSize());
+		GL11.glScalef(1.8f, 1.8f, 1.8f);
 	}
 
-	/**
-	 * Allows the render to do any OpenGL state modifications necessary before
-	 * the model is rendered. Args: entityLiving, partialTickTime
-	 */
-	
-	protected void preRenderCallback(EntityLivingBase par1EntityLivingBase,
-			float par2) {
+	protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2) {
 		this.preRenderScale((EntityPterosaur) par1EntityLivingBase, par2);
-		if (!((EntityPterosaur) par1EntityLivingBase)
-				.checkGround((EntityPterosaur) par1EntityLivingBase)) {
-			if (!(this.mainModel instanceof ModelPterosaurFlying)) {
-				this.mainModel = new ModelPterosaurFlying();
+		
+		if (!((EntityPterosaur) par1EntityLivingBase).checkGround((EntityPterosaur) par1EntityLivingBase)) {
+			if (!(this.mainModel instanceof ModelFlyingPteranodon)) {
+				this.mainModel = new ModelFlyingPteranodon();
 			}
-		} else if (this.mainModel instanceof ModelPterosaurFlying) {
-			this.mainModel = new ModelPterosaurGround();
 		}
-
+		else if (this.mainModel instanceof ModelFlyingPteranodon) {
+			this.mainModel = new ModelPteranodon();
+		}
 	}
+	 protected ResourceLocation func_110919_a(EntityPterosaur par1Entity)
+	    {
+	        return new ResourceLocation(par1Entity.getTexture());
+	    }
 
-	@Override
-	protected ResourceLocation getEntityTexture(Entity entity) {
-		EntityPterosaur dino = (EntityPterosaur) entity;
-		return new ResourceLocation("fossil:textures/mob/Pterosaur_Flying.png");
-	}
+	    /**
+	     * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
+	     */
+	    protected ResourceLocation getEntityTexture(Entity par1Entity)
+	    {
+	        return this.func_110919_a((EntityPterosaur)par1Entity);
+	    }
 }

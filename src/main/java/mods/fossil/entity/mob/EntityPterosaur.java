@@ -65,11 +65,11 @@ public class EntityPterosaur extends EntityDinosaur {
 		 */
 		this.adultAge = EnumDinoType.Pterosaur.AdultAge;
 		// Set initial size for hitbox. (length/width, height)
-		this.setSize(1.0F, 1.0F);
+		this.setSize(2F, 1.8F);
 		// Size of dinosaur at day 0.
-		this.minSize = 1.0F;
+		this.minSize = 0.3F;
 		// Size of dinosaur at age Adult.
-		this.maxSize = 4.0F;
+		this.maxSize = 1.0F;
 
 		this.tasks.addTask(4, new EntityAISwimming(this));
 		this.tasks.addTask(2, new EntityAILeapAtTarget(this, 0.4F));
@@ -97,7 +97,30 @@ public class EntityPterosaur extends EntityDinosaur {
 		if (this.isModelized()) {
 			return super.getTexture();
 		}
-			return "fossil:textures/mob/Pterosaur.png";
+	 if (this.isAdult()) {
+			switch (this.getSubSpecies()) {
+			default:
+				return "fossil:textures/mob/Pteranodon/Pteranodon_classic.png";
+			case 1:
+				return "fossil:textures/mob/Pteranodon/Pteranodon_Blue.png";
+			case 2:
+				return "fossil:textures/mob/Pteranodon/Pteranodon_Red.png";
+			}
+		}
+		else if (this.isChild()) {
+			switch (this.getSubSpecies()) {
+			default:
+				return "fossil:textures/mob/Pteranodon/Pteranodon_classic_baby.png";
+			case 1:
+				return "fossil:textures/mob/Pteranodon/Pteranodon_Blue_baby.png";
+			case 2:
+				return "fossil:textures/mob/Pteranodon/Pteranodon_Red_baby.png";
+			}
+		}
+
+
+		return "fossil:textures/mob/Pteranodon/Pteranodon_classic.png";
+
 	}
 
 	protected void applyEntityAttributes() {

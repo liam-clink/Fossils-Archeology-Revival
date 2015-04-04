@@ -11,7 +11,7 @@ public class ItemAquaticScarabGem extends Item {
 	public ItemAquaticScarabGem() {
 		super();
 		this.maxStackSize = 64;
-		this.setCreativeTab(Fossil.tabFTest);
+		this.setCreativeTab(Fossil.tabFItems);
 	}
 
 	@Override

@@ -13,7 +13,6 @@ public class BlockLimestoneBrick extends Block {
 		setHardness(3.0F);
 		setResistance(20.0F);
 		setStepSound(Block.soundTypeStone);
-		this.setCreativeTab(Fossil.tabFTest);
 		setBlockName(LocalizationStrings.BLOCK_LIMESTONEBRICK_NAME);
 	}
 	

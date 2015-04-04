@@ -2,9 +2,11 @@ package mods.fossil.client.renderer.entity;
 
 import mods.fossil.client.model.ModelDinoEgg;
 import mods.fossil.entity.EntityDinoEgg;
+import mods.fossil.fossilEnums.EnumDinoType;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.opengl.GL11;
 
 public class RenderDinoEgg extends Render
@@ -19,6 +21,9 @@ public class RenderDinoEgg extends Render
 
     public void renderDinoEgg(EntityDinoEgg var1, double var2, double var4, double var6, float var8, float var9)
     {
+        if(var1.DinoInside == EnumDinoType.Compsognathus){
+            GL11.glScalef(0.5F, 0.5F, 0.5F);
+        }
         GL11.glPushMatrix();
         GL11.glTranslatef((float)var2, (float)var4, (float)var6);
         GL11.glRotatef(180.0F - var8, 0.0F, 1.0F, 0.0F);
@@ -35,6 +40,7 @@ public class RenderDinoEgg extends Render
         GL11.glScalef(1.0F / var12, 1.0F / var12, 1.0F / var12);
         this.renderManager.renderEngine.bindTexture(new ResourceLocation(var1.getTexture()));
         GL11.glScalef(-1.0F, -1.0F, 1.0F);
+ 
         this.MainModel.render(var1, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
         GL11.glPopMatrix();
     }

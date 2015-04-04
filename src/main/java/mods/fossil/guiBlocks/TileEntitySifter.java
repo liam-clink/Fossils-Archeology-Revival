@@ -292,7 +292,7 @@ public class TileEntitySifter extends TileEntity implements IInventory,
 				} else {
 					if (Fossil.DebugMode())
 						Fossil.Console("Sifter successful loot: " + randomloot);
-					if (random < 0.1) {
+					if (random < 0.4) {
 						result = new ItemStack(Fossil.DominicanAmber, 1);
 					}
 					else if (random < 15) {

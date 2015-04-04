@@ -11,7 +11,6 @@ public class BlockLimestone extends Block {
 	public BlockLimestone(Material material) {
 		super(material.rock);
 		setHardness(0.3F);
-		this.setCreativeTab(Fossil.tabFTest);
 		setBlockName(LocalizationStrings.BLOCK_LIMESTONE_NAME);
 	}
 

@@ -249,7 +249,7 @@ public class Fossil
 	public static CreativeTabs tabFMaterial = new TabFMaterial("Fossil Material");
 	public static CreativeTabs tabFFigurines = new TabFFigurines("Fossil Test");
 	public static CreativeTabs tabFBones = new TabFBones("Fossil Bones");
-	public static CreativeTabs tabFTest = new TabFTest("Pre Release");
+//	public static CreativeTabs tabFTest = new TabFTest("Pre Release");
 
 	/*
 	 * Render ID's
@@ -558,7 +558,7 @@ public class Fossil
 		Limestone = new BlockLimestone(Material.rock);
 		LimestoneBrick = new BlockLimestoneBrick(Material.rock);
 		blockMagnolia = new BlockMagnoliaFlower(Material.plants);
-		blockDillhoffia = new BlockDillhoffiaFlower(Material.plants);
+		blockDillhoffia = new BlockDillhoffiaFlower(Material.plants).setStepSound(Block.soundTypeGrass);
 		blockanalyzerIdle = new BlockAnalyzer(false);
 		blockanalyzerActive = new BlockAnalyzer(true);
 		blockcultivateIdle = new BlockCultivate(false);
@@ -770,7 +770,7 @@ public class Fossil
 		fossilrecordBones = new ItemFossilRecord(LocalizationStrings.RECORD_BONES_NAME).setUnlocalizedName(LocalizationStrings.FOSSIL_RECORD_NAME);
 
 		/*
-		 * I honestly don't know what this is doing xD
+		 * registers javlins to be shot
 		 */
 		
 		BlockDispenser.dispenseBehaviorRegistry.putObject(Fossil.ancientJavelin, new BehaviorJavelinDispense(MinecraftServer.getServer(), -1));
@@ -791,8 +791,6 @@ public class Fossil
 		 * GameRegistry.registerItem(dinosaurModels, LocalizationStrings.DINOSAUR_MODELS);
 		 */
 		
-		GameRegistry.registerItem(AquaticScarabGem, LocalizationStrings.AQUATIC_SCARAB_GEM_NAME);
-		GameRegistry.registerItem(DominicanAmber, LocalizationStrings.DOMINICAN_AMBER_NAME);
 		GameRegistry.registerItem(biofossil, LocalizationStrings.BIO_FOSSIL_NAME);
 		GameRegistry.registerItem(relic, LocalizationStrings.RELIC_NAME);
 		GameRegistry.registerItem(stoneboard, LocalizationStrings.TABLET_NAME);
@@ -803,6 +801,7 @@ public class Fossil
 		GameRegistry.registerItem(brokenhelmet, LocalizationStrings.BROKEN_HELMET_NAME);
 		GameRegistry.registerItem(skullStick, LocalizationStrings.SKULL_STICK_NAME);
 		GameRegistry.registerItem(gem, LocalizationStrings.SCARAB_GEM_NAME);
+		GameRegistry.registerItem(AquaticScarabGem, LocalizationStrings.AQUATIC_SCARAB_GEM_NAME);
 		GameRegistry.registerItem(gemAxe, LocalizationStrings.SCARAB_AXE_NAME);
 		GameRegistry.registerItem(gemPickaxe, LocalizationStrings.SCARAB_PICKAXE_NAME);
 		GameRegistry.registerItem(gemSword, LocalizationStrings.SCARAB_SWORD_NAME);
@@ -813,6 +812,7 @@ public class Fossil
 		GameRegistry.registerItem(magicConch, LocalizationStrings.MAGIC_CONCH_NAME);
 		GameRegistry.registerItem(icedMeat, LocalizationStrings.ICED_MEAT_NAME);
 		GameRegistry.registerItem(amber, LocalizationStrings.AMBER_NAME);
+		GameRegistry.registerItem(DominicanAmber, LocalizationStrings.DOMINICAN_AMBER_NAME);
 		GameRegistry.registerItem(woodjavelin, LocalizationStrings.WOOD_JAVELIN_NAME);
 		GameRegistry.registerItem(stonejavelin, LocalizationStrings.STONE_JAVELIN_NAME);
 		GameRegistry.registerItem(ironjavelin, LocalizationStrings.IRON_JAVELIN_NAME);
@@ -901,10 +901,9 @@ public class Fossil
 		 */
 		
 		GameRegistry.registerBlock(blockFossil, LocalizationStrings.BLOCK_FOSSIL_NAME);
-		GameRegistry.registerBlock(blockMagnolia, LocalizationStrings.BLOCK_MAGNOLIA_NAME);
-		GameRegistry.registerBlock(Limestone, LocalizationStrings.BLOCK_LIMESTONE_NAME);
-		GameRegistry.registerBlock(LimestoneBrick, LocalizationStrings.BLOCK_LIMESTONEBRICK_NAME);
-		GameRegistry.registerBlock(blockDillhoffia, LocalizationStrings.BLOCK_DILLHOFFIA_NAME);
+		//GameRegistry.registerBlock(blockMagnolia, LocalizationStrings.BLOCK_MAGNOLIA_NAME);
+		//GameRegistry.registerBlock(Limestone, LocalizationStrings.BLOCK_LIMESTONE_NAME);
+		//GameRegistry.registerBlock(LimestoneBrick, LocalizationStrings.BLOCK_LIMESTONEBRICK_NAME);
 		GameRegistry.registerBlock(blockSkull, LocalizationStrings.BLOCK_SKULL_NAME);
 		GameRegistry.registerBlock(skullLantern, LocalizationStrings.SKULL_LANTERN_NAME);
 		GameRegistry.registerBlock(blockanalyzerIdle, LocalizationStrings.BLOCK_ANALYZER_IDLE_NAME);
@@ -933,6 +932,7 @@ public class Fossil
 		GameRegistry.registerBlock(volcanicRock, LocalizationStrings.VOLCANIC_ROCK_NAME);
 		GameRegistry.registerBlock(tar, LocalizationStrings.TAR_NAME);
 		GameRegistry.registerBlock(sarracina, LocalizationStrings.SARRACINA_NAME);
+		GameRegistry.registerBlock(blockDillhoffia, LocalizationStrings.BLOCK_DILLHOFFIA_NAME);
 		GameRegistry.registerBlock(amberOre, LocalizationStrings.AMBER_ORE_NAME);
 		GameRegistry.registerBlock(ancientStone, LocalizationStrings.ANCIENT_STONE_NAME);
 		GameRegistry.registerBlock(ancientStonebrick, LocalizationStrings.ANCIENT_STONE_BRICK_NAME);

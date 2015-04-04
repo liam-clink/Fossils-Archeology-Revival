@@ -28,6 +28,7 @@ public class RenderTRex extends RenderLiving
     protected void preRenderScale(EntityTRex entitydinosaur, float par2)
     {
         GL11.glScalef(entitydinosaur.getDinosaurSize(), entitydinosaur.getDinosaurSize(), entitydinosaur.getDinosaurSize());
+        GL11.glTranslated(0, 0, 0.5F);
     }
 
     /**

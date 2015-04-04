@@ -9,6 +9,9 @@ import mods.fossil.fossilAI.DinoAIFollowOwner;
 import mods.fossil.fossilAI.DinoAIRideGround;
 import mods.fossil.fossilAI.DinoAITargetNonTamedExceptSelfClass;
 import mods.fossil.fossilAI.DinoAIWander;
+import mods.fossil.fossilAI.WaterDinoAIEat;
+import mods.fossil.fossilAI.WaterDinoAIHunt;
+import mods.fossil.fossilAI.WaterDinoAIWander;
 import mods.fossil.fossilEnums.EnumDinoType;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -29,18 +32,21 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
-public class EntitySarcosuchus extends EntityDinosaur {
+public class EntitySarcosuchus extends EntitySwimmingDino {
 	public boolean isTamed = false;
 
 	public static final double baseHealth = EnumDinoType.Sarcosuchus.Health0;
 	public static final double baseDamage = EnumDinoType.Sarcosuchus.Strength0;
 	public static final double baseSpeed = EnumDinoType.Sarcosuchus.Speed0;
-	
+
 	public static final double maxHealth = EnumDinoType.Sarcosuchus.HealthMax;
 	public static final double maxDamage = EnumDinoType.Sarcosuchus.StrengthMax;
 	public static final double maxSpeed = EnumDinoType.Sarcosuchus.SpeedMax;
 	public int WeakToDeath = 0;
-
+	private WaterDinoAIWander aiWaterDinoWander = new WaterDinoAIWander(this, 1.0D);
+	private WaterDinoAIHunt aiWaterDinoHunt = new WaterDinoAIHunt(this, EntityLiving.class, 500, false, 0.002D);
+	private WaterDinoAIEat aiWaterDinoEat = new WaterDinoAIEat(this, 50, 0.0017D);
+	private DinoAIEat aiDinoEat = new DinoAIEat(this, 20);
 	public EntitySarcosuchus(World var1) {
 		super(var1, EnumDinoType.Sarcosuchus);
 		this.updateSize();
@@ -49,13 +55,16 @@ public class EntitySarcosuchus extends EntityDinosaur {
 		 */
 		this.adultAge = EnumDinoType.Sarcosuchus.AdultAge;
 		// Set initial size for hitbox. (length/width, height)
-		this.setSize(2.0F, 1.0F);
+		this.setSize(6.0F, 1.0F);
 		// Size of dinosaur at day 0.
 		this.minSize = 0.2F;
 		// Size of dinosaur at age Adult.
 		this.maxSize = 1.3F;
 
 		this.getNavigator().setCanSwim(true);
+		this.tasks.addTask(6, this.aiWaterDinoWander);
+		this.tasks.addTask(5, this.aiWaterDinoEat);
+		this.tasks.addTask(5, this.aiWaterDinoHunt);
 		this.tasks.addTask(8, new EntityAISwimming(this));
 		this.tasks.addTask(4, new DinoAIAttackOnCollide(this, 1.1D, true));
 		this.tasks.addTask(5, new DinoAIFollowOwner(this, 1.0D, 10.0F, 2.0F));
@@ -64,32 +73,38 @@ public class EntitySarcosuchus extends EntityDinosaur {
 		this.tasks.addTask(9, new EntityAILookIdle(this));
 		tasks.addTask(1, new DinoAIRideGround(this, 1));
 		this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
-		this.targetTasks.addTask(2, new DinoAITargetNonTamedExceptSelfClass(
-				this, EntityLiving.class, 750, false));
+		this.targetTasks.addTask(2, new DinoAITargetNonTamedExceptSelfClass(this, EntityLiving.class, 750, false));
 		this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
 	}
 
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed)
-				.setBaseValue(EnumDinoType.Sarcosuchus.Speed0);
+		.setBaseValue(EnumDinoType.Sarcosuchus.Speed0);
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth)
-				.setBaseValue(EnumDinoType.Sarcosuchus.Health0);
+		.setBaseValue(EnumDinoType.Sarcosuchus.Health0);
 		this.getEntityAttribute(SharedMonsterAttributes.attackDamage)
-				.setBaseValue(EnumDinoType.Sarcosuchus.Strength0);
+		.setBaseValue(EnumDinoType.Sarcosuchus.Strength0);
 	}
 
 	@Override
 	public boolean isAIEnabled() {
 		return !this.isModelized() && !this.isWeak();
 	}
+	protected String getLivingSound() {
+		if(isChild()){
+			return "fossil:sarcosuchus_baby_living";
+		}
+		return "fossil:sarcosuchus_living";
+	}
 
 	public void moveEntityWithHeading(float par1, float par2) {
-		super.moveEntityWithHeading(par1, par2);
 		if (this.isWeak()) {
 			this.motionX *= 0.0D;
 			this.motionZ *= 0.0D;
 			this.rotationPitch = this.rotationYaw = 0;
+		}else{
+			super.moveEntityWithHeading(par1, par2);
 		}
 	}
 
@@ -102,7 +117,27 @@ public class EntitySarcosuchus extends EntityDinosaur {
 		if (this.isModelized()) {
 			return super.getTexture();
 		}
-		if (this.isAdult()) {
+		if (this.isWeak()) {
+			switch (this.getSubSpecies()) {
+			default:
+				return "fossil:textures/mob/Sarcosuchus_Weak.png";
+			case 1:
+				return "fossil:textures/mob/Sarcosuchus/Sarcosuchus_Swamp_Weak.png";
+			case 2:
+				return "fossil:textures/mob/Sarcosuchus/Sarcosuchus_Desert_Weak.png";
+			}
+		}
+		else if (this.isTamed()) {
+			switch (this.getSubSpecies()) {
+			default:
+				return "fossil:textures/mob/Sarcosuchus_tame.png";
+			case 1:
+				return "fossil:textures/mob/Sarcosuchus/Sarcosuchus_Swamp_tame.png";
+			case 2:
+				return "fossil:textures/mob/Sarcosuchus/Sarcosuchus_Desert_tame.png";
+			}
+		}
+		else if (this.isAdult()) {
 			switch (this.getSubSpecies()) {
 			default:
 				return "fossil:textures/mob/Sarcosuchus_Wild.png";
@@ -122,35 +157,10 @@ public class EntitySarcosuchus extends EntityDinosaur {
 				return "fossil:textures/mob/Sarcosuchus/Sarcosuchus_Desert_baby.png";
 			}
 		}
-		else if (this.isTamed()) {
-			switch (this.getSubSpecies()) {
-			default:
-				return "fossil:textures/mob/Sarcosuchus_tame.png";
-			case 1:
-				return "fossil:textures/mob/Sarcosuchus/Sarcosuchus_Swamp_tame.png";
-			case 2:
-				return "fossil:textures/mob/Sarcosuchus/Sarcosuchus_Desert_tame.png";
-			}
-		}
-		else if (this.isWeak()) {
-			switch (this.getSubSpecies()) {
-			default:
-				return "fossil:textures/mob/Sarcosuchus_Weak.png";
-			case 1:
-				return "fossil:textures/mob/Sarcosuchus/Sarcosuchus_Swamp_Weak.png";
-			case 2:
-				return "fossil:textures/mob/Sarcosuchus/Sarcosuchus_Desert_Weak.png";
-			}
-		} else {
-			switch (this.getSubSpecies()) {
-			default:
-				return "fossil:textures/mob/Sarcosuchus_Wild.png";
-			case 1:
-				return "fossil:textures/mob/Sarcosuchus/Sarcosuchus_Swamp_Wild.png";
-			case 2:
-				return "fossil:textures/mob/Sarcosuchus/Sarcosuchus_Desert_Wild.png";
-			}
-		}
+
+
+		return "fossil:textures/mob/Sarcosuchus_Wild.png";
+
 	}
 
 	public boolean isWeak() {
@@ -192,7 +202,7 @@ public class EntitySarcosuchus extends EntityDinosaur {
 						if (!this.worldObj.isRemote) {
 							Fossil.ShowMessage(
 									StatCollector
-											.translateToLocal(LocalizationStrings.STATUS_GEM_ERROR_HEALTH),
+									.translateToLocal(LocalizationStrings.STATUS_GEM_ERROR_HEALTH),
 									player);
 						}
 					}
@@ -201,7 +211,7 @@ public class EntitySarcosuchus extends EntityDinosaur {
 						if (!this.worldObj.isRemote) {
 							Fossil.ShowMessage(
 									StatCollector
-											.translateToLocal(LocalizationStrings.STATUS_GEM_ERROR_YOUNG),
+									.translateToLocal(LocalizationStrings.STATUS_GEM_ERROR_YOUNG),
 									player);
 						}
 					}
@@ -211,7 +221,14 @@ public class EntitySarcosuchus extends EntityDinosaur {
 		}
 		return false;
 	}
-
+	public boolean isOnSurface()
+	{
+		return this.worldObj.isAirBlock((int)Math.floor(this.posX), (int)Math.floor(this.posY + (double)(this.getEyeHeight() / 2.0F)), (int)Math.floor(this.posZ));
+	}
+	public boolean canBreatheUnderwater()
+	{
+		return true;
+	}
 	public EntitySarcosuchus spawnBabyAnimal(EntityAgeable var1) {
 		return new EntitySarcosuchus(this.worldObj);
 	}
@@ -233,7 +250,7 @@ public class EntitySarcosuchus extends EntityDinosaur {
 			this.riddenByEntity.setPosition(
 					this.posX,
 					this.posY + this.getMountHeight()
-							+ this.riddenByEntity.getYOffset(), this.posZ);
+					+ this.riddenByEntity.getYOffset(), this.posZ);
 		}
 	}
 
@@ -253,16 +270,16 @@ public class EntitySarcosuchus extends EntityDinosaur {
 
 		if (this.getDinoAge() <= this.adultAge) {
 			this.getEntityAttribute(SharedMonsterAttributes.maxHealth)
-					.setBaseValue(
-							Math.round(this.baseHealth
-									+ (healthStep * this.getDinoAge())));
+			.setBaseValue(
+					Math.round(this.baseHealth
+							+ (healthStep * this.getDinoAge())));
 			this.getEntityAttribute(SharedMonsterAttributes.attackDamage)
-					.setBaseValue(
-							Math.round(this.baseDamage
-									+ (attackStep * this.getDinoAge())));
+			.setBaseValue(
+					Math.round(this.baseDamage
+							+ (attackStep * this.getDinoAge())));
 			this.getEntityAttribute(SharedMonsterAttributes.movementSpeed)
-					.setBaseValue(
-							this.baseSpeed + (speedStep * this.getDinoAge()));
+			.setBaseValue(
+					this.baseSpeed + (speedStep * this.getDinoAge()));
 
 			if (this.isTeen()) {
 				this.getEntityAttribute(

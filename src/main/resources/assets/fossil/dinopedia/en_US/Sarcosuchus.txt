@@ -1,21 +1,14 @@
 Sarcosuchus "Flesh Crocodile"
-"sar-koh-soo-kuss"
+"sark-oh-soch-us"
 
-Length: 12m
-Height: 1.3m
-Area: Africa and South America
-Climate: Tropical
-Period: Early Cretaceous
+Length: 1100cm
+Height: 130cm
+Area: Africa
+
+Climate: Arid
+Period: Cretaceous
 Family: Pholidosauridae
 
-Sarcosuchus were ambush 
-predators, feeding on 
-aquatic and terrestrial animals.
-Their eyes are positioned high 
-on their head, allowing them to 
-see with minimal exposure
-of their body.
+(insert data here)
 
-It is renowned for its large size
-and its unusually bulbous nose, 
-similar to that of a gharial.
+(insert second data here)

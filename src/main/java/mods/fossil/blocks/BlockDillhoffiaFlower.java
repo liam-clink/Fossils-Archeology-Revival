@@ -9,8 +9,8 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 public class BlockDillhoffiaFlower extends BlockBush {
 
 	public BlockDillhoffiaFlower(Material material) {
-		super(material.plants);
-		this.setCreativeTab(Fossil.tabFTest);
+		super(material);
+		this.setCreativeTab(Fossil.tabFBlocks);
 		setBlockName(LocalizationStrings.BLOCK_DILLHOFFIA_NAME);
 	}
 	
