@@ -108,7 +108,7 @@ public class EntityFailuresaurus extends EntityMob
 	 */
 	protected Item getDropItem()
 	{
-		return Fossil.biofossil;
+		return Fossil.failuresaurusFlesh;
 	}
 
 	public void onLivingUpdate()

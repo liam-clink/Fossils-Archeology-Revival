@@ -158,6 +158,7 @@ public class LocalizationStrings
     public static final String QUAGGA_MEAT_COOKED = "quaggaMeatCooked";
 	public static String MAMMOTH_MEAT = "mammothMeat";
 	public static String MAMMOTH_MEAT_COOKED = "mammothMeatCooked";
+	public static String FAILURESAURUS_FLESH_NAME = "failuresaurusFlesh";
 
     //DNA
     public static final String DNA_PIG_NAME = "dnaPig";

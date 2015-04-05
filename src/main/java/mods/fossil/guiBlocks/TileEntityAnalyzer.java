@@ -243,6 +243,7 @@ ISidedInventory {
 				if (EnumDinoType.isDinoDrop(this.analyzerItemStacks[var1]
 						.getItem())
 						|| (var2 == Fossil.biofossil)
+						|| (var2 == Fossil.failuresaurusFlesh)
 						|| (var2 == Fossil.relic)
 						|| (var2 == Items.porkchop)
 						|| (var2 == Items.beef)
@@ -342,6 +343,59 @@ ISidedInventory {
 
 			if (this.analyzerItemStacks[this.RawIndex].getItem() == Items.beef) {
 				itemstack = new ItemStack(Fossil.dnaCow, 2);
+			}
+			if (this.analyzerItemStacks[this.RawIndex].getItem() == Fossil.failuresaurusFlesh) {
+				int randChoice = new Random().nextInt(3);
+				if(randChoice == 0){
+					itemstack = new ItemStack(Items.rotten_flesh, 1);
+				}else{
+					int i = new Random().nextInt(EnumDinoType.values().length + 13); 
+					Item i0 = null;
+					if (i == 0) {
+						i0 = Fossil.brokenSapling;
+					} else if (i == 1) {
+						i0 = Fossil.dnaCoelacanth;
+						
+					}
+					else if (i == 2) {
+						i0 = Fossil.dnaChicken;
+					} 
+					else if (i == 3) {
+						i0 = Fossil.dnaCow;
+					} 
+					else if (i == 4) {
+						i0 = Fossil.dnaDodo;
+					} 
+					else if (i == 5) {
+						i0 = Fossil.dnaElasmotherium;
+					} 
+					else if (i == 6) {
+						i0 = Fossil.dnaHorse;
+					} 
+					else if (i == 7) {
+						i0 = Fossil.dnaMammoth;
+					} 
+					else if (i == 8) {
+						i0 = Fossil.dnaPig;
+					}
+					else if (i == 9) {
+						i0 = Fossil.dnaQuagga;
+					} 
+					else if (i == 10) {
+						i0 = Fossil.dnaSheep;
+					} 
+					else if (i == 11) {
+						i0 = Fossil.dnaSmilodon;
+					}
+					else if (i == 12) {
+						i0 = Fossil.dnaTerrorBird;
+					}
+					else {
+						i0 = EnumDinoType.values()[i - 13].DNAItem;
+					}
+
+					itemstack = new ItemStack(i0, 1);
+				}
 			}
 
 			if (this.analyzerItemStacks[this.RawIndex].getItem() == Items.leather) {

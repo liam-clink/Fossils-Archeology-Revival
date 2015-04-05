@@ -18,7 +18,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityCultivate extends TileEntity implements IInventory,
-		ISidedInventory {
+ISidedInventory {
 	private static final int[] slots_top = new int[] { 0 }; // input
 	private static final int[] slots_bottom = new int[] { 2, 1 }; // output
 	private static final int[] slots_sides = new int[] { 1 }; // fuel
@@ -27,6 +27,7 @@ public class TileEntityCultivate extends TileEntity implements IInventory,
 	public int furnaceBurnTime = 0;
 	public int currentItemBurnTime = 0;
 	public int furnaceCookTime = 0;
+	public boolean isActive;
 	private String customName;
 
 	/**
@@ -163,6 +164,7 @@ public class TileEntityCultivate extends TileEntity implements IInventory,
 	 * e.g. the mob spawner uses this to count ticks and creates a new spawn
 	 * inside its implementation.
 	 */
+	
 	public void updateEntity() {
 		boolean var1 = this.furnaceCookTime > 0;
 		boolean var2 = false;
@@ -173,7 +175,13 @@ public class TileEntityCultivate extends TileEntity implements IInventory,
 		} else {
 			cookValue = 6000;
 		}
-
+			if (this.furnaceCookTime > 0) {
+				isActive = true;
+				worldObj.notifyBlockChange(xCoord, yCoord, zCoord, worldObj.getBlock(xCoord,yCoord,zCoord));
+				}else{
+				isActive = false;
+			}
+		
 		if (this.furnaceBurnTime > 0) {
 			--this.furnaceBurnTime;
 		}
@@ -191,7 +199,7 @@ public class TileEntityCultivate extends TileEntity implements IInventory,
 								.hasContainerItem()) {
 							this.cultivateItemStacks[1] = new ItemStack(
 									this.cultivateItemStacks[1].getItem()
-											.getContainerItem());
+									.getContainerItem());
 						} else {
 							--this.cultivateItemStacks[1].stackSize;
 						}
@@ -245,8 +253,8 @@ public class TileEntityCultivate extends TileEntity implements IInventory,
 											.getInventoryStackLimit()
 											&& this.cultivateItemStacks[2].stackSize < this.cultivateItemStacks[2]
 													.getMaxStackSize() ? true
-											: this.cultivateItemStacks[2].stackSize < var1
-													.getMaxStackSize())));
+															: this.cultivateItemStacks[2].stackSize < var1
+															.getMaxStackSize())));
 		}
 	}
 
@@ -263,7 +271,7 @@ public class TileEntityCultivate extends TileEntity implements IInventory,
 			if (this.cultivateItemStacks[0].getItem().hasContainerItem()) {
 				this.cultivateItemStacks[0] = new ItemStack(
 						this.cultivateItemStacks[0].getItem()
-								.getContainerItem());
+						.getContainerItem());
 			} else {
 				--this.cultivateItemStacks[0].stackSize;
 			}
@@ -329,8 +337,8 @@ public class TileEntityCultivate extends TileEntity implements IInventory,
 	public boolean isUseableByPlayer(EntityPlayer var1) {
 		return this.worldObj.getTileEntity(this.xCoord, this.yCoord,
 				this.zCoord) != this ? false : var1.getDistanceSq(
-				(double) this.xCoord + 0.5D, (double) this.yCoord + 0.5D,
-				(double) this.zCoord + 0.5D) <= 64.0D;
+						(double) this.xCoord + 0.5D, (double) this.yCoord + 0.5D,
+						(double) this.zCoord + 0.5D) <= 64.0D;
 	}
 
 	private ItemStack CheckSmelt(int var1) {
@@ -389,11 +397,11 @@ public class TileEntityCultivate extends TileEntity implements IInventory,
 
 		if (EnumDinoType.getEgg(itemstack.getItem()) != null) {
 			return new ItemStack(EnumDinoType.getEgg(itemstack.getItem()), 1); // converts
-																				// dino
-																				// dna
-																				// to
-																				// dino
-																				// egg
+			// dino
+			// dna
+			// to
+			// dino
+			// egg
 		}
 
 		if (itemstack.getItem() == Fossil.dnaCoelacanth) {
@@ -489,5 +497,6 @@ public class TileEntityCultivate extends TileEntity implements IInventory,
 
 	@Override
 	public void closeInventory() {
+
 	}
 }

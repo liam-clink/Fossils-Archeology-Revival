@@ -376,6 +376,7 @@ public class Fossil
 	public static Item powderyString;
 	public static Item animalCoin;
 	public static Item dinoCoin;
+	public static Item failuresaurusFlesh;
 	public static Item dodoEgg;
 	public static Item cultivatedDodoEgg;
 	public static Item dodoWing;
@@ -668,6 +669,7 @@ public class Fossil
 		vertebrae = new ItemDinosaurBones("vertebrae").setUnlocalizedName(LocalizationStrings.VERTEBRAE_NAME);
 
 		brokenSapling = new ForgeItem("Palae_Fossil").setUnlocalizedName(LocalizationStrings.BROKEN_SAPLING_NAME).setCreativeTab(this.tabFMaterial);
+		failuresaurusFlesh = new ForgeItem("flesh").setUnlocalizedName(LocalizationStrings.FAILURESAURUS_FLESH_NAME).setCreativeTab(this.tabFMaterial);
 		dodoEgg = new ItemDodoEgg().setUnlocalizedName(LocalizationStrings.DODO_EGG_NAME);
 		cultivatedDodoEgg = new ItemCultivatedDodoEgg().setUnlocalizedName(LocalizationStrings.CULTIVATED_DODO_EGG_NAME);
 		potteryShards = new ForgeItem("PotteryShard").setUnlocalizedName(LocalizationStrings.POTTERY_SHARDS).setCreativeTab(this.tabFItems);
@@ -865,6 +867,7 @@ public class Fossil
 		GameRegistry.registerItem(dodoWingCooked, LocalizationStrings.DODO_WING_COOKED_NAME);
 		GameRegistry.registerItem(fossilrecordBones, LocalizationStrings.FOSSIL_RECORD_NAME);
 		GameRegistry.registerItem(livingCoelacanth, LocalizationStrings.LIVING_COELACANTH_NAME);
+		GameRegistry.registerItem(failuresaurusFlesh, LocalizationStrings.FAILURESAURUS_FLESH_NAME);
 		GameRegistry.registerItem(terrorBirdEgg, LocalizationStrings.TERROR_BIRD_EGG_NAME);
 		GameRegistry.registerItem(cultivatedTerrorBirdEgg, LocalizationStrings.CULTIVATED_TERROR_BIRD_EGG_NAME);
 		GameRegistry.registerItem(terrorBirdMeat, LocalizationStrings.TERROR_BIRD_MEAT);

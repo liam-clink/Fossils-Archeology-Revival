@@ -3,6 +3,7 @@ package mods.fossil.guiBlocks;
 import java.util.Random;
 
 import mods.fossil.Fossil;
+import mods.fossil.client.ClientProxy;
 import mods.fossil.client.LocalizationStrings;
 import mods.fossil.entity.mob.EntityFailuresaurus;
 import net.minecraft.block.Block;
@@ -53,6 +54,10 @@ public class BlockCultivate extends BlockContainer {
 			setCreativeTab(Fossil.tabFBlocks);
 		}
 	}
+	public void onBlockDestroyedByPlayer(World world, int x, int y, int z, int i) {
+		this.ReturnDNA(world, x, y, z);
+		super.onBlockDestroyedByPlayer(world, x, y, z, i);
+	}
 
 	public Item getItemDropped(int par1, Random rand, int par2) {
 		return Item.getItemFromBlock(Fossil.blockcultivateIdle);
@@ -64,6 +69,29 @@ public class BlockCultivate extends BlockContainer {
 	public void onBlockAdded(World var1, int var2, int var3, int var4) {
 		super.onBlockAdded(var1, var2, var3, var4);
 		this.setDefaultDirection(var1, var2, var3, var4);
+	}
+	@Override
+	public boolean renderAsNormalBlock()
+	{
+		return false;
+	}
+
+	@Override
+	public int getRenderType()
+	{
+		return -90;
+	}
+
+	@Override
+	public boolean isOpaqueCube()
+	{
+		return false;
+	}
+
+	@Override
+	public int getRenderBlockPass()
+	{
+		return 1;
 	}
 
 	/**
@@ -104,9 +132,7 @@ public class BlockCultivate extends BlockContainer {
 	 */
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister par1IconRegister) {
-		this.blockIcon = par1IconRegister
-				.registerIcon(this.isActive ? "fossil:Culture_Sides_Active"
-						: "fossil:Culture_Sides_Idle");
+		this.blockIcon = par1IconRegister.registerIcon("fossil:Culture_Sides_Idle");
 		this.Bottom = par1IconRegister.registerIcon("fossil:Culture_Bottom");
 		this.Top = par1IconRegister.registerIcon("fossil:Culture_Top");
 	}
@@ -195,8 +221,55 @@ public class BlockCultivate extends BlockContainer {
 	 * 
 	 * if (var6 == 3)var1.setBlockMetadataWithNotify(var2, var3, var4, 4,2); }
 	 */
+	private void ReturnDNA(World world, int x, int y, int z) {
+		if (!keepFurnaceInventory) {
+			TileEntityCultivate tileentity = (TileEntityCultivate) world
+					.getTileEntity(x, y, z);
+			if(tileentity != null){
+				ItemStack itemstack = tileentity.getStackInSlot(0);
+
+				if (itemstack != null) {
+					float xOffset = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
+					float yOffset = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
+					float zOffset = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
+
+					while (itemstack.stackSize > 0) {
+						int rand = this.furnaceRand.nextInt(21) + 10;
+
+						if (rand > itemstack.stackSize) {
+							rand = itemstack.stackSize;
+						}
+
+						itemstack.stackSize -= rand;
+						EntityItem entityItem = new EntityItem(world,
+								(double) ((float) x + xOffset),
+								(double) ((float) y + yOffset),
+								(double) ((float) z + zOffset),
+								new ItemStack(itemstack.getItem(), rand,
+										itemstack.getItemDamage()));
+
+						if (itemstack.hasTagCompound()) {
+							entityItem.getEntityItem().setTagCompound(
+									(NBTTagCompound) itemstack
+									.getTagCompound().copy());
+						}
+
+						float offset = 0.05F;
+						entityItem.motionX = (double) ((float) this.furnaceRand
+								.nextGaussian() * offset);
+						entityItem.motionY = (double) ((float) this.furnaceRand
+								.nextGaussian() * offset + 0.2F);
+						entityItem.motionZ = (double) ((float) this.furnaceRand
+								.nextGaussian() * offset);
+						world.spawnEntityInWorld(entityItem);
+					}
+				}
+			}
+		}
+	}
 
 	private void ReturnIron(World world, int x, int y, int z) {
+
 		ItemStack itemstack = new ItemStack(Items.iron_ingot, 3);
 		float var6 = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
 		float var7 = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
@@ -235,8 +308,8 @@ public class BlockCultivate extends BlockContainer {
 
 			if (Math.pow(x - P.posX, 2D) + Math.pow(y - P.posY, 2D)
 					+ Math.pow(z - P.posZ, 2D) < 10000) // Only for Players
-														// closer than 100
-														// Metres
+				// closer than 100
+				// Metres
 			{
 				Fossil.ShowMessage(var6, P);
 			}
@@ -268,7 +341,7 @@ public class BlockCultivate extends BlockContainer {
 			if (rand >= 10) {
 				creature = new EntityFailuresaurus(world);
 				((EntityFailuresaurus) creature).setSkin(new Random()
-						.nextInt(3));
+				.nextInt(3));
 			}
 
 			((EntityLiving) creature).setLocationAndAngles((double) x,
@@ -282,8 +355,7 @@ public class BlockCultivate extends BlockContainer {
 	 * ejects contained items into the world, and notifies neighbours of an
 	 * update, as appropriate
 	 */
-	public void breakBlock(World world, int x, int y, int z, Block block,
-			int var6) {
+	public void breakBlock(World world, int x, int y, int z, Block block, int var6) {
 		if (!keepFurnaceInventory) {
 			TileEntityCultivate tileentity = (TileEntityCultivate) world
 					.getTileEntity(x, y, z);
@@ -315,7 +387,7 @@ public class BlockCultivate extends BlockContainer {
 							if (itemstack.hasTagCompound()) {
 								entityItem.getEntityItem().setTagCompound(
 										(NBTTagCompound) itemstack
-												.getTagCompound().copy());
+										.getTagCompound().copy());
 							}
 
 							float offset = 0.05F;
