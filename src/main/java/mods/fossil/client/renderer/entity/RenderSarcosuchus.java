@@ -54,6 +54,7 @@ public class RenderSarcosuchus extends RenderLiving {
 	protected ResourceLocation func_110919_a(EntitySarcosuchus par1Entity) {
 		return new ResourceLocation(par1Entity.getTexture());
 	}
+	
 
 	/**
 	 * Returns the location of an entity's texture. Doesn't seem to be called

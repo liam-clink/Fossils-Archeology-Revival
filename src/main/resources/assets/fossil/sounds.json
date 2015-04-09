@@ -85,5 +85,7 @@
 	"velociraptor_living_tame": {"category": "neutral","sounds": ["velociraptor_living_tame1", "velociraptor_living_tame2"]},
 	"velociraptor_living_wild": {"category": "neutral","sounds": ["velociraptor_living_wild1", "velociraptor_living_wild2"]},
 	"whip": {"category": "player","sounds": ["whip1"]},
+	"anuTotem": {"category": "player","sounds": ["anuTotem"]},
 	"record_bones": {"category": "record","sounds": [{"name": "record_bones","stream": true}]}
+	
 }

@@ -5,14 +5,23 @@ import java.util.Random;
 import javax.swing.Icon;
 
 import mods.fossil.Fossil;
+import mods.fossil.client.LocalizationStrings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.BlockFlower;
+import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.world.ColorizerFoliage;
+import net.minecraft.world.ColorizerGrass;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -26,8 +35,11 @@ public class BlockFern extends BlockBush
 		float var3 = 0.5F;
 		this.setBlockBounds(0.5F - var3, 0.0F, 0.5F - var3, 0.5F + var3, 0.25F, 0.5F + var3);
 		this.disableStats();
+		this.setBlockName(LocalizationStrings.FERN_BLOCK_NAME);
 		this.setHardness(0.0F);
 		this.setStepSound(Block.soundTypeGrass);
+		this.setCreativeTab((CreativeTabs)null);
+
 		//this.setCreativeTab(Fossil.tabFBlocks);
 		//this.setRequiresSelfNotify();
 	}
@@ -62,15 +74,11 @@ public class BlockFern extends BlockBush
 		this.fernPics[12] = par1IIconRegister.registerIcon("fossil:Fern_2S5");
 	}
 
-
 	protected boolean canPlaceBlockOn(Block block)
 	{
 		return block == Blocks.grass;
 	}
-
-	/**
-	 * Ticks the block if it's been scheduled
-	 */
+	
 	public void updateTick(World var1, int var2, int var3, int var4, Random var5)
 	{
 		super.updateTick(var1, var2, var3, var4, var5);
@@ -209,13 +217,7 @@ public class BlockFern extends BlockBush
 		return fernPics[var2];
 	}
 
-	/**
-	 * The type of render function that is called for this block
-	 */
-	public int getRenderType()
-	{
-		return 6;
-	}
+
 
 	/**
 	 * Drops the block items with a specified chance of dropping the specified items
@@ -230,6 +232,9 @@ public class BlockFern extends BlockBush
 	 */
 	public Item getItemDropped(int var1, Random var2, int var3)
 	{
+		if(var2.nextInt(4) == 0){
+			return Fossil.fernSeed;
+		}
 		return null;
 	}
 
@@ -298,14 +303,36 @@ public class BlockFern extends BlockBush
 	{
 		return (var1 == 4) || (var1 == 11);
 	}
+	public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z)
+	{
+		return new ItemStack(Fossil.fernSeed);
+	}
 
-	/**
-	 * only called by clickMiddleMouseButton , and passed to inventory.setCurrentItem (along with isCreative)
-	 */
-	/*
-    public int idPicked(World var1, int var2, int var3, int var4)
+	@Override
+    public int getBlockColor()
     {
-        return Fossil.fernSeed;
-    }
-	 */
+		double var1 = 0.5D;
+		double var3 = 1.0D;
+		
+		return ColorizerGrass.getGrassColor(var1, var3);
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+    public int getRenderColor(int par1)
+    {
+		return ColorizerGrass.getGrassColor(0.5D, 1.0D);
+	}
+
+	@Override
+	public int getRenderType()
+	{
+		return 1;
+	}
+
+	@Override
+    public int colorMultiplier(IBlockAccess world, int x, int y, int z)
+	{		
+		return world.getBiomeGenForCoords(x, z).getBiomeFoliageColor(x, y, z);
+	}
 }

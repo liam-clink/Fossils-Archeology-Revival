@@ -1,6 +1,6 @@
-﻿#Build 7.1.0 - Updated August 6 2014
+﻿#Build 7.0 - Updated August 6 2014
 #Traditional Chinese (zh_TW) Localization File
-#Keys last updated April 4 2015
+#Keys last updated October 5 2014
 #創造模式標簽
 itemgroup.FCombat=古代裝備
 itemgroup.FBlocks=古代方塊
@@ -88,11 +88,6 @@ tile.ancientWoodSlab.ancientWood.name=Ancient Wood Slab
 tile.ancientWoodDoubleSlab.ancientWood.name=Ancient Wood Slab
 tile.ancientStoneSlab.ancientStone.name=Ancient Stone Slab
 tile.ancientStoneDoubleSlab.ancientStone.name=Ancient Stone Slab
-tile.Limestone.name=Limestone
-tile.LimestoneBrick.name=Limestone Brick
-tile.Dillhoffia.name=Dillhoffia
-tile.Magnolia.name=Magnolia
-tile.slimeTrail.name=Failuresaurus Trail
 
 #Collectables
 tile.figurine.figurine_steve_pristine.name=Pristine Steve Figurine
@@ -410,18 +405,6 @@ item.terrorBirdMeat.name=Raw Terror Bird Leg
 item.terrorBirdMeatCooked.name=Cooked Terror Bird Leg
 item.quaggaMeat.name=Raw Quagga Meat
 item.quaggaMeatCooked.name=Cooked Quagga Meat
-item.eggSarcosuchus.name=Sarcosuchus Egg
-item.dnaSarcosuchus.name=Sarcosuchus DNA
-item.rawSarcosuchus.name=Sarcosuchus Meat
-item.legBone.Sarcosuchus.name=Sarcosuchus Leg Bone
-item.claw.Sarcosuchus.name=Sarcosuchus Osteoderms
-item.foot.Sarcosuchus.name=Sarcosuchus Foot
-item.vertebrae.Sarcosuchus.name=Sarcosuchus Vertebrae
-item.armBone.Sarcosuchus.name=Sarcosuchus Arm Bone
-item.dinoRibCage.Sarcosuchus.name=Sarcosuchus Rib Cage
-item.skull.Sarcosuchus.name=Sarcosuchus Skull
-item.DominicanAmber.name=Dominican Amber
-item.AquaticScarabGem.name=Aquatic Scarab Gem
 
 #前綴/後綴
 dnaName.head=
@@ -484,7 +467,6 @@ entity.fossil.Pachycephalosaurus.name=腫頭龍
 entity.fossil.Deinonychus.name=Deinonychus
 entity.fossil.Gallimimus.name=Gallimimus
 entity.fossil.Allosaurus.name=Allosaurus
-entity.fossil.Sarcosuchus.name=Sarcosuchus
 
 #動物名稱.
 entity.fossil.Mammoth.name=猛犸象
@@ -541,7 +523,6 @@ anuSpeaker.summon=爲我賣命吧,我的仆人.
 anuSpeaker.trans=地上的獸啊,顯露你的智慧吧.
 anuSpeaker.qi=劍氣!
 anuSpeaker.fireRain=來下點火雨吧!
-anuSpeaker.mySword=Trying to use my magic against me? Bad Idea.
 
 #阿努雜兵對白
 fpzSpeaker.self=僵屍豬人: 

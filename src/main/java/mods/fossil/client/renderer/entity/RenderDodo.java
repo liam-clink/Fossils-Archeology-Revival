@@ -2,9 +2,12 @@ package mods.fossil.client.renderer.entity;
 
 import java.util.Random;
 
+import org.lwjgl.opengl.GL11;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import mods.fossil.entity.mob.EntityDodo;
+import mods.fossil.entity.mob.EntitySpinosaurus;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
@@ -28,7 +31,16 @@ public class RenderDodo extends RenderLiving
     {
         super.doRender(par1Entity, par2, par4, par6, par8, par9);
     }
+    protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2)
+    {
+    	if(par1EntityLivingBase.isChild()){
+        	GL11.glTranslatef(0, 0.0625F, 0);
 
+    	}else{
+        	GL11.glTranslatef(0, 0.125F, 0);
+
+    	}
+    }
     protected ResourceLocation func_110919_a(EntityDodo par1Entity)
     {
     	switch (par1Entity.getSkin())

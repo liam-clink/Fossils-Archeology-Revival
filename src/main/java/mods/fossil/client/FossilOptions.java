@@ -6,6 +6,7 @@ public class FossilOptions
 {
     
     public static boolean Gen_Palaeoraphe;
+    public static boolean Gen_HellShips;
     public static boolean Allow_Flying;
     public static boolean Gen_Academy;
     public static boolean Gen_Ships;
@@ -26,11 +27,14 @@ public class FossilOptions
     public static boolean AllowBookEnchantments;
 	public static boolean AllowBreeding;
 	public static boolean VelociraptorFeathers;
+    public static int biomeIDDarknessLair;
+    public static int dimIDDarknessLair;
 
 
     public void Load(Configuration config)
     {
         Gen_Palaeoraphe = config.get("option", "Palaeoraphe", false).getBoolean(false);
+        Gen_HellShips = config.get("option", "Hell Ships", true).getBoolean(true);
         Gen_Academy = config.get("option", "Academy", true).getBoolean(true);
         Gen_Ships = config.get("option", "Ships", true).getBoolean(true);
         Gen_Temple = config.get("option", "Temple", true).getBoolean(true);
@@ -52,6 +56,10 @@ public class FossilOptions
         GallimimusFeathers = config.get("toggle_feathers",  "Gallimimus Feathers", false).getBoolean(false);
         CompsognathusFeathers = config.get("toggle_feathers",  "Compsognathus Feathers", false).getBoolean(false);
         VelociraptorFeathers = config.get("toggle_feathers",  "Velociraptor Feathers", false).getBoolean(false);
+        
+        biomeIDDarknessLair = config.get("biome IDs", "Layer of Darkness ID:", 33).getInt();
+        dimIDDarknessLair = config.get("biome IDs", "Layer of Darkness ID:", 23).getInt();
+
     }
 
 }

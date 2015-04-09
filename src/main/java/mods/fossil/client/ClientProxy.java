@@ -6,16 +6,19 @@ import mods.fossil.client.gui.GuiBoneHelmet;
 import mods.fossil.client.model.*;
 import mods.fossil.client.renderer.entity.*;
 import mods.fossil.client.renderer.item.ItemFigurineRenderer;
+import mods.fossil.client.renderer.item.ItemRenderAnuTotem;
 import mods.fossil.client.renderer.item.ItemRenderTileEntity;
 import mods.fossil.client.renderer.item.ItemVaseAmphoraRenderer;
 import mods.fossil.client.renderer.item.ItemVaseKylixRenderer;
 import mods.fossil.client.renderer.item.ItemVaseVoluteRenderer;
 import mods.fossil.client.renderer.tileentity.RenderFeeder;
 import mods.fossil.client.renderer.tileentity.RenderTNClock;
+import mods.fossil.client.renderer.tileentity.TileEntityAnuTotemRender;
 import mods.fossil.client.renderer.tileentity.TileEntityCultivateRenderer;
 import mods.fossil.client.renderer.tileentity.TileEntityFigurineRenderer;
 import mods.fossil.client.renderer.tileentity.TileEntityVaseRenderer;
 import mods.fossil.entity.EntityAncientJavelin;
+import mods.fossil.entity.EntityAnuEffect;
 import mods.fossil.entity.EntityCultivatedDodoEgg;
 import mods.fossil.entity.EntityDinoEgg;
 import mods.fossil.entity.EntityDodoEgg;
@@ -23,6 +26,7 @@ import mods.fossil.entity.EntityJavelin;
 import mods.fossil.entity.EntityStoneboard;
 import mods.fossil.entity.EntityTerrorBirdEgg;
 import mods.fossil.entity.mob.*;
+import mods.fossil.guiBlocks.TileEntityAnuTotem;
 import mods.fossil.guiBlocks.TileEntityCultivate;
 import mods.fossil.guiBlocks.TileEntityFigurine;
 import mods.fossil.guiBlocks.TileEntityTimeMachine;
@@ -88,6 +92,7 @@ public class ClientProxy extends CommonProxy {
         RenderingRegistry.registerEntityRenderingHandler(EntityTerrorBird.class, new RenderTerrorBird(new ModelTerrorBird(), 0.5F));
         RenderingRegistry.registerEntityRenderingHandler(EntityTerrorBirdEgg.class, new RenderSnowball(Fossil.terrorBirdEgg));
         RenderingRegistry.registerEntityRenderingHandler(EntityElasmotherium.class, new RenderElasmotherium(new ModelElasmotherium(), 0.5F));
+        RenderingRegistry.registerEntityRenderingHandler(EntityAnuEffect.class, new RenderAnuEffect());
 
        
         /*
@@ -119,10 +124,13 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void registerTileEntitySpecialRenderer() {
 		TileEntitySpecialRenderer cultivate = new TileEntityCultivateRenderer();
-
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCultivate.class, cultivate); 
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(Fossil.blockcultivateActive),new ItemRenderTileEntity(cultivate, new TileEntityCultivate()));
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(Fossil.blockcultivateIdle),new ItemRenderTileEntity(cultivate, new TileEntityCultivate()));
+
+		TileEntitySpecialRenderer totem = new TileEntityAnuTotemRender();
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAnuTotem.class, totem); 
+        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(Fossil.anuTotem),new ItemRenderAnuTotem(totem, new TileEntityAnuTotem()));
 
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTimeMachine.class, new RenderTNClock());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFigurine.class, new TileEntityFigurineRenderer());

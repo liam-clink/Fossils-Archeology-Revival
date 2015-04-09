@@ -37,7 +37,7 @@ public class BlockFossil extends BlockStone
 	 */
 	public Item getItemDropped(int var1, Random var2, int var3)
 	{
-		int i = (new Random()).nextInt(1000);
+		int i = (new Random()).nextInt(1100);
 
 		if (i < 1)
 		{
@@ -136,7 +136,11 @@ public class BlockFossil extends BlockStone
 			this.randomMeta = 0;
 			return Items.bone;
 		}
-
+		if (i < 1200)
+		{
+			this.randomMeta = 0;
+			return Fossil.brokenSapling;
+		}
 		this.randomMeta = 0;
 		return Item.getItemFromBlock(Blocks.cobblestone);
 	}
@@ -157,6 +161,7 @@ public class BlockFossil extends BlockStone
 		}
 		return ret;
 	}
+	
 
 	@Override
 	public void registerBlockIcons(IIconRegister par1IIconRegister)

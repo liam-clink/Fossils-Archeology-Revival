@@ -76,13 +76,13 @@ public class ModelDodo extends ModelBase
         setRotation(WingRight, 0F, 0F, 0F);
         Beak = new ModelRenderer(this, 23, 1);
         Beak.addBox(-1.5F, -3F, -8F, 3, 3, 5);
-        Beak.setRotationPoint(0.5F, 9F, -6F);
+        Beak.setRotationPoint(0F, 9F, -6F);
         Beak.setTextureSize(64, 32);
         Beak.mirror = true;
         setRotation(Beak, 0F, 0F, 0F);
         Head = new ModelRenderer(this, 35, 5);
         Head.addBox(-2.5F, -4F, -3F, 5, 4, 4);
-        Head.setRotationPoint(0.5F, 9F, -6F);
+        Head.setRotationPoint(0F, 9F, -6F);
         Head.setTextureSize(64, 32);
         Head.mirror = true;
         setRotation(Head, 0F, 0F, 0F);

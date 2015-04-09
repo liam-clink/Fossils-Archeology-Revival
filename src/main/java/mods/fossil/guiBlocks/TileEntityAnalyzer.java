@@ -4,6 +4,7 @@ import java.util.Random;
 
 import mods.fossil.Fossil;
 import mods.fossil.client.LocalizationStrings;
+import mods.fossil.core.FossilPlants;
 import mods.fossil.fossilEnums.EnumDinoType;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -254,7 +255,8 @@ ISidedInventory {
 						|| (var2 == Items.leather)
 						|| (var2 == Fossil.dodoWing)
 						|| (var2 == Fossil.terrorBirdMeat)
-						|| (var2 == Fossil.quaggaMeat)) {
+						|| (var2 == Fossil.quaggaMeat)
+						|| (var2 == Fossil.brokenSapling)) {
 					this.RawIndex = var1;
 					break;
 				}
@@ -282,20 +284,14 @@ ISidedInventory {
 			int var3;
 
 			if (this.analyzerItemStacks[this.RawIndex].getItem() == Fossil.biofossil) {
-				if (rand < 1) {
-					itemstack = new ItemStack(Fossil.brokenSapling, 1);
-				}
+				
 
-				if (rand > 1 && rand <= 45) {
+				if (rand > -1 && rand <= 50) {
 					itemstack = new ItemStack(Items.dye, 3, 15);
 				}
 
-				if (rand > 45 && rand <= 80) {
+				if (rand > 50 && rand <= 85) {
 					itemstack = new ItemStack(Blocks.sand, 3);
-				}
-
-				if (rand > 85 && rand <= 90) {
-					itemstack = new ItemStack(Fossil.fernSeed, 3);
 				}
 
 				if (rand > 85) {
@@ -313,6 +309,23 @@ ISidedInventory {
 
 					itemstack = new ItemStack(i0, 1);
 				}
+			}
+			if (this.analyzerItemStacks[this.RawIndex].getItem() == Fossil.brokenSapling) {
+				if(rand > 0){
+					itemstack = new ItemStack(Blocks.sand, 2, 0);
+				}
+				if(rand > 35 && rand <= 65){
+					itemstack = new ItemStack(Items.coal, 1, 2);
+				}
+				if(rand > 65 && rand <= 85){
+					itemstack = new ItemStack(Items.dye, 1, 2);
+				}
+				
+				if(rand > 85){
+					//int dnaChoice = new Random().nextInt(100);
+					itemstack = new ItemStack(FossilPlants.fossilSeed_dillhoffia, 1, 2);
+				}
+
 			}
 
 			if (this.analyzerItemStacks[this.RawIndex].getItem() == Item
@@ -355,7 +368,7 @@ ISidedInventory {
 						i0 = Fossil.brokenSapling;
 					} else if (i == 1) {
 						i0 = Fossil.dnaCoelacanth;
-						
+
 					}
 					else if (i == 2) {
 						i0 = Fossil.dnaChicken;

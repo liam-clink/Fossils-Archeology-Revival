@@ -105,7 +105,10 @@ public class BlockFigurine extends BlockContainer
 	{
 		return false;
 	}
-
+	public boolean canProvidePower()
+	{
+		return true;
+	}
 	/**
 	 * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
 	 */

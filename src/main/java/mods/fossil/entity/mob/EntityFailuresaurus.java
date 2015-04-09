@@ -2,6 +2,7 @@ package mods.fossil.entity.mob;
 
 import mods.fossil.Fossil;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.monster.EntityMob;
@@ -28,7 +29,7 @@ public class EntityFailuresaurus extends EntityMob
 		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
 
 	}
-
+	
 	protected void entityInit()
 	{
 		super.entityInit();

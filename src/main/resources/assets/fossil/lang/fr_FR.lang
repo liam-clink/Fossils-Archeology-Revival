@@ -1,6 +1,6 @@
-#Build 7.1.0 - Updated September 3 2014
+#Build 7.0 - Updated September 3 2014
 #French (fr_FR) Localization File
-#Keys last updated April 4 2015
+#Keys last updated October 5 2014
 #Tab Groups
 itemgroup.FCombat=Équipement ancien
 itemgroup.FBlocks=Blocs anciens
@@ -88,11 +88,6 @@ tile.ancientWoodSlab.ancientWood.name=Dalle en bois ancien
 tile.ancientWoodDoubleSlab.ancientWood.name=Dalle en bois ancien
 tile.ancientStoneSlab.ancientStone.name=Dalle en roche ancienne
 tile.ancientStoneDoubleSlab.ancientStone.name=Dalle en roche ancienne
-tile.Limestone.name=Limestone
-tile.LimestoneBrick.name=Limestone Brick
-tile.Dillhoffia.name=Dillhoffia
-tile.Magnolia.name=Magnolia
-tile.slimeTrail.name=Failuresaurus Trail
 
 #Collectables
 tile.figurine.figurine_steve_pristine.name=Figurine antique de Steve
@@ -410,56 +405,44 @@ item.terrorBirdMeat.name=Cuisse d'oiseau-terreur crue
 item.terrorBirdMeatCooked.name=Cuisse d'oiseau-terreur cuite
 item.quaggaMeat.name=Viande de Quagga crue
 item.quaggaMeatCooked.name=Viande de Quagga cuite
-item.eggSarcosuchus.name=Sarcosuchus Egg
-item.dnaSarcosuchus.name=Sarcosuchus DNA
-item.rawSarcosuchus.name=Sarcosuchus Meat
-item.legBone.Sarcosuchus.name=Sarcosuchus Leg Bone
-item.claw.Sarcosuchus.name=Sarcosuchus Osteoderms
-item.foot.Sarcosuchus.name=Sarcosuchus Foot
-item.vertebrae.Sarcosuchus.name=Sarcosuchus Vertebrae
-item.armBone.Sarcosuchus.name=Sarcosuchus Arm Bone
-item.dinoRibCage.Sarcosuchus.name=Sarcosuchus Rib Cage
-item.skull.Sarcosuchus.name=Sarcosuchus Skull
-item.DominicanAmber.name=Dominican Amber
-item.AquaticScarabGem.name=Aquatic Scarab Gem
 
 #Dinosaur related chat messages
-dnaName.head=ADN de 
+dnaName.head=ADN de
 dnaName.tail=
-embryoName.head=Embryon de 
+embryoName.head=Embryon de
 embryoName.tail=
-meatName.head=Viande de 
+meatName.head=Viande de
 meatName.tail=
-mGCName.head=Conque magique: 
+mGCName.head=Conque magique:
 mGCName.tail=
-dEggName.head=Œuf de 
+dEggName.head=Œuf de
 dEggName.tail=
 
 #Order chat messages
-order.head=Ordre: 
+order.head=Ordre:
 order.Stay=Immobile
 order.Follow=Suivre
 order.FreeMove=Libre
 
 #Dinosaur status chat message
-status.Hungry.head= 
-status.Hungry= a faim.
+status.Hungry.head=
+status.Hungry=a faim.
 status.Starve.head=
-status.Starve= est mort de faim.
-status.LearningChest.head=Un 
-status.LearningChest= a appris à ouvrir les coffres.
-status.Betrayed.head=Ce 
-status.Betrayed= ne fera plus jamais confiance au genre humain.
+status.Starve=est mort de faim.
+status.LearningChest.head=Un
+status.LearningChest=a appris à ouvrir les coffres.
+status.Betrayed.head=Ce
+status.Betrayed=ne fera plus jamais confiance au genre humain.
 status.NoSpace.head=
-status.NoSpace= ne dispose pas d'assez d'espace pour pouvoir grandir.
+status.NoSpace=ne dispose pas d'assez d'espace pour pouvoir grandir.
 status.StarveEsc.head=
-status.StarveEsc= s'est échappé puisqu'il mourrait de faim.
-status.SJLBite= a croqué le Sio-Chiu-Le puis s'en est allé.
-status.ChewTime= a besoin de temps pour mâcher.
+status.StarveEsc=s'est échappé puisqu'il mourrait de faim.
+status.SJLBite=a croqué le Sio-Chiu-Le puis s'en est allé.
+status.ChewTime=a besoin de temps pour mâcher.
 status.Full.head=Ce
-status.Full= est repu.
+status.Full=est repu.
 status.Nervous.Head=Vous avez rendu le petit
-status.Nervous= trop nerveux pour qu'il puisse chasser par lui-même.
+status.Nervous=trop nerveux pour qu'il puisse chasser par lui-même.
 status.GemErrorYoung=Ce T. rex est encore trop jeune.
 status.GemErrorHealth=La gemme ne peut rien apporter à une énergie vitale aussi forte.
 status.GemErrorTamed=Ce T. rex a déjà été apprivoisé.
@@ -484,7 +467,6 @@ entity.fossil.Pachycephalosaurus.name=Pachycephalosaurus
 entity.fossil.Deinonychus.name=Deinonychus
 entity.fossil.Gallimimus.name=Gallimimus
 entity.fossil.Allosaurus.name=Allosaurus
-entity.fossil.Sarcosuchus.name=Sarcosuchus
 
 #Non-dinosaur names
 entity.fossil.Mammoth.name=Mammouth
@@ -500,7 +482,7 @@ entity.fossil.TerrorBird.name=Oiseau-terreur
 entity.fossil.Elasmotherium.name=Elasmotherium
 
 #Pedia text
-pedia.text.owner=Propriétaire: 
+pedia.text.owner=Propriétaire:
 pedia.text.chest=* Coffres
 pedia.text.caution=!Dangereux!
 pedia.text.rideable=* Peut être monté
@@ -541,7 +523,6 @@ anuSpeaker.summon=Serviteurs, votre Maître vous appellent.
 anuSpeaker.trans=Réveillez votre sagesse, brutes.
 anuSpeaker.qi=Qi-shock !
 anuSpeaker.fireRain=Faisons pleuvoir un peu de feu !
-anuSpeaker.mySword=Trying to use my magic against me? Bad Idea.
 
 #Friendly pigmen speaking lines
 fpzSpeaker.self=Cochons-zombies:
@@ -554,8 +535,8 @@ fpzSpeaker.anuSommon=Inclinez-vous devant Anu !!
 dinoegg.hatched=Un œuf a éclos !
 dinoegg.noSpace=Cet œuf ne peut apparaître ici.
 dinoegg.head=Un œuf de
-dinoegg.dry= est mort car il était trop sec.
-dinoegg.cold= est mort car il était trop froid.
+dinoegg.dry=est mort car il était trop sec.
+dinoegg.cold=est mort car il était trop froid.
 
 #Cultivator chat messages
 cultivate.outBreak=Attention ! Échec de l'opération de clonage !

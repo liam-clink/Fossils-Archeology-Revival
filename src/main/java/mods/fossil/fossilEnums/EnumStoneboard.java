@@ -2,6 +2,7 @@ package mods.fossil.fossilEnums;
 
 public enum EnumStoneboard
 {
+	//Remember: divide the x and y offsets by 2
     Lighting("Lighting", 32, 16, 0, 0),
     Sociel("Sociel", 16, 16, 32, 0),
     Greatwar("Greatwar", 32, 32, 0, 16),
@@ -21,7 +22,9 @@ public enum EnumStoneboard
     HolyMosa("HolyMosa", 64, 32, 0, 128),
     AnciTM("AnciTM", 32, 32, 96, 0),
     ModTM("ModTM", 16, 32, 128, 0),
-    VigTM("VigTM", 32, 32, 144, 0);
+    VigTM("VigTM", 32, 32, 144, 0),
+    Test("Test", 32, 16, 96, 32);
+
 
     public static final int maxArtTitleLength = "annoyangry".length();
 
@@ -32,12 +35,12 @@ public enum EnumStoneboard
     public final int offsetY;
 //   public static final EnumStoneboard[] allArt = new EnumStoneboard[]{Lighting, Sociel, Greatwar, Killboss, Portol, Herobine, FlatCreep, annoyangry, Rex1, Rex2, Rex3, Rex4, Puzzle, GunFight, Pricess, Mosa, HolyMosa, AnciTM, ModTM, VigTM};
 
-    private EnumStoneboard(String par3Str, int par4, int par5, int par6, int par7)
+    private EnumStoneboard(String title, int xSize, int ySize, int textureX, int textureY)
     {
-        this.title = par3Str;
-        this.sizeX = par4;
-        this.sizeY = par5;
-        this.offsetX = par6;
-        this.offsetY = par7;
+        this.title = title;
+        this.sizeX = xSize;
+        this.sizeY = ySize;
+        this.offsetX = textureX;
+        this.offsetY = textureY;
     }
 }

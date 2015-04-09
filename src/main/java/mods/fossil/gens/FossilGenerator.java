@@ -18,6 +18,7 @@ public class FossilGenerator implements IWorldGenerator {
 
 		case 0:
 			generateSurface(world, random, chunkX * 16, chunkZ * 16);
+			
 		}
 	}
 

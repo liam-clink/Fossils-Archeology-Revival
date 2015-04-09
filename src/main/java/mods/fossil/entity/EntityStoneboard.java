@@ -37,6 +37,7 @@ public class EntityStoneboard extends Entity implements IEntityAdditionalSpawnDa
         this.tickCounter1 = 0;
         this.direction = 0;
         this.yOffset = 0.0F;
+        this.ignoreFrustumCheck = true;
         this.setSize(0.5F, 0.5F);
     }
 

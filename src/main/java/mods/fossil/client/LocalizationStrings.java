@@ -1,5 +1,7 @@
 package mods.fossil.client;
 
+import net.minecraft.util.StatCollector;
+
 public class LocalizationStrings
 {
 	//Achievements
@@ -288,6 +290,9 @@ public class LocalizationStrings
     public static final String FOSSIL_RECORD_NAME = "record_bones";
     public static final String RECORD_BONES_NAME = "record_bones_disc";
     public static final String FOSSILRECORD2_NAME = "record_jp_theme";
+	public static final String BLOCK_ANU_NAME = "anu_block";
+	public static final String BLOCK_ANU_PORTAL_NAME = "anu_portal";
+	public static final String BIOME_ANU = StatCollector.translateToLocal("biome.anu.name");
 
     
     //Dinosaur name strings are handled through DinoEnum.

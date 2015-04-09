@@ -52,7 +52,7 @@ public class ModelPteranodon extends ModelBase {
 		this.setRotateAngle(Body, -0.40893064374227134F, -0.0F, 0.0F);
 		this.Beakb = new ModelRenderer(this, 18, 54);
 		this.Beakb.setRotationPoint(0.0F, 0.0F, 0.0F);
-		this.Beakb.addBox(-1.0001F, 0.0F, -7.0F, 2, 2, 8);
+		this.Beakb.addBox(-1.01F, 0.0F, -7.0F, 2, 2, 8);
 		this.Leg2 = new ModelRenderer(this, 20, 45);
 		this.Leg2.setRotationPoint(1.5F, 21.0F, 6.5F);
 		this.Leg2.addBox(-0.7F, 0.0F, -0.5F, 1, 3, 1);
@@ -111,7 +111,7 @@ public class ModelPteranodon extends ModelBase {
 		this.setRotateAngle(Beak2, 0.0022689280275926286F, -0.0F, 0.0F);
 		this.Beaka = new ModelRenderer(this, 18, 54);
 		this.Beaka.setRotationPoint(0.0F, -2.3F, -5.8F);
-		this.Beaka.addBox(-0.9999F, 0.0F, -7.0F, 2, 2, 8);
+		this.Beaka.addBox(-0.99F, 0.0F, -7.0F, 2, 2, 8);
 		this.setRotateAngle(Beaka, 0.05462880558742251F, -0.0F, 0.0F);
 		this.Neck2 = new ModelRenderer(this, 0, 41);
 		this.Neck2.setRotationPoint(0.0F, 0.1F, 1.0F);
@@ -154,11 +154,17 @@ public class ModelPteranodon extends ModelBase {
 	private void setRotationAngles(Entity entity, float f, float f1, float f2, float f3, float f4, float f5, boolean modelized) {
 		super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 		if(!modelized){
+			  this.Head.rotateAngleY = (f3 / (180F / (float)Math.PI))/3;
+		        this.Head.rotateAngleX = (f4 / (180F / (float)Math.PI))/3 + this.Head.rotateAngleX;
+		        this.Neck2.rotateAngleY = (f3 / (180F / (float)Math.PI))/5;
 		this.Leg.rotateAngleX = MathHelper.cos(f * 0.6662F + (float)Math.PI) * 1.4F * f1;
 		this.Leg2.rotateAngleX = MathHelper.cos(f * 0.6662F) * 1.4F * f1;
 		this.WingL1.rotateAngleX = MathHelper.cos(f * 0.6662F + (float)Math.PI) * 1.4F * f1;
 		this.WingR1.rotateAngleX = MathHelper.cos(f * 0.6662F) * 1.4F * f1;
 		}else{
+			this.Head.rotateAngleY = 0F;
+			this.Head.rotateAngleX = 1.038819970787025F;
+			this.Neck2.rotateAngleY = 0F;
 			this.Leg.rotateAngleX = 0;
 			this.Leg2.rotateAngleX = 0;
 			this.WingL1.rotateAngleX = -0.08726646259971647F;

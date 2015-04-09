@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Random;
 
 import mods.fossil.Fossil;
 import mods.fossil.client.LocalizationStrings;
@@ -14,6 +15,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIAvoidEntity;
@@ -87,6 +89,8 @@ public class EntitySmilodon extends EntityPrehistoric
         this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
         this.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
+        this.targetTasks.addTask(4, new EntityAITargetNonTamed(this, EntityMammoth.class, 200, false));
+        this.targetTasks.addTask(4, new EntityAITargetNonTamed(this, EntityElasmotherium.class, 200, false));
         this.targetTasks.addTask(4, new EntityAITargetNonTamed(this, EntitySheep.class, 200, false));
         this.targetTasks.addTask(4, new EntityAITargetNonTamed(this, EntityDodo.class, 200, false));
         this.targetTasks.addTask(4, new EntityAITargetNonTamed(this, EntityTerrorBird.class, 200, false));
@@ -184,7 +188,17 @@ public class EntitySmilodon extends EntityPrehistoric
         this.dataWatcher.addObject(18, Float.valueOf(this.getHealth()));
         this.dataWatcher.addObject(19, new Byte((byte)0));
         this.dataWatcher.addObject(20, new Byte((byte)BlockColored.func_150032_b(1)));
+        this.dataWatcher.addObject(21,  Byte.valueOf((byte)0));
+
     }
+    public int getSkin()
+	{
+		return this.dataWatcher.getWatchableObjectByte(21);
+	}
+	public void setSkin(int par1)
+	{
+		this.dataWatcher.updateObject(21, Byte.valueOf((byte)par1));
+	}
 
     /**
      * Plays step sound at given x, y, z for the entity
@@ -202,6 +216,7 @@ public class EntitySmilodon extends EntityPrehistoric
         super.writeEntityToNBT(var1);
         var1.setBoolean("Angry", this.isAngry());
         var1.setByte("CollarColor", (byte)this.getCollarColor());
+        var1.setInteger("Albino", this.getSkin());
     }
 
     /**
@@ -211,6 +226,7 @@ public class EntitySmilodon extends EntityPrehistoric
     {
         super.readEntityFromNBT(var1);
         this.setAngry(var1.getBoolean("Angry"));
+        this.setSkin(var1.getInteger("Albino"));
     }
 
     /**
@@ -326,7 +342,29 @@ public class EntitySmilodon extends EntityPrehistoric
             }
         }
     }
+	public String getTexture() {
 
+		if (this.isChild()) {
+			switch (this.getSkin()) {
+			default:
+				return "fossil:textures/mob/Smilodon/Smilodon_Young.png";
+			case 1:
+				return "fossil:textures/mob/Smilodon/Smilodon_White_Young.png";
+			
+			}
+		}
+		else if (!this.isChild()) {
+			switch (this.getSkin()) {
+			default:
+				return "fossil:textures/mob/Smilodon/Smilodon_Adult.png";
+			case 1:
+				return "fossil:textures/mob/Smilodon/Smilodon_White_Adult.png";
+			
+			}
+		}
+		return "fossil:textures/mob/Smilodon/Smilodon_White_Young.png";
+
+	}
     public boolean getSmilodonShaking()
     {
         return this.isShaking;
@@ -336,7 +374,15 @@ public class EntitySmilodon extends EntityPrehistoric
     {
         return 0.75F + (this.prevTimeSmilodonIsShaking + (this.timeSmilodonIsShaking - this.prevTimeSmilodonIsShaking) * var1) / 2.0F * 0.25F;
     }
-
+    @Override
+	public IEntityLivingData onSpawnWithEgg(IEntityLivingData par1EntityLivingData) {
+		if(new Random().nextInt(3) == 0){
+			this.setSkin(1);
+		}else{
+			this.setSkin(0);
+		}
+		return par1EntityLivingData;
+	}
     @SideOnly(Side.CLIENT)
     public float getShakeAngle(float par1, float par2)
     {
@@ -802,13 +848,16 @@ public class EntitySmilodon extends EntityPrehistoric
     public EntityAnimal procreate(EntityAnimal var1)
     {
         EntitySmilodon smilodon = new EntitySmilodon(this.worldObj);
-
         if (this.isTamed())
         {
         	this.func_152115_b(this.getOwner().getUniqueID().toString());
     //        var2.setOwner);
             smilodon.setTamed(true);
-
+            if(((EntitySmilodon)var1).getSkin() == 1 &&this.getSkin() == 1){
+            	smilodon.setSkin(1);
+            }else if(this.getRNG().nextInt(20) == 1){
+            	smilodon.setSkin(1);
+            }
         }
 
         return smilodon;
@@ -879,6 +928,11 @@ public class EntitySmilodon extends EntityPrehistoric
         EntityAgeable var2 = (new EntitySmilodon(this.worldObj)).Imprinting(this.posX, this.posY, this.posZ);
         var2.setGrowingAge(-24000);
         var2.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, this.rotationPitch);
+        if(((EntitySmilodon)var1).getSkin() == 1 &&this.getSkin() == 1){
+        	((EntitySmilodon)var2).setSkin(1);
+        }else if(this.getRNG().nextInt(20) == 1){
+        	((EntitySmilodon)var2).setSkin(1);
+        }
         return var2;
     }
 }

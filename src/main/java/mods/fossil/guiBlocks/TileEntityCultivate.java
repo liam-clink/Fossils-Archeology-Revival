@@ -4,6 +4,7 @@ import java.util.Random;
 
 import mods.fossil.Fossil;
 import mods.fossil.client.LocalizationStrings;
+import mods.fossil.core.FossilPlants;
 import mods.fossil.entity.mob.EntityTerrorBird;
 import mods.fossil.fossilEnums.EnumDinoType;
 import mods.fossil.items.ItemLivingCoelacanth;
@@ -164,7 +165,7 @@ ISidedInventory {
 	 * e.g. the mob spawner uses this to count ticks and creates a new spawn
 	 * inside its implementation.
 	 */
-	
+
 	public void updateEntity() {
 		boolean var1 = this.furnaceCookTime > 0;
 		boolean var2 = false;
@@ -175,13 +176,13 @@ ISidedInventory {
 		} else {
 			cookValue = 6000;
 		}
-			if (this.furnaceCookTime > 0) {
-				isActive = true;
-				worldObj.notifyBlockChange(xCoord, yCoord, zCoord, worldObj.getBlock(xCoord,yCoord,zCoord));
-				}else{
-				isActive = false;
-			}
-		
+		if (this.furnaceCookTime > 0) {
+			isActive = true;
+			worldObj.notifyBlockChange(xCoord, yCoord, zCoord, worldObj.getBlock(xCoord,yCoord,zCoord));
+		}else{
+			isActive = false;
+		}
+
 		if (this.furnaceBurnTime > 0) {
 			--this.furnaceBurnTime;
 		}
@@ -346,8 +347,8 @@ ISidedInventory {
 	}
 
 	private ItemStack CheckSmelt(ItemStack itemstack) {
-		if (itemstack.getItem() == Fossil.brokenSapling) {
-			return new ItemStack(Fossil.palmSap, 1);
+		if (itemstack.getItem() == FossilPlants.fossilSeed_fern) {
+			return new ItemStack(Fossil.fernSeed, 1);
 		}
 
 		if (itemstack.getItem() == Fossil.dnaSheep) {
@@ -498,5 +499,28 @@ ISidedInventory {
 	@Override
 	public void closeInventory() {
 
+	}
+	/**Returns an intiger based on what dna is inside
+	 * 0 = 4 legged animal
+	 * 1 = legless animal
+	 * 2 = plant
+	 * 3 = spore
+	 * 4 = insect
+	 */
+	public int getDNAType() {
+		if(this.getStackInSlot(0) != null){
+			if(this.getStackInSlot(0).getItem() != null){
+				if(this.getStackInSlot(0).getItem() == Fossil.dnaCoelacanth){
+					return 1;
+				}
+				if(this.getStackInSlot(0).getItem() == FossilPlants.fossilSeed_dillhoffia|| this.getStackInSlot(0).getItem() == FossilPlants.seed_sarracina){
+					return 2;
+				}
+				if(this.getStackInSlot(0).getItem() == FossilPlants.fossilSeed_fern){
+					return 2;
+				}
+			}
+		}
+		return 0;
 	}
 }

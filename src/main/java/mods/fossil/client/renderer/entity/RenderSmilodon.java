@@ -1,5 +1,6 @@
 package mods.fossil.client.renderer.entity;
 
+import mods.fossil.entity.mob.EntitySarcosuchus;
 import mods.fossil.entity.mob.EntitySmilodon;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
@@ -9,17 +10,6 @@ import net.minecraft.util.ResourceLocation;
 
 public class RenderSmilodon extends RenderLiving
 {
-    private static final ResourceLocation loc = new ResourceLocation("fossil:textures/mob/Smilodon_Adult.png");
-
-    protected ResourceLocation func_110919_a(EntitySmilodon par1Entity)
-    {
-        return loc;
-    }
-
-    protected ResourceLocation getEntityTexture(Entity par1Entity)
-    {
-        return this.func_110919_a((EntitySmilodon)par1Entity);
-    }
 
     public RenderSmilodon(ModelBase var1, float var2)
     {
@@ -46,7 +36,18 @@ public class RenderSmilodon extends RenderLiving
     {
         this.func_25006_b((EntitySmilodon)var1, var2);
     }
+    protected ResourceLocation func_110919_a(EntitySmilodon par1Entity) {
+		return new ResourceLocation(par1Entity.getTexture());
+	}
+	
 
+	/**
+	 * Returns the location of an entity's texture. Doesn't seem to be called
+	 * unless you call Render.bindEntityTexture.
+	 */
+	protected ResourceLocation getEntityTexture(Entity par1Entity) {
+		return this.func_110919_a((EntitySmilodon) par1Entity);
+	}
     /**
      * Defines what float the third param in setRotationAngles of ModelBase is
      */

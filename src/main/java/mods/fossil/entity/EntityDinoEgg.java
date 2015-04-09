@@ -653,7 +653,9 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
 				case Dilophosaurus:
 					var5 = new EntityDilophosaurus(this.worldObj);
 
-					if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.HOT))
+					if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.NETHER)||BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.JUNGLE)
+							||BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.LUSH)||BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.MESA)
+							||BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.WASTELAND)||BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.SPOOKY))
 					{
 						((EntityDilophosaurus)var5).setSubSpecies(1);
 					}
