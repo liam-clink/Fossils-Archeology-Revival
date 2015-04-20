@@ -78,7 +78,11 @@ public class EntityMosasaurus extends EntitySwimmingDino implements IMob
     {
         return true;
     }
-    
+    public void onLivingUpdate()
+	{
+		breakBlock(5);
+		super.onLivingUpdate();
+	}
     public String getTexture()
     {
         if (this.isModelized())

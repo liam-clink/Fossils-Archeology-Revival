@@ -74,7 +74,11 @@ public class EntityTriceratops extends EntityDinosaur
         
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
     }
-
+    public void onLivingUpdate()
+	{
+		breakBlock(5);
+		super.onLivingUpdate();
+	}
     protected void applyEntityAttributes()
     {
         super.applyEntityAttributes();

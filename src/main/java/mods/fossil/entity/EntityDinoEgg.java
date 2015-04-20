@@ -10,6 +10,7 @@ import mods.fossil.client.gui.GuiPedia;
 import mods.fossil.entity.mob.EntityAllosaurus;
 import mods.fossil.entity.mob.EntityAnkylosaurus;
 import mods.fossil.entity.mob.EntityBrachiosaurus;
+import mods.fossil.entity.mob.EntityCeratosaurus;
 import mods.fossil.entity.mob.EntityCompsognathus;
 import mods.fossil.entity.mob.EntityDeinonychus;
 import mods.fossil.entity.mob.EntityDilophosaurus;
@@ -92,6 +93,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
 	{
 		int var1 = this.DinoInside.ordinal();
 		return var1 < 4 ? "fossil:textures/mob/DinosaurEggs/eggTexture" + (var1 + 1) + ".png" : "fossil:textures/mob/DinosaurEggs/eggTexture" + var1 + ".png";
+		
 	}
 
 	public EntityDinoEgg(World var1)
@@ -799,6 +801,20 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
 					}else{
 						((EntitySarcosuchus)var5).setSubSpecies(0); 
 
+					}
+					break;
+				case Ceratosaurus:
+					var5 = new EntityCeratosaurus(this.worldObj);
+
+					if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.NETHER)||BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.JUNGLE)
+							||BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.LUSH)||BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.MESA)
+							||BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.WASTELAND)||BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.SPOOKY))
+					{
+						((EntityCeratosaurus)var5).setSubSpecies(1);
+					}
+					else
+					{
+						((EntityCeratosaurus)var5).setSubSpecies(0);
 					}
 					break;
 

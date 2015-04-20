@@ -1,5 +1,6 @@
 package mods.fossil.entity;
 
+import mods.fossil.entity.mob.EntityDodoEgg;
 import net.minecraft.dispenser.BehaviorProjectileDispense;
 import net.minecraft.dispenser.IPosition;
 import net.minecraft.entity.IProjectile;
@@ -25,7 +26,7 @@ public class BehaviorDodoEggDispense extends BehaviorProjectileDispense
     {
         if (this.javelin < 0)
         {
-            EntityDodoEgg var3 = new EntityDodoEgg(par1World, par2IPosition.getX(), par2IPosition.getY(), par2IPosition.getZ());
+        	EntityDodoEgg var3 = new EntityDodoEgg(par1World, par2IPosition.getX(), par2IPosition.getY(), par2IPosition.getZ());
             return var3;
         }
 

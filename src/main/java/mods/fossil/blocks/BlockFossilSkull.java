@@ -1,12 +1,16 @@
 package mods.fossil.blocks;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import mods.fossil.Fossil;
-import mods.fossil.client.LocalizationStrings;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockDirectional;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.monster.EntityIronGolem;
+import net.minecraft.entity.monster.EntitySnowman;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
@@ -14,75 +18,43 @@ import net.minecraft.world.World;
 
 public class BlockFossilSkull extends BlockDirectional
 {
-	private boolean isLantern;
-	private IIcon Front;
-	private IIcon Back;
+    private boolean isActive;
+    @SideOnly(Side.CLIENT)
+    private IIcon textureTop;
+    @SideOnly(Side.CLIENT)
+    private IIcon textureFront;
 
-	public BlockFossilSkull(boolean isLantern)
-	{
-		super(Material.rock);
-		setHardness(1.0F);
-		setStepSound(Block.soundTypeStone);
-		setCreativeTab(Fossil.tabFBlocks);
-		//this.blockIndexInTexture = var2;
-		this.setTickRandomly(true);
-		this.isLantern = isLantern;
-		if(isLantern) {
-			setLightLevel(0.9375F);
-			setBlockName(LocalizationStrings.SKULL_LANTERN_NAME);
-		} else {
-			setBlockName(LocalizationStrings.BLOCK_SKULL_NAME);
-		}
-	}
-	/*public int getRenderType()
+    public BlockFossilSkull(boolean isActive)
     {
-    	return 2303;
-    }*/
+        super(Material.rock);
+        this.setTickRandomly(true);
+        this.isActive = isActive;
+        this.setCreativeTab(Fossil.tabFBlocks);
+        this.setBlockName(isActive ? "skullLantern" : "skullBlock");
+    }
 
-	/**
-	 * When this method is called, your block should register all the icons it needs with the given IconRegister. This
-	 * is the only chance you get to register icons.
-	 */
-	public void registerBlockIcons(IIconRegister par1IconRegister)
-	{
-		this.blockIcon = par1IconRegister.registerIcon("fossil:Skull_Side");
-		this.Front = this.isLantern ? par1IconRegister.registerIcon("fossil:Skull_Lantern_Front") : par1IconRegister.registerIcon("fossil:Skull_Front");
-		this.Back = par1IconRegister.registerIcon("fossil:Skull_Back");//TODO: Bottom!
-	}
+    /**
+     * Gets the block's texture. Args: side, meta
+     */
+    @SideOnly(Side.CLIENT)
+    public IIcon getIcon(int side, int meta)
+    {
+        return side == 1 ? this.textureTop : (side == 0 ? this.textureTop : (meta == 2 && side == 2 ? this.textureFront : (meta == 3 && side == 5 ? this.textureFront : (meta == 0 && side == 3 ? this.textureFront : (meta == 1 && side == 4 ? this.textureFront : this.blockIcon)))));
+    }
+    /**
+     * Called when the block is placed in the world.
+     */
+    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack)
+    {
+        int l = MathHelper.floor_double((double)(entity.rotationYaw * 4.0F / 360.0F) + 2.5D) & 3;
+        world.setBlockMetadataWithNotify(x, y, z, l, 2);
+    }
 
-	/**
-	 * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
-	 */
-	public IIcon getIcon(int par1, int par2)
-	{
-		return par1 == 1 ? this.Back : (par1 == 0 ? this.blockIcon : (par1 != par2 ? this.blockIcon : this.Front));
-	}
-
-	/**
-	 * Called when the block is placed in the world.
-	 */
-	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack)
-	{
-		int l = MathHelper.floor_double((double)(par5EntityLivingBase.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
-
-		if (l == 0)
-		{
-			par1World.setBlockMetadataWithNotify(par2, par3, par4, 2, 2);
-		}
-
-		if (l == 1)
-		{
-			par1World.setBlockMetadataWithNotify(par2, par3, par4, 5, 2);
-		}
-
-		if (l == 2)
-		{
-			par1World.setBlockMetadataWithNotify(par2, par3, par4, 3, 2);
-		}
-
-		if (l == 3)
-		{
-			par1World.setBlockMetadataWithNotify(par2, par3, par4, 4, 2);
-		}
-	}
+    @SideOnly(Side.CLIENT)
+    public void registerBlockIcons(IIconRegister iicon)
+    {
+        this.textureFront = iicon.registerIcon("fossil:Skull_Front_" + (this.isActive ? "on" : "off"));
+        this.textureTop = iicon.registerIcon("fossil:Skull_Back");
+        this.blockIcon = iicon.registerIcon("fossil:Skull_Side");
+    }
 }

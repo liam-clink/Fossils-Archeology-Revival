@@ -46,7 +46,7 @@ public class BlockTar extends Block
 		double var6 = (double)((float)x + random.nextFloat());
 		double var8 = (double)y - 0.05D;
 		double var10 = (double)((float)z + random.nextFloat());
-		FossilFX.spawnParticle("tarBubble", var6, var8 + 1, var10, 0.0D, 0.0D, 0.0D);
+		FossilFX.spawnParticle("tarBubble", var6, var8 + 1, var10, 0.0D, 0.0D, 0.0D, 2);
 		if (random.nextInt(200) == 0)
 		{
 			world.playSound(x, y, z, "fossil:tar", 0.1F + random.nextFloat() * 0.2F, 0.4F + random.nextFloat() * 0.15F, false);

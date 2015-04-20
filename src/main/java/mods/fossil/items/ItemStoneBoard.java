@@ -3,6 +3,7 @@ package mods.fossil.items;
 import mods.fossil.Fossil;
 import mods.fossil.client.LocalizationStrings;
 import mods.fossil.entity.EntityStoneboard;
+import mods.fossil.handler.FossilAchievementHandler;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -43,6 +44,7 @@ public class ItemStoneBoard extends Item
                     {
                         world.spawnEntityInWorld(var12);
                     }
+                    var2.addStat(FossilAchievementHandler.tablet, 1);
 
                     --var1.stackSize;
                 }

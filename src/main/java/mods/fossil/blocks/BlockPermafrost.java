@@ -4,10 +4,12 @@ import java.util.Random;
 
 import mods.fossil.Fossil;
 import mods.fossil.client.LocalizationStrings;
+import mods.fossil.handler.FossilAchievementHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBreakable;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -28,7 +30,11 @@ public class BlockPermafrost extends BlockBreakable
 		setBlockName(LocalizationStrings.BLOCK_PERMAFROST_NAME);
 		setCreativeTab(Fossil.tabFBlocks);
 	}
-
+	public void harvestBlock(World world, EntityPlayer player, int x, int y, int z, int i)
+	{
+		super.harvestBlock(world, player, x, y, z, i); 
+		player.triggerAchievement(FossilAchievementHandler.firstFossil);
+	}
 	/**
 	 * Returns which pass should this block be rendered on. 0 for solids and 1 for alpha
 	 */

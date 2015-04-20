@@ -81,7 +81,11 @@ public class EntityAnkylosaurus extends EntityDinosaur
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(EnumDinoType.Ankylosaurus.Health0);
         this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(EnumDinoType.Ankylosaurus.Strength0);
     }
-
+    public void onLivingUpdate()
+	{
+		breakBlock(5);
+		super.onLivingUpdate();
+	}
     /**
      * Returns the texture's file path as a String.
      */

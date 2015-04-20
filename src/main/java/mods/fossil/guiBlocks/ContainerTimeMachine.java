@@ -17,14 +17,7 @@ public class ContainerTimeMachine extends Container {
 		int var3;
 		int var4;
 
-		for (var3 = 0; var3 < 2; ++var3) {
-			for (var4 = 0; var4 < 3; ++var4) {
-				this.addSlotToContainer(new Slot(var2, var4 + var3 * 3,
-						7 + 18 * var3, 17 + 18 * var4));
-			}
-		}
-
-		this.addSlotToContainer(new Slot(var2, 6, 79, 36));
+		this.addSlotToContainer(new Slot(var2, 6, 36, 36));
 
 		for (var3 = 0; var3 < 3; ++var3) {
 			for (var4 = 0; var4 < 9; ++var4) {

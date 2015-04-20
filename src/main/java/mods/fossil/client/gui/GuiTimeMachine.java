@@ -57,7 +57,7 @@ public class GuiTimeMachine extends GuiContainer
         this.timeMachineInstance.getClass();
         float var9 = var10000 / 1000.0F;
         int var8 = (int)(var9 * 75.0F);
-        this.drawTexturedModalRect(var6 + 51, var7 + 6, 176, 1, 75, var8);
+        this.drawTexturedModalRect(var6 + 7, var7 + 6, 176, 1, 75, var8);
     }
 
     /**

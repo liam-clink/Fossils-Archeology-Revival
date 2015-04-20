@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Random;
 
 import mods.fossil.Fossil;
 import mods.fossil.client.LocalizationStrings;
@@ -12,6 +13,7 @@ import mods.fossil.client.gui.GuiPedia;
 import mods.fossil.fossilAI.DinoAIRideGround;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIEatGrass;
@@ -159,7 +161,41 @@ public class EntityMammoth extends EntityPrehistoric implements IShearable
      */
     public String getTexture()
     {
-        return this.isChild() ? "fossil:textures/mob/MammothYoung.png" : (!this.getSheared() ? "fossil:textures/mob/MammothAdult.png" : "fossil:textures/mob/MammothFurless.png");
+    	if(this.getSheared()){
+    		switch (this.getSkin()) {
+			default:
+				return "fossil:textures/mob/Mammoth/Mammoth_Brown_Furless.png";
+			case 1:
+				return "fossil:textures/mob/Mammoth/Mammoth_Dark_Brown_Furless.png";
+			case 2:
+				return "fossil:textures/mob/Mammoth/Mammoth_White_Furless.png";
+			}
+    	}
+    	if (!this.isChild()) {
+			switch (this.getSkin()) {
+			default:
+				return "fossil:textures/mob/Mammoth/Mammoth_Brown_Adult.png";
+			case 1:
+				return "fossil:textures/mob/Mammoth/Mammoth_Dark_Brown_Adult.png";
+			case 2:
+				return "fossil:textures/mob/Mammoth/Mammoth_White_Adult.png";
+			}
+		}
+		else if (this.isChild()) {
+			switch (this.getSkin()) {
+			default:
+				return "fossil:textures/mob/Mammoth/Mammoth_Brown_Baby.png";
+			case 1:
+				return "fossil:textures/mob/Mammoth/Mammoth_Dark_Brown_Baby.png";
+			case 2:
+				return "fossil:textures/mob/Mammoth/Mammoth_Dark_Brown_Baby.png";
+			}
+		}
+
+
+		return "fossil:textures/mob/Mammoth/Mammoth_Brown_Adult.png";
+
+      //  return this.isChild() ? "fossil:textures/mob/MammothYoung.png" : (!this.getSheared() ? "fossil:textures/mob/MammothAdult.png" : "fossil:textures/mob/MammothFurless.png");
     }
     
     @Override
@@ -196,6 +232,8 @@ public class EntityMammoth extends EntityPrehistoric implements IShearable
         super.writeEntityToNBT(var1);
         var1.setBoolean("Sheared", this.getSheared());
         var1.setByte("Color", (byte)this.getFleeceColor());
+        var1.setInteger("Type", this.getSkin());
+
     }
 
     /**
@@ -206,6 +244,7 @@ public class EntityMammoth extends EntityPrehistoric implements IShearable
         super.readEntityFromNBT(var1);
         this.setSheared(var1.getBoolean("Sheared"));
         this.setFleeceColor(var1.getByte("Color"));
+        this.setSkin(var1.getInteger("Type"));
     }
     
     /**
@@ -276,6 +315,7 @@ public class EntityMammoth extends EntityPrehistoric implements IShearable
     {
         super.entityInit();
         this.dataWatcher.addObject(18, new Byte((byte)3));
+        this.dataWatcher.addObject(21,  Byte.valueOf((byte)0));
     }
 
     /**
@@ -317,7 +357,15 @@ public class EntityMammoth extends EntityPrehistoric implements IShearable
         player.rotationPitch = this.rotationPitch;
         player.mountEntity(this);
     }
-    
+    public int getSkin()
+	{
+		return this.dataWatcher.getWatchableObjectByte(21);
+	}
+	public void setSkin(int par1)
+	{
+		this.dataWatcher.updateObject(21, Byte.valueOf((byte)par1));
+	}
+	
     @SideOnly(Side.CLIENT)
     public void ShowPedia(GuiPedia p0)
     {
@@ -435,7 +483,15 @@ public class EntityMammoth extends EntityPrehistoric implements IShearable
 
         //TODO show all blocks the dino can eat
     }
-
+    @Override
+  	public IEntityLivingData onSpawnWithEgg(IEntityLivingData par1EntityLivingData) {
+  		if(new Random().nextInt(3) == 0){
+  			this.setSkin(2);
+  		}else{
+  			this.setSkin(this.getRNG().nextInt(2));
+  		}
+  		return par1EntityLivingData;
+  	}
     @SideOnly(Side.CLIENT)
     public void ShowPedia2(GuiPedia p0)
     {
@@ -482,7 +538,12 @@ public class EntityMammoth extends EntityPrehistoric implements IShearable
 
         for (int var9 = 0; var9 < var8; ++var9)
         {
+        	if(this.getSkin() != 2){
             var7.add(new ItemStack(Blocks.wool, 1, 12));
+        	}else{
+                var7.add(new ItemStack(Blocks.wool, 1, 0));
+
+        	}
         }
 
         this.setSheared(true);

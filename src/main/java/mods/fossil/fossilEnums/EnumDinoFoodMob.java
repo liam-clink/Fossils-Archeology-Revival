@@ -46,6 +46,9 @@ public enum EnumDinoFoodMob
     TerrorBird(EntityTerrorBird.class, 40, 3),
     Mammoth(EntityMammoth.class,100, 7),
     Elasmotherium(EntityElasmotherium.class,80, 7),
+    Confuciusornis(EntityConfuciusornis.class, 15, 2),
+    Ceratosaurus(EntityCeratosaurus.class, 25, 1),
+
     ;
     public Class preyClass;
     public int FoodValue;

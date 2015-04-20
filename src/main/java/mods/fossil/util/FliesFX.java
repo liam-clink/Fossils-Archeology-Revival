@@ -13,14 +13,13 @@ public class FliesFX extends EntityFX
 {
     //declare your variables
     public static final ResourceLocation resourceloc = new ResourceLocation("fossil:textures/Flies.png");
+    private static final ResourceLocation particles = new ResourceLocation("textures/particle/particles.png");
+
     private static TextureManager textureManager = Minecraft.getMinecraft().getTextureManager(); //get the TextureManager instance
 
     float particleScaleOverTime;
 
-    public FliesFX(World par1World, double par2, double par4, double par6, double par8, double par10, double par12)
-    {
-        this(par1World, par2, par4, par6, par8, par10, par12, 2.0F);
-    }
+
 
     public FliesFX(World par1World, double par2, double par4, double par6, double par8, double par10, double par12, float par14)
     {
@@ -73,7 +72,7 @@ public class FliesFX extends EntityFX
         tessellator1.addVertexWithUV(f11 + f1 * f10 + f4 * f10, f12 + f2 * f10, f13 + f3 * f10 + f5 * f10, f0, f8);
         tessellator1.addVertexWithUV((f11 + f1 * f10) - f4 * f10, f12 - f2 * f10, (f13 + f3 * f10) - f5 * f10, f0, f9);
         tessellator1.draw();
-//        GL11.glBindTexture(GL11.GL_TEXTURE_2D, mc.renderEngine.getTexture("/particles.png"));
+        FMLClientHandler.instance().getClient().renderEngine.bindTexture(particles);
     }
 
     /**

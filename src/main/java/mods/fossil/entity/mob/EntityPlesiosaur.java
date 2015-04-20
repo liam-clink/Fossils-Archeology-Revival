@@ -131,7 +131,11 @@ public class EntityPlesiosaur extends EntitySwimmingDino implements IMob
     public boolean shouldDismountInWater(Entity rider){
         return false;
     }
-    
+    public void onLivingUpdate()
+	{
+		breakBlock(5);
+		super.onLivingUpdate();
+	}
     /**
      * Returns the texture's file path as a String.
      */

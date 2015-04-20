@@ -6,9 +6,11 @@ import java.util.Random;
 import mods.fossil.Fossil;
 import mods.fossil.client.LocalizationStrings;
 import mods.fossil.fossilEnums.EnumDinoType;
+import mods.fossil.handler.FossilAchievementHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStone;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -144,7 +146,11 @@ public class BlockFossil extends BlockStone
 		this.randomMeta = 0;
 		return Item.getItemFromBlock(Blocks.cobblestone);
 	}
-
+	public void harvestBlock(World world, EntityPlayer player, int x, int y, int z, int i)
+	{
+		super.harvestBlock(world, player, x, y, z, i); 
+		player.triggerAchievement(FossilAchievementHandler.firstFossil);
+	}
 	@Override
 	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune)
 	{
@@ -161,7 +167,7 @@ public class BlockFossil extends BlockStone
 		}
 		return ret;
 	}
-	
+
 
 	@Override
 	public void registerBlockIcons(IIconRegister par1IIconRegister)

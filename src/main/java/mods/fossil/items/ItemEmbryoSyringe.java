@@ -155,7 +155,7 @@ public class ItemEmbryoSyringe extends Item
                 thisEntity.worldObj.spawnParticle("smoke", thisEntity.posX + (double)(this.rand.nextFloat() * thisEntity.width * 2.0F) - (double)thisEntity.width, thisEntity.posY + 0.5D + (double)(this.rand.nextFloat() * thisEntity.height), thisEntity.posZ + (double)(this.rand.nextFloat() * thisEntity.width * 2.0F) - (double)thisEntity.width, var4, var6, var8);
             }
             
-            player.triggerAchievement(FossilAchievementHandler.IceAge);
+            //player.triggerAchievement(FossilAchievementHandler.IceAge);
             return true;
         }
 

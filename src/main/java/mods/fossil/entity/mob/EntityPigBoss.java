@@ -176,6 +176,15 @@ public class EntityPigBoss extends EntityMob implements IBossDisplayData, IRange
      */
     public void onUpdate()
     {
+    	for (int var7 = 0; var7 < worldObj.playerEntities.size(); ++var7) {
+			EntityPlayer P = (EntityPlayer) worldObj.playerEntities.get(var7);
+
+			if (Math.pow(this.posX - P.posX, 2D) + Math.pow(this.posY - P.posY, 2D) + Math.pow(this.posZ - P.posZ, 2D) < 100)
+			{
+				P.addStat(FossilAchievementHandler.anuAttack, 1);
+				}
+			
+		}
         if (this.randomSoundDelay > 0 && --this.randomSoundDelay == 0)
         {
             this.worldObj.playSoundAtEntity(this, "mob.zombiepig.zpigangry", this.getSoundVolume() * 2.0F, ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F) * 1.8F);
@@ -475,7 +484,7 @@ public class EntityPigBoss extends EntityMob implements IBossDisplayData, IRange
     		
             if (!this.worldObj.provider.isHellWorld)
             {
-            	((EntityPlayer)entityplayer).triggerAchievement(FossilAchievementHandler.pigBossOnEarth);
+            	//((EntityPlayer)entityplayer).triggerAchievement(FossilAchievementHandler.pigBossOnEarth);
             }
     		
         	return entityplayer;

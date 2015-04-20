@@ -27,7 +27,7 @@ public class ItemRenderTileEntity implements IItemRenderer {
 		if(type == IItemRenderer.ItemRenderType.ENTITY){
 			GL11.glTranslatef(-0.5F, 0.0F, -0.5F);
 		}
-		float rot = 0;
+		GL11.glTranslatef(0, -0.1F, 0);
 		GL11.glPushMatrix();
 		this.render.renderTileEntityAt(this.entity, 0.0D, 0.0D, 0.0D, 0.0F);
 		GL11.glPopMatrix();

@@ -74,7 +74,16 @@ public class ItemAncientsword extends ItemSword
     private boolean checkHelmet(EntityPlayer var1)
     {
         ItemStack var2 = var1.inventory.armorInventory[3];
-        return var2 == null ? false : var2.getItem() == Fossil.ancienthelmet;
+        if(var2 == null){
+        	return false;
+        }
+        if(var2.getItem() == null){
+        	 if(var2.getItem() == Fossil.ancienthelmet){
+             	return true;
+             }	
+        	 return false;
+        }
+        return false;
     }
 
     @Override

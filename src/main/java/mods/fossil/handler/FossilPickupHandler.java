@@ -19,12 +19,12 @@ public class FossilPickupHandler
 
         if (item.getEntityItem().getItem() == Fossil.biofossil)
         {
-            player.addStat(FossilAchievementHandler.FoundFossils, 1);
+       //     player.addStat(FossilAchievementHandler.FoundFossils, 1);
         }
         
         if (item.getEntityItem().getItem() == Fossil.icedMeat)
         {
-            player.addStat(FossilAchievementHandler.Permafrost, 1);
+         //   player.addStat(FossilAchievementHandler.Permafrost, 1);
         }
     }
 }

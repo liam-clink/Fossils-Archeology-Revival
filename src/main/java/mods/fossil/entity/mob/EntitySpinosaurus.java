@@ -444,6 +444,7 @@ public class EntitySpinosaurus extends EntityDinosaur implements IWaterDino
      */
     public void onLivingUpdate()
     {
+    	breakBlock(5);
         if (!this.isWeak())
         {
             this.handleScream();

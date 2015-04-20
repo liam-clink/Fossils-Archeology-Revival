@@ -3,6 +3,7 @@ package mods.fossil.guiBlocks;
 import java.util.Random;
 
 import mods.fossil.Fossil;
+import mods.fossil.client.LocalizationStrings;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -10,6 +11,8 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -18,6 +21,7 @@ public class TileEntityTimeMachine extends TileEntity implements IInventory,
 		ISidedInventory {
 	final int MEMORY_WIDTH = 100;
 	final int MEMORY_HEIGHT = 256;
+	private String customName;
 	public int field_40068_a;
 	public float field_40063_b;
 	public float field_40061_d;
@@ -37,7 +41,16 @@ public class TileEntityTimeMachine extends TileEntity implements IInventory,
 	private int restoringLayer = 60;
 	private int restoreTick = 0;
 	private final int RESTORE_TICK = 10;
-
+	public boolean isClockInPlace(){
+		if(this.getStackInSlot(6) != null){
+			if(this.getStackInSlot(6).getItem() != null){
+				if(this.getStackInSlot(6).getItem() == Fossil.ancientClock){
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 	/**
 	 * Allows the entity to update its state. Overridden in most subclasses,
 	 * e.g. the mob spawner uses this to count ticks and creates a new spawn
@@ -46,9 +59,17 @@ public class TileEntityTimeMachine extends TileEntity implements IInventory,
 	public void updateEntity() {
 		super.updateEntity();
 		this.UpdateClock();
-
+		if(this.chargeLevel != 0){
+			if(!this.isClockInPlace()){
+				this.chargeLevel = 0;
+			}	
+		}
 		if (!this.isRestoring) {
-			this.charge();
+			
+			if(this.isClockInPlace()){
+				this.charge();
+			}
+
 
 			if (this.memoryArray == null || this.memoryMDArray == null) {
 				this.startMemory();
@@ -274,12 +295,6 @@ public class TileEntityTimeMachine extends TileEntity implements IInventory,
 		}
 	}
 
-	/**
-	 * Returns the name of the inventory.
-	 */
-	public String getInvName() {
-		return "Time Machine Stack";
-	}
 
 	/**
 	 * Returns the maximum stack size for a inventory slot. Seems to always be
@@ -372,52 +387,97 @@ public class TileEntityTimeMachine extends TileEntity implements IInventory,
 					|| var2 == Blocks.diamond_ore;
 		}
 	}
+	public void readFromNBT(NBTTagCompound var1) {
+		super.readFromNBT(var1);
+		NBTTagList var2 = var1.getTagList("Items", 10);
+		this.insideStack = new ItemStack[this.getSizeInventory()];
 
+		for (int var3 = 0; var3 < var2.tagCount(); ++var3) {
+			NBTTagCompound var4 = (NBTTagCompound) var2.getCompoundTagAt(var3);
+			byte var5 = var4.getByte("Slot");
+
+			if (var5 >= 0 && var5 < this.insideStack.length) {
+				this.insideStack[var5] = ItemStack
+						.loadItemStackFromNBT(var4);
+			}
+		}
+
+		this.chargeLevel = var1.getShort("chargeLevel");
+
+
+		if (var1.hasKey("CustomName")) {
+			this.customName = var1.getString("CustomName");
+		}
+	}
+	public void writeToNBT(NBTTagCompound var1) {
+		super.writeToNBT(var1);
+		var1.setShort("chargeLevel", (short) this.chargeLevel);
+		NBTTagList var2 = new NBTTagList();
+
+		for (int var3 = 0; var3 < this.insideStack.length; ++var3) {
+			if (this.insideStack[var3] != null) {
+				NBTTagCompound var4 = new NBTTagCompound();
+				var4.setByte("Slot", (byte) var3);
+				this.insideStack[var3].writeToNBT(var4);
+				var2.appendTag(var4);
+			}
+		}
+
+		var1.setTag("Items", var2);
+
+		if (this.isInvNameLocalized()) {
+			var1.setString("CustomName", this.customName);
+		}
+	}
 	@Override
 	public int[] getAccessibleSlotsFromSide(int var1) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public boolean canInsertItem(int i, ItemStack itemstack, int j) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean canExtractItem(int i, ItemStack itemstack, int j) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public String getInventoryName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public boolean hasCustomInventoryName() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public void openInventory() {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void closeInventory() {
-		// TODO Auto-generated method stub
-
 	}
+	public String getInvName() {
+		return this.isInvNameLocalized() ? this.customName : "tile."
+				+ LocalizationStrings.BLOCK_TIMEMACHINE_NAME + ".name";
+	}
+	@Override
+	public String getInventoryName() {
+		return this.isInvNameLocalized() ? this.customName : "tile."
+				+ LocalizationStrings.BLOCK_TIMEMACHINE_NAME + ".name";
+	}
+
+	/**
+	 * If this returns false, the inventory name will be used as an unlocalized
+	 * name, and translated into the player's language. Otherwise it will be
+	 * used directly.
+	 */
+	public boolean isInvNameLocalized() {
+		return this.customName != null && this.customName.length() > 0;
+	}
+
 }

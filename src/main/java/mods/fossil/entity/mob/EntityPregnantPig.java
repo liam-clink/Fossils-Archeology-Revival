@@ -12,8 +12,7 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
 
-public class EntityPregnantPig implements IViviparous, IExtendedEntityProperties
-{
+public class EntityPregnantPig implements IViviparous, IExtendedEntityProperties{
 	public final static String PREGNANT_PIG_PROP = "EntityPregnantPig";
 	private final EntityPig pig;
 	

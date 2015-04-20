@@ -7,7 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import mods.fossil.Fossil;
 import mods.fossil.core.FossilPlants;
+import mods.fossil.util.FossilFX;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.BlockDoublePlant;
@@ -44,6 +46,7 @@ public class BlockFossilTallPlant extends BlockDoublePlant implements IGrowable,
 		this.textureName = string;
 	}
 
+
 	/**
 	 * The type of render function that is called for this block
 	 */
@@ -51,7 +54,29 @@ public class BlockFossilTallPlant extends BlockDoublePlant implements IGrowable,
 	{
 		return 40;
 	}
-
+    @SideOnly(Side.CLIENT)
+	public void randomDisplayTick(World world, int i, int j, int k, Random random)
+	{
+    	 if(this == FossilPlants.mutantPlant){
+				if(world.getBlockMetadata(i, j, k) != 0){
+					int l = ((MathHelper.floor_double((double)(1 * 4.0F / 360.0F) + 0.5D) & 3) + 2) % 4;
+					int q = 8 | l;
+					world.spawnParticle("blockcrack_" + Block.getIdFromBlock(FossilPlants.mutantPlant) + "_" + q, i + ((double)random.nextFloat()), j + ((double)random.nextFloat()), k + ((double)random.nextFloat()), 4.0D * ((double)random.nextFloat()), 0.5D, ((double)random.nextFloat()) * 4.0D);
+					world.spawnParticle("blockcrack_" + Block.getIdFromBlock(FossilPlants.mutantPlant) + "_" + q, i + ((double)random.nextFloat()), j + ((double)random.nextFloat()), k + ((double)random.nextFloat()), 4.0D * ((double)random.nextFloat()), 0.5D, ((double)random.nextFloat()) * 4.0D);
+					world.spawnParticle("blockcrack_" + Block.getIdFromBlock(FossilPlants.mutantPlant) + "_" + q, i + ((double)random.nextFloat()), j + ((double)random.nextFloat()), k + ((double)random.nextFloat()), 4.0D * ((double)random.nextFloat() - 0.5D), 0.5D, ((double)random.nextFloat() - 0.5D) * 4.0D);
+					world.spawnParticle("blockcrack_" + Block.getIdFromBlock(FossilPlants.mutantPlant) + "_" + q, i + ((double)random.nextFloat()), j + ((double)random.nextFloat()), k + ((double)random.nextFloat()), 4.0D * ((double)random.nextFloat() - 0.5D), 0.5D, ((double)random.nextFloat() - 0.5D) * 4.0D);
+				}
+			}
+		if(this == FossilPlants.sarracina){
+			if(world.getBlockMetadata(i, j, k) == 0){
+			FossilFX.spawnParticle("flies", i + 0.7, j + 0.8, k + 0.6, 0.0D, 1.5D, 0.0D, 3);
+			FossilFX.spawnParticle("flies", i + 0.7, j + 0.5, k, 0.0D, 1.5D, 0.0D, 2);
+			FossilFX.spawnParticle("flies", i, j + 0.5, k + 0.5, 0.0D, 1.5D, 0.0D, 4);
+			FossilFX.spawnParticle("flies", i + 0.3, j + 0.5, k + 0.9, 0.0D, 1.5D, 0.0D, 4);
+			}
+			
+		}
+	}
 	/**
 	 * Updates the blocks bounds based on its current state. Args: world, x, y, z
 	 */
@@ -258,7 +283,6 @@ public class BlockFossilTallPlant extends BlockDoublePlant implements IGrowable,
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int var6, float var7, float var8, float var9){
 		ItemStack itemstack = player.getCurrentEquippedItem();
-		if(this == FossilPlants.bennettitales_small){
 			if(itemstack != null){
 				if(itemstack.getItem() != null){
 					if(itemstack.getItem() == Items.dye){
@@ -268,7 +292,6 @@ public class BlockFossilTallPlant extends BlockDoublePlant implements IGrowable,
 					}
 				}
 			}
-		}
 		return false;
 	}
 	@SideOnly(Side.CLIENT)
@@ -324,21 +347,4 @@ public class BlockFossilTallPlant extends BlockDoublePlant implements IGrowable,
 		this.dropBlockAsItem(world, x, y, z, new ItemStack(this, 1, l));
 	}
 
-	@Override
-	public boolean isShearable(ItemStack item, IBlockAccess world, int x, int y, int z)
-	{
-		int metadata = world.getBlockMetadata(x, y, z);
-		int type = func_149890_d(metadata);
-		return func_149887_c(metadata) && (type == 3 || type == 4);
-	}
-
-	@Override
-	public ArrayList<ItemStack> onSheared(ItemStack item, IBlockAccess world, int x, int y, int z, int fortune)
-	{
-		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
-		int type = func_149890_d(world.getBlockMetadata(x, y, z));
-		if (type == 3 || type == 2)
-			ret.add(new ItemStack(Blocks.tallgrass, 2, type == 3 ? 2 : 1));
-		return ret;
-	}
 }

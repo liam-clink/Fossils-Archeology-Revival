@@ -5,6 +5,7 @@ import java.util.Random;
 import mods.fossil.Fossil;
 import mods.fossil.client.ClientProxy;
 import mods.fossil.client.LocalizationStrings;
+import mods.fossil.core.FossilPlants;
 import mods.fossil.entity.mob.EntityFailuresaurus;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -40,7 +41,6 @@ public class BlockCultivate extends BlockContainer {
 	private IIcon Top;
 	@SideOnly(Side.CLIENT)
 	private IIcon Bottom;
-
 	public BlockCultivate(boolean isActive) {
 		super(Material.glass);
 		setLightLevel(0.9375F);
@@ -60,7 +60,9 @@ public class BlockCultivate extends BlockContainer {
 	}
 
 	public Item getItemDropped(int par1, Random rand, int par2) {
+
 		return Item.getItemFromBlock(Fossil.blockcultivateIdle);
+
 	}
 
 	/**
@@ -182,9 +184,14 @@ public class BlockCultivate extends BlockContainer {
 		keepFurnaceInventory = true;
 
 		if (isActive) {
+
 			world.setBlock(x, y, z, Fossil.blockcultivateActive);
+
 		} else {
+
 			world.setBlock(x, y, z, Fossil.blockcultivateIdle);
+
+
 		}
 
 		keepFurnaceInventory = false;
@@ -199,6 +206,7 @@ public class BlockCultivate extends BlockContainer {
 	 */
 	@Override
 	public TileEntity createNewTileEntity(World world, int par2) {
+
 		return new TileEntityCultivate();
 	}
 
@@ -223,8 +231,7 @@ public class BlockCultivate extends BlockContainer {
 	 */
 	private void ReturnDNA(World world, int x, int y, int z) {
 		if (!keepFurnaceInventory) {
-			TileEntityCultivate tileentity = (TileEntityCultivate) world
-					.getTileEntity(x, y, z);
+			TileEntityCultivate tileentity = (TileEntityCultivate) world.getTileEntity(x, y, z);
 			if(tileentity != null){
 				ItemStack itemstack = tileentity.getStackInSlot(0);
 
@@ -300,8 +307,7 @@ public class BlockCultivate extends BlockContainer {
 	public void onBlockRemovalLost(World world, int x, int y, int z,
 			boolean isActive) {
 		keepFurnaceInventory = false;
-		String var6 = StatCollector
-				.translateToLocal(LocalizationStrings.CULTIVATE_OUTBREAK);
+		String var6 = StatCollector.translateToLocal(LocalizationStrings.CULTIVATE_OUTBREAK);
 
 		for (int var7 = 0; var7 < world.playerEntities.size(); ++var7) {
 			EntityPlayer P = (EntityPlayer) world.playerEntities.get(var7);
@@ -316,38 +322,51 @@ public class BlockCultivate extends BlockContainer {
 		}
 
 		this.ReturnIron(world, x, y, z);
-		world.setBlock(x, y, z, Blocks.air, 0, z);
-		world.removeTileEntity(x, y, z);
+		if(!world.isRemote){
+			if (isActive) {
+				TileEntityCultivate tileentity = (TileEntityCultivate) world.getTileEntity(x, y, z);
+				if(tileentity != null){
 
-		if (isActive) {
-			Object creature = null;
-			world.playAuxSFX(2001, x, y, z, Block.getIdFromBlock(Blocks.glass));
-			world.setBlock(x, y, z, Blocks.water);
+					if(tileentity.getDNAType() == 2 ||tileentity.getDNAType() == 3){
+						world.playAuxSFX(2001, x, y, z, Block.getIdFromBlock(Blocks.glass));
+						world.setBlock(x, y, z, FossilPlants.mutantPlant);
+						world.setBlock(x, y+1, z, FossilPlants.mutantPlant, 8, 3);
+						world.setBlock(x, y-1, z, Blocks.dirt);
 
-			if (world.isRemote) {
-				return;
+					}else{
+						Object creature = null;
+						world.playAuxSFX(2001, x, y, z, Block.getIdFromBlock(Blocks.glass));
+						world.setBlock(x, y, z, Blocks.water);
+
+						if (world.isRemote) {
+							return;
+						}
+
+						int rand = world.rand.nextInt(100);
+
+						if (rand <= 5) {
+							creature = new EntityCreeper(world);
+						}
+
+						if (rand > 5 && rand < 10) {
+							creature = new EntityPigZombie(world);
+						}
+
+						if (rand >= 10) {
+							creature = new EntityFailuresaurus(world);
+							((EntityFailuresaurus) creature).setSkin(new Random()
+							.nextInt(3));
+						}
+
+						((EntityLiving) creature).setLocationAndAngles((double) x,
+								(double) y, (double) z, world.rand.nextFloat() * 360.0F,
+								0.0F);
+						world.spawnEntityInWorld((Entity) creature);
+					}
+					world.removeTileEntity(x, y, z);
+				}
+				
 			}
-
-			int rand = world.rand.nextInt(100);
-
-			if (rand <= 5) {
-				creature = new EntityCreeper(world);
-			}
-
-			if (rand > 5 && rand < 10) {
-				creature = new EntityPigZombie(world);
-			}
-
-			if (rand >= 10) {
-				creature = new EntityFailuresaurus(world);
-				((EntityFailuresaurus) creature).setSkin(new Random()
-				.nextInt(3));
-			}
-
-			((EntityLiving) creature).setLocationAndAngles((double) x,
-					(double) y, (double) z, world.rand.nextFloat() * 360.0F,
-					0.0F);
-			world.spawnEntityInWorld((Entity) creature);
 		}
 	}
 
@@ -357,8 +376,7 @@ public class BlockCultivate extends BlockContainer {
 	 */
 	public void breakBlock(World world, int x, int y, int z, Block block, int var6) {
 		if (!keepFurnaceInventory) {
-			TileEntityCultivate tileentity = (TileEntityCultivate) world
-					.getTileEntity(x, y, z);
+			TileEntityCultivate tileentity = (TileEntityCultivate) world.getTileEntity(x, y, z);
 
 			if (tileentity != null) {
 				for (int i = 0; i < tileentity.getSizeInventory(); ++i) {
@@ -429,6 +447,7 @@ public class BlockCultivate extends BlockContainer {
 
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World world, int x, int y, int z) {
-		return Item.getItemFromBlock(Fossil.blockcultivateIdle);
+
+		return Item.getItemFromBlock(Fossil.blockcultivateActive);
 	}
 }

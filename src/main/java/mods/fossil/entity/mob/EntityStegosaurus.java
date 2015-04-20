@@ -90,7 +90,11 @@ public class EntityStegosaurus extends EntityDinosaur
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(baseHealth);
         this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(baseDamage);
     }
-    
+    public void onLivingUpdate()
+	{
+		breakBlock(5);
+		super.onLivingUpdate();
+	}
     public String getTexture()
     {
         if (this.isModelized())

@@ -84,7 +84,11 @@ public class EntityBrachiosaurus extends EntityDinosaur {
 		this.getEntityAttribute(SharedMonsterAttributes.attackDamage)
 				.setBaseValue(EnumDinoType.Brachiosaurus.Strength0);
 	}
-
+	public void onLivingUpdate()
+	{
+		breakBlock(5);
+		super.onLivingUpdate();
+	}
 	/**
 	 * Returns the texture's file path as a String.
 	 */

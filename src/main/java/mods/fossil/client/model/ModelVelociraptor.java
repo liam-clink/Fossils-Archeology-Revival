@@ -209,7 +209,7 @@ public class ModelVelociraptor extends ModelDinosaurs
 	      upperBody.addChild(neck);
 	      velociraptor.addChild(upperBody);
 	    tail1 = new ModelRenderer(this, "tail1");
-	    tail1.setRotationPoint(0F, 0F, 5F);
+	    tail1.setRotationPoint(0F, 0.1F, 5F);
 	    setRotation(tail1, 0F, 0F, 0F);
 	    tail1.mirror = true;
 	      tail1.addBox("tail1", -2F, 0F, 0F, 4, 4, 6);

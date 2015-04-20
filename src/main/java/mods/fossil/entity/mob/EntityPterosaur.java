@@ -312,6 +312,8 @@ public class EntityPterosaur extends EntityDinosaur {
 
 	/*
 	 * Personal thanks to Alexthe666 for giving us his flying code
+	 * 
+	 * lol Im the one coding this :P
 	 */
 
 	protected void updateFallState(double par1, boolean par3) {

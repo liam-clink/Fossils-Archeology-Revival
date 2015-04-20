@@ -38,7 +38,7 @@ public class EntityStoneboard extends Entity implements IEntityAdditionalSpawnDa
         this.direction = 0;
         this.yOffset = 0.0F;
         this.ignoreFrustumCheck = true;
-        this.setSize(0.5F, 0.5F);
+        this.setSize(0.5F,0.5F);
     }
 
     public EntityStoneboard(World var1, int var2, int var3, int var4, int var5)
@@ -192,7 +192,12 @@ public class EntityStoneboard extends Entity implements IEntityAdditionalSpawnDa
             }
         }
     }
-
+    public float getXDimension(){
+    	return art.sizeX * 0.0625F;
+    }
+    public float getYDimension(){
+    	return art.sizeY * 0.0625F;
+    }
     public boolean onValidSurface()
     {
         if (this.worldObj.getCollidingBoundingBoxes(this, this.boundingBox).size() > 0)     //test for collisions
@@ -353,5 +358,7 @@ public class EntityStoneboard extends Entity implements IEntityAdditionalSpawnDa
         int var2 = var1.readInt();
         this.art = EnumStoneboard.values()[var2];
     }
+
+	
 
 }

@@ -18,11 +18,14 @@ public class FossilRecipeHandler
         GameRegistry.addRecipe(new ItemStack(Fossil.skullLantern, 1), new Object[] {"X", "Y", 'X', Fossil.blockSkull, 'Y', Blocks.torch});
         GameRegistry.addRecipe(new ItemStack(Items.dye, 5, 15), new Object[] {"X", 'X', Fossil.blockSkull});
         GameRegistry.addRecipe(new ItemStack(Items.dye, 5, 15), new Object[] {"X", 'X', Fossil.skullLantern});
-        GameRegistry.addRecipe(new ItemStack(Fossil.blockcultivateIdle, 1), new Object[] {"XYX", "XWX", "ZZZ", 'X', Blocks.glass, 'Y', new ItemStack(Items.dye, 1, 2), 'W', Items.water_bucket, 'Z', Items.iron_ingot});
         GameRegistry.addRecipe(new ItemStack(Fossil.blockanalyzerIdle, 1), new Object[] {"XYX", "XWX", 'X', Items.iron_ingot, 'Y', Fossil.relic, 'W', Fossil.biofossil});
         GameRegistry.addRecipe(new ItemStack(Fossil.blockworktableIdle, 1), new Object[] {"X", "Y", 'X', Items.paper, 'Y', Blocks.crafting_table});
         GameRegistry.addRecipe(new ItemStack(Fossil.blockSifterIdle, 1), new Object[] {"XYX", "YZY", "YXY", 'X', Items.string, 'Y', Blocks.planks, 'Z', Blocks.iron_bars});
         GameRegistry.addRecipe(new ItemStack(Fossil.ancientWoodPlate, 3), new Object[] {"XX", 'X', Fossil.ancientWood});
+//        GameRegistry.addRecipe(new ItemStack(Fossil.blockcultivateIdle, 1), new Object[] {"XYX", "XWX", "ZZZ", 'X', Blocks.glass, 'Y', new ItemStack(Items.dye, 1, 2), 'W', Items.water_bucket, 'Z', Items.iron_ingot});
+        GameRegistry.addRecipe(new ItemStack(Fossil.blockTimeMachine, 1), new Object[] {"XYX", "ZUZ", "VXV", 'X', Fossil.gem, 'Y', Items.nether_star, 'Z', Items.gold_ingot, 'U', Items.ender_pearl, 'V', Blocks.obsidian});
+        GameRegistry.addRecipe(new ItemStack(Fossil.blockWeakcultivateIdle, 1), new Object[] {"XYX", "XWX", "ZUZ", 'X', Blocks.glass, 'Y', new ItemStack(Items.dye, 1, 2), 'W', Items.water_bucket, 'Z', Items.iron_ingot, 'U', Items.redstone});
+        GameRegistry.addRecipe(new ItemStack(Fossil.blockcultivateIdle, 1), new Object[] {"XYX", "XWX", "ZUZ", 'X', Blocks.glass, 'Y', new ItemStack(Items.dye, 1, 2), 'W', Items.water_bucket, 'Z', Items.iron_ingot, 'U', Blocks.sticky_piston});
 
         GameRegistry.addRecipe(new ItemStack(Fossil.LimestoneBrick, 4), new Object[] {"XXA", "XXA", "AAA", 'X', Fossil.Limestone});
         GameRegistry.addRecipe(new ItemStack(Fossil.LimestoneBrick, 4), new Object[] {"AXX", "AXX", "AAA", 'X', Fossil.Limestone});
@@ -44,6 +47,8 @@ public class FossilRecipeHandler
         GameRegistry.addShapelessRecipe(new ItemStack(Fossil.gemSword), new Object[] {Items.diamond_sword, Fossil.gem});
         GameRegistry.addShapelessRecipe(new ItemStack(Fossil.gemShovel), new Object[] {Items.golden_shovel, Fossil.gem});
         GameRegistry.addShapelessRecipe(new ItemStack(Fossil.gemShovel), new Object[] {Items.diamond_shovel, Fossil.gem});
+        GameRegistry.addShapelessRecipe(new ItemStack(Fossil.gemShovel), new Object[] {Items.diamond_shovel, Fossil.gem});
+        GameRegistry.addShapelessRecipe(new ItemStack(Fossil.denseSand, 2), new Object[] {Items.quartz, Blocks.sand});
 
         for (int i = 0; i < EnumDinoType.values().length; i++)
             GameRegistry.addShapelessRecipe(new ItemStack(Fossil.dinoPedia), new Object[] {Items.book, EnumDinoType.values()[i].DNAItem});
@@ -120,6 +125,7 @@ public class FossilRecipeHandler
  
         GameRegistry.addSmelting(Fossil.rawChickenSoup, new ItemStack(Fossil.cookedChickenSoup), 3.0F);
         GameRegistry.addSmelting(EnumDinoType.values()[4].EggItem, new ItemStack(Fossil.sjl), 3.0F);
+        GameRegistry.addSmelting(Fossil.denseSand, new ItemStack(Fossil.strongGlass), 3.0F);
 
         for (int i = 0; i < EnumDinoType.values().length; i++)
             if (i != 4) //Nautilus treated specially

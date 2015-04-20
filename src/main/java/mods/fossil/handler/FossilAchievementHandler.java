@@ -1,6 +1,10 @@
 package mods.fossil.handler;
 
+import mods.fossil.Fossil;
+import mods.fossil.core.FossilPlants;
+import mods.fossil.fossilEnums.EnumDinoType;
 import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
 import net.minecraftforge.common.AchievementPage;
 import cpw.mods.fml.common.registry.LanguageRegistry;
@@ -9,7 +13,7 @@ public class FossilAchievementHandler
 {
     public static AchievementPage FossilsAchievementPage;
 
-    public static Achievement FirstEgg;
+   /* public static Achievement FirstEgg;
     public static Achievement AllEggs;
     public static Achievement FoundFossils;
     public static Achievement Permafrost;
@@ -20,83 +24,96 @@ public class FossilAchievementHandler
     public static Achievement Dinopedia;
     public static Achievement IceAge;
     public static Achievement TheKing;
-    public static Achievement pigBossOnEarth;
+    public static Achievement pigBossOnEarth;*/
+    public static Achievement firstFossil;
+    public static Achievement analyzer;
+    public static Achievement tablet;
+    public static Achievement dinoDna;
+    public static Achievement cultivate;
+    public static Achievement dinoEgg;
+    public static Achievement mammalEmbryo;
+    public static Achievement birdEgg;
+    public static Achievement sifter;
+    public static Achievement fossilSeeds;
+    public static Achievement failuresaurus;
+    public static Achievement failuresaurusAnalyzer;
+    public static Achievement findAnuTotem;
+    public static Achievement anuPortal;
+    public static Achievement anubiteEncounter;
+    public static Achievement anuAttack;
+    public static Achievement anuDead;
+    public static Achievement arcWorkbench;
+    public static Achievement fixedSword;
+    public static Achievement fixedHelmet;
+    public static Achievement fixedVase;
+    public static Achievement dinopedia;
+    public static Achievement scarab;
+    public static Achievement scarabTools;
+    public static Achievement blueScarab;
+    public static Achievement key;
+    public static Achievement clock;
+
 
     public static void loadAchievements()
     {   
-        FirstEgg = new Achievement("FirstEgg", "FirstEgg", 5, 0, Items.bone, CultVat).registerStat();
-        addAchievementName("FirstEgg", "Dawn of the Dinosaurs!");
-        addAchievementDesc("FirstEgg", "One small step for a dinosaur,");
+    	firstFossil =  new Achievement("achievement.firstFossil", "firstFossil",  0, 0, new ItemStack(Fossil.biofossil), (Achievement)null).registerStat();
+    	analyzer =  new Achievement("achievement.analyzer", "analyzer",  0, -2, new ItemStack(Fossil.blockanalyzerActive), (Achievement)firstFossil).registerStat();
+    	tablet =  new Achievement("achievement.tablet", "tablet",  -2, -2, new ItemStack(Fossil.stoneboard), (Achievement)analyzer).registerStat();
+    	dinoDna =  new Achievement("achievement.dinoDna", "dinoDna",  0, -4, new ItemStack(EnumDinoType.TRex.DNAItem), (Achievement)analyzer).registerStat().setSpecial();
+    	cultivate =  new Achievement("achievement.cultivate", "cultivate",  2, -4, new ItemStack(Fossil.blockcultivateActive), (Achievement)dinoDna).registerStat();
+    	dinoEgg =  new Achievement("achievement.dinoEgg", "dinoEgg",  4, -4, new ItemStack(EnumDinoType.TRex.EggItem), (Achievement)cultivate).registerStat();
+    	mammalEmbryo =  new Achievement("achievement.mammalEmbryo", "mammalEmbryo",  4, -6, new ItemStack(Fossil.embryoMammoth), (Achievement)cultivate).registerStat();
+    	birdEgg =  new Achievement("achievement.birdEgg", "birdEgg",  4, -2, new ItemStack(Fossil.cultivatedConfuciusornisEgg), (Achievement)cultivate).registerStat();
+    	sifter =  new Achievement("achievement.sifter", "sifter",  -2, 0, new ItemStack(Fossil.blockSifterActive), (Achievement)null).registerStat();
+    	fossilSeeds =  new Achievement("achievement.fossilSeeds", "fossilSeeds",  -2, -3, new ItemStack(FossilPlants.fossilSeed), (Achievement)analyzer).registerStat();
+    	failuresaurus =  new Achievement("achievement.failuresaurus", "failuresaurus",  4, 0, new ItemStack(Fossil.blockSlimeTrail), (Achievement)cultivate).registerStat();
+    	failuresaurusAnalyzer =  new Achievement("achievement.failuresaurusAnalyzer", "failuresaurusAnalyzer",  4, 2, new ItemStack(Fossil.failuresaurusFlesh), (Achievement)failuresaurus).registerStat();
+    	findAnuTotem =  new Achievement("achievement.findAnuTotem", "findAnuTotem",  -6, 6, new ItemStack(Fossil.anuTotem), (Achievement)null).registerStat();
+    	anuPortal =  new Achievement("achievement.anuPortal", "anuPortal",  -4, 5, new ItemStack(Fossil.anuPortal), (Achievement)findAnuTotem).registerStat();
+    	anubiteEncounter =  new Achievement("achievement.anubiteEncounter", "anubiteEncounter",  -2, 5, new ItemStack(Fossil.anubiteStatue), (Achievement)anuPortal).registerStat();
+    	anuAttack =  new Achievement("achievement.anuAttack", "anuAttack",  0, 5, new ItemStack(Fossil.ancientSword), (Achievement)anubiteEncounter).registerStat();
+    	anuDead =  new Achievement("achievement.anuDead", "anuDead",  2, 5, new ItemStack(Fossil.brokenSword), (Achievement)anuAttack).registerStat().setSpecial();
+    	arcWorkbench =  new Achievement("achievement.arcWorkbench", "arcWorkbench",  -6, 0, new ItemStack(Fossil.blockworktableActive), (Achievement)null).registerStat();
+    	fixedSword =  new Achievement("achievement.fixedSword", "fixedSword",  -6, -2, new ItemStack(Fossil.ancientSword), (Achievement)arcWorkbench).registerStat();
+    	fixedHelmet =  new Achievement("achievement.fixedHelmet", "fixedHelmet",  -6, 2, new ItemStack(Fossil.ancienthelmet), (Achievement)arcWorkbench).registerStat();
+    	fixedVase =  new Achievement("achievement.fixedVase", "fixedVase",  -4, 0, new ItemStack(Fossil.vaseAmphoraBlock, 1, 1), (Achievement)arcWorkbench).registerStat();
+    	dinopedia =  new Achievement("achievement.dinopedia", "dinopedia",  0, -6, new ItemStack(Fossil.dinoPedia), (Achievement)dinoDna).registerStat();
+    	scarab =  new Achievement("achievement.scarab", "scarab",  0, 2, new ItemStack(Fossil.gem), (Achievement)firstFossil).registerStat();
+    	scarabTools =  new Achievement("achievement.scarabTools", "scarabTools",  2, 2, new ItemStack(Fossil.gemSword), (Achievement)scarab).registerStat();
+    	blueScarab =  new Achievement("achievement.blueScarab", "blueScarab",  -2, 2, new ItemStack(Fossil.AquaticScarabGem), (Achievement)scarab).registerStat();
+    	key =  new Achievement("achievement.key", "key",  2, 7, new ItemStack(Fossil.ancientKey), (Achievement)anuDead).registerStat();
+    	clock =  new Achievement("achievement.clock", "clock",  2, 7, new ItemStack(Fossil.ancientClock), (Achievement)key).registerStat();
 
-        AllEggs = new Achievement("AllEggs", "AllEggs", 5, 1, Items.bone, FirstEgg).registerStat().setSpecial();
-        addAchievementName("AllEggs", "Gotta Hatch 'Em All!");
-        addAchievementDesc("AllEggs", "One giant leap for Dinosauria.");
-        
-        FoundFossils = new Achievement("FoundFossils", "FoundFossils", 2, 0, Items.bone, null).registerStat();
-        addAchievementName("FoundFossils", "Trace from the past.");
-        addAchievementDesc("FoundFossils", "Digging for bones!");
- 
-        Permafrost = new Achievement("Permafrost", "Permafrost", 0, 1, Items.book, null).registerStat();
-        addAchievementName("Permafrost", "Try not to get a cold!");
-        addAchievementDesc("Permafrost", "What wonders could be inside it?"); 
-        
-        ArchWorkbench = new Achievement("ArchWorkbench", "ArchWorkbench", 3, -1, Items.iron_shovel, null).registerStat();
-        addAchievementName("ArchWorkbench", "Let's get the party started!");
-        addAchievementDesc("ArchWorkbench", "First step in becoming an archaeologist.");         
-        
-        Analyzer = new Achievement("Analyzer", "Analyzer", 3, 0, Items.book, FoundFossils).registerStat();
-        addAchievementName("Analyzer", "For SCIENCE!");
-        addAchievementDesc("Analyzer", "Discovering the past!");    
-        
-        CultVat = new Achievement("CultVat", "CultVat", 4, 0, Items.book, Analyzer).registerStat();
-        addAchievementName("CultVat", "Genetic manipulation.");
-        addAchievementDesc("CultVat", "Bring history back to live!");
-        
-        Sifter = new Achievement("Sifter", "Sifter", 4, 1, Items.book, null).registerStat();
-        addAchievementName("Sifter", "Cuz' baby I'm a Gold Digger!");
-        addAchievementDesc("Sifter", "Even if I have to go through all the dirt!");
-        
-        Dinopedia = new Achievement("Dinopedia", "Dinopedia", 3, 1, Items.book, Analyzer).registerStat();
-        addAchievementName("Dinopedia", "Fill all the pages!");
-        addAchievementDesc("Dinopedia", "Find all the dinos!");
-
-        IceAge = new Achievement("IceAge", "IceAge", 3, 1, Items.book, Analyzer).registerStat();
-        addAchievementName("IceAge", "I do not know how you'll give birth...");
-        addAchievementDesc("IceAge", "However I want the ice age back!");
-        
-        TheKing = new Achievement("TheKing", "TheKing", 5, -1, Items.book, null).registerStat().setSpecial();
-        addAchievementName("TheKing", "Ruler of the Late Cretaceous.");
-        addAchievementDesc("TheKing", "Long live the king!");
-        
-        pigBossOnEarth = new Achievement("pigBossOnEarth", "pigBossOnEarth", 8, -2, Items.book, null).registerStat().setSpecial();
-        addAchievementName("pigBossOnEarth", "Hail Anu");
-        addAchievementDesc("pigBossOnEarth", "You summoned Anu!");
-
-
-        AchievementPage FossilsAchievementPage = new AchievementPage("Fossils",
-                FirstEgg,
-                AllEggs,
-                FoundFossils,
-                Permafrost,
-                ArchWorkbench,
-                Analyzer,
-                CultVat,
-                Sifter,
-                Dinopedia,
-                IceAge,
-                TheKing,
-                pigBossOnEarth
-        		);
-        AchievementPage.registerAchievementPage(FossilsAchievementPage);
+        AchievementPage.registerAchievementPage(new AchievementPage("Fossils and Archeology", 
+        		new Achievement[]{
+        		firstFossil,
+        		analyzer,
+        		tablet,
+        		dinoDna,
+        		cultivate,
+        		dinoEgg,
+        		mammalEmbryo,
+        		birdEgg,
+        		sifter,
+        		fossilSeeds,
+        		failuresaurus,
+        		failuresaurusAnalyzer,
+        		findAnuTotem,
+        		anuPortal,
+        		anubiteEncounter,
+        		anuAttack,
+        		anuDead,
+        		arcWorkbench,
+        		fixedSword,
+        		fixedHelmet,
+        		fixedVase,
+        		dinopedia, 
+        		scarab,
+        		scarabTools,
+        		blueScarab,
+        		key,
+        		clock
+        		}));
     }
 
-    private static void addAchievementName(String ach, String name)
-    {
-        LanguageRegistry.instance().addStringLocalization("achievement." + ach, "en_US", name);
-    }
-
-    private static void addAchievementDesc(String ach, String desc)
-    {
-        LanguageRegistry.instance().addStringLocalization("achievement." + ach + ".desc", "en_US", desc);
-    }
 }

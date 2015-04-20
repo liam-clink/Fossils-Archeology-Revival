@@ -1,7 +1,6 @@
 package mods.fossil.handler;
 
 import mods.fossil.entity.mob.*;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 
@@ -40,6 +39,10 @@ public class FossilSpawnEggs
         registerEntityEgg(EntityTerrorBird.class, 			0x689d94, 0x151917);
         registerEntityEgg(EntityAllosaurus.class, 			0x813030, 0x24496e);
         registerEntityEgg(EntityElasmotherium.class, 		0xcc9566, 0x3d2700);
+        registerEntityEgg(EntityConfuciusornis.class, 		0xA4A2A5, 0x773C00);
+        registerEntityEgg(EntityCeratosaurus.class, 		0x678A5A, 0xD6C78D);
+        registerEntityEgg(EntityAnubite.class, 				0x381A1F, 0x732A19);
+
     }
 
     public static int getUniqueEntityId()

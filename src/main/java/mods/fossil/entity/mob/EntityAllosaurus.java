@@ -127,7 +127,11 @@ public class EntityAllosaurus extends EntityDinosaur
     {
         return !this.isModelized() && !this.isWeak();
     }
-
+    public void onLivingUpdate()
+	{
+		breakBlock(5);
+		super.onLivingUpdate();
+	}
     public boolean attackEntityAsMob(Entity var1)
     {
         return super.attackEntityAsMob(var1);

@@ -161,6 +161,7 @@ public class ModelPteranodon extends ModelBase {
 		this.Leg2.rotateAngleX = MathHelper.cos(f * 0.6662F) * 1.4F * f1;
 		this.WingL1.rotateAngleX = MathHelper.cos(f * 0.6662F + (float)Math.PI) * 1.4F * f1;
 		this.WingR1.rotateAngleX = MathHelper.cos(f * 0.6662F) * 1.4F * f1;
+		
 		}else{
 			this.Head.rotateAngleY = 0F;
 			this.Head.rotateAngleX = 1.038819970787025F;

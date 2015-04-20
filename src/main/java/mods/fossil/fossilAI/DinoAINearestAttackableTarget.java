@@ -5,8 +5,8 @@ import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 
 public class DinoAINearestAttackableTarget extends EntityAINearestAttackableTarget {
 
-	private boolean asChild;
-	private EntityCreature entity;
+	protected boolean asChild;
+	protected EntityCreature entity;
 
 	/*
 	 * Check if the attacking creature is a child, and if so will it run.

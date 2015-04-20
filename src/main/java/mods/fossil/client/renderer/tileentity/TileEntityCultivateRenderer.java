@@ -25,7 +25,6 @@ import net.minecraft.world.World;
 
 
 public class TileEntityCultivateRenderer extends TileEntitySpecialRenderer {
-
 	public static final ResourceLocation texture = new ResourceLocation("fossil:textures/blocks/cultureVat/culturevat_green.png");
 	public static final ResourceLocation textureEmbryoBasic = new ResourceLocation("fossil:textures/blocks/cultureVat/embryo_generic.png");
 	private static final ResourceLocation textureEmbryoLimbless = new ResourceLocation("fossil:textures/blocks/cultureVat/embryo_legless.png");
@@ -105,13 +104,17 @@ public class TileEntityCultivateRenderer extends TileEntitySpecialRenderer {
 		}
 
 		}
-		GL11.glEnable(GL11.GL_BLEND);
-		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-		this.bindTexture(texture);
-		this.modelBlock.render(0.0625F);
-		GL11.glDisable(GL11.GL_BLEND);
-		GL11.glPopMatrix();
-		GL11.glPopMatrix();
+		
+		
+			GL11.glEnable(GL11.GL_BLEND);
+			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+			GL11.glPushMatrix();
+			this.bindTexture(texture);
+			this.modelBlock.render(0.0625F);
+			GL11.glPopMatrix();
+			GL11.glDisable(GL11.GL_BLEND);
+			GL11.glPopMatrix();
+			GL11.glPopMatrix();
 	}
 	@Override
 	public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f) {

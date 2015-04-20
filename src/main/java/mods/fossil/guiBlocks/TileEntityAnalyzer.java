@@ -5,7 +5,10 @@ import java.util.Random;
 import mods.fossil.Fossil;
 import mods.fossil.client.LocalizationStrings;
 import mods.fossil.core.FossilPlants;
+import mods.fossil.entity.mob.EntityAnubite;
 import mods.fossil.fossilEnums.EnumDinoType;
+import mods.fossil.handler.FossilAchievementHandler;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -184,13 +187,36 @@ ISidedInventory {
 	public boolean isBurning() {
 		return this.analyzerBurnTime > 0;
 	}
-
+	
 	/**
 	 * Allows the entity to update its state. Overridden in most subclasses,
 	 * e.g. the mob spawner uses this to count ticks and creates a new spawn
 	 * inside its implementation.
 	 */
 	public void updateEntity() {
+		int slots;
+
+
+		for (int var7 = 0; var7 < worldObj.playerEntities.size(); ++var7) {
+			EntityPlayer P = (EntityPlayer) worldObj.playerEntities.get(var7);
+
+			if (Math.pow(this.xCoord - P.posX, 2D) + Math.pow(this.yCoord - P.posY, 2D) + Math.pow(this.zCoord - P.posZ, 2D) < 40)
+			{
+				for (slots = 12; slots > 8; --slots) {
+					if (this.analyzerItemStacks[slots] != null) {
+						if (this.analyzerItemStacks[slots].getItem() != null) {
+							if (this.analyzerItemStacks[slots].getItem() == Fossil.stoneboard) {
+								P.addStat(FossilAchievementHandler.tablet, 1);
+							}
+							if (Fossil.isDNA(this.analyzerItemStacks[slots].getItem())) {
+								P.addStat(FossilAchievementHandler.dinoDna, 1);
+							}
+						}
+					}
+
+				}
+			}
+		}
 		boolean var1 = this.analyzerBurnTime > 0;
 		boolean var2 = false;
 
@@ -284,7 +310,7 @@ ISidedInventory {
 			int var3;
 
 			if (this.analyzerItemStacks[this.RawIndex].getItem() == Fossil.biofossil) {
-				
+
 
 				if (rand > -1 && rand <= 50) {
 					itemstack = new ItemStack(Items.dye, 3, 15);
@@ -296,15 +322,19 @@ ISidedInventory {
 
 				if (rand > 85) {
 					int i = new Random()
-					.nextInt(EnumDinoType.values().length + 2); 
+					.nextInt(EnumDinoType.values().length + 3); 
 					Item i0 = null;
 
 					if (i == 0) {
 						i0 = Fossil.brokenSapling;
 					} else if (i == 1) {
 						i0 = Fossil.dnaCoelacanth;
+					}
+					else if (i == 2) {
+						i0 = Fossil.dnaConfuciusornis;
+
 					} else {
-						i0 = EnumDinoType.values()[i - 2].DNAItem;
+						i0 = EnumDinoType.values()[i - 3].DNAItem;
 					}
 
 					itemstack = new ItemStack(i0, 1);
@@ -320,10 +350,9 @@ ISidedInventory {
 				if(rand > 65 && rand <= 85){
 					itemstack = new ItemStack(Items.dye, 1, 2);
 				}
-				
+
 				if(rand > 85){
-					//int dnaChoice = new Random().nextInt(100);
-					itemstack = new ItemStack(FossilPlants.fossilSeed_dillhoffia, 1, 2);
+					itemstack = new ItemStack(FossilPlants.fossilSeed, 1, new Random().nextInt(8));
 				}
 
 			}
@@ -362,13 +391,12 @@ ISidedInventory {
 				if(randChoice == 0){
 					itemstack = new ItemStack(Items.rotten_flesh, 1);
 				}else{
-					int i = new Random().nextInt(EnumDinoType.values().length + 13); 
+					int i = new Random().nextInt(EnumDinoType.values().length + 14); 
 					Item i0 = null;
 					if (i == 0) {
 						i0 = Fossil.brokenSapling;
 					} else if (i == 1) {
 						i0 = Fossil.dnaCoelacanth;
-
 					}
 					else if (i == 2) {
 						i0 = Fossil.dnaChicken;
@@ -403,8 +431,11 @@ ISidedInventory {
 					else if (i == 12) {
 						i0 = Fossil.dnaTerrorBird;
 					}
+					else if (i == 13) {
+						i0 = Fossil.dnaConfuciusornis;
+					}
 					else {
-						i0 = EnumDinoType.values()[i - 13].DNAItem;
+						i0 = EnumDinoType.values()[i - 14].DNAItem;
 					}
 
 					itemstack = new ItemStack(i0, 1);
@@ -591,6 +622,7 @@ ISidedInventory {
 	}
 
 	public void openChest() {
+
 	}
 
 	public void closeChest() {
@@ -653,6 +685,27 @@ ISidedInventory {
 
 	@Override
 	public void openInventory() {
+		int slots;
+		for (int var7 = 0; var7 < worldObj.playerEntities.size(); ++var7) {
+			EntityPlayer P = (EntityPlayer) worldObj.playerEntities.get(var7);
+
+			if (Math.pow(this.xCoord - P.posX, 2D) + Math.pow(this.yCoord - P.posY, 2D) + Math.pow(this.zCoord - P.posZ, 2D) < 40)
+			{
+				for (slots = 12; slots > 8; --slots) {
+					if (this.analyzerItemStacks[slots] != null) {
+						if (this.analyzerItemStacks[slots].getItem() != null) {
+							if (this.analyzerItemStacks[slots].getItem() == Fossil.stoneboard) {
+								P.addStat(FossilAchievementHandler.tablet, 1);
+							}
+							if (Fossil.isDNA(this.analyzerItemStacks[slots].getItem())) {
+								P.addStat(FossilAchievementHandler.dinoDna, 1);
+							}
+						}
+					}
+
+				}
+			}
+		}
 	}
 
 	@Override

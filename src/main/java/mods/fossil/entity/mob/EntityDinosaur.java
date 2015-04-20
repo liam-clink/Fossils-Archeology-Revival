@@ -9,6 +9,7 @@ import java.util.Random;
 import java.util.logging.Level;
 
 import mods.fossil.Fossil;
+import mods.fossil.client.FossilOptions;
 import mods.fossil.client.LocalizationStrings;
 import mods.fossil.client.gui.GuiPedia;
 import mods.fossil.entity.EntityDinoEgg;
@@ -28,8 +29,10 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIControlledByPlayer;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -55,7 +58,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public abstract class EntityDinosaur extends EntityPrehistoric implements
-		IEntityAdditionalSpawnData {
+IEntityAdditionalSpawnData {
 	public static final int OWNER_NAME_DATA_INDEX = 17;
 	public static final int HUNGER_TICK_DATA_INDEX = 18;
 	public static final int HUNGER_DATA_INDEX = 19;
@@ -127,11 +130,11 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(
 				1.0D);
 		getEntityAttribute(SharedMonsterAttributes.maxHealth)
-				.setBaseValue(1.0D);
+		.setBaseValue(1.0D);
 		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(
 				1.0D);
 		getEntityAttribute(SharedMonsterAttributes.knockbackResistance)
-				.setBaseValue(0.0D);
+		.setBaseValue(0.0D);
 
 	}
 
@@ -171,7 +174,47 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements
 	public void updateSize() {
 		this.jump();
 	}
+	/**Call this in onLivingUpdate() if your dino breaks blocks.*/
+	public void breakBlock(float hardness){
+		if(!isModelized() && this.isAdult() && this.IsDeadlyHungry()){
+			if(FossilOptions.Dino_Block_Breaking){
+				for (int a=(int)Math.round(this.boundingBox.minX)-1;a<=(int)Math.round(this.boundingBox.maxX)+1;a++){
+					for (int b=(int)Math.round(this.boundingBox.minY);(b<=(int)Math.round(this.boundingBox.maxY)+3) &&(b<=127);b++){
+						for (int c=(int)Math.round(this.boundingBox.minZ)-1;c<=(int)Math.round(this.boundingBox.maxZ)+1;c++){
+							Block block = worldObj.getBlock(a,b,c);
 
+							if(block.getBlockHardness(worldObj, a, b, c) < hardness){
+								if (block != Blocks.air || block == Fossil.ancientGlass || block == Fossil.strongGlass)
+								{
+									this.playSound(block.stepSound.getBreakSound(), 0.15F, 1.0F);
+									Item item = block.getItemDropped(worldObj.getBlockMetadata(a, b, c), this.getRNG(), 1);
+									int itemCount = block.quantityDropped(getRNG());
+									int itemMeta = block.damageDropped(worldObj.getBlockMetadata(a, b, c));
+									if(item != null){
+										float f = 0.7F;
+										double d0 = (double)(this.getRNG().nextFloat() * f) + (double)(1.0F - f) * 0.5D;
+										double d1 = (double)(this.getRNG().nextFloat() * f) + (double)(1.0F - f) * 0.5D;
+										double d2 = (double)(this.getRNG().nextFloat() * f) + (double)(1.0F - f) * 0.5D;
+										if(!worldObj.isRemote){
+											EntityItem entityitem = new EntityItem(worldObj, (double)a + d0, (double)b + d1, (double)c + d2, new ItemStack(item, itemCount, itemMeta));
+											entityitem.delayBeforeCanPickup = 10;
+											worldObj.spawnEntityInWorld(entityitem);
+										}
+									}
+									if(!worldObj.isRemote){
+										this.worldObj.spawnParticle("blockcrack_" + Block.getIdFromBlock(block) + "_" + this.worldObj.getBlockMetadata(a, b, c), a + ((double)this.rand.nextFloat() - 0.5D) * (double)this.width, b + 0.1D, c + ((double)this.rand.nextFloat() - 0.5D) * (double)this.width, 4.0D * ((double)this.rand.nextFloat() - 0.5D), 0.5D, ((double)this.rand.nextFloat() - 0.5D) * 4.0D);
+										worldObj.setBlock(a, b, c, Blocks.air);
+									}
+								}
+
+							}
+						}
+					}
+
+				}
+			}
+		}
+	}
 	/**
 	 * Get dinosaur's knockback value
 	 */
@@ -376,7 +419,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements
 		return this.isModelized() ? this.getModelTexture() : Fossil.modid + ":"
 				+ "textures/mob/DinoModel" + this.SelfType.toString() + ".png";
 	}
-	
+
 	public void moveEntityWithHeading(float par1, float par2) {
 		if (!isModelized()) {
 			super.moveEntityWithHeading(par1, par2);
@@ -491,7 +534,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements
 		p0.PrintStringXY(
 				StatCollector.translateToLocal("entity.fossil."
 						+ this.SelfType.toString() + ".name"), p0.rightIndent,
-				34, 0, 0, 0);
+						34, 0, 0, 0);
 		p0.PrintPictXY(pediaclock, p0.rightIndent, 46, 8, 8);
 		p0.PrintPictXY(pediaheart, p0.rightIndent, 58, 9, 9);
 		p0.PrintPictXY(pediafood, p0.rightIndent, 70, 9, 9);
@@ -500,16 +543,16 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements
 		if (this.getDinoAge() == 1)
 			p0.PrintStringXY(
 					String.valueOf(this.getDinoAge())
-							+ " "
-							+ StatCollector
-									.translateToLocal(LocalizationStrings.PEDIA_EGG_DAY),
+					+ " "
+					+ StatCollector
+					.translateToLocal(LocalizationStrings.PEDIA_EGG_DAY),
 					p0.rightIndent + 12, 46);
 		else
 			p0.PrintStringXY(
 					String.valueOf(this.getDinoAge())
-							+ " "
-							+ StatCollector
-									.translateToLocal(LocalizationStrings.PEDIA_EGG_DAYS),
+					+ " "
+					+ StatCollector
+					.translateToLocal(LocalizationStrings.PEDIA_EGG_DAYS),
 					p0.rightIndent + 12, 46);
 
 		// Display Health
@@ -526,7 +569,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements
 			if (this.getOwnerDisplayName().length() > 0) {
 				p0.AddStringLR(
 						StatCollector
-								.translateToLocal(LocalizationStrings.PEDIA_TEXT_OWNER),
+						.translateToLocal(LocalizationStrings.PEDIA_TEXT_OWNER),
 						true);
 
 				// //////////1.7.10 BLOCK //////////////
@@ -563,7 +606,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements
 			p0.AddStringLR(
 					StatCollector.translateToLocal("Order: "
 							+ (new ItemStack(this.SelfType.OrderItem))
-									.getDisplayName()), true);
+							.getDisplayName()), true);
 
 		for (int i = 0; i < this.SelfType.FoodItemList.index; i++) {
 			if (this.SelfType.FoodItemList.getItem(i) != null) {
@@ -732,13 +775,13 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements
 					if (this.posY + dy >= 0
 							&& this.posY + dy <= this.worldObj.getHeight()
 							&& this.SelfType.FoodBlockList
-									.CheckBlock(this.worldObj.getBlock(
-											MathHelper.floor_double(this.posX
-													+ ds),
+							.CheckBlock(this.worldObj.getBlock(
+									MathHelper.floor_double(this.posX
+											+ ds),
 											MathHelper.floor_double(this.posY
 													+ dy),
-											MathHelper.floor_double(this.posZ
-													- r)))) {
+													MathHelper.floor_double(this.posZ
+															- r)))) {
 						pos = Vec3.createVectorHelper(
 								MathHelper.floor_double(this.posX + ds),
 								MathHelper.floor_double(this.posY + dy),
@@ -749,13 +792,13 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements
 					if (this.posY + dy >= 0
 							&& this.posY + dy <= this.worldObj.getHeight()
 							&& this.SelfType.FoodBlockList
-									.CheckBlock(this.worldObj.getBlock(
-											MathHelper.floor_double(this.posX
-													+ ds),
+							.CheckBlock(this.worldObj.getBlock(
+									MathHelper.floor_double(this.posX
+											+ ds),
 											MathHelper.floor_double(this.posY
 													+ dy),
-											MathHelper.floor_double(this.posZ
-													+ r)))) {
+													MathHelper.floor_double(this.posZ
+															+ r)))) {
 						pos = Vec3.createVectorHelper(
 								MathHelper.floor_double(this.posX + ds),
 								MathHelper.floor_double(this.posY + dy),
@@ -770,13 +813,13 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements
 					if (this.posY + dy >= 0
 							&& this.posY + dy <= this.worldObj.getHeight()
 							&& this.SelfType.FoodBlockList
-									.CheckBlock(this.worldObj.getBlock(
-											MathHelper.floor_double(this.posX
-													- r),
+							.CheckBlock(this.worldObj.getBlock(
+									MathHelper.floor_double(this.posX
+											- r),
 											MathHelper.floor_double(this.posY
 													+ dy),
-											MathHelper.floor_double(this.posZ
-													+ ds)))) {
+													MathHelper.floor_double(this.posZ
+															+ ds)))) {
 						pos = Vec3.createVectorHelper(
 								MathHelper.floor_double(this.posX - r),
 								MathHelper.floor_double(this.posY + dy),
@@ -787,13 +830,13 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements
 					if (this.posY + dy >= 0
 							&& this.posY + dy <= this.worldObj.getHeight()
 							&& this.SelfType.FoodBlockList
-									.CheckBlock(this.worldObj.getBlock(
-											MathHelper.floor_double(this.posX
-													+ r),
+							.CheckBlock(this.worldObj.getBlock(
+									MathHelper.floor_double(this.posX
+											+ r),
 											MathHelper.floor_double(this.posY
 													+ dy),
-											MathHelper.floor_double(this.posZ
-													+ ds)))) {
+													MathHelper.floor_double(this.posZ
+															+ ds)))) {
 						pos = Vec3.createVectorHelper(
 								MathHelper.floor_double(this.posX + r),
 								MathHelper.floor_double(this.posY + dy),
@@ -810,15 +853,15 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements
 	public TileEntityFeeder GetNearestFeeder(int SEARCH_RANGE) {
 		for (int dx = -2; dx != -(SEARCH_RANGE + 1); dx += (dx < 0) ? (dx * -2)
 				: (-(2 * dx + 1))) // Creates the following order:
-									// -2,2,-3,3,-4,1,....,10, stops with 10.
-									// looks at near places, first
+			// -2,2,-3,3,-4,1,....,10, stops with 10.
+			// looks at near places, first
 		{
 			for (int dy = -5; dy < 4; dy++) {
 				for (int dz = -2; dz != -(SEARCH_RANGE + 1); dz += (dz < 0) ? (dz * -2)
 						: (-(2 * dz + 1))) // Creates the following order:
-											// -2,2,-3,3,-4,1,....,10, stops
-											// with 10. looks at near places,
-											// first
+					// -2,2,-3,3,-4,1,....,10, stops
+					// with 10. looks at near places,
+					// first
 				{
 					if (this.posY + dy >= 0
 							&& this.posY + dy <= this.worldObj.getHeight()) {
@@ -830,7 +873,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements
 						if (fed != null
 								&& fed instanceof TileEntityFeeder
 								&& !((TileEntityFeeder) fed)
-										.CheckIsEmpty(this.SelfType)) {
+								.CheckIsEmpty(this.SelfType)) {
 							return (TileEntityFeeder) fed;
 						}
 					}
@@ -880,7 +923,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements
 							+ (double) ((new Random()).nextInt(3) - 1),
 							this.posY,
 							this.posZ
-									+ (double) ((new Random()).nextInt(3) - 1),
+							+ (double) ((new Random()).nextInt(3) - 1),
 							this.worldObj.rand.nextFloat() * 360.0F, 0.0F);
 
 					this.worldObj.spawnEntityInWorld((Entity) var5);
@@ -991,18 +1034,18 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements
 			double var6 = this.rand.nextGaussian() * 0.02D;
 			double var8 = this.rand.nextGaussian() * 0.02D;
 			this.worldObj
-					.spawnParticle(
-							var2,
-							this.posX
-									+ (double) (this.rand.nextFloat()
-											* this.width * 2.0F)
-									- (double) this.width,
+			.spawnParticle(
+					var2,
+					this.posX
+					+ (double) (this.rand.nextFloat()
+							* this.width * 2.0F)
+							- (double) this.width,
 							this.posY
-									+ 0.5D
-									+ (double) (this.rand.nextFloat() * this.height),
+							+ 0.5D
+							+ (double) (this.rand.nextFloat() * this.height),
 							this.posZ
-									+ (double) (this.rand.nextFloat()
-											* this.width * 2.0F)
+							+ (double) (this.rand.nextFloat()
+									* this.width * 2.0F)
 									- (double) this.width, var4, var6, var8);
 		}
 	}
@@ -1281,15 +1324,15 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements
 		compound.setInteger("AgeTick", this.getDinoAgeTick());
 		compound.setInteger("SubSpecies", this.getSubSpecies());
 		compound.setByte("OrderStatus", (byte) this.OrderStatus.ordinal()/*
-																		 * (byte)
-																		 * Fossil
-																		 * .
-																		 * EnumToInt
-																		 * (
-																		 * this.
-																		 * OrderStatus
-																		 * )
-																		 */);
+		 * (byte)
+		 * Fossil
+		 * .
+		 * EnumToInt
+		 * (
+		 * this.
+		 * OrderStatus
+		 * )
+		 */);
 		/*
 		 * if (this.ItemInMouth != null) { var1.setShort("Itemid",
 		 * (short)this.ItemInMouth.itemID); var1.setByte("ItemCount",
@@ -1392,8 +1435,8 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements
 
 							if (!player.capabilities.isCreativeMode) {
 								player.inventory
-										.addItemStackToInventory(new ItemStack(
-												Items.glass_bottle, 1));
+								.addItemStackToInventory(new ItemStack(
+										Items.glass_bottle, 1));
 							}
 							this.setDinoAgeTick(/* this.AgingTicks */this
 									.getDinoAgeTick() + 2000);
@@ -1406,7 +1449,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements
 					if (!this.worldObj.isRemote) {
 						Fossil.ShowMessage(
 								StatCollector
-										.translateToLocal(LocalizationStrings.STATUS_ESSENCE_FAIL),
+								.translateToLocal(LocalizationStrings.STATUS_ESSENCE_FAIL),
 								player);
 					}
 
@@ -1425,7 +1468,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements
 							this.increaseHunger(this.SelfType.FoodItemList
 									.getItemFood(itemstack.getItem())
 									+ this.SelfType.FoodBlockList
-											.getBlockFood(itemstack.getItem()));
+									.getBlockFood(itemstack.getItem()));
 
 							if (Fossil.FossilOptions.Heal_Dinos) {
 								// System.out.println("Hbefore:"+String.valueOf(this.health));
@@ -1456,10 +1499,10 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements
 							 */
 							if (!this.isTamed() && this.SelfType.isTameable()
 									&& (new Random()).nextInt(10) == 1) // taming
-																		// probability
-																		// 10%
-																		// (not
-																		// TREX!)
+								// probability
+								// 10%
+								// (not
+								// TREX!)
 							{
 								this.setTamed(true);
 								this.setOwner(player.getUniqueID().toString());
@@ -1491,10 +1534,10 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements
 								if (this.SelfType.FoodItemList
 										.getItemFood(ItemInMouth.getItem())
 										+ this.SelfType.FoodBlockList
-												.getBlockFood(ItemInMouth
-														.getItem()) < this.SelfType.FoodItemList
-										.getItemFood(itemstack.getItem())
-										+ this.SelfType.FoodBlockList
+										.getBlockFood(ItemInMouth
+												.getItem()) < this.SelfType.FoodItemList
+												.getItemFood(itemstack.getItem())
+												+ this.SelfType.FoodBlockList
 												.getBlockFood(itemstack
 														.getItem())) {
 									// The item given is better food for the

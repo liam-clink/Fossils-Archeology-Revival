@@ -8,6 +8,7 @@ import mods.fossil.core.FossilPlants;
 import mods.fossil.entity.mob.EntityTerrorBird;
 import mods.fossil.fossilEnums.EnumDinoType;
 import mods.fossil.items.ItemLivingCoelacanth;
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
@@ -30,6 +31,9 @@ ISidedInventory {
 	public int furnaceCookTime = 0;
 	public boolean isActive;
 	private String customName;
+
+	public TileEntityCultivate() {
+	}
 
 	/**
 	 * Returns the number of slots in the inventory.
@@ -174,6 +178,7 @@ ISidedInventory {
 		if (Fossil.DebugMode()) {
 			cookValue = 300;
 		} else {
+
 			cookValue = 6000;
 		}
 		if (this.furnaceCookTime > 0) {
@@ -235,11 +240,9 @@ ISidedInventory {
 		if (var2) {
 			this.markDirty();
 		}
-
 		if (this.furnaceCookTime == 3001 && (new Random()).nextInt(100) < 20) {
-			((BlockCultivate) Fossil.blockcultivateIdle).onBlockRemovalLost(
-					this.worldObj, this.xCoord, this.yCoord, this.zCoord, true);
-		}
+			((BlockCultivate)Fossil.blockcultivateIdle).onBlockRemovalLost(this.worldObj, this.xCoord, this.yCoord, this.zCoord, true);
+		}		
 	}
 
 	private boolean canSmelt() {
@@ -311,7 +314,7 @@ ISidedInventory {
 				return 1000;
 			}
 
-			if (output == Fossil.dodoEgg || output == Fossil.terrorBirdEgg) {
+			if (output == Fossil.dodoEgg || output == Fossil.terrorBirdEgg || output == Fossil.confuciusornisEgg) {
 				return 1000;
 			}
 
@@ -350,7 +353,9 @@ ISidedInventory {
 		if (itemstack.getItem() == FossilPlants.fossilSeed_fern) {
 			return new ItemStack(Fossil.fernSeed, 1);
 		}
-
+		if (itemstack.getItem() == FossilPlants.fossilSeed) {
+			return new ItemStack(FossilPlants.seed, 1, itemstack.getItemDamage());
+		}
 		if (itemstack.getItem() == Fossil.dnaSheep) {
 			return new ItemStack(Fossil.embryoSheep, 1);
 		}
@@ -368,7 +373,7 @@ ISidedInventory {
 		}
 
 		if (itemstack.getItem() == Fossil.dnaChicken) {
-			return new ItemStack(Fossil.embryoChicken, 1);
+			return new ItemStack(Fossil.cultivatedChickenEgg, 1);
 		}
 
 		if (itemstack.getItem() == Fossil.dnaPig) {
@@ -390,7 +395,9 @@ ISidedInventory {
 		if (itemstack.getItem() == Fossil.dnaDodo) {
 			return new ItemStack(Fossil.cultivatedDodoEgg, 1);
 		}
-
+		if (itemstack.getItem() == Fossil.dnaConfuciusornis) {
+			return new ItemStack(Fossil.cultivatedConfuciusornisEgg, 1);
+		}
 		if (itemstack.getItem() == Fossil.dnaTerrorBird) {
 			return new ItemStack(Fossil.cultivatedTerrorBirdEgg, 1,
 					new Random().nextInt(EntityTerrorBird.names.length));
@@ -513,12 +520,13 @@ ISidedInventory {
 				if(this.getStackInSlot(0).getItem() == Fossil.dnaCoelacanth){
 					return 1;
 				}
-				if(this.getStackInSlot(0).getItem() == FossilPlants.fossilSeed_dillhoffia|| this.getStackInSlot(0).getItem() == FossilPlants.seed_sarracina){
-					return 2;
-				}
 				if(this.getStackInSlot(0).getItem() == FossilPlants.fossilSeed_fern){
+					return 3;
+				}
+				if(this.getStackInSlot(0).getItem() == FossilPlants.fossilSeed){
 					return 2;
 				}
+
 			}
 		}
 		return 0;

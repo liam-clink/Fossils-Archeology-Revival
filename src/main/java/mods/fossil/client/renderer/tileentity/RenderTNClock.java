@@ -94,8 +94,9 @@ public class RenderTNClock extends TileEntitySpecialRenderer
         {
             var15.EdgePullBack();
         }
-
+        if(var1.isClockInPlace()){
         this.MainModel.render((Entity)null, var9, 0.5F, var13, var14, 0.0F, 0.0625F);
+        }
         GL11.glPopMatrix();
     }
 
