@@ -1,5 +1,6 @@
 package mods.fossil.client.gui;
 
+import mods.fossil.client.LocalizationStrings;
 import mods.fossil.guiBlocks.ContainerTimeMachine;
 import mods.fossil.guiBlocks.TileEntityTimeMachine;
 import net.minecraft.client.gui.GuiButton;
@@ -7,6 +8,7 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
+
 import org.lwjgl.opengl.GL11;
 
 public class GuiTimeMachine extends GuiContainer
@@ -21,6 +23,7 @@ public class GuiTimeMachine extends GuiContainer
     {
         super(new ContainerTimeMachine(var1, var2));
         this.timeMachineInstance = var2;
+        this.ySize = 188;
     }
 
     /**
@@ -29,16 +32,24 @@ public class GuiTimeMachine extends GuiContainer
     public void initGui()
     {
         super.initGui();
-        //this.controlList.clear();
     }
-
-    protected void drawGuiContainerForegroundLayer()
+    @Override
+    protected void drawGuiContainerForegroundLayer(int x, int y)
     {
         //int var1 = 16711680;
         String var2 = this.timeMachineInstance.getChargeLevel() / 10 + "%";
         int var3 = (34 - this.fontRendererObj.getStringWidth(var2)) / 2;
+        this.fontRendererObj.drawString(StatCollector.translateToLocal("tile.timeMachine.name"), 70 - StatCollector.translateToLocal(LocalizationStrings.BLOCK_TIMEMACHINE_NAME).length(), 6, 4210752);
         this.fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), 8, this.ySize - 96 + 2, 4210752);
-        this.fontRendererObj.drawString(var2, 131 + var3, 40, 16711680);
+       // this.fontRendererObj.drawString(var2, 131 + var3, 40, 16711680);
+        if(this.timeMachineInstance.isCharged()){
+        	String comingSoon = "Comming Soon...";
+        	 GL11.glPushMatrix();
+             GL11.glScalef(1.25F, 1.25F, 1.25F);
+             this.fontRendererObj.drawString(comingSoon, this.xSize/2 - comingSoon.length() * 4 + 37, this.ySize - 152 + 2, 0XBF0000, false);
+             GL11.glPopMatrix();
+
+        }
     }
 
     /**
@@ -55,9 +66,9 @@ public class GuiTimeMachine extends GuiContainer
         this.timeMachineInstance.getClass();
         float var10000 = (float)(1000 - this.timeMachineInstance.getChargeLevel());
         this.timeMachineInstance.getClass();
-        float var9 = var10000 / 1000.0F;
+        float var9 = var10000 / 1000.0F;//14
         int var8 = (int)(var9 * 75.0F);
-        this.drawTexturedModalRect(var6 + 7, var7 + 6, 176, 1, 75, var8);
+        this.drawTexturedModalRect(var6 + 5, var7 + 17, 176, 2, 75, var8);
     }
 
     /**

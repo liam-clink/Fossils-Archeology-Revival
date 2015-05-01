@@ -19,14 +19,35 @@ import net.minecraftforge.common.ChestGenHooks;
 
 public class WorldGenHellBoat extends WorldGenerator
 {
-    
-    
+	protected static final WeightedRandomChestContent[] field_111019_a = new WeightedRandomChestContent[] {
+		new WeightedRandomChestContent(Item.getItemFromBlock(Fossil.ancientGlass), 0, 2, 5, 25), 
+		new WeightedRandomChestContent(Fossil.relic, 0, 1, 2, 76), 
+		new WeightedRandomChestContent(Fossil.ancientSword, 0, 1, 3, 15),
+		new WeightedRandomChestContent(Item.getItemFromBlock(Fossil.blockSkull), 0, 1, 2, 60),
+		new WeightedRandomChestContent(Item.getItemFromBlock(Fossil.skullLantern), 0, 1, 2, 45),
+		new WeightedRandomChestContent(Item.getItemFromBlock(Fossil.drum), 0, 1, 1, 28),
+		new WeightedRandomChestContent(Fossil.potteryShards, 0, 1, 3, 70),
+		new WeightedRandomChestContent(Fossil.goldjavelin, 0, 1, 1, 33),
+		new WeightedRandomChestContent(Fossil.ironjavelin, 0, 1, 1, 46),
+		new WeightedRandomChestContent(Fossil.stoneboard, 0, 1, 3, 25),
+		new WeightedRandomChestContent(Items.bone, 0, 1, 3, 85),
+		new WeightedRandomChestContent(Items.emerald, 0, 1, 3, 25),
+		new WeightedRandomChestContent(Items.flint, 0, 1, 3, 35),
+		new WeightedRandomChestContent(Items.blaze_rod, 0, 1, 3, 30),
+		new WeightedRandomChestContent(Items.ghast_tear, 0, 1, 2, 25),
+		new WeightedRandomChestContent(Item.getItemFromBlock(Blocks.bookshelf), 0, 1, 5, 35),
+		new WeightedRandomChestContent(Item.getItemFromBlock(Blocks.glowstone), 0, 1, 4, 35),
+		new WeightedRandomChestContent(Item.getItemFromBlock(Blocks.obsidian), 0, 1, 6, 25),
+		new WeightedRandomChestContent(Items.netherbrick, 0, 1, 12, 65),
+		new WeightedRandomChestContent(Item.getItemFromBlock(Blocks.tnt), 0, 1, 6, 25)
+	};
+
 	protected Block[] GetValidSpawnBlocks()
 	{
 		return new Block[]
-		{
-			Blocks.lava,
-		};
+				{
+				Blocks.lava,
+				};
 	}
 
 	public boolean LocationIsValidSpawn(World world, int x, int y, int z)
@@ -75,8 +96,8 @@ public class WorldGenHellBoat extends WorldGenerator
 
 	public boolean generate(World world, Random rand, int x, int y, int z)
 	{
-		 generate_r0(world, rand, x, y, z);
-       return true;
+		generate_r0(world, rand, x, y, z);
+		return true;
 
 	}
 
@@ -347,12 +368,7 @@ public class WorldGenHellBoat extends WorldGenerator
 		world.setBlock(x + 16, y + 1, z + 2, Blocks.air, 0, 3);
 		world.setBlock(x + 17, y + 1, z + 2, Blocks.air, 0, 3);
 		world.setBlock(x + 18, y + 1, z + 2, Blocks.chest, 4, 3);
-		 TileEntityChest tileentitychest3 = (TileEntityChest)world.getTileEntity(x + 18, y + 1, z + 2);
-
-	        if (tileentitychest3 != null)
-	        {
-	            WeightedRandomChestContent.generateChestContents(rand, ChestGenHooks.getItems(Fossil.CHEST_HELLSHIP, rand), tileentitychest3, ChestGenHooks.getCount(Fossil.CHEST_HELLSHIP, rand));
-	        }
+		this.generateStructureChestContents(world, rand, x + 18, y + 1, z + 2, field_111019_a, 2 + rand.nextInt(1));
 		world.setBlock(x + 19, y + 1, z + 2, Blocks.iron_bars, 0, 3);
 		world.setBlock(x + 20, y + 1, z + 2, Blocks.air, 0, 3);
 		world.setBlock(x + 21, y + 1, z + 2, Blocks.nether_brick, 0, 3);
@@ -373,12 +389,7 @@ public class WorldGenHellBoat extends WorldGenerator
 		world.setBlock(x + 16, y + 1, z + 3, Blocks.air, 0, 3);
 		world.setBlock(x + 17, y + 1, z + 3, Blocks.air, 0, 3);
 		world.setBlock(x + 18, y + 1, z + 3, Blocks.chest, 4, 3);
-		 TileEntityChest tileentitychest4 = (TileEntityChest)world.getTileEntity(x + 18, y + 1, z + 3);
-
-	        if (tileentitychest4 != null)
-	        {
-	            WeightedRandomChestContent.generateChestContents(rand, ChestGenHooks.getItems(Fossil.CHEST_HELLSHIP, rand), tileentitychest4, ChestGenHooks.getCount(Fossil.CHEST_HELLSHIP, rand));
-	        }
+		this.generateStructureChestContents(world, rand, x + 18, y + 1, z + 3, field_111019_a, 2 + rand.nextInt(1));
 		world.setBlock(x + 19, y + 1, z + 3, Blocks.iron_bars, 0, 3);
 		world.setBlock(x + 20, y + 1, z + 3, Blocks.air, 0, 3);
 		world.setBlock(x + 21, y + 1, z + 3, Blocks.air, 0, 3);
@@ -389,12 +400,7 @@ public class WorldGenHellBoat extends WorldGenerator
 		world.setBlock(x + 4, y + 1, z + 4, Blocks.air, 0, 3);
 		world.setBlock(x + 5, y + 1, z + 4, Blocks.air, 0, 3);
 		world.setBlock(x + 6, y + 1, z + 4, Blocks.chest, 4, 3);
-		 TileEntityChest tileentitychest5 = (TileEntityChest)world.getTileEntity(x + 6, y + 1, z + 4);
-
-	        if (tileentitychest5 != null)
-	        {
-	            WeightedRandomChestContent.generateChestContents(rand, ChestGenHooks.getItems(Fossil.CHEST_HELLSHIP, rand), tileentitychest5, ChestGenHooks.getCount(Fossil.CHEST_HELLSHIP, rand));
-	        }
+		this.generateStructureChestContents(world, rand, x + 6, y + 1, z + 4, field_111019_a, 2 + rand.nextInt(1));
 		world.setBlock(x + 7, y + 1, z + 4, Blocks.nether_brick_stairs, 1, 3);
 		world.setBlock(x + 8, y + 1, z + 4, Blocks.air, 0, 3);
 		world.setBlock(x + 9, y + 1, z + 4, Blocks.air, 0, 3);
@@ -405,8 +411,7 @@ public class WorldGenHellBoat extends WorldGenerator
 		world.setBlock(x + 14, y + 1, z + 4, Blocks.air, 0, 3);
 		world.setBlock(x + 15, y + 1, z + 4, Blocks.double_stone_slab, 0, 3);
 		//world.setBlock(x + 16, y + 1, z + 4, Blocks.iron_door, 3, 3);
-        ItemDoor.placeDoorBlock(world, x + 16, y + 1, z + 4, 3, Blocks.iron_door);  
-
+		ItemDoor.placeDoorBlock(world, x + 16, y + 1, z + 4, 3, Blocks.iron_door);  
 		world.setBlock(x + 17, y + 1, z + 4, Blocks.double_stone_slab, 0, 3);
 		world.setBlock(x + 18, y + 1, z + 4, Blocks.iron_bars, 0, 3);
 		world.setBlock(x + 19, y + 1, z + 4, Blocks.iron_bars, 0, 3);
@@ -445,12 +450,7 @@ public class WorldGenHellBoat extends WorldGenerator
 		world.setBlock(x + 4, y + 1, z + 6, Blocks.air, 0, 3);
 		world.setBlock(x + 5, y + 1, z + 6, Blocks.air, 0, 3);
 		world.setBlock(x + 6, y + 1, z + 6, Blocks.chest, 4, 3);
-		 TileEntityChest tileentitychest6 = (TileEntityChest)world.getTileEntity(x + 6, y + 1, z + 6);
-
-	        if (tileentitychest6 != null)
-	        {
-	            WeightedRandomChestContent.generateChestContents(rand, ChestGenHooks.getItems(Fossil.CHEST_HELLSHIP, rand), tileentitychest6, ChestGenHooks.getCount(Fossil.CHEST_HELLSHIP, rand));
-	        }
+		this.generateStructureChestContents(world, rand, x + 6, y + 1, z + 6, field_111019_a, 2 + rand.nextInt(1));
 		world.setBlock(x + 7, y + 1, z + 6, Blocks.nether_brick_stairs, 1, 3);
 		world.setBlock(x + 8, y + 1, z + 6, Blocks.air, 0, 3);
 		world.setBlock(x + 9, y + 1, z + 6, Blocks.air, 0, 3);
@@ -461,19 +461,14 @@ public class WorldGenHellBoat extends WorldGenerator
 		world.setBlock(x + 14, y + 1, z + 6, Blocks.air, 0, 3);
 		world.setBlock(x + 15, y + 1, z + 6, Blocks.double_stone_slab, 0, 3);
 		//world.setBlock(x + 16, y + 1, z + 6, Blocks.iron_door, 1, 3);
-        ItemDoor.placeDoorBlock(world, x + 16, y + 1, z + 6, 3, Blocks.iron_door);  
+		ItemDoor.placeDoorBlock(world, x + 16, y + 1, z + 6, 3, Blocks.iron_door);  
 		world.setBlock(x + 17, y + 1, z + 6, Blocks.double_stone_slab, 0, 3);
 		world.setBlock(x + 18, y + 1, z + 6, Blocks.iron_bars, 0, 3);
 		world.setBlock(x + 19, y + 1, z + 6, Blocks.iron_bars, 0, 3);
 		world.setBlock(x + 20, y + 1, z + 6, Blocks.air, 0, 3);
 		world.setBlock(x + 21, y + 1, z + 6, Blocks.air, 0, 3);
 		world.setBlock(x + 22, y + 1, z + 6, Blocks.chest, 4, 3);//
-        TileEntityChest tileentitychest1 = (TileEntityChest)world.getTileEntity(x + 22, y + 1, z + 6);
-
-        if (tileentitychest1 != null)
-        {
-            WeightedRandomChestContent.generateChestContents(rand, ChestGenHooks.getItems(Fossil.CHEST_HELLSHIP, rand), tileentitychest1, ChestGenHooks.getCount(Fossil.CHEST_HELLSHIP, rand));
-        }
+		this.generateStructureChestContents(world, rand, x + 22, y + 1, z + 6, field_111019_a, 2 + rand.nextInt(1));
 		world.setBlock(x + 23, y + 1, z + 6, Blocks.nether_brick, 0, 3);
 		world.setBlock(x + 2, y + 1, z + 7, Blocks.nether_brick, 0, 3);
 		world.setBlock(x + 3, y + 1, z + 7, Blocks.air, 0, 3);
@@ -503,14 +498,8 @@ public class WorldGenHellBoat extends WorldGenerator
 		world.setBlock(x + 9, y + 1, z + 8, Blocks.furnace, 2, 3);
 		world.setBlock(x + 10, y + 1, z + 8, Blocks.furnace, 2, 3);
 		world.setBlock(x + 11, y + 1, z + 8, Blocks.chest, 2, 3);//
-		   TileEntityChest tileentitychest2 = (TileEntityChest)world.getTileEntity(x + 11, y + 1, z + 8);
-
-	        if (tileentitychest2 != null)
-	        {
-	            WeightedRandomChestContent.generateChestContents(rand, ChestGenHooks.getItems(Fossil.CHEST_HELLSHIP, rand), tileentitychest2, ChestGenHooks.getCount(Fossil.CHEST_HELLSHIP, rand));
-	        }
+		this.generateStructureChestContents(world, rand, x + 11, y + 1, z + 8, field_111019_a, 2 + rand.nextInt(1));
 		world.setBlock(x + 11, y + 1, z + 7, Blocks.air, 2, 3);
-
 		world.setBlock(x + 12, y + 1, z + 8, Blocks.air, 0, 3);
 		world.setBlock(x + 13, y + 1, z + 8, Blocks.air, 0, 3);
 		world.setBlock(x + 14, y + 1, z + 8, Blocks.air, 0, 3);
@@ -518,12 +507,7 @@ public class WorldGenHellBoat extends WorldGenerator
 		world.setBlock(x + 16, y + 1, z + 8, Blocks.air, 0, 3);
 		world.setBlock(x + 17, y + 1, z + 8, Blocks.air, 0, 3);
 		world.setBlock(x + 18, y + 1, z + 8, Blocks.chest, 2, 3);
-		 TileEntityChest tileentitychest7 = (TileEntityChest)world.getTileEntity(x + 18, y + 1, z + 8);
-
-	        if (tileentitychest7 != null)
-	        {
-	            WeightedRandomChestContent.generateChestContents(rand, ChestGenHooks.getItems(Fossil.CHEST_HELLSHIP, rand), tileentitychest7, ChestGenHooks.getCount(Fossil.CHEST_HELLSHIP, rand));
-	        }
+		this.generateStructureChestContents(world, rand, x + 18, y + 1, z + 8, field_111019_a, 2 + rand.nextInt(1));
 		world.setBlock(x + 18, y + 1, z + 7, Blocks.air, 2, 3);
 		world.setBlock(x + 19, y + 1, z + 8, Blocks.iron_bars, 0, 3);
 		world.setBlock(x + 20, y + 1, z + 8, Blocks.web, 0, 3);
@@ -1152,5 +1136,16 @@ public class WorldGenHellBoat extends WorldGenerator
 		return true;
 
 	}
-    
+	protected void generateStructureChestContents(World world, Random rand, int i1, int j1, int k1, WeightedRandomChestContent[] content, int i)
+	{
+
+		world.setBlock(i1, j1, k1, Blocks.chest, 0, 2);
+		TileEntityChest tileentitychest = (TileEntityChest)world.getTileEntity(i1, j1, k1);
+
+		if (tileentitychest != null)
+		{
+			WeightedRandomChestContent.generateChestContents(rand, content, tileentitychest, i);
+		}
+
+	}  
 }

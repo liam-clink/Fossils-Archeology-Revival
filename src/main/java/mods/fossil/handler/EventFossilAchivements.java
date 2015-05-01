@@ -24,6 +24,15 @@ public class EventFossilAchivements
 		if(event.crafting.getItem() == Item.getItemFromBlock(Fossil.blockcultivateIdle)) {
 			event.player.addStat(FossilAchievementHandler.cultivate, 1);
 		}
+		if(event.crafting.getItem() == Item.getItemFromBlock(Fossil.blockWeakcultivateIdle)) {
+			event.player.addStat(FossilAchievementHandler.cultivate, 1);
+		}
+		if(event.crafting.getItem() == Item.getItemFromBlock(Fossil.blockStrongcultivateIdle)) {
+			event.player.addStat(FossilAchievementHandler.cultivate, 1);
+		}
+		if(event.crafting.getItem() == Item.getItemFromBlock(Fossil.blockworktableIdle)) {
+			event.player.addStat(FossilAchievementHandler.arcWorkbench, 1);
+		}
 		if(event.crafting.getItem() == Fossil.AquaticScarabGem) {
 			event.player.addStat(FossilAchievementHandler.blueScarab, 1);
 		}
@@ -35,14 +44,12 @@ public class EventFossilAchivements
 	}
 	@SubscribeEvent
 	public void onItemEvent(PlayerEvent.ItemPickupEvent event) {
-		if(Fossil.isDNA(event.pickedUp.getEntityItem().getItem())) {
-			event.player.addStat(FossilAchievementHandler.dinoDna, 1);
-		}
-		if(event.pickedUp.getEntityItem().getItem() == FossilPlants.fossilSeed || event.pickedUp.getEntityItem().getItem() == FossilPlants.fossilSeed_fern) {
-			event.player.addStat(FossilAchievementHandler.fossilSeeds, 1);
-		}
+		
 		if(event.pickedUp.getEntityItem().getItem() == Fossil.gem) {
 			event.player.addStat(FossilAchievementHandler.scarab, 1);
+		}
+		if(event.pickedUp.getEntityItem().getItem() == Fossil.ancientKey) {
+			event.player.addStat(FossilAchievementHandler.key, 1);
 		}
 	}
 }

@@ -709,7 +709,7 @@ public class EntityMammoth extends EntityPrehistoric implements IShearable
     {
         if (this.riddenByEntity != null)
         {
-            this.riddenByEntity.setPosition(this.posX, this.posY + (double)this.getEyeHeight(), this.posZ);
+            this.riddenByEntity.setPosition(this.posX, this.posY + 0.8 + (double)this.getEyeHeight(), this.posZ);
         }
     }
 

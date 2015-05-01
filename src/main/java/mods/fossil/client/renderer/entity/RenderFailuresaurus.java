@@ -1,9 +1,13 @@
 package mods.fossil.client.renderer.entity;
 
+import org.lwjgl.opengl.GL11;
+
 import mods.fossil.entity.mob.EntityFailuresaurus;
+import mods.fossil.entity.mob.EntityVelociraptor;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 
 public class RenderFailuresaurus extends RenderLiving
@@ -16,7 +20,6 @@ public class RenderFailuresaurus extends RenderLiving
     {
         super(var1, var2);
     }
-
     protected ResourceLocation getResourceLocation(EntityFailuresaurus entity)
     {
     	switch (entity.getSkin())

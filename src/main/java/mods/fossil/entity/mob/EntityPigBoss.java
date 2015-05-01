@@ -12,6 +12,7 @@ import mods.fossil.fossilEnums.EnumPigBossSpeaks;
 import mods.fossil.fossilEnums.EnumPigmenSpeaks;
 import mods.fossil.handler.FossilAchievementHandler;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -478,9 +479,14 @@ public class EntityPigBoss extends EntityMob implements IBossDisplayData, IRange
         EntityPlayer entityplayer = this.worldObj.getClosestVulnerablePlayerToEntity(this, 16.0D);
         
         if(entityplayer != null && this.canEntityBeSeen(entityplayer)){
-        	
-    		Fossil.ShowMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + 
-					StatCollector.translateToLocal("anuSpeaker.hello"), (EntityPlayer)entityplayer);
+        	if(this.getRNG().nextInt(1) == 0){
+        		Fossil.ShowMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + 
+    					StatCollector.translateToLocal("anuSpeaker.hello"), (EntityPlayer)entityplayer);
+        	}else{
+        		Fossil.ShowMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + 
+    					StatCollector.translateToLocal("anuSpeaker.fewBeaten"), (EntityPlayer)entityplayer);
+        	}
+    		
     		
             if (!this.worldObj.provider.isHellWorld)
             {
@@ -634,24 +640,24 @@ public class EntityPigBoss extends EntityMob implements IBossDisplayData, IRange
             {
                 for (int var2 = (int)(Math.round(this.posZ) - 1L); var2 <= (int)(Math.round(this.posZ) + 1L); ++var2)
                 {
-                    Block var3 = this.worldObj.getBlock(var1, (int)(Math.round(this.posY) - 1L), var2);
+                    Material var3 = this.worldObj.getBlock(var1, (int)(Math.round(this.posY) - 1L), var2).getMaterial();
 
-                    if (var3 == Blocks.stone || var3 == Blocks.cobblestone)
+                    if (var3 == Material.rock)
                     {
                         this.worldObj.setBlock(var1, (int)(Math.round(this.posY) - 1L), var2, Blocks.netherrack);
                     }
 
-                    if (var3 == Blocks.dirt || var3 == Blocks.grass || var3 == Blocks.sand || var3 == Blocks.gravel)
+                    if (var3 == Material.ground)
                     {
                         this.worldObj.setBlock(var1, (int)(Math.round(this.posY) - 1L), var2, Blocks.soul_sand);
                     }
 
-                    if (var3 == Blocks.ice)
+                    if (var3 == Material.ice || var3 == Material.water)
                     {
                         this.worldObj.setBlock(var1, (int)(Math.round(this.posY) - 1L), var2, Blocks.obsidian);
                     }
 
-                    if (var3 == Blocks.clay)
+                    if (var3 == Material.clay)
                     {
                         this.worldObj.setBlock(var1, (int)(Math.round(this.posY) - 1L), var2, Blocks.glowstone);
                     }

@@ -178,6 +178,7 @@ public class EntitySarcosuchus extends EntitySwimmingDino {
 	 */
 
 	public boolean interact(EntityPlayer player) {
+		 super.interact(player);
 		ItemStack itemStack = player.inventory.getCurrentItem();
 		if (itemStack != null) {
 			if (itemStack.getItem() == Fossil.AquaticScarabGem) {
@@ -217,7 +218,7 @@ public class EntitySarcosuchus extends EntitySwimmingDino {
 					}
 				}
 			}
-			return super.interact(player);
+			return true;
 		}
 		return false;
 	}

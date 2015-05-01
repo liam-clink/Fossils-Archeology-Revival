@@ -1,5 +1,8 @@
 package mods.fossil.guiBlocks;
 
+import mods.fossil.Fossil;
+import mods.fossil.fossilEnums.EnumDinoType;
+import mods.fossil.handler.FossilAchievementHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -102,7 +105,24 @@ public class ContainerCultivateStrong extends Container {
 	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2) {
 		ItemStack itemstack = null;
 		Slot slot = (Slot) this.inventorySlots.get(par2);
-
+		if(par2 == 2) {
+			if(slot.getStack() != null){
+				if(slot.getStack().getItem() != null){
+					if(EnumDinoType.isDinoEgg(slot.getStack().getItem())){
+						par1EntityPlayer.addStat(FossilAchievementHandler.dinoEgg, 1);
+					}
+					if(slot.getStack().getItem() == Fossil.embryoCow || slot.getStack().getItem() == Fossil.embryoElasmotherium|| slot.getStack().getItem() == Fossil.embryoHorse
+							|| slot.getStack().getItem() == Fossil.embryoMammoth || slot.getStack().getItem() == Fossil.embryoPig || slot.getStack().getItem() == Fossil.embryoQuagga
+							 || slot.getStack().getItem() == Fossil.embryoSheep || slot.getStack().getItem() == Fossil.embryoSmilodon){
+						par1EntityPlayer.addStat(FossilAchievementHandler.mammalEmbryo, 1);
+					}
+					if(slot.getStack().getItem() == Fossil.cultivatedChickenEgg || slot.getStack().getItem() == Fossil.cultivatedConfuciusornisEgg
+							|| slot.getStack().getItem() == Fossil.cultivatedDodoEgg || slot.getStack().getItem() == Fossil.cultivatedTerrorBirdEgg){
+						par1EntityPlayer.addStat(FossilAchievementHandler.birdEgg, 1);
+					}
+				}
+			}
+		}
 		if (slot != null && slot.getHasStack()) {
 			ItemStack itemstack1 = slot.getStack();
 			itemstack = itemstack1.copy();

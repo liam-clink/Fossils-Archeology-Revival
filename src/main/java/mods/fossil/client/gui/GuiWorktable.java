@@ -20,7 +20,6 @@ public class GuiWorktable extends GuiContainer
         super(new ContainerWorktable(var1, var2));
         this.furnaceInventory = (TileEntityWorktable)var2;
     }
-
     protected void drawGuiContainerForegroundLayer()
     {
         this.fontRendererObj.drawString(LocalizationStrings.BLOCK_WORKTABLE_IDLE_NAME, 30, 6, 4210752);

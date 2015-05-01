@@ -27,6 +27,7 @@ public class ModelPteranodon extends ModelBase {
 	public ModelRenderer Fibre3;
 	public ModelRenderer Neck;
 	public ModelRenderer Fibre4;
+	public ModelRenderer HeadPivot;
 	public ModelRenderer Head;
 	public ModelRenderer Beaka;
 	public ModelRenderer Beak2;
@@ -81,10 +82,14 @@ public class ModelPteranodon extends ModelBase {
 		this.WingR2.setRotationPoint(-8.8F, 0.0F, 2.6F);
 		this.WingR2.addBox(-10.7F, -0.4F, -0.7F, 11, 1, 4);
 		this.setRotateAngle(WingR2, 0.0F, 2.4586453172844123F, 0.0F);
+		this.HeadPivot = new ModelRenderer(this, 0, 0);
+		this.HeadPivot.setRotationPoint(0.0F, -0.6F, -3.5F);
+		this.HeadPivot.addBox(0F, 0F, 0F, 0, 0, 0);
+		this.setRotateAngle(HeadPivot, 1.038819970787025F, -0.0F, 0.0F);
 		this.Head = new ModelRenderer(this, 0, 55);
-		this.Head.setRotationPoint(0.0F, -0.6F, -3.5F);
+		this.Head.setRotationPoint(0.0F, 0F, 0F);
 		this.Head.addBox(-2.0F, -3.0F, -5.0F, 4, 4, 5);
-		this.setRotateAngle(Head, 1.038819970787025F, -0.0F, 0.0F);
+		this.setRotateAngle(Head, 0F, -0.0F, 0.0F);
 		this.HandR = new ModelRenderer(this, 58, 32);
 		this.HandR.setRotationPoint(-9.5F, 0.1F, -2.5F);
 		this.HandR.addBox(-0.5F, -0.5F, -1.0F, 1, 1, 1);
@@ -131,7 +136,8 @@ public class ModelPteranodon extends ModelBase {
 		this.WingL1.addChild(this.WingL2);
 		this.Neck2.addChild(this.Neck);
 		this.WingR1.addChild(this.HandR);
-		this.Neck.addChild(this.Head);
+		this.Neck.addChild(this.HeadPivot);
+		this.HeadPivot.addChild(this.Head);
 		this.Head.addChild(this.Crest);
 		this.Beaka.addChild(this.Beakb);
 		this.Neck2.addChild(this.Fibre4);
@@ -155,7 +161,7 @@ public class ModelPteranodon extends ModelBase {
 		super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 		if(!modelized){
 			  this.Head.rotateAngleY = (f3 / (180F / (float)Math.PI))/3;
-		        this.Head.rotateAngleX = (f4 / (180F / (float)Math.PI))/3 + this.Head.rotateAngleX;
+		        this.Head.rotateAngleX = (f4 / (180F / (float)Math.PI))/3;
 		        this.Neck2.rotateAngleY = (f3 / (180F / (float)Math.PI))/5;
 		this.Leg.rotateAngleX = MathHelper.cos(f * 0.6662F + (float)Math.PI) * 1.4F * f1;
 		this.Leg2.rotateAngleX = MathHelper.cos(f * 0.6662F) * 1.4F * f1;
@@ -164,7 +170,7 @@ public class ModelPteranodon extends ModelBase {
 		
 		}else{
 			this.Head.rotateAngleY = 0F;
-			this.Head.rotateAngleX = 1.038819970787025F;
+			this.Head.rotateAngleX = 0F;
 			this.Neck2.rotateAngleY = 0F;
 			this.Leg.rotateAngleX = 0;
 			this.Leg2.rotateAngleX = 0;

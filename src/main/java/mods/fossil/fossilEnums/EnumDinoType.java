@@ -259,7 +259,7 @@ public enum EnumDinoType {
      */
     public static void init()
     {
-    	Ceratosaurus.setItems(Fossil.skullStick);
+    	Ceratosaurus.setItems(Items.bone);
     	Ceratosaurus.setAges(5, 10, -1);
     	Ceratosaurus.setDinoSize(sizeBaby, sizeTeen, sizeAdult);
     	Ceratosaurus.setProperties(8.0D, 35.0D, 1.0D, 10.0D, 0.25D, 0.42D, 400);
@@ -633,7 +633,18 @@ public enum EnumDinoType {
 
         return false;
     }
+    public static boolean isDinoEgg(Item i0)
+    {
+        for (int i = 0; i < values().length; i++)
+        {
+            if (values()[i].EggItem == i0)
+            {
+                return true;
+            }
+        }
 
+        return false;
+    }
     /**
      * takes an Item and returns if it is a dino drop
      */

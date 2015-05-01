@@ -4,6 +4,7 @@ import java.util.Random;
 
 import mods.fossil.Fossil;
 import mods.fossil.client.FossilOptions;
+import mods.fossil.gens.feature.WorldGenAnuCastle;
 import mods.fossil.gens.feature.WorldGenHellBoat;
 import mods.fossil.gens.feature.WorldGenTarPit;
 import net.minecraft.world.World;

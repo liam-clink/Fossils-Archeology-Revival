@@ -1,6 +1,8 @@
 package mods.fossil.guiBlocks;
 
 import mods.fossil.Fossil;
+import mods.fossil.core.FossilPlants;
+import mods.fossil.handler.FossilAchievementHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -119,6 +121,30 @@ public class ContainerAnalyzer extends Container {
 	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2) {
 		ItemStack itemstack = null;
 		Slot slot = (Slot) this.inventorySlots.get(par2);
+		for (par2 = 0; par2 < 9; ++par2) {
+			if(slot.getStack() != null){
+				if(slot.getStack().getItem() != null){
+					if(slot.getStack().getItem() == Fossil.failuresaurusFlesh){
+						par1EntityPlayer.addStat(FossilAchievementHandler.failuresaurusAnalyzer, 1);
+					}
+				}
+			}
+		}
+		for (par2 = 12; par2 > 8; --par2) {
+			if(slot.getStack() != null){
+				if(slot.getStack().getItem() != null){
+					if(slot.getStack().getItem() == Fossil.stoneboard){
+						par1EntityPlayer.addStat(FossilAchievementHandler.tablet, 1);
+					}
+					if(Fossil.isDNA(slot.getStack().getItem())){
+						par1EntityPlayer.addStat(FossilAchievementHandler.dinoDna, 1);
+					}
+					if(slot.getStack().getItem() == FossilPlants.fossilSeed || slot.getStack().getItem() == FossilPlants.fossilSeed_fern){
+						par1EntityPlayer.addStat(FossilAchievementHandler.fossilSeeds, 1);
+					}
+				}
+			}
+		}
 
 		if (slot != null && slot.getHasStack()) {
 			ItemStack itemstack1 = slot.getStack();

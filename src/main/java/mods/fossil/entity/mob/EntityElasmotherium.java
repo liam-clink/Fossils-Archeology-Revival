@@ -346,12 +346,6 @@ public class EntityElasmotherium extends EntityPrehistoric
 
         if (itemstack != null)
         {
-            if (itemstack.getItem().equals(Fossil.chickenEss))
-            {
-                this.setGrowingAge(this.getGrowingAge() + 2000);
-                itemstack.stackSize--;
-                return true;
-            }
 
             if (FMLCommonHandler.instance().getSide().isClient() && itemstack.getItem() == Fossil.dinoPedia)
             {

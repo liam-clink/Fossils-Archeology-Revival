@@ -101,7 +101,11 @@ public class EntityVelociraptor extends EntityDinosaur
         
         this.targetTasks.addTask(5, new DinoAIHunt(this, EntityLiving.class, 500, false));
     }
-
+    protected void entityInit()
+	{
+		super.entityInit();
+		this.dataWatcher.addObject(30, new Byte((byte)0));
+	}
     protected void applyEntityAttributes()
     {
         super.applyEntityAttributes();
@@ -109,7 +113,21 @@ public class EntityVelociraptor extends EntityDinosaur
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(baseHealth);
         this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(baseDamage);
     }
+    public void setBesideClimbableBlock(boolean isClollided)
+	{
+		byte b0 = this.dataWatcher.getWatchableObjectByte(30);
 
+		if (isClollided)
+		{
+			b0 = (byte)(b0 | 1);
+		}
+		else
+		{
+			b0 &= -2;
+		}
+
+		this.dataWatcher.updateObject(30, Byte.valueOf(b0));
+	}
     /*protected void entityInit()
     {
         super.entityInit();
@@ -242,14 +260,26 @@ public class EntityVelociraptor extends EntityDinosaur
     {
         return this.worldObj.checkNoEntityCollision(this.boundingBox) && this.worldObj.getCollidingBoundingBoxes(this, this.boundingBox).size() == 0 && !this.worldObj.isAnyLiquid(this.boundingBox);
     }
-
+    public boolean isBesideClimbableBlock()
+	{
+		return (this.dataWatcher.getWatchableObjectByte(30) & 1) != 0;
+	}
+    public boolean isOnLadder()
+	{
+		return this.isBesideClimbableBlock();
+	}
+    protected void fall(float i) {}
     /**
      * Called to update the entity's position/logic.
      */
     public void onUpdate()
     {
         super.onUpdate();
-
+        if (!this.worldObj.isRemote)
+		{
+			this.setBesideClimbableBlock(this.isCollidedHorizontally);
+		}
+        
         /*this.field_25054_c = this.field_25048_b;
 
         if (this.looksWithInterest)

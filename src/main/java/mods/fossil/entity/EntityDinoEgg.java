@@ -789,15 +789,14 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
 							|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.WASTELAND)
 							|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.SPOOKY))
 					{
-						((EntitySarcosuchus)var5).setSubSpecies(1); //desert
+						((EntitySarcosuchus)var5).setSubSpecies(2); //desert
 					}
 					else if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.JUNGLE)
 							|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.MAGICAL)
 							|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.SWAMP)
-							|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.DENSE)
-							|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.LUSH))
+							|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.DENSE))
 					{
-						((EntitySarcosuchus)var5).setSubSpecies(2); //swamp
+						((EntitySarcosuchus)var5).setSubSpecies(1); //swamp
 					}else{
 						((EntitySarcosuchus)var5).setSubSpecies(0); 
 
@@ -828,7 +827,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
 				if(var5 instanceof EntityDinosaur){
 					if (((EntityDinosaur)var5).SelfType.isTameable() && player != null)
 					{
-						if(((EntityDinosaur)var5).SelfType != EnumDinoType.TRex && ((EntityDinosaur)var5).SelfType != EnumDinoType.Allosaurus){
+						if(((EntityDinosaur)var5).SelfType != EnumDinoType.TRex && ((EntityDinosaur)var5).SelfType != EnumDinoType.Allosaurus && ((EntityDinosaur)var5).SelfType != EnumDinoType.Sarcosuchus){
 							// Tameable and player next to it
 							((EntityDinosaur)var5).setTamed(true);
 							((EntityDinosaur)var5).setOwner(player.getUniqueID().toString());

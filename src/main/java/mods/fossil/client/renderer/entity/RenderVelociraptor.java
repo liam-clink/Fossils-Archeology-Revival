@@ -25,6 +25,7 @@ public class RenderVelociraptor extends RenderLiving
      */
     protected void preRenderScale(EntityVelociraptor entitydinosaur, float par2)
     {
+    	
         GL11.glScalef(entitydinosaur.getDinosaurSize(), entitydinosaur.getDinosaurSize(), entitydinosaur.getDinosaurSize());
     }
 

@@ -176,20 +176,31 @@ IEntityAdditionalSpawnData {
 	}
 	/**Call this in onLivingUpdate() if your dino breaks blocks.*/
 	public void breakBlock(float hardness){
-		if(!isModelized() && this.isAdult() && this.IsDeadlyHungry()){
-			if(FossilOptions.Dino_Block_Breaking){
+		if(FossilOptions.Dino_Block_Breaking){
+		if(!isModelized() && this.isAdult() && this.IsHungry()){
 				for (int a=(int)Math.round(this.boundingBox.minX)-1;a<=(int)Math.round(this.boundingBox.maxX)+1;a++){
 					for (int b=(int)Math.round(this.boundingBox.minY);(b<=(int)Math.round(this.boundingBox.maxY)+3) &&(b<=127);b++){
 						for (int c=(int)Math.round(this.boundingBox.minZ)-1;c<=(int)Math.round(this.boundingBox.maxZ)+1;c++){
+							
 							Block block = worldObj.getBlock(a,b,c);
+							if (block != Blocks.air || block != Fossil.ancientGlass || block != Fossil.strongGlass)
+							{
+								if(block.getBlockHardness(worldObj, a, b, c) < hardness){
 
-							if(block.getBlockHardness(worldObj, a, b, c) < hardness){
-								if (block != Blocks.air || block == Fossil.ancientGlass || block == Fossil.strongGlass)
-								{
-									this.playSound(block.stepSound.getBreakSound(), 0.15F, 1.0F);
+									this.motionX *= 0.6D;
+									this.motionZ *= 0.6D;
 									Item item = block.getItemDropped(worldObj.getBlockMetadata(a, b, c), this.getRNG(), 1);
 									int itemCount = block.quantityDropped(getRNG());
 									int itemMeta = block.damageDropped(worldObj.getBlockMetadata(a, b, c));
+									if(block != null && block != Blocks.air){
+										//this.worldObj.spawnParticle("blockcrack_" + Block.getIdFromBlock(block) + "_" + this.worldObj.getBlockMetadata(a, b, c), a + ((double)this.rand.nextFloat() - 0.5D) * (double)this.width,b + 0.1D, c + ((double)this.rand.nextFloat() - 0.5D) * (double)this.width, 4.0D * ((double)this.rand.nextFloat() - 0.5D), 0.5D, ((double)this.rand.nextFloat() - 0.5D) * 4.0D);
+										this.playSound(block.stepSound.getBreakSound(), 0.15F, 1.0F);
+									}
+									
+									if(!worldObj.isRemote){
+										worldObj.setBlock(a, b, c, Blocks.air);
+									}
+									
 									if(item != null){
 										float f = 0.7F;
 										double d0 = (double)(this.getRNG().nextFloat() * f) + (double)(1.0F - f) * 0.5D;
@@ -199,11 +210,8 @@ IEntityAdditionalSpawnData {
 											EntityItem entityitem = new EntityItem(worldObj, (double)a + d0, (double)b + d1, (double)c + d2, new ItemStack(item, itemCount, itemMeta));
 											entityitem.delayBeforeCanPickup = 10;
 											worldObj.spawnEntityInWorld(entityitem);
+
 										}
-									}
-									if(!worldObj.isRemote){
-										this.worldObj.spawnParticle("blockcrack_" + Block.getIdFromBlock(block) + "_" + this.worldObj.getBlockMetadata(a, b, c), a + ((double)this.rand.nextFloat() - 0.5D) * (double)this.width, b + 0.1D, c + ((double)this.rand.nextFloat() - 0.5D) * (double)this.width, 4.0D * ((double)this.rand.nextFloat() - 0.5D), 0.5D, ((double)this.rand.nextFloat() - 0.5D) * 4.0D);
-										worldObj.setBlock(a, b, c, Blocks.air);
 									}
 								}
 

@@ -20,7 +20,7 @@ achievement.firstFossil.desc=Mine a Fossil or Permafrost block.
 achievement.analyzer=More Fossils!
 achievement.analyzer.desc=Craft an Analyzer block.
 achievement.tablet=The Prophecy...
-achievement.tablet.desc=Place a Stoneboard.
+achievement.tablet.desc=Obtain a Stoneboard from Analyzing a Relic Scrap.
 achievement.dinoDna=Bingo! Dino DNA!
 achievement.dinoDna.desc=Obtain any DNA from Analyzing a Bio-Fossil.
 achievement.cultivate=Cult Classic!
@@ -626,6 +626,8 @@ anuSpeaker.summon=Servants, your Master calls.
 anuSpeaker.trans=Brutes, wake up your wisdom.
 anuSpeaker.qi=Qi-shock!
 anuSpeaker.fireRain=Lets rain some fire!
+anuSpeaker.mySword=Using my own magic against me? Bad idea.
+anuSpeaker.fewBeaten=Few have beaten me. Prepare to die.
 
 #Friendly pigmen speaking lines
 fpzSpeaker.self=Pig Zombies: 
@@ -643,9 +645,9 @@ dinoegg.cold= died because it was too cold.
 
 #Cultivator chat messages
 cultivate.outBreak=Warning! Cultivating failed!
-tile.cultureVat.teir1=Teir 1
-tile.cultureVat.teir2=Teir 2
-tile.cultureVat.teir3=Teir 3
+tile.cultureVat.teir1=Tier 1
+tile.cultureVat.teir2=Tier 2
+tile.cultureVat.teir3=Tier 3
 
 #Drum chat messages
 drum.trigger=Drum Order: 

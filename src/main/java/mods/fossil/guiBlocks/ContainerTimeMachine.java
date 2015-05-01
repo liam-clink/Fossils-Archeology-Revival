@@ -1,5 +1,8 @@
 package mods.fossil.guiBlocks;
 
+import mods.fossil.Fossil;
+import mods.fossil.fossilEnums.EnumDinoType;
+import mods.fossil.handler.FossilAchievementHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -17,17 +20,17 @@ public class ContainerTimeMachine extends Container {
 		int var3;
 		int var4;
 
-		this.addSlotToContainer(new Slot(var2, 6, 36, 36));
+		this.addSlotToContainer(new Slot(var2, 6, 35, 46));
 
 		for (var3 = 0; var3 < 3; ++var3) {
 			for (var4 = 0; var4 < 9; ++var4) {
 				this.addSlotToContainer(new Slot(var1, var4 + var3 * 9 + 9,
-						8 + var4 * 18, 84 + var3 * 18));
+						7 + var4 * 18, 107 + var3 * 18));
 			}
 		}
 
 		for (var3 = 0; var3 < 9; ++var3) {
-			this.addSlotToContainer(new Slot(var1, var3, 8 + var3 * 18, 142));
+			this.addSlotToContainer(new Slot(var1, var3, 7 + var3 * 18, 165));
 		}
 	}
 
@@ -42,7 +45,18 @@ public class ContainerTimeMachine extends Container {
 	 * Called when a player shift-clicks on a slot. You must override this or
 	 * you will crash when someone does that.
 	 */
-	public ItemStack transferStackInSlot(EntityPlayer var1, int var2) {
+	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int var2) {
+		Slot slot = (Slot) this.inventorySlots.get(var2);
+
+		if(var2 == 6) {
+			if(slot.getStack() != null){
+				if(slot.getStack().getItem() != null){
+					if(slot.getStack().getItem() == Fossil.ancientClock){
+						par1EntityPlayer.addStat(FossilAchievementHandler.clock, 1);
+					}
+				}
+			}
+		}
 		return null;
 	}
 }

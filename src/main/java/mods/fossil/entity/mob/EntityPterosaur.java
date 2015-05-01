@@ -253,9 +253,6 @@ public class EntityPterosaur extends EntityDinosaur {
 		return this.getEyeHeight() / 2.0F;
 	}
 
-	public boolean interact(EntityPlayer player) {
-		return super.interact(player);
-	}
 
 	public boolean CheckSpace() {
 		if (this.isEntityInsideOpaqueBlock()) {

@@ -103,11 +103,34 @@ public class EntityDeinonychus extends EntityDinosaur
         this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(baseDamage);
         this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(baseDamage);
     }
-  
-    @Override
-    public void entityInit(){
-    	super.entityInit();
-    }
+    public void setBesideClimbableBlock(boolean isClollided)
+   	{
+   		byte b0 = this.dataWatcher.getWatchableObjectByte(30);
+
+   		if (isClollided)
+   		{
+   			b0 = (byte)(b0 | 1);
+   		}
+   		else
+   		{
+   			b0 &= -2;
+   		}
+
+   		this.dataWatcher.updateObject(30, Byte.valueOf(b0));
+   	}
+    public boolean isBesideClimbableBlock()
+   	{
+   		return (this.dataWatcher.getWatchableObjectByte(30) & 1) != 0;
+   	}
+       public boolean isOnLadder()
+   	{
+   		return this.isBesideClimbableBlock();
+   	}
+    protected void entityInit()
+	{
+		super.entityInit();
+		this.dataWatcher.addObject(30, new Byte((byte)0));
+	}
 
     /*protected void entityInit()
     {
@@ -328,7 +351,14 @@ public class EntityDeinonychus extends EntityDinosaur
 
         return super.interact(var1);
     }
-
+    public void onUpdate()
+    {
+        super.onUpdate();
+        if (!this.worldObj.isRemote)
+		{
+			this.setBesideClimbableBlock(this.isCollidedHorizontally);
+		}
+    }
     public void handleHealthUpdate(byte var1)
     {
         if (var1 == 7)

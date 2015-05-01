@@ -67,7 +67,7 @@ public class EntityCeratosaurus extends EntityDinosaur
 		// Size of dinosaur at day 0.
 		this.minSize = 0.4F;
 		// Size of dinosaur at age Adult.
-		this.maxSize = 2.7F;
+		this.maxSize = 2.3F;
 			texturePath = Fossil.modid + ":textures/mob/" + this.SelfType.toString() + "/";
 
 		this.getNavigator().setAvoidsWater(true);
@@ -436,18 +436,6 @@ public String getTexture()
         }
     }
  */
-
-
-
-public void ShowPedia(GuiPedia p0)
-{
-	super.ShowPedia(p0);
-
-	if (!this.isTamed()  && this.isAdult())
-	{
-		p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_CAUTION), true, 255, 40, 90);
-	}
-}
 
 public EntityCeratosaurus spawnBabyAnimal(EntityAgeable var1)
 {

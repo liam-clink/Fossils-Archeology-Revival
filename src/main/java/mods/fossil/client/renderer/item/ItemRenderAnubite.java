@@ -34,8 +34,10 @@ public class ItemRenderAnubite implements IItemRenderer {
 		}
 		float rot = 0;
 		GL11.glPushMatrix();
-		
+		 GL11.glPushAttrib(GL11.GL_ENABLE_BIT);
+	      GL11.glEnable(GL11.GL_ALPHA_TEST);
 		this.render.renderTileEntityAt(this.entity, 0.0D, 0.0D, 0.0D, 0.0F);
+		GL11.glPopAttrib();
 		GL11.glPopMatrix();
 
 	}

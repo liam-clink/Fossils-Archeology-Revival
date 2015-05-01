@@ -66,7 +66,7 @@ public class EntityAnubite extends EntityMob{
 	{
 		super.applyEntityAttributes();
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(30.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.40000001192092896D);
+		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.34000001192092896D);
 		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(1.5D);
 	}
 
@@ -237,13 +237,16 @@ public class EntityAnubite extends EntityMob{
 		}
 		else
 		{
+			super.attackEntityFrom(source, i);
 			this.teleportRandomly();
 			return super.attackEntityFrom(source, i);
 		}
 	}
 	public boolean attackEntityAsMob(Entity entity)
 	{
+		super.attackEntityAsMob(entity);
 		this.teleportRandomly();
 		return super.attackEntityAsMob(entity);
+
 	}
 }

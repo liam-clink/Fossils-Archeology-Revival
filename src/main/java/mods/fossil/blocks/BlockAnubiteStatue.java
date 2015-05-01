@@ -40,7 +40,7 @@ public class BlockAnubiteStatue extends BlockContainer {
 	}
 	public boolean onBlockActivated(World var1, int xCoord, int yCoord, int zCoord,
 			EntityPlayer var5, int var6, float var7, float var8, float var9) {
-		//var1.newExplosion((Entity)null, xCoord + 0.5F, yCoord, zCoord + 0.5, 5F, true, true);
+		var1.newExplosion((Entity)null, xCoord + 0.5F, yCoord, zCoord + 0.5, 5F, true, true);
 		EntityAnubite newMob = new EntityAnubite(var1);
 		if(!var1.isRemote){
 		newMob.setLocationAndAngles(xCoord + 0.5, yCoord, zCoord + 0.5, 0,0);

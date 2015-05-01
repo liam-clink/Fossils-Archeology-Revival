@@ -1,11 +1,15 @@
 package mods.fossil.guiBlocks;
 
+import mods.fossil.Fossil;
+import mods.fossil.fossilEnums.EnumDinoType;
+import mods.fossil.handler.FossilAchievementHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.inventory.SlotFurnace;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.tileentity.TileEntity;
@@ -91,9 +95,26 @@ public class ContainerWorktable extends Container {
 	 * you will crash when someone does that.
 	 */
 	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2) {
+		
 		ItemStack itemstack = null;
 		Slot slot = (Slot) this.inventorySlots.get(par2);
-
+		if(par2 == 2) {
+			if(slot.getStack() != null){
+				if(slot.getStack().getItem() != null){
+					if(slot.getStack().getItem() == Fossil.ancientSword){
+						par1EntityPlayer.addStat(FossilAchievementHandler.fixedSword, 1);
+					}
+					if(slot.getStack().getItem() == Fossil.ancienthelmet){
+						par1EntityPlayer.addStat(FossilAchievementHandler.fixedHelmet, 1);
+					}
+					if(slot.getStack().getItem() == Item.getItemFromBlock(Fossil.vaseAmphoraBlock) ||
+							slot.getStack().getItem() == Item.getItemFromBlock(Fossil.vaseKylixBlock)||
+							slot.getStack().getItem() == Item.getItemFromBlock(Fossil.vaseVoluteBlock)){
+						par1EntityPlayer.addStat(FossilAchievementHandler.fixedVase, 1);
+					}
+				}
+			}
+		}
 		if (slot != null && slot.getHasStack()) {
 			ItemStack itemstack1 = slot.getStack();
 			itemstack = itemstack1.copy();

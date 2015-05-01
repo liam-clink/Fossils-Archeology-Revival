@@ -1,11 +1,13 @@
 package mods.fossil.guiBlocks;
 
 import java.util.Random;
+
 import mods.fossil.Fossil;
 import mods.fossil.client.ClientProxy;
 import mods.fossil.client.LocalizationStrings;
 import mods.fossil.core.FossilPlants;
 import mods.fossil.entity.mob.EntityFailuresaurus;
+import mods.fossil.handler.FossilAchievementHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -312,6 +314,7 @@ public class BlockCultivateWeak extends BlockContainer {
 				// closer than 100
 				// Metres
 			{
+				P.addStat(FossilAchievementHandler.failuresaurus, 1);
 				Fossil.ShowMessage(var6, P);
 			}
 		}

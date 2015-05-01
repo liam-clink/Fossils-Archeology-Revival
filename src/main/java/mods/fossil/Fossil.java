@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 
 import mods.fossil.biome.BiomeBasic;
 import mods.fossil.blocks.BlockAmberOre;
+import mods.fossil.blocks.BlockAncientChest;
 import mods.fossil.blocks.BlockAncientGlass;
 import mods.fossil.blocks.BlockAncientStone;
 import mods.fossil.blocks.BlockAncientStoneSlab;
@@ -361,6 +362,7 @@ public class Fossil
 	public static Block anuTotem;
 	public static Block anuPortal;
 	public static Block anubiteStatue;
+	public static Block ancientChest;
 	public static Block blockSifterIdle;
 	public static Block blockSifterActive;
 	public static Block volcanicStairs;
@@ -669,6 +671,7 @@ public class Fossil
 		anuTotem = new BlockAnuTotem();
 		anuPortal = new BlockAnuPortal();
 		anubiteStatue = new BlockAnubiteStatue();
+		ancientChest = new BlockAncientChest();
 		blockSifterIdle = new BlockSifter(false);
 		blockSifterActive = new BlockSifter(true);
 		volcanicStairs = new BlockFossilStairs(volcanicBrick, 0).setBlockName(LocalizationStrings.VOLCANIC_STAIRS);
@@ -1037,6 +1040,7 @@ public class Fossil
 		GameRegistry.registerBlock(anuTotem, BlockAnuItem.class, LocalizationStrings.BLOCK_ANU_NAME);
 		GameRegistry.registerBlock(anuPortal,LocalizationStrings.BLOCK_ANU_PORTAL_NAME);
 		GameRegistry.registerBlock(anubiteStatue, BlockAnubiteItem.class, "anubiteStatue");
+	//	GameRegistry.registerBlock(ancientChest, "ancientChest");
 		GameRegistry.registerBlock(blockSifterIdle, LocalizationStrings.BLOCK_SIFTER_IDLE);
 		GameRegistry.registerBlock(blockSifterActive, LocalizationStrings.BLOCK_SIFTER_ACTIVE);
 		GameRegistry.registerBlock(volcanicStairs, LocalizationStrings.VOLCANIC_STAIRS);
