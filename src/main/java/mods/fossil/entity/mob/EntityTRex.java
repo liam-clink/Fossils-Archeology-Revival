@@ -501,13 +501,22 @@ public String getTexture()
 			return texturePath + "TRex_Adult.png";
 		}
 	}
-
+	if (this.isAdult() && this.isTamed())
+	{
+		switch (this.getSubSpecies())
+		{
+		case 1:
+			return texturePath + "TRex_Green_Tame.png";
+		default:
+			return texturePath + "TRex_Adult_Tame.png";
+		}
+	}
 	switch (this.getSubSpecies())
 	{
 	case 1:
-		return texturePath + "TRex_Green_Tame.png";
+		return texturePath + "TRex_Green_Baby.png";
 	default:
-		return texturePath + "TRex_Tame.png";
+		return texturePath + "TRex_Baby.png";
 	}
 }
 

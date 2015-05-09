@@ -31,10 +31,8 @@ public class RenderConfuciusornis
   @Override
   protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2) {	
 	  	if(par1EntityLivingBase.isChild()){
-	  		GL11.glTranslatef(0, 0, 0.15F);
 	  		GL11.glScalef(0.3F, 0.3F, 0.3F);
 	  	}else{
-	  		GL11.glTranslatef(0, 0, 0.3F);
 	  		GL11.glScalef(0.6F, 0.6F, 0.6F);
 	  	}
 		if (!((EntityConfuciusornis) par1EntityLivingBase).checkGround((EntityConfuciusornis)par1EntityLivingBase)) {

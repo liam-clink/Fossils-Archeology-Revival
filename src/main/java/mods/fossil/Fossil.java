@@ -87,6 +87,7 @@ import mods.fossil.entity.mob.EntityMammoth;
 import mods.fossil.entity.mob.EntityNautilus;
 import mods.fossil.entity.mob.EntityPigBoss;
 import mods.fossil.entity.mob.EntityQuagga;
+import mods.fossil.entity.mob.EntitySentryPigman;
 import mods.fossil.entity.mob.EntitySmilodon;
 import mods.fossil.entity.mob.EntityTerrorBird;
 import mods.fossil.fossilEnums.EnumDinoFoodMob;
@@ -428,6 +429,8 @@ public class Fossil
 	public static Item cultivatedConfuciusornisEgg;
 	public static Item dodoWing;
 	public static Item dodoWingCooked;
+	public static Item confuciornisRaw;
+	public static Item confuciornisCooked;
 	public static Item figurineItem;
 	public static Item brokenHeadRelic;
 	public static Item potteryShards;
@@ -833,6 +836,8 @@ public class Fossil
 		sjl = new ForgeFood(8, 2.0F, false, "Sio_Chiu_Le").setUnlocalizedName(LocalizationStrings.SJL_NAME).setCreativeTab(this.tabFFood);
 		dodoWing = new ForgeFood(3, 0.3F, false, "Raw_Dodo_Wing").setPotionEffect(Potion.hunger.id, 30, 0, 0.3F).setUnlocalizedName(LocalizationStrings.DODO_WING_NAME).setCreativeTab(this.tabFFood);
 		dodoWingCooked = new ForgeFood(8, 0.8F, false, "Cooked_Dodo_Wing").setUnlocalizedName(LocalizationStrings.DODO_WING_COOKED_NAME).setCreativeTab(this.tabFFood);
+		confuciornisRaw = new ForgeFood(2, 0.3F, false, "RawConfuciornis").setUnlocalizedName("rawConfuciornis").setCreativeTab(this.tabFFood);
+		confuciornisCooked = new ForgeFood(5, 0.8F, false, "CookedConfuciornis").setUnlocalizedName("cookedConfuciornis").setCreativeTab(this.tabFFood);
 		terrorBirdMeat = new ForgeFood(2, 0.8F, false, "TerrorBird/TerrorBird_Meat").setPotionEffect(Potion.hunger.id, 30, 0, 0.3F).setUnlocalizedName(LocalizationStrings.TERROR_BIRD_MEAT).setCreativeTab(this.tabFFood);
 		terrorBirdMeatCooked = new ForgeFood(4, 0.8F, false, "TerrorBird/TerrorBird_Meat_Cooked").setUnlocalizedName(LocalizationStrings.TERROR_BIRD_MEAT_COOKED).setCreativeTab(this.tabFFood);
 		quaggaMeat = new ForgeFood(2, 0.8F, false, "Quagga_Meat").setPotionEffect(Potion.hunger.id, 30, 0, 0.3F).setUnlocalizedName(LocalizationStrings.QUAGGA_MEAT).setCreativeTab(this.tabFFood);
@@ -943,6 +948,8 @@ public class Fossil
 		GameRegistry.registerItem(sjl, LocalizationStrings.SJL_NAME);
 		GameRegistry.registerItem(dodoWing, LocalizationStrings.DODO_WING_NAME);
 		GameRegistry.registerItem(dodoWingCooked, LocalizationStrings.DODO_WING_COOKED_NAME);
+		GameRegistry.registerItem(confuciornisRaw, "confuciornisRaw");
+		GameRegistry.registerItem(confuciornisCooked, "confuciornisCooked");
 		GameRegistry.registerItem(fossilrecordBones, LocalizationStrings.FOSSIL_RECORD_NAME);
 		GameRegistry.registerItem(livingCoelacanth, LocalizationStrings.LIVING_COELACANTH_NAME);
 		GameRegistry.registerItem(failuresaurusFlesh, LocalizationStrings.FAILURESAURUS_FLESH_NAME);
@@ -1058,14 +1065,14 @@ public class Fossil
 		EntityRegistry.registerModEntity(EntityJavelin.class, 				"Javelin", 				2, this, 250, 5, true);
 		EntityRegistry.registerModEntity(EntityAncientJavelin.class, 		"AncientJavelin", 		3, this, 250, 5, true);
 		EntityRegistry.registerModEntity(EntityMLighting.class, 			"FriendlyLighting", 	4, this, 250, 5, true);
-		EntityRegistry.registerModEntity(EntityFailuresaurus.class, 		"Failuresaurus", 		5, this, 250, 5, true);
-		EntityRegistry.registerModEntity(EntityBones.class, 				"Bones", 				6, this, 250, 5, true);
+		EntityRegistry.registerModEntity(EntityFailuresaurus.class, 		"Failuresaurus", 		5, this, 250, 3, true);
+		EntityRegistry.registerModEntity(EntityBones.class, 				"Bones", 				6, this, 250, 3, true);
 		EntityRegistry.registerModEntity(EntityDinoEgg.class, 				"DinoEgg", 				8, this, 250, 5, true);
-		EntityRegistry.registerModEntity(EntityFriendlyPigZombie.class, 	"FriendlyPigZombie", 	12, this, 250, 5, true);
-		EntityRegistry.registerModEntity(EntityPigBoss.class, 				"PigBoss", 				13, this, 250, 5, true);
-		EntityRegistry.registerModEntity(EntitySmilodon.class, 				"Smilodon", 			22, this, 250, 5, true);
-		EntityRegistry.registerModEntity(EntityMammoth.class, 				"Mammoth", 				24, this, 250, 5, true);
-		EntityRegistry.registerModEntity(EntityDodo.class,           		"Dodo",             	25, this, 250, 5, true);
+		EntityRegistry.registerModEntity(EntityFriendlyPigZombie.class, 	"FriendlyPigZombie", 	12, this, 250, 3, true);
+		EntityRegistry.registerModEntity(EntityPigBoss.class, 				"PigBoss", 				13, this, 250, 3, true);
+		EntityRegistry.registerModEntity(EntitySmilodon.class, 				"Smilodon", 			22, this, 250, 3, true);
+		EntityRegistry.registerModEntity(EntityMammoth.class, 				"Mammoth", 				24, this, 250, 3, true);
+		EntityRegistry.registerModEntity(EntityDodo.class,           		"Dodo",             	25, this, 250, 3, true);
 		EntityRegistry.registerModEntity(EntityDodoEgg.class,           	"DodoEgg",              26, this, 250, 5, true);
 		EntityRegistry.registerModEntity(EntityCultivatedDodoEgg.class, 	"CultivatedDodoEgg",    27, this, 250, 5, true);
 		EntityRegistry.registerModEntity(EntityCoelacanth.class, 			"Coelacanth",    		28, this, 250, 5, true);
@@ -1076,9 +1083,10 @@ public class Fossil
 		EntityRegistry.registerModEntity(EntityAnuEffect.class, 			"AnuEffect", 			34, this, 250, 5, true);
 		EntityRegistry.registerModEntity(EntityConfuciusornisEgg.class,     "ConfuciusornisEgg",    35, this, 250, 5, true);
 		EntityRegistry.registerModEntity(EntityCultivatedConfuciusornisEgg.class, "CultivatedConfuciusornisEgg",36, this, 250, 5, true);
-		EntityRegistry.registerModEntity(EntityConfuciusornis.class, 		"Confuciusornis",       37, this, 250, 5, true);
+		EntityRegistry.registerModEntity(EntityConfuciusornis.class, 		"Confuciusornis",       37, this, 250, 3, true);
 		EntityRegistry.registerModEntity(EntityCultivatedChickenEgg.class,  "CultivatedChickenEgg", 38, this, 250, 5, true);
-		EntityRegistry.registerModEntity(EntityAnubite.class,  				"Anubite", 				39, this, 250, 5, true);
+		EntityRegistry.registerModEntity(EntityAnubite.class,  				"Anubite", 				39, this, 250, 3, true);
+		EntityRegistry.registerModEntity(EntitySentryPigman.class,  		"SentryPigman", 		40, this, 250, 3, true);
 
 
 		for (int i = 0; i < EnumDinoType.values().length; i++)

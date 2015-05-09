@@ -65,9 +65,9 @@ public class EntityAnubite extends EntityMob{
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(30.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(20.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.34000001192092896D);
-		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(1.5D);
+		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(4D);
 	}
 
 	private boolean shouldAttackPlayer(EntityPlayer player)
@@ -238,14 +238,18 @@ public class EntityAnubite extends EntityMob{
 		else
 		{
 			super.attackEntityFrom(source, i);
-			this.teleportRandomly();
+			if(rand.nextInt(3) == 0){
+				this.teleportRandomly();
+			}
 			return super.attackEntityFrom(source, i);
 		}
 	}
 	public boolean attackEntityAsMob(Entity entity)
 	{
 		super.attackEntityAsMob(entity);
-		this.teleportRandomly();
+		if(rand.nextInt(3) == 0){
+			this.teleportRandomly();
+		}
 		return super.attackEntityAsMob(entity);
 
 	}

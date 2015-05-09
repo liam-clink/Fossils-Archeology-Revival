@@ -92,6 +92,33 @@ public class EntityConfuciusornis extends EntityAnimal
 	{
 		return true;
 	}
+    protected Item getDropItem()
+    {
+        return Items.feather;
+    }
+
+    /**
+     * Drop 0-2 items of this living's type. @param par1 - Whether this entity has recently been hit by a player. @param
+     * par2 - Level of Looting used to kill this mob.
+     */
+    protected void dropFewItems(boolean par1, int par2)
+    {
+        int j = this.rand.nextInt(3) + this.rand.nextInt(1 + par2);
+
+        for (int k = 0; k < j; ++k)
+        {
+            this.dropItem(Items.feather, 1);
+        }
+
+        if (this.isBurning())
+        {
+            this.dropItem(Fossil.confuciornisCooked, 1);
+        }
+        else
+        {
+            this.dropItem(Fossil.confuciornisRaw, 1);
+        }
+    }
 	@Override
 	public boolean attackEntityFrom(DamageSource var1, float var2) {
 		flyAround();
@@ -101,7 +128,7 @@ public class EntityConfuciusornis extends EntityAnimal
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(4.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(10.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.25D);
 	}
 
@@ -123,7 +150,7 @@ public class EntityConfuciusornis extends EntityAnimal
 	 */
 	protected String getLivingSound()
 	{
-		return Fossil.modid + ":" + "dodo_living";
+		return Fossil.modid + ":" + "confuciusornis_living";
 	}
 
 	/**
@@ -132,7 +159,7 @@ public class EntityConfuciusornis extends EntityAnimal
 	@Override
 	protected String getHurtSound()
 	{
-		return Fossil.modid + ":" + "dodo_hurt";
+		return Fossil.modid + ":" + "confuciusornis_hurt";
 	}
 	@Override
 	/**
@@ -140,7 +167,7 @@ public class EntityConfuciusornis extends EntityAnimal
 	 */
 	protected String getDeathSound()
 	{
-		return Fossil.modid + ":" + "dodo_death";
+		return Fossil.modid + ":" + "confuciusornis_death";
 	}
 
 

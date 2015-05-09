@@ -62,7 +62,7 @@ public enum EnumDinoType {
     Gallimimus(EntityGallimimus.class,					C.MODEL | C.TAME	| C.RIDE	| C.HERB_CARN),
     Liopleurodon(EntityLiopleurodon.class, 				C.MODEL |  		  				  C.CARNIVORE),
     Allosaurus(EntityAllosaurus.class, 					C.MODEL | C.TAME	| C.RIDE	| C.CARNIVORE),
-    Sarcosuchus(EntitySarcosuchus.class,                C.MODEL | C.TAME                | C.CARNIVORE),
+    Sarcosuchus(EntitySarcosuchus.class,                          C.TAME                | C.CARNIVORE),
     Ceratosaurus(EntityCeratosaurus.class,                C.MODEL | C.TAME   | C.RIDE    | C.CARNIVORE),
 
     //Meganeura(EntitySarcosuchus.class,                	          C.TAME                | C.CARNIVORE),

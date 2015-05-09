@@ -359,6 +359,8 @@ item.animalCoin.name=Animal Coin
 item.dinoCoin.name=Dinosaur Coin
 item.dodoWing.name=Raw Dodo Wing
 item.dodoWingCooked.name=Cooked Dodo Wing
+item.rawConfuciornis.name=Raw Confuciornis
+item.cookedConfuciornis.name=Cooked Confuciornis
 item.dinoSteak.name=Dino Steak
 item.rawTriceratops.name=Triceratops Meat
 item.rawVelociraptor.name=Velociraptor Meat
@@ -571,6 +573,7 @@ entity.fossil.Dodo.name=Dodolimimus
 entity.fossil.Allosaurus.name=Allosaurus
 entity.fossil.Sarcosuchus.name=Sarcosuchus
 entity.fossil.Ceratosaurus.name=Ceratosaurus
+entity.fossil.SentryPigman.name=Sentry Pigman
 
 #Non-dinosaur names
 entity.fossil.Mammoth.name=Mammoth

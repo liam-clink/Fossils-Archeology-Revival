@@ -42,6 +42,7 @@ public class FossilSpawnEggs
         registerEntityEgg(EntityConfuciusornis.class, 		0xA4A2A5, 0x773C00);
         registerEntityEgg(EntityCeratosaurus.class, 		0x678A5A, 0xD6C78D);
         registerEntityEgg(EntityAnubite.class, 				0x381A1F, 0x732A19);
+        registerEntityEgg(EntitySentryPigman.class, 		15373203, 0xD0A750);
 
     }
 

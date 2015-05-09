@@ -106,6 +106,7 @@ public class ClientProxy extends CommonProxy {
         RenderingRegistry.registerEntityRenderingHandler(EntityConfuciusornis.class, new RenderConfuciusornis());
         RenderingRegistry.registerEntityRenderingHandler(EntityAnubite.class, new RenderAnubite());
         RenderingRegistry.registerEntityRenderingHandler(EntityCeratosaurus.class, new RenderCeratosaurus(new ModelCeratosaurus(), 0.3F));
+        RenderingRegistry.registerEntityRenderingHandler(EntitySentryPigman.class, new RenderSentryPigman());
 
         /*
          * Item Registry
