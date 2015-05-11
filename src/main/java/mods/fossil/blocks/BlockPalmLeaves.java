@@ -26,7 +26,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class BlockPalmLeaves extends BlockLeaves
 {
 	public static final String[] LEAF_TYPES = new String[] {"palaeoraphe"};
-	public static final String[][] field_94396_b = new String[][] {{"leaves_palaeoraphe"}, {"leaves_palaeoraphe_opaque"}};
+	public static final String[][] field_94396_b = new String[][] {{"leaves_palaeoraphe"}, {"leaves_palaeoraphe_fast"}};
 	@SideOnly(Side.CLIENT)
 
 	/** 1 for fast graphic. 0 for fancy graphics. used in iconArray. */

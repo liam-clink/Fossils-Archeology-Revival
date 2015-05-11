@@ -143,6 +143,7 @@ public class RenderPlayerCapes {
 				GL11.glPopMatrix();
 
 			}
+            RenderHelper.enableStandardItemLighting();
 		}
 	}
 
