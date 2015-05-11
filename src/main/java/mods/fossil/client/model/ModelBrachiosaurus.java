@@ -202,4 +202,17 @@ public class ModelBrachiosaurus extends ModelBase {
 		modelRenderer.rotateAngleY = y;
 		modelRenderer.rotateAngleZ = z;
 	}
+
+	public void renderFollower(float f5) {
+		this.Body2.render(f5);
+		this.LowerBody.render(f5);
+		this.FrontThighLeft.render(f5);
+		this.LowerNeck1.render(f5);
+		this.BackThighLeft.render(f5);
+		this.Tail.render(f5);
+		this.FrontThighRight.render(f5);
+		this.BackThighRight.render(f5);
+		this.Body.render(f5);
+		this.LowerNeck2.render(f5);
+	}
 }

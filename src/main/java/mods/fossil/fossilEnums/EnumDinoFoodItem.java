@@ -65,6 +65,10 @@ public enum EnumDinoFoodItem
     TerrorBirdMeatCooked(Fossil.terrorBirdMeatCooked, 21, 6),
     TerrorBirdEgg(Fossil.terrorBirdEgg, 10, 3),
     Allosaurus(EnumDinoType.Allosaurus.DropItem, 28, 4),
+    Confuciornis(Fossil.confuciornisRaw, 10, 2),
+    ConfuciornisCooked(Fossil.confuciornisCooked, 25, 2),
+    ConfuciornisEgg(Fossil.confuciusornisEgg, 10, 2),
+
     ;
     public Item item;
     public int FoodValue;
@@ -151,6 +155,8 @@ public enum EnumDinoFoodItem
     	dinoType.FoodItemList.addItem(TerrorBirdMeat);
     	dinoType.FoodItemList.addItem(TerrorBirdMeatCooked);
     	dinoType.FoodItemList.addItem(Allosaurus);
+    	dinoType.FoodItemList.addItem(Confuciornis);
+    	dinoType.FoodItemList.addItem(ConfuciornisCooked);
 
     }
     
@@ -159,5 +165,7 @@ public enum EnumDinoFoodItem
     	dinoType.FoodItemList.addItem(TerrorBirdEgg);
     	dinoType.FoodItemList.addItem(DodoEgg);
     	dinoType.FoodItemList.addItem(Egg);
+    	dinoType.FoodItemList.addItem(ConfuciornisEgg);
+
     }
 }

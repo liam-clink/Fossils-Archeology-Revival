@@ -45,7 +45,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
-public class EntityPlesiosaur extends EntitySwimmingDino implements IMob
+public class EntityPlesiosaur extends EntitySwimmingDino
 {
     private boolean looksWithInterest;
     //public final float HuntLimit = (float)(this.getHungerLimit() * 4 / 5);

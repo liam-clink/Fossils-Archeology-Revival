@@ -158,7 +158,11 @@ public class ModelDilophosaurus extends ModelDinosaurs {
 		this.leftThigh.render(f6);
 		this.rightThigh.render(f6);
 	}
-
+	public void renderFollower(float f6){
+		this.lowerBody.render(f6);
+		this.leftThigh.render(f6);
+		this.rightThigh.render(f6);
+	}
 	/**
 	 * This is a helper function from Tabula to set the rotation of model parts
 	 */

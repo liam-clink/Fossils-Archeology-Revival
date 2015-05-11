@@ -28,45 +28,45 @@ public class WorldGenPalaeoraphe extends WorldGenerator {
 		}
 
 		var4 = var4 - 5 + deltaY;
-		var1.setBlock(var3, var4 + 16, var5, Fossil.palmLeaves);
-		var1.setBlock(var3 + 1, var4 + 15, var5, Fossil.palmLeaves);
-		var1.setBlock(var3 + 2, var4 + 15, var5, Fossil.palmLeaves);
-		var1.setBlock(var3 + 3, var4 + 15, var5, Fossil.palmLeaves);
-		var1.setBlock(var3 + 4, var4 + 15, var5, Fossil.palmLeaves);
-		var1.setBlock(var3 + 5, var4 + 14, var5, Fossil.palmLeaves);
-		var1.setBlock(var3, var4 + 15, var5 + 1, Fossil.palmLeaves);
-		var1.setBlock(var3, var4 + 15, var5 + 2, Fossil.palmLeaves);
-		var1.setBlock(var3, var4 + 15, var5 + 3, Fossil.palmLeaves);
-		var1.setBlock(var3, var4 + 15, var5 + 4, Fossil.palmLeaves);
-		var1.setBlock(var3, var4 + 14, var5 + 5, Fossil.palmLeaves);
-		var1.setBlock(var3 - 1, var4 + 15, var5, Fossil.palmLeaves);
-		var1.setBlock(var3 - 2, var4 + 15, var5, Fossil.palmLeaves);
-		var1.setBlock(var3 - 3, var4 + 15, var5, Fossil.palmLeaves);
-		var1.setBlock(var3 - 4, var4 + 15, var5, Fossil.palmLeaves);
-		var1.setBlock(var3 - 5, var4 + 14, var5, Fossil.palmLeaves);
-		var1.setBlock(var3, var4 + 15, var5 - 1, Fossil.palmLeaves);
-		var1.setBlock(var3, var4 + 15, var5 - 2, Fossil.palmLeaves);
-		var1.setBlock(var3, var4 + 15, var5 - 3, Fossil.palmLeaves);
-		var1.setBlock(var3, var4 + 15, var5 - 4, Fossil.palmLeaves);
-		var1.setBlock(var3, var4 + 14, var5 - 5, Fossil.palmLeaves);
-		var1.setBlock(var3 + 1, var4 + 15, var5 + 1, Fossil.palmLeaves);
-		var1.setBlock(var3 + 1, var4 + 15, var5 - 1, Fossil.palmLeaves);
-		var1.setBlock(var3 - 1, var4 + 15, var5 + 1, Fossil.palmLeaves);
-		var1.setBlock(var3 - 1, var4 + 15, var5 - 1, Fossil.palmLeaves);
-		var1.setBlock(var3 + 2, var4 + 15, var5 + 2, Fossil.palmLeaves);
-		var1.setBlock(var3 + 2, var4 + 15, var5 - 2, Fossil.palmLeaves);
-		var1.setBlock(var3 - 2, var4 + 15, var5 + 2, Fossil.palmLeaves);
-		var1.setBlock(var3 - 2, var4 + 15, var5 - 2, Fossil.palmLeaves);
-		var1.setBlock(var3 + 3, var4 + 14, var5 + 3, Fossil.palmLeaves);
-		var1.setBlock(var3 + 3, var4 + 14, var5 - 3, Fossil.palmLeaves);
-		var1.setBlock(var3 - 3, var4 + 14, var5 + 3, Fossil.palmLeaves);
-		var1.setBlock(var3 - 3, var4 + 14, var5 - 3, Fossil.palmLeaves);
+		var1.setBlock(var3, var4 + 16, var5, Fossil.palmLeaves, 8, 2);
+		var1.setBlock(var3 + 1, var4 + 15, var5, Fossil.palmLeaves, 8, 2);
+		var1.setBlock(var3 + 2, var4 + 15, var5, Fossil.palmLeaves, 8, 2);
+		var1.setBlock(var3 + 3, var4 + 15, var5, Fossil.palmLeaves, 8, 2);
+		var1.setBlock(var3 + 4, var4 + 15, var5, Fossil.palmLeaves, 8, 2);
+		var1.setBlock(var3 + 5, var4 + 14, var5, Fossil.palmLeaves, 8, 2);
+		var1.setBlock(var3, var4 + 15, var5 + 1, Fossil.palmLeaves, 8, 2);
+		var1.setBlock(var3, var4 + 15, var5 + 2, Fossil.palmLeaves, 8, 2);
+		var1.setBlock(var3, var4 + 15, var5 + 3, Fossil.palmLeaves, 8, 2);
+		var1.setBlock(var3, var4 + 15, var5 + 4, Fossil.palmLeaves, 8, 2);
+		var1.setBlock(var3, var4 + 14, var5 + 5, Fossil.palmLeaves, 8, 2);
+		var1.setBlock(var3 - 1, var4 + 15, var5, Fossil.palmLeaves, 8, 2);
+		var1.setBlock(var3 - 2, var4 + 15, var5, Fossil.palmLeaves, 8, 2);
+		var1.setBlock(var3 - 3, var4 + 15, var5, Fossil.palmLeaves, 8, 2);
+		var1.setBlock(var3 - 4, var4 + 15, var5, Fossil.palmLeaves, 8, 2);
+		var1.setBlock(var3 - 5, var4 + 14, var5, Fossil.palmLeaves, 8, 2);
+		var1.setBlock(var3, var4 + 15, var5 - 1, Fossil.palmLeaves, 8, 2);
+		var1.setBlock(var3, var4 + 15, var5 - 2, Fossil.palmLeaves, 8, 2);
+		var1.setBlock(var3, var4 + 15, var5 - 3, Fossil.palmLeaves, 8, 2);
+		var1.setBlock(var3, var4 + 15, var5 - 4, Fossil.palmLeaves, 8, 2);
+		var1.setBlock(var3, var4 + 14, var5 - 5, Fossil.palmLeaves, 8, 2);
+		var1.setBlock(var3 + 1, var4 + 15, var5 + 1, Fossil.palmLeaves, 8, 2);
+		var1.setBlock(var3 + 1, var4 + 15, var5 - 1, Fossil.palmLeaves, 8, 2);
+		var1.setBlock(var3 - 1, var4 + 15, var5 + 1, Fossil.palmLeaves, 8, 2);
+		var1.setBlock(var3 - 1, var4 + 15, var5 - 1, Fossil.palmLeaves, 8, 2);
+		var1.setBlock(var3 + 2, var4 + 15, var5 + 2, Fossil.palmLeaves, 8, 2);
+		var1.setBlock(var3 + 2, var4 + 15, var5 - 2, Fossil.palmLeaves, 8, 2);
+		var1.setBlock(var3 - 2, var4 + 15, var5 + 2, Fossil.palmLeaves, 8, 2);
+		var1.setBlock(var3 - 2, var4 + 15, var5 - 2, Fossil.palmLeaves, 8, 2);
+		var1.setBlock(var3 + 3, var4 + 14, var5 + 3, Fossil.palmLeaves, 8, 2);
+		var1.setBlock(var3 + 3, var4 + 14, var5 - 3, Fossil.palmLeaves, 8, 2);
+		var1.setBlock(var3 - 3, var4 + 14, var5 + 3, Fossil.palmLeaves, 8, 2);
+		var1.setBlock(var3 - 3, var4 + 14, var5 - 3, Fossil.palmLeaves, 8, 2);
 		/*
 		 * var1.setBlockAndMetadata(var3 + 6, var4 + 14, var5,
-		 * Fossil.palmLeaves, 0); var1.setBlockAndMetadata(var3, var4 + 13, var5
-		 * + 6, Fossil.palmLeaves, 0); var1.setBlockAndMetadata(var3 - 6, var4 +
-		 * 13, var5, Fossil.palmLeaves, 0); var1.setBlockAndMetadata(var3, var4
-		 * + 13, var5 - 6, Fossil.palmLeaves, 0);
+		 * Fossil.palmLeaves, 8, 2, 0); var1.setBlockAndMetadata(var3, var4 + 13, var5
+		 * + 6, Fossil.palmLeaves, 8, 2, 0); var1.setBlockAndMetadata(var3 - 6, var4 +
+		 * 13, var5, Fossil.palmLeaves, 8, 2, 0); var1.setBlockAndMetadata(var3, var4
+		 * + 13, var5 - 6, Fossil.palmLeaves, 8, 2, 0);
 		 */
 		return true;
 	}

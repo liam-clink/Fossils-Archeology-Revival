@@ -37,7 +37,7 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
-public class EntityLiopleurodon extends EntitySwimmingDino implements IMob
+public class EntityLiopleurodon extends EntitySwimmingDino
 {
     private Entity targetedEntity;
 

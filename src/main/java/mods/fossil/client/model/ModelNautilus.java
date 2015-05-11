@@ -90,7 +90,16 @@ public class ModelNautilus extends ModelBase
         this.Tech5.render(var7);
         this.Tech6.render(var7);
     }
-
+    public void renderFollower(float var7){
+    	this.Shell.render(var7);
+        this.Head.render(var7);
+        this.Tech1.render(var7);
+        this.Tech2.render(var7);
+        this.Tech3.render(var7);
+        this.Tech4.render(var7);
+        this.Tech5.render(var7);
+        this.Tech6.render(var7);
+    }
     /**
      * Sets the model's various rotation angles. For bipeds, par1 and par2 are used for animating the movement of arms
      * and legs, where par1 represents the time(so that arms and legs swing back and forth) and par2 represents how

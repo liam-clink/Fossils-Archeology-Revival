@@ -123,6 +123,7 @@ import mods.fossil.guiBlocks.TileEntityTimeMachine;
 import mods.fossil.guiBlocks.TileEntityVase;
 import mods.fossil.guiBlocks.TileEntityWorktable;
 import mods.fossil.handler.EventFossilAchivements;
+import mods.fossil.handler.EventOverlay;
 import mods.fossil.handler.FossilAchievementHandler;
 import mods.fossil.handler.FossilConnectionEvent;
 import mods.fossil.handler.FossilInteractEvent;
@@ -184,6 +185,7 @@ import mods.fossil.util.FossilBonemealEvent;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
@@ -550,18 +552,18 @@ public class Fossil
 			FossilOptions.Heal_Dinos = config.get("option", "Heal_Dinos", true).getBoolean(true);
 			FossilOptions.Dinos_Starve = config.get("option", "Dinos_Starve", true).getBoolean(true);
 			FossilOptions.Dino_Block_Breaking = config.get("option", "Dino_Block_Breaking", true).getBoolean(true);
-			FossilOptions.Skull_Overlay = config.get("option", "Skull_Overlay", false).getBoolean(false);
+			FossilOptions.Skull_Overlay = config.get("option", "Skull_Overlay", true).getBoolean(true);
 			FossilOptions.LoginMessage = config.get("option", "Display_Login_Message", true).getBoolean(false);
 			FossilOptions.Anu_Spawn = config.get("option", "Anu_Spawn", false).getBoolean(false);
 			FossilOptions.Anu_Allowed_Overworld = config.get("option", "Anu_Allowed_Overworld", false).getBoolean(false);
 			FossilOptions.AllowBreeding = config.get("option", "Allow_Dinosaur_Breeding", true).getBoolean(true);
 
 			//Dinosaur Feathers
-			FossilOptions.TRexFeathers = config.get("toggle_feathers", "TRex Feathers", false).getBoolean(false);
-			FossilOptions.DeinonychusFeathers = config.get("toggle_feathers", "Deinonychus Feathers", true).getBoolean(true);
-			FossilOptions.GallimimusFeathers = config.get("toggle_feathers",  "Gallimimus Feathers", false).getBoolean(false);
-			FossilOptions.CompsognathusFeathers = config.get("toggle_feathers",  "Compsognathus Feathers", false).getBoolean(false);
-			FossilOptions.VelociraptorFeathers = config.get("toggle_feathers",  "Velociraptor Feathers", false).getBoolean(false);
+			FossilOptions.TRexFeathers = config.get("toggle_scales", "Tyrannosaurus Scales", false).getBoolean(false);
+			FossilOptions.DeinonychusFeathers = config.get("toggle_scales", "Deinonychus Scales", false).getBoolean(false);
+			FossilOptions.GallimimusFeathers = config.get("toggle_scales",  "Gallimimus Scales", false).getBoolean(false);
+			FossilOptions.CompsognathusFeathers = config.get("toggle_scales",  "Compsognathus Scales", false).getBoolean(false);
+			FossilOptions.VelociraptorFeathers = config.get("toggle_scales",  "Velociraptor Scales", false).getBoolean(false);
 
 			//IDs
 			FossilOptions.biomeIDDarknessLair = config.get("biome IDs", "Layer of Darkness ID:", 33).getInt();
@@ -1167,6 +1169,9 @@ public class Fossil
 		MinecraftForge.EVENT_BUS.register(new FossilToolEvent());
 		MinecraftForge.EVENT_BUS.register(new FossilLivingEvent());
 		MinecraftForge.EVENT_BUS.register(new FossilInteractEvent());
+		if(FossilOptions.Skull_Overlay){
+		    MinecraftForge.EVENT_BUS.register(new EventOverlay(Minecraft.getMinecraft()));
+		}
 		FMLCommonHandler.instance().bus().register(new FossilConnectionEvent());
 	}
 

@@ -121,7 +121,7 @@ public class EntityAnubite extends EntityMob{
 	protected boolean teleportRandomly()
 	{
 		double d0 = this.posX + (this.rand.nextDouble() - 0.5D) * 32.0D;
-		double d1 = this.posY + (double)(this.rand.nextInt(64) - 32);
+		double d1 = this.posY + (double)(this.rand.nextInt(32) - 32);
 		double d2 = this.posZ + (this.rand.nextDouble() - 0.5D) * 32.0D;
 		return this.teleportTo(d0, d1, d2);
 	}
@@ -238,9 +238,6 @@ public class EntityAnubite extends EntityMob{
 		else
 		{
 			super.attackEntityFrom(source, i);
-			if(rand.nextInt(3) == 0){
-				this.teleportRandomly();
-			}
 			return super.attackEntityFrom(source, i);
 		}
 	}

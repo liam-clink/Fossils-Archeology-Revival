@@ -69,7 +69,7 @@ public class EntityDeinonychus extends EntityDinosaur
         // Size of dinosaur at age Adult.
         this.maxSize = 1.0F;
         
-    	if(Fossil.FossilOptions.DeinonychusFeathers)
+    	if(!Fossil.FossilOptions.DeinonychusFeathers)
             texturePath = Fossil.modid + ":textures/mob/" + this.SelfType.toString() + "/feathered/" + "Feathered_";
     	else
     		texturePath = Fossil.modid + ":textures/mob/" + this.SelfType.toString() + "/";

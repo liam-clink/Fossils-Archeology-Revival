@@ -297,4 +297,10 @@ public class ModelTRex extends MowzieModelBase {
 			leftFoot.rotateAngleX = 0.33161255787892263F;
 		}
 	}
+
+	public void renderFollower(float f5) {
+		this.leftThigh.render(f5);
+		this.lowerBody.render(f5);
+		this.rightThigh.render(f5);
+	}
 }

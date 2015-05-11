@@ -52,7 +52,7 @@ public class EntityGallimimus extends EntityDinosaur
         // Size of dinosaur at age Adult.
         this.maxSize = 2.2F;
         
-    	if(Fossil.FossilOptions.GallimimusFeathers)
+    	if(!Fossil.FossilOptions.GallimimusFeathers)
             texturePath = Fossil.modid + ":textures/mob/" + this.SelfType.toString() + "/feathered/" + "Feathered_";
     	else
     		texturePath = Fossil.modid + ":textures/mob/" + this.SelfType.toString() + "/";

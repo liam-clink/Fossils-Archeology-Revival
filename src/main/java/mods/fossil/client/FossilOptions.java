@@ -43,7 +43,7 @@ public class FossilOptions
         Allow_Flying = config.get("option", "Allow_Flying", false).getBoolean(false);
         Dinos_Starve = config.get("option", "Dinos_Starve", true).getBoolean(true);
         Dino_Block_Breaking = config.get("option", "Dino_Block_Breaking", true).getBoolean(true);
-        Skull_Overlay = config.get("option", "Skull_Overlay", false).getBoolean(false);
+        Skull_Overlay = config.get("option", "Skull_Overlay", true).getBoolean(true);
         LoginMessage = config.get("option", "Display_Login_Message", true).getBoolean(false);
         Anu_Spawn = config.get("option", "Anu_Spawn", false).getBoolean(false);
         Anu_Allowed_Overworld = config.get("option", "Anu_Allowed_Overworld", false).getBoolean(false);
@@ -51,14 +51,14 @@ public class FossilOptions
         AllowBookEnchantments = config.get("option", "Allow Book Enchantments", true).getBoolean(true);
         AllowBreeding = config.get("option", "Allow_Dinosaur_Breeding", true).getBoolean(true);
         
-        TRexFeathers = config.get("toggle_feathers",  "Trex Feathers", false).getBoolean(false);
-        DeinonychusFeathers = config.get("toggle_feathers",  "Deinonychus Feathers", true).getBoolean(true);
-        GallimimusFeathers = config.get("toggle_feathers",  "Gallimimus Feathers", false).getBoolean(false);
-        CompsognathusFeathers = config.get("toggle_feathers",  "Compsognathus Feathers", false).getBoolean(false);
-        VelociraptorFeathers = config.get("toggle_feathers",  "Velociraptor Feathers", false).getBoolean(false);
+        TRexFeathers = config.get("toggle_scales",  "Tyrannosaurus Scales", false).getBoolean(false);
+        DeinonychusFeathers = config.get("toggle_scales",  "Deinonychus Scales", false).getBoolean(false);
+        GallimimusFeathers = config.get("toggle_scales",  "Gallimimus Scales", false).getBoolean(false);
+        CompsognathusFeathers = config.get("toggle_scales",  "Compsognathus Scales", false).getBoolean(false);
+        VelociraptorFeathers = config.get("toggle_scales",  "Velociraptor Scales", false).getBoolean(false);
         
         biomeIDDarknessLair = config.get("biome IDs", "Layer of Darkness ID:", 33).getInt();
-        dimIDDarknessLair = config.get("biome IDs", "Layer of Darkness ID:", 23).getInt();
+        dimIDDarknessLair = config.get("dimension IDs", "Layer of Darkness ID:", 23).getInt();
 
     }
 

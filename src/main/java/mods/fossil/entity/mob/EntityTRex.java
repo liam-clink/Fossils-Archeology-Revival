@@ -67,7 +67,7 @@ public class EntityTRex extends EntityDinosaur
 		// Size of dinosaur at age Adult.
 		this.maxSize = 4.5F;
 
-		if(Fossil.FossilOptions.TRexFeathers)
+		if(!Fossil.FossilOptions.TRexFeathers)
 			texturePath = Fossil.modid + ":textures/mob/"
 					+ this.SelfType.toString() + "/feathered/" + "Feathered_";
 		else
@@ -86,7 +86,7 @@ public class EntityTRex extends EntityDinosaur
 		this.targetTasks.addTask(2, new DinoAITargetNonTamedExceptSelfClass(this, EntityLiving.class, 750, false));
 		tasks.addTask(1, new DinoAIRideGround(this, 1));
 		this.tasks.addTask(2, this.aiControlledByPlayer = new EntityAIControlledByPlayer(this, 0.3F));
-        this.stepHeight = 1F;
+		this.stepHeight = 1F;
 		this.targetTasks.addTask(5, new DinoAIHunt(this, EntityLiving.class, 200, false));
 
 		//this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
@@ -453,77 +453,81 @@ public class EntityTRex extends EntityDinosaur
         this.setPathToEntity(this.worldObj.getEntityPathToXYZ(this, var14, var6, var15, (float)var2, true, false, true, false));
     }
 	 */
-	
 
-/**
- * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
- * use this to react to sunlight and start to burn.
- */
-public void onLivingUpdate()
-{
-	breakBlock(5);
-	if (this.Timer > 0)
-	{
-		--this.Timer;
-	}
-	super.onLivingUpdate();
-}
 
-/**
- * Returns the texture's file path as a String.
- */
-@Override
-public String getTexture()
-{
-	if (this.isModelized())
+	/**
+	 * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
+	 * use this to react to sunlight and start to burn.
+	 */
+	public void onLivingUpdate()
 	{
-		return super.getTexture();
-	}
-
-	if (this.isWeak())
-	{
-		switch (this.getSubSpecies())
+		breakBlock(5);
+		if (this.Timer > 0)
 		{
-		case 1:
-			return texturePath + "TRex_Green_Weak.png";
-		default:
-			return texturePath + "TRex_Weak.png";
+			--this.Timer;
 		}
+		super.onLivingUpdate();
 	}
 
-	if (this.isAdult() && !this.isTamed())
+	/**
+	 * Returns the texture's file path as a String.
+	 */
+	@Override
+	public String getTexture()
 	{
-		switch (this.getSubSpecies())
+		if (this.isModelized())
 		{
-		case 1:
-			return texturePath + "TRex_Green_Adult.png";
-		default:
+			return super.getTexture();
+		}
+
+		if (this.isWeak())
+		{
+			switch (this.getSubSpecies())
+			{
+			case 1:
+				return texturePath + "TRex_Green_Weak.png";
+			default:
+				return texturePath + "TRex_Weak.png";
+			}
+		}
+
+		if (this.isAdult() && !this.isTamed())
+		{
+			switch (this.getSubSpecies())
+			{
+			case 1:
+				return texturePath + "TRex_Green_Adult.png";
+			default:
+				return texturePath + "TRex_Adult.png";
+			}
+		}
+		if (this.isAdult() && this.isTamed())
+		{
+			switch (this.getSubSpecies())
+			{
+			case 1:
+				return texturePath + "TRex_Green_Tame.png";
+			default:
+				return texturePath + "TRex_Tame.png";
+			}
+		}
+		if(this.isChild()){
+			switch (this.getSubSpecies())
+			{
+			case 1:
+				return texturePath + "TRex_Green_Baby.png";
+			default:
+				return texturePath + "TRex_Baby.png";
+			}
+		}else{
 			return texturePath + "TRex_Adult.png";
 		}
 	}
-	if (this.isAdult() && this.isTamed())
-	{
-		switch (this.getSubSpecies())
-		{
-		case 1:
-			return texturePath + "TRex_Green_Tame.png";
-		default:
-			return texturePath + "TRex_Adult_Tame.png";
-		}
-	}
-	switch (this.getSubSpecies())
-	{
-	case 1:
-		return texturePath + "TRex_Green_Baby.png";
-	default:
-		return texturePath + "TRex_Baby.png";
-	}
-}
 
-/**
- * Causes this entity to do an upwards motion (jumping).
- */
-/*
+	/**
+	 * Causes this entity to do an upwards motion (jumping).
+	 */
+	/*
     protected void jump()
     {
         if (!this.isInWater())
@@ -542,105 +546,105 @@ public String getTexture()
             this.motionY -= 0.1D;
         }
     }
- */
+	 */
 
-/**
- * Check if the dinosaur is in a weakened state.
- * @return
- */
-public boolean isWeak()
-{
-	return (this.getHealth() < 8) && (this.getDinoAge() >= this.adultAge) && !this.isTamed();
-	//return false;//this.getHealthData() < 8 && this.getDinoAge()>8 && !this.isTamed();
-}
-
-private void HandleWeak()
-{
-	if (!this.worldObj.isRemote)
+	/**
+	 * Check if the dinosaur is in a weakened state.
+	 * @return
+	 */
+	public boolean isWeak()
 	{
-		++this.WeakToDeath;
+		return (this.getHealth() < 8) && (this.getDinoAge() >= this.adultAge) && !this.isTamed();
+		//return false;//this.getHealthData() < 8 && this.getDinoAge()>8 && !this.isTamed();
+	}
 
-		if (this.WeakToDeath >= 200)
+	private void HandleWeak()
+	{
+		if (!this.worldObj.isRemote)
 		{
-			this.attackEntityFrom(DamageSource.generic, 10);
+			++this.WeakToDeath;
+
+			if (this.WeakToDeath >= 200)
+			{
+				this.attackEntityFrom(DamageSource.generic, 10);
+			}
+			else
+			{
+				this.setTarget((Entity)null);
+				this.setPathToEntity((PathEntity)null);
+				this.setAngry(false);
+			}
 		}
-		else
+	}
+	public void ShowPedia(GuiPedia p0)
+	{
+		super.ShowPedia(p0);
+
+		if (this.isWeak())
 		{
-			this.setTarget((Entity)null);
-			this.setPathToEntity((PathEntity)null);
-			this.setAngry(false);
+			p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_WEAK), true, 255, 40, 90);
+		}
+
+		if (!this.isWeak() && !this.isTamed()  && this.isAdult())
+		{
+			p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_CAUTION), true, 255, 40, 90);
 		}
 	}
-}
-public void ShowPedia(GuiPedia p0)
-{
-	super.ShowPedia(p0);
 
-	if (this.isWeak())
+	public EntityTRex spawnBabyAnimal(EntityAgeable var1)
 	{
-		p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_WEAK), true, 255, 40, 90);
+		return new EntityTRex(this.worldObj);
 	}
 
-	if (!this.isWeak() && !this.isTamed()  && this.isAdult())
+	@Override
+	public EntityAgeable createChild(EntityAgeable var1)
 	{
-		p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_CAUTION), true, 255, 40, 90);
+		EntityTRex baby = new EntityTRex(this.worldObj);
+		baby.setSubSpecies(this.getSubSpecies());
+		return baby;
 	}
-}
 
-public EntityTRex spawnBabyAnimal(EntityAgeable var1)
-{
-	return new EntityTRex(this.worldObj);
-}
+	/**
+	 * This gets called when a dinosaur grows naturally or through Chicken Essence.
+	 */
 
-@Override
-public EntityAgeable createChild(EntityAgeable var1)
-{
-	EntityTRex baby = new EntityTRex(this.worldObj);
-	baby.setSubSpecies(this.getSubSpecies());
-	return baby;
-}
-
-/**
- * This gets called when a dinosaur grows naturally or through Chicken Essence.
- */
-
-@Override
-public void updateSize()
-{
-	double healthStep;
-	double attackStep;
-	double speedStep;
-	healthStep = (this.maxHealth - this.baseHealth) / (this.adultAge + 1);
-	attackStep = (this.maxDamage - this.baseDamage) / (this.adultAge + 1);
-	speedStep = (this.maxSpeed - this.baseSpeed) / (this.adultAge + 1);
+	@Override
+	public void updateSize()
+	{
+		double healthStep;
+		double attackStep;
+		double speedStep;
+		healthStep = (this.maxHealth - this.baseHealth) / (this.adultAge + 1);
+		attackStep = (this.maxDamage - this.baseDamage) / (this.adultAge + 1);
+		speedStep = (this.maxSpeed - this.baseSpeed) / (this.adultAge + 1);
 
 
-	if(this.getDinoAge() <= this.adultAge){
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(Math.round(this.baseHealth + (healthStep * this.getDinoAge())));
-		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(Math.round(this.baseDamage + (attackStep * this.getDinoAge())));
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(this.baseSpeed + (speedStep * this.getDinoAge()));
+		if(this.getDinoAge() <= this.adultAge){
+			this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(Math.round(this.baseHealth + (healthStep * this.getDinoAge())));
+			this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(Math.round(this.baseDamage + (attackStep * this.getDinoAge())));
+			this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(this.baseSpeed + (speedStep * this.getDinoAge()));
 
-		if (this.isTeen()) {
-			this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.5D);
-		}
-		else if (this.isAdult()){
-			this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(2.0D);
-		}
-		else {
-			this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.0D);
+			if (this.isTeen()) {
+				this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.5D);
+			}
+			else if (this.isAdult()){
+				this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(2.0D);
+			}
+			else {
+				this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.0D);
+			}
 		}
 	}
-}
 
-@Override
-public void writeSpawnData(ByteBuf buffer) {
-	// TODO Auto-generated method stub
+	@Override
+	public void writeSpawnData(ByteBuf buffer) {
+		// TODO Auto-generated method stub
 
-}
+	}
 
-@Override
-public void readSpawnData(ByteBuf additionalData) {
-	// TODO Auto-generated method stub
+	@Override
+	public void readSpawnData(ByteBuf additionalData) {
+		// TODO Auto-generated method stub
 
-}
+	}
 }

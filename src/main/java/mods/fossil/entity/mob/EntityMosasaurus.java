@@ -29,7 +29,7 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
-public class EntityMosasaurus extends EntitySwimmingDino implements IMob
+public class EntityMosasaurus extends EntitySwimmingDino
 {
     private Entity targetedEntity;
 

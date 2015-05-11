@@ -282,12 +282,33 @@ public class ModelSpinosaurus extends ModelDinosaurs
       this.lowerBody.render(var7);
       this.headpivot.render(var7);
   }
-  
+	public void renderFollower(float f6){
+	      this.lowerBody.render(f6);
+	      this.headpivot.render(f6);
+	      this.headpivot.rotationPointX = this.headdummy.rotationPointX;
+	      	this.headpivot.rotationPointY = this.headdummy.rotationPointY+12.5F;
+	      	this.headpivot.rotationPointZ = this.headdummy.rotationPointZ-7;
+	   	 this.upperBody.rotateAngleX = (float)Math.toRadians(6);
+		 this.sail1_upperBody.rotateAngleX = this.sail2_upperBody.rotateAngleX = -(this.upperBody.rotateAngleX);
+		 this.neck.rotateAngleX = (float)Math.toRadians(-34);
+		 this.tail2.rotateAngleX = (float)Math.toRadians(-4);
+		 this.tail3.rotateAngleX = (float)Math.toRadians(2);
+		 this.leftUpperArm.rotateAngleX = (float)Math.toRadians(-6);
+		 this.rightUpperArm.rotateAngleX = (float)Math.toRadians(-6);
+		 this.leftLowerArm.rotateAngleX = (float)Math.toRadians(-30);
+		 this.rightLowerArm.rotateAngleX = (float)Math.toRadians(-30);
+		 this.leftUpperLeg.rotateAngleX = (float)Math.toRadians(-15);
+		 this.rightUpperLeg.rotateAngleX = (float)Math.toRadians(-15);
+		 this.leftFoot.rotateAngleX = (float)Math.toRadians(15);
+		 this.rightFoot.rotateAngleX = (float)Math.toRadians(15);
+
+	}
   private void setRotation(ModelRenderer model, float x, float y, float z)
   {
     model.rotateAngleX = x;
     model.rotateAngleY = y;
     model.rotateAngleZ = z;
+    
   }
 
 	@Override

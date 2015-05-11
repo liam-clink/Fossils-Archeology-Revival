@@ -79,7 +79,7 @@ public class EntityCompsognathus extends EntityDinosaur
         // Size of dinosaur at age Adult.
         this.maxSize = 0.65F;
         
-    	if(Fossil.FossilOptions.CompsognathusFeathers)
+    	if(!Fossil.FossilOptions.CompsognathusFeathers)
             texturePath = Fossil.modid + ":textures/mob/" + this.SelfType.toString() + "/feathered/" + "Feathered_";
     	else
     		texturePath = Fossil.modid + ":textures/mob/" + this.SelfType.toString() + "/";
