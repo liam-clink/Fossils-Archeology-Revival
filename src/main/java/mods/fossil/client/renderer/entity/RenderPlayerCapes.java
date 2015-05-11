@@ -38,7 +38,7 @@ public class RenderPlayerCapes {
 
 	public UUID alexID = UUID.fromString("71363abe-fd03-49c9-940d-aae8b8209b7c");
 	public UUID redID = UUID.fromString("5468a8f2-84d6-46e2-b58c-f9d576b67544");
-	public UUID tyrannoID = UUID.fromString("5468a8f2-84d6-46e2-b58c-f9d576b67544");
+	public UUID tyrannoID = UUID.fromString("04e6d7f5-b587-4e4f-8ce0-b210d368a79e");
 	public UUID raptorID = UUID.fromString("0ed918c8-d612-4360-b711-cd415671356f");
 	public UUID robbID = UUID.fromString("05b14ce7-0ff1-4b8e-9ef8-d98502e9bf07");
 	public UUID nanoID = UUID.fromString("d4c29faf-82bc-4d34-bda0-cb850595595a");
