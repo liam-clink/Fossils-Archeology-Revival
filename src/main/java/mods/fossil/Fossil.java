@@ -247,7 +247,7 @@ public class Fossil
 	 * 2 = Release build
 	 */
 
-	public static final int modState = 0;
+	public static final int modState = 2;
 
 	@SidedProxy(clientSide = "mods.fossil.client.ClientProxy", serverSide = "mods.fossil.CommonProxy")
 	public static CommonProxy proxy;
