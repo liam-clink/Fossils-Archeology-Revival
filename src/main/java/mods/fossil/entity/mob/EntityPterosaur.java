@@ -253,15 +253,6 @@ public class EntityPterosaur extends EntityDinosaur {
 		return this.getEyeHeight() / 2.0F;
 	}
 
-
-	public boolean CheckSpace() {
-		if (this.isEntityInsideOpaqueBlock()) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
 	@SideOnly(Side.CLIENT)
 	public void ShowPedia(GuiPedia gui) {
 		super.ShowPedia(gui);
