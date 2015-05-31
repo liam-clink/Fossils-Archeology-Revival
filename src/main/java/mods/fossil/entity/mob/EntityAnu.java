@@ -282,7 +282,7 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
 	}
 	public void onLivingUpdate(){
 		if(worldObj.isRemote){
-			ISound music = PositionedSoundRecord.func_147673_a(new ResourceLocation("fossil:music.anu"));
+			//ISound music = PositionedSoundRecord.func_147673_a(new ResourceLocation("fossil:music.anu"));
 			if(songCounter < songLength){
 				songCounter++;
 			}
@@ -290,10 +290,10 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
 				songCounter = 0;
 			}
 			if(songCounter == 1){
-				Minecraft.getMinecraft().getSoundHandler().playSound(music);
+				//Minecraft.getMinecraft().getSoundHandler().playSound(music);
 			}
 			if(this.isDead){
-				Minecraft.getMinecraft().getSoundHandler().stopSounds();
+				//Minecraft.getMinecraft().getSoundHandler().stopSounds();
 			}
 		}
 		super.onLivingUpdate();
