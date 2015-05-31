@@ -57,10 +57,11 @@ public class FossilLivingEvent {
 		if (event.entity instanceof EntitySheep && EntityPregnantSheep.get((EntitySheep) event.entity) == null)
 			EntityPregnantSheep.register((EntitySheep) event.entity);
 	}
+	
 	@SubscribeEvent
 	public void onAchievementGet(AchievementEvent event){
 		if(event.achievement == FossilAchievementHandler.firstDino){
-			Minecraft.getMinecraft().getSoundHandler().playSound(PositionedSoundRecord.func_147673_a(new ResourceLocation("fossil:music.first_dinosaur")));
+			event.entityPlayer.playSound("fossil:music.first_dinosaur", 1, 1);
 		}
 	}
 	
