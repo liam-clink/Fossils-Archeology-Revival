@@ -203,7 +203,7 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
 	}
 
 	public void updateAITasks(){
-		if(this.getAttackMode() == 2){
+		if(this.getAttackMode() != 0){
 			if (this.ticksExisted % 20 == 0)
 			{
 				this.heal(1.0F);

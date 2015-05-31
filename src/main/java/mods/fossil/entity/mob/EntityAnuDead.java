@@ -51,7 +51,7 @@ public class EntityAnuDead extends EntityLiving
 	}
 
 	public boolean interact(EntityPlayer entity)
-    {
+	{
 		if ((entity.ridingEntity == null) && (entity.riddenByEntity == null) && (entity instanceof EntityPlayerMP))
 		{
 			EntityPlayerMP thePlayer = (EntityPlayerMP) entity;
@@ -72,7 +72,7 @@ public class EntityAnuDead extends EntityLiving
 			}
 		}
 		return true;
-    }
+	}
 	/**
 	 * handles entity death timer, experience orb and particle creation
 	 */
@@ -92,8 +92,10 @@ public class EntityAnuDead extends EntityLiving
 		}
 		for (int i = 0; i < 2; ++i)
 		{
-			EntityFX particle1 = new DeathOrbFX(worldObj, (double)this.posX, (double)this.posY, (double)this.posZ, 0, 0, 0);
-			Minecraft.getMinecraft().effectRenderer.addEffect(particle1); 
+			if(worldObj.isRemote){
+				EntityFX particle1 = new DeathOrbFX(worldObj, (double)this.posX, (double)this.posY, (double)this.posZ, 0, 0, 0);
+				Minecraft.getMinecraft().effectRenderer.addEffect(particle1);
+			}
 		}
 	}
 
