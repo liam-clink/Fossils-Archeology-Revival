@@ -238,6 +238,6 @@ public class BlockAncientChest extends BlockContainer
 	 @SideOnly(Side.CLIENT)
 	 public void registerBlockIcons(IIconRegister iicon)
 	 {
-		 this.blockIcon = iicon.registerIcon("fossil:chestSquare");
+		 this.blockIcon = iicon.registerIcon("fossil:AncientChestSquare");
 	 }
 }

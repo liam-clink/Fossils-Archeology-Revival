@@ -21,7 +21,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class TileEntityAncientChestRender extends TileEntitySpecialRenderer
 {
-	private static final ResourceLocation texture = new ResourceLocation("fossil:textures/blocks/chest.png");
+	private static final ResourceLocation texture = new ResourceLocation("fossil:textures/blocks/AncientChest.png");
 
 	private ModelChest model = new ModelChest();
 	EntityItem key = new EntityItem(Minecraft.getMinecraft().theWorld, 0D, 0D, 0D, new ItemStack(Fossil.ancientKey));

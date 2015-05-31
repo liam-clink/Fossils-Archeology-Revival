@@ -277,22 +277,24 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
 		}
 	}
 	protected void dropFewItems(boolean par1, int par2)
-    {
-        this.dropItem(Fossil.ancientKey, 1);
-    }
+	{
+		this.dropItem(Fossil.ancientKey, 1);
+	}
 	public void onLivingUpdate(){
-		ISound music = PositionedSoundRecord.func_147673_a(new ResourceLocation("fossil:music.anu"));
-		if(songCounter < songLength){
-			songCounter++;
-		}
-		if(songCounter == songLength - 1){
-			songCounter = 0;
-		}
-		if(songCounter == 1){
-			Minecraft.getMinecraft().getSoundHandler().playSound(music);
-		}
-		if(this.isDead){
-			Minecraft.getMinecraft().getSoundHandler().stopSounds();
+		if(worldObj.isRemote){
+			ISound music = PositionedSoundRecord.func_147673_a(new ResourceLocation("fossil:music.anu"));
+			if(songCounter < songLength){
+				songCounter++;
+			}
+			if(songCounter == songLength - 1){
+				songCounter = 0;
+			}
+			if(songCounter == 1){
+				Minecraft.getMinecraft().getSoundHandler().playSound(music);
+			}
+			if(this.isDead){
+				Minecraft.getMinecraft().getSoundHandler().stopSounds();
+			}
 		}
 		super.onLivingUpdate();
 		if (this.getAttackMode() == 1 && !this.onGround && this.motionY < 0.0D)
