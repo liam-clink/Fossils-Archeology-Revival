@@ -4,22 +4,6 @@ import net.minecraft.util.StatCollector;
 
 public class LocalizationStrings
 {
-	//Achievements
-	
-	public static final String ACHIEVEMENT_FIRST_EGG = "FirstEgg";
-	public static final String ACHIEVEMENT_ALL_EGGS = "AllEggs";
-	public static final String ACHIEVEMENT_FOUND_FOSSILS = "FoundFossils";
-	public static final String ACHIEVEMENT_PIGBOSS = "pigBossOnEarth";
-	public static final String ACHIEVEMENT_PERMAFROST = "Permafrost";
-	public static final String ACHIEVEMENT_ARCHWORKBENCH = "ArchWorkbench";
-	public static final String ACHIEVEMENT_ANALYZER = "Analyzer";
-	public static final String ACHIEVEMENT_CULTVAT = "CultVat";
-	public static final String ACHIEVEMENT_SIFTER = "Sifter";
-	public static final String AQUATIC_SCARAB_GEM_NAME = "AquaticScarabGem";
-	public static final String ACHIEVEMENT_DINOPEDIA = "Dinopedia";
-	public static final String ACHIEVEMENT_ICEAGE = "IceAge";
-	public static final String ACHIEVEMENT_THEKING = "TheKing";
-	
 	//Enchantments
 	public static final String ENCHANTMENT_PALEONTOLOGY = "paleontology";
 	public static final String ENCHANTMENT_ARCHEOLOGY = "archeology";

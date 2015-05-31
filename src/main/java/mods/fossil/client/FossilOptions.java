@@ -27,8 +27,11 @@ public class FossilOptions
     public static boolean AllowBookEnchantments;
 	public static boolean AllowBreeding;
 	public static boolean VelociraptorFeathers;
+	public static boolean DeveloperSpecials;
     public static int biomeIDDarknessLair;
+	public static int biomeIDTreasure;
     public static int dimIDDarknessLair;
+	public static int dimIDTreasure;
 
 
     public void Load(Configuration config)
@@ -57,8 +60,13 @@ public class FossilOptions
         CompsognathusFeathers = config.get("toggle_scales",  "Compsognathus Scales", false).getBoolean(false);
         VelociraptorFeathers = config.get("toggle_scales",  "Velociraptor Scales", false).getBoolean(false);
         
-        biomeIDDarknessLair = config.get("biome IDs", "Layer of Darkness ID:", 33).getInt();
-        dimIDDarknessLair = config.get("dimension IDs", "Layer of Darkness ID:", 23).getInt();
+        DeveloperSpecials = config.get("option",  "(Devs only)Allow Dev Specials", true).getBoolean(true);
+        
+        biomeIDDarknessLair = config.get("biome IDs", "Layer of Darkness ID:", 128).getInt();
+        biomeIDTreasure = config.get("biome IDs", "Treasure ID:", 127).getInt();
+
+        dimIDDarknessLair = config.get("dimension IDs", "Layer of Darkness ID:", -23).getInt();
+        dimIDTreasure = config.get("dimension IDs", "Ancient Treasure Room ID:", -34).getInt();
 
     }
 

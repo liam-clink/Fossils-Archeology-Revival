@@ -166,8 +166,8 @@ public class WorldGenAnuCastle extends WorldGenerator
 		ItemDoor.placeDoorBlock(world, x + 65, y + 13, z + 122, 1, Blocks.iron_door);  
 		ItemDoor.placeDoorBlock(world, x + 75, y + 13, z + 122, 1, Blocks.iron_door);  
 
-		world.setBlock(x + 70, y + 7, z + 70, Blocks.ender_chest);
-		world.setBlock(x + 70, y + 10, z + 70, Blocks.standing_sign, 0, 3);
+		world.setBlock(x + 70, y + 9, z + 70, Fossil.sarcophagus, 3, 2);
+		world.markBlockForUpdate(x + 70, y + 9, z + 70);
 
 	}
 	protected void chestWithLoot(int i1, int j1, int k1, boolean isTrapped, World world, Random rand, WeightedRandomChestContent[] content, int i)

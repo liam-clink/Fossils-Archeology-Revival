@@ -1,5 +1,7 @@
 package mods.fossil.client.model;
 
+import org.lwjgl.opengl.GL11;
+
 import mods.fossil.entity.mob.EntityDinosaur;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
@@ -153,16 +155,20 @@ public class ModelDilophosaurus extends ModelDinosaurs {
 	public void render(Entity f, float f1, float f2, float f3, float f4, float f5, float f6)
 	{
 		super.render(f, f1, f2, f3, f4, f5, f6);
-		this.setRotationAngles(f1, f2, f3, f4, f5, f6, ((EntityDinosaur)f).isModelized());
+		if(f instanceof EntityDinosaur){
+			this.setRotationAngles(f1, f2, f3, f4, f5, f6, ((EntityDinosaur)f).isModelized());
+		}else{
+			this.setRotationAngles(f1, f2, f3, f4, f5, f6, false);
+		}
 		this.lowerBody.render(f6);
 		this.leftThigh.render(f6);
 		this.rightThigh.render(f6);
 	}
-	public void renderFollower(float f6){
+	public void renderFollower(Entity f, float f1, float f2, float f3, float f4, float f5, float f6){
 		this.lowerBody.render(f6);
 		this.leftThigh.render(f6);
 		this.rightThigh.render(f6);
-	}
+		}
 	/**
 	 * This is a helper function from Tabula to set the rotation of model parts
 	 */

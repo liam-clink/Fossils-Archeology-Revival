@@ -25,12 +25,11 @@ import net.minecraft.world.World;
 
 
 public class TileEntityCultivateRenderer extends TileEntitySpecialRenderer {
-	public static final ResourceLocation texture = new ResourceLocation("fossil:textures/blocks/cultureVat/culturevat_green.png");
+	public static final ResourceLocation texture = new ResourceLocation("fossil:textures/blocks/cultureVat/culturevat.png");
 	public static final ResourceLocation textureEmbryoBasic = new ResourceLocation("fossil:textures/blocks/cultureVat/embryo_generic.png");
 	private static final ResourceLocation textureEmbryoLimbless = new ResourceLocation("fossil:textures/blocks/cultureVat/embryo_legless.png");
 	private static final ResourceLocation textureEmbryoPlant = new ResourceLocation("fossil:textures/blocks/cultureVat/embryo_plant.png");
 	private static final ResourceLocation textureEmbryoSpore = new ResourceLocation("fossil:textures/blocks/cultureVat/embryo_spore.png");
-
 	private ModelEmbryoGeneric model;
 	private ModelEmbryoPlant modelPlant;
 
@@ -45,11 +44,9 @@ public class TileEntityCultivateRenderer extends TileEntitySpecialRenderer {
 
 	public void renderCultureVatAt(TileEntityCultivate tileentity, double x, double y, double z, float f) {
 
-		float rot = 0.0F;
-		if (tileentity.getWorldObj() != null)
-		{
-			rot = tileentity.getWorldObj().getWorldTime() % 360L;
-		}
+		float rot =	(float) (720.0 * (System.currentTimeMillis() & 0x3FFFL) / 0x3FFFL);
+
+		
 		GL11.glPushMatrix();
 		GL11.glTranslatef(0f, 0f,0f);
 		GL11.glTranslated((float)x + 0.5F, (float)y + 1.5F, (float)z + 0.5F);

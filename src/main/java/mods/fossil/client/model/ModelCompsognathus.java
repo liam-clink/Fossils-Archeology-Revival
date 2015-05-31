@@ -104,7 +104,12 @@ public class ModelCompsognathus extends ModelDinosaurs
     public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
     {
         super.render(entity, f, f1, f2, f3, f4, f5);
+        if(entity instanceof EntityDinosaur){
         setRotationAngles(f, f1, f2, f3, f4, f5, ((EntityDinosaur)entity).isModelized());
+        }else{
+            setRotationAngles(f, f1, f2, f3, f4, f5, false);
+
+        }
         body.render(f5);
         head.render(f5);
     }

@@ -389,6 +389,7 @@ public class EntityAllosaurus extends EntityDinosaur
             {
                 if (this.isWeak() && !this.isTamed())
                 {
+                	player.triggerAchievement(FossilAchievementHandler.squire);
                     this.heal(200);
                     this.increaseHunger(500);
                     this.setTamed(true);

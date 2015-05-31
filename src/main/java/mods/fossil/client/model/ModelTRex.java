@@ -179,34 +179,34 @@ public class ModelTRex extends MowzieModelBase {
 		this.rightUpperArm.addChild(this.rightLowerArm);
 		this.lowerBody.addChild(this.upperBody);
 		this.tail3.addChild(this.middleTailBackFeather);
-		 lowerBody.setInitValuesToCurrentPose();
-		 rightThigh.setInitValuesToCurrentPose();
-		 leftThigh.setInitValuesToCurrentPose();
-		 tail1.setInitValuesToCurrentPose();
-		 upperBody.setInitValuesToCurrentPose();
-		 tail2.setInitValuesToCurrentPose();
-		 tail3.setInitValuesToCurrentPose();
-		 leftTailFeather.setInitValuesToCurrentPose();
-		 rightTailFeather.setInitValuesToCurrentPose();
-		 middleTailFrontFeather.setInitValuesToCurrentPose();
-		 middleTailBackFeather.setInitValuesToCurrentPose();
-		 neck.setInitValuesToCurrentPose();
-		 leftUpperArm.setInitValuesToCurrentPose();
-		 rightUpperArm.setInitValuesToCurrentPose();
-		 head.setInitValuesToCurrentPose();
-		 headPivot.setInitValuesToCurrentPose();
-		 leftCrest.setInitValuesToCurrentPose();
-		 rightCrest.setInitValuesToCurrentPose();
-		 middleCrest.setInitValuesToCurrentPose();
-		 upperJaw.setInitValuesToCurrentPose();
-		 lowerJaw.setInitValuesToCurrentPose();
-		 teeth.setInitValuesToCurrentPose();
-		 leftLowerArm.setInitValuesToCurrentPose();
-		 rightLowerArm.setInitValuesToCurrentPose();
-		 rightLeg.setInitValuesToCurrentPose();
-		 rightFoot.setInitValuesToCurrentPose();
-		 leftLeg.setInitValuesToCurrentPose();
-		 leftFoot.setInitValuesToCurrentPose();
+		lowerBody.setInitValuesToCurrentPose();
+		rightThigh.setInitValuesToCurrentPose();
+		leftThigh.setInitValuesToCurrentPose();
+		tail1.setInitValuesToCurrentPose();
+		upperBody.setInitValuesToCurrentPose();
+		tail2.setInitValuesToCurrentPose();
+		tail3.setInitValuesToCurrentPose();
+		leftTailFeather.setInitValuesToCurrentPose();
+		rightTailFeather.setInitValuesToCurrentPose();
+		middleTailFrontFeather.setInitValuesToCurrentPose();
+		middleTailBackFeather.setInitValuesToCurrentPose();
+		neck.setInitValuesToCurrentPose();
+		leftUpperArm.setInitValuesToCurrentPose();
+		rightUpperArm.setInitValuesToCurrentPose();
+		head.setInitValuesToCurrentPose();
+		headPivot.setInitValuesToCurrentPose();
+		leftCrest.setInitValuesToCurrentPose();
+		rightCrest.setInitValuesToCurrentPose();
+		middleCrest.setInitValuesToCurrentPose();
+		upperJaw.setInitValuesToCurrentPose();
+		lowerJaw.setInitValuesToCurrentPose();
+		teeth.setInitValuesToCurrentPose();
+		leftLowerArm.setInitValuesToCurrentPose();
+		rightLowerArm.setInitValuesToCurrentPose();
+		rightLeg.setInitValuesToCurrentPose();
+		rightFoot.setInitValuesToCurrentPose();
+		leftLeg.setInitValuesToCurrentPose();
+		leftFoot.setInitValuesToCurrentPose();
 	}
 
 	@Override
@@ -220,50 +220,83 @@ public class ModelTRex extends MowzieModelBase {
 	}
 
 	public void update(){
-		 lowerBody.setCurrentPoseToInitValues();
-		 rightThigh.setCurrentPoseToInitValues();
-		 leftThigh.setCurrentPoseToInitValues();
-		 tail1.setCurrentPoseToInitValues();
-		 upperBody.setCurrentPoseToInitValues();
-		 tail2.setCurrentPoseToInitValues();
-		 tail3.setCurrentPoseToInitValues();
-		 leftTailFeather.setCurrentPoseToInitValues();
-		 rightTailFeather.setCurrentPoseToInitValues();
-		 middleTailFrontFeather.setCurrentPoseToInitValues();
-		 middleTailBackFeather.setCurrentPoseToInitValues();
-		 neck.setCurrentPoseToInitValues();
-		 leftUpperArm.setCurrentPoseToInitValues();
-		 rightUpperArm.setCurrentPoseToInitValues();
-		 head.setCurrentPoseToInitValues();
-		 headPivot.setCurrentPoseToInitValues();
-		 leftCrest.setCurrentPoseToInitValues();
-		 rightCrest.setCurrentPoseToInitValues();
-		 middleCrest.setCurrentPoseToInitValues();
-		 upperJaw.setCurrentPoseToInitValues();
-		 lowerJaw.setCurrentPoseToInitValues();
-		 teeth.setCurrentPoseToInitValues();
-		 leftLowerArm.setCurrentPoseToInitValues();
-		 rightLowerArm.setCurrentPoseToInitValues();
-		 rightLeg.setCurrentPoseToInitValues();
-		 rightFoot.setCurrentPoseToInitValues();
-		 leftLeg.setCurrentPoseToInitValues();
-		 leftFoot.setCurrentPoseToInitValues();
+		lowerBody.setCurrentPoseToInitValues();
+		rightThigh.setCurrentPoseToInitValues();
+		leftThigh.setCurrentPoseToInitValues();
+		tail1.setCurrentPoseToInitValues();
+		upperBody.setCurrentPoseToInitValues();
+		tail2.setCurrentPoseToInitValues();
+		tail3.setCurrentPoseToInitValues();
+		leftTailFeather.setCurrentPoseToInitValues();
+		rightTailFeather.setCurrentPoseToInitValues();
+		middleTailFrontFeather.setCurrentPoseToInitValues();
+		middleTailBackFeather.setCurrentPoseToInitValues();
+		neck.setCurrentPoseToInitValues();
+		leftUpperArm.setCurrentPoseToInitValues();
+		rightUpperArm.setCurrentPoseToInitValues();
+		head.setCurrentPoseToInitValues();
+		headPivot.setCurrentPoseToInitValues();
+		leftCrest.setCurrentPoseToInitValues();
+		rightCrest.setCurrentPoseToInitValues();
+		middleCrest.setCurrentPoseToInitValues();
+		upperJaw.setCurrentPoseToInitValues();
+		lowerJaw.setCurrentPoseToInitValues();
+		teeth.setCurrentPoseToInitValues();
+		leftLowerArm.setCurrentPoseToInitValues();
+		rightLowerArm.setCurrentPoseToInitValues();
+		rightLeg.setCurrentPoseToInitValues();
+		rightFoot.setCurrentPoseToInitValues();
+		leftLeg.setCurrentPoseToInitValues();
+		leftFoot.setCurrentPoseToInitValues();
 	}
 	/**
 	 * This is a helper function from Tabula to set the rotation of model parts
 	 */
-	 public void setRotateAngle(MowzieModelRenderer MowzieModelRenderer, float x, float y, float z) {
+	public void setRotateAngle(MowzieModelRenderer MowzieModelRenderer, float x, float y, float z) {
 		MowzieModelRenderer.rotateAngleX = x;
 		MowzieModelRenderer.rotateAngleY = y;
 		MowzieModelRenderer.rotateAngleZ = z;
 	}
 
-	
+
 	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity f6) {
 		super.setRotationAngles(f, f1, f2, f3, f4, f5, f6);
+		if(f6 instanceof EntityDinosaur){
+			if(!((EntityDinosaur)f6).isModelized())
+			{
+				update();
 
-		if(!((EntityDinosaur)f6).isModelized())
-		{
+				tail1.rotateAngleY = 0.08F * MathHelper.sin(f2 * (float)0.1F + (f1 + 2));
+				tail2.rotateAngleY = 0.10F * MathHelper.sin(f2  * (float)0.1F + f1+1);
+				tail3.rotateAngleY = 0.15F * MathHelper.sin(f2  * (float)0.1F + f1);
+
+				// this.UpperLegRight.rotateAngleX = MathHelper.cos(f * 0.5662F) * 1.0F * f1;
+				//  this.UpperLegLeft.rotateAngleX = MathHelper.cos(f * 0.5662F + (float)Math.PI) * 1.0F * f1;
+
+				head.rotateAngleX = (f4 / (180F / (float)Math.PI));
+				head.rotateAngleY = (f3 / (180F / (float)Math.PI));
+				walk(leftThigh, 0.5F * 1, 0.8F, false, 0F, 0.4F, f, f1);
+				//	walk(leftLeg, 0.5F * 1, 0.5F, false, 0F, 0F, f, f1);
+				//	walk(leftFoot, 0.5F * 1, 1.5F, false, 0.5F, 1F, f, f1);
+				walk(rightThigh, 0.5F * 1, 0.8F, true, 0F, 0.4F, f, f1);
+				//	walk(rightLeg, 0.5F * 1, 0.5F, true, 0F, 0F, f, f1);
+				//	walk(rightFoot, 0.5F * 1, 1.5F, true, 0.5F, 1F, f, f1);
+
+			}else{
+				tail1.rotateAngleY = 0F;
+				tail2.rotateAngleY = 0F;
+				tail3.rotateAngleY = 0F;
+
+				head.rotateAngleX = 0F;
+				head.rotateAngleY = 0F;
+				rightThigh.rotateAngleX = 0F;
+				leftThigh.rotateAngleX = 0F;
+				rightLeg.rotateAngleX = -0.3270747018237373F;
+				leftLeg.rotateAngleX = -0.3270747018237373F;
+				rightFoot.rotateAngleX = 0.33161255787892263F;
+				leftFoot.rotateAngleX = 0.33161255787892263F;
+			}
+		}else{
 			update();
 
 			tail1.rotateAngleY = 0.08F * MathHelper.sin(f2 * (float)0.1F + (f1 + 2));
@@ -276,25 +309,11 @@ public class ModelTRex extends MowzieModelBase {
 			head.rotateAngleX = (f4 / (180F / (float)Math.PI));
 			head.rotateAngleY = (f3 / (180F / (float)Math.PI));
 			walk(leftThigh, 0.5F * 1, 0.8F, false, 0F, 0.4F, f, f1);
-			walk(leftLeg, 0.5F * 1, 0.5F, false, 0F, 0F, f, f1);
-			walk(leftFoot, 0.5F * 1, 1.5F, true, 0.5F, 1F, f, f1);
+			//	walk(leftLeg, 0.5F * 1, 0.5F, false, 0F, 0F, f, f1);
+			//	walk(leftFoot, 0.5F * 1, 1.5F, false, 0.5F, 1F, f, f1);
 			walk(rightThigh, 0.5F * 1, 0.8F, true, 0F, 0.4F, f, f1);
-			walk(rightLeg, 0.5F * 1, 0.5F, true, 0F, 0F, f, f1);
-			walk(rightFoot, 0.5F * 1, 1.5F, false, 0.5F, 1F, f, f1);
-			
-		}else{
-			tail1.rotateAngleY = 0F;
-			tail2.rotateAngleY = 0F;
-			tail3.rotateAngleY = 0F;
-
-			head.rotateAngleX = 0F;
-			head.rotateAngleY = 0F;
-			rightThigh.rotateAngleX = 0F;
-			leftThigh.rotateAngleX = 0F;
-			rightLeg.rotateAngleX = -0.3270747018237373F;
-			leftLeg.rotateAngleX = -0.3270747018237373F;
-			rightFoot.rotateAngleX = 0.33161255787892263F;
-			leftFoot.rotateAngleX = 0.33161255787892263F;
+			//	walk(rightLeg, 0.5F * 1, 0.5F, true, 0F, 0F, f, f1);
+			//	walk(rightFoot, 0.5F * 1, 1.5F, true, 0.5F, 1F, f, f1);
 		}
 	}
 

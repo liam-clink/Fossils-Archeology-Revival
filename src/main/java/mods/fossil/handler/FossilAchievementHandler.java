@@ -3,9 +3,11 @@ package mods.fossil.handler;
 import mods.fossil.Fossil;
 import mods.fossil.core.FossilPlants;
 import mods.fossil.fossilEnums.EnumDinoType;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
+import net.minecraft.stats.StatBase;
 import net.minecraftforge.common.AchievementPage;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
@@ -51,7 +53,12 @@ public class FossilAchievementHandler
     public static Achievement scarabTools;
     public static Achievement blueScarab;
     public static Achievement key;
+	public static Achievement wtf;
     public static Achievement clock;
+    public static Achievement firstDino;
+    public static Achievement theKing;
+    public static Achievement usurper;
+    public static Achievement squire;
 
 
     public static void loadAchievements()
@@ -82,7 +89,12 @@ public class FossilAchievementHandler
     	scarabTools =  new Achievement("achievement.scarabTools", "scarabTools",  2, 2, new ItemStack(Fossil.gemSword), (Achievement)scarab).registerStat();
     	blueScarab =  new Achievement("achievement.blueScarab", "blueScarab",  -2, 2, new ItemStack(Fossil.AquaticScarabGem), (Achievement)scarab).registerStat();
     	key =  new Achievement("achievement.key", "key",  2, 7, new ItemStack(Fossil.ancientKey), (Achievement)anuDead).registerStat();
-    	clock =  new Achievement("achievement.clock", "clock",  2, 7, new ItemStack(Fossil.ancientClock), (Achievement)key).registerStat();
+    	wtf =  new Achievement("achievement.inTreasure", "inTreasure",  4, 7, new ItemStack(Blocks.stonebrick), (Achievement)key).registerStat();
+    	clock =  new Achievement("achievement.clock", "clock",  6, 7, new ItemStack(Fossil.ancientClock), (Achievement)wtf).registerStat();
+    	firstDino =  new Achievement("achievement.firstDino", "firstDino",  6, -4, new ItemStack(Fossil.skull, 1, 0), (Achievement)dinoEgg).registerStat().setSpecial();
+    	theKing =  new Achievement("achievement.theKing", "theKing",  8, -5, new ItemStack(Fossil.skull, 1, 2), (Achievement)firstDino).registerStat().setSpecial();
+    	usurper =  new Achievement("achievement.usurper", "usurper",  8, -3, new ItemStack(Fossil.skull, 1, 10), (Achievement)firstDino).registerStat().setSpecial();
+    	squire =  new Achievement("achievement.squire", "squire",  7, -1, new ItemStack(Fossil.skull, 1, 17), (Achievement)firstDino).registerStat();
 
         AchievementPage.registerAchievementPage(new AchievementPage("Fossils and Archeology", 
         		new Achievement[]{
@@ -112,7 +124,12 @@ public class FossilAchievementHandler
         		scarabTools,
         		blueScarab,
         		key,
-        		clock
+        		wtf,
+        		clock,
+        		firstDino,
+        		theKing,
+        		usurper,
+        		squire
         		}));
     }
 

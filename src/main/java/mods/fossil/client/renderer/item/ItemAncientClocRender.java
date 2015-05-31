@@ -37,11 +37,8 @@ public class ItemAncientClocRender implements IItemRenderer {
 
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
-		float rot = 0.0F;
-		if (FMLClientHandler.instance().getWorldClient() != null)
-		{
-			rot = FMLClientHandler.instance().getWorldClient().getWorldTime() % 360L;
-		}
+		float rot =	(float) (720.0 * (System.currentTimeMillis() & 0x3FFFL) / 0x3FFFL);
+
 		switch(type){
 		case EQUIPPED:{
 			GL11.glPushMatrix();

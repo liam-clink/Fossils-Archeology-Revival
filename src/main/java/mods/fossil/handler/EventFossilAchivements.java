@@ -24,11 +24,8 @@ public class EventFossilAchivements
 		if(event.crafting.getItem() == Item.getItemFromBlock(Fossil.blockcultivateIdle)) {
 			event.player.addStat(FossilAchievementHandler.cultivate, 1);
 		}
-		if(event.crafting.getItem() == Item.getItemFromBlock(Fossil.blockWeakcultivateIdle)) {
-			event.player.addStat(FossilAchievementHandler.cultivate, 1);
-		}
-		if(event.crafting.getItem() == Item.getItemFromBlock(Fossil.blockStrongcultivateIdle)) {
-			event.player.addStat(FossilAchievementHandler.cultivate, 1);
+		if(event.crafting.getItem() == Item.getItemFromBlock(Fossil.blockSifterIdle)) {
+			event.player.addStat(FossilAchievementHandler.sifter, 1);
 		}
 		if(event.crafting.getItem() == Item.getItemFromBlock(Fossil.blockworktableIdle)) {
 			event.player.addStat(FossilAchievementHandler.arcWorkbench, 1);

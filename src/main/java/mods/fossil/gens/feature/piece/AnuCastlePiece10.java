@@ -2278,7 +2278,6 @@ public class AnuCastlePiece10 {
 		world.setBlock(x + 37, y + 9, z + 70, Blocks.nether_brick, 0, 3);
 		world.setBlock(x + 38, y + 9, z + 70, Blocks.nether_brick, 0, 3);
 		world.setBlock(x + 39, y + 9, z + 70, Blocks.nether_brick, 0, 3);
-		world.setBlock(x + 70, y + 9, z + 70, Blocks.lapis_block, 0, 3);
 		world.setBlock(x + 101, y + 9, z + 70, Blocks.nether_brick, 0, 3);
 		world.setBlock(x + 102, y + 9, z + 70, Blocks.nether_brick, 0, 3);
 		world.setBlock(x + 103, y + 9, z + 70, Blocks.nether_brick, 0, 3);

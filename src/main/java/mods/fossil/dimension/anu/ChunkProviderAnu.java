@@ -3,6 +3,8 @@ package mods.fossil.dimension.anu;
 import java.util.List;
 import java.util.Random;
 
+import mods.fossil.Fossil;
+import mods.fossil.gens.feature.WorldGenAnuCastle;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.material.Material;
@@ -135,6 +137,7 @@ public class ChunkProviderAnu implements IChunkProvider
     }
     public void replaceBiomeBlocks(int p_147421_1_, int p_147421_2_, Block[] p_147421_3_, BiomeGenBase[] p_147421_4_, byte[] meta)
     {
+    	
         ChunkProviderEvent.ReplaceBiomeBlocks event = new ChunkProviderEvent.ReplaceBiomeBlocks(this, p_147421_1_, p_147421_2_, p_147421_3_, meta, p_147421_4_, this.endWorld);
         MinecraftForge.EVENT_BUS.post(event);
         if (event.getResult() == Result.DENY) return;
@@ -206,12 +209,14 @@ public class ChunkProviderAnu implements IChunkProvider
      */
     public Chunk provideChunk(int p_73154_1_, int p_73154_2_)
     {
+    	
         this.endRNG.setSeed((long)p_73154_1_ * 341873128712L + (long)p_73154_2_ * 132897987541L);
         Block[] ablock = new Block[32768];
         byte[] meta = new byte[ablock.length];
         this.biomesForGeneration = this.endWorld.getWorldChunkManager().loadBlockGeneratorData(this.biomesForGeneration, p_73154_1_ * 16, p_73154_2_ * 16, 16, 16);
         this.func_147420_a(p_73154_1_, p_73154_2_, ablock, this.biomesForGeneration);
         this.replaceBiomeBlocks(p_73154_1_, p_73154_2_, ablock, this.biomesForGeneration, meta);
+        
         Chunk chunk = new Chunk(this.endWorld, ablock, meta, p_73154_1_, p_73154_2_);
         byte[] abyte = chunk.getBiomeArray();
 
@@ -219,7 +224,6 @@ public class ChunkProviderAnu implements IChunkProvider
         {
             abyte[k] = (byte)this.biomesForGeneration[k].biomeID;
         }
-
         chunk.generateSkylightMap();
         return chunk;
     }
@@ -381,17 +385,14 @@ public class ChunkProviderAnu implements IChunkProvider
     public void populate(IChunkProvider p_73153_1_, int p_73153_2_, int p_73153_3_)
     {
         BlockFalling.fallInstantly = true;
-
         MinecraftForge.EVENT_BUS.post(new PopulateChunkEvent.Pre(p_73153_1_, endWorld, endWorld.rand, p_73153_2_, p_73153_3_, false));
-
         int k = p_73153_2_ * 16;
         int l = p_73153_3_ * 16;
         BiomeGenBase biomegenbase = this.endWorld.getBiomeGenForCoords(k + 16, l + 16);
         biomegenbase.decorate(this.endWorld, this.endWorld.rand, k, l);
-
         MinecraftForge.EVENT_BUS.post(new PopulateChunkEvent.Post(p_73153_1_, endWorld, endWorld.rand, p_73153_2_, p_73153_3_, false));
-
         BlockFalling.fallInstantly = false;
+      
     }
 
     /**

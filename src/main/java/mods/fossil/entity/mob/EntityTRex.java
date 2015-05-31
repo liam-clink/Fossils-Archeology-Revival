@@ -326,7 +326,7 @@ public class EntityTRex extends EntityDinosaur
 			{
 				if (this.isWeak() && !this.isTamed())
 				{
-					//player.triggerAchievement(FossilAchievementHandler.TheKing);
+					player.triggerAchievement(FossilAchievementHandler.theKing);
 					this.heal(200);
 					this.increaseHunger(500);
 					this.setTamed(true);

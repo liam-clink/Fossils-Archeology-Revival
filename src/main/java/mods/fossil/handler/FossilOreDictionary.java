@@ -16,8 +16,11 @@ public class FossilOreDictionary
         OreDictionary.registerOre("stairWood", new ItemStack(Fossil.palaeStairs));
         OreDictionary.registerOre("treeSapling", new ItemStack(Fossil.palmSap));
         OreDictionary.registerOre("record", new ItemStack(Fossil.fossilrecordBones));
-        OreDictionary.registerOre("oreFossil", new ItemStack(Fossil.biofossil));
-        
+        OreDictionary.registerOre("oreFossil", new ItemStack(Fossil.blockFossil));
+       
+        OreDictionary.registerOre("fossil", new ItemStack(Fossil.biofossil));
+        OreDictionary.registerOre("gemScarab", new ItemStack(Fossil.gem));
+        OreDictionary.registerOre("gemScarabBlue", new ItemStack(Fossil.AquaticScarabGem));
         OreDictionary.registerOre("dinosaurClaw", new ItemStack(Fossil.claw,1, 1));
         OreDictionary.registerOre("dinosaurClaw", new ItemStack(Fossil.claw,1, 8));
         OreDictionary.registerOre("dinosaurClaw", new ItemStack(Fossil.claw,1, 11));

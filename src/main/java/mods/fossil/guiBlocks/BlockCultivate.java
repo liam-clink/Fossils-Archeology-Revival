@@ -155,6 +155,10 @@ public class BlockCultivate extends BlockContainer {
 	 */
 	public void randomDisplayTick(World var1, int var2, int var3, int var4,
 			Random var5) {
+		
+			var1.spawnParticle("suspended", (double)((float)var2 + var5.nextFloat()), (double)((float)var3 + var5.nextFloat()), (double)((float)var4 + var5.nextFloat()), 0.0D, 0.0D, 0.0D);
+
+		
 	}
 
 	/**

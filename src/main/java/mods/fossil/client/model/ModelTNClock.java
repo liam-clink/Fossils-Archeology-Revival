@@ -65,12 +65,12 @@ public class ModelTNClock extends ModelBase
 		this.axie.render(var7);
 		this.C.render(var7);
 		GL11.glPushMatrix();
-		GL11.glRotatef(worldTime, 0, 0, 1);
+		GL11.glRotatef(worldTime * -1F, 0, 0, 1);
 		this.H.render(var7);
 		GL11.glPopMatrix();
 
 		GL11.glPushMatrix();
-		GL11.glRotatef(-1 * worldTime, 0, 0, 1);
+		GL11.glRotatef(worldTime * 1F, 0, 0, 1);
 		this.M.render(var7);
 		GL11.glPopMatrix();
 

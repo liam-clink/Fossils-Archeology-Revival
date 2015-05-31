@@ -183,7 +183,6 @@ ISidedInventory {
 		}
 		if (this.furnaceCookTime > 0) {
 			isActive = true;
-			worldObj.notifyBlockChange(xCoord, yCoord, zCoord, worldObj.getBlock(xCoord,yCoord,zCoord));
 		}else{
 			isActive = false;
 		}
@@ -234,6 +233,7 @@ ISidedInventory {
 				BlockCultivate.updateFurnaceBlockState(
 						this.furnaceCookTime > 0, this.worldObj, this.xCoord,
 						this.yCoord, this.zCoord);
+
 			}
 		}
 
@@ -352,6 +352,9 @@ ISidedInventory {
 	private ItemStack CheckSmelt(ItemStack itemstack) {
 		if (itemstack.getItem() == FossilPlants.fossilSeed_fern) {
 			return new ItemStack(Fossil.fernSeed, 1);
+		}
+		if (itemstack.getItem() == FossilPlants.palaeSaplingFossil) {
+			return new ItemStack(Fossil.palmSap, 1);
 		}
 		if (itemstack.getItem() == FossilPlants.fossilSeed) {
 			return new ItemStack(FossilPlants.seed, 1, itemstack.getItemDamage());
@@ -520,7 +523,7 @@ ISidedInventory {
 				if(this.getStackInSlot(0).getItem() == Fossil.dnaCoelacanth){
 					return 1;
 				}
-				if(this.getStackInSlot(0).getItem() == FossilPlants.fossilSeed_fern){
+				if(this.getStackInSlot(0).getItem() == FossilPlants.fossilSeed_fern || this.getStackInSlot(0).getItem() == FossilPlants.palaeSaplingFossil){
 					return 3;
 				}
 				if(this.getStackInSlot(0).getItem() == FossilPlants.fossilSeed){

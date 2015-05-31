@@ -1,11 +1,14 @@
 package mods.fossil.client.renderer.entity;
 
 import mods.fossil.entity.mob.EntityNautilus;
+import net.minecraft.block.material.Material;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.opengl.GL11;
 
 public class RenderNautilus extends RenderLiving
@@ -46,7 +49,13 @@ public class RenderNautilus extends RenderLiving
         GL11.glRotatef(var5, 0.0F, 1.0F, 0.0F);
         GL11.glTranslatef(0.0F, -1.2F, 0.0F);
     }
-
+    protected void preRenderCallback(EntityLivingBase entity, float par2)
+    {
+    	if(!entity.isInsideOfMaterial(Material.water)){
+    		GL11.glTranslatef(0, -0.3F, 0);
+    		GL11.glRotatef(90, 0, 0, 1);
+    	}
+    }
     protected float handleRotationFloat(EntityNautilus var1, float var2)
     {
         float var3 = var1.lastTentacleAngle + (var1.tentacleAngle - var1.lastTentacleAngle) * var2;

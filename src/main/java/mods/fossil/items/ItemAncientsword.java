@@ -77,6 +77,7 @@ public class ItemAncientsword extends ItemSword
         if(var2 == null){
         	return false;
         }
+        
         if(var2.getItem() == null){
         	 if(var2.getItem() == Fossil.ancienthelmet){
              	return true;

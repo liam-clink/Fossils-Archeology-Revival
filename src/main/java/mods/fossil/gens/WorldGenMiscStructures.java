@@ -4,6 +4,7 @@ import java.util.Random;
 
 import mods.fossil.Fossil;
 import mods.fossil.client.FossilOptions;
+import mods.fossil.gens.feature.WorldGenAncientChest;
 import mods.fossil.gens.feature.WorldGenAnuCastle;
 import mods.fossil.gens.feature.WorldGenHellBoat;
 import mods.fossil.gens.feature.WorldGenTarPit;
@@ -31,6 +32,20 @@ public class WorldGenMiscStructures implements IWorldGenerator {
 
 					new WorldGenHellBoat().generate(world, random, Xcoord1, Ycoord1, Zcoord1);
 				}
+			}
+		}
+		if(world.getChunkFromChunkCoords(chunkX, chunkZ) == world.getChunkFromBlockCoords(-70, -70) && world.provider.dimensionId == Fossil.dimensionID_anu){
+			int counter = 0;
+			counter++;
+			if(counter == 1){
+				new WorldGenAnuCastle().generate(world, random, -70, 61, -70);
+			}
+		}
+		if(world.getChunkFromChunkCoords(chunkX, chunkZ) == world.getChunkFromBlockCoords(-80, -120) && world.provider.dimensionId == Fossil.dimensionID_treasure){
+			int counter = 0;
+			counter++;
+			if(counter == 1){
+				new WorldGenAncientChest().generate(world, random, -80, 63, -120);
 			}
 		}
 	}

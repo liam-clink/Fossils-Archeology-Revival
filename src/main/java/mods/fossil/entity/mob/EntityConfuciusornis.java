@@ -8,8 +8,10 @@ import java.io.InputStreamReader;
 import mods.fossil.Fossil;
 import mods.fossil.client.LocalizationStrings;
 import mods.fossil.client.gui.GuiPedia;
+import mods.fossil.entity.EntityMLighting;
 import mods.fossil.fossilAI.DinoAIAttackBabies;
 import mods.fossil.fossilAI.DinoAINearestAttackableTarget;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAvoidEntity;
@@ -96,7 +98,9 @@ public class EntityConfuciusornis extends EntityAnimal
     {
         return Items.feather;
     }
-
+   
+    	
+    
     /**
      * Drop 0-2 items of this living's type. @param par1 - Whether this entity has recently been hit by a player. @param
      * par2 - Level of Looting used to kill this mob.

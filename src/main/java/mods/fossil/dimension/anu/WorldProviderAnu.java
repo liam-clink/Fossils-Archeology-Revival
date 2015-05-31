@@ -28,7 +28,7 @@ public class WorldProviderAnu extends WorldProvider{
 	}
 	public boolean canRespawnHere()
 	{
-		return true;
+		return false;
 	}
 	@SideOnly(Side.CLIENT)
 	public Vec3 getFogColor(float p_76562_1_, float p_76562_2_)
@@ -121,6 +121,6 @@ public class WorldProviderAnu extends WorldProvider{
 	}
 	public int getRespawnDimension(EntityPlayerMP player)
 	{
-		return Fossil.dimensionID_anu;
+		return 0;
 	}
 }

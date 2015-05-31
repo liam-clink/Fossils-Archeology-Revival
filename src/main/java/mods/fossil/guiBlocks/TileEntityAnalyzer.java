@@ -347,10 +347,12 @@ ISidedInventory {
 				if(rand > 35 && rand <= 65){
 					itemstack = new ItemStack(Items.coal, 1, 2);
 				}
-				if(rand > 65 && rand <= 85){
+				if(rand > 65 && rand <= 75){
+					itemstack = new ItemStack(FossilPlants.palaeSaplingFossil, 1, 0);
+				}
+				if(rand > 75 && rand <= 85){
 					itemstack = new ItemStack(Items.dye, 1, 2);
 				}
-
 				if(rand > 85){
 					itemstack = new ItemStack(FossilPlants.fossilSeed, 1, new Random().nextInt(8));
 				}

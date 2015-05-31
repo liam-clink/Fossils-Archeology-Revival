@@ -15,7 +15,7 @@ public class FossilSpawnEggs
         registerEntityEgg(EntityVelociraptor.class, 		0xbfa487, 0x936d2e);
         registerEntityEgg(EntityTRex.class, 				0x763c11, 0xffebc4);
         registerEntityEgg(EntityFailuresaurus.class, 		0x61ffbd, 0xf4eee6);
-		registerEntityEgg(EntityPigBoss.class, 				0x000000, 0xff0000);
+		registerEntityEgg(EntityAnu.class,                  0x000000, 0xff0000);
         registerEntityEgg(EntityPterosaur.class, 			0xe4cae2, 0x751075);
         registerEntityEgg(EntityNautilus.class, 			0xd4aba9, 0x97312f);
         registerEntityEgg(EntityPlesiosaur.class, 			0xa4362e, 0xcd6052);

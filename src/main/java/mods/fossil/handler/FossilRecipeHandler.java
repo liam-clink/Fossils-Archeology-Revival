@@ -24,15 +24,9 @@ public class FossilRecipeHandler
         GameRegistry.addRecipe(new ItemStack(Fossil.ancientWoodPlate, 3), new Object[] {"XX", 'X', Fossil.ancientWood});
 //        GameRegistry.addRecipe(new ItemStack(Fossil.blockcultivateIdle, 1), new Object[] {"XYX", "XWX", "ZZZ", 'X', Blocks.glass, 'Y', new ItemStack(Items.dye, 1, 2), 'W', Items.water_bucket, 'Z', Items.iron_ingot});
         GameRegistry.addRecipe(new ItemStack(Fossil.blockTimeMachine, 1), new Object[] {"XYX", "ZUZ", "VXV", 'X', Fossil.gem, 'Y', Items.nether_star, 'Z', Items.gold_ingot, 'U', Items.ender_pearl, 'V', Blocks.obsidian});
-        GameRegistry.addRecipe(new ItemStack(Fossil.blockWeakcultivateIdle, 1), new Object[] {"XYX", "XWX", "ZUZ", 'X', Blocks.glass, 'Y', new ItemStack(Items.dye, 1, 2), 'W', Items.water_bucket, 'Z', Items.iron_ingot, 'U', Items.redstone});
-        GameRegistry.addRecipe(new ItemStack(Fossil.blockcultivateIdle, 1), new Object[] {"XYX", "XWX", "ZUZ", 'X', Blocks.glass, 'Y', new ItemStack(Items.dye, 1, 2), 'W', Items.water_bucket, 'Z', Items.iron_ingot, 'U', Blocks.sticky_piston});
-
-        GameRegistry.addRecipe(new ItemStack(Fossil.LimestoneBrick, 4), new Object[] {"XXA", "XXA", "AAA", 'X', Fossil.Limestone});
-        GameRegistry.addRecipe(new ItemStack(Fossil.LimestoneBrick, 4), new Object[] {"AXX", "AXX", "AAA", 'X', Fossil.Limestone});
-        GameRegistry.addRecipe(new ItemStack(Fossil.LimestoneBrick, 4), new Object[] {"AAA", "AXX", "AXX", 'X', Fossil.Limestone});
-        GameRegistry.addRecipe(new ItemStack(Fossil.LimestoneBrick, 4), new Object[] {"AAA", "AXX", "AXX", 'X', Fossil.Limestone});
+        GameRegistry.addRecipe(new ItemStack(Fossil.blockcultivateIdle, 1), new Object[] {"XYX", "XWX", "ZZZ", 'X', Blocks.glass, 'Y', new ItemStack(Items.dye, 1, 2), 'W', Items.water_bucket, 'Z', Items.iron_ingot});
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.cake, 1), new Object[] {"MMM", "SES", "WWW", 'M', Items.milk_bucket, 'S', Items.sugar, 'W', Items.wheat, 'E', "foodEgg"}));
- 
+        GameRegistry.addRecipe(new ItemStack(Fossil.obsidianSpikes, 4), new Object[] {"A A", "A A", 'A', Blocks.obsidian});
         GameRegistry.addRecipe(new ItemStack(Fossil.skullStick, 1), new Object[] {"X", "Y", 'X', Fossil.blockSkull, 'Y', Items.stick});
         GameRegistry.addRecipe(new ItemStack(Fossil.drum, 1), new Object[] {"ZZZ", "XYX", "XXX", 'X', Blocks.planks, 'Y', Items.redstone, 'Z', Items.leather});
         GameRegistry.addRecipe(new ItemStack(Fossil.feederActive, 1), new Object[] {"XYX", "ZAB", "BBB", 'X', Items.iron_ingot, 'Y', Blocks.glass, 'Z', Blocks.stone_button, 'A', Items.bucket, 'B', Blocks.stone});
@@ -49,6 +43,7 @@ public class FossilRecipeHandler
         GameRegistry.addShapelessRecipe(new ItemStack(Fossil.gemShovel), new Object[] {Items.diamond_shovel, Fossil.gem});
         GameRegistry.addShapelessRecipe(new ItemStack(Fossil.gemShovel), new Object[] {Items.diamond_shovel, Fossil.gem});
         GameRegistry.addShapelessRecipe(new ItemStack(Fossil.denseSand, 2), new Object[] {Items.quartz, Blocks.sand});
+        GameRegistry.addShapelessRecipe(new ItemStack(Fossil.toothDagger, 1), new Object[] {new ItemStack(Fossil.claw, 1, EnumDinoType.TRex.ordinal()), Items.stick});
 
         for (int i = 0; i < EnumDinoType.values().length; i++)
             GameRegistry.addShapelessRecipe(new ItemStack(Fossil.dinoPedia), new Object[] {Items.book, EnumDinoType.values()[i].DNAItem});

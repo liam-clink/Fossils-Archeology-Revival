@@ -21,6 +21,7 @@ import mods.fossil.fossilEnums.EnumOrderType;
 import mods.fossil.fossilEnums.EnumSituation;
 import mods.fossil.guiBlocks.TileEntityFeeder;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -183,7 +184,7 @@ IEntityAdditionalSpawnData {
 						for (int c=(int)Math.round(this.boundingBox.minZ)-1;c<=(int)Math.round(this.boundingBox.maxZ)+1;c++){
 							
 							Block block = worldObj.getBlock(a,b,c);
-							if (block != Blocks.air || block != Fossil.ancientGlass || block != Fossil.strongGlass)
+							if (block.getMaterial() != Material.plants || block != Blocks.air || block != Fossil.ancientGlass || block != Fossil.strongGlass)
 							{
 								if(block.getBlockHardness(worldObj, a, b, c) < hardness){
 

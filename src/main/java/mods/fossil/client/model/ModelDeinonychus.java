@@ -273,8 +273,13 @@ public class ModelDeinonychus extends ModelDinosaurs
 	public void render(Entity var1, float var2, float var3, float var4, float var5, float var6, float var7)
 	{
 		super.render(var1, var2, var3, var4, var5, var6, var7);
-		this.setRotationAngles(var2, var3, var4, var5, var6, var7, ((EntityDinosaur)var1).isModelized());
+		if(var1 instanceof EntityDinosaur){
+			this.setRotationAngles(var2, var3, var4, var5, var6, var7, ((EntityDinosaur)var1).isModelized());
 
+		}else{
+			this.setRotationAngles(var2, var3, var4, var5, var6, var7, false);
+			standingPose(var2, var3);
+		}
 		deinonychus.render(var7);
 		headpivot.render(var7);
 	}
@@ -298,7 +303,7 @@ public class ModelDeinonychus extends ModelDinosaurs
 		this.rightTalon2.rotateAngleX = (float)Math.toRadians(80);
 
 		if(!isModelized){
-			this.head.rotateAngleX = -var5 / (180F / (float)Math.PI);
+			this.head.rotateAngleX = var5 / (180F / (float)Math.PI);
 			this.head.rotateAngleY = var4 / (180F / (float)Math.PI);
 			this.tail1.rotateAngleY = 0.2F * MathHelper.sin(var3 * (float)0.1F + (var2+1));
 			this.tail2.rotateAngleY = 0.1F * MathHelper.sin(var3 * (float)0.1F + var2);

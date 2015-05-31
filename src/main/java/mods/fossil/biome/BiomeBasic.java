@@ -31,7 +31,7 @@ public class BiomeBasic extends BiomeGenBase{
 		if(lifeSelector == 0){
 			this.spawnableCreatureList.add(new BiomeGenBase.SpawnListEntry(EntityPigZombie.class, 200, 1, 8));
 		}
-
+		if(lifeSelector == 1){}
 
 	}
 

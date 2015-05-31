@@ -43,7 +43,7 @@ public class GuiTimeMachine extends GuiContainer
         this.fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), 8, this.ySize - 96 + 2, 4210752);
        // this.fontRendererObj.drawString(var2, 131 + var3, 40, 16711680);
         if(this.timeMachineInstance.isCharged()){
-        	String comingSoon = "Comming Soon...";
+        	String comingSoon = "Coming Soon...";
         	 GL11.glPushMatrix();
              GL11.glScalef(1.25F, 1.25F, 1.25F);
              this.fontRendererObj.drawString(comingSoon, this.xSize/2 - comingSoon.length() * 4 + 37, this.ySize - 152 + 2, 0XBF0000, false);

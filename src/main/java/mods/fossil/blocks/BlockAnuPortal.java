@@ -68,7 +68,7 @@ public class BlockAnuPortal extends Block {
 
 		if (rand.nextInt(100) == 0)
 		{
-			world.playSound((double)x + 0.5D, (double)y + 0.5D, (double)z + 0.5D, "portal", 1.5F, rand.nextFloat() * 0.4F + 0.8F, false);
+			world.playSound((double)x + 0.5D, (double)y + 0.5D, (double)z + 0.5D, "portal.portal", 1.5F, rand.nextFloat() * 0.4F + 0.8F, false);
 		}
 		for (int l = x - 2; l <= x + 2; ++l)
 		{

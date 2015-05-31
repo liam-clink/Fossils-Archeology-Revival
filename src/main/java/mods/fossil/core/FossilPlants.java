@@ -13,6 +13,7 @@ import net.minecraft.item.Item;
 public class FossilPlants {
 
 	public static Item fossilSeed_fern;
+	public static Item palaeSaplingFossil;
 	public static Item fossilSeed;
 	public static Item seed;
 	
@@ -36,6 +37,7 @@ public class FossilPlants {
 	public static void assign(){
 				//fossil seed
 				fossilSeed_fern = new ForgeItem("plants/fossilSeed_fern").setUnlocalizedName("fossilSeed_fern").setCreativeTab(Fossil.tabFMaterial);
+				palaeSaplingFossil = new ForgeItem("palae_Fossil").setUnlocalizedName("fossilSapling_palae").setCreativeTab(Fossil.tabFMaterial);
 				fossilSeed = new ItemFossilSeeds(true).setUnlocalizedName("fossilSeed").setCreativeTab(Fossil.tabFMaterial);
 				//seed
 				seed = new ItemFossilSeeds(false).setUnlocalizedName("seed").setCreativeTab(Fossil.tabFMaterial);
@@ -55,6 +57,7 @@ public class FossilPlants {
 	}
 	public static void register(){
 		GameRegistry.registerItem(fossilSeed_fern, "fossilSeed_fern");
+		GameRegistry.registerItem(palaeSaplingFossil, "palaeSaplingFossil");
 		GameRegistry.registerItem(fossilSeed, "fossilSeed");
 		GameRegistry.registerItem(Fossil.fernSeed, LocalizationStrings.FERNSEED_NAME);
 		GameRegistry.registerItem(seed, "seed");

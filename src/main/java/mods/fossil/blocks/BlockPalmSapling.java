@@ -1,5 +1,7 @@
 package mods.fossil.blocks;
 
+import static net.minecraftforge.common.util.ForgeDirection.DOWN;
+
 import java.util.Random;
 
 import mods.fossil.Fossil;
@@ -53,48 +55,50 @@ public class BlockPalmSapling extends BlockBush implements IGrowable
 	{
 		super.updateTick(world, i, j, k, random);
 
-		if ((world.getBlockLightValue(i, j + 1, k) >= 9) && (random.nextInt(30) == 0))
+		if (((world.getBlockLightValue(i, j + 1, k) >= 9) && (random.nextInt(30) == 0)))
 		{
-			int l = world.getBlockMetadata(i, j, k);
-
+			int y;
 			if (random.nextInt(3) == 0)
 			{
-				generateTree(world, i, j, k, random, l);
+				generateTree(world, i, j, k, random);
 			}
 		}
 	}
-
-	public void generateTree(World world, int i, int j, int k, Random random, int l)
+	public boolean canGenerate(World world, int x, int y, int z){
+		int i;
+		for(i = 0; i< 13; i++){
+			if(world.getBlock(x, y + i, z).isOpaqueCube()){
+				return true;
+			}
+		}
+		return false;
+	}
+	public void generateTree(World world, int i, int j, int k, Random random)
 	{
-		world.setBlock(i, j, k, Blocks.air, 0, l);
 		WorldGenPalaeoraphe w0 = new WorldGenPalaeoraphe();
 		Block j1 = world.getBlock(i, j - 1, k);
 
-		if ((j1 == Blocks.grass || j1 == Blocks.dirt) && j < 128 - 12 - 1)
+		if (!canGenerate(world, i, j, k) && (j1 == Blocks.grass || j1 == Blocks.dirt) && j < 128 - 12 - 1)
 		{
 			w0.generate(world, random, i, j, k);
 			world.setBlock(i, j, k, Fossil.palmLog);
 		}
 	}
+    public boolean func_149851_a(World p_149851_1_, int p_149851_2_, int p_149851_3_, int p_149851_4_, boolean p_149851_5_)
+    {
+        return true;
+    }
+    public void func_149879_c(World p_149879_1_, int p_149879_2_, int p_149879_3_, int p_149879_4_, Random p_149879_5_)
+    {
+          this.generateTree(p_149879_1_, p_149879_2_, p_149879_3_, p_149879_4_, p_149879_5_);
+    }
+    public boolean func_149852_a(World p_149852_1_, Random p_149852_2_, int p_149852_3_, int p_149852_4_, int p_149852_5_)
+    {
+        return (double)p_149852_1_.rand.nextFloat() < 0.45D;
+    }
 
-	@Override
-	public boolean func_149851_a(World var1, int var2, int var3, int var4,
-			boolean var5) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean func_149852_a(World var1, Random var2, int var3, int var4,
-			int var5) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public void func_149853_b(World var1, Random var2, int var3, int var4,
-			int var5) {
-		// TODO Auto-generated method stub
-
-	}
+    public void func_149853_b(World p_149853_1_, Random p_149853_2_, int p_149853_3_, int p_149853_4_, int p_149853_5_)
+    {
+        this.func_149879_c(p_149853_1_, p_149853_3_, p_149853_4_, p_149853_5_, p_149853_2_);
+    }
 }

@@ -46,10 +46,7 @@ public class FossilGuiHandler implements IGuiHandler
             case 8:
             	quagga = (EntityQuagga)world.getEntityByID(x);
             	return new ContainerQuagga(player.inventory, quagga.quaggaChest, quagga);
-            case 9:
-                return new ContainerCultivateWeak(player.inventory, (TileEntityCultivateWeak)tile_entity);
-            case 10:
-                return new ContainerCultivateStrong(player.inventory, (TileEntityCultivateStrong) tile_entity);
+          
         }
 
         return null;
@@ -89,10 +86,7 @@ public class FossilGuiHandler implements IGuiHandler
             case 8:
             	quagga = (EntityQuagga)world.getEntityByID(x);
                 return new GuiQuagga(player.inventory, quagga.quaggaChest, quagga);
-            case 9:
-                return new GuiCultivateWeak(player.inventory, (TileEntityCultivateWeak)tile_entity);
-            case 10:
-                return new GuiCultivateStrong(player.inventory, (TileEntityCultivateStrong) tile_entity);
+
         }
 
         return null;

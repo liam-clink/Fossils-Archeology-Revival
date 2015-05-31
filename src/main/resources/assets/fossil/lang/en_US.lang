@@ -25,7 +25,7 @@ achievement.dinoDna=Bingo! Dino DNA!
 achievement.dinoDna.desc=Obtain any DNA from Analyzing a Bio-Fossil.
 achievement.cultivate=Cult Classic!
 achievement.cultivate.desc=Craft a Culture Vat with any teir.
-achievement.dinoEgg=That's a Big Egg....
+achievement.dinoEgg=What Species is this?
 achievement.dinoEgg.desc=Cultivate a Dinosaur Egg.
 achievement.mammalEmbryo=Ouch!
 achievement.mammalEmbryo.desc=Cultivate a Mammal Embryo.
@@ -45,13 +45,13 @@ achievement.anuPortal=The Middle?
 achievement.anuPortal.desc=Activate a Mysterious Idol.
 achievement.anubiteEncounter=Living Statue!
 achievement.anubiteEncounter.desc=Encounter an Anubite.
-achievement.anuAttack=Ruler of the Undead
-achievement.anuAttack.desc=Find Anu in his Fortress.
+achievement.anuAttack=Ruler of the Undead!
+achievement.anuAttack.desc=Wake Anu.
 achievement.anuDead=The Middle.
 achievement.anuDead.desc=Kill Anu.
 achievement.arcWorkbench=Fixer-Upper!
 achievement.arcWorkbench.desc=Craft an Archeology Workbench
-achievement.fixedSword=Swing your Sword!
+achievement.fixedSword=Swing Your Sword!
 achievement.fixedSword.desc=Repair an Ancient Sword in an Archeology Workbench.
 achievement.fixedHelmet=Thinking Cap!
 achievement.fixedHelmet.desc=Repair an Ancient Helmet in an Archeology Workbench.
@@ -69,7 +69,16 @@ achievement.key=Key Infomation!
 achievement.key.desc=Obtain an Ancient Key from killing Anu.
 achievement.clock=Turn Back the Clock!
 achievement.key.desc=Place an Ancient Clock inside of a Time Machine.
-
+achievement.firstDino=De-Extinction!
+achievement.firstDino.desc=Hatch your first dinosaur egg.
+achievement.theKing=The King!
+achievement.theKing.desc=Tame a Tyrannosaurus.
+achievement.usurper=The Usurper!
+achievement.usurper.desc=Tame a Spinosaurus.
+achievement.squire=The... Squire?
+achievement.squire.desc=Tame an Allosaurus.
+achievement.inTreasure=The Room?
+achievement.inTreasure.desc=Find the Secret Treasure Room.
 #Enchantments
 enchantment.paleontology=Paleontology
 enchantment.archeology=Archeology
@@ -124,7 +133,10 @@ tile.ancientWoodDoubleSlab.ancientWood.name=Ancient Wood Slab
 tile.ancientStoneSlab.ancientStone.name=Ancient Stone Slab
 tile.ancientStoneDoubleSlab.ancientStone.name=Ancient Stone Slab
 tile.slimeTrail.name=Failuresaurus Trail
-
+tile.obsidianSpikes.name=Obsidian Spikes
+tile.ancientChest.name=Ancient Treasure Chest
+tile.home_portal.name=Overworld Portal
+tile.sarcophagus.name=Mysterious Sarcophagus
 #Collectables
 tile.figurine.figurine_steve_pristine.name=Pristine Steve Figurine
 tile.figurine.figurine_skeleton_pristine.name=Pristine Skeleton Figurine
@@ -472,6 +484,7 @@ item.DominicanAmber.name=Dominican Amber
 item.AquaticScarabGem.name=Aquatic Scarab Gem
 item.ancientKey.name=Ancient Key
 item.ancientClock.name=Ancient Clock
+item.toothDagger.name=Tooth Dagger
 
 #Dinosaur related chat messages
 dnaName.head=DNA of 
@@ -487,6 +500,7 @@ dEggName.tail=
 
 #Plants
 item.fossilSeed_fern.name=Fossilized Fern Spores
+item.palae_Fossil.name=Petrified Palaeoraphe Sapling
 item.fossilSeed.dillhoffia.name=Fossilized Dillhoffia Seeds
 item.fossilSeed.sarracina.name=Fossilized Sarracenia Seeds
 item.fossilSeed.cephalotaxus.name=Fossilized Cephalotaxus Seeds
@@ -586,6 +600,7 @@ entity.fossil.TerrorBird.name=Terror Bird
 entity.fossil.Elasmotherium.name=Elasmotherium
 entity.fossil.Confuciusornis.name=Confuciusornis
 entity.fossil.Anubite.name=Anubite
+entity.fossil.AnuDead.name=Anu
 
 #Pedia text
 pedia.text.owner=Owner:
@@ -631,6 +646,9 @@ anuSpeaker.qi=Qi-shock!
 anuSpeaker.fireRain=Lets rain some fire!
 anuSpeaker.mySword=Using my own magic against me? Bad idea.
 anuSpeaker.fewBeaten=Few have beaten me. Prepare to die.
+anuSpeaker.archers=Archers, fire!
+anuSpeaker.blaze=Blazes! Destroy the enemy!
+anuSpeaker.no=NO!!!!!!!!!!!!!!!
 
 #Friendly pigmen speaking lines
 fpzSpeaker.self=Pig Zombies: 

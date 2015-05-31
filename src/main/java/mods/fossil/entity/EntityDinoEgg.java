@@ -29,6 +29,7 @@ import mods.fossil.entity.mob.EntityTriceratops;
 import mods.fossil.entity.mob.EntityVelociraptor;
 import mods.fossil.fossilEnums.EnumDinoType;
 import mods.fossil.fossilEnums.EnumOrderType;
+import mods.fossil.handler.FossilAchievementHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityBoat;
@@ -818,13 +819,16 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
 					break;
 
 				default:
-					Fossil.ShowMessage("Bug: Impossible result.", player);
+					Fossil.ShowMessage("ERROR 404: Dinosaur not found. Please report this bug to a developer.", player);
 					//System.err.println("EGGERROR2"+String.valueOf(i));
 					this.setDead();
 					return;
 				}
 
 				if(var5 instanceof EntityDinosaur){
+					if(player != null){
+						player.addStat(FossilAchievementHandler.firstDino, 1);
+					}
 					if (((EntityDinosaur)var5).SelfType.isTameable() && player != null)
 					{
 						if(((EntityDinosaur)var5).SelfType != EnumDinoType.TRex && ((EntityDinosaur)var5).SelfType != EnumDinoType.Allosaurus && ((EntityDinosaur)var5).SelfType != EnumDinoType.Sarcosuchus){

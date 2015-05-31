@@ -19,7 +19,7 @@ public class FossilBonemealEvent
         {
             if (!event.world.isRemote)
             {
-                ((BlockPalmSapling)Fossil.palmSap).generateTree(event.world, event.x, event.y, event.z, event.world.rand, event.world.getBlockMetadata(event.x, event.y, event.z));
+                ((BlockPalmSapling)Fossil.palmSap).generateTree(event.world, event.x, event.y, event.z, event.world.rand);
                 event.setResult(event.getResult().ALLOW);
             }
         }
