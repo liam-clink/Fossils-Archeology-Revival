@@ -38,10 +38,6 @@ public class BlockCultivate extends BlockContainer {
 	private Random furnaceRand = new Random();
 	private final boolean isActive;
 	private static boolean keepFurnaceInventory = false;
-	@SideOnly(Side.CLIENT)
-	private IIcon Top;
-	@SideOnly(Side.CLIENT)
-	private IIcon Bottom;
 	public BlockCultivate(boolean isActive) {
 		super(Material.glass);
 		setLightLevel(0.9375F);
@@ -136,17 +132,7 @@ public class BlockCultivate extends BlockContainer {
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister par1IconRegister) {
 		this.blockIcon = par1IconRegister.registerIcon("fossil:Culture_Sides_Idle");
-		this.Bottom = par1IconRegister.registerIcon("fossil:Culture_Bottom");
-		this.Top = par1IconRegister.registerIcon("fossil:Culture_Top");
-	}
 
-	/**
-	 * From the specified side and block metadata retrieves the blocks texture.
-	 * Args: side, metadata
-	 */
-	public IIcon getIcon(int par1, int par2) {
-		return par1 == 1 ? this.Top
-				: (par1 != 0 ? this.blockIcon : this.Bottom);
 	}
 
 	@SideOnly(Side.CLIENT)
