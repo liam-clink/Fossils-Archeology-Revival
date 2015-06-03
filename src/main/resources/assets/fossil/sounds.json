@@ -90,7 +90,7 @@
 	"ceratosaurus_living": {"category": "neutral","sounds": ["ceratosaurus_living1", "ceratosaurus_living2"]},
 	"whip": {"category": "player","sounds": ["whip1"]},
 	"anuTotem": {"category": "player","sounds": ["anuTotem"]},
-	"record_bones": {"category": "record","sounds": [{"name": "record_bones","stream": true}]},
+	"record_bones_disc": {"category": "record","sounds": [{"name": "record_bones","stream": true}]},
 	"music.first_dinosaur": {"category": "record","sounds": [{"name": "music_first_dinosaur","stream": true}]},
     "music.anu": {"category": "record","sounds": [{"name": "music_anu","stream": true}]},
 	"anu_living_healthy": {"category": "neutral","sounds": ["anu_living_stage1_0", "anu_living_stage1_1", "anu_living_stage1_2", "anu_living_stage1_3"]},
