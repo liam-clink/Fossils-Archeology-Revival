@@ -46,7 +46,7 @@ public class FossilOptions
         Heal_Dinos = config.get("option", "Heal_Dinos", true).getBoolean(true);
         Allow_Flying = config.get("option", "Allow_Flying", false).getBoolean(false);
         Dinos_Starve = config.get("option", "Dinos_Starve", true).getBoolean(true);
-        Dino_Block_Breaking = config.get("option", "Dino_Block_Breaking", false).getBoolean(false);
+        Dino_Block_Breaking = config.get("option", "Dino_Block_Breaking", true).getBoolean(true);
         Skull_Overlay = config.get("option", "Skull_Overlay", true).getBoolean(true);
         LoginMessage = config.get("option", "Display_Login_Message", true).getBoolean(false);
         Anu_Spawn = config.get("option", "Anu_Spawn", false).getBoolean(false);
