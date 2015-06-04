@@ -127,62 +127,56 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
 			if (targetEntity instanceof EntityPlayer)
 			{
 
-				if(this.getRNG().nextInt(7) == 0){
+				if(this.getRNG().nextInt(10) == 0){
 					if (var2 != 0)
 					{
 						ItemStack itemstack = ((EntityPlayer)targetEntity).inventory.getCurrentItem();
 
-						if (itemstack == null)
-						{
-							if (!this.worldObj.isRemote)
-								Fossil.ShowMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " 
-										+ StatCollector.translateToLocal("anuSpeaker.draw"), (EntityPlayer)targetEntity);
+						if(itemstack != null){
+							if(itemstack.getItem() != null){
+								if (itemstack.getItem() == Fossil.ancientSword)
+								{
 
-							return super.attackEntityFrom(damageSource, var2);
-						}
-						else
-						{
-							if (itemstack.getItem() == Fossil.ancientSword)
-							{
+									if (!this.worldObj.isRemote)
+										Fossil.ShowMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + 
+												StatCollector.translateToLocal("anuSpeaker.mySword"), (EntityPlayer)targetEntity);
 
-								if (!this.worldObj.isRemote)
-									Fossil.ShowMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + 
-											StatCollector.translateToLocal("anuSpeaker.mySword"), (EntityPlayer)targetEntity);
-
-								return super.attackEntityFrom(damageSource, var2);
-							}
+									return super.attackEntityFrom(damageSource, var2);
+								}
 
 
-							if (itemstack.getItem() != Fossil.ancientSword && itemstack.getItem() instanceof ItemSword)
-							{
+								if (itemstack.getItem() != Fossil.ancientSword && itemstack.getItem() instanceof ItemSword)
+								{
 
-								if (!this.worldObj.isRemote)
-									Fossil.ShowMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + 
-											StatCollector.translateToLocal("anuSpeaker.draw"), (EntityPlayer)targetEntity);
+									if (!this.worldObj.isRemote)
+										Fossil.ShowMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + 
+												StatCollector.translateToLocal("anuSpeaker.draw"), (EntityPlayer)targetEntity);
 
-								return super.attackEntityFrom(damageSource, var2);
-							}
+									return super.attackEntityFrom(damageSource, var2);
+								}
 
-							if (damageSource.damageType == "arrow")
-							{
-								if (!this.worldObj.isRemote)
-									Fossil.ShowMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + 
-											StatCollector.translateToLocal("anuSpeaker.coward"), (EntityPlayer)targetEntity);
+								if (damageSource.damageType == "arrow")
+								{
+									if (!this.worldObj.isRemote)
+										Fossil.ShowMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + 
+												StatCollector.translateToLocal("anuSpeaker.coward"), (EntityPlayer)targetEntity);
 
-								return super.attackEntityFrom(damageSource, var2);
-							}else{
+									return super.attackEntityFrom(damageSource, var2);
+								}else{
 
+								}
 							}
 						}
 					}
 				}
 			}
 		}
+
 		return super.attackEntityFrom(damageSource, var2);
 	}
 
 	public void updateAITasks(){
-		if(this.getAttackMode() == 2){
+		if(this.getAttackMode() == 2 || this.getAttackMode() == 1){
 			if (this.ticksExisted % 20 == 0)
 			{
 				this.heal(2.0F);
@@ -212,17 +206,17 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
 	public void onDeath(DamageSource dmg)
 	{
 
-        if (dmg.getSourceOfDamage() instanceof EntityArrow && dmg.getEntity() instanceof EntityPlayer)
-        {
-            EntityPlayer entityplayer = (EntityPlayer)dmg.getEntity();
-            double d0 = entityplayer.posX - this.posX;
-            double d1 = entityplayer.posZ - this.posZ;
+		if (dmg.getSourceOfDamage() instanceof EntityArrow && dmg.getEntity() instanceof EntityPlayer)
+		{
+			EntityPlayer entityplayer = (EntityPlayer)dmg.getEntity();
+			double d0 = entityplayer.posX - this.posX;
+			double d1 = entityplayer.posZ - this.posZ;
 
-            if (d0 * d0 + d1 * d1 >= 2500.0D)
-            {
-                entityplayer.triggerAchievement(FossilAchievementHandler.anuDead);
-            }
-        }
+			if (d0 * d0 + d1 * d1 >= 2500.0D)
+			{
+				entityplayer.triggerAchievement(FossilAchievementHandler.anuDead);
+			}
+		}
 		EntityAnuDead entity = new EntityAnuDead(this.worldObj);
 		if(!this.worldObj.isRemote){
 			entity.setLocationAndAngles(this.posX + this.getRNG().nextInt(4), this.posY, this.posZ + this.getRNG().nextInt(4), this.rotationYaw, this.rotationPitch);
@@ -271,18 +265,23 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
 		this.dropItem(Fossil.ancientKey, 1);
 	}
 	public void onLivingUpdate(){
-			if(songCounter < songLength){
-				songCounter++;
-			}
-			if(songCounter == songLength - 1){
-				songCounter = 0;
-			}
-			if(songCounter == 1){
-				Fossil.proxy.playSound("fossil:music.anu");
-			}
-			if(this.isDead){
+		if(songCounter < songLength){
+			songCounter++;
+		}
+		if(songCounter == songLength - 1){
+			songCounter = 0;
+		}
+		if(songCounter == 1){
+			Fossil.proxy.playSound("fossil:music.anu");
+		}
+		if(this.isDead ){
+			Fossil.proxy.stopSound();
+		}
+		if(this.attackingPlayer != null){
+			if(this.attackingPlayer.isDead){
 				Fossil.proxy.stopSound();
 			}
+		}
 		super.onLivingUpdate();
 		if (this.getAttackMode() == 1 && !this.onGround && this.motionY < 0.0D)
 		{
