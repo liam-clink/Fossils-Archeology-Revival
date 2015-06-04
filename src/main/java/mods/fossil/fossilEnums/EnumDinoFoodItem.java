@@ -26,7 +26,7 @@ public enum EnumDinoFoodItem
 	 * but maybe trade off with higher HealValue and vice versa.
 	 */
     
-    FishRaw(Items.fish, 30, 4), //this MUST BE the first carnivore food!
+    FishRaw(Items.fish, 30, 4),//this MUST BE the first carnivore food!
     FishCooked(Items.cooked_fished, 45, 6),
     BeefCooked(Items.cooked_beef, 60, 6),
     BeefRaw(Items.beef, 40, 4),

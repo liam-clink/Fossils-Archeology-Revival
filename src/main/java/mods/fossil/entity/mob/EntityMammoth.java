@@ -11,6 +11,7 @@ import mods.fossil.Fossil;
 import mods.fossil.client.LocalizationStrings;
 import mods.fossil.client.gui.GuiPedia;
 import mods.fossil.fossilAI.DinoAIRideGround;
+import mods.fossil.handler.FossilAchievementHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.IEntityLivingData;
@@ -545,7 +546,7 @@ public class EntityMammoth extends EntityPrehistoric implements IShearable
 
         	}
         }
-
+        this.worldObj.getClosestPlayer(x, y, z, 10).addStat(FossilAchievementHandler.anuAttack, 1);
         this.setSheared(true);
         return var7;
 	}

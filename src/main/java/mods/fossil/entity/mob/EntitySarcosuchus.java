@@ -55,7 +55,7 @@ public class EntitySarcosuchus extends EntitySwimmingDino {
 		 */
 		this.adultAge = EnumDinoType.Sarcosuchus.AdultAge;
 		// Set initial size for hitbox. (length/width, height)
-		this.setSize(6.0F, 1.0F);
+		this.setSize(4.0F, 1.0F);
 		// Size of dinosaur at day 0.
 		this.minSize = 0.2F;
 		// Size of dinosaur at age Adult.

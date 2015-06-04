@@ -41,7 +41,7 @@ public class EntityAnuDead extends EntityLiving
 		this.dataWatcher.addObject(16, new Byte((byte)0));
 	}
 	public void playSummonSong(){
-		this.playSound("fossil:anu_death_effect", 0.15F, 1F);
+		this.playSound("fossil:anu_death_effect", 1F, 1F);
 	}
 
 	protected void applyEntityAttributes()
@@ -83,9 +83,6 @@ public class EntityAnuDead extends EntityLiving
 		}
 		if(deathTicks == this.maxLifespan){
 			this.setDead();
-		}
-		if(deathTicks_animation > this.maxLifespan){
-			deathTicks_animation--;
 		}
 		if(deathTicks == 40){
 			this.playSummonSong();

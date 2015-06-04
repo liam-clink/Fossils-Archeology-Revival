@@ -59,6 +59,7 @@ import mods.fossil.client.FossilGuiHandler;
 import mods.fossil.client.FossilOptions;
 import mods.fossil.client.LocalizationStrings;
 import mods.fossil.client.renderer.tileentity.RenderFeeder;
+import mods.fossil.core.FossilFireSupport;
 import mods.fossil.core.FossilPlants;
 import mods.fossil.dimension.anu.WorldProviderAnu;
 import mods.fossil.dimension.treasure.WorldProviderTreasure;
@@ -244,7 +245,7 @@ public class Fossil
 
 	//Testing 
 
-	public static final String modversion = "1.7.10 Build 7.1.0";
+	public static final String modversion = "1.7.10 Build 7.2.0";
 
 	/**
 	 * The mod state
@@ -252,8 +253,7 @@ public class Fossil
 	 * 1 = Beta build
 	 * 2 = Release build
 	 */
-
-	public static final int modState = 0;
+	public static final int modState = 2;
 
 	@SidedProxy(clientSide = "mods.fossil.client.ClientProxy", serverSide = "mods.fossil.CommonProxy")
 	public static CommonProxy proxy;
@@ -576,6 +576,7 @@ public class Fossil
 			FossilOptions.GallimimusFeathers = config.get("toggle_scales",  "Gallimimus Scales", false).getBoolean(false);
 			FossilOptions.CompsognathusFeathers = config.get("toggle_scales",  "Compsognathus Scales", false).getBoolean(false);
 			FossilOptions.VelociraptorFeathers = config.get("toggle_scales",  "Velociraptor Scales", false).getBoolean(false);
+			FossilOptions.TriceratopsQuills = config.get("toggle_quills",  "Triceratops Quills", true).getBoolean(true);
 
 			//IDs
 			FossilOptions.biomeIDDarknessLair = config.get("biome IDs", "Layer of Darkness ID:", 128).getInt();
@@ -1179,7 +1180,7 @@ public class Fossil
 		proxy.registerRenderThings();
 		FossilOreDictionary.oreRegistration();
 		FossilRecipeHandler.addRecipe();
-
+		FossilFireSupport.setFireInfo();
 		
 		 //GameRegistry.registerPickupHandler(new FossilPickupHandler());
 		FMLCommonHandler.instance().bus().register(new EventFossilAchivements());
@@ -1190,9 +1191,7 @@ public class Fossil
 		MinecraftForge.EVENT_BUS.register(new FossilToolEvent());
 		MinecraftForge.EVENT_BUS.register(new FossilLivingEvent());
 		MinecraftForge.EVENT_BUS.register(new FossilInteractEvent());
-		if(FossilOptions.Skull_Overlay){
-		    MinecraftForge.EVENT_BUS.register(new EventOverlay(Minecraft.getMinecraft()));
-		}
+		
 		FMLCommonHandler.instance().bus().register(new FossilConnectionEvent());
 	}
 

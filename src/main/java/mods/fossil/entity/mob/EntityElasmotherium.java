@@ -12,6 +12,7 @@ import mods.fossil.client.gui.GuiPedia;
 import mods.fossil.fossilAI.DinoAIRaptorLeapAtTarget;
 import mods.fossil.fossilAI.DinoAIRideGround;
 import mods.fossil.fossilAI.DinoAITargetNonTamedExceptSelfClass;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
@@ -185,7 +186,7 @@ public class EntityElasmotherium extends EntityPrehistoric
     public void onLivingUpdate()
     {
         super.onLivingUpdate();
-
+  
         if (this.attackTimer > 0)
         {
             --this.attackTimer;

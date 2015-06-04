@@ -15,8 +15,6 @@ import mods.fossil.entity.mob.EntityTRex;
 import mods.fossil.fossilEnums.EnumAnimalType;
 import mods.fossil.gens.feature.WorldGenAncientChest;
 import mods.fossil.gens.feature.WorldGenAnuCastle;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.passive.EntityAnimal;
@@ -28,14 +26,12 @@ import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.AchievementEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.event.world.ChunkEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class FossilLivingEvent {
@@ -57,14 +53,12 @@ public class FossilLivingEvent {
 		if (event.entity instanceof EntitySheep && EntityPregnantSheep.get((EntitySheep) event.entity) == null)
 			EntityPregnantSheep.register((EntitySheep) event.entity);
 	}
-	
 	@SubscribeEvent
 	public void onAchievementGet(AchievementEvent event){
 		if(event.achievement == FossilAchievementHandler.firstDino){
-			event.entityPlayer.playSound("fossil:music.first_dinosaur", 1, 1);
+			Fossil.proxy.playSound("fossil:music.first_dinosaur");
 		}
 	}
-	
 	@SubscribeEvent
 	public void onEntityLivingDeath(LivingDeathEvent event)
 	{
@@ -221,10 +215,16 @@ public class FossilLivingEvent {
 
 		case Smilodon:
 			birthEntity = new EntitySmilodon(event.entityLiving.worldObj).Imprinting(event.entityLiving.posX, event.entityLiving.posY, event.entityLiving.posZ);
+			if(new Random().nextInt(5) == 0){
+				((EntitySmilodon)birthEntity).setSkin(1);
+			}
 			break;
 
 		case Mammoth:
 			birthEntity = (new EntityMammoth(event.entityLiving.worldObj)).Imprinting(event.entityLiving.posX, event.entityLiving.posY, event.entityLiving.posZ);
+			if(new Random().nextInt(5) == 0){
+				((EntityMammoth)birthEntity).setSkin(2);
+			}
 			break;
 
 		case Elasmotherium:

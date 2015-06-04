@@ -79,6 +79,8 @@ achievement.squire=The... Squire?
 achievement.squire.desc=Tame an Allosaurus.
 achievement.inTreasure=The Room?
 achievement.inTreasure.desc=Find the Secret Treasure Room.
+achievement.shear=One Big Sheep!
+achievement.shear.desc=Shear a Mammoth.
 #Enchantments
 enchantment.paleontology=Paleontology
 enchantment.archeology=Archeology
@@ -500,7 +502,7 @@ dEggName.tail=
 
 #Plants
 item.fossilSeed_fern.name=Fossilized Fern Spores
-item.palae_Fossil.name=Petrified Palaeoraphe Sapling
+item.fossilSapling_palae.name=Petrified Palaeoraphe Sapling
 item.fossilSeed.dillhoffia.name=Fossilized Dillhoffia Seeds
 item.fossilSeed.sarracina.name=Fossilized Sarracenia Seeds
 item.fossilSeed.cephalotaxus.name=Fossilized Cephalotaxus Seeds

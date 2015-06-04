@@ -12,7 +12,6 @@ import mods.fossil.client.gui.GuiPedia;
 import mods.fossil.fossilAI.*;
 import mods.fossil.fossilEnums.EnumDinoType;
 import mods.fossil.fossilEnums.EnumSituation;
-import mods.fossil.handler.FossilAchievementHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -68,7 +67,7 @@ public class EntityCeratosaurus extends EntityDinosaur
 		this.minSize = 0.4F;
 		// Size of dinosaur at age Adult.
 		this.maxSize = 1.9F;
-			texturePath = Fossil.modid + ":textures/mob/" + this.SelfType.toString() + "/";
+		texturePath = Fossil.modid + ":textures/mob/" + this.SelfType.toString() + "/";
 
 		this.getNavigator().setAvoidsWater(true);
 		this.tasks.addTask(1, new EntityAISwimming(this));
@@ -81,14 +80,14 @@ public class EntityCeratosaurus extends EntityDinosaur
 		this.tasks.addTask(9, new EntityAILookIdle(this));
 		this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
 		this.targetTasks.addTask(2, new DinoAITargetNonTamedExceptSelfClass(this, EntityLiving.class, 750, false));
-			 tasks.addTask(1, new DinoAIRideGround(this, 1));
+		tasks.addTask(1, new DinoAIRideGround(this, 1));
 		this.tasks.addTask(2, this.aiControlledByPlayer = new EntityAIControlledByPlayer(this, 0.3F));
-        this.stepHeight = 1F;
+		this.stepHeight = 1F;
 		this.targetTasks.addTask(5, new DinoAIHunt(this, EntityLiving.class, 200, false));
-        this.tasks.addTask(4, new EntityAIAvoidEntity(this, EntityTRex.class, 16.0F, 0.8D, 1.33D));
-        this.tasks.addTask(4, new EntityAIAvoidEntity(this, EntitySpinosaurus.class, 16.0F, 0.8D, 1.33D));
-        this.tasks.addTask(4, new EntityAIAvoidEntity(this, EntityBrachiosaurus.class, 16.0F, 0.8D, 1.33D));
-        this.tasks.addTask(4, new EntityAIAvoidEntity(this, EntityAllosaurus.class, 16.0F, 0.8D, 1.33D));
+		this.tasks.addTask(4, new EntityAIAvoidEntity(this, EntityTRex.class, 16.0F, 0.8D, 1.33D));
+		this.tasks.addTask(4, new EntityAIAvoidEntity(this, EntitySpinosaurus.class, 16.0F, 0.8D, 1.33D));
+		this.tasks.addTask(4, new EntityAIAvoidEntity(this, EntityBrachiosaurus.class, 16.0F, 0.8D, 1.33D));
+		this.tasks.addTask(4, new EntityAIAvoidEntity(this, EntityAllosaurus.class, 16.0F, 0.8D, 1.33D));
 
 		//this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
 
@@ -118,7 +117,7 @@ public class EntityCeratosaurus extends EntityDinosaur
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(baseHealth);
 		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(baseDamage);
 	}
-		/*
+	/*
 	 * Checks if the entity's current position is a valid location to spawn this entity.
 	 */
 
@@ -170,7 +169,7 @@ public class EntityCeratosaurus extends EntityDinosaur
 	{
 		if(this.isModelized())
 			return null;
-			return Fossil.modid + ":" + this.SelfType.toString().toLowerCase() + "_living";
+		return Fossil.modid + ":" + this.SelfType.toString().toLowerCase() + "_living";
 	}
 	protected String getHurtSound() {
 		if (this.isModelized())
@@ -194,55 +193,55 @@ public class EntityCeratosaurus extends EntityDinosaur
 	 * Called when the entity is attacked.
 	 */
 	@Override
-	 public boolean attackEntityFrom(DamageSource damagesource, float damageamount)
-    {
-        Entity entity = damagesource.getEntity();
-        boolean var4 = false;
-        this.setSitting(false);
+	public boolean attackEntityFrom(DamageSource damagesource, float damageamount)
+	{
+		Entity entity = damagesource.getEntity();
+		boolean var4 = false;
+		this.setSitting(false);
 
-        if (entity != null && !(entity instanceof EntityPlayer) && !(entity instanceof EntityArrow))
-        {
-            damageamount = (damageamount + 1) / 2;
-        }
+		if (entity != null && !(entity instanceof EntityPlayer) && !(entity instanceof EntityArrow))
+		{
+			damageamount = (damageamount + 1) / 2;
+		}
 
-        if (super.attackEntityFrom(damagesource, damageamount))
-        {
-            if (!this.isAngry())
-            {
-                if (entity instanceof EntityArrow && ((EntityArrow)entity).shootingEntity != null)
-                {
-                    entity = ((EntityArrow)entity).shootingEntity;
-                }
+		if (super.attackEntityFrom(damagesource, damageamount))
+		{
+			if (!this.isAngry())
+			{
+				if (entity instanceof EntityArrow && ((EntityArrow)entity).shootingEntity != null)
+				{
+					entity = ((EntityArrow)entity).shootingEntity;
+				}
 
-                if (entity instanceof EntityLiving)
-                {
-                    this.setTarget((EntityLiving)entity);
-                }
+				if (entity instanceof EntityLiving)
+				{
+					this.setTarget((EntityLiving)entity);
+				}
 
-                if (entity instanceof EntityPlayer && this.isTamed() && ((EntityPlayer)entity) == this.getOwner() && this.getRNG().nextInt(6) == 0)
-                {
-                    //Hit by the owner->untame
-                    this.SendStatusMessage(EnumSituation.Betrayed);
-                    this.setTamed(false);
-                    this.setOwner("");
-                    this.ItemInMouth = null;
-                    this.setAngry(true);
-                    this.setTarget(entity);
-                    var4 = true;
-                }
-            }
-            else if (entity != this && entity != null)
-            {
-                this.entityToAttack = entity;
-            }
+				if (entity instanceof EntityPlayer && this.isTamed() && ((EntityPlayer)entity) == this.getOwner() && this.getRNG().nextInt(6) == 0)
+				{
+					//Hit by the owner->untame
+					this.SendStatusMessage(EnumSituation.Betrayed);
+					this.setTamed(false);
+					this.setOwner("");
+					this.ItemInMouth = null;
+					this.setAngry(true);
+					this.setTarget(entity);
+					var4 = true;
+				}
+			}
+			else if (entity != this && entity != null)
+			{
+				this.entityToAttack = entity;
+			}
 
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
 
 	public boolean isAngry()
 	{
@@ -365,58 +364,58 @@ public class EntityCeratosaurus extends EntityDinosaur
         this.setPathToEntity(this.worldObj.getEntityPathToXYZ(this, var14, var6, var15, (float)var2, true, false, true, false));
     }
 	 */
-	
 
-/**
- * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
- * use this to react to sunlight and start to burn.
- */
-public void onLivingUpdate()
-{
-	breakBlock(5);
-	if (this.Timer > 0)
-	{
-		--this.Timer;
-	}
-	super.onLivingUpdate();
-}
 
-/**
- * Returns the texture's file path as a String.
- */
-@Override
-public String getTexture()
-{
-	if (this.isModelized())
+	/**
+	 * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
+	 * use this to react to sunlight and start to burn.
+	 */
+	public void onLivingUpdate()
 	{
-		return super.getTexture();
-	}
-
-	if (this.isAdult())
-	{
-		switch (this.getSubSpecies())
+		breakBlock(5);
+		if (this.Timer > 0)
 		{
-		case 1:
-			return texturePath + "Ceratosaurus_Red_Adult.png";
-		default:
-			return texturePath + "Ceratosaurus_Green_Adult.png";
+			--this.Timer;
 		}
-	}else{
-		switch (this.getSubSpecies())
-		{
-		case 1:
-			return texturePath + "Ceratosaurus_Red_Baby.png";
-		default:
-			return texturePath + "Ceratosaurus_Green_Baby.png";
-		}
+		super.onLivingUpdate();
 	}
 
-}
+	/**
+	 * Returns the texture's file path as a String.
+	 */
+	@Override
+	public String getTexture()
+	{
+		if (this.isModelized())
+		{
+			return super.getTexture();
+		}
 
-/**
- * Causes this entity to do an upwards motion (jumping).
- */
-/*
+		if (this.isAdult())
+		{
+			switch (this.getSubSpecies())
+			{
+			case 1:
+				return texturePath + "Ceratosaurus_Red_Adult.png";
+			default:
+				return texturePath + "Ceratosaurus_Green_Adult.png";
+			}
+		}else{
+			switch (this.getSubSpecies())
+			{
+			case 1:
+				return texturePath + "Ceratosaurus_Red_Baby.png";
+			default:
+				return texturePath + "Ceratosaurus_Green_Baby.png";
+			}
+		}
+
+	}
+
+	/**
+	 * Causes this entity to do an upwards motion (jumping).
+	 */
+	/*
     protected void jump()
     {
         if (!this.isInWater())
@@ -435,62 +434,62 @@ public String getTexture()
             this.motionY -= 0.1D;
         }
     }
- */
+	 */
 
-public EntityCeratosaurus spawnBabyAnimal(EntityAgeable var1)
-{
-	return new EntityCeratosaurus(this.worldObj);
-}
+	public EntityCeratosaurus spawnBabyAnimal(EntityAgeable var1)
+	{
+		return new EntityCeratosaurus(this.worldObj);
+	}
 
-@Override
-public EntityAgeable createChild(EntityAgeable var1)
-{
-	EntityCeratosaurus baby = new EntityCeratosaurus(this.worldObj);
-	baby.setSubSpecies(this.getSubSpecies());
-	return baby;
-}
+	@Override
+	public EntityAgeable createChild(EntityAgeable var1)
+	{
+		EntityCeratosaurus baby = new EntityCeratosaurus(this.worldObj);
+		baby.setSubSpecies(this.getSubSpecies());
+		return baby;
+	}
 
-/**
- * This gets called when a dinosaur grows naturally or through Chicken Essence.
- */
+	/**
+	 * This gets called when a dinosaur grows naturally or through Chicken Essence.
+	 */
 
-@Override
-public void updateSize()
-{
-	double healthStep;
-	double attackStep;
-	double speedStep;
-	healthStep = (this.maxHealth - this.baseHealth) / (this.adultAge + 1);
-	attackStep = (this.maxDamage - this.baseDamage) / (this.adultAge + 1);
-	speedStep = (this.maxSpeed - this.baseSpeed) / (this.adultAge + 1);
+	@Override
+	public void updateSize()
+	{
+		double healthStep;
+		double attackStep;
+		double speedStep;
+		healthStep = (this.maxHealth - this.baseHealth) / (this.adultAge + 1);
+		attackStep = (this.maxDamage - this.baseDamage) / (this.adultAge + 1);
+		speedStep = (this.maxSpeed - this.baseSpeed) / (this.adultAge + 1);
 
 
-	if(this.getDinoAge() <= this.adultAge){
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(Math.round(this.baseHealth + (healthStep * this.getDinoAge())));
-		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(Math.round(this.baseDamage + (attackStep * this.getDinoAge())));
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(this.baseSpeed + (speedStep * this.getDinoAge()));
+		if(this.getDinoAge() <= this.adultAge){
+			this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(Math.round(this.baseHealth + (healthStep * this.getDinoAge())));
+			this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(Math.round(this.baseDamage + (attackStep * this.getDinoAge())));
+			this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(this.baseSpeed + (speedStep * this.getDinoAge()));
 
-		if (this.isTeen()) {
-			this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.5D);
-		}
-		else if (this.isAdult()){
-			this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(2.0D);
-		}
-		else {
-			this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.0D);
+			if (this.isTeen()) {
+				this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.5D);
+			}
+			else if (this.isAdult()){
+				this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(2.0D);
+			}
+			else {
+				this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.0D);
+			}
 		}
 	}
-}
 
-@Override
-public void writeSpawnData(ByteBuf buffer) {
-	// TODO Auto-generated method stub
+	@Override
+	public void writeSpawnData(ByteBuf buffer) {
+		// TODO Auto-generated method stub
 
-}
+	}
 
-@Override
-public void readSpawnData(ByteBuf additionalData) {
-	// TODO Auto-generated method stub
+	@Override
+	public void readSpawnData(ByteBuf additionalData) {
+		// TODO Auto-generated method stub
 
-}
+	}
 }

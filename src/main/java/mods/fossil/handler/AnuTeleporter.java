@@ -11,6 +11,7 @@ import mods.fossil.gens.feature.WorldGenAncientChest;
 import mods.fossil.gens.feature.WorldGenAnuCastle;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.Direction;
@@ -49,6 +50,11 @@ public class AnuTeleporter extends Teleporter{
 		int k = MathHelper.floor_double(p_77185_1_.posZ);
 		byte b0 = 1;
 		byte b1 = 0;
+		if(worldServerInstance.provider.dimensionId == Fossil.dimensionID_treasure){
+			if(p_77185_1_ instanceof EntityPlayer){
+				((EntityPlayer)p_77185_1_).triggerAchievement(FossilAchievementHandler.wtf);
+			}
+		}
 		if(worldServerInstance.provider.dimensionId == Fossil.dimensionID_anu){
 
 			for (int l = -2; l <= 2; ++l)

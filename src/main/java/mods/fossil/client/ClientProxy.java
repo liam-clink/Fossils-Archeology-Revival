@@ -1,12 +1,79 @@
 package mods.fossil.client;
 
-
 import mods.fossil.CommonProxy;
 import mods.fossil.Fossil;
-import mods.fossil.client.gui.GuiBoneHelmet;
-import mods.fossil.client.model.*;
+import mods.fossil.client.model.ModelAllosaurus;
+import mods.fossil.client.model.ModelAnkylosaurus;
+import mods.fossil.client.model.ModelBrachiosaurus;
+import mods.fossil.client.model.ModelCeratosaurus;
+import mods.fossil.client.model.ModelCoelacanth;
+import mods.fossil.client.model.ModelCompsognathus;
+import mods.fossil.client.model.ModelDeadAnu;
+import mods.fossil.client.model.ModelDeinonychus;
+import mods.fossil.client.model.ModelDilophosaurus;
+import mods.fossil.client.model.ModelDodo;
+import mods.fossil.client.model.ModelElasmotherium;
+import mods.fossil.client.model.ModelFailuresaurus;
+import mods.fossil.client.model.ModelGallimimus;
+import mods.fossil.client.model.ModelLiopleurodon;
+import mods.fossil.client.model.ModelMammoth;
+import mods.fossil.client.model.ModelMosasaurus;
+import mods.fossil.client.model.ModelNautilus;
+import mods.fossil.client.model.ModelPachycephalosaurus;
+import mods.fossil.client.model.ModelPigBoss;
+import mods.fossil.client.model.ModelPlesiosaur;
+import mods.fossil.client.model.ModelPteranodon;
+import mods.fossil.client.model.ModelQuagga;
+import mods.fossil.client.model.ModelSarcosuchus;
+import mods.fossil.client.model.ModelSmilodon;
+import mods.fossil.client.model.ModelSpinosaurus;
+import mods.fossil.client.model.ModelStegosaurus;
+import mods.fossil.client.model.ModelTRex;
+import mods.fossil.client.model.ModelTerrorBird;
+import mods.fossil.client.model.ModelTriceratops;
+import mods.fossil.client.model.ModelVelociraptor;
 import mods.fossil.client.model.armor.ModelAncientHelmet;
-import mods.fossil.client.renderer.entity.*;
+import mods.fossil.client.renderer.entity.RenderAllosaurus;
+import mods.fossil.client.renderer.entity.RenderAnkylosaurus;
+import mods.fossil.client.renderer.entity.RenderAnuEffect;
+import mods.fossil.client.renderer.entity.RenderAnubite;
+import mods.fossil.client.renderer.entity.RenderBones;
+import mods.fossil.client.renderer.entity.RenderBrachiosaurus;
+import mods.fossil.client.renderer.entity.RenderCeratosaurus;
+import mods.fossil.client.renderer.entity.RenderCoelacanth;
+import mods.fossil.client.renderer.entity.RenderCompsognathus;
+import mods.fossil.client.renderer.entity.RenderConfuciusornis;
+import mods.fossil.client.renderer.entity.RenderDeadAnu;
+import mods.fossil.client.renderer.entity.RenderDeinonychus;
+import mods.fossil.client.renderer.entity.RenderDilophosaurus;
+import mods.fossil.client.renderer.entity.RenderDinoEgg;
+import mods.fossil.client.renderer.entity.RenderDodo;
+import mods.fossil.client.renderer.entity.RenderElasmotherium;
+import mods.fossil.client.renderer.entity.RenderFPZ;
+import mods.fossil.client.renderer.entity.RenderFailuresaurus;
+import mods.fossil.client.renderer.entity.RenderFollowers;
+import mods.fossil.client.renderer.entity.RenderGallimimus;
+import mods.fossil.client.renderer.entity.RenderJavelin;
+import mods.fossil.client.renderer.entity.RenderLiopleurodon;
+import mods.fossil.client.renderer.entity.RenderMammoth;
+import mods.fossil.client.renderer.entity.RenderMosasaurus;
+import mods.fossil.client.renderer.entity.RenderNautilus;
+import mods.fossil.client.renderer.entity.RenderPachycephalosaurus;
+import mods.fossil.client.renderer.entity.RenderPigBoss;
+import mods.fossil.client.renderer.entity.RenderPlayerCapes;
+import mods.fossil.client.renderer.entity.RenderPlesiosaur;
+import mods.fossil.client.renderer.entity.RenderPterosaur;
+import mods.fossil.client.renderer.entity.RenderQuagga;
+import mods.fossil.client.renderer.entity.RenderSarcosuchus;
+import mods.fossil.client.renderer.entity.RenderSentryPigman;
+import mods.fossil.client.renderer.entity.RenderSmilodon;
+import mods.fossil.client.renderer.entity.RenderSpinosaurus;
+import mods.fossil.client.renderer.entity.RenderStegosaurus;
+import mods.fossil.client.renderer.entity.RenderStoneboard;
+import mods.fossil.client.renderer.entity.RenderTRex;
+import mods.fossil.client.renderer.entity.RenderTerrorBird;
+import mods.fossil.client.renderer.entity.RenderTriceratops;
+import mods.fossil.client.renderer.entity.RenderVelociraptor;
 import mods.fossil.client.renderer.item.ItemAncientClocRender;
 import mods.fossil.client.renderer.item.ItemFigurineRenderer;
 import mods.fossil.client.renderer.item.ItemRenderAnuTotem;
@@ -31,7 +98,46 @@ import mods.fossil.entity.EntityDinoEgg;
 import mods.fossil.entity.EntityJavelin;
 import mods.fossil.entity.EntityStoneboard;
 import mods.fossil.entity.EntityTerrorBirdEgg;
-import mods.fossil.entity.mob.*;
+import mods.fossil.entity.mob.EntityAllosaurus;
+import mods.fossil.entity.mob.EntityAnkylosaurus;
+import mods.fossil.entity.mob.EntityAnu;
+import mods.fossil.entity.mob.EntityAnuDead;
+import mods.fossil.entity.mob.EntityAnubite;
+import mods.fossil.entity.mob.EntityBones;
+import mods.fossil.entity.mob.EntityBrachiosaurus;
+import mods.fossil.entity.mob.EntityCeratosaurus;
+import mods.fossil.entity.mob.EntityCoelacanth;
+import mods.fossil.entity.mob.EntityCompsognathus;
+import mods.fossil.entity.mob.EntityConfuciusornis;
+import mods.fossil.entity.mob.EntityConfuciusornisEgg;
+import mods.fossil.entity.mob.EntityCultivatedChickenEgg;
+import mods.fossil.entity.mob.EntityCultivatedConfuciusornisEgg;
+import mods.fossil.entity.mob.EntityCultivatedDodoEgg;
+import mods.fossil.entity.mob.EntityDeinonychus;
+import mods.fossil.entity.mob.EntityDilophosaurus;
+import mods.fossil.entity.mob.EntityDodo;
+import mods.fossil.entity.mob.EntityDodoEgg;
+import mods.fossil.entity.mob.EntityElasmotherium;
+import mods.fossil.entity.mob.EntityFailuresaurus;
+import mods.fossil.entity.mob.EntityFriendlyPigZombie;
+import mods.fossil.entity.mob.EntityGallimimus;
+import mods.fossil.entity.mob.EntityLiopleurodon;
+import mods.fossil.entity.mob.EntityMammoth;
+import mods.fossil.entity.mob.EntityMosasaurus;
+import mods.fossil.entity.mob.EntityNautilus;
+import mods.fossil.entity.mob.EntityPachycephalosaurus;
+import mods.fossil.entity.mob.EntityPlesiosaur;
+import mods.fossil.entity.mob.EntityPterosaur;
+import mods.fossil.entity.mob.EntityQuagga;
+import mods.fossil.entity.mob.EntitySarcosuchus;
+import mods.fossil.entity.mob.EntitySentryPigman;
+import mods.fossil.entity.mob.EntitySmilodon;
+import mods.fossil.entity.mob.EntitySpinosaurus;
+import mods.fossil.entity.mob.EntityStegosaurus;
+import mods.fossil.entity.mob.EntityTRex;
+import mods.fossil.entity.mob.EntityTerrorBird;
+import mods.fossil.entity.mob.EntityTriceratops;
+import mods.fossil.entity.mob.EntityVelociraptor;
 import mods.fossil.guiBlocks.TileEntityAncientChest;
 import mods.fossil.guiBlocks.TileEntityAnuTotem;
 import mods.fossil.guiBlocks.TileEntityAnubiteStatue;
@@ -40,10 +146,10 @@ import mods.fossil.guiBlocks.TileEntityFigurine;
 import mods.fossil.guiBlocks.TileEntitySarcophagus;
 import mods.fossil.guiBlocks.TileEntityTimeMachine;
 import mods.fossil.guiBlocks.TileEntityVase;
+import mods.fossil.handler.EventOverlay;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.model.ModelBiped;
-import net.minecraft.client.model.ModelPig;
-import net.minecraft.client.renderer.entity.RenderPig;
 import net.minecraft.client.renderer.entity.RenderSnowball;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.player.EntityPlayer;
@@ -55,6 +161,8 @@ import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
+
+
 
 public class ClientProxy extends CommonProxy {
 
@@ -114,7 +222,7 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityAnuDead.class, new RenderDeadAnu(new ModelDeadAnu(), 0.3F));
 
 		if(FossilOptions.DeveloperSpecials){
-		RenderingRegistry.registerEntityRenderingHandler(EntityPlayer.class, new RenderFollowers());
+			RenderingRegistry.registerEntityRenderingHandler(EntityPlayer.class, new RenderFollowers());
 		}
 		/*
 		 * Item Registry
@@ -137,8 +245,11 @@ public class ClientProxy extends CommonProxy {
 		 */
 
 		VillagerRegistry.instance().registerVillagerSkin(10, new ResourceLocation("fossil:textures/mob/Archaeologist.png"));
-	}
 
+		if(FossilOptions.Skull_Overlay){
+			MinecraftForge.EVENT_BUS.register(new EventOverlay(Minecraft.getMinecraft()));
+		}
+	}
 	/*
 	 * TileEntity Registry
 	 */
@@ -189,6 +300,11 @@ public class ClientProxy extends CommonProxy {
 	public void registerEvents() {
 		MinecraftForge.EVENT_BUS.register(new RenderPlayerCapes());
 	}
-
+	public void playSound(String soundName) {
+		Minecraft.getMinecraft().getSoundHandler().playSound(PositionedSoundRecord.func_147673_a(new ResourceLocation(soundName)));
+	}
+	public void stopSound() {
+		Minecraft.getMinecraft().getSoundHandler().stopSounds();
+	}
 
 }

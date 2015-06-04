@@ -5,7 +5,6 @@ import java.util.Iterator;
 
 import mods.fossil.Fossil;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -19,7 +18,7 @@ import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
-public class EventOverlay extends Gui
+public class EventOverlay
 {
 	private static final ResourceLocation texture = new ResourceLocation("fossil:textures/gui/ancienthelmetblur.png");
 	private static final ResourceLocation texture2 = new ResourceLocation("fossil:textures/gui/skullhelmetblur.png");
