@@ -526,7 +526,8 @@ public class Fossil
 	 */
 
 	public static Item fossilrecordBones;
-
+	public static Item recordNano_Anu;
+	
 	static ArmorMaterial bone = EnumHelper.addArmorMaterial("Bone", 25, new int[] {2, 7, 6, 2}, 15);
 	static ToolMaterial scarab = EnumHelper.addToolMaterial("Scarab", 3, 1861, 8.0F, 4.0F, 25);
 	static ArmorMaterial scarabArmor = EnumHelper.addArmorMaterial("Scarab", 50, new int[]{3, 8, 6, 3}, 10);
@@ -562,7 +563,7 @@ public class Fossil
 			FossilOptions.Gen_Temple = config.get("option", "Temple", true).getBoolean(true);
 			FossilOptions.Heal_Dinos = config.get("option", "Heal_Dinos", true).getBoolean(true);
 			FossilOptions.Dinos_Starve = config.get("option", "Dinos_Starve", true).getBoolean(true);
-			FossilOptions.Dino_Block_Breaking = config.get("option", "Dino_Block_Breaking", true).getBoolean(true);
+			FossilOptions.Dino_Block_Breaking = config.get("option", "Dino_Block_Breaking", false).getBoolean(false);
 			FossilOptions.Skull_Overlay = config.get("option", "Skull_Overlay", true).getBoolean(true);
 			FossilOptions.LoginMessage = config.get("option", "Display_Login_Message", true).getBoolean(false);
 			FossilOptions.Anu_Spawn = config.get("option", "Anu_Spawn", false).getBoolean(false);
@@ -873,6 +874,7 @@ public class Fossil
 		 */
 
 		fossilrecordBones = new ItemFossilRecord(LocalizationStrings.RECORD_BONES_NAME).setUnlocalizedName(LocalizationStrings.FOSSIL_RECORD_NAME);
+		recordNano_Anu = new ItemFossilRecord(LocalizationStrings.FOSSIL_RECORD_NANO_ANU).setUnlocalizedName(LocalizationStrings.RECORD_BONES_NAME);
 
 		/*
 		 * registers javlins to be shot
@@ -975,6 +977,7 @@ public class Fossil
 		GameRegistry.registerItem(confuciornisRaw, "confuciornisRaw");
 		GameRegistry.registerItem(confuciornisCooked, "confuciornisCooked");
 		GameRegistry.registerItem(fossilrecordBones, LocalizationStrings.FOSSIL_RECORD_NAME);
+		GameRegistry.registerItem(recordNano_Anu, LocalizationStrings.FOSSIL_RECORD_NANO_ANU);
 		GameRegistry.registerItem(livingCoelacanth, LocalizationStrings.LIVING_COELACANTH_NAME);
 		GameRegistry.registerItem(failuresaurusFlesh, LocalizationStrings.FAILURESAURUS_FLESH_NAME);
 		GameRegistry.registerItem(terrorBirdEgg, LocalizationStrings.TERROR_BIRD_EGG_NAME);

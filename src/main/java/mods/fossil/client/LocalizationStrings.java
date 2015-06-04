@@ -272,6 +272,7 @@ public class LocalizationStrings
 
     //Fossil records
     public static final String FOSSIL_RECORD_NAME = "record_bones";
+    public static final String FOSSIL_RECORD_NANO_ANU = "music.anu";
     public static final String RECORD_BONES_NAME = "record_bones_disc";
     public static final String FOSSILRECORD2_NAME = "record_jp_theme";
 	public static final String BLOCK_ANU_NAME = "anu_block";
