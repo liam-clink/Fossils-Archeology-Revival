@@ -184,7 +184,7 @@ IEntityAdditionalSpawnData {
 		if(FossilOptions.Dino_Block_Breaking){
 			if(!isModelized() && this.isAdult() && this.IsHungry()){
 				for (int a=(int)Math.round(this.boundingBox.minX)-1;a<=(int)Math.round(this.boundingBox.maxX)+1;a++){
-					for (int b=(int)Math.round(this.boundingBox.minY);(b<=(int)Math.round(this.boundingBox.maxY)+3) &&( b<=127);b++){
+					for (int b=(int)Math.round(this.boundingBox.minY) + 1;(b<=(int)Math.round(this.boundingBox.maxY)+3) &&( b<=127);b++){
 						for (int c=(int)Math.round(this.boundingBox.minZ)-1;c<=(int)Math.round(this.boundingBox.maxZ)+1;c++){
 
 							Block block = worldObj.getBlock(a,b,c);
