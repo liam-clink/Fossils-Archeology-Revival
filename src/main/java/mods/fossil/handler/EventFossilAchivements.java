@@ -48,5 +48,8 @@ public class EventFossilAchivements
 		if(event.pickedUp.getEntityItem().getItem() == Fossil.ancientKey) {
 			event.player.addStat(FossilAchievementHandler.key, 1);
 		}
+		if(event.pickedUp.getEntityItem().getItem() == Fossil.ancientClock) {
+			event.player.addStat(FossilAchievementHandler.clock, 1);
+		}
 	}
 }

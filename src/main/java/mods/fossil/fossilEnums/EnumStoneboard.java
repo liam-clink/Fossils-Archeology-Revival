@@ -28,7 +28,8 @@ public enum EnumStoneboard
 	Anubite1("Anubite1", 16, 16, 128, 32),
 	Anubite2("Anubite2", 16, 16, 144, 32),
 	Anubite3("Anubite3", 16, 16, 160, 32),
-	Anubite4("Anubite4", 16, 16, 176, 32);
+	Anubite4("Anubite4", 16, 16, 176, 32),
+	touchAnu("touchAnu", 32, 16, 128, 48);
 
 	public static final int maxArtTitleLength = "annoyangry".length();
 

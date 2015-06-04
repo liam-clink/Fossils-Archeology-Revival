@@ -3,30 +3,19 @@ package mods.fossil.entity.mob;
 import java.util.List;
 
 import mods.fossil.Fossil;
-import mods.fossil.client.FossilOptions;
 import mods.fossil.entity.EntityMLighting;
 import mods.fossil.fossilAI.AnuAIArrowAttack;
 import mods.fossil.fossilAI.AnuAIAttackOnCollide;
 import mods.fossil.fossilAI.AnuAIAvoidEntity;
-import mods.fossil.fossilEnums.EnumPigmenSpeaks;
-import mods.fossil.gens.feature.WorldGenMegaSpike;
 import mods.fossil.gens.feature.WorldGenSpikesBlock;
-import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.audio.ISound;
+import mods.fossil.handler.FossilAchievementHandler;
 import net.minecraft.client.audio.PositionedSoundRecord;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIArrowAttack;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
-import net.minecraft.entity.ai.EntityAIAvoidEntity;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
@@ -34,24 +23,16 @@ import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.boss.IBossDisplayData;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityBlaze;
 import net.minecraft.entity.monster.EntityGhast;
 import net.minecraft.entity.monster.EntityGolem;
-import net.minecraft.entity.monster.EntityIronGolem;
-import net.minecraft.entity.monster.EntityMagmaCube;
 import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.monster.EntityPigZombie;
 import net.minecraft.entity.monster.EntitySkeleton;
-import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.entity.projectile.EntityLargeFireball;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
@@ -62,17 +43,15 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import net.minecraft.util.Vec3;
-import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenIceSpike;
-import net.minecraft.world.gen.feature.WorldGenPumpkin;
-import net.minecraft.world.gen.feature.WorldGenSpikes;
+
+
 
 public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAttackMob{
 
-	public int allHealth = 300;
-	public int middleHealth = 200;
-	public int finalHealth = 100;
+	public int allHealth = 600;
+	public int middleHealth = 400;
+	public int finalHealth = 200;
 	//length of song in ticks
 	public int songLength = 4041;
 	public int songCounter = 0;
@@ -112,7 +91,7 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
 	{
 		super.applyEntityAttributes();
 		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(40.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(300D);
+		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(600D);
 		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.35D);
 	}
 	protected String getLivingSound()
@@ -206,7 +185,7 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
 		if(this.getAttackMode() == 2){
 			if (this.ticksExisted % 20 == 0)
 			{
-				this.heal(1.0F);
+				this.heal(2.0F);
 			}
 		}
 		super.updateAITasks();
@@ -233,6 +212,17 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
 	public void onDeath(DamageSource dmg)
 	{
 
+        if (dmg.getSourceOfDamage() instanceof EntityArrow && dmg.getEntity() instanceof EntityPlayer)
+        {
+            EntityPlayer entityplayer = (EntityPlayer)dmg.getEntity();
+            double d0 = entityplayer.posX - this.posX;
+            double d1 = entityplayer.posZ - this.posZ;
+
+            if (d0 * d0 + d1 * d1 >= 2500.0D)
+            {
+                entityplayer.triggerAchievement(FossilAchievementHandler.anuDead);
+            }
+        }
 		EntityAnuDead entity = new EntityAnuDead(this.worldObj);
 		if(!this.worldObj.isRemote){
 			entity.setLocationAndAngles(this.posX + this.getRNG().nextInt(4), this.posY, this.posZ + this.getRNG().nextInt(4), this.rotationYaw, this.rotationPitch);
@@ -281,8 +271,6 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
 		this.dropItem(Fossil.ancientKey, 1);
 	}
 	public void onLivingUpdate(){
-		if(worldObj.isRemote){
-			ISound music = PositionedSoundRecord.func_147673_a(new ResourceLocation("fossil:music.anu"));
 			if(songCounter < songLength){
 				songCounter++;
 			}
@@ -290,12 +278,11 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
 				songCounter = 0;
 			}
 			if(songCounter == 1){
-				Minecraft.getMinecraft().getSoundHandler().playSound(music);
+				Fossil.proxy.playSound("fossil:music.anu");
 			}
 			if(this.isDead){
-				Minecraft.getMinecraft().getSoundHandler().stopSounds();
+				Fossil.proxy.stopSound();
 			}
-		}
 		super.onLivingUpdate();
 		if (this.getAttackMode() == 1 && !this.onGround && this.motionY < 0.0D)
 		{
@@ -482,9 +469,9 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
 		this.setAttackMode(0);
 		this.setCurrentItemOrArmor(0, new ItemStack(Fossil.ancientSword));
 		this.enchantEquipment();
-		EntityPlayer entityplayer = this.worldObj.getClosestVulnerablePlayerToEntity(this, 16.0D);
+		EntityPlayer entityplayer = this.worldObj.getClosestPlayer(posX, posY, posZ, 100F);
 
-		if(entityplayer != null && this.canEntityBeSeen(entityplayer)){
+		if(entityplayer != null){
 			if(this.getRNG().nextInt(1) == 0){
 				Fossil.ShowMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + 
 						StatCollector.translateToLocal("anuSpeaker.hello"), (EntityPlayer)entityplayer);

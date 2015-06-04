@@ -1,6 +1,7 @@
 package mods.fossil.entity.mob;
 
 import io.netty.buffer.ByteBuf;
+import mods.fossil.Fossil;
 import mods.fossil.fossilAI.DinoAIAttackOnCollide;
 import mods.fossil.fossilAI.DinoAIEat;
 import mods.fossil.fossilAI.DinoAIFollowOwner;
@@ -8,6 +9,7 @@ import mods.fossil.fossilAI.DinoAIRideGround;
 import mods.fossil.fossilAI.DinoAIWander;
 import mods.fossil.fossilEnums.EnumDinoType;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
@@ -78,11 +80,11 @@ public class EntityBrachiosaurus extends EntityDinosaur {
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed)
-				.setBaseValue(EnumDinoType.Brachiosaurus.Speed0);
+		.setBaseValue(EnumDinoType.Brachiosaurus.Speed0);
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth)
-				.setBaseValue(EnumDinoType.Brachiosaurus.Health0);
+		.setBaseValue(EnumDinoType.Brachiosaurus.Health0);
 		this.getEntityAttribute(SharedMonsterAttributes.attackDamage)
-				.setBaseValue(EnumDinoType.Brachiosaurus.Strength0);
+		.setBaseValue(EnumDinoType.Brachiosaurus.Strength0);
 	}
 	public void onLivingUpdate()
 	{
@@ -179,7 +181,7 @@ public class EntityBrachiosaurus extends EntityDinosaur {
 			this.riddenByEntity.setPosition(
 					this.posX,
 					this.posY + this.getMountHeight()
-							+ this.riddenByEntity.getYOffset(), this.posZ);
+					+ this.riddenByEntity.getYOffset(), this.posZ);
 		}
 	}
 
@@ -199,16 +201,16 @@ public class EntityBrachiosaurus extends EntityDinosaur {
 		if (this.getDinoAge() <= this.adultAge) {
 
 			this.getEntityAttribute(SharedMonsterAttributes.maxHealth)
-					.setBaseValue(
-							Math.round(this.baseHealth
-									+ (healthStep * this.getDinoAge())));
+			.setBaseValue(
+					Math.round(this.baseHealth
+							+ (healthStep * this.getDinoAge())));
 			this.getEntityAttribute(SharedMonsterAttributes.attackDamage)
-					.setBaseValue(
-							Math.round(this.baseDamage
-									+ (attackStep * this.getDinoAge())));
+			.setBaseValue(
+					Math.round(this.baseDamage
+							+ (attackStep * this.getDinoAge())));
 			this.getEntityAttribute(SharedMonsterAttributes.movementSpeed)
-					.setBaseValue(
-							this.baseSpeed + (speedStep * this.getDinoAge()));
+			.setBaseValue(
+					this.baseSpeed + (speedStep * this.getDinoAge()));
 
 			if (this.isTeen()) {
 				this.getEntityAttribute(

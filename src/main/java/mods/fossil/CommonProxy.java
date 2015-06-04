@@ -3,11 +3,10 @@ package mods.fossil;
 import java.util.Random;
 
 import net.minecraft.client.model.ModelBiped;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraftforge.common.ChestGenHooks;
+
 
 public class CommonProxy {
 	public void registerRenderThings() {
@@ -21,7 +20,6 @@ public class CommonProxy {
 
 	public void registerEvents() {
 	}
-
 	public void registerChestItems() {
 		// Random rand = new Random();
 		// ChestGenHooks chestGenAcademyHooks =
@@ -56,7 +54,7 @@ public class CommonProxy {
 						Fossil.fossilrecordBones), 1, 1, 5));
 		ChestGenHooks.getInfo(ChestGenHooks.DUNGEON_CHEST).addItem(new WeightedRandomChestContent(new ItemStack(Fossil.fossilrecordBones), 1, 1, 5));
 		ChestGenHooks.getInfo(ChestGenHooks.DUNGEON_CHEST).addItem(new WeightedRandomChestContent(new ItemStack(Fossil.fossilrecordBones), 1, 1, 5));
-		
+
 		ChestGenHooks chestcontents = ChestGenHooks.getInfo(Fossil.CHEST_HELLSHIP);
 
 		/*chestcontents.addItem(new WeightedRandomChestContent(new ItemStack(Fossil.ancientGlass), 2, 5, 5));
@@ -87,4 +85,7 @@ public class CommonProxy {
 
 
 	}
+	public void playSound(String soundName) {}
+	public void stopSound() {}
+
 }

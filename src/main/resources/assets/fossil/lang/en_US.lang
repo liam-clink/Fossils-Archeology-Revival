@@ -81,7 +81,12 @@ achievement.squire=The... Squire?
 achievement.squire.desc=Tame an Allosaurus.
 achievement.inTreasure=The Room?
 achievement.inTreasure.desc=Find the Secret Treasure Room.
+<<<<<<< HEAD
+achievement.shear=One Big Sheep!
+achievement.shear.desc=Shear a Mammoth.
+=======
 
+>>>>>>> 0f2b9f87fecae88c55ba4002a374c9e2fa595416
 #Enchantments
 enchantment.paleontology=Paleontology
 enchantment.archeology=Archeology
@@ -492,8 +497,13 @@ item.ancientClock.name=Ancient Clock
 item.toothDagger.name=Tooth Dagger
 
 #Plants
+<<<<<<< HEAD
+item.fossilSeed_fern.name=Fossilized Fern Spores
+item.fossilSapling_palae.name=Petrified Palaeoraphe Sapling
+=======
 item.fernSeeds.name=Fern Seeds
 item.palae_Fossil.name=Petrified Palaeoraphe Sapling
+>>>>>>> 0f2b9f87fecae88c55ba4002a374c9e2fa595416
 item.fossilSeed.dillhoffia.name=Fossilized Dillhoffia Seeds
 item.fossilSeed.sarracina.name=Fossilized Sarracenia Seeds
 item.fossilSeed.cephalotaxus.name=Fossilized Cephalotaxus Seeds

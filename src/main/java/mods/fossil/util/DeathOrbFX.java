@@ -42,7 +42,6 @@ public class DeathOrbFX extends EntityFX
 
 
 	@Override
-	@SideOnly(Side.CLIENT)
 	public void renderParticle(Tessellator tessellator, float par2, float par3, float par4, float par5, float par6, float par7)
 	{
 		tessellator.draw();

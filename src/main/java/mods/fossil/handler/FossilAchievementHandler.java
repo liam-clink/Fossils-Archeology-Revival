@@ -57,8 +57,9 @@ public class FossilAchievementHandler
     public static Achievement clock;
     public static Achievement firstDino;
     public static Achievement theKing;
-    public static Achievement usurper;
+  //  public static Achievement usurper;
     public static Achievement squire;
+    public static Achievement shear;
 
 
     public static void loadAchievements()
@@ -93,9 +94,10 @@ public class FossilAchievementHandler
     	clock =  new Achievement("achievement.clock", "clock",  6, 7, new ItemStack(Fossil.ancientClock), (Achievement)wtf).registerStat();
     	firstDino =  new Achievement("achievement.firstDino", "firstDino",  6, -4, new ItemStack(Fossil.skull, 1, 0), (Achievement)dinoEgg).registerStat().setSpecial();
     	theKing =  new Achievement("achievement.theKing", "theKing",  8, -5, new ItemStack(Fossil.skull, 1, 2), (Achievement)firstDino).registerStat().setSpecial();
-    	usurper =  new Achievement("achievement.usurper", "usurper",  8, -3, new ItemStack(Fossil.skull, 1, 10), (Achievement)firstDino).registerStat().setSpecial();
+    	//usurper =  new Achievement("achievement.usurper", "usurper",  8, -3, new ItemStack(Fossil.skull, 1, 10), (Achievement)firstDino).registerStat().setSpecial();
     	squire =  new Achievement("achievement.squire", "squire",  7, -1, new ItemStack(Fossil.skull, 1, 17), (Achievement)firstDino).registerStat();
-
+    	shear =  new Achievement("achievement.shear", "shear",  6, -6, new ItemStack(Blocks.wool, 1, 12), (Achievement)mammalEmbryo).registerStat();
+    	
         AchievementPage.registerAchievementPage(new AchievementPage("Fossils and Archeology", 
         		new Achievement[]{
         		firstFossil,
@@ -128,8 +130,9 @@ public class FossilAchievementHandler
         		clock,
         		firstDino,
         		theKing,
-        		usurper,
-        		squire
+        		//usurper,
+        		squire,
+        		shear
         		}));
     }
 
