@@ -253,7 +253,7 @@ public class Fossil
 	 * 2 = Release build
 	 */
 
-	public static final int modState = 0;
+	public static final int modState = 2;
 
 	@SidedProxy(clientSide = "mods.fossil.client.ClientProxy", serverSide = "mods.fossil.CommonProxy")
 	public static CommonProxy proxy;
@@ -563,7 +563,7 @@ public class Fossil
 			FossilOptions.Gen_Temple = config.get("option", "Temple", true).getBoolean(true);
 			FossilOptions.Heal_Dinos = config.get("option", "Heal_Dinos", true).getBoolean(true);
 			FossilOptions.Dinos_Starve = config.get("option", "Dinos_Starve", true).getBoolean(true);
-			FossilOptions.Dino_Block_Breaking = config.get("option", "Dino_Block_Breaking", true).getBoolean(true);
+			FossilOptions.Dino_Block_Breaking = config.get("option", "Dino_Block_Breaking", false).getBoolean(false);
 			FossilOptions.Skull_Overlay = config.get("option", "Skull_Overlay", true).getBoolean(true);
 			FossilOptions.LoginMessage = config.get("option", "Display_Login_Message", true).getBoolean(false);
 			FossilOptions.Anu_Spawn = config.get("option", "Anu_Spawn", false).getBoolean(false);
