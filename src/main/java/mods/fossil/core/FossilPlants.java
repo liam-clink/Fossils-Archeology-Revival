@@ -37,7 +37,7 @@ public class FossilPlants {
 	public static void assign(){
 				//fossil seed
 				fossilSeed_fern = new ForgeItem("plants/fossilSeed_fern").setUnlocalizedName("fossilSeed_fern").setCreativeTab(Fossil.tabFMaterial);
-				palaeSaplingFossil = new ForgeItem("palae_Fossil").setUnlocalizedName("fossilSapling_palae").setCreativeTab(Fossil.tabFMaterial);
+				palaeSaplingFossil = new ForgeItem("Palae_Fossil").setUnlocalizedName("fossilSapling_palae").setCreativeTab(Fossil.tabFMaterial);
 				fossilSeed = new ItemFossilSeeds(true).setUnlocalizedName("fossilSeed").setCreativeTab(Fossil.tabFMaterial);
 				//seed
 				seed = new ItemFossilSeeds(false).setUnlocalizedName("seed").setCreativeTab(Fossil.tabFMaterial);
