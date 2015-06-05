@@ -873,8 +873,8 @@ public class Fossil
 		 * Making the mod cds
 		 */
 
-		fossilrecordBones = new ItemFossilRecord(LocalizationStrings.RECORD_BONES_NAME).setUnlocalizedName(LocalizationStrings.FOSSIL_RECORD_NAME);
-		recordNano_Anu = new ItemFossilRecord(LocalizationStrings.FOSSIL_RECORD_NANO_ANU).setUnlocalizedName(LocalizationStrings.RECORD_BONES_NAME);
+		fossilrecordBones = new ItemFossilRecord(LocalizationStrings.RECORD_BONES_NAME, "fossil:record_bones").setUnlocalizedName(LocalizationStrings.FOSSIL_RECORD_NAME);
+		recordNano_Anu = new ItemFossilRecord(LocalizationStrings.FOSSIL_RECORD_NANO_ANU, "fossil:record_anu").setUnlocalizedName(LocalizationStrings.RECORD_BONES_NAME);
 
 		/*
 		 * registers javlins to be shot
