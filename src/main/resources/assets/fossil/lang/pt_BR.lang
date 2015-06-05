@@ -1,7 +1,7 @@
 #Build 7.1.0 - Updated April 4 2015
 #Portuguese (pt_BR) Localization File
 #Contribution Credits - Al-Myr
-#Keys last updated May 31 2015
+#Keys last updated June 04 2015
 
 #Tab Groups
 itemgroup.FCombat=FAR: Combate
@@ -38,7 +38,7 @@ achievement.sifter.desc=Craft a Sifter.
 achievement.fossilSeeds=Plants From the Past!
 achievement.fossilSeeds.desc=Obtain any Fossilized Seeds from analyzing a Plant Fossil.
 achievement.failuresaurus=Epic Fail!
-achievement.failuresaurus.desc=Accidentially create a Failuresaurus using a Culture Vat.
+achievement.failuresaurus.desc=Accidentally create a Failuresaurus using a Culture Vat.
 achievement.failuresaurusAnalyzer=Back to the Drawing Boards!
 achievement.failuresaurusAnalyzer.desc=Get any DNA from Analyzing Failuresarus Flesh.
 achievement.findAnuTotem=What the?
@@ -81,6 +81,8 @@ achievement.squire=The... Squire?
 achievement.squire.desc=Tame an Allosaurus.
 achievement.inTreasure=The Room?
 achievement.inTreasure.desc=Find the Secret Treasure Room.
+achievement.shear=One Big Sheep!
+achievement.shear.desc=Shear a Mammoth.
 
 #Enchantments
 enchantment.paleontology=Palentologia
@@ -104,7 +106,7 @@ tile.palaeorapheLog.name=Madeira de Palaeoraphe
 tile.palaeorapheLeaves.name=Folhas de Palaeoraphe
 tile.palaeorapheSapling.name=Muda de Palaeoraphe
 tile.palaeoraphePlanks.name=Tábuas de Palaeoraphe
-tile.palaeorapheSlab.name=Laje de Palaeoraphe
+tile.palaeorapheSlab.palae.name=Laje de Palaeoraphe
 tile.palaeorapheSlabDouble.name=Laje de Palaeoraphe
 tile.palaeorapheStairs.name=Escadas de Palaeoraphe
 tile.volcanicAsh.name=Cinza Vulcânica
@@ -140,6 +142,10 @@ tile.obsidianSpikes.name=Obsidian Spikes
 tile.ancientChest.name=Ancient Treasure Chest
 tile.home_portal.name=Overworld Portal
 tile.sarcophagus.name=Mysterious Sarcophagus
+tile.strongGlass.name=Reinforced Glass
+tile.anu_block.name=Anu Statue
+tile.AnubiteStatue.name=Anubite Statue
+tile.denseSand.name=Dense Sand
 
 #Collectables
 tile.figurine.figurine_steve_pristine.name=Estatueta Primitiva do Steve
@@ -376,8 +382,8 @@ item.animalCoin.name=Moeda de Animal
 item.dinoCoin.name=Moeda de Dinossauro
 item.dodoWing.name=Asa de Dodô Crua
 item.dodoWingCooked.name=Asa de Dodô Assada
-item.rawConfuciornis.name=Raw Confuciornis
-item.cookedConfuciornis.name=Cooked Confuciornis
+item.rawConfuciornis.name=Raw Confuciusornis
+item.cookedConfuciornis.name=Cooked Confuciusornis
 item.dinoSteak.name=Filé de Dinossauro
 item.rawTriceratops.name=Carne de Tricerátopo
 item.rawVelociraptor.name=Carne de Velociráptor
@@ -492,6 +498,8 @@ item.ancientClock.name=Ancient Clock
 item.toothDagger.name=Tooth Dagger
 
 #Plants
+item.fossilSeed_fern.name=Fossilized Fern Spores
+item.fossilSapling_palae.name=Petrified Palaeoraphe Sapling
 item.fernSeeds.name=Broto de Samambaia
 item.palae_Fossil.name=Petrified Palaeoraphe Sapling
 item.fossilSeed.dillhoffia.name=Fossilized Dillhoffia Seeds
@@ -689,3 +697,4 @@ entity.fossil.PigBoss.name=Anu
 item.record_bones.name=Disco de Música
 item.record_bones_disc.name=Disco de Música
 item.record.record_bones_disc.desc=WhiteJoshMan - Bones
+item.record.music.anu.desc=Nanotyrano - Awakening
