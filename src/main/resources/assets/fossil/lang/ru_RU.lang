@@ -1,7 +1,7 @@
-﻿#Build 7.1.0 - Updated August 28 2014
+﻿#Build 7.2.0 - Updated August 28 2014
 #Russian (ru_RU) Localization File
 #Contribution Credits - Adaptivity, fewizz
-#Keys last updated May 31 2015
+#Keys last updated June 04 2015
 
 #Tab Groups
 itemgroup.FCombat=Древняя броня
@@ -38,7 +38,7 @@ achievement.sifter.desc=Craft a Sifter.
 achievement.fossilSeeds=Plants From the Past!
 achievement.fossilSeeds.desc=Obtain any Fossilized Seeds from analyzing a Plant Fossil.
 achievement.failuresaurus=Epic Fail!
-achievement.failuresaurus.desc=Accidentially create a Failuresaurus using a Culture Vat.
+achievement.failuresaurus.desc=Accidentally create a Failuresaurus using a Culture Vat.
 achievement.failuresaurusAnalyzer=Back to the Drawing Boards!
 achievement.failuresaurusAnalyzer.desc=Get any DNA from Analyzing Failuresarus Flesh.
 achievement.findAnuTotem=What the?
@@ -81,6 +81,8 @@ achievement.squire=The... Squire?
 achievement.squire.desc=Tame an Allosaurus.
 achievement.inTreasure=The Room?
 achievement.inTreasure.desc=Find the Secret Treasure Room.
+achievement.shear=One Big Sheep!
+achievement.shear.desc=Shear a Mammoth.
 
 #Enchantments
 enchantment.paleontology=Палеонтология
@@ -104,7 +106,7 @@ tile.palaeorapheLog.name=Доминиканская древесина
 tile.palaeorapheLeaves.name=Доминиканская листва
 tile.palaeorapheSapling.name=Доминиканский саженец
 tile.palaeoraphePlanks.name=Доминиканские доски
-tile.palaeorapheSlab.name=Доминиканская плита
+tile.palaeorapheSlab.palae.name=Доминиканская плита
 tile.palaeorapheSlabDouble.name=Доминиканская плита
 tile.palaeorapheStairs.name=Доминиканские ступеньки
 tile.volcanicAsh.name=Вулканический пепел
@@ -140,6 +142,10 @@ tile.obsidianSpikes.name=Obsidian Spikes
 tile.ancientChest.name=Ancient Treasure Chest
 tile.home_portal.name=Overworld Portal
 tile.sarcophagus.name=Mysterious Sarcophagus
+tile.strongGlass.name=Reinforced Glass
+tile.anu_block.name=Anu Statue
+tile.AnubiteStatue.name=Anubite Statue
+tile.denseSand.name=Dense Sand
 
 #Collectables
 tile.figurine.figurine_steve_pristine.name=Древняя статуэтка Стива
@@ -376,8 +382,8 @@ item.animalCoin.name=Монетка животного
 item.dinoCoin.name=Монетка динозавра
 item.dodoWing.name=Сырое крыло дронта
 item.dodoWingCooked.name=Приготовленное крыло дронта
-item.rawConfuciornis.name=Raw Confuciornis
-item.cookedConfuciornis.name=Cooked Confuciornis
+item.rawConfuciornis.name=Raw Confuciusornis
+item.cookedConfuciornis.name=Cooked Confuciusornis
 item.dinoSteak.name=Стейк из динозавра
 item.rawTriceratops.name=Мясо трицератопса
 item.rawVelociraptor.name=Мясо велоцираптора
@@ -492,6 +498,8 @@ item.ancientClock.name=Ancient Clock
 item.toothDagger.name=Tooth Dagger
 
 #Plants
+item.fossilSeed_fern.name=Fossilized Fern Spores
+item.fossilSapling_palae.name=Petrified Palaeoraphe Sapling
 item.fernSeeds.name=Семена папоротника
 item.palae_Fossil.name=Petrified Palaeoraphe Sapling
 item.fossilSeed.dillhoffia.name=Fossilized Dillhoffia Seeds
@@ -689,3 +697,4 @@ entity.fossil.PigBoss.name=Ану
 item.record_bones.name=Ископаемая пластинка
 item.record_bones_disc.name=Ископаемая пластинка
 item.record.record_bones_disc.desc=WhiteJoshMan - Кости
+item.record.music.anu.desc=Nanotyrano - Awakening
