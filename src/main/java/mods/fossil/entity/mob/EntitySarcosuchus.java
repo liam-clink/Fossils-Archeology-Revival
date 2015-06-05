@@ -218,6 +218,19 @@ public class EntitySarcosuchus extends EntitySwimmingDino {
 					}
 				}
 			}
+			
+			if (!Fossil.DebugMode())
+			{
+				if (itemStack.getItem() == Fossil.chickenEss)
+				{
+					if (!this.worldObj.isRemote)
+					{
+						Fossil.ShowMessage(StatCollector.translateToLocal(LocalizationStrings.STATUS_ESSENCE_FAIL), player);
+						return true;
+					}
+				}
+			}
+			
 			return true;
 		}
 		return false;
