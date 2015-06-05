@@ -4,7 +4,6 @@ import mods.fossil.Fossil;
 import mods.fossil.handler.AnuTeleporter;
 import mods.fossil.util.DeathOrbFX;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.particle.EntityFX;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -90,8 +89,8 @@ public class EntityAnuDead extends EntityLiving
 		for (int i = 0; i < 2; ++i)
 		{
 			if(worldObj.isRemote){
-				EntityFX particle1 = new DeathOrbFX(worldObj, (double)this.posX, (double)this.posY, (double)this.posZ, 0, 0, 0);
-				Minecraft.getMinecraft().effectRenderer.addEffect(particle1);
+				Fossil.proxy.spawnAnuParticle(worldObj, posX, posY, posZ);
+				
 			}
 		}
 	}

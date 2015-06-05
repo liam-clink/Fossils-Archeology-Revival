@@ -147,14 +147,17 @@ import mods.fossil.guiBlocks.TileEntitySarcophagus;
 import mods.fossil.guiBlocks.TileEntityTimeMachine;
 import mods.fossil.guiBlocks.TileEntityVase;
 import mods.fossil.handler.EventOverlay;
+import mods.fossil.util.DeathOrbFX;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.renderer.entity.RenderSnowball;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
@@ -305,6 +308,10 @@ public class ClientProxy extends CommonProxy {
 	}
 	public void stopSound() {
 		Minecraft.getMinecraft().getSoundHandler().stopSounds();
+	}
+	public void spawnAnuParticle(World world, double posX, double posY, double posZ) {
+		EntityFX particle1 = new DeathOrbFX(world, posX, posY, posZ, 0, 0, 0);
+		Minecraft.getMinecraft().effectRenderer.addEffect(particle1);
 	}
 
 }

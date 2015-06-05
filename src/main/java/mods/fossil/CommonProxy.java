@@ -5,6 +5,7 @@ import java.util.Random;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.WeightedRandomChestContent;
+import net.minecraft.world.World;
 import net.minecraftforge.common.ChestGenHooks;
 
 
@@ -87,5 +88,6 @@ public class CommonProxy {
 	}
 	public void playSound(String soundName) {}
 	public void stopSound() {}
+	public void spawnAnuParticle(World world, double posX, double posY, double posZ) {}
 
 }
