@@ -1,7 +1,7 @@
-#Build 7.1.0 - Updated May 31 2015
+#Build 7.2.0 - Updated June 04 2015
 #English (en_US) Localization File
 #Contribution Credits - 
-#Keys last updated May 31 2015
+#Keys last updated June 04 2015
 
 #Tab Groups
 itemgroup.FCombat=Ancient Equipment
@@ -38,7 +38,7 @@ achievement.sifter.desc=Craft a Sifter.
 achievement.fossilSeeds=Plants From the Past!
 achievement.fossilSeeds.desc=Obtain any Fossilized Seeds from analyzing a Plant Fossil.
 achievement.failuresaurus=Epic Fail!
-achievement.failuresaurus.desc=Accidentially create a Failuresaurus using a Culture Vat.
+achievement.failuresaurus.desc=Accidentally create a Failuresaurus using a Culture Vat.
 achievement.failuresaurusAnalyzer=Back to the Drawing Boards!
 achievement.failuresaurusAnalyzer.desc=Get any DNA from Analyzing Failuresarus Flesh.
 achievement.findAnuTotem=What the?
@@ -81,12 +81,9 @@ achievement.squire=The... Squire?
 achievement.squire.desc=Tame an Allosaurus.
 achievement.inTreasure=The Room?
 achievement.inTreasure.desc=Find the Secret Treasure Room.
-<<<<<<< HEAD
 achievement.shear=One Big Sheep!
 achievement.shear.desc=Shear a Mammoth.
-=======
 
->>>>>>> 0f2b9f87fecae88c55ba4002a374c9e2fa595416
 #Enchantments
 enchantment.paleontology=Paleontology
 enchantment.archeology=Archeology
@@ -109,7 +106,7 @@ tile.palaeorapheLog.name=Palaeoraphe Log
 tile.palaeorapheLeaves.name=Palaeoraphe Leaves
 tile.palaeorapheSapling.name=Palaeoraphe Sapling
 tile.palaeoraphePlanks.name=Palaeoraphe Planks
-tile.palaeorapheSlab.name=Palaeoraphe Slab
+tile.palaeorapheSlab.palae.name=Palaeoraphe Slab
 tile.palaeorapheSlabDouble.name=Palaeoraphe Slab
 tile.palaeorapheStairs.name=Palaeoraphe Stairs
 tile.volcanicAsh.name=Volcanic Ash
@@ -145,6 +142,10 @@ tile.obsidianSpikes.name=Obsidian Spikes
 tile.ancientChest.name=Ancient Treasure Chest
 tile.home_portal.name=Overworld Portal
 tile.sarcophagus.name=Mysterious Sarcophagus
+tile.strongGlass.name=Reinforced Glass
+tile.anu_block.name=Anu Statue
+tile.AnubiteStatue.name=Anubite Statue
+tile.denseSand.name=Dense Sand
 
 #Collectables
 tile.figurine.figurine_steve_pristine.name=Pristine Steve Figurine
@@ -214,7 +215,7 @@ item.magicConch.name=Magic Conch
 item.legBone.Triceratops.name=Triceratops Leg Bone
 item.legBone.Velociraptor.name=Velociraptor Leg Bone
 item.legBone.TRex.name=Tyrannosaurus Leg Bone
-item.legBone.Pterosaur.name=Pterosaur Leg Bone
+item.legBone.Pterosaur.name=Pteranodon Leg Bone
 item.legBone.Plesiosaur.name=Plesiosaur Leg Bone
 item.legBone.Mosasaurus.name=Mosasaurus Leg Bone
 item.legBone.Liopleurodon.name=Liopleurodon Leg Bone
@@ -233,7 +234,7 @@ item.legBone.Ceratosaurus.name=Ceratosaurus Leg Bone
 item.armBone.Triceratops.name=Triceratops Arm Bone
 item.armBone.Velociraptor.name=Velociraptor Arm Bone
 item.armBone.TRex.name=Tyrannosaurus Arm Bone
-item.armBone.Pterosaur.name=Pterosaur Arm Bone
+item.armBone.Pterosaur.name=Pteranodon Arm Bone
 item.armBone.Plesiosaur.name=Plesiosaur Arm Bone
 item.armBone.Mosasaurus.name=Mosasaurus Arm Bone
 item.armBone.Liopleurodon.name=Liopleurodon Arm Bone
@@ -252,7 +253,7 @@ item.armBone.Ceratosaurus.name=Ceratosaurus Arm Bone
 item.claw.Triceratops.name=Triceratops Horn
 item.claw.Velociraptor.name=Velociraptor Talon
 item.claw.TRex.name=Tyrannosaurus Tooth
-item.claw.Pterosaur.name=Pterosaur Finger
+item.claw.Pterosaur.name=Pteranodon Finger
 item.claw.Plesiosaur.name=Plesiosaur Teeth
 item.claw.Mosasaurus.name=Mosasaurus Tooth
 item.claw.Liopleurodon.name=Liopleurodon Gastralias
@@ -271,7 +272,7 @@ item.claw.Ceratosaurus.name=Ceratosaurus Horn
 item.foot.Triceratops.name=Triceratops Foot
 item.foot.Velociraptor.name=Velociraptor Foot
 item.foot.TRex.name=Tyrannosaurus Foot
-item.foot.Pterosaur.name=Pterosaur Foot
+item.foot.Pterosaur.name=Pteranodon Foot
 item.foot.Plesiosaur.name=Plesiosaur Foot
 item.foot.Mosasaurus.name=Mosasaurus Foot
 item.foot.Liopleurodon.name=Liopleurodon Foot
@@ -290,7 +291,7 @@ item.foot.Ceratosaurus.name=Ceratosaurus Foot
 item.skull.Triceratops.name=Triceratops Skull
 item.skull.Velociraptor.name=Velociraptor Skull
 item.skull.TRex.name=Tyrannosaurus Skull
-item.skull.Pterosaur.name=Pterosaur Skull
+item.skull.Pterosaur.name=Pteranodon Skull
 item.skull.Plesiosaur.name=Plesiosaur Skull
 item.skull.Mosasaurus.name=Mosasaurus Skull
 item.skull.Liopleurodon.name=Liopleurodon Skull
@@ -309,7 +310,7 @@ item.skull.Ceratosaurus.name=Ceratosaurus Skull
 item.vertebrae.Triceratops.name=Triceratops Vertebrae
 item.vertebrae.Velociraptor.name=Velociraptor Vertebrae
 item.vertebrae.TRex.name=Tyrannosaurus Vertebrae
-item.vertebrae.Pterosaur.name=Pterosaur Vertebrae
+item.vertebrae.Pterosaur.name=Pteranodon Vertebrae
 item.vertebrae.Plesiosaur.name=Plesiosaur Vertebrae
 item.vertebrae.Mosasaurus.name=Mosasaurus Vertebrae
 item.vertebrae.Liopleurodon.name=Liopleurodon Vertebrae
@@ -328,7 +329,7 @@ item.vertebrae.Ceratosaurus.name=Ceratosaurus Vertebrae
 item.dinoRibCage.Triceratops.name=Triceratops Rib Cage
 item.dinoRibCage.Velociraptor.name=Velociraptor Rib Cage
 item.dinoRibCage.TRex.name=Tyrannosaurus Rib Cage
-item.dinoRibCage.Pterosaur.name=Pterosaur Rib Cage
+item.dinoRibCage.Pterosaur.name=Pteranodon Rib Cage
 item.dinoRibCage.Plesiosaur.name=Plesiosaur Rib Cage
 item.dinoRibCage.Mosasaurus.name=Mosasaurus Rib Cage
 item.dinoRibCage.Liopleurodon.name=Liopleurodon Rib Cage
@@ -347,7 +348,7 @@ item.dinoRibCage.Ceratosaurus.name=Ceratosaurus Rib Cage
 item.dinosaurModels.Triceratops.name=Triceratops Model
 item.dinosaurModels.Velociraptor.name=Velociraptor Model
 item.dinosaurModels.TRex.name=Tyrannosaurus Model
-item.dinosaurModels.Pterosaur.name=Pterosaur Model
+item.dinosaurModels.Pterosaur.name=Pteranodon Model
 item.dinosaurModels.Plesiosaur.name=Plesiosaur Model
 item.dinosaurModels.Mosasaurus.name=Mosasaurus Model
 item.dinosaurModels.Liopleurodon.name=Liopleurodon Model
@@ -381,13 +382,13 @@ item.animalCoin.name=Animal Coin
 item.dinoCoin.name=Dinosaur Coin
 item.dodoWing.name=Raw Dodo Wing
 item.dodoWingCooked.name=Cooked Dodo Wing
-item.rawConfuciornis.name=Raw Confuciornis
-item.cookedConfuciornis.name=Cooked Confuciornis
+item.rawConfuciornis.name=Raw Confuciusornis
+item.cookedConfuciornis.name=Cooked Confuciusornis
 item.dinoSteak.name=Dino Steak
 item.rawTriceratops.name=Triceratops Meat
 item.rawVelociraptor.name=Velociraptor Meat
 item.rawTRex.name=Tyrannosaurus Meat
-item.rawPterosaur.name=Pterosaur Meat
+item.rawPterosaur.name=Pteranodon Meat
 item.rawNautilus.name=Nautilus Meat
 item.rawPlesiosaur.name=Plesiosaur Meat
 item.rawMosasaurus.name=Mosasaurus Meat
@@ -407,7 +408,7 @@ item.rawCeratosaurus.name=Ceratosaurus Meat
 item.eggTriceratops.name=Triceratops Egg
 item.eggVelociraptor.name=Velociraptor Egg
 item.eggTRex.name=Tyrannosaurus Egg
-item.eggPterosaur.name=Pterosaur Egg
+item.eggPterosaur.name=Pteranodon Egg
 item.eggNautilus.name=Living Nautilus
 item.eggPlesiosaur.name=Plesiosaur Egg
 item.eggMosasaurus.name=Mosasaurus Egg
@@ -444,7 +445,7 @@ item.failuresaurusFlesh.name=Failuresaurus Flesh
 item.dnaTriceratops.name=Triceratops DNA
 item.dnaVelociraptor.name=Velociraptor DNA
 item.dnaTRex.name=Tyrannosaurus DNA
-item.dnaPterosaur.name=Pterosaur DNA
+item.dnaPterosaur.name=Pteranodon DNA
 item.dnaNautilus.name=Nautilus DNA
 item.dnaPlesiosaur.name=Plesiosaur DNA
 item.dnaMosasaurus.name=Mosasaurus DNA
@@ -497,13 +498,10 @@ item.ancientClock.name=Ancient Clock
 item.toothDagger.name=Tooth Dagger
 
 #Plants
-<<<<<<< HEAD
 item.fossilSeed_fern.name=Fossilized Fern Spores
 item.fossilSapling_palae.name=Petrified Palaeoraphe Sapling
-=======
 item.fernSeeds.name=Fern Seeds
 item.palae_Fossil.name=Petrified Palaeoraphe Sapling
->>>>>>> 0f2b9f87fecae88c55ba4002a374c9e2fa595416
 item.fossilSeed.dillhoffia.name=Fossilized Dillhoffia Seeds
 item.fossilSeed.sarracina.name=Fossilized Sarracenia Seeds
 item.fossilSeed.cephalotaxus.name=Fossilized Cephalotaxus Seeds
@@ -582,7 +580,7 @@ status.essencefail=Essence of Chicken had no effect.
 entity.fossil.Triceratops.name=Triceratops
 entity.fossil.Velociraptor.name=Velociraptor
 entity.fossil.TRex.name=Tyrannosaurus
-entity.fossil.Pterosaur.name=Pterosaur
+entity.fossil.Pterosaur.name=Pteranodon
 entity.fossil.Plesiosaur.name=Plesiosaur
 entity.fossil.Mosasaurus.name=Mosasaurus
 entity.fossil.Liopleurodon.name=Liopleurodon
@@ -699,3 +697,4 @@ entity.fossil.PigBoss.name=Anu
 item.record_bones.name=Fossil Record
 item.record_bones_disc.name=Fossil Record
 item.record.record_bones_disc.desc=WhiteJoshMan - Bones
+item.record.music.anu.desc=Nanotyrano - Awakening
