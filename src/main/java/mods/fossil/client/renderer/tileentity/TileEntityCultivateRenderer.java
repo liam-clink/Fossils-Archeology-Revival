@@ -58,12 +58,11 @@ public class TileEntityCultivateRenderer extends TileEntitySpecialRenderer {
 			GL11.glPushMatrix();
 			GL11.glTranslatef(0,0.5F, 0);
 			GL11.glPushMatrix();
-			GL11.glRotatef(rot, 0, 9, 0);
 			GL11.glScalef(0.5F, 0.5F, 0.5F);
-			GL11.glPopMatrix();
-
+			GL11.glRotatef(rot, 0, 9, 0);
 			this.bindTexture(textureEmbryoLimbless);
 			model.render(0.0625F);
+			GL11.glPopMatrix();
 			GL11.glPopMatrix();
 		}else if(tileentity.getDNAType() == 1){
 			GL11.glPushMatrix();

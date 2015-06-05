@@ -17,19 +17,21 @@ public class ItemFossilRecord extends ItemRecord
 
     /** The name of the record. */
     public final String recordName;
+    public final String texture;
 
-    public ItemFossilRecord(String string)
+    public ItemFossilRecord(String string, String texture)
     {
         super(string);
         this.recordName = string;
         this.maxStackSize = 1;
+        this.texture = texture;
         setCreativeTab(Fossil.tabFItems);
     }
 
     @SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister reg)
     {
-        this.itemIcon = reg.registerIcon(Fossil.modid + ":record_bones");
+        this.itemIcon = reg.registerIcon(texture);
     }
     
     /**

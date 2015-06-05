@@ -1,6 +1,7 @@
 package mods.fossil.biome;
 
 import java.util.Random;
+
 import mods.fossil.entity.mob.EntitySentryPigman;
 import mods.fossil.gens.feature.WorldGenHellMushoom;
 import net.minecraft.block.Block;
@@ -31,6 +32,7 @@ public class BiomeBasic extends BiomeGenBase{
 		if(lifeSelector == 0){
 			this.spawnableCreatureList.add(new BiomeGenBase.SpawnListEntry(EntityPigZombie.class, 200, 1, 8));
 			this.spawnableCreatureList.add(new BiomeGenBase.SpawnListEntry(EntitySentryPigman.class, 200, 1, 4));
+
 		}
 		if(lifeSelector == 1){}
 

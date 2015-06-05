@@ -38,7 +38,11 @@ public class WorldGenAnuCastle extends WorldGenerator
 		new WeightedRandomChestContent(Item.getItemFromBlock(Blocks.glowstone), 0, 1, 4, 65),
 		new WeightedRandomChestContent(Item.getItemFromBlock(Blocks.obsidian), 0, 1, 6, 55),
 		new WeightedRandomChestContent(Items.netherbrick, 0, 1, 12, 65),
+		new WeightedRandomChestContent(Fossil.recordNano_Anu, 0, 1, 1, 6),
+		new WeightedRandomChestContent(Items.netherbrick, 0, 1, 12, 65),
+
 		new WeightedRandomChestContent(Item.getItemFromBlock(Blocks.tnt), 0, 1, 6, 45)
+		
 	};
 
 	protected Block[] GetValidSpawnBlocks()

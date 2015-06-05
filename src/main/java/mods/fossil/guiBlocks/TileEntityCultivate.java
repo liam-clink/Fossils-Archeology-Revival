@@ -526,7 +526,7 @@ ISidedInventory {
 				if(this.getStackInSlot(0).getItem() == FossilPlants.fossilSeed_fern || this.getStackInSlot(0).getItem() == FossilPlants.palaeSaplingFossil){
 					return 3;
 				}
-				if(this.getStackInSlot(0).getItem() == FossilPlants.fossilSeed){
+				if(this.getStackInSlot(0).getItem() == FossilPlants.palaeSaplingFossil || this.getStackInSlot(0).getItem() == FossilPlants.fossilSeed){
 					return 2;
 				}
 

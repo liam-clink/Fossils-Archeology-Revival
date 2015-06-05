@@ -9,7 +9,6 @@ import mods.fossil.fossilAI.AnuAIAttackOnCollide;
 import mods.fossil.fossilAI.AnuAIAvoidEntity;
 import mods.fossil.gens.feature.WorldGenSpikesBlock;
 import mods.fossil.handler.FossilAchievementHandler;
-import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;

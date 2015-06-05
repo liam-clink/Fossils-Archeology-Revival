@@ -93,70 +93,70 @@ public class RenderFollowers extends RenderPlayer {
 			GL11.glPopMatrix();
 			GL11.glPopMatrix();
 		}
-	
-	if(player.getUniqueID().equals(redID)){
-		GL11.glPushMatrix();
-		GL11.glTranslatef(0, 0.8F, 0);
-		GL11.glScalef(0.3F, 0.3F, 0.3F);
-		GL11.glRotatef(180, 1, 0, 0);
-		GL11.glRotatef(player.rotationYawHead, 0, 1, 0);
-		GL11.glPushMatrix();
-		FMLClientHandler.instance().getClient().getTextureManager().bindTexture(new ResourceLocation("fossil:textures/mob/Spinosaurus_Adult.png"));
-		model_Bluestreak52.render(player, f7, f6, f4, f3 - f2, f13, f5);
-		GL11.glPopMatrix();
-		GL11.glPopMatrix();
-	}
 
-if(player.getUniqueID().equals(tyrannoID)){
-	GL11.glPushMatrix();
-	GL11.glTranslatef(0, 0.8F, 0);
-	GL11.glScalef(0.3F, 0.3F, 0.3F);
-	GL11.glRotatef(180, 1, 0, 0);
-	GL11.glRotatef(player.rotationYawHead, 0, 1, 0);
-	GL11.glPushMatrix();
-	FMLClientHandler.instance().getClient().getTextureManager().bindTexture(new ResourceLocation("fossil:textures/mob/TRex/feathered/Feathered_TRex_Adult.png"));
-	model_tyranno66.render(player, f7, f6, f4, f3 - f2, f13, f5);
-	GL11.glPopMatrix();
-	GL11.glPopMatrix();
-}
-if(player.getUniqueID().equals(raptorID)){
-	GL11.glPushMatrix();
-	GL11.glTranslatef(0, 0.8F, 0);
-	GL11.glScalef(0.3F, 0.3F, 0.3F);
-	GL11.glRotatef(180, 1, 0, 0);
-	GL11.glRotatef(player.rotationYawHead, 0, 1, 0);
-	GL11.glPushMatrix();
-	FMLClientHandler.instance().getClient().getTextureManager().bindTexture(new ResourceLocation("fossil:textures/mob/Deinonychus/feathered/Feathered_Deinonychus_Grey_Adult.png"));
-	model_Raptorfarian.render(player, f7, f6, f4, f3 - f2, f13, f5);
-	GL11.glPopMatrix();
-	GL11.glPopMatrix();
-}
-if(player.getUniqueID().equals(robbID)){
-	GL11.glPushMatrix();
-	GL11.glTranslatef(0, 0.8F, 0);
-	GL11.glScalef(0.3F, 0.3F, 0.3F);
-	GL11.glRotatef(180, 1, 0, 0);
-	GL11.glRotatef(player.rotationYawHead, 0, 1, 0);
-	GL11.glPushMatrix();
-	FMLClientHandler.instance().getClient().getTextureManager().bindTexture(new ResourceLocation("fossil:textures/mob/Brachiosaurus.png"));
-	model_Robberto08.render(player, f7, f6, f4, f3 - f2, f13, f5);
-	GL11.glPopMatrix();
-	GL11.glPopMatrix();
-}
-if(player.getUniqueID().equals(nanoID)){
-	GL11.glPushMatrix();
-	GL11.glTranslatef(0F, 0.9F, 0);
-	GL11.glScalef(0.4F, 0.4F, 0.4F);
-	GL11.glRotatef(180, 1, 0, 0);
-	GL11.glRotatef(player.rotationYawHead, 0, 1, 0);
-	GL11.glTranslatef(-0.0625F, 0.0F, 0);
+		if(player.getUniqueID().equals(redID)){
+			GL11.glPushMatrix();
+			GL11.glTranslatef(0, 0.8F, 0);
+			GL11.glScalef(0.3F, 0.3F, 0.3F);
+			GL11.glRotatef(180, 1, 0, 0);
+			GL11.glRotatef(player.rotationYawHead, 0, 1, 0);
+			GL11.glPushMatrix();
+			FMLClientHandler.instance().getClient().getTextureManager().bindTexture(new ResourceLocation("fossil:textures/mob/Spinosaurus_Adult.png"));
+			model_Bluestreak52.render(player, f7, f6, f4, f3 - f2, f13, f5);
+			GL11.glPopMatrix();
+			GL11.glPopMatrix();
+		}
 
-	GL11.glPushMatrix();
-	FMLClientHandler.instance().getClient().getTextureManager().bindTexture(new ResourceLocation("fossil:textures/mob/Compsognathus/feathered/Feathered_Compsognathus_Green.png"));
-	model_NanoTyrano.render(player, f7, f6, f4, f3 - f2, f13, f5);
-	GL11.glPopMatrix();
-	GL11.glPopMatrix();
-}
+		if(player.getUniqueID().equals(tyrannoID)){
+			GL11.glPushMatrix();
+			GL11.glTranslatef(0, 0.8F, 0);
+			GL11.glScalef(0.3F, 0.3F, 0.3F);
+			GL11.glRotatef(180, 1, 0, 0);
+			GL11.glRotatef(player.rotationYawHead, 0, 1, 0);
+			GL11.glPushMatrix();
+			FMLClientHandler.instance().getClient().getTextureManager().bindTexture(new ResourceLocation("fossil:textures/mob/TRex/feathered/Feathered_TRex_Adult.png"));
+			model_tyranno66.render(player, f7, f6, f4, f3 - f2, f13, f5);
+			GL11.glPopMatrix();
+			GL11.glPopMatrix();
+		}
+		if(player.getUniqueID().equals(raptorID)){
+			GL11.glPushMatrix();
+			GL11.glTranslatef(0, 0.8F, 0);
+			GL11.glScalef(0.3F, 0.3F, 0.3F);
+			GL11.glRotatef(180, 1, 0, 0);
+			GL11.glRotatef(player.rotationYawHead, 0, 1, 0);
+			GL11.glPushMatrix();
+			FMLClientHandler.instance().getClient().getTextureManager().bindTexture(new ResourceLocation("fossil:textures/mob/Deinonychus/feathered/Feathered_Deinonychus_Grey_Adult.png"));
+			model_Raptorfarian.render(player, f7, f6, f4, f3 - f2, f13, f5);
+			GL11.glPopMatrix();
+			GL11.glPopMatrix();
+		}
+		if(player.getUniqueID().equals(robbID)){
+			GL11.glPushMatrix();
+			GL11.glTranslatef(0, 0.8F, 0);
+			GL11.glScalef(0.3F, 0.3F, 0.3F);
+			GL11.glRotatef(180, 1, 0, 0);
+			GL11.glRotatef(player.rotationYawHead, 0, 1, 0);
+			GL11.glPushMatrix();
+			FMLClientHandler.instance().getClient().getTextureManager().bindTexture(new ResourceLocation("fossil:textures/mob/Brachiosaurus.png"));
+			model_Robberto08.render(player, f7, f6, f4, f3 - f2, f13, f5);
+			GL11.glPopMatrix();
+			GL11.glPopMatrix();
+		}
+		if(player.getUniqueID().equals(nanoID)){
+			GL11.glPushMatrix();
+			GL11.glTranslatef(0F, 0.9F, 0);
+			GL11.glScalef(0.4F, 0.4F, 0.4F);
+			GL11.glRotatef(180, 1, 0, 0);
+			GL11.glRotatef(player.rotationYawHead, 0, 1, 0);
+			GL11.glTranslatef(-0.0625F, 0.0F, 0);
+
+			GL11.glPushMatrix();
+			FMLClientHandler.instance().getClient().getTextureManager().bindTexture(new ResourceLocation("fossil:textures/mob/Compsognathus/feathered/Feathered_Compsognathus_Green.png"));
+			model_NanoTyrano.render(player, f7, f6, f4, f3 - f2, f13, f5);
+			GL11.glPopMatrix();
+			GL11.glPopMatrix();
+		}
 		super.doRender(player, x, y, z, yaw, unknownFloat);
 	}
 
