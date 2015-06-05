@@ -1,7 +1,7 @@
-#Build 7.1.0 - Updated September 22 2014
+#Build 7.1.0 - Updated June 04 2015
 #Simplified Chinese (zh_CN) Localization File
-#Contribution Credits - crafteverywhere, sb023612
-#Keys last updated May 31 2015
+#Contribution Credits - crafteverywhere, sb023612, oldjunyi
+#Keys last updated June 04 2015
 
 #创造模式标签
 itemgroup.FCombat=古代装备
@@ -81,6 +81,8 @@ achievement.squire=这是... 大地主?
 achievement.squire.desc=抚养一头异特龙.
 achievement.inTreasure=屋子?
 achievement.inTreasure.desc=找到秘密的宝物房间.
+achievement.shear=One Big Sheep!
+achievement.shear.desc=Shear a Mammoth.
 
 #Enchantments
 enchantment.paleontology=古生物学
@@ -104,7 +106,7 @@ tile.palaeorapheLog.name=古树原木
 tile.palaeorapheLeaves.name=古树树叶
 tile.palaeorapheSapling.name=古树树苗
 tile.palaeoraphePlanks.name=古树木板
-tile.palaeorapheSlab.name=古树台阶
+tile.palaeorapheSlab.palae.name=古树台阶
 tile.palaeorapheSlabDouble.name=古树台阶
 tile.palaeorapheStairs.name=古树楼梯
 tile.volcanicAsh.name=火山灰
@@ -140,6 +142,10 @@ tile.obsidianSpikes.name=黑曜石尖刺
 tile.ancientChest.name=古代宝物箱
 tile.home_portal.name=主世界传送门
 tile.sarcophagus.name=神秘石棺
+tile.strongGlass.name=Reinforced Glass
+tile.anu_block.name=Anu Statue
+tile.AnubiteStatue.name=Anubite Statue
+tile.denseSand.name=Dense Sand
 
 #Collectables
 tile.figurine.figurine_steve_pristine.name=质朴史蒂夫雕像
@@ -428,10 +434,10 @@ item.eggTerrorBird.gastornis.name=冠恐鸟蛋
 item.eggTerrorBird.phorusrhacos.name=恐鹤蛋
 item.eggTerrorBird.titanis.name=泰坦鸟蛋
 item.eggTerrorBird.kelenken.name=窃鹤蛋
-item.eggCultivatedTerrorBird.gastornis.name=人工培育的冠恐鸟蛋
-item.eggCultivatedTerrorBird.phorusrhacos.name=人工培育的恐鹤蛋
-item.eggCultivatedTerrorBird.titanis.name=人工培育的泰坦鸟蛋
-item.eggCultivatedTerrorBird.kelenken.name=人工培育的窃鹤蛋
+item.eggCultivatedTerrorBird.gastornis.name=人工养殖冠恐鸟蛋
+item.eggCultivatedTerrorBird.phorusrhacos.name=人工养殖恐鹤蛋
+item.eggCultivatedTerrorBird.titanis.name=人工养殖泰坦鸟蛋
+item.eggCultivatedTerrorBird.kelenken.name=人工养殖窃鹤蛋
 item.eggCultivatedChicken.name=人工培育的鸡蛋
 item.eggConfuciusornis.name=孔子鸟蛋
 item.eggCultivatedConfuciusornis.name=人工培育的孔子鸟蛋
@@ -492,6 +498,9 @@ item.ancientClock.name=古代时钟
 item.toothDagger.name=牙制匕首
 
 #Plants
+item.fossilSeed_fern.name=Fossilized Fern Spores
+item.fossilSapling_palae.name=Petrified Palaeoraphe Sapling
+item.fernSeeds.name=蕨类种子
 item.palae_Fossil.name=古树树苗化石
 item.fossilSeed.dillhoffia.name=Dillhoffia种子化石
 item.fossilSeed.sarracina.name=瓶子草种子化石
@@ -632,7 +641,7 @@ pedia.embryo.Mammoth=猛犸象
 pedia.embryo.Dodo=渡渡鸟
 pedia.embryo.Horse=马
 pedia.embryo.Quagga=斑驴
-pedia.embryo.Elasmotherium=板齿犀
+pedia.embryo.Elasmotherium=Elasmotherium
 
 #阿努对白
 anuSpeaker.self=阿努: 
@@ -661,11 +670,11 @@ fpzSpeaker.lifeFor.head=为
 fpzSpeaker.lifeFor.tail=而生!
 fpzSpeaker.anuSommon=我皇阿努万岁!!
 
-#恐龙蛋信息
+#恐龙蛋信息        
 dinoegg.hatched=有颗恐龙蛋孵化了!
-dinoegg.noSpace=这颗蛋无法放在这里.
+dinoegg.noSpace=这颗蛋无法放在这里.                
 dinoegg.head=某颗
-dinoegg.dry=蛋因为太干燥死亡了
+dinoegg.dry=蛋因为太干燥死亡了        
 dinoegg.cold=蛋因为太寒冷死亡了
 
 #培养槽
@@ -688,3 +697,4 @@ entity.fossil.PigBoss.name=阿努
 item.record_bones.name=化石唱片
 item.record_bones_disc.name=化石唱片
 item.record.record_bones_disc.desc=WhiteJoshMan-骨之唱片
+item.record.music.anu.desc=Nanotyrano - Awakening
