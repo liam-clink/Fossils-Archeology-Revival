@@ -245,8 +245,6 @@ public class Fossil
 	 * The mod version
 	 */
 
-	//Testing 
-
 	public static final String modversion = "1.7.10 Build 7.2.0";
 
 	/**
