@@ -146,6 +146,7 @@ import mods.fossil.guiBlocks.TileEntityFigurine;
 import mods.fossil.guiBlocks.TileEntitySarcophagus;
 import mods.fossil.guiBlocks.TileEntityTimeMachine;
 import mods.fossil.guiBlocks.TileEntityVase;
+import mods.fossil.handler.EventNewMenu;
 import mods.fossil.handler.EventOverlay;
 import mods.fossil.util.DeathOrbFX;
 import net.minecraft.client.Minecraft;
@@ -302,6 +303,7 @@ public class ClientProxy extends CommonProxy {
 
 	public void registerEvents() {
 		MinecraftForge.EVENT_BUS.register(new RenderPlayerCapes());
+		MinecraftForge.EVENT_BUS.register(new EventNewMenu());
 	}
 	public void playSound(String soundName) {
 		Minecraft.getMinecraft().getSoundHandler().playSound(PositionedSoundRecord.func_147673_a(new ResourceLocation(soundName)));
