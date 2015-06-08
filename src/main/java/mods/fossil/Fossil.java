@@ -233,8 +233,6 @@ import cpw.mods.fml.relauncher.Side;
 
 public class Fossil
 {
-	//Testing, please ignore
-	
 	/**
 	 * The mod ID
 	 */
@@ -572,6 +570,7 @@ public class Fossil
 			FossilOptions.Anu_Allowed_Overworld = config.get("option", "Anu_Allowed_Overworld", false).getBoolean(false);
 			FossilOptions.AllowBreeding = config.get("option", "Allow_Dinosaur_Breeding", true).getBoolean(true);
 			FossilOptions.DeveloperSpecials = config.get("option",  "(Devs only)Allow Dev Specials", true).getBoolean(true);
+			FossilOptions.CustomMainMenu = config.get("option",  "(Devs only)Allow Dev Specials", true).getBoolean(true);
 
 			//Dinosaur Feathers
 			FossilOptions.TRexFeathers = config.get("toggle_scales", "Tyrannosaurus Scales", false).getBoolean(false);

@@ -29,6 +29,7 @@ public class FossilOptions
 	public static boolean AllowBreeding;
 	public static boolean VelociraptorFeathers;
 	public static boolean DeveloperSpecials;
+	public static boolean CustomMainMenu;
     public static int biomeIDDarknessLair;
 	public static int biomeIDTreasure;
     public static int dimIDDarknessLair;
@@ -63,6 +64,7 @@ public class FossilOptions
         TriceratopsQuills = config.get("toggle_quills",  "Triceratops Quills", true).getBoolean(true);
         
         DeveloperSpecials = config.get("option",  "(Devs only)Allow Dev Specials", true).getBoolean(true);
+        CustomMainMenu = config.get("option",  "(Devs only)Allow Dev Specials", true).getBoolean(true);
         
         biomeIDDarknessLair = config.get("biome IDs", "Layer of Darkness ID:", 128).getInt();
         biomeIDTreasure = config.get("biome IDs", "Treasure ID:", 127).getInt();
