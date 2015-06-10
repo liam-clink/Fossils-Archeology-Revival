@@ -234,8 +234,7 @@ import cpw.mods.fml.relauncher.Side;
 
 public class Fossil
 {
-	//Testing, please ignore
-	
+
 	/**
 	 * The mod ID
 	 */
