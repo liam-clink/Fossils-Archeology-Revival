@@ -234,6 +234,8 @@ import cpw.mods.fml.relauncher.Side;
 
 public class Fossil
 {
+	//Testing, please ignore
+	
 	/**
 	 * The mod ID
 	 */
@@ -243,8 +245,6 @@ public class Fossil
 	/**
 	 * The mod version
 	 */
-
-	//Testing 
 
 	public static final String modversion = "1.7.10 Build 7.2.0";
 
