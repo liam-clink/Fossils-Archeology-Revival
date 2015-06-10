@@ -28,13 +28,16 @@ public class RenderConfuciusornis
   {
     super(new ModelConfuciusornis(), 0.3F);
   }
-  @Override
-  protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2) {	
-	  	if(par1EntityLivingBase.isChild()){
-	  		GL11.glScalef(0.3F, 0.3F, 0.3F);
-	  	}else{
-	  		GL11.glScalef(0.6F, 0.6F, 0.6F);
-	  	}
+@Override
+	protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2) {	
+		if(par1EntityLivingBase.isChild()){
+			GL11.glScalef(0.3F, 0.3F, 0.3F);
+			super.preRenderCallback(par1EntityLivingBase, par2);
+			
+		}else{
+			GL11.glScalef(0.6F, 0.6F, 0.6F);
+			super.preRenderCallback(par1EntityLivingBase, par2);
+		}
 		if (!((EntityConfuciusornis) par1EntityLivingBase).checkGround((EntityConfuciusornis)par1EntityLivingBase)) {
 			if (!(this.mainModel instanceof ModelFlyingConfuciusornis)) {
 				this.mainModel = new ModelFlyingConfuciusornis();
