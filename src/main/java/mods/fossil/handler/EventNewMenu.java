@@ -25,7 +25,7 @@ public class EventNewMenu
 	@SubscribeEvent
 	public void openMainMenu(GuiOpenEvent event)
 	{
-		if (event.gui instanceof GuiMainMenu)
+		if (event.gui instanceof GuiMainMenu && FossilOptions.CustomMainMenu)
 		{
 			GuiMainMenu mainMenu = (GuiMainMenu)event.gui;
 			Field field = ReflectionHelper.findField(GuiMainMenu.class, ObfuscationReflectionHelper.remapFieldNames(GuiMainMenu.class.getName(), titlePanoramaPaths));

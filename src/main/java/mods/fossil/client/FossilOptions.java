@@ -64,7 +64,7 @@ public class FossilOptions
         TriceratopsQuills = config.get("toggle_quills",  "Triceratops Quills", true).getBoolean(true);
         
         DeveloperSpecials = config.get("option",  "(Devs only)Allow Dev Specials", true).getBoolean(true);
-        CustomMainMenu = config.get("option",  "(Devs only)Allow Dev Specials", true).getBoolean(true);
+        CustomMainMenu = config.get("option",  "Custom Main Menu", true).getBoolean(true);
         
         biomeIDDarknessLair = config.get("biome IDs", "Layer of Darkness ID:", 128).getInt();
         biomeIDTreasure = config.get("biome IDs", "Treasure ID:", 127).getInt();
