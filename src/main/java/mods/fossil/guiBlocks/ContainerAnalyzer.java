@@ -121,31 +121,7 @@ public class ContainerAnalyzer extends Container {
 	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2) {
 		ItemStack itemstack = null;
 		Slot slot = (Slot) this.inventorySlots.get(par2);
-		for (par2 = 0; par2 < 9; ++par2) {
-			if(slot.getStack() != null){
-				if(slot.getStack().getItem() != null){
-					if(slot.getStack().getItem() == Fossil.failuresaurusFlesh){
-						par1EntityPlayer.addStat(FossilAchievementHandler.failuresaurusAnalyzer, 1);
-					}
-				}
-			}
-		}
-		for (par2 = 12; par2 > 8; --par2) {
-			if(slot.getStack() != null){
-				if(slot.getStack().getItem() != null){
-					if(slot.getStack().getItem() == Fossil.stoneboard){
-						par1EntityPlayer.addStat(FossilAchievementHandler.tablet, 1);
-					}
-					if(Fossil.isDNA(slot.getStack().getItem())){
-						par1EntityPlayer.addStat(FossilAchievementHandler.dinoDna, 1);
-					}
-					if(slot.getStack().getItem() == FossilPlants.fossilSeed || slot.getStack().getItem() == FossilPlants.fossilSeed_fern){
-						par1EntityPlayer.addStat(FossilAchievementHandler.fossilSeeds, 1);
-					}
-				}
-			}
-		}
-
+		
 		if (slot != null && slot.getHasStack()) {
 			ItemStack itemstack1 = slot.getStack();
 			itemstack = itemstack1.copy();
@@ -196,8 +172,7 @@ public class ContainerAnalyzer extends Container {
 
 			// In one of the output slots; try to place in player inventory /
 			// action bar
-			else if (!this.mergeItemStack(itemstack1, OUTPUT_END + 1,
-					OUTPUT_END + 37, false)) {
+			else if (!this.mergeItemStack(itemstack1, OUTPUT_END + 1, OUTPUT_END + 37, false)) {
 				return null;
 			}
 

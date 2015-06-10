@@ -98,39 +98,16 @@ public class ContainerWorktable extends Container {
 		
 		ItemStack itemstack = null;
 		Slot slot = (Slot) this.inventorySlots.get(par2);
-		if(par2 == 2) {
-			if(slot.getStack() != null){
-				if(slot.getStack().getItem() != null){
-					if(slot.getStack().getItem() == Fossil.ancientSword){
-						par1EntityPlayer.addStat(FossilAchievementHandler.fixedSword, 1);
-					}
-					if(slot.getStack().getItem() == Fossil.ancienthelmet){
-						par1EntityPlayer.addStat(FossilAchievementHandler.fixedHelmet, 1);
-					}
-					if(slot.getStack().getItem() == Item.getItemFromBlock(Fossil.vaseAmphoraBlock) ||
-							slot.getStack().getItem() == Item.getItemFromBlock(Fossil.vaseKylixBlock)||
-							slot.getStack().getItem() == Item.getItemFromBlock(Fossil.vaseVoluteBlock)){
-						par1EntityPlayer.addStat(FossilAchievementHandler.fixedVase, 1);
-					}
-				}
-			}
-		}
+
 		if (slot != null && slot.getHasStack()) {
 			ItemStack itemstack1 = slot.getStack();
 			itemstack = itemstack1.copy();
 
-			if (par2 > INPUT_END && par2 < OUTPUT_END + 1 && par2 != FUEL) // If
-																			// slot
-																			// is
-																			// equal
-																			// to
-																			// Output.
+			if (par2 > INPUT_END && par2 < OUTPUT_END + 1 && par2 != FUEL) // If slot is equal to Output.
 			{
 				// Place INTO inventory, only check output.
 				if (!this.mergeItemStack(itemstack1, OUTPUT_END + 1,
-						OUTPUT_END + 36 + 1, true)) // 13 is first slot after
-													// the outputs, 49 is last
-													// inventory slot
+						OUTPUT_END + 36 + 1, true)) // 13 is first slot after the outputs, 49 is last inventory slot
 				{
 					return null;
 				}
