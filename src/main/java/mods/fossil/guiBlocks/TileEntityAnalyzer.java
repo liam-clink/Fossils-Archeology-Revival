@@ -208,9 +208,9 @@ ISidedInventory {
 							if (this.analyzerItemStacks[slots].getItem() == Fossil.stoneboard) {
 								P.addStat(FossilAchievementHandler.tablet, 1);
 							}
-							if (Fossil.isDNA(this.analyzerItemStacks[slots].getItem())) {
-								P.addStat(FossilAchievementHandler.dinoDna, 1);
-							}
+							//if (Fossil.isDNA(this.analyzerItemStacks[slots].getItem())) {
+							//	P.addStat(FossilAchievementHandler.dinoDna, 1);
+							//}
 						}
 					}
 
@@ -699,9 +699,9 @@ ISidedInventory {
 							if (this.analyzerItemStacks[slots].getItem() == Fossil.stoneboard) {
 								P.addStat(FossilAchievementHandler.tablet, 1);
 							}
-							if (Fossil.isDNA(this.analyzerItemStacks[slots].getItem())) {
-								P.addStat(FossilAchievementHandler.dinoDna, 1);
-							}
+							//if (Fossil.isDNA(this.analyzerItemStacks[slots].getItem())) {
+							//	P.addStat(FossilAchievementHandler.dinoDna, 1);
+							//}
 						}
 					}
 

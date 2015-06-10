@@ -138,6 +138,7 @@ import mods.fossil.handler.FossilRecipeHandler;
 import mods.fossil.handler.FossilSpawnEggs;
 import mods.fossil.handler.FossilToolEvent;
 import mods.fossil.handler.FossilTradeHandler;
+import mods.fossil.handler.PickupHandler;
 import mods.fossil.items.ItemAmber;
 import mods.fossil.items.ItemAncientEgg;
 import mods.fossil.items.ItemAncientHelmet;
@@ -583,7 +584,7 @@ public class Fossil
 			//IDs
 			FossilOptions.biomeIDDarknessLair = config.get("biome IDs", "Layer of Darkness ID:", 128).getInt();
 			FossilOptions.biomeIDTreasure = config.get("biome IDs", "Treasure ID:", 127).getInt();
-			FossilOptions.dimIDDarknessLair = config.get("biome IDs", "Layer of Darkness ID:", -23).getInt();
+			FossilOptions.dimIDDarknessLair = config.get("dimension IDs", "Layer of Darkness ID:", -23).getInt();
 			FossilOptions.dimIDTreasure = config.get("dimension IDs", "Ancient Treasure Room ID:", -34).getInt();
 
 			/*
@@ -1186,7 +1187,7 @@ public class Fossil
 		FossilRecipeHandler.addRecipe();
 		FossilFireSupport.setFireInfo();
 		
-		 //GameRegistry.registerPickupHandler(new FossilPickupHandler());
+		FMLCommonHandler.instance().bus().register(new PickupHandler());
 		FMLCommonHandler.instance().bus().register(new EventFossilAchivements());
 		 
 
