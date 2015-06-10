@@ -134,11 +134,11 @@ import mods.fossil.handler.FossilConnectionEvent;
 import mods.fossil.handler.FossilInteractEvent;
 import mods.fossil.handler.FossilLivingEvent;
 import mods.fossil.handler.FossilOreDictionary;
-import mods.fossil.handler.PickupHandler;
 import mods.fossil.handler.FossilRecipeHandler;
 import mods.fossil.handler.FossilSpawnEggs;
 import mods.fossil.handler.FossilToolEvent;
 import mods.fossil.handler.FossilTradeHandler;
+import mods.fossil.handler.PickupHandler;
 import mods.fossil.items.ItemAmber;
 import mods.fossil.items.ItemAncientEgg;
 import mods.fossil.items.ItemAncientHelmet;
@@ -234,7 +234,6 @@ import cpw.mods.fml.relauncher.Side;
 
 public class Fossil
 {
-
 	/**
 	 * The mod ID
 	 */
@@ -244,6 +243,8 @@ public class Fossil
 	/**
 	 * The mod version
 	 */
+
+	//Testing 
 
 	public static final String modversion = "1.7.10 Build 7.2.0";
 
@@ -570,6 +571,7 @@ public class Fossil
 			FossilOptions.Anu_Allowed_Overworld = config.get("option", "Anu_Allowed_Overworld", false).getBoolean(false);
 			FossilOptions.AllowBreeding = config.get("option", "Allow_Dinosaur_Breeding", true).getBoolean(true);
 			FossilOptions.DeveloperSpecials = config.get("option",  "(Devs only)Allow Dev Specials", true).getBoolean(true);
+			FossilOptions.CustomMainMenu = config.get("option",  "(Devs only)Allow Dev Specials", true).getBoolean(true);
 
 			//Dinosaur Feathers
 			FossilOptions.TRexFeathers = config.get("toggle_scales", "Tyrannosaurus Scales", false).getBoolean(false);
@@ -1185,9 +1187,9 @@ public class Fossil
 		FossilRecipeHandler.addRecipe();
 		FossilFireSupport.setFireInfo();
 		
-		 FMLCommonHandler.instance().bus().register(new PickupHandler());
+		FMLCommonHandler.instance().bus().register(new PickupHandler());
 		FMLCommonHandler.instance().bus().register(new EventFossilAchivements());
-
+		 
 
 		proxy.registerChestLoot();
 		FossilAchievementHandler.loadAchievements();
