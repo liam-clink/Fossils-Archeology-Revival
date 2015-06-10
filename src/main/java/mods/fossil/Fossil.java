@@ -225,6 +225,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
@@ -246,7 +247,7 @@ public class Fossil
 
 	//Testing 
 
-	public static final String modversion = "1.7.10 Build 7.2.0";
+	public static final String modversion = "1.7.10 Build 7.3.0";
 
 	/**
 	 * The mod state
@@ -254,7 +255,7 @@ public class Fossil
 	 * 1 = Beta build
 	 * 2 = Release build
 	 */
-	public static final int modState = 2;
+	public static final int modState = 0;
 
 	@SidedProxy(clientSide = "mods.fossil.client.ClientProxy", serverSide = "mods.fossil.CommonProxy")
 	public static CommonProxy proxy;
@@ -267,6 +268,7 @@ public class Fossil
 	public static FossilOptions FossilOptions;
 	public static Properties LangProps = new Properties();
 	public static Object ToPedia;
+	public static SimpleNetworkWrapper channel;
 
 	//public static IChatListener messagerHandler = new FossilMessageHandler();
 
@@ -571,7 +573,7 @@ public class Fossil
 			FossilOptions.Anu_Allowed_Overworld = config.get("option", "Anu_Allowed_Overworld", false).getBoolean(false);
 			FossilOptions.AllowBreeding = config.get("option", "Allow_Dinosaur_Breeding", true).getBoolean(true);
 			FossilOptions.DeveloperSpecials = config.get("option",  "(Devs only)Allow Dev Specials", true).getBoolean(true);
-			FossilOptions.CustomMainMenu = config.get("option",  "(Devs only)Allow Dev Specials", true).getBoolean(true);
+			FossilOptions.CustomMainMenu = config.get("option",  "Custom Main Menu", true).getBoolean(true);
 
 			//Dinosaur Feathers
 			FossilOptions.TRexFeathers = config.get("toggle_scales", "Tyrannosaurus Scales", false).getBoolean(false);
@@ -624,6 +626,7 @@ public class Fossil
 
 	@Mod.EventHandler
 	public void Init(FMLInitializationEvent event) {	
+		channel = NetworkRegistry.INSTANCE.newSimpleChannel("fossil");
 
 		dimensionID_anu = FossilOptions.dimIDDarknessLair;
 		dimensionID_treasure = FossilOptions.dimIDTreasure;

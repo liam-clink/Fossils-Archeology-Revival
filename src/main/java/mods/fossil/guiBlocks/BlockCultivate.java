@@ -321,9 +321,9 @@ public class BlockCultivate extends BlockContainer {
 
 					if(tileentity.getDNAType() == 2 ||tileentity.getDNAType() == 3){
 						world.playAuxSFX(2001, x, y, z, Block.getIdFromBlock(Blocks.glass));
-						world.setBlock(x, y, z, FossilPlants.mutantPlant);
-						world.setBlock(x, y+1, z, FossilPlants.mutantPlant, 8, 3);
-						world.setBlock(x, y-1, z, Blocks.dirt);
+						world.setBlock(x, y+1, z, FossilPlants.mutantPlant);
+						world.setBlock(x, y+2, z, FossilPlants.mutantPlant, 8, 3);
+						world.setBlock(x, y, z, Blocks.dirt);
 
 					}else{
 						Object creature = null;
