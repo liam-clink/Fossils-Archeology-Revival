@@ -7,12 +7,10 @@ import com.github.revival.common.api.ISubBlocksBlock;
 import com.github.revival.common.creativetab.FATabRegistry;
 import com.github.revival.common.handler.IContentHandler;
 import com.github.revival.common.handler.LocalizationStrings;
-import com.github.revival.common.item.forge.ForgeItem;
 import com.google.common.collect.Lists;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.item.Item;
 
 import java.lang.reflect.Field;
 import java.util.List;
@@ -38,8 +36,8 @@ public class FABlockRegistry extends FARegistry implements IContentHandler
     public static Block blockTimeMachine;
     public static Block ferns;
     public static Block drum;
-    public static Block feederIdle;
-    public static Block feederActive;
+    //public static Block feederIdle;
+    //public static Block feederActive;
     public static Block blockPermafrost;
     public static Block blockIcedStone;
     public static Block volcanicAsh;
@@ -83,7 +81,6 @@ public class FABlockRegistry extends FARegistry implements IContentHandler
     public static Block vaseKylixBlock;
     public static Block vaseVoluteBlock;
     public static Block sarcophagus;
-    public static Item palaeSaplingFossil;
     public static Block dillhoffia;
     public static Block sarracina;
     public static Block cephalotaxus;
@@ -111,8 +108,8 @@ public class FABlockRegistry extends FARegistry implements IContentHandler
         blockworktableActive = new BlockWorktable(true);
         denseSand = new BlockDenseSand();
         strongGlass = new BlockStrongGlass(Material.glass);
-        feederIdle = new BlockFeeder(false);
-        feederActive = new BlockFeeder(true);
+        //feederIdle = new BlockFeeder(false);
+        //feederActive = new BlockFeeder(true);
         blockTimeMachine = new BlockTimeMachine();
         ferns = new BlockFern();
         drum = new BlockDrum();
@@ -161,19 +158,18 @@ public class FABlockRegistry extends FARegistry implements IContentHandler
         vaseAmphoraBlock = new BlockVaseAmphora();
         vaseKylixBlock = new BlockVaseKylix();
         sarcophagus = new BlockSarcophagus();
-        FABlockRegistry.palaeSaplingFossil = new ForgeItem("Palae_Fossil").setUnlocalizedName("fossilSapling_palae").setCreativeTab(FATabRegistry.tabFMaterial);
-        FABlockRegistry.dillhoffia = new BlockFossilPlant("plants/plant_dillhoffia", 1).setBlockName("plant_dillhoffia").setCreativeTab(FATabRegistry.tabFBlocks);
-        FABlockRegistry.sarracina = new BlockFossilTallPlant("plants/plant_sarracina").setBlockName("plant_sarracina").setCreativeTab(FATabRegistry.tabFBlocks);
-        FABlockRegistry.cephalotaxus = new BlockFossilPlant("plants/plant_cephalotaxus", 1).setBlockName("plant_cephalotaxus").setCreativeTab(FATabRegistry.tabFBlocks);
-        FABlockRegistry.licopodiophyta = new BlockFossilPlant("plants/plant_licopodiophyta", 1).setBlockName("plant_licopodiophyta").setCreativeTab(FATabRegistry.tabFBlocks);
-        FABlockRegistry.paleopanax = new BlockFossilTallPlant("plants/plant_paleopanax").setBlockName("plant_paleopanax").setCreativeTab(FATabRegistry.tabFBlocks);
-        FABlockRegistry.zamites = new BlockFossilPlant("plants/plant_zamites", 1).setBlockName("plant_zamites").setCreativeTab(FATabRegistry.tabFBlocks);
-        FABlockRegistry.bennettitales_small = new BlockFossilPlant("plants/plant_bennettitales_small", 1).setBlockName("plant_bennettitales_small").setCreativeTab(FATabRegistry.tabFBlocks);
-        FABlockRegistry.bennettitales_large = new BlockFossilTallPlant("plants/plant_bennettitales_large").setBlockName("plant_bennettitales_large").setCreativeTab(FATabRegistry.tabFBlocks);
-        FABlockRegistry.welwitschia = new BlockFossilPlant("plants/plant_welwitschia", 1).setBlockName("plant_welwitschia").setCreativeTab(FATabRegistry.tabFBlocks);
-        FABlockRegistry.horsetail_small = new BlockFossilPlant("plants/plant_horsetail_small", 1).setBlockName("plant_horsetail_small").setCreativeTab(FATabRegistry.tabFBlocks);
-        FABlockRegistry.horsetail_large = new BlockFossilTallPlant("plants/plant_horsetail_large").setBlockName("plant_horsetail_large").setCreativeTab(FATabRegistry.tabFBlocks);
-        FABlockRegistry.mutantPlant = new BlockFossilTallPlant("plants/plant_mutant").setBlockName("plant_mutant").setLightLevel(0.4F).setCreativeTab(FATabRegistry.tabFBlocks);
+        dillhoffia = new BlockFossilPlant("plants/plant_dillhoffia", 1).setBlockName("plant_dillhoffia").setCreativeTab(FATabRegistry.tabFBlocks);
+        sarracina = new BlockFossilTallPlant("plants/plant_sarracina").setBlockName("plant_sarracina").setCreativeTab(FATabRegistry.tabFBlocks);
+        cephalotaxus = new BlockFossilPlant("plants/plant_cephalotaxus", 1).setBlockName("plant_cephalotaxus").setCreativeTab(FATabRegistry.tabFBlocks);
+        licopodiophyta = new BlockFossilPlant("plants/plant_licopodiophyta", 1).setBlockName("plant_licopodiophyta").setCreativeTab(FATabRegistry.tabFBlocks);
+        paleopanax = new BlockFossilTallPlant("plants/plant_paleopanax").setBlockName("plant_paleopanax").setCreativeTab(FATabRegistry.tabFBlocks);
+        zamites = new BlockFossilPlant("plants/plant_zamites", 1).setBlockName("plant_zamites").setCreativeTab(FATabRegistry.tabFBlocks);
+        bennettitales_small = new BlockFossilPlant("plants/plant_bennettitales_small", 1).setBlockName("plant_bennettitales_small").setCreativeTab(FATabRegistry.tabFBlocks);
+        bennettitales_large = new BlockFossilTallPlant("plants/plant_bennettitales_large").setBlockName("plant_bennettitales_large").setCreativeTab(FATabRegistry.tabFBlocks);
+        welwitschia = new BlockFossilPlant("plants/plant_welwitschia", 1).setBlockName("plant_welwitschia").setCreativeTab(FATabRegistry.tabFBlocks);
+        horsetail_small = new BlockFossilPlant("plants/plant_horsetail_small", 1).setBlockName("plant_horsetail_small").setCreativeTab(FATabRegistry.tabFBlocks);
+        horsetail_large = new BlockFossilTallPlant("plants/plant_horsetail_large").setBlockName("plant_horsetail_large").setCreativeTab(FATabRegistry.tabFBlocks);
+        mutantPlant = new BlockFossilTallPlant("plants/plant_mutant").setBlockName("plant_mutant").setLightLevel(0.4F).setCreativeTab(FATabRegistry.tabFBlocks);
     }
 
     public void initCreativeTabs()

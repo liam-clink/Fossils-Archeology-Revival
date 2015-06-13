@@ -59,13 +59,12 @@ public class BlockFeeder extends BlockContainer
         }
     }
 
-    public static void updateFurnaceBlockState(boolean herb, boolean carn,
-                                               World world, int x, int y, int z)
+    public static void updateFurnaceBlockState(boolean herb, boolean carn, World world, int x, int y, int z)
     {
         int meta = world.getBlockMetadata(x, y, z);
         TileEntity tileentity = world.getTileEntity(x, y, z);
 
-        world.setBlock(x, y, z, FABlockRegistry.feederActive);
+        //world.setBlock(x, y, z, FABlockRegistry.feederActive);
 
         if (herb) // If there's VEGGIES
             meta |= HERB_BIT;
@@ -90,7 +89,7 @@ public class BlockFeeder extends BlockContainer
     @SideOnly(Side.CLIENT)
     public Item getItem(World world, int x, int y, int z)
     {
-        return Item.getItemFromBlock(FABlockRegistry.feederActive);
+        return null;//Item.getItemFromBlock(FABlockRegistry.feederActive);
     }
 
     /**
@@ -99,7 +98,7 @@ public class BlockFeeder extends BlockContainer
     @Override
     public Item getItemDropped(int var1, Random var2, int var3)
     {
-        return Item.getItemFromBlock(FABlockRegistry.feederActive);
+        return null;//Item.getItemFromBlock(FABlockRegistry.feederActive);
     }
 
     /**

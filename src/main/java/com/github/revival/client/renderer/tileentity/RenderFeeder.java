@@ -1,6 +1,5 @@
 package com.github.revival.client.renderer.tileentity;
 
-import com.github.revival.common.block.FABlockRegistry;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
@@ -17,10 +16,10 @@ public class RenderFeeder implements ISimpleBlockRenderingHandler
     {
         int meta = 3;
 
-        if (block == FABlockRegistry.feederActive)
+        /*if (block == FABlockRegistry.feederActive)
         {
             meta = 1;
-        }
+        }*/
 
         Tessellator tessellator = Tessellator.instance;
         block.setBlockBoundsForItemRender();

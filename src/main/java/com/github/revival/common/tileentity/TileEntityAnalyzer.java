@@ -429,7 +429,7 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory,
                 }
                 if (rand > 65 && rand <= 75)
                 {
-                    itemstack = new ItemStack(FABlockRegistry.palaeSaplingFossil, 1, 0);
+                    itemstack = new ItemStack(FAItemRegistry.palaeSaplingFossil, 1, 0);
                 }
                 if (rand > 75 && rand <= 85)
                 {

@@ -1,10 +1,10 @@
 package com.github.revival.common.creativetab;
 
+import com.github.revival.common.block.FABlockRegistry;
 import com.github.revival.common.handler.LocalizationStrings;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 
 public class TabFFigurines extends CreativeTabs
@@ -17,7 +17,7 @@ public class TabFFigurines extends CreativeTabs
     @SideOnly(Side.CLIENT)
     public Item getTabIconItem()
     {
-        return Items.apple;
+        return Item.getItemFromBlock(FABlockRegistry.figurineBlock);
     }
 
     public String getTranslatedTabLabel()

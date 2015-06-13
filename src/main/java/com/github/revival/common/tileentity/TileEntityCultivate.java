@@ -440,7 +440,7 @@ public class TileEntityCultivate extends TileEntity implements IInventory,
         {
             return new ItemStack(FAItemRegistry.fernSeed, 1);
         }
-        if (itemstack.getItem() == FABlockRegistry.palaeSaplingFossil)
+        if (itemstack.getItem() == FAItemRegistry.palaeSaplingFossil)
         {
             return new ItemStack(FABlockRegistry.palmSap, 1);
         }
@@ -636,7 +636,7 @@ public class TileEntityCultivate extends TileEntity implements IInventory,
                 {
                     return 1;
                 }
-                if (this.getStackInSlot(0).getItem() == FAItemRegistry.fossilSeed_fern || this.getStackInSlot(0).getItem() == FABlockRegistry.palaeSaplingFossil || this.getStackInSlot(0).getItem() == FAItemRegistry.fossilSeed)
+                if (this.getStackInSlot(0).getItem() == FAItemRegistry.fossilSeed_fern || this.getStackInSlot(0).getItem() == FAItemRegistry.palaeSaplingFossil || this.getStackInSlot(0).getItem() == FAItemRegistry.fossilSeed)
                 {
                     return 2;
                 }

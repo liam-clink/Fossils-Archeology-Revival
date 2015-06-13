@@ -3,6 +3,7 @@ package com.github.revival.common;
 import com.github.revival.common.block.FABlockRegistry;
 import com.github.revival.common.item.FAItemRegistry;
 import net.minecraft.client.model.ModelBiped;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraft.world.World;
@@ -10,12 +11,11 @@ import net.minecraftforge.common.ChestGenHooks;
 
 import java.util.Random;
 
-
 public class CommonProxy
 {
     public void init()
     {
-        /*Blocks.fire.setFireInfo(FABlockRegistry.palmLeaves, 30, 60);
+        Blocks.fire.setFireInfo(FABlockRegistry.palmLeaves, 30, 60);
         Blocks.fire.setFireInfo(FABlockRegistry.palmLog, 5, 20);
         Blocks.fire.setFireInfo(FABlockRegistry.palaePlanks, 5, 20);
         Blocks.fire.setFireInfo(FABlockRegistry.palaeStairs, 5, 20);
@@ -30,18 +30,18 @@ public class CommonProxy
         Blocks.fire.setFireInfo(FABlockRegistry.ancientWoodSingleSlab, 5, 20);
         Blocks.fire.setFireInfo(FABlockRegistry.ancientWoodDoubleSlab, 5, 20);
         Blocks.fire.setFireInfo(FABlockRegistry.ferns, 30, 60);
-        Blocks.fire.setFireInfo(FossilPlants.bennettitales_large, 60, 100);
-        Blocks.fire.setFireInfo(FossilPlants.bennettitales_small, 60, 100);
-        Blocks.fire.setFireInfo(FossilPlants.cephalotaxus, 60, 100);
-        Blocks.fire.setFireInfo(FossilPlants.dillhoffia, 60, 100);
-        Blocks.fire.setFireInfo(FossilPlants.horsetail_large, 60, 100);
-        Blocks.fire.setFireInfo(FossilPlants.horsetail_small, 60, 100);
-        Blocks.fire.setFireInfo(FossilPlants.licopodiophyta, 60, 100);
-        Blocks.fire.setFireInfo(FossilPlants.mutantPlant, 60, 100);
-        Blocks.fire.setFireInfo(FossilPlants.paleopanax, 60, 100);
-        Blocks.fire.setFireInfo(FossilPlants.sarracina, 60, 100);
-        Blocks.fire.setFireInfo(FossilPlants.welwitschia, 60, 100);
-        Blocks.fire.setFireInfo(FossilPlants.zamites, 60, 100);*/
+        Blocks.fire.setFireInfo(FABlockRegistry.bennettitales_large, 60, 100);
+        Blocks.fire.setFireInfo(FABlockRegistry.bennettitales_small, 60, 100);
+        Blocks.fire.setFireInfo(FABlockRegistry.cephalotaxus, 60, 100);
+        Blocks.fire.setFireInfo(FABlockRegistry.dillhoffia, 60, 100);
+        Blocks.fire.setFireInfo(FABlockRegistry.horsetail_large, 60, 100);
+        Blocks.fire.setFireInfo(FABlockRegistry.horsetail_small, 60, 100);
+        Blocks.fire.setFireInfo(FABlockRegistry.licopodiophyta, 60, 100);
+        Blocks.fire.setFireInfo(FABlockRegistry.mutantPlant, 60, 100);
+        Blocks.fire.setFireInfo(FABlockRegistry.paleopanax, 60, 100);
+        Blocks.fire.setFireInfo(FABlockRegistry.sarracina, 60, 100);
+        Blocks.fire.setFireInfo(FABlockRegistry.welwitschia, 60, 100);
+        Blocks.fire.setFireInfo(FABlockRegistry.zamites, 60, 100);
     }
 
     public ModelBiped getArmorModel(int id)
