@@ -1,7 +1,9 @@
 package com.github.revival.common.block;
 
+import com.github.revival.common.api.ISubBlocksBlock;
 import com.github.revival.common.creativetab.FATabRegistry;
 import com.github.revival.common.handler.LocalizationStrings;
+import com.github.revival.common.item.blocks.ItemBlockAnuStatue;
 import com.github.revival.common.tileentity.TileEntityAnuTotem;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -10,18 +12,19 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockAnuTotem extends BlockContainer
+public class BlockAnuStatue extends BlockContainer implements ISubBlocksBlock
 {
 
     private int counter = 0;
 
-    public BlockAnuTotem()
+    public BlockAnuStatue()
     {
         super(Material.rock);
         this.setBlockBounds(0F, 0.0F, 0F, 1F, 1.9F, 1);
@@ -108,5 +111,10 @@ public class BlockAnuTotem extends BlockContainer
     public TileEntity createNewTileEntity(World world, int i)
     {
         return new TileEntityAnuTotem();
+    }
+
+    public Class<? extends ItemBlock> getItemBlockClass()
+    {
+        return ItemBlockAnuStatue.class;
     }
 }

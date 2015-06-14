@@ -5,15 +5,15 @@ import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
-public class ItemBlockAnubiteStatue extends ItemBlock
+public class ItemBlockAnuStatue extends ItemBlock
 {
-    public ItemBlockAnubiteStatue(Block b)
+    public ItemBlockAnuStatue(Block b)
     {
         super(b);
     }
 
     public EnumRarity getRarity(ItemStack item)
     {
-        return EnumRarity.rare;
+        return EnumRarity.epic;
     }
 }

@@ -144,7 +144,7 @@ public class FABlockRegistry extends FARegistry implements IContentHandler
         marble = new BlockMarble();
         obsidianSpikes = new BlockSpikes().setCreativeTab(FATabRegistry.tabFBlocks).setHardness(50.0F).setResistance(2000.0F).setStepSound(Block.soundTypePiston).setBlockName("obsidianSpikes").setBlockTextureName("fossil:obsidianSpikes");
         figurineBlock = new BlockFigurine();
-        anuTotem = new BlockAnuTotem();
+        anuTotem = new BlockAnuStatue();
         anuPortal = new BlockAnuPortal();
         homePortal = new BlockHomePortal();
         anubiteStatue = new BlockAnubiteStatue();
