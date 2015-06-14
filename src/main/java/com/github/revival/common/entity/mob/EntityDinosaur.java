@@ -327,28 +327,6 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements
         return false;
     }
 
-    /**
-     * Returns a boundingBox used to collide the entity with other entities and blocks. This enables the entity to be
-     * pushable on contact, like boats or minecarts.
-     */
-    public AxisAlignedBB getCollisionBox(Entity var1)
-    {
-        return var1.boundingBox;
-    }
-
-    /**
-     * returns the bounding box for this entity
-     */
-    public AxisAlignedBB getBoundingBox()
-    {
-        return this.boundingBox;
-    }
-
-    public boolean canBeCollidedWith()
-    {
-        return !isDead;
-    }
-
     public int getDinoAgeTick()
     {
         return this.dataWatcher.getWatchableObjectInt(AGE_TICK_DATA_INDEX);
