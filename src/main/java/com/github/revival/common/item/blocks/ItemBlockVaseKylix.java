@@ -1,14 +1,13 @@
-package com.github.revival.common.block;
+package com.github.revival.common.item.blocks;
 
+import com.github.revival.common.block.BlockVaseKylix;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlockWithMetadata;
 import net.minecraft.item.ItemStack;
 
-public class BlockVaseVoluteItem extends ItemBlockWithMetadata
+public class ItemBlockVaseKylix extends ItemBlockWithMetadata
 {
-    private Block itemBlock;
-
-    public BlockVaseVoluteItem(Block block)
+    public ItemBlockVaseKylix(Block block)
     {
         super(block, block);
         setHasSubtypes(true);
@@ -17,8 +16,7 @@ public class BlockVaseVoluteItem extends ItemBlockWithMetadata
     @Override
     public String getUnlocalizedName(ItemStack itemstack)
     {
-        return getUnlocalizedName() + "." + BlockVaseVolute.shortname[itemstack.getItemDamage()];
-
+        return getUnlocalizedName() + "." + BlockVaseKylix.shortname[itemstack.getItemDamage()];
     }
 
     @Override

@@ -1,12 +1,13 @@
-package com.github.revival.common.block;
+package com.github.revival.common.item.blocks;
 
+import com.github.revival.common.block.BlockFigurine;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlockWithMetadata;
 import net.minecraft.item.ItemStack;
 
-public class BlockFigurineItem extends ItemBlockWithMetadata
+public class ItemBlockFigurine extends ItemBlockWithMetadata
 {
-    public BlockFigurineItem(Block block)
+    public ItemBlockFigurine(Block block)
     {
         super(block, block);
     }

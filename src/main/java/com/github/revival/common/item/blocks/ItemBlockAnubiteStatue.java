@@ -1,16 +1,15 @@
-package com.github.revival.common.block;
+package com.github.revival.common.item.blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
-public class BlockAnuItem extends ItemBlock
+public class ItemBlockAnubiteStatue extends ItemBlock
 {
-
-    public BlockAnuItem(Block block)
+    public ItemBlockAnubiteStatue(Block b)
     {
-        super(block);
+        super(b);
     }
 
     public EnumRarity getRarity(ItemStack item)

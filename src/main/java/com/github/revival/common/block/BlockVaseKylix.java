@@ -1,8 +1,10 @@
 package com.github.revival.common.block;
 
 import com.github.revival.Revival;
+import com.github.revival.common.api.ISubBlocksBlock;
 import com.github.revival.common.creativetab.FATabRegistry;
 import com.github.revival.common.handler.LocalizationStrings;
+import com.github.revival.common.item.blocks.ItemBlockVaseKylix;
 import com.github.revival.common.tileentity.TileEntityVase;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -14,6 +16,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
@@ -24,16 +27,8 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-public class BlockVaseKylix extends BlockContainer
+public class BlockVaseKylix extends BlockContainer implements ISubBlocksBlock
 {
-    public static final String[] longname =
-            {
-                    "Damaged Kylix",
-                    "Restored Kylix",
-                    "Red-Figure Kylix",
-                    "Black-Figure Kylix",
-                    "Porcelain Kylix",
-            };
     public static final String[] shortname =
             {
                     "damaged_kylix",
@@ -141,7 +136,6 @@ public class BlockVaseKylix extends BlockContainer
     @Override
     public void breakBlock(World world, int x, int y, int z, Block oldBlock, int oldMeta)
     {
-        TileEntity tileentity = world.getTileEntity(x, y, z);
         this.getMeta = getDamageValue(world, x, y, z);
         super.breakBlock(world, x, y, z, oldBlock, oldMeta);
     }
@@ -190,10 +184,12 @@ public class BlockVaseKylix extends BlockContainer
 
         for (int i = 0; i < shortname.length; ++i)
         {
-
-            // icons[i] = iconregister.registerIcon(Revival.modid + ":figurines/" + (this.getUnlocalizedName().substring(5)) + i);
             icons[i] = iconregister.registerIcon(Revival.modid + ":vases/icons/" + "vase_icon_kylix_" + i);
         }
     }
 
+    public Class<? extends ItemBlock> getItemBlockClass()
+    {
+        return ItemBlockVaseKylix.class;
+    }
 }

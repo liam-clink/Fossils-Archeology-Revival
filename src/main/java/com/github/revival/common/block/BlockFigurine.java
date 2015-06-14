@@ -4,6 +4,7 @@ import com.github.revival.Revival;
 import com.github.revival.common.api.ISubBlocksBlock;
 import com.github.revival.common.creativetab.FATabRegistry;
 import com.github.revival.common.handler.LocalizationStrings;
+import com.github.revival.common.item.blocks.ItemBlockFigurine;
 import com.github.revival.common.tileentity.TileEntityFigurine;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -127,6 +128,6 @@ public class BlockFigurine extends BlockContainer implements ISubBlocksBlock
 
     public Class<? extends ItemBlock> getItemBlockClass()
     {
-        return BlockFigurineItem.class;
+        return ItemBlockFigurine.class;
     }
 }

@@ -1,8 +1,10 @@
 package com.github.revival.common.block;
 
 import com.github.revival.Revival;
+import com.github.revival.common.api.ISubBlocksBlock;
 import com.github.revival.common.creativetab.FATabRegistry;
 import com.github.revival.common.handler.LocalizationStrings;
+import com.github.revival.common.item.blocks.ItemBlockVaseAmphora;
 import com.github.revival.common.tileentity.TileEntityVase;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -14,6 +16,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
@@ -24,16 +27,8 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-public class BlockVaseAmphora extends BlockContainer
+public class BlockVaseAmphora extends BlockContainer implements ISubBlocksBlock
 {
-    public static final String[] longname =
-            {
-                    "Damaged Amphora",
-                    "Restored Amphora",
-                    "Red-Figure Amphora",
-                    "Black-Figure Amphora",
-                    "Porcelain Amphora",
-            };
     public static final String[] shortname =
             {
                     "damaged_amphora",
@@ -93,8 +88,6 @@ public class BlockVaseAmphora extends BlockContainer
 
     public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9)
     {
-        ItemStack itemstack = par5EntityPlayer.inventory.getCurrentItem();
-
         return false;
     }
 
@@ -132,7 +125,6 @@ public class BlockVaseAmphora extends BlockContainer
     @Override
     public void breakBlock(World world, int x, int y, int z, Block oldBlock, int oldMeta)
     {
-        TileEntity tileentity = world.getTileEntity(x, y, z);
         this.getMeta = getDamageValue(world, x, y, z);
         super.breakBlock(world, x, y, z, oldBlock, oldMeta);
     }
@@ -181,10 +173,12 @@ public class BlockVaseAmphora extends BlockContainer
 
         for (int i = 0; i < shortname.length; ++i)
         {
-
-            // icons[i] = iconregister.registerIcon(Revival.modid + ":figurines/" + (this.getUnlocalizedName().substring(5)) + i);
             icons[i] = iconregister.registerIcon(Revival.modid + ":vases/icons/" + "vase_icon_amphora_" + i);
         }
     }
 
+    public Class<? extends ItemBlock> getItemBlockClass()
+    {
+        return ItemBlockVaseAmphora.class;
+    }
 }

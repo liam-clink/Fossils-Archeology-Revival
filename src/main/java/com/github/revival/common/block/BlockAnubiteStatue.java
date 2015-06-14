@@ -1,7 +1,9 @@
 package com.github.revival.common.block;
 
+import com.github.revival.common.api.ISubBlocksBlock;
 import com.github.revival.common.creativetab.FATabRegistry;
 import com.github.revival.common.entity.mob.EntityAnubite;
+import com.github.revival.common.item.blocks.ItemBlockAnubiteStatue;
 import com.github.revival.common.tileentity.TileEntityAnubiteStatue;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -12,12 +14,13 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public class BlockAnubiteStatue extends BlockContainer
+public class BlockAnubiteStatue extends BlockContainer implements ISubBlocksBlock
 {
 
     private int counter = 0;
@@ -107,5 +110,10 @@ public class BlockAnubiteStatue extends BlockContainer
     public TileEntity createNewTileEntity(World world, int i)
     {
         return new TileEntityAnubiteStatue();
+    }
+
+    public Class<? extends ItemBlock> getItemBlockClass()
+    {
+        return ItemBlockAnubiteStatue.class;
     }
 }
