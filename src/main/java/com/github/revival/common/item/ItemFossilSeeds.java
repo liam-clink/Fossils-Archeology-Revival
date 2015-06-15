@@ -34,10 +34,7 @@ public class ItemFossilSeeds extends Item
     {
         for (int i = 0; i < fossilSeeds.length; ++i)
         {
-            if (i != 3)
-            {
                 list.add(new ItemStack(item, 1, i));
-            }
         }
     }
 

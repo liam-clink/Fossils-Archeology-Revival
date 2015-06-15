@@ -6,7 +6,7 @@ public enum EnumStoneboard
     Lighting("Lighting", 32, 16, 0, 0),
     Sociel("Sociel", 16, 16, 32, 0),
     Greatwar("Greatwar", 32, 32, 0, 16),
-    Killboss("Killboss", 32, 16, 0, 48),
+    clock("clock", 32, 16, 0, 48),
     Portol("Portol", 32, 32, 0, 64),
     Herobine("Herobine", 32, 32, 32, 32),
     FlatCreep("FlatCreep", 16, 16, 48, 0),
@@ -29,9 +29,9 @@ public enum EnumStoneboard
     Anubite2("Anubite2", 16, 16, 144, 32),
     Anubite3("Anubite3", 16, 16, 160, 32),
     Anubite4("Anubite4", 16, 16, 176, 32),
-    touchAnu("touchAnu", 32, 16, 128, 48);
-
-    public static final int maxArtTitleLength = "annoyangry".length();
+    sarcophagus_open("sarcophagus_open", 32, 32, 128, 48),
+    sarcophagus_kill("sarcophagus_kill", 32, 32, 96, 80),
+    deadAnu("deadAnu", 32, 32, 128, 80);
 
     public final String title;
     public final int sizeX;

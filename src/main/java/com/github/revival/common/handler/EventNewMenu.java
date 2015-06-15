@@ -14,12 +14,12 @@ public class EventNewMenu
 {
     public static final String[] titlePanoramaPaths = new String[]{"titlePanoramaPaths", "field_73978_o"};
     public static ResourceLocation[] panorama = new ResourceLocation[]{
-            new ResourceLocation("fossil:textures/gui/panorama/up.png"),//1
-            new ResourceLocation("fossil:textures/gui/panorama/down.png"),//2
-            new ResourceLocation("fossil:textures/gui/panorama/north.png"),//3
-            new ResourceLocation("fossil:textures/gui/panorama/east.png"),//4
-            new ResourceLocation("fossil:textures/gui/panorama/south.png"),//5
-            new ResourceLocation("fossil:textures/gui/panorama/west.png")};//6
+        new ResourceLocation("fossil:textures/gui/panorama/south.png"),	//0 - north
+        new ResourceLocation("fossil:textures/gui/panorama/west.png"),	//1 - west
+        new ResourceLocation("fossil:textures/gui/panorama/north.png"),	//2 - south
+        new ResourceLocation("fossil:textures/gui/panorama/east.png"),	//3 - east
+        new ResourceLocation("fossil:textures/gui/panorama/up.png"),	//4 - up
+        new ResourceLocation("fossil:textures/gui/panorama/down.png")};	//5 - down
 
     @SubscribeEvent
     public void openMainMenu(GuiOpenEvent event)
