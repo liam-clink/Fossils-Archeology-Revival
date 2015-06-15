@@ -28,6 +28,10 @@ Coldrake
 
 ###### Audio Artists  
 whitejoshman  
+nanoTyranno
+
+###### Builders
+Robberto
 
 ###### Language Contributors  
 Octo-Docto (Spanish)  
