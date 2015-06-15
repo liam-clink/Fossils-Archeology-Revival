@@ -27,7 +27,7 @@ interface C
     Velociraptor(EntityVelociraptor.class, C.TAME | C.CARNIVORE),
     TRex(EntityTRex.class, C.MODEL | C.TAME | C.RIDE | C.CARNIVORE),
     Pterosaur(EntityPterosaur.class, C.MODEL | C.TAME | C.CARNIVORE),
-    Nautilus(EntityNautilus.class, C.MODEL),
+    Nautilus(EntityNautilus.class, C.NOTHING),
     Plesiosaur(EntityPlesiosaur.class, C.MODEL | C.TAME | C.RIDE | C.CARNIVORE),
     Mosasaurus(EntityMosasaurus.class, C.MODEL | C.CARNIVORE),
     Stegosaurus(EntityStegosaurus.class, C.MODEL | C.TAME | C.HERBIVORE),

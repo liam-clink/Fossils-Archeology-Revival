@@ -171,6 +171,7 @@ public class Revival
             FossilOptions.CompsognathusFeathers = config.get("toggle_scales", "Compsognathus Scales", false).getBoolean(false);
             FossilOptions.VelociraptorFeathers = config.get("toggle_scales", "Velociraptor Scales", false).getBoolean(false);
             FossilOptions.TriceratopsQuills = config.get("toggle_quills", "Triceratops Quills", true).getBoolean(true);
+            FossilOptions.DilophosaurusFeathers = config.get("toggle_scales",  "Dilophosaurus Scales", false).getBoolean(false);
 
             FossilOptions.biomeIDDarknessLair = config.get("biome IDs", "Layer of Darkness ID:", 128).getInt();
             FossilOptions.biomeIDTreasure = config.get("biome IDs", "Treasure ID:", 127).getInt();

@@ -1,11 +1,13 @@
 package com.github.revival.common.entity.mob;
 
+import com.github.revival.Revival;
 import com.github.revival.client.gui.GuiPedia;
 import com.github.revival.common.entity.ai.*;
 import com.github.revival.common.enums.EnumDinoType;
 import com.github.revival.common.enums.EnumOrderType;
 import com.github.revival.common.enums.EnumSituation;
 import com.github.revival.common.handler.LocalizationStrings;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import io.netty.buffer.ByteBuf;
@@ -29,21 +31,12 @@ import java.util.Vector;
 public class EntityDilophosaurus extends EntityDinosaur
 {
     public static final double baseHealth = EnumDinoType.Dilophosaurus.Health0;
-
-    //public final float HuntLimit = (float)(this.getHungerLimit() * 4 / 5);
-    //private float field_25048_b;
-    //private float field_25054_c;//HAS something todo with look with interest
-    //private boolean field_25052_g;
-
-	/*private boolean isWolfShaking;
-    private float timeWolfIsShaking;//FIND OUT WHAT THIS IS FOR
-    private float prevTimeWolfIsShaking;*/
     public static final double baseDamage = EnumDinoType.Dilophosaurus.Strength0;
     public static final double baseSpeed = EnumDinoType.Dilophosaurus.Speed0;
     public static final double maxHealth = EnumDinoType.Dilophosaurus.HealthMax;
     public static final double maxDamage = EnumDinoType.Dilophosaurus.StrengthMax;
     public static final double maxSpeed = EnumDinoType.Dilophosaurus.SpeedMax;
-    //public ItemStack ItemInMouth = null;
+
     public int LearningChestTick = 900;
     public boolean PreyChecked = false;
     public boolean SupportChecked = false;
@@ -51,6 +44,7 @@ public class EntityDilophosaurus extends EntityDinosaur
     public float SwingAngle = -1000.0F;
     public int FleeingTick = 0;
     private boolean looksWithInterest;//IS THAT WORKING?
+    private final String texturePath;
 
     public EntityDilophosaurus(World var1)
     {
@@ -68,7 +62,10 @@ public class EntityDilophosaurus extends EntityDinosaur
         // Size of dinosaur at age Adult.
         this.maxSize = 2.0F;
 
-        //  texturePath = Revival.modid + ":textures/mob/" + String.valueOf(this.SelfType) + "/";
+    	if(!Revival.FossilOptions.DilophosaurusFeathers)
+            texturePath = Revival.modid + ":textures/mob/" + this.SelfType.toString() + "/feathered/" + "Feathered_";
+    	else
+    		texturePath = Revival.modid + ":textures/mob/" + this.SelfType.toString() + "/";
 
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(0, new EntityAISwimming(this));
@@ -115,38 +112,33 @@ public class EntityDilophosaurus extends EntityDinosaur
     /**
      * Returns the texture's file path as a String.
      */
-    @Override
-    public String getTexture()
-    {
-        if (this.isModelized())
-        {
-            return super.getTexture();
-        }
-        if (this.isAdult())
-        {
-            switch (this.getSubSpecies())
-            {
-                case 0:
-                default:
-                    return "fossil:textures/mob/Dilophosaurus/Dilophosaurus_Adult.png";
-                case 1:
-                    return "fossil:textures/mob/Dilophosaurus/Dilophosaurus_Adult_Orange.png";
-            }
-        }
-        else if (this.isChild())
-        {
-            switch (this.getSubSpecies())
-            {
-                case 0:
-                default:
-                    return "fossil:textures/mob/Dilophosaurus/Dilophosaurus_Baby.png";
-                case 1:
-                    return "fossil:textures/mob/Dilophosaurus/Dilophosaurus_Baby_Orange.png";
-            }
-        }
-        return "fossil:textures/mob/Dilophosaurus/Dilophosaurus_Baby.png";
+	@Override
+	public String getTexture()
+	{
+		if (this.isModelized())
+		{
+			return super.getTexture();
+		}
+		
+		if(this.isAdult())
+		{
+			switch (this.getSubSpecies())
+			{
+			case 0: default:
+				return texturePath + "Dilophosaurus_Adult.png";
+			case 1: 
+				return texturePath + "Dilophosaurus_Adult_Orange.png";
+			}	
+		}
 
-    }
+		switch (this.getSubSpecies())
+		{
+		case 0: default:
+			return texturePath + "Dilophosaurus_Baby.png";
+		case 1: 
+			return texturePath + "Dilophosaurus_Baby_Orange.png";
+		}	
+	}
 
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.

@@ -23,6 +23,7 @@ public class FossilOptions
     public static boolean GallimimusFeathers;
     public static boolean CompsognathusFeathers;
     public static boolean TriceratopsQuills;
+    public static boolean DilophosaurusFeathers;
     public static boolean AllowTableEnchantments;
     public static boolean AllowBookEnchantments;
     public static boolean AllowBreeding;
@@ -60,6 +61,7 @@ public class FossilOptions
         CompsognathusFeathers = config.get("toggle_scales", "Compsognathus Scales", false).getBoolean(false);
         VelociraptorFeathers = config.get("toggle_scales", "Velociraptor Scales", false).getBoolean(false);
         TriceratopsQuills = config.get("toggle_quills", "Triceratops Quills", true).getBoolean(true);
+        DilophosaurusFeathers = config.get("toggle_scales",  "Dilophosaurus Scales", false).getBoolean(false);
 
         DeveloperSpecials = config.get("option", "(Devs only)Allow Dev Specials", true).getBoolean(true);
         CustomMainMenu = config.get("option", "Custom Main Menu", true).getBoolean(true);
