@@ -1,6 +1,6 @@
 #[Fossil and Archeology Revival 1.7](http://www.minecraftforum.net/topic/1708636-)
 ***
-![Banner](http://i.imgur.com/qi6XOQZ.png)
+![Banner](http://i.imgur.com/7no8xtV.jpg)
 
 [Imgur album of current and past banners](http://imgur.com/a/hBe0h)
 
