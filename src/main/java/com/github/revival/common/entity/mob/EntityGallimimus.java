@@ -1,7 +1,6 @@
 package com.github.revival.common.entity.mob;
 
 import com.github.revival.Revival;
-import com.github.revival.client.model.mowzie.ChainBuffer;
 import com.github.revival.common.entity.ai.DinoAIEat;
 import com.github.revival.common.entity.ai.DinoAIFollowOwner;
 import com.github.revival.common.entity.ai.DinoAIRideGround;
@@ -29,7 +28,6 @@ public class EntityGallimimus extends EntityDinosaur
     public static final double maxSpeed = EnumDinoType.Gallimimus.SpeedMax;
     private final String texturePath;
     public boolean isTamed = false;
-    public ChainBuffer buffer = new ChainBuffer(3);
     public EntityGallimimus(World var1)
     {
         super(var1, EnumDinoType.Gallimimus);
