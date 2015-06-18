@@ -241,7 +241,7 @@ interface C
         Gallimimus.setItems(Items.stick);
         Gallimimus.setAges(4, 10, -1);
         Gallimimus.setDinoSize(sizeBaby, sizeTeen, sizeAdult);
-        Gallimimus.setProperties(4.0D, 20.0D, 2.0D, 6.0D, 0.3D, 0.65D, 300);
+        Gallimimus.setProperties(4.0D, 20.0D, 2.0D, 6.0D, 0.25D, 0.4D, 300);
         Gallimimus.setExperience(0.7F, 0.7F);
         //Blocks
         Gallimimus.FoodBlockList.addblock(EnumDinoFoodBlock.Ferns);

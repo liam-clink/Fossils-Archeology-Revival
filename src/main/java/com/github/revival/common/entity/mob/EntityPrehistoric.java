@@ -22,7 +22,7 @@ public class EntityPrehistoric extends EntityTameable
 {
 
     public static final int OWNER_DISPLAY_NAME_INDEX = 24;
-
+    public float animation_frame;
     protected static final ResourceLocation pediaclock = new ResourceLocation("fossil:textures/gui/PediaClock.png");
     protected static final ResourceLocation pediafood = new ResourceLocation("fossil:textures/gui/PediaFood.png");
     protected static final ResourceLocation pediaheart = new ResourceLocation("fossil:textures/gui/PediaHeart.png");
@@ -187,7 +187,10 @@ public class EntityPrehistoric extends EntityTameable
         // TODO Auto-generated method stub
 
     }
-
+    public void onUpdate(){
+    	super.onUpdate();
+    	animation_frame++;
+    }
 
     public String getOwnerDisplayName()
     {

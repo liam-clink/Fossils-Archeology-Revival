@@ -2,11 +2,14 @@ package com.github.revival.client.renderer.entity;
 
 import com.github.revival.common.entity.EntityAncientJavelin;
 import com.github.revival.common.entity.EntityJavelin;
+
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
+import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
@@ -14,29 +17,24 @@ public class RenderJavelin extends Render
 {
     public void renderJavelin(EntityJavelin var1, double var2, double var4, double var6, float var8, float var9)
     {
-        switch (var1.SelfMaterial.ordinal())
-        {
-            case 1:
-                this.renderManager.renderEngine.bindTexture(new ResourceLocation("fossil:textures/StoneJavelin.png"));
-                break;
-
-            case 2:
-                this.renderManager.renderEngine.bindTexture(new ResourceLocation("fossil:textures/IronJavelin.png"));
-                break;
-
-            case 4:
-                this.renderManager.renderEngine.bindTexture(new ResourceLocation("fossil:textures/GoldJavelin.png"));
-                break;
-
-            case 3:
-                this.renderManager.renderEngine.bindTexture(new ResourceLocation("fossil:textures/DiamondJavelin.png"));
-                break;
-
-            case 0:
-            default:
-                this.renderManager.renderEngine.bindTexture(new ResourceLocation("fossil:textures/WoodenJavelin.png"));
-        }
-
+    	if(var1.SelfMaterial == ToolMaterial.WOOD){
+            this.renderManager.renderEngine.bindTexture(new ResourceLocation("fossil:textures/WoodenJavelin.png"));
+    	}
+    	else if(var1.SelfMaterial == ToolMaterial.STONE){
+            this.renderManager.renderEngine.bindTexture(new ResourceLocation("fossil:textures/StoneJavelin.png"));
+    	}
+    	else if(var1.SelfMaterial == ToolMaterial.IRON){
+            this.renderManager.renderEngine.bindTexture(new ResourceLocation("fossil:textures/IronJavelin.png"));
+    	}
+    	else if(var1.SelfMaterial == ToolMaterial.GOLD){
+            this.renderManager.renderEngine.bindTexture(new ResourceLocation("fossil:textures/GoldJavelin.png"));
+    	}
+    	else if(var1.SelfMaterial == ToolMaterial.EMERALD){
+            this.renderManager.renderEngine.bindTexture(new ResourceLocation("fossil:textures/DiamondJavelin.png"));
+    	}else{
+            this.renderManager.renderEngine.bindTexture(new ResourceLocation("fossil:textures/WoodenJavelin.png"));
+    	}
+       
         if (var1 instanceof EntityAncientJavelin)
         {
             this.renderManager.renderEngine.bindTexture(new ResourceLocation("fossil:textures/AncientJavelin.png"));

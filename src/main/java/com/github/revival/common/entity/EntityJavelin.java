@@ -113,7 +113,6 @@ public class EntityJavelin extends EntityArrow implements IEntityAdditionalSpawn
                 if (this.ticksInGround == 1200 || this.damaged < 0)
                 {
                     this.worldObj.playSoundEffect(this.posX, this.posY, this.posZ, "random.break", 0.5F, 1.0F);
-                    this.setDead();
                 }
             }
             else
@@ -253,7 +252,6 @@ public class EntityJavelin extends EntityArrow implements IEntityAdditionalSpawn
 
                         if (!(movingobjectposition.entityHit instanceof EntityEnderman))
                         {
-                            this.setDead();
                         }
                     }
                     else
