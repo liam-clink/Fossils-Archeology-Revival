@@ -180,7 +180,7 @@ public class TileEntityCultivate extends TileEntity implements IInventory,
 
         for (int var3 = 0; var3 < var2.tagCount(); ++var3)
         {
-            NBTTagCompound var4 = (NBTTagCompound) var2.getCompoundTagAt(var3);
+            NBTTagCompound var4 = var2.getCompoundTagAt(var3);
             byte var5 = var4.getByte("Slot");
 
             if (var5 >= 0 && var5 < this.cultivateItemStacks.length)
@@ -192,8 +192,8 @@ public class TileEntityCultivate extends TileEntity implements IInventory,
 
         this.furnaceBurnTime = var1.getShort("BurnTime");
         this.furnaceCookTime = var1.getShort("CookTime");
-        this.currentItemBurnTime = this
-                .getItemBurnTime(this.cultivateItemStacks[1]);
+        this.currentItemBurnTime =
+                getItemBurnTime(this.cultivateItemStacks[1]);
 
         if (var1.hasKey("CustomName"))
         {
@@ -271,7 +271,7 @@ public class TileEntityCultivate extends TileEntity implements IInventory,
         boolean var2 = false;
         int cookValue;
 
-        if (Revival.DebugMode())
+        if (Revival.enableDebugging())
         {
             cookValue = 300;
         }
@@ -280,14 +280,7 @@ public class TileEntityCultivate extends TileEntity implements IInventory,
 
             cookValue = 6000;
         }
-        if (this.furnaceCookTime > 0)
-        {
-            isActive = true;
-        }
-        else
-        {
-            isActive = false;
-        }
+        isActive = this.furnaceCookTime > 0;
 
         if (this.furnaceBurnTime > 0)
         {
@@ -298,8 +291,7 @@ public class TileEntityCultivate extends TileEntity implements IInventory,
         {
             if (this.furnaceBurnTime == 0 && this.canSmelt())
             {
-                this.currentItemBurnTime = this.furnaceBurnTime = this
-                        .getItemBurnTime(this.cultivateItemStacks[1]);
+                this.currentItemBurnTime = this.furnaceBurnTime = getItemBurnTime(this.cultivateItemStacks[1]);
 
                 if (this.furnaceBurnTime > 0)
                 {
@@ -308,7 +300,7 @@ public class TileEntityCultivate extends TileEntity implements IInventory,
                     if (this.cultivateItemStacks[1] != null)
                     {
                         if (this.cultivateItemStacks[1].getItem()
-                                .hasContainerItem())
+                                .hasContainerItem(null))
                         {
                             this.cultivateItemStacks[1] = new ItemStack(
                                     this.cultivateItemStacks[1].getItem()
@@ -392,14 +384,17 @@ public class TileEntityCultivate extends TileEntity implements IInventory,
 
             if (this.cultivateItemStacks[2] == null)
             {
-                this.cultivateItemStacks[2] = var1.copy();
+                if (var1 != null)
+                {
+                    this.cultivateItemStacks[2] = var1.copy();
+                }
             }
             else if (this.cultivateItemStacks[2] == var1)
             {
                 this.cultivateItemStacks[2].stackSize += var1.stackSize;
             }
 
-            if (this.cultivateItemStacks[0].getItem().hasContainerItem())
+            if (this.cultivateItemStacks[0].getItem().hasContainerItem(null))
             {
                 this.cultivateItemStacks[0] = new ItemStack(
                         this.cultivateItemStacks[0].getItem()
@@ -423,10 +418,7 @@ public class TileEntityCultivate extends TileEntity implements IInventory,
      */
     public boolean isUseableByPlayer(EntityPlayer var1)
     {
-        return this.worldObj.getTileEntity(this.xCoord, this.yCoord,
-                this.zCoord) != this ? false : var1.getDistanceSq(
-                (double) this.xCoord + 0.5D, (double) this.yCoord + 0.5D,
-                (double) this.zCoord + 0.5D) <= 64.0D;
+        return this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord) == this && var1.getDistanceSq((double) this.xCoord + 0.5D, (double) this.yCoord + 0.5D, (double) this.zCoord + 0.5D) <= 64.0D;
     }
 
     private ItemStack CheckSmelt(int var1)

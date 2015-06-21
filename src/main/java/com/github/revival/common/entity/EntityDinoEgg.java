@@ -99,7 +99,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
 
     private void setPedia()
     {
-        Revival.ToPedia = (Object) this;
+        Revival.toPedia = (Object) this;
     }
 
     /**
@@ -113,7 +113,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
 
     protected void entityInit()
     {
-        if (Revival.DebugMode())
+        if (Revival.enableDebugging())
         {
             this.HatchTime = 100;
         }

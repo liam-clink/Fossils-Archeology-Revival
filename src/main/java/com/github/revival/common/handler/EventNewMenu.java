@@ -1,5 +1,6 @@
 package com.github.revival.common.handler;
 
+import com.github.revival.common.config.FossilConfig;
 import cpw.mods.fml.common.ObfuscationReflectionHelper;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.ReflectionHelper;
@@ -24,7 +25,7 @@ public class EventNewMenu
     @SubscribeEvent
     public void openMainMenu(GuiOpenEvent event)
     {
-        if (event.gui instanceof GuiMainMenu && FossilOptions.CustomMainMenu)
+        if (event.gui instanceof GuiMainMenu && FossilConfig.customMainMenu)
         {
             GuiMainMenu mainMenu = (GuiMainMenu) event.gui;
             Field field = ReflectionHelper.findField(GuiMainMenu.class, ObfuscationReflectionHelper.remapFieldNames(GuiMainMenu.class.getName(), titlePanoramaPaths));

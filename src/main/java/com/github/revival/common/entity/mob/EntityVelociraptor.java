@@ -2,6 +2,7 @@ package com.github.revival.common.entity.mob;
 
 import com.github.revival.Revival;
 import com.github.revival.client.gui.GuiPedia;
+import com.github.revival.common.config.FossilConfig;
 import com.github.revival.common.entity.ai.*;
 import com.github.revival.common.enums.EnumDinoType;
 import com.github.revival.common.handler.LocalizationStrings;
@@ -57,7 +58,7 @@ public class EntityVelociraptor extends EntityDinosaur
         // Size of dinosaur at age Adult.
         this.maxSize = 0.8F;
         
-        if (!Revival.FossilOptions.VelociraptorFeathers)
+        if (!FossilConfig.featheredVelociraptor)
             texturePath = Revival.modid + ":textures/mob/" + this.SelfType.toString() + "/feathered/" + "Feathered_";
         else
             texturePath = Revival.modid + ":textures/mob/" + this.SelfType.toString() + "/";

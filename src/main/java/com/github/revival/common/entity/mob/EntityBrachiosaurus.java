@@ -126,7 +126,7 @@ public class EntityBrachiosaurus extends EntityDinosaur
 	/*
 	 * public void onUpdate() { super.onUpdate(); if ((this.isTeen() ||
 	 * this.isAdult()) && !this.isModelized() &&
-	 * Revival.FossilOptions.Dino_Block_Breaking == true && this.riddenByEntity
+	 * Revival.fossilOptions.dinoBlockBreaking == true && this.riddenByEntity
 	 * == null )//this.getDinoAge() >= 4) { this.BlockInteractive(); } }
 	 */
     public float getEyeHeight()

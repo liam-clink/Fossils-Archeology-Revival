@@ -90,7 +90,7 @@ public class EntityPregnantCow implements IViviparous, IExtendedEntityProperties
 
     public void setPedia()
     {
-        Revival.ToPedia = (Object) this;
+        Revival.toPedia = (Object) this;
     }
 
     @Override

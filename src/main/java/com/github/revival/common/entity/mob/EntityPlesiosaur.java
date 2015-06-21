@@ -1,6 +1,6 @@
 package com.github.revival.common.entity.mob;
 
-import com.github.revival.Revival;
+import com.github.revival.common.config.FossilConfig;
 import com.github.revival.common.entity.ai.*;
 import com.github.revival.common.enums.EnumDinoType;
 import com.github.revival.common.enums.EnumOrderType;
@@ -583,7 +583,7 @@ public class EntityPlesiosaur extends EntitySwimmingDino
             this.increaseHunger(100);
         }
 
-        if (Revival.FossilOptions.Heal_Dinos)
+        if (FossilConfig.healingDinos)
         {
             this.heal(5);
         }

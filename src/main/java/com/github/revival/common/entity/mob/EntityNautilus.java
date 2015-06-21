@@ -158,7 +158,7 @@ public class EntityNautilus extends EntityWaterMob
     
     private void setPedia()
     {
-        Revival.ToPedia = (Object) this;
+        Revival.toPedia = (Object) this;
     }
 
     /**

@@ -245,127 +245,127 @@ public class GuiPedia extends GuiContainer
 
         if (BookPages == 0)
         {
-            if (Revival.ToPedia instanceof EntityDinosaur)
+            if (Revival.toPedia instanceof EntityDinosaur)
             {
-                ((EntityDinosaur) Revival.ToPedia).ShowPedia(this);
+                ((EntityDinosaur) Revival.toPedia).ShowPedia(this);
             }
 
-            if (Revival.ToPedia instanceof EntityDinoEgg)
+            if (Revival.toPedia instanceof EntityDinoEgg)
             {
-                ((EntityDinoEgg) Revival.ToPedia).ShowPedia(this);
+                ((EntityDinoEgg) Revival.toPedia).ShowPedia(this);
             }
 
-            if (Revival.ToPedia instanceof EntityPregnantCow)
+            if (Revival.toPedia instanceof EntityPregnantCow)
             {
-                ((EntityPregnantCow) Revival.ToPedia).ShowPedia(this);
+                ((EntityPregnantCow) Revival.toPedia).ShowPedia(this);
             }
 
-            if (Revival.ToPedia instanceof EntityPregnantPig)
+            if (Revival.toPedia instanceof EntityPregnantPig)
             {
-                ((EntityPregnantPig) Revival.ToPedia).ShowPedia(this);
+                ((EntityPregnantPig) Revival.toPedia).ShowPedia(this);
             }
 
-            if (Revival.ToPedia instanceof EntityPregnantHorse)
+            if (Revival.toPedia instanceof EntityPregnantHorse)
             {
-                ((EntityPregnantHorse) Revival.ToPedia).ShowPedia(this);
+                ((EntityPregnantHorse) Revival.toPedia).ShowPedia(this);
             }
 
-            if (Revival.ToPedia instanceof EntityPregnantSheep)
+            if (Revival.toPedia instanceof EntityPregnantSheep)
             {
-                ((EntityPregnantSheep) Revival.ToPedia).ShowPedia(this);
+                ((EntityPregnantSheep) Revival.toPedia).ShowPedia(this);
             }
 
-            if (Revival.ToPedia instanceof EntityMammoth)
+            if (Revival.toPedia instanceof EntityMammoth)
             {
-                ((EntityMammoth) Revival.ToPedia).ShowPedia(this);
+                ((EntityMammoth) Revival.toPedia).ShowPedia(this);
             }
 
-            if (Revival.ToPedia instanceof EntityElasmotherium)
+            if (Revival.toPedia instanceof EntityElasmotherium)
             {
-                ((EntityElasmotherium) Revival.ToPedia).ShowPedia(this);
+                ((EntityElasmotherium) Revival.toPedia).ShowPedia(this);
             }
 
-            if (Revival.ToPedia instanceof EntitySmilodon)
+            if (Revival.toPedia instanceof EntitySmilodon)
             {
-                ((EntitySmilodon) Revival.ToPedia).ShowPedia(this);
+                ((EntitySmilodon) Revival.toPedia).ShowPedia(this);
             }
 
-            if (Revival.ToPedia instanceof EntityDodo)
+            if (Revival.toPedia instanceof EntityDodo)
             {
-                ((EntityDodo) Revival.ToPedia).ShowPedia(this);
+                ((EntityDodo) Revival.toPedia).ShowPedia(this);
             }
-            if (Revival.ToPedia instanceof EntityConfuciusornis)
+            if (Revival.toPedia instanceof EntityConfuciusornis)
             {
-                ((EntityConfuciusornis) Revival.ToPedia).ShowPedia(this);
+                ((EntityConfuciusornis) Revival.toPedia).ShowPedia(this);
             }
-            if (Revival.ToPedia instanceof EntityCoelacanth)
+            if (Revival.toPedia instanceof EntityCoelacanth)
             {
-                ((EntityCoelacanth) Revival.ToPedia).ShowPedia(this);
-            }
-
-            if (Revival.ToPedia instanceof EntityNautilus)
-            {
-                ((EntityNautilus) Revival.ToPedia).ShowPedia(this);
+                ((EntityCoelacanth) Revival.toPedia).ShowPedia(this);
             }
 
-            if (Revival.ToPedia instanceof EntityQuagga)
+            if (Revival.toPedia instanceof EntityNautilus)
             {
-                ((EntityQuagga) Revival.ToPedia).ShowPedia(this);
+                ((EntityNautilus) Revival.toPedia).ShowPedia(this);
             }
 
-            if (Revival.ToPedia instanceof EntityTerrorBird)
+            if (Revival.toPedia instanceof EntityQuagga)
             {
-                ((EntityTerrorBird) Revival.ToPedia).ShowPedia(this);
+                ((EntityQuagga) Revival.toPedia).ShowPedia(this);
+            }
+
+            if (Revival.toPedia instanceof EntityTerrorBird)
+            {
+                ((EntityTerrorBird) Revival.toPedia).ShowPedia(this);
             }
         }
         else
         {
-            if (Revival.ToPedia instanceof EntityDinosaur)
+            if (Revival.toPedia instanceof EntityDinosaur)
             {
-                ((EntityDinosaur) Revival.ToPedia).ShowPedia2(this);
+                ((EntityDinosaur) Revival.toPedia).ShowPedia2(this);
             }
 
-            if (Revival.ToPedia instanceof EntityElasmotherium)
+            if (Revival.toPedia instanceof EntityElasmotherium)
             {
-                ((EntityElasmotherium) Revival.ToPedia).ShowPedia2(this);
+                ((EntityElasmotherium) Revival.toPedia).ShowPedia2(this);
             }
 
-            if (Revival.ToPedia instanceof EntityMammoth)
+            if (Revival.toPedia instanceof EntityMammoth)
             {
-                ((EntityMammoth) Revival.ToPedia).ShowPedia2(this);
+                ((EntityMammoth) Revival.toPedia).ShowPedia2(this);
             }
 
-            if (Revival.ToPedia instanceof EntitySmilodon)
+            if (Revival.toPedia instanceof EntitySmilodon)
             {
-                ((EntitySmilodon) Revival.ToPedia).ShowPedia2(this);
+                ((EntitySmilodon) Revival.toPedia).ShowPedia2(this);
             }
 
-            if (Revival.ToPedia instanceof EntityDodo)
+            if (Revival.toPedia instanceof EntityDodo)
             {
-                ((EntityDodo) Revival.ToPedia).ShowPedia2(this);
+                ((EntityDodo) Revival.toPedia).ShowPedia2(this);
             }
-            if (Revival.ToPedia instanceof EntityConfuciusornis)
+            if (Revival.toPedia instanceof EntityConfuciusornis)
             {
-                ((EntityConfuciusornis) Revival.ToPedia).ShowPedia2(this);
+                ((EntityConfuciusornis) Revival.toPedia).ShowPedia2(this);
             }
-            if (Revival.ToPedia instanceof EntityCoelacanth)
+            if (Revival.toPedia instanceof EntityCoelacanth)
             {
-                ((EntityCoelacanth) Revival.ToPedia).ShowPedia2(this);
-            }
-
-            if (Revival.ToPedia instanceof EntityNautilus)
-            {
-                ((EntityNautilus) Revival.ToPedia).ShowPedia2(this);
+                ((EntityCoelacanth) Revival.toPedia).ShowPedia2(this);
             }
 
-            if (Revival.ToPedia instanceof EntityQuagga)
+            if (Revival.toPedia instanceof EntityNautilus)
             {
-                ((EntityQuagga) Revival.ToPedia).ShowPedia2(this);
+                ((EntityNautilus) Revival.toPedia).ShowPedia2(this);
             }
 
-            if (Revival.ToPedia instanceof EntityTerrorBird)
+            if (Revival.toPedia instanceof EntityQuagga)
             {
-                ((EntityTerrorBird) Revival.ToPedia).ShowPedia2(this);
+                ((EntityQuagga) Revival.toPedia).ShowPedia2(this);
+            }
+
+            if (Revival.toPedia instanceof EntityTerrorBird)
+            {
+                ((EntityTerrorBird) Revival.toPedia).ShowPedia2(this);
             }
         }
     }

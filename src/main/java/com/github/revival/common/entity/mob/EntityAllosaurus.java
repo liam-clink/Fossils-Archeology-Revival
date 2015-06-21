@@ -412,7 +412,7 @@ public class EntityAllosaurus extends EntityDinosaur
                 return false;
             }
 
-            if (!Revival.DebugMode())
+            if (!Revival.enableDebugging())
             {
                 if (itemStack.getItem() == FAItemRegistry.chickenEss)
                 {

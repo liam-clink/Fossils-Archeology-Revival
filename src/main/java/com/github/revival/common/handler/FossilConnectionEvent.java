@@ -1,6 +1,7 @@
 package com.github.revival.common.handler;
 
 import com.github.revival.Revival;
+import com.github.revival.common.config.FossilConfig;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,7 +14,7 @@ public class FossilConnectionEvent
     {
         EntityPlayer player = event.player;
 
-        if (Revival.DebugMode())
+        if (Revival.enableDebugging())
         {
             Revival.ShowMessage("------- DEBUG MODE IS ON. TURN OFF BEFORE RELEASING! --------", player);
         }
@@ -22,7 +23,7 @@ public class FossilConnectionEvent
         {
             case DEV:
 
-                if (Revival.FossilOptions.LoginMessage)
+                if (FossilConfig.loginMessage)
                 {
                     Revival.ShowMessage("You are running F/A:Revival Dev Build, ${version}.", player);
                     Revival.ShowMessage("Github: https://github.com/FossilsArcheologyRevival/FossilArcheology1.7", player);
@@ -30,7 +31,7 @@ public class FossilConnectionEvent
                 return;
 
             case BETA:
-                if (Revival.FossilOptions.LoginMessage)
+                if (FossilConfig.loginMessage)
                 {
                     Revival.ShowMessage("You are running Fossils and Archaeology Revival ${version}.", player);
                     Revival.ShowMessage("This mod is currently in a BETA state. Be sure to backup worlds.", player);
@@ -43,7 +44,7 @@ public class FossilConnectionEvent
                 return;
 
             case RELEASE:
-                if (Revival.FossilOptions.LoginMessage)
+                if (FossilConfig.loginMessage)
                 {
                     Revival.ShowMessage("You are running Fossils and Archaeology Revival ${version}.", player);
                     Revival.ShowMessage("Forum and support: http://www.minecraftforum.net/topic/1708636-", player);

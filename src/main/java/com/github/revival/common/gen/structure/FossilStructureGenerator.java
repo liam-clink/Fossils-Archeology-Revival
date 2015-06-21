@@ -1,19 +1,19 @@
 package com.github.revival.common.gen.structure;
 
 import com.github.revival.common.block.FABlockRegistry;
+import com.github.revival.common.config.FossilConfig;
 import com.github.revival.common.enums.EnumDinoType;
 import com.github.revival.common.gen.structure.academy.*;
 import com.github.revival.common.gen.structure.temple.Temple1;
 import com.github.revival.common.gen.structure.temple.Temple2;
 import com.github.revival.common.gen.structure.temple.Temple3;
 import com.github.revival.common.gen.structure.temple.TempleUtil;
-import com.github.revival.common.handler.FossilOptions;
 import com.github.revival.common.item.FAItemRegistry;
 import com.github.revival.common.tileentity.TileEntityFigurine;
 import com.github.revival.common.tileentity.TileEntityVase;
-import coolalias.structuregenapi.util.LogHelper;
-import coolalias.structuregenapi.util.Structure;
-import coolalias.structuregenapi.util.StructureGeneratorBase;
+import com.google.common.collect.Lists;
+import net.ilexiconn.llibrary.common.structure.util.Structure;
+import net.ilexiconn.llibrary.common.structure.util.StructureGeneratorBase;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntityVillager;
@@ -25,9 +25,7 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeDictionary;
-import org.apache.logging.log4j.Level;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
@@ -36,7 +34,7 @@ public class FossilStructureGenerator extends StructureGeneratorBase
     /**
      * List storing all structures currently available
      */
-    public static final List<Structure> structures = new LinkedList();
+    public static final List<Structure> structures = Lists.newArrayList();
 
     /**
      * Add all structures to the Structure List
@@ -44,7 +42,7 @@ public class FossilStructureGenerator extends StructureGeneratorBase
     static
     {
         Structure structure = new Structure("Academy");
-        if (FossilOptions.Gen_Academy)
+        if (FossilConfig.generateAcademy)
         {
             structure.addBlockArray(Academy1.blockArrayAcademy);
             structure.addBlockArray(Academy2.blockArrayAcademy);
@@ -57,7 +55,7 @@ public class FossilStructureGenerator extends StructureGeneratorBase
         }
 
         structure = new Structure("Temple");
-        if (FossilOptions.Gen_Temple)
+        if (FossilConfig.generateTemple)
         {
             structure.addBlockArray(Temple1.blockArrayTemple);
             structure.addBlockArray(Temple2.blockArrayTemple);
@@ -101,28 +99,7 @@ public class FossilStructureGenerator extends StructureGeneratorBase
     }
 
     int random_hole;
-    // a better way would be to pass World in to the constructors and set the
-    // random_hole
-    // value there, but I'm feeling lazy
     boolean value_set = false;
-    int block_change;
-
-    public FossilStructureGenerator(Entity entity, int[][][][] blocks)
-    {
-        super(entity, blocks);
-    }
-
-    public FossilStructureGenerator(Entity entity, int[][][][] blocks,
-                                    int structureFacing)
-    {
-        super(entity, blocks, structureFacing);
-    }
-
-    public FossilStructureGenerator(Entity entity, int[][][][] blocks,
-                                    int structureFacing, int offX, int offY, int offZ)
-    {
-        super(entity, blocks, structureFacing, offX, offY, offZ);
-    }
 
     public FossilStructureGenerator()
     {
@@ -142,8 +119,6 @@ public class FossilStructureGenerator extends StructureGeneratorBase
     @Override
     public int getRealBlockID(int fakeID, int customData1)
     {
-        LogHelper.log(Level.TRACE, "Getting real id from fake id: " + fakeID);
-
         switch (fakeID)
         {
             case AcademyUtil.CUSTOM_CHEST:
@@ -198,16 +173,6 @@ public class FossilStructureGenerator extends StructureGeneratorBase
         }
     }
 
-    private EnumDinoType getDinosaur()
-    {
-        EnumDinoType[] var1 = EnumDinoType.values();
-        int var2 = var1.length;
-        Random var4 = new Random();
-        EnumDinoType enumDinosaur;
-        enumDinosaur = var1[var4.nextInt(var2)];
-        return enumDinosaur;
-    }
-
     /**
      * A custom 'hook' to allow setting of tile entities, spawning entities,
      * etc.
@@ -216,7 +181,6 @@ public class FossilStructureGenerator extends StructureGeneratorBase
      * @param customData1 Custom data used to subtype events for given fakeID
      * @param customData2 Additional custom data
      */
-    @Override
     public void onCustomBlockAdded(World world, int x, int y, int z,
                                    int fakeID, int customData1, int customData2)
     {
@@ -230,17 +194,10 @@ public class FossilStructureGenerator extends StructureGeneratorBase
             value_set = true;
         }
 
-        int meta = world.getBlockMetadata(x, y, z);
-        LogHelper.log(Level.TRACE, "Setting custom block info for fake id "
-                + fakeID + " and customData1 " + customData1);
-        LogHelper
-                .log(Level.TRACE, "Custom block metadata from world = " + meta);
-
         switch (fakeID)
         {
             case AcademyUtil.CUSTOM_CHEST:
                 Random rand = new Random();
-                ItemStack book = new ItemStack(Items.enchanted_book);
 
                 // Using the pre-made method addItemToTileInventory adds items to
                 // the first slot available
@@ -252,10 +209,7 @@ public class FossilStructureGenerator extends StructureGeneratorBase
                     {
                         int i = (new Random())
                                 .nextInt(EnumDinoType.values().length + 1); // +1
-                        // for
-                        // the
-                        // sapling
-                        Item i0 = null;
+                        Item i0;
 
                         if (i == 0)
                         {
@@ -335,10 +289,7 @@ public class FossilStructureGenerator extends StructureGeneratorBase
                 {
                     for (int iterate = 0; iterate < rand.nextInt(1) + 3; iterate++)
                     {
-                        int i = (new Random()).nextInt(10); // +1 for the sapling
-                        Item i0 = null;
-                        Item i2 = null;
-                        ItemStack i1 = null;
+                        int i = (new Random()).nextInt(10);
 
                         if (i < 3)
                             addItemToTileInventory(world, new ItemStack(
@@ -732,7 +683,7 @@ public class FossilStructureGenerator extends StructureGeneratorBase
                         || BiomeDictionary.isBiomeOfType(biome,
                         BiomeDictionary.Type.HILLS)
                         || BiomeDictionary.isBiomeOfType(biome,
-                        BiomeDictionary.Type.FROZEN)
+                        BiomeDictionary.Type.SNOWY)
                         || BiomeDictionary.isBiomeOfType(biome,
                         BiomeDictionary.Type.WATER)
                         || BiomeDictionary.isBiomeOfType(biome,
@@ -758,7 +709,7 @@ public class FossilStructureGenerator extends StructureGeneratorBase
                 else if (BiomeDictionary.isBiomeOfType(biome,
                         BiomeDictionary.Type.BEACH)
                         || BiomeDictionary.isBiomeOfType(biome,
-                        BiomeDictionary.Type.DESERT))
+                        BiomeDictionary.Type.SANDY))
                 {
                     switch (customData1)
                     {
@@ -828,8 +779,7 @@ public class FossilStructureGenerator extends StructureGeneratorBase
                 break;
 
             default:
-                LogHelper.log(Level.WARN, "No custom method defined for id "
-                        + fakeID);
+                break;
         }
     }
 }

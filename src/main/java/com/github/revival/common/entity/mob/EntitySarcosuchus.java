@@ -238,7 +238,7 @@ public class EntitySarcosuchus extends EntitySwimmingDino
                 }
             }
 
-            if (!Revival.DebugMode())
+            if (!Revival.enableDebugging())
             {
                 if (itemStack.getItem() == FAItemRegistry.chickenEss)
                 {

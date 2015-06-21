@@ -2,9 +2,9 @@ package com.github.revival.common.entity.mob;
 
 import com.github.revival.Revival;
 import com.github.revival.common.block.FABlockRegistry;
+import com.github.revival.common.config.FossilConfig;
 import com.github.revival.common.entity.ai.*;
 import com.github.revival.common.enums.EnumDinoType;
-import com.github.revival.common.handler.FossilOptions;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -47,7 +47,7 @@ public class EntityTriceratops extends EntityDinosaur
         this.minSize = 1.0F;
         // Size of dinosaur at age Adult.
         this.maxSize = 8.0F;
-        if (FossilOptions.TriceratopsQuills)
+        if (FossilConfig.quilledTriceratops)
         {
             texturePath = Revival.modid + ":textures/mob/" + this.SelfType.toString() + "/quilled/";
         }

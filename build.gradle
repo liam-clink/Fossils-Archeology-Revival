@@ -27,6 +27,18 @@ minecraft {
     replace '${version}', project.version
 }
 
+repositories {
+    mavenCentral()
+    maven {
+        name = "ilexiconn"
+        url = "http://maven.ilexiconn.net/"
+    }
+}
+
+dependencies {
+    compile 'net.ilexiconn.llibrary:LLibrary:0.3.0-1.7.10:dev'
+}
+
 processResources {
     inputs.property "version", project.version
     inputs.property "mcversion", project.minecraft.version

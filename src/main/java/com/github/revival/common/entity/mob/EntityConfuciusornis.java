@@ -121,7 +121,7 @@ public class EntityConfuciusornis extends EntityAnimal
 
     private void setPedia()
     {
-        Revival.ToPedia = (Object) this;
+        Revival.toPedia = (Object) this;
     }
 
     @Override

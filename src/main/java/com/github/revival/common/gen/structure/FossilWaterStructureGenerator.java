@@ -1,16 +1,15 @@
 package com.github.revival.common.gen.structure;
 
 import com.github.revival.common.block.FABlockRegistry;
+import com.github.revival.common.config.FossilConfig;
 import com.github.revival.common.enums.EnumDinoType;
 import com.github.revival.common.gen.structure.shipwreck.ShipWreck1;
 import com.github.revival.common.gen.structure.shipwreck.ShipWreck2;
 import com.github.revival.common.gen.structure.shipwreck.ShipWreck3;
 import com.github.revival.common.gen.structure.shipwreck.ShipWreckUtil;
-import com.github.revival.common.handler.FossilOptions;
 import com.github.revival.common.item.FAItemRegistry;
-import coolalias.structuregenapi.util.LogHelper;
-import coolalias.structuregenapi.util.Structure;
-import coolalias.structuregenapi.util.StructureGeneratorBase;
+import net.ilexiconn.llibrary.common.structure.util.Structure;
+import net.ilexiconn.llibrary.common.structure.util.StructureGeneratorBase;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntityVillager;
@@ -20,7 +19,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
-import org.apache.logging.log4j.Level;
 
 import java.util.LinkedList;
 import java.util.Random;
@@ -38,7 +36,7 @@ public class FossilWaterStructureGenerator extends StructureGeneratorBase
     static
     {
         Structure structure = new Structure("ShipWreck");
-        if (FossilOptions.Gen_Ships)
+        if (FossilConfig.generateShips)
         {
             structure.addBlockArray(ShipWreck1.blockArrayShipWreck1);
             structure.addBlockArray(ShipWreck2.blockArrayShipWreck2);
@@ -125,8 +123,6 @@ public class FossilWaterStructureGenerator extends StructureGeneratorBase
     @Override
     public int getRealBlockID(int fakeID, int customData1)
     {
-        LogHelper.log(Level.TRACE, "Getting real id from fake id: " + fakeID);
-
         switch (fakeID)
         {
             case ShipWreckUtil.CUSTOM_CHEST:
@@ -205,10 +201,6 @@ public class FossilWaterStructureGenerator extends StructureGeneratorBase
         }
 
         int meta = world.getBlockMetadata(x, y, z);
-        LogHelper.log(Level.TRACE, "Setting custom block info for fake id "
-                + fakeID + " and customData1 " + customData1);
-        LogHelper
-                .log(Level.TRACE, "Custom block metadata from world = " + meta);
 
         switch (fakeID)
         {
@@ -438,8 +430,7 @@ public class FossilWaterStructureGenerator extends StructureGeneratorBase
                 break;
 
             default:
-                LogHelper.log(Level.WARN, "No custom method defined for id "
-                        + fakeID);
+                break;
         }
     }
 }

@@ -2,6 +2,7 @@ package com.github.revival.common.dimension.anu;
 
 
 import com.github.revival.Revival;
+import com.github.revival.common.config.FossilConfig;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -10,20 +11,13 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.biome.WorldChunkManagerHell;
 import net.minecraft.world.chunk.IChunkProvider;
-import net.minecraftforge.common.DimensionManager;
 
 public class WorldProviderAnu extends WorldProvider
 {
-
-    public static WorldProvider getProviderForDimension(int id)
-    {
-        return DimensionManager.createProviderFor(Revival.dimensionID_anu);
-    }
-
     public void registerWorldChunkManager()
     {
         this.worldChunkMgr = new WorldChunkManagerHell(Revival.anuBiome, 0);
-        this.dimensionId = Revival.dimensionID_anu;
+        this.dimensionId = FossilConfig.dimIdDarknessLair;
         this.hasNoSky = true;
         this.isHellWorld = true;
 
@@ -71,11 +65,6 @@ public class WorldProviderAnu extends WorldProvider
     public float[] calcSunriseSunsetColors(float p_76560_1_, float p_76560_2_)
     {
         return null;
-    }
-
-    public IChunkProvider createChunkProvider()
-    {//true or false
-        return new ChunkProviderAnu(this.worldObj, this.worldObj.getSeed());
     }
 
     @Override
@@ -128,11 +117,6 @@ public class WorldProviderAnu extends WorldProvider
     public boolean doesXZShowFog(int p_76568_1_, int p_76568_2_)
     {
         return false;
-    }
-
-    protected synchronized String setUserMessage(String par1Str)
-    {
-        return "Building the Land of Darkness";
     }
 
     public int getRespawnDimension(EntityPlayerMP player)

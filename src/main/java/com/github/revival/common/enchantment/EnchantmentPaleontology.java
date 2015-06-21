@@ -1,6 +1,7 @@
 package com.github.revival.common.enchantment;
 
 import com.github.revival.Revival;
+import com.github.revival.common.config.FossilConfig;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.item.ItemPickaxe;
@@ -52,7 +53,7 @@ public class EnchantmentPaleontology extends Enchantment
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack)
     {
-        if (Revival.FossilOptions.AllowTableEnchantments)
+        if (FossilConfig.allowTableEnchantments)
         {
             return canApply(stack);
         }
@@ -66,7 +67,7 @@ public class EnchantmentPaleontology extends Enchantment
     @Override
     public boolean isAllowedOnBooks()
     {
-        if (Revival.FossilOptions.AllowBookEnchantments)
+        if (FossilConfig.allowBookEnchantments)
         {
             return true;
         }

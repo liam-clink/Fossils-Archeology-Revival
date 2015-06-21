@@ -1,6 +1,6 @@
 package com.github.revival.common.entity.ai;
 
-import com.github.revival.Revival;
+import com.github.revival.common.config.FossilConfig;
 import com.github.revival.common.entity.mob.EntityDinosaur;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -42,7 +42,7 @@ public class DinoAIHunt extends EntityAITarget
     {
         if (!theWorld.isRemote)
         {
-            if (!Revival.FossilOptions.Dinos_Starve)
+            if (!FossilConfig.starvingDinos)
                 return false;
         }
         

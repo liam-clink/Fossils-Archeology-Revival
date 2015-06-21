@@ -1,7 +1,7 @@
 package com.github.revival.common.handler;
 
 
-import com.github.revival.Revival;
+import com.github.revival.common.config.FossilConfig;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -48,14 +48,14 @@ public class AnuTeleporter extends Teleporter
         int k = MathHelper.floor_double(p_77185_1_.posZ);
         byte b0 = 1;
         byte b1 = 0;
-        if (worldServerInstance.provider.dimensionId == Revival.dimensionID_treasure)
+        if (worldServerInstance.provider.dimensionId == FossilConfig.dimIdTreasure)
         {
             if (p_77185_1_ instanceof EntityPlayer)
             {
                 ((EntityPlayer) p_77185_1_).triggerAchievement(FossilAchievementHandler.wtf);
             }
         }
-        if (worldServerInstance.provider.dimensionId == Revival.dimensionID_anu)
+        if (worldServerInstance.provider.dimensionId == FossilConfig.dimIdDarknessLair)
         {
 
             for (int l = -2; l <= 2; ++l)

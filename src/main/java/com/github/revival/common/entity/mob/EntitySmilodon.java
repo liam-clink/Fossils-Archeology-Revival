@@ -130,7 +130,7 @@ public class EntitySmilodon extends EntityPrehistoric
 
     private void setPedia()
     {
-        Revival.ToPedia = (Object) this;
+        Revival.toPedia = this;
     }
 
     /**
@@ -556,13 +556,13 @@ public class EntitySmilodon extends EntityPrehistoric
 
                 if (var2.stackSize <= 0)
                 {
-                    if (var2.getItem().hasContainerItem())
+                    if (var2.getItem().hasContainerItem(null))
                     {
                         var1.inventory.setInventorySlotContents(var1.inventory.currentItem, new ItemStack(var2.getItem().getContainerItem()));
                     }
                     else
                     {
-                        var1.inventory.setInventorySlotContents(var1.inventory.currentItem, (ItemStack) null);
+                        var1.inventory.setInventorySlotContents(var1.inventory.currentItem, null);
                     }
                 }
 
@@ -572,7 +572,7 @@ public class EntitySmilodon extends EntityPrehistoric
                     {
                         this.setTamed(true);
                         this.setIsTamed(true);
-                        this.setPathToEntity((PathEntity) null);
+                        this.setPathToEntity(null);
                         this.aiSit.setSitting(true);
                         this.setHealth(20);
                         this.func_152115_b(var1.getUniqueID().toString());
@@ -593,9 +593,9 @@ public class EntitySmilodon extends EntityPrehistoric
             {
                 this.aiSit.setSitting(!this.isSitting());
                 this.isJumping = false;
-                this.setPathToEntity((PathEntity) null);
-                this.setTarget((Entity) null);
-                this.setAttackTarget((EntityLivingBase) null);
+                this.setPathToEntity(null);
+                this.setTarget(null);
+                this.setAttackTarget(null);
             }
             
         }
@@ -612,7 +612,7 @@ public class EntitySmilodon extends EntityPrehistoric
 
                     if (var2.stackSize <= 0)
                     {
-                        var1.inventory.setInventorySlotContents(var1.inventory.currentItem, (ItemStack) null);
+                        var1.inventory.setInventorySlotContents(var1.inventory.currentItem, null);
                     }
 
                     return true;
@@ -633,7 +633,7 @@ public class EntitySmilodon extends EntityPrehistoric
                 {
                     this.aiSit.setSitting(!this.isSitting());
                     this.isJumping = false;
-                    this.setPathToEntity((PathEntity) null);
+                    this.setPathToEntity(null);
                 }
 
                 return true;
@@ -727,14 +727,14 @@ public class EntitySmilodon extends EntityPrehistoric
          */
         if (this.hasCustomNameTag())
         {
-            p0.PrintStringXY(this.getCustomNameTag(), p0.rightIndent, 24, 40, 90, 245);
+            p0.PrintStringXY(this.getCustomNameTag(), GuiPedia.rightIndent, 24, 40, 90, 245);
         }
 
-        p0.PrintStringXY(StatCollector.translateToLocal(LocalizationStrings.ANIMAL_SMILODON), p0.rightIndent, 34, 0, 0, 0);
-        p0.PrintPictXY(pediaheart, p0.rightIndent, 58, 9, 9);
+        p0.PrintStringXY(StatCollector.translateToLocal(LocalizationStrings.ANIMAL_SMILODON), GuiPedia.rightIndent, 34, 0, 0, 0);
+        p0.PrintPictXY(pediaheart, GuiPedia.rightIndent, 58, 9, 9);
 
         //Display Health
-        p0.PrintStringXY(String.valueOf(this.getHealth()) + '/' + this.getMaxHealth(), p0.rightIndent + 12, 58);
+        p0.PrintStringXY(String.valueOf(this.getHealth()) + '/' + this.getMaxHealth(), GuiPedia.rightIndent + 12, 58);
 
         //Display owner name
         if (this.isTamed())

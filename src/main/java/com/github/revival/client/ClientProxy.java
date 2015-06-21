@@ -9,11 +9,11 @@ import com.github.revival.client.renderer.particle.DeathOrbFX;
 import com.github.revival.client.renderer.tileentity.*;
 import com.github.revival.common.CommonProxy;
 import com.github.revival.common.block.FABlockRegistry;
+import com.github.revival.common.config.FossilConfig;
 import com.github.revival.common.entity.*;
 import com.github.revival.common.entity.mob.*;
 import com.github.revival.common.handler.EventNewMenu;
 import com.github.revival.common.handler.EventOverlay;
-import com.github.revival.common.handler.FossilOptions;
 import com.github.revival.common.item.FAItemRegistry;
 import com.github.revival.common.tileentity.*;
 import cpw.mods.fml.client.registry.ClientRegistry;
@@ -87,7 +87,7 @@ public class ClientProxy extends CommonProxy
         RenderingRegistry.registerEntityRenderingHandler(EntitySentryPigman.class, new RenderSentryPigman());
         RenderingRegistry.registerEntityRenderingHandler(EntityAnuDead.class, new RenderDeadAnu(new ModelDeadAnu(), 0.3F));
 
-        if (FossilOptions.DeveloperSpecials)
+        if (FossilConfig.developerSpecials)
         {
             RenderingRegistry.registerEntityRenderingHandler(EntityPlayer.class, new RenderFollowers());
         }
@@ -102,7 +102,7 @@ public class ClientProxy extends CommonProxy
 
         VillagerRegistry.instance().registerVillagerSkin(10, new ResourceLocation("fossil:textures/mob/Archaeologist.png"));
 
-        if (FossilOptions.Skull_Overlay)
+        if (FossilConfig.skullOverlay)
         {
             MinecraftForge.EVENT_BUS.register(new EventOverlay(Minecraft.getMinecraft()));
         }

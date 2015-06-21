@@ -1,6 +1,6 @@
 package com.github.revival.common.entity.ai;
 
-import com.github.revival.Revival;
+import com.github.revival.common.config.FossilConfig;
 import com.github.revival.common.entity.mob.EntityDinosaur;
 import com.github.revival.common.item.FAItemRegistry;
 import net.minecraft.entity.ai.EntityAIBase;
@@ -128,7 +128,7 @@ public class DinoAIControlledByPlayer extends EntityAIBase
             }
         }
 
-        if (this.speedBoosted && this.motionTarget.RiderSneak && this.lastTimeSeenWhip == 0 && this.motionTarget.onGround && Revival.FossilOptions.Dino_Block_Breaking)
+        if (this.speedBoosted && this.motionTarget.RiderSneak && this.lastTimeSeenWhip == 0 && this.motionTarget.onGround && FossilConfig.dinoBlockBreaking)
         {
             int BlocksDestroyed = this.motionTarget.BlockInteractive();
             this.currentSpeed -= BlocksDestroyed * 0.02;

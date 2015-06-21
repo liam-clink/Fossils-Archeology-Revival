@@ -1,6 +1,6 @@
 package com.github.revival.common.creativetab;
 
-import com.github.revival.common.handler.IContentHandler;
+import net.ilexiconn.llibrary.common.content.IContentHandler;
 import net.minecraft.creativetab.CreativeTabs;
 
 public class FATabRegistry implements IContentHandler

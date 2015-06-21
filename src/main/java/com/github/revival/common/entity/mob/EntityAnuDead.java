@@ -1,6 +1,7 @@
 package com.github.revival.common.entity.mob;
 
 import com.github.revival.Revival;
+import com.github.revival.common.config.FossilConfig;
 import com.github.revival.common.handler.AnuTeleporter;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -61,10 +62,10 @@ public class EntityAnuDead extends EntityLiving
             {
                 thePlayer.timeUntilPortal = 10;
             }
-            else if (thePlayer.dimension != Revival.dimensionID_treasure)
+            else if (thePlayer.dimension != FossilConfig.dimIdTreasure)
             {
                 thePlayer.timeUntilPortal = 10;
-                thePlayer.mcServer.getConfigurationManager().transferPlayerToDimension(thePlayer, Revival.dimensionID_treasure, new AnuTeleporter(thePlayer.mcServer.worldServerForDimension(Revival.dimensionID_treasure)));
+                thePlayer.mcServer.getConfigurationManager().transferPlayerToDimension(thePlayer, FossilConfig.dimIdTreasure, new AnuTeleporter(thePlayer.mcServer.worldServerForDimension(FossilConfig.dimIdTreasure)));
             }
             else
             {

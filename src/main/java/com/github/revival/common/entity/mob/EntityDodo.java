@@ -84,7 +84,7 @@ public class EntityDodo extends EntityAnimal
     
     private void setPedia()
     {
-        Revival.ToPedia = (Object) this;
+        Revival.toPedia = (Object) this;
     }
 
     /**

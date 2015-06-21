@@ -1,6 +1,7 @@
 package com.github.revival.common.entity.mob;
 
 import com.github.revival.Revival;
+import com.github.revival.common.config.FossilConfig;
 import com.github.revival.common.entity.ai.DinoAIEat;
 import com.github.revival.common.entity.ai.DinoAIFollowOwner;
 import com.github.revival.common.entity.ai.DinoAIRideGround;
@@ -43,7 +44,7 @@ public class EntityGallimimus extends EntityDinosaur
         // Size of dinosaur at age Adult.
         this.maxSize = 2.2F;
         
-        if (!Revival.FossilOptions.GallimimusFeathers)
+        if (!FossilConfig.featheredGallimimus)
             texturePath = Revival.modid + ":textures/mob/" + this.SelfType.toString() + "/feathered/" + "Feathered_";
         else
             texturePath = Revival.modid + ":textures/mob/" + this.SelfType.toString() + "/";

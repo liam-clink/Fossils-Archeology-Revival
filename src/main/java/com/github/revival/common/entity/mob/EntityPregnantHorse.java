@@ -91,7 +91,7 @@ public class EntityPregnantHorse implements IViviparous, IExtendedEntityProperti
 
     public void setPedia()
     {
-        Revival.ToPedia = (Object) this;
+        Revival.toPedia = (Object) this;
     }
 
     @Override

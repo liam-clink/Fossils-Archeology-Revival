@@ -1,7 +1,7 @@
 package com.github.revival.common.gen.structure;
 
 import com.github.revival.Revival;
-import coolalias.structuregenapi.util.Structure;
+import net.ilexiconn.llibrary.common.structure.util.Structure;
 import cpw.mods.fml.common.IWorldGenerator;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -28,7 +28,7 @@ public class ShipWreckGenerator implements IWorldGenerator
                 // list
                 // Recall that a chunk is only 16x16 blocks in area, so this is
                 // quite a lot of structures
-                if (random.nextInt(1500) < 1)// Revival.FossilOptions.Debug_Gen_Rate_Shipwreck)
+                if (random.nextInt(1500) < 1)// Revival.fossilOptions.Debug_Gen_Rate_Shipwreck)
                 {
                     generateStructure(world, random, chunkX * 16, chunkZ * 16);
                 }

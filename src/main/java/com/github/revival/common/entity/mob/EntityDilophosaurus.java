@@ -2,6 +2,7 @@ package com.github.revival.common.entity.mob;
 
 import com.github.revival.Revival;
 import com.github.revival.client.gui.GuiPedia;
+import com.github.revival.common.config.FossilConfig;
 import com.github.revival.common.entity.ai.*;
 import com.github.revival.common.enums.EnumDinoType;
 import com.github.revival.common.enums.EnumOrderType;
@@ -62,7 +63,7 @@ public class EntityDilophosaurus extends EntityDinosaur
         // Size of dinosaur at age Adult.
         this.maxSize = 2.0F;
 
-    	if(!Revival.FossilOptions.DilophosaurusFeathers)
+    	if(!FossilConfig.featheredDilophosaurus)
             texturePath = Revival.modid + ":textures/mob/" + this.SelfType.toString() + "/feathered/" + "Feathered_";
     	else
     		texturePath = Revival.modid + ":textures/mob/" + this.SelfType.toString() + "/";

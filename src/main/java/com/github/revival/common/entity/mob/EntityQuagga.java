@@ -106,7 +106,7 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic
 
     private void setPedia()
     {
-        Revival.ToPedia = (Object) this;
+        Revival.toPedia = (Object) this;
     }
 
     /**

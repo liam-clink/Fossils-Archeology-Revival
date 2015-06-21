@@ -87,14 +87,6 @@ public class EntityCeratosaurus extends EntityDinosaur
         return !this.isModelized();
     }
 
-    /**
-     * Return the AI task for player control.
-     */
-    public EntityAIControlledByPlayer getAIControlledByPlayer()
-    {
-        return this.aiControlledByPlayer;
-    }
-
     protected void applyEntityAttributes()
     {
         super.applyEntityAttributes();

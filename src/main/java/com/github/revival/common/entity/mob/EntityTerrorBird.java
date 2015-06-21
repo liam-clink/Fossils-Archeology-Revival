@@ -192,7 +192,7 @@ public class EntityTerrorBird extends EntityTameable
 
     private void setPedia()
     {
-        Revival.ToPedia = (Object) this;
+        Revival.toPedia = (Object) this;
     }
     
     /**

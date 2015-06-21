@@ -221,7 +221,6 @@ public class TileEntityTimeMachine extends TileEntity implements IInventory,
 
         for (var6 = this.TargetFacingAngle - this.CurrectFacingAngle; var6 >= (float) Math.PI; var6 -= ((float) Math.PI * 2F))
         {
-            ;
         }
 
         while (var6 < -(float) Math.PI)
@@ -451,18 +450,9 @@ public class TileEntityTimeMachine extends TileEntity implements IInventory,
         }
     }
 
-    private boolean isNonPerserveBlock(Block var1)
+    private boolean isNonPerserveBlock(Block block)
     {
-        if (var1 == null)
-        {
-            return false;
-        }
-        else
-        {
-            Block var2 = var1;
-            return var2.hasTileEntity() ? true : var2 == Blocks.diamond_block
-                    || var2 == Blocks.diamond_ore;
-        }
+        return block != null && (block.hasTileEntity(0) || block == Blocks.diamond_block || block == Blocks.diamond_ore);
     }
 
     public void readFromNBT(NBTTagCompound var1)
@@ -473,7 +463,7 @@ public class TileEntityTimeMachine extends TileEntity implements IInventory,
 
         for (int var3 = 0; var3 < var2.tagCount(); ++var3)
         {
-            NBTTagCompound var4 = (NBTTagCompound) var2.getCompoundTagAt(var3);
+            NBTTagCompound var4 = var2.getCompoundTagAt(var3);
             byte var5 = var4.getByte("Slot");
 
             if (var5 >= 0 && var5 < this.insideStack.length)

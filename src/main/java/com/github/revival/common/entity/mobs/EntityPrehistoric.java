@@ -518,7 +518,7 @@ public abstract class EntityPrehistoric extends EntityAgeable
 
     private void setPedia()
     {
-        Revival.ToPedia = this;
+        Revival.toPedia = this;
     }
 
     public int getSubSpecies()

@@ -1,6 +1,6 @@
 package com.github.revival.common.entity.ai;
 
-import com.github.revival.Revival;
+import com.github.revival.common.config.FossilConfig;
 import com.github.revival.common.entity.mob.EntityDinosaur;
 import com.github.revival.common.enums.EnumDinoType;
 import com.github.revival.common.enums.EnumSituation;
@@ -22,7 +22,7 @@ public class DinoAIGrowup extends EntityAIBase
     public boolean shouldExecute()
     {
 
-        if (/*FossilOptions.DinoGrows && */this.AITarget.getDinoAge() < this.AITarget.SelfType.MaxAge)
+        if (/*fossilOptions.DinoGrows && */this.AITarget.getDinoAge() < this.AITarget.SelfType.MaxAge)
         {
             this.AITarget.increaseDinoAgeTick();
             return this.AITarget.getDinoAgeTick() >= this.AITarget.SelfType.AgingTicks;
@@ -64,7 +64,7 @@ public class DinoAIGrowup extends EntityAIBase
                 if (this.AITarget.getMaxHealth() < this.AITarget.getHealth())
                 {
                     //the dino heals itself 15% when growing up
-                    if (Revival.FossilOptions.Heal_Dinos)
+                    if (FossilConfig.healingDinos)
                     {
                         this.AITarget.heal(MathHelper.ceiling_double_int(this.AITarget.getHealth() * 0.15f));
                     }
@@ -76,7 +76,7 @@ public class DinoAIGrowup extends EntityAIBase
 
                 if (this.AITarget.getHealth() > MathHelper.ceiling_double_int(this.AITarget.getMaxHealth()*0.05f))
                 {
-                	if(Revival.FossilOptions.Heal_Dinos)
+                	if(Revival.fossilOptions.healingDinos)
                 		this.AITarget.attackEntityFrom(DamageSource.generic, MathHelper.ceiling_double_int(this.AITarget.getMaxHealth()*0.05f));
                 }
 

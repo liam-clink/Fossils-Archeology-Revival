@@ -131,7 +131,7 @@ public class EntitySpinosaurus extends EntityDinosaur implements IWaterDino
 
         //this.blockBreakingBehavior.execute();
         /*
-        if (this.isAdult() && Revival.FossilOptions.Dino_Block_Breaking == true)
+        if (this.isAdult() && Revival.fossilOptions.dinoBlockBreaking == true)
         {
             BlockInteractive();
         }
@@ -328,7 +328,7 @@ public class EntitySpinosaurus extends EntityDinosaur implements IWaterDino
             {
                 if (this.isWeak() && !this.isTamed())
                 {
-                    if (Revival.FossilOptions.Heal_Dinos)
+                    if (Revival.fossilOptions.healingDinos)
                     {
                         this.heal(200);
                     }

@@ -94,7 +94,7 @@ public class EntityMammoth extends EntityPrehistoric implements IShearable
 
     private void setPedia()
     {
-        Revival.ToPedia = (Object) this;
+        Revival.toPedia = (Object) this;
     }
 
     public boolean attackEntityAsMob(Entity var1)

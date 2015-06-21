@@ -18,7 +18,7 @@ public enum EnumAnimalType
 
     private EnumAnimalType(int grow0)
     {
-        if (Revival.DebugMode())
+        if (Revival.enableDebugging())
         {
             GrowTime = 100;
         }

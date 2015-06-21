@@ -1,6 +1,7 @@
 package com.github.revival.common.entity.ai;
 
 import com.github.revival.Revival;
+import com.github.revival.common.config.FossilConfig;
 import com.github.revival.common.entity.mob.EntityDinosaur;
 import com.github.revival.common.enums.EnumOrderType;
 import com.github.revival.common.tileentity.TileEntityFeeder;
@@ -23,11 +24,9 @@ import net.minecraft.world.World;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Logger;
 
 public class DinoAIEat extends EntityAIBase
 {
-    private static final Logger Log = Revival.Log;
     private static final int NO_TARGET = -1;
     private static final int ITEM = 1;
     private static final int BLOCK = 2;
@@ -91,7 +90,7 @@ public class DinoAIEat extends EntityAIBase
 
         if (!theWorld.isRemote)
         {
-            if (!Revival.FossilOptions.Dinos_Starve)
+            if (!FossilConfig.starvingDinos)
                 return false;
         }
         

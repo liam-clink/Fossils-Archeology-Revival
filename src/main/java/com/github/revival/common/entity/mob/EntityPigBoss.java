@@ -1,6 +1,7 @@
 package com.github.revival.common.entity.mob;
 
 import com.github.revival.Revival;
+import com.github.revival.common.config.FossilConfig;
 import com.github.revival.common.enums.EnumPigmenSpeaks;
 import com.github.revival.common.handler.FossilAchievementHandler;
 import com.github.revival.common.item.FAItemRegistry;
@@ -184,7 +185,7 @@ public class EntityPigBoss extends EntityMob implements IBossDisplayData, IRange
             this.worldObj.playSoundAtEntity(this, "mob.zombiepig.zpigangry", this.getSoundVolume() * 2.0F, ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F) * 1.8F);
         }
 
-        if (Revival.FossilOptions.Anu_Allowed_Overworld && !this.worldObj.provider.isHellWorld)
+        if (FossilConfig.anuAllowedOverworld && !this.worldObj.provider.isHellWorld)
             this.BlockTimeInteract();
 
         super.onUpdate();
@@ -200,9 +201,9 @@ public class EntityPigBoss extends EntityMob implements IBossDisplayData, IRange
 
         if (!worldObj.isRemote)
         {
-            if (!Revival.FossilOptions.Anu_Spawn)
+            if (!FossilConfig.anuSpawn)
                 this.setDead();
-            if (!Revival.FossilOptions.Anu_Allowed_Overworld && !this.worldObj.provider.isHellWorld)
+            if (!FossilConfig.anuAllowedOverworld && !this.worldObj.provider.isHellWorld)
                 this.setDead();
         }
 

@@ -1,6 +1,7 @@
 package com.github.revival.common.entity.mob;
 
 import com.github.revival.Revival;
+import com.github.revival.common.config.FossilConfig;
 import com.github.revival.common.entity.ai.*;
 import com.github.revival.common.enums.EnumDinoType;
 import io.netty.buffer.ByteBuf;
@@ -47,7 +48,7 @@ public class EntityDeinonychus extends EntityDinosaur
         // Size of dinosaur at age Adult.
         this.maxSize = 1.0F;
         
-        if (!Revival.FossilOptions.DeinonychusFeathers)
+        if (!FossilConfig.featheredDeinonychus)
             texturePath = Revival.modid + ":textures/mob/" + this.SelfType.toString() + "/feathered/" + "Feathered_";
         else
             texturePath = Revival.modid + ":textures/mob/" + this.SelfType.toString() + "/";

@@ -1,10 +1,9 @@
 package com.github.revival.common.gen;
 
-import com.github.revival.Revival;
+import com.github.revival.common.config.FossilConfig;
 import com.github.revival.common.gen.feature.WorldGenAncientChest;
 import com.github.revival.common.gen.feature.WorldGenAnuCastle;
 import com.github.revival.common.gen.feature.WorldGenHellBoat;
-import com.github.revival.common.handler.FossilOptions;
 import cpw.mods.fml.common.IWorldGenerator;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -20,7 +19,7 @@ public class WorldGenMiscStructures implements IWorldGenerator
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider)
     {
         BiomeGenBase biome = world.getWorldChunkManager().getBiomeGenAt(chunkX, chunkZ);
-        if (FossilOptions.Gen_HellShips)
+        if (FossilConfig.generateHellShips)
         {
             if (BiomeDictionary.isBiomeOfType(biome, Type.NETHER))
             {
@@ -34,7 +33,7 @@ public class WorldGenMiscStructures implements IWorldGenerator
                 }
             }
         }
-        if (world.getChunkFromChunkCoords(chunkX, chunkZ) == world.getChunkFromBlockCoords(-70, -70) && world.provider.dimensionId == Revival.dimensionID_anu)
+        if (world.getChunkFromChunkCoords(chunkX, chunkZ) == world.getChunkFromBlockCoords(-70, -70) && world.provider.dimensionId == FossilConfig.dimIdDarknessLair)
         {
             int counter = 0;
             counter++;
@@ -43,7 +42,7 @@ public class WorldGenMiscStructures implements IWorldGenerator
                 new WorldGenAnuCastle().generate(world, random, -70, 61, -70);
             }
         }
-        if (world.getChunkFromChunkCoords(chunkX, chunkZ) == world.getChunkFromBlockCoords(-80, -120) && world.provider.dimensionId == Revival.dimensionID_treasure)
+        if (world.getChunkFromChunkCoords(chunkX, chunkZ) == world.getChunkFromBlockCoords(-80, -120) && world.provider.dimensionId == FossilConfig.dimIdTreasure)
         {
             int counter = 0;
             counter++;

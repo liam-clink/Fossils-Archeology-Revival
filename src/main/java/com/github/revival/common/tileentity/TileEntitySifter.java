@@ -347,7 +347,7 @@ public class TileEntitySifter extends TileEntity implements IInventory,
             {
                 if (randomloot < 80)
                 {
-                    if (Revival.DebugMode())
+                    if (Revival.enableDebugging())
                         Revival.Console("Sifter no result: " + randomloot);
                     if (random < 75)
                     {
@@ -360,7 +360,7 @@ public class TileEntitySifter extends TileEntity implements IInventory,
                 }
                 else
                 {
-                    if (Revival.DebugMode())
+                    if (Revival.enableDebugging())
                         Revival.Console("Sifter successful loot: " + randomloot);
                     if (random < 0.4)
                     {

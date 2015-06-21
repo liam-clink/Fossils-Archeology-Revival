@@ -93,15 +93,6 @@ public class EntityLiopleurodon extends EntitySwimmingDino
         else
             return Revival.modid + ":" + "liopleurodon_outside";
     }
-    
-    @Override
-    public String getAttackSound()
-    {
-        if (this.isModelized())
-            return null;
-
-        return Revival.modid + ":" + this.SelfType.toString().toLowerCase() + "_attack";
-    }
 
     /**
      * Returns true if the Entity AI code should be run
@@ -219,7 +210,7 @@ public class EntityLiopleurodon extends EntitySwimmingDino
 
         if (var2 != null)
         {
-            if (!Revival.DebugMode())
+            if (!Revival.enableDebugging())
             {
                 if (var2.getItem() == FAItemRegistry.chickenEss)
                 {

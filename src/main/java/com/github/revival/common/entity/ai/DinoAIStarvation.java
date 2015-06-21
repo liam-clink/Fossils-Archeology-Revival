@@ -1,6 +1,6 @@
 package com.github.revival.common.entity.ai;
 
-import com.github.revival.Revival;
+import com.github.revival.common.config.FossilConfig;
 import com.github.revival.common.entity.mob.EntityDinosaur;
 import com.github.revival.common.enums.EnumOrderType;
 import com.github.revival.common.enums.EnumSituation;
@@ -22,10 +22,10 @@ public class DinoAIStarvation extends EntityAIBase
      */
     public boolean shouldExecute()
     {
-        //if (FossilOptions.DinoHunger)
+        //if (fossilOptions.DinoHunger)
         //{
         this.mover.decreaseHungerTick();
-        return this.mover.getHungerTick() <= 0 && Revival.FossilOptions.Dinos_Starve;// && this.mover.worldObj.difficultySetting > 0;
+        return this.mover.getHungerTick() <= 0 && FossilConfig.starvingDinos;// && this.mover.worldObj.difficultySetting > 0;
         //}
         //return false;
     }

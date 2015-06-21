@@ -73,7 +73,7 @@ public class EntityElasmotherium extends EntityPrehistoric
 
     private void setPedia()
     {
-        Revival.ToPedia = (Object) this;
+        Revival.toPedia = (Object) this;
     }
     
     public boolean attackEntityAsMob(Entity entity)

@@ -2,6 +2,7 @@ package com.github.revival.common.entity.mob;
 
 import com.github.revival.Revival;
 import com.github.revival.client.gui.GuiPedia;
+import com.github.revival.common.config.FossilConfig;
 import com.github.revival.common.entity.ai.*;
 import com.github.revival.common.enums.EnumDinoType;
 import com.github.revival.common.handler.FossilAchievementHandler;
@@ -59,7 +60,7 @@ public class EntityTRex extends EntityDinosaur
         // Size of dinosaur at age Adult.
         this.maxSize = 4.5F;
 
-        if (!Revival.FossilOptions.TRexFeathers)
+        if (!FossilConfig.featheredTRex)
             texturePath = Revival.modid + ":textures/mob/"
                     + this.SelfType.toString() + "/feathered/" + "Feathered_";
         else
@@ -92,14 +93,6 @@ public class EntityTRex extends EntityDinosaur
     public boolean isAIEnabled()
     {
         return !this.isModelized() && !this.isWeak();
-    }
-
-    /**
-     * Return the AI task for player control.
-     */
-    public EntityAIControlledByPlayer getAIControlledByPlayer()
-    {
-        return this.aiControlledByPlayer;
     }
 
     protected void applyEntityAttributes()
@@ -364,7 +357,7 @@ public class EntityTRex extends EntityDinosaur
                 return false;
             }
 
-            if (!Revival.DebugMode())
+            if (!Revival.enableDebugging())
             {
                 if (itemStack.getItem() == FAItemRegistry.chickenEss)
                 {

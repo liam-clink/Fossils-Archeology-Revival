@@ -238,7 +238,7 @@ public class TileEntityWorktable extends TileEntity implements IInventory,
                     if (this.furnaceItemStacks[1] != null)
                     {
                         if (this.furnaceItemStacks[1].getItem()
-                                .hasContainerItem())
+                                .hasContainerItem(null))
                         {
                             this.furnaceItemStacks[1] = new ItemStack(
                                     this.furnaceItemStacks[1].getItem()
@@ -319,14 +319,17 @@ public class TileEntityWorktable extends TileEntity implements IInventory,
 
             if (this.furnaceItemStacks[2] == null)
             {
-                this.furnaceItemStacks[2] = var1.copy();
+                if (var1 != null)
+                {
+                    this.furnaceItemStacks[2] = var1.copy();
+                }
             }
             else if (this.furnaceItemStacks[2] == var1)
             {
                 this.furnaceItemStacks[2].stackSize += var1.stackSize;
             }
 
-            if (this.furnaceItemStacks[0].getItem().hasContainerItem())
+            if (this.furnaceItemStacks[0].getItem().hasContainerItem(null))
             {
                 this.furnaceItemStacks[0] = new ItemStack(
                         this.furnaceItemStacks[0].getItem().getContainerItem());
