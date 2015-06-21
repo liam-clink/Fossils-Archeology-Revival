@@ -1,7 +1,7 @@
 package com.github.revival.client.model;
 
-import com.github.revival.client.model.mowzie.MowzieModelBase;
-import com.github.revival.client.model.mowzie.MowzieModelRenderer;
+import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelBase;
+import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelRenderer;
 import net.minecraft.entity.Entity;
 
 /**

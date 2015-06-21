@@ -1,14 +1,13 @@
 package com.github.revival.client.model;
 
-import com.github.revival.client.model.mowzie.*;
 import com.github.revival.common.entity.mob.EntityDinosaur;
-import com.github.revival.common.entity.mob.EntityGallimimus;
 import com.github.revival.common.entity.mob.EntityPrehistoric;
-
-import net.minecraft.client.model.ModelBase;
+import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelBase;
+import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelRenderer;
 import net.minecraft.entity.Entity;
 
-public class ModelGallimimus extends MowzieModelBase {
+public class ModelGallimimus extends MowzieModelBase
+{
 	public MowzieModelRenderer lowerBody;
 	public MowzieModelRenderer rightThigh;
 	public MowzieModelRenderer leftThigh;
