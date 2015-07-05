@@ -26,7 +26,8 @@ public class RenderPlayerCapes
 			/*Bluestreak52*/UUID.fromString("5468a8f2-84d6-46e2-b58c-f9d576b67544"),
 			/*Robberto08*/UUID.fromString("05b14ce7-0ff1-4b8e-9ef8-d98502e9bf07"),
 			/*Alexthe666*/UUID.fromString("71363abe-fd03-49c9-940d-aae8b8209b7c"),
-			/*NanoTyrano*/UUID.fromString("d4c29faf-82bc-4d34-bda0-cb850595595a")
+			/*NanoTyrano*/UUID.fromString("d4c29faf-82bc-4d34-bda0-cb850595595a"),
+			/*iLexiconn*/UUID.formatting("40e85e42-21f6-46b6-b5b3-6aeb07f3e3fd")
     };
     public UUID[] contributoruuid = new UUID[]{
 			/*JTGhawk137*/UUID.fromString("54201149-1f1f-498b-98ca-50f66951a68f"),
