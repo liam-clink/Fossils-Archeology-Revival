@@ -89,7 +89,7 @@ public class ClientProxy extends CommonProxy
 
         if (FossilConfig.developerSpecials)
         {
-            RenderingRegistry.registerEntityRenderingHandler(EntityPlayer.class, new RenderFollowers());
+            //RenderingRegistry.registerEntityRenderingHandler(EntityPlayer.class, new RenderFollowers());
         }
 
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(FABlockRegistry.figurineBlock), new ItemFigurineRenderer());

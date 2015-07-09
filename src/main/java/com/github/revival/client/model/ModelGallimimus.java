@@ -227,14 +227,13 @@ public class ModelGallimimus extends MowzieModelBase
 				walk(rightFoot, 0.5F, 0.8F, true, 0F, 0F, f, -f1);
 				walk(neck, -0.25F, 0.2F, false, 0F, 0.4F, f, -f1);
 				walk(headPivot, -0.2F, 0.25F, false, 0F, 0.4F, f, f1);
-				walk(neck, 0.05F, 0.15F, false, 0F, 0.3F, frame, -1);
-				walk(headPivot, 0.05F, 0.15F, false, 0F, 0.3F, frame, 1);
 				walk(rightUpperArm, 0.05F, 0.05F, true, 0F, 0F, frame, 1);
 				walk(leftUpperArm, 0.05F, 0.05F, true, 0F, 0F, frame, 1);
 				walk(rightLowerArm, 0.05F,  0.05F, false, 0F, 0F, frame, -1);
 				walk(leftLowerArm, 0.05F,  0.05F, false, 0F, 0F, frame, -1);
 				chainSwing(tail, 0.03F, 0.15F, 0, frame, -1);
 				chainWave(tail, 0.02F, 0.05F, 0, frame, -1);
+				 this.chainWave(tail, 0.1F, -0.05F - (-0.05F), 2, frame, 1.0F - 0.6F);
 			}else{
 				update();
 			}

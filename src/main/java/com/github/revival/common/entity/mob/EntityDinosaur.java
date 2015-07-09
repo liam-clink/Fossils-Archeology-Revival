@@ -512,11 +512,6 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
         return (!this.isAdult() && !this.isTeen()) ? 0.4F : 1.0F;
     }
 
-    @Override
-    public boolean isOnLadder()
-    {
-        return false;
-    }
 
     @SideOnly(Side.CLIENT)
     public void ShowPedia(GuiPedia p0)
@@ -1799,12 +1794,6 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
         player.mountEntity(this);
     }
 
-    @Override
-    public void jump()
-    {
-        super.jump();
-        this.motionY = 0.45D;
-    }
 
     public boolean isInvulnerable(DamageSource var1)
     {

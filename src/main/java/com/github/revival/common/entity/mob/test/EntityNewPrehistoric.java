@@ -1,8 +1,26 @@
-package com.github.revival.common.entity.mob;
+package com.github.revival.common.entity.mob.test;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
+import org.lwjgl.opengl.GL11;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.passive.EntityTameable;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 
 import com.github.revival.client.gui.GuiPedia;
 import com.github.revival.common.api.IPrehistoricAI;
-import com.github.revival.common.enums.EnumPrehistoricAI;
+import com.github.revival.common.enums.EnumDinoType;
+import com.github.revival.common.enums.EnumOrderType;
 import com.github.revival.common.enums.EnumPrehistoricAI.Activity;
 import com.github.revival.common.enums.EnumPrehistoricAI.Attacking;
 import com.github.revival.common.enums.EnumPrehistoricAI.Climbing;
@@ -16,90 +34,48 @@ import com.github.revival.common.enums.EnumPrehistoricAI.Untaming;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.EntityAgeable;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.passive.EntityTameable;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeHooks;
 
-import org.lwjgl.opengl.GL11;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-
-public class EntityPrehistoric extends EntityTameable implements IPrehistoricAI
-{
+public class EntityNewPrehistoric extends EntityTameable implements IPrehistoricAI {
 
 	public static final int OWNER_DISPLAY_NAME_INDEX = 24;
+	public static final int HUNGER_TICK_DATA_INDEX = 18;
+	public static final int HUNGER_DATA_INDEX = 19;
+	public static final int AGE_TICK_DATA_INDEX = 20;
+	public static final int AGE_DATA_INDEX = 21;
+	public static final int SUBSPECIES_INDEX = 22;
+	public static final int MODELIZED_INDEX = 23;
+	public static final byte HEART_MESSAGE = 35;
+	public static final byte SMOKE_MESSAGE = 36;
+	public static final byte AGING_MESSAGE = 37;
 	public float animation_frame;
+	public float RiderStrafe = 0.0F;
+	public float RiderForward = 0.0F;
+	public boolean RiderJump = false;
+	public boolean RiderSneak = false;
+	public float minSize;
+	public float maxSize;
+	public int adultAge;
+	public EnumDinoType SelfType = null;	public int BreedTick;
+	public ItemStack ItemInMouth = null;
+	public EnumOrderType OrderStatus;
+	public double baseHealth;
+	public double baseDamage;
+	public double baseSpeed;
+	public double maxHealth;
+	public double maxDamage;
+	public double maxSpeed;
 	protected static final ResourceLocation pediaclock = new ResourceLocation("fossil:textures/gui/PediaClock.png");
 	protected static final ResourceLocation pediafood = new ResourceLocation("fossil:textures/gui/PediaFood.png");
 	protected static final ResourceLocation pediaheart = new ResourceLocation("fossil:textures/gui/PediaHeart.png");
 
-	private boolean inHerd = false;
-	private float awarenessRadius;
-	private int maxHerdSize;
-	private float herdWanderRadius;
-
-	public EntityPrehistoric(World par1World)
-	{
-		super(par1World);
+	public EntityNewPrehistoric(World world) {
+		super(world);
 	}
 
 	protected void entityInit()
 	{
 		super.entityInit();
 		this.dataWatcher.addObject(OWNER_DISPLAY_NAME_INDEX, "");
-	}
-
-	public boolean isInHerd()
-	{
-		return inHerd;
-	}
-
-	public float getAwarenessRadius()
-	{
-		return awarenessRadius;
-	}
-	@Override
-	public void jump(){
-		if(this.aiJumpType() == EnumPrehistoricAI.Jumping.TWOBLOCKS){
-			this.motionY = 0.41999998688697815D * 2;
-			 if (this.isPotionActive(Potion.jump))
-		        {
-		            this.motionY += (double)((float)(this.getActivePotionEffect(Potion.jump).getAmplifier() + 1) * 0.1F);
-		        }
-
-		        if (this.isSprinting())
-		        {
-		            float f = this.rotationYaw * 0.017453292F;
-		            this.motionX -= (double)(MathHelper.sin(f) * 0.2F);
-		            this.motionZ += (double)(MathHelper.cos(f) * 0.2F);
-		        }
-
-		        this.isAirBorne = true;
-		        ForgeHooks.onLivingJump(this);
-		}else{
-			super.jump();
-		}
-	}
-	public int getMaxHerdSize()
-	{
-		return maxHerdSize;
-	}
-
-	public float getHerdWanderRadius()
-	{
-		return herdWanderRadius;
 	}
 
 	/**
@@ -109,15 +85,10 @@ public class EntityPrehistoric extends EntityTameable implements IPrehistoricAI
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.30000001192092896D);
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(19.0D);
-		getAttributeMap().registerAttribute(SharedMonsterAttributes.attackDamage);
 		setBaseValues();
 	}
 
-	/**
-	 * Overrided in unique entity classes.
-	 */
+
 	private void setBaseValues()
 	{
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(1.0D);
@@ -156,13 +127,6 @@ public class EntityPrehistoric extends EntityTameable implements IPrehistoricAI
 		super.readEntityFromNBT(compound);
 	}
 
-	@Override
-	public EntityAgeable createChild(EntityAgeable entityageable)
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	public EntityPlayer getRidingPlayer()
 	{
 		if (riddenByEntity instanceof EntityPlayer)
@@ -175,7 +139,6 @@ public class EntityPrehistoric extends EntityTameable implements IPrehistoricAI
 		}
 	}
 
-	//2:07 to
 	@SideOnly(Side.CLIENT)
 	public void ShowPedia2(GuiPedia p0, String mobName)
 	{
@@ -221,11 +184,6 @@ public class EntityPrehistoric extends EntityTameable implements IPrehistoricAI
 		}
 	}
 
-	public void onWhipRightClick()
-	{
-		// TODO Auto-generated method stub
-
-	}
 	public void onUpdate(){
 		super.onUpdate();
 		animation_frame++;
@@ -241,6 +199,7 @@ public class EntityPrehistoric extends EntityTameable implements IPrehistoricAI
 	{
 		this.dataWatcher.updateObject(OWNER_DISPLAY_NAME_INDEX, displayName);
 	}
+
 
 	@Override
 	public Activity aiActivityType() {
@@ -290,6 +249,11 @@ public class EntityPrehistoric extends EntityTameable implements IPrehistoricAI
 	@Override
 	public Untaming aiUntameType() {
 		return Untaming.STARVE;
+	}
+
+	@Override
+	public EntityAgeable createChild(EntityAgeable entity) {
+		return null;
 	}
 
 }
