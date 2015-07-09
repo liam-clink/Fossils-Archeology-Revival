@@ -53,7 +53,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.util.EnumHelper;
 
-@Mod(modid = Revival.modid, name = "Fossil/Archeology", version = "7.3", dependencies = "required-after:llibrary@[0.3.0-1.7.10,)")
+@Mod(modid = Revival.modid, name = "Fossil/Archeology", version = "${version}", dependencies = "required-after:llibrary@[0.3.0-1.7.10,)")
 public class Revival
 {
     public static final String modid = "fossil";
