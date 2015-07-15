@@ -4,7 +4,7 @@ import com.github.revival.Revival;
 import com.github.revival.client.gui.GuiPedia;
 import com.github.revival.common.config.FossilConfig;
 import com.github.revival.common.entity.ai.*;
-import com.github.revival.common.enums.EnumDinoType;
+import com.github.revival.common.enums.EnumPrehistoric;
 import com.github.revival.common.handler.FossilAchievementHandler;
 import com.github.revival.common.handler.LocalizationStrings;
 import com.github.revival.common.item.FAItemRegistry;
@@ -26,12 +26,12 @@ import java.util.Random;
 
 public class EntityTRex extends EntityDinosaur
 {
-    public static final double baseHealth = EnumDinoType.TRex.Health0;
-    public static final double baseDamage = EnumDinoType.TRex.Strength0;
-    public static final double baseSpeed = EnumDinoType.TRex.Speed0;
-    public static final double maxHealth = EnumDinoType.TRex.HealthMax;
-    public static final double maxDamage = EnumDinoType.TRex.StrengthMax;
-    public static final double maxSpeed = EnumDinoType.TRex.SpeedMax;
+    public static final double baseHealth = EnumPrehistoric.TRex.Health0;
+    public static final double baseDamage = EnumPrehistoric.TRex.Strength0;
+    public static final double baseSpeed = EnumPrehistoric.TRex.Speed0;
+    public static final double maxHealth = EnumPrehistoric.TRex.HealthMax;
+    public static final double maxDamage = EnumPrehistoric.TRex.StrengthMax;
+    public static final double maxSpeed = EnumPrehistoric.TRex.SpeedMax;
     private static float health = 10;
     public final int Areas = 15;
     final EntityAIControlledByPlayer aiControlledByPlayer;
@@ -46,13 +46,13 @@ public class EntityTRex extends EntityDinosaur
 
     public EntityTRex(World var1)
     {
-        super(var1, EnumDinoType.TRex);
+        super(var1, EnumPrehistoric.TRex);
         this.looksWithInterest = false;
         this.updateSize();
         /*
          * EDIT VARIABLES PER DINOSAUR TYPE
 		 */
-        this.adultAge = EnumDinoType.TRex.AdultAge;
+        this.adultAge = EnumPrehistoric.TRex.AdultAge;
         // Set initial size for hitbox. (length/width, height)
         this.setSize(1.5F, 1.25F);
         // Size of dinosaur at day 0.

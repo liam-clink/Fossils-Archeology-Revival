@@ -2,7 +2,7 @@ package com.github.revival.common.gen.structure;
 
 import com.github.revival.common.block.FABlockRegistry;
 import com.github.revival.common.config.FossilConfig;
-import com.github.revival.common.enums.EnumDinoType;
+import com.github.revival.common.enums.EnumPrehistoric;
 import com.github.revival.common.gen.structure.academy.*;
 import com.github.revival.common.gen.structure.temple.Temple1;
 import com.github.revival.common.gen.structure.temple.Temple2;
@@ -208,7 +208,7 @@ public class FossilStructureGenerator extends StructureGeneratorBase
                     for (int iterate = 0; iterate < rand.nextInt(3) + 3; iterate++)
                     {
                         int i = (new Random())
-                                .nextInt(EnumDinoType.values().length + 1); // +1
+                                .nextInt(EnumPrehistoric.values().length + 1); // +1
                         Item i0;
 
                         if (i == 0)
@@ -217,7 +217,7 @@ public class FossilStructureGenerator extends StructureGeneratorBase
                         }
                         else
                         {
-                            i0 = EnumDinoType.values()[i - 1].DNAItem;
+                            i0 = EnumPrehistoric.values()[i - 1].DNAItem;
                         }
 
                         int loot = (int) (Math.random() * 100);

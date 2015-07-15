@@ -4,7 +4,7 @@ import com.github.revival.Revival;
 import com.github.revival.client.gui.GuiPedia;
 import com.github.revival.common.config.FossilConfig;
 import com.github.revival.common.entity.ai.*;
-import com.github.revival.common.enums.EnumDinoType;
+import com.github.revival.common.enums.EnumPrehistoric;
 import com.github.revival.common.handler.LocalizationStrings;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -28,12 +28,12 @@ import java.util.Vector;
 
 public class EntityVelociraptor extends EntityDinosaur
 {
-    public static final double baseHealth = EnumDinoType.Velociraptor.Health0;
-    public static final double baseDamage = EnumDinoType.Velociraptor.Strength0;
-    public static final double baseSpeed = EnumDinoType.Velociraptor.Speed0;
-    public static final double maxHealth = EnumDinoType.Velociraptor.HealthMax;
-    public static final double maxDamage = EnumDinoType.Velociraptor.StrengthMax;
-    public static final double maxSpeed = EnumDinoType.Velociraptor.SpeedMax;
+    public static final double baseHealth = EnumPrehistoric.Velociraptor.Health0;
+    public static final double baseDamage = EnumPrehistoric.Velociraptor.Strength0;
+    public static final double baseSpeed = EnumPrehistoric.Velociraptor.Speed0;
+    public static final double maxHealth = EnumPrehistoric.Velociraptor.HealthMax;
+    public static final double maxDamage = EnumPrehistoric.Velociraptor.StrengthMax;
+    public static final double maxSpeed = EnumPrehistoric.Velociraptor.SpeedMax;
     private final String texturePath;
     public int LearningChestTick = 900;
     public boolean PreyChecked = false;
@@ -44,13 +44,13 @@ public class EntityVelociraptor extends EntityDinosaur
     
     public EntityVelociraptor(World var1)
     {
-        super(var1, EnumDinoType.Velociraptor);
+        super(var1, EnumPrehistoric.Velociraptor);
         this.looksWithInterest = false;
         this.updateSize();
         /*
          * EDIT VARIABLES PER DINOSAUR TYPE
          */
-        this.adultAge = EnumDinoType.Velociraptor.AdultAge;
+        this.adultAge = EnumPrehistoric.Velociraptor.AdultAge;
         // Set initial size for hitbox. (length/width, height)
         this.setSize(2F, 2F);
         // Size of dinosaur at day 0.

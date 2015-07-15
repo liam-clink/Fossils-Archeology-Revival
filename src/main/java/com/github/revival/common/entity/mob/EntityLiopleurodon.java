@@ -5,7 +5,7 @@ import com.github.revival.common.entity.ai.WaterDinoAIAttack;
 import com.github.revival.common.entity.ai.WaterDinoAIEat;
 import com.github.revival.common.entity.ai.WaterDinoAIHunt;
 import com.github.revival.common.entity.ai.WaterDinoAIWander;
-import com.github.revival.common.enums.EnumDinoType;
+import com.github.revival.common.enums.EnumPrehistoric;
 import com.github.revival.common.handler.LocalizationStrings;
 import com.github.revival.common.item.FAItemRegistry;
 import io.netty.buffer.ByteBuf;
@@ -24,12 +24,12 @@ import java.util.Random;
 
 public class EntityLiopleurodon extends EntitySwimmingDino
 {
-    public static final double baseHealth = EnumDinoType.Liopleurodon.Health0;
-    public static final double baseDamage = EnumDinoType.Liopleurodon.Strength0;
-    public static final double baseSpeed = EnumDinoType.Liopleurodon.Speed0;
-    public static final double maxHealth = EnumDinoType.Liopleurodon.HealthMax;
-    public static final double maxDamage = EnumDinoType.Liopleurodon.StrengthMax;
-    public static final double maxSpeed = EnumDinoType.Liopleurodon.SpeedMax;
+    public static final double baseHealth = EnumPrehistoric.Liopleurodon.Health0;
+    public static final double baseDamage = EnumPrehistoric.Liopleurodon.Strength0;
+    public static final double baseSpeed = EnumPrehistoric.Liopleurodon.Speed0;
+    public static final double maxHealth = EnumPrehistoric.Liopleurodon.HealthMax;
+    public static final double maxDamage = EnumPrehistoric.Liopleurodon.StrengthMax;
+    public static final double maxSpeed = EnumPrehistoric.Liopleurodon.SpeedMax;
     public int courseChangeCooldown;
     public double waypointX;
     public double waypointY;
@@ -42,11 +42,11 @@ public class EntityLiopleurodon extends EntitySwimmingDino
 
     public EntityLiopleurodon(World par1World)
     {
-        super(par1World, EnumDinoType.Liopleurodon);
+        super(par1World, EnumPrehistoric.Liopleurodon);
         /*
          * EDIT VARIABLES PER DINOSAUR TYPE
          */
-        this.adultAge = EnumDinoType.Liopleurodon.AdultAge;
+        this.adultAge = EnumPrehistoric.Liopleurodon.AdultAge;
         // Set initial size for hitbox. (length/width, height)
         this.setSize(1.5F, 0.5F);
         // Size of dinosaur at day 0.

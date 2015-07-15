@@ -4,7 +4,7 @@ import com.github.revival.Revival;
 import com.github.revival.common.entity.EntityDinoEgg;
 import com.github.revival.common.entity.mob.EntityDinosaur;
 import com.github.revival.common.entity.mob.EntityNautilus;
-import com.github.revival.common.enums.EnumDinoType;
+import com.github.revival.common.enums.EnumPrehistoric;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -35,32 +35,10 @@ public class ItemDinosaurModels extends Item
         setHasSubtypes(true);
     }
 
-    public static boolean spawnCreature(World var0, EnumDinoType var1, double var2, double var4, double var6)
-    {
-        Object var8;
-
-        if (var1 == EnumDinoType.Nautilus)
-        {
-            var8 = new EntityNautilus(var0);
-        }
-        else
-        {
-            var8 = new EntityDinoEgg(var0, var1);
-        }
-
-        if (var8 != null)
-        {
-            ((Entity) var8).setLocationAndAngles(var2, var4, var6, var0.rand.nextFloat() * 360.0F, 0.0F);
-            var0.spawnEntityInWorld((Entity) var8);
-        }
-
-        return var8 != null;
-    }
-
     @Override
     public String getUnlocalizedName(ItemStack itemstack)
     {
-        return getUnlocalizedName() + "." + EnumDinoType.values()[itemstack.getItemDamage()].name();
+        return getUnlocalizedName() + "." + EnumPrehistoric.values()[itemstack.getItemDamage()].name();
     }
 
     @Override
@@ -74,13 +52,13 @@ public class ItemDinosaurModels extends Item
     @SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister icon)
     {
-        icons = new IIcon[EnumDinoType.values().length];
+        icons = new IIcon[EnumPrehistoric.values().length];
 
         for (int i = 0; i < icons.length; i++)
         {
             if (i != 4) //Silly Nautilus, bones are for dinosaurs.
             {
-                icons[i] = icon.registerIcon(Revival.modid + ":" + "dinosaur_bones/models/" + EnumDinoType.values()[i] + "_model");
+                icons[i] = icon.registerIcon(Revival.modid + ":" + "dinosaur_bones/models/" + EnumPrehistoric.values()[i] + "_model");
             }
         }
     }
@@ -106,7 +84,7 @@ public class ItemDinosaurModels extends Item
         }
         else
         {
-            Class var11 = EnumDinoType.values()[var1.getItemDamage()].getDinoClass();
+            Class var11 = EnumPrehistoric.values()[var1.getItemDamage()].getDinoClass();
             EntityDinosaur var12;
 
             try

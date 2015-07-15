@@ -4,8 +4,9 @@ import com.github.revival.common.block.BlockFeeder;
 import com.github.revival.common.entity.mob.EntityDinosaur;
 import com.github.revival.common.enums.EnumDinoFoodBlock;
 import com.github.revival.common.enums.EnumDinoFoodItem;
-import com.github.revival.common.enums.EnumDinoType;
+import com.github.revival.common.enums.EnumPrehistoric;
 import com.github.revival.common.handler.LocalizationStrings;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
@@ -27,7 +28,7 @@ public class TileEntityFeeder extends TileEntity implements IInventory,
     public int MeatMax = 10000;
     public int VegCurrent = 0;
     public int VegMax = 10000;
-    public boolean[] ContainType = new boolean[EnumDinoType.values().length];
+    public boolean[] ContainType = new boolean[EnumPrehistoric.values().length];
     private ItemStack[] feederItemStacks = new ItemStack[2];
     private String customName;
 
@@ -222,10 +223,10 @@ public class TileEntityFeeder extends TileEntity implements IInventory,
                     // TODO the feeder contains the raw food of the dino....he
                     // wont eat out of it anymore until it has been emptied!
 
-                    if (EnumDinoType.isDinoDrop(this.feederItemStacks[0]
+                    if (EnumPrehistoric.isFoodItem(this.feederItemStacks[0]
                             .getItem()))
                     {
-                        this.ContainType[EnumDinoType
+                        this.ContainType[EnumPrehistoric
                                 .getIndex(this.feederItemStacks[0].getItem())] = true;
                     }
                 }
@@ -333,9 +334,9 @@ public class TileEntityFeeder extends TileEntity implements IInventory,
      * Dino! Returns false if the dino is a carnivore and its own meat is in the
      * feeder
      */
-    public boolean CheckIsEmpty(EnumDinoType dinotype)
+    public boolean CheckIsEmpty(EnumPrehistoric selfType)
     {
-        if (((!dinotype.isHerbivore() || this.VegCurrent == 0) && (!dinotype
+        if (((!selfType.isHerbivore() || this.VegCurrent == 0) && (!selfType
                 .isCarnivore() || this.MeatCurrent == 0))) // ||
         // this.ContainType[dinotype.ordinal()])
         {
@@ -346,7 +347,7 @@ public class TileEntityFeeder extends TileEntity implements IInventory,
         return false;
     }
 
-    public int Feed(EntityDinosaur dinosaur, EnumDinoType dinotype)
+    public int Feed(EntityDinosaur dinosaur, EnumPrehistoric dinotype)
     {
         int feedamount = 0;
         int meat = this.MeatCurrent;
@@ -398,9 +399,9 @@ public class TileEntityFeeder extends TileEntity implements IInventory,
 	 */
 
 	/*
-	 * public boolean GetIfEatingSameBreed(EnumDinoType var1) {//Seems to be
-	 * completely senseless to me, will return true for all dinos EnumDinoType[]
-	 * var2 = EnumDinoType.values();
+	 * public boolean GetIfEatingSameBreed(EnumPrehistoric var1) {//Seems to be
+	 * completely senseless to me, will return true for all dinos EnumPrehistoric[]
+	 * var2 = EnumPrehistoric.values();
 	 * 
 	 * for (int var3 = 0; var3 < var2.length; ++var3) { if
 	 * (var1.equals(var2[var3])) { return true; } }

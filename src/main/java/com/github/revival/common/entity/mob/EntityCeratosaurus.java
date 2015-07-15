@@ -2,7 +2,7 @@ package com.github.revival.common.entity.mob;
 
 import com.github.revival.Revival;
 import com.github.revival.common.entity.ai.*;
-import com.github.revival.common.enums.EnumDinoType;
+import com.github.revival.common.enums.EnumPrehistoric;
 import com.github.revival.common.enums.EnumSituation;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -19,12 +19,12 @@ import java.util.Random;
 
 public class EntityCeratosaurus extends EntityDinosaur
 {
-    public static final double baseHealth = EnumDinoType.Ceratosaurus.Health0;
-    public static final double baseDamage = EnumDinoType.Ceratosaurus.Strength0;
-    public static final double baseSpeed = EnumDinoType.Ceratosaurus.Speed0;
-    public static final double maxHealth = EnumDinoType.Ceratosaurus.HealthMax;
-    public static final double maxDamage = EnumDinoType.Ceratosaurus.StrengthMax;
-    public static final double maxSpeed = EnumDinoType.Ceratosaurus.SpeedMax;
+    public static final double baseHealth = EnumPrehistoric.Ceratosaurus.Health0;
+    public static final double baseDamage = EnumPrehistoric.Ceratosaurus.Strength0;
+    public static final double baseSpeed = EnumPrehistoric.Ceratosaurus.Speed0;
+    public static final double maxHealth = EnumPrehistoric.Ceratosaurus.HealthMax;
+    public static final double maxDamage = EnumPrehistoric.Ceratosaurus.StrengthMax;
+    public static final double maxSpeed = EnumPrehistoric.Ceratosaurus.SpeedMax;
     private static float health = 10;
     public final int Areas = 15;
     final EntityAIControlledByPlayer aiControlledByPlayer;
@@ -39,13 +39,13 @@ public class EntityCeratosaurus extends EntityDinosaur
 
     public EntityCeratosaurus(World var1)
     {
-        super(var1, EnumDinoType.Ceratosaurus);
+        super(var1, EnumPrehistoric.Ceratosaurus);
         this.looksWithInterest = false;
         this.updateSize();
         /*
          * EDIT VARIABLES PER DINOSAUR TYPE
 		 */
-        this.adultAge = EnumDinoType.Ceratosaurus.AdultAge;
+        this.adultAge = EnumPrehistoric.Ceratosaurus.AdultAge;
         // Set initial size for hitbox. (length/width, height)
         this.setSize(1.55F, 1.3F);
         // Size of dinosaur at day 0.

@@ -3,7 +3,7 @@ package com.github.revival.common.entity.mob;
 import com.github.revival.Revival;
 import com.github.revival.client.gui.GuiPedia;
 import com.github.revival.common.api.IViviparous;
-import com.github.revival.common.enums.EnumAnimalType;
+import com.github.revival.common.enums.EnumPrehistoric;
 import com.github.revival.common.handler.LocalizationStrings;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntitySheep;
@@ -18,7 +18,7 @@ public class EntityPregnantSheep implements IViviparous, IExtendedEntityProperti
     private final EntitySheep sheep;
 
     public int EmbryoProgress;
-    public EnumAnimalType Embryo;
+    public EnumPrehistoric Embryo;
     private World worldObj;
 
 
@@ -74,7 +74,7 @@ public class EntityPregnantSheep implements IViviparous, IExtendedEntityProperti
 
         if (compound.hasKey("Inside"))
         {
-            this.Embryo = EnumAnimalType.values()[properties.getByte("Inside")];
+            this.Embryo = EnumPrehistoric.values()[properties.getByte("Inside")];
         }
     }
 
@@ -83,7 +83,7 @@ public class EntityPregnantSheep implements IViviparous, IExtendedEntityProperti
     {
     }
 
-    public void SetEmbryo(EnumAnimalType animalType)
+    public void setEmbryo(EnumPrehistoric animalType)
     {
         this.Embryo = animalType;
     }
@@ -98,7 +98,7 @@ public class EntityPregnantSheep implements IViviparous, IExtendedEntityProperti
     {
         if (this.Embryo != null)
         {
-            int quot = (int) Math.floor(((float) this.EmbryoProgress / (float) this.Embryo.GrowTime * 100.0F));
+            int quot = (int) Math.floor(((float) this.EmbryoProgress / (float) this.Embryo.growTime * 100.0F));
 
             p0.reset();
             p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_EMBRYO_INSIDE), false);

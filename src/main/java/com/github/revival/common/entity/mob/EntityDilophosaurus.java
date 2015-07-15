@@ -4,7 +4,7 @@ import com.github.revival.Revival;
 import com.github.revival.client.gui.GuiPedia;
 import com.github.revival.common.config.FossilConfig;
 import com.github.revival.common.entity.ai.*;
-import com.github.revival.common.enums.EnumDinoType;
+import com.github.revival.common.enums.EnumPrehistoric;
 import com.github.revival.common.enums.EnumOrderType;
 import com.github.revival.common.enums.EnumSituation;
 import com.github.revival.common.handler.LocalizationStrings;
@@ -31,12 +31,12 @@ import java.util.Vector;
 
 public class EntityDilophosaurus extends EntityDinosaur
 {
-    public static final double baseHealth = EnumDinoType.Dilophosaurus.Health0;
-    public static final double baseDamage = EnumDinoType.Dilophosaurus.Strength0;
-    public static final double baseSpeed = EnumDinoType.Dilophosaurus.Speed0;
-    public static final double maxHealth = EnumDinoType.Dilophosaurus.HealthMax;
-    public static final double maxDamage = EnumDinoType.Dilophosaurus.StrengthMax;
-    public static final double maxSpeed = EnumDinoType.Dilophosaurus.SpeedMax;
+    public static final double baseHealth = EnumPrehistoric.Dilophosaurus.Health0;
+    public static final double baseDamage = EnumPrehistoric.Dilophosaurus.Strength0;
+    public static final double baseSpeed = EnumPrehistoric.Dilophosaurus.Speed0;
+    public static final double maxHealth = EnumPrehistoric.Dilophosaurus.HealthMax;
+    public static final double maxDamage = EnumPrehistoric.Dilophosaurus.StrengthMax;
+    public static final double maxSpeed = EnumPrehistoric.Dilophosaurus.SpeedMax;
 
     public int LearningChestTick = 900;
     public boolean PreyChecked = false;
@@ -49,13 +49,13 @@ public class EntityDilophosaurus extends EntityDinosaur
 
     public EntityDilophosaurus(World var1)
     {
-        super(var1, EnumDinoType.Dilophosaurus);
+        super(var1, EnumPrehistoric.Dilophosaurus);
         this.looksWithInterest = false;
         this.updateSize();
         /*
          * EDIT VARIABLES PER DINOSAUR TYPE
 		 */
-        this.adultAge = EnumDinoType.Dilophosaurus.AdultAge;
+        this.adultAge = EnumPrehistoric.Dilophosaurus.AdultAge;
         // Set initial size for hitbox. (length/width, height)
         this.setSize(1.5F, 1.5F);
         // Size of dinosaur at day 0.

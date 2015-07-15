@@ -6,7 +6,8 @@ import com.github.revival.client.gui.elements.FossilGuiPage;
 import com.github.revival.common.container.ContainerPedia;
 import com.github.revival.common.entity.EntityDinoEgg;
 import com.github.revival.common.entity.mob.*;
-import com.github.revival.common.enums.EnumDinoType;
+import com.github.revival.common.enums.EnumPrehistoric;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
@@ -22,6 +23,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
@@ -41,7 +43,7 @@ public class GuiPedia extends GuiContainer
     public int BookPages;
     public int BookPagesTotal = 1;
     public FossilGuiButton buttonIcon;
-    public EnumDinoType SelfType = null;
+    public EnumPrehistoric SelfType = null;
     int update = 0;
     int left;//counter for text added on the left side
     int right;//same for the right side

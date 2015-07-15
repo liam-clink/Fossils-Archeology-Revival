@@ -5,7 +5,7 @@ import com.github.revival.common.entity.ai.DinoAIAttackOnCollide;
 import com.github.revival.common.entity.ai.DinoAIEat;
 import com.github.revival.common.entity.ai.DinoAIFollowOwner;
 import com.github.revival.common.entity.ai.DinoAIWander;
-import com.github.revival.common.enums.EnumDinoType;
+import com.github.revival.common.enums.EnumPrehistoric;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
@@ -21,12 +21,12 @@ import java.util.Random;
 
 public class EntityStegosaurus extends EntityDinosaur
 {
-    public static final double baseHealth = EnumDinoType.Stegosaurus.Health0;
-    public static final double baseDamage = EnumDinoType.Stegosaurus.Strength0;
-    public static final double baseSpeed = EnumDinoType.Stegosaurus.Speed0;
-    public static final double maxHealth = EnumDinoType.Stegosaurus.HealthMax;
-    public static final double maxDamage = EnumDinoType.Stegosaurus.StrengthMax;
-    public static final double maxSpeed = EnumDinoType.Stegosaurus.SpeedMax;
+    public static final double baseHealth = EnumPrehistoric.Stegosaurus.Health0;
+    public static final double baseDamage = EnumPrehistoric.Stegosaurus.Strength0;
+    public static final double baseSpeed = EnumPrehistoric.Stegosaurus.Speed0;
+    public static final double maxHealth = EnumPrehistoric.Stegosaurus.HealthMax;
+    public static final double maxDamage = EnumPrehistoric.Stegosaurus.StrengthMax;
+    public static final double maxSpeed = EnumPrehistoric.Stegosaurus.SpeedMax;
     private final String texturePath;
     /*public final float HuntLimit = (float)this.getHungerLimit() * 0.9F;
     private float field_25048_b;
@@ -44,7 +44,7 @@ public class EntityStegosaurus extends EntityDinosaur
 
     public EntityStegosaurus(World var1)
     {
-        super(var1, EnumDinoType.Stegosaurus);
+        super(var1, EnumPrehistoric.Stegosaurus);
         this.looksWithInterest = false;
 
         this.updateSize();
@@ -52,7 +52,7 @@ public class EntityStegosaurus extends EntityDinosaur
         /*
          * EDIT VARIABLES PER DINOSAUR TYPE
          */
-        this.adultAge = EnumDinoType.Stegosaurus.AdultAge;
+        this.adultAge = EnumPrehistoric.Stegosaurus.AdultAge;
         // Set initial size for hitbox. (length/width, height)
         this.setSize(1.0F, 0.8F);
         // Size of dinosaur at day 0.

@@ -279,7 +279,7 @@ public class EntityTerrorBird extends EntityTameable
         if (!this.isChild() && !this.worldObj.isRemote && --this.timeUntilNextEgg <= 0)
         {
             this.playSound("mob.chicken.plop", 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
-            this.entityDropItem(new ItemStack(FAItemRegistry.terrorBirdEgg, 1, this.getSkin()), 1);
+        //    this.entityDropItem(new ItemStack(FAItemRegistry.terrorBirdEgg, 1, this.getSkin()), 1);
             this.timeUntilNextEgg = this.nextTimeUntilNextEgg;
         }
     }
@@ -377,11 +377,11 @@ public class EntityTerrorBird extends EntityTameable
 
         if (this.isBurning())
         {
-            this.dropItem(FAItemRegistry.terrorBirdMeatCooked, 1);
+     //       this.dropItem(FAItemRegistry.terrorBirdMeatCooked, 1);
         }
         else
         {
-            this.dropItem(FAItemRegistry.terrorBirdMeat, 1);
+     //       this.dropItem(FAItemRegistry.terrorBirdMeat, 1);
         }
     }
     
@@ -542,8 +542,8 @@ public class EntityTerrorBird extends EntityTameable
         }
         else if (itemstack != null)
         {
-            if ((this.getSkin() == 0 && itemstack.getItem() == Item.getItemFromBlock(Blocks.pumpkin))
-                    || (this.getSkin() != 0 && itemstack.getItem() == FAItemRegistry.quaggaMeat))
+            if ((this.getSkin() == 0 && itemstack.getItem() == Item.getItemFromBlock(Blocks.pumpkin)))
+           //         || (this.getSkin() != 0 && itemstack.getItem() == FAItemRegistry.quaggaMeat))
             {
                 if (!player.capabilities.isCreativeMode)
                 {
@@ -632,7 +632,7 @@ public class EntityTerrorBird extends EntityTameable
         if (this.getSkin() == 0)
             return itemstack != null && itemstack.getItem() == Item.getItemFromBlock(Blocks.pumpkin);
 
-        return itemstack != null && itemstack.getItem() == FAItemRegistry.quaggaMeat;
+        return itemstack != null; //&& itemstack.getItem() == FAItemRegistry.quaggaMeat;
     }
 
     public EntityAgeable createChild(EntityAgeable par1EntityAgeable)

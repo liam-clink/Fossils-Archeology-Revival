@@ -2,7 +2,7 @@ package com.github.revival.common.gen.structure;
 
 import com.github.revival.common.block.FABlockRegistry;
 import com.github.revival.common.config.FossilConfig;
-import com.github.revival.common.enums.EnumDinoType;
+import com.github.revival.common.enums.EnumPrehistoric;
 import com.github.revival.common.gen.structure.shipwreck.ShipWreck1;
 import com.github.revival.common.gen.structure.shipwreck.ShipWreck2;
 import com.github.revival.common.gen.structure.shipwreck.ShipWreck3;
@@ -168,12 +168,12 @@ public class FossilWaterStructureGenerator extends StructureGeneratorBase
         }
     }
 
-    private EnumDinoType getDinosaur()
+    private EnumPrehistoric getDinosaur()
     {
-        EnumDinoType[] var1 = EnumDinoType.values();
+    	EnumPrehistoric[] var1 = EnumPrehistoric.values();
         int var2 = var1.length;
         Random var4 = new Random();
-        EnumDinoType enumDinosaur;
+        EnumPrehistoric enumDinosaur;
         enumDinosaur = var1[var4.nextInt(var2)];
         return enumDinosaur;
     }

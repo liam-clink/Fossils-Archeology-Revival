@@ -2,7 +2,7 @@ package com.github.revival.common.entity.ai;
 
 import com.github.revival.common.config.FossilConfig;
 import com.github.revival.common.entity.mob.EntityDinosaur;
-import com.github.revival.common.enums.EnumDinoType;
+import com.github.revival.common.enums.EnumPrehistoric;
 import com.github.revival.common.enums.EnumSituation;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.util.MathHelper;
@@ -49,11 +49,11 @@ public class DinoAIGrowup extends EntityAIBase
         {
             this.AITarget.setPosition(this.AITarget.posX, this.AITarget.posY + 1, this.AITarget.posZ);
             if ((this.AITarget.CheckSpace()
-                    && this.AITarget.SelfType != EnumDinoType.Mosasaurus
-                    && this.AITarget.SelfType != EnumDinoType.Liopleurodon)
-                    || (this.AITarget.isInWater() && this.AITarget.SelfType == EnumDinoType.Mosasaurus)
-                    || (this.AITarget.isInWater() && this.AITarget.SelfType == EnumDinoType.Liopleurodon)
-                    || (this.AITarget.isInWater() && this.AITarget.SelfType == EnumDinoType.Plesiosaur))
+                    && this.AITarget.SelfType != EnumPrehistoric.Mosasaurus
+                    && this.AITarget.SelfType != EnumPrehistoric.Liopleurodon)
+                    || (this.AITarget.isInWater() && this.AITarget.SelfType == EnumPrehistoric.Mosasaurus)
+                    || (this.AITarget.isInWater() && this.AITarget.SelfType == EnumPrehistoric.Liopleurodon)
+                    || (this.AITarget.isInWater() && this.AITarget.SelfType == EnumPrehistoric.Plesiosaur))
             {
                 this.AITarget.setDinoAgeTick(0);
                 this.AITarget.increaseDinoAge();

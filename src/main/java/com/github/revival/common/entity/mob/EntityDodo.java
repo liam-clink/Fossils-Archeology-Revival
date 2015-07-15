@@ -2,8 +2,10 @@ package com.github.revival.common.entity.mob;
 
 import com.github.revival.Revival;
 import com.github.revival.client.gui.GuiPedia;
+import com.github.revival.common.enums.EnumPrehistoric;
 import com.github.revival.common.handler.LocalizationStrings;
 import com.github.revival.common.item.FAItemRegistry;
+
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -170,7 +172,7 @@ public class EntityDodo extends EntityAnimal
         if (!this.isChild() && !this.worldObj.isRemote && --this.timeUntilNextEgg <= 0)
         {
             this.playSound("mob.chicken.plop", 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
-            this.dropItem(FAItemRegistry.dodoEgg, 1);
+            this.dropItem(EnumPrehistoric.Dodo.birdEggItem, 1);
             this.timeUntilNextEgg = this.rand.nextInt(6000) + 6000;
         }
     }
@@ -221,11 +223,11 @@ public class EntityDodo extends EntityAnimal
 
         if (this.isBurning())
         {
-            this.dropItem(FAItemRegistry.dodoWingCooked, 1);
+            this.dropItem(EnumPrehistoric.Dodo.cookedFoodItem, 1);
         }
         else
         {
-            this.dropItem(FAItemRegistry.dodoWing, 1);
+            this.dropItem(EnumPrehistoric.Dodo.foodItem, 1);
         }
     }
 

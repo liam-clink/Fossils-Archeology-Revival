@@ -3,7 +3,7 @@ package com.github.revival.common.entity.mob;
 import com.github.revival.Revival;
 import com.github.revival.client.gui.GuiPedia;
 import com.github.revival.common.entity.ai.*;
-import com.github.revival.common.enums.EnumDinoType;
+import com.github.revival.common.enums.EnumPrehistoric;
 import com.github.revival.common.enums.EnumOrderType;
 import com.github.revival.common.enums.EnumSituation;
 import com.github.revival.common.handler.FossilAchievementHandler;
@@ -29,7 +29,7 @@ import java.util.Vector;
 
 public class EntityAllosaurus extends EntityDinosaur
 {
-    public static final double baseHealth = EnumDinoType.Allosaurus.Health0;
+    public static final double baseHealth = EnumPrehistoric.Allosaurus.Health0;
 
     //public final float HuntLimit = (float)(this.getHungerLimit() * 4 / 5);
     //private float field_25048_b;
@@ -37,11 +37,11 @@ public class EntityAllosaurus extends EntityDinosaur
     //private boolean field_25052_g;
 
     //public ItemStack ItemInMouth = null;
-    public static final double baseDamage = EnumDinoType.Allosaurus.Strength0;
-    public static final double baseSpeed = EnumDinoType.Allosaurus.Speed0;
-    public static final double maxHealth = EnumDinoType.Allosaurus.HealthMax;
-    public static final double maxDamage = EnumDinoType.Allosaurus.StrengthMax;
-    public static final double maxSpeed = EnumDinoType.Allosaurus.SpeedMax;
+    public static final double baseDamage = EnumPrehistoric.Allosaurus.Strength0;
+    public static final double baseSpeed = EnumPrehistoric.Allosaurus.Speed0;
+    public static final double maxHealth = EnumPrehistoric.Allosaurus.HealthMax;
+    public static final double maxDamage = EnumPrehistoric.Allosaurus.StrengthMax;
+    public static final double maxSpeed = EnumPrehistoric.Allosaurus.SpeedMax;
     private final String texturePath;
     public boolean PreyChecked = false;
     public boolean SupportChecked = false;
@@ -53,13 +53,13 @@ public class EntityAllosaurus extends EntityDinosaur
 
     public EntityAllosaurus(World var1)
     {
-        super(var1, EnumDinoType.Allosaurus);
+        super(var1, EnumPrehistoric.Allosaurus);
         this.looksWithInterest = false;
         this.updateSize();
         /*
          * EDIT VARIABLES PER DINOSAUR TYPE
          */
-        this.adultAge = EnumDinoType.Allosaurus.AdultAge;
+        this.adultAge = EnumPrehistoric.Allosaurus.AdultAge;
         // Set initial size for hitbox. (length/width, height)
         this.setSize(1.4F, 1.3F);
         // Size of dinosaur at day 0.

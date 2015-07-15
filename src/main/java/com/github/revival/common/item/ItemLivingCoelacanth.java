@@ -2,7 +2,7 @@ package com.github.revival.common.item;
 
 import com.github.revival.Revival;
 import com.github.revival.common.entity.mob.EntityCoelacanth;
-import com.github.revival.common.enums.EnumDinoType;
+import com.github.revival.common.enums.EnumPrehistoric;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -21,7 +21,7 @@ import java.util.List;
 
 public class ItemLivingCoelacanth extends Item
 {
-    public static final int TypeCount = EnumDinoType.values().length;
+    public static final int TypeCount = EnumPrehistoric.values().length;
     public static final String[] names = new String[]{"first", "second", "third"};
     private int DinoType;
     @SideOnly(Side.CLIENT)

@@ -36,38 +36,38 @@ public enum EnumDinoFoodItem
     PorkCooked(Items.cooked_porkchop, 55, 5),
     Egg(Items.egg, 7, 2),
     Sjl(FAItemRegistry.sjl, 65, 7), //SioChiuLe
-    Nautilus(EnumDinoType.Nautilus.DropItem, 28, 2),
+    Nautilus(EnumPrehistoric.Nautilus.foodItem, 28, 2),
     Coelacanth(FAItemRegistry.livingCoelacanth, 33, 2),
     ChickenSoupRaw(FAItemRegistry.rawChickenSoup, 25, 1),
     ChickenSoupCooked(FAItemRegistry.cookedChickenSoup, 50, 5),
-    Triceratops(EnumDinoType.Triceratops.DropItem, 55, 5),
-    Velociraptor(EnumDinoType.Velociraptor.DropItem, 28, 3),
-    TRex(EnumDinoType.TRex.DropItem, 60, 7),
-    Sarcosuchus(EnumDinoType.Sarcosuchus.DropItem, 60, 7),
-    Pterosaur(EnumDinoType.Pterosaur.DropItem, 35, 2),
-    Plesiosaur(EnumDinoType.Plesiosaur.DropItem, 40, 5),
-    Mosasaurus(EnumDinoType.Mosasaurus.DropItem, 30, 4),
-    Liopleurodon(EnumDinoType.Liopleurodon.DropItem, 28, 3),
-    Stegosaurus(EnumDinoType.Stegosaurus.DropItem, 55, 5),
-    Dilophosaurus(EnumDinoType.Dilophosaurus.DropItem, 28, 4),
-    Brachiosaur(EnumDinoType.Brachiosaurus.DropItem, 80, 9),
-    Spinosaurus(EnumDinoType.Spinosaurus.DropItem, 65, 7),
-    Compsognathus(EnumDinoType.Compsognathus.DropItem, 15, 2),
-    Ankylosaurus(EnumDinoType.Ankylosaurus.DropItem, 53, 3),
-    Pachycephalosaurus(EnumDinoType.Pachycephalosaurus.DropItem, 40, 3),
-    Deinonychus(EnumDinoType.Deinonychus.DropItem, 35, 4),
-    Gallimimus(EnumDinoType.Gallimimus.DropItem, 58, 5),
+    Triceratops(EnumPrehistoric.Triceratops.foodItem, 55, 5),
+    Velociraptor(EnumPrehistoric.Velociraptor.foodItem, 28, 3),
+    TRex(EnumPrehistoric.TRex.foodItem, 60, 7),
+    Sarcosuchus(EnumPrehistoric.Sarcosuchus.foodItem, 60, 7),
+    Pterosaur(EnumPrehistoric.Pterosaur.foodItem, 35, 2),
+    Plesiosaur(EnumPrehistoric.Plesiosaur.foodItem, 40, 5),
+    Mosasaurus(EnumPrehistoric.Mosasaurus.foodItem, 30, 4),
+    Liopleurodon(EnumPrehistoric.Liopleurodon.foodItem, 28, 3),
+    Stegosaurus(EnumPrehistoric.Stegosaurus.foodItem, 55, 5),
+    Dilophosaurus(EnumPrehistoric.Dilophosaurus.foodItem, 28, 4),
+    Brachiosaur(EnumPrehistoric.Brachiosaurus.foodItem, 80, 9),
+    Spinosaurus(EnumPrehistoric.Spinosaurus.foodItem, 65, 7),
+    Compsognathus(EnumPrehistoric.Compsognathus.foodItem, 15, 2),
+    Ankylosaurus(EnumPrehistoric.Ankylosaurus.foodItem, 53, 3),
+    Pachycephalosaurus(EnumPrehistoric.Pachycephalosaurus.foodItem, 40, 3),
+    Deinonychus(EnumPrehistoric.Deinonychus.foodItem, 35, 4),
+    Gallimimus(EnumPrehistoric.Gallimimus.foodItem, 58, 5),
     DinoMeatCooked(FAItemRegistry.cookedDinoMeat, 75, 8),
-    DodoWing(FAItemRegistry.dodoWing, 23, 3),
-    DodoWingCooked(FAItemRegistry.dodoWingCooked, 40, 5),
-    DodoEgg(FAItemRegistry.dodoEgg, 10, 3),
-    TerrorBirdMeat(FAItemRegistry.terrorBirdMeat, 11, 4),
-    TerrorBirdMeatCooked(FAItemRegistry.terrorBirdMeatCooked, 21, 6),
-    TerrorBirdEgg(FAItemRegistry.terrorBirdEgg, 10, 3),
-    Allosaurus(EnumDinoType.Allosaurus.DropItem, 28, 4),
-    Confuciornis(FAItemRegistry.confuciornisRaw, 10, 2),
-    ConfuciornisCooked(FAItemRegistry.confuciornisCooked, 25, 2),
-    ConfuciornisEgg(FAItemRegistry.confuciusornisEgg, 10, 2),;
+    DodoWing(EnumPrehistoric.Dodo.foodItem, 23, 3),
+    DodoWingCooked(EnumPrehistoric.Dodo.cookedFoodItem, 40, 5),
+    DodoEgg(EnumPrehistoric.Dodo.birdEggItem, 10, 3),
+    TerrorBirdMeat(EnumPrehistoric.Dodo.birdEggItem, 11, 4),
+    TerrorBirdMeatCooked(EnumPrehistoric.Dodo.birdEggItem, 21, 6),
+    TerrorBirdEgg(EnumPrehistoric.Dodo.birdEggItem, 10, 3),
+    Allosaurus(EnumPrehistoric.Allosaurus.foodItem, 28, 4),
+    Confuciornis(EnumPrehistoric.Confuciusornis.foodItem, 10, 2),
+    ConfuciornisCooked(EnumPrehistoric.Confuciusornis.cookedFoodItem, 25, 2),
+    ConfuciornisEgg(EnumPrehistoric.Confuciusornis.birdEggItem, 10, 2),;
     public static final int ISHERBIVOROUS = 1;
     public static final int ISCARNIVOROUS = 2;
     public static final int ISNOFOOD = 0;
@@ -119,7 +119,7 @@ public enum EnumDinoFoodItem
         return 0;
     }
     
-    public static void carnivoreItemPreset(EnumDinoType dinoType)
+    public static void carnivoreItemPreset(EnumPrehistoric dinoType)
     {
         dinoType.FoodItemList.addItem(BeefCooked);
         dinoType.FoodItemList.addItem(BeefRaw);
@@ -155,7 +155,7 @@ public enum EnumDinoFoodItem
 
     }
     
-    public static void raptorItemPreset(EnumDinoType dinoType)
+    public static void raptorItemPreset(EnumPrehistoric dinoType)
     {
         dinoType.FoodItemList.addItem(TerrorBirdEgg);
         dinoType.FoodItemList.addItem(DodoEgg);

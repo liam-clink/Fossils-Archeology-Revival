@@ -2,7 +2,7 @@ package com.github.revival.common.entity.mob;
 
 import com.github.revival.client.gui.GuiPedia;
 import com.github.revival.common.entity.ai.*;
-import com.github.revival.common.enums.EnumDinoType;
+import com.github.revival.common.enums.EnumPrehistoric;
 import com.github.revival.common.handler.LocalizationStrings;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -30,13 +30,13 @@ public class EntityPterosaur extends EntityDinosaur
     public static final int BASE_SIZE = 4;
     public static final int HOME_RADIUS = 256;
 
-    public static final double baseHealth = EnumDinoType.Pterosaur.Health0;
-    public static final double baseDamage = EnumDinoType.Pterosaur.Strength0;
-    public static final double baseSpeed = EnumDinoType.Pterosaur.Speed0;
+    public static final double baseHealth = EnumPrehistoric.Pterosaur.Health0;
+    public static final double baseDamage = EnumPrehistoric.Pterosaur.Strength0;
+    public static final double baseSpeed = EnumPrehistoric.Pterosaur.Speed0;
 
-    public static final double maxHealth = EnumDinoType.Pterosaur.HealthMax;
-    public static final double maxDamage = EnumDinoType.Pterosaur.StrengthMax;
-    public static final double maxSpeed = EnumDinoType.Pterosaur.SpeedMax;
+    public static final double maxHealth = EnumPrehistoric.Pterosaur.HealthMax;
+    public static final double maxDamage = EnumPrehistoric.Pterosaur.StrengthMax;
+    public static final double maxSpeed = EnumPrehistoric.Pterosaur.SpeedMax;
 
     public ItemStack ItemInMouth = null;
     public int LearningChestTick = 900;
@@ -50,13 +50,13 @@ public class EntityPterosaur extends EntityDinosaur
 
     public EntityPterosaur(World var1)
     {
-        super(var1, EnumDinoType.Pterosaur);
+        super(var1, EnumPrehistoric.Pterosaur);
         this.updateSize();
 
 		/*
          * EDIT VARIABLES PER DINOSAUR TYPE
 		 */
-        this.adultAge = EnumDinoType.Pterosaur.AdultAge;
+        this.adultAge = EnumPrehistoric.Pterosaur.AdultAge;
         // Set initial size for hitbox. (length/width, height)
         this.setSize(2F, 1.8F);
         // Size of dinosaur at day 0.

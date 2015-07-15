@@ -1,7 +1,7 @@
 package com.github.revival.common.entity.ai;
 
 import com.github.revival.common.entity.mob.EntityDinosaur;
-import com.github.revival.common.enums.EnumDinoType;
+import com.github.revival.common.enums.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.Vec3;
@@ -30,7 +30,7 @@ public class DinoHerd
     private ArrayList<EntityLiving> targets;
     private ArrayList<EntityLiving> longTermTargets;
     private EntityDinosaur leader;
-    private EnumDinoType dinoType;
+    private EnumPrehistoric dinoType;
     private float awarenessRadius;
     private float wanderRadius;
     private float heightAwareness;
@@ -60,7 +60,7 @@ public class DinoHerd
 
     };
 
-    public DinoHerd(EnumDinoType dinoType, int maxHerdSize, int maxTargets, float awarenessRadius, float immediateAwarenessRadius, float wanderRadius, float heightAwareness)
+    public DinoHerd(EnumPrehistoric dinoType, int maxHerdSize, int maxTargets, float awarenessRadius, float immediateAwarenessRadius, float wanderRadius, float heightAwareness)
     {
         herdDinos = new ArrayList<EntityDinosaur>();
         this.dinoType = dinoType;
@@ -72,7 +72,7 @@ public class DinoHerd
         this.immediateAwarenessRadius = immediateAwarenessRadius;
     }
 
-    public DinoHerd(EnumDinoType dinoType, int maxHerdSize, int maxTargets, float awarenessRadius, float wanderRadius)
+    public DinoHerd(EnumPrehistoric dinoType, int maxHerdSize, int maxTargets, float awarenessRadius, float wanderRadius)
     {
         this(dinoType, maxHerdSize, maxTargets, awarenessRadius, awarenessRadius / 2, wanderRadius, 5.0F + awarenessRadius / 5);
     }

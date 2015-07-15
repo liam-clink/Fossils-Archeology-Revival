@@ -2,7 +2,7 @@ package com.github.revival.common.item;
 
 import com.github.revival.Revival;
 import com.github.revival.common.creativetab.FATabRegistry;
-import com.github.revival.common.enums.EnumDinoType;
+import com.github.revival.common.enums.EnumDinoBones;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -33,7 +33,7 @@ public class ItemDinosaurBones extends Item
     @Override
     public String getUnlocalizedName(ItemStack itemstack)
     {
-        return getUnlocalizedName() + "." + EnumDinoType.values()[itemstack.getItemDamage()].name();
+        return getUnlocalizedName() + "." + EnumDinoBones.values()[itemstack.getItemDamage()].name();
     }
 
     @Override
@@ -47,13 +47,13 @@ public class ItemDinosaurBones extends Item
     @SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister icon)
     {
-        icons = new IIcon[EnumDinoType.values().length];
+        icons = new IIcon[EnumDinoBones.values().length];
 
         for (int i = 0; i < icons.length; i++)
         {
-            if (i != 4) //Silly Nautilus, bones are for dinosaurs.
+            if (i != 0) //Silly Nautilus, bones are for dinosaurs.
             {
-                icons[i] = icon.registerIcon(Revival.modid + ":" + "dinosaur_bones/" + this.itemType + "/" + EnumDinoType.values()[i] + "_" + this.itemType);
+                icons[i] = icon.registerIcon(Revival.modid + ":" + "dinosaur_bones/" + this.itemType + "/" + EnumDinoBones.values()[i] + "_" + this.itemType);
             }
         }
     }
@@ -63,7 +63,7 @@ public class ItemDinosaurBones extends Item
     {
         for (int i = 0; i < icons.length; i++)
         {
-            if (i != 4) //Silly Nautilus, bones are for dinosaurs.
+            if (i != 0) //Silly Nautilus, bones are for dinosaurs.
             {
                 ItemStack itemstack = new ItemStack(item, 1, i);
                 list.add(itemstack);

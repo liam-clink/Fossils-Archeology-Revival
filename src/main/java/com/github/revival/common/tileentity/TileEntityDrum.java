@@ -3,7 +3,7 @@ package com.github.revival.common.tileentity;
 import com.github.revival.Revival;
 import com.github.revival.common.entity.mob.EntityDinosaur;
 import com.github.revival.common.entity.mob.EntityTRex;
-import com.github.revival.common.enums.EnumDinoType;
+import com.github.revival.common.enums.EnumPrehistoric;
 import com.github.revival.common.enums.EnumOrderType;
 import com.github.revival.common.handler.LocalizationStrings;
 import com.github.revival.common.item.FAItemRegistry;
@@ -118,17 +118,17 @@ public class TileEntityDrum extends TileEntity
 
         if (item != FAItemRegistry.skullStick) // That is treated specially ;)
         {
-            for (int i = 0; i < EnumDinoType.values().length; ++i)
+            for (int i = 0; i < EnumPrehistoric.values().length; ++i)
             {
-                if (EnumDinoType.values()[i].OrderItem != null
-                        && EnumDinoType.values()[i].OrderItem == item)
+                if (EnumPrehistoric.values()[i].orderItem != null
+                        && EnumPrehistoric.values()[i].orderItem == item)
                 {
                     Revival.ShowMessage(
                             StatCollector
                                     .translateToLocal(LocalizationStrings.DRUM_ORDERING)
                                     + StatCollector
                                     .translateToLocal("fossil.entity."
-                                            + EnumDinoType.values()[i]
+                                            + EnumPrehistoric.values()[i]
                                             .toString())
                                     + ": "
                                     + StatCollector.translateToLocal("order."
@@ -151,7 +151,7 @@ public class TileEntityDrum extends TileEntity
                 Entity var3 = (Entity) it.next();
                 EntityDinosaur var4 = (EntityDinosaur) var3;
 
-                if (item == var4.SelfType.OrderItem
+                if (item == var4.SelfType.orderItem
                         && var4.isTamed()
                         && var2.getCommandSenderName().equalsIgnoreCase(
                         var4.getCommandSenderName()))

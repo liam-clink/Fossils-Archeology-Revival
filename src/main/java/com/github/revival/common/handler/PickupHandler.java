@@ -2,7 +2,7 @@ package com.github.revival.common.handler;
 
 import com.github.revival.Revival;
 import com.github.revival.common.block.FABlockRegistry;
-import com.github.revival.common.enums.EnumDinoType;
+import com.github.revival.common.enums.EnumPrehistoric;
 import com.github.revival.common.item.FAItemRegistry;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
@@ -43,26 +43,16 @@ public class PickupHandler
         }
 
         //Cultivator Achievements
-        if (EnumDinoType.isDinoEgg(event.smelting.getItem()))
+        if (EnumPrehistoric.isDinoEgg(event.smelting.getItem()))
         {
             event.player.addStat(FossilAchievementHandler.dinoEgg, 1);
         }
-        if (event.smelting.getItem() == FAItemRegistry.embryoCow
-                || event.smelting.getItem() == FAItemRegistry.embryoElasmotherium
-                || event.smelting.getItem() == FAItemRegistry.embryoHorse
-                || event.smelting.getItem() == FAItemRegistry.embryoMammoth
-                || event.smelting.getItem() == FAItemRegistry.embryoPig
-                || event.smelting.getItem() == FAItemRegistry.embryoQuagga
-                || event.smelting.getItem() == FAItemRegistry.embryoSheep
-                || event.smelting.getItem() == FAItemRegistry.embryoSmilodon)
+        if (Revival.isDNA(event.smelting.getItem()))
         {
             event.player.addStat(FossilAchievementHandler.mammalEmbryo, 1);
         }
 
-        if (event.smelting.getItem() == FAItemRegistry.cultivatedChickenEgg
-                || event.smelting.getItem() == FAItemRegistry.cultivatedConfuciusornisEgg
-                || event.smelting.getItem() == FAItemRegistry.cultivatedDodoEgg
-                || event.smelting.getItem() == FAItemRegistry.cultivatedTerrorBirdEgg)
+        if (EnumPrehistoric.isBestBirdEgg(event.smelting.getItem()))
         {
             event.player.addStat(FossilAchievementHandler.birdEgg, 1);
         }

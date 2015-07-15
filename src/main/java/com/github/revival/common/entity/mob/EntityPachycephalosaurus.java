@@ -1,7 +1,7 @@
 package com.github.revival.common.entity.mob;
 
 import com.github.revival.common.entity.ai.*;
-import com.github.revival.common.enums.EnumDinoType;
+import com.github.revival.common.enums.EnumPrehistoric;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import io.netty.buffer.ByteBuf;
@@ -17,12 +17,12 @@ import net.minecraft.world.World;
 
 public class EntityPachycephalosaurus extends EntityDinosaur
 {
-    public static final double baseHealth = EnumDinoType.Pachycephalosaurus.Health0;
-    public static final double baseDamage = EnumDinoType.Pachycephalosaurus.Strength0;
-    public static final double baseSpeed = EnumDinoType.Pachycephalosaurus.Speed0;
-    public static final double maxHealth = EnumDinoType.Pachycephalosaurus.HealthMax;
-    public static final double maxDamage = EnumDinoType.Pachycephalosaurus.StrengthMax;
-    public static final double maxSpeed = EnumDinoType.Pachycephalosaurus.SpeedMax;
+    public static final double baseHealth = EnumPrehistoric.Pachycephalosaurus.Health0;
+    public static final double baseDamage = EnumPrehistoric.Pachycephalosaurus.Strength0;
+    public static final double baseSpeed = EnumPrehistoric.Pachycephalosaurus.Speed0;
+    public static final double maxHealth = EnumPrehistoric.Pachycephalosaurus.HealthMax;
+    public static final double maxDamage = EnumPrehistoric.Pachycephalosaurus.StrengthMax;
+    public static final double maxSpeed = EnumPrehistoric.Pachycephalosaurus.SpeedMax;
     /*public final float HuntLimit = (float)this.getHungerLimit() * 0.9F;
     private float field_25048_b;
     private float field_25054_c;
@@ -40,13 +40,13 @@ public class EntityPachycephalosaurus extends EntityDinosaur
 
     public EntityPachycephalosaurus(World var1)
     {
-        super(var1, EnumDinoType.Pachycephalosaurus);
+        super(var1, EnumPrehistoric.Pachycephalosaurus);
         this.looksWithInterest = false;
         this.updateSize();
         /*
          * EDIT VARIABLES PER DINOSAUR TYPE
          */
-        this.adultAge = EnumDinoType.Pachycephalosaurus.AdultAge;
+        this.adultAge = EnumPrehistoric.Pachycephalosaurus.AdultAge;
         // Set initial size for hitbox. (length/width, height)
         this.setSize(1.0F, 1.5F);
         // Size of dinosaur at day 0.

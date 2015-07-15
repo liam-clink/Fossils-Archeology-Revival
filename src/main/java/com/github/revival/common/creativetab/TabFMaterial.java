@@ -1,7 +1,8 @@
 package com.github.revival.common.creativetab;
 
-import com.github.revival.common.enums.EnumDinoType;
+import com.github.revival.common.enums.EnumPrehistoric;
 import com.github.revival.common.handler.LocalizationStrings;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.creativetab.CreativeTabs;
@@ -17,7 +18,7 @@ public class TabFMaterial extends CreativeTabs
     @SideOnly(Side.CLIENT)
     public Item getTabIconItem()
     {
-        return EnumDinoType.Brachiosaurus.EggItem;
+        return EnumPrehistoric.Brachiosaurus.eggItem;
     }
 
     public String getTranslatedTabLabel()

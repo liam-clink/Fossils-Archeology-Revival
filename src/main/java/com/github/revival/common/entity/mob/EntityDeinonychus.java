@@ -3,7 +3,7 @@ package com.github.revival.common.entity.mob;
 import com.github.revival.Revival;
 import com.github.revival.common.config.FossilConfig;
 import com.github.revival.common.entity.ai.*;
-import com.github.revival.common.enums.EnumDinoType;
+import com.github.revival.common.enums.EnumPrehistoric;
 import com.github.revival.common.enums.EnumPrehistoricAI.Jumping;
 
 import io.netty.buffer.ByteBuf;
@@ -27,12 +27,12 @@ import java.util.Vector;
 public class EntityDeinonychus extends EntityDinosaur
 {
 
-	public static final double baseHealth = EnumDinoType.Deinonychus.Health0;
-	public static final double baseDamage = EnumDinoType.Deinonychus.Strength0;
-	public static final double baseSpeed = EnumDinoType.Deinonychus.Speed0;
-	public static final double maxHealth = EnumDinoType.Deinonychus.HealthMax;
-	public static final double maxDamage = EnumDinoType.Deinonychus.StrengthMax;
-	public static final double maxSpeed = EnumDinoType.Deinonychus.SpeedMax;
+	public static final double baseHealth = EnumPrehistoric.Deinonychus.Health0;
+	public static final double baseDamage = EnumPrehistoric.Deinonychus.Strength0;
+	public static final double baseSpeed = EnumPrehistoric.Deinonychus.Speed0;
+	public static final double maxHealth = EnumPrehistoric.Deinonychus.HealthMax;
+	public static final double maxDamage = EnumPrehistoric.Deinonychus.StrengthMax;
+	public static final double maxSpeed = EnumPrehistoric.Deinonychus.SpeedMax;
 	private final String texturePath;
 	public boolean PreyChecked = false;
 	public boolean SupportChecked = false;
@@ -40,10 +40,10 @@ public class EntityDeinonychus extends EntityDinosaur
 
 	public EntityDeinonychus(World var1)
 	{
-		super(var1, EnumDinoType.Deinonychus);
+		super(var1, EnumPrehistoric.Deinonychus);
 		this.updateSize();
 
-		this.adultAge = EnumDinoType.Deinonychus.AdultAge;
+		this.adultAge = EnumPrehistoric.Deinonychus.AdultAge;
 		// Set initial size for hitbox. (length/width, height)
 		this.setSize(1.75F, 1.75F);
 		// Size of dinosaur at day 0.

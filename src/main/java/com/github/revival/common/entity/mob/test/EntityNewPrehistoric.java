@@ -19,7 +19,7 @@ import net.minecraft.world.World;
 
 import com.github.revival.client.gui.GuiPedia;
 import com.github.revival.common.api.IPrehistoricAI;
-import com.github.revival.common.enums.EnumDinoType;
+import com.github.revival.common.enums.EnumPrehistoric;
 import com.github.revival.common.enums.EnumOrderType;
 import com.github.revival.common.enums.EnumPrehistoricAI.Activity;
 import com.github.revival.common.enums.EnumPrehistoricAI.Attacking;
@@ -55,7 +55,7 @@ public class EntityNewPrehistoric extends EntityTameable implements IPrehistoric
 	public float minSize;
 	public float maxSize;
 	public int adultAge;
-	public EnumDinoType SelfType = null;	public int BreedTick;
+	public EnumPrehistoric SelfType = null;	public int BreedTick;
 	public ItemStack ItemInMouth = null;
 	public EnumOrderType OrderStatus;
 	public double baseHealth;

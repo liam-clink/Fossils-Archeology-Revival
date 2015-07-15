@@ -3,6 +3,8 @@ package com.github.revival.common.handler;
 import com.github.revival.Revival;
 import com.github.revival.common.entity.mob.*;
 import com.github.revival.common.enums.EnumAnimalType;
+import com.github.revival.common.enums.EnumPrehistoric;
+
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -75,11 +77,11 @@ public class FossilLivingEvent
                 ++props.EmbryoProgress;
                 this.getClass();
 
-                if (props.EmbryoProgress >= props.Embryo.GrowTime) //var10000 == 3000)
+                if (props.EmbryoProgress >= props.Embryo.growTime) //var10000 == 3000)
                 {
                     GrowEntity(props.Embryo, event);
                     props.EmbryoProgress = 0;
-                    props.SetEmbryo(null);
+                    props.setEmbryo(null);
                 }
             }
         }
@@ -94,11 +96,11 @@ public class FossilLivingEvent
                 ++props.EmbryoProgress;
                 this.getClass();
 
-                if (props.EmbryoProgress >= props.Embryo.GrowTime) //var10000 == 3000)
+                if (props.EmbryoProgress >= props.Embryo.growTime) //var10000 == 3000)
                 {
                     GrowEntity(props.Embryo, event);
                     props.EmbryoProgress = 0;
-                    props.SetEmbryo(null);
+                    props.setEmbryo(null);
                 }
             }
         }
@@ -112,11 +114,11 @@ public class FossilLivingEvent
                 ++props.EmbryoProgress;
                 this.getClass();
 
-                if (props.EmbryoProgress >= props.Embryo.GrowTime) //var10000 == 3000)
+                if (props.EmbryoProgress >= props.Embryo.growTime) //var10000 == 3000)
                 {
                     GrowEntity(props.Embryo, event);
                     props.EmbryoProgress = 0;
-                    props.SetEmbryo(null);
+                    props.setEmbryo(null);
                 }
             }
         }
@@ -130,17 +132,17 @@ public class FossilLivingEvent
                 ++props.EmbryoProgress;
                 this.getClass();
 
-                if (props.EmbryoProgress >= props.Embryo.GrowTime) //var10000 == 3000)
+                if (props.EmbryoProgress >= props.Embryo.growTime) //var10000 == 3000)
                 {
                     GrowEntity(props.Embryo, event);
                     props.EmbryoProgress = 0;
-                    props.SetEmbryo(null);
+                    props.setEmbryo(null);
                 }
             }
         }
     }
 
-    public void GrowEntity(EnumAnimalType embryo, LivingUpdateEvent event)
+    public void GrowEntity(EnumPrehistoric embryo, LivingUpdateEvent event)
     {
         float rnd = new Random().nextInt(100);
         Object birthEntity;

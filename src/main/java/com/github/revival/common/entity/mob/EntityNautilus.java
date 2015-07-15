@@ -2,7 +2,7 @@ package com.github.revival.common.entity.mob;
 
 import com.github.revival.Revival;
 import com.github.revival.client.gui.GuiPedia;
-import com.github.revival.common.enums.EnumDinoType;
+import com.github.revival.common.enums.*;
 import com.github.revival.common.item.FAItemRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
@@ -139,7 +139,7 @@ public class EntityNautilus extends EntityWaterMob
 
         if (var2 == null)
         {
-            ItemStack var3 = new ItemStack(EnumDinoType.Nautilus.EggItem/*Revival.shellNautilusFossil.ancientegg*/, 1);
+            ItemStack var3 = new ItemStack(EnumPrehistoric.Nautilus.eggItem/*Revival.shellNautilusFossil.ancientegg*/, 1);
 
             if (var1.inventory.addItemStackToInventory(var3))
             {

@@ -2,10 +2,12 @@ package com.github.revival.client.renderer.entity;
 
 import com.github.revival.client.model.ModelDinoEgg;
 import com.github.revival.common.entity.EntityDinoEgg;
-import com.github.revival.common.enums.EnumDinoType;
+import com.github.revival.common.enums.EnumPrehistoric;
+
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.opengl.GL11;
 
 public class RenderDinoEgg extends Render
@@ -35,7 +37,7 @@ public class RenderDinoEgg extends Render
         float var12 = 0.75F;
         GL11.glScalef(var12, var12, var12);
         GL11.glScalef(1.0F / var12, 1.0F / var12, 1.0F / var12);
-        if (var1.DinoInside == EnumDinoType.Compsognathus)
+        if (var1.DinoInside == EnumPrehistoric.Compsognathus)
         {
             GL11.glTranslatef(0, -0.725F, 0);
             GL11.glScalef(0.5F, 0.5F, 0.5F);

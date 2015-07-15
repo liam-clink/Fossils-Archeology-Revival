@@ -2,7 +2,7 @@ package com.github.revival.common.entity.mob;
 
 import com.github.revival.common.config.FossilConfig;
 import com.github.revival.common.entity.ai.*;
-import com.github.revival.common.enums.EnumDinoType;
+import com.github.revival.common.enums.EnumPrehistoric;
 import com.github.revival.common.enums.EnumOrderType;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.Block;
@@ -28,7 +28,7 @@ import java.util.Random;
 
 public class EntityPlesiosaur extends EntitySwimmingDino
 {
-    public static final double baseHealth = EnumDinoType.Plesiosaur.Health0;
+    public static final double baseHealth = EnumPrehistoric.Plesiosaur.Health0;
     //public final float HuntLimit = (float)(this.getHungerLimit() * 4 / 5);
     /*private float field_25048_b;
     private float field_25054_c;//For the interesting looking angle!
@@ -37,11 +37,11 @@ public class EntityPlesiosaur extends EntitySwimmingDino
     public int SubSpecies = 1;
     public boolean isBaby = true;*/
     //public int RushTick = 0;
-    public static final double baseDamage = EnumDinoType.Plesiosaur.Strength0;
-    public static final double baseSpeed = EnumDinoType.Plesiosaur.Speed0;
-    public static final double maxHealth = EnumDinoType.Plesiosaur.HealthMax;
-    public static final double maxDamage = EnumDinoType.Plesiosaur.StrengthMax;
-    public static final double maxSpeed = EnumDinoType.Plesiosaur.SpeedMax;
+    public static final double baseDamage = EnumPrehistoric.Plesiosaur.Strength0;
+    public static final double baseSpeed = EnumPrehistoric.Plesiosaur.Speed0;
+    public static final double maxHealth = EnumPrehistoric.Plesiosaur.HealthMax;
+    public static final double maxDamage = EnumPrehistoric.Plesiosaur.StrengthMax;
+    public static final double maxSpeed = EnumPrehistoric.Plesiosaur.SpeedMax;
     //protected final int AGE_LIMIT = 18;
     public float TargetY = 0.0F;
     private boolean looksWithInterest;
@@ -59,14 +59,14 @@ public class EntityPlesiosaur extends EntitySwimmingDino
 
     public EntityPlesiosaur(World var1)
     {
-        super(var1, EnumDinoType.Plesiosaur);
+        super(var1, EnumPrehistoric.Plesiosaur);
         this.looksWithInterest = false;
         this.setSubSpecies((new Random()).nextInt(3) + 1);
         this.updateSize();
         /*
 		 * EDIT VARIABLES PER DINOSAUR TYPE
 		 */
-        this.adultAge = EnumDinoType.Plesiosaur.AdultAge;
+        this.adultAge = EnumPrehistoric.Plesiosaur.AdultAge;
         // Set initial size for hitbox. (length/width, height)
         this.setSize(1.0F, 1.0F);
         // Size of dinosaur at day 0.

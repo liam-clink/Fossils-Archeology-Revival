@@ -4,7 +4,7 @@ import com.github.revival.Revival;
 import com.github.revival.common.block.FABlockRegistry;
 import com.github.revival.common.config.FossilConfig;
 import com.github.revival.common.entity.ai.*;
-import com.github.revival.common.enums.EnumDinoType;
+import com.github.revival.common.enums.EnumPrehistoric;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -21,26 +21,26 @@ import java.util.Random;
 
 public class EntityTriceratops extends EntityDinosaur
 {
-    public static final double baseHealth = EnumDinoType.Triceratops.Health0;
-    public static final double baseDamage = EnumDinoType.Triceratops.Strength0;
-    public static final double baseSpeed = EnumDinoType.Triceratops.Speed0;
-    public static final double maxHealth = EnumDinoType.Triceratops.HealthMax;
-    public static final double maxDamage = EnumDinoType.Triceratops.StrengthMax;
-    public static final double maxSpeed = EnumDinoType.Triceratops.SpeedMax;
+    public static final double baseHealth = EnumPrehistoric.Triceratops.Health0;
+    public static final double baseDamage = EnumPrehistoric.Triceratops.Strength0;
+    public static final double baseSpeed = EnumPrehistoric.Triceratops.Speed0;
+    public static final double maxHealth = EnumPrehistoric.Triceratops.HealthMax;
+    public static final double maxDamage = EnumPrehistoric.Triceratops.StrengthMax;
+    public static final double maxSpeed = EnumPrehistoric.Triceratops.SpeedMax;
     private final String texturePath;
     public boolean Running = false;
     private boolean looksWithInterest;
 
     public EntityTriceratops(World var1)
     {
-        super(var1, EnumDinoType.Triceratops);
+        super(var1, EnumPrehistoric.Triceratops);
         this.looksWithInterest = false;
         this.updateSize();
         this.setSubSpecies((new Random()).nextInt(3) + 1);
         /*
          * EDIT VARIABLES PER DINOSAUR TYPE
 		 */
-        this.adultAge = EnumDinoType.Triceratops.AdultAge;
+        this.adultAge = EnumPrehistoric.Triceratops.AdultAge;
         // Set initial size for hitbox. (length/width, height)
         this.setSize(0.8F, 0.8F);
         // Size of dinosaur at day 0.

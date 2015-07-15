@@ -1,28 +1,22 @@
 package com.github.revival.common.entity.mob;
 
-import com.github.revival.Revival;
-import com.github.revival.client.gui.GuiPedia;
-import com.github.revival.common.block.FABlockRegistry;
-import com.github.revival.common.config.FossilConfig;
-import com.github.revival.common.entity.EntityDinoEgg;
-import com.github.revival.common.entity.ai.DinoAIGrowup;
-import com.github.revival.common.entity.ai.DinoAIStarvation;
-import com.github.revival.common.enums.EnumDinoType;
-import com.github.revival.common.enums.EnumOrderType;
-import com.github.revival.common.enums.EnumSituation;
-import com.github.revival.common.handler.LocalizationStrings;
-import com.github.revival.common.item.FAItemRegistry;
-import com.github.revival.common.tileentity.TileEntityFeeder;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.List;
+import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.client.Minecraft;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.IEntityLivingData;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
@@ -33,16 +27,33 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.*;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.MathHelper;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+
 import org.lwjgl.opengl.GL11;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.List;
-import java.util.Random;
+import com.github.revival.Revival;
+import com.github.revival.client.gui.GuiPedia;
+import com.github.revival.common.block.FABlockRegistry;
+import com.github.revival.common.config.FossilConfig;
+import com.github.revival.common.entity.EntityDinoEgg;
+import com.github.revival.common.entity.ai.DinoAIGrowup;
+import com.github.revival.common.entity.ai.DinoAIStarvation;
+import com.github.revival.common.enums.EnumOrderType;
+import com.github.revival.common.enums.EnumPrehistoric;
+import com.github.revival.common.enums.EnumSituation;
+import com.github.revival.common.handler.LocalizationStrings;
+import com.github.revival.common.item.FAItemRegistry;
+import com.github.revival.common.tileentity.TileEntityFeeder;
+
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public abstract class EntityDinosaur extends EntityPrehistoric implements IEntityAdditionalSpawnData
 {
@@ -69,7 +80,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
     public float minSize;
     public float maxSize;
     public int adultAge;
-    public EnumDinoType SelfType = null;
+    public EnumPrehistoric SelfType = null;
     // Breed Tick at the moment, 0=breed, BreedingTime=timer just started
     public int BreedTick;
     // Variable for the thing the dino can hold in it's mouth
@@ -83,7 +94,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
     public double maxSpeed;
 
     // EntityDinosaur Constructor
-    public EntityDinosaur(World var1, EnumDinoType T0)
+    public EntityDinosaur(World var1, EnumPrehistoric T0)
     {
         super(var1);
         this.SelfType = T0;
@@ -618,10 +629,10 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
                             .translateToLocal(LocalizationStrings.PEDIA_TEXT_RIDEABLE),
                     true);
 
-        if (this.SelfType.OrderItem != null)
+        if (this.SelfType.orderItem != null)
             p0.AddStringLR(
                     StatCollector.translateToLocal("Order: "
-                            + (new ItemStack(this.SelfType.OrderItem))
+                            + (new ItemStack(this.SelfType.orderItem))
                             .getDisplayName()), true);
 
         for (int i = 0; i < this.SelfType.FoodItemList.index; i++)
@@ -1129,7 +1140,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
             return Items.bone;
         }
 
-        return this.SelfType.DropItem;
+        return this.SelfType.foodItem;
     }
 
     /**
@@ -1658,8 +1669,8 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
                         setRidingPlayer(player);
                     }
 
-                    if (this.SelfType.OrderItem != null
-                            && itemstack.getItem() == this.SelfType.OrderItem
+                    if (this.SelfType.orderItem != null
+                            && itemstack.getItem() == this.SelfType.orderItem
                             && this.isTamed() && func_152114_e(player)
                             && !player.isRiding())
                     {

@@ -6,7 +6,7 @@ import com.github.revival.common.entity.ai.DinoAIEat;
 import com.github.revival.common.entity.ai.DinoAIFollowOwner;
 import com.github.revival.common.entity.ai.DinoAIRideGround;
 import com.github.revival.common.entity.ai.DinoAIWander;
-import com.github.revival.common.enums.EnumDinoType;
+import com.github.revival.common.enums.EnumPrehistoric;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.EntityAgeable;
@@ -18,25 +18,25 @@ import net.minecraft.world.World;
 
 public class EntityGallimimus extends EntityDinosaur
 {
-    public static final double baseHealth = EnumDinoType.Gallimimus.Health0;
+    public static final double baseHealth = EnumPrehistoric.Gallimimus.Health0;
 
 //    final float PUSHDOWN_HARDNESS = 5.0F;
     //final EntityAIControlledByPlayer aiControlledByPlayer;
-    public static final double baseDamage = EnumDinoType.Gallimimus.Strength0;
-    public static final double baseSpeed = EnumDinoType.Gallimimus.Speed0;
-    public static final double maxHealth = EnumDinoType.Gallimimus.HealthMax;
-    public static final double maxDamage = EnumDinoType.Gallimimus.StrengthMax;
-    public static final double maxSpeed = EnumDinoType.Gallimimus.SpeedMax;
+    public static final double baseDamage = EnumPrehistoric.Gallimimus.Strength0;
+    public static final double baseSpeed = EnumPrehistoric.Gallimimus.Speed0;
+    public static final double maxHealth = EnumPrehistoric.Gallimimus.HealthMax;
+    public static final double maxDamage = EnumPrehistoric.Gallimimus.StrengthMax;
+    public static final double maxSpeed = EnumPrehistoric.Gallimimus.SpeedMax;
     private final String texturePath;
     public boolean isTamed = false;
     public EntityGallimimus(World var1)
     {
-        super(var1, EnumDinoType.Gallimimus);
+        super(var1, EnumPrehistoric.Gallimimus);
         this.updateSize();
         /*
          * EDIT VARIABLES PER DINOSAUR TYPE
          */
-        this.adultAge = EnumDinoType.Gallimimus.AdultAge;
+        this.adultAge = EnumPrehistoric.Gallimimus.AdultAge;
         // Set initial size for hitbox. (length/width, height)
         this.setSize(1.0F, 2.0F);
         // Size of dinosaur at day 0.
@@ -74,9 +74,9 @@ public class EntityGallimimus extends EntityDinosaur
     protected void applyEntityAttributes()
     {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(EnumDinoType.Gallimimus.Speed0);
-        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(EnumDinoType.Gallimimus.Health0);
-        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(EnumDinoType.Gallimimus.Strength0);
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(EnumPrehistoric.Gallimimus.Speed0);
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(EnumPrehistoric.Gallimimus.Health0);
+        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(EnumPrehistoric.Gallimimus.Strength0);
     }
 
     /**

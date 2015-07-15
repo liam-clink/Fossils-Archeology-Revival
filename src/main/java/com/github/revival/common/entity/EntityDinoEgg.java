@@ -3,11 +3,12 @@ package com.github.revival.common.entity;
 import com.github.revival.Revival;
 import com.github.revival.client.gui.GuiPedia;
 import com.github.revival.common.entity.mob.*;
-import com.github.revival.common.enums.EnumDinoType;
 import com.github.revival.common.enums.EnumOrderType;
+import com.github.revival.common.enums.EnumPrehistoric;
 import com.github.revival.common.handler.FossilAchievementHandler;
 import com.github.revival.common.handler.LocalizationStrings;
 import com.github.revival.common.item.FAItemRegistry;
+
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 import cpw.mods.fml.relauncher.Side;
@@ -44,12 +45,12 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
     public final int HatchingNeedTime;
     public int damageTaken;
     public int timeSinceHit;
-    public EnumDinoType DinoInside;
+    public EnumPrehistoric DinoInside;
     //public int BirthTick;
     public String ParentOwner;
     private int HatchTime;
 
-    public EntityDinoEgg(World var1, EnumDinoType var2)
+    public EntityDinoEgg(World var1, EnumPrehistoric var12)
     {
         super(var1);
         //this.BirthTick = 0;
@@ -60,22 +61,22 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
         this.preventEntitySpawning = true;
         this.setSize(0.5F, 1.5F);
         this.yOffset = this.height;
-        this.DinoInside = var2;
+        this.DinoInside = var12;
         this.lastBirthTick = 0;
     }
 
     public EntityDinoEgg(World var1)
     {
-        this(var1, (EnumDinoType) null);
+        this(var1, (EnumPrehistoric)null);
     }
 
-    public EntityDinoEgg(World var1, EnumDinoType var2, EntityDinosaur var3)
+    public EntityDinoEgg(World var1, EnumPrehistoric var2, EntityDinosaur var3)
     {
         this(var1, var2);
         this.ParentOwner = var3.getCommandSenderName();
     }
 
-    public EntityDinoEgg(World var1, double var2, double var4, double var6, EnumDinoType var8)
+    public EntityDinoEgg(World var1, double var2, double var4, double var6, EnumPrehistoric var8)
     {
         this(var1, var8);
         this.setPosition(var2, var4 + (double) this.yOffset, var6);
@@ -432,7 +433,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
             player = this.worldObj.getClosestPlayerToEntity(this, 16.0D);
         }
 
-        if (this.DinoInside == EnumDinoType.Mosasaurus || this.DinoInside == EnumDinoType.Liopleurodon)
+        if (this.DinoInside == EnumPrehistoric.Mosasaurus || this.DinoInside == EnumPrehistoric.Liopleurodon)
         {
             if (this.inWater)
             {
@@ -469,7 +470,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
             {
                 String var6;
 
-                if (this.DinoInside == EnumDinoType.Mosasaurus || this.DinoInside == EnumDinoType.Liopleurodon)
+                if (this.DinoInside == EnumPrehistoric.Mosasaurus || this.DinoInside == EnumPrehistoric.Liopleurodon)
                 {
                     var6 = StatCollector.translateToLocal(LocalizationStrings.DINOEGG_DRY);
                 }
@@ -817,7 +818,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
                     }
                     if (((EntityDinosaur) var5).SelfType.isTameable() && player != null)
                     {
-                        if (((EntityDinosaur) var5).SelfType != EnumDinoType.TRex && ((EntityDinosaur) var5).SelfType != EnumDinoType.Allosaurus && ((EntityDinosaur) var5).SelfType != EnumDinoType.Sarcosuchus)
+                        if (((EntityDinosaur) var5).SelfType != EnumPrehistoric.TRex && ((EntityDinosaur) var5).SelfType != EnumPrehistoric.Allosaurus && ((EntityDinosaur) var5).SelfType != EnumPrehistoric.Sarcosuchus)
                         {
                             // Tameable and player next to it
                             ((EntityDinosaur) var5).setTamed(true);
@@ -834,7 +835,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
                 if (this.worldObj.checkNoEntityCollision(((EntityLiving) var5).boundingBox)
                         && this.worldObj.getCollidingBoundingBoxes((Entity) var5, ((EntityLiving) var5).boundingBox).size() == 0
                         && (!this.worldObj.isAnyLiquid(((EntityLiving) var5).boundingBox)
-                        || this.DinoInside == EnumDinoType.Mosasaurus || this.DinoInside == EnumDinoType.Liopleurodon))
+                        || this.DinoInside == EnumPrehistoric.Mosasaurus || this.DinoInside == EnumPrehistoric.Liopleurodon))
                 {
                     //if (!this.worldObj.isRemote)
                     {
@@ -873,7 +874,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
      */
     protected void readEntityFromNBT(NBTTagCompound var1)
     {
-        EnumDinoType[] var2 = EnumDinoType.values();
+    	EnumPrehistoric[] var2 = EnumPrehistoric.values();
         this.setBirthTick(var1.getInteger("BirthTick"));
         this.DinoInside = var2[var1.getInteger("DinoType")];
         this.ParentOwner = var1.getString("ParentOwner");
@@ -889,7 +890,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
 
         if (itemstack == null)
         {
-            Item i0 = this.DinoInside.EggItem;
+            Item i0 = this.DinoInside.eggItem;
             ItemStack var3 = new ItemStack(i0/*this.DinoInside.EggItem/*var7*/, 1, 1);
 
             if (player.inventory.addItemStackToInventory(var3))
@@ -910,7 +911,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
         return false;
     }
 
-    private int EnumToInt(EnumDinoType var1)
+    private int EnumToInt(EnumPrehistoric var1)
     {
         return this.DinoInside.ordinal();
     }
@@ -918,7 +919,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
     @SideOnly(Side.CLIENT)
     public void ShowPedia(GuiPedia p0)
     {
-        Item it0 = this.DinoInside.EggItem;
+        Item it0 = this.DinoInside.eggItem;
         /*switch (this.DinoInside)
         {
             case Triceratops:it0=Revival.eggTriceratops;break;
@@ -940,7 +941,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
         int quot = (int) Math.floor(((float) this.getBirthTick() / (float) this.HatchingNeedTime * 100.0F));
         String stat;
 
-        if (this.DinoInside == EnumDinoType.Mosasaurus || this.DinoInside == EnumDinoType.Liopleurodon)
+        if (this.DinoInside == EnumPrehistoric.Mosasaurus || this.DinoInside == EnumPrehistoric.Liopleurodon)
         {
             if (this.getBirthTick() >= 0)
             {
@@ -984,6 +985,6 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
     public void readSpawnData(ByteBuf var1)
     {
         this.setBirthTick(var1.readInt());
-        this.DinoInside = EnumDinoType.values()[var1.readInt()];
+        this.DinoInside = EnumPrehistoric.values()[var1.readInt()];
     }
 }

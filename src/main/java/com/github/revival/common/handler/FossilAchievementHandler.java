@@ -1,8 +1,9 @@
 package com.github.revival.common.handler;
 
 import com.github.revival.common.block.FABlockRegistry;
-import com.github.revival.common.enums.EnumDinoType;
+import com.github.revival.common.enums.EnumPrehistoric;
 import com.github.revival.common.item.FAItemRegistry;
+
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
@@ -64,11 +65,11 @@ public class FossilAchievementHandler
         firstFossil = new Achievement("achievement.firstFossil", "firstFossil", 0, 0, new ItemStack(FAItemRegistry.biofossil), (Achievement) null).registerStat();
         analyzer = new Achievement("achievement.analyzer", "analyzer", 0, -2, new ItemStack(FABlockRegistry.blockanalyzerActive), (Achievement) firstFossil).registerStat();
         tablet = new Achievement("achievement.tablet", "tablet", -2, -2, new ItemStack(FAItemRegistry.stoneboard), (Achievement) analyzer).registerStat();
-        dinoDna = new Achievement("achievement.dinoDna", "dinoDna", 0, -4, new ItemStack(EnumDinoType.TRex.DNAItem), (Achievement) analyzer).registerStat().setSpecial();
+        dinoDna = new Achievement("achievement.dinoDna", "dinoDna", 0, -4, new ItemStack(EnumPrehistoric.TRex.DNAItem), (Achievement) analyzer).registerStat().setSpecial();
         cultivate = new Achievement("achievement.cultivate", "cultivate", 2, -4, new ItemStack(FABlockRegistry.blockcultivateActive), (Achievement) dinoDna).registerStat();
-        dinoEgg = new Achievement("achievement.dinoEgg", "dinoEgg", 4, -4, new ItemStack(EnumDinoType.TRex.EggItem), (Achievement) cultivate).registerStat();
-        mammalEmbryo = new Achievement("achievement.mammalEmbryo", "mammalEmbryo", 4, -6, new ItemStack(FAItemRegistry.embryoMammoth), (Achievement) cultivate).registerStat();
-        birdEgg = new Achievement("achievement.birdEgg", "birdEgg", 4, -2, new ItemStack(FAItemRegistry.cultivatedConfuciusornisEgg), (Achievement) cultivate).registerStat();
+        dinoEgg = new Achievement("achievement.dinoEgg", "dinoEgg", 4, -4, new ItemStack(EnumPrehistoric.TRex.eggItem), (Achievement) cultivate).registerStat();
+        mammalEmbryo = new Achievement("achievement.mammalEmbryo", "mammalEmbryo", 4, -6, new ItemStack(EnumPrehistoric.Mammoth.embryoItem), (Achievement) cultivate).registerStat();
+        birdEgg = new Achievement("achievement.birdEgg", "birdEgg", 4, -2, new ItemStack(EnumPrehistoric.Confuciusornis.bestBirdEggItem), (Achievement) cultivate).registerStat();
         sifter = new Achievement("achievement.sifter", "sifter", -2, 0, new ItemStack(FABlockRegistry.blockSifterActive), (Achievement) null).registerStat();
         fossilSeeds = new Achievement("achievement.fossilSeeds", "fossilSeeds", -2, -3, new ItemStack(FAItemRegistry.fossilSeed), (Achievement) analyzer).registerStat();
         failuresaurus = new Achievement("achievement.failuresaurus", "failuresaurus", 4, 0, new ItemStack(FABlockRegistry.blockSlimeTrail), (Achievement) cultivate).registerStat();

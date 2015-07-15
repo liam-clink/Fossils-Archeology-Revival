@@ -4,7 +4,7 @@ import com.github.revival.Revival;
 import com.github.revival.client.gui.GuiPedia;
 import com.github.revival.common.config.FossilConfig;
 import com.github.revival.common.entity.ai.*;
-import com.github.revival.common.enums.EnumDinoType;
+import com.github.revival.common.enums.EnumPrehistoric;
 import com.github.revival.common.enums.EnumOrderType;
 import com.github.revival.common.enums.EnumSituation;
 import com.github.revival.common.handler.LocalizationStrings;
@@ -28,12 +28,12 @@ import java.util.Vector;
 
 public class EntityCompsognathus extends EntityDinosaur
 {
-    public static final double baseHealth = EnumDinoType.Compsognathus.Health0;
-    public static final double baseDamage = EnumDinoType.Compsognathus.Strength0;
-    public static final double baseSpeed = EnumDinoType.Compsognathus.Speed0;
-    public static final double maxHealth = EnumDinoType.Compsognathus.HealthMax;
-    public static final double maxDamage = EnumDinoType.Compsognathus.StrengthMax;
-    public static final double maxSpeed = EnumDinoType.Compsognathus.SpeedMax;
+    public static final double baseHealth = EnumPrehistoric.Compsognathus.Health0;
+    public static final double baseDamage = EnumPrehistoric.Compsognathus.Strength0;
+    public static final double baseSpeed = EnumPrehistoric.Compsognathus.Speed0;
+    public static final double maxHealth = EnumPrehistoric.Compsognathus.HealthMax;
+    public static final double maxDamage = EnumPrehistoric.Compsognathus.StrengthMax;
+    public static final double maxSpeed = EnumPrehistoric.Compsognathus.SpeedMax;
     private final String texturePath;
     public int LearningChestTick = 900;
     public boolean PreyChecked = false;
@@ -45,13 +45,13 @@ public class EntityCompsognathus extends EntityDinosaur
 
     public EntityCompsognathus(World var1)
     {
-        super(var1, EnumDinoType.Compsognathus);
+        super(var1, EnumPrehistoric.Compsognathus);
         this.looksWithInterest = false;
         this.updateSize();
         /*
          * EDIT VARIABLES PER DINOSAUR TYPE
          */
-        this.adultAge = EnumDinoType.Compsognathus.AdultAge;
+        this.adultAge = EnumPrehistoric.Compsognathus.AdultAge;
         // Set initial size for hitbox. (length/width, height)
         this.setSize(1.0F, 1.0F);
         // Size of dinosaur at day 0.
@@ -92,9 +92,9 @@ public class EntityCompsognathus extends EntityDinosaur
     protected void applyEntityAttributes()
     {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(EnumDinoType.Compsognathus.Speed0);
-        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(EnumDinoType.Compsognathus.Health0);
-        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(EnumDinoType.Compsognathus.Strength0);
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(EnumPrehistoric.Compsognathus.Speed0);
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(EnumPrehistoric.Compsognathus.Health0);
+        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(EnumPrehistoric.Compsognathus.Strength0);
     }
 
     /**

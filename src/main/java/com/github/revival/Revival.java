@@ -15,7 +15,7 @@ import com.github.revival.common.enchantment.EnchantmentPaleontology;
 import com.github.revival.common.entity.*;
 import com.github.revival.common.entity.mob.*;
 import com.github.revival.common.enums.EnumDinoFoodMob;
-import com.github.revival.common.enums.EnumDinoType;
+import com.github.revival.common.enums.EnumPrehistoric;
 import com.github.revival.common.gen.*;
 import com.github.revival.common.gen.structure.AcademyGenerator;
 import com.github.revival.common.gen.structure.ShipWreckGenerator;
@@ -83,7 +83,7 @@ public class Revival
 
     public static boolean enableDebugging()
     {
-        return false;
+        return true;
     }
 
     public static void ShowMessage(String var6, EntityPlayer var1)
@@ -105,20 +105,7 @@ public class Revival
 
     public static boolean isDNA(Item item)
     {
-        if (item == FAItemRegistry.dnaChicken) return true;
-        if (item == FAItemRegistry.dnaCoelacanth) return true;
-        if (item == FAItemRegistry.dnaConfuciusornis) return true;
-        if (item == FAItemRegistry.dnaCow) return true;
-        if (item == FAItemRegistry.dnaDodo) return true;
-        if (item == FAItemRegistry.dnaElasmotherium) return true;
-        if (item == FAItemRegistry.dnaHorse) return true;
-        if (item == FAItemRegistry.dnaMammoth) return true;
-        if (item == FAItemRegistry.dnaPig) return true;
-        if (item == FAItemRegistry.dnaQuagga) return true;
-        if (item == FAItemRegistry.dnaSheep) return true;
-        if (item == FAItemRegistry.dnaSmilodon) return true;
-        if (item == FAItemRegistry.dnaTerrorBird) return true;
-        else if (EnumDinoType.isDinoDNA(item)) return true;
+        if (EnumPrehistoric.isDNA(item)) return true;
         return false;
     }
 
@@ -131,6 +118,7 @@ public class Revival
 
         ConfigHelper.registerConfigHandler(modid, event.getSuggestedConfigurationFile(), new FossilConfig());
         ContentHelper.init(new FATabRegistry(), new FABlockRegistry(), new FAItemRegistry());
+        EnumPrehistoric.init();
         FossilOreDictionary.oreRegistration();
 
         channel = NetworkRegistry.INSTANCE.newSimpleChannel("fossil");
@@ -174,16 +162,15 @@ public class Revival
         EntityRegistry.registerModEntity(EntitySentryPigman.class, "SentryPigman", 40, this, 250, 3, true);
         EntityRegistry.registerModEntity(EntityAnuDead.class, "AnuDead", 41, this, 250, 3, true);
 
-        for (int i = 0; i < EnumDinoType.values().length; i++)
+        for (int i = 0; i < EnumPrehistoric.values().length; i++)
         {
-            EntityRegistry.registerModEntity(EnumDinoType.values()[i].getDinoClass(), EnumDinoType.values()[i].name(), 200 + i, this, 250, 3, true);
+            EntityRegistry.registerModEntity(EnumPrehistoric.values()[i].getDinoClass(), EnumPrehistoric.values()[i].name(), 200 + i, this, 250, 3, true);
         }
 
         EntityRegistry.addSpawn(EntityCoelacanth.class, 1, 2, 4, EnumCreatureType.waterCreature, BiomeGenBase.ocean);
         EntityRegistry.addSpawn(EntityNautilus.class, 5, 4, 14, EnumCreatureType.waterCreature, BiomeGenBase.river, BiomeGenBase.ocean);
 
         FossilSpawnEggs.addSpawnEggs();
-        EnumDinoType.init();
         EnumDinoFoodMob.init();
 
         GameRegistry.registerWorldGenerator(new FossilGenerator(), 0);

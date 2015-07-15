@@ -5,7 +5,7 @@ import com.github.revival.common.entity.ai.WaterDinoAIAttack;
 import com.github.revival.common.entity.ai.WaterDinoAIEat;
 import com.github.revival.common.entity.ai.WaterDinoAIHunt;
 import com.github.revival.common.entity.ai.WaterDinoAIWander;
-import com.github.revival.common.enums.EnumDinoType;
+import com.github.revival.common.enums.EnumPrehistoric;
 import com.github.revival.common.handler.LocalizationStrings;
 import com.github.revival.common.item.FAItemRegistry;
 import io.netty.buffer.ByteBuf;
@@ -24,12 +24,12 @@ import java.util.Random;
 
 public class EntityMosasaurus extends EntitySwimmingDino
 {
-    public static final double baseHealth = EnumDinoType.Mosasaurus.Health0;
-    public static final double baseDamage = EnumDinoType.Mosasaurus.Strength0;
-    public static final double baseSpeed = EnumDinoType.Mosasaurus.Speed0;
-    public static final double maxHealth = EnumDinoType.Mosasaurus.HealthMax;
-    public static final double maxDamage = EnumDinoType.Mosasaurus.StrengthMax;
-    public static final double maxSpeed = EnumDinoType.Mosasaurus.SpeedMax;
+    public static final double baseHealth = EnumPrehistoric.Mosasaurus.Health0;
+    public static final double baseDamage = EnumPrehistoric.Mosasaurus.Strength0;
+    public static final double baseSpeed = EnumPrehistoric.Mosasaurus.Speed0;
+    public static final double maxHealth = EnumPrehistoric.Mosasaurus.HealthMax;
+    public static final double maxDamage = EnumPrehistoric.Mosasaurus.StrengthMax;
+    public static final double maxSpeed = EnumPrehistoric.Mosasaurus.SpeedMax;
     public int courseChangeCooldown;
     public double waypointX;
     public double waypointY;
@@ -42,11 +42,11 @@ public class EntityMosasaurus extends EntitySwimmingDino
 
     public EntityMosasaurus(World par1World)
     {
-        super(par1World, EnumDinoType.Mosasaurus);
+        super(par1World, EnumPrehistoric.Mosasaurus);
         /*
          * EDIT VARIABLES PER DINOSAUR TYPE
 		 */
-        this.adultAge = EnumDinoType.Mosasaurus.AdultAge;
+        this.adultAge = EnumPrehistoric.Mosasaurus.AdultAge;
         // Set initial size for hitbox. (length/width, height)
         this.setSize(1.5F, 0.6F);
         // Size of dinosaur at day 0.

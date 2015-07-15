@@ -7,7 +7,7 @@ import com.github.revival.common.entity.ai.DinoAIAttackOnCollide;
 import com.github.revival.common.entity.ai.DinoAIEat;
 import com.github.revival.common.entity.ai.DinoAITargetNonTamedExceptSelfClass;
 import com.github.revival.common.entity.ai.DinoAIWander;
-import com.github.revival.common.enums.EnumDinoType;
+import com.github.revival.common.enums.EnumPrehistoric;
 import com.github.revival.common.handler.LocalizationStrings;
 import com.github.revival.common.item.FAItemRegistry;
 import io.netty.buffer.ByteBuf;
@@ -28,12 +28,12 @@ import java.util.Random;
 
 public class EntitySpinosaurus extends EntityDinosaur implements IWaterDino
 {
-    public static final double baseHealth = EnumDinoType.Spinosaurus.Health0;
-    public static final double baseDamage = EnumDinoType.Spinosaurus.Strength0;
-    public static final double baseSpeed = EnumDinoType.Spinosaurus.Speed0;
-    public static final double maxHealth = EnumDinoType.Spinosaurus.HealthMax;
-    public static final double maxDamage = EnumDinoType.Spinosaurus.StrengthMax;
-    public static final double maxSpeed = EnumDinoType.Spinosaurus.SpeedMax;
+    public static final double baseHealth = EnumPrehistoric.Spinosaurus.Health0;
+    public static final double baseDamage = EnumPrehistoric.Spinosaurus.Strength0;
+    public static final double baseSpeed = EnumPrehistoric.Spinosaurus.Speed0;
+    public static final double maxHealth = EnumPrehistoric.Spinosaurus.HealthMax;
+    public static final double maxDamage = EnumPrehistoric.Spinosaurus.StrengthMax;
+    public static final double maxSpeed = EnumPrehistoric.Spinosaurus.SpeedMax;
     //private final BlockBreakingRule blockBreakingBehavior;
     public final int Areas = 15;
     /*private float field_25048_b;
@@ -49,7 +49,7 @@ public class EntitySpinosaurus extends EntityDinosaur implements IWaterDino
 
     public EntitySpinosaurus(World var1)
     {
-        super(var1, EnumDinoType.Spinosaurus);
+        super(var1, EnumPrehistoric.Spinosaurus);
         //this.blockBreakingBehavior = new BlockBreakingRule(this.worldObj, this, 5.0F);
         this.looksWithInterest = false;
         //this.texture = "/mods/fossil/textures/TRex.png";
@@ -61,7 +61,7 @@ public class EntitySpinosaurus extends EntityDinosaur implements IWaterDino
         /*
          * EDIT VARIABLES PER DINOSAUR TYPE
          */
-        this.adultAge = EnumDinoType.Spinosaurus.AdultAge;
+        this.adultAge = EnumPrehistoric.Spinosaurus.AdultAge;
         // Set initial size for hitbox. (length/width, height)
         this.setSize(1.5F, 1.0F);
         // Size of dinosaur at day 0.

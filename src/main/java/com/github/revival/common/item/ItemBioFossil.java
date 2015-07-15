@@ -4,7 +4,7 @@ import com.github.revival.common.creativetab.FATabRegistry;
 import com.github.revival.common.entity.EntityDinoEgg;
 import com.github.revival.common.entity.mob.EntityDinosaur;
 import com.github.revival.common.entity.mob.EntityNautilus;
-import com.github.revival.common.enums.EnumDinoType;
+import com.github.revival.common.enums.EnumPrehistoric;
 import com.github.revival.common.handler.LocalizationStrings;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
@@ -29,27 +29,7 @@ public class ItemBioFossil extends Item
         setCreativeTab(FATabRegistry.tabFItems);
     }
 
-    public static boolean spawnCreature(World var0, EnumDinoType var1, double var2, double var4, double var6)
-    {
-        Object var8;
-
-        if (var1 == EnumDinoType.Nautilus)
-        {
-            var8 = new EntityNautilus(var0);
-        }
-        else
-        {
-            var8 = new EntityDinoEgg(var0, var1);
-        }
-
-        if (var8 != null)
-        {
-            ((Entity) var8).setLocationAndAngles(var2, var4, var6, var0.rand.nextFloat() * 360.0F, 0.0F);
-            var0.spawnEntityInWorld((Entity) var8);
-        }
-
-        return var8 != null;
-    }
+ 
 
     @Override
     public void registerIcons(IIconRegister iconRegister)
@@ -95,12 +75,12 @@ public class ItemBioFossil extends Item
         }
     }
 
-    private EnumDinoType getRandomModel()
+    private EnumPrehistoric getRandomModel()
     {
-        EnumDinoType[] var1 = EnumDinoType.values();
+        EnumPrehistoric[] var1 = EnumPrehistoric.values();
         int var2 = var1.length;
         Random var4 = new Random();
-        EnumDinoType var3;
+        EnumPrehistoric var3;
 
         do
         {

@@ -1504,11 +1504,11 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic
         {
             if (this.isBurning())
             {
-                this.dropItem(FAItemRegistry.quaggaMeatCooked, 1);
+           //     this.dropItem(FAItemRegistry.quaggaMeatCooked, 1);
             }
             else
             {
-                this.dropItem(FAItemRegistry.quaggaMeat, 1);
+           //     this.dropItem(FAItemRegistry.quaggaMeat, 1);
             }
         }
     }

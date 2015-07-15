@@ -1,24 +1,27 @@
 package com.github.revival.common.tileentity;
 
-import com.github.revival.Revival;
-import com.github.revival.common.block.BlockCultivate;
-import com.github.revival.common.block.FABlockRegistry;
-import com.github.revival.common.entity.mob.EntityTerrorBird;
-import com.github.revival.common.enums.EnumDinoType;
-import com.github.revival.common.handler.LocalizationStrings;
-import com.github.revival.common.item.FAItemRegistry;
-import com.github.revival.common.item.ItemLivingCoelacanth;
+import java.util.Random;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 
-import java.util.Random;
+import com.github.revival.Revival;
+import com.github.revival.common.block.BlockCultivate;
+import com.github.revival.common.block.FABlockRegistry;
+import com.github.revival.common.entity.mob.EntityTerrorBird;
+import com.github.revival.common.enums.EnumPrehistoric;
+import com.github.revival.common.handler.LocalizationStrings;
+import com.github.revival.common.item.FAItemRegistry;
+import com.github.revival.common.item.ItemBirdEgg;
+import com.github.revival.common.item.ItemLivingCoelacanth;
 
 public class TileEntityCultivate extends TileEntity implements IInventory,
         ISidedInventory
@@ -73,12 +76,12 @@ public class TileEntityCultivate extends TileEntity implements IInventory,
                 return 1000;
             }
 
-            if (output == FAItemRegistry.dodoEgg || output == FAItemRegistry.terrorBirdEgg || output == FAItemRegistry.confuciusornisEgg)
+            if (output instanceof ItemBirdEgg)
             {
                 return 1000;
             }
 
-            if (output == FAItemRegistry.dodoWing || output == FAItemRegistry.terrorBirdMeat)
+            if (output instanceof ItemFood && ((ItemFood)output).isWolfsFavoriteMeat())
             {
                 return 1500;
             }
@@ -440,80 +443,33 @@ public class TileEntityCultivate extends TileEntity implements IInventory,
         {
             return new ItemStack(FAItemRegistry.seed, 1, itemstack.getItemDamage());
         }
-        if (itemstack.getItem() == FAItemRegistry.dnaSheep)
-        {
-            return new ItemStack(FAItemRegistry.embryoSheep, 1);
-        }
 
-        if (itemstack.getItem() == FAItemRegistry.dnaCow)
-        {
-            return new ItemStack(FAItemRegistry.embryoCow, 1);
-        }
-
-        if (itemstack.getItem() == FAItemRegistry.dnaHorse)
-        {
-            return new ItemStack(FAItemRegistry.embryoHorse, 1);
-        }
-
-        if (itemstack.getItem() == FAItemRegistry.dnaQuagga)
-        {
-            return new ItemStack(FAItemRegistry.embryoQuagga, 1);
-        }
-
-        if (itemstack.getItem() == FAItemRegistry.dnaChicken)
-        {
-            return new ItemStack(FAItemRegistry.cultivatedChickenEgg, 1);
-        }
-
-        if (itemstack.getItem() == FAItemRegistry.dnaPig)
-        {
-            return new ItemStack(FAItemRegistry.embryoPig, 1);
-        }
-
-        if (itemstack.getItem() == FAItemRegistry.dnaSmilodon)
-        {
-            return new ItemStack(FAItemRegistry.embryoSmilodon, 1);
-        }
-
-        if (itemstack.getItem() == FAItemRegistry.dnaMammoth)
-        {
-            return new ItemStack(FAItemRegistry.embryoMammoth, 1);
-        }
-
-        if (itemstack.getItem() == FAItemRegistry.dnaElasmotherium)
-        {
-            return new ItemStack(FAItemRegistry.embryoElasmotherium, 1);
-        }
-
-        if (itemstack.getItem() == FAItemRegistry.dnaDodo)
-        {
-            return new ItemStack(FAItemRegistry.cultivatedDodoEgg, 1);
-        }
-        if (itemstack.getItem() == FAItemRegistry.dnaConfuciusornis)
-        {
-            return new ItemStack(FAItemRegistry.cultivatedConfuciusornisEgg, 1);
-        }
-        if (itemstack.getItem() == FAItemRegistry.dnaTerrorBird)
+       /* if (itemstack.getItem() == FAItemRegistry.dnaTerrorBird)
         {
             return new ItemStack(FAItemRegistry.cultivatedTerrorBirdEgg, 1,
                     new Random().nextInt(EntityTerrorBird.names.length));
-        }
+        }*/
 
-        if (EnumDinoType.getEgg(itemstack.getItem()) != null)
+        if (EnumPrehistoric.getEgg(itemstack.getItem()) != null)
         {
-            return new ItemStack(EnumDinoType.getEgg(itemstack.getItem()), 1); // converts
-            // dino
-            // dna
-            // to
-            // dino
-            // egg
+            return new ItemStack(EnumPrehistoric.getEgg(itemstack.getItem()), 1);
+
+        }
+        
+        if (EnumPrehistoric.getEmbryo(itemstack.getItem()) != null)
+        {
+            return new ItemStack(EnumPrehistoric.getEmbryo(itemstack.getItem()), 1);
+        }
+        if (EnumPrehistoric.getBestBirdEgg(itemstack.getItem()) != null)
+        {
+            return new ItemStack(EnumPrehistoric.getBestBirdEgg(itemstack.getItem()), 1);
         }
 
-        if (itemstack.getItem() == FAItemRegistry.dnaCoelacanth)
+       /* if (itemstack.getItem() == FAItemRegistry.dnaCoelacanth)
         {
             return new ItemStack(FAItemRegistry.livingCoelacanth, 1,
                     new Random().nextInt(ItemLivingCoelacanth.names.length));
-        }
+        }*/
 
         return null;
     }
@@ -624,7 +580,7 @@ public class TileEntityCultivate extends TileEntity implements IInventory,
         {
             if (this.getStackInSlot(0).getItem() != null)
             {
-                if (this.getStackInSlot(0).getItem() == FAItemRegistry.dnaCoelacanth)
+                if (this.getStackInSlot(0).getItem() == EnumPrehistoric.Coelacanth.DNAItem)
                 {
                     return 1;
                 }

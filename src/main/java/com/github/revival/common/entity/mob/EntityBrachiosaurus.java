@@ -1,7 +1,7 @@
 package com.github.revival.common.entity.mob;
 
 import com.github.revival.common.entity.ai.*;
-import com.github.revival.common.enums.EnumDinoType;
+import com.github.revival.common.enums.EnumPrehistoric;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityAgeable;
@@ -14,25 +14,25 @@ import net.minecraft.world.World;
 
 public class EntityBrachiosaurus extends EntityDinosaur
 {
-    public static final double baseHealth = EnumDinoType.Brachiosaurus.Health0;
+    public static final double baseHealth = EnumPrehistoric.Brachiosaurus.Health0;
 
     // final float PUSHDOWN_HARDNESS = 5.0F;
     // final EntityAIControlledByPlayer aiControlledByPlayer;
-    public static final double baseDamage = EnumDinoType.Brachiosaurus.Strength0;
-    public static final double baseSpeed = EnumDinoType.Brachiosaurus.Speed0;
-    public static final double maxHealth = EnumDinoType.Brachiosaurus.HealthMax;
-    public static final double maxDamage = EnumDinoType.Brachiosaurus.StrengthMax;
-    public static final double maxSpeed = EnumDinoType.Brachiosaurus.SpeedMax;
+    public static final double baseDamage = EnumPrehistoric.Brachiosaurus.Strength0;
+    public static final double baseSpeed = EnumPrehistoric.Brachiosaurus.Speed0;
+    public static final double maxHealth = EnumPrehistoric.Brachiosaurus.HealthMax;
+    public static final double maxDamage = EnumPrehistoric.Brachiosaurus.StrengthMax;
+    public static final double maxSpeed = EnumPrehistoric.Brachiosaurus.SpeedMax;
     public boolean isTamed = false;
 
     public EntityBrachiosaurus(World var1)
     {
-        super(var1, EnumDinoType.Brachiosaurus);
+        super(var1, EnumPrehistoric.Brachiosaurus);
         this.updateSize();
         /*
          * EDIT VARIABLES PER DINOSAUR TYPE
 		 */
-        this.adultAge = EnumDinoType.Brachiosaurus.AdultAge;
+        this.adultAge = EnumPrehistoric.Brachiosaurus.AdultAge;
         // Set initial size for hitbox. (length/width, height)
         this.setSize(1.5F, 2.0F);
         // Size of dinosaur at day 0.
@@ -69,11 +69,11 @@ public class EntityBrachiosaurus extends EntityDinosaur
     {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.movementSpeed)
-                .setBaseValue(EnumDinoType.Brachiosaurus.Speed0);
+                .setBaseValue(EnumPrehistoric.Brachiosaurus.Speed0);
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth)
-                .setBaseValue(EnumDinoType.Brachiosaurus.Health0);
+                .setBaseValue(EnumPrehistoric.Brachiosaurus.Health0);
         this.getEntityAttribute(SharedMonsterAttributes.attackDamage)
-                .setBaseValue(EnumDinoType.Brachiosaurus.Strength0);
+                .setBaseValue(EnumPrehistoric.Brachiosaurus.Strength0);
     }
 
     public void onLivingUpdate()

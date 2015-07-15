@@ -1,6 +1,6 @@
 package com.github.revival.common.entity.mob;
 
-import com.github.revival.common.enums.EnumDinoType;
+import com.github.revival.common.enums.EnumPrehistoric;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
@@ -11,7 +11,7 @@ public abstract class EntitySwimmingDino extends EntityDinosaur
 {
     public Random rand;
 
-    public EntitySwimmingDino(World world, EnumDinoType dinotype)
+    public EntitySwimmingDino(World world, EnumPrehistoric dinotype)
     {
         super(world, dinotype);
         

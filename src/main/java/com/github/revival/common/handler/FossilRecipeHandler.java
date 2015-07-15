@@ -1,7 +1,6 @@
 package com.github.revival.common.handler;
 
 import com.github.revival.common.block.FABlockRegistry;
-import com.github.revival.common.enums.EnumDinoType;
 import com.github.revival.common.item.FAItemRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.init.Blocks;
@@ -42,11 +41,11 @@ public class FossilRecipeHandler
         GameRegistry.addShapelessRecipe(new ItemStack(FAItemRegistry.gemShovel), new Object[]{Items.diamond_shovel, FAItemRegistry.gem});
         GameRegistry.addShapelessRecipe(new ItemStack(FAItemRegistry.gemShovel), new Object[]{Items.diamond_shovel, FAItemRegistry.gem});
         GameRegistry.addShapelessRecipe(new ItemStack(FABlockRegistry.denseSand, 2), new Object[]{Items.quartz, Blocks.sand});
-        GameRegistry.addShapelessRecipe(new ItemStack(FAItemRegistry.toothDagger, 1), new Object[]{new ItemStack(FAItemRegistry.claw, 1, EnumDinoType.TRex.ordinal()), Items.stick});
+       // GameRegistry.addShapelessRecipe(new ItemStack(FAItemRegistry.toothDagger, 1), new Object[]{new ItemStack(FAItemRegistry.claw, 1, EnumDinoType.TRex.ordinal()), Items.stick});
 
-        for (int i = 0; i < EnumDinoType.values().length; i++)
-            GameRegistry.addShapelessRecipe(new ItemStack(FAItemRegistry.dinoPedia), new Object[]{Items.book, EnumDinoType.values()[i].DNAItem});
-        GameRegistry.addShapelessRecipe(new ItemStack(FAItemRegistry.dinoPedia), new Object[]{Items.book, FAItemRegistry.dnaCoelacanth});
+       // for (int i = 0; i < EnumDinoType.values().length; i++)
+       //     GameRegistry.addShapelessRecipe(new ItemStack(FAItemRegistry.dinoPedia), new Object[]{Items.book, EnumDinoType.values()[i].DNAItem});
+       // GameRegistry.addShapelessRecipe(new ItemStack(FAItemRegistry.dinoPedia), new Object[]{Items.book, FAItemRegistry.dnaCoelacanth});
         //GameRegistry.addShapelessRecipe(new ItemStack(Revival.archNotebook), new Object[] {Item.book, Revival.relic});
         GameRegistry.addShapelessRecipe(new ItemStack(FAItemRegistry.rawChickenSoup, 1, 0), new Object[]{Items.bucket, Items.chicken});
         GameRegistry.addShapelessRecipe(new ItemStack(FAItemRegistry.magicConch, 1, 1), new Object[]{new ItemStack(FAItemRegistry.magicConch, 1, 0)});
@@ -118,19 +117,19 @@ public class FossilRecipeHandler
         GameRegistry.addShapelessRecipe(new ItemStack(FABlockRegistry.vaseKylixBlock, 1, 4), new Object[]{new ItemStack(Items.dye, 1, 4), new ItemStack(Items.dye, 1, 15), new ItemStack(Items.dye, 1, 15), new ItemStack(FABlockRegistry.vaseKylixBlock, 1, 1)});
 
         GameRegistry.addSmelting(FAItemRegistry.rawChickenSoup, new ItemStack(FAItemRegistry.cookedChickenSoup), 3.0F);
-        GameRegistry.addSmelting(EnumDinoType.values()[4].EggItem, new ItemStack(FAItemRegistry.sjl), 3.0F);
+        //GameRegistry.addSmelting(EnumDinoType.values()[4].EggItem, new ItemStack(FAItemRegistry.sjl), 3.0F);
         GameRegistry.addSmelting(FABlockRegistry.denseSand, new ItemStack(FABlockRegistry.strongGlass), 3.0F);
 
-        for (int i = 0; i < EnumDinoType.values().length; i++)
+       /* for (int i = 0; i < EnumDinoType.values().length; i++)
             if (i != 4) //Nautilus treated specially
             {
                 GameRegistry.addSmelting(EnumDinoType.values()[i].DropItem, new ItemStack(FAItemRegistry.cookedDinoMeat), 3.0F);
-            }
+            }*/
 
         GameRegistry.addSmelting(FAItemRegistry.icedMeat, new ItemStack(Items.beef), 3.0F);
-        GameRegistry.addSmelting(FAItemRegistry.dodoWing, new ItemStack(FAItemRegistry.dodoWingCooked), 3.0F);
-        GameRegistry.addSmelting(FAItemRegistry.terrorBirdMeat, new ItemStack(FAItemRegistry.terrorBirdMeatCooked), 3.0F);
-        GameRegistry.addSmelting(FAItemRegistry.quaggaMeat, new ItemStack(FAItemRegistry.quaggaMeatCooked), 3.0F);
+       // GameRegistry.addSmelting(FAItemRegistry.dodoWing, new ItemStack(FAItemRegistry.dodoWingCooked), 3.0F);
+       // GameRegistry.addSmelting(FAItemRegistry.terrorBirdMeat, new ItemStack(FAItemRegistry.terrorBirdMeatCooked), 3.0F);
+       // GameRegistry.addSmelting(FAItemRegistry.quaggaMeat, new ItemStack(FAItemRegistry.quaggaMeatCooked), 3.0F);
 
     }
 }

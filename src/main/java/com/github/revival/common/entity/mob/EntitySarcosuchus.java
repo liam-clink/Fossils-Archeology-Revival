@@ -2,7 +2,7 @@ package com.github.revival.common.entity.mob;
 
 import com.github.revival.Revival;
 import com.github.revival.common.entity.ai.*;
-import com.github.revival.common.enums.EnumDinoType;
+import com.github.revival.common.enums.EnumPrehistoric;
 import com.github.revival.common.handler.LocalizationStrings;
 import com.github.revival.common.item.FAItemRegistry;
 import io.netty.buffer.ByteBuf;
@@ -20,12 +20,12 @@ import net.minecraft.world.World;
 
 public class EntitySarcosuchus extends EntitySwimmingDino
 {
-    public static final double baseHealth = EnumDinoType.Sarcosuchus.Health0;
-    public static final double baseDamage = EnumDinoType.Sarcosuchus.Strength0;
-    public static final double baseSpeed = EnumDinoType.Sarcosuchus.Speed0;
-    public static final double maxHealth = EnumDinoType.Sarcosuchus.HealthMax;
-    public static final double maxDamage = EnumDinoType.Sarcosuchus.StrengthMax;
-    public static final double maxSpeed = EnumDinoType.Sarcosuchus.SpeedMax;
+    public static final double baseHealth = EnumPrehistoric.Sarcosuchus.Health0;
+    public static final double baseDamage = EnumPrehistoric.Sarcosuchus.Strength0;
+    public static final double baseSpeed = EnumPrehistoric.Sarcosuchus.Speed0;
+    public static final double maxHealth = EnumPrehistoric.Sarcosuchus.HealthMax;
+    public static final double maxDamage = EnumPrehistoric.Sarcosuchus.StrengthMax;
+    public static final double maxSpeed = EnumPrehistoric.Sarcosuchus.SpeedMax;
     public boolean isTamed = false;
     public int WeakToDeath = 0;
     private WaterDinoAIWander aiWaterDinoWander = new WaterDinoAIWander(this, 1.0D);
@@ -35,12 +35,12 @@ public class EntitySarcosuchus extends EntitySwimmingDino
 
     public EntitySarcosuchus(World var1)
     {
-        super(var1, EnumDinoType.Sarcosuchus);
+        super(var1, EnumPrehistoric.Sarcosuchus);
         this.updateSize();
         /*
          * EDIT VARIABLES PER DINOSAUR TYPE
 		 */
-        this.adultAge = EnumDinoType.Sarcosuchus.AdultAge;
+        this.adultAge = EnumPrehistoric.Sarcosuchus.AdultAge;
         // Set initial size for hitbox. (length/width, height)
         this.setSize(4.0F, 1.0F);
         // Size of dinosaur at day 0.
@@ -68,11 +68,11 @@ public class EntitySarcosuchus extends EntitySwimmingDino
     {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.movementSpeed)
-                .setBaseValue(EnumDinoType.Sarcosuchus.Speed0);
+                .setBaseValue(EnumPrehistoric.Sarcosuchus.Speed0);
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth)
-                .setBaseValue(EnumDinoType.Sarcosuchus.Health0);
+                .setBaseValue(EnumPrehistoric.Sarcosuchus.Health0);
         this.getEntityAttribute(SharedMonsterAttributes.attackDamage)
-                .setBaseValue(EnumDinoType.Sarcosuchus.Strength0);
+                .setBaseValue(EnumPrehistoric.Sarcosuchus.Strength0);
     }
 
     @Override

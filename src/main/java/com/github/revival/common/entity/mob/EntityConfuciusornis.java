@@ -3,7 +3,9 @@ package com.github.revival.common.entity.mob;
 import com.github.revival.Revival;
 import com.github.revival.client.gui.GuiPedia;
 import com.github.revival.common.entity.ai.DinoAIAttackBabies;
+import com.github.revival.common.enums.EnumPrehistoric;
 import com.github.revival.common.item.FAItemRegistry;
+
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -90,11 +92,11 @@ public class EntityConfuciusornis extends EntityAnimal
 
         if (this.isBurning())
         {
-            this.dropItem(FAItemRegistry.confuciornisCooked, 1);
+            this.dropItem(EnumPrehistoric.Confuciusornis.cookedFoodItem, 1);
         }
         else
         {
-            this.dropItem(FAItemRegistry.confuciornisRaw, 1);
+            this.dropItem(EnumPrehistoric.Confuciusornis.foodItem, 1);
         }
     }
 
@@ -268,7 +270,7 @@ public class EntityConfuciusornis extends EntityAnimal
         if (!this.isChild() && !this.worldObj.isRemote && --this.timeUntilNextEgg <= 0)
         {
             this.playSound("mob.chicken.plop", 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
-            this.dropItem(FAItemRegistry.confuciusornisEgg, 1);
+            this.dropItem(EnumPrehistoric.Confuciusornis.birdEggItem, 1);
             this.timeUntilNextEgg = this.rand.nextInt(6000) + 6000;
         }
         if (motionY < 0.0D)

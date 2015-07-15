@@ -1,7 +1,7 @@
 package com.github.revival.common.entity.mob;
 
 import com.github.revival.common.entity.ai.*;
-import com.github.revival.common.enums.EnumDinoType;
+import com.github.revival.common.enums.EnumPrehistoric;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -12,25 +12,25 @@ import net.minecraft.world.World;
 
 public class EntityAnkylosaurus extends EntityDinosaur
 {
-    public static final double baseHealth = EnumDinoType.Ankylosaurus.Health0;
+    public static final double baseHealth = EnumPrehistoric.Ankylosaurus.Health0;
 
 //    final float PUSHDOWN_HARDNESS = 5.0F;
     //final EntityAIControlledByPlayer aiControlledByPlayer;
-    public static final double baseDamage = EnumDinoType.Ankylosaurus.Strength0;
-    public static final double baseSpeed = EnumDinoType.Ankylosaurus.Speed0;
-    public static final double maxHealth = EnumDinoType.Ankylosaurus.HealthMax;
-    public static final double maxDamage = EnumDinoType.Ankylosaurus.StrengthMax;
-    public static final double maxSpeed = EnumDinoType.Ankylosaurus.SpeedMax;
+    public static final double baseDamage = EnumPrehistoric.Ankylosaurus.Strength0;
+    public static final double baseSpeed = EnumPrehistoric.Ankylosaurus.Speed0;
+    public static final double maxHealth = EnumPrehistoric.Ankylosaurus.HealthMax;
+    public static final double maxDamage = EnumPrehistoric.Ankylosaurus.StrengthMax;
+    public static final double maxSpeed = EnumPrehistoric.Ankylosaurus.SpeedMax;
     public boolean isTamed = false;
 
     public EntityAnkylosaurus(World var1)
     {
-        super(var1, EnumDinoType.Ankylosaurus);
+        super(var1, EnumPrehistoric.Ankylosaurus);
         this.updateSize();
         /*
          * EDIT VARIABLES PER DINOSAUR TYPE
          */
-        this.adultAge = EnumDinoType.Ankylosaurus.AdultAge;
+        this.adultAge = EnumPrehistoric.Ankylosaurus.AdultAge;
         // Set initial size for hitbox. (length/width, height)
         this.setSize(1.1F, 1.0F);
         // Size of dinosaur at day 0.
@@ -65,9 +65,9 @@ public class EntityAnkylosaurus extends EntityDinosaur
     protected void applyEntityAttributes()
     {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(EnumDinoType.Ankylosaurus.Speed0);
-        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(EnumDinoType.Ankylosaurus.Health0);
-        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(EnumDinoType.Ankylosaurus.Strength0);
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(EnumPrehistoric.Ankylosaurus.Speed0);
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(EnumPrehistoric.Ankylosaurus.Health0);
+        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(EnumPrehistoric.Ankylosaurus.Strength0);
     }
 
     public void onLivingUpdate()

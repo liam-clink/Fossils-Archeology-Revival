@@ -3,7 +3,7 @@ package com.github.revival.common.tileentity;
 import com.github.revival.Revival;
 import com.github.revival.common.block.BlockSifter;
 import com.github.revival.common.block.FABlockRegistry;
-import com.github.revival.common.enums.EnumDinoType;
+import com.github.revival.common.enums.EnumPrehistoric;
 import com.github.revival.common.handler.LocalizationStrings;
 import com.github.revival.common.item.FAItemRegistry;
 import net.minecraft.entity.player.EntityPlayer;
@@ -403,8 +403,7 @@ public class TileEntitySifter extends TileEntity implements IInventory,
 
                     else if (random <= 100)
                     {
-                        int i = (new Random())
-                                .nextInt(EnumDinoType.values().length + 1); // +1
+                        int i = (new Random()).nextInt(15);
                         // for
                         // the
                         // sapling
