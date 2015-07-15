@@ -35,6 +35,10 @@ public class FossilConfig implements IConfigHandler
     public static boolean developerSpecials;
     public static boolean customMainMenu;
 
+    public static boolean genFossils;
+    public static boolean genPermafrost;
+    public static boolean genVolcanicRock;
+
     public static int biomeIdDarknessLair;
     public static int biomeIdTreasure;
     public static int dimIdDarknessLair;
@@ -61,6 +65,10 @@ public class FossilConfig implements IConfigHandler
         allowTableEnchantments = configuration.get("option", "Allow Table Enchantments", true).getBoolean(true);
         allowBookEnchantments = configuration.get("option", "Allow Book Enchantments", true).getBoolean(true);
         allowBreeding = configuration.get("option", "Allow_Dinosaur_Breeding", true).getBoolean(true);
+
+	genFossils = configuration.get("option", "Generate Fossils", true).getBoolean(true);
+	genPermafrost = configuration.get("option", "Generate Permafrost", true).getBoolean(true);
+	genVolcanicRock = configuration.get("option", "Generate Volcanic Rock", true).getBoolean(true);
 
         featheredTRex = configuration.get("toggle_scales", "Tyrannosaurus Scales", false).getBoolean(false);
         featheredDeinonychus = configuration.get("toggle_scales", "Deinonychus Scales", false).getBoolean(false);
