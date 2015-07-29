@@ -29,7 +29,7 @@ import com.github.revival.common.entity.mob.EntitySarcosuchus;
 import com.github.revival.common.entity.mob.EntitySmilodon;
 import com.github.revival.common.entity.mob.EntitySpinosaurus;
 import com.github.revival.common.entity.mob.EntityStegosaurus;
-import com.github.revival.common.entity.mob.EntityTRex;
+import com.github.revival.common.entity.mob.EntityTyrannosaurus;
 import com.github.revival.common.entity.mob.EntityTerrorBird;
 import com.github.revival.common.entity.mob.EntityTriceratops;
 import com.github.revival.common.entity.mob.EntityVelociraptor;

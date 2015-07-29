@@ -4,21 +4,31 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.command.IEntitySelector;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIAvoidEntity;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
 import com.github.revival.client.gui.GuiPedia;
 import com.github.revival.common.api.IPrehistoricAI;
+import com.github.revival.common.entity.mob.EntityDinosaur;
+import com.github.revival.common.entity.mob.EntityGallimimus;
 import com.github.revival.common.enums.EnumPrehistoric;
 import com.github.revival.common.enums.EnumOrderType;
 import com.github.revival.common.enums.EnumPrehistoricAI.Activity;
@@ -35,7 +45,7 @@ import com.github.revival.common.enums.EnumPrehistoricAI.Untaming;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class EntityNewPrehistoric extends EntityTameable implements IPrehistoricAI {
+public abstract class EntityNewPrehistoric extends EntityTameable implements IPrehistoricAI {
 
 	public static final int OWNER_DISPLAY_NAME_INDEX = 24;
 	public static final int HUNGER_TICK_DATA_INDEX = 18;
@@ -55,7 +65,8 @@ public class EntityNewPrehistoric extends EntityTameable implements IPrehistoric
 	public float minSize;
 	public float maxSize;
 	public int adultAge;
-	public EnumPrehistoric SelfType = null;	public int BreedTick;
+	public EnumPrehistoric SelfType = null;
+	public int BreedTick;
 	public ItemStack ItemInMouth = null;
 	public EnumOrderType OrderStatus;
 	public double baseHealth;
@@ -67,9 +78,18 @@ public class EntityNewPrehistoric extends EntityTameable implements IPrehistoric
 	protected static final ResourceLocation pediaclock = new ResourceLocation("fossil:textures/gui/PediaClock.png");
 	protected static final ResourceLocation pediafood = new ResourceLocation("fossil:textures/gui/PediaFood.png");
 	protected static final ResourceLocation pediaheart = new ResourceLocation("fossil:textures/gui/PediaHeart.png");
+	public ChunkCoordinates currentHerdTarget;
+	public float herdMemberRange = 32;
+	public List<EntityNewPrehistoric> flock = new ArrayList<EntityNewPrehistoric>();
+	public EntityNewPrehistoric flockLeader = null;
 
 	public EntityNewPrehistoric(World world) {
 		super(world);
+		this.tasks.addTask(1, new DinoAIRunAway(this, EntityCreature.class, 16.0F, this.maxSpeed/2, this.maxSpeed));
+		this.tasks.addTask(2, new DinoAITerratorial(this, EntityCreature.class, 4.0F));
+		this.tasks.addTask(3, new DinoAIAgressive(this, EntityCreature.class, 750, isCannabil(), true));
+		//this.tasks.addTask(4, new DinoAIFlock(this, 32));
+
 	}
 
 	protected void entityInit()
@@ -87,8 +107,51 @@ public class EntityNewPrehistoric extends EntityTameable implements IPrehistoric
 		super.applyEntityAttributes();
 		setBaseValues();
 	}
+	public boolean isHungry(){
+		return true;
+	}
+	public void onLivingUpdate(){
+		super.onLivingUpdate();
+		if(this.doesFlock()){
+			IEntitySelector selector =IEntitySelector.selectAnything;
+			List<Entity> entities = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.expand((double)herdMemberRange, 3.0D, (double)herdMemberRange), selector);
+			for(Entity mob: entities){
+				if(mob instanceof EntityNewPrehistoric){
+					if(((EntityNewPrehistoric)mob).SelfType == this.SelfType){
+						EntityNewPrehistoric member = (EntityNewPrehistoric)mob;
+						flock.add(member);
+						System.out.println("A Newb Dino joined the Flock!!!");
 
+						if(member.isDead){
+							System.out.println("Oh No!!! A dino Died and left the flock :(");
+							flock.remove(member);
+						}
+						if(flockLeader == null || flockLeader.isDead){
+							System.out.println("The Flock found a new Leader!!!");
+							flockLeader = findLeader(flock);
+						}
+						member.motionX = flockLeader.motionX;
+						member.motionY = flockLeader.motionY;
+						member.motionZ = flockLeader.motionZ;
 
+					}
+					if(!worldObj.isRemote && flockLeader != null){
+						if(flockLeader == this && this.rand.nextInt(100) == 0)
+						{
+							this.moveEntity((int) posX + rand.nextInt(90)
+                    - rand.nextInt(60), (int) posY + rand.nextInt(60) - 2,
+                    (int) posZ + rand.nextInt(90) - rand.nextInt(60));
+						}
+					}
+				}
+			}
+		}
+	}
+
+	public EntityNewPrehistoric findLeader(List<EntityNewPrehistoric> flock){
+		int index = new Random().nextInt(flock.size());		
+		return flock.get(index);
+	}
 	private void setBaseValues()
 	{
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(1.0D);
@@ -202,53 +265,38 @@ public class EntityNewPrehistoric extends EntityTameable implements IPrehistoric
 
 
 	@Override
-	public Activity aiActivityType() {
-		return Activity.DURINAL;
-	}
+	public abstract Activity aiActivityType();
 
 	@Override
-	public Attacking aiAttackType() {
-		return Attacking.BASIC;
-	}
+	public abstract Attacking aiAttackType();
 
 	@Override
-	public Climbing aiClimbType() {
-		return Climbing.NONE;
-	}
+	public abstract Climbing aiClimbType();
 
 	@Override
-	public Dexterity aiDexterityType() {
-		return Dexterity.NONE;
-	}
+	public abstract Dexterity aiDexterityType();
 
 	@Override
-	public Following aiFollowType() {
-		return Following.NONE;
-	}
+	public abstract Following aiFollowType();
 
 	@Override
-	public Jumping aiJumpType() {
-		return Jumping.BASIC;
-	}
+	public abstract Jumping aiJumpType();
 
 	@Override
-	public Response aiResponseType() {
-		return Response.NONE;
-	}
+	public abstract Response aiResponseType();
 
 	@Override
-	public Stalking aiStalkType() {
-		return Stalking.NONE;
-	}
+	public abstract Stalking aiStalkType();
+	@Override
+	public abstract Taming aiTameType();
 
 	@Override
-	public Taming aiTameType() {
-		return Taming.IMPRINTING;
-	}
+	public abstract Untaming aiUntameType();
 
-	@Override
-	public Untaming aiUntameType() {
-		return Untaming.STARVE;
+	public abstract boolean doesFlock();
+
+	public boolean isCannabil(){
+		return false;
 	}
 
 	@Override

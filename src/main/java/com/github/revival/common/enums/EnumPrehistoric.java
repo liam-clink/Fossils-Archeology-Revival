@@ -40,7 +40,7 @@ import com.github.revival.common.entity.mob.EntitySarcosuchus;
 import com.github.revival.common.entity.mob.EntitySmilodon;
 import com.github.revival.common.entity.mob.EntitySpinosaurus;
 import com.github.revival.common.entity.mob.EntityStegosaurus;
-import com.github.revival.common.entity.mob.EntityTRex;
+import com.github.revival.common.entity.mob.EntityTyrannosaurus;
 import com.github.revival.common.entity.mob.EntityTerrorBird;
 import com.github.revival.common.entity.mob.EntityTriceratops;
 import com.github.revival.common.entity.mob.EntityVelociraptor;
@@ -73,7 +73,7 @@ public enum EnumPrehistoric {
 	Coelacanth(EntityCoelacanth.class, EnumMobType.FISH, EnumTimePeriod.MESOZOIC, I.NOTHING, true),
 	Triceratops(EntityTriceratops.class, EnumMobType.DINOSAUR, EnumTimePeriod.MESOZOIC, I.MODEL | I.TAME | I.RIDE | I.HERBIVORE, true),
 	Velociraptor(EntityVelociraptor.class, EnumMobType.DINOSAUR, EnumTimePeriod.MESOZOIC, I.TAME | I.CARNIVORE, true),
-	TRex(EntityTRex.class, EnumMobType.DINOSAUR, EnumTimePeriod.MESOZOIC, I.MODEL | I.TAME | I.RIDE | I.CARNIVORE, true),
+	Tyrannosaurus(EntityTyrannosaurus.class, EnumMobType.DINOSAUR, EnumTimePeriod.MESOZOIC, I.MODEL | I.TAME | I.RIDE | I.CARNIVORE, true),
 	Pterosaur(EntityPterosaur.class, EnumMobType.DINOSAUR, EnumTimePeriod.MESOZOIC, I.MODEL | I.TAME | I.CARNIVORE, true),
 	Plesiosaur(EntityPlesiosaur.class, EnumMobType.DINOSAUR, EnumTimePeriod.MESOZOIC, I.MODEL | I.TAME | I.RIDE | I.CARNIVORE, true),
 	Mosasaurus(EntityMosasaurus.class, EnumMobType.DINOSAUR, EnumTimePeriod.MESOZOIC, I.MODEL | I.CARNIVORE, true),
@@ -151,39 +151,9 @@ public enum EnumPrehistoric {
 
 	public static void init(){
 
-		for (int i = 0; i < values().length; i++)
-		{
-			values()[i].DNAItem = new Item().setUnlocalizedName("dna" + EnumPrehistoric.values()[i].name()).setTextureName("fossil:prehistoric/dna/" + EnumPrehistoric.values()[i].name() + "_DNA").setCreativeTab(FATabRegistry.tabFMaterial);	
-			GameRegistry.registerItem(EnumPrehistoric.values()[i].DNAItem, "dna" + EnumPrehistoric.values()[i].name());
-
-			if(values()[i].type == EnumMobType.DINOSAUR){
-				values()[i].eggItem = new ItemDinoEgg(i).setUnlocalizedName("egg" + EnumPrehistoric.values()[i].name()).setTextureName("fossil:prehistoric/dinoEggs/" + EnumPrehistoric.values()[i].name() + "_Egg").setCreativeTab(FATabRegistry.tabFMaterial);	
-				GameRegistry.registerItem(EnumPrehistoric.values()[i].eggItem, "egg" + EnumPrehistoric.values()[i].name());
-			}
-			if(values()[i].type == EnumMobType.MAMMAL || values()[i].type == EnumMobType.VANILLA){
-				values()[i].embryoItem = new ItemMammalEmbryo(i).setUnlocalizedName("embryo" + EnumPrehistoric.values()[i].name()).setTextureName("fossil:prehistoric/embryos/" + EnumPrehistoric.values()[i].name() + "_Syringe").setCreativeTab(FATabRegistry.tabFMaterial);	
-				GameRegistry.registerItem(EnumPrehistoric.values()[i].embryoItem, "embryo" + EnumPrehistoric.values()[i].name());
-			}
-			if(values()[i].type == EnumMobType.BIRD){
-				values()[i].birdEggItem = new ItemBirdEgg(values()[i], false).setUnlocalizedName("egg" + EnumPrehistoric.values()[i].name()).setTextureName("fossil:prehistoric/birdEggs/Egg_" + EnumPrehistoric.values()[i].name() ).setCreativeTab(FATabRegistry.tabFMaterial);	
-				GameRegistry.registerItem(EnumPrehistoric.values()[i].birdEggItem, "egg" + EnumPrehistoric.values()[i].name());
-			}
-			if(values()[i].type == EnumMobType.BIRD || values()[i].type == EnumMobType.CHICKEN){
-				values()[i].bestBirdEggItem = new ItemBirdEgg(values()[i], true).setUnlocalizedName("eggCultivated" + EnumPrehistoric.values()[i].name()).setTextureName("fossil:prehistoric/birdEggs/Egg_Cultivated_" + EnumPrehistoric.values()[i].name() ).setCreativeTab(FATabRegistry.tabFMaterial);	
-				GameRegistry.registerItem(EnumPrehistoric.values()[i].bestBirdEggItem, "eggCultivated" + EnumPrehistoric.values()[i].name());
-			}
-			if(values()[i].timeperiod != EnumTimePeriod.CURRENT){
-				if(values()[i].type != EnumMobType.FISH){
-					values()[i].foodItem = new ForgeFood(3, 0.3F, true, "prehistoric/food/" + EnumPrehistoric.values()[i].name() + "_Meat").setUnlocalizedName("raw" + EnumPrehistoric.values()[i].name()).setCreativeTab(FATabRegistry.tabFMaterial);	
-					GameRegistry.registerItem(EnumPrehistoric.values()[i].foodItem, "raw" + EnumPrehistoric.values()[i].name());
-				}
-				values()[i].cookedFoodItem = new ForgeFood(8, 0.8F, true, "prehistoric/cookedFood/" + EnumPrehistoric.values()[i].name() + "_Meat_Cooked").setUnlocalizedName("cooked" + EnumPrehistoric.values()[i].name()).setCreativeTab(FATabRegistry.tabFMaterial);	
-				GameRegistry.registerItem(EnumPrehistoric.values()[i].cookedFoodItem, "cooked" + EnumPrehistoric.values()[i].name());
-			}
-
+		
 		}
 
-	}
 
 	public static boolean isDNA(Item i0)
 	{

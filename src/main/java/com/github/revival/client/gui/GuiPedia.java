@@ -78,8 +78,7 @@ public class GuiPedia extends GuiContainer
         super.initGui();
     }
     
-    /**
-     * Resets the y-offset for left and right side
+     /* Resets the y-offset for left and right side
      */
     public void reset()
     {

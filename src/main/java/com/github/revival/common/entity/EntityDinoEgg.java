@@ -59,8 +59,8 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
         this.damageTaken = 0;
         this.timeSinceHit = 0;
         this.preventEntitySpawning = true;
-        this.setSize(0.5F, 1.5F);
-        this.yOffset = this.height;
+        this.setSize(0.5F, 1.0F);
+        this.yOffset = this.height + 0.5F;
         this.DinoInside = var12;
         this.lastBirthTick = 0;
     }
@@ -93,8 +93,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
      */
     public String getTexture()
     {
-        int var1 = this.DinoInside.ordinal();
-        return var1 < 4 ? "fossil:textures/mob/DinosaurEggs/eggTexture" + (var1 + 1) + ".png" : "fossil:textures/mob/DinosaurEggs/eggTexture" + var1 + ".png";
+        return "fossil:textures/mob/DinosaurEggs/eggTexture_" + DinoInside.name() + ".png";
 
     }
 
@@ -548,18 +547,18 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
 
                         break;
 
-                    case TRex:
-                        var5 = new EntityTRex(this.worldObj);
+                    case Tyrannosaurus:
+                        var5 = new EntityTyrannosaurus(this.worldObj);
 
                         if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.FOREST)
                                 || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.SWAMP)
                                 || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.JUNGLE))
                         {
-                            ((EntityTRex) var5).setSubSpecies(1);
+                            ((EntityTyrannosaurus) var5).setSubSpecies(1);
                         }
                         else
                         {
-                            ((EntityTRex) var5).setSubSpecies(0);
+                            ((EntityTyrannosaurus) var5).setSubSpecies(0);
                         }
                         break;
 
@@ -818,7 +817,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
                     }
                     if (((EntityDinosaur) var5).SelfType.isTameable() && player != null)
                     {
-                        if (((EntityDinosaur) var5).SelfType != EnumPrehistoric.TRex && ((EntityDinosaur) var5).SelfType != EnumPrehistoric.Allosaurus && ((EntityDinosaur) var5).SelfType != EnumPrehistoric.Sarcosuchus)
+                        if (((EntityDinosaur) var5).SelfType != EnumPrehistoric.Tyrannosaurus && ((EntityDinosaur) var5).SelfType != EnumPrehistoric.Allosaurus && ((EntityDinosaur) var5).SelfType != EnumPrehistoric.Sarcosuchus)
                         {
                             // Tameable and player next to it
                             ((EntityDinosaur) var5).setTamed(true);

@@ -87,7 +87,7 @@ public class EntityAllosaurus extends EntityDinosaur
         
         tasks.addTask(1, new DinoAIRideGround(this, 1.1)); // mutex all
         
-        this.tasks.addTask(4, new EntityAIAvoidEntity(this, EntityTRex.class, 16.0F, 0.8D, 1.33D));
+        this.tasks.addTask(4, new EntityAIAvoidEntity(this, EntityTyrannosaurus.class, 16.0F, 0.8D, 1.33D));
         this.tasks.addTask(4, new EntityAIAvoidEntity(this, EntitySpinosaurus.class, 16.0F, 0.8D, 1.33D));
         this.tasks.addTask(4, new EntityAIAvoidEntity(this, EntityBrachiosaurus.class, 16.0F, 0.8D, 1.33D));
     }

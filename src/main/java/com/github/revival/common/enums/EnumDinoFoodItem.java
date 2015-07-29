@@ -42,7 +42,7 @@ public enum EnumDinoFoodItem
     ChickenSoupCooked(FAItemRegistry.cookedChickenSoup, 50, 5),
     Triceratops(EnumPrehistoric.Triceratops.foodItem, 55, 5),
     Velociraptor(EnumPrehistoric.Velociraptor.foodItem, 28, 3),
-    TRex(EnumPrehistoric.TRex.foodItem, 60, 7),
+    TRex(EnumPrehistoric.Tyrannosaurus.foodItem, 60, 7),
     Sarcosuchus(EnumPrehistoric.Sarcosuchus.foodItem, 60, 7),
     Pterosaur(EnumPrehistoric.Pterosaur.foodItem, 35, 2),
     Plesiosaur(EnumPrehistoric.Plesiosaur.foodItem, 40, 5),

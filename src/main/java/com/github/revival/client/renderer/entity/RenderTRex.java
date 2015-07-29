@@ -2,7 +2,7 @@ package com.github.revival.client.renderer.entity;
 
 import com.github.revival.client.model.ModelTRex;
 import com.github.revival.client.model.ModelWeakTRex;
-import com.github.revival.common.entity.mob.EntityTRex;
+import com.github.revival.common.entity.mob.EntityTyrannosaurus;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.model.ModelBase;
@@ -25,7 +25,7 @@ public class RenderTRex extends RenderLiving
      * <p/>
      * Use this to grow the dinonsaur with age.
      */
-    protected void preRenderScale(EntityTRex entitydinosaur, float par2)
+    protected void preRenderScale(EntityTyrannosaurus entitydinosaur, float par2)
     {
         GL11.glScalef(entitydinosaur.getDinosaurSize(), entitydinosaur.getDinosaurSize(), entitydinosaur.getDinosaurSize());
         GL11.glTranslated(0, 0, 0.5F);
@@ -37,8 +37,8 @@ public class RenderTRex extends RenderLiving
      */
     protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2)
     {
-        this.preRenderScale((EntityTRex) par1EntityLivingBase, par2);
-        if (((EntityTRex) par1EntityLivingBase).isWeak())
+        this.preRenderScale((EntityTyrannosaurus) par1EntityLivingBase, par2);
+        if (((EntityTyrannosaurus) par1EntityLivingBase).isWeak())
 
         {
             if (!(this.mainModel instanceof ModelWeakTRex))
@@ -53,7 +53,7 @@ public class RenderTRex extends RenderLiving
         
     }
 
-    protected ResourceLocation func_110919_a(EntityTRex par1Entity)
+    protected ResourceLocation func_110919_a(EntityTyrannosaurus par1Entity)
     {
         return new ResourceLocation(par1Entity.getTexture());
     }
@@ -63,6 +63,6 @@ public class RenderTRex extends RenderLiving
      */
     protected ResourceLocation getEntityTexture(Entity par1Entity)
     {
-        return this.func_110919_a((EntityTRex) par1Entity);
+        return this.func_110919_a((EntityTyrannosaurus) par1Entity);
     }
 }

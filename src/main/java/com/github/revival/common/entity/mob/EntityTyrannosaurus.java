@@ -24,14 +24,14 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class EntityTRex extends EntityDinosaur
+public class EntityTyrannosaurus extends EntityDinosaur
 {
-    public static final double baseHealth = EnumPrehistoric.TRex.Health0;
-    public static final double baseDamage = EnumPrehistoric.TRex.Strength0;
-    public static final double baseSpeed = EnumPrehistoric.TRex.Speed0;
-    public static final double maxHealth = EnumPrehistoric.TRex.HealthMax;
-    public static final double maxDamage = EnumPrehistoric.TRex.StrengthMax;
-    public static final double maxSpeed = EnumPrehistoric.TRex.SpeedMax;
+    public static final double baseHealth = EnumPrehistoric.Tyrannosaurus.Health0;
+    public static final double baseDamage = EnumPrehistoric.Tyrannosaurus.Strength0;
+    public static final double baseSpeed = EnumPrehistoric.Tyrannosaurus.Speed0;
+    public static final double maxHealth = EnumPrehistoric.Tyrannosaurus.HealthMax;
+    public static final double maxDamage = EnumPrehistoric.Tyrannosaurus.StrengthMax;
+    public static final double maxSpeed = EnumPrehistoric.Tyrannosaurus.SpeedMax;
     private static float health = 10;
     public final int Areas = 15;
     final EntityAIControlledByPlayer aiControlledByPlayer;
@@ -44,15 +44,15 @@ public class EntityTRex extends EntityDinosaur
     private boolean looksWithInterest;
     private int Timer;
 
-    public EntityTRex(World var1)
+    public EntityTyrannosaurus(World var1)
     {
-        super(var1, EnumPrehistoric.TRex);
+        super(var1, EnumPrehistoric.Tyrannosaurus);
         this.looksWithInterest = false;
         this.updateSize();
         /*
          * EDIT VARIABLES PER DINOSAUR TYPE
 		 */
-        this.adultAge = EnumPrehistoric.TRex.AdultAge;
+        this.adultAge = EnumPrehistoric.Tyrannosaurus.AdultAge;
         // Set initial size for hitbox. (length/width, height)
         this.setSize(1.5F, 1.25F);
         // Size of dinosaur at day 0.
@@ -277,7 +277,7 @@ public class EntityTRex extends EntityDinosaur
         this.worldObj.setEntityState(this, (byte) 4);
 
         if (shouldScream)
-            this.worldObj.playSoundAtEntity(this, Revival.modid + ":" + "trex_scream", this.getSoundVolume(), this.getSoundPitch());
+            this.worldObj.playSoundAtEntity(this, Revival.modid + ":" + "Tyrannosaurus_scream", this.getSoundVolume(), this.getSoundPitch());
     }
 
     /**
@@ -472,9 +472,9 @@ public class EntityTRex extends EntityDinosaur
             switch (this.getSubSpecies())
             {
                 case 1:
-                    return texturePath + "TRex_Green_Weak.png";
+                    return texturePath + "Tyrannosaurus_Green_Weak.png";
                 default:
-                    return texturePath + "TRex_Weak.png";
+                    return texturePath + "Tyrannosaurus_Brown_Weak.png";
             }
         }
 
@@ -483,9 +483,9 @@ public class EntityTRex extends EntityDinosaur
             switch (this.getSubSpecies())
             {
                 case 1:
-                    return texturePath + "TRex_Green_Adult.png";
+                    return texturePath + "Tyrannosaurus_Green_Adult.png";
                 default:
-                    return texturePath + "TRex_Adult.png";
+                    return texturePath + "Tyrannosaurus_Brown_Adult.png";
             }
         }
         if (this.isAdult() && this.isTamed())
@@ -493,9 +493,9 @@ public class EntityTRex extends EntityDinosaur
             switch (this.getSubSpecies())
             {
                 case 1:
-                    return texturePath + "TRex_Green_Tame.png";
+                    return texturePath + "Tyrannosaurus_Green_Tame.png";
                 default:
-                    return texturePath + "TRex_Tame.png";
+                    return texturePath + "Tyrannosaurus_Brown_Tame.png";
             }
         }
         if (this.isChild())
@@ -503,14 +503,14 @@ public class EntityTRex extends EntityDinosaur
             switch (this.getSubSpecies())
             {
                 case 1:
-                    return texturePath + "TRex_Green_Baby.png";
+                    return texturePath + "Tyrannosaurus_Green_Baby.png";
                 default:
-                    return texturePath + "TRex_Baby.png";
+                    return texturePath + "Tyrannosaurus_Brown_Baby.png";
             }
         }
         else
         {
-            return texturePath + "TRex_Adult.png";
+            return texturePath + "Tyrannosaurus_Brown_Adult.png";
         }
     }
 
@@ -583,15 +583,15 @@ public class EntityTRex extends EntityDinosaur
         }
     }
 
-    public EntityTRex spawnBabyAnimal(EntityAgeable var1)
+    public EntityTyrannosaurus spawnBabyAnimal(EntityAgeable var1)
     {
-        return new EntityTRex(this.worldObj);
+        return new EntityTyrannosaurus(this.worldObj);
     }
 
     @Override
     public EntityAgeable createChild(EntityAgeable var1)
     {
-        EntityTRex baby = new EntityTRex(this.worldObj);
+        EntityTyrannosaurus baby = new EntityTyrannosaurus(this.worldObj);
         baby.setSubSpecies(this.getSubSpecies());
         return baby;
     }

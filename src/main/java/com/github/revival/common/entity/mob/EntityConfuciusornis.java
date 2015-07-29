@@ -52,7 +52,7 @@ public class EntityConfuciusornis extends EntityAnimal
         this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
         this.tasks.addTask(7, new EntityAILookIdle(this));
         this.targetTasks.addTask(3, this.aiAttackBabies);
-        this.tasks.addTask(4, new EntityAIAvoidEntity(this, EntityTRex.class, 16.0F, 0.8D, 1.33D));
+        this.tasks.addTask(4, new EntityAIAvoidEntity(this, EntityTyrannosaurus.class, 16.0F, 0.8D, 1.33D));
         this.tasks.addTask(4, new EntityAIAvoidEntity(this, EntityVelociraptor.class, 16.0F, 0.8D, 1.33D));
         this.tasks.addTask(4, new EntityAIAvoidEntity(this, EntityTerrorBird.class, 16.0F, 0.8D, 1.33D));
         this.tasks.addTask(4, new EntityAIAvoidEntity(this, EntityAllosaurus.class, 16.0F, 0.8D, 1.33D));

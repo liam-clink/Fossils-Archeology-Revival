@@ -53,7 +53,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.util.EnumHelper;
 
-@Mod(modid = Revival.modid, name = "Fossil/Archeology", version = "${version}", dependencies = "required-after:llibrary@[0.3.0-1.7.10,)")
+@Mod(modid = Revival.modid, name = "Fossil/Archeology", version = "7.3", dependencies = "required-after:llibrary@[0.3.0-1.7.10,)")
 public class Revival
 {
     public static final String modid = "fossil";
@@ -147,17 +147,12 @@ public class Revival
         EntityRegistry.registerModEntity(EntityMammoth.class, "Mammoth", 24, this, 250, 3, true);
         EntityRegistry.registerModEntity(EntityDodo.class, "Dodo", 25, this, 250, 3, true);
         EntityRegistry.registerModEntity(EntityDodoEgg.class, "DodoEgg", 26, this, 250, 5, true);
-        EntityRegistry.registerModEntity(EntityCultivatedDodoEgg.class, "CultivatedDodoEgg", 27, this, 250, 5, true);
         EntityRegistry.registerModEntity(EntityCoelacanth.class, "Coelacanth", 28, this, 250, 5, true);
         EntityRegistry.registerModEntity(EntityQuagga.class, "Quagga", 30, this, 250, 3, true);
         EntityRegistry.registerModEntity(EntityTerrorBird.class, "TerrorBird", 31, this, 250, 3, true);
         EntityRegistry.registerModEntity(EntityTerrorBirdEgg.class, "TerrorBirdEgg", 32, this, 250, 5, true);
         EntityRegistry.registerModEntity(EntityElasmotherium.class, "Elasmotherium", 33, this, 250, 3, true);
         EntityRegistry.registerModEntity(EntityAnuEffect.class, "AnuEffect", 34, this, 250, 5, true);
-        EntityRegistry.registerModEntity(EntityConfuciusornisEgg.class, "ConfuciusornisEgg", 35, this, 250, 5, true);
-        EntityRegistry.registerModEntity(EntityCultivatedConfuciusornisEgg.class, "CultivatedConfuciusornisEgg", 36, this, 250, 5, true);
-        EntityRegistry.registerModEntity(EntityConfuciusornis.class, "Confuciusornis", 37, this, 250, 3, true);
-        EntityRegistry.registerModEntity(EntityCultivatedChickenEgg.class, "CultivatedChickenEgg", 38, this, 250, 5, true);
         EntityRegistry.registerModEntity(EntityAnubite.class, "Anubite", 39, this, 250, 3, true);
         EntityRegistry.registerModEntity(EntitySentryPigman.class, "SentryPigman", 40, this, 250, 3, true);
         EntityRegistry.registerModEntity(EntityAnuDead.class, "AnuDead", 41, this, 250, 3, true);

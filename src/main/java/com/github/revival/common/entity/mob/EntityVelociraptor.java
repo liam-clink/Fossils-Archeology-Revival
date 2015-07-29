@@ -66,7 +66,7 @@ public class EntityVelociraptor extends EntityDinosaur
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(1, new DinoAIRaptorLeapAtTarget(this, 0.4F, 0.4F, 0.4F));
-        this.tasks.addTask(1, new EntityAIAvoidEntity(this, EntityTRex.class, 16.0F, 0.8D, 1.33D));
+        this.tasks.addTask(1, new EntityAIAvoidEntity(this, EntityTyrannosaurus.class, 16.0F, 0.8D, 1.33D));
         this.tasks.addTask(1, new EntityAIAvoidEntity(this, EntitySpinosaurus.class, 16.0F, 0.8D, 1.33D));
         this.tasks.addTask(1, new EntityAIAvoidEntity(this, EntityBrachiosaurus.class, 16.0F, 0.8D, 1.33D));
         this.tasks.addTask(3, new DinoAIAttackOnCollide(this, 1.2D, true));

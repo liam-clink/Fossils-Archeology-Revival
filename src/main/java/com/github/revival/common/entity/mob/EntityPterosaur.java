@@ -71,7 +71,7 @@ public class EntityPterosaur extends EntityDinosaur
         this.tasks.addTask(7, new DinoAIEat(this, 48));
         this.tasks.addTask(5, new DinoAIFlying(this));
         this.tasks.addTask(1, new DinoAIWander(this, 1.0D));
-        this.tasks.addTask(4, new EntityAIAvoidEntity(this, EntityTRex.class,
+        this.tasks.addTask(4, new EntityAIAvoidEntity(this, EntityTyrannosaurus.class,
                 16.0F, 0.8D, 1.33D));
         this.tasks.addTask(4, new EntityAIAvoidEntity(this,
                 EntitySpinosaurus.class, 16.0F, 0.8D, 1.33D));

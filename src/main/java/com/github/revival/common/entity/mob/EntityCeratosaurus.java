@@ -69,7 +69,7 @@ public class EntityCeratosaurus extends EntityDinosaur
         this.tasks.addTask(2, this.aiControlledByPlayer = new EntityAIControlledByPlayer(this, 0.3F));
         this.stepHeight = 1F;
         this.targetTasks.addTask(5, new DinoAIHunt(this, EntityLiving.class, 200, false));
-        this.tasks.addTask(4, new EntityAIAvoidEntity(this, EntityTRex.class, 16.0F, 0.8D, 1.33D));
+        this.tasks.addTask(4, new EntityAIAvoidEntity(this, EntityTyrannosaurus.class, 16.0F, 0.8D, 1.33D));
         this.tasks.addTask(4, new EntityAIAvoidEntity(this, EntitySpinosaurus.class, 16.0F, 0.8D, 1.33D));
         this.tasks.addTask(4, new EntityAIAvoidEntity(this, EntityBrachiosaurus.class, 16.0F, 0.8D, 1.33D));
         this.tasks.addTask(4, new EntityAIAvoidEntity(this, EntityAllosaurus.class, 16.0F, 0.8D, 1.33D));

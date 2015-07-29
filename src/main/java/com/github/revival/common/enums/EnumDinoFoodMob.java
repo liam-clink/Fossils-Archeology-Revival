@@ -70,7 +70,7 @@ public enum EnumDinoFoodMob
     {
         Triceratops.setDetails(EntityTriceratops.class);
         Velociraptor.setDetails(EntityVelociraptor.class);
-        TRex.setDetails(EntityTRex.class);
+        TRex.setDetails(EntityTyrannosaurus.class);
         Pterosaur.setDetails(EntityPterosaur.class);
         Sarcosuchus.setDetails(EntitySarcosuchus.class);
         Plesiosaur.setDetails(EntityPlesiosaur.class);

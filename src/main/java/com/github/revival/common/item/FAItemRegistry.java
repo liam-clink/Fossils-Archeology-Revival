@@ -7,8 +7,12 @@ import com.github.revival.common.creativetab.FATabRegistry;
 import com.github.revival.common.entity.BehaviorConfuciusornisEggDispense;
 import com.github.revival.common.entity.BehaviorDodoEggDispense;
 import com.github.revival.common.entity.BehaviorJavelinDispense;
+import com.github.revival.common.enums.EnumMobType;
+import com.github.revival.common.enums.EnumPrehistoric;
+import com.github.revival.common.enums.EnumTimePeriod;
 import com.github.revival.common.handler.LocalizationStrings;
 import com.github.revival.common.item.forge.*;
+
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.ilexiconn.llibrary.common.content.IContentHandler;
 import net.minecraft.block.BlockDispenser;
@@ -200,6 +204,36 @@ public class FAItemRegistry extends FARegistry implements IContentHandler
       //  BlockDispenser.dispenseBehaviorRegistry.putObject(dodoEgg, new BehaviorDodoEggDispense(MinecraftServer.getServer(), 5));
        // BlockDispenser.dispenseBehaviorRegistry.putObject(confuciusornisEgg, new BehaviorConfuciusornisEggDispense(MinecraftServer.getServer(), 6));
 
+        for (int i = 0; i < EnumPrehistoric.values().length; i++)
+		{
+			EnumPrehistoric.values()[i].DNAItem = new Item().setUnlocalizedName("dna" + EnumPrehistoric.values()[i].name()).setTextureName("fossil:prehistoric/dna/" + EnumPrehistoric.values()[i].name() + "_DNA").setCreativeTab(FATabRegistry.tabFMaterial);	
+			GameRegistry.registerItem(EnumPrehistoric.values()[i].DNAItem, "dna" + EnumPrehistoric.values()[i].name());
+
+			if(EnumPrehistoric.values()[i].type == EnumMobType.DINOSAUR){
+				EnumPrehistoric.values()[i].eggItem = new ItemDinoEgg(EnumPrehistoric.values()[i]).setUnlocalizedName("egg" + EnumPrehistoric.values()[i].name()).setTextureName("fossil:prehistoric/dinoEggs/" + EnumPrehistoric.values()[i].name() + "_Egg").setCreativeTab(FATabRegistry.tabFMaterial);	
+				GameRegistry.registerItem(EnumPrehistoric.values()[i].eggItem, "egg" + EnumPrehistoric.values()[i].name());
+			}
+			if(EnumPrehistoric.values()[i].type == EnumMobType.MAMMAL || EnumPrehistoric.values()[i].type == EnumMobType.VANILLA){
+				EnumPrehistoric.values()[i].embryoItem = new ItemMammalEmbryo(i).setUnlocalizedName("embryo" + EnumPrehistoric.values()[i].name()).setTextureName("fossil:prehistoric/embryos/" + EnumPrehistoric.values()[i].name() + "_Syringe").setCreativeTab(FATabRegistry.tabFMaterial);	
+				GameRegistry.registerItem(EnumPrehistoric.values()[i].embryoItem, "embryo" + EnumPrehistoric.values()[i].name());
+			}
+			if(EnumPrehistoric.values()[i].type == EnumMobType.BIRD){
+				EnumPrehistoric.values()[i].birdEggItem = new ItemBirdEgg(EnumPrehistoric.values()[i], false).setUnlocalizedName("egg" + EnumPrehistoric.values()[i].name()).setTextureName("fossil:prehistoric/birdEggs/Egg_" + EnumPrehistoric.values()[i].name() ).setCreativeTab(FATabRegistry.tabFMaterial);	
+				GameRegistry.registerItem(EnumPrehistoric.values()[i].birdEggItem, "egg" + EnumPrehistoric.values()[i].name());
+			}
+			if(EnumPrehistoric.values()[i].type == EnumMobType.BIRD || EnumPrehistoric.values()[i].type == EnumMobType.CHICKEN){
+				EnumPrehistoric.values()[i].bestBirdEggItem = new ItemBirdEgg(EnumPrehistoric.values()[i], true).setUnlocalizedName("eggCultivated" + EnumPrehistoric.values()[i].name()).setTextureName("fossil:prehistoric/birdEggs/Egg_Cultivated_" + EnumPrehistoric.values()[i].name() ).setCreativeTab(FATabRegistry.tabFMaterial);	
+				GameRegistry.registerItem(EnumPrehistoric.values()[i].bestBirdEggItem, "eggCultivated" + EnumPrehistoric.values()[i].name());
+			}
+			if(EnumPrehistoric.values()[i].timeperiod != EnumTimePeriod.CURRENT){
+				if(EnumPrehistoric.values()[i].type != EnumMobType.FISH){
+					EnumPrehistoric.values()[i].foodItem = new ForgeFood(3, 0.3F, true, "prehistoric/food/" + EnumPrehistoric.values()[i].name() + "_Meat").setUnlocalizedName("raw" + EnumPrehistoric.values()[i].name()).setCreativeTab(FATabRegistry.tabFMaterial);	
+					GameRegistry.registerItem(EnumPrehistoric.values()[i].foodItem, "raw" + EnumPrehistoric.values()[i].name());
+				}
+				EnumPrehistoric.values()[i].cookedFoodItem = new ForgeFood(8, 0.8F, true, "prehistoric/cookedFood/" + EnumPrehistoric.values()[i].name() + "_Meat_Cooked").setUnlocalizedName("cooked" + EnumPrehistoric.values()[i].name()).setCreativeTab(FATabRegistry.tabFMaterial);	
+				GameRegistry.registerItem(EnumPrehistoric.values()[i].cookedFoodItem, "cooked" + EnumPrehistoric.values()[i].name());
+			}
+		}
 
     }
 

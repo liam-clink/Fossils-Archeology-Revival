@@ -2,7 +2,7 @@ package com.github.revival.common.tileentity;
 
 import com.github.revival.Revival;
 import com.github.revival.common.entity.mob.EntityDinosaur;
-import com.github.revival.common.entity.mob.EntityTRex;
+import com.github.revival.common.entity.mob.EntityTyrannosaurus;
 import com.github.revival.common.enums.EnumPrehistoric;
 import com.github.revival.common.enums.EnumOrderType;
 import com.github.revival.common.handler.LocalizationStrings;
@@ -172,7 +172,7 @@ public class TileEntityDrum extends TileEntity
                     .translateToLocal(LocalizationStrings.DRUM_TREX
                             + String.valueOf(this.Order.ordinal() + 1)), var2);
             List list = this.worldObj.getEntitiesWithinAABB(
-                    EntityTRex.class,
+                    EntityTyrannosaurus.class,
                     AxisAlignedBB.getBoundingBox((double) this.xCoord,
                             (double) this.yCoord, (double) this.zCoord,
                             (double) this.xCoord + 1.0D,
@@ -184,7 +184,7 @@ public class TileEntityDrum extends TileEntity
             while (it.hasNext())
             {
                 Entity var4 = (Entity) it.next();
-                EntityTRex var5 = (EntityTRex) var4;
+                EntityTyrannosaurus var5 = (EntityTyrannosaurus) var4;
 
                 if (var5.isAdult() && !var5.isTamed())
                 {

@@ -26,7 +26,7 @@ public enum EnumEntityPrehistoric
     Spinosaurus(EntitySpinosaurus.class, true, false, true, false, true, 0),
     Stegosaurus(EntityStegosaurus.class, true, false, true, true, false, 1),
     Triceratops(EntityTriceratops.class, true, true, true, true, true, 1),
-    TyrannosaurusRex(EntityTRex.class, true, false, true, true, true, 0),
+    TyrannosaurusRex(EntityTyrannosaurus.class, true, false, true, true, true, 0),
     Velociraptor(EntityVelociraptor.class, true, false, true, true, true, 0);
 
     public static int FOOD_HABBIT_CARNIVORE = 0;

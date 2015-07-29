@@ -52,9 +52,9 @@ public class FossilLivingEvent
     {
         if (event.source.getEntity() instanceof EntityPlayerMP)
         {
-            if (event.source.getEntity() instanceof EntityTRex)
+            if (event.source.getEntity() instanceof EntityTyrannosaurus)
             {
-                EntityTRex entity = (EntityTRex) event.entityLiving;
+                EntityTyrannosaurus entity = (EntityTyrannosaurus) event.entityLiving;
 
                 entity.openMouth(true);
 

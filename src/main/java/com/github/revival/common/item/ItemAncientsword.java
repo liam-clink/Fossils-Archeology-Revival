@@ -3,6 +3,7 @@ package com.github.revival.common.item;
 import com.github.revival.common.entity.EntityMLighting;
 import com.github.revival.common.entity.mob.EntityFriendlyPigZombie;
 import com.github.revival.common.enums.EnumPigmenSpeaks;
+
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -14,6 +15,7 @@ import net.minecraft.item.ItemSword;
 import net.minecraft.world.EnumDifficulty;
 
 import java.util.Random;
+import java.util.UUID;
 
 public class ItemAncientsword extends ItemSword
 {
@@ -44,11 +46,16 @@ public class ItemAncientsword extends ItemSword
 
                 if (!targetentity.worldObj.isRemote)
                 {
+                	targetentity.setDead();
+                    targetentity.worldObj.addWeatherEffect(new EntityMLighting(targetentity.worldObj, targetentity.posX, targetentity.posY, targetentity.posZ));
                     EntityFriendlyPigZombie fpz = new EntityFriendlyPigZombie(targetentity.worldObj);
-                    fpz.LeaderName = var2.getCommandSenderName();
-                    fpz.setLocationAndAngles(targetentity.posX, targetentity.posY, targetentity.posZ, targetentity.rotationYaw, targetentity.rotationPitch);
-                    targetentity.setDead();
                     targetentity.worldObj.spawnEntityInWorld(fpz);
+                    fpz.setTamed(true);
+                    if(player instanceof EntityPlayer){
+                    	EntityPlayer playerUUID = (EntityPlayer)player;
+                        fpz.func_152115_b(playerUUID.getUniqueID().toString());
+                    }
+                    fpz.setLocationAndAngles(targetentity.posX, targetentity.posY, targetentity.posZ, targetentity.rotationYaw, targetentity.rotationPitch);
                     fpz.Mouth.SendSpeech(EnumPigmenSpeaks.LifeFor, fpz.LeaderName);
                 }
             }
