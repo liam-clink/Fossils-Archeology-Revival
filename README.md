@@ -1,6 +1,6 @@
-#[Fossil and Archeology Revival 1.7](http://www.minecraftforum.net/topic/1708636-)
+#[Fossil and Archeology Revival 1.7](http://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/2398119)
 ***
-![Banner](http://i.imgur.com/qi6XOQZ.png)
+![Banner](http://i.imgur.com/7no8xtV.jpg)
 
 [Imgur album of current and past banners](http://imgur.com/a/hBe0h)
 
@@ -16,7 +16,8 @@ Forked from [Flammarilva](https://github.com/fls81245)'s Fossil And Archeology m
 [Cannibal Vox](https://github.com/CannibalVox)  
 [Roomon1](https://github.com/Roomon1)  
 [JTGhawk137](https://github.com/JTGhawk137)  
-[Alexthe666](https://github.com/Alex-the-666)
+[Alexthe666](https://github.com/Alex-the-666)  
+[iLexiconn](https://github.com/iLexiconn)  
 
 ###### Texture/Model Artists  
 [tyranno66](https://github.com/tyranno66)  
@@ -28,13 +29,23 @@ Coldrake
 
 ###### Audio Artists  
 whitejoshman  
+Nanotyrano  
+
+###### Builders  
+Robberto08  
 
 ###### Language Contributors  
 Octo-Docto (Spanish)  
 [Gusanito](https://github.com/Gusanito) (Spanish)  
+Roody, DragonH (Dutch)  
 Retro_King (German)  
-[crafteverywhere](https://github.com/crafteverywhere) (Simplified Chinese)  
-[sb023612](https://github.com/sb023612) (Simplified Chinese)  
+Cronosus (Czech)  
+[crafteverywhere](https://github.com/crafteverywhere), [sb023612](https://github.com/sb023612), oldjunyi (Simplified Chinese)  
+Adaptivity, fewizz (Russian)  
+LeGribouilleur (French)  
+utoc123, dy126800, lalaladinosaur (Korean)  
+Al-Myr, SteveOriginal (Portuguese)  
+Mirach (Polish)  
 
 ###### Special Thanks
 Flammarilva (original mod creator) and the rest of Team July
