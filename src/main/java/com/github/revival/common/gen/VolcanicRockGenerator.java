@@ -1,6 +1,7 @@
 package com.github.revival.common.gen;
 
 import com.github.revival.common.block.FABlockRegistry;
+import com.github.revival.common.config.FossilConfig;
 import cpw.mods.fml.common.IWorldGenerator;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
@@ -24,6 +25,7 @@ public class VolcanicRockGenerator implements IWorldGenerator
     private void generateSurface(World world, Random random, int BlockX,
                                  int BlockZ)
     {
+	if (FossilConfig.genVolcanicRock == true) {
         for (int i = 0; i < 10; i++)
         {
             int Xcoord = BlockX + random.nextInt(16);
@@ -32,5 +34,6 @@ public class VolcanicRockGenerator implements IWorldGenerator
             (new WorldGenMinable(FABlockRegistry.volcanicRock, 6)).generate(world,
                     random, Xcoord, Ycoord, Zcoord);
         }
+	}
     }
 }
