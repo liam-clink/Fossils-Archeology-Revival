@@ -122,38 +122,16 @@ public class EntityVelociraptor extends EntityDinosaur
             return super.getModelTexture();
         }
 
-        if (this.isAdult())
-        {
-            switch (this.getSubSpecies())
-            {
-                case 1:
-                    return texturePath + "Velociraptor_Blue_Adult.png";
-
-                case 2:
-                    return texturePath + "Velociraptor_Green_Adult.png";
-
-                case 3:
-                    return texturePath + "Velociraptor_River_Adult.png";
-
-                default:
-                    return texturePath + "Velociraptor_Brown_Adult.png";
-            }
-        }
-
         switch (this.getSubSpecies())
         {
             case 1:
-                return texturePath + "Velociraptor_Blue_Baby.png";
+                return texturePath + "Velociraptor_Female.png";
 
-            case 2:
-                return texturePath + "Velociraptor_Green_Baby.png";
-
-            case 3:
-                return texturePath + "Velociraptor_River_Baby.png";
-
+     
             default:
-                return texturePath + "Velociraptor_Brown_Baby.png";
+                return texturePath + "Velociraptor_Male.png";
         }
+
     }
 
     @Override
