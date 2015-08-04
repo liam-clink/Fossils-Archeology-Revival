@@ -70,7 +70,7 @@ public class Revival
 
     public static int feederRenderID;
 
-	public static Enchantment paleontology;
+    public static Enchantment paleontology;
     public static Enchantment archeology;
 
     public static BiomeGenBase anuBiome;
