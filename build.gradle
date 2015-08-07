@@ -15,9 +15,12 @@ buildscript {
     }
 }
 
+project.ext.buildnumber = ""
+if (System.getenv().BUILD_NUMBER) project.buildnumber = "-" + System.getenv().BUILD_NUMBER
+
 apply plugin: 'forge'
 
-version = "1.7.10-idk"
+version = "1.7.10" + project.ext.buildnumber
 group = "com.github.revival"
 archivesBaseName = "Fossils-and-Archeology-Revival"
 
@@ -36,7 +39,7 @@ repositories {
 }
 
 dependencies {
-    compile 'net.ilexiconn.llibrary:LLibrary:0.3.1-1.7.10:dev'
+    compile 'net.ilexiconn.llibrary:LLibrary:0.3.4-1.7.10:dev'
 }
 
 processResources {

@@ -1,9 +1,11 @@
 package com.github.revival.client.renderer.entity;
 
+import com.github.revival.Revival;
 import com.github.revival.common.entity.mob.EntityVelociraptor;
+import com.github.revival.common.json.JsonTabulaModel;
+import com.github.revival.common.json.ModelHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -13,9 +15,11 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class RenderVelociraptor extends RenderLiving
 {
-    public RenderVelociraptor(ModelBase par1ModelBase, float par2)
+    private static JsonTabulaModel model = ModelHelper.parseModelFromJson(Revival.class.getResourceAsStream("assets/fossil/models/Velociraptor.json"));
+
+    public RenderVelociraptor()
     {
-        super(par1ModelBase, par2);
+        super(model.modelJson, 0.5f);
     }
 
     /**
