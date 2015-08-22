@@ -1504,7 +1504,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	public void playerFlyDown(EntityPlayer player){}
 
 	public String getTexture(){
-		String toggle = this.hasFeatherToggle ? !this.featherToggle ? "/feathered/" : "/scaled/" : "";
+		String toggle = this.hasFeatherToggle ? !this.featherToggle ? "feathered/" : "scaled/" : "";
 		String gender = this.hasTeenTexture ? this.isTeen() ? "_teen": this.isChild() ? "_baby" : this.getGender() == 0 ? "_female" : "_male" : this.isChild() ? "_baby" : this.getGender() == 0 ? "_female" : "_male";
 		String sleeping = this.getSleeping() == 0 ? "" : "_sleeping";
 		String toggleList = this.hasFeatherToggle ? !this.featherToggle ? "_feathered" : "_scaled" : "";
