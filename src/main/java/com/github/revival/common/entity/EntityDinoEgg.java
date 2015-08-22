@@ -592,7 +592,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
                         break;
 
                     case Plesiosaur:
-                        var5 = new EntityPlesiosaur(this.worldObj);
+                        var5 = new EntityPlesiosaurus(this.worldObj);
                         break;
 
                     case Mosasaurus:

@@ -33,7 +33,7 @@ import com.github.revival.common.entity.mob.EntityMammoth;
 import com.github.revival.common.entity.mob.EntityMosasaurus;
 import com.github.revival.common.entity.mob.EntityNautilus;
 import com.github.revival.common.entity.mob.EntityPachycephalosaurus;
-import com.github.revival.common.entity.mob.EntityPlesiosaur;
+import com.github.revival.common.entity.mob.EntityPlesiosaurus;
 import com.github.revival.common.entity.mob.EntityPterosaur;
 import com.github.revival.common.entity.mob.EntityQuagga;
 import com.github.revival.common.entity.mob.EntitySarcosuchus;
@@ -75,7 +75,7 @@ public enum EnumPrehistoric {
 	Velociraptor(EntityVelociraptor.class, EnumMobType.DINOSAUR, EnumTimePeriod.MESOZOIC, I.TAME | I.CARNIVORE, true),
 	Tyrannosaurus(EntityTyrannosaurus.class, EnumMobType.DINOSAUR, EnumTimePeriod.MESOZOIC, I.MODEL | I.TAME | I.RIDE | I.CARNIVORE, true),
 	Pterosaur(EntityPterosaur.class, EnumMobType.DINOSAUR, EnumTimePeriod.MESOZOIC, I.MODEL | I.TAME | I.CARNIVORE, true),
-	Plesiosaur(EntityPlesiosaur.class, EnumMobType.DINOSAUR, EnumTimePeriod.MESOZOIC, I.MODEL | I.TAME | I.RIDE | I.CARNIVORE, true),
+	Plesiosaur(EntityPlesiosaurus.class, EnumMobType.DINOSAUR, EnumTimePeriod.MESOZOIC, I.MODEL | I.TAME | I.RIDE | I.CARNIVORE, true),
 	Mosasaurus(EntityMosasaurus.class, EnumMobType.DINOSAUR, EnumTimePeriod.MESOZOIC, I.MODEL | I.CARNIVORE, true),
 	Stegosaurus(EntityStegosaurus.class, EnumMobType.DINOSAUR, EnumTimePeriod.MESOZOIC, I.MODEL | I.TAME | I.HERBIVORE, true),
 	Dilophosaurus(EntityDilophosaurus.class, EnumMobType.DINOSAUR, EnumTimePeriod.MESOZOIC, I.TAME | I.CARNIVORE, true),

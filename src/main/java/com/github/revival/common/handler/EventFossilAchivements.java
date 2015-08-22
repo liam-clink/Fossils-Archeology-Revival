@@ -27,7 +27,7 @@ public class EventFossilAchivements
         {
             event.player.addStat(FossilAchievementHandler.arcWorkbench, 1);
         }
-        if (event.crafting.getItem() == FAItemRegistry.AquaticScarabGem)
+        if (event.crafting.getItem() == FAItemRegistry.gem_blue)
         {
             event.player.addStat(FossilAchievementHandler.blueScarab, 1);
         }

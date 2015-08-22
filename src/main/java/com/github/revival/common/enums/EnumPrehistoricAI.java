@@ -1,34 +1,37 @@
 package com.github.revival.common.enums;
 
 public class EnumPrehistoricAI {
+	public enum Moving{
+		WALK, FLIGHT, AQUATIC, SEMIAQUATIC, WALKANDGLIDE;
+	}
 	public enum Response{
-		NONE, SCARED, TERRITORIAL, AGRESSIVE;
+		NONE, SCARED, TERRITORIAL, AGRESSIVE, WATERAGRESSIVE, WATERCALM;
 	}
 	public enum Following{
-		NONE, SKITTISH, AGRESSIVE;
+		NONE, NORMAL, SKITTISH, AGRESSIVE;
 	}
 	public enum Taming{
-		IMPRINTING, FEEDING, GEM;
+		IMPRINTING, FEEDING, GEM, BLUEGEM, NONE;
 	}
 	public enum Untaming{
-		ATTACK, STARVE;
+		NONE, ATTACK, STARVE;
 	}
 	public enum Climbing{
-		NONE, AROREAL, ARTHROPOD;
+		NONE, ARTHROPOD;
 	}
 	public enum Jumping{
 		BASIC, TWOBLOCKS;
-	}
-	public enum Dexterity{
-		NONE, OPENDOORS, OPENCHESTS, BOTH;
 	}
 	public enum Stalking{
 		NONE, STEALTH;
 	}
 	public enum Activity{
-		DURINAL, NOCTURNAL;
+		DURINAL, NOCTURNAL, BOTH, NOSLEEP;
 	}
 	public enum Attacking{
-		BASIC, KNOCKUP, GRAB, TAILSWING, CHARGE, DROWN, DROP;
+		BASIC, KNOCKUP, GRAB, TAILSWING, CHARGE, DROWN, DROP, STOMP, JUMP;
+	}
+	public enum WaterAbility{
+		NONE, FLEE, ATTACK, IGNOREANDFISH;
 	}
 }

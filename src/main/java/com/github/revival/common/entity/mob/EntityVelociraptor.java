@@ -1,468 +1,170 @@
 package com.github.revival.common.entity.mob;
 
-import com.github.revival.Revival;
-import com.github.revival.client.gui.GuiPedia;
-import com.github.revival.common.config.FossilConfig;
-import com.github.revival.common.entity.ai.*;
-import com.github.revival.common.enums.EnumPrehistoric;
-import com.github.revival.common.handler.LocalizationStrings;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import io.netty.buffer.ByteBuf;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityAgeable;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.projectile.EntityArrow;
-import net.minecraft.item.EnumAction;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.StatCollector;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.world.World;
 
-import java.util.Vector;
+import com.github.revival.common.config.FossilConfig;
+import com.github.revival.common.entity.mob.test.EntityNewPrehistoric;
+import com.github.revival.common.enums.EnumPrehistoric;
+import com.github.revival.common.enums.EnumPrehistoricAI.Activity;
+import com.github.revival.common.enums.EnumPrehistoricAI.Attacking;
+import com.github.revival.common.enums.EnumPrehistoricAI.Climbing;
+import com.github.revival.common.enums.EnumPrehistoricAI.Following;
+import com.github.revival.common.enums.EnumPrehistoricAI.Jumping;
+import com.github.revival.common.enums.EnumPrehistoricAI.Moving;
+import com.github.revival.common.enums.EnumPrehistoricAI.Response;
+import com.github.revival.common.enums.EnumPrehistoricAI.Stalking;
+import com.github.revival.common.enums.EnumPrehistoricAI.Taming;
+import com.github.revival.common.enums.EnumPrehistoricAI.Untaming;
+import com.github.revival.common.enums.EnumPrehistoricAI.WaterAbility;
+import com.github.revival.common.item.FAItemRegistry;
 
-public class EntityVelociraptor extends EntityDinosaur
+public class EntityVelociraptor extends EntityNewPrehistoric
 {
-    public static final double baseHealth = EnumPrehistoric.Velociraptor.Health0;
-    public static final double baseDamage = EnumPrehistoric.Velociraptor.Strength0;
-    public static final double baseSpeed = EnumPrehistoric.Velociraptor.Speed0;
-    public static final double maxHealth = EnumPrehistoric.Velociraptor.HealthMax;
-    public static final double maxDamage = EnumPrehistoric.Velociraptor.StrengthMax;
-    public static final double maxSpeed = EnumPrehistoric.Velociraptor.SpeedMax;
-    private final String texturePath;
-    public int LearningChestTick = 900;
-    public boolean PreyChecked = false;
-    public boolean SupportChecked = false;
-    public Vector MemberList = new Vector();
-    private boolean looksWithInterest;
-
-    
-    public EntityVelociraptor(World var1)
-    {
-        super(var1, EnumPrehistoric.Velociraptor);
-        this.looksWithInterest = false;
-        this.updateSize();
-        /*
-         * EDIT VARIABLES PER DINOSAUR TYPE
-         */
-        this.adultAge = EnumPrehistoric.Velociraptor.AdultAge;
-        // Set initial size for hitbox. (length/width, height)
+	public static final double baseDamage = 2;
+	public static final double maxDamage = 7;
+	public static final double baseHealth = 4;
+	public static final double maxHealth = 22;
+	public static final double baseSpeed = 0.25D;
+	public static final double maxSpeed = 0.35D;
+	
+	public EntityVelociraptor(World world) {
+		super(world, EnumPrehistoric.Velociraptor);
+		this.hasFeatherToggle = true;
+		this.featherToggle = FossilConfig.featheredVelociraptor;
         this.setSize(2F, 2F);
-        // Size of dinosaur at day 0.
-        this.minSize = 0.3F;
-        // Size of dinosaur at age Adult.
-        this.maxSize = 0.8F;
-        
-        if (!FossilConfig.featheredVelociraptor)
-            texturePath = Revival.modid + ":textures/mob/" + this.SelfType.toString() + "/feathered/" + "Feathered_";
-        else
-            texturePath = Revival.modid + ":textures/mob/" + this.SelfType.toString() + "/";
-        
-        this.getNavigator().setAvoidsWater(true);
-        this.tasks.addTask(0, new EntityAISwimming(this));
-        this.tasks.addTask(1, new DinoAIRaptorLeapAtTarget(this, 0.4F, 0.4F, 0.4F));
-        this.tasks.addTask(1, new EntityAIAvoidEntity(this, EntityTyrannosaurus.class, 16.0F, 0.8D, 1.33D));
-        this.tasks.addTask(1, new EntityAIAvoidEntity(this, EntitySpinosaurus.class, 16.0F, 0.8D, 1.33D));
-        this.tasks.addTask(1, new EntityAIAvoidEntity(this, EntityBrachiosaurus.class, 16.0F, 0.8D, 1.33D));
-        this.tasks.addTask(3, new DinoAIAttackOnCollide(this, 1.2D, true));
-        this.tasks.addTask(4, new EntityAIOpenDoor(this, true));
-        this.tasks.addTask(5, new DinoAIFollowOwner(this, 1.0F, 10.0F, 2.0F));
-        this.tasks.addTask(6, new DinoAIEat(this, 48));
-        this.tasks.addTask(7, new DinoAIWander(this, 1.0D));
-        this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-        this.tasks.addTask(9, new EntityAILookIdle(this));
-        this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
-        this.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));
-        this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
-        //this.targetTasks.addTask(2, new DinoAITargetNonTamedExceptSelfClass(this, EntityLiving.class, 750, false));
-        
-        this.targetTasks.addTask(5, new DinoAIHunt(this, EntityLiving.class, 500, false));
-    }
+		minSize = 0.3F;
+		maxSize = 0.8F;
+		teenAge = 3;
+		adultAge = 6;
 
-    protected void entityInit()
-    {
-        super.entityInit();
-        this.dataWatcher.addObject(30, new Byte((byte) 0));
-    }
+		developsResistance = false;
+		breaksBlocks = false;
+		favoriteFood = Items.beef;
+	}
 
-    protected void applyEntityAttributes()
-    {
-        super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(baseSpeed);
-        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(baseHealth);
-        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(baseDamage);
-    }
+	@Override
+	public void setSpawnValues() {}
 
-    /**
-     * returns if this entity triggers Block.onEntityWalking on the blocks they walk on. used for spiders and wolves to
-     * prevent them from trampling crops
-     */
-    protected boolean canTriggerWalking()
-    {
-        return false;
-    }
-    /*protected void entityInit()
-    {
-        super.entityInit();
-        this.dataWatcher.addObject(24, new Byte((byte)0));
-    }*/
+	@Override
+	protected void applyEntityAttributes()
+	{
+		super.applyEntityAttributes();
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(baseSpeed);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(baseHealth);
+		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(baseDamage);
+	}
+	
+	public void updateSize()
+	{
+		double healthStep;
+		double attackStep;
+		double speedStep;
+		healthStep = (this.maxHealth - this.baseHealth) / (this.adultAge + 1);
+		attackStep = (this.maxDamage - this.baseDamage) / (this.adultAge + 1);
+		speedStep = (this.maxSpeed - this.baseSpeed) / (this.adultAge + 1);
 
-    /**
-     * Returns the texture's file path as a String.
-     */
-    public String getTexture()
-    {
-        if (this.isModelized())
-        {
-            return super.getModelTexture();
-        }
 
-        switch (this.getSubSpecies())
-        {
-            case 1:
-                return texturePath + "Velociraptor_Female.png";
+		if (this.getDinoAge() <= this.adultAge)
+		{
+			this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(Math.round(this.baseHealth + (healthStep * this.getDinoAge())));
+			this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(Math.round(this.baseDamage + (attackStep * this.getDinoAge())));
+			this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(this.baseSpeed + (speedStep * this.getDinoAge()));
 
-     
-            default:
-                return texturePath + "Velociraptor_Male.png";
-        }
+			if (this.isTeen())
+			{
+				this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.5D);
+			}
+			else if (this.isAdult())
+			{
+				this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(2.0D);
+			}
+			else
+			{
+				if(this.developsResistance)
+					this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.0D);
+			}
+		}
+	}
 
-    }
+	@Override
+	public Activity aiActivityType() {
 
-    @Override
-    /**
-     * Returns the sound this mob makes while it's alive.
-     */
-    protected String getLivingSound()
-    {
-        if (this.isModelized())
-            return null;
-        return this.isTamed() ? Revival.modid + ":" + "velociraptor_living_tame" : Revival.modid + ":" + "velociraptor_living_wild";
-    }
-    
-    /**
-     * (abstract) Protected helper method to write subclass entity data to NBT.
-     */
-    public void writeEntityToNBT(NBTTagCompound var1)
-    {
-        super.writeEntityToNBT(var1);
-        var1.setInteger("LearningChestTick", this.LearningChestTick);
-        /*if (this.ItemInMouth != null)
-        {
-            var1.setShort("Itemid", (short)this.ItemInMouth.itemID);
-            var1.setByte("ItemCount", (byte)this.ItemInMouth.stackSize);
-            var1.setShort("ItemDamage", (short)this.ItemInMouth.getItemDamage());
-        }
-        else
-        {
-            var1.setShort("Itemid", (short) - 1);
-            var1.setByte("ItemCount", (byte)0);
-            var1.setShort("ItemDamage", (short)0);
-        }*/
-        //var1.setBoolean("Angry", this.isSelfAngry());
-        //var1.setBoolean("Sitting", this.isSelfSitting());
-        //var1.setInteger("SubType", this.getSubSpecies());
-        //this.isSelfAngry()
-    }
-    
-    /**
-     * (abstract) Protected helper method to read subclass entity data from NBT.
-     */
-    public void readEntityFromNBT(NBTTagCompound var1)
-    {
-        super.readEntityFromNBT(var1);
-        this.LearningChestTick = var1.getInteger("LearningChestTick");
-        /*short var2 = var1.getShort("Itemid");
-        byte var3 = var1.getByte("ItemCount");
-        short var4 = var1.getShort("ItemDamage");
+		return Activity.NOCTURNAL;
+	}
 
-        if (var2 != -1)
-        {
-            this.ItemInMouth = new ItemStack(var2, var3, var4);
-        }
-        else
-        {
-            this.ItemInMouth = null;
-        }*/
-        //this.setSelfAngry(var1.getBoolean("Angry"));
-        //this.setSelfSitting(var1.getBoolean("Sitting"));
-        /*if (var1.hasKey("SubType"))
-        {
-            this.setSubSpecies(var1.getInteger("SubType"));
-        }*/
-        // this.InitSize();
-    }
+	@Override
+	public Attacking aiAttackType() {
 
-    /**
-     * Checks if the entity's current position is a valid location to spawn this entity.
-     */
-    public boolean getCanSpawnHere()
-    {
-        return this.worldObj.checkNoEntityCollision(this.boundingBox) && this.worldObj.getCollidingBoundingBoxes(this, this.boundingBox).size() == 0 && !this.worldObj.isAnyLiquid(this.boundingBox);
-    }
+		return Attacking.JUMP;
+	}
 
-    public boolean isBesideClimbableBlock()
-    {
-        return (this.dataWatcher.getWatchableObjectByte(30) & 1) != 0;
-    }
+	@Override
+	public Climbing aiClimbType() {
 
-    public void setBesideClimbableBlock(boolean isClollided)
-    {
-        byte b0 = this.dataWatcher.getWatchableObjectByte(30);
+		return Climbing.ARTHROPOD;
+	}
 
-        if (isClollided)
-        {
-            b0 = (byte) (b0 | 1);
-        }
-        else
-        {
-            b0 &= -2;
-        }
+	@Override
+	public Following aiFollowType() {
 
-        this.dataWatcher.updateObject(30, Byte.valueOf(b0));
-    }
+		return Following.AGRESSIVE;
+	}
 
-    public boolean isOnLadder()
-    {
-        return this.isBesideClimbableBlock();
-    }
+	@Override
+	public Jumping aiJumpType() {
 
-    protected void fall(float i)
-    {
-    }
+		return Jumping.TWOBLOCKS;
+	}
 
-    /**
-     * Called to update the entity's position/logic.
-     */
-    public void onUpdate()
-    {
-        super.onUpdate();
-        if (!this.worldObj.isRemote)
-        {
-            this.setBesideClimbableBlock(this.isCollidedHorizontally);
-        }
-        
-        /*this.field_25054_c = this.field_25048_b;
+	@Override
+	public Response aiResponseType() {
 
-        if (this.looksWithInterest)
-        {
-            this.field_25048_b += (1.0F - this.field_25048_b) * 0.4F;
-        }
-        else
-        {
-            this.field_25048_b += (0.0F - this.field_25048_b) * 0.4F;
-        }
+		return isChild() ? Response.SCARED :Response.TERRITORIAL;
+	}
 
-        if (this.looksWithInterest)
-        {
-            this.numTicksToChaseTarget = 10;
-        }*/
-    }
+	@Override
+	public Stalking aiStalkType() {
 
-    public float getEyeHeight()
-    {
-        return this.height * 0.8F;
-    }
+		return Stalking.STEALTH;
+	}
 
-    /**
-     * The speed it takes to move the entityliving's rotationPitch through the faceEntity method. This is only currently
-     * use in wolves.
-     */
-    public int getVerticalFaceSpeed()
-    {
-        return this.isSitting() ? 20 : super.getVerticalFaceSpeed();
-    }
+	@Override
+	public Taming aiTameType() {
 
-    /**
-     * Disables a mob's ability to move on its own while true.
-     */
-    protected boolean isMovementCeased()
-    {
-        return this.isSitting();// || this.field_25052_g;
-    }
+		return Taming.FEEDING;
+	}
 
-    /**
-     * Called when the entity is attacked.
-     */
-    
-    public boolean attackEntityFrom(DamageSource var1, float var2)
-    {
-        Entity var3 = var1.getEntity();
-        boolean var4 = false;
+	@Override
+	public Untaming aiUntameType() {
 
-        if (var3 != null && !(var3 instanceof EntityPlayer) && !(var3 instanceof EntityArrow))
-        {
-            var2 = (var2 + 1) / 2;
-        }
+		return Untaming.ATTACK;
+	}
 
-        if (super.attackEntityFrom(var1, var2))
-        {
-            if (!this.isAngry())
-            {
-                if (var3 instanceof EntityPlayer)
-                {
-                    this.setTamed(false);
-                    //  this.setOwner("");
-                    this.setOwnerDisplayName("");
-                    this.ItemInMouth = null;
-                    this.PreyChecked = true;
-                    var4 = true;
-                }
+	@Override
+	public Moving aiMovingType() {
 
-                if (var3 instanceof EntityArrow && ((EntityArrow) var3).shootingEntity != null)
-                {
-                    var3 = ((EntityArrow) var3).shootingEntity;
-                }
+		return Moving.WALK;
+	}
 
-                if (var3 instanceof EntityLiving)
-                {
-                    this.setAttackTarget((EntityLiving) var3);
-                }
-            }
-            else if (var3 != this && var3 != null)
-            {
-                this.entityToAttack = var3;
-            }
+	@Override
+	public WaterAbility aiWaterAbilityType() {
 
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-    
-    /**
-     * Finds the closest player within 16 blocks to attack, or null if this Entity isn't interested in attacking
-     * (Animals, Spiders at day, peaceful PigZombies).
-     */
-    protected Entity findPlayerToAttack()
-    {
-        return null;
-    }
+		return WaterAbility.NONE;
+	}
 
-    /**
-     * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
-     */
-    public boolean interact(EntityPlayer var1)
-    {
-        ItemStack var2 = var1.inventory.getCurrentItem();
+	@Override
+	public boolean doesFlock() {
+		return false;
+	}
 
-        if (var2 != null)
-        {
-            if (var2.getItem().getItemUseAction(var2) == EnumAction.bow)
-            {
-                return false;
-            }
-        }
+	@Override
+	public Item getOrderItem() {
 
-        return super.interact(var1);
-    }
-
-    public void handleHealthUpdate(byte var1)
-    {
-        if (var1 == 7)
-        {
-            this.showHeartsOrSmokeFX(true, true);
-        }
-        else if (var1 == 6)
-        {
-            this.showHeartsOrSmokeFX(false, false);
-        }
-        else if (var1 == 8)
-        {
-            //this.field_25052_g = true;
-            //this.timeWolfIsShaking = 0.0F;
-            //this.prevTimeWolfIsShaking = 0.0F;
-        }
-        else
-        {
-            super.handleHealthUpdate(var1);
-        }
-    }
-
-    @SideOnly(Side.CLIENT)
-    public void ShowPedia(GuiPedia p0)
-    {
-        super.ShowPedia(p0);
-
-        if (this.LearningChestTick == 0)
-        {
-            p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_CHEST), true);
-        }
-    }
-
-    public EntityAnimal spawnBabyAnimal(EntityAnimal var1)
-    {
-        return new EntityVelociraptor(this.worldObj);
-    }
-
-    /*
-    public boolean IsIdle()
-    {
-        return this.motionX < 0.03125D && this.motionY < 0.03125D && this.motionZ < 0.03125D;
-    }
-    */
-
-    @Override
-    public EntityAgeable createChild(EntityAgeable var1)
-    {
-        EntityVelociraptor baby = new EntityVelociraptor(this.worldObj);
-        baby.setSubSpecies(this.getSubSpecies());
-        return baby;
-    }
-    
-    /**
-     * This gets called when a dinosaur grows naturally or through Chicken Essence.
-     */
-    @Override
-    public void updateSize()
-    {
-        double healthStep;
-        double attackStep;
-        double speedStep;
-        healthStep = (this.maxHealth - this.baseHealth) / (this.adultAge + 1);
-        attackStep = (this.maxDamage - this.baseDamage) / (this.adultAge + 1);
-        speedStep = (this.maxSpeed - this.baseSpeed) / (this.adultAge + 1);
-        
-        
-        if (this.getDinoAge() <= this.adultAge)
-        {
-            this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(Math.round(this.baseHealth + (healthStep * this.getDinoAge())));
-            this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(Math.round(this.baseDamage + (attackStep * this.getDinoAge())));
-            this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(this.baseSpeed + (speedStep * this.getDinoAge()));
-
-            if (this.isTeen())
-            {
-                this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.5D);
-            }
-            else if (this.isAdult())
-            {
-                this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(2.0D);
-            }
-            else
-            {
-                this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.0D);
-            }
-        }
-    }
-
-    @Override
-    public void writeSpawnData(ByteBuf buffer)
-    {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void readSpawnData(ByteBuf additionalData)
-    {
-        // TODO Auto-generated method stub
-
-    }
+		return Items.bone;
+	}
+  
 }

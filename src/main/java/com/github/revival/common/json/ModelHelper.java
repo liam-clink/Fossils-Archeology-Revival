@@ -10,11 +10,13 @@ import java.io.InputStreamReader;
 
 public class ModelHelper
 {
+	public static JsonTabulaModel tabulaModel;
     @SideOnly(Side.CLIENT)
-    public static JsonTabulaModel parseModelFromJson(InputStream stream)
+    public static  JsonTabulaModel parseModelFromJson(InputStream stream)
     {
-        JsonTabulaModel tabulaModel = JsonFactory.getGson().fromJson(new InputStreamReader(stream), JsonTabulaModel.class);
+    	  tabulaModel = JsonFactory.getGson().fromJson(new InputStreamReader(stream), JsonTabulaModel.class); 
         tabulaModel.modelJson = new ModelJson(tabulaModel);
         return tabulaModel;
     }
 }
+//

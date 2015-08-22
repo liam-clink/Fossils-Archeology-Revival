@@ -21,7 +21,7 @@ public enum EnumEntityPrehistoric
     Mosasaurus(EntityMosasaurus.class, true, false, true, true, true, 0),
     Nautilus(EntityNautilus.class, false, false, false, false, false, 0),
     Pachycephalosaurus(EntityPachycephalosaurus.class, true, false, true, true, true, 1),
-    Plesiosaur(EntityPlesiosaur.class, true, true, true, true, true, 0),
+    Plesiosaur(EntityPlesiosaurus.class, true, true, true, true, true, 0),
     Pterosaur(EntityPterosaur.class, true, false, true, true, true, 0),
     Spinosaurus(EntitySpinosaurus.class, true, false, true, false, true, 0),
     Stegosaurus(EntityStegosaurus.class, true, false, true, true, false, 1),

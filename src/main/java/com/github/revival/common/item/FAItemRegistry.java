@@ -27,7 +27,7 @@ import java.lang.reflect.Field;
 public class FAItemRegistry extends FARegistry implements IContentHandler
 {
     public static Item biofossil;
-    public static Item AquaticScarabGem;
+    public static Item gem_blue;
     public static Item relic;
     public static Item stoneboard;
     public static Item ancientSword;
@@ -93,7 +93,7 @@ public class FAItemRegistry extends FARegistry implements IContentHandler
     {
         biofossil = new ItemBioFossil();
         DominicanAmber = new ItemDominicanAmber();
-        AquaticScarabGem = new ItemAquaticScarabGem().setUnlocalizedName("AquaticScarabGem");
+        gem_blue = new ItemAquaticScarabGem().setUnlocalizedName("AquaticScarabGem");
         relic = new ForgeItem("Relic_Scrap").setUnlocalizedName(LocalizationStrings.RELIC_NAME).setCreativeTab(FATabRegistry.tabFItems);
         stoneboard = new ItemStoneBoard();
         ancientSword = new ItemAncientsword().setUnlocalizedName(LocalizationStrings.ANCIENT_SWORD_NAME).setCreativeTab(FATabRegistry.tabFCombat);

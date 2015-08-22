@@ -1,15 +1,8 @@
 package com.github.revival.client.gui;
 
-import com.github.revival.Revival;
-import com.github.revival.client.gui.elements.FossilGuiButton;
-import com.github.revival.client.gui.elements.FossilGuiPage;
-import com.github.revival.common.container.ContainerPedia;
-import com.github.revival.common.entity.EntityDinoEgg;
-import com.github.revival.common.entity.mob.*;
-import com.github.revival.common.enums.EnumPrehistoric;
+import java.util.ArrayList;
+import java.util.List;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.ScaledResolution;
@@ -27,8 +20,26 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.github.revival.Revival;
+import com.github.revival.client.gui.elements.FossilGuiButton;
+import com.github.revival.client.gui.elements.FossilGuiPage;
+import com.github.revival.common.container.ContainerPedia;
+import com.github.revival.common.entity.EntityDinoEgg;
+import com.github.revival.common.entity.mob.EntityCoelacanth;
+import com.github.revival.common.entity.mob.EntityDinosaur;
+import com.github.revival.common.entity.mob.EntityFishBase;
+import com.github.revival.common.entity.mob.EntityNautilus;
+import com.github.revival.common.entity.mob.EntityPregnantCow;
+import com.github.revival.common.entity.mob.EntityPregnantHorse;
+import com.github.revival.common.entity.mob.EntityPregnantPig;
+import com.github.revival.common.entity.mob.EntityPregnantSheep;
+import com.github.revival.common.entity.mob.EntityQuagga;
+import com.github.revival.common.entity.mob.EntityTerrorBird;
+import com.github.revival.common.entity.mob.test.EntityNewPrehistoric;
+import com.github.revival.common.enums.EnumPrehistoric;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class GuiPedia extends GuiContainer
@@ -246,10 +257,6 @@ public class GuiPedia extends GuiContainer
 
         if (BookPages == 0)
         {
-            if (Revival.toPedia instanceof EntityDinosaur)
-            {
-                ((EntityDinosaur) Revival.toPedia).ShowPedia(this);
-            }
 
             if (Revival.toPedia instanceof EntityDinoEgg)
             {
@@ -276,37 +283,14 @@ public class GuiPedia extends GuiContainer
                 ((EntityPregnantSheep) Revival.toPedia).ShowPedia(this);
             }
 
-            if (Revival.toPedia instanceof EntityMammoth)
+            if (Revival.toPedia instanceof EntityNewPrehistoric)
             {
-                ((EntityMammoth) Revival.toPedia).ShowPedia(this);
+                ((EntityNewPrehistoric) Revival.toPedia).ShowPedia(this);
             }
 
-            if (Revival.toPedia instanceof EntityElasmotherium)
+            if (Revival.toPedia instanceof EntityFishBase)
             {
-                ((EntityElasmotherium) Revival.toPedia).ShowPedia(this);
-            }
-
-            if (Revival.toPedia instanceof EntitySmilodon)
-            {
-                ((EntitySmilodon) Revival.toPedia).ShowPedia(this);
-            }
-
-            if (Revival.toPedia instanceof EntityDodo)
-            {
-                ((EntityDodo) Revival.toPedia).ShowPedia(this);
-            }
-            if (Revival.toPedia instanceof EntityConfuciusornis)
-            {
-                ((EntityConfuciusornis) Revival.toPedia).ShowPedia(this);
-            }
-            if (Revival.toPedia instanceof EntityCoelacanth)
-            {
-                ((EntityCoelacanth) Revival.toPedia).ShowPedia(this);
-            }
-
-            if (Revival.toPedia instanceof EntityNautilus)
-            {
-                ((EntityNautilus) Revival.toPedia).ShowPedia(this);
+                ((EntityFishBase) Revival.toPedia).ShowPedia(this);
             }
 
             if (Revival.toPedia instanceof EntityQuagga)
@@ -321,42 +305,14 @@ public class GuiPedia extends GuiContainer
         }
         else
         {
-            if (Revival.toPedia instanceof EntityDinosaur)
+            if (Revival.toPedia instanceof EntityNewPrehistoric)
             {
-                ((EntityDinosaur) Revival.toPedia).ShowPedia2(this);
+                ((EntityNewPrehistoric) Revival.toPedia).showPedia2(this, ((EntityNewPrehistoric) Revival.toPedia).selfType.toString());
             }
 
-            if (Revival.toPedia instanceof EntityElasmotherium)
+            if (Revival.toPedia instanceof EntityFishBase)
             {
-                ((EntityElasmotherium) Revival.toPedia).ShowPedia2(this);
-            }
-
-            if (Revival.toPedia instanceof EntityMammoth)
-            {
-                ((EntityMammoth) Revival.toPedia).ShowPedia2(this);
-            }
-
-            if (Revival.toPedia instanceof EntitySmilodon)
-            {
-                ((EntitySmilodon) Revival.toPedia).ShowPedia2(this);
-            }
-
-            if (Revival.toPedia instanceof EntityDodo)
-            {
-                ((EntityDodo) Revival.toPedia).ShowPedia2(this);
-            }
-            if (Revival.toPedia instanceof EntityConfuciusornis)
-            {
-                ((EntityConfuciusornis) Revival.toPedia).ShowPedia2(this);
-            }
-            if (Revival.toPedia instanceof EntityCoelacanth)
-            {
-                ((EntityCoelacanth) Revival.toPedia).ShowPedia2(this);
-            }
-
-            if (Revival.toPedia instanceof EntityNautilus)
-            {
-                ((EntityNautilus) Revival.toPedia).ShowPedia2(this);
+                ((EntityFishBase) Revival.toPedia).ShowPedia2(this);
             }
 
             if (Revival.toPedia instanceof EntityQuagga)

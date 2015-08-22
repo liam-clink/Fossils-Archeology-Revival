@@ -42,7 +42,7 @@ public class ItemLivingCoelacanth extends Item
         Object var8;
 
         var8 = new EntityCoelacanth(var0);
-        ((EntityCoelacanth) var8).setSkin(meta);
+        ///((EntityCoelacanth) var8).setSkin(meta);
 
 
         if (var8 != null)

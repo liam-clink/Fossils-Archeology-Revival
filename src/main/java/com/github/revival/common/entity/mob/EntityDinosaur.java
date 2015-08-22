@@ -99,7 +99,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
         super(var1);
         this.SelfType = T0;
         this.OrderStatus = EnumOrderType.FreeMove;
-        this.tasks.addTask(0, new DinoAIGrowup(this));
+       // this.tasks.addTask(0, new DinoAIGrowup(this));
         this.tasks.addTask(0, new DinoAIStarvation(this));
         this.BreedTick = this.SelfType.BreedingTicks;
         this.setHunger(this.SelfType.MaxHunger / 2);

@@ -21,7 +21,7 @@ public class FossilOreDictionary
 
         OreDictionary.registerOre("fossil", new ItemStack(FAItemRegistry.biofossil));
         OreDictionary.registerOre("gemScarab", new ItemStack(FAItemRegistry.gem));
-        OreDictionary.registerOre("gemScarabBlue", new ItemStack(FAItemRegistry.AquaticScarabGem));
+        OreDictionary.registerOre("gemScarabBlue", new ItemStack(FAItemRegistry.gem_blue));
         OreDictionary.registerOre("dinosaurClaw", new ItemStack(FAItemRegistry.claw, 1, 1));
         OreDictionary.registerOre("dinosaurClaw", new ItemStack(FAItemRegistry.claw, 1, 8));
         OreDictionary.registerOre("dinosaurClaw", new ItemStack(FAItemRegistry.claw, 1, 11));

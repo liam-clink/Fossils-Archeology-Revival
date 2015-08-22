@@ -6,13 +6,14 @@ import com.github.revival.common.enums.EnumPrehistoricAI;
 import com.github.revival.common.enums.EnumPrehistoricAI.Activity;
 import com.github.revival.common.enums.EnumPrehistoricAI.Attacking;
 import com.github.revival.common.enums.EnumPrehistoricAI.Climbing;
-import com.github.revival.common.enums.EnumPrehistoricAI.Dexterity;
 import com.github.revival.common.enums.EnumPrehistoricAI.Following;
 import com.github.revival.common.enums.EnumPrehistoricAI.Jumping;
+import com.github.revival.common.enums.EnumPrehistoricAI.Moving;
 import com.github.revival.common.enums.EnumPrehistoricAI.Response;
 import com.github.revival.common.enums.EnumPrehistoricAI.Stalking;
 import com.github.revival.common.enums.EnumPrehistoricAI.Taming;
 import com.github.revival.common.enums.EnumPrehistoricAI.Untaming;
+import com.github.revival.common.enums.EnumPrehistoricAI.WaterAbility;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -258,11 +259,6 @@ public class EntityPrehistoric extends EntityTameable implements IPrehistoricAI
 	}
 
 	@Override
-	public Dexterity aiDexterityType() {
-		return Dexterity.NONE;
-	}
-
-	@Override
 	public Following aiFollowType() {
 		return Following.NONE;
 	}
@@ -290,6 +286,18 @@ public class EntityPrehistoric extends EntityTameable implements IPrehistoricAI
 	@Override
 	public Untaming aiUntameType() {
 		return Untaming.STARVE;
+	}
+
+	@Override
+	public Moving aiMovingType() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public WaterAbility aiWaterAbilityType() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

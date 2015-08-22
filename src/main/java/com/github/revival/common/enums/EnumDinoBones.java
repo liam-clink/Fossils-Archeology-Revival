@@ -22,7 +22,7 @@ import com.github.revival.common.entity.mob.EntityMammoth;
 import com.github.revival.common.entity.mob.EntityMosasaurus;
 import com.github.revival.common.entity.mob.EntityNautilus;
 import com.github.revival.common.entity.mob.EntityPachycephalosaurus;
-import com.github.revival.common.entity.mob.EntityPlesiosaur;
+import com.github.revival.common.entity.mob.EntityPlesiosaurus;
 import com.github.revival.common.entity.mob.EntityPterosaur;
 import com.github.revival.common.entity.mob.EntityQuagga;
 import com.github.revival.common.entity.mob.EntitySarcosuchus;

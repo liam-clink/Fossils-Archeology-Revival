@@ -1,17 +1,18 @@
 package com.github.revival.common.entity.ai;
 
-import com.github.revival.common.config.FossilConfig;
-import com.github.revival.common.entity.mob.EntityDinosaur;
-import com.github.revival.common.enums.EnumPrehistoric;
-import com.github.revival.common.enums.EnumSituation;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.util.MathHelper;
 
+import com.github.revival.common.config.FossilConfig;
+import com.github.revival.common.entity.mob.test.EntityNewPrehistoric;
+import com.github.revival.common.enums.EnumPrehistoric;
+import com.github.revival.common.enums.EnumSituation;
+
 public class DinoAIGrowup extends EntityAIBase
 {
-    protected EntityDinosaur AITarget;
+    protected EntityNewPrehistoric AITarget;
 
-    public DinoAIGrowup(EntityDinosaur var1)
+    public DinoAIGrowup(EntityNewPrehistoric var1)
     {
         this.AITarget = var1;
     }
@@ -22,10 +23,10 @@ public class DinoAIGrowup extends EntityAIBase
     public boolean shouldExecute()
     {
 
-        if (/*fossilOptions.DinoGrows && */this.AITarget.getDinoAge() < this.AITarget.SelfType.MaxAge)
+        if (/*fossilOptions.DinoGrows && */this.AITarget.getDinoAge() < this.AITarget.selfType.MaxAge)
         {
             this.AITarget.increaseDinoAgeTick();
-            return this.AITarget.getDinoAgeTick() >= this.AITarget.SelfType.AgingTicks;
+            return this.AITarget.getDinoAgeTick() >= this.AITarget.selfType.AgingTicks;
         }
 
         return false;
@@ -48,12 +49,12 @@ public class DinoAIGrowup extends EntityAIBase
         if (!this.AITarget.worldObj.isRemote)
         {
             this.AITarget.setPosition(this.AITarget.posX, this.AITarget.posY + 1, this.AITarget.posZ);
-            if ((this.AITarget.CheckSpace()
-                    && this.AITarget.SelfType != EnumPrehistoric.Mosasaurus
-                    && this.AITarget.SelfType != EnumPrehistoric.Liopleurodon)
-                    || (this.AITarget.isInWater() && this.AITarget.SelfType == EnumPrehistoric.Mosasaurus)
-                    || (this.AITarget.isInWater() && this.AITarget.SelfType == EnumPrehistoric.Liopleurodon)
-                    || (this.AITarget.isInWater() && this.AITarget.SelfType == EnumPrehistoric.Plesiosaur))
+            if ((!this.AITarget.isEntityInsideOpaqueBlock()
+                    && this.AITarget.selfType != EnumPrehistoric.Mosasaurus
+                    && this.AITarget.selfType != EnumPrehistoric.Liopleurodon)
+                    || (this.AITarget.isInWater() && this.AITarget.selfType == EnumPrehistoric.Mosasaurus)
+                    || (this.AITarget.isInWater() && this.AITarget.selfType == EnumPrehistoric.Liopleurodon)
+                    || (this.AITarget.isInWater() && this.AITarget.selfType == EnumPrehistoric.Plesiosaur))
             {
                 this.AITarget.setDinoAgeTick(0);
                 this.AITarget.increaseDinoAge();
@@ -90,7 +91,7 @@ public class DinoAIGrowup extends EntityAIBase
             }
             else
             {
-                this.AITarget.SendStatusMessage(EnumSituation.NoSpace);    //, this.AITarget.SelfType);
+                this.AITarget.sendStatusMessage(EnumSituation.NoSpace);    //, this.AITarget.SelfType);
 
             }
         }

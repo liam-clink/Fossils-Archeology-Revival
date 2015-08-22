@@ -2,7 +2,7 @@ package com.github.revival.common.item;
 
 import com.github.revival.Revival;
 import com.github.revival.common.entity.mob.EntityDinosaur;
-import com.github.revival.common.entity.mob.EntityPlesiosaur;
+import com.github.revival.common.entity.mob.EntityPlesiosaurus;
 import com.github.revival.common.enums.EnumOrderType;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
@@ -56,7 +56,7 @@ public class ItemMagicConch extends Item
         //String var11 = StatCollector.translateToLocal("Drum.Msg.Middle");
         //String var12 = StatCollector.translateToLocal("Drum.Msg.Tail");
         String var13 = "";
-        List var14 = var2.getEntitiesWithinAABB(EntityPlesiosaur.class, AxisAlignedBB.getBoundingBox(var3.posX, var3.posY, var3.posZ, var3.posX + 1.0D, var3.posY + 1.0D, var3.posZ + 1.0D).expand(30.0D, 4.0D, 30.0D));
+        List var14 = var2.getEntitiesWithinAABB(EntityPlesiosaurus.class, AxisAlignedBB.getBoundingBox(var3.posX, var3.posY, var3.posZ, var3.posX + 1.0D, var3.posY + 1.0D, var3.posZ + 1.0D).expand(30.0D, 4.0D, 30.0D));
         Iterator var15 = var14.iterator();
 
         while (var15.hasNext())

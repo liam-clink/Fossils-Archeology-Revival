@@ -32,7 +32,7 @@ public class FossilRecipeHandler
         GameRegistry.addShapelessRecipe(new ItemStack(FAItemRegistry.gemAxe), new Object[]{Items.diamond_axe, FAItemRegistry.gem});
         GameRegistry.addShapelessRecipe(new ItemStack(FAItemRegistry.gemPickaxe), new Object[]{Items.golden_pickaxe, FAItemRegistry.gem});
         GameRegistry.addShapelessRecipe(new ItemStack(FAItemRegistry.gemPickaxe), new Object[]{Items.diamond_pickaxe, FAItemRegistry.gem});
-        GameRegistry.addShapelessRecipe(new ItemStack(FAItemRegistry.AquaticScarabGem), new Object[]{FAItemRegistry.DominicanAmber, FAItemRegistry.gem});
+        GameRegistry.addShapelessRecipe(new ItemStack(FAItemRegistry.gem_blue), new Object[]{FAItemRegistry.DominicanAmber, FAItemRegistry.gem});
         GameRegistry.addShapelessRecipe(new ItemStack(FAItemRegistry.gemHoe), new Object[]{Items.golden_hoe, FAItemRegistry.gem});
         GameRegistry.addShapelessRecipe(new ItemStack(FAItemRegistry.gemHoe), new Object[]{Items.diamond_hoe, FAItemRegistry.gem});
         GameRegistry.addShapelessRecipe(new ItemStack(FAItemRegistry.gemSword), new Object[]{Items.golden_sword, FAItemRegistry.gem});

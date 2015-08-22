@@ -2,6 +2,7 @@ package com.github.revival.common.handler;
 
 import com.github.revival.Revival;
 import com.github.revival.common.entity.mob.*;
+import com.github.revival.common.entity.mob.test.EntityNewPrehistoric;
 import com.github.revival.common.enums.EnumAnimalType;
 import com.github.revival.common.enums.EnumPrehistoric;
 
@@ -44,21 +45,6 @@ public class FossilLivingEvent
         if (event.achievement == FossilAchievementHandler.firstDino)
         {
             Revival.proxy.playSound("fossil:music.first_dinosaur");
-        }
-    }
-
-    @SubscribeEvent
-    public void onEntityLivingDeath(LivingDeathEvent event)
-    {
-        if (event.source.getEntity() instanceof EntityPlayerMP)
-        {
-            if (event.source.getEntity() instanceof EntityTyrannosaurus)
-            {
-                EntityTyrannosaurus entity = (EntityTyrannosaurus) event.entityLiving;
-
-                entity.openMouth(true);
-
-            }
         }
     }
 
@@ -202,23 +188,25 @@ public class FossilLivingEvent
                 break;
 
             case Smilodon:
-                birthEntity = new EntitySmilodon(event.entityLiving.worldObj).Imprinting(event.entityLiving.posX, event.entityLiving.posY, event.entityLiving.posZ);
+                birthEntity = new EntitySmilodon(event.entityLiving.worldObj);
                 if (new Random().nextInt(5) == 0)
                 {
-                    ((EntitySmilodon) birthEntity).setSkin(1);
+                   // ((EntitySmilodon) birthEntity).setSkin(1);
                 }
                 break;
 
             case Mammoth:
-                birthEntity = (new EntityMammoth(event.entityLiving.worldObj)).Imprinting(event.entityLiving.posX, event.entityLiving.posY, event.entityLiving.posZ);
+                birthEntity = (new EntityMammoth(event.entityLiving.worldObj));
+                ((EntityNewPrehistoric)birthEntity).func_152114_e(event.entityLiving.worldObj.getClosestPlayerToEntity(((EntityNewPrehistoric)birthEntity), 8));
                 if (new Random().nextInt(5) == 0)
                 {
-                    ((EntityMammoth) birthEntity).setSkin(2);
+                   // ((EntityMammoth) birthEntity).setSkin(2);
                 }
                 break;
 
             case Elasmotherium:
-                birthEntity = (new EntityElasmotherium(event.entityLiving.worldObj)).Imprinting(event.entityLiving.posX, event.entityLiving.posY, event.entityLiving.posZ);
+                birthEntity = (new EntityElasmotherium(event.entityLiving.worldObj));
+                ((EntityNewPrehistoric)birthEntity).func_152114_e(event.entityLiving.worldObj.getClosestPlayerToEntity(((EntityNewPrehistoric)birthEntity), 8));
                 break;
 
             case Quagga:
