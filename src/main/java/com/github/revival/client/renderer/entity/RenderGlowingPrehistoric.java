@@ -41,9 +41,9 @@ public class RenderGlowingPrehistoric extends RenderLiving{
 
 	protected int shouldRenderPass(EntityLivingBase entity, int i, float q)
 	{  
-		if (i == 2)
+		if (i == 2 && entity instanceof EntityNewPrehistoric)
 		{
-			this.bindTexture(overlay);
+			this.bindTexture(new ResourceLocation(((EntityNewPrehistoric)entity).getOverlayTexture()));
 			GL11.glEnable(GL11.GL_BLEND);
 			GL11.glDisable(GL11.GL_ALPHA_TEST);
 			GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE);

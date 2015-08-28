@@ -13,7 +13,6 @@ import net.minecraft.block.BlockBush;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
-import net.minecraft.command.IEntitySelector;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLivingBase;
@@ -49,6 +48,7 @@ import com.github.revival.client.gui.GuiPedia;
 import com.github.revival.common.api.IPrehistoricAI;
 import com.github.revival.common.block.FABlockRegistry;
 import com.github.revival.common.config.FossilConfig;
+import com.github.revival.common.enums.EnumAnimation;
 import com.github.revival.common.enums.EnumOrderType;
 import com.github.revival.common.enums.EnumPrehistoric;
 import com.github.revival.common.enums.EnumPrehistoricAI.Activity;
@@ -225,15 +225,15 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		this.setDinoAge(6);
 		this.setSpawnValues();
 		this.setGender(random.nextInt(2));
-		System.out.println(getGender());
-
+		System.out.println(getTexture());
+		Revival.ShowMessage(getTexture(), worldObj.getClosestPlayerToEntity(this, 20));
 		return par1EntityLivingData;
 	}
 
 	@Override
 	public boolean isAIEnabled()
 	{
-		return !this.isModelized();
+		return false;
 	}
 
 	public abstract void setSpawnValues();
@@ -1633,5 +1633,14 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
 	private double getSpeed() {
 		return 0.4D;
+	}
+	
+	public String getOverlayTexture(){
+			return "fossil:textures/blank.png";
+	}
+	
+	public void triggerAnimation(EnumAnimation animation){
+		int animateID = animation.ordinal();
+		Revival.proxy.animate(animateID);
 	}
 }

@@ -160,4 +160,11 @@ public class EntityCompsognathus extends EntityNewPrehistoric
 			}
 		}
 	}
+	public String getOverlayTexture(){
+		if(this.getSleeping() != 1 && !this.worldObj.isDaytime()){
+			return "fossil:textures/mob/compsognathus/overlay.png";
+		}else{
+			return "fossil:textures/blank.png";
+		}
+	}
 }

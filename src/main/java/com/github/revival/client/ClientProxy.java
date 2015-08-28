@@ -271,4 +271,6 @@ public class ClientProxy extends CommonProxy
 		EntityFX particle1 = new DeathOrbFX(world, posX, posY, posZ, 0, 0, 0);
 		Minecraft.getMinecraft().effectRenderer.addEffect(particle1);
 	}
+	
+	public void animate(int animateID) {}
 }

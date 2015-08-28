@@ -75,4 +75,6 @@ public class CommonProxy
     {
 
     }
+
+	public void animate(int animateID) {}
 }

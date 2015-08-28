@@ -93,6 +93,7 @@ public class FABlockRegistry extends FARegistry implements IContentHandler
     public static Block horsetail_small;
     public static Block horsetail_large;
     public static Block mutantPlant;
+    public static Block tempskya;
 
     public void init()
     {
@@ -170,6 +171,7 @@ public class FABlockRegistry extends FARegistry implements IContentHandler
         horsetail_small = new BlockFossilPlant("plants/plant_horsetail_small", 1).setBlockName("plant_horsetail_small").setCreativeTab(FATabRegistry.tabFBlocks);
         horsetail_large = new BlockFossilTallPlant("plants/plant_horsetail_large").setBlockName("plant_horsetail_large").setCreativeTab(FATabRegistry.tabFBlocks);
         mutantPlant = new BlockFossilTallPlant("plants/plant_mutant").setBlockName("plant_mutant").setLightLevel(0.4F).setCreativeTab(FATabRegistry.tabFBlocks);
+        tempskya = new BlockTempskya("plants/plant_tempskya").setBlockName("plant_tempskya").setCreativeTab(FATabRegistry.tabFBlocks);
     }
 
     public void initCreativeTabs()

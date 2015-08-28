@@ -189,12 +189,6 @@ public class BlockFossilTallPlant extends BlockDoublePlant implements IGrowable,
         return l != 2 && l != 3 ? 16777215 : a.getBiomeGenForCoords(x, z).getBiomeGrassColor(x, y, z);
     }
 
-    public void func_149889_c(World world, int x, int y, int z, int i, int i1)
-    {
-        world.setBlock(x, y, z, this, i, i1);
-        world.setBlock(x, y + 1, z, this, 8, i1);
-    }
-
     /**
      * Called when the block is placed in the world.
      */
