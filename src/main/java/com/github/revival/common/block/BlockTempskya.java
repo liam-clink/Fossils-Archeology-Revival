@@ -81,14 +81,21 @@ public class BlockTempskya extends BlockBush{
 		}
 	}
 	public void makeTempskya(World world, int x, int y, int z){
-		if(world.getBlock(x, y, z) == Blocks.air &&
-				world.getBlock(x, y + 1, z) == Blocks.air &&
-				world.getBlock(x, y + 2, z) == Blocks.air &&
-				world.getBlock(x, y + 3, z) == Blocks.air){
-			world.setBlock(x, y, z, this, 0, 2);
+		world.setBlock(x, y, z, this, 0, 2);
 		world.setBlock(x, y + 1, z, this, 1, 2);
 		world.setBlock(x, y + 2, z, this, 2, 2);
 		world.setBlock(x, y + 3, z, this, 3, 2);
+	}
+
+	public boolean canPlaceBlockAt(World world, int x, int y, int z)
+	{
+		if(world.getBlock(x, y, z) != Blocks.air &&
+				world.getBlock(x, y + 1, z) != Blocks.air &&
+				world.getBlock(x, y + 2, z) != Blocks.air &&
+				world.getBlock(x, y + 3, z) != Blocks.air){
+			return false;
+		}else{
+			return super.canPlaceBlockAt(world, x, y, z);
 		}
 
 	}
