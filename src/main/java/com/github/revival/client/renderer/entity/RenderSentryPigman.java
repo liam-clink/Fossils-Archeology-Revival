@@ -13,7 +13,7 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class RenderSentryPigman extends RenderBiped
 {
-    private static final ResourceLocation skeletonTextures = new ResourceLocation("fossil:textures/mob/sentryPigman.png");
+    private static final ResourceLocation skeletonTextures = new ResourceLocation("fossil:textures/model/sentryPigman.png");
 
     public RenderSentryPigman()
     {

@@ -206,7 +206,7 @@ public class ClientProxy extends CommonProxy
 
 		RenderingRegistry.registerBlockHandler(Revival.feederRenderID, new RenderFeeder());
 
-		VillagerRegistry.instance().registerVillagerSkin(10, new ResourceLocation("fossil:textures/mob/Archaeologist.png"));
+		VillagerRegistry.instance().registerVillagerSkin(10, new ResourceLocation("fossil:textures/model/Archaeologist.png"));
 
 		if (FossilConfig.skullOverlay)
 		{

@@ -10,7 +10,7 @@ import net.minecraft.util.ResourceLocation;
 @SideOnly(Side.CLIENT)
 public class RenderAnubite extends RenderBiped
 {
-    private static final ResourceLocation skeletonTextures = new ResourceLocation("fossil:textures/mob/Anubite_ancient.png");
+    private static final ResourceLocation skeletonTextures = new ResourceLocation("fossil:textures/model/Anubite_ancient.png");
 
     public RenderAnubite()
     {

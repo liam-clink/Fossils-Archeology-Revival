@@ -19,7 +19,7 @@ import java.util.Map;
 public class RenderQuagga extends RenderLiving
 {
     private static final Map field_110852_a = Maps.newHashMap();
-    private static final ResourceLocation quaggaTexture = new ResourceLocation("fossil:textures/mob/Quagga_Brown.png");
+    private static final ResourceLocation quaggaTexture = new ResourceLocation("fossil:textures/model/quagga_0/quagga.png");
 
     public RenderQuagga(ModelBase par1ModelBase, float par2)
     {

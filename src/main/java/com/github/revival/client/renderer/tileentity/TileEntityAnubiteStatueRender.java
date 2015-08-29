@@ -11,7 +11,7 @@ import org.lwjgl.opengl.GL11;
 public class TileEntityAnubiteStatueRender extends TileEntitySpecialRenderer
 {
 
-    public static final ResourceLocation texture = new ResourceLocation("fossil:textures/mob/Anubite_ancient_statue.png");
+    public static final ResourceLocation texture = new ResourceLocation("fossil:textures/model/Anubite_ancient_statue.png");
 
 
     private ModelAnubite modelBlock;

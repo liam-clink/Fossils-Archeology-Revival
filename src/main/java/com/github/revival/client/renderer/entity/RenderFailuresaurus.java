@@ -8,9 +8,9 @@ import net.minecraft.util.ResourceLocation;
 
 public class RenderFailuresaurus extends RenderLiving
 {
-    private static final ResourceLocation failuresaurus_default = new ResourceLocation("fossil:textures/mob/Failuresaurus.png");
-    private static final ResourceLocation failuresaurus_creepy = new ResourceLocation("fossil:textures/mob/Failuresaurus_creepy.png");
-    private static final ResourceLocation failuresaurus_cute = new ResourceLocation("fossil:textures/mob/Failuresaurus_cute.png");
+    private static final ResourceLocation failuresaurus_default = new ResourceLocation("fossil:textures/model/failuresaurus_0/failuresaurus_0.png");
+    private static final ResourceLocation failuresaurus_creepy = new ResourceLocation("fossil:textures/model/failuresaurus_0/failuresaurus_1.png");
+    private static final ResourceLocation failuresaurus_cute = new ResourceLocation("fossil:textures/model/failuresaurus_0/failuresaurus_2.png");
 
     public RenderFailuresaurus(ModelBase var1, float var2)
     {

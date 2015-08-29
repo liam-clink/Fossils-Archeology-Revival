@@ -12,7 +12,7 @@ import net.minecraft.util.ResourceLocation;
 @SideOnly(Side.CLIENT)
 public class RenderDeadAnu extends RenderLiving
 {
-    private static final ResourceLocation anu = new ResourceLocation("fossil:textures/mob/PigBoss.png");
+    private static final ResourceLocation anu = new ResourceLocation("fossil:textures/model/PigBoss.png");
 
     public RenderDeadAnu(ModelBase par1ModelBase, float par2)
     {

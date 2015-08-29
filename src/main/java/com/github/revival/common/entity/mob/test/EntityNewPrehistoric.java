@@ -1508,7 +1508,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		String gender = this.hasTeenTexture ? this.isTeen() ? "_teen": this.isChild() ? "_baby" : this.getGender() == 0 ? "_female" : "_male" : this.isChild() ? "_baby" : this.getGender() == 0 ? "_female" : "_male";
 		String sleeping = this.getSleeping() == 0 ? "" : "_sleeping";
 		String toggleList = this.hasFeatherToggle ? !this.featherToggle ? "_feathered" : "_scaled" : "";
-		return "fossil:textures/mob/" + selfType.toString().toLowerCase() + "/" + toggle + selfType.toString().toLowerCase() + gender + toggleList + sleeping + ".png";
+		return "fossil:textures/model/" + selfType.toString().toLowerCase() + "_0/" + toggle + selfType.toString().toLowerCase() + gender + toggleList + sleeping + ".png";
 	}
 	@SideOnly(Side.CLIENT)
 	public void ShowPedia(GuiPedia p0)

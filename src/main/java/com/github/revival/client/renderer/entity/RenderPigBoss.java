@@ -36,7 +36,7 @@ public class RenderPigBoss extends RenderLiving
 
     protected ResourceLocation func_110919_a(EntityAnu par1Entity)
     {
-        return new ResourceLocation("fossil:textures/mob/PigBoss.png");
+        return new ResourceLocation("fossil:textures/model/PigBoss.png");
     }
 
     protected ResourceLocation getEntityTexture(Entity par1Entity)
@@ -63,7 +63,7 @@ public class RenderPigBoss extends RenderLiving
             }
             else
             {
-                this.bindTexture(new ResourceLocation("fossil:textures/mob/PigBoss_overlay.png"));
+                this.bindTexture(new ResourceLocation("fossil:textures/model/PigBoss_overlay.png"));
                 GL11.glEnable(GL11.GL_BLEND);
                 GL11.glDisable(GL11.GL_ALPHA_TEST);
                 GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE);
