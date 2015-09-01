@@ -11,24 +11,46 @@ import net.minecraft.entity.Entity;
 
 import com.github.revival.common.entity.mob.test.EntityNewPrehistoric;
 
+<<<<<<< HEAD
 public class ModelPrehistoric extends MowzieModelBase{
 
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		doMowzieStuff(true);
+=======
+public abstract class ModelPrehistoric extends MowzieModelBase{
+
+	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+>>>>>>> origin/master
 		renderAll();
 		if(entity instanceof EntityNewPrehistoric){
 			EntityNewPrehistoric mob = (EntityNewPrehistoric)entity;
 			if(mob.isModelized()){
+<<<<<<< HEAD
 				renderFossil(mob, f, f1, f2, f3, f4, f5);
 			}else{
 				if(mob.getSleeping() == 0){
 					renderLiving(mob, f, f1, f2, f3, f4, f5);
 				}else{
 					renderSleeping(mob, f, f1, f2, f3, f4, f5);
+=======
+				GL11.glPushMatrix();
+				renderFossil(mob, f, f1, f2, f3, f4, f5);
+				GL11.glPopMatrix();
+			}else{
+				if(mob.getSleeping() == 0){
+					GL11.glPushMatrix();
+					renderLiving(mob, f, f1, f2, f3, f4, f5);
+					GL11.glPopMatrix();
+				}else{
+					GL11.glPushMatrix();
+					renderSleeping(mob, f, f1, f2, f3, f4, f5);
+					GL11.glPopMatrix();
+>>>>>>> origin/master
 
 				}
 			}
 		}
+<<<<<<< HEAD
 	}
 	/**PreRender and setAngles*/
 	public void renderFossil(EntityNewPrehistoric entity, float f, float f1, float f2, float f3, float f4, float f5) {
@@ -39,6 +61,16 @@ public class ModelPrehistoric extends MowzieModelBase{
 	/**PreRender and setAngles*/
 	public void renderSleeping(EntityNewPrehistoric entity, float f, float f1, float f2, float f3, float f4, float f5){
 	}
+=======
+		doMowzieStuff(true);
+	}
+	/**PreRender and setAngles*/
+	public abstract void renderFossil(EntityNewPrehistoric entity, float f, float f1, float f2, float f3, float f4, float f5);
+	/**PreRender and setAngles*/
+	public abstract void renderLiving(EntityNewPrehistoric entity, float f, float f1, float f2, float f3, float f4, float f5);
+	/**PreRender and setAngles*/
+	public abstract void renderSleeping(EntityNewPrehistoric entity, float f, float f1, float f2, float f3, float f4, float f5);
+>>>>>>> origin/master
 
 	public void renderAll(){
 		Iterator itr = this.boxList.iterator();

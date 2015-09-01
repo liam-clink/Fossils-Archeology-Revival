@@ -117,7 +117,11 @@ public class EntityVelociraptor extends EntityNewPrehistoric
 	@Override
 	public Jumping aiJumpType() {
 
+<<<<<<< HEAD
 		return Jumping.BASIC;
+=======
+		return Jumping.TWOBLOCKS;
+>>>>>>> origin/master
 	}
 
 	@Override
