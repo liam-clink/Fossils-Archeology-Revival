@@ -1,0 +1,6 @@
+------------------------------------------
+(Do not change/remove the line above!
+ Dashed line denotes how much space you
+ have in the dinopedia before it runs off
+ the page. Eventually I will get around
+ to making a proper string handler.)
