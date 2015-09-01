@@ -1258,11 +1258,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 				if(itemstack.getItem() != null){
 					if (this.aiTameType() == Taming.GEM && itemstack.getItem() == FAItemRegistry.gem || this.aiTameType() == Taming.BLUEGEM && itemstack.getItem() == FAItemRegistry.gem_blue)
 					{
-<<<<<<< HEAD
 						if (!this.isTamed())
-=======
-						if (this.isWeak() && !this.isTamed())
->>>>>>> origin/master
 						{
 							this.triggerTamingAcheivement(player);
 							this.heal(200);

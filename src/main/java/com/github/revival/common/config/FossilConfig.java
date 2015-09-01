@@ -81,11 +81,7 @@ public class FossilConfig implements IConfigHandler
         developerSpecials = configuration.get("option", "(Devs only)Allow Dev Specials", true).getBoolean(true);
         customMainMenu = configuration.get("option", "Custom Main Menu", true).getBoolean(true);
 
-<<<<<<< HEAD
         biomeIdDarknessLair = configuration.get("biome IDs", "Lair of Darkness ID:", 128).getInt();
-=======
-        biomeIdDarknessLair = configuration.get("biome IDs", "Layer of Darkness ID:", 128).getInt();
->>>>>>> origin/master
         biomeIdTreasure = configuration.get("biome IDs", "Treasure ID:", 127).getInt();
 
         dimIdDarknessLair = configuration.get("dimension IDs", "Layer of Darkness ID:", -23).getInt();
