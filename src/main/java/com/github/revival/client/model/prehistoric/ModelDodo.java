@@ -59,7 +59,7 @@ public class ModelDodo extends MowzieModelBase {
 		this.rightWing.setRotationPoint(-3.5F, 3.0F, 3.0F);
 		this.rightWing.addBox(-1.0F, -1.0F, -2.0F, 1, 3, 4, 0.0F);
 		this.beak = new MowzieModelRenderer(this, 23, 1);
-		this.beak.setRotationPoint(0.5F, -1.0F, -4.0F);
+		this.beak.setRotationPoint(0F, -1.0F, -4.0F);
 		this.beak.addBox(-1.5F, -1.0F, -5.0F, 3, 3, 5, 0.0F);
 		this.neck.addChild(this.head);
 		this.body.addChild(this.neck);
@@ -96,9 +96,10 @@ public class ModelDodo extends MowzieModelBase {
 		this.chainWave(neckParts, speed2, 0.1F, -3, entity.ticksExisted, 1);
 		this.chainWave(neckParts, speed2, 0.2F, -3, f, f1);
 		EntityDodo dodo = (EntityDodo)entity;
+		this.bob(body_fat, speed2, 0.4F, false, entity.ticksExisted, 1);
 		if(dodo.getFat() > 0){
 			GL11.glPushMatrix();
-            GL11.glTranslatef(0.0F, f5 - ((dodo.getFat()) * 0.1F) - 0.3F, 0);
+            GL11.glTranslatef(0.0F, f5 - ((dodo.getFat()) * 0.1F) - 0.2F, 0);
 			GL11.glScalef(((dodo.getFat()) * 0.1F) + 1, ((dodo.getFat()) * 0.1F) + 1, ((dodo.getFat()) * 0.1F) + 1);
 			this.body_fat.render(f5);
 			GL11.glPopMatrix();

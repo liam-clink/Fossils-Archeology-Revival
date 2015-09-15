@@ -203,6 +203,11 @@ public class EntityDodo extends EntityNewPrehistoric
 							this.setFat(this.getFat() + 1);
 							this.worldObj.playSoundAtEntity(this, "random.eat",
 									this.getSoundVolume(), this.getSoundPitch());
+						}else{
+							if(!this.worldObj.isRemote)
+							this.worldObj.createExplosion(this, this.posX, this.posY, this.posZ, 2, true);
+							this.setDinoAge(1);
+							this.setFat(0);
 						}
 					}
 				}
@@ -221,6 +226,7 @@ public class EntityDodo extends EntityNewPrehistoric
 		if(this.getFat() > 5){
 			this.motionY += 0.1D;
 			if(this.posY > 200){
+				if(!this.worldObj.isRemote)
 				this.worldObj.createExplosion(this, this.posX, this.posY, this.posZ, 2, true);
 				this.setDinoAge(1);
 				this.setFat(0);
