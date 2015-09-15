@@ -1,8 +1,11 @@
 package com.github.revival.common.entity.mob;
 
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
 import com.github.revival.common.entity.mob.test.EntityNewPrehistoric;
@@ -28,7 +31,8 @@ public class EntityDodo extends EntityNewPrehistoric
 	public static final double maxHealth = 10;
 	public static final double baseSpeed = 0.15D;
 	public static final double maxSpeed = 0.2D;
-	
+	public static final int FAT_INDEX = 28;
+
 	public EntityDodo(World world) {
 		super(world, EnumPrehistoric.Dodo);
 		this.setSize(0.5F, 0.7F);
@@ -39,6 +43,33 @@ public class EntityDodo extends EntityNewPrehistoric
 		developsResistance = false;
 		breaksBlocks = false;
 		favoriteFood = Items.melon;
+	}
+
+	@Override
+	public void entityInit(){
+		super.entityInit();
+		this.dataWatcher.addObject(FAT_INDEX, 0);
+	}
+	public int getFat()
+	{
+		return this.dataWatcher.getWatchableObjectInt(FAT_INDEX);
+	}
+
+	public void setFat(int var1)
+	{
+		this.dataWatcher.updateObject(FAT_INDEX, var1);
+	}
+
+	public void readEntityFromNBT(NBTTagCompound compound)
+	{
+		super.readEntityFromNBT(compound);
+		this.setFat(compound.getInteger("FatLevel"));
+	}
+
+	public void writeEntityToNBT(NBTTagCompound compound)
+	{
+		super.writeEntityToNBT(compound);
+		compound.setInteger("FatLevel", this.getFat());
 	}
 
 	@Override
@@ -156,6 +187,43 @@ public class EntityDodo extends EntityNewPrehistoric
 			{
 				if(this.developsResistance)
 					this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.0D);
+			}
+		}
+	}
+
+	public boolean interact(EntityPlayer player)
+	{
+		super.interact(player);
+		ItemStack itemstack = player.inventory.getCurrentItem();
+			if(itemstack != null){
+				if(itemstack.getItem() != null){
+					if(itemstack.getItem() == Items.melon_seeds){
+						System.out.println("lel");
+						if(this.getFat() < 10){
+							this.setFat(this.getFat() + 1);
+							this.worldObj.playSoundAtEntity(this, "random.eat",
+									this.getSoundVolume(), this.getSoundPitch());
+						}
+					}
+				}
+			}
+		return super.interact(player);
+	}
+
+    public boolean allowLeashing()
+    {
+        return true;
+    }
+    
+	@Override
+	public void onLivingUpdate(){
+		super.onLivingUpdate();
+		if(this.getFat() > 5){
+			this.motionY += 0.1D;
+			if(this.posY > 200){
+				this.worldObj.createExplosion(this, this.posX, this.posY, this.posZ, 2, true);
+				this.setDinoAge(1);
+				this.setFat(0);
 			}
 		}
 	}

@@ -186,10 +186,10 @@ public class ModelTriceratops extends MowzieModelBase {
 	}
 	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
 		MowzieModelRenderer[] tailParts = {this.tail1, this.tail2, this.tail3};
-		MowzieModelRenderer[] neckParts = {this.neck};
+		MowzieModelRenderer[] neckParts = {this.neck, this.head};
 
-		this.faceTarget(head, 2, f3, f4);
-		
+		this.faceTarget(head, 1, f3, f4);
+
 		float speed = 0.5F;
 		float speed2 = 0.1F;
 
@@ -204,6 +204,7 @@ public class ModelTriceratops extends MowzieModelBase {
 		this.walk(rightFrontLeg, speed, 0.2F, false, 0F, -0.6F, f, f1);
 		this.chainWave(tailParts, speed2, 0.05F, -3, entity.ticksExisted, 1);
 		this.chainSwing(tailParts, speed2, 0.35F, -3, entity.ticksExisted, 1);
+		this.chainWave(neckParts, speed2, 0.05F, -3, entity.ticksExisted, 1);
 
 	}
 }

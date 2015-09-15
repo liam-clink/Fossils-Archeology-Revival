@@ -29,9 +29,6 @@ public class RenderPrehistoric extends RenderLiving{
 	}
 	protected void preRenderCallback(EntityLivingBase entity, float f)
 	{
-		if(entity instanceof EntityNewPrehistoric){
-			EntityNewPrehistoric prehistoric = (EntityNewPrehistoric)entity;
-			GL11.glScalef(prehistoric.getDinosaurSize(), prehistoric.getDinosaurSize(), prehistoric.getDinosaurSize());
-		}
+		GL11.glScalef(((EntityNewPrehistoric)entity).getDinosaurSize(), ((EntityNewPrehistoric)entity).getDinosaurSize(), ((EntityNewPrehistoric)entity).getDinosaurSize());
 	}
 }

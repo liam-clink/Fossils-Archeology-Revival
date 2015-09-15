@@ -188,16 +188,16 @@ public class ModelTyrannosaurus extends MowzieModelBase
 	}
 	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
 		MowzieModelRenderer[] tailParts = {this.tail1, this.tail2, this.tail3};
-		MowzieModelRenderer[] neckParts = {this.neck};
+		MowzieModelRenderer[] neckParts = {this.neck, this.head};
 		MowzieModelRenderer[] leftArmParts = {this.leftUpperArm, this.leftLowerArm};
 		MowzieModelRenderer[] rightArmParts = {this.rightUpperArm, this.rightLowerArm};
-
+	
 		this.faceTarget(head, 1, f3, f4);
-		
+
 		float speed = 0.5F;
 		float speed2 = 0.1F;
 
-		this.bob(lowerBody, speed2, 0.7F, false, entity.ticksExisted, 1);
+		this.bob(lowerBody, speed2, 0.4F, false, entity.ticksExisted, 1);
 		this.walk(leftThigh, speed, 0.8F, false, 0F, 0.4F, f, f1);
 		this.walk(leftLeg, speed, 0.2F, false, 0F, -0.6F, f, f1);
 		this.walk(leftFoot, speed, -0.4F, false, 4.5F, 0.4F, f, f1);
@@ -208,6 +208,7 @@ public class ModelTyrannosaurus extends MowzieModelBase
 		this.chainWave(leftArmParts, speed2, 0.05F, -3, entity.ticksExisted, 1);
 		this.chainWave(rightArmParts, speed2, 0.05F, -3, entity.ticksExisted, 1);
 		this.chainSwing(tailParts, speed2, 0.15F, -3, entity.ticksExisted, 1);
+		this.chainWave(neckParts, speed2, 0.05F, -3, entity.ticksExisted, 1);
 
 	}
 
