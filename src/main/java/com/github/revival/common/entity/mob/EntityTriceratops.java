@@ -33,7 +33,7 @@ public class EntityTriceratops extends EntityNewPrehistoric
 	public EntityTriceratops(World world) {
 		super(world, EnumPrehistoric.Triceratops);
 		this.hasFeatherToggle = true;
-		this.featherToggle = FossilConfig.quilledTriceratops;
+		this.featherToggle = !FossilConfig.quilledTriceratops;
         this.setSize(0.8F, 0.8F);
     	minSize = 1F;
 		maxSize = 8F;

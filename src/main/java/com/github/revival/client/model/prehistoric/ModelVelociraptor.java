@@ -228,7 +228,7 @@ public class ModelVelociraptor extends MowzieModelBase {
 	}
 	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
 		MowzieModelRenderer[] tailParts = {this.tail1, this.tail2, this.tail3};
-		MowzieModelRenderer[] neckParts = {this.neck};
+		MowzieModelRenderer[] neckParts = {this.neck, this.head};
 		MowzieModelRenderer[] leftArmParts = {this.leftUpperArm, this.leftLowerArm};
 		MowzieModelRenderer[] rightArmParts = {this.rightUpperArm, this.rightLowerArm};
 
@@ -249,6 +249,7 @@ public class ModelVelociraptor extends MowzieModelBase {
 		this.chainWave(rightArmParts, speed, 0.05F, -3, entity.ticksExisted, 1);
 		this.chainSwing(tailParts, speed, 0.15F, -3, entity.ticksExisted, 1);
 		this.chainSwing(tailParts, speed2, 0.25F, -3, f, f1);
+		this.chainWave(neckParts, speed, 0.15F, 3, entity.ticksExisted, 1);
 
 	}
 

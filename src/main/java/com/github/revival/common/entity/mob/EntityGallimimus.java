@@ -22,7 +22,9 @@ import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChunkCoordinates;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
@@ -57,7 +59,7 @@ public class EntityGallimimus extends EntityNewPrehistoric
 	public static final double maxHealth = 40;
 	public static final double baseSpeed = 0.25D;
 	public static final double maxSpeed = 0.4D;
-	
+
 	public EntityGallimimus(World world) {
 		super(world, EnumPrehistoric.Gallimimus);
         this.setSize(1.0F, 2.0F);
@@ -370,6 +372,25 @@ public class EntityGallimimus extends EntityNewPrehistoric
 
 		return Items.stick;
 	}
+	
+	public void onUpdate(){
+		super.onUpdate();
+
+	}
+	public boolean isSanic(){
+        String s = EnumChatFormatting.getTextWithoutFormattingCodes(this.getCommandSenderName());
+		return s.equals("sanic") || s.equals("Sanic");
+	}
+	
+	@Override
+	public String getTexture(){
+		if(isSanic()){
+		return "fossil:textures/model/gallimimus_0/sanic.png";	
+		}else{
+		return super.getTexture();
+		}
+	}
+	
 	public void updateSize()
 	{
 		double healthStep;
