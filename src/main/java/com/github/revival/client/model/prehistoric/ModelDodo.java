@@ -20,7 +20,6 @@ public class ModelDodo extends MowzieModelBase {
 	public MowzieModelRenderer neck;
 	public MowzieModelRenderer head;
 	public MowzieModelRenderer beak;
-	protected float field_78151_h = 4.0F;
 	
 	public ModelDodo() {
 		this.textureWidth = 64;
@@ -52,7 +51,7 @@ public class ModelDodo extends MowzieModelBase {
 		this.body_fat.setRotationPoint(0.5F, 13.0F, -6.0F);
 		this.body_fat.addBox(-3.5F, 0.0F, 0.0F, 7, 7, 9, 0.0F);
 		this.tail = new MowzieModelRenderer(this, 14, 16);
-		this.tail.setRotationPoint(0.5F, 1.0F, 6.5F);
+		this.tail.setRotationPoint(0F, 1.0F, 6.5F);
 		this.tail.addBox(-2.0F, -2.0F, 0.0F, 4, 4, 4, 0.0F);
 		ModelUtils.setRotateAngle(tail, -0.18587756533739608F, -0.0F, 0.0F);
 		this.rightWing = new MowzieModelRenderer(this, 34, 25);
@@ -88,7 +87,8 @@ public class ModelDodo extends MowzieModelBase {
 
 		float speed = 1.5F;
 		float speed2 = 0.1F;
-		this.bob(body, speed2, 0.4F, false, entity.ticksExisted, 1);
+		this.bob(body, speed2, -0.4F, false, entity.ticksExisted, 1);
+		//this.bob(bottom, speed2, -0.4F, false, entity.ticksExisted, 1);
 		this.walk(leftLeg, speed, 0.2F, false, 0F, -0.6F, f, f1);
 		this.walk(rightLeg, speed, 0.2F, true, 0F, -0.6F, f, f1);
 		this.chainWave(tailParts, speed2, 0.05F, -3, entity.ticksExisted, 1);
@@ -96,7 +96,7 @@ public class ModelDodo extends MowzieModelBase {
 		this.chainWave(neckParts, speed2, 0.1F, -3, entity.ticksExisted, 1);
 		this.chainWave(neckParts, speed2, 0.2F, -3, f, f1);
 		EntityDodo dodo = (EntityDodo)entity;
-		this.bob(body_fat, speed2, 0.4F, false, entity.ticksExisted, 1);
+		this.bob(body_fat, speed2, -0.4F, false, entity.ticksExisted, 1);
 		if(dodo.getFat() > 0){
 			GL11.glPushMatrix();
             GL11.glTranslatef(0.0F, f5 - ((dodo.getFat()) * 0.1F) - 0.2F, 0);
@@ -109,8 +109,8 @@ public class ModelDodo extends MowzieModelBase {
 				ModelUtils.setRotateAngle(head, -0.7285004297824331F, -0.0F, 0.0F);
 				this.chainWave(neckParts, speed2, 0.1F, -3, entity.ticksExisted, 1);
 				this.chainWave(neckParts, speed2, 0.2F, -3, f, f1);
-				this.walk(leftLeg, speed2, 0.7F, true, 0F, 0F, entity.ticksExisted, -1);
-				this.walk(rightLeg, speed2, 0.7F, true, 0F, 0F, entity.ticksExisted, 1);
+				this.walk(leftLeg, 0.7F, 0.7F, true, 0F, 0F, entity.ticksExisted, -1);
+				this.walk(rightLeg, 0.7F, 0.7F, true, 0F, 0F, entity.ticksExisted, 1);
 			}
 		}
 

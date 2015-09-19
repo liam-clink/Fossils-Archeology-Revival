@@ -20,6 +20,7 @@ import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIOwnerHurtByTarget;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.IMob;
@@ -42,6 +43,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 
 import org.lwjgl.opengl.GL11;
+
+import scala.reflect.internal.Trees.This;
 
 import com.github.revival.Revival;
 import com.github.revival.client.gui.GuiPedia;
@@ -127,7 +130,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		this.setHunger(100 / 2);
 		this.tasks.addTask(1, new DinoAIRunAway(this, EntityLivingBase.class, 16.0F, this.getSpeed()/2, this.getSpeed()));
 		this.tasks.addTask(1, new DinoAITerratorial(this, EntityLivingBase.class, 4.0F));
-		this.tasks.addTask(1, new DinoAIAgressive(this, EntityLivingBase.class, 750, isCannabil(), true));
+        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityLivingBase.class, 0, true));
 		this.tasks.addTask(2, new DinoAIWaterAgressive(this, 0.009D));
 		this.tasks.addTask(2, new DinoAIFish(this, 1));
 		this.tasks.addTask(3, new DinoAIWander(this, 1));
@@ -1220,6 +1223,9 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	}
 	public boolean interact(EntityPlayer player)
 	{
+		System.out.println(this.getHealth());
+		System.out.println(this.getSpeed());
+
 		ItemStack itemstack = player.inventory.getCurrentItem();
 		if(this.isModelized()){
 			if (itemstack == null)
