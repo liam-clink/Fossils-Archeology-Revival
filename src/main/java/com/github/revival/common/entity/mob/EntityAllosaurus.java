@@ -42,6 +42,7 @@ public class EntityAllosaurus extends EntityNewPrehistoric
 		developsResistance = true;
 		breaksBlocks = true;
 		favoriteFood = Items.beef;
+		necklength = 2;
 	}
 
 	@Override

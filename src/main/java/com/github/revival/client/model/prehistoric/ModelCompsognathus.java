@@ -168,8 +168,9 @@ public class ModelCompsognathus extends MowzieModelBase {
 		MowzieModelRenderer[] leftArmParts = {this.leftUpperArm, this.leftlowerArm};
 		MowzieModelRenderer[] rightArmParts = {this.rightUpperArm, this.RightLowerArm};
 
-		this.faceTarget(head, 1, f3, f4);
-		
+		this.faceTarget(head, 2, f3, f4);
+		this.faceTarget(neck, 2, f3, f4);
+
 		float speed = 0.1F;
 		float speed2 = 0.5F;
 

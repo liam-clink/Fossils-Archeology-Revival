@@ -20,7 +20,7 @@ public class ModelDodo extends MowzieModelBase {
 	public MowzieModelRenderer neck;
 	public MowzieModelRenderer head;
 	public MowzieModelRenderer beak;
-	
+
 	public ModelDodo() {
 		this.textureWidth = 64;
 		this.textureHeight = 32;
@@ -83,23 +83,27 @@ public class ModelDodo extends MowzieModelBase {
 	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
 		MowzieModelRenderer[] tailParts = {this.tail};
 		MowzieModelRenderer[] neckParts = {this.neck, this.head};	
-		this.faceTarget(head, 1, f3, f4);
-
+		EntityDodo dodo = (EntityDodo)entity;
 		float speed = 1.5F;
 		float speed2 = 0.1F;
-		this.bob(body, speed2, -0.4F, false, entity.ticksExisted, 1);
-		//this.bob(bottom, speed2, -0.4F, false, entity.ticksExisted, 1);
-		this.walk(leftLeg, speed, 0.2F, false, 0F, -0.6F, f, f1);
-		this.walk(rightLeg, speed, 0.2F, true, 0F, -0.6F, f, f1);
-		this.chainWave(tailParts, speed2, 0.05F, -3, entity.ticksExisted, 1);
-		this.chainSwing(tailParts, speed2, 0.15F, -3, entity.ticksExisted, 1);
-		this.chainWave(neckParts, speed2, 0.1F, -3, entity.ticksExisted, 1);
-		this.chainWave(neckParts, speed2, 0.2F, -3, f, f1);
-		EntityDodo dodo = (EntityDodo)entity;
-		this.bob(body_fat, speed2, -0.4F, false, entity.ticksExisted, 1);
+		if(dodo.getSleeping() == 1){
+			this.sleepPose();
+		}else{
+			faceTarget(head, 2, f3, f4);
+			faceTarget(neck, 2, f3, f4);	
+			this.bob(body, speed2, -0.4F, false, entity.ticksExisted, 1);
+			//this.bob(bottom, speed2, -0.4F, false, entity.ticksExisted, 1);
+			this.walk(leftLeg, speed, 0.2F, false, 0F, -0.6F, f, f1);
+			this.walk(rightLeg, speed, 0.2F, true, 0F, -0.6F, f, f1);
+			this.chainWave(tailParts, speed2, 0.05F, -3, entity.ticksExisted, 1);
+			this.chainSwing(tailParts, speed2, 0.15F, -3, entity.ticksExisted, 1);
+			this.chainWave(neckParts, speed2, 0.1F, -3, entity.ticksExisted, 1);
+			this.chainWave(neckParts, speed2, 0.2F, -3, f, f1);
+			this.bob(body_fat, speed2, -0.4F, false, entity.ticksExisted, 1);
+		}
 		if(dodo.getFat() > 0){
 			GL11.glPushMatrix();
-            GL11.glTranslatef(0.0F, f5 - ((dodo.getFat()) * 0.1F) - 0.2F, 0);
+			GL11.glTranslatef(0.0F, f5 - ((dodo.getFat()) * 0.1F) - 0.2F, 0);
 			GL11.glScalef(((dodo.getFat()) * 0.1F) + 1, ((dodo.getFat()) * 0.1F) + 1, ((dodo.getFat()) * 0.1F) + 1);
 			this.body_fat.render(f5);
 			GL11.glPopMatrix();
@@ -114,6 +118,19 @@ public class ModelDodo extends MowzieModelBase {
 			}
 		}
 
+
+
+	}
+
+	private void sleepPose() {
+		ModelUtils.setRotateAngle(tail, -0.18587756533739608F, -0.0F, 0.0F);
+		ModelUtils.setRotateAngle(leftLeg, -1.5533430342749532F, -0.0F, 0.0F);
+		ModelUtils.setRotateAngle(rightLeg, -1.5533430342749532F, -0.0F, 0.0F);
+		ModelUtils.setRotateAngle(neck, -0.8196066167365371F, -0.0F, 0.0F);
+		ModelUtils.setRotateAngle(head, 0.8196066167365371F, 0.3520329101272563F, 0.0F);
+        this.body.setRotationPoint(0.5F, 16.0F, -6.0F);
+        this.leftLeg.setRotationPoint(2.5F, 24.0F, 0.0F);
+        this.rightLeg.setRotationPoint(-1.5F, 24.0F, 0.0F);
 
 	}
 }

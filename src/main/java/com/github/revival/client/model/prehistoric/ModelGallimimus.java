@@ -184,22 +184,18 @@ public class ModelGallimimus extends MowzieModelBase
 		MowzieModelRenderer[] leftArmParts = {this.leftUpperArm, this.leftLowerArm};
 		MowzieModelRenderer[] rightArmParts = {this.rightUpperArm, this.rightLowerArm};
 
-		faceTarget(head, 1, f3, f4);
+		faceTarget(head, 2, f3, f4);
+		faceTarget(neck, 2, f3, f4);
 		float speed = 0.1F;
 		float speed2 = 0.5F;
 
 		this.bob(lowerBody, speed, 0.5F, false, entity.ticksExisted, 1);
-		if(!((EntityGallimimus)entity).isSanic()){
-			this.walk(leftThigh, speed2, 0.8F, false, 0F, 0.4F, f, f1);
-			this.walk(leftLeg, speed2, 0.2F, false, 0F, -0.6F, f, f1);
-			this.walk(leftFoot, speed2, -0.4F, false, 4.5F, 0.4F, f, f1);
-			this.walk(rightThigh, speed2, 0.8F, true, 0F, 0.4F, f, f1);
-			this.walk(rightLeg, speed2, 0.2F, true, 0F, -0.6F, f, f1);
-			this.walk(rightFoot, speed2, -0.4F, true, 4.5F, 0.4F, f, f1);
-		}else{
-			leftThigh.rotateAngleX += f + (0.5F * entity.ticksExisted);
-			rightThigh.rotateAngleX -= f + (0.5F * entity.ticksExisted);
-		}
+		this.walk(leftThigh, speed2, 0.8F, false, 0F, 0.4F, f, f1);
+		this.walk(leftLeg, speed2, 0.2F, false, 0F, -0.6F, f, f1);
+		this.walk(leftFoot, speed2, -0.4F, false, 4.5F, 0.4F, f, f1);
+		this.walk(rightThigh, speed2, 0.8F, true, 0F, 0.4F, f, f1);
+		this.walk(rightLeg, speed2, 0.2F, true, 0F, -0.6F, f, f1);
+		this.walk(rightFoot, speed2, -0.4F, true, 4.5F, 0.4F, f, f1);
 		this.chainWave(tailParts, speed, 0.05F, -3, entity.ticksExisted, 1);
 		this.chainWave(leftArmParts, speed, -0.15F, -3, entity.ticksExisted, 1);
 		this.chainWave(rightArmParts, speed,  -0.15F, -3, entity.ticksExisted, 1);

@@ -377,19 +377,6 @@ public class EntityGallimimus extends EntityNewPrehistoric
 		super.onUpdate();
 
 	}
-	public boolean isSanic(){
-        String s = EnumChatFormatting.getTextWithoutFormattingCodes(this.getCommandSenderName());
-		return s.equals("sanic") || s.equals("Sanic");
-	}
-	
-	@Override
-	public String getTexture(){
-		if(isSanic()){
-		return "fossil:textures/model/gallimimus_0/sanic.png";	
-		}else{
-		return super.getTexture();
-		}
-	}
 	
 	public void updateSize()
 	{

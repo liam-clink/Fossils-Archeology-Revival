@@ -45,7 +45,6 @@ import com.github.revival.client.model.prehistoric.ModelTriceratops;
 import com.github.revival.client.model.prehistoric.ModelTyrannosaurus;
 import com.github.revival.client.model.prehistoric.ModelVelociraptor;
 import com.github.revival.client.model.prehistoric.alternate.ModelFlyingConfuciusornis;
-import com.github.revival.client.model.prehistoric.alternate.ModelFlyingPteranodon;
 import com.github.revival.client.renderer.entity.RenderAnuEffect;
 import com.github.revival.client.renderer.entity.RenderAnubite;
 import com.github.revival.client.renderer.entity.RenderBirdEgg;
@@ -75,6 +74,7 @@ import com.github.revival.client.renderer.item.ItemVaseAmphoraRenderer;
 import com.github.revival.client.renderer.item.ItemVaseKylixRenderer;
 import com.github.revival.client.renderer.item.ItemVaseVoluteRenderer;
 import com.github.revival.client.renderer.particle.DeathOrbFX;
+import com.github.revival.client.renderer.particle.SleepFX;
 import com.github.revival.client.renderer.tileentity.RenderFeeder;
 import com.github.revival.client.renderer.tileentity.RenderTNClock;
 import com.github.revival.client.renderer.tileentity.TileEntityAncientChestRender;
@@ -271,6 +271,10 @@ public class ClientProxy extends CommonProxy
 		EntityFX particle1 = new DeathOrbFX(world, posX, posY, posZ, 0, 0, 0);
 		Minecraft.getMinecraft().effectRenderer.addEffect(particle1);
 	}
-	
+	public void spawnSleepParticle(World world, double posX, double posY, double posZ)
+	{
+		EntityFX particle1 = new SleepFX(world, posX, posY, posZ, 0, 0, 0);
+		Minecraft.getMinecraft().effectRenderer.addEffect(particle1);
+	}
 	public void animate(int animateID) {}
 }

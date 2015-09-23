@@ -71,10 +71,9 @@ public class CommonProxy
 
     }
 
-    public void spawnAnuParticle(World world, double posX, double posY, double posZ)
-    {
+    public void spawnAnuParticle(World world, double posX, double posY, double posZ){}
 
-    }
+	public void spawnSleepParticle(World world, double posX, double posY, double posZ){}
 
 	public void animate(int animateID) {}
 }

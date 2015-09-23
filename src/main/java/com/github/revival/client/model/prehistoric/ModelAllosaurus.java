@@ -174,7 +174,8 @@ public class ModelAllosaurus extends MowzieModelBase {
 		MowzieModelRenderer[] leftArmParts = {this.leftUpperArm, this.leftLowerArm};
 		MowzieModelRenderer[] rightArmParts = {this.rightUpperArm, this.rightLowerArm};
 
-		this.faceTarget(head, 1, f3, f4);
+		faceTarget(neck, 2, f3, f4);
+		faceTarget(head, 2, f3, f4);
 		
 		float speed = 0.1F;
 		float speed2 = 0.5F;

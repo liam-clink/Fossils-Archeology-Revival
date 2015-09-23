@@ -43,6 +43,7 @@ public class EntityDodo extends EntityNewPrehistoric
 		developsResistance = false;
 		breaksBlocks = false;
 		favoriteFood = Items.melon;
+		hasTeenTexture = false;
 	}
 
 	@Override
@@ -87,7 +88,7 @@ public class EntityDodo extends EntityNewPrehistoric
 	@Override
 	public Activity aiActivityType() {
 
-		return Activity.BOTH;
+		return Activity.DURINAL;
 	}
 
 	@Override

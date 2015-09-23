@@ -118,6 +118,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	public boolean hasFeatherToggle = false;
 	public boolean featherToggle;
 	public boolean hasTeenTexture = false;
+	public int necklength = 2;
 
 	public EntityNewPrehistoric(World world, EnumPrehistoric selfType) {
 		super(world);
@@ -140,7 +141,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		this.tasks.addTask(4, aiSit);
 		this.tasks.addTask(5, new DinoAIFeeder(this, 48));
 		this.tasks.addTask(5, new DinoAIWaterFeeder(this, 50, 0.0017D));
-		this.tasks.addTask(6, new EntityAILookIdle(this));
+		this.tasks.addTask(6, new DinoAILook(this, necklength));
 		this.tasks.addTask(6, new DinoAILookAtEntity(this, EntityLivingBase.class, 8));
 		this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
 		this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
@@ -431,7 +432,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		if(this.aiActivityType() == Activity.DURINAL && !this.worldObj.isDaytime()){
 			return true;
 		}else if(this.aiActivityType() == Activity.NOCTURNAL && this.worldObj.isDaytime()){
-			return true;
+			return false;
 		}else if(this.aiActivityType() == Activity.BOTH && rand.nextInt(200) == 0){
 			return true;
 		}else{
@@ -441,10 +442,22 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
 	public void onLivingUpdate(){
 		super.onLivingUpdate();
+		boolean flag = false;
+		if(this.isSleeping()){
+			this.motionX *= 0;
+			this.motionY *= 0;
+			flag = true;
+			if(this.getRNG().nextInt(40) == 0){
+				Revival.proxy.spawnSleepParticle(worldObj, this.posX, this.posY, this.posZ);
+			}
+		}
+		if(flag && !this.isSleeping()){
+			
+		}
 		if(this.getSleeping() == 1){
-			Entity closestLivingEntity = this.worldObj.getClosestPlayerToEntity(this, (double)5);
+			Entity closestLivingEntity = this.worldObj.getClosestPlayerToEntity(this, (double)2);
 			if(closestLivingEntity != null){
-				this.setSleeping(0);
+				//this.setSleeping(0);
 			}
 
 		}
@@ -459,8 +472,8 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 			//animate going to bed
 		}
 		if(!canSleep() && rand.nextInt(100) == 0 && this.getSleeping() == 1){
-			this.setSleeping(0);
-			//animate waking u[
+			//this.setSleeping(0);
+			//animate waking up
 		}
 		
 		
@@ -1153,6 +1166,13 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	public void setSleeping(int var1)
 	{
 		this.dataWatcher.updateObject(SLEEPING_INDEX, var1);
+	}
+	public boolean isSleeping(){
+		if(getSleeping() == 0){
+			return false;
+		}else{
+			return true;
+		}
 	}
 	@Override
 	public boolean shouldDismountInWater(Entity rider)

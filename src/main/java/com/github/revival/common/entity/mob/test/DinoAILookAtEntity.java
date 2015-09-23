@@ -32,6 +32,10 @@ public class DinoAILookAtEntity extends EntityAIBase
 	 */
 	public boolean shouldExecute()
 	{
+		if(((EntityNewPrehistoric)this.theWatcher).isSleeping()){
+			return false;
+		}
+		
 
 		if (this.theWatcher.getRNG().nextFloat() >= this.field_75331_e)
 		{
