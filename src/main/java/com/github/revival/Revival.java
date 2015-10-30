@@ -166,6 +166,9 @@ public class Revival
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
+    	channel = NetworkRegistry.INSTANCE.newSimpleChannel(modid);
+	channel.registerMessage(MessageCorrectAnimation.class, MessageCorrectAnimation.class, 1, Side.CLIENT);
+		
         MinecraftForge.EVENT_BUS.register(new FossilBonemealEvent());
         VillagerRegistry.instance().registerVillageTradeHandler(10, new FossilTradeHandler());
         VillagerRegistry.instance().registerVillagerId(10);
@@ -174,9 +177,6 @@ public class Revival
         ContentHelper.init(new FATabRegistry(), new FABlockRegistry(), new FAItemRegistry());
         EnumPrehistoric.init();
         FossilOreDictionary.oreRegistration();
-
-        channel = NetworkRegistry.INSTANCE.newSimpleChannel("fossil");
-		channel.registerMessage(MessageCorrectAnimation.class, MessageCorrectAnimation.class, 0, Side.CLIENT);
 
         DimensionManager.registerProviderType(FossilConfig.dimIdDarknessLair, WorldProviderAnu.class, false);
         DimensionManager.registerDimension(FossilConfig.dimIdDarknessLair, FossilConfig.dimIdDarknessLair);
