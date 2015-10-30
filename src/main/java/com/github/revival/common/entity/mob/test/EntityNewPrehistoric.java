@@ -142,8 +142,8 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		this.tasks.addTask(4, aiSit);
 		this.tasks.addTask(5, new DinoAIFeeder(this, 48));
 		this.tasks.addTask(5, new DinoAIWaterFeeder(this, 50, 0.0017D));
-		this.tasks.addTask(6, new DinoAILook(this, necklength));
-		this.tasks.addTask(6, new DinoAILookAtEntity(this, EntityLivingBase.class, 8));
+		//this.tasks.addTask(6, new DinoAILook(this, necklength));
+		//this.tasks.addTask(6, new DinoAILookAtEntity(this, EntityLivingBase.class, 8));
 		this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
 		this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
 	}
