@@ -34,12 +34,12 @@ public class MessageCorrectAnimation extends AbstractMessage<MessageCorrectAnima
 
 	@Override
 	public void handleClientMessage(MessageCorrectAnimation message, EntityPlayer player) {
-		World world = FMLClientHandler.instance().getWorldClient();
-		IAnimated entity = (IAnimated)world.getEntityByID(message.entityID);
-		if(entity != null && message.animID != 0) {
-			entity.setAnimation(entity.animations()[message.animID]);
-			entity.setAnimationTick(0);
-		}		
+		 IAnimated entity = (IAnimated) player.worldObj.getEntityByID(message.entityID);
+	        if (entity != null && message.animID != 0)
+	        {
+	            entity.setAnimation(entity.animations()[message.animID]);
+	            entity.setAnimationTick(0);
+	        }
 	}
 
 	@Override
