@@ -1,15 +1,17 @@
 package com.github.revival.common;
 
-import com.github.revival.common.block.FABlockRegistry;
-import com.github.revival.common.item.FAItemRegistry;
+import java.util.Random;
+
 import net.minecraft.client.model.ModelBiped;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ChestGenHooks;
 
-import java.util.Random;
+import com.github.revival.common.block.FABlockRegistry;
+import com.github.revival.common.item.FAItemRegistry;
 
 public class CommonProxy
 {
@@ -76,4 +78,11 @@ public class CommonProxy
 	public void spawnSleepParticle(World world, double posX, double posY, double posZ){}
 
 	public void animate(int animateID) {}
+	
+	public void doChainBuffer(Object buffer, EntityLivingBase entity){}
+	
+	public Object getChainBuffer(int tailsegments){
+		return null;
+	}
+
 }

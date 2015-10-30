@@ -63,8 +63,8 @@ public class EntityGallimimus extends EntityNewPrehistoric
 	public static final double maxHealth = 40;
 	public static final double baseSpeed = 0.25D;
 	public static final double maxSpeed = 0.4D;
-	@SideOnly(Side.CLIENT)
-	public ChainBuffer tailbuffer = new ChainBuffer(3);
+	public Object tailbuffer = Revival.proxy.getChainBuffer(3);
+
 
 	public EntityGallimimus(World world) {
 		super(world, EnumPrehistoric.Gallimimus);
@@ -380,7 +380,7 @@ public class EntityGallimimus extends EntityNewPrehistoric
 	
 	public void onUpdate(){
 		super.onUpdate();
-		tailbuffer.calculateChainSwingBuffer(70F, 5, 4, this);
+		//Revival.proxy.doChainBuffer(tailbuffer, this);
 	}
 
 	public void updateSize()

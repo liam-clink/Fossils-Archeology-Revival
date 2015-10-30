@@ -7,6 +7,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
 
+import com.github.revival.Revival;
 import com.github.revival.common.config.FossilConfig;
 import com.github.revival.common.entity.mob.test.EntityNewPrehistoric;
 import com.github.revival.common.enums.EnumPrehistoric;
@@ -33,8 +34,7 @@ public class EntityTriceratops extends EntityNewPrehistoric
 	public static final double maxHealth = 64;
 	public static final double baseSpeed = 0.2D;
 	public static final double maxSpeed = 0.25D;
-	@SideOnly(Side.CLIENT)
-	public ChainBuffer tailbuffer = new ChainBuffer(3);
+	public Object tailbuffer = Revival.proxy.getChainBuffer(3);
 
 	public EntityTriceratops(World world) {
 		super(world, EnumPrehistoric.Triceratops);
@@ -50,7 +50,7 @@ public class EntityTriceratops extends EntityNewPrehistoric
 	}
 	public void onUpdate(){
 		super.onUpdate();
-		tailbuffer.calculateChainSwingBuffer(70F, 5, 4, this);
+		//Revival.proxy.doChainBuffer(tailbuffer, this);
 	}
 	@Override
 	public void setSpawnValues() {}

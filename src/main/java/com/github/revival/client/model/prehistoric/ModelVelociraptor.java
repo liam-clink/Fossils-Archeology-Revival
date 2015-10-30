@@ -1,8 +1,10 @@
 package com.github.revival.client.model.prehistoric;
 
+import com.github.revival.common.entity.mob.EntityAllosaurus;
 import com.github.revival.common.entity.mob.EntityDeinonychus;
 import com.github.revival.common.entity.mob.EntityVelociraptor;
 
+import net.ilexiconn.llibrary.client.model.modelbase.ChainBuffer;
 import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelBase;
 import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelRenderer;
 import net.minecraft.entity.Entity;
@@ -253,7 +255,7 @@ public class ModelVelociraptor extends MowzieModelBase {
 		this.chainSwing(tailParts, speed, 0.15F, -3, entity.ticksExisted, 1);
 		this.chainSwing(tailParts, speed2, 0.25F, -3, f, f1);
 		this.chainWave(neckParts, speed, 0.15F, 3, entity.ticksExisted, 1);
-		((EntityVelociraptor)entity).tailbuffer.applyChainSwingBuffer(tailParts);
+		//((ChainBuffer)((EntityVelociraptor)entity).tailbuffer).applyChainSwingBuffer(tailParts);
 
 	}
 

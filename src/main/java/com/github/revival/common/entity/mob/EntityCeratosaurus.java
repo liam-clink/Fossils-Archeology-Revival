@@ -6,6 +6,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
 
+import com.github.revival.Revival;
 import com.github.revival.common.entity.mob.test.EntityNewPrehistoric;
 import com.github.revival.common.enums.EnumPrehistoric;
 import com.github.revival.common.enums.EnumPrehistoricAI.Activity;
@@ -32,8 +33,8 @@ public class EntityCeratosaurus extends EntityNewPrehistoric
 	public static final double maxHealth = 50;
 	public static final double baseSpeed = 0.25D;
 	public static final double maxSpeed = 0.42D;	
-	@SideOnly(Side.CLIENT)
-	public ChainBuffer tailbuffer = new ChainBuffer(3);
+	public Object tailbuffer = Revival.proxy.getChainBuffer(3);
+
 	public EntityCeratosaurus(World world) {
 		super(world, EnumPrehistoric.Ceratosaurus);
 		this.setSize(1.55F, 1.3F);
@@ -47,7 +48,7 @@ public class EntityCeratosaurus extends EntityNewPrehistoric
 
 	public void onUpdate(){
 		super.onUpdate();
-		tailbuffer.calculateChainSwingBuffer(70F, 5, 4, this);
+		//Revival.proxy.doChainBuffer(tailbuffer, this);
 	}
 	@Override
 	protected void applyEntityAttributes()

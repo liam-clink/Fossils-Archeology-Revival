@@ -1,10 +1,12 @@
 package com.github.revival.client;
 
+import net.ilexiconn.llibrary.client.model.modelbase.ChainBuffer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
@@ -277,4 +279,12 @@ public class ClientProxy extends CommonProxy
 		Minecraft.getMinecraft().effectRenderer.addEffect(particle1);
 	}
 	public void animate(int animateID) {}
+	
+	public void doChainBuffer(Object buffer, EntityLivingBase entity){
+		((ChainBuffer)buffer).calculateChainSwingBuffer(70F, 5, 4, entity);
+	}
+	
+	public Object getChainBuffer(int tailsegments){
+		return new ChainBuffer(tailsegments);
+	}
 }

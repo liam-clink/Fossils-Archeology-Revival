@@ -1,5 +1,6 @@
 package com.github.revival.client.model.prehistoric;
 
+import net.ilexiconn.llibrary.client.model.modelbase.ChainBuffer;
 import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelBase;
 import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelRenderer;
 import net.minecraft.entity.Entity;
@@ -192,7 +193,7 @@ public class ModelAllosaurus extends MowzieModelBase {
 		this.chainSwing(tailParts, speed, 0.15F, -3, entity.ticksExisted, 1);
 		this.chainSwing(tailParts, speed2, 0.25F, -3, f, f1);
 		this.chainWave(neckParts, speed, 0.15F, 3, entity.ticksExisted, 1);
-		((EntityAllosaurus)entity).tailbuffer.applyChainSwingBuffer(tailParts);
+		//((ChainBuffer)((EntityAllosaurus)entity).tailbuffer).applyChainSwingBuffer(tailParts);
 
 	}
 }

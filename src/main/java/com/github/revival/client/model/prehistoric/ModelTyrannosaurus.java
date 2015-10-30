@@ -1,11 +1,13 @@
 package com.github.revival.client.model.prehistoric;
 
+import net.ilexiconn.llibrary.client.model.modelbase.ChainBuffer;
 import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelBase;
 import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelRenderer;
 import net.ilexiconn.llibrary.common.animation.Animator;
 import net.ilexiconn.llibrary.common.animation.IAnimated;
 import net.minecraft.entity.Entity;
 
+import com.github.revival.common.entity.mob.EntityAllosaurus;
 import com.github.revival.common.entity.mob.EntityTyrannosaurus;
 
 public class ModelTyrannosaurus extends MowzieModelBase
@@ -253,7 +255,7 @@ public class ModelTyrannosaurus extends MowzieModelBase
 		this.chainWave(rightArmParts, speed2, 0.05F, -3, entity.ticksExisted, 1);
 		this.chainSwing(tailParts, speed2, 0.15F, -3, entity.ticksExisted, 1);
 		this.chainWave(neckParts, speed2, 0.05F, -3, entity.ticksExisted, 1);
-		((EntityTyrannosaurus)entity).tailbuffer.applyChainSwingBuffer(tailParts);
+		//((ChainBuffer)((EntityTyrannosaurus)entity).tailbuffer).applyChainSwingBuffer(tailParts);
 	}
 
 	/* public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity f6)
