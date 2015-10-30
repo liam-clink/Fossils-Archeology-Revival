@@ -34,8 +34,8 @@ public class EntityTyrannosaurus extends EntityNewPrehistoric
 	public static final double maxDamage = 14;
 	public static final double baseHealth = 15;
 	public static final double maxHealth = 82;
-	public static final double baseSpeed = 0.25D;
-	public static final double maxSpeed = 0.45D;
+	public static final double baseSpeed = 0D;
+	public static final double maxSpeed = 0D;
 	public static Animation animation_roar = new Animation(1, 100);
 	public Object tailbuffer = Revival.proxy.getChainBuffer(3);
 
@@ -54,7 +54,7 @@ public class EntityTyrannosaurus extends EntityNewPrehistoric
 	}
 	@Override
 	public boolean isAIEnabled(){
-		return false;
+		return true;
 	}
 	@Override
 	public void setSpawnValues() {}
@@ -161,7 +161,7 @@ public class EntityTyrannosaurus extends EntityNewPrehistoric
 		super.onUpdate();
 
 		//Revival.proxy.doChainBuffer(tailbuffer, this);
-		if(!this.isSleeping() && this.onGround && this.rand.nextInt(200) == 0 && !worldObj.isRemote){
+		if(!this.isSleeping() && this.rand.nextInt(200) == 0 && !worldObj.isRemote){
 			if(this.getAnimation() != animation_roar){
 				this.setAnimation(animation_roar);
 			}
