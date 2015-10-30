@@ -52,10 +52,24 @@ public class EntityTyrannosaurus extends EntityNewPrehistoric
 		breaksBlocks = true;
 		favoriteFood = Items.beef;
 	}
-
+	@Override
+	public boolean isAIEnabled(){
+		return false;
+	}
 	@Override
 	public void setSpawnValues() {}
 
+	@Override
+	public void moveEntityWithHeading(float par1, float par2)
+	{
+		super.moveEntityWithHeading(par1, par2);
+		this.motionX *= 0;
+		this.motionY *= 0;
+		this.motionZ *= 0;
+		this.rotationPitch *= 0;
+		this.rotationYaw *= 0;
+	}
+        
 	@Override
 	protected void applyEntityAttributes()
 	{
@@ -145,6 +159,7 @@ public class EntityTyrannosaurus extends EntityNewPrehistoric
 
 	public void onUpdate(){
 		super.onUpdate();
+
 		//Revival.proxy.doChainBuffer(tailbuffer, this);
 		if(!this.isSleeping() && this.onGround && this.rand.nextInt(200) == 0 && !worldObj.isRemote){
 			if(this.getAnimation() != animation_roar){
