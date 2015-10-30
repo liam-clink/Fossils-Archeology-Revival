@@ -22,6 +22,9 @@ import com.github.revival.common.enums.EnumPrehistoricAI.Taming;
 import com.github.revival.common.enums.EnumPrehistoricAI.Untaming;
 import com.github.revival.common.enums.EnumPrehistoricAI.WaterAbility;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 public class EntityTriceratops extends EntityNewPrehistoric
 {
 	public static final double baseDamage = 1;
@@ -30,6 +33,7 @@ public class EntityTriceratops extends EntityNewPrehistoric
 	public static final double maxHealth = 64;
 	public static final double baseSpeed = 0.2D;
 	public static final double maxSpeed = 0.25D;
+	@SideOnly(Side.CLIENT)
 	public ChainBuffer tailbuffer = new ChainBuffer(3);
 
 	public EntityTriceratops(World world) {

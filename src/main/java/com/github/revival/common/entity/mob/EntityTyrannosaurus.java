@@ -23,6 +23,9 @@ import com.github.revival.common.enums.EnumPrehistoricAI.Untaming;
 import com.github.revival.common.enums.EnumPrehistoricAI.WaterAbility;
 import com.github.revival.common.item.FAItemRegistry;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 public class EntityTyrannosaurus extends EntityNewPrehistoric
 {
 
@@ -32,8 +35,8 @@ public class EntityTyrannosaurus extends EntityNewPrehistoric
 	public static final double maxHealth = 82;
 	public static final double baseSpeed = 0.25D;
 	public static final double maxSpeed = 0.45D;
-
 	public static Animation animation_roar = new Animation(1, 100);
+	@SideOnly(Side.CLIENT)
 	public ChainBuffer tailbuffer = new ChainBuffer(3);
 
 	public EntityTyrannosaurus(World world) {

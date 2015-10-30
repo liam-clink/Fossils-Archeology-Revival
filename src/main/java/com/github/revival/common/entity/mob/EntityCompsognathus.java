@@ -21,6 +21,9 @@ import com.github.revival.common.enums.EnumPrehistoricAI.Taming;
 import com.github.revival.common.enums.EnumPrehistoricAI.Untaming;
 import com.github.revival.common.enums.EnumPrehistoricAI.WaterAbility;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 public class EntityCompsognathus extends EntityNewPrehistoric
 {
 	public static final double baseDamage = 1;
@@ -29,6 +32,7 @@ public class EntityCompsognathus extends EntityNewPrehistoric
 	public static final double maxHealth = 12;
 	public static final double baseSpeed = 0.25D;
 	public static final double maxSpeed = 0.3D;
+	@SideOnly(Side.CLIENT)
 	public ChainBuffer tailbuffer = new ChainBuffer(2);
 
 	public EntityCompsognathus(World world) {

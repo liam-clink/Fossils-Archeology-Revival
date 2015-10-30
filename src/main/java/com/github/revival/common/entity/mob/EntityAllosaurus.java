@@ -1,9 +1,6 @@
 package com.github.revival.common.entity.mob;
 
-import java.util.ArrayList;
-
 import net.ilexiconn.llibrary.client.model.modelbase.ChainBuffer;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -25,6 +22,9 @@ import com.github.revival.common.enums.EnumPrehistoricAI.Untaming;
 import com.github.revival.common.enums.EnumPrehistoricAI.WaterAbility;
 import com.github.revival.common.handler.FossilAchievementHandler;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 public class EntityAllosaurus extends EntityNewPrehistoric
 {
 	public static final double baseDamage = 2;
@@ -33,6 +33,7 @@ public class EntityAllosaurus extends EntityNewPrehistoric
 	public static final double maxHealth = 58;
 	public static final double baseSpeed = 0.25D;
 	public static final double maxSpeed = 0.42D;
+	@SideOnly(Side.CLIENT)
 	public ChainBuffer tailbuffer = new ChainBuffer(3);
 
 	public EntityAllosaurus(World world) {
