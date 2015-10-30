@@ -24,7 +24,7 @@ public class DinoAIAge extends EntityAIBase
     public boolean shouldExecute()
     {
 
-        if (/*fossilOptions.DinoGrows && */this.AITarget.getDinoAge() < this.AITarget.selfType.MaxAge)
+        if (/*fossilOptions.DinoGrows && */this.AITarget.getDinoAge() < this.AITarget.getAdultAge())
         {
             this.AITarget.increaseDinoAgeTick();
             return this.AITarget.getDinoAgeTick() >= this.AITarget.selfType.AgingTicks;

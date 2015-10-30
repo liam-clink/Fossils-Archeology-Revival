@@ -1,7 +1,8 @@
 package com.github.revival.common.entity.mob;
 
+import net.ilexiconn.llibrary.client.model.modelbase.ChainBuffer;
+import net.ilexiconn.llibrary.common.animation.Animation;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
@@ -31,16 +32,18 @@ public class EntityTyrannosaurus extends EntityNewPrehistoric
 	public static final double maxHealth = 82;
 	public static final double baseSpeed = 0.25D;
 	public static final double maxSpeed = 0.45D;
-	
+
+	public static Animation animation_roar = new Animation(1, 100);
+	public ChainBuffer tailbuffer = new ChainBuffer(3);
+
 	public EntityTyrannosaurus(World world) {
 		super(world, EnumPrehistoric.Tyrannosaurus);
-        this.setSize(1.5F, 1.25F);
+		this.setSize(1.5F, 1.25F);
 		this.hasFeatherToggle = true;
 		this.featherToggle = FossilConfig.featheredTRex;
-        minSize = 1F;
+		minSize = 1F;
 		maxSize = 4.5F;
 		teenAge = 5;
-		adultAge = 12;
 		developsResistance = true;
 		breaksBlocks = true;
 		favoriteFood = Items.beef;
@@ -135,19 +138,33 @@ public class EntityTyrannosaurus extends EntityNewPrehistoric
 
 		return FAItemRegistry.skullStick;
 	}
-  
+
+	public void onUpdate(){
+		super.onUpdate();
+		tailbuffer.calculateChainSwingBuffer(70F, 5, 4, this);
+		if(!this.isSleeping() && this.onGround && this.rand.nextInt(200) == 0 && !worldObj.isRemote){
+			if(this.getAnimation() != animation_roar){
+				this.setAnimation(animation_roar);
+			}
+		}
+		if(getAnimation() == EntityTyrannosaurus.animation_roar && getAnimationTick() == 10){
+			this.playSound("fossil:tyrannosaurus_roar", 1, 1);
+		}
+	}
+
 	public void updateSize()
 	{
 		double healthStep;
 		double attackStep;
 		double speedStep;
-		healthStep = (this.maxHealth - this.baseHealth) / (this.adultAge + 1);
-		attackStep = (this.maxDamage - this.baseDamage) / (this.adultAge + 1);
-		speedStep = (this.maxSpeed - this.baseSpeed) / (this.adultAge + 1);
+		healthStep = (this.maxHealth - this.baseHealth) / (this.getAdultAge() + 1);
+		attackStep = (this.maxDamage - this.baseDamage) / (this.getAdultAge() + 1);
+		speedStep = (this.maxSpeed - this.baseSpeed) / (this.getAdultAge() + 1);
 
 
-		if (this.getDinoAge() <= this.adultAge)
+		if (this.getDinoAge() <= this.getAdultAge())
 		{
+
 			this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(Math.round(this.baseHealth + (healthStep * this.getDinoAge())));
 			this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(Math.round(this.baseDamage + (attackStep * this.getDinoAge())));
 			this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(this.baseSpeed + (speedStep * this.getDinoAge()));
@@ -162,10 +179,18 @@ public class EntityTyrannosaurus extends EntityNewPrehistoric
 			}
 			else
 			{
-				if(this.developsResistance)
-					this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.0D);
+				this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.0D);
 			}
 		}
 	}
 
+	@Override
+	public int getAdultAge() {
+		return 12;
+	}
+
+	@Override
+	public Animation[] animations() {
+		return new Animation[]{this.animation_none, this.animation_roar};
+	}
 }

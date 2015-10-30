@@ -4,7 +4,7 @@ import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelBase;
 import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelRenderer;
 import net.minecraft.entity.Entity;
 
-import com.github.revival.common.entity.mob.test.EntityNewPrehistoric;
+import com.github.revival.common.entity.mob.EntityAllosaurus;
 
 public class ModelAllosaurus extends MowzieModelBase {
     public MowzieModelRenderer rightUpperLeg;
@@ -174,8 +174,7 @@ public class ModelAllosaurus extends MowzieModelBase {
 		MowzieModelRenderer[] leftArmParts = {this.leftUpperArm, this.leftLowerArm};
 		MowzieModelRenderer[] rightArmParts = {this.rightUpperArm, this.rightLowerArm};
 
-		faceTarget(neck, 2, f3, f4);
-		faceTarget(head, 2, f3, f4);
+		faceTarget(neck, 1, f3, f4);
 		
 		float speed = 0.1F;
 		float speed2 = 0.5F;
@@ -193,6 +192,7 @@ public class ModelAllosaurus extends MowzieModelBase {
 		this.chainSwing(tailParts, speed, 0.15F, -3, entity.ticksExisted, 1);
 		this.chainSwing(tailParts, speed2, 0.25F, -3, f, f1);
 		this.chainWave(neckParts, speed, 0.15F, 3, entity.ticksExisted, 1);
+		((EntityAllosaurus)entity).tailbuffer.applyChainSwingBuffer(tailParts);
 
 	}
 }

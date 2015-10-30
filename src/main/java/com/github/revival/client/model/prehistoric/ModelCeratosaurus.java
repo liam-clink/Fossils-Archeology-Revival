@@ -4,7 +4,7 @@ import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelBase;
 import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelRenderer;
 import net.minecraft.entity.Entity;
 
-import com.github.revival.common.entity.mob.test.EntityNewPrehistoric;
+import com.github.revival.common.entity.mob.EntityCeratosaurus;
 
 
 public class ModelCeratosaurus extends MowzieModelBase {
@@ -185,6 +185,6 @@ public class ModelCeratosaurus extends MowzieModelBase {
 		this.chainSwing(tailParts, speed, 0.15F, -3, entity.ticksExisted, 1);
 		this.chainSwing(tailParts, speed2, 0.25F, -3, f, f1);
 		this.chainWave(neckParts, speed, 0.15F, 3, entity.ticksExisted, 1);
-
+		((EntityCeratosaurus)entity).tailbuffer.applyChainSwingBuffer(tailParts);
 	}
 }

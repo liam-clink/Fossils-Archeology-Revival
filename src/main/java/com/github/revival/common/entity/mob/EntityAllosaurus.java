@@ -2,6 +2,7 @@ package com.github.revival.common.entity.mob;
 
 import java.util.ArrayList;
 
+import net.ilexiconn.llibrary.client.model.modelbase.ChainBuffer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
@@ -32,19 +33,60 @@ public class EntityAllosaurus extends EntityNewPrehistoric
 	public static final double maxHealth = 58;
 	public static final double baseSpeed = 0.25D;
 	public static final double maxSpeed = 0.42D;
+	public ChainBuffer tailbuffer = new ChainBuffer(3);
 
 	public EntityAllosaurus(World world) {
 		super(world, EnumPrehistoric.Allosaurus);
         this.setSize(1.4F, 1.3F);
 		minSize = 0.55F;
 		maxSize = 3.1F;
-		adultAge = 10;
 		developsResistance = true;
 		breaksBlocks = true;
 		favoriteFood = Items.beef;
 		necklength = 2;
 	}
 
+	public void onUpdate(){
+		super.onUpdate();
+		tailbuffer.calculateChainSwingBuffer(70F, 5, 4, this);
+	}
+	public void updateSize()
+	{
+		 double healthStep;
+	        double attackStep;
+	        double speedStep;
+	        healthStep = (this.maxHealth - this.baseHealth) / (this.getAdultAge() + 1);
+	        attackStep = (this.maxDamage - this.baseDamage) / (this.getAdultAge() + 1);
+	        speedStep = (this.maxSpeed - this.baseSpeed) / (this.getAdultAge() + 1);
+	        
+	        
+	        if (this.getDinoAge() <= this.getAdultAge())
+	        {
+
+	            this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(Math.round(this.baseHealth + (healthStep * this.getDinoAge())));
+	            this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(Math.round(this.baseDamage + (attackStep * this.getDinoAge())));
+	            this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(this.baseSpeed + (speedStep * this.getDinoAge()));
+
+	            if (this.isTeen())
+	            {
+	                this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.5D);
+	            }
+	            else if (this.isAdult())
+	            {
+	                this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(2.0D);
+	            }
+	            else
+	            {
+	                this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.0D);
+	            }
+	        }
+	}
+
+	@Override
+	public int getAdultAge() {
+		return 10;
+	}
+	
 	@Override
 	public void setSpawnValues() {}
 
@@ -124,37 +166,6 @@ public class EntityAllosaurus extends EntityNewPrehistoric
 	@Override
 	public Item getOrderItem() {
 		return Items.bone;
-	}
-	public void updateSize()
-	{
-		double healthStep;
-		double attackStep;
-		double speedStep;
-		healthStep = (this.maxHealth - this.baseHealth) / (this.adultAge + 1);
-		attackStep = (this.maxDamage - this.baseDamage) / (this.adultAge + 1);
-		speedStep = (this.maxSpeed - this.baseSpeed) / (this.adultAge + 1);
-
-
-		if (this.getDinoAge() <= this.adultAge)
-		{
-			this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(Math.round(this.baseHealth + (healthStep * this.getDinoAge())));
-			this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(Math.round(this.baseDamage + (attackStep * this.getDinoAge())));
-			this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(this.baseSpeed + (speedStep * this.getDinoAge()));
-
-			if (this.isTeen())
-			{
-				this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.5D);
-			}
-			else if (this.isAdult())
-			{
-				this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(2.0D);
-			}
-			else
-			{
-				if(this.developsResistance)
-					this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.0D);
-			}
-		}
 	}
 
 }

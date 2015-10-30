@@ -1,10 +1,10 @@
 package com.github.revival.client.model.prehistoric;
 
+import com.github.revival.common.entity.mob.EntityTriceratops;
+
 import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelBase;
 import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelRenderer;
 import net.minecraft.entity.Entity;
-
-import com.github.revival.common.entity.mob.test.EntityNewPrehistoric;
 
 public class ModelTriceratops extends MowzieModelBase {
     public MowzieModelRenderer upperBody;
@@ -205,6 +205,7 @@ public class ModelTriceratops extends MowzieModelBase {
 		this.chainWave(tailParts, speed2, 0.05F, -3, entity.ticksExisted, 1);
 		this.chainSwing(tailParts, speed2, 0.35F, -3, entity.ticksExisted, 1);
 		this.chainWave(neckParts, speed2, 0.05F, -3, entity.ticksExisted, 1);
+		((EntityTriceratops)entity).tailbuffer.applyChainSwingBuffer(tailParts);
 
 	}
 }

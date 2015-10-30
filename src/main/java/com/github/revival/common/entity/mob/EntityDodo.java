@@ -39,7 +39,6 @@ public class EntityDodo extends EntityNewPrehistoric
 		minSize = 0.5F;
 		maxSize = 1F;
 		teenAge = 2;
-		adultAge = 5;
 		developsResistance = false;
 		breaksBlocks = false;
 		favoriteFood = Items.melon;
@@ -160,17 +159,18 @@ public class EntityDodo extends EntityNewPrehistoric
 	public Item getOrderItem() {
 		return Items.stick;
 	}
+	
 	public void updateSize()
 	{
 		 double healthStep;
 	        double attackStep;
 	        double speedStep;
-	        healthStep = (this.maxHealth - this.baseHealth) / (this.adultAge + 1);
-	        attackStep = (this.maxDamage - this.baseDamage) / (this.adultAge + 1);
-	        speedStep = (this.maxSpeed - this.baseSpeed) / (this.adultAge + 1);
+	        healthStep = (this.maxHealth - this.baseHealth) / (this.getAdultAge() + 1);
+	        attackStep = (this.maxDamage - this.baseDamage) / (this.getAdultAge() + 1);
+	        speedStep = (this.maxSpeed - this.baseSpeed) / (this.getAdultAge() + 1);
 	        
 	        
-	        if (this.getDinoAge() <= this.adultAge)
+	        if (this.getDinoAge() <= this.getAdultAge())
 	        {
 
 	            this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(Math.round(this.baseHealth + (healthStep * this.getDinoAge())));
@@ -192,6 +192,11 @@ public class EntityDodo extends EntityNewPrehistoric
 	        }
 	}
 
+	@Override
+	public int getAdultAge() {
+		return 5;
+	}
+	
 	public boolean interact(EntityPlayer player)
 	{
 		super.interact(player);

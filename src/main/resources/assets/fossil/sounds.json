@@ -1,4 +1,5 @@
 {
+    "tyrannosaurus_roar": {"category": "neutral","sounds": ["tyrannosaurus_roar"]},
 	"allosaurus_death": {"category": "neutral","sounds": ["allosaurus_death1"]},
 	"allosaurus_hurt": {"category": "neutral","sounds": ["allosaurus_hurt1"]},
 	"allosaurus_living_tamed": {"category": "neutral","sounds": ["allosaurus_living_tamed1"]},

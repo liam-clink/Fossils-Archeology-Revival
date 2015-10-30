@@ -3,6 +3,7 @@ package com.github.revival.client.model.prehistoric;
 import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelBase;
 import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.MathHelper;
 
 import org.lwjgl.opengl.GL11;
 
@@ -84,13 +85,14 @@ public class ModelDodo extends MowzieModelBase {
 		MowzieModelRenderer[] tailParts = {this.tail};
 		MowzieModelRenderer[] neckParts = {this.neck, this.head};	
 		EntityDodo dodo = (EntityDodo)entity;
+		this.rightLeg.rotateAngleX = MathHelper.cos(f * 0.6662F) * 1.4F * f1;
+        this.leftLeg.rotateAngleX = MathHelper.cos(f * 0.6662F + (float)Math.PI) * 1.4F * f1;
 		float speed = 1.5F;
 		float speed2 = 0.1F;
 		if(dodo.getSleeping() == 1){
 			this.sleepPose();
 		}else{
-			faceTarget(head, 2, f3, f4);
-			faceTarget(neck, 2, f3, f4);	
+			faceTarget(head, 1, f3, f4);
 			this.bob(body, speed2, -0.4F, false, entity.ticksExisted, 1);
 			//this.bob(bottom, speed2, -0.4F, false, entity.ticksExisted, 1);
 			this.walk(leftLeg, speed, 0.2F, false, 0F, -0.6F, f, f1);
@@ -115,6 +117,9 @@ public class ModelDodo extends MowzieModelBase {
 				this.chainWave(neckParts, speed2, 0.2F, -3, f, f1);
 				this.walk(leftLeg, 0.7F, 0.7F, true, 0F, 0F, entity.ticksExisted, -1);
 				this.walk(rightLeg, 0.7F, 0.7F, true, 0F, 0F, entity.ticksExisted, 1);
+			}else{
+				neck.setCurrentPoseToInitValues();
+				head.setCurrentPoseToInitValues();
 			}
 		}
 

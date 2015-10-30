@@ -35,7 +35,6 @@ public class EntityConfuciusornis extends EntityNewPrehistoric
 		minSize = 0.3F;
 		maxSize = 0.6F;
 		teenAge = 1;
-		adultAge = 3;
 		developsResistance = false;
 		breaksBlocks = false;
 		favoriteFood = Items.pumpkin_seeds;
@@ -121,35 +120,42 @@ public class EntityConfuciusornis extends EntityNewPrehistoric
 	public Item getOrderItem() {
 		return Items.stick;
 	}
+
 	public void updateSize()
 	{
-		double healthStep;
-		double attackStep;
-		double speedStep;
-		healthStep = (this.maxHealth - this.baseHealth) / (this.adultAge + 1);
-		attackStep = (this.maxDamage - this.baseDamage) / (this.adultAge + 1);
-		speedStep = (this.maxSpeed - this.baseSpeed) / (this.adultAge + 1);
+		 double healthStep;
+	        double attackStep;
+	        double speedStep;
+	        healthStep = (this.maxHealth - this.baseHealth) / (this.getAdultAge() + 1);
+	        attackStep = (this.maxDamage - this.baseDamage) / (this.getAdultAge() + 1);
+	        speedStep = (this.maxSpeed - this.baseSpeed) / (this.getAdultAge() + 1);
+	        
+	        
+	        if (this.getDinoAge() <= this.getAdultAge())
+	        {
 
+	            this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(Math.round(this.baseHealth + (healthStep * this.getDinoAge())));
+	            this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(Math.round(this.baseDamage + (attackStep * this.getDinoAge())));
+	            this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(this.baseSpeed + (speedStep * this.getDinoAge()));
 
-		if (this.getDinoAge() <= this.adultAge)
-		{
-			this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(Math.round(this.baseHealth + (healthStep * this.getDinoAge())));
-			this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(Math.round(this.baseDamage + (attackStep * this.getDinoAge())));
-			this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(this.baseSpeed + (speedStep * this.getDinoAge()));
-
-			if (this.isTeen())
-			{
-				this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.5D);
-			}
-			else if (this.isAdult())
-			{
-				this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(2.0D);
-			}
-			else
-			{
-				if(this.developsResistance)
-					this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.0D);
-			}
-		}
+	            if (this.isTeen())
+	            {
+	                this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.5D);
+	            }
+	            else if (this.isAdult())
+	            {
+	                this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(2.0D);
+	            }
+	            else
+	            {
+	                this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.0D);
+	            }
+	        }
 	}
+
+	@Override
+	public int getAdultAge() {
+		return 3;
+	}
+	
 }

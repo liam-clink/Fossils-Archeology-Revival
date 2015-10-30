@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import net.ilexiconn.llibrary.common.animation.Animation;
+import net.ilexiconn.llibrary.common.animation.IAnimated;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.BlockLiquid;
@@ -19,7 +21,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIOwnerHurtByTarget;
 import net.minecraft.entity.item.EntityItem;
@@ -44,13 +45,12 @@ import net.minecraftforge.common.ForgeHooks;
 
 import org.lwjgl.opengl.GL11;
 
-import scala.reflect.internal.Trees.This;
-
 import com.github.revival.Revival;
 import com.github.revival.client.gui.GuiPedia;
 import com.github.revival.common.api.IPrehistoricAI;
 import com.github.revival.common.block.FABlockRegistry;
 import com.github.revival.common.config.FossilConfig;
+import com.github.revival.common.entity.animation.AnimationTicker;
 import com.github.revival.common.enums.EnumAnimation;
 import com.github.revival.common.enums.EnumOrderType;
 import com.github.revival.common.enums.EnumPrehistoric;
@@ -74,7 +74,7 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public abstract class EntityNewPrehistoric extends EntityTameable implements IPrehistoricAI {
+public abstract class EntityNewPrehistoric extends EntityTameable implements IPrehistoricAI, IAnimated {
 
 	public static final int OWNER_DISPLAY_NAME_INDEX = 24;
 	public static final int HUNGER_TICK_DATA_INDEX = 18;
@@ -97,7 +97,6 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	public boolean RiderSneak = false;
 	public float minSize;
 	public float maxSize;
-	public int adultAge;
 	public int teenAge;
 	public EnumPrehistoric selfType = null;
 	public int BreedTick;
@@ -119,7 +118,9 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	public boolean featherToggle;
 	public boolean hasTeenTexture = false;
 	public int necklength = 2;
-
+	private Animation currentAnimation;
+	private int animTick;
+	
 	public EntityNewPrehistoric(World world, EnumPrehistoric selfType) {
 		super(world);
 		this.updateSize();
@@ -145,7 +146,6 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		this.tasks.addTask(6, new DinoAILookAtEntity(this, EntityLivingBase.class, 8));
 		this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
 		this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
-
 	}
 
 
@@ -189,6 +189,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(19.0D);
 		getAttributeMap().registerAttribute(SharedMonsterAttributes.attackDamage);
 		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(1.0D);
+		updateSize();
 	}
 
 	public void readEntityFromNBT(NBTTagCompound compound)
@@ -468,7 +469,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 			}
 		}
 		if(canSleep() && rand.nextInt(400) == 0 && this.getEntityToAttack() == null && this.riddenByEntity == null && this.getSleeping() == 0){
-			this.setSleeping(1);
+			//this.setSleeping(1);
 			//animate going to bed
 		}
 		if(!canSleep() && rand.nextInt(100) == 0 && this.getSleeping() == 1){
@@ -664,6 +665,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	public void onUpdate(){
 		super.onUpdate();
 		animation_frame++;
+		AnimationTicker.tickAnimations(this);
 		if (!this.worldObj.isRemote && this.aiClimbType() == Climbing.ARTHROPOD)
 		{
 			this.setBesideClimbableBlock(this.isCollidedHorizontally);
@@ -713,7 +715,8 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	@Override
 	public abstract WaterAbility aiWaterAbilityType();
 
-
+	public abstract int getAdultAge();
+	
 	public abstract boolean doesFlock();
 
 	public boolean isCannabil(){
@@ -723,11 +726,11 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	public float getDinosaurSize()
 	{
 		float step;
-		step = (this.maxSize - this.minSize) / (this.adultAge + 1);
+		step = (this.maxSize - this.minSize) / (this.getAdultAge() + 1);
 
-		if (this.getDinoAge() > this.adultAge)
+		if (this.getDinoAge() > this.getAdultAge())
 		{
-			return this.minSize + (step * this.adultAge);
+			return this.minSize + (step * this.getAdultAge());
 		}
 
 		return this.minSize + (step * this.getDinoAge());
@@ -739,39 +742,8 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 				+ (float) this.getDinoAge() * this.selfType.ExpInc);
 	}
 
-	public void updateSize()
-	{
-		/*double healthStep;
-		double attackStep;
-		double speedStep;
-		healthStep = (this.maxHealth - this.baseHealth) / (this.adultAge + 1);
-		attackStep = (this.maxDamage - this.baseDamage) / (this.adultAge + 1);
-		speedStep = (this.maxSpeed - this.baseSpeed) / (this.adultAge + 1);
-
-
-		if (this.getDinoAge() <= this.adultAge)
-		{
-			this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(Math.round(this.baseHealth + (healthStep * this.getDinoAge())));
-			this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(Math.round(this.baseDamage + (attackStep * this.getDinoAge())));
-			this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(this.baseSpeed + (speedStep * this.getDinoAge()));
-
-			if (this.isTeen())
-			{
-				this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.5D);
-			}
-			else if (this.isAdult())
-			{
-				this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(2.0D);
-			}
-			else
-			{
-				if(this.developsResistance)
-					this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.0D);
-			}
-		}*/
-		this.jump();
-	}
-
+	public abstract void updateSize();
+	
 	public void breakBlock(float hardness)
 	{
 		if (FossilConfig.dinoBlockBreaking)
@@ -840,13 +812,13 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
 	public boolean isAdult()
 	{
-		return this.getDinoAge() >= adultAge;
+		return this.getDinoAge() >= getAdultAge();
 	}
 
 	public boolean isTeen()
 	{
 		return this.getDinoAge() >= teenAge
-				&& this.getDinoAge() < adultAge;
+				&& this.getDinoAge() < getAdultAge();
 	}
 
 	public boolean isChild()
@@ -990,26 +962,23 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	@Override
 	public void moveEntityWithHeading(float par1, float par2)
 	{
-		if(this.getSleeping() == 1){
-			this.motionX *= 0.0D;
-			this.motionZ *= 0.0D;
-		}
-		if (!isModelized())
-		{
-			super.moveEntityWithHeading(par1, par2);
+        if (!isModelized() && !this.isSleeping())
+        {
+            super.moveEntityWithHeading(par1, par2);
 
-			// this.stepHeight = 0.5F;
+            // this.stepHeight = 0.5F;
 
-			if (this.riddenByEntity != null || this.isAdult())
-			{
-				this.stepHeight = 1.0F;
-			}
-		}
-		else
-		{
-			this.motionX *= 0.0D;
-			this.motionZ *= 0.0D;
-		}
+            if (this.riddenByEntity != null || this.isAdult())
+            {
+                this.stepHeight = 1.0F;
+            }
+        }
+        else
+        {
+            this.motionX *= 0.0D;
+            this.motionZ *= 0.0D;
+        }
+
 
 		if(this.aiMovingType() == Moving.AQUATIC || this.aiMovingType() == Moving.SEMIAQUATIC){
 			double d0;
@@ -1243,6 +1212,8 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	}
 	public boolean interact(EntityPlayer player)
 	{
+		Revival.ShowMessage(getTexture(), worldObj.getClosestPlayerToEntity(this, 20));
+		Revival.ShowMessage(getTexture(), worldObj.getClosestPlayerToEntity(this, 20));
 		System.out.println(this.getHealth());
 		System.out.println(this.getSpeed());
 
@@ -1310,7 +1281,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 				if (itemstack.getItem() == FAItemRegistry.chickenEss && !player.worldObj.isRemote)
 				{
 					// Be grown up by chicken essence
-					if (this.getDinoAge() < this.adultAge && this.getHunger() > 0)
+					if (this.getDinoAge() < this.getAdultAge() && this.getHunger() > 0)
 					{
 						if (this.getHunger() > 0)
 						{
@@ -1484,7 +1455,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	}
 
 	private boolean isWeak() {
-		return (this.getHealth() < 8) && (this.getDinoAge() >= this.adultAge) && !this.isTamed();
+		return (this.getHealth() < 8) && (this.getDinoAge() >= this.getAdultAge()) && !this.isTamed();
 	}
 
 	public void setRidingPlayer(EntityPlayer player)
@@ -1669,4 +1640,27 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		int animateID = animation.ordinal();
 		Revival.proxy.animate(animateID);
 	}
+	
+	public void setAnimationTick(int tick) {
+		animTick = tick;
+	}
+
+	public int getAnimationTick() {
+		return animTick;
+	}
+
+	@Override
+	public void setAnimation(Animation animation) {
+		currentAnimation = animation;
+	}
+
+	@Override
+	public Animation getAnimation() {
+		return currentAnimation;
+	}
+
+	public Animation[] animations() {
+		return new Animation[]{this.animation_none};
+	}
+
 }
