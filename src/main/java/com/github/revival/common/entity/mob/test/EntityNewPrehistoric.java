@@ -120,7 +120,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	public int necklength = 2;
 	private Animation currentAnimation;
 	private int animTick;
-	
+
 	public EntityNewPrehistoric(World world, EnumPrehistoric selfType) {
 		super(world);
 		this.updateSize();
@@ -132,7 +132,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		this.setHunger(100 / 2);
 		this.tasks.addTask(1, new DinoAIRunAway(this, EntityLivingBase.class, 16.0F, this.getSpeed()/2, this.getSpeed()));
 		this.tasks.addTask(1, new DinoAITerratorial(this, EntityLivingBase.class, 4.0F));
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityLivingBase.class, 0, true));
+		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityLivingBase.class, 0, true));
 		this.tasks.addTask(2, new DinoAIWaterAgressive(this, 0.009D));
 		this.tasks.addTask(2, new DinoAIFish(this, 1));
 		this.tasks.addTask(3, new DinoAIWander(this, 1));
@@ -146,6 +146,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		//this.tasks.addTask(6, new DinoAILookAtEntity(this, EntityLivingBase.class, 8));
 		this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
 		this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
+
 	}
 
 
@@ -221,14 +222,14 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	}
 
 	@Override
-	public IEntityLivingData onSpawnWithEgg(
-			IEntityLivingData par1EntityLivingData)
+	public IEntityLivingData onSpawnWithEgg(IEntityLivingData par1EntityLivingData)
 	{
 		par1EntityLivingData = super.onSpawnWithEgg(par1EntityLivingData);
 		Random random = new Random();
 		this.heal(200);
 		this.setDinoAge(6);
 		this.setSpawnValues();
+		this.setDinoAgeTick(0);
 		this.setGender(random.nextInt(2));
 		System.out.println(getTexture());
 		Revival.ShowMessage(getTexture(), worldObj.getClosestPlayerToEntity(this, 20));
@@ -453,7 +454,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 			}
 		}
 		if(flag && !this.isSleeping()){
-			
+
 		}
 		if(this.getSleeping() == 1){
 			Entity closestLivingEntity = this.worldObj.getClosestPlayerToEntity(this, (double)2);
@@ -476,8 +477,8 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 			//this.setSleeping(0);
 			//animate waking up
 		}
-		
-		
+
+
 
 		if(breaksBlocks){
 			this.breakBlock(5);
@@ -527,7 +528,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 			}
 		}
 		if(this.doesFlock()){
-		/*	IEntitySelector selector =IEntitySelector.selectAnything;
+			/*	IEntitySelector selector =IEntitySelector.selectAnything;
 			List<Entity> entities = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.expand((double)herdMemberRange, 3.0D, (double)herdMemberRange), selector);
 			for(Entity mob: entities){
 				if(mob instanceof EntityNewPrehistoric){
@@ -664,6 +665,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
 	public void onUpdate(){
 		super.onUpdate();
+		this.updateSize();
 		animation_frame++;
 		AnimationTicker.tickAnimations(this);
 		if (!this.worldObj.isRemote && this.aiClimbType() == Climbing.ARTHROPOD)
@@ -716,7 +718,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	public abstract WaterAbility aiWaterAbilityType();
 
 	public abstract int getAdultAge();
-	
+
 	public abstract boolean doesFlock();
 
 	public boolean isCannabil(){
@@ -742,7 +744,11 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 				+ (float) this.getDinoAge() * this.selfType.ExpInc);
 	}
 
-	public abstract void updateSize();
+	public void updateSize()
+	{
+		System.out.println("i");
+		this.jump();
+	}
 	
 	public void breakBlock(float hardness)
 	{
@@ -861,7 +867,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 			this.setDinoAge(this.getDinoAge() + 1);
 			return true;
 		}
-
+		this.updateSize();
 		return false;
 	}
 
@@ -962,22 +968,22 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	@Override
 	public void moveEntityWithHeading(float par1, float par2)
 	{
-        if (!isModelized() && !this.isSleeping())
-        {
-            super.moveEntityWithHeading(par1, par2);
+		if (!isModelized() && !this.isSleeping())
+		{
+			super.moveEntityWithHeading(par1, par2);
 
-            // this.stepHeight = 0.5F;
+			// this.stepHeight = 0.5F;
 
-            if (this.riddenByEntity != null || this.isAdult())
-            {
-                this.stepHeight = 1.0F;
-            }
-        }
-        else
-        {
-            this.motionX *= 0.0D;
-            this.motionZ *= 0.0D;
-        }
+			if (this.riddenByEntity != null || this.isAdult())
+			{
+				this.stepHeight = 1.0F;
+			}
+		}
+		else
+		{
+			this.motionX *= 0.0D;
+			this.motionZ *= 0.0D;
+		}
 
 
 		if(this.aiMovingType() == Moving.AQUATIC || this.aiMovingType() == Moving.SEMIAQUATIC){
@@ -1212,10 +1218,8 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	}
 	public boolean interact(EntityPlayer player)
 	{
-		Revival.ShowMessage(getTexture(), worldObj.getClosestPlayerToEntity(this, 20));
-		Revival.ShowMessage(getTexture(), worldObj.getClosestPlayerToEntity(this, 20));
-		System.out.println(this.getHealth());
-		System.out.println(this.getSpeed());
+		Revival.ShowMessage( "" + this.getHealth(), worldObj.getClosestPlayerToEntity(this, 20));
+		Revival.ShowMessage( "" + this.getHealth(), worldObj.getClosestPlayerToEntity(this, 20));
 
 		ItemStack itemstack = player.inventory.getCurrentItem();
 		if(this.isModelized()){
@@ -1300,7 +1304,8 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 							{
 								player.inventory.addItemStackToInventory(new ItemStack(Items.glass_bottle, 1));
 							}
-							this.setDinoAgeTick(this.getDinoAgeTick() + 2000);
+							this.setDinoAgeTick(12000);
+							this.increaseDinoAge();
 							this.setHunger(1 + (new Random()).nextInt(this.getHunger()));
 							return true;
 						}
@@ -1631,16 +1636,16 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	private double getSpeed() {
 		return 0.4D;
 	}
-	
+
 	public String getOverlayTexture(){
-			return "fossil:textures/blank.png";
+		return "fossil:textures/blank.png";
 	}
-	
+
 	public void triggerAnimation(EnumAnimation animation){
 		int animateID = animation.ordinal();
 		Revival.proxy.animate(animateID);
 	}
-	
+
 	public void setAnimationTick(int tick) {
 		animTick = tick;
 	}

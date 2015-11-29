@@ -24,10 +24,10 @@ public class DinoAIAge extends EntityAIBase
     public boolean shouldExecute()
     {
 
-        if (/*fossilOptions.DinoGrows && */this.AITarget.getDinoAge() < this.AITarget.getAdultAge())
+        if (/*fossilOptions.DinoGrows && */this.AITarget.getDinoAge() < 999)
         {
             this.AITarget.increaseDinoAgeTick();
-            return this.AITarget.getDinoAgeTick() >= this.AITarget.selfType.AgingTicks;
+            return this.AITarget.getDinoAgeTick() >= 12000;
         }
 
         return false;
@@ -60,39 +60,19 @@ public class DinoAIAge extends EntityAIBase
                 this.AITarget.setDinoAgeTick(0);
                 this.AITarget.increaseDinoAge();
                 this.AITarget.worldObj.setEntityState(this.AITarget, this.AITarget.AGING_MESSAGE);
-                //this.AITarget.CheckSkin();
                 this.AITarget.updateSize();
 
                 if (this.AITarget.getMaxHealth() < this.AITarget.getHealth())
                 {
-                    //the dino heals itself 15% when growing up
                     if (FossilConfig.healingDinos)
                     {
                         this.AITarget.heal(MathHelper.ceiling_double_int(this.AITarget.getHealth() * 0.15f));
                     }
                 }
-
-                /*this.AITarget.setDinoAge(this.AITarget.getDinoAge()-1);
-                this.AITarget.worldObj.setEntityState(this.AITarget, this.AITarget.AGING_MESSAGE);
-                //this.AITarget.CheckSkin();
-
-                if (this.AITarget.getHealth() > MathHelper.ceiling_double_int(this.AITarget.getMaxHealth()*0.05f))
-                {
-                	if(Revival.fossilOptions.healingDinos)
-                		this.AITarget.attackEntityFrom(DamageSource.generic, MathHelper.ceiling_double_int(this.AITarget.getMaxHealth()*0.05f));
-                }
-
-                this.AITarget.updateSize();
-                //this.AITarget.setPosition(this.AITarget.posX, this.AITarget.posY, this.AITarget.posZ);
-
-                if (this.AITarget.isTamed())
-                {
-                    this.AITarget.SendStatusMessage(EnumSituation.NoSpace);//, this.AITarget.SelfType);
-                }*/
             }
             else
             {
-                this.AITarget.sendStatusMessage(EnumSituation.NoSpace);    //, this.AITarget.SelfType);
+                this.AITarget.sendStatusMessage(EnumSituation.NoSpace);
 
             }
         }
