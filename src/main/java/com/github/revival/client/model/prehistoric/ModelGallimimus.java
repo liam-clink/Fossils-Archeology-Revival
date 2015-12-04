@@ -1,14 +1,14 @@
 package com.github.revival.client.model.prehistoric;
 
-import com.github.revival.common.entity.mob.EntityAllosaurus;
-import com.github.revival.common.entity.mob.EntityGallimimus;
-
-import net.ilexiconn.llibrary.client.model.modelbase.ChainBuffer;
-import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelBase;
 import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelRenderer;
+import net.ilexiconn.llibrary.common.animation.Animator;
+import net.ilexiconn.llibrary.common.animation.IAnimated;
 import net.minecraft.entity.Entity;
 
-public class ModelGallimimus extends MowzieModelBase
+import com.github.revival.client.model.prehistoric.test.ModelNewPrehistoric;
+import com.github.revival.common.entity.mob.test.EntityNewPrehistoric;
+
+public class ModelGallimimus extends ModelNewPrehistoric
 {
 	public MowzieModelRenderer lowerBody;
 	public MowzieModelRenderer rightThigh;
@@ -37,6 +37,7 @@ public class ModelGallimimus extends MowzieModelBase
 	public MowzieModelRenderer rightFoot;
 	public MowzieModelRenderer leftLeg;
 	public MowzieModelRenderer leftFoot;
+	private Animator animator;
 
 	public ModelGallimimus() {
 		this.textureWidth = 128;
@@ -171,25 +172,45 @@ public class ModelGallimimus extends MowzieModelBase
 		this.lowerBody.addChild(this.upperBody);
 		this.leftLowerArm.addChild(this.leftLowerArmFeather);
 		ModelUtils.doMowzieStuff(false, boxList);
+		animator = new Animator(this);
 	}
 
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
-		super.render(entity, f, f1, f2, f3, f4, f5);
-		ModelUtils.doMowzieStuff(true, boxList);
-		this.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
+		animate((IAnimated)entity, f, f1, f2, f3, f4, f5);
 		ModelUtils.renderAll(boxList);
 	}
+
+	public void animate(IAnimated entity, float f, float f1, float f2, float f3, float f4, float f5) {
+		animator.update(entity);
+		ModelUtils.doMowzieStuff(true, boxList);
+		setRotationAngles(f, f1, f2, f3, f4, f5, (Entity)entity);
+		
+		animator.setAnimationId(EntityNewPrehistoric.animation_sit.animationId);
+		animator.startPhase(20);
+		sitPose(true);
+		animator.endPhase();
+		
+		animator.setAnimationId(EntityNewPrehistoric.animation_getUp.animationId);
+		animator.startPhase(0);
+		sitPose(true);
+		animator.endPhase();
+		animator.resetPhase(20);
+		animator.endPhase();
+
+	}
+
 	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
 		MowzieModelRenderer[] tailParts = {this.tail1, this.tail2, this.tail3};
 		MowzieModelRenderer[] neckParts = {this.neck, this.head};
 		MowzieModelRenderer[] leftArmParts = {this.leftUpperArm, this.leftLowerArm};
 		MowzieModelRenderer[] rightArmParts = {this.rightUpperArm, this.rightLowerArm};
 
-		faceTarget(head, 2, f3, f4);
-		faceTarget(neck, 2, f3, f4);
+		faceTarget(head, 1, f3, f4);
 		float speed = 0.1F;
 		float speed2 = 0.5F;
-
+		if(((IAnimated)entity).getAnimation().animationId == 0)
+			carryOutPoses(entity);
+		this.walk(upperBody, speed, 0.05F, false, 1F, 0F, entity.ticksExisted, 1);
 		this.bob(lowerBody, speed, 0.5F, false, entity.ticksExisted, 1);
 		this.walk(leftThigh, speed2, 0.8F, false, 0F, 0.4F, f, f1);
 		this.walk(leftLeg, speed2, 0.2F, false, 0F, -0.6F, f, f1);
@@ -250,5 +271,34 @@ public class ModelGallimimus extends MowzieModelBase
 		if (invert)
 			inverted = -1;
 		box.rotateAngleX += f * degree * inverted * f1 + weight * f1;
+	}
+
+	@Override
+	public void sleepPose(boolean animate) {
+
+	}
+
+	@Override
+	public void sitPose(boolean animate) {
+		ModelUtils.animateOrSetRotation(animator, animate, leftFoot, 1.186823891356144F, -0.0F, 0.0F, false);
+		ModelUtils.animateOrSetRotation(animator, animate, rightFoot, 1.186823891356144F, -0.0F, 0.0F, false);
+		ModelUtils.animateOrSetRotation(animator, animate, neck, -0.045553093477052F, -0.0F, 0.0F, false);
+		ModelUtils.animateOrSetRotation(animator, animate, leftUpperArm, -0.3490658503988659F, -0.08726646259971647F, -0.767944870877505F, false);
+		ModelUtils.animateOrSetRotation(animator, animate, leftLeg, -1.186823891356144F, -0.0F, 0.0F, false);
+		ModelUtils.animateOrSetRotation(animator, animate, leftLowerArm, -0.2617993877991494F, -0.0F, 0.0F, false);
+		ModelUtils.animateOrSetRotation(animator, animate, upperBody, 0.36425021489121656F, -0.0F, 0.0F, false);
+		ModelUtils.animateOrSetRotation(animator, animate, lowerBody, -0.045553093477052F, -0.0F, 0.0F, false);
+		ModelUtils.animateOrSetRotation(animator, animate, rightUpperArm, -0.3490658503988659F, -0.08726646259971647F, 0.767944870877505F, false);
+		ModelUtils.animateOrSetRotation(animator, animate, tail3, 0.091106186954104F, 0.0F, 0.0F, false);
+		ModelUtils.animateOrSetRotation(animator, animate, rightLeg, -1.186823891356144F, -0.0F, 0.0F, false);
+		ModelUtils.animateOrSetRotation(animator, animate, tail2, 0.045553093477052F, -0.0F, 0.0F, false);
+		ModelUtils.animateOrSetRotation(animator, animate, tail1, (float)Math.toRadians(-13.04), -0.0F, 0.0F, false);
+		ModelUtils.animateOrSetRotation(animator, animate, rightLowerArm, -0.2617993877991494F, -0.0F, 0.0F, false);
+		ModelUtils.animateToPos(animator, animate, lowerBody, 0F, 14.50F - lowerBody.initRotationPointY, 0F, true);
+		ModelUtils.animateToPos(animator, animate, leftThigh, 0F, 16.60F - leftThigh.initRotationPointY, 0F, true);
+		ModelUtils.animateToPos(animator, animate, rightThigh, 0F, 16.60F - rightThigh.initRotationPointY, 0F, true);
+		ModelUtils.setPos(animator, animate, lowerBody, 0F, 14.50F, -3F, false);
+		ModelUtils.setPos(animator, animate, leftThigh, 3.5F, 16.60F, 5F, false);
+		ModelUtils.setPos(animator, animate, rightThigh, -3.5F, 16.60F, 5F, false);
 	}
 }

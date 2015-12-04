@@ -1,14 +1,14 @@
 package com.github.revival.client.model.prehistoric;
 
-import com.github.revival.common.entity.mob.EntityAllosaurus;
-import com.github.revival.common.entity.mob.EntityTriceratops;
-
-import net.ilexiconn.llibrary.client.model.modelbase.ChainBuffer;
-import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelBase;
 import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelRenderer;
+import net.ilexiconn.llibrary.common.animation.Animator;
+import net.ilexiconn.llibrary.common.animation.IAnimated;
 import net.minecraft.entity.Entity;
 
-public class ModelTriceratops extends MowzieModelBase {
+import com.github.revival.client.model.prehistoric.test.ModelNewPrehistoric;
+import com.github.revival.common.entity.mob.test.EntityNewPrehistoric;
+
+public class ModelTriceratops extends ModelNewPrehistoric {
     public MowzieModelRenderer upperBody;
     public MowzieModelRenderer rightFrontThigh;
     public MowzieModelRenderer leftFrontThigh;
@@ -37,6 +37,7 @@ public class ModelTriceratops extends MowzieModelBase {
     public MowzieModelRenderer leftFrontLeg;
     public MowzieModelRenderer rightHindLeg;
     public MowzieModelRenderer leftHindLeg;
+	private Animator animator;
 
     public ModelTriceratops() {
         this.textureWidth = 128;
@@ -178,14 +179,34 @@ public class ModelTriceratops extends MowzieModelBase {
         this.tail1.addChild(this.quills);
         this.beak.addChild(this.noseHorn);
         ModelUtils.doMowzieStuff(false, boxList);
+		animator = new Animator(this);
     }
 
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
-		super.render(entity, f, f1, f2, f3, f4, f5);
-		ModelUtils.doMowzieStuff(true, boxList);
-		this.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
+	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+		animate((IAnimated)entity, f, f1, f2, f3, f4, f5);
 		ModelUtils.renderAll(boxList);
 	}
+
+	public void animate(IAnimated entity, float f, float f1, float f2, float f3, float f4, float f5) {
+		animator.update(entity);
+		ModelUtils.doMowzieStuff(true, boxList);
+		setRotationAngles(f, f1, f2, f3, f4, f5, (Entity)entity);
+
+		animator.setAnimationId(EntityNewPrehistoric.animation_sit.animationId);
+		animator.startPhase(20);
+		sitPose(true);
+		animator.endPhase();
+
+		animator.setAnimationId(EntityNewPrehistoric.animation_getUp.animationId);
+		animator.startPhase(0);
+		sitPose(true);
+		animator.endPhase();
+		animator.resetPhase(20);
+		animator.endPhase();
+
+	}
+
+	
 	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
 		MowzieModelRenderer[] tailParts = {this.tail1, this.tail2, this.tail3};
 		MowzieModelRenderer[] neckParts = {this.neck, this.head};
@@ -194,7 +215,10 @@ public class ModelTriceratops extends MowzieModelBase {
 
 		float speed = 0.5F;
 		float speed2 = 0.1F;
-
+		if(((IAnimated)entity).getAnimation().animationId == 0)
+			carryOutPoses(entity);
+		this.walk(upperBody, speed2, 0.05F, false, 1F, 0F, entity.ticksExisted, 1);
+		this.walk(lowerBody, speed2, -0.05F, false, 1F, 0F, entity.ticksExisted, 1);
 		this.bob(upperBody, speed2, 0.2F, false, entity.ticksExisted, 1);
 		this.walk(leftHindThigh, speed, 0.8F, false, 0F, 0.4F, f, f1);
 		this.walk(leftHindLeg, speed, 0.2F, false, 0F, -0.6F, f, f1);
@@ -209,5 +233,40 @@ public class ModelTriceratops extends MowzieModelBase {
 		this.chainWave(neckParts, speed2, 0.05F, -3, entity.ticksExisted, 1);
 		//((ChainBuffer)((EntityTriceratops)entity).tailbuffer).applyChainSwingBuffer(tailParts);
 
+	}
+
+	@Override
+	public void sleepPose(boolean animate) {}
+
+	@Override
+	public void sitPose(boolean animate) {
+        ModelUtils.animateOrSetRotation(animator, animate, lowerBody, -0.17907078125461823F, 0.0F, 0.0F, false);
+        ModelUtils.animateOrSetRotation(animator, animate, leftHindLeg, 0.45378560551852565F, -0.0F, 0.0F, false);
+        ModelUtils.animateOrSetRotation(animator, animate, leftFrontThigh, -0.22689280275926282F, -0.0F, 0.0F, false);
+        ModelUtils.animateOrSetRotation(animator, animate, neck, -0.31869712141416456F, -0.0F, 0.0F, false);
+        ModelUtils.animateOrSetRotation(animator, animate, rightHindLeg, 0.45378560551852565F, -0.0F, 0.0F, false);
+        ModelUtils.animateOrSetRotation(animator, animate, tail1, -0.40980330836826856F, -0.0F, 0.0F, false);
+        ModelUtils.animateOrSetRotation(animator, animate, upperBody, -0.045553093477052F, -0.0F, 0.0F, false);
+        ModelUtils.animateOrSetRotation(animator, animate, quills_1, 0.05235987755982988F, 0.0F, 0.0F, false);
+        ModelUtils.animateOrSetRotation(animator, animate, tail2, 0.22759093446006054F, -0.0F, 0.0F, false);
+        ModelUtils.animateOrSetRotation(animator, animate, rightFrontThigh, -0.22689280275926282F, -0.0F, 0.0F, false);
+        ModelUtils.animateOrSetRotation(animator, animate, rightFrontLeg, 0.22689280275926282F, 0.0F, 0.0F, false);
+        ModelUtils.animateOrSetRotation(animator, animate, beak, 0.2808606942177475F, -0.0F, 0.0F, false);
+        ModelUtils.animateOrSetRotation(animator, animate, head, 0.5462880558742251F, -0.0F, 0.0F, false);
+        ModelUtils.animateOrSetRotation(animator, animate, leftFrontLeg, 0.22689280275926282F, -0.0F, 0.0F, false);
+        ModelUtils.animateOrSetRotation(animator, animate, quills, 0.05235987755982988F, 0.0F, 0.0F, false);
+        ModelUtils.animateOrSetRotation(animator, animate, beakbottom, 0.2513223807039196F, -0.0F, 0.0F, false);
+        ModelUtils.animateOrSetRotation(animator, animate, tail3, 0.2555162024919699F, -0.0F, 0.0F, false);
+        ModelUtils.animateOrSetRotation(animator, animate, quills_2, 0.05235987755982988F, 0.0F, 0.0F, false);
+        ModelUtils.animateToPos(animator, animate, upperBody, 0F, 16.20F - upperBody.initRotationPointY, 0F, true);
+		ModelUtils.animateToPos(animator, animate, rightFrontThigh, 0F, 21.3F - rightFrontThigh.initRotationPointY, 0F, true);
+		ModelUtils.animateToPos(animator, animate, leftFrontThigh, 0F, 21.3F - leftFrontThigh.initRotationPointY, 0F, true);
+		ModelUtils.animateToPos(animator, animate, rightHindThigh, 0F, 19.9F - rightHindThigh.initRotationPointY, 0F, true);
+		ModelUtils.animateToPos(animator, animate, leftHindThigh, 0F, 19.9F - leftHindThigh.initRotationPointY, 0F, true);
+		ModelUtils.setPos(animator, animate, upperBody, 0F, 16.20F, 1F, false);
+		ModelUtils.setPos(animator, animate, rightFrontThigh, -2.8F, 21.30F, -3F, false);
+		ModelUtils.setPos(animator, animate, leftFrontThigh, 2.8F, 21.30F, -3F, false);
+		ModelUtils.setPos(animator, animate, rightHindThigh, -2.4F, 19.90F, 4F, false);
+		ModelUtils.setPos(animator, animate, leftHindThigh, 2.4F, 19.90F, 4F, false);
 	}
 }

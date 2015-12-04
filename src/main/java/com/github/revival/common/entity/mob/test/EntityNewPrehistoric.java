@@ -68,6 +68,7 @@ import com.github.revival.common.enums.EnumPrehistoricAI.WaterAbility;
 import com.github.revival.common.enums.EnumSituation;
 import com.github.revival.common.handler.LocalizationStrings;
 import com.github.revival.common.item.FAItemRegistry;
+import com.github.revival.common.message.MessageDinoSit;
 import com.github.revival.common.tileentity.TileEntityFeeder;
 
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -120,12 +121,21 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	public int necklength = 2;
 	private Animation currentAnimation;
 	private int animTick;
+	public static Animation animation_sit = new Animation(1, 20);
+	public static Animation animation_sleep = new Animation(2, 20);
+	public static Animation animation_getUp = new Animation(3, 20);
+	public static Animation animation_wake = new Animation(4, 20);
+	private int sitTick;
+	private int sleepTick;
+	private int getUpTick;
+	private int wakeTick;
+	public boolean clientSitting;
+	public boolean clientSleeping;
 
 	public EntityNewPrehistoric(World world, EnumPrehistoric selfType) {
 		super(world);
 		this.updateSize();
 		this.selfType = selfType;
-		//this.setHealth((float) this.baseHealth);
 		this.currentOrder = EnumOrderType.FreeMove;
 		this.tasks.addTask(0, new DinoAIAge(this));
 		this.tasks.addTask(0, new DinoAIHunger(this));
@@ -142,8 +152,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		this.tasks.addTask(4, aiSit);
 		this.tasks.addTask(5, new DinoAIFeeder(this, 48));
 		this.tasks.addTask(5, new DinoAIWaterFeeder(this, 50, 0.0017D));
-		//this.tasks.addTask(6, new DinoAILook(this, necklength));
-		//this.tasks.addTask(6, new DinoAILookAtEntity(this, EntityLivingBase.class, 8));
+		this.tasks.addTask(6, new DinoAILookAtEntity(this, EntityLivingBase.class, 8));
 		this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
 		this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
 
@@ -231,8 +240,6 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		this.setSpawnValues();
 		this.setDinoAgeTick(0);
 		this.setGender(random.nextInt(2));
-		System.out.println(getTexture());
-		Revival.ShowMessage(getTexture(), worldObj.getClosestPlayerToEntity(this, 20));
 		return par1EntityLivingData;
 	}
 
@@ -259,7 +266,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
 	public boolean isSitting()
 	{
-		return this.getOrderType() == EnumOrderType.Stay;
+		return super.isSitting();
 	}
 
 	public boolean canBePushed()
@@ -269,7 +276,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
 	protected boolean isMovementCeased()
 	{
-		return this.getOrderType() == EnumOrderType.Stay;
+		return this.getOrderType() == EnumOrderType.Stay || this.isSitting();
 	}
 
 	public EnumOrderType getOrderType()
@@ -444,42 +451,37 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
 	public void onLivingUpdate(){
 		super.onLivingUpdate();
-		boolean flag = false;
-		if(this.isSleeping()){
-			this.motionX *= 0;
-			this.motionY *= 0;
-			flag = true;
-			if(this.getRNG().nextInt(40) == 0){
-				Revival.proxy.spawnSleepParticle(worldObj, this.posX, this.posY, this.posZ);
-			}
-		}
-		if(flag && !this.isSleeping()){
 
-		}
-		if(this.getSleeping() == 1){
-			Entity closestLivingEntity = this.worldObj.getClosestPlayerToEntity(this, (double)2);
-			if(closestLivingEntity != null){
-				//this.setSleeping(0);
-			}
-
-		}
-		if(this.aiMovingType() == Moving.FLIGHT || this.aiMovingType() == Moving.WALKANDGLIDE){
-			if (!this.onGround && this.motionY < 0.0D)
-			{
-				this.motionY *= 0.6D;
-			}
-		}
-		if(canSleep() && rand.nextInt(400) == 0 && this.getEntityToAttack() == null && this.riddenByEntity == null && this.getSleeping() == 0){
-			//this.setSleeping(1);
-			//animate going to bed
-		}
-		if(!canSleep() && rand.nextInt(100) == 0 && this.getSleeping() == 1){
-			//this.setSleeping(0);
-			//animate waking up
+		if(this.getRNG().nextInt(200) == 0 && !this.isSitting() && sitTick == 0 && this.getAnimation() != this.animation_sit){
+			sitTick = 1;
+			this.setAnimation(animation_sit);
 		}
 
+		if (sitTick != 0 && sitTick < animation_sit.duration)
+		{
+			sitTick++;
+		}else{
+			sitTick = 0;	
+		}
+		if(sitTick == animation_sit.duration && !this.isSitting()){
+			this.setSitting(true);
+		}
+		
+		if(this.getRNG().nextInt(200) == 0 && this.isSitting() && getUpTick == 0 && this.getAnimation() != this.animation_getUp){
+			getUpTick = 1;
+			this.setAnimation(animation_getUp);
+		}
 
-
+		if (getUpTick != 0 && getUpTick < animation_getUp.duration)
+		{
+			getUpTick++;
+		}else{
+			getUpTick = 0;	
+		}
+		if(getUpTick == animation_getUp.duration){
+			this.setSitting(false);
+		}
+		
 		if(breaksBlocks){
 			this.breakBlock(5);
 		}
@@ -746,10 +748,9 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
 	public void updateSize()
 	{
-		System.out.println("i");
 		this.jump();
 	}
-	
+
 	public void breakBlock(float hardness)
 	{
 		if (FossilConfig.dinoBlockBreaking)
@@ -1141,7 +1142,15 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	public void setSleeping(int var1)
 	{
 		this.dataWatcher.updateObject(SLEEPING_INDEX, var1);
+		this.sendSitPacket();
 	}
+
+	public void setSitting(boolean var1)
+	{
+		super.setSitting(var1);
+		this.sendSitPacket();
+	}
+
 	public boolean isSleeping(){
 		if(getSleeping() == 0){
 			return false;
@@ -1218,8 +1227,8 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	}
 	public boolean interact(EntityPlayer player)
 	{
-		Revival.ShowMessage( "" + this.getHealth(), worldObj.getClosestPlayerToEntity(this, 20));
-		Revival.ShowMessage( "" + this.getHealth(), worldObj.getClosestPlayerToEntity(this, 20));
+		//Revival.ShowMessage( "" + this.getHealth(), worldObj.getClosestPlayerToEntity(this, 20));
+		//Revival.ShowMessage( "" + this.getHealth(), worldObj.getClosestPlayerToEntity(this, 20));
 
 		ItemStack itemstack = player.inventory.getCurrentItem();
 		if(this.isModelized()){
@@ -1664,8 +1673,14 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		return currentAnimation;
 	}
 
+	public void sendSitPacket()
+	{
+		if (FMLCommonHandler.instance().getEffectiveSide().isClient()) return;
+		Revival.channel.sendToAll(new MessageDinoSit(this.getEntityId()));
+	}
+
 	public Animation[] animations() {
-		return new Animation[]{this.animation_none};
+		return new Animation[]{this.animation_none, this.animation_sit, this.animation_sleep, this.animation_getUp, this.animation_wake};
 	}
 
 }

@@ -1,13 +1,14 @@
 package com.github.revival.client.model.prehistoric;
 
-import net.ilexiconn.llibrary.client.model.modelbase.ChainBuffer;
-import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelBase;
 import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelRenderer;
+import net.ilexiconn.llibrary.common.animation.Animator;
+import net.ilexiconn.llibrary.common.animation.IAnimated;
 import net.minecraft.entity.Entity;
 
-import com.github.revival.common.entity.mob.EntityAllosaurus;
+import com.github.revival.client.model.prehistoric.test.ModelNewPrehistoric;
+import com.github.revival.common.entity.mob.test.EntityNewPrehistoric;
 
-public class ModelAllosaurus extends MowzieModelBase {
+public class ModelAllosaurus extends ModelNewPrehistoric {
     public MowzieModelRenderer rightUpperLeg;
     public MowzieModelRenderer leftUpperLeg;
     public MowzieModelRenderer lowerBody;
@@ -31,6 +32,7 @@ public class ModelAllosaurus extends MowzieModelBase {
     public MowzieModelRenderer teeth;
     public MowzieModelRenderer rightLowerArm;
     public MowzieModelRenderer leftLowerArm;
+	private Animator animator;
 
     public ModelAllosaurus() {
         this.textureWidth = 128;
@@ -161,14 +163,33 @@ public class ModelAllosaurus extends MowzieModelBase {
         this.tail1.addChild(this.tail2);
         this.leftUpperArm.addChild(this.rightLowerArm);
         ModelUtils.doMowzieStuff(false, boxList);
+		animator = new Animator(this);
     }
 
     public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
-		super.render(entity, f, f1, f2, f3, f4, f5);
-		ModelUtils.doMowzieStuff(true, boxList);
-		this.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
+		animate((IAnimated)entity, f, f1, f2, f3, f4, f5);
 		ModelUtils.renderAll(boxList);
 	}
+
+	public void animate(IAnimated entity, float f, float f1, float f2, float f3, float f4, float f5) {
+		animator.update(entity);
+		ModelUtils.doMowzieStuff(true, boxList);
+		setRotationAngles(f, f1, f2, f3, f4, f5, (Entity)entity);
+		
+		animator.setAnimationId(EntityNewPrehistoric.animation_sit.animationId);
+		animator.startPhase(20);
+		sitPose(true);
+		animator.endPhase();
+		
+		animator.setAnimationId(EntityNewPrehistoric.animation_getUp.animationId);
+		animator.startPhase(0);
+		sitPose(true);
+		animator.endPhase();
+		animator.resetPhase(20);
+		animator.endPhase();
+
+	}
+
 	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
 		MowzieModelRenderer[] tailParts = {this.tail1, this.tail2, this.tail3};
 		MowzieModelRenderer[] neckParts = {this.neck, this.head};
@@ -179,7 +200,9 @@ public class ModelAllosaurus extends MowzieModelBase {
 		
 		float speed = 0.1F;
 		float speed2 = 0.5F;
-
+		if(((IAnimated)entity).getAnimation().animationId == 0)
+			carryOutPoses(entity);
+		this.walk(upperBody, speed, 0.05F, false, 1F, 0F, entity.ticksExisted, 1);
 		this.bob(lowerBody, speed, 0.7F, false, entity.ticksExisted, 1);
 		this.walk(leftUpperLeg, speed2, 0.8F, false, 0F, 0.4F, f, f1);
 		this.walk(leftLowerLeg, speed2, 0.2F, false, 0F, -0.6F, f, f1);
@@ -195,5 +218,41 @@ public class ModelAllosaurus extends MowzieModelBase {
 		this.chainWave(neckParts, speed, 0.15F, 3, entity.ticksExisted, 1);
 		//((ChainBuffer)((EntityAllosaurus)entity).tailbuffer).applyChainSwingBuffer(tailParts);
 
+	}
+
+	@Override
+	public void sleepPose(boolean animate) {
+		
+        
+	}
+
+	@Override
+	public void sitPose(boolean animate) {
+		ModelUtils.animateOrSetRotation(animator, animate, leftUpperArm, 0.16109388995907664F, 0.0F, 0.0F, false);
+    	ModelUtils.animateOrSetRotation(animator, animate, neck, -0.7740535232594852F, 0.0F, 0.0F, false);
+    	ModelUtils.animateOrSetRotation(animator, animate, leftUpperLeg, -0.4886921905584123F, 0.0F, 0.0F, false);
+    	ModelUtils.animateOrSetRotation(animator, animate, leftLowerLeg, -1.0471975511965976F, 0.0F, 0.0F, false);
+    	ModelUtils.animateOrSetRotation(animator, animate, leftFoot, 1.5707963267948966F, 0.0F, 0.0F, false);
+    	ModelUtils.animateOrSetRotation(animator, animate, tail3, 0.136659280431156F, 0.0F, 0.0F, false);
+    	ModelUtils.animateOrSetRotation(animator, animate, head, 1.1838568316277536F, 0.0F, 0.0F, false);
+    	ModelUtils.animateOrSetRotation(animator, animate, lowerBody, -0.03490658503988659F, 0.0F, 0.0F, false);
+    	ModelUtils.animateOrSetRotation(animator, animate, lowerJaw, -0.06430079482153023F, 0.0F, 0.0F, false);
+    	ModelUtils.animateOrSetRotation(animator, animate, rightFoot, 1.5707963267948966F, 0.0F, 0.0F, false);
+    	ModelUtils.animateOrSetRotation(animator, animate, tail2, 0.091106186954104F, 0.0F, 0.0F, false);
+    	ModelUtils.animateOrSetRotation(animator, animate, leftLowerArm, -1.53588974175501F, 0.0F, 0.0F, false);
+    	ModelUtils.animateOrSetRotation(animator, animate, leftCrest, -0.6981316804885863F, 0.0F, 0.3141592741012573F, false);
+    	ModelUtils.animateOrSetRotation(animator, animate, rightUpperLeg, -0.4886921905584123F, 0.0F, 0.0F, false);
+    	ModelUtils.animateOrSetRotation(animator, animate, tail1, -0.31869712141416456F, 0.0F, 0.0F, false);
+    	ModelUtils.animateOrSetRotation(animator, animate, rightLowerArm, -1.53588974175501F, 0.0F, 0.0F, false);
+    	ModelUtils.animateOrSetRotation(animator, animate, rightUpperArm, 0.16109388995907664F, 0.0F, 0.0F, false);
+    	ModelUtils.animateOrSetRotation(animator, animate, rightCrest, -0.6981316804885863F, 0.0F, -0.3141592741012573F, false);
+    	ModelUtils.animateOrSetRotation(animator, animate, rightLowerLeg, -1.0471975511965976F, 0.0F, 0.0F, false);
+    	ModelUtils.animateOrSetRotation(animator, animate, head, -0F, 0.0F, 0.0F, false);
+		ModelUtils.animateToPos(animator, animate, lowerBody, 0F, 15.30F - lowerBody.initRotationPointY, 0F, true);
+		ModelUtils.animateToPos(animator, animate, rightUpperLeg, 0F, 17.50F - rightUpperLeg.initRotationPointY, 0F, true);
+		ModelUtils.animateToPos(animator, animate, leftUpperLeg, 0F, 17.50F - leftUpperLeg.initRotationPointY, 0F, true);
+		ModelUtils.setPos(animator, animate, lowerBody, 0F, 15.30F, -3F, false);
+		ModelUtils.setPos(animator, animate, rightUpperLeg, -3F, 17.50F, 5.5F, false);
+		ModelUtils.setPos(animator, animate, leftUpperLeg, 3F, 17.50F, 5.5F, false);
 	}
 }

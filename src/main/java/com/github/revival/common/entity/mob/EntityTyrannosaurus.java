@@ -1,8 +1,8 @@
 package com.github.revival.common.entity.mob;
 
-import net.ilexiconn.llibrary.client.model.modelbase.ChainBuffer;
 import net.ilexiconn.llibrary.common.animation.Animation;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
@@ -22,10 +22,8 @@ import com.github.revival.common.enums.EnumPrehistoricAI.Stalking;
 import com.github.revival.common.enums.EnumPrehistoricAI.Taming;
 import com.github.revival.common.enums.EnumPrehistoricAI.Untaming;
 import com.github.revival.common.enums.EnumPrehistoricAI.WaterAbility;
+import com.github.revival.common.handler.FossilAchievementHandler;
 import com.github.revival.common.item.FAItemRegistry;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class EntityTyrannosaurus extends EntityNewPrehistoric
 {
@@ -36,7 +34,7 @@ public class EntityTyrannosaurus extends EntityNewPrehistoric
 	public static final double maxHealth = 82;
 	public static final double baseSpeed = 0D;
 	public static final double maxSpeed = 0D;
-	public static Animation animation_roar = new Animation(1, 100);
+	public static Animation animation_roar = new Animation(5, 100);
 	public Object tailbuffer = Revival.proxy.getChainBuffer(3);
 
 
@@ -45,8 +43,8 @@ public class EntityTyrannosaurus extends EntityNewPrehistoric
 		this.setSize(1.5F, 1.25F);
 		this.hasFeatherToggle = true;
 		this.featherToggle = FossilConfig.featheredTRex;
-		minSize = 1F;
-		maxSize = 4.5F;
+		minSize = 0.1F;
+		maxSize = 7.5F;
 		teenAge = 5;
 		developsResistance = true;
 		breaksBlocks = true;
@@ -58,17 +56,6 @@ public class EntityTyrannosaurus extends EntityNewPrehistoric
 	}
 	@Override
 	public void setSpawnValues() {}
-
-	@Override
-	public void moveEntityWithHeading(float par1, float par2)
-	{
-		super.moveEntityWithHeading(par1, par2);
-		this.motionX *= 0;
-		this.motionY *= 0;
-		this.motionZ *= 0;
-		this.rotationPitch *= 0;
-		this.rotationYaw *= 0;
-	}
         
 	@Override
 	protected void applyEntityAttributes()
@@ -161,8 +148,8 @@ public class EntityTyrannosaurus extends EntityNewPrehistoric
 		super.onUpdate();
 
 		//Revival.proxy.doChainBuffer(tailbuffer, this);
-		if(!this.isSleeping() && this.rand.nextInt(200) == 0 && !worldObj.isRemote){
-			if(this.getAnimation() != animation_roar){
+		if(!this.isSleeping() && this.rand.nextInt(500) == 0 && !worldObj.isRemote){
+			if(this.getAnimation() == this.animation_none){
 				this.setAnimation(animation_roar);
 			}
 		}
@@ -171,6 +158,10 @@ public class EntityTyrannosaurus extends EntityNewPrehistoric
 		}
 	}
 
+	private void triggerTamingAcheivement(EntityPlayer player) {
+		player.triggerAchievement(FossilAchievementHandler.theKing);
+
+	}
 	public void updateSize()
 	{
 		double healthStep;
@@ -210,6 +201,8 @@ public class EntityTyrannosaurus extends EntityNewPrehistoric
 
 	@Override
 	public Animation[] animations() {
-		return new Animation[]{this.animation_none, this.animation_roar};
+		return new Animation[]{this.animation_none, this.animation_sit, this.animation_sleep, this.animation_getUp, this.animation_wake,
+				this.animation_roar};
 	}
+
 }
