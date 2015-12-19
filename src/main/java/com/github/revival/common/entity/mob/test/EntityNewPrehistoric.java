@@ -47,6 +47,7 @@ import org.lwjgl.opengl.GL11;
 
 import com.github.revival.Revival;
 import com.github.revival.client.gui.GuiPedia;
+import com.github.revival.common.api.FoodMappings;
 import com.github.revival.common.api.IPrehistoricAI;
 import com.github.revival.common.block.FABlockRegistry;
 import com.github.revival.common.config.FossilConfig;
@@ -152,7 +153,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		this.tasks.addTask(4, aiSit);
 		this.tasks.addTask(5, new DinoAIFeeder(this, 48));
 		this.tasks.addTask(5, new DinoAIWaterFeeder(this, 50, 0.0017D));
-		this.tasks.addTask(6, new DinoAILookAtEntity(this, EntityLivingBase.class, 8));
+		//this.tasks.addTask(6, new DinoAILookAtEntity(this, EntityLivingBase.class, 8));
 		this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
 		this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
 
@@ -235,10 +236,10 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	{
 		par1EntityLivingData = super.onSpawnWithEgg(par1EntityLivingData);
 		Random random = new Random();
+		this.setDinoAge(this.getAdultAge());
+		this.updateSize();
 		this.heal(200);
-		this.setDinoAge(6);
 		this.setSpawnValues();
-		this.setDinoAgeTick(0);
 		this.setGender(random.nextInt(2));
 		return par1EntityLivingData;
 	}
@@ -454,19 +455,20 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
 		if(this.getRNG().nextInt(200) == 0 && !this.isSitting() && sitTick == 0 && this.getAnimation() != this.animation_sit){
 			sitTick = 1;
+		}
+		if(sitTick == 1){
 			this.setAnimation(animation_sit);
 		}
-
-		if (sitTick != 0 && sitTick < animation_sit.duration)
+		if (sitTick != 0 && sitTick < animation_sit.duration + 1)
 		{
 			sitTick++;
 		}else{
 			sitTick = 0;	
 		}
-		if(sitTick == animation_sit.duration && !this.isSitting()){
+		if(sitTick == animation_sit.duration + 1 && !this.isSitting()){
 			this.setSitting(true);
 		}
-		
+
 		if(this.getRNG().nextInt(200) == 0 && this.isSitting() && getUpTick == 0 && this.getAnimation() != this.animation_getUp){
 			getUpTick = 1;
 			this.setAnimation(animation_getUp);
@@ -481,7 +483,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		if(getUpTick == animation_getUp.duration){
 			this.setSitting(false);
 		}
-		
+
 		if(breaksBlocks){
 			this.breakBlock(5);
 		}
@@ -868,7 +870,6 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 			this.setDinoAge(this.getDinoAge() + 1);
 			return true;
 		}
-		this.updateSize();
 		return false;
 	}
 
@@ -1227,9 +1228,6 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	}
 	public boolean interact(EntityPlayer player)
 	{
-		//Revival.ShowMessage( "" + this.getHealth(), worldObj.getClosestPlayerToEntity(this, 20));
-		//Revival.ShowMessage( "" + this.getHealth(), worldObj.getClosestPlayerToEntity(this, 20));
-
 		ItemStack itemstack = player.inventory.getCurrentItem();
 		if(this.isModelized()){
 			if (itemstack == null)
@@ -1313,8 +1311,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 							{
 								player.inventory.addItemStackToInventory(new ItemStack(Items.glass_bottle, 1));
 							}
-							this.setDinoAgeTick(12000);
-							this.increaseDinoAge();
+							this.setDinoAgeTick(this.getDinoAge() + 2000);
 							this.setHunger(1 + (new Random()).nextInt(this.getHunger()));
 							return true;
 						}
@@ -1328,24 +1325,18 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 					return false;
 				}
 
-				if (this.selfType.FoodItemList.CheckItem(itemstack.getItem())
-						|| this.selfType.FoodBlockList.CheckBlock(Block
-								.getBlockFromItem(itemstack.getItem())))
+				if (FoodMappings.instance().getItemFoodAmount(itemstack.getItem(), this.selfType.diet) != 0)
 				{
-					// Item is one of the dinos food items
 					if (!player.worldObj.isRemote)
 					{
 						if (this.getMaxHunger() > this.getHunger())
 						{
-							// The Dino is Hungry and it can eat the item
-							// this.showHeartsOrSmokeFX(false);
 							this.worldObj.setEntityState(this, SMOKE_MESSAGE);
-							this.increaseHunger(this.selfType.FoodItemList.getItemFood(itemstack.getItem()) + this.selfType.FoodBlockList.getBlockFood(itemstack.getItem()));
+							this.increaseHunger(FoodMappings.instance().getItemFoodAmount(itemstack.getItem(), this.selfType.diet));
 
 							if (FossilConfig.healingDinos)
 							{
-								// System.out.println("Hbefore:"+String.valueOf(this.health));
-								this.heal(this.selfType.FoodItemList.getItemHeal(itemstack.getItem())+ this.selfType.FoodBlockList.getBlockHeal(Block.getBlockFromItem(itemstack.getItem())));
+								this.heal(3);
 							}
 
 							if (this.getHunger() >= this.getMaxHunger())

@@ -93,6 +93,7 @@ import com.github.revival.common.tileentity.TileEntitySifter;
 import com.github.revival.common.tileentity.TileEntityTimeMachine;
 import com.github.revival.common.tileentity.TileEntityVase;
 import com.github.revival.common.tileentity.TileEntityWorktable;
+import com.github.revival.misc.FossilFoodMappings;
 
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -179,7 +180,7 @@ public class Revival
 		ContentHelper.init(new FATabRegistry(), new FABlockRegistry(), new FAItemRegistry());
 		EnumPrehistoric.init();
 		FossilOreDictionary.oreRegistration();
-
+		FossilFoodMappings.init();
 		DimensionManager.registerProviderType(FossilConfig.dimIdDarknessLair, WorldProviderAnu.class, false);
 		DimensionManager.registerDimension(FossilConfig.dimIdDarknessLair, FossilConfig.dimIdDarknessLair);
 		DimensionManager.registerProviderType(FossilConfig.dimIdTreasure, WorldProviderTreasure.class, false);

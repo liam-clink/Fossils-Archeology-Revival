@@ -43,8 +43,8 @@ public class EntityTyrannosaurus extends EntityNewPrehistoric
 		this.setSize(1.5F, 1.25F);
 		this.hasFeatherToggle = true;
 		this.featherToggle = FossilConfig.featheredTRex;
-		minSize = 0.1F;
-		maxSize = 7.5F;
+		minSize = 0.4F;
+		maxSize = 4.5F;
 		teenAge = 5;
 		developsResistance = true;
 		breaksBlocks = true;

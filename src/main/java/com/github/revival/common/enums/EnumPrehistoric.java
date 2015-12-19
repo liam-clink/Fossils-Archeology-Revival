@@ -13,6 +13,7 @@ import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.item.Item;
 
+import com.github.revival.common.api.EnumDiet;
 import com.github.revival.common.creativetab.FATabRegistry;
 import com.github.revival.common.entity.mob.DinoFoodBlockList;
 import com.github.revival.common.entity.mob.DinoFoodItemList;
@@ -67,44 +68,46 @@ interface I
 	int CARRY = 1 << 5; //Bit 5: Dino can Carry Items
 
 }
+
 public enum EnumPrehistoric {
 
-	Nautilus(EntityNautilus.class, EnumMobType.FISH, EnumTimePeriod.MESOZOIC, I.NOTHING, true),
-	Coelacanth(EntityCoelacanth.class, EnumMobType.FISH, EnumTimePeriod.MESOZOIC, I.NOTHING, true),
-	Triceratops(EntityTriceratops.class, EnumMobType.DINOSAUR, EnumTimePeriod.MESOZOIC, I.MODEL | I.TAME | I.RIDE | I.HERBIVORE, true),
-	Velociraptor(EntityVelociraptor.class, EnumMobType.DINOSAUR, EnumTimePeriod.MESOZOIC, I.TAME | I.CARNIVORE, true),
-	Tyrannosaurus(EntityTyrannosaurus.class, EnumMobType.DINOSAUR, EnumTimePeriod.MESOZOIC, I.MODEL | I.TAME | I.RIDE | I.CARNIVORE, true),
-	Pterosaur(EntityPterosaur.class, EnumMobType.DINOSAUR, EnumTimePeriod.MESOZOIC, I.MODEL | I.TAME | I.CARNIVORE, true),
-	Plesiosaur(EntityPlesiosaurus.class, EnumMobType.DINOSAUR, EnumTimePeriod.MESOZOIC, I.MODEL | I.TAME | I.RIDE | I.CARNIVORE, true),
-	Mosasaurus(EntityMosasaurus.class, EnumMobType.DINOSAUR, EnumTimePeriod.MESOZOIC, I.MODEL | I.CARNIVORE, true),
-	Stegosaurus(EntityStegosaurus.class, EnumMobType.DINOSAUR, EnumTimePeriod.MESOZOIC, I.MODEL | I.TAME | I.HERBIVORE, true),
-	Dilophosaurus(EntityDilophosaurus.class, EnumMobType.DINOSAUR, EnumTimePeriod.MESOZOIC, I.TAME | I.CARNIVORE, true),
-	Brachiosaurus(EntityBrachiosaurus.class, EnumMobType.DINOSAUR, EnumTimePeriod.MESOZOIC, I.MODEL | I.TAME | I.RIDE | I.HERBIVORE, true),
-	Spinosaurus(EntitySpinosaurus.class, EnumMobType.DINOSAUR, EnumTimePeriod.MESOZOIC, I.MODEL | I.CARNIVORE, true),
-	Compsognathus(EntityCompsognathus.class, EnumMobType.DINOSAUR, EnumTimePeriod.MESOZOIC, I.MODEL | I.TAME | I.CARNIVORE, true),
-	Ankylosaurus(EntityAnkylosaurus.class, EnumMobType.DINOSAUR, EnumTimePeriod.MESOZOIC, I.MODEL | I.TAME | I.RIDE | I.HERBIVORE, true),
-	Pachycephalosaurus(EntityPachycephalosaurus.class, EnumMobType.DINOSAUR, EnumTimePeriod.MESOZOIC, I.TAME | I.HERBIVORE, true),
-	Deinonychus(EntityDeinonychus.class, EnumMobType.DINOSAUR, EnumTimePeriod.MESOZOIC, I.MODEL | I.TAME | I.CARNIVORE, true),
-	Gallimimus(EntityGallimimus.class, EnumMobType.DINOSAUR, EnumTimePeriod.MESOZOIC, I.MODEL | I.TAME | I.RIDE | I.HERB_CARN, true),
-	Liopleurodon(EntityLiopleurodon.class, EnumMobType.DINOSAUR, EnumTimePeriod.MESOZOIC, I.MODEL | I.CARNIVORE, true),
-	Allosaurus(EntityAllosaurus.class, EnumMobType.DINOSAUR, EnumTimePeriod.MESOZOIC, I.MODEL | I.TAME | I.RIDE | I.CARNIVORE, true),
-	Sarcosuchus(EntitySarcosuchus.class, EnumMobType.DINOSAUR, EnumTimePeriod.MESOZOIC, I.TAME | I.CARNIVORE, true),
-	Ceratosaurus(EntityCeratosaurus.class, EnumMobType.DINOSAUR, EnumTimePeriod.MESOZOIC, I.MODEL | I.TAME | I.RIDE | I.CARNIVORE, true),
-	Confuciusornis(EntityConfuciusornis.class, EnumMobType.BIRD, EnumTimePeriod.MESOZOIC, I.TAME | I.HERBIVORE, true),
-	Dodo(EntityDodo.class, EnumMobType.BIRD, EnumTimePeriod.CENOZOIC, I.TAME | I.HERBIVORE, true),
-	TerrorBird(EntityTerrorBird.class, EnumMobType.TERRORBIRD, EnumTimePeriod.CENOZOIC, I.TAME, true),
-	Mammoth(EntityMammoth.class, EnumMobType.MAMMAL, EnumTimePeriod.CENOZOIC, I.TAME | I.RIDE | I.HERBIVORE, true),
-	Smilodon(EntitySmilodon.class, EnumMobType.MAMMAL, EnumTimePeriod.CENOZOIC, I.TAME | I.CARNIVORE, true),
-	Quagga(EntityQuagga.class, EnumMobType.MAMMAL, EnumTimePeriod.CENOZOIC, I.TAME | I.RIDE | I.HERBIVORE, true),
-	Elasmotherium(EntityQuagga.class, EnumMobType.MAMMAL, EnumTimePeriod.CENOZOIC, I.TAME | I.RIDE | I.HERBIVORE, true),
-	Pig(EntityPig.class, EnumMobType.VANILLA, EnumTimePeriod.CURRENT, I.NOTHING, false),
-	Cow(EntityCow.class, EnumMobType.VANILLA, EnumTimePeriod.CURRENT, I.NOTHING, false),
-	Sheep(EntitySheep.class, EnumMobType.VANILLA, EnumTimePeriod.CURRENT, I.NOTHING, false),
-	Horse(EntityHorse.class, EnumMobType.VANILLA, EnumTimePeriod.CURRENT, I.NOTHING, false),
-	Chicken(EntityChicken.class, EnumMobType.CHICKEN, EnumTimePeriod.CURRENT, I.NOTHING, false);
+	Nautilus(EntityNautilus.class, EnumMobType.FISH, EnumTimePeriod.MESOZOIC, EnumDiet.NONE, I.NOTHING, true),
+	Coelacanth(EntityCoelacanth.class, EnumMobType.FISH, EnumTimePeriod.MESOZOIC, EnumDiet.NONE, I.NOTHING, true),
+	Triceratops(EntityTriceratops.class, EnumMobType.DINOSAUR, EnumTimePeriod.MESOZOIC, EnumDiet.HERBIVORE, I.MODEL | I.TAME | I.RIDE | I.HERBIVORE, true),
+	Velociraptor(EntityVelociraptor.class, EnumMobType.DINOSAUR, EnumTimePeriod.MESOZOIC, EnumDiet.CARNIVORE, I.TAME | I.CARNIVORE, true),
+	Tyrannosaurus(EntityTyrannosaurus.class, EnumMobType.DINOSAUR, EnumTimePeriod.MESOZOIC, EnumDiet.CARNIVORE, I.MODEL | I.TAME | I.RIDE | I.CARNIVORE, true),
+	Pterosaur(EntityPterosaur.class, EnumMobType.DINOSAUR, EnumTimePeriod.MESOZOIC, EnumDiet.PISCIVORE, I.MODEL | I.TAME | I.CARNIVORE, true),
+	Plesiosaur(EntityPlesiosaurus.class, EnumMobType.DINOSAUR, EnumTimePeriod.MESOZOIC, EnumDiet.PISCIVORE, I.MODEL | I.TAME | I.RIDE | I.CARNIVORE, true),
+	Mosasaurus(EntityMosasaurus.class, EnumMobType.DINOSAUR, EnumTimePeriod.MESOZOIC, EnumDiet.CARNIVORE, I.MODEL | I.CARNIVORE, true),
+	Stegosaurus(EntityStegosaurus.class, EnumMobType.DINOSAUR, EnumTimePeriod.MESOZOIC, EnumDiet.HERBIVORE, I.MODEL | I.TAME | I.HERBIVORE, true),
+	Dilophosaurus(EntityDilophosaurus.class, EnumMobType.DINOSAUR, EnumTimePeriod.MESOZOIC, EnumDiet.CARNIVORE, I.TAME | I.CARNIVORE, true),
+	Brachiosaurus(EntityBrachiosaurus.class, EnumMobType.DINOSAUR, EnumTimePeriod.MESOZOIC, EnumDiet.HERBIVORE, I.MODEL | I.TAME | I.RIDE | I.HERBIVORE, true),
+	Spinosaurus(EntitySpinosaurus.class, EnumMobType.DINOSAUR, EnumTimePeriod.MESOZOIC, EnumDiet.PISCIVORE, I.MODEL | I.CARNIVORE, true),
+	Compsognathus(EntityCompsognathus.class, EnumMobType.DINOSAUR, EnumTimePeriod.MESOZOIC, EnumDiet.CARNIVORE, I.MODEL | I.TAME | I.CARNIVORE, true),
+	Ankylosaurus(EntityAnkylosaurus.class, EnumMobType.DINOSAUR, EnumTimePeriod.MESOZOIC, EnumDiet.HERBIVORE, I.MODEL | I.TAME | I.RIDE | I.HERBIVORE, true),
+	Pachycephalosaurus(EntityPachycephalosaurus.class, EnumMobType.DINOSAUR, EnumTimePeriod.MESOZOIC, EnumDiet.HERBIVORE, I.TAME | I.HERBIVORE, true),
+	Deinonychus(EntityDeinonychus.class, EnumMobType.DINOSAUR, EnumTimePeriod.MESOZOIC, EnumDiet.CARNIVORE_EGG, I.MODEL | I.TAME | I.CARNIVORE, true),
+	Gallimimus(EntityGallimimus.class, EnumMobType.DINOSAUR, EnumTimePeriod.MESOZOIC, EnumDiet.OMNIVORE, I.MODEL | I.TAME | I.RIDE | I.HERB_CARN, true),
+	Liopleurodon(EntityLiopleurodon.class, EnumMobType.DINOSAUR, EnumTimePeriod.MESOZOIC, EnumDiet.PISCIVORE, I.MODEL | I.CARNIVORE, true),
+	Allosaurus(EntityAllosaurus.class, EnumMobType.DINOSAUR, EnumTimePeriod.MESOZOIC, EnumDiet.CARNIVORE, I.MODEL | I.TAME | I.RIDE | I.CARNIVORE, true),
+	Sarcosuchus(EntitySarcosuchus.class, EnumMobType.DINOSAUR, EnumTimePeriod.MESOZOIC, EnumDiet.PISCIVORE, I.TAME | I.CARNIVORE, true),
+	Ceratosaurus(EntityCeratosaurus.class, EnumMobType.DINOSAUR, EnumTimePeriod.MESOZOIC, EnumDiet.CARNIVORE, I.MODEL | I.TAME | I.RIDE | I.CARNIVORE, true),
+	Confuciusornis(EntityConfuciusornis.class, EnumMobType.BIRD, EnumTimePeriod.MESOZOIC, EnumDiet.HERBIVORE, I.TAME | I.HERBIVORE, true),
+	Dodo(EntityDodo.class, EnumMobType.BIRD, EnumTimePeriod.CENOZOIC, EnumDiet.HERBIVORE, I.TAME | I.HERBIVORE, true),
+	TerrorBird(EntityTerrorBird.class, EnumMobType.TERRORBIRD, EnumTimePeriod.CENOZOIC, EnumDiet.CARNIVORE, I.TAME, true),
+	Mammoth(EntityMammoth.class, EnumMobType.MAMMAL, EnumTimePeriod.CENOZOIC, EnumDiet.HERBIVORE, I.TAME | I.RIDE | I.HERBIVORE, true),
+	Smilodon(EntitySmilodon.class, EnumMobType.MAMMAL, EnumTimePeriod.CENOZOIC, EnumDiet.CARNIVORE, I.TAME | I.CARNIVORE, true),
+	Quagga(EntityQuagga.class, EnumMobType.MAMMAL, EnumTimePeriod.CENOZOIC, EnumDiet.HERBIVORE, I.TAME | I.RIDE | I.HERBIVORE, true),
+	Elasmotherium(EntityQuagga.class, EnumMobType.MAMMAL, EnumTimePeriod.CENOZOIC, EnumDiet.HERBIVORE, I.TAME | I.RIDE | I.HERBIVORE, true),
+	Pig(EntityPig.class, EnumMobType.VANILLA, EnumTimePeriod.CURRENT, EnumDiet.OMNIVORE, I.NOTHING, false),
+	Cow(EntityCow.class, EnumMobType.VANILLA, EnumTimePeriod.CURRENT, EnumDiet.HERBIVORE, I.NOTHING, false),
+	Sheep(EntitySheep.class, EnumMobType.VANILLA, EnumTimePeriod.CURRENT, EnumDiet.HERBIVORE, I.NOTHING, false),
+	Horse(EntityHorse.class, EnumMobType.VANILLA, EnumTimePeriod.CURRENT, EnumDiet.HERBIVORE, I.NOTHING, false),
+	Chicken(EntityChicken.class, EnumMobType.CHICKEN, EnumTimePeriod.CURRENT, EnumDiet.HERBIVORE, I.NOTHING, false);
 
 	private final Class dinoClass;
 	public EnumMobType type;
+	public EnumDiet diet;
 	public EnumTimePeriod timeperiod;
 	public DinoFoodItemList FoodItemList;
 	public DinoFoodBlockList FoodBlockList;
@@ -138,11 +141,12 @@ public enum EnumPrehistoric {
 	public Item bestBirdEggItem;
 	public int growTime = 100;
 
-	EnumPrehistoric(Class class0, EnumMobType animalType, EnumTimePeriod timeperiod, int f0, boolean init)
+	EnumPrehistoric(Class class0, EnumMobType animalType, EnumTimePeriod timeperiod, EnumDiet diet, int f0, boolean init)
 	{
 		this.dinoClass = class0;
 		this.type = animalType;
 		this.timeperiod = timeperiod;
+		this.diet = diet;
 		this.Flags = f0;
 		this.FoodItemList = new DinoFoodItemList();
 		this.FoodBlockList = new DinoFoodBlockList();

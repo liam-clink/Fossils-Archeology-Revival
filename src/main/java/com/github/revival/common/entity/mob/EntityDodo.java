@@ -45,6 +45,9 @@ public class EntityDodo extends EntityNewPrehistoric
 		hasTeenTexture = false;
 	}
 
+	public boolean isAIEnabled(){
+		return false;
+	}
 	@Override
 	public void entityInit(){
 		super.entityInit();

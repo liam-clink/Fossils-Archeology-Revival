@@ -78,7 +78,12 @@ public class ModelDodo extends MowzieModelBase {
 		this.body.render(f5);
 		this.leftLeg.render(f5);
 		this.rightLeg.render(f5);
-
+		if(this.isChild){
+			head.setScale(1.5F, 1.5F, 1.5F);
+			beak.setScale(0.5F, 0.5F, 0.5F);
+			beak.setRotationPoint(0, -1, -3.5F);
+		}
+		
 	}
 
 	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
@@ -89,6 +94,7 @@ public class ModelDodo extends MowzieModelBase {
         this.leftLeg.rotateAngleX = MathHelper.cos(f * 0.6662F + (float)Math.PI) * 1.4F * f1;
 		float speed = 1.5F;
 		float speed2 = 0.1F;
+		
 		if(dodo.getSleeping() == 1){
 			this.sleepPose();
 		}else{
