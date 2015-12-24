@@ -1,9 +1,10 @@
 package com.github.revival.client.model.prehistoric.test;
 
 import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelBase;
-import net.ilexiconn.llibrary.common.animation.Animator;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 
+import com.github.revival.client.renderer.entity.RenderPrehistoric;
 import com.github.revival.common.entity.mob.test.EntityNewPrehistoric;
 
 public abstract class ModelNewPrehistoric extends MowzieModelBase{
@@ -28,5 +29,7 @@ public abstract class ModelNewPrehistoric extends MowzieModelBase{
 	public abstract void sitPose(boolean animate);
 
 	public void hurtPose(boolean animate){}
+
+	public void renderHeldItem(RenderPrehistoric renderPrehistoric, EntityLiving entity, float i) {}
 
 }

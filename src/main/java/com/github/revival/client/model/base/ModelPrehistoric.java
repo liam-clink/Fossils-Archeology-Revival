@@ -2,13 +2,12 @@ package com.github.revival.client.model.base;
 
 import java.util.Iterator;
 
-import org.lwjgl.opengl.GL11;
-
 import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelBase;
 import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelRenderer;
-import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 
+import com.github.revival.client.renderer.entity.RenderPrehistoric;
 import com.github.revival.common.entity.mob.test.EntityNewPrehistoric;
 
 public class ModelPrehistoric extends MowzieModelBase{
@@ -38,6 +37,8 @@ public class ModelPrehistoric extends MowzieModelBase{
 	}
 	/**PreRender and setAngles*/
 	public void renderSleeping(EntityNewPrehistoric entity, float f, float f1, float f2, float f3, float f4, float f5){
+	}
+	public void renderHeldItem(RenderPrehistoric renderPrehistoric, EntityLivingBase entity, float i) {	
 	}
 
 	public void renderAll(){
@@ -72,5 +73,6 @@ public class ModelPrehistoric extends MowzieModelBase{
         MowzieModelRenderer.rotateAngleY = y;
         MowzieModelRenderer.rotateAngleZ = z;
     }
+
 }
 

@@ -66,8 +66,7 @@ public class DinoAIRunAway extends EntityAIBase
 		}
 		if(closestLivingEntity != null){
 			if(targetEntityClass == closestLivingEntity.getClass() && targetEntityClass != theEntity.getClass()){
-				if(closestLivingEntity.boundingBox.maxX * 1.5F < theEntity.boundingBox.maxX && closestLivingEntity.boundingBox.minX * 1.5F > theEntity.boundingBox.minX
-						&& closestLivingEntity.boundingBox.minZ * 1.5F < theEntity.boundingBox.minZ && closestLivingEntity.boundingBox.minZ  * 1.5F > theEntity.boundingBox.minZ){
+				if(closestLivingEntity.width * 1.5F < theEntity.width){
 					return false;
 				}
 			}

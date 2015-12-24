@@ -130,6 +130,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	private int sleepTick;
 	private int getUpTick;
 	private int wakeTick;
+	private int eatTick;
 	public boolean clientSitting;
 	public boolean clientSleeping;
 
@@ -285,49 +286,28 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		return this.currentOrder;
 	}
 
-	public Vec3 getBlockToEat(int SEARCH_RANGE)
+	public Vec3 getBlockToEat(int range)
 	{
 		Vec3 pos;
 
-		for (int r = 1; r <= SEARCH_RANGE; r++)
+		for (int r = 1; r <= range; r++)
 		{
 			for (int ds = -r; ds <= r; ds++)
 			{
 				for (int dy = 4; dy > -5; dy--)
 				{
-					if (this.posY + dy >= 0
-							&& this.posY + dy <= this.worldObj.getHeight()
-							&& this.selfType.FoodBlockList
-							.CheckBlock(this.worldObj.getBlock(
-									MathHelper.floor_double(this.posX
-											+ ds),
-											MathHelper.floor_double(this.posY
-													+ dy),
-													MathHelper.floor_double(this.posZ
-															- r))))
+					int x = MathHelper.floor_double(this.posX+ ds);
+					int y = MathHelper.floor_double(this.posY + dy);
+					int z = MathHelper.floor_double(this.posZ - r);
+					if (this.posY + dy >= 0 && this.posY + dy <= this.worldObj.getHeight() && FoodMappings.instance().getBlockFoodAmount(this.worldObj.getBlock(x, y, z), selfType.diet) != 0)
 					{
-						pos = Vec3.createVectorHelper(
-								MathHelper.floor_double(this.posX + ds),
-								MathHelper.floor_double(this.posY + dy),
-								MathHelper.floor_double(this.posZ - r));
+						pos = Vec3.createVectorHelper(x, y, z);
 						return pos;
 					}
 
-					if (this.posY + dy >= 0
-							&& this.posY + dy <= this.worldObj.getHeight()
-							&& this.selfType.FoodBlockList
-							.CheckBlock(this.worldObj.getBlock(
-									MathHelper.floor_double(this.posX
-											+ ds),
-											MathHelper.floor_double(this.posY
-													+ dy),
-													MathHelper.floor_double(this.posZ
-															+ r))))
+					if (this.posY + dy >= 0 && this.posY + dy <= this.worldObj.getHeight() && FoodMappings.instance().getBlockFoodAmount(this.worldObj.getBlock(x, y, z), selfType.diet) != 0)
 					{
-						pos = Vec3.createVectorHelper(
-								MathHelper.floor_double(this.posX + ds),
-								MathHelper.floor_double(this.posY + dy),
-								MathHelper.floor_double(this.posZ + r));
+						pos = Vec3.createVectorHelper(x, y, z);
 						return pos;
 					}
 				}
@@ -337,39 +317,19 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 			{
 				for (int dy = 4; dy > -5; dy--)
 				{
-					if (this.posY + dy >= 0
-							&& this.posY + dy <= this.worldObj.getHeight()
-							&& this.selfType.FoodBlockList
-							.CheckBlock(this.worldObj.getBlock(
-									MathHelper.floor_double(this.posX
-											- r),
-											MathHelper.floor_double(this.posY
-													+ dy),
-													MathHelper.floor_double(this.posZ
-															+ ds))))
+					int x = MathHelper.floor_double(this.posX+ ds);
+					int y = MathHelper.floor_double(this.posY + dy);
+					int z = MathHelper.floor_double(this.posZ - r);
+
+					if (this.posY + dy >= 0 && this.posY + dy <= this.worldObj.getHeight() && FoodMappings.instance().getBlockFoodAmount(this.worldObj.getBlock(x, y, z), selfType.diet) != 0)
 					{
-						pos = Vec3.createVectorHelper(
-								MathHelper.floor_double(this.posX - r),
-								MathHelper.floor_double(this.posY + dy),
-								MathHelper.floor_double(this.posZ + ds));
+						pos = Vec3.createVectorHelper(x, y, z);
 						return pos;
 					}
 
-					if (this.posY + dy >= 0
-							&& this.posY + dy <= this.worldObj.getHeight()
-							&& this.selfType.FoodBlockList
-							.CheckBlock(this.worldObj.getBlock(
-									MathHelper.floor_double(this.posX
-											+ r),
-											MathHelper.floor_double(this.posY
-													+ dy),
-													MathHelper.floor_double(this.posZ
-															+ ds))))
+					if (this.posY + dy >= 0 && this.posY + dy <= this.worldObj.getHeight() && FoodMappings.instance().getBlockFoodAmount(this.worldObj.getBlock(x, y, z), selfType.diet) != 0)
 					{
-						pos = Vec3.createVectorHelper(
-								MathHelper.floor_double(this.posX + r),
-								MathHelper.floor_double(this.posY + dy),
-								MathHelper.floor_double(this.posZ + ds));
+						pos = Vec3.createVectorHelper(x, y, z);
 						return pos;
 					}
 				}
@@ -484,6 +444,16 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 			this.setSitting(false);
 		}
 
+		if(eatTick != 0 && eatTick > 50){
+			eatTick++;
+			if(FoodMappings.instance().getItemFoodAmount(this.getHeldItem().getItem(), this.selfType.diet) != 0)
+				this.worldObj.spawnParticle("itemcrack_" + Item.getIdFromItem(this.getHeldItem().getItem()) + "_" + this.getHeldItem().getItemDamage(), this.posX + ((double)this.rand.nextFloat() - 0.5D) * (double)this.width, this.boundingBox.minY + 0.1D, this.posZ + ((double)this.rand.nextFloat() - 0.5D) * (double)this.width, 4.0D * ((double)this.rand.nextFloat() - 0.5D), 0.5D, ((double)this.rand.nextFloat() - 0.5D) * 4.0D);
+		}
+		if(eatTick == 49){
+			if(FoodMappings.instance().getItemFoodAmount(this.getHeldItem().getItem(), this.selfType.diet) != 0)
+				this.increaseHunger(FoodMappings.instance().getItemFoodAmount(this.getHeldItem().getItem(), this.selfType.diet));
+			this.setCurrentItemOrArmor(0, (ItemStack)null);
+		}
 		if(breaksBlocks){
 			this.breakBlock(5);
 		}
@@ -1331,8 +1301,10 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 					{
 						if (this.getMaxHunger() > this.getHunger())
 						{
-							this.worldObj.setEntityState(this, SMOKE_MESSAGE);
-							this.increaseHunger(FoodMappings.instance().getItemFoodAmount(itemstack.getItem(), this.selfType.diet));
+							eatTick = 1;
+							if(this.getHeldItem() != null)
+								this.entityDropItem(this.getHeldItem(), 0);
+							this.setCurrentItemOrArmor(0, itemstack);
 
 							if (FossilConfig.healingDinos)
 							{
