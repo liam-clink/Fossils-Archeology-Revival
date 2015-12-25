@@ -16,6 +16,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTUtil;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.StringUtils;
 
 import org.lwjgl.opengl.GL11;
@@ -61,7 +62,7 @@ public class ModelVelociraptor extends ModelNewPrehistoric {
 	public MowzieModelRenderer rightFoot;
 	public MowzieModelRenderer rightToeClaw1;
 	public Animator animator;
-	
+
 	public ModelVelociraptor() {
 		this.textureWidth = 128;
 		this.textureHeight = 64;
@@ -253,7 +254,7 @@ public class ModelVelociraptor extends ModelNewPrehistoric {
 		animator.startPhase(20);
 		sitPose(true);
 		animator.endPhase();
-		
+
 		animator.setAnimationId(EntityNewPrehistoric.animation_getUp.animationId);
 		animator.startPhase(0);
 		sitPose(true);
@@ -284,13 +285,12 @@ public class ModelVelociraptor extends ModelNewPrehistoric {
 		this.walk(rightLeg, speed2, 0.2F, true, 0F, -0.6F, f, f1);
 		this.walk(rightFoot, speed2, -0.4F, true, 4.5F, 0.4F, f, f1);
 		this.walk(upperBody, speed, 0.1F, false, 0, 0, entity.ticksExisted, 1);
-		this.walk(neck, speed, 0.1F, true, 0, 0, entity.ticksExisted, 1);
 		this.chainWave(tailParts, speed, 0.05F, -3, entity.ticksExisted, 1);
 		this.chainWave(leftArmParts, speed, 0.05F, -3, entity.ticksExisted, 1);
 		this.chainWave(rightArmParts, speed, 0.05F, -3, entity.ticksExisted, 1);
 		this.chainSwing(tailParts, speed, 0.15F, -3, entity.ticksExisted, 1);
 		this.chainSwing(tailParts, speed2, 0.25F, -3, f, f1);
-		//this.chainWave(neckParts, speed, 0.15F, 3, entity.ticksExisted, 1);
+		this.chainWave(neckParts, speed, 0.15F, 3, entity.ticksExisted, 1);
 		//((ChainBuffer)((EntityVelociraptor)entity).tailbuffer).applyChainSwingBuffer(tailParts);
 
 	}
@@ -340,141 +340,142 @@ public class ModelVelociraptor extends ModelNewPrehistoric {
 	}
 
 	public void renderHeldItem(RenderPrehistoric renderPrehistoric, EntityLiving entity, float f) {
-		 GL11.glColor3f(1.0F, 1.0F, 1.0F);
-		 renderPrehistoric.superRenderEquippedItems(entity, f);
-	        ItemStack itemstack = entity.getHeldItem();
-	        ItemStack itemstack1 = entity.func_130225_q(3);
-	        Item item;
-	        float f1;
+		GL11.glColor3f(1.0F, 1.0F, 1.0F);
+		renderPrehistoric.superRenderEquippedItems(entity, f);
+		ItemStack itemstack = entity.getHeldItem();
+		ItemStack itemstack1 = entity.func_130225_q(3);
+		Item item;
+		float f1;
 
-	        if (itemstack1 != null)
-	        {
-	            GL11.glPushMatrix();
-	            item = itemstack1.getItem();
+		if (itemstack1 != null)
+		{
+			GL11.glPushMatrix();
+			item = itemstack1.getItem();
 
-	            net.minecraftforge.client.IItemRenderer customRenderer = net.minecraftforge.client.MinecraftForgeClient.getItemRenderer(itemstack1, net.minecraftforge.client.IItemRenderer.ItemRenderType.EQUIPPED);
-	            boolean is3D = (customRenderer != null && customRenderer.shouldUseRenderHelper(net.minecraftforge.client.IItemRenderer.ItemRenderType.EQUIPPED, itemstack1, net.minecraftforge.client.IItemRenderer.ItemRendererHelper.BLOCK_3D));
+			net.minecraftforge.client.IItemRenderer customRenderer = net.minecraftforge.client.MinecraftForgeClient.getItemRenderer(itemstack1, net.minecraftforge.client.IItemRenderer.ItemRenderType.EQUIPPED);
+			boolean is3D = (customRenderer != null && customRenderer.shouldUseRenderHelper(net.minecraftforge.client.IItemRenderer.ItemRenderType.EQUIPPED, itemstack1, net.minecraftforge.client.IItemRenderer.ItemRendererHelper.BLOCK_3D));
 
-	            if (item instanceof ItemBlock)
-	            {
-	                if (is3D || RenderBlocks.renderItemIn3d(Block.getBlockFromItem(item).getRenderType()))
-	                {
-	                    f1 = 0.625F;
-	                    GL11.glTranslatef(0.0F, -0.2F, 0.0F);
-	                    GL11.glRotatef(90.0F, 0.0F, 1.0F, 0.0F);
-	                    GL11.glScalef(f1, -f1, -f1);
-	                }
+			if (item instanceof ItemBlock)
+			{
+				if (is3D || RenderBlocks.renderItemIn3d(Block.getBlockFromItem(item).getRenderType()))
+				{
+					f1 = 0.625F;
+					GL11.glTranslatef(0.0F, -0.2F, 0.0F);
+					GL11.glRotatef(90.0F, 0.0F, 1.0F, 0.0F);
+					GL11.glScalef(f1, f1, f1);
+				}
 
-	                renderPrehistoric.getRenderManager().itemRenderer.renderItem(entity, itemstack1, 0);
-	            }
-	            else if (item == Items.skull)
-	            {
-	                f1 = 1.0625F;
-	                GL11.glScalef(f1, -f1, -f1);
-	                GameProfile gameprofile = null;
+				renderPrehistoric.getRenderManager().itemRenderer.renderItem(entity, itemstack1, 0);
+			}
+			else if (item == Items.skull)
+			{
+				f1 = 1.0625F;
+				GL11.glScalef(f1, f1, f1);
+				GameProfile gameprofile = null;
 
-	                if (itemstack1.hasTagCompound())
-	                {
-	                    NBTTagCompound nbttagcompound = itemstack1.getTagCompound();
+				if (itemstack1.hasTagCompound())
+				{
+					NBTTagCompound nbttagcompound = itemstack1.getTagCompound();
 
-	                    if (nbttagcompound.hasKey("SkullOwner", 10))
-	                    {
-	                        gameprofile = NBTUtil.func_152459_a(nbttagcompound.getCompoundTag("SkullOwner"));
-	                    }
-	                    else if (nbttagcompound.hasKey("SkullOwner", 8) && !StringUtils.isNullOrEmpty(nbttagcompound.getString("SkullOwner")))
-	                    {
-	                        gameprofile = new GameProfile((UUID)null, nbttagcompound.getString("SkullOwner"));
-	                    }
-	                }
+					if (nbttagcompound.hasKey("SkullOwner", 10))
+					{
+						gameprofile = NBTUtil.func_152459_a(nbttagcompound.getCompoundTag("SkullOwner"));
+					}
+					else if (nbttagcompound.hasKey("SkullOwner", 8) && !StringUtils.isNullOrEmpty(nbttagcompound.getString("SkullOwner")))
+					{
+						gameprofile = new GameProfile((UUID)null, nbttagcompound.getString("SkullOwner"));
+					}
+				}
 
-	                TileEntitySkullRenderer.field_147536_b.func_152674_a(-0.5F, 0.0F, -0.5F, 1, 180.0F, itemstack1.getItemDamage(), gameprofile);
-	            }
+				TileEntitySkullRenderer.field_147536_b.func_152674_a(-0.5F, 0.0F, -0.5F, 1, 180.0F, itemstack1.getItemDamage(), gameprofile);
+			}
 
-	            GL11.glPopMatrix();
-	        }
+			GL11.glPopMatrix();
+		}
 
-	        if (itemstack != null && itemstack.getItem() != null)
-	        {
-	            item = itemstack.getItem();
-	            GL11.glPushMatrix();
-	            GL11.glTranslatef(0, 0.55F, -0.5F);
-	            this.head.postRender(0.0625F);
+		if (itemstack != null && itemstack.getItem() != null)
+		{
+			item = itemstack.getItem();
+			GL11.glPushMatrix();
+			GL11.glTranslatef(0, 0.55F, -0.55F);
+			GL11.glTranslatef(0, -(head.rotateAngleX - neck.rotateAngleX) + 0.75F, 0);
 
-	            net.minecraftforge.client.IItemRenderer customRenderer = net.minecraftforge.client.MinecraftForgeClient.getItemRenderer(itemstack, net.minecraftforge.client.IItemRenderer.ItemRenderType.EQUIPPED);
-	            boolean is3D = (customRenderer != null && customRenderer.shouldUseRenderHelper(net.minecraftforge.client.IItemRenderer.ItemRenderType.EQUIPPED, itemstack, net.minecraftforge.client.IItemRenderer.ItemRendererHelper.BLOCK_3D));
+			this.head.postRender(0.0625F);
 
-	            if (item instanceof ItemBlock && (is3D || RenderBlocks.renderItemIn3d(Block.getBlockFromItem(item).getRenderType())))
-	            {
-	                f1 = 0.5F;
-	                GL11.glTranslatef(0.0F, 0.1875F, -0.3125F);
-	                f1 *= 0.75F;
-	                GL11.glRotatef(20.0F, 1.0F, 0.0F, 0.0F);
-	                GL11.glRotatef(45.0F, 0.0F, 1.0F, 0.0F);
-	                GL11.glScalef(-f1, -f1, f1);
-	            }
-	            else if (item == Items.bow)
-	            {
-	                f1 = 0.625F;
-	                GL11.glTranslatef(0.0F, 0.125F, 0.3125F);
-	                GL11.glRotatef(-20.0F, 0.0F, 1.0F, 0.0F);
-	                GL11.glScalef(f1, -f1, f1);
-	                GL11.glRotatef(-100.0F, 1.0F, 0.0F, 0.0F);
-	                GL11.glRotatef(45.0F, 0.0F, 1.0F, 0.0F);
-	            }
-	            else if (item.isFull3D())
-	            {
-	                f1 = 0.625F;
+			net.minecraftforge.client.IItemRenderer customRenderer = net.minecraftforge.client.MinecraftForgeClient.getItemRenderer(itemstack, net.minecraftforge.client.IItemRenderer.ItemRenderType.EQUIPPED);
+			boolean is3D = (customRenderer != null && customRenderer.shouldUseRenderHelper(net.minecraftforge.client.IItemRenderer.ItemRenderType.EQUIPPED, itemstack, net.minecraftforge.client.IItemRenderer.ItemRendererHelper.BLOCK_3D));
 
-	                if (item.shouldRotateAroundWhenRendering())
-	                {
-	                    GL11.glRotatef(180.0F, 0.0F, 0.0F, 1.0F);
-	                    GL11.glTranslatef(0.0F, -0.125F, 0.0F);
-	                }
+			if (item instanceof ItemBlock && (is3D || RenderBlocks.renderItemIn3d(Block.getBlockFromItem(item).getRenderType())))
+			{
+				f1 = 0.5F;
+				GL11.glTranslatef(0.0F, 0.1875F, -0.3125F);
+				f1 *= 0.75F;
+				GL11.glRotatef(20.0F, 1.0F, 0.0F, 0.0F);
+				GL11.glRotatef(45.0F, 0.0F, 1.0F, 0.0F);
+				GL11.glScalef(f1, f1, f1);
+			}
+			else if (item == Items.bow)
+			{
+				f1 = 0.625F;
+				GL11.glTranslatef(0.0F, 0.125F, 0.3125F);
+				GL11.glRotatef(-20.0F, 0.0F, 1.0F, 0.0F);
+				GL11.glScalef(f1, f1, f1);
+				GL11.glRotatef(-100.0F, 1.0F, 0.0F, 0.0F);
+				GL11.glRotatef(45.0F, 0.0F, 1.0F, 0.0F);
+			}
+			else if (item.isFull3D())
+			{
+				f1 = 0.625F;
 
-	                GL11.glTranslatef(0.0F, 0.1875F, 0.0F);
-	                GL11.glScalef(f1, -f1, f1);
-	                GL11.glRotatef(-100.0F, 1.0F, 0.0F, 0.0F);
-	                GL11.glRotatef(45.0F, 0.0F, 1.0F, 0.0F);
-	            }
-	            else
-	            {
-	                f1 = 0.375F;
-	                GL11.glScalef(f1, f1, f1);
-	                GL11.glTranslatef(f1 * 1.5F, 0, -1.8F);
-	                GL11.glRotatef(90.0F, 0.0F, 0.0F, 1.0F);
-	                GL11.glRotatef(-150.0F, 0.0F, 1.0F, 0.0F);
-	                float speed = -0.1F;
-	                float degree = -0.02F;
-		           // GL11.glTranslatef(0, -(float) (Math.sin(f * speed) * f1 * degree - f1 * degree), 0);
+				if (item.shouldRotateAroundWhenRendering())
+				{
+					GL11.glRotatef(180.0F, 0.0F, 0.0F, 1.0F);
+					GL11.glTranslatef(0.0F, -0.125F, 0.0F);
+				}
 
-	            }
+				GL11.glTranslatef(0.0F, 0.1875F, 0.0F);
+				GL11.glScalef(f1, f1, f1);
+				GL11.glRotatef(-100.0F, 1.0F, 0.0F, 0.0F);
+				GL11.glRotatef(45.0F, 0.0F, 1.0F, 0.0F);
+			}
+			else
+			{
+				f1 = 0.375F;
+				GL11.glScalef(f1, f1, f1);
+				GL11.glTranslatef(0.4F, 0.2F, -1.8F);
+				GL11.glRotatef(90.0F, 0.0F, 0.0F, 1.0F);
+				GL11.glRotatef(-150.0F, 0.0F, 1.0F, 0.0F);
+				float speed = -0.1F;
+				float degree = -0.02F;
 
-	            float f2;
-	            int i;
-	            float f5;
-	            if (itemstack.getItem().requiresMultipleRenderPasses())
-	            {
-	                for (i = 0; i < itemstack.getItem().getRenderPasses(itemstack.getItemDamage()); ++i)
-	                {
-	                    int j = itemstack.getItem().getColorFromItemStack(itemstack, i);
-	                    f5 = (float)(j >> 16 & 255) / 255.0F;
-	                    f2 = (float)(j >> 8 & 255) / 255.0F;
-	                    float f3 = (float)(j & 255) / 255.0F;
-	                    GL11.glColor4f(f5, f2, f3, 1.0F);
-	                    renderPrehistoric.getRenderManager().itemRenderer.renderItem(entity, itemstack, i);
-	                }
-	            }
-	            else
-	            {
-	                i = itemstack.getItem().getColorFromItemStack(itemstack, 0);
-	                float f4 = (float)(i >> 16 & 255) / 255.0F;
-	                f5 = (float)(i >> 8 & 255) / 255.0F;
-	                f2 = (float)(i & 255) / 255.0F;
-	                GL11.glColor4f(f4, f5, f2, 1.0F);
-	                renderPrehistoric.getRenderManager().itemRenderer.renderItem(entity, itemstack, 0);
-	            }
+			}
 
-	            GL11.glPopMatrix();
-	        }
+			float f2;
+			int i;
+			float f5;
+			if (itemstack.getItem().requiresMultipleRenderPasses())
+			{
+				for (i = 0; i < itemstack.getItem().getRenderPasses(itemstack.getItemDamage()); ++i)
+				{
+					int j = itemstack.getItem().getColorFromItemStack(itemstack, i);
+					f5 = (float)(j >> 16 & 255) / 255.0F;
+					f2 = (float)(j >> 8 & 255) / 255.0F;
+					float f3 = (float)(j & 255) / 255.0F;
+					GL11.glColor4f(f5, f2, f3, 1.0F);
+					renderPrehistoric.getRenderManager().itemRenderer.renderItem(entity, itemstack, i);
+				}
+			}
+			else
+			{
+				i = itemstack.getItem().getColorFromItemStack(itemstack, 0);
+				float f4 = (float)(i >> 16 & 255) / 255.0F;
+				f5 = (float)(i >> 8 & 255) / 255.0F;
+				f2 = (float)(i & 255) / 255.0F;
+				GL11.glColor4f(f4, f5, f2, 1.0F);
+				renderPrehistoric.getRenderManager().itemRenderer.renderItem(entity, itemstack, 0);
+			}
+
+			GL11.glPopMatrix();
+		}
 	}
 }
