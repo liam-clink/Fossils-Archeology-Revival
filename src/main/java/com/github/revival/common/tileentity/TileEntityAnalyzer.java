@@ -406,7 +406,7 @@ ISidedInventory
 				}
 				if (rand > 35 && rand <= 65)
 				{
-					itemstack = new ItemStack(Items.coal, 1, 2);
+					itemstack = new ItemStack(Items.coal, 1, 1);
 				}
 				if (rand > 65 && rand <= 75)
 				{
