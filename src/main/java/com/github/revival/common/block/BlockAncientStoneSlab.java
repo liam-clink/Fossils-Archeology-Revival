@@ -12,6 +12,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import net.minecraft.world.World;
 
 import java.util.List;
 import java.util.Random;
@@ -55,6 +56,12 @@ public class BlockAncientStoneSlab extends BlockSlab
     protected ItemStack createStackedBlock(int par1)
     {
         return new ItemStack(FABlockRegistry.ancientStoneSingleSlab, 2, par1 & 7);
+    }
+
+    @SideOnly(Side.CLIENT)
+    public Item getItem(World world, int x, int y, int z)
+    {
+        return Item.getItemFromBlock(this);
     }
 
     /**
