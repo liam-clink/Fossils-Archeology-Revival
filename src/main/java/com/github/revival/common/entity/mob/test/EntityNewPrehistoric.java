@@ -134,6 +134,8 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	public boolean clientSitting;
 	public boolean clientSleeping;
 
+	public float sitProgress;
+
 	public EntityNewPrehistoric(World world, EnumPrehistoric selfType) {
 		super(world);
 		this.updateSize();
@@ -640,6 +642,18 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	public void onUpdate(){
 		super.onUpdate();
 		this.updateSize();
+
+		boolean sitting = isSitting();
+
+		if (sitting && sitProgress < 20.0F)
+		{
+			sitProgress += 0.5F;
+		}
+		else if (!sitting && sitProgress > 0.0F)
+		{
+			sitProgress -= 0.5F;
+		}
+
 		animation_frame++;
 		AnimationTicker.tickAnimations(this);
 		if (!this.worldObj.isRemote && this.aiClimbType() == Climbing.ARTHROPOD)
@@ -1116,9 +1130,9 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		this.sendSitPacket();
 	}
 
-	public void setSitting(boolean var1)
+	public void setSitting(boolean sitting)
 	{
-		super.setSitting(var1);
+		super.setSitting(sitting);
 		this.sendSitPacket();
 	}
 

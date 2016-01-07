@@ -51,9 +51,9 @@ public class EntityPrehistoric extends EntityTameable implements IPrehistoricAI
 	private int maxHerdSize;
 	private float herdWanderRadius;
 
-	public EntityPrehistoric(World par1World)
+	public EntityPrehistoric(World world)
 	{
-		super(par1World);
+		super(world);
 	}
 
 	protected void entityInit()

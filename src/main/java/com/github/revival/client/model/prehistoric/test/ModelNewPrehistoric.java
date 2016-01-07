@@ -15,10 +15,7 @@ public abstract class ModelNewPrehistoric extends MowzieModelBase{
 	public void carryOutPoses(Entity entity){
 		if(entity instanceof EntityNewPrehistoric){
 			EntityNewPrehistoric prehistoric = (EntityNewPrehistoric)entity;
-			if(prehistoric.isSitting()){
-				sitPose(false);
-			}
-			else if(prehistoric.isSleeping()){
+			if(prehistoric.isSleeping()){
 				sleepPose(false);
 			}
 		}
@@ -26,8 +23,6 @@ public abstract class ModelNewPrehistoric extends MowzieModelBase{
 
 	public abstract void sleepPose(boolean animate);
 	
-	public abstract void sitPose(boolean animate);
-
 	public void hurtPose(boolean animate){}
 
 	public void renderHeldItem(RenderPrehistoric renderPrehistoric, EntityLiving entity, float i) {}
