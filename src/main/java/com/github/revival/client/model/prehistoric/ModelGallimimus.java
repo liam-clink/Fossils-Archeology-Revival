@@ -185,17 +185,17 @@ public class ModelGallimimus extends ModelNewPrehistoric
 		ModelUtils.doMowzieStuff(true, boxList);
 		setRotationAngles(f, f1, f2, f3, f4, f5, (Entity)entity);
 		
-		animator.setAnimationId(EntityNewPrehistoric.animation_sit.animationId);
-		animator.startPhase(20);
-		sitPose(true);
-		animator.endPhase();
-		
-		animator.setAnimationId(EntityNewPrehistoric.animation_getUp.animationId);
-		animator.startPhase(0);
-		sitPose(true);
-		animator.endPhase();
-		animator.resetPhase(20);
-		animator.endPhase();
+//		animator.setAnimationId(EntityNewPrehistoric.animation_sit.animationId);
+//		animator.startPhase(20);
+//		sitPose(true);
+//		animator.endPhase();
+//
+//		animator.setAnimationId(EntityNewPrehistoric.animation_getUp.animationId);
+//		animator.startPhase(0);
+//		sitPose(true);
+//		animator.endPhase();
+//		animator.resetPhase(20);
+//		animator.endPhase();
 
 	}
 
@@ -278,27 +278,27 @@ public class ModelGallimimus extends ModelNewPrehistoric
 
 	}
 
-	@Override
-	public void sitPose(boolean animate) {
-		ModelUtils.animateOrSetRotation(animator, animate, leftFoot, 1.186823891356144F, -0.0F, 0.0F, false);
-		ModelUtils.animateOrSetRotation(animator, animate, rightFoot, 1.186823891356144F, -0.0F, 0.0F, false);
-		ModelUtils.animateOrSetRotation(animator, animate, neck, -0.045553093477052F, -0.0F, 0.0F, false);
-		ModelUtils.animateOrSetRotation(animator, animate, leftUpperArm, -0.3490658503988659F, -0.08726646259971647F, -0.767944870877505F, false);
-		ModelUtils.animateOrSetRotation(animator, animate, leftLeg, -1.186823891356144F, -0.0F, 0.0F, false);
-		ModelUtils.animateOrSetRotation(animator, animate, leftLowerArm, -0.2617993877991494F, -0.0F, 0.0F, false);
-		ModelUtils.animateOrSetRotation(animator, animate, upperBody, 0.36425021489121656F, -0.0F, 0.0F, false);
-		ModelUtils.animateOrSetRotation(animator, animate, lowerBody, -0.045553093477052F, -0.0F, 0.0F, false);
-		ModelUtils.animateOrSetRotation(animator, animate, rightUpperArm, -0.3490658503988659F, -0.08726646259971647F, 0.767944870877505F, false);
-		ModelUtils.animateOrSetRotation(animator, animate, tail3, 0.091106186954104F, 0.0F, 0.0F, false);
-		ModelUtils.animateOrSetRotation(animator, animate, rightLeg, -1.186823891356144F, -0.0F, 0.0F, false);
-		ModelUtils.animateOrSetRotation(animator, animate, tail2, 0.045553093477052F, -0.0F, 0.0F, false);
-		ModelUtils.animateOrSetRotation(animator, animate, tail1, (float)Math.toRadians(-13.04), -0.0F, 0.0F, false);
-		ModelUtils.animateOrSetRotation(animator, animate, rightLowerArm, -0.2617993877991494F, -0.0F, 0.0F, false);
-		ModelUtils.animateToPos(animator, animate, lowerBody, 0F, 14.50F - lowerBody.initRotationPointY, 0F, true);
-		ModelUtils.animateToPos(animator, animate, leftThigh, 0F, 16.60F - leftThigh.initRotationPointY, 0F, true);
-		ModelUtils.animateToPos(animator, animate, rightThigh, 0F, 16.60F - rightThigh.initRotationPointY, 0F, true);
-		ModelUtils.setPos(animator, animate, lowerBody, 0F, 14.50F, -3F, false);
-		ModelUtils.setPos(animator, animate, leftThigh, 3.5F, 16.60F, 5F, false);
-		ModelUtils.setPos(animator, animate, rightThigh, -3.5F, 16.60F, 5F, false);
-	}
+//	@Override
+//	public void sitPose(boolean animate) {
+//		ModelUtils.animateOrSetRotation(animator, animate, leftFoot, 1.186823891356144F, -0.0F, 0.0F, false);
+//		ModelUtils.animateOrSetRotation(animator, animate, rightFoot, 1.186823891356144F, -0.0F, 0.0F, false);
+//		ModelUtils.animateOrSetRotation(animator, animate, neck, -0.045553093477052F, -0.0F, 0.0F, false);
+//		ModelUtils.animateOrSetRotation(animator, animate, leftUpperArm, -0.3490658503988659F, -0.08726646259971647F, -0.767944870877505F, false);
+//		ModelUtils.animateOrSetRotation(animator, animate, leftLeg, -1.186823891356144F, -0.0F, 0.0F, false);
+//		ModelUtils.animateOrSetRotation(animator, animate, leftLowerArm, -0.2617993877991494F, -0.0F, 0.0F, false);
+//		ModelUtils.animateOrSetRotation(animator, animate, upperBody, 0.36425021489121656F, -0.0F, 0.0F, false);
+//		ModelUtils.animateOrSetRotation(animator, animate, lowerBody, -0.045553093477052F, -0.0F, 0.0F, false);
+//		ModelUtils.animateOrSetRotation(animator, animate, rightUpperArm, -0.3490658503988659F, -0.08726646259971647F, 0.767944870877505F, false);
+//		ModelUtils.animateOrSetRotation(animator, animate, tail3, 0.091106186954104F, 0.0F, 0.0F, false);
+//		ModelUtils.animateOrSetRotation(animator, animate, rightLeg, -1.186823891356144F, -0.0F, 0.0F, false);
+//		ModelUtils.animateOrSetRotation(animator, animate, tail2, 0.045553093477052F, -0.0F, 0.0F, false);
+//		ModelUtils.animateOrSetRotation(animator, animate, tail1, (float)Math.toRadians(-13.04), -0.0F, 0.0F, false);
+//		ModelUtils.animateOrSetRotation(animator, animate, rightLowerArm, -0.2617993877991494F, -0.0F, 0.0F, false);
+//		ModelUtils.animateToPos(animator, animate, lowerBody, 0F, 14.50F - lowerBody.initRotationPointY, 0F, true);
+//		ModelUtils.animateToPos(animator, animate, leftThigh, 0F, 16.60F - leftThigh.initRotationPointY, 0F, true);
+//		ModelUtils.animateToPos(animator, animate, rightThigh, 0F, 16.60F - rightThigh.initRotationPointY, 0F, true);
+//		ModelUtils.setPos(animator, animate, lowerBody, 0F, 14.50F, -3F, false);
+//		ModelUtils.setPos(animator, animate, leftThigh, 3.5F, 16.60F, 5F, false);
+//		ModelUtils.setPos(animator, animate, rightThigh, -3.5F, 16.60F, 5F, false);
+//	}
 }
