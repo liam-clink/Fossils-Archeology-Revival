@@ -92,7 +92,7 @@ public class TileEntityDrum extends TileEntity
         // - 1*/)));
         // String var2 = Revival.GetLangTextByKey("Drum.Head");
         // String var3 = this.GetOrderString();
-        Revival.ShowMessage(
+        Revival.showMessage(
                 StatCollector
                         .translateToLocal(LocalizationStrings.DRUM_TRIGGER)
                         + StatCollector.translateToLocal("order."
@@ -123,7 +123,7 @@ public class TileEntityDrum extends TileEntity
                 if (EnumPrehistoric.values()[i].orderItem != null
                         && EnumPrehistoric.values()[i].orderItem == item)
                 {
-                    Revival.ShowMessage(
+                    Revival.showMessage(
                             StatCollector
                                     .translateToLocal(LocalizationStrings.DRUM_ORDERING)
                                     + StatCollector
@@ -168,7 +168,7 @@ public class TileEntityDrum extends TileEntity
         }
         else
         {
-            Revival.ShowMessage(StatCollector
+            Revival.showMessage(StatCollector
                     .translateToLocal(LocalizationStrings.DRUM_TREX
                             + String.valueOf(this.Order.ordinal() + 1)), var2);
             List list = this.worldObj.getEntitiesWithinAABB(

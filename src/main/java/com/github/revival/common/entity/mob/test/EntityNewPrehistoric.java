@@ -134,6 +134,8 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	public boolean clientSitting;
 	public boolean clientSleeping;
 
+	public float sitProgress;
+
 	public EntityNewPrehistoric(World world, EnumPrehistoric selfType) {
 		super(world);
 		this.updateSize();
@@ -413,7 +415,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	public void onLivingUpdate(){
 		super.onLivingUpdate();
 
-		if(this.getRNG().nextInt(200) == 0 && !this.isSitting() && sitTick == 0 && this.getAnimation() != this.animation_sit){
+		if(this.getRNG().nextInt(800) == 0 && !this.isSitting() && sitTick == 0 && this.getAnimation() != this.animation_sit){
 			sitTick = 1;
 		}
 		if(sitTick == 1){
@@ -429,7 +431,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 			this.setSitting(true);
 		}
 
-		if(this.getRNG().nextInt(200) == 0 && this.isSitting() && getUpTick == 0 && this.getAnimation() != this.animation_getUp){
+		if(this.getRNG().nextInt(800) == 0 && this.isSitting() && getUpTick == 0 && this.getAnimation() != this.animation_getUp){
 			getUpTick = 1;
 			this.setAnimation(animation_getUp);
 		}
@@ -640,6 +642,18 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	public void onUpdate(){
 		super.onUpdate();
 		this.updateSize();
+
+		boolean sitting = isSitting();
+
+		if (sitting && sitProgress < 20.0F)
+		{
+			sitProgress += 0.5F;
+		}
+		else if (!sitting && sitProgress > 0.0F)
+		{
+			sitProgress -= 0.5F;
+		}
+
 		animation_frame++;
 		AnimationTicker.tickAnimations(this);
 		if (!this.worldObj.isRemote && this.aiClimbType() == Climbing.ARTHROPOD)
@@ -934,7 +948,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 			String Status1 = StatCollector.translateToLocal(("status." + var1.toString() + ".head"));
 			String Dino = this.selfType.toString();
 			String Status2 = StatCollector.translateToLocal("status." + var1.toString());
-			Revival.ShowMessage(Status1 + Dino + " " + Status2, (EntityPlayer) this.getOwner());
+			Revival.showMessage(Status1 + Dino + " " + Status2, (EntityPlayer) this.getOwner());
 		}
 	}
 	@Override
@@ -1116,9 +1130,9 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		this.sendSitPacket();
 	}
 
-	public void setSitting(boolean var1)
+	public void setSitting(boolean sitting)
 	{
-		super.setSitting(var1);
+		super.setSitting(sitting);
 		this.sendSitPacket();
 	}
 
@@ -1289,7 +1303,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
 					if (!this.worldObj.isRemote)
 					{
-						Revival.ShowMessage(StatCollector.translateToLocal(LocalizationStrings.STATUS_ESSENCE_FAIL), player);
+						Revival.showMessage(StatCollector.translateToLocal(LocalizationStrings.STATUS_ESSENCE_FAIL), player);
 					}
 
 					return false;
@@ -1449,7 +1463,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
 	private void sendOrderMessage(EnumOrderType var1) {
 		String S = StatCollector.translateToLocal(LocalizationStrings.ORDER_HEAD) + StatCollector.translateToLocal("order." + var1.toString());
-		Revival.ShowMessage(S, (EntityPlayer) this.getOwner());
+		Revival.showMessage(S, (EntityPlayer) this.getOwner());
 	}
 
 	public void nudgeEntity(EntityPlayer player)

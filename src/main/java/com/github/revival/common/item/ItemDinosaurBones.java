@@ -16,7 +16,6 @@ import java.util.List;
 public class ItemDinosaurBones extends Item
 {
 
-	@SideOnly(Side.CLIENT)
 	public IIcon[] icons = new IIcon[EnumDinoBones.values().length];
 	String itemType;
 
@@ -58,11 +57,8 @@ public class ItemDinosaurBones extends Item
 	{
 		for (int i = 0; i < icons.length; i++)
 		{
-			if (i != 0) //Silly Nautilus, bones are for dinosaurs.
-			{
-				ItemStack itemstack = new ItemStack(item, 1, i);
-				list.add(itemstack);
-			}
+			ItemStack itemstack = new ItemStack(item, 1, i);
+			list.add(itemstack);
 		}
 	}
 

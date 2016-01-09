@@ -1050,7 +1050,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
     public void SendOrderMessage(EnumOrderType var1)
     {
         String S = StatCollector.translateToLocal(LocalizationStrings.ORDER_HEAD) + StatCollector.translateToLocal("order." + var1.toString());
-        Revival.ShowMessage(S, (EntityPlayer) this.getOwner());
+        Revival.showMessage(S, (EntityPlayer) this.getOwner());
     }
 
     public void SendStatusMessage(EnumSituation var1)
@@ -1060,7 +1060,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
             String Status1 = StatCollector.translateToLocal(("status." + var1.toString() + ".head"));
             String Dino = this.SelfType.toString();
             String Status2 = StatCollector.translateToLocal("status." + var1.toString());
-            Revival.ShowMessage(Status1 + Dino + " " + Status2, (EntityPlayer) this.getOwner());
+            Revival.showMessage(Status1 + Dino + " " + Status2, (EntityPlayer) this.getOwner());
         }
     }
 
@@ -1534,7 +1534,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
 
                     if (!this.worldObj.isRemote)
                     {
-                        Revival.ShowMessage(
+                        Revival.showMessage(
                                 StatCollector
                                         .translateToLocal(LocalizationStrings.STATUS_ESSENCE_FAIL),
                                 player);

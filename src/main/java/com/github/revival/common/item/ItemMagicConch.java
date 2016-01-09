@@ -75,7 +75,7 @@ public class ItemMagicConch extends Item
         // Revival.ShowMessage(var10 + var9 + var11 + " " + var13 + var12, var3);
         if (!var3.worldObj.isRemote)
         {
-            Revival.ShowMessage(var10 + var9 + " " + var13, var3);
+            Revival.showMessage(var10 + var9 + " " + var13, var3);
         }
         return var1;
     }

@@ -16,7 +16,7 @@ public class FossilConnectionEvent
 
         if (Revival.enableDebugging())
         {
-            Revival.ShowMessage("------- DEBUG MODE IS ON. TURN OFF BEFORE RELEASING! --------", player);
+            Revival.showMessage("------- DEBUG MODE IS ON. TURN OFF BEFORE RELEASING! --------", player);
         }
 
         switch (Revival.modState)
@@ -25,18 +25,18 @@ public class FossilConnectionEvent
 
                 if (FossilConfig.loginMessage)
                 {
-                    Revival.ShowMessage("You are running F/A:Revival Dev Build, ${version}.", player);
-                    Revival.ShowMessage("Github: https://github.com/FossilsArcheologyRevival/FossilArcheology1.7", player);
+                    Revival.showMessage("You are running F/A:Revival Dev Build, ${version}.", player);
+                    Revival.showMessage("Github: https://github.com/FossilsArcheologyRevival/FossilArcheology1.7", player);
                 }
                 return;
 
             case BETA:
                 if (FossilConfig.loginMessage)
                 {
-                    Revival.ShowMessage("You are running Fossils and Archaeology Revival ${version}.", player);
-                    Revival.ShowMessage("This mod is currently in a BETA state. Be sure to backup worlds.", player);
-                    Revival.ShowMessage("Forum and support: http://www.minecraftforum.net/topic/1708636-", player);
-                    Revival.ShowMessage("Github: https://github.com/FossilsArcheologyRevival/FossilArcheology1.7", player);
+                    Revival.showMessage("You are running Fossils and Archaeology Revival ${version}.", player);
+                    Revival.showMessage("This mod is currently in a BETA state. Be sure to backup worlds.", player);
+                    Revival.showMessage("Forum and support: http://www.minecraftforum.net/topic/1708636-", player);
+                    Revival.showMessage("Github: https://github.com/FossilsArcheologyRevival/FossilArcheology1.7", player);
                     Revival.instance.config.load();
                     Revival.instance.config.get("option", "Display_Login_Message", false).set(false);
                     Revival.instance.config.save();
@@ -46,9 +46,9 @@ public class FossilConnectionEvent
             case RELEASE:
                 if (FossilConfig.loginMessage)
                 {
-                    Revival.ShowMessage("You are running Fossils and Archaeology Revival ${version}.", player);
-                    Revival.ShowMessage("Forum and support: http://www.minecraftforum.net/topic/1708636-", player);
-                    Revival.ShowMessage("Github: https://github.com/FossilsArcheologyRevival/FossilArcheology1.7", player);
+                    Revival.showMessage("You are running Fossils and Archaeology Revival ${version}.", player);
+                    Revival.showMessage("Forum and support: http://www.minecraftforum.net/topic/1708636-", player);
+                    Revival.showMessage("Github: https://github.com/FossilsArcheologyRevival/FossilArcheology1.7", player);
                     Revival.instance.config.load();
                     Revival.instance.config.get("option", "Display_Login_Message", false).set(false);
                     Revival.instance.config.save();

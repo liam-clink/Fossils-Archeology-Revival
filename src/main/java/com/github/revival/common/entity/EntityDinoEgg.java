@@ -482,7 +482,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
 
                 if (FMLCommonHandler.instance().getSide().isServer())
                 {
-                    Revival.ShowMessage(var1 + StatCollector.translateToLocal("entity.fossil." + this.DinoInside.toString())/*EntityDinosaur.GetNameByEnum(this.DinoInside, false)*/ + var6, player);
+                    Revival.showMessage(var1 + StatCollector.translateToLocal("entity.fossil." + this.DinoInside.toString())/*EntityDinosaur.GetNameByEnum(this.DinoInside, false)*/ + var6, player);
                 }
             }
 
@@ -803,7 +803,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
                         break;
 
                     default:
-                        Revival.ShowMessage("ERROR 404: Dinosaur not found. Please report this bug to a developer.", player);
+                        Revival.showMessage("ERROR 404: Dinosaur not found. Please report this bug to a developer.", player);
                         //System.err.println("EGGERROR2"+String.valueOf(i));
                         this.setDead();
                         return;
@@ -842,7 +842,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
 
                         if (player != null)
                         {
-                            Revival.ShowMessage(StatCollector.translateToLocal(LocalizationStrings.DINOEGG_HATCHED), player);
+                            Revival.showMessage(StatCollector.translateToLocal(LocalizationStrings.DINOEGG_HATCHED), player);
                         }
                     }
                     this.setDead();
@@ -850,7 +850,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
                 else
                 {
                     //System.err.println("EGGERROR-NOPLACE");
-                    Revival.ShowMessage(StatCollector.translateToLocal(LocalizationStrings.DINOEGG_NOSPACE), player);
+                    Revival.showMessage(StatCollector.translateToLocal(LocalizationStrings.DINOEGG_NOSPACE), player);
                     this.setBirthTick(this.getBirthTick() - 500);
                     //System.err.println("EGGERROR3"+String.valueOf(i));
                 }

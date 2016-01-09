@@ -64,6 +64,7 @@ import com.github.revival.common.gen.WorldGeneratorPalaeoraphe;
 import com.github.revival.common.gen.structure.AcademyGenerator;
 import com.github.revival.common.gen.structure.ShipWreckGenerator;
 import com.github.revival.common.handler.EventFossilAchivements;
+import com.github.revival.common.handler.EventPlayer;
 import com.github.revival.common.handler.FossilAchievementHandler;
 import com.github.revival.common.handler.FossilBonemealEvent;
 import com.github.revival.common.handler.FossilConnectionEvent;
@@ -109,7 +110,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.relauncher.Side;
 
-@Mod(modid = Revival.modid, name = "Fossil/Archeology", version = "7.3", dependencies = "required-after:llibrary@[0.3.0-1.7.10,)")
+@Mod(modid = Revival.modid, name = "Fossil/Archeology", version = "7.3", dependencies = "required-after:llibrary@[0.3.2-1.7.10,)")
 public class Revival
 {
 	public static final String modid = "fossil";
@@ -142,7 +143,7 @@ public class Revival
 		return true;
 	}
 
-	public static void ShowMessage(String var6, EntityPlayer var1)
+	public static void showMessage(String var6, EntityPlayer var1)
 	{
 		if (var1 != null)
 		{
@@ -173,6 +174,7 @@ public class Revival
 		channel.registerMessage(MessageDinoSit.class, MessageDinoSit.class, 2, Side.CLIENT);
 
 		MinecraftForge.EVENT_BUS.register(new FossilBonemealEvent());
+		MinecraftForge.EVENT_BUS.register(new EventPlayer());
 		VillagerRegistry.instance().registerVillageTradeHandler(10, new FossilTradeHandler());
 		VillagerRegistry.instance().registerVillagerId(10);
 

@@ -1,17 +1,25 @@
 package com.github.revival.common.entity.mob;
 
-import com.github.revival.Revival;
-import com.github.revival.common.entity.EntityMLighting;
-import com.github.revival.common.entity.ai.AnuAIArrowAttack;
-import com.github.revival.common.entity.ai.AnuAIAttackOnCollide;
-import com.github.revival.common.entity.ai.AnuAIAvoidEntity;
-import com.github.revival.common.gen.feature.WorldGenSpikesBlock;
-import com.github.revival.common.handler.FossilAchievementHandler;
-import com.github.revival.common.item.FAItemRegistry;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
+import java.util.List;
+
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.IEntityLivingData;
+import net.minecraft.entity.IRangedAttackMob;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.boss.IBossDisplayData;
-import net.minecraft.entity.monster.*;
+import net.minecraft.entity.monster.EntityBlaze;
+import net.minecraft.entity.monster.EntityGhast;
+import net.minecraft.entity.monster.EntityGolem;
+import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.entity.projectile.EntityLargeFireball;
@@ -20,10 +28,23 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.*;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.ChunkCoordinates;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.MathHelper;
+import net.minecraft.util.StatCollector;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
-import java.util.List;
+import com.github.revival.Revival;
+import com.github.revival.common.entity.EntityFAPlayer;
+import com.github.revival.common.entity.EntityMLighting;
+import com.github.revival.common.entity.ai.AnuAIArrowAttack;
+import com.github.revival.common.entity.ai.AnuAIAttackOnCollide;
+import com.github.revival.common.entity.ai.AnuAIAvoidEntity;
+import com.github.revival.common.gen.feature.WorldGenSpikesBlock;
+import com.github.revival.common.handler.FossilAchievementHandler;
+import com.github.revival.common.item.FAItemRegistry;
 
 
 public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAttackMob
@@ -75,7 +96,7 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
     {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(40.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(600D);
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(1D);
         this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.35D);
     }
 
@@ -132,7 +153,7 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
                                 {
 
                                     if (!this.worldObj.isRemote)
-                                        Revival.ShowMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " +
+                                        Revival.showMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " +
                                                 StatCollector.translateToLocal("anuSpeaker.mySword"), (EntityPlayer) targetEntity);
 
                                     return super.attackEntityFrom(damageSource, var2);
@@ -143,7 +164,7 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
                                 {
 
                                     if (!this.worldObj.isRemote)
-                                        Revival.ShowMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " +
+                                        Revival.showMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " +
                                                 StatCollector.translateToLocal("anuSpeaker.draw"), (EntityPlayer) targetEntity);
 
                                     return super.attackEntityFrom(damageSource, var2);
@@ -152,7 +173,7 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
                                 if (damageSource.damageType == "arrow")
                                 {
                                     if (!this.worldObj.isRemote)
-                                        Revival.ShowMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " +
+                                        Revival.showMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " +
                                                 StatCollector.translateToLocal("anuSpeaker.coward"), (EntityPlayer) targetEntity);
 
                                     return super.attackEntityFrom(damageSource, var2);
@@ -191,12 +212,12 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
         {
             if (this.getRNG().nextInt(1) == 0)
             {
-                Revival.ShowMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " +
+                Revival.showMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " +
                         StatCollector.translateToLocal("anuSpeaker.hello"), (EntityPlayer) entityplayer);
             }
             else
             {
-                Revival.ShowMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " +
+                Revival.showMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " +
                         StatCollector.translateToLocal("anuSpeaker.fewBeaten"), (EntityPlayer) entityplayer);
             }
 
@@ -207,12 +228,11 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
         return null;
     }
 
-    public void onDeath(DamageSource dmg)
-    {
-
-        if (dmg.getSourceOfDamage() instanceof EntityArrow && dmg.getEntity() instanceof EntityPlayer)
-        {
+    public void onDeath(DamageSource dmg){
+        if (dmg.getSourceOfDamage() instanceof EntityArrow || dmg.getEntity() instanceof EntityPlayer){
             EntityPlayer entityplayer = (EntityPlayer) dmg.getEntity();
+        	onKillEntity(entityplayer);
+
             double d0 = entityplayer.posX - this.posX;
             double d1 = entityplayer.posZ - this.posZ;
 
@@ -228,7 +248,7 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
             this.worldObj.spawnEntityInWorld(entity);
         }
         entity.setHealth(0F);
-        Revival.ShowMessage(
+        Revival.showMessage(
                 StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " +
                         StatCollector.translateToLocal("anuSpeaker.no"), this.worldObj.getClosestPlayerToEntity(this, 50));
         super.onDeath(dmg);
@@ -385,7 +405,7 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
             }
             if (spawnPigmenChoice == 0)
             {
-                Revival.ShowMessage(
+                Revival.showMessage(
                         StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " +
                                 StatCollector.translateToLocal("anuSpeaker.trans"), this.worldObj.getClosestPlayerToEntity(this, 50));
                 this.spawnMobs(new EntitySentryPigman(worldObj));
@@ -393,14 +413,14 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
             if (spawnWitherChoice == 0)
             {
                 this.spawnMobs(new EntitySkeleton(worldObj));
-                Revival.ShowMessage(
+                Revival.showMessage(
                         StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " +
                                 StatCollector.translateToLocal("anuSpeaker.archers"), this.worldObj.getClosestPlayerToEntity(this, 50));
             }
             if (spawnBlazeChoice == 0)
             {
                 this.spawnMobs(new EntityBlaze(worldObj));
-                Revival.ShowMessage(
+                Revival.showMessage(
                         StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " +
                                 StatCollector.translateToLocal("anuSpeaker.blaze"), this.worldObj.getClosestPlayerToEntity(this, 50));
             }
@@ -535,12 +555,12 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
         {
             if (this.getRNG().nextInt(1) == 0)
             {
-                Revival.ShowMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " +
+                Revival.showMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " +
                         StatCollector.translateToLocal("anuSpeaker.hello"), (EntityPlayer) entityplayer);
             }
             else
             {
-                Revival.ShowMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " +
+                Revival.showMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " +
                         StatCollector.translateToLocal("anuSpeaker.fewBeaten"), (EntityPlayer) entityplayer);
             }
         }
@@ -609,6 +629,13 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
         entitylargefireball.posY = this.posY + (double) (this.height / 2.0F) + 0.5D;
         entitylargefireball.posZ = this.posZ + vec3.zCoord * d8;
         this.worldObj.spawnEntityInWorld(entitylargefireball);
+    }
+
+    public void onKillEntity(EntityLivingBase entity) {
+    	if(entity instanceof EntityPlayer){
+    		EntityPlayer player = (EntityPlayer)entity;
+    		EntityFAPlayer.get(player).setKilledAnu(true);
+    	}
     }
 
 }

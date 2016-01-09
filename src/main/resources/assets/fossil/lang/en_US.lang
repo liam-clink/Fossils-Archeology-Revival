@@ -699,3 +699,6 @@ item.record_bones.name=Fossil Record
 item.record_bones_disc.name=Fossil Record
 item.record.record_bones_disc.desc=WhiteJoshMan - Bones
 item.record.music.anu.desc=Nanotyrano - Awakening
+
+#4f want new stuff at bottom
+anu.breakblock=You cannot break this block until its guardian has been destroyed.

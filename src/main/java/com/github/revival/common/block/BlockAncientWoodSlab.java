@@ -2,6 +2,8 @@ package com.github.revival.common.block;
 
 import com.github.revival.common.creativetab.FATabRegistry;
 import com.github.revival.common.handler.LocalizationStrings;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.material.Material;
@@ -37,6 +39,12 @@ public class BlockAncientWoodSlab extends BlockSlab
             setBlockName(LocalizationStrings.ANCIENT_WOOD_SINGLESLAB_NAME);
             setCreativeTab(FATabRegistry.tabFBlocks);
         }
+    }
+
+    @SideOnly(Side.CLIENT)
+    public Item getItem(World world, int x, int y, int z)
+    {
+        return Item.getItemFromBlock(this);
     }
 
     @Override

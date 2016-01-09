@@ -348,7 +348,7 @@ public class BlockCultivate extends BlockContainer
             // Metres
             {
                 P.addStat(FossilAchievementHandler.failuresaurus, 1);
-                Revival.ShowMessage(var6, P);
+                Revival.showMessage(var6, P);
             }
         }
 

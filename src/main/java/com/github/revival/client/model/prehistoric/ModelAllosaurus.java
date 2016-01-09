@@ -1,5 +1,6 @@
 package com.github.revival.client.model.prehistoric;
 
+import com.github.revival.common.entity.mob.EntityAllosaurus;
 import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelRenderer;
 import net.ilexiconn.llibrary.common.animation.Animator;
 import net.ilexiconn.llibrary.common.animation.IAnimated;
@@ -174,20 +175,7 @@ public class ModelAllosaurus extends ModelNewPrehistoric {
 	public void animate(IAnimated entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		animator.update(entity);
 		ModelUtils.doMowzieStuff(true, boxList);
-		setRotationAngles(f, f1, f2, f3, f4, f5, (Entity)entity);
-		
-		animator.setAnimationId(EntityNewPrehistoric.animation_sit.animationId);
-		animator.startPhase(20);
-		sitPose(true);
-		animator.endPhase();
-		
-		animator.setAnimationId(EntityNewPrehistoric.animation_getUp.animationId);
-		animator.startPhase(0);
-		sitPose(true);
-		animator.endPhase();
-		animator.resetPhase(20);
-		animator.endPhase();
-
+		setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
 	}
 
 	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
@@ -197,7 +185,32 @@ public class ModelAllosaurus extends ModelNewPrehistoric {
 		MowzieModelRenderer[] rightArmParts = {this.rightUpperArm, this.rightLowerArm};
 
 		faceTarget(neck, 1, f3, f4);
-		
+
+        EntityAllosaurus allosaurus = (EntityAllosaurus) entity;
+
+        float sitProgress = allosaurus.sitProgress;
+        sitAnimationRotation(lowerBody, sitProgress, -((float)Math.toRadians(2.0D)), 0, 0);
+        sitAnimationRotation(rightUpperLeg, sitProgress, -((float)Math.toRadians(28.0D)), 0, 0);
+        sitAnimationRotation(tail2, sitProgress, (float)Math.toRadians(5.22D), 0, 0);
+        sitAnimationRotation(neck, sitProgress, -((float)Math.toRadians(44.35D)), 0, 0);
+        sitAnimationRotation(rightCrest, sitProgress, -((float)Math.toRadians(39.99999883637168D)), 0, -((float)Math.toRadians(18.000000500895634D)));
+        sitAnimationRotation(leftFoot, sitProgress, (float)Math.toRadians(90.0D), 0, 0);
+        sitAnimationRotation(rightFoot, sitProgress, (float)Math.toRadians(90.0D), 0, 0);
+        sitAnimationRotation(lowerJaw, sitProgress, -((float)Math.toRadians(3.6841641626103416D)), 0, 0);
+        sitAnimationRotation(leftLowerLeg, sitProgress, -((float)Math.toRadians(60.0D)), 0, 0);
+        sitAnimationRotation(tail3, sitProgress, (float)Math.toRadians(7.83D), 0, 0);
+        sitAnimationRotation(leftLowerArm, sitProgress, -((float)Math.toRadians(88.0D)), 0, 0);
+        sitAnimationRotation(leftCrest, sitProgress, -((float)Math.toRadians(39.99999883637168D)), 0, (float)Math.toRadians(18.000000500895634D));
+        sitAnimationRotation(rightLowerLeg, sitProgress, -((float)Math.toRadians(60.0D)), 0, 0);
+        sitAnimationRotation(tail1, sitProgress, -((float)Math.toRadians(18.26D)), 0, 0);
+        sitAnimationRotation(leftUpperLeg, sitProgress, -((float)Math.toRadians(28.0D)), 0, 0);
+        sitAnimationRotation(rightUpperArm, sitProgress, (float)Math.toRadians(9.23D), 0, 0);
+        sitAnimationRotation(rightLowerArm, sitProgress, -((float)Math.toRadians(88.0D)), 0, 0);
+        sitAnimationRotation(head, sitProgress, (float)Math.toRadians(67.83D), 0, 0);
+        sitAnimationPos(lowerBody, sitProgress, 0F, 15.30F - lowerBody.initRotationPointY, 0F);
+        sitAnimationPos(rightUpperLeg, sitProgress, 0F, 17.50F - rightUpperLeg.initRotationPointY, 0F);
+        sitAnimationPos(leftUpperLeg, sitProgress, 0F, 17.50F - leftUpperLeg.initRotationPointY, 0F);
+
 		float speed = 0.1F;
 		float speed2 = 0.5F;
 		if(((IAnimated)entity).getAnimation().animationId == 0)
@@ -220,39 +233,10 @@ public class ModelAllosaurus extends ModelNewPrehistoric {
 
 	}
 
+
 	@Override
 	public void sleepPose(boolean animate) {
 		
         
-	}
-
-	@Override
-	public void sitPose(boolean animate) {
-		ModelUtils.animateOrSetRotation(animator, animate, leftUpperArm, 0.16109388995907664F, 0.0F, 0.0F, false);
-    	ModelUtils.animateOrSetRotation(animator, animate, neck, -0.7740535232594852F, 0.0F, 0.0F, false);
-    	ModelUtils.animateOrSetRotation(animator, animate, leftUpperLeg, -0.4886921905584123F, 0.0F, 0.0F, false);
-    	ModelUtils.animateOrSetRotation(animator, animate, leftLowerLeg, -1.0471975511965976F, 0.0F, 0.0F, false);
-    	ModelUtils.animateOrSetRotation(animator, animate, leftFoot, 1.5707963267948966F, 0.0F, 0.0F, false);
-    	ModelUtils.animateOrSetRotation(animator, animate, tail3, 0.136659280431156F, 0.0F, 0.0F, false);
-    	ModelUtils.animateOrSetRotation(animator, animate, head, 1.1838568316277536F, 0.0F, 0.0F, false);
-    	ModelUtils.animateOrSetRotation(animator, animate, lowerBody, -0.03490658503988659F, 0.0F, 0.0F, false);
-    	ModelUtils.animateOrSetRotation(animator, animate, lowerJaw, -0.06430079482153023F, 0.0F, 0.0F, false);
-    	ModelUtils.animateOrSetRotation(animator, animate, rightFoot, 1.5707963267948966F, 0.0F, 0.0F, false);
-    	ModelUtils.animateOrSetRotation(animator, animate, tail2, 0.091106186954104F, 0.0F, 0.0F, false);
-    	ModelUtils.animateOrSetRotation(animator, animate, leftLowerArm, -1.53588974175501F, 0.0F, 0.0F, false);
-    	ModelUtils.animateOrSetRotation(animator, animate, leftCrest, -0.6981316804885863F, 0.0F, 0.3141592741012573F, false);
-    	ModelUtils.animateOrSetRotation(animator, animate, rightUpperLeg, -0.4886921905584123F, 0.0F, 0.0F, false);
-    	ModelUtils.animateOrSetRotation(animator, animate, tail1, -0.31869712141416456F, 0.0F, 0.0F, false);
-    	ModelUtils.animateOrSetRotation(animator, animate, rightLowerArm, -1.53588974175501F, 0.0F, 0.0F, false);
-    	ModelUtils.animateOrSetRotation(animator, animate, rightUpperArm, 0.16109388995907664F, 0.0F, 0.0F, false);
-    	ModelUtils.animateOrSetRotation(animator, animate, rightCrest, -0.6981316804885863F, 0.0F, -0.3141592741012573F, false);
-    	ModelUtils.animateOrSetRotation(animator, animate, rightLowerLeg, -1.0471975511965976F, 0.0F, 0.0F, false);
-    	ModelUtils.animateOrSetRotation(animator, animate, head, -0F, 0.0F, 0.0F, false);
-		ModelUtils.animateToPos(animator, animate, lowerBody, 0F, 15.30F - lowerBody.initRotationPointY, 0F, true);
-		ModelUtils.animateToPos(animator, animate, rightUpperLeg, 0F, 17.50F - rightUpperLeg.initRotationPointY, 0F, true);
-		ModelUtils.animateToPos(animator, animate, leftUpperLeg, 0F, 17.50F - leftUpperLeg.initRotationPointY, 0F, true);
-		ModelUtils.setPos(animator, animate, lowerBody, 0F, 15.30F, -3F, false);
-		ModelUtils.setPos(animator, animate, rightUpperLeg, -3F, 17.50F, 5.5F, false);
-		ModelUtils.setPos(animator, animate, leftUpperLeg, 3F, 17.50F, 5.5F, false);
 	}
 }

@@ -294,7 +294,7 @@ public class EntityPigBoss extends EntityMob implements IBossDisplayData, IRange
                         if (this.getAttackMode() != 0)
                         {
                             if (!this.worldObj.isRemote)
-                                Revival.ShowMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": "
+                                Revival.showMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": "
                                         + StatCollector.translateToLocal("anuSpeaker.draw"), (EntityPlayer) targetEntity);
 
                             this.SetAttackMode(0);
@@ -308,7 +308,7 @@ public class EntityPigBoss extends EntityMob implements IBossDisplayData, IRange
                         {
 
                             if (!this.worldObj.isRemote)
-                                Revival.ShowMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " +
+                                Revival.showMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " +
                                         StatCollector.translateToLocal("anuSpeaker.mySword"), (EntityPlayer) targetEntity);
 
                             this.SetAttackMode(0);
@@ -321,7 +321,7 @@ public class EntityPigBoss extends EntityMob implements IBossDisplayData, IRange
                         {
 
                             if (!this.worldObj.isRemote)
-                                Revival.ShowMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " +
+                                Revival.showMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " +
                                         StatCollector.translateToLocal("anuSpeaker.draw"), (EntityPlayer) targetEntity);
 
                             this.SetAttackMode(0);
@@ -332,7 +332,7 @@ public class EntityPigBoss extends EntityMob implements IBossDisplayData, IRange
                         if (damageSource.damageType == "arrow" && this.getAttackMode() != 1)
                         {
                             if (!this.worldObj.isRemote)
-                                Revival.ShowMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " +
+                                Revival.showMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " +
                                         StatCollector.translateToLocal("anuSpeaker.coward"), (EntityPlayer) targetEntity);
 
                             this.SetAttackMode(1);
@@ -350,13 +350,13 @@ public class EntityPigBoss extends EntityMob implements IBossDisplayData, IRange
                                 if (this.worldObj.provider.isHellWorld)
                                 {
                                     if (!this.worldObj.isRemote)
-                                        Revival.ShowMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " +
+                                        Revival.showMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " +
                                                 StatCollector.translateToLocal("anuSpeaker.leartHere"), (EntityPlayer) targetEntity);
                                 }
                                 else
                                 {
                                     if (!this.worldObj.isRemote)
-                                        Revival.ShowMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " +
+                                        Revival.showMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " +
                                                 StatCollector.translateToLocal("anuSpeaker.leartThere"), (EntityPlayer) targetEntity);
                                 }
 
@@ -369,7 +369,7 @@ public class EntityPigBoss extends EntityMob implements IBossDisplayData, IRange
                             if (var5 < 6.0D && this.getAttackMode() != 0)
                             {
                                 if (!this.worldObj.isRemote)
-                                    Revival.ShowMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " +
+                                    Revival.showMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " +
                                             StatCollector.translateToLocal("anuSpeaker.unknownRanged"), (EntityPlayer) targetEntity);
 
                                 this.SetAttackMode(0);
@@ -383,7 +383,7 @@ public class EntityPigBoss extends EntityMob implements IBossDisplayData, IRange
                 {
 
                     if (!this.worldObj.isRemote)
-                        Revival.ShowMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " +
+                        Revival.showMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " +
                                 StatCollector.translateToLocal("anuSpeaker.unknownMelee"), (EntityPlayer) targetEntity);
 
                     this.SetAttackMode(1);
@@ -476,12 +476,12 @@ public class EntityPigBoss extends EntityMob implements IBossDisplayData, IRange
         {
             if (this.getRNG().nextInt(1) == 0)
             {
-                Revival.ShowMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " +
+                Revival.showMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " +
                         StatCollector.translateToLocal("anuSpeaker.hello"), (EntityPlayer) entityplayer);
             }
             else
             {
-                Revival.ShowMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " +
+                Revival.showMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " +
                         StatCollector.translateToLocal("anuSpeaker.fewBeaten"), (EntityPlayer) entityplayer);
             }
 
@@ -550,7 +550,7 @@ public class EntityPigBoss extends EntityMob implements IBossDisplayData, IRange
 
                             if (distance < 30.0D)
                             {
-                                Revival.ShowMessage(
+                                Revival.showMessage(
                                         StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " +
                                                 StatCollector.translateToLocal("anuSpeaker.fireRain"), player);
                             }
@@ -699,7 +699,7 @@ public class EntityPigBoss extends EntityMob implements IBossDisplayData, IRange
 
                     if (distance < 30.0D)
                     {
-                        Revival.ShowMessage(
+                        Revival.showMessage(
                                 StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " +
                                         StatCollector.translateToLocal("anuSpeaker.qi"), player);
                     }
@@ -750,7 +750,7 @@ public class EntityPigBoss extends EntityMob implements IBossDisplayData, IRange
 
                 if (distance < 30.0D)
                 {
-                    Revival.ShowMessage(
+                    Revival.showMessage(
                             StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " +
                                     StatCollector.translateToLocal("anuSpeaker.summon"), player);
                 }
@@ -787,7 +787,7 @@ public class EntityPigBoss extends EntityMob implements IBossDisplayData, IRange
 
                 if (distance < 30.0D)
                 {
-                    Revival.ShowMessage(
+                    Revival.showMessage(
                             StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " +
                                     StatCollector.translateToLocal("anuSpeaker.trans"), player);
                 }
