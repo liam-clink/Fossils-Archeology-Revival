@@ -189,6 +189,7 @@ public class ModelAllosaurus extends ModelNewPrehistoric {
         EntityAllosaurus allosaurus = (EntityAllosaurus) entity;
 
         float sitProgress = allosaurus.sitProgress;
+<<<<<<< HEAD
         sitAnimationRotation(lowerBody, sitProgress, -((float)Math.toRadians(2.0D)), 0, 0);
         sitAnimationRotation(rightUpperLeg, sitProgress, -((float)Math.toRadians(28.0D)), 0, 0);
         sitAnimationRotation(tail2, sitProgress, (float)Math.toRadians(5.22D), 0, 0);
@@ -207,6 +208,28 @@ public class ModelAllosaurus extends ModelNewPrehistoric {
         sitAnimationRotation(rightUpperArm, sitProgress, (float)Math.toRadians(9.23D), 0, 0);
         sitAnimationRotation(rightLowerArm, sitProgress, -((float)Math.toRadians(88.0D)), 0, 0);
         sitAnimationRotation(head, sitProgress, (float)Math.toRadians(67.83D), 0, 0);
+=======
+        sitAnimationRotation(leftUpperArm, sitProgress, 0.16109388995907664F, 0.0F, 0.0F);
+        sitAnimationRotation(neck, sitProgress, -0.7740535232594852F, 0.0F, 0.0F);
+        sitAnimationRotation(leftUpperLeg, sitProgress, -0.4886921905584123F, 0.0F, 0.0F);
+        sitAnimationRotation(leftLowerLeg, sitProgress, -1.0471975511965976F, 0.0F, 0.0F);
+        sitAnimationRotation(leftFoot, sitProgress, 1.5707963267948966F, 0.0F, 0.0F);
+        sitAnimationRotation(tail3, sitProgress, 0.136659280431156F, 0.0F, 0.0F);
+        sitAnimationRotation(head, sitProgress, 1.1838568316277536F, 0.0F, 0.0F);
+        sitAnimationRotation(lowerBody, sitProgress, -0.03490658503988659F, 0.0F, 0.0F);
+        sitAnimationRotation(lowerJaw, sitProgress, -0.06430079482153023F, 0.0F, 0.0F);
+        sitAnimationRotation(rightFoot, sitProgress, 1.5707963267948966F, 0.0F, 0.0F);
+        sitAnimationRotation(tail2, sitProgress, 0.091106186954104F, 0.0F, 0.0F);
+        sitAnimationRotation(leftLowerArm, sitProgress, -1.53588974175501F, 0.0F, 0.0F);
+        sitAnimationRotation(leftCrest, sitProgress, -0.6981316804885863F, 0.0F, 0.3141592741012573F);
+        sitAnimationRotation(rightUpperLeg, sitProgress, -0.4886921905584123F, 0.0F, 0.0F);
+        sitAnimationRotation(tail1, sitProgress, -0.31869712141416456F, 0.0F, 0.0F);
+        sitAnimationRotation(rightLowerArm, sitProgress, -1.53588974175501F, 0.0F, 0.0F);
+        sitAnimationRotation(rightUpperArm, sitProgress, 0.16109388995907664F, 0.0F, 0.0F);
+        sitAnimationRotation(rightCrest, sitProgress, -0.6981316804885863F, 0.0F, -0.3141592741012573F);
+        sitAnimationRotation(rightLowerLeg, sitProgress, -1.0471975511965976F, 0.0F, 0.0F);
+        sitAnimationRotation(head, sitProgress, -0F, 0.0F, 0.0F);
+>>>>>>> origin/master
         sitAnimationPos(lowerBody, sitProgress, 0F, 15.30F - lowerBody.initRotationPointY, 0F);
         sitAnimationPos(rightUpperLeg, sitProgress, 0F, 17.50F - rightUpperLeg.initRotationPointY, 0F);
         sitAnimationPos(leftUpperLeg, sitProgress, 0F, 17.50F - leftUpperLeg.initRotationPointY, 0F);
@@ -233,6 +256,22 @@ public class ModelAllosaurus extends ModelNewPrehistoric {
 
 	}
 
+<<<<<<< HEAD
+=======
+    private void sitAnimationRotation(MowzieModelRenderer modelRenderer, float sitProgress, float rotX, float rotY, float rotZ)
+    {
+        modelRenderer.rotateAngleX += sitProgress * rotX / 20.0F;
+        modelRenderer.rotateAngleY += sitProgress * rotY / 20.0F;
+        modelRenderer.rotateAngleZ += sitProgress * rotZ / 20.0F;
+    }
+
+    private void sitAnimationPos(MowzieModelRenderer modelRenderer, float sitProgress, float x, float y, float z)
+    {
+        modelRenderer.rotationPointX += sitProgress * x / 20.0F;
+        modelRenderer.rotationPointY += sitProgress * y / 20.0F;
+        modelRenderer.rotationPointZ += sitProgress * z / 20.0F;
+    }
+>>>>>>> origin/master
 
 	@Override
 	public void sleepPose(boolean animate) {

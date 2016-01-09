@@ -25,7 +25,7 @@ group = "com.github.revival"
 archivesBaseName = "Fossils-and-Archeology-Revival"
 
 minecraft {
-    version = "1.7.10-10.13.4.1448-1.7.10"
+    version = "1.7.10-10.13.4.1558-1.7.10"
     runDir = "minecraft"
     replace '${version}', project.version
 }
@@ -39,7 +39,7 @@ repositories {
 }
 
 dependencies {
-    compile 'net.ilexiconn:llibrary:0.4.3-1.7.10:dev'
+    compile 'net.ilexiconn:llibrary:0.7.0-1.7.10:dev'
 }
 
 processResources {
