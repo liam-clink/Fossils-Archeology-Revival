@@ -184,19 +184,6 @@ public class ModelGallimimus extends ModelNewPrehistoric
 		animator.update(entity);
 		ModelUtils.doMowzieStuff(true, boxList);
 		setRotationAngles(f, f1, f2, f3, f4, f5, (Entity)entity);
-		
-//		animator.setAnimationId(EntityNewPrehistoric.animation_sit.animationId);
-//		animator.startPhase(20);
-//		sitPose(true);
-//		animator.endPhase();
-//
-//		animator.setAnimationId(EntityNewPrehistoric.animation_getUp.animationId);
-//		animator.startPhase(0);
-//		sitPose(true);
-//		animator.endPhase();
-//		animator.resetPhase(20);
-//		animator.endPhase();
-
 	}
 
 	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
@@ -208,8 +195,6 @@ public class ModelGallimimus extends ModelNewPrehistoric
 		faceTarget(head, 1, f3, f4);
 		float speed = 0.1F;
 		float speed2 = 0.5F;
-		if(((IAnimated)entity).getAnimation().animationId == 0)
-			carryOutPoses(entity);
 		this.walk(upperBody, speed, 0.05F, false, 1F, 0F, entity.ticksExisted, 1);
 		this.bob(lowerBody, speed, 0.5F, false, entity.ticksExisted, 1);
 		this.walk(leftThigh, speed2, 0.8F, false, 0F, 0.4F, f, f1);
@@ -264,19 +249,6 @@ public class ModelGallimimus extends ModelNewPrehistoric
 		}
 	}*/
 
-
-	public void sanic_walk(MowzieModelRenderer box, float speed, float degree, boolean invert, float offset, float weight, float f, float f1)
-	{
-		int inverted = 1;
-		if (invert)
-			inverted = -1;
-		box.rotateAngleX += f * degree * inverted * f1 + weight * f1;
-	}
-
-	@Override
-	public void sleepPose(boolean animate) {
-
-	}
 
 //	@Override
 //	public void sitPose(boolean animate) {

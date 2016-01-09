@@ -251,8 +251,6 @@ public class ModelTyrannosaurus extends ModelNewPrehistoric
 
 		float speed = 0.5F;
 		float speed2 = 0.1F;
-		if(((IAnimated)entity).getAnimation().animationId == 0)
-			carryOutPoses(entity);
 		this.walk(upperBody, speed2, 0.05F, false, 1F, 0F, entity.ticksExisted, 1);
 		this.bob(lowerBody, speed2, 0.4F, false, entity.ticksExisted, 1);
 		this.walk(upperBody, speed2, 0.05F, false, 1F, 0F, entity.ticksExisted, 1);
@@ -270,8 +268,6 @@ public class ModelTyrannosaurus extends ModelNewPrehistoric
 		//((ChainBuffer)((EntityTyrannosaurus)entity).tailbuffer).applyChainSwingBuffer(tailParts);
 	}
 
-	@Override
-	public void sleepPose(boolean animate) {}
 
 //	@Override
 //	public void sitPose(boolean animate) {

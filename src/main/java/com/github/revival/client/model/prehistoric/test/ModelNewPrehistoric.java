@@ -13,21 +13,6 @@ public abstract class ModelNewPrehistoric extends MowzieModelBase{
 	public ModelNewPrehistoric(){
 	}
 	
-	public void carryOutPoses(Entity entity){
-		if(entity instanceof EntityNewPrehistoric){
-			EntityNewPrehistoric prehistoric = (EntityNewPrehistoric)entity;
-			if(prehistoric.isSleeping()){
-				sleepPose(false);
-			}
-		}
-	}
-
-	public abstract void sleepPose(boolean animate);
-	
-	public void hurtPose(boolean animate){}
-
-	public void renderHeldItem(RenderPrehistoric renderPrehistoric, EntityLiving entity, float i) {}
-
 	public void sitAnimationRotation(MowzieModelRenderer modelRenderer, float sitProgress, float rotX, float rotY, float rotZ)
     {
         modelRenderer.rotateAngleX += sitProgress * rotX / 25.0F;

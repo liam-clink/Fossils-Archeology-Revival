@@ -39,12 +39,6 @@ public class RenderPrehistoric extends RenderLiving{
     {
        super.renderEquippedItems(entity, i);
     }
-	public void renderEquippedItems(EntityLivingBase entity, float i)
-    {
-        if(this.mainModel instanceof ModelNewPrehistoric){
-        	((ModelNewPrehistoric)this.mainModel).renderHeldItem(this, (EntityLiving)entity, i);
-        }
-    }
 
 	public RenderManager getRenderManager() {
 		return this.renderManager;

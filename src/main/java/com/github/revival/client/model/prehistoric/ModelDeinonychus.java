@@ -235,33 +235,6 @@ public class ModelDeinonychus extends ModelNewPrehistoric {
 		animator.update(entity);
 		ModelUtils.doMowzieStuff(true, boxList);
 		setRotationAngles(f, f1, f2, f3, f4, f5, (Entity)entity);
-
-<<<<<<< HEAD
-		//		animator.setAnimationId(EntityNewPrehistoric.animation_sit.animationId);
-		//		animator.startPhase(20);
-		//		sitPose(true);
-		//		animator.endPhase();
-		//
-		//		animator.setAnimationId(EntityNewPrehistoric.animation_getUp.animationId);
-		//		animator.startPhase(0);
-		//		sitPose(true);
-		//		animator.endPhase();
-		//		animator.resetPhase(20);
-		//		animator.endPhase();
-=======
-//		animator.setAnimationId(EntityNewPrehistoric.animation_sit.animationId);
-//		animator.startPhase(20);
-//		sitPose(true);
-//		animator.endPhase();
-//
-//		animator.setAnimationId(EntityNewPrehistoric.animation_getUp.animationId);
-//		animator.startPhase(0);
-//		sitPose(true);
-//		animator.endPhase();
-//		animator.resetPhase(20);
-//		animator.endPhase();
->>>>>>> origin/master
-
 	}
 
 	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
@@ -327,7 +300,7 @@ public class ModelDeinonychus extends ModelNewPrehistoric {
 	@Override
 	public void sleepPose(boolean animate) {}
 
-<<<<<<< HEAD
+
 	//	@Override
 	//	public void sitPose(boolean animate) {
 	//		ModelUtils.animateOrSetRotation(animator, animate, leftUpperArmWing, 1.5184364492350666F, -0.0F, 0.0F, false);
@@ -365,7 +338,7 @@ public class ModelDeinonychus extends ModelNewPrehistoric {
 	//		ModelUtils.setPos(animator, animate, rightThigh, -3.5F, 16.20F, 4.5F, false);
 	//		ModelUtils.setPos(animator, animate, leftThigh, 3.5F, 16.20F, 4.5F, false);
 	//	}
-=======
+
 //	@Override
 //	public void sitPose(boolean animate) {
 //		ModelUtils.animateOrSetRotation(animator, animate, leftUpperArmWing, 1.5184364492350666F, -0.0F, 0.0F, false);
@@ -403,7 +376,7 @@ public class ModelDeinonychus extends ModelNewPrehistoric {
 //		ModelUtils.setPos(animator, animate, rightThigh, -3.5F, 16.20F, 4.5F, false);
 //		ModelUtils.setPos(animator, animate, leftThigh, 3.5F, 16.20F, 4.5F, false);
 //	}
->>>>>>> origin/master
+
 
 
 }

@@ -215,8 +215,6 @@ public class ModelTriceratops extends ModelNewPrehistoric {
 
 		float speed = 0.5F;
 		float speed2 = 0.1F;
-		if(((IAnimated)entity).getAnimation().animationId == 0)
-			carryOutPoses(entity);
 		this.walk(upperBody, speed2, 0.05F, false, 1F, 0F, entity.ticksExisted, 1);
 		this.walk(lowerBody, speed2, -0.05F, false, 1F, 0F, entity.ticksExisted, 1);
 		this.bob(upperBody, speed2, 0.2F, false, entity.ticksExisted, 1);
@@ -234,9 +232,6 @@ public class ModelTriceratops extends ModelNewPrehistoric {
 		//((ChainBuffer)((EntityTriceratops)entity).tailbuffer).applyChainSwingBuffer(tailParts);
 
 	}
-
-	@Override
-	public void sleepPose(boolean animate) {}
 
 //	@Override
 //	public void sitPose(boolean animate) {
