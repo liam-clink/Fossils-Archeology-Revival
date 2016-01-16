@@ -110,7 +110,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.relauncher.Side;
 
-@Mod(modid = Revival.modid, name = "Fossil/Archeology", version = "7.3", dependencies = "required-after:llibrary@[0.3.2-1.7.10,)")
+@Mod(modid = Revival.modid, name = "Fossil/Archeology", version = "7.3", dependencies = "required-after:llibrary@[0.7.2,)")
 public class Revival
 {
 	public static final String modid = "fossil";
