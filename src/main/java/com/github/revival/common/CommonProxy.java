@@ -17,33 +17,7 @@ public class CommonProxy
 {
     public void init()
     {
-        Blocks.fire.setFireInfo(FABlockRegistry.palmLeaves, 30, 60);
-        Blocks.fire.setFireInfo(FABlockRegistry.palmLog, 5, 20);
-        Blocks.fire.setFireInfo(FABlockRegistry.palaePlanks, 5, 20);
-        Blocks.fire.setFireInfo(FABlockRegistry.palaeStairs, 5, 20);
-        Blocks.fire.setFireInfo(FABlockRegistry.palaeSingleSlab, 5, 20);
-        Blocks.fire.setFireInfo(FABlockRegistry.palaeDoubleSlab, 5, 20);
-        Blocks.fire.setFireInfo(FABlockRegistry.blockworktableIdle, 5, 20);
-        Blocks.fire.setFireInfo(FABlockRegistry.blockworktableActive, 5, 20);
-        Blocks.fire.setFireInfo(FABlockRegistry.ancientWood, 5, 20);
-        Blocks.fire.setFireInfo(FABlockRegistry.ancientWoodPillar, 5, 20);
-        Blocks.fire.setFireInfo(FABlockRegistry.ancientWoodPlate, 5, 20);
-        Blocks.fire.setFireInfo(FABlockRegistry.ancientWoodStairs, 5, 20);
-        Blocks.fire.setFireInfo(FABlockRegistry.ancientWoodSingleSlab, 5, 20);
-        Blocks.fire.setFireInfo(FABlockRegistry.ancientWoodDoubleSlab, 5, 20);
-        Blocks.fire.setFireInfo(FABlockRegistry.ferns, 30, 60);
-        Blocks.fire.setFireInfo(FABlockRegistry.bennettitales_large, 60, 100);
-        Blocks.fire.setFireInfo(FABlockRegistry.bennettitales_small, 60, 100);
-        Blocks.fire.setFireInfo(FABlockRegistry.cephalotaxus, 60, 100);
-        Blocks.fire.setFireInfo(FABlockRegistry.dillhoffia, 60, 100);
-        Blocks.fire.setFireInfo(FABlockRegistry.horsetail_large, 60, 100);
-        Blocks.fire.setFireInfo(FABlockRegistry.horsetail_small, 60, 100);
-        Blocks.fire.setFireInfo(FABlockRegistry.licopodiophyta, 60, 100);
-        Blocks.fire.setFireInfo(FABlockRegistry.mutantPlant, 60, 100);
-        Blocks.fire.setFireInfo(FABlockRegistry.paleopanax, 60, 100);
-        Blocks.fire.setFireInfo(FABlockRegistry.sarracina, 60, 100);
-        Blocks.fire.setFireInfo(FABlockRegistry.welwitschia, 60, 100);
-        Blocks.fire.setFireInfo(FABlockRegistry.zamites, 60, 100);
+      
     }
 
     public ModelBiped getArmorModel(int id)
@@ -85,4 +59,5 @@ public class CommonProxy
 		return null;
 	}
 
+	public void spawnTarParticle(World world, double posX, double posY, double posZ){}
 }

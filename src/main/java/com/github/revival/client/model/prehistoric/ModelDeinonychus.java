@@ -297,10 +297,6 @@ public class ModelDeinonychus extends ModelNewPrehistoric {
 
 	}
 
-	@Override
-	public void sleepPose(boolean animate) {}
-
-
 	//	@Override
 	//	public void sitPose(boolean animate) {
 	//		ModelUtils.animateOrSetRotation(animator, animate, leftUpperArmWing, 1.5184364492350666F, -0.0F, 0.0F, false);

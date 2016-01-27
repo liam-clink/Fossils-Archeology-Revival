@@ -1,93 +1,67 @@
 package com.github.revival.common.block;
 
-import com.github.revival.client.renderer.particle.FossilFX;
-import com.github.revival.common.creativetab.FATabRegistry;
-import com.github.revival.common.handler.LocalizationStrings;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.Block;
+import java.util.Random;
+
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.BlockFluidClassic;
 
-import java.util.Random;
+import com.github.revival.Revival;
+import com.github.revival.client.renderer.particle.FossilFX;
+import com.github.revival.common.entity.mob.EntityTarSlime;
+import com.github.revival.common.handler.LocalizationStrings;
 
-public class BlockTar extends Block
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
+public class BlockTar extends BlockFluidClassic
 {
-    public BlockTar()
-    {
-        super(Material.sand);
-        this.setCreativeTab(FATabRegistry.tabFBlocks);
-        setHardness(100.0F);
-        setBlockName(LocalizationStrings.TAR_NAME);
-    }
+	public BlockTar()
+	{
+		super(Revival.tar_fluid, Material.water);
+		setBlockName(LocalizationStrings.TAR_NAME);
+	}
 
-    /**
-     * Triggered whenever an entity collides with this block (enters into the block). Args: world, x, y, z, entity
-     */
-    public void onEntityCollidedWithBlock(World world, int i, int j, int k, Entity entity)
-    {
-        entity.motionX = 0.000000000000000004D;
-        entity.motionY = 0.070000000745058064D;
-        entity.fallDistance = 0.0F;
-        entity.motionZ = 0.000000000000000004D;
-        entity.attackEntityFrom(DamageSource.drown, 1);
-    }
+	@Override
+	public boolean canDisplace(IBlockAccess world, int x, int y, int z) {
+		if (world.getBlock(x, y, z).getMaterial().isLiquid()) return false;
+		return super.canDisplace(world, x, y, z);
+	}
 
+	@Override
+	public boolean displaceIfPossible(World world, int x, int y, int z) {
+		if (world.getBlock(x, y, z).getMaterial().isLiquid()) return false;
+		return super.displaceIfPossible(world, x, y, z);
+	}
 
-    @SideOnly(Side.CLIENT)
-    @Override
-    public void randomDisplayTick(World world, int x, int y, int z, Random random)
-    {
-        double var6 = (double) ((float) x + random.nextFloat());
-        double var8 = (double) y - 0.05D;
-        double var10 = (double) ((float) z + random.nextFloat());
-        FossilFX.spawnParticle("tarBubble", var6, var8 + 1, var10, 0.0D, 0.0D, 0.0D, 2);
-        if (random.nextInt(200) == 0)
-        {
-            world.playSound(x, y, z, "fossil:tar", 0.1F + random.nextFloat() * 0.2F, 0.4F + random.nextFloat() * 0.15F, false);
-        }
-    }
+	public void onEntityCollidedWithBlock(World world, int i, int j, int k, Entity entity)
+	{
+		if(entity instanceof EntityTarSlime){
+			entity.motionY *= 1.070000000745058064D;
+			entity.setAir(30);
+		}else{
+			entity.motionX = 0.000000000000000004D;
+			entity.motionY = 0.070000000745058064D;
+			entity.fallDistance = 0.0F;
+			entity.motionZ = 0.000000000000000004D;
+			entity.attackEntityFrom(DamageSource.drown, 1);
+		}
+	}
 
-    /**
-     * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
-     * cleared to be reused)
-     */
-    public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int i, int j, int k)
-    {
-        return null;
-    }
-
-    /**
-     * Returns the quantity of items to drop on block destruction.
-     */
-    public int quantityDropped(Random random)
-    {
-        return 1;
-    }
-
-    public boolean isOpaqueCube()
-    {
-        return true;
-    }
-
-    public boolean renderAsNormalBlock()
-    {
-        return true;
-    }
-
-    public boolean shouldSideBeRendered(IBlockAccess var1, int var2, int var3, int var4, int var5)
-    {
-        return true;
-    }
-
-    @Override
-    public void registerBlockIcons(IIconRegister par1IconRegister)
-    {
-        this.blockIcon = par1IconRegister.registerIcon("fossil:Tar"); //adding in a texture, 1.5.1 style!
-    }
+	@SideOnly(Side.CLIENT)
+	@Override
+	public void randomDisplayTick(World world, int x, int y, int z, Random random)
+	{
+		double var6 = (double) ((float) x + random.nextFloat());
+		double var8 = (double) y - 0.05D;
+		double var10 = (double) ((float) z + random.nextFloat());
+		FossilFX.spawnParticle("tarBubble", var6, var8 + 1, var10, 0.0D, 0.0D, 0.0D, 2);
+		if (random.nextInt(200) == 0)
+		{
+			world.playSound(x, y, z, "fossil:tar", 0.1F + random.nextFloat() * 0.2F, 0.4F + random.nextFloat() * 0.15F, false);
+		}
+	}
 }

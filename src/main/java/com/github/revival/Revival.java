@@ -18,6 +18,7 @@ import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.util.EnumHelper;
+import net.minecraftforge.fluids.Fluid;
 
 import com.github.revival.client.renderer.tileentity.RenderFeeder;
 import com.github.revival.common.CommonProxy;
@@ -53,6 +54,7 @@ import com.github.revival.common.entity.mob.EntityNautilus;
 import com.github.revival.common.entity.mob.EntityQuagga;
 import com.github.revival.common.entity.mob.EntitySentryPigman;
 import com.github.revival.common.entity.mob.EntitySmilodon;
+import com.github.revival.common.entity.mob.EntityTarSlime;
 import com.github.revival.common.entity.mob.EntityTerrorBird;
 import com.github.revival.common.enums.EnumDinoFoodMob;
 import com.github.revival.common.enums.EnumPrehistoric;
@@ -137,6 +139,7 @@ public class Revival
 
 	public static ToolMaterial toothDaggerMaterial = EnumHelper.addToolMaterial("toothDagger", 3, 250, 70.0F, 1.5F, 25);
 	public Configuration config;
+	public static Fluid tar_fluid;
 
 	public static boolean enableDebugging()
 	{
@@ -216,6 +219,7 @@ public class Revival
 		EntityRegistry.registerModEntity(EntityAnubite.class, "Anubite", 39, this, 250, 3, true);
 		EntityRegistry.registerModEntity(EntitySentryPigman.class, "SentryPigman", 40, this, 250, 3, true);
 		EntityRegistry.registerModEntity(EntityAnuDead.class, "AnuDead", 41, this, 250, 3, true);
+		EntityRegistry.registerModEntity(EntityTarSlime.class, "TarSlime", 42, this, 250, 3, true);
 
 		for (int i = 0; i < EnumPrehistoric.values().length; i++)
 		{
@@ -272,5 +276,6 @@ public class Revival
 		MinecraftForge.EVENT_BUS.register(new FossilInteractEvent());
 
 		FMLCommonHandler.instance().bus().register(new FossilConnectionEvent());
+		
 	}
 }

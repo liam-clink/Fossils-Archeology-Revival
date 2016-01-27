@@ -1,28 +1,35 @@
 package com.github.revival.common.item;
 
-import com.github.revival.Revival;
-import com.github.revival.common.FARegistry;
-import com.github.revival.common.block.FABlockRegistry;
-import com.github.revival.common.creativetab.FATabRegistry;
-import com.github.revival.common.entity.BehaviorConfuciusornisEggDispense;
-import com.github.revival.common.entity.BehaviorDodoEggDispense;
-import com.github.revival.common.entity.BehaviorJavelinDispense;
-import com.github.revival.common.enums.EnumMobType;
-import com.github.revival.common.enums.EnumPrehistoric;
-import com.github.revival.common.enums.EnumTimePeriod;
-import com.github.revival.common.handler.LocalizationStrings;
-import com.github.revival.common.item.forge.*;
+import java.lang.reflect.Field;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.ilexiconn.llibrary.common.content.IContentHandler;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
-import net.minecraft.potion.Potion;
+import net.minecraft.item.ItemBucket;
+import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.FluidRegistry;
 
-import java.lang.reflect.Field;
+import com.github.revival.Revival;
+import com.github.revival.common.FARegistry;
+import com.github.revival.common.block.FABlockRegistry;
+import com.github.revival.common.creativetab.FATabRegistry;
+import com.github.revival.common.entity.BehaviorJavelinDispense;
+import com.github.revival.common.handler.BucketEvent;
+import com.github.revival.common.handler.LocalizationStrings;
+import com.github.revival.common.item.forge.ForgeAxe;
+import com.github.revival.common.item.forge.ForgeFood;
+import com.github.revival.common.item.forge.ForgeHoe;
+import com.github.revival.common.item.forge.ForgeItem;
+import com.github.revival.common.item.forge.ForgePickaxe;
+import com.github.revival.common.item.forge.ForgeShovel;
+import com.github.revival.common.item.forge.ForgeSword;
+
+import cpw.mods.fml.common.registry.GameRegistry;
 
 public class FAItemRegistry extends FARegistry implements IContentHandler
 {
@@ -88,6 +95,9 @@ public class FAItemRegistry extends FARegistry implements IContentHandler
 	public static Item seed;
 	public static Item fossilSeed_fern;
 	public static Item palaeSaplingFossil;
+	public static Item tardrop;
+	public static Item tarfossil;
+	public static Item tar_bucket;
 
 	public void init()
 	{
@@ -97,16 +107,15 @@ public class FAItemRegistry extends FARegistry implements IContentHandler
 		relic = new ForgeItem("Relic_Scrap").setUnlocalizedName(LocalizationStrings.RELIC_NAME).setCreativeTab(FATabRegistry.tabFItems);
 		stoneboard = new ItemStoneBoard();
 		ancientSword = new ItemAncientsword().setUnlocalizedName(LocalizationStrings.ANCIENT_SWORD_NAME).setCreativeTab(FATabRegistry.tabFCombat);
-		brokenSword = new ForgeItem("Broken_Ancient_Sword").setMaxStackSize(1).setUnlocalizedName(LocalizationStrings.BROKEN_SWORD_NAME).setCreativeTab(FATabRegistry.tabFMaterial);
+		brokenSword = new ForgeItem("Broken_Ancient_Sword").setMaxStackSize(1).setUnlocalizedName(LocalizationStrings.BROKEN_SWORD_NAME).setCreativeTab(FATabRegistry.tabFItems);
 		fernSeed = new ItemFernSeed(FABlockRegistry.ferns);
 		ancienthelmet = new ItemAncientHelmet(ItemArmor.ArmorMaterial.IRON, 3, 0).setUnlocalizedName(LocalizationStrings.ANCIENT_HELMET_NAME).setCreativeTab(FATabRegistry.tabFCombat);
-		brokenhelmet = new ForgeItem("Broken_Ancient_Helm").setMaxStackSize(1).setUnlocalizedName(LocalizationStrings.BROKEN_HELMET_NAME).setCreativeTab(FATabRegistry.tabFMaterial);
+		brokenhelmet = new ForgeItem("Broken_Ancient_Helm").setMaxStackSize(1).setUnlocalizedName(LocalizationStrings.BROKEN_HELMET_NAME).setCreativeTab(FATabRegistry.tabFItems);
 		skullStick = new ForgeItem("Skull_Stick").setUnlocalizedName(LocalizationStrings.SKULL_STICK_NAME).setCreativeTab(FATabRegistry.tabFItems);
 		gem = new ForgeItem("Scarab_Gem").setUnlocalizedName(LocalizationStrings.SCARAB_GEM_NAME).setCreativeTab(FATabRegistry.tabFItems);
 		gemAxe = new ForgeAxe(Revival.scarab, "Gem_Axe").setUnlocalizedName(LocalizationStrings.SCARAB_AXE_NAME).setCreativeTab(FATabRegistry.tabFTools);
 		gemPickaxe = new ForgePickaxe(Revival.scarab, "Gem_Pickaxe").setUnlocalizedName(LocalizationStrings.SCARAB_PICKAXE_NAME).setCreativeTab(FATabRegistry.tabFTools);
 		gemSword = new ForgeSword(Revival.scarab, "Gem_Sword").setUnlocalizedName(LocalizationStrings.SCARAB_SWORD_NAME).setCreativeTab(FATabRegistry.tabFCombat);
-
 		gemHoe = new ForgeHoe(Revival.scarab, "Gem_Hoe").setUnlocalizedName(LocalizationStrings.SCARAB_HOE_NAME).setCreativeTab(FATabRegistry.tabFTools);
 		gemShovel = new ForgeShovel(Revival.scarab, "Gem_Shovel").setUnlocalizedName(LocalizationStrings.SCARAB_SHOVEL_NAME).setCreativeTab(FATabRegistry.tabFTools);
 		dinoPedia = new ForgeItem("Dinopedia").setUnlocalizedName(LocalizationStrings.DINOPEDIA_NAME).setCreativeTab(FATabRegistry.tabFItems);
@@ -122,7 +131,6 @@ public class FAItemRegistry extends FARegistry implements IContentHandler
 		ancientJavelin = new ItemJavelin(Revival.scarab, "Ancient_Javelin").setUnlocalizedName(LocalizationStrings.ANCIENT_JAVELIN_NAME).setCreativeTab(FATabRegistry.tabFCombat);
 		toothDagger = new ItemToothDagger(Revival.toothDaggerMaterial).setTextureName("fossil:toothDagger").setUnlocalizedName("toothDagger").setCreativeTab(FATabRegistry.tabFCombat);
 		whip = new ItemWhip().setUnlocalizedName(LocalizationStrings.WHIP_NAME).setCreativeTab(FATabRegistry.tabFTools);
-
 		legBone = new ItemDinosaurBones("legBone").setUnlocalizedName(LocalizationStrings.LEGBONE_NAME);
 		claw = new ItemDinosaurBones("uniqueItem").setUnlocalizedName(LocalizationStrings.CLAW_NAME);
 		foot = new ItemDinosaurBones("foot").setUnlocalizedName(LocalizationStrings.FOOT_NAME);
@@ -130,49 +138,21 @@ public class FAItemRegistry extends FARegistry implements IContentHandler
 		armBone = new ItemDinosaurBones("armBone").setUnlocalizedName(LocalizationStrings.ARM_BONE_NAME);
 		dinoRibCage = new ItemDinosaurBones("dinoRibCage").setUnlocalizedName(LocalizationStrings.DINO_RIB_CAGE_NAME);
 		vertebrae = new ItemDinosaurBones("vertebrae").setUnlocalizedName(LocalizationStrings.VERTEBRAE_NAME);
-
-		brokenSapling = new ForgeItem("fossilPlant").setUnlocalizedName(LocalizationStrings.BROKEN_SAPLING_NAME).setCreativeTab(FATabRegistry.tabFMaterial);
-		failuresaurusFlesh = new ForgeItem("flesh").setUnlocalizedName(LocalizationStrings.FAILURESAURUS_FLESH_NAME).setCreativeTab(FATabRegistry.tabFMaterial);
+		brokenSapling = new ForgeItem("fossilPlant").setUnlocalizedName(LocalizationStrings.BROKEN_SAPLING_NAME).setCreativeTab(FATabRegistry.tabFItems);
+		failuresaurusFlesh = new ForgeItem("flesh").setUnlocalizedName(LocalizationStrings.FAILURESAURUS_FLESH_NAME).setCreativeTab(FATabRegistry.tabFItems);
 		// cultivatedChickenEgg = new ItemBirdEgg(4).setUnlocalizedName("eggCultivatedChicken").setTextureName("fossil:Egg_Cultivated_Chicken");
 		//dodoEgg = new ItemBirdEgg(0).setUnlocalizedName(LocalizationStrings.DODO_EGG_NAME).setTextureName("fossil:Egg_Dodo");
 		// cultivatedDodoEgg = new ItemBirdEgg(1).setUnlocalizedName(LocalizationStrings.CULTIVATED_DODO_EGG_NAME).setTextureName("fossil:Egg_Cultivated_Dodo");
 		// confuciusornisEgg = new ItemBirdEgg(2).setUnlocalizedName("eggConfuciusornis").setTextureName("fossil:Egg_Confuciusornis");
 		// cultivatedConfuciusornisEgg = new ItemBirdEgg(3).setUnlocalizedName("eggCultivatedConfuciusornis").setTextureName("fossil:Egg_Cultivated_Confuciusornis");
 		potteryShards = new ForgeItem("PotteryShard").setUnlocalizedName(LocalizationStrings.POTTERY_SHARDS).setCreativeTab(FATabRegistry.tabFItems);
-		livingCoelacanth = new ItemLivingCoelacanth(1).setUnlocalizedName(LocalizationStrings.LIVING_COELACANTH_NAME).setCreativeTab(FATabRegistry.tabFMaterial);
+		livingCoelacanth = new ItemLivingCoelacanth(1).setUnlocalizedName(LocalizationStrings.LIVING_COELACANTH_NAME).setCreativeTab(FATabRegistry.tabFItems);
 		// terrorBirdEgg = new ItemTerrorBirdEgg(false).setUnlocalizedName(LocalizationStrings.TERROR_BIRD_EGG_NAME);
 		// cultivatedTerrorBirdEgg = new ItemTerrorBirdEgg(true).setUnlocalizedName(LocalizationStrings.CULTIVATED_TERROR_BIRD_EGG_NAME);
-
 		skullHelmet = new ItemSkullHelmet(Revival.bone, 3, 0).setUnlocalizedName(LocalizationStrings.SKULL_HELMET_NAME).setCreativeTab(FATabRegistry.tabFCombat);
 		ribCage = new ItemRibCage(Revival.bone, 3, 1).setUnlocalizedName(LocalizationStrings.RIBCAGE_NAME).setCreativeTab(FATabRegistry.tabFCombat);
 		femurs = new ItemFemurs(Revival.bone, 3, 2).setUnlocalizedName(LocalizationStrings.FEMURS_NAME).setCreativeTab(FATabRegistry.tabFCombat);
 		feet = new ItemFeet(Revival.bone, 3, 3).setUnlocalizedName(LocalizationStrings.FEET_NAME).setCreativeTab(FATabRegistry.tabFCombat);
-
-		//  dnaPig = new ForgeItem("Pig_DNA").setUnlocalizedName(LocalizationStrings.DNA_PIG_NAME).setCreativeTab(FATabRegistry.tabFMaterial);
-		//  dnaSheep = new ForgeItem("Sheep_DNA").setUnlocalizedName(LocalizationStrings.DNA_SHEEP_NAME).setCreativeTab(FATabRegistry.tabFMaterial);
-		//  dnaCow = new ForgeItem("Cow_DNA").setUnlocalizedName(LocalizationStrings.DNA_COW_NAME).setCreativeTab(FATabRegistry.tabFMaterial);
-		// dnaChicken = new ForgeItem("Chicken_DNA").setUnlocalizedName(LocalizationStrings.DNA_CHICKEN_NAME).setCreativeTab(FATabRegistry.tabFMaterial);
-		//dnaSmilodon = new ForgeItem("Smilodon_DNA").setUnlocalizedName(LocalizationStrings.DNA_SMILODON_NAME).setCreativeTab(FATabRegistry.tabFMaterial);
-		// dnaMammoth = new ForgeItem("Mammoth_DNA").setUnlocalizedName(LocalizationStrings.DNA_MAMMOTH_NAME).setCreativeTab(FATabRegistry.tabFMaterial);
-		// dnaDodo = new ForgeItem("Dodo_DNA").setUnlocalizedName(LocalizationStrings.DNA_DODO_NAME).setCreativeTab(FATabRegistry.tabFMaterial);
-		// dnaCoelacanth = new ForgeItem("Coelacanth_DNA").setUnlocalizedName(LocalizationStrings.DNA_COELACANTH_NAME).setCreativeTab(FATabRegistry.tabFMaterial);
-		//dnaHorse = new ForgeItem("Horse_DNA").setUnlocalizedName(LocalizationStrings.DNA_HORSE_NAME).setCreativeTab(FATabRegistry.tabFMaterial);
-		//dnaQuagga = new ForgeItem("Quagga_DNA").setUnlocalizedName(LocalizationStrings.DNA_QUAGGA_NAME).setCreativeTab(FATabRegistry.tabFMaterial);
-		// dnaTerrorBird = new ForgeItem("TerrorBird/TerrorBird_DNA").setUnlocalizedName(LocalizationStrings.DNA_TERROR_BIRD_NAME).setCreativeTab(FATabRegistry.tabFMaterial);
-		// dnaElasmotherium = new ForgeItem("Elasmotherium/Elasmotherium_DNA").setUnlocalizedName(LocalizationStrings.DNA_ELASMOTHERIUM_NAME).setCreativeTab(FATabRegistry.tabFMaterial);
-		// dnaConfuciusornis = new ForgeItem("Confuciusornis_DNA").setUnlocalizedName("dnaConfuciusornis").setCreativeTab(FATabRegistry.tabFMaterial);
-
-		//  embryoSheep = new ItemEmbryoSyringe(1).setUnlocalizedName(LocalizationStrings.EMBRYO_SHEEP_NAME).setCreativeTab(FATabRegistry.tabFItems);
-		//  embryoCow = new ItemEmbryoSyringe(2).setUnlocalizedName(LocalizationStrings.EMBRYO_COW_NAME).setCreativeTab(FATabRegistry.tabFItems);
-		// embryoChicken = new ItemEmbryoSyringe(3).setUnlocalizedName(LocalizationStrings.EMBRYO_CHICKEN_NAME).setCreativeTab(FATabRegistry.tabFItems);
-		//  embryoSmilodon = new ItemEmbryoSyringe(4).setUnlocalizedName(LocalizationStrings.EMBRYO_SMILODON_NAME).setCreativeTab(FATabRegistry.tabFItems);
-		//   embryoMammoth = new ItemEmbryoSyringe(5).setUnlocalizedName(LocalizationStrings.EMBRYO_MAMMOTH_NAME).setCreativeTab(FATabRegistry.tabFItems);
-		//    embryoHorse = new ItemEmbryoSyringe(6).setUnlocalizedName(LocalizationStrings.EMBRYO_HORSE_NAME).setCreativeTab(FATabRegistry.tabFItems);
-		//    embryoQuagga = new ItemEmbryoSyringe(7).setUnlocalizedName(LocalizationStrings.EMBRYO_QUAGGA_NAME).setCreativeTab(FATabRegistry.tabFItems);
-		ancientClock = new Item().setTextureName("apple_golden").setUnlocalizedName("ancientClock").setCreativeTab(FATabRegistry.tabFItems).setMaxStackSize(1);
-		ancientKey = new ForgeItem("Ancient_Key").setUnlocalizedName("ancientKey").setCreativeTab(FATabRegistry.tabFItems);
-
-
 		cookedDinoMeat = new ForgeFood(8, 0.8F, true, "Dino_Steak").setUnlocalizedName(LocalizationStrings.DINO_STEAK_NAME).setCreativeTab(FATabRegistry.tabFFood);
 		cookedChickenSoup = new ForgeItem("Cooked_Chicken_Soup").setUnlocalizedName(LocalizationStrings.COOKED_CHICKEN_SOUP_NAME).setMaxStackSize(1).setContainerItem(Items.bucket).setCreativeTab(FATabRegistry.tabFFood);
 		rawChickenSoup = new ForgeItem("Raw_Chicken_Soup").setUnlocalizedName(LocalizationStrings.RAW_CHICKEN_SOUP_NAME).setMaxStackSize(1).setContainerItem(Items.bucket).setCreativeTab(FATabRegistry.tabFFood);
@@ -186,15 +166,18 @@ public class FAItemRegistry extends FARegistry implements IContentHandler
 		//  terrorBirdMeatCooked = new ForgeFood(4, 0.8F, false, "TerrorBird/TerrorBird_Meat_Cooked").setUnlocalizedName(LocalizationStrings.TERROR_BIRD_MEAT_COOKED).setCreativeTab(FATabRegistry.tabFFood);
 		// quaggaMeat = new ForgeFood(2, 0.8F, false, "Quagga_Meat").setPotionEffect(Potion.hunger.id, 30, 0, 0.3F).setUnlocalizedName(LocalizationStrings.QUAGGA_MEAT).setCreativeTab(FATabRegistry.tabFFood);
 		// quaggaMeatCooked = new ForgeFood(7, 1F, false, "Quagga_Meat_Cooked").setUnlocalizedName(LocalizationStrings.QUAGGA_MEAT_COOKED).setCreativeTab(FATabRegistry.tabFFood);
-
 		fossilrecordBones = new ItemFossilRecord(LocalizationStrings.RECORD_BONES_NAME, "fossil:record_bones").setUnlocalizedName(LocalizationStrings.FOSSIL_RECORD_NAME);
 		recordNano_Anu = new ItemFossilRecord(LocalizationStrings.FOSSIL_RECORD_NANO_ANU, "fossil:record_anu").setUnlocalizedName(LocalizationStrings.RECORD_BONES_NAME);
-
-		fossilSeed_fern = new ForgeItem("plants/fossilSeed_fern").setUnlocalizedName("fossilSeed_fern").setCreativeTab(FATabRegistry.tabFMaterial);
-		fossilSeed = new ItemFossilSeeds(true).setUnlocalizedName("fossilSeed").setCreativeTab(FATabRegistry.tabFMaterial);
-		seed = new ItemFossilSeeds(false).setUnlocalizedName("seed").setCreativeTab(FATabRegistry.tabFMaterial);
-		palaeSaplingFossil = new ForgeItem("Palae_Fossil").setUnlocalizedName("fossilSapling_palae").setCreativeTab(FATabRegistry.tabFMaterial);
-
+		fossilSeed_fern = new ForgeItem("plants/fossilSeed_fern").setUnlocalizedName("fossilSeed_fern").setCreativeTab(FATabRegistry.tabFItems);
+		fossilSeed = new ItemFossilSeeds(true).setUnlocalizedName("fossilSeed").setCreativeTab(FATabRegistry.tabFItems);
+		seed = new ItemFossilSeeds(false).setUnlocalizedName("seed").setCreativeTab(FATabRegistry.tabFItems);
+		palaeSaplingFossil = new ForgeItem("Palae_Fossil").setUnlocalizedName("fossilSapling_palae").setCreativeTab(FATabRegistry.tabFItems);
+		tardrop = new ForgeItem("tardrop").setUnlocalizedName("tardrop").setCreativeTab(FATabRegistry.tabFItems);
+		tarfossil = new ForgeItem("tar_fossil").setUnlocalizedName("tarfossil").setCreativeTab(FATabRegistry.tabFItems);
+		tar_bucket = new ItemBucket(FABlockRegistry.tar).setUnlocalizedName("tar_bucket").setTextureName("fossil:bucket_tar").setContainerItem(Items.bucket);
+		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluidStack("tar", FluidContainerRegistry.BUCKET_VOLUME), new ItemStack(tar_bucket), new ItemStack(Items.bucket));
+		BucketEvent.INSTANCE.buckets.put(FABlockRegistry.tar, tar_bucket);
+		MinecraftForge.EVENT_BUS.register(BucketEvent.INSTANCE);
 		BlockDispenser.dispenseBehaviorRegistry.putObject(ancientJavelin, new BehaviorJavelinDispense(MinecraftServer.getServer(), -1));
 		BlockDispenser.dispenseBehaviorRegistry.putObject(woodjavelin, new BehaviorJavelinDispense(MinecraftServer.getServer(), 0));
 		BlockDispenser.dispenseBehaviorRegistry.putObject(stonejavelin, new BehaviorJavelinDispense(MinecraftServer.getServer(), 1));

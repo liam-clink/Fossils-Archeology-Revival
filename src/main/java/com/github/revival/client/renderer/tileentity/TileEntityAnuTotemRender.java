@@ -12,8 +12,6 @@ public class TileEntityAnuTotemRender extends TileEntitySpecialRenderer
 {
 
     public static final ResourceLocation texture = new ResourceLocation("fossil:textures/blocks/anuTotem.png");
-
-
     private ModelAnuTotem modelBlock;
 
     public TileEntityAnuTotemRender()

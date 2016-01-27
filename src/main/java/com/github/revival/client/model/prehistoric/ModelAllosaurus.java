@@ -186,9 +186,8 @@ public class ModelAllosaurus extends ModelNewPrehistoric {
 
 		faceTarget(neck, 1, f3, f4);
 
-        EntityAllosaurus allosaurus = (EntityAllosaurus) entity;
-
-        float sitProgress = allosaurus.sitProgress;
+        EntityNewPrehistoric prehistoric = (EntityNewPrehistoric) entity;
+        float sitProgress = prehistoric.sitProgress;
 
         sitAnimationRotation(lowerBody, sitProgress, -((float)Math.toRadians(2.0D)), 0, 0);
         sitAnimationRotation(rightUpperLeg, sitProgress, -((float)Math.toRadians(28.0D)), 0, 0);
@@ -214,8 +213,6 @@ public class ModelAllosaurus extends ModelNewPrehistoric {
 
 		float speed = 0.1F;
 		float speed2 = 0.5F;
-		if(((IAnimated)entity).getAnimation().animationId == 0)
-			carryOutPoses(entity);
 		this.walk(upperBody, speed, 0.05F, false, 1F, 0F, entity.ticksExisted, 1);
 		this.bob(lowerBody, speed, 0.7F, false, entity.ticksExisted, 1);
 		this.walk(leftUpperLeg, speed2, 0.8F, false, 0F, 0.4F, f, f1);
@@ -232,11 +229,5 @@ public class ModelAllosaurus extends ModelNewPrehistoric {
 		this.chainWave(neckParts, speed, 0.15F, 3, entity.ticksExisted, 1);
 		//((ChainBuffer)((EntityAllosaurus)entity).tailbuffer).applyChainSwingBuffer(tailParts);
 
-	}
-
-	@Override
-	public void sleepPose(boolean animate) {
-		
-        
 	}
 }

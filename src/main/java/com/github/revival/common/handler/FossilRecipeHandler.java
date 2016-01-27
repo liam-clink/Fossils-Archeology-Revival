@@ -19,7 +19,7 @@ public class FossilRecipeHandler
         GameRegistry.addRecipe(new ItemStack(FABlockRegistry.blockanalyzerIdle, 1), new Object[]{"XYX", "XWX", 'X', Items.iron_ingot, 'Y', FAItemRegistry.relic, 'W', FAItemRegistry.biofossil});
         GameRegistry.addRecipe(new ItemStack(FABlockRegistry.blockworktableIdle, 1), new Object[]{"X", "Y", 'X', Items.paper, 'Y', Blocks.crafting_table});
         GameRegistry.addRecipe(new ItemStack(FABlockRegistry.blockSifterIdle, 1), new Object[]{"XYX", "YZY", "YXY", 'X', Items.string, 'Y', Blocks.planks, 'Z', Blocks.iron_bars});
-        GameRegistry.addRecipe(new ItemStack(FABlockRegistry.ancientWoodPlate, 3), new Object[]{"XX", 'X', FABlockRegistry.ancientWood});
+        //GameRegistry.addRecipe(new ItemStack(FABlockRegistry.ancientWoodPlate, 3), new Object[]{"XX", 'X', FABlockRegistry.ancientWood});
 //        GameRegistry.addRecipe(new ItemStack(Revival.blockcultivateIdle, 1), new Object[] {"XYX", "XWX", "ZZZ", 'X', Blocks.glass, 'Y', new ItemStack(Items.dye, 1, 2), 'W', Items.water_bucket, 'Z', Items.iron_ingot});
         GameRegistry.addRecipe(new ItemStack(FABlockRegistry.blockTimeMachine, 1), new Object[]{"XYX", "ZUZ", "VXV", 'X', FAItemRegistry.gem, 'Y', Items.nether_star, 'Z', Items.gold_ingot, 'U', Items.ender_pearl, 'V', Blocks.obsidian});
         GameRegistry.addRecipe(new ItemStack(FABlockRegistry.blockcultivateIdle, 1), new Object[]{"XYX", "XWX", "ZZZ", 'X', Blocks.glass, 'Y', new ItemStack(Items.dye, 1, 2), 'W', Items.water_bucket, 'Z', Items.iron_ingot});
@@ -85,11 +85,11 @@ public class FossilRecipeHandler
         GameRegistry.addRecipe(new ItemStack(FABlockRegistry.palaeStairs, 4), new Object[]{"P  ", "PP ", "PPP", 'P', FABlockRegistry.palaePlanks});
         GameRegistry.addRecipe(new ItemStack(FABlockRegistry.palaeStairs, 4), new Object[]{"  P", " PP", "PPP", 'P', FABlockRegistry.palaePlanks});
         //GameRegistry.addRecipe(new ItemStack(Revival.ancientWoodSingleSlab, 6), new Object[] {"PPP", 'P', Revival.ancientWood});
-        GameRegistry.addRecipe(new ItemStack(FABlockRegistry.ancientWoodStairs, 4), new Object[]{"P  ", "PP ", "PPP", 'P', FABlockRegistry.ancientWood});
-        GameRegistry.addRecipe(new ItemStack(FABlockRegistry.ancientWoodStairs, 4), new Object[]{"  P", " PP", "PPP", 'P', FABlockRegistry.ancientWood});
+       // GameRegistry.addRecipe(new ItemStack(FABlockRegistry.ancientWoodStairs, 4), new Object[]{"P  ", "PP ", "PPP", 'P', FABlockRegistry.ancientWood});
+       // GameRegistry.addRecipe(new ItemStack(FABlockRegistry.ancientWoodStairs, 4), new Object[]{"  P", " PP", "PPP", 'P', FABlockRegistry.ancientWood});
         //GameRegistry.addRecipe(new ItemStack(Revival.ancientStoneSingleSlab, 6), new Object[] {"PPP", 'P', Revival.ancientStone});
-        GameRegistry.addRecipe(new ItemStack(FABlockRegistry.ancientStoneStairs, 4), new Object[]{"P  ", "PP ", "PPP", 'P', FABlockRegistry.ancientStone});
-        GameRegistry.addRecipe(new ItemStack(FABlockRegistry.ancientStoneStairs, 4), new Object[]{"  P", " PP", "PPP", 'P', FABlockRegistry.ancientStone});
+       // GameRegistry.addRecipe(new ItemStack(FABlockRegistry.ancientStoneStairs, 4), new Object[]{"P  ", "PP ", "PPP", 'P', FABlockRegistry.ancientStone});
+      //  GameRegistry.addRecipe(new ItemStack(FABlockRegistry.ancientStoneStairs, 4), new Object[]{"  P", " PP", "PPP", 'P', FABlockRegistry.ancientStone});
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(FAItemRegistry.feet, 1), new Object[]{"* *", "# #", '#', new ItemStack(FAItemRegistry.foot, 1, OreDictionary.WILDCARD_VALUE), '*', "dinosaurClaw"}));
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(FAItemRegistry.feet, 1), new Object[]{"   ", "* *", "# #", '#', new ItemStack(FAItemRegistry.foot, 1, OreDictionary.WILDCARD_VALUE), '*', "dinosaurClaw"}));
         GameRegistry.addRecipe(new ItemStack(FAItemRegistry.femurs, 1), new Object[]{"###", "* *", "# #", '#', Items.bone, '*', new ItemStack(FAItemRegistry.legBone, 1, OreDictionary.WILDCARD_VALUE)});

@@ -10,7 +10,6 @@ public class FATabRegistry implements IContentHandler
     public static CreativeTabs tabFFood;
     public static CreativeTabs tabFCombat;
     public static CreativeTabs tabFTools;
-    public static CreativeTabs tabFMaterial;
     public static CreativeTabs tabFFigurines;
     public static CreativeTabs tabFBones;
 
@@ -21,7 +20,6 @@ public class FATabRegistry implements IContentHandler
         tabFFood = new TabFFood("Fossil Food");
         tabFCombat = new TabFCombat("Fossil Combat");
         tabFTools = new TabFTools("Fossil Deco");
-        tabFMaterial = new TabFMaterial("Fossil Material");
         tabFFigurines = new TabFFigurines("Fossil Test");
         tabFBones = new TabFBones("Fossil Bones");
     }

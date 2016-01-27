@@ -65,6 +65,7 @@ import com.github.revival.client.renderer.entity.RenderPrehistoric;
 import com.github.revival.client.renderer.entity.RenderQuagga;
 import com.github.revival.client.renderer.entity.RenderSentryPigman;
 import com.github.revival.client.renderer.entity.RenderStoneboard;
+import com.github.revival.client.renderer.entity.RenderTarSlime;
 import com.github.revival.client.renderer.entity.RenderTerrorBird;
 import com.github.revival.client.renderer.item.ItemAncientClocRender;
 import com.github.revival.client.renderer.item.ItemFigurineRenderer;
@@ -77,6 +78,7 @@ import com.github.revival.client.renderer.item.ItemVaseKylixRenderer;
 import com.github.revival.client.renderer.item.ItemVaseVoluteRenderer;
 import com.github.revival.client.renderer.particle.DeathOrbFX;
 import com.github.revival.client.renderer.particle.SleepFX;
+import com.github.revival.client.renderer.particle.TarDropsFX;
 import com.github.revival.client.renderer.tileentity.RenderFeeder;
 import com.github.revival.client.renderer.tileentity.RenderTNClock;
 import com.github.revival.client.renderer.tileentity.TileEntityAncientChestRender;
@@ -125,6 +127,7 @@ import com.github.revival.common.entity.mob.EntitySentryPigman;
 import com.github.revival.common.entity.mob.EntitySmilodon;
 import com.github.revival.common.entity.mob.EntitySpinosaurus;
 import com.github.revival.common.entity.mob.EntityStegosaurus;
+import com.github.revival.common.entity.mob.EntityTarSlime;
 import com.github.revival.common.entity.mob.EntityTerrorBird;
 import com.github.revival.common.entity.mob.EntityTriceratops;
 import com.github.revival.common.entity.mob.EntityTyrannosaurus;
@@ -196,7 +199,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntitySentryPigman.class, new RenderSentryPigman());
 		RenderingRegistry.registerEntityRenderingHandler(EntityAnuDead.class, new RenderDeadAnu(new ModelDeadAnu(), 0.3F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityBirdEgg.class, new RenderBirdEgg());
-		
+		RenderingRegistry.registerEntityRenderingHandler(EntityTarSlime.class, new RenderTarSlime());
 		RenderingRegistry.registerEntityRenderingHandler(EntityQuagga.class, new RenderQuagga(new ModelQuagga(), 0.5F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityTerrorBird.class, new RenderTerrorBird(new ModelTerrorBird(), 0.5F));
 
@@ -278,6 +281,13 @@ public class ClientProxy extends CommonProxy
 		EntityFX particle1 = new SleepFX(world, posX, posY, posZ, 0, 0, 0);
 		Minecraft.getMinecraft().effectRenderer.addEffect(particle1);
 	}
+	
+	public void spawnTarParticle(World world, double posX, double posY, double posZ)
+	{
+		EntityFX particle1 = new TarDropsFX(world, posX, posY, posZ);
+		Minecraft.getMinecraft().effectRenderer.addEffect(particle1);
+	}
+	
 	public void animate(int animateID) {}
 	
 	public void doChainBuffer(Object buffer, EntityLivingBase entity){
