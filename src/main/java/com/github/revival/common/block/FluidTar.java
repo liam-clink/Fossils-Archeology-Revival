@@ -1,6 +1,5 @@
 package com.github.revival.common.block;
 
-import net.minecraft.block.Block;
 import net.minecraftforge.fluids.Fluid;
 
 public class FluidTar extends Fluid
@@ -9,7 +8,7 @@ public class FluidTar extends Fluid
 	{
 		super(fluidName);
 		this.setViscosity(6000);
-		this.setIcons(this.block.getIcon(0, 0), this.block.getIcon(0, 0));
+		//this.setIcons(this.block.getIcon(0, 0), this.block.getIcon(0, 0)); Nope!
 	}
 
 }

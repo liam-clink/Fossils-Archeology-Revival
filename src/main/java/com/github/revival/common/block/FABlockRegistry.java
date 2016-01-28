@@ -1,15 +1,5 @@
 package com.github.revival.common.block;
 
-import java.lang.reflect.Field;
-import java.util.List;
-
-import net.ilexiconn.llibrary.common.content.IContentHandler;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.init.Blocks;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidRegistry;
-
 import com.github.revival.Revival;
 import com.github.revival.common.FARegistry;
 import com.github.revival.common.api.INamedBlock;
@@ -17,8 +7,14 @@ import com.github.revival.common.api.ISubBlocksBlock;
 import com.github.revival.common.creativetab.FATabRegistry;
 import com.github.revival.common.handler.LocalizationStrings;
 import com.google.common.collect.Lists;
-
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.ilexiconn.llibrary.common.content.IContentHandler;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraftforge.fluids.FluidRegistry;
+
+import java.lang.reflect.Field;
+import java.util.List;
 
 public class FABlockRegistry extends FARegistry implements IContentHandler
 {
@@ -99,6 +95,9 @@ public class FABlockRegistry extends FARegistry implements IContentHandler
 
 	public void init()
 	{
+		Revival.tar_fluid = new FluidTar("tar").setBlock(tar);
+		FluidRegistry.registerFluid(Revival.tar_fluid);
+
 		skullLantern = new BlockFossilSkull(true).setLightLevel(1F);
 		Limestone = new BlockLimestone(Material.rock);
 		LimestoneBrick = new BlockLimestoneBrick(Material.rock);
@@ -175,9 +174,6 @@ public class FABlockRegistry extends FARegistry implements IContentHandler
 		mutantPlant = new BlockFossilTallPlant("plants/plant_mutant").setBlockName("plant_mutant").setLightLevel(0.4F).setCreativeTab(FATabRegistry.tabFBlocks);
 		tempskya = new BlockTempskya("plants/plant_tempskya").setBlockName("plant_tempskya").setCreativeTab(FATabRegistry.tabFBlocks);
 
-		Revival.tar_fluid = new FluidTar("tar").setBlock(tar);
-		FluidRegistry.registerFluid(Revival.tar_fluid);
-
 		/*Blocks.fire.setFireInfo(FABlockRegistry.palmLeaves, 30, 60);
 		Blocks.fire.setFireInfo(FABlockRegistry.palmLog, 5, 20);
 		Blocks.fire.setFireInfo(FABlockRegistry.palaePlanks, 5, 20);
@@ -214,7 +210,7 @@ public class FABlockRegistry extends FARegistry implements IContentHandler
 
 	public void gameRegistry() throws Exception
 	{
-		/*initCreativeTabs();
+		initCreativeTabs();
 		try
 		{
 			for (Field f : FABlockRegistry.class.getDeclaredFields())
@@ -231,7 +227,7 @@ public class FABlockRegistry extends FARegistry implements IContentHandler
 		catch (IllegalAccessException e)
 		{
 			throw new RuntimeException(e);
-		}*/
+		}
 	}
 
 	public void registerBlock(Block block)
