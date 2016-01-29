@@ -113,7 +113,7 @@ public class EntityTarSlime extends EntitySlime{
 
 	protected Item getDropItem()
 	{
-		return FAItemRegistry.tarfossil;
+		return FAItemRegistry.tardrop;
 	}
 
 	@Override

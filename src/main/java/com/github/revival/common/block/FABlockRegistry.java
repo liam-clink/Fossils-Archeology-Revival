@@ -7,9 +7,11 @@ import com.github.revival.common.api.ISubBlocksBlock;
 import com.github.revival.common.creativetab.FATabRegistry;
 import com.github.revival.common.handler.LocalizationStrings;
 import com.google.common.collect.Lists;
+
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.ilexiconn.llibrary.common.content.IContentHandler;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraftforge.fluids.FluidRegistry;
 
@@ -62,7 +64,6 @@ public class FABlockRegistry extends FARegistry implements IContentHandler
 	public static Block ancientStoneStairs;
 	public static Block ancientStoneSingleSlab;
 	public static Block ancientStoneDoubleSlab;
-	public static Block marble;
 	public static Block obsidianSpikes;
 	public static Block figurineBlock;
 	public static Block anuTotem;
@@ -95,6 +96,7 @@ public class FABlockRegistry extends FARegistry implements IContentHandler
 
 	public void init()
 	{
+		Revival.tar_material = new MaterialTar(MapColor.blackColor);
 		Revival.tar_fluid = new FluidTar("tar").setBlock(tar);
 		FluidRegistry.registerFluid(Revival.tar_fluid);
 
@@ -143,7 +145,6 @@ public class FABlockRegistry extends FARegistry implements IContentHandler
 		ancientStoneStairs = new BlockFossilStairs(ancientStone, 0).setBlockName(LocalizationStrings.ANCIENT_STONE_STAIRS_NAME);
 		ancientStoneDoubleSlab = new BlockAncientStoneSlab(true);
 		ancientStoneSingleSlab = new BlockAncientStoneSlab(false);
-		marble = new BlockMarble();
 		obsidianSpikes = new BlockSpikes().setCreativeTab(FATabRegistry.tabFBlocks).setHardness(50.0F).setResistance(2000.0F).setStepSound(Block.soundTypePiston).setBlockName("obsidianSpikes").setBlockTextureName("fossil:obsidianSpikes");
 		figurineBlock = new BlockFigurine();
 		anuTotem = new BlockAnuStatue();

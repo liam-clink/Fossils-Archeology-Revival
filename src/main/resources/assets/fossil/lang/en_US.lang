@@ -705,3 +705,4 @@ anu.breakblock=You cannot break this block until its guardian has been destroyed
 entity.fossil.TarSlime.name=Tar Slime
 item.tardrop.name=Tar Drop
 item.tarfossil.name=Tar Fossil
+item.tar_bucket.name=Tar Bucket

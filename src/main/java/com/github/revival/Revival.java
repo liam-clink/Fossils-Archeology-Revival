@@ -2,6 +2,7 @@ package com.github.revival;
 
 import net.ilexiconn.llibrary.common.config.ConfigHelper;
 import net.ilexiconn.llibrary.common.content.ContentHelper;
+import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.entity.EnumCreatureType;
@@ -112,7 +113,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.relauncher.Side;
 
-@Mod(modid = Revival.modid, name = "Fossil/Archeology", version = "7.3", dependencies = "required-after:llibrary@[0.7.2,)")
+@Mod(modid = Revival.modid, name = "Fossil/Archeology", version = "7.3", dependencies = "required-after:llibrary@[0.5.2,)")
 public class Revival
 {
 	public static final String modid = "fossil";
@@ -139,6 +140,8 @@ public class Revival
 
 	public static ToolMaterial toothDaggerMaterial = EnumHelper.addToolMaterial("toothDagger", 3, 250, 70.0F, 1.5F, 25);
 	public Configuration config;
+	
+	public static Material tar_material;
 	public static Fluid tar_fluid;
 
 	public static boolean enableDebugging()

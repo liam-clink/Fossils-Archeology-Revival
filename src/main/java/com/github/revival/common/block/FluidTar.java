@@ -7,8 +7,8 @@ public class FluidTar extends Fluid
 	public FluidTar(String fluidName) 
 	{
 		super(fluidName);
-		this.setViscosity(6000);
-		//this.setIcons(this.block.getIcon(0, 0), this.block.getIcon(0, 0)); Nope!
+		this.setViscosity(8000);
+		this.setIcons(BlockTar.tar_still, BlockTar.tar_flowing);
 	}
 
 }

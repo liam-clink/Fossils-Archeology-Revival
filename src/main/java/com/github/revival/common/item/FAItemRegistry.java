@@ -174,7 +174,7 @@ public class FAItemRegistry extends FARegistry implements IContentHandler
 		palaeSaplingFossil = new ForgeItem("Palae_Fossil").setUnlocalizedName("fossilSapling_palae").setCreativeTab(FATabRegistry.tabFItems);
 		tardrop = new ForgeItem("tardrop").setUnlocalizedName("tardrop").setCreativeTab(FATabRegistry.tabFItems);
 		tarfossil = new ForgeItem("tar_fossil").setUnlocalizedName("tarfossil").setCreativeTab(FATabRegistry.tabFItems);
-		tar_bucket = new ItemBucket(FABlockRegistry.tar).setUnlocalizedName("tar_bucket").setTextureName("fossil:bucket_tar").setContainerItem(Items.bucket);
+		tar_bucket = new ItemBucket(FABlockRegistry.tar).setUnlocalizedName("tar_bucket").setTextureName("fossil:bucket_tar").setContainerItem(Items.bucket).setCreativeTab(FATabRegistry.tabFItems);
 		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluidStack("tar", FluidContainerRegistry.BUCKET_VOLUME), new ItemStack(tar_bucket), new ItemStack(Items.bucket));
 		BucketEvent.INSTANCE.buckets.put(FABlockRegistry.tar, tar_bucket);
 		MinecraftForge.EVENT_BUS.register(BucketEvent.INSTANCE);
