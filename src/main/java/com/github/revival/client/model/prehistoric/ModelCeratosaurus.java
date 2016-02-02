@@ -150,14 +150,16 @@ public class ModelCeratosaurus extends MowzieModelBase {
 		this.headPivot.addChild(this.head);
 		this.upperJaw.addChild(this.frontNasalCrest);
 		this.head.addChild(this.upperJaw);
-		ModelUtils.doMowzieStuff(false, boxList);
+		this.setInitPose();
 	}
 
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		super.render(entity, f, f1, f2, f3, f4, f5);
-		ModelUtils.doMowzieStuff(true, boxList);
+		this.rightThigh.render(f5);
+		this.lowerBody.render(f5);
+		this.leftThigh.render(f5);
 		this.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-		ModelUtils.renderAll(boxList);
+		this.setToInitPose();
 	}
 	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
 		MowzieModelRenderer[] tailParts = {this.tail1, this.tail2, this.tail3};

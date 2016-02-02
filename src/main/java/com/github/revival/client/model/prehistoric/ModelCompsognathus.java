@@ -155,18 +155,20 @@ public class ModelCompsognathus extends ModelNewPrehistoric {
 		this.RightLowerArm.addChild(this.RightUpperArmWing);
 		this.LeftLowerArm.addChild(this.LeftUpperArmWing);
 		this.head.addChild(this.crest);
-		ModelUtils.doMowzieStuff(false, boxList);
+		this.setInitPose();
 		animator = new Animator(this);
 	}
 
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		animate((IAnimated)entity, f, f1, f2, f3, f4, f5);
-		ModelUtils.renderAll(boxList);
+		RightUpperLeg.render(f5);
+		body.render(f5);
+		LeftUpperLeg.render(f5);
 	}
 
 	public void animate(IAnimated entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		animator.update(entity);
-		ModelUtils.doMowzieStuff(true, boxList);
+		this.setToInitPose();
 		setRotationAngles(f, f1, f2, f3, f4, f5, (Entity)entity);
 
 	}
@@ -176,7 +178,6 @@ public class ModelCompsognathus extends ModelNewPrehistoric {
 		MowzieModelRenderer[] neckParts = {this.neck, this.head};
 		MowzieModelRenderer[] leftArmParts = {this.LeftUpperArm, this.LeftLowerArm};
 		MowzieModelRenderer[] rightArmParts = {this.RightUpperArm, this.RightLowerArm};
-		ModelUtils.doMowzieStuff(true, boxList);
 
 		this.faceTarget(head, 1, f3, f4);
 

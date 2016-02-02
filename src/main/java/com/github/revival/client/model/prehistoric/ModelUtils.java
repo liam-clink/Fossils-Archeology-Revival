@@ -10,34 +10,6 @@ import net.minecraft.client.model.ModelRenderer;
 
 public class ModelUtils {
 
-	public static void renderAll(List boxList){
-		Iterator itr = boxList.iterator();
-		while(itr.hasNext()) {
-			Object element = itr.next();
-			if(element instanceof MowzieModelRenderer){
-				MowzieModelRenderer box = (MowzieModelRenderer)element;
-				if(box.getParent() == null){
-					box.render(0.0625F);
-				}
-			}
-		}
-	}
-
-	public static void doMowzieStuff(boolean reset, List boxList){
-		Iterator itr = boxList.iterator();
-		while(itr.hasNext()) {
-			Object element = itr.next();
-			if(element instanceof MowzieModelRenderer){
-				MowzieModelRenderer box = (MowzieModelRenderer)element;
-				if(reset){
-					box.setCurrentPoseToInitValues();
-				}else{
-					box.setInitValuesToCurrentPose();
-				}
-			}
-		}
-	}
-
 	public static void animateOrSetRotation(Animator animator, boolean animate, MowzieModelRenderer part, float x, float y, float z, boolean override){
 		if(animate){
 			if(override){
@@ -85,7 +57,7 @@ public class ModelUtils {
 			Object element = itr.next();
 			if(element instanceof MowzieModelRenderer){
 				MowzieModelRenderer box = (MowzieModelRenderer)element;
-				
+
 				animator.rotate(box, box.rotateAngleX == box.initRotateAngleX ? 0 : box.initRotateAngleX,
 						box.rotateAngleY == box.initRotateAngleY ? 0 : box.initRotateAngleY,
 								box.rotateAngleZ == box.initRotateAngleZ ? 0 : box.initRotateAngleZ);
@@ -95,7 +67,7 @@ public class ModelUtils {
 			}
 		}
 	}
-	
+
 	public static void setRotateAngle(MowzieModelRenderer MowzieModelRenderer, float x, float y, float z)
 	{
 		MowzieModelRenderer.rotateAngleX = x;

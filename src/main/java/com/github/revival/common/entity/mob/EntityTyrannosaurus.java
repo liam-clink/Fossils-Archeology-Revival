@@ -148,7 +148,7 @@ public class EntityTyrannosaurus extends EntityNewPrehistoric
 		super.onUpdate();
 
 		//Revival.proxy.doChainBuffer(tailbuffer, this);
-		if(!this.isSleeping() && this.rand.nextInt(500) == 0 && !worldObj.isRemote){
+		if(!this.isSleeping() && this.rand.nextInt(500) == 0 && !worldObj.isRemote && !this.isSitting()){
 			if(this.getAnimation() == this.animation_none){
 				this.setAnimation(animation_roar);
 			}

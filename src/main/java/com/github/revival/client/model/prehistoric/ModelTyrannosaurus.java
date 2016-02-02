@@ -181,18 +181,21 @@ public class ModelTyrannosaurus extends ModelNewPrehistoric
 		this.rightUpperArm.addChild(this.rightLowerArm);
 		this.lowerBody.addChild(this.upperBody);
 		this.tail3.addChild(this.middleTailBackFeather);
-		ModelUtils.doMowzieStuff(false, boxList);
+		this.setInitPose();
 		animator = new Animator(this);
 	}
 
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		animate((IAnimated)entity, f, f1, f2, f3, f4, f5);
-		ModelUtils.renderAll(boxList);
+		this.rightThigh.render(f5);
+		this.lowerBody.render(f5);
+		this.leftThigh.render(f5);
+
 	}
 
 	public void animate(IAnimated entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		animator.update(entity);
-		ModelUtils.doMowzieStuff(true, boxList);
+		this.setToInitPose();
 		setRotationAngles(f, f1, f2, f3, f4, f5, (Entity)entity);
 		animator.setAnimationId(EntityTyrannosaurus.animation_roar.animationId);
 		animator.startPhase(20);
@@ -251,6 +254,34 @@ public class ModelTyrannosaurus extends ModelNewPrehistoric
 
 		float speed = 0.5F;
 		float speed2 = 0.1F;
+		float sitProgress = ((EntityNewPrehistoric)(entity)).sitProgress;
+		sitAnimationRotation(neck, sitProgress, -((float)Math.toRadians(15D)), 0, 0);
+        sitAnimationRotation(leftLowerArm, sitProgress, -((float)Math.toRadians(30.0D)), 0, 0);
+        sitAnimationRotation(lowerBody, sitProgress, -((float)Math.toRadians(13.04D)), 0, 0);
+        sitAnimationRotation(leftCrest, sitProgress, -((float)Math.toRadians(4.05D)), 0, 0);
+        sitAnimationRotation(rightLowerArm, sitProgress, -((float)Math.toRadians(30.0D)), 0, 0);
+        sitAnimationRotation(middleTailBackFeather, sitProgress, (float)Math.toRadians(10.08D), 0, 0);
+        sitAnimationRotation(tail1, sitProgress, -((float)Math.toRadians(10.43D)), 0, 0);
+        sitAnimationRotation(tail3, sitProgress, -((float)Math.toRadians(2.61D)), 0, 0);
+        sitAnimationRotation(lowerJaw, sitProgress, (float)Math.toRadians(1.26D), 0, 0);
+        sitAnimationRotation(leftTailFeather, sitProgress, (float)Math.toRadians(5.95D), 0, 0);
+        sitAnimationRotation(rightLeg, sitProgress, -((float)Math.toRadians(40.0D)), 0, 0);
+        sitAnimationRotation(upperBody, sitProgress, (float)Math.toRadians(6.48D), 0, 0);
+        sitAnimationRotation(rightCrest, sitProgress, -((float)Math.toRadians(4.05D)), 0, 0);
+        sitAnimationRotation(rightThigh, sitProgress, -((float)Math.toRadians(50.0D)), 0, 0);
+        sitAnimationRotation(leftLeg, sitProgress, -((float)Math.toRadians(40.0D)), 0, 0);
+        sitAnimationRotation(leftFoot, sitProgress, (float)Math.toRadians(90.0D), 0, 0);
+        sitAnimationRotation(middleCrest, sitProgress, (float)Math.toRadians(9.21D), 0, 0);
+        sitAnimationRotation(head, sitProgress, (float)Math.toRadians(17D), 0, 0);
+        sitAnimationRotation(middleTailFrontFeather, sitProgress, (float)Math.toRadians(18.73D), 0, 0);
+        sitAnimationRotation(tail2, sitProgress, (float)Math.toRadians(13.04D), 0, 0);
+        sitAnimationRotation(rightTailFeather, sitProgress, (float)Math.toRadians(5.95D), 0, 0);
+        sitAnimationRotation(rightFoot, sitProgress, (float)Math.toRadians(90.0D), 0, 0);
+        sitAnimationRotation(leftThigh, sitProgress, -((float)Math.toRadians(50.0D)), 0, 0);
+        sitAnimationRotation(upperJaw, sitProgress, (float)Math.toRadians(2.0D), 0, 0);
+        sitAnimationPos(rightThigh, sitProgress, 0F, 16.90F - rightThigh.initRotationPointY, 0F);
+		sitAnimationPos(lowerBody, sitProgress, 0F, 10.80F - lowerBody.initRotationPointY, 0F);
+		sitAnimationPos(leftThigh, sitProgress, 0F, 16.90F - leftThigh.initRotationPointY, 0F);
 		this.walk(upperBody, speed2, 0.05F, false, 1F, 0F, entity.ticksExisted, 1);
 		this.bob(lowerBody, speed2, 0.4F, false, entity.ticksExisted, 1);
 		this.walk(upperBody, speed2, 0.05F, false, 1F, 0F, entity.ticksExisted, 1);
@@ -265,6 +296,7 @@ public class ModelTyrannosaurus extends ModelNewPrehistoric
 		this.chainWave(rightArmParts, speed2, 0.05F, -3, entity.ticksExisted, 1);
 		this.chainSwing(tailParts, speed2, 0.15F, -3, entity.ticksExisted, 1);
 		this.chainWave(neckParts, speed2, 0.05F, -3, entity.ticksExisted, 1);
+		
 		//((ChainBuffer)((EntityTyrannosaurus)entity).tailbuffer).applyChainSwingBuffer(tailParts);
 	}
 
