@@ -76,7 +76,6 @@ public class EntityVelociraptor extends EntityNewPrehistoric
 	        attackStep = (this.maxDamage - this.baseDamage) / (this.getAdultAge() + 1);
 	        speedStep = (this.maxSpeed - this.baseSpeed) / (this.getAdultAge() + 1);
 	        
-	        
 	        if (this.getDinoAge() <= this.getAdultAge())
 	        {
 

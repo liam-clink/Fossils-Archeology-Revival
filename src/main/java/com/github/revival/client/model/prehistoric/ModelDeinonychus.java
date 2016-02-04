@@ -248,7 +248,7 @@ public class ModelDeinonychus extends ModelNewPrehistoric {
 		this.faceTarget(head, 1, f3, f4);
 
 		float speed = 0.1F;
-		float speed2 = 0.5F;
+		float speed2 = 0.8F;
 		float sitProgress = ((EntityNewPrehistoric)(entity)).sitProgress;
 		sitAnimationRotation(upperBody, sitProgress, (float)Math.toRadians(13.13D), 0, 0);
 		sitAnimationRotation(rightFoot, sitProgress, ((float)Math.toRadians(26D)), 0, 0);

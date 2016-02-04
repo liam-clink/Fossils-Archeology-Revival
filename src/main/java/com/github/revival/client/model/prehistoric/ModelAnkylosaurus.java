@@ -1,251 +1,236 @@
 package com.github.revival.client.model.prehistoric;
 
 import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelRenderer;
+import net.ilexiconn.llibrary.common.animation.Animator;
+import net.ilexiconn.llibrary.common.animation.IAnimated;
+import net.minecraft.entity.Entity;
 
 import com.github.revival.client.model.base.ModelPrehistoric;
 import com.github.revival.common.entity.mob.test.EntityNewPrehistoric;
 
 public class ModelAnkylosaurus extends ModelPrehistoric
 {
-    public MowzieModelRenderer Tail[];
-    //fields
-    MowzieModelRenderer Head;
-    MowzieModelRenderer Mouth;
-    MowzieModelRenderer Head_Block;
-    MowzieModelRenderer HeadHorn1;
-    MowzieModelRenderer HeadHorn2;
-    MowzieModelRenderer HeadHorn3;
-    MowzieModelRenderer HeadHorn4;
-    MowzieModelRenderer Body;
-    MowzieModelRenderer BodySpikes;
-    MowzieModelRenderer Neck;
-    MowzieModelRenderer Tail1;
-    MowzieModelRenderer Tail3;
-    MowzieModelRenderer Tail2;
-    MowzieModelRenderer Front_ThighLeft;
-    MowzieModelRenderer Front_ThighRight;
-    MowzieModelRenderer Back_ThighLeft;
-    MowzieModelRenderer Back_ThighRight;
-    MowzieModelRenderer Front_LowerLegRight;
-    MowzieModelRenderer Front_LowerLegLeft;
-    MowzieModelRenderer Back_LowerLegRight;
-    MowzieModelRenderer Back_LowerLegLeft;
+    public MowzieModelRenderer Body;
+    public MowzieModelRenderer BodyUpper;
+    public MowzieModelRenderer BodySpikes;
+    public MowzieModelRenderer Tail1;
+    public MowzieModelRenderer BackThighR;
+    public MowzieModelRenderer BackThighL;
+    public MowzieModelRenderer Neck;
+    public MowzieModelRenderer BodyUpperSpikes;
+    public MowzieModelRenderer FrontThighR;
+    public MowzieModelRenderer FrontThighL;
+    public MowzieModelRenderer Head;
+    public MowzieModelRenderer HornL1;
+    public MowzieModelRenderer HeadBlock;
+    public MowzieModelRenderer Mouth;
+    public MowzieModelRenderer HornL2;
+    public MowzieModelRenderer HornR1;
+    public MowzieModelRenderer HornR2;
+    public MowzieModelRenderer Mouth_1;
+    public MowzieModelRenderer FrontLegR;
+    public MowzieModelRenderer FrontLegL;
+    public MowzieModelRenderer Tail2;
+    public MowzieModelRenderer TailSpikes;
+    public MowzieModelRenderer Tail3;
+    public MowzieModelRenderer TailClub;
+    public MowzieModelRenderer BackLegR;
+    public MowzieModelRenderer BackLegL;
+	private Animator animator;
 
-    public ModelAnkylosaurus()
-    {
-        textureWidth = 128;
-        textureHeight = 64;
-        Head = new MowzieModelRenderer(this, 0, 0);
-        Head.addBox(-4F, 0F, -8F, 8, 7, 8);
-        Head.setRotationPoint(0F, 10.5F, -8F);
-        Head.setTextureSize(128, 64);
-        Head.mirror = true;
-        setRotateAngle(Head, 0F, 0F, 0F);
-        Head_Block = new MowzieModelRenderer(this, 24, 0);
-        Head_Block.addBox(-3.0F, -0.9F, -4.9F, 6, 2, 5);
-        Head_Block.setRotationPoint(0F, 10.5F, -8F);
-        Head_Block.setTextureSize(128, 64);
-        Head_Block.mirror = true;
-        setRotateAngle(Head_Block, 0.1745329F, 0F, 0F);
-        Mouth = new MowzieModelRenderer(this, 0, 15);
-        Mouth.addBox(-2F, -2F, -11F, 4, 6, 4);
-        Mouth.setRotationPoint(0F, 10.5F, -8F);
-        Mouth.setTextureSize(128, 64);
-        Mouth.mirror = true;
-        setRotateAngle(Mouth, 0.4363323F, 0F, 0F);
-        HeadHorn1 = new MowzieModelRenderer(this, 32, 7);
-        HeadHorn1.addBox(3F, -0.9F, -2.9F, 3, 3, 3);
-        HeadHorn1.setRotationPoint(0F, 10.5F, -8F);
-        HeadHorn1.setTextureSize(128, 64);
-        HeadHorn1.mirror = true;
-        setRotateAngle(HeadHorn1, 0.1745329F, 0F, 0F);
-        HeadHorn2 = new MowzieModelRenderer(this, 44, 7);
-        HeadHorn2.addBox(-6F, -0.9F, -2.9F, 3, 3, 3);
-        HeadHorn2.setRotationPoint(0F, 10.5F, -8F);
-        HeadHorn2.setTextureSize(128, 64);
-        HeadHorn2.mirror = true;
-        setRotateAngle(HeadHorn2, 0.1745329F, 0F, 0F);
-        HeadHorn3 = new MowzieModelRenderer(this, 32, 7);
-        HeadHorn3.addBox(3F, 3.5F, -3F, 3, 3, 3);
-        HeadHorn3.setRotationPoint(0F, 10.5F, -8F);
-        HeadHorn3.setTextureSize(128, 64);
-        HeadHorn3.mirror = true;
-        setRotateAngle(HeadHorn3, 0F, 0F, 0.1745329F);
-        HeadHorn4 = new MowzieModelRenderer(this, 44, 7);
-        HeadHorn4.addBox(-6F, 3.5F, -3F, 3, 3, 3);
-        HeadHorn4.setRotationPoint(0F, 10.5F, -8F);
-        HeadHorn4.setTextureSize(128, 64);
-        HeadHorn4.mirror = true;
-        setRotateAngle(HeadHorn4, 0F, 0F, -0.1745329F);
-        Body = new MowzieModelRenderer(this, 68, 0);
-        Body.addBox(0F, 3F, 0F, 14, 10, 16);
-        Body.setRotationPoint(-7F, 6F, -7F);
-        Body.setTextureSize(128, 64);
-        Body.mirror = true;
-        setRotateAngle(Body, 0F, 0F, 0F);
-        BodySpikes = new MowzieModelRenderer(this, 56, 26);
-        BodySpikes.addBox(0F, 3F, 0F, 18, 2, 18);
-        BodySpikes.setRotationPoint(-9F, 10F, -8F);
-        BodySpikes.setTextureSize(128, 64);
-        BodySpikes.mirror = true;
-        setRotateAngle(BodySpikes, 0F, 0F, 0F);
-        Neck = new MowzieModelRenderer(this, 46, 0);
-        Neck.addBox(0F, -9F, -2.5F, 4, 5, 2);
-        Neck.setRotationPoint(-2F, 8F, -8F);
-        Neck.setTextureSize(128, 64);
-        Neck.mirror = true;
-        setRotateAngle(Neck, 3F, 0F, 0F);
-        Tail1 = new MowzieModelRenderer(this, 104, 46);
-        Tail1.addBox(-3F, 3F, 0F, 6, 6, 6);
-        Tail1.setRotationPoint(0F, 7F, 8F);
-        Tail1.setTextureSize(128, 64);
-        Tail1.mirror = true;
-        setRotateAngle(Tail1, -0.2617994F, 0F, 0F);
-        Tail3 = new MowzieModelRenderer(this, 80, 46);
-        Tail3.addBox(-3F, -3F, 0F, 6, 6, 6);
-        Tail3.setRotationPoint(0F, 2F, 7F);
-        Tail3.setTextureSize(128, 64);
-        Tail3.mirror = true;
-        setRotateAngle(Tail3, 0F, 0F, 0F);
-        Tail2 = new MowzieModelRenderer(this, 56, 46);
-        Tail2.addBox(-2F, 0F, 0F, 4, 4, 8);
-        Tail2.setRotationPoint(0F, 4F, 5F);
-        Tail2.setTextureSize(128, 64);
-        Tail2.mirror = true;
-        setRotateAngle(Tail2, 0F, 0F, 0F);
-        Tail1.addChild(Tail2);
-        Tail2.addChild(Tail3);
-        Front_ThighRight = new MowzieModelRenderer(this, 18, 24);
-        Front_ThighRight.addBox(0F, 3F, -2F, 4, 4, 4);
-        Front_ThighRight.setRotationPoint(-9F, 14F, -4F);
-        Front_ThighRight.setTextureSize(128, 64);
-        Front_ThighRight.mirror = true;
-        setRotateAngle(Front_ThighRight, 0F, 0F, 0F);
-        Front_ThighLeft = new MowzieModelRenderer(this, 18, 24);
-        Front_ThighLeft.addBox(0F, 3F, -2F, 4, 4, 4);
-        Front_ThighLeft.setRotationPoint(5F, 14F, -4F);
-        Front_ThighLeft.setTextureSize(128, 64);
-        Front_ThighLeft.mirror = true;
-        setRotateAngle(Front_ThighLeft, 0F, 0F, 0F);
-        Back_ThighRight = new MowzieModelRenderer(this, 0, 25);
-        Back_ThighRight.addBox(0F, 3F, -2F, 4, 5, 5);
-        Back_ThighRight.setRotationPoint(-9F, 13F, 5F);
-        Back_ThighRight.setTextureSize(128, 64);
-        Back_ThighRight.mirror = true;
-        setRotateAngle(Back_ThighRight, 0F, 0F, 0F);
-        Back_ThighLeft = new MowzieModelRenderer(this, 0, 25);
-        Back_ThighLeft.addBox(0F, 3F, -2F, 4, 5, 5);
-        Back_ThighLeft.setRotationPoint(5F, 13F, 5F);
-        Back_ThighLeft.setTextureSize(128, 64);
-        Back_ThighLeft.mirror = true;
-        setRotateAngle(Back_ThighLeft, 0F, 0F, 0F);
-        Front_LowerLegRight = new MowzieModelRenderer(this, 0, 35);
-        Front_LowerLegRight.addBox(0F, 6F, -1F, 3, 4, 4);
-        Front_LowerLegRight.setRotationPoint(0F, 0F, 0F);
-        Front_LowerLegRight.setTextureSize(128, 64);
-        Front_LowerLegRight.mirror = true;
-        setRotateAngle(Front_LowerLegRight, 0F, 0F, 0F);
-        Front_LowerLegLeft = new MowzieModelRenderer(this, 0, 35);
-        Front_LowerLegLeft.addBox(0F, 6F, -1F, 3, 4, 4);
-        Front_LowerLegLeft.setRotationPoint(0F, 0F, 0F);
-        Front_LowerLegLeft.setTextureSize(128, 64);
-        Front_LowerLegLeft.mirror = true;
-        setRotateAngle(Front_LowerLegLeft, 0F, 0F, 0F);
-        Back_LowerLegRight = new MowzieModelRenderer(this, 0, 35);
-        Back_LowerLegRight.addBox(0F, 7F, 0F, 3, 4, 4);
-        Back_LowerLegRight.setRotationPoint(0F, 0F, 0F);
-        Back_LowerLegRight.setTextureSize(128, 64);
-        Back_LowerLegRight.mirror = true;
-        setRotateAngle(Back_LowerLegRight, 0F, 0F, 0F);
-        Back_LowerLegLeft = new MowzieModelRenderer(this, 0, 35);
-        Back_LowerLegLeft.addBox(0F, 7F, 0F, 3, 4, 4);
-        Back_LowerLegLeft.setRotationPoint(0F, 0F, 0F);
-        Back_LowerLegLeft.setTextureSize(128, 64);
-        Back_LowerLegLeft.mirror = true;
-        setRotateAngle(Back_LowerLegLeft, 0F, 0F, 0F);
-        Front_ThighRight.addChild(Front_LowerLegRight);
-        Front_ThighLeft.addChild(Front_LowerLegLeft);
-        Back_ThighRight.addChild(Back_LowerLegRight);
-        Back_ThighLeft.addChild(Back_LowerLegLeft);
-        this.doMowzieStuff(false);
+    public ModelAnkylosaurus() {
+        this.textureWidth = 256;
+        this.textureHeight = 128;
+        this.Body = new MowzieModelRenderer(this, 68, 2);
+        this.Body.setRotationPoint(0.0F, 13.7F, -3.0F);
+        this.Body.addBox(-7.0F, -5.0F, 0.0F, 14, 10, 12, 0.0F);
+        this.setRotateAngle(Body, -3.887035670558508E-15F, -0.0F, 0.0F);
+        this.Head = new MowzieModelRenderer(this, 1, 1);
+        this.Head.setRotationPoint(0.0F, 0.0F, -6.1F);
+        this.Head.addBox(-4.0F, -1.9F, -7.0F, 8, 7, 7, 0.0F);
+        this.setRotateAngle(Head, 0.22759093446006054F, -0.0F, 0.0F);
+        this.BodyUpper = new MowzieModelRenderer(this, 34, 17);
+        this.BodyUpper.setRotationPoint(0.0F, -0.4F, 0.6F);
+        this.BodyUpper.addBox(-6.0F, -4.2F, -8.1F, 12, 9, 8, 0.0F);
+        this.setRotateAngle(BodyUpper, 0.045553093477052F, -0.0F, 0.0F);
+        this.HeadBlock = new MowzieModelRenderer(this, 24, 0);
+        this.HeadBlock.setRotationPoint(0.0F, -0.9F, -4.1F);
+        this.HeadBlock.addBox(-3.0F, -1.0F, 0.0F, 6, 2, 5, 0.0F);
+        this.setRotateAngle(HeadBlock, 0.18203784098300857F, -0.0F, 0.0F);
+        this.Mouth = new MowzieModelRenderer(this, 0, 15);
+        this.Mouth.setRotationPoint(0.0F, 0.9F, -6.3F);
+        this.Mouth.addBox(-2.0F, -2.0F, -4.0F, 4, 5, 4, 0.0F);
+        this.setRotateAngle(Mouth, 0.136659280431156F, -0.0F, 0.0F);
+        this.HornL2 = new MowzieModelRenderer(this, 32, 7);
+        this.HornL2.setRotationPoint(2.8F, 1.5F, -1.5F);
+        this.HornL2.addBox(0.0F, 0.0F, -1.5F, 3, 2, 3, 0.0F);
+        this.setRotateAngle(HornL2, 0.8726646259971648F, -0.3490658503988659F, 0.5235987755982988F);
+        this.FrontLegL = new MowzieModelRenderer(this, 0, 35);
+        this.FrontLegL.mirror = true;
+        this.FrontLegL.setRotationPoint(0.0F, 4.1F, -1.3F);
+        this.FrontLegL.addBox(-1.5F, 0.0F, -1.0F, 3, 4, 4, 0.0F);
+        this.setRotateAngle(FrontLegL, -0.2617993877991494F, -0.0F, 0.0F);
+        this.HornR1 = new MowzieModelRenderer(this, 32, 7);
+        this.HornR1.mirror = true;
+        this.HornR1.setRotationPoint(-2.8F, -2.5F, -0.4F);
+        this.HornR1.addBox(-3.0F, 0.0F, -0.5F, 3, 2, 3, 0.0F);
+        this.setRotateAngle(HornR1, 0.6283185307179586F, -0.08726646259971647F, -0.8726646259971648F);
+        this.TailClub = new MowzieModelRenderer(this, 72, 36);
+        this.TailClub.setRotationPoint(0.0F, 0.1F, 8.9F);
+        this.TailClub.addBox(-3.5F, -3.0F, -0.4F, 7, 5, 6, 0.0F);
+        this.setRotateAngle(TailClub, 0.136659280431156F, -0.0F, 0.0F);
+        this.BackLegL = new MowzieModelRenderer(this, 0, 35);
+        this.BackLegL.mirror = true;
+        this.BackLegL.setRotationPoint(0.0F, 4.8F, 1.0F);
+        this.BackLegL.addBox(-1.5F, -0.2F, -2.0F, 3, 4, 4, 0.0F);
+        this.Tail3 = new MowzieModelRenderer(this, 100, 35);
+        this.Tail3.setRotationPoint(0.0F, -0.4F, 4.9F);
+        this.Tail3.addBox(-2.0F, -1.6F, 0.9F, 4, 4, 8, 0.0F);
+        this.setRotateAngle(Tail3, 0.045553093477052F, -0.0F, 0.0F);
+        this.FrontThighR = new MowzieModelRenderer(this, 18, 24);
+        this.FrontThighR.setRotationPoint(-6.5F, 2.1F, -5.9F);
+        this.FrontThighR.addBox(-2.0F, 0.0F, -2.0F, 4, 5, 4, 0.0F);
+        this.setRotateAngle(FrontThighR, 0.22759093446006054F, -0.0F, 0.0F);
+        this.HornR2 = new MowzieModelRenderer(this, 32, 7);
+        this.HornR2.mirror = true;
+        this.HornR2.setRotationPoint(-2.8F, 1.5F, -1.5F);
+        this.HornR2.addBox(-3.0F, 0.0F, -1.5F, 3, 2, 3, 0.0F);
+        this.setRotateAngle(HornR2, 0.8726646259971648F, 0.3490658503988659F, -0.5235987755982988F);
+        this.TailSpikes = new MowzieModelRenderer(this, 14, 68);
+        this.TailSpikes.setRotationPoint(0.0F, -1.2F, 1.2F);
+        this.TailSpikes.addBox(-7.5F, 0.0F, -2.6F, 15, 2, 7, 0.0F);
+        this.setRotateAngle(TailSpikes, 0.091106186954104F, -0.0F, 0.0F);
+        this.BodyUpperSpikes = new MowzieModelRenderer(this, 14, 35);
+        this.BodyUpperSpikes.setRotationPoint(0.0F, -1.8F, -4.5F);
+        this.BodyUpperSpikes.addBox(-7.0F, 0.0F, -5.0F, 14, 2, 10, 0.0F);
+        this.Tail2 = new MowzieModelRenderer(this, 105, 24);
+        this.Tail2.setRotationPoint(0.0F, 0.5F, 5.7F);
+        this.Tail2.addBox(-2.5F, -2.5F, 0.0F, 5, 5, 6, 0.0F);
+        this.setRotateAngle(Tail2, 0.045553093477052F, -0.0F, 0.0F);
+        this.BackThighR = new MowzieModelRenderer(this, 0, 25);
+        this.BackThighR.setRotationPoint(-7.0F, 1.7F, 9.3F);
+        this.BackThighR.addBox(-2.0F, 0.0F, -2.5F, 4, 5, 5, 0.0F);
+        this.FrontThighL = new MowzieModelRenderer(this, 18, 24);
+        this.FrontThighL.mirror = true;
+        this.FrontThighL.setRotationPoint(6.5F, 2.1F, -5.9F);
+        this.FrontThighL.addBox(-2.0F, 0.0F, -2.0F, 4, 5, 4, 0.0F);
+        this.setRotateAngle(FrontThighL, 0.22759093446006054F, -0.0F, 0.0F);
+        this.Neck = new MowzieModelRenderer(this, 57, 48);
+        this.Neck.setRotationPoint(0.0F, -1.9F, -7.8F);
+        this.Neck.addBox(-3.0F, -1.4F, -6.1F, 6, 6, 6, 0.0F);
+        this.BodySpikes = new MowzieModelRenderer(this, 0, 48);
+        this.BodySpikes.setRotationPoint(0.0F, -2.4F, 6.0F);
+        this.BodySpikes.addBox(-9.0F, 0.0F, -8.0F, 18, 2, 13, 0.0F);
+        this.setRotateAngle(BodySpikes, 0.008726646259971648F, -0.0F, 0.0F);
+        this.FrontLegR = new MowzieModelRenderer(this, 0, 35);
+        this.FrontLegR.setRotationPoint(0.0F, 4.1F, -1.3F);
+        this.FrontLegR.addBox(-1.5F, 0.0F, -1.0F, 3, 4, 4, 0.0F);
+        this.setRotateAngle(FrontLegR, -0.2617993877991494F, -0.0F, 0.0F);
+        this.BackLegR = new MowzieModelRenderer(this, 0, 35);
+        this.BackLegR.setRotationPoint(0.0F, 4.8F, 1.0F);
+        this.BackLegR.addBox(-1.5F, -0.2F, -2.0F, 3, 4, 4, 0.0F);
+        this.HornL1 = new MowzieModelRenderer(this, 32, 7);
+        this.HornL1.setRotationPoint(2.8F, -2.5F, -0.4F);
+        this.HornL1.addBox(0.0F, 0.0F, -1.0F, 3, 2, 3, 0.0F);
+        this.setRotateAngle(HornL1, 0.6283185307179586F, -0.08726646259971647F, 0.8726646259971648F);
+        this.Tail1 = new MowzieModelRenderer(this, 83, 49);
+        this.Tail1.setRotationPoint(0.0F, -1.2F, 11.5F);
+        this.Tail1.addBox(-3.0F, -3.0F, 0.0F, 6, 7, 6, 0.0F);
+        this.setRotateAngle(Tail1, -0.18203784098300857F, -0.0F, 0.0F);
+        this.BackThighL = new MowzieModelRenderer(this, 0, 25);
+        this.BackThighL.mirror = true;
+        this.BackThighL.setRotationPoint(7.0F, 1.7F, 9.3F);
+        this.BackThighL.addBox(-2.0F, 0.0F, -2.5F, 4, 5, 5, 0.0F);
+        this.Mouth_1 = new MowzieModelRenderer(this, 0, 47);
+        this.Mouth_1.setRotationPoint(0.0F, 3.4F, -6.0F);
+        this.Mouth_1.addBox(-2.0F, -0.3F, -1.7F, 4, 4, 1, 0.0F);
+        this.setRotateAngle(Mouth_1, 1.593485607070823F, -3.141592653589793F, 0.0F);
+        this.Neck.addChild(this.Head);
+        this.Body.addChild(this.BodyUpper);
+        this.Head.addChild(this.HeadBlock);
+        this.Head.addChild(this.Mouth);
+        this.Head.addChild(this.HornL2);
+        this.FrontThighL.addChild(this.FrontLegL);
+        this.Head.addChild(this.HornR1);
+        this.Tail3.addChild(this.TailClub);
+        this.BackThighL.addChild(this.BackLegL);
+        this.Tail2.addChild(this.Tail3);
+        this.BodyUpper.addChild(this.FrontThighR);
+        this.Head.addChild(this.HornR2);
+        this.Tail1.addChild(this.TailSpikes);
+        this.BodyUpper.addChild(this.BodyUpperSpikes);
+        this.Tail1.addChild(this.Tail2);
+        this.Body.addChild(this.BackThighR);
+        this.BodyUpper.addChild(this.FrontThighL);
+        this.BodyUpper.addChild(this.Neck);
+        this.Body.addChild(this.BodySpikes);
+        this.FrontThighR.addChild(this.FrontLegR);
+        this.BackThighR.addChild(this.BackLegR);
+        this.Head.addChild(this.HornL1);
+        this.Body.addChild(this.Tail1);
+        this.Body.addChild(this.BackThighL);
+        this.Head.addChild(this.Mouth_1);
+        this.setInitPose();
+		animator = new Animator(this);
     }
-
-	@Override
-	public void renderFossil(EntityNewPrehistoric entity, float f, float f1,
-			float f2, float f3, float f4, float f5) {
-		
+    
+    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+		animate((IAnimated)entity, f, f1, f2, f3, f4, f5);
+        this.Body.render(f5);
 	}
 
-	@Override
-	public void renderLiving(EntityNewPrehistoric entity, float f, float f1,
-			float f2, float f3, float f4, float f5) {
-		
+    public void animate(IAnimated entity, float f, float f1, float f2, float f3, float f4, float f5) {
+		animator.update(entity);
+		this.setToInitPose();
+		setRotationAngles(f, f1, f2, f3, f4, f5, (Entity)entity);
 	}
 
-	@Override
-	public void renderSleeping(EntityNewPrehistoric entity, float f, float f1,
-			float f2, float f3, float f4, float f5) {
-		
+	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
+		MowzieModelRenderer[] tailParts = {this.Tail1, this.Tail2, this.Tail3, this.TailClub};
+		MowzieModelRenderer[] neckParts = {this.Neck, this.Head};
+		this.faceTarget(Head, 1, f3, f4);
+		float speed = 0.1F;
+		float speed2 = 1.1F;
+		float sitProgress = ((EntityNewPrehistoric)(entity)).sitProgress;
+		this.chainWave(tailParts, speed, 0.05F, -3, entity.ticksExisted, 1);
+		this.chainSwing(tailParts, speed, 0.15F, -2, entity.ticksExisted, 1);
+		this.chainWave(neckParts, speed, 0.15F, 3, entity.ticksExisted, 1);
+		this.bob(Body, speed, 0.4F, false, entity.ticksExisted, 1);
+		this.bob(FrontThighL, speed, -0.4F, false, entity.ticksExisted, 1);
+		this.bob(FrontThighR, speed, -0.4F, false, entity.ticksExisted, 1);
+		this.bob(BackThighL, speed, -0.4F, false, entity.ticksExisted, 1);
+		this.bob(BackThighR, speed, -0.4F, false, entity.ticksExisted, 1);
+		this.walk(FrontThighL, speed2, 0.8F, true, 0F, -0.4F, f, f1);
+		this.walk(FrontThighR, speed2, 0.8F, false, 0F, -0.4F, f, f1);
+		this.walk(BackThighL, speed2, 0.8F, false, 0F, 0.4F, f, f1);
+		this.walk(BackThighR, speed2, 0.8F, true, 0F, 0.4F, f, f1);
+		this.walk(FrontLegL, speed2, 0.6F, true, 0F, 0.4F, f, f1);
+		this.walk(FrontLegR, speed2, 0.6F, false, 0F, 0.4F, f, f1);
+		this.walk(BackLegL, speed2, 0.6F, false, 0F, 0.4F, f, f1);
+		this.walk(BackLegR, speed2, 0.6F, true, 0F, 0.4F, f, f1);
+	/*	MowzieModelRenderer[] tailParts = {this.tail1, this.tail2, this.tail3};
+		MowzieModelRenderer[] neckParts = {this.neck, this.head};
+		MowzieModelRenderer[] leftArmParts = {this.leftUpperArm, this.leftLowerArm};
+		MowzieModelRenderer[] rightArmParts = {this.rightUpperArm, this.rightLowerArm};
+		this.faceTarget(head, 1, f3, f4);
+		float speed = 0.1F;
+		float speed2 = 0.5F;
+		float sitProgress = ((EntityNewPrehistoric)(entity)).sitProgress;
+		this.walk(upperBody, speed, 0.1F, false, 1F, 0F, entity.ticksExisted, 1);
+		this.bob(lowerBody, speed, 0.7F, false, entity.ticksExisted, 1);
+		this.walk(leftThigh, speed2, 0.8F, false, 0F, 0.4F, f, f1);
+		this.walk(leftLeg, speed2, 0.2F, false, 0F, -0.6F, f, f1);
+		this.walk(leftFoot, speed2, -0.4F, false, 4.5F, 0.4F, f, f1);
+		this.walk(rightThigh, speed2, 0.8F, true, 0F, 0.4F, f, f1);
+		this.walk(rightLeg, speed2, 0.2F, true, 0F, -0.6F, f, f1);
+		this.walk(rightFoot, speed2, -0.4F, true, 4.5F, 0.4F, f, f1);
+		this.chainWave(tailParts, speed, 0.05F, -3, entity.ticksExisted, 1);
+		this.chainWave(leftArmParts, speed, 0.15F, -3, entity.ticksExisted, 1);
+		this.chainWave(rightArmParts, speed, 0.15F, -3, entity.ticksExisted, 1);
+		this.chainSwing(tailParts, speed, 0.15F, -3, entity.ticksExisted, 1);
+		this.chainSwing(tailParts, speed2, 0.25F, -3, f, f1);
+		this.chainWave(neckParts, speed, 0.15F, 3, entity.ticksExisted, 1);
+		//((ChainBuffer)((EntityDeinonychus)entity).tailbuffer).applyChainSwingBuffer(tailParts);*/
 	}
 
-   
-
-    /*protected void setRotationAngles(float var1, float var2, float var3, float var4, float var5, float var6, boolean var7)
-    {
-
-        float PI = (float) Math.PI;
-        float initialOffset = PI / 2;
-        float offset = PI * 2 / 11;
-        float currentAngle = 0;
-        
-        if (!var7)
-        {
-            //make sure to re-add initial parts offset rotation at the end.
-            this.Head.rotateAngleX = var5 / 2 / (180F / (float) Math.PI);
-            this.Head.rotateAngleY = var4 / 2 / (180F / (float) Math.PI);
-            this.Mouth.rotateAngleX = var5 / 2 / (180F / (float) Math.PI) + 0.4363323F;
-            this.HeadHorn1.rotateAngleX = var5 / 2 / (180F / (float) Math.PI) + 0.1745329F;
-            this.HeadHorn2.rotateAngleX = var5 / 2 / (180F / (float) Math.PI) + 0.1745329F;
-            this.HeadHorn3.rotateAngleX = var5 / 2 / (180F / (float) Math.PI);
-            this.HeadHorn4.rotateAngleX = var5 / 2 / (180F / (float) Math.PI);
-            this.Head_Block.rotateAngleX = var5 / 2 / (180F / (float) Math.PI) + 0.1745329F;
-            this.Mouth.rotateAngleY = var4 / 2 / (180F / (float) Math.PI);
-            this.HeadHorn1.rotateAngleY = var4 / 2 / (180F / (float) Math.PI);
-            this.HeadHorn2.rotateAngleY = var4 / 2 / (180F / (float) Math.PI);
-            this.HeadHorn3.rotateAngleY = var4 / 2 / (180F / (float) Math.PI);
-            this.HeadHorn4.rotateAngleY = var4 / 2 / (180F / (float) Math.PI);
-            this.Head_Block.rotateAngleY = var4 / 2 / (180F / (float) Math.PI);
-            this.Front_ThighLeft.rotateAngleX = MathHelper.cos((var1) * 0.63330555F + 1) * 1.0F * var2;
-            this.Front_ThighRight.rotateAngleX = MathHelper.cos((var1) * 0.63330555F + (float) Math.PI) * 1.0F * var2;
-            this.Back_ThighLeft.rotateAngleX = MathHelper.cos((var1) * 0.63330555F + (float) Math.PI + 2) * 1.0F * var2;
-            this.Back_ThighRight.rotateAngleX = MathHelper.cos((var1) * 0.63330555F + 1) * 1.0F * var2;
-            this.Tail1.rotateAngleY = 0.15F * MathHelper.sin(var3 * (float) 0.1F + (var2 + 2));
-            this.Tail2.rotateAngleY = 0.25F * MathHelper.sin(var3 * (float) 0.1F + (var2 + 1));
-            this.Tail3.rotateAngleY = 0.15F * MathHelper.sin(var3 * (float) 0.1F + var2);
-        }
-        else
-        {
-            this.Head.rotateAngleX = 0;
-            this.Head.rotateAngleY = 0;
-            this.Mouth.rotateAngleX = 0.4363323F;
-            this.HeadHorn1.rotateAngleX = 0.1745329F;
-            this.HeadHorn2.rotateAngleX = 0.1745329F;
-            this.HeadHorn3.rotateAngleX = 0;
-            this.HeadHorn4.rotateAngleX = 0;
-            this.Head_Block.rotateAngleX = 0.1745329F;
-            this.Mouth.rotateAngleY = 0;
-            this.HeadHorn1.rotateAngleY = 0;
-            this.HeadHorn2.rotateAngleY = 0;
-            this.HeadHorn3.rotateAngleY = 0;
-            this.HeadHorn4.rotateAngleY = 0;
-            this.Head_Block.rotateAngleY = 0;
-            this.Front_ThighLeft.rotateAngleX = 0;
-            this.Front_ThighRight.rotateAngleX = 0;
-            this.Back_ThighLeft.rotateAngleX = 0;
-            this.Back_ThighRight.rotateAngleX = 0;
-            this.Tail1.rotateAngleY = 0;
-            this.Tail2.rotateAngleY = 0;
-            this.Tail3.rotateAngleY = 0;
-        }
-    }*/
 }

@@ -260,7 +260,7 @@ public class ModelVelociraptor extends ModelNewPrehistoric {
 		MowzieModelRenderer[] rightArmParts = {this.rightUpperArm, this.rightLowerArm};
 		this.faceTarget(head, 1, f3, f4);
 		float speed = 0.1F;
-		float speed2 = 0.5F;
+		float speed2 = 0.7F;
 		float sitProgress = ((EntityNewPrehistoric)(entity)).sitProgress;
         sitAnimationRotation(rightThigh, sitProgress, -((float)Math.toRadians(75.0D)), 0, 0);
         sitAnimationRotation(leftLowerArm, sitProgress, 0, 0, 0);

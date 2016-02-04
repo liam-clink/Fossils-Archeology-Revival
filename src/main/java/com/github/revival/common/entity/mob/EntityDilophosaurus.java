@@ -32,8 +32,6 @@ public class EntityDilophosaurus extends EntityNewPrehistoric
 
 	public EntityDilophosaurus(World world) {
 		super(world, EnumPrehistoric.Dilophosaurus);
-		this.hasFeatherToggle = true;
-		this.featherToggle = FossilConfig.featheredDilophosaurus;
         this.setSize(1.5F, 1.5F);
 		minSize = 0.5F;
 		maxSize = 2F;
