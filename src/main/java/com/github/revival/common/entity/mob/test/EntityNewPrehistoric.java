@@ -119,6 +119,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	public boolean hasFeatherToggle = false;
 	public boolean featherToggle;
 	public boolean hasTeenTexture = false;
+	public boolean hasBabyTexture;
 	public int necklength = 2;
 	private Animation currentAnimation;
 	private int animTick;
@@ -159,7 +160,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		//this.tasks.addTask(6, new DinoAILookAtEntity(this, EntityLivingBase.class, 8));
 		this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
 		this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
-
+		hasBabyTexture = true;
 	}
 
 
@@ -1493,6 +1494,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
 	public String getTexture(){
 		String toggle = this.hasFeatherToggle ? !this.featherToggle ? "feathered/" : "scaled/" : "";
+		boolean isBaby = this.isChild() && this.hasBabyTexture;
 		String gender = this.hasTeenTexture ? this.isTeen() ? "_teen": this.isChild() ? "_baby" : this.getGender() == 0 ? "_female" : "_male" : this.isChild() ? "_baby" : this.getGender() == 0 ? "_female" : "_male";
 		String sleeping = this.getSleeping() == 0 ? "" : "_sleeping";
 		String toggleList = this.hasFeatherToggle ? !this.featherToggle ? "_feathered" : "_scaled" : "";

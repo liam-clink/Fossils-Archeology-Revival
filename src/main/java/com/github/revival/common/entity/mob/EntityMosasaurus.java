@@ -38,6 +38,7 @@ public class EntityMosasaurus extends EntityNewPrehistoric
 		developsResistance = true;
 		breaksBlocks = true;
 		favoriteFood = Items.fish;
+		hasBabyTexture = false;
 	}
 
 	@Override

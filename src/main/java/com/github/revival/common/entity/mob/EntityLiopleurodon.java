@@ -55,6 +55,7 @@ public class EntityLiopleurodon extends EntityNewPrehistoric{
 		developsResistance = true;
 		breaksBlocks = false;
 		favoriteFood = Items.fish;
+		hasBabyTexture = false;
 	}
 
 	@Override

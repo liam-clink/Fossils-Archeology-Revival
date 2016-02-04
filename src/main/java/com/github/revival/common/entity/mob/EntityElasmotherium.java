@@ -38,6 +38,7 @@ public class EntityElasmotherium extends EntityNewPrehistoric
 		developsResistance = true;
 		breaksBlocks = true;
 		favoriteFood = Items.potato;
+		hasBabyTexture = false;
 	}
 
 	@Override

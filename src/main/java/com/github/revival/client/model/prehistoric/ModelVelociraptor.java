@@ -251,19 +251,6 @@ public class ModelVelociraptor extends ModelNewPrehistoric {
 		animator.update(entity);
 		this.setToInitPose();
 		setRotationAngles(f, f1, f2, f3, f4, f5, (Entity)entity);
-
-		//		animator.setAnimationId(EntityNewPrehistoric.animation_sit.animationId);
-		//		animator.startPhase(20);
-		//		sitPose(true);
-		//		animator.endPhase();
-		//
-		//		animator.setAnimationId(EntityNewPrehistoric.animation_getUp.animationId);
-		//		animator.startPhase(0);
-		//		sitPose(true);
-		//		animator.endPhase();
-		//		animator.resetPhase(20);
-		//		animator.endPhase();
-
 	}
 
 	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {

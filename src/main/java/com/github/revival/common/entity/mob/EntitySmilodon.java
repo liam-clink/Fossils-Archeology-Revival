@@ -38,7 +38,7 @@ public class EntitySmilodon extends EntityNewPrehistoric
 		developsResistance = true;
 		breaksBlocks = false;
 		favoriteFood = Items.beef;
-
+		hasBabyTexture = false;
 	}
 
 	@Override

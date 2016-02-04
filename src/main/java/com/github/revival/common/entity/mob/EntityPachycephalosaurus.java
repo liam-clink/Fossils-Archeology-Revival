@@ -38,6 +38,7 @@ public class EntityPachycephalosaurus extends EntityNewPrehistoric
 		developsResistance = true;
 		breaksBlocks = false;
 		favoriteFood = Items.carrot;
+		hasBabyTexture = false;
 	}
 	
 	@Override
