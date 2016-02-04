@@ -68,7 +68,7 @@ public class Revival
 
 	public static final String MODID = "fossil";
 	public static final ModState STATE = ModState.DEV;
-	public static final String VERSION = "7.3-develop";
+	public static final String VERSION = "7.3.0-develop";
 
 	public static FossilGuiHandler guiHandler = new FossilGuiHandler();
 
