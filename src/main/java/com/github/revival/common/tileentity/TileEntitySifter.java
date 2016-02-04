@@ -3,7 +3,6 @@ package com.github.revival.common.tileentity;
 import com.github.revival.Revival;
 import com.github.revival.common.block.BlockSifter;
 import com.github.revival.common.block.FABlockRegistry;
-import com.github.revival.common.enums.EnumPrehistoric;
 import com.github.revival.common.handler.LocalizationStrings;
 import com.github.revival.common.item.FAItemRegistry;
 import net.minecraft.entity.player.EntityPlayer;
@@ -348,7 +347,7 @@ public class TileEntitySifter extends TileEntity implements IInventory,
                 if (randomloot < 80)
                 {
                     if (Revival.enableDebugging())
-                        Revival.Console("Sifter no result: " + randomloot);
+                        Revival.printDebug("Sifter no result: " + randomloot);
                     if (random < 75)
                     {
                         result = null;
@@ -361,7 +360,7 @@ public class TileEntitySifter extends TileEntity implements IInventory,
                 else
                 {
                     if (Revival.enableDebugging())
-                        Revival.Console("Sifter successful loot: " + randomloot);
+                        Revival.printDebug("Sifter successful loot: " + randomloot);
                     if (random < 0.4)
                     {
                         result = new ItemStack(FAItemRegistry.DominicanAmber, 1);

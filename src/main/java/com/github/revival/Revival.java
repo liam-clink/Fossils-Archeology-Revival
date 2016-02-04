@@ -1,26 +1,5 @@
 package com.github.revival;
 
-import net.ilexiconn.llibrary.common.config.ConfigHelper;
-import net.ilexiconn.llibrary.common.content.ContentHelper;
-import net.minecraft.block.material.Material;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnumEnchantmentType;
-import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
-import net.minecraft.item.Item.ToolMaterial;
-import net.minecraft.item.ItemArmor.ArmorMaterial;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.IChatComponent;
-import net.minecraft.util.StatCollector;
-import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraftforge.common.DimensionManager;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.common.util.EnumHelper;
-import net.minecraftforge.fluids.Fluid;
-
 import com.github.revival.client.renderer.tileentity.RenderFeeder;
 import com.github.revival.common.CommonProxy;
 import com.github.revival.common.ModState;
@@ -33,72 +12,19 @@ import com.github.revival.common.dimension.anu.WorldProviderAnu;
 import com.github.revival.common.dimension.treasure.WorldProviderTreasure;
 import com.github.revival.common.enchantment.EnchantmentArcheology;
 import com.github.revival.common.enchantment.EnchantmentPaleontology;
-import com.github.revival.common.entity.EntityAncientJavelin;
-import com.github.revival.common.entity.EntityAnuEffect;
-import com.github.revival.common.entity.EntityDinoEgg;
-import com.github.revival.common.entity.EntityJavelin;
-import com.github.revival.common.entity.EntityMLighting;
-import com.github.revival.common.entity.EntityStoneboard;
-import com.github.revival.common.entity.EntityTerrorBirdEgg;
-import com.github.revival.common.entity.mob.EntityAnu;
-import com.github.revival.common.entity.mob.EntityAnuDead;
-import com.github.revival.common.entity.mob.EntityAnubite;
-import com.github.revival.common.entity.mob.EntityBones;
-import com.github.revival.common.entity.mob.EntityCoelacanth;
-import com.github.revival.common.entity.mob.EntityDodo;
-import com.github.revival.common.entity.mob.EntityDodoEgg;
-import com.github.revival.common.entity.mob.EntityElasmotherium;
-import com.github.revival.common.entity.mob.EntityFailuresaurus;
-import com.github.revival.common.entity.mob.EntityFriendlyPigZombie;
-import com.github.revival.common.entity.mob.EntityMammoth;
-import com.github.revival.common.entity.mob.EntityNautilus;
-import com.github.revival.common.entity.mob.EntityQuagga;
-import com.github.revival.common.entity.mob.EntitySentryPigman;
-import com.github.revival.common.entity.mob.EntitySmilodon;
-import com.github.revival.common.entity.mob.EntityTarSlime;
-import com.github.revival.common.entity.mob.EntityTerrorBird;
+import com.github.revival.common.entity.*;
+import com.github.revival.common.entity.mob.*;
 import com.github.revival.common.enums.EnumDinoFoodMob;
 import com.github.revival.common.enums.EnumPrehistoric;
-import com.github.revival.common.gen.FossilGenerator;
-import com.github.revival.common.gen.TarGenerator;
-import com.github.revival.common.gen.VolcanicRockGenerator;
-import com.github.revival.common.gen.WorldGenMiscStructures;
-import com.github.revival.common.gen.WorldGeneratorPalaeoraphe;
+import com.github.revival.common.gen.*;
 import com.github.revival.common.gen.structure.AcademyGenerator;
 import com.github.revival.common.gen.structure.ShipWreckGenerator;
-import com.github.revival.common.handler.EventFossilAchivements;
-import com.github.revival.common.handler.EventPlayer;
-import com.github.revival.common.handler.FossilAchievementHandler;
-import com.github.revival.common.handler.FossilBonemealEvent;
-import com.github.revival.common.handler.FossilConnectionEvent;
-import com.github.revival.common.handler.FossilGuiHandler;
-import com.github.revival.common.handler.FossilInteractEvent;
-import com.github.revival.common.handler.FossilLivingEvent;
-import com.github.revival.common.handler.FossilOreDictionary;
-import com.github.revival.common.handler.FossilRecipeHandler;
-import com.github.revival.common.handler.FossilSpawnEggs;
-import com.github.revival.common.handler.FossilToolEvent;
-import com.github.revival.common.handler.FossilTradeHandler;
-import com.github.revival.common.handler.LocalizationStrings;
-import com.github.revival.common.handler.PickupHandler;
+import com.github.revival.common.handler.*;
 import com.github.revival.common.item.FAItemRegistry;
 import com.github.revival.common.message.MessageCorrectAnimation;
 import com.github.revival.common.message.MessageDinoSit;
-import com.github.revival.common.tileentity.TileEntityAnalyzer;
-import com.github.revival.common.tileentity.TileEntityAncientChest;
-import com.github.revival.common.tileentity.TileEntityAnuTotem;
-import com.github.revival.common.tileentity.TileEntityAnubiteStatue;
-import com.github.revival.common.tileentity.TileEntityCultivate;
-import com.github.revival.common.tileentity.TileEntityDrum;
-import com.github.revival.common.tileentity.TileEntityFeeder;
-import com.github.revival.common.tileentity.TileEntityFigurine;
-import com.github.revival.common.tileentity.TileEntitySarcophagus;
-import com.github.revival.common.tileentity.TileEntitySifter;
-import com.github.revival.common.tileentity.TileEntityTimeMachine;
-import com.github.revival.common.tileentity.TileEntityVase;
-import com.github.revival.common.tileentity.TileEntityWorktable;
+import com.github.revival.common.tileentity.*;
 import com.github.revival.misc.FossilFoodMappings;
-
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.FMLLog;
@@ -112,17 +38,38 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.relauncher.Side;
+import net.ilexiconn.llibrary.common.config.ConfigHelper;
+import net.ilexiconn.llibrary.common.content.ContentHelper;
+import net.minecraft.block.material.Material;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnumEnchantmentType;
+import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.Item.ToolMaterial;
+import net.minecraft.item.ItemArmor.ArmorMaterial;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.StatCollector;
+import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.common.util.EnumHelper;
+import net.minecraftforge.fluids.Fluid;
+import org.apache.logging.log4j.Level;
 
-@Mod(modid = Revival.modid, name = "Fossil/Archeology", version = "7.3", dependencies = "required-after:llibrary@[0.5.2,)")
+@Mod(modid = Revival.MODID, name = "Fossils and Archeology Revival", version = Revival.VERSION, dependencies = "required-after:llibrary@[0.7.2,)")
 public class Revival
 {
-	public static final String modid = "fossil";
-	public static final FossilSoundType soundTypeSlime = new FossilSoundType(1.0F, 1.0F);
-	public static ModState modState = ModState.DEV;
 	@SidedProxy(clientSide = "com.github.revival.client.ClientProxy", serverSide = "com.github.revival.common.CommonProxy")
 	public static CommonProxy proxy;
-	@Instance("fossil")
+	@Instance(MODID)
 	public static Revival instance;
+
+	public static final String MODID = "fossil";
+	public static final ModState STATE = ModState.DEV;
+	public static final String VERSION = "7.3-develop";
+
 	public static FossilGuiHandler guiHandler = new FossilGuiHandler();
 
 	public static Object toPedia;
@@ -138,6 +85,8 @@ public class Revival
 	public static ArmorMaterial bone = EnumHelper.addArmorMaterial("Bone", 25, new int[]{2, 7, 6, 2}, 15);
 	public static ToolMaterial scarab = EnumHelper.addToolMaterial("Scarab", 3, 1861, 8.0F, 4.0F, 25);
 
+	public static final FossilSoundType soundTypeSlime = new FossilSoundType(1.0F, 1.0F);
+
 	public static ToolMaterial toothDaggerMaterial = EnumHelper.addToolMaterial("toothDagger", 3, 250, 70.0F, 1.5F, 25);
 	public Configuration config;
 	
@@ -146,36 +95,29 @@ public class Revival
 
 	public static boolean enableDebugging()
 	{
-		return true;
+		return STATE == ModState.DEV;
 	}
 
-	public static void showMessage(String var6, EntityPlayer var1)
+	public static void showMessage(String message, EntityPlayer player)
 	{
-		if (var1 != null)
+		if (player != null)
 		{
-			IChatComponent message = new ChatComponentText(var6);
-			var1.addChatMessage(message);
+			player.addChatMessage(new ChatComponentText(message));
 		}
 	}
 
-	public static void Console(String var0)
+	public static void printDebug(String message)
 	{
 		if (enableDebugging())
 		{
-			FMLLog.log(Revival.modid, org.apache.logging.log4j.Level.INFO, var0);
+			FMLLog.log(Revival.MODID, Level.INFO, message);
 		}
-	}
-
-	public static boolean isDNA(Item item)
-	{
-		if (EnumPrehistoric.isDNA(item)) return true;
-		return false;
 	}
 
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
-		channel = NetworkRegistry.INSTANCE.newSimpleChannel(modid);
+		channel = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
 		channel.registerMessage(MessageCorrectAnimation.class, MessageCorrectAnimation.class, 1, Side.CLIENT);
 		channel.registerMessage(MessageDinoSit.class, MessageDinoSit.class, 2, Side.CLIENT);
 
@@ -184,7 +126,7 @@ public class Revival
 		VillagerRegistry.instance().registerVillageTradeHandler(10, new FossilTradeHandler());
 		VillagerRegistry.instance().registerVillagerId(10);
 
-		ConfigHelper.registerConfigHandler(modid, event.getSuggestedConfigurationFile(), new FossilConfig());
+		ConfigHelper.registerConfigHandler(MODID, event.getSuggestedConfigurationFile(), new FossilConfig());
 		ContentHelper.init(new FATabRegistry(), new FABlockRegistry(), new FAItemRegistry());
 		EnumPrehistoric.init();
 		FossilOreDictionary.oreRegistration();

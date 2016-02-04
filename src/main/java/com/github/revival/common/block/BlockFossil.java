@@ -176,6 +176,6 @@ public class BlockFossil extends BlockStone
     @Override
     public void registerBlockIcons(IIconRegister par1IIconRegister)
     {
-        this.blockIcon = par1IIconRegister.registerIcon(Revival.modid + ":" + "Fossil");
+        this.blockIcon = par1IIconRegister.registerIcon(Revival.MODID + ":" + "Fossil");
     }
 }

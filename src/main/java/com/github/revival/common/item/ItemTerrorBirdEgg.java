@@ -40,7 +40,7 @@ public class ItemTerrorBirdEgg extends Item
 
         for (int i = 0; i < icons.length; i++)
         {
-            icons[i] = iconregister.registerIcon(Revival.modid + ":TerrorBird/" + "Egg_" + this.cultivatedPrefix() + names[i]);
+            icons[i] = iconregister.registerIcon(Revival.MODID + ":TerrorBird/" + "Egg_" + this.cultivatedPrefix() + names[i]);
         }
     }
     

@@ -1,15 +1,12 @@
 package com.github.revival.common.item;
 
 import com.github.revival.Revival;
-import com.github.revival.common.entity.EntityDinoEgg;
 import com.github.revival.common.entity.mob.EntityDinosaur;
-import com.github.revival.common.entity.mob.EntityNautilus;
 import com.github.revival.common.enums.EnumPrehistoric;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -58,7 +55,7 @@ public class ItemDinosaurModels extends Item
         {
             if (i != 4) //Silly Nautilus, bones are for dinosaurs.
             {
-                icons[i] = icon.registerIcon(Revival.modid + ":" + "dinosaur_bones/models/" + EnumPrehistoric.values()[i] + "_model");
+                icons[i] = icon.registerIcon(Revival.MODID + ":" + "dinosaur_bones/models/" + EnumPrehistoric.values()[i] + "_model");
             }
         }
     }

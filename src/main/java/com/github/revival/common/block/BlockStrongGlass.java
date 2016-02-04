@@ -65,7 +65,7 @@ public class BlockStrongGlass extends Block
     {
         for (int i = 0; i < 47; i++)
         {
-            textures[i] = iconRegistry.registerIcon(Revival.modid + ":" + "strongGlass/Reinforced_Glass" + "_" + (i + 1));
+            textures[i] = iconRegistry.registerIcon(Revival.MODID + ":" + "strongGlass/Reinforced_Glass" + "_" + (i + 1));
         }
     }
 

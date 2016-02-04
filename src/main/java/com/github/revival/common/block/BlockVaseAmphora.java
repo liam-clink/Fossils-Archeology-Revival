@@ -173,7 +173,7 @@ public class BlockVaseAmphora extends BlockContainer implements ISubBlocksBlock
 
         for (int i = 0; i < shortname.length; ++i)
         {
-            icons[i] = iconregister.registerIcon(Revival.modid + ":vases/icons/" + "vase_icon_amphora_" + i);
+            icons[i] = iconregister.registerIcon(Revival.MODID + ":vases/icons/" + "vase_icon_amphora_" + i);
         }
     }
 

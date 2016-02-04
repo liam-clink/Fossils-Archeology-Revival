@@ -14,7 +14,7 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiSifter extends GuiContainer
 {
-    private static final ResourceLocation furnaceGuiTextures = new ResourceLocation(Revival.modid + ":" + "textures/gui/Sifter.png");
+    private static final ResourceLocation furnaceGuiTextures = new ResourceLocation(Revival.MODID + ":" + "textures/gui/Sifter.png");
     private TileEntitySifter sifterInventory;
 
     public GuiSifter(InventoryPlayer par1InventoryPlayer, TileEntitySifter par2TileEntitySifter)

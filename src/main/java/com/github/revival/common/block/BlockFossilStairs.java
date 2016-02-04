@@ -22,7 +22,7 @@ public class BlockFossilStairs extends BlockStairs
     @Override
     public void registerBlockIcons(IIconRegister par1IIconRegister)
     {
-        this.blockIcon = par1IIconRegister.registerIcon(Revival.modid + ":" + "Ancient_Wood");
+        this.blockIcon = par1IIconRegister.registerIcon(Revival.MODID + ":" + "Ancient_Wood");
     }
 	 */
 }

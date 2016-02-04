@@ -122,7 +122,7 @@ public class BlockFigurine extends BlockContainer implements ISubBlocksBlock
 
         for (int i = 0; i < shortname.length; ++i)
         {
-            icons[i] = iconregister.registerIcon(Revival.modid + ":figurines/icons/" + "figurine_icon_" + i);
+            icons[i] = iconregister.registerIcon(Revival.MODID + ":figurines/icons/" + "figurine_icon_" + i);
         }
     }
 

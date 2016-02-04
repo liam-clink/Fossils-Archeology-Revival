@@ -118,9 +118,9 @@ public class EntityGallimimus extends EntityNewPrehistoric
 		this.maxSize = 2.2F;
 
 		if (!FossilConfig.featheredGallimimus)
-			texturePath = Revival.modid + ":textures/mob/" + this.SelfType.toString() + "/feathered/" + "Feathered_";
+			texturePath = Revival.MODID + ":textures/mob/" + this.SelfType.toString() + "/feathered/" + "Feathered_";
 		else
-			texturePath = Revival.modid + ":textures/mob/" + this.SelfType.toString() + "/";
+			texturePath = Revival.MODID + ":textures/mob/" + this.SelfType.toString() + "/";
 
 		this.getNavigator().setAvoidsWater(true);
 		this.tasks.addTask(1, new EntityAISwimming(this));

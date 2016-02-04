@@ -745,7 +745,7 @@ public abstract class EntityPrehistoric extends EntityAgeable
 
     protected String getModelTexture()
     {
-        return Revival.modid + ":" + "textures/mob/DinosaurModels/DinoModel" + type.toString() + ".png";
+        return Revival.MODID + ":" + "textures/mob/DinosaurModels/DinoModel" + type.toString() + ".png";
     }
 
     public String getTexture()

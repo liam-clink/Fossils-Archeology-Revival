@@ -409,7 +409,7 @@ public class BlockPalmLeaves extends BlockLeaves
 
             for (int j = 0; j < field_94396_b[i].length; ++j)
             {
-                this.iconArray[i][j] = par1IIconRegister.registerIcon(Revival.modid + ":" + field_94396_b[i][j]);
+                this.iconArray[i][j] = par1IIconRegister.registerIcon(Revival.MODID + ":" + field_94396_b[i][j]);
             }
         }
     }

@@ -16,14 +16,14 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class RenderTerrorBird extends RenderLiving
 {
-    private static final ResourceLocation gastornisBaby = new ResourceLocation(Revival.modid + ":" + "textures/mob/TerrorBird/Gastornis_Baby.png");
-    private static final ResourceLocation gastornisAdult = new ResourceLocation(Revival.modid + ":" + "textures/mob/TerrorBird/Gastornis_Adult.png");
-    private static final ResourceLocation PhorusrhacosBaby = new ResourceLocation(Revival.modid + ":" + "textures/mob/TerrorBird/Phorusrhacos_Baby.png");
-    private static final ResourceLocation PhorusrhacosAdult = new ResourceLocation(Revival.modid + ":" + "textures/mob/TerrorBird/Phorusrhacos_Adult.png");
-    private static final ResourceLocation TitanisBaby = new ResourceLocation(Revival.modid + ":" + "textures/mob/TerrorBird/Titanis_Baby.png");
-    private static final ResourceLocation TitanisAdult = new ResourceLocation(Revival.modid + ":" + "textures/mob/TerrorBird/Titanis_Adult.png");
-    private static final ResourceLocation KelenkenAdult = new ResourceLocation(Revival.modid + ":" + "textures/mob/TerrorBird/Kelenken_Adult.png");
-    private static final ResourceLocation KelenkenBaby = new ResourceLocation(Revival.modid + ":" + "textures/mob/TerrorBird/Kelenken_Baby.png");
+    private static final ResourceLocation gastornisBaby = new ResourceLocation(Revival.MODID + ":" + "textures/mob/TerrorBird/Gastornis_Baby.png");
+    private static final ResourceLocation gastornisAdult = new ResourceLocation(Revival.MODID + ":" + "textures/mob/TerrorBird/Gastornis_Adult.png");
+    private static final ResourceLocation PhorusrhacosBaby = new ResourceLocation(Revival.MODID + ":" + "textures/mob/TerrorBird/Phorusrhacos_Baby.png");
+    private static final ResourceLocation PhorusrhacosAdult = new ResourceLocation(Revival.MODID + ":" + "textures/mob/TerrorBird/Phorusrhacos_Adult.png");
+    private static final ResourceLocation TitanisBaby = new ResourceLocation(Revival.MODID + ":" + "textures/mob/TerrorBird/Titanis_Baby.png");
+    private static final ResourceLocation TitanisAdult = new ResourceLocation(Revival.MODID + ":" + "textures/mob/TerrorBird/Titanis_Adult.png");
+    private static final ResourceLocation KelenkenAdult = new ResourceLocation(Revival.MODID + ":" + "textures/mob/TerrorBird/Kelenken_Adult.png");
+    private static final ResourceLocation KelenkenBaby = new ResourceLocation(Revival.MODID + ":" + "textures/mob/TerrorBird/Kelenken_Baby.png");
     
 
     public RenderTerrorBird(ModelBase par1ModelBase, float par2)

@@ -63,18 +63,18 @@ public class ItemLivingCoelacanth extends Item
 
         for (int i = 0; i < icons.length; i++)
         {
-            // icons[i] = par1IconRegister.registerIcon(Revival.modid + ":" + (this.getUnlocalizedName().substring(5)) + i);
+            // icons[i] = par1IconRegister.registerIcon(Revival.MODID + ":" + (this.getUnlocalizedName().substring(5)) + i);
             switch (i)
             {
                 case 0:
                 default:
-                    icons[i] = par1IconRegister.registerIcon(Revival.modid + ":" + "Coelacanth_live_Ocean");
+                    icons[i] = par1IconRegister.registerIcon(Revival.MODID + ":" + "Coelacanth_live_Ocean");
                     break;
                 case 1:
-                    icons[i] = par1IconRegister.registerIcon(Revival.modid + ":" + "Coelacanth_live_River");
+                    icons[i] = par1IconRegister.registerIcon(Revival.MODID + ":" + "Coelacanth_live_River");
                     break;
                 case 2:
-                    icons[i] = par1IconRegister.registerIcon(Revival.modid + ":" + "Coelacanth_live_Swamp");
+                    icons[i] = par1IconRegister.registerIcon(Revival.MODID + ":" + "Coelacanth_live_Swamp");
                     break;
             }
         }

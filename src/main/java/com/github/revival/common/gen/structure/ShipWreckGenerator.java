@@ -82,7 +82,7 @@ public class ShipWreckGenerator implements IWorldGenerator
         }
         else
         {
-            Revival.Console("Gen: Shipwreck Spawn at " + x + ", " + y + ", " + z);
+            Revival.printDebug("Gen: Shipwreck Spawn at " + x + ", " + y + ", " + z);
         }
 
         int widthX = ((Structure) gen.structures.get(struct)).getWidthX();

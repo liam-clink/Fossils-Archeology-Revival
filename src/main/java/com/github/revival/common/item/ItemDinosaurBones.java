@@ -48,7 +48,7 @@ public class ItemDinosaurBones extends Item
 	{
 		for (int i = 0; i < icons.length; i++)
 		{
-			icons[i] = icon.registerIcon(Revival.modid + ":" + "dinosaur_bones/" + this.itemType + "/" + EnumDinoBones.values()[i] + "_" + this.itemType);
+			icons[i] = icon.registerIcon(Revival.MODID + ":" + "dinosaur_bones/" + this.itemType + "/" + EnumDinoBones.values()[i] + "_" + this.itemType);
 		}
 	}
 

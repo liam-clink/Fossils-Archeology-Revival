@@ -223,7 +223,7 @@ public class EntityTerrorBird extends EntityTameable
      */
     protected String getLivingSound()
     {
-        return this.isAngry() ? Revival.modid + ":" + "terror_bird_attack" : Revival.modid + ":" + "terror_bird_living";
+        return this.isAngry() ? Revival.MODID + ":" + "terror_bird_attack" : Revival.MODID + ":" + "terror_bird_living";
     }
 
     /**
@@ -232,7 +232,7 @@ public class EntityTerrorBird extends EntityTameable
     @Override
     protected String getHurtSound()
     {
-        return Revival.modid + ":" + "terror_bird_hurt";
+        return Revival.MODID + ":" + "terror_bird_hurt";
     }
 
     @Override
@@ -241,7 +241,7 @@ public class EntityTerrorBird extends EntityTameable
      */
     protected String getDeathSound()
     {
-        return Revival.modid + ":" + "terror_bird_death";
+        return Revival.MODID + ":" + "terror_bird_death";
     }
     
 
@@ -447,7 +447,7 @@ public class EntityTerrorBird extends EntityTameable
             EnchantmentHelper.func_151385_b(this, entity);
         }
 
-        //this.playSound(Revival.modid + ":" + "terror_bird_attack", this.getSoundVolume(), this.getSoundPitch());
+        //this.playSound(Revival.MODID + ":" + "terror_bird_attack", this.getSoundVolume(), this.getSoundPitch());
         return flag;
     }
 
@@ -719,7 +719,7 @@ public class EntityTerrorBird extends EntityTameable
         }
 
         p0.PrintStringXY(Character.toString(this.names[this.getSkin()].charAt(0)).toUpperCase() + this.names[this.getSkin()].substring(1), p0.rightIndent, 34, 0, 0, 0);
-        p0.PrintPictXY(new ResourceLocation(Revival.modid + ":" + "textures/items/TerrorBird/" + "Egg_Cultivated_" + names[this.getSkin()] + ".png"), ((p0.xGui / 2) + (p0.xGui / 4)), 7, 16, 16);
+        p0.PrintPictXY(new ResourceLocation(Revival.MODID + ":" + "textures/items/TerrorBird/" + "Egg_Cultivated_" + names[this.getSkin()] + ".png"), ((p0.xGui / 2) + (p0.xGui / 4)), 7, 16, 16);
 
         p0.PrintPictXY(pediaheart, p0.rightIndent, 58, 9, 9);
 

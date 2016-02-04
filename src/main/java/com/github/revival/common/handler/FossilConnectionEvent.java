@@ -19,13 +19,13 @@ public class FossilConnectionEvent
             Revival.showMessage("------- DEBUG MODE IS ON. TURN OFF BEFORE RELEASING! --------", player);
         }
 
-        switch (Revival.modState)
+        switch (Revival.STATE)
         {
             case DEV:
 
                 if (FossilConfig.loginMessage)
                 {
-                    Revival.showMessage("You are running F/A:Revival Dev Build, ${version}.", player);
+                    Revival.showMessage("You are running F/A:Revival Dev Build, " + Revival.VERSION + ".", player);
                     Revival.showMessage("Github: https://github.com/FossilsArcheologyRevival/FossilArcheology1.7", player);
                 }
                 return;
@@ -33,7 +33,7 @@ public class FossilConnectionEvent
             case BETA:
                 if (FossilConfig.loginMessage)
                 {
-                    Revival.showMessage("You are running Fossils and Archaeology Revival ${version}.", player);
+                    Revival.showMessage("You are running Fossils and Archaeology Revival " + Revival.VERSION + ".", player);
                     Revival.showMessage("This mod is currently in a BETA state. Be sure to backup worlds.", player);
                     Revival.showMessage("Forum and support: http://www.minecraftforum.net/topic/1708636-", player);
                     Revival.showMessage("Github: https://github.com/FossilsArcheologyRevival/FossilArcheology1.7", player);
@@ -46,7 +46,7 @@ public class FossilConnectionEvent
             case RELEASE:
                 if (FossilConfig.loginMessage)
                 {
-                    Revival.showMessage("You are running Fossils and Archaeology Revival ${version}.", player);
+                    Revival.showMessage("You are running Fossils and Archaeology Revival " + Revival.VERSION + ".", player);
                     Revival.showMessage("Forum and support: http://www.minecraftforum.net/topic/1708636-", player);
                     Revival.showMessage("Github: https://github.com/FossilsArcheologyRevival/FossilArcheology1.7", player);
                     Revival.instance.config.load();

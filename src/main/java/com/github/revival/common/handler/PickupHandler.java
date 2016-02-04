@@ -1,6 +1,5 @@
 package com.github.revival.common.handler;
 
-import com.github.revival.Revival;
 import com.github.revival.common.block.FABlockRegistry;
 import com.github.revival.common.enums.EnumPrehistoric;
 import com.github.revival.common.item.FAItemRegistry;
@@ -25,7 +24,7 @@ public class PickupHandler
     {
 
         //Analyzer Achievements
-        if (Revival.isDNA(event.smelting.getItem()))
+        if (EnumPrehistoric.isDNA(event.smelting.getItem()))
         {
             event.player.addStat(FossilAchievementHandler.dinoDna, 1);
         }
@@ -47,7 +46,7 @@ public class PickupHandler
         {
             event.player.addStat(FossilAchievementHandler.dinoEgg, 1);
         }
-        if (Revival.isDNA(event.smelting.getItem()))
+        if (EnumPrehistoric.isDNA(event.smelting.getItem()))
         {
             event.player.addStat(FossilAchievementHandler.mammalEmbryo, 1);
         }

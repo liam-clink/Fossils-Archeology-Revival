@@ -41,7 +41,6 @@ import com.github.revival.client.gui.GuiPedia;
 import com.github.revival.common.block.FABlockRegistry;
 import com.github.revival.common.config.FossilConfig;
 import com.github.revival.common.entity.EntityDinoEgg;
-import com.github.revival.common.entity.ai.DinoAIGrowup;
 import com.github.revival.common.entity.ai.DinoAIStarvation;
 import com.github.revival.common.enums.EnumOrderType;
 import com.github.revival.common.enums.EnumPrehistoric;
@@ -426,7 +425,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
 
     protected String getModelTexture()
     {
-        return Revival.modid + ":" + "textures/mob/DinosaurModels/DinoModel"
+        return Revival.MODID + ":" + "textures/mob/DinosaurModels/DinoModel"
                 + this.SelfType.toString() + ".png";
     }
 
@@ -435,7 +434,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
      */
     public String getTexture()
     {
-        return this.isModelized() ? this.getModelTexture() : Revival.modid + ":"
+        return this.isModelized() ? this.getModelTexture() : Revival.MODID + ":"
                 + "textures/mob/DinoModel" + this.SelfType.toString() + ".png";
     }
 
@@ -477,7 +476,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
     {
         if (this.isModelized())
             return null;
-        return Revival.modid + ":" + this.SelfType.toString().toLowerCase()
+        return Revival.MODID + ":" + this.SelfType.toString().toLowerCase()
                 + "_living";
     }
 
@@ -489,7 +488,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
     {
         if (this.isModelized())
             return null;
-        return Revival.modid + ":" + this.SelfType.toString().toLowerCase()
+        return Revival.MODID + ":" + this.SelfType.toString().toLowerCase()
                 + "_hurt";
     }
 
@@ -501,7 +500,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
     {
         if (this.isModelized())
             return null;
-        return Revival.modid + ":" + this.SelfType.toString().toLowerCase()
+        return Revival.MODID + ":" + this.SelfType.toString().toLowerCase()
                 + "_death";
     }
 
@@ -529,7 +528,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
     {
 
         p0.reset();
-        p0.PrintPictXY(new ResourceLocation(Revival.modid + ":"
+        p0.PrintPictXY(new ResourceLocation(Revival.MODID + ":"
                         + "textures/items/" + this.SelfType.toString() + "_DNA.png"),
                 ((p0.xGui / 2) + (p0.xGui / 4)), 7, 16, 16); // 185
 

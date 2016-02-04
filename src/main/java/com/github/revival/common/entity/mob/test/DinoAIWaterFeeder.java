@@ -16,7 +16,6 @@ import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.pathfinding.PathPoint;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
@@ -136,7 +135,7 @@ public class DinoAIWaterFeeder extends EntityAIBase
 
                     if (this.targetFeeder != null)
                     {
-                        Revival.Console("Found Feeder at: " + this.targetFeeder.xCoord + ", " + this.targetFeeder.yCoord + ", " + this.targetFeeder.zCoord);
+                        Revival.printDebug("Found Feeder at: " + this.targetFeeder.xCoord + ", " + this.targetFeeder.yCoord + ", " + this.targetFeeder.zCoord);
                         this.destX = this.targetFeeder.xCoord;
                         this.destY = this.targetFeeder.yCoord;
                         this.destZ = this.targetFeeder.zCoord;
@@ -191,7 +190,7 @@ public class DinoAIWaterFeeder extends EntityAIBase
         
         if (Distance > this.SEARCH_RANGE)
         {
-            Revival.Console("Target too far, discontinuing task. Distance: " + Distance + ", Range: " + this.SEARCH_RANGE);
+            Revival.printDebug("Target too far, discontinuing task. Distance: " + Distance + ", Range: " + this.SEARCH_RANGE);
             return false;
         }
 

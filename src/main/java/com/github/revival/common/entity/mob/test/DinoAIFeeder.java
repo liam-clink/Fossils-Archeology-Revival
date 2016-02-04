@@ -6,7 +6,6 @@ import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityCreature;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.item.EntityItem;
@@ -16,7 +15,6 @@ import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.pathfinding.PathPoint;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
@@ -117,7 +115,7 @@ public class DinoAIFeeder extends EntityAIBase
 
                     if (this.targetFeeder != null)
                     {
-                        Revival.Console("Found Feeder at: " + this.targetFeeder.xCoord + ", " + this.targetFeeder.yCoord + ", " + this.targetFeeder.zCoord);
+                        Revival.printDebug("Found Feeder at: " + this.targetFeeder.xCoord + ", " + this.targetFeeder.yCoord + ", " + this.targetFeeder.zCoord);
                         this.destX = this.targetFeeder.xCoord;
                         this.destY = this.targetFeeder.yCoord;
                         this.destZ = this.targetFeeder.zCoord;
@@ -173,7 +171,7 @@ public class DinoAIFeeder extends EntityAIBase
         
         if (Distance > this.SEARCH_RANGE)
         {
-            Revival.Console("Target too far, discontinuing task. Distance: " + Distance + ", Range: " + this.SEARCH_RANGE);
+            Revival.printDebug("Target too far, discontinuing task. Distance: " + Distance + ", Range: " + this.SEARCH_RANGE);
             endTask();
             return false;
         }
@@ -211,7 +209,7 @@ public class DinoAIFeeder extends EntityAIBase
 
         if (this.typeofTarget == FEEDER)
         {
-            Revival.Console("Update Feeder Task");
+            Revival.printDebug("Update Feeder Task");
             if (this.targetFeeder == null)
                 endTask();
 
@@ -241,7 +239,7 @@ public class DinoAIFeeder extends EntityAIBase
 
             if (Distance < this.SEARCH_RANGE && this.targetItem.isEntityAlive() && this.targetItem != null)
             {
-                Revival.Console("Update Item Task");
+                Revival.printDebug("Update Item Task");
                 this.dinosaur.getNavigator().tryMoveToXYZ(this.destX, this.destY, this.destZ, 1.0D);
                 if (Distance < 2.5)
                 {
@@ -266,7 +264,7 @@ public class DinoAIFeeder extends EntityAIBase
             }
             else
             {
-                Revival.Console("Ending Item Task");
+                Revival.printDebug("Ending Item Task");
                 endTask();
             }
 
@@ -274,7 +272,7 @@ public class DinoAIFeeder extends EntityAIBase
 
         if (this.typeofTarget == BLOCK)
         {
-            Revival.Console("Update Block Task");
+            Revival.printDebug("Update Block Task");
             if (!this.dinosaur.selfType.FoodBlockList.CheckBlock(this.dinosaur.worldObj.getBlock((int) destX, (int) destY, (int) destZ)))
                 endTask();
             if (Distance < Range)
@@ -377,7 +375,7 @@ public class DinoAIFeeder extends EntityAIBase
 
             if (this.dinosaur.selfType.FoodItemList.CheckItemById(entityItem.getEntityItem().itemID) || this.dinosaur.selfType.FoodBlockList.CheckBlockById(entityItem.getEntityItem().itemID))
             {
-            	Revival.Console("targetItem: "+ entityItem);
+            	Revival.printDebug("targetItem: "+ entityItem);
             		this.targetItem = entityItem;            
             	
                 itemlocation = Vec3.createVectorHelper(entityItem.posX, entityItem.posY, entityItem.posZ);

@@ -1519,7 +1519,7 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic
 
 
         p0.reset();
-        p0.PrintPictXY(new ResourceLocation(Revival.modid + ":" + "textures/items/" + "Quagga" + "_DNA.png"), ((p0.xGui / 2) + (p0.xGui / 4)), 7, 16, 16); //185
+        p0.PrintPictXY(new ResourceLocation(Revival.MODID + ":" + "textures/items/" + "Quagga" + "_DNA.png"), ((p0.xGui / 2) + (p0.xGui / 4)), 7, 16, 16); //185
 
         
         /* LEFT PAGE

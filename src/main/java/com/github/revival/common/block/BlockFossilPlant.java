@@ -89,7 +89,7 @@ public class BlockFossilPlant extends BlockBush
     @Override
     public void registerBlockIcons(IIconRegister par1IIconRegister)
     {
-        this.blockIcon = par1IIconRegister.registerIcon(Revival.modid + ":" + textureName);
+        this.blockIcon = par1IIconRegister.registerIcon(Revival.MODID + ":" + textureName);
     }
 
     @Override

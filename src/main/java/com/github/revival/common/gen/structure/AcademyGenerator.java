@@ -99,7 +99,7 @@ public class AcademyGenerator implements IWorldGenerator
         }
         else
         {
-            Revival.Console("Gen: Academy Spawn at " + x + ", " + y + ", " + z);
+            Revival.printDebug("Gen: Academy Spawn at " + x + ", " + y + ", " + z);
         }
 
         int widthX = gen.structures.get(struct).getWidthX();

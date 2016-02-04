@@ -1505,7 +1505,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	{
 
 		p0.reset();
-		p0.PrintPictXY(new ResourceLocation(Revival.modid + ":"
+		p0.PrintPictXY(new ResourceLocation(Revival.MODID + ":"
 				+ "textures/items/" + this.selfType.toString() + "_DNA.png"),
 				((p0.xGui / 2) + (p0.xGui / 4)), 7, 16, 16); // 185
 
