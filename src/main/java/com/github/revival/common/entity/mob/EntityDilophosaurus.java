@@ -32,7 +32,7 @@ public class EntityDilophosaurus extends EntityNewPrehistoric
 
 	public EntityDilophosaurus(World world) {
 		super(world, EnumPrehistoric.Dilophosaurus);
-        this.setSize(1.5F, 1.5F);
+        this.setSize(1.5F, 0.9F);
 		minSize = 0.5F;
 		maxSize = 2F;
 		teenAge = 4;

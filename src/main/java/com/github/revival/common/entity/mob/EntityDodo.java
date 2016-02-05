@@ -35,7 +35,7 @@ public class EntityDodo extends EntityNewPrehistoric
 
 	public EntityDodo(World world) {
 		super(world, EnumPrehistoric.Dodo);
-		this.setSize(0.5F, 0.7F);
+		this.setSize(0.8F, 0.7F);
 		minSize = 0.5F;
 		maxSize = 1F;
 		teenAge = 2;

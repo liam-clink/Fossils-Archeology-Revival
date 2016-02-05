@@ -32,15 +32,15 @@ public class EntityTyrannosaurus extends EntityNewPrehistoric
 	public static final double maxDamage = 14;
 	public static final double baseHealth = 15;
 	public static final double maxHealth = 82;
-	public static final double baseSpeed = 0.25D;
-	public static final double maxSpeed = 0.3D;
+	public static final double baseSpeed = 0.05D;
+	public static final double maxSpeed = 0.15D;
 	public static Animation animation_roar = new Animation(5, 100);
 	public Object tailbuffer = Revival.proxy.getChainBuffer(3);
 
 
 	public EntityTyrannosaurus(World world) {
 		super(world, EnumPrehistoric.Tyrannosaurus);
-		this.setSize(1.5F, 1.25F);
+		this.setSize(1.8F, 1.25F);
 		this.hasFeatherToggle = true;
 		this.featherToggle = FossilConfig.featheredTRex;
 		minSize = 0.4F;

@@ -32,7 +32,10 @@ public class RenderPrehistoric extends RenderLiving{
 	
 	protected void preRenderCallback(EntityLivingBase entity, float f)
 	{
-		GL11.glScalef(((EntityNewPrehistoric)entity).getDinosaurSize(), ((EntityNewPrehistoric)entity).getDinosaurSize(), ((EntityNewPrehistoric)entity).getDinosaurSize());
+		EntityNewPrehistoric dino = (EntityNewPrehistoric)entity;
+		GL11.glScalef(dino.getDinosaurSize(), dino.getDinosaurSize(), dino.getDinosaurSize());
+		GL11.glScalef(dino.getGender() == 1 ? dino.getMaleSize() : 1, dino.getGender() == 1 ? dino.getMaleSize() : 1, dino.getGender() == 1 ? dino.getMaleSize() : 1);
+
 	}
 	
 	public void superRenderEquippedItems(EntityLivingBase entity, float i)

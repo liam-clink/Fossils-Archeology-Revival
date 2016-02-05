@@ -1624,7 +1624,11 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	private double getSpeed() {
 		return 0.4D;
 	}
-
+	
+	public float getMaleSize(){
+		return 1.0F;
+	}
+	
 	public String getOverlayTexture(){
 		return "fossil:textures/blank.png";
 	}

@@ -1,285 +1,173 @@
 package com.github.revival.client.model.prehistoric;
 
 import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelRenderer;
+import net.ilexiconn.llibrary.common.animation.Animator;
+import net.ilexiconn.llibrary.common.animation.IAnimated;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.util.MathHelper;
 
 import org.lwjgl.opengl.GL11;
 
 import com.github.revival.client.model.base.ModelPrehistoric;
-import com.github.revival.common.entity.mob.EntityElasmotherium;
 import com.github.revival.common.entity.mob.test.EntityNewPrehistoric;
 
 public class ModelElasmotherium extends ModelPrehistoric
 {
-    private MowzieModelRenderer headpivot;
-    private MowzieModelRenderer head;
-    private MowzieModelRenderer rightHorn;
-    private MowzieModelRenderer leftHorn;
-    private MowzieModelRenderer crest;
-    private MowzieModelRenderer rightBackUpperLeg;
-    private MowzieModelRenderer beakHorn;
-    private MowzieModelRenderer beak;
-    private MowzieModelRenderer rightBackLowerLeg;
-    private MowzieModelRenderer leftBackUpperLeg;
-    private MowzieModelRenderer leftBackLowerLeg;
-    private MowzieModelRenderer leftFrontUpperLeg;
-    private MowzieModelRenderer leftFrontLowerLeg;
-    private MowzieModelRenderer rightFrontUpperLeg;
-    private MowzieModelRenderer rightFrontLowerLeg;
-    private MowzieModelRenderer lowerBody;
-    private MowzieModelRenderer tail1;
-    private MowzieModelRenderer neck;
-    private MowzieModelRenderer headdummy;
-    private MowzieModelRenderer upperBody;
-    private MowzieModelRenderer lowerJaw;
-    private MowzieModelRenderer upperJaw;
-    private MowzieModelRenderer torso;
-    private MowzieModelRenderer upperHorn;
-    private MowzieModelRenderer lowerHorn;
-    private MowzieModelRenderer elasmotherium;
-    private MowzieModelRenderer neckpivot;
+	private Animator animator;
+    public MowzieModelRenderer middleBody;
+    public MowzieModelRenderer rightFrontThigh;
+    public MowzieModelRenderer rightHindThigh;
+    public MowzieModelRenderer leftFrontThigh;
+    public MowzieModelRenderer leftHindThigh;
+    public MowzieModelRenderer upperBody;
+    public MowzieModelRenderer lowerBody;
+    public MowzieModelRenderer neck;
+    public MowzieModelRenderer head;
+    public MowzieModelRenderer upperJaw;
+    public MowzieModelRenderer lowerJaw;
+    public MowzieModelRenderer EarR;
+    public MowzieModelRenderer EarL;
+    public MowzieModelRenderer lowerHorn;
+    public MowzieModelRenderer upperHorn;
+    public MowzieModelRenderer tail;
+    public MowzieModelRenderer rightFrontLeg;
+    public MowzieModelRenderer rightHindLeg;
+    public MowzieModelRenderer leftFrontLeg;
+    public MowzieModelRenderer leftHindLeg;
 
-    public ModelElasmotherium()
-    {
-        textureWidth = 256;
-        textureHeight = 128;
-        setTextureOffset("leftBackUpperLeg.leftBackUpperLeg", 89, 60);
-        setTextureOffset("leftBackLowerLeg.leftBackLowerLeg", 68, 98);
-        setTextureOffset("rightBackUpperLeg.rightBackUpperLeg", 89, 60);
-        setTextureOffset("rightBackLowerLeg.rightBackLowerLeg", 68, 98);
-        setTextureOffset("rightFrontUpperLeg.rightFrontUpperLeg", 157, 0);
-        setTextureOffset("rightFrontLowerLeg.rightFrontLowerLeg", 68, 98);
-        setTextureOffset("leftFrontUpperLeg.leftFrontUpperLeg", 157, 0);
-        setTextureOffset("leftFrontLowerLeg.leftFrontLowerLeg", 68, 98);
-        setTextureOffset("torso.torso", 0, 0);
-        setTextureOffset("upperBody.upperBody", 0, 64);
-        setTextureOffset("neck.neck", 0, 102);
-        setTextureOffset("head.head", 0, 42);
-        setTextureOffset("lowerJaw.lowerJaw", 78, 81);
-        setTextureOffset("upperJaw.upperJaw", 86, 42);
-        setTextureOffset("lowerHorn.lowerHorn", 57, 61);
-        setTextureOffset("upperHorn.upperHorn", 53, 44);
-        setTextureOffset("lowerBody.lowerBody", 89, 0);
-        setTextureOffset("tail1.tail1", 0, 0);
-        
-        elasmotherium = new MowzieModelRenderer(this, "elasmotherium");
-        elasmotherium.setRotationPoint(0F, 24F, 0F);
-        setRotateAngle(elasmotherium, 0F, 0F, 0F);
-        elasmotherium.mirror = true;
-        leftBackUpperLeg = new MowzieModelRenderer(this, "leftBackUpperLeg");
-        leftBackUpperLeg.setRotationPoint(6F, -16.5F, 20.5F);
-        setRotateAngle(leftBackUpperLeg, 0F, 0F, 0F);
-        leftBackUpperLeg.mirror = true;
-        leftBackUpperLeg.mirror = true;
-        leftBackUpperLeg.addBox("leftBackUpperLeg", 0F, 0F, -2.9F, 4, 10, 6);
-        leftBackUpperLeg.mirror = false;
-        leftBackLowerLeg = new MowzieModelRenderer(this, "leftBackLowerLeg");
-        leftBackLowerLeg.setRotationPoint(1F, 8F, 2F);
-        setRotateAngle(leftBackLowerLeg, 0F, 0F, 0F);
-        leftBackLowerLeg.mirror = true;
-        leftBackLowerLeg.mirror = true;
-        leftBackLowerLeg.addBox("leftBackLowerLeg", -2F, 0.5F, -3.5F, 4, 8, 5);
-        leftBackLowerLeg.mirror = false;
-        leftBackUpperLeg.addChild(leftBackLowerLeg);
-        elasmotherium.addChild(leftBackUpperLeg);
-        rightBackUpperLeg = new MowzieModelRenderer(this, "rightBackUpperLeg");
-        rightBackUpperLeg.setRotationPoint(-6F, -16.5F, 20.5F);
-        setRotateAngle(rightBackUpperLeg, 0F, 0F, 0F);
-        rightBackUpperLeg.mirror = true;
-        rightBackUpperLeg.addBox("rightBackUpperLeg", -4F, 0F, -2.9F, 4, 10, 6);
-        rightBackLowerLeg = new MowzieModelRenderer(this, "rightBackLowerLeg");
-        rightBackLowerLeg.setRotationPoint(-1F, 8F, 2F);
-        setRotateAngle(rightBackLowerLeg, 0F, 0F, 0F);
-        rightBackLowerLeg.mirror = true;
-        rightBackLowerLeg.addBox("rightBackLowerLeg", -2F, 0.5F, -3.5F, 4, 8, 5);
-        rightBackUpperLeg.addChild(rightBackLowerLeg);
-        elasmotherium.addChild(rightBackUpperLeg);
-        rightFrontUpperLeg = new MowzieModelRenderer(this, "rightFrontUpperLeg");
-        rightFrontUpperLeg.setRotationPoint(-7F, -17.5F, -7F);
-        setRotateAngle(rightFrontUpperLeg, 0F, 0F, 0F);
-        rightFrontUpperLeg.mirror = true;
-        rightFrontUpperLeg.addBox("rightFrontUpperLeg", -3.6F, 0F, -3F, 4, 10, 6);
-        rightFrontLowerLeg = new MowzieModelRenderer(this, "rightFrontLowerLeg");
-        rightFrontLowerLeg.setRotationPoint(-1F, 9.5F, -0.3F);
-        setRotateAngle(rightFrontLowerLeg, 0F, 0F, 0F);
-        rightFrontLowerLeg.mirror = true;
-        rightFrontLowerLeg.addBox("rightFrontLowerLeg", -2.2F, 0F, -2F, 4, 8, 5);
-        rightFrontUpperLeg.addChild(rightFrontLowerLeg);
-        elasmotherium.addChild(rightFrontUpperLeg);
-        leftFrontUpperLeg = new MowzieModelRenderer(this, "leftFrontUpperLeg");
-        leftFrontUpperLeg.setRotationPoint(7F, -17.5F, -7F);
-        setRotateAngle(leftFrontUpperLeg, 0F, 0F, 0F);
-        leftFrontUpperLeg.mirror = true;
-        leftFrontUpperLeg.mirror = true;
-        leftFrontUpperLeg.addBox("leftFrontUpperLeg", -0.2F, 0F, -3F, 4, 10, 6);
-        leftFrontUpperLeg.mirror = false;
-        leftFrontLowerLeg = new MowzieModelRenderer(this, "leftFrontLowerLeg");
-        leftFrontLowerLeg.setRotationPoint(1F, 9.5F, -0.3F);
-        setRotateAngle(leftFrontLowerLeg, 0F, 0F, 0F);
-        leftFrontLowerLeg.mirror = true;
-        leftFrontLowerLeg.mirror = true;
-        leftFrontLowerLeg.addBox("leftFrontLowerLeg", -1.8F, 0F, -2F, 4, 8, 5);
-        leftFrontLowerLeg.mirror = false;
-        leftFrontUpperLeg.addChild(leftFrontLowerLeg);
-        elasmotherium.addChild(leftFrontUpperLeg);
-        torso = new MowzieModelRenderer(this, "torso");
-        torso.setRotationPoint(0F, -16.5F, -2.5F);
-        setRotateAngle(torso, 0F, 0F, 0F);
-        torso.mirror = true;
-        torso.addBox("torso", -8F, -11F, 0F, 16, 22, 17);
-        upperBody = new MowzieModelRenderer(this, "upperBody");
-        upperBody.setRotationPoint(0F, -10.5F, 1F);
-        setRotateAngle(upperBody, 0F, 0F, 0F);
-        upperBody.mirror = true;
-        upperBody.addBox("upperBody", -7F, -1F, -11F, 14, 22, 11);
-        neckpivot = new MowzieModelRenderer(this, "neckpivot");
-        neckpivot.setRotationPoint(0F, 10.5F, -7F);
-        setRotateAngle(neckpivot, 0F, 0F, 0F);
-        neck = new MowzieModelRenderer(this, "neck");
-        neck.setRotationPoint(0F, 0F, 0F);
-        setRotateAngle(neck, 0F, 0F, 0F);
-        neck.mirror = true;
-        neck.addBox("neck", -5.5F, -8F, -9F, 11, 16, 9);
-        head = new MowzieModelRenderer(this, "head");
-        head.setRotationPoint(0F, -4F, -10.5F);
-        setRotateAngle(head, 0F, 0F, 0F);
-        head.mirror = true;
-        head.addBox("head", -4.5F, -3F, -4F, 9, 10, 7);
-        lowerJaw = new MowzieModelRenderer(this, "lowerJaw");
-        lowerJaw.setRotationPoint(0F, 4F, -2.8F);
-        setRotateAngle(lowerJaw, 0F, 0F, 0F);
-        lowerJaw.mirror = true;
-        lowerJaw.addBox("lowerJaw", -1.5F, -1.5F, -7F, 3, 3, 7);
-        head.addChild(lowerJaw);
-        upperJaw = new MowzieModelRenderer(this, "upperJaw");
-        upperJaw.setRotationPoint(0F, 0F, -3F);
-        setRotateAngle(upperJaw, 0F, 0F, 0F);
-        upperJaw.mirror = true;
-        upperJaw.addBox("upperJaw", -2.5F, -3F, -7F, 5, 6, 7);
-        lowerHorn = new MowzieModelRenderer(this, "lowerHorn");
-        lowerHorn.setRotationPoint(0F, -2.5F, -1F);
-        setRotateAngle(lowerHorn, 0F, 0F, 0F);
-        lowerHorn.mirror = true;
-        lowerHorn.addBox("lowerHorn", -1.5F, -8F, -2F, 3, 8, 4);
-        upperHorn = new MowzieModelRenderer(this, "upperHorn");
-        upperHorn.setRotationPoint(0F, -5F, 0F);
-        setRotateAngle(upperHorn, 0F, 0F, 0F);
-        upperHorn.mirror = true;
-        upperHorn.addBox("upperHorn", -1F, -12F, -1F, 2, 12, 2);
-        lowerHorn.addChild(upperHorn);
-        upperJaw.addChild(lowerHorn);
-        head.addChild(upperJaw);
-        neck.addChild(head);
-        neckpivot.addChild(neck);
-        upperBody.addChild(neckpivot);
-        torso.addChild(upperBody);
-        lowerBody = new MowzieModelRenderer(this, "lowerBody");
-        lowerBody.setRotationPoint(0F, -9.5F, 16F);
-        setRotateAngle(lowerBody, 0F, 0F, 0F);
-        lowerBody.mirror = true;
-        lowerBody.addBox("lowerBody", -6F, 0F, 0F, 12, 18, 12);
-        tail1 = new MowzieModelRenderer(this, "tail1");
-        tail1.setRotationPoint(0F, 8F, 12F);
-        setRotateAngle(tail1, 0F, 0F, 0F);
-        tail1.mirror = true;
-        tail1.addBox("tail1", -1F, 0F, -3F, 2, 8, 3);
-        lowerBody.addChild(tail1);
-        torso.addChild(lowerBody);
-        elasmotherium.addChild(torso);
-        doMowzieStuff(false);
+    public ModelElasmotherium() {
+        this.textureWidth = 64;
+        this.textureHeight = 64;
+        this.head = new MowzieModelRenderer(this, 25, 53);
+        this.head.setRotationPoint(0.0F, 1.0F, -4.5F);
+        this.head.addBox(-2.5F, -3.0F, -4.0F, 5, 5, 4, 0.0F);
+        this.setRotateAngle(head, 6.981317007977319E-4F, -0.0F, 0.0F);
+        this.tail = new MowzieModelRenderer(this, 0, 0);
+        this.tail.setRotationPoint(0.0F, -1.5F, 5.7F);
+        this.tail.addBox(-0.5F, 0.0F, -1.5F, 1, 5, 2, 0.0F);
+        this.setRotateAngle(tail, 0.5009094953223726F, -0.0F, 0.0F);
+        this.lowerJaw = new MowzieModelRenderer(this, 51, 25);
+        this.lowerJaw.setRotationPoint(0.0F, 0.8F, -3.5F);
+        this.lowerJaw.addBox(-1.0F, -0.9F, -3.6F, 2, 2, 4, 0.0F);
+        this.setRotateAngle(lowerJaw, -0.31869712141416456F, -0.0F, 0.0F);
+        this.rightHindThigh = new MowzieModelRenderer(this, 0, 45);
+        this.rightHindThigh.mirror = true;
+        this.rightHindThigh.setRotationPoint(-3.0F, 17.0F, 7.4F);
+        this.rightHindThigh.addBox(-2.0F, -1.0F, -1.5F, 2, 5, 3, 0.0F);
+        this.middleBody = new MowzieModelRenderer(this, 0, 0);
+        this.middleBody.setRotationPoint(0.0F, 10.8F, -5.0F);
+        this.middleBody.addBox(-4.0F, -2.0F, 0.0F, 8, 10, 10, 0.0F);
+        this.setRotateAngle(middleBody, -0.041713369122664476F, -0.0F, 0.0F);
+        this.lowerBody = new MowzieModelRenderer(this, 39, 36);
+        this.lowerBody.setRotationPoint(0.0F, 1.7F, 8.97F);
+        this.lowerBody.addBox(-3.0F, -4.0F, 0.0F, 6, 10, 6, 0.0F);
+        this.rightFrontLeg = new MowzieModelRenderer(this, 10, 38);
+        this.rightFrontLeg.setRotationPoint(-0.8F, 3.5F, 0.5F);
+        this.rightFrontLeg.addBox(-1.0F, 0.0F, -1.5F, 2, 4, 3, 0.0F);
+        this.rightFrontThigh = new MowzieModelRenderer(this, 0, 37);
+        this.rightFrontThigh.mirror = true;
+        this.rightFrontThigh.setRotationPoint(-2.8F, 16.5F, -6.5F);
+        this.rightFrontThigh.addBox(-2.0F, -1.0F, -1.5F, 2, 5, 3, 0.0F);
+        this.leftFrontThigh = new MowzieModelRenderer(this, 0, 37);
+        this.leftFrontThigh.setRotationPoint(2.8F, 16.5F, -6.5F);
+        this.leftFrontThigh.addBox(0.0F, -1.0F, -1.5F, 2, 5, 3, 0.0F);
+        this.upperHorn = new MowzieModelRenderer(this, 51, 57);
+        this.upperHorn.setRotationPoint(0.0F, -3.5F, -0.3F);
+        this.upperHorn.addBox(-0.5F, -5.8F, -0.5F, 1, 5, 1, 0.0F);
+        this.setRotateAngle(upperHorn, -0.27314402793711257F, -0.0F, 0.0F);
+        this.neck = new MowzieModelRenderer(this, 42, 0);
+        this.neck.setRotationPoint(0.0F, -0.7F, -4.5F);
+        this.neck.addBox(-3.0F, -3.0F, -5.0F, 6, 7, 5, 0.0F);
+        this.setRotateAngle(neck, 0.27314402793711257F, -0.0F, 0.0F);
+        this.EarR = new MowzieModelRenderer(this, 51, 31);
+        this.EarR.setRotationPoint(-1.8F, -2.0F, -2.0F);
+        this.EarR.addBox(-0.5F, -2.0F, -0.5F, 1, 2, 1, 0.0F);
+        this.setRotateAngle(EarR, -0.767944870877505F, -0.4363323129985824F, -0.3141592653589793F);
+        this.rightHindLeg = new MowzieModelRenderer(this, 10, 46);
+        this.rightHindLeg.setRotationPoint(-0.7F, 3.0F, 0.5F);
+        this.rightHindLeg.addBox(-1.0F, 0.0F, -1.5F, 2, 4, 3, 0.0F);
+        this.leftHindThigh = new MowzieModelRenderer(this, 0, 45);
+        this.leftHindThigh.setRotationPoint(3.0F, 17.0F, 7.4F);
+        this.leftHindThigh.addBox(0.0F, -1.0F, -1.5F, 2, 5, 3, 0.0F);
+        this.EarL = new MowzieModelRenderer(this, 51, 31);
+        this.EarL.mirror = true;
+        this.EarL.setRotationPoint(1.8F, -2.0F, -2.0F);
+        this.EarL.addBox(-0.5F, -2.0F, -0.5F, 1, 2, 1, 0.0F);
+        this.setRotateAngle(EarL, -0.767944870877505F, 0.4363323129985824F, 0.3141592653589793F);
+        this.upperBody = new MowzieModelRenderer(this, 0, 20);
+        this.upperBody.setRotationPoint(0.0F, 2.5F, 2.0F);
+        this.upperBody.addBox(-3.5F, -5.0F, -6.0F, 7, 11, 6, 0.0F);
+        this.setRotateAngle(upperBody, 0.15707963267948966F, -0.0F, 0.0F);
+        this.leftHindLeg = new MowzieModelRenderer(this, 10, 46);
+        this.leftHindLeg.mirror = true;
+        this.leftHindLeg.setRotationPoint(0.7F, 3.0F, 0.5F);
+        this.leftHindLeg.addBox(-1.0F, 0.0F, -1.5F, 2, 4, 3, 0.0F);
+        this.upperJaw = new MowzieModelRenderer(this, 48, 18);
+        this.upperJaw.setRotationPoint(0.0F, -1.8F, -3.7F);
+        this.upperJaw.addBox(-1.5F, -1.0F, -4.0F, 3, 3, 4, 0.0F);
+        this.setRotateAngle(upperJaw, 0.136659280431156F, -0.0F, 0.0F);
+        this.leftFrontLeg = new MowzieModelRenderer(this, 10, 38);
+        this.leftFrontLeg.mirror = true;
+        this.leftFrontLeg.setRotationPoint(0.8F, 3.5F, 0.5F);
+        this.leftFrontLeg.addBox(-1.0F, 0.0F, -1.5F, 2, 4, 3, 0.0F);
+        this.lowerHorn = new MowzieModelRenderer(this, 56, 56);
+        this.lowerHorn.setRotationPoint(0.0F, -0.5F, -0.3F);
+        this.lowerHorn.addBox(-1.0F, -4.7F, -1.0F, 2, 5, 2, 0.0F);
+        this.setRotateAngle(lowerHorn, 0.4553564018453205F, -0.0F, 0.0F);
+        this.neck.addChild(this.head);
+        this.lowerBody.addChild(this.tail);
+        this.head.addChild(this.lowerJaw);
+        this.middleBody.addChild(this.lowerBody);
+        this.rightFrontThigh.addChild(this.rightFrontLeg);
+        this.lowerHorn.addChild(this.upperHorn);
+        this.upperBody.addChild(this.neck);
+        this.head.addChild(this.EarR);
+        this.rightHindThigh.addChild(this.rightHindLeg);
+        this.head.addChild(this.EarL);
+        this.middleBody.addChild(this.upperBody);
+        this.leftHindThigh.addChild(this.leftHindLeg);
+        this.head.addChild(this.upperJaw);
+        this.leftFrontThigh.addChild(this.leftFrontLeg);
+        this.upperJaw.addChild(this.lowerHorn);
+        this.setInitPose();
+		animator = new Animator(this);
     }
 
-    /*
-    public void render(Entity var1, float var2, float var3, float var4, float var5, float var6, float var7)
-    {
-        super.render(var1, var2, var3, var4, var5, var6, var7);
-        EntityElasmotherium entity = (EntityElasmotherium) var1;
-        this.setRotationAngles(var2, var3, var4, var5, var6, var7);
-        
-        boolean isAdult = entity.isAdult();
-        float childSize = entity.getEntitySize();
-        
-        GL11.glPushMatrix();
-
-        if (!isAdult)
-        {
-            GL11.glScalef(childSize, childSize, childSize);
-            GL11.glTranslatef(0.0F, 2.0F - childSize * 2, 0.0F);
-        }
-        else
-        {
-            GL11.glScalef(1.5F, 1.5F, 1.5F);
-            GL11.glTranslatef(0.0F, -0.5F, 0.0F);
-        }
-        
-        this.elasmotherium.render(var7);
-        
-        GL11.glPopMatrix();
+    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+		animate((IAnimated)entity, f, f1, f2, f3, f4, f5);
+        this.rightHindThigh.render(f5);
+        this.middleBody.render(f5);
+        this.rightFrontThigh.render(f5);
+        this.leftFrontThigh.render(f5);
+        this.leftHindThigh.render(f5);
     }
-
-    public void setRotationAngles(float var1, float var2, float var3, float var4, float var5, float var6)
-    {
-        this.lowerBody.rotateAngleX = (float) Math.toRadians(-5);
-        this.upperBody.rotateAngleX = (float) Math.toRadians(7);
-        //this.neck.rotateAngleX = (float)Math.toRadians(10);
-        this.lowerHorn.rotateAngleX = (float) Math.toRadians(10);
-        this.upperHorn.rotateAngleX = (float) Math.toRadians(-5);
-        this.tail1.rotateAngleX = (float) Math.toRadians(30);
-
-        this.neckpivot.rotateAngleX = (var5 * 0.3F) / (180F / (float) Math.PI);
-        this.neckpivot.rotateAngleY = (var4 * 0.3F) / (180F / (float) Math.PI);
-
-        this.leftFrontUpperLeg.rotateAngleX = MathHelper.cos((var1) * 0.63330555F + 1) * 0.7F * var2;
-        this.rightFrontUpperLeg.rotateAngleX = MathHelper.cos((var1) * 0.63330555F + (float) Math.PI) * 0.7F * var2;
-        this.leftBackUpperLeg.rotateAngleX = MathHelper.cos((var1) * 0.63330555F + (float) Math.PI + 2) * 0.7F * var2;
-        this.rightBackUpperLeg.rotateAngleX = MathHelper.cos((var1) * 0.63330555F + 1) * 0.7F * var2;
-    }
-
-   
-    public void setLivingAnimations(EntityLivingBase entity, float var2, float var3, float var4)
-    {
-        EntityElasmotherium elasmotherium = (EntityElasmotherium) entity;
-        int attackTimer = elasmotherium.getattackTimer();
-        if (attackTimer > 0)
-        {
-            this.neck.rotateAngleX = (float) Math.toRadians(-15) + 0.125F * this.swingProgress((float) attackTimer - var4, 10.0F);
-        }
-        else
-        {
-            if (elasmotherium.isAngry())
-            {
-                this.neck.rotateAngleX = (float) Math.toRadians(30);
-            }
-            else
-            {
-                this.neck.rotateAngleX = (float) Math.toRadians(10);
-            }
-        }
-
-    }
-
-    private float swingProgress(float var1, float var2)
-    {
-        return (Math.abs(var1 % var2 - var2 * 0.5F) - var2 * 0.25F) / (var2 * 0.25F);
-    }
- */
-	@Override
-	public void renderFossil(EntityNewPrehistoric entity, float f, float f1,
-			float f2, float f3, float f4, float f5) {
-		
+    
+    public void animate(IAnimated entity, float f, float f1, float f2, float f3, float f4, float f5) {
+		animator.update(entity);
+		this.setToInitPose();
+		setRotationAngles(f, f1, f2, f3, f4, f5, (Entity)entity);
 	}
 
-	@Override
-	public void renderLiving(EntityNewPrehistoric entity, float f, float f1,
-			float f2, float f3, float f4, float f5) {
-		
-	}
+	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
+		MowzieModelRenderer[] tailParts = {this.tail};
+		MowzieModelRenderer[] neckParts = {this.neck, this.head};
+		this.faceTarget(head, 1, f3, f4);
+		float speed = 0.1F;
+		float speed2 = 1.1F;
+		float sitProgress = ((EntityNewPrehistoric)(entity)).sitProgress;
+		this.chainWave(tailParts, speed, 0.05F, -3, entity.ticksExisted, 1);
+		this.chainSwing(tailParts, speed, 0.15F, -2, entity.ticksExisted, 1);
+		this.chainWave(neckParts, speed, 0.15F, 3, entity.ticksExisted, 1);
+		this.bob(middleBody, speed, 0.3F, false, entity.ticksExisted, 1);
+		this.walk(lowerBody, speed, 0.05F, true, 0F, 0F, entity.ticksExisted, 1);
+		this.walk(upperBody, speed, 0.05F, true, 0F, 0F, entity.ticksExisted, 1);
+		this.walk(leftFrontThigh, speed2, 0.8F, true, 0F, -0.4F, f, f1);
+		this.walk(rightFrontThigh, speed2, 0.8F, false, 0F, -0.4F, f, f1);
+		this.walk(leftHindThigh, speed2, 0.8F, false, 0F, 0.4F, f, f1);
+		this.walk(rightHindThigh, speed2, 0.8F, true, 0F, 0.4F, f, f1);
+		this.walk(leftFrontLeg, speed2, 0.6F, true, 0F, 0.4F, f, f1);
+		this.walk(rightFrontLeg, speed2, 0.6F, false, 0F, 0.4F, f, f1);
+		this.walk(leftHindLeg, speed2, 0.6F, false, 0F, 0.4F, f, f1);
+		this.walk(rightHindLeg, speed2, 0.6F, true, 0F, 0.4F, f, f1);
 
-	@Override
-	public void renderSleeping(EntityNewPrehistoric entity, float f, float f1,
-			float f2, float f3, float f4, float f5) {
-		
 	}
 }

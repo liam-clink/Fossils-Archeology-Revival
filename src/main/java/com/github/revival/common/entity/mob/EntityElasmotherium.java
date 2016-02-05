@@ -26,14 +26,14 @@ public class EntityElasmotherium extends EntityNewPrehistoric
 	public static final double maxDamage = 9;
 	public static final double baseHealth = 12;
 	public static final double maxHealth = 62;
-	public static final double baseSpeed = 0.15D;
-	public static final double maxSpeed = 0.4D;
+	public static final double baseSpeed = 0.2D;
+	public static final double maxSpeed = 0.45D;
 
 	public EntityElasmotherium(World world) {
 		super(world, EnumPrehistoric.Elasmotherium);
-        this.setSize(2F, 2F);
+        this.setSize(1F, 1F);
     	minSize = 0.5F;
-		maxSize = 1.5F;
+		maxSize = 2.6F;
 		teenAge = 4;
 		developsResistance = true;
 		breaksBlocks = true;
@@ -168,4 +168,7 @@ public class EntityElasmotherium extends EntityNewPrehistoric
 		return 9;
 	}
 	
+	public float getMaleSize(){
+		return 1.2F;
+	}
 }

@@ -1,308 +1,170 @@
 package com.github.revival.client.model.prehistoric;
 
-import com.github.revival.common.entity.mob.EntitySmilodon;
-import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.model.ModelRenderer;
+import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelRenderer;
+import net.ilexiconn.llibrary.common.animation.Animator;
+import net.ilexiconn.llibrary.common.animation.IAnimated;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.util.MathHelper;
-import org.lwjgl.opengl.GL11;
 
-public class ModelSmilodon extends ModelBase
+import com.github.revival.client.model.base.ModelPrehistoric;
+import com.github.revival.common.entity.mob.test.EntityNewPrehistoric;
+
+public class ModelSmilodon extends ModelPrehistoric
 {
-    protected float field_40331_g = 4.0F;
-    protected float field_40332_n = 2.0F;
-    ModelRenderer Head = (new ModelRenderer(this, 0, 0)).setTextureSize(64, 32);
-    ModelRenderer Nose;
-    ModelRenderer UpperJaw;
-    ModelRenderer LowerJaw;
-    ModelRenderer ToothUpperRight;
-    ModelRenderer ToothUpperLeft;
-    ModelRenderer ToothLowerRight;
-    ModelRenderer ToothLowerLeft;
-    ModelRenderer UpperBody;
-    ModelRenderer LowerBody;
-    ModelRenderer Tail;
-    ModelRenderer Front_ThighRight;
-    ModelRenderer Front_ThighLeft;
-    ModelRenderer Back_ThighRight;
-    ModelRenderer Back_ThighLeft;
-    ModelRenderer EarRight;
-    ModelRenderer EarLeft;
-    ModelRenderer C1;
-    ModelRenderer C2;
+	public MowzieModelRenderer lowerBody;
+	public MowzieModelRenderer leftFrontThigh;
+	public MowzieModelRenderer rightFrontThigh;
+	public MowzieModelRenderer rightHindThigh;
+	public MowzieModelRenderer leftHindThigh;
+	public MowzieModelRenderer upperBody;
+	public MowzieModelRenderer tail;
+	public MowzieModelRenderer neck;
+	public MowzieModelRenderer head;
+	public MowzieModelRenderer upperJaw;
+	public MowzieModelRenderer lowerJaw;
+	public MowzieModelRenderer leftEar;
+	public MowzieModelRenderer rightEar;
+	public MowzieModelRenderer nose;
+	public MowzieModelRenderer upperRightFang;
+	public MowzieModelRenderer upperLeftFang;
+	public MowzieModelRenderer leftFrontLeg;
+	public MowzieModelRenderer rightFrontLeg;
+	public MowzieModelRenderer rightHindLeg;
+	public MowzieModelRenderer leftHindLeg;
+	private Animator animator;
 
-    public ModelSmilodon()
-    {
-        this.Head.addBox(-2.5F, -1.5F, -4.0F, 5, 4, 4);
-        this.Head.setRotationPoint(0.0F, 15.0F, -3.0F);
-        this.setRotation(this.Head, 0.0F, 0.0F, 0.0F);
-        this.Head.mirror = true;
-        this.Nose = (new ModelRenderer(this, 18, 0)).setTextureSize(64, 32);
-        this.Nose.addBox(-1.0F, -1.0F, -7.0F, 2, 1, 3);
-        this.Nose.setRotationPoint(0.0F, 15.0F, -3.0F);
-        this.setRotation(this.Nose, 0.0F, 0.0F, 0.0F);
-        this.Nose.mirror = true;
-        this.UpperJaw = (new ModelRenderer(this, 18, 5)).setTextureSize(64, 32);
-        this.UpperJaw.addBox(-2.0F, 0.0F, -7.0F, 4, 2, 3);
-        this.UpperJaw.setRotationPoint(0.0F, 15.0F, -3.0F);
-        this.setRotation(this.UpperJaw, 0.0F, 0.0F, 0.0F);
-        this.UpperJaw.mirror = true;
-        this.LowerJaw = (new ModelRenderer(this, 48, 7)).setTextureSize(64, 32);
-        this.LowerJaw.addBox(-1.0F, 0.0F, -3.5F, 2, 1, 3);
-        this.LowerJaw.setRotationPoint(0.0F, 1.5F, -3.0F);
-        this.setRotation(this.LowerJaw, 0.1745329F, 0.0F, 0.0F);
-        this.LowerJaw.mirror = true;
-        UpperJaw.addChild(LowerJaw);
-        this.ToothUpperRight = (new ModelRenderer(this, 44, 14)).setTextureSize(64, 32);
-        this.ToothUpperRight.addBox(-1.5F, 2.0F, -6.0F, 1, 2, 1);
-        this.ToothUpperRight.setRotationPoint(0.0F, 15.0F, -3.0F);
-        this.setRotation(this.ToothUpperRight, 0.0F, 0.0F, 0.0F);
-        this.ToothUpperRight.mirror = true;
-        this.ToothUpperLeft = (new ModelRenderer(this, 44, 14)).setTextureSize(64, 32);
-        this.ToothUpperLeft.addBox(0.5F, 2.0F, -6.0F, 1, 2, 1);
-        this.ToothUpperLeft.setRotationPoint(0.0F, 15.0F, -3.0F);
-        this.setRotation(this.ToothUpperLeft, 0.0F, 0.0F, 0.0F);
-        this.ToothUpperLeft.mirror = true;
-        this.ToothLowerRight = (new ModelRenderer(this, 44, 17)).setTextureSize(64, 32);
-        this.ToothLowerRight.addBox(-1.5F, 4.0F, -6.0F, 1, 2, 1);
-        this.ToothLowerRight.setRotationPoint(0.0F, 15.0F, -3.0F);
-        this.setRotation(this.ToothLowerRight, 0.0F, 0.0F, 0.0F);
-        this.ToothLowerRight.mirror = true;
-        this.ToothLowerLeft = (new ModelRenderer(this, 44, 17)).setTextureSize(64, 32);
-        this.ToothLowerLeft.addBox(0.5F, 4.0F, -6.0F, 1, 2, 1);
-        this.ToothLowerLeft.setRotationPoint(0.0F, 15.0F, -3.0F);
-        this.setRotation(this.ToothLowerLeft, 0.0F, 0.0F, 0.0F);
-        this.ToothLowerLeft.mirror = true;
-        this.UpperBody = (new ModelRenderer(this, 0, 11)).setTextureSize(64, 32);
-        this.UpperBody.addBox(-3.5F, -2.5F, -3.0F, 7, 6, 4);
-        this.UpperBody.setRotationPoint(0.0F, 15.0F, 0.0F);
-        this.setRotation(this.UpperBody, 0.0F, 0.0F, 0.0F);
-        this.UpperBody.mirror = true;
-        this.LowerBody = (new ModelRenderer(this, 0, 21)).setTextureSize(64, 32);
-        this.LowerBody.addBox(-2.5F, -2.5F, 0.0F, 5, 5, 6);
-        this.LowerBody.setRotationPoint(0.0F, 16.0F, 1.0F);
-        this.setRotation(this.LowerBody, 0.0F, 0.0F, 0.0F);
-        this.LowerBody.mirror = true;
-        this.Tail = (new ModelRenderer(this, 44, 7)).setTextureSize(64, 32);
-        this.Tail.addBox(-0.5F, 0.0F, -0.5F, 1, 6, 1);
-        this.Tail.setRotationPoint(0.0F, 14.0F, 6.5F);
-        this.setRotation(this.Tail, 0.5576792F, 0.0F, 0.0F);
-        this.Tail.mirror = true;
-        this.Front_ThighRight = (new ModelRenderer(this, 40, 0)).setTextureSize(64, 32);
-        this.Front_ThighRight.addBox(-1.0F, -0.5F, -1.0F, 2, 5, 2);
-        this.Front_ThighRight.setRotationPoint(-1.5F, 19.0F, -2.0F);
-        this.setRotation(this.Front_ThighRight, 0.0F, 0.0F, 0.0F);
-        this.Front_ThighRight.mirror = true;
-        this.Front_ThighLeft = (new ModelRenderer(this, 32, 0)).setTextureSize(64, 32);
-        this.Front_ThighLeft.addBox(-1.0F, -0.5F, -1.0F, 2, 5, 2);
-        this.Front_ThighLeft.setRotationPoint(1.5F, 19.0F, -2.0F);
-        this.setRotation(this.Front_ThighLeft, 0.0F, 0.0F, 0.0F);
-        this.Front_ThighLeft.mirror = true;
-        this.Back_ThighRight = (new ModelRenderer(this, 56, 0)).setTextureSize(64, 32);
-        this.Back_ThighRight.addBox(-1.0F, -0.5F, -1.0F, 2, 5, 2);
-        this.Back_ThighRight.setRotationPoint(-1.5F, 19.0F, 6.0F);
-        this.setRotation(this.Back_ThighRight, 0.0F, 0.0F, 0.0F);
-        this.Back_ThighRight.mirror = true;
-        this.Back_ThighLeft = (new ModelRenderer(this, 48, 0)).setTextureSize(64, 32);
-        this.Back_ThighLeft.addBox(-1.0F, -0.5F, -1.0F, 2, 5, 2);
-        this.Back_ThighLeft.setRotationPoint(1.5F, 19.0F, 6.0F);
-        this.setRotation(this.Back_ThighLeft, 0.0F, 0.0F, 0.0F);
-        this.Back_ThighLeft.mirror = true;
-        this.EarRight = (new ModelRenderer(this, 6, 8)).setTextureSize(64, 32);
-        this.EarRight.addBox(-2.5F, -2.5F, -3.0F, 1, 1, 2);
-        this.EarRight.setRotationPoint(0.0F, 15.0F, -3.0F);
-        this.setRotation(this.EarRight, 0.0F, 0.0F, 0.0F);
-        this.EarRight.mirror = true;
-        this.EarLeft = (new ModelRenderer(this, 0, 8)).setTextureSize(64, 32);
-        this.EarLeft.addBox(1.5F, -2.5F, -3.0F, 1, 1, 2);
-        this.EarLeft.setRotationPoint(0.0F, 15.0F, -3.0F);
-        this.setRotation(this.EarLeft, 0.0F, 0.0F, 0.0F);
-        this.EarLeft.mirror = true;
-        this.C1 = (new ModelRenderer(this, 22, 20)).setTextureSize(64, 32);
-        this.C1.addBox(-4.0F, -3.0F, -3.5F, 8, 7, 5);
-        this.C1.setRotationPoint(0.0F, 15.0F, 0.0F);
-        this.setRotation(this.C1, 0.0F, 0.0F, 0.0F);
-        this.C1.mirror = true;
-        this.C2 = (new ModelRenderer(this, 22, 10)).setTextureSize(64, 32);
-        this.C2.addBox(-3.0F, -2.0F, -4.5F, 6, 5, 5);
-        this.C2.setRotationPoint(0.0F, 15.0F, -3.0F);
-        this.setRotation(this.C2, 0.0F, 0.0F, 0.0F);
-        this.C2.mirror = true;
-    }
+	public ModelSmilodon() {
+		this.textureWidth = 64;
+		this.textureHeight = 32;
+		this.lowerJaw = new MowzieModelRenderer(this, 17, 10);
+		this.lowerJaw.setRotationPoint(0.0F, 1.2F, -2.4F);
+		this.lowerJaw.addBox(-1.0F, 0.5F, -3.0F, 2, 1, 3, 0.0F);
+		this.neck = new MowzieModelRenderer(this, 20, 16);
+		this.neck.setRotationPoint(0.0F, -0.4F, -6.5F);
+		this.neck.addBox(-2.0F, -2.0F, -4.0F, 4, 4, 4, 0.0F);
+		this.setRotateAngle(neck, -0.136659280431156F, -0.0F, 0.0F);
+		this.leftEar = new MowzieModelRenderer(this, 6, 8);
+		this.leftEar.setRotationPoint(2.1F, -1.2F, -0.5F);
+		this.leftEar.addBox(-0.5F, -1.0F, -1.0F, 1, 1, 2, 0.0F);
+		this.setRotateAngle(leftEar, -0.05235987755982988F, -0.0F, 0.0F);
+		this.leftHindThigh = new MowzieModelRenderer(this, 42, 0);
+		this.leftHindThigh.setRotationPoint(-1.5F, 14.0F, 5.8F);
+		this.leftHindThigh.addBox(-2.0F, -1.0F, -1.5F, 2, 6, 3, 0.0F);
+		this.rightEar = new MowzieModelRenderer(this, 6, 8);
+		this.rightEar.mirror = true;
+		this.rightEar.setRotationPoint(-2.1F, -1.2F, -0.5F);
+		this.rightEar.addBox(-0.5F, -1.0F, -1.0F, 1, 1, 2, 0.0F);
+		this.setRotateAngle(rightEar, -0.05235987755982988F, -0.0F, 0.0F);
+		this.rightHindLeg = new MowzieModelRenderer(this, 34, 8);
+		this.rightHindLeg.setRotationPoint(1.0F, 4.0F, 0.8F);
+		this.rightHindLeg.addBox(-1.1F, 0.0F, -1.0F, 2, 6, 2, 0.0F);
+		this.rightFrontThigh = new MowzieModelRenderer(this, 52, 0);
+		this.rightFrontThigh.mirror = true;
+		this.rightFrontThigh.setRotationPoint(-2.0F, 12.5F, -4.5F);
+		this.rightFrontThigh.addBox(-2.0F, -1.0F, -1.5F, 2, 7, 3, 0.0F);
+		this.rightFrontLeg = new MowzieModelRenderer(this, 34, 0);
+		this.rightFrontLeg.mirror = true;
+		this.rightFrontLeg.setRotationPoint(-0.9F, 5.5F, -0.4F);
+		this.rightFrontLeg.addBox(-1.0F, 0.0F, -1.0F, 2, 6, 2, 0.0F);
+		this.upperBody = new MowzieModelRenderer(this, 30, 19);
+		this.upperBody.setRotationPoint(0.0F, 2.4F, 1.5F);
+		this.upperBody.addBox(-3.0F, -2.5F, -7.0F, 6, 6, 7, 0.0F);
+		this.setRotateAngle(upperBody, -0.041713369122664476F, -0.0F, 0.0F);
+		this.rightHindThigh = new MowzieModelRenderer(this, 42, 0);
+		this.rightHindThigh.setRotationPoint(1.5F, 14.0F, 5.8F);
+		this.rightHindThigh.addBox(0.0F, -1.0F, -1.5F, 2, 6, 3, 0.0F);
+		this.nose = new MowzieModelRenderer(this, 18, 0);
+		this.nose.setRotationPoint(0.0F, -1.7F, -0.2F);
+		this.nose.addBox(-1.0F, -0.5F, -3.0F, 2, 2, 3, 0.0F);
+		this.setRotateAngle(nose, 0.136659280431156F, -0.0F, 0.0F);
+		this.head = new MowzieModelRenderer(this, 0, 0);
+		this.head.setRotationPoint(0.0F, -0.4F, -3.3F);
+		this.head.addBox(-2.5F, -1.5F, -3.0F, 5, 4, 3, 0.0F);
+		this.setRotateAngle(head, 0.4553564018453205F, -0.0F, 0.0F);
+		this.upperLeftFang = new MowzieModelRenderer(this, 45, 14);
+		this.upperLeftFang.setRotationPoint(1.0F, 1.0F, -2.12F);
+		this.upperLeftFang.addBox(-0.5F, 0.0F, -0.5F, 1, 2, 1, 0.0F);
+		this.setRotateAngle(upperLeftFang, 0.004537856055185257F, -0.0F, 0.0F);
+		this.leftFrontThigh = new MowzieModelRenderer(this, 52, 0);
+		this.leftFrontThigh.setRotationPoint(2.0F, 12.5F, -4.5F);
+		this.leftFrontThigh.addBox(0.0F, -1.0F, -1.5F, 2, 7, 3, 0.0F);
+		this.tail = new MowzieModelRenderer(this, 44, 9);
+		this.tail.setRotationPoint(0.0F, 0.4F, 8.1F);
+		this.tail.addBox(-0.5F, 0.0F, -0.5F, 1, 4, 1, 0.0F);
+		this.setRotateAngle(tail, -0.6373942428283291F, 3.141592653589793F, 0.0F);
+		this.upperRightFang = new MowzieModelRenderer(this, 45, 14);
+		this.upperRightFang.mirror = true;
+		this.upperRightFang.setRotationPoint(-1.0F, 1.0F, -2.12F);
+		this.upperRightFang.addBox(-0.5F, 0.0F, -0.5F, 1, 2, 1, 0.0F);
+		this.setRotateAngle(upperRightFang, 0.004537856055185257F, 0.0F, 0.0F);
+		this.upperJaw = new MowzieModelRenderer(this, 18, 5);
+		this.upperJaw.setRotationPoint(0.0F, 0.9F, -2.6F);
+		this.upperJaw.addBox(-2.0F, -1.0F, -3.0F, 4, 2, 3, 0.0F);
+		this.setRotateAngle(upperJaw, 0.03944444109507184F, -0.0F, 0.0F);
+		this.lowerBody = new MowzieModelRenderer(this, 0, 18);
+		this.lowerBody.setRotationPoint(0.0F, 12.0F, -1.0F);
+		this.lowerBody.addBox(-2.5F, 0.0F, 0.0F, 5, 5, 9, 0.0F);
+		this.setRotateAngle(lowerBody, 0.008726646259971648F, -0.0F, 0.0F);
+		this.leftFrontLeg = new MowzieModelRenderer(this, 34, 0);
+		this.leftFrontLeg.setRotationPoint(0.9F, 5.5F, -0.4F);
+		this.leftFrontLeg.addBox(-1.0F, 0.0F, -1.0F, 2, 6, 2, 0.0F);
+		this.leftHindLeg = new MowzieModelRenderer(this, 34, 8);
+		this.leftHindLeg.mirror = true;
+		this.leftHindLeg.setRotationPoint(-1.0F, 4.0F, 0.8F);
+		this.leftHindLeg.addBox(-0.9F, 0.0F, -1.0F, 2, 6, 2, 0.0F);
+		this.head.addChild(this.lowerJaw);
+		this.upperBody.addChild(this.neck);
+		this.head.addChild(this.leftEar);
+		this.head.addChild(this.rightEar);
+		this.rightHindThigh.addChild(this.rightHindLeg);
+		this.rightFrontThigh.addChild(this.rightFrontLeg);
+		this.lowerBody.addChild(this.upperBody);
+		this.upperJaw.addChild(this.nose);
+		this.neck.addChild(this.head);
+		this.upperJaw.addChild(this.upperLeftFang);
+		this.lowerBody.addChild(this.tail);
+		this.upperJaw.addChild(this.upperRightFang);
+		this.head.addChild(this.upperJaw);
+		this.leftFrontThigh.addChild(this.leftFrontLeg);
+		this.leftHindThigh.addChild(this.leftHindLeg);
+        this.setInitPose();
+		animator = new Animator(this);
+	}
 
+	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+		animate((IAnimated)entity, f, f1, f2, f3, f4, f5);
+		this.leftHindThigh.render(f5);
+		this.rightFrontThigh.render(f5);
+		this.rightHindThigh.render(f5);
+		this.leftFrontThigh.render(f5);
+		this.lowerBody.render(f5);
+	}
 
-    /**
-     * Sets the models various rotation angles then renders the model.
-     */
-    public void render(Entity var1, float var2, float var3, float var4, float var5, float var6, float var7)
-    {
-        super.render(var1, var2, var3, var4, var5, var6, var7);
-        this.setRotationAngles(var2, var3, var4, var5, var6, var7, var1);
-        float var8 = 2.0F;
+	public void animate(IAnimated entity, float f, float f1, float f2, float f3, float f4, float f5) {
+		animator.update(entity);
+		this.setToInitPose();
+		setRotationAngles(f, f1, f2, f3, f4, f5, (Entity)entity);
+	}
 
-        if (this.isChild)
-        {
-            float var9 = 2.0F;
-            GL11.glPushMatrix();
-            GL11.glTranslatef(0.0F, 0.0F, 0.0F);
-            this.Head.render(var7);
-            this.Nose.render(var7);
-            this.UpperJaw.render(var7);
-            // this.LowerJaw.render(var7);
-            this.ToothUpperRight.render(var7);
-            this.ToothUpperLeft.render(var7);
-            this.ToothLowerRight.render(var7);
-            this.ToothLowerLeft.render(var7);
-            this.EarRight.render(var7);
-            this.EarLeft.render(var7);
-            GL11.glPopMatrix();
-            GL11.glPushMatrix();
-            GL11.glScalef(2.0F / var9, 2.0F / var9, 2.0F / var9);
-            GL11.glTranslatef(0.0F, 0.0F, 0.0F);
-            this.UpperBody.render(var7);
-            this.LowerBody.render(var7);
-            this.Tail.render(var7);
-            this.Front_ThighRight.render(var7);
-            this.Front_ThighLeft.render(var7);
-            this.Back_ThighRight.render(var7);
-            this.Back_ThighLeft.render(var7);
-            this.C1.render(var7);
-            this.C2.render(var7);
-            GL11.glPopMatrix();
-        }
-        else
-        {
-            GL11.glPushMatrix();
-            GL11.glScalef(2.0F, 2.0F, 2.0F);
-            GL11.glTranslatef(0.0F, -0.7F, 0.0F);
-            this.Head.render(var7);
-            this.Nose.render(var7);
-            this.UpperJaw.render(var7);
-            //  this.LowerJaw.render(var7);
-            this.ToothUpperRight.render(var7);
-            this.ToothUpperLeft.render(var7);
-            this.ToothLowerRight.render(var7);
-            this.ToothLowerLeft.render(var7);
-            this.UpperBody.render(var7);
-            this.LowerBody.render(var7);
-            this.Tail.render(var7);
-            this.Front_ThighRight.render(var7);
-            this.Front_ThighLeft.render(var7);
-            this.Back_ThighRight.render(var7);
-            this.Back_ThighLeft.render(var7);
-            this.EarRight.render(var7);
-            this.EarLeft.render(var7);
-            this.C1.render(var7);
-            this.C2.render(var7);
-            GL11.glPopMatrix();
-        }
-    }
+	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
+		MowzieModelRenderer[] tailParts = {this.tail};
+		MowzieModelRenderer[] neckParts = {this.neck, this.head};
+		this.faceTarget(head, 1, f3, f4);
+		float speed = 0.1F;
+		float speed2 = 1.1F;
+		float sitProgress = ((EntityNewPrehistoric)(entity)).sitProgress;
+		this.chainWave(tailParts, speed, 0.05F, -3, entity.ticksExisted, 1);
+		this.chainSwing(tailParts, speed, 0.15F, -2, entity.ticksExisted, 1);
+		this.chainWave(neckParts, speed, 0.15F, 3, entity.ticksExisted, 1);
+		this.bob(lowerBody, speed, 0.4F, false, entity.ticksExisted, 1);
+		this.walk(upperBody, speed, 0.01F, true, 0.1F, 0F, entity.ticksExisted, 1);
+		this.walk(leftFrontThigh, speed2, 0.6F, true, 0F, -0.4F, f, f1);
+		this.walk(rightFrontThigh, speed2, 0.6F, false, 0F, -0.4F, f, f1);
+		this.walk(leftHindThigh, speed2, 0.6F, true, 0F, 0.4F, f, f1);
+		this.walk(rightHindThigh, speed2, 0.6F, false, 0F, 0.4F, f, f1);
+		this.walk(leftFrontLeg, speed2, 0.4F, true, 0F, -0.4F, f, f1);
+		this.walk(rightFrontLeg, speed2, 0.4F, false, 0F, -0.4F, f, f1);
+		this.walk(leftHindLeg, speed2, 0.4F, true, 0F, 0.4F, f, f1);
+		this.walk(rightHindLeg, speed2, 0.4F, false, 0F, 0.4F, f, f1);
+	}
 
-
-    private void setRotation(ModelRenderer var1, float var2, float var3, float var4)
-    {
-        var1.rotateAngleX = var2;
-        var1.rotateAngleY = var3;
-        var1.rotateAngleZ = var4;
-    }
-
-    /**
-     * Sets the model's various rotation angles. For bipeds, par1 and par2 are used for animating the movement of arms
-     * and legs, where par1 represents the time(so that arms and legs swing back and forth) and par2 represents how
-     * "far" arms and legs can swing at most.
-     */
-    public void setRotationAngles(float var1, float var2, float var3, float var4, float var5, float var6, Entity var7)
-    {
-
-        super.setRotationAngles(var1, var2, var3, var4, var5, var6, var7);
-        this.Head.rotateAngleX = var5 / (180F / (float) Math.PI);
-
-
-        this.EarLeft.rotateAngleX = this.EarRight.rotateAngleX
-                = this.Nose.rotateAngleX = this.UpperJaw.rotateAngleX
-                = this.ToothUpperRight.rotateAngleX = this.ToothUpperLeft.rotateAngleX
-                = this.ToothLowerRight.rotateAngleX = this.ToothLowerLeft.rotateAngleX = this.Head.rotateAngleX;
-        this.Head.rotateAngleY = var4 / (180F / (float) Math.PI);
-        this.EarLeft.rotateAngleY = this.EarRight.rotateAngleY
-                = this.Nose.rotateAngleY = this.UpperJaw.rotateAngleY
-                = this.ToothUpperRight.rotateAngleY = this.ToothUpperLeft.rotateAngleY
-                = this.ToothLowerRight.rotateAngleY = this.ToothLowerLeft.rotateAngleY = this.Head.rotateAngleY;
-        //   this.Tail.rotateAngleX = var3;
-
-        //   this.Front_ThighLeft.rotateAngleX = MathHelper.cos((var1) * 0.63330555F + 1) * 1.0F * var2;
-        //   this.Front_ThighRight.rotateAngleX = MathHelper.cos((var1) * 0.63330555F + (float)Math.PI) * 1.0F * var2;
-        //   this.Back_ThighLeft.rotateAngleX = MathHelper.cos((var1) * 0.63330555F + (float)Math.PI + 2) * 1.0F * var2;
-        //   this.Back_ThighRight.rotateAngleX = MathHelper.cos((var1) * 0.63330555F + 1) * 1.0F * var2;
-    }
-
-
-    /**
-     * Used for easily adding entity-dependent animations. The second and third float params here are the same second
-     * and third as in the setRotationAngles method.
-     */
-    public void setLivingAnimations(EntityLivingBase var1, float var2, float var3, float var4)
-    {
-        EntitySmilodon var5 = (EntitySmilodon) var1;
-
-        if (var5.isAngry())
-        {
-            this.Tail.rotateAngleY = 0.0F;
-        }
-        else
-        {
-            this.Tail.rotateAngleY = MathHelper.cos(var2 * 0.6662F) * 1.4F * var3;
-        }
-
-        if (var5.isSitting())
-        {
-            this.UpperBody.setRotationPoint(0.0F, 17.0F, 0.0F);
-            this.UpperBody.rotateAngleX = -0.314F;
-            this.UpperBody.rotateAngleY = 0.0F;
-            this.C1.setRotationPoint(0.0F, 17.0F, 0.0F);
-            this.C1.rotateAngleX = -0.314F;
-            this.C1.rotateAngleY = 0.0F;
-            this.LowerBody.setRotationPoint(0.0F, 20.0F, -1.0F);
-            this.LowerBody.rotateAngleX = -((float) Math.PI / 4F);
-            this.Tail.setRotationPoint(0.0F, 23.0F, 4.5F);
-            this.Back_ThighRight.setRotationPoint(-1.5F, 25.0F, 1.0F);
-            this.Back_ThighRight.rotateAngleX = ((float) Math.PI * 3F / 2F);
-            this.Back_ThighLeft.setRotationPoint(1.5F, 25.0F, 1.0F);
-            this.Back_ThighLeft.rotateAngleX = ((float) Math.PI * 3F / 2F);
-            this.Front_ThighRight.rotateAngleX = 5.811947F;
-            this.Front_ThighRight.setRotationPoint(-1.5F, 20.0F, -2.0F);
-            this.Front_ThighLeft.rotateAngleX = 5.811947F;
-            this.Front_ThighLeft.setRotationPoint(1.5F, 20.0F, -2.0F);
-        }
-        else
-        {
-            this.UpperBody.setRotationPoint(0.0F, 15.0F, 0.0F);
-            this.LowerBody.setRotationPoint(0.0F, 16.0F, 1.0F);
-            this.LowerBody.rotateAngleX = 0.0F;
-            this.UpperBody.rotateAngleX = this.LowerBody.rotateAngleX;
-            this.C1.setRotationPoint(0.0F, 15.0F, 0.0F);
-            this.C1.rotateAngleX = this.UpperBody.rotateAngleX;
-            this.Tail.setRotationPoint(0.0F, 14.0F, 6.5F);
-            this.Back_ThighRight.setRotationPoint(-1.5F, 19.0F, 6.0F);
-            this.Back_ThighLeft.setRotationPoint(1.5F, 19.0F, 6.0F);
-            this.Front_ThighRight.setRotationPoint(-1.5F, 19.0F, -2.0F);
-            this.Front_ThighLeft.setRotationPoint(1.5F, 19.0F, -2.0F);
-            this.Back_ThighRight.rotateAngleX = MathHelper.cos(var2 * 0.6662F) * 1.4F * var3;
-            this.Back_ThighLeft.rotateAngleX = MathHelper.cos(var2 * 0.6662F + (float) Math.PI) * 1.4F * var3;
-            this.Front_ThighRight.rotateAngleX = MathHelper.cos(var2 * 0.6662F + (float) Math.PI) * 1.4F * var3;
-            this.Front_ThighLeft.rotateAngleX = MathHelper.cos(var2 * 0.6662F) * 1.4F * var3;
-        }
-
-       /* float var6 = var5.getInterestedAngle(var4) + var5.getShakeAngle(var4, 0.0F);
-        this.Head.rotateAngleZ = this.Nose.rotateAngleZ = this.UpperJaw.rotateAngleZ = this.ToothUpperRight.rotateAngleZ = this.ToothUpperLeft.rotateAngleZ = this.ToothLowerRight.rotateAngleZ = this.ToothLowerLeft.rotateAngleZ = this.EarRight.rotateAngleZ = this.EarLeft.rotateAngleZ = var6;
-        this.UpperBody.rotateAngleZ = var5.getShakeAngle(var4, -0.08F);
-        this.LowerBody.rotateAngleZ = var5.getShakeAngle(var4, -0.16F);
-        this.Tail.rotateAngleZ = var5.getShakeAngle(var4, -0.2F);
-
-        if (var5.getSmilodonShaking())
-        {
-            float var7 = var5.getBrightness(var4) * var5.getShadingWhileShaking(var4);
-            GL11.glColor3f(var7, var7, var7);
-        }*/
-    }
 }

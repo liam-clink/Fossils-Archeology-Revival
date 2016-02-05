@@ -32,7 +32,7 @@ public class EntityAnkylosaurus extends EntityNewPrehistoric
 
 	public EntityAnkylosaurus(World world) {
 		super(world, EnumPrehistoric.Ankylosaurus);
-        this.setSize(1.1F, 1.0F);
+        this.setSize(1.4F, 1.0F);
         minSize = 1.0F;
         maxSize = 3.0F;
 		teenAge = 5;

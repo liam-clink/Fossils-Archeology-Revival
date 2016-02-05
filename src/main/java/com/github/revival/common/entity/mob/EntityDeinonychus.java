@@ -41,7 +41,7 @@ public class EntityDeinonychus extends EntityNewPrehistoric
 		super(world, EnumPrehistoric.Deinonychus);
 		this.hasFeatherToggle = true;
 		this.featherToggle = FossilConfig.featheredDeinonychus;
-        this.setSize(1.75F, 1.75F);
+        this.setSize(1.8F, 1.25F);
 		minSize = 0.3F;
 		maxSize = 1;
 		teenAge = 4;

@@ -44,10 +44,10 @@ public class EntityMammoth extends EntityNewPrehistoric implements IShearable
 	
 	public EntityMammoth(World world) {
 		super(world, EnumPrehistoric.Mammoth);
-		this.setSize(4.5F, 6.5F);
+		this.setSize(0.7F, 0.7F);
 		this.tasks.addTask(10, aiEatGrass);
-		minSize = 0.3F;
-		maxSize = 1F;
+		minSize = 1.3F;
+		maxSize = 5F;
 		teenAge = 7;
 		developsResistance = true;
 		breaksBlocks = true;
@@ -159,7 +159,7 @@ public class EntityMammoth extends EntityNewPrehistoric implements IShearable
        int k = MathHelper.floor_double(this.posZ);
        PotionEffect BIOME_EFFECT = new PotionEffect(Potion.weakness.id, 60, 1);
        if(!this.isPotionActive(Potion.weakness) && this.worldObj.getBiomeGenForCoords(i, k).getFloatTemperature(i, j, k) > 1.0 && !this.getSheared()){
-           this.addPotionEffect(BIOME_EFFECT);
+           //this.addPotionEffect(BIOME_EFFECT);
 
        }
     
@@ -281,4 +281,7 @@ public class EntityMammoth extends EntityNewPrehistoric implements IShearable
 		return 14;
 	}
 	
+	public float getMaleSize(){
+		return 1.2F;
+	}
 }

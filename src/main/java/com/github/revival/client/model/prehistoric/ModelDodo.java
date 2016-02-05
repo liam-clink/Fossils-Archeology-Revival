@@ -117,13 +117,6 @@ public class ModelDodo extends ModelPrehistoric {
 		this.chainSwing(tailParts, speed2, 0.15F, -3, entity.ticksExisted, 1);
 		this.chainWave(neckParts, speed2, 0.1F, -3, entity.ticksExisted, 1);
 		this.chainWave(neckParts, speed, 0.4F, -3, f, f1);
-		if(dodo.isChild()){
-			head.setScale(1.5F, 1.5F, 1.5F);
-			beakLower.setScale(0.5F, 0.5F, 0.5F);
-			beakLower.setRotationPoint(0, 0, -3.5F);
-			beakUpper.setScale(0.5F, 0.5F, 0.5F);
-			beakUpper.setRotationPoint(0, -1, -3.5F);
-		}
 		if(dodo.getFat() > 0){
 			float scale = 1 + (dodo.getFat() * 0.1F);
 			body.setScale(scale, scale, scale);

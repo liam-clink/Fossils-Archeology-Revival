@@ -31,9 +31,9 @@ public class EntitySmilodon extends EntityNewPrehistoric
 
 	public EntitySmilodon(World world) {
 		super(world, EnumPrehistoric.Smilodon);
-        this.setSize(1.5F, 1.0F);
+        this.setSize(0.9F, 0.8F);
     	minSize = 0.5F;
-		maxSize = 1F;
+		maxSize = 1.7F;
 		teenAge = 4;
 		developsResistance = true;
 		breaksBlocks = false;
@@ -168,5 +168,7 @@ public class EntitySmilodon extends EntityNewPrehistoric
 		return 8;
 	}
 	
-  
+	public float getMaleSize(){
+		return 1.2F;
+	}
 }
