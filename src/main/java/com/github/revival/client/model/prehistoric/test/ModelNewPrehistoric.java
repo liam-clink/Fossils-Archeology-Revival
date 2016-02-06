@@ -13,6 +13,13 @@ public abstract class ModelNewPrehistoric extends MowzieModelBase{
 	public ModelNewPrehistoric(){
 	}
 	
+	public static void setRotateAngle(MowzieModelRenderer MowzieModelRenderer, float x, float y, float z)
+	{
+		MowzieModelRenderer.rotateAngleX = x;
+		MowzieModelRenderer.rotateAngleY = y;
+		MowzieModelRenderer.rotateAngleZ = z;
+	}
+	
 	public void sitAnimationRotation(MowzieModelRenderer modelRenderer, float sitProgress, float rotX, float rotY, float rotZ)
     {
         modelRenderer.rotateAngleX += sitProgress * rotX / 25.0F;

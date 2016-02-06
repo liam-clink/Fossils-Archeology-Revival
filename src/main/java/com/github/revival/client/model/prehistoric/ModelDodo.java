@@ -4,14 +4,13 @@ import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelRenderer;
 import net.ilexiconn.llibrary.common.animation.Animator;
 import net.ilexiconn.llibrary.common.animation.IAnimated;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.MathHelper;
 
-import org.lwjgl.opengl.GL11;
-
-import com.github.revival.client.model.base.ModelPrehistoric;
+import com.github.revival.client.model.prehistoric.test.ModelNewPrehistoric;
 import com.github.revival.common.entity.mob.EntityDodo;
+import com.github.revival.common.entity.mob.EntityTyrannosaurus;
+import com.github.revival.common.entity.mob.test.EntityNewPrehistoric;
 
-public class ModelDodo extends ModelPrehistoric {
+public class ModelDodo extends ModelNewPrehistoric {
 	public MowzieModelRenderer body;
 	public MowzieModelRenderer rightLeg;
 	public MowzieModelRenderer leftLeg;
@@ -50,7 +49,7 @@ public class ModelDodo extends ModelPrehistoric {
 		this.beakLower.setRotationPoint(0.0F, 0.0F, -4.0F);
 		this.beakLower.addBox(-1.5F, 0.0F, -5.0F, 3, 1, 5, 0.0F);
 		this.body = new MowzieModelRenderer(this, 0, 0);
-		this.body.setRotationPoint(0.5F, 13.0F, -6.0F);
+		this.body.setRotationPoint(0F, 13.0F, -6.0F);
 		this.body.addBox(-3.5F, 0.0F, 0.0F, 7, 7, 9, 0.0F);
 		this.rightFoot = new MowzieModelRenderer(this, 22, 24);
 		this.rightFoot.setRotationPoint(0.0F, 3.0F, 0.0F);
@@ -99,6 +98,11 @@ public class ModelDodo extends ModelPrehistoric {
 		animator.update(entity);
 		this.setToInitPose();
 		setRotationAngles(f, f1, f2, f3, f4, f5, (Entity)entity);
+		animator.setAnimationId(EntityNewPrehistoric.animation_speak.animationId);
+		animator.startPhase(EntityDodo.getSpeakLength()/2);
+		ModelUtils.rotate(animator, beakLower, 29, 0, 0);
+		animator.endPhase();
+		animator.resetPhase(EntityDodo.getSpeakLength()/2);
 	}
 
 	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
@@ -107,6 +111,7 @@ public class ModelDodo extends ModelPrehistoric {
 		EntityDodo dodo = (EntityDodo)entity;
 		float speed = 1.8F;
 		float speed2 = 0.1F;
+		float sitProgress = ((EntityNewPrehistoric)(entity)).sitProgress;
 		faceTarget(head, 1, f3, f4);
 		this.bob(body, speed2, -0.4F, false, entity.ticksExisted, 1);
 		this.walk(leftLeg, speed, 1.9F, false, 0F, 0F, f, f1);
@@ -117,6 +122,16 @@ public class ModelDodo extends ModelPrehistoric {
 		this.chainSwing(tailParts, speed2, 0.15F, -3, entity.ticksExisted, 1);
 		this.chainWave(neckParts, speed2, 0.1F, -3, entity.ticksExisted, 1);
 		this.chainWave(neckParts, speed, 0.4F, -3, f, f1);
+		sitAnimationRotation(neck, sitProgress, -((float)Math.toRadians(16.0D)), 0, 0);
+        sitAnimationRotation(rightLeg, sitProgress, -((float)Math.toRadians(90.0D)), 0, 0);
+        sitAnimationRotation(rightFoot, sitProgress, (float)Math.toRadians(90.0D), 0, 0);
+        sitAnimationRotation(leftLeg, sitProgress, -((float)Math.toRadians(90.0D)), 0, 0);
+        sitAnimationRotation(leftFoot, sitProgress, (float)Math.toRadians(90.0D), 0, 0);
+        sitAnimationRotation(tail, sitProgress, -((float)Math.toRadians(10.65D)), 0, 0);
+        sitAnimationRotation(head, sitProgress, (float)Math.toRadians(16.0D), 0, 0);
+        sitAnimationPos(body, sitProgress, 0, 3F, 0);
+        sitAnimationPos(rightLeg, sitProgress, 0, 3F, 0);
+        sitAnimationPos(leftLeg, sitProgress, 0, 3F, 0);
 		if(dodo.getFat() > 0){
 			float scale = 1 + (dodo.getFat() * 0.1F);
 			body.setScale(scale, scale, scale);

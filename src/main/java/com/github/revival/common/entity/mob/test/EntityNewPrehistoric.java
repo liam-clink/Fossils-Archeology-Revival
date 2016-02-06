@@ -123,10 +123,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	public int necklength = 2;
 	private Animation currentAnimation;
 	private int animTick;
-	public static Animation animation_sit = new Animation(1, 20);
-	public static Animation animation_sleep = new Animation(2, 20);
-	public static Animation animation_getUp = new Animation(3, 20);
-	public static Animation animation_wake = new Animation(4, 20);
+	public static Animation animation_speak = new Animation(1, getSpeakLength());
 	private int sitTick;
 	private int sleepTick;
 	private int getUpTick;
@@ -144,6 +141,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		this.currentOrder = EnumOrderType.FreeMove;
 		this.tasks.addTask(0, new DinoAIAge(this));
 		this.tasks.addTask(0, new DinoAIHunger(this));
+		this.tasks.addTask(0, aiSit);
 		this.setHunger(100 / 2);
 		this.tasks.addTask(1, new DinoAIRunAway(this, EntityLivingBase.class, 16.0F, this.getSpeed()/2, this.getSpeed()));
 		this.tasks.addTask(1, new DinoAITerratorial(this, EntityLivingBase.class, 4.0F));
@@ -162,6 +160,8 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
 		hasBabyTexture = true;
 	}
+
+
 
 
 	protected void entityInit()
@@ -415,47 +415,9 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
 	public void onLivingUpdate(){
 		super.onLivingUpdate();
-
-		if(this.getRNG().nextInt(800) == 0 && !this.isSitting() && sitTick == 0 && this.getAnimation() != this.animation_sit){
-			sitTick = 1;
-		}
-		if(sitTick == 1){
-			this.setAnimation(animation_sit);
-		}
-		if (sitTick != 0 && sitTick < animation_sit.duration + 1)
-		{
-			sitTick++;
-		}else{
-			sitTick = 0;	
-		}
-		if(sitTick == animation_sit.duration + 1 && !this.isSitting()){
+		
+		if(this.getRNG().nextInt(800) == 0 && worldObj.isRemote && !this.isSitting()){
 			this.setSitting(true);
-		}
-
-		if(this.getRNG().nextInt(800) == 0 && this.isSitting() && getUpTick == 0 && this.getAnimation() != this.animation_getUp){
-			getUpTick = 1;
-			this.setAnimation(animation_getUp);
-		}
-
-		if (getUpTick != 0 && getUpTick < animation_getUp.duration)
-		{
-			getUpTick++;
-		}else{
-			getUpTick = 0;	
-		}
-		if(getUpTick == animation_getUp.duration){
-			this.setSitting(false);
-		}
-
-		if(eatTick != 0 && eatTick > 50){
-			eatTick++;
-			if(FoodMappings.instance().getItemFoodAmount(this.getHeldItem().getItem(), this.selfType.diet) != 0)
-				this.worldObj.spawnParticle("itemcrack_" + Item.getIdFromItem(this.getHeldItem().getItem()) + "_" + this.getHeldItem().getItemDamage(), this.posX + ((double)this.rand.nextFloat() - 0.5D) * (double)this.width, this.boundingBox.minY + 0.1D, this.posZ + ((double)this.rand.nextFloat() - 0.5D) * (double)this.width, 4.0D * ((double)this.rand.nextFloat() - 0.5D), 0.5D, ((double)this.rand.nextFloat() - 0.5D) * 4.0D);
-		}
-		if(eatTick == 49){
-			if(FoodMappings.instance().getItemFoodAmount(this.getHeldItem().getItem(), this.selfType.diet) != 0)
-				this.increaseHunger(FoodMappings.instance().getItemFoodAmount(this.getHeldItem().getItem(), this.selfType.diet));
-			this.setCurrentItemOrArmor(0, (ItemStack)null);
 		}
 		if(breaksBlocks){
 			this.breakBlock(5);
@@ -643,17 +605,18 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	public void onUpdate(){
 		super.onUpdate();
 		this.updateSize();
-
 		boolean sitting = isSitting();
-
 		if (sitting && sitProgress < 20.0F)
 		{
 			sitProgress += 0.5F;
+			Revival.channel.sendToServer(new MessageDinoSit(this.getEntityId(), sitProgress));
 		}
 		else if (!sitting && sitProgress > 0.0F)
 		{
 			sitProgress -= 0.5F;
+			Revival.channel.sendToServer(new MessageDinoSit(this.getEntityId(), sitProgress));
 		}
+		
 
 		animation_frame++;
 		AnimationTicker.tickAnimations(this);
@@ -1128,13 +1091,11 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	public void setSleeping(int var1)
 	{
 		this.dataWatcher.updateObject(SLEEPING_INDEX, var1);
-		this.sendSitPacket();
 	}
 
 	public void setSitting(boolean sitting)
 	{
 		super.setSitting(sitting);
-		this.sendSitPacket();
 	}
 
 	public boolean isSleeping(){
@@ -1155,6 +1116,13 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 			if(this.getOwner() == this.getLastAttacker()){
 				this.setTamed(false);
 				this.sendStatusMessage(EnumSituation.Betrayed);
+			}
+		}
+		if(this.getHurtSound() != null){
+			if(this.getAnimation() != null){
+				if(this.getAnimation().animationId == 0 && worldObj.isRemote){
+					this.setAnimation(animation_speak);
+				}
 			}
 		}
 		super.attackEntityFrom(dmg, i);
@@ -1624,11 +1592,11 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	private double getSpeed() {
 		return 0.4D;
 	}
-	
+
 	public float getMaleSize(){
 		return 1.0F;
 	}
-	
+
 	public String getOverlayTexture(){
 		return "fossil:textures/blank.png";
 	}
@@ -1656,14 +1624,23 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		return currentAnimation;
 	}
 
-	public void sendSitPacket()
-	{
-		if (FMLCommonHandler.instance().getEffectiveSide().isClient()) return;
-		Revival.channel.sendToAll(new MessageDinoSit(this.getEntityId()));
+	public Animation[] animations() {
+		return new Animation[]{this.animation_none, this.animation_speak};
 	}
 
-	public Animation[] animations() {
-		return new Animation[]{this.animation_none, this.animation_sit, this.animation_sleep, this.animation_getUp, this.animation_wake};
+	public static int getSpeakLength() {
+		return 20;
 	}
+
+	public void playLivingSound()
+	{
+		super.playLivingSound();
+		if(this.getAnimation() != null){
+			if(this.getAnimation().animationId == 0 && !worldObj.isRemote){
+				this.setAnimation(animation_speak);
+			}
+		}
+	}
+	
 
 }

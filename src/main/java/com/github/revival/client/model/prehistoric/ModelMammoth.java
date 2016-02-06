@@ -5,10 +5,10 @@ import net.ilexiconn.llibrary.common.animation.Animator;
 import net.ilexiconn.llibrary.common.animation.IAnimated;
 import net.minecraft.entity.Entity;
 
-import com.github.revival.client.model.base.ModelPrehistoric;
+import com.github.revival.client.model.prehistoric.test.ModelNewPrehistoric;
 import com.github.revival.common.entity.mob.test.EntityNewPrehistoric;
 
-public class ModelMammoth extends ModelPrehistoric
+public class ModelMammoth extends ModelNewPrehistoric
 {
     public MowzieModelRenderer leftFrontLeg;
     public MowzieModelRenderer rightFrontLeg;
@@ -222,6 +222,20 @@ public class ModelMammoth extends ModelPrehistoric
 		this.walk(rightFrontLeg, speed2, 0.8F, false, 0F, -0.4F, f, f1);
 		this.walk(leftHindLeg, speed2, 0.8F, false, 0F, 0.4F, f, f1);
 		this.walk(rightHindLeg, speed2, 0.8F, true, 0F, 0.4F, f, f1);
-		
+        sitAnimationRotation(Tail, sitProgress, (float)Math.toRadians(20.87D), 0, 0);
+        sitAnimationRotation(EarR, sitProgress, (float)Math.toRadians(5.0D), -((float)Math.toRadians(30.0D)), 0);
+        sitAnimationRotation(neck, sitProgress, -((float)Math.toRadians(13.04D)), 0, 0);
+        sitAnimationRotation(upperBody, sitProgress, (float)Math.toRadians(15.65D), 0, 0);
+        sitAnimationRotation(head, sitProgress, (float)Math.toRadians(33.91D), 0, 0);
+        sitAnimationRotation(upperBodyFur, sitProgress, -((float)Math.toRadians(2.0D)), 0, 0);
+        sitAnimationRotation(lowerBody, sitProgress, -((float)Math.toRadians(2.61D)), 0, 0);
+        sitAnimationRotation(lowerBodyFur, sitProgress, (float)Math.toRadians(13.04D), 0, 0);
+        sitAnimationRotation(EarL, sitProgress, (float)Math.toRadians(5.0D), (float)Math.toRadians(30.0D), 0);
+        sitAnimationRotation(bottomjaw, sitProgress, -((float)Math.toRadians(77.3D)), 0, 0);
+        sitAnimationRotation(middleBody, sitProgress, -((float)Math.toRadians(26.09D)), 0, 0);
+        sitAnimationPos(middleBody, sitProgress, 0, 1.1F, 0);
+        sitAnimationPos(leftHindLeg, sitProgress, 0, 0, -3);
+        sitAnimationPos(rightHindLeg, sitProgress, 0, 0, -3);
+
 	}
 }

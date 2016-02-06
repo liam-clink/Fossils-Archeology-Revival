@@ -242,4 +242,20 @@ public class EntityDodo extends EntityNewPrehistoric
 			}
 		}
 	}
+	
+	protected String getLivingSound()
+    {
+        return "fossil:dodo_living";
+    }
+	
+	protected String getHurtSound()
+    {
+        return "fossil:dodo_hurt";
+    }
+	
+	protected String getDeathSound()
+    {
+        return "fossil:dodo_death";
+    }
+
 }

@@ -5,10 +5,10 @@ import net.ilexiconn.llibrary.common.animation.Animator;
 import net.ilexiconn.llibrary.common.animation.IAnimated;
 import net.minecraft.entity.Entity;
 
-import com.github.revival.client.model.base.ModelPrehistoric;
+import com.github.revival.client.model.prehistoric.test.ModelNewPrehistoric;
 import com.github.revival.common.entity.mob.test.EntityNewPrehistoric;
 
-public class ModelAnkylosaurus extends ModelPrehistoric
+public class ModelAnkylosaurus extends ModelNewPrehistoric
 {
     public MowzieModelRenderer Body;
     public MowzieModelRenderer BodyUpper;
@@ -208,29 +208,29 @@ public class ModelAnkylosaurus extends ModelPrehistoric
 		this.walk(FrontLegR, speed2, 0.6F, false, 0F, 0.4F, f, f1);
 		this.walk(BackLegL, speed2, 0.6F, false, 0F, 0.4F, f, f1);
 		this.walk(BackLegR, speed2, 0.6F, true, 0F, 0.4F, f, f1);
-	/*	MowzieModelRenderer[] tailParts = {this.tail1, this.tail2, this.tail3};
-		MowzieModelRenderer[] neckParts = {this.neck, this.head};
-		MowzieModelRenderer[] leftArmParts = {this.leftUpperArm, this.leftLowerArm};
-		MowzieModelRenderer[] rightArmParts = {this.rightUpperArm, this.rightLowerArm};
-		this.faceTarget(head, 1, f3, f4);
-		float speed = 0.1F;
-		float speed2 = 0.5F;
-		float sitProgress = ((EntityNewPrehistoric)(entity)).sitProgress;
-		this.walk(upperBody, speed, 0.1F, false, 1F, 0F, entity.ticksExisted, 1);
-		this.bob(lowerBody, speed, 0.7F, false, entity.ticksExisted, 1);
-		this.walk(leftThigh, speed2, 0.8F, false, 0F, 0.4F, f, f1);
-		this.walk(leftLeg, speed2, 0.2F, false, 0F, -0.6F, f, f1);
-		this.walk(leftFoot, speed2, -0.4F, false, 4.5F, 0.4F, f, f1);
-		this.walk(rightThigh, speed2, 0.8F, true, 0F, 0.4F, f, f1);
-		this.walk(rightLeg, speed2, 0.2F, true, 0F, -0.6F, f, f1);
-		this.walk(rightFoot, speed2, -0.4F, true, 4.5F, 0.4F, f, f1);
-		this.chainWave(tailParts, speed, 0.05F, -3, entity.ticksExisted, 1);
-		this.chainWave(leftArmParts, speed, 0.15F, -3, entity.ticksExisted, 1);
-		this.chainWave(rightArmParts, speed, 0.15F, -3, entity.ticksExisted, 1);
-		this.chainSwing(tailParts, speed, 0.15F, -3, entity.ticksExisted, 1);
-		this.chainSwing(tailParts, speed2, 0.25F, -3, f, f1);
-		this.chainWave(neckParts, speed, 0.15F, 3, entity.ticksExisted, 1);
-		//((ChainBuffer)((EntityDeinonychus)entity).tailbuffer).applyChainSwingBuffer(tailParts);*/
+        sitAnimationRotation(BackThighR, sitProgress, (float)Math.toRadians(70.43D), -((float)Math.toRadians(2.61D)), (float)Math.toRadians(2.61D));
+        sitAnimationRotation(Neck, sitProgress, -((float)Math.toRadians(31.3D)), 0, 0);
+        sitAnimationRotation(FrontThighR, sitProgress, -((float)Math.toRadians(78.26D)), -((float)Math.toRadians(23.48D)), (float)Math.toRadians(49.57D));
+        sitAnimationRotation(Mouth, sitProgress, (float)Math.toRadians(7.83D), 0, 0);
+        sitAnimationRotation(FrontThighL, sitProgress, -((float)Math.toRadians(75.65D)), (float)Math.toRadians(26.09D), -((float)Math.toRadians(39.13D)));
+        sitAnimationRotation(Mouth_1, sitProgress, (float)Math.toRadians(91.3D), -((float)Math.toRadians(180.0D)), 0);
+        sitAnimationRotation(FrontLegL, sitProgress, -((float)Math.toRadians(15.0D)), 0, 0);
+        sitAnimationRotation(HornR2, sitProgress, (float)Math.toRadians(50.0D), (float)Math.toRadians(20.0D), -((float)Math.toRadians(30.0D)));
+        sitAnimationRotation(Tail2, sitProgress, (float)Math.toRadians(2.61D), 0, 0);
+        sitAnimationRotation(BodySpikes, sitProgress, (float)Math.toRadians(0.5D), 0, 0);
+        sitAnimationRotation(Head, sitProgress, (float)Math.toRadians(33.91D), 0, 0);
+        sitAnimationRotation(HornR1, sitProgress, (float)Math.toRadians(36.0D), -((float)Math.toRadians(5.0D)), -((float)Math.toRadians(50.0D)));
+        sitAnimationRotation(BodyUpper, sitProgress, (float)Math.toRadians(2.61D), 0, 0);
+        sitAnimationRotation(HornL2, sitProgress, (float)Math.toRadians(50.0D), -((float)Math.toRadians(20.0D)), (float)Math.toRadians(30.0D));
+        sitAnimationRotation(TailClub, sitProgress, (float)Math.toRadians(7.83D), 0, 0);
+        sitAnimationRotation(TailSpikes, sitProgress, (float)Math.toRadians(5.22D), 0, 0);
+        sitAnimationRotation(Tail1, sitProgress, -((float)Math.toRadians(10.43D)), 0, 0);
+        sitAnimationRotation(Tail3, sitProgress, (float)Math.toRadians(2.61D), 0, 0);
+        sitAnimationRotation(HeadBlock, sitProgress, (float)Math.toRadians(10.43D), 0, 0);
+        sitAnimationRotation(FrontLegR, sitProgress, -((float)Math.toRadians(15.0D)), 0, 0);
+        sitAnimationRotation(BackThighL, sitProgress, (float)Math.toRadians(65.22D), 0, -((float)Math.toRadians(41.74D)));
+        sitAnimationRotation(HornL1, sitProgress, (float)Math.toRadians(36.0D), -((float)Math.toRadians(5.0D)), (float)Math.toRadians(50.0D));
+        sitAnimationPos(Body, sitProgress, 0, 4.3F, -3);
 	}
 
 }

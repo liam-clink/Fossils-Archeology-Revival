@@ -58,7 +58,7 @@ import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fluids.Fluid;
 import org.apache.logging.log4j.Level;
 
-@Mod(modid = Revival.MODID, name = "Fossils and Archeology Revival", version = Revival.VERSION, dependencies = "required-after:llibrary@[0.7.2,)")
+@Mod(modid = Revival.MODID, name = "Fossils and Archeology Revival", version = Revival.VERSION, dependencies = "required-after:llibrary@[0.6.2,)")
 public class Revival
 {
 	public static final String MODID = "fossil";
@@ -119,7 +119,7 @@ public class Revival
 	{
 		channel = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
 		channel.registerMessage(MessageCorrectAnimation.class, MessageCorrectAnimation.class, 1, Side.CLIENT);
-		channel.registerMessage(MessageDinoSit.class, MessageDinoSit.class, 2, Side.CLIENT);
+		channel.registerMessage(MessageDinoSit.class, MessageDinoSit.class, 2, Side.SERVER);
 
 		MinecraftForge.EVENT_BUS.register(new FossilBonemealEvent());
 		MinecraftForge.EVENT_BUS.register(new EventPlayer());

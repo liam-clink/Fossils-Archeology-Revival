@@ -5,10 +5,10 @@ import net.ilexiconn.llibrary.common.animation.Animator;
 import net.ilexiconn.llibrary.common.animation.IAnimated;
 import net.minecraft.entity.Entity;
 
-import com.github.revival.client.model.base.ModelPrehistoric;
+import com.github.revival.client.model.prehistoric.test.ModelNewPrehistoric;
 import com.github.revival.common.entity.mob.test.EntityNewPrehistoric;
 
-public class ModelSmilodon extends ModelPrehistoric
+public class ModelSmilodon extends ModelNewPrehistoric
 {
 	public MowzieModelRenderer lowerBody;
 	public MowzieModelRenderer leftFrontThigh;
@@ -151,7 +151,7 @@ public class ModelSmilodon extends ModelPrehistoric
 		this.faceTarget(head, 1, f3, f4);
 		float speed = 0.1F;
 		float speed2 = 1.1F;
-		float sitProgress = ((EntityNewPrehistoric)(entity)).sitProgress;
+		float sitProgress =20;//((EntityNewPrehistoric)(entity)).sitProgress;
 		this.chainWave(tailParts, speed, 0.05F, -3, entity.ticksExisted, 1);
 		this.chainSwing(tailParts, speed, 0.15F, -2, entity.ticksExisted, 1);
 		this.chainWave(neckParts, speed, 0.15F, 3, entity.ticksExisted, 1);
@@ -165,6 +165,30 @@ public class ModelSmilodon extends ModelPrehistoric
 		this.walk(rightFrontLeg, speed2, 0.4F, false, 0F, -0.4F, f, f1);
 		this.walk(leftHindLeg, speed2, 0.4F, true, 0F, 0.4F, f, f1);
 		this.walk(rightHindLeg, speed2, 0.4F, false, 0F, 0.4F, f, f1);
+        sitAnimationRotation(tail, sitProgress, -((float)Math.toRadians(36.52D)), 0, 0);
+        sitAnimationRotation(leftFrontThigh, sitProgress, -((float)Math.toRadians(10.0D)), (float)Math.toRadians(18.0D), -((float)Math.toRadians(13.0D)));
+        sitAnimationRotation(leftHindThigh, sitProgress, -((float)Math.toRadians(55.0D)), (float)Math.toRadians(20.0D), 0);
+        sitAnimationRotation(head, sitProgress, (float)Math.toRadians(39.13D), 0, 0);
+        sitAnimationRotation(rightEar, sitProgress, -((float)Math.toRadians(3.0D)), 0, 0);
+        sitAnimationRotation(upperBody, sitProgress, (float)Math.toRadians(5.22D), 0, 0);
+        sitAnimationRotation(lowerBody, sitProgress, -((float)Math.toRadians(5.22D)), 0, 0);
+        sitAnimationRotation(upperRightFang, sitProgress, (float)Math.toRadians(0.26D), 0, 0);
+        sitAnimationRotation(nose, sitProgress, (float)Math.toRadians(7.83D), 0, 0);
+        sitAnimationRotation(upperJaw, sitProgress, (float)Math.toRadians(2.26D), 0, 0);
+        sitAnimationRotation(rightHindLeg, sitProgress, (float)Math.toRadians(160.0D), 0, 0);
+        sitAnimationRotation(rightFrontThigh, sitProgress, -((float)Math.toRadians(10.0D)), -((float)Math.toRadians(18.0D)), (float)Math.toRadians(13.0D));
+        sitAnimationRotation(leftHindLeg, sitProgress, (float)Math.toRadians(160.0D), 0, 0);
+        sitAnimationRotation(leftEar, sitProgress, -((float)Math.toRadians(3.0D)), 0, 0);
+        sitAnimationRotation(leftFrontLeg, sitProgress, -((float)Math.toRadians(100.0D)), 0, 0);
+        sitAnimationRotation(upperLeftFang, sitProgress, (float)Math.toRadians(0.26D), 0, 0);
+        sitAnimationRotation(neck, sitProgress, -((float)Math.toRadians(31.3D)), 0, 0);
+        sitAnimationRotation(rightFrontLeg, sitProgress, -((float)Math.toRadians(100.0D)), 0, 0);
+        sitAnimationRotation(rightHindThigh, sitProgress, -((float)Math.toRadians(55.0D)), -((float)Math.toRadians(20.0D)), 0);
+        sitAnimationPos(lowerBody, sitProgress, 0, 5.1F, 0);
+        sitAnimationPos(rightFrontThigh, sitProgress, 0, 5.1F, 0);
+        sitAnimationPos(leftFrontThigh, sitProgress, 0, 5.1F, 0);
+        sitAnimationPos(rightHindThigh, sitProgress, 0, 6, 0);
+        sitAnimationPos(leftHindThigh, sitProgress, 0, 6, 0);
 	}
 
 }

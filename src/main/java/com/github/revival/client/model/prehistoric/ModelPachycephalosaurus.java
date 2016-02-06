@@ -5,10 +5,10 @@ import net.ilexiconn.llibrary.common.animation.Animator;
 import net.ilexiconn.llibrary.common.animation.IAnimated;
 import net.minecraft.entity.Entity;
 
-import com.github.revival.client.model.base.ModelPrehistoric;
+import com.github.revival.client.model.prehistoric.test.ModelNewPrehistoric;
 import com.github.revival.common.entity.mob.test.EntityNewPrehistoric;
 
-public class ModelPachycephalosaurus extends ModelPrehistoric
+public class ModelPachycephalosaurus extends ModelNewPrehistoric
 {
 
     public MowzieModelRenderer leftThigh;
@@ -34,6 +34,7 @@ public class ModelPachycephalosaurus extends ModelPrehistoric
     public MowzieModelRenderer rightLeg;
     public MowzieModelRenderer rightFoot;
     public MowzieModelRenderer lowerBody;
+    public MowzieModelRenderer headPivot;
 	private Animator animator;
 
     public ModelPachycephalosaurus() {
@@ -92,10 +93,11 @@ public class ModelPachycephalosaurus extends ModelPrehistoric
         this.leftLowerArm.setRotationPoint(0.9F, 2.5F, -0.5F);
         this.leftLowerArm.addBox(-1.0F, 0.0F, 0.0F, 2, 3, 2, 0.0F);
         this.setRotateAngle(leftLowerArm, -0.7291985614832309F, -0.0F, 0.0F);
+        this.headPivot = new MowzieModelRenderer(this, 0, 0);
+        this.headPivot.setRotationPoint(0.5F, -0.5F, -5.4F);
+        this.setRotateAngle(headPivot, -0.8196066167365371F, -0.0F, 0.0F);
         this.head = new MowzieModelRenderer(this, 0, 0);
-        this.head.setRotationPoint(0.5F, -0.5F, -5.4F);
         this.head.addBox(-3.0F, -0.1F, -1.8F, 5, 6, 5, 0.0F);
-        this.setRotateAngle(head, -0.8196066167365371F, -0.0F, 0.0F);
         this.leftLeg = new MowzieModelRenderer(this, 0, 25);
         this.leftLeg.setRotationPoint(1.1F, 4.0F, 1.8F);
         this.leftLeg.addBox(-1.0F, 0.0F, -1.0F, 2, 7, 3, 0.0F);
@@ -146,7 +148,8 @@ public class ModelPachycephalosaurus extends ModelPrehistoric
         this.rightLeg.addChild(this.rightFoot);
         this.rightUpperArm.addChild(this.rightLowerArm);
         this.leftUpperArm.addChild(this.leftLowerArm);
-        this.neck.addChild(this.head);
+        this.neck.addChild(this.headPivot);
+        this.headPivot.addChild(this.head);
         this.leftThigh.addChild(this.leftLeg);
         this.leftLeg.addChild(this.leftFoot);
         this.rightThigh.addChild(this.rightLeg);
@@ -178,8 +181,9 @@ public class ModelPachycephalosaurus extends ModelPrehistoric
 		MowzieModelRenderer[] neckParts = {this.neck, this.head};
 		MowzieModelRenderer[] leftArmParts = {this.leftUpperArm, this.leftLowerArm};
 		MowzieModelRenderer[] rightArmParts = {this.rightUpperArm, this.rightLowerArm};
-		this.faceTarget(head, 1, f3, f4);
-		float speed = 0.1F;
+		head.rotateAngleZ += (f3 / (180f / (float) Math.PI));
+		head.rotateAngleX += (f4 / (180f / (float) Math.PI));
+        float speed = 0.1F;
 		float speed2 = 0.8F;
 		float sitProgress = ((EntityNewPrehistoric)(entity)).sitProgress;
 		this.walk(upperBody, speed, 0.1F, false, 1F, 0F, entity.ticksExisted, 1);
@@ -196,5 +200,26 @@ public class ModelPachycephalosaurus extends ModelPrehistoric
 		this.chainSwing(tailParts, speed, 0.15F, -3, entity.ticksExisted, 1);
 		this.chainSwing(tailParts, speed2, 0.25F, -3, f, f1);
 		this.chainWave(neckParts, speed, 0.15F, 3, entity.ticksExisted, 1);
+		sitAnimationRotation(lowerBody, sitProgress, -((float)Math.toRadians(18.26D)), 0, 0);
+        sitAnimationRotation(leftFoot, sitProgress, (float)Math.toRadians(80.0D), 0, 0);
+        sitAnimationRotation(tail3, sitProgress, (float)Math.toRadians(18.26D), 0, 0);
+        sitAnimationRotation(upperBody, sitProgress, (float)Math.toRadians(10.43D), 0, 0);
+        sitAnimationRotation(rightFoot, sitProgress, (float)Math.toRadians(80.0D), 0, 0);
+        sitAnimationRotation(leftUpperArm, sitProgress, (float)Math.toRadians(9.0D), 0, 0);
+        sitAnimationRotation(headPivot, sitProgress, ((float)Math.toRadians(33.91D)), 0, 0);
+        sitAnimationRotation(rightThigh, sitProgress, -((float)Math.toRadians(65.0D)), 0, 0);
+        sitAnimationRotation(leftThigh, sitProgress, -((float)Math.toRadians(65.0D)), 0, 0);
+        sitAnimationRotation(rightUpperArm, sitProgress, (float)Math.toRadians(9.0D), 0, 0);
+        sitAnimationRotation(rightLowerArm, sitProgress, -((float)Math.toRadians(41.78D)), 0, 0);
+        sitAnimationRotation(tail2, sitProgress, (float)Math.toRadians(1.0D), 0, 0);
+        sitAnimationRotation(tail1, sitProgress, -((float)Math.toRadians(2.61D)), 0, 0);
+        sitAnimationRotation(rightLeg, sitProgress, -((float)Math.toRadians(15.0D)), 0, 0);
+        sitAnimationRotation(neck, sitProgress, -((float)Math.toRadians(15.0D)), 0, 0);
+        sitAnimationRotation(leftLowerArm, sitProgress, -((float)Math.toRadians(41.78D)), 0, 0);
+        sitAnimationRotation(leftLeg, sitProgress, -((float)Math.toRadians(15.0D)), 0, 0);
+        sitAnimationPos(lowerBody, sitProgress, 0, 4.1F, 0);
+        sitAnimationPos(rightThigh, sitProgress, 0, 5F, 0);
+        sitAnimationPos(leftThigh, sitProgress, 0, 5F, 0);
+
     }
 }

@@ -1,11 +1,15 @@
 package com.github.revival.client.model.prehistoric;
 
-import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelBase;
 import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelRenderer;
+import net.ilexiconn.llibrary.common.animation.Animator;
+import net.ilexiconn.llibrary.common.animation.IAnimated;
 import net.minecraft.entity.Entity;
 
+import com.github.revival.client.model.prehistoric.test.ModelNewPrehistoric;
+import com.github.revival.common.entity.mob.test.EntityNewPrehistoric;
 
-public class ModelCeratosaurus extends MowzieModelBase {
+
+public class ModelCeratosaurus extends ModelNewPrehistoric {
 	public MowzieModelRenderer leftThigh;
 	public MowzieModelRenderer rightThigh;
 	public MowzieModelRenderer lowerBody;
@@ -30,6 +34,7 @@ public class ModelCeratosaurus extends MowzieModelBase {
 	public MowzieModelRenderer backNasalCrest;
 	public MowzieModelRenderer tail2;
 	public MowzieModelRenderer tail3;
+	private Animator animator;
 
 	public ModelCeratosaurus() {
 		this.textureWidth = 128;
@@ -151,15 +156,21 @@ public class ModelCeratosaurus extends MowzieModelBase {
 		this.upperJaw.addChild(this.frontNasalCrest);
 		this.head.addChild(this.upperJaw);
 		this.setInitPose();
+		animator = new Animator(this);
 	}
 
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
-		super.render(entity, f, f1, f2, f3, f4, f5);
+		animate((IAnimated)entity, f, f1, f2, f3, f4, f5);
 		this.rightThigh.render(f5);
 		this.lowerBody.render(f5);
 		this.leftThigh.render(f5);
-		this.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 		this.setToInitPose();
+	}
+
+    public void animate(IAnimated entity, float f, float f1, float f2, float f3, float f4, float f5) {
+		animator.update(entity);
+		this.setToInitPose();
+		setRotationAngles(f, f1, f2, f3, f4, f5, (Entity)entity);
 	}
 	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
 		MowzieModelRenderer[] tailParts = {this.tail1, this.tail2, this.tail3};
@@ -171,7 +182,7 @@ public class ModelCeratosaurus extends MowzieModelBase {
 
 		float speed = 0.1F;
 		float speed2 = 0.5F;
-
+		float sitProgress = ((EntityNewPrehistoric)(entity)).sitProgress;
 		this.bob(lowerBody, speed, 0.7F, false, entity.ticksExisted, 1);
 		this.walk(leftThigh, speed2, 0.8F, false, 0F, 0.4F, f, f1);
 		this.walk(leftLeg, speed2, 0.2F, false, 0F, -0.6F, f, f1);
@@ -185,6 +196,31 @@ public class ModelCeratosaurus extends MowzieModelBase {
 		this.chainSwing(tailParts, speed, 0.15F, -3, entity.ticksExisted, 1);
 		this.chainSwing(tailParts, speed2, 0.25F, -3, f, f1);
 		this.chainWave(neckParts, speed, 0.15F, 3, entity.ticksExisted, 1);
+		sitAnimationRotation(rightUpperArm, sitProgress, -((float)Math.toRadians(44.0D)), 0, 0);
+        sitAnimationRotation(head, sitProgress, (float)Math.toRadians(22.0D), 0, 0);
+        sitAnimationRotation(tail2, sitProgress, (float)Math.toRadians(4.0D), 0, 0);
+        sitAnimationRotation(leftHorn, sitProgress, (float)Math.toRadians(14.0D), (float)Math.toRadians(13.0D), (float)Math.toRadians(24.0D));
+        sitAnimationRotation(upperBody, sitProgress, (float)Math.toRadians(10.43D), 0, 0);
+        sitAnimationRotation(backNasalCrest, sitProgress, -((float)Math.toRadians(46.98D)), 0, 0);
+        sitAnimationRotation(leftLeg, sitProgress, -((float)Math.toRadians(65.0D)), 0, 0);
+        sitAnimationRotation(leftThigh, sitProgress, -((float)Math.toRadians(20.0D)), 0, 0);
+        sitAnimationRotation(rightThigh, sitProgress, -((float)Math.toRadians(20.0D)), 0, 0);
+        sitAnimationRotation(tail3, sitProgress, (float)Math.toRadians(5.22D), 0, 0);
+        sitAnimationRotation(frontNasalCrest, sitProgress, (float)Math.toRadians(53.34D), 0, 0);
+        sitAnimationRotation(leftLowerArm, sitProgress, -((float)Math.toRadians(42.35D)), 0, 0);
+        sitAnimationRotation(lowerBody, sitProgress, -((float)Math.toRadians(10.43D)), 0, 0);
+        sitAnimationRotation(tail1, sitProgress, -((float)Math.toRadians(5.22D)), 0, 0);
+        sitAnimationRotation(neck, sitProgress, -((float)Math.toRadians(10.43D)), 0, 0);
+        sitAnimationRotation(rightHorn, sitProgress, (float)Math.toRadians(14.0D), -((float)Math.toRadians(13.0D)), -((float)Math.toRadians(24.0D)));
+        sitAnimationRotation(leftFoot, sitProgress, (float)Math.toRadians(86.0D), 0, 0);
+        sitAnimationRotation(rightLowerArm, sitProgress, -((float)Math.toRadians(42.35D)), 0, 0);
+        sitAnimationRotation(rightFoot, sitProgress, (float)Math.toRadians(86.0D), 0, 0);
+        sitAnimationRotation(rightLeg, sitProgress, -((float)Math.toRadians(65.0D)), 0, 0);
+        sitAnimationRotation(leftUpperArm, sitProgress, -((float)Math.toRadians(44.0D)), 0, 0);
+        sitAnimationPos(lowerBody, sitProgress, 0, 8.1F, 0);
+        sitAnimationPos(leftThigh, sitProgress, 0, 7.6F, 0);
+        sitAnimationPos(rightThigh, sitProgress, 0, 7.6F, 0);
+
 		//((ChainBuffer)((EntityCeratosaurus)entity).tailbuffer).applyChainSwingBuffer(tailParts);
 	}
 }

@@ -201,8 +201,7 @@ public class EntityTyrannosaurus extends EntityNewPrehistoric
 
 	@Override
 	public Animation[] animations() {
-		return new Animation[]{this.animation_none, this.animation_sit, this.animation_sleep, this.animation_getUp, this.animation_wake,
-				this.animation_roar};
+		return new Animation[]{this.animation_none, this.animation_speak, this.animation_roar};
 	}
 
 }

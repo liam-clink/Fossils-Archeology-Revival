@@ -40,7 +40,7 @@ public class EntityMammoth extends EntityNewPrehistoric implements IShearable
 	public static final double baseHealth = 10;
 	public static final double maxHealth = 66;
 	public static final double baseSpeed = 0.2D;
-	public static final double maxSpeed = 0.4D;
+	public static final double maxSpeed = 0.8D;
 	
 	public EntityMammoth(World world) {
 		super(world, EnumPrehistoric.Mammoth);
