@@ -68,9 +68,7 @@ public class DinoAIWaterAgressive extends EntityAIBase
         }
 		if(targetedEntity != null){
 
-    		if(targetedEntity.boundingBox.maxX * 1.5F < entity.boundingBox.maxX && targetedEntity.boundingBox.minX * 1.5F > entity.boundingBox.minX
-    		&& targetedEntity.boundingBox.minZ * 1.5F < entity.boundingBox.minZ && targetedEntity.boundingBox.minZ  * 1.5F > entity.boundingBox.minZ
-    		|| !this.entity.preyList().contains(targetedEntity)){
+    		if(targetedEntity.width * 1.5F > entity.width || this.entity.preyBlacklist().contains(targetedEntity)){
     			return false;
     		}
 		}

@@ -21,7 +21,6 @@ import com.github.revival.common.gen.structure.AcademyGenerator;
 import com.github.revival.common.gen.structure.ShipWreckGenerator;
 import com.github.revival.common.handler.*;
 import com.github.revival.common.item.FAItemRegistry;
-import com.github.revival.common.message.MessageCorrectAnimation;
 import com.github.revival.common.message.MessageDinoSit;
 import com.github.revival.common.tileentity.*;
 import com.github.revival.misc.FossilFoodMappings;
@@ -118,7 +117,6 @@ public class Revival
 	public void preInit(FMLPreInitializationEvent event)
 	{
 		channel = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
-		channel.registerMessage(MessageCorrectAnimation.class, MessageCorrectAnimation.class, 1, Side.CLIENT);
 		channel.registerMessage(MessageDinoSit.class, MessageDinoSit.class, 2, Side.SERVER);
 
 		MinecraftForge.EVENT_BUS.register(new FossilBonemealEvent());

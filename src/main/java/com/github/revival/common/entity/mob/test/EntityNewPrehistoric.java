@@ -161,9 +161,6 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		hasBabyTexture = true;
 	}
 
-
-
-
 	protected void entityInit()
 	{
 		super.entityInit();
@@ -267,16 +264,6 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	{
 		return this.getHunger() < this.getMaxHunger()
 				* (1 - this.selfType.HungryLevel);
-	}
-
-	public boolean isSitting()
-	{
-		return super.isSitting();
-	}
-
-	public boolean canBePushed()
-	{
-		return !this.isSitting();
 	}
 
 	protected boolean isMovementCeased()
@@ -416,9 +403,14 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	public void onLivingUpdate(){
 		super.onLivingUpdate();
 		
-		if(this.getRNG().nextInt(800) == 0 && worldObj.isRemote && !this.isSitting()){
+		if(this.getRNG().nextInt(800) == 0 && worldObj.isRemote && !this.isSitting() && this.getAttackTarget() == null){
 			this.setSitting(true);
 		}
+		
+		if(this.getRNG().nextInt(800) == 0 && worldObj.isRemote && this.isSitting() ||  worldObj.isRemote && this.isSitting() && this.getAttackTarget() != null){
+			this.setSitting(false);
+		}
+		
 		if(breaksBlocks){
 			this.breakBlock(5);
 		}
@@ -434,8 +426,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 							if (getEntityToAttack() == null)
 							{
 								if (rand.nextInt(400) == 0)
-									if (!this.getOrderType().equals(
-											this.currentOrder.Stay))
+									if (!this.getOrderType().equals(this.currentOrder.Stay))
 										if (!isFlying)
 											isFlying = true;
 										else

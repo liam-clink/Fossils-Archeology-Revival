@@ -1,12 +1,10 @@
 package com.github.revival.common.entity.animation;
 
+import net.ilexiconn.llibrary.LLibrary;
 import net.ilexiconn.llibrary.common.animation.Animation;
 import net.ilexiconn.llibrary.common.animation.IAnimated;
+import net.ilexiconn.llibrary.common.message.MessageLLibraryAnimation;
 import net.minecraft.entity.Entity;
-
-import com.github.revival.Revival;
-import com.github.revival.common.message.MessageCorrectAnimation;
-
 import cpw.mods.fml.common.FMLCommonHandler;
 
 public class AnimationTicker
@@ -24,7 +22,7 @@ public class AnimationTicker
     {
         if (FMLCommonHandler.instance().getEffectiveSide().isClient()) return;
         entity.setAnimation(animation);
-        Revival.channel.sendToAll(new MessageCorrectAnimation((byte) animation.animationId, ((Entity) entity).getEntityId()));
+        LLibrary.networkWrapper.sendToAll(new MessageLLibraryAnimation((byte) animation.animationId, ((Entity) entity).getEntityId()));
     }
 
     public static void tickAnimations(IAnimated entity)

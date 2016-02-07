@@ -50,10 +50,7 @@ public class EntityTyrannosaurus extends EntityNewPrehistoric
 		breaksBlocks = true;
 		favoriteFood = Items.beef;
 	}
-	@Override
-	public boolean isAIEnabled(){
-		return true;
-	}
+
 	@Override
 	public void setSpawnValues() {}
         

@@ -51,6 +51,10 @@ public class DinoAIFollowWild extends EntityAIBase
     		return false;
     	}
     	
+    	if(temptedEntity.isSitting()){
+    		return false;
+    	}
+    	
         if (this.delayTemptCounter > 0)
         {
             --this.delayTemptCounter;

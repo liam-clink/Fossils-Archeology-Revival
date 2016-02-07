@@ -27,11 +27,9 @@ public class DinoAIAgressive extends EntityAINearestAttackableTarget
 		}
 		if(closestLivingEntity != null){
 			if(targetClass == closestLivingEntity.getClass()){
-				if(closestLivingEntity.boundingBox.maxX * 1.5F < theTameable.boundingBox.maxX && closestLivingEntity.boundingBox.minX * 1.5F > theTameable.boundingBox.minX
-						&& closestLivingEntity.boundingBox.minZ * 1.5F < theTameable.boundingBox.minZ && closestLivingEntity.boundingBox.minZ  * 1.5F > theTameable.boundingBox.minZ
-						|| !this.theTameable.preyList().contains(targetClass)){
-					return false;
-				}
+				if(closestLivingEntity.width * 1.5F < theTameable.width || this.theTameable.preyBlacklist().contains(closestLivingEntity)){
+	    			return false;
+	    		}
 			}
 		}
 		if(this.theTameable.preyBlacklist().contains(targetClass)){
