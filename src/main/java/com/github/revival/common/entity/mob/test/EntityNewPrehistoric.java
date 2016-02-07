@@ -15,11 +15,13 @@ import net.minecraft.block.BlockBush;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
+import net.minecraft.command.IEntitySelector;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIOwnerHurtByTarget;
@@ -51,7 +53,6 @@ import com.github.revival.common.api.FoodMappings;
 import com.github.revival.common.api.IPrehistoricAI;
 import com.github.revival.common.block.FABlockRegistry;
 import com.github.revival.common.config.FossilConfig;
-import com.github.revival.common.entity.animation.AnimationTicker;
 import com.github.revival.common.enums.EnumAnimation;
 import com.github.revival.common.enums.EnumOrderType;
 import com.github.revival.common.enums.EnumPrehistoric;
@@ -88,7 +89,6 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	public static final int GENDER_INDEX = 25;
 	public static final int CLIMBING_INDEX = 26;
 	public static final int SLEEPING_INDEX = 27;
-
 	public static final byte HEART_MESSAGE = 35;
 	public static final byte SMOKE_MESSAGE = 36;
 	public static final byte AGING_MESSAGE = 37;
@@ -143,9 +143,9 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		this.tasks.addTask(0, new DinoAIHunger(this));
 		this.tasks.addTask(0, aiSit);
 		this.setHunger(100 / 2);
+        this.tasks.addTask(1, new EntityAIAttackOnCollide(this, 1.0D, true));
 		this.tasks.addTask(1, new DinoAIRunAway(this, EntityLivingBase.class, 16.0F, this.getSpeed()/2, this.getSpeed()));
 		this.tasks.addTask(1, new DinoAITerratorial(this, EntityLivingBase.class, 4.0F));
-		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityLivingBase.class, 0, true));
 		this.tasks.addTask(2, new DinoAIWaterAgressive(this, 0.009D));
 		this.tasks.addTask(2, new DinoAIFish(this, 1));
 		this.tasks.addTask(3, new DinoAIWander(this, 1));
@@ -157,6 +157,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		this.tasks.addTask(5, new DinoAIWaterFeeder(this, 50, 0.0017D));
 		//this.tasks.addTask(6, new DinoAILookAtEntity(this, EntityLivingBase.class, 8));
 		this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
+		this.targetTasks.addTask(2, new DinoAIAgressive(this, EntityLivingBase.class, 1, true, this.isCannabil()));
 		this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
 		hasBabyTexture = true;
 	}
@@ -610,7 +611,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		
 
 		animation_frame++;
-		AnimationTicker.tickAnimations(this);
+		Animation.tickAnimations(this);
 		if (!this.worldObj.isRemote && this.aiClimbType() == Climbing.ARTHROPOD)
 		{
 			this.setBesideClimbableBlock(this.isCollidedHorizontally);
@@ -1633,5 +1634,14 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		}
 	}
 	
-
+	public EntityLivingBase getClosestEntity(){
+		IEntitySelector selector =IEntitySelector.selectAnything;
+		List<Entity> entities = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.expand((double)herdMemberRange, 3.0D, (double)herdMemberRange), selector);
+		for(Entity mob : entities){
+			if(mob instanceof EntityLivingBase){
+				return (EntityLivingBase)mob;
+			}
+		}
+		return null;
+	}
 }

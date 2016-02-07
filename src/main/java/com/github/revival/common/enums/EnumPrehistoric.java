@@ -553,6 +553,8 @@ public enum EnumPrehistoric {
 	{
 		return (this.Flags & I.CARNIVORE) != 0;
 	}
+	
+	
 	public static EnumPrehistoric getRandomMezoic(){
 		List<EnumPrehistoric> list = new ArrayList<EnumPrehistoric>();
 		for (int i = 0; i < values().length; i++)
