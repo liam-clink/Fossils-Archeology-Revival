@@ -56,17 +56,7 @@ import com.github.revival.common.config.FossilConfig;
 import com.github.revival.common.enums.EnumAnimation;
 import com.github.revival.common.enums.EnumOrderType;
 import com.github.revival.common.enums.EnumPrehistoric;
-import com.github.revival.common.enums.EnumPrehistoricAI.Activity;
-import com.github.revival.common.enums.EnumPrehistoricAI.Attacking;
-import com.github.revival.common.enums.EnumPrehistoricAI.Climbing;
-import com.github.revival.common.enums.EnumPrehistoricAI.Following;
-import com.github.revival.common.enums.EnumPrehistoricAI.Jumping;
-import com.github.revival.common.enums.EnumPrehistoricAI.Moving;
-import com.github.revival.common.enums.EnumPrehistoricAI.Response;
-import com.github.revival.common.enums.EnumPrehistoricAI.Stalking;
-import com.github.revival.common.enums.EnumPrehistoricAI.Taming;
-import com.github.revival.common.enums.EnumPrehistoricAI.Untaming;
-import com.github.revival.common.enums.EnumPrehistoricAI.WaterAbility;
+import com.github.revival.common.enums.EnumPrehistoricAI.*;
 import com.github.revival.common.enums.EnumSituation;
 import com.github.revival.common.handler.LocalizationStrings;
 import com.github.revival.common.item.FAItemRegistry;
@@ -143,7 +133,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		this.tasks.addTask(0, new DinoAIHunger(this));
 		this.tasks.addTask(0, aiSit);
 		this.setHunger(100 / 2);
-        this.tasks.addTask(1, new EntityAIAttackOnCollide(this, 1.0D, true));
+		this.tasks.addTask(7, new EntityAIAttackOnCollide(this, 0D, true));
 		this.tasks.addTask(1, new DinoAIRunAway(this, EntityLivingBase.class, 16.0F, this.getSpeed()/2, this.getSpeed()));
 		this.tasks.addTask(1, new DinoAITerratorial(this, EntityLivingBase.class, 4.0F));
 		this.tasks.addTask(2, new DinoAIWaterAgressive(this, 0.009D));
@@ -249,7 +239,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	@Override
 	public boolean isAIEnabled()
 	{
-		return false;
+		return true;
 	}
 
 	public abstract void setSpawnValues();
@@ -403,15 +393,15 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
 	public void onLivingUpdate(){
 		super.onLivingUpdate();
-		
+
 		if(this.getRNG().nextInt(800) == 0 && worldObj.isRemote && !this.isSitting() && this.getAttackTarget() == null){
 			this.setSitting(true);
 		}
-		
+
 		if(this.getRNG().nextInt(800) == 0 && worldObj.isRemote && this.isSitting() ||  worldObj.isRemote && this.isSitting() && this.getAttackTarget() != null){
 			this.setSitting(false);
 		}
-		
+
 		if(breaksBlocks){
 			this.breakBlock(5);
 		}
@@ -608,7 +598,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 			sitProgress -= 0.5F;
 			Revival.channel.sendToServer(new MessageDinoSit(this.getEntityId(), sitProgress));
 		}
-		
+
 
 		animation_frame++;
 		Animation.tickAnimations(this);
@@ -746,6 +736,11 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 				}
 			}
 		}
+	}
+
+	public boolean attackEntityAsMob(Entity entity)
+	{
+		return entity.attackEntityFrom(DamageSource.causeMobDamage(this), 3.0F);
 	}
 
 	@Override
@@ -1633,7 +1628,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 			}
 		}
 	}
-	
+
 	public EntityLivingBase getClosestEntity(){
 		IEntitySelector selector =IEntitySelector.selectAnything;
 		List<Entity> entities = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.expand((double)herdMemberRange, 3.0D, (double)herdMemberRange), selector);

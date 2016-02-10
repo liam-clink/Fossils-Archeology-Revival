@@ -15,20 +15,19 @@ public class DinoAIAgressive extends EntityAINearestAttackableTarget
 {
 	private EntityNewPrehistoric mob;
 	private final Class<? extends Entity> targetClass;
-	private boolean isCannabil;
+	private boolean isCannibal;
 
-	public DinoAIAgressive(EntityNewPrehistoric mob, Class<? extends Entity> prey, int hungryTicks, boolean see, boolean isCannabil)
+	public DinoAIAgressive(EntityNewPrehistoric mob, Class<? extends Entity> prey, int hungryTicks, boolean see, boolean isCannibal)
 	{
 		super(mob, prey, hungryTicks, see);
 		this.mob = mob;
 		this.targetClass = prey;
-		this.isCannabil = isCannabil;
+		this.isCannibal = isCannibal;
 	}
 
 
 	public boolean shouldExecute()
 	{
-		System.out.println("i");
 		Entity targetEntity;
 		EntityAINearestAttackableTarget.Sorter theNearestAttackableTargetSorter = new EntityAINearestAttackableTarget.Sorter(mob);
 		IEntitySelector targetEntitySelector = new IEntitySelector()
@@ -68,7 +67,7 @@ public class DinoAIAgressive extends EntityAINearestAttackableTarget
 				return false;
 			}
 
-			if(!this.isCannabil){
+			if(!this.isCannibal){
 				if(this.mob.getClass() == this.targetClass){
 					return false;
 				}
