@@ -12,7 +12,7 @@ public class DinoAIWander extends EntityAIBase
     private double yPosition;
     private double zPosition;
 
-    public DinoAIWander(EntityNewPrehistoric var1, double par2)
+    public DinoAIWander(EntityNewPrehistoric var1)
     {
         this.entity = var1;
         this.setMutexBits(1);
@@ -27,7 +27,11 @@ public class DinoAIWander extends EntityAIBase
         {
             this.entity.currentOrder = EnumOrderType.FreeMove;
         }
-
+        
+        if(entity.isSitting()){
+        	return false;
+        }
+        
         if (this.entity.getRNG().nextInt(20) != 0)
         {
             return false;
@@ -38,7 +42,7 @@ public class DinoAIWander extends EntityAIBase
         }
         else
         {
-            Vec3 vec3 = RandomPositionGenerator.findRandomTarget(this.entity, 20, 7);
+            Vec3 vec3 = RandomPositionGenerator.findRandomTarget(this.entity, 30, 7);
 
             if (vec3 == null)
             {
@@ -67,6 +71,6 @@ public class DinoAIWander extends EntityAIBase
      */
     public void startExecuting()
     {
-        this.entity.getNavigator().tryMoveToXYZ(this.xPosition, this.yPosition, this.zPosition, 3);
+        this.entity.getNavigator().tryMoveToXYZ(this.xPosition, this.yPosition, this.zPosition, 1);
     }
 }

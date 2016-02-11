@@ -27,7 +27,7 @@ public class EntityStegosaurus extends EntityNewPrehistoric
 	public static final double baseHealth = 12;
 	public static final double maxHealth = 66;
 	public static final double baseSpeed = 0.25D;
-	public static final double maxSpeed = 0.45D;
+	public static final double maxSpeed = 0.3D;
 
 	public EntityStegosaurus(World world) {
 		super(world, EnumPrehistoric.Stegosaurus);

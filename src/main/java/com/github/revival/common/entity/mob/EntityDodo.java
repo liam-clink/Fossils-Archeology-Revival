@@ -30,7 +30,7 @@ public class EntityDodo extends EntityNewPrehistoric
 	public static final double baseHealth = 4;
 	public static final double maxHealth = 10;
 	public static final double baseSpeed = 0.15D;
-	public static final double maxSpeed = 0.35D;
+	public static final double maxSpeed = 0.25D;
 	public static final int FAT_INDEX = 28;
 
 	public EntityDodo(World world) {

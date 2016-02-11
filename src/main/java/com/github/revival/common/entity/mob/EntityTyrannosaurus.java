@@ -32,8 +32,8 @@ public class EntityTyrannosaurus extends EntityNewPrehistoric
 	public static final double maxDamage = 14;
 	public static final double baseHealth = 15;
 	public static final double maxHealth = 82;
-	public static final double baseSpeed = 0.05D;
-	public static final double maxSpeed = 0.15D;
+	public static final double baseSpeed = 0.25D;
+	public static final double maxSpeed = 0.3D;
 	public static Animation animation_roar = new Animation(2, 100);
 	public Object tailbuffer = Revival.proxy.getChainBuffer(3);
 

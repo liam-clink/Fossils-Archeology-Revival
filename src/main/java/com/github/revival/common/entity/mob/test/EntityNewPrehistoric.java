@@ -5,11 +5,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-import net.ilexiconn.llibrary.common.animation.Animation;
-import net.ilexiconn.llibrary.common.animation.IAnimated;
+import net.ilexiconn.llibrary.common.animation.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.BlockLiquid;
@@ -114,15 +114,10 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	private Animation currentAnimation;
 	private int animTick;
 	public static Animation animation_speak = new Animation(1, getSpeakLength());
-	private int sitTick;
-	private int sleepTick;
-	private int getUpTick;
-	private int wakeTick;
-	private int eatTick;
 	public boolean clientSitting;
 	public boolean clientSleeping;
-
 	public float sitProgress;
+	public int ticksSitted;
 
 	public EntityNewPrehistoric(World world, EnumPrehistoric selfType) {
 		super(world);
@@ -138,7 +133,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		this.tasks.addTask(1, new DinoAITerratorial(this, EntityLivingBase.class, 4.0F));
 		this.tasks.addTask(2, new DinoAIWaterAgressive(this, 0.009D));
 		this.tasks.addTask(2, new DinoAIFish(this, 1));
-		this.tasks.addTask(3, new DinoAIWander(this, 1));
+		this.tasks.addTask(3, new DinoAIWander(this));
 		this.tasks.addTask(3, new DinoAIWaterWander(this, 1));
 		this.tasks.addTask(4, new DinoAIFollow(this, 1.0D, 10.0F, 2.0F));
 		this.tasks.addTask(4, new DinoAIFollowWild(this, 1, favoriteFood));
@@ -393,13 +388,19 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
 	public void onLivingUpdate(){
 		super.onLivingUpdate();
-
-		if(this.getRNG().nextInt(800) == 0 && worldObj.isRemote && !this.isSitting() && this.getAttackTarget() == null){
-			this.setSitting(true);
+		
+		if(this.isSitting()){
+			ticksSitted++;
 		}
-
-		if(this.getRNG().nextInt(800) == 0 && worldObj.isRemote && this.isSitting() ||  worldObj.isRemote && this.isSitting() && this.getAttackTarget() != null){
+		
+		if(worldObj.isRemote && !this.isSitting() && this.getRNG().nextInt(800) == 1){
+			this.setSitting(true);
+			ticksSitted = 0;
+		}
+		
+		if(worldObj.isRemote && this.isSitting() && ticksSitted > 100 && this.getRNG().nextInt(400) == 1){
 			this.setSitting(false);
+			ticksSitted = 0;
 		}
 
 		if(breaksBlocks){
@@ -1271,7 +1272,6 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 					{
 						if (this.getMaxHunger() > this.getHunger())
 						{
-							eatTick = 1;
 							if(this.getHeldItem() != null)
 								this.entityDropItem(this.getHeldItem(), 0);
 							this.setCurrentItemOrArmor(0, itemstack);
@@ -1630,13 +1630,26 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	}
 
 	public EntityLivingBase getClosestEntity(){
-		IEntitySelector selector =IEntitySelector.selectAnything;
-		List<Entity> entities = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.expand((double)herdMemberRange, 3.0D, (double)herdMemberRange), selector);
-		for(Entity mob : entities){
-			if(mob instanceof EntityLivingBase){
-				return (EntityLivingBase)mob;
-			}
+		Entity targetEntity;
+		EntityAINearestAttackableTarget.Sorter theNearestAttackableTargetSorter = new EntityAINearestAttackableTarget.Sorter(this);
+		IEntitySelector targetEntitySelector = new IEntitySelector()
+	        {
+	            public boolean isEntityApplicable(Entity entity)
+	            {
+	                return (entity instanceof EntityLivingBase);
+	            }
+	        };
+		double d0 = 64;
+		List list = worldObj.selectEntitiesWithinAABB(EntityLivingBase.class, this.boundingBox.expand(d0, 4.0D, d0), targetEntitySelector);
+		Collections.sort(list, theNearestAttackableTargetSorter);
+
+		if (list.isEmpty())
+		{
+			return null;
 		}
-		return null;
+		else
+		{
+			return (EntityLivingBase)list.get(0);
+		}
 	}
 }

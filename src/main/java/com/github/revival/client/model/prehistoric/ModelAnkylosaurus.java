@@ -190,7 +190,7 @@ public class ModelAnkylosaurus extends ModelNewPrehistoric
 		MowzieModelRenderer[] neckParts = {this.Neck, this.Head};
 		this.faceTarget(Head, 1, f3, f4);
 		float speed = 0.1F;
-		float speed2 = 1.1F;
+		float speed2 = 0.6F;
 		float sitProgress = ((EntityNewPrehistoric)(entity)).sitProgress;
 		this.chainWave(tailParts, speed, 0.05F, -3, entity.ticksExisted, 1);
 		this.chainSwing(tailParts, speed, 0.15F, -2, entity.ticksExisted, 1);
