@@ -1,26 +1,31 @@
 package com.github.revival.common.entity.mob.test;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
-
-import net.ilexiconn.llibrary.common.animation.*;
+import com.github.revival.Revival;
+import com.github.revival.client.gui.GuiPedia;
+import com.github.revival.common.api.FoodMappings;
+import com.github.revival.common.api.IPrehistoricAI;
+import com.github.revival.common.block.FABlockRegistry;
+import com.github.revival.common.config.FossilConfig;
+import com.github.revival.common.enums.EnumAnimation;
+import com.github.revival.common.enums.EnumOrderType;
+import com.github.revival.common.enums.EnumPrehistoric;
+import com.github.revival.common.enums.EnumPrehistoricAI.*;
+import com.github.revival.common.enums.EnumSituation;
+import com.github.revival.common.handler.LocalizationStrings;
+import com.github.revival.common.item.FAItemRegistry;
+import com.github.revival.common.tileentity.TileEntityFeeder;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.ilexiconn.llibrary.common.animation.Animation;
+import net.ilexiconn.llibrary.common.animation.IAnimated;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.command.IEntitySelector;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityAgeable;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.IEntityLivingData;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
@@ -36,36 +41,19 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ChunkCoordinates;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
-import net.minecraft.util.Vec3;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
-
 import org.lwjgl.opengl.GL11;
 
-import com.github.revival.Revival;
-import com.github.revival.client.gui.GuiPedia;
-import com.github.revival.common.api.FoodMappings;
-import com.github.revival.common.api.IPrehistoricAI;
-import com.github.revival.common.block.FABlockRegistry;
-import com.github.revival.common.config.FossilConfig;
-import com.github.revival.common.enums.EnumAnimation;
-import com.github.revival.common.enums.EnumOrderType;
-import com.github.revival.common.enums.EnumPrehistoric;
-import com.github.revival.common.enums.EnumPrehistoricAI.*;
-import com.github.revival.common.enums.EnumSituation;
-import com.github.revival.common.handler.LocalizationStrings;
-import com.github.revival.common.item.FAItemRegistry;
-import com.github.revival.common.message.MessageDinoSit;
-import com.github.revival.common.tileentity.TileEntityFeeder;
-
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 
 public abstract class EntityNewPrehistoric extends EntityTameable implements IPrehistoricAI, IAnimated {
 
@@ -392,13 +380,13 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		if(this.isSitting()){
 			ticksSitted++;
 		}
-		
-		if(worldObj.isRemote && !this.isSitting() && this.getRNG().nextInt(800) == 1){
+
+		if(worldObj.isRemote && !this.isSitting() && this.getRNG().nextInt(8000) == 1){
 			this.setSitting(true);
 			ticksSitted = 0;
 		}
 		
-		if(worldObj.isRemote && this.isSitting() && ticksSitted > 100 && this.getRNG().nextInt(400) == 1){
+		if(worldObj.isRemote && this.isSitting() && ticksSitted > 100 && this.getRNG().nextInt(1000) == 1){
 			this.setSitting(false);
 			ticksSitted = 0;
 		}
@@ -592,12 +580,12 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		if (sitting && sitProgress < 20.0F)
 		{
 			sitProgress += 0.5F;
-			Revival.channel.sendToServer(new MessageDinoSit(this.getEntityId(), sitProgress));
+			//Revival.channel.sendToServer(new MessageDinoSit(this.getEntityId(), sitProgress));
 		}
 		else if (!sitting && sitProgress > 0.0F)
 		{
 			sitProgress -= 0.5F;
-			Revival.channel.sendToServer(new MessageDinoSit(this.getEntityId(), sitProgress));
+			//Revival.channel.sendToServer(new MessageDinoSit(this.getEntityId(), sitProgress));
 		}
 
 
@@ -1083,6 +1071,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
 	public void setSitting(boolean sitting)
 	{
+		System.out.println(Thread.currentThread().getStackTrace()[2]);
 		super.setSitting(sitting);
 	}
 
