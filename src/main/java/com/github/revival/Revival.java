@@ -23,7 +23,7 @@ import com.github.revival.common.handler.*;
 import com.github.revival.common.item.FAItemRegistry;
 import com.github.revival.common.message.MessageDinoSit;
 import com.github.revival.common.tileentity.*;
-import com.github.revival.misc.FossilFoodMappings;
+import com.github.revival.common.util.FossilFoodMappings;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.FMLLog;

@@ -1,4 +1,4 @@
-package com.github.revival.misc;
+package com.github.revival.common.util;
 
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.passive.EntityChicken;

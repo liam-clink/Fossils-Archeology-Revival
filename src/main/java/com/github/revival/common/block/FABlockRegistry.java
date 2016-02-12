@@ -7,9 +7,7 @@ import com.github.revival.common.api.ISubBlocksBlock;
 import com.github.revival.common.creativetab.FATabRegistry;
 import com.github.revival.common.handler.LocalizationStrings;
 import com.google.common.collect.Lists;
-
 import cpw.mods.fml.common.registry.GameRegistry;
-import net.ilexiconn.llibrary.common.content.IContentHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
@@ -18,7 +16,7 @@ import net.minecraftforge.fluids.FluidRegistry;
 import java.lang.reflect.Field;
 import java.util.List;
 
-public class FABlockRegistry extends FARegistry implements IContentHandler
+public class FABlockRegistry extends FARegistry
 {
 	public static List<String> list = Lists.newArrayList();
 	public static Block blockFossil;

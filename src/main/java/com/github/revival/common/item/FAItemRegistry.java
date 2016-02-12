@@ -1,8 +1,14 @@
 package com.github.revival.common.item;
 
-import java.lang.reflect.Field;
-
-import net.ilexiconn.llibrary.common.content.IContentHandler;
+import com.github.revival.Revival;
+import com.github.revival.common.FARegistry;
+import com.github.revival.common.block.FABlockRegistry;
+import com.github.revival.common.creativetab.FATabRegistry;
+import com.github.revival.common.entity.BehaviorJavelinDispense;
+import com.github.revival.common.handler.BucketEvent;
+import com.github.revival.common.handler.LocalizationStrings;
+import com.github.revival.common.item.forge.*;
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -14,24 +20,9 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 
-import com.github.revival.Revival;
-import com.github.revival.common.FARegistry;
-import com.github.revival.common.block.FABlockRegistry;
-import com.github.revival.common.creativetab.FATabRegistry;
-import com.github.revival.common.entity.BehaviorJavelinDispense;
-import com.github.revival.common.handler.BucketEvent;
-import com.github.revival.common.handler.LocalizationStrings;
-import com.github.revival.common.item.forge.ForgeAxe;
-import com.github.revival.common.item.forge.ForgeFood;
-import com.github.revival.common.item.forge.ForgeHoe;
-import com.github.revival.common.item.forge.ForgeItem;
-import com.github.revival.common.item.forge.ForgePickaxe;
-import com.github.revival.common.item.forge.ForgeShovel;
-import com.github.revival.common.item.forge.ForgeSword;
+import java.lang.reflect.Field;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-
-public class FAItemRegistry extends FARegistry implements IContentHandler
+public class FAItemRegistry extends FARegistry
 {
 	public static Item biofossil;
 	public static Item gem_blue;
