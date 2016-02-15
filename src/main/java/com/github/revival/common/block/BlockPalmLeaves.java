@@ -105,143 +105,12 @@ public class BlockPalmLeaves extends BlockLeaves
      * different metadata value, but before the new metadata value is set. Args: World, x, y, z, old block ID, old
      * metadata
      */
-    public void breakBlock(World world, int x, int y, int z, Block oldblock, int metadata)
-    {
-        byte b0 = 1;
-        int i1 = b0 + 1;
-
-        if (world.checkChunksExist(x - i1, y - i1, z - i1, x + i1, y + i1, z + i1))
-        {
-            for (int j1 = -b0; j1 <= b0; ++j1)
-            {
-                for (int k1 = -b0; k1 <= b0; ++k1)
-                {
-                    for (int l1 = -b0; l1 <= b0; ++l1)
-                    {
-                        Block block = world.getBlock(x + j1, y + k1, z + l1);
-                        if (block.isLeaves(world, x + j1, y + k1, z + l1))
-                        {
-                            block.beginLeavesDecay(world, x + j1, y + k1, z + l1);
-                        }
-                    }
-                }
-            }
-        }
-    }
+    public void breakBlock(World world, int x, int y, int z, Block oldblock, int metadata) {}
 
     /**
      * Ticks the block if it's been scheduled
      */
-    public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
-    {
-        if (!par1World.isRemote)
-        {
-            int l = par1World.getBlockMetadata(par2, par3, par4);
-
-            if ((l & 8) != 0 && (l & 4) == 0)
-            {
-                byte b0 = 5;
-                int i1 = b0 + 1;
-                byte b1 = 32;
-                int j1 = b1 * b1;
-                int k1 = b1 / 2;
-
-                if (this.adjacentTreeBlocks == null)
-                {
-                    this.adjacentTreeBlocks = new int[b1 * b1 * b1];
-                }
-
-                int l1;
-
-                if (par1World.checkChunksExist(par2 - i1, par3 - i1, par4 - i1, par2 + i1, par3 + i1, par4 + i1))
-                {
-                    int i2;
-                    int j2;
-                    int k2;
-
-                    for (l1 = -b0; l1 <= b0; ++l1)
-                    {
-                        for (i2 = -b0; i2 <= b0; ++i2)
-                        {
-                            for (j2 = -b0; j2 <= b0; ++j2)
-                            {
-                                Block block = par1World.getBlock(par2 + l1, par3 + i2, par4 + j2);
-
-                                if (block != null && block.canSustainLeaves(par1World, par2 + l1, par3 + i2, par4 + j2))
-                                {
-                                    this.adjacentTreeBlocks[(l1 + k1) * j1 + (i2 + k1) * b1 + j2 + k1] = 0;
-                                }
-                                else if (block != null && block.isLeaves(par1World, par2 + l1, par3 + i2, par4 + j2))
-                                {
-                                    this.adjacentTreeBlocks[(l1 + k1) * j1 + (i2 + k1) * b1 + j2 + k1] = -2;
-                                }
-                                else
-                                {
-                                    this.adjacentTreeBlocks[(l1 + k1) * j1 + (i2 + k1) * b1 + j2 + k1] = -1;
-                                }
-                            }
-                        }
-                    }
-
-                    for (l1 = 1; l1 <= 4; ++l1)
-                    {
-                        for (i2 = -b0; i2 <= b0; ++i2)
-                        {
-                            for (j2 = -b0; j2 <= b0; ++j2)
-                            {
-                                for (k2 = -b0; k2 <= b0; ++k2)
-                                {
-                                    if (this.adjacentTreeBlocks[(i2 + k1) * j1 + (j2 + k1) * b1 + k2 + k1] == l1 - 1)
-                                    {
-                                        if (this.adjacentTreeBlocks[(i2 + k1 - 1) * j1 + (j2 + k1) * b1 + k2 + k1] == -2)
-                                        {
-                                            this.adjacentTreeBlocks[(i2 + k1 - 1) * j1 + (j2 + k1) * b1 + k2 + k1] = l1;
-                                        }
-
-                                        if (this.adjacentTreeBlocks[(i2 + k1 + 1) * j1 + (j2 + k1) * b1 + k2 + k1] == -2)
-                                        {
-                                            this.adjacentTreeBlocks[(i2 + k1 + 1) * j1 + (j2 + k1) * b1 + k2 + k1] = l1;
-                                        }
-
-                                        if (this.adjacentTreeBlocks[(i2 + k1) * j1 + (j2 + k1 - 1) * b1 + k2 + k1] == -2)
-                                        {
-                                            this.adjacentTreeBlocks[(i2 + k1) * j1 + (j2 + k1 - 1) * b1 + k2 + k1] = l1;
-                                        }
-
-                                        if (this.adjacentTreeBlocks[(i2 + k1) * j1 + (j2 + k1 + 1) * b1 + k2 + k1] == -2)
-                                        {
-                                            this.adjacentTreeBlocks[(i2 + k1) * j1 + (j2 + k1 + 1) * b1 + k2 + k1] = l1;
-                                        }
-
-                                        if (this.adjacentTreeBlocks[(i2 + k1) * j1 + (j2 + k1) * b1 + (k2 + k1 - 1)] == -2)
-                                        {
-                                            this.adjacentTreeBlocks[(i2 + k1) * j1 + (j2 + k1) * b1 + (k2 + k1 - 1)] = l1;
-                                        }
-
-                                        if (this.adjacentTreeBlocks[(i2 + k1) * j1 + (j2 + k1) * b1 + k2 + k1 + 1] == -2)
-                                        {
-                                            this.adjacentTreeBlocks[(i2 + k1) * j1 + (j2 + k1) * b1 + k2 + k1 + 1] = l1;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-
-                l1 = this.adjacentTreeBlocks[k1 * j1 + k1 * b1 + k1];
-
-                if (l1 >= 0)
-                {
-                    par1World.setBlockMetadataWithNotify(par2, par3, par4, l & -9, 2);
-                }
-                else
-                {
-                    this.removeLeaves(par1World, par2, par3, par4);
-                }
-            }
-        }
-    }
+    public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random) {}
 
     @SideOnly(Side.CLIENT)
 
@@ -257,12 +126,6 @@ public class BlockPalmLeaves extends BlockLeaves
             double d2 = (double) ((float) par4 + par5Random.nextFloat());
             par1World.spawnParticle("dripWater", d0, d1, d2, 0.0D, 0.0D, 0.0D);
         }
-    }
-
-    private void removeLeaves(World par1World, int par2, int par3, int par4)
-    {
-        this.dropBlockAsItem(par1World, par2, par3, par4, par1World.getBlockMetadata(par2, par3, par4), 0);
-        par1World.setBlockToAir(par2, par3, par4);
     }
 
     /**
