@@ -7,6 +7,7 @@ import net.minecraft.entity.Entity;
 
 import com.github.revival.client.model.prehistoric.test.ModelNewPrehistoric;
 import com.github.revival.common.entity.mob.EntityDeinonychus;
+import com.github.revival.common.entity.mob.EntityTyrannosaurus;
 import com.github.revival.common.entity.mob.test.EntityNewPrehistoric;
 
 public class ModelDeinonychus extends ModelNewPrehistoric {
@@ -235,9 +236,36 @@ public class ModelDeinonychus extends ModelNewPrehistoric {
 	}
 
 	public void animate(IAnimated entity, float f, float f1, float f2, float f3, float f4, float f5) {
+		MowzieModelRenderer[] neckParts = {this.neck, this.head};
 		animator.update(entity);
 		this.setToInitPose();
 		setRotationAngles(f, f1, f2, f3, f4, f5, (Entity)entity);
+		/*animator.setAnimationId(EntityDeinonychus.animation_attack.animationId);
+		animator.startPhase(15);
+		animator.move(leftThigh, 0, 3.2F, -0.5F);
+		animator.move(rightThigh, 0, 3.2F, -0.5F);
+		animator.move(lowerBody, 0, 3.2F, -0.5F);
+		ModelUtils.rotate(animator, rightLeg, 30, 0, 0);
+		ModelUtils.rotate(animator, leftLeg, 30, 0, 0);
+		ModelUtils.rotate(animator, rightFoot, -30, 0, 0);
+		ModelUtils.rotate(animator, leftFoot, -30, 0, 0);
+		ModelUtils.rotate(animator, leftUpperArm, 0, 0, -50);
+		ModelUtils.rotate(animator, rightUpperArm, 0, 0, 50);
+		animator.endPhase();
+		animator.startPhase(15);
+		animator.move(leftThigh, 0,0F, 0F);
+		animator.move(rightThigh, 0, 0F, 0F);
+		animator.move(lowerBody, 0, 0F, 0F);
+		ModelUtils.rotate(animator, lowerBody, -15, 0, 0);
+		ModelUtils.rotate(animator, rightThigh, 39, 0, 0);
+		ModelUtils.rotate(animator, leftThigh, 39, 0, 0);
+		ModelUtils.rotate(animator, rightLeg, 60, 0, 0);
+		ModelUtils.rotate(animator, leftLeg, 60, 0, 0);
+		ModelUtils.rotate(animator, rightFoot, -70, 0, 0);
+		ModelUtils.rotate(animator, leftFoot, -70, 0, 0);
+		animator.endPhase();
+		animator.resetPhase(15);*/
+		
 	}
 
 	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
@@ -284,6 +312,24 @@ public class ModelDeinonychus extends ModelNewPrehistoric {
 		this.chainSwing(tailParts, speed, 0.15F, -3, entity.ticksExisted, 1);
 		this.chainSwing(tailParts, speed2, 0.25F, -3, f, f1);
 		this.chainWave(neckParts, speed, 0.15F, 3, entity.ticksExisted, 1);
+		if(((EntityDeinonychus)entity).getAnimation() != EntityDeinonychus.animation_attack && ((EntityDeinonychus)entity).ridingEntity != null){
+			ModelUtils.setRotateAngleAlt(lowerBody, -15, 0, 0);
+			ModelUtils.setRotateAngleAlt(leftLeg, 20, 0, 0);
+			ModelUtils.setRotateAngleAlt(leftFoot, -20, 0, 0);
+			ModelUtils.setRotateAngleAlt(rightLeg, 20, 0, 0);
+			ModelUtils.setRotateAngleAlt(rightFoot, -20, 0, 0);
+			ModelUtils.setRotateAngleAlt(leftUpperArm, 0, 0, -40);
+			ModelUtils.setRotateAngleAlt(rightUpperArm, 0, 0, 40);
+			ModelUtils.setRotateAngleAlt(head, 40, 0, 0);
+			EntityDeinonychus dino = (EntityDeinonychus)entity;
+			float speed3 = 0.5F;
+			this.walk(lowerJaw, speed3, -0.3F, true, 0.5F, 0.3F, entity.ticksExisted, 1);
+			this.walk(neck, speed3, 0.4F, false, 0F, 0.4F, entity.ticksExisted, 1);
+			this.walk(head, speed3, 0.4F, true, 0F, 0.2F, entity.ticksExisted, 1);
+			this.flap(leftUpperArm, 0.8F, 0.4F, true, 0.3F, -0.1F, entity.ticksExisted, 1);
+			this.flap(rightUpperArm, 0.8F, -0.4F, false, 0.3F, 0.1F, entity.ticksExisted, 1);
+
+		}
 		//((ChainBuffer)((EntityDeinonychus)entity).tailbuffer).applyChainSwingBuffer(tailParts);
 	}
 

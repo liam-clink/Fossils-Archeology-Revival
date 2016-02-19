@@ -9,7 +9,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 
 import com.github.revival.common.api.EnumDiet;
-import com.github.revival.common.entity.mob.EntityDinosaur;
 
 public class DinoAIAgressive extends EntityAINearestAttackableTarget
 {
@@ -31,15 +30,16 @@ public class DinoAIAgressive extends EntityAINearestAttackableTarget
 		Entity targetEntity;
 		EntityAINearestAttackableTarget.Sorter theNearestAttackableTargetSorter = new EntityAINearestAttackableTarget.Sorter(mob);
 		IEntitySelector targetEntitySelector = new IEntitySelector()
-	        {
-	            public boolean isEntityApplicable(Entity entity)
-	            {
-	                return (entity instanceof EntityLivingBase);
-	            }
-	        };
+		{
+			public boolean isEntityApplicable(Entity entity)
+			{
+				return (entity instanceof EntityLivingBase);
+			}
+		};
 		double d0 = this.getTargetDistance();
 		List list = this.taskOwner.worldObj.selectEntitiesWithinAABB(this.targetClass, this.taskOwner.boundingBox.expand(d0, 4.0D, d0), targetEntitySelector);
 		Collections.sort(list, theNearestAttackableTargetSorter);
+
 
 		if (list.isEmpty())
 		{
@@ -52,37 +52,30 @@ public class DinoAIAgressive extends EntityAINearestAttackableTarget
 			if(!this.mob.isHungry()){
 				return false;
 			}
-
-			if(this.mob.selfType.diet != EnumDiet.CARNIVORE ||this.mob.selfType.diet != EnumDiet.CARNIVORE_EGG || this.mob.selfType.diet != EnumDiet.PISCCARNIVORE || this.mob.selfType.diet != EnumDiet.OMNIVORE){
+			if(mob.canAttackClass(targetEntity.getClass())){
+				return false;
+			}
+			
+			if(this.mob.selfType.diet == EnumDiet.HERBIVORE){
 				return false;
 			}
 
 			if(targetEntity != null){
-				if(targetEntity.width * 1.5F < mob.width || this.mob.preyBlacklist().contains(targetEntity)){
-					return false;
-				}
-			}
-
-			if(this.mob.preyBlacklist().contains(targetClass)){
-				return false;
-			}
-
-			if(!this.isCannibal){
-				if(this.mob.getClass() == this.targetClass){
+				if(mob.width < targetEntity.width){
 					return false;
 				}
 			}
 
 			if(this.mob.isTamed()){
 				if(this.mob.getOwner() != null){
-					if(this.mob.getOwner().getClass() == this.targetClass){
+					if(this.mob.getOwner().getClass() == targetEntity.getClass()){
 						if(!this.mob.isHungry()){
 							return false;
 						}
 					}
 				}
 			}
-			return true;
+			return super.shouldExecute();
 		}
 	}
 

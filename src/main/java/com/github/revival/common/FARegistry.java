@@ -1,10 +1,11 @@
 package com.github.revival.common;
 
+import net.ilexiconn.llibrary.common.content.IContentHandler;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
-public abstract class FARegistry
+public abstract class FARegistry implements IContentHandler
 {
     public abstract void initCreativeTabs();
 

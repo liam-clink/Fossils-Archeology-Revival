@@ -23,7 +23,7 @@ import com.github.revival.common.handler.*;
 import com.github.revival.common.item.FAItemRegistry;
 import com.github.revival.common.message.MessageDinoSit;
 import com.github.revival.common.tileentity.*;
-import com.github.revival.misc.FossilFoodMappings;
+import com.github.revival.common.util.FossilFoodMappings;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.FMLLog;
@@ -57,12 +57,13 @@ import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fluids.Fluid;
 import org.apache.logging.log4j.Level;
 
-@Mod(modid = Revival.MODID, name = "Fossils and Archeology Revival", version = Revival.VERSION, dependencies = "required-after:llibrary@[0.6.2,)")
+@Mod(modid = Revival.MODID, name = "Fossils and Archeology Revival", version = Revival.VERSION, dependencies = "required-after:llibrary@[" + Revival.LLIBRARY_VERSION + ",)")
 public class Revival
 {
 	public static final String MODID = "fossil";
 	public static final ModState STATE = ModState.DEV;
 	public static final String VERSION = "7.3.0-develop";
+    public static final String LLIBRARY_VERSION = "0.7.0";
 
 	@SidedProxy(clientSide = "com.github.revival.client.ClientProxy", serverSide = "com.github.revival.common.CommonProxy")
 	public static CommonProxy proxy;

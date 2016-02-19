@@ -74,5 +74,12 @@ public class ModelUtils {
 		MowzieModelRenderer.rotateAngleY = y;
 		MowzieModelRenderer.rotateAngleZ = z;
 	}
+	
+	public static void setRotateAngleAlt(MowzieModelRenderer MowzieModelRenderer, float x, float y, float z)
+	{
+		MowzieModelRenderer.rotateAngleX = (float) Math.toRadians(x);
+		MowzieModelRenderer.rotateAngleY = (float) Math.toRadians(y);
+		MowzieModelRenderer.rotateAngleZ = (float) Math.toRadians(z);
+	}
 
 }

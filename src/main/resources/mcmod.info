@@ -17,6 +17,10 @@
             "Alexthe666",
             "iLexiconn"
         ],
-        "credits": "Original mod by Flammarilva and Team July!"
+        "credits": "Original mod by Flammarilva and Team July!",
+        "dependencies": [
+            "llibrary@[${llibrary_version},)"
+        ],
+        "useDependencyInformation": true
     }
 ]

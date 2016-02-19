@@ -1,52 +1,5 @@
 package com.github.revival.common.entity.mob.test;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
-
-import net.ilexiconn.llibrary.common.animation.*;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockBush;
-import net.minecraft.block.BlockLiquid;
-import net.minecraft.block.material.Material;
-import net.minecraft.client.Minecraft;
-import net.minecraft.command.IEntitySelector;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityAgeable;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.IEntityLivingData;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAIOwnerHurtByTarget;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.monster.IMob;
-import net.minecraft.entity.passive.EntityTameable;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.potion.Potion;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ChunkCoordinates;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
-import net.minecraft.util.Vec3;
-import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeHooks;
-
-import org.lwjgl.opengl.GL11;
-
 import com.github.revival.Revival;
 import com.github.revival.client.gui.GuiPedia;
 import com.github.revival.common.api.FoodMappings;
@@ -60,12 +13,53 @@ import com.github.revival.common.enums.EnumPrehistoricAI.*;
 import com.github.revival.common.enums.EnumSituation;
 import com.github.revival.common.handler.LocalizationStrings;
 import com.github.revival.common.item.FAItemRegistry;
-import com.github.revival.common.message.MessageDinoSit;
 import com.github.revival.common.tileentity.TileEntityFeeder;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.ilexiconn.llibrary.common.animation.Animation;
+import net.ilexiconn.llibrary.common.animation.IAnimated;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockBush;
+import net.minecraft.block.BlockLiquid;
+import net.minecraft.block.material.Material;
+import net.minecraft.client.Minecraft;
+import net.minecraft.command.IEntitySelector;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAIOwnerHurtByTarget;
+import net.minecraft.entity.ai.EntityAITargetNonTamed;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.monster.EntityCreeper;
+import net.minecraft.entity.monster.EntityGhast;
+import net.minecraft.entity.monster.IMob;
+import net.minecraft.entity.passive.EntitySheep;
+import net.minecraft.entity.passive.EntityTameable;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.potion.Potion;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.*;
+import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeHooks;
+
+import org.lwjgl.opengl.GL11;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 
 public abstract class EntityNewPrehistoric extends EntityTameable implements IPrehistoricAI, IAnimated {
 
@@ -114,6 +108,8 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	private Animation currentAnimation;
 	private int animTick;
 	public static Animation animation_speak = new Animation(1, getSpeakLength());
+	public static Animation animation_attack = new Animation(2, getAttackLength());
+
 	public boolean clientSitting;
 	public boolean clientSleeping;
 	public float sitProgress;
@@ -128,7 +124,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		this.tasks.addTask(0, new DinoAIHunger(this));
 		this.tasks.addTask(0, aiSit);
 		this.setHunger(100 / 2);
-		this.tasks.addTask(7, new EntityAIAttackOnCollide(this, 0D, true));
+		this.tasks.addTask(7, new EntityAIAttackOnCollide(this, 1.0D, true));
 		this.tasks.addTask(1, new DinoAIRunAway(this, EntityLivingBase.class, 16.0F, this.getSpeed()/2, this.getSpeed()));
 		this.tasks.addTask(1, new DinoAITerratorial(this, EntityLivingBase.class, 4.0F));
 		this.tasks.addTask(2, new DinoAIWaterAgressive(this, 0.009D));
@@ -142,10 +138,12 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		this.tasks.addTask(5, new DinoAIWaterFeeder(this, 50, 0.0017D));
 		//this.tasks.addTask(6, new DinoAILookAtEntity(this, EntityLivingBase.class, 8));
 		this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
-		this.targetTasks.addTask(2, new DinoAIAgressive(this, EntityLivingBase.class, 1, true, this.isCannabil()));
+		this.targetTasks.addTask(2, new DinoAIAgressive(this, EntityLivingBase.class, 1, true, this.isCannibal()));
 		this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
+		//this.targetTasks.addTask(2, new EntityAITargetNonTamed(this, EntityLivingBase.class, 200, false));
 		hasBabyTexture = true;
 	}
+
 
 	protected void entityInit()
 	{
@@ -388,17 +386,17 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
 	public void onLivingUpdate(){
 		super.onLivingUpdate();
-		
+
 		if(this.isSitting()){
 			ticksSitted++;
 		}
-		
-		if(worldObj.isRemote && !this.isSitting() && this.getRNG().nextInt(800) == 1){
+
+		if(worldObj.isRemote && !this.isSitting() && this.getRNG().nextInt(400) == 1 && !this.isRiding()){
 			this.setSitting(true);
 			ticksSitted = 0;
 		}
-		
-		if(worldObj.isRemote && this.isSitting() && ticksSitted > 100 && this.getRNG().nextInt(400) == 1){
+
+		if(worldObj.isRemote && this.isSitting() && ticksSitted > 100 && this.getRNG().nextInt(100) == 1){
 			this.setSitting(false);
 			ticksSitted = 0;
 		}
@@ -592,12 +590,12 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		if (sitting && sitProgress < 20.0F)
 		{
 			sitProgress += 0.5F;
-			Revival.channel.sendToServer(new MessageDinoSit(this.getEntityId(), sitProgress));
+			//Revival.channel.sendToServer(new MessageDinoSit(this.getEntityId(), sitProgress));
 		}
 		else if (!sitting && sitProgress > 0.0F)
 		{
 			sitProgress -= 0.5F;
-			Revival.channel.sendToServer(new MessageDinoSit(this.getEntityId(), sitProgress));
+			//Revival.channel.sendToServer(new MessageDinoSit(this.getEntityId(), sitProgress));
 		}
 
 
@@ -656,8 +654,13 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
 	public abstract boolean doesFlock();
 
-	public boolean isCannabil(){
+	public static boolean isCannibal(){
 		return false;
+	}
+	
+	public boolean canAttackClass(Class clazz)
+	{
+		return this.getClass() != clazz;
 	}
 
 	public float getDinosaurSize()
@@ -1612,10 +1615,14 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	}
 
 	public Animation[] animations() {
-		return new Animation[]{this.animation_none, this.animation_speak};
+		return new Animation[]{this.animation_none, this.animation_speak, this.animation_attack};
 	}
 
 	public static int getSpeakLength() {
+		return 20;
+	}
+
+	public static int getAttackLength() {
 		return 20;
 	}
 
@@ -1633,12 +1640,12 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		Entity targetEntity;
 		EntityAINearestAttackableTarget.Sorter theNearestAttackableTargetSorter = new EntityAINearestAttackableTarget.Sorter(this);
 		IEntitySelector targetEntitySelector = new IEntitySelector()
-	        {
-	            public boolean isEntityApplicable(Entity entity)
-	            {
-	                return (entity instanceof EntityLivingBase);
-	            }
-	        };
+		{
+			public boolean isEntityApplicable(Entity entity)
+			{
+				return (entity instanceof EntityLivingBase);
+			}
+		};
 		double d0 = 64;
 		List list = worldObj.selectEntitiesWithinAABB(EntityLivingBase.class, this.boundingBox.expand(d0, 4.0D, d0), targetEntitySelector);
 		Collections.sort(list, theNearestAttackableTargetSorter);
