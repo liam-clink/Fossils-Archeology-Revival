@@ -14,7 +14,10 @@ import com.github.revival.common.enums.EnumSituation;
 import com.github.revival.common.handler.LocalizationStrings;
 import com.github.revival.common.item.FAItemRegistry;
 import com.github.revival.common.tileentity.TileEntityFeeder;
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -49,7 +52,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
-
 import org.lwjgl.opengl.GL11;
 
 import java.io.BufferedReader;
@@ -391,12 +393,21 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 			ticksSitted++;
 		}
 
+<<<<<<< HEAD
 		if(worldObj.isRemote && !this.isSitting() && this.getRNG().nextInt(400) == 1 && !this.isRiding()){
 			this.setSitting(true);
 			ticksSitted = 0;
 		}
 
 		if(worldObj.isRemote && this.isSitting() && ticksSitted > 100 && this.getRNG().nextInt(100) == 1){
+=======
+		if(worldObj.isRemote && !this.isSitting() && this.getRNG().nextInt(8000) == 1){
+			this.setSitting(true);
+			ticksSitted = 0;
+		}
+		
+		if(worldObj.isRemote && this.isSitting() && ticksSitted > 100 && this.getRNG().nextInt(1000) == 1){
+>>>>>>> origin/master
 			this.setSitting(false);
 			ticksSitted = 0;
 		}
@@ -1086,6 +1097,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
 	public void setSitting(boolean sitting)
 	{
+		System.out.println(Thread.currentThread().getStackTrace()[2]);
 		super.setSitting(sitting);
 	}
 
