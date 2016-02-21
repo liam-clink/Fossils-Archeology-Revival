@@ -1,49 +1,13 @@
 package com.github.revival.common.handler;
 
+import com.github.revival.common.entity.mob.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 
-import com.github.revival.common.entity.mob.EntityAllosaurus;
-import com.github.revival.common.entity.mob.EntityAnkylosaurus;
-import com.github.revival.common.entity.mob.EntityAnu;
-import com.github.revival.common.entity.mob.EntityAnubite;
-import com.github.revival.common.entity.mob.EntityBones;
-import com.github.revival.common.entity.mob.EntityBrachiosaurus;
-import com.github.revival.common.entity.mob.EntityCeratosaurus;
-import com.github.revival.common.entity.mob.EntityCoelacanth;
-import com.github.revival.common.entity.mob.EntityCompsognathus;
-import com.github.revival.common.entity.mob.EntityConfuciusornis;
-import com.github.revival.common.entity.mob.EntityDeinonychus;
-import com.github.revival.common.entity.mob.EntityDilophosaurus;
-import com.github.revival.common.entity.mob.EntityDodo;
-import com.github.revival.common.entity.mob.EntityElasmotherium;
-import com.github.revival.common.entity.mob.EntityFailuresaurus;
-import com.github.revival.common.entity.mob.EntityGallimimus;
-import com.github.revival.common.entity.mob.EntityLiopleurodon;
-import com.github.revival.common.entity.mob.EntityMammoth;
-import com.github.revival.common.entity.mob.EntityMosasaurus;
-import com.github.revival.common.entity.mob.EntityNautilus;
-import com.github.revival.common.entity.mob.EntityPachycephalosaurus;
-import com.github.revival.common.entity.mob.EntityPlesiosaurus;
-import com.github.revival.common.entity.mob.EntityPterosaur;
-import com.github.revival.common.entity.mob.EntityQuagga;
-import com.github.revival.common.entity.mob.EntitySarcosuchus;
-import com.github.revival.common.entity.mob.EntitySentryPigman;
-import com.github.revival.common.entity.mob.EntitySmilodon;
-import com.github.revival.common.entity.mob.EntitySpinosaurus;
-import com.github.revival.common.entity.mob.EntityStegosaurus;
-import com.github.revival.common.entity.mob.EntityTarSlime;
-import com.github.revival.common.entity.mob.EntityTerrorBird;
-import com.github.revival.common.entity.mob.EntityTriceratops;
-import com.github.revival.common.entity.mob.EntityTyrannosaurus;
-import com.github.revival.common.entity.mob.EntityVelociraptor;
-
-public class FossilSpawnEggs
-{
+public class FossilSpawnEggs {
     static int startEntityId = 300;
 
-    public static void addSpawnEggs()
-    {                                                        //bg		//fg
+    public static void addSpawnEggs() {                                                        //bg		//fg
         registerEntityEgg(EntityTriceratops.class, 0x62d84e, 0xebffd5);
         registerEntityEgg(EntitySarcosuchus.class, 0x2B2B1E, 0x72715B);
         registerEntityEgg(EntityVelociraptor.class, 0xbfa487, 0x936d2e);
@@ -81,10 +45,8 @@ public class FossilSpawnEggs
 
     }
 
-    public static int getUniqueEntityId()
-    {
-        do
-        {
+    public static int getUniqueEntityId() {
+        do {
             startEntityId++;
         }
         while (EntityList.getStringFromID(startEntityId) != null);
@@ -92,8 +54,7 @@ public class FossilSpawnEggs
         return startEntityId;
     }
 
-    public static void registerEntityEgg(Class<? extends Entity> entity, int primaryColor, int secondaryColor)
-    {
+    public static void registerEntityEgg(Class<? extends Entity> entity, int primaryColor, int secondaryColor) {
         int id = getUniqueEntityId();
         EntityList.IDtoClassMapping.put(id, entity);
         EntityList.entityEggs.put(id, new EntityList.EntityEggInfo(id, primaryColor, secondaryColor));

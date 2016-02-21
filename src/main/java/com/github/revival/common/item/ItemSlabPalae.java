@@ -5,11 +5,9 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.item.ItemSlab;
 
-public class ItemSlabPalae extends ItemSlab
-{
+public class ItemSlabPalae extends ItemSlab {
 
-    public ItemSlabPalae(Block block)
-    {
+    public ItemSlabPalae(Block block) {
         super(block, (BlockSlab) FABlockRegistry.palaeSingleSlab, (BlockSlab) FABlockRegistry.palaeDoubleSlab, false);
     }
 }

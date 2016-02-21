@@ -13,15 +13,13 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-public class BlockDrum extends BlockContainer
-{
+public class BlockDrum extends BlockContainer {
     IIcon Top1;
     IIcon Top2;
     IIcon Top3;
     IIcon Bottom;
 
-    public BlockDrum()
-    {
+    public BlockDrum() {
         super(Material.wood);
         this.setBlockName(LocalizationStrings.DRUM_NAME);
         this.setHardness(0.8F);
@@ -38,7 +36,7 @@ public class BlockDrum extends BlockContainer
      * Args: side, metadata
      */
     /*
-	 * public int getBlockTextureFromSideAndMetadata(int var1, int var2) { if
+     * public int getBlockTextureFromSideAndMetadata(int var1, int var2) { if
 	 * (var1 != 1 && var1 != 0) { return 4; } else { switch (var2) { case 0:
 	 * default: return 1;
 	 * 
@@ -51,8 +49,7 @@ public class BlockDrum extends BlockContainer
      * When this method is called, your block should register all the icons it needs with the given IIconRegister. This
      * is the only chance you get to register icons.
      */
-    public void registerBlockIcons(IIconRegister par1IIconRegister)
-    {
+    public void registerBlockIcons(IIconRegister par1IIconRegister) {
         this.blockIcon = par1IIconRegister.registerIcon("fossil:Drum_Side");
         this.Top1 = par1IIconRegister.registerIcon("fossil:Drum_Top1");
         this.Top2 = par1IIconRegister.registerIcon("fossil:Drum_Top2");
@@ -64,21 +61,15 @@ public class BlockDrum extends BlockContainer
      * From the specified side and block metadata retrieves the blocks texture.
      * Args: side, metadata
      */
-    public IIcon getIcon(int par1, int par2)
-    {
-        if (par1 != 1 && par1 != 0)
-        {
+    public IIcon getIcon(int par1, int par2) {
+        if (par1 != 1 && par1 != 0) {
             return blockIcon;
-        }
-        else
-        {
-            if (par1 == 0)
-            {
+        } else {
+            if (par1 == 0) {
                 return Bottom;
             }
 
-            switch (par2)
-            {
+            switch (par2) {
                 case 0:
                 default:
                     return Top1;
@@ -116,10 +107,8 @@ public class BlockDrum extends BlockContainer
      */
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z,
-                                    EntityPlayer player, int var6, float var7, float var8, float var9)
-    {
-        if (!world.isRemote)
-        {
+                                    EntityPlayer player, int var6, float var7, float var8, float var9) {
+        if (!world.isRemote) {
             TileEntityDrum tileEntity = (TileEntityDrum) world.getTileEntity(x,
                     y, z);
             tileEntity.TriggerOrder(player);
@@ -134,15 +123,12 @@ public class BlockDrum extends BlockContainer
      * Called when the block is clicked by a player. Args: x, y, z, entityPlayer
      */
     public void onBlockClicked(World var1, int var2, int var3, int var4,
-                               EntityPlayer var5)
-    {
-        if (!var1.isRemote)
-        {
+                               EntityPlayer var5) {
+        if (!var1.isRemote) {
             TileEntityDrum var6 = (TileEntityDrum) var1.getTileEntity(var2,
                     var3, var4);
 
-            if (var5.inventory.getCurrentItem() != null)
-            {
+            if (var5.inventory.getCurrentItem() != null) {
                 var6.SendOrder(var5.inventory.getCurrentItem().getItem(), var5);
             }
         }
@@ -153,8 +139,7 @@ public class BlockDrum extends BlockContainer
      * the block.
      */
     @Override
-    public TileEntity createNewTileEntity(World var1, int var2)
-    {
+    public TileEntity createNewTileEntity(World var1, int var2) {
         return new TileEntityDrum();
     }
 }

@@ -9,42 +9,35 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class ContainerTimeMachine extends Container
-{
+public class ContainerTimeMachine extends Container {
     private TileEntityTimeMachine timeMachine;
     private int lastCookTime = 0;
     private int lastBurnTime = 0;
     private int lastItemBurnTime = 0;
 
-    public ContainerTimeMachine(InventoryPlayer var1, TileEntityTimeMachine var2)
-    {
+    public ContainerTimeMachine(InventoryPlayer var1, TileEntityTimeMachine var2) {
         this.timeMachine = var2;
         int var3;
         int var4;
 
         this.addSlotToContainer(new Slot(var2, 6, 35, 46));
 
-        for (var3 = 0; var3 < 3; ++var3)
-        {
-            for (var4 = 0; var4 < 9; ++var4)
-            {
+        for (var3 = 0; var3 < 3; ++var3) {
+            for (var4 = 0; var4 < 9; ++var4) {
                 this.addSlotToContainer(new Slot(var1, var4 + var3 * 9 + 9,
                         7 + var4 * 18, 107 + var3 * 18));
             }
         }
 
-        for (var3 = 0; var3 < 9; ++var3)
-        {
+        for (var3 = 0; var3 < 9; ++var3) {
             this.addSlotToContainer(new Slot(var1, var3, 7 + var3 * 18, 165));
         }
     }
 
-    public void updateProgressBar(int var1, int var2)
-    {
+    public void updateProgressBar(int var1, int var2) {
     }
 
-    public boolean canInteractWith(EntityPlayer var1)
-    {
+    public boolean canInteractWith(EntityPlayer var1) {
         return this.timeMachine.isUseableByPlayer(var1);
     }
 
@@ -52,18 +45,13 @@ public class ContainerTimeMachine extends Container
      * Called when a player shift-clicks on a slot. You must override this or
      * you will crash when someone does that.
      */
-    public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int var2)
-    {
+    public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int var2) {
         Slot slot = (Slot) this.inventorySlots.get(var2);
 
-        if (var2 == 6)
-        {
-            if (slot.getStack() != null)
-            {
-                if (slot.getStack().getItem() != null)
-                {
-                    if (slot.getStack().getItem() == FAItemRegistry.ancientClock)
-                    {
+        if (var2 == 6) {
+            if (slot.getStack() != null) {
+                if (slot.getStack().getItem() != null) {
+                    if (slot.getStack().getItem() == FAItemRegistry.ancientClock) {
                         par1EntityPlayer.addStat(FossilAchievementHandler.clock, 1);
                     }
                 }

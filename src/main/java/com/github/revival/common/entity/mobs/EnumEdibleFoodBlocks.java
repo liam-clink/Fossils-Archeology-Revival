@@ -2,8 +2,7 @@ package com.github.revival.common.entity.mobs;
 
 import net.minecraft.block.Block;
 
-public class EnumEdibleFoodBlocks
-{
+public class EnumEdibleFoodBlocks {
 
     ;
 
@@ -11,25 +10,21 @@ public class EnumEdibleFoodBlocks
     private int baseHungerHeal;
     private int baseHealthHeal;
 
-    private EnumEdibleFoodBlocks(Block block, int baseHungerHeal, int baseHealthHeal)
-    {
+    private EnumEdibleFoodBlocks(Block block, int baseHungerHeal, int baseHealthHeal) {
         this.block = block;
         this.baseHungerHeal = baseHungerHeal;
         this.baseHealthHeal = baseHealthHeal;
     }
 
-    public int getBaseHungerHeal()
-    {
+    public int getBaseHungerHeal() {
         return baseHungerHeal;
     }
 
-    public int getBaseHealthHeal()
-    {
+    public int getBaseHealthHeal() {
         return baseHealthHeal;
     }
 
-    public boolean isBlock(Block block)
-    {
+    public boolean isBlock(Block block) {
         return this.block.equals(block);
     }
 

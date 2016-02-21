@@ -1,7 +1,6 @@
 package com.github.revival.common;
 
-public enum ModState
-{
+public enum ModState {
     DEV,
     BETA,
     RELEASE

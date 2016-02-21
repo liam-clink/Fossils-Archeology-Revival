@@ -1,12 +1,10 @@
 package com.github.revival.client.model.prehistoric.alternate;
 
-import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelRenderer;
-
 import com.github.revival.client.model.base.ModelPrehistoric;
 import com.github.revival.common.entity.mob.test.EntityNewPrehistoric;
+import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelRenderer;
 
-public class ModelFlyingConfuciusornis extends ModelPrehistoric
-{
+public class ModelFlyingConfuciusornis extends ModelPrehistoric {
     public MowzieModelRenderer rightLeg;
     public MowzieModelRenderer leftLeg;
     public MowzieModelRenderer body;
@@ -38,8 +36,7 @@ public class ModelFlyingConfuciusornis extends ModelPrehistoric
     public MowzieModelRenderer leftWingPivot;
     public MowzieModelRenderer rightWingPivot;
 
-    public ModelFlyingConfuciusornis()
-    {
+    public ModelFlyingConfuciusornis() {
         this.textureWidth = 64;
         this.textureHeight = 32;
         this.headPivot = new MowzieModelRenderer(this, 0, 0);
@@ -182,20 +179,20 @@ public class ModelFlyingConfuciusornis extends ModelPrehistoric
         this.leftTail4.addChild(this.leftTail5);
     }
 
-	@Override
-	public void renderFossil(EntityNewPrehistoric entity, float f, float f1,float f2, float f3, float f4, float f5) {
-		
-	}
+    @Override
+    public void renderFossil(EntityNewPrehistoric entity, float f, float f1, float f2, float f3, float f4, float f5) {
 
-	@Override
-	public void renderLiving(EntityNewPrehistoric entity, float f, float f1,float f2, float f3, float f4, float f5) {
-		
-	}
+    }
 
-	@Override
-	public void renderSleeping(EntityNewPrehistoric entity, float f, float f1,float f2, float f3, float f4, float f5) {
-		
-	}
+    @Override
+    public void renderLiving(EntityNewPrehistoric entity, float f, float f1, float f2, float f3, float f4, float f5) {
+
+    }
+
+    @Override
+    public void renderSleeping(EntityNewPrehistoric entity, float f, float f1, float f2, float f3, float f4, float f5) {
+
+    }
 
   /*public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6)
     {

@@ -1,5 +1,8 @@
 package com.github.revival.common.entity.mob;
 
+import com.github.revival.common.entity.mob.test.EntityNewPrehistoric;
+import com.github.revival.common.enums.EnumPrehistoric;
+import com.github.revival.common.enums.EnumPrehistoricAI.*;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -8,253 +11,224 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
-import com.github.revival.common.entity.mob.test.EntityNewPrehistoric;
-import com.github.revival.common.enums.EnumPrehistoric;
-import com.github.revival.common.enums.EnumPrehistoricAI.Activity;
-import com.github.revival.common.enums.EnumPrehistoricAI.Attacking;
-import com.github.revival.common.enums.EnumPrehistoricAI.Climbing;
-import com.github.revival.common.enums.EnumPrehistoricAI.Following;
-import com.github.revival.common.enums.EnumPrehistoricAI.Jumping;
-import com.github.revival.common.enums.EnumPrehistoricAI.Moving;
-import com.github.revival.common.enums.EnumPrehistoricAI.Response;
-import com.github.revival.common.enums.EnumPrehistoricAI.Stalking;
-import com.github.revival.common.enums.EnumPrehistoricAI.Taming;
-import com.github.revival.common.enums.EnumPrehistoricAI.Untaming;
-import com.github.revival.common.enums.EnumPrehistoricAI.WaterAbility;
+public class EntityDodo extends EntityNewPrehistoric {
 
-public class EntityDodo extends EntityNewPrehistoric
-{
+    public static final double baseDamage = 1;
+    public static final double maxDamage = 1;
+    public static final double baseHealth = 4;
+    public static final double maxHealth = 10;
+    public static final double baseSpeed = 0.15D;
+    public static final double maxSpeed = 0.25D;
+    public static final int FAT_INDEX = 28;
 
-	public static final double baseDamage = 1;
-	public static final double maxDamage = 1;
-	public static final double baseHealth = 4;
-	public static final double maxHealth = 10;
-	public static final double baseSpeed = 0.15D;
-	public static final double maxSpeed = 0.25D;
-	public static final int FAT_INDEX = 28;
+    public EntityDodo(World world) {
+        super(world, EnumPrehistoric.Dodo);
+        this.setSize(0.8F, 0.7F);
+        minSize = 0.5F;
+        maxSize = 1F;
+        teenAge = 2;
+        developsResistance = false;
+        breaksBlocks = false;
+        favoriteFood = Items.melon;
+        hasTeenTexture = false;
+    }
 
-	public EntityDodo(World world) {
-		super(world, EnumPrehistoric.Dodo);
-		this.setSize(0.8F, 0.7F);
-		minSize = 0.5F;
-		maxSize = 1F;
-		teenAge = 2;
-		developsResistance = false;
-		breaksBlocks = false;
-		favoriteFood = Items.melon;
-		hasTeenTexture = false;
-	}
+    public boolean isAIEnabled() {
+        return false;
+    }
 
-	public boolean isAIEnabled(){
-		return false;
-	}
-	@Override
-	public void entityInit(){
-		super.entityInit();
-		this.dataWatcher.addObject(FAT_INDEX, 0);
-	}
-	public int getFat()
-	{
-		return this.dataWatcher.getWatchableObjectInt(FAT_INDEX);
-	}
+    @Override
+    public void entityInit() {
+        super.entityInit();
+        this.dataWatcher.addObject(FAT_INDEX, 0);
+    }
 
-	public void setFat(int var1)
-	{
-		this.dataWatcher.updateObject(FAT_INDEX, var1);
-	}
+    public int getFat() {
+        return this.dataWatcher.getWatchableObjectInt(FAT_INDEX);
+    }
 
-	public void readEntityFromNBT(NBTTagCompound compound)
-	{
-		super.readEntityFromNBT(compound);
-		this.setFat(compound.getInteger("FatLevel"));
-	}
+    public void setFat(int var1) {
+        this.dataWatcher.updateObject(FAT_INDEX, var1);
+    }
 
-	public void writeEntityToNBT(NBTTagCompound compound)
-	{
-		super.writeEntityToNBT(compound);
-		compound.setInteger("FatLevel", this.getFat());
-	}
+    public void readEntityFromNBT(NBTTagCompound compound) {
+        super.readEntityFromNBT(compound);
+        this.setFat(compound.getInteger("FatLevel"));
+    }
 
-	@Override
-	public void setSpawnValues() {}
+    public void writeEntityToNBT(NBTTagCompound compound) {
+        super.writeEntityToNBT(compound);
+        compound.setInteger("FatLevel", this.getFat());
+    }
 
-	@Override
-	protected void applyEntityAttributes()
-	{
-		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(baseSpeed);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(baseHealth);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(baseDamage);
-	}
+    @Override
+    public void setSpawnValues() {
+    }
 
-	@Override
-	public Activity aiActivityType() {
+    @Override
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(baseSpeed);
+        getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(baseHealth);
+        getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(baseDamage);
+    }
 
-		return Activity.DURINAL;
-	}
+    @Override
+    public Activity aiActivityType() {
 
-	@Override
-	public Attacking aiAttackType() {
+        return Activity.DURINAL;
+    }
 
-		return Attacking.BASIC;
-	}
+    @Override
+    public Attacking aiAttackType() {
 
-	@Override
-	public Climbing aiClimbType() {
+        return Attacking.BASIC;
+    }
 
-		return Climbing.NONE;
-	}
+    @Override
+    public Climbing aiClimbType() {
 
-	@Override
-	public Following aiFollowType() {
+        return Climbing.NONE;
+    }
 
-		return Following.NORMAL;
-	}
+    @Override
+    public Following aiFollowType() {
 
-	@Override
-	public Jumping aiJumpType() {
+        return Following.NORMAL;
+    }
 
-		return Jumping.BASIC;
-	}
+    @Override
+    public Jumping aiJumpType() {
 
-	@Override
-	public Response aiResponseType() {
+        return Jumping.BASIC;
+    }
 
-		return Response.NONE;
-	}
+    @Override
+    public Response aiResponseType() {
 
-	@Override
-	public Stalking aiStalkType() {
+        return Response.NONE;
+    }
 
-		return Stalking.NONE;
-	}
+    @Override
+    public Stalking aiStalkType() {
 
-	@Override
-	public Taming aiTameType() {
+        return Stalking.NONE;
+    }
 
-		return Taming.FEEDING;
-	}
+    @Override
+    public Taming aiTameType() {
 
-	@Override
-	public Untaming aiUntameType() {
+        return Taming.FEEDING;
+    }
 
-		return Untaming.NONE;
-	}
+    @Override
+    public Untaming aiUntameType() {
 
-	@Override
-	public Moving aiMovingType() {
+        return Untaming.NONE;
+    }
 
-		return Moving.WALKANDGLIDE;
-	}
+    @Override
+    public Moving aiMovingType() {
 
-	@Override
-	public WaterAbility aiWaterAbilityType() {
+        return Moving.WALKANDGLIDE;
+    }
 
-		return WaterAbility.NONE;
-	}
+    @Override
+    public WaterAbility aiWaterAbilityType() {
 
-	@Override
-	public boolean doesFlock() {
-		return false;
-	}
+        return WaterAbility.NONE;
+    }
 
-	@Override
-	public Item getOrderItem() {
-		return Items.stick;
-	}
-	
-	public void updateSize()
-	{
-		 double healthStep;
-	        double attackStep;
-	        double speedStep;
-	        healthStep = (this.maxHealth - this.baseHealth) / (this.getAdultAge() + 1);
-	        attackStep = (this.maxDamage - this.baseDamage) / (this.getAdultAge() + 1);
-	        speedStep = (this.maxSpeed - this.baseSpeed) / (this.getAdultAge() + 1);
-	        
-	        
-	        if (this.getDinoAge() <= this.getAdultAge())
-	        {
+    @Override
+    public boolean doesFlock() {
+        return false;
+    }
 
-	            this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(Math.round(this.baseHealth + (healthStep * this.getDinoAge())));
-	            this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(Math.round(this.baseDamage + (attackStep * this.getDinoAge())));
-	            this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(this.baseSpeed + (speedStep * this.getDinoAge()));
+    @Override
+    public Item getOrderItem() {
+        return Items.stick;
+    }
 
-	            if (this.isTeen())
-	            {
-	                this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.5D);
-	            }
-	            else if (this.isAdult())
-	            {
-	                this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(2.0D);
-	            }
-	            else
-	            {
-	                this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.0D);
-	            }
-	        }
-	}
+    public void updateSize() {
+        double healthStep;
+        double attackStep;
+        double speedStep;
+        healthStep = (this.maxHealth - this.baseHealth) / (this.getAdultAge() + 1);
+        attackStep = (this.maxDamage - this.baseDamage) / (this.getAdultAge() + 1);
+        speedStep = (this.maxSpeed - this.baseSpeed) / (this.getAdultAge() + 1);
 
-	@Override
-	public int getAdultAge() {
-		return 5;
-	}
-	
-	public boolean interact(EntityPlayer player)
-	{
-		super.interact(player);
-		ItemStack itemstack = player.inventory.getCurrentItem();
-			if(itemstack != null){
-				if(itemstack.getItem() != null){
-					if(itemstack.getItem() == Items.melon_seeds){
-						System.out.println("lel");
-						if(this.getFat() < 10){
-							this.setFat(this.getFat() + 1);
-							this.worldObj.playSoundAtEntity(this, "random.eat",
-									this.getSoundVolume(), this.getSoundPitch());
-						}else{
-							if(!this.worldObj.isRemote)
-							this.worldObj.createExplosion(this, this.posX, this.posY, this.posZ, 2, true);
-							this.setDinoAge(1);
-							this.setFat(0);
-						}
-					}
-				}
-			}
-		return super.interact(player);
-	}
 
-    public boolean allowLeashing()
-    {
+        if (this.getDinoAge() <= this.getAdultAge()) {
+
+            this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(Math.round(this.baseHealth + (healthStep * this.getDinoAge())));
+            this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(Math.round(this.baseDamage + (attackStep * this.getDinoAge())));
+            this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(this.baseSpeed + (speedStep * this.getDinoAge()));
+
+            if (this.isTeen()) {
+                this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.5D);
+            } else if (this.isAdult()) {
+                this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(2.0D);
+            } else {
+                this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.0D);
+            }
+        }
+    }
+
+    @Override
+    public int getAdultAge() {
+        return 5;
+    }
+
+    public boolean interact(EntityPlayer player) {
+        super.interact(player);
+        ItemStack itemstack = player.inventory.getCurrentItem();
+        if (itemstack != null) {
+            if (itemstack.getItem() != null) {
+                if (itemstack.getItem() == Items.melon_seeds) {
+                    System.out.println("lel");
+                    if (this.getFat() < 10) {
+                        this.setFat(this.getFat() + 1);
+                        this.worldObj.playSoundAtEntity(this, "random.eat",
+                                this.getSoundVolume(), this.getSoundPitch());
+                    } else {
+                        if (!this.worldObj.isRemote)
+                            this.worldObj.createExplosion(this, this.posX, this.posY, this.posZ, 2, true);
+                        this.setDinoAge(1);
+                        this.setFat(0);
+                    }
+                }
+            }
+        }
+        return super.interact(player);
+    }
+
+    public boolean allowLeashing() {
         return true;
     }
-    
-	@Override
-	public void onLivingUpdate(){
-		super.onLivingUpdate();
-		if(this.getFat() > 5){
-			this.motionY += 0.1D;
-			if(this.posY > 200){
-				if(!this.worldObj.isRemote)
-				this.worldObj.createExplosion(this, this.posX, this.posY, this.posZ, 2, true);
-				this.setDinoAge(1);
-				this.setFat(0);
-			}
-		}
-	}
-	
-	protected String getLivingSound()
-    {
+
+    @Override
+    public void onLivingUpdate() {
+        super.onLivingUpdate();
+        if (this.getFat() > 5) {
+            this.motionY += 0.1D;
+            if (this.posY > 200) {
+                if (!this.worldObj.isRemote)
+                    this.worldObj.createExplosion(this, this.posX, this.posY, this.posZ, 2, true);
+                this.setDinoAge(1);
+                this.setFat(0);
+            }
+        }
+    }
+
+    protected String getLivingSound() {
         return "fossil:dodo_living";
     }
-	
-	protected String getHurtSound()
-    {
+
+    protected String getHurtSound() {
         return "fossil:dodo_hurt";
     }
-	
-	protected String getDeathSound()
-    {
+
+    protected String getDeathSound() {
         return "fossil:dodo_death";
     }
 

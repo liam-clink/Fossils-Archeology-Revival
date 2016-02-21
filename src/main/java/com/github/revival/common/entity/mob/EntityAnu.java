@@ -1,41 +1,5 @@
 package com.github.revival.common.entity.mob;
 
-import java.util.List;
-
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.IEntityLivingData;
-import net.minecraft.entity.IRangedAttackMob;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.boss.IBossDisplayData;
-import net.minecraft.entity.monster.EntityBlaze;
-import net.minecraft.entity.monster.EntityGhast;
-import net.minecraft.entity.monster.EntityGolem;
-import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.monster.EntitySkeleton;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.projectile.EntityArrow;
-import net.minecraft.entity.projectile.EntityLargeFireball;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.ChunkCoordinates;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.StatCollector;
-import net.minecraft.util.Vec3;
-import net.minecraft.world.World;
-
 import com.github.revival.Revival;
 import com.github.revival.common.entity.EntityFAPlayer;
 import com.github.revival.common.entity.EntityMLighting;
@@ -45,10 +9,25 @@ import com.github.revival.common.entity.ai.AnuAIAvoidEntity;
 import com.github.revival.common.gen.feature.WorldGenSpikesBlock;
 import com.github.revival.common.handler.FossilAchievementHandler;
 import com.github.revival.common.item.FAItemRegistry;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.*;
+import net.minecraft.entity.boss.IBossDisplayData;
+import net.minecraft.entity.monster.*;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.projectile.EntityArrow;
+import net.minecraft.entity.projectile.EntityLargeFireball;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemSword;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.*;
+import net.minecraft.world.World;
+
+import java.util.List;
 
 
-public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAttackMob
-{
+public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAttackMob {
 
     public int allHealth = 600;
     public int middleHealth = 400;
@@ -62,8 +41,7 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
     private AnuAIArrowAttack aiArrowAttack = new AnuAIArrowAttack(this, 1.0D, 20, 60, 15.0F);
     private ChunkCoordinates currentTarget;
 
-    public EntityAnu(World world)
-    {
+    public EntityAnu(World world) {
         super(world);
         this.setSize(1F, 1.8F);
         this.getNavigator().setBreakDoors(true);
@@ -82,75 +60,56 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
         this.experienceValue = 50;
     }
 
-    public void setFlying(boolean state)
-    {
+    public void setFlying(boolean state) {
         isFlying = state;
     }
 
-    public boolean isAIEnabled()
-    {
+    public boolean isAIEnabled() {
         return true;
     }
 
-    protected void applyEntityAttributes()
-    {
+    protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(40.0D);
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(1D);
         this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.35D);
     }
 
-    protected String getLivingSound()
-    {
-        if (this.getAttackMode() == 0)
-        {
+    protected String getLivingSound() {
+        if (this.getAttackMode() == 0) {
             return "fossil:anu_living_healthy";
-        }
-        else if (this.getAttackMode() == 1)
-        {
+        } else if (this.getAttackMode() == 1) {
             return "fossil:anu_living_middle";
         }
         return "fossil:anu_living_middle";
     }
 
-    protected String getHurtSound()
-    {
+    protected String getHurtSound() {
         return "random.break";
     }
 
-    protected String getDeathSound()
-    {
+    protected String getDeathSound() {
         return "mob.irongolem.death";
     }
 
-    public boolean attackEntityFrom(DamageSource damageSource, float var2)
-    {
+    public boolean attackEntityFrom(DamageSource damageSource, float var2) {
         Entity targetEntity = damageSource.getEntity();
 
         AxisAlignedBB chatDistance = this.boundingBox.expand(30.0D, 30.0D, 30.0D);
         List playerList = this.worldObj.getEntitiesWithinAABB(EntityPlayer.class, chatDistance);
 
-        if (targetEntity instanceof EntityGhast)
-        {
+        if (targetEntity instanceof EntityGhast) {
             return false;
-        }
-        else
-        {
-            if (targetEntity instanceof EntityPlayer)
-            {
+        } else {
+            if (targetEntity instanceof EntityPlayer) {
 
-                if (this.getRNG().nextInt(10) == 0)
-                {
-                    if (var2 != 0)
-                    {
+                if (this.getRNG().nextInt(10) == 0) {
+                    if (var2 != 0) {
                         ItemStack itemstack = ((EntityPlayer) targetEntity).inventory.getCurrentItem();
 
-                        if (itemstack != null)
-                        {
-                            if (itemstack.getItem() != null)
-                            {
-                                if (itemstack.getItem() == FAItemRegistry.ancientSword)
-                                {
+                        if (itemstack != null) {
+                            if (itemstack.getItem() != null) {
+                                if (itemstack.getItem() == FAItemRegistry.ancientSword) {
 
                                     if (!this.worldObj.isRemote)
                                         Revival.showMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " +
@@ -160,8 +119,7 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
                                 }
 
 
-                                if (itemstack.getItem() != FAItemRegistry.ancientSword && itemstack.getItem() instanceof ItemSword)
-                                {
+                                if (itemstack.getItem() != FAItemRegistry.ancientSword && itemstack.getItem() instanceof ItemSword) {
 
                                     if (!this.worldObj.isRemote)
                                         Revival.showMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " +
@@ -170,16 +128,13 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
                                     return super.attackEntityFrom(damageSource, var2);
                                 }
 
-                                if (damageSource.damageType == "arrow")
-                                {
+                                if (damageSource.damageType == "arrow") {
                                     if (!this.worldObj.isRemote)
                                         Revival.showMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " +
                                                 StatCollector.translateToLocal("anuSpeaker.coward"), (EntityPlayer) targetEntity);
 
                                     return super.attackEntityFrom(damageSource, var2);
-                                }
-                                else
-                                {
+                                } else {
 
                                 }
                             }
@@ -192,31 +147,23 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
         return super.attackEntityFrom(damageSource, var2);
     }
 
-    public void updateAITasks()
-    {
-        if (this.getAttackMode() == 2 || this.getAttackMode() == 1)
-        {
-            if (this.ticksExisted % 20 == 0)
-            {
+    public void updateAITasks() {
+        if (this.getAttackMode() == 2 || this.getAttackMode() == 1) {
+            if (this.ticksExisted % 20 == 0) {
                 this.heal(2.0F);
             }
         }
         super.updateAITasks();
     }
 
-    protected Entity findPlayerToAttack()
-    {
+    protected Entity findPlayerToAttack() {
         EntityPlayer entityplayer = this.worldObj.getClosestVulnerablePlayerToEntity(this, 16.0D);
 
-        if (entityplayer != null && this.canEntityBeSeen(entityplayer))
-        {
-            if (this.getRNG().nextInt(1) == 0)
-            {
+        if (entityplayer != null && this.canEntityBeSeen(entityplayer)) {
+            if (this.getRNG().nextInt(1) == 0) {
                 Revival.showMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " +
                         StatCollector.translateToLocal("anuSpeaker.hello"), (EntityPlayer) entityplayer);
-            }
-            else
-            {
+            } else {
                 Revival.showMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " +
                         StatCollector.translateToLocal("anuSpeaker.fewBeaten"), (EntityPlayer) entityplayer);
             }
@@ -228,22 +175,20 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
         return null;
     }
 
-    public void onDeath(DamageSource dmg){
-        if (dmg.getSourceOfDamage() instanceof EntityArrow || dmg.getEntity() instanceof EntityPlayer){
+    public void onDeath(DamageSource dmg) {
+        if (dmg.getSourceOfDamage() instanceof EntityArrow || dmg.getEntity() instanceof EntityPlayer) {
             EntityPlayer entityplayer = (EntityPlayer) dmg.getEntity();
-        	onKillEntity(entityplayer);
+            onKillEntity(entityplayer);
 
             double d0 = entityplayer.posX - this.posX;
             double d1 = entityplayer.posZ - this.posZ;
 
-            if (d0 * d0 + d1 * d1 >= 2500.0D)
-            {
+            if (d0 * d0 + d1 * d1 >= 2500.0D) {
                 entityplayer.triggerAchievement(FossilAchievementHandler.anuDead);
             }
         }
         EntityAnuDead entity = new EntityAnuDead(this.worldObj);
-        if (!this.worldObj.isRemote)
-        {
+        if (!this.worldObj.isRemote) {
             entity.setLocationAndAngles(this.posX + this.getRNG().nextInt(4), this.posY, this.posZ + this.getRNG().nextInt(4), this.rotationYaw, this.rotationPitch);
             this.worldObj.spawnEntityInWorld(entity);
         }
@@ -257,145 +202,112 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
     /**
      * Called when the mob is falling. Calculates and applies fall damage.
      */
-    protected void fall(float i)
-    {
+    protected void fall(float i) {
     }
 
     /**
      * Takes in the distance the entity has fallen this tick and whether its on the ground to update the fall distance
      * and deal fall damage if landing on the ground.  Args: distanceFallenThisTick, onGround
      */
-    protected void updateFallState(double x, boolean y)
-    {
+    protected void updateFallState(double x, boolean y) {
     }
 
 
-    public boolean attackEntityAsMob(Entity entity)
-    {
-        if (this.getRNG().nextInt(4) == 0)
-        {
+    public boolean attackEntityAsMob(Entity entity) {
+        if (this.getRNG().nextInt(4) == 0) {
             this.worldObj.addWeatherEffect(new EntityMLighting(this.worldObj, entity.posX, entity.posY, entity.posZ));
         }
         return super.attackEntityAsMob(entity);
     }
 
-    public void spawnMobs(EntityLiving entity)
-    {
-        if (!this.worldObj.isRemote)
-        {
+    public void spawnMobs(EntityLiving entity) {
+        if (!this.worldObj.isRemote) {
             entity.setLocationAndAngles(this.posX + this.getRNG().nextInt(4), this.posY, this.posZ + this.getRNG().nextInt(4), this.rotationYaw, this.rotationPitch);
             this.worldObj.spawnEntityInWorld(entity);
-            if (entity instanceof EntitySkeleton)
-            {
+            if (entity instanceof EntitySkeleton) {
                 ((EntitySkeleton) entity).setSkeletonType(1);
                 ((EntitySkeleton) entity).setCurrentItemOrArmor(0, new ItemStack(Items.bow));
 
             }
-            if (entity instanceof EntitySentryPigman)
-            {
+            if (entity instanceof EntitySentryPigman) {
                 ((EntitySentryPigman) entity).setCurrentItemOrArmor(0, new ItemStack(Items.iron_sword));
             }
 
         }
     }
 
-    protected void dropFewItems(boolean par1, int par2)
-    {
+    protected void dropFewItems(boolean par1, int par2) {
         this.dropItem(FAItemRegistry.ancientKey, 1);
     }
 
-    public void onLivingUpdate()
-    {
-        if (songCounter < songLength)
-        {
+    public void onLivingUpdate() {
+        if (songCounter < songLength) {
             songCounter++;
         }
-        if (songCounter == songLength - 1)
-        {
+        if (songCounter == songLength - 1) {
             songCounter = 0;
         }
-        if (songCounter == 1)
-        {
+        if (songCounter == 1) {
             Revival.proxy.playSound("fossil:music.anu");
         }
-        if (this.isDead)
-        {
+        if (this.isDead) {
             Revival.proxy.stopSound();
         }
-        if (this.attackingPlayer != null)
-        {
-            if (this.attackingPlayer.isDead)
-            {
+        if (this.attackingPlayer != null) {
+            if (this.attackingPlayer.isDead) {
                 Revival.proxy.stopSound();
             }
         }
         super.onLivingUpdate();
-        if (this.getAttackMode() == 1 && !this.onGround && this.motionY < 0.0D)
-        {
+        if (this.getAttackMode() == 1 && !this.onGround && this.motionY < 0.0D) {
             this.motionY *= 0.6D;
         }
-        if (this.getAttackMode() == 1)
-        {
-            if (!worldObj.isRemote)
-            {
+        if (this.getAttackMode() == 1) {
+            if (!worldObj.isRemote) {
                 setFlying(true);
-                if (!this.checkGround())
-                {
+                if (!this.checkGround()) {
                     flyAround();
+                } else {
                 }
-                else
-                {
-                }
-                if (getEntityToAttack() != null)
-                {
+                if (getEntityToAttack() != null) {
                     currentTarget = new ChunkCoordinates((int) getEntityToAttack().posX + rand.nextInt(20) - rand.nextInt(10), (int) ((int) getEntityToAttack().posY + getEntityToAttack().getEyeHeight()) + rand.nextInt(20) - rand.nextInt(10), (int) getEntityToAttack().posZ + rand.nextInt(40) - rand.nextInt(10));
                     setFlying(false);
                     flyTowardsTarget();
                 }
             }
         }
-        if (this.getHealth() < middleHealth && this.getAttackMode() != 1)
-        {
+        if (this.getHealth() < middleHealth && this.getAttackMode() != 1) {
             this.setAttackMode(1);
         }
-        if (this.getHealth() < finalHealth && this.getAttackMode() != 2)
-        {
+        if (this.getHealth() < finalHealth && this.getAttackMode() != 2) {
             this.setAttackMode(2);
 
         }
-        if (this.getAttackMode() == 1)
-        {
+        if (this.getAttackMode() == 1) {
 
-            for (int i = 0; i < 2; ++i)
-            {
+            for (int i = 0; i < 2; ++i) {
                 this.worldObj.spawnParticle("smoke", this.posX + (this.rand.nextDouble() - 0.5D) * (double) this.width, this.posY + this.rand.nextDouble() * (double) this.height, this.posZ + (this.rand.nextDouble() - 0.5D) * (double) this.width, 0.0D, 0.0D, 0.0D);
             }
         }
-        if (this.getAttackMode() == 2)
-        {
-            for (int i = 0; i < 2; ++i)
-            {
+        if (this.getAttackMode() == 2) {
+            for (int i = 0; i < 2; ++i) {
                 this.worldObj.spawnParticle("dripLava", this.posX + (this.rand.nextDouble() - 0.5D) * (double) this.width, this.posY + this.rand.nextDouble() * (double) this.height, this.posZ + (this.rand.nextDouble() - 0.5D) * (double) this.width, 0.0D, 0.0D, 0.0D);
             }
         }
-        if (this.getAttackMode() == 2)
-        {
+        if (this.getAttackMode() == 2) {
             int spikechoice = this.getRNG().nextInt(250);
             int defensechoice = this.getRNG().nextInt(500);
             int spawnPigmenChoice = this.getRNG().nextInt(250);
             int spawnWitherChoice = this.getRNG().nextInt(350);
             int spawnBlazeChoice = this.getRNG().nextInt(300);
 
-            if (spikechoice == 0)
-            {
+            if (spikechoice == 0) {
                 this.playSound("dig.stone", 1, 1);
                 new WorldGenSpikesBlock().generate(worldObj, this.getRNG(), (int) this.posX, (int) this.posY, (int) this.posZ);
             }
-            if (defensechoice == 0)
-            {
+            if (defensechoice == 0) {
                 this.playSound("dig.stone", 1, 1);
-                if (!worldObj.isRemote)
-                {
+                if (!worldObj.isRemote) {
                     this.generateDefenseHutP1((int) this.posX, (int) this.posY, (int) this.posZ);
                     this.generateDefenseHutP2((int) this.posX, (int) this.posY, (int) this.posZ);
                     this.generateDefenseHutP2((int) this.posX, (int) this.posY + 1, (int) this.posZ);
@@ -403,22 +315,19 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
                     this.generateDefenseHutP1((int) this.posX, (int) this.posY + 4, (int) this.posZ);
                 }
             }
-            if (spawnPigmenChoice == 0)
-            {
+            if (spawnPigmenChoice == 0) {
                 Revival.showMessage(
                         StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " +
                                 StatCollector.translateToLocal("anuSpeaker.trans"), this.worldObj.getClosestPlayerToEntity(this, 50));
                 this.spawnMobs(new EntitySentryPigman(worldObj));
             }
-            if (spawnWitherChoice == 0)
-            {
+            if (spawnWitherChoice == 0) {
                 this.spawnMobs(new EntitySkeleton(worldObj));
                 Revival.showMessage(
                         StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " +
                                 StatCollector.translateToLocal("anuSpeaker.archers"), this.worldObj.getClosestPlayerToEntity(this, 50));
             }
-            if (spawnBlazeChoice == 0)
-            {
+            if (spawnBlazeChoice == 0) {
                 this.spawnMobs(new EntityBlaze(worldObj));
                 Revival.showMessage(
                         StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " +
@@ -427,10 +336,8 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
         }
     }
 
-    public void flyTowardsTarget()
-    {
-        if (currentTarget != null)
-        {
+    public void flyTowardsTarget() {
+        if (currentTarget != null) {
             double targetX = currentTarget.posX + 0.5D - posX;
             double targetY = currentTarget.posY + 1D - posY;
             double targetZ = currentTarget.posZ + 0.5D - posZ;
@@ -446,8 +353,7 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
 
     }
 
-    public void flyAround()
-    {
+    public void flyAround() {
         if (currentTarget != null)
             if (!worldObj.isAirBlock(currentTarget.posX, currentTarget.posY,
                     currentTarget.posZ) || currentTarget.posY < 1)
@@ -465,8 +371,7 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
     }
 
 
-    private void generateDefenseHutP2(int x, int y, int z)
-    {
+    private void generateDefenseHutP2(int x, int y, int z) {
         this.worldObj.setBlock(x - 3, y, z, Blocks.obsidian);
         this.worldObj.setBlock(x - 3, y, z + 1, Blocks.obsidian);
         this.worldObj.setBlock(x - 3, y, z + 2, Blocks.obsidian);
@@ -489,8 +394,7 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
         this.worldObj.setBlock(x - 2, y, z - 3, Blocks.obsidian);
     }
 
-    private void generateDefenseHutP1(int x, int y, int z)
-    {
+    private void generateDefenseHutP1(int x, int y, int z) {
         this.worldObj.setBlock(x, y - 1, z, Blocks.obsidian);
         this.worldObj.setBlock(x + 1, y - 1, z, Blocks.obsidian);
         this.worldObj.setBlock(x + 2, y - 1, z, Blocks.obsidian);
@@ -520,46 +424,33 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
     }
 
 
-    public boolean checkGround()
-    {
-        if (!this.onGround)
-        {
-            if (this.worldObj.isAirBlock((int) this.posX, (int) this.posY - 1, (int) this.posZ))
-            {
+    public boolean checkGround() {
+        if (!this.onGround) {
+            if (this.worldObj.isAirBlock((int) this.posX, (int) this.posY - 1, (int) this.posZ)) {
                 return true;
-            }
-            else
-            {
+            } else {
                 return false;
             }
-        }
-        else
-        {
+        } else {
             return false;
         }
     }
 
-    public ItemStack getHeldItem()
-    {
+    public ItemStack getHeldItem() {
         return new ItemStack(FAItemRegistry.ancientSword);
     }
 
-    public void initializeMob()
-    {
+    public void initializeMob() {
         this.setAttackMode(0);
         this.setCurrentItemOrArmor(0, new ItemStack(FAItemRegistry.ancientSword));
         this.enchantEquipment();
         EntityPlayer entityplayer = this.worldObj.getClosestPlayer(posX, posY, posZ, 100F);
 
-        if (entityplayer != null)
-        {
-            if (this.getRNG().nextInt(1) == 0)
-            {
+        if (entityplayer != null) {
+            if (this.getRNG().nextInt(1) == 0) {
                 Revival.showMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " +
                         StatCollector.translateToLocal("anuSpeaker.hello"), (EntityPlayer) entityplayer);
-            }
-            else
-            {
+            } else {
                 Revival.showMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " +
                         StatCollector.translateToLocal("anuSpeaker.fewBeaten"), (EntityPlayer) entityplayer);
             }
@@ -567,22 +458,19 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
     }
 
     //0 == melee, 1 == flight/ranged, 2 == defense
-    public int getAttackMode()
-    {
+    public int getAttackMode() {
         return this.dataWatcher.getWatchableObjectByte(19);
     }
 
     //0 == melee, 1 == flight/ranged, 2 == defense
-    public void setAttackMode(int i)
-    {
+    public void setAttackMode(int i) {
         this.dataWatcher.updateObject(19, Byte.valueOf((byte) i));
     }
 
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
-    public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
-    {
+    public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {
         super.writeEntityToNBT(par1NBTTagCompound);
         par1NBTTagCompound.setInteger("AttackMode", this.getAttackMode());
     }
@@ -590,33 +478,28 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
-    public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
-    {
+    public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {
         super.readEntityFromNBT(par1NBTTagCompound);
         this.setAttackMode(par1NBTTagCompound.getInteger("AttackMode"));
     }
 
-    protected void entityInit()
-    {
+    protected void entityInit() {
         super.entityInit();
         this.dataWatcher.addObject(19, Byte.valueOf((byte) 0));
     }
 
-    protected boolean canDespawn()
-    {
+    protected boolean canDespawn() {
         return false;
     }
 
-    public IEntityLivingData onSpawnWithEgg(IEntityLivingData par1EntityLivingData)
-    {
+    public IEntityLivingData onSpawnWithEgg(IEntityLivingData par1EntityLivingData) {
         par1EntityLivingData = super.onSpawnWithEgg(par1EntityLivingData);
         this.initializeMob();
         return par1EntityLivingData;
     }
 
     @Override
-    public void attackEntityWithRangedAttack(EntityLivingBase entity, float y)
-    {
+    public void attackEntityWithRangedAttack(EntityLivingBase entity, float y) {
         double d5 = entity.posX - this.posX;
         double d6 = entity.boundingBox.minY + (double) (entity.height / 2.0F) - (this.posY + (double) (this.height / 2.0F));
         double d7 = entity.posZ - this.posZ;
@@ -632,10 +515,10 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
     }
 
     public void onKillEntity(EntityLivingBase entity) {
-    	if(entity instanceof EntityPlayer){
-    		EntityPlayer player = (EntityPlayer)entity;
-    		EntityFAPlayer.get(player).setKilledAnu(true);
-    	}
+        if (entity instanceof EntityPlayer) {
+            EntityPlayer player = (EntityPlayer) entity;
+            EntityFAPlayer.get(player).setKilledAnu(true);
+        }
     }
 
 }

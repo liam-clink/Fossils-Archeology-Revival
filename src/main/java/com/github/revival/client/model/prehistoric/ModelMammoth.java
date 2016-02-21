@@ -1,15 +1,13 @@
 package com.github.revival.client.model.prehistoric;
 
+import com.github.revival.client.model.prehistoric.test.ModelNewPrehistoric;
+import com.github.revival.common.entity.mob.test.EntityNewPrehistoric;
 import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelRenderer;
 import net.ilexiconn.llibrary.common.animation.Animator;
 import net.ilexiconn.llibrary.common.animation.IAnimated;
 import net.minecraft.entity.Entity;
 
-import com.github.revival.client.model.prehistoric.test.ModelNewPrehistoric;
-import com.github.revival.common.entity.mob.test.EntityNewPrehistoric;
-
-public class ModelMammoth extends ModelNewPrehistoric
-{
+public class ModelMammoth extends ModelNewPrehistoric {
     public MowzieModelRenderer leftFrontLeg;
     public MowzieModelRenderer rightFrontLeg;
     public MowzieModelRenderer rightHindLeg;
@@ -39,7 +37,7 @@ public class ModelMammoth extends ModelNewPrehistoric
     public MowzieModelRenderer TuskL3;
     public MowzieModelRenderer TuskR2;
     public MowzieModelRenderer TuskR3;
-	private Animator animator;
+    private Animator animator;
 
     public ModelMammoth() {
         this.textureWidth = 128;
@@ -183,59 +181,59 @@ public class ModelMammoth extends ModelNewPrehistoric
         this.head.addChild(this.headHump);
         this.head.addChild(this.EarL);
         this.setInitPose();
-		animator = new Animator(this);
+        animator = new Animator(this);
     }
 
     @Override
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) { 
-		animate((IAnimated)entity, f, f1, f2, f3, f4, f5);
+    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+        animate((IAnimated) entity, f, f1, f2, f3, f4, f5);
         this.leftFrontLeg.render(f5);
         this.rightFrontLeg.render(f5);
         this.rightHindLeg.render(f5);
         this.middleBody.render(f5);
         this.leftHindLeg.render(f5);
     }
-    
-    public void animate(IAnimated entity, float f, float f1, float f2, float f3, float f4, float f5) {
-		animator.update(entity);
-		this.setToInitPose();
-		setRotationAngles(f, f1, f2, f3, f4, f5, (Entity)entity);
-	}
 
-	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
-		MowzieModelRenderer[] tailParts = {this.Tail};
-		MowzieModelRenderer[] neckParts = {this.neck, this.head};
-		MowzieModelRenderer[] trunkParts = {this.nose2, this.nose3, this.nose4};
-		this.faceTarget(head, 1, f3, f4);
-		float speed = 0.1F;
-		float speed2 = 1.1F;
-		float sitProgress = ((EntityNewPrehistoric)(entity)).sitProgress;
-		this.chainWave(tailParts, speed, 0.05F, -3, entity.ticksExisted, 1);
-		this.chainSwing(tailParts, speed, 0.15F, -2, entity.ticksExisted, 1);
-		this.chainWave(neckParts, speed, 0.15F, 3, entity.ticksExisted, 1);
-		this.chainWave(trunkParts, speed, 0.15F, 3, entity.ticksExisted, 1);
-		this.chainSwing(trunkParts, speed, 0.15F, -1, entity.ticksExisted, 1);
-		this.bob(middleBody, speed, 0.3F, false, entity.ticksExisted, 1);
-		this.walk(lowerBody, speed, 0.05F, true, 0F, 0F, entity.ticksExisted, 1);
-		this.walk(upperBody, speed, 0.05F, true, 0F, 0F, entity.ticksExisted, 1);
-		this.walk(leftFrontLeg, speed2, 0.8F, true, 0F, -0.4F, f, f1);
-		this.walk(rightFrontLeg, speed2, 0.8F, false, 0F, -0.4F, f, f1);
-		this.walk(leftHindLeg, speed2, 0.8F, false, 0F, 0.4F, f, f1);
-		this.walk(rightHindLeg, speed2, 0.8F, true, 0F, 0.4F, f, f1);
-        sitAnimationRotation(Tail, sitProgress, (float)Math.toRadians(20.87D), 0, 0);
-        sitAnimationRotation(EarR, sitProgress, (float)Math.toRadians(5.0D), -((float)Math.toRadians(30.0D)), 0);
-        sitAnimationRotation(neck, sitProgress, -((float)Math.toRadians(13.04D)), 0, 0);
-        sitAnimationRotation(upperBody, sitProgress, (float)Math.toRadians(15.65D), 0, 0);
-        sitAnimationRotation(head, sitProgress, (float)Math.toRadians(33.91D), 0, 0);
-        sitAnimationRotation(upperBodyFur, sitProgress, -((float)Math.toRadians(2.0D)), 0, 0);
-        sitAnimationRotation(lowerBody, sitProgress, -((float)Math.toRadians(2.61D)), 0, 0);
-        sitAnimationRotation(lowerBodyFur, sitProgress, (float)Math.toRadians(13.04D), 0, 0);
-        sitAnimationRotation(EarL, sitProgress, (float)Math.toRadians(5.0D), (float)Math.toRadians(30.0D), 0);
-        sitAnimationRotation(bottomjaw, sitProgress, -((float)Math.toRadians(77.3D)), 0, 0);
-        sitAnimationRotation(middleBody, sitProgress, -((float)Math.toRadians(26.09D)), 0, 0);
+    public void animate(IAnimated entity, float f, float f1, float f2, float f3, float f4, float f5) {
+        animator.update(entity);
+        this.setToInitPose();
+        setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
+    }
+
+    public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
+        MowzieModelRenderer[] tailParts = {this.Tail};
+        MowzieModelRenderer[] neckParts = {this.neck, this.head};
+        MowzieModelRenderer[] trunkParts = {this.nose2, this.nose3, this.nose4};
+        this.faceTarget(head, 1, f3, f4);
+        float speed = 0.1F;
+        float speed2 = 1.1F;
+        float sitProgress = ((EntityNewPrehistoric) (entity)).sitProgress;
+        this.chainWave(tailParts, speed, 0.05F, -3, entity.ticksExisted, 1);
+        this.chainSwing(tailParts, speed, 0.15F, -2, entity.ticksExisted, 1);
+        this.chainWave(neckParts, speed, 0.15F, 3, entity.ticksExisted, 1);
+        this.chainWave(trunkParts, speed, 0.15F, 3, entity.ticksExisted, 1);
+        this.chainSwing(trunkParts, speed, 0.15F, -1, entity.ticksExisted, 1);
+        this.bob(middleBody, speed, 0.3F, false, entity.ticksExisted, 1);
+        this.walk(lowerBody, speed, 0.05F, true, 0F, 0F, entity.ticksExisted, 1);
+        this.walk(upperBody, speed, 0.05F, true, 0F, 0F, entity.ticksExisted, 1);
+        this.walk(leftFrontLeg, speed2, 0.8F, true, 0F, -0.4F, f, f1);
+        this.walk(rightFrontLeg, speed2, 0.8F, false, 0F, -0.4F, f, f1);
+        this.walk(leftHindLeg, speed2, 0.8F, false, 0F, 0.4F, f, f1);
+        this.walk(rightHindLeg, speed2, 0.8F, true, 0F, 0.4F, f, f1);
+        sitAnimationRotation(Tail, sitProgress, (float) Math.toRadians(20.87D), 0, 0);
+        sitAnimationRotation(EarR, sitProgress, (float) Math.toRadians(5.0D), -((float) Math.toRadians(30.0D)), 0);
+        sitAnimationRotation(neck, sitProgress, -((float) Math.toRadians(13.04D)), 0, 0);
+        sitAnimationRotation(upperBody, sitProgress, (float) Math.toRadians(15.65D), 0, 0);
+        sitAnimationRotation(head, sitProgress, (float) Math.toRadians(33.91D), 0, 0);
+        sitAnimationRotation(upperBodyFur, sitProgress, -((float) Math.toRadians(2.0D)), 0, 0);
+        sitAnimationRotation(lowerBody, sitProgress, -((float) Math.toRadians(2.61D)), 0, 0);
+        sitAnimationRotation(lowerBodyFur, sitProgress, (float) Math.toRadians(13.04D), 0, 0);
+        sitAnimationRotation(EarL, sitProgress, (float) Math.toRadians(5.0D), (float) Math.toRadians(30.0D), 0);
+        sitAnimationRotation(bottomjaw, sitProgress, -((float) Math.toRadians(77.3D)), 0, 0);
+        sitAnimationRotation(middleBody, sitProgress, -((float) Math.toRadians(26.09D)), 0, 0);
         sitAnimationPos(middleBody, sitProgress, 0, 1.1F, 0);
         sitAnimationPos(leftHindLeg, sitProgress, 0, 0, -3);
         sitAnimationPos(rightHindLeg, sitProgress, 0, 0, -3);
 
-	}
+    }
 }

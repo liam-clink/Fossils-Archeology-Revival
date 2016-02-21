@@ -1,15 +1,10 @@
 package com.github.revival.client.model.prehistoric.alternate;
 
-import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelRenderer;
-import net.minecraft.entity.Entity;
-import net.minecraft.util.MathHelper;
-
 import com.github.revival.client.model.base.ModelPrehistoric;
-import com.github.revival.common.entity.mob.EntityDinosaur;
 import com.github.revival.common.entity.mob.test.EntityNewPrehistoric;
+import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelRenderer;
 
-public class ModelFlyingPteranodon extends ModelPrehistoric
-{
+public class ModelFlyingPteranodon extends ModelPrehistoric {
     public MowzieModelRenderer Leg;
     public MowzieModelRenderer Leg2;
     public MowzieModelRenderer WingR1;
@@ -32,8 +27,7 @@ public class ModelFlyingPteranodon extends ModelPrehistoric
     public MowzieModelRenderer HandL;
     public MowzieModelRenderer WingL2;
 
-    public ModelFlyingPteranodon()
-    {
+    public ModelFlyingPteranodon() {
         this.textureWidth = 128;
         this.textureHeight = 64;
         this.Head = new MowzieModelRenderer(this, 0, 55);
@@ -138,23 +132,23 @@ public class ModelFlyingPteranodon extends ModelPrehistoric
 
     }
 
-	@Override
-	public void renderFossil(EntityNewPrehistoric entity, float f, float f1,
-			float f2, float f3, float f4, float f5) {
-		
-	}
+    @Override
+    public void renderFossil(EntityNewPrehistoric entity, float f, float f1,
+                             float f2, float f3, float f4, float f5) {
 
-	@Override
-	public void renderLiving(EntityNewPrehistoric entity, float f, float f1,
-			float f2, float f3, float f4, float f5) {
-		
-	}
+    }
 
-	@Override
-	public void renderSleeping(EntityNewPrehistoric entity, float f, float f1,
-			float f2, float f3, float f4, float f5) {
-		
-	}
+    @Override
+    public void renderLiving(EntityNewPrehistoric entity, float f, float f1,
+                             float f2, float f3, float f4, float f5) {
+
+    }
+
+    @Override
+    public void renderSleeping(EntityNewPrehistoric entity, float f, float f1,
+                               float f2, float f3, float f4, float f5) {
+
+    }
 
 /*
     private void setRotationAngles(Entity entity, float f, float f1, float f2, float f3, float f4, float f5, boolean modelized)

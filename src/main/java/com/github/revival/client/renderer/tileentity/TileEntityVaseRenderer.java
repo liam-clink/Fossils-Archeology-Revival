@@ -14,8 +14,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
-public class TileEntityVaseRenderer extends TileEntitySpecialRenderer
-{
+public class TileEntityVaseRenderer extends TileEntitySpecialRenderer {
     // volute textures
     private static final ResourceLocation damaged_volute = new ResourceLocation("fossil:textures/blocks/vases/vase_damaged_volute.png");
     private static final ResourceLocation restored_volute = new ResourceLocation("fossil:textures/blocks/vases/vase_restored_volute.png");
@@ -41,16 +40,14 @@ public class TileEntityVaseRenderer extends TileEntitySpecialRenderer
     private ModelBase proxyVase;
 
     // also gets model of our block
-    public TileEntityVaseRenderer()
-    {
+    public TileEntityVaseRenderer() {
         this.modelVolute = new ModelVaseVolute();
         this.modelAmphora = new ModelVaseAmphora();
         this.modelKylix = new ModelVaseKylix();
     }
 
     // renders tileentity in world
-    public void renderTileEntityFigurineAt(TileEntityVase te, double x, double y, double z, float scale)
-    {
+    public void renderTileEntityFigurineAt(TileEntityVase te, double x, double y, double z, float scale) {
         // push matrix tells the renderer to start doing something
         GL11.glPushMatrix();
         // this sets the initial location
@@ -64,24 +61,20 @@ public class TileEntityVaseRenderer extends TileEntitySpecialRenderer
     }
 
     // rotates block
-    private void rotateBlock(World world, int x, int y, int z, Block block, int meta, int vaseType)
-    {
-        if (world != null)
-        {
+    private void rotateBlock(World world, int x, int y, int z, Block block, int meta, int vaseType) {
+        if (world != null) {
             int dir = world.getBlockMetadata(x, y, z);
             GL11.glPushMatrix();
             // this line rotates renderer
             GL11.glRotatef(dir * (90), 0F, 1F, 0F);
             GL11.glScalef(1F, 1F, 1F);
 
-            switch (vaseType)
-            {
+            switch (vaseType) {
                 case 0:
                 default:
                     this.proxyVase = this.modelVolute;
                     // gets the texture for model
-                    switch (meta)
-                    {
+                    switch (meta) {
                         case 0:
                         default:
                             this.bindTexture(damaged_volute);
@@ -108,8 +101,7 @@ public class TileEntityVaseRenderer extends TileEntitySpecialRenderer
                 case 1:
                     this.proxyVase = this.modelAmphora;
                     // gets the texture for model
-                    switch (meta)
-                    {
+                    switch (meta) {
                         case 0:
                         default:
                             this.bindTexture(damaged_amphora);
@@ -136,8 +128,7 @@ public class TileEntityVaseRenderer extends TileEntitySpecialRenderer
                 case 2:
                     this.proxyVase = this.modelKylix;
                     // gets the texture for model
-                    switch (meta)
-                    {
+                    switch (meta) {
                         case 0:
                         default:
                             this.bindTexture(damaged_kylix);
@@ -162,14 +153,12 @@ public class TileEntityVaseRenderer extends TileEntitySpecialRenderer
                     }
                     break;
             }
-            
+
 
             // renders the model
             //this.model.render((Entity) null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
             GL11.glPopMatrix();
-        }
-        else
-        {
+        } else {
             GL11.glPushMatrix();
             GL11.glRotatef(0F, 0F, 1F, 0F);
             FMLClientHandler.instance().getClient().renderEngine.bindTexture(damaged_volute);
@@ -180,8 +169,7 @@ public class TileEntityVaseRenderer extends TileEntitySpecialRenderer
 
     @Override
     public void renderTileEntityAt(TileEntity tileentity, double d0, double d1,
-                                   double d2, float f)
-    {
+                                   double d2, float f) {
         this.renderTileEntityFigurineAt((TileEntityVase) tileentity, d0, d1, d2, f);
     }
 }

@@ -7,19 +7,16 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-public abstract class EntitySwimmingDino extends EntityDinosaur
-{
+public abstract class EntitySwimmingDino extends EntityDinosaur {
     public Random rand;
 
-    public EntitySwimmingDino(World world, EnumPrehistoric dinotype)
-    {
+    public EntitySwimmingDino(World world, EnumPrehistoric dinotype) {
         super(world, dinotype);
-        
+
         this.rand = new Random();
     }
 
-    public boolean canBreatheUnderwater()
-    {
+    public boolean canBreatheUnderwater() {
         return true;
     }
 
@@ -27,32 +24,25 @@ public abstract class EntitySwimmingDino extends EntityDinosaur
      * Moves the entity based on the specified heading.  Args: strafe, forward
      */
     @Override
-    public void moveEntityWithHeading(float par1, float par2)
-    {
+    public void moveEntityWithHeading(float par1, float par2) {
         double d0;
 
-        if (this.isInWater())
-        {
+        if (this.isInWater()) {
             this.moveFlying(par1, par2, 0.02F);
             this.moveEntity(this.motionX, this.motionY, this.motionZ);
             this.motionX *= 0.900000011920929D;
             this.motionY *= 0.900000011920929D;
             this.motionZ *= 0.900000011920929D;
-        }
-        else if (this.handleLavaMovement())
-        {
+        } else if (this.handleLavaMovement()) {
             this.moveFlying(par1, par2, 0.02F);
             this.moveEntity(this.motionX, this.motionY, this.motionZ);
             this.motionX *= 0.5D;
             this.motionY *= 0.5D;
             this.motionZ *= 0.5D;
-        }
-        else
-        {
+        } else {
             float f2 = 0.91F;
 
-            if (this.onGround)
-            {
+            if (this.onGround) {
                 f2 = this.worldObj.getBlock(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.boundingBox.minY) - 1, MathHelper.floor_double(this.posZ)).slipperiness * 0.91F;
 
             }
@@ -60,36 +50,29 @@ public abstract class EntitySwimmingDino extends EntityDinosaur
             float f3 = 0.16277136F / (f2 * f2 * f2);
             float f4;
 
-            if (this.onGround)
-            {
+            if (this.onGround) {
                 f4 = this.getAIMoveSpeed() * f3;
-            }
-            else
-            {
+            } else {
                 f4 = this.jumpMovementFactor;
             }
 
             this.moveFlying(par1, par2, f4);
             f2 = 0.91F;
 
-            if (this.onGround)
-            {
+            if (this.onGround) {
                 f2 = this.worldObj.getBlock(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.boundingBox.minY) - 1, MathHelper.floor_double(this.posZ)).slipperiness * 0.91F;
 
             }
 
 
             this.moveEntity(this.motionX, this.motionY, this.motionZ);
-            
-            if (this.isInsideOfMaterial(Material.water))
-            {
+
+            if (this.isInsideOfMaterial(Material.water)) {
                 this.motionY = 0.0D;
                 this.motionX *= (double) f2;
                 this.motionY *= (double) f2;
                 this.motionZ *= (double) f2;
-            }
-            else
-            {
+            } else {
                 this.motionY -= 0.08D;
                 this.motionY *= 0.9800000190734863D;
                 this.motionX *= (double) f2;
@@ -102,8 +85,7 @@ public abstract class EntitySwimmingDino extends EntityDinosaur
         double d1 = this.posZ - this.prevPosZ;
         float f6 = MathHelper.sqrt_double(d0 * d0 + d1 * d1) * 4.0F;
 
-        if (f6 > 1.0F)
-        {
+        if (f6 > 1.0F) {
             f6 = 1.0F;
         }
 
@@ -116,8 +98,7 @@ public abstract class EntitySwimmingDino extends EntityDinosaur
      * returns true if this entity is by a ladder, false otherwise
      */
     @Override
-    public boolean isOnLadder()
-    {
+    public boolean isOnLadder() {
         return false;
     }
 }

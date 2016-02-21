@@ -16,10 +16,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
-public class EntitySentryPigman extends EntityMob
-{
-    public EntitySentryPigman(World p_i1741_1_)
-    {
+public class EntitySentryPigman extends EntityMob {
+    public EntitySentryPigman(World p_i1741_1_) {
         super(p_i1741_1_);
         this.isImmuneToFire = true;
         this.getNavigator().setAvoidsWater(true);
@@ -37,8 +35,7 @@ public class EntitySentryPigman extends EntityMob
 
     }
 
-    protected void entityInit()
-    {
+    protected void entityInit() {
         super.entityInit();
         this.dataWatcher.addObject(13, new Byte((byte) 0));
     }
@@ -46,13 +43,11 @@ public class EntitySentryPigman extends EntityMob
     /**
      * Returns true if the newer Entity AI code should be run
      */
-    public boolean isAIEnabled()
-    {
+    public boolean isAIEnabled() {
         return true;
     }
 
-    protected void applyEntityAttributes()
-    {
+    protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.25D);
     }
@@ -60,49 +55,42 @@ public class EntitySentryPigman extends EntityMob
     /**
      * Returns the sound this mob makes while it's alive.
      */
-    protected String getLivingSound()
-    {
+    protected String getLivingSound() {
         return "mob.zombiepig.zpigangry";
     }
 
     /**
      * Returns the sound this mob makes when it is hurt.
      */
-    protected String getHurtSound()
-    {
+    protected String getHurtSound() {
         return "mob.zombiepig.zpighurt";
     }
 
     /**
      * Returns the sound this mob makes on death.
      */
-    protected String getDeathSound()
-    {
+    protected String getDeathSound() {
         return "mob.zombiepig.zpigdeath";
     }
 
-    protected void func_145780_a(int p_145780_1_, int p_145780_2_, int p_145780_3_, Block p_145780_4_)
-    {
+    protected void func_145780_a(int p_145780_1_, int p_145780_2_, int p_145780_3_, Block p_145780_4_) {
         this.playSound("mob.zombie.step", 0.15F, 1.0F);
     }
 
     /**
      * Get this Entity's EnumCreatureAttribute
      */
-    public EnumCreatureAttribute getCreatureAttribute()
-    {
+    public EnumCreatureAttribute getCreatureAttribute() {
         return EnumCreatureAttribute.UNDEAD;
     }
 
     /**
      * Handles updating while being ridden by an entity
      */
-    public void updateRidden()
-    {
+    public void updateRidden() {
         super.updateRidden();
 
-        if (this.ridingEntity instanceof EntityCreature)
-        {
+        if (this.ridingEntity instanceof EntityCreature) {
             EntityCreature entitycreature = (EntityCreature) this.ridingEntity;
             this.renderYawOffset = entitycreature.renderYawOffset;
         }
@@ -113,45 +101,39 @@ public class EntitySentryPigman extends EntityMob
      * Drop 0-2 items of this living's type. @param par1 - Whether this entity has recently been hit by a player. @param
      * par2 - Level of Looting used to kill this mob.
      */
-    protected void dropFewItems(boolean p_70628_1_, int p_70628_2_)
-    {
+    protected void dropFewItems(boolean p_70628_1_, int p_70628_2_) {
         int j;
         int k;
 
 
         j = this.rand.nextInt(3 + p_70628_2_);
 
-        for (k = 0; k < j; ++k)
-        {
+        for (k = 0; k < j; ++k) {
             this.dropItem(Items.gold_ingot, 1);
         }
-        
+
 
         j = this.rand.nextInt(3 + p_70628_2_);
 
-        for (k = 0; k < j; ++k)
-        {
+        for (k = 0; k < j; ++k) {
             this.dropItem(Items.rotten_flesh, 1);
         }
     }
 
-    protected void dropRareDrop(int p_70600_1_)
-    {
+    protected void dropRareDrop(int p_70600_1_) {
         this.entityDropItem(new ItemStack(Blocks.gold_block, 1, 1), 0.0F);
     }
 
     /**
      * Makes entity wear random armor based on difficulty
      */
-    protected void addRandomArmor()
-    {
+    protected void addRandomArmor() {
         super.addRandomArmor();
         this.setCurrentItemOrArmor(0, new ItemStack(Items.iron_sword));
     }
 
 
-    public void readEntityFromNBT(NBTTagCompound p_70037_1_)
-    {
+    public void readEntityFromNBT(NBTTagCompound p_70037_1_) {
         super.readEntityFromNBT(p_70037_1_);
     }
 

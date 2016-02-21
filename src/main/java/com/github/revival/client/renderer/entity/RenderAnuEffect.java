@@ -17,34 +17,29 @@ import org.lwjgl.opengl.GL11;
 import java.util.Random;
 
 @SideOnly(Side.CLIENT)
-public class RenderAnuEffect extends RenderLiving
-{
+public class RenderAnuEffect extends RenderLiving {
     private static final ResourceLocation explodingTexture = new ResourceLocation("fossil:textures/blocks/anuTotemExploding.png");
     private static final ResourceLocation texture = new ResourceLocation("fossil:textures/blocks/anuTotem.png");
     protected ModelAnuTotem modelAnuTotem;
 
-    public RenderAnuEffect()
-    {
+    public RenderAnuEffect() {
         super(new ModelAnuTotem(), 0.3F);
         this.modelAnuTotem = (ModelAnuTotem) this.mainModel;
         this.setRenderPassModel(this.mainModel);
     }
 
-    protected void rotateCorpse(EntityAnuEffect entity, float x, float y, float z)
-    {
+    protected void rotateCorpse(EntityAnuEffect entity, float x, float y, float z) {
         float f3 = 0;
         float f4 = 0;
         GL11.glRotatef(-f3, 0.0F, 1.0F, 0.0F);
         GL11.glRotatef(f4 * 10.0F, 1.0F, 0.0F, 0.0F);
         GL11.glTranslatef(0.0F, 0.0F, 1.0F);
 
-        if (entity.deathTime > 0)
-        {
+        if (entity.deathTime > 0) {
             float f5 = ((float) entity.deathTime + z - 1.0F) / 20.0F * 1.6F;
             f5 = MathHelper.sqrt_float(f5);
 
-            if (f5 > 1.0F)
-            {
+            if (f5 > 1.0F) {
                 f5 = 1.0F;
             }
 
@@ -55,42 +50,35 @@ public class RenderAnuEffect extends RenderLiving
     /**
      * Renders the model in RenderLiving
      */
-    protected void renderModel(EntityAnuEffect entity, float x, float y, float z, float i, float j, float u)
-    {
+    protected void renderModel(EntityAnuEffect entity, float x, float y, float z, float i, float j, float u) {
         int i1 = 0;
-        if (entity.worldObj != null)
-        {
+        if (entity.worldObj != null) {
             i1 = entity.getAnuRotation();
         }
         short short1 = 0;
-        if (i1 == 2)
-        {
+        if (i1 == 2) {
             GL11.glTranslatef(0, 0, -1);
             short1 = 360;
         }
 
-        if (i1 == 3)
-        {
+        if (i1 == 3) {
             GL11.glTranslatef(0, 0, -1);
             short1 = 180;
         }
 
-        if (i1 == 4)
-        {
+        if (i1 == 4) {
             GL11.glTranslatef(0, 0, -1);
             short1 = 90;
         }
 
-        if (i1 == 5)
-        {
+        if (i1 == 5) {
             GL11.glTranslatef(0, 0, -1);
             short1 = -90;
         }
 
         GL11.glRotatef(-1 * short1, 0.0F, 1.0F, 0.0F);
         GL11.glPushMatrix();
-        if (entity.deathTicks > 0)
-        {
+        if (entity.deathTicks > 0) {
             float f6 = (float) entity.deathTicks / 200.0F;
             GL11.glDepthFunc(GL11.GL_LEQUAL);
             GL11.glEnable(GL11.GL_ALPHA_TEST);
@@ -104,8 +92,7 @@ public class RenderAnuEffect extends RenderLiving
 
         this.bindEntityTexture(entity);
         this.mainModel.render(entity, x, y, z, i, j, u);
-        if (entity.hurtTime > 0)
-        {
+        if (entity.hurtTime > 0) {
 
             GL11.glDepthFunc(GL11.GL_EQUAL);
             GL11.glDisable(GL11.GL_TEXTURE_2D);
@@ -123,24 +110,20 @@ public class RenderAnuEffect extends RenderLiving
     }
 
 
-    protected ResourceLocation getEntityTexture(EntityAnuEffect entity)
-    {
+    protected ResourceLocation getEntityTexture(EntityAnuEffect entity) {
         return texture;
     }
 
-    protected void renderEquippedItems(EntityAnuEffect entity, float i1)
-    {
+    protected void renderEquippedItems(EntityAnuEffect entity, float i1) {
         super.renderEquippedItems(entity, i1);
         Tessellator tessellator = Tessellator.instance;
 
-        if (entity.deathTicks > 0)
-        {
+        if (entity.deathTicks > 0) {
             RenderHelper.disableStandardItemLighting();
             float f1 = ((float) entity.deathTicks + i1) / 200.0F;
             float f2 = 0.0F;
 
-            if (f1 > 0.8F)
-            {
+            if (f1 > 0.8F) {
                 f2 = (f1 - 0.8F) / 0.2F;
             }
 
@@ -155,8 +138,7 @@ public class RenderAnuEffect extends RenderLiving
             GL11.glPushMatrix();
             GL11.glTranslatef(0, 0.5F, 0);
 
-            for (int i = 0; (float) i < (f1 + f1 * f1) / 2.0F * 60.0F; ++i)
-            {
+            for (int i = 0; (float) i < (f1 + f1 * f1) / 2.0F * 60.0F; ++i) {
                 GL11.glRotatef(random.nextFloat() * 360.0F, 1.0F, 0.0F, 0.0F);
                 GL11.glRotatef(random.nextFloat() * 360.0F, 0.0F, 1.0F, 0.0F);
                 GL11.glRotatef(random.nextFloat() * 360.0F, 0.0F, 0.0F, 1.0F);
@@ -191,19 +173,14 @@ public class RenderAnuEffect extends RenderLiving
     /**
      * Queries whether should render the specified pass or not.
      */
-    protected int shouldRenderPass(EntityAnuEffect entity, int x, float i)
-    {
-        if (x == 1)
-        {
+    protected int shouldRenderPass(EntityAnuEffect entity, int x, float i) {
+        if (x == 1) {
             GL11.glDepthFunc(GL11.GL_LEQUAL);
         }
 
-        if (x != 0)
-        {
+        if (x != 0) {
             return -1;
-        }
-        else
-        {
+        } else {
             GL11.glEnable(GL11.GL_BLEND);
             GL11.glDisable(GL11.GL_ALPHA_TEST);
             GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE);
@@ -222,34 +199,29 @@ public class RenderAnuEffect extends RenderLiving
     /**
      * Queries whether should render the specified pass or not.
      */
-    protected int shouldRenderPass(EntityLivingBase entity, int x, float i)
-    {
+    protected int shouldRenderPass(EntityLivingBase entity, int x, float i) {
         return this.shouldRenderPass((EntityAnuEffect) entity, x, i);
     }
 
-    protected void renderEquippedItems(EntityLivingBase entity, float i1)
-    {
+    protected void renderEquippedItems(EntityLivingBase entity, float i1) {
         this.renderEquippedItems((EntityAnuEffect) entity, i1);
     }
 
-    protected void rotateCorpse(EntityLivingBase entity, float x, float y, float z)
-    {
+    protected void rotateCorpse(EntityLivingBase entity, float x, float y, float z) {
         this.rotateCorpse((EntityAnuEffect) entity, x, y, z);
     }
 
     /**
      * Renders the model in RenderLiving
      */
-    protected void renderModel(EntityLivingBase entity, float x, float y, float z, float i, float j, float u)
-    {
+    protected void renderModel(EntityLivingBase entity, float x, float y, float z, float i, float j, float u) {
         this.renderModel((EntityAnuEffect) entity, x, y, z, i, j, u);
     }
 
     /**
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
-    protected ResourceLocation getEntityTexture(Entity entity)
-    {
+    protected ResourceLocation getEntityTexture(Entity entity) {
         return this.getEntityTexture((EntityAnuEffect) entity);
     }
 
@@ -259,8 +231,7 @@ public class RenderAnuEffect extends RenderLiving
      * (Render<T extends Entity) and this method has signature public void func_76986_a(T entity, double d, double d1,
      * double d2, float f, float f1). But JAD is pre 1.5 so doesn't do that.
      */
-    public void doRender(Entity entity, double x, double y, double z, float i, float j)
-    {
+    public void doRender(Entity entity, double x, double y, double z, float i, float j) {
         this.doRender((EntityAnuEffect) entity, x, y, z, i, j);
     }
 }

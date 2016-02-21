@@ -12,10 +12,8 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class BlockIcedStone extends Block
-{
-    public BlockIcedStone()
-    {
+public class BlockIcedStone extends Block {
+    public BlockIcedStone() {
         super(Material.rock);
         this.setHarvestLevel("pickaxe", 1);
         setHardness(1.5F);
@@ -28,30 +26,24 @@ public class BlockIcedStone extends Block
     /**
      * Returns the ID of the items to drop on destruction.
      */
-    public Item getItemDropped(int var1, Random var2, int var3)
-    {
+    public Item getItemDropped(int var1, Random var2, int var3) {
         return Item.getItemFromBlock(Blocks.cobblestone);
     }
 
     /**
      * Ticks the block if it's been scheduled
      */
-    public void updateTick(World var1, int var2, int var3, int var4, Random var5)
-    {
-        if (var1.getSavedLightValue(EnumSkyBlock.Block, var2, var3, var4) <= 11 - this.lightOpacity && (!var1.canBlockSeeTheSky(var2, var3 + 1, var4) || !var1.isDaytime()))
-        {
+    public void updateTick(World var1, int var2, int var3, int var4, Random var5) {
+        if (var1.getSavedLightValue(EnumSkyBlock.Block, var2, var3, var4) <= 11 - this.lightOpacity && (!var1.canBlockSeeTheSky(var2, var3 + 1, var4) || !var1.isDaytime())) {
             int var6 = 0;
 
-            while (var6 < 20)
-            {
+            while (var6 < 20) {
                 int var7 = (new Random()).nextInt(3) - 1;
                 int var8 = (new Random()).nextInt(3) - 1;
                 int var9 = (new Random()).nextInt(3) - 1;
 
-                if (var1.getBlock(var2 + var7, var3 + var8, var4 + var9) != Blocks.flowing_water && var1.getBlock(var2 + var7, var3 + var8, var4 + var9) != Blocks.water)
-                {
-                    if (var1.getBlock(var2 + var7, var3 + var8, var4 + var9) != Blocks.flowing_lava && var1.getBlock(var2 + var7, var3 + var8, var4 + var9) != Blocks.lava && var1.getBlock(var2 + var7, var3 + var8, var4 + var9) != Blocks.fire)
-                    {
+                if (var1.getBlock(var2 + var7, var3 + var8, var4 + var9) != Blocks.flowing_water && var1.getBlock(var2 + var7, var3 + var8, var4 + var9) != Blocks.water) {
+                    if (var1.getBlock(var2 + var7, var3 + var8, var4 + var9) != Blocks.flowing_lava && var1.getBlock(var2 + var7, var3 + var8, var4 + var9) != Blocks.lava && var1.getBlock(var2 + var7, var3 + var8, var4 + var9) != Blocks.fire) {
                         ++var6;
                         continue;
                     }
@@ -63,9 +55,7 @@ public class BlockIcedStone extends Block
                 var1.setBlock(var2 + var7, var3 + var8, var4 + var9, Blocks.ice);
                 return;
             }
-        }
-        else
-        {
+        } else {
             var1.setBlock(var2, var3, var4, Blocks.stone);
         }
     }
@@ -74,32 +64,23 @@ public class BlockIcedStone extends Block
      * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
      * their own) Args: x, y, z, neighbor blockID
      */
-    public void onNeighborBlockChange(World var1, int var2, int var3, int var4, int var5)
-    {
-        if (var1.getSavedLightValue(EnumSkyBlock.Block, var2, var3, var4) <= 11 - this.lightOpacity && (!var1.canBlockSeeTheSky(var2, var3 + 1, var4) || !var1.isDaytime()))
-        {
-            for (int var6 = -1; var6 <= 1; ++var6)
-            {
-                for (int var7 = -1; var7 <= 1; ++var7)
-                {
-                    for (int var8 = -1; var8 <= 1; ++var8)
-                    {
-                        if (var1.getBlock(var2 + var6, var3 + var7, var4 + var8) == Blocks.flowing_water || var1.getBlock(var2 + var6, var3 + var7, var4 + var8) == Blocks.water)
-                        {
+    public void onNeighborBlockChange(World var1, int var2, int var3, int var4, int var5) {
+        if (var1.getSavedLightValue(EnumSkyBlock.Block, var2, var3, var4) <= 11 - this.lightOpacity && (!var1.canBlockSeeTheSky(var2, var3 + 1, var4) || !var1.isDaytime())) {
+            for (int var6 = -1; var6 <= 1; ++var6) {
+                for (int var7 = -1; var7 <= 1; ++var7) {
+                    for (int var8 = -1; var8 <= 1; ++var8) {
+                        if (var1.getBlock(var2 + var6, var3 + var7, var4 + var8) == Blocks.flowing_water || var1.getBlock(var2 + var6, var3 + var7, var4 + var8) == Blocks.water) {
                             var1.setBlock(var2 + var6, var3 + var7, var4 + var8, Blocks.ice);
                         }
 
-                        if (var1.getBlock(var2 + var6, var3 + var7, var4 + var8) == Blocks.flowing_lava || var1.getBlock(var2 + var6, var3 + var7, var4 + var8) == Blocks.lava || var1.getBlock(var2 + var6, var3 + var7, var4 + var8) == Blocks.fire)
-                        {
+                        if (var1.getBlock(var2 + var6, var3 + var7, var4 + var8) == Blocks.flowing_lava || var1.getBlock(var2 + var6, var3 + var7, var4 + var8) == Blocks.lava || var1.getBlock(var2 + var6, var3 + var7, var4 + var8) == Blocks.fire) {
                             var1.setBlock(var2, var3, var4, Blocks.stone);
                             return;
                         }
                     }
                 }
             }
-        }
-        else
-        {
+        } else {
             var1.setBlock(var2, var3, var4, Blocks.stone);
         }
     }
@@ -116,8 +97,7 @@ public class BlockIcedStone extends Block
      * When this method is called, your block should register all the icons it needs with the given IconRegister. This
      * is the only chance you get to register icons.
      */
-    public void registerBlockIcons(IIconRegister par1IconRegister)
-    {
+    public void registerBlockIcons(IIconRegister par1IconRegister) {
         this.blockIcon = par1IconRegister.registerIcon("fossil:Iced_Stone");
     }
 }

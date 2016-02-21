@@ -4,8 +4,7 @@ import com.github.revival.common.item.FAItemRegistry;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 
-public enum EnumDinoFoodItem
-{
+public enum EnumDinoFoodItem {
     Wheat(Items.wheat, 13, 2), //Veggie Foods
     Melon(Items.melon, 10, 2),
     Apple(Items.apple, 20, 3),
@@ -25,7 +24,7 @@ public enum EnumDinoFoodItem
      * TODO: Change FoodValue so things higher up on the food chain are worth less in FoodValue,
 	 * but maybe trade off with higher HealValue and vice versa.
 	 */
-    
+
     FishRaw(Items.fish, 30, 4),//this MUST BE the first carnivore food!
     FishCooked(Items.cooked_fished, 45, 6),
     BeefCooked(Items.cooked_beef, 60, 6),
@@ -75,8 +74,7 @@ public enum EnumDinoFoodItem
     public int FoodValue;
     public int HealValue;
 
-    private EnumDinoFoodItem(Item item0, int Food, int Heal)
-    {
+    private EnumDinoFoodItem(Item item0, int Food, int Heal) {
         this.item = item0;
         this.FoodValue = Food;
         this.HealValue = Heal;
@@ -85,8 +83,7 @@ public enum EnumDinoFoodItem
     /**
      * Takes the itemid and tells if its herbivore, carnivore or no food
      */
-    public static int foodtype(Item i0)
-    {
+    public static int foodtype(Item i0) {
         for (int i = 0; i < EnumDinoFoodItem.values().length; i++) //check all entries
         {
             if (EnumDinoFoodItem.values()[i].item == i0) //found it in the list
@@ -106,21 +103,17 @@ public enum EnumDinoFoodItem
     /**
      * Takes the itemid and gives the food value
      */
-    public static int getItemFood(Item i0)
-    {
-        for (int i = 0; i < EnumDinoFoodItem.values().length; i++)
-        {
-            if (EnumDinoFoodItem.values()[i].item == i0)
-            {
+    public static int getItemFood(Item i0) {
+        for (int i = 0; i < EnumDinoFoodItem.values().length; i++) {
+            if (EnumDinoFoodItem.values()[i].item == i0) {
                 return EnumDinoFoodItem.values()[i].FoodValue;
             }
         }
 
         return 0;
     }
-    
-    public static void carnivoreItemPreset(EnumPrehistoric dinoType)
-    {
+
+    public static void carnivoreItemPreset(EnumPrehistoric dinoType) {
         dinoType.FoodItemList.addItem(BeefCooked);
         dinoType.FoodItemList.addItem(BeefRaw);
         dinoType.FoodItemList.addItem(ChickenCooked);
@@ -154,9 +147,8 @@ public enum EnumDinoFoodItem
         dinoType.FoodItemList.addItem(ConfuciornisCooked);
 
     }
-    
-    public static void raptorItemPreset(EnumPrehistoric dinoType)
-    {
+
+    public static void raptorItemPreset(EnumPrehistoric dinoType) {
         dinoType.FoodItemList.addItem(TerrorBirdEgg);
         dinoType.FoodItemList.addItem(DodoEgg);
         dinoType.FoodItemList.addItem(Egg);

@@ -3,8 +3,7 @@ package com.github.revival.client.model;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 
-public class ModelEmbryoPlant extends ModelBase
-{
+public class ModelEmbryoPlant extends ModelBase {
     //fields
     ModelRenderer Shape1;
     ModelRenderer Shape2;
@@ -12,8 +11,7 @@ public class ModelEmbryoPlant extends ModelBase
     ModelRenderer Shape4;
     ModelRenderer Shape5;
 
-    public ModelEmbryoPlant()
-    {
+    public ModelEmbryoPlant() {
         textureWidth = 64;
         textureHeight = 32;
 
@@ -49,8 +47,7 @@ public class ModelEmbryoPlant extends ModelBase
         setRotation(Shape5, -0.4886922F, 0F, 0F);
     }
 
-    public void render(float f5)
-    {
+    public void render(float f5) {
         Shape1.render(f5);
         Shape2.render(f5);
         Shape3.render(f5);
@@ -58,8 +55,7 @@ public class ModelEmbryoPlant extends ModelBase
         Shape4.render(f5);
     }
 
-    private void setRotation(ModelRenderer model, float x, float y, float z)
-    {
+    private void setRotation(ModelRenderer model, float x, float y, float z) {
         model.rotateAngleX = x;
         model.rotateAngleY = y;
         model.rotateAngleZ = z;

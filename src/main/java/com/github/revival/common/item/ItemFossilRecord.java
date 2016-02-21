@@ -8,8 +8,7 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.ItemRecord;
 import net.minecraft.util.ResourceLocation;
 
-public class ItemFossilRecord extends ItemRecord
-{
+public class ItemFossilRecord extends ItemRecord {
 
     /**
      * The name of the record.
@@ -17,8 +16,7 @@ public class ItemFossilRecord extends ItemRecord
     public final String recordName;
     public final String texture;
 
-    public ItemFossilRecord(String string, String texture)
-    {
+    public ItemFossilRecord(String string, String texture) {
         super(string);
         this.recordName = string;
         this.maxStackSize = 1;
@@ -27,19 +25,17 @@ public class ItemFossilRecord extends ItemRecord
     }
 
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IIconRegister reg)
-    {
+    public void registerIcons(IIconRegister reg) {
         this.itemIcon = reg.registerIcon(texture);
     }
-    
+
     /**
      * Retrieves the resource location of the sound to play for this record.
      *
      * @param name The name of the record to play
      * @return The resource location for the audio, null to use default.
      */
-    public ResourceLocation getRecordResource(String name)
-    {
+    public ResourceLocation getRecordResource(String name) {
         return new ResourceLocation(Revival.MODID + ":" + this.recordName);
     }
 

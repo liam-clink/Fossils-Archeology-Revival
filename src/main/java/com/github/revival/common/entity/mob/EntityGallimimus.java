@@ -1,93 +1,46 @@
 package com.github.revival.common.entity.mob;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
-import io.netty.buffer.ByteBuf;
-import net.ilexiconn.llibrary.client.model.modelbase.ChainBuffer;
-import net.minecraft.command.IEntitySelector;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityAgeable;
-import net.minecraft.entity.EntityCreature;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
-import net.minecraft.entity.ai.EntityAIAvoidEntity;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILeapAtTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.ai.RandomPositionGenerator;
-import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ChunkCoordinates;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.Vec3;
-import net.minecraft.world.World;
-
 import com.github.revival.Revival;
 import com.github.revival.common.config.FossilConfig;
-import com.github.revival.common.entity.ai.DinoAIEat;
-import com.github.revival.common.entity.ai.DinoAIFollowOwner;
-import com.github.revival.common.entity.ai.DinoAIRideGround;
-import com.github.revival.common.entity.ai.DinoAIWander;
-import com.github.revival.common.entity.mob.test.DinoAIFlock;
 import com.github.revival.common.entity.mob.test.EntityNewPrehistoric;
-import com.github.revival.common.entity.mob.test.Flock;
 import com.github.revival.common.enums.EnumPrehistoric;
-import com.github.revival.common.enums.EnumPrehistoricAI.Activity;
-import com.github.revival.common.enums.EnumPrehistoricAI.Attacking;
-import com.github.revival.common.enums.EnumPrehistoricAI.Climbing;
-import com.github.revival.common.enums.EnumPrehistoricAI.Following;
-import com.github.revival.common.enums.EnumPrehistoricAI.Jumping;
-import com.github.revival.common.enums.EnumPrehistoricAI.Moving;
-import com.github.revival.common.enums.EnumPrehistoricAI.Response;
-import com.github.revival.common.enums.EnumPrehistoricAI.Stalking;
-import com.github.revival.common.enums.EnumPrehistoricAI.Taming;
-import com.github.revival.common.enums.EnumPrehistoricAI.Untaming;
-import com.github.revival.common.enums.EnumPrehistoricAI.WaterAbility;
+import com.github.revival.common.enums.EnumPrehistoricAI.*;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.world.World;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
-public class EntityGallimimus extends EntityNewPrehistoric
-{
-	public static final double baseDamage = 1;
-	public static final double maxDamage = 3;
-	public static final double baseHealth = 8;
-	public static final double maxHealth = 40;
-	public static final double baseSpeed = 0.25D;
-	public static final double maxSpeed = 0.4D;
-	public Object tailbuffer = Revival.proxy.getChainBuffer(3);
+public class EntityGallimimus extends EntityNewPrehistoric {
+    public static final double baseDamage = 1;
+    public static final double maxDamage = 3;
+    public static final double baseHealth = 8;
+    public static final double maxHealth = 40;
+    public static final double baseSpeed = 0.25D;
+    public static final double maxSpeed = 0.4D;
+    public Object tailbuffer = Revival.proxy.getChainBuffer(3);
 
 
-	public EntityGallimimus(World world) {
-		super(world, EnumPrehistoric.Gallimimus);
+    public EntityGallimimus(World world) {
+        super(world, EnumPrehistoric.Gallimimus);
         this.setSize(1.1F, 2F);
-		this.hasFeatherToggle = true;
-		this.featherToggle = FossilConfig.featheredGallimimus;
-		minSize = 0.5F;
-		maxSize = 2.2F;
-		teenAge = 4;
-		developsResistance = true;
-		breaksBlocks = false;
-		favoriteFood = Items.carrot;
-	}
-	
-	@Override
-	protected void applyEntityAttributes()
-	{
-		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(baseSpeed);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(baseHealth);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(baseDamage);
-	}
-	
+        this.hasFeatherToggle = true;
+        this.featherToggle = FossilConfig.featheredGallimimus;
+        minSize = 0.5F;
+        maxSize = 2.2F;
+        teenAge = 4;
+        developsResistance = true;
+        breaksBlocks = false;
+        favoriteFood = Items.carrot;
+    }
+
+    @Override
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(baseSpeed);
+        getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(baseHealth);
+        getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(baseDamage);
+    }
+
 	/*public static final double baseHealth = EnumPrehistoric.Gallimimus.Health0;
 
 	//    final float PUSHDOWN_HARDNESS = 5.0F;
@@ -298,126 +251,120 @@ public class EntityGallimimus extends EntityNewPrehistoric
 		return baby;
 	}*/
 
-	@Override
-	public void setSpawnValues() {}
+    @Override
+    public void setSpawnValues() {
+    }
 
-	@Override
-	public Activity aiActivityType() {
-		return Activity.DURINAL;
-	}
+    @Override
+    public Activity aiActivityType() {
+        return Activity.DURINAL;
+    }
 
-	@Override
-	public Attacking aiAttackType() {
+    @Override
+    public Attacking aiAttackType() {
 
-		return Attacking.BASIC;
-	}
+        return Attacking.BASIC;
+    }
 
-	@Override
-	public Climbing aiClimbType() {
+    @Override
+    public Climbing aiClimbType() {
 
-		return Climbing.NONE;
-	}
+        return Climbing.NONE;
+    }
 
-	@Override
-	public Following aiFollowType() {
+    @Override
+    public Following aiFollowType() {
 
-		return Following.SKITTISH;
-	}
+        return Following.SKITTISH;
+    }
 
-	@Override
-	public Jumping aiJumpType() {
+    @Override
+    public Jumping aiJumpType() {
 
-		return Jumping.TWOBLOCKS;
-	}
+        return Jumping.TWOBLOCKS;
+    }
 
-	@Override
-	public Response aiResponseType() {
+    @Override
+    public Response aiResponseType() {
 
-		return Response.SCARED;
-	}
+        return Response.SCARED;
+    }
 
-	@Override
-	public Stalking aiStalkType() {
+    @Override
+    public Stalking aiStalkType() {
 
-		return Stalking.NONE;
-	}
+        return Stalking.NONE;
+    }
 
-	@Override
-	public Taming aiTameType() {
+    @Override
+    public Taming aiTameType() {
 
-		return Taming.FEEDING;
-	}
+        return Taming.FEEDING;
+    }
 
-	@Override
-	public Untaming aiUntameType() {
+    @Override
+    public Untaming aiUntameType() {
 
-		return Untaming.ATTACK;
-	}
+        return Untaming.ATTACK;
+    }
 
-	@Override
-	public Moving aiMovingType() {
+    @Override
+    public Moving aiMovingType() {
 
-		return Moving.WALK;
-	}
+        return Moving.WALK;
+    }
 
-	@Override
-	public WaterAbility aiWaterAbilityType() {
+    @Override
+    public WaterAbility aiWaterAbilityType() {
 
-		return WaterAbility.NONE;
-	}
+        return WaterAbility.NONE;
+    }
 
-	@Override
-	public boolean doesFlock() {
+    @Override
+    public boolean doesFlock() {
 
-		return true;
-	}
+        return true;
+    }
 
-	@Override
-	public Item getOrderItem() {
+    @Override
+    public Item getOrderItem() {
 
-		return Items.stick;
-	}
-	
-	public void onUpdate(){
-		super.onUpdate();
-		//Revival.proxy.doChainBuffer(tailbuffer, this);
-	}
+        return Items.stick;
+    }
 
-	public void updateSize()
-	{
-		 double healthStep;
-	        double attackStep;
-	        double speedStep;
-	        healthStep = (this.maxHealth - this.baseHealth) / (this.getAdultAge() + 1);
-	        attackStep = (this.maxDamage - this.baseDamage) / (this.getAdultAge() + 1);
-	        speedStep = (this.maxSpeed - this.baseSpeed) / (this.getAdultAge() + 1);
-	        
-	        
-	        if (this.getDinoAge() <= this.getAdultAge())
-	        {
+    public void onUpdate() {
+        super.onUpdate();
+        //Revival.proxy.doChainBuffer(tailbuffer, this);
+    }
 
-	            this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(Math.round(this.baseHealth + (healthStep * this.getDinoAge())));
-	            this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(Math.round(this.baseDamage + (attackStep * this.getDinoAge())));
-	            this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(this.baseSpeed + (speedStep * this.getDinoAge()));
+    public void updateSize() {
+        double healthStep;
+        double attackStep;
+        double speedStep;
+        healthStep = (this.maxHealth - this.baseHealth) / (this.getAdultAge() + 1);
+        attackStep = (this.maxDamage - this.baseDamage) / (this.getAdultAge() + 1);
+        speedStep = (this.maxSpeed - this.baseSpeed) / (this.getAdultAge() + 1);
 
-	            if (this.isTeen())
-	            {
-	                this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.5D);
-	            }
-	            else if (this.isAdult())
-	            {
-	                this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(2.0D);
-	            }
-	            else
-	            {
-	                this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.0D);
-	            }
-	        }
-	}
 
-	@Override
-	public int getAdultAge() {
-		return 10;
-	}
-	
+        if (this.getDinoAge() <= this.getAdultAge()) {
+
+            this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(Math.round(this.baseHealth + (healthStep * this.getDinoAge())));
+            this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(Math.round(this.baseDamage + (attackStep * this.getDinoAge())));
+            this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(this.baseSpeed + (speedStep * this.getDinoAge()));
+
+            if (this.isTeen()) {
+                this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.5D);
+            } else if (this.isAdult()) {
+                this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(2.0D);
+            } else {
+                this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.0D);
+            }
+        }
+    }
+
+    @Override
+    public int getAdultAge() {
+        return 10;
+    }
+
 }

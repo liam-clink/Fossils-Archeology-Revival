@@ -1,12 +1,10 @@
 package com.github.revival.client.model.prehistoric;
 
-import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelRenderer;
-
 import com.github.revival.client.model.base.ModelPrehistoric;
 import com.github.revival.common.entity.mob.test.EntityNewPrehistoric;
+import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelRenderer;
 
-public class ModelTerrorBird extends ModelPrehistoric
-{
+public class ModelTerrorBird extends ModelPrehistoric {
     //fields
     private MowzieModelRenderer Body;
     private MowzieModelRenderer RightThigh;
@@ -27,8 +25,7 @@ public class ModelTerrorBird extends ModelPrehistoric
     private MowzieModelRenderer headpivot;
     private MowzieModelRenderer headdummy;
 
-    public ModelTerrorBird()
-    {
+    public ModelTerrorBird() {
         textureWidth = 128;
         textureHeight = 64;
         setTextureOffset("Body.Body", 0, 0);
@@ -288,22 +285,22 @@ public class ModelTerrorBird extends ModelPrehistoric
     }
     */
 
-	@Override
-	public void renderFossil(EntityNewPrehistoric entity, float f, float f1,
-			float f2, float f3, float f4, float f5) {
-		
-	}
+    @Override
+    public void renderFossil(EntityNewPrehistoric entity, float f, float f1,
+                             float f2, float f3, float f4, float f5) {
 
-	@Override
-	public void renderLiving(EntityNewPrehistoric entity, float f, float f1,
-			float f2, float f3, float f4, float f5) {
-		
-	}
+    }
 
-	@Override
-	public void renderSleeping(EntityNewPrehistoric entity, float f, float f1,
-			float f2, float f3, float f4, float f5) {
-		
-	}
+    @Override
+    public void renderLiving(EntityNewPrehistoric entity, float f, float f1,
+                             float f2, float f3, float f4, float f5) {
+
+    }
+
+    @Override
+    public void renderSleeping(EntityNewPrehistoric entity, float f, float f1,
+                               float f2, float f3, float f4, float f5) {
+
+    }
 
 }

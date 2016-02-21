@@ -4,15 +4,13 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-public class ModelFailuresaurus extends ModelBase
-{
+public class ModelFailuresaurus extends ModelBase {
     public ModelRenderer noumenon1 = new ModelRenderer(this, 0, 1);
     public ModelRenderer noumenon2;
     public ModelRenderer noumenon3;
     public ModelRenderer hand1;
 
-    public ModelFailuresaurus()
-    {
+    public ModelFailuresaurus() {
         this.noumenon1.addBox(0.0F, 0.0F, 0.0F, 10, 1, 14, 0.0F);
         this.noumenon1.setRotationPoint(-5.0F, 23.0F, -7.0F);
         this.noumenon1.rotateAngleX = 0.0F;
@@ -45,8 +43,7 @@ public class ModelFailuresaurus extends ModelBase
     /**
      * Sets the models various rotation angles then renders the model.
      */
-    public void render(Entity var1, float var2, float var3, float var4, float var5, float var6, float var7)
-    {
+    public void render(Entity var1, float var2, float var3, float var4, float var5, float var6, float var7) {
         this.setRotationAngles(var2, var3, var4, var5, var6, var7, var1);
         this.noumenon1.render(var7);
         this.noumenon2.render(var7);

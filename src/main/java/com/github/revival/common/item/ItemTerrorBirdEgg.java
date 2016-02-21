@@ -17,80 +17,68 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-public class ItemTerrorBirdEgg extends Item
-{
+public class ItemTerrorBirdEgg extends Item {
     public static final String[] names = EntityTerrorBird.names;
     @SideOnly(Side.CLIENT)
     private IIcon[] icons;
     private boolean isCultivated;
-    
-    public ItemTerrorBirdEgg(boolean isCultivated)
-    {
+
+    public ItemTerrorBirdEgg(boolean isCultivated) {
         super();
         this.maxStackSize = 16;
         this.setCreativeTab(FATabRegistry.tabFItems);
         this.setHasSubtypes(true);
         this.isCultivated = isCultivated;
     }
-    
+
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IIconRegister iconregister)
-    {
+    public void registerIcons(IIconRegister iconregister) {
         icons = new IIcon[names.length];
 
-        for (int i = 0; i < icons.length; i++)
-        {
+        for (int i = 0; i < icons.length; i++) {
             icons[i] = iconregister.registerIcon(Revival.MODID + ":TerrorBird/" + "Egg_" + this.cultivatedPrefix() + names[i]);
         }
     }
-    
-    private String cultivatedPrefix()
-    {
+
+    private String cultivatedPrefix() {
         if (this.isCultivated)
             return "Cultivated_";
 
         return "";
 
     }
-    
-    public IIcon getIconFromDamage(int par1)
-    {
+
+    public IIcon getIconFromDamage(int par1) {
         return icons[par1];
     }
-    
+
     @SideOnly(Side.CLIENT)
     @Override
-    public void getSubItems(Item item, CreativeTabs creativeTab, List list)
-    {
-        for (int x = 0; x < (names.length); x++)
-        {
+    public void getSubItems(Item item, CreativeTabs creativeTab, List list) {
+        for (int x = 0; x < (names.length); x++) {
             list.add(new ItemStack(this, 1, x));
         }
     }
-    
-    public String getUnlocalizedName(ItemStack itemstack)
-    {
+
+    public String getUnlocalizedName(ItemStack itemstack) {
         int i = MathHelper.clamp_int(itemstack.getItemDamage(), 0, 15);
         return super.getUnlocalizedName() + "." + names[i];
     }
-    
+
     /**
      * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
      */
-    public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer player)
-    {
-        if (!player.capabilities.isCreativeMode)
-        {
+    public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer player) {
+        if (!player.capabilities.isCreativeMode) {
             --itemstack.stackSize;
         }
 
         world.playSoundAtEntity(player, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
 
-        if (!world.isRemote)
-        {
+        if (!world.isRemote) {
             Item item = player.inventory.getCurrentItem().getItem();
             int subitem = itemstack.getItemDamage();
-            
+
             world.spawnEntityInWorld(new EntityTerrorBirdEgg(world, player, subitem, isCultivated));
         }
 

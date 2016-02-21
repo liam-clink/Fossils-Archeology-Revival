@@ -9,8 +9,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
-public class GuiNotebook extends GuiScreen
-{
+public class GuiNotebook extends GuiScreen {
     private static final ResourceLocation notebook_background = new ResourceLocation("fossil:textures/gui/Arch_Notebook.png");
     public FossilGuiPage buttonNextPage;
     public FossilGuiPage buttonPreviousPage;
@@ -25,8 +24,7 @@ public class GuiNotebook extends GuiScreen
     private int bookImageWidth = 254;
     private int bookImageHeight = 188;
 
-    public void initGui()
-    {
+    public void initGui() {
         buttonList.clear();
         int var1 = (this.width - this.bookImageWidth) / 2;
         int var2 = (this.height - this.bookImageHeight) / 2;
@@ -36,8 +34,7 @@ public class GuiNotebook extends GuiScreen
         addButtonByPage(BookPages);
     }
 
-    public void addTextByPage(int page)
-    {
+    public void addTextByPage(int page) {
         int var1 = MathHelper.floor_float((this.width - this.bookImageWidth) / 2.2F);
         int var2 = MathHelper.floor_float((this.height - this.bookImageHeight) / 2.2F);
         int var3 = MathHelper.floor_float((this.width - this.bookImageWidth) / 2.0F + 10);
@@ -46,8 +43,7 @@ public class GuiNotebook extends GuiScreen
         GL11.glScalef(1.10F, 1.10F, 1.10F);
         GL11.glPopMatrix();
 
-        if (page == 1)
-        {
+        if (page == 1) {
             /*
             //TODO
             String[] dinoArrayLeft = PediaDinosaur.ankylosaurus_leftPage;
@@ -78,8 +74,7 @@ public class GuiNotebook extends GuiScreen
         GL11.glPopMatrix();
     }
 
-    public void addButtonByPage(int page)
-    {
+    public void addButtonByPage(int page) {
         int var1 = (this.width - this.bookImageWidth) / 2;
         int var2 = (this.height - this.bookImageHeight) / 2;
 
@@ -93,8 +88,7 @@ public class GuiNotebook extends GuiScreen
         }
         */
 
-        if (page == 0)
-        {
+        if (page == 0) {
             this.buttonList.add(this.buttonIcon = new FossilGuiButton(2, var1 + 35, var2 + 55, 0));
             this.buttonList.add(this.buttonIcon = new FossilGuiButton(3, var1 + 75, var2 + 55, 2));
             this.buttonList.add(this.buttonIcon = new FossilGuiButton(4, var1 + 115, var2 + 55, 4));
@@ -103,10 +97,8 @@ public class GuiNotebook extends GuiScreen
         }
     }
 
-    public void triggerButtons(GuiButton button)
-    {
-        switch (button.id)
-        {
+    public void triggerButtons(GuiButton button) {
+        switch (button.id) {
             case 2:
                 this.BookPages = 1;
                 break;
@@ -118,22 +110,15 @@ public class GuiNotebook extends GuiScreen
     }
 
     @Override
-    public void actionPerformed(GuiButton button)
-    {
-        if (button.id == 0 && BookPages < BookPagesTotal)
-        {
+    public void actionPerformed(GuiButton button) {
+        if (button.id == 0 && BookPages < BookPagesTotal) {
             BookPages += 1;
-        }
-        else
-        {
+        } else {
         }
 
-        if (button.id == 1 && BookPages > 0)
-        {
+        if (button.id == 1 && BookPages > 0) {
             BookPages -= 1;
-        }
-        else
-        {
+        } else {
         }
 
         this.triggerButtons(button);
@@ -141,8 +126,7 @@ public class GuiNotebook extends GuiScreen
         this.updateScreen();
     }
 
-    public void drawScreen(int par1, int par2, float par3)
-    {
+    public void drawScreen(int par1, int par2, float par3) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.renderEngine.bindTexture(notebook_background);
         int var5 = (this.width - this.bookImageWidth) / 2;
@@ -153,13 +137,11 @@ public class GuiNotebook extends GuiScreen
         int var3 = 0;
         addTextByPage(BookPages);
 
-        if (BookPages == 0)
-        {
+        if (BookPages == 0) {
             this.drawTexturedModalRect(((this.width - this.bookImageWidth) / 2) + 22, ((this.height - this.bookImageHeight) / 2) + 11, 0, 240, 136, 15);
         }
 
-        if (BookPages >= 9)
-        {
+        if (BookPages >= 9) {
             var3 = 4;
         }
 
@@ -170,16 +152,14 @@ public class GuiNotebook extends GuiScreen
     /**
      * Returns true if this GUI should pause the game when it is displayed in single-player
      */
-    public boolean doesGuiPauseGame()
-    {
+    public boolean doesGuiPauseGame() {
         return false;
     }
 
     /**
      * Called when the screen is unloaded. Used to disable keyboard repeat events
      */
-    public void onGuiClosed()
-    {
+    public void onGuiClosed() {
         super.onGuiClosed();
     }
 }

@@ -25,8 +25,7 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class BlockAnalyzer extends BlockContainer
-{
+public class BlockAnalyzer extends BlockContainer {
     private static boolean keepFurnaceInventory = false;
     private final boolean isActive;
     private Random furnaceRand = new Random();
@@ -35,19 +34,15 @@ public class BlockAnalyzer extends BlockContainer
     @SideOnly(Side.CLIENT)
     private IIcon Front;
 
-    public BlockAnalyzer(boolean isActive)
-    {
+    public BlockAnalyzer(boolean isActive) {
         super(Material.iron);
         setHardness(3.0F);
         setStepSound(Block.soundTypeMetal);
         this.isActive = isActive;
-        if (isActive)
-        {
+        if (isActive) {
             setLightLevel(0.9375F);
             setBlockName(LocalizationStrings.BLOCK_ANALYZER_ACTIVE_NAME);
-        }
-        else
-        {
+        } else {
             setBlockName(LocalizationStrings.BLOCK_ANALYZER_IDLE_NAME);
             setCreativeTab(FATabRegistry.tabFBlocks);
         }
@@ -59,26 +54,21 @@ public class BlockAnalyzer extends BlockContainer
      * is burning
      */
     public static void updateFurnaceBlockState(boolean isActive, World world,
-                                               int x, int y, int z)
-    {
+                                               int x, int y, int z) {
         int l = world.getBlockMetadata(x, y, z);
         TileEntity tileentity = world.getTileEntity(x, y, z);
         keepFurnaceInventory = true;
 
-        if (isActive)
-        {
+        if (isActive) {
             world.setBlock(x, y, z, FABlockRegistry.blockanalyzerActive);
-        }
-        else
-        {
+        } else {
             world.setBlock(x, y, z, FABlockRegistry.blockanalyzerIdle);
         }
 
         keepFurnaceInventory = false;
         world.setBlockMetadataWithNotify(x, y, z, l, 2);
 
-        if (tileentity != null)
-        {
+        if (tileentity != null) {
             tileentity.validate();
             world.setTileEntity(x, y, z, tileentity);
         }
@@ -88,8 +78,7 @@ public class BlockAnalyzer extends BlockContainer
      * public String getTextureFile() { return
      * "/fossil/textures/Fos_terrian.png"; }
      */
-    public int getRenderType()
-    {
+    public int getRenderType() {
         return 2303;
     }
 
@@ -97,16 +86,14 @@ public class BlockAnalyzer extends BlockContainer
      * Returns the ID of the items to drop on destruction.
      */
     @Override
-    public Item getItemDropped(int var1, Random var2, int var3)
-    {
+    public Item getItemDropped(int var1, Random var2, int var3) {
         return Item.getItemFromBlock(FABlockRegistry.blockanalyzerIdle);
     }
 
     /**
      * Called whenever the block is added into the world. Args: world, x, y, z
      */
-    public void onBlockAdded(World world, int x, int y, int z)
-    {
+    public void onBlockAdded(World world, int x, int y, int z) {
         super.onBlockAdded(world, x, y, z);
         this.setDefaultDirection(world, x, y, z);
     }
@@ -114,33 +101,27 @@ public class BlockAnalyzer extends BlockContainer
     /**
      * set a blocks direction
      */
-    private void setDefaultDirection(World world, int x, int y, int z)
-    {
-        if (!world.isRemote)
-        {
+    private void setDefaultDirection(World world, int x, int y, int z) {
+        if (!world.isRemote) {
             Block block = world.getBlock(x, y, z - 1);
             Block block1 = world.getBlock(x, y, z + 1);
             Block block2 = world.getBlock(x - 1, y, z);
             Block block3 = world.getBlock(x + 1, y, z);
             byte b0 = 3;
 
-            if (block.func_149730_j() && !block1.func_149730_j())
-            {
+            if (block.func_149730_j() && !block1.func_149730_j()) {
                 b0 = 3;
             }
 
-            if (block1.func_149730_j() && !block.func_149730_j())
-            {
+            if (block1.func_149730_j() && !block.func_149730_j()) {
                 b0 = 2;
             }
 
-            if (block2.func_149730_j() && !block3.func_149730_j())
-            {
+            if (block2.func_149730_j() && !block3.func_149730_j()) {
                 b0 = 5;
             }
 
-            if (block3.func_149730_j() && !block2.func_149730_j())
-            {
+            if (block3.func_149730_j() && !block2.func_149730_j()) {
                 b0 = 4;
             }
 
@@ -154,8 +135,7 @@ public class BlockAnalyzer extends BlockContainer
      * register icons.
      */
     @SideOnly(Side.CLIENT)
-    public void registerBlockIcons(IIconRegister par1IconRegister)
-    {
+    public void registerBlockIcons(IIconRegister par1IconRegister) {
         this.blockIcon = par1IconRegister.registerIcon("fossil:Analyser_Sides");
         this.Top = par1IconRegister.registerIcon("fossil:Analyser_Top");
         this.Front = this.isActive ? par1IconRegister
@@ -167,8 +147,7 @@ public class BlockAnalyzer extends BlockContainer
      * From the specified side and block metadata retrieves the blocks texture.
      * Args: side, metadata
      */
-    public IIcon getIcon(int par1, int par2)
-    {
+    public IIcon getIcon(int par1, int par2) {
 
         return par1 == 1 ? this.Top : (par1 == 0 ? this.blockIcon
                 : (par1 != par2 ? this.blockIcon : this.Front));
@@ -181,14 +160,10 @@ public class BlockAnalyzer extends BlockContainer
      * Called upon block activation (right click on the block.)
      */
     public boolean onBlockActivated(World var1, int var2, int var3, int var4,
-                                    EntityPlayer var5, int var6, float var7, float var8, float var9)
-    {
-        if (var1.isRemote)
-        {
+                                    EntityPlayer var5, int var6, float var7, float var8, float var9) {
+        if (var1.isRemote) {
             return true;
-        }
-        else
-        {
+        } else {
             var5.openGui(Revival.instance, 0, var1, var2, var3, var4);
             return true;
         }
@@ -198,33 +173,27 @@ public class BlockAnalyzer extends BlockContainer
      * Called when the block is placed in the world.
      */
     public void onBlockPlacedBy(World par1World, int par2, int par3, int par4,
-                                EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack)
-    {
+                                EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack) {
         int l = MathHelper
                 .floor_double((double) (par5EntityLivingBase.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
 
-        if (l == 0)
-        {
+        if (l == 0) {
             par1World.setBlockMetadataWithNotify(par2, par3, par4, 2, 2);
         }
 
-        if (l == 1)
-        {
+        if (l == 1) {
             par1World.setBlockMetadataWithNotify(par2, par3, par4, 5, 2);
         }
 
-        if (l == 2)
-        {
+        if (l == 2) {
             par1World.setBlockMetadataWithNotify(par2, par3, par4, 3, 2);
         }
 
-        if (l == 3)
-        {
+        if (l == 3) {
             par1World.setBlockMetadataWithNotify(par2, par3, par4, 4, 2);
         }
 
-        if (par6ItemStack.hasDisplayName())
-        {
+        if (par6ItemStack.hasDisplayName()) {
             ((TileEntityAnalyzer) par1World.getTileEntity(par2, par3, par4))
                     .setGuiDisplayName(par6ItemStack.getDisplayName());
         }
@@ -235,31 +204,24 @@ public class BlockAnalyzer extends BlockContainer
      * update, as appropriate
      */
     public void breakBlock(World world, int x, int y, int z, Block block,
-                           int var6)
-    {
-        if (!keepFurnaceInventory)
-        {
+                           int var6) {
+        if (!keepFurnaceInventory) {
             TileEntityAnalyzer tileentity = (TileEntityAnalyzer) world
                     .getTileEntity(x, y, z);
 
-            if (tileentity != null)
-            {
-                for (int i = 0; i < tileentity.getSizeInventory(); ++i)
-                {
+            if (tileentity != null) {
+                for (int i = 0; i < tileentity.getSizeInventory(); ++i) {
                     ItemStack itemstack = tileentity.getStackInSlot(i);
 
-                    if (itemstack != null)
-                    {
+                    if (itemstack != null) {
                         float xOffset = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
                         float yOffset = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
                         float zOffset = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
 
-                        while (itemstack.stackSize > 0)
-                        {
+                        while (itemstack.stackSize > 0) {
                             int rand = this.furnaceRand.nextInt(21) + 10;
 
-                            if (rand > itemstack.stackSize)
-                            {
+                            if (rand > itemstack.stackSize) {
                                 rand = itemstack.stackSize;
                             }
 
@@ -271,8 +233,7 @@ public class BlockAnalyzer extends BlockContainer
                                     new ItemStack(itemstack.getItem(), rand,
                                             itemstack.getItemDamage()));
 
-                            if (itemstack.hasTagCompound())
-                            {
+                            if (itemstack.hasTagCompound()) {
                                 entityItem.getEntityItem().setTagCompound(
                                         (NBTTagCompound) itemstack
                                                 .getTagCompound().copy());
@@ -300,8 +261,7 @@ public class BlockAnalyzer extends BlockContainer
      * the block.
      */
     @Override
-    public TileEntity createNewTileEntity(World world, int par2)
-    {
+    public TileEntity createNewTileEntity(World world, int par2) {
         return new TileEntityAnalyzer();
     }
 
@@ -310,8 +270,7 @@ public class BlockAnalyzer extends BlockContainer
      * use the value from getComparatorInputOverride instead of the actual
      * redstone signal strength.
      */
-    public boolean hasComparatorInputOverride()
-    {
+    public boolean hasComparatorInputOverride() {
         return true;
     }
 
@@ -321,8 +280,7 @@ public class BlockAnalyzer extends BlockContainer
      * comparator.
      */
     public int getComparatorInputOverride(World par1World, int par2, int par3,
-                                          int par4, int par5)
-    {
+                                          int par4, int par5) {
         return Container.calcRedstoneFromInventory((IInventory) par1World
                 .getTileEntity(par2, par3, par4));
     }
@@ -332,8 +290,7 @@ public class BlockAnalyzer extends BlockContainer
      * inventory.setCurrentItem (along with isCreative)
      */
     @SideOnly(Side.CLIENT)
-    public Item getItem(World world, int x, int y, int z)
-    {
+    public Item getItem(World world, int x, int y, int z) {
         return Item.getItemFromBlock(FABlockRegistry.blockanalyzerIdle);
     }
 }

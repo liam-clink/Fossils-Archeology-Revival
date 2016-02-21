@@ -8,46 +8,38 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 
-public class TileEntityAnubiteStatueRender extends TileEntitySpecialRenderer
-{
+public class TileEntityAnubiteStatueRender extends TileEntitySpecialRenderer {
 
     public static final ResourceLocation texture = new ResourceLocation("fossil:textures/model/Anubite_ancient_statue.png");
 
 
     private ModelAnubite modelBlock;
 
-    public TileEntityAnubiteStatueRender()
-    {
+    public TileEntityAnubiteStatueRender() {
         this.modelBlock = new ModelAnubite();
 
     }
 
-    public void renderAnuAt(TileEntityAnubiteStatue tileentity, double x, double y, double z, float f)
-    {
+    public void renderAnuAt(TileEntityAnubiteStatue tileentity, double x, double y, double z, float f) {
         int i1 = 0;
-        if (tileentity.hasWorldObj())
-        {
+        if (tileentity.hasWorldObj()) {
             i1 = tileentity.getBlockMetadata();
         }
         short short1 = 0;
-        if (i1 == 2)
-        {
+        if (i1 == 2) {
 
             short1 = 360;
         }
 
-        if (i1 == 3)
-        {
+        if (i1 == 3) {
             short1 = 180;
         }
 
-        if (i1 == 4)
-        {
+        if (i1 == 4) {
             short1 = 90;
         }
 
-        if (i1 == 5)
-        {
+        if (i1 == 5) {
             short1 = -90;
         }
 
@@ -64,8 +56,7 @@ public class TileEntityAnubiteStatueRender extends TileEntitySpecialRenderer
     }
 
     @Override
-    public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f)
-    {
+    public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f) {
         this.renderAnuAt((TileEntityAnubiteStatue) tileentity, x, y, z, f);
     }
 }

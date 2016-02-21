@@ -8,7 +8,6 @@ import com.github.revival.common.enums.EnumPrehistoric;
 import com.github.revival.common.handler.FossilAchievementHandler;
 import com.github.revival.common.handler.LocalizationStrings;
 import com.github.revival.common.item.FAItemRegistry;
-
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 import cpw.mods.fml.relauncher.Side;
@@ -32,8 +31,7 @@ import net.minecraftforge.common.BiomeDictionary;
 
 import java.util.List;
 
-public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
-{
+public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData {
     public static final int HATCHING_INDEX = 18;
     private static final String HEAD = "Dinoegg.";
     private static final String MSGHEAD = "Dinoegg.msghead";
@@ -50,8 +48,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
     public String ParentOwner;
     private int HatchTime;
 
-    public EntityDinoEgg(World var1, EnumPrehistoric var12)
-    {
+    public EntityDinoEgg(World var1, EnumPrehistoric var12) {
         super(var1);
         //this.BirthTick = 0;
         this.ParentOwner = "";
@@ -65,19 +62,16 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
         this.lastBirthTick = 0;
     }
 
-    public EntityDinoEgg(World var1)
-    {
-        this(var1, (EnumPrehistoric)null);
+    public EntityDinoEgg(World var1) {
+        this(var1, (EnumPrehistoric) null);
     }
 
-    public EntityDinoEgg(World var1, EnumPrehistoric var2, EntityDinosaur var3)
-    {
+    public EntityDinoEgg(World var1, EnumPrehistoric var2, EntityDinosaur var3) {
         this(var1, var2);
         this.ParentOwner = var3.getCommandSenderName();
     }
 
-    public EntityDinoEgg(World var1, double var2, double var4, double var6, EnumPrehistoric var8)
-    {
+    public EntityDinoEgg(World var1, double var2, double var4, double var6, EnumPrehistoric var8) {
         this(var1, var8);
         this.setPosition(var2, var4 + (double) this.yOffset, var6);
         this.motionX = 0.0D;
@@ -91,14 +85,12 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
     /**
      * Returns the texture's file path as a String.
      */
-    public String getTexture()
-    {
+    public String getTexture() {
         return "fossil:textures/mob/DinosaurEggs/eggTexture_" + DinoInside.name() + ".png";
 
     }
 
-    private void setPedia()
-    {
+    private void setPedia() {
         Revival.toPedia = (Object) this;
     }
 
@@ -106,32 +98,25 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
      * returns if this entity triggers Block.onEntityWalking on the blocks they walk on. used for spiders and wolves to
      * prevent them from trampling crops
      */
-    protected boolean canTriggerWalking()
-    {
+    protected boolean canTriggerWalking() {
         return false;
     }
 
-    protected void entityInit()
-    {
-        if (Revival.enableDebugging())
-        {
+    protected void entityInit() {
+        if (Revival.enableDebugging()) {
             this.HatchTime = 100;
-        }
-        else
-        {
+        } else {
             this.HatchTime = 3000;
         }
 
         this.dataWatcher.addObject(HATCHING_INDEX, new Integer(0));
     }
 
-    public int getBirthTick()
-    {
+    public int getBirthTick() {
         return this.dataWatcher.getWatchableObjectInt(HATCHING_INDEX);
     }
 
-    public void setBirthTick(int var1)
-    {
+    public void setBirthTick(int var1) {
         this.dataWatcher.updateObject(HATCHING_INDEX, Integer.valueOf(var1));
     }
 
@@ -139,50 +124,42 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
      * Returns a boundingBox used to collide the entity with other entities and blocks. This enables the entity to be
      * pushable on contact, like boats or minecarts.
      */
-    public AxisAlignedBB getCollisionBox(Entity var1)
-    {
+    public AxisAlignedBB getCollisionBox(Entity var1) {
         return var1.boundingBox;
     }
 
     /**
      * returns the bounding box for this entity
      */
-    public AxisAlignedBB getBoundingBox()
-    {
+    public AxisAlignedBB getBoundingBox() {
         return this.boundingBox;
     }
 
     /**
      * Returns true if this entity should push and be pushed by other entities when colliding.
      */
-    public boolean canBePushed()
-    {
+    public boolean canBePushed() {
         return true;
     }
 
     /**
      * Returns the Y offset from the entity's position for any entity riding this one.
      */
-    public double getMountedYOffset()
-    {
+    public double getMountedYOffset() {
         return (double) this.height * 0.0D - 0.30000001192092896D;
     }
 
     /**
      * Called when the entity is attacked.
      */
-    public boolean attackEntityFrom(DamageSource var1, int var2)
-    {
-        if (!this.worldObj.isRemote && !this.isDead)
-        {
+    public boolean attackEntityFrom(DamageSource var1, int var2) {
+        if (!this.worldObj.isRemote && !this.isDead) {
             this.timeSinceHit = 10;
             this.damageTaken += var2 * 10;
             this.setBeenAttacked();
 
-            if (this.damageTaken > 40)
-            {
-                if (this.riddenByEntity != null)
-                {
+            if (this.damageTaken > 40) {
+                if (this.riddenByEntity != null) {
                     this.riddenByEntity.mountEntity(this);
                 }
 
@@ -190,9 +167,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
             }
 
             return true;
-        }
-        else
-        {
+        } else {
             return true;
         }
     }
@@ -200,8 +175,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
     /**
      * Setups the entity to do the hurt animation. Only used by packets in multiplayer.
      */
-    public void performHurtAnimation()
-    {
+    public void performHurtAnimation() {
         this.timeSinceHit = 10;
         this.damageTaken += this.damageTaken * 10;
     }
@@ -209,28 +183,24 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
     /**
      * Returns true if other Entities should be prevented from moving through this Entity.
      */
-    public boolean canBeCollidedWith()
-    {
+    public boolean canBeCollidedWith() {
         return !this.isDead;
     }
 
     /**
      * Called to update the entity's position/logic.
      */
-    public void onUpdate()
-    {
+    public void onUpdate() {
         super.onUpdate();
         //if(!this.worldObj.isRemote)
         this.HandleHatching();
         //super.onUpdate();
 
-        if (this.timeSinceHit > 0)
-        {
+        if (this.timeSinceHit > 0) {
             --this.timeSinceHit;
         }
 
-        if (this.damageTaken > 0)
-        {
+        if (this.damageTaken > 0) {
             --this.damageTaken;
         }
 
@@ -240,8 +210,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
         byte var1 = 5;
         double var2 = 0.0D;
 
-        for (int var4 = 0; var4 < var1; ++var4)
-        {
+        for (int var4 = 0; var4 < var1; ++var4) {
             double var5 = this.boundingBox.minY + (this.boundingBox.maxY - this.boundingBox.minY) * (double) (var4 + 0) / (double) var1 - 0.125D;
             double var7 = this.boundingBox.minY + (this.boundingBox.maxY - this.boundingBox.minY) * (double) (var4 + 1) / (double) var1 - 0.125D;
             AxisAlignedBB.getBoundingBox(this.boundingBox.minX, var5, this.boundingBox.minZ, this.boundingBox.maxX, var7, this.boundingBox.maxZ);
@@ -249,51 +218,41 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
 
         double var21;
 
-        if (var2 < 1.0D)
-        {
+        if (var2 < 1.0D) {
             var21 = var2 * 2.0D - 1.0D;
             this.motionY += 0.03999999910593033D * var21;
-        }
-        else
-        {
-            if (this.motionY < 0.0D)
-            {
+        } else {
+            if (this.motionY < 0.0D) {
                 this.motionY /= 2.0D;
             }
 
             this.motionY += 0.007000000216066837D;
         }
 
-        if (this.riddenByEntity != null)
-        {
+        if (this.riddenByEntity != null) {
             this.motionX += this.riddenByEntity.motionX * 0.2D;
             this.motionZ += this.riddenByEntity.motionZ * 0.2D;
         }
 
         var21 = 0.4D;
 
-        if (this.motionX < -var21)
-        {
+        if (this.motionX < -var21) {
             this.motionX = -var21;
         }
 
-        if (this.motionX > var21)
-        {
+        if (this.motionX > var21) {
             this.motionX = var21;
         }
 
-        if (this.motionZ < -var21)
-        {
+        if (this.motionZ < -var21) {
             this.motionZ = -var21;
         }
 
-        if (this.motionZ > var21)
-        {
+        if (this.motionZ > var21) {
             this.motionZ = var21;
         }
 
-        if (this.onGround)
-        {
+        if (this.onGround) {
             this.motionX *= 0.5D;
             this.motionY *= 0.5D;
             this.motionZ *= 0.5D;
@@ -304,40 +263,31 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
         double var8;
         double var10;
 
-        if (var6 > 0.15D)
-        {
+        if (var6 > 0.15D) {
             var8 = Math.cos((double) this.rotationYaw * Math.PI / 180.0D);
             var10 = Math.sin((double) this.rotationYaw * Math.PI / 180.0D);
 
-            for (int var12 = 0; (double) var12 < 1.0D + var6 * 60.0D; ++var12)
-            {
+            for (int var12 = 0; (double) var12 < 1.0D + var6 * 60.0D; ++var12) {
                 double var13 = (double) (this.rand.nextFloat() * 2.0F - 1.0F);
                 double var15 = (double) (this.rand.nextInt(2) * 2 - 1) * 0.7D;
                 double var17;
                 double var19;
 
-                if (this.rand.nextBoolean())
-                {
+                if (this.rand.nextBoolean()) {
                     var17 = this.posX - var8 * var13 * 0.8D + var10 * var15;
                     var19 = this.posZ - var10 * var13 * 0.8D - var8 * var15;
-                }
-                else
-                {
+                } else {
                     var17 = this.posX + var8 + var10 * var13 * 0.7D;
                     var19 = this.posZ + var10 - var8 * var13 * 0.7D;
                 }
             }
         }
 
-        if (this.isCollidedHorizontally && var6 > 0.15D)
-        {
-            if (!this.worldObj.isRemote)
-            {
+        if (this.isCollidedHorizontally && var6 > 0.15D) {
+            if (!this.worldObj.isRemote) {
                 this.setDead();
             }
-        }
-        else
-        {
+        } else {
             this.motionX *= 0.9900000095367432D;
             this.motionY *= 0.949999988079071D;
             this.motionZ *= 0.9900000095367432D;
@@ -348,30 +298,25 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
         var10 = this.prevPosX - this.posX;
         double var22 = this.prevPosZ - this.posZ;
 
-        if (var10 * var10 + var22 * var22 > 0.001D)
-        {
+        if (var10 * var10 + var22 * var22 > 0.001D) {
             var8 = (double) ((float) (Math.atan2(var22, var10) * 180.0D / Math.PI));
         }
 
         double var14;
 
-        for (var14 = var8 - (double) this.rotationYaw; var14 >= 180.0D; var14 -= 360.0D)
-        {
+        for (var14 = var8 - (double) this.rotationYaw; var14 >= 180.0D; var14 -= 360.0D) {
             ;
         }
 
-        while (var14 < -180.0D)
-        {
+        while (var14 < -180.0D) {
             var14 += 360.0D;
         }
 
-        if (var14 > 20.0D)
-        {
+        if (var14 > 20.0D) {
             var14 = 20.0D;
         }
 
-        if (var14 < -20.0D)
-        {
+        if (var14 < -20.0D) {
             var14 = -20.0D;
         }
 
@@ -380,144 +325,109 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
         List var16 = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.expand(0.0D, 0.0D, 0.0D));
         int var23;
 
-        if (var16 != null && var16.size() > 0)
-        {
-            for (var23 = 0; var23 < var16.size(); ++var23)
-            {
+        if (var16 != null && var16.size() > 0) {
+            for (var23 = 0; var23 < var16.size(); ++var23) {
                 Entity var18 = (Entity) var16.get(var23);
 
-                if (var18 != this.riddenByEntity && var18.canBePushed() && var18 instanceof EntityBoat)
-                {
+                if (var18 != this.riddenByEntity && var18.canBePushed() && var18 instanceof EntityBoat) {
                     var18.applyEntityCollision(this);
                 }
             }
         }
 
-        for (var23 = 0; var23 < 4; ++var23)
-        {
+        for (var23 = 0; var23 < 4; ++var23) {
             int var24 = MathHelper.floor_double(this.posX + ((double) (var23 % 2) - 0.5D) * 0.8D);
             int var25 = MathHelper.floor_double(this.posY);
             int var20 = MathHelper.floor_double(this.posZ + ((double) (var23 / 2) - 0.5D) * 0.8D);
 
-            if (this.worldObj.getBlock(var24, var25, var20) == Blocks.snow)
-            {
+            if (this.worldObj.getBlock(var24, var25, var20) == Blocks.snow) {
                 this.worldObj.setBlock(var24, var25, var20, Blocks.air, 0, 2);
             }
         }
 
-        if (this.riddenByEntity != null && this.riddenByEntity.isDead)
-        {
+        if (this.riddenByEntity != null && this.riddenByEntity.isDead) {
             this.riddenByEntity = null;
         }
     }
 
-    public void updateRiderPosition()
-    {
-        if (this.riddenByEntity != null)
-        {
+    public void updateRiderPosition() {
+        if (this.riddenByEntity != null) {
             double var1 = Math.cos((double) this.rotationYaw * Math.PI / 180.0D) * 0.4D;
             double var3 = Math.sin((double) this.rotationYaw * Math.PI / 180.0D) * 0.4D;
             this.riddenByEntity.setPosition(this.posX + var1, this.posY + this.getMountedYOffset() + this.riddenByEntity.getYOffset(), this.posZ + var3);
         }
     }
 
-    private void HandleHatching()
-    {
+    private void HandleHatching() {
         //this.getClass();//needed to set which is the actual instance using this function
         float brightness = this.getBrightness(1.0F);
         EntityPlayer player = null;
 
-        if ((this.ParentOwner == "" || this.worldObj.getPlayerEntityByName(this.ParentOwner) == null) && this.worldObj.getClosestPlayerToEntity(this, 16.0D) != null)
-        {
+        if ((this.ParentOwner == "" || this.worldObj.getPlayerEntityByName(this.ParentOwner) == null) && this.worldObj.getClosestPlayerToEntity(this, 16.0D) != null) {
             player = this.worldObj.getClosestPlayerToEntity(this, 16.0D);
         }
 
-        if (this.DinoInside == EnumPrehistoric.Mosasaurus || this.DinoInside == EnumPrehistoric.Liopleurodon)
-        {
-            if (this.inWater)
-            {
+        if (this.DinoInside == EnumPrehistoric.Mosasaurus || this.DinoInside == EnumPrehistoric.Liopleurodon) {
+            if (this.inWater) {
                 this.lastBirthTick = this.getBirthTick();
                 this.setBirthTick(this.getBirthTick() + 1);
 
-            }
-            else
-            {
+            } else {
                 this.setBirthTick(this.getBirthTick() - 1);
             }
 
-        }
-        else if ((double) brightness >= 0.5D && !this.inWater)
-        {
+        } else if ((double) brightness >= 0.5D && !this.inWater) {
             this.lastBirthTick = this.getBirthTick();
             this.setBirthTick(this.getBirthTick() + 1);
 
-        }
-        else
-        {
+        } else {
             BiomeGenBase var5 = this.worldObj.getBiomeGenForCoords((int) this.posX, (int) this.posZ);
             float var6 = var5.temperature;
             //if (!this.worldObj.canBlockSeeTheSky(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY), MathHelper.floor_double(this.posZ)))
-            if ((var6 <= 0.15F && brightness < 0.5) || this.inWater)
-            {
+            if ((var6 <= 0.15F && brightness < 0.5) || this.inWater) {
                 this.setBirthTick(this.getBirthTick() - 1);
             }
         }
 
-        if (this.getBirthTick() <= -this.HatchingNeedTime)
-        {
-            if (player != null)
-            {
+        if (this.getBirthTick() <= -this.HatchingNeedTime) {
+            if (player != null) {
                 String var6;
 
-                if (this.DinoInside == EnumPrehistoric.Mosasaurus || this.DinoInside == EnumPrehistoric.Liopleurodon)
-                {
+                if (this.DinoInside == EnumPrehistoric.Mosasaurus || this.DinoInside == EnumPrehistoric.Liopleurodon) {
                     var6 = StatCollector.translateToLocal(LocalizationStrings.DINOEGG_DRY);
-                }
-                else
-                {
+                } else {
                     var6 = StatCollector.translateToLocal(LocalizationStrings.DINOEGG_WET);
                 }
 
                 String var1 = StatCollector.translateToLocal(LocalizationStrings.DINOEGG_HEAD);
 
-                if (FMLCommonHandler.instance().getSide().isServer())
-                {
+                if (FMLCommonHandler.instance().getSide().isServer()) {
                     Revival.showMessage(var1 + StatCollector.translateToLocal("entity.fossil." + this.DinoInside.toString())/*EntityDinosaur.GetNameByEnum(this.DinoInside, false)*/ + var6, player);
                 }
             }
 
             this.setDead();
-        }
-        else
-        {
-            if (this.getBirthTick() >= this.HatchingNeedTime)
-            {
-                if (this.worldObj.isRemote)
-                {
+        } else {
+            if (this.getBirthTick() >= this.HatchingNeedTime) {
+                if (this.worldObj.isRemote) {
                     return;
                 }
 
                 BiomeGenBase var3 = this.worldObj.provider.worldChunkMgr.getBiomeGenAt((int) Math.floor(this.posX), (int) Math.floor(this.posZ));
                 Object var5 = null;
 
-                switch (this.DinoInside)
-                {
+                switch (this.DinoInside) {
                     case Triceratops:
                         var5 = new EntityTriceratops(this.worldObj);
 
                         if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.SAVANNA)
                                 || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.SANDY)
-                                || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.MESA))
-                        {
+                                || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.MESA)) {
                             ((EntityTriceratops) var5).setSubSpecies(1);
-                        }
-                        else if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.COLD)
-                                || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.MOUNTAIN))
-                        {
+                        } else if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.COLD)
+                                || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.MOUNTAIN)) {
                             ((EntityTriceratops) var5).setSubSpecies(2);
-                        }
-                        else
-                        {
+                        } else {
                             ((EntityTriceratops) var5).setSubSpecies(0);
                         }
                         break;
@@ -526,22 +436,15 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
                         var5 = new EntityVelociraptor(this.worldObj);
 
                         if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.FOREST)
-                                || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.SWAMP))
-                        {
+                                || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.SWAMP)) {
                             ((EntityVelociraptor) var5).setSubSpecies(2);
-                        }
-                        else if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.COLD)
-                                || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.MOUNTAIN))
-                        {
+                        } else if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.COLD)
+                                || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.MOUNTAIN)) {
                             ((EntityVelociraptor) var5).setSubSpecies(1);
-                        }
-                        else if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.WATER)
-                                || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.BEACH))
-                        {
+                        } else if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.WATER)
+                                || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.BEACH)) {
                             ((EntityVelociraptor) var5).setSubSpecies(3);
-                        }
-                        else
-                        {
+                        } else {
                             ((EntityVelociraptor) var5).setSubSpecies(0);
                         }
 
@@ -552,12 +455,9 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
 
                         if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.FOREST)
                                 || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.SWAMP)
-                                || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.JUNGLE))
-                        {
+                                || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.JUNGLE)) {
                             ((EntityTyrannosaurus) var5).setSubSpecies(1);
-                        }
-                        else
-                        {
+                        } else {
                             ((EntityTyrannosaurus) var5).setSubSpecies(0);
                         }
                         break;
@@ -569,23 +469,18 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
                                 || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.NETHER)
                                 || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.DEAD)
                                 || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.JUNGLE)
-                                || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.HOT))
-                        {
+                                || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.HOT)) {
                             ((EntityPterosaur) var5).setSubSpecies(2); //nether
-                        }
-                        else if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.COLD)
+                        } else if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.COLD)
                                 || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.END)
                                 || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.FOREST)
                                 || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.MUSHROOM)
                                 || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.CONIFEROUS)
                                 || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.OCEAN)
                                 || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.RIVER)
-                                || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.WATER))
-                        {
+                                || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.WATER)) {
                             ((EntityPterosaur) var5).setSubSpecies(1); //cold
-                        }
-                        else
-                        {
+                        } else {
                             ((EntityPterosaur) var5).setSubSpecies(0);
 
                         }
@@ -600,12 +495,9 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
 
                         if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.COLD)
                                 || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.MOUNTAIN)
-                                || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.WATER))
-                        {
+                                || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.WATER)) {
                             ((EntityMosasaurus) var5).setSubSpecies(1);
-                        }
-                        else
-                        {
+                        } else {
                             ((EntityMosasaurus) var5).setSubSpecies(2);
                         }
 
@@ -620,17 +512,12 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
 
                         if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.SAVANNA)
                                 || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.SANDY)
-                                || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.MESA))
-                        {
+                                || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.MESA)) {
                             ((EntityStegosaurus) var5).setSubSpecies(2);
-                        }
-                        else if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.COLD)
-                                || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.MOUNTAIN))
-                        {
+                        } else if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.COLD)
+                                || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.MOUNTAIN)) {
                             ((EntityStegosaurus) var5).setSubSpecies(1);
-                        }
-                        else
-                        {
+                        } else {
                             ((EntityStegosaurus) var5).setSubSpecies(0);
                         }
                         break;
@@ -640,12 +527,9 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
 
                         if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.NETHER) || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.JUNGLE)
                                 || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.LUSH) || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.MESA)
-                                || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.WASTELAND) || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.SPOOKY))
-                        {
+                                || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.WASTELAND) || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.SPOOKY)) {
                             ((EntityDilophosaurus) var5).setSubSpecies(1);
-                        }
-                        else
-                        {
+                        } else {
                             ((EntityDilophosaurus) var5).setSubSpecies(0);
                         }
                         break;
@@ -654,18 +538,13 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
                         var5 = new EntityAllosaurus(this.worldObj);
 
                         if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.HOT)
-                                || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.DRY))
-                        {
+                                || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.DRY)) {
                             ((EntityAllosaurus) var5).setSubSpecies(2);
-                        }
-                        else if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.JUNGLE)
+                        } else if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.JUNGLE)
                                 || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.SWAMP)
-                                || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.FOREST))
-                        {
+                                || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.FOREST)) {
                             ((EntityAllosaurus) var5).setSubSpecies(3);
-                        }
-                        else
-                        {
+                        } else {
                             ((EntityAllosaurus) var5).setSubSpecies(1);
                         }
 
@@ -682,17 +561,12 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
                     case Pachycephalosaurus:
                         var5 = new EntityPachycephalosaurus(this.worldObj);
 
-                        if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.FOREST))
-                        {
+                        if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.FOREST)) {
                             ((EntityPachycephalosaurus) var5).setSubSpecies(1);
-                        }
-                        else if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.COLD)
-                                || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.MOUNTAIN))
-                        {
+                        } else if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.COLD)
+                                || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.MOUNTAIN)) {
                             ((EntityPachycephalosaurus) var5).setSubSpecies(2);
-                        }
-                        else
-                        {
+                        } else {
                             ((EntityPachycephalosaurus) var5).setSubSpecies(3);
                         }
 
@@ -703,12 +577,9 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
 
                         if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.COLD)
                                 || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.MOUNTAIN)
-                                || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.HOT))
-                        {
+                                || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.HOT)) {
                             ((EntityCompsognathus) var5).setSubSpecies(1);
-                        }
-                        else
-                        {
+                        } else {
                             ((EntityCompsognathus) var5).setSubSpecies(2);
                         }
 
@@ -722,17 +593,12 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
                         var5 = new EntityDeinonychus(this.worldObj);
                         if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.COLD)
                                 || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.MOUNTAIN)
-                                || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.HILLS))
-                        {
+                                || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.HILLS)) {
                             ((EntityDeinonychus) var5).setSubSpecies(1); //Grey
-                        }
-                        else if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.JUNGLE)
-                                || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.SWAMP))
-                        {
+                        } else if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.JUNGLE)
+                                || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.SWAMP)) {
                             ((EntityDeinonychus) var5).setSubSpecies(2); //Black
-                        }
-                        else
-                        {
+                        } else {
                             ((EntityDeinonychus) var5).setSubSpecies(3); //Brown
                         }
                         break;
@@ -742,23 +608,16 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
 
                         if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.PLAINS)
                                 || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.HILLS)
-                                || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.FOREST))
-                        {
+                                || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.FOREST)) {
                             ((EntityGallimimus) var5).setSubSpecies(1); //Green
-                        }
-                        else if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.COLD)
+                        } else if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.COLD)
                                 || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.BEACH)
-                                || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.WATER))
-                        {
+                                || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.WATER)) {
                             ((EntityGallimimus) var5).setSubSpecies(2); //Blue
-                        }
-                        else if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.HOT)
-                                || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.WASTELAND))
-                        {
+                        } else if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.HOT)
+                                || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.WASTELAND)) {
                             ((EntityGallimimus) var5).setSubSpecies(3); //Orange
-                        }
-                        else
-                        {
+                        } else {
                             ((EntityGallimimus) var5).setSubSpecies(4); //Brown
                         }
                         break;
@@ -770,19 +629,14 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
                                 || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.BEACH)
                                 || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.DRY)
                                 || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.WASTELAND)
-                                || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.SPOOKY))
-                        {
+                                || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.SPOOKY)) {
                             ((EntitySarcosuchus) var5).setSubSpecies(2); //desert
-                        }
-                        else if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.JUNGLE)
+                        } else if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.JUNGLE)
                                 || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.MAGICAL)
                                 || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.SWAMP)
-                                || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.DENSE))
-                        {
+                                || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.DENSE)) {
                             ((EntitySarcosuchus) var5).setSubSpecies(1); //swamp
-                        }
-                        else
-                        {
+                        } else {
                             ((EntitySarcosuchus) var5).setSubSpecies(0);
 
                         }
@@ -792,12 +646,9 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
 
                         if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.NETHER) || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.JUNGLE)
                                 || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.LUSH) || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.MESA)
-                                || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.WASTELAND) || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.SPOOKY))
-                        {
+                                || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.WASTELAND) || BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.SPOOKY)) {
                             ((EntityCeratosaurus) var5).setSubSpecies(1);
-                        }
-                        else
-                        {
+                        } else {
                             ((EntityCeratosaurus) var5).setSubSpecies(0);
                         }
                         break;
@@ -809,16 +660,12 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
                         return;
                 }
 
-                if (var5 instanceof EntityDinosaur)
-                {
-                    if (player != null)
-                    {
+                if (var5 instanceof EntityDinosaur) {
+                    if (player != null) {
                         player.addStat(FossilAchievementHandler.firstDino, 1);
                     }
-                    if (((EntityDinosaur) var5).SelfType.isTameable() && player != null)
-                    {
-                        if (((EntityDinosaur) var5).SelfType != EnumPrehistoric.Tyrannosaurus && ((EntityDinosaur) var5).SelfType != EnumPrehistoric.Allosaurus && ((EntityDinosaur) var5).SelfType != EnumPrehistoric.Sarcosuchus)
-                        {
+                    if (((EntityDinosaur) var5).SelfType.isTameable() && player != null) {
+                        if (((EntityDinosaur) var5).SelfType != EnumPrehistoric.Tyrannosaurus && ((EntityDinosaur) var5).SelfType != EnumPrehistoric.Allosaurus && ((EntityDinosaur) var5).SelfType != EnumPrehistoric.Sarcosuchus) {
                             // Tameable and player next to it
                             ((EntityDinosaur) var5).setTamed(true);
                             ((EntityDinosaur) var5).setOwner(player.getUniqueID().toString());
@@ -834,21 +681,17 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
                 if (this.worldObj.checkNoEntityCollision(((EntityLiving) var5).boundingBox)
                         && this.worldObj.getCollidingBoundingBoxes((Entity) var5, ((EntityLiving) var5).boundingBox).size() == 0
                         && (!this.worldObj.isAnyLiquid(((EntityLiving) var5).boundingBox)
-                        || this.DinoInside == EnumPrehistoric.Mosasaurus || this.DinoInside == EnumPrehistoric.Liopleurodon))
-                {
+                        || this.DinoInside == EnumPrehistoric.Mosasaurus || this.DinoInside == EnumPrehistoric.Liopleurodon)) {
                     //if (!this.worldObj.isRemote)
                     {
                         this.worldObj.spawnEntityInWorld((Entity) var5);
 
-                        if (player != null)
-                        {
+                        if (player != null) {
                             Revival.showMessage(StatCollector.translateToLocal(LocalizationStrings.DINOEGG_HATCHED), player);
                         }
                     }
                     this.setDead();
-                }
-                else
-                {
+                } else {
                     //System.err.println("EGGERROR-NOPLACE");
                     Revival.showMessage(StatCollector.translateToLocal(LocalizationStrings.DINOEGG_NOSPACE), player);
                     this.setBirthTick(this.getBirthTick() - 500);
@@ -861,8 +704,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
-    protected void writeEntityToNBT(NBTTagCompound var1)
-    {
+    protected void writeEntityToNBT(NBTTagCompound var1) {
         var1.setInteger("BirthTick", this.getBirthTick());
         var1.setInteger("DinoType", this.EnumToInt(this.DinoInside));
         var1.setString("ParentOwner", this.ParentOwner);
@@ -871,9 +713,8 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
-    protected void readEntityFromNBT(NBTTagCompound var1)
-    {
-    	EnumPrehistoric[] var2 = EnumPrehistoric.values();
+    protected void readEntityFromNBT(NBTTagCompound var1) {
+        EnumPrehistoric[] var2 = EnumPrehistoric.values();
         this.setBirthTick(var1.getInteger("BirthTick"));
         this.DinoInside = var2[var1.getInteger("DinoType")];
         this.ParentOwner = var1.getString("ParentOwner");
@@ -883,25 +724,20 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
      * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
      */
     @Override
-    public boolean interactFirst(EntityPlayer player)
-    {
+    public boolean interactFirst(EntityPlayer player) {
         ItemStack itemstack = player.inventory.getCurrentItem();
 
-        if (itemstack == null)
-        {
+        if (itemstack == null) {
             Item i0 = this.DinoInside.eggItem;
             ItemStack var3 = new ItemStack(i0/*this.DinoInside.EggItem/*var7*/, 1, 1);
 
-            if (player.inventory.addItemStackToInventory(var3))
-            {
+            if (player.inventory.addItemStackToInventory(var3)) {
                 this.worldObj.playSoundAtEntity(player, "random.pop", 0.2F, ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
                 this.setDead();
             }
 
             return true;
-        }
-        else if (FMLCommonHandler.instance().getSide().isClient() && itemstack.getItem() == FAItemRegistry.dinoPedia)
-        {
+        } else if (FMLCommonHandler.instance().getSide().isClient() && itemstack.getItem() == FAItemRegistry.dinoPedia) {
             this.setPedia();
             player.openGui(Revival.instance, 4, worldObj, (int) posX, (int) posY, (int) posZ);
             return true;
@@ -910,14 +746,12 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
         return false;
     }
 
-    private int EnumToInt(EnumPrehistoric var1)
-    {
+    private int EnumToInt(EnumPrehistoric var1) {
         return this.DinoInside.ordinal();
     }
 
     @SideOnly(Side.CLIENT)
-    public void ShowPedia(GuiPedia p0)
-    {
+    public void ShowPedia(GuiPedia p0) {
         Item it0 = this.DinoInside.eggItem;
         /*switch (this.DinoInside)
         {
@@ -940,25 +774,16 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
         int quot = (int) Math.floor(((float) this.getBirthTick() / (float) this.HatchingNeedTime * 100.0F));
         String stat;
 
-        if (this.DinoInside == EnumPrehistoric.Mosasaurus || this.DinoInside == EnumPrehistoric.Liopleurodon)
-        {
-            if (this.getBirthTick() >= 0)
-            {
+        if (this.DinoInside == EnumPrehistoric.Mosasaurus || this.DinoInside == EnumPrehistoric.Liopleurodon) {
+            if (this.getBirthTick() >= 0) {
                 stat = StatCollector.translateToLocal(LocalizationStrings.PEDIA_EGG_WET);
-            }
-            else
-            {
+            } else {
                 stat = StatCollector.translateToLocal(LocalizationStrings.PEDIA_EGG_DRY);
             }
-        }
-        else
-        {
-            if ((this.getBirthTick() >= 0 && this.getBirthTick() > this.lastBirthTick) || this.getBirthTick() >= 100)
-            {
+        } else {
+            if ((this.getBirthTick() >= 0 && this.getBirthTick() > this.lastBirthTick) || this.getBirthTick() >= 100) {
                 stat = StatCollector.translateToLocal(LocalizationStrings.PEDIA_EGG_WARM);
-            }
-            else
-            {
+            } else {
                 stat = StatCollector.translateToLocal(LocalizationStrings.PEDIA_EGG_COLD);
             }
         }
@@ -966,23 +791,20 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
         p0.PrintStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_EGG_STATUS), false, 2, 40, 90, 245);
         p0.PrintStringLR(stat, false, 3);
 
-        if (this.getBirthTick() >= 0)
-        {
+        if (this.getBirthTick() >= 0) {
             p0.PrintStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_EGG_PROGRESS), false, 4, 40, 90, 245);
             p0.PrintStringLR(String.valueOf(quot) + "/100", false, 5);
         }
     }
 
     @Override
-    public void writeSpawnData(ByteBuf var1)
-    {
+    public void writeSpawnData(ByteBuf var1) {
         var1.writeInt(this.getBirthTick());
         var1.writeInt(this.EnumToInt(this.DinoInside));
     }
 
     @Override
-    public void readSpawnData(ByteBuf var1)
-    {
+    public void readSpawnData(ByteBuf var1) {
         this.setBirthTick(var1.readInt());
         this.DinoInside = EnumPrehistoric.values()[var1.readInt()];
     }

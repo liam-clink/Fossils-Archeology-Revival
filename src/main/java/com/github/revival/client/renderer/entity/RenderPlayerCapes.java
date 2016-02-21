@@ -11,8 +11,7 @@ import net.minecraftforge.client.event.RenderPlayerEvent;
 import java.util.UUID;
 
 @SideOnly(Side.CLIENT)
-public class RenderPlayerCapes
-{
+public class RenderPlayerCapes {
 
 	/*
      * Renders the cape on the player if they are in the array
@@ -20,7 +19,7 @@ public class RenderPlayerCapes
 
 
     public UUID[] devuuid = new UUID[]{
-			/*tyranno66*/UUID.fromString("04e6d7f5-b587-4e4f-8ce0-b210d368a79e"),
+            /*tyranno66*/UUID.fromString("04e6d7f5-b587-4e4f-8ce0-b210d368a79e"),
 			/*Raptorfarian*/UUID.fromString("0ed918c8-d612-4360-b711-cd415671356f"),
 			/*4f6f3b*/UUID.fromString("0248b8a4-7fab-4d6f-8a22-8a51534fd53f"),
 			/*Bluestreak52*/UUID.fromString("5468a8f2-84d6-46e2-b58c-f9d576b67544"),
@@ -169,38 +168,30 @@ public class RenderPlayerCapes
 	}*/
 
     @SubscribeEvent
-    public void playerRender(RenderPlayerEvent.Pre e)
-    {
+    public void playerRender(RenderPlayerEvent.Pre e) {
         float tick = (float) (720.0 * (System.currentTimeMillis() & 0x3FFFL) / 0x3FFFL);
 
         if (e.entityPlayer instanceof AbstractClientPlayer
-                && isDeveloper(e.entityPlayer.getUniqueID()))
-        {
+                && isDeveloper(e.entityPlayer.getUniqueID())) {
             ((AbstractClientPlayer) e.entityPlayer).func_152121_a(
                     MinecraftProfileTexture.Type.CAPE, new ResourceLocation(
                             "fossil", "textures/FossilCape.png"));
-        }
-
-        else if (e.entityPlayer instanceof AbstractClientPlayer
-                && isContributor(e.entityPlayer.getUniqueID()))
-        {
+        } else if (e.entityPlayer instanceof AbstractClientPlayer
+                && isContributor(e.entityPlayer.getUniqueID())) {
             ((AbstractClientPlayer) e.entityPlayer).func_152121_a(
                     MinecraftProfileTexture.Type.CAPE, new ResourceLocation(
                             "fossil", "textures/ContributorCape.png"));
         }
     }
 
-    private float interpolateRotation(float p_77034_1_, float p_77034_2_, float p_77034_3_)
-    {
+    private float interpolateRotation(float p_77034_1_, float p_77034_2_, float p_77034_3_) {
         float f3;
 
-        for (f3 = p_77034_2_ - p_77034_1_; f3 < -180.0F; f3 += 360.0F)
-        {
+        for (f3 = p_77034_2_ - p_77034_1_; f3 < -180.0F; f3 += 360.0F) {
             ;
         }
 
-        while (f3 >= 180.0F)
-        {
+        while (f3 >= 180.0F) {
             f3 -= 360.0F;
         }
 
@@ -212,24 +203,18 @@ public class RenderPlayerCapes
 	 * UUIDs of the players are stored
 	 */
 
-    public boolean isDeveloper(UUID userid)
-    {
-        for (UUID uuid1 : devuuid)
-        {
-            if (userid.equals(uuid1))
-            {
+    public boolean isDeveloper(UUID userid) {
+        for (UUID uuid1 : devuuid) {
+            if (userid.equals(uuid1)) {
                 return true;
             }
         }
         return false;
     }
 
-    public boolean isContributor(UUID userid)
-    {
-        for (UUID uuid1 : contributoruuid)
-        {
-            if (userid.equals(uuid1))
-            {
+    public boolean isContributor(UUID userid) {
+        for (UUID uuid1 : contributoruuid) {
+            if (userid.equals(uuid1)) {
                 return true;
             }
         }

@@ -2,8 +2,7 @@ package com.github.revival.common.enums;
 
 import com.github.revival.Revival;
 
-public enum EnumAnimalType
-{
+public enum EnumAnimalType {
     Pig(3000),
     Sheep(3000),
     Cow(3000),
@@ -16,14 +15,10 @@ public enum EnumAnimalType
 
     public int GrowTime;
 
-    private EnumAnimalType(int grow0)
-    {
-        if (Revival.enableDebugging())
-        {
+    private EnumAnimalType(int grow0) {
+        if (Revival.enableDebugging()) {
             GrowTime = 100;
-        }
-        else
-        {
+        } else {
             GrowTime = grow0;
         }
     }

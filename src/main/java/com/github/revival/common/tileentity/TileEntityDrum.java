@@ -3,8 +3,8 @@ package com.github.revival.common.tileentity;
 import com.github.revival.Revival;
 import com.github.revival.common.entity.mob.EntityDinosaur;
 import com.github.revival.common.entity.mob.EntityTyrannosaurus;
-import com.github.revival.common.enums.EnumPrehistoric;
 import com.github.revival.common.enums.EnumOrderType;
+import com.github.revival.common.enums.EnumPrehistoric;
 import com.github.revival.common.handler.LocalizationStrings;
 import com.github.revival.common.item.FAItemRegistry;
 import net.minecraft.entity.Entity;
@@ -22,8 +22,7 @@ import java.util.List;
 //import fossil.entity.mob.EntityRaptor;
 //import fossil.entity.mob.EntityTriceratops;
 
-public class TileEntityDrum extends TileEntity
-{
+public class TileEntityDrum extends TileEntity {
     /*
      * final String DRUM = "Drum."; final String MSG = "Msg."; final String
      * ORDER = "Order."; final String HEAD = "Head"; final String MIDDLE =
@@ -35,8 +34,7 @@ public class TileEntityDrum extends TileEntity
     // public byte note;
     // public boolean previousRedstoneState;
 
-    public TileEntityDrum()
-    {
+    public TileEntityDrum() {
         this.Order = EnumOrderType.Stay;
         // this.note = 0;
         // this.previousRedstoneState = false;
@@ -45,8 +43,7 @@ public class TileEntityDrum extends TileEntity
     /**
      * Writes a tile entity to NBT.
      */
-    public void writeToNBT(NBTTagCompound var1)
-    {
+    public void writeToNBT(NBTTagCompound var1) {
         super.writeToNBT(var1);
         var1.setByte("Order", (byte) this.Order.ordinal());// Revival.EnumToInt(this.Order));
     }
@@ -54,8 +51,7 @@ public class TileEntityDrum extends TileEntity
     /**
      * Reads a tile entity from NBT.
      */
-    public void readFromNBT(NBTTagCompound var1)
-    {
+    public void readFromNBT(NBTTagCompound var1) {
         super.readFromNBT(var1);
         this.Order = EnumOrderType.values()[var1.getByte("Order")];
     }
@@ -82,8 +78,7 @@ public class TileEntityDrum extends TileEntity
 	 * + this.Order.toString()); }
 	 */
 
-    public void TriggerOrder(EntityPlayer player)
-    {
+    public void TriggerOrder(EntityPlayer player) {
         this.Order = this.Order.Next();
         this.worldObj.playSoundEffect((double) this.xCoord,
                 (double) this.yCoord, (double) this.zCoord,
@@ -100,11 +95,10 @@ public class TileEntityDrum extends TileEntity
         this.markDirty();
     }
 
-    public boolean SendOrder(Item item, EntityPlayer var2)
-    {
+    public boolean SendOrder(Item item, EntityPlayer var2) {
         // var2.itemID == this.ItemToControl.itemID && this.isTamed() &&
         // var1.username.equalsIgnoreCase(this.getOwnerName())
-		/*
+        /*
 		 * String var3 = ""; String var4 = ""; String var5 =
 		 * Revival.GetLangTextByKey("Drum.Msg.Head"); String var6 =
 		 * Revival.GetLangTextByKey("Drum.Msg.Middle"); String var7 =
@@ -118,11 +112,9 @@ public class TileEntityDrum extends TileEntity
 
         if (item != FAItemRegistry.skullStick) // That is treated specially ;)
         {
-            for (int i = 0; i < EnumPrehistoric.values().length; ++i)
-            {
+            for (int i = 0; i < EnumPrehistoric.values().length; ++i) {
                 if (EnumPrehistoric.values()[i].orderItem != null
-                        && EnumPrehistoric.values()[i].orderItem == item)
-                {
+                        && EnumPrehistoric.values()[i].orderItem == item) {
                     Revival.showMessage(
                             StatCollector
                                     .translateToLocal(LocalizationStrings.DRUM_ORDERING)
@@ -146,8 +138,7 @@ public class TileEntityDrum extends TileEntity
                             30.0D));
             Iterator it = list.iterator();
 
-            while (it.hasNext())
-            {
+            while (it.hasNext()) {
                 Entity var3 = (Entity) it.next();
                 EntityDinosaur var4 = (EntityDinosaur) var3;
 
@@ -165,9 +156,7 @@ public class TileEntityDrum extends TileEntity
 				 * Revival.ShowMessage("NOPE",var2);
 				 */
             }
-        }
-        else
-        {
+        } else {
             Revival.showMessage(StatCollector
                     .translateToLocal(LocalizationStrings.DRUM_TREX
                             + String.valueOf(this.Order.ordinal() + 1)), var2);
@@ -181,13 +170,11 @@ public class TileEntityDrum extends TileEntity
                             50.0D));
             Iterator it = list.iterator();
 
-            while (it.hasNext())
-            {
+            while (it.hasNext()) {
                 Entity var4 = (Entity) it.next();
                 EntityTyrannosaurus var5 = (EntityTyrannosaurus) var4;
 
-                if (var5.isAdult() && !var5.isTamed())
-                {
+                if (var5.isAdult() && !var5.isTamed()) {
                     var5.setAngry(true);
                     var5.setAttackTarget(var2);
                 }
@@ -271,8 +258,7 @@ public class TileEntityDrum extends TileEntity
 	 */
 
     @Override
-    public boolean canUpdate()
-    {
+    public boolean canUpdate() {
         return false;
     }
 

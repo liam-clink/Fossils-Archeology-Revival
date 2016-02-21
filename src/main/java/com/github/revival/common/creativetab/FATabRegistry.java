@@ -3,8 +3,7 @@ package com.github.revival.common.creativetab;
 import net.ilexiconn.llibrary.common.content.IContentHandler;
 import net.minecraft.creativetab.CreativeTabs;
 
-public class FATabRegistry implements IContentHandler
-{
+public class FATabRegistry implements IContentHandler {
     public static CreativeTabs tabFBlocks;
     public static CreativeTabs tabFItems;
     public static CreativeTabs tabFFood;
@@ -13,8 +12,7 @@ public class FATabRegistry implements IContentHandler
     public static CreativeTabs tabFFigurines;
     public static CreativeTabs tabFBones;
 
-    public void init()
-    {
+    public void init() {
         tabFBlocks = new TabFBlocks("Fossil Blocks");
         tabFItems = new TabFItems("Fossil Items");
         tabFFood = new TabFFood("Fossil Food");
@@ -24,8 +22,7 @@ public class FATabRegistry implements IContentHandler
         tabFBones = new TabFBones("Fossil Bones");
     }
 
-    public void gameRegistry() throws Exception
-    {
+    public void gameRegistry() throws Exception {
 
     }
 }

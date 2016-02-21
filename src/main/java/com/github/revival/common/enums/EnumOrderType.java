@@ -1,13 +1,11 @@
 package com.github.revival.common.enums;
 
-public enum EnumOrderType
-{
+public enum EnumOrderType {
     Stay,
     Follow,
     FreeMove;
 
-    public final EnumOrderType Next()
-    {
+    public final EnumOrderType Next() {
         return this.values()[(this.ordinal() + 1) % this.values().length];
         /*switch (this.ordinal())
         {

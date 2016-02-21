@@ -10,14 +10,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-public class FossilGuiHandler implements IGuiHandler
-{
-    public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z)
-    {
+public class FossilGuiHandler implements IGuiHandler {
+    public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
         TileEntity tileEntity = world.getTileEntity(x, y, z);
 
-        switch (id)
-        {
+        switch (id) {
             case 0:
                 return new ContainerAnalyzer(player.inventory, tileEntity);
             case 1:
@@ -43,12 +40,10 @@ public class FossilGuiHandler implements IGuiHandler
         return null;
     }
 
-    public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z)
-    {
+    public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
         TileEntity tileEntity = world.getTileEntity(x, y, z);
 
-        switch (id)
-        {
+        switch (id) {
             case 0:
                 return new GuiAnalyzer(player.inventory, tileEntity);
             case 1:

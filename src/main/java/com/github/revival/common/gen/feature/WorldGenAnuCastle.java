@@ -15,8 +15,7 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 
 import java.util.Random;
 
-public class WorldGenAnuCastle extends WorldGenerator
-{
+public class WorldGenAnuCastle extends WorldGenerator {
     protected static final WeightedRandomChestContent[] treasure = new WeightedRandomChestContent[]{
             new WeightedRandomChestContent(Item.getItemFromBlock(FABlockRegistry.ancientGlass), 0, 2, 5, 25),
             new WeightedRandomChestContent(FAItemRegistry.relic, 0, 1, 2, 76),
@@ -45,16 +44,14 @@ public class WorldGenAnuCastle extends WorldGenerator
 
     };
 
-    protected Block[] GetValidSpawnBlocks()
-    {
+    protected Block[] GetValidSpawnBlocks() {
         return new Block[]
                 {
                         Blocks.netherrack,
                 };
     }
 
-    public boolean generate(World world, Random rand, int x, int y, int z)
-    {
+    public boolean generate(World world, Random rand, int x, int y, int z) {
         generate_r0(world, rand, x, y, z);
         generateChests(world, rand, x, y, z);
         generateSpecial(world, rand, x, y, z);
@@ -62,8 +59,7 @@ public class WorldGenAnuCastle extends WorldGenerator
 
     }
 
-    public void generateChests(World world, Random rand, int x, int y, int z)
-    {
+    public void generateChests(World world, Random rand, int x, int y, int z) {
         chestWithLoot(x + 24, y + 3, z + 51, false, world, rand, treasure, 6 + rand.nextInt(6));
         chestWithLoot(x + 24, y + 3, z + 53, false, world, rand, treasure, 6 + rand.nextInt(6));
         chestWithLoot(x + 32, y + 3, z + 53, false, world, rand, treasure, 6 + rand.nextInt(6));
@@ -163,8 +159,7 @@ public class WorldGenAnuCastle extends WorldGenerator
         chestWithLoot(x + 121, y + 23, z + 28, false, world, rand, treasure, 6 + rand.nextInt(6));
     }
 
-    public void generateSpecial(World world, Random rand, int x, int y, int z)
-    {
+    public void generateSpecial(World world, Random rand, int x, int y, int z) {
 
         ItemDoor.placeDoorBlock(world, x + 65, y + 13, z + 18, 3, Blocks.iron_door);
         ItemDoor.placeDoorBlock(world, x + 75, y + 13, z + 18, 3, Blocks.iron_door);
@@ -180,28 +175,22 @@ public class WorldGenAnuCastle extends WorldGenerator
 
     }
 
-    protected void chestWithLoot(int i1, int j1, int k1, boolean isTrapped, World world, Random rand, WeightedRandomChestContent[] content, int i)
-    {
-        if (isTrapped)
-        {
+    protected void chestWithLoot(int i1, int j1, int k1, boolean isTrapped, World world, Random rand, WeightedRandomChestContent[] content, int i) {
+        if (isTrapped) {
             world.setBlock(i1, j1, k1, Blocks.trapped_chest, 0, 2);
 
-        }
-        else
-        {
+        } else {
             world.setBlock(i1, j1, k1, Blocks.chest, 0, 2);
         }
 
         TileEntityChest tileentitychest = (TileEntityChest) world.getTileEntity(i1, j1, k1);
 
-        if (tileentitychest != null)
-        {
+        if (tileentitychest != null) {
             WeightedRandomChestContent.generateChestContents(rand, content, tileentitychest, i);
         }
     }
 
-    public boolean generate_r0(World world, Random rand, int x, int y, int z)
-    {
+    public boolean generate_r0(World world, Random rand, int x, int y, int z) {
         world.setBlock(x + 0, y + -1, z + 0, Blocks.netherrack, 0, 3);
         world.setBlock(x + 1, y + -1, z + 0, Blocks.netherrack, 0, 3);
         world.setBlock(x + 2, y + -1, z + 0, Blocks.netherrack, 0, 3);

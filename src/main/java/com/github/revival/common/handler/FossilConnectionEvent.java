@@ -6,33 +6,27 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
 import net.minecraft.entity.player.EntityPlayer;
 
-public class FossilConnectionEvent
-{
+public class FossilConnectionEvent {
 
     @SubscribeEvent
-    public void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event)
-    {
+    public void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
         EntityPlayer player = event.player;
 
-        if (Revival.enableDebugging())
-        {
+        if (Revival.enableDebugging()) {
             Revival.showMessage("------- DEBUG MODE IS ON. TURN OFF BEFORE RELEASING! --------", player);
         }
 
-        switch (Revival.STATE)
-        {
+        switch (Revival.STATE) {
             case DEV:
 
-                if (FossilConfig.loginMessage)
-                {
+                if (FossilConfig.loginMessage) {
                     Revival.showMessage("You are running F/A:Revival Dev Build, " + Revival.VERSION + ".", player);
                     Revival.showMessage("Github: https://github.com/FossilsArcheologyRevival/FossilArcheology1.7", player);
                 }
                 return;
 
             case BETA:
-                if (FossilConfig.loginMessage)
-                {
+                if (FossilConfig.loginMessage) {
                     Revival.showMessage("You are running Fossils and Archaeology Revival " + Revival.VERSION + ".", player);
                     Revival.showMessage("This mod is currently in a BETA state. Be sure to backup worlds.", player);
                     Revival.showMessage("Forum and support: http://www.minecraftforum.net/topic/1708636-", player);
@@ -44,8 +38,7 @@ public class FossilConnectionEvent
                 return;
 
             case RELEASE:
-                if (FossilConfig.loginMessage)
-                {
+                if (FossilConfig.loginMessage) {
                     Revival.showMessage("You are running Fossils and Archaeology Revival " + Revival.VERSION + ".", player);
                     Revival.showMessage("Forum and support: http://www.minecraftforum.net/topic/1708636-", player);
                     Revival.showMessage("Github: https://github.com/FossilsArcheologyRevival/FossilArcheology1.7", player);

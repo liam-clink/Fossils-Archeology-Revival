@@ -7,8 +7,7 @@ import net.minecraft.item.Item;
 
 import java.util.ArrayList;
 
-public enum EnumEntityPrehistoric
-{
+public enum EnumEntityPrehistoric {
     // entityClass tameable rideable canCarry canFormHerds territorial targetFoodHabbit
     Allosaurus(EntityAllosaurus.class, true, true, true, false, true, 0),
     Ankylosaurus(EntityAnkylosaurus.class, true, true, true, false, true, 1),
@@ -74,8 +73,7 @@ public enum EnumEntityPrehistoric
     private boolean attacksPlayersAsAdult;
     private boolean territorial;
 
-    private EnumEntityPrehistoric(Class entityClass, boolean tameable, boolean rideable, boolean canCarry, boolean canFormHerds, boolean territorial, int targetFoodHabbit)
-    {
+    private EnumEntityPrehistoric(Class entityClass, boolean tameable, boolean rideable, boolean canCarry, boolean canFormHerds, boolean territorial, int targetFoodHabbit) {
         this.entityClass = entityClass;
         this.tameable = tameable;
         this.rideable = rideable;
@@ -85,8 +83,7 @@ public enum EnumEntityPrehistoric
         this.targetFoodHabbit = targetFoodHabbit;
     }
 
-    public static void init()
-    {
+    public static void init() {
         Allosaurus.setBaseValues(10.0D, 2.0D, 0.25D, 2.0D, 0.55F, 1.0F);
         Allosaurus.setMaxValues(40.0D, 11.0D, 0.42D, 11.0D, 3.1F);
         Allosaurus.setDimensions(1.4F, 1.3F, 1.0F); // Fix eye height
@@ -99,56 +96,44 @@ public enum EnumEntityPrehistoric
 
     }
 
-    public boolean shouldRunFromEntity(EntityPrehistoric e)
-    {
+    public boolean shouldRunFromEntity(EntityPrehistoric e) {
         return fleesFrom.contains(e.getType());
     }
 
-    public boolean willEat(Item item)
-    {
-        for (EnumEdibleFoodstuff foodItem : foodItems)
-        {
-            if (foodItem.isItem(item))
-            {
+    public boolean willEat(Item item) {
+        for (EnumEdibleFoodstuff foodItem : foodItems) {
+            if (foodItem.isItem(item)) {
                 return true;
             }
         }
         return false;
     }
 
-    public boolean willEat(Block block)
-    {
-        for (EnumEdibleFoodBlocks foodBlock : foodBlocks)
-        {
-            if (foodBlock.isBlock(block))
-            {
+    public boolean willEat(Block block) {
+        for (EnumEdibleFoodBlocks foodBlock : foodBlocks) {
+            if (foodBlock.isBlock(block)) {
                 return true;
             }
         }
         return false;
     }
 
-    public boolean willAttack(EntityLiving entity)
-    {
-        for (EnumEdibleFoodMob foodMob : foodMobs)
-        {
-            if (foodMob.isEntity(entity))
-            {
+    public boolean willAttack(EntityLiving entity) {
+        for (EnumEdibleFoodMob foodMob : foodMobs) {
+            if (foodMob.isEntity(entity)) {
                 return true;
             }
         }
         return false;
     }
 
-    private void setDimensions(float baseBoundingBoxHeight, float baseBoundingBoxWidth, float baseEyeHeight)
-    {
+    private void setDimensions(float baseBoundingBoxHeight, float baseBoundingBoxWidth, float baseEyeHeight) {
         this.baseBoundingBoxHeight = baseBoundingBoxHeight;
         this.baseBoundingBoxWidth = baseBoundingBoxWidth;
         this.baseEyeHeight = baseEyeHeight;
     }
 
-    private void setBaseValues(double health, double damage, double speed, double strength, float size, float exp)
-    {
+    private void setBaseValues(double health, double damage, double speed, double strength, float size, float exp) {
         baseHealth = health;
         baseDamage = damage;
         baseSpeed = speed;
@@ -157,8 +142,7 @@ public enum EnumEntityPrehistoric
         baseExp = exp;
     }
 
-    private void setMaxValues(double health, double damage, double speed, double strength, float size)
-    {
+    private void setMaxValues(double health, double damage, double speed, double strength, float size) {
         maxHealth = health;
         maxDamage = damage;
         maxSpeed = speed;
@@ -166,244 +150,197 @@ public enum EnumEntityPrehistoric
         maxSize = size;
     }
 
-    private void setHerdProperties(int maxHerdSize, float maxAwarenessRadius, float immediateAwarenessRadius, float herdWanderRadius)
-    {
+    private void setHerdProperties(int maxHerdSize, float maxAwarenessRadius, float immediateAwarenessRadius, float herdWanderRadius) {
         this.maxHerdSize = maxHerdSize;
         this.maxAwarenessRadius = maxAwarenessRadius;
         this.immediateAwarenessRadius = immediateAwarenessRadius;
         this.herdWanderRadius = herdWanderRadius;
     }
 
-    private void setAges(int teenAge, int adultAge)
-    {
+    private void setAges(int teenAge, int adultAge) {
         this.teenAge = teenAge;
         this.adultAge = adultAge;
     }
 
-    private void setIfEaten(int hunger, int health)
-    {
+    private void setIfEaten(int hunger, int health) {
         this.hungerIfEaten = hunger;
         this.healIfEaten = health;
     }
 
-    private void setSpeedRunMultiplier(double speedRunMult)
-    {
+    private void setSpeedRunMultiplier(double speedRunMult) {
         this.speedRunMult = speedRunMult;
     }
 
-    private void setHungerProperties(float hungerLevel, int ticksPerHungerDecrement)
-    {
+    private void setHungerProperties(float hungerLevel, int ticksPerHungerDecrement) {
         this.hungerLevel = hungerLevel;
         this.ticksPerHungerDecrement = ticksPerHungerDecrement;
     }
 
-    private void setAttacksPlayersAsAdult(boolean attacks)
-    {
+    private void setAttacksPlayersAsAdult(boolean attacks) {
         this.attacksPlayersAsAdult = attacks;
     }
 
-    private void setTerritorialRadius(float radius)
-    {
+    private void setTerritorialRadius(float radius) {
         this.territorialRadius = radius;
     }
 
-    public Item getDropItem()
-    {
+    public Item getDropItem() {
         return dropItemMeat;
     }
 
-    private void setDropItem(Item item)
-    {
+    private void setDropItem(Item item) {
         this.dropItemMeat = item;
     }
 
-    public double getBaseHealth()
-    {
+    public double getBaseHealth() {
         return baseHealth;
     }
 
-    public double getBaseDamage()
-    {
+    public double getBaseDamage() {
         return baseDamage;
     }
 
-    public double getBaseSpeed()
-    {
+    public double getBaseSpeed() {
         return baseSpeed;
     }
 
-    public double getBaseStrength()
-    {
+    public double getBaseStrength() {
         return baseStrength;
     }
 
-    public double getMaxHealth()
-    {
+    public double getMaxHealth() {
         return maxHealth;
     }
 
-    public double getMaxDamage()
-    {
+    public double getMaxDamage() {
         return maxDamage;
     }
 
-    public double getMaxSpeed()
-    {
+    public double getMaxSpeed() {
         return maxSpeed;
     }
 
-    public double getMaxStrength()
-    {
+    public double getMaxStrength() {
         return maxStrength;
     }
 
-    public double getSpeedRunMult()
-    {
+    public double getSpeedRunMult() {
         return speedRunMult;
     }
 
-    public float getBaseSize()
-    {
+    public float getBaseSize() {
         return baseSize;
     }
 
-    public float getMaxSize()
-    {
+    public float getMaxSize() {
         return maxSize;
     }
 
-    public float getBaseEyeHeight()
-    {
+    public float getBaseEyeHeight() {
         return baseEyeHeight;
     }
 
-    public float getBaseBoundingBoxHeight()
-    {
+    public float getBaseBoundingBoxHeight() {
         return baseBoundingBoxHeight;
     }
 
-    public float getBaseBoundingBoxWidth()
-    {
+    public float getBaseBoundingBoxWidth() {
         return baseBoundingBoxWidth;
     }
 
-    public float getBaseExp()
-    {
+    public float getBaseExp() {
         return baseExp;
     }
 
-    public float getExpDaily()
-    {
+    public float getExpDaily() {
         return expDaily;
     }
 
-    private void setExpDaily(float expDaily)
-    {
+    private void setExpDaily(float expDaily) {
         this.expDaily = expDaily;
     }
 
-    public float getMaxAwarenessRadius()
-    {
+    public float getMaxAwarenessRadius() {
         return maxAwarenessRadius;
     }
 
-    public float getImmediateAwarenessRadius()
-    {
+    public float getImmediateAwarenessRadius() {
         return immediateAwarenessRadius;
     }
 
-    public float getHerdWanderRadius()
-    {
+    public float getHerdWanderRadius() {
         return herdWanderRadius;
     }
 
-    public float getHungerLevel()
-    {
+    public float getHungerLevel() {
         return hungerLevel;
     }
 
-    public int getMaxHerdSize()
-    {
+    public int getMaxHerdSize() {
         return maxHerdSize;
     }
 
-    public int getTargetFoodHabbit()
-    {
+    public int getTargetFoodHabbit() {
         return targetFoodHabbit;
     }
 
-    public int getMaxHunger()
-    {
+    public int getMaxHunger() {
         return maxHunger;
     }
 
-    public int getAdultAge()
-    {
+    public int getAdultAge() {
         return adultAge;
     }
 
-    public int getTeenAge()
-    {
+    public int getTeenAge() {
         return teenAge;
     }
 
-    public int getHungerIfEaten()
-    {
+    public int getHungerIfEaten() {
         return hungerIfEaten;
     }
 
-    public int getHealthIfEaten()
-    {
+    public int getHealthIfEaten() {
         return healIfEaten;
     }
 
-    public int getTicksPerHungerDecrement()
-    {
+    public int getTicksPerHungerDecrement() {
         return ticksPerHungerDecrement;
     }
 
-    public boolean isCanFormHerds()
-    {
+    public boolean isCanFormHerds() {
         return canFormHerds;
     }
 
-    public boolean isTameable()
-    {
+    public boolean isTameable() {
         return tameable;
     }
 
-    public boolean isRideable()
-    {
+    public boolean isRideable() {
         return rideable;
     }
 
-    public boolean isCanCarry()
-    {
+    public boolean isCanCarry() {
         return canCarry;
     }
 
-    public boolean attacksPlayersAsAdult()
-    {
+    public boolean attacksPlayersAsAdult() {
         return attacksPlayersAsAdult;
     }
 
-    public boolean eatsMeat()
-    {
+    public boolean eatsMeat() {
         return targetFoodHabbit == this.FOOD_HABBIT_CARNIVORE || targetFoodHabbit == this.FOOD_HABBIT_OMNIVORE;
     }
 
-    public boolean eatsVegetables()
-    {
+    public boolean eatsVegetables() {
         return targetFoodHabbit == this.FOOD_HABBIT_HERBIVORE || targetFoodHabbit == this.FOOD_HABBIT_OMNIVORE;
     }
 
-    public boolean eatsBlocks()
-    {
+    public boolean eatsBlocks() {
         return !foodBlocks.isEmpty();
     }
 
-    public Class getEntityClass()
-    {
+    public Class getEntityClass() {
         return entityClass;
     }
 

@@ -8,13 +8,10 @@ import net.minecraft.world.chunk.IChunkProvider;
 
 import java.util.Random;
 
-public class WorldGeneratorPalaeoraphe implements IWorldGenerator
-{
+public class WorldGeneratorPalaeoraphe implements IWorldGenerator {
     public void generate(Random random, int chunkX, int chunkZ, World world,
-                         IChunkProvider chunkGenerator, IChunkProvider chunkProvider)
-    {
-        switch (world.provider.dimensionId)
-        {
+                         IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
+        switch (world.provider.dimensionId) {
             case -1:
                 generateNether(world, random, chunkX * 16, chunkZ * 16);
 
@@ -24,8 +21,7 @@ public class WorldGeneratorPalaeoraphe implements IWorldGenerator
     }
 
     private void generateSurface(World world, Random rand, int chunkX,
-                                 int chunkZ)
-    {
+                                 int chunkZ) {
         BiomeGenBase biome = world.getWorldChunkManager().getBiomeGenAt(chunkX,
                 chunkZ);
         WorldGenPalaeoraphe tree = new WorldGenPalaeoraphe();
@@ -33,8 +29,7 @@ public class WorldGeneratorPalaeoraphe implements IWorldGenerator
         if ((biome instanceof BiomeGenSwamp)) // then add ||BiomeGenXYZ if you
         // want more.
         {
-            for (int x = 0; x < 2; x++)
-            {
+            for (int x = 0; x < 2; x++) {
                 int i = chunkX + rand.nextInt(128);
                 int k = chunkZ + rand.nextInt(128);
                 int j = world.getHeightValue(i, k);
@@ -44,7 +39,6 @@ public class WorldGeneratorPalaeoraphe implements IWorldGenerator
     }
 
     private void generateNether(World world, Random random, int blockX,
-                                int blockZ)
-    {
+                                int blockZ) {
     }
 }

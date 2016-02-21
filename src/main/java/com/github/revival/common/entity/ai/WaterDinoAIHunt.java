@@ -13,8 +13,7 @@ import java.util.Iterator;
 import java.util.List;
 
 
-public class WaterDinoAIHunt extends EntityAITarget
-{
+public class WaterDinoAIHunt extends EntityAITarget {
     private final Class targetClass;
     private EntityDinosaur dinosaur;
     private DinoAINearestAttackableTargetSorter targetSorter;
@@ -35,8 +34,7 @@ public class WaterDinoAIHunt extends EntityAITarget
     private double speed;
     private World theWorld;
 
-    public WaterDinoAIHunt(EntityDinosaur dinosaur, Class _class, int range, boolean par4, double speed)
-    {
+    public WaterDinoAIHunt(EntityDinosaur dinosaur, Class _class, int range, boolean par4, double speed) {
         super(dinosaur, par4);
         this.theWorld = dinosaur.worldObj;
         this.speed = speed;
@@ -46,22 +44,18 @@ public class WaterDinoAIHunt extends EntityAITarget
         this.targetSorter = new DinoAINearestAttackableTargetSorter(this, this.dinosaur);
     }
 
-    public boolean isInterruptible()
-    {
+    public boolean isInterruptible() {
         return true;
     }
-    
+
     @Override
-    public boolean shouldExecute()
-    {
-        if (!theWorld.isRemote)
-        {
+    public boolean shouldExecute() {
+        if (!theWorld.isRemote) {
             if (!FossilConfig.starvingDinos)
                 return false;
         }
-        
-        if ((this.dinosaur.IsHungry() || this.dinosaur.IsDeadlyHungry()) && !this.dinosaur.SelfType.FoodMobList.IsEmpty())
-        {
+
+        if ((this.dinosaur.IsHungry() || this.dinosaur.IsDeadlyHungry()) && !this.dinosaur.SelfType.FoodMobList.IsEmpty()) {
             double d0 = this.getTargetDistance();
 
             if (this.getTargetDistance() > SEARCH_RANGE)
@@ -71,14 +65,11 @@ public class WaterDinoAIHunt extends EntityAITarget
             Collections.sort(list, this.targetSorter);
             Iterator iterator = list.iterator();
 
-            while (iterator.hasNext())
-            {
+            while (iterator.hasNext()) {
                 EntityLiving entity = (EntityLiving) iterator.next();
 
-                if (this.dinosaur.SelfType.FoodMobList.CheckMobByClass(entity.getClass()))
-                {//It's food
-                    if (!(entity instanceof EntityDinosaur) || (entity instanceof EntityDinosaur && ((EntityDinosaur) entity).isModelized() == false))
-                    {//No modelized Dinos for Lunch!
+                if (this.dinosaur.SelfType.FoodMobList.CheckMobByClass(entity.getClass())) {//It's food
+                    if (!(entity instanceof EntityDinosaur) || (entity instanceof EntityDinosaur && ((EntityDinosaur) entity).isModelized() == false)) {//No modelized Dinos for Lunch!
                         this.targetEntity = entity;
                         //this.dinosaur.setAttackTarget(entity);
                         return true;
@@ -94,44 +85,37 @@ public class WaterDinoAIHunt extends EntityAITarget
     /**
      * Returns whether an in-progress EntityAIBase should continue executing
      */
-    public boolean continueExecuting()
-    {
+    public boolean continueExecuting() {
         return !this.targetEntity.isEntityAlive() ? false : (this.dinosaur.getDistanceSqToEntity(this.targetEntity) > SEARCH_RANGE ? false : this.shouldExecute());
     }
-    
+
     /**
      * Resets the task
      */
-    public void resetTask()
-    {
+    public void resetTask() {
         this.targetEntity = null;
         this.dinosaur.getNavigator().clearPathEntity();
     }
-    
+
     /**
      * Updates the task
      */
-    public void updateTask()
-    {
+    public void updateTask() {
         double distance = SEARCH_RANGE;
         this.dinosaur.getLookHelper().setLookPositionWithEntity(this.targetEntity, 30.0F, 30.0F);
         double d0 = (double) (this.dinosaur.width * 2.0F * this.dinosaur.width * 2.0F);
         double d1 = this.dinosaur.getDistanceSq(this.targetEntity.posX, this.targetEntity.boundingBox.minY, this.targetEntity.posZ);
         double d2 = 1.8D;
 
-        if (d1 > d0 && d1 < 16.0D)
-        {
+        if (d1 > d0 && d1 < 16.0D) {
             d2 = 1.0D;
-        }
-        else if (d1 < 225.0D)
-        {
+        } else if (d1 < 225.0D) {
             d2 = 1.3D;
         }
 
 
         if (this.dinosaur.isInWater() && this.targetEntity != null && this.targetEntity.isInWater()
-                && this.targetEntity.getDistanceSqToEntity(this.dinosaur) < distance * distance)
-        {
+                && this.targetEntity.getDistanceSqToEntity(this.dinosaur) < distance * distance) {
 
             this.deltaX = this.targetEntity.posX - this.dinosaur.posX;
             this.deltaY = this.targetEntity.posY - this.dinosaur.posY;
@@ -142,30 +126,25 @@ public class WaterDinoAIHunt extends EntityAITarget
             this.movePosX = this.deltaX;
             this.movePosY = this.deltaY;
             this.movePosZ = this.deltaZ;
-            
+
             this.dinosaur.addVelocity(deltaX * this.speed, deltaY * this.speed, deltaZ * this.speed);
 
-            if (this.dinosaur.canEntityBeSeen(this.targetEntity))
-            {
+            if (this.dinosaur.canEntityBeSeen(this.targetEntity)) {
                 Vec3 vec3 = this.dinosaur.getLook(1.0F);
             }
-        }
-        else
-        {
+        } else {
             this.dinosaur.renderYawOffset = this.dinosaur.rotationYaw = -((float) Math.atan2(this.dinosaur.motionX, this.dinosaur.motionZ)) * 180.0F / (float) Math.PI;
         }
-        
+
         this.attackCountdown = Math.max(this.attackCountdown - 1, 0);
 
-        if (d1 <= d0)
-        {
-            if (this.attackCountdown <= 0)
-            {
+        if (d1 <= d0) {
+            if (this.attackCountdown <= 0) {
                 this.attackCountdown = 20;
                 this.dinosaur.attackEntityAsMob(this.targetEntity);
             }
         }
-        
+
     }
-    
+
 }

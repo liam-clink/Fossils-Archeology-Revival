@@ -5,11 +5,9 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.item.ItemSlab;
 
-public class ItemSlabAncientStone extends ItemSlab
-{
+public class ItemSlabAncientStone extends ItemSlab {
 
-    public ItemSlabAncientStone(Block block)
-    {
+    public ItemSlabAncientStone(Block block) {
         super(block, (BlockSlab) FABlockRegistry.ancientStoneSingleSlab, (BlockSlab) FABlockRegistry.ancientStoneDoubleSlab, false);
     }
 }

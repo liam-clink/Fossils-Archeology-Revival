@@ -5,20 +5,17 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.ilexiconn.llibrary.client.model.tabula.ModelJson;
 
 @SideOnly(Side.CLIENT)
-public class JsonTabulaModel extends net.ilexiconn.llibrary.common.json.container.JsonTabulaModel
-{
+public class JsonTabulaModel extends net.ilexiconn.llibrary.common.json.container.JsonTabulaModel {
     private String modelName;
     private String authorName;
 
     public ModelJson modelJson;
 
-    public String getModelName()
-    {
+    public String getModelName() {
         return modelName;
     }
 
-    public String getAuthorName()
-    {
+    public String getAuthorName() {
         return authorName;
     }
 }

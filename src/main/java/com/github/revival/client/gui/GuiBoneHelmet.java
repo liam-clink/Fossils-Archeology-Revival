@@ -18,12 +18,10 @@ import org.lwjgl.opengl.GL11;
 // GuiBuffBar implements a simple status bar at the top of the screen which
 // shows the current buffs/debuffs applied to the character.
 //
-public class GuiBoneHelmet extends Gui
-{
+public class GuiBoneHelmet extends Gui {
     private Minecraft mc;
 
-    public GuiBoneHelmet(Minecraft mc)
-    {
+    public GuiBoneHelmet(Minecraft mc) {
         super();
         // We need this to invoke the render engine.
         this.mc = mc;
@@ -34,28 +32,24 @@ public class GuiBoneHelmet extends Gui
     // GuiIngameForge.pre() and GuiIngameForce.post().
     //
     @SubscribeEvent(priority = EventPriority.NORMAL)
-    public void onRenderExperienceBar(RenderGameOverlayEvent event)
-    {
+    public void onRenderExperienceBar(RenderGameOverlayEvent event) {
         //
         // We draw after the ExperienceBar has drawn.  The event raised by GuiIngameForge.pre()
         // will return true from isCancelable.  If you call event.setCanceled(true) in
         // that case, the portion of rendering which this event represents will be canceled.
         // We want to draw *after* the experience bar is drawn, so we make sure isCancelable() returns
         // false and that the eventType represents the ExperienceBar event.
-        if (event.isCancelable() || event.type != ElementType.EXPERIENCE)
-        {
+        if (event.isCancelable() || event.type != ElementType.EXPERIENCE) {
             return;
         }
 
-        if (!FossilConfig.skullOverlay)
-        {
+        if (!FossilConfig.skullOverlay) {
             return;
         }
 
         ItemStack helmet = Minecraft.getMinecraft().thePlayer.inventory.armorItemInSlot(3);
 
-        if (Minecraft.getMinecraft().gameSettings.thirdPersonView == 0 && helmet != null && helmet.getItem() == FAItemRegistry.skullHelmet)
-        {
+        if (Minecraft.getMinecraft().gameSettings.thirdPersonView == 0 && helmet != null && helmet.getItem() == FAItemRegistry.skullHelmet) {
             // Starting position for the buff bar - 2 pixels from the top left corner.
             int xPos = 0;
             int yPos = 0;
@@ -78,8 +72,7 @@ public class GuiBoneHelmet extends Gui
         }
     }
 
-    public void myDrawTexturedModalRect(int x, int y, int width, int height)
-    {
+    public void myDrawTexturedModalRect(int x, int y, int width, int height) {
         Tessellator tessellator = Tessellator.instance;
         tessellator.startDrawingQuads();
         tessellator.addVertexWithUV(x, y + height, 0, 0.0, 1.0);

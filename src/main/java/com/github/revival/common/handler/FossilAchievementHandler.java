@@ -3,14 +3,12 @@ package com.github.revival.common.handler;
 import com.github.revival.common.block.FABlockRegistry;
 import com.github.revival.common.enums.EnumPrehistoric;
 import com.github.revival.common.item.FAItemRegistry;
-
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
 import net.minecraftforge.common.AchievementPage;
 
-public class FossilAchievementHandler
-{
+public class FossilAchievementHandler {
     public static AchievementPage FossilsAchievementPage;
 
     /* public static Achievement FirstEgg;
@@ -60,8 +58,7 @@ public class FossilAchievementHandler
     public static Achievement shear;
 
 
-    public static void loadAchievements()
-    {
+    public static void loadAchievements() {
         firstFossil = new Achievement("achievement.firstFossil", "firstFossil", 0, 0, new ItemStack(FAItemRegistry.biofossil), (Achievement) null).registerStat();
         analyzer = new Achievement("achievement.analyzer", "analyzer", 0, -2, new ItemStack(FABlockRegistry.blockanalyzerActive), (Achievement) firstFossil).registerStat();
         tablet = new Achievement("achievement.tablet", "tablet", -2, -2, new ItemStack(FAItemRegistry.stoneboard), (Achievement) analyzer).registerStat();

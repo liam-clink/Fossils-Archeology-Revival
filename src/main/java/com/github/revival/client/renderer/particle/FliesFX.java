@@ -9,8 +9,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
-public class FliesFX extends EntityFX
-{
+public class FliesFX extends EntityFX {
     //declare your variables
     public static final ResourceLocation resourceloc = new ResourceLocation("fossil:textures/Flies.png");
     private static final ResourceLocation particles = new ResourceLocation("textures/particle/particles.png");
@@ -20,8 +19,7 @@ public class FliesFX extends EntityFX
     float particleScaleOverTime;
 
 
-    public FliesFX(World par1World, double par2, double par4, double par6, double par8, double par10, double par12, float par14)
-    {
+    public FliesFX(World par1World, double par2, double par4, double par6, double par8, double par10, double par12, float par14) {
         super(par1World, par2, par4, par6, 0.0D, 0.0D, 0.0D);
         this.motionX *= 0.009999999776482582D;
         this.motionY *= 0.009999999776482582D;
@@ -35,21 +33,18 @@ public class FliesFX extends EntityFX
         this.setParticleTextureIndex(0);
     }
 
-    public void renderParticle(Tessellator tessellator, float f, float f1, float f2, float f3, float f4, float f5)
-    {
+    public void renderParticle(Tessellator tessellator, float f, float f1, float f2, float f3, float f4, float f5) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         Tessellator tessellator1 = new Tessellator();
         tessellator1.startDrawingQuads();
         tessellator1.setBrightness(getBrightnessForRender(f));
         float f6 = (((float) particleAge + f) / (float) particleMaxAge) * 32F;
 
-        if (f6 < 0.0F)
-        {
+        if (f6 < 0.0F) {
             f6 = 0.0F;
         }
 
-        if (f6 > 1.0F)
-        {
+        if (f6 > 1.0F) {
             f6 = 1.0F;
         }
 
@@ -77,21 +72,18 @@ public class FliesFX extends EntityFX
     /**
      * Called to update the entity's position/logic.
      */
-    public void onUpdate()
-    {
+    public void onUpdate() {
         this.prevPosX = this.posX;
         this.prevPosY = this.posY;
         this.prevPosZ = this.posZ;
 
-        if (this.particleAge++ >= this.particleMaxAge)
-        {
+        if (this.particleAge++ >= this.particleMaxAge) {
             this.setDead();
         }
 
         this.moveEntity(this.motionX, this.motionY, this.motionZ);
 
-        if (this.posY == this.prevPosY)
-        {
+        if (this.posY == this.prevPosY) {
             this.motionX *= 1.1D;
             this.motionZ *= 1.1D;
         }
@@ -100,8 +92,7 @@ public class FliesFX extends EntityFX
         this.motionY *= 0.8600000143051147D;
         this.motionZ *= 0.8600000143051147D;
 
-        if (this.onGround)
-        {
+        if (this.onGround) {
             this.motionX *= 0.699999988079071D;
             this.motionZ *= 0.699999988079071D;
         }

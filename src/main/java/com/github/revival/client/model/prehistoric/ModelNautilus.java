@@ -1,12 +1,11 @@
 package com.github.revival.client.model.prehistoric;
 
+import com.github.revival.client.model.base.ModelPrehistoric;
+import com.github.revival.common.entity.mob.test.EntityNewPrehistoric;
 import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelRenderer;
 import net.minecraft.util.MathHelper;
 
-import com.github.revival.client.model.base.ModelPrehistoric;
-import com.github.revival.common.entity.mob.test.EntityNewPrehistoric;
-
-public class ModelNautilus extends ModelPrehistoric{
+public class ModelNautilus extends ModelPrehistoric {
 
     public MowzieModelRenderer Shell;
     public MowzieModelRenderer Head;
@@ -17,9 +16,9 @@ public class ModelNautilus extends ModelPrehistoric{
     public MowzieModelRenderer Tech5;
     public MowzieModelRenderer Tech6;
 
-    public ModelNautilus(){
-    	this.Shell = new MowzieModelRenderer(this, 0, 12);
-    	this.Shell.addBox(-2.0F, -5.0F, -5.0F, 4, 10, 10, 0.0F);
+    public ModelNautilus() {
+        this.Shell = new MowzieModelRenderer(this, 0, 12);
+        this.Shell.addBox(-2.0F, -5.0F, -5.0F, 4, 10, 10, 0.0F);
         this.Shell.setRotationPoint(2.0F, 15.0F, 1.0F);
         this.Shell.rotateAngleX = 0.0F;
         this.Shell.rotateAngleY = 0.0F;
@@ -74,13 +73,13 @@ public class ModelNautilus extends ModelPrehistoric{
         this.Tech6.rotateAngleY = 0.0F;
         this.Tech6.rotateAngleZ = 0.0F;
         this.Tech6.mirror = false;
-		doMowzieStuff(false);
+        doMowzieStuff(false);
 
     }
-	
 
-	@Override
-	public void renderLiving(EntityNewPrehistoric entity, float f, float f1, float f2, float f3, float f4, float f5) {
+
+    @Override
+    public void renderLiving(EntityNewPrehistoric entity, float f, float f1, float f2, float f3, float f4, float f5) {
         super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
         this.Tech1.rotateAngleX = 0.2F * MathHelper.sin(f2 * 0.3F + 1.0F) + 0.4F;
         this.Tech2.rotateAngleX = 0.2F * MathHelper.sin(f2 * 0.3F + 2.0F) + 0.4F;
@@ -88,15 +87,15 @@ public class ModelNautilus extends ModelPrehistoric{
         this.Tech4.rotateAngleX = 0.2F * MathHelper.sin(f2 * 0.3F + 4.0F) + 0.4F;
         this.Tech5.rotateAngleX = 0.2F * MathHelper.sin(f2 * 0.3F + 5.0F) + 0.4F;
         this.Tech6.rotateAngleX = 0.2F * MathHelper.sin(f2 * 0.3F + 6.0F) + 0.4F;
-	}
+    }
 
-	@Override
-	public void renderFossil(EntityNewPrehistoric entity, float f, float f1, float f2, float f3, float f4, float f5) {
-		
-	}
+    @Override
+    public void renderFossil(EntityNewPrehistoric entity, float f, float f1, float f2, float f3, float f4, float f5) {
 
-	@Override
-	public void renderSleeping(EntityNewPrehistoric entity, float f, float f1, float f2, float f3, float f4, float f5) {
-		
-	}
+    }
+
+    @Override
+    public void renderSleeping(EntityNewPrehistoric entity, float f, float f1, float f2, float f3, float f4, float f5) {
+
+    }
 }

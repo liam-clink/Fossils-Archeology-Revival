@@ -8,13 +8,12 @@ import net.ilexiconn.llibrary.common.json.JsonFactory;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-public class ModelHelper
-{
-	public static JsonTabulaModel tabulaModel;
+public class ModelHelper {
+    public static JsonTabulaModel tabulaModel;
+
     @SideOnly(Side.CLIENT)
-    public static  JsonTabulaModel parseModelFromJson(InputStream stream)
-    {
-    	  tabulaModel = JsonFactory.getGson().fromJson(new InputStreamReader(stream), JsonTabulaModel.class); 
+    public static JsonTabulaModel parseModelFromJson(InputStream stream) {
+        tabulaModel = JsonFactory.getGson().fromJson(new InputStreamReader(stream), JsonTabulaModel.class);
         tabulaModel.modelJson = new ModelJson(tabulaModel);
         return tabulaModel;
     }

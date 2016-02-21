@@ -1,9 +1,8 @@
 package com.github.revival.client.model.prehistoric;
 
-import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelRenderer;
-
 import com.github.revival.client.model.base.ModelPrehistoric;
 import com.github.revival.common.entity.mob.test.EntityNewPrehistoric;
+import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelRenderer;
 
 public class ModelPteranodon extends ModelPrehistoric {
     public MowzieModelRenderer Leg2;
@@ -136,26 +135,26 @@ public class ModelPteranodon extends ModelPrehistoric {
         this.Body.addChild(this.Fibre2);
     }
 
-	@Override
-	public void renderFossil(EntityNewPrehistoric entity, float f, float f1,
-			float f2, float f3, float f4, float f5) {
-		
-	}
+    @Override
+    public void renderFossil(EntityNewPrehistoric entity, float f, float f1,
+                             float f2, float f3, float f4, float f5) {
 
-	@Override
-	public void renderLiving(EntityNewPrehistoric entity, float f, float f1,
-			float f2, float f3, float f4, float f5) {
-		if(entity.isFlying){
-			
-		}else{
-			
-		}
-	}
+    }
 
-	@Override
-	public void renderSleeping(EntityNewPrehistoric entity, float f, float f1,
-			float f2, float f3, float f4, float f5) {
-		
-	}
+    @Override
+    public void renderLiving(EntityNewPrehistoric entity, float f, float f1,
+                             float f2, float f3, float f4, float f5) {
+        if (entity.isFlying) {
+
+        } else {
+
+        }
+    }
+
+    @Override
+    public void renderSleeping(EntityNewPrehistoric entity, float f, float f1,
+                               float f2, float f3, float f4, float f5) {
+
+    }
 
 }

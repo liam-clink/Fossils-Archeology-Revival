@@ -22,78 +22,59 @@ public class ItemFossilSeeds extends Item
     public boolean isFossil;
     private IIcon[] textures;
 
-    public ItemFossilSeeds(boolean isFossil)
-    {
+    public ItemFossilSeeds(boolean isFossil) {
         super();
         this.setHasSubtypes(true);
         this.isFossil = isFossil;
     }
 
     @Override
-    public void getSubItems(Item item, CreativeTabs creativeTabs, List list)
-    {
-        for (int i = 0; i < fossilSeeds.length; ++i)
-        {
-                list.add(new ItemStack(item, 1, i));
+    public void getSubItems(Item item, CreativeTabs creativeTabs, List list) {
+        for (int i = 0; i < fossilSeeds.length; ++i) {
+            list.add(new ItemStack(item, 1, i));
         }
     }
 
     @Override
-    public void registerIcons(IIconRegister iconRegister)
-    {
+    public void registerIcons(IIconRegister iconRegister) {
         textures = new IIcon[fossilSeeds.length];
 
-        for (int i = 0; i < fossilSeeds.length; ++i)
-        {
-            if (isFossil)
-            {
+        for (int i = 0; i < fossilSeeds.length; ++i) {
+            if (isFossil) {
                 textures[i] = iconRegister.registerIcon("fossil:" + "plants/fossilSeed_" + fossilSeeds[i]);
-            }
-            else
-            {
+            } else {
                 textures[i] = iconRegister.registerIcon("fossil:" + "plants/seed_" + fossilSeeds[i]);
             }
         }
     }
 
     @Override
-    public IIcon getIconFromDamage(int meta)
-    {
-        if (meta < 0 || meta >= textures.length)
-        {
+    public IIcon getIconFromDamage(int meta) {
+        if (meta < 0 || meta >= textures.length) {
             meta = 0;
         }
 
         return textures[meta];
     }
 
-    public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int i, float a, float b, float c)
-    {
+    public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int i, float a, float b, float c) {
 
-        if (!isFossil && player.canPlayerEdit(x, y, z, i, stack) && player.canPlayerEdit(x, y + 1, z, i, stack))
-        {
-            if (Blocks.sapling.canBlockStay(world, x, y, z) && world.isAirBlock(x, y + 1, z) && world.getBlock(x, y, z) != FABlockRegistry.welwitschia)
-            {
+        if (!isFossil && player.canPlayerEdit(x, y, z, i, stack) && player.canPlayerEdit(x, y + 1, z, i, stack)) {
+            if (Blocks.sapling.canBlockStay(world, x, y, z) && world.isAirBlock(x, y + 1, z) && world.getBlock(x, y, z) != FABlockRegistry.welwitschia) {
                 this.placePlantBlock(stack, world, x, y, z, new Random());
                 --stack.stackSize;
                 return true;
-            }
-            else
-            {
+            } else {
                 return false;
             }
-        }
-        else
-        {
+        } else {
             return false;
         }
     }
 
-    private void placePlantBlock(ItemStack stack, World world, int x, int y, int z, Random rand)
-    {
+    private void placePlantBlock(ItemStack stack, World world, int x, int y, int z, Random rand) {
         world.playSound((double) x + 0.5D, (double) y + 0.5D, (double) z + 0.5D, FABlockRegistry.dillhoffia.stepSound.getBreakSound(), 1F, rand.nextFloat() * 0.1F + 0.8F, false);
-        switch (stack.getItemDamage())
-        {
+        switch (stack.getItemDamage()) {
             case 0:
                 world.setBlock(x, y + 1, z, FABlockRegistry.dillhoffia);
                 break;
@@ -127,11 +108,9 @@ public class ItemFossilSeeds extends Item
     }
 
     @Override
-    public String getUnlocalizedName(ItemStack itemStack)
-    {
+    public String getUnlocalizedName(ItemStack itemStack) {
         int meta = itemStack.getItemDamage();
-        if (meta < 0 || meta >= fossilSeeds.length)
-        {
+        if (meta < 0 || meta >= fossilSeeds.length) {
             meta = 0;
         }
 

@@ -5,11 +5,9 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.item.ItemSlab;
 
-public class ItemSlabAncientWood extends ItemSlab
-{
+public class ItemSlabAncientWood extends ItemSlab {
 
-    public ItemSlabAncientWood(Block block)
-    {
+    public ItemSlabAncientWood(Block block) {
         super(block, (BlockSlab) FABlockRegistry.ancientWoodSingleSlab, (BlockSlab) FABlockRegistry.ancientWoodDoubleSlab, false);
     }
 }

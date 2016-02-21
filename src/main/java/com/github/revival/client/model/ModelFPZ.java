@@ -7,20 +7,16 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 
 @SideOnly(Side.CLIENT)
-public class ModelFPZ extends ModelBiped
-{
-    public ModelFPZ()
-    {
+public class ModelFPZ extends ModelBiped {
+    public ModelFPZ() {
         this(0.0F, false);
     }
 
-    protected ModelFPZ(float par1, float par2, int par3, int par4)
-    {
+    protected ModelFPZ(float par1, float par2, int par3, int par4) {
         super(par1, par2, par3, par4);
     }
 
-    public ModelFPZ(float par1, boolean par2)
-    {
+    public ModelFPZ(float par1, boolean par2) {
         super(par1, 0.0F, 64, par2 ? 32 : 64);
     }
 
@@ -29,8 +25,7 @@ public class ModelFPZ extends ModelBiped
      * and legs, where par1 represents the time(so that arms and legs swing back and forth) and par2 represents how
      * "far" arms and legs can swing at most.
      */
-    public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity par7Entity)
-    {
+    public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity par7Entity) {
         super.setRotationAngles(par1, par2, par3, par4, par5, par6, par7Entity);
         float f6 = MathHelper.sin(this.onGround * (float) Math.PI);
         float f7 = MathHelper.sin((1.0F - (1.0F - this.onGround) * (1.0F - this.onGround)) * (float) Math.PI);

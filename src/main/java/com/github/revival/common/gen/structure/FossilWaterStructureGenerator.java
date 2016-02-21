@@ -23,8 +23,7 @@ import net.minecraft.world.World;
 import java.util.LinkedList;
 import java.util.Random;
 
-public class FossilWaterStructureGenerator extends StructureGeneratorBase
-{
+public class FossilWaterStructureGenerator extends StructureGeneratorBase {
     /**
      * List storing all structures currently available
      */
@@ -33,11 +32,9 @@ public class FossilWaterStructureGenerator extends StructureGeneratorBase
     /**
      * Add all structures to the Structure List
      */
-    static
-    {
+    static {
         Structure structure = new Structure("ShipWreck");
-        if (FossilConfig.generateShips)
-        {
+        if (FossilConfig.generateShips) {
             structure.addBlockArray(ShipWreck1.blockArrayShipWreck1);
             structure.addBlockArray(ShipWreck2.blockArrayShipWreck2);
             structure.addBlockArray(ShipWreck3.blockArrayShipWreck3);
@@ -88,25 +85,21 @@ public class FossilWaterStructureGenerator extends StructureGeneratorBase
     // value there, but I'm feeling lazy
     boolean value_set = false;
 
-    public FossilWaterStructureGenerator(Entity entity, int[][][][] blocks)
-    {
+    public FossilWaterStructureGenerator(Entity entity, int[][][][] blocks) {
         super(entity, blocks);
     }
 
     public FossilWaterStructureGenerator(Entity entity, int[][][][] blocks,
-                                         int structureFacing)
-    {
+                                         int structureFacing) {
         super(entity, blocks, structureFacing);
     }
 
     public FossilWaterStructureGenerator(Entity entity, int[][][][] blocks,
-                                         int structureFacing, int offX, int offY, int offZ)
-    {
+                                         int structureFacing, int offX, int offY, int offZ) {
         super(entity, blocks, structureFacing, offX, offY, offZ);
     }
 
-    public FossilWaterStructureGenerator()
-    {
+    public FossilWaterStructureGenerator() {
         super();
     }
 
@@ -121,10 +114,8 @@ public class FossilWaterStructureGenerator extends StructureGeneratorBase
      * <= 4096
      */
     @Override
-    public int getRealBlockID(int fakeID, int customData1)
-    {
-        switch (fakeID)
-        {
+    public int getRealBlockID(int fakeID, int customData1) {
+        switch (fakeID) {
             case ShipWreckUtil.CUSTOM_CHEST:
                 return Block.getIdFromBlock(Blocks.chest);
 
@@ -168,9 +159,8 @@ public class FossilWaterStructureGenerator extends StructureGeneratorBase
         }
     }
 
-    private EnumPrehistoric getDinosaur()
-    {
-    	EnumPrehistoric[] var1 = EnumPrehistoric.values();
+    private EnumPrehistoric getDinosaur() {
+        EnumPrehistoric[] var1 = EnumPrehistoric.values();
         int var2 = var1.length;
         Random var4 = new Random();
         EnumPrehistoric enumDinosaur;
@@ -188,10 +178,8 @@ public class FossilWaterStructureGenerator extends StructureGeneratorBase
      */
     @Override
     public void onCustomBlockAdded(World world, int x, int y, int z,
-                                   int fakeID, int customData1, int customData2)
-    {
-        if (!value_set)
-        {
+                                   int fakeID, int customData1, int customData2) {
+        if (!value_set) {
             // if using this method, this should only be done once per
             // structure, preferably with a better method
             // sets one value of RANDOM_HOLE to remove from the structure,
@@ -202,8 +190,7 @@ public class FossilWaterStructureGenerator extends StructureGeneratorBase
 
         int meta = world.getBlockMetadata(x, y, z);
 
-        switch (fakeID)
-        {
+        switch (fakeID) {
             case ShipWreckUtil.CUSTOM_CHEST:
                 Random rand = new Random();
 
@@ -211,52 +198,37 @@ public class FossilWaterStructureGenerator extends StructureGeneratorBase
                 // the first slot available
 
                 // Here we use customData to subtype custom_chest:
-                if (customData1 == ShipWreckUtil.RARE_LOOT)
-                {
+                if (customData1 == ShipWreckUtil.RARE_LOOT) {
                     // How many times to iterate through the list for loot
-                    for (int iterate = 0; iterate < rand.nextInt(4); iterate++)
-                    {
+                    for (int iterate = 0; iterate < rand.nextInt(4); iterate++) {
                         int loot = rand.nextInt(100);
 
-                        if (loot < 20)
-                        {
+                        if (loot < 20) {
                             addItemToTileInventory(world, new ItemStack(
                                     Items.leather, rand.nextInt(20) + 1), x, y, z);
-                        }
-                        else if (loot < 40)
-                        {
+                        } else if (loot < 40) {
                             addItemToTileInventory(world, new ItemStack(
                                             Items.golden_sword, rand.nextInt(2) + 1), x, y,
                                     z);
-                        }
-                        else if (loot < 50)
-                        {
+                        } else if (loot < 50) {
                             addItemToTileInventory(world, new ItemStack(
                                     Items.compass, 1), x, y, z);
-                        }
-                        else if (loot < 60)
-                        {
+                        } else if (loot < 60) {
                             addItemToTileInventory(
                                     world,
                                     (new ItemStack(
                                             Item.getItemFromBlock(FABlockRegistry.figurineBlock),
                                             rand.nextInt(2) + 1, rand.nextInt(15))),
                                     x, y, z);
-                        }
-                        else if (loot < 80)
-                        {
+                        } else if (loot < 80) {
                             addItemToTileInventory(world, new ItemStack(
                                             Items.gold_nugget, rand.nextInt(32) + 1), x, y,
                                     z);
-                        }
-                        else if (loot < 90)
-                        {
+                        } else if (loot < 90) {
                             addItemToTileInventory(world, new ItemStack(
                                             FAItemRegistry.ironjavelin, rand.nextInt(16) + 1), x,
                                     y, z);
-                        }
-                        else if (loot < 101)
-                        {
+                        } else if (loot < 101) {
                             addItemToTileInventory(world, new ItemStack(
                                     Items.name_tag, rand.nextInt(2) + 1), x, y, z);
                         }
@@ -264,47 +236,32 @@ public class FossilWaterStructureGenerator extends StructureGeneratorBase
                     }
                 }
                 // Not our specific chest, so we'll do some generic stuff
-                if (customData1 == ShipWreckUtil.COMMON_LOOT)
-                {
+                if (customData1 == ShipWreckUtil.COMMON_LOOT) {
                     // How many times to iterate through the list for loot
-                    for (int iterate = 0; iterate < rand.nextInt(7); iterate++)
-                    {
+                    for (int iterate = 0; iterate < rand.nextInt(7); iterate++) {
                         int loot = (int) (Math.random() * 100);
 
-                        if (loot < 20)
-                        {
+                        if (loot < 20) {
                             addItemToTileInventory(world, new ItemStack(
                                     Items.leather, rand.nextInt(6) + 1), x, y, z);
-                        }
-                        else if (loot < 40)
-                        {
+                        } else if (loot < 40) {
                             addItemToTileInventory(world, new ItemStack(Items.book,
                                     rand.nextInt(2) + 1), x, y, z);
-                        }
-                        else if (loot < 60)
-                        {
+                        } else if (loot < 60) {
                             addItemToTileInventory(world, new ItemStack(
                                             Items.fishing_rod, rand.nextInt(1) + 1), x, y,
                                     z);
-                        }
-                        else if (loot < 70)
-                        {
+                        } else if (loot < 70) {
                             addItemToTileInventory(world, new ItemStack(
                                     Items.gunpowder, rand.nextInt(10) + 1), x, y, z);
-                        }
-                        else if (loot < 85)
-                        {
+                        } else if (loot < 85) {
                             addItemToTileInventory(world, new ItemStack(
                                             FAItemRegistry.woodjavelin, rand.nextInt(8) + 1), x, y,
                                     z);
-                        }
-                        else if (loot < 95)
-                        {
+                        } else if (loot < 95) {
                             addItemToTileInventory(world, new ItemStack(
                                     Items.iron_sword, rand.nextInt(1) + 1), x, y, z);
-                        }
-                        else
-                        {
+                        } else {
                             addItemToTileInventory(world, new ItemStack(
                                     Items.iron_ingot, rand.nextInt(8) + 1), x, y, z);
                         }
@@ -322,8 +279,7 @@ public class FossilWaterStructureGenerator extends StructureGeneratorBase
                 // as it is full
                 boolean addmore = true;
 
-                while (addmore)
-                {
+                while (addmore) {
                     // Here we use customData as the itemID to place
                     addmore = addItemToTileInventory(world,
                             new ItemStack(Item.getItemById(customData1), 64, 0), x,
@@ -340,8 +296,7 @@ public class FossilWaterStructureGenerator extends StructureGeneratorBase
                 String[] text;
 
                 // Set different text for each custom sign, using different colors
-                if (customData1 == ShipWreckUtil.CUSTOM_SIGN_1)
-                {
+                if (customData1 == ShipWreckUtil.CUSTOM_SIGN_1) {
                     // max number of lines is 4; any more than that will be ignored
                     text = new String[5];
                     text[0] = EnumChatFormatting.DARK_RED + " BEWARE";
@@ -352,9 +307,7 @@ public class FossilWaterStructureGenerator extends StructureGeneratorBase
                             + "Enter at your abcdefghijklm";
                     text[3] = EnumChatFormatting.DARK_GRAY + " own risk.";
                     text[4] = "Never prints!";
-                }
-                else
-                {
+                } else {
                     // best to allocate only what is needed, here just one line
                     text = new String[1];
                     text[0] = EnumChatFormatting.BLACK + "Sign Post Text";
@@ -413,8 +366,7 @@ public class FossilWaterStructureGenerator extends StructureGeneratorBase
                 // will become holes
                 // this way is nice because we don't need to set customData2 for all
                 // these blocks
-                if (world.rand.nextFloat() < 0.25F)
-                {
+                if (world.rand.nextFloat() < 0.25F) {
                     world.setBlockToAir(x, y, z);
                 }
 

@@ -5,8 +5,7 @@ import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 
-public enum EnumDinoFoodBlock
-{
+public enum EnumDinoFoodBlock {
     Cake(Blocks.cake, 50, 8),
     Carrot(Blocks.carrots, 20, 3),
     Crops(Blocks.wheat, 10, 2),
@@ -27,8 +26,7 @@ public enum EnumDinoFoodBlock
     public int FoodValue;
     public int HealValue;
 
-    private EnumDinoFoodBlock(Block Block, int Food, int Heal)
-    {
+    private EnumDinoFoodBlock(Block Block, int Food, int Heal) {
         block = Block;
         FoodValue = Food;
         HealValue = Heal;
@@ -37,12 +35,9 @@ public enum EnumDinoFoodBlock
     /**
      * Takes the itemid and gives the food value
      */
-    public static int getBlockFood(Item i0)
-    {
-        for (int i = 0; i < EnumDinoFoodBlock.values().length; i++)
-        {
-            if (Item.getItemFromBlock(EnumDinoFoodBlock.values()[i].block) == i0)
-            {
+    public static int getBlockFood(Item i0) {
+        for (int i = 0; i < EnumDinoFoodBlock.values().length; i++) {
+            if (Item.getItemFromBlock(EnumDinoFoodBlock.values()[i].block) == i0) {
                 return EnumDinoFoodBlock.values()[i].FoodValue;
             }
         }

@@ -8,8 +8,7 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
-public class TileEntityFigurine extends TileEntity
-{
+public class TileEntityFigurine extends TileEntity {
     /**
      * Entity type for this figurine.
      */
@@ -24,8 +23,7 @@ public class TileEntityFigurine extends TileEntity
      * Writes a tile entity to NBT.
      */
     @Override
-    public void writeToNBT(NBTTagCompound par1NBTTagCompound)
-    {
+    public void writeToNBT(NBTTagCompound par1NBTTagCompound) {
         super.writeToNBT(par1NBTTagCompound);
         par1NBTTagCompound.setByte("FigurineType",
                 (byte) (this.figurineType & 255));
@@ -33,8 +31,7 @@ public class TileEntityFigurine extends TileEntity
     }
 
     @Override
-    public boolean canUpdate()
-    {
+    public boolean canUpdate() {
         return false;
     }
 
@@ -42,8 +39,7 @@ public class TileEntityFigurine extends TileEntity
      * Reads a tile entity from NBT.
      */
     @Override
-    public void readFromNBT(NBTTagCompound par1NBTTagCompound)
-    {
+    public void readFromNBT(NBTTagCompound par1NBTTagCompound) {
         super.readFromNBT(par1NBTTagCompound);
         this.figurineType = par1NBTTagCompound.getByte("FigurineType");
         this.figurineRotation = par1NBTTagCompound.getByte("Rot");
@@ -53,8 +49,7 @@ public class TileEntityFigurine extends TileEntity
      * Overriden in a sign to provide the text.
      */
     @Override
-    public Packet getDescriptionPacket()
-    {
+    public Packet getDescriptionPacket() {
         NBTTagCompound nbttagcompound = new NBTTagCompound();
         this.writeToNBT(nbttagcompound);
         return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord,
@@ -63,38 +58,33 @@ public class TileEntityFigurine extends TileEntity
 
     @Override
     public void onDataPacket(NetworkManager netManager,
-                             S35PacketUpdateTileEntity packet)
-    {
+                             S35PacketUpdateTileEntity packet) {
         readFromNBT(packet.func_148857_g());
     }
 
     /**
      * Get the entity type for the figurine
      */
-    public int getFigurineType()
-    {
+    public int getFigurineType() {
         return this.figurineType;
     }
 
     /**
      * Set the entity type for the figurine
      */
-    public void setFigurineType(int par1)
-    {
+    public void setFigurineType(int par1) {
         this.figurineType = par1;
     }
 
     /**
      * Set the figurine's rotation
      */
-    public void setFigurineRotation(int par1)
-    {
+    public void setFigurineRotation(int par1) {
         this.figurineRotation = par1;
     }
 
     @SideOnly(Side.CLIENT)
-    public int func_82119_b()
-    {
+    public int func_82119_b() {
         return this.figurineRotation;
     }
 }

@@ -11,8 +11,7 @@ import net.minecraft.util.MathHelper;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
-public class ModelQuagga extends ModelBase
-{
+public class ModelQuagga extends ModelBase {
     private ModelRenderer head;
     private ModelRenderer mouthTop;
     private ModelRenderer mouthBottom;
@@ -53,8 +52,7 @@ public class ModelQuagga extends ModelBase
     private ModelRenderer field_110702_R;
     private ModelRenderer field_110701_S;
 
-    public ModelQuagga()
-    {
+    public ModelQuagga() {
         this.textureWidth = 128;
         this.textureHeight = 128;
         this.body = new ModelRenderer(this, 0, 34);
@@ -198,8 +196,7 @@ public class ModelQuagga extends ModelBase
     /**
      * Sets the models various rotation angles then renders the model.
      */
-    public void render(Entity par1Entity, float par2, float par3, float par4, float par5, float par6, float par7)
-    {
+    public void render(Entity par1Entity, float par2, float par3, float par4, float par5, float par6, float par7) {
         EntityQuagga entityhorse = (EntityQuagga) par1Entity;
         float f6 = entityhorse.getGrassEatingAmount(0.0F);
         boolean flag = entityhorse.isAdultHorse();
@@ -208,8 +205,7 @@ public class ModelQuagga extends ModelBase
         float f7 = entityhorse.getHorseSize();
         boolean flag4 = entityhorse.riddenByEntity != null;
 
-        if (flag1)
-        {
+        if (flag1) {
             this.field_110717_i.render(par7);
             this.field_110696_I.render(par7);
             this.field_110697_J.render(par7);
@@ -221,15 +217,13 @@ public class ModelQuagga extends ModelBase
             this.field_110700_P.render(par7);
             this.field_110699_Q.render(par7);
 
-            if (flag4)
-            {
+            if (flag4) {
                 this.field_110702_R.render(par7);
                 this.field_110701_S.render(par7);
             }
         }
 
-        if (!flag)
-        {
+        if (!flag) {
             GL11.glPushMatrix();
             GL11.glScalef(f7, 0.5F + f7 * 0.5F, f7);
             GL11.glTranslatef(0.0F, 0.95F * (1.0F - f7), 0.0F);
@@ -248,8 +242,7 @@ public class ModelQuagga extends ModelBase
         this.frontRightShin.render(par7);
         this.frontRightHoof.render(par7);
 
-        if (!flag)
-        {
+        if (!flag) {
             GL11.glPopMatrix();
             GL11.glPushMatrix();
             GL11.glScalef(f7, f7, f7);
@@ -263,19 +256,15 @@ public class ModelQuagga extends ModelBase
         this.neck.render(par7);
         this.mane.render(par7);
 
-        if (!flag)
-        {
+        if (!flag) {
             GL11.glPopMatrix();
             GL11.glPushMatrix();
             float f8 = 0.5F + f7 * f7 * 0.5F;
             GL11.glScalef(f8, f8, f8);
 
-            if (f6 <= 0.0F)
-            {
+            if (f6 <= 0.0F) {
                 GL11.glTranslatef(0.0F, 1.35F * (1.0F - f7), 0.0F);
-            }
-            else
-            {
+            } else {
                 GL11.glTranslatef(0.0F, 0.9F * (1.0F - f7) * f6 + 1.35F * (1.0F - f7) * (1.0F - f6), 0.15F * (1.0F - f7) * f6);
             }
         }
@@ -285,36 +274,30 @@ public class ModelQuagga extends ModelBase
 
         this.head.render(par7);
 
-        if (!flag)
-        {
+        if (!flag) {
             GL11.glPopMatrix();
         }
 
-        if (flag2)
-        {
+        if (flag2) {
             this.field_110687_G.render(par7);
             this.field_110695_H.render(par7);
         }
     }
 
-    private void func_110682_a(ModelRenderer par1ModelRenderer, float par2, float par3, float par4)
-    {
+    private void func_110682_a(ModelRenderer par1ModelRenderer, float par2, float par3, float par4) {
         par1ModelRenderer.rotateAngleX = par2;
         par1ModelRenderer.rotateAngleY = par3;
         par1ModelRenderer.rotateAngleZ = par4;
     }
 
-    private float func_110683_a(float par1, float par2, float par3)
-    {
+    private float func_110683_a(float par1, float par2, float par3) {
         float f3;
 
-        for (f3 = par2 - par1; f3 < -180.0F; f3 += 360.0F)
-        {
+        for (f3 = par2 - par1; f3 < -180.0F; f3 += 360.0F) {
             ;
         }
 
-        while (f3 >= 180.0F)
-        {
+        while (f3 >= 180.0F) {
             f3 -= 360.0F;
         }
 
@@ -325,8 +308,7 @@ public class ModelQuagga extends ModelBase
      * Used for easily adding entity-dependent animations. The second and third float params here are the same second
      * and third as in the setRotationAngles method.
      */
-    public void setLivingAnimations(EntityLivingBase par1EntityLivingBase, float par2, float par3, float par4)
-    {
+    public void setLivingAnimations(EntityLivingBase par1EntityLivingBase, float par2, float par3, float par4) {
         super.setLivingAnimations(par1EntityLivingBase, par2, par3, par4);
         float f3 = this.func_110683_a(par1EntityLivingBase.prevRenderYawOffset, par1EntityLivingBase.renderYawOffset, par4);
         float f4 = this.func_110683_a(par1EntityLivingBase.prevRotationYawHead, par1EntityLivingBase.rotationYawHead, par4);
@@ -334,18 +316,15 @@ public class ModelQuagga extends ModelBase
         float f6 = f4 - f3;
         float f7 = f5 / (180F / (float) Math.PI);
 
-        if (f6 > 20.0F)
-        {
+        if (f6 > 20.0F) {
             f6 = 20.0F;
         }
 
-        if (f6 < -20.0F)
-        {
+        if (f6 < -20.0F) {
             f6 = -20.0F;
         }
 
-        if (par3 > 0.2F)
-        {
+        if (par3 > 0.2F) {
             f7 += MathHelper.cos(par2 * 0.4F) * 0.15F * par3;
         }
 
@@ -452,8 +431,7 @@ public class ModelQuagga extends ModelBase
         this.frontRightHoof.rotationPointY = this.frontRightShin.rotationPointY;
         this.frontRightHoof.rotationPointZ = this.frontRightShin.rotationPointZ;
 
-        if (flag1)
-        {
+        if (flag1) {
             this.field_110696_I.rotationPointY = f9 * 0.5F + f10 * 2.0F;
             this.field_110696_I.rotationPointZ = f9 * 11.0F + f10 * 2.0F;
             this.field_110697_J.rotationPointY = this.field_110696_I.rotationPointY;
@@ -494,8 +472,7 @@ public class ModelQuagga extends ModelBase
             this.field_110699_Q.rotateAngleY = this.head.rotateAngleY;
             this.field_110701_S.rotateAngleY = this.head.rotateAngleY;
 
-            if (flag2)
-            {
+            if (flag2) {
                 this.field_110691_L.rotateAngleX = -1.0471976F;
                 this.field_110692_M.rotateAngleX = -1.0471976F;
                 this.field_110693_N.rotateAngleX = -1.0471976F;
@@ -504,9 +481,7 @@ public class ModelQuagga extends ModelBase
                 this.field_110692_M.rotateAngleZ = 0.0F;
                 this.field_110693_N.rotateAngleZ = 0.0F;
                 this.field_110694_O.rotateAngleZ = 0.0F;
-            }
-            else
-            {
+            } else {
                 this.field_110691_L.rotateAngleX = f14 / 3.0F;
                 this.field_110692_M.rotateAngleX = f14 / 3.0F;
                 this.field_110693_N.rotateAngleX = f14 / 3.0F;
@@ -520,18 +495,14 @@ public class ModelQuagga extends ModelBase
 
         f15 = -1.3089F + par3 * 1.5F;
 
-        if (f15 > 0.0F)
-        {
+        if (f15 > 0.0F) {
             f15 = 0.0F;
         }
 
-        if (flag)
-        {
+        if (flag) {
             this.tailBase.rotateAngleY = MathHelper.cos(f12 * 0.7F);
             f15 = 0.0F;
-        }
-        else
-        {
+        } else {
             this.tailBase.rotateAngleY = 0.0F;
         }
 

@@ -1,12 +1,10 @@
 package com.github.revival.client.model.prehistoric;
 
-import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelRenderer;
-
 import com.github.revival.client.model.base.ModelPrehistoric;
 import com.github.revival.common.entity.mob.test.EntityNewPrehistoric;
+import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelRenderer;
 
-public class ModelMosasaurus extends ModelPrehistoric
-{
+public class ModelMosasaurus extends ModelPrehistoric {
     //fields
     MowzieModelRenderer Body;
     private MowzieModelRenderer FrontFlipper_Right;
@@ -26,8 +24,7 @@ public class ModelMosasaurus extends ModelPrehistoric
     private MowzieModelRenderer JawBottomBase;
     private MowzieModelRenderer JawBottom;
 
-    public ModelMosasaurus()
-    {
+    public ModelMosasaurus() {
         textureWidth = 128;
         textureHeight = 64;
         setTextureOffset("Body.Body", 77, 43);
@@ -156,26 +153,26 @@ public class ModelMosasaurus extends ModelPrehistoric
         doMowzieStuff(false);
     }
 
-	@Override
-	public void renderFossil(EntityNewPrehistoric entity, float f, float f1,
-			float f2, float f3, float f4, float f5) {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void renderFossil(EntityNewPrehistoric entity, float f, float f1,
+                             float f2, float f3, float f4, float f5) {
+        // TODO Auto-generated method stub
 
-	@Override
-	public void renderLiving(EntityNewPrehistoric entity, float f, float f1,
-			float f2, float f3, float f4, float f5) {
-		// TODO Auto-generated method stub
-		
-	}
+    }
 
-	@Override
-	public void renderSleeping(EntityNewPrehistoric entity, float f, float f1,
-			float f2, float f3, float f4, float f5) {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void renderLiving(EntityNewPrehistoric entity, float f, float f1,
+                             float f2, float f3, float f4, float f5) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void renderSleeping(EntityNewPrehistoric entity, float f, float f1,
+                               float f2, float f3, float f4, float f5) {
+        // TODO Auto-generated method stub
+
+    }
 
   /*  protected void setRotationAngles(float var1, float var2, float var3,
                                      float var4, float var5, float var6, boolean isModelized)
@@ -246,4 +243,5 @@ public class ModelMosasaurus extends ModelPrehistoric
         }
 
 
-    }*/}
+    }*/
+}

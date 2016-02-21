@@ -8,8 +8,7 @@ import net.minecraft.entity.Entity;
  * ModelPigBoss - Either Mojang or a mod author
  * Created using Tabula 4.1.1
  */
-public class ModelAnuTotem extends ModelBase
-{
+public class ModelAnuTotem extends ModelBase {
     public ModelRenderer field_78112_f;
     public ModelRenderer field_78124_i;
     public ModelRenderer Head;
@@ -23,8 +22,7 @@ public class ModelAnuTotem extends ModelBase
     public ModelRenderer LeftTusk;
     public ModelRenderer RightTusk;
 
-    public ModelAnuTotem()
-    {
+    public ModelAnuTotem() {
         this.textureWidth = 64;
         this.textureHeight = 32;
         this.RightTusk = new ModelRenderer(this, 0, 0);
@@ -76,8 +74,7 @@ public class ModelAnuTotem extends ModelBase
         this.Head.addChild(this.field_78114_d);
     }
 
-    public void renderBlock(float f5)
-    {
+    public void renderBlock(float f5) {
         this.field_78112_f.render(f5);
         this.field_78124_i.render(f5);
         this.field_78113_g.render(f5);
@@ -86,8 +83,7 @@ public class ModelAnuTotem extends ModelBase
         this.Head.render(f5);
     }
 
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
-    {
+    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
         this.field_78112_f.render(f5);
         this.field_78124_i.render(f5);
         this.field_78113_g.render(f5);
@@ -100,8 +96,7 @@ public class ModelAnuTotem extends ModelBase
     /**
      * This is a helper function from Tabula to set the rotation of model parts
      */
-    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z)
-    {
+    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
         modelRenderer.rotateAngleX = x;
         modelRenderer.rotateAngleY = y;
         modelRenderer.rotateAngleZ = z;

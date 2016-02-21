@@ -6,7 +6,6 @@ import com.github.revival.common.enums.EnumDinoFoodBlock;
 import com.github.revival.common.enums.EnumDinoFoodItem;
 import com.github.revival.common.enums.EnumPrehistoric;
 import com.github.revival.common.handler.LocalizationStrings;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,8 +17,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityFeeder extends TileEntity implements IInventory,
-        ISidedInventory
-{
+        ISidedInventory {
 
     private static final int[] slots_carn = new int[]{0}; // input 1
     private static final int[] slots_herb = new int[]{1}; // input 2
@@ -32,15 +30,12 @@ public class TileEntityFeeder extends TileEntity implements IInventory,
     private ItemStack[] feederItemStacks = new ItemStack[2];
     private String customName;
 
-    public TileEntityFeeder()
-    {
+    public TileEntityFeeder() {
         this.ClearTypeRecord();
     }
 
-    public void ClearTypeRecord()
-    {
-        for (int var1 = 0; var1 < this.ContainType.length; ++var1)
-        {
+    public void ClearTypeRecord() {
+        for (int var1 = 0; var1 < this.ContainType.length; ++var1) {
             this.ContainType[var1] = false;
         }
     }
@@ -48,16 +43,14 @@ public class TileEntityFeeder extends TileEntity implements IInventory,
     /**
      * Returns the number of slots in the inventory.
      */
-    public int getSizeInventory()
-    {
+    public int getSizeInventory() {
         return this.feederItemStacks.length;
     }
 
     /**
      * Returns the stack in slot i
      */
-    public ItemStack getStackInSlot(int var1)
-    {
+    public ItemStack getStackInSlot(int var1) {
         return this.feederItemStacks[var1];
     }
 
@@ -65,32 +58,24 @@ public class TileEntityFeeder extends TileEntity implements IInventory,
      * Removes from an inventory slot (first arg) up to a specified number
      * (second arg) of items and returns them in a new stack.
      */
-    public ItemStack decrStackSize(int var1, int var2)
-    {
-        if (this.feederItemStacks[var1] != null)
-        {
+    public ItemStack decrStackSize(int var1, int var2) {
+        if (this.feederItemStacks[var1] != null) {
             ItemStack var3;
 
-            if (this.feederItemStacks[var1].stackSize <= var2)
-            {
+            if (this.feederItemStacks[var1].stackSize <= var2) {
                 var3 = this.feederItemStacks[var1];
                 this.feederItemStacks[var1] = null;
                 return var3;
-            }
-            else
-            {
+            } else {
                 var3 = this.feederItemStacks[var1].splitStack(var2);
 
-                if (this.feederItemStacks[var1].stackSize == 0)
-                {
+                if (this.feederItemStacks[var1].stackSize == 0) {
                     this.feederItemStacks[var1] = null;
                 }
 
                 return var3;
             }
-        }
-        else
-        {
+        } else {
             return null;
         }
     }
@@ -99,12 +84,10 @@ public class TileEntityFeeder extends TileEntity implements IInventory,
      * Sets the given item stack to the specified slot in the inventory (can be
      * crafting or armor sections).
      */
-    public void setInventorySlotContents(int var1, ItemStack var2)
-    {
+    public void setInventorySlotContents(int var1, ItemStack var2) {
         this.feederItemStacks[var1] = var2;
 
-        if (var2 != null && var2.stackSize > this.getInventoryStackLimit())
-        {
+        if (var2 != null && var2.stackSize > this.getInventoryStackLimit()) {
             var2.stackSize = this.getInventoryStackLimit();
         }
     }
@@ -112,19 +95,16 @@ public class TileEntityFeeder extends TileEntity implements IInventory,
     /**
      * Reads a tile entity from NBT.
      */
-    public void readFromNBT(NBTTagCompound var1)
-    {
+    public void readFromNBT(NBTTagCompound var1) {
         super.readFromNBT(var1);
         NBTTagList var2 = var1.getTagList("Items", 10);
         this.feederItemStacks = new ItemStack[this.getSizeInventory()];
 
-        for (int var3 = 0; var3 < var2.tagCount(); ++var3)
-        {
+        for (int var3 = 0; var3 < var2.tagCount(); ++var3) {
             NBTTagCompound var4 = (NBTTagCompound) var2.getCompoundTagAt(var3);
             byte var5 = var4.getByte("Slot");
 
-            if (var5 >= 0 && var5 < this.feederItemStacks.length)
-            {
+            if (var5 >= 0 && var5 < this.feederItemStacks.length) {
                 this.feederItemStacks[var5] = ItemStack
                         .loadItemStackFromNBT(var4);
             }
@@ -133,8 +113,7 @@ public class TileEntityFeeder extends TileEntity implements IInventory,
         this.MeatCurrent = var1.getInteger("MeatCurrent");
         this.VegCurrent = var1.getInteger("VegCurrent");
 
-        if (var1.hasKey("CustomName"))
-        {
+        if (var1.hasKey("CustomName")) {
             this.customName = var1.getString("CustomName");
         }
     }
@@ -142,15 +121,12 @@ public class TileEntityFeeder extends TileEntity implements IInventory,
     /**
      * Writes a tile entity to NBT.
      */
-    public void writeToNBT(NBTTagCompound var1)
-    {
+    public void writeToNBT(NBTTagCompound var1) {
         super.writeToNBT(var1);
         NBTTagList var2 = new NBTTagList();
 
-        for (int var3 = 0; var3 < this.feederItemStacks.length; ++var3)
-        {
-            if (this.feederItemStacks[var3] != null)
-            {
+        for (int var3 = 0; var3 < this.feederItemStacks.length; ++var3) {
+            if (this.feederItemStacks[var3] != null) {
                 NBTTagCompound var4 = new NBTTagCompound();
                 var4.setByte("Slot", (byte) var3);
                 this.feederItemStacks[var3].writeToNBT(var4);
@@ -162,8 +138,7 @@ public class TileEntityFeeder extends TileEntity implements IInventory,
         var1.setInteger("MeatCurrent", this.MeatCurrent);
         var1.setInteger("VegCurrent", this.VegCurrent);
 
-        if (this.hasCustomInventoryName())
-        {
+        if (this.hasCustomInventoryName()) {
             var1.setString("CustomName", this.customName);
         }
     }
@@ -172,18 +147,15 @@ public class TileEntityFeeder extends TileEntity implements IInventory,
      * Returns the maximum stack size for a inventory slot. Seems to always be
      * 64, possibly will be extended. *Isn't this more of a set than a get?*
      */
-    public int getInventoryStackLimit()
-    {
+    public int getInventoryStackLimit() {
         return 64;
     }
 
-    public int getMeatBarScaled(int var1)
-    {
+    public int getMeatBarScaled(int var1) {
         return this.MeatCurrent * var1 / this.MeatMax;
     }
 
-    public int getVegBarScaled(int var1)
-    {
+    public int getVegBarScaled(int var1) {
         return this.VegCurrent * var1 / this.VegMax;
     }
 
@@ -197,14 +169,12 @@ public class TileEntityFeeder extends TileEntity implements IInventory,
      * e.g. the mob spawner uses this to count ticks and creates a new spawn
      * inside its implementation.
      */
-    public void updateEntity()
-    {
+    public void updateEntity() {
         boolean var1 = false;
         int var2 = ((this.MeatCurrent > 0) ? 2 : 0)
                 + ((this.VegCurrent > 0) ? 1 : 0);
 
-        if (!this.worldObj.isRemote)
-        {
+        if (!this.worldObj.isRemote) {
             int var3;
 
             if (this.feederItemStacks[0] != null
@@ -224,32 +194,26 @@ public class TileEntityFeeder extends TileEntity implements IInventory,
                     // wont eat out of it anymore until it has been emptied!
 
                     if (EnumPrehistoric.isFoodItem(this.feederItemStacks[0]
-                            .getItem()))
-                    {
+                            .getItem())) {
                         this.ContainType[EnumPrehistoric
                                 .getIndex(this.feederItemStacks[0].getItem())] = true;
                     }
                 }
 
-                if (val * this.feederItemStacks[0].stackSize + this.MeatCurrent < this.MeatMax)
-                {
+                if (val * this.feederItemStacks[0].stackSize + this.MeatCurrent < this.MeatMax) {
                     // can take all of it
                     this.MeatCurrent += val
                             * this.feederItemStacks[0].stackSize;
                     var1 = true;
                     this.feederItemStacks[0] = null;
-                }
-                else
-                {
+                } else {
                     while (val + this.MeatCurrent < this.MeatMax
-                            && this.feederItemStacks[0] != null)
-                    {
+                            && this.feederItemStacks[0] != null) {
                         this.MeatCurrent += val;
                         var1 = true;
                         --this.feederItemStacks[0].stackSize;
 
-                        if (this.feederItemStacks[0].stackSize == 0)
-                        {
+                        if (this.feederItemStacks[0].stackSize == 0) {
                             this.feederItemStacks[0] = null;
                         }
                     }
@@ -269,23 +233,18 @@ public class TileEntityFeeder extends TileEntity implements IInventory,
                         .getBlockFood(this.feederItemStacks[1]
                                 .getItem());
 
-                if (val * this.feederItemStacks[1].stackSize + this.VegCurrent < this.VegMax)
-                {
+                if (val * this.feederItemStacks[1].stackSize + this.VegCurrent < this.VegMax) {
                     this.VegCurrent += val * this.feederItemStacks[1].stackSize;
                     var1 = true;
                     this.feederItemStacks[1] = null;
-                }
-                else
-                {
+                } else {
                     while (val + this.VegCurrent < this.VegMax
-                            && this.feederItemStacks[1] != null)
-                    {
+                            && this.feederItemStacks[1] != null) {
                         this.VegCurrent += val;
                         var1 = true;
                         --this.feederItemStacks[1].stackSize;
 
-                        if (this.feederItemStacks[1].stackSize == 0)
-                        {
+                        if (this.feederItemStacks[1].stackSize == 0) {
                             this.feederItemStacks[1] = null;
                         }
                     }
@@ -293,8 +252,7 @@ public class TileEntityFeeder extends TileEntity implements IInventory,
             }
 
             if (var2 != (((this.MeatCurrent > 0) ? 2 : 0) + ((this.VegCurrent > 0) ? 1
-                    : 0)))
-            {
+                    : 0))) {
                 BlockFeeder.updateFurnaceBlockState(this.VegCurrent > 0,
                         this.MeatCurrent > 0, this.worldObj, this.xCoord,
                         this.yCoord, this.zCoord);
@@ -302,8 +260,7 @@ public class TileEntityFeeder extends TileEntity implements IInventory,
                 // this.xCoord, this.yCoord, this.zCoord);
             }
 
-            if (var1)
-            {
+            if (var1) {
                 this.markDirty();
             }
         }
@@ -313,20 +270,17 @@ public class TileEntityFeeder extends TileEntity implements IInventory,
      * Do not make give this method the name canInteractWith because it clashes
      * with Container
      */
-    public boolean isUseableByPlayer(EntityPlayer var1)
-    {
+    public boolean isUseableByPlayer(EntityPlayer var1) {
         return this.worldObj.getTileEntity(this.xCoord, this.yCoord,
                 this.zCoord) != this ? false : var1.getDistanceSq(
                 (double) this.xCoord + 0.5D, (double) this.yCoord + 0.5D,
                 (double) this.zCoord + 0.5D) <= 64.0D;
     }
 
-    public void openChest()
-    {
+    public void openChest() {
     }
 
-    public void closeChest()
-    {
+    public void closeChest() {
     }
 
     /**
@@ -334,8 +288,7 @@ public class TileEntityFeeder extends TileEntity implements IInventory,
      * Dino! Returns false if the dino is a carnivore and its own meat is in the
      * feeder
      */
-    public boolean CheckIsEmpty(EnumPrehistoric selfType)
-    {
+    public boolean CheckIsEmpty(EnumPrehistoric selfType) {
         if (((!selfType.isHerbivore() || this.VegCurrent == 0) && (!selfType
                 .isCarnivore() || this.MeatCurrent == 0))) // ||
         // this.ContainType[dinotype.ordinal()])
@@ -347,13 +300,11 @@ public class TileEntityFeeder extends TileEntity implements IInventory,
         return false;
     }
 
-    public int Feed(EntityDinosaur dinosaur, EnumPrehistoric dinotype)
-    {
+    public int Feed(EntityDinosaur dinosaur, EnumPrehistoric dinotype) {
         int feedamount = 0;
         int meat = this.MeatCurrent;
 
-        while (!this.CheckIsEmpty(dinotype) && dinosaur.increaseHunger(1))
-        {
+        while (!this.CheckIsEmpty(dinotype) && dinosaur.increaseHunger(1)) {
             if (dinotype.isCarnivore() && this.MeatCurrent > 0)// if
             // meatcurrent=0
             // it eats
@@ -365,9 +316,7 @@ public class TileEntityFeeder extends TileEntity implements IInventory,
             // checkisempty
             {
                 --this.MeatCurrent;
-            }
-            else
-            {
+            } else {
                 --this.VegCurrent;
             }
 
@@ -399,7 +348,7 @@ public class TileEntityFeeder extends TileEntity implements IInventory,
 	 */
 
 	/*
-	 * public boolean GetIfEatingSameBreed(EnumPrehistoric var1) {//Seems to be
+     * public boolean GetIfEatingSameBreed(EnumPrehistoric var1) {//Seems to be
 	 * completely senseless to me, will return true for all dinos EnumPrehistoric[]
 	 * var2 = EnumPrehistoric.values();
 	 * 
@@ -414,20 +363,17 @@ public class TileEntityFeeder extends TileEntity implements IInventory,
      * whatever it returns as an EntityItem - like when you close a workbench
      * GUI.
      */
-    public ItemStack getStackInSlotOnClosing(int var1)
-    {
+    public ItemStack getStackInSlotOnClosing(int var1) {
         return null;
     }
 
     @SideOnly(Side.CLIENT)
-    public int getCurrentMeat()
-    {
+    public int getCurrentMeat() {
         return this.MeatCurrent;
     }
 
     @SideOnly(Side.CLIENT)
-    public int getCurreentVeg()
-    {
+    public int getCurreentVeg() {
         return this.VegCurrent;
     }
 
@@ -435,8 +381,7 @@ public class TileEntityFeeder extends TileEntity implements IInventory,
      * Sets the custom display name to use when opening a GUI linked to this
      * tile entity.
      */
-    public void setGuiDisplayName(String par1Str)
-    {
+    public void setGuiDisplayName(String par1Str) {
         this.customName = par1Str;
     }
 
@@ -444,8 +389,7 @@ public class TileEntityFeeder extends TileEntity implements IInventory,
      * Returns true if automation is allowed to insert the given stack (ignoring
      * stack size) into the given slot.
      */
-    public boolean isItemValidForSlot(int par1, ItemStack itemstack)
-    {
+    public boolean isItemValidForSlot(int par1, ItemStack itemstack) {
         // return par1 == 2 ? false : (par1 == 1 ?
         // (EnumDinoFoodItem.foodtype(itemstack.itemID) ==
         // EnumDinoFoodItem.ISCARNIVOROUS
@@ -470,8 +414,7 @@ public class TileEntityFeeder extends TileEntity implements IInventory,
      * Returns an array containing the indices of the slots that can be accessed
      * by automation on the given side of this block.
      */
-    public int[] getAccessibleSlotsFromSide(int par1)
-    {
+    public int[] getAccessibleSlotsFromSide(int par1) {
         if (par1 == 3)
             return slots_carn;
         if (par1 == 2)
@@ -484,8 +427,7 @@ public class TileEntityFeeder extends TileEntity implements IInventory,
      * Returns true if automation can insert the given item in the given slot
      * from the given side. Args: Slot, item, side
      */
-    public boolean canInsertItem(int par1, ItemStack par2ItemStack, int par3)
-    {
+    public boolean canInsertItem(int par1, ItemStack par2ItemStack, int par3) {
         return this.isItemValidForSlot(par1, par2ItemStack);
     }
 
@@ -493,31 +435,26 @@ public class TileEntityFeeder extends TileEntity implements IInventory,
      * Returns true if automation can extract the given item in the given slot
      * from the given side. Args: Slot, item, side
      */
-    public boolean canExtractItem(int par1, ItemStack par2ItemStack, int par3)
-    {
+    public boolean canExtractItem(int par1, ItemStack par2ItemStack, int par3) {
         return false;
     }
 
     @Override
-    public String getInventoryName()
-    {
+    public String getInventoryName() {
         return this.hasCustomInventoryName() ? this.customName : "tile."
                 + LocalizationStrings.FEEDER_ACTIVE_NAME + ".name";
     }
 
     @Override
-    public boolean hasCustomInventoryName()
-    {
+    public boolean hasCustomInventoryName() {
         return this.customName != null && this.customName.length() > 0;
     }
 
     @Override
-    public void openInventory()
-    {
+    public void openInventory() {
     }
 
     @Override
-    public void closeInventory()
-    {
+    public void closeInventory() {
     }
 }

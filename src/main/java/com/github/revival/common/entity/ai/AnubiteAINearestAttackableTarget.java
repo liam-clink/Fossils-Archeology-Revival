@@ -12,8 +12,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class AnubiteAINearestAttackableTarget extends EntityAITarget
-{
+public class AnubiteAINearestAttackableTarget extends EntityAITarget {
     private static final String __OBFID = "CL_00001620";
     private final Class targetClass;
     private final int targetChance;
@@ -28,51 +27,40 @@ public class AnubiteAINearestAttackableTarget extends EntityAITarget
     private final IEntitySelector targetEntitySelector;
     private EntityLivingBase targetEntity;
 
-    public AnubiteAINearestAttackableTarget(EntityCreature prey, Class preyClass, int targetChance, boolean shouldCheckSight)
-    {
+    public AnubiteAINearestAttackableTarget(EntityCreature prey, Class preyClass, int targetChance, boolean shouldCheckSight) {
         this(prey, preyClass, targetChance, shouldCheckSight, false);
     }
 
-    public AnubiteAINearestAttackableTarget(EntityCreature prey, Class preyClass, int targetChance, boolean shouldCheckSight, boolean bool)
-    {
+    public AnubiteAINearestAttackableTarget(EntityCreature prey, Class preyClass, int targetChance, boolean shouldCheckSight, boolean bool) {
         this(prey, preyClass, targetChance, shouldCheckSight, bool, (IEntitySelector) null);
     }
 
-    public AnubiteAINearestAttackableTarget(EntityCreature prey, Class preyClass, int targetChance, boolean shouldCheckSight, boolean bool, final IEntitySelector p_i1665_6_)
-    {
+    public AnubiteAINearestAttackableTarget(EntityCreature prey, Class preyClass, int targetChance, boolean shouldCheckSight, boolean bool, final IEntitySelector p_i1665_6_) {
         super(prey, shouldCheckSight, bool);
         this.targetClass = preyClass;
         this.targetChance = targetChance;
         this.theNearestAttackableTargetSorter = new AnubiteAINearestAttackableTarget.Sorter(prey);
         this.setMutexBits(1);
-        this.targetEntitySelector = new IEntitySelector()
-        {
+        this.targetEntitySelector = new IEntitySelector() {
             private static final String __OBFID = "CL_00001621";
 
             /**
              * Return whether the specified entity is applicable to this filter.
              */
-            public boolean isEntityApplicable(Entity prey)
-            {
-                if (prey != null)
-                {
-                    if (prey instanceof EntityPlayer)
-                    {
+            public boolean isEntityApplicable(Entity prey) {
+                if (prey != null) {
+                    if (prey instanceof EntityPlayer) {
                         EntityPlayer player = (EntityPlayer) prey;
-                        if (player.getCurrentArmor(3) != null)
-                        {
-                            if (player.getCurrentArmor(3).getItem() != null)
-                            {
-                                if (player.getCurrentArmor(3).getItem() == FAItemRegistry.ancienthelmet)
-                                {
+                        if (player.getCurrentArmor(3) != null) {
+                            if (player.getCurrentArmor(3).getItem() != null) {
+                                if (player.getCurrentArmor(3).getItem() == FAItemRegistry.ancienthelmet) {
                                     return false;
                                 }
                             }
                         }
                     }
                 }
-                if (prey.getClass() == taskOwner.getClass())
-                {
+                if (prey.getClass() == taskOwner.getClass()) {
                     return false;
                 }
                 return !(prey instanceof EntityLivingBase) ? false : (p_i1665_6_ != null && !p_i1665_6_.isEntityApplicable(prey) ? false : AnubiteAINearestAttackableTarget.this.isSuitableTarget((EntityLivingBase) prey, false));
@@ -83,25 +71,18 @@ public class AnubiteAINearestAttackableTarget extends EntityAITarget
     /**
      * Returns whether the EntityAIBase should begin execution.
      */
-    public boolean shouldExecute()
-    {
+    public boolean shouldExecute() {
 
-        if (this.targetChance > 0 && this.taskOwner.getRNG().nextInt(this.targetChance) != 0)
-        {
+        if (this.targetChance > 0 && this.taskOwner.getRNG().nextInt(this.targetChance) != 0) {
             return false;
-        }
-        else
-        {
+        } else {
             double d0 = this.getTargetDistance();
             List list = this.taskOwner.worldObj.selectEntitiesWithinAABB(this.targetClass, this.taskOwner.boundingBox.expand(d0, 4.0D, d0), this.targetEntitySelector);
             Collections.sort(list, this.theNearestAttackableTargetSorter);
 
-            if (list.isEmpty())
-            {
+            if (list.isEmpty()) {
                 return false;
-            }
-            else
-            {
+            } else {
                 this.targetEntity = (EntityLivingBase) list.get(0);
                 return true;
             }
@@ -111,31 +92,26 @@ public class AnubiteAINearestAttackableTarget extends EntityAITarget
     /**
      * Execute a one shot task or start executing a continuous task
      */
-    public void startExecuting()
-    {
+    public void startExecuting() {
         this.taskOwner.setAttackTarget(this.targetEntity);
         super.startExecuting();
     }
 
-    public static class Sorter implements Comparator
-    {
+    public static class Sorter implements Comparator {
         private static final String __OBFID = "CL_00001622";
         private final Entity theEntity;
 
-        public Sorter(Entity p_i1662_1_)
-        {
+        public Sorter(Entity p_i1662_1_) {
             this.theEntity = p_i1662_1_;
         }
 
-        public int compare(Entity p_compare_1_, Entity p_compare_2_)
-        {
+        public int compare(Entity p_compare_1_, Entity p_compare_2_) {
             double d0 = this.theEntity.getDistanceSqToEntity(p_compare_1_);
             double d1 = this.theEntity.getDistanceSqToEntity(p_compare_2_);
             return d0 < d1 ? -1 : (d0 > d1 ? 1 : 0);
         }
 
-        public int compare(Object p_compare_1_, Object p_compare_2_)
-        {
+        public int compare(Object p_compare_1_, Object p_compare_2_) {
             return this.compare((Entity) p_compare_1_, (Entity) p_compare_2_);
         }
     }

@@ -1,12 +1,10 @@
 package com.github.revival.client.model.prehistoric;
 
-import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelRenderer;
-
 import com.github.revival.client.model.base.ModelPrehistoric;
 import com.github.revival.common.entity.mob.test.EntityNewPrehistoric;
+import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelRenderer;
 
-public class ModelSpinosaurus extends ModelPrehistoric
-{
+public class ModelSpinosaurus extends ModelPrehistoric {
     public MowzieModelRenderer headpivot;
     public MowzieModelRenderer headdummy;
     //fields
@@ -41,8 +39,7 @@ public class ModelSpinosaurus extends ModelPrehistoric
     private MowzieModelRenderer sail1_upperBody;
     private MowzieModelRenderer rightUpperArm;
 
-    public ModelSpinosaurus()
-    {
+    public ModelSpinosaurus() {
         textureWidth = 64;
         textureHeight = 64;
         setTextureOffset("lowerBody.lowerBody", 0, 46);
@@ -344,22 +341,22 @@ public class ModelSpinosaurus extends ModelPrehistoric
         this.headpivot.rotateAngleY = 0;
     }*/
 
-	@Override
-	public void renderFossil(EntityNewPrehistoric entity, float f, float f1,
-			float f2, float f3, float f4, float f5) {
-		
-	}
+    @Override
+    public void renderFossil(EntityNewPrehistoric entity, float f, float f1,
+                             float f2, float f3, float f4, float f5) {
 
-	@Override
-	public void renderLiving(EntityNewPrehistoric entity, float f, float f1,
-			float f2, float f3, float f4, float f5) {
-		
-	}
+    }
 
-	@Override
-	public void renderSleeping(EntityNewPrehistoric entity, float f, float f1,
-			float f2, float f3, float f4, float f5) {
-		
-	}
+    @Override
+    public void renderLiving(EntityNewPrehistoric entity, float f, float f1,
+                             float f2, float f3, float f4, float f5) {
+
+    }
+
+    @Override
+    public void renderSleeping(EntityNewPrehistoric entity, float f, float f1,
+                               float f2, float f3, float f4, float f5) {
+
+    }
 
 }

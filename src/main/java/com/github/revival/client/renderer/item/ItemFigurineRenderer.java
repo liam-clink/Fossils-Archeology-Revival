@@ -12,8 +12,7 @@ import org.lwjgl.opengl.GL11;
 import static org.lwjgl.opengl.GL11.glPopMatrix;
 import static org.lwjgl.opengl.GL11.glPushMatrix;
 
-public class ItemFigurineRenderer implements IItemRenderer
-{
+public class ItemFigurineRenderer implements IItemRenderer {
     // the model texture of our block
     private static final ResourceLocation pristine_steve = new ResourceLocation("fossil:textures/blocks/figurines/figurine_steve_pristine.png");
     private static final ResourceLocation pristine_skeleton = new ResourceLocation("fossil:textures/blocks/figurines/figurine_skeleton_pristine.png");
@@ -34,42 +33,36 @@ public class ItemFigurineRenderer implements IItemRenderer
     private static ModelFigurine modelfigurine;
     private static ModelFigurineBroken modelbroken;
 
-    public ItemFigurineRenderer()
-    {
+    public ItemFigurineRenderer() {
         modelfigurine = new ModelFigurine();
         modelbroken = new ModelFigurineBroken();
 
     }
 
-    private static void bindTexture(ResourceLocation texture)
-    {
+    private static void bindTexture(ResourceLocation texture) {
         Minecraft.getMinecraft().renderEngine.bindTexture(texture);
     }
 
     @Override
-    public boolean handleRenderType(ItemStack item, ItemRenderType type)
-    {
+    public boolean handleRenderType(ItemStack item, ItemRenderType type) {
         //return true;
         return type != ItemRenderType.INVENTORY;
     }
 
     @Override
-    public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper)
-    {
+    public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper) {
         return true;
     }
 
     @Override
-    public void renderItem(ItemRenderType type, ItemStack item, Object... data)
-    {
+    public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
         int meta = item.getItemDamage();
         glPushMatrix();
         GL11.glTranslatef(0.0F, 2.3F, 0.7F);
         GL11.glRotatef(-180.0F, 0F, 0F, 1F);
         GL11.glRotatef(-80.0F, 0F, 1F, 0F);
 
-        switch (meta)
-        {
+        switch (meta) {
             case 0:
             default:
                 this.bindTexture(pristine_steve);
@@ -120,12 +113,12 @@ public class ItemFigurineRenderer implements IItemRenderer
                 this.bindTexture(mysterious);
                 break;
         }
-        
+
         if (meta < 10 || meta == 15)
             this.modelfigurine.render((Entity) data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
         else
             this.modelbroken.render((Entity) data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
-        
+
         glPopMatrix();
     }
 }

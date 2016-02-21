@@ -1,12 +1,10 @@
 package com.github.revival.client.model.prehistoric;
 
-import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelRenderer;
-
 import com.github.revival.client.model.base.ModelPrehistoric;
 import com.github.revival.common.entity.mob.test.EntityNewPrehistoric;
+import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelRenderer;
 
-public class ModelSarcosuchus extends ModelPrehistoric
-{
+public class ModelSarcosuchus extends ModelPrehistoric {
     MowzieModelRenderer body;
     MowzieModelRenderer LowerBody;
     MowzieModelRenderer leftHindLeg;
@@ -46,8 +44,7 @@ public class ModelSarcosuchus extends ModelPrehistoric
     MowzieModelRenderer rightBodyOsteoderms;
     MowzieModelRenderer leftBodyOsteoderms;
 
-    public ModelSarcosuchus()
-    {
+    public ModelSarcosuchus() {
         textureWidth = 256;
         textureHeight = 128;
         setTextureOffset("body.body", 61, 92);
@@ -341,23 +338,23 @@ public class ModelSarcosuchus extends ModelPrehistoric
         body.addChild(leftBodyOsteoderms);
     }
 
-	@Override
-	public void renderFossil(EntityNewPrehistoric entity, float f, float f1,
-			float f2, float f3, float f4, float f5) {
-		
-	}
+    @Override
+    public void renderFossil(EntityNewPrehistoric entity, float f, float f1,
+                             float f2, float f3, float f4, float f5) {
 
-	@Override
-	public void renderLiving(EntityNewPrehistoric entity, float f, float f1,
-			float f2, float f3, float f4, float f5) {
-		
-	}
+    }
 
-	@Override
-	public void renderSleeping(EntityNewPrehistoric entity, float f, float f1,
-			float f2, float f3, float f4, float f5) {
-		
-	}
+    @Override
+    public void renderLiving(EntityNewPrehistoric entity, float f, float f1,
+                             float f2, float f3, float f4, float f5) {
+
+    }
+
+    @Override
+    public void renderSleeping(EntityNewPrehistoric entity, float f, float f1,
+                               float f2, float f3, float f4, float f5) {
+
+    }
 
    /* public void setRotationAngles(float f, float f1, float f2, float f3,
                                   float f4, float f5, Entity entity)

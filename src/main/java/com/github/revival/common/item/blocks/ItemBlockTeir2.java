@@ -10,17 +10,14 @@ import net.minecraft.util.StatCollector;
 
 import java.util.List;
 
-public class ItemBlockTeir2 extends ItemBlock
-{
+public class ItemBlockTeir2 extends ItemBlock {
 
-    public ItemBlockTeir2(Block block)
-    {
+    public ItemBlockTeir2(Block block) {
         super(block);
     }
 
     @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4)
-    {
+    public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
         list.add(StatCollector.translateToLocal("tile.cultureVat.teir2"));
 
     }

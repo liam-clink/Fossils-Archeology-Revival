@@ -1,12 +1,11 @@
 package com.github.revival.client.model.prehistoric;
 
+import com.github.revival.client.model.prehistoric.test.ModelNewPrehistoric;
+import com.github.revival.common.entity.mob.test.EntityNewPrehistoric;
 import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelRenderer;
 import net.ilexiconn.llibrary.common.animation.Animator;
 import net.ilexiconn.llibrary.common.animation.IAnimated;
 import net.minecraft.entity.Entity;
-
-import com.github.revival.client.model.prehistoric.test.ModelNewPrehistoric;
-import com.github.revival.common.entity.mob.test.EntityNewPrehistoric;
 
 public class ModelTriceratops extends ModelNewPrehistoric {
     public MowzieModelRenderer upperBody;
@@ -37,7 +36,7 @@ public class ModelTriceratops extends ModelNewPrehistoric {
     public MowzieModelRenderer leftFrontLeg;
     public MowzieModelRenderer rightHindLeg;
     public MowzieModelRenderer leftHindLeg;
-	private Animator animator;
+    private Animator animator;
 
     public ModelTriceratops() {
         this.textureWidth = 128;
@@ -179,23 +178,23 @@ public class ModelTriceratops extends ModelNewPrehistoric {
         this.tail1.addChild(this.quills);
         this.beak.addChild(this.noseHorn);
         this.setInitPose();
-		animator = new Animator(this);
+        animator = new Animator(this);
     }
 
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
-		animate((IAnimated)entity, f, f1, f2, f3, f4, f5);
-		this.rightFrontThigh.render(f5);
-		this.leftFrontThigh.render(f5);
-		this.upperBody.render(f5);
-		this.rightHindThigh.render(f5);
-		this.leftHindThigh.render(f5);
+    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+        animate((IAnimated) entity, f, f1, f2, f3, f4, f5);
+        this.rightFrontThigh.render(f5);
+        this.leftFrontThigh.render(f5);
+        this.upperBody.render(f5);
+        this.rightHindThigh.render(f5);
+        this.leftHindThigh.render(f5);
 
-	}
+    }
 
-	public void animate(IAnimated entity, float f, float f1, float f2, float f3, float f4, float f5) {
-		animator.update(entity);
+    public void animate(IAnimated entity, float f, float f1, float f2, float f3, float f4, float f5) {
+        animator.update(entity);
         this.setToInitPose();
-		setRotationAngles(f, f1, f2, f3, f4, f5, (Entity)entity);
+        setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
 
 //		animator.setAnimationId(EntityNewPrehistoric.animation_sit.animationId);
 //		animator.startPhase(20);
@@ -209,56 +208,56 @@ public class ModelTriceratops extends ModelNewPrehistoric {
 //		animator.resetPhase(20);
 //		animator.endPhase();
 
-	}
+    }
 
-	
-	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
-		MowzieModelRenderer[] tailParts = {this.tail1, this.tail2, this.tail3};
-		MowzieModelRenderer[] neckParts = {this.neck, this.head};
 
-		this.faceTarget(head, 1, f3, f4);
+    public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
+        MowzieModelRenderer[] tailParts = {this.tail1, this.tail2, this.tail3};
+        MowzieModelRenderer[] neckParts = {this.neck, this.head};
 
-		float speed = 0.5F;
-		float speed2 = 0.1F;
-		float sitProgress = ((EntityNewPrehistoric)(entity)).sitProgress;
-        sitAnimationRotation(rightHindLeg, sitProgress, (float)Math.toRadians(110.0D), 0, 0);
-        sitAnimationRotation(lowerBody, sitProgress, -((float)Math.toRadians(13.04D)), 0, 0);
-        sitAnimationRotation(tail3, sitProgress, -(float)Math.toRadians(14.64D), 0, 0);
-        sitAnimationRotation(leftHindThigh, sitProgress, -((float)Math.toRadians(10.0D)), 0, 0);
-        sitAnimationRotation(tail2, sitProgress, (float)Math.toRadians(13.04D), 0, 0);
-        sitAnimationRotation(rightFrontThigh, sitProgress, -((float)Math.toRadians(13.0D)), 0, 0);
-        sitAnimationRotation(leftHindLeg, sitProgress, (float)Math.toRadians(110.0D), 0, 0);
-        sitAnimationRotation(leftFrontThigh, sitProgress, -((float)Math.toRadians(13.0D)), 0, 0);
-        sitAnimationRotation(tail1, sitProgress, ((float)Math.toRadians(15D)), 0, 0);
-        sitAnimationRotation(quills, sitProgress, (float)Math.toRadians(3.0D), 0, 0);
-        sitAnimationRotation(upperBody, sitProgress, -((float)Math.toRadians(2.61D)), 0, 0);
-        sitAnimationRotation(rightHindThigh, sitProgress, -((float)Math.toRadians(10.0D)), 0, 0);
-        sitAnimationRotation(rightFrontLeg, sitProgress, -(float)Math.toRadians(90.0D), 0, 0);
-        sitAnimationRotation(leftFrontLeg, sitProgress, -(float)Math.toRadians(90.0D), 0, 0);
-        sitAnimationRotation(neck, sitProgress, -((float)Math.toRadians(18.26D)), 0, 0);
-        sitAnimationRotation(head, sitProgress, (float)Math.toRadians(31.3D), 0, 0);
+        this.faceTarget(head, 1, f3, f4);
+
+        float speed = 0.5F;
+        float speed2 = 0.1F;
+        float sitProgress = ((EntityNewPrehistoric) (entity)).sitProgress;
+        sitAnimationRotation(rightHindLeg, sitProgress, (float) Math.toRadians(110.0D), 0, 0);
+        sitAnimationRotation(lowerBody, sitProgress, -((float) Math.toRadians(13.04D)), 0, 0);
+        sitAnimationRotation(tail3, sitProgress, -(float) Math.toRadians(14.64D), 0, 0);
+        sitAnimationRotation(leftHindThigh, sitProgress, -((float) Math.toRadians(10.0D)), 0, 0);
+        sitAnimationRotation(tail2, sitProgress, (float) Math.toRadians(13.04D), 0, 0);
+        sitAnimationRotation(rightFrontThigh, sitProgress, -((float) Math.toRadians(13.0D)), 0, 0);
+        sitAnimationRotation(leftHindLeg, sitProgress, (float) Math.toRadians(110.0D), 0, 0);
+        sitAnimationRotation(leftFrontThigh, sitProgress, -((float) Math.toRadians(13.0D)), 0, 0);
+        sitAnimationRotation(tail1, sitProgress, ((float) Math.toRadians(15D)), 0, 0);
+        sitAnimationRotation(quills, sitProgress, (float) Math.toRadians(3.0D), 0, 0);
+        sitAnimationRotation(upperBody, sitProgress, -((float) Math.toRadians(2.61D)), 0, 0);
+        sitAnimationRotation(rightHindThigh, sitProgress, -((float) Math.toRadians(10.0D)), 0, 0);
+        sitAnimationRotation(rightFrontLeg, sitProgress, -(float) Math.toRadians(90.0D), 0, 0);
+        sitAnimationRotation(leftFrontLeg, sitProgress, -(float) Math.toRadians(90.0D), 0, 0);
+        sitAnimationRotation(neck, sitProgress, -((float) Math.toRadians(18.26D)), 0, 0);
+        sitAnimationRotation(head, sitProgress, (float) Math.toRadians(31.3D), 0, 0);
         sitAnimationPos(upperBody, sitProgress, 0F, 16.20F - upperBody.initRotationPointY, 0F);
-		sitAnimationPos(rightFrontThigh, sitProgress, 0F, 21.30F - rightFrontThigh.initRotationPointY, 0F);
-		sitAnimationPos(leftFrontThigh, sitProgress, 0F, 21.30F - leftFrontThigh.initRotationPointY, 0F);
-		sitAnimationPos(rightHindThigh, sitProgress, 0F, 20.50F - rightHindThigh.initRotationPointY, 0F);
-		sitAnimationPos(leftHindThigh, sitProgress, 0F, 20.50F - leftHindThigh.initRotationPointY, 0F);
-		this.walk(upperBody, speed2, 0.05F, false, 1F, 0F, entity.ticksExisted, 1);
-		this.walk(lowerBody, speed2, -0.05F, false, 1F, 0F, entity.ticksExisted, 1);
-		this.bob(upperBody, speed2, 0.2F, false, entity.ticksExisted, 1);
-		this.walk(leftHindThigh, speed, 0.8F, false, 0F, 0.4F, f, f1);
-		this.walk(leftHindLeg, speed, 0.2F, false, 0F, -0.6F, f, f1);
-		this.walk(rightHindThigh, speed, 0.8F, true, 0F, 0.4F, f, f1);
-		this.walk(rightHindLeg, speed, 0.2F, true, 0F, -0.6F, f, f1);
-		this.walk(leftFrontThigh, speed, 0.8F, true, 0F, 0.4F, f, f1);
-		this.walk(leftFrontLeg, speed, 0.2F, true, 0F, -0.6F, f, f1);
-		this.walk(rightFrontThigh, speed, 0.8F, false, 0F, 0.4F, f, f1);
-		this.walk(rightFrontLeg, speed, 0.2F, false, 0F, -0.6F, f, f1);
-		this.chainWave(tailParts, speed2, 0.05F, -3, entity.ticksExisted, 1);
-		this.chainSwing(tailParts, speed2, 0.35F, -3, entity.ticksExisted, 1);
-		this.chainWave(neckParts, speed2, 0.05F, -3, entity.ticksExisted, 1);
-		//((ChainBuffer)((EntityTriceratops)entity).tailbuffer).applyChainSwingBuffer(tailParts);
+        sitAnimationPos(rightFrontThigh, sitProgress, 0F, 21.30F - rightFrontThigh.initRotationPointY, 0F);
+        sitAnimationPos(leftFrontThigh, sitProgress, 0F, 21.30F - leftFrontThigh.initRotationPointY, 0F);
+        sitAnimationPos(rightHindThigh, sitProgress, 0F, 20.50F - rightHindThigh.initRotationPointY, 0F);
+        sitAnimationPos(leftHindThigh, sitProgress, 0F, 20.50F - leftHindThigh.initRotationPointY, 0F);
+        this.walk(upperBody, speed2, 0.05F, false, 1F, 0F, entity.ticksExisted, 1);
+        this.walk(lowerBody, speed2, -0.05F, false, 1F, 0F, entity.ticksExisted, 1);
+        this.bob(upperBody, speed2, 0.2F, false, entity.ticksExisted, 1);
+        this.walk(leftHindThigh, speed, 0.8F, false, 0F, 0.4F, f, f1);
+        this.walk(leftHindLeg, speed, 0.2F, false, 0F, -0.6F, f, f1);
+        this.walk(rightHindThigh, speed, 0.8F, true, 0F, 0.4F, f, f1);
+        this.walk(rightHindLeg, speed, 0.2F, true, 0F, -0.6F, f, f1);
+        this.walk(leftFrontThigh, speed, 0.8F, true, 0F, 0.4F, f, f1);
+        this.walk(leftFrontLeg, speed, 0.2F, true, 0F, -0.6F, f, f1);
+        this.walk(rightFrontThigh, speed, 0.8F, false, 0F, 0.4F, f, f1);
+        this.walk(rightFrontLeg, speed, 0.2F, false, 0F, -0.6F, f, f1);
+        this.chainWave(tailParts, speed2, 0.05F, -3, entity.ticksExisted, 1);
+        this.chainSwing(tailParts, speed2, 0.35F, -3, entity.ticksExisted, 1);
+        this.chainWave(neckParts, speed2, 0.05F, -3, entity.ticksExisted, 1);
+        //((ChainBuffer)((EntityTriceratops)entity).tailbuffer).applyChainSwingBuffer(tailParts);
 
-	}
+    }
 
 //	@Override
 //	public void sitPose(boolean animate) {

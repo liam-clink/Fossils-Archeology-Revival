@@ -1,190 +1,153 @@
 package com.github.revival.common.entity.mob;
 
-import com.github.revival.Revival;
-import com.github.revival.common.entity.ai.WaterDinoAIAttack;
-import com.github.revival.common.entity.ai.WaterDinoAIEat;
-import com.github.revival.common.entity.ai.WaterDinoAIHunt;
-import com.github.revival.common.entity.ai.WaterDinoAIWander;
 import com.github.revival.common.entity.mob.test.EntityNewPrehistoric;
 import com.github.revival.common.enums.EnumPrehistoric;
-import com.github.revival.common.enums.EnumPrehistoricAI.Activity;
-import com.github.revival.common.enums.EnumPrehistoricAI.Attacking;
-import com.github.revival.common.enums.EnumPrehistoricAI.Climbing;
-import com.github.revival.common.enums.EnumPrehistoricAI.Following;
-import com.github.revival.common.enums.EnumPrehistoricAI.Jumping;
-import com.github.revival.common.enums.EnumPrehistoricAI.Moving;
-import com.github.revival.common.enums.EnumPrehistoricAI.Response;
-import com.github.revival.common.enums.EnumPrehistoricAI.Stalking;
-import com.github.revival.common.enums.EnumPrehistoricAI.Taming;
-import com.github.revival.common.enums.EnumPrehistoricAI.Untaming;
-import com.github.revival.common.enums.EnumPrehistoricAI.WaterAbility;
-import com.github.revival.common.handler.LocalizationStrings;
-import com.github.revival.common.item.FAItemRegistry;
-
-import io.netty.buffer.ByteBuf;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
-import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.entity.player.EntityPlayer;
+import com.github.revival.common.enums.EnumPrehistoricAI.*;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.StatCollector;
-import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
-import java.util.Random;
+public class EntityLiopleurodon extends EntityNewPrehistoric {
 
-public class EntityLiopleurodon extends EntityNewPrehistoric{
+    public static final double baseDamage = 2;
+    public static final double maxDamage = 12;
+    public static final double baseHealth = 10;
+    public static final double maxHealth = 45;
+    public static final double baseSpeed = 0.3D;
+    public static final double maxSpeed = 0.4D;
 
-	public static final double baseDamage = 2;
-	public static final double maxDamage = 12;
-	public static final double baseHealth = 10;
-	public static final double maxHealth = 45;
-	public static final double baseSpeed = 0.3D;
-	public static final double maxSpeed = 0.4D;
-	
-	public EntityLiopleurodon(World world) {
-		super(world, EnumPrehistoric.Liopleurodon);
+    public EntityLiopleurodon(World world) {
+        super(world, EnumPrehistoric.Liopleurodon);
         this.setSize(1.5F, 0.5F);
-		minSize = 0.8F;
-		maxSize = 1.8F;
-		teenAge = 6;
-		developsResistance = true;
-		breaksBlocks = false;
-		favoriteFood = Items.fish;
-		hasBabyTexture = false;
-	}
+        minSize = 0.8F;
+        maxSize = 1.8F;
+        teenAge = 6;
+        developsResistance = true;
+        breaksBlocks = false;
+        favoriteFood = Items.fish;
+        hasBabyTexture = false;
+    }
 
-	@Override
-	protected void applyEntityAttributes()
-	{
-		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(baseSpeed);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(baseHealth);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(baseDamage);
-	}
-	
-	@Override
-	public void setSpawnValues() {}
+    @Override
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(baseSpeed);
+        getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(baseHealth);
+        getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(baseDamage);
+    }
+
+    @Override
+    public void setSpawnValues() {
+    }
 
 
+    @Override
+    public Activity aiActivityType() {
 
-	@Override
-	public Activity aiActivityType() {
+        return Activity.DURINAL;
+    }
 
-		return Activity.DURINAL;
-	}
+    @Override
+    public Attacking aiAttackType() {
 
-	@Override
-	public Attacking aiAttackType() {
+        return Attacking.DROWN;
+    }
 
-		return Attacking.DROWN;
-	}
+    @Override
+    public Climbing aiClimbType() {
 
-	@Override
-	public Climbing aiClimbType() {
+        return Climbing.NONE;
+    }
 
-		return Climbing.NONE;
-	}
+    @Override
+    public Following aiFollowType() {
 
-	@Override
-	public Following aiFollowType() {
+        return Following.AGRESSIVE;
+    }
 
-		return Following.AGRESSIVE;
-	}
+    @Override
+    public Jumping aiJumpType() {
 
-	@Override
-	public Jumping aiJumpType() {
+        return Jumping.BASIC;
+    }
 
-		return Jumping.BASIC;
-	}
+    @Override
+    public Response aiResponseType() {
 
-	@Override
-	public Response aiResponseType() {
+        return Response.AGRESSIVE;
+    }
 
-		return Response.AGRESSIVE;
-	}
+    @Override
+    public Stalking aiStalkType() {
 
-	@Override
-	public Stalking aiStalkType() {
+        return Stalking.NONE;
+    }
 
-		return Stalking.NONE;
-	}
+    @Override
+    public Taming aiTameType() {
 
-	@Override
-	public Taming aiTameType() {
+        return Taming.BLUEGEM;
+    }
 
-		return Taming.BLUEGEM;
-	}
+    @Override
+    public Untaming aiUntameType() {
 
-	@Override
-	public Untaming aiUntameType() {
+        return Untaming.NONE;
+    }
 
-		return Untaming.NONE;
-	}
+    @Override
+    public Moving aiMovingType() {
 
-	@Override
-	public Moving aiMovingType() {
+        return Moving.AQUATIC;
+    }
 
-		return Moving.AQUATIC;
-	}
+    @Override
+    public WaterAbility aiWaterAbilityType() {
 
-	@Override
-	public WaterAbility aiWaterAbilityType() {
+        return WaterAbility.ATTACK;
+    }
 
-		return WaterAbility.ATTACK;
-	}
+    @Override
+    public boolean doesFlock() {
 
-	@Override
-	public boolean doesFlock() {
+        return false;
+    }
 
-		return false;
-	}
+    @Override
+    public Item getOrderItem() {
 
-	@Override
-	public Item getOrderItem() {
+        return Items.stick;
+    }
 
-		return Items.stick;
-	}
+    public void updateSize() {
+        double healthStep;
+        double attackStep;
+        double speedStep;
+        healthStep = (this.maxHealth - this.baseHealth) / (this.getAdultAge() + 1);
+        attackStep = (this.maxDamage - this.baseDamage) / (this.getAdultAge() + 1);
+        speedStep = (this.maxSpeed - this.baseSpeed) / (this.getAdultAge() + 1);
 
-	public void updateSize()
-	{
-		 double healthStep;
-	        double attackStep;
-	        double speedStep;
-	        healthStep = (this.maxHealth - this.baseHealth) / (this.getAdultAge() + 1);
-	        attackStep = (this.maxDamage - this.baseDamage) / (this.getAdultAge() + 1);
-	        speedStep = (this.maxSpeed - this.baseSpeed) / (this.getAdultAge() + 1);
-	        
-	        
-	        if (this.getDinoAge() <= this.getAdultAge())
-	        {
 
-	            this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(Math.round(this.baseHealth + (healthStep * this.getDinoAge())));
-	            this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(Math.round(this.baseDamage + (attackStep * this.getDinoAge())));
-	            this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(this.baseSpeed + (speedStep * this.getDinoAge()));
+        if (this.getDinoAge() <= this.getAdultAge()) {
 
-	            if (this.isTeen())
-	            {
-	                this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.5D);
-	            }
-	            else if (this.isAdult())
-	            {
-	                this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(2.0D);
-	            }
-	            else
-	            {
-	                this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.0D);
-	            }
-	        }
-	}
+            this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(Math.round(this.baseHealth + (healthStep * this.getDinoAge())));
+            this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(Math.round(this.baseDamage + (attackStep * this.getDinoAge())));
+            this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(this.baseSpeed + (speedStep * this.getDinoAge()));
 
-	@Override
-	public int getAdultAge() {
-		return 13;
-	}
-	
+            if (this.isTeen()) {
+                this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.5D);
+            } else if (this.isAdult()) {
+                this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(2.0D);
+            } else {
+                this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.0D);
+            }
+        }
+    }
+
+    @Override
+    public int getAdultAge() {
+        return 13;
+    }
+
 }

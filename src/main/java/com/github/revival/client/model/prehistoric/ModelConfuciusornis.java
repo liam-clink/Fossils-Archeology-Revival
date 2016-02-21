@@ -1,14 +1,10 @@
 package com.github.revival.client.model.prehistoric;
 
-import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelRenderer;
-import net.minecraft.entity.Entity;
-import net.minecraft.util.MathHelper;
-
 import com.github.revival.client.model.base.ModelPrehistoric;
 import com.github.revival.common.entity.mob.test.EntityNewPrehistoric;
+import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelRenderer;
 
-public class ModelConfuciusornis extends ModelPrehistoric
-{
+public class ModelConfuciusornis extends ModelPrehistoric {
     public MowzieModelRenderer rightLeg;
     public MowzieModelRenderer rightFoot;
     public MowzieModelRenderer leftLeg;
@@ -32,8 +28,7 @@ public class ModelConfuciusornis extends ModelPrehistoric
     public MowzieModelRenderer rightTail3;
     public MowzieModelRenderer rightTailFan;
 
-    public ModelConfuciusornis()
-    {
+    public ModelConfuciusornis() {
         this.textureWidth = 64;
         this.textureHeight = 32;
         this.rightTail3 = new MowzieModelRenderer(this, 50, 20);
@@ -155,24 +150,24 @@ public class ModelConfuciusornis extends ModelPrehistoric
     }
 */
 
-	@Override
-	public void renderFossil(EntityNewPrehistoric entity, float f, float f1,
-			float f2, float f3, float f4, float f5) {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void renderFossil(EntityNewPrehistoric entity, float f, float f1,
+                             float f2, float f3, float f4, float f5) {
+        // TODO Auto-generated method stub
 
-	@Override
-	public void renderLiving(EntityNewPrehistoric entity, float f, float f1,
-			float f2, float f3, float f4, float f5) {
-		// TODO Auto-generated method stub
-		
-	}
+    }
 
-	@Override
-	public void renderSleeping(EntityNewPrehistoric entity, float f, float f1,
-			float f2, float f3, float f4, float f5) {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void renderLiving(EntityNewPrehistoric entity, float f, float f1,
+                             float f2, float f3, float f4, float f5) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void renderSleeping(EntityNewPrehistoric entity, float f, float f1,
+                               float f2, float f3, float f4, float f5) {
+        // TODO Auto-generated method stub
+
+    }
 }

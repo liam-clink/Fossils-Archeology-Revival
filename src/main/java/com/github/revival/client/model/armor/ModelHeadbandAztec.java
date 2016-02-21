@@ -5,8 +5,7 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 
-public class ModelHeadbandAztec extends ModelBiped
-{
+public class ModelHeadbandAztec extends ModelBiped {
     public final ResourceLocation texture;
     //fields
     ModelRenderer AztecFeather;
@@ -15,8 +14,7 @@ public class ModelHeadbandAztec extends ModelBiped
     ModelRenderer BandLeft;
     ModelRenderer BandBack;
 
-    public ModelHeadbandAztec(float f)
-    {
+    public ModelHeadbandAztec(float f) {
         super(f, 0, 64, 32);
 
         texture = new ResourceLocation("fossil:textures/armor/headband_master.png");
@@ -67,16 +65,14 @@ public class ModelHeadbandAztec extends ModelBiped
         this.bipedHead.addChild(BandFront);
     }
 
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
-    {
+    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
         super.render(entity, f, f1, f2, f3, f4, f5);
         this.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 
 
     }
 
-    private void setRotation(ModelRenderer model, float x, float y, float z)
-    {
+    private void setRotation(ModelRenderer model, float x, float y, float z) {
         model.rotateAngleX = x;
         model.rotateAngleY = y;
         model.rotateAngleZ = z;

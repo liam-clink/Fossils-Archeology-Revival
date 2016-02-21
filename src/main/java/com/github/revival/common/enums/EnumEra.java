@@ -1,7 +1,6 @@
 package com.github.revival.common.enums;
 
-public enum EnumEra
-{
+public enum EnumEra {
     Now,
     StoneAge,
     Cretaceous,

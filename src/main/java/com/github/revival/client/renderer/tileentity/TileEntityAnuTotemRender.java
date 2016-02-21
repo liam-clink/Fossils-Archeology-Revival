@@ -8,44 +8,36 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 
-public class TileEntityAnuTotemRender extends TileEntitySpecialRenderer
-{
+public class TileEntityAnuTotemRender extends TileEntitySpecialRenderer {
 
     public static final ResourceLocation texture = new ResourceLocation("fossil:textures/blocks/anuTotem.png");
     private ModelAnuTotem modelBlock;
 
-    public TileEntityAnuTotemRender()
-    {
+    public TileEntityAnuTotemRender() {
         this.modelBlock = new ModelAnuTotem();
 
     }
 
-    public void renderAnuAt(TileEntityAnuTotem tileentity, double x, double y, double z, float f)
-    {
+    public void renderAnuAt(TileEntityAnuTotem tileentity, double x, double y, double z, float f) {
         int i1 = 0;
-        if (tileentity.hasWorldObj())
-        {
+        if (tileentity.hasWorldObj()) {
             i1 = tileentity.getBlockMetadata();
         }
         short short1 = 0;
-        if (i1 == 2)
-        {
+        if (i1 == 2) {
 
             short1 = 360;
         }
 
-        if (i1 == 3)
-        {
+        if (i1 == 3) {
             short1 = 180;
         }
 
-        if (i1 == 4)
-        {
+        if (i1 == 4) {
             short1 = 90;
         }
 
-        if (i1 == 5)
-        {
+        if (i1 == 5) {
             short1 = -90;
         }
 
@@ -62,8 +54,7 @@ public class TileEntityAnuTotemRender extends TileEntitySpecialRenderer
     }
 
     @Override
-    public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f)
-    {
+    public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f) {
         this.renderAnuAt((TileEntityAnuTotem) tileentity, x, y, z, f);
     }
 }

@@ -7,11 +7,9 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 
 import java.util.Random;
 
-public class WorldGenAncientChest extends WorldGenerator
-{
+public class WorldGenAncientChest extends WorldGenerator {
 
-    public boolean generate(World world, Random rand, int x, int y, int z)
-    {
+    public boolean generate(World world, Random rand, int x, int y, int z) {
         world.setBlock(x + 0, y + -2, z + 0, Blocks.bedrock, 0, 3);
         world.setBlock(x + 1, y + -2, z + 0, Blocks.bedrock, 0, 3);
         world.setBlock(x + 2, y + -2, z + 0, Blocks.bedrock, 0, 3);
@@ -948,8 +946,7 @@ public class WorldGenAncientChest extends WorldGenerator
 
     }
 
-    public boolean generate_r02_last(World world, Random rand, int x, int y, int z)
-    {
+    public boolean generate_r02_last(World world, Random rand, int x, int y, int z) {
 
         world.setBlock(x + 3, y + 2, z + 2, Blocks.redstone_torch, 3, 3);
         world.setBlock(x + 7, y + 2, z + 2, Blocks.redstone_torch, 3, 3);

@@ -7,16 +7,14 @@ import net.minecraft.client.model.ModelRenderer;
  * ModelBiped - Either Mojang or a mod author
  * Created using Tabula 4.1.1
  */
-public class ModelAncientHelmet extends ModelBiped
-{
+public class ModelAncientHelmet extends ModelBiped {
     public ModelRenderer Snout;
     public ModelRenderer Ear1;
     public ModelRenderer Ear2;
     public ModelRenderer Tooth1;
     public ModelRenderer Tooth2;
 
-    public ModelAncientHelmet(float f)
-    {
+    public ModelAncientHelmet(float f) {
         super(f, 0, 64, 64);
         this.textureWidth = 64;
         this.textureHeight = 64;
@@ -47,8 +45,7 @@ public class ModelAncientHelmet extends ModelBiped
     /**
      * This is a helper function from Tabula to set the rotation of model parts
      */
-    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z)
-    {
+    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
         modelRenderer.rotateAngleX = x;
         modelRenderer.rotateAngleY = y;
         modelRenderer.rotateAngleZ = z;

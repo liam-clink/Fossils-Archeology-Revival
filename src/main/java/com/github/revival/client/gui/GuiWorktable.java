@@ -10,19 +10,16 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import org.lwjgl.opengl.GL11;
 
-public class GuiWorktable extends GuiContainer
-{
+public class GuiWorktable extends GuiContainer {
     private static final ResourceLocation loc = new ResourceLocation("fossil:textures/gui/Workbench.png");
     private TileEntityWorktable furnaceInventory;
 
-    public GuiWorktable(InventoryPlayer var1, TileEntity var2)
-    {
+    public GuiWorktable(InventoryPlayer var1, TileEntity var2) {
         super(new ContainerWorktable(var1, var2));
         this.furnaceInventory = (TileEntityWorktable) var2;
     }
 
-    protected void drawGuiContainerForegroundLayer()
-    {
+    protected void drawGuiContainerForegroundLayer() {
         this.fontRendererObj.drawString(LocalizationStrings.BLOCK_WORKTABLE_IDLE_NAME, 30, 6, 4210752);
         this.fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), 8, this.ySize - 96 + 2, 4210752);
     }
@@ -30,8 +27,7 @@ public class GuiWorktable extends GuiContainer
     /**
      * Draw the background layer for the GuiContainer (everything behind the items)
      */
-    protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3)
-    {
+    protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         mc.getTextureManager().bindTexture(loc);
         int var5 = (this.width - this.xSize) / 2;
@@ -39,8 +35,7 @@ public class GuiWorktable extends GuiContainer
         this.drawTexturedModalRect(var5, var6, 0, 0, this.xSize, this.ySize);
         int var7;
 
-        if (this.furnaceInventory.isBurning())
-        {
+        if (this.furnaceInventory.isBurning()) {
             var7 = this.furnaceInventory.getBurnTimeRemainingScaled(12);
             this.drawTexturedModalRect(var5 + 82, var6 + 36 + 12 - var7, 176, 12 - var7, 14, var7 + 2);
         }

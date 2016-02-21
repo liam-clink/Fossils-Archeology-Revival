@@ -3,11 +3,8 @@ package com.github.revival.client.model;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
-public class ModelTarSlime extends ModelBase
-{
+public class ModelTarSlime extends ModelBase {
     public ModelRenderer eyeRight;
     public ModelRenderer eyeLeft;
     public ModelRenderer mouth;
@@ -31,7 +28,7 @@ public class ModelTarSlime extends ModelBase
     }
 
     @Override
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) { 
+    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
         this.eyeLeft.render(f5);
         this.mouth.render(f5);
         this.eyeRight.render(f5);

@@ -24,8 +24,7 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class BlockSifter extends BlockContainer
-{
+public class BlockSifter extends BlockContainer {
     private static boolean keepFurnaceInventory = false;
     private final boolean isActive;
     // private final String VAT = "Vat.";
@@ -36,18 +35,14 @@ public class BlockSifter extends BlockContainer
     @SideOnly(Side.CLIENT)
     private IIcon Bottom;
 
-    public BlockSifter(boolean isActive)
-    {
+    public BlockSifter(boolean isActive) {
         super(Material.wood);
         this.isActive = isActive;
         setHardness(3.0F);
         setStepSound(Block.soundTypeMetal);
-        if (isActive)
-        {
+        if (isActive) {
             setBlockName(LocalizationStrings.BLOCK_SIFTER_ACTIVE);
-        }
-        else
-        {
+        } else {
             setBlockName(LocalizationStrings.BLOCK_SIFTER_IDLE);
             setCreativeTab(FATabRegistry.tabFBlocks);
         }
@@ -58,26 +53,21 @@ public class BlockSifter extends BlockContainer
      * is burning
      */
     public static void updateFurnaceBlockState(boolean isActive, World world,
-                                               int x, int y, int z)
-    {
+                                               int x, int y, int z) {
         int l = world.getBlockMetadata(x, y, z);
         TileEntity tileentity = world.getTileEntity(x, y, z);
         keepFurnaceInventory = true;
 
-        if (isActive)
-        {
+        if (isActive) {
             world.setBlock(x, y, z, FABlockRegistry.blockSifterActive);
-        }
-        else
-        {
+        } else {
             world.setBlock(x, y, z, FABlockRegistry.blockSifterIdle);
         }
 
         keepFurnaceInventory = false;
         world.setBlockMetadataWithNotify(x, y, z, l, 2);
 
-        if (tileentity != null)
-        {
+        if (tileentity != null) {
             tileentity.validate();
             world.setTileEntity(x, y, z, tileentity);
         }
@@ -86,8 +76,7 @@ public class BlockSifter extends BlockContainer
     /**
      * Called whenever the block is added into the world. Args: world, x, y, z
      */
-    public void onBlockAdded(World world, int x, int y, int z)
-    {
+    public void onBlockAdded(World world, int x, int y, int z) {
         super.onBlockAdded(world, x, y, z);
         this.setDefaultDirection(world, x, y, z);
     }
@@ -95,33 +84,27 @@ public class BlockSifter extends BlockContainer
     /**
      * set a blocks direction
      */
-    private void setDefaultDirection(World world, int x, int y, int z)
-    {
-        if (!world.isRemote)
-        {
+    private void setDefaultDirection(World world, int x, int y, int z) {
+        if (!world.isRemote) {
             Block block = world.getBlock(x, y, z - 1);
             Block block1 = world.getBlock(x, y, z + 1);
             Block block2 = world.getBlock(x - 1, y, z);
             Block block3 = world.getBlock(x + 1, y, z);
             byte b0 = 3;
 
-            if (block.func_149730_j() && !block1.func_149730_j())
-            {
+            if (block.func_149730_j() && !block1.func_149730_j()) {
                 b0 = 3;
             }
 
-            if (block1.func_149730_j() && !block.func_149730_j())
-            {
+            if (block1.func_149730_j() && !block.func_149730_j()) {
                 b0 = 2;
             }
 
-            if (block2.func_149730_j() && !block3.func_149730_j())
-            {
+            if (block2.func_149730_j() && !block3.func_149730_j()) {
                 b0 = 5;
             }
 
-            if (block3.func_149730_j() && !block2.func_149730_j())
-            {
+            if (block3.func_149730_j() && !block2.func_149730_j()) {
                 b0 = 4;
             }
 
@@ -135,8 +118,7 @@ public class BlockSifter extends BlockContainer
      * register icons.
      */
     @SideOnly(Side.CLIENT)
-    public void registerBlockIcons(IIconRegister par1IconRegister)
-    {
+    public void registerBlockIcons(IIconRegister par1IconRegister) {
         this.blockIcon = par1IconRegister.registerIcon("fossil:SifterSides");
         this.Bottom = par1IconRegister.registerIcon("fossil:SifterBottom");
         this.Top = this.isActive ? par1IconRegister
@@ -148,8 +130,7 @@ public class BlockSifter extends BlockContainer
      * From the specified side and block metadata retrieves the blocks texture.
      * Args: side, metadata
      */
-    public IIcon getIcon(int par1, int par2)
-    {
+    public IIcon getIcon(int par1, int par2) {
         return par1 == 1 ? this.Top
                 : (par1 != 0 ? this.blockIcon : this.Bottom);
     }
@@ -161,28 +142,22 @@ public class BlockSifter extends BlockContainer
      * public int getBlockTextureFromSide(int var1) { return var1 == 1 ? 36 :
 	 * (var1 == 0 ? 36 : (var1 == 3 ? 20 : 20)); }
 	 */
-
     @SideOnly(Side.CLIENT)
     /**
      * A randomly called display update to be able to add particles or other items for display
      */
     public void randomDisplayTick(World var1, int var2, int var3, int var4,
-                                  Random var5)
-    {
+                                  Random var5) {
     }
 
     /**
      * Called upon block activation (right click on the block.)
      */
     public boolean onBlockActivated(World var1, int var2, int var3, int var4,
-                                    EntityPlayer var5, int var6, float var7, float var8, float var9)
-    {
-        if (var1.isRemote)
-        {
+                                    EntityPlayer var5, int var6, float var7, float var8, float var9) {
+        if (var1.isRemote) {
             return true;
-        }
-        else
-        {
+        } else {
             var5.openGui(Revival.instance, 7, var1, var2, var3, var4);
             return true;
         }
@@ -193,15 +168,14 @@ public class BlockSifter extends BlockContainer
      * the block.
      */
     @Override
-    public TileEntity createNewTileEntity(World world, int par2)
-    {
+    public TileEntity createNewTileEntity(World world, int par2) {
         return new TileEntitySifter();
     }
 
     /**
      * Called when the block is placed in the world.
      */
-	/*
+    /*
 	 * public void onBlockPlacedBy(World var1, int var2, int var3, int var4,
 	 * EntityLiving var5) {This Block doesnt care for directions!
 	 * super.onBlockPlacedBy(par1World, par2, par3, par4, par5EntityLiving,
@@ -217,19 +191,16 @@ public class BlockSifter extends BlockContainer
 	 * 
 	 * if (var6 == 3)var1.setBlockMetadataWithNotify(var2, var3, var4, 4,2); }
 	 */
-    private void ReturnIron(World world, int x, int y, int z)
-    {
+    private void ReturnIron(World world, int x, int y, int z) {
         ItemStack itemstack = new ItemStack(Items.iron_ingot, 3);
         float var6 = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
         float var7 = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
         float var8 = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
 
-        while (itemstack.stackSize > 0)
-        {
+        while (itemstack.stackSize > 0) {
             int var9 = this.furnaceRand.nextInt(21) + 10;
 
-            if (var9 > itemstack.stackSize)
-            {
+            if (var9 > itemstack.stackSize) {
                 var9 = itemstack.stackSize;
             }
 
@@ -253,31 +224,24 @@ public class BlockSifter extends BlockContainer
      * update, as appropriate
      */
     public void breakBlock(World world, int x, int y, int z, Block block,
-                           int var6)
-    {
-        if (!keepFurnaceInventory)
-        {
+                           int var6) {
+        if (!keepFurnaceInventory) {
             TileEntitySifter tileentity = (TileEntitySifter) world
                     .getTileEntity(x, y, z);
 
-            if (tileentity != null)
-            {
-                for (int i = 0; i < tileentity.getSizeInventory(); ++i)
-                {
+            if (tileentity != null) {
+                for (int i = 0; i < tileentity.getSizeInventory(); ++i) {
                     ItemStack itemstack = tileentity.getStackInSlot(i);
 
-                    if (itemstack != null)
-                    {
+                    if (itemstack != null) {
                         float xOffset = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
                         float yOffset = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
                         float zOffset = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
 
-                        while (itemstack.stackSize > 0)
-                        {
+                        while (itemstack.stackSize > 0) {
                             int rand = this.furnaceRand.nextInt(21) + 10;
 
-                            if (rand > itemstack.stackSize)
-                            {
+                            if (rand > itemstack.stackSize) {
                                 rand = itemstack.stackSize;
                             }
 
@@ -289,8 +253,7 @@ public class BlockSifter extends BlockContainer
                                     new ItemStack(itemstack.getItem(), rand,
                                             itemstack.getItemDamage()));
 
-                            if (itemstack.hasTagCompound())
-                            {
+                            if (itemstack.hasTagCompound()) {
                                 entityItem.getEntityItem().setTagCompound(
                                         (NBTTagCompound) itemstack
                                                 .getTagCompound().copy());
@@ -319,8 +282,7 @@ public class BlockSifter extends BlockContainer
      * use the value from getComparatorInputOverride instead of the actual
      * redstone signal strength.
      */
-    public boolean hasComparatorInputOverride()
-    {
+    public boolean hasComparatorInputOverride() {
         return true;
     }
 
@@ -330,8 +292,7 @@ public class BlockSifter extends BlockContainer
      * comparator.
      */
     public int getComparatorInputOverride(World par1World, int par2, int par3,
-                                          int par4, int par5)
-    {
+                                          int par4, int par5) {
         return Container.calcRedstoneFromInventory((IInventory) par1World
                 .getTileEntity(par2, par3, par4));
     }
@@ -340,8 +301,7 @@ public class BlockSifter extends BlockContainer
     /**
      * only called by clickMiddleMouseButton , and passed to inventory.setCurrentItem (along with isCreative)
      */
-    public Item getItem(World world, int x, int y, int z)
-    {
+    public Item getItem(World world, int x, int y, int z) {
         return Item.getItemFromBlock(FABlockRegistry.blockSifterIdle);
     }
 }
