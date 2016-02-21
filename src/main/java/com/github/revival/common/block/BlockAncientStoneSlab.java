@@ -19,7 +19,7 @@ import java.util.Random;
 
 public class BlockAncientStoneSlab extends BlockSlab {
     public static final String[] blockStepTypes = {"ancientStone"};
-    private IIcon theIcon;
+    private IIcon icon;
 
     public BlockAncientStoneSlab(boolean doubleSlabbed) {
         super(doubleSlabbed, Material.rock);
@@ -37,17 +37,17 @@ public class BlockAncientStoneSlab extends BlockSlab {
     }
 
     @Override
-    public void registerBlockIcons(IIconRegister par1IconRegister) {
-        this.blockIcon = par1IconRegister.registerIcon("fossil:Ancient_Stonebricks");
-        this.theIcon = par1IconRegister.registerIcon("fossil:Ancient_Stonebricks");
+    public void registerBlockIcons(IIconRegister iconRegister) {
+        this.blockIcon = iconRegister.registerIcon("fossil:Ancient_Stonebricks");
+        this.icon = iconRegister.registerIcon("fossil:Ancient_Stonebricks");
     }
 
-    public Item getItemDropped(int var1, Random var2, int var3) {
+    public Item getItemDropped(int var1, Random rand, int var3) {
         return Item.getItemFromBlock(FABlockRegistry.ancientStoneSingleSlab);
     }
 
-    protected ItemStack createStackedBlock(int par1) {
-        return new ItemStack(FABlockRegistry.ancientStoneSingleSlab, 2, par1 & 7);
+    protected ItemStack createStackedBlock(int meta) {
+        return new ItemStack(FABlockRegistry.ancientStoneSingleSlab, 2, meta & 7);
     }
 
     @SideOnly(Side.CLIENT)
@@ -60,12 +60,12 @@ public class BlockAncientStoneSlab extends BlockSlab {
      */
     // 1.6.4 - getFullSlabName
     @Override
-    public String func_150002_b(int par1) {
-        if (par1 < 0 || par1 >= blockStepTypes.length) {
-            par1 = 0;
+    public String func_150002_b(int meta) {
+        if (meta < 0 || meta >= blockStepTypes.length) {
+            meta = 0;
         }
 
-        return super.getUnlocalizedName() + "." + blockStepTypes[par1];
+        return super.getUnlocalizedName() + "." + blockStepTypes[meta];
     }
 
     /**
@@ -73,9 +73,9 @@ public class BlockAncientStoneSlab extends BlockSlab {
      */
     @Override
     @SideOnly(Side.CLIENT)
-    public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List par3List) {
-        if (par1 != Item.getItemFromBlock(FABlockRegistry.ancientStoneDoubleSlab)) {
-            par3List.add(new ItemStack(par1, 1, 0));
+    public void getSubBlocks(Item item, CreativeTabs tab, List subBlocks) {
+        if (item != Item.getItemFromBlock(FABlockRegistry.ancientStoneDoubleSlab)) {
+            subBlocks.add(new ItemStack(item, 1, 0));
         }
     }
 

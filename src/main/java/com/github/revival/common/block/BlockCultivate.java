@@ -36,7 +36,7 @@ public class BlockCultivate extends BlockContainer {
     private final boolean isActive;
     // private final String VAT = "Vat.";
     // private final String ERR_OUTBREAK = "Err.OutBreak";
-    private Random furnaceRand = new Random();
+    private Random rand = new Random();
 
     public BlockCultivate(boolean isActive) {
         super(Material.glass);
@@ -52,46 +52,38 @@ public class BlockCultivate extends BlockContainer {
         }
     }
 
-    public static void updateFurnaceBlockState(boolean isActive, World world,
-                                               int x, int y, int z) {
-        int var5 = world.getBlockMetadata(x, y, z);
-        TileEntity var6 = world.getTileEntity(x, y, z);
+    public static void updateFurnaceBlockState(boolean isActive, World world, int x, int y, int z) {
+        int meta = world.getBlockMetadata(x, y, z);
+        TileEntity tile = world.getTileEntity(x, y, z);
         keepFurnaceInventory = true;
 
         if (isActive) {
-
             world.setBlock(x, y, z, FABlockRegistry.blockcultivateActive);
-
         } else {
-
             world.setBlock(x, y, z, FABlockRegistry.blockcultivateIdle);
-
-
         }
 
         keepFurnaceInventory = false;
-        world.setBlockMetadataWithNotify(x, y, z, var5, 2);
-        var6.validate();
-        world.setTileEntity(x, y, z, var6);
+        world.setBlockMetadataWithNotify(x, y, z, meta, 2);
+        tile.validate();
+        world.setTileEntity(x, y, z, tile);
     }
 
     public void onBlockDestroyedByPlayer(World world, int x, int y, int z, int i) {
-        this.ReturnDNA(world, x, y, z);
+        this.returnDNA(world, x, y, z);
         super.onBlockDestroyedByPlayer(world, x, y, z, i);
     }
 
     public Item getItemDropped(int par1, Random rand, int par2) {
-
         return Item.getItemFromBlock(FABlockRegistry.blockcultivateIdle);
-
     }
 
     /**
      * Called whenever the block is added into the world. Args: world, x, y, z
      */
-    public void onBlockAdded(World var1, int var2, int var3, int var4) {
-        super.onBlockAdded(var1, var2, var3, var4);
-        this.setDefaultDirection(var1, var2, var3, var4);
+    public void onBlockAdded(World world, int x, int y, int z) {
+        super.onBlockAdded(world, x, y, z);
+        this.setDefaultDirection(world, x, y, z);
     }
 
     @Override
@@ -151,9 +143,8 @@ public class BlockCultivate extends BlockContainer {
      * register icons.
      */
     @SideOnly(Side.CLIENT)
-    public void registerBlockIcons(IIconRegister par1IconRegister) {
-        this.blockIcon = par1IconRegister.registerIcon("fossil:Culture_Sides_Idle");
-
+    public void registerBlockIcons(IIconRegister iconRegister) {
+        this.blockIcon = iconRegister.registerIcon("fossil:Culture_Sides_Idle");
     }
 
     /**
@@ -167,23 +158,18 @@ public class BlockCultivate extends BlockContainer {
     /**
      * A randomly called display update to be able to add particles or other items for display
      */
-    public void randomDisplayTick(World var1, int var2, int var3, int var4,
-                                  Random var5) {
-
-        var1.spawnParticle("suspended", (double) ((float) var2 + var5.nextFloat()), (double) ((float) var3 + var5.nextFloat()), (double) ((float) var4 + var5.nextFloat()), 0.0D, 0.0D, 0.0D);
-
-
+    public void randomDisplayTick(World world, int x, int y, int z, Random rand) {
+        world.spawnParticle("suspended", (double) ((float) x + rand.nextFloat()), (double) ((float) y + rand.nextFloat()), (double) ((float) z + rand.nextFloat()), 0.0D, 0.0D, 0.0D);
     }
 
     /**
      * Called upon block activation (right click on the block.)
      */
-    public boolean onBlockActivated(World var1, int var2, int var3, int var4,
-                                    EntityPlayer var5, int var6, float var7, float var8, float var9) {
-        if (var1.isRemote) {
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
+        if (world.isRemote) {
             return true;
         } else {
-            var5.openGui(Revival.instance, 1, var1, var2, var3, var4);
+            player.openGui(Revival.instance, 1, world, x, y, z);
             return true;
         }
     }
@@ -194,7 +180,6 @@ public class BlockCultivate extends BlockContainer {
      */
     @Override
     public TileEntity createNewTileEntity(World world, int par2) {
-
         return new TileEntityCultivate();
     }
 
@@ -217,45 +202,42 @@ public class BlockCultivate extends BlockContainer {
 	 * 
 	 * if (var6 == 3)var1.setBlockMetadataWithNotify(var2, var3, var4, 4,2); }
 	 */
-    private void ReturnDNA(World world, int x, int y, int z) {
+    private void returnDNA(World world, int x, int y, int z) {
         if (!keepFurnaceInventory) {
-            TileEntityCultivate tileentity = (TileEntityCultivate) world.getTileEntity(x, y, z);
-            if (tileentity != null) {
-                ItemStack itemstack = tileentity.getStackInSlot(0);
+            TileEntityCultivate tile = (TileEntityCultivate) world.getTileEntity(x, y, z);
+            if (tile != null) {
+                ItemStack stack = tile.getStackInSlot(0);
 
-                if (itemstack != null) {
-                    float xOffset = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
-                    float yOffset = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
-                    float zOffset = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
+                if (stack != null) {
+                    float xOffset = this.rand.nextFloat() * 0.8F + 0.1F;
+                    float yOffset = this.rand.nextFloat() * 0.8F + 0.1F;
+                    float zOffset = this.rand.nextFloat() * 0.8F + 0.1F;
 
-                    while (itemstack.stackSize > 0) {
-                        int rand = this.furnaceRand.nextInt(21) + 10;
+                    while (stack.stackSize > 0) {
+                        int rand = this.rand.nextInt(21) + 10;
 
-                        if (rand > itemstack.stackSize) {
-                            rand = itemstack.stackSize;
+                        if (rand > stack.stackSize) {
+                            rand = stack.stackSize;
                         }
 
-                        itemstack.stackSize -= rand;
+                        stack.stackSize -= rand;
                         EntityItem entityItem = new EntityItem(world,
                                 (double) ((float) x + xOffset),
                                 (double) ((float) y + yOffset),
                                 (double) ((float) z + zOffset),
-                                new ItemStack(itemstack.getItem(), rand,
-                                        itemstack.getItemDamage()));
+                                new ItemStack(stack.getItem(), rand,
+                                        stack.getItemDamage()));
 
-                        if (itemstack.hasTagCompound()) {
+                        if (stack.hasTagCompound()) {
                             entityItem.getEntityItem().setTagCompound(
-                                    (NBTTagCompound) itemstack
+                                    (NBTTagCompound) stack
                                             .getTagCompound().copy());
                         }
 
                         float offset = 0.05F;
-                        entityItem.motionX = (double) ((float) this.furnaceRand
-                                .nextGaussian() * offset);
-                        entityItem.motionY = (double) ((float) this.furnaceRand
-                                .nextGaussian() * offset + 0.2F);
-                        entityItem.motionZ = (double) ((float) this.furnaceRand
-                                .nextGaussian() * offset);
+                        entityItem.motionX = (double) ((float) this.rand.nextGaussian() * offset);
+                        entityItem.motionY = (double) ((float) this.rand.nextGaussian() * offset + 0.2F);
+                        entityItem.motionZ = (double) ((float) this.rand.nextGaussian() * offset);
                         world.spawnEntityInWorld(entityItem);
                     }
                 }
@@ -263,37 +245,34 @@ public class BlockCultivate extends BlockContainer {
         }
     }
 
-    private void ReturnIron(World world, int x, int y, int z) {
+    private void returnIron(World world, int x, int y, int z) {
+        ItemStack stack = new ItemStack(Items.iron_ingot, 3);
+        float offsetX = this.rand.nextFloat() * 0.8F + 0.1F;
+        float offsetY = this.rand.nextFloat() * 0.8F + 0.1F;
+        float offsetZ = this.rand.nextFloat() * 0.8F + 0.1F;
 
-        ItemStack itemstack = new ItemStack(Items.iron_ingot, 3);
-        float var6 = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
-        float var7 = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
-        float var8 = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
+        while (stack.stackSize > 0) {
+            int stackDecay = this.rand.nextInt(21) + 10;
 
-        while (itemstack.stackSize > 0) {
-            int var9 = this.furnaceRand.nextInt(21) + 10;
-
-            if (var9 > itemstack.stackSize) {
-                var9 = itemstack.stackSize;
+            if (stackDecay > stack.stackSize) {
+                stackDecay = stack.stackSize;
             }
 
-            itemstack.stackSize -= var9;
-            EntityItem world0 = new EntityItem(world,
-                    (double) ((float) x + var6), (double) ((float) y + var7),
-                    (double) ((float) z + var8), new ItemStack(
-                    itemstack.getItem(), var9,
-                    itemstack.getItemDamage()));
-            float world1 = 0.05F;
-            world0.motionX = (double) ((float) this.furnaceRand.nextGaussian() * world1);
-            world0.motionY = (double) ((float) this.furnaceRand.nextGaussian()
-                    * world1 + 0.2F);
-            world0.motionZ = (double) ((float) this.furnaceRand.nextGaussian() * world1);
-            world.spawnEntityInWorld(world0);
+            stack.stackSize -= stackDecay;
+            EntityItem item = new EntityItem(world,
+                    (double) ((float) x + offsetX), (double) ((float) y + offsetY),
+                    (double) ((float) z + offsetZ), new ItemStack(
+                    stack.getItem(), stackDecay,
+                    stack.getItemDamage()));
+            float motionMutlipler = 0.05F;
+            item.motionX = (double) ((float) this.rand.nextGaussian() * motionMutlipler);
+            item.motionY = (double) ((float) this.rand.nextGaussian() * motionMutlipler + 0.2F);
+            item.motionZ = (double) ((float) this.rand.nextGaussian() * motionMutlipler);
+            world.spawnEntityInWorld(item);
         }
     }
 
-    public void onBlockRemovalLost(World world, int x, int y, int z,
-                                   boolean isActive) {
+    public void onBlockRemovalLost(World world, int x, int y, int z, boolean isActive) {
         keepFurnaceInventory = false;
         String var6 = StatCollector.translateToLocal(LocalizationStrings.CULTIVATE_OUTBREAK);
 
@@ -310,7 +289,7 @@ public class BlockCultivate extends BlockContainer {
             }
         }
 
-        this.ReturnIron(world, x, y, z);
+        this.returnIron(world, x, y, z);
         if (!world.isRemote) {
             if (isActive) {
                 TileEntityCultivate tileentity = (TileEntityCultivate) world.getTileEntity(x, y, z);
@@ -372,12 +351,12 @@ public class BlockCultivate extends BlockContainer {
                     ItemStack itemstack = tileentity.getStackInSlot(i);
 
                     if (itemstack != null) {
-                        float xOffset = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
-                        float yOffset = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
-                        float zOffset = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
+                        float xOffset = this.rand.nextFloat() * 0.8F + 0.1F;
+                        float yOffset = this.rand.nextFloat() * 0.8F + 0.1F;
+                        float zOffset = this.rand.nextFloat() * 0.8F + 0.1F;
 
                         while (itemstack.stackSize > 0) {
-                            int rand = this.furnaceRand.nextInt(21) + 10;
+                            int rand = this.rand.nextInt(21) + 10;
 
                             if (rand > itemstack.stackSize) {
                                 rand = itemstack.stackSize;
@@ -398,11 +377,11 @@ public class BlockCultivate extends BlockContainer {
                             }
 
                             float offset = 0.05F;
-                            entityItem.motionX = (double) ((float) this.furnaceRand
+                            entityItem.motionX = (double) ((float) this.rand
                                     .nextGaussian() * offset);
-                            entityItem.motionY = (double) ((float) this.furnaceRand
+                            entityItem.motionY = (double) ((float) this.rand
                                     .nextGaussian() * offset + 0.2F);
-                            entityItem.motionZ = (double) ((float) this.furnaceRand
+                            entityItem.motionZ = (double) ((float) this.rand
                                     .nextGaussian() * offset);
                             world.spawnEntityInWorld(entityItem);
                         }

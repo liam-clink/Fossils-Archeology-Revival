@@ -12,8 +12,6 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 
 public class BlockAncientGlass extends Block {
-
-
     public IIcon[] textures = new IIcon[47];
 
     public int[] textureRefByID = {0, 0, 6, 6, 0, 0, 6, 6, 3, 3, 19, 15, 3, 3,
@@ -38,9 +36,8 @@ public class BlockAncientGlass extends Block {
         this.setCreativeTab(FATabRegistry.tabFBlocks);
     }
 
-    public boolean shouldSideBeRendered(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5) {
-        Block i1 = par1IBlockAccess.getBlock(par2, par3, par4);
-        return i1 == this ? false : super.shouldSideBeRendered(par1IBlockAccess, par2, par3, par4, par5);
+    public boolean shouldSideBeRendered(IBlockAccess world, int x, int y, int z, int side) {
+        return world.getBlock(x, y, z) != this && super.shouldSideBeRendered(world, x, y, z, side);
     }
 
     public boolean isOpaqueCube() {
@@ -56,17 +53,15 @@ public class BlockAncientGlass extends Block {
     }
 
     @SideOnly(Side.CLIENT)
-    public void registerBlockIcons(IIconRegister iconRegistry) {
+    public void registerBlockIcons(IIconRegister iconRegister) {
         for (int i = 0; i < 47; i++) {
-            textures[i] = iconRegistry.registerIcon(Revival.MODID + ":" + "ancientGlass/Ancient_Glass" + "_" + (i + 1));
+            textures[i] = iconRegister.registerIcon(Revival.MODID + ":" + "ancientGlass/Ancient_Glass" + "_" + (i + 1));
         }
     }
 
     @Override
     public IIcon getIcon(int side, int meta) {
-
         return textures[0];
-
     }
 
     public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
@@ -102,12 +97,11 @@ public class BlockAncientGlass extends Block {
             bitMatrix[6] = world.getBlock(x, y - 1, z) == this;
             bitMatrix[7] = world.getBlock(x, y - 1, z + (side == 4 ? 1 : -1)) == this;
         }
+
         int id = 0;
         for (int i = 0; i <= 7; i++)
             id = id + (bitMatrix[i] ? (i == 0 ? 1 : (i == 1 ? 2 : (i == 2 ? 4 : (i == 3 ? 8 : (i == 4 ? 16 : (i == 5 ? 32 : (i == 6 ? 64 : 128))))))) : 0);
+
         return id > 255 || id < 0 ? textures[0] : textures[textureRefByID[id]];
-
     }
-
-
 }

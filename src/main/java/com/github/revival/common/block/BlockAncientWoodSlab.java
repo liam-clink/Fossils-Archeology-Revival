@@ -42,41 +42,41 @@ public class BlockAncientWoodSlab extends BlockSlab {
     }
 
     @Override
-    public void registerBlockIcons(IIconRegister par1IconRegister) {
-        this.blockIcon = par1IconRegister.registerIcon("fossil:Ancient_Wood");
+    public void registerBlockIcons(IIconRegister iconRegister) {
+        this.blockIcon = iconRegister.registerIcon("fossil:Ancient_Wood");
     }
 
-    public Item getItemDropped(int var1, Random var2, int var3) {
+    public Item getItemDropped(int var1, Random rand, int var3) {
         return Item.getItemFromBlock(FABlockRegistry.ancientWoodSingleSlab);
     }
 
-    public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLiving par5EntityLiving) {
-        if (par1World.getBlock(par2, par3 - 1, par4) == FABlockRegistry.ancientWoodSingleSlab) {
-            par1World.setBlock(par2, par3, par4, Blocks.air, 0, 2);
-            par1World.setBlock(par2, par3 - 1, par4, FABlockRegistry.ancientWoodDoubleSlab);
+    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving placer) {
+        if (world.getBlock(x, y - 1, z) == FABlockRegistry.ancientWoodSingleSlab) {
+            world.setBlock(x, y, z, Blocks.air, 0, 2);
+            world.setBlock(x, y - 1, z, FABlockRegistry.ancientWoodDoubleSlab);
         }
 
-        if (par1World.getBlock(par2, par3 + 1, par4) == FABlockRegistry.ancientWoodSingleSlab) {
-            par1World.setBlock(par2, par3, par4, Blocks.air, 0, 2);
-            par1World.setBlock(par2, par3 + 1, par4, FABlockRegistry.ancientWoodDoubleSlab);
+        if (world.getBlock(x, y + 1, z) == FABlockRegistry.ancientWoodSingleSlab) {
+            world.setBlock(x, y, z, Blocks.air, 0, 2);
+            world.setBlock(x, y + 1, z, FABlockRegistry.ancientWoodDoubleSlab);
         }
     }
 
-    protected ItemStack createStackedBlock(int par1) {
-        return new ItemStack(FABlockRegistry.ancientWoodSingleSlab, 2, par1 & 7);
+    protected ItemStack createStackedBlock(int meta) {
+        return new ItemStack(FABlockRegistry.ancientWoodSingleSlab, 2, meta & 7);
     }
 
-    public String func_150002_b(int par1) {
-        if ((par1 < 0) || (par1 >= woodType.length)) {
-            par1 = 0;
+    public String func_150002_b(int meta) {
+        if ((meta < 0) || (meta >= woodType.length)) {
+            meta = 0;
         }
 
-        return super.getUnlocalizedName() + "." + woodType[par1];
+        return super.getUnlocalizedName() + "." + woodType[meta];
     }
 
-    public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List par3List) {
-        if (par1 != Item.getItemFromBlock(FABlockRegistry.ancientWoodDoubleSlab)) {
-            par3List.add(new ItemStack(par1, 1, 0));
+    public void getSubBlocks(Item item, CreativeTabs tab, List subBlocks) {
+        if (item != Item.getItemFromBlock(FABlockRegistry.ancientWoodDoubleSlab)) {
+            subBlocks.add(new ItemStack(item, 1, 0));
         }
     }
 }

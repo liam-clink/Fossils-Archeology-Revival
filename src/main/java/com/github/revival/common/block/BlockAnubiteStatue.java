@@ -21,7 +21,6 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 public class BlockAnubiteStatue extends BlockContainer implements ISubBlocksBlock {
-
     private int counter = 0;
 
     public BlockAnubiteStatue() {
@@ -32,26 +31,24 @@ public class BlockAnubiteStatue extends BlockContainer implements ISubBlocksBloc
         this.setBlockUnbreakable();
         this.setResistance(60000000.0F);
         setBlockName("AnubiteStatue");
-
     }
 
-    public boolean onBlockActivated(World var1, int xCoord, int yCoord, int zCoord,
-                                    EntityPlayer var5, int var6, float var7, float var8, float var9) {
-        var1.newExplosion((Entity) null, xCoord + 0.5F, yCoord, zCoord + 0.5, 5F, true, true);
-        EntityAnubite newMob = new EntityAnubite(var1);
-        if (!var1.isRemote) {
-            newMob.setLocationAndAngles(xCoord + 0.5, yCoord, zCoord + 0.5, 0, 0);
-            var1.spawnEntityInWorld(newMob);
-            var1.removeTileEntity(xCoord, yCoord, zCoord);
-            var1.setBlock(xCoord, yCoord, zCoord, Blocks.air);
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
+        world.newExplosion(null, x + 0.5F, y, z + 0.5, 5F, true, true);
+        EntityAnubite newMob = new EntityAnubite(world);
+        if (!world.isRemote) {
+            newMob.setLocationAndAngles(x + 0.5, y, z + 0.5, 0, 0);
+            world.spawnEntityInWorld(newMob);
+            world.removeTileEntity(x, y, z);
+            world.setBlock(x, y, z, Blocks.air);
         }
         return true;
     }
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void registerBlockIcons(IIconRegister iconregister) {
-        this.blockIcon = iconregister.registerIcon("nether_brick");
+    public void registerBlockIcons(IIconRegister iconRegister) {
+        this.blockIcon = iconRegister.registerIcon("nether_brick");
     }
 
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack) {
@@ -75,7 +72,6 @@ public class BlockAnubiteStatue extends BlockContainer implements ISubBlocksBloc
         }
 
         world.setBlockMetadataWithNotify(x, y, z, b0, 2);
-
 
         world.markBlockForUpdate(x, y, z);
 

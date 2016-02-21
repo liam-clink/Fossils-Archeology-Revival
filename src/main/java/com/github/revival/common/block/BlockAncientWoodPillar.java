@@ -16,7 +16,7 @@ import java.util.Random;
 
 public class BlockAncientWoodPillar extends Block {
     @SideOnly(Side.CLIENT)
-    private IIcon Top;
+    private IIcon top;
 
     public BlockAncientWoodPillar() {
         super(Material.wood);
@@ -25,62 +25,61 @@ public class BlockAncientWoodPillar extends Block {
         setBlockName(LocalizationStrings.ANCIENT_WOOD_PILLAR_NAME);
     }
 
-    public static int limitToValidMetadata(int var0) {
-        return var0 & 3;
+    public static int limitToValidMetadata(int meta) {
+        return meta & 3;
     }
 
     @Override
-    public void registerBlockIcons(IIconRegister par1IconRegister) {
-        this.blockIcon = par1IconRegister.registerIcon("fossil:Ancient_Wood_Pillar"); //adding in a texture, 1.5.1 style!
-        this.Top = par1IconRegister.registerIcon("fossil:Ancient_Wood_Pillar_Top");
+    public void registerBlockIcons(IIconRegister iconRegister) {
+        this.blockIcon = iconRegister.registerIcon("fossil:Ancient_Wood_Pillar"); //adding in a texture, 1.5.1 style!
+        this.top = iconRegister.registerIcon("fossil:Ancient_Wood_Pillar_Top");
     }
 
     // this sets the amount droped when broken.
-    public int quantityDropped(Random par1Random) {
+    public int quantityDropped(Random rand) {
         return 1;
     }
 
     // this tells the game what to drop if the block is brocken with an explosion. an example of this would be creeper explosions
     // making stone drop cobblestone.
-    public Item getItemDropped(int var1, Random var2, int var3) {
+    public Item getItemDropped(int var1, Random rand, int var3) {
         return Item.getItemFromBlock(FABlockRegistry.palmLog);
     }
 
     /**
      * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
      */
-    public IIcon getIcon(int var1, int var2) {
-        return ((var2 & 12) == 0 && var1 < 2) || ((var2 & 12) == 8 && var1 > 1 && var1 < 4) || ((var2 & 12) == 4 && var1 > 3) ? this.Top : this.blockIcon;
+    public IIcon getIcon(int side, int meta) {
+        return ((meta & 12) == 0 && side < 2) || ((meta & 12) == 8 && side > 1 && side < 4) || ((meta & 12) == 4 && side > 3) ? this.top : this.blockIcon;
     }
 
     /**
      * Called when a block is placed using its ItemBlock. Args: World, X, Y, Z, side, hitX, hitY, hitZ, block metadata
      */
-    public int onBlockPlaced(World var1, int var2, int var3, int var4, int var5, float var6, float var7, float var8, int var9) {
-        int var10 = var9 & 3;
-        byte var11 = 0;
+    public int onBlockPlaced(World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int metadata) {
+        int validMeta = metadata & 3;
+        byte modifier = 0;
 
-        switch (var5) {
+        switch (side) {
             case 0:
             case 1:
-                var11 = 0;
+                modifier = 0;
                 break;
-
             case 2:
             case 3:
-                var11 = 8;
+                modifier = 8;
                 break;
 
             case 4:
             case 5:
-                var11 = 4;
+                modifier = 4;
         }
 
-        return var10 | var11;
+        return validMeta | modifier;
     }
 
-    public int damageDropped(int var1) {
-        return var1 & 3;
+    public int damageDropped(int meta) {
+        return meta & 3;
     }
 
     /**
@@ -91,11 +90,11 @@ public class BlockAncientWoodPillar extends Block {
         return new ItemStack(this, 1, limitToValidMetadata(var1));
     }
 
-    public boolean canSustainLeaves(World var1, int var2, int var3, int var4) {
+    public boolean canSustainLeaves(World world, int x, int y, int z) {
         return true;
     }
 
-    public boolean isWood(World var1, int var2, int var3, int var4) {
+    public boolean isWood(World world, int x, int y, int z) {
         return true;
     }
 }

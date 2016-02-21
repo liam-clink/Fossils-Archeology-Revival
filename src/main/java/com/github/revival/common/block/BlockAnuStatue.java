@@ -20,7 +20,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class BlockAnuStatue extends BlockContainer implements ISubBlocksBlock {
-
     private int counter = 0;
 
     public BlockAnuStatue() {
@@ -31,13 +30,12 @@ public class BlockAnuStatue extends BlockContainer implements ISubBlocksBlock {
         this.setBlockUnbreakable();
         this.setResistance(60000000.0F);
         setBlockName(LocalizationStrings.BLOCK_ANU_NAME);
-
     }
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void registerBlockIcons(IIconRegister iconregister) {
-        this.blockIcon = iconregister.registerIcon("bedrock");
+    public void registerBlockIcons(IIconRegister iconRegister) {
+        this.blockIcon = iconRegister.registerIcon("bedrock");
     }
 
     @Override
@@ -50,7 +48,7 @@ public class BlockAnuStatue extends BlockContainer implements ISubBlocksBlock {
     }
 
     @Override
-    public int isProvidingWeakPower(IBlockAccess acces, int x, int y, int z, int i) {
+    public int isProvidingWeakPower(IBlockAccess world, int x, int y, int z, int i) {
         return 15;
     }
 

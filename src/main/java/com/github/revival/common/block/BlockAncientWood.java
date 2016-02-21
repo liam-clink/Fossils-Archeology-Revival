@@ -15,7 +15,7 @@ public class BlockAncientWood extends Block {
     }
 
     @Override
-    public void registerBlockIcons(IIconRegister par1IconRegister) {
-        this.blockIcon = par1IconRegister.registerIcon("fossil:Ancient_Wood");
+    public void registerBlockIcons(IIconRegister iconRegister) {
+        this.blockIcon = iconRegister.registerIcon("fossil:Ancient_Wood");
     }
 }
