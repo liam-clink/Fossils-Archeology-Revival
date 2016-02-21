@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 buildscript {
     repositories {
         mavenCentral()
@@ -79,4 +77,3 @@ String getVersion(String type) {
 
     return "$major.$revision.$patch";
 }
->>>>>>> origin/master
