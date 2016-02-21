@@ -9,15 +9,21 @@ import com.github.revival.common.config.FossilConfig;
 import com.github.revival.common.enums.EnumAnimation;
 import com.github.revival.common.enums.EnumOrderType;
 import com.github.revival.common.enums.EnumPrehistoric;
-import com.github.revival.common.enums.EnumPrehistoricAI.*;
+import com.github.revival.common.enums.EnumPrehistoricAI.Activity;
+import com.github.revival.common.enums.EnumPrehistoricAI.Attacking;
+import com.github.revival.common.enums.EnumPrehistoricAI.Climbing;
+import com.github.revival.common.enums.EnumPrehistoricAI.Following;
+import com.github.revival.common.enums.EnumPrehistoricAI.Jumping;
+import com.github.revival.common.enums.EnumPrehistoricAI.Moving;
+import com.github.revival.common.enums.EnumPrehistoricAI.Response;
+import com.github.revival.common.enums.EnumPrehistoricAI.Stalking;
+import com.github.revival.common.enums.EnumPrehistoricAI.Taming;
+import com.github.revival.common.enums.EnumPrehistoricAI.Untaming;
+import com.github.revival.common.enums.EnumPrehistoricAI.WaterAbility;
 import com.github.revival.common.enums.EnumSituation;
 import com.github.revival.common.handler.LocalizationStrings;
 import com.github.revival.common.item.FAItemRegistry;
 import com.github.revival.common.tileentity.TileEntityFeeder;
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/master
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -29,17 +35,17 @@ import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.command.IEntitySelector;
-import net.minecraft.entity.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.IEntityLivingData;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIOwnerHurtByTarget;
-import net.minecraft.entity.ai.EntityAITargetNonTamed;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.monster.EntityCreeper;
-import net.minecraft.entity.monster.EntityGhast;
 import net.minecraft.entity.monster.IMob;
-import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -49,7 +55,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.*;
+import net.minecraft.util.ChunkCoordinates;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.MathHelper;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 import org.lwjgl.opengl.GL11;
@@ -393,28 +404,20 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 			ticksSitted++;
 		}
 
-<<<<<<< HEAD
 		if(worldObj.isRemote && !this.isSitting() && this.getRNG().nextInt(400) == 1 && !this.isRiding()){
 			this.setSitting(true);
 			ticksSitted = 0;
 		}
 
 		if(worldObj.isRemote && this.isSitting() && ticksSitted > 100 && this.getRNG().nextInt(100) == 1){
-=======
-		if(worldObj.isRemote && !this.isSitting() && this.getRNG().nextInt(8000) == 1){
 			this.setSitting(true);
-			ticksSitted = 0;
-		}
-		
-		if(worldObj.isRemote && this.isSitting() && ticksSitted > 100 && this.getRNG().nextInt(1000) == 1){
->>>>>>> origin/master
-			this.setSitting(false);
 			ticksSitted = 0;
 		}
 
 		if(breaksBlocks){
 			this.breakBlock(5);
 		}
+
 		if(this.aiMovingType() == Moving.FLIGHT){
 			if (this.riddenByEntity == null)
 			{
