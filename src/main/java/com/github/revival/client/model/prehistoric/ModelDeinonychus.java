@@ -239,7 +239,7 @@ public class ModelDeinonychus extends ModelNewPrehistoric {
         this.setToInitPose();
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
         /*animator.setAnimationId(EntityDeinonychus.animation_attack.animationId);
-		animator.startPhase(15);
+        animator.startPhase(15);
 		animator.move(leftThigh, 0, 3.2F, -0.5F);
 		animator.move(rightThigh, 0, 3.2F, -0.5F);
 		animator.move(lowerBody, 0, 3.2F, -0.5F);

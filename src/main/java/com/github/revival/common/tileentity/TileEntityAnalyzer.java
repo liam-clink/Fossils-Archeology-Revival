@@ -530,7 +530,7 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory,
     }
 
 	/*
-	 * Returns true if automation is allowed to insert the given stack (ignoring
+     * Returns true if automation is allowed to insert the given stack (ignoring
 	 * stack size) into the given slot.
 	 */
 

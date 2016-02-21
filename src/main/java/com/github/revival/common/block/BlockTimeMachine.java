@@ -108,7 +108,7 @@ public class BlockTimeMachine extends BlockContainer {
      * From the specified side and block metadata retrieves the blocks texture.
      * Args: side, metadata
      */
-	/*
+    /*
 	 * public int getBlockTextureFromSideAndMetadata(int var1, int var2) {
 	 * return this.getBlockTextureFromSide(var1); }
 	 */

@@ -522,7 +522,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
                 // /////////////////////////////////////
 
                 // //////////1.7.2 BLOCK //////////////
-				/*
+                /*
 				 * String s0 = this.getOwnerName(); if (s0.length() > 11) { s0 =
 				 * this.getOwnerName().substring(0, 11); }
 				 * 

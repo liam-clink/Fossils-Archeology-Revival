@@ -1,7 +1,6 @@
 package com.github.revival.common.gen.structure.shipwreck;
 
-public class ShipWreckUtil
-{
+public class ShipWreckUtil {
     /**
      * Some predefined values for custom hooks that I use in the demo structure
      */
@@ -12,7 +11,7 @@ public class ShipWreckUtil
      * Start of specific chests; I'll use negative values so as not to conflict with item types and such
      */
     public static final int COMMON_LOOT = -1;
-    
+
     public static final int RARE_LOOT = -2;
 
     /**

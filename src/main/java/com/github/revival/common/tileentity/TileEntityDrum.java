@@ -99,7 +99,7 @@ public class TileEntityDrum extends TileEntity {
         // var2.itemID == this.ItemToControl.itemID && this.isTamed() &&
         // var1.username.equalsIgnoreCase(this.getOwnerName())
         /*
-		 * String var3 = ""; String var4 = ""; String var5 =
+         * String var3 = ""; String var4 = ""; String var5 =
 		 * Revival.GetLangTextByKey("Drum.Msg.Head"); String var6 =
 		 * Revival.GetLangTextByKey("Drum.Msg.Middle"); String var7 =
 		 * Revival.GetLangTextByKey("Drum.Msg.Tail");

@@ -20,7 +20,7 @@ public class RenderPlayerCapes {
 
     public UUID[] devuuid = new UUID[]{
             /*tyranno66*/UUID.fromString("04e6d7f5-b587-4e4f-8ce0-b210d368a79e"),
-			/*Raptorfarian*/UUID.fromString("0ed918c8-d612-4360-b711-cd415671356f"),
+            /*Raptorfarian*/UUID.fromString("0ed918c8-d612-4360-b711-cd415671356f"),
 			/*4f6f3b*/UUID.fromString("0248b8a4-7fab-4d6f-8a22-8a51534fd53f"),
 			/*Bluestreak52*/UUID.fromString("5468a8f2-84d6-46e2-b58c-f9d576b67544"),
 			/*Robberto08*/UUID.fromString("05b14ce7-0ff1-4b8e-9ef8-d98502e9bf07"),

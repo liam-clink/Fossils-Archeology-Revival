@@ -202,7 +202,7 @@ public class BlockCultivate extends BlockContainer {
      * Called when the block is placed in the world.
      */
     /*
-	 * public void onBlockPlacedBy(World var1, int var2, int var3, int var4,
+     * public void onBlockPlacedBy(World var1, int var2, int var3, int var4,
 	 * EntityLiving var5) {This Block doesnt care for directions!
 	 * super.onBlockPlacedBy(par1World, par2, par3, par4, par5EntityLiving,
 	 * par6ItemStack) int var6 =

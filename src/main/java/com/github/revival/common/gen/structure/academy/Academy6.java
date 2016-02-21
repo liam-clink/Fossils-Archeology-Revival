@@ -1,7 +1,6 @@
 package com.github.revival.common.gen.structure.academy;
 
-public class Academy6
-{
+public class Academy6 {
 
     public static final int[][][][] blockArrayAcademy =
             {

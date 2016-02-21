@@ -1,9 +1,9 @@
 package com.github.revival.common.entity.mob.test;
 
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-
+import com.github.revival.Revival;
+import com.github.revival.common.config.FossilConfig;
+import com.github.revival.common.entity.ai.DinoAINearestAttackableTargetSorter;
+import com.github.revival.common.tileentity.TileEntityFeeder;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLiving;
@@ -19,13 +19,11 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
-import com.github.revival.Revival;
-import com.github.revival.common.config.FossilConfig;
-import com.github.revival.common.entity.ai.DinoAINearestAttackableTargetSorter;
-import com.github.revival.common.tileentity.TileEntityFeeder;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
 
-public class DinoAIWaterFeeder extends EntityAIBase
-{
+public class DinoAIWaterFeeder extends EntityAIBase {
     private static final int NO_TARGET = -1;
     private static final int ITEM = 1;
     private static final int BLOCK = 2;
@@ -75,8 +73,7 @@ public class DinoAIWaterFeeder extends EntityAIBase
     /**
      * Creates The AI, Input: Dino, Speed, searching range
      */
-    public DinoAIWaterFeeder(EntityNewPrehistoric Dino0, int Range0, double speed)
-    {
+    public DinoAIWaterFeeder(EntityNewPrehistoric Dino0, int Range0, double speed) {
         this.theWorld = Dino0.worldObj;
         this.targetMob = null;
         this.targetFeeder = null;
@@ -91,26 +88,22 @@ public class DinoAIWaterFeeder extends EntityAIBase
     /**
      * Determine if this AI Task is interruptible by a higher (= lower value) priority task.
      */
-    public boolean isInterruptible()
-    {
+    public boolean isInterruptible() {
         return true;
     }
-    
+
     /**
      * Returns whether the EntityAIBase should begin execution.
      */
-    public boolean shouldExecute()
-    {
+    public boolean shouldExecute() {
         int Range = this.SEARCH_RANGE;// Current Searching range
 
-        if (!theWorld.isRemote)
-        {
+        if (!theWorld.isRemote) {
             if (!FossilConfig.starvingDinos)
                 return false;
         }
-        
-        if (!this.dinosaur.IsHungry() && !this.dinosaur.IsDeadlyHungry())
-        {
+
+        if (!this.dinosaur.IsHungry() && !this.dinosaur.IsDeadlyHungry()) {
             this.typeofTarget = NO_TARGET;
             return false;
         }
@@ -118,23 +111,19 @@ public class DinoAIWaterFeeder extends EntityAIBase
         PathNavigate pathnavigate = this.dinosaur.getNavigator();
         PathEntity pathentity = pathnavigate.getPath();
 
-        if (pathentity != null && !pathentity.isFinished())
-        {
+        if (pathentity != null && !pathentity.isFinished()) {
             PathPoint pathpoint = pathentity.getFinalPathPoint();
             this.entityPosX = pathpoint.xCoord;
             this.entityPosY = pathpoint.yCoord + 1;
             this.entityPosZ = pathpoint.zCoord;
 
-            if (this.dinosaur.getDistanceSq((double) this.entityPosX, this.dinosaur.posY, (double) this.entityPosZ) <= 5.25D)
-            {
+            if (this.dinosaur.getDistanceSq((double) this.entityPosX, this.dinosaur.posY, (double) this.entityPosZ) <= 5.25D) {
                 //Feeder has priority over other food sources.
-                if (this.dinosaur.selfType.useFeeder())
-                {
+                if (this.dinosaur.selfType.useFeeder()) {
                     //targetFeeder = this.dinosaur.GetNearestFeeder(Range/2);
                     this.targetFeeder = null;
 
-                    if (this.targetFeeder != null)
-                    {
+                    if (this.targetFeeder != null) {
                         Revival.printDebug("Found Feeder at: " + this.targetFeeder.xCoord + ", " + this.targetFeeder.yCoord + ", " + this.targetFeeder.zCoord);
                         this.destX = this.targetFeeder.xCoord;
                         this.destY = this.targetFeeder.yCoord;
@@ -146,11 +135,9 @@ public class DinoAIWaterFeeder extends EntityAIBase
             }
         }
         //Check for items and then blocks.
-        if (!this.dinosaur.selfType.FoodItemList.IsEmpty())
-        {
+        if (!this.dinosaur.selfType.FoodItemList.IsEmpty()) {
             this.targetItem = this.getNearestItem2(this.SEARCH_RANGE);
-            if (this.targetItem != null)
-            {
+            if (this.targetItem != null) {
                 this.destX = targetItem.posX;
                 this.destY = targetItem.posY;
                 this.destZ = targetItem.posZ;
@@ -161,7 +148,7 @@ public class DinoAIWaterFeeder extends EntityAIBase
             if (!this.dinosaur.selfType.FoodBlockList.IsEmpty())//Hasn't found anything and has blocks it can look for
             {
                 Vec3 targetBlock = this.dinosaur.getBlockToEat(this.SEARCH_RANGE);
-                
+
                 if (targetBlock != null)//Found Item, go there and eat it
                 {
                     this.destX = targetBlock.xCoord;
@@ -179,23 +166,19 @@ public class DinoAIWaterFeeder extends EntityAIBase
      * Returns whether an in-progress EntityAIBase should continue executing
      */
     @Override
-    public boolean continueExecuting()
-    {
+    public boolean continueExecuting() {
         double Distance = Math.sqrt(Math.pow(this.dinosaur.posX - this.destX, 2.0D) + Math.pow(this.dinosaur.posZ - this.destZ, 2.0D));
 
-        if (!this.dinosaur.IsHungry())
-        {
+        if (!this.dinosaur.IsHungry()) {
             return false;
         }
-        
-        if (Distance > this.SEARCH_RANGE)
-        {
+
+        if (Distance > this.SEARCH_RANGE) {
             Revival.printDebug("Target too far, discontinuing task. Distance: " + Distance + ", Range: " + this.SEARCH_RANGE);
             return false;
         }
 
-        switch (this.typeofTarget)
-        {
+        switch (this.typeofTarget) {
             case NO_TARGET:
             default:
                 return false;
@@ -218,62 +201,49 @@ public class DinoAIWaterFeeder extends EntityAIBase
      * Updates the task
      */
     @Override
-    public void updateTask()
-    {
+    public void updateTask() {
         int Range = this.SEARCH_RANGE;
         this.dinosaur.setSitting(false);
         double Distance = Math.sqrt(Math.pow(this.dinosaur.posX - this.destX, 2.0D) + Math.pow(this.dinosaur.posZ - this.destZ, 2.0D));
 
-        
-        if (Distance > Range)
-        {
+
+        if (Distance > Range) {
             endTask();
         }
-        
 
-        if (this.typeofTarget == FEEDER)
-        {
+
+        if (this.typeofTarget == FEEDER) {
 
             if (this.targetFeeder == null)
                 endTask();
 
-            if (Distance < SEARCH_RANGE)
-            {
+            if (Distance < SEARCH_RANGE) {
 
                 this.moveToTarget(this.destX, this.destY, this.destZ);
                 this.TimeAtThisTarget++;
-                if (Distance < 4.5D)
-                {
-                    if (this.targetFeeder != null)
-                    {
+                if (Distance < 4.5D) {
+                    if (this.targetFeeder != null) {
                         //int healval = MathHelper.floor_double(this.targetFeeder.Feed(this.dinosaur, this.dinosaur.selfType) / 15D);
-                       // this.dinosaur.heal(healval);
+                        // this.dinosaur.heal(healval);
                     }
                 }
             }
-            if (this.TimeAtThisTarget == 100)
-            {
+            if (this.TimeAtThisTarget == 100) {
                 endTask();
-            }
-            else
-            {
+            } else {
                 endTask();
             }
 
         }
 
-        if (this.typeofTarget == ITEM)
-        {
+        if (this.typeofTarget == ITEM) {
             if (this.targetItem == null)
                 endTask();
-            if (Distance < SEARCH_RANGE)
-            {
+            if (Distance < SEARCH_RANGE) {
                 this.moveToTarget(this.destX, this.destY, this.destZ);
-                if (Distance < 2.5)
-                {
+                if (Distance < 2.5) {
 
-                    if (this.targetItem != null && this.targetItem.isEntityAlive())
-                    {
+                    if (this.targetItem != null && this.targetItem.isEntityAlive()) {
                         /*int i = this.dinosaur.PickUpItem(this.targetItem.getEntityItem());
 
                         if (i > 0)
@@ -288,45 +258,35 @@ public class DinoAIWaterFeeder extends EntityAIBase
                         }*/
                     }
                 }
-            }
-            else
-            {
+            } else {
                 endTask();
             }
         }
 
-        if (this.typeofTarget == BLOCK)
-        {
+        if (this.typeofTarget == BLOCK) {
             if (!this.dinosaur.selfType.FoodBlockList.CheckBlock(this.dinosaur.worldObj.getBlock((int) destX, (int) destY, (int) destZ)))
                 endTask();
-            if (Distance < SEARCH_RANGE)
-            {
+            if (Distance < SEARCH_RANGE) {
                 this.dinosaur.getNavigator().tryMoveToXYZ(this.destX, this.destY, this.destZ, 1.0D);
-                if (Distance < 2.5)
-                {
-                    if (this.dinosaur.selfType.FoodBlockList.CheckBlock(this.dinosaur.worldObj.getBlock((int) destX, (int) destY, (int) destZ)))
-                    {
+                if (Distance < 2.5) {
+                    if (this.dinosaur.selfType.FoodBlockList.CheckBlock(this.dinosaur.worldObj.getBlock((int) destX, (int) destY, (int) destZ))) {
                         this.dinosaur.heal(this.dinosaur.selfType.FoodBlockList.getBlockHeal(this.dinosaur.worldObj.getBlock((int) destX, (int) destY, (int) destZ)));
                         this.dinosaur.increaseHunger(this.dinosaur.selfType.FoodBlockList.getBlockFood(Item.getItemFromBlock(this.dinosaur.worldObj.getBlock((int) destX, (int) destY, (int) destZ))));
                         this.dinosaur.worldObj.setBlock((int) destX, (int) destY, (int) destZ, Blocks.air, 0, 2);
 
                         this.TimeAtThisTarget++;
-                        if (this.TimeAtThisTarget == 20)
-                        {
+                        if (this.TimeAtThisTarget == 20) {
                             endTask();
                         }
                     }
                 }
-            }
-            else
-            {
+            } else {
                 endTask();
             }
         }
     }
 
-    public void endTask()
-    {
+    public void endTask() {
 //        this.dinosaur.getNavigator().clearPathEntity();
         this.TimeAtThisTarget = 0;
         targetItem = null;
@@ -335,12 +295,11 @@ public class DinoAIWaterFeeder extends EntityAIBase
         this.targetEntity = null;
         this.typeofTarget = NO_TARGET;
     }
-    
+
     /**
      * Resets the task
      */
-    public void resetTask()
-    {
+    public void resetTask() {
         this.TimeAtThisTarget = 0;
         targetItem = null;
         targetBlock = null;
@@ -349,17 +308,14 @@ public class DinoAIWaterFeeder extends EntityAIBase
         this.typeofTarget = NO_TARGET;
     }
 
-    private TileEntityFeeder getNearbyFeeder()
-    {
+    private TileEntityFeeder getNearbyFeeder() {
         double range = 36;
         List<TileEntity> nearbyEntities = theWorld.getEntitiesWithinAABB(TileEntityFeeder.class, this.dinosaur.boundingBox.expand(range, range, range));
 
-        for (TileEntity entityFeeder : nearbyEntities)
-        {
+        for (TileEntity entityFeeder : nearbyEntities) {
             TileEntityFeeder nearbyFeeder = (TileEntityFeeder) entityFeeder;
 
-            if (this.dinosaur.selfType.useFeeder())
-            {
+            if (this.dinosaur.selfType.useFeeder()) {
                 return nearbyFeeder;
             }
         }
@@ -367,22 +323,19 @@ public class DinoAIWaterFeeder extends EntityAIBase
         return null;
     }
 
-    private EntityItem getNearestItem2(int SEARCH_RANGE)
-    {
+    private EntityItem getNearestItem2(int SEARCH_RANGE) {
         List nearbyItems = this.dinosaur.worldObj.getEntitiesWithinAABB(EntityItem.class, this.dinosaur.boundingBox.expand(SEARCH_RANGE, SEARCH_RANGE, SEARCH_RANGE));
         Collections.sort(nearbyItems, this.targetSorter);
         Iterator iterateNearbyItems = nearbyItems.iterator();
         EntityItem entityItem = null;
 
-        while (iterateNearbyItems.hasNext())
-        {
+        while (iterateNearbyItems.hasNext()) {
 
             EntityItem entityItem1 = (EntityItem) iterateNearbyItems.next();
 
             if ((this.dinosaur.selfType.FoodItemList.CheckItem(entityItem1.getEntityItem().getItem())
                     || this.dinosaur.selfType.FoodBlockList.CheckBlock(Block.getBlockFromItem(entityItem1.getEntityItem().getItem()))
-                    && this.dinosaur.getDistanceSqToEntity(entityItem1) < SEARCH_RANGE))
-            {
+                    && this.dinosaur.getDistanceSqToEntity(entityItem1) < SEARCH_RANGE)) {
                 entityItem = entityItem1;
                 //SEARCH_RANGE = (int) this.dinosaur.getDistanceSqToEntity(entityItem);
             }
@@ -390,8 +343,7 @@ public class DinoAIWaterFeeder extends EntityAIBase
         return entityItem;
     }
 
-    private void moveToTarget(double destX, double destY, double destZ)
-    {
+    private void moveToTarget(double destX, double destY, double destZ) {
         double distance = 64.0D;
 
         // Simple "pathfinding" to attack closest player.
@@ -404,7 +356,7 @@ public class DinoAIWaterFeeder extends EntityAIBase
         this.movePosX = this.deltaX;
         this.movePosY = this.deltaY;
         this.movePosZ = this.deltaZ;
-        
+
         this.dinosaur.addVelocity(deltaX * this.speed, deltaY * this.speed, deltaZ * this.speed);
     }
 

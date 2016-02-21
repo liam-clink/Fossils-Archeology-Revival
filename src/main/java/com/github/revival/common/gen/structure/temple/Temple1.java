@@ -4,8 +4,7 @@ import com.github.revival.common.gen.structure.academy.AcademyUtil;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 
-public class Temple1
-{
+public class Temple1 {
     /*
      * For directional blocks (relative to direction of generation):
 	 * 0 - Facing Right

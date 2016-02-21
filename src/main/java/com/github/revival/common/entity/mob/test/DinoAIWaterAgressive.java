@@ -1,18 +1,16 @@
 package com.github.revival.common.entity.mob.test;
 
-import java.util.Random;
-
+import com.github.revival.common.enums.EnumPrehistoricAI.Moving;
+import com.github.revival.common.enums.EnumPrehistoricAI.Response;
+import com.github.revival.common.enums.EnumPrehistoricAI.WaterAbility;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
-import com.github.revival.common.enums.EnumPrehistoricAI.Moving;
-import com.github.revival.common.enums.EnumPrehistoricAI.Response;
-import com.github.revival.common.enums.EnumPrehistoricAI.WaterAbility;
+import java.util.Random;
 
-public class DinoAIWaterAgressive extends EntityAIBase
-{
+public class DinoAIWaterAgressive extends EntityAIBase {
     public int courseChangeCooldown;
     public double waypointX;
     public double waypointY;
@@ -31,9 +29,9 @@ public class DinoAIWaterAgressive extends EntityAIBase
     private double deltaY;
     private double deltaZ;
     private double length;
-    
+
     private Random rand = new Random();
-    
+
     private World worldObj;
     private double movePosX;
     private double movePosY;
@@ -43,8 +41,7 @@ public class DinoAIWaterAgressive extends EntityAIBase
     private Vec3 moveVector;
     private Vec3 normalizedVector;
 
-    public DinoAIWaterAgressive(EntityNewPrehistoric dinosaur, double speed)
-    {
+    public DinoAIWaterAgressive(EntityNewPrehistoric dinosaur, double speed) {
         this.entity = dinosaur;
         this.speed = speed;
         this.setMutexBits(1);
@@ -53,25 +50,24 @@ public class DinoAIWaterAgressive extends EntityAIBase
     /**
      * Returns whether the EntityAIBase should begin execution.
      */
-    public boolean shouldExecute()
-    {
+    public boolean shouldExecute() {
         double distance = 64.0D;
-        if(entity.aiMovingType() != Moving.AQUATIC || entity.aiMovingType() != Moving.SEMIAQUATIC){
-        	return false;
+        if (entity.aiMovingType() != Moving.AQUATIC || entity.aiMovingType() != Moving.SEMIAQUATIC) {
+            return false;
         }
-        if(entity.aiWaterAbilityType() != WaterAbility.ATTACK || entity.aiResponseType() != Response.WATERAGRESSIVE){
-        	return false;
+        if (entity.aiWaterAbilityType() != WaterAbility.ATTACK || entity.aiResponseType() != Response.WATERAGRESSIVE) {
+            return false;
         }
         this.targetedEntity = this.entity.worldObj.getClosestVulnerablePlayerToEntity(this.entity, 20.0D);
-        if(entity.preyBlacklist().contains(targetedEntity)){
-        	return false;
+        if (entity.preyBlacklist().contains(targetedEntity)) {
+            return false;
         }
-		if(targetedEntity != null){
+        if (targetedEntity != null) {
 
-    		if(targetedEntity.width * 1.5F > entity.width || this.entity.preyBlacklist().contains(targetedEntity)){
-    			return false;
-    		}
-		}
+            if (targetedEntity.width * 1.5F > entity.width || this.entity.preyBlacklist().contains(targetedEntity)) {
+                return false;
+            }
+        }
         return (this.entity.isInWater() && this.targetedEntity != null && this.targetedEntity.isInWater()
                 && this.targetedEntity.getDistanceSqToEntity(this.entity) < distance * distance);
     }
@@ -79,8 +75,7 @@ public class DinoAIWaterAgressive extends EntityAIBase
     /**
      * Returns whether an in-progress EntityAIBase should continue executing
      */
-    public boolean continueExecuting()
-    {
+    public boolean continueExecuting() {
         double distance = 64.0D;
         this.targetedEntity = this.entity.worldObj.getClosestVulnerablePlayerToEntity(this.entity, 20.0D);
 
@@ -92,12 +87,10 @@ public class DinoAIWaterAgressive extends EntityAIBase
      * Execute a one shot task or start executing a continuous task
      */
     @Override
-    public void updateTask()
-    {
+    public void updateTask() {
         double distance = 64.0D;
 
-        if (this.targetedEntity != null && this.targetedEntity.isDead)
-        {
+        if (this.targetedEntity != null && this.targetedEntity.isDead) {
             this.targetedEntity = null;
         }
 
@@ -105,8 +98,7 @@ public class DinoAIWaterAgressive extends EntityAIBase
         this.targetedEntity = this.entity.worldObj.getClosestVulnerablePlayerToEntity(this.entity, 20.0D);
 
         if (this.entity.isInWater() && this.targetedEntity != null && this.targetedEntity.isInWater()
-                && this.targetedEntity.getDistanceSqToEntity(this.entity) < distance * distance)
-        {
+                && this.targetedEntity.getDistanceSqToEntity(this.entity) < distance * distance) {
 
             // Simple "pathfinding" to attack closest player.
             this.deltaX = this.targetedEntity.posX - this.entity.posX;
@@ -119,12 +111,10 @@ public class DinoAIWaterAgressive extends EntityAIBase
             this.movePosX = this.deltaX;
             this.movePosY = this.deltaY;
             this.movePosZ = this.deltaZ;
-            
+
             this.entity.addVelocity(deltaX * this.speed, deltaY * this.speed, deltaZ * this.speed);
 
-        }
-        else
-        {
+        } else {
             this.entity.renderYawOffset = this.entity.rotationYaw = -((float) Math.atan2(this.entity.motionX, this.entity.motionZ)) * 180.0F / (float) Math.PI;
         }
     }

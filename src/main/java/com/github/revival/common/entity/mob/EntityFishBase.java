@@ -291,5 +291,5 @@ public abstract class EntityFishBase extends EntityWaterMob {
     public abstract Item getItem();
 
 }
-	
+
 	

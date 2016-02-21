@@ -4,8 +4,7 @@ import com.github.revival.common.block.FABlockRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 
-public class Academy1
-{
+public class Academy1 {
     public static final int[][][][] blockArrayAcademy =
             {
                     //This is where all the x, y, z values go (i, j, k). They are broke down by

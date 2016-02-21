@@ -3,9 +3,8 @@ package com.github.revival.common.gen.structure.temple;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 
-public class Temple3
-{
-    
+public class Temple3 {
+
     /*
      * For directional blocks (relative to direction of generation):
 	 * 0 - Facing Right
@@ -25,7 +24,7 @@ public class Temple3
     public static final int INVERT_LEFT = 5;
     public static final int INVERT_TOWARDS = 6;
     public static final int INVERT_AWAY = 7;
-    
+
     public static final int[][][][] blockArrayTemple =
             {
                     { // y = 11

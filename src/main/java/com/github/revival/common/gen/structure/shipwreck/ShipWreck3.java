@@ -3,8 +3,7 @@ package com.github.revival.common.gen.structure.shipwreck;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 
-public class ShipWreck3
-{
+public class ShipWreck3 {
     /**
      * Some predefined values for custom hooks that I use in the demo structure
      */

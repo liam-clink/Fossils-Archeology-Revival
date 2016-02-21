@@ -84,7 +84,7 @@ public class BlockDrum extends BlockContainer {
     }
 
 	/*
-	 * Lets the block know when one of its neighbor changes. Doesn't know which
+     * Lets the block know when one of its neighbor changes. Doesn't know which
 	 * neighbor changed (coordinates passed are their own) Args: x, y, z,
 	 * neighbor blockID
 	 */
