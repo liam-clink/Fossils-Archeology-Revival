@@ -332,7 +332,7 @@ public class DinoAIEat extends EntityAIBase {
         {
             EntityItem entityItem = (EntityItem) iterateNearbyItems.next();
 
-            if (this.dinosaur.SelfType.FoodItemList.CheckItemById(entityItem.getEntityItem().itemID) || this.dinosaur.SelfType.FoodBlockList.CheckBlockById(entityItem.getEntityItem().itemID))
+            if (this.dinosaur.selfType.FoodItemList.CheckItemById(entityItem.getEntityItem().itemID) || this.dinosaur.selfType.FoodBlockList.CheckBlockById(entityItem.getEntityItem().itemID))
             {
             	Revival.printDebug("targetItem: "+ entityItem);
             		this.targetItem = entityItem;            

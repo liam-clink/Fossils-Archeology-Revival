@@ -10,7 +10,6 @@ import net.minecraft.entity.EntityLivingBase;
 import java.util.Iterator;
 
 public class ModelPrehistoric extends MowzieModelBase {
-
     public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
         doMowzieStuff(true);
         renderAll();
@@ -23,7 +22,6 @@ public class ModelPrehistoric extends MowzieModelBase {
                     renderLiving(mob, f, f1, f2, f3, f4, f5);
                 } else {
                     renderSleeping(mob, f, f1, f2, f3, f4, f5);
-
                 }
             }
         }
@@ -64,9 +62,9 @@ public class ModelPrehistoric extends MowzieModelBase {
     }
 
     public void doMowzieStuff(boolean reset) {
-        Iterator itr = this.boxList.iterator();
-        while (itr.hasNext()) {
-            Object element = itr.next();
+        Iterator iterator = this.boxList.iterator();
+        while (iterator.hasNext()) {
+            Object element = iterator.next();
             if (element instanceof MowzieModelRenderer) {
                 MowzieModelRenderer box = (MowzieModelRenderer) element;
                 if (reset) {
@@ -78,11 +76,10 @@ public class ModelPrehistoric extends MowzieModelBase {
         }
     }
 
-    public void setRotateAngle(MowzieModelRenderer MowzieModelRenderer, float x, float y, float z) {
-        MowzieModelRenderer.rotateAngleX = x;
-        MowzieModelRenderer.rotateAngleY = y;
-        MowzieModelRenderer.rotateAngleZ = z;
+    public void setRotateAngle(MowzieModelRenderer modelRenderer, float x, float y, float z) {
+        modelRenderer.rotateAngleX = x;
+        modelRenderer.rotateAngleY = y;
+        modelRenderer.rotateAngleZ = z;
     }
-
 }
 

@@ -181,7 +181,7 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory,
         return 64;
     }
 
-    public int getCookProgressScaled(int var1) {
+    public int getAnalyzeProgressScaled(int var1) {
         return this.analyzerCookTime * var1 / 200;
     }
 

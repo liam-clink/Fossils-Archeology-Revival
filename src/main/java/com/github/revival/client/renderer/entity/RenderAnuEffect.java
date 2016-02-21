@@ -77,6 +77,7 @@ public class RenderAnuEffect extends RenderLiving {
         }
 
         GL11.glRotatef(-1 * short1, 0.0F, 1.0F, 0.0F);
+
         GL11.glPushMatrix();
         if (entity.deathTicks > 0) {
             float f6 = (float) entity.deathTicks / 200.0F;
@@ -92,8 +93,8 @@ public class RenderAnuEffect extends RenderLiving {
 
         this.bindEntityTexture(entity);
         this.mainModel.render(entity, x, y, z, i, j, u);
-        if (entity.hurtTime > 0) {
 
+        if (entity.hurtTime > 0) {
             GL11.glDepthFunc(GL11.GL_EQUAL);
             GL11.glDisable(GL11.GL_TEXTURE_2D);
             GL11.glEnable(GL11.GL_BLEND);

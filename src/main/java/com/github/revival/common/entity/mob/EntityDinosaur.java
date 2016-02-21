@@ -339,8 +339,8 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
      * Dino
      */
     /*
-     * public double getAttackStrength() { return this.SelfType.Strength0 +
-	 * this.getDinoAge() * this.SelfType.StrengthInc; }
+     * public double getAttackStrength() { return this.selfType.Strength0 +
+	 * this.getDinoAge() * this.selfType.StrengthInc; }
 	 */
 
     /**
@@ -449,7 +449,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
     public void ShowPedia(GuiPedia p0) {
 
         p0.reset();
-        p0.PrintPictXY(new ResourceLocation(Revival.MODID + ":"
+        p0.printPicture(new ResourceLocation(Revival.MODID + ":"
                         + "textures/items/" + this.SelfType.toString() + "_DNA.png"),
                 ((p0.xGui / 2) + (p0.xGui / 4)), 7, 16, 16); // 185
 
@@ -466,28 +466,28 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
 		 * CUSTOM NAME DINOSAUR NAME DINO AGE HEALTH HUNGER
 		 */
         if (this.hasCustomNameTag()) {
-            p0.PrintStringXY(this.getCustomNameTag(), GuiPedia.rightIndent, 24, 40,
+            p0.printStringXY(this.getCustomNameTag(), GuiPedia.rightIndent, 24, 40,
                     90, 245);
         }
 
-        p0.PrintStringXY(
+        p0.printStringXY(
                 StatCollector.translateToLocal("entity.fossil."
                         + this.SelfType.toString() + ".name"), GuiPedia.rightIndent,
                 34, 0, 0, 0);
-        p0.PrintPictXY(pediaclock, GuiPedia.rightIndent, 46, 8, 8);
-        p0.PrintPictXY(pediaheart, GuiPedia.rightIndent, 58, 9, 9);
-        p0.PrintPictXY(pediafood, GuiPedia.rightIndent, 70, 9, 9);
+        p0.printPicture(pediaclock, GuiPedia.rightIndent, 46, 8, 8);
+        p0.printPicture(pediaheart, GuiPedia.rightIndent, 58, 9, 9);
+        p0.printPicture(pediafood, GuiPedia.rightIndent, 70, 9, 9);
 
         // Print "Day" after age
         if (this.getDinoAge() == 1)
-            p0.PrintStringXY(
+            p0.printStringXY(
                     String.valueOf(this.getDinoAge())
                             + " "
                             + StatCollector
                             .translateToLocal(LocalizationStrings.PEDIA_EGG_DAY),
                     GuiPedia.rightIndent + 12, 46);
         else
-            p0.PrintStringXY(
+            p0.printStringXY(
                     String.valueOf(this.getDinoAge())
                             + " "
                             + StatCollector
@@ -495,18 +495,18 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
                     GuiPedia.rightIndent + 12, 46);
 
         // Display Health
-        p0.PrintStringXY(
+        p0.printStringXY(
                 String.valueOf(this.getHealth()) + '/' + this.getMaxHealth(),
                 GuiPedia.rightIndent + 12, 58);
         // Display Hunger
-        p0.PrintStringXY(
+        p0.printStringXY(
                 String.valueOf(this.getHunger()) + '/' + this.getMaxHunger(),
                 GuiPedia.rightIndent + 12, 70);
 
         // Display owner name
         if (this.SelfType.isTameable() && this.isTamed()) {
             if (this.getOwnerDisplayName().length() > 0) {
-                p0.AddStringLR(
+                p0.addStringLR(
                         StatCollector
                                 .translateToLocal(LocalizationStrings.PEDIA_TEXT_OWNER),
                         true);
@@ -518,7 +518,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
                     s0 = this.getOwnerDisplayName().substring(0, 11);
                 }
 
-                p0.AddStringLR(s0, true);
+                p0.addStringLR(s0, true);
                 // /////////////////////////////////////
 
                 // //////////1.7.2 BLOCK //////////////
@@ -526,30 +526,30 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
 				 * String s0 = this.getOwnerName(); if (s0.length() > 11) { s0 =
 				 * this.getOwnerName().substring(0, 11); }
 				 * 
-				 * p0.AddStringLR(s0, true);
+				 * p0.addStringLR(s0, true);
 				 */
                 // /////////////////////////////////////
             } else {
-                p0.AddStringLR(StatCollector.translateToLocal("Tamed"), true);
+                p0.addStringLR(StatCollector.translateToLocal("Tamed"), true);
             }
         } else {
-            p0.AddStringLR(StatCollector.translateToLocal("Untamed"), true);
+            p0.addStringLR(StatCollector.translateToLocal("Untamed"), true);
         }
         // Display if Rideable
         if (this.SelfType.isRideable() && this.isAdult())
-            p0.AddStringLR(StatCollector
+            p0.addStringLR(StatCollector
                             .translateToLocal(LocalizationStrings.PEDIA_TEXT_RIDEABLE),
                     true);
 
         if (this.SelfType.orderItem != null)
-            p0.AddStringLR(
+            p0.addStringLR(
                     StatCollector.translateToLocal("Order: "
                             + (new ItemStack(this.SelfType.orderItem))
                             .getDisplayName()), true);
 
         for (int i = 0; i < this.SelfType.FoodItemList.index; i++) {
             if (this.SelfType.FoodItemList.getItem(i) != null) {
-                p0.AddMiniItem(this.SelfType.FoodItemList.getItem(i));
+                p0.addMiniItem(this.SelfType.FoodItemList.getItem(i));
             }
         }
 
@@ -559,7 +559,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
     @SideOnly(Side.CLIENT)
     public void ShowPedia2(GuiPedia p0) {
         p0.reset();
-        p0.AddStringLR("", 150, false);
+        p0.addStringLR("", 150, false);
         String translatePath = "assets/fossil/dinopedia/"
                 + Minecraft.getMinecraft().gameSettings.language + "/";
         String bioFile = String.valueOf(this.SelfType) + ".txt";
@@ -578,7 +578,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
                 while ((line = bufferedReader.readLine()) != null) {
                     GL11.glPushMatrix();
                     GL11.glScalef(0.5F, 0.5F, 0.5F);
-                    p0.AddStringLR(line, 150, false);
+                    p0.addStringLR(line, 150, false);
                     GL11.glPopMatrix();
                 }
                 fileReader.close();
@@ -586,16 +586,16 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
                 e.printStackTrace();
             }
         } else {
-            p0.AddStringLR("File not found.", false);
+            p0.addStringLR("File not found.", false);
             GL11.glPushMatrix();
             GL11.glScalef(0.5F, 0.5F, 0.5F);
-            p0.AddStringLR(translatePath + bioFile, 150, false);
+            p0.addStringLR(translatePath + bioFile, 150, false);
             GL11.glPopMatrix();
         }
 
         if (Revival.enableDebugging()) {
-            p0.AddStringLR(StatCollector.translateToLocal("Command: " + this.getOrderType()), true);
-            p0.AddStringLR(StatCollector.translateToLocal("Sitting: " + this.isSitting()), true);
+            p0.addStringLR(StatCollector.translateToLocal("Command: " + this.getOrderType()), true);
+            p0.addStringLR(StatCollector.translateToLocal("Sitting: " + this.isSitting()), true);
         }
     }
 
@@ -999,7 +999,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
         }
 
         int j = (new Random()).nextInt(7);
-        // int var4 = this.isModelized() ? 0 : this.SelfType.ordinal();
+        // int var4 = this.isModelized() ? 0 : this.selfType.ordinal();
         Item item = null;
 
         switch (j) {

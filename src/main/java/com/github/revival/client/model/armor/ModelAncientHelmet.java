@@ -41,7 +41,6 @@ public class ModelAncientHelmet extends ModelBiped {
         this.bipedHead.addChild(this.Snout);
     }
 
-
     /**
      * This is a helper function from Tabula to set the rotation of model parts
      */

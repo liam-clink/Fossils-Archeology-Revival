@@ -1242,11 +1242,11 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic {
     }
 
     @SideOnly(Side.CLIENT)
-    public void ShowPedia(GuiPedia p0) {
+    public void showPedia(GuiPedia p0) {
 
 
         p0.reset();
-        p0.PrintPictXY(new ResourceLocation(Revival.MODID + ":" + "textures/items/" + "Quagga" + "_DNA.png"), ((p0.xGui / 2) + (p0.xGui / 4)), 7, 16, 16); //185
+        p0.printPicture(new ResourceLocation(Revival.MODID + ":" + "textures/items/" + "Quagga" + "_DNA.png"), ((p0.xGui / 2) + (p0.xGui / 4)), 7, 16, 16); //185
 
         
         /* LEFT PAGE
@@ -1272,37 +1272,37 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic {
          * 
          */
         if (this.hasCustomNameTag()) {
-            p0.PrintStringXY(this.getCustomNameTag(), p0.rightIndent, 24, 40, 90, 245);
+            p0.printStringXY(this.getCustomNameTag(), p0.rightIndent, 24, 40, 90, 245);
         }
 
-        p0.PrintStringXY(StatCollector.translateToLocal(LocalizationStrings.ANIMAL_QUAGGA), p0.rightIndent, 34, 0, 0, 0);
-        p0.PrintPictXY(pediaheart, p0.rightIndent, 58, 9, 9);
+        p0.printStringXY(StatCollector.translateToLocal(LocalizationStrings.ANIMAL_QUAGGA), p0.rightIndent, 34, 0, 0, 0);
+        p0.printPicture(pediaheart, p0.rightIndent, 58, 9, 9);
 
         //Display Health
-        p0.PrintStringXY(String.valueOf(this.getHealth()) + '/' + this.getMaxHealth(), p0.rightIndent + 12, 58);
+        p0.printStringXY(String.valueOf(this.getHealth()) + '/' + this.getMaxHealth(), p0.rightIndent + 12, 58);
 
         //Display owner name
         if (this.isTame()) {
-            p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_OWNER), true);
+            p0.addStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_OWNER), true);
             String s0 = this.getOwnerName();
 
             if (s0.length() > 11) {
                 s0 = this.getOwnerName().substring(0, 11);
             }
 
-            p0.AddStringLR(s0, true);
+            p0.addStringLR(s0, true);
         }
 
         //Display if Rideable
 
         if (this.isAdultHorse())
-            p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_RIDEABLE), true);
+            p0.addStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_RIDEABLE), true);
 
         //TODO show all blocks the dino can eat
     }
 
     @SideOnly(Side.CLIENT)
-    public void ShowPedia2(GuiPedia p0) {
+    public void showPedia2(GuiPedia p0) {
         entityPrehistoricClass.ShowPedia2(p0, "Quagga");
     }
 }

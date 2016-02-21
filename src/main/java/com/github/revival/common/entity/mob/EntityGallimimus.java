@@ -71,9 +71,9 @@ public class EntityGallimimus extends EntityNewPrehistoric {
 		this.maxSize = 2.2F;
 
 		if (!FossilConfig.featheredGallimimus)
-			texturePath = Revival.MODID + ":textures/mob/" + this.SelfType.toString() + "/feathered/" + "Feathered_";
+			texturePath = Revival.MODID + ":textures/mob/" + this.selfType.toString() + "/feathered/" + "Feathered_";
 		else
-			texturePath = Revival.MODID + ":textures/mob/" + this.SelfType.toString() + "/";
+			texturePath = Revival.MODID + ":textures/mob/" + this.selfType.toString() + "/";
 
 		this.getNavigator().setAvoidsWater(true);
 		this.tasks.addTask(1, new EntityAISwimming(this));
@@ -186,7 +186,7 @@ public class EntityGallimimus extends EntityNewPrehistoric {
 		List<Entity> entities = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.expand((double)herdMemberRange, 3.0D, (double)herdMemberRange), selector);
 		for(Entity mob: entities){
 			if(mob instanceof EntityDinosaur){
-				if(((EntityDinosaur)mob).SelfType == this.SelfType){
+				if(((EntityDinosaur)mob).selfType == this.selfType){
 					return (EntityDinosaur) mob;
 				}
 			}

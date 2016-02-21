@@ -13,30 +13,30 @@ public class FossilGuiPage extends GuiButton {
     private int page;
     private int lastpage = 1;
 
-    public FossilGuiPage(int par1, int par2, int par3, boolean par4, int bookpage) {
-        super(par1, par2, par3, 34, 24, "");
-        this.nextPage = par4;
+    public FossilGuiPage(int id, int xPos, int yPos, boolean nextPage, int bookpage) {
+        super(id, xPos, yPos, 34, 24, "");
+        this.nextPage = nextPage;
         page = bookpage;
     }
 
-    public void drawButton(Minecraft par1Minecraft, int par2, int par3) {
+    public void drawButton(Minecraft mc, int mouseX, int mouseY) {
         if (this.enabled) {
-            boolean var4 = par2 >= this.xPosition && par3 >= this.yPosition && par2 < this.xPosition + this.width && par3 < this.yPosition + this.height;
+            boolean hovering = mouseX >= this.xPosition && mouseY >= this.yPosition && mouseX < this.xPosition + this.width && mouseY < this.yPosition + this.height;
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-            par1Minecraft.renderEngine.bindTexture(new ResourceLocation("fossil:textures/gui/Dinopedia.png"));
-            int var5 = 0;
-            int var6 = 223;
+            mc.renderEngine.bindTexture(new ResourceLocation("fossil:textures/gui/Dinopedia.png"));
+            int width = 0;
+            int height = 223;
 
-            //  if ((var4) || (this.nextPage && page == lastpage) || (!this.nextPage && page == 0))
+            //  if ((hovering) || (this.nextPage && page == lastpage) || (!this.nextPage && page == 0))
             if ((this.nextPage && page == lastpage) || (!this.nextPage && page == 0)) {
-                var6 -= 23;
+                height -= 23;
             }
 
             if (!this.nextPage) {
-                var5 += 34;
+                width += 34;
             }
 
-            this.drawTexturedModalRect(this.xPosition, this.yPosition, var5, var6, 34, 30);
+            this.drawTexturedModalRect(this.xPosition, this.yPosition, width, height, 34, 30);
         }
     }
 }

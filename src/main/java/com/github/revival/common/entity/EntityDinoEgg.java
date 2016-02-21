@@ -751,7 +751,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData 
     }
 
     @SideOnly(Side.CLIENT)
-    public void ShowPedia(GuiPedia p0) {
+    public void showPedia(GuiPedia p0) {
         Item it0 = this.DinoInside.eggItem;
         /*switch (this.DinoInside)
         {
@@ -769,8 +769,8 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData 
             default:it0=Revival.eggTriceratops;
         }*/
         p0.reset();
-        p0.PrintItemXY(it0, 185, 7);
-        p0.PrintStringLR(StatCollector.translateToLocal("entity.fossil." + this.DinoInside.toString() + ".name"), false, 1, 40, 90, 245);
+        p0.printItemXY(it0, 185, 7);
+        p0.printStringLR(StatCollector.translateToLocal("entity.fossil." + this.DinoInside.toString() + ".name"), false, 1, 40, 90, 245);
         int quot = (int) Math.floor(((float) this.getBirthTick() / (float) this.HatchingNeedTime * 100.0F));
         String stat;
 
@@ -788,12 +788,12 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData 
             }
         }
 
-        p0.PrintStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_EGG_STATUS), false, 2, 40, 90, 245);
-        p0.PrintStringLR(stat, false, 3);
+        p0.printStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_EGG_STATUS), false, 2, 40, 90, 245);
+        p0.printStringLR(stat, false, 3);
 
         if (this.getBirthTick() >= 0) {
-            p0.PrintStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_EGG_PROGRESS), false, 4, 40, 90, 245);
-            p0.PrintStringLR(String.valueOf(quot) + "/100", false, 5);
+            p0.printStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_EGG_PROGRESS), false, 4, 40, 90, 245);
+            p0.printStringLR(String.valueOf(quot) + "/100", false, 5);
         }
     }
 

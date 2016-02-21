@@ -170,11 +170,11 @@ public class TileEntitySifter extends TileEntity implements IInventory,
         return 64;
     }
 
-    public int getCookProgressScaled(int var1) {
+    public int getSiftProgressScaled(int var1) {
         return this.sifterCookTime * var1 / 200;
     }
 
-    public int getBurnTimeRemainingScaled(int var1) {
+    public int getSiftTimeRemainingScaled(int var1) {
         if (this.currentItemBurnTime == 0) {
             this.currentItemBurnTime = 100;
         }

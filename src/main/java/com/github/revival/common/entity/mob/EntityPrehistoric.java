@@ -148,7 +148,7 @@ public class EntityPrehistoric extends EntityTameable implements IPrehistoricAI 
     @SideOnly(Side.CLIENT)
     public void ShowPedia2(GuiPedia p0, String mobName) {
         p0.reset();
-        p0.AddStringLR("", 150, false);
+        p0.addStringLR("", 150, false);
         String translatePath = "assets/fossil/dinopedia/" + Minecraft.getMinecraft().gameSettings.language + "/";
         String bioFile = String.valueOf(mobName) + ".txt";
 
@@ -165,7 +165,7 @@ public class EntityPrehistoric extends EntityTameable implements IPrehistoricAI 
                 while ((line = bufferedReader.readLine()) != null) {
                     GL11.glPushMatrix();
                     GL11.glScalef(0.5F, 0.5F, 0.5F);
-                    p0.AddStringLR(line, 150, false);
+                    p0.addStringLR(line, 150, false);
                     GL11.glPopMatrix();
                 }
                 fileReader.close();
@@ -173,10 +173,10 @@ public class EntityPrehistoric extends EntityTameable implements IPrehistoricAI 
                 e.printStackTrace();
             }
         } else {
-            p0.AddStringLR("File not found.", false);
+            p0.addStringLR("File not found.", false);
             GL11.glPushMatrix();
             GL11.glScalef(0.5F, 0.5F, 0.5F);
-            p0.AddStringLR(translatePath + bioFile, 150, false);
+            p0.addStringLR(translatePath + bioFile, 150, false);
             GL11.glPopMatrix();
         }
     }

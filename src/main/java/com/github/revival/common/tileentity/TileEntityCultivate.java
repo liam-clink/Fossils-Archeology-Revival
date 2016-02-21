@@ -203,7 +203,7 @@ public class TileEntityCultivate extends TileEntity implements IInventory,
         return 64;
     }
 
-    public int getCookProgressScaled(int var1) {
+    public int getCultivateProgressScaled(int var1) {
         return this.furnaceCookTime * var1 / 6000;
     }
 

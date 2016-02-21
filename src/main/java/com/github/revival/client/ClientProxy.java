@@ -41,7 +41,7 @@ import net.minecraftforge.common.MinecraftForge;
 
 
 public class ClientProxy extends CommonProxy {
-    private static final ModelAncientHelmet helmet_0 = new ModelAncientHelmet(1.0f);
+    private static final ModelAncientHelmet helmetModel = new ModelAncientHelmet(1.0f);
     // private JsonTabulaModel velociraptor = ModelHelper.parseModelFromJson(Revival.class.getResourceAsStream("/assets/fossil/models/Velociraptor.json"));
 
     public void init() {
@@ -110,7 +110,6 @@ public class ClientProxy extends CommonProxy {
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(FABlockRegistry.blockcultivateActive), new ItemRenderTileEntity(cultivate, new TileEntityCultivate()));
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(FABlockRegistry.blockcultivateIdle), new ItemRenderTileEntity(cultivate, new TileEntityCultivate()));
 
-
         TileEntitySpecialRenderer ancChest = new TileEntityAncientChestRender();
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAncientChest.class, ancChest);
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(FABlockRegistry.ancientChest), new ItemRenderTileEntity(ancChest, new TileEntityAncientChest()));
@@ -136,14 +135,14 @@ public class ClientProxy extends CommonProxy {
     }
 
     public ModelBiped getArmorModel(int id) {
-
         switch (id) {
             case 0:
-                return helmet_0;
+                return helmetModel;
             default:
                 break;
         }
-        return helmet_0;
+
+        return helmetModel;
     }
 
     public void playSound(String soundName) {
@@ -172,11 +171,11 @@ public class ClientProxy extends CommonProxy {
     public void animate(int animateID) {
     }
 
-    public void doChainBuffer(Object buffer, EntityLivingBase entity) {
-        ((ChainBuffer) buffer).calculateChainSwingBuffer(70F, 5, 4, entity);
+    public void doChainBuffer(ChainBuffer buffer, EntityLivingBase entity) {
+        buffer.calculateChainSwingBuffer(70F, 5, 4, entity);
     }
 
-    public Object getChainBuffer(int tailsegments) {
-        return new ChainBuffer(tailsegments);
+    public ChainBuffer getChainBuffer(int tailSegments) {
+        return new ChainBuffer(tailSegments);
     }
 }

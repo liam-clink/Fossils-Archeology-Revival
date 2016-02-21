@@ -114,7 +114,7 @@ public abstract class EntityPrehistoric extends EntityAgeable {
     @SideOnly(Side.CLIENT)
     public void ShowPedia2(GuiPedia p0) {
         p0.reset();
-        p0.AddStringLR("", 150, false);
+        p0.addStringLR("", 150, false);
         String translatePath = "assets/fossil/dinopedia/" + Minecraft.getMinecraft().gameSettings.language + "/";
         String bioFile = type.toString() + ".txt";
 
@@ -131,7 +131,7 @@ public abstract class EntityPrehistoric extends EntityAgeable {
                 while ((line = bufferedReader.readLine()) != null) {
                     GL11.glPushMatrix();
                     GL11.glScalef(0.5F, 0.5F, 0.5F);
-                    p0.AddStringLR(line, 150, false);
+                    p0.addStringLR(line, 150, false);
                     GL11.glPopMatrix();
                 }
                 fileReader.close();
@@ -139,10 +139,10 @@ public abstract class EntityPrehistoric extends EntityAgeable {
                 e.printStackTrace();
             }
         } else {
-            p0.AddStringLR("File not found.", false);
+            p0.addStringLR("File not found.", false);
             GL11.glPushMatrix();
             GL11.glScalef(0.5F, 0.5F, 0.5F);
-            p0.AddStringLR(translatePath + bioFile, 150, false);
+            p0.addStringLR(translatePath + bioFile, 150, false);
             GL11.glPopMatrix();
         }
     }

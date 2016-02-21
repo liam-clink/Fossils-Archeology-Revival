@@ -14,8 +14,8 @@ public class GuiNotebook extends GuiScreen {
     public FossilGuiPage buttonNextPage;
     public FossilGuiPage buttonPreviousPage;
     // The name of the file to open.
-    public int BookPages;
-    public int BookPagesTotal = 1;
+    public int bookPages;
+    public int bookPagesTotal = 1;
     public FossilGuiButton buttonIcon;
     int update = 0;
     // This will reference one line at a time
@@ -26,12 +26,12 @@ public class GuiNotebook extends GuiScreen {
 
     public void initGui() {
         buttonList.clear();
-        int var1 = (this.width - this.bookImageWidth) / 2;
-        int var2 = (this.height - this.bookImageHeight) / 2;
-        this.buttonList.add(this.buttonNextPage = new FossilGuiPage(0, var1 + 200, var2 + 140, true, BookPages));
-        this.buttonList.add(this.buttonPreviousPage = new FossilGuiPage(1, var1 + 30, var2 + 140, false, BookPages));
+        int centerX = (this.width - this.bookImageWidth) / 2;
+        int centerY = (this.height - this.bookImageHeight) / 2;
+        this.buttonList.add(this.buttonNextPage = new FossilGuiPage(0, centerX + 200, centerY + 140, true, bookPages));
+        this.buttonList.add(this.buttonPreviousPage = new FossilGuiPage(1, centerX + 30, centerY + 140, false, bookPages));
         this.itemRender = new RenderItem();
-        addButtonByPage(BookPages);
+        addButtonByPage(bookPages);
     }
 
     public void addTextByPage(int page) {
@@ -75,50 +75,48 @@ public class GuiNotebook extends GuiScreen {
     }
 
     public void addButtonByPage(int page) {
-        int var1 = (this.width - this.bookImageWidth) / 2;
-        int var2 = (this.height - this.bookImageHeight) / 2;
+        int centerX = (this.width - this.bookImageWidth) / 2;
+        int centerY = (this.height - this.bookImageHeight) / 2;
 
         /*
         if(page == 6)
         {
-            this.buttonList.add(this.buttonIcon = new FossilGuiButton(7, var1+35, var2+75, 10));
-            this.buttonList.add(this.buttonIcon = new FossilGuiButton(8, var1+75, var2+55, 12));
-            this.buttonList.add(this.buttonIcon = new FossilGuiButton(9, var1+115, var2+75, 14));
-            this.buttonList.add(this.buttonIcon = new FossilGuiButton(10, var1+75, var2+95, 16));
+            this.buttonList.add(this.buttonIcon = new FossilGuiButton(7, centerX+35, centerY+75, 10));
+            this.buttonList.add(this.buttonIcon = new FossilGuiButton(8, centerX+75, centerY+55, 12));
+            this.buttonList.add(this.buttonIcon = new FossilGuiButton(9, centerX+115, centerY+75, 14));
+            this.buttonList.add(this.buttonIcon = new FossilGuiButton(10, centerX+75, centerY+95, 16));
         }
         */
 
         if (page == 0) {
-            this.buttonList.add(this.buttonIcon = new FossilGuiButton(2, var1 + 35, var2 + 55, 0));
-            this.buttonList.add(this.buttonIcon = new FossilGuiButton(3, var1 + 75, var2 + 55, 2));
-            this.buttonList.add(this.buttonIcon = new FossilGuiButton(4, var1 + 115, var2 + 55, 4));
-            this.buttonList.add(this.buttonIcon = new FossilGuiButton(5, var1 + 55, var2 + 95, 6));
-            this.buttonList.add(this.buttonIcon = new FossilGuiButton(6, var1 + 95, var2 + 95, 8));
+            this.buttonList.add(this.buttonIcon = new FossilGuiButton(2, centerX + 35, centerY + 55, 0));
+            this.buttonList.add(this.buttonIcon = new FossilGuiButton(3, centerX + 75, centerY + 55, 2));
+            this.buttonList.add(this.buttonIcon = new FossilGuiButton(4, centerX + 115, centerY + 55, 4));
+            this.buttonList.add(this.buttonIcon = new FossilGuiButton(5, centerX + 55, centerY + 95, 6));
+            this.buttonList.add(this.buttonIcon = new FossilGuiButton(6, centerX + 95, centerY + 95, 8));
         }
     }
 
     public void triggerButtons(GuiButton button) {
         switch (button.id) {
             case 2:
-                this.BookPages = 1;
+                this.bookPages = 1;
                 break;
 
             case 3:
-                this.BookPages = 2;
+                this.bookPages = 2;
                 break;
         }
     }
 
     @Override
     public void actionPerformed(GuiButton button) {
-        if (button.id == 0 && BookPages < BookPagesTotal) {
-            BookPages += 1;
-        } else {
+        if (button.id == 0 && bookPages < bookPagesTotal) {
+            bookPages += 1;
         }
 
-        if (button.id == 1 && BookPages > 0) {
-            BookPages -= 1;
-        } else {
+        if (button.id == 1 && bookPages > 0) {
+            bookPages -= 1;
         }
 
         this.triggerButtons(button);
@@ -126,27 +124,25 @@ public class GuiNotebook extends GuiScreen {
         this.updateScreen();
     }
 
-    public void drawScreen(int par1, int par2, float par3) {
+    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.renderEngine.bindTexture(notebook_background);
-        int var5 = (this.width - this.bookImageWidth) / 2;
-        int var6 = ((this.height - this.bookImageHeight) / 2) - 10;
-        this.drawTexturedModalRect(var5, var6, 0, 0, this.bookImageWidth, this.bookImageHeight);
-        int var1 = (this.width - this.bookImageWidth) / 2;
-        int var2 = (this.height - this.bookImageHeight) / 2;
-        int var3 = 0;
-        addTextByPage(BookPages);
+        int centerX = (this.width - this.bookImageWidth) / 2;
+        int centerY = ((this.height - this.bookImageHeight) / 2) - 10;
+        this.drawTexturedModalRect(centerX, centerY, 0, 0, this.bookImageWidth, this.bookImageHeight);
+        int pageOffset = 0;
+        addTextByPage(bookPages);
 
-        if (BookPages == 0) {
+        if (bookPages == 0) {
             this.drawTexturedModalRect(((this.width - this.bookImageWidth) / 2) + 22, ((this.height - this.bookImageHeight) / 2) + 11, 0, 240, 136, 15);
         }
 
-        if (BookPages >= 9) {
-            var3 = 4;
+        if (bookPages >= 9) {
+            pageOffset = 4;
         }
 
-        fontRendererObj.drawString(Integer.toString(BookPages + 1), var1 + 89 - var3, var2 + 145, 0x2b2b2b, false);
-        super.drawScreen(par1, par2, par3);
+        fontRendererObj.drawString(Integer.toString(bookPages + 1), centerX + 89 - pageOffset, centerY + 155, 0x2b2b2b, false);
+        super.drawScreen(mouseX, mouseY, partialTicks);
     }
 
     /**

@@ -75,10 +75,10 @@ public class DinoAIGrowup extends EntityAIBase {
 
                 if (this.AITarget.isTamed())
                 {
-                    this.AITarget.SendStatusMessage(EnumSituation.NoSpace);//, this.AITarget.SelfType);
+                    this.AITarget.SendStatusMessage(EnumSituation.NoSpace);//, this.AITarget.selfType);
                 }*/
             } else {
-                this.AITarget.sendStatusMessage(EnumSituation.NoSpace);    //, this.AITarget.SelfType);
+                this.AITarget.sendStatusMessage(EnumSituation.NoSpace);    //, this.AITarget.selfType);
 
             }
         }

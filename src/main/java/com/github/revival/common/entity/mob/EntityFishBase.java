@@ -96,31 +96,31 @@ public abstract class EntityFishBase extends EntityWaterMob {
     }
 
     @SideOnly(Side.CLIENT)
-    public void ShowPedia(GuiPedia p0) {
+    public void showPedia(GuiPedia p0) {
         p0.reset();
 
         if (this.hasCustomNameTag()) {
-            p0.PrintStringXY(this.getCustomNameTag(), p0.rightIndent, 24, 40, 90, 245);
+            p0.printStringXY(this.getCustomNameTag(), p0.rightIndent, 24, 40, 90, 245);
         }
 
-        p0.PrintStringXY(StatCollector.translateToLocal(getCodeName()), p0.rightIndent, 34, 0, 0, 0);
+        p0.printStringXY(StatCollector.translateToLocal(getCodeName()), p0.rightIndent, 34, 0, 0, 0);
 
-        p0.PrintPictXY(new ResourceLocation(this.getItemTexture()), ((p0.xGui / 2) + (p0.xGui / 4)), 7, 16, 16);
+        p0.printPicture(new ResourceLocation(this.getItemTexture()), ((p0.xGui / 2) + (p0.xGui / 4)), 7, 16, 16);
         if (this.hasCustomNameTag()) {
-            p0.AddStringLR("No Despawn", true);
+            p0.addStringLR("No Despawn", true);
         }
     }
 
 
     @SideOnly(Side.CLIENT)
-    public void ShowPedia2(GuiPedia p0) {
+    public void showPedia2(GuiPedia p0) {
         this.showPedia2(p0, this.getName());
     }
 
     @SideOnly(Side.CLIENT)
     public void showPedia2(GuiPedia p0, String mobName) {
         p0.reset();
-        p0.AddStringLR("", 150, false);
+        p0.addStringLR("", 150, false);
         String translatePath = "assets/fossil/dinopedia/" + Minecraft.getMinecraft().gameSettings.language + "/";
         String bioFile = String.valueOf(mobName) + ".txt";
 
@@ -137,7 +137,7 @@ public abstract class EntityFishBase extends EntityWaterMob {
                 while ((line = bufferedReader.readLine()) != null) {
                     GL11.glPushMatrix();
                     GL11.glScalef(0.5F, 0.5F, 0.5F);
-                    p0.AddStringLR(line, 150, false);
+                    p0.addStringLR(line, 150, false);
                     GL11.glPopMatrix();
                 }
                 fileReader.close();
@@ -145,10 +145,10 @@ public abstract class EntityFishBase extends EntityWaterMob {
                 e.printStackTrace();
             }
         } else {
-            p0.AddStringLR("File not found.", false);
+            p0.addStringLR("File not found.", false);
             GL11.glPushMatrix();
             GL11.glScalef(0.5F, 0.5F, 0.5F);
-            p0.AddStringLR(translatePath + bioFile, 150, false);
+            p0.addStringLR(translatePath + bioFile, 150, false);
             GL11.glPopMatrix();
         }
     }

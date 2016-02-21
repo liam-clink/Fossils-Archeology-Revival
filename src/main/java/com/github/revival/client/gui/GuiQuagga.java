@@ -12,54 +12,54 @@ import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class GuiQuagga extends GuiContainer {
-    private static final ResourceLocation horseGuiTextures = new ResourceLocation("textures/gui/container/horse.png");
-    private IInventory field_110413_u;
-    private IInventory field_110412_v;
-    private EntityQuagga field_110411_w;
-    private float field_110416_x;
-    private float field_110415_y;
+    private static final ResourceLocation gui = new ResourceLocation("textures/gui/container/horse.png");
+    private IInventory playerInventory;
+    private IInventory entityInventory;
+    private EntityQuagga entity;
+    private float mouseX;
+    private float mouseY;
 
-    public GuiQuagga(IInventory par1IInventory, IInventory par2IInventory, EntityQuagga par3EntityQuagga) {
-        super(new ContainerQuagga(par1IInventory, par2IInventory, par3EntityQuagga));
-        this.field_110413_u = par1IInventory;
-        this.field_110412_v = par2IInventory;
-        this.field_110411_w = par3EntityQuagga;
+    public GuiQuagga(IInventory playerInventory, IInventory entityInventory, EntityQuagga entity) {
+        super(new ContainerQuagga(playerInventory, entityInventory, entity));
+        this.playerInventory = playerInventory;
+        this.entityInventory = entityInventory;
+        this.entity = entity;
         this.allowUserInput = false;
     }
 
     /**
      * Draw the foreground layer for the GuiContainer (everything in front of the items)
      */
-    protected void drawGuiContainerForegroundLayer(int par1, int par2) {
-        this.fontRendererObj.drawString(this.field_110412_v.hasCustomInventoryName() ? this.field_110412_v.getInventoryName() : I18n.format(this.field_110412_v.getInventoryName()), 8, 6, 4210752);
-        this.fontRendererObj.drawString(this.field_110413_u.hasCustomInventoryName() ? this.field_110413_u.getInventoryName() : I18n.format(this.field_110413_u.getInventoryName()), 8, this.ySize - 96 + 2, 4210752);
+    protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
+        this.fontRendererObj.drawString(this.entityInventory.hasCustomInventoryName() ? this.entityInventory.getInventoryName() : I18n.format(this.entityInventory.getInventoryName()), 8, 6, 4210752);
+        this.fontRendererObj.drawString(this.playerInventory.hasCustomInventoryName() ? this.playerInventory.getInventoryName() : I18n.format(this.playerInventory.getInventoryName()), 8, this.ySize - 96 + 2, 4210752);
     }
 
     /**
      * Draw the background layer for the GuiContainer (everything behind the items)
      */
-    protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3) {
+    protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.mc.getTextureManager().bindTexture(horseGuiTextures);
-        int k = (this.width - this.xSize) / 2;
-        int l = (this.height - this.ySize) / 2;
-        this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);
+        this.mc.getTextureManager().bindTexture(gui);
+        int centerX = (this.width - this.xSize) / 2;
+        int centerY = (this.height - this.ySize) / 2;
+        this.drawTexturedModalRect(centerX, centerY, 0, 0, this.xSize, this.ySize);
 
-        if (this.field_110411_w.isChested()) {
-            this.drawTexturedModalRect(k + 79, l + 17, 0, this.ySize, 90, 54);
+        if (this.entity.isChested()) {
+            this.drawTexturedModalRect(centerX + 79, centerY + 17, 0, this.ySize, 90, 54);
         }
 
-        this.drawTexturedModalRect(k + 7, l + 35, 0, this.ySize + 54, 18, 18);
+        this.drawTexturedModalRect(centerX + 7, centerY + 35, 0, this.ySize + 54, 18, 18);
 
-        GuiInventory.func_147046_a(k + 51, l + 60, 17, (float) (k + 51) - this.field_110416_x, (float) (l + 75 - 50) - this.field_110415_y, this.field_110411_w);
+        GuiInventory.func_147046_a(centerX + 51, centerY + 60, 17, (float) (centerX + 51) - this.mouseX, (float) (centerY + 75 - 50) - this.mouseY, this.entity);
     }
 
     /**
      * Draws the screen and all the components in it.
      */
-    public void drawScreen(int par1, int par2, float par3) {
-        this.field_110416_x = (float) par1;
-        this.field_110415_y = (float) par2;
-        super.drawScreen(par1, par2, par3);
+    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+        this.mouseX = (float) mouseX;
+        this.mouseY = (float) mouseY;
+        super.drawScreen(mouseX, mouseY, partialTicks);
     }
 }

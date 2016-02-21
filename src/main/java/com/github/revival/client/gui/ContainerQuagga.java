@@ -8,85 +8,89 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
 public class ContainerQuagga extends Container {
-    private IInventory field_111243_a;
-    private EntityQuagga theHorse;
+    private IInventory inventory;
+    private EntityQuagga entity;
 
-    public ContainerQuagga(IInventory par1IInventory, IInventory par2IInventory, EntityQuagga par3EntityQuagga) {
-        this.field_111243_a = par2IInventory;
-        this.theHorse = par3EntityQuagga;
+    public ContainerQuagga(IInventory playerInventory, IInventory inventory, EntityQuagga entity) {
+        this.inventory = inventory;
+        this.entity = entity;
+
         byte b0 = 3;
-        par2IInventory.openInventory();
+        inventory.openInventory();
+
         int i = (b0 - 4) * 18;
-        this.addSlotToContainer(new Slot(par2IInventory, 0, 8, 18)); //Sideslot
-        this.addSlotToContainer(new Slot(par2IInventory, 1, 8, 36)); //armor
+
+        this.addSlotToContainer(new Slot(inventory, 0, 8, 18)); //Sideslot
+        this.addSlotToContainer(new Slot(inventory, 1, 8, 36)); //armor
+
         int j;
         int k;
 
-        if (par3EntityQuagga.isChested()) {
+        if (entity.isChested()) {
             for (j = 0; j < b0; ++j) {
                 for (k = 0; k < 5; ++k) {
-                    this.addSlotToContainer(new Slot(par2IInventory, 2 + k + j * 5, 80 + k * 18, 18 + j * 18));
+                    this.addSlotToContainer(new Slot(inventory, 2 + k + j * 5, 80 + k * 18, 18 + j * 18));
                 }
             }
         }
 
         for (j = 0; j < 3; ++j) {
             for (k = 0; k < 9; ++k) {
-                this.addSlotToContainer(new Slot(par1IInventory, k + j * 9 + 9, 8 + k * 18, 102 + j * 18 + i));
+                this.addSlotToContainer(new Slot(playerInventory, k + j * 9 + 9, 8 + k * 18, 102 + j * 18 + i));
             }
         }
 
         for (j = 0; j < 9; ++j) {
-            this.addSlotToContainer(new Slot(par1IInventory, j, 8 + j * 18, 160 + i));
+            this.addSlotToContainer(new Slot(playerInventory, j, 8 + j * 18, 160 + i));
         }
     }
 
-    public boolean canInteractWith(EntityPlayer par1EntityPlayer) {
-        return this.field_111243_a.isUseableByPlayer(par1EntityPlayer) && this.theHorse.isEntityAlive() && this.theHorse.getDistanceToEntity(par1EntityPlayer) < 8.0F;
+    public boolean canInteractWith(EntityPlayer player) {
+        return this.inventory.isUseableByPlayer(player) && this.entity.isEntityAlive() && this.entity.getDistanceToEntity(player) < 8.0F;
     }
 
     /**
      * Called when a player shift-clicks on a slot. You must override this or you will crash when someone does that.
      */
-    public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2) {
-        ItemStack itemstack = null;
-        Slot slot = (Slot) this.inventorySlots.get(par2);
+    public ItemStack transferStackInSlot(EntityPlayer player, int slotIndex) {
+        ItemStack transferred = null;
+        Slot slot = (Slot) this.inventorySlots.get(slotIndex);
 
         if (slot != null && slot.getHasStack()) {
-            ItemStack itemstack1 = slot.getStack();
-            itemstack = itemstack1.copy();
+            ItemStack stack = slot.getStack();
+            transferred = stack.copy();
 
-            if (par2 < this.field_111243_a.getSizeInventory()) {
-                if (!this.mergeItemStack(itemstack1, this.field_111243_a.getSizeInventory(), this.inventorySlots.size(), true)) {
+            if (slotIndex < this.inventory.getSizeInventory()) {
+                if (!this.mergeItemStack(stack, this.inventory.getSizeInventory(), this.inventorySlots.size(), true)) {
                     return null;
                 }
-            } else if (this.getSlot(1).isItemValid(itemstack1) && !this.getSlot(1).getHasStack()) {
-                if (!this.mergeItemStack(itemstack1, 1, 2, false)) {
+            } else if (this.getSlot(1).isItemValid(stack) && !this.getSlot(1).getHasStack()) {
+                if (!this.mergeItemStack(stack, 1, 2, false)) {
                     return null;
                 }
-            } else if (this.getSlot(0).isItemValid(itemstack1)) {
-                if (!this.mergeItemStack(itemstack1, 0, 1, false)) {
+            } else if (this.getSlot(0).isItemValid(stack)) {
+                if (!this.mergeItemStack(stack, 0, 1, false)) {
                     return null;
                 }
-            } else if (this.field_111243_a.getSizeInventory() <= 2 || !this.mergeItemStack(itemstack1, 2, this.field_111243_a.getSizeInventory(), false)) {
+            } else if (this.inventory.getSizeInventory() <= 2 || !this.mergeItemStack(stack, 2, this.inventory.getSizeInventory(), false)) {
                 return null;
             }
 
-            if (itemstack1.stackSize == 0) {
-                slot.putStack((ItemStack) null);
+            if (stack.stackSize == 0) {
+                slot.putStack(null);
             } else {
                 slot.onSlotChanged();
             }
         }
 
-        return itemstack;
+        return transferred;
     }
 
     /**
      * Called when the container is closed.
      */
-    public void onContainerClosed(EntityPlayer par1EntityPlayer) {
-        super.onContainerClosed(par1EntityPlayer);
-        this.field_111243_a.closeInventory();
+    public void onContainerClosed(EntityPlayer player) {
+        super.onContainerClosed(player);
+        this.inventory.closeInventory();
     }
 }
