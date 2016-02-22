@@ -1,4 +1,4 @@
-#Build 7.2.0 - Updated July 30 2015
+#Build 7.2.0 - Updated July 30 2015
 #Simplified Chinese (zh_CN) Localization File
 #Contribution Credits - crafteverywhere, sb023612, oldjunyi
 #Keys last updated July 30 2015
@@ -533,6 +533,7 @@ tile.plant_welwitschia.name=千岁兰
 tile.plant_horsetail_small.name=马尾草
 tile.plant_horsetail_large.name=高马尾草
 tile.plant_mutant.name=畸变植物
+tile.plant_tempskya.name=登普斯基蕨
 
 #恐龙资料消息
 dnaName.head=
@@ -698,3 +699,10 @@ item.record_bones.name=化石唱片
 item.record_bones_disc.name=化石唱片
 item.record.record_bones_disc.desc=WhiteJoshMan - Bones
 item.record.music.anu.desc=Nanotyrano - Awakening
+
+#4f wants new stuff at bottom
+anu.breakblock=在守护者被消灭之前，你无法破坏这个方块
+entity.fossil.TarSlime.name=焦油史莱姆
+item.tardrop.name=焦油滴
+item.tarfossil.name=焦油化石
+item.tar_bucket.name=焦油桶
