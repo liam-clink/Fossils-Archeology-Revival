@@ -1,21 +1,10 @@
 package com.github.revival.common.entity.mob;
 
-import com.github.revival.Revival;
-import com.github.revival.client.gui.GuiPedia;
-import com.github.revival.common.entity.ai.DinoAIRideGround;
-import com.github.revival.common.handler.FossilAchievementHandler;
-import com.github.revival.common.handler.LocalizationStrings;
-import com.github.revival.common.item.FAItemRegistry;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityAgeable;
-import net.minecraft.entity.IEntityLivingData;
+import com.github.revival.common.entity.mob.test.EntityNewPrehistoric;
+import com.github.revival.common.enums.EnumPrehistoric;
+import com.github.revival.common.enums.EnumPrehistoricAI.*;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.ai.EntityAIEatGrass;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -23,589 +12,113 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.IShearable;
 
 import java.util.ArrayList;
-import java.util.Random;
 
-public class EntityMammoth extends EntityPrehistoric implements IShearable
-{
-    private static final int SIZE_MULTIFER = 5;
-    private static final int EATING_TIMES_TO_GROW_FUR = 5;
-    private static final float CHILD_SIZE_Y = 1.3F;
-    private static final float CHILD_SIZE_X = 0.9F;
-    private static final float ADULT_SIZE_Y = 6.5F;
-    private static final float ADULT_SIZE_X = 4.5F;
-    private static final Potion BIOME_SICK = Potion.weakness;
-    private static final PotionEffect BIOME_EFFECT = new PotionEffect(Potion.weakness.id, 60, 1);
-    private static final BiomeGenBase[] COLD_BIOMES = new BiomeGenBase[]{BiomeGenBase.frozenOcean, BiomeGenBase.frozenRiver, BiomeGenBase.iceMountains, BiomeGenBase.icePlains, BiomeGenBase.taiga, BiomeGenBase.taigaHills};
-    private static final BiomeGenBase[] HOT_BIOMES = new BiomeGenBase[]{BiomeGenBase.desert, BiomeGenBase.swampland, BiomeGenBase.jungle, BiomeGenBase.jungleHills, BiomeGenBase.hell, BiomeGenBase.desertHills};
+public class EntityMammoth extends EntityNewPrehistoric implements IShearable {
     private EntityAIEatGrass aiEatGrass = new EntityAIEatGrass(this);
     private int eatGrassTimes = 0;
-    private int swingTick;
 
-    public EntityMammoth(World var1)
-    {
-        super(var1);
-        this.setSize(1.0F, 1.0F);
-        this.getNavigator().setAvoidsWater(true);
-        
-        this.tasks.addTask(0, new EntityAISwimming(this));
-        this.tasks.addTask(2, new EntityAIMate(this, 1.0D));
-        this.tasks.addTask(3, new EntityAITempt(this, 1.25D, Items.wheat, false));
-        this.tasks.addTask(3, new EntityAILeapAtTarget(this, 0.4F));
-        this.tasks.addTask(4, new EntityAIAttackOnCollide(this, 1.0D, true));
-        this.tasks.addTask(4, new EntityAIFollowParent(this, 1.0D));
-        this.tasks.addTask(5, new EntityAIWander(this, 1.0D));
-        this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-        this.tasks.addTask(7, new EntityAILookIdle(this));
-        this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
-        this.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));
-        this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
-        
-        tasks.addTask(1, new DinoAIRideGround(this, 1)); // mutex all
+    public static final double baseDamage = 2;
+    public static final double maxDamage = 12;
+    public static final double baseHealth = 10;
+    public static final double maxHealth = 66;
+    public static final double baseSpeed = 0.2D;
+    public static final double maxSpeed = 0.3D;
 
-        
-        this.experienceValue = 5;
+    public EntityMammoth(World world) {
+        super(world, EnumPrehistoric.Mammoth);
+        this.setSize(0.7F, 0.7F);
+        this.tasks.addTask(10, aiEatGrass);
+        minSize = 1.3F;
+        maxSize = 5F;
+        teenAge = 7;
+        developsResistance = true;
+        breaksBlocks = true;
+        favoriteFood = Items.potato;
     }
 
-    /**
-     * Returns true if the newer Entity AI code should be run
-     */
-    public boolean isAIEnabled()
-    {
-        return true;
-    }
-    
-    protected void applyEntityAttributes()
-    {
+    @Override
+    protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(24.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.25D);
-        this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(1.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(2.0D);
+        getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(baseSpeed);
+        getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(baseHealth);
+        getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(baseDamage);
     }
 
-    private void setPedia()
-    {
-        Revival.toPedia = (Object) this;
-    }
-
-    public boolean attackEntityAsMob(Entity var1)
-    {
-        this.swingTick = 10;
-        this.worldObj.setEntityState(this, (byte) 4);
-        boolean var2 = var1.attackEntityFrom(DamageSource.causeMobDamage(this), this.isChild() ? 2 : 7);
-
-        if (var2)
-        {
-            var1.motionY += 0.4000000059604645D;
-        }
-
-        this.worldObj.playSoundAtEntity(this, "mob.irongolem.throw", 1.0F, 1.0F);
-        return var2;
-    }
-
-    /**
-     * Get number of ticks, at least during which the living entity will be silent.
-     */
-    public int getTalkInterval()
-    {
-        return 360;
-    }
-
-    /**
-     * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
-     * use this to react to sunlight and start to burn.
-     */
-    public void onLivingUpdate()
-    {
-        super.onLivingUpdate();
-        this.updateSize();
-
-        if (this.swingTick > 0)
-        {
-            --this.swingTick;
-        }
-
-        if (!this.isPotionActive(BIOME_SICK) && this.checkBiomeAndWeakness())
-        {
-            this.addPotionEffect(BIOME_EFFECT);
-        }
-    }
-
-    /**
-     * Returns the texture's file path as a String.
-     */
-    public String getTexture()
-    {
-        if (this.getSheared())
-        {
-            switch (this.getSkin())
-            {
-                default:
-                    return "fossil:textures/mob/Mammoth/Mammoth_Brown_Furless.png";
-                case 1:
-                    return "fossil:textures/mob/Mammoth/Mammoth_Dark_Brown_Furless.png";
-                case 2:
-                    return "fossil:textures/mob/Mammoth/Mammoth_White_Furless.png";
-            }
-        }
-        if (!this.isChild())
-        {
-            switch (this.getSkin())
-            {
-                default:
-                    return "fossil:textures/mob/Mammoth/Mammoth_Brown_Adult.png";
-                case 1:
-                    return "fossil:textures/mob/Mammoth/Mammoth_Dark_Brown_Adult.png";
-                case 2:
-                    return "fossil:textures/mob/Mammoth/Mammoth_White_Adult.png";
-            }
-        }
-        else if (this.isChild())
-        {
-            switch (this.getSkin())
-            {
-                default:
-                    return "fossil:textures/mob/Mammoth/Mammoth_Brown_Baby.png";
-                case 1:
-                    return "fossil:textures/mob/Mammoth/Mammoth_Dark_Brown_Baby.png";
-                case 2:
-                    return "fossil:textures/mob/Mammoth/Mammoth_Dark_Brown_Baby.png";
-            }
-        }
-
-
-        return "fossil:textures/mob/Mammoth/Mammoth_Brown_Adult.png";
-
-        //  return this.isChild() ? "fossil:textures/mob/MammothYoung.png" : (!this.getSheared() ? "fossil:textures/mob/MammothAdult.png" : "fossil:textures/mob/MammothFurless.png");
-    }
-    
-    @Override
-    /**
-     * Returns the sound this mob makes while it's alive.
-     */
-    protected String getLivingSound()
-    {
-        return Revival.modid + ":" + "mammoth_living";
-    }
-
-    /**
-     * Returns the sound this mob makes when it is hurt.
-     */
-    @Override
-    protected String getHurtSound()
-    {
-        return Revival.modid + ":" + "mammoth_hurt";
-    }
-
-    @Override
-    /**
-     * Returns the sound this mob makes on death.
-     */
-    protected String getDeathSound()
-    {
-        return Revival.modid + ":" + "mammoth_death";
-    }
-
-    /**
-     * (abstract) Protected helper method to write subclass entity data to NBT.
-     */
-    public void writeEntityToNBT(NBTTagCompound var1)
-    {
-        super.writeEntityToNBT(var1);
-        var1.setBoolean("Sheared", this.getSheared());
-        var1.setByte("Color", (byte) this.getFleeceColor());
-        var1.setInteger("Type", this.getSkin());
-
-    }
-
-    /**
-     * (abstract) Protected helper method to read subclass entity data from NBT.
-     */
-    public void readEntityFromNBT(NBTTagCompound var1)
-    {
-        super.readEntityFromNBT(var1);
-        this.setSheared(var1.getBoolean("Sheared"));
-        this.setFleeceColor(var1.getByte("Color"));
-        this.setSkin(var1.getInteger("Type"));
-    }
-    
-    /**
-     * Disables a mob's ability to move on its own while true.
-     */
-    protected boolean isMovementCeased()
-    {
-        return this.isSitting();
-    }
-
-    /**
-     * Returns the volume for the sounds this mob makes.
-     */
-    protected float getSoundVolume()
-    {
-        if (this.isChild())
-            return 0.4F;
-
-        return 1.0F;
-    }
-    
-    /**
-     * Gets the pitch of living sounds in living entities.
-     */
-    protected float getSoundPitch()
-    {
-        return (this.isChild()) ? (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 2.5F
-                : (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F;
-    }
-
-    /**
-     * Returns the item ID for the item the mob drops on death.
-     */
-    protected Item getDropItem()
-    {
-        return Items.leather;
-    }
-
-    /**
-     * Drop 0-2 items of this living's type
-     */
-    protected void dropFewItems(boolean var1, int var2)
-    {
-        int var3 = this.rand.nextInt(3) + this.rand.nextInt(1 + var2);
-        int var4;
-
-        for (var4 = 0; var4 < var3; ++var4)
-        {
-            this.dropItem(Items.leather, 1);
-        }
-
-        var3 = this.rand.nextInt(3) + 1 + this.rand.nextInt(1 + var2);
-
-        for (var4 = 0; var4 < var3; ++var4)
-        {
-            if (this.isBurning())
-            {
-                this.dropItem(Items.cooked_beef, 1);
-            }
-            else
-            {
-                this.dropItem(Items.beef, 1);
-            }
-        }
-    }
-
-    protected void entityInit()
-    {
+    protected void entityInit() {
         super.entityInit();
-        this.dataWatcher.addObject(18, new Byte((byte) 3));
-        this.dataWatcher.addObject(21, Byte.valueOf((byte) 0));
-    }
-
-    /**
-     * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
-     */
-    public boolean interact(EntityPlayer player)
-    {
-        ItemStack var2 = player.inventory.getCurrentItem();
-
-        if (var2 != null)
-        {
-            if (var2.getItem().equals(FAItemRegistry.chickenEss))
-            {
-                this.setGrowingAge(this.getGrowingAge() + 2000);
-                var2.stackSize--;
-                return true;
-            }
-
-            if (FMLCommonHandler.instance().getSide().isClient() && var2.getItem() == FAItemRegistry.dinoPedia)
-            {
-                this.setPedia();
-                player.openGui(Revival.instance, 4, this.worldObj, (int) this.posX, (int) this.posY, (int) this.posZ);
-                return true;
-            }
-            
-            if (var2.getItem() == FAItemRegistry.whip && this.isTamed() && !this.isChild() && !this.worldObj.isRemote
-                    && this.riddenByEntity == null && player == this.getOwner())
-            {
-                setRidingPlayer(player);
-            }
-            
-        }
-
-        return super.interact(player);
-    }
-    
-    public void setRidingPlayer(EntityPlayer player)
-    {
-        player.rotationYaw = this.rotationYaw;
-        player.rotationPitch = this.rotationPitch;
-        player.mountEntity(this);
-    }
-
-    public int getSkin()
-    {
-        return this.dataWatcher.getWatchableObjectByte(21);
-    }
-
-    public void setSkin(int par1)
-    {
-        this.dataWatcher.updateObject(21, Byte.valueOf((byte) par1));
-    }
-
-    @SideOnly(Side.CLIENT)
-    public void ShowPedia(GuiPedia p0)
-    {
-
-
-        p0.reset();
-        p0.PrintPictXY(new ResourceLocation(Revival.modid + ":" + "textures/items/" + "Mammoth" + "_DNA.png"), ((p0.xGui / 2) + (p0.xGui / 4)), 7, 16, 16); //185
-
-        
-        /* LEFT PAGE
-         * 
-         * OWNER:
-         * (+2) OWNER NAME 
-         * RIDEABLE
-         * ORDER
-         * ABLE TO FLY
-         * ABLE TO CHEST
-         * DANGEROUS
-         * 
-         * 
-         */
-        
-        /* RIGHT PAGE
-         * 
-         * CUSTOM NAME
-         * DINOSAUR NAME
-         * DINO AGE
-         * HEALTH
-         * HUNGER
-         * 
-         */
-        if (this.hasCustomNameTag())
-        {
-            p0.PrintStringXY(this.getCustomNameTag(), p0.rightIndent, 24, 40, 90, 245);
-        }
-
-        p0.PrintStringXY(StatCollector.translateToLocal(LocalizationStrings.ANIMAL_MAMMOTH), p0.rightIndent, 34, 0, 0, 0);
-        //p0.PrintPictXY(pediaclock, p0.rightIndent, 46, 8, 8);
-        p0.PrintPictXY(pediaheart, p0.rightIndent, 58, 9, 9);
-        //p0.PrintPictXY(pediafood, p0.rightIndent, 70, 9, 9);
-
-        //Print "Day" after age
-        /*
-        if (this.getDinoAge() == 1)
-        {
-            p0.PrintStringXY(String.valueOf(this.getDinoAge()) + " " + StatCollector.translateToLocal(LocalizationStrings.PEDIA_EGG_DAY), p0.rightIndent+12, 46);
-        }
-        else
-        {
-            p0.PrintStringXY(String.valueOf(this.getDinoAge()) + " " + StatCollector.translateToLocal(LocalizationStrings.PEDIA_EGG_DAYS), p0.rightIndent+12, 46);
-        }
-        */
-
-        //Display Health
-        p0.PrintStringXY(String.valueOf(this.getHealth()) + '/' + this.getMaxHealth(), p0.rightIndent + 12, 58);
-        //Display Hunger
-        //p0.PrintStringXY(String.valueOf(this.getHunger()) + '/' + this.getMaxHunger(), p0.rightIndent+12, 70);
-
-        //Display owner name
-        if (this.isTamed())
-        {
-            if (this.getOwnerDisplayName().length() > 0)
-            {
-                p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_OWNER), true);
-
-                ////////////1.7.10 BLOCK //////////////
-
-                String s0 = String.valueOf(this.getOwnerDisplayName());
-                if (s0.length() > 11)
-                {
-                    s0 = this.getOwnerDisplayName().substring(0, 11);
-                }
-
-                p0.AddStringLR(s0, true);
-                ///////////////////////////////////////
-
-                ////////////1.7.2 BLOCK //////////////
-                /*
-                String s0 = this.getOwnerName();
-	            if (s0.length() > 11)
-	            {
-	                s0 = this.getOwnerName().substring(0, 11);
-	            }
-	            
-	            p0.AddStringLR(s0, true);
-	            */
-                ///////////////////////////////////////
-            }
-            else
-            {
-                p0.AddStringLR(StatCollector.translateToLocal("Tamed"), true);
-            }
-        }
-        else
-        {
-            p0.AddStringLR(StatCollector.translateToLocal("Untamed"), true);
-        }
-        //Display if Rideable
-        /*
-        if (this.isRideable() && this.isAdult())
-            p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_RIDEABLE), true);
-
-        if (this.SelfType.OrderItem != null)
-        p0.AddStringLR(StatCollector.translateToLocal("Order: " + this.SelfType.OrderItem.getStatName()), true);
-
-        
-        for (int i = 0; i < this.SelfType.FoodItemList.index; i++)
-        {
-            if (this.SelfType.FoodItemList.getItem(i) != null)
-            {
-                p0.AddMiniItem(this.SelfType.FoodItemList.getItem(i));
-            }
-        }
-        */
-
-        //TODO show all blocks the dino can eat
+        this.dataWatcher.addObject(30, new Byte((byte) 3));
     }
 
     @Override
-    public IEntityLivingData onSpawnWithEgg(IEntityLivingData par1EntityLivingData)
-    {
-        if (new Random().nextInt(3) == 0)
-        {
-            this.setSkin(2);
-        }
-        else
-        {
-            this.setSkin(this.getRNG().nextInt(2));
-        }
-        return par1EntityLivingData;
-    }
-
-    @SideOnly(Side.CLIENT)
-    public void ShowPedia2(GuiPedia p0)
-    {
-        super.ShowPedia2(p0, "Mammoth");
-    }
-    
-    public EntityAnimal spawnBabyAnimal(EntityAnimal var1)
-    {
-        EntityMammoth var2 = new EntityMammoth(this.worldObj);
-
-        if (this.isTamed())
-        {
-            //  var2.func_146067_o(this.getOwner());
-            var2.setTamed(true);
-        }
-
-        return var2;
-    }
-
-    @Override
-    public boolean isShearable(ItemStack item, IBlockAccess world, int x, int y, int z)
-    {
+    public boolean isShearable(ItemStack item, IBlockAccess world, int x, int y, int z) {
         this.eatGrassTimes = 0;
         return !this.getSheared() && !this.isChild();
     }
 
     @Override
-    public ArrayList<ItemStack> onSheared(ItemStack item, IBlockAccess world, int x, int y, int z, int fortune)
-    {
+    public ArrayList<ItemStack> onSheared(ItemStack item, IBlockAccess world, int x, int y, int z, int fortune) {
         ArrayList var7 = new ArrayList();
         int var8 = 1 + this.rand.nextInt(20);
 
-        for (int var9 = 0; var9 < var8; ++var9)
-        {
-            if (this.getSkin() != 2)
-            {
-                var7.add(new ItemStack(Blocks.wool, 1, 12));
-            }
-            else
-            {
-                var7.add(new ItemStack(Blocks.wool, 1, 0));
+        for (int var9 = 0; var9 < var8; ++var9) {
 
-            }
+            var7.add(new ItemStack(Blocks.wool, 1, 12));
+
+
         }
-        this.worldObj.getClosestPlayer(x, y, z, 10).addStat(FossilAchievementHandler.anuAttack, 1);
-        this.setSheared(true);
         return var7;
     }
 
-    public int getFleeceColor()
-    {
-        return this.dataWatcher.getWatchableObjectByte(18) & 15;
+    @Override
+    public void setSpawnValues() {
     }
 
-    public void setFleeceColor(int var1)
-    {
-        byte var2 = this.dataWatcher.getWatchableObjectByte(18);
-        this.dataWatcher.updateObject(18, Byte.valueOf((byte) (var2 & 240 | var1 & 15)));
+    public boolean getSheared() {
+        return (this.dataWatcher.getWatchableObjectByte(30) & 16) != 0;
     }
 
-    public boolean getSheared()
-    {
-        return (this.dataWatcher.getWatchableObjectByte(18) & 16) != 0;
-    }
+    public void setSheared(boolean var1) {
+        byte var2 = this.dataWatcher.getWatchableObjectByte(30);
 
-    public void setSheared(boolean var1)
-    {
-        byte var2 = this.dataWatcher.getWatchableObjectByte(18);
-
-        if (var1)
-        {
-            this.dataWatcher.updateObject(18, Byte.valueOf((byte) (var2 | 16)));
-        }
-        else
-        {
-            this.dataWatcher.updateObject(18, Byte.valueOf((byte) (var2 & -17)));
+        if (var1) {
+            this.dataWatcher.updateObject(30, Byte.valueOf((byte) (var2 | 16)));
+        } else {
+            this.dataWatcher.updateObject(30, Byte.valueOf((byte) (var2 & -17)));
         }
     }
 
-    public void updateSize()
-    {
-        if (!this.isChild())
-        {
-            if (this.width != 4.5F || this.height != 6.5F)
-            {
-                this.setSize(4.5F, 6.5F);
-                this.setPosition(this.posX, this.posY, this.posZ);
-            }
-        }
+    public void writeEntityToNBT(NBTTagCompound var1) {
+        super.writeEntityToNBT(var1);
+        var1.setBoolean("Sheared", this.getSheared());
     }
 
-    /**
-     * This function applies the benefits of growing back wool and faster growing up to the acting entity. (This
-     * function is used in the AIEatGrass)
-     */
-    public void eatGrassBonus()
-    {
-        if (this.getSheared())
-        {
+
+    public void readEntityFromNBT(NBTTagCompound var1) {
+        super.readEntityFromNBT(var1);
+        this.setSheared(var1.getBoolean("Sheared"));
+
+    }
+
+    public void eatGrassBonus() {
+        if (this.getSheared()) {
             ++this.eatGrassTimes;
 
-            if (this.eatGrassTimes >= 5)
-            {
+            if (this.eatGrassTimes >= 5) {
                 this.setSheared(false);
                 this.eatGrassTimes = 0;
             }
         }
 
-        if (this.isChild())
-        {
+        if (this.isChild()) {
             int var1 = this.getGrowingAge() + 1200;
 
-            if (var1 > 0)
-            {
+            if (var1 > 0) {
                 var1 = 0;
             }
 
@@ -613,110 +126,128 @@ public class EntityMammoth extends EntityPrehistoric implements IShearable
         }
     }
 
-    private boolean checkBiomeAndWeakness()
-    {
-        if (this.isChild())
-        {
-            return false;
+    public void onLivingUpdate() {
+        int i = MathHelper.floor_double(this.posX);
+        int j = MathHelper.floor_double(this.posY);
+        int k = MathHelper.floor_double(this.posZ);
+        PotionEffect BIOME_EFFECT = new PotionEffect(Potion.weakness.id, 60, 1);
+        if (!this.isPotionActive(Potion.weakness) && this.worldObj.getBiomeGenForCoords(i, k).getFloatTemperature(i, j, k) > 1.0 && !this.getSheared()) {
+            //this.addPotionEffect(BIOME_EFFECT);
+
         }
-        else
-        {
-            BiomeGenBase var1 = this.worldObj.getBiomeGenForCoords((int) this.posX, (int) this.posZ);
-            boolean var2 = this.isBiomeCold(var1);
-            boolean var3 = this.isBiomeHot(var1);
-            return this.getSheared() ? var2 : var3;
-        }
+
+        super.onLivingUpdate();
     }
 
-    private boolean isBiomeHot(BiomeGenBase var1)
-    {
-        return this.isBiomeInList(HOT_BIOMES, var1);
+
+    @Override
+    public Activity aiActivityType() {
+
+        return Activity.DURINAL;
     }
 
-    private boolean isBiomeCold(BiomeGenBase var1)
-    {
-        return this.isBiomeInList(COLD_BIOMES, var1);
+    @Override
+    public Attacking aiAttackType() {
+
+        return Attacking.KNOCKUP;
     }
 
-    private boolean isBiomeInList(BiomeGenBase[] var1, BiomeGenBase var2)
-    {
-        for (int var3 = 0; var3 < var1.length; ++var3)
-        {
-            if (var1[var3].equals(var2))
-            {
-                return true;
+    @Override
+    public Climbing aiClimbType() {
+
+        return Climbing.NONE;
+    }
+
+    @Override
+    public Following aiFollowType() {
+
+        return Following.NONE;
+    }
+
+    @Override
+    public Jumping aiJumpType() {
+
+        return Jumping.BASIC;
+    }
+
+    @Override
+    public Response aiResponseType() {
+
+        return Response.TERRITORIAL;
+    }
+
+    @Override
+    public Stalking aiStalkType() {
+
+        return Stalking.NONE;
+    }
+
+    @Override
+    public Taming aiTameType() {
+
+        return Taming.IMPRINTING;
+    }
+
+    @Override
+    public Untaming aiUntameType() {
+
+        return Untaming.ATTACK;
+    }
+
+    @Override
+    public Moving aiMovingType() {
+
+        return Moving.WALK;
+    }
+
+    @Override
+    public WaterAbility aiWaterAbilityType() {
+
+        return WaterAbility.NONE;
+    }
+
+    @Override
+    public boolean doesFlock() {
+        return true;
+    }
+
+    @Override
+    public Item getOrderItem() {
+
+        return Items.stick;
+    }
+
+    public void updateSize() {
+        double healthStep;
+        double attackStep;
+        double speedStep;
+        healthStep = (this.maxHealth - this.baseHealth) / (this.getAdultAge() + 1);
+        attackStep = (this.maxDamage - this.baseDamage) / (this.getAdultAge() + 1);
+        speedStep = (this.maxSpeed - this.baseSpeed) / (this.getAdultAge() + 1);
+
+
+        if (this.getDinoAge() <= this.getAdultAge()) {
+
+            this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(Math.round(this.baseHealth + (healthStep * this.getDinoAge())));
+            this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(Math.round(this.baseDamage + (attackStep * this.getDinoAge())));
+            this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(this.baseSpeed + (speedStep * this.getDinoAge()));
+
+            if (this.isTeen()) {
+                this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.5D);
+            } else if (this.isAdult()) {
+                this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(2.0D);
+            } else {
+                this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.0D);
             }
         }
-
-        return false;
     }
 
-    public EntityMammoth Imprinting(double var1, double var3, double var5)
-    {
-        EntityPlayer player = this.worldObj.getClosestPlayer(var1, var3, var5, 50.0D);
-
-        if (player == null)
-        {
-            return this;
-        }
-        else
-        {
-            this.func_152115_b(player.getUniqueID().toString());
-            //   this.setOwner(var7.username);
-            this.setTamed(true);
-            this.setOwnerDisplayName(player.getCommandSenderName());
-            return this;
-        }
-    }
-
-    public int getSwingTick()
-    {
-        return this.swingTick;
-    }
-
-    /*public EntityAgeable func_90011_a(EntityAgeable var1)
-    {
-        return null;
-    }*/
-
-    public void moveEntityWithHeading(float par1, float par2)
-    {
-        super.moveEntityWithHeading(par1, par2);
-
-        //this.stepHeight = 0.5F;
-
-        if (this.riddenByEntity != null || !this.isChild())
-        {
-            this.stepHeight = 1.0F;
-        }
-    }
-    
     @Override
-    public EntityAgeable createChild(EntityAgeable var1)
-    {
-        EntityAgeable var2 = (new EntityMammoth(this.worldObj)).Imprinting(this.posX, this.posY, this.posZ);
-        var2.setGrowingAge(-24000);
-        var2.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, this.rotationPitch);
-        return var2;
-    }
-    
-    public float getEyeHeight()
-    {
-        return 5.3F;
+    public int getAdultAge() {
+        return 14;
     }
 
-    public float getHalfHeight()
-    {
-        return this.getEyeHeight() / 2.0F + 0.7F;
+    public float getMaleSize() {
+        return 1.2F;
     }
-    
-    public void updateRiderPosition()
-    {
-        if (this.riddenByEntity != null)
-        {
-            this.riddenByEntity.setPosition(this.posX, this.posY + 0.8 + (double) this.getEyeHeight(), this.posZ);
-        }
-    }
-
-
 }

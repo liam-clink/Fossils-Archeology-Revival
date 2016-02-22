@@ -1,9 +1,6 @@
 package com.github.revival.common.entity.mob.test;
 
-import java.util.List;
-
 import com.github.revival.common.enums.EnumPrehistoricAI.Response;
-
 import net.minecraft.command.IEntitySelector;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
@@ -15,35 +12,42 @@ import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.util.Vec3;
 
-public class DinoAIRunAway extends EntityAIBase
-{
-    public final IEntitySelector selector = new IEntitySelector()
-    {
+import java.util.List;
+
+public class DinoAIRunAway extends EntityAIBase {
+    public final IEntitySelector selector = new IEntitySelector() {
         private static final String __OBFID = "CL_00001575";
+
         /**
          * Return whether the specified entity is applicable to this filter.
          */
-        public boolean isEntityApplicable(Entity entity)
-        {
+        public boolean isEntityApplicable(Entity entity) {
             return entity.isEntityAlive() && DinoAIRunAway.this.theEntity.getEntitySenses().canSee(entity);
         }
     };
-    /** The entity we are attached to */
+    /**
+     * The entity we are attached to
+     */
     private EntityCreature theEntity;
     private double farSpeed;
     private double nearSpeed;
     private Entity closestLivingEntity;
     private float distanceFromEntity;
-    /** The PathEntity of our entity */
+    /**
+     * The PathEntity of our entity
+     */
     private PathEntity entityPathEntity;
-    /** The PathNavigate of our entity */
+    /**
+     * The PathNavigate of our entity
+     */
     private PathNavigate entityPathNavigate;
-    /** The class of the entity we should avoid */
+    /**
+     * The class of the entity we should avoid
+     */
     private Class targetEntityClass;
     private static final String __OBFID = "CL_00001574";
 
-    public DinoAIRunAway(EntityCreature creature, Class target, float distance, double far, double near)
-    {
+    public DinoAIRunAway(EntityCreature creature, Class target, float distance, double far, double near) {
         this.theEntity = creature;
         this.targetEntityClass = target;
         this.distanceFromEntity = distance;
@@ -56,59 +60,48 @@ public class DinoAIRunAway extends EntityAIBase
     /**
      * Returns whether the EntityAIBase should begin execution.
      */
-    public boolean shouldExecute()
-    {
-    	if(this.theEntity instanceof EntityNewPrehistoric){
-    		EntityNewPrehistoric prehistoric = (EntityNewPrehistoric)theEntity;
-    		if(prehistoric.aiResponseType() != Response.SCARED){
-    			return false;
-    		}
-    	}
-    	if(targetEntityClass == closestLivingEntity.getClass() && targetEntityClass != theEntity.getClass()){
-    		if(closestLivingEntity.boundingBox.maxX * 1.5F < theEntity.boundingBox.maxX && closestLivingEntity.boundingBox.minX * 1.5F < theEntity.boundingBox.minX
-    		&& closestLivingEntity.boundingBox.minZ * 1.5F < theEntity.boundingBox.minZ && closestLivingEntity.boundingBox.minZ  * 1.5F < theEntity.boundingBox.minZ){
-    			return false;
-    		}
-    	}
-        if (this.targetEntityClass == EntityPlayer.class)
-        {
-            if (this.theEntity instanceof EntityTameable && ((EntityTameable)this.theEntity).isTamed())
-            {
+    public boolean shouldExecute() {
+        if (this.theEntity instanceof EntityNewPrehistoric) {
+            EntityNewPrehistoric prehistoric = (EntityNewPrehistoric) theEntity;
+            if (prehistoric.aiResponseType() != Response.SCARED) {
                 return false;
             }
-
-            this.closestLivingEntity = this.theEntity.worldObj.getClosestPlayerToEntity(this.theEntity, (double)this.distanceFromEntity);
-
-            if (this.closestLivingEntity == null)
-            {
-                return false;
-            }
-            
         }
-        else
-        {
-            List list = this.theEntity.worldObj.selectEntitiesWithinAABB(this.targetEntityClass, this.theEntity.boundingBox.expand((double)this.distanceFromEntity, 3.0D, (double)this.distanceFromEntity), this.selector);
-
-            if (list.isEmpty())
-            {
+        if (closestLivingEntity != null) {
+            if (targetEntityClass == closestLivingEntity.getClass() && targetEntityClass != theEntity.getClass()) {
+                if (closestLivingEntity.width * 1.5F < theEntity.width) {
+                    return false;
+                }
+            }
+        }
+        if (this.targetEntityClass == EntityPlayer.class) {
+            if (this.theEntity instanceof EntityTameable && ((EntityTameable) this.theEntity).isTamed()) {
                 return false;
             }
 
-            this.closestLivingEntity = (Entity)list.get(0);
+            this.closestLivingEntity = this.theEntity.worldObj.getClosestPlayerToEntity(this.theEntity, (double) this.distanceFromEntity);
+
+            if (this.closestLivingEntity == null) {
+                return false;
+            }
+
+        } else {
+            List list = this.theEntity.worldObj.selectEntitiesWithinAABB(this.targetEntityClass, this.theEntity.boundingBox.expand((double) this.distanceFromEntity, 3.0D, (double) this.distanceFromEntity), this.selector);
+
+            if (list.isEmpty()) {
+                return false;
+            }
+
+            this.closestLivingEntity = (Entity) list.get(0);
         }
 
         Vec3 vec3 = RandomPositionGenerator.findRandomTargetBlockAwayFrom(this.theEntity, 16, 7, Vec3.createVectorHelper(this.closestLivingEntity.posX, this.closestLivingEntity.posY, this.closestLivingEntity.posZ));
 
-        if (vec3 == null)
-        {
+        if (vec3 == null) {
             return false;
-        }
-        else if (this.closestLivingEntity.getDistanceSq(vec3.xCoord, vec3.yCoord, vec3.zCoord) < this.closestLivingEntity.getDistanceSqToEntity(this.theEntity))
-        {
+        } else if (this.closestLivingEntity.getDistanceSq(vec3.xCoord, vec3.yCoord, vec3.zCoord) < this.closestLivingEntity.getDistanceSqToEntity(this.theEntity)) {
             return false;
-        }
-        else
-        {
+        } else {
             this.entityPathEntity = this.entityPathNavigate.getPathToXYZ(vec3.xCoord, vec3.yCoord, vec3.zCoord);
             return this.entityPathEntity == null ? false : this.entityPathEntity.isDestinationSame(vec3);
         }
@@ -117,38 +110,31 @@ public class DinoAIRunAway extends EntityAIBase
     /**
      * Returns whether an in-progress EntityAIBase should continue executing
      */
-    public boolean continueExecuting()
-    {
+    public boolean continueExecuting() {
         return !this.entityPathNavigate.noPath();
     }
 
     /**
      * Execute a one shot task or start executing a continuous task
      */
-    public void startExecuting()
-    {
+    public void startExecuting() {
         this.entityPathNavigate.setPath(this.entityPathEntity, this.farSpeed);
     }
 
     /**
      * Resets the task
      */
-    public void resetTask()
-    {
+    public void resetTask() {
         this.closestLivingEntity = null;
     }
 
     /**
      * Updates the task
      */
-    public void updateTask()
-    {
-        if (this.theEntity.getDistanceSqToEntity(this.closestLivingEntity) < 49.0D)
-        {
+    public void updateTask() {
+        if (this.theEntity.getDistanceSqToEntity(this.closestLivingEntity) < 49.0D) {
             this.theEntity.getNavigator().setSpeed(this.nearSpeed);
-        }
-        else
-        {
+        } else {
             this.theEntity.getNavigator().setSpeed(this.farSpeed);
         }
     }

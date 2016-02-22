@@ -1,7 +1,6 @@
 package com.github.revival.common.enums;
 
-public enum EnumStoneboard
-{
+public enum EnumStoneboard {
     //Remember: divide the x and y offsets and sizes by 2
     Lighting("Lighting", 32, 16, 0, 0),
     Sociel("Sociel", 16, 16, 32, 0),
@@ -40,8 +39,7 @@ public enum EnumStoneboard
     public final int offsetY;
     //   public static final EnumStoneboard[] allArt = new EnumStoneboard[]{Lighting, Sociel, Greatwar, Killboss, Portol, Herobine, FlatCreep, annoyangry, Rex1, Rex2, Rex3, Rex4, Puzzle, GunFight, Pricess, Mosa, HolyMosa, AnciTM, ModTM, VigTM};
 
-    private EnumStoneboard(String title, int xSize, int ySize, int textureX, int textureY)
-    {
+    private EnumStoneboard(String title, int xSize, int ySize, int textureX, int textureY) {
         this.title = title;
         this.sizeX = xSize;
         this.sizeY = ySize;

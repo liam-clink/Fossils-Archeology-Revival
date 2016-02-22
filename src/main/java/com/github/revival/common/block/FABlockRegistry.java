@@ -8,17 +8,16 @@ import com.github.revival.common.creativetab.FATabRegistry;
 import com.github.revival.common.handler.LocalizationStrings;
 import com.google.common.collect.Lists;
 import cpw.mods.fml.common.registry.GameRegistry;
-import net.ilexiconn.llibrary.common.content.IContentHandler;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
+import net.minecraftforge.fluids.FluidRegistry;
 
 import java.lang.reflect.Field;
 import java.util.List;
 
-public class FABlockRegistry extends FARegistry implements IContentHandler
-{
+public class FABlockRegistry extends FARegistry {
     public static List<String> list = Lists.newArrayList();
-
     public static Block blockFossil;
     public static Block blockSkull;
     public static Block skullLantern;
@@ -36,8 +35,6 @@ public class FABlockRegistry extends FARegistry implements IContentHandler
     public static Block blockTimeMachine;
     public static Block ferns;
     public static Block drum;
-    //public static Block feederIdle;
-    //public static Block feederActive;
     public static Block blockPermafrost;
     public static Block blockIcedStone;
     public static Block volcanicAsh;
@@ -64,7 +61,6 @@ public class FABlockRegistry extends FARegistry implements IContentHandler
     public static Block ancientStoneStairs;
     public static Block ancientStoneSingleSlab;
     public static Block ancientStoneDoubleSlab;
-    public static Block marble;
     public static Block obsidianSpikes;
     public static Block figurineBlock;
     public static Block anuTotem;
@@ -93,9 +89,13 @@ public class FABlockRegistry extends FARegistry implements IContentHandler
     public static Block horsetail_small;
     public static Block horsetail_large;
     public static Block mutantPlant;
+    public static Block tempskya;
 
-    public void init()
-    {
+    public void init() {
+        Revival.tar_material = new MaterialTar(MapColor.blackColor);
+        Revival.tar_fluid = new FluidTar("tar").setBlock(tar);
+        FluidRegistry.registerFluid(Revival.tar_fluid);
+
         skullLantern = new BlockFossilSkull(true).setLightLevel(1F);
         Limestone = new BlockLimestone(Material.rock);
         LimestoneBrick = new BlockLimestoneBrick(Material.rock);
@@ -141,7 +141,6 @@ public class FABlockRegistry extends FARegistry implements IContentHandler
         ancientStoneStairs = new BlockFossilStairs(ancientStone, 0).setBlockName(LocalizationStrings.ANCIENT_STONE_STAIRS_NAME);
         ancientStoneDoubleSlab = new BlockAncientStoneSlab(true);
         ancientStoneSingleSlab = new BlockAncientStoneSlab(false);
-        marble = new BlockMarble();
         obsidianSpikes = new BlockSpikes().setCreativeTab(FATabRegistry.tabFBlocks).setHardness(50.0F).setResistance(2000.0F).setStepSound(Block.soundTypePiston).setBlockName("obsidianSpikes").setBlockTextureName("fossil:obsidianSpikes");
         figurineBlock = new BlockFigurine();
         anuTotem = new BlockAnuStatue();
@@ -170,20 +169,45 @@ public class FABlockRegistry extends FARegistry implements IContentHandler
         horsetail_small = new BlockFossilPlant("plants/plant_horsetail_small", 1).setBlockName("plant_horsetail_small").setCreativeTab(FATabRegistry.tabFBlocks);
         horsetail_large = new BlockFossilTallPlant("plants/plant_horsetail_large").setBlockName("plant_horsetail_large").setCreativeTab(FATabRegistry.tabFBlocks);
         mutantPlant = new BlockFossilTallPlant("plants/plant_mutant").setBlockName("plant_mutant").setLightLevel(0.4F).setCreativeTab(FATabRegistry.tabFBlocks);
+        tempskya = new BlockTempskya("plants/plant_tempskya").setBlockName("plant_tempskya").setCreativeTab(FATabRegistry.tabFBlocks);
+
+		/*Blocks.fire.setFireInfo(FABlockRegistry.palmLeaves, 30, 60);
+        Blocks.fire.setFireInfo(FABlockRegistry.palmLog, 5, 20);
+		Blocks.fire.setFireInfo(FABlockRegistry.palaePlanks, 5, 20);
+		Blocks.fire.setFireInfo(FABlockRegistry.palaeStairs, 5, 20);
+		Blocks.fire.setFireInfo(FABlockRegistry.palaeSingleSlab, 5, 20);
+		Blocks.fire.setFireInfo(FABlockRegistry.palaeDoubleSlab, 5, 20);
+		Blocks.fire.setFireInfo(FABlockRegistry.blockworktableIdle, 5, 20);
+		Blocks.fire.setFireInfo(FABlockRegistry.blockworktableActive, 5, 20);
+		Blocks.fire.setFireInfo(FABlockRegistry.ancientWood, 5, 20);
+		Blocks.fire.setFireInfo(FABlockRegistry.ancientWoodPillar, 5, 20);
+		Blocks.fire.setFireInfo(FABlockRegistry.ancientWoodPlate, 5, 20);
+		Blocks.fire.setFireInfo(FABlockRegistry.ancientWoodStairs, 5, 20);
+		Blocks.fire.setFireInfo(FABlockRegistry.ancientWoodSingleSlab, 5, 20);
+		Blocks.fire.setFireInfo(FABlockRegistry.ancientWoodDoubleSlab, 5, 20);
+		Blocks.fire.setFireInfo(FABlockRegistry.ferns, 30, 60);
+		Blocks.fire.setFireInfo(FABlockRegistry.bennettitales_large, 60, 100);
+		Blocks.fire.setFireInfo(FABlockRegistry.bennettitales_small, 60, 100);
+		Blocks.fire.setFireInfo(FABlockRegistry.cephalotaxus, 60, 100);
+		Blocks.fire.setFireInfo(FABlockRegistry.dillhoffia, 60, 100);
+		Blocks.fire.setFireInfo(FABlockRegistry.horsetail_large, 60, 100);
+		Blocks.fire.setFireInfo(FABlockRegistry.horsetail_small, 60, 100);
+		Blocks.fire.setFireInfo(FABlockRegistry.licopodiophyta, 60, 100);
+		Blocks.fire.setFireInfo(FABlockRegistry.mutantPlant, 60, 100);
+		Blocks.fire.setFireInfo(FABlockRegistry.paleopanax, 60, 100);
+		Blocks.fire.setFireInfo(FABlockRegistry.sarracina, 60, 100);
+		Blocks.fire.setFireInfo(FABlockRegistry.welwitschia, 60, 100);
+		Blocks.fire.setFireInfo(FABlockRegistry.zamites, 60, 100);*/
     }
 
-    public void initCreativeTabs()
-    {
+    public void initCreativeTabs() {
 
     }
 
-    public void gameRegistry() throws Exception
-    {
+    public void gameRegistry() throws Exception {
         initCreativeTabs();
-        try
-        {
-            for (Field f : FABlockRegistry.class.getDeclaredFields())
-            {
+        try {
+            for (Field f : FABlockRegistry.class.getDeclaredFields()) {
                 Object obj = f.get(null);
                 list.add(f.getName());
                 if (obj instanceof Block)
@@ -192,24 +216,19 @@ public class FABlockRegistry extends FARegistry implements IContentHandler
                     for (Block block : (Block[]) obj)
                         registerBlock(block);
             }
-        }
-        catch (IllegalAccessException e)
-        {
+        } catch (IllegalAccessException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void registerBlock(Block block)
-    {
+    public void registerBlock(Block block) {
         String name = block.getUnlocalizedName();
         String[] strings = name.split("\\.");
         name = strings[strings.length - 1];
         if (block instanceof INamedBlock) name = ((INamedBlock) block).getBlockName();
 
-        if (block instanceof ISubBlocksBlock)
-        {
+        if (block instanceof ISubBlocksBlock) {
             GameRegistry.registerBlock(block, ((ISubBlocksBlock) block).getItemBlockClass(), name);
-        }
-        else GameRegistry.registerBlock(block, name);
+        } else GameRegistry.registerBlock(block, name);
     }
 }

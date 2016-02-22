@@ -1,50 +1,74 @@
 package com.github.revival.common.entity.mob.test;
 
+import com.github.revival.common.api.EnumDiet;
+import net.minecraft.command.IEntitySelector;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 
-public class DinoAIAgressive extends EntityAINearestAttackableTarget
-{
-	private EntityNewPrehistoric theTameable;
-	private final Class targetClass;
-	private boolean isCannabil;
+import java.util.Collections;
+import java.util.List;
 
-	public DinoAIAgressive(EntityNewPrehistoric mob, Class prey, int hungryTicks, boolean see, boolean isCannabil)
-	{
-		super(mob, prey, hungryTicks, see);
-		this.theTameable = mob;
-		this.targetClass = prey;
-		this.isCannabil = isCannabil;
-	}
+public class DinoAIAgressive extends EntityAINearestAttackableTarget {
+    private EntityNewPrehistoric mob;
+    private final Class<? extends Entity> targetClass;
+    private boolean isCannibal;
+
+    public DinoAIAgressive(EntityNewPrehistoric mob, Class<? extends Entity> prey, int hungryTicks, boolean see, boolean isCannibal) {
+        super(mob, prey, hungryTicks, see);
+        this.mob = mob;
+        this.targetClass = prey;
+        this.isCannibal = isCannibal;
+    }
 
 
-	public boolean shouldExecute()
-	{
-        Entity closestLivingEntity = this.theTameable.worldObj.getClosestPlayerToEntity(this.theTameable, (double)20);
+    public boolean shouldExecute() {
+        Entity targetEntity;
+        EntityAINearestAttackableTarget.Sorter theNearestAttackableTargetSorter = new EntityAINearestAttackableTarget.Sorter(mob);
+        IEntitySelector targetEntitySelector = new IEntitySelector() {
+            public boolean isEntityApplicable(Entity entity) {
+                return (entity instanceof EntityLivingBase);
+            }
+        };
+        double d0 = this.getTargetDistance();
+        List list = this.taskOwner.worldObj.selectEntitiesWithinAABB(this.targetClass, this.taskOwner.boundingBox.expand(d0, 4.0D, d0), targetEntitySelector);
+        Collections.sort(list, theNearestAttackableTargetSorter);
 
-		if(!this.theTameable.isHungry()){
-		return false;
-		}
-		if(targetClass == closestLivingEntity.getClass()){
-    		if(closestLivingEntity.boundingBox.maxX * 1.5F < theTameable.boundingBox.maxX && closestLivingEntity.boundingBox.minX * 1.5F < theTameable.boundingBox.minX
-    		&& closestLivingEntity.boundingBox.minZ * 1.5F < theTameable.boundingBox.minZ && closestLivingEntity.boundingBox.minZ  * 1.5F < theTameable.boundingBox.minZ){
-    			return false;
-    		}
-    	}
-		if(!this.isCannabil){
-			if(this.theTameable.getClass() == this.targetClass){
-				return false;
-			}
-		}
-		if(this.theTameable.isTamed()){
-			if(this.theTameable.getOwner() != null){
-				if(this.theTameable.getOwner().getClass() == this.targetClass){
-					if(!this.theTameable.isHungry()){
-						return false;
-					}
-				}
-			}
-		}
-		return super.shouldExecute();
-	}
+
+        if (list.isEmpty()) {
+            return false;
+        } else {
+            targetEntity = (EntityLivingBase) list.get(0);
+
+            if (!this.mob.isHungry()) {
+                return false;
+            }
+            if (mob.canAttackClass(targetEntity.getClass())) {
+                return false;
+            }
+
+            if (this.mob.selfType.diet == EnumDiet.HERBIVORE) {
+                return false;
+            }
+
+            if (targetEntity != null) {
+                if (mob.width < targetEntity.width) {
+                    return false;
+                }
+            }
+
+            if (this.mob.isTamed()) {
+                if (this.mob.getOwner() != null) {
+                    if (this.mob.getOwner().getClass() == targetEntity.getClass()) {
+                        if (!this.mob.isHungry()) {
+                            return false;
+                        }
+                    }
+                }
+            }
+            return super.shouldExecute();
+        }
+    }
+
+
 }

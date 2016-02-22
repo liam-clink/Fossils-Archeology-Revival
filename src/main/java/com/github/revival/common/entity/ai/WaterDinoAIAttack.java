@@ -8,8 +8,7 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class WaterDinoAIAttack extends EntityAIBase
-{
+public class WaterDinoAIAttack extends EntityAIBase {
     public int courseChangeCooldown;
     public double waypointX;
     public double waypointY;
@@ -28,9 +27,9 @@ public class WaterDinoAIAttack extends EntityAIBase
     private double deltaY;
     private double deltaZ;
     private double length;
-    
+
     private Random rand = new Random();
-    
+
     private World worldObj;
     private double movePosX;
     private double movePosY;
@@ -40,8 +39,7 @@ public class WaterDinoAIAttack extends EntityAIBase
     private Vec3 moveVector;
     private Vec3 normalizedVector;
 
-    public WaterDinoAIAttack(EntityDinosaur dinosaur, double speed)
-    {
+    public WaterDinoAIAttack(EntityDinosaur dinosaur, double speed) {
         this.entity = dinosaur;
         this.speed = speed;
         this.setMutexBits(1);
@@ -50,8 +48,7 @@ public class WaterDinoAIAttack extends EntityAIBase
     /**
      * Returns whether the EntityAIBase should begin execution.
      */
-    public boolean shouldExecute()
-    {
+    public boolean shouldExecute() {
         double distance = 64.0D;
         this.targetedEntity = this.entity.worldObj.getClosestVulnerablePlayerToEntity(this.entity, 20.0D);
 
@@ -62,8 +59,7 @@ public class WaterDinoAIAttack extends EntityAIBase
     /**
      * Returns whether an in-progress EntityAIBase should continue executing
      */
-    public boolean continueExecuting()
-    {
+    public boolean continueExecuting() {
         double distance = 64.0D;
         this.targetedEntity = this.entity.worldObj.getClosestVulnerablePlayerToEntity(this.entity, 20.0D);
 
@@ -75,12 +71,10 @@ public class WaterDinoAIAttack extends EntityAIBase
      * Execute a one shot task or start executing a continuous task
      */
     @Override
-    public void updateTask()
-    {
+    public void updateTask() {
         double distance = 64.0D;
 
-        if (this.targetedEntity != null && this.targetedEntity.isDead)
-        {
+        if (this.targetedEntity != null && this.targetedEntity.isDead) {
             this.targetedEntity = null;
         }
 
@@ -88,8 +82,7 @@ public class WaterDinoAIAttack extends EntityAIBase
         this.targetedEntity = this.entity.worldObj.getClosestVulnerablePlayerToEntity(this.entity, 20.0D);
 
         if (this.entity.isInWater() && this.targetedEntity != null && this.targetedEntity.isInWater()
-                && this.targetedEntity.getDistanceSqToEntity(this.entity) < distance * distance)
-        {
+                && this.targetedEntity.getDistanceSqToEntity(this.entity) < distance * distance) {
 
             // Simple "pathfinding" to attack closest player.
             this.deltaX = this.targetedEntity.posX - this.entity.posX;
@@ -102,12 +95,10 @@ public class WaterDinoAIAttack extends EntityAIBase
             this.movePosX = this.deltaX;
             this.movePosY = this.deltaY;
             this.movePosZ = this.deltaZ;
-            
+
             this.entity.addVelocity(deltaX * this.speed, deltaY * this.speed, deltaZ * this.speed);
 
-        }
-        else
-        {
+        } else {
             this.entity.renderYawOffset = this.entity.rotationYaw = -((float) Math.atan2(this.entity.motionX, this.entity.motionZ)) * 180.0F / (float) Math.PI;
         }
     }

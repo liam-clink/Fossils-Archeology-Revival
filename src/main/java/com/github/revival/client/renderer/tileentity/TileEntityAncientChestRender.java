@@ -16,18 +16,15 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
-public class TileEntityAncientChestRender extends TileEntitySpecialRenderer
-{
+public class TileEntityAncientChestRender extends TileEntitySpecialRenderer {
     private static final ResourceLocation texture = new ResourceLocation("fossil:textures/blocks/AncientChest.png");
     EntityItem key = new EntityItem(Minecraft.getMinecraft().theWorld, 0D, 0D, 0D, new ItemStack(FAItemRegistry.ancientKey));
     private ModelChest model = new ModelChest();
 
-    public void renderTileEntityAt(TileEntityAncientChest chest, double x, double y, double z, float i1)
-    {
+    public void renderTileEntityAt(TileEntityAncientChest chest, double x, double y, double z, float i1) {
         int i = 0;
 
-        if (chest.hasWorldObj())
-        {
+        if (chest.hasWorldObj()) {
             i = chest.getBlockMetadata();
         }
 
@@ -37,52 +34,42 @@ public class TileEntityAncientChestRender extends TileEntitySpecialRenderer
         GL11.glScalef(1.0F, -1.0F, -1.0F);
         GL11.glTranslatef(0.5F, 0.5F, 0.5F);
         short short1 = 0;
-        if (i == 2)
-        {
+        if (i == 2) {
             short1 = 180;
         }
 
-        if (i == 3)
-        {
+        if (i == 3) {
             short1 = 0;
         }
 
-        if (i == 4)
-        {
+        if (i == 4) {
             short1 = 90;
         }
 
-        if (i == 5)
-        {
+        if (i == 5) {
             short1 = -90;
         }
         GL11.glPushMatrix();
         GL11.glRotatef((float) short1, 0.0F, 1.0F, 0.0F);
         GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
         float f1;
-        if (chest.chestLidCounter > 90)
-        {
+        if (chest.chestLidCounter > 90) {
             f1 = chest.chestLidCounter2 + chest.chestLidCounter;
-        }
-        else
-        {
+        } else {
             f1 = chest.chestLidCounter;
         }
         this.model.chestLid.rotateAngleX = -(float) Math.toRadians(f1);
         this.model.renderAll();
         GL11.glPopMatrix();
         GL11.glPopMatrix();
-        if (chest.chestState == 1)
-        {
+        if (chest.chestState == 1) {
             this.renderItem(x, y, z, i);
         }
     }
 
-    public void renderItem(double x, double y, double z, int i)
-    {
+    public void renderItem(double x, double y, double z, int i) {
 
-        if (i == 2)
-        {
+        if (i == 2) {
             GL11.glPushMatrix();
             float scale = 1F;
             key.hoverStart = 0.0F;
@@ -98,8 +85,7 @@ public class TileEntityAncientChestRender extends TileEntitySpecialRenderer
             RenderItem.renderInFrame = false;
             GL11.glPopMatrix();
         }
-        if (i == 3)
-        {
+        if (i == 3) {
             GL11.glPushMatrix();
             float scale = 1F;
             key.hoverStart = 0.0F;
@@ -114,8 +100,7 @@ public class TileEntityAncientChestRender extends TileEntitySpecialRenderer
             RenderItem.renderInFrame = false;
             GL11.glPopMatrix();
         }
-        if (i == 4)
-        {
+        if (i == 4) {
             GL11.glPushMatrix();
             float scale = 1F;
             key.hoverStart = 0.0F;
@@ -132,8 +117,7 @@ public class TileEntityAncientChestRender extends TileEntitySpecialRenderer
             GL11.glPopMatrix();
 
         }
-        if (i == 5)
-        {
+        if (i == 5) {
             GL11.glPushMatrix();
             float scale = 1F;
             key.hoverStart = 0.0F;
@@ -152,8 +136,7 @@ public class TileEntityAncientChestRender extends TileEntitySpecialRenderer
 
     }
 
-    public void renderTileEntityAt(TileEntity chest, double x, double y, double z, float i1)
-    {
+    public void renderTileEntityAt(TileEntity chest, double x, double y, double z, float i1) {
         this.renderTileEntityAt((TileEntityAncientChest) chest, x, y, z, i1);
     }
 }

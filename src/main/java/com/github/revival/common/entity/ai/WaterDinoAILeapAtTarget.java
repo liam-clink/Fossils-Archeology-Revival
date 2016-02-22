@@ -5,8 +5,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAILeapAtTarget;
 import net.minecraft.util.MathHelper;
 
-public class WaterDinoAILeapAtTarget extends EntityAILeapAtTarget
-{
+public class WaterDinoAILeapAtTarget extends EntityAILeapAtTarget {
     /**
      * The entity that is leaping.
      */
@@ -22,24 +21,19 @@ public class WaterDinoAILeapAtTarget extends EntityAILeapAtTarget
      */
     float leapMotionY;
 
-    public WaterDinoAILeapAtTarget(EntityLiving var1, float var2)
-    {
+    public WaterDinoAILeapAtTarget(EntityLiving var1, float var2) {
         super(var1, var2);
     }
 
     /**
      * Returns whether the EntityAIBase should begin execution.
      */
-    public boolean shouldExecute()
-    {
+    public boolean shouldExecute() {
         this.leapTarget = this.leaper.getAttackTarget();
 
-        if (this.leapTarget == null)
-        {
+        if (this.leapTarget == null) {
             return false;
-        }
-        else
-        {
+        } else {
             double d0 = this.leaper.getDistanceSqToEntity(this.leapTarget);
             return d0 >= 4.0D && d0 <= 16.0D ? (!this.leaper.onGround ? false : this.leaper.getRNG().nextInt(5) == 0) : false;
         }
@@ -48,16 +42,14 @@ public class WaterDinoAILeapAtTarget extends EntityAILeapAtTarget
     /**
      * Returns whether an in-progress EntityAIBase should continue executing
      */
-    public boolean continueExecuting()
-    {
+    public boolean continueExecuting() {
         return false;
     }
 
     /**
      * Execute a one shot task or start executing a continuous task
      */
-    public void startExecuting()
-    {
+    public void startExecuting() {
         double var1 = this.leapTarget.posX - this.leaper.posX;
         double var3 = this.leapTarget.posZ - this.leaper.posZ;
         float var5 = MathHelper.sqrt_double(var1 * var1 + var3 * var3);

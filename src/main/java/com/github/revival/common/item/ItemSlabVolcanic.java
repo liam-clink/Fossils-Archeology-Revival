@@ -5,11 +5,9 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.item.ItemSlab;
 
-public class ItemSlabVolcanic extends ItemSlab
-{
+public class ItemSlabVolcanic extends ItemSlab {
 
-    public ItemSlabVolcanic(Block block)
-    {
+    public ItemSlabVolcanic(Block block) {
         super(block, (BlockSlab) FABlockRegistry.volcanicSingleSlab, (BlockSlab) FABlockRegistry.volcanicDoubleSlab, false);
     }
 }

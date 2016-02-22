@@ -2,8 +2,7 @@ package com.github.revival.common.handler;
 
 import net.minecraft.util.StatCollector;
 
-public class LocalizationStrings
-{
+public class LocalizationStrings {
     //Enchantments
     public static final String ENCHANTMENT_PALEONTOLOGY = "paleontology";
     public static final String ENCHANTMENT_ARCHEOLOGY = "archeology";
@@ -263,7 +262,7 @@ public class LocalizationStrings
     public static String MAMMOTH_MEAT_COOKED = "mammothMeatCooked";
     public static String FAILURESAURUS_FLESH_NAME = "failuresaurusFlesh";
 
-    
+
     //Dinosaur name strings are handled through DinoEnum.
 
 }

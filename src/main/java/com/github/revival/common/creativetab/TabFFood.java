@@ -7,21 +7,17 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
-public class TabFFood extends CreativeTabs
-{
-    public TabFFood(String par2Str)
-    {
+public class TabFFood extends CreativeTabs {
+    public TabFFood(String par2Str) {
         super(par2Str);
     }
 
     @SideOnly(Side.CLIENT)
-    public Item getTabIconItem()
-    {
+    public Item getTabIconItem() {
         return FAItemRegistry.cookedChickenSoup;
     }
 
-    public String getTranslatedTabLabel()
-    {
+    public String getTranslatedTabLabel() {
         return LocalizationStrings.FFOOD_NAME;
     }
 }

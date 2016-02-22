@@ -5,8 +5,7 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import org.lwjgl.opengl.GL11;
 
-public class ModelAnubite extends ModelBiped
-{
+public class ModelAnubite extends ModelBiped {
     public int heldItemRight;
     //fields
     ModelRenderer WolfHead;
@@ -20,8 +19,7 @@ public class ModelAnubite extends ModelBiped
     ModelRenderer leftarm;
     ModelRenderer sword;
 
-    public ModelAnubite()
-    {
+    public ModelAnubite() {
         textureWidth = 128;
         textureHeight = 64;
 
@@ -87,8 +85,7 @@ public class ModelAnubite extends ModelBiped
         rightarm.addChild(sword);
     }
 
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
-    {
+    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
         setRotationAngles(f, f1, f2, f3, f4, f5, entity);
         WolfHead.render(f5);
         Nose.render(f5);
@@ -101,15 +98,13 @@ public class ModelAnubite extends ModelBiped
         leftarm.render(f5);
     }
 
-    private void setRotation(ModelRenderer model, float x, float y, float z)
-    {
+    private void setRotation(ModelRenderer model, float x, float y, float z) {
         model.rotateAngleX = x;
         model.rotateAngleY = y;
         model.rotateAngleZ = z;
     }
 
-    public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
-    {
+    public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
         super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
         this.WolfHead.rotateAngleY = f3 / (180F / (float) Math.PI);
         this.WolfHead.rotateAngleX = f4 / (180F / (float) Math.PI);
@@ -127,8 +122,7 @@ public class ModelAnubite extends ModelBiped
         this.leftleg.rotateAngleX = this.bipedLeftLeg.rotateAngleX;
     }
 
-    public void renderBlock(float f5)
-    {
+    public void renderBlock(float f5) {
         WolfHead.render(f5);
         Nose.render(f5);
         Ear1.render(f5);

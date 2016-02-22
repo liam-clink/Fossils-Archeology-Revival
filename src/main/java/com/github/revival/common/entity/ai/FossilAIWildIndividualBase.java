@@ -17,8 +17,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Random;
 
-public abstract class FossilAIWildIndividualBase extends EntityAIBase
-{
+public abstract class FossilAIWildIndividualBase extends EntityAIBase {
 
     private static final int taskFleeNear = 0;
     private static final int taskFleeFar = 1;
@@ -60,26 +59,22 @@ public abstract class FossilAIWildIndividualBase extends EntityAIBase
     private Chunk currentChunk;
     private Chunk tempChunk;
 
-    public FossilAIWildIndividualBase(EntityPrehistoric entity)
-    {
+    public FossilAIWildIndividualBase(EntityPrehistoric entity) {
         this.entity = entity;
         this.setMutexBits(2);
     }
 
     @Override
-    public boolean shouldExecute()
-    {
+    public boolean shouldExecute() {
         return taskDone && !entity.hasOwner() && !entity.isInHerd();
     }
 
-    public boolean continueExecuting()
-    {
+    public boolean continueExecuting() {
         return !taskDone && !entity.hasOwner() && !entity.isInHerd();
     }
 
     // TODO get entities from chunks not world
-    public void startExecuting()
-    {
+    public void startExecuting() {
         taskDone = false;
         // ArrayLists to store found entities
         nearbyPrehistoricEntities.clear();
@@ -99,44 +94,28 @@ public abstract class FossilAIWildIndividualBase extends EntityAIBase
 
         currentChunk = entity.worldObj.getChunkFromChunkCoords(entity.chunkCoordX, entity.chunkCoordY);
 
-        for (int i = -chunkRadius; i <= chunkRadius; i++)
-        {
-            for (int j = -chunkRadius; j <= chunkRadius; j++)
-            {
+        for (int i = -chunkRadius; i <= chunkRadius; i++) {
+            for (int j = -chunkRadius; j <= chunkRadius; j++) {
                 tempChunk = entity.worldObj.getChunkFromChunkCoords(currentChunk.xPosition + i, currentChunk.zPosition + j);
-                for (int k = (int) ((entity.posY - 4) / 16); k < (int) ((entity.posY + 4) / 16) && k >= 0 && k < tempChunk.entityLists.length; k++)
-                {
-                    for (Object tempEntity : tempChunk.entityLists[k])
-                    {
-                        if (tempEntity.getClass().isAssignableFrom(EntityPrehistoric.class))
-                        {
-                            if (entity.canFindEntity((Entity) tempEntity))
-                            {
+                for (int k = (int) ((entity.posY - 4) / 16); k < (int) ((entity.posY + 4) / 16) && k >= 0 && k < tempChunk.entityLists.length; k++) {
+                    for (Object tempEntity : tempChunk.entityLists[k]) {
+                        if (tempEntity.getClass().isAssignableFrom(EntityPrehistoric.class)) {
+                            if (entity.canFindEntity((Entity) tempEntity)) {
                                 nearbyPrehistoricEntities.add((EntityPrehistoric) tempEntity);
-                                if (tempEntity.getClass().isAssignableFrom(entity.getClass()))
-                                {
+                                if (tempEntity.getClass().isAssignableFrom(entity.getClass())) {
                                     nearbyPrehistoricEntitiesOfSameSpecies.add((EntityPrehistoric) tempEntity);
                                 }
                             }
-                        }
-                        else if (tempEntity.getClass().isAssignableFrom(EntityPlayer.class))
-                        {
-                            if (entity.canFindEntity((Entity) tempEntity))
-                            {
+                        } else if (tempEntity.getClass().isAssignableFrom(EntityPlayer.class)) {
+                            if (entity.canFindEntity((Entity) tempEntity)) {
                                 nearbyPlayers.add((EntityPlayer) tempEntity);
                             }
-                        }
-                        else if (tempEntity.getClass().isAssignableFrom(EntityLiving.class))
-                        {
-                            if (entity.canFindEntity((Entity) tempEntity))
-                            {
+                        } else if (tempEntity.getClass().isAssignableFrom(EntityLiving.class)) {
+                            if (entity.canFindEntity((Entity) tempEntity)) {
                                 nearbyLivingEntities.add((EntityLiving) tempEntity);
                             }
-                        }
-                        else if (tempEntity.getClass().isAssignableFrom(EntityItem.class))
-                        {
-                            if (entity.canFindEntity((Entity) tempEntity))
-                            {
+                        } else if (tempEntity.getClass().isAssignableFrom(EntityItem.class)) {
+                            if (entity.canFindEntity((Entity) tempEntity)) {
                                 nearbyItemEntities.add((EntityItem) tempEntity);
                             }
                         }
@@ -145,30 +124,23 @@ public abstract class FossilAIWildIndividualBase extends EntityAIBase
             }
         }
 
-        if (!nearbyPrehistoricEntities.isEmpty())
-        {
+        if (!nearbyPrehistoricEntities.isEmpty()) {
             // Check nearby targets to see if we should flee
-            for (EntityPrehistoric tempEntity : nearbyPrehistoricEntities)
-            {
-                if (entity.getType().shouldRunFromEntity(tempEntity))
-                {
+            for (EntityPrehistoric tempEntity : nearbyPrehistoricEntities) {
+                if (entity.getType().shouldRunFromEntity(tempEntity)) {
                     fleeingTargets.add(tempEntity);
                 }
             }
 
-            if (!fleeingTargets.isEmpty())
-            {
+            if (!fleeingTargets.isEmpty()) {
                 // Sort based on
-                Collections.sort(fleeingTargets, new Comparator<EntityPrehistoric>()
-                {
+                Collections.sort(fleeingTargets, new Comparator<EntityPrehistoric>() {
                     @Override
-                    public int compare(EntityPrehistoric o1, EntityPrehistoric o2)
-                    {
+                    public int compare(EntityPrehistoric o1, EntityPrehistoric o2) {
                         return (int) (o1.getStrength() - o2.getStrength());
                     }
                 });
-                switch (entity.distanceStatus(fleeingTargets.get(0)))
-                {
+                switch (entity.distanceStatus(fleeingTargets.get(0))) {
                     case 1:
                         task = this.taskFleeNear;
                         break;
@@ -179,19 +151,14 @@ public abstract class FossilAIWildIndividualBase extends EntityAIBase
                 target = fleeingTargets.get(0);
                 return;
             }
-        }
-        else if (nearbyPlayers.isEmpty())
-        {
-            Collections.sort(nearbyPlayers, new Comparator<EntityPlayer>()
-            {
+        } else if (nearbyPlayers.isEmpty()) {
+            Collections.sort(nearbyPlayers, new Comparator<EntityPlayer>() {
                 @Override
-                public int compare(EntityPlayer arg0, EntityPlayer arg1)
-                {
+                public int compare(EntityPlayer arg0, EntityPlayer arg1) {
                     return (int) (entity.distanceToEntity(arg0) - entity.distanceToEntity(arg1));
                 }
             });
-            switch (entity.distanceStatus(nearbyPlayers.get(0)))
-            {
+            switch (entity.distanceStatus(nearbyPlayers.get(0))) {
                 case 1:
                     task = this.taskFleeFar;
                     break;
@@ -202,35 +169,26 @@ public abstract class FossilAIWildIndividualBase extends EntityAIBase
             target = nearbyPlayers.get(0);
         }
 
-        if (entity.hungerLevel() > 0)
-        {
-            for (Object tempTileEntity : entity.worldObj.loadedTileEntityList)
-            {
-                if (tempTileEntity instanceof TileEntityFeeder)
-                {
-                    if (entity.canFindFeeder((TileEntityFeeder) tempTileEntity))
-                    {
+        if (entity.hungerLevel() > 0) {
+            for (Object tempTileEntity : entity.worldObj.loadedTileEntityList) {
+                if (tempTileEntity instanceof TileEntityFeeder) {
+                    if (entity.canFindFeeder((TileEntityFeeder) tempTileEntity)) {
                         feeders.add((TileEntityFeeder) tempTileEntity);
                     }
                 }
             }
 
-            if (!feeders.isEmpty())
-            {
-                Collections.sort(feeders, new Comparator<TileEntityFeeder>()
-                {
+            if (!feeders.isEmpty()) {
+                Collections.sort(feeders, new Comparator<TileEntityFeeder>() {
                     @Override
-                    public int compare(TileEntityFeeder o1, TileEntityFeeder o2)
-                    {
+                    public int compare(TileEntityFeeder o1, TileEntityFeeder o2) {
                         int totalFood1 = 0;
                         int totalFood2 = 0;
-                        if (entity.getType().eatsMeat())
-                        {
+                        if (entity.getType().eatsMeat()) {
                             totalFood1 += o1.MeatCurrent;
                             totalFood2 += o2.MeatCurrent;
                         }
-                        if (entity.getType().eatsVegetables())
-                        {
+                        if (entity.getType().eatsVegetables()) {
                             totalFood1 += o1.VegCurrent;
                             totalFood2 += o2.VegCurrent;
                         }
@@ -242,28 +200,21 @@ public abstract class FossilAIWildIndividualBase extends EntityAIBase
                 return;
             }
 
-            for (EntityPrehistoric food : nearbyPrehistoricEntities)
-            {
-                if (entity.getType().willAttack(food))
-                {
+            for (EntityPrehistoric food : nearbyPrehistoricEntities) {
+                if (entity.getType().willAttack(food)) {
                     possibleFood.add(food);
                 }
             }
-            for (EntityLiving food : nearbyLivingEntities)
-            {
-                if (entity.getType().willAttack(food))
-                {
+            for (EntityLiving food : nearbyLivingEntities) {
+                if (entity.getType().willAttack(food)) {
                     possibleFood.add(food);
                 }
             }
 
-            if (!possibleFood.isEmpty())
-            {
-                Collections.sort(possibleFood, new Comparator<EntityLiving>()
-                {
+            if (!possibleFood.isEmpty()) {
+                Collections.sort(possibleFood, new Comparator<EntityLiving>() {
                     @Override
-                    public int compare(EntityLiving o1, EntityLiving o2)
-                    {
+                    public int compare(EntityLiving o1, EntityLiving o2) {
                         return (int) (entity.distanceToEntity(o1) - entity.distanceToEntity(o2));
                     }
                 });
@@ -273,21 +224,16 @@ public abstract class FossilAIWildIndividualBase extends EntityAIBase
                 return;
             }
 
-            for (EntityItem item : nearbyItemEntities)
-            {
-                if (entity.getType().willEat(item.getEntityItem().getItem()))
-                {
+            for (EntityItem item : nearbyItemEntities) {
+                if (entity.getType().willEat(item.getEntityItem().getItem())) {
                     possibleItemFood.add(item);
                 }
             }
 
-            if (!possibleItemFood.isEmpty())
-            {
-                Collections.sort(possibleItemFood, new Comparator<EntityItem>()
-                {
+            if (!possibleItemFood.isEmpty()) {
+                Collections.sort(possibleItemFood, new Comparator<EntityItem>() {
                     @Override
-                    public int compare(EntityItem o1, EntityItem o2)
-                    {
+                    public int compare(EntityItem o1, EntityItem o2) {
                         return (int) (entity.distanceToEntity(o1) - entity.distanceToEntity(o2));
                     }
                 });
@@ -297,21 +243,14 @@ public abstract class FossilAIWildIndividualBase extends EntityAIBase
                 return;
             }
 
-            if (entity.getType().eatsBlocks())
-            {
-                for (int i = (int) -entity.getType().getMaxAwarenessRadius(); i <= (int) entity.getType().getMaxAwarenessRadius(); i++)
-                {
+            if (entity.getType().eatsBlocks()) {
+                for (int i = (int) -entity.getType().getMaxAwarenessRadius(); i <= (int) entity.getType().getMaxAwarenessRadius(); i++) {
                     int bound = (int) Math.sqrt(Math.pow(entity.getType().getMaxAwarenessRadius(), 2) - Math.pow(i, 2));
-                    for (int k = -bound; k <= bound; k++)
-                    {
-                        for (int j = -4; j <= 4; j++)
-                        {
-                            if (entity.getType().willEat(entity.worldObj.getBlock(i, j, k)))
-                            {
+                    for (int k = -bound; k <= bound; k++) {
+                        for (int j = -4; j <= 4; j++) {
+                            if (entity.getType().willEat(entity.worldObj.getBlock(i, j, k))) {
                                 foodBlocks.add(Vec3.createVectorHelper(i, j, k));
-                            }
-                            else if (waterBlock == null && entity.worldObj.getBlock(i, j, k).getMaterial().equals(Material.water))
-                            {
+                            } else if (waterBlock == null && entity.worldObj.getBlock(i, j, k).getMaterial().equals(Material.water)) {
                                 waterBlock = Vec3.createVectorHelper(i, j, k);
                                 checkedForWater = true;
                             }
@@ -319,13 +258,10 @@ public abstract class FossilAIWildIndividualBase extends EntityAIBase
                     }
                 }
 
-                if (!foodBlocks.isEmpty())
-                {
-                    Collections.sort(foodBlocks, new Comparator<Vec3>()
-                    {
+                if (!foodBlocks.isEmpty()) {
+                    Collections.sort(foodBlocks, new Comparator<Vec3>() {
                         @Override
-                        public int compare(Vec3 o1, Vec3 o2)
-                        {
+                        public int compare(Vec3 o1, Vec3 o2) {
                             return (int) (entity.distanceToLocation(o1) - entity.distanceToLocation(o2));
                         }
                     });
@@ -336,112 +272,82 @@ public abstract class FossilAIWildIndividualBase extends EntityAIBase
                 }
             }
 
-            if (entity.hungerLevel() > 1)
-            {
+            if (entity.hungerLevel() > 1) {
                 task = this.taskWanderFast;
                 setWanderTarget(true);
                 return;
             }
         }
 
-        if (!nearbyPrehistoricEntitiesOfSameSpecies.isEmpty() && entity.getType().isCanFormHerds())
-        {
-            Collections.sort(nearbyPrehistoricEntitiesOfSameSpecies, new Comparator<EntityPrehistoric>()
-            {
+        if (!nearbyPrehistoricEntitiesOfSameSpecies.isEmpty() && entity.getType().isCanFormHerds()) {
+            Collections.sort(nearbyPrehistoricEntitiesOfSameSpecies, new Comparator<EntityPrehistoric>() {
                 @Override
-                public int compare(EntityPrehistoric o1, EntityPrehistoric o2)
-                {
+                public int compare(EntityPrehistoric o1, EntityPrehistoric o2) {
                     return (int) (entity.distanceToEntity(o1) - entity.distanceToEntity(o2));
                 }
             });
-            if (nearbyPrehistoricEntitiesOfSameSpecies.get(0).isInHerd())
-            {
+            if (nearbyPrehistoricEntitiesOfSameSpecies.get(0).isInHerd()) {
                 task = this.taskAskJoinHerd;
-            }
-            else
-            {
+            } else {
                 task = this.taskFormHerd;
             }
             target = nearbyPrehistoricEntitiesOfSameSpecies.get(0);
             return;
         }
 
-        if (!nearbyPlayers.isEmpty())
-        {
-            Collections.sort(nearbyPlayers, new Comparator<EntityPlayer>()
-            {
+        if (!nearbyPlayers.isEmpty()) {
+            Collections.sort(nearbyPlayers, new Comparator<EntityPlayer>() {
                 @Override
-                public int compare(EntityPlayer o1, EntityPlayer o2)
-                {
+                public int compare(EntityPlayer o1, EntityPlayer o2) {
                     return (int) (entity.distanceToEntity(o1) - entity.distanceToEntity(o2));
                 }
             });
-            if (entity.isAdult())
-            {
-                if (entity.getType().attacksPlayersAsAdult())
-                {
+            if (entity.isAdult()) {
+                if (entity.getType().attacksPlayersAsAdult()) {
                     task = this.taskTrackAndAttack;
-                }
-                else
-                {
+                } else {
                     task = this.taskFollow;
                 }
                 target = nearbyPlayers.get(0);
                 return;
-            }
-            else if (entity.isChild())
-            {
+            } else if (entity.isChild()) {
                 task = this.taskAvoid;
                 target = nearbyPlayers.get(0);
                 return;
             }
         }
 
-        if (!checkedForWater)
-        {
-            for (int i = (int) -entity.getType().getMaxAwarenessRadius(); i <= (int) entity.getType().getMaxAwarenessRadius(); i++)
-            {
+        if (!checkedForWater) {
+            for (int i = (int) -entity.getType().getMaxAwarenessRadius(); i <= (int) entity.getType().getMaxAwarenessRadius(); i++) {
                 int bound = (int) Math.sqrt(Math.pow(entity.getType().getMaxAwarenessRadius(), 2) - Math.pow(i, 2));
-                for (int k = -bound; k <= bound; k++)
-                {
-                    for (int j = -4; j <= 4; j++)
-                    {
-                        if (waterBlock == null && entity.worldObj.getBlock(i, j, k).getMaterial().equals(Material.water))
-                        {
+                for (int k = -bound; k <= bound; k++) {
+                    for (int j = -4; j <= 4; j++) {
+                        if (waterBlock == null && entity.worldObj.getBlock(i, j, k).getMaterial().equals(Material.water)) {
                             waterBlock = Vec3.createVectorHelper(i, j, k);
                             checkedForWater = true;
                             break;
                         }
                     }
-                    if (checkedForWater)
-                    {
+                    if (checkedForWater) {
                         break;
                     }
                 }
-                if (checkedForWater)
-                {
+                if (checkedForWater) {
                     break;
                 }
             }
         }
 
-        if (waterBlock == null)
-        {
-            if ((new Random()).nextDouble() >= 0.5)
-            {
+        if (waterBlock == null) {
+            if ((new Random()).nextDouble() >= 0.5) {
                 task = this.taskWanderSlow;
                 setWanderTarget(false);
-            }
-            else
-            {
+            } else {
                 task = this.taskIdle;
             }
-        }
-        else
-        {
+        } else {
             int i = 1;
-            while (!entity.worldObj.getBlock((int) waterBlock.xCoord, (int) waterBlock.yCoord + i, (int) waterBlock.zCoord).getMaterial().equals(Material.air))
-            {
+            while (!entity.worldObj.getBlock((int) waterBlock.xCoord, (int) waterBlock.yCoord + i, (int) waterBlock.zCoord).getMaterial().equals(Material.air)) {
                 i++;
             }
             i--;
@@ -453,37 +359,26 @@ public abstract class FossilAIWildIndividualBase extends EntityAIBase
         }
     }
 
-    public void updateTask()
-    {
+    public void updateTask() {
 
-        if (tickCounter % fleeInterruptTicks == 0 && task != taskFleeNear && task != taskFleeFar)
-        {
+        if (tickCounter % fleeInterruptTicks == 0 && task != taskFleeNear && task != taskFleeFar) {
             int chunkRadius = (int) Math.ceil(entity.getType().getMaxAwarenessRadius() / 16);
 
             possibleFleeTargets.clear();
 
             currentChunk = entity.worldObj.getChunkFromChunkCoords(entity.chunkCoordX, entity.chunkCoordY);
 
-            for (int i = -chunkRadius; i <= chunkRadius; i++)
-            {
-                for (int j = -chunkRadius; j <= chunkRadius; j++)
-                {
+            for (int i = -chunkRadius; i <= chunkRadius; i++) {
+                for (int j = -chunkRadius; j <= chunkRadius; j++) {
                     tempChunk = entity.worldObj.getChunkFromChunkCoords(currentChunk.xPosition + i, currentChunk.zPosition + j);
-                    for (int k = (int) ((entity.posY - 4) / 16); k < (int) ((entity.posY + 4) / 16) && k >= 0 && k < tempChunk.entityLists.length; k++)
-                    {
-                        for (Object tempEntity : tempChunk.entityLists[k])
-                        {
-                            if (tempEntity.getClass().isAssignableFrom(EntityPrehistoric.class) && entity.getType().shouldRunFromEntity((EntityPrehistoric) tempEntity))
-                            {
-                                if (entity.canFindEntity((Entity) tempEntity))
-                                {
+                    for (int k = (int) ((entity.posY - 4) / 16); k < (int) ((entity.posY + 4) / 16) && k >= 0 && k < tempChunk.entityLists.length; k++) {
+                        for (Object tempEntity : tempChunk.entityLists[k]) {
+                            if (tempEntity.getClass().isAssignableFrom(EntityPrehistoric.class) && entity.getType().shouldRunFromEntity((EntityPrehistoric) tempEntity)) {
+                                if (entity.canFindEntity((Entity) tempEntity)) {
                                     possibleFleeTargets.add((EntityPrehistoric) tempEntity);
                                 }
-                            }
-                            else if (entity.isChild() && tempEntity.getClass().isAssignableFrom(EntityPlayer.class))
-                            {
-                                if (entity.canFindEntity((Entity) tempEntity))
-                                {
+                            } else if (entity.isChild() && tempEntity.getClass().isAssignableFrom(EntityPlayer.class)) {
+                                if (entity.canFindEntity((Entity) tempEntity)) {
                                     possibleFleeTargetPlayers.add((EntityPlayer) tempEntity);
                                 }
                             }
@@ -491,18 +386,14 @@ public abstract class FossilAIWildIndividualBase extends EntityAIBase
                     }
                 }
             }
-            if (!possibleFleeTargets.isEmpty())
-            {
-                Collections.sort(possibleFleeTargets, new Comparator<EntityPrehistoric>()
-                {
+            if (!possibleFleeTargets.isEmpty()) {
+                Collections.sort(possibleFleeTargets, new Comparator<EntityPrehistoric>() {
                     @Override
-                    public int compare(EntityPrehistoric o1, EntityPrehistoric o2)
-                    {
+                    public int compare(EntityPrehistoric o1, EntityPrehistoric o2) {
                         return (int) (o1.getStrength() - o2.getStrength());
                     }
                 });
-                switch (entity.distanceStatus(possibleFleeTargets.get(0)))
-                {
+                switch (entity.distanceStatus(possibleFleeTargets.get(0))) {
                     case 1:
                         task = this.taskFleeFar;
                         break;
@@ -511,19 +402,14 @@ public abstract class FossilAIWildIndividualBase extends EntityAIBase
                         break;
                 }
                 target = possibleFleeTargets.get(0);
-            }
-            else if (!possibleFleeTargetPlayers.isEmpty())
-            {
-                Collections.sort(possibleFleeTargetPlayers, new Comparator<EntityPlayer>()
-                {
+            } else if (!possibleFleeTargetPlayers.isEmpty()) {
+                Collections.sort(possibleFleeTargetPlayers, new Comparator<EntityPlayer>() {
                     @Override
-                    public int compare(EntityPlayer arg0, EntityPlayer arg1)
-                    {
+                    public int compare(EntityPlayer arg0, EntityPlayer arg1) {
                         return (int) (entity.distanceToEntity(arg0) - entity.distanceToEntity(arg1));
                     }
                 });
-                switch (entity.distanceStatus(possibleFleeTargetPlayers.get(0)))
-                {
+                switch (entity.distanceStatus(possibleFleeTargetPlayers.get(0))) {
                     case 1:
                         task = this.taskFleeFar;
                         break;
@@ -535,8 +421,7 @@ public abstract class FossilAIWildIndividualBase extends EntityAIBase
             }
         }
         tickCounter++;
-        switch (task)
-        {
+        switch (task) {
             case taskFleeNear:
                 fleeFromEntity((Entity) target, true);
                 break;
@@ -582,8 +467,7 @@ public abstract class FossilAIWildIndividualBase extends EntityAIBase
         }
     }
 
-    private void taskDone()
-    {
+    private void taskDone() {
         taskDone = true;
     }
 

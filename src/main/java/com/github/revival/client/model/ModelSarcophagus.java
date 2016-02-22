@@ -7,8 +7,7 @@ import net.minecraft.client.model.ModelRenderer;
  * sarcophagus.tcn - TechneToTabulaImporter
  * Created using Tabula 4.1.1
  */
-public class ModelSarcophagus extends ModelBase
-{
+public class ModelSarcophagus extends ModelBase {
     public ModelRenderer BottomBack;
     public ModelRenderer Shape10;
     public ModelRenderer Shape9;
@@ -56,8 +55,7 @@ public class ModelSarcophagus extends ModelBase
     public ModelRenderer leftTusk;
     public ModelRenderer RightTusk;
 
-    public ModelSarcophagus()
-    {
+    public ModelSarcophagus() {
         this.textureWidth = 128;
         this.textureHeight = 128;
         this.Shape3 = new ModelRenderer(this, 57, 55);
@@ -264,9 +262,8 @@ public class ModelSarcophagus extends ModelBase
         this.doorMain.addChild(this.Ear1);
     }
 
-    
-    public void renderBlock(float f5)
-    {
+
+    public void renderBlock(float f5) {
         this.Shape3.render(f5);
         this.Shape8.render(f5);
         this.hinge.render(f5);
@@ -290,8 +287,7 @@ public class ModelSarcophagus extends ModelBase
     /**
      * This is a helper function from Tabula to set the rotation of model parts
      */
-    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z)
-    {
+    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
         modelRenderer.rotateAngleX = x;
         modelRenderer.rotateAngleY = y;
         modelRenderer.rotateAngleZ = z;

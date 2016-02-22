@@ -7,8 +7,7 @@ import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public class FPZAIFollowOwner extends EntityAIBase
-{
+public class FPZAIFollowOwner extends EntityAIBase {
     World theWorld;
     float maxDist;
     float minDist;
@@ -19,8 +18,7 @@ public class FPZAIFollowOwner extends EntityAIBase
     private int field_48310_h;
     private boolean field_48311_i;
 
-    public FPZAIFollowOwner(EntityFriendlyPigZombie var1, float var2, float var3, float var4)
-    {
+    public FPZAIFollowOwner(EntityFriendlyPigZombie var1, float var2, float var3, float var4) {
         this.thePet = var1;
         this.theWorld = var1.worldObj;
         this.field_48303_f = var2;
@@ -33,20 +31,14 @@ public class FPZAIFollowOwner extends EntityAIBase
     /**
      * Returns whether the EntityAIBase should begin execution.
      */
-    public boolean shouldExecute()
-    {
+    public boolean shouldExecute() {
         EntityLivingBase var1 = this.thePet.func_130012_q();
 
-        if (var1 == null)
-        {
+        if (var1 == null) {
             return false;
-        }
-        else if (this.thePet.getDistanceSqToEntity(var1) < (double) (this.minDist * this.minDist))
-        {
+        } else if (this.thePet.getDistanceSqToEntity(var1) < (double) (this.minDist * this.minDist)) {
             return false;
-        }
-        else
-        {
+        } else {
             this.theOwner = var1;
             return true;
         }
@@ -55,16 +47,14 @@ public class FPZAIFollowOwner extends EntityAIBase
     /**
      * Returns whether an in-progress EntityAIBase should continue executing
      */
-    public boolean continueExecuting()
-    {
+    public boolean continueExecuting() {
         return !this.petPathfinder.noPath() && this.thePet.getDistanceSqToEntity(this.theOwner) > (double) (this.maxDist * this.maxDist);
     }
 
     /**
      * Execute a one shot task or start executing a continuous task
      */
-    public void startExecuting()
-    {
+    public void startExecuting() {
         this.field_48310_h = 0;
         this.field_48311_i = this.thePet.getNavigator().getAvoidsWater();
         this.thePet.getNavigator().setAvoidsWater(false);
@@ -73,8 +63,7 @@ public class FPZAIFollowOwner extends EntityAIBase
     /**
      * Resets the task
      */
-    public void resetTask()
-    {
+    public void resetTask() {
         this.theOwner = null;
         this.petPathfinder.clearPathEntity();
         this.thePet.getNavigator().setAvoidsWater(this.field_48311_i);
@@ -83,26 +72,20 @@ public class FPZAIFollowOwner extends EntityAIBase
     /**
      * Updates the task
      */
-    public void updateTask()
-    {
+    public void updateTask() {
         this.thePet.getLookHelper().setLookPositionWithEntity(this.theOwner, 10.0F, (float) this.thePet.getVerticalFaceSpeed());
 
-        if (--this.field_48310_h <= 0)
-        {
+        if (--this.field_48310_h <= 0) {
             this.field_48310_h = 10;
 
-            if (!this.petPathfinder.tryMoveToEntityLiving(this.theOwner, this.field_48303_f) && this.thePet.getDistanceSqToEntity(this.theOwner) >= 144.0D)
-            {
+            if (!this.petPathfinder.tryMoveToEntityLiving(this.theOwner, this.field_48303_f) && this.thePet.getDistanceSqToEntity(this.theOwner) >= 144.0D) {
                 int var1 = MathHelper.floor_double(this.theOwner.posX) - 2;
                 int var2 = MathHelper.floor_double(this.theOwner.posZ) - 2;
                 int var3 = MathHelper.floor_double(this.theOwner.boundingBox.minY);
 
-                for (int var4 = 0; var4 <= 4; ++var4)
-                {
-                    for (int var5 = 0; var5 <= 4; ++var5)
-                    {
-                        if ((var4 < 1 || var5 < 1 || var4 > 3 || var5 > 3) && World.doesBlockHaveSolidTopSurface(this.theWorld, var1 + var4, var3 - 1, var2 + var5) && !this.theWorld.getBlock(var1 + var4, var3, var2 + var5).isNormalCube() && !this.theWorld.getBlock(var1 + var4, var3 + 1, var2 + var5).isNormalCube())
-                        {
+                for (int var4 = 0; var4 <= 4; ++var4) {
+                    for (int var5 = 0; var5 <= 4; ++var5) {
+                        if ((var4 < 1 || var5 < 1 || var4 > 3 || var5 > 3) && World.doesBlockHaveSolidTopSurface(this.theWorld, var1 + var4, var3 - 1, var2 + var5) && !this.theWorld.getBlock(var1 + var4, var3, var2 + var5).isNormalCube() && !this.theWorld.getBlock(var1 + var4, var3 + 1, var2 + var5).isNormalCube()) {
                             this.thePet.setLocationAndAngles((double) ((float) (var1 + var4) + 0.5F), (double) var3, (double) ((float) (var2 + var5) + 0.5F), this.thePet.rotationYaw, this.thePet.rotationPitch);
                             this.petPathfinder.clearPathEntity();
                             return;

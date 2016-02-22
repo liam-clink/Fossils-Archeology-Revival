@@ -7,22 +7,18 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
 import org.lwjgl.opengl.GL11;
 
-public class ItemAncientClocRender implements IItemRenderer
-{
+public class ItemAncientClocRender implements IItemRenderer {
 
     protected ModelTNClock model;
     protected ResourceLocation texture = new ResourceLocation("fossil:textures/blocks/TNClock.png");
 
-    public ItemAncientClocRender()
-    {
+    public ItemAncientClocRender() {
         model = new ModelTNClock();
     }
 
     @Override
-    public boolean handleRenderType(ItemStack item, ItemRenderType type)
-    {
-        switch (type)
-        {
+    public boolean handleRenderType(ItemStack item, ItemRenderType type) {
+        switch (type) {
             case EQUIPPED:
                 return true;
             case EQUIPPED_FIRST_PERSON:
@@ -39,20 +35,16 @@ public class ItemAncientClocRender implements IItemRenderer
 
     @Override
     public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item,
-                                         ItemRendererHelper helper)
-    {
+                                         ItemRendererHelper helper) {
         return false;
     }
 
     @Override
-    public void renderItem(ItemRenderType type, ItemStack item, Object... data)
-    {
+    public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
         float rot = (float) (720.0 * (System.currentTimeMillis() & 0x3FFFL) / 0x3FFFL);
 
-        switch (type)
-        {
-            case EQUIPPED:
-            {
+        switch (type) {
+            case EQUIPPED: {
                 GL11.glPushMatrix();
                 float scale = 1.8F;
                 GL11.glTranslatef(-0.4F, 1.9F, 0.3F);
@@ -67,8 +59,7 @@ public class ItemAncientClocRender implements IItemRenderer
                 GL11.glPopMatrix();
                 break;
             }
-            case EQUIPPED_FIRST_PERSON:
-            {
+            case EQUIPPED_FIRST_PERSON: {
                 GL11.glPushMatrix();
                 float scale = 70F;
                 GL11.glScalef(scale, scale, scale);
@@ -84,8 +75,7 @@ public class ItemAncientClocRender implements IItemRenderer
                 break;
 
             }
-            case INVENTORY:
-            {
+            case INVENTORY: {
                 GL11.glPushMatrix();
                 float scale = 20F;
                 GL11.glScalef(scale, scale, scale);
@@ -101,8 +91,7 @@ public class ItemAncientClocRender implements IItemRenderer
                 GL11.glPopMatrix();
                 break;
             }
-            case ENTITY:
-            {
+            case ENTITY: {
                 GL11.glPushMatrix();
                 float scale = 1.3F;
                 GL11.glRotatef(rot, 0, 1, 0);

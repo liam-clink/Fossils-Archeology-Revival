@@ -533,6 +533,7 @@ tile.plant_welwitschia.name=Welwitschia
 tile.plant_horsetail_small.name=Horsetail
 tile.plant_horsetail_large.name=Tall Horsetail
 tile.plant_mutant.name=Failure Plant
+tile.plant_tempskya.name=Tempskya
 
 #Dinosaur related chat messages
 dnaName.head=DNA of 
@@ -698,3 +699,10 @@ item.record_bones.name=Fossil Record
 item.record_bones_disc.name=Fossil Record
 item.record.record_bones_disc.desc=WhiteJoshMan - Bones
 item.record.music.anu.desc=Nanotyrano - Awakening
+
+#4f wants new stuff at bottom
+anu.breakblock=You cannot break this block until its guardian has been destroyed.
+entity.fossil.TarSlime.name=Tar Slime
+item.tardrop.name=Tar Drop
+item.tarfossil.name=Tar Fossil
+item.tar_bucket.name=Tar Bucket

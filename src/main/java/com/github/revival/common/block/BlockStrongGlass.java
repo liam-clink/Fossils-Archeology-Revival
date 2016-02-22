@@ -10,8 +10,7 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 
-public class BlockStrongGlass extends Block
-{
+public class BlockStrongGlass extends Block {
 
     public IIcon[] textures = new IIcon[47];
 
@@ -28,8 +27,7 @@ public class BlockStrongGlass extends Block
             41, 29, 29, 39, 33, 4, 4, 5, 5, 4, 4, 5, 5, 9, 9, 30, 12, 9, 9, 30, 12, 7, 7, 24,
             24, 7, 7, 10, 10, 8, 8, 36, 35, 8, 8, 34, 11};
 
-    public BlockStrongGlass(Material material)
-    {
+    public BlockStrongGlass(Material material) {
         super(material);
         this.setLightOpacity(1);
         this.setBlockName("strongGlass");
@@ -39,50 +37,41 @@ public class BlockStrongGlass extends Block
     }
 
     @Override
-    public int getRenderBlockPass()
-    {
+    public int getRenderBlockPass() {
         return 0;
     }
 
-    public boolean shouldSideBeRendered(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
-    {
+    public boolean shouldSideBeRendered(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5) {
         Block i1 = par1IBlockAccess.getBlock(par2, par3, par4);
         return i1 == this ? false : super.shouldSideBeRendered(par1IBlockAccess, par2, par3, par4, par5);
     }
 
-    public boolean isOpaqueCube()
-    {
+    public boolean isOpaqueCube() {
         return false;
     }
 
-    public boolean renderAsNormalBlock()
-    {
+    public boolean renderAsNormalBlock() {
         return false;
     }
 
     @SideOnly(Side.CLIENT)
-    public void registerBlockIcons(IIconRegister iconRegistry)
-    {
-        for (int i = 0; i < 47; i++)
-        {
-            textures[i] = iconRegistry.registerIcon(Revival.modid + ":" + "strongGlass/Reinforced_Glass" + "_" + (i + 1));
+    public void registerBlockIcons(IIconRegister iconRegistry) {
+        for (int i = 0; i < 47; i++) {
+            textures[i] = iconRegistry.registerIcon(Revival.MODID + ":" + "strongGlass/Reinforced_Glass" + "_" + (i + 1));
         }
     }
 
     @Override
-    public IIcon getIcon(int side, int meta)
-    {
+    public IIcon getIcon(int side, int meta) {
 
         return textures[0];
 
     }
 
-    public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side)
-    {
+    public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
         boolean[] bitMatrix = new boolean[8];
 
-        if (side == 0 || side == 1)
-        {
+        if (side == 0 || side == 1) {
             bitMatrix[0] = world.getBlock(x - 1, y, z - 1) == this;
             bitMatrix[1] = world.getBlock(x, y, z - 1) == this;
             bitMatrix[2] = world.getBlock(x + 1, y, z - 1) == this;
@@ -92,8 +81,7 @@ public class BlockStrongGlass extends Block
             bitMatrix[6] = world.getBlock(x, y, z + 1) == this;
             bitMatrix[7] = world.getBlock(x + 1, y, z + 1) == this;
         }
-        if (side == 2 || side == 3)
-        {
+        if (side == 2 || side == 3) {
             bitMatrix[0] = world.getBlock(x + (side == 2 ? 1 : -1), y + 1, z) == this;
             bitMatrix[1] = world.getBlock(x, y + 1, z) == this;
             bitMatrix[2] = world.getBlock(x + (side == 3 ? 1 : -1), y + 1, z) == this;
@@ -103,8 +91,7 @@ public class BlockStrongGlass extends Block
             bitMatrix[6] = world.getBlock(x, y - 1, z) == this;
             bitMatrix[7] = world.getBlock(x + (side == 3 ? 1 : -1), y - 1, z) == this;
         }
-        if (side == 4 || side == 5)
-        {
+        if (side == 4 || side == 5) {
             bitMatrix[0] = world.getBlock(x, y + 1, z + (side == 5 ? 1 : -1)) == this;
             bitMatrix[1] = world.getBlock(x, y + 1, z) == this;
             bitMatrix[2] = world.getBlock(x, y + 1, z + (side == 4 ? 1 : -1)) == this;

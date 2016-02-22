@@ -7,21 +7,17 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
-public class TabFTools extends CreativeTabs
-{
-    public TabFTools(String par2Str)
-    {
+public class TabFTools extends CreativeTabs {
+    public TabFTools(String par2Str) {
         super(par2Str);
     }
 
     @SideOnly(Side.CLIENT)
-    public Item getTabIconItem()
-    {
+    public Item getTabIconItem() {
         return FAItemRegistry.gemHoe;
     }
 
-    public String getTranslatedTabLabel()
-    {
+    public String getTranslatedTabLabel() {
         return LocalizationStrings.FTOOLS_NAME;
     }
 }

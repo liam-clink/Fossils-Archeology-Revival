@@ -1,7 +1,6 @@
 package com.github.revival.common.enums;
 
-public enum EnumPigBossSpeaks
-{
+public enum EnumPigBossSpeaks {
     Hello,
     BareHand,
     Draw,

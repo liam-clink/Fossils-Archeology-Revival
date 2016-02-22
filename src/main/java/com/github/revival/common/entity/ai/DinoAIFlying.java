@@ -7,8 +7,7 @@ import net.minecraft.util.Vec3;
 
 import java.util.Random;
 
-public class DinoAIFlying extends EntityAIBase
-{
+public class DinoAIFlying extends EntityAIBase {
 
     public static eFlyingState currentState = eFlyingState.FS_ON_GROUND;
 
@@ -22,41 +21,34 @@ public class DinoAIFlying extends EntityAIBase
     private Vec3 wanderDestination = null;
     private float MOTION_VECTOR_SCALE = 100.0f;
     private float SPEED_IN_AIR = 0.1f;
-    public DinoAIFlying(EntityDinosaur Dinosaur)
-    {
+
+    public DinoAIFlying(EntityDinosaur Dinosaur) {
         dino = Dinosaur;
         this.setMutexBits(5);
     }
 
     @Override
-    public boolean shouldExecute()
-    {
-        if (dino.IsHungry())
-        {
+    public boolean shouldExecute() {
+        if (dino.IsHungry()) {
             return false;
         }
-        if (!dino.isAdult())
-        {
+        if (!dino.isAdult()) {
             return false;
         }
-        if (dino.getOrderType().equals(dino.OrderStatus.Stay))
-        {
+        if (dino.getOrderType().equals(dino.OrderStatus.Stay)) {
             return false;
         }
         return true;
     }
 
     @Override
-    public void startExecuting()
-    {
+    public void startExecuting() {
         duringFlight();
     }
 
     @Override
-    public boolean continueExecuting()
-    {
-        if (dino.IsHungry())
-        {
+    public boolean continueExecuting() {
+        if (dino.IsHungry()) {
             landFlight();
             return false;
         }
@@ -64,10 +56,8 @@ public class DinoAIFlying extends EntityAIBase
     }
 
     @Override
-    public void updateTask()
-    {
-        switch (currentState)
-        {
+    public void updateTask() {
+        switch (currentState) {
             case FS_ASCENDING:
                 ascendFlight();
                 break;
@@ -89,33 +79,27 @@ public class DinoAIFlying extends EntityAIBase
         }
     }
 
-    public void duringFlight()
-    {
+    public void duringFlight() {
         positionChecker();
     }
 
-    public void descendFlight()
-    {
+    public void descendFlight() {
 
     }
 
-    public void ascendFlight()
-    {
+    public void ascendFlight() {
 
     }
 
-    public void landFlight()
-    {
+    public void landFlight() {
 
     }
 
-    public void onGround()
-    {
+    public void onGround() {
 
     }
 
-    public void positionChecker()
-    {
+    public void positionChecker() {
         Random rand = new Random();
 
         motionVector.xCoord = dino.motionX * MOTION_VECTOR_SCALE;
@@ -125,20 +109,17 @@ public class DinoAIFlying extends EntityAIBase
         wanderDestination = RandomPositionGenerator
                 .findRandomTargetBlockTowards(this.dino, 5, 10,
                         motionVector);
-        if (wanderDestination == null)
-        {
+        if (wanderDestination == null) {
             return;
         }
 
         if (dino.worldObj.getHeightValue((int) wanderDestination.xCoord,
-                (int) wanderDestination.zCoord) + 1 > wanderDestination.yCoord)
-        {
+                (int) wanderDestination.zCoord) + 1 > wanderDestination.yCoord) {
             wanderDestination.yCoord = +3;
         }
     }
 
-    public enum eFlyingState
-    {
+    public enum eFlyingState {
         FS_ON_GROUND, FS_IN_AIR, FS_ASCENDING, FS_DESCENDING
     }
 }

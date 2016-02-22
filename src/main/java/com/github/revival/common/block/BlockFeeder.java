@@ -25,8 +25,7 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class BlockFeeder extends BlockContainer
-{
+public class BlockFeeder extends BlockContainer {
     private static final int NO_BIT = 0;
     private static final int HERB_BIT = 4;
     private static final int CARN_BIT = 8;
@@ -43,24 +42,19 @@ public class BlockFeeder extends BlockContainer
     private IIcon Front4;
     private IIcon Bottom;
 
-    public BlockFeeder(boolean isActive)
-    {
+    public BlockFeeder(boolean isActive) {
         super(Material.iron);
         setHardness(3.5F);
         setStepSound(Block.soundTypeStone);
-        if (isActive)
-        {
+        if (isActive) {
             setBlockName(LocalizationStrings.FEEDER_ACTIVE_NAME);
-        }
-        else
-        {
+        } else {
             setBlockName(LocalizationStrings.FEEDER_ACTIVE_NAME);
             setCreativeTab(FATabRegistry.tabFBlocks);
         }
     }
 
-    public static void updateFurnaceBlockState(boolean herb, boolean carn, World world, int x, int y, int z)
-    {
+    public static void updateFurnaceBlockState(boolean herb, boolean carn, World world, int x, int y, int z) {
         int meta = world.getBlockMetadata(x, y, z);
         TileEntity tileentity = world.getTileEntity(x, y, z);
 
@@ -79,16 +73,14 @@ public class BlockFeeder extends BlockContainer
 
         world.setBlockMetadataWithNotify(x, y, z, meta, 2);
 
-        if (tileentity != null)
-        {
+        if (tileentity != null) {
             tileentity.validate();
             world.setTileEntity(x, y, z, tileentity);
         }
     }
 
     @SideOnly(Side.CLIENT)
-    public Item getItem(World world, int x, int y, int z)
-    {
+    public Item getItem(World world, int x, int y, int z) {
         return null;//Item.getItemFromBlock(FABlockRegistry.feederActive);
     }
 
@@ -96,32 +88,27 @@ public class BlockFeeder extends BlockContainer
      * Returns the ID of the items to drop on destruction.
      */
     @Override
-    public Item getItemDropped(int var1, Random var2, int var3)
-    {
+    public Item getItemDropped(int var1, Random var2, int var3) {
         return null;//Item.getItemFromBlock(FABlockRegistry.feederActive);
     }
 
     /**
      * Called whenever the block is added into the world. Args: world, x, y, z
      */
-    public void onBlockAdded(World world, int x, int y, int z)
-    {
+    public void onBlockAdded(World world, int x, int y, int z) {
         super.onBlockAdded(world, x, y, z);
         this.setDefaultDirection(world, x, y, z);
     }
 
-    public int getRenderType()
-    {
+    public int getRenderType() {
         return Revival.feederRenderID;
     }
 
     /**
      * set a blocks direction
      */
-    private void setDefaultDirection(World world, int x, int y, int z)
-    {
-        if (!world.isRemote)
-        {
+    private void setDefaultDirection(World world, int x, int y, int z) {
+        if (!world.isRemote) {
             Block block = world.getBlock(x, y, z - 1);
             Block block1 = world.getBlock(x, y, z + 1);
             Block block2 = world.getBlock(x - 1, y, z);
@@ -129,23 +116,19 @@ public class BlockFeeder extends BlockContainer
 
             byte b0 = 3;
 
-            if (block.func_149730_j() && !block1.func_149730_j())
-            {
+            if (block.func_149730_j() && !block1.func_149730_j()) {
                 b0 = 3;
             }
 
-            if (block1.func_149730_j() && !block.func_149730_j())
-            {
+            if (block1.func_149730_j() && !block.func_149730_j()) {
                 b0 = 2;
             }
 
-            if (block2.func_149730_j() && !block3.func_149730_j())
-            {
+            if (block2.func_149730_j() && !block3.func_149730_j()) {
                 b0 = 5;
             }
 
-            if (block3.func_149730_j() && !block2.func_149730_j())
-            {
+            if (block3.func_149730_j() && !block2.func_149730_j()) {
                 b0 = 4;
             }
 
@@ -159,8 +142,7 @@ public class BlockFeeder extends BlockContainer
      * register icons.
      */
     @SideOnly(Side.CLIENT)
-    public void registerBlockIcons(IIconRegister par1IconRegister)
-    {
+    public void registerBlockIcons(IIconRegister par1IconRegister) {
         this.blockIcon = par1IconRegister.registerIcon("fossil:Feeder_Sides");
         this.Bottom = par1IconRegister.registerIcon("fossil:Feeder_Bottom");
         this.Top1 = par1IconRegister.registerIcon("fossil:Feeder_Top1");
@@ -177,22 +159,14 @@ public class BlockFeeder extends BlockContainer
      * From the specified side and block metadata retrieves the blocks texture.
      * Args: side, metadata
      */
-    public IIcon getIcon(int side, int meta)
-    {
-        if (side == 0)
-        {
+    public IIcon getIcon(int side, int meta) {
+        if (side == 0) {
             return this.Bottom;
-        }
-        else if (side != 1 && ((meta & DIRECTION_BITS) + 2) != side)
-        {
+        } else if (side != 1 && ((meta & DIRECTION_BITS) + 2) != side) {
             return this.blockIcon;
-        }
-        else
-        {
-            if (side == 1)
-            {
-                switch (meta & BOTH_BITS)
-                {
+        } else {
+            if (side == 1) {
+                switch (meta & BOTH_BITS) {
                     case NO_BIT:
                         return this.Top1;// no food
 
@@ -205,11 +179,9 @@ public class BlockFeeder extends BlockContainer
                     case BOTH_BITS:
                         return this.Top4;// both
                 }
-            }
-            else// Front
+            } else// Front
             {
-                switch (meta & BOTH_BITS)
-                {
+                switch (meta & BOTH_BITS) {
                     case NO_BIT:
                         return this.Front1;// no food
 
@@ -232,19 +204,14 @@ public class BlockFeeder extends BlockContainer
      * Called upon block activation (right click on the block.)
      */
     public boolean onBlockActivated(World world, int x, int y, int z,
-                                    EntityPlayer player, int var6, float var7, float var8, float var9)
-    {
-        if (world.isRemote)
-        {
+                                    EntityPlayer player, int var6, float var7, float var8, float var9) {
+        if (world.isRemote) {
             return true;
-        }
-        else
-        {
+        } else {
             TileEntityFeeder tileentity = (TileEntityFeeder) world
                     .getTileEntity(x, y, z);
 
-            if (tileentity != null)
-            {
+            if (tileentity != null) {
                 player.openGui(Revival.instance, 2, world, x, y, z);
             }
 
@@ -256,8 +223,7 @@ public class BlockFeeder extends BlockContainer
      * Returns a new instance of a block's tile entity class. Called on placing
      * the block.
      */
-    public TileEntity createNewTileEntity(World world, int par2)
-    {
+    public TileEntity createNewTileEntity(World world, int par2) {
         return new TileEntityFeeder();
     }
 
@@ -265,33 +231,27 @@ public class BlockFeeder extends BlockContainer
      * Called when the block is placed in the world.
      */
     public void onBlockPlacedBy(World world, int x, int y, int z,
-                                EntityLivingBase entityLivingBase, ItemStack itemstack)
-    {
+                                EntityLivingBase entityLivingBase, ItemStack itemstack) {
         int entityDirection = MathHelper
                 .floor_double((double) (entityLivingBase.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
 
-        if (entityDirection == 0)
-        {
+        if (entityDirection == 0) {
             world.setBlockMetadataWithNotify(x, y, z, 0, 2);
         }
 
-        if (entityDirection == 1)
-        {
+        if (entityDirection == 1) {
             world.setBlockMetadataWithNotify(x, y, z, 3, 2);
         }
 
-        if (entityDirection == 2)
-        {
+        if (entityDirection == 2) {
             world.setBlockMetadataWithNotify(x, y, z, 1, 2);
         }
 
-        if (entityDirection == 3)
-        {
+        if (entityDirection == 3) {
             world.setBlockMetadataWithNotify(x, y, z, 2, 2);
         }
 
-        if (itemstack.hasDisplayName())
-        {
+        if (itemstack.hasDisplayName()) {
             ((TileEntityFeeder) world.getTileEntity(x, y, z))
                     .setGuiDisplayName(itemstack.getDisplayName());
         }
@@ -302,29 +262,23 @@ public class BlockFeeder extends BlockContainer
      * update, as appropriate
      */
     public void breakBlock(World world, int x, int y, int z, Block block,
-                           int var6)
-    {
+                           int var6) {
         TileEntityFeeder tileentity = (TileEntityFeeder) world.getTileEntity(x,
                 y, z);
 
-        if (tileentity != null)
-        {
-            for (int i = 0; i < tileentity.getSizeInventory(); ++i)
-            {
+        if (tileentity != null) {
+            for (int i = 0; i < tileentity.getSizeInventory(); ++i) {
                 ItemStack itemstack = tileentity.getStackInSlot(i);
 
-                if (itemstack != null)
-                {
+                if (itemstack != null) {
                     float xOffset = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
                     float yOffset = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
                     float zOffset = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
 
-                    while (itemstack.stackSize > 0)
-                    {
+                    while (itemstack.stackSize > 0) {
                         int rand = this.furnaceRand.nextInt(21) + 10;
 
-                        if (rand > itemstack.stackSize)
-                        {
+                        if (rand > itemstack.stackSize) {
                             rand = itemstack.stackSize;
                         }
 
@@ -336,8 +290,7 @@ public class BlockFeeder extends BlockContainer
                                 itemstack.getItem(), rand,
                                 itemstack.getItemDamage()));
 
-                        if (itemstack.hasTagCompound())
-                        {
+                        if (itemstack.hasTagCompound()) {
                             entityItem.getEntityItem().setTagCompound(
                                     (NBTTagCompound) itemstack.getTagCompound()
                                             .copy());
@@ -363,8 +316,7 @@ public class BlockFeeder extends BlockContainer
      * use the value from getComparatorInputOverride instead of the actual
      * redstone signal strength.
      */
-    public boolean hasComparatorInputOverride()
-    {
+    public boolean hasComparatorInputOverride() {
         return true;
     }
 
@@ -374,8 +326,7 @@ public class BlockFeeder extends BlockContainer
      * comparator.
      */
     public int getComparatorInputOverride(World par1World, int par2, int par3,
-                                          int par4, int par5)
-    {
+                                          int par4, int par5) {
         return Container.calcRedstoneFromInventory((IInventory) par1World
                 .getTileEntity(par2, par3, par4));
     }

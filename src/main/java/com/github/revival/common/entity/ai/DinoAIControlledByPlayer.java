@@ -7,8 +7,7 @@ import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
-public class DinoAIControlledByPlayer extends EntityAIBase
-{
+public class DinoAIControlledByPlayer extends EntityAIBase {
     private final EntityDinosaur motionTarget;
     public int FollowTimeWithoutWhip = 90;
     //private final float maxSpeed;
@@ -39,8 +38,7 @@ public class DinoAIControlledByPlayer extends EntityAIBase
     /**
      * Execute a one shot task or start executing a continuous task
      */
-    public void startExecuting()
-    {
+    public void startExecuting() {
         this.currentSpeed = 0.0F;
         this.lastTimeSeenWhip = -1;
     }
@@ -48,8 +46,7 @@ public class DinoAIControlledByPlayer extends EntityAIBase
     /**
      * Resets the task
      */
-    public void resetTask()
-    {
+    public void resetTask() {
         this.speedBoosted = false;
         this.currentSpeed = 0.0F;
         this.lastTimeSeenWhip = -1;
@@ -58,16 +55,13 @@ public class DinoAIControlledByPlayer extends EntityAIBase
     /**
      * Returns whether the EntityAIBase should begin execution.
      */
-    public boolean shouldExecute()
-    {
+    public boolean shouldExecute() {
         /*System.out.println(String.valueOf(this.speedBoosted));
         if(this.motionTarget.riddenByEntity != null)
         	System.out.println(String.valueOf(this.motionTarget.canBeSteered()));
         System.out.println("LastWhip "+String.valueOf(this.lastTimeSeenWhip));*/
-        if (this.motionTarget.isEntityAlive() && this.motionTarget.riddenByEntity != null && this.motionTarget.riddenByEntity instanceof EntityPlayer)
-        {
-            if (/*this.lastTimeSeenWhip==FollowTimeWithoutWhip &&*/ this.motionTarget.canBeSteered())
-            {
+        if (this.motionTarget.isEntityAlive() && this.motionTarget.riddenByEntity != null && this.motionTarget.riddenByEntity instanceof EntityPlayer) {
+            if (/*this.lastTimeSeenWhip==FollowTimeWithoutWhip &&*/ this.motionTarget.canBeSteered()) {
                 this.lastTimeSeenWhip = 0;
                 EntityPlayer P = (EntityPlayer) this.motionTarget.riddenByEntity;
                 /* Handle whip damage in whip class so it doesn't constantly drain while riding.
@@ -80,8 +74,7 @@ public class DinoAIControlledByPlayer extends EntityAIBase
                 */
             }
 
-            if (!this.motionTarget.canBeSteered() && this.lastTimeSeenWhip < FollowTimeWithoutWhip && this.lastTimeSeenWhip != -1)
-            {
+            if (!this.motionTarget.canBeSteered() && this.lastTimeSeenWhip < FollowTimeWithoutWhip && this.lastTimeSeenWhip != -1) {
                 this.lastTimeSeenWhip++;
             }
 
@@ -94,15 +87,12 @@ public class DinoAIControlledByPlayer extends EntityAIBase
     /**
      * Updates the task
      */
-    public void updateTask()
-    {
+    public void updateTask() {
         this.motionTarget.decreaseHungerTick();
 
         //System.out.println(String.valueOf(this.motionTarget.ticksExisted%100));
-        if (this.speedBoosted)
-        {
-            if (this.speedBoostTime++ > this.maxSpeedBoostTime)
-            {
+        if (this.speedBoosted) {
+            if (this.speedBoostTime++ > this.maxSpeedBoostTime) {
                 this.speedBoosted = false;
                 this.speedBoostTime = 0;
             }
@@ -111,13 +101,11 @@ public class DinoAIControlledByPlayer extends EntityAIBase
         //currentSpeed=this.motionTarget.HandleRiding(currentSpeed,(float)speedBoostTime/(float)maxSpeedBoostTime);
         EntityPlayer P = (EntityPlayer) this.motionTarget.riddenByEntity;
 
-        if (!P.capabilities.isCreativeMode && this.currentSpeed >= this.motionTarget.getAIMoveSpeed() * 0.5F && this.motionTarget.getRNG().nextFloat() < 0.006F && !this.speedBoosted)
-        {
+        if (!P.capabilities.isCreativeMode && this.currentSpeed >= this.motionTarget.getAIMoveSpeed() * 0.5F && this.motionTarget.getRNG().nextFloat() < 0.006F && !this.speedBoosted) {
             //decrease the whips uses left
             ItemStack I = P.getHeldItem();
 
-            if (I != null && I.getItem() == FAItemRegistry.whip)
-            {
+            if (I != null && I.getItem() == FAItemRegistry.whip) {
                 //var21.damageItem(1, P);
                 I.setItemDamage(I.getItemDamage() + 1);
                 /*if (var21.stackSize == 0)
@@ -128,13 +116,11 @@ public class DinoAIControlledByPlayer extends EntityAIBase
             }
         }
 
-        if (this.speedBoosted && this.motionTarget.RiderSneak && this.lastTimeSeenWhip == 0 && this.motionTarget.onGround && FossilConfig.dinoBlockBreaking)
-        {
+        if (this.speedBoosted && this.motionTarget.RiderSneak && this.lastTimeSeenWhip == 0 && this.motionTarget.onGround && FossilConfig.dinoBlockBreaking) {
             int BlocksDestroyed = this.motionTarget.BlockInteractive();
             this.currentSpeed -= BlocksDestroyed * 0.02;
 
-            if (this.currentSpeed < -0.15F)
-            {
+            if (this.currentSpeed < -0.15F) {
                 this.currentSpeed = -0.15F;
             }
 
@@ -147,16 +133,14 @@ public class DinoAIControlledByPlayer extends EntityAIBase
     /**
      * Return whether the entity's speed is boosted.
      */
-    public boolean isSpeedBoosted()
-    {
+    public boolean isSpeedBoosted() {
         return this.speedBoosted;
     }
 
     /**
      * Boost the entity's movement speed.
      */
-    public void boostSpeed()
-    {
+    public void boostSpeed() {
         this.speedBoosted = true;
         this.speedBoostTime = 0;
         this.maxSpeedBoostTime = this.motionTarget.getRNG().nextInt(381) + 600;
@@ -165,8 +149,7 @@ public class DinoAIControlledByPlayer extends EntityAIBase
     /**
      * Return whether the entity is being controlled by a player.
      */
-    public boolean isControlledByPlayer()
-    {
+    public boolean isControlledByPlayer() {
         return this.motionTarget.isEntityAlive() && this.motionTarget.riddenByEntity != null && this.motionTarget.riddenByEntity instanceof EntityPlayer && (this.speedBoosted || this.motionTarget.canBeSteered() || this.lastTimeSeenWhip < 90); //!this.isSpeedBoosted() && this.currentSpeed > this.motionTarget.getSpeed() * 0.3F;
     }
 }

@@ -23,8 +23,7 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-public class BlockFigurine extends BlockContainer implements ISubBlocksBlock
-{
+public class BlockFigurine extends BlockContainer implements ISubBlocksBlock {
     public static final String[] shortname =
             {
                     "figurine_steve_pristine",
@@ -47,8 +46,7 @@ public class BlockFigurine extends BlockContainer implements ISubBlocksBlock
 
     private IIcon[] icons;
 
-    public BlockFigurine()
-    {
+    public BlockFigurine() {
         super(Material.wood);
         setBlockBounds(0.25f, 0f, 0.25f, 0.75f, 0.5f, 0.75f);
         setCreativeTab(FATabRegistry.tabFFigurines);
@@ -56,36 +54,29 @@ public class BlockFigurine extends BlockContainer implements ISubBlocksBlock
     }
 
     @SideOnly(Side.CLIENT)
-    public void getSubBlocks(Item par1, CreativeTabs creativetabs, List list)
-    {
-        for (int j = 0; j < 16; ++j)
-        {
+    public void getSubBlocks(Item par1, CreativeTabs creativetabs, List list) {
+        for (int j = 0; j < 16; ++j) {
             list.add(new ItemStack(par1, 1, j));
         }
     }
 
-    public int getRenderType()
-    {
+    public int getRenderType() {
         return -1;
     }
 
-    public boolean isOpaqueCube()
-    {
+    public boolean isOpaqueCube() {
         return false;
     }
 
-    public boolean canProvidePower()
-    {
+    public boolean canProvidePower() {
         return true;
     }
 
-    public boolean renderAsNormalBlock()
-    {
+    public boolean renderAsNormalBlock() {
         return false;
     }
 
-    public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack)
-    {
+    public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack) {
         int l = MathHelper.floor_double((double) (par5EntityLivingBase.rotationYaw * 4.0F / 360.0F) + 1.5D) & 3;
         par1World.setBlockMetadataWithNotify(par2, par3, par4, l, 2);
         TileEntity tileentity = par1World.getTileEntity(par2, par3, par4);
@@ -93,41 +84,34 @@ public class BlockFigurine extends BlockContainer implements ISubBlocksBlock
         ((TileEntityFigurine) tileentity).setFigurineRotation(1);
     }
 
-    public TileEntity createNewTileEntity(World world, int par2)
-    {
+    public TileEntity createNewTileEntity(World world, int par2) {
         return new TileEntityFigurine();
     }
 
-    public int getDamageValue(World par1World, int par2, int par3, int par4)
-    {
+    public int getDamageValue(World par1World, int par2, int par3, int par4) {
         TileEntity tileentity = par1World.getTileEntity(par2, par3, par4);
         return tileentity != null && tileentity instanceof TileEntityFigurine ? ((TileEntityFigurine) tileentity).getFigurineType() : super.getDamageValue(par1World, par2, par3, par4);
     }
 
-    public int damageDropped(int meta)
-    {
+    public int damageDropped(int meta) {
         return meta;
     }
 
     @SideOnly(Side.CLIENT)
-    public IIcon getIcon(int side, int meta)
-    {
+    public IIcon getIcon(int side, int meta) {
         return icons[meta];
     }
 
     @SideOnly(Side.CLIENT)
-    public void registerBlockIcons(IIconRegister iconregister)
-    {
+    public void registerBlockIcons(IIconRegister iconregister) {
         icons = new IIcon[shortname.length];
 
-        for (int i = 0; i < shortname.length; ++i)
-        {
-            icons[i] = iconregister.registerIcon(Revival.modid + ":figurines/icons/" + "figurine_icon_" + i);
+        for (int i = 0; i < shortname.length; ++i) {
+            icons[i] = iconregister.registerIcon(Revival.MODID + ":figurines/icons/" + "figurine_icon_" + i);
         }
     }
 
-    public Class<? extends ItemBlock> getItemBlockClass()
-    {
+    public Class<? extends ItemBlock> getItemBlockClass() {
         return ItemBlockFigurine.class;
     }
 }

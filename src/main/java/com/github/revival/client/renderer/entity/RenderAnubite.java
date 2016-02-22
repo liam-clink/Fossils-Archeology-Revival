@@ -8,17 +8,14 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.ResourceLocation;
 
 @SideOnly(Side.CLIENT)
-public class RenderAnubite extends RenderBiped
-{
-    private static final ResourceLocation skeletonTextures = new ResourceLocation("fossil:textures/mob/Anubite_ancient.png");
+public class RenderAnubite extends RenderBiped {
+    private static final ResourceLocation skeletonTextures = new ResourceLocation("fossil:textures/model/Anubite_ancient.png");
 
-    public RenderAnubite()
-    {
+    public RenderAnubite() {
         super(new ModelAnubite(), 0.3F);
     }
 
-    protected ResourceLocation getEntityTexture(EntityLiving p_110775_1_)
-    {
+    protected ResourceLocation getEntityTexture(EntityLiving entity) {
         return skeletonTextures;
     }
 

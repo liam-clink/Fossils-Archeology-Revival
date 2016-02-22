@@ -3,11 +3,9 @@ package com.github.revival.common.entity.mobs;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.util.Vec3;
 
-public abstract class FossilModelBase extends ModelBase
-{
+public abstract class FossilModelBase extends ModelBase {
 
-    public FossilModelBase()
-    {
+    public FossilModelBase() {
 
     }
 

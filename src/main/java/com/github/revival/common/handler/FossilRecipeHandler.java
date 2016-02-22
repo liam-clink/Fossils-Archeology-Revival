@@ -9,17 +9,15 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
-public class FossilRecipeHandler
-{
-    public static void addRecipe()
-    {
+public class FossilRecipeHandler {
+    public static void addRecipe() {
         GameRegistry.addRecipe(new ItemStack(FABlockRegistry.skullLantern, 1), new Object[]{"X", "Y", 'X', FABlockRegistry.blockSkull, 'Y', Blocks.torch});
         GameRegistry.addRecipe(new ItemStack(Items.dye, 5, 15), new Object[]{"X", 'X', FABlockRegistry.blockSkull});
         GameRegistry.addRecipe(new ItemStack(Items.dye, 5, 15), new Object[]{"X", 'X', FABlockRegistry.skullLantern});
         GameRegistry.addRecipe(new ItemStack(FABlockRegistry.blockanalyzerIdle, 1), new Object[]{"XYX", "XWX", 'X', Items.iron_ingot, 'Y', FAItemRegistry.relic, 'W', FAItemRegistry.biofossil});
         GameRegistry.addRecipe(new ItemStack(FABlockRegistry.blockworktableIdle, 1), new Object[]{"X", "Y", 'X', Items.paper, 'Y', Blocks.crafting_table});
         GameRegistry.addRecipe(new ItemStack(FABlockRegistry.blockSifterIdle, 1), new Object[]{"XYX", "YZY", "YXY", 'X', Items.string, 'Y', Blocks.planks, 'Z', Blocks.iron_bars});
-        GameRegistry.addRecipe(new ItemStack(FABlockRegistry.ancientWoodPlate, 3), new Object[]{"XX", 'X', FABlockRegistry.ancientWood});
+        //GameRegistry.addRecipe(new ItemStack(FABlockRegistry.ancientWoodPlate, 3), new Object[]{"XX", 'X', FABlockRegistry.ancientWood});
 //        GameRegistry.addRecipe(new ItemStack(Revival.blockcultivateIdle, 1), new Object[] {"XYX", "XWX", "ZZZ", 'X', Blocks.glass, 'Y', new ItemStack(Items.dye, 1, 2), 'W', Items.water_bucket, 'Z', Items.iron_ingot});
         GameRegistry.addRecipe(new ItemStack(FABlockRegistry.blockTimeMachine, 1), new Object[]{"XYX", "ZUZ", "VXV", 'X', FAItemRegistry.gem, 'Y', Items.nether_star, 'Z', Items.gold_ingot, 'U', Items.ender_pearl, 'V', Blocks.obsidian});
         GameRegistry.addRecipe(new ItemStack(FABlockRegistry.blockcultivateIdle, 1), new Object[]{"XYX", "XWX", "ZZZ", 'X', Blocks.glass, 'Y', new ItemStack(Items.dye, 1, 2), 'W', Items.water_bucket, 'Z', Items.iron_ingot});
@@ -32,7 +30,7 @@ public class FossilRecipeHandler
         GameRegistry.addShapelessRecipe(new ItemStack(FAItemRegistry.gemAxe), new Object[]{Items.diamond_axe, FAItemRegistry.gem});
         GameRegistry.addShapelessRecipe(new ItemStack(FAItemRegistry.gemPickaxe), new Object[]{Items.golden_pickaxe, FAItemRegistry.gem});
         GameRegistry.addShapelessRecipe(new ItemStack(FAItemRegistry.gemPickaxe), new Object[]{Items.diamond_pickaxe, FAItemRegistry.gem});
-        GameRegistry.addShapelessRecipe(new ItemStack(FAItemRegistry.AquaticScarabGem), new Object[]{FAItemRegistry.DominicanAmber, FAItemRegistry.gem});
+        GameRegistry.addShapelessRecipe(new ItemStack(FAItemRegistry.gem_blue), new Object[]{FAItemRegistry.DominicanAmber, FAItemRegistry.gem});
         GameRegistry.addShapelessRecipe(new ItemStack(FAItemRegistry.gemHoe), new Object[]{Items.golden_hoe, FAItemRegistry.gem});
         GameRegistry.addShapelessRecipe(new ItemStack(FAItemRegistry.gemHoe), new Object[]{Items.diamond_hoe, FAItemRegistry.gem});
         GameRegistry.addShapelessRecipe(new ItemStack(FAItemRegistry.gemSword), new Object[]{Items.golden_sword, FAItemRegistry.gem});
@@ -41,11 +39,11 @@ public class FossilRecipeHandler
         GameRegistry.addShapelessRecipe(new ItemStack(FAItemRegistry.gemShovel), new Object[]{Items.diamond_shovel, FAItemRegistry.gem});
         GameRegistry.addShapelessRecipe(new ItemStack(FAItemRegistry.gemShovel), new Object[]{Items.diamond_shovel, FAItemRegistry.gem});
         GameRegistry.addShapelessRecipe(new ItemStack(FABlockRegistry.denseSand, 2), new Object[]{Items.quartz, Blocks.sand});
-       // GameRegistry.addShapelessRecipe(new ItemStack(FAItemRegistry.toothDagger, 1), new Object[]{new ItemStack(FAItemRegistry.claw, 1, EnumDinoType.TRex.ordinal()), Items.stick});
+        // GameRegistry.addShapelessRecipe(new ItemStack(FAItemRegistry.toothDagger, 1), new Object[]{new ItemStack(FAItemRegistry.claw, 1, EnumDinoType.TRex.ordinal()), Items.stick});
 
-       // for (int i = 0; i < EnumDinoType.values().length; i++)
-       //     GameRegistry.addShapelessRecipe(new ItemStack(FAItemRegistry.dinoPedia), new Object[]{Items.book, EnumDinoType.values()[i].DNAItem});
-       // GameRegistry.addShapelessRecipe(new ItemStack(FAItemRegistry.dinoPedia), new Object[]{Items.book, FAItemRegistry.dnaCoelacanth});
+        // for (int i = 0; i < EnumDinoType.values().length; i++)
+        //     GameRegistry.addShapelessRecipe(new ItemStack(FAItemRegistry.dinoPedia), new Object[]{Items.book, EnumDinoType.values()[i].DNAItem});
+        // GameRegistry.addShapelessRecipe(new ItemStack(FAItemRegistry.dinoPedia), new Object[]{Items.book, FAItemRegistry.dnaCoelacanth});
         //GameRegistry.addShapelessRecipe(new ItemStack(Revival.archNotebook), new Object[] {Item.book, Revival.relic});
         GameRegistry.addShapelessRecipe(new ItemStack(FAItemRegistry.rawChickenSoup, 1, 0), new Object[]{Items.bucket, Items.chicken});
         GameRegistry.addShapelessRecipe(new ItemStack(FAItemRegistry.magicConch, 1, 1), new Object[]{new ItemStack(FAItemRegistry.magicConch, 1, 0)});
@@ -85,11 +83,11 @@ public class FossilRecipeHandler
         GameRegistry.addRecipe(new ItemStack(FABlockRegistry.palaeStairs, 4), new Object[]{"P  ", "PP ", "PPP", 'P', FABlockRegistry.palaePlanks});
         GameRegistry.addRecipe(new ItemStack(FABlockRegistry.palaeStairs, 4), new Object[]{"  P", " PP", "PPP", 'P', FABlockRegistry.palaePlanks});
         //GameRegistry.addRecipe(new ItemStack(Revival.ancientWoodSingleSlab, 6), new Object[] {"PPP", 'P', Revival.ancientWood});
-        GameRegistry.addRecipe(new ItemStack(FABlockRegistry.ancientWoodStairs, 4), new Object[]{"P  ", "PP ", "PPP", 'P', FABlockRegistry.ancientWood});
-        GameRegistry.addRecipe(new ItemStack(FABlockRegistry.ancientWoodStairs, 4), new Object[]{"  P", " PP", "PPP", 'P', FABlockRegistry.ancientWood});
+        // GameRegistry.addRecipe(new ItemStack(FABlockRegistry.ancientWoodStairs, 4), new Object[]{"P  ", "PP ", "PPP", 'P', FABlockRegistry.ancientWood});
+        // GameRegistry.addRecipe(new ItemStack(FABlockRegistry.ancientWoodStairs, 4), new Object[]{"  P", " PP", "PPP", 'P', FABlockRegistry.ancientWood});
         //GameRegistry.addRecipe(new ItemStack(Revival.ancientStoneSingleSlab, 6), new Object[] {"PPP", 'P', Revival.ancientStone});
-        GameRegistry.addRecipe(new ItemStack(FABlockRegistry.ancientStoneStairs, 4), new Object[]{"P  ", "PP ", "PPP", 'P', FABlockRegistry.ancientStone});
-        GameRegistry.addRecipe(new ItemStack(FABlockRegistry.ancientStoneStairs, 4), new Object[]{"  P", " PP", "PPP", 'P', FABlockRegistry.ancientStone});
+        // GameRegistry.addRecipe(new ItemStack(FABlockRegistry.ancientStoneStairs, 4), new Object[]{"P  ", "PP ", "PPP", 'P', FABlockRegistry.ancientStone});
+        //  GameRegistry.addRecipe(new ItemStack(FABlockRegistry.ancientStoneStairs, 4), new Object[]{"  P", " PP", "PPP", 'P', FABlockRegistry.ancientStone});
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(FAItemRegistry.feet, 1), new Object[]{"* *", "# #", '#', new ItemStack(FAItemRegistry.foot, 1, OreDictionary.WILDCARD_VALUE), '*', "dinosaurClaw"}));
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(FAItemRegistry.feet, 1), new Object[]{"   ", "* *", "# #", '#', new ItemStack(FAItemRegistry.foot, 1, OreDictionary.WILDCARD_VALUE), '*', "dinosaurClaw"}));
         GameRegistry.addRecipe(new ItemStack(FAItemRegistry.femurs, 1), new Object[]{"###", "* *", "# #", '#', Items.bone, '*', new ItemStack(FAItemRegistry.legBone, 1, OreDictionary.WILDCARD_VALUE)});
@@ -102,12 +100,12 @@ public class FossilRecipeHandler
         GameRegistry.addRecipe(new ItemStack(FABlockRegistry.vaseAmphoraBlock, 1), new Object[]{" XX", " XX", " XX", 'X', FAItemRegistry.potteryShards});
         GameRegistry.addRecipe(new ItemStack(FABlockRegistry.vaseKylixBlock, 1), new Object[]{"   ", "XXX", " X ", 'X', FAItemRegistry.potteryShards});
         GameRegistry.addRecipe(new ItemStack(FABlockRegistry.vaseKylixBlock, 1), new Object[]{"XXX", " X ", "   ", 'X', FAItemRegistry.potteryShards});
-        
+
         //Shapeless vase recipies for dying them metadata > 1 = dye colors
         GameRegistry.addShapelessRecipe(new ItemStack(FABlockRegistry.vaseVoluteBlock, 1, 2), new Object[]{new ItemStack(Items.dye, 1, 0), new ItemStack(Items.dye, 1, 0), new ItemStack(Items.dye, 1, 14), new ItemStack(FABlockRegistry.vaseVoluteBlock, 1, 1)});
         GameRegistry.addShapelessRecipe(new ItemStack(FABlockRegistry.vaseVoluteBlock, 1, 3), new Object[]{new ItemStack(Items.dye, 1, 0), new ItemStack(Items.dye, 1, 14), new ItemStack(Items.dye, 1, 14), new ItemStack(FABlockRegistry.vaseVoluteBlock, 1, 1)});
         GameRegistry.addShapelessRecipe(new ItemStack(FABlockRegistry.vaseVoluteBlock, 1, 4), new Object[]{new ItemStack(Items.dye, 1, 4), new ItemStack(Items.dye, 1, 15), new ItemStack(Items.dye, 1, 15), new ItemStack(FABlockRegistry.vaseVoluteBlock, 1, 1)});
-        
+
         GameRegistry.addShapelessRecipe(new ItemStack(FABlockRegistry.vaseAmphoraBlock, 1, 2), new Object[]{new ItemStack(Items.dye, 1, 0), new ItemStack(Items.dye, 1, 0), new ItemStack(Items.dye, 1, 14), new ItemStack(FABlockRegistry.vaseAmphoraBlock, 1, 1)});
         GameRegistry.addShapelessRecipe(new ItemStack(FABlockRegistry.vaseAmphoraBlock, 1, 3), new Object[]{new ItemStack(Items.dye, 1, 0), new ItemStack(Items.dye, 1, 14), new ItemStack(Items.dye, 1, 14), new ItemStack(FABlockRegistry.vaseAmphoraBlock, 1, 1)});
         GameRegistry.addShapelessRecipe(new ItemStack(FABlockRegistry.vaseAmphoraBlock, 1, 4), new Object[]{new ItemStack(Items.dye, 1, 4), new ItemStack(Items.dye, 1, 15), new ItemStack(Items.dye, 1, 15), new ItemStack(FABlockRegistry.vaseAmphoraBlock, 1, 1)});
@@ -127,9 +125,9 @@ public class FossilRecipeHandler
             }*/
 
         GameRegistry.addSmelting(FAItemRegistry.icedMeat, new ItemStack(Items.beef), 3.0F);
-       // GameRegistry.addSmelting(FAItemRegistry.dodoWing, new ItemStack(FAItemRegistry.dodoWingCooked), 3.0F);
-       // GameRegistry.addSmelting(FAItemRegistry.terrorBirdMeat, new ItemStack(FAItemRegistry.terrorBirdMeatCooked), 3.0F);
-       // GameRegistry.addSmelting(FAItemRegistry.quaggaMeat, new ItemStack(FAItemRegistry.quaggaMeatCooked), 3.0F);
+        // GameRegistry.addSmelting(FAItemRegistry.dodoWing, new ItemStack(FAItemRegistry.dodoWingCooked), 3.0F);
+        // GameRegistry.addSmelting(FAItemRegistry.terrorBirdMeat, new ItemStack(FAItemRegistry.terrorBirdMeatCooked), 3.0F);
+        // GameRegistry.addSmelting(FAItemRegistry.quaggaMeat, new ItemStack(FAItemRegistry.quaggaMeatCooked), 3.0F);
 
     }
 }

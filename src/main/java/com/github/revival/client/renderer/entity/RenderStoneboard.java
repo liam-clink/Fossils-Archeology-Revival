@@ -9,14 +9,11 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-public class RenderStoneboard extends Render
-{
+public class RenderStoneboard extends Render {
     private static final ResourceLocation field_110807_a = new ResourceLocation("textures/painting/paintings_kristoffer_zetterstrand.png");
 
-    public void func_158_a(EntityStoneboard entitystoneboard, double var2, double var4, double var6, float var8, float var9)
-    {
-        if (entitystoneboard.art != null)
-        {
+    public void func_158_a(EntityStoneboard entitystoneboard, double var2, double var4, double var6, float var8, float var9) {
+        if (entitystoneboard.art != null) {
             //this.rand.setSeed(187L);
             GL11.glPushMatrix();
             GL11.glTranslatef((float) var2, (float) var4, (float) var6);
@@ -32,17 +29,14 @@ public class RenderStoneboard extends Render
         }
     }
 
-    private void func_159_a(EntityStoneboard var1, int var2, int var3, int var4, int var5)
-    {
+    private void func_159_a(EntityStoneboard var1, int var2, int var3, int var4, int var5) {
         float var6 = (float) (-var2) / 2.0F;
         float var7 = (float) (-var3) / 2.0F;
         float var8 = -0.5F;
         float var9 = 0.5F;
 
-        for (int var10 = 0; var10 < var2 / 16; ++var10)
-        {
-            for (int var11 = 0; var11 < var3 / 16; ++var11)
-            {
+        for (int var10 = 0; var10 < var2 / 16; ++var10) {
+            for (int var11 = 0; var11 < var3 / 16; ++var11) {
                 float var12 = var6 + (float) ((var10 + 1) * 16);
                 float var13 = var6 + (float) (var10 * 16);
                 float var14 = var7 + (float) ((var11 + 1) * 16);
@@ -101,8 +95,7 @@ public class RenderStoneboard extends Render
         }
     }
 
-    private void func_160_a(EntityStoneboard var1, float var2, float var3)
-    {
+    private void func_160_a(EntityStoneboard var1, float var2, float var3) {
         /*int var4 = MathHelper.floor_double(var1.posX);
         int var5 = MathHelper.floor_double(var1.posY + (double)(var3 / 16.0F));
         int var6 = MathHelper.floor_double(var1.posZ);
@@ -135,14 +128,12 @@ public class RenderStoneboard extends Render
      * (Render<T extends Entity) and this method has signature public void doRender(T entity, double d, double d1,
      * double d2, float f, float f1). But JAD is pre 1.5 so doesn't do that.
      */
-    public void doRender(Entity var1, double var2, double var4, double var6, float var8, float var9)
-    {
+    public void doRender(Entity var1, double var2, double var4, double var6, float var8, float var9) {
         this.func_158_a((EntityStoneboard) var1, var2, var4, var6, var8, var9);
     }
 
     @Override
-    protected ResourceLocation getEntityTexture(Entity entity)
-    {
+    protected ResourceLocation getEntityTexture(Entity entity) {
         // TODO Auto-generated method stub
         return null;
     }

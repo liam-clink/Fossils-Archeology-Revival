@@ -18,20 +18,17 @@ import net.minecraft.entity.player.EntityPlayer;
  *
  * @author Nico Bergemann <barracuda415 at yahoo.de>
  */
-public abstract class DinoAIRide extends EntityAIBase
-{
+public abstract class DinoAIRide extends EntityAIBase {
     protected final EntityPrehistoric dinosaur;
     protected EntityPlayer rider;
 
-    public DinoAIRide(EntityPrehistoric dinosaur)
-    {
+    public DinoAIRide(EntityPrehistoric dinosaur) {
         this.dinosaur = dinosaur;
         setMutexBits(0xffffffff);
     }
 
     @Override
-    public boolean shouldExecute()
-    {
+    public boolean shouldExecute() {
         rider = dinosaur.getRidingPlayer();
         return rider != null;
     }

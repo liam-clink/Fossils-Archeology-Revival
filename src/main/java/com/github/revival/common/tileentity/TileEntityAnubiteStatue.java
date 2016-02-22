@@ -7,21 +7,16 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 
-public class TileEntityAnubiteStatue extends TileEntity
-{
+public class TileEntityAnubiteStatue extends TileEntity {
 
-    public void updateEntity()
-    {
+    public void updateEntity() {
         EntityPlayer player = this.worldObj.getClosestPlayer(xCoord, yCoord, zCoord, 5);
-        if (player != null)
-        {
+        if (player != null) {
             player.addStat(FossilAchievementHandler.anubiteEncounter, 1);
-            if (!player.capabilities.isCreativeMode)
-            {
+            if (!player.capabilities.isCreativeMode) {
                 worldObj.newExplosion((Entity) null, xCoord + 0.5F, yCoord, zCoord + 0.5, 5F, true, true);
                 EntityAnubite newMob = new EntityAnubite(worldObj);
-                if (!worldObj.isRemote)
-                {
+                if (!worldObj.isRemote) {
                     newMob.setLocationAndAngles(xCoord + 0.5, yCoord, zCoord + 0.5, 0, 0);
                     worldObj.spawnEntityInWorld(newMob);
                     worldObj.removeTileEntity(xCoord, yCoord, zCoord);

@@ -1,7 +1,6 @@
 package com.github.revival.common.gen.structure.academy;
 
-public class AcademyUtil
-{
+public class AcademyUtil {
     /**
      * Some predefined values for custom hooks that I use in the demo structure
      */
@@ -18,7 +17,7 @@ public class AcademyUtil
     public static final int COMMON_LOOT_F2 = -4;
     public static final int RARE_LOOT_F3 = -5;
     public static final int COMMON_LOOT_F3 = -6;
-    
+
     public static final int TEMPLE_COMMON_LOOT = -7;
     public static final int TEMPLE_RARE_LOOT = -8;
 

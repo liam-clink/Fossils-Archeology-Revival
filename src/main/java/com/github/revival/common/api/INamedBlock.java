@@ -1,6 +1,5 @@
 package com.github.revival.common.api;
 
-public interface INamedBlock
-{
+public interface INamedBlock {
     String getBlockName();
 }

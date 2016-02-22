@@ -5,31 +5,25 @@ import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
-public class EntityMetadataThrowable extends EntityThrowable
-{
+public class EntityMetadataThrowable extends EntityThrowable {
 
-    public EntityMetadataThrowable(World world)
-    {
+    public EntityMetadataThrowable(World world) {
         super(world);
     }
-    
-    public EntityMetadataThrowable(World world, EntityLivingBase entityLivingBase)
-    {
+
+    public EntityMetadataThrowable(World world, EntityLivingBase entityLivingBase) {
         super(world, entityLivingBase);
     }
 
-    public EntityMetadataThrowable(World world, double x, double y, double z)
-    {
+    public EntityMetadataThrowable(World world, double x, double y, double z) {
         super(world);
     }
 
     @Override
-    protected void onImpact(MovingObjectPosition p_70184_1_)
-    {
+    protected void onImpact(MovingObjectPosition p_70184_1_) {
     }
 
-    public String getTexture()
-    {
+    public String getTexture() {
         return "";
     }
 }

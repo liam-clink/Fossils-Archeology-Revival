@@ -10,14 +10,12 @@ import net.minecraft.util.MathHelper;
 
 import java.util.Random;
 
-public class DinoAIFishing extends EntityAIBase
-{
+public class DinoAIFishing extends EntityAIBase {
     //private final float huntLimit;
     private final int percentage;
     private EntityDinosaur theEntity;
 
-    public DinoAIFishing(EntityDinosaur var1/*, float var2*/, int var3)
-    {
+    public DinoAIFishing(EntityDinosaur var1/*, float var2*/, int var3) {
         this.theEntity = var1;
         this.setMutexBits(4);
         var1.getNavigator().setCanSwim(true);
@@ -28,20 +26,17 @@ public class DinoAIFishing extends EntityAIBase
     /**
      * Returns whether the EntityAIBase should begin execution.
      */
-    public boolean shouldExecute()
-    {
+    public boolean shouldExecute() {
         return !this.nearbyGotWater() ? false : this.theEntity.IsHungry()/*(float)this.theEntity.getHunger() < this.huntLimit*/ && this.theEntity.getRNG().nextInt(100) < this.percentage;
     }
 
     /**
      * Updates the task
      */
-    public void updateTask()
-    {
+    public void updateTask() {
         Random var1 = this.theEntity.getRNG();
 
-        for (int var2 = 0; var2 <= var1.nextInt(3); ++var2)
-        {
+        for (int var2 = 0; var2 <= var1.nextInt(3); ++var2) {
             EntityItem var3 = new EntityItem(this.theEntity.worldObj, this.theEntity.posX, this.theEntity.posY, this.theEntity.posZ, new ItemStack(Items.fish));
             double var4 = (double) (var1.nextInt(5) - 2);
             double var6 = (double) (var1.nextInt(5) - 2);
@@ -55,14 +50,10 @@ public class DinoAIFishing extends EntityAIBase
         }
     }
 
-    private boolean nearbyGotWater()
-    {
-        if (this.theEntity.isInWater())
-        {
+    private boolean nearbyGotWater() {
+        if (this.theEntity.isInWater()) {
             return true;
-        }
-        else
-        {
+        } else {
             AxisAlignedBB var1 = this.theEntity.boundingBox.expand(2.0D, 2.0D, 2.0D);
             return this.theEntity.worldObj.isAnyLiquid(var1);
         }

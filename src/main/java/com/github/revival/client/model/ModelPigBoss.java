@@ -10,8 +10,7 @@ import net.minecraft.util.MathHelper;
  * ModelPigBoss - Either Mojang or a mod author
  * Created using Tabula 4.1.1
  */
-public class ModelPigBoss extends ModelBase
-{
+public class ModelPigBoss extends ModelBase {
     public ModelRenderer rightArm;
     public ModelRenderer rightLeg;
     public ModelRenderer Head;
@@ -31,8 +30,7 @@ public class ModelPigBoss extends ModelBase
     public ModelRenderer RightWing2;
     public ModelRenderer RightWing3;
 
-    public ModelPigBoss()
-    {
+    public ModelPigBoss() {
         this.textureWidth = 64;
         this.textureHeight = 64;
         this.HornLeft = new ModelRenderer(this, 0, 17);
@@ -110,8 +108,7 @@ public class ModelPigBoss extends ModelBase
     }
 
     @Override
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
-    {
+    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
         setRotationAngles(f, f1, f2, f3, f4, f5, entity);
         this.leftLeg.render(f5);
         this.leftArm.render(f5);
@@ -120,16 +117,14 @@ public class ModelPigBoss extends ModelBase
         this.Head.render(f5);
         this.rightArm.render(f5);
         EntityAnu anu = (EntityAnu) entity;
-        if (anu.getAttackMode() == 1)
-        {
+        if (anu.getAttackMode() == 1) {
             LeftWing1.render(f5);
             RightWing1.render(f5);
         }
 
     }
 
-    public void renderBlock(float f5)
-    {
+    public void renderBlock(float f5) {
         this.leftLeg.render(f5);
         this.leftArm.render(f5);
         this.rightLeg.render(f5);
@@ -139,18 +134,15 @@ public class ModelPigBoss extends ModelBase
     }
 
     @Override
-    public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
-    {
+    public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
         EntityAnu anu = (EntityAnu) entity;
-        if (anu.getAttackMode() != 1)
-        {
+        if (anu.getAttackMode() != 1) {
             this.leftArm.rotateAngleX = MathHelper.cos((f) * 0.63330555F + 1) * 1.0F * f1;
             this.rightArm.rotateAngleX = MathHelper.cos((f) * 0.63330555F + (float) Math.PI) * 1.0F * f1;
             this.leftLeg.rotateAngleX = MathHelper.cos((f) * 0.63330555F + (float) Math.PI + 2) * 1.0F * f1;
             this.rightLeg.rotateAngleX = MathHelper.cos((f) * 0.63330555F + 1) * 1.0F * f1;
         }
-        if (anu.getAttackMode() == 1)
-        {
+        if (anu.getAttackMode() == 1) {
             this.Head.rotateAngleX = (float) Math.toRadians(-35D);
             this.Head.rotateAngleY = 0;
             this.leftArm.rotateAngleX = (float) Math.toRadians(-125D);
@@ -158,9 +150,7 @@ public class ModelPigBoss extends ModelBase
             this.rightLeg.rotateAngleX = 0;
             this.leftLeg.rotateAngleX = 0;
 
-        }
-        else
-        {
+        } else {
             this.Head.rotateAngleX = f4 / (180F / (float) Math.PI);
             this.Head.rotateAngleY = f3 / (180F / (float) Math.PI);
         }
@@ -174,8 +164,7 @@ public class ModelPigBoss extends ModelBase
     /**
      * This is a helper function from Tabula to set the rotation of model parts
      */
-    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z)
-    {
+    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
         modelRenderer.rotateAngleX = x;
         modelRenderer.rotateAngleY = y;
         modelRenderer.rotateAngleZ = z;

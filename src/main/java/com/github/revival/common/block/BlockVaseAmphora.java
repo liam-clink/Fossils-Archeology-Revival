@@ -27,8 +27,7 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-public class BlockVaseAmphora extends BlockContainer implements ISubBlocksBlock
-{
+public class BlockVaseAmphora extends BlockContainer implements ISubBlocksBlock {
     public static final String[] shortname =
             {
                     "damaged_amphora",
@@ -41,8 +40,7 @@ public class BlockVaseAmphora extends BlockContainer implements ISubBlocksBlock
     private IIcon[] icons;
     private int getMeta;
 
-    public BlockVaseAmphora()
-    {
+    public BlockVaseAmphora() {
         super(Material.clay);
         this.setCreativeTab(FATabRegistry.tabFFigurines);
         setBlockName(LocalizationStrings.VASE_AMPHORA);
@@ -53,10 +51,8 @@ public class BlockVaseAmphora extends BlockContainer implements ISubBlocksBlock
     /**
      * returns a list of items with the same ID, but different meta (eg: dye returns 16 items)
      */
-    public void getSubBlocks(Item par1, CreativeTabs creativetabs, List list)
-    {
-        for (int j = 0; j < shortname.length; ++j)
-        {
+    public void getSubBlocks(Item par1, CreativeTabs creativetabs, List list) {
+        for (int j = 0; j < shortname.length; ++j) {
             list.add(new ItemStack(par1, 1, j));
         }
     }
@@ -64,8 +60,7 @@ public class BlockVaseAmphora extends BlockContainer implements ISubBlocksBlock
     /**
      * The type of render function that is called for this block
      */
-    public int getRenderType()
-    {
+    public int getRenderType() {
         return -1;
     }
 
@@ -73,29 +68,25 @@ public class BlockVaseAmphora extends BlockContainer implements ISubBlocksBlock
      * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
      * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
      */
-    public boolean isOpaqueCube()
-    {
+    public boolean isOpaqueCube() {
         return false;
     }
 
     /**
      * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
      */
-    public boolean renderAsNormalBlock()
-    {
+    public boolean renderAsNormalBlock() {
         return false;
     }
 
-    public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9)
-    {
+    public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9) {
         return false;
     }
 
     /**
      * Updates the blocks bounds based on its current state. Args: world, x, y, z
      */
-    public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
-    {
+    public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4) {
         this.setBlockBounds(0.15F, 0.0F, 0.15F, 0.85F, 1.3F, 0.85F);
     }
 
@@ -103,8 +94,7 @@ public class BlockVaseAmphora extends BlockContainer implements ISubBlocksBlock
      * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
      * cleared to be reused)
      */
-    public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
-    {
+    public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4) {
         this.setBlockBoundsBasedOnState(par1World, par2, par3, par4);
         return super.getCollisionBoundingBoxFromPool(par1World, par2, par3, par4);
     }
@@ -112,8 +102,7 @@ public class BlockVaseAmphora extends BlockContainer implements ISubBlocksBlock
     /**
      * Called when the block is placed in the world.
      */
-    public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack)
-    {
+    public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack) {
         int l = MathHelper.floor_double((double) (par5EntityLivingBase.rotationYaw * 4.0F / 360.0F) + 1.5D) & 3;
         par1World.setBlockMetadataWithNotify(par2, par3, par4, l, 2);
         TileEntity tileentity = par1World.getTileEntity(par2, par3, par4);
@@ -123,8 +112,7 @@ public class BlockVaseAmphora extends BlockContainer implements ISubBlocksBlock
     }
 
     @Override
-    public void breakBlock(World world, int x, int y, int z, Block oldBlock, int oldMeta)
-    {
+    public void breakBlock(World world, int x, int y, int z, Block oldBlock, int oldMeta) {
         this.getMeta = getDamageValue(world, x, y, z);
         super.breakBlock(world, x, y, z, oldBlock, oldMeta);
     }
@@ -133,16 +121,14 @@ public class BlockVaseAmphora extends BlockContainer implements ISubBlocksBlock
      * Returns a new instance of a block's tile entity class. Called on placing the block.
      */
     @Override
-    public TileEntity createNewTileEntity(World par1World, int par2)
-    {
+    public TileEntity createNewTileEntity(World par1World, int par2) {
         return new TileEntityVase();
     }
 
     /**
      * Get the block's damage value (for use with pick block).
      */
-    public int getDamageValue(World par1World, int par2, int par3, int par4)
-    {
+    public int getDamageValue(World par1World, int par2, int par3, int par4) {
         TileEntity tileentity = par1World.getTileEntity(par2, par3, par4);
         return tileentity != null && tileentity instanceof TileEntityVase ? ((TileEntityVase) tileentity).getVaseTypeMeta() : super.getDamageValue(par1World, par2, par3, par4);
     }
@@ -152,8 +138,7 @@ public class BlockVaseAmphora extends BlockContainer implements ISubBlocksBlock
      */
 
     @Override
-    public int damageDropped(int meta)
-    {
+    public int damageDropped(int meta) {
         return this.getMeta;
     }
 
@@ -161,24 +146,20 @@ public class BlockVaseAmphora extends BlockContainer implements ISubBlocksBlock
     /**
      * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
      */
-    public IIcon getIcon(int side, int meta)
-    {
+    public IIcon getIcon(int side, int meta) {
         return icons[meta];
     }
 
     @SideOnly(Side.CLIENT)
-    public void registerBlockIcons(IIconRegister iconregister)
-    {
+    public void registerBlockIcons(IIconRegister iconregister) {
         icons = new IIcon[shortname.length];
 
-        for (int i = 0; i < shortname.length; ++i)
-        {
-            icons[i] = iconregister.registerIcon(Revival.modid + ":vases/icons/" + "vase_icon_amphora_" + i);
+        for (int i = 0; i < shortname.length; ++i) {
+            icons[i] = iconregister.registerIcon(Revival.MODID + ":vases/icons/" + "vase_icon_amphora_" + i);
         }
     }
 
-    public Class<? extends ItemBlock> getItemBlockClass()
-    {
+    public Class<? extends ItemBlock> getItemBlockClass() {
         return ItemBlockVaseAmphora.class;
     }
 }

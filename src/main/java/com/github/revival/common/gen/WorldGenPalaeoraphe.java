@@ -8,27 +8,22 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 
 import java.util.Random;
 
-public class WorldGenPalaeoraphe extends WorldGenerator
-{
-    public WorldGenPalaeoraphe()
-    {
+public class WorldGenPalaeoraphe extends WorldGenerator {
+    public WorldGenPalaeoraphe() {
     }
 
     public boolean generate(World var1, Random var2, int var3, int var4,
-                            int var5)
-    {
+                            int var5) {
         Block j1 = var1.getBlock(var3, var4 - 1, var5);
 
-        if (j1 != Blocks.grass && j1 != Blocks.dirt || var4 >= 128 - 12 - 1)
-        {
+        if (j1 != Blocks.grass && j1 != Blocks.dirt || var4 >= 128 - 12 - 1) {
             return false;
         }
 
         // int deltaY = 5;
         int deltaY = var2.nextInt(10);
 
-        for (int y = (var4 - 1) + 1; y <= var4 + 10 + deltaY; y++)
-        {
+        for (int y = (var4 - 1) + 1; y <= var4 + 10 + deltaY; y++) {
             var1.setBlock(var3, y, var5, FABlockRegistry.palmLog);
         }
 

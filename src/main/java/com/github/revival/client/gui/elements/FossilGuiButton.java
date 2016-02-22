@@ -3,25 +3,21 @@ package com.github.revival.client.gui.elements;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 
-public class FossilGuiButton extends GuiButton
-{
-    private int IconIndexHeight;
-    private int IconIndexWidth;
+public class FossilGuiButton extends GuiButton {
+    private int iconIndexHeight;
+    private int iconIndexWidth;
 
-    public FossilGuiButton(int id, int xPosition, int yPosition, int par4)
-    {
+    public FossilGuiButton(int id, int xPosition, int yPosition, int width) {
         super(id, xPosition, yPosition, 32, 32, "");
 
-        for (; par4 > 7; )
-        {
-            par4 -= 8;
-            IconIndexHeight++;
+        for (; width > 7; ) {
+            width -= 8;
+            iconIndexHeight++;
         }
 
-        IconIndexWidth = par4;
+        iconIndexWidth = width;
     }
-    
-    public void drawButton(Minecraft par1Minecraft, int par2, int par3)
-    {
+
+    public void drawButton(Minecraft mc, int mouseX, int mouseY) {
     }
 }

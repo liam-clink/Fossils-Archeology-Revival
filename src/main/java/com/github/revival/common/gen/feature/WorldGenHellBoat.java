@@ -15,8 +15,7 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 
 import java.util.Random;
 
-public class WorldGenHellBoat extends WorldGenerator
-{
+public class WorldGenHellBoat extends WorldGenerator {
     protected static final WeightedRandomChestContent[] field_111019_a = new WeightedRandomChestContent[]{
             new WeightedRandomChestContent(Item.getItemFromBlock(FABlockRegistry.ancientGlass), 0, 2, 5, 25),
             new WeightedRandomChestContent(FAItemRegistry.relic, 0, 1, 2, 76),
@@ -40,27 +39,23 @@ public class WorldGenHellBoat extends WorldGenerator
             new WeightedRandomChestContent(Item.getItemFromBlock(Blocks.tnt), 0, 1, 6, 25)
     };
 
-    protected Block[] GetValidSpawnBlocks()
-    {
+    protected Block[] GetValidSpawnBlocks() {
         return new Block[]
                 {
                         Blocks.lava,
                 };
     }
 
-    public boolean LocationIsValidSpawn(World world, int x, int y, int z)
-    {
+    public boolean LocationIsValidSpawn(World world, int x, int y, int z) {
         int distanceToAir = 0;
         Block checkBlock = world.getBlock(x, y, z);
 
-        while (checkBlock != Blocks.air)
-        {
+        while (checkBlock != Blocks.air) {
             distanceToAir++;
             checkBlock = world.getBlock(x, y + distanceToAir, z);
         }
 
-        if (distanceToAir > 1)
-        {
+        if (distanceToAir > 1) {
             return false;
         }
 
@@ -70,39 +65,29 @@ public class WorldGenHellBoat extends WorldGenerator
         Block blockAbove = world.getBlock(x, y + 1, z);
         Block blockBelow = world.getBlock(x, y - 1, z);
 
-        for (Block i : GetValidSpawnBlocks())
-        {
-            if (blockAbove != Blocks.air)
-            {
+        for (Block i : GetValidSpawnBlocks()) {
+            if (blockAbove != Blocks.air) {
                 return false;
             }
-            if (block == i)
-            {
+            if (block == i) {
                 return true;
-            }
-            else if (block == Blocks.snow_layer && blockBelow == i)
-            {
+            } else if (block == Blocks.snow_layer && blockBelow == i) {
                 return true;
-            }
-            else if (block.getMaterial() == Material.plants && blockBelow == i)
-            {
+            } else if (block.getMaterial() == Material.plants && blockBelow == i) {
                 return true;
             }
         }
         return false;
     }
 
-    public boolean generate(World world, Random rand, int x, int y, int z)
-    {
+    public boolean generate(World world, Random rand, int x, int y, int z) {
         generate_r0(world, rand, x, y, z);
         return true;
 
     }
 
-    public boolean generate_r0(World world, Random rand, int x, int y, int z)
-    {
-        if (!LocationIsValidSpawn(world, x + 16, y, z + 5))
-        {
+    public boolean generate_r0(World world, Random rand, int x, int y, int z) {
+        if (!LocationIsValidSpawn(world, x + 16, y, z + 5)) {
             return false;
         }
 
@@ -1110,8 +1095,7 @@ public class WorldGenHellBoat extends WorldGenerator
 
     }
 
-    public boolean generate_r02_last(World world, Random rand, int x, int y, int z)
-    {
+    public boolean generate_r02_last(World world, Random rand, int x, int y, int z) {
 
         world.setBlock(x + 2, y + 2, z + 4, Blocks.redstone_torch, 1, 3);
         world.setBlock(x + 2, y + 2, z + 6, Blocks.redstone_torch, 1, 3);
@@ -1136,14 +1120,12 @@ public class WorldGenHellBoat extends WorldGenerator
 
     }
 
-    protected void generateStructureChestContents(World world, Random rand, int i1, int j1, int k1, WeightedRandomChestContent[] content, int i)
-    {
+    protected void generateStructureChestContents(World world, Random rand, int i1, int j1, int k1, WeightedRandomChestContent[] content, int i) {
 
         world.setBlock(i1, j1, k1, Blocks.chest, 0, 2);
         TileEntityChest tileentitychest = (TileEntityChest) world.getTileEntity(i1, j1, k1);
 
-        if (tileentitychest != null)
-        {
+        if (tileentitychest != null) {
             WeightedRandomChestContent.generateChestContents(rand, content, tileentitychest, i);
         }
 

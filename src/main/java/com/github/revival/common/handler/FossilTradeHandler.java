@@ -10,11 +10,9 @@ import net.minecraft.village.MerchantRecipeList;
 
 import java.util.Random;
 
-public class FossilTradeHandler implements IVillageTradeHandler
-{
+public class FossilTradeHandler implements IVillageTradeHandler {
     @Override
-    public void manipulateTradesForVillager(EntityVillager villager, MerchantRecipeList recipeList, Random random)
-    {
+    public void manipulateTradesForVillager(EntityVillager villager, MerchantRecipeList recipeList, Random random) {
         recipeList.add(new MerchantRecipe(new ItemStack(Items.emerald, 3), new ItemStack(FAItemRegistry.biofossil, 1, 0)));
         recipeList.add(new MerchantRecipe(new ItemStack(Items.emerald, 12), new ItemStack(FAItemRegistry.stonejavelin, 2, 0)));
         recipeList.add(new MerchantRecipe(new ItemStack(Items.emerald, 14), new ItemStack(FAItemRegistry.chickenEss, 24, 0)));

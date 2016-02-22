@@ -16,19 +16,16 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 @SideOnly(Side.CLIENT)
-public class RenderThrowableEgg extends Render
-{
+public class RenderThrowableEgg extends Render {
     private Item item;
     private int damage;
 
-    public RenderThrowableEgg(Item item, int damage)
-    {
+    public RenderThrowableEgg(Item item, int damage) {
         this.item = item;
         this.damage = damage;
     }
 
-    public RenderThrowableEgg(Item item)
-    {
+    public RenderThrowableEgg(Item item) {
         this(item, 0);
     }
 
@@ -38,12 +35,10 @@ public class RenderThrowableEgg extends Render
      * (Render<T extends Entity) and this method has signature public void func_76986_a(T entity, double d, double d1,
      * double d2, float f, float f1). But JAD is pre 1.5 so doesn't do that.
      */
-    public void doRender(Entity entity, double d1, double d2, double d3, float float1, float float2)
-    {
+    public void doRender(Entity entity, double d1, double d2, double d3, float float1, float float2) {
         IIcon iicon = this.item.getIconFromDamage(this.damage);
 
-        if (iicon != null)
-        {
+        if (iicon != null) {
             GL11.glPushMatrix();
             GL11.glTranslatef((float) d1, (float) d2, (float) d3);
             GL11.glEnable(GL12.GL_RESCALE_NORMAL);
@@ -51,8 +46,7 @@ public class RenderThrowableEgg extends Render
             this.bindEntityTexture(entity);
             Tessellator tessellator = Tessellator.instance;
 
-            if (iicon == ItemPotion.func_94589_d("bottle_splash"))
-            {
+            if (iicon == ItemPotion.func_94589_d("bottle_splash")) {
                 int i = PotionHelper.func_77915_a(((EntityPotion) entity).getPotionDamage(), false);
                 float f2 = (float) (i >> 16 & 255) / 255.0F;
                 float f3 = (float) (i >> 8 & 255) / 255.0F;
@@ -73,13 +67,11 @@ public class RenderThrowableEgg extends Render
     /**
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
-    protected ResourceLocation getEntityTexture(Entity entity)
-    {
+    protected ResourceLocation getEntityTexture(Entity entity) {
         return TextureMap.locationItemsTexture;
     }
 
-    private void func_77026_a(Tessellator tessellator, IIcon iicon)
-    {
+    private void func_77026_a(Tessellator tessellator, IIcon iicon) {
         float f = iicon.getMinU();
         float f1 = iicon.getMaxU();
         float f2 = iicon.getMinV();

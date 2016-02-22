@@ -7,13 +7,11 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.world.IBlockAccess;
 import org.lwjgl.opengl.GL11;
 
-public class RenderFeeder implements ISimpleBlockRenderingHandler
-{
+public class RenderFeeder implements ISimpleBlockRenderingHandler {
     public static final RenderFeeder INSTANCE = new RenderFeeder();
 
     @Override
-    public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer)
-    {
+    public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
         int meta = 3;
 
         /*if (block == FABlockRegistry.feederActive)
@@ -54,16 +52,12 @@ public class RenderFeeder implements ISimpleBlockRenderingHandler
     }
 
     @Override
-    public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer)
-    {
+    public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
         int direction = renderer.blockAccess.getBlockMetadata(x, y, z) & 3;
 
-        if (direction > 0)
-        {
+        if (direction > 0) {
             renderer.uvRotateTop = direction - 1;
-        }
-        else
-        {
+        } else {
             renderer.uvRotateTop = 3;
         }
 
@@ -73,14 +67,12 @@ public class RenderFeeder implements ISimpleBlockRenderingHandler
     }
 
     @Override
-    public int getRenderId()
-    {
+    public int getRenderId() {
         return 0;
     }
 
     @Override
-    public boolean shouldRender3DInInventory(int modelId)
-    {
+    public boolean shouldRender3DInInventory(int modelId) {
         return true;
     }
 }

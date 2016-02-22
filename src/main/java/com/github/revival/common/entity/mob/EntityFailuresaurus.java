@@ -13,10 +13,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public class EntityFailuresaurus extends EntityMob
-{
-    public EntityFailuresaurus(World var1)
-    {
+public class EntityFailuresaurus extends EntityMob {
+    public EntityFailuresaurus(World var1) {
         super(var1);
         this.setSize(0.8F, 0.8F);
         this.experienceValue = 4;
@@ -26,64 +24,51 @@ public class EntityFailuresaurus extends EntityMob
 
     }
 
-    protected void entityInit()
-    {
+    protected void entityInit() {
         super.entityInit();
         this.dataWatcher.addObject(16, new Byte((byte) 0));
         this.dataWatcher.addObject(18, Byte.valueOf((byte) 0));
         this.setSkin(this.worldObj.rand.nextInt(3));
     }
 
-    protected boolean canDespawn()
-    {
+    protected boolean canDespawn() {
         return false;
     }
 
-    public boolean allowLeashing()
-    {
+    public boolean allowLeashing() {
         return true;
     }
 
-    public boolean isOnLadder()
-    {
+    public boolean isOnLadder() {
         return this.isBesideClimbableBlock();
     }
 
-    public void onUpdate()
-    {
+    public void onUpdate() {
         super.onUpdate();
 
-        if (!this.worldObj.isRemote)
-        {
+        if (!this.worldObj.isRemote) {
             this.setBesideClimbableBlock(this.isCollidedHorizontally);
         }
     }
 
-    public int getSkin()
-    {
+    public int getSkin() {
         return this.dataWatcher.getWatchableObjectByte(18);
     }
 
-    public void setSkin(int par1)
-    {
+    public void setSkin(int par1) {
         this.dataWatcher.updateObject(18, Byte.valueOf((byte) par1));
     }
 
-    public boolean isBesideClimbableBlock()
-    {
+    public boolean isBesideClimbableBlock() {
         return (this.dataWatcher.getWatchableObjectByte(16) & 1) != 0;
     }
 
-    public void setBesideClimbableBlock(boolean isClollided)
-    {
+    public void setBesideClimbableBlock(boolean isClollided) {
         byte b0 = this.dataWatcher.getWatchableObjectByte(16);
 
-        if (isClollided)
-        {
+        if (isClollided) {
             b0 = (byte) (b0 | 1);
-        }
-        else
-        {
+        } else {
             b0 &= -2;
         }
 
@@ -93,8 +78,7 @@ public class EntityFailuresaurus extends EntityMob
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
-    public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
-    {
+    public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {
         super.writeEntityToNBT(par1NBTTagCompound);
         par1NBTTagCompound.setInteger("FailuresaurusSkin", this.getSkin());
     }
@@ -102,8 +86,7 @@ public class EntityFailuresaurus extends EntityMob
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
-    public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
-    {
+    public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {
         super.readEntityFromNBT(par1NBTTagCompound);
         this.setSkin(par1NBTTagCompound.getInteger("FailuresaurusSkin"));
     }
@@ -111,63 +94,54 @@ public class EntityFailuresaurus extends EntityMob
     /**
      * Returns the item ID for the item the mob drops on death.
      */
-    protected Item getDropItem()
-    {
+    protected Item getDropItem() {
         return FAItemRegistry.failuresaurusFlesh;
     }
 
-    public void onLivingUpdate()
-    {
+    public void onLivingUpdate() {
         super.onLivingUpdate();
         int i = MathHelper.floor_double(this.posX);
         int j = MathHelper.floor_double(this.posY);
         int k = MathHelper.floor_double(this.posZ);
-        for (int l = 0; l < 4; ++l)
-        {
+        for (int l = 0; l < 4; ++l) {
             i = MathHelper.floor_double(this.posX + (double) ((float) (l % 2 * 2 - 1) * 0.25F));
             j = MathHelper.floor_double(this.posY);
             k = MathHelper.floor_double(this.posZ + (double) ((float) (l / 2 % 2 * 2 - 1) * 0.25F));
 
-            if (this.worldObj.getBlock(i, j, k).getMaterial() == Material.air && FABlockRegistry.blockSlimeTrail.canPlaceBlockAt(this.worldObj, i, j, k))
-            {
+            if (this.worldObj.getBlock(i, j, k).getMaterial() == Material.air && FABlockRegistry.blockSlimeTrail.canPlaceBlockAt(this.worldObj, i, j, k)) {
                 this.worldObj.setBlock(i, j, k, FABlockRegistry.blockSlimeTrail);
             }
         }
     }
 
-    protected String getLivingSound()
-    {
+    protected String getLivingSound() {
         return "mob.zombie.say";
     }
 
     /**
      * Returns the sound this mob makes when it is hurt.
      */
-    protected String getHurtSound()
-    {
+    protected String getHurtSound() {
         return "mob.zombie.hurt";
     }
 
     /**
      * Returns the sound this mob makes on death.
      */
-    protected String getDeathSound()
-    {
+    protected String getDeathSound() {
         return "mob.zombie.death";
     }
 
     /**
      * Causes this entity to do an upwards motion (jumping).
      */
-    protected void jump()
-    {
+    protected void jump() {
     }
 
     /**
      * Returns the texture's file path as a String.
      */
-    public String getTexture()
-    {
+    public String getTexture() {
         return "fossil:textures/mob/Failuresaurus.png";
     }
 }

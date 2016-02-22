@@ -7,8 +7,7 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class DinoAIHerd extends EntityAIBase
-{
+public class DinoAIHerd extends EntityAIBase {
     // The assigned Dinosaur
     private EntityDinosaur dinosaur;
     // The speed
@@ -18,8 +17,7 @@ public class DinoAIHerd extends EntityAIBase
     private World world;
     private DinoHerd herd;
 
-    public DinoAIHerd(EntityDinosaur dinosaur, double speed)
-    {
+    public DinoAIHerd(EntityDinosaur dinosaur, double speed) {
         this.dinosaur = dinosaur;
         //this.herd = dinosaur.getHerd();
         this.speed = speed;
@@ -28,64 +26,52 @@ public class DinoAIHerd extends EntityAIBase
     }
 
     @Override
-    public boolean shouldExecute()
-    {
-        if (dinosaur.isInHerd())
-        {
+    public boolean shouldExecute() {
+        if (dinosaur.isInHerd()) {
             return true;
         }
         return false;
     }
 
     @Override
-    public void startExecuting()
-    {
+    public void startExecuting() {
 
     }
 
     @Override
-    public void updateTask()
-    {
+    public void updateTask() {
 
     }
 
-    public void idleAroundLeader()
-    {
+    public void idleAroundLeader() {
 
     }
 
-    public void idleAsLeader()
-    {
+    public void idleAsLeader() {
 
     }
 
-    public void wanderWithLeader()
-    {
+    public void wanderWithLeader() {
 
     }
 
-    public void wanderAsLeader()
-    {
+    public void wanderAsLeader() {
 
     }
 
-    public void attack()
-    {
+    public void attack() {
 
     }
 
-    public void chaseWithLeader()
-    {
+    public void chaseWithLeader() {
 
     }
 
-    public void chaseAsLeader()
-    {
+    public void chaseAsLeader() {
 
     }
 
-    public void disperse()
-    {
+    public void disperse() {
 
     }
 

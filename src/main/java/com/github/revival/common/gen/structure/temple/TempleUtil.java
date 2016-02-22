@@ -1,7 +1,6 @@
 package com.github.revival.common.gen.structure.temple;
 
-public class TempleUtil
-{
+public class TempleUtil {
     /**
      * Some predefined values for custom hooks that I use in the demo structure
      */

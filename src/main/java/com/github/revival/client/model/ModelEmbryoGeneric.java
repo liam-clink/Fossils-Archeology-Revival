@@ -10,8 +10,7 @@ package com.github.revival.client.model;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 
-public class ModelEmbryoGeneric extends ModelBase
-{
+public class ModelEmbryoGeneric extends ModelBase {
     //fields
     ModelRenderer head;
     ModelRenderer body;
@@ -25,8 +24,7 @@ public class ModelEmbryoGeneric extends ModelBase
     ModelRenderer rightfoot;
     ModelRenderer rightarm;
 
-    public ModelEmbryoGeneric()
-    {
+    public ModelEmbryoGeneric() {
         textureWidth = 64;
         textureHeight = 32;
 
@@ -98,8 +96,7 @@ public class ModelEmbryoGeneric extends ModelBase
         setRotation(rightarm, -1.204277F, 0.2094395F, 0F);
     }
 
-    public void render(float f5)
-    {
+    public void render(float f5) {
         head.render(f5);
         body.render(f5);
         neck2.render(f5);
@@ -113,8 +110,7 @@ public class ModelEmbryoGeneric extends ModelBase
         rightarm.render(f5);
     }
 
-    private void setRotation(ModelRenderer model, float x, float y, float z)
-    {
+    private void setRotation(ModelRenderer model, float x, float y, float z) {
         model.rotateAngleX = x;
         model.rotateAngleY = y;
         model.rotateAngleZ = z;

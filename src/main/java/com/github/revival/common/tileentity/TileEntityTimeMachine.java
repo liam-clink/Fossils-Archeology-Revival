@@ -19,8 +19,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 import java.util.Random;
 
 public class TileEntityTimeMachine extends TileEntity implements IInventory,
-        ISidedInventory
-{
+        ISidedInventory {
     private static Random field_40064_r = new Random();
     public final float RndRound = ((float) Math.PI * 2F);
     public final int MAX_CHARGED = 1000;
@@ -44,14 +43,10 @@ public class TileEntityTimeMachine extends TileEntity implements IInventory,
     private int restoringLayer = 60;
     private int restoreTick = 0;
 
-    public boolean isClockInPlace()
-    {
-        if (this.getStackInSlot(6) != null)
-        {
-            if (this.getStackInSlot(6).getItem() != null)
-            {
-                if (this.getStackInSlot(6).getItem() == FAItemRegistry.ancientClock)
-                {
+    public boolean isClockInPlace() {
+        if (this.getStackInSlot(6) != null) {
+            if (this.getStackInSlot(6).getItem() != null) {
+                if (this.getStackInSlot(6).getItem() == FAItemRegistry.ancientClock) {
                     return true;
                 }
             }
@@ -64,52 +59,41 @@ public class TileEntityTimeMachine extends TileEntity implements IInventory,
      * e.g. the mob spawner uses this to count ticks and creates a new spawn
      * inside its implementation.
      */
-    public void updateEntity()
-    {
+    public void updateEntity() {
         super.updateEntity();
         this.UpdateClock();
-        if (this.chargeLevel != 0)
-        {
-            if (!this.isClockInPlace())
-            {
+        if (this.chargeLevel != 0) {
+            if (!this.isClockInPlace()) {
                 this.chargeLevel = 0;
             }
         }
-        if (!this.isRestoring)
-        {
+        if (!this.isRestoring) {
 
-            if (this.isClockInPlace())
-            {
+            if (this.isClockInPlace()) {
                 this.charge();
             }
 
 
-            if (this.memoryArray == null || this.memoryMDArray == null)
-            {
+            if (this.memoryArray == null || this.memoryMDArray == null) {
                 this.startMemory();
             }
 
             // if (this.memoryArray != null && this.memoryMDArray != null &&
             // this.isCharged())
             // this.startWork();
-        }
-        else if (++this.restoreTick == 10)
-        {
+        } else if (++this.restoreTick == 10) {
             this.restoreProgress();
             this.restoreTick = 0;
         }
     }
 
-    private void restoreProgress()
-    {
+    private void restoreProgress() {
         Random var1 = this.worldObj.rand;
         boolean var2 = false;
         boolean var3 = false;
 
-        for (int var4 = 0; var4 < 100; ++var4)
-        {
-            for (int var5 = 0; var5 < 100; ++var5)
-            {
+        for (int var4 = 0; var4 < 100; ++var4) {
+            for (int var5 = 0; var5 < 100; ++var5) {
                 World var10000 = this.worldObj;
                 int var10001 = this.xCoord + var4;
                 this.getClass();
@@ -120,8 +104,7 @@ public class TileEntityTimeMachine extends TileEntity implements IInventory,
                 Block var6 = var10000.getBlock(var10001, var10002,
                         var10003 - 100 / 2);
 
-                if (!this.isNonPerserveBlock(var6))
-                {
+                if (!this.isNonPerserveBlock(var6)) {
                     int var10 = this.memoryArray[var4][this.restoringLayer][var5];
                     int var12 = this.memoryMDArray[var4][this.restoringLayer][var5];
                     var10000 = this.worldObj;
@@ -134,8 +117,7 @@ public class TileEntityTimeMachine extends TileEntity implements IInventory,
                     var10000.setBlockMetadataWithNotify(var10001, var10002,
                             var10003 - 100 / 2, var10, var12);
 
-                    if (var10 != 0)
-                    {
+                    if (var10 != 0) {
                         var10000 = this.worldObj;
                         var10002 = this.xCoord + var4;
                         this.getClass();
@@ -167,64 +149,53 @@ public class TileEntityTimeMachine extends TileEntity implements IInventory,
         int var11 = ++this.restoringLayer;
         this.getClass();
 
-        if (var11 >= 256)
-        {
+        if (var11 >= 256) {
             this.isRestoring = false;
             this.restoringLayer = 0;
             this.chargeLevel = 0;
         }
     }
 
-    public void UpdateClock()
-    {
+    public void UpdateClock() {
         this.SendingCurrentFacing = this.CurrectFacingAngle;
         EntityPlayer var1 = this.worldObj.getClosestPlayer(
                 (double) ((float) this.xCoord + 0.5F),
                 (double) ((float) this.yCoord + 0.5F),
                 (double) ((float) this.zCoord + 0.5F), 3.0D);
 
-        if (var1 != null)
-        {
+        if (var1 != null) {
             this.PlayerClosing = true;
             double var2 = var1.posX - (double) ((float) this.xCoord + 0.5F);
             double var4 = var1.posZ - (double) ((float) this.zCoord + 0.5F);
             this.TargetFacingAngle = (float) Math.atan2(var4, var2)
                     + ((float) Math.PI / 2F);
-        }
-        else
-        {
+        } else {
             this.PlayerClosing = false;
             this.TargetFacingAngle += 0.02F;
         }
 
-        while (this.CurrectFacingAngle >= (float) Math.PI)
-        {
+        while (this.CurrectFacingAngle >= (float) Math.PI) {
             this.CurrectFacingAngle -= ((float) Math.PI * 2F);
         }
 
-        while (this.CurrectFacingAngle < -(float) Math.PI)
-        {
+        while (this.CurrectFacingAngle < -(float) Math.PI) {
             this.CurrectFacingAngle += ((float) Math.PI * 2F);
         }
 
-        while (this.TargetFacingAngle >= (float) Math.PI)
-        {
+        while (this.TargetFacingAngle >= (float) Math.PI) {
             this.TargetFacingAngle -= ((float) Math.PI * 2F);
         }
 
-        while (this.TargetFacingAngle < -(float) Math.PI)
-        {
+        while (this.TargetFacingAngle < -(float) Math.PI) {
             this.TargetFacingAngle += ((float) Math.PI * 2F);
         }
 
         float var6;
 
-        for (var6 = this.TargetFacingAngle - this.CurrectFacingAngle; var6 >= (float) Math.PI; var6 -= ((float) Math.PI * 2F))
-        {
+        for (var6 = this.TargetFacingAngle - this.CurrectFacingAngle; var6 >= (float) Math.PI; var6 -= ((float) Math.PI * 2F)) {
         }
 
-        while (var6 < -(float) Math.PI)
-        {
+        while (var6 < -(float) Math.PI) {
             var6 += ((float) Math.PI * 2F);
         }
 
@@ -233,13 +204,11 @@ public class TileEntityTimeMachine extends TileEntity implements IInventory,
         float var3 = (this.field_40061_d - this.field_40063_b) * 0.4F;
         float var7 = 0.2F;
 
-        if (var3 < -var7)
-        {
+        if (var3 < -var7) {
             var3 = -var7;
         }
 
-        if (var3 > var7)
-        {
+        if (var3 > var7) {
             var3 = var7;
         }
 
@@ -247,19 +216,16 @@ public class TileEntityTimeMachine extends TileEntity implements IInventory,
         this.field_40063_b += this.field_40062_e;
     }
 
-    private boolean NotAllowed(Item var1)
-    {
+    private boolean NotAllowed(Item var1) {
         return var1 == Item.getItemFromBlock(Blocks.diamond_block)
                 || var1 == Item.getItemFromBlock(Blocks.diamond_ore);
     }
 
-    public int getSizeInventorySide(ForgeDirection var1)
-    {
+    public int getSizeInventorySide(ForgeDirection var1) {
         return 1;
     }
 
-    public int getStartInventorySide(ForgeDirection var1)
-    {
+    public int getStartInventorySide(ForgeDirection var1) {
         return var1 == ForgeDirection.DOWN ? 1 : (var1 == ForgeDirection.UP ? 0
                 : 2);
     }
@@ -269,16 +235,12 @@ public class TileEntityTimeMachine extends TileEntity implements IInventory,
      * whatever it returns as an EntityItem - like when you close a workbench
      * GUI.
      */
-    public ItemStack getStackInSlotOnClosing(int var1)
-    {
-        if (this.insideStack[var1] != null)
-        {
+    public ItemStack getStackInSlotOnClosing(int var1) {
+        if (this.insideStack[var1] != null) {
             ItemStack var2 = this.insideStack[var1];
             this.insideStack[var1] = null;
             return var2;
-        }
-        else
-        {
+        } else {
             return null;
         }
     }
@@ -286,16 +248,14 @@ public class TileEntityTimeMachine extends TileEntity implements IInventory,
     /**
      * Returns the number of slots in the inventory.
      */
-    public int getSizeInventory()
-    {
+    public int getSizeInventory() {
         return this.insideStack.length;
     }
 
     /**
      * Returns the stack in slot i
      */
-    public ItemStack getStackInSlot(int var1)
-    {
+    public ItemStack getStackInSlot(int var1) {
         return this.insideStack[var1];
     }
 
@@ -303,32 +263,24 @@ public class TileEntityTimeMachine extends TileEntity implements IInventory,
      * Removes from an inventory slot (first arg) up to a specified number
      * (second arg) of items and returns them in a new stack.
      */
-    public ItemStack decrStackSize(int var1, int var2)
-    {
-        if (this.insideStack[var1] != null)
-        {
+    public ItemStack decrStackSize(int var1, int var2) {
+        if (this.insideStack[var1] != null) {
             ItemStack var3;
 
-            if (this.insideStack[var1].stackSize <= var2)
-            {
+            if (this.insideStack[var1].stackSize <= var2) {
                 var3 = this.insideStack[var1];
                 this.insideStack[var1] = null;
                 return var3;
-            }
-            else
-            {
+            } else {
                 var3 = this.insideStack[var1].splitStack(var2);
 
-                if (this.insideStack[var1].stackSize == 0)
-                {
+                if (this.insideStack[var1].stackSize == 0) {
                     this.insideStack[var1] = null;
                 }
 
                 return var3;
             }
-        }
-        else
-        {
+        } else {
             return null;
         }
     }
@@ -337,12 +289,10 @@ public class TileEntityTimeMachine extends TileEntity implements IInventory,
      * Sets the given item stack to the specified slot in the inventory (can be
      * crafting or armor sections).
      */
-    public void setInventorySlotContents(int var1, ItemStack var2)
-    {
+    public void setInventorySlotContents(int var1, ItemStack var2) {
         this.insideStack[var1] = var2;
 
-        if (var2 != null && var2.stackSize > this.getInventoryStackLimit())
-        {
+        if (var2 != null && var2.stackSize > this.getInventoryStackLimit()) {
             var2.stackSize = this.getInventoryStackLimit();
         }
     }
@@ -352,8 +302,7 @@ public class TileEntityTimeMachine extends TileEntity implements IInventory,
      * Returns the maximum stack size for a inventory slot. Seems to always be
      * 64, possibly will be extended. *Isn't this more of a set than a get?*
      */
-    public int getInventoryStackLimit()
-    {
+    public int getInventoryStackLimit() {
         return 64;
     }
 
@@ -361,86 +310,67 @@ public class TileEntityTimeMachine extends TileEntity implements IInventory,
      * Do not make give this method the name canInteractWith because it clashes
      * with Container
      */
-    public boolean isUseableByPlayer(EntityPlayer var1)
-    {
+    public boolean isUseableByPlayer(EntityPlayer var1) {
         return this.worldObj.getTileEntity(this.xCoord, this.yCoord,
                 this.zCoord) != this ? false : var1.getDistanceSq(
                 (double) this.xCoord + 0.5D, (double) this.yCoord + 0.5D,
                 (double) this.zCoord + 0.5D) <= 64.0D;
     }
 
-    public void openChest()
-    {
+    public void openChest() {
     }
 
-    public void closeChest()
-    {
+    public void closeChest() {
     }
 
-    private void charge()
-    {
-        if (!this.isCharged())
-        {
+    private void charge() {
+        if (!this.isCharged()) {
             ++this.chargeLevel;
         }
     }
 
-    public int getChargeLevel()
-    {
+    public int getChargeLevel() {
         return this.chargeLevel;
     }
 
-    public boolean isCharged()
-    {
+    public boolean isCharged() {
         int var10000 = this.chargeLevel;
         this.getClass();
         return var10000 == 1000;
     }
 
-    public void startWork()
-    {
-        if (this.memoryArray != null && this.memoryMDArray != null)
-        {
-            if (this.isCharged())
-            {
+    public void startWork() {
+        if (this.memoryArray != null && this.memoryMDArray != null) {
+            if (this.isCharged()) {
                 this.isRestoring = true;
             }
         }
     }
 
-    public void startMemory()
-    {
+    public void startMemory() {
         this.memoryArray = new int[100][256][100];
         this.memoryMDArray = new int[100][256][100];
 
-        for (int var1 = 0; var1 < 100; ++var1)
-        {
-            for (int var2 = 0; var2 < 256; ++var2)
-            {
-                for (int var3 = 0; var3 < 100; ++var3)
-                {
+        for (int var1 = 0; var1 < 100; ++var1) {
+            for (int var2 = 0; var2 < 256; ++var2) {
+                for (int var3 = 0; var3 < 100; ++var3) {
                     Block var4 = this.worldObj.getBlock(
                             this.xCoord + var1 - 50, var2, this.zCoord + var3
                                     - 50);
 
-                    if (this.isNonPerserveBlock(var4))
-                    {
+                    if (this.isNonPerserveBlock(var4)) {
                         var4 = Blocks.air;
                     }
 
-                    if (var4 != Blocks.air)
-                    {
+                    if (var4 != Blocks.air) {
                         this.memoryMDArray[var1][var2][var3] = this.worldObj
                                 .getBlockMetadata(this.xCoord + var1 - 50,
                                         var2, this.zCoord + var3 - 50);
-                    }
-                    else
-                    {
+                    } else {
                         this.memoryMDArray[var1][var2][var3] = 0;
                     }
 
-                    if (var4 == Blocks.dirt)
-                    {
+                    if (var4 == Blocks.dirt) {
                         var4 = FABlockRegistry.palaePlanks;
                     }
 
@@ -450,24 +380,20 @@ public class TileEntityTimeMachine extends TileEntity implements IInventory,
         }
     }
 
-    private boolean isNonPerserveBlock(Block block)
-    {
+    private boolean isNonPerserveBlock(Block block) {
         return block != null && (block.hasTileEntity(0) || block == Blocks.diamond_block || block == Blocks.diamond_ore);
     }
 
-    public void readFromNBT(NBTTagCompound var1)
-    {
+    public void readFromNBT(NBTTagCompound var1) {
         super.readFromNBT(var1);
         NBTTagList var2 = var1.getTagList("Items", 10);
         this.insideStack = new ItemStack[this.getSizeInventory()];
 
-        for (int var3 = 0; var3 < var2.tagCount(); ++var3)
-        {
+        for (int var3 = 0; var3 < var2.tagCount(); ++var3) {
             NBTTagCompound var4 = var2.getCompoundTagAt(var3);
             byte var5 = var4.getByte("Slot");
 
-            if (var5 >= 0 && var5 < this.insideStack.length)
-            {
+            if (var5 >= 0 && var5 < this.insideStack.length) {
                 this.insideStack[var5] = ItemStack
                         .loadItemStackFromNBT(var4);
             }
@@ -476,22 +402,18 @@ public class TileEntityTimeMachine extends TileEntity implements IInventory,
         this.chargeLevel = var1.getShort("chargeLevel");
 
 
-        if (var1.hasKey("CustomName"))
-        {
+        if (var1.hasKey("CustomName")) {
             this.customName = var1.getString("CustomName");
         }
     }
 
-    public void writeToNBT(NBTTagCompound var1)
-    {
+    public void writeToNBT(NBTTagCompound var1) {
         super.writeToNBT(var1);
         var1.setShort("chargeLevel", (short) this.chargeLevel);
         NBTTagList var2 = new NBTTagList();
 
-        for (int var3 = 0; var3 < this.insideStack.length; ++var3)
-        {
-            if (this.insideStack[var3] != null)
-            {
+        for (int var3 = 0; var3 < this.insideStack.length; ++var3) {
+            if (this.insideStack[var3] != null) {
                 NBTTagCompound var4 = new NBTTagCompound();
                 var4.setByte("Slot", (byte) var3);
                 this.insideStack[var3].writeToNBT(var4);
@@ -501,61 +423,51 @@ public class TileEntityTimeMachine extends TileEntity implements IInventory,
 
         var1.setTag("Items", var2);
 
-        if (this.isInvNameLocalized())
-        {
+        if (this.isInvNameLocalized()) {
             var1.setString("CustomName", this.customName);
         }
     }
 
     @Override
-    public int[] getAccessibleSlotsFromSide(int var1)
-    {
+    public int[] getAccessibleSlotsFromSide(int var1) {
         return null;
     }
 
     @Override
-    public boolean canInsertItem(int i, ItemStack itemstack, int j)
-    {
+    public boolean canInsertItem(int i, ItemStack itemstack, int j) {
         return false;
     }
 
     @Override
-    public boolean canExtractItem(int i, ItemStack itemstack, int j)
-    {
+    public boolean canExtractItem(int i, ItemStack itemstack, int j) {
         return false;
     }
 
     @Override
-    public boolean isItemValidForSlot(int i, ItemStack itemstack)
-    {
+    public boolean isItemValidForSlot(int i, ItemStack itemstack) {
         return false;
     }
 
     @Override
-    public boolean hasCustomInventoryName()
-    {
+    public boolean hasCustomInventoryName() {
         return false;
     }
 
     @Override
-    public void openInventory()
-    {
+    public void openInventory() {
     }
 
     @Override
-    public void closeInventory()
-    {
+    public void closeInventory() {
     }
 
-    public String getInvName()
-    {
+    public String getInvName() {
         return this.isInvNameLocalized() ? this.customName : "tile."
                 + LocalizationStrings.BLOCK_TIMEMACHINE_NAME + ".name";
     }
 
     @Override
-    public String getInventoryName()
-    {
+    public String getInventoryName() {
         return this.isInvNameLocalized() ? this.customName : "tile."
                 + LocalizationStrings.BLOCK_TIMEMACHINE_NAME + ".name";
     }
@@ -565,8 +477,7 @@ public class TileEntityTimeMachine extends TileEntity implements IInventory,
      * name, and translated into the player's language. Otherwise it will be
      * used directly.
      */
-    public boolean isInvNameLocalized()
-    {
+    public boolean isInvNameLocalized() {
         return this.customName != null && this.customName.length() > 0;
     }
 

@@ -3,17 +3,7 @@ package com.github.revival.common.entity.mob;
 import com.github.revival.client.gui.GuiPedia;
 import com.github.revival.common.api.IPrehistoricAI;
 import com.github.revival.common.enums.EnumPrehistoricAI;
-import com.github.revival.common.enums.EnumPrehistoricAI.Activity;
-import com.github.revival.common.enums.EnumPrehistoricAI.Attacking;
-import com.github.revival.common.enums.EnumPrehistoricAI.Climbing;
-import com.github.revival.common.enums.EnumPrehistoricAI.Dexterity;
-import com.github.revival.common.enums.EnumPrehistoricAI.Following;
-import com.github.revival.common.enums.EnumPrehistoricAI.Jumping;
-import com.github.revival.common.enums.EnumPrehistoricAI.Response;
-import com.github.revival.common.enums.EnumPrehistoricAI.Stalking;
-import com.github.revival.common.enums.EnumPrehistoricAI.Taming;
-import com.github.revival.common.enums.EnumPrehistoricAI.Untaming;
-
+import com.github.revival.common.enums.EnumPrehistoricAI.*;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
@@ -23,12 +13,10 @@ import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
-
 import org.lwjgl.opengl.GL11;
 
 import java.io.BufferedReader;
@@ -36,260 +24,237 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-public class EntityPrehistoric extends EntityTameable implements IPrehistoricAI
-{
+public class EntityPrehistoric extends EntityTameable implements IPrehistoricAI {
 
-	public static final int OWNER_DISPLAY_NAME_INDEX = 24;
-	public float animation_frame;
-	protected static final ResourceLocation pediaclock = new ResourceLocation("fossil:textures/gui/PediaClock.png");
-	protected static final ResourceLocation pediafood = new ResourceLocation("fossil:textures/gui/PediaFood.png");
-	protected static final ResourceLocation pediaheart = new ResourceLocation("fossil:textures/gui/PediaHeart.png");
+    public static final int OWNER_DISPLAY_NAME_INDEX = 24;
+    public float animation_frame;
+    protected static final ResourceLocation pediaclock = new ResourceLocation("fossil:textures/gui/PediaClock.png");
+    protected static final ResourceLocation pediafood = new ResourceLocation("fossil:textures/gui/PediaFood.png");
+    protected static final ResourceLocation pediaheart = new ResourceLocation("fossil:textures/gui/PediaHeart.png");
 
-	private boolean inHerd = false;
-	private float awarenessRadius;
-	private int maxHerdSize;
-	private float herdWanderRadius;
+    private boolean inHerd = false;
+    private float awarenessRadius;
+    private int maxHerdSize;
+    private float herdWanderRadius;
 
-	public EntityPrehistoric(World par1World)
-	{
-		super(par1World);
-	}
+    public EntityPrehistoric(World world) {
+        super(world);
+    }
 
-	protected void entityInit()
-	{
-		super.entityInit();
-		this.dataWatcher.addObject(OWNER_DISPLAY_NAME_INDEX, "");
-	}
+    protected void entityInit() {
+        super.entityInit();
+        this.dataWatcher.addObject(OWNER_DISPLAY_NAME_INDEX, "");
+    }
 
-	public boolean isInHerd()
-	{
-		return inHerd;
-	}
+    public boolean isInHerd() {
+        return inHerd;
+    }
 
-	public float getAwarenessRadius()
-	{
-		return awarenessRadius;
-	}
-	@Override
-	public void jump(){
-		if(this.aiJumpType() == EnumPrehistoricAI.Jumping.TWOBLOCKS){
-			this.motionY = 0.41999998688697815D * 2;
-			 if (this.isPotionActive(Potion.jump))
-		        {
-		            this.motionY += (double)((float)(this.getActivePotionEffect(Potion.jump).getAmplifier() + 1) * 0.1F);
-		        }
+    public float getAwarenessRadius() {
+        return awarenessRadius;
+    }
 
-		        if (this.isSprinting())
-		        {
-		            float f = this.rotationYaw * 0.017453292F;
-		            this.motionX -= (double)(MathHelper.sin(f) * 0.2F);
-		            this.motionZ += (double)(MathHelper.cos(f) * 0.2F);
-		        }
+    @Override
+    public void jump() {
+        if (this.aiJumpType() == EnumPrehistoricAI.Jumping.TWOBLOCKS) {
+            this.motionY = 0.41999998688697815D * 2;
+            if (this.isPotionActive(Potion.jump)) {
+                this.motionY += (double) ((float) (this.getActivePotionEffect(Potion.jump).getAmplifier() + 1) * 0.1F);
+            }
 
-		        this.isAirBorne = true;
-		        ForgeHooks.onLivingJump(this);
-		}else{
-			super.jump();
-		}
-	}
-	public int getMaxHerdSize()
-	{
-		return maxHerdSize;
-	}
+            if (this.isSprinting()) {
+                float f = this.rotationYaw * 0.017453292F;
+                this.motionX -= (double) (MathHelper.sin(f) * 0.2F);
+                this.motionZ += (double) (MathHelper.cos(f) * 0.2F);
+            }
 
-	public float getHerdWanderRadius()
-	{
-		return herdWanderRadius;
-	}
+            this.isAirBorne = true;
+            ForgeHooks.onLivingJump(this);
+        } else {
+            super.jump();
+        }
+    }
 
-	/**
-	 * Override this and set temporary variables to the attributes.
-	 */
-	@Override
-	protected void applyEntityAttributes()
-	{
-		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.30000001192092896D);
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(19.0D);
-		getAttributeMap().registerAttribute(SharedMonsterAttributes.attackDamage);
-		setBaseValues();
-	}
+    public int getMaxHerdSize() {
+        return maxHerdSize;
+    }
 
-	/**
-	 * Overrided in unique entity classes.
-	 */
-	private void setBaseValues()
-	{
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(1.0D);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(1.0D);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(1.0D);
-		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.0D);
+    public float getHerdWanderRadius() {
+        return herdWanderRadius;
+    }
 
-	}
+    /**
+     * Override this and set temporary variables to the attributes.
+     */
+    @Override
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.30000001192092896D);
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(19.0D);
+        getAttributeMap().registerAttribute(SharedMonsterAttributes.attackDamage);
+        setBaseValues();
+    }
 
-	/**
-	 * (abstract) Protected helper method to write subclass entity data to NBT.
-	 */
-	public void writeEntityToNBT(NBTTagCompound compound)
-	{
-		super.writeEntityToNBT(compound);
-		compound.setString("OwnerDisplayName", this.getOwnerDisplayName());
-	}
+    /**
+     * Overrided in unique entity classes.
+     */
+    private void setBaseValues() {
+        getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(1.0D);
+        getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(1.0D);
+        getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(1.0D);
+        getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.0D);
 
-	/**
-	 * (abstract) Protected helper method to read subclass entity data from NBT.
-	 */
-	public void readEntityFromNBT(NBTTagCompound compound)
-	{
-		String s = "";
+    }
 
-		if (compound.hasKey("Owner", 8))
-		{
-			s = compound.getString("Owner");
-			this.setOwnerDisplayName(s);
-		}
-		else
-		{
-			this.setOwnerDisplayName(compound.getString("OwnerDisplayName"));
-		}
+    /**
+     * (abstract) Protected helper method to write subclass entity data to NBT.
+     */
+    public void writeEntityToNBT(NBTTagCompound compound) {
+        super.writeEntityToNBT(compound);
+        compound.setString("OwnerDisplayName", this.getOwnerDisplayName());
+    }
 
-		super.readEntityFromNBT(compound);
-	}
+    /**
+     * (abstract) Protected helper method to read subclass entity data from NBT.
+     */
+    public void readEntityFromNBT(NBTTagCompound compound) {
+        String s = "";
 
-	@Override
-	public EntityAgeable createChild(EntityAgeable entityageable)
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
+        if (compound.hasKey("Owner", 8)) {
+            s = compound.getString("Owner");
+            this.setOwnerDisplayName(s);
+        } else {
+            this.setOwnerDisplayName(compound.getString("OwnerDisplayName"));
+        }
 
-	public EntityPlayer getRidingPlayer()
-	{
-		if (riddenByEntity instanceof EntityPlayer)
-		{
-			return (EntityPlayer) riddenByEntity;
-		}
-		else
-		{
-			return null;
-		}
-	}
+        super.readEntityFromNBT(compound);
+    }
 
-	//2:07 to
-	@SideOnly(Side.CLIENT)
-	public void ShowPedia2(GuiPedia p0, String mobName)
-	{
-		p0.reset();
-		p0.AddStringLR("", 150, false);
-		String translatePath = "assets/fossil/dinopedia/" + Minecraft.getMinecraft().gameSettings.language + "/";
-		String bioFile = String.valueOf(mobName) + ".txt";
+    @Override
+    public EntityAgeable createChild(EntityAgeable entityageable) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
-		if (getClass().getClassLoader().getResourceAsStream(translatePath) == null)
-		{
-			translatePath = "assets/fossil/dinopedia/" + "en_US" + "/";
-		}
+    public EntityPlayer getRidingPlayer() {
+        if (riddenByEntity instanceof EntityPlayer) {
+            return (EntityPlayer) riddenByEntity;
+        } else {
+            return null;
+        }
+    }
 
-		if (getClass().getClassLoader().getResourceAsStream(translatePath + bioFile) != null)
-		{
-			InputStream fileReader = getClass().getClassLoader().getResourceAsStream(translatePath + bioFile);
-			try
-			{
-				BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(fileReader));
-				StringBuffer stringBuffer = new StringBuffer();
-				String line;
-				while ((line = bufferedReader.readLine()) != null)
-				{
-					GL11.glPushMatrix();
-					GL11.glScalef(0.5F, 0.5F, 0.5F);
-					p0.AddStringLR(line, 150, false);
-					GL11.glPopMatrix();
-				}
-				fileReader.close();
-			}
-			catch (IOException e)
-			{
-				e.printStackTrace();
-			}
-		}
-		else
-		{
-			p0.AddStringLR("File not found.", false);
-			GL11.glPushMatrix();
-			GL11.glScalef(0.5F, 0.5F, 0.5F);
-			p0.AddStringLR(translatePath + bioFile, 150, false);
-			GL11.glPopMatrix();
-		}
-	}
+    //2:07 to
+    @SideOnly(Side.CLIENT)
+    public void ShowPedia2(GuiPedia p0, String mobName) {
+        p0.reset();
+        p0.addStringLR("", 150, false);
+        String translatePath = "assets/fossil/dinopedia/" + Minecraft.getMinecraft().gameSettings.language + "/";
+        String bioFile = String.valueOf(mobName) + ".txt";
 
-	public void onWhipRightClick()
-	{
-		// TODO Auto-generated method stub
+        if (getClass().getClassLoader().getResourceAsStream(translatePath) == null) {
+            translatePath = "assets/fossil/dinopedia/" + "en_US" + "/";
+        }
 
-	}
-	public void onUpdate(){
-		super.onUpdate();
-		animation_frame++;
-	}
+        if (getClass().getClassLoader().getResourceAsStream(translatePath + bioFile) != null) {
+            InputStream fileReader = getClass().getClassLoader().getResourceAsStream(translatePath + bioFile);
+            try {
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(fileReader));
+                StringBuffer stringBuffer = new StringBuffer();
+                String line;
+                while ((line = bufferedReader.readLine()) != null) {
+                    GL11.glPushMatrix();
+                    GL11.glScalef(0.5F, 0.5F, 0.5F);
+                    p0.addStringLR(line, 150, false);
+                    GL11.glPopMatrix();
+                }
+                fileReader.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            p0.addStringLR("File not found.", false);
+            GL11.glPushMatrix();
+            GL11.glScalef(0.5F, 0.5F, 0.5F);
+            p0.addStringLR(translatePath + bioFile, 150, false);
+            GL11.glPopMatrix();
+        }
+    }
 
-	public String getOwnerDisplayName()
-	{
-		String s = this.dataWatcher.getWatchableObjectString(OWNER_DISPLAY_NAME_INDEX);
-		return s;
-	}
+    public void onWhipRightClick() {
+        // TODO Auto-generated method stub
 
-	public void setOwnerDisplayName(String displayName)
-	{
-		this.dataWatcher.updateObject(OWNER_DISPLAY_NAME_INDEX, displayName);
-	}
+    }
 
-	@Override
-	public Activity aiActivityType() {
-		return Activity.DURINAL;
-	}
+    public void onUpdate() {
+        super.onUpdate();
+        animation_frame++;
+    }
 
-	@Override
-	public Attacking aiAttackType() {
-		return Attacking.BASIC;
-	}
+    public String getOwnerDisplayName() {
+        String s = this.dataWatcher.getWatchableObjectString(OWNER_DISPLAY_NAME_INDEX);
+        return s;
+    }
 
-	@Override
-	public Climbing aiClimbType() {
-		return Climbing.NONE;
-	}
+    public void setOwnerDisplayName(String displayName) {
+        this.dataWatcher.updateObject(OWNER_DISPLAY_NAME_INDEX, displayName);
+    }
 
-	@Override
-	public Dexterity aiDexterityType() {
-		return Dexterity.NONE;
-	}
+    @Override
+    public Activity aiActivityType() {
+        return Activity.DURINAL;
+    }
 
-	@Override
-	public Following aiFollowType() {
-		return Following.NONE;
-	}
+    @Override
+    public Attacking aiAttackType() {
+        return Attacking.BASIC;
+    }
 
-	@Override
-	public Jumping aiJumpType() {
-		return Jumping.BASIC;
-	}
+    @Override
+    public Climbing aiClimbType() {
+        return Climbing.NONE;
+    }
 
-	@Override
-	public Response aiResponseType() {
-		return Response.NONE;
-	}
+    @Override
+    public Following aiFollowType() {
+        return Following.NONE;
+    }
 
-	@Override
-	public Stalking aiStalkType() {
-		return Stalking.NONE;
-	}
+    @Override
+    public Jumping aiJumpType() {
+        return Jumping.BASIC;
+    }
 
-	@Override
-	public Taming aiTameType() {
-		return Taming.IMPRINTING;
-	}
+    @Override
+    public Response aiResponseType() {
+        return Response.NONE;
+    }
 
-	@Override
-	public Untaming aiUntameType() {
-		return Untaming.STARVE;
-	}
+    @Override
+    public Stalking aiStalkType() {
+        return Stalking.NONE;
+    }
+
+    @Override
+    public Taming aiTameType() {
+        return Taming.IMPRINTING;
+    }
+
+    @Override
+    public Untaming aiUntameType() {
+        return Untaming.STARVE;
+    }
+
+    @Override
+    public Moving aiMovingType() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public WaterAbility aiWaterAbilityType() {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
 }

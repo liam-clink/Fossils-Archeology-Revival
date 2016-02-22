@@ -2,30 +2,24 @@ package com.github.revival.common.entity.mob;
 
 import com.github.revival.common.enums.EnumDinoFoodMob;
 
-public class DinoFoodMobList
-{
+public class DinoFoodMobList {
     EnumDinoFoodMob[] Mobs;
 
     int index;
 
-    public DinoFoodMobList()
-    {
+    public DinoFoodMobList() {
         index = 0;
         this.Mobs = new EnumDinoFoodMob[100];
     }
 
-    public void addMob(EnumDinoFoodMob mob)
-    {
+    public void addMob(EnumDinoFoodMob mob) {
         this.Mobs[index] = mob;
         index++;
     }
 
-    public boolean CheckMobByClass(Class mobclass)
-    {
-        for (int i = 0; i < index; i++)
-        {
-            if (Mobs[i].preyClass == mobclass)
-            {
+    public boolean CheckMobByClass(Class mobclass) {
+        for (int i = 0; i < index; i++) {
+            if (Mobs[i].preyClass == mobclass) {
                 return true;
             }
         }
@@ -33,12 +27,9 @@ public class DinoFoodMobList
         return false;
     }
 
-    public int getMobFood(Class mobclass)
-    {
-        for (int i = 0; i < index; i++)
-        {
-            if (Mobs[i].preyClass == mobclass)
-            {
+    public int getMobFood(Class mobclass) {
+        for (int i = 0; i < index; i++) {
+            if (Mobs[i].preyClass == mobclass) {
                 return Mobs[i].FoodValue;
             }
         }
@@ -46,12 +37,9 @@ public class DinoFoodMobList
         return 0;
     }
 
-    public int getMobHeal(Class mobclass)
-    {
-        for (int i = 0; i < index; i++)
-        {
-            if (Mobs[i].preyClass == mobclass)
-            {
+    public int getMobHeal(Class mobclass) {
+        for (int i = 0; i < index; i++) {
+            if (Mobs[i].preyClass == mobclass) {
                 return Mobs[i].HealValue;
             }
         }
@@ -59,8 +47,7 @@ public class DinoFoodMobList
         return 0;
     }
 
-    public boolean IsEmpty()
-    {
+    public boolean IsEmpty() {
         return index == 0;
     }
 }

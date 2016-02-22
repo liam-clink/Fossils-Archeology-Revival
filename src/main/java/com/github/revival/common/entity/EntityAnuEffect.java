@@ -10,15 +10,13 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public class EntityAnuEffect extends EntityLiving
-{
+public class EntityAnuEffect extends EntityLiving {
 
     public boolean slowed;
     public int deathTicks;
     private Entity target;
 
-    public EntityAnuEffect(World world)
-    {
+    public EntityAnuEffect(World world) {
         super(world);
         this.setSize(1.0F, 1.9F);
         this.isImmuneToFire = true;
@@ -26,18 +24,15 @@ public class EntityAnuEffect extends EntityLiving
 
     }
 
-    public int getAnuRotation()
-    {
+    public int getAnuRotation() {
         return this.dataWatcher.getWatchableObjectByte(18);
     }
 
-    public void setAnuRotation(float par1)
-    {
+    public void setAnuRotation(float par1) {
         this.dataWatcher.updateObject(18, Byte.valueOf((byte) par1));
     }
 
-    public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
-    {
+    public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {
         super.writeEntityToNBT(par1NBTTagCompound);
         par1NBTTagCompound.setInteger("AnuRotation", this.getAnuRotation());
     }
@@ -45,33 +40,28 @@ public class EntityAnuEffect extends EntityLiving
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
-    public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
-    {
+    public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {
         super.readEntityFromNBT(par1NBTTagCompound);
         this.setAnuRotation(par1NBTTagCompound.getInteger("AnuRotation"));
     }
 
-    public void moveEntityWithHeading(float par1, float par2)
-    {
+    public void moveEntityWithHeading(float par1, float par2) {
         this.motionX *= 0.0D;
         this.motionY *= 0.0D;
         this.motionZ *= 0.0D;
     }
 
-    protected void entityInit()
-    {
+    protected void entityInit() {
         super.entityInit();
         this.dataWatcher.addObject(16, new Byte((byte) 0));
         this.dataWatcher.addObject(18, Byte.valueOf((byte) 0));
     }
 
-    public void playSummonSong()
-    {
+    public void playSummonSong() {
         this.playSound("fossil:anuTotem", 0.15F, 1F);
     }
 
-    protected void applyEntityAttributes()
-    {
+    protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(20.0D);
     }
@@ -80,12 +70,10 @@ public class EntityAnuEffect extends EntityLiving
     /**
      * handles entity death timer, experience orb and particle creation
      */
-    protected void onDeathUpdate()
-    {
+    protected void onDeathUpdate() {
         ++this.deathTicks;
 
-        if (this.deathTicks >= 160 && this.deathTicks <= 180)
-        {
+        if (this.deathTicks >= 160 && this.deathTicks <= 180) {
             float f = (this.rand.nextFloat() - 0.5F) * 8.0F;
             float f1 = (this.rand.nextFloat() - 0.5F) * 4.0F;
             float f2 = (this.rand.nextFloat() - 0.5F) * 8.0F;
@@ -95,33 +83,27 @@ public class EntityAnuEffect extends EntityLiving
         int i;
         int j;
 
-        if (!this.worldObj.isRemote)
-        {
-            if (this.deathTicks > 150 && this.deathTicks % 5 == 0)
-            {
+        if (!this.worldObj.isRemote) {
+            if (this.deathTicks > 150 && this.deathTicks % 5 == 0) {
                 i = 1000;
 
-                while (i > 0)
-                {
+                while (i > 0) {
                     j = EntityXPOrb.getXPSplit(i);
                     i -= j;
                     // this.worldObj.spawnEntityInWorld(new EntityXPOrb(this.worldObj, this.posX, this.posY, this.posZ, j));
                 }
             }
 
-            if (this.deathTicks == 1)
-            {
+            if (this.deathTicks == 1) {
                 //  this.worldObj.playBroadcastSound(1018, (int)this.posX, (int)this.posY, (int)this.posZ, 0);
             }
         }
         this.renderYawOffset = this.rotationYaw += 20.0F;
 
-        if (this.deathTicks == 200 && !this.worldObj.isRemote)
-        {
+        if (this.deathTicks == 200 && !this.worldObj.isRemote) {
             i = 2000;
 
-            while (i > 0)
-            {
+            while (i > 0) {
                 j = EntityXPOrb.getXPSplit(i);
                 i -= j;
                 this.worldObj.spawnEntityInWorld(new EntityXPOrb(this.worldObj, this.posX, this.posY, this.posZ, j));
@@ -135,8 +117,7 @@ public class EntityAnuEffect extends EntityLiving
     /**
      * Creates the ender portal leading back to the normal world after defeating the enderdragon.
      */
-    private void createEnderPortal(int x, int y, int z)
-    {
+    private void createEnderPortal(int x, int y, int z) {
         worldObj.setBlock(x, y, z, FABlockRegistry.anuPortal);
         worldObj.setBlock(x, y + 1, z, FABlockRegistry.anuPortal);
         worldObj.setBlock(x, y + 2, z, Blocks.obsidian);
@@ -146,24 +127,21 @@ public class EntityAnuEffect extends EntityLiving
     /**
      * Makes the entity despawn if requirements are reached
      */
-    protected void despawnEntity()
-    {
+    protected void despawnEntity() {
 
     }
 
     /**
      * Returns true if other Entities should be prevented from moving through this Entity.
      */
-    public boolean canBeCollidedWith()
-    {
+    public boolean canBeCollidedWith() {
         return false;
     }
 
     /**
      * Returns the volume for the sounds this mob makes.
      */
-    protected float getSoundVolume()
-    {
+    protected float getSoundVolume() {
         return 5.0F;
     }
 }

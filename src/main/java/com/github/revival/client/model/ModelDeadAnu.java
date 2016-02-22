@@ -10,8 +10,7 @@ import org.lwjgl.opengl.GL11;
  * ModelPigBoss - Either Mojang or a mod author
  * Created using Tabula 4.1.1
  */
-public class ModelDeadAnu extends ModelBase
-{
+public class ModelDeadAnu extends ModelBase {
     public ModelRenderer field_78112_f;
     public ModelRenderer field_78124_i;
     public ModelRenderer Head;
@@ -25,8 +24,7 @@ public class ModelDeadAnu extends ModelBase
     public ModelRenderer LeftTusk;
     public ModelRenderer RightTusk;
 
-    public ModelDeadAnu()
-    {
+    public ModelDeadAnu() {
         this.textureWidth = 64;
         this.textureHeight = 64;
         this.field_78115_e = new ModelRenderer(this, 40, 18);
@@ -78,16 +76,13 @@ public class ModelDeadAnu extends ModelBase
         this.Head.addChild(this.Hornleft);
     }
 
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
-    {
+    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
         float alpha;
         GL11.glPushMatrix();
         GL11.glTranslatef(0, 1.4F, 0.6F);
         GL11.glRotatef(-90, 1, 0, 0);
-        if (entity instanceof EntityAnuDead)
-        {
-            if (((EntityAnuDead) entity).deathTicks > 40)
-            {
+        if (entity instanceof EntityAnuDead) {
+            if (((EntityAnuDead) entity).deathTicks > 40) {
                 alpha = 1 - (((((EntityAnuDead) entity).deathTicks - 40) / 9) * 0.01F);
                 GL11.glColor4f(1.0F, 1.0F, 1.0F, alpha);
             }
@@ -108,8 +103,7 @@ public class ModelDeadAnu extends ModelBase
     /**
      * This is a helper function from Tabula to set the rotation of model parts
      */
-    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z)
-    {
+    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
         modelRenderer.rotateAngleX = x;
         modelRenderer.rotateAngleY = y;
         modelRenderer.rotateAngleZ = z;

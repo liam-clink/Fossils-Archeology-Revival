@@ -6,8 +6,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 import org.lwjgl.opengl.GL11;
 
-public class ModelTNClock extends ModelBase
-{
+public class ModelTNClock extends ModelBase {
     ModelRenderer H = (new ModelRenderer(this, 0, 5)).setTextureSize(64, 32);
     ModelRenderer M;
     ModelRenderer axie;
@@ -17,8 +16,7 @@ public class ModelTNClock extends ModelBase
     ModelRenderer C21;
     ModelRenderer C31;
 
-    public ModelTNClock()
-    {
+    public ModelTNClock() {
         this.H.addBox(-0.5333334F, -3.0F, -0.5F, 1, 3, 1);
         this.H.setRotationPoint(0.0F, 0.0F, 0.0F);
         this.setRotation(this.H, 0.0F, 0.0F, 0.0F);
@@ -60,8 +58,7 @@ public class ModelTNClock extends ModelBase
         this.C31.mirror = true;
     }
 
-    public void renderItem(float var7, float worldTime)
-    {
+    public void renderItem(float var7, float worldTime) {
 
         this.axie.render(var7);
         this.C.render(var7);
@@ -90,8 +87,7 @@ public class ModelTNClock extends ModelBase
     /**
      * Sets the models various rotation angles then renders the model.
      */
-    public void render(Entity var1, float var2, float var3, float var4, float var5, float var6, float var7)
-    {
+    public void render(Entity var1, float var2, float var3, float var4, float var5, float var6, float var7) {
         super.render(var1, var2, var3, var4, var5, var6, var7);
         this.setRotationAngles(var2, var3, var4, var5, var6, var7, var1);
         this.H.render(var7);
@@ -104,8 +100,7 @@ public class ModelTNClock extends ModelBase
         this.C31.render(var7);
     }
 
-    public void EdgeRotate(float var1, float var2, float var3, float var4, float var5, float var6)
-    {
+    public void EdgeRotate(float var1, float var2, float var3, float var4, float var5, float var6) {
         this.C2.rotateAngleX = MathHelper.cos(var1 / 4.797769F) * 0.5235988F * var2 + 0.0F;
         this.C2.rotateAngleZ = MathHelper.cos(var1 / 9.595538F) * (float) Math.PI * var2 + 0.0F;
         this.C3.rotateAngleX = MathHelper.cos(var1 / 4.797769F) * 0.5235988F * var2 + 0.0F;
@@ -116,8 +111,7 @@ public class ModelTNClock extends ModelBase
         this.C31.rotateAngleZ = MathHelper.cos(var1 / 9.595538F) * -(float) Math.PI * var2 + ((float) Math.PI / 4F);
     }
 
-    public void EdgePullBack()
-    {
+    public void EdgePullBack() {
         this.C2.rotateAngleX = 0.0F;
         this.C2.rotateAngleY = 0.0F;
         this.C2.rotateAngleZ = 0.0F;
@@ -132,29 +126,21 @@ public class ModelTNClock extends ModelBase
         this.C31.rotateAngleZ = ((float) Math.PI / 4F);
     }
 
-    public void UpdateTime(float var1, float var2)
-    {
-        if ((double) var1 <= Math.PI)
-        {
+    public void UpdateTime(float var1, float var2) {
+        if ((double) var1 <= Math.PI) {
             this.H.rotateAngleZ = var1;
-        }
-        else
-        {
+        } else {
             this.H.rotateAngleZ = (float) ((double) var1 - (Math.PI * 2D));
         }
 
-        if ((double) var2 <= Math.PI)
-        {
+        if ((double) var2 <= Math.PI) {
             this.M.rotateAngleZ = var2;
-        }
-        else
-        {
+        } else {
             this.M.rotateAngleZ = (float) ((double) var2 - (Math.PI * 2D));
         }
     }
 
-    private void setRotation(ModelRenderer var1, float var2, float var3, float var4)
-    {
+    private void setRotation(ModelRenderer var1, float var2, float var3, float var4) {
         var1.rotateAngleX = var2;
         var1.rotateAngleY = var3;
         var1.rotateAngleZ = var4;

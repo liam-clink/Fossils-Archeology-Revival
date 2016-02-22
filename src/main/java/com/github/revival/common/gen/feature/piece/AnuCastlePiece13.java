@@ -5,11 +5,9 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class AnuCastlePiece13
-{
-    public static boolean generate_r077(World world, Random rand, int x, int y, int z)
-    {
-        
+public class AnuCastlePiece13 {
+    public static boolean generate_r077(World world, Random rand, int x, int y, int z) {
+
         world.setBlock(x + 22, y + 12, z + 28, Blocks.planks, 5, 3);
         world.setBlock(x + 23, y + 12, z + 28, Blocks.planks, 5, 3);
         world.setBlock(x + 24, y + 12, z + 28, Blocks.planks, 5, 3);
@@ -1510,15 +1508,14 @@ public class AnuCastlePiece13
         world.setBlock(x + 66, y + 12, z + 39, Blocks.planks, 5, 3);
         world.setBlock(x + 67, y + 12, z + 39, Blocks.planks, 5, 3);
         world.setBlock(x + 68, y + 12, z + 39, Blocks.planks, 5, 3);
-        
+
         generate_r078(world, rand, x, y, z);
         return true;
-        
+
     }
-    
-    public static boolean generate_r078(World world, Random rand, int x, int y, int z)
-    {
-        
+
+    public static boolean generate_r078(World world, Random rand, int x, int y, int z) {
+
         world.setBlock(x + 69, y + 12, z + 39, Blocks.stonebrick, 0, 3);
         world.setBlock(x + 70, y + 12, z + 39, Blocks.stonebrick, 0, 3);
         world.setBlock(x + 71, y + 12, z + 39, Blocks.stonebrick, 0, 3);
@@ -3019,15 +3016,14 @@ public class AnuCastlePiece13
         world.setBlock(x + 108, y + 12, z + 58, Blocks.planks, 5, 3);
         world.setBlock(x + 109, y + 12, z + 58, Blocks.stonebrick, 0, 3);
         world.setBlock(x + 110, y + 12, z + 58, Blocks.planks, 5, 3);
-        
+
         generate_r079(world, rand, x, y, z);
         return true;
-        
+
     }
-    
-    public static boolean generate_r079(World world, Random rand, int x, int y, int z)
-    {
-        
+
+    public static boolean generate_r079(World world, Random rand, int x, int y, int z) {
+
         world.setBlock(x + 111, y + 12, z + 58, Blocks.planks, 5, 3);
         world.setBlock(x + 112, y + 12, z + 58, Blocks.planks, 5, 3);
         world.setBlock(x + 113, y + 12, z + 58, Blocks.planks, 5, 3);
@@ -4528,15 +4524,14 @@ public class AnuCastlePiece13
         world.setBlock(x + 126, y + 12, z + 77, Blocks.planks, 5, 3);
         world.setBlock(x + 127, y + 12, z + 77, Blocks.planks, 5, 3);
         world.setBlock(x + 128, y + 12, z + 77, Blocks.planks, 5, 3);
-        
+
         generate_r080(world, rand, x, y, z);
         return true;
-        
+
     }
-    
-    public static boolean generate_r080(World world, Random rand, int x, int y, int z)
-    {
-        
+
+    public static boolean generate_r080(World world, Random rand, int x, int y, int z) {
+
         world.setBlock(x + 129, y + 12, z + 77, Blocks.planks, 5, 3);
         world.setBlock(x + 130, y + 12, z + 77, Blocks.planks, 5, 3);
         world.setBlock(x + 131, y + 12, z + 77, Blocks.planks, 5, 3);
@@ -6037,15 +6032,14 @@ public class AnuCastlePiece13
         world.setBlock(x + 54, y + 12, z + 97, Blocks.stone_brick_stairs, 5, 3);
         world.setBlock(x + 86, y + 12, z + 97, Blocks.stone_brick_stairs, 4, 3);
         world.setBlock(x + 87, y + 12, z + 97, Blocks.stone_brick_stairs, 6, 3);
-        
+
         generate_r081(world, rand, x, y, z);
         return true;
-        
+
     }
-    
-    public static boolean generate_r081(World world, Random rand, int x, int y, int z)
-    {
-        
+
+    public static boolean generate_r081(World world, Random rand, int x, int y, int z) {
+
         world.setBlock(x + 88, y + 12, z + 97, Blocks.stone_brick_stairs, 4, 3);
         world.setBlock(x + 102, y + 12, z + 97, Blocks.stonebrick, 0, 3);
         world.setBlock(x + 103, y + 12, z + 97, Blocks.planks, 5, 3);
@@ -7546,15 +7540,14 @@ public class AnuCastlePiece13
         world.setBlock(x + 21, y + 12, z + 110, Blocks.planks, 5, 3);
         world.setBlock(x + 22, y + 12, z + 110, Blocks.planks, 5, 3);
         world.setBlock(x + 23, y + 12, z + 110, Blocks.planks, 5, 3);
-        
+
         generate_r082(world, rand, x, y, z);
         return true;
-        
+
     }
-    
-    public static boolean generate_r082(World world, Random rand, int x, int y, int z)
-    {
-        
+
+    public static boolean generate_r082(World world, Random rand, int x, int y, int z) {
+
         world.setBlock(x + 24, y + 12, z + 110, Blocks.planks, 5, 3);
         world.setBlock(x + 25, y + 12, z + 110, Blocks.stonebrick, 0, 3);
         world.setBlock(x + 26, y + 12, z + 110, Blocks.stonebrick, 0, 3);
@@ -9055,15 +9048,14 @@ public class AnuCastlePiece13
         world.setBlock(x + 56, y + 12, z + 121, Blocks.planks, 5, 3);
         world.setBlock(x + 57, y + 12, z + 121, Blocks.planks, 5, 3);
         world.setBlock(x + 58, y + 12, z + 121, Blocks.planks, 5, 3);
-        
+
         generate_r083(world, rand, x, y, z);
         return true;
-        
+
     }
-    
-    public static boolean generate_r083(World world, Random rand, int x, int y, int z)
-    {
-        
+
+    public static boolean generate_r083(World world, Random rand, int x, int y, int z) {
+
         world.setBlock(x + 59, y + 12, z + 121, Blocks.stonebrick, 0, 3);
         world.setBlock(x + 60, y + 12, z + 121, Blocks.stonebrick, 0, 3);
         world.setBlock(x + 61, y + 12, z + 121, Blocks.stonebrick, 0, 3);
@@ -10564,10 +10556,10 @@ public class AnuCastlePiece13
         world.setBlock(x + 79, y + 12, z + 132, Blocks.stonebrick, 0, 3);
         world.setBlock(x + 80, y + 12, z + 132, Blocks.stonebrick, 0, 3);
         world.setBlock(x + 81, y + 12, z + 132, Blocks.stonebrick, 0, 3);
-        
+
         AnuCastlePiece14.generate_r084(world, rand, x, y, z);
         return true;
-        
+
     }
-    
+
 }

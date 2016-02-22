@@ -10,19 +10,16 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import org.lwjgl.opengl.GL11;
 
-public class GuiWorktable extends GuiContainer
-{
+public class GuiWorktable extends GuiContainer {
     private static final ResourceLocation loc = new ResourceLocation("fossil:textures/gui/Workbench.png");
-    private TileEntityWorktable furnaceInventory;
+    private TileEntityWorktable tile;
 
-    public GuiWorktable(InventoryPlayer var1, TileEntity var2)
-    {
-        super(new ContainerWorktable(var1, var2));
-        this.furnaceInventory = (TileEntityWorktable) var2;
+    public GuiWorktable(InventoryPlayer playerInventory, TileEntity tile) {
+        super(new ContainerWorktable(playerInventory, tile));
+        this.tile = (TileEntityWorktable) tile;
     }
 
-    protected void drawGuiContainerForegroundLayer()
-    {
+    protected void drawGuiContainerForegroundLayer() {
         this.fontRendererObj.drawString(LocalizationStrings.BLOCK_WORKTABLE_IDLE_NAME, 30, 6, 4210752);
         this.fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), 8, this.ySize - 96 + 2, 4210752);
     }
@@ -30,22 +27,20 @@ public class GuiWorktable extends GuiContainer
     /**
      * Draw the background layer for the GuiContainer (everything behind the items)
      */
-    protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3)
-    {
+    protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         mc.getTextureManager().bindTexture(loc);
-        int var5 = (this.width - this.xSize) / 2;
-        int var6 = (this.height - this.ySize) / 2;
-        this.drawTexturedModalRect(var5, var6, 0, 0, this.xSize, this.ySize);
-        int var7;
+        int centerX = (this.width - this.xSize) / 2;
+        int centerY = (this.height - this.ySize) / 2;
+        this.drawTexturedModalRect(centerX, centerY, 0, 0, this.xSize, this.ySize);
+        int progress;
 
-        if (this.furnaceInventory.isBurning())
-        {
-            var7 = this.furnaceInventory.getBurnTimeRemainingScaled(12);
-            this.drawTexturedModalRect(var5 + 82, var6 + 36 + 12 - var7, 176, 12 - var7, 14, var7 + 2);
+        if (this.tile.isBurning()) {
+            progress = this.tile.getBurnTimeRemainingScaled(12);
+            this.drawTexturedModalRect(centerX + 82, centerY + 36 + 12 - progress, 176, 12 - progress, 14, progress + 2);
         }
 
-        var7 = this.furnaceInventory.getCookProgressScaled(24);
-        this.drawTexturedModalRect(var5 + 79, var6 + 18, 176, 14, var7 + 1, 16);
+        progress = this.tile.getCookProgressScaled(24);
+        this.drawTexturedModalRect(centerX + 79, centerY + 18, 176, 14, progress + 1, 16);
     }
 }

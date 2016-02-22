@@ -12,8 +12,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
-public class TileEntityFigurineRenderer extends TileEntitySpecialRenderer
-{
+public class TileEntityFigurineRenderer extends TileEntitySpecialRenderer {
     // the model texture of our block
     private static final ResourceLocation pristine_steve = new ResourceLocation("fossil:textures/blocks/figurines/figurine_steve_pristine.png");
     private static final ResourceLocation pristine_skeleton = new ResourceLocation("fossil:textures/blocks/figurines/figurine_skeleton_pristine.png");
@@ -36,15 +35,13 @@ public class TileEntityFigurineRenderer extends TileEntitySpecialRenderer
     public final ModelFigurineBroken modelbroken;
 
     // also gets model of our block
-    public TileEntityFigurineRenderer()
-    {
+    public TileEntityFigurineRenderer() {
         this.model = new ModelFigurine();
         this.modelbroken = new ModelFigurineBroken();
     }
 
     // renders tileentity in world
-    public void renderTileEntityFigurineAt(TileEntityFigurine te, double x, double y, double z, float scale)
-    {
+    public void renderTileEntityFigurineAt(TileEntityFigurine te, double x, double y, double z, float scale) {
         // push matrix tells the renderer to start doing something
         GL11.glPushMatrix();
         // this sets the initial location
@@ -58,10 +55,8 @@ public class TileEntityFigurineRenderer extends TileEntitySpecialRenderer
     }
 
     // rotates block
-    private void rotateBlock(World world, int x, int y, int z, Block block, int par6)
-    {
-        if (world != null)
-        {
+    private void rotateBlock(World world, int x, int y, int z, Block block, int par6) {
+        if (world != null) {
             int dir = world.getBlockMetadata(x, y, z);
             GL11.glPushMatrix();
             // this line rotates renderer
@@ -69,8 +64,7 @@ public class TileEntityFigurineRenderer extends TileEntitySpecialRenderer
             GL11.glScalef(0.5F, 0.5F, 0.5F);
 
             // gets the texture for model
-            switch (par6)
-            {
+            switch (par6) {
                 case 0:
                 default:
                     this.bindTexture(pristine_steve);
@@ -156,9 +150,7 @@ public class TileEntityFigurineRenderer extends TileEntitySpecialRenderer
             // renders the model
             //this.model.render((Entity) null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
             GL11.glPopMatrix();
-        }
-        else
-        {
+        } else {
             GL11.glPushMatrix();
             GL11.glRotatef(0F, 0F, 1F, 0F);
             FMLClientHandler.instance().getClient().renderEngine.bindTexture(pristine_steve);
@@ -169,8 +161,7 @@ public class TileEntityFigurineRenderer extends TileEntitySpecialRenderer
 
     @Override
     public void renderTileEntityAt(TileEntity tileentity, double d0, double d1,
-                                   double d2, float f)
-    {
+                                   double d2, float f) {
         this.renderTileEntityFigurineAt((TileEntityFigurine) tileentity, d0, d1, d2, f);
     }
 }

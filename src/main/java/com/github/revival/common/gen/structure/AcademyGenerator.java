@@ -10,14 +10,11 @@ import net.minecraft.world.chunk.IChunkProvider;
 
 import java.util.Random;
 
-public class AcademyGenerator implements IWorldGenerator
-{
+public class AcademyGenerator implements IWorldGenerator {
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world,
-                         IChunkProvider chunkGenerator, IChunkProvider chunkProvider)
-    {
-        switch (world.provider.dimensionId)
-        {
+                         IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
+        switch (world.provider.dimensionId) {
             case -1:
                 // not currently generating anything in the nether
                 // generateNether(world, random, chunkX * 16, chunkZ * 16);
@@ -32,9 +29,7 @@ public class AcademyGenerator implements IWorldGenerator
                 {
                     generateStructure(world, random, chunkX * 16, chunkZ * 16);
                     break;
-                }
-                else
-                {
+                } else {
                     break;
                 }
 
@@ -44,8 +39,7 @@ public class AcademyGenerator implements IWorldGenerator
     }
 
     private final void generateStructure(World world, Random rand, int chunkX,
-                                         int chunkZ)
-    {
+                                         int chunkZ) {
         BiomeGenBase biome = world.getWorldChunkManager().getBiomeGenAt(chunkX,
                 chunkZ);
         // Need to create a new instance each time or the generate() methods may
@@ -77,8 +71,7 @@ public class AcademyGenerator implements IWorldGenerator
                 || !world.doesBlockHaveSolidTopSurface(world, x + 10,
                 y, z - 11) || !world
                 .doesBlockHaveSolidTopSurface(world, x - 10, y,
-                        z + 11)))
-        {
+                        z + 11))) {
             --y;
         }
 
@@ -93,13 +86,10 @@ public class AcademyGenerator implements IWorldGenerator
                 .doesBlockHaveSolidTopSurface(world, x - 10, y, z + 11)
                 && world.canBlockSeeTheSky(x, y, z)
                 || Block.getIdFromBlock(world.getBlock(x, y + 1, z)) == Block
-                .getIdFromBlock(Blocks.water))
-        {
+                .getIdFromBlock(Blocks.water)) {
             return;
-        }
-        else
-        {
-            Revival.Console("Gen: Academy Spawn at " + x + ", " + y + ", " + z);
+        } else {
+            Revival.printDebug("Gen: Academy Spawn at " + x + ", " + y + ", " + z);
         }
 
         int widthX = gen.structures.get(struct).getWidthX();

@@ -6,10 +6,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 
-public class BlockVolcanicBrick extends Block
-{
-    public BlockVolcanicBrick()
-    {
+public class BlockVolcanicBrick extends Block {
+    public BlockVolcanicBrick() {
         super(Material.rock);
         setHardness(3.0F);
         setResistance(5.0F);
@@ -19,8 +17,7 @@ public class BlockVolcanicBrick extends Block
     }
 
     @Override
-    public void registerBlockIcons(IIconRegister par1IconRegister)
-    {
+    public void registerBlockIcons(IIconRegister par1IconRegister) {
         this.blockIcon = par1IconRegister.registerIcon("fossil:Volcanic_Brick");
     }
 }

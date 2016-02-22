@@ -2,41 +2,32 @@ package com.github.revival.client.renderer.entity;
 
 import com.github.revival.common.entity.EntityAncientJavelin;
 import com.github.revival.common.entity.EntityJavelin;
-
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
-
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-public class RenderJavelin extends Render
-{
-    public void renderJavelin(EntityJavelin var1, double var2, double var4, double var6, float var8, float var9)
-    {
-    	if(var1.SelfMaterial == ToolMaterial.WOOD){
+public class RenderJavelin extends Render {
+    public void renderJavelin(EntityJavelin var1, double var2, double var4, double var6, float var8, float var9) {
+        if (var1.SelfMaterial == ToolMaterial.WOOD) {
             this.renderManager.renderEngine.bindTexture(new ResourceLocation("fossil:textures/WoodenJavelin.png"));
-    	}
-    	else if(var1.SelfMaterial == ToolMaterial.STONE){
+        } else if (var1.SelfMaterial == ToolMaterial.STONE) {
             this.renderManager.renderEngine.bindTexture(new ResourceLocation("fossil:textures/StoneJavelin.png"));
-    	}
-    	else if(var1.SelfMaterial == ToolMaterial.IRON){
+        } else if (var1.SelfMaterial == ToolMaterial.IRON) {
             this.renderManager.renderEngine.bindTexture(new ResourceLocation("fossil:textures/IronJavelin.png"));
-    	}
-    	else if(var1.SelfMaterial == ToolMaterial.GOLD){
+        } else if (var1.SelfMaterial == ToolMaterial.GOLD) {
             this.renderManager.renderEngine.bindTexture(new ResourceLocation("fossil:textures/GoldJavelin.png"));
-    	}
-    	else if(var1.SelfMaterial == ToolMaterial.EMERALD){
+        } else if (var1.SelfMaterial == ToolMaterial.EMERALD) {
             this.renderManager.renderEngine.bindTexture(new ResourceLocation("fossil:textures/DiamondJavelin.png"));
-    	}else{
+        } else {
             this.renderManager.renderEngine.bindTexture(new ResourceLocation("fossil:textures/WoodenJavelin.png"));
-    	}
-       
-        if (var1 instanceof EntityAncientJavelin)
-        {
+        }
+
+        if (var1 instanceof EntityAncientJavelin) {
             this.renderManager.renderEngine.bindTexture(new ResourceLocation("fossil:textures/AncientJavelin.png"));
         }
 
@@ -58,8 +49,7 @@ public class RenderJavelin extends Render
         GL11.glEnable(GL12.GL_RESCALE_NORMAL);
         float var21 = (float) var1.arrowShake - var9;
 
-        if (var21 > 0.0F)
-        {
+        if (var21 > 0.0F) {
             float var22 = -MathHelper.sin(var21 * 3.0F) * var21;
             GL11.glRotatef(var22, 0.0F, 0.0F, 1.0F);
         }
@@ -82,8 +72,7 @@ public class RenderJavelin extends Render
         var10.addVertexWithUV(-7.0D, -2.0D, -2.0D, (double) var16, (double) var19);
         var10.draw();
 
-        for (int var23 = 0; var23 < 4; ++var23)
-        {
+        for (int var23 = 0; var23 < 4; ++var23) {
             GL11.glRotatef(90.0F, 1.0F, 0.0F, 0.0F);
             GL11.glNormal3f(0.0F, 0.0F, var20);
             var10.startDrawingQuads();
@@ -104,14 +93,12 @@ public class RenderJavelin extends Render
      * (Render<T extends Entity) and this method has signature public void doRender(T entity, double d, double d1,
      * double d2, float f, float f1). But JAD is pre 1.5 so doesn't do that.
      */
-    public void doRender(Entity var1, double var2, double var4, double var6, float var8, float var9)
-    {
+    public void doRender(Entity var1, double var2, double var4, double var6, float var8, float var9) {
         this.renderJavelin((EntityJavelin) var1, var2, var4, var6, var8, var9);
     }
 
     @Override
-    protected ResourceLocation getEntityTexture(Entity entity)
-    {
+    protected ResourceLocation getEntityTexture(Entity entity) {
         // TODO Auto-generated method stub
         return null;
     }

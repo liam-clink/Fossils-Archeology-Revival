@@ -15,59 +15,53 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 @SideOnly(Side.CLIENT)
-public class GuiFeeder extends GuiContainer
-{
+public class GuiFeeder extends GuiContainer {
     private static final ResourceLocation loc = new ResourceLocation("fossil:textures/gui/Feeder.png");
     private TileEntityFeeder FeederInventory;
 
-    public GuiFeeder(InventoryPlayer var1, TileEntity var2)
-    {
+    public GuiFeeder(InventoryPlayer var1, TileEntity var2) {
         super(new ContainerFeeder(var1, var2));
         this.FeederInventory = (TileEntityFeeder) var2;
     }
 
     @Override
-    protected void drawGuiContainerForegroundLayer(int par1, int par2)
-    {
+    protected void drawGuiContainerForegroundLayer(int par1, int par2) {
         String customName = this.FeederInventory.hasCustomInventoryName() ? this.FeederInventory.getInventoryName() : I18n.format(this.FeederInventory.getInventoryName());
         this.fontRendererObj.drawString(customName, this.xSize / 6 - this.fontRendererObj.getStringWidth(customName) / 2, 6, 4210752);
-        
+
         this.fontRendererObj.drawString(I18n.format("container.inventory"), 8, this.ySize - 96 + 2, 4210752);
     }
 
     /**
      * Draws the screen and all the components in it.
      */
-    public void drawScreen(int var1, int var2, float var3)
-    {
+    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         this.drawDefaultBackground();
-        int var4 = this.guiLeft;
-        int var5 = this.guiTop;
-        this.drawGuiContainerBackgroundLayer(var3, var1, var2);
+        int left = this.guiLeft;
+        int top = this.guiTop;
+        this.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
         GL11.glDisable(GL12.GL_RESCALE_NORMAL);
         RenderHelper.disableStandardItemLighting();
         GL11.glDisable(GL11.GL_LIGHTING);
         GL11.glDisable(GL11.GL_DEPTH_TEST);
-        super.drawScreen(var1, var2, var3);
+        super.drawScreen(mouseX, mouseY, partialTicks);
         RenderHelper.enableGUIStandardItemLighting();
         GL11.glPushMatrix();
-        GL11.glTranslatef((float) var4, (float) var5, 0.0F);
+        GL11.glTranslatef((float) left, (float) top, 0.0F);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-        Object var6 = null;
-        short var7 = 240;
-        short var8 = 240;
-        OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float) var7 / 1.0F, (float) var8 / 1.0F);
+        short lightX = 240;
+        short lightY = 240;
+        OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float) lightX / 1.0F, (float) lightY / 1.0F);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        InventoryPlayer var9 = this.mc.thePlayer.inventory;
+        InventoryPlayer playerInventory = this.mc.thePlayer.inventory;
 
-        if (var9.getItemStack() != null)
-        {
+        if (playerInventory.getItemStack() != null) {
             GL11.glTranslatef(0.0F, 0.0F, 32.0F);
             this.zLevel = 200.0F;
             itemRender.zLevel = 200.0F;
-            itemRender.renderItemAndEffectIntoGUI(this.fontRendererObj, this.mc.renderEngine, var9.getItemStack(), var1 - var4 - 8, var2 - var5 - 8);
-            itemRender.renderItemOverlayIntoGUI(this.fontRendererObj, this.mc.renderEngine, var9.getItemStack(), var1 - var4 - 8, var2 - var5 - 8);
+            itemRender.renderItemAndEffectIntoGUI(this.fontRendererObj, this.mc.renderEngine, playerInventory.getItemStack(), mouseX - left - 8, mouseY - top - 8);
+            itemRender.renderItemOverlayIntoGUI(this.fontRendererObj, this.mc.renderEngine, playerInventory.getItemStack(), mouseX - left - 8, mouseY - top - 8);
             this.zLevel = 0.0F;
             itemRender.zLevel = 0.0F;
         }
@@ -83,8 +77,7 @@ public class GuiFeeder extends GuiContainer
     /**
      * Draw the background layer for the GuiContainer (everything behind the items)
      */
-    protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3)
-    {
+    protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3) {
         //int var4 = this.mc.renderEngine.getTexture("/fossil/textures/UIFeeder.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         mc.getTextureManager().bindTexture(loc);

@@ -14,33 +14,29 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
-public class RenderTerrorBird extends RenderLiving
-{
-    private static final ResourceLocation gastornisBaby = new ResourceLocation(Revival.modid + ":" + "textures/mob/TerrorBird/Gastornis_Baby.png");
-    private static final ResourceLocation gastornisAdult = new ResourceLocation(Revival.modid + ":" + "textures/mob/TerrorBird/Gastornis_Adult.png");
-    private static final ResourceLocation PhorusrhacosBaby = new ResourceLocation(Revival.modid + ":" + "textures/mob/TerrorBird/Phorusrhacos_Baby.png");
-    private static final ResourceLocation PhorusrhacosAdult = new ResourceLocation(Revival.modid + ":" + "textures/mob/TerrorBird/Phorusrhacos_Adult.png");
-    private static final ResourceLocation TitanisBaby = new ResourceLocation(Revival.modid + ":" + "textures/mob/TerrorBird/Titanis_Baby.png");
-    private static final ResourceLocation TitanisAdult = new ResourceLocation(Revival.modid + ":" + "textures/mob/TerrorBird/Titanis_Adult.png");
-    private static final ResourceLocation KelenkenAdult = new ResourceLocation(Revival.modid + ":" + "textures/mob/TerrorBird/Kelenken_Adult.png");
-    private static final ResourceLocation KelenkenBaby = new ResourceLocation(Revival.modid + ":" + "textures/mob/TerrorBird/Kelenken_Baby.png");
-    
+public class RenderTerrorBird extends RenderLiving {
+    private static final ResourceLocation gastornisBaby = new ResourceLocation(Revival.MODID + ":" + "textures/mob/TerrorBird/Gastornis_Baby.png");
+    private static final ResourceLocation gastornisAdult = new ResourceLocation(Revival.MODID + ":" + "textures/mob/TerrorBird/Gastornis_Adult.png");
+    private static final ResourceLocation PhorusrhacosBaby = new ResourceLocation(Revival.MODID + ":" + "textures/mob/TerrorBird/Phorusrhacos_Baby.png");
+    private static final ResourceLocation PhorusrhacosAdult = new ResourceLocation(Revival.MODID + ":" + "textures/mob/TerrorBird/Phorusrhacos_Adult.png");
+    private static final ResourceLocation TitanisBaby = new ResourceLocation(Revival.MODID + ":" + "textures/mob/TerrorBird/Titanis_Baby.png");
+    private static final ResourceLocation TitanisAdult = new ResourceLocation(Revival.MODID + ":" + "textures/mob/TerrorBird/Titanis_Adult.png");
+    private static final ResourceLocation KelenkenAdult = new ResourceLocation(Revival.MODID + ":" + "textures/mob/TerrorBird/Kelenken_Adult.png");
+    private static final ResourceLocation KelenkenBaby = new ResourceLocation(Revival.MODID + ":" + "textures/mob/TerrorBird/Kelenken_Baby.png");
 
-    public RenderTerrorBird(ModelBase par1ModelBase, float par2)
-    {
+
+    public RenderTerrorBird(ModelBase par1ModelBase, float par2) {
         super(par1ModelBase, par2);
     }
 
-    public void renderDodo(EntityTerrorBird entity, double par2, double par4, double par6, float par8, float par9)
-    {
+    public void renderDodo(EntityTerrorBird entity, double par2, double par4, double par6, float par8, float par9) {
         super.doRender(entity, par2, par4, par6, par8, par9);
     }
-    
+
     /**
      * Defines what float the third param in setRotationAngles of ModelBase is
      */
-    protected float handleRotationFloat(EntityTerrorBird entity, float angle)
-    {
+    protected float handleRotationFloat(EntityTerrorBird entity, float angle) {
         if (entity.isAngry())
             return entity.getWingRotation();
 
@@ -48,24 +44,21 @@ public class RenderTerrorBird extends RenderLiving
         float f2 = entity.field_70884_g + (entity.destPos - entity.field_70884_g) * angle;
         return (MathHelper.sin(f1) + 1.0F) * f2;
     }
-    
+
     /**
      * Defines what float the third param in setRotationAngles of ModelBase is
      */
-    protected float handleRotationFloat(EntityLivingBase entityLivingBase, float angle)
-    {
+    protected float handleRotationFloat(EntityLivingBase entityLivingBase, float angle) {
         return this.handleRotationFloat((EntityTerrorBird) entityLivingBase, angle);
     }
-    
+
     /**
      * Applies the scale to the transform matrix
      * <p/>
      * Use this to grow the dinonsaur with age.
      */
-    protected void preRenderScale(EntityTerrorBird entity, float par2)
-    {
-        switch (entity.getSkin())
-        {
+    protected void preRenderScale(EntityTerrorBird entity, float par2) {
+        switch (entity.getSkin()) {
             case 0:
             default:
                 GL11.glScalef(0.85F, 0.85F, 0.85F);
@@ -81,20 +74,17 @@ public class RenderTerrorBird extends RenderLiving
                 break;
         }
     }
-    
+
     /**
      * Allows the render to do any OpenGL state modifications necessary before the model is rendered. Args:
      * entityLiving, partialTickTime
      */
-    protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2)
-    {
+    protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2) {
         this.preRenderScale((EntityTerrorBird) par1EntityLivingBase, par2);
     }
 
-    protected ResourceLocation func_110919_a(EntityTerrorBird entity)
-    {
-        switch (entity.getSkin())
-        {
+    protected ResourceLocation func_110919_a(EntityTerrorBird entity) {
+        switch (entity.getSkin()) {
             case 0:
             default:
                 if (entity.isChild())
@@ -118,20 +108,17 @@ public class RenderTerrorBird extends RenderLiving
         }
     }
 
-    protected float getWingRotation(EntityTerrorBird entityLiving, float par2)
-    {
+    protected float getWingRotation(EntityTerrorBird entityLiving, float par2) {
         float f1 = entityLiving.field_70888_h + (entityLiving.field_70886_e - entityLiving.field_70888_h) * par2;
         float f2 = entityLiving.field_70884_g + (entityLiving.destPos - entityLiving.field_70884_g) * par2;
         return (MathHelper.sin(f1) + 1.0F) * f2;
     }
 
-    public void doRender(EntityLiving entityLiving, double par2, double par4, double par6, float par8, float par9)
-    {
+    public void doRender(EntityLiving entityLiving, double par2, double par4, double par6, float par8, float par9) {
         this.renderDodo((EntityTerrorBird) entityLiving, par2, par4, par6, par8, par9);
     }
 
-    protected ResourceLocation getEntityTexture(Entity entity)
-    {
+    protected ResourceLocation getEntityTexture(Entity entity) {
         return this.func_110919_a((EntityTerrorBird) entity);
     }
 
@@ -141,8 +128,7 @@ public class RenderTerrorBird extends RenderLiving
      * (Render<T extends Entity) and this method has signature public void doRender(T entity, double d, double d1,
      * double d2, float f, float f1). But JAD is pre 1.5 so doesn't do that.
      */
-    public void doRender(Entity entity, double par2, double par4, double par6, float par8, float par9)
-    {
+    public void doRender(Entity entity, double par2, double par4, double par6, float par8, float par9) {
         this.renderDodo((EntityTerrorBird) entity, par2, par4, par6, par8, par9);
     }
 }

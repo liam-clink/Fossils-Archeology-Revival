@@ -17,8 +17,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-public class AnuTeleporter extends Teleporter
-{
+public class AnuTeleporter extends Teleporter {
     private final WorldServer worldServerInstance;
     private final Random random;
     private final LongHashMap destinationCoordinateCache = new LongHashMap();
@@ -28,8 +27,7 @@ public class AnuTeleporter extends Teleporter
      */
     private final List destinationCoordinateKeys = new ArrayList();
 
-    public AnuTeleporter(WorldServer worldserver)
-    {
+    public AnuTeleporter(WorldServer worldserver) {
         super(worldserver);
         this.worldServerInstance = worldserver;
         this.random = new Random(worldserver.getSeed());
@@ -38,8 +36,7 @@ public class AnuTeleporter extends Teleporter
     /**
      * Place an entity in a nearby portal, creating one if necessary.
      */
-    public void placeInPortal(Entity p_77185_1_, double p_77185_2_, double p_77185_4_, double p_77185_6_, float p_77185_8_)
-    {
+    public void placeInPortal(Entity p_77185_1_, double p_77185_2_, double p_77185_4_, double p_77185_6_, float p_77185_8_) {
 
         p_77185_1_.setLocationAndAngles((double) -74, (double) 63, (double) -115, p_77185_1_.rotationYaw, 0.0F);
 
@@ -48,22 +45,16 @@ public class AnuTeleporter extends Teleporter
         int k = MathHelper.floor_double(p_77185_1_.posZ);
         byte b0 = 1;
         byte b1 = 0;
-        if (worldServerInstance.provider.dimensionId == FossilConfig.dimIdTreasure)
-        {
-            if (p_77185_1_ instanceof EntityPlayer)
-            {
+        if (worldServerInstance.provider.dimensionId == FossilConfig.dimIdTreasure) {
+            if (p_77185_1_ instanceof EntityPlayer) {
                 ((EntityPlayer) p_77185_1_).triggerAchievement(FossilAchievementHandler.wtf);
             }
         }
-        if (worldServerInstance.provider.dimensionId == FossilConfig.dimIdDarknessLair)
-        {
+        if (worldServerInstance.provider.dimensionId == FossilConfig.dimIdDarknessLair) {
 
-            for (int l = -2; l <= 2; ++l)
-            {
-                for (int i1 = -2; i1 <= 2; ++i1)
-                {
-                    for (int j1 = -1; j1 < 3; ++j1)
-                    {
+            for (int l = -2; l <= 2; ++l) {
+                for (int i1 = -2; i1 <= 2; ++i1) {
+                    for (int j1 = -1; j1 < 3; ++j1) {
                         int k1 = i + i1 * b0 + l * b1;
                         int l1 = j + j1;
                         int i2 = k + i1 * b1 - l * b0;
@@ -77,8 +68,7 @@ public class AnuTeleporter extends Teleporter
     }
 
 
-    public boolean makePortal(Entity p_85188_1_)
-    {
+    public boolean makePortal(Entity p_85188_1_) {
         byte b0 = 16;
         double d0 = -1.0D;
         int i = MathHelper.floor_double(p_85188_1_.posX);
@@ -105,47 +95,36 @@ public class AnuTeleporter extends Teleporter
         double d3;
         double d4;
 
-        for (i2 = i - b0; i2 <= i + b0; ++i2)
-        {
+        for (i2 = i - b0; i2 <= i + b0; ++i2) {
             d1 = (double) i2 + 0.5D - p_85188_1_.posX;
 
-            for (k2 = k - b0; k2 <= k + b0; ++k2)
-            {
+            for (k2 = k - b0; k2 <= k + b0; ++k2) {
                 d2 = (double) k2 + 0.5D - p_85188_1_.posZ;
                 label274:
 
-                for (i3 = this.worldServerInstance.getActualHeight() - 1; i3 >= 0; --i3)
-                {
-                    if (this.worldServerInstance.isAirBlock(i2, i3, k2))
-                    {
-                        while (i3 > 0 && this.worldServerInstance.isAirBlock(i2, i3 - 1, k2))
-                        {
+                for (i3 = this.worldServerInstance.getActualHeight() - 1; i3 >= 0; --i3) {
+                    if (this.worldServerInstance.isAirBlock(i2, i3, k2)) {
+                        while (i3 > 0 && this.worldServerInstance.isAirBlock(i2, i3 - 1, k2)) {
                             --i3;
                         }
 
-                        for (j3 = l1; j3 < l1 + 4; ++j3)
-                        {
+                        for (j3 = l1; j3 < l1 + 4; ++j3) {
                             k3 = j3 % 2;
                             l3 = 1 - k3;
 
-                            if (j3 % 4 >= 2)
-                            {
+                            if (j3 % 4 >= 2) {
                                 k3 = -k3;
                                 l3 = -l3;
                             }
 
-                            for (i4 = 0; i4 < 3; ++i4)
-                            {
-                                for (j4 = 0; j4 < 4; ++j4)
-                                {
-                                    for (k4 = -1; k4 < 4; ++k4)
-                                    {
+                            for (i4 = 0; i4 < 3; ++i4) {
+                                for (j4 = 0; j4 < 4; ++j4) {
+                                    for (k4 = -1; k4 < 4; ++k4) {
                                         l4 = i2 + (j4 - 1) * k3 + i4 * l3;
                                         i5 = i3 + k4;
                                         int j5 = k2 + (j4 - 1) * l3 - i4 * k3;
 
-                                        if (k4 < 0 && !this.worldServerInstance.getBlock(l4, i5, j5).getMaterial().isSolid() || k4 >= 0 && !this.worldServerInstance.isAirBlock(l4, i5, j5))
-                                        {
+                                        if (k4 < 0 && !this.worldServerInstance.getBlock(l4, i5, j5).getMaterial().isSolid() || k4 >= 0 && !this.worldServerInstance.isAirBlock(l4, i5, j5)) {
                                             continue label274;
                                         }
                                     }
@@ -155,8 +134,7 @@ public class AnuTeleporter extends Teleporter
                             d3 = (double) i3 + 0.5D - p_85188_1_.posY;
                             d4 = d1 * d1 + d3 * d3 + d2 * d2;
 
-                            if (d0 < 0.0D || d4 < d0)
-                            {
+                            if (d0 < 0.0D || d4 < d0) {
                                 d0 = d4;
                                 l = i2;
                                 i1 = i3;
@@ -169,41 +147,31 @@ public class AnuTeleporter extends Teleporter
             }
         }
 
-        if (d0 < 0.0D)
-        {
-            for (i2 = i - b0; i2 <= i + b0; ++i2)
-            {
+        if (d0 < 0.0D) {
+            for (i2 = i - b0; i2 <= i + b0; ++i2) {
                 d1 = (double) i2 + 0.5D - p_85188_1_.posX;
 
-                for (k2 = k - b0; k2 <= k + b0; ++k2)
-                {
+                for (k2 = k - b0; k2 <= k + b0; ++k2) {
                     d2 = (double) k2 + 0.5D - p_85188_1_.posZ;
                     label222:
 
-                    for (i3 = this.worldServerInstance.getActualHeight() - 1; i3 >= 0; --i3)
-                    {
-                        if (this.worldServerInstance.isAirBlock(i2, i3, k2))
-                        {
-                            while (i3 > 0 && this.worldServerInstance.isAirBlock(i2, i3 - 1, k2))
-                            {
+                    for (i3 = this.worldServerInstance.getActualHeight() - 1; i3 >= 0; --i3) {
+                        if (this.worldServerInstance.isAirBlock(i2, i3, k2)) {
+                            while (i3 > 0 && this.worldServerInstance.isAirBlock(i2, i3 - 1, k2)) {
                                 --i3;
                             }
 
-                            for (j3 = l1; j3 < l1 + 2; ++j3)
-                            {
+                            for (j3 = l1; j3 < l1 + 2; ++j3) {
                                 k3 = j3 % 2;
                                 l3 = 1 - k3;
 
-                                for (i4 = 0; i4 < 4; ++i4)
-                                {
-                                    for (j4 = -1; j4 < 4; ++j4)
-                                    {
+                                for (i4 = 0; i4 < 4; ++i4) {
+                                    for (j4 = -1; j4 < 4; ++j4) {
                                         k4 = i2 + (i4 - 1) * k3;
                                         l4 = i3 + j4;
                                         i5 = k2 + (i4 - 1) * l3;
 
-                                        if (j4 < 0 && !this.worldServerInstance.getBlock(k4, l4, i5).getMaterial().isSolid() || j4 >= 0 && !this.worldServerInstance.isAirBlock(k4, l4, i5))
-                                        {
+                                        if (j4 < 0 && !this.worldServerInstance.getBlock(k4, l4, i5).getMaterial().isSolid() || j4 >= 0 && !this.worldServerInstance.isAirBlock(k4, l4, i5)) {
                                             continue label222;
                                         }
                                     }
@@ -212,8 +180,7 @@ public class AnuTeleporter extends Teleporter
                                 d3 = (double) i3 + 0.5D - p_85188_1_.posY;
                                 d4 = d1 * d1 + d3 * d3 + d2 * d2;
 
-                                if (d0 < 0.0D || d4 < d0)
-                                {
+                                if (d0 < 0.0D || d4 < d0) {
                                     d0 = d4;
                                     l = i2;
                                     i1 = i3;
@@ -233,34 +200,27 @@ public class AnuTeleporter extends Teleporter
         int l5 = k1 % 2;
         int l2 = 1 - l5;
 
-        if (k1 % 4 >= 2)
-        {
+        if (k1 % 4 >= 2) {
             l5 = -l5;
             l2 = -l2;
         }
 
         boolean flag;
 
-        if (d0 < 0.0D)
-        {
-            if (i1 < 70)
-            {
+        if (d0 < 0.0D) {
+            if (i1 < 70) {
                 i1 = 70;
             }
 
-            if (i1 > this.worldServerInstance.getActualHeight() - 10)
-            {
+            if (i1 > this.worldServerInstance.getActualHeight() - 10) {
                 i1 = this.worldServerInstance.getActualHeight() - 10;
             }
 
             j2 = i1;
 
-            for (i3 = -1; i3 <= 1; ++i3)
-            {
-                for (j3 = 1; j3 < 3; ++j3)
-                {
-                    for (k3 = -1; k3 < 3; ++k3)
-                    {
+            for (i3 = -1; i3 <= 1; ++i3) {
+                for (j3 = 1; j3 < 3; ++j3) {
+                    for (k3 = -1; k3 < 3; ++k3) {
                         l3 = k5 + (j3 - 1) * l5 + i3 * l2;
                         i4 = j2 + k3;
                         j4 = k2 + (j3 - 1) * l2 - i3 * l5;
@@ -271,12 +231,9 @@ public class AnuTeleporter extends Teleporter
             }
         }
 
-        for (i3 = 0; i3 < 4; ++i3)
-        {
-            for (j3 = 0; j3 < 4; ++j3)
-            {
-                for (k3 = -1; k3 < 4; ++k3)
-                {
+        for (i3 = 0; i3 < 4; ++i3) {
+            for (j3 = 0; j3 < 4; ++j3) {
+                for (k3 = -1; k3 < 4; ++k3) {
                     l3 = k5 + (j3 - 1) * l5;
                     i4 = j2 + k3;
                     j4 = k2 + (j3 - 1) * l2;
@@ -285,10 +242,8 @@ public class AnuTeleporter extends Teleporter
                 }
             }
 
-            for (j3 = 0; j3 < 4; ++j3)
-            {
-                for (k3 = -1; k3 < 4; ++k3)
-                {
+            for (j3 = 0; j3 < 4; ++j3) {
+                for (k3 = -1; k3 < 4; ++k3) {
                     l3 = k5 + (j3 - 1) * l5;
                     i4 = j2 + k3;
                     j4 = k2 + (j3 - 1) * l2;
@@ -304,20 +259,16 @@ public class AnuTeleporter extends Teleporter
      * called periodically to remove out-of-date portal locations from the cache list. Argument par1 is a
      * WorldServer.getTotalWorldTime() value.
      */
-    public void removeStalePortalLocations(long p_85189_1_)
-    {
-        if (p_85189_1_ % 100L == 0L)
-        {
+    public void removeStalePortalLocations(long p_85189_1_) {
+        if (p_85189_1_ % 100L == 0L) {
             Iterator iterator = this.destinationCoordinateKeys.iterator();
             long j = p_85189_1_ - 600L;
 
-            while (iterator.hasNext())
-            {
+            while (iterator.hasNext()) {
                 Long olong = (Long) iterator.next();
                 AnuTeleporter.PortalPosition portalposition = (AnuTeleporter.PortalPosition) this.destinationCoordinateCache.getValueByKey(olong.longValue());
 
-                if (portalposition == null || portalposition.lastUpdateTime < j)
-                {
+                if (portalposition == null || portalposition.lastUpdateTime < j) {
                     iterator.remove();
                     this.destinationCoordinateCache.remove(olong.longValue());
                 }
@@ -325,16 +276,14 @@ public class AnuTeleporter extends Teleporter
         }
     }
 
-    public class PortalPosition extends ChunkCoordinates
-    {
+    public class PortalPosition extends ChunkCoordinates {
         private static final String __OBFID = "CL_00000154";
         /**
          * The worldtime at which this PortalPosition was last verified
          */
         public long lastUpdateTime;
 
-        public PortalPosition(int p_i1962_2_, int p_i1962_3_, int p_i1962_4_, long p_i1962_5_)
-        {
+        public PortalPosition(int p_i1962_2_, int p_i1962_3_, int p_i1962_4_, long p_i1962_5_) {
             super(p_i1962_2_, p_i1962_3_, p_i1962_4_);
             this.lastUpdateTime = p_i1962_5_;
         }

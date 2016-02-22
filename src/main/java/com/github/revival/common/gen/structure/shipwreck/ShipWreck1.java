@@ -3,8 +3,7 @@ package com.github.revival.common.gen.structure.shipwreck;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 
-public class ShipWreck1
-{
+public class ShipWreck1 {
     public static final int[][][][] blockArrayShipWreck1 =
             {
                     //This is where all the x, y, z values go (i, j, k). They are broke down by

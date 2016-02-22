@@ -3,7 +3,6 @@ package com.github.revival.common.tileentity;
 import com.github.revival.Revival;
 import com.github.revival.common.block.BlockSifter;
 import com.github.revival.common.block.FABlockRegistry;
-import com.github.revival.common.enums.EnumPrehistoric;
 import com.github.revival.common.handler.LocalizationStrings;
 import com.github.revival.common.item.FAItemRegistry;
 import net.minecraft.entity.player.EntityPlayer;
@@ -20,8 +19,7 @@ import net.minecraft.tileentity.TileEntity;
 import java.util.Random;
 
 public class TileEntitySifter extends TileEntity implements IInventory,
-        ISidedInventory
-{
+        ISidedInventory {
 
     private static final int[] slots_sides = new int[]{}; // input
     private static final int[] slots_bottom = new int[]{1, 2, 3, 4, 5}; // output
@@ -34,37 +32,32 @@ public class TileEntitySifter extends TileEntity implements IInventory,
     private int RawIndex = -1;
     private int SpaceIndex = -1;
 
-    public TileEntitySifter()
-    {
+    public TileEntitySifter() {
         sifterItemStacks = new ItemStack[6];
     }
 
-    private static int getItemBurnTime(ItemStack var1)
-    {
+    private static int getItemBurnTime(ItemStack var1) {
         return 100;
     }
 
     /**
      * Return true if item is a fuel source (getItemBurnTime() > 0).
      */
-    public static boolean isItemFuel(ItemStack par0ItemStack)
-    {
+    public static boolean isItemFuel(ItemStack par0ItemStack) {
         return getItemBurnTime(par0ItemStack) > 0;
     }
 
     /**
      * Returns the number of slots in the inventory.
      */
-    public int getSizeInventory()
-    {
+    public int getSizeInventory() {
         return this.sifterItemStacks.length;
     }
 
     /**
      * Returns the stack in slot i
      */
-    public ItemStack getStackInSlot(int var1)
-    {
+    public ItemStack getStackInSlot(int var1) {
         return this.sifterItemStacks[var1];
     }
 
@@ -72,32 +65,24 @@ public class TileEntitySifter extends TileEntity implements IInventory,
      * Removes from an inventory slot (first arg) up to a specified number
      * (second arg) of items and returns them in a new stack.
      */
-    public ItemStack decrStackSize(int var1, int var2)
-    {
-        if (this.sifterItemStacks[var1] != null)
-        {
+    public ItemStack decrStackSize(int var1, int var2) {
+        if (this.sifterItemStacks[var1] != null) {
             ItemStack var3;
 
-            if (this.sifterItemStacks[var1].stackSize <= var2)
-            {
+            if (this.sifterItemStacks[var1].stackSize <= var2) {
                 var3 = this.sifterItemStacks[var1];
                 this.sifterItemStacks[var1] = null;
                 return var3;
-            }
-            else
-            {
+            } else {
                 var3 = this.sifterItemStacks[var1].splitStack(var2);
 
-                if (this.sifterItemStacks[var1].stackSize == 0)
-                {
+                if (this.sifterItemStacks[var1].stackSize == 0) {
                     this.sifterItemStacks[var1] = null;
                 }
 
                 return var3;
             }
-        }
-        else
-        {
+        } else {
             return null;
         }
     }
@@ -106,45 +91,38 @@ public class TileEntitySifter extends TileEntity implements IInventory,
      * Sets the given item stack to the specified slot in the inventory (can be
      * crafting or armor sections).
      */
-    public void setInventorySlotContents(int var1, ItemStack var2)
-    {
+    public void setInventorySlotContents(int var1, ItemStack var2) {
         this.sifterItemStacks[var1] = var2;
 
-        if (var2 != null && var2.stackSize > this.getInventoryStackLimit())
-        {
+        if (var2 != null && var2.stackSize > this.getInventoryStackLimit()) {
             var2.stackSize = this.getInventoryStackLimit();
         }
     }
 
     @Override
-    public String getInventoryName()
-    {
+    public String getInventoryName() {
         return this.hasCustomInventoryName() ? this.customName : "tile."
                 + LocalizationStrings.BLOCK_SIFTER_IDLE + ".name";
     }
 
     @Override
-    public boolean hasCustomInventoryName()
-    {
+    public boolean hasCustomInventoryName() {
         return this.customName != null && this.customName.length() > 0;
     }
 
     /**
      * Reads a tile entity from NBT.
      */
-    public void readFromNBT(NBTTagCompound var1)
-    {
+    public void readFromNBT(NBTTagCompound var1) {
         super.readFromNBT(var1);
         NBTTagList var2 = var1.getTagList("Items", 10);
         this.sifterItemStacks = new ItemStack[this.getSizeInventory()];
 
-        for (int var3 = 0; var3 < var2.tagCount(); ++var3)
-        {
+        for (int var3 = 0; var3 < var2.tagCount(); ++var3) {
             NBTTagCompound var4 = (NBTTagCompound) var2.getCompoundTagAt(var3);
             byte var5 = var4.getByte("Slot");
 
-            if (var5 >= 0 && var5 < this.sifterItemStacks.length)
-            {
+            if (var5 >= 0 && var5 < this.sifterItemStacks.length) {
                 this.sifterItemStacks[var5] = ItemStack
                         .loadItemStackFromNBT(var4);
             }
@@ -154,8 +132,7 @@ public class TileEntitySifter extends TileEntity implements IInventory,
         this.sifterCookTime = var1.getShort("CookTime");
         this.currentItemBurnTime = 100;
 
-        if (var1.hasKey("CustomName"))
-        {
+        if (var1.hasKey("CustomName")) {
             this.customName = var1.getString("CustomName");
         }
     }
@@ -163,17 +140,14 @@ public class TileEntitySifter extends TileEntity implements IInventory,
     /**
      * Writes a tile entity to NBT.
      */
-    public void writeToNBT(NBTTagCompound var1)
-    {
+    public void writeToNBT(NBTTagCompound var1) {
         super.writeToNBT(var1);
         var1.setShort("BurnTime", (short) this.sifterBurnTime);
         var1.setShort("CookTime", (short) this.sifterCookTime);
         NBTTagList var2 = new NBTTagList();
 
-        for (int var3 = 0; var3 < this.sifterItemStacks.length; ++var3)
-        {
-            if (this.sifterItemStacks[var3] != null)
-            {
+        for (int var3 = 0; var3 < this.sifterItemStacks.length; ++var3) {
+            if (this.sifterItemStacks[var3] != null) {
                 NBTTagCompound var4 = new NBTTagCompound();
                 var4.setByte("Slot", (byte) var3);
                 this.sifterItemStacks[var3].writeToNBT(var4);
@@ -181,8 +155,7 @@ public class TileEntitySifter extends TileEntity implements IInventory,
             }
         }
 
-        if (this.hasCustomInventoryName())
-        {
+        if (this.hasCustomInventoryName()) {
             var1.setString("CustomName", this.customName);
         }
 
@@ -193,28 +166,23 @@ public class TileEntitySifter extends TileEntity implements IInventory,
      * Returns the maximum stack size for a inventory slot. Seems to always be
      * 64, possibly will be extended. *Isn't this more of a set than a get?*
      */
-    public int getInventoryStackLimit()
-    {
+    public int getInventoryStackLimit() {
         return 64;
     }
 
-    public int getCookProgressScaled(int var1)
-    {
+    public int getSiftProgressScaled(int var1) {
         return this.sifterCookTime * var1 / 200;
     }
 
-    public int getBurnTimeRemainingScaled(int var1)
-    {
-        if (this.currentItemBurnTime == 0)
-        {
+    public int getSiftTimeRemainingScaled(int var1) {
+        if (this.currentItemBurnTime == 0) {
             this.currentItemBurnTime = 100;
         }
 
         return this.sifterBurnTime * var1 / this.currentItemBurnTime;
     }
 
-    public boolean isBurning()
-    {
+    public boolean isBurning() {
         return this.sifterBurnTime > 0;
     }
 
@@ -227,67 +195,53 @@ public class TileEntitySifter extends TileEntity implements IInventory,
      * e.g. the mob spawner uses this to count ticks and creates a new spawn
      * inside its implementation.
      */
-    public void updateEntity()
-    {
+    public void updateEntity() {
         boolean var1 = this.sifterBurnTime > 0;
         boolean var2 = false;
-        if (this.sifterBurnTime > 0)
-        {
+        if (this.sifterBurnTime > 0) {
             --this.sifterBurnTime;
         }
 
-        if (!this.worldObj.isRemote)
-        {
-            if (this.sifterBurnTime == 0 && this.canSmelt())
-            {
+        if (!this.worldObj.isRemote) {
+            if (this.sifterBurnTime == 0 && this.canSmelt()) {
                 this.currentItemBurnTime = this.sifterBurnTime = 100;
 
-                if (this.sifterBurnTime > 0)
-                {
+                if (this.sifterBurnTime > 0) {
                     var2 = true;
                 }
             }
 
-            if (this.isBurning() && this.canSmelt())
-            {
+            if (this.isBurning() && this.canSmelt()) {
                 ++this.sifterCookTime;
 
-                if (this.sifterCookTime == 200)
-                {
+                if (this.sifterCookTime == 200) {
                     this.sifterCookTime = 0;
                     this.smeltItem();
                     var2 = true;
                 }
-            }
-            else
-            {
+            } else {
                 this.sifterCookTime = 0;
             }
 
-            if (var1 != this.sifterBurnTime > 0)
-            {
+            if (var1 != this.sifterBurnTime > 0) {
                 var2 = true;
                 BlockSifter.updateFurnaceBlockState(this.sifterBurnTime > 0,
                         this.worldObj, this.xCoord, this.yCoord, this.zCoord);
             }
         }
 
-        if (var2)
-        {
+        if (var2) {
             this.markDirty();
         }
     }
 
-    private boolean canSmelt()
-    {
+    private boolean canSmelt() {
         this.SpaceIndex = -1;
         this.RawIndex = -1;
         int var1;
 
-        for (var1 = 0; var1 < 1; ++var1)
-        {
-            if (this.sifterItemStacks[var1] != null)
-            {
+        for (var1 = 0; var1 < 1; ++var1) {
+            if (this.sifterItemStacks[var1] != null) {
                 Item input = this.sifterItemStacks[var1].getItem();
 
                 ItemStack itemstack = this.sifterItemStacks[var1];
@@ -296,24 +250,18 @@ public class TileEntitySifter extends TileEntity implements IInventory,
                         || (input == Item.getItemFromBlock(Blocks.dirt))
                         || (input == Item.getItemFromBlock(Blocks.gravel))
                         || (input == Item.getItemFromBlock(Blocks.clay))
-                        || (input == Item.getItemFromBlock(FABlockRegistry.volcanicAsh)))
-                {
+                        || (input == Item.getItemFromBlock(FABlockRegistry.volcanicAsh))) {
                     this.RawIndex = var1;
                     break;
                 }
             }
         }
 
-        if (this.RawIndex == -1)
-        {
+        if (this.RawIndex == -1) {
             return false;
-        }
-        else
-        {
-            for (var1 = 5; var1 > 0; --var1)
-            {
-                if (this.sifterItemStacks[var1] == null)
-                {
+        } else {
+            for (var1 = 5; var1 > 0; --var1) {
+                if (this.sifterItemStacks[var1] == null) {
                     this.SpaceIndex = var1;
                     break;
                 }
@@ -323,10 +271,8 @@ public class TileEntitySifter extends TileEntity implements IInventory,
         }
     }
 
-    public void smeltItem()
-    {
-        if (this.canSmelt())
-        {
+    public void smeltItem() {
+        if (this.canSmelt()) {
             ItemStack result = null;
             int randomloot = (new Random()).nextInt(100);
             double random = (new Random()).nextInt(100);
@@ -343,78 +289,44 @@ public class TileEntitySifter extends TileEntity implements IInventory,
                     || this.sifterItemStacks[this.RawIndex].getItem() == Item
                     .getItemFromBlock(FABlockRegistry.volcanicAsh)
 
-                    )
-            {
-                if (randomloot < 80)
-                {
+                    ) {
+                if (randomloot < 80) {
                     if (Revival.enableDebugging())
-                        Revival.Console("Sifter no result: " + randomloot);
-                    if (random < 75)
-                    {
+                        Revival.printDebug("Sifter no result: " + randomloot);
+                    if (random < 75) {
                         result = null;
-                    }
-                    else
-                    {
+                    } else {
                         result = this.sifterItemStacks[this.SpaceIndex];
                     }
-                }
-                else
-                {
+                } else {
                     if (Revival.enableDebugging())
-                        Revival.Console("Sifter successful loot: " + randomloot);
-                    if (random < 0.4)
-                    {
+                        Revival.printDebug("Sifter successful loot: " + randomloot);
+                    if (random < 0.4) {
                         result = new ItemStack(FAItemRegistry.DominicanAmber, 1);
-                    }
-                    else if (random < 15)
-                    {
+                    } else if (random < 15) {
                         result = new ItemStack(FAItemRegistry.brokenSapling, 1);
-                    }
-
-                    else if (random < 30)
-                    {
+                    } else if (random < 30) {
                         result = new ItemStack(Items.potato, 1);
-                    }
-
-                    else if (random < 40)
-                    {
+                    } else if (random < 40) {
                         result = new ItemStack(Items.carrot, 1);
-                    }
-
-                    else if (random < 60)
-                    {
+                    } else if (random < 60) {
                         result = new ItemStack(Items.dye, 1, 15);
-                    }
-
-                    else if (random < 80)
-                    {
+                    } else if (random < 80) {
                         result = new ItemStack(Blocks.sand, 1);
-                    }
-
-                    else if (random < 90)
-                    {
+                    } else if (random < 90) {
                         result = new ItemStack(FAItemRegistry.fernSeed, 2);
-                    }
-
-                    else if (random < 95)
-                    {
+                    } else if (random < 95) {
                         result = new ItemStack(FAItemRegistry.potteryShards, 3);
-                    }
-
-                    else if (random <= 100)
-                    {
+                    } else if (random <= 100) {
                         int i = (new Random()).nextInt(15);
                         // for
                         // the
                         // sapling
                         Item i0 = null;
 
-                        if (i == 0)
-                        {
+                        if (i == 0) {
                             i0 = FAItemRegistry.brokenSapling;
-                        }
-                        else
-                        {
+                        } else {
                             i0 = FAItemRegistry.biofossil;
                         }
 
@@ -422,24 +334,19 @@ public class TileEntitySifter extends TileEntity implements IInventory,
                     }
                 }
             }
-            if (result != null)
-            {
+            if (result != null) {
                 if (result.stackSize != 0
-                        && this.sifterItemStacks[this.SpaceIndex] == null)
-                {
+                        && this.sifterItemStacks[this.SpaceIndex] == null) {
                     this.sifterItemStacks[this.SpaceIndex] = result.copy();
-                }
-                else if (this.sifterItemStacks[this.SpaceIndex]
-                        .isItemEqual(result))
-                {
+                } else if (this.sifterItemStacks[this.SpaceIndex]
+                        .isItemEqual(result)) {
                     sifterItemStacks[this.SpaceIndex].stackSize += result.stackSize;
                 }
             }
 
             --this.sifterItemStacks[0].stackSize;
 
-            if (this.sifterItemStacks[0].stackSize <= 0)
-            {
+            if (this.sifterItemStacks[0].stackSize <= 0) {
                 this.sifterItemStacks[0] = null;
             }
 
@@ -450,8 +357,7 @@ public class TileEntitySifter extends TileEntity implements IInventory,
      * Do not make give this method the name canInteractWith because it clashes
      * with Container
      */
-    public boolean isUseableByPlayer(EntityPlayer var1)
-    {
+    public boolean isUseableByPlayer(EntityPlayer var1) {
         return this.worldObj.getTileEntity(this.xCoord, this.yCoord,
                 this.zCoord) != this ? false : var1.getDistanceSq(
                 (double) this.xCoord + 0.5D, (double) this.yCoord + 0.5D,
@@ -462,8 +368,7 @@ public class TileEntitySifter extends TileEntity implements IInventory,
      * Returns true if automation is allowed to insert the given stack (ignoring
      * stack size) into the given slot.
      */
-    public boolean isStackValidForSlot(int par1, ItemStack par2ItemStack)
-    {
+    public boolean isStackValidForSlot(int par1, ItemStack par2ItemStack) {
         return par1 > 8 ? false : (par1 < 8 ? isItemFuel(par2ItemStack) : true);
     }
 
@@ -472,8 +377,7 @@ public class TileEntitySifter extends TileEntity implements IInventory,
      * whatever it returns as an EntityItem - like when you close a workbench
      * GUI.
      */
-    public ItemStack getStackInSlotOnClosing(int var1)
-    {
+    public ItemStack getStackInSlotOnClosing(int var1) {
         return null;
     }
 
@@ -481,8 +385,7 @@ public class TileEntitySifter extends TileEntity implements IInventory,
      * Returns true if automation is allowed to insert the given stack (ignoring
      * stack size) into the given slot.
      */
-    public boolean isItemValidForSlot(int par1, ItemStack par2ItemStack)
-    {
+    public boolean isItemValidForSlot(int par1, ItemStack par2ItemStack) {
         return par1 == 0 ? isItemFuel(par2ItemStack) : false;
     }
 
@@ -490,8 +393,7 @@ public class TileEntitySifter extends TileEntity implements IInventory,
      * Returns an array containing the indices of the slots that can be accessed
      * by automation on the given side of this block.
      */
-    public int[] getAccessibleSlotsFromSide(int par1)
-    {
+    public int[] getAccessibleSlotsFromSide(int par1) {
         return par1 == 0 ? slots_bottom : (par1 == 1 ? slots_top : slots_sides);
     }
 
@@ -499,8 +401,7 @@ public class TileEntitySifter extends TileEntity implements IInventory,
      * Returns true if automation can insert the given item in the given slot
      * from the given side. Args: Slot, item, side
      */
-    public boolean canInsertItem(int par1, ItemStack par2ItemStack, int par3)
-    {
+    public boolean canInsertItem(int par1, ItemStack par2ItemStack, int par3) {
         return this.isItemValidForSlot(par1, par2ItemStack);
     }
 
@@ -508,22 +409,19 @@ public class TileEntitySifter extends TileEntity implements IInventory,
      * Returns true if automation can extract the given item in the given slot
      * from the given side. Args: Slot, item, side
      */
-    public boolean canExtractItem(int par1, ItemStack par2ItemStack, int par3)
-    {
+    public boolean canExtractItem(int par1, ItemStack par2ItemStack, int par3) {
         return par3 != 0 || par1 != 1
                 || par2ItemStack.getItem() == Items.bucket;
     }
 
     @Override
-    public void openInventory()
-    {
+    public void openInventory() {
         // TODO Auto-generated method stub
 
     }
 
     @Override
-    public void closeInventory()
-    {
+    public void closeInventory() {
         // TODO Auto-generated method stub
 
     }

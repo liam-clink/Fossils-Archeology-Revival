@@ -5,8 +5,7 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.EntityPlayer;
 
-public enum EnumDinoFoodMob
-{
+public enum EnumDinoFoodMob {
     /*
      * TODO: Change FoodValue so things higher up on the food chain are worth less in FoodValue,
      * but maybe trade off with higher HealValue and vice versa.
@@ -52,28 +51,25 @@ public enum EnumDinoFoodMob
     public int FoodValue;
     public int HealValue;
 
-    private EnumDinoFoodMob(Class pClass, int Food, int Heal)
-    {
+    private EnumDinoFoodMob(Class pClass, int Food, int Heal) {
         preyClass = pClass;
         FoodValue = Food;
         HealValue = Heal;
     }
 
-    private EnumDinoFoodMob(EnumDinoFoodMob mob0)
-    {
+    private EnumDinoFoodMob(EnumDinoFoodMob mob0) {
         preyClass = mob0.preyClass;
         FoodValue = mob0.FoodValue;
         HealValue = mob0.HealValue;
     }
 
-    public static void init()
-    {
+    public static void init() {
         Triceratops.setDetails(EntityTriceratops.class);
         Velociraptor.setDetails(EntityVelociraptor.class);
         TRex.setDetails(EntityTyrannosaurus.class);
         Pterosaur.setDetails(EntityPterosaur.class);
         Sarcosuchus.setDetails(EntitySarcosuchus.class);
-        Plesiosaur.setDetails(EntityPlesiosaur.class);
+        Plesiosaur.setDetails(EntityPlesiosaurus.class);
         Mosasaurus.setDetails(EntityMosasaurus.class);
         Stegosaurus.setDetails(EntityStegosaurus.class);
         Dilophosaurus.setDetails(EntityDilophosaurus.class);
@@ -88,8 +84,7 @@ public enum EnumDinoFoodMob
         Allosaurus.setDetails(EntityAllosaurus.class);
     }
 
-    public void setDetails(Class pClass)
-    {
+    public void setDetails(Class pClass) {
         preyClass = pClass;
     }
 }

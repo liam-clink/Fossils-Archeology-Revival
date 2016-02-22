@@ -20,13 +20,10 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public class BlockAnubiteStatue extends BlockContainer implements ISubBlocksBlock
-{
-
+public class BlockAnubiteStatue extends BlockContainer implements ISubBlocksBlock {
     private int counter = 0;
 
-    public BlockAnubiteStatue()
-    {
+    public BlockAnubiteStatue() {
         super(Material.rock);
         this.setBlockBounds(0F, 0.0F, 0F, 1F, 2F, 1);
         this.setCreativeTab(FATabRegistry.tabFBlocks);
@@ -34,86 +31,70 @@ public class BlockAnubiteStatue extends BlockContainer implements ISubBlocksBloc
         this.setBlockUnbreakable();
         this.setResistance(60000000.0F);
         setBlockName("AnubiteStatue");
-
     }
 
-    public boolean onBlockActivated(World var1, int xCoord, int yCoord, int zCoord,
-                                    EntityPlayer var5, int var6, float var7, float var8, float var9)
-    {
-        var1.newExplosion((Entity) null, xCoord + 0.5F, yCoord, zCoord + 0.5, 5F, true, true);
-        EntityAnubite newMob = new EntityAnubite(var1);
-        if (!var1.isRemote)
-        {
-            newMob.setLocationAndAngles(xCoord + 0.5, yCoord, zCoord + 0.5, 0, 0);
-            var1.spawnEntityInWorld(newMob);
-            var1.removeTileEntity(xCoord, yCoord, zCoord);
-            var1.setBlock(xCoord, yCoord, zCoord, Blocks.air);
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
+        world.newExplosion(null, x + 0.5F, y, z + 0.5, 5F, true, true);
+        EntityAnubite newMob = new EntityAnubite(world);
+        if (!world.isRemote) {
+            newMob.setLocationAndAngles(x + 0.5, y, z + 0.5, 0, 0);
+            world.spawnEntityInWorld(newMob);
+            world.removeTileEntity(x, y, z);
+            world.setBlock(x, y, z, Blocks.air);
         }
         return true;
     }
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void registerBlockIcons(IIconRegister iconregister)
-    {
-        this.blockIcon = iconregister.registerIcon("nether_brick");
+    public void registerBlockIcons(IIconRegister iconRegister) {
+        this.blockIcon = iconRegister.registerIcon("nether_brick");
     }
 
-    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack)
-    {
+    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack) {
         byte b0 = 0;
         int l = MathHelper.floor_double((double) (entity.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
 
-        if (l == 0)
-        {
+        if (l == 0) {
             b0 = 2;
         }
 
-        if (l == 1)
-        {
+        if (l == 1) {
             b0 = 5;
         }
 
-        if (l == 2)
-        {
+        if (l == 2) {
             b0 = 3;
         }
 
-        if (l == 3)
-        {
+        if (l == 3) {
             b0 = 4;
         }
 
         world.setBlockMetadataWithNotify(x, y, z, b0, 2);
-
 
         world.markBlockForUpdate(x, y, z);
 
         super.onBlockPlacedBy(world, x, y, z, entity, stack);
     }
 
-    public int getRenderType()
-    {
+    public int getRenderType() {
         return -94;
     }
 
-    public boolean isOpaqueCube()
-    {
+    public boolean isOpaqueCube() {
         return false;
     }
 
-    public boolean renderAsNormalBlock()
-    {
+    public boolean renderAsNormalBlock() {
         return false;
     }
 
-    public TileEntity createNewTileEntity(World world, int i)
-    {
+    public TileEntity createNewTileEntity(World world, int i) {
         return new TileEntityAnubiteStatue();
     }
 
-    public Class<? extends ItemBlock> getItemBlockClass()
-    {
+    public Class<? extends ItemBlock> getItemBlockClass() {
         return ItemBlockAnubiteStatue.class;
     }
 }

@@ -3,25 +3,20 @@ package com.github.revival.client.renderer.entity;
 import com.github.revival.client.model.ModelDinoEgg;
 import com.github.revival.common.entity.EntityDinoEgg;
 import com.github.revival.common.enums.EnumPrehistoric;
-
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
-
 import org.lwjgl.opengl.GL11;
 
-public class RenderDinoEgg extends Render
-{
+public class RenderDinoEgg extends Render {
     protected ModelDinoEgg MainModel;
 
-    public RenderDinoEgg(float var1)
-    {
+    public RenderDinoEgg(float var1) {
         this.shadowSize = var1;
         this.MainModel = new ModelDinoEgg();
     }
 
-    public void renderDinoEgg(EntityDinoEgg var1, double var2, double var4, double var6, float var8, float var9)
-    {
+    public void renderDinoEgg(EntityDinoEgg var1, double var2, double var4, double var6, float var8, float var9) {
 
         GL11.glPushMatrix();
         GL11.glTranslatef((float) var2, (float) var4, (float) var6);
@@ -29,16 +24,14 @@ public class RenderDinoEgg extends Render
         float var10 = (float) var1.timeSinceHit - var9;
         float var11 = (float) var1.damageTaken - var9;
 
-        if (var11 < 0.0F)
-        {
+        if (var11 < 0.0F) {
             var11 = 0.0F;
         }
 
         float var12 = 0.75F;
         GL11.glScalef(var12, var12, var12);
         GL11.glScalef(1.0F / var12, 1.0F / var12, 1.0F / var12);
-        if (var1.DinoInside == EnumPrehistoric.Compsognathus)
-        {
+        if (var1.DinoInside == EnumPrehistoric.Compsognathus) {
             GL11.glTranslatef(0, -0.725F, 0);
             GL11.glScalef(0.5F, 0.5F, 0.5F);
         }
@@ -49,8 +42,7 @@ public class RenderDinoEgg extends Render
         GL11.glPopMatrix();
     }
 
-    public void doRenderLiving(EntityDinoEgg var1, double var2, double var4, double var6, float var8, float var9)
-    {
+    public void doRenderLiving(EntityDinoEgg var1, double var2, double var4, double var6, float var8, float var9) {
         this.renderDinoEgg(var1, var2, var4, var6, var8, var9);
     }
 
@@ -60,14 +52,12 @@ public class RenderDinoEgg extends Render
      * (Render<T extends Entity) and this method has signature public void doRender(T entity, double d, double d1,
      * double d2, float f, float f1). But JAD is pre 1.5 so doesn't do that.
      */
-    public void doRender(Entity var1, double var2, double var4, double var6, float var8, float var9)
-    {
+    public void doRender(Entity var1, double var2, double var4, double var6, float var8, float var9) {
         this.renderDinoEgg((EntityDinoEgg) var1, var2, var4, var6, var8, var9);
     }
 
     @Override
-    protected ResourceLocation getEntityTexture(Entity entity)
-    {
+    protected ResourceLocation getEntityTexture(Entity entity) {
         // TODO Auto-generated method stub
         return null;
     }

@@ -1,7 +1,6 @@
 package com.github.revival.common.enums;
 
-public enum EnumPigmenSpeaks
-{
+public enum EnumPigmenSpeaks {
     SelfKill,
     LifeFor,
     AnuSommon;

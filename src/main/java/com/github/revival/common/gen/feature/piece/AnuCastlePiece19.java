@@ -5,10 +5,8 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class AnuCastlePiece19
-{
-    public static boolean generate_r0121_last(World world, Random rand, int x, int y, int z)
-    {
+public class AnuCastlePiece19 {
+    public static boolean generate_r0121_last(World world, Random rand, int x, int y, int z) {
 
         world.setBlock(x + 7, y + 13, z + 6, Blocks.ladder, 2, 3);
         world.setBlock(x + 49, y + 13, z + 6, Blocks.ladder, 2, 3);

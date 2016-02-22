@@ -3,8 +3,7 @@ package com.github.revival.client.model;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 
-public class ModelSifter extends ModelBase
-{
+public class ModelSifter extends ModelBase {
     public ModelRenderer sifter;
     //fields
     ModelRenderer longwall1;
@@ -14,8 +13,7 @@ public class ModelSifter extends ModelBase
     ModelRenderer top;
     ModelRenderer floor;
 
-    public ModelSifter()
-    {
+    public ModelSifter() {
         textureWidth = 64;
         textureHeight = 64;
 
@@ -89,8 +87,7 @@ public class ModelSifter extends ModelBase
       super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
     }
     */
-    public void renderAll()
-    {
+    public void renderAll() {
         longwall1.render(0.0625F);
         shortwall2.render(0.0625F);
         longwall2.render(0.0625F);

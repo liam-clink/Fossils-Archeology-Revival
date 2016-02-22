@@ -1,5 +1,8 @@
 package com.github.revival.client.renderer.entity;
 
+import com.github.revival.common.entity.mob.projectile.EntityBirdEgg;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.texture.TextureMap;
@@ -10,40 +13,30 @@ import net.minecraft.item.ItemPotion;
 import net.minecraft.potion.PotionHelper;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
-
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-import com.github.revival.common.entity.mob.projectile.EntityBirdEgg;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 @SideOnly(Side.CLIENT)
-public class RenderBirdEgg extends Render
-{
+public class RenderBirdEgg extends Render {
     private Item item;
 
-    public void doRender(Entity entity, double x, double y, double z, float u, float v)
-    {
-    	item = ((EntityBirdEgg)entity).item;
+    public void doRender(Entity entity, double x, double y, double z, float u, float v) {
+        item = ((EntityBirdEgg) entity).item;
         IIcon iicon = this.item.getIconFromDamage(0);
 
-        if (iicon != null)
-        {
+        if (iicon != null) {
             GL11.glPushMatrix();
-            GL11.glTranslatef((float)x, (float)y, (float)z);
+            GL11.glTranslatef((float) x, (float) y, (float) z);
             GL11.glEnable(GL12.GL_RESCALE_NORMAL);
             GL11.glScalef(0.5F, 0.5F, 0.5F);
             this.bindEntityTexture(entity);
             Tessellator tessellator = Tessellator.instance;
 
-            if (iicon == ItemPotion.func_94589_d("bottle_splash"))
-            {
-                int i = PotionHelper.func_77915_a(((EntityPotion)entity).getPotionDamage(), false);
-                float f2 = (float)(i >> 16 & 255) / 255.0F;
-                float f3 = (float)(i >> 8 & 255) / 255.0F;
-                float f4 = (float)(i & 255) / 255.0F;
+            if (iicon == ItemPotion.func_94589_d("bottle_splash")) {
+                int i = PotionHelper.func_77915_a(((EntityPotion) entity).getPotionDamage(), false);
+                float f2 = (float) (i >> 16 & 255) / 255.0F;
+                float f3 = (float) (i >> 8 & 255) / 255.0F;
+                float f4 = (float) (i & 255) / 255.0F;
                 GL11.glColor3f(f2, f3, f4);
                 GL11.glPushMatrix();
                 this.func_77026_a(tessellator, ItemPotion.func_94589_d("overlay"));
@@ -60,13 +53,11 @@ public class RenderBirdEgg extends Render
     /**
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
-    protected ResourceLocation getEntityTexture(Entity entity)
-    {
+    protected ResourceLocation getEntityTexture(Entity entity) {
         return TextureMap.locationItemsTexture;
     }
 
-    private void func_77026_a(Tessellator tess, IIcon iicon)
-    {
+    private void func_77026_a(Tessellator tess, IIcon iicon) {
         float f = iicon.getMinU();
         float f1 = iicon.getMaxU();
         float f2 = iicon.getMinV();
@@ -78,10 +69,10 @@ public class RenderBirdEgg extends Render
         GL11.glRotatef(-this.renderManager.playerViewX, 1.0F, 0.0F, 0.0F);
         tess.startDrawingQuads();
         tess.setNormal(0.0F, 1.0F, 0.0F);
-        tess.addVertexWithUV((double)(0.0F - f5), (double)(0.0F - f6), 0.0D, (double)f, (double)f3);
-        tess.addVertexWithUV((double)(f4 - f5), (double)(0.0F - f6), 0.0D, (double)f1, (double)f3);
-        tess.addVertexWithUV((double)(f4 - f5), (double)(f4 - f6), 0.0D, (double)f1, (double)f2);
-        tess.addVertexWithUV((double)(0.0F - f5), (double)(f4 - f6), 0.0D, (double)f, (double)f2);
+        tess.addVertexWithUV((double) (0.0F - f5), (double) (0.0F - f6), 0.0D, (double) f, (double) f3);
+        tess.addVertexWithUV((double) (f4 - f5), (double) (0.0F - f6), 0.0D, (double) f1, (double) f3);
+        tess.addVertexWithUV((double) (f4 - f5), (double) (f4 - f6), 0.0D, (double) f1, (double) f2);
+        tess.addVertexWithUV((double) (0.0F - f5), (double) (f4 - f6), 0.0D, (double) f, (double) f2);
         tess.draw();
     }
 }

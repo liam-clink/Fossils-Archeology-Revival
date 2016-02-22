@@ -4,16 +4,14 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import org.lwjgl.opengl.GL11;
 
-public class ModelBlock extends ModelBase
-{
+public class ModelBlock extends ModelBase {
     //fields
     ModelRenderer main;
     ModelRenderer bottom;
     ModelRenderer opening;
     ModelRenderer opening1;
 
-    public ModelBlock()
-    {
+    public ModelBlock() {
         textureWidth = 64;
         textureHeight = 128;
 
@@ -42,8 +40,7 @@ public class ModelBlock extends ModelBase
         opening1.mirror = true;
     }
 
-    public void render(float f5)
-    {
+    public void render(float f5) {
         GL11.glPushMatrix();
         opening.render(f5);
         opening1.render(f5);
@@ -52,8 +49,7 @@ public class ModelBlock extends ModelBase
         GL11.glPopMatrix();
     }
 
-    private void setRotation(ModelRenderer model, float x, float y, float z)
-    {
+    private void setRotation(ModelRenderer model, float x, float y, float z) {
         model.rotateAngleX = x;
         model.rotateAngleY = y;
         model.rotateAngleZ = z;

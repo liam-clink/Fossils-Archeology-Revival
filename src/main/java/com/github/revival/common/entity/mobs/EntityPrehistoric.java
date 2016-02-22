@@ -29,8 +29,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Random;
 
-public abstract class EntityPrehistoric extends EntityAgeable
-{
+public abstract class EntityPrehistoric extends EntityAgeable {
 
     public static int ticksPerAge = 12000;
 
@@ -49,20 +48,16 @@ public abstract class EntityPrehistoric extends EntityAgeable
     private boolean male;
     private Vec3 home;
 
-    public EntityPrehistoric(World world, EnumEntityPrehistoric type, int subSpecies, ModelBase model)
-    {
+    public EntityPrehistoric(World world, EnumEntityPrehistoric type, int subSpecies, ModelBase model) {
         super(world);
         this.type = type;
         this.exp = type.getBaseExp();
         this.subSpecies = subSpecies;
         this.hunger = type.getMaxHunger() / 2;
         this.setSize(type.getBaseBoundingBoxHeight(), type.getBaseBoundingBoxWidth());
-        if ((new Random()).nextBoolean())
-        {
+        if ((new Random()).nextBoolean()) {
             male = true;
-        }
-        else
-        {
+        } else {
             male = false;
         }
         //this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(type.getMaxHealth());
@@ -81,41 +76,30 @@ public abstract class EntityPrehistoric extends EntityAgeable
     abstract boolean tryTame(EntityPlayer player);
 
     @Override
-    public boolean interact(EntityPlayer player)
-    {
-        if (this.isStatue)
-        {
+    public boolean interact(EntityPlayer player) {
+        if (this.isStatue) {
             return statueInteract(player);
         }
 
         return tryTame(player);
     }
 
-    private boolean statueInteract(EntityPlayer player)
-    {
+    private boolean statueInteract(EntityPlayer player) {
         ItemStack itemStack = player.inventory.getCurrentItem();
 
-        if (itemStack.getItem().equals(Items.bone))
-        {
+        if (itemStack.getItem().equals(Items.bone)) {
             this.age++;
-            if (!player.capabilities.isCreativeMode)
-            {
+            if (!player.capabilities.isCreativeMode) {
                 itemStack.stackSize--;
-                if (itemStack.stackSize == 0)
-                {
+                if (itemStack.stackSize == 0) {
                     player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
                 }
             }
             return true;
-        }
-        else
-        {
-            if (player.isSneaking())
-            {
+        } else {
+            if (player.isSneaking()) {
                 this.setPositionAndUpdate(this.posX + (this.posX - player.posX) * 0.1F, this.posY, this.posZ + (this.posZ - player.posZ) * 0.1F);
-            }
-            else
-            {
+            } else {
                 this.faceEntity(player, 360.0F, 360.0F);
             }
         }
@@ -128,68 +112,55 @@ public abstract class EntityPrehistoric extends EntityAgeable
      * @param p0
      */
     @SideOnly(Side.CLIENT)
-    public void ShowPedia2(GuiPedia p0)
-    {
+    public void ShowPedia2(GuiPedia p0) {
         p0.reset();
-        p0.AddStringLR("", 150, false);
+        p0.addStringLR("", 150, false);
         String translatePath = "assets/fossil/dinopedia/" + Minecraft.getMinecraft().gameSettings.language + "/";
         String bioFile = type.toString() + ".txt";
 
-        if (getClass().getClassLoader().getResourceAsStream(translatePath) == null)
-        {
+        if (getClass().getClassLoader().getResourceAsStream(translatePath) == null) {
             translatePath = "assets/fossil/dinopedia/" + "en_US" + "/";
         }
 
-        if (getClass().getClassLoader().getResourceAsStream(translatePath + bioFile) != null)
-        {
+        if (getClass().getClassLoader().getResourceAsStream(translatePath + bioFile) != null) {
             InputStream fileReader = getClass().getClassLoader().getResourceAsStream(translatePath + bioFile);
-            try
-            {
+            try {
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(fileReader));
                 StringBuffer stringBuffer = new StringBuffer();
                 String line;
-                while ((line = bufferedReader.readLine()) != null)
-                {
+                while ((line = bufferedReader.readLine()) != null) {
                     GL11.glPushMatrix();
                     GL11.glScalef(0.5F, 0.5F, 0.5F);
-                    p0.AddStringLR(line, 150, false);
+                    p0.addStringLR(line, 150, false);
                     GL11.glPopMatrix();
                 }
                 fileReader.close();
-            }
-            catch (IOException e)
-            {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
-        else
-        {
-            p0.AddStringLR("File not found.", false);
+        } else {
+            p0.addStringLR("File not found.", false);
             GL11.glPushMatrix();
             GL11.glScalef(0.5F, 0.5F, 0.5F);
-            p0.AddStringLR(translatePath + bioFile, 150, false);
+            p0.addStringLR(translatePath + bioFile, 150, false);
             GL11.glPopMatrix();
         }
     }
 
     @Override
-    protected void dropFewItems(boolean var1, int numToDrop)
-    {
+    protected void dropFewItems(boolean var1, int numToDrop) {
         this.entityDropItem(new ItemStack(getDropItem(), numToDrop, 0), 0.5F);
     }
 
 
     @Override
-    protected void dropRareDrop(int numToDrop)
-    {
-        if (this.isStatue || this.isChild())
-        {
+    protected void dropRareDrop(int numToDrop) {
+        if (this.isStatue || this.isChild()) {
             return;
         }
 
         Item toDrop = null;
-        switch ((new Random()).nextInt(7))
-        {
+        switch ((new Random()).nextInt(7)) {
             case 0:
                 toDrop = FAItemRegistry.legBone;
                 break;
@@ -205,30 +176,27 @@ public abstract class EntityPrehistoric extends EntityAgeable
             case 3:
                 toDrop = FAItemRegistry.skull;
                 break;
-            
+
             case 4:
                 toDrop = FAItemRegistry.vertebrae;
                 break;
-            
+
             case 5:
                 toDrop = FAItemRegistry.armBone;
                 break;
-            
+
             case 6:
                 toDrop = FAItemRegistry.dinoRibCage;
                 break;
         }
         entityDropItem(new ItemStack(toDrop, 1, type.ordinal()), 0.5F);
 
-        if (!this.isAdult())
-        {
+        if (!this.isAdult()) {
             return;
         }
 
-        if ((new Random()).nextInt(20) == 0)
-        {
-            switch ((new Random()).nextInt(7))
-            {
+        if ((new Random()).nextInt(20) == 0) {
+            switch ((new Random()).nextInt(7)) {
                 case 0:
                     toDrop = FAItemRegistry.legBone;
                     break;
@@ -270,12 +238,10 @@ public abstract class EntityPrehistoric extends EntityAgeable
      *
      * @param particleID
      */
-    public void spawnParticle(int particleID)
-    {
+    public void spawnParticle(int particleID) {
         String particleString = "";
 
-        switch (particleID)
-        {
+        switch (particleID) {
             case 0:
                 particleString = "heart";
                 break;
@@ -287,8 +253,7 @@ public abstract class EntityPrehistoric extends EntityAgeable
                 break;
         }
 
-        for (int i = 0; i < 7; i++)
-        {
+        for (int i = 0; i < 7; i++) {
             double var4 = this.rand.nextGaussian() * 0.02D;
             double var6 = this.rand.nextGaussian() * 0.02D;
             double var8 = this.rand.nextGaussian() * 0.02D;
@@ -301,17 +266,13 @@ public abstract class EntityPrehistoric extends EntityAgeable
      *
      * @param feeder
      */
-    public void eatFromFeeder(TileEntityFeeder feeder)
-    {
-        while (hunger <= type.getMaxHunger() && (feeder.MeatCurrent > 0 || feeder.VegCurrent > 0))
-        {
-            if (feeder.MeatCurrent > 0)
-            {
+    public void eatFromFeeder(TileEntityFeeder feeder) {
+        while (hunger <= type.getMaxHunger() && (feeder.MeatCurrent > 0 || feeder.VegCurrent > 0)) {
+            if (feeder.MeatCurrent > 0) {
                 hunger++;
                 feeder.MeatCurrent--;
             }
-            if (feeder.VegCurrent > 0)
-            {
+            if (feeder.VegCurrent > 0) {
                 hunger++;
                 feeder.VegCurrent--;
             }
@@ -323,17 +284,12 @@ public abstract class EntityPrehistoric extends EntityAgeable
      * Points the entity in a direction and moves it
      */
     @Override
-    public void moveEntityWithHeading(float xHeading, float yHeading)
-    {
-        if (!isStatue())
-        {
+    public void moveEntityWithHeading(float xHeading, float yHeading) {
+        if (!isStatue()) {
             super.moveEntityWithHeading(xHeading, yHeading);
-            if (this.riddenByEntity != null || this.isAdult())
-            {
+            if (this.riddenByEntity != null || this.isAdult()) {
                 this.stepHeight = 1.0F;
-            }
-            else
-            {
+            } else {
                 this.stepHeight = 0.5F;
             }
         }
@@ -344,20 +300,16 @@ public abstract class EntityPrehistoric extends EntityAgeable
      *
      * @return
      */
-    public EntityPlayer getRidingPlayer()
-    {
-        if (riddenByEntity instanceof EntityPlayer)
-        {
+    public EntityPlayer getRidingPlayer() {
+        if (riddenByEntity instanceof EntityPlayer) {
             return (EntityPlayer) riddenByEntity;
         }
         return null;
     }
 
     @Override
-    protected Item getDropItem()
-    {
-        if (this.isStatue)
-        {
+    protected Item getDropItem() {
+        if (this.isStatue) {
             return FAItemRegistry.biofossil;
         }
         return type.getDropItem();
@@ -369,13 +321,11 @@ public abstract class EntityPrehistoric extends EntityAgeable
      * @param target
      */
     @Override
-    public boolean attackEntityAsMob(Entity target)
-    {
+    public boolean attackEntityAsMob(Entity target) {
 
         boolean attacked = target.attackEntityFrom(DamageSource.causeMobDamage(this), (float) this.getStrength());
 
-        if (attacked)
-        {
+        if (attacked) {
 
         }
 
@@ -386,14 +336,11 @@ public abstract class EntityPrehistoric extends EntityAgeable
      * Runs when mob is attacked
      */
     @Override
-    public boolean attackEntityFrom(DamageSource attacker, float var2)
-    {
-        if (attacker.getEntity().equals(riddenByEntity) || attacker.getEntity().equals(this))
-        {
+    public boolean attackEntityFrom(DamageSource attacker, float var2) {
+        if (attacker.getEntity().equals(riddenByEntity) || attacker.getEntity().equals(this)) {
             return false;
         }
-        if (dropStatue())
-        {
+        if (dropStatue()) {
             return true;
         }
         return super.attackEntityFrom(attacker, var2);
@@ -405,54 +352,41 @@ public abstract class EntityPrehistoric extends EntityAgeable
      * -Add hunger and health values for other mobs
      */
     @Override
-    public void onKillEntity(EntityLivingBase entity)
-    {
-        if (entity instanceof EntityPrehistoric)
-        {
+    public void onKillEntity(EntityLivingBase entity) {
+        if (entity instanceof EntityPrehistoric) {
             addHunger(((EntityPrehistoric) entity).getType().getHungerIfEaten());
             heal(((EntityPrehistoric) entity).getType().getHealthIfEaten());
         }
     }
 
-    public int pickupItem(ItemStack item)
-    {
-        if (type.willEat(item.getItem()))
-        {
+    public int pickupItem(ItemStack item) {
+        if (type.willEat(item.getItem())) {
             eat(item);
-        }
-        else
-        {
+        } else {
             holdItem(item);
         }
         return 0;
     }
 
-    public void eat(ItemStack itemstack)
-    {
+    public void eat(ItemStack itemstack) {
         EnumEdibleFoodstuff food = EnumEdibleFoodstuff.getFromItem(itemstack.getItem());
-        while (this.hunger < type.getMaxHunger() && itemstack.stackSize > 0)
-        {
+        while (this.hunger < type.getMaxHunger() && itemstack.stackSize > 0) {
             this.hunger += food.getBaseHungerHeal();
             this.setHealth(this.getHealth() + food.getBaseHealthHeal());
             itemstack.stackSize--;
         }
-        if (this.hunger < type.getMaxHunger())
-        {
+        if (this.hunger < type.getMaxHunger()) {
             this.hunger = type.getMaxHunger();
         }
     }
 
-    public void holdItem(ItemStack item)
-    {
+    public void holdItem(ItemStack item) {
         this.itemCarrying = new ItemStack(item.getItem(), item.getItemDamage());
     }
 
-    public boolean dropStatue()
-    {
-        if (isStatue())
-        {
-            if (!this.worldObj.isRemote && !this.isDead)
-            {
+    public boolean dropStatue() {
+        if (isStatue()) {
+            if (!this.worldObj.isRemote && !this.isDead) {
                 this.entityDropItem(new ItemStack(FAItemRegistry.biofossil, 1), 0.0F);
                 this.setDead();
             }
@@ -461,19 +395,16 @@ public abstract class EntityPrehistoric extends EntityAgeable
         return false;
     }
 
-    public void setPathToEntity(Entity entity)
-    {
+    public void setPathToEntity(Entity entity) {
         // TODO
     }
 
-    public void setPathToPosition(Vec3 location)
-    {
+    public void setPathToPosition(Vec3 location) {
         // TODO
     }
 
     @Override
-    public float getEyeHeight()
-    {
+    public float getEyeHeight() {
         return type.getBaseEyeHeight() * this.getSize();
     }
 
@@ -482,11 +413,9 @@ public abstract class EntityPrehistoric extends EntityAgeable
      *
      * @return
      */
-    public double getStrength()
-    {
+    public double getStrength() {
         double step = (type.getMaxStrength() - type.getBaseStrength()) / (type.getAdultAge());
-        if (this.age > type.getAdultAge())
-        {
+        if (this.age > type.getAdultAge()) {
             return type.getBaseStrength() + (step * type.getAdultAge());
         }
         return type.getBaseStrength() + (step * age);
@@ -497,11 +426,9 @@ public abstract class EntityPrehistoric extends EntityAgeable
      *
      * @return
      */
-    public float getSize()
-    {
+    public float getSize() {
         float step = (type.getMaxSize() - type.getBaseSize()) / (type.getAdultAge());
-        if (this.age > type.getAdultAge())
-        {
+        if (this.age > type.getAdultAge()) {
             return type.getBaseSize() + (step * type.getAdultAge());
         }
         return type.getBaseSize() + (step * age);
@@ -511,18 +438,15 @@ public abstract class EntityPrehistoric extends EntityAgeable
      * Sets the scale of the dinosaur
      */
     @Override
-    public void setScaleForAge(boolean child)
-    {
+    public void setScaleForAge(boolean child) {
         this.setScale(getSize());
     }
 
-    private void setPedia()
-    {
+    private void setPedia() {
         Revival.toPedia = this;
     }
 
-    public int getSubSpecies()
-    {
+    public int getSubSpecies() {
         return subSpecies;
     }
 
@@ -530,8 +454,7 @@ public abstract class EntityPrehistoric extends EntityAgeable
      * Dino can't climb ladder
      */
     @Override
-    public boolean isOnLadder()
-    {
+    public boolean isOnLadder() {
         return false;
     }
 
@@ -539,42 +462,36 @@ public abstract class EntityPrehistoric extends EntityAgeable
      * Gets the experience points of the mob
      */
     @Override
-    protected int getExperiencePoints(EntityPlayer player)
-    {
+    protected int getExperiencePoints(EntityPlayer player) {
         return (int) exp;
     }
 
     @Override
-    public boolean isAIEnabled()
-    {
+    public boolean isAIEnabled() {
         return !this.isStatue && !this.worldObj.isRemote;
     }
 
     @Override
-    public boolean canBePushed()
-    {
+    public boolean canBePushed() {
         return !this.isStatue;
     }
 
     @Override
-    protected boolean canDespawn()
-    {
+    protected boolean canDespawn() {
         return false;
     }
 
     /**
      * Gets the age of the mob
      */
-    public int getAge()
-    {
+    public int getAge() {
         return age;
     }
 
     /**
      * Increments the age of the mob
      */
-    public void incrementAge()
-    {
+    public void incrementAge() {
         age++;
         exp += type.getExpDaily();
     }
@@ -584,18 +501,15 @@ public abstract class EntityPrehistoric extends EntityAgeable
      *
      * @return
      */
-    public int getHunger()
-    {
+    public int getHunger() {
         return hunger;
     }
 
     /**
      * Decrements the hunger
      */
-    public void decrementHunger()
-    {
-        if (hunger > 0)
-        {
+    public void decrementHunger() {
+        if (hunger > 0) {
             hunger--;
         }
     }
@@ -605,16 +519,13 @@ public abstract class EntityPrehistoric extends EntityAgeable
      *
      * @param hunger
      */
-    public boolean addHunger(int hunger)
-    {
-        if (this.hunger >= type.getMaxHunger())
-        {
+    public boolean addHunger(int hunger) {
+        if (this.hunger >= type.getMaxHunger()) {
             this.hunger = type.getMaxHunger();
             return false;
         }
         this.hunger += hunger;
-        if (this.hunger > type.getMaxHunger())
-        {
+        if (this.hunger > type.getMaxHunger()) {
             this.hunger = type.getMaxHunger();
         }
         this.worldObj.playSoundAtEntity(this, "random.eat", this.getSoundVolume(), this.getSoundPitch());
@@ -626,8 +537,7 @@ public abstract class EntityPrehistoric extends EntityAgeable
      *
      * @return
      */
-    public EnumEntityPrehistoric getType()
-    {
+    public EnumEntityPrehistoric getType() {
         return type;
     }
 
@@ -636,8 +546,7 @@ public abstract class EntityPrehistoric extends EntityAgeable
      *
      * @return
      */
-    public String getOwnerDisplayName()
-    {
+    public String getOwnerDisplayName() {
         return ownerDisplayName;
     }
 
@@ -646,8 +555,7 @@ public abstract class EntityPrehistoric extends EntityAgeable
      *
      * @param ownerDisplayName
      */
-    public void setOwnerDisplayName(String ownerDisplayName)
-    {
+    public void setOwnerDisplayName(String ownerDisplayName) {
         this.ownerDisplayName = ownerDisplayName;
     }
 
@@ -656,13 +564,11 @@ public abstract class EntityPrehistoric extends EntityAgeable
      *
      * @return
      */
-    public boolean isStatue()
-    {
+    public boolean isStatue() {
         return isStatue;
     }
 
-    public void setStatue(boolean isStatue)
-    {
+    public void setStatue(boolean isStatue) {
         this.isStatue = isStatue;
     }
 
@@ -671,8 +577,7 @@ public abstract class EntityPrehistoric extends EntityAgeable
      *
      * @return
      */
-    public boolean isInHerd()
-    {
+    public boolean isInHerd() {
         return inHerd;
     }
 
@@ -681,8 +586,7 @@ public abstract class EntityPrehistoric extends EntityAgeable
      *
      * @return
      */
-    public boolean isWild()
-    {
+    public boolean isWild() {
         return isWild;
     }
 
@@ -691,8 +595,7 @@ public abstract class EntityPrehistoric extends EntityAgeable
      *
      * @return
      */
-    public boolean isAdult()
-    {
+    public boolean isAdult() {
         return this.age >= type.getAdultAge();
     }
 
@@ -701,26 +604,22 @@ public abstract class EntityPrehistoric extends EntityAgeable
      *
      * @return
      */
-    public boolean isTeen()
-    {
+    public boolean isTeen() {
         return this.age >= type.getTeenAge();
     }
 
     /**
      * Returns true if the mob is a child
      */
-    public boolean isChild()
-    {
+    public boolean isChild() {
         return this.age < type.getTeenAge();
     }
 
-    public boolean hasOwner()
-    {
+    public boolean hasOwner() {
         return ownerDisplayName == null || ownerDisplayName.isEmpty();
     }
 
-    public boolean isMale()
-    {
+    public boolean isMale() {
         return male;
     }
 
@@ -729,13 +628,10 @@ public abstract class EntityPrehistoric extends EntityAgeable
      *
      * @return
      */
-    public int hungerLevel()
-    {
+    public int hungerLevel() {
         float hungerRatio = ((float) hunger) / type.getMaxHunger();
-        if (hungerRatio < type.getHungerLevel())
-        {
-            if (hungerRatio < type.getHungerLevel() / 4)
-            {
+        if (hungerRatio < type.getHungerLevel()) {
+            if (hungerRatio < type.getHungerLevel() / 4) {
                 return 2;
             }
             return 1;
@@ -743,30 +639,25 @@ public abstract class EntityPrehistoric extends EntityAgeable
         return 0;
     }
 
-    protected String getModelTexture()
-    {
-        return Revival.modid + ":" + "textures/mob/DinosaurModels/DinoModel" + type.toString() + ".png";
+    protected String getModelTexture() {
+        return Revival.MODID + ":" + "textures/mob/DinosaurModels/DinoModel" + type.toString() + ".png";
     }
 
-    public String getTexture()
-    {
+    public String getTexture() {
         // TODO
         return null;
     }
 
-    public Vec3 getHome()
-    {
+    public Vec3 getHome() {
         return home;
     }
 
-    public void setHome(Vec3 home)
-    {
+    public void setHome(Vec3 home) {
         this.home = home;
     }
 
     @Override
-    public void writeEntityToNBT(NBTTagCompound compound)
-    {
+    public void writeEntityToNBT(NBTTagCompound compound) {
         super.writeEntityToNBT(compound);
         compound.setBoolean("isStatue", this.isStatue);
         compound.setInteger("Hunger", this.hunger);
@@ -777,8 +668,7 @@ public abstract class EntityPrehistoric extends EntityAgeable
     }
 
     @Override
-    public void readEntityFromNBT(NBTTagCompound compound)
-    {
+    public void readEntityFromNBT(NBTTagCompound compound) {
         super.readEntityFromNBT(compound);
         this.isStatue = compound.getBoolean("isStatue");
         this.hunger = compound.getInteger("Hunger");
@@ -794,8 +684,7 @@ public abstract class EntityPrehistoric extends EntityAgeable
      * @param location
      * @return
      */
-    public double distanceToLocation(Vec3 location)
-    {
+    public double distanceToLocation(Vec3 location) {
         return Math.sqrt(Math.pow(posX - location.xCoord + 0.5, 2) + Math.pow(posZ - location.zCoord + 0.5, 2));
     }
 
@@ -805,8 +694,7 @@ public abstract class EntityPrehistoric extends EntityAgeable
      * @param entity
      * @return
      */
-    public double distanceToEntity(Entity entity)
-    {
+    public double distanceToEntity(Entity entity) {
         return Math.sqrt(Math.pow(posX - entity.posX, 2) + Math.pow(posZ - entity.posZ, 2));
     }
 
@@ -816,8 +704,7 @@ public abstract class EntityPrehistoric extends EntityAgeable
      * @param entity
      * @return
      */
-    public double distanceToFeeder(TileEntityFeeder entity)
-    {
+    public double distanceToFeeder(TileEntityFeeder entity) {
         return Math.sqrt(Math.pow(posX - entity.xCoord + 0.5, 2) + Math.pow(posY - entity.yCoord + 0.5, 2));
     }
 
@@ -828,15 +715,11 @@ public abstract class EntityPrehistoric extends EntityAgeable
      * @param location
      * @return
      */
-    public int distanceStatus(Vec3 location)
-    {
+    public int distanceStatus(Vec3 location) {
         double distance = this.distanceToLocation(location);
-        if (distance < type.getImmediateAwarenessRadius())
-        {
+        if (distance < type.getImmediateAwarenessRadius()) {
             return 2;
-        }
-        else if (distance < type.getMaxAwarenessRadius())
-        {
+        } else if (distance < type.getMaxAwarenessRadius()) {
             return 1;
         }
         return 0;
@@ -848,8 +731,7 @@ public abstract class EntityPrehistoric extends EntityAgeable
      * @param entity
      * @return
      */
-    public int distanceStatus(Entity entity)
-    {
+    public int distanceStatus(Entity entity) {
         return distanceStatus(Vec3.createVectorHelper(entity.posX, entity.posY, entity.posZ));
     }
 
@@ -859,8 +741,7 @@ public abstract class EntityPrehistoric extends EntityAgeable
      * @param entity
      * @return
      */
-    public int distanceStatus(TileEntityFeeder entity)
-    {
+    public int distanceStatus(TileEntityFeeder entity) {
         return distanceStatus(Vec3.createVectorHelper(entity.xCoord, entity.yCoord, entity.zCoord));
     }
 
@@ -870,8 +751,7 @@ public abstract class EntityPrehistoric extends EntityAgeable
      * @param entity
      * @return
      */
-    private boolean canSeeEntity(Entity entity)
-    {
+    private boolean canSeeEntity(Entity entity) {
         boolean canSeeAnyDir = worldObj.rayTraceBlocks(Vec3.createVectorHelper(posX, posY, posZ), Vec3.createVectorHelper(entity.posX, entity.posY, entity.posZ)) == null;
         boolean entityWithinFieldOfView = Vec3.createVectorHelper(entity.posX - posX, entity.posY - posY, entity.posZ - posZ).normalize().dotProduct(getLookVec()) > 0.8;
         return canSeeAnyDir && entityWithinFieldOfView;
@@ -883,86 +763,54 @@ public abstract class EntityPrehistoric extends EntityAgeable
      * @param position
      * @return
      */
-    private boolean rayTraceBlock(Vec3 position)
-    {
-        if (posY >= position.yCoord)
-        {
-            if (canSeeBlockFace(position, 0))
-            {
+    private boolean rayTraceBlock(Vec3 position) {
+        if (posY >= position.yCoord) {
+            if (canSeeBlockFace(position, 0)) {
+                return true;
+            }
+        } else {
+            if (canSeeBlockFace(position, 1)) {
                 return true;
             }
         }
-        else
-        {
-            if (canSeeBlockFace(position, 1))
-            {
-                return true;
-            }
-        }
-        if (Math.abs(posX - position.xCoord) >= Math.abs(posZ - position.zCoord))
-        {
-            if (posX >= position.xCoord)
-            {
-                if (canSeeBlockFace(position, 2))
-                {
+        if (Math.abs(posX - position.xCoord) >= Math.abs(posZ - position.zCoord)) {
+            if (posX >= position.xCoord) {
+                if (canSeeBlockFace(position, 2)) {
+                    return true;
+                }
+            } else {
+                if (canSeeBlockFace(position, 3)) {
                     return true;
                 }
             }
-            else
-            {
-                if (canSeeBlockFace(position, 3))
-                {
+        } else {
+            if (posZ >= position.zCoord) {
+                if (canSeeBlockFace(position, 4)) {
                     return true;
                 }
-            }
-        }
-        else
-        {
-            if (posZ >= position.zCoord)
-            {
-                if (canSeeBlockFace(position, 4))
-                {
-                    return true;
-                }
-            }
-            else
-            {
-                if (canSeeBlockFace(position, 5))
-                {
+            } else {
+                if (canSeeBlockFace(position, 5)) {
                     return true;
                 }
             }
         }
-        if (Math.abs(posX - position.xCoord) >= Math.abs(posZ - position.zCoord))
-        {
-            if (posZ >= position.zCoord)
-            {
-                if (canSeeBlockFace(position, 4))
-                {
+        if (Math.abs(posX - position.xCoord) >= Math.abs(posZ - position.zCoord)) {
+            if (posZ >= position.zCoord) {
+                if (canSeeBlockFace(position, 4)) {
+                    return true;
+                }
+            } else {
+                if (canSeeBlockFace(position, 5)) {
                     return true;
                 }
             }
-            else
-            {
-                if (canSeeBlockFace(position, 5))
-                {
+        } else {
+            if (posX >= position.xCoord) {
+                if (canSeeBlockFace(position, 2)) {
                     return true;
                 }
-            }
-        }
-        else
-        {
-            if (posX >= position.xCoord)
-            {
-                if (canSeeBlockFace(position, 2))
-                {
-                    return true;
-                }
-            }
-            else
-            {
-                if (canSeeBlockFace(position, 3))
-                {
+            } else {
+                if (canSeeBlockFace(position, 3)) {
                     return true;
                 }
             }
@@ -983,11 +831,9 @@ public abstract class EntityPrehistoric extends EntityAgeable
      * @param face
      * @return
      */
-    private boolean canSeeBlockFace(Vec3 position, int face)
-    {
+    private boolean canSeeBlockFace(Vec3 position, int face) {
         Vec3 target = null;
-        switch (face)
-        {
+        switch (face) {
             case 0:
                 target = position.addVector(0.5, 1.0, 0.5);
                 break;
@@ -1017,8 +863,7 @@ public abstract class EntityPrehistoric extends EntityAgeable
      * @param entity
      * @return
      */
-    private boolean canSeeBlock(Vec3 position)
-    {
+    private boolean canSeeBlock(Vec3 position) {
         boolean canSeeAnyDir = rayTraceBlock(position);
         boolean blockWithinFieldOfView = Vec3.createVectorHelper(position.xCoord - posX + 0.5, position.yCoord - posY + 0.5, position.zCoord - posZ + 0.5).normalize().dotProduct(getLookVec()) > 0.8;
         return canSeeAnyDir && blockWithinFieldOfView;
@@ -1030,10 +875,8 @@ public abstract class EntityPrehistoric extends EntityAgeable
      * @param entity
      * @return
      */
-    public boolean canFindEntity(Entity entity)
-    {
-        switch (distanceStatus(entity))
-        {
+    public boolean canFindEntity(Entity entity) {
+        switch (distanceStatus(entity)) {
             case 0:
                 return false;
             case 1:
@@ -1050,8 +893,7 @@ public abstract class EntityPrehistoric extends EntityAgeable
      * @param entity
      * @return
      */
-    public boolean canFindFeeder(TileEntityFeeder entity)
-    {
+    public boolean canFindFeeder(TileEntityFeeder entity) {
         return canFindBlock(Vec3.createVectorHelper(entity.xCoord, entity.yCoord, entity.zCoord));
     }
 
@@ -1061,10 +903,8 @@ public abstract class EntityPrehistoric extends EntityAgeable
      * @param block
      * @return
      */
-    public boolean canFindBlock(Vec3 block)
-    {
-        switch (distanceStatus(block))
-        {
+    public boolean canFindBlock(Vec3 block) {
+        switch (distanceStatus(block)) {
             case 0:
                 return false;
             case 1:
@@ -1075,8 +915,7 @@ public abstract class EntityPrehistoric extends EntityAgeable
         return false;
     }
 
-    private boolean vec3Equals(Vec3 v1, Vec3 v2)
-    {
+    private boolean vec3Equals(Vec3 v1, Vec3 v2) {
         return v1.xCoord == v2.xCoord && v1.yCoord == v2.yCoord && v1.zCoord == v2.zCoord;
     }
 

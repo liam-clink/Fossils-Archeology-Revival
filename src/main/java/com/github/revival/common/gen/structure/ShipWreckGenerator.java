@@ -1,8 +1,8 @@
 package com.github.revival.common.gen.structure;
 
 import com.github.revival.Revival;
-import net.ilexiconn.llibrary.common.structure.util.Structure;
 import cpw.mods.fml.common.IWorldGenerator;
+import net.ilexiconn.llibrary.common.structure.util.Structure;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
@@ -10,13 +10,10 @@ import net.minecraft.world.chunk.IChunkProvider;
 
 import java.util.Random;
 
-public class ShipWreckGenerator implements IWorldGenerator
-{
+public class ShipWreckGenerator implements IWorldGenerator {
     @Override
-    public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider)
-    {
-        switch (world.provider.dimensionId)
-        {
+    public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
+        switch (world.provider.dimensionId) {
             case -1:
                 // not currently generating anything in the nether
                 // generateNether(world, random, chunkX * 16, chunkZ * 16);
@@ -40,8 +37,7 @@ public class ShipWreckGenerator implements IWorldGenerator
         }
     }
 
-    private void generateStructure(World world, Random rand, int chunkX, int chunkZ)
-    {
+    private void generateStructure(World world, Random rand, int chunkX, int chunkZ) {
         // Need to create a new instance each time or the generate() methods may
         // overlap themselves and cause a crash
         // WorldGeneratorAcademy gen = new WorldGeneratorAcademy();
@@ -63,8 +59,7 @@ public class ShipWreckGenerator implements IWorldGenerator
             // || !world.doesBlockHaveSolidTopSurface(world, x - 10, y+4, z - 11)
             // || !world.doesBlockHaveSolidTopSurface(world, x + 10, y+4, z - 11)
             // || !world.doesBlockHaveSolidTopSurface(world, x - 10, y+4, z + 11))
-                )
-        {
+                ) {
             --y;
         }
 
@@ -76,13 +71,10 @@ public class ShipWreckGenerator implements IWorldGenerator
             // || !world.doesBlockHaveSolidTopSurface(world, x + 10, y, z - 11)
             // || !world.doesBlockHaveSolidTopSurface(world, x - 10, y, z + 11))
             // && world.canBlockSeeTheSky(x, y, z)
-                )
-        {
+                ) {
             return;
-        }
-        else
-        {
-            Revival.Console("Gen: Shipwreck Spawn at " + x + ", " + y + ", " + z);
+        } else {
+            Revival.printDebug("Gen: Shipwreck Spawn at " + x + ", " + y + ", " + z);
         }
 
         int widthX = ((Structure) gen.structures.get(struct)).getWidthX();

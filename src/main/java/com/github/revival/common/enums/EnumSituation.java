@@ -1,9 +1,9 @@
 package com.github.revival.common.enums;
 
-public enum EnumSituation
-{
+public enum EnumSituation {
     Hungry,
     Starve,
+    StarveUntame,
     LearningChest,
     Betrayed,
     NoSpace,

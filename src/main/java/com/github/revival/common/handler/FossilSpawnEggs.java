@@ -4,12 +4,10 @@ import com.github.revival.common.entity.mob.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 
-public class FossilSpawnEggs
-{
+public class FossilSpawnEggs {
     static int startEntityId = 300;
 
-    public static void addSpawnEggs()
-    {                                                        //bg		//fg
+    public static void addSpawnEggs() {                                                        //bg		//fg
         registerEntityEgg(EntityTriceratops.class, 0x62d84e, 0xebffd5);
         registerEntityEgg(EntitySarcosuchus.class, 0x2B2B1E, 0x72715B);
         registerEntityEgg(EntityVelociraptor.class, 0xbfa487, 0x936d2e);
@@ -18,7 +16,7 @@ public class FossilSpawnEggs
         registerEntityEgg(EntityAnu.class, 0x000000, 0xff0000);
         registerEntityEgg(EntityPterosaur.class, 0xe4cae2, 0x751075);
         registerEntityEgg(EntityNautilus.class, 0xd4aba9, 0x97312f);
-        registerEntityEgg(EntityPlesiosaur.class, 0xa4362e, 0xcd6052);
+        registerEntityEgg(EntityPlesiosaurus.class, 0xa4362e, 0xcd6052);
         registerEntityEgg(EntityMosasaurus.class, 0x9cbd8c, 0x357510);
         registerEntityEgg(EntityStegosaurus.class, 0xbfc9a9, 0x5e7510);
         registerEntityEgg(EntityDilophosaurus.class, 0x474807, 0x9f9e4e);
@@ -43,13 +41,12 @@ public class FossilSpawnEggs
         registerEntityEgg(EntityCeratosaurus.class, 0x678A5A, 0xD6C78D);
         registerEntityEgg(EntityAnubite.class, 0x381A1F, 0x732A19);
         registerEntityEgg(EntitySentryPigman.class, 15373203, 0xD0A750);
+        registerEntityEgg(EntityTarSlime.class, 0X222222, 0x0B0B0B);
 
     }
 
-    public static int getUniqueEntityId()
-    {
-        do
-        {
+    public static int getUniqueEntityId() {
+        do {
             startEntityId++;
         }
         while (EntityList.getStringFromID(startEntityId) != null);
@@ -57,8 +54,7 @@ public class FossilSpawnEggs
         return startEntityId;
     }
 
-    public static void registerEntityEgg(Class<? extends Entity> entity, int primaryColor, int secondaryColor)
-    {
+    public static void registerEntityEgg(Class<? extends Entity> entity, int primaryColor, int secondaryColor) {
         int id = getUniqueEntityId();
         EntityList.IDtoClassMapping.put(id, entity);
         EntityList.entityEggs.put(id, new EntityList.EntityEggInfo(id, primaryColor, secondaryColor));

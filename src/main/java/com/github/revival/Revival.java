@@ -21,7 +21,9 @@ import com.github.revival.common.gen.structure.AcademyGenerator;
 import com.github.revival.common.gen.structure.ShipWreckGenerator;
 import com.github.revival.common.handler.*;
 import com.github.revival.common.item.FAItemRegistry;
+import com.github.revival.common.message.MessageDinoSit;
 import com.github.revival.common.tileentity.*;
+import com.github.revival.common.util.FossilFoodMappings;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.FMLLog;
@@ -34,35 +36,39 @@ import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
+import cpw.mods.fml.relauncher.Side;
 import net.ilexiconn.llibrary.common.config.ConfigHelper;
 import net.ilexiconn.llibrary.common.content.ContentHelper;
+import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.IChatComponent;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.util.EnumHelper;
+import net.minecraftforge.fluids.Fluid;
+import org.apache.logging.log4j.Level;
 
-@Mod(modid = Revival.modid, name = "Fossil/Archeology", version = "7.3", dependencies = "required-after:llibrary@[0.3.0-1.7.10,)")
-public class Revival
-{
-    public static final String modid = "fossil";
-    public static final FossilSoundType soundTypeSlime = new FossilSoundType(1.0F, 1.0F);
-    public static ModState modState = ModState.DEV;
+@Mod(modid = Revival.MODID, name = "Fossils and Archeology Revival", version = Revival.VERSION, dependencies = "required-after:llibrary@[" + Revival.LLIBRARY_VERSION + ",)")
+public class Revival {
+    public static final String MODID = "fossil";
+    public static final ModState STATE = ModState.DEV;
+    public static final String VERSION = "7.3.0-develop";
+    public static final String LLIBRARY_VERSION = "0.7.0";
+
     @SidedProxy(clientSide = "com.github.revival.client.ClientProxy", serverSide = "com.github.revival.common.CommonProxy")
     public static CommonProxy proxy;
-    @Instance("fossil")
+    @Instance(MODID)
     public static Revival instance;
+
     public static FossilGuiHandler guiHandler = new FossilGuiHandler();
 
     public static Object toPedia;
@@ -70,7 +76,7 @@ public class Revival
 
     public static int feederRenderID;
 
-	public static Enchantment paleontology;
+    public static Enchantment paleontology;
     public static Enchantment archeology;
 
     public static BiomeGenBase anuBiome;
@@ -78,51 +84,45 @@ public class Revival
     public static ArmorMaterial bone = EnumHelper.addArmorMaterial("Bone", 25, new int[]{2, 7, 6, 2}, 15);
     public static ToolMaterial scarab = EnumHelper.addToolMaterial("Scarab", 3, 1861, 8.0F, 4.0F, 25);
 
-	public static ToolMaterial toothDaggerMaterial = EnumHelper.addToolMaterial("toothDagger", 3, 250, 70.0F, 1.5F, 25);
+    public static final FossilSoundType soundTypeSlime = new FossilSoundType(1.0F, 1.0F);
+
+    public static ToolMaterial toothDaggerMaterial = EnumHelper.addToolMaterial("toothDagger", 3, 250, 70.0F, 1.5F, 25);
     public Configuration config;
 
-    public static boolean enableDebugging()
-    {
-        return true;
+    public static Material tar_material;
+    public static Fluid tar_fluid;
+
+    public static boolean enableDebugging() {
+        return STATE == ModState.DEV;
     }
 
-    public static void ShowMessage(String var6, EntityPlayer var1)
-    {
-        if (var1 != null)
-        {
-            IChatComponent message = new ChatComponentText(var6);
-            var1.addChatMessage(message);
+    public static void showMessage(String message, EntityPlayer player) {
+        if (player != null) {
+            player.addChatMessage(new ChatComponentText(message));
         }
     }
 
-    public static void Console(String var0)
-    {
-        if (enableDebugging())
-        {
-            FMLLog.log(Revival.modid, org.apache.logging.log4j.Level.INFO, var0);
+    public static void printDebug(String message) {
+        if (enableDebugging()) {
+            FMLLog.log(Revival.MODID, Level.INFO, message);
         }
-    }
-
-    public static boolean isDNA(Item item)
-    {
-        if (EnumPrehistoric.isDNA(item)) return true;
-        return false;
     }
 
     @Mod.EventHandler
-    public void preInit(FMLPreInitializationEvent event)
-    {
+    public void preInit(FMLPreInitializationEvent event) {
+        channel = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
+        channel.registerMessage(MessageDinoSit.class, MessageDinoSit.class, 2, Side.SERVER);
+
         MinecraftForge.EVENT_BUS.register(new FossilBonemealEvent());
+        MinecraftForge.EVENT_BUS.register(new EventPlayer());
         VillagerRegistry.instance().registerVillageTradeHandler(10, new FossilTradeHandler());
         VillagerRegistry.instance().registerVillagerId(10);
 
-        ConfigHelper.registerConfigHandler(modid, event.getSuggestedConfigurationFile(), new FossilConfig());
+        ConfigHelper.registerConfigHandler(MODID, event.getSuggestedConfigurationFile(), new FossilConfig());
         ContentHelper.init(new FATabRegistry(), new FABlockRegistry(), new FAItemRegistry());
         EnumPrehistoric.init();
         FossilOreDictionary.oreRegistration();
-
-        channel = NetworkRegistry.INSTANCE.newSimpleChannel("fossil");
-
+        FossilFoodMappings.init();
         DimensionManager.registerProviderType(FossilConfig.dimIdDarknessLair, WorldProviderAnu.class, false);
         DimensionManager.registerDimension(FossilConfig.dimIdDarknessLair, FossilConfig.dimIdDarknessLair);
         DimensionManager.registerProviderType(FossilConfig.dimIdTreasure, WorldProviderTreasure.class, false);
@@ -156,9 +156,9 @@ public class Revival
         EntityRegistry.registerModEntity(EntityAnubite.class, "Anubite", 39, this, 250, 3, true);
         EntityRegistry.registerModEntity(EntitySentryPigman.class, "SentryPigman", 40, this, 250, 3, true);
         EntityRegistry.registerModEntity(EntityAnuDead.class, "AnuDead", 41, this, 250, 3, true);
+        EntityRegistry.registerModEntity(EntityTarSlime.class, "TarSlime", 42, this, 250, 3, true);
 
-        for (int i = 0; i < EnumPrehistoric.values().length; i++)
-        {
+        for (int i = 0; i < EnumPrehistoric.values().length; i++) {
             EntityRegistry.registerModEntity(EnumPrehistoric.values()[i].getDinoClass(), EnumPrehistoric.values()[i].name(), 200 + i, this, 250, 3, true);
         }
 
@@ -212,5 +212,6 @@ public class Revival
         MinecraftForge.EVENT_BUS.register(new FossilInteractEvent());
 
         FMLCommonHandler.instance().bus().register(new FossilConnectionEvent());
+
     }
 }

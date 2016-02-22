@@ -15,16 +15,19 @@ buildscript {
     }
 }
 
-apply plugin: 'forge'
+project.ext.buildnumber = ""
+if (System.getenv().BUILD_NUMBER) project.buildnumber = "-" + System.getenv().BUILD_NUMBER
 
-version = "1.7.10-idk"
+apply plugin: "forge"
+
+version = getVersion("VERSION") + project.buildnumber
+def llibrary_version = getVersion("LLIBRARY_VERSION")
 group = "com.github.revival"
-archivesBaseName = "Fossils-and-Archeology-Revival"
+archivesBaseName = "fossils_and_archeology_revival"
 
 minecraft {
-    version = "1.7.10-10.13.4.1448-1.7.10"
+    version = "1.7.10-10.13.4.1558-1.7.10"
     runDir = "minecraft"
-    replace '${version}', project.version
 }
 
 repositories {
@@ -36,19 +39,41 @@ repositories {
 }
 
 dependencies {
-    compile 'net.ilexiconn.llibrary:LLibrary:0.3.1-1.7.10:dev'
+    compile "net.ilexiconn:llibrary:$llibrary_version-1.7.10:dev"
 }
 
 processResources {
     inputs.property "version", project.version
     inputs.property "mcversion", project.minecraft.version
+    inputs.property "llibrary_version", llibrary_version
 
     from(sourceSets.main.resources.srcDirs) {
         include 'mcmod.info'
-        expand 'version':project.version, 'mcversion':project.minecraft.version
+        expand 'version': project.version, 'mcversion': project.minecraft.version, 'llibrary_version': llibrary_version
     }
         
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
+}
+
+String getVersion(String type) {
+    String major = "0";
+    String revision = "0";
+    String patch = "0";
+    String prefix = "public static final String $type = \"";
+    File file = file("src/main/java/com/github/revival/Revival.java")
+    file.eachLine { String s ->
+        s = s.trim();
+        if (s.startsWith(prefix)) {
+            s = s.substring(prefix.length(), s.length() - 2);
+            String[] pts = s.split("\\.");
+
+            major = pts[0];
+            revision = pts[1];
+            patch = pts[2];
+        }
+    }
+
+    return "$major.$revision.$patch";
 }

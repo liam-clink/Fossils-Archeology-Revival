@@ -10,8 +10,7 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 
-public class TileEntityCultivateRenderer extends TileEntitySpecialRenderer
-{
+public class TileEntityCultivateRenderer extends TileEntitySpecialRenderer {
     public static final ResourceLocation texture = new ResourceLocation("fossil:textures/blocks/cultureVat/culturevat.png");
     public static final ResourceLocation textureEmbryoBasic = new ResourceLocation("fossil:textures/blocks/cultureVat/embryo_generic.png");
     private static final ResourceLocation textureEmbryoLimbless = new ResourceLocation("fossil:textures/blocks/cultureVat/embryo_legless.png");
@@ -22,16 +21,14 @@ public class TileEntityCultivateRenderer extends TileEntitySpecialRenderer
 
     private ModelBlock modelBlock;
 
-    public TileEntityCultivateRenderer()
-    {
+    public TileEntityCultivateRenderer() {
         this.model = new ModelEmbryoGeneric();
         modelPlant = new ModelEmbryoPlant();
         this.modelBlock = new ModelBlock();
 
     }
 
-    public void renderCultureVatAt(TileEntityCultivate tileentity, double x, double y, double z, float f)
-    {
+    public void renderCultureVatAt(TileEntityCultivate tileentity, double x, double y, double z, float f) {
 
         float rot = (float) (720.0 * (System.currentTimeMillis() & 0x3FFFL) / 0x3FFFL);
 
@@ -41,11 +38,9 @@ public class TileEntityCultivateRenderer extends TileEntitySpecialRenderer
         GL11.glTranslated((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
         GL11.glRotatef(180, 0F, 0F, 1F);
         GL11.glPushMatrix();
-        if (tileentity.isActive)
-        {
+        if (tileentity.isActive) {
 
-            if (tileentity.getDNAType() == 1)
-            {
+            if (tileentity.getDNAType() == 1) {
                 GL11.glPushMatrix();
                 GL11.glTranslatef(0, 0.5F, 0);
                 GL11.glPushMatrix();
@@ -55,9 +50,7 @@ public class TileEntityCultivateRenderer extends TileEntitySpecialRenderer
                 model.render(0.0625F);
                 GL11.glPopMatrix();
                 GL11.glPopMatrix();
-            }
-            else if (tileentity.getDNAType() == 2)
-            {
+            } else if (tileentity.getDNAType() == 2) {
                 GL11.glPushMatrix();
                 GL11.glTranslatef(0, 0.5F, 0);
                 GL11.glPushMatrix();
@@ -67,9 +60,7 @@ public class TileEntityCultivateRenderer extends TileEntitySpecialRenderer
                 modelPlant.render(0.0625F);
                 GL11.glPopMatrix();
                 GL11.glPopMatrix();
-            }
-            else
-            {
+            } else {
                 GL11.glPushMatrix();
                 GL11.glTranslatef(0, 0.5F, 0);
                 GL11.glPushMatrix();
@@ -97,8 +88,7 @@ public class TileEntityCultivateRenderer extends TileEntitySpecialRenderer
     }
 
     @Override
-    public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f)
-    {
+    public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f) {
         this.renderCultureVatAt((TileEntityCultivate) tileentity, x, y, z, f);
     }
 }

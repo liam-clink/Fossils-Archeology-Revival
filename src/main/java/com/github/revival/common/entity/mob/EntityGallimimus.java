@@ -1,44 +1,47 @@
 package com.github.revival.common.entity.mob;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
-import io.netty.buffer.ByteBuf;
-import net.minecraft.command.IEntitySelector;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityAgeable;
-import net.minecraft.entity.EntityCreature;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
-import net.minecraft.entity.ai.EntityAIAvoidEntity;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILeapAtTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.ai.RandomPositionGenerator;
-import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.ChunkCoordinates;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.Vec3;
-import net.minecraft.world.World;
-
 import com.github.revival.Revival;
 import com.github.revival.common.config.FossilConfig;
-import com.github.revival.common.entity.ai.DinoAIEat;
-import com.github.revival.common.entity.ai.DinoAIFollowOwner;
-import com.github.revival.common.entity.ai.DinoAIRideGround;
-import com.github.revival.common.entity.ai.DinoAIWander;
-import com.github.revival.common.entity.mob.test.DinoAIFlock;
 import com.github.revival.common.entity.mob.test.EntityNewPrehistoric;
-import com.github.revival.common.entity.mob.test.Flock;
 import com.github.revival.common.enums.EnumPrehistoric;
+import com.github.revival.common.enums.EnumPrehistoricAI.*;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.world.World;
 
-public class EntityGallimimus extends EntityDinosaur
-{
-	public static final double baseHealth = EnumPrehistoric.Gallimimus.Health0;
+public class EntityGallimimus extends EntityNewPrehistoric {
+    public static final double baseDamage = 1;
+    public static final double maxDamage = 3;
+    public static final double baseHealth = 8;
+    public static final double maxHealth = 40;
+    public static final double baseSpeed = 0.25D;
+    public static final double maxSpeed = 0.4D;
+    public Object tailbuffer = Revival.proxy.getChainBuffer(3);
+
+
+    public EntityGallimimus(World world) {
+        super(world, EnumPrehistoric.Gallimimus);
+        this.setSize(1.1F, 2F);
+        this.hasFeatherToggle = true;
+        this.featherToggle = FossilConfig.featheredGallimimus;
+        minSize = 0.5F;
+        maxSize = 2.2F;
+        teenAge = 4;
+        developsResistance = true;
+        breaksBlocks = false;
+        favoriteFood = Items.carrot;
+    }
+
+    @Override
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(baseSpeed);
+        getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(baseHealth);
+        getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(baseDamage);
+    }
+
+	/*public static final double baseHealth = EnumPrehistoric.Gallimimus.Health0;
 
 	//    final float PUSHDOWN_HARDNESS = 5.0F;
 	//final EntityAIControlledByPlayer aiControlledByPlayer;
@@ -58,9 +61,7 @@ public class EntityGallimimus extends EntityDinosaur
 	{
 		super(var1, EnumPrehistoric.Gallimimus);
 		this.updateSize();
-		/*
-		 * EDIT VARIABLES PER DINOSAUR TYPE
-		 */
+		
 		this.adultAge = EnumPrehistoric.Gallimimus.AdultAge;
 		// Set initial size for hitbox. (length/width, height)
 		this.setSize(1.0F, 2.0F);
@@ -70,9 +71,9 @@ public class EntityGallimimus extends EntityDinosaur
 		this.maxSize = 2.2F;
 
 		if (!FossilConfig.featheredGallimimus)
-			texturePath = Revival.modid + ":textures/mob/" + this.SelfType.toString() + "/feathered/" + "Feathered_";
+			texturePath = Revival.MODID + ":textures/mob/" + this.selfType.toString() + "/feathered/" + "Feathered_";
 		else
-			texturePath = Revival.modid + ":textures/mob/" + this.SelfType.toString() + "/";
+			texturePath = Revival.MODID + ":textures/mob/" + this.selfType.toString() + "/";
 
 		this.getNavigator().setAvoidsWater(true);
 		this.tasks.addTask(1, new EntityAISwimming(this));
@@ -104,9 +105,6 @@ public class EntityGallimimus extends EntityDinosaur
 		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(EnumPrehistoric.Gallimimus.Strength0);
 	}
 
-	/**
-	 * Returns the texture's file path as a String.
-	 */
 	@Override
 	public String getTexture()
 	{
@@ -134,9 +132,6 @@ public class EntityGallimimus extends EntityDinosaur
 		return this.isSitting() ? 70 : super.getVerticalFaceSpeed();
 	}
 
-	/**
-	 * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
-	 */
 	public boolean interact(EntityPlayer var1)
 	{
 		//Add special item interaction code here
@@ -191,7 +186,7 @@ public class EntityGallimimus extends EntityDinosaur
 		List<Entity> entities = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.expand((double)herdMemberRange, 3.0D, (double)herdMemberRange), selector);
 		for(Entity mob: entities){
 			if(mob instanceof EntityDinosaur){
-				if(((EntityDinosaur)mob).SelfType == this.SelfType){
+				if(((EntityDinosaur)mob).selfType == this.selfType){
 					return (EntityDinosaur) mob;
 				}
 			}
@@ -200,9 +195,6 @@ public class EntityGallimimus extends EntityDinosaur
 	}
 
 
-	/**
-	 * This gets called when a dinosaur grows naturally or through Chicken Essence.
-	 */
 	@Override
 	public void updateSize()
 	{
@@ -240,14 +232,14 @@ public class EntityGallimimus extends EntityDinosaur
 	@Override
 	public void writeSpawnData(ByteBuf buffer)
 	{
-		// TODO Auto-generated method stub
+
 
 	}
 
 	@Override
 	public void readSpawnData(ByteBuf additionalData)
 	{
-		// TODO Auto-generated method stub
+
 
 	}
 
@@ -257,6 +249,122 @@ public class EntityGallimimus extends EntityDinosaur
 		EntityGallimimus baby = new EntityGallimimus(this.worldObj);
 		baby.setSubSpecies(this.getSubSpecies());
 		return baby;
-	}
+	}*/
+
+    @Override
+    public void setSpawnValues() {
+    }
+
+    @Override
+    public Activity aiActivityType() {
+        return Activity.DURINAL;
+    }
+
+    @Override
+    public Attacking aiAttackType() {
+
+        return Attacking.BASIC;
+    }
+
+    @Override
+    public Climbing aiClimbType() {
+
+        return Climbing.NONE;
+    }
+
+    @Override
+    public Following aiFollowType() {
+
+        return Following.SKITTISH;
+    }
+
+    @Override
+    public Jumping aiJumpType() {
+
+        return Jumping.TWOBLOCKS;
+    }
+
+    @Override
+    public Response aiResponseType() {
+
+        return Response.SCARED;
+    }
+
+    @Override
+    public Stalking aiStalkType() {
+
+        return Stalking.NONE;
+    }
+
+    @Override
+    public Taming aiTameType() {
+
+        return Taming.FEEDING;
+    }
+
+    @Override
+    public Untaming aiUntameType() {
+
+        return Untaming.ATTACK;
+    }
+
+    @Override
+    public Moving aiMovingType() {
+
+        return Moving.WALK;
+    }
+
+    @Override
+    public WaterAbility aiWaterAbilityType() {
+
+        return WaterAbility.NONE;
+    }
+
+    @Override
+    public boolean doesFlock() {
+
+        return true;
+    }
+
+    @Override
+    public Item getOrderItem() {
+
+        return Items.stick;
+    }
+
+    public void onUpdate() {
+        super.onUpdate();
+        //Revival.proxy.doChainBuffer(tailbuffer, this);
+    }
+
+    public void updateSize() {
+        double healthStep;
+        double attackStep;
+        double speedStep;
+        healthStep = (this.maxHealth - this.baseHealth) / (this.getAdultAge() + 1);
+        attackStep = (this.maxDamage - this.baseDamage) / (this.getAdultAge() + 1);
+        speedStep = (this.maxSpeed - this.baseSpeed) / (this.getAdultAge() + 1);
+
+
+        if (this.getDinoAge() <= this.getAdultAge()) {
+
+            this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(Math.round(this.baseHealth + (healthStep * this.getDinoAge())));
+            this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(Math.round(this.baseDamage + (attackStep * this.getDinoAge())));
+            this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(this.baseSpeed + (speedStep * this.getDinoAge()));
+
+            if (this.isTeen()) {
+                this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.5D);
+            } else if (this.isAdult()) {
+                this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(2.0D);
+            } else {
+                this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.0D);
+            }
+        }
+    }
+
+    @Override
+    public int getAdultAge() {
+        return 10;
+    }
 
 }
