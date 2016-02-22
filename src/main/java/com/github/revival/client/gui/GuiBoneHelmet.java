@@ -1,7 +1,7 @@
 package com.github.revival.client.gui;
 
-import com.github.revival.common.config.FossilConfig;
-import com.github.revival.common.item.FAItemRegistry;
+import com.github.revival.server.config.FossilConfig;
+import com.github.revival.server.item.FAItemRegistry;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.client.Minecraft;

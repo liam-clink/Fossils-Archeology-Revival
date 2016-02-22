@@ -1,7 +1,7 @@
 package com.github.revival.client.renderer.entity;
 
 import com.github.revival.client.model.ModelPigBoss;
-import com.github.revival.common.entity.mob.EntityAnu;
+import com.github.revival.server.entity.mob.EntityAnu;
 import com.mojang.authlib.GameProfile;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.OpenGlHelper;

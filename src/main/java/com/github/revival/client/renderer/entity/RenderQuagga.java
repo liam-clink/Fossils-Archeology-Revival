@@ -1,6 +1,6 @@
 package com.github.revival.client.renderer.entity;
 
-import com.github.revival.common.entity.mob.EntityQuagga;
+import com.github.revival.server.entity.mob.EntityQuagga;
 import com.google.common.collect.Maps;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

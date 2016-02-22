@@ -1,7 +1,7 @@
 package com.github.revival.client.gui;
 
-import com.github.revival.common.container.ContainerAnalyzer;
-import com.github.revival.common.tileentity.TileEntityAnalyzer;
+import com.github.revival.server.block.entity.TileEntityAnalyzer;
+import com.github.revival.server.container.AnalyzerContainer;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -14,7 +14,7 @@ public class GuiAnalyzer extends GuiContainer {
     private TileEntityAnalyzer analyzerInventory;
 
     public GuiAnalyzer(InventoryPlayer playerInventory, TileEntity tile) {
-        super(new ContainerAnalyzer(playerInventory, tile));
+        super(new AnalyzerContainer(playerInventory, tile));
         this.analyzerInventory = (TileEntityAnalyzer) tile;
     }
 

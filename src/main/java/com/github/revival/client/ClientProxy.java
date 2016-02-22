@@ -13,16 +13,16 @@ import com.github.revival.client.renderer.particle.DeathOrbFX;
 import com.github.revival.client.renderer.particle.SleepFX;
 import com.github.revival.client.renderer.particle.TarDropsFX;
 import com.github.revival.client.renderer.tileentity.*;
-import com.github.revival.common.CommonProxy;
-import com.github.revival.common.block.FABlockRegistry;
-import com.github.revival.common.config.FossilConfig;
-import com.github.revival.common.entity.*;
-import com.github.revival.common.entity.mob.*;
-import com.github.revival.common.entity.mob.projectile.EntityBirdEgg;
-import com.github.revival.common.handler.EventNewMenu;
-import com.github.revival.common.handler.EventOverlay;
-import com.github.revival.common.item.FAItemRegistry;
-import com.github.revival.common.tileentity.*;
+import com.github.revival.server.ServerProxy;
+import com.github.revival.server.block.FABlockRegistry;
+import com.github.revival.server.block.entity.*;
+import com.github.revival.server.config.FossilConfig;
+import com.github.revival.server.entity.*;
+import com.github.revival.server.entity.mob.*;
+import com.github.revival.server.entity.mob.projectile.EntityBirdEgg;
+import com.github.revival.server.handler.EventNewMenu;
+import com.github.revival.server.handler.EventOverlay;
+import com.github.revival.server.item.FAItemRegistry;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
@@ -40,7 +40,7 @@ import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
 
 
-public class ClientProxy extends CommonProxy {
+public class ClientProxy extends ServerProxy {
     private static final ModelAncientHelmet helmetModel = new ModelAncientHelmet(1.0f);
     // private JsonTabulaModel velociraptor = ModelHelper.parseModelFromJson(Revival.class.getResourceAsStream("/assets/fossil/models/Velociraptor.json"));
 

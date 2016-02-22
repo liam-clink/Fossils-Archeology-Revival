@@ -1,8 +1,8 @@
 package com.github.revival.client.renderer.entity;
 
 import com.github.revival.client.model.ModelDinoEgg;
-import com.github.revival.common.entity.EntityDinoEgg;
-import com.github.revival.common.enums.EnumPrehistoric;
+import com.github.revival.server.entity.EntityDinoEgg;
+import com.github.revival.server.enums.EnumPrehistoric;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;

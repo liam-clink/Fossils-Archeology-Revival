@@ -1,7 +1,7 @@
 package com.github.revival.client.renderer.entity;
 
 import com.github.revival.Revival;
-import com.github.revival.common.entity.mob.EntityTerrorBird;
+import com.github.revival.server.entity.mob.EntityTerrorBird;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.model.ModelBase;
@@ -37,8 +37,9 @@ public class RenderTerrorBird extends RenderLiving {
      * Defines what float the third param in setRotationAngles of ModelBase is
      */
     protected float handleRotationFloat(EntityTerrorBird entity, float angle) {
-        if (entity.isAngry())
+        if (entity.isAngry()) {
             return entity.getWingRotation();
+        }
 
         float f1 = entity.field_70888_h + (entity.field_70886_e - entity.field_70888_h) * angle;
         float f2 = entity.field_70884_g + (entity.destPos - entity.field_70884_g) * angle;
@@ -87,23 +88,27 @@ public class RenderTerrorBird extends RenderLiving {
         switch (entity.getSkin()) {
             case 0:
             default:
-                if (entity.isChild())
+                if (entity.isChild()) {
                     return gastornisBaby;
+                }
                 return gastornisAdult;
 
             case 1:
-                if (entity.isChild())
+                if (entity.isChild()) {
                     return PhorusrhacosBaby;
+                }
                 return PhorusrhacosAdult;
 
             case 2:
-                if (entity.isChild())
+                if (entity.isChild()) {
                     return TitanisBaby;
+                }
                 return TitanisAdult;
 
             case 3:
-                if (entity.isChild())
+                if (entity.isChild()) {
                     return KelenkenBaby;
+                }
                 return KelenkenAdult;
         }
     }

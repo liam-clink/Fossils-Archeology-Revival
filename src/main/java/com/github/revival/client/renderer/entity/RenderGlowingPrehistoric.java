@@ -1,6 +1,6 @@
 package com.github.revival.client.renderer.entity;
 
-import com.github.revival.common.entity.mob.test.EntityNewPrehistoric;
+import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.entity.RenderLiving;

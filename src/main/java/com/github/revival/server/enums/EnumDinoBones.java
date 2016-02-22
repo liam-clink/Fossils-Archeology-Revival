@@ -1,0 +1,30 @@
+package com.github.revival.server.enums;
+
+public enum EnumDinoBones {
+    Triceratops,
+    Velociraptor,
+    TRex,
+    Pterosaur,
+    Plesiosaur,
+    Mosasaurus,
+    Stegosaurus,
+    Dilophosaurus,
+    Brachiosaurus,
+    Spinosaurus,
+    Compsognathus,
+    Ankylosaurus,
+    Pachycephalosaurus,
+    Deinonychus,
+    Gallimimus,
+    Liopleurodon,
+    Allosaurus,
+    Sarcosuchus,
+    Ceratosaurus,
+    Confuciusornis,
+    Dodo,
+    TerrorBird,
+    Mammoth,
+    Smilodon,
+    Quagga,
+    Elasmotherium;
+}

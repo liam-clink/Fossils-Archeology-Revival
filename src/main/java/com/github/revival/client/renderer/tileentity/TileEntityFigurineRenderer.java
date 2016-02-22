@@ -2,7 +2,7 @@ package com.github.revival.client.renderer.tileentity;
 
 import com.github.revival.client.model.ModelFigurine;
 import com.github.revival.client.model.ModelFigurineBroken;
-import com.github.revival.common.tileentity.TileEntityFigurine;
+import com.github.revival.server.block.entity.TileEntityFigurine;
 import cpw.mods.fml.client.FMLClientHandler;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -40,7 +40,7 @@ public class TileEntityFigurineRenderer extends TileEntitySpecialRenderer {
         this.modelbroken = new ModelFigurineBroken();
     }
 
-    // renders tileentity in world
+    // renders entity in world
     public void renderTileEntityFigurineAt(TileEntityFigurine te, double x, double y, double z, float scale) {
         // push matrix tells the renderer to start doing something
         GL11.glPushMatrix();

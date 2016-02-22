@@ -1,6 +1,6 @@
 package com.github.revival.client.model;
 
-import com.github.revival.common.entity.mob.EntityAnuDead;
+import com.github.revival.server.entity.mob.EntityAnuDead;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;

@@ -1,7 +1,7 @@
 package com.github.revival.client.renderer.tileentity;
 
 import com.github.revival.client.model.ModelTNClock;
-import com.github.revival.common.tileentity.TileEntityTimeMachine;
+import com.github.revival.server.block.entity.TileEntityTimeMachine;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;

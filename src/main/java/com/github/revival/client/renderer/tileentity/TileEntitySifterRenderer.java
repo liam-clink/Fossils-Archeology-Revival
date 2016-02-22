@@ -1,7 +1,7 @@
 package com.github.revival.client.renderer.tileentity;
 
 import com.github.revival.client.model.ModelSifter;
-import com.github.revival.common.tileentity.TileEntitySifter;
+import com.github.revival.server.block.entity.TileEntitySifter;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -32,8 +32,8 @@ public class TileEntitySifterRenderer extends TileEntitySpecialRenderer {
 
         this.modelSifter.sifter.rotateAngleZ = 1.57079633F;
         /* 
-         if(tileentity.isPowered){
-         this.run(tileentity.animationOffset, 0.2F);
+         if(entity.isPowered){
+         this.run(entity.animationOffset, 0.2F);
          }
          */
 

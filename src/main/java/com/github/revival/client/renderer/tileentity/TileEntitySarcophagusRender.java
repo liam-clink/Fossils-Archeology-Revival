@@ -2,8 +2,8 @@ package com.github.revival.client.renderer.tileentity;
 
 import com.github.revival.client.model.ModelPigBoss;
 import com.github.revival.client.model.ModelSarcophagus;
-import com.github.revival.common.item.FAItemRegistry;
-import com.github.revival.common.tileentity.TileEntitySarcophagus;
+import com.github.revival.server.block.entity.TileEntitySarcophagus;
+import com.github.revival.server.item.FAItemRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;

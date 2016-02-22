@@ -3,7 +3,7 @@ package com.github.revival.client.renderer.tileentity;
 import com.github.revival.client.model.ModelBlock;
 import com.github.revival.client.model.ModelEmbryoGeneric;
 import com.github.revival.client.model.ModelEmbryoPlant;
-import com.github.revival.common.tileentity.TileEntityCultivate;
+import com.github.revival.server.block.entity.TileEntityCultivate;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;

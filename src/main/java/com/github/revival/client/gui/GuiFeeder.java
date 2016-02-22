@@ -1,7 +1,7 @@
 package com.github.revival.client.gui;
 
-import com.github.revival.common.container.ContainerFeeder;
-import com.github.revival.common.tileentity.TileEntityFeeder;
+import com.github.revival.server.block.entity.TileEntityFeeder;
+import com.github.revival.server.container.FeederContainer;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -20,7 +20,7 @@ public class GuiFeeder extends GuiContainer {
     private TileEntityFeeder FeederInventory;
 
     public GuiFeeder(InventoryPlayer var1, TileEntity var2) {
-        super(new ContainerFeeder(var1, var2));
+        super(new FeederContainer(var1, var2));
         this.FeederInventory = (TileEntityFeeder) var2;
     }
 

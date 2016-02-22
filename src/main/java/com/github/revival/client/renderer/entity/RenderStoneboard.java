@@ -1,7 +1,7 @@
 package com.github.revival.client.renderer.entity;
 
-import com.github.revival.common.entity.EntityStoneboard;
-import com.github.revival.common.enums.EnumStoneboard;
+import com.github.revival.server.entity.EntityStoneboard;
+import com.github.revival.server.enums.EnumStoneboard;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;

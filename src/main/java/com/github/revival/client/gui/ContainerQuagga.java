@@ -1,6 +1,6 @@
 package com.github.revival.client.gui;
 
-import com.github.revival.common.entity.mob.EntityQuagga;
+import com.github.revival.server.entity.mob.EntityQuagga;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;

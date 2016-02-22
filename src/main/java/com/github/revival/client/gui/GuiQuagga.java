@@ -1,6 +1,6 @@
 package com.github.revival.client.gui;
 
-import com.github.revival.common.entity.mob.EntityQuagga;
+import com.github.revival.server.entity.mob.EntityQuagga;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.gui.inventory.GuiContainer;

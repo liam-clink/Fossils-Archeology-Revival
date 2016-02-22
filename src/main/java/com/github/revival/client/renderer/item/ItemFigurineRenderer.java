@@ -114,10 +114,11 @@ public class ItemFigurineRenderer implements IItemRenderer {
                 break;
         }
 
-        if (meta < 10 || meta == 15)
+        if (meta < 10 || meta == 15) {
             this.modelfigurine.render((Entity) data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
-        else
+        } else {
             this.modelbroken.render((Entity) data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+        }
 
         glPopMatrix();
     }

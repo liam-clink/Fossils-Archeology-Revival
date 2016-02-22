@@ -10,8 +10,8 @@ import net.minecraft.world.World;
 
 @SideOnly(Side.CLIENT)
 public class TarDropsFX extends EntityFX {
-    private int bobTimer;
     private static final String __OBFID = "CL_00000901";
+    private int bobTimer;
 
     public TarDropsFX(World world, double x, double y, double z) {
         super(world, x, y, z, 0.0D, 0.0D, 0.0D);

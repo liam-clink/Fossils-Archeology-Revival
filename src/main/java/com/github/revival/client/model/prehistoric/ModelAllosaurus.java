@@ -1,7 +1,7 @@
 package com.github.revival.client.model.prehistoric;
 
 import com.github.revival.client.model.prehistoric.test.ModelNewPrehistoric;
-import com.github.revival.common.entity.mob.test.EntityNewPrehistoric;
+import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelRenderer;
 import net.ilexiconn.llibrary.common.animation.Animator;
 import net.ilexiconn.llibrary.common.animation.IAnimated;

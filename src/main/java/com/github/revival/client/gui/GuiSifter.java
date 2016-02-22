@@ -1,8 +1,8 @@
 package com.github.revival.client.gui;
 
 import com.github.revival.Revival;
-import com.github.revival.common.container.ContainerSifter;
-import com.github.revival.common.tileentity.TileEntitySifter;
+import com.github.revival.server.block.entity.TileEntitySifter;
+import com.github.revival.server.container.SifterContainer;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -17,7 +17,7 @@ public class GuiSifter extends GuiContainer {
     private TileEntitySifter sifterInventory;
 
     public GuiSifter(InventoryPlayer playerInventory, TileEntitySifter sifterInventory) {
-        super(new ContainerSifter(playerInventory, sifterInventory));
+        super(new SifterContainer(playerInventory, sifterInventory));
         this.sifterInventory = sifterInventory;
     }
 

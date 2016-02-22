@@ -1,8 +1,8 @@
 package com.github.revival.client.gui;
 
-import com.github.revival.common.container.ContainerTimeMachine;
-import com.github.revival.common.handler.LocalizationStrings;
-import com.github.revival.common.tileentity.TileEntityTimeMachine;
+import com.github.revival.server.block.entity.TileEntityTimeMachine;
+import com.github.revival.server.container.TimeMachineContainer;
+import com.github.revival.server.handler.LocalizationStrings;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -18,7 +18,7 @@ public class GuiTimeMachine extends GuiContainer {
     private TileEntityTimeMachine timeMachineInstance;
 
     public GuiTimeMachine(InventoryPlayer playerInventory, TileEntityTimeMachine tile) {
-        super(new ContainerTimeMachine(playerInventory, tile));
+        super(new TimeMachineContainer(playerInventory, tile));
         this.timeMachineInstance = tile;
         this.ySize = 188;
     }

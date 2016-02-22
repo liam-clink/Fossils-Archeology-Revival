@@ -1,7 +1,7 @@
 package com.github.revival.client.model.prehistoric;
 
 import com.github.revival.client.model.base.ModelPrehistoric;
-import com.github.revival.common.entity.mob.test.EntityNewPrehistoric;
+import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelRenderer;
 
 public class ModelSpinosaurus extends ModelPrehistoric {

@@ -1,6 +1,6 @@
 package com.github.revival.client.renderer.entity;
 
-import com.github.revival.common.entity.mob.EntityFishBase;
+import com.github.revival.server.entity.mob.EntityFishBase;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;

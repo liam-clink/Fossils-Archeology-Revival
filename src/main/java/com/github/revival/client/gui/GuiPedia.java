@@ -3,11 +3,11 @@ package com.github.revival.client.gui;
 import com.github.revival.Revival;
 import com.github.revival.client.gui.elements.FossilGuiButton;
 import com.github.revival.client.gui.elements.FossilGuiPage;
-import com.github.revival.common.container.ContainerPedia;
-import com.github.revival.common.entity.EntityDinoEgg;
-import com.github.revival.common.entity.mob.*;
-import com.github.revival.common.entity.mob.test.EntityNewPrehistoric;
-import com.github.revival.common.enums.EnumPrehistoric;
+import com.github.revival.server.container.PediaContainer;
+import com.github.revival.server.entity.EntityDinoEgg;
+import com.github.revival.server.entity.mob.*;
+import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
+import com.github.revival.server.enums.EnumPrehistoric;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.gui.GuiButton;
@@ -50,7 +50,7 @@ public class GuiPedia extends GuiContainer {
     private float mouseY;
 
     public GuiPedia(/*InventoryPlayer var1*/) {
-        super(new ContainerPedia());
+        super(new PediaContainer());
         this.xSize = 280;
         this.ySize = 174;
         left = 0;

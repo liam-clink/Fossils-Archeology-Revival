@@ -1,7 +1,7 @@
 package com.github.revival.client.renderer.entity;
 
-import com.github.revival.common.entity.EntityAncientJavelin;
-import com.github.revival.common.entity.EntityJavelin;
+import com.github.revival.server.entity.EntityAncientJavelin;
+import com.github.revival.server.entity.EntityJavelin;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;

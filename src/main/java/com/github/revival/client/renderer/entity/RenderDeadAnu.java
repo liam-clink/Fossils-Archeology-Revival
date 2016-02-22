@@ -1,6 +1,6 @@
 package com.github.revival.client.renderer.entity;
 
-import com.github.revival.common.entity.mob.EntityAnuDead;
+import com.github.revival.server.entity.mob.EntityAnuDead;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.model.ModelBase;

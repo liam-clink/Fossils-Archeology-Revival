@@ -1,7 +1,7 @@
 package com.github.revival.client.renderer.entity;
 
 import com.github.revival.client.model.ModelBones;
-import com.github.revival.common.entity.mob.EntityBones;
+import com.github.revival.server.entity.mob.EntityBones;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.entity.RenderBiped;

@@ -1,7 +1,7 @@
 package com.github.revival.client.gui;
 
-import com.github.revival.common.container.ContainerCultivate;
-import com.github.revival.common.tileentity.TileEntityCultivate;
+import com.github.revival.server.block.entity.TileEntityCultivate;
+import com.github.revival.server.container.CultivateContainer;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -14,7 +14,7 @@ public class GuiCultivate extends GuiContainer {
     private TileEntityCultivate cultivateInventory;
 
     public GuiCultivate(InventoryPlayer playerInventory, TileEntity tile) {
-        super(new ContainerCultivate(playerInventory, tile));
+        super(new CultivateContainer(playerInventory, tile));
         this.cultivateInventory = (TileEntityCultivate) tile;
     }
 

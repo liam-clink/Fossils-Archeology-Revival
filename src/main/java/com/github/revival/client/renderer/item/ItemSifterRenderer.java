@@ -1,7 +1,7 @@
 package com.github.revival.client.renderer.item;
 
 import com.github.revival.client.model.ModelSifter;
-import com.github.revival.common.tileentity.TileEntitySifter;
+import com.github.revival.server.block.entity.TileEntitySifter;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;

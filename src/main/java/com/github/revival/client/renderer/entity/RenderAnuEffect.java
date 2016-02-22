@@ -1,7 +1,7 @@
 package com.github.revival.client.renderer.entity;
 
 import com.github.revival.client.model.ModelAnuTotem;
-import com.github.revival.common.entity.EntityAnuEffect;
+import com.github.revival.server.entity.EntityAnuEffect;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.OpenGlHelper;

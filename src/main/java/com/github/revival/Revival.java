@@ -1,29 +1,28 @@
 package com.github.revival;
 
 import com.github.revival.client.renderer.tileentity.RenderFeeder;
-import com.github.revival.common.CommonProxy;
-import com.github.revival.common.ModState;
-import com.github.revival.common.biome.BiomeBasic;
-import com.github.revival.common.block.FABlockRegistry;
-import com.github.revival.common.block.sound.FossilSoundType;
-import com.github.revival.common.config.FossilConfig;
-import com.github.revival.common.creativetab.FATabRegistry;
-import com.github.revival.common.dimension.anu.WorldProviderAnu;
-import com.github.revival.common.dimension.treasure.WorldProviderTreasure;
-import com.github.revival.common.enchantment.EnchantmentArcheology;
-import com.github.revival.common.enchantment.EnchantmentPaleontology;
-import com.github.revival.common.entity.*;
-import com.github.revival.common.entity.mob.*;
-import com.github.revival.common.enums.EnumDinoFoodMob;
-import com.github.revival.common.enums.EnumPrehistoric;
-import com.github.revival.common.gen.*;
-import com.github.revival.common.gen.structure.AcademyGenerator;
-import com.github.revival.common.gen.structure.ShipWreckGenerator;
-import com.github.revival.common.handler.*;
-import com.github.revival.common.item.FAItemRegistry;
-import com.github.revival.common.message.MessageDinoSit;
-import com.github.revival.common.tileentity.*;
-import com.github.revival.common.util.FossilFoodMappings;
+import com.github.revival.server.ModState;
+import com.github.revival.server.ServerProxy;
+import com.github.revival.server.biome.BasicBiome;
+import com.github.revival.server.block.FABlockRegistry;
+import com.github.revival.server.block.entity.*;
+import com.github.revival.server.block.sound.FossilSoundType;
+import com.github.revival.server.config.FossilConfig;
+import com.github.revival.server.creativetab.FATabRegistry;
+import com.github.revival.server.dimension.anu.WorldProviderAnu;
+import com.github.revival.server.dimension.treasure.WorldProviderTreasure;
+import com.github.revival.server.enchantment.ArcheologyEnchantment;
+import com.github.revival.server.enchantment.PaleontologyEnchantment;
+import com.github.revival.server.entity.*;
+import com.github.revival.server.entity.mob.*;
+import com.github.revival.server.enums.EnumDinoFoodMob;
+import com.github.revival.server.enums.EnumPrehistoric;
+import com.github.revival.server.gen.*;
+import com.github.revival.server.gen.structure.AcademyGenerator;
+import com.github.revival.server.gen.structure.ShipWreckGenerator;
+import com.github.revival.server.handler.*;
+import com.github.revival.server.item.FAItemRegistry;
+import com.github.revival.server.util.FossilFoodMappings;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.FMLLog;
@@ -32,11 +31,9 @@ import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
-import cpw.mods.fml.relauncher.Side;
 import net.ilexiconn.llibrary.common.config.ConfigHelper;
 import net.ilexiconn.llibrary.common.content.ContentHelper;
 import net.minecraft.block.material.Material;
@@ -63,34 +60,24 @@ public class Revival {
     public static final ModState STATE = ModState.DEV;
     public static final String VERSION = "7.3.0-develop";
     public static final String LLIBRARY_VERSION = "0.7.0";
-
-    @SidedProxy(clientSide = "com.github.revival.client.ClientProxy", serverSide = "com.github.revival.common.CommonProxy")
-    public static CommonProxy proxy;
+    public static final FossilSoundType soundTypeSlime = new FossilSoundType(1.0F, 1.0F);
+    @SidedProxy(clientSide = "com.github.revival.client.ClientProxy", serverSide = "com.github.revival.server.ServerProxy")
+    public static ServerProxy proxy;
     @Instance(MODID)
     public static Revival instance;
-
     public static FossilGuiHandler guiHandler = new FossilGuiHandler();
-
     public static Object toPedia;
-    public static SimpleNetworkWrapper channel;
-
     public static int feederRenderID;
-
     public static Enchantment paleontology;
     public static Enchantment archeology;
-
     public static BiomeGenBase anuBiome;
     public static BiomeGenBase treasureBiome;
     public static ArmorMaterial bone = EnumHelper.addArmorMaterial("Bone", 25, new int[]{2, 7, 6, 2}, 15);
     public static ToolMaterial scarab = EnumHelper.addToolMaterial("Scarab", 3, 1861, 8.0F, 4.0F, 25);
-
-    public static final FossilSoundType soundTypeSlime = new FossilSoundType(1.0F, 1.0F);
-
     public static ToolMaterial toothDaggerMaterial = EnumHelper.addToolMaterial("toothDagger", 3, 250, 70.0F, 1.5F, 25);
-    public Configuration config;
-
     public static Material tar_material;
     public static Fluid tar_fluid;
+    public Configuration config;
 
     public static boolean enableDebugging() {
         return STATE == ModState.DEV;
@@ -110,9 +97,6 @@ public class Revival {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        channel = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
-        channel.registerMessage(MessageDinoSit.class, MessageDinoSit.class, 2, Side.SERVER);
-
         MinecraftForge.EVENT_BUS.register(new FossilBonemealEvent());
         MinecraftForge.EVENT_BUS.register(new EventPlayer());
         VillagerRegistry.instance().registerVillageTradeHandler(10, new FossilTradeHandler());
@@ -128,11 +112,11 @@ public class Revival {
         DimensionManager.registerProviderType(FossilConfig.dimIdTreasure, WorldProviderTreasure.class, false);
         DimensionManager.registerDimension(FossilConfig.dimIdTreasure, FossilConfig.dimIdTreasure);
 
-        paleontology = new EnchantmentPaleontology(FossilConfig.enchIdPaleontology, 2, EnumEnchantmentType.digger);
-        archeology = new EnchantmentArcheology(FossilConfig.enchIdArcheology, 2, EnumEnchantmentType.digger);
+        paleontology = new PaleontologyEnchantment(FossilConfig.enchIdPaleontology, 2, EnumEnchantmentType.digger);
+        archeology = new ArcheologyEnchantment(FossilConfig.enchIdArcheology, 2, EnumEnchantmentType.digger);
 
-        anuBiome = new BiomeBasic(FossilConfig.biomeIdDarknessLair, Blocks.netherrack, Blocks.netherrack, true, 0, 0).setDisableRain().setBiomeName(LocalizationStrings.BIOME_ANU).setTemperatureRainfall(0.8F, 0F).setHeight(new BiomeGenBase.Height(0F, 0F));
-        treasureBiome = new BiomeBasic(FossilConfig.biomeIdTreasure, Blocks.air, Blocks.air, true, 1, 0).setDisableRain().setBiomeName(StatCollector.translateToLocal("biome.treasure.name")).setTemperatureRainfall(0.8F, 0F).setHeight(new BiomeGenBase.Height(0F, 0F));
+        anuBiome = new BasicBiome(FossilConfig.biomeIdDarknessLair, Blocks.netherrack, Blocks.netherrack, true, 0, 0).setDisableRain().setBiomeName(LocalizationStrings.BIOME_ANU).setTemperatureRainfall(0.8F, 0F).setHeight(new BiomeGenBase.Height(0F, 0F));
+        treasureBiome = new BasicBiome(FossilConfig.biomeIdTreasure, Blocks.air, Blocks.air, true, 1, 0).setDisableRain().setBiomeName(StatCollector.translateToLocal("biome.treasure.name")).setTemperatureRainfall(0.8F, 0F).setHeight(new BiomeGenBase.Height(0F, 0F));
 
         EntityRegistry.registerModEntity(EntityStoneboard.class, "StoneBoard", 1, this, 250, Integer.MAX_VALUE, false);
         EntityRegistry.registerModEntity(EntityJavelin.class, "Javelin", 2, this, 250, 5, true);
@@ -170,9 +154,15 @@ public class Revival {
 
         GameRegistry.registerWorldGenerator(new FossilGenerator(), 0);
 
-        if (FossilConfig.generatePalaeoraphe) GameRegistry.registerWorldGenerator(new WorldGeneratorPalaeoraphe(), 0);
-        if (FossilConfig.generateAcademy) GameRegistry.registerWorldGenerator(new AcademyGenerator(), 0);
-        if (FossilConfig.generateShips) GameRegistry.registerWorldGenerator(new ShipWreckGenerator(), 0);
+        if (FossilConfig.generatePalaeoraphe) {
+            GameRegistry.registerWorldGenerator(new WorldGeneratorPalaeoraphe(), 0);
+        }
+        if (FossilConfig.generateAcademy) {
+            GameRegistry.registerWorldGenerator(new AcademyGenerator(), 0);
+        }
+        if (FossilConfig.generateShips) {
+            GameRegistry.registerWorldGenerator(new ShipWreckGenerator(), 0);
+        }
 
         GameRegistry.registerWorldGenerator(new WorldGenMiscStructures(), 0);
 

@@ -1,7 +1,7 @@
 package com.github.revival.client.renderer.entity;
 
 import com.github.revival.client.model.ModelFPZ;
-import com.github.revival.common.entity.mob.EntityFriendlyPigZombie;
+import com.github.revival.server.entity.mob.EntityFriendlyPigZombie;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.entity.RenderBiped;

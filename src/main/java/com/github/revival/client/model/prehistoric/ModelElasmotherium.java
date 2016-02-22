@@ -1,14 +1,13 @@
 package com.github.revival.client.model.prehistoric;
 
 import com.github.revival.client.model.prehistoric.test.ModelNewPrehistoric;
-import com.github.revival.common.entity.mob.test.EntityNewPrehistoric;
+import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelRenderer;
 import net.ilexiconn.llibrary.common.animation.Animator;
 import net.ilexiconn.llibrary.common.animation.IAnimated;
 import net.minecraft.entity.Entity;
 
 public class ModelElasmotherium extends ModelNewPrehistoric {
-    private Animator animator;
     public MowzieModelRenderer middleBody;
     public MowzieModelRenderer rightFrontThigh;
     public MowzieModelRenderer rightHindThigh;
@@ -29,6 +28,7 @@ public class ModelElasmotherium extends ModelNewPrehistoric {
     public MowzieModelRenderer rightHindLeg;
     public MowzieModelRenderer leftFrontLeg;
     public MowzieModelRenderer leftHindLeg;
+    private Animator animator;
 
     public ModelElasmotherium() {
         this.textureWidth = 64;

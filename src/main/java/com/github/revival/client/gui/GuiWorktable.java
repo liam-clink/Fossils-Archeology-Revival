@@ -1,8 +1,8 @@
 package com.github.revival.client.gui;
 
-import com.github.revival.common.container.ContainerWorktable;
-import com.github.revival.common.handler.LocalizationStrings;
-import com.github.revival.common.tileentity.TileEntityWorktable;
+import com.github.revival.server.block.entity.TileEntityWorktable;
+import com.github.revival.server.container.WorktableContainer;
+import com.github.revival.server.handler.LocalizationStrings;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -15,7 +15,7 @@ public class GuiWorktable extends GuiContainer {
     private TileEntityWorktable tile;
 
     public GuiWorktable(InventoryPlayer playerInventory, TileEntity tile) {
-        super(new ContainerWorktable(playerInventory, tile));
+        super(new WorktableContainer(playerInventory, tile));
         this.tile = (TileEntityWorktable) tile;
     }
 

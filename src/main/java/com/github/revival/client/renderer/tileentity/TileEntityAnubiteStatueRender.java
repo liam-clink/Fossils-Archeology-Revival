@@ -1,7 +1,7 @@
 package com.github.revival.client.renderer.tileentity;
 
 import com.github.revival.client.model.ModelAnubite;
-import com.github.revival.common.tileentity.TileEntityAnubiteStatue;
+import com.github.revival.server.block.entity.TileEntityAnubiteStatue;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;

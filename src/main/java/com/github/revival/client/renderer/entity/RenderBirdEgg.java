@@ -1,6 +1,6 @@
 package com.github.revival.client.renderer.entity;
 
-import com.github.revival.common.entity.mob.projectile.EntityBirdEgg;
+import com.github.revival.server.entity.mob.projectile.EntityBirdEgg;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.Tessellator;
