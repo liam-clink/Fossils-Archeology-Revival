@@ -18,6 +18,7 @@ Forked from [Flammarilva](https://github.com/fls81245)'s Fossil And Archeology m
 [JTGhawk137](https://github.com/JTGhawk137)  
 [Alexthe666](https://github.com/Alex-the-666)  
 [iLexiconn](https://github.com/iLexiconn)  
+[gegy1000](https://github.com/gegy1000)
 
 ###### Texture/Model Artists  
 [tyranno66](https://github.com/tyranno66)  
