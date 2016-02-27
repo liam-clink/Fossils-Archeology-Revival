@@ -75,11 +75,6 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
     protected static final ResourceLocation pediaheart = new ResourceLocation("fossil:textures/gui/PediaHeart.png");
     public static Animation animation_speak = new Animation(1, 20);
     public static Animation animation_attack = new Animation(2, 20);
-    public float animation_frame;
-    public float RiderStrafe = 0.0F;
-    public float RiderForward = 0.0F;
-    public boolean RiderJump = false;
-    public boolean RiderSneak = false;
     public float minSize;
     public float maxSize;
     public int teenAge;
@@ -557,9 +552,6 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
             sitProgress -= 0.5F;
             //Revival.channel.sendToServer(new MessageDinoSit(this.getEntityId(), sitProgress));
         }
-
-
-        animation_frame++;
         Animation.tickAnimations(this);
         if (!this.worldObj.isRemote && this.aiClimbType() == Climbing.ARTHROPOD) {
             this.setBesideClimbableBlock(this.isCollidedHorizontally);
