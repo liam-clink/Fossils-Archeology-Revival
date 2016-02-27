@@ -17,8 +17,6 @@ public class EntityGallimimus extends EntityNewPrehistoric {
     public static final double maxHealth = 40;
     public static final double baseSpeed = 0.25D;
     public static final double maxSpeed = 0.4D;
-    public Object tailbuffer = Revival.proxy.getChainBuffer(3);
-
 
     public EntityGallimimus(World world) {
         super(world, EnumPrehistoric.Gallimimus);

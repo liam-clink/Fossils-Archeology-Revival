@@ -17,7 +17,6 @@ public class EntityVelociraptor extends EntityNewPrehistoric {
     public static final double maxHealth = 22;
     public static final double baseSpeed = 0.25D;
     public static final double maxSpeed = 0.3D;
-    public Object tailbuffer = Revival.proxy.getChainBuffer(3);
 
     public EntityVelociraptor(World world) {
         super(world, EnumPrehistoric.Velociraptor);

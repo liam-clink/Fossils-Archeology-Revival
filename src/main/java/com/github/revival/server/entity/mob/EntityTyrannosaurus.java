@@ -23,8 +23,6 @@ public class EntityTyrannosaurus extends EntityNewPrehistoric {
     public static final double baseSpeed = 0.25D;
     public static final double maxSpeed = 0.3D;
     public static Animation animation_roar = new Animation(2, 100);
-    public Object tailbuffer = Revival.proxy.getChainBuffer(3);
-
 
     public EntityTyrannosaurus(World world) {
         super(world, EnumPrehistoric.Tyrannosaurus);

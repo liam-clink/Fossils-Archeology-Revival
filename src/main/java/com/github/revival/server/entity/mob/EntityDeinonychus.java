@@ -2,6 +2,7 @@ package com.github.revival.server.entity.mob;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
@@ -28,12 +29,11 @@ import com.github.revival.server.enums.EnumPrehistoricAI.WaterAbility;
 public class EntityDeinonychus extends EntityNewPrehistoric {
 
     public static final double baseDamage = 2;
-    public static final double maxDamage = 10;
+    public static final double maxDamage = 6;
     public static final double baseHealth = 10;
     public static final double maxHealth = 32;
     public static final double baseSpeed = 0.23D;
     public static final double maxSpeed = 0.35D;
-    public Object tailbuffer = Revival.proxy.getChainBuffer(2);
 
     public EntityDeinonychus(World world) {
         super(world, EnumPrehistoric.Deinonychus);
@@ -194,7 +194,8 @@ public class EntityDeinonychus extends EntityNewPrehistoric {
 
     public boolean attackEntityAsMob(Entity entity) {
     	if(this.ridingEntity == entity && this.ticksExisted % 20 == 0){
-            entity.attackEntityFrom(DamageSource.causeMobDamage(this), 0.3F);
+            IAttributeInstance iattributeinstance = this.getEntityAttribute(SharedMonsterAttributes.attackDamage);
+            entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float)iattributeinstance.getAttributeValue());
 		}
         return false;
     }

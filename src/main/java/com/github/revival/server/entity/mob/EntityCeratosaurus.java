@@ -17,7 +17,6 @@ public class EntityCeratosaurus extends EntityNewPrehistoric {
     public static final double maxHealth = 50;
     public static final double baseSpeed = 0.25D;
     public static final double maxSpeed = 0.42D;
-    public Object tailbuffer = Revival.proxy.getChainBuffer(3);
 
     public EntityCeratosaurus(World world) {
         super(world, EnumPrehistoric.Ceratosaurus);

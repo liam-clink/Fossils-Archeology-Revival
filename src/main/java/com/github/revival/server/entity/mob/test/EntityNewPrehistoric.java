@@ -360,6 +360,9 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
         super.onLivingUpdate();
 
         if (this.isSitting()) {
+        	if(!this.getNavigator().noPath()){
+        		this.getNavigator().clearPathEntity();
+        	}
             ticksSitted++;
         }
 
@@ -368,8 +371,8 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
             ticksSitted = 0;
         }
 
-        if (worldObj.isRemote && this.isSitting() && ticksSitted > 100 && this.getRNG().nextInt(100) == 1) {
-            this.setSitting(true);
+        if (worldObj.isRemote && (this.isSitting() && ticksSitted > 100 && this.getRNG().nextInt(100) == 1 || this.getAttackTarget() != null)) {
+            this.setSitting(false);
             ticksSitted = 0;
         }
 

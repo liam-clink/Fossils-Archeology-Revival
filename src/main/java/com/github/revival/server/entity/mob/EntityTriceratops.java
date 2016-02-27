@@ -18,7 +18,6 @@ public class EntityTriceratops extends EntityNewPrehistoric {
     public static final double maxHealth = 64;
     public static final double baseSpeed = 0.2D;
     public static final double maxSpeed = 0.25D;
-    public Object tailbuffer = Revival.proxy.getChainBuffer(3);
 
     public EntityTriceratops(World world) {
         super(world, EnumPrehistoric.Triceratops);
