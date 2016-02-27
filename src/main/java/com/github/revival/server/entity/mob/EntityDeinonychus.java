@@ -52,10 +52,6 @@ public class EntityDeinonychus extends EntityNewPrehistoric {
     public int getAttackLength() {
         return 35;
     }
-    
-    public void onUpdate() {
-        super.onUpdate();
-    }
 
     @Override
     protected void applyEntityAttributes() {

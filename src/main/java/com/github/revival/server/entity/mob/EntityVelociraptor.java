@@ -2,17 +2,23 @@ package com.github.revival.server.entity.mob;
 
 import com.github.revival.Revival;
 import com.github.revival.server.config.FossilConfig;
+import com.github.revival.server.entity.ai.DinoAILeapAtTarget;
 import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 import com.github.revival.server.enums.EnumPrehistoric;
 import com.github.revival.server.enums.EnumPrehistoricAI.*;
+
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 public class EntityVelociraptor extends EntityNewPrehistoric {
-    public static final double baseDamage = 2;
-    public static final double maxDamage = 7;
+    public static final double baseDamage = 1;
+    public static final double maxDamage = 4;
     public static final double baseHealth = 4;
     public static final double maxHealth = 22;
     public static final double baseSpeed = 0.25D;
@@ -20,6 +26,7 @@ public class EntityVelociraptor extends EntityNewPrehistoric {
 
     public EntityVelociraptor(World world) {
         super(world, EnumPrehistoric.Velociraptor);
+        this.tasks.addTask(3, new DinoAILeapAtTarget(this));
         this.hasFeatherToggle = true;
         this.featherToggle = FossilConfig.featheredVelociraptor;
         this.setSize(1.5F, 1.5F);
@@ -31,11 +38,11 @@ public class EntityVelociraptor extends EntityNewPrehistoric {
         favoriteFood = Items.beef;
     }
 
-    public void onUpdate() {
-        super.onUpdate();
-        //Revival.proxy.doChainBuffer(tailbuffer, this);
+    @Override
+    public int getAttackLength() {
+        return 35;
     }
-
+    
     @Override
     public void setSpawnValues() {
     }
@@ -154,6 +161,38 @@ public class EntityVelociraptor extends EntityNewPrehistoric {
     public Item getOrderItem() {
 
         return Items.bone;
+    }
+    
+    public void onLivingUpdate() {
+        super.onLivingUpdate();
+        System.out.println(this.getAnimationTick());
+
+		if(this.getAttackTarget() != null && this.getAnimation() == this.animation_attack && this.getAnimationTick() == 20 && this.onGround){
+    		double d0 = this.getAttackTarget().posX - this.posX;
+			double d1 = this.getAttackTarget().posZ - this.posZ;
+			float f = MathHelper.sqrt_double(d0 * d0 + d1 * d1);
+			this.motionX += d0 / (double)f * 0.5D * 0.800000011920929D + this.motionX * 0.20000000298023224D;
+			this.motionZ += d1 / (double)f * 0.5D * 0.800000011920929D + this.motionZ * 0.20000000298023224D;
+			this.getLookHelper().setLookPositionWithEntity(this.getAttackTarget(), 10, 12);
+			this.motionY = (double)0.4;
+    	}
+    }
+
+    public boolean attackEntityAsMob(Entity entity) {
+    	if(this.ridingEntity == entity && this.ticksExisted % 20 == 0){
+            IAttributeInstance iattributeinstance = this.getEntityAttribute(SharedMonsterAttributes.attackDamage);
+            entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float)iattributeinstance.getAttributeValue());
+		}
+        return false;
+    }
+    
+    public void applyEntityCollision(Entity entity){
+    	super.applyEntityCollision(entity);
+    	if(this.getAttackTarget() != null){
+    		if(this.getAttackTarget() == entity && this.getAnimation() == this.animation_attack && !onGround && this.ridingEntity != entity){
+                this.mountEntity(entity);
+    		}
+    	}
     }
 
 }
