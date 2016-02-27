@@ -1,7 +1,7 @@
 package com.github.revival.server.item;
 
 import com.github.revival.Revival;
-import com.github.revival.client.model.armor.HeadbandRomanModel;
+import com.github.revival.client.model.armor.ModelHeadbandRoman;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.model.ModelBiped;
@@ -19,7 +19,7 @@ import java.util.List;
 
 public class HeadRelicItem extends ItemArmor {
     public static final String[] headbandItemNames = new String[]{"broken", "roman"};
-    ModelBiped headband = new HeadbandRomanModel();
+    ModelBiped headband = new ModelHeadbandRoman();
     @SideOnly(Side.CLIENT)
     private IIcon[] headbandIcons;
 

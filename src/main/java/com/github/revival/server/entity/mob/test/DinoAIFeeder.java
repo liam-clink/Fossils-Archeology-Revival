@@ -1,7 +1,7 @@
 package com.github.revival.server.entity.mob.test;
 
 import com.github.revival.Revival;
-import com.github.revival.server.block.entity.FeederTile;
+import com.github.revival.server.block.entity.TileEntityFeeder;
 import com.github.revival.server.config.FossilConfig;
 import com.github.revival.server.entity.ai.DinoAINearestAttackableTargetSorter;
 import com.github.revival.server.enums.EnumOrderType;
@@ -33,14 +33,14 @@ public class DinoAIFeeder extends EntityAIBase {
     // the range the dino is able to get the item when in
     private final int USE_RANGE = 3;
     protected EntityCreature taskOwner;
-    private NewPrehistoricEntity dinosaur;
+    private EntityNewPrehistoric dinosaur;
     private double destX;
     private double destY;
     private double destZ;
     private int typeofTarget = NO_TARGET;
     private int TimeAtThisTarget = 0;
     // The item the dino is going to take
-    private FeederTile targetFeeder;
+    private TileEntityFeeder targetFeeder;
     private EntityItem targetItem;
     private Vec3 targetBlock;
     private EntityLivingBase targetEntity;
@@ -57,7 +57,7 @@ public class DinoAIFeeder extends EntityAIBase {
     /**
      * Creates The AI, Input: Dino, Speed, searching range
      */
-    public DinoAIFeeder(NewPrehistoricEntity Dino0, int Range0) {
+    public DinoAIFeeder(EntityNewPrehistoric Dino0, int Range0) {
         this.theWorld = Dino0.worldObj;
         this.targetFeeder = null;
         this.dinosaur = Dino0;
@@ -285,12 +285,12 @@ public class DinoAIFeeder extends EntityAIBase {
         this.typeofTarget = NO_TARGET;
     }
 
-    private FeederTile getNearbyFeeder() {
+    private TileEntityFeeder getNearbyFeeder() {
         double range = 36;
-        List<TileEntity> nearbyEntities = theWorld.getEntitiesWithinAABB(FeederTile.class, this.dinosaur.boundingBox.expand(range, range, range));
+        List<TileEntity> nearbyEntities = theWorld.getEntitiesWithinAABB(TileEntityFeeder.class, this.dinosaur.boundingBox.expand(range, range, range));
 
         for (TileEntity entityFeeder : nearbyEntities) {
-            FeederTile nearbyFeeder = (FeederTile) entityFeeder;
+            TileEntityFeeder nearbyFeeder = (TileEntityFeeder) entityFeeder;
 
             if (this.dinosaur.selfType.useFeeder()) {
                 return nearbyFeeder;

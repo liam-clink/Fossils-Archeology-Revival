@@ -1,12 +1,12 @@
 package com.github.revival.server.entity.ai;
 
-import com.github.revival.server.entity.mob.BonesEntity;
+import com.github.revival.server.entity.mob.EntityBones;
 import net.minecraft.entity.ai.EntityAIBase;
 
 public class EntityAIDeadBones extends EntityAIBase {
-    private BonesEntity asker;
+    private EntityBones asker;
 
-    public EntityAIDeadBones(BonesEntity var1) {
+    public EntityAIDeadBones(EntityBones var1) {
         this.asker = var1;
     }
 

@@ -1,14 +1,14 @@
 package com.github.revival.server.entity.ai;
 
 import com.github.revival.server.config.FossilConfig;
-import com.github.revival.server.entity.mob.DinosaurEntity;
+import com.github.revival.server.entity.mob.EntityDinosaur;
 import com.github.revival.server.item.FAItemRegistry;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
 public class DinoAIControlledByPlayer extends EntityAIBase {
-    private final DinosaurEntity motionTarget;
+    private final EntityDinosaur motionTarget;
     public int FollowTimeWithoutWhip = 90;
     //private final float maxSpeed;
     private float currentSpeed = 0.0F;
@@ -28,7 +28,7 @@ public class DinoAIControlledByPlayer extends EntityAIBase {
      */
     private int maxSpeedBoostTime = 100;
 
-    public DinoAIControlledByPlayer(DinosaurEntity var1)//, float var2)
+    public DinoAIControlledByPlayer(EntityDinosaur var1)//, float var2)
     {
         this.motionTarget = var1;
         //this.maxSpeed = var2;

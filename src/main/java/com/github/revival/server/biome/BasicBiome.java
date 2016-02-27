@@ -1,6 +1,6 @@
 package com.github.revival.server.biome;
 
-import com.github.revival.server.entity.mob.SentryPigmanEntity;
+import com.github.revival.server.entity.mob.EntitySentryPigman;
 import com.github.revival.server.gen.feature.HellMushroomWorldGen;
 import net.minecraft.block.Block;
 import net.minecraft.entity.monster.EntityPigZombie;
@@ -26,7 +26,7 @@ public class BasicBiome extends BiomeGenBase {
         }
         if (lifeSelector == 0) {
             this.spawnableCreatureList.add(new BiomeGenBase.SpawnListEntry(EntityPigZombie.class, 200, 1, 8));
-            this.spawnableCreatureList.add(new BiomeGenBase.SpawnListEntry(SentryPigmanEntity.class, 200, 1, 4));
+            this.spawnableCreatureList.add(new BiomeGenBase.SpawnListEntry(EntitySentryPigman.class, 200, 1, 4));
         }
     }
 

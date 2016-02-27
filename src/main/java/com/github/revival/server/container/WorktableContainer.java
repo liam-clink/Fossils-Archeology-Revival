@@ -1,6 +1,6 @@
 package com.github.revival.server.container;
 
-import com.github.revival.server.block.entity.WorktableTile;
+import com.github.revival.server.block.entity.TileEntityWorktable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -12,13 +12,13 @@ import net.minecraft.tileentity.TileEntity;
 
 public class WorktableContainer extends Container {
     public static final int FUEL = 1, INPUT_END = 0, OUTPUT_END = 2;
-    private WorktableTile furnace;
+    private TileEntityWorktable furnace;
     private int cookTime = 0;
     private int burnTime = 0;
     private int itemBurnTime = 0;
 
     public WorktableContainer(InventoryPlayer var1, TileEntity var2) {
-        this.furnace = (WorktableTile) var2;
+        this.furnace = (TileEntityWorktable) var2;
         this.addSlotToContainer(new Slot(this.furnace, 0, 49, 20));
         this.addSlotToContainer(new Slot(this.furnace, 1, 81, 54));
         this.addSlotToContainer(new SlotFurnace(var1.player, this.furnace, 2,

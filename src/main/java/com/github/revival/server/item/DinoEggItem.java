@@ -1,6 +1,6 @@
 package com.github.revival.server.item;
 
-import com.github.revival.server.entity.DinoEggEntity;
+import com.github.revival.server.entity.EntityDinoEgg;
 import com.github.revival.server.enums.EnumMobType;
 import com.github.revival.server.enums.EnumPrehistoric;
 import cpw.mods.fml.relauncher.Side;
@@ -36,7 +36,7 @@ public class DinoEggItem extends Item {
     public static boolean spawnCreature(World var0, EnumPrehistoric var1, double var2, double var4, double var6) {
         Object var8;
         if (var1.type == EnumMobType.DINOSAUR) {
-            var8 = new DinoEggEntity(var0, var1);
+            var8 = new EntityDinoEgg(var0, var1);
         } else {
             var8 = (Entity) null;
         }

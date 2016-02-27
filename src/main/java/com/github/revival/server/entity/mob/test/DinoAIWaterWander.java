@@ -20,7 +20,7 @@ public class DinoAIWaterWander extends EntityAIBase {
     private double zPosition;
     private double speed;
     private ArrayList collidingBoundingBoxes = new ArrayList();
-    private NewPrehistoricEntity entity;
+    private EntityNewPrehistoric entity;
     private float randomMotionVecX;
     private float randomMotionVecY;
     private float randomMotionVecZ;
@@ -34,7 +34,7 @@ public class DinoAIWaterWander extends EntityAIBase {
 
     private World worldObj;
 
-    public DinoAIWaterWander(NewPrehistoricEntity dinosaur, double speed) {
+    public DinoAIWaterWander(EntityNewPrehistoric dinosaur, double speed) {
         this.entity = dinosaur;
         this.speed = speed;
         this.setMutexBits(1);

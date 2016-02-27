@@ -1,5 +1,6 @@
 package com.github.revival.server.item;
 
+import com.github.revival.server.enums.EnumAnimalType;
 import net.minecraft.item.Item;
 
 import java.util.Random;
@@ -7,7 +8,7 @@ import java.util.Random;
 public class EmbryoSyringeItem extends Item {
     //private String[] ItemNames = new String[] {"EmbyoPig", "EmbyoSheep", "EmbyoCow", "EmbyoSmilodon", "EmbyoMammoth"};
     int AnimalType;
-    private com.github.revival.server.enums.AnimalType embryo;
+    private EnumAnimalType embryo;
     private Random rand;
 
     public EmbryoSyringeItem(int AnimalType0) {
@@ -19,7 +20,7 @@ public class EmbryoSyringeItem extends Item {
         this.rand = new Random();
     }
 
-    public static com.github.revival.server.enums.AnimalType GetEmbryo(int var0) {
-        return com.github.revival.server.enums.AnimalType.values()[var0];
+    public static EnumAnimalType GetEmbryo(int var0) {
+        return EnumAnimalType.values()[var0];
     }
 }

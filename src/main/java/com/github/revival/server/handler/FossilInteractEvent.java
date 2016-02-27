@@ -1,10 +1,10 @@
 package com.github.revival.server.handler;
 
 import com.github.revival.Revival;
-import com.github.revival.server.entity.mob.PregnantCowEntity;
-import com.github.revival.server.entity.mob.PregnantHorseEntity;
-import com.github.revival.server.entity.mob.PregnantPigEntity;
-import com.github.revival.server.entity.mob.PregnantSheepEntity;
+import com.github.revival.server.entity.mob.EntityPregnantCow;
+import com.github.revival.server.entity.mob.EntityPregnantHorse;
+import com.github.revival.server.entity.mob.EntityPregnantPig;
+import com.github.revival.server.entity.mob.EntityPregnantSheep;
 import com.github.revival.server.item.FAItemRegistry;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.passive.EntityCow;
@@ -26,7 +26,7 @@ public class FossilInteractEvent {
                 if (itemstack != null) {
                     if (event.target instanceof EntityHorse) {
                         if (player.getHeldItem().getItem() == FAItemRegistry.dinoPedia) {
-                            PregnantHorseEntity props = PregnantHorseEntity.get((EntityHorse) event.target);
+                            EntityPregnantHorse props = EntityPregnantHorse.get((EntityHorse) event.target);
 
                             if (props.Embryo != null) {
                                 props.setPedia();
@@ -39,7 +39,7 @@ public class FossilInteractEvent {
 
                     if (event.target instanceof EntityCow) {
                         if (player.getHeldItem().getItem() == FAItemRegistry.dinoPedia) {
-                            PregnantCowEntity props = PregnantCowEntity.get((EntityCow) event.target);
+                            EntityPregnantCow props = EntityPregnantCow.get((EntityCow) event.target);
 
                             if (props.Embryo != null) {
                                 props.setPedia();
@@ -52,7 +52,7 @@ public class FossilInteractEvent {
 
                     if (event.target instanceof EntityPig) {
                         if (player.getHeldItem().getItem() == FAItemRegistry.dinoPedia) {
-                            PregnantPigEntity props = PregnantPigEntity.get((EntityPig) event.target);
+                            EntityPregnantPig props = EntityPregnantPig.get((EntityPig) event.target);
 
                             if (props.Embryo != null) {
                                 props.setPedia();
@@ -65,7 +65,7 @@ public class FossilInteractEvent {
 
                     if (event.target instanceof EntitySheep) {
                         if (player.getHeldItem().getItem() == FAItemRegistry.dinoPedia) {
-                            PregnantSheepEntity props = PregnantSheepEntity.get((EntitySheep) event.target);
+                            EntityPregnantSheep props = EntityPregnantSheep.get((EntitySheep) event.target);
 
                             if (props.Embryo != null) {
                                 props.setPedia();

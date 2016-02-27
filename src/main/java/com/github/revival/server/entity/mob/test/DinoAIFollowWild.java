@@ -11,7 +11,7 @@ public class DinoAIFollowWild extends EntityAIBase {
     /**
      * The entity using this AI that is tempted by the player.
      */
-    private NewPrehistoricEntity temptedEntity;
+    private EntityNewPrehistoric temptedEntity;
     private double field_75282_b;
     /**
      * X position of player tempting this mob
@@ -46,7 +46,7 @@ public class DinoAIFollowWild extends EntityAIBase {
      */
     private boolean field_75286_m;
 
-    public DinoAIFollowWild(NewPrehistoricEntity mob, double i, Item food) {
+    public DinoAIFollowWild(EntityNewPrehistoric mob, double i, Item food) {
         this.temptedEntity = mob;
         this.field_75282_b = i;
         this.field_151484_k = food;

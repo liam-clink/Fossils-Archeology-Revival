@@ -1,6 +1,6 @@
 package com.github.revival.server.entity.ai;
 
-import com.github.revival.server.entity.mob.DinosaurEntity;
+import com.github.revival.server.entity.mob.EntityDinosaur;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.world.World;
@@ -9,7 +9,7 @@ import java.util.Random;
 
 public class DinoAIHerd extends EntityAIBase {
     // The assigned Dinosaur
-    private DinosaurEntity dinosaur;
+    private EntityDinosaur dinosaur;
     // The speed
     private double speed;
     private Random rand = new Random();
@@ -17,7 +17,7 @@ public class DinoAIHerd extends EntityAIBase {
     private World world;
     private DinoHerd herd;
 
-    public DinoAIHerd(DinosaurEntity dinosaur, double speed) {
+    public DinoAIHerd(EntityDinosaur dinosaur, double speed) {
         this.dinosaur = dinosaur;
         //this.herd = dinosaur.getHerd();
         this.speed = speed;

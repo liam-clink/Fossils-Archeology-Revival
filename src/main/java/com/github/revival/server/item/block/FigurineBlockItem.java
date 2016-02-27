@@ -1,6 +1,6 @@
 package com.github.revival.server.item.block;
 
-import com.github.revival.server.block.FigurineBlock;
+import com.github.revival.server.block.BlockFigurine;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlockWithMetadata;
 import net.minecraft.item.ItemStack;
@@ -11,6 +11,6 @@ public class FigurineBlockItem extends ItemBlockWithMetadata {
     }
 
     public String getUnlocalizedName(ItemStack itemstack) {
-        return getUnlocalizedName() + "." + FigurineBlock.shortname[itemstack.getItemDamage()];
+        return getUnlocalizedName() + "." + BlockFigurine.shortname[itemstack.getItemDamage()];
     }
 }

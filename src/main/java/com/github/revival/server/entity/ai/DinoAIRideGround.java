@@ -9,7 +9,7 @@
  */
 package com.github.revival.server.entity.ai;
 
-import com.github.revival.server.entity.mob.PrehistoricEntity;
+import com.github.revival.server.entity.mob.EntityPrehistoric;
 import com.github.revival.server.item.FAItemRegistry;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -27,7 +27,7 @@ public class DinoAIRideGround extends DinoAIRide {
     public int FollowTimeWithoutWhip = 120;
     private int lastTimeSeenWhip = -1;
 
-    public DinoAIRideGround(PrehistoricEntity dinosaur, double speed) {
+    public DinoAIRideGround(EntityPrehistoric dinosaur, double speed) {
         super(dinosaur);
         this.speed = speed;
     }

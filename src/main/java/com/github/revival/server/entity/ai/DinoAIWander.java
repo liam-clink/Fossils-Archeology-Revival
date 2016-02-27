@@ -1,19 +1,19 @@
 package com.github.revival.server.entity.ai;
 
-import com.github.revival.server.entity.mob.DinosaurEntity;
+import com.github.revival.server.entity.mob.EntityDinosaur;
 import com.github.revival.server.enums.EnumOrderType;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.RandomPositionGenerator;
 import net.minecraft.util.Vec3;
 
 public class DinoAIWander extends EntityAIBase {
-    private DinosaurEntity entity;
+    private EntityDinosaur entity;
     private double xPosition;
     private double yPosition;
     private double zPosition;
     private double speed;
 
-    public DinoAIWander(DinosaurEntity var1, double par2) {
+    public DinoAIWander(EntityDinosaur var1, double par2) {
         this.entity = var1;
         this.speed = par2;
         this.setMutexBits(1);

@@ -1,7 +1,7 @@
 package com.github.revival.server.item;
 
 import com.github.revival.Revival;
-import com.github.revival.server.entity.mob.DinosaurEntity;
+import com.github.revival.server.entity.mob.EntityDinosaur;
 import com.github.revival.server.enums.EnumPrehistoric;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -70,10 +70,10 @@ public class DinosaurModelItem extends Item {
             return true;
         } else {
             Class var11 = EnumPrehistoric.values()[var1.getItemDamage()].getDinoClass();
-            DinosaurEntity var12;
+            EntityDinosaur var12;
 
             try {
-                var12 = (DinosaurEntity) var11.getConstructor(new Class[]{World.class}).newInstance(new Object[]{var3});
+                var12 = (EntityDinosaur) var11.getConstructor(new Class[]{World.class}).newInstance(new Object[]{var3});
             } catch (Throwable var14) {
                 var14.printStackTrace();
                 return false;

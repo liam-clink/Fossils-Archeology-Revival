@@ -1,6 +1,6 @@
 package com.github.revival.client.renderer.item;
 
-import com.github.revival.client.model.TNClockModel;
+import com.github.revival.client.model.ModelTNClock;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -9,11 +9,11 @@ import org.lwjgl.opengl.GL11;
 
 public class ItemAncientClocRender implements IItemRenderer {
 
-    protected TNClockModel model;
+    protected ModelTNClock model;
     protected ResourceLocation texture = new ResourceLocation("fossil:textures/blocks/TNClock.png");
 
     public ItemAncientClocRender() {
-        model = new TNClockModel();
+        model = new ModelTNClock();
     }
 
     @Override

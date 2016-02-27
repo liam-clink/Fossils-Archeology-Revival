@@ -1,16 +1,16 @@
 package com.github.revival.server.entity.ai;
 
 import com.github.revival.server.config.FossilConfig;
-import com.github.revival.server.entity.mob.test.NewPrehistoricEntity;
+import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 import com.github.revival.server.enums.EnumPrehistoric;
 import com.github.revival.server.enums.EnumSituation;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.util.MathHelper;
 
 public class DinoAIGrowup extends EntityAIBase {
-    protected NewPrehistoricEntity AITarget;
+    protected EntityNewPrehistoric AITarget;
 
-    public DinoAIGrowup(NewPrehistoricEntity var1) {
+    public DinoAIGrowup(EntityNewPrehistoric var1) {
         this.AITarget = var1;
     }
 

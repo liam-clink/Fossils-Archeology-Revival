@@ -1,6 +1,6 @@
 package com.github.revival.server.item.block;
 
-import com.github.revival.server.block.VaseKylixBlock;
+import com.github.revival.server.block.BlockVaseKylix;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlockWithMetadata;
 import net.minecraft.item.ItemStack;
@@ -13,7 +13,7 @@ public class VaseKylixBlockItem extends ItemBlockWithMetadata {
 
     @Override
     public String getUnlocalizedName(ItemStack itemstack) {
-        return getUnlocalizedName() + "." + VaseKylixBlock.shortname[itemstack.getItemDamage()];
+        return getUnlocalizedName() + "." + BlockVaseKylix.shortname[itemstack.getItemDamage()];
     }
 
     @Override

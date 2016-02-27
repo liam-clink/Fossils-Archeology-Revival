@@ -20,7 +20,7 @@ public enum EnumDinoFoodMob {
     Sheep(EntitySheep.class, 35, 3),
     Squid(EntitySquid.class, 30, 3),
     Mob(EntityMob.class, 20, 1),
-    Nautilus(NautilusEntity.class, 100, 5),
+    Nautilus(EntityNautilus.class, 100, 5),
     Triceratops(null, 50, 3),
     Velociraptor(null, 20, 3),
     TRex(null, 70, 5),
@@ -39,14 +39,14 @@ public enum EnumDinoFoodMob {
     Deinonychus(null, 35, 3),
     Gallimimus(null, 40, 4),
     Allosaurus(null, 25, 1),
-    Dodo(DodoEntity.class, 20, 2),
-    Coelacanth(CoelacanthEntity.class, 20, 2),
-    Quagga(QuaggaEntity.class, 50, 3),
-    TerrorBird(TerrorBirdEntity.class, 40, 3),
-    Mammoth(MammothEntity.class, 100, 7),
-    Elasmotherium(ElasmotheriumEntity.class, 80, 7),
-    Confuciusornis(ConfuciusornisEntity.class, 15, 2),
-    Ceratosaurus(CeratosaurusEntity.class, 25, 1),;
+    Dodo(EntityDodo.class, 20, 2),
+    Coelacanth(EntityCoelacanth.class, 20, 2),
+    Quagga(EntityQuagga.class, 50, 3),
+    TerrorBird(EntityTerrorBird.class, 40, 3),
+    Mammoth(EntityMammoth.class, 100, 7),
+    Elasmotherium(EntityElasmotherium.class, 80, 7),
+    Confuciusornis(EntityConfuciusornis.class, 15, 2),
+    Ceratosaurus(EntityCeratosaurus.class, 25, 1),;
     public Class preyClass;
     public int FoodValue;
     public int HealValue;
@@ -64,24 +64,24 @@ public enum EnumDinoFoodMob {
     }
 
     public static void init() {
-        Triceratops.setDetails(TriceratopsEntity.class);
-        Velociraptor.setDetails(VelociraptorEntity.class);
-        TRex.setDetails(TyrannosaurusEntity.class);
-        Pterosaur.setDetails(PterosaurEntity.class);
-        Sarcosuchus.setDetails(SarcosuchusEntity.class);
-        Plesiosaur.setDetails(PlesiosaurusEntity.class);
-        Mosasaurus.setDetails(MosasaurusEntity.class);
-        Stegosaurus.setDetails(StegosaurusEntity.class);
-        Dilophosaurus.setDetails(DilophosaurusEntity.class);
-        Brachiosaurus.setDetails(BrachiosaurusEntity.class);
-        Spinosaurus.setDetails(SpinosaurusEntity.class);
-        Compsognathus.setDetails(CompsognathusEntity.class);
-        Ankylosaurus.setDetails(AnkylosaurusEntity.class);
-        Pachycephalosaurus.setDetails(PachycephalosaurusEntity.class);
-        Deinonychus.setDetails(DeinonychusEntity.class);
-        Liopleurodon.setDetails(LiopleurodonEntity.class);
-        Gallimimus.setDetails(GallimimusEntity.class);
-        Allosaurus.setDetails(AllosaurusEntity.class);
+        Triceratops.setDetails(EntityTriceratops.class);
+        Velociraptor.setDetails(EntityVelociraptor.class);
+        TRex.setDetails(EntityTyrannosaurus.class);
+        Pterosaur.setDetails(EntityPterosaur.class);
+        Sarcosuchus.setDetails(EntitySarcosuchus.class);
+        Plesiosaur.setDetails(EntityPlesiosaurus.class);
+        Mosasaurus.setDetails(EntityMosasaurus.class);
+        Stegosaurus.setDetails(EntityStegosaurus.class);
+        Dilophosaurus.setDetails(EntityDilophosaurus.class);
+        Brachiosaurus.setDetails(EntityBrachiosaurus.class);
+        Spinosaurus.setDetails(EntitySpinosaurus.class);
+        Compsognathus.setDetails(EntityCompsognathus.class);
+        Ankylosaurus.setDetails(EntityAnkylosaurus.class);
+        Pachycephalosaurus.setDetails(EntityPachycephalosaurus.class);
+        Deinonychus.setDetails(EntityDeinonychus.class);
+        Liopleurodon.setDetails(EntityLiopleurodon.class);
+        Gallimimus.setDetails(EntityGallimimus.class);
+        Allosaurus.setDetails(EntityAllosaurus.class);
     }
 
     public void setDetails(Class pClass) {

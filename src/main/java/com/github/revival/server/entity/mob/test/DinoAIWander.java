@@ -6,12 +6,12 @@ import net.minecraft.entity.ai.RandomPositionGenerator;
 import net.minecraft.util.Vec3;
 
 public class DinoAIWander extends EntityAIBase {
-    private NewPrehistoricEntity entity;
+    private EntityNewPrehistoric entity;
     private double xPosition;
     private double yPosition;
     private double zPosition;
 
-    public DinoAIWander(NewPrehistoricEntity var1) {
+    public DinoAIWander(EntityNewPrehistoric var1) {
         this.entity = var1;
         this.setMutexBits(1);
     }

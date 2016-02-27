@@ -1,7 +1,7 @@
 package com.github.revival.server.entity.mob.projectile;
 
-import com.github.revival.server.entity.mob.ConfuciusornisEntity;
-import com.github.revival.server.entity.mob.DodoEntity;
+import com.github.revival.server.entity.mob.EntityConfuciusornis;
+import com.github.revival.server.entity.mob.EntityDodo;
 import com.github.revival.server.enums.EnumPrehistoric;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntityAnimal;
@@ -76,11 +76,11 @@ public class EntityBirdEgg extends EntityThrowable {
         EntityAnimal mob;
         switch (type) {
             case Dodo:
-                mob = new DodoEntity(this.worldObj);
+                mob = new EntityDodo(this.worldObj);
                 break;
 
             case Confuciusornis:
-                mob = new ConfuciusornisEntity(this.worldObj);
+                mob = new EntityConfuciusornis(this.worldObj);
                 break;
 
             case Chicken:

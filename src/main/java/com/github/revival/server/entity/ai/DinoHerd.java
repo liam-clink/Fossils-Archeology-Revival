@@ -1,6 +1,6 @@
 package com.github.revival.server.entity.ai;
 
-import com.github.revival.server.entity.mob.DinosaurEntity;
+import com.github.revival.server.entity.mob.EntityDinosaur;
 import com.github.revival.server.enums.EnumPrehistoric;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -25,10 +25,10 @@ public class DinoHerd {
     public static final int MODE_CHASE = 3;
     public static final int MODE_DISPERSE = 4;
 
-    private ArrayList<DinosaurEntity> herdDinos;
+    private ArrayList<EntityDinosaur> herdDinos;
     private ArrayList<EntityLiving> targets;
     private ArrayList<EntityLiving> longTermTargets;
-    private DinosaurEntity leader;
+    private EntityDinosaur leader;
     private EnumPrehistoric dinoType;
     private float awarenessRadius;
     private float wanderRadius;
@@ -58,7 +58,7 @@ public class DinoHerd {
     };
 
     public DinoHerd(EnumPrehistoric dinoType, int maxHerdSize, int maxTargets, float awarenessRadius, float immediateAwarenessRadius, float wanderRadius, float heightAwareness) {
-        herdDinos = new ArrayList<DinosaurEntity>();
+        herdDinos = new ArrayList<EntityDinosaur>();
         this.dinoType = dinoType;
         this.carnivorous = dinoType.isCarnivore();
         this.maxHerdSize = maxHerdSize;
@@ -78,7 +78,7 @@ public class DinoHerd {
      * @param dino The dinosaur to add
      * @return True if the dinosaur was added to the herd
      */
-    public boolean addDinoToHerd(DinosaurEntity dino) {
+    public boolean addDinoToHerd(EntityDinosaur dino) {
         // Don't add if the herd is full
         if (herdDinos.size() >= maxHerdSize) {
             return false;
@@ -96,7 +96,7 @@ public class DinoHerd {
         return false;
     }
 
-    public void removeDinoFromHerd(DinosaurEntity dino) {
+    public void removeDinoFromHerd(EntityDinosaur dino) {
         if (herdDinos.contains(dino)) {
             herdDinos.remove(dino);
             updateHerdData();
@@ -110,9 +110,9 @@ public class DinoHerd {
         totalAge = 0;
         totalSize = 0.0F;
         int maxAge = 0;
-        DinosaurEntity oldest = null;
+        EntityDinosaur oldest = null;
         for (int i = 0; i < herdDinos.size(); i++) {
-            DinosaurEntity dino = herdDinos.get(i);
+            EntityDinosaur dino = herdDinos.get(i);
             totalAge += dino.getAge();
             totalSize += dino.getDinosaurSize();
             if (dino.getAge() > maxAge) {
@@ -202,8 +202,8 @@ public class DinoHerd {
     public boolean shouldDisperse() {
         boolean toDisperse = false;
         for (Object tempEntity : leader.worldObj.loadedEntityList) {
-            if (tempEntity instanceof DinosaurEntity) {
-                DinosaurEntity tempDino = (DinosaurEntity) tempEntity;
+            if (tempEntity instanceof EntityDinosaur) {
+                EntityDinosaur tempDino = (EntityDinosaur) tempEntity;
                 if (leader.SelfType.isCarnivore()) {
                     if (tempDino.SelfType.isCarnivore() && tempDino.getDinosaurSize() > leader.getDinosaurSize() + averageSize && tempDino.getAge() > leader.getAge() + averageAge) {
                         toDisperse = true;
@@ -326,7 +326,7 @@ public class DinoHerd {
         return fleeFromLarger;
     }
 
-    public DinosaurEntity getLeader() {
+    public EntityDinosaur getLeader() {
         return leader;
     }
 

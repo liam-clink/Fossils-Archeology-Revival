@@ -9,24 +9,24 @@ import java.util.ArrayList;
 
 public enum EnumEntityPrehistoric {
     // entityClass tameable rideable canCarry canFormHerds territorial targetFoodHabbit
-    Allosaurus(AllosaurusEntity.class, true, true, true, false, true, 0),
-    Ankylosaurus(AnkylosaurusEntity.class, true, true, true, false, true, 1),
-    Brachiosaurus(BrachiosaurusEntity.class, true, true, true, true, false, 1),
-    Compsognathus(CompsognathusEntity.class, true, false, true, true, true, 2),
-    Deinonychus(DeinonychusEntity.class, true, false, true, false, false, 0),
-    Dilophosaurus(DilophosaurusEntity.class, true, false, true, true, true, 0),
-    Gallimimus(GallimimusEntity.class, true, true, true, true, false, 2),
-    Liopleurodon(LiopleurodonEntity.class, true, false, true, false, true, 0),
-    Mosasaurus(MosasaurusEntity.class, true, false, true, true, true, 0),
-    Nautilus(NautilusEntity.class, false, false, false, false, false, 0),
-    Pachycephalosaurus(PachycephalosaurusEntity.class, true, false, true, true, true, 1),
-    Plesiosaur(PlesiosaurusEntity.class, true, true, true, true, true, 0),
-    Pterosaur(PterosaurEntity.class, true, false, true, true, true, 0),
-    Spinosaurus(SpinosaurusEntity.class, true, false, true, false, true, 0),
-    Stegosaurus(StegosaurusEntity.class, true, false, true, true, false, 1),
-    Triceratops(TriceratopsEntity.class, true, true, true, true, true, 1),
-    TyrannosaurusRex(TyrannosaurusEntity.class, true, false, true, true, true, 0),
-    Velociraptor(VelociraptorEntity.class, true, false, true, true, true, 0);
+    Allosaurus(EntityAllosaurus.class, true, true, true, false, true, 0),
+    Ankylosaurus(EntityAnkylosaurus.class, true, true, true, false, true, 1),
+    Brachiosaurus(EntityBrachiosaurus.class, true, true, true, true, false, 1),
+    Compsognathus(EntityCompsognathus.class, true, false, true, true, true, 2),
+    Deinonychus(EntityDeinonychus.class, true, false, true, false, false, 0),
+    Dilophosaurus(EntityDilophosaurus.class, true, false, true, true, true, 0),
+    Gallimimus(EntityGallimimus.class, true, true, true, true, false, 2),
+    Liopleurodon(EntityLiopleurodon.class, true, false, true, false, true, 0),
+    Mosasaurus(EntityMosasaurus.class, true, false, true, true, true, 0),
+    Nautilus(EntityNautilus.class, false, false, false, false, false, 0),
+    Pachycephalosaurus(EntityPachycephalosaurus.class, true, false, true, true, true, 1),
+    Plesiosaur(EntityPlesiosaurus.class, true, true, true, true, true, 0),
+    Pterosaur(EntityPterosaur.class, true, false, true, true, true, 0),
+    Spinosaurus(EntitySpinosaurus.class, true, false, true, false, true, 0),
+    Stegosaurus(EntityStegosaurus.class, true, false, true, true, false, 1),
+    Triceratops(EntityTriceratops.class, true, true, true, true, true, 1),
+    TyrannosaurusRex(EntityTyrannosaurus.class, true, false, true, true, true, 0),
+    Velociraptor(EntityVelociraptor.class, true, false, true, true, true, 0);
 
     public static int FOOD_HABBIT_CARNIVORE = 0;
     public static int FOOD_HABBIT_HERBIVORE = 1;
@@ -96,7 +96,7 @@ public enum EnumEntityPrehistoric {
 
     }
 
-    public boolean shouldRunFromEntity(PrehistoricEntity e) {
+    public boolean shouldRunFromEntity(EntityPrehistoric e) {
         return fleesFrom.contains(e.getType());
     }
 

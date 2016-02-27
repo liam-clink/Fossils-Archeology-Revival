@@ -1,7 +1,7 @@
 package com.github.revival.server.entity.ai;
 
 import com.github.revival.server.config.FossilConfig;
-import com.github.revival.server.entity.mob.DinosaurEntity;
+import com.github.revival.server.entity.mob.EntityDinosaur;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAITarget;
@@ -15,7 +15,7 @@ import java.util.List;
 
 public class WaterDinoAIHunt extends EntityAITarget {
     private final Class targetClass;
-    private DinosaurEntity dinosaur;
+    private EntityDinosaur dinosaur;
     private DinoAINearestAttackableTargetSorter targetSorter;
     /**
      * This filter is applied to the Entity search.  Only matching entities will be targetted.  (null -> no
@@ -34,7 +34,7 @@ public class WaterDinoAIHunt extends EntityAITarget {
     private double speed;
     private World theWorld;
 
-    public WaterDinoAIHunt(DinosaurEntity dinosaur, Class _class, int range, boolean par4, double speed) {
+    public WaterDinoAIHunt(EntityDinosaur dinosaur, Class _class, int range, boolean par4, double speed) {
         super(dinosaur, par4);
         this.theWorld = dinosaur.worldObj;
         this.speed = speed;
@@ -71,7 +71,7 @@ public class WaterDinoAIHunt extends EntityAITarget {
                 EntityLiving entity = (EntityLiving) iterator.next();
 
                 if (this.dinosaur.SelfType.FoodMobList.CheckMobByClass(entity.getClass())) {//It's food
-                    if (!(entity instanceof DinosaurEntity) || (entity instanceof DinosaurEntity && ((DinosaurEntity) entity).isModelized() == false)) {//No modelized Dinos for Lunch!
+                    if (!(entity instanceof EntityDinosaur) || (entity instanceof EntityDinosaur && ((EntityDinosaur) entity).isModelized() == false)) {//No modelized Dinos for Lunch!
                         this.targetEntity = entity;
                         //this.dinosaur.setAttackTarget(entity);
                         return true;

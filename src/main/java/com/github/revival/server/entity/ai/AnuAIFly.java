@@ -1,12 +1,12 @@
 package com.github.revival.server.entity.ai;
 
-import com.github.revival.server.entity.mob.AnuEntity;
+import com.github.revival.server.entity.mob.EntityAnu;
 import net.minecraft.entity.ai.EntityAIBase;
 
 public class AnuAIFly extends EntityAIBase {
-    protected AnuEntity entity;
+    protected EntityAnu entity;
 
-    public AnuAIFly(AnuEntity var1) {
+    public AnuAIFly(EntityAnu var1) {
         this.entity = var1;
 
     }

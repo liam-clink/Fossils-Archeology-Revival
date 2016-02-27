@@ -1,6 +1,6 @@
 package com.github.revival.server.entity;
 
-import com.github.revival.server.entity.mob.DodoEggEntity;
+import com.github.revival.server.entity.mob.EntityDodoEgg;
 import net.minecraft.dispenser.BehaviorProjectileDispense;
 import net.minecraft.dispenser.IPosition;
 import net.minecraft.entity.IProjectile;
@@ -24,11 +24,11 @@ public class BehaviorDodoEggDispense extends BehaviorProjectileDispense {
      */
     protected IProjectile getProjectileEntity(World par1World, IPosition par2IPosition) {
         if (this.javelin < 0) {
-            DodoEggEntity var3 = new DodoEggEntity(par1World, par2IPosition.getX(), par2IPosition.getY(), par2IPosition.getZ());
+            EntityDodoEgg var3 = new EntityDodoEgg(par1World, par2IPosition.getX(), par2IPosition.getY(), par2IPosition.getZ());
             return var3;
         }
 
-        DodoEggEntity var3 = new DodoEggEntity(par1World, par2IPosition.getX(), par2IPosition.getY(), par2IPosition.getZ());
+        EntityDodoEgg var3 = new EntityDodoEgg(par1World, par2IPosition.getX(), par2IPosition.getY(), par2IPosition.getZ());
         return var3;
     }
 }

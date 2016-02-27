@@ -9,7 +9,7 @@
  */
 package com.github.revival.server.entity.ai;
 
-import com.github.revival.server.entity.mob.PrehistoricEntity;
+import com.github.revival.server.entity.mob.EntityPrehistoric;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.player.EntityPlayer;
 
@@ -19,10 +19,10 @@ import net.minecraft.entity.player.EntityPlayer;
  * @author Nico Bergemann <barracuda415 at yahoo.de>
  */
 public abstract class DinoAIRide extends EntityAIBase {
-    protected final PrehistoricEntity dinosaur;
+    protected final EntityPrehistoric dinosaur;
     protected EntityPlayer rider;
 
-    public DinoAIRide(PrehistoricEntity dinosaur) {
+    public DinoAIRide(EntityPrehistoric dinosaur) {
         this.dinosaur = dinosaur;
         setMutexBits(0xffffffff);
     }

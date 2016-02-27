@@ -2,7 +2,7 @@ package com.github.revival.server.handler;
 
 import com.github.revival.Revival;
 import com.github.revival.server.entity.mob.*;
-import com.github.revival.server.entity.mob.test.NewPrehistoricEntity;
+import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 import com.github.revival.server.enums.EnumPrehistoric;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.Entity;
@@ -20,20 +20,20 @@ public class FossilLivingEvent {
 
     @SubscribeEvent
     public void onEntityConstructing(EntityConstructing event) {
-        if (event.entity instanceof EntityHorse && PregnantHorseEntity.get((EntityHorse) event.entity) == null) {
-            PregnantHorseEntity.register((EntityHorse) event.entity);
+        if (event.entity instanceof EntityHorse && EntityPregnantHorse.get((EntityHorse) event.entity) == null) {
+            EntityPregnantHorse.register((EntityHorse) event.entity);
         }
 
-        if (event.entity instanceof EntityCow && PregnantCowEntity.get((EntityCow) event.entity) == null) {
-            PregnantCowEntity.register((EntityCow) event.entity);
+        if (event.entity instanceof EntityCow && EntityPregnantCow.get((EntityCow) event.entity) == null) {
+            EntityPregnantCow.register((EntityCow) event.entity);
         }
 
-        if (event.entity instanceof EntityPig && PregnantPigEntity.get((EntityPig) event.entity) == null) {
-            PregnantPigEntity.register((EntityPig) event.entity);
+        if (event.entity instanceof EntityPig && EntityPregnantPig.get((EntityPig) event.entity) == null) {
+            EntityPregnantPig.register((EntityPig) event.entity);
         }
 
-        if (event.entity instanceof EntitySheep && PregnantSheepEntity.get((EntitySheep) event.entity) == null) {
-            PregnantSheepEntity.register((EntitySheep) event.entity);
+        if (event.entity instanceof EntitySheep && EntityPregnantSheep.get((EntitySheep) event.entity) == null) {
+            EntityPregnantSheep.register((EntitySheep) event.entity);
         }
     }
 
@@ -49,7 +49,7 @@ public class FossilLivingEvent {
         this.rand = new Random();
 
         if (event.entityLiving instanceof EntityHorse) {
-            PregnantHorseEntity props = PregnantHorseEntity.get((EntityHorse) event.entityLiving);
+            EntityPregnantHorse props = EntityPregnantHorse.get((EntityHorse) event.entityLiving);
 
             if (props.Embryo != null) {
 
@@ -66,7 +66,7 @@ public class FossilLivingEvent {
         }
 
         if (event.entityLiving instanceof EntityCow) {
-            PregnantCowEntity props = PregnantCowEntity.get((EntityCow) event.entityLiving);
+            EntityPregnantCow props = EntityPregnantCow.get((EntityCow) event.entityLiving);
 
             if (props.Embryo != null) {
 
@@ -83,7 +83,7 @@ public class FossilLivingEvent {
         }
 
         if (event.entityLiving instanceof EntityPig) {
-            PregnantPigEntity props = PregnantPigEntity.get((EntityPig) event.entityLiving);
+            EntityPregnantPig props = EntityPregnantPig.get((EntityPig) event.entityLiving);
 
             if (props.Embryo != null) {
                 ++props.EmbryoProgress;
@@ -99,7 +99,7 @@ public class FossilLivingEvent {
         }
 
         if (event.entityLiving instanceof EntitySheep) {
-            PregnantSheepEntity props = PregnantSheepEntity.get((EntitySheep) event.entityLiving);
+            EntityPregnantSheep props = EntityPregnantSheep.get((EntitySheep) event.entityLiving);
 
             if (props.Embryo != null) {
                 ++props.EmbryoProgress;
@@ -163,32 +163,32 @@ public class FossilLivingEvent {
                 break;
 
             case Smilodon:
-                birthEntity = new SmilodonEntity(event.entityLiving.worldObj);
+                birthEntity = new EntitySmilodon(event.entityLiving.worldObj);
                 if (new Random().nextInt(5) == 0) {
-                    // ((SmilodonEntity) birthEntity).setSkin(1);
+                    // ((EntitySmilodon) birthEntity).setSkin(1);
                 }
                 break;
 
             case Mammoth:
-                birthEntity = (new MammothEntity(event.entityLiving.worldObj));
-                ((NewPrehistoricEntity) birthEntity).func_152114_e(event.entityLiving.worldObj.getClosestPlayerToEntity(((NewPrehistoricEntity) birthEntity), 8));
+                birthEntity = (new EntityMammoth(event.entityLiving.worldObj));
+                ((EntityNewPrehistoric) birthEntity).func_152114_e(event.entityLiving.worldObj.getClosestPlayerToEntity(((EntityNewPrehistoric) birthEntity), 8));
                 if (new Random().nextInt(5) == 0) {
-                    // ((MammothEntity) birthEntity).setSkin(2);
+                    // ((EntityMammoth) birthEntity).setSkin(2);
                 }
                 break;
 
             case Elasmotherium:
-                birthEntity = (new ElasmotheriumEntity(event.entityLiving.worldObj));
-                ((NewPrehistoricEntity) birthEntity).func_152114_e(event.entityLiving.worldObj.getClosestPlayerToEntity(((NewPrehistoricEntity) birthEntity), 8));
+                birthEntity = (new EntityElasmotherium(event.entityLiving.worldObj));
+                ((EntityNewPrehistoric) birthEntity).func_152114_e(event.entityLiving.worldObj.getClosestPlayerToEntity(((EntityNewPrehistoric) birthEntity), 8));
                 break;
 
             case Quagga:
-                birthEntity = new QuaggaEntity(event.entityLiving.worldObj);
+                birthEntity = new EntityQuagga(event.entityLiving.worldObj);
 
-                int d0 = (int) (event.entityLiving.getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue() + ((QuaggaEntity) birthEntity).getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue() + (int) ((QuaggaEntity) birthEntity).randomHealthStat());
-                ((QuaggaEntity) birthEntity).getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(d0 / 3.0D);
-                double d2 = event.entityLiving.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getBaseValue() + ((QuaggaEntity) birthEntity).getEntityAttribute(SharedMonsterAttributes.movementSpeed).getBaseValue() + ((QuaggaEntity) birthEntity).randomSpeedStat();
-                ((QuaggaEntity) birthEntity).getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(d2 / 3.0D);
+                int d0 = (int) (event.entityLiving.getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue() + ((EntityQuagga) birthEntity).getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue() + (int) ((EntityQuagga) birthEntity).randomHealthStat());
+                ((EntityQuagga) birthEntity).getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(d0 / 3.0D);
+                double d2 = event.entityLiving.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getBaseValue() + ((EntityQuagga) birthEntity).getEntityAttribute(SharedMonsterAttributes.movementSpeed).getBaseValue() + ((EntityQuagga) birthEntity).randomSpeedStat();
+                ((EntityQuagga) birthEntity).getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(d2 / 3.0D);
                 break;
 
             default:

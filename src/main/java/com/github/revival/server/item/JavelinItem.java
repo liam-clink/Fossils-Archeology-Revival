@@ -1,7 +1,7 @@
 package com.github.revival.server.item;
 
-import com.github.revival.server.entity.AncientJavelinEntity;
-import com.github.revival.server.entity.JavelinEntity;
+import com.github.revival.server.entity.EntityAncientJavelin;
+import com.github.revival.server.entity.EntityJavelin;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -63,29 +63,29 @@ public class JavelinItem extends Item {
 
             if (this != FAItemRegistry.ancientJavelin) //!this.isAncient)
             {
-                var8 = new JavelinEntity(var2, var3, var7 * 2.0F, this.SelfMaterial, var1.getMaxDamage() - (var1.getItemDamage() + 1));
+                var8 = new EntityJavelin(var2, var3, var7 * 2.0F, this.SelfMaterial, var1.getMaxDamage() - (var1.getItemDamage() + 1));
             } else {
-                var8 = new AncientJavelinEntity(var2, var3, var7 * 2.0F, this.SelfMaterial, var1.getMaxDamage() - (var1.getItemDamage() + 1));
+                var8 = new EntityAncientJavelin(var2, var3, var7 * 2.0F, this.SelfMaterial, var1.getMaxDamage() - (var1.getItemDamage() + 1));
             }
 
             if (var7 == 1.0F) {
-                ((JavelinEntity) var8).arrowCritical = true;
+                ((EntityJavelin) var8).arrowCritical = true;
             }
 
             int var9 = EnchantmentHelper.getEnchantmentLevel(Enchantment.power.effectId, var1);
 
             if (var9 > 0) {
-                ((JavelinEntity) var8).setDamage(((JavelinEntity) var8).getDamage() + (double) var9 * 0.5D + 0.5D);
+                ((EntityJavelin) var8).setDamage(((EntityJavelin) var8).getDamage() + (double) var9 * 0.5D + 0.5D);
             }
 
             int var10 = EnchantmentHelper.getEnchantmentLevel(Enchantment.punch.effectId, var1);
 
             if (var10 > 0) {
-                ((JavelinEntity) var8).setKnockbackStrength(var10);
+                ((EntityJavelin) var8).setKnockbackStrength(var10);
             }
 
             if (EnchantmentHelper.getEnchantmentLevel(Enchantment.flame.effectId, var1) > 0) {
-                ((JavelinEntity) var8).setFire(100);
+                ((EntityJavelin) var8).setFire(100);
             }
 
             var2.playSoundAtEntity(var3, "random.bow", 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + var7 * 0.5F);
@@ -93,7 +93,7 @@ public class JavelinItem extends Item {
             if (!var5) {
                 var3.inventory.consumeInventoryItem(this);
             } else {
-                ((JavelinEntity) var8).canBePickedUp = 2;
+                ((EntityJavelin) var8).canBePickedUp = 2;
             }
 
             if (!var2.isRemote) {

@@ -1,46 +1,60 @@
 package com.github.revival.server.entity.ai;
 
-import com.github.revival.server.entity.mob.test.NewPrehistoricEntity;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.util.MathHelper;
 
-public class DinoAILeapAtTarget extends EntityAIBase {
-    NewPrehistoricEntity dino;
-    EntityLivingBase leapTarget;
+import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 
-    public DinoAILeapAtTarget(NewPrehistoricEntity dino) {
-        this.dino = dino;
-        this.setMutexBits(5);
-    }
+public class DinoAILeapAtTarget extends EntityAIBase
+{
+	EntityNewPrehistoric dino;
+	EntityLivingBase leapTarget;
 
-    public boolean shouldExecute() {
-        this.leapTarget = this.dino.getAttackTarget();
+	public DinoAILeapAtTarget(EntityNewPrehistoric dino)
+	{
+		this.dino = dino;
+		this.setMutexBits(5);
+	}
 
-        if (dino.getAnimation() == dino.animation_attack) {
-            return false;
-        }
-        if (dino.isSitting()) {
-            return false;
-        }
-        if (dino.ridingEntity != null) {
-            return false;
-        }
-        if (this.leapTarget == null) {
-            return false;
-        } else {
-            double d0 = this.dino.getDistanceSqToEntity(this.leapTarget);
-            return d0 >= 4.0D && d0 <= 16.0D ? (!this.dino.onGround ? false : this.dino.getRNG().nextInt(5) == 0) : false;
-        }
-    }
+	public boolean shouldExecute()
+	{
+		this.leapTarget = this.dino.getAttackTarget();
 
-    public boolean continueExecuting() {
-        return !this.dino.onGround;
-    }
+		if(dino.getAnimation() == dino.animation_attack)
+		{
+			return false;
+		}
+		if(dino.isSitting())
+		{
+			return false;
+		}
+		if(dino.ridingEntity != null)
+		{
+			return false;
+		}
+		if (this.leapTarget == null)
+		{
+			return false;
+		}
+		else
+		{
+			double d0 = this.dino.getDistanceSqToEntity(this.leapTarget);
+			return d0 >= 4.0D && d0 <= 16.0D ? (!this.dino.onGround ? false : this.dino.getRNG().nextInt(5) == 0) : false;
+		}
+	}
 
-    public void startExecuting() {
-        if (dino.getAnimation() != dino.animation_attack) {
-            dino.setAnimation(dino.animation_attack);
-        }
-    }
+	public boolean continueExecuting()
+	{
+		return !this.dino.onGround;
+	}
+
+	public void startExecuting()
+	{
+		if(dino.getAnimation() != dino.animation_attack){
+			dino.setAnimation(dino.animation_attack);
+		}
+	}
 
 }

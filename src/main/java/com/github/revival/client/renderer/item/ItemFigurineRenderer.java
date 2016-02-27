@@ -1,7 +1,7 @@
 package com.github.revival.client.renderer.item;
 
-import com.github.revival.client.model.FigurineModel;
-import com.github.revival.client.model.FigurineBrokenModel;
+import com.github.revival.client.model.ModelFigurine;
+import com.github.revival.client.model.ModelFigurineBroken;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
@@ -30,12 +30,12 @@ public class ItemFigurineRenderer implements IItemRenderer {
     private static final ResourceLocation broken_enderman = new ResourceLocation("fossil:textures/blocks/figurines/figurine_enderman_broken.png");
     private static final ResourceLocation broken_zombiepig = new ResourceLocation("fossil:textures/blocks/figurines/figurine_pigzombie_broken.png");
     private static final ResourceLocation mysterious = new ResourceLocation("fossil:textures/blocks/figurines/figurine_mysterious.png");
-    private static FigurineModel modelfigurine;
-    private static FigurineBrokenModel modelbroken;
+    private static ModelFigurine modelfigurine;
+    private static ModelFigurineBroken modelbroken;
 
     public ItemFigurineRenderer() {
-        modelfigurine = new FigurineModel();
-        modelbroken = new FigurineBrokenModel();
+        modelfigurine = new ModelFigurine();
+        modelbroken = new ModelFigurineBroken();
 
     }
 

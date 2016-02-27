@@ -1,7 +1,7 @@
 package com.github.revival.server.entity.ai;
 
 import com.github.revival.server.config.FossilConfig;
-import com.github.revival.server.entity.mob.DinosaurEntity;
+import com.github.revival.server.entity.mob.EntityDinosaur;
 import com.github.revival.server.enums.EnumOrderType;
 import com.github.revival.server.enums.EnumSituation;
 import net.minecraft.entity.ai.EntityAIBase;
@@ -9,9 +9,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 
 public class DinoAIStarvation extends EntityAIBase {
-    DinosaurEntity mover = null;
+    EntityDinosaur mover = null;
 
-    public DinoAIStarvation(DinosaurEntity var1) {
+    public DinoAIStarvation(EntityDinosaur var1) {
         this.mover = var1;
     }
 

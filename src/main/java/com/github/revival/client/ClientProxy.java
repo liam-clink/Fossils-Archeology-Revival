@@ -1,12 +1,12 @@
 package com.github.revival.client;
 
 import com.github.revival.Revival;
-import com.github.revival.client.model.DeadAnuModel;
-import com.github.revival.client.model.FailuresaurusModel;
-import com.github.revival.client.model.PigBossModel;
-import com.github.revival.client.model.armor.AncientHelmetModel;
+import com.github.revival.client.model.ModelDeadAnu;
+import com.github.revival.client.model.ModelFailuresaurus;
+import com.github.revival.client.model.ModelPigBoss;
+import com.github.revival.client.model.armor.ModelAncientHelmet;
 import com.github.revival.client.model.prehistoric.*;
-import com.github.revival.client.model.prehistoric.alternate.FlyingConfuciusornisModel;
+import com.github.revival.client.model.prehistoric.alternate.ModelFlyingConfuciusornis;
 import com.github.revival.client.renderer.entity.*;
 import com.github.revival.client.renderer.item.*;
 import com.github.revival.client.renderer.particle.DeathOrbFX;
@@ -41,55 +41,55 @@ import net.minecraftforge.common.MinecraftForge;
 
 
 public class ClientProxy extends ServerProxy {
-    private static final AncientHelmetModel helmetModel = new AncientHelmetModel(1.0f);
+    private static final ModelAncientHelmet helmetModel = new ModelAncientHelmet(1.0f);
     // private JsonTabulaModel velociraptor = ModelHelper.parseModelFromJson(Revival.class.getResourceAsStream("/assets/fossil/models/Velociraptor.json"));
 
     public void init() {
         super.init();
-        RenderingRegistry.registerEntityRenderingHandler(TriceratopsEntity.class, new PrehistoricRenderer(new TriceratopsModel()));
-        RenderingRegistry.registerEntityRenderingHandler(VelociraptorEntity.class, new PrehistoricRenderer(new VelociraptorModel()));
-        RenderingRegistry.registerEntityRenderingHandler(TyrannosaurusEntity.class, new PrehistoricRenderer(new TyrannosaurusModel()));
-        RenderingRegistry.registerEntityRenderingHandler(PterosaurEntity.class, new PrehistoricRenderer(new PteranodonModel()));
-        RenderingRegistry.registerEntityRenderingHandler(NautilusEntity.class, new FishRenderer(new NautilusModel()));
-        RenderingRegistry.registerEntityRenderingHandler(PlesiosaurusEntity.class, new PrehistoricRenderer(new PlesiosaurusModel()));
-        RenderingRegistry.registerEntityRenderingHandler(MosasaurusEntity.class, new PrehistoricRenderer(new MosasaurusModel()));
-        RenderingRegistry.registerEntityRenderingHandler(StegosaurusEntity.class, new PrehistoricRenderer(new StegosaurusModel()));
-        RenderingRegistry.registerEntityRenderingHandler(DilophosaurusEntity.class, new PrehistoricRenderer(new DilophosaurusModel()));
-        RenderingRegistry.registerEntityRenderingHandler(SmilodonEntity.class, new PrehistoricRenderer(new SmilodonModel()));
-        RenderingRegistry.registerEntityRenderingHandler(BrachiosaurusEntity.class, new PrehistoricRenderer(new BrachiosaurusModel()));
-        RenderingRegistry.registerEntityRenderingHandler(MammothEntity.class, new PrehistoricRenderer(new MammothModel()));
-        RenderingRegistry.registerEntityRenderingHandler(SpinosaurusEntity.class, new PrehistoricRenderer(new SpinosaurusModel()));
-        RenderingRegistry.registerEntityRenderingHandler(CompsognathusEntity.class, new GlowingPrehistoricRenderer(new CompsognathusModel(), new ResourceLocation("fossil:textures/mob/compsognathus/compsognathus_overlay.png")));
-        RenderingRegistry.registerEntityRenderingHandler(DodoEntity.class, new PrehistoricRenderer(new DodoModel()));
-        RenderingRegistry.registerEntityRenderingHandler(AnkylosaurusEntity.class, new PrehistoricRenderer(new AnkylosaurusModel()));
-        RenderingRegistry.registerEntityRenderingHandler(PachycephalosaurusEntity.class, new PrehistoricRenderer(new PachycephalosaurusModel()));
-        RenderingRegistry.registerEntityRenderingHandler(DeinonychusEntity.class, new PrehistoricRenderer(new DeinonychusModel()));
-        RenderingRegistry.registerEntityRenderingHandler(GallimimusEntity.class, new PrehistoricRenderer(new GallimimusModel()));
-        RenderingRegistry.registerEntityRenderingHandler(SarcosuchusEntity.class, new PrehistoricRenderer(new SarcosuchusModel()));
-        RenderingRegistry.registerEntityRenderingHandler(AllosaurusEntity.class, new PrehistoricRenderer(new AllosaurusModel()));
-        RenderingRegistry.registerEntityRenderingHandler(CoelacanthEntity.class, new FishRenderer(new CoelacanthModel()));
-        RenderingRegistry.registerEntityRenderingHandler(LiopleurodonEntity.class, new PrehistoricRenderer(new LiopleurodonModel()));
-        RenderingRegistry.registerEntityRenderingHandler(ElasmotheriumEntity.class, new PrehistoricRenderer(new ElasmotheriumModel()));
-        RenderingRegistry.registerEntityRenderingHandler(CeratosaurusEntity.class, new PrehistoricRenderer(new CeratosaurusModel()));
-        RenderingRegistry.registerEntityRenderingHandler(ConfuciusornisEntity.class, new FlyingPrehistoricRenderer(new ConfuciusornisModel(), new FlyingConfuciusornisModel()));
+        RenderingRegistry.registerEntityRenderingHandler(EntityTriceratops.class, new RenderPrehistoric(new ModelTriceratops()));
+        RenderingRegistry.registerEntityRenderingHandler(EntityVelociraptor.class, new RenderPrehistoric(new ModelVelociraptor()));
+        RenderingRegistry.registerEntityRenderingHandler(EntityTyrannosaurus.class, new RenderPrehistoric(new ModelTyrannosaurus()));
+        RenderingRegistry.registerEntityRenderingHandler(EntityPterosaur.class, new RenderPrehistoric(new ModelPteranodon()));
+        RenderingRegistry.registerEntityRenderingHandler(EntityNautilus.class, new RenderFish(new ModelNautilus()));
+        RenderingRegistry.registerEntityRenderingHandler(EntityPlesiosaurus.class, new RenderPrehistoric(new ModelPlesiosaurus()));
+        RenderingRegistry.registerEntityRenderingHandler(EntityMosasaurus.class, new RenderPrehistoric(new ModelMosasaurus()));
+        RenderingRegistry.registerEntityRenderingHandler(EntityStegosaurus.class, new RenderPrehistoric(new ModelStegosaurus()));
+        RenderingRegistry.registerEntityRenderingHandler(EntityDilophosaurus.class, new RenderPrehistoric(new ModelDilophosaurus()));
+        RenderingRegistry.registerEntityRenderingHandler(EntitySmilodon.class, new RenderPrehistoric(new ModelSmilodon()));
+        RenderingRegistry.registerEntityRenderingHandler(EntityBrachiosaurus.class, new RenderPrehistoric(new ModelBrachiosaurus()));
+        RenderingRegistry.registerEntityRenderingHandler(EntityMammoth.class, new RenderPrehistoric(new ModelMammoth()));
+        RenderingRegistry.registerEntityRenderingHandler(EntitySpinosaurus.class, new RenderPrehistoric(new ModelSpinosaurus()));
+        RenderingRegistry.registerEntityRenderingHandler(EntityCompsognathus.class, new RenderGlowingPrehistoric(new ModelCompsognathus(), new ResourceLocation("fossil:textures/mob/compsognathus/compsognathus_overlay.png")));
+        RenderingRegistry.registerEntityRenderingHandler(EntityDodo.class, new RenderPrehistoric(new ModelDodo()));
+        RenderingRegistry.registerEntityRenderingHandler(EntityAnkylosaurus.class, new RenderPrehistoric(new ModelAnkylosaurus()));
+        RenderingRegistry.registerEntityRenderingHandler(EntityPachycephalosaurus.class, new RenderPrehistoric(new ModelPachycephalosaurus()));
+        RenderingRegistry.registerEntityRenderingHandler(EntityDeinonychus.class, new RenderPrehistoric(new ModelDeinonychus()));
+        RenderingRegistry.registerEntityRenderingHandler(EntityGallimimus.class, new RenderPrehistoric(new ModelGallimimus()));
+        RenderingRegistry.registerEntityRenderingHandler(EntitySarcosuchus.class, new RenderPrehistoric(new ModelSarcosuchus()));
+        RenderingRegistry.registerEntityRenderingHandler(EntityAllosaurus.class, new RenderPrehistoric(new ModelAllosaurus()));
+        RenderingRegistry.registerEntityRenderingHandler(EntityCoelacanth.class, new RenderFish(new ModelCoelacanth()));
+        RenderingRegistry.registerEntityRenderingHandler(EntityLiopleurodon.class, new RenderPrehistoric(new ModelLiopleurodon()));
+        RenderingRegistry.registerEntityRenderingHandler(EntityElasmotherium.class, new RenderPrehistoric(new ModelElasmotherium()));
+        RenderingRegistry.registerEntityRenderingHandler(EntityCeratosaurus.class, new RenderPrehistoric(new ModelCeratosaurus()));
+        RenderingRegistry.registerEntityRenderingHandler(EntityConfuciusornis.class, new RenderFlyingPrehistoric(new ModelConfuciusornis(), new ModelFlyingConfuciusornis()));
 
 
-        RenderingRegistry.registerEntityRenderingHandler(StoneboardEntity.class, new StoneboardRenderer());
-        RenderingRegistry.registerEntityRenderingHandler(FailuresaurusEntity.class, new FailuresaurusRenderer(new FailuresaurusModel(), 0.5F));
-        RenderingRegistry.registerEntityRenderingHandler(AnuEntity.class, new PigBossRenderer(new PigBossModel(), 0.5F));
-        RenderingRegistry.registerEntityRenderingHandler(FriendlyPigZombieEntity.class, new FPZRenderer());
-        RenderingRegistry.registerEntityRenderingHandler(DinoEggEntity.class, new DinoEggRenderer(1.5F));
-        RenderingRegistry.registerEntityRenderingHandler(JavelinEntity.class, new JavelinRenderer());
-        RenderingRegistry.registerEntityRenderingHandler(AncientJavelinEntity.class, new JavelinRenderer());
-        RenderingRegistry.registerEntityRenderingHandler(BonesEntity.class, new BonesRenderer());
-        RenderingRegistry.registerEntityRenderingHandler(AnuEffectEntity.class, new AnuEffectRenderer());
-        RenderingRegistry.registerEntityRenderingHandler(AnubiteEntity.class, new AnubiteRenderer());
-        RenderingRegistry.registerEntityRenderingHandler(SentryPigmanEntity.class, new SentryPigmanRenderer());
-        RenderingRegistry.registerEntityRenderingHandler(AnuDeadEntity.class, new DeadAnuRenderer(new DeadAnuModel(), 0.3F));
-        RenderingRegistry.registerEntityRenderingHandler(EntityBirdEgg.class, new BirdEggRenderer());
-        RenderingRegistry.registerEntityRenderingHandler(TarSlimeEntity.class, new TarSlimeRenderer());
-        RenderingRegistry.registerEntityRenderingHandler(QuaggaEntity.class, new QuaggaRenderer(new QuaggaModel(), 0.5F));
-        RenderingRegistry.registerEntityRenderingHandler(TerrorBirdEntity.class, new TerrorBirdRenderer(new TerrorBirdModel(), 0.5F));
+        RenderingRegistry.registerEntityRenderingHandler(EntityStoneboard.class, new RenderStoneboard());
+        RenderingRegistry.registerEntityRenderingHandler(EntityFailuresaurus.class, new RenderFailuresaurus(new ModelFailuresaurus(), 0.5F));
+        RenderingRegistry.registerEntityRenderingHandler(EntityAnu.class, new RenderPigBoss(new ModelPigBoss(), 0.5F));
+        RenderingRegistry.registerEntityRenderingHandler(EntityFriendlyPigZombie.class, new RenderFPZ());
+        RenderingRegistry.registerEntityRenderingHandler(EntityDinoEgg.class, new RenderDinoEgg(1.5F));
+        RenderingRegistry.registerEntityRenderingHandler(EntityJavelin.class, new RenderJavelin());
+        RenderingRegistry.registerEntityRenderingHandler(EntityAncientJavelin.class, new RenderJavelin());
+        RenderingRegistry.registerEntityRenderingHandler(EntityBones.class, new RenderBones());
+        RenderingRegistry.registerEntityRenderingHandler(EntityAnuEffect.class, new RenderAnuEffect());
+        RenderingRegistry.registerEntityRenderingHandler(EntityAnubite.class, new RenderAnubite());
+        RenderingRegistry.registerEntityRenderingHandler(EntitySentryPigman.class, new RenderSentryPigman());
+        RenderingRegistry.registerEntityRenderingHandler(EntityAnuDead.class, new RenderDeadAnu(new ModelDeadAnu(), 0.3F));
+        RenderingRegistry.registerEntityRenderingHandler(EntityBirdEgg.class, new RenderBirdEgg());
+        RenderingRegistry.registerEntityRenderingHandler(EntityTarSlime.class, new RenderTarSlime());
+        RenderingRegistry.registerEntityRenderingHandler(EntityQuagga.class, new RenderQuagga(new ModelQuagga(), 0.5F));
+        RenderingRegistry.registerEntityRenderingHandler(EntityTerrorBird.class, new RenderTerrorBird(new ModelTerrorBird(), 0.5F));
 
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(FABlockRegistry.figurineBlock), new ItemFigurineRenderer());
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(FABlockRegistry.vaseVoluteBlock), new ItemVaseVoluteRenderer());
@@ -97,7 +97,7 @@ public class ClientProxy extends ServerProxy {
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(FABlockRegistry.vaseKylixBlock), new ItemVaseKylixRenderer());
         MinecraftForgeClient.registerItemRenderer(FAItemRegistry.ancientClock, new ItemAncientClocRender());
 
-        RenderingRegistry.registerBlockHandler(Revival.feederRenderID, new FeederRenderer());
+        RenderingRegistry.registerBlockHandler(Revival.feederRenderID, new RenderFeeder());
 
         VillagerRegistry.instance().registerVillagerSkin(10, new ResourceLocation("fossil:textures/model/Archaeologist.png"));
 
@@ -105,32 +105,32 @@ public class ClientProxy extends ServerProxy {
             MinecraftForge.EVENT_BUS.register(new EventOverlay(Minecraft.getMinecraft()));
         }
 
-        TileEntitySpecialRenderer cultivate = new CultivateSpecialRenderer();
-        ClientRegistry.bindTileEntitySpecialRenderer(CultivateTile.class, cultivate);
-        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(FABlockRegistry.blockcultivateActive), new ItemRenderTileEntity(cultivate, new CultivateTile()));
-        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(FABlockRegistry.blockcultivateIdle), new ItemRenderTileEntity(cultivate, new CultivateTile()));
+        TileEntitySpecialRenderer cultivate = new TileEntityCultivateRenderer();
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCultivate.class, cultivate);
+        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(FABlockRegistry.blockcultivateActive), new ItemRenderTileEntity(cultivate, new TileEntityCultivate()));
+        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(FABlockRegistry.blockcultivateIdle), new ItemRenderTileEntity(cultivate, new TileEntityCultivate()));
 
-        TileEntitySpecialRenderer ancChest = new AncientChestSpecialRenderer();
-        ClientRegistry.bindTileEntitySpecialRenderer(AncientChestTile.class, ancChest);
-        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(FABlockRegistry.ancientChest), new ItemRenderTileEntity(ancChest, new AncientChestTile()));
+        TileEntitySpecialRenderer ancChest = new TileEntityAncientChestRender();
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAncientChest.class, ancChest);
+        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(FABlockRegistry.ancientChest), new ItemRenderTileEntity(ancChest, new TileEntityAncientChest()));
 
-        TileEntitySpecialRenderer totem = new AnuTotemSpecialRenderer();
-        ClientRegistry.bindTileEntitySpecialRenderer(AnuTotemTile.class, totem);
-        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(FABlockRegistry.anuTotem), new ItemRenderAnuTotem(totem, new AnuTotemTile()));
+        TileEntitySpecialRenderer totem = new TileEntityAnuTotemRender();
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAnuTotem.class, totem);
+        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(FABlockRegistry.anuTotem), new ItemRenderAnuTotem(totem, new TileEntityAnuTotem()));
 
-        TileEntitySpecialRenderer anubite = new AnubiteStatueSpecialRenderer();
-        ClientRegistry.bindTileEntitySpecialRenderer(AnubiteStatueTile.class, anubite);
-        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(FABlockRegistry.anubiteStatue), new ItemRenderAnubite(anubite, new AnubiteStatueTile()));
+        TileEntitySpecialRenderer anubite = new TileEntityAnubiteStatueRender();
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAnubiteStatue.class, anubite);
+        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(FABlockRegistry.anubiteStatue), new ItemRenderAnubite(anubite, new TileEntityAnubiteStatue()));
 
-        TileEntitySpecialRenderer sarcophagus = new SarcophagusSpecialRenderer();
-        ClientRegistry.bindTileEntitySpecialRenderer(SarcophagusTile.class, sarcophagus);
-        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(FABlockRegistry.sarcophagus), new ItemRenderSarcophagus(sarcophagus, new SarcophagusTile()));
+        TileEntitySpecialRenderer sarcophagus = new TileEntitySarcophagusRender();
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySarcophagus.class, sarcophagus);
+        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(FABlockRegistry.sarcophagus), new ItemRenderSarcophagus(sarcophagus, new TileEntitySarcophagus()));
 
-        ClientRegistry.bindTileEntitySpecialRenderer(TimeMachineTile.class, new TNClockSpecialRenderer());
-        ClientRegistry.bindTileEntitySpecialRenderer(FigurineTile.class, new FigurineSpecialRenderer());
-        ClientRegistry.bindTileEntitySpecialRenderer(VaseTile.class, new VaseSpecialRenderer());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTimeMachine.class, new RenderTNClock());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFigurine.class, new TileEntityFigurineRenderer());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityVase.class, new TileEntityVaseRenderer());
 
-        MinecraftForge.EVENT_BUS.register(new PlayerCapesRenderer());
+        MinecraftForge.EVENT_BUS.register(new RenderPlayerCapes());
         MinecraftForge.EVENT_BUS.register(new EventNewMenu());
     }
 

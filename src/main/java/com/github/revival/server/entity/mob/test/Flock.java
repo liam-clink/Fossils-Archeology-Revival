@@ -1,6 +1,6 @@
 package com.github.revival.server.entity.mob.test;
 
-import com.github.revival.server.entity.mob.PrehistoricEntity;
+import com.github.revival.server.entity.mob.EntityPrehistoric;
 import com.github.revival.server.enums.EnumPrehistoric;
 import net.minecraft.command.IEntitySelector;
 import net.minecraft.entity.Entity;
@@ -16,8 +16,8 @@ import java.util.Random;
 
 public class Flock {
     public float flockYaw;
-    public List<PrehistoricEntity> flockMembers = new ArrayList<PrehistoricEntity>();
-    public PrehistoricEntity flockLeader;
+    public List<EntityPrehistoric> flockMembers = new ArrayList<EntityPrehistoric>();
+    public EntityPrehistoric flockLeader;
     public EnumPrehistoric type;
     private double flockPosX;
     private double flockPosY;
@@ -36,7 +36,7 @@ public class Flock {
         return ii;
     }
 
-    public void createFlock(PrehistoricEntity creator) {
+    public void createFlock(EntityPrehistoric creator) {
         flockMembers.add(creator);
         flockLeader = creator;
         flockPosX = creator.posX;
@@ -54,7 +54,7 @@ public class Flock {
             flockYaw = flockLeader.rotationYaw;
         }
         for (int i = 0; i < flockMembers.size(); i++) {
-            PrehistoricEntity member = ((PrehistoricEntity) flockMembers.toArray()[i]);
+            EntityPrehistoric member = ((EntityPrehistoric) flockMembers.toArray()[i]);
             if (member != null) {
                 if (flockLeader != null) {
                     //member.getNavigator().tryMoveToEntityLiving(flockLeader, 0.7);
@@ -89,12 +89,12 @@ public class Flock {
         }
     }
 
-    public PrehistoricEntity closestEntity() {
+    public EntityPrehistoric closestEntity() {
         IEntitySelector selector = IEntitySelector.selectAnything;
         List<Entity> entities = flockLeader.worldObj.getEntitiesWithinAABBExcludingEntity(flockLeader, flockLeader.boundingBox.expand((double) 12, 3.0D, (double) 12), selector);
         for (Entity mob : entities) {
-            if (mob instanceof PrehistoricEntity) {
-                return (PrehistoricEntity) mob;
+            if (mob instanceof EntityPrehistoric) {
+                return (EntityPrehistoric) mob;
             }
         }
         return null;

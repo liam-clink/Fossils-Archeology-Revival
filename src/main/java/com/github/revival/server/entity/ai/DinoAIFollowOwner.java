@@ -1,6 +1,6 @@
 package com.github.revival.server.entity.ai;
 
-import com.github.revival.server.entity.mob.DinosaurEntity;
+import com.github.revival.server.entity.mob.EntityDinosaur;
 import com.github.revival.server.enums.EnumOrderType;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
@@ -12,14 +12,14 @@ public class DinoAIFollowOwner extends EntityAIBase {
     World theWorld;
     float maxDist;
     float minDist;
-    private DinosaurEntity DinoEntity;
+    private EntityDinosaur DinoEntity;
     private EntityLivingBase theOwner;
     private double speed;
     private PathNavigate petPathfinder;
     private int counter;
     private boolean avoidsWater;
 
-    public DinoAIFollowOwner(DinosaurEntity par1EntityTameable, double par2, float par4, float par5) {
+    public DinoAIFollowOwner(EntityDinosaur par1EntityTameable, double par2, float par4, float par5) {
         this.DinoEntity = par1EntityTameable;
         this.theWorld = par1EntityTameable.worldObj;
         this.speed = par2;

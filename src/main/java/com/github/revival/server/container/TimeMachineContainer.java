@@ -1,6 +1,6 @@
 package com.github.revival.server.container;
 
-import com.github.revival.server.block.entity.TimeMachineTile;
+import com.github.revival.server.block.entity.TileEntityTimeMachine;
 import com.github.revival.server.handler.FossilAchievementHandler;
 import com.github.revival.server.item.FAItemRegistry;
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,12 +10,12 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
 public class TimeMachineContainer extends Container {
-    private TimeMachineTile timeMachine;
+    private TileEntityTimeMachine timeMachine;
     private int lastCookTime = 0;
     private int lastBurnTime = 0;
     private int lastItemBurnTime = 0;
 
-    public TimeMachineContainer(InventoryPlayer var1, TimeMachineTile var2) {
+    public TimeMachineContainer(InventoryPlayer var1, TileEntityTimeMachine var2) {
         this.timeMachine = var2;
         int var3;
         int var4;
