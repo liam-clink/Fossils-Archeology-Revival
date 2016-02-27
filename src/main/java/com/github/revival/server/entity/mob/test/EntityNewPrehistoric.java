@@ -121,6 +121,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	public boolean clientSleeping;
 	public float sitProgress;
 	public int ticksSitted;
+	protected boolean isSitting;
 	protected boolean developsResistance;
 	protected boolean breaksBlocks;
 	private Animation currentAnimation;
@@ -270,6 +271,15 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
 	public EnumOrderType getOrderType() {
 		return this.currentOrder;
+	}
+
+	@Override
+	public boolean isMovementBlocked() {
+		return isSitting();
+	}
+
+	public boolean isSitting() {
+		return worldObj.isRemote ? (this.dataWatcher.getWatchableObjectByte(16) & 1) != 0 : isSitting;
 	}
 
 	public Vec3 getBlockToEat(int range) {
@@ -981,6 +991,10 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
 	public void setSitting(boolean sitting) {
 		super.setSitting(sitting);
+
+        if (!worldObj.isRemote) {
+            this.isSitting = sitting;
+        }
 	}
 
 	public boolean isSleeping() {
