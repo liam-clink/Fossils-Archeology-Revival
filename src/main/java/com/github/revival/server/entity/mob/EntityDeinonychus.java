@@ -1,10 +1,5 @@
 package com.github.revival.server.entity.mob;
 
-import com.github.revival.Revival;
-import com.github.revival.server.config.FossilConfig;
-import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
-import com.github.revival.server.enums.EnumPrehistoric;
-import com.github.revival.server.enums.EnumPrehistoricAI.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.init.Items;
@@ -12,6 +7,23 @@ import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+
+import com.github.revival.Revival;
+import com.github.revival.server.config.FossilConfig;
+import com.github.revival.server.entity.ai.DinoAILeapAtTarget;
+import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
+import com.github.revival.server.enums.EnumPrehistoric;
+import com.github.revival.server.enums.EnumPrehistoricAI.Activity;
+import com.github.revival.server.enums.EnumPrehistoricAI.Attacking;
+import com.github.revival.server.enums.EnumPrehistoricAI.Climbing;
+import com.github.revival.server.enums.EnumPrehistoricAI.Following;
+import com.github.revival.server.enums.EnumPrehistoricAI.Jumping;
+import com.github.revival.server.enums.EnumPrehistoricAI.Moving;
+import com.github.revival.server.enums.EnumPrehistoricAI.Response;
+import com.github.revival.server.enums.EnumPrehistoricAI.Stalking;
+import com.github.revival.server.enums.EnumPrehistoricAI.Taming;
+import com.github.revival.server.enums.EnumPrehistoricAI.Untaming;
+import com.github.revival.server.enums.EnumPrehistoricAI.WaterAbility;
 
 public class EntityDeinonychus extends EntityNewPrehistoric {
 
@@ -25,6 +37,7 @@ public class EntityDeinonychus extends EntityNewPrehistoric {
 
     public EntityDeinonychus(World world) {
         super(world, EnumPrehistoric.Deinonychus);
+        this.tasks.addTask(3, new DinoAILeapAtTarget(this));
         this.hasFeatherToggle = true;
         this.featherToggle = FossilConfig.featheredDeinonychus;
         this.setSize(1.8F, 1.25F);
@@ -35,14 +48,13 @@ public class EntityDeinonychus extends EntityNewPrehistoric {
         breaksBlocks = false;
         favoriteFood = Items.chicken;
     }
-
-    public static int getAttackLength() {
-        return 45;
+    @Override
+    public int getAttackLength() {
+        return 35;
     }
-
+    
     public void onUpdate() {
         super.onUpdate();
-        //Revival.proxy.doChainBuffer(tailbuffer, this);
     }
 
     @Override
@@ -167,35 +179,33 @@ public class EntityDeinonychus extends EntityNewPrehistoric {
 
     public void onLivingUpdate() {
         super.onLivingUpdate();
-        if (this.getAttackTarget() != null) {
-            double d_0 = this.getDistanceSqToEntity(this.getAttackTarget());
-            boolean b = d_0 >= 6.0D && d_0 <= 18.0D ? (!this.onGround ? false : this.getRNG().nextInt(5) == 0) : false;
-            if (b) {
-                double d0 = this.posX - this.posX;
-                double d1 = this.posZ - this.posZ;
-                float f = MathHelper.sqrt_double(d0 * d0 + d1 * d1);
-                this.motionX += d0 / (double) f * 0.1D * 0.800000011920929D + this.motionX * 0.20000000298023224D;
-                this.motionZ += d1 / (double) f * 0.1D * 0.800000011920929D + this.motionZ * 0.20000000298023224D;
-                this.motionY = 0.4;
-            }
-            if (this.ridingEntity != null) {
-                if (this.ridingEntity == this.getAttackTarget()) {
-                    if (this.ticksExisted % 20 == 0) {
-                        this.ridingEntity.attackEntityFrom(DamageSource.causeMobDamage(this), 0);
-                    }
-                }
-            }
+        System.out.println(this.getAnimationTick());
 
-        }
-
+		if(this.getAttackTarget() != null && this.getAnimation() == this.animation_attack && this.getAnimationTick() == 20 && this.onGround){
+    		double d0 = this.getAttackTarget().posX - this.posX;
+			double d1 = this.getAttackTarget().posZ - this.posZ;
+			float f = MathHelper.sqrt_double(d0 * d0 + d1 * d1);
+			this.motionX += d0 / (double)f * 0.5D * 0.800000011920929D + this.motionX * 0.20000000298023224D;
+			this.motionZ += d1 / (double)f * 0.5D * 0.800000011920929D + this.motionZ * 0.20000000298023224D;
+			this.getLookHelper().setLookPositionWithEntity(this.getAttackTarget(), 10, 12);
+			this.motionY = (double)0.4;
+    	}
     }
 
     public boolean attackEntityAsMob(Entity entity) {
-        double d_0 = this.getDistanceSqToEntity(entity);
-        boolean b = d_0 >= 1.0D && d_0 <= 2.0D ? (!this.onGround ? false : this.getRNG().nextInt(5) == 0) : false;
-        if (b && this.ridingEntity != entity) {
-            this.mountEntity(entity);
-        }
+    	if(this.ridingEntity == entity && this.ticksExisted % 20 == 0){
+            entity.attackEntityFrom(DamageSource.causeMobDamage(this), 0.3F);
+		}
         return false;
     }
+    
+    public void applyEntityCollision(Entity entity){
+    	super.applyEntityCollision(entity);
+    	if(this.getAttackTarget() != null){
+    		if(this.getAttackTarget() == entity && this.getAnimation() == this.animation_attack && !onGround && this.ridingEntity != entity){
+                this.mountEntity(entity);
+    		}
+    	}
+    }
+
 }

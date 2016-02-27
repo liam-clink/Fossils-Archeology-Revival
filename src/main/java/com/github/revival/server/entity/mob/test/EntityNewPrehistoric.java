@@ -73,8 +73,8 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
     protected static final ResourceLocation pediaclock = new ResourceLocation("fossil:textures/gui/PediaClock.png");
     protected static final ResourceLocation pediafood = new ResourceLocation("fossil:textures/gui/PediaFood.png");
     protected static final ResourceLocation pediaheart = new ResourceLocation("fossil:textures/gui/PediaHeart.png");
-    public static Animation animation_speak = new Animation(1, getSpeakLength());
-    public static Animation animation_attack = new Animation(2, getAttackLength());
+    public static Animation animation_speak = new Animation(1, 20);
+    public static Animation animation_attack = new Animation(2, 20);
     public float animation_frame;
     public float RiderStrafe = 0.0F;
     public float RiderForward = 0.0F;
@@ -113,6 +113,8 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
         this.updateSize();
         this.selfType = selfType;
         this.currentOrder = EnumOrderType.FreeMove;
+        animation_speak.duration = this.getSpeakLength();
+        animation_attack.duration = this.getAttackLength();
         this.tasks.addTask(0, new DinoAIAge(this));
         this.tasks.addTask(0, new DinoAIHunger(this));
         this.tasks.addTask(0, aiSit);
@@ -129,7 +131,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
         this.tasks.addTask(4, aiSit);
         this.tasks.addTask(5, new DinoAIFeeder(this, 48));
         this.tasks.addTask(5, new DinoAIWaterFeeder(this, 50, 0.0017D));
-        //this.tasks.addTask(6, new DinoAILookAtEntity(this, EntityLivingBase.class, 8));
+        this.tasks.addTask(6, new DinoAILookAtEntity(this, EntityLivingBase.class, 8));
         this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
         this.targetTasks.addTask(2, new DinoAIAgressive(this, EntityLivingBase.class, 1, true, this.isCannibal()));
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
@@ -141,11 +143,11 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
         return false;
     }
 
-    public static int getSpeakLength() {
+    public int getSpeakLength() {
         return 20;
     }
 
-    public static int getAttackLength() {
+    public int getAttackLength() {
         return 20;
     }
 
@@ -361,7 +363,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
             ticksSitted++;
         }
 
-        if (worldObj.isRemote && !this.isSitting() && this.getRNG().nextInt(400) == 1 && !this.isRiding()) {
+        if (worldObj.isRemote && !this.isSitting() && this.getRNG().nextInt(400) == 1 && !this.isRiding() && (this.getAnimation() == this.animation_none || this.getAnimation() == this.animation_speak)) {
             this.setSitting(true);
             ticksSitted = 0;
         }
@@ -952,7 +954,6 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
     }
 
     public void setSitting(boolean sitting) {
-        System.out.println(Thread.currentThread().getStackTrace()[2]);
         super.setSitting(sitting);
     }
 
