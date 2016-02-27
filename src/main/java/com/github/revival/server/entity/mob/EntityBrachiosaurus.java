@@ -146,6 +146,9 @@ public class EntityBrachiosaurus extends EntityNewPrehistoric {
     public int getAdultAge() {
         return 20;
     }
-
+    
+	public int getTailSegments() {
+		return 3;
+	}
 
 }

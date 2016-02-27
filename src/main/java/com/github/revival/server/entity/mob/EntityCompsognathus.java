@@ -161,4 +161,8 @@ public class EntityCompsognathus extends EntityNewPrehistoric {
             return "fossil:textures/blank.png";
         }
     }
+    
+	public int getTailSegments() {
+		return 2;
+	}
 }

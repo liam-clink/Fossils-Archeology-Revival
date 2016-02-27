@@ -204,6 +204,7 @@ public class ModelDilophosaurus extends ModelNewPrehistoric {
         sitAnimationPos(lowerBody, sitProgress, 0, 5.8F, 0);
         sitAnimationPos(leftThigh, sitProgress, 0, 5.8F, 0);
         sitAnimationPos(rightThigh, sitProgress, 0, 5.8F, 0);
+        ((EntityNewPrehistoric)entity).tailbuffer.applyChainSwingBuffer(tailParts);
     }
 
 

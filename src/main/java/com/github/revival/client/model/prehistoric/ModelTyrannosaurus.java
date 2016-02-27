@@ -293,8 +293,7 @@ public class ModelTyrannosaurus extends ModelNewPrehistoric {
         this.chainWave(rightArmParts, speed2, 0.05F, -3, entity.ticksExisted, 1);
         this.chainSwing(tailParts, speed2, 0.15F, -3, entity.ticksExisted, 1);
         this.chainWave(neckParts, speed2, 0.05F, -3, entity.ticksExisted, 1);
-
-        //((ChainBuffer)((EntityTyrannosaurus)entity).tailbuffer).applyChainSwingBuffer(tailParts);
+        ((EntityNewPrehistoric)entity).tailbuffer.applyChainSwingBuffer(tailParts);
     }
 
 

@@ -1,23 +1,15 @@
 package com.github.revival.server.entity.mob.test;
 
-import com.github.revival.Revival;
-import com.github.revival.client.gui.GuiPedia;
-import com.github.revival.server.util.FoodMappings;
-import com.github.revival.server.api.IPrehistoricAI;
-import com.github.revival.server.block.FABlockRegistry;
-import com.github.revival.server.block.entity.TileEntityFeeder;
-import com.github.revival.server.config.FossilConfig;
-import com.github.revival.server.enums.EnumAnimation;
-import com.github.revival.server.enums.EnumOrderType;
-import com.github.revival.server.enums.EnumPrehistoric;
-import com.github.revival.server.enums.EnumPrehistoricAI.*;
-import com.github.revival.server.enums.EnumSituation;
-import com.github.revival.server.handler.LocalizationStrings;
-import com.github.revival.server.item.FAItemRegistry;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.ilexiconn.llibrary.client.model.modelbase.ChainBuffer;
 import net.ilexiconn.llibrary.common.animation.Animation;
 import net.ilexiconn.llibrary.common.animation.IAnimated;
 import net.minecraft.block.Block;
@@ -26,7 +18,11 @@ import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.command.IEntitySelector;
-import net.minecraft.entity.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.IEntityLivingData;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
@@ -42,20 +38,45 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.*;
+import net.minecraft.util.ChunkCoordinates;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.MathHelper;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 
 import org.lwjgl.opengl.GL11;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import com.github.revival.Revival;
+import com.github.revival.client.gui.GuiPedia;
+import com.github.revival.server.api.IPrehistoricAI;
+import com.github.revival.server.block.FABlockRegistry;
+import com.github.revival.server.block.entity.TileEntityFeeder;
+import com.github.revival.server.config.FossilConfig;
+import com.github.revival.server.enums.EnumAnimation;
+import com.github.revival.server.enums.EnumOrderType;
+import com.github.revival.server.enums.EnumPrehistoric;
+import com.github.revival.server.enums.EnumPrehistoricAI.Activity;
+import com.github.revival.server.enums.EnumPrehistoricAI.Attacking;
+import com.github.revival.server.enums.EnumPrehistoricAI.Climbing;
+import com.github.revival.server.enums.EnumPrehistoricAI.Following;
+import com.github.revival.server.enums.EnumPrehistoricAI.Jumping;
+import com.github.revival.server.enums.EnumPrehistoricAI.Moving;
+import com.github.revival.server.enums.EnumPrehistoricAI.Response;
+import com.github.revival.server.enums.EnumPrehistoricAI.Stalking;
+import com.github.revival.server.enums.EnumPrehistoricAI.Taming;
+import com.github.revival.server.enums.EnumPrehistoricAI.Untaming;
+import com.github.revival.server.enums.EnumPrehistoricAI.WaterAbility;
+import com.github.revival.server.enums.EnumSituation;
+import com.github.revival.server.handler.LocalizationStrings;
+import com.github.revival.server.item.FAItemRegistry;
+import com.github.revival.server.util.FoodMappings;
+
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public abstract class EntityNewPrehistoric extends EntityTameable implements IPrehistoricAI, IAnimated {
 
@@ -104,7 +125,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	protected boolean breaksBlocks;
 	private Animation currentAnimation;
 	private int animTick;
-
+	public ChainBuffer tailbuffer;
 	public EntityNewPrehistoric(World world, EnumPrehistoric selfType) {
 		super(world);
 		this.updateSize();
@@ -134,6 +155,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
 		//this.targetTasks.addTask(2, new EntityAITargetNonTamed(this, EntityLivingBase.class, 200, false));
 		hasBabyTexture = true;
+		tailbuffer = new ChainBuffer(this.getTailSegments());
 	}
 
 	public static boolean isCannibal() {
@@ -363,12 +385,12 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 			ticksSitted++;
 		}
 
-		if (worldObj.isRemote && !this.isSitting() && this.getRNG().nextInt(400) == 1 && !this.isRiding() && (this.getAnimation() == this.animation_none || this.getAnimation() == this.animation_speak)) {
+		if (worldObj.isRemote && !this.isSitting() && this.getRNG().nextInt(1000) == 1 && !this.isRiding() && (this.getAnimation() == this.animation_none || this.getAnimation() == this.animation_speak)) {
 			this.setSitting(true);
 			ticksSitted = 0;
 		}
 
-		if (worldObj.isRemote && (this.isSitting() && ticksSitted > 100 && this.getRNG().nextInt(100) == 1 || this.getAttackTarget() != null)) {
+		if (worldObj.isRemote && (this.isSitting() && ticksSitted > 100 && this.getRNG().nextInt(1000) == 1 || this.getAttackTarget() != null)) {
 			this.setSitting(false);
 			ticksSitted = 0;
 		}
@@ -545,6 +567,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
 	public void onUpdate() {
 		super.onUpdate();
+		tailbuffer.calculateChainSwingBuffer(70, 40, 10, this);
 		this.updateSize();
 		if(this.ridingEntity != null){
 			if(this.ridingEntity.isDead){
@@ -1403,6 +1426,10 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
 	}
 
+	public int getTailSegments() {
+		return 3;
+	}
+	
 	@Override
 	public void updateRidden() {
 		super.updateRidden();

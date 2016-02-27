@@ -144,4 +144,7 @@ public class EntityPachycephalosaurus extends EntityNewPrehistoric {
         return 10;
     }
 
+	public int getTailSegments() {
+		return 3;
+	}
 }

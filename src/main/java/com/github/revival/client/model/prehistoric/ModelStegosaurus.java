@@ -199,6 +199,7 @@ public class ModelStegosaurus extends ModelPrehistoric {
         this.walk(rightFrontLeg, speed2, 0.6F, false, 0F, -0.4F, f, f1);
         this.walk(leftHindLeg, speed2, 0.6F, false, 0F, 0.4F, f, f1);
         this.walk(rightHindLeg, speed2, 0.6F, true, 0F, 0.4F, f, f1);
+        ((EntityNewPrehistoric)entity).tailbuffer.applyChainSwingBuffer(tailParts);
     }
 
 }

@@ -333,6 +333,6 @@ public class ModelDeinonychus extends ModelNewPrehistoric {
             this.flap(rightUpperArm, 0.8F, -0.4F, false, 0.3F, 0.2F, entity.ticksExisted, 1);
 
         }
-        //((ChainBuffer)((EntityDeinonychus)entity).tailbuffer).applyChainSwingBuffer(tailParts);
+        ((EntityNewPrehistoric)entity).tailbuffer.applyChainSwingBuffer(tailParts);
     }
 }

@@ -218,6 +218,6 @@ public class ModelPachycephalosaurus extends ModelNewPrehistoric {
         sitAnimationPos(lowerBody, sitProgress, 0, 4.1F, 0);
         sitAnimationPos(rightThigh, sitProgress, 0, 5F, 0);
         sitAnimationPos(leftThigh, sitProgress, 0, 5F, 0);
-
+        ((EntityNewPrehistoric)entity).tailbuffer.applyChainSwingBuffer(tailParts);
     }
 }

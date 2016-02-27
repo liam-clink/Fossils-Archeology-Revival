@@ -30,11 +30,6 @@ public class EntityAllosaurus extends EntityNewPrehistoric {
         necklength = 2;
     }
 
-    public void onUpdate() {
-        super.onUpdate();
-        //Revival.proxy.doChainBuffer(tailbuffer, this);
-    }
-
     public void updateSize() {
         double healthStep;
         double attackStep;
@@ -146,4 +141,7 @@ public class EntityAllosaurus extends EntityNewPrehistoric {
         return Items.bone;
     }
 
+	public int getTailSegments() {
+		return 3;
+	}
 }

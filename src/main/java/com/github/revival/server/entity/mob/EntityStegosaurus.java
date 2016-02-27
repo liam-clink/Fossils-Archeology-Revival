@@ -147,5 +147,8 @@ public class EntityStegosaurus extends EntityNewPrehistoric {
     public int getAdultAge() {
         return 12;
     }
-
+    
+	public int getTailSegments() {
+		return 3;
+	}
 }

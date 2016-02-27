@@ -194,5 +194,8 @@ public class EntityVelociraptor extends EntityNewPrehistoric {
     		}
     	}
     }
-
+    
+	public int getTailSegments() {
+		return 3;
+	}
 }

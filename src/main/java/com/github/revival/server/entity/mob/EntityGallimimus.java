@@ -364,5 +364,8 @@ public class EntityGallimimus extends EntityNewPrehistoric {
     public int getAdultAge() {
         return 10;
     }
-
+    
+	public int getTailSegments() {
+		return 3;
+	}
 }

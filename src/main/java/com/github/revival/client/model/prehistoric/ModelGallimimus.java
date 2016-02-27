@@ -228,8 +228,7 @@ public class ModelGallimimus extends ModelNewPrehistoric {
         this.chainSwing(tailParts, speed2, 0.25F, -3, f, f1);
         this.chainWave(neckParts, speed, 0.05F, 3, entity.ticksExisted, 1);
         this.chainWave(neckParts, speed, 0.15F, 3, f, f1);
-        //((ChainBuffer)((EntityGallimimus)entity).tailbuffer).applyChainSwingBuffer(tailParts);
-
+        ((EntityNewPrehistoric)entity).tailbuffer.applyChainSwingBuffer(tailParts);
     }
 
 

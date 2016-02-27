@@ -148,5 +148,8 @@ public class EntityAnkylosaurus extends EntityNewPrehistoric {
 
         return Items.stick;
     }
-
+    
+	public int getTailSegments() {
+		return 4;
+	}
 }

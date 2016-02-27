@@ -181,4 +181,7 @@ public class EntityTyrannosaurus extends EntityNewPrehistoric {
         return new Animation[]{this.animation_none, this.animation_speak, this.animation_roar};
     }
 
+	public int getTailSegments() {
+		return 3;
+	}
 }

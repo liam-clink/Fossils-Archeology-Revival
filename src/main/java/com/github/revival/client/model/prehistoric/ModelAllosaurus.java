@@ -1,11 +1,12 @@
 package com.github.revival.client.model.prehistoric;
 
-import com.github.revival.client.model.prehistoric.test.ModelNewPrehistoric;
-import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelRenderer;
 import net.ilexiconn.llibrary.common.animation.Animator;
 import net.ilexiconn.llibrary.common.animation.IAnimated;
 import net.minecraft.entity.Entity;
+
+import com.github.revival.client.model.prehistoric.test.ModelNewPrehistoric;
+import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 
 public class ModelAllosaurus extends ModelNewPrehistoric {
     public MowzieModelRenderer rightUpperLeg;
@@ -227,7 +228,7 @@ public class ModelAllosaurus extends ModelNewPrehistoric {
         this.chainSwing(tailParts, speed, 0.15F, -3, entity.ticksExisted, 1);
         this.chainSwing(tailParts, speed2, 0.25F, -3, f, f1);
         this.chainWave(neckParts, speed, 0.15F, 3, entity.ticksExisted, 1);
-        //((ChainBuffer)((EntityAllosaurus)entity).tailbuffer).applyChainSwingBuffer(tailParts);
+        ((EntityNewPrehistoric)entity).tailbuffer.applyChainSwingBuffer(tailParts);
 
     }
 }
