@@ -567,7 +567,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
 	public void onUpdate() {
 		super.onUpdate();
-		tailbuffer.calculateChainSwingBuffer(70, 40, 10, this);
+		tailbuffer.calculateChainSwingBuffer(90, 15, 4, this);
 		this.updateSize();
 		if(this.ridingEntity != null){
 			if(this.ridingEntity.isDead){
