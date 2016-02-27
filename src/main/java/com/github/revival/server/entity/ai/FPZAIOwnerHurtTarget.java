@@ -1,15 +1,15 @@
 package com.github.revival.server.entity.ai;
 
-import com.github.revival.server.entity.mob.EntityFriendlyPigZombie;
+import com.github.revival.server.entity.mob.FriendlyPigZombieEntity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAITarget;
 
 public class FPZAIOwnerHurtTarget extends EntityAITarget {
-    EntityFriendlyPigZombie fpz;
+    FriendlyPigZombieEntity fpz;
     EntityLivingBase theTarget;
     private int field_142050_e;
 
-    public FPZAIOwnerHurtTarget(EntityFriendlyPigZombie var1) {
+    public FPZAIOwnerHurtTarget(FriendlyPigZombieEntity var1) {
         super(var1, false);
         this.fpz = var1;
         this.setMutexBits(1);

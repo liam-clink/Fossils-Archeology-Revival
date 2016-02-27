@@ -8,9 +8,9 @@ import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.item.ItemStack;
 
 public class DinoAIHunger extends EntityAIBase {
-    EntityNewPrehistoric mover = null;
+    NewPrehistoricEntity mover = null;
 
-    public DinoAIHunger(EntityNewPrehistoric var1) {
+    public DinoAIHunger(NewPrehistoricEntity var1) {
         this.mover = var1;
     }
 

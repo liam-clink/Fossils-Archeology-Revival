@@ -1,6 +1,6 @@
 package com.github.revival.server.entity.ai;
 
-import com.github.revival.server.entity.mob.EntityDinosaur;
+import com.github.revival.server.entity.mob.DinosaurEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.util.Vec3;
@@ -17,7 +17,7 @@ public class WaterDinoAIAttack extends EntityAIBase {
     private double yPosition;
     private double zPosition;
     private double speed;
-    private EntityDinosaur entity;
+    private DinosaurEntity entity;
     private float randomMotionVecX;
     private float randomMotionVecY;
     private float randomMotionVecZ;
@@ -39,7 +39,7 @@ public class WaterDinoAIAttack extends EntityAIBase {
     private Vec3 moveVector;
     private Vec3 normalizedVector;
 
-    public WaterDinoAIAttack(EntityDinosaur dinosaur, double speed) {
+    public WaterDinoAIAttack(DinosaurEntity dinosaur, double speed) {
         this.entity = dinosaur;
         this.speed = speed;
         this.setMutexBits(1);

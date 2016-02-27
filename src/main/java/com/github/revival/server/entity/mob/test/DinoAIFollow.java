@@ -11,14 +11,14 @@ public class DinoAIFollow extends EntityAIBase {
     World theWorld;
     float maxDist;
     float minDist;
-    private EntityNewPrehistoric DinoEntity;
+    private NewPrehistoricEntity DinoEntity;
     private EntityLivingBase theOwner;
     private double speed;
     private PathNavigate petPathfinder;
     private int counter;
     private boolean avoidsWater;
 
-    public DinoAIFollow(EntityNewPrehistoric par1EntityTameable, double par2, float par4, float par5) {
+    public DinoAIFollow(NewPrehistoricEntity par1EntityTameable, double par2, float par4, float par5) {
         this.DinoEntity = par1EntityTameable;
         this.theWorld = par1EntityTameable.worldObj;
         this.speed = par2;

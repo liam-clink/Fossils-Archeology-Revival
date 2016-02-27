@@ -1,6 +1,6 @@
 package com.github.revival.server.entity.ai;
 
-import com.github.revival.server.entity.mob.EntityDinosaur;
+import com.github.revival.server.entity.mob.DinosaurEntity;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.RandomPositionGenerator;
 import net.minecraft.util.Vec3;
@@ -15,14 +15,14 @@ public class DinoAIFlying extends EntityAIBase {
     private static Vec3 motionVector = Vec3.createVectorHelper(0.0D, 0.0D, 0.0D);
     protected eFlyingState previousState = eFlyingState.FS_ON_GROUND;
     protected boolean isAscending = false;
-    private EntityDinosaur dino = null;
+    private DinosaurEntity dino = null;
     private double takeOffInitialHeight = 0;
     private double takeOffDestinationHeight = 0;
     private Vec3 wanderDestination = null;
     private float MOTION_VECTOR_SCALE = 100.0f;
     private float SPEED_IN_AIR = 0.1f;
 
-    public DinoAIFlying(EntityDinosaur Dinosaur) {
+    public DinoAIFlying(DinosaurEntity Dinosaur) {
         dino = Dinosaur;
         this.setMutexBits(5);
     }

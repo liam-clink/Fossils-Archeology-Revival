@@ -13,9 +13,9 @@ import java.util.Random;
 public class DinoAIFish extends EntityAIBase {
     //private final float huntLimit;
     private final int percentage;
-    private EntityNewPrehistoric theEntity;
+    private NewPrehistoricEntity theEntity;
 
-    public DinoAIFish(EntityNewPrehistoric var1/*, float var2*/, int var3) {
+    public DinoAIFish(NewPrehistoricEntity var1/*, float var2*/, int var3) {
         this.theEntity = var1;
         this.setMutexBits(4);
         var1.getNavigator().setCanSwim(true);

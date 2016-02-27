@@ -33,7 +33,7 @@ public class DinoAILookAtEntity extends EntityAIBase {
      * Returns whether the EntityAIBase should begin execution.
      */
     public boolean shouldExecute() {
-        if (((EntityNewPrehistoric) this.theWatcher).isSleeping()) {
+        if (((NewPrehistoricEntity) this.theWatcher).isSleeping()) {
             return false;
         }
 

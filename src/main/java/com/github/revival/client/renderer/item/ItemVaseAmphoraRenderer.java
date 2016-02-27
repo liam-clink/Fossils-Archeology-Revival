@@ -1,6 +1,6 @@
 package com.github.revival.client.renderer.item;
 
-import com.github.revival.client.model.ModelVaseAmphora;
+import com.github.revival.client.model.VaseAmphoraModel;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
@@ -17,10 +17,10 @@ public class ItemVaseAmphoraRenderer implements IItemRenderer {
     private static final ResourceLocation redFigure_amphora = new ResourceLocation("fossil:textures/blocks/vases/vase_redFigure_amphora.png");
     private static final ResourceLocation blackFigure_amphora = new ResourceLocation("fossil:textures/blocks/vases/vase_blackFigure_amphora.png");
     private static final ResourceLocation porcelain_amphora = new ResourceLocation("fossil:textures/blocks/vases/vase_porcelain_amphora.png");
-    private static ModelVaseAmphora model;
+    private static VaseAmphoraModel model;
 
     public ItemVaseAmphoraRenderer() {
-        model = new ModelVaseAmphora();
+        model = new VaseAmphoraModel();
 
     }
 

@@ -1,6 +1,6 @@
 package com.github.revival.server.util;
 
-import com.github.revival.server.entity.EnumDiet;
+import com.github.revival.server.entity.Diet;
 import com.google.common.collect.Maps;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -36,7 +36,7 @@ public class FoodMappings {
         return INSTANCE;
     }
 
-    public void addToItemMappings(Item item, int food, EnumDiet diet) {
+    public void addToItemMappings(Item item, int food, Diet diet) {
         switch (diet) {
             case CARNIVORE:
                 if (carnivoreItemDiet == null) {
@@ -85,7 +85,7 @@ public class FoodMappings {
         }
     }
 
-    public int getItemFoodAmount(Item item, EnumDiet diet) {
+    public int getItemFoodAmount(Item item, Diet diet) {
         switch (diet) {
             case CARNIVORE:
                 if (carnivoreItemDiet != null && carnivoreItemDiet.containsKey(Item.getIdFromItem(item))) {
@@ -128,7 +128,7 @@ public class FoodMappings {
         return 0;
     }
 
-    public void addToBlockMappings(Block block, int food, EnumDiet diet, boolean registerItem) {
+    public void addToBlockMappings(Block block, int food, Diet diet, boolean registerItem) {
         switch (diet) {
             case CARNIVORE:
                 if (carnivoreBlockDiet == null) {
@@ -180,7 +180,7 @@ public class FoodMappings {
         }
     }
 
-    public int getBlockFoodAmount(Block block, EnumDiet diet) {
+    public int getBlockFoodAmount(Block block, Diet diet) {
         switch (diet) {
             case CARNIVORE:
                 if (carnivoreBlockDiet != null && carnivoreBlockDiet.containsKey(Block.getIdFromBlock(block))) {
@@ -223,7 +223,7 @@ public class FoodMappings {
         return 0;
     }
 
-    public void addToEntityMappings(Class<? extends Entity> entity, int food, EnumDiet diet) {
+    public void addToEntityMappings(Class<? extends Entity> entity, int food, Diet diet) {
         switch (diet) {
             case CARNIVORE:
                 if (carnivoreEntityDiet == null) {
@@ -272,7 +272,7 @@ public class FoodMappings {
         }
     }
 
-    public int getEntityFoodAmount(Class<? extends Entity> entity, EnumDiet diet) {
+    public int getEntityFoodAmount(Class<? extends Entity> entity, Diet diet) {
         switch (diet) {
             case CARNIVORE:
                 if (carnivoreEntityDiet != null && carnivoreEntityDiet.containsKey(entity)) {

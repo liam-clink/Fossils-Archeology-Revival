@@ -1,6 +1,6 @@
 package com.github.revival;
 
-import com.github.revival.client.renderer.tileentity.RenderFeeder;
+import com.github.revival.client.renderer.tileentity.FeederRenderer;
 import com.github.revival.server.ModState;
 import com.github.revival.server.ServerProxy;
 import com.github.revival.server.biome.BasicBiome;
@@ -9,8 +9,8 @@ import com.github.revival.server.block.entity.*;
 import com.github.revival.server.block.sound.FossilSoundType;
 import com.github.revival.server.config.FossilConfig;
 import com.github.revival.server.creativetab.FATabRegistry;
-import com.github.revival.server.dimension.anu.WorldProviderAnu;
-import com.github.revival.server.dimension.treasure.WorldProviderTreasure;
+import com.github.revival.server.dimension.anu.AnuWorldProvider;
+import com.github.revival.server.dimension.treasure.TreasureWorldProvider;
 import com.github.revival.server.enchantment.ArcheologyEnchantment;
 import com.github.revival.server.enchantment.PaleontologyEnchantment;
 import com.github.revival.server.entity.*;
@@ -107,9 +107,9 @@ public class Revival {
         EnumPrehistoric.init();
         FossilOreDictionary.oreRegistration();
         FossilFoodMappings.init();
-        DimensionManager.registerProviderType(FossilConfig.dimIdDarknessLair, WorldProviderAnu.class, false);
+        DimensionManager.registerProviderType(FossilConfig.dimIdDarknessLair, AnuWorldProvider.class, false);
         DimensionManager.registerDimension(FossilConfig.dimIdDarknessLair, FossilConfig.dimIdDarknessLair);
-        DimensionManager.registerProviderType(FossilConfig.dimIdTreasure, WorldProviderTreasure.class, false);
+        DimensionManager.registerProviderType(FossilConfig.dimIdTreasure, TreasureWorldProvider.class, false);
         DimensionManager.registerDimension(FossilConfig.dimIdTreasure, FossilConfig.dimIdTreasure);
 
         paleontology = new PaleontologyEnchantment(FossilConfig.enchIdPaleontology, 2, EnumEnchantmentType.digger);
@@ -118,36 +118,36 @@ public class Revival {
         anuBiome = new BasicBiome(FossilConfig.biomeIdDarknessLair, Blocks.netherrack, Blocks.netherrack, true, 0, 0).setDisableRain().setBiomeName(LocalizationStrings.BIOME_ANU).setTemperatureRainfall(0.8F, 0F).setHeight(new BiomeGenBase.Height(0F, 0F));
         treasureBiome = new BasicBiome(FossilConfig.biomeIdTreasure, Blocks.air, Blocks.air, true, 1, 0).setDisableRain().setBiomeName(StatCollector.translateToLocal("biome.treasure.name")).setTemperatureRainfall(0.8F, 0F).setHeight(new BiomeGenBase.Height(0F, 0F));
 
-        EntityRegistry.registerModEntity(EntityStoneboard.class, "StoneBoard", 1, this, 250, Integer.MAX_VALUE, false);
-        EntityRegistry.registerModEntity(EntityJavelin.class, "Javelin", 2, this, 250, 5, true);
-        EntityRegistry.registerModEntity(EntityAncientJavelin.class, "AncientJavelin", 3, this, 250, 5, true);
-        EntityRegistry.registerModEntity(EntityMLighting.class, "FriendlyLighting", 4, this, 250, 5, true);
-        EntityRegistry.registerModEntity(EntityFailuresaurus.class, "Failuresaurus", 5, this, 250, 3, true);
-        EntityRegistry.registerModEntity(EntityBones.class, "Bones", 6, this, 250, 3, true);
-        EntityRegistry.registerModEntity(EntityDinoEgg.class, "DinoEgg", 8, this, 250, 5, true);
-        EntityRegistry.registerModEntity(EntityFriendlyPigZombie.class, "FriendlyPigZombie", 12, this, 250, 3, true);
-        EntityRegistry.registerModEntity(EntityAnu.class, "PigBoss", 13, this, 250, 3, true);
-        EntityRegistry.registerModEntity(EntitySmilodon.class, "Smilodon", 22, this, 250, 3, true);
-        EntityRegistry.registerModEntity(EntityMammoth.class, "Mammoth", 24, this, 250, 3, true);
-        EntityRegistry.registerModEntity(EntityDodo.class, "Dodo", 25, this, 250, 3, true);
-        EntityRegistry.registerModEntity(EntityDodoEgg.class, "DodoEgg", 26, this, 250, 5, true);
-        EntityRegistry.registerModEntity(EntityCoelacanth.class, "Coelacanth", 28, this, 250, 5, true);
-        EntityRegistry.registerModEntity(EntityQuagga.class, "Quagga", 30, this, 250, 3, true);
-        EntityRegistry.registerModEntity(EntityTerrorBird.class, "TerrorBird", 31, this, 250, 3, true);
-        EntityRegistry.registerModEntity(EntityTerrorBirdEgg.class, "TerrorBirdEgg", 32, this, 250, 5, true);
-        EntityRegistry.registerModEntity(EntityElasmotherium.class, "Elasmotherium", 33, this, 250, 3, true);
-        EntityRegistry.registerModEntity(EntityAnuEffect.class, "AnuEffect", 34, this, 250, 5, true);
-        EntityRegistry.registerModEntity(EntityAnubite.class, "Anubite", 39, this, 250, 3, true);
-        EntityRegistry.registerModEntity(EntitySentryPigman.class, "SentryPigman", 40, this, 250, 3, true);
-        EntityRegistry.registerModEntity(EntityAnuDead.class, "AnuDead", 41, this, 250, 3, true);
-        EntityRegistry.registerModEntity(EntityTarSlime.class, "TarSlime", 42, this, 250, 3, true);
+        EntityRegistry.registerModEntity(StoneboardEntity.class, "StoneBoard", 1, this, 250, Integer.MAX_VALUE, false);
+        EntityRegistry.registerModEntity(JavelinEntity.class, "Javelin", 2, this, 250, 5, true);
+        EntityRegistry.registerModEntity(AncientJavelinEntity.class, "AncientJavelin", 3, this, 250, 5, true);
+        EntityRegistry.registerModEntity(MLightingEntity.class, "FriendlyLighting", 4, this, 250, 5, true);
+        EntityRegistry.registerModEntity(FailuresaurusEntity.class, "Failuresaurus", 5, this, 250, 3, true);
+        EntityRegistry.registerModEntity(BonesEntity.class, "Bones", 6, this, 250, 3, true);
+        EntityRegistry.registerModEntity(DinoEggEntity.class, "DinoEgg", 8, this, 250, 5, true);
+        EntityRegistry.registerModEntity(FriendlyPigZombieEntity.class, "FriendlyPigZombie", 12, this, 250, 3, true);
+        EntityRegistry.registerModEntity(AnuEntity.class, "PigBoss", 13, this, 250, 3, true);
+        EntityRegistry.registerModEntity(SmilodonEntity.class, "Smilodon", 22, this, 250, 3, true);
+        EntityRegistry.registerModEntity(MammothEntity.class, "Mammoth", 24, this, 250, 3, true);
+        EntityRegistry.registerModEntity(DodoEntity.class, "Dodo", 25, this, 250, 3, true);
+        EntityRegistry.registerModEntity(DodoEggEntity.class, "DodoEgg", 26, this, 250, 5, true);
+        EntityRegistry.registerModEntity(CoelacanthEntity.class, "Coelacanth", 28, this, 250, 5, true);
+        EntityRegistry.registerModEntity(QuaggaEntity.class, "Quagga", 30, this, 250, 3, true);
+        EntityRegistry.registerModEntity(TerrorBirdEntity.class, "TerrorBird", 31, this, 250, 3, true);
+        EntityRegistry.registerModEntity(TerrorBirdEggEntity.class, "TerrorBirdEgg", 32, this, 250, 5, true);
+        EntityRegistry.registerModEntity(ElasmotheriumEntity.class, "Elasmotherium", 33, this, 250, 3, true);
+        EntityRegistry.registerModEntity(AnuEffectEntity.class, "AnuEffect", 34, this, 250, 5, true);
+        EntityRegistry.registerModEntity(AnubiteEntity.class, "Anubite", 39, this, 250, 3, true);
+        EntityRegistry.registerModEntity(SentryPigmanEntity.class, "SentryPigman", 40, this, 250, 3, true);
+        EntityRegistry.registerModEntity(AnuDeadEntity.class, "AnuDead", 41, this, 250, 3, true);
+        EntityRegistry.registerModEntity(TarSlimeEntity.class, "TarSlime", 42, this, 250, 3, true);
 
         for (int i = 0; i < EnumPrehistoric.values().length; i++) {
             EntityRegistry.registerModEntity(EnumPrehistoric.values()[i].getDinoClass(), EnumPrehistoric.values()[i].name(), 200 + i, this, 250, 3, true);
         }
 
-        EntityRegistry.addSpawn(EntityCoelacanth.class, 1, 2, 4, EnumCreatureType.waterCreature, BiomeGenBase.ocean);
-        EntityRegistry.addSpawn(EntityNautilus.class, 5, 4, 14, EnumCreatureType.waterCreature, BiomeGenBase.river, BiomeGenBase.ocean);
+        EntityRegistry.addSpawn(CoelacanthEntity.class, 1, 2, 4, EnumCreatureType.waterCreature, BiomeGenBase.ocean);
+        EntityRegistry.addSpawn(NautilusEntity.class, 5, 4, 14, EnumCreatureType.waterCreature, BiomeGenBase.river, BiomeGenBase.ocean);
 
         FossilSpawnEggs.addSpawnEggs();
         EnumDinoFoodMob.init();
@@ -173,21 +173,21 @@ public class Revival {
 
         NetworkRegistry.INSTANCE.registerGuiHandler(this, guiHandler);
 
-        GameRegistry.registerTileEntity(TileEntityCultivate.class, LocalizationStrings.BLOCK_CULTIVATE_IDLE_NAME);
-        GameRegistry.registerTileEntity(TileEntityAnalyzer.class, LocalizationStrings.BLOCK_ANALYZER_IDLE_NAME);
-        GameRegistry.registerTileEntity(TileEntityWorktable.class, LocalizationStrings.BLOCK_WORKTABLE_IDLE_NAME);
-        GameRegistry.registerTileEntity(TileEntityDrum.class, LocalizationStrings.DRUM_NAME);
-        GameRegistry.registerTileEntity(TileEntityFeeder.class, LocalizationStrings.T_FEEDER_IDLE_NAME);
-        GameRegistry.registerTileEntity(TileEntityTimeMachine.class, LocalizationStrings.BLOCK_TIMEMACHINE_NAME);
-        GameRegistry.registerTileEntity(TileEntitySifter.class, LocalizationStrings.BLOCK_SIFTER_IDLE);
-        GameRegistry.registerTileEntity(TileEntityFigurine.class, "figurineType");
-        GameRegistry.registerTileEntity(TileEntityVase.class, "vaseType");
-        GameRegistry.registerTileEntity(TileEntityAnuTotem.class, LocalizationStrings.BLOCK_ANU_NAME);
-        GameRegistry.registerTileEntity(TileEntityAnubiteStatue.class, "Anubite_Statue");
-        GameRegistry.registerTileEntity(TileEntityAncientChest.class, "Ancient_Chest");
-        GameRegistry.registerTileEntity(TileEntitySarcophagus.class, "sarcophagus");
+        GameRegistry.registerTileEntity(CultivateTile.class, LocalizationStrings.BLOCK_CULTIVATE_IDLE_NAME);
+        GameRegistry.registerTileEntity(AnalyzerTile.class, LocalizationStrings.BLOCK_ANALYZER_IDLE_NAME);
+        GameRegistry.registerTileEntity(WorktableTile.class, LocalizationStrings.BLOCK_WORKTABLE_IDLE_NAME);
+        GameRegistry.registerTileEntity(DrumTile.class, LocalizationStrings.DRUM_NAME);
+        GameRegistry.registerTileEntity(FeederTile.class, LocalizationStrings.T_FEEDER_IDLE_NAME);
+        GameRegistry.registerTileEntity(TimeMachineTile.class, LocalizationStrings.BLOCK_TIMEMACHINE_NAME);
+        GameRegistry.registerTileEntity(SifterTile.class, LocalizationStrings.BLOCK_SIFTER_IDLE);
+        GameRegistry.registerTileEntity(FigurineTile.class, "figurineType");
+        GameRegistry.registerTileEntity(VaseTile.class, "vaseType");
+        GameRegistry.registerTileEntity(AnuTotemTile.class, LocalizationStrings.BLOCK_ANU_NAME);
+        GameRegistry.registerTileEntity(AnubiteStatueTile.class, "Anubite_Statue");
+        GameRegistry.registerTileEntity(AncientChestTile.class, "Ancient_Chest");
+        GameRegistry.registerTileEntity(SarcophagusTile.class, "sarcophagus");
 
-        RenderingRegistry.registerBlockHandler(2303, RenderFeeder.INSTANCE);
+        RenderingRegistry.registerBlockHandler(2303, FeederRenderer.INSTANCE);
         proxy.init();
 
         FossilRecipeHandler.addRecipe();

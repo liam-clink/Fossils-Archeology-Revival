@@ -1,6 +1,6 @@
 package com.github.revival.server.container;
 
-import com.github.revival.server.block.entity.TileEntityAnalyzer;
+import com.github.revival.server.block.entity.AnalyzerTile;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -12,13 +12,13 @@ import net.minecraft.tileentity.TileEntity;
 
 public class AnalyzerContainer extends Container {
     public static final int OUTPUT_END = 12, INPUT_END = 8;
-    private TileEntityAnalyzer analyzer;
+    private AnalyzerTile analyzer;
     private int cookTime = 0;
     private int burnTime = 0;
     private int itemBurnTime = 0;
 
     public AnalyzerContainer(InventoryPlayer var1, TileEntity var2) {
-        this.analyzer = (TileEntityAnalyzer) var2;
+        this.analyzer = (AnalyzerTile) var2;
         int var3;
         int var4;
 

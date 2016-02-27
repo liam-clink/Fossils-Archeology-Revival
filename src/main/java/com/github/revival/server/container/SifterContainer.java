@@ -1,6 +1,6 @@
 package com.github.revival.server.container;
 
-import com.github.revival.server.block.entity.TileEntitySifter;
+import com.github.revival.server.block.entity.SifterTile;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -12,7 +12,7 @@ import net.minecraft.tileentity.TileEntity;
 
 public class SifterContainer extends Container {
     public static final int INPUT = 0;
-    private TileEntitySifter sifter;
+    private SifterTile sifter;
     private int cookTime = 0;
     private int burnTime = 0;
     private int itemBurnTime = 0;
@@ -22,7 +22,7 @@ public class SifterContainer extends Container {
 	 */
 
     public SifterContainer(InventoryPlayer var1, TileEntity var2) {
-        this.sifter = (TileEntitySifter) var2;
+        this.sifter = (SifterTile) var2;
         int var3;
         int var4;
 

@@ -1,7 +1,7 @@
 package com.github.revival.server.item;
 
 import com.github.revival.server.creativetab.FATabRegistry;
-import com.github.revival.server.entity.EntityStoneboard;
+import com.github.revival.server.entity.StoneboardEntity;
 import com.github.revival.server.handler.FossilAchievementHandler;
 import com.github.revival.server.handler.LocalizationStrings;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -24,7 +24,7 @@ public class StoneBoardItem extends Item {
             return false;
         } else {
             int var11 = Direction.facingToDirection[direction];
-            EntityStoneboard var12 = new EntityStoneboard(world, x, y, z, var11);
+            StoneboardEntity var12 = new StoneboardEntity(world, x, y, z, var11);
 
             if (!var2.canPlayerEdit(x, y, z, direction, var1)) {
                 return false;

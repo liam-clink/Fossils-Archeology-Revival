@@ -1,6 +1,6 @@
 package com.github.revival.server.item.block;
 
-import com.github.revival.server.block.BlockVaseAmphora;
+import com.github.revival.server.block.VaseAmphoraBlock;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlockWithMetadata;
 import net.minecraft.item.ItemStack;
@@ -13,7 +13,7 @@ public class VaseAmphoraBlockItem extends ItemBlockWithMetadata {
 
     @Override
     public String getUnlocalizedName(ItemStack itemstack) {
-        return getUnlocalizedName() + "." + BlockVaseAmphora.shortname[itemstack.getItemDamage()];
+        return getUnlocalizedName() + "." + VaseAmphoraBlock.shortname[itemstack.getItemDamage()];
     }
 
     @Override

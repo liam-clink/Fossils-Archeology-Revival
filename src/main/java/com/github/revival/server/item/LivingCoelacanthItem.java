@@ -1,7 +1,7 @@
 package com.github.revival.server.item;
 
 import com.github.revival.Revival;
-import com.github.revival.server.entity.mob.EntityCoelacanth;
+import com.github.revival.server.entity.mob.CoelacanthEntity;
 import com.github.revival.server.enums.EnumPrehistoric;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -38,8 +38,8 @@ public class LivingCoelacanthItem extends Item {
     public static boolean spawnCreature(World var0, Item i, int meta, double var2, double var4, double var6) {
         Object var8;
 
-        var8 = new EntityCoelacanth(var0);
-        ///((EntityCoelacanth) var8).setSkin(meta);
+        var8 = new CoelacanthEntity(var0);
+        ///((CoelacanthEntity) var8).setSkin(meta);
 
 
         if (var8 != null) {

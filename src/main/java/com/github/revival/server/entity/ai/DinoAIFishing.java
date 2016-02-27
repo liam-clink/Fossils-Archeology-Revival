@@ -1,6 +1,6 @@
 package com.github.revival.server.entity.ai;
 
-import com.github.revival.server.entity.mob.EntityDinosaur;
+import com.github.revival.server.entity.mob.DinosaurEntity;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Items;
@@ -13,9 +13,9 @@ import java.util.Random;
 public class DinoAIFishing extends EntityAIBase {
     //private final float huntLimit;
     private final int percentage;
-    private EntityDinosaur theEntity;
+    private DinosaurEntity theEntity;
 
-    public DinoAIFishing(EntityDinosaur var1/*, float var2*/, int var3) {
+    public DinoAIFishing(DinosaurEntity var1/*, float var2*/, int var3) {
         this.theEntity = var1;
         this.setMutexBits(4);
         var1.getNavigator().setCanSwim(true);

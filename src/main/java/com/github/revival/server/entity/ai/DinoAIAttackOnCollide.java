@@ -1,6 +1,6 @@
 package com.github.revival.server.entity.ai;
 
-import com.github.revival.server.entity.mob.EntityDinosaur;
+import com.github.revival.server.entity.mob.DinosaurEntity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.pathfinding.PathEntity;
@@ -8,7 +8,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 public class DinoAIAttackOnCollide extends EntityAIBase {
-    private final EntityDinosaur attacker;
+    private final DinosaurEntity attacker;
     World worldObj;
     /**
      * An amount of decrementing ticks that allows the entity to attack once the tick reaches 0.
@@ -24,12 +24,12 @@ public class DinoAIAttackOnCollide extends EntityAIBase {
     Class classTarget;
     private int field_75445_i;
 
-    public DinoAIAttackOnCollide(EntityDinosaur par1EntityDinosaur, Class par2Class, double par3, boolean par5) {
+    public DinoAIAttackOnCollide(DinosaurEntity par1EntityDinosaur, Class par2Class, double par3, boolean par5) {
         this(par1EntityDinosaur, par3, par5);
         this.classTarget = par2Class;
     }
 
-    public DinoAIAttackOnCollide(EntityDinosaur par1EntityDinosaur, double par2, boolean par4) {
+    public DinoAIAttackOnCollide(DinosaurEntity par1EntityDinosaur, double par2, boolean par4) {
         this.attacker = par1EntityDinosaur;
         this.worldObj = par1EntityDinosaur.worldObj;
         this.field_75440_e = par2;

@@ -3,9 +3,9 @@ package com.github.revival.server.entity.mob;
 import com.github.revival.server.enums.EnumPigmenSpeaks;
 
 public class PigmenSpeaker {
-    EntityFriendlyPigZombie speaker = null;
+    FriendlyPigZombieEntity speaker = null;
 
-    public PigmenSpeaker(EntityFriendlyPigZombie var1) {
+    public PigmenSpeaker(FriendlyPigZombieEntity var1) {
         this.speaker = var1;
     }
 

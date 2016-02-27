@@ -2,8 +2,8 @@ package com.github.revival.server.item;
 
 import com.github.revival.Revival;
 import com.github.revival.server.creativetab.FATabRegistry;
-import com.github.revival.server.entity.EntityTerrorBirdEgg;
-import com.github.revival.server.entity.mob.EntityTerrorBird;
+import com.github.revival.server.entity.TerrorBirdEggEntity;
+import com.github.revival.server.entity.mob.TerrorBirdEntity;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -18,7 +18,7 @@ import net.minecraft.world.World;
 import java.util.List;
 
 public class TerrorBirdEggItem extends Item {
-    public static final String[] names = EntityTerrorBird.names;
+    public static final String[] names = TerrorBirdEntity.names;
     @SideOnly(Side.CLIENT)
     private IIcon[] icons;
     private boolean isCultivated;
@@ -80,7 +80,7 @@ public class TerrorBirdEggItem extends Item {
             Item item = player.inventory.getCurrentItem().getItem();
             int subitem = itemstack.getItemDamage();
 
-            world.spawnEntityInWorld(new EntityTerrorBirdEgg(world, player, subitem, isCultivated));
+            world.spawnEntityInWorld(new TerrorBirdEggEntity(world, player, subitem, isCultivated));
         }
 
         return itemstack;

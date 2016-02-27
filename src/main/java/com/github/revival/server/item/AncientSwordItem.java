@@ -1,7 +1,7 @@
 package com.github.revival.server.item;
 
-import com.github.revival.server.entity.EntityMLighting;
-import com.github.revival.server.entity.mob.EntityFriendlyPigZombie;
+import com.github.revival.server.entity.MLightingEntity;
+import com.github.revival.server.entity.mob.FriendlyPigZombieEntity;
 import com.github.revival.server.enums.EnumPigmenSpeaks;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
@@ -38,8 +38,8 @@ public class AncientSwordItem extends ItemSword {
 
                 if (!targetentity.worldObj.isRemote) {
                     targetentity.setDead();
-                    targetentity.worldObj.addWeatherEffect(new EntityMLighting(targetentity.worldObj, targetentity.posX, targetentity.posY, targetentity.posZ));
-                    EntityFriendlyPigZombie fpz = new EntityFriendlyPigZombie(targetentity.worldObj);
+                    targetentity.worldObj.addWeatherEffect(new MLightingEntity(targetentity.worldObj, targetentity.posX, targetentity.posY, targetentity.posZ));
+                    FriendlyPigZombieEntity fpz = new FriendlyPigZombieEntity(targetentity.worldObj);
                     targetentity.worldObj.spawnEntityInWorld(fpz);
                     fpz.setTamed(true);
                     if (player instanceof EntityPlayer) {
@@ -52,7 +52,7 @@ public class AncientSwordItem extends ItemSword {
             }
 
             if (targetentity != null && (new Random()).nextInt(100) < 8) {
-                targetentity.worldObj.addWeatherEffect(new EntityMLighting(targetentity.worldObj, targetentity.posX, targetentity.posY, targetentity.posZ));
+                targetentity.worldObj.addWeatherEffect(new MLightingEntity(targetentity.worldObj, targetentity.posX, targetentity.posY, targetentity.posZ));
             }
         }
 

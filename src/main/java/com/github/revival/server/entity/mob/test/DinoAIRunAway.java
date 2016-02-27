@@ -61,8 +61,8 @@ public class DinoAIRunAway extends EntityAIBase {
      * Returns whether the EntityAIBase should begin execution.
      */
     public boolean shouldExecute() {
-        if (this.theEntity instanceof EntityNewPrehistoric) {
-            EntityNewPrehistoric prehistoric = (EntityNewPrehistoric) theEntity;
+        if (this.theEntity instanceof NewPrehistoricEntity) {
+            NewPrehistoricEntity prehistoric = (NewPrehistoricEntity) theEntity;
             if (prehistoric.aiResponseType() != Response.SCARED) {
                 return false;
             }

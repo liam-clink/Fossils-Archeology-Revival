@@ -1,6 +1,6 @@
 package com.github.revival.server.container;
 
-import com.github.revival.server.block.entity.TileEntityFeeder;
+import com.github.revival.server.block.entity.FeederTile;
 import com.github.revival.server.enums.EnumDinoFoodItem;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -18,10 +18,10 @@ public class FeederContainer extends Container {
     public static final int CARN_INPUT = 0, HERB_INPUT = 1;
     int lastVegValue = 0;
     int lastMeatValue = 0;
-    private TileEntityFeeder tileEntityFeeder;
+    private FeederTile tileEntityFeeder;
 
     public FeederContainer(IInventory var1, TileEntity var2) {
-        this.tileEntityFeeder = (TileEntityFeeder) var2;
+        this.tileEntityFeeder = (FeederTile) var2;
         this.addSlotToContainer(new Slot(this.tileEntityFeeder, 0, 60, 62));
         this.addSlotToContainer(new Slot(this.tileEntityFeeder, 1, 104, 62));
         int var3;

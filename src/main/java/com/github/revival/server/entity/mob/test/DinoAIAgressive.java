@@ -1,6 +1,6 @@
 package com.github.revival.server.entity.mob.test;
 
-import com.github.revival.server.entity.EnumDiet;
+import com.github.revival.server.entity.Diet;
 import net.minecraft.command.IEntitySelector;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -11,10 +11,10 @@ import java.util.List;
 
 public class DinoAIAgressive extends EntityAINearestAttackableTarget {
     private final Class<? extends Entity> targetClass;
-    private EntityNewPrehistoric mob;
+    private NewPrehistoricEntity mob;
     private boolean isCannibal;
 
-    public DinoAIAgressive(EntityNewPrehistoric mob, Class<? extends Entity> prey, int hungryTicks, boolean see, boolean isCannibal) {
+    public DinoAIAgressive(NewPrehistoricEntity mob, Class<? extends Entity> prey, int hungryTicks, boolean see, boolean isCannibal) {
         super(mob, prey, hungryTicks, see);
         this.mob = mob;
         this.targetClass = prey;
@@ -47,7 +47,7 @@ public class DinoAIAgressive extends EntityAINearestAttackableTarget {
                 return false;
             }
 
-            if (this.mob.selfType.diet == EnumDiet.HERBIVORE) {
+            if (this.mob.selfType.diet == Diet.HERBIVORE) {
                 return false;
             }
 

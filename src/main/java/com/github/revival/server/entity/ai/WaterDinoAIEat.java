@@ -1,9 +1,9 @@
 package com.github.revival.server.entity.ai;
 
 import com.github.revival.Revival;
-import com.github.revival.server.block.entity.TileEntityFeeder;
+import com.github.revival.server.block.entity.FeederTile;
 import com.github.revival.server.config.FossilConfig;
-import com.github.revival.server.entity.mob.EntityDinosaur;
+import com.github.revival.server.entity.mob.DinosaurEntity;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLiving;
@@ -35,14 +35,14 @@ public class WaterDinoAIEat extends EntityAIBase {
     // the range the dino is able to get the item when in
     private final int USE_RANGE = 3;
     protected EntityCreature taskOwner;
-    private EntityDinosaur dinosaur;
+    private DinosaurEntity dinosaur;
     private double destX;
     private double destY;
     private double destZ;
     private int typeofTarget = NO_TARGET;
     private int TimeAtThisTarget = 0;
     // The item the dino is going to take
-    private TileEntityFeeder targetFeeder;
+    private FeederTile targetFeeder;
     private EntityItem targetItem;
     private EntityLiving targetMob;
     private Vec3 targetBlock;
@@ -74,7 +74,7 @@ public class WaterDinoAIEat extends EntityAIBase {
     /**
      * Creates The AI, Input: Dino, Speed, searching range
      */
-    public WaterDinoAIEat(EntityDinosaur Dino0, int Range0, double speed) {
+    public WaterDinoAIEat(DinosaurEntity Dino0, int Range0, double speed) {
         this.theWorld = Dino0.worldObj;
         this.targetMob = null;
         this.targetFeeder = null;
@@ -310,12 +310,12 @@ public class WaterDinoAIEat extends EntityAIBase {
         this.typeofTarget = NO_TARGET;
     }
 
-    private TileEntityFeeder getNearbyFeeder() {
+    private FeederTile getNearbyFeeder() {
         double range = 36;
-        List<TileEntity> nearbyEntities = theWorld.getEntitiesWithinAABB(TileEntityFeeder.class, this.dinosaur.boundingBox.expand(range, range, range));
+        List<TileEntity> nearbyEntities = theWorld.getEntitiesWithinAABB(FeederTile.class, this.dinosaur.boundingBox.expand(range, range, range));
 
         for (TileEntity entityFeeder : nearbyEntities) {
-            TileEntityFeeder nearbyFeeder = (TileEntityFeeder) entityFeeder;
+            FeederTile nearbyFeeder = (FeederTile) entityFeeder;
 
             if (this.dinosaur.SelfType.useFeeder()) {
                 return nearbyFeeder;

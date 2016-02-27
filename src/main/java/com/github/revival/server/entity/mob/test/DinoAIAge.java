@@ -8,9 +8,9 @@ import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.util.MathHelper;
 
 public class DinoAIAge extends EntityAIBase {
-    protected EntityNewPrehistoric AITarget;
+    protected NewPrehistoricEntity AITarget;
 
-    public DinoAIAge(EntityNewPrehistoric var1) {
+    public DinoAIAge(NewPrehistoricEntity var1) {
         this.AITarget = var1;
     }
 

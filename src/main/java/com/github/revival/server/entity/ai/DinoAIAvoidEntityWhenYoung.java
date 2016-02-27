@@ -1,6 +1,6 @@
 package com.github.revival.server.entity.ai;
 
-import com.github.revival.server.entity.mob.EntityDinosaur;
+import com.github.revival.server.entity.mob.DinosaurEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.ai.EntityAIAvoidEntity;
@@ -13,7 +13,7 @@ import net.minecraft.util.Vec3;
 import java.util.List;
 
 public class DinoAIAvoidEntityWhenYoung extends EntityAIAvoidEntity {
-    EntityDinosaur dinoEntity;
+    DinosaurEntity dinoEntity;
 
     /**
      * The entity we are attached to
@@ -41,7 +41,7 @@ public class DinoAIAvoidEntityWhenYoung extends EntityAIAvoidEntity {
 
     public DinoAIAvoidEntityWhenYoung(EntityCreature par1EntityCreature, Class par2Class, float par3, double par4, double par6) {
         super(par1EntityCreature, par2Class, par3, par4, par6);
-        this.theEntity = (EntityDinosaur) par1EntityCreature;
+        this.theEntity = (DinosaurEntity) par1EntityCreature;
         this.targetEntityClass = par2Class;
         this.distanceFromEntity = par3;
         this.farSpeed = par4;

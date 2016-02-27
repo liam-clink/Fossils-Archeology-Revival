@@ -1,7 +1,7 @@
 package com.github.revival.server.entity.ai;
 
 import com.github.revival.server.api.IWaterDino;
-import com.github.revival.server.entity.mob.EntityDinosaur;
+import com.github.revival.server.entity.mob.DinosaurEntity;
 import com.github.revival.server.enums.EnumOrderType;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.ai.EntityAIBase;
@@ -14,13 +14,13 @@ public class WaterDinoAISwimming extends EntityAIBase {
     protected final float FAST_FLOAT_SPEED;
     protected final float FAST_SINK_SPEED;
     protected final float FOLLOW_RANGE;
-    protected EntityDinosaur entity;
+    protected DinosaurEntity entity;
     protected IWaterDino entityInterface;
     protected boolean usuallySurface;
     protected boolean fastFlag;
     protected boolean diveAtNight;
 
-    public WaterDinoAISwimming(EntityDinosaur var1, boolean var2, float var3, float var4) {
+    public WaterDinoAISwimming(DinosaurEntity var1, boolean var2, float var3, float var4) {
         this.entityInterface = null;
         this.usuallySurface = true;
         this.FOLLOW_RANGE = 1.5F;
@@ -39,7 +39,7 @@ public class WaterDinoAISwimming extends EntityAIBase {
         this.FAST_SINK_SPEED = -this.FAST_FLOAT_SPEED;
     }
 
-    public WaterDinoAISwimming(EntityDinosaur var1, boolean var2, float var3) {
+    public WaterDinoAISwimming(DinosaurEntity var1, boolean var2, float var3) {
         this(var1, var2, var3, var3);
     }
 

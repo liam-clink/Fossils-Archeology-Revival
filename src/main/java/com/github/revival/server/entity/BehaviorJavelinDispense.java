@@ -24,13 +24,13 @@ public class BehaviorJavelinDispense extends BehaviorProjectileDispense {
      */
     protected IProjectile getProjectileEntity(World par1World, IPosition par2IPosition) {
         if (this.javelin < 0) {
-            EntityAncientJavelin var3 = new EntityAncientJavelin(par1World, par2IPosition.getX(), par2IPosition.getY(), par2IPosition.getZ());
+            AncientJavelinEntity var3 = new AncientJavelinEntity(par1World, par2IPosition.getX(), par2IPosition.getY(), par2IPosition.getZ());
             var3.canBePickedUp = 1;
             var3.SelfMaterial = ToolMaterial.IRON;
             return var3;
         }
 
-        EntityJavelin var3 = new EntityJavelin(par1World, par2IPosition.getX(), par2IPosition.getY(), par2IPosition.getZ());
+        JavelinEntity var3 = new JavelinEntity(par1World, par2IPosition.getX(), par2IPosition.getY(), par2IPosition.getZ());
         var3.canBePickedUp = 1;
 
         switch (this.javelin) {

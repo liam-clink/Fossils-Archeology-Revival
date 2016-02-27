@@ -1,6 +1,6 @@
 package com.github.revival.server.entity.ai;
 
-import com.github.revival.server.entity.mob.EntityDinosaur;
+import com.github.revival.server.entity.mob.DinosaurEntity;
 import net.minecraft.entity.ai.EntityAITargetNonTamed;
 import net.minecraft.entity.passive.EntityTameable;
 
@@ -17,6 +17,6 @@ public class DinoAITargetNonTamedExceptSelfClass extends EntityAITargetNonTamed 
      */
     public boolean shouldExecute() {
         boolean var1 = super.shouldExecute();
-        return var1 && this.taskOwner instanceof EntityDinosaur && ((EntityDinosaur) this.taskOwner).SelfType == ((EntityDinosaur) this.taskOwner).SelfType ? false : var1;
+        return var1 && this.taskOwner instanceof DinosaurEntity && ((DinosaurEntity) this.taskOwner).SelfType == ((DinosaurEntity) this.taskOwner).SelfType ? false : var1;
     }
 }

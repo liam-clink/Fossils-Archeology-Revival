@@ -1,7 +1,7 @@
 package com.github.revival.server.item;
 
 import com.github.revival.server.creativetab.FATabRegistry;
-import com.github.revival.server.entity.mob.EntityDinosaur;
+import com.github.revival.server.entity.mob.DinosaurEntity;
 import com.github.revival.server.enums.EnumPrehistoric;
 import com.github.revival.server.handler.LocalizationStrings;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -35,10 +35,10 @@ public class BioFossilItem extends Item {
             return true;
         } else {
             Class var11 = this.getRandomModel().getDinoClass();
-            EntityDinosaur var12;
+            DinosaurEntity var12;
 
             try {
-                var12 = (EntityDinosaur) var11.getConstructor(new Class[]{World.class}).newInstance(new Object[]{var3});
+                var12 = (DinosaurEntity) var11.getConstructor(new Class[]{World.class}).newInstance(new Object[]{var3});
             } catch (Throwable var14) {
                 var14.printStackTrace();
                 return false;

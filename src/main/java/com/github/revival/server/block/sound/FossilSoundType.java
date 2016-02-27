@@ -8,7 +8,7 @@ public class FossilSoundType extends SoundType {
     }
 
     /**
-     * Used when a block breaks, e.g.: Player break, Sheep eating grass, etc..
+     * Used when a block breaks, e.g.: Player break, SHEEP eating grass, etc..
      */
     public String getBreakSound() {
         return "mob.slime.big";

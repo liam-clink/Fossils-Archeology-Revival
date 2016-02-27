@@ -1,6 +1,6 @@
 package com.github.revival.server.entity.ai;
 
-import com.github.revival.server.entity.mob.EntityQuagga;
+import com.github.revival.server.entity.mob.QuaggaEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.RandomPositionGenerator;
@@ -8,14 +8,14 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.Vec3;
 
 public class QuaggaAITaming extends EntityAIBase {
-    private EntityQuagga horseHost;
+    private QuaggaEntity horseHost;
     private double field_111178_b;
     private double field_111179_c;
     private double field_111176_d;
     private double field_111177_e;
 
-    public QuaggaAITaming(EntityQuagga par1EntityQuagga, double par2) {
-        this.horseHost = par1EntityQuagga;
+    public QuaggaAITaming(QuaggaEntity par1QuaggaEntity, double par2) {
+        this.horseHost = par1QuaggaEntity;
         this.field_111178_b = par2;
         this.setMutexBits(1);
     }

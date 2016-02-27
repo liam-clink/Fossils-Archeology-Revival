@@ -1,6 +1,6 @@
 package com.github.revival.server.item;
 
-import com.github.revival.server.entity.mob.EntityDinosaur;
+import com.github.revival.server.entity.mob.DinosaurEntity;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -39,8 +39,8 @@ public class WhipItem extends ItemCarrotOnAStick {
      * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
      */
     public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer player) {
-        if (player.isRiding() && player.ridingEntity instanceof EntityDinosaur) {
-            EntityDinosaur dinosaur = (EntityDinosaur) player.ridingEntity;
+        if (player.isRiding() && player.ridingEntity instanceof DinosaurEntity) {
+            DinosaurEntity dinosaur = (DinosaurEntity) player.ridingEntity;
             dinosaur.onWhipRightClick();
             itemstack.damageItem(1, player);
             player.swingItem();

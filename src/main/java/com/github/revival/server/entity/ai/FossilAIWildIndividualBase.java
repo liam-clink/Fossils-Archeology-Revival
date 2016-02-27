@@ -1,7 +1,7 @@
 package com.github.revival.server.entity.ai;
 
-import com.github.revival.server.block.entity.TileEntityFeeder;
-import com.github.revival.server.entity.mobs.EntityPrehistoric;
+import com.github.revival.server.block.entity.FeederTile;
+import com.github.revival.server.entity.mobs.PrehistoricEntity;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -36,30 +36,30 @@ public abstract class FossilAIWildIndividualBase extends EntityAIBase {
 
     private static final int fleeInterruptTicks = 5;
 
-    private EntityPrehistoric entity;
+    private PrehistoricEntity entity;
     private Object target;
     private int task;
     private int tickCounter;
     private float radiusDimension;
     private boolean taskDone;
 
-    private ArrayList<EntityPrehistoric> nearbyPrehistoricEntities = new ArrayList<EntityPrehistoric>();
-    private ArrayList<EntityPrehistoric> nearbyPrehistoricEntitiesOfSameSpecies = new ArrayList<EntityPrehistoric>();
+    private ArrayList<PrehistoricEntity> nearbyPrehistoricEntities = new ArrayList<PrehistoricEntity>();
+    private ArrayList<PrehistoricEntity> nearbyPrehistoricEntitiesOfSameSpecies = new ArrayList<PrehistoricEntity>();
     private ArrayList<EntityLiving> nearbyLivingEntities = new ArrayList<EntityLiving>();
     private ArrayList<EntityItem> nearbyItemEntities = new ArrayList<EntityItem>();
     private ArrayList<EntityPlayer> nearbyPlayers = new ArrayList<EntityPlayer>();
-    private ArrayList<EntityPrehistoric> fleeingTargets = new ArrayList<EntityPrehistoric>();
-    private ArrayList<TileEntityFeeder> feeders = new ArrayList<TileEntityFeeder>();
+    private ArrayList<PrehistoricEntity> fleeingTargets = new ArrayList<PrehistoricEntity>();
+    private ArrayList<FeederTile> feeders = new ArrayList<FeederTile>();
     private ArrayList<EntityLiving> possibleFood = new ArrayList<EntityLiving>();
     private ArrayList<EntityItem> possibleItemFood = new ArrayList<EntityItem>();
     private ArrayList<Vec3> foodBlocks = new ArrayList<Vec3>();
-    private ArrayList<EntityPrehistoric> possibleFleeTargets = new ArrayList<EntityPrehistoric>();
+    private ArrayList<PrehistoricEntity> possibleFleeTargets = new ArrayList<PrehistoricEntity>();
     private ArrayList<EntityPlayer> possibleFleeTargetPlayers = new ArrayList<EntityPlayer>();
 
     private Chunk currentChunk;
     private Chunk tempChunk;
 
-    public FossilAIWildIndividualBase(EntityPrehistoric entity) {
+    public FossilAIWildIndividualBase(PrehistoricEntity entity) {
         this.entity = entity;
         this.setMutexBits(2);
     }
@@ -99,11 +99,11 @@ public abstract class FossilAIWildIndividualBase extends EntityAIBase {
                 tempChunk = entity.worldObj.getChunkFromChunkCoords(currentChunk.xPosition + i, currentChunk.zPosition + j);
                 for (int k = (int) ((entity.posY - 4) / 16); k < (int) ((entity.posY + 4) / 16) && k >= 0 && k < tempChunk.entityLists.length; k++) {
                     for (Object tempEntity : tempChunk.entityLists[k]) {
-                        if (tempEntity.getClass().isAssignableFrom(EntityPrehistoric.class)) {
+                        if (tempEntity.getClass().isAssignableFrom(PrehistoricEntity.class)) {
                             if (entity.canFindEntity((Entity) tempEntity)) {
-                                nearbyPrehistoricEntities.add((EntityPrehistoric) tempEntity);
+                                nearbyPrehistoricEntities.add((PrehistoricEntity) tempEntity);
                                 if (tempEntity.getClass().isAssignableFrom(entity.getClass())) {
-                                    nearbyPrehistoricEntitiesOfSameSpecies.add((EntityPrehistoric) tempEntity);
+                                    nearbyPrehistoricEntitiesOfSameSpecies.add((PrehistoricEntity) tempEntity);
                                 }
                             }
                         } else if (tempEntity.getClass().isAssignableFrom(EntityPlayer.class)) {
@@ -126,7 +126,7 @@ public abstract class FossilAIWildIndividualBase extends EntityAIBase {
 
         if (!nearbyPrehistoricEntities.isEmpty()) {
             // Check nearby targets to see if we should flee
-            for (EntityPrehistoric tempEntity : nearbyPrehistoricEntities) {
+            for (PrehistoricEntity tempEntity : nearbyPrehistoricEntities) {
                 if (entity.getType().shouldRunFromEntity(tempEntity)) {
                     fleeingTargets.add(tempEntity);
                 }
@@ -134,9 +134,9 @@ public abstract class FossilAIWildIndividualBase extends EntityAIBase {
 
             if (!fleeingTargets.isEmpty()) {
                 // Sort based on
-                Collections.sort(fleeingTargets, new Comparator<EntityPrehistoric>() {
+                Collections.sort(fleeingTargets, new Comparator<PrehistoricEntity>() {
                     @Override
-                    public int compare(EntityPrehistoric o1, EntityPrehistoric o2) {
+                    public int compare(PrehistoricEntity o1, PrehistoricEntity o2) {
                         return (int) (o1.getStrength() - o2.getStrength());
                     }
                 });
@@ -171,17 +171,17 @@ public abstract class FossilAIWildIndividualBase extends EntityAIBase {
 
         if (entity.hungerLevel() > 0) {
             for (Object tempTileEntity : entity.worldObj.loadedTileEntityList) {
-                if (tempTileEntity instanceof TileEntityFeeder) {
-                    if (entity.canFindFeeder((TileEntityFeeder) tempTileEntity)) {
-                        feeders.add((TileEntityFeeder) tempTileEntity);
+                if (tempTileEntity instanceof FeederTile) {
+                    if (entity.canFindFeeder((FeederTile) tempTileEntity)) {
+                        feeders.add((FeederTile) tempTileEntity);
                     }
                 }
             }
 
             if (!feeders.isEmpty()) {
-                Collections.sort(feeders, new Comparator<TileEntityFeeder>() {
+                Collections.sort(feeders, new Comparator<FeederTile>() {
                     @Override
-                    public int compare(TileEntityFeeder o1, TileEntityFeeder o2) {
+                    public int compare(FeederTile o1, FeederTile o2) {
                         int totalFood1 = 0;
                         int totalFood2 = 0;
                         if (entity.getType().eatsMeat()) {
@@ -200,7 +200,7 @@ public abstract class FossilAIWildIndividualBase extends EntityAIBase {
                 return;
             }
 
-            for (EntityPrehistoric food : nearbyPrehistoricEntities) {
+            for (PrehistoricEntity food : nearbyPrehistoricEntities) {
                 if (entity.getType().willAttack(food)) {
                     possibleFood.add(food);
                 }
@@ -280,9 +280,9 @@ public abstract class FossilAIWildIndividualBase extends EntityAIBase {
         }
 
         if (!nearbyPrehistoricEntitiesOfSameSpecies.isEmpty() && entity.getType().isCanFormHerds()) {
-            Collections.sort(nearbyPrehistoricEntitiesOfSameSpecies, new Comparator<EntityPrehistoric>() {
+            Collections.sort(nearbyPrehistoricEntitiesOfSameSpecies, new Comparator<PrehistoricEntity>() {
                 @Override
-                public int compare(EntityPrehistoric o1, EntityPrehistoric o2) {
+                public int compare(PrehistoricEntity o1, PrehistoricEntity o2) {
                     return (int) (entity.distanceToEntity(o1) - entity.distanceToEntity(o2));
                 }
             });
@@ -373,9 +373,9 @@ public abstract class FossilAIWildIndividualBase extends EntityAIBase {
                     tempChunk = entity.worldObj.getChunkFromChunkCoords(currentChunk.xPosition + i, currentChunk.zPosition + j);
                     for (int k = (int) ((entity.posY - 4) / 16); k < (int) ((entity.posY + 4) / 16) && k >= 0 && k < tempChunk.entityLists.length; k++) {
                         for (Object tempEntity : tempChunk.entityLists[k]) {
-                            if (tempEntity.getClass().isAssignableFrom(EntityPrehistoric.class) && entity.getType().shouldRunFromEntity((EntityPrehistoric) tempEntity)) {
+                            if (tempEntity.getClass().isAssignableFrom(PrehistoricEntity.class) && entity.getType().shouldRunFromEntity((PrehistoricEntity) tempEntity)) {
                                 if (entity.canFindEntity((Entity) tempEntity)) {
-                                    possibleFleeTargets.add((EntityPrehistoric) tempEntity);
+                                    possibleFleeTargets.add((PrehistoricEntity) tempEntity);
                                 }
                             } else if (entity.isChild() && tempEntity.getClass().isAssignableFrom(EntityPlayer.class)) {
                                 if (entity.canFindEntity((Entity) tempEntity)) {
@@ -387,9 +387,9 @@ public abstract class FossilAIWildIndividualBase extends EntityAIBase {
                 }
             }
             if (!possibleFleeTargets.isEmpty()) {
-                Collections.sort(possibleFleeTargets, new Comparator<EntityPrehistoric>() {
+                Collections.sort(possibleFleeTargets, new Comparator<PrehistoricEntity>() {
                     @Override
-                    public int compare(EntityPrehistoric o1, EntityPrehistoric o2) {
+                    public int compare(PrehistoricEntity o1, PrehistoricEntity o2) {
                         return (int) (o1.getStrength() - o2.getStrength());
                     }
                 });
@@ -447,7 +447,7 @@ public abstract class FossilAIWildIndividualBase extends EntityAIBase {
                 trackAndAttackEntity((EntityLiving) target);
                 break;
             case taskFeedFromFeeder:
-                feedFromFeeder((TileEntityFeeder) target);
+                feedFromFeeder((FeederTile) target);
                 break;
             case taskPickupItem:
                 pickupItem((EntityItem) target);
@@ -456,10 +456,10 @@ public abstract class FossilAIWildIndividualBase extends EntityAIBase {
                 eatBlock((Vec3) target);
                 break;
             case taskFormHerd:
-                formHerd((EntityPrehistoric) target);
+                formHerd((PrehistoricEntity) target);
                 break;
             case taskAskJoinHerd:
-                askToJoinHerd((EntityPrehistoric) target);
+                askToJoinHerd((PrehistoricEntity) target);
                 break;
             case taskFindAndDrinkWater:
                 findAndDrinkWater((Vec3) target);
@@ -485,15 +485,15 @@ public abstract class FossilAIWildIndividualBase extends EntityAIBase {
 
     abstract void trackAndAttackEntity(EntityLiving target);
 
-    abstract void feedFromFeeder(TileEntityFeeder feeder);
+    abstract void feedFromFeeder(FeederTile feeder);
 
     abstract void eatBlock(Vec3 target);
 
     abstract void pickupItem(EntityItem item);
 
-    abstract void formHerd(EntityPrehistoric entity);
+    abstract void formHerd(PrehistoricEntity entity);
 
-    abstract void askToJoinHerd(EntityPrehistoric entity);
+    abstract void askToJoinHerd(PrehistoricEntity entity);
 
     abstract void findAndDrinkWater(Vec3 water);
 }

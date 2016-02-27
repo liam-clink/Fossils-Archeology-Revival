@@ -1,9 +1,9 @@
 package com.github.revival.server.item;
 
-import com.github.revival.server.entity.mob.EntityPregnantCow;
-import com.github.revival.server.entity.mob.EntityPregnantHorse;
-import com.github.revival.server.entity.mob.EntityPregnantPig;
-import com.github.revival.server.entity.mob.EntityPregnantSheep;
+import com.github.revival.server.entity.mob.PregnantCowEntity;
+import com.github.revival.server.entity.mob.PregnantHorseEntity;
+import com.github.revival.server.entity.mob.PregnantPigEntity;
+import com.github.revival.server.entity.mob.PregnantSheepEntity;
 import com.github.revival.server.enums.EnumPrehistoric;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.*;
@@ -40,7 +40,7 @@ public class MammalEmbryoItem extends Item {
             Object pregnantEntity = null;
 
             if (thisEntity instanceof EntityPig) {
-                EntityPregnantPig props = EntityPregnantPig.get(((EntityPig) thisEntity));
+                PregnantPigEntity props = PregnantPigEntity.get(((EntityPig) thisEntity));
                 if (props.Embryo != null) {
                     return false;
                 }
@@ -50,7 +50,7 @@ public class MammalEmbryoItem extends Item {
                     return false;
                 }
             } else if (thisEntity instanceof EntityCow) {
-                EntityPregnantCow props = EntityPregnantCow.get(((EntityCow) thisEntity));
+                PregnantCowEntity props = PregnantCowEntity.get(((EntityCow) thisEntity));
                 if (props.Embryo != null) {
                     return false;
                 }
@@ -60,7 +60,7 @@ public class MammalEmbryoItem extends Item {
                     return false;
                 }
             } else if (thisEntity instanceof EntitySheep) {
-                EntityPregnantSheep props = EntityPregnantSheep.get(((EntitySheep) thisEntity));
+                PregnantSheepEntity props = PregnantSheepEntity.get(((EntitySheep) thisEntity));
                 if (props.Embryo != null) {
                     return false;
                 }
@@ -70,7 +70,7 @@ public class MammalEmbryoItem extends Item {
                     return false;
                 }
             } else if (thisEntity instanceof EntityHorse) {
-                EntityPregnantHorse props = EntityPregnantHorse.get(((EntityHorse) thisEntity));
+                PregnantHorseEntity props = PregnantHorseEntity.get(((EntityHorse) thisEntity));
                 if (((EntityHorse) thisEntity).getHorseType() != 0
                         || props.Embryo != null) {
                     return false;

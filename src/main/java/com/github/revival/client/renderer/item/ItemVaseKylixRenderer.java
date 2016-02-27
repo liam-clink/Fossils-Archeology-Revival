@@ -1,6 +1,6 @@
 package com.github.revival.client.renderer.item;
 
-import com.github.revival.client.model.ModelVaseKylix;
+import com.github.revival.client.model.VaseKylixModel;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
@@ -17,10 +17,10 @@ public class ItemVaseKylixRenderer implements IItemRenderer {
     private static final ResourceLocation redFigure_kylix = new ResourceLocation("fossil:textures/blocks/vases/vase_redFigure_kylix.png");
     private static final ResourceLocation blackFigure_kylix = new ResourceLocation("fossil:textures/blocks/vases/vase_blackFigure_kylix.png");
     private static final ResourceLocation porcelain_kylix = new ResourceLocation("fossil:textures/blocks/vases/vase_porcelain_kylix.png");
-    private static ModelVaseKylix model;
+    private static VaseKylixModel model;
 
     public ItemVaseKylixRenderer() {
-        model = new ModelVaseKylix();
+        model = new VaseKylixModel();
 
     }
 

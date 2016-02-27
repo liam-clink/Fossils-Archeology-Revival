@@ -13,13 +13,13 @@ public class FATabRegistry implements IContentHandler {
     public static CreativeTabs tabFBones;
 
     public void init() {
-        tabFBlocks = new TabFBlocks("Fossil Blocks");
-        tabFItems = new TabFItems("Fossil Items");
-        tabFFood = new TabFFood("Fossil Food");
-        tabFCombat = new TabFCombat("Fossil Combat");
-        tabFTools = new TabFTools("Fossil Deco");
-        tabFFigurines = new TabFFigurines("Fossil Test");
-        tabFBones = new TabFBones("Fossil Bones");
+        tabFBlocks = new FBlocksTab("Fossil Blocks");
+        tabFItems = new FItemsTab("Fossil Items");
+        tabFFood = new FFoodTab("Fossil Food");
+        tabFCombat = new FCombatTab("Fossil Combat");
+        tabFTools = new FToolsTab("Fossil Deco");
+        tabFFigurines = new FFigurinesTab("Fossil Test");
+        tabFBones = new FBonesTab("Fossil Bones");
     }
 
     public void gameRegistry() throws Exception {

@@ -1,6 +1,6 @@
 package com.github.revival.server.item.block;
 
-import com.github.revival.server.block.BlockVaseVolute;
+import com.github.revival.server.block.VaseVoluteBlock;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlockWithMetadata;
 import net.minecraft.item.ItemStack;
@@ -13,7 +13,7 @@ public class VaseVoluteBlockItem extends ItemBlockWithMetadata {
 
     @Override
     public String getUnlocalizedName(ItemStack itemstack) {
-        return getUnlocalizedName() + "." + BlockVaseVolute.shortname[itemstack.getItemDamage()];
+        return getUnlocalizedName() + "." + VaseVoluteBlock.shortname[itemstack.getItemDamage()];
     }
 
     @Override

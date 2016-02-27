@@ -19,7 +19,7 @@ public class DinoAIWaterAgressive extends EntityAIBase {
     private double yPosition;
     private double zPosition;
     private double speed;
-    private EntityNewPrehistoric entity;
+    private NewPrehistoricEntity entity;
     private float randomMotionVecX;
     private float randomMotionVecY;
     private float randomMotionVecZ;
@@ -41,7 +41,7 @@ public class DinoAIWaterAgressive extends EntityAIBase {
     private Vec3 moveVector;
     private Vec3 normalizedVector;
 
-    public DinoAIWaterAgressive(EntityNewPrehistoric dinosaur, double speed) {
+    public DinoAIWaterAgressive(NewPrehistoricEntity dinosaur, double speed) {
         this.entity = dinosaur;
         this.speed = speed;
         this.setMutexBits(1);

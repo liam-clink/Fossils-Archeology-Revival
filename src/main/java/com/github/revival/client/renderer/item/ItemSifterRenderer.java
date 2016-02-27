@@ -1,17 +1,17 @@
 package com.github.revival.client.renderer.item;
 
-import com.github.revival.client.model.ModelSifter;
-import com.github.revival.server.block.entity.TileEntitySifter;
+import com.github.revival.client.model.SifterModel;
+import com.github.revival.server.block.entity.SifterTile;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
 
 public class ItemSifterRenderer implements IItemRenderer {
     TileEntitySpecialRenderer render;
-    private ModelSifter modelsifter;
+    private SifterModel modelsifter;
 
     public ItemSifterRenderer() {
-        modelsifter = new ModelSifter();
+        modelsifter = new SifterModel();
     }
 
     @Override
@@ -26,6 +26,6 @@ public class ItemSifterRenderer implements IItemRenderer {
 
     @Override
     public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
-        this.render.renderTileEntityAt(new TileEntitySifter(), 0.0D, 0.0D, 0.0D, 0.0F);
+        this.render.renderTileEntityAt(new SifterTile(), 0.0D, 0.0D, 0.0D, 0.0F);
     }
 }

@@ -1,6 +1,6 @@
 package com.github.revival.client.renderer.item;
 
-import com.github.revival.client.model.ModelVaseVolute;
+import com.github.revival.client.model.VaseVoluteModel;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
@@ -17,10 +17,10 @@ public class ItemVaseVoluteRenderer implements IItemRenderer {
     private static final ResourceLocation redFigure_volute = new ResourceLocation("fossil:textures/blocks/vases/vase_redFigure_volute.png");
     private static final ResourceLocation blackFigure_volute = new ResourceLocation("fossil:textures/blocks/vases/vase_blackFigure_volute.png");
     private static final ResourceLocation porcelain_volute = new ResourceLocation("fossil:textures/blocks/vases/vase_porcelain_volute.png");
-    private static ModelVaseVolute model;
+    private static VaseVoluteModel model;
 
     public ItemVaseVoluteRenderer() {
-        model = new ModelVaseVolute();
+        model = new VaseVoluteModel();
 
     }
 

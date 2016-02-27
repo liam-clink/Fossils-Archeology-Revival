@@ -1,6 +1,6 @@
 package com.github.revival.server.entity.ai;
 
-import com.github.revival.server.entity.mob.EntitySwimmingDino;
+import com.github.revival.server.entity.mob.SwimmingDinoEntity;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.EntityAIBase;
@@ -20,7 +20,7 @@ public class WaterDinoAIWander extends EntityAIBase {
     private double zPosition;
     private double speed;
     private ArrayList collidingBoundingBoxes = new ArrayList();
-    private EntitySwimmingDino entity;
+    private SwimmingDinoEntity entity;
     private float randomMotionVecX;
     private float randomMotionVecY;
     private float randomMotionVecZ;
@@ -34,7 +34,7 @@ public class WaterDinoAIWander extends EntityAIBase {
 
     private World worldObj;
 
-    public WaterDinoAIWander(EntitySwimmingDino dinosaur, double speed) {
+    public WaterDinoAIWander(SwimmingDinoEntity dinosaur, double speed) {
         this.entity = dinosaur;
         this.speed = speed;
         this.setMutexBits(1);

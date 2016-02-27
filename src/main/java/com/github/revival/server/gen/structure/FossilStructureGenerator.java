@@ -1,8 +1,8 @@
 package com.github.revival.server.gen.structure;
 
 import com.github.revival.server.block.FABlockRegistry;
-import com.github.revival.server.block.entity.TileEntityFigurine;
-import com.github.revival.server.block.entity.TileEntityVase;
+import com.github.revival.server.block.entity.FigurineTile;
+import com.github.revival.server.block.entity.VaseTile;
 import com.github.revival.server.config.FossilConfig;
 import com.github.revival.server.enums.EnumPrehistoric;
 import com.github.revival.server.gen.structure.academy.*;
@@ -525,7 +525,7 @@ public class FossilStructureGenerator extends StructureGeneratorBase {
                         world.setBlock(x, y, z, FABlockRegistry.vaseKylixBlock,
                                 randomVaseType, 2);
 
-                        TileEntityVase vase = (world.getTileEntity(x, y, z) instanceof TileEntityVase ? (TileEntityVase) world
+                        VaseTile vase = (world.getTileEntity(x, y, z) instanceof VaseTile ? (VaseTile) world
                                 .getTileEntity(x, y, z) : null);
 
                         if (vase != null) {
@@ -541,7 +541,7 @@ public class FossilStructureGenerator extends StructureGeneratorBase {
                         world.setBlock(x, y, z, FABlockRegistry.figurineBlock, randomMeta2,
                                 2);
 
-                        TileEntityFigurine figurine = (world.getTileEntity(x, y, z) instanceof TileEntityFigurine ? (TileEntityFigurine) world
+                        FigurineTile figurine = (world.getTileEntity(x, y, z) instanceof FigurineTile ? (FigurineTile) world
                                 .getTileEntity(x, y, z) : null);
 
                         if (figurine != null) {

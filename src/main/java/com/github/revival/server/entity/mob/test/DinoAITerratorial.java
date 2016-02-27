@@ -17,7 +17,7 @@ public class DinoAITerratorial extends EntityAIBase {
     /**
      * The entity we are attached to
      */
-    private EntityNewPrehistoric dino;
+    private NewPrehistoricEntity dino;
     public final IEntitySelector selector = new IEntitySelector() {
         private static final String __OBFID = "CL_00001575";
 
@@ -43,7 +43,7 @@ public class DinoAITerratorial extends EntityAIBase {
      */
     private Class<? extends Entity> targetEntityClass;
 
-    public DinoAITerratorial(EntityNewPrehistoric creature, Class<? extends Entity> target, float distance) {
+    public DinoAITerratorial(NewPrehistoricEntity creature, Class<? extends Entity> target, float distance) {
         this.dino = creature;
         this.targetEntityClass = target;
         this.distanceFromEntity = distance;
@@ -55,8 +55,8 @@ public class DinoAITerratorial extends EntityAIBase {
      * Returns whether the EntityAIBase should begin execution.
      */
     public boolean shouldExecute() {
-        if (this.dino instanceof EntityNewPrehistoric) {
-            EntityNewPrehistoric prehistoric = (EntityNewPrehistoric) dino;
+        if (this.dino instanceof NewPrehistoricEntity) {
+            NewPrehistoricEntity prehistoric = (NewPrehistoricEntity) dino;
             if (prehistoric.aiResponseType() != Response.TERRITORIAL) {
                 return false;
             }

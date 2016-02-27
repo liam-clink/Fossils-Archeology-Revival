@@ -1,6 +1,6 @@
 package com.github.revival.server.entity.ai;
 
-import com.github.revival.server.entity.mob.EntityFriendlyPigZombie;
+import com.github.revival.server.entity.mob.FriendlyPigZombieEntity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.pathfinding.PathNavigate;
@@ -11,14 +11,14 @@ public class FPZAIFollowOwner extends EntityAIBase {
     World theWorld;
     float maxDist;
     float minDist;
-    private EntityFriendlyPigZombie thePet;
+    private FriendlyPigZombieEntity thePet;
     private EntityLivingBase theOwner;
     private float field_48303_f;
     private PathNavigate petPathfinder;
     private int field_48310_h;
     private boolean field_48311_i;
 
-    public FPZAIFollowOwner(EntityFriendlyPigZombie var1, float var2, float var3, float var4) {
+    public FPZAIFollowOwner(FriendlyPigZombieEntity var1, float var2, float var3, float var4) {
         this.thePet = var1;
         this.theWorld = var1.worldObj;
         this.field_48303_f = var2;
