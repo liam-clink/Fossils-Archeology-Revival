@@ -546,6 +546,12 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	public void onUpdate() {
 		super.onUpdate();
 		this.updateSize();
+		if(this.ridingEntity != null){
+			if(this.ridingEntity.isDead){
+				this.mountEntity(null);
+				this.posY += 1;
+			}
+		}
 		boolean sitting = isSitting();
 		if (sitting && sitProgress < 20.0F) {
 			sitProgress += 0.5F;
@@ -961,6 +967,11 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 			return true;
 		}
 	}
+	
+	public void dismountEntity(Entity entity){
+		super.dismountEntity(entity);
+		this.posY += 1;
+    }
 
 	public void setSleeping(int var1) {
 		this.dataWatcher.updateObject(SLEEPING_INDEX, var1);

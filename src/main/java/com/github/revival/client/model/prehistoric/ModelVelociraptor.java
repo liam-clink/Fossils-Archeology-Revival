@@ -212,7 +212,7 @@ public class ModelVelociraptor extends ModelNewPrehistoric {
         this.rightUpperArm.addChild(this.rightUpperArmFeather);
         this.tail1.addChild(this.tail2);
         this.head.addChild(this.lowerCrest);
-        this.tail2.addChild(this.rightToeClaw2);
+        this.rightToeClaw1.addChild(this.rightToeClaw2);
         this.head.addChild(this.lowerJaw);
         this.rightFoot.addChild(this.rightToeClaw1);
         this.head.addChild(this.upperCrest);
