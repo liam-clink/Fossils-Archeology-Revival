@@ -1,11 +1,13 @@
 package com.github.revival.client.model.prehistoric;
 
-import com.github.revival.client.model.prehistoric.test.ModelNewPrehistoric;
-import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelRenderer;
 import net.ilexiconn.llibrary.common.animation.Animator;
 import net.ilexiconn.llibrary.common.animation.IAnimated;
 import net.minecraft.entity.Entity;
+
+import com.github.revival.client.model.prehistoric.test.ModelNewPrehistoric;
+import com.github.revival.server.entity.mob.EntityAnkylosaurus;
+import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 
 public class ModelAnkylosaurus extends ModelNewPrehistoric {
     public MowzieModelRenderer Body;
@@ -181,6 +183,24 @@ public class ModelAnkylosaurus extends ModelNewPrehistoric {
         animator.update(entity);
         this.setToInitPose();
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
+        animator.setAnimationId(EntityAnkylosaurus.animation_attack.animationId);
+        animator.startPhase(5);
+		ModelUtils.rotate(animator, Body, 0, 15, 0);
+		ModelUtils.rotate(animator, Tail1, 0, 10, 0);
+		ModelUtils.rotate(animator, Tail2, 0, 18, 0);
+		ModelUtils.rotate(animator, Tail3, 0, 20, 0);
+		ModelUtils.rotate(animator, TailClub, 0, 20, 0);
+		animator.endPhase();
+		animator.setStationaryPhase(5);
+		animator.startPhase(10);
+		ModelUtils.rotate(animator, Body, 0, -127, 0);
+		ModelUtils.rotate(animator, Tail1, 0, -10, 0);
+		ModelUtils.rotate(animator, Tail2, 0, -18, 0);
+		ModelUtils.rotate(animator, Tail3, 0, -20, 0);
+		ModelUtils.rotate(animator, TailClub, 0, -23, 0);
+		animator.endPhase();
+		animator.setStationaryPhase(5);
+		animator.resetPhase(5);
     }
 
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
@@ -209,7 +229,7 @@ public class ModelAnkylosaurus extends ModelNewPrehistoric {
         sitAnimationRotation(BackThighR, sitProgress, (float) Math.toRadians(70.43D), -((float) Math.toRadians(2.61D)), (float) Math.toRadians(2.61D));
         sitAnimationRotation(Neck, sitProgress, -((float) Math.toRadians(31.3D)), 0, 0);
         sitAnimationRotation(FrontThighR, sitProgress, -((float) Math.toRadians(78.26D)), -((float) Math.toRadians(23.48D)), (float) Math.toRadians(49.57D));
-        sitAnimationRotation(Mouth, sitProgress, (float) Math.toRadians(7.83D), 0, 0);
+        sitAnimationRotation(Mouth, sitProgress, (float) Math.toRadians(0D), 0, 0);
         sitAnimationRotation(FrontThighL, sitProgress, -((float) Math.toRadians(75.65D)), (float) Math.toRadians(26.09D), -((float) Math.toRadians(39.13D)));
         sitAnimationRotation(Mouth_1, sitProgress, (float) Math.toRadians(91.3D), -((float) Math.toRadians(180.0D)), 0);
         sitAnimationRotation(FrontLegL, sitProgress, -((float) Math.toRadians(15.0D)), 0, 0);

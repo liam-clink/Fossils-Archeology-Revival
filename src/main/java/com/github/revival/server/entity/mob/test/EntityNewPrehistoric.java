@@ -577,7 +577,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
 	public void onUpdate() {
 		super.onUpdate();
-		tailbuffer.calculateChainSwingBuffer(90, 15, 4, this);
+		tailbuffer.calculateChainSwingBuffer(70, 10, 4, this);
 		this.updateSize();
 		if(this.ridingEntity != null){
 			if(this.ridingEntity.isDead){
@@ -858,9 +858,6 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 			if (this.riddenByEntity != null || this.isAdult()) {
 				this.stepHeight = 1.0F;
 			}
-		} else {
-			this.motionX *= 0.0D;
-			this.motionZ *= 0.0D;
 		}
 
 
