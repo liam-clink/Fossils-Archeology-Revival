@@ -229,7 +229,6 @@ public class ModelAnkylosaurus extends ModelNewPrehistoric {
         sitAnimationRotation(BackThighR, sitProgress, (float) Math.toRadians(70.43D), -((float) Math.toRadians(2.61D)), (float) Math.toRadians(2.61D));
         sitAnimationRotation(Neck, sitProgress, -((float) Math.toRadians(31.3D)), 0, 0);
         sitAnimationRotation(FrontThighR, sitProgress, -((float) Math.toRadians(78.26D)), -((float) Math.toRadians(23.48D)), (float) Math.toRadians(49.57D));
-        sitAnimationRotation(Mouth, sitProgress, (float) Math.toRadians(0D), 0, 0);
         sitAnimationRotation(FrontThighL, sitProgress, -((float) Math.toRadians(75.65D)), (float) Math.toRadians(26.09D), -((float) Math.toRadians(39.13D)));
         sitAnimationRotation(Mouth_1, sitProgress, (float) Math.toRadians(91.3D), -((float) Math.toRadians(180.0D)), 0);
         sitAnimationRotation(FrontLegL, sitProgress, -((float) Math.toRadians(15.0D)), 0, 0);
