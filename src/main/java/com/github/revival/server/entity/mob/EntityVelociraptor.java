@@ -36,6 +36,7 @@ public class EntityVelociraptor extends EntityNewPrehistoric {
         developsResistance = false;
         breaksBlocks = false;
         favoriteFood = Items.beef;
+        jumpLength = 3.5F;
     }
 
     @Override

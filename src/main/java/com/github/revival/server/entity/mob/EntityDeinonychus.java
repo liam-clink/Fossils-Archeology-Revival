@@ -47,6 +47,7 @@ public class EntityDeinonychus extends EntityNewPrehistoric {
         developsResistance = false;
         breaksBlocks = false;
         favoriteFood = Items.chicken;
+        jumpLength = 5;
     }
     @Override
     public int getAttackLength() {

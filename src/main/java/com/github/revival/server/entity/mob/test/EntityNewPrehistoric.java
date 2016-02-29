@@ -23,7 +23,6 @@ import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIOwnerHurtByTarget;
@@ -55,6 +54,7 @@ import com.github.revival.server.api.IPrehistoricAI;
 import com.github.revival.server.block.FABlockRegistry;
 import com.github.revival.server.block.entity.TileEntityFeeder;
 import com.github.revival.server.config.FossilConfig;
+import com.github.revival.server.entity.ai.DinoAIAttackOnCollide;
 import com.github.revival.server.enums.EnumAnimation;
 import com.github.revival.server.enums.EnumOrderType;
 import com.github.revival.server.enums.EnumPrehistoric;
@@ -127,6 +127,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	private Animation currentAnimation;
 	private int animTick;
 	public ChainBuffer tailbuffer;
+	public float jumpLength;
 	public EntityNewPrehistoric(World world, EnumPrehistoric selfType) {
 		super(world);
 		this.updateSize();
@@ -138,7 +139,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		this.tasks.addTask(0, new DinoAIHunger(this));
 		this.tasks.addTask(0, aiSit);
 		this.setHunger(100 / 2);
-		this.tasks.addTask(7, new EntityAIAttackOnCollide(this, 1.0D, true));
+		this.tasks.addTask(7, new DinoAIAttackOnCollide(this, 1.0D, true));
 		this.tasks.addTask(1, new DinoAIRunAway(this, EntityLivingBase.class, 16.0F, this.getSpeed() / 2, this.getSpeed()));
 		this.tasks.addTask(1, new DinoAITerratorial(this, EntityLivingBase.class, 4.0F));
 		this.tasks.addTask(2, new DinoAIWaterAgressive(this, 0.009D));
