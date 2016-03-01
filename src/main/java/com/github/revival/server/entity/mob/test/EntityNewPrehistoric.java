@@ -200,7 +200,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		compound.setString("OwnerDisplayName", this.getOwnerDisplayName());
 		compound.setInteger("Gender", this.getGender());
 		compound.setInteger("Sleeping", this.getSleeping());
-
+        compound.setBoolean("Sitting", this.isSitting);
 	}
 
 	@Override
@@ -224,6 +224,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		this.setSubSpecies(compound.getInteger("SubSpecies"));
 		this.setGender(compound.getInteger("Gender"));
 		this.setSleeping(compound.getInteger("Sleeping"));
+        this.setSitting(compound.getBoolean("Sitting"));
 
 		this.setOrder(EnumOrderType.values()[compound.getByte("currentOrder")]);
 		String s = "";
@@ -280,7 +281,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	}
 
 	public boolean isSitting() {
-		return worldObj.isRemote ? (this.dataWatcher.getWatchableObjectByte(16) & 1) != 0 : isSitting;
+		return worldObj.isRemote ? ((this.dataWatcher.getWatchableObjectByte(16) & 1) != 0) : isSitting;
 	}
 
 	public Vec3 getBlockToEat(int range) {
@@ -1002,7 +1003,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 			return true;
 		}
 	}
-	
+
 	public void dismountEntity(Entity entity){
 		super.dismountEntity(entity);
 		this.posY += 1;
@@ -1441,7 +1442,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	public int getTailSegments() {
 		return 3;
 	}
-	
+
 	@Override
 	public void updateRidden() {
 		super.updateRidden();
