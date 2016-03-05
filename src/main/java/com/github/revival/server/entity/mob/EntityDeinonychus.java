@@ -176,6 +176,12 @@ public class EntityDeinonychus extends EntityNewPrehistoric {
 
     public void onLivingUpdate() {
         super.onLivingUpdate();
+        if(this.getAttackTarget() != null && this.ridingEntity != null){
+        	if(this.ridingEntity == this.getAttackTarget() && this.ticksExisted % 20 == 0){
+                IAttributeInstance iattributeinstance = this.getEntityAttribute(SharedMonsterAttributes.attackDamage);
+                this.getAttackTarget().attackEntityFrom(DamageSource.causeMobDamage(this), (float)iattributeinstance.getAttributeValue());
+    		}
+        }
 		if(this.getAttackTarget() != null && this.getAnimation() == this.animation_attack && this.getAnimationTick() == 20 && this.onGround){
     		double d0 = this.getAttackTarget().posX - this.posX;
 			double d1 = this.getAttackTarget().posZ - this.posZ;
@@ -188,10 +194,6 @@ public class EntityDeinonychus extends EntityNewPrehistoric {
     }
 
     public boolean attackEntityAsMob(Entity entity) {
-    	if(this.ridingEntity == entity && this.ticksExisted % 10 == 0){
-            IAttributeInstance iattributeinstance = this.getEntityAttribute(SharedMonsterAttributes.attackDamage);
-            entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float)iattributeinstance.getAttributeValue());
-		}
         return false;
     }
     

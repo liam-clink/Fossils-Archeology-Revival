@@ -46,7 +46,6 @@ public class DinoAIAttackOnCollide extends EntityAIBase {
 
 	public boolean continueExecuting() {
 		EntityLivingBase entitylivingbase = this.dino.getAttackTarget();
-
 		return entitylivingbase == null ? false : (!entitylivingbase.isEntityAlive() ? false : (!this.field_75437_f ? !this.dino.getNavigator().noPath() : this.dino.isWithinHomeDistance(MathHelper.floor_double(entitylivingbase.posX), MathHelper.floor_double(entitylivingbase.posY), MathHelper.floor_double(entitylivingbase.posZ))));
 	}
 

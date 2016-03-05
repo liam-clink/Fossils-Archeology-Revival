@@ -6,6 +6,7 @@ import net.ilexiconn.llibrary.common.animation.IAnimated;
 import net.minecraft.entity.Entity;
 
 import com.github.revival.client.model.prehistoric.test.ModelNewPrehistoric;
+import com.github.revival.server.entity.mob.EntityAllosaurus;
 import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 
 public class ModelAllosaurus extends ModelNewPrehistoric {
@@ -177,6 +178,18 @@ public class ModelAllosaurus extends ModelNewPrehistoric {
         animator.update(entity);
         this.setToInitPose();
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
+        animator.setAnimationId(EntityAllosaurus.animation_attack.animationId);
+        animator.startPhase(10);
+		ModelUtils.rotate(animator, neck, -41, 0, 0);
+		ModelUtils.rotate(animator, head, 57, 0, 0);
+		ModelUtils.rotate(animator, lowerJaw, 35, 0, 0);
+        animator.endPhase();
+        animator.startPhase(5);
+		ModelUtils.rotate(animator, neck, 6, 0, 0);
+		ModelUtils.rotate(animator, head, -14, 0, 0);
+		ModelUtils.rotate(animator, lowerJaw, 35, 0, 0);
+        animator.endPhase();
+        animator.resetPhase(10);
     }
 
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {

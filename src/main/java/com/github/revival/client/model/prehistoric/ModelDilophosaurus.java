@@ -1,11 +1,13 @@
 package com.github.revival.client.model.prehistoric;
 
-import com.github.revival.client.model.prehistoric.test.ModelNewPrehistoric;
-import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelRenderer;
 import net.ilexiconn.llibrary.common.animation.Animator;
 import net.ilexiconn.llibrary.common.animation.IAnimated;
 import net.minecraft.entity.Entity;
+
+import com.github.revival.client.model.prehistoric.test.ModelNewPrehistoric;
+import com.github.revival.server.entity.mob.EntityDilophosaurus;
+import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 
 public class ModelDilophosaurus extends ModelNewPrehistoric {
     public MowzieModelRenderer lowerBody;
@@ -156,6 +158,18 @@ public class ModelDilophosaurus extends ModelNewPrehistoric {
         animator.update(entity);
         this.setToInitPose();
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
+        animator.setAnimationId(EntityDilophosaurus.animation_attack.animationId);
+        animator.startPhase(10);
+		ModelUtils.rotate(animator, neck, -41, 0, 0);
+		ModelUtils.rotate(animator, head, 57, 0, 0);
+		ModelUtils.rotate(animator, lowerJaw, 15, 0, 0);
+        animator.endPhase();
+        animator.startPhase(5);
+		ModelUtils.rotate(animator, neck, 6, 0, 0);
+		ModelUtils.rotate(animator, head, -14, 0, 0);
+		ModelUtils.rotate(animator, lowerJaw, 15, 0, 0);
+        animator.endPhase();
+        animator.resetPhase(10);
     }
 
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
@@ -165,7 +179,7 @@ public class ModelDilophosaurus extends ModelNewPrehistoric {
         MowzieModelRenderer[] rightArmParts = {this.rightUpperArm, this.rightLowerArm};
         this.faceTarget(head, 1, f3, f4);
         float speed = 0.1F;
-        float speed2 = 0.8F;
+        float speed2 = 0.3F;
         float sitProgress = ((EntityNewPrehistoric) (entity)).sitProgress;
         this.walk(upperBody, speed, 0.1F, false, 1F, 0F, entity.ticksExisted, 1);
         this.bob(lowerBody, speed, 0.7F, false, entity.ticksExisted, 1);
