@@ -1,11 +1,13 @@
 package com.github.revival.client.model.prehistoric;
 
-import com.github.revival.client.model.prehistoric.test.ModelNewPrehistoric;
-import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelRenderer;
 import net.ilexiconn.llibrary.common.animation.Animator;
 import net.ilexiconn.llibrary.common.animation.IAnimated;
 import net.minecraft.entity.Entity;
+
+import com.github.revival.client.model.prehistoric.test.ModelNewPrehistoric;
+import com.github.revival.server.entity.mob.EntityCeratosaurus;
+import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 
 
 public class ModelCeratosaurus extends ModelNewPrehistoric {
@@ -170,6 +172,18 @@ public class ModelCeratosaurus extends ModelNewPrehistoric {
         animator.update(entity);
         this.setToInitPose();
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
+        animator.setAnimationId(EntityCeratosaurus.animation_attack.animationId);
+        animator.startPhase(10);
+		ModelUtils.rotate(animator, neck, -41, 0, 0);
+		ModelUtils.rotate(animator, head, 57, 0, 0);
+		ModelUtils.rotate(animator, lowerJaw, 25, 0, 0);
+        animator.endPhase();
+        animator.startPhase(5);
+		ModelUtils.rotate(animator, neck, 6, 0, 0);
+		ModelUtils.rotate(animator, head, -14, 0, 0);
+		ModelUtils.rotate(animator, lowerJaw, 25, 0, 0);
+        animator.endPhase();
+        animator.resetPhase(10);
     }
 
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
@@ -186,10 +200,10 @@ public class ModelCeratosaurus extends ModelNewPrehistoric {
         this.bob(lowerBody, speed, 0.7F, false, entity.ticksExisted, 1);
         this.walk(leftThigh, speed2, 0.8F, false, 0F, 0.4F, f, f1);
         this.walk(leftLeg, speed2, 0.2F, false, 0F, -0.6F, f, f1);
-        this.walk(leftFoot, speed2, -0.4F, false, 4.5F, 0.4F, f, f1);
+        this.walk(leftFoot, speed2, 0.8F, true, 4.5F, 0.4F, f, f1);
         this.walk(rightThigh, speed2, 0.8F, true, 0F, 0.4F, f, f1);
         this.walk(rightLeg, speed2, 0.2F, true, 0F, -0.6F, f, f1);
-        this.walk(rightFoot, speed2, -0.4F, true, 4.5F, 0.4F, f, f1);
+        this.walk(rightFoot, speed2, 0.8F, false, 4.5F, 0.4F, f, f1);
         this.chainWave(tailParts, speed, 0.05F, -3, entity.ticksExisted, 1);
         this.chainWave(leftArmParts, speed, 0.15F, -3, entity.ticksExisted, 1);
         this.chainWave(rightArmParts, speed, 0.15F, -3, entity.ticksExisted, 1);

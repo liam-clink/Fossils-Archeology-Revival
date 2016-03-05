@@ -249,7 +249,7 @@ public class ModelTyrannosaurus extends ModelNewPrehistoric {
         MowzieModelRenderer[] leftArmParts = {this.leftUpperArm, this.leftLowerArm};
         MowzieModelRenderer[] rightArmParts = {this.rightUpperArm, this.rightLowerArm};
 
-        float speed = 0.5F;
+        float speed = 0.9F;
         float speed2 = 0.1F;
         float sitProgress = ((EntityNewPrehistoric) (entity)).sitProgress;
         sitAnimationRotation(neck, sitProgress, -((float) Math.toRadians(15D)), 0, 0);
@@ -284,10 +284,10 @@ public class ModelTyrannosaurus extends ModelNewPrehistoric {
         this.walk(upperBody, speed2, 0.05F, false, 1F, 0F, entity.ticksExisted, 1);
         this.walk(leftThigh, speed, 0.8F, false, 0F, 0.4F, f, f1);
         this.walk(leftLeg, speed, 0.2F, false, 0F, -0.6F, f, f1);
-        this.walk(leftFoot, speed, -0.4F, false, 4.5F, 0.4F, f, f1);
+        this.walk(leftFoot, speed, -0.4F, true, 2.5F, 0.4F, f, f1);
         this.walk(rightThigh, speed, 0.8F, true, 0F, 0.4F, f, f1);
         this.walk(rightLeg, speed, 0.2F, true, 0F, -0.6F, f, f1);
-        this.walk(rightFoot, speed, -0.4F, true, 4.5F, 0.4F, f, f1);
+        this.walk(rightFoot, speed, -0.4F, false, 2.5F, 0.4F, f, f1);
         this.chainWave(tailParts, speed2, 0.05F, -3, entity.ticksExisted, 1);
         this.chainWave(leftArmParts, speed2, 0.05F, -3, entity.ticksExisted, 1);
         this.chainWave(rightArmParts, speed2, 0.05F, -3, entity.ticksExisted, 1);

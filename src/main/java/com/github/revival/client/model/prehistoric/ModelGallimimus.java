@@ -194,7 +194,7 @@ public class ModelGallimimus extends ModelNewPrehistoric {
 
         faceTarget(head, 1, f3, f4);
         float speed = 0.1F;
-        float speed2 = 0.5F;
+        float speed2 = 0.3F;
         float sitProgress = ((EntityNewPrehistoric) (entity)).sitProgress;
         sitAnimationRotation(tail3, sitProgress, (float) Math.toRadians(5.22D), 0, 0);
         sitAnimationRotation(lowerBody, sitProgress, -((float) Math.toRadians(2.61D)), 0, 0);
@@ -217,10 +217,10 @@ public class ModelGallimimus extends ModelNewPrehistoric {
         this.bob(lowerBody, speed, 0.5F, false, entity.ticksExisted, 1);
         this.walk(leftThigh, speed2, 0.8F, false, 0F, 0.4F, f, f1);
         this.walk(leftLeg, speed2, 0.2F, false, 0F, -0.6F, f, f1);
-        this.walk(leftFoot, speed2, -0.4F, false, 4.5F, 0.4F, f, f1);
+        this.walk(leftFoot, speed2, -0.8F, true, 4.5F, 0.4F, f, f1);
         this.walk(rightThigh, speed2, 0.8F, true, 0F, 0.4F, f, f1);
         this.walk(rightLeg, speed2, 0.2F, true, 0F, -0.6F, f, f1);
-        this.walk(rightFoot, speed2, -0.4F, true, 4.5F, 0.4F, f, f1);
+        this.walk(rightFoot, speed2, -0.8F, false, 4.5F, 0.4F, f, f1);
         this.chainWave(tailParts, speed, 0.05F, -3, entity.ticksExisted, 1);
         this.chainWave(leftArmParts, speed, -0.15F, -3, entity.ticksExisted, 1);
         this.chainWave(rightArmParts, speed, -0.15F, -3, entity.ticksExisted, 1);

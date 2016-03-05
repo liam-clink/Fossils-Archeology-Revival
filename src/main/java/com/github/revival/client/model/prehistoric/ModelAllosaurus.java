@@ -231,10 +231,10 @@ public class ModelAllosaurus extends ModelNewPrehistoric {
         this.bob(lowerBody, speed, 0.7F, false, entity.ticksExisted, 1);
         this.walk(leftUpperLeg, speed2, 0.8F, false, 0F, 0.4F, f, f1);
         this.walk(leftLowerLeg, speed2, 0.2F, false, 0F, -0.6F, f, f1);
-        this.walk(leftFoot, speed2, -0.4F, false, 4.5F, 0.4F, f, f1);
+        this.walk(leftFoot, speed2, -0.8F, true, 2.5F, 0.4F, f, f1);
         this.walk(rightUpperLeg, speed2, 0.8F, true, 0F, 0.4F, f, f1);
         this.walk(rightLowerLeg, speed2, 0.2F, true, 0F, -0.6F, f, f1);
-        this.walk(rightFoot, speed2, -0.4F, true, 4.5F, 0.4F, f, f1);
+        this.walk(rightFoot, speed2, -0.8F, false, 2.5F, 0.4F, f, f1);
         this.chainWave(tailParts, speed, 0.05F, -3, entity.ticksExisted, 1);
         this.chainWave(leftArmParts, speed, 0.15F, -3, entity.ticksExisted, 1);
         this.chainWave(rightArmParts, speed, 0.15F, -3, entity.ticksExisted, 1);

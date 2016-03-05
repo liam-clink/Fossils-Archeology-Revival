@@ -1,7 +1,9 @@
 package com.github.revival.client.model.prehistoric;
 
 import com.github.revival.client.model.prehistoric.test.ModelNewPrehistoric;
+import com.github.revival.server.entity.mob.EntityDeinonychus;
 import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
+
 import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelRenderer;
 import net.ilexiconn.llibrary.common.animation.Animator;
 import net.ilexiconn.llibrary.common.animation.IAnimated;
@@ -169,7 +171,37 @@ public class ModelCompsognathus extends ModelNewPrehistoric {
         animator.update(entity);
         this.setToInitPose();
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
-
+        animator.setAnimationId(EntityDeinonychus.animation_attack.animationId);
+        animator.startPhase(15);
+		animator.move(LeftUpperLeg, 0, 1F, -0.5F);
+		animator.move(RightUpperLeg, 0, 1F, -0.5F);
+		animator.move(body, 0, 1F, -0.5F);
+		ModelUtils.rotate(animator, body, 15, 0, 0);
+		ModelUtils.rotate(animator, RightLowerLeg, -30, 0, 0);
+		ModelUtils.rotate(animator, LeftLowerLeg, -30, 0, 0);
+		ModelUtils.rotate(animator, RightFoot, 30, 0, 0);
+		ModelUtils.rotate(animator, LeftFoot, 30, 0, 0);
+		ModelUtils.rotate(animator, LeftUpperArm, 0, 0, -50);
+		ModelUtils.rotate(animator, RightUpperArm, 0, 0, 50);
+		ModelUtils.rotate(animator, head, -20, 0, 0);
+		animator.endPhase();
+		animator.setStationaryPhase(5);
+        animator.startPhase(5);
+		animator.move(LeftUpperLeg, 0, -6F, 0F);
+		animator.move(RightUpperLeg, 0, -6F, 0F);
+		animator.move(body, 0, -10F, 0F);
+		ModelUtils.rotate(animator, body, -25, 0, 0);
+		ModelUtils.rotate(animator, RightUpperLeg, -35, 0, 0);
+		ModelUtils.rotate(animator, LeftUpperLeg, -35, 0, 0);
+		ModelUtils.rotate(animator, RightLowerLeg, -30, 0, 0);
+		ModelUtils.rotate(animator, LeftLowerLeg, -30, 0, 0);
+		ModelUtils.rotate(animator, RightFoot, -55, 0, 0);
+		ModelUtils.rotate(animator, LeftFoot, -55, 0, 0);
+		ModelUtils.rotate(animator, LeftUpperArm, 0, 0, -50);
+		ModelUtils.rotate(animator, RightUpperArm, 0, 0, 50);
+		animator.endPhase();
+		animator.setStationaryPhase(5);
+		animator.resetPhase(5);
     }
 
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
@@ -181,32 +213,32 @@ public class ModelCompsognathus extends ModelNewPrehistoric {
         this.faceTarget(head, 1, f3, f4);
 
         float speed = 0.1F;
-        float speed2 = 1.5F;
+        float speed2 = 0.5F;
         float sitProgress = ((EntityNewPrehistoric) (entity)).sitProgress;
         sitAnimationRotation(neck, sitProgress, 0.18203784098300857F, 0.0F, 0.0F);
-        sitAnimationRotation(RightLowerLeg, sitProgress, 2.0943951023931953F, 0.0F, 0.0F);
+        sitAnimationRotation(RightLowerLeg, sitProgress, 2.0943951023931953F + (float) Math.toRadians(15D), 0.0F, 0.0F);
         sitAnimationRotation(tail2, sitProgress, 0.091106186954104F, 0.0F, 0.0F);
         sitAnimationRotation(crest, sitProgress, 0.31869712141416456F, 0.0F, 0.0F);
         sitAnimationRotation(RightLowerArm, sitProgress, -0.22689280275926282F, 0.0F, 0.0F);
-        sitAnimationRotation(LeftLowerLeg, sitProgress, 2.0943951023931953F, 0.0F, 0.0F);
+        sitAnimationRotation(LeftLowerLeg, sitProgress, 2.0943951023931953F + (float) Math.toRadians(15D), 0.0F, 0.0F);
         sitAnimationRotation(tail1, sitProgress, -0.18203784098300857F, 0.0F, 0.0F);
         sitAnimationRotation(LeftLowerArm, sitProgress, -0.22689280275926282F, 0.0F, 0.0F);
-        sitAnimationRotation(LeftFoot, sitProgress, -0.7853981633974483F, 0.0F, 0.0F);
-        sitAnimationRotation(RightUpperLeg, sitProgress, -1.0471975511965976F, 0.0F, 0.0F);
+        sitAnimationRotation(LeftFoot, sitProgress, -0.7853981633974483F - (float) Math.toRadians(55D), 0.0F, 0.0F);
+        sitAnimationRotation(RightUpperLeg, sitProgress, -1.0471975511965976F + (float) Math.toRadians(25D), 0.0F, 0.0F);
         sitAnimationRotation(RightUpperArm, sitProgress, -0.17453292519943295F, 0.0F, 0.7740535232594852F);
         sitAnimationRotation(LeftUpperArm, sitProgress, -0.17453292519943295F, 0.0F, -0.6373942428283291F);
-        sitAnimationRotation(LeftUpperLeg, sitProgress, -1.0471975511965976F, 0.0F, 0.0F);
-        sitAnimationRotation(RightFoot, sitProgress, -0.7853981633974483F, 0.0F, 0.0F);
-        sitAnimationPos(body, sitProgress, 0F, 22.7F - body.initRotationPointY, 0F);
-        sitAnimationPos(RightUpperLeg, sitProgress, 0F, 19.7F - RightUpperLeg.initRotationPointY, 0F);
-        sitAnimationPos(LeftUpperLeg, sitProgress, 0F, 19.7F - LeftUpperLeg.initRotationPointY, 0F);
+        sitAnimationRotation(LeftUpperLeg, sitProgress, -1.0471975511965976F + (float) Math.toRadians(25D), 0.0F, 0.0F);
+        sitAnimationRotation(RightFoot, sitProgress, -0.7853981633974483F - (float) Math.toRadians(55D), 0.0F, 0.0F);
+        sitAnimationPos(body, sitProgress, 0F, 22F - body.initRotationPointY, 0F);
+        sitAnimationPos(RightUpperLeg, sitProgress, 0F, 19F - RightUpperLeg.initRotationPointY, 0F);
+        sitAnimationPos(LeftUpperLeg, sitProgress, 0F, 19F - LeftUpperLeg.initRotationPointY, 0F);
         this.bob(body, speed, 0.7F, false, entity.ticksExisted, 1);
         this.walk(LeftUpperLeg, speed2, 0.8F, false, 0F, 0.4F, f, f1);
         this.walk(LeftLowerLeg, speed2, 0.2F, false, 0F, -0.6F, f, f1);
-        this.walk(LeftFoot, speed2, -0.4F, false, 4.5F, 0.4F, f, f1);
+        this.walk(LeftFoot, speed2, 0.8F, true, 0F, 0.4F, f, f1);
         this.walk(RightUpperLeg, speed2, 0.8F, true, 0F, 0.4F, f, f1);
         this.walk(RightLowerLeg, speed2, 0.2F, true, 0F, -0.6F, f, f1);
-        this.walk(RightFoot, speed2, -0.4F, true, 4.5F, 0.4F, f, f1);
+        this.walk(RightFoot, speed2, 0.8F, false, 0F, 0.4F, f, f1);
         this.chainWave(tailParts, speed, 0.05F, -3, entity.ticksExisted, 1);
         this.chainWave(leftArmParts, speed, 0.15F, -3, entity.ticksExisted, 1);
         this.chainWave(rightArmParts, speed, 0.15F, -3, entity.ticksExisted, 1);

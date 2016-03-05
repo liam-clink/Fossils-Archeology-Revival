@@ -183,7 +183,7 @@ public class EntityAllosaurus extends EntityNewPrehistoric {
 				double d0 = this.getAttackTarget().posX - this.posX;
 				double d1 = this.getAttackTarget().posZ - this.posZ;
 				float f = MathHelper.sqrt_double(d0 * d0 + d1 * d1);
-				entity.addVelocity((double)(-MathHelper.sin(this.rotationYaw * (float)Math.PI / 180.0F) * 0.1F), 0.0D, (double)(MathHelper.cos(this.rotationYaw * (float)Math.PI / 180.0F) * 0.1F));
+				entity.addVelocity((double)(-MathHelper.sin(this.rotationYaw * (float)Math.PI / 180.0F) * (0.1F * this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).getAttributeValue()/2)), 0.0D, (double)(MathHelper.cos(this.rotationYaw * (float)Math.PI / 180.0F) * (0.1F * this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).getAttributeValue()/2)));
 				entity.isAirBorne = false;
 
 			}
