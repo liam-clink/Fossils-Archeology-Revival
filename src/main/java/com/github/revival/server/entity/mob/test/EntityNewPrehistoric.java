@@ -281,7 +281,20 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	}
 
 	public boolean isSitting() {
-		return worldObj.isRemote ? ((this.dataWatcher.getWatchableObjectByte(16) & 1) != 0) : isSitting;
+        if (worldObj.isRemote) {
+            boolean isSitting = (this.dataWatcher.getWatchableObjectByte(16) & 1) != 0;
+
+            if ((isSitting != this.isSitting))
+            {
+                ticksSitted = 0;
+            }
+
+            this.isSitting = isSitting;
+
+            return isSitting;
+        }
+
+		return isSitting;
 	}
 
 	public Vec3 getBlockToEat(int range) {
@@ -397,12 +410,12 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 			ticksSitted++;
 		}
 
-		if (worldObj.isRemote && !this.isSitting() && this.getRNG().nextInt(1000) == 1 && !this.isRiding() && (this.getAnimation() == this.animation_none || this.getAnimation() == this.animation_speak)) {
+		if (!worldObj.isRemote && !this.isSitting() && this.getRNG().nextInt(1000) == 1 && !this.isRiding() && (this.getAnimation() == this.animation_none || this.getAnimation() == this.animation_speak)) {
 			this.setSitting(true);
 			ticksSitted = 0;
 		}
 
-		if (worldObj.isRemote && (this.isSitting() && ticksSitted > 100 && this.getRNG().nextInt(1000) == 1 || this.getAttackTarget() != null)) {
+		if (!worldObj.isRemote && (this.isSitting() && ticksSitted > 100 && this.getRNG().nextInt(1000) == 1 || this.getAttackTarget() != null)) {
 			this.setSitting(false);
 			ticksSitted = 0;
 		}

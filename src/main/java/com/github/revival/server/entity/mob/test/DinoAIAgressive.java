@@ -46,6 +46,9 @@ public class DinoAIAgressive extends EntityAINearestAttackableTarget {
             if (mob.canAttackClass(targetEntity.getClass())) {
                 return false;
             }
+            if (mob.isMovementBlocked()) {
+                return false;
+            }
 
             if (this.mob.selfType.diet == EnumDiet.HERBIVORE) {
                 return false;

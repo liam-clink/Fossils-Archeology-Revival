@@ -34,6 +34,8 @@ public class DinoAIAttackOnCollide extends EntityAIBase {
 			return false;
 		} else if (!entitylivingbase.isEntityAlive()) {
 			return false;
+		} else if (this.dino.isMovementBlocked()) {
+			return false;
 		} else if (this.classTarget != null && !this.classTarget.isAssignableFrom(entitylivingbase.getClass())) {
 			return false;
 		} else {

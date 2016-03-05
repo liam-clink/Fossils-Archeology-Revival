@@ -22,7 +22,7 @@ public class DinoAILeapAtTarget extends EntityAIBase
 	{
 		this.leapTarget = this.dino.getAttackTarget();
 
-		if(dino.getAnimation() == dino.animation_attack)
+		if(dino.getAnimation() == EntityNewPrehistoric.animation_attack)
 		{
 			return false;
 		}
@@ -41,7 +41,7 @@ public class DinoAILeapAtTarget extends EntityAIBase
 		else
 		{
 			double d0 = this.dino.getDistanceSqToEntity(this.leapTarget);
-			return d0 >= 1.0D && d0 <= 16.0D ? (!this.dino.onGround ? false : this.dino.getRNG().nextInt(5) == 0) : false;
+			return (d0 >= 1.0D && d0 <= 16.0D) && (this.dino.onGround && this.dino.getRNG().nextInt(5) == 0) && !dino.isMovementBlocked();
 		}
 	}
 
