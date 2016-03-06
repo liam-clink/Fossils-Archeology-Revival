@@ -187,8 +187,8 @@ public class ModelCompsognathus extends ModelNewPrehistoric {
 		animator.endPhase();
 		animator.setStationaryPhase(5);
         animator.startPhase(5);
-		animator.move(LeftUpperLeg, 0, -6F, 0F);
-		animator.move(RightUpperLeg, 0, -6F, 0F);
+		animator.move(LeftUpperLeg, 0, -9F, 0F);
+		animator.move(RightUpperLeg, 0, -9F, 0F);
 		animator.move(body, 0, -10F, 0F);
 		ModelUtils.rotate(animator, body, -25, 0, 0);
 		ModelUtils.rotate(animator, RightUpperLeg, -35, 0, 0);

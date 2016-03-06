@@ -2,6 +2,7 @@ package com.github.revival.server.entity.mob;
 
 import com.github.revival.server.block.FABlockRegistry;
 import com.github.revival.server.item.FAItemRegistry;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntitySlime;
@@ -10,6 +11,7 @@ import net.minecraft.item.Item;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 public class EntityTarSlime extends EntitySlime {
@@ -38,6 +40,13 @@ public class EntityTarSlime extends EntitySlime {
     @Override
     public void onUpdate() {
         super.onUpdate();
+        int j = MathHelper.floor_double(this.posX);
+        int k = MathHelper.floor_double(this.posY);
+        int l = MathHelper.floor_double(this.posZ);
+        if(this.worldObj.getBlock(j, k, l) == FABlockRegistry.tar)
+        {
+        	this.motionY *= 1.3;
+        }
         boolean flag = onGround;
         if (onGround && !flag || this.isJumping) {
             this.playSound(this.getJumpSound(), this.getSoundVolume(), getSoundPitch() * ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F) / 0.8F);
@@ -120,5 +129,23 @@ public class EntityTarSlime extends EntitySlime {
         return false;
     }
 
+    public boolean isEntityInsideOpaqueBlock()
+    {
+        for (int i = 0; i < 8; ++i)
+        {
+            float f = ((float)((i >> 0) % 2) - 0.5F) * this.width * 0.8F;
+            float f1 = ((float)((i >> 1) % 2) - 0.5F) * 0.1F;
+            float f2 = ((float)((i >> 2) % 2) - 0.5F) * this.width * 0.8F;
+            int j = MathHelper.floor_double(this.posX + (double)f);
+            int k = MathHelper.floor_double(this.posY + (double)this.getEyeHeight() + (double)f1);
+            int l = MathHelper.floor_double(this.posZ + (double)f2);
 
+            if (this.worldObj.getBlock(j, k, l).isNormalCube() && this.worldObj.getBlock(j, k, l) != FABlockRegistry.tar)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

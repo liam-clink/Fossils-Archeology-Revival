@@ -1,7 +1,9 @@
 package com.github.revival.client.model.prehistoric;
 
 import com.github.revival.client.model.prehistoric.test.ModelNewPrehistoric;
+import com.github.revival.server.entity.mob.EntityAnkylosaurus;
 import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
+
 import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelRenderer;
 import net.ilexiconn.llibrary.common.animation.Animator;
 import net.ilexiconn.llibrary.common.animation.IAnimated;
@@ -198,6 +200,26 @@ public class ModelMammoth extends ModelNewPrehistoric {
         animator.update(entity);
         this.setToInitPose();
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
+        animator.setAnimationId(EntityAnkylosaurus.animation_attack.animationId);
+        animator.startPhase(5);
+		ModelUtils.rotate(animator, neck, 0, 20, 0);
+		ModelUtils.rotate(animator, head, 0, 5, 10);
+		ModelUtils.rotate(animator, nose3, 0, 0, 7);
+		ModelUtils.rotate(animator, nose4, 0, 0, 10);
+		animator.endPhase();
+		animator.setStationaryPhase(5);
+		animator.startPhase(10);
+		ModelUtils.rotate(animator, neck, 0, -30, 0);
+		ModelUtils.rotate(animator, head, 0, -5, -15);
+		ModelUtils.rotate(animator, nose1, -40, 0, 0);
+		ModelUtils.rotate(animator, nose2, -12, 0, 0);
+		ModelUtils.rotate(animator, nose3, -31, 0, 0);
+		ModelUtils.rotate(animator, nose4, -18, 0, 0);
+		animator.move(nose2, 0, -0.2F, 0);
+		animator.move(nose3, 0, -0.7F, 0.3F);
+		animator.endPhase();
+		animator.setStationaryPhase(10);
+		animator.resetPhase(5);
     }
 
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {

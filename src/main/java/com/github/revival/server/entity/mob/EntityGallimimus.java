@@ -5,9 +5,14 @@ import com.github.revival.server.config.FossilConfig;
 import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 import com.github.revival.server.enums.EnumPrehistoric;
 import com.github.revival.server.enums.EnumPrehistoricAI.*;
+
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 public class EntityGallimimus extends EntityNewPrehistoric {
@@ -30,6 +35,10 @@ public class EntityGallimimus extends EntityNewPrehistoric {
         breaksBlocks = false;
         favoriteFood = Items.carrot;
     }
+    
+    public int getAttackLength() {
+		return 30;
+	}
 
     @Override
     protected void applyEntityAttributes() {
@@ -367,5 +376,43 @@ public class EntityGallimimus extends EntityNewPrehistoric {
     
 	public int getTailSegments() {
 		return 3;
+	}
+	
+	public void onLivingUpdate(){
+    	super.onLivingUpdate();
+    	if(this.getAnimation() == this.animation_attack && this.getAnimationTick() == 12 && this.getAttackTarget() != null){
+    		this.attackEntityAsMob(this.getAttackTarget());
+    	}
+    }
+	
+	public boolean attackEntityAsMob(Entity entity)
+	{
+		if(this.getAnimation() == animation_none){
+			this.setAnimation(animation_attack);
+			return false;
+		}
+		if(this.getAnimation() == animation_attack && this.getAnimationTick() == 12){
+			IAttributeInstance iattributeinstance = this.getEntityAttribute(SharedMonsterAttributes.attackDamage);
+			boolean flag = entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float)iattributeinstance.getAttributeValue());
+
+			if (flag)
+			{
+				if(entity.ridingEntity != null){
+					if(entity.ridingEntity  == this){
+						entity.mountEntity(null);
+					}
+				}
+				entity.motionY += 0.4000000059604645D;
+				double d0 = this.getAttackTarget().posX - this.posX;
+				double d1 = this.getAttackTarget().posZ - this.posZ;
+				float f = MathHelper.sqrt_double(d0 * d0 + d1 * d1);
+				entity.addVelocity((double)(-MathHelper.sin(this.rotationYaw * (float)Math.PI / 180.0F) * (0.1F * this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).getAttributeValue()/2)), 0.0D, (double)(MathHelper.cos(this.rotationYaw * (float)Math.PI / 180.0F) * (0.1F * this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).getAttributeValue()/2)));
+                entity.isAirBorne = false;
+				
+			}
+
+			return flag;
+		}
+		return false;
 	}
 }

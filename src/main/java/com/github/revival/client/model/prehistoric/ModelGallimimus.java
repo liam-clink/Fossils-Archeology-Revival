@@ -1,7 +1,9 @@
 package com.github.revival.client.model.prehistoric;
 
 import com.github.revival.client.model.prehistoric.test.ModelNewPrehistoric;
+import com.github.revival.server.entity.mob.EntityDilophosaurus;
 import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
+
 import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelRenderer;
 import net.ilexiconn.llibrary.common.animation.Animator;
 import net.ilexiconn.llibrary.common.animation.IAnimated;
@@ -184,6 +186,26 @@ public class ModelGallimimus extends ModelNewPrehistoric {
         animator.update(entity);
         this.setToInitPose();
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
+        animator.setAnimationId(EntityDilophosaurus.animation_attack.animationId);
+        animator.startPhase(10);
+		ModelUtils.rotate(animator, neck, -36, 0, 0);
+		ModelUtils.rotate(animator, head, 47, 0, 0);
+		ModelUtils.rotate(animator, lowerJaw, 15, 0, 0);
+		ModelUtils.rotate(animator, leftUpperArm, 10, 0, -40);
+		ModelUtils.rotate(animator, rightUpperArm, 10, 0, 40);
+		ModelUtils.rotate(animator, leftLowerArm, -20, 0, 0);
+		ModelUtils.rotate(animator, rightLowerArm, -20, 0, 0);
+        animator.endPhase();
+        animator.startPhase(5);
+		ModelUtils.rotate(animator, neck, 6, 0, 0);
+		ModelUtils.rotate(animator, head, -14, 0, 0);
+		ModelUtils.rotate(animator, lowerJaw, 15, 0, 0);
+		ModelUtils.rotate(animator, leftUpperArm, 10, 0, -40);
+		ModelUtils.rotate(animator, rightUpperArm, 10, 0, 40);
+		ModelUtils.rotate(animator, leftLowerArm, -20, 0, 0);
+		ModelUtils.rotate(animator, rightLowerArm, -20, 0, 0);
+        animator.endPhase();
+        animator.resetPhase(10);
     }
 
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
@@ -194,7 +216,7 @@ public class ModelGallimimus extends ModelNewPrehistoric {
 
         faceTarget(head, 1, f3, f4);
         float speed = 0.1F;
-        float speed2 = 0.3F;
+        float speed2 = 0.4F;
         float sitProgress = ((EntityNewPrehistoric) (entity)).sitProgress;
         sitAnimationRotation(tail3, sitProgress, (float) Math.toRadians(5.22D), 0, 0);
         sitAnimationRotation(lowerBody, sitProgress, -((float) Math.toRadians(2.61D)), 0, 0);
