@@ -1,7 +1,9 @@
 package com.github.revival.client.model.prehistoric;
 
 import com.github.revival.client.model.prehistoric.test.ModelNewPrehistoric;
+import com.github.revival.server.entity.mob.EntityAnkylosaurus;
 import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
+
 import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelRenderer;
 import net.ilexiconn.llibrary.common.animation.Animator;
 import net.ilexiconn.llibrary.common.animation.IAnimated;
@@ -172,6 +174,21 @@ public class ModelPachycephalosaurus extends ModelNewPrehistoric {
         animator.update(entity);
         this.setToInitPose();
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
+        animator.setAnimationId(EntityAnkylosaurus.animation_attack.animationId);
+        animator.startPhase(5);
+		animator.move(lowerBody, 0, 5, -2);
+		ModelUtils.rotate(animator, lowerBody, 20, 0, 0);
+		ModelUtils.rotate(animator, head, 30, 0, 0);
+		ModelUtils.rotate(animator, neck, -50, 0, 0);
+		animator.endPhase();
+		animator.setStationaryPhase(5);
+		animator.startPhase(10);
+		animator.move(lowerBody, 0, -2, 2);
+		ModelUtils.rotate(animator, lowerBody, -20, 0, 0);
+		ModelUtils.rotate(animator, head, -10, 0, 0);
+		animator.endPhase();
+		animator.setStationaryPhase(5);
+		animator.resetPhase(5);
     }
 
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
