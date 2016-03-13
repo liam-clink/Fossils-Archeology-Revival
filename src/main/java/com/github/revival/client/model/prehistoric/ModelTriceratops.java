@@ -1,7 +1,9 @@
 package com.github.revival.client.model.prehistoric;
 
 import com.github.revival.client.model.prehistoric.test.ModelNewPrehistoric;
+import com.github.revival.server.entity.mob.EntityAnkylosaurus;
 import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
+
 import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelRenderer;
 import net.ilexiconn.llibrary.common.animation.Animator;
 import net.ilexiconn.llibrary.common.animation.IAnimated;
@@ -195,7 +197,19 @@ public class ModelTriceratops extends ModelNewPrehistoric {
         animator.update(entity);
         this.setToInitPose();
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
-
+        animator.setAnimationId(EntityAnkylosaurus.animation_attack.animationId);
+        animator.startPhase(5);
+		ModelUtils.rotate(animator, head, 30, 0, 0);
+		ModelUtils.rotate(animator, neck, 25, 0, 0);
+		animator.endPhase();
+		animator.setStationaryPhase(5);
+		animator.startPhase(10);
+		ModelUtils.rotate(animator, neck, -30, 0, 0);
+		ModelUtils.rotate(animator, head, -30, 0, 0);
+		animator.endPhase();
+		animator.setStationaryPhase(5);
+		animator.resetPhase(5);
+		
 //		animator.setAnimationId(EntityNewPrehistoric.animation_sit.animationId);
 //		animator.startPhase(20);
 //		sitPose(true);

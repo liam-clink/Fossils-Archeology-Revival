@@ -180,12 +180,8 @@ public class EntitySmilodon extends EntityNewPrehistoric {
 						entity.mountEntity(null);
 					}
 				}
-				entity.motionY += 0.4000000059604645D;
-				double d0 = this.getAttackTarget().posX - this.posX;
-				double d1 = this.getAttackTarget().posZ - this.posZ;
-				float f = MathHelper.sqrt_double(d0 * d0 + d1 * d1);
-				entity.addVelocity((double)(-MathHelper.sin(this.rotationYaw * (float)Math.PI / 180.0F) * (0.05F)), -1.1D, (double)(MathHelper.cos(this.rotationYaw * (float)Math.PI / 180.0F) * (0.1F)));
-				entity.isAirBorne = false;
+				entity.motionY += (0.4000000059604645D / 2);
+                knockbackEntity(entity, 0.05F, -1.1F);	
 
 			}
 

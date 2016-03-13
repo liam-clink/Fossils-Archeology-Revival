@@ -200,7 +200,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		compound.setString("OwnerDisplayName", this.getOwnerDisplayName());
 		compound.setInteger("Gender", this.getGender());
 		compound.setInteger("Sleeping", this.getSleeping());
-        compound.setBoolean("Sitting", this.isSitting);
+		compound.setBoolean("Sitting", this.isSitting);
 	}
 
 	@Override
@@ -224,7 +224,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		this.setSubSpecies(compound.getInteger("SubSpecies"));
 		this.setGender(compound.getInteger("Gender"));
 		this.setSleeping(compound.getInteger("Sleeping"));
-        this.setSitting(compound.getBoolean("Sitting"));
+		this.setSitting(compound.getBoolean("Sitting"));
 
 		this.setOrder(EnumOrderType.values()[compound.getByte("currentOrder")]);
 		String s = "";
@@ -281,18 +281,18 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	}
 
 	public boolean isSitting() {
-        if (worldObj.isRemote) {
-            boolean isSitting = (this.dataWatcher.getWatchableObjectByte(16) & 1) != 0;
+		if (worldObj.isRemote) {
+			boolean isSitting = (this.dataWatcher.getWatchableObjectByte(16) & 1) != 0;
 
-            if ((isSitting != this.isSitting))
-            {
-                ticksSitted = 0;
-            }
+			if ((isSitting != this.isSitting))
+			{
+				ticksSitted = 0;
+			}
 
-            this.isSitting = isSitting;
+			this.isSitting = isSitting;
 
-            return isSitting;
-        }
+			return isSitting;
+		}
 
 		return isSitting;
 	}
@@ -495,8 +495,8 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 				}
 			}
 		}*/
+		}
 	}
-}
 
 	public void flyTowardsTarget() {
 		if (currentTarget != null) {
@@ -1004,9 +1004,9 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	public void setSitting(boolean sitting) {
 		super.setSitting(sitting);
 
-        if (!worldObj.isRemote) {
-            this.isSitting = sitting;
-        }
+		if (!worldObj.isRemote) {
+			this.isSitting = sitting;
+		}
 	}
 
 	public boolean isSleeping() {
@@ -1020,7 +1020,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	public void dismountEntity(Entity entity){
 		super.dismountEntity(entity);
 		this.posY += 1;
-    }
+	}
 
 	public void setSleeping(int var1) {
 		this.dataWatcher.updateObject(SLEEPING_INDEX, var1);
@@ -1510,6 +1510,39 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 			if (this.getAnimation().animationId == 0 && !worldObj.isRemote) {
 				this.setAnimation(animation_speak);
 			}
+		}
+	}
+
+	public void knockbackEntity(Entity knockBackMob, float knockbackStrength, float knockbackStrengthUp){
+		knockBackMob(knockBackMob, 1, 0.4D, 1);
+	}
+
+	public static void knockBackMob(Entity entity, double xMotion, double yMotion, double zMotion){
+		entity.isAirBorne = true;
+		float f1 = MathHelper.sqrt_double(xMotion * xMotion + zMotion * zMotion);
+		entity.motionX /= 2.0D;
+		entity.motionY /= 2.0D;
+		entity.motionZ /= 2.0D;
+		entity.motionX -= xMotion / (double)f1;
+		entity.motionY += yMotion;
+		entity.motionZ -= zMotion / (double)f1;
+
+	}
+
+	@Override
+	public void knockBack(Entity entity, float f, double x, double z)
+	{
+		if (this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).getAttributeValue() <= 0)
+		{
+			this.velocityChanged = false;
+			float f1 = MathHelper.sqrt_double(x * x + z * z);
+			float f2 = f * 0.15F;
+			this.motionX /= 2.0D;
+			this.motionY /= 2.0D;
+			this.motionZ /= 2.0D;
+			this.motionX -= x / (double)f1 * (double)f2;
+			this.motionY += (double)f2;
+			this.motionZ -= z / (double)f1 * (double)f2;
 		}
 	}
 
