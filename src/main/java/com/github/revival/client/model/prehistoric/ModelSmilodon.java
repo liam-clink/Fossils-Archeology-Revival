@@ -1,10 +1,13 @@
 package com.github.revival.client.model.prehistoric;
 
-import com.github.revival.client.model.prehistoric.test.ModelNewPrehistoric;
 import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelRenderer;
 import net.ilexiconn.llibrary.common.animation.Animator;
 import net.ilexiconn.llibrary.common.animation.IAnimated;
 import net.minecraft.entity.Entity;
+
+import com.github.revival.client.model.prehistoric.test.ModelNewPrehistoric;
+import com.github.revival.server.entity.mob.EntitySmilodon;
+import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 
 public class ModelSmilodon extends ModelNewPrehistoric {
     public MowzieModelRenderer lowerBody;
@@ -140,6 +143,18 @@ public class ModelSmilodon extends ModelNewPrehistoric {
         animator.update(entity);
         this.setToInitPose();
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
+        animator.setAnimationId(EntitySmilodon.animation_attack.animationId);
+        animator.startPhase(10);
+		ModelUtils.rotate(animator, neck, -31, 0, 0);
+		ModelUtils.rotate(animator, head, -40, 0, 0);
+		ModelUtils.rotate(animator, lowerJaw, 70, 0, 0);
+        animator.endPhase();
+        animator.startPhase(5);
+		ModelUtils.rotate(animator, neck, 6, 0, 0);
+		ModelUtils.rotate(animator, head, -14, 0, 0);
+		ModelUtils.rotate(animator, lowerJaw, 70, 0, 0);
+        animator.endPhase();
+        animator.resetPhase(10);
     }
 
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
@@ -148,7 +163,7 @@ public class ModelSmilodon extends ModelNewPrehistoric {
         this.faceTarget(head, 1, f3, f4);
         float speed = 0.1F;
         float speed2 = 1.1F;
-        float sitProgress = 20;//((EntityNewPrehistoric)(entity)).sitProgress;
+        float sitProgress = ((EntityNewPrehistoric)(entity)).sitProgress;
         this.chainWave(tailParts, speed, 0.05F, -3, entity.ticksExisted, 1);
         this.chainSwing(tailParts, speed, 0.15F, -2, entity.ticksExisted, 1);
         this.chainWave(neckParts, speed, 0.15F, 3, entity.ticksExisted, 1);

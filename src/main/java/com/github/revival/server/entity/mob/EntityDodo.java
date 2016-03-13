@@ -163,14 +163,6 @@ public class EntityDodo extends EntityNewPrehistoric {
             this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(Math.round(this.baseHealth + (healthStep * this.getDinoAge())));
             this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(Math.round(this.baseDamage + (attackStep * this.getDinoAge())));
             this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(this.baseSpeed + (speedStep * this.getDinoAge()));
-
-            if (this.isTeen()) {
-                this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.5D);
-            } else if (this.isAdult()) {
-                this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(2.0D);
-            } else {
-                this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.0D);
-            }
         }
     }
 
@@ -210,6 +202,7 @@ public class EntityDodo extends EntityNewPrehistoric {
     @Override
     public void onLivingUpdate() {
         super.onLivingUpdate();
+        this.motionX *= 0; this.motionZ *= 0;
         if (this.getFat() > 5) {
             this.motionY += 0.1D;
             if (this.posY > 200) {
