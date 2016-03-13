@@ -1,11 +1,13 @@
 package com.github.revival.client.model.prehistoric;
 
-import com.github.revival.client.model.prehistoric.test.ModelNewPrehistoric;
-import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelRenderer;
 import net.ilexiconn.llibrary.common.animation.Animator;
 import net.ilexiconn.llibrary.common.animation.IAnimated;
 import net.minecraft.entity.Entity;
+
+import com.github.revival.client.model.prehistoric.test.ModelNewPrehistoric;
+import com.github.revival.server.entity.mob.EntityBrachiosaurus;
+import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 
 public class ModelBrachiosaurus extends ModelNewPrehistoric {
     public MowzieModelRenderer BackThighRight;
@@ -162,12 +164,42 @@ public class ModelBrachiosaurus extends ModelNewPrehistoric {
         animator.update(entity);
         this.setToInitPose();
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
+        animator.setAnimationId(EntityBrachiosaurus.animation_attack.animationId);
+        animator.startPhase(20);
+		animator.move(FrontThighLeft, 0, -4, 3);
+		animator.move(FrontThighRight, 0, -4, 3);
+		animator.move(BackThighLeft, 0, 1, 0);
+		animator.move(BackThighRight, 0, 1, 0);
+		ModelUtils.rotate(animator, LowerBody, -50, 0, 0);
+		ModelUtils.rotate(animator, Neck2, 2, 0, 0);
+		ModelUtils.rotate(animator, Neck3, 1, 0, 0);
+		ModelUtils.rotate(animator, Neck4, 14, 0, 0);
+		ModelUtils.rotate(animator, FrontThighRight, -28, 0, 0);
+		ModelUtils.rotate(animator, FrontThighLeft, -28, 0, 0);
+		ModelUtils.rotate(animator, FrontLegRight, 28, 0, 0);
+		ModelUtils.rotate(animator, FrontLegLeft, 28, 0, 0);
+		ModelUtils.rotate(animator, BackThighRight, -32, 0, 0);
+		ModelUtils.rotate(animator, BackThighLeft, -32, 0, 0);
+		ModelUtils.rotate(animator, BackLegRight, 32, 0, 0);
+		ModelUtils.rotate(animator, BackLegLeft, 32, 0, 0);
+		ModelUtils.rotate(animator, Tail, 0, 0, 0);
+		ModelUtils.rotate(animator, Tail2, 16, 0, 0);
+		ModelUtils.rotate(animator, Tail3, 14, 0, 0);
+		animator.endPhase();
+		animator.setStationaryPhase(5);
+		animator.resetPhase(5);
     }
 
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
         MowzieModelRenderer[] tailParts = {this.Tail, this.Tail2, this.Tail3};
         MowzieModelRenderer[] neckParts = {this.Neck1, this.Neck2, this.Neck3, this.Neck4, this.Neck5, this.Head};
-        this.faceTarget(Head, 1, f3, f4);
+        ModelUtils.faceTargetMod(Head, f3, f4, 0.16F);
+        ModelUtils.faceTargetMod(Neck1, f3, f4, 0.16F);
+        ModelUtils.faceTargetMod(Neck2, f3, f4, 0.16F);
+        ModelUtils.faceTargetMod(Neck3, f3, f4, 0.16F);
+        ModelUtils.faceTargetMod(Neck4, f3, f4, 0.16F);
+        ModelUtils.faceTargetMod(Neck5, f3, f4, 0.16F);
+
         float speed = 0.1F;
         float speed2 = 0.6F;
         float sitProgress = ((EntityNewPrehistoric) (entity)).sitProgress;

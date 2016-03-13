@@ -66,6 +66,12 @@ public class ModelUtils {
             }
         }
     }
+    
+    public static void faceTargetMod(MowzieModelRenderer part, float f3, float f4, float multi){
+    	part.rotateAngleY += f3 / (180F / (float)Math.PI) * multi;
+    	part.rotateAngleX += f4 / (180F / (float)Math.PI) * multi;
+
+    }
 
     public static void setRotateAngle(MowzieModelRenderer MowzieModelRenderer, float x, float y, float z) {
         MowzieModelRenderer.rotateAngleX = x;

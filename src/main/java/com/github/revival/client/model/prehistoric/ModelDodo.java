@@ -3,6 +3,7 @@ package com.github.revival.client.model.prehistoric;
 import com.github.revival.client.model.prehistoric.test.ModelNewPrehistoric;
 import com.github.revival.server.entity.mob.EntityDodo;
 import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
+
 import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelRenderer;
 import net.ilexiconn.llibrary.common.animation.Animator;
 import net.ilexiconn.llibrary.common.animation.IAnimated;
@@ -128,8 +129,11 @@ public class ModelDodo extends ModelNewPrehistoric {
 		float speed = 1.8F;
 		float speed2 = 0.1F;
 		float sitProgress = ((EntityNewPrehistoric) (entity)).sitProgress;
-		faceTarget(head, 1, f3, f4);
-		this.bob(body, speed2, -0.4F, false, entity.ticksExisted, 1);
+		
+        ModelUtils.faceTargetMod(neck, f3, f4, 0.5F);
+        ModelUtils.faceTargetMod(head, f3, f4, 0.5F);
+        
+        this.bob(body, speed2, -0.4F, false, entity.ticksExisted, 1);
 		this.walk(leftLeg, speed, 1.9F, false, 0F, 0F, f, f1);
 		this.walk(rightLeg, speed, 1.9F, true, 0F, 0F, f, f1);
 		this.walk(leftFoot, speed, 1.9F, true, 0.3F, 0F, f, f1);

@@ -160,7 +160,8 @@ public class ModelSmilodon extends ModelNewPrehistoric {
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
         MowzieModelRenderer[] tailParts = {this.tail};
         MowzieModelRenderer[] neckParts = {this.neck, this.head};
-        this.faceTarget(head, 1, f3, f4);
+        ModelUtils.faceTargetMod(neck, f3, f4, 0.5F);
+        ModelUtils.faceTargetMod(head, f3, f4, 0.5F);
         float speed = 0.1F;
         float speed2 = 1.1F;
         float sitProgress = ((EntityNewPrehistoric)(entity)).sitProgress;

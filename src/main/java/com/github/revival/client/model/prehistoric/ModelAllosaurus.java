@@ -198,7 +198,8 @@ public class ModelAllosaurus extends ModelNewPrehistoric {
         MowzieModelRenderer[] leftArmParts = {this.leftUpperArm, this.leftLowerArm};
         MowzieModelRenderer[] rightArmParts = {this.rightUpperArm, this.rightLowerArm};
 
-        faceTarget(neck, 1, f3, f4);
+        ModelUtils.faceTargetMod(neck, f3, f4, 0.5F);
+        ModelUtils.faceTargetMod(head, f3, f4, 0.5F);
 
         EntityNewPrehistoric prehistoric = (EntityNewPrehistoric) entity;
         float sitProgress = prehistoric.sitProgress;

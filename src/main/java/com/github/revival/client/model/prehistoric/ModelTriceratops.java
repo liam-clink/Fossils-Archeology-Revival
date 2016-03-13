@@ -229,7 +229,8 @@ public class ModelTriceratops extends ModelNewPrehistoric {
         MowzieModelRenderer[] tailParts = {this.tail1, this.tail2, this.tail3};
         MowzieModelRenderer[] neckParts = {this.neck, this.head};
 
-        this.faceTarget(head, 1, f3, f4);
+        ModelUtils.faceTargetMod(neck, f3, f4, 0.5F);
+        ModelUtils.faceTargetMod(head, f3, f4, 0.5F);
 
         float speed = 0.5F;
         float speed2 = 0.1F;

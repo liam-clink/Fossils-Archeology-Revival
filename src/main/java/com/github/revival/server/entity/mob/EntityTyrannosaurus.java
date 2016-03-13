@@ -7,11 +7,15 @@ import com.github.revival.server.enums.EnumPrehistoric;
 import com.github.revival.server.enums.EnumPrehistoricAI.*;
 import com.github.revival.server.handler.FossilAchievementHandler;
 import com.github.revival.server.item.FAItemRegistry;
+
 import net.ilexiconn.llibrary.common.animation.Animation;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
 public class EntityTyrannosaurus extends EntityNewPrehistoric {
@@ -22,7 +26,7 @@ public class EntityTyrannosaurus extends EntityNewPrehistoric {
     public static final double maxHealth = 82;
     public static final double baseSpeed = 0.25D;
     public static final double maxSpeed = 0.3D;
-    public static Animation animation_roar = new Animation(2, 100);
+    public static Animation animation_roar = new Animation(3, 100);
 
     public EntityTyrannosaurus(World world) {
         super(world, EnumPrehistoric.Tyrannosaurus);
@@ -36,6 +40,44 @@ public class EntityTyrannosaurus extends EntityNewPrehistoric {
         breaksBlocks = true;
         favoriteFood = Items.beef;
     }
+    
+	public int getAttackLength() {
+		return 30;
+	}
+	
+    public void onLivingUpdate(){
+    	super.onLivingUpdate();
+    	if(this.getAnimation() == this.animation_attack && this.getAnimationTick() == 12 && this.getAttackTarget() != null){
+    		this.attackEntityAsMob(this.getAttackTarget());
+    	}
+    }
+    
+    public boolean attackEntityAsMob(Entity entity)
+	{
+		if(this.getAnimation() == animation_none){
+			this.setAnimation(animation_attack);
+			return false;
+		}
+		if(this.getAnimation() == animation_attack && this.getAnimationTick() == 12){
+			IAttributeInstance iattributeinstance = this.getEntityAttribute(SharedMonsterAttributes.attackDamage);
+			boolean flag = entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float)iattributeinstance.getAttributeValue());
+
+			if (flag)
+			{
+				if(entity.ridingEntity != null){
+					if(entity.ridingEntity  == this){
+						entity.mountEntity(null);
+					}
+				}
+				entity.motionY += (0.4000000059604645D / 2);
+                knockbackEntity(entity, 1F, 0.1F);	
+				
+			}
+
+			return flag;
+		}
+		return false;
+	}
 
     @Override
     public void setSpawnValues() {
@@ -131,7 +173,7 @@ public class EntityTyrannosaurus extends EntityNewPrehistoric {
         super.onUpdate();
 
         //Revival.proxy.doChainBuffer(tailbuffer, this);
-        if (!this.isSleeping() && this.rand.nextInt(500) == 0 && !worldObj.isRemote && !this.isSitting()) {
+        if (!this.isSleeping() && this.rand.nextInt(500) == 0 && !worldObj.isRemote && !this.isSitting() && this.getAttackTarget() == null) {
             if (this.getAnimation() == this.animation_none) {
                 this.setAnimation(animation_roar);
             }
@@ -178,7 +220,7 @@ public class EntityTyrannosaurus extends EntityNewPrehistoric {
 
     @Override
     public Animation[] animations() {
-        return new Animation[]{this.animation_none, this.animation_speak, this.animation_roar};
+        return new Animation[]{this.animation_none, this.animation_speak, this.animation_attack, this.animation_roar};
     }
 
 	public int getTailSegments() {

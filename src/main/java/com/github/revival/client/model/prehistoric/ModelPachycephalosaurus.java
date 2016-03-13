@@ -196,8 +196,9 @@ public class ModelPachycephalosaurus extends ModelNewPrehistoric {
         MowzieModelRenderer[] neckParts = {this.neck, this.head};
         MowzieModelRenderer[] leftArmParts = {this.leftUpperArm, this.leftLowerArm};
         MowzieModelRenderer[] rightArmParts = {this.rightUpperArm, this.rightLowerArm};
-        head.rotateAngleZ += (f3 / (180f / (float) Math.PI));
-        head.rotateAngleX += (f4 / (180f / (float) Math.PI));
+        head.rotateAngleZ += (f3 / (180f / (float) Math.PI)) * 0.5F;
+        head.rotateAngleX += (f4 / (180f / (float) Math.PI)) * 0.5F;
+        ModelUtils.faceTargetMod(neck, f3, f4, 0.5F);
         float speed = 0.1F;
         float speed2 = 0.3F;
         float sitProgress = ((EntityNewPrehistoric) (entity)).sitProgress;

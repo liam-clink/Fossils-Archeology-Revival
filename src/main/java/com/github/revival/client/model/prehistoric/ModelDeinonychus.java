@@ -3,6 +3,7 @@ package com.github.revival.client.model.prehistoric;
 import com.github.revival.client.model.prehistoric.test.ModelNewPrehistoric;
 import com.github.revival.server.entity.mob.EntityDeinonychus;
 import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
+
 import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelRenderer;
 import net.ilexiconn.llibrary.common.animation.Animator;
 import net.ilexiconn.llibrary.common.animation.IAnimated;
@@ -276,8 +277,10 @@ public class ModelDeinonychus extends ModelNewPrehistoric {
         MowzieModelRenderer[] neckParts = {this.neck, this.head};
         MowzieModelRenderer[] leftArmParts = {this.leftUpperArm, this.leftLowerArm};
         MowzieModelRenderer[] rightArmParts = {this.rightUpperArm, this.rightLowerArm};
-        this.faceTarget(head, 1, f3, f4);
-
+        
+        ModelUtils.faceTargetMod(neck, f3, f4, 0.5F);
+        ModelUtils.faceTargetMod(head, f3, f4, 0.5F);
+        
         float speed = 0.1F;
         float speed2 = 0.3F;
         float sitProgress = ((EntityNewPrehistoric) (entity)).sitProgress;

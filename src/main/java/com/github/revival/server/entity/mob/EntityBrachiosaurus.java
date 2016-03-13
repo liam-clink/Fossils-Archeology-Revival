@@ -3,14 +3,18 @@ package com.github.revival.server.entity.mob;
 import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 import com.github.revival.server.enums.EnumPrehistoric;
 import com.github.revival.server.enums.EnumPrehistoricAI.*;
+
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
 public class EntityBrachiosaurus extends EntityNewPrehistoric {
     public static final double baseDamage = 2;
-    public static final double maxDamage = 18;
+    public static final double maxDamage = 46;
     public static final double baseHealth = 20;
     public static final double maxHealth = 200;
     public static final double baseSpeed = 0.2;
@@ -25,6 +29,11 @@ public class EntityBrachiosaurus extends EntityNewPrehistoric {
         developsResistance = true;
         breaksBlocks = true;
         favoriteFood = Items.wheat;
+    }
+    
+    @Override
+    public int getAttackLength() {
+        return 40;
     }
 
     @Override
@@ -149,6 +158,41 @@ public class EntityBrachiosaurus extends EntityNewPrehistoric {
     
 	public int getTailSegments() {
 		return 3;
+	}
+	
+    public void onLivingUpdate(){
+    	super.onLivingUpdate();
+    	if(this.getAnimation() == this.animation_attack && this.getAnimationTick() == 25 && this.getAttackTarget() != null){
+    		this.attackEntityAsMob(this.getAttackTarget());
+    	}
+    }
+    
+	public boolean attackEntityAsMob(Entity entity)
+	{
+		if(this.getAnimation() == animation_none){
+			this.setAnimation(animation_attack);
+			return false;
+		}
+
+		if(this.getAnimation() == animation_attack && this.getAnimationTick() == 25){
+			IAttributeInstance iattributeinstance = this.getEntityAttribute(SharedMonsterAttributes.attackDamage);
+			boolean flag = entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float)iattributeinstance.getAttributeValue());
+
+			if (flag)
+			{
+				if(entity.ridingEntity != null){
+					if(entity.ridingEntity  == this){
+						entity.mountEntity(null);
+					}
+				}
+				entity.motionY -= 0.4000000059604645D;
+                knockbackEntity(entity, -2F, -0.1F);
+				
+			}
+
+			return flag;
+		}
+		return false;
 	}
 
 }

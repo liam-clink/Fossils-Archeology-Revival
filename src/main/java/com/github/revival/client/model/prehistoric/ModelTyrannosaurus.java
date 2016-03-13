@@ -1,8 +1,10 @@
 package com.github.revival.client.model.prehistoric;
 
 import com.github.revival.client.model.prehistoric.test.ModelNewPrehistoric;
+import com.github.revival.server.entity.mob.EntityDilophosaurus;
 import com.github.revival.server.entity.mob.EntityTyrannosaurus;
 import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
+
 import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelRenderer;
 import net.ilexiconn.llibrary.common.animation.Animator;
 import net.ilexiconn.llibrary.common.animation.IAnimated;
@@ -194,6 +196,18 @@ public class ModelTyrannosaurus extends ModelNewPrehistoric {
         animator.update(entity);
         this.setToInitPose();
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
+        animator.setAnimationId(EntityTyrannosaurus.animation_attack.animationId);
+        animator.startPhase(10);
+		ModelUtils.rotate(animator, neck, -31, 0, 0);
+		ModelUtils.rotate(animator, head, 37, 0, -20);
+		ModelUtils.rotate(animator, lowerJaw, 25, 0, 0);
+        animator.endPhase();
+        animator.startPhase(5);
+		ModelUtils.rotate(animator, neck, 6, 0, 0);
+		ModelUtils.rotate(animator, head, -14, 0, 20);
+		ModelUtils.rotate(animator, lowerJaw, 25, 0, 0);
+        animator.endPhase();
+        animator.resetPhase(10);
         animator.setAnimationId(EntityTyrannosaurus.animation_roar.animationId);
         animator.startPhase(20);
         ModelUtils.rotate(animator, lowerBody, -5.22, 0, 0);
@@ -224,22 +238,12 @@ public class ModelTyrannosaurus extends ModelNewPrehistoric {
         ModelUtils.rotateToInit(animator, head);
         animator.endPhase();
         animator.resetPhase(20);
-        animator.endPhase();
         if (mob.getAnimation() == EntityTyrannosaurus.animation_none) {
-            this.faceTarget(neck, 1, f3, f4);
-        }
+            ModelUtils.faceTargetMod(neck, f3, f4, 0.5F);
+            ModelUtils.faceTargetMod(head, f3, f4, 0.5F);
 
-//		animator.setAnimationId(EntityNewPrehistoric.animation_sit.animationId);
-//		animator.startPhase(20);
-//		sitPose(true);
-//		animator.endPhase();
-//
-//		animator.setAnimationId(EntityNewPrehistoric.animation_getUp.animationId);
-//		animator.startPhase(0);
-//		sitPose(true);
-//		animator.endPhase();
-//		animator.resetPhase(20);
-//		animator.endPhase();
+        }
+        
     }
 
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
@@ -295,101 +299,4 @@ public class ModelTyrannosaurus extends ModelNewPrehistoric {
         this.chainWave(neckParts, speed2, 0.05F, -3, entity.ticksExisted, 1);
         ((EntityNewPrehistoric)entity).tailbuffer.applyChainSwingBuffer(tailParts);
     }
-
-
-//	@Override
-//	public void sitPose(boolean animate) {
-//		ModelUtils.animateOrSetRotation(animator, animate, rightCrest, -0.07068583470577035F, -0.0F, 0.0F, false);
-//        ModelUtils.animateOrSetRotation(animator, animate, leftCrest, -0.07068583470577035F, -0.0F, 0.0F, false);
-//        ModelUtils.animateOrSetRotation(animator, animate, leftLowerArm, -0.5235987755982988F, -0.0F, 0.0F, false);
-//        ModelUtils.animateOrSetRotation(animator, animate, middleCrest, 0.16074482410867777F, -0.0F, 0.0F, false);
-//        ModelUtils.animateOrSetRotation(animator, animate, rightLeg, -0.6981317007977318F, -0.0F, 0.0F, false);
-//        ModelUtils.animateOrSetRotation(animator, animate, rightThigh, -0.8726646259971648F, -0.0F, 0.0F, false);
-//        ModelUtils.animateOrSetRotation(animator, animate, tail2, 0.22759093446006054F, -0.0F, 0.0F, false);
-//        ModelUtils.animateOrSetRotation(animator, animate, lowerBody, -0.22759093446006054F, -0.0F, 0.0F, false);
-//        ModelUtils.animateOrSetRotation(animator, animate, middleTailBackFeather, 0.1759291886010284F, -0.0F, 0.0F, false);
-//        ModelUtils.animateOrSetRotation(animator, animate, neck, -0.5462880558742251F, -0.0F, 0.0F, false);
-//        ModelUtils.animateOrSetRotation(animator, animate, middleTailFrontFeather, 0.3269001688985379F, -0.0F, 0.0F, false);
-//        ModelUtils.animateOrSetRotation(animator, animate, upperJaw, 0.03490658503988659F, -0.0F, 0.0F, false);
-//        ModelUtils.animateOrSetRotation(animator, animate, upperBody, 0.11309733552923257F, -0.0F, 0.0F, false);
-//        ModelUtils.animateOrSetRotation(animator, animate, tail1, -0.18203784098300857F, -0.0F, 0.0F, false);
-//        ModelUtils.animateOrSetRotation(animator, animate, tail3, -0.045553093477052F, -0.0F, 0.0F, false);
-//        ModelUtils.animateOrSetRotation(animator, animate, leftFoot, 1.5707963267948966F, -0.0F, 0.0F, false);
-//        ModelUtils.animateOrSetRotation(animator, animate, leftTailFeather, 0.1038470904936626F, -0.0F, 0.0F, false);
-//        ModelUtils.animateOrSetRotation(animator, animate, leftThigh, -0.8726646259971648F, -0.0F, 0.0F, false);
-//        ModelUtils.animateOrSetRotation(animator, animate, rightTailFeather, 0.1038470904936626F, -0.0F, 0.0F, false);
-//        ModelUtils.animateOrSetRotation(animator, animate, headPivot, 1.0016444577195458F, -0.0F, 0.0F, false);
-//        ModelUtils.animateOrSetRotation(animator, animate, rightFoot, 1.5707963267948966F, -0.0F, 0.0F, false);
-//        ModelUtils.animateOrSetRotation(animator, animate, lowerJaw, 0.02199114857512855F, -0.0F, 0.0F, false);
-//        ModelUtils.animateOrSetRotation(animator, animate, rightLowerArm, -0.5235987755982988F, -0.0F, 0.0F, false);
-//        ModelUtils.animateOrSetRotation(animator, animate, leftLeg, -0.6981317007977318F, -0.0F, 0.0F, false);
-//        ModelUtils.animateToPos(animator, animate, lowerBody, 0F, 10.80F - lowerBody.initRotationPointY, 0F, true);
-//		ModelUtils.animateToPos(animator, animate, rightThigh, 0F, 16.90F - rightThigh.initRotationPointY, 0F, true);
-//		ModelUtils.animateToPos(animator, animate, leftThigh, 0F, 16.90F - leftThigh.initRotationPointY, 0F, true);
-//		ModelUtils.setPos(animator, animate, lowerBody, 0F, 10.80F, -1F, false);
-//		ModelUtils.setPos(animator, animate, rightThigh, -2.5F, 16.90F, 7.5F, false);
-//		ModelUtils.setPos(animator, animate, leftThigh, 2.5F, 16.90F, 7.5F, false);
-//	}
-
-	/* public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity f6)
-    {
-        super.setRotationAngles(f, f1, f2, f3, f4, f5, f6);
-        if (f6 instanceof EntityDinosaur)
-        {
-            if (!((EntityDinosaur) f6).isModelized())
-            {
-
-                tail1.rotateAngleY = 0.08F * MathHelper.sin(f2 * (float) 0.1F + (f1 + 2));
-                tail2.rotateAngleY = 0.10F * MathHelper.sin(f2 * (float) 0.1F + f1 + 1);
-                tail3.rotateAngleY = 0.15F * MathHelper.sin(f2 * (float) 0.1F + f1);
-
-                // this.UpperLegRight.rotateAngleX = MathHelper.cos(f * 0.5662F) * 1.0F * f1;
-                //  this.UpperLegLeft.rotateAngleX = MathHelper.cos(f * 0.5662F + (float)Math.PI) * 1.0F * f1;
-
-                head.rotateAngleX = (f4 / (180F / (float) Math.PI));
-                head.rotateAngleY = (f3 / (180F / (float) Math.PI));
-                walk(leftThigh, 0.5F * 1, 0.8F, false, 0F, 0.4F, f, f1);
-                //	walk(leftLeg, 0.5F * 1, 0.5F, false, 0F, 0F, f, f1);
-                //	walk(leftFoot, 0.5F * 1, 1.5F, false, 0.5F, 1F, f, f1);
-                walk(rightThigh, 0.5F * 1, 0.8F, true, 0F, 0.4F, f, f1);
-                //	walk(rightLeg, 0.5F * 1, 0.5F, true, 0F, 0F, f, f1);
-                //	walk(rightFoot, 0.5F * 1, 1.5F, true, 0.5F, 1F, f, f1);
-
-            }
-            else
-            {
-                tail1.rotateAngleY = 0F;
-                tail2.rotateAngleY = 0F;
-                tail3.rotateAngleY = 0F;
-
-                head.rotateAngleX = 0F;
-                head.rotateAngleY = 0F;
-                rightThigh.rotateAngleX = 0F;
-                leftThigh.rotateAngleX = 0F;
-                rightLeg.rotateAngleX = -0.3270747018237373F;
-                leftLeg.rotateAngleX = -0.3270747018237373F;
-                rightFoot.rotateAngleX = 0.33161255787892263F;
-                leftFoot.rotateAngleX = 0.33161255787892263F;
-            }
-        }
-        else
-        {
-
-            tail1.rotateAngleY = 0.08F * MathHelper.sin(f2 * (float) 0.1F + (f1 + 2));
-            tail2.rotateAngleY = 0.10F * MathHelper.sin(f2 * (float) 0.1F + f1 + 1);
-            tail3.rotateAngleY = 0.15F * MathHelper.sin(f2 * (float) 0.1F + f1);
-
-            // this.UpperLegRight.rotateAngleX = MathHelper.cos(f * 0.5662F) * 1.0F * f1;
-            //  this.UpperLegLeft.rotateAngleX = MathHelper.cos(f * 0.5662F + (float)Math.PI) * 1.0F * f1;
-
-            head.rotateAngleX = (f4 / (180F / (float) Math.PI));
-            head.rotateAngleY = (f3 / (180F / (float) Math.PI));
-            walk(leftThigh, 0.5F * 1, 0.8F, false, 0F, 0.4F, f, f1);
-            //	walk(leftLeg, 0.5F * 1, 0.5F, false, 0F, 0F, f, f1);
-            //	walk(leftFoot, 0.5F * 1, 1.5F, false, 0.5F, 1F, f, f1);
-            walk(rightThigh, 0.5F * 1, 0.8F, true, 0F, 0.4F, f, f1);
-            //	walk(rightLeg, 0.5F * 1, 0.5F, true, 0F, 0F, f, f1);
-            //	walk(rightFoot, 0.5F * 1, 1.5F, true, 0.5F, 1F, f, f1);
-        }
-    }*/
 }

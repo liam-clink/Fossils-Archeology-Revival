@@ -203,7 +203,10 @@ public class ModelStegosaurus extends ModelPrehistoric {
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
         MowzieModelRenderer[] tailParts = {this.tail1, this.tail2, this.tail3};
         MowzieModelRenderer[] neckParts = {this.neck1, this.neck2, this.head};
-        this.faceTarget(head, 1, f3, f4);
+        ModelUtils.faceTargetMod(neck1, f3, f4, 0.33F);
+        ModelUtils.faceTargetMod(neck2, f3, f4, 0.33F);
+        ModelUtils.faceTargetMod(head, f3, f4, 0.33F);
+
         float speed = 0.1F;
         float speed2 = 0.9F;
         float sitProgress = ((EntityNewPrehistoric) (entity)).sitProgress;

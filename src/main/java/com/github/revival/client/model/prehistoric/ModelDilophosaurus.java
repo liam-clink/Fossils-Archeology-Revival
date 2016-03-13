@@ -177,7 +177,10 @@ public class ModelDilophosaurus extends ModelNewPrehistoric {
         MowzieModelRenderer[] neckParts = {this.neck, this.head};
         MowzieModelRenderer[] leftArmParts = {this.leftUpperArm, this.leftLowerArm};
         MowzieModelRenderer[] rightArmParts = {this.rightUpperArm, this.rightLowerArm};
-        this.faceTarget(head, 1, f3, f4);
+        
+        ModelUtils.faceTargetMod(neck, f3, f4, 0.5F);
+        ModelUtils.faceTargetMod(head, f3, f4, 0.5F);
+        
         float speed = 0.1F;
         float speed2 = 0.3F;
         float sitProgress = ((EntityNewPrehistoric) (entity)).sitProgress;

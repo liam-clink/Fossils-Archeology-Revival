@@ -226,7 +226,8 @@ public class ModelMammoth extends ModelNewPrehistoric {
         MowzieModelRenderer[] tailParts = {this.Tail};
         MowzieModelRenderer[] neckParts = {this.neck, this.head};
         MowzieModelRenderer[] trunkParts = {this.nose2, this.nose3, this.nose4};
-        this.faceTarget(head, 1, f3, f4);
+        ModelUtils.faceTargetMod(neck, f3, f4, 0.5F);
+        ModelUtils.faceTargetMod(head, f3, f4, 0.5F);
         float speed = 0.1F;
         float speed2 = 1.1F;
         float sitProgress = ((EntityNewPrehistoric) (entity)).sitProgress;

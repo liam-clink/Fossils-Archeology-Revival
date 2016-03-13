@@ -206,7 +206,8 @@ public class ModelAnkylosaurus extends ModelNewPrehistoric {
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
         MowzieModelRenderer[] tailParts = {this.Tail1, this.Tail2, this.Tail3, this.TailClub};
         MowzieModelRenderer[] neckParts = {this.Neck, this.Head};
-        this.faceTarget(Head, 1, f3, f4);
+        ModelUtils.faceTargetMod(Head, f3, f4, 0.5F);
+        ModelUtils.faceTargetMod(Neck, f3, f4, 0.5F);
         float speed = 0.1F;
         float speed2 = 0.6F;
         float sitProgress = ((EntityNewPrehistoric) (entity)).sitProgress;
