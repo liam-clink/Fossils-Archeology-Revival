@@ -1,77 +1,97 @@
 package com.github.revival.server.entity.mob.test;
 
-import com.github.revival.server.entity.EnumDiet;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
 import net.minecraft.command.IEntitySelector;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAITarget;
 
-import java.util.Collections;
-import java.util.List;
+public class DinoAIAgressive extends EntityAITarget
+{
+	private final Class targetClass;
+	private final int targetChance;
+	private final DinoAIAgressive.Sorter theNearestAttackableTargetSorter;
+	private final IEntitySelector targetEntitySelector;
+	private EntityLivingBase targetEntity;
 
-public class DinoAIAgressive extends EntityAINearestAttackableTarget {
-    private final Class<? extends Entity> targetClass;
-    private EntityNewPrehistoric mob;
-    private boolean isCannibal;
+	public DinoAIAgressive(EntityNewPrehistoric mob, Class targetClass, int selectorTime, boolean sight)
+	{
+		this(mob, targetClass, selectorTime, sight, false);
+	}
 
-    public DinoAIAgressive(EntityNewPrehistoric mob, Class<? extends Entity> prey, int hungryTicks, boolean see, boolean isCannibal) {
-        super(mob, prey, hungryTicks, see);
-        this.mob = mob;
-        this.targetClass = prey;
-        this.isCannibal = isCannibal;
-    }
+	public DinoAIAgressive(EntityNewPrehistoric mob, Class targetClass, int selectorTime, boolean sight, boolean nearbyOnly)
+	{
+		this(mob, targetClass, selectorTime, sight, nearbyOnly, (IEntitySelector)null);
+	}
 
+	public DinoAIAgressive(EntityNewPrehistoric mob, Class targetClass, int selectorTime, boolean sight, boolean nearbyOnly, final IEntitySelector selector)
+	{
+		super(mob, sight, nearbyOnly);
+		this.targetClass = targetClass;
+		this.targetChance = selectorTime;
+		this.theNearestAttackableTargetSorter = new DinoAIAgressive.Sorter(mob);
+		this.setMutexBits(1);
+		this.targetEntitySelector = new IEntitySelector()
+		{
+			public boolean isEntityApplicable(Entity entity)
+			{
+				return !(entity instanceof EntityLivingBase) ? false : (selector != null && !selector.isEntityApplicable(entity) ? false : DinoAIAgressive.this.isSuitableTarget((EntityLivingBase)entity, false));
+			}
+		};
+	}
 
-    public boolean shouldExecute() {
-        Entity targetEntity;
-        EntityAINearestAttackableTarget.Sorter theNearestAttackableTargetSorter = new EntityAINearestAttackableTarget.Sorter(mob);
-        IEntitySelector targetEntitySelector = new IEntitySelector() {
-            public boolean isEntityApplicable(Entity entity) {
-                return (entity instanceof EntityLivingBase);
-            }
-        };
-        double d0 = this.getTargetDistance();
-        List list = this.taskOwner.worldObj.selectEntitiesWithinAABB(this.targetClass, this.taskOwner.boundingBox.expand(d0, 4.0D, d0), targetEntitySelector);
-        Collections.sort(list, theNearestAttackableTargetSorter);
+	public boolean shouldExecute()
+	{
+		if (this.targetChance > 0 && this.taskOwner.getRNG().nextInt(this.targetChance) != 0)
+		{
+			return false;
+		}
+		else
+		{
+			double d0 = this.getTargetDistance();
+			List list = this.taskOwner.worldObj.selectEntitiesWithinAABB(this.targetClass, this.taskOwner.boundingBox.expand(d0, 4.0D, d0), this.targetEntitySelector);
+			Collections.sort(list, this.theNearestAttackableTargetSorter);
 
+			if (list.isEmpty())
+			{
+				return false;
+			}
+			else
+			{
+				this.targetEntity = (EntityLivingBase)list.get(0);
+				return ((EntityNewPrehistoric)taskOwner).canDinoHunt(targetEntity);
+			}
+		}
+	}
 
-        if (list.isEmpty()) {
-            return false;
-        } else {
-            targetEntity = (EntityLivingBase) list.get(0);
+	public void startExecuting()
+	{
+		this.taskOwner.setAttackTarget(this.targetEntity);
+		super.startExecuting();
+	}
 
-            if (!this.mob.isHungry()) {
-                return false;
-            }
-            if (mob.canAttackClass(targetEntity.getClass())) {
-                return false;
-            }
-            if (mob.isMovementBlocked()) {
-                return false;
-            }
+	public static class Sorter implements Comparator
+	{
+		private final Entity theEntity;
 
-            if (this.mob.selfType.diet == EnumDiet.HERBIVORE) {
-                return false;
-            }
+		public Sorter(Entity entity)
+		{
+			this.theEntity = entity;
+		}
 
-            if (targetEntity != null) {
-                if (mob.width < targetEntity.width) {
-                    return false;
-                }
-            }
+		public int compare(Entity firstEntity, Entity secondEntity)
+		{
+			double d0 = this.theEntity.getDistanceSqToEntity(firstEntity);
+			double d1 = this.theEntity.getDistanceSqToEntity(secondEntity);
+			return d0 < d1 ? -1 : (d0 > d1 ? 1 : 0);
+		}
 
-            if (this.mob.isTamed()) {
-                if (this.mob.getOwner() != null) {
-                    if (this.mob.getOwner().getClass() == targetEntity.getClass()) {
-                        if (!this.mob.isHungry()) {
-                            return false;
-                        }
-                    }
-                }
-            }
-            return super.shouldExecute();
-        }
-    }
-
-
+		public int compare(Object firstEntity, Object secondEntity)
+		{
+			return this.compare((Entity)firstEntity, (Entity)secondEntity);
+		}
+	}
 }

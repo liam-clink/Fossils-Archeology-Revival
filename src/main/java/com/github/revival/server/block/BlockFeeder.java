@@ -1,9 +1,11 @@
 package com.github.revival.server.block;
 
 import com.github.revival.Revival;
-import com.github.revival.server.block.entity.TileEntityFeeder;
+import com.github.revival.server.block.entity.TileEntityNewFeeder;
 import com.github.revival.server.creativetab.FATabRegistry;
 import com.github.revival.server.handler.LocalizationStrings;
+
+import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -44,17 +46,19 @@ public class BlockFeeder extends BlockContainer {
 
     public BlockFeeder(boolean isActive) {
         super(Material.iron);
+        if(isActive){
+        	GameRegistry.registerTileEntity(TileEntityNewFeeder.class, "NewFeeder");
+        }
         setHardness(3.5F);
-        setStepSound(Block.soundTypeStone);
-        if (isActive) {
-            setBlockName(LocalizationStrings.FEEDER_ACTIVE_NAME);
-        } else {
-            setBlockName(LocalizationStrings.FEEDER_ACTIVE_NAME);
+        setStepSound(Block.soundTypeMetal);
+        setBlockName(LocalizationStrings.FEEDER_ACTIVE_NAME);
+
+        if (!isActive) {
             setCreativeTab(FATabRegistry.tabFBlocks);
         }
     }
 
-    public static void updateFurnaceBlockState(boolean herb, boolean carn, World world, int x, int y, int z) {
+    public static void updateFeederBlockState(boolean herb, boolean carn, World world, int x, int y, int z) {
         int meta = world.getBlockMetadata(x, y, z);
         TileEntity tileentity = world.getTileEntity(x, y, z);
 
@@ -80,14 +84,13 @@ public class BlockFeeder extends BlockContainer {
         world.setBlockMetadataWithNotify(x, y, z, meta, 2);
 
         if (tileentity != null) {
-            tileentity.validate();
             world.setTileEntity(x, y, z, tileentity);
         }
     }
 
     @SideOnly(Side.CLIENT)
     public Item getItem(World world, int x, int y, int z) {
-        return null;//Item.getItemFromBlock(FABlockRegistry.feederActive);
+        return Item.getItemFromBlock(FABlockRegistry.feederActive);
     }
 
     /**
@@ -95,7 +98,7 @@ public class BlockFeeder extends BlockContainer {
      */
     @Override
     public Item getItemDropped(int var1, Random var2, int var3) {
-        return null;//Item.getItemFromBlock(FABlockRegistry.feederActive);
+        return Item.getItemFromBlock(FABlockRegistry.feederActive);
     }
 
     /**
@@ -214,7 +217,7 @@ public class BlockFeeder extends BlockContainer {
         if (world.isRemote) {
             return true;
         } else {
-            TileEntityFeeder tileentity = (TileEntityFeeder) world
+            TileEntityNewFeeder tileentity = (TileEntityNewFeeder) world
                     .getTileEntity(x, y, z);
 
             if (tileentity != null) {
@@ -230,7 +233,7 @@ public class BlockFeeder extends BlockContainer {
      * the block.
      */
     public TileEntity createNewTileEntity(World world, int par2) {
-        return new TileEntityFeeder();
+        return new TileEntityNewFeeder();
     }
 
     /**
@@ -258,7 +261,7 @@ public class BlockFeeder extends BlockContainer {
         }
 
         if (itemstack.hasDisplayName()) {
-            ((TileEntityFeeder) world.getTileEntity(x, y, z))
+            ((TileEntityNewFeeder) world.getTileEntity(x, y, z))
                     .setGuiDisplayName(itemstack.getDisplayName());
         }
     }
@@ -269,7 +272,7 @@ public class BlockFeeder extends BlockContainer {
      */
     public void breakBlock(World world, int x, int y, int z, Block block,
                            int var6) {
-        TileEntityFeeder tileentity = (TileEntityFeeder) world.getTileEntity(x,
+        TileEntityNewFeeder tileentity = (TileEntityNewFeeder) world.getTileEntity(x,
                 y, z);
 
         if (tileentity != null) {

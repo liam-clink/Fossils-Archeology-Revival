@@ -1,39 +1,5 @@
 package com.github.revival;
 
-import com.github.revival.client.renderer.tileentity.RenderFeeder;
-import com.github.revival.server.ModState;
-import com.github.revival.server.ServerProxy;
-import com.github.revival.server.biome.BasicBiome;
-import com.github.revival.server.block.FABlockRegistry;
-import com.github.revival.server.block.entity.*;
-import com.github.revival.server.block.sound.FossilSoundType;
-import com.github.revival.server.config.FossilConfig;
-import com.github.revival.server.creativetab.FATabRegistry;
-import com.github.revival.server.dimension.anu.WorldProviderAnu;
-import com.github.revival.server.dimension.treasure.WorldProviderTreasure;
-import com.github.revival.server.enchantment.ArcheologyEnchantment;
-import com.github.revival.server.enchantment.PaleontologyEnchantment;
-import com.github.revival.server.entity.*;
-import com.github.revival.server.entity.mob.*;
-import com.github.revival.server.enums.EnumDinoFoodMob;
-import com.github.revival.server.enums.EnumPrehistoric;
-import com.github.revival.server.gen.*;
-import com.github.revival.server.gen.structure.AcademyGenerator;
-import com.github.revival.server.gen.structure.ShipWreckGenerator;
-import com.github.revival.server.handler.*;
-import com.github.revival.server.item.FAItemRegistry;
-import com.github.revival.server.util.FossilFoodMappings;
-import cpw.mods.fml.client.registry.RenderingRegistry;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.FMLLog;
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.registry.EntityRegistry;
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.VillagerRegistry;
 import net.ilexiconn.llibrary.common.config.ConfigHelper;
 import net.ilexiconn.llibrary.common.content.ContentHelper;
 import net.minecraft.block.material.Material;
@@ -52,7 +18,98 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fluids.Fluid;
+
 import org.apache.logging.log4j.Level;
+
+import com.github.revival.client.renderer.tileentity.RenderFeeder;
+import com.github.revival.server.ModState;
+import com.github.revival.server.ServerProxy;
+import com.github.revival.server.biome.BasicBiome;
+import com.github.revival.server.block.FABlockRegistry;
+import com.github.revival.server.block.entity.TileEntityAnalyzer;
+import com.github.revival.server.block.entity.TileEntityAncientChest;
+import com.github.revival.server.block.entity.TileEntityAnuTotem;
+import com.github.revival.server.block.entity.TileEntityAnubiteStatue;
+import com.github.revival.server.block.entity.TileEntityCultivate;
+import com.github.revival.server.block.entity.TileEntityDrum;
+import com.github.revival.server.block.entity.TileEntityFeeder;
+import com.github.revival.server.block.entity.TileEntityFigurine;
+import com.github.revival.server.block.entity.TileEntitySarcophagus;
+import com.github.revival.server.block.entity.TileEntitySifter;
+import com.github.revival.server.block.entity.TileEntityTimeMachine;
+import com.github.revival.server.block.entity.TileEntityVase;
+import com.github.revival.server.block.entity.TileEntityWorktable;
+import com.github.revival.server.block.sound.FossilSoundType;
+import com.github.revival.server.config.FossilConfig;
+import com.github.revival.server.creativetab.FATabRegistry;
+import com.github.revival.server.dimension.anu.WorldProviderAnu;
+import com.github.revival.server.dimension.treasure.WorldProviderTreasure;
+import com.github.revival.server.enchantment.ArcheologyEnchantment;
+import com.github.revival.server.enchantment.PaleontologyEnchantment;
+import com.github.revival.server.entity.EntityAncientJavelin;
+import com.github.revival.server.entity.EntityAnuEffect;
+import com.github.revival.server.entity.EntityDinoEgg;
+import com.github.revival.server.entity.EntityJavelin;
+import com.github.revival.server.entity.EntityMLighting;
+import com.github.revival.server.entity.EntityStoneboard;
+import com.github.revival.server.entity.EntityTerrorBirdEgg;
+import com.github.revival.server.entity.mob.EntityAnu;
+import com.github.revival.server.entity.mob.EntityAnuDead;
+import com.github.revival.server.entity.mob.EntityAnubite;
+import com.github.revival.server.entity.mob.EntityBones;
+import com.github.revival.server.entity.mob.EntityCoelacanth;
+import com.github.revival.server.entity.mob.EntityDodo;
+import com.github.revival.server.entity.mob.EntityDodoEgg;
+import com.github.revival.server.entity.mob.EntityElasmotherium;
+import com.github.revival.server.entity.mob.EntityFailuresaurus;
+import com.github.revival.server.entity.mob.EntityFriendlyPigZombie;
+import com.github.revival.server.entity.mob.EntityMammoth;
+import com.github.revival.server.entity.mob.EntityNautilus;
+import com.github.revival.server.entity.mob.EntityQuagga;
+import com.github.revival.server.entity.mob.EntitySentryPigman;
+import com.github.revival.server.entity.mob.EntitySmilodon;
+import com.github.revival.server.entity.mob.EntityTarSlime;
+import com.github.revival.server.entity.mob.EntityTerrorBird;
+import com.github.revival.server.enums.EnumDinoFoodMob;
+import com.github.revival.server.enums.EnumPrehistoric;
+import com.github.revival.server.gen.FossilGenerator;
+import com.github.revival.server.gen.TarGenerator;
+import com.github.revival.server.gen.VolcanicRockGenerator;
+import com.github.revival.server.gen.WorldGenMiscStructures;
+import com.github.revival.server.gen.WorldGeneratorPalaeoraphe;
+import com.github.revival.server.gen.structure.AcademyGenerator;
+import com.github.revival.server.gen.structure.ShipWreckGenerator;
+import com.github.revival.server.handler.EventFossilAchivements;
+import com.github.revival.server.handler.EventPlayer;
+import com.github.revival.server.handler.FossilAchievementHandler;
+import com.github.revival.server.handler.FossilBonemealEvent;
+import com.github.revival.server.handler.FossilConnectionEvent;
+import com.github.revival.server.handler.FossilGuiHandler;
+import com.github.revival.server.handler.FossilInteractEvent;
+import com.github.revival.server.handler.FossilLivingEvent;
+import com.github.revival.server.handler.FossilOreDictionary;
+import com.github.revival.server.handler.FossilRecipeHandler;
+import com.github.revival.server.handler.FossilSpawnEggs;
+import com.github.revival.server.handler.FossilToolEvent;
+import com.github.revival.server.handler.FossilTradeHandler;
+import com.github.revival.server.handler.LocalizationStrings;
+import com.github.revival.server.handler.PickupHandler;
+import com.github.revival.server.item.FAItemRegistry;
+import com.github.revival.server.util.FossilFoodMappings;
+
+import cpw.mods.fml.client.registry.RenderingRegistry;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.FMLLog;
+import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.Mod.Instance;
+import cpw.mods.fml.common.SidedProxy;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+import cpw.mods.fml.common.registry.EntityRegistry;
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.registry.VillagerRegistry;
+import cpw.mods.fml.relauncher.Side;
 
 @Mod(modid = Revival.MODID, name = "Fossils and Archeology Revival", version = Revival.VERSION, dependencies = "required-after:llibrary@[" + Revival.LLIBRARY_VERSION + ",)")
 public class Revival {
@@ -78,6 +135,7 @@ public class Revival {
     public static Material tar_material;
     public static Fluid tar_fluid;
     public Configuration config;
+    public static SimpleNetworkWrapper channel;
 
     public static boolean enableDebugging() {
         return STATE == ModState.DEV;
@@ -97,6 +155,7 @@ public class Revival {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+    	channel = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
         MinecraftForge.EVENT_BUS.register(new FossilBonemealEvent());
         MinecraftForge.EVENT_BUS.register(new EventPlayer());
         VillagerRegistry.instance().registerVillageTradeHandler(10, new FossilTradeHandler());

@@ -90,6 +90,8 @@ public class FABlockRegistry extends FARegistry {
     public static Block horsetail_large;
     public static Block mutantPlant;
     public static Block tempskya;
+    public static Block feederIdle;
+    public static Block feederActive;
 
     public void init() {
         Revival.tar_material = new MaterialTar(MapColor.blackColor);
@@ -108,8 +110,8 @@ public class FABlockRegistry extends FARegistry {
         blockworktableActive = new BlockWorktable(true);
         denseSand = new BlockDenseSand();
         strongGlass = new BlockStrongGlass(Material.glass);
-        //feederIdle = new BlockFeeder(false);
-        //feederActive = new BlockFeeder(true);
+        feederIdle = new BlockFeeder(false);
+        feederActive = new BlockFeeder(true);
         blockTimeMachine = new BlockTimeMachine();
         ferns = new BlockFern();
         drum = new BlockDrum();

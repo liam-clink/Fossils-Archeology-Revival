@@ -38,18 +38,28 @@ public class FossilFoodMappings {
         FoodMappings.instance().addToItemMappings(Items.chicken, 10, EnumDiet.CARNIVORE);
         FoodMappings.instance().addToItemMappings(Items.porkchop, 35, EnumDiet.CARNIVORE);
         FoodMappings.instance().addToItemMappings(Items.cooked_porkchop, 55, EnumDiet.CARNIVORE);
+        FoodMappings.instance().addToItemMappings(Items.cooked_beef, 60, EnumDiet.CARNIVORE_EGG);
+        FoodMappings.instance().addToItemMappings(Items.beef, 40, EnumDiet.CARNIVORE_EGG);
+        FoodMappings.instance().addToItemMappings(Items.cooked_chicken, 15, EnumDiet.CARNIVORE_EGG);
+        FoodMappings.instance().addToItemMappings(Items.chicken, 10, EnumDiet.CARNIVORE_EGG);
+        FoodMappings.instance().addToItemMappings(Items.porkchop, 35, EnumDiet.CARNIVORE_EGG);
+        FoodMappings.instance().addToItemMappings(Items.cooked_porkchop, 55, EnumDiet.CARNIVORE_EGG);
         FoodMappings.instance().addToItemMappings(Items.egg, 7, EnumDiet.CARNIVORE_EGG);
         FoodMappings.instance().addToItemMappings(FAItemRegistry.sjl, 65, EnumDiet.PISCIVORE);
         FoodMappings.instance().addToItemMappings(FAItemRegistry.failuresaurusFlesh, 15, EnumDiet.CARNIVORE);
+        FoodMappings.instance().addToItemMappings(FAItemRegistry.failuresaurusFlesh, 15, EnumDiet.CARNIVORE_EGG);
         FoodMappings.instance().addToItemMappings(FAItemRegistry.livingCoelacanth, 35, EnumDiet.PISCIVORE);
         for (int i = 0; i < EnumPrehistoric.values().length; i++) {
             if (EnumPrehistoric.values()[i].timeperiod != EnumTimePeriod.CURRENT) {
                 if (EnumPrehistoric.values()[i].type != EnumMobType.FISH) {
                     FoodMappings.instance().addToItemMappings(EnumPrehistoric.values()[i].foodItem, 35, EnumDiet.CARNIVORE);
+                    FoodMappings.instance().addToItemMappings(EnumPrehistoric.values()[i].foodItem, 35, EnumDiet.CARNIVORE_EGG);
+
                 } else {
 
                 }
                 FoodMappings.instance().addToItemMappings(EnumPrehistoric.values()[i].cookedFoodItem, 75, EnumDiet.CARNIVORE);
+                FoodMappings.instance().addToItemMappings(EnumPrehistoric.values()[i].cookedFoodItem, 75, EnumDiet.CARNIVORE_EGG);
             }
             if (EnumPrehistoric.values()[i].type == EnumMobType.BIRD || EnumPrehistoric.values()[i].type == EnumMobType.CHICKEN) {
                 FoodMappings.instance().addToItemMappings(EnumPrehistoric.values()[i].bestBirdEggItem, 15, EnumDiet.CARNIVORE_EGG);

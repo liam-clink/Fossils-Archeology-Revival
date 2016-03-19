@@ -1,6 +1,6 @@
 package com.github.revival.client.gui;
 
-import com.github.revival.server.block.entity.TileEntityFeeder;
+import com.github.revival.server.block.entity.TileEntityNewFeeder;
 import com.github.revival.server.container.FeederContainer;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -17,11 +17,11 @@ import org.lwjgl.opengl.GL12;
 @SideOnly(Side.CLIENT)
 public class GuiFeeder extends GuiContainer {
     private static final ResourceLocation loc = new ResourceLocation("fossil:textures/gui/Feeder.png");
-    private TileEntityFeeder FeederInventory;
+    private TileEntityNewFeeder FeederInventory;
 
     public GuiFeeder(InventoryPlayer var1, TileEntity var2) {
         super(new FeederContainer(var1, var2));
-        this.FeederInventory = (TileEntityFeeder) var2;
+        this.FeederInventory = (TileEntityNewFeeder) var2;
     }
 
     @Override
@@ -67,7 +67,7 @@ public class GuiFeeder extends GuiContainer {
         }
 
         this.fontRendererObj.drawString("" + this.FeederInventory.getCurrentMeat(), 23, 32, 16711680);
-        this.fontRendererObj.drawString("" + this.FeederInventory.getCurreentVeg(), 120, 32, 243459);
+        this.fontRendererObj.drawString("" + this.FeederInventory.getCurrentPlant(), 120, 32, 243459);
         GL11.glPopMatrix();
         GL11.glEnable(GL11.GL_LIGHTING);
         GL11.glEnable(GL11.GL_DEPTH_TEST);

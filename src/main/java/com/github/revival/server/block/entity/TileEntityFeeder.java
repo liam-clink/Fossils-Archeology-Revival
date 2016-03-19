@@ -201,14 +201,11 @@ public class TileEntityFeeder extends TileEntity implements IInventory,
                 }
 
                 if (val * this.feederItemStacks[0].stackSize + this.MeatCurrent < this.MeatMax) {
-                    // can take all of it
-                    this.MeatCurrent += val
-                            * this.feederItemStacks[0].stackSize;
+                    this.MeatCurrent += val * this.feederItemStacks[0].stackSize;
                     var1 = true;
                     this.feederItemStacks[0] = null;
                 } else {
-                    while (val + this.MeatCurrent < this.MeatMax
-                            && this.feederItemStacks[0] != null) {
+                    while (val + this.MeatCurrent < this.MeatMax && this.feederItemStacks[0] != null) {
                         this.MeatCurrent += val;
                         var1 = true;
                         --this.feederItemStacks[0].stackSize;
@@ -253,7 +250,7 @@ public class TileEntityFeeder extends TileEntity implements IInventory,
 
             if (var2 != (((this.MeatCurrent > 0) ? 2 : 0) + ((this.VegCurrent > 0) ? 1
                     : 0))) {
-                BlockFeeder.updateFurnaceBlockState(this.VegCurrent > 0,
+                BlockFeeder.updateFeederBlockState(this.VegCurrent > 0,
                         this.MeatCurrent > 0, this.worldObj, this.xCoord,
                         this.yCoord, this.zCoord);
                 // BlockFeeder.updateFurnaceBlockState(var4, this.worldObj,
@@ -329,7 +326,7 @@ public class TileEntityFeeder extends TileEntity implements IInventory,
             this.ClearTypeRecord();
         }
 
-        BlockFeeder.updateFurnaceBlockState(this.VegCurrent > 0,
+        BlockFeeder.updateFeederBlockState(this.VegCurrent > 0,
                 this.MeatCurrent > 0, this.worldObj, this.xCoord, this.yCoord,
                 this.zCoord);
         return feedamount;// amount fed to the dino

@@ -1,7 +1,8 @@
 package com.github.revival.server.container;
 
-import com.github.revival.server.block.entity.TileEntityFeeder;
-import com.github.revival.server.enums.EnumDinoFoodItem;
+import com.github.revival.server.block.entity.TileEntityNewFeeder;
+import com.github.revival.server.entity.EnumDiet;
+import com.github.revival.server.util.FoodMappings;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,12 +19,12 @@ public class FeederContainer extends Container {
     public static final int CARN_INPUT = 0, HERB_INPUT = 1;
     int lastVegValue = 0;
     int lastMeatValue = 0;
-    private TileEntityFeeder tileEntityFeeder;
+    private TileEntityNewFeeder feeder;
 
     public FeederContainer(IInventory var1, TileEntity var2) {
-        this.tileEntityFeeder = (TileEntityFeeder) var2;
-        this.addSlotToContainer(new Slot(this.tileEntityFeeder, 0, 60, 62));
-        this.addSlotToContainer(new Slot(this.tileEntityFeeder, 1, 104, 62));
+        this.feeder = (TileEntityNewFeeder) var2;
+        this.addSlotToContainer(new Slot(this.feeder, 0, 60, 62));
+        this.addSlotToContainer(new Slot(this.feeder, 1, 104, 62));
         int var3;
 
         for (var3 = 0; var3 < 3; ++var3) {
@@ -40,8 +41,8 @@ public class FeederContainer extends Container {
 
     public void addCraftingToCrafters(ICrafting var1) {
         super.addCraftingToCrafters(var1);
-        var1.sendProgressBarUpdate(this, 0, this.tileEntityFeeder.VegCurrent);
-        var1.sendProgressBarUpdate(this, 1, this.tileEntityFeeder.MeatCurrent);
+        var1.sendProgressBarUpdate(this, 0, this.feeder.currentPlant);
+        var1.sendProgressBarUpdate(this, 1, this.feeder.currentMeat);
     }
 
     /**
@@ -54,34 +55,34 @@ public class FeederContainer extends Container {
         while (var1.hasNext()) {
             ICrafting var2 = (ICrafting) var1.next();
 
-            if (this.lastVegValue != this.tileEntityFeeder.VegCurrent) {
+            if (this.lastVegValue != this.feeder.currentPlant) {
                 var2.sendProgressBarUpdate(this, 0,
-                        this.tileEntityFeeder.VegCurrent);
+                        this.feeder.currentPlant);
             }
 
-            if (this.lastMeatValue != this.tileEntityFeeder.MeatCurrent) {
+            if (this.lastMeatValue != this.feeder.currentMeat) {
                 var2.sendProgressBarUpdate(this, 1,
-                        this.tileEntityFeeder.MeatCurrent);
+                        this.feeder.currentMeat);
             }
         }
 
-        this.lastVegValue = this.tileEntityFeeder.VegCurrent;
-        this.lastMeatValue = this.tileEntityFeeder.MeatCurrent;
+        this.lastVegValue = this.feeder.currentPlant;
+        this.lastMeatValue = this.feeder.currentMeat;
     }
 
     @SideOnly(Side.CLIENT)
     public void updateProgressBar(int var1, int var2) {
         if (var1 == 0) {
-            this.tileEntityFeeder.VegCurrent = var2;
+            this.feeder.currentPlant = var2;
         }
 
         if (var1 == 1) {
-            this.tileEntityFeeder.MeatCurrent = var2;
+            this.feeder.currentMeat = var2;
         }
     }
 
     public boolean canInteractWith(EntityPlayer var1) {
-        return this.tileEntityFeeder.isUseableByPlayer(var1);
+        return this.feeder.isUseableByPlayer(var1);
     }
 
     /**
@@ -100,14 +101,14 @@ public class FeederContainer extends Container {
             // inventory
             {
                 // if it can be smelted, place in the input slots
-                if (EnumDinoFoodItem.foodtype(itemstack1.getItem()) == EnumDinoFoodItem.ISCARNIVOROUS) {
+                if (FoodMappings.instance().getItemFoodAmount(itemstack1.getItem(), EnumDiet.CARNIVORE_EGG) != 0) {
                     // try to place in either Input slot; add 1 to final input
                     // slot because mergeItemStack uses < index
                     if (!this.mergeItemStack(itemstack1, 0, 1, false)) {
                         return null;
                     }
                 }
-                if (EnumDinoFoodItem.foodtype(itemstack1.getItem()) == EnumDinoFoodItem.ISHERBIVOROUS) {
+                if (FoodMappings.instance().getItemFoodAmount(itemstack1.getItem(), EnumDiet.HERBIVORE) != 0) {
                     // try to place in either Input slot; add 1 to final input
                     // slot because mergeItemStack uses < index
                     if (!this.mergeItemStack(itemstack1, 1, 2, false)) {

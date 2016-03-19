@@ -52,7 +52,7 @@ import com.github.revival.Revival;
 import com.github.revival.client.gui.GuiPedia;
 import com.github.revival.server.api.IPrehistoricAI;
 import com.github.revival.server.block.FABlockRegistry;
-import com.github.revival.server.block.entity.TileEntityFeeder;
+import com.github.revival.server.block.entity.TileEntityNewFeeder;
 import com.github.revival.server.config.FossilConfig;
 import com.github.revival.server.entity.ai.DinoAIAttackOnCollide;
 import com.github.revival.server.enums.EnumAnimation;
@@ -361,24 +361,19 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		return false;
 	}
 
-	public TileEntityFeeder getNearestFeeder(int SEARCH_RANGE) {
-		for (int dx = -2; dx != -(SEARCH_RANGE + 1); dx += (dx < 0) ? (dx * -2)
+	public TileEntityNewFeeder getNearestFeeder(int feederRange) {
+		for (int dx = -2; dx != -(feederRange + 1); dx += (dx < 0) ? (dx * -2)
 				: (-(2 * dx + 1))) {
 			for (int dy = -5; dy < 4; dy++) {
-				for (int dz = -2; dz != -(SEARCH_RANGE + 1); dz += (dz < 0) ? (dz * -2)
+				for (int dz = -2; dz != -(feederRange + 1); dz += (dz < 0) ? (dz * -2)
 						: (-(2 * dz + 1))) {
 					if (this.posY + dy >= 0
 							&& this.posY + dy <= this.worldObj.getHeight()) {
-						TileEntity fed = this.worldObj.getTileEntity(
-								MathHelper.floor_double(this.posX + dx),
-								MathHelper.floor_double(this.posY + dy),
-								MathHelper.floor_double(this.posZ + dz));
+						TileEntity feeder = this.worldObj.getTileEntity(MathHelper.floor_double(this.posX + dx), MathHelper.floor_double(this.posY + dy), MathHelper.floor_double(this.posZ + dz));
 
-						if (fed != null
-								&& fed instanceof TileEntityFeeder
-								&& !((TileEntityFeeder) fed)
-								.CheckIsEmpty(this.selfType)) {
-							return (TileEntityFeeder) fed;
+						if (feeder != null && feeder instanceof TileEntityNewFeeder) {
+							System.out.println(feeder);
+							return (TileEntityNewFeeder) feeder;
 						}
 					}
 				}
@@ -1532,18 +1527,52 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	@Override
 	public void knockBack(Entity entity, float f, double x, double z)
 	{
-		if (this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).getAttributeValue() <= 0)
-		{
-			this.velocityChanged = false;
-			float f1 = MathHelper.sqrt_double(x * x + z * z);
-			float f2 = f * 0.15F;
-			this.motionX /= 2.0D;
-			this.motionY /= 2.0D;
-			this.motionZ /= 2.0D;
-			this.motionX -= x / (double)f1 * (double)f2;
-			this.motionY += (double)f2;
-			this.motionZ -= z / (double)f1 * (double)f2;
+		if(entity != null && entity instanceof EntityNewPrehistoric){
+			if (this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).getAttributeValue() <= 0 && this.onGround)
+			{
+				this.velocityChanged = false;
+				float f1 = MathHelper.sqrt_double(x * x + z * z);
+				float f2 = f * 0.15F;
+				this.motionX /= 2.0D;
+				this.motionY /= 2.0D;
+				this.motionZ /= 2.0D;
+				this.motionX -= x / (double)f1 * (double)f2;
+				this.motionY += (double)f2;
+				this.motionZ -= z / (double)f1 * (double)f2;
+			}
+		}else{
+			super.knockBack(entity, f, x, z);
 		}
+	}
+
+	public boolean canDinoHunt(Entity target){
+		double d1 = this.boundingBox.maxX - this.boundingBox.minX;
+		double d2 = target.boundingBox.maxX - target.boundingBox.minX;
+
+		if(target instanceof EntityNewPrehistoric){
+			EntityNewPrehistoric prehistoric = (EntityNewPrehistoric)target;
+			if((d1 * getDinosaurSize()) >= (d2 * getDinosaurSize())){
+				return isHungry();
+			}
+		}else if((d1 * getDinosaurSize()) >= d2){
+			return isHungry();
+		}
+		return false;
+		/*	if(this.selfType.diet != EnumDiet.HERBIVORE && this.selfType.diet != EnumDiet.NONE){
+			if(mobBoundingBoxDistance >= targetBoundingBoxDistance){	
+				return true;
+				if(target instanceof EntityNewPrehistoric){
+					EntityNewPrehistoric prehistoric = (EntityNewPrehistoric)target;
+					if(prehistoric.selfType.diet.fearIndex <= mob.selfType.diet.fearIndex){
+
+						return true;	
+					}
+				}else{
+					return true;
+				}
+			}
+		}
+		return false; */
 	}
 
 	public EntityLivingBase getClosestEntity() {
@@ -1563,5 +1592,46 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		} else {
 			return (EntityLivingBase) list.get(0);
 		}
+	}
+
+	public void doFoodEffect(Item item) {
+		if(item == null){
+			switch(this.selfType.diet){
+			case HERBIVORE:	
+				spawnItemParticle(Item.getItemFromBlock(Blocks.leaves));
+				spawnItemParticle(Item.getItemFromBlock(Blocks.leaves));
+				spawnItemParticle(Item.getItemFromBlock(Blocks.leaves));
+				spawnItemParticle(Item.getItemFromBlock(Blocks.leaves));
+				break;
+			case OMNIVORE:
+				spawnItemParticle(Items.bread);
+				spawnItemParticle(Items.bread);
+				spawnItemParticle(Items.bread);
+				spawnItemParticle(Items.bread);
+				break;
+			default:
+				spawnItemParticle(Items.beef);
+				spawnItemParticle(Items.beef);
+				spawnItemParticle(Items.beef);
+				spawnItemParticle(Items.beef);
+				break;
+
+			}
+
+		}else{
+			spawnItemParticle(item);
+		}
+		this.worldObj.playSoundAtEntity(this, "random.eat", this.getSoundVolume(), this.getSoundPitch());
+	}
+
+	public void spawnItemParticle(Item item){
+		double motionX = rand.nextGaussian() * 0.07D;
+		double motionY = rand.nextGaussian() * 0.07D;
+		double motionZ = rand.nextGaussian() * 0.07D;
+		float f = (float)(getRNG().nextFloat() * (this.boundingBox.maxX - this.boundingBox.minX) + this.boundingBox.minX);
+		float f1 = (float)(getRNG().nextFloat() * (this.boundingBox.maxY - this.boundingBox.minY) + this.boundingBox.minY);
+		float f2 = (float)(getRNG().nextFloat() * (this.boundingBox.maxZ - this.boundingBox.minZ) + this.boundingBox.minZ);
+		worldObj.spawnParticle("iconcrack_" + Item.getIdFromItem(item) + "_0", f, f1, f2, motionX, motionY, motionZ);
+		//worldObj.spawnParticle("iconcrack_" + Item.getIdFromItem(item) + "_0", posX + rand.nextFloat() * width * 2.0F - width, posY + 0.5D + rand.nextFloat() * height, posZ + rand.nextFloat() * width * 2.0F - width, motionX, motionY, motionZ);
 	}
 }
