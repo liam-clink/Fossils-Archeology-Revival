@@ -130,8 +130,9 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	public ChainBuffer tailbuffer;
 	public float jumpLength;
 	public int ticksEating;
+    private int dinoAge;
 
-	public EntityNewPrehistoric(World world, EnumPrehistoric selfType) {
+    public EntityNewPrehistoric(World world, EnumPrehistoric selfType) {
 		super(world);
 		this.updateSize();
 		this.selfType = selfType;
@@ -217,28 +218,25 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	}
 
 	public void readEntityFromNBT(NBTTagCompound compound) {
-		super.readEntityFromNBT(compound);
-		this.setModelized(compound.getBoolean("isModelized"));
-		this.setAngry(compound.getBoolean("Angry"));
-		this.setDinoAge(compound.getInteger("DinoAge"));
-		this.setDinoAgeTick(compound.getInteger("AgeTick"));
-		this.setHunger(compound.getInteger("Hunger"));
-		this.setHungerTick(compound.getInteger("HungerTick"));
-		this.setSubSpecies(compound.getInteger("SubSpecies"));
-		this.setGender(compound.getInteger("Gender"));
-		this.setSleeping(compound.getInteger("Sleeping"));
-		this.setSitting(compound.getBoolean("Sitting"));
-
-		this.setOrder(EnumOrderType.values()[compound.getByte("currentOrder")]);
-		String s = "";
-
-		if (compound.hasKey("Owner", 8)) {
-			s = compound.getString("Owner");
-			this.setOwnerDisplayName(s);
-		} else {
-			this.setOwnerDisplayName(compound.getString("OwnerDisplayName"));
-		}
-
+        this.setDinoAge(compound.getInteger("DinoAge"));
+        this.setDinoAgeTick(compound.getInteger("AgeTick"));
+        this.setModelized(compound.getBoolean("isModelized"));
+        this.setAngry(compound.getBoolean("Angry"));
+        this.setHunger(compound.getInteger("Hunger"));
+        this.setHungerTick(compound.getInteger("HungerTick"));
+        this.setSubSpecies(compound.getInteger("SubSpecies"));
+        this.setGender(compound.getInteger("Gender"));
+        this.setSleeping(compound.getInteger("Sleeping"));
+        this.setSitting(compound.getBoolean("Sitting"));
+        this.setOrder(EnumOrderType.values()[compound.getByte("currentOrder")]);
+        String owner;
+        if (compound.hasKey("Owner", 8)) {
+            owner = compound.getString("Owner");
+            this.setOwnerDisplayName(owner);
+        } else {
+            this.setOwnerDisplayName(compound.getString("OwnerDisplayName"));
+        }
+        super.readEntityFromNBT(compound);
 	}
 
 	@Override
@@ -663,14 +661,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	}
 
 	public float getDinosaurSize() {
-		float step;
-		step = (this.maxSize - this.minSize) / (this.getAdultAge() + 1);
-
-		if (this.getDinoAge() > this.getAdultAge()) {
-			return this.minSize + (step * this.getAdultAge());
-		}
-
-		return this.minSize + (step * this.getDinoAge());
+        return ((maxSize - minSize) / this.getAdultAge() * Math.min(this.getDinoAge(), this.getAdultAge())) + minSize;
 	}
 
 	protected int getExperiencePoints(EntityPlayer par1EntityPlayer) {
@@ -768,11 +759,12 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	}
 
 	public int getDinoAge() {
-		return this.dataWatcher.getWatchableObjectInt(AGE_DATA_INDEX);
+		return worldObj.isRemote ? this.dataWatcher.getWatchableObjectInt(AGE_DATA_INDEX) : dinoAge;
 	}
 
-	public void setDinoAge(int var1) {
-		this.dataWatcher.updateObject(AGE_DATA_INDEX, var1);
+	public void setDinoAge(int age) {
+		this.dataWatcher.updateObject(AGE_DATA_INDEX, age);
+        this.dinoAge = age;
 	}
 
 	public boolean increaseDinoAge() {
