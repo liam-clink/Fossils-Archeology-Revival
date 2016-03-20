@@ -5,11 +5,12 @@ import io.netty.buffer.ByteBuf;
 import java.util.Random;
 
 import net.ilexiconn.llibrary.common.message.AbstractMessage;
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.particle.EntityBlockDustFX;
 import net.minecraft.client.particle.EntityBreakingFX;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 
@@ -19,6 +20,7 @@ public class MessageFoodParticles extends AbstractMessage<MessageFoodParticles>{
 
 	public int dinosaurID;
 	public int foodItemID;
+	public int blockItemID;
 
 	public MessageFoodParticles(int dinosaurID)
 	{
@@ -32,6 +34,13 @@ public class MessageFoodParticles extends AbstractMessage<MessageFoodParticles>{
 		this.foodItemID = foodItemID;
 	}
 
+	public MessageFoodParticles(int dinosaurID, Block block)
+	{
+		this.dinosaurID = dinosaurID;
+		this.blockItemID = Block.getIdFromBlock(block);
+	}
+
+
 	public MessageFoodParticles()
 	{
 	}
@@ -42,7 +51,7 @@ public class MessageFoodParticles extends AbstractMessage<MessageFoodParticles>{
 
 		if(entity instanceof EntityNewPrehistoric){
 			EntityNewPrehistoric prehistoric = (EntityNewPrehistoric)entity;
-			if(message.foodItemID == 0){
+			if(message.foodItemID == 0 && message.blockItemID == 0){
 				switch(prehistoric.selfType.diet){
 				case HERBIVORE:	
 					spawnItemParticle(prehistoric, Items.reeds);
@@ -65,10 +74,23 @@ public class MessageFoodParticles extends AbstractMessage<MessageFoodParticles>{
 
 				}
 			}else{
-				spawnItemParticle(prehistoric, Item.getItemById(message.foodItemID));
-				spawnItemParticle(prehistoric, Item.getItemById(message.foodItemID));
-				spawnItemParticle(prehistoric, Item.getItemById(message.foodItemID));
-				spawnItemParticle(prehistoric, Item.getItemById(message.foodItemID));
+				if(message.foodItemID != 0){
+					spawnItemParticle(prehistoric, Item.getItemById(message.foodItemID ));
+					spawnItemParticle(prehistoric, Item.getItemById(message.foodItemID));
+					spawnItemParticle(prehistoric, Item.getItemById(message.foodItemID));
+					spawnItemParticle(prehistoric, Item.getItemById(message.foodItemID));
+				}
+				if(message.blockItemID != 0){
+					spawnBlockParticle(prehistoric, Block.getBlockById(message.blockItemID));
+					spawnBlockParticle(prehistoric, Block.getBlockById(message.blockItemID));
+					spawnBlockParticle(prehistoric, Block.getBlockById(message.blockItemID));
+					spawnBlockParticle(prehistoric, Block.getBlockById(message.blockItemID));
+					spawnBlockParticle(prehistoric, Block.getBlockById(message.blockItemID));
+					spawnBlockParticle(prehistoric, Block.getBlockById(message.blockItemID));
+					spawnBlockParticle(prehistoric, Block.getBlockById(message.blockItemID));
+					spawnBlockParticle(prehistoric, Block.getBlockById(message.blockItemID));
+
+				}
 			}
 
 		}
@@ -85,6 +107,18 @@ public class MessageFoodParticles extends AbstractMessage<MessageFoodParticles>{
 		Minecraft.getMinecraft().effectRenderer.addEffect(new EntityBreakingFX(entity.worldObj, f, f1, f2, motionX, motionY, motionZ, item, 0));
 
 	}
+	
+	public static final void spawnBlockParticle(Entity entity, Block block){
+		Random rand = new Random();
+		double motionX = rand.nextGaussian() * 0.07D;
+		double motionY = rand.nextGaussian() * 0.07D;
+		double motionZ = rand.nextGaussian() * 0.07D;
+		float f = (float)(rand.nextFloat() * (entity.boundingBox.maxX - entity.boundingBox.minX) + entity.boundingBox.minX);
+		float f1 = (float)(rand.nextFloat() * (entity.boundingBox.maxY - entity.boundingBox.minY) + entity.boundingBox.minY);
+		float f2 = (float)(rand.nextFloat() * (entity.boundingBox.maxZ - entity.boundingBox.minZ) + entity.boundingBox.minZ);
+		Minecraft.getMinecraft().effectRenderer.addEffect(new EntityBlockDustFX(entity.worldObj, f, f1, f2, motionX, motionY, motionZ, block, 0));
+
+	}
 
 	public void handleServerMessage(MessageFoodParticles message, EntityPlayer player)
 	{
@@ -95,11 +129,14 @@ public class MessageFoodParticles extends AbstractMessage<MessageFoodParticles>{
 	{
 		dinosaurID = buf.readInt();
 		foodItemID = buf.readInt();
+		blockItemID = buf.readInt();
+
 	}
 
 	public void toBytes(ByteBuf buf)
 	{
 		buf.writeInt(dinosaurID);
 		buf.writeInt(foodItemID);
+		buf.writeInt(blockItemID);
 	}
 }

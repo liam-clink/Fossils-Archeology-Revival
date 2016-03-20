@@ -111,18 +111,15 @@ public class DinoAIFeeder extends EntityAIBase {
 			this.typeofTarget = ITEM;
 			return true;
 		}
-		if (!this.dinosaur.selfType.FoodBlockList.IsEmpty())//Hasn't found anything and has blocks it can look for
-		{
-			Vec3 targetBlock = this.dinosaur.getBlockToEat(this.searchRange);
 
-			if (targetBlock != null)//Found Item, go there and eat it
-			{
-				this.destX = targetBlock.xCoord;
-				this.destY = targetBlock.yCoord;
-				this.destZ = targetBlock.zCoord;
-				this.typeofTarget = BLOCK;
-				return true;
-			}
+		Vec3 targetBlock = this.dinosaur.getBlockToEat(this.searchRange);
+		if (targetBlock != null)
+		{
+			this.destX = targetBlock.xCoord;
+			this.destY = targetBlock.yCoord;
+			this.destZ = targetBlock.zCoord;
+			this.typeofTarget = BLOCK;
+			return true;
 		}
 
 		return false;
@@ -141,7 +138,6 @@ public class DinoAIFeeder extends EntityAIBase {
 		}
 
 		if (Distance > this.searchRange) {
-			Revival.printDebug("Target too far, discontinuing task. Distance: " + Distance + ", Range: " + this.searchRange);
 			endTask();
 			return false;
 		}
@@ -154,31 +150,26 @@ public class DinoAIFeeder extends EntityAIBase {
 		case ITEM:
 			return this.targetItem.isEntityAlive() && this.targetItem != null;
 		case BLOCK:
-			return this.dinosaur.selfType.FoodBlockList.CheckBlock(this.dinosaur.worldObj.getBlock((int) destX, (int) destY, (int) destZ)) && this.targetBlock != null;
+			return FoodMappings.instance().getBlockFoodAmount(this.dinosaur.worldObj.getBlock((int) destX, (int) destY, (int) destZ), dinosaur.selfType.diet) != 0 && this.targetBlock != null;
 		case FEEDER:
 			return !this.targetFeeder.isInvalid();
-			//return targetFeeder != null;
 
 		}
-
-		//return ((this.dinosaur.IsHungry() || this.dinosaur.IsDeadlyHungry()) && (this.typeofTarget != -1));
 	}
 
 	public void updateTask() {
-		int Range = this.searchRange;
+		int range = this.searchRange;
 		this.dinosaur.setSitting(false);
 		this.dinosaur.setOrder(EnumOrderType.FreeMove);
-		double Distance = Math.sqrt(Math.pow(this.dinosaur.posX - this.destX, 2.0D) + Math.pow(this.dinosaur.posZ - this.destZ, 2.0D));
-
+		double distance = Math.sqrt(Math.pow(this.dinosaur.posX - this.destX, 2.0D) + Math.pow(this.dinosaur.posZ - this.destZ, 2.0D));
 		if (this.typeofTarget == FEEDER) {
 			if (this.targetFeeder == null) {
 				endTask();
 			}
-
-			if (Distance < Range) {
+			if (distance < range) {
 				this.dinosaur.getNavigator().tryMoveToXYZ(this.destX, this.destY, this.destZ, 1.0D);
 
-				if (Distance < 4.5D) {
+				if (distance < 4.5D) {
 					if (this.targetFeeder != null) {
 						if(this.dinosaur.ticksEating < 30){
 							this.dinosaur.ticksEating++;
@@ -186,7 +177,6 @@ public class DinoAIFeeder extends EntityAIBase {
 							this.dinosaur.heal(healval);
 							this.dinosaur.doFoodEffect(null);
 							Revival.channel.sendToAll(new MessageFoodParticles(dinosaur.getEntityId()));
-							dinosaur.worldObj.spawnParticle("smoke", dinosaur.posX, dinosaur.posY, dinosaur.posZ, 0, 0, 0);
 						}else{
 							dinosaur.ticksEating = 0;
 							endTask();
@@ -201,9 +191,9 @@ public class DinoAIFeeder extends EntityAIBase {
 
 		if (this.typeofTarget == ITEM) {
 
-			if (Distance < this.searchRange && this.targetItem.isEntityAlive() && this.targetItem != null) {
+			if (distance < this.searchRange && this.targetItem.isEntityAlive() && this.targetItem != null) {
 				this.dinosaur.getNavigator().tryMoveToXYZ(this.destX, this.destY, this.destZ, 1.0D);
-				if (Distance < 2.5) {
+				if (distance < 2.5) {
 
 					if (this.targetItem != null && this.targetItem.isEntityAlive()) {
 						this.dinosaur.eatItem(this.targetItem.getEntityItem());
@@ -217,19 +207,17 @@ public class DinoAIFeeder extends EntityAIBase {
 		}
 
 		if (this.typeofTarget == BLOCK) {
-			Revival.printDebug("Update Block Task");
-			if (!this.dinosaur.selfType.FoodBlockList.CheckBlock(this.dinosaur.worldObj.getBlock((int) destX, (int) destY, (int) destZ))) {
+			if (!(FoodMappings.instance().getBlockFoodAmount(this.dinosaur.worldObj.getBlock((int) destX, (int) destY, (int) destZ), dinosaur.selfType.diet) != 0)) {
 				endTask();
 			}
-			if (Distance < Range) {
+			if (distance < range) {
 				this.dinosaur.getNavigator().tryMoveToXYZ(this.destX, this.destY, this.destZ, 1.0D);
-				if (Distance < 2.5) {
-					if (this.dinosaur.selfType.FoodBlockList.CheckBlock(this.dinosaur.worldObj.getBlock((int) destX, (int) destY, (int) destZ))) {
-						this.dinosaur.heal(this.dinosaur.selfType.FoodBlockList.getBlockHeal(this.dinosaur.worldObj.getBlock((int) destX, (int) destY, (int) destZ)));
-						this.dinosaur.increaseHunger(this.dinosaur.selfType.FoodBlockList.getBlockFood(Item.getItemFromBlock(this.dinosaur.worldObj.getBlock((int) destX, (int) destY, (int) destZ))));
-						this.dinosaur.worldObj.setBlock((int) destX, (int) destY, (int) destZ, Blocks.air, 0, 2);
-						endTask();
-					}
+				if (distance < 2.5) {
+					//this.dinosaur.heal(this.dinosaur.selfType.FoodBlockList.getBlockHeal(this.dinosaur.worldObj.getBlock((int) destX, (int) destY, (int) destZ)));
+					//this.dinosaur.increaseHunger(this.dinosaur.selfType.FoodBlockList.getBlockFood(Item.getItemFromBlock(this.dinosaur.worldObj.getBlock((int) destX, (int) destY, (int) destZ))));
+					this.dinosaur.eatBlock((int) destX, (int) destY, (int) destZ);
+					this.dinosaur.worldObj.setBlock((int) destX, (int) destY, (int) destZ, Blocks.air, 0, 2);
+					endTask();
 				}
 			} else {
 				endTask();

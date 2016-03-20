@@ -1599,7 +1599,6 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	}
 
 	public void eatItem(ItemStack stack){
-
 		if(stack.stackSize > 0 && stack != null && stack.getItem() != null){
 			if(FoodMappings.instance().getItemFoodAmount(stack.getItem(), selfType.diet) != 0){
 				doFoodEffect(stack.getItem());
@@ -1607,6 +1606,16 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 				this.setHunger(this.getHunger() + FoodMappings.instance().getItemFoodAmount(stack.getItem(), selfType.diet));
 				stack.stackSize--;
 			}
+		}
+	}
+
+	public void eatBlock(int destX, int destY, int destZ) {
+		Block block = worldObj.getBlock(destX, destY, destZ);
+		if(FoodMappings.instance().getBlockFoodAmount(block, selfType.diet) != 0){
+			this.heal(Math.round(FoodMappings.instance().getBlockFoodAmount(block, selfType.diet) / 10));
+			doFoodEffect(Item.getItemFromBlock(block));
+			Revival.channel.sendToAll(new MessageFoodParticles(getEntityId(), block));
+
 		}
 	}
 }
