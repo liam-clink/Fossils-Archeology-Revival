@@ -18,10 +18,18 @@ import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 public class MessageFoodParticles extends AbstractMessage<MessageFoodParticles>{
 
 	public int dinosaurID;
+	public int foodItemID;
 
 	public MessageFoodParticles(int dinosaurID)
 	{
 		this.dinosaurID = dinosaurID;
+		foodItemID = 0;
+	}
+
+	public MessageFoodParticles(int dinosaurID, int foodItemID)
+	{
+		this.dinosaurID = dinosaurID;
+		this.foodItemID = foodItemID;
 	}
 
 	public MessageFoodParticles()
@@ -31,31 +39,38 @@ public class MessageFoodParticles extends AbstractMessage<MessageFoodParticles>{
 	public void handleClientMessage(MessageFoodParticles message, EntityPlayer player)
 	{
 		Entity entity = player.worldObj.getEntityByID(message.dinosaurID);
-		
+
 		if(entity instanceof EntityNewPrehistoric){
 			EntityNewPrehistoric prehistoric = (EntityNewPrehistoric)entity;
-			switch(prehistoric.selfType.diet){
-			case HERBIVORE:	
-				spawnItemParticle(prehistoric, Items.reeds);
-				spawnItemParticle(prehistoric, Items.reeds);
-				spawnItemParticle(prehistoric, Items.reeds);
-				spawnItemParticle(prehistoric, Items.reeds);
-				break;
-			case OMNIVORE:
-				spawnItemParticle(prehistoric, Items.bread);
-				spawnItemParticle(prehistoric, Items.bread);
-				spawnItemParticle(prehistoric, Items.bread);
-				spawnItemParticle(prehistoric, Items.bread);
-				break;
-			default:
-				spawnItemParticle(prehistoric, Items.beef);
-				spawnItemParticle(prehistoric, Items.beef);
-				spawnItemParticle(prehistoric, Items.beef);
-				spawnItemParticle(prehistoric, Items.beef);
-				break;
+			if(message.foodItemID == 0){
+				switch(prehistoric.selfType.diet){
+				case HERBIVORE:	
+					spawnItemParticle(prehistoric, Items.reeds);
+					spawnItemParticle(prehistoric, Items.reeds);
+					spawnItemParticle(prehistoric, Items.reeds);
+					spawnItemParticle(prehistoric, Items.reeds);
+					break;
+				case OMNIVORE:
+					spawnItemParticle(prehistoric, Items.bread);
+					spawnItemParticle(prehistoric, Items.bread);
+					spawnItemParticle(prehistoric, Items.bread);
+					spawnItemParticle(prehistoric, Items.bread);
+					break;
+				default:
+					spawnItemParticle(prehistoric, Items.beef);
+					spawnItemParticle(prehistoric, Items.beef);
+					spawnItemParticle(prehistoric, Items.beef);
+					spawnItemParticle(prehistoric, Items.beef);
+					break;
 
+				}
+			}else{
+				spawnItemParticle(prehistoric, Item.getItemById(message.foodItemID));
+				spawnItemParticle(prehistoric, Item.getItemById(message.foodItemID));
+				spawnItemParticle(prehistoric, Item.getItemById(message.foodItemID));
+				spawnItemParticle(prehistoric, Item.getItemById(message.foodItemID));
 			}
-			
+
 		}
 	}
 
@@ -80,10 +95,12 @@ public class MessageFoodParticles extends AbstractMessage<MessageFoodParticles>{
 	public void fromBytes(ByteBuf buf)
 	{
 		dinosaurID = buf.readInt();
+		foodItemID = buf.readInt();
 	}
 
 	public void toBytes(ByteBuf buf)
 	{
 		buf.writeInt(dinosaurID);
+		buf.writeInt(foodItemID);
 	}
 }

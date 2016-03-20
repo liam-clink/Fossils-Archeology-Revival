@@ -213,19 +213,8 @@ public class DinoAIFeeder extends EntityAIBase {
 				if (Distance < 2.5) {
 
 					if (this.targetItem != null && this.targetItem.isEntityAlive()) {
-						/* int i = this.dinosaur.pickUpItem(this.targetItem.getEntityItem());
-
-                        if (i > 0)
-                        {
-                            this.targetItem.getEntityItem().stackSize = i;
-                            endTask();
-                        }
-                        else
-                        {
-                            this.targetItem.setDead();
-                            endTask();
-                        }
-						 */
+						this.dinosaur.eatItem(this.targetItem.getEntityItem());
+						endTask(); 
 					}
 				}
 			} else {
@@ -303,9 +292,9 @@ public class DinoAIFeeder extends EntityAIBase {
 
 			EntityItem entityItem1 = (EntityItem) iterateNearbyItems.next();
 			if(entityItem1.getEntityItem() != null && entityItem1.getEntityItem().getItem() != null)
-			if ((FoodMappings.instance().getItemFoodAmount(entityItem1.getEntityItem().getItem(), dinosaur.selfType.diet) != 0) && this.dinosaur.getDistanceSqToEntity(entityItem1) < range) {
-				entityItem = entityItem1;
-			}
+				if ((FoodMappings.instance().getItemFoodAmount(entityItem1.getEntityItem().getItem(), dinosaur.selfType.diet) != 0) && this.dinosaur.getDistanceSqToEntity(entityItem1) < range) {
+					entityItem = entityItem1;
+				}
 		}
 		return entityItem;
 	}

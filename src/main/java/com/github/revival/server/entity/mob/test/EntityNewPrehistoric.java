@@ -1605,4 +1605,16 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		float f2 = (float)(getRNG().nextFloat() * (this.boundingBox.maxZ - this.boundingBox.minZ) + this.boundingBox.minZ);
 		worldObj.spawnParticle("iconcrack_" + Item.getIdFromItem(item) + "_0", f, f1, f2, motionX, motionY, motionZ);
 	}
+
+	public void eatItem(ItemStack stack){
+
+		if(stack.stackSize > 0 && stack != null && stack.getItem() != null){
+			if(FoodMappings.instance().getItemFoodAmount(stack.getItem(), selfType.diet) != 0){
+				doFoodEffect(stack.getItem());
+				Revival.channel.sendToAll(new MessageFoodParticles(getEntityId(), Item.getIdFromItem(stack.getItem())));
+				this.setHunger(this.getHunger() + FoodMappings.instance().getItemFoodAmount(stack.getItem(), selfType.diet));
+				stack.stackSize--;
+			}
+		}
+	}
 }
