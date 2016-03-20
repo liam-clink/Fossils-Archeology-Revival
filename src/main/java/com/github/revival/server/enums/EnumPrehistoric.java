@@ -481,7 +481,7 @@ public enum EnumPrehistoric {
     }
 
     public boolean useFeeder() {
-        return (this.Flags & I.HERB_CARN) != 0;
+        return this.diet != EnumDiet.NONE && this.diet != EnumDiet.INSECTIVORE && this.diet != EnumDiet.PISCIVORE;
     }
 
     public boolean isHerbivore() {
