@@ -1,17 +1,11 @@
-#Build 7.2.0 - Updated June 04 2015
+﻿#Build 7.2.0 - Updated June 04 2015
 #English (en_US) Localization File
 #Contribution Credits - 
 #Keys last updated June 04 2015
 
 #Tab Groups
-itemgroup.FCombat=Ancient Equipment
-itemgroup.FBlocks=Ancient Blocks
-itemgroup.FFood=Ancient Foods
-itemgroup.FItems=Ancient Items
-itemgroup.FMaterial=Ancient Materials
-itemgroup.FTools=Ancient Tools
-itemgroup.FFigurines=Collectables
-itemgroup.FBones=Dinosaur Bones
+itemgroup.FBlocks=Fossils Revival Blocks
+itemgroup.FItems=Fossils Revival Items
 
 #Biomes
 biome.anu.name=Land of Darkness

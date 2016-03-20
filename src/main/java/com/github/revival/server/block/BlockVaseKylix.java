@@ -42,7 +42,7 @@ public class BlockVaseKylix extends BlockContainer implements ISubBlocksBlock {
 
     public BlockVaseKylix() {
         super(Material.clay);
-        setCreativeTab(FATabRegistry.tabFFigurines);
+        setCreativeTab(FATabRegistry.tabFBlocks);
         setBlockName(LocalizationStrings.VASE_KYLIX);
     }
 

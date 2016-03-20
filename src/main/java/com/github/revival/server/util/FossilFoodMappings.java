@@ -17,6 +17,7 @@ import net.minecraft.init.Items;
 public class FossilFoodMappings {
 
     public static void init() {
+        FoodMappings.instance().addToItemMappings(Items.reeds, 15, EnumDiet.HERBIVORE);
         FoodMappings.instance().addToItemMappings(Items.wheat, 13, EnumDiet.HERBIVORE);
         FoodMappings.instance().addToItemMappings(Items.melon, 10, EnumDiet.HERBIVORE);
         FoodMappings.instance().addToItemMappings(Items.apple, 20, EnumDiet.HERBIVORE);
@@ -69,6 +70,7 @@ public class FossilFoodMappings {
                 }
             }
         }
+        FoodMappings.instance().addToItemMappings(Items.reeds, 15, EnumDiet.OMNIVORE);
         FoodMappings.instance().addToItemMappings(Items.wheat, 13, EnumDiet.OMNIVORE);
         FoodMappings.instance().addToItemMappings(Items.melon, 10, EnumDiet.OMNIVORE);
         FoodMappings.instance().addToItemMappings(Items.apple, 20, EnumDiet.OMNIVORE);

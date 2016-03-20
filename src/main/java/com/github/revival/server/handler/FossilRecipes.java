@@ -1,20 +1,23 @@
 package com.github.revival.server.handler;
 
-import com.github.revival.server.block.FABlockRegistry;
-import com.github.revival.server.item.FAItemRegistry;
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
+import net.minecraftforge.oredict.ShapelessOreRecipe;
 
-public class FossilRecipeHandler {
+import com.github.revival.server.block.FABlockRegistry;
+import com.github.revival.server.item.FAItemRegistry;
+
+import cpw.mods.fml.common.registry.GameRegistry;
+
+public class FossilRecipes {
     public static void addRecipe() {
         GameRegistry.addRecipe(new ItemStack(FABlockRegistry.skullLantern, 1), new Object[]{"X", "Y", 'X', FABlockRegistry.blockSkull, 'Y', Blocks.torch});
         GameRegistry.addRecipe(new ItemStack(Items.dye, 5, 15), new Object[]{"X", 'X', FABlockRegistry.blockSkull});
         GameRegistry.addRecipe(new ItemStack(Items.dye, 5, 15), new Object[]{"X", 'X', FABlockRegistry.skullLantern});
-        GameRegistry.addRecipe(new ItemStack(FABlockRegistry.blockanalyzerIdle, 1), new Object[]{"XYX", "XWX", 'X', Items.iron_ingot, 'Y', FAItemRegistry.relic, 'W', FAItemRegistry.biofossil});
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(FABlockRegistry.blockanalyzerIdle, 1), new Object[]{"XYX", "XWX", 'X', "ingotIron", 'Y', "artifact", 'W', "fossil"}));
         GameRegistry.addRecipe(new ItemStack(FABlockRegistry.blockworktableIdle, 1), new Object[]{"X", "Y", 'X', Items.paper, 'Y', Blocks.crafting_table});
         GameRegistry.addRecipe(new ItemStack(FABlockRegistry.blockSifterIdle, 1), new Object[]{"XYX", "YZY", "YXY", 'X', Items.string, 'Y', Blocks.planks, 'Z', Blocks.iron_bars});
         //GameRegistry.addRecipe(new ItemStack(FABlockRegistry.ancientWoodPlate, 3), new Object[]{"XX", 'X', FABlockRegistry.ancientWood});
@@ -40,6 +43,7 @@ public class FossilRecipeHandler {
         GameRegistry.addShapelessRecipe(new ItemStack(FAItemRegistry.gemShovel), new Object[]{Items.diamond_shovel, FAItemRegistry.gem});
         GameRegistry.addShapelessRecipe(new ItemStack(FABlockRegistry.denseSand, 2), new Object[]{Items.quartz, Blocks.sand});
         // GameRegistry.addShapelessRecipe(new ItemStack(FAItemRegistry.toothDagger, 1), new Object[]{new ItemStack(FAItemRegistry.claw, 1, EnumDinoType.TRex.ordinal()), Items.stick});
+        GameRegistry.addRecipe(new ShapelessOreRecipe(FAItemRegistry.dinoPedia,  new Object[]{Items.book, "fossil"}));
 
         // for (int i = 0; i < EnumDinoType.values().length; i++)
         //     GameRegistry.addShapelessRecipe(new ItemStack(FAItemRegistry.dinoPedia), new Object[]{Items.book, EnumDinoType.values()[i].DNAItem});

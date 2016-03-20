@@ -7,6 +7,7 @@ import com.github.revival.server.api.ISubBlocksBlock;
 import com.github.revival.server.creativetab.FATabRegistry;
 import com.github.revival.server.handler.LocalizationStrings;
 import com.google.common.collect.Lists;
+
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
@@ -21,8 +22,6 @@ public class FABlockRegistry extends FARegistry {
     public static Block blockFossil;
     public static Block blockSkull;
     public static Block skullLantern;
-    public static Block Limestone;
-    public static Block LimestoneBrick;
     public static Block blockanalyzerIdle;
     public static Block blockanalyzerActive;
     public static Block blockcultivateIdle;
@@ -30,10 +29,11 @@ public class FABlockRegistry extends FARegistry {
     public static Block blockSlimeTrail;
     public static Block blockworktableIdle;
     public static Block blockworktableActive;
+    public static Block feederIdle;
+    public static Block feederActive;
     public static Block denseSand;
     public static Block strongGlass;
     public static Block blockTimeMachine;
-    public static Block ferns;
     public static Block drum;
     public static Block blockPermafrost;
     public static Block blockIcedStone;
@@ -47,17 +47,17 @@ public class FABlockRegistry extends FARegistry {
     public static Block palaeSingleSlab;
     public static Block palaeDoubleSlab;
     public static Block palaeStairs;
-    public static Block volcanicBrick;
-    public static Block amberOre;
-    public static Block ancientStone;
-    public static Block ancientStonebrick;
     public static Block ancientWood;
     public static Block ancientWoodPillar;
-    public static Block ancientGlass;
     public static Block ancientWoodPlate;
     public static Block ancientWoodStairs;
     public static Block ancientWoodSingleSlab;
     public static Block ancientWoodDoubleSlab;
+    public static Block volcanicBrick;
+    public static Block amberOre;
+    public static Block ancientStone;
+    public static Block ancientStonebrick;
+    public static Block ancientGlass;
     public static Block ancientStoneStairs;
     public static Block ancientStoneSingleSlab;
     public static Block ancientStoneDoubleSlab;
@@ -77,6 +77,7 @@ public class FABlockRegistry extends FARegistry {
     public static Block vaseKylixBlock;
     public static Block vaseVoluteBlock;
     public static Block sarcophagus;
+    public static Block ferns;
     public static Block dillhoffia;
     public static Block sarracina;
     public static Block cephalotaxus;
@@ -90,17 +91,12 @@ public class FABlockRegistry extends FARegistry {
     public static Block horsetail_large;
     public static Block mutantPlant;
     public static Block tempskya;
-    public static Block feederIdle;
-    public static Block feederActive;
 
     public void init() {
         Revival.tar_material = new MaterialTar(MapColor.blackColor);
         Revival.tar_fluid = new FluidTar("tar").setBlock(tar);
         FluidRegistry.registerFluid(Revival.tar_fluid);
-
         skullLantern = new BlockFossilSkull(true).setLightLevel(1F);
-        Limestone = new BlockLimestone(Material.rock);
-        LimestoneBrick = new BlockLimestoneBrick(Material.rock);
         blockanalyzerIdle = new BlockAnalyzer(false);
         blockanalyzerActive = new BlockAnalyzer(true);
         blockcultivateIdle = new BlockCultivate(false);

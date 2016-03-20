@@ -51,10 +51,13 @@ public class BlockFeeder extends BlockContainer {
         }
         setHardness(3.5F);
         setStepSound(Block.soundTypeMetal);
-        setBlockName(LocalizationStrings.FEEDER_ACTIVE_NAME);
 
         if (!isActive) {
             setCreativeTab(FATabRegistry.tabFBlocks);
+            setBlockName(LocalizationStrings.FEEDER_ACTIVE_NAME);
+        }else{
+            setBlockName(LocalizationStrings.FEEDER_IDLE_NAME);
+
         }
     }
 

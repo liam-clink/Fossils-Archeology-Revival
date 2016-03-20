@@ -16,6 +16,7 @@ public class FossilOreDictionary {
         OreDictionary.registerOre("record", new ItemStack(FAItemRegistry.fossilrecordBones));
         OreDictionary.registerOre("oreFossil", new ItemStack(FABlockRegistry.blockFossil));
 
+        OreDictionary.registerOre("artifact", new ItemStack(FAItemRegistry.relic));
         OreDictionary.registerOre("fossil", new ItemStack(FAItemRegistry.biofossil));
         OreDictionary.registerOre("gemScarab", new ItemStack(FAItemRegistry.gem));
         OreDictionary.registerOre("gemScarabBlue", new ItemStack(FAItemRegistry.gem_blue));

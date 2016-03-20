@@ -253,7 +253,7 @@ public class ModelTyrannosaurus extends ModelNewPrehistoric {
         MowzieModelRenderer[] leftArmParts = {this.leftUpperArm, this.leftLowerArm};
         MowzieModelRenderer[] rightArmParts = {this.rightUpperArm, this.rightLowerArm};
 
-        float speed = 0.9F;
+        float speed = 0.5F;
         float speed2 = 0.1F;
         float sitProgress = ((EntityNewPrehistoric) (entity)).sitProgress;
         sitAnimationRotation(neck, sitProgress, -((float) Math.toRadians(15D)), 0, 0);

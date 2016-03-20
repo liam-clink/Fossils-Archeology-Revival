@@ -88,7 +88,7 @@ import com.github.revival.server.handler.FossilGuiHandler;
 import com.github.revival.server.handler.FossilInteractEvent;
 import com.github.revival.server.handler.FossilLivingEvent;
 import com.github.revival.server.handler.FossilOreDictionary;
-import com.github.revival.server.handler.FossilRecipeHandler;
+import com.github.revival.server.handler.FossilRecipes;
 import com.github.revival.server.handler.FossilSpawnEggs;
 import com.github.revival.server.handler.FossilToolEvent;
 import com.github.revival.server.handler.FossilTradeHandler;
@@ -251,7 +251,7 @@ public class Revival {
         RenderingRegistry.registerBlockHandler(2303, RenderFeeder.INSTANCE);
         proxy.init();
 
-        FossilRecipeHandler.addRecipe();
+        FossilRecipes.addRecipe();
 
         FMLCommonHandler.instance().bus().register(new PickupHandler());
         FMLCommonHandler.instance().bus().register(new EventFossilAchivements());

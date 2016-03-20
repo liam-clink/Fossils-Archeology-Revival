@@ -42,7 +42,7 @@ public class BlockVaseAmphora extends BlockContainer implements ISubBlocksBlock 
 
     public BlockVaseAmphora() {
         super(Material.clay);
-        this.setCreativeTab(FATabRegistry.tabFFigurines);
+        this.setCreativeTab(FATabRegistry.tabFBlocks);
         setBlockName(LocalizationStrings.VASE_AMPHORA);
     }
 
