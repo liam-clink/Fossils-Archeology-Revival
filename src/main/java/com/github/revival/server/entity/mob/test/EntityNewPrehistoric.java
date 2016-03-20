@@ -1549,15 +1549,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	}
 
 	public boolean canDinoHunt(Entity target){
-		double d1 = this.boundingBox.maxX - this.boundingBox.minX;
-		double d2 = target.boundingBox.maxX - target.boundingBox.minX;
-
-		if(target instanceof EntityNewPrehistoric){
-			EntityNewPrehistoric prehistoric = (EntityNewPrehistoric)target;
-			if((d1 * getDinosaurSize()) >= (d2 * getDinosaurSize())){
-				return isHungry();
-			}
-		}else if((d1 * getDinosaurSize()) >= d2){
+		if(width >= target.width){
 			return isHungry();
 		}
 		return false;
