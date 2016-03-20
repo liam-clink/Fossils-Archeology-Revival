@@ -164,19 +164,13 @@ public class DinoAIFeeder extends EntityAIBase {
 		//return ((this.dinosaur.IsHungry() || this.dinosaur.IsDeadlyHungry()) && (this.typeofTarget != -1));
 	}
 
-	/**
-	 * Updates the task
-	 */
-	@Override
 	public void updateTask() {
-		dinosaur.worldObj.spawnParticle("smoke", dinosaur.posX, dinosaur.posY, dinosaur.posZ, 0, 0, 0);
 		int Range = this.searchRange;
 		this.dinosaur.setSitting(false);
 		this.dinosaur.setOrder(EnumOrderType.FreeMove);
 		double Distance = Math.sqrt(Math.pow(this.dinosaur.posX - this.destX, 2.0D) + Math.pow(this.dinosaur.posZ - this.destZ, 2.0D));
 
 		if (this.typeofTarget == FEEDER) {
-			Revival.printDebug("Update Feeder Task");
 			if (this.targetFeeder == null) {
 				endTask();
 			}
@@ -208,7 +202,6 @@ public class DinoAIFeeder extends EntityAIBase {
 		if (this.typeofTarget == ITEM) {
 
 			if (Distance < this.searchRange && this.targetItem.isEntityAlive() && this.targetItem != null) {
-				Revival.printDebug("Update Item Task");
 				this.dinosaur.getNavigator().tryMoveToXYZ(this.destX, this.destY, this.destZ, 1.0D);
 				if (Distance < 2.5) {
 
@@ -218,7 +211,6 @@ public class DinoAIFeeder extends EntityAIBase {
 					}
 				}
 			} else {
-				Revival.printDebug("Ending Item Task");
 				endTask();
 			}
 
@@ -255,9 +247,6 @@ public class DinoAIFeeder extends EntityAIBase {
 		this.typeofTarget = NO_TARGET;
 	}
 
-	/**
-	 * Resets the task
-	 */
 	public void resetTask() {
 		this.TimeAtThisTarget = 0;
 		targetItem = null;
@@ -298,31 +287,5 @@ public class DinoAIFeeder extends EntityAIBase {
 		}
 		return entityItem;
 	}
-
-	/*
-    private Vec3 getNearestItem(int SEARCH_RANGE)
-    {
-        List nearbyItems = this.dinosaur.worldObj.getEntitiesWithinAABB(EntityItem.class, this.dinosaur.boundingBox.expand(SEARCH_RANGE, SEARCH_RANGE, SEARCH_RANGE));
-        Collections.sort(nearbyItems, this.targetSorter);
-        Iterator iterateNearbyItems = nearbyItems.iterator();
-        Vec3 itemlocation = null;
-
-        while (iterateNearbyItems.hasNext())
-        {
-            EntityItem entityItem = (EntityItem) iterateNearbyItems.next();
-
-            if (this.dinosaur.selfType.FoodItemList.CheckItemById(entityItem.getEntityItem().itemID) || this.dinosaur.selfType.FoodBlockList.CheckBlockById(entityItem.getEntityItem().itemID))
-            {
-            	Revival.printDebug("targetItem: "+ entityItem);
-            		this.targetItem = entityItem;            
-
-                itemlocation = Vec3.createVectorHelper(entityItem.posX, entityItem.posY, entityItem.posZ);
-                break;
-            }
-        }
-
-        return itemlocation;
-    }
-	 */
 
 }

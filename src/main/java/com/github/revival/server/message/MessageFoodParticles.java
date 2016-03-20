@@ -75,7 +75,6 @@ public class MessageFoodParticles extends AbstractMessage<MessageFoodParticles>{
 	}
 
 	public static final void spawnItemParticle(Entity entity, Item item){
-		System.out.println("i");
 		Random rand = new Random();
 		double motionX = rand.nextGaussian() * 0.07D;
 		double motionY = rand.nextGaussian() * 0.07D;
