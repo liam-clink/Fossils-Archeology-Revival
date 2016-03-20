@@ -54,6 +54,7 @@ import com.github.revival.server.api.IPrehistoricAI;
 import com.github.revival.server.block.FABlockRegistry;
 import com.github.revival.server.block.entity.TileEntityNewFeeder;
 import com.github.revival.server.config.FossilConfig;
+import com.github.revival.server.entity.EnumDiet;
 import com.github.revival.server.entity.ai.DinoAIAttackOnCollide;
 import com.github.revival.server.enums.EnumAnimation;
 import com.github.revival.server.enums.EnumOrderType;
@@ -130,15 +131,17 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	public ChainBuffer tailbuffer;
 	public float jumpLength;
 	public int ticksEating;
-    private int dinoAge;
+	private int dinoAge;
+	public double attackSpeedBoost;
 
-    public EntityNewPrehistoric(World world, EnumPrehistoric selfType) {
+	public EntityNewPrehistoric(World world, EnumPrehistoric selfType) {
 		super(world);
 		this.updateSize();
 		this.selfType = selfType;
 		this.currentOrder = EnumOrderType.FreeMove;
 		animation_speak.duration = this.getSpeakLength();
 		animation_attack.duration = this.getAttackLength();
+		attackSpeedBoost = 1.3D;
 		this.tasks.addTask(0, new DinoAIAge(this));
 		this.tasks.addTask(0, new DinoAIHunger(this));
 		this.tasks.addTask(0, aiSit);
@@ -218,25 +221,25 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	}
 
 	public void readEntityFromNBT(NBTTagCompound compound) {
-        this.setDinoAge(compound.getInteger("DinoAge"));
-        this.setDinoAgeTick(compound.getInteger("AgeTick"));
-        this.setModelized(compound.getBoolean("isModelized"));
-        this.setAngry(compound.getBoolean("Angry"));
-        this.setHunger(compound.getInteger("Hunger"));
-        this.setHungerTick(compound.getInteger("HungerTick"));
-        this.setSubSpecies(compound.getInteger("SubSpecies"));
-        this.setGender(compound.getInteger("Gender"));
-        this.setSleeping(compound.getInteger("Sleeping"));
-        this.setSitting(compound.getBoolean("Sitting"));
-        this.setOrder(EnumOrderType.values()[compound.getByte("currentOrder")]);
-        String owner;
-        if (compound.hasKey("Owner", 8)) {
-            owner = compound.getString("Owner");
-            this.setOwnerDisplayName(owner);
-        } else {
-            this.setOwnerDisplayName(compound.getString("OwnerDisplayName"));
-        }
-        super.readEntityFromNBT(compound);
+		this.setDinoAge(compound.getInteger("DinoAge"));
+		this.setDinoAgeTick(compound.getInteger("AgeTick"));
+		this.setModelized(compound.getBoolean("isModelized"));
+		this.setAngry(compound.getBoolean("Angry"));
+		this.setHunger(compound.getInteger("Hunger"));
+		this.setHungerTick(compound.getInteger("HungerTick"));
+		this.setSubSpecies(compound.getInteger("SubSpecies"));
+		this.setGender(compound.getInteger("Gender"));
+		this.setSleeping(compound.getInteger("Sleeping"));
+		this.setSitting(compound.getBoolean("Sitting"));
+		this.setOrder(EnumOrderType.values()[compound.getByte("currentOrder")]);
+		String owner;
+		if (compound.hasKey("Owner", 8)) {
+			owner = compound.getString("Owner");
+			this.setOwnerDisplayName(owner);
+		} else {
+			this.setOwnerDisplayName(compound.getString("OwnerDisplayName"));
+		}
+		super.readEntityFromNBT(compound);
 	}
 
 	@Override
@@ -398,7 +401,9 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
-		if(!worldObj.isRemote)this.setScale(this.getDinosaurSize());
+		if(this.getHunger() > 100){
+			this.setHunger(100);
+		}
 		if (this.isSitting()) {
 			if(!this.getNavigator().noPath()){
 				this.getNavigator().clearPathEntity();
@@ -661,7 +666,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	}
 
 	public float getDinosaurSize() {
-        return ((maxSize - minSize) / this.getAdultAge() * Math.min(this.getDinoAge(), this.getAdultAge())) + minSize;
+		return ((maxSize - minSize) / this.getAdultAge() * Math.min(this.getDinoAge(), this.getAdultAge())) + minSize;
 	}
 
 	protected int getExperiencePoints(EntityPlayer par1EntityPlayer) {
@@ -764,7 +769,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
 	public void setDinoAge(int age) {
 		this.dataWatcher.updateObject(AGE_DATA_INDEX, age);
-        this.dinoAge = age;
+		this.dinoAge = age;
 	}
 
 	public boolean increaseDinoAge() {
@@ -792,7 +797,11 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	}
 
 	public void setHunger(int var1) {
-		this.dataWatcher.updateObject(HUNGER_DATA_INDEX, var1);
+		if(this.getHunger() > this.getMaxHunger()){
+			this.dataWatcher.updateObject(HUNGER_DATA_INDEX, 100);
+		}else{
+			this.dataWatcher.updateObject(HUNGER_DATA_INDEX, var1);
+		}
 	}
 
 	public boolean increaseHunger(int var1) {
@@ -1167,15 +1176,12 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 				if (FoodMappings.instance().getItemFoodAmount(itemstack.getItem(), this.selfType.diet) != 0) {
 					if (!player.worldObj.isRemote) {
 						if (this.getMaxHunger() > this.getHunger()) {
-							if (this.getHeldItem() != null) {
-								this.entityDropItem(this.getHeldItem(), 0);
-							}
-							this.setCurrentItemOrArmor(0, itemstack);
 
+							this.setHunger(this.getHunger() + FoodMappings.instance().getItemFoodAmount(itemstack.getItem(), this.selfType.diet));
+							if(!worldObj.isRemote)this.eatItem(itemstack);
 							if (FossilConfig.healingDinos) {
 								this.heal(3);
 							}
-
 							if (this.getHunger() >= this.getMaxHunger()) {
 								if (this.isTamed()) {
 									this.sendStatusMessage(EnumSituation.Full);
@@ -1256,14 +1262,6 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 						return true;
 					}
 
-					if (this.selfType.canCarryItems() && itemstack.getItem() != FAItemRegistry.dinoPedia && this.ItemInMouth == null && ((this.isTamed() && player == this.getOwner()) || (new Random()).nextInt(40) == 1)) {
-
-						if (itemstack.stackSize <= 0) {
-							player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
-						}
-
-						return true;
-					}
 				}
 			}
 		}
@@ -1526,14 +1524,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 			if (this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).getAttributeValue() <= 0 && this.onGround)
 			{
 				this.velocityChanged = false;
-				float f1 = MathHelper.sqrt_double(x * x + z * z);
-				float f2 = f * 0.15F;
-				this.motionX /= 2.0D;
-				this.motionY /= 2.0D;
-				this.motionZ /= 2.0D;
-				this.motionX -= x / (double)f1 * (double)f2;
-				this.motionY += (double)f2;
-				this.motionZ -= z / (double)f1 * (double)f2;
+				knockBackMob(entity, 1, 0.4D, 1);
 			}
 		}else{
 			super.knockBack(entity, f, x, z);
@@ -1541,8 +1532,10 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	}
 
 	public boolean canDinoHunt(Entity target){
-		if(width >= target.width){
-			return isHungry();
+		if(this.selfType.diet != EnumDiet.HERBIVORE && this.selfType.diet != EnumDiet.NONE && canAttackClass(target.getClass())){
+			if(width >= target.width){
+				return isHungry();
+			}
 		}
 		return false;
 		/*	if(this.selfType.diet != EnumDiet.HERBIVORE && this.selfType.diet != EnumDiet.NONE){

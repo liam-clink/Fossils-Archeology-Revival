@@ -50,7 +50,7 @@ public class DinoAIAttackOnCollide extends EntityAIBase {
 	}
 
 	public void startExecuting() {
-		this.dino.getNavigator().setPath(this.entityPathEntity, this.field_75440_e);
+		this.dino.getNavigator().setPath(this.entityPathEntity, dino.attackSpeedBoost);
 		this.field_75445_i = 0;
 	}
 
@@ -66,7 +66,7 @@ public class DinoAIAttackOnCollide extends EntityAIBase {
 				this.field_75445_i = 4 + this.dino.getRNG().nextInt(7);
 
 			}
-			this.dino.getNavigator().tryMoveToEntityLiving(entitylivingbase, this.field_75440_e);
+			this.dino.getNavigator().tryMoveToEntityLiving(entitylivingbase, dino.attackSpeedBoost);
 			this.attackTick = Math.max(this.attackTick - 1, 0);
 			double d0 = (double) (this.dino.width * 8.0F * this.dino.width * 8.0F + entitylivingbase.width);
 

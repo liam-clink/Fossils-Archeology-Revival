@@ -9,7 +9,6 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-import com.github.revival.Revival;
 import com.github.revival.server.config.FossilConfig;
 import com.github.revival.server.entity.ai.DinoAILeapAtTarget;
 import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
@@ -196,6 +195,10 @@ public class EntityDeinonychus extends EntityNewPrehistoric {
                 this.mountEntity(entity);
     		}
     	}
+    }
+    
+    public boolean canAttackClass(Class clazz){
+    	return (clazz == EntityVelociraptor.class) ? false : super.canAttackClass(clazz);
     }
     
     public boolean attackEntityFrom(DamageSource dmg, float i) {
