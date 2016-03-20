@@ -24,6 +24,7 @@ import com.github.revival.server.block.entity.TileEntityNewFeeder;
 import com.github.revival.server.config.FossilConfig;
 import com.github.revival.server.entity.ai.DinoAINearestAttackableTargetSorter;
 import com.github.revival.server.enums.EnumOrderType;
+import com.github.revival.server.message.MessageFoodParticles;
 
 public class DinoAIFeeder extends EntityAIBase {
 	private static final int NO_TARGET = -1;
@@ -185,6 +186,7 @@ public class DinoAIFeeder extends EntityAIBase {
 	 */
 	@Override
 	public void updateTask() {
+		dinosaur.worldObj.spawnParticle("smoke", dinosaur.posX, dinosaur.posY, dinosaur.posZ, 0, 0, 0);
 		int Range = this.SEARCH_RANGE;
 		this.dinosaur.setSitting(false);
 		this.dinosaur.setOrder(EnumOrderType.FreeMove);
@@ -201,11 +203,17 @@ public class DinoAIFeeder extends EntityAIBase {
 
 				if (Distance < 4.5D) {
 					if (this.targetFeeder != null) {
-						int healval = MathHelper.floor_double(this.targetFeeder.feedDinosaur(this.dinosaur) / 15D);
-						this.dinosaur.heal(healval);
-						this.dinosaur.doFoodEffect(null);
-						//dinosaur.worldObj.spawnParticle("smoke", dinosaur.posX, dinosaur.posY, dinosaur.posZ, 0, 0, 0);
-						endTask();
+						if(this.dinosaur.ticksEating < 30){
+							this.dinosaur.ticksEating++;
+							int healval = MathHelper.floor_double(this.targetFeeder.feedDinosaur(this.dinosaur) / 15D);
+							this.dinosaur.heal(healval);
+							this.dinosaur.doFoodEffect(null);
+							Revival.channel.sendToAll(new MessageFoodParticles(dinosaur.getEntityId()));
+							dinosaur.worldObj.spawnParticle("smoke", dinosaur.posX, dinosaur.posY, dinosaur.posZ, 0, 0, 0);
+						}else{
+							dinosaur.ticksEating = 0;
+							endTask();
+						}
 					}
 				}
 			} else {

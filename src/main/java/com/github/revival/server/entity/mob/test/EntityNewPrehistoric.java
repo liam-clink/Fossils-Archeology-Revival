@@ -72,6 +72,7 @@ import com.github.revival.server.enums.EnumPrehistoricAI.WaterAbility;
 import com.github.revival.server.enums.EnumSituation;
 import com.github.revival.server.handler.LocalizationStrings;
 import com.github.revival.server.item.FAItemRegistry;
+import com.github.revival.server.message.MessageFoodParticles;
 import com.github.revival.server.util.FoodMappings;
 
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -128,6 +129,8 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	private int animTick;
 	public ChainBuffer tailbuffer;
 	public float jumpLength;
+	public int ticksEating;
+
 	public EntityNewPrehistoric(World world, EnumPrehistoric selfType) {
 		super(world);
 		this.updateSize();
@@ -371,7 +374,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 							&& this.posY + dy <= this.worldObj.getHeight()) {
 						TileEntity feeder = this.worldObj.getTileEntity(MathHelper.floor_double(this.posX + dx), MathHelper.floor_double(this.posY + dy), MathHelper.floor_double(this.posZ + dz));
 
-						if (feeder != null && feeder instanceof TileEntityNewFeeder) {
+						if (feeder != null && feeder instanceof TileEntityNewFeeder && !((TileEntityNewFeeder)feeder).isEmpty(selfType)) {
 							System.out.println(feeder);
 							return (TileEntityNewFeeder) feeder;
 						}
@@ -397,7 +400,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
-
+		if(!worldObj.isRemote)this.setScale(this.getDinosaurSize());
 		if (this.isSitting()) {
 			if(!this.getNavigator().noPath()){
 				this.getNavigator().clearPathEntity();
@@ -1595,30 +1598,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	}
 
 	public void doFoodEffect(Item item) {
-		if(item == null){
-			switch(this.selfType.diet){
-			case HERBIVORE:	
-				spawnItemParticle(Item.getItemFromBlock(Blocks.leaves));
-				spawnItemParticle(Item.getItemFromBlock(Blocks.leaves));
-				spawnItemParticle(Item.getItemFromBlock(Blocks.leaves));
-				spawnItemParticle(Item.getItemFromBlock(Blocks.leaves));
-				break;
-			case OMNIVORE:
-				spawnItemParticle(Items.bread);
-				spawnItemParticle(Items.bread);
-				spawnItemParticle(Items.bread);
-				spawnItemParticle(Items.bread);
-				break;
-			default:
-				spawnItemParticle(Items.beef);
-				spawnItemParticle(Items.beef);
-				spawnItemParticle(Items.beef);
-				spawnItemParticle(Items.beef);
-				break;
-
-			}
-
-		}else{
+		if(item != null){
 			spawnItemParticle(item);
 		}
 		this.worldObj.playSoundAtEntity(this, "random.eat", this.getSoundVolume(), this.getSoundPitch());
@@ -1632,6 +1612,5 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		float f1 = (float)(getRNG().nextFloat() * (this.boundingBox.maxY - this.boundingBox.minY) + this.boundingBox.minY);
 		float f2 = (float)(getRNG().nextFloat() * (this.boundingBox.maxZ - this.boundingBox.minZ) + this.boundingBox.minZ);
 		worldObj.spawnParticle("iconcrack_" + Item.getIdFromItem(item) + "_0", f, f1, f2, motionX, motionY, motionZ);
-		//worldObj.spawnParticle("iconcrack_" + Item.getIdFromItem(item) + "_0", posX + rand.nextFloat() * width * 2.0F - width, posY + 0.5D + rand.nextFloat() * height, posZ + rand.nextFloat() * width * 2.0F - width, motionX, motionY, motionZ);
 	}
 }

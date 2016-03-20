@@ -95,6 +95,7 @@ import com.github.revival.server.handler.FossilTradeHandler;
 import com.github.revival.server.handler.LocalizationStrings;
 import com.github.revival.server.handler.PickupHandler;
 import com.github.revival.server.item.FAItemRegistry;
+import com.github.revival.server.message.MessageFoodParticles;
 import com.github.revival.server.util.FossilFoodMappings;
 
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -156,6 +157,7 @@ public class Revival {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
     	channel = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
+    	channel.registerMessage(MessageFoodParticles.class, MessageFoodParticles.class, 0, Side.CLIENT);
         MinecraftForge.EVENT_BUS.register(new FossilBonemealEvent());
         MinecraftForge.EVENT_BUS.register(new EventPlayer());
         VillagerRegistry.instance().registerVillageTradeHandler(10, new FossilTradeHandler());
