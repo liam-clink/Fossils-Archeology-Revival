@@ -25,6 +25,7 @@ public class EntityPachycephalosaurus extends EntityNewPrehistoric {
     public EntityPachycephalosaurus(World world) {
         super(world, EnumPrehistoric.Pachycephalosaurus);
         this.setSize(1.0F, 1.5F);
+    	this.pediaScale = 10F;
         minSize = 0.5F;
         maxSize = 2F;
         teenAge = 4;
@@ -81,7 +82,7 @@ public class EntityPachycephalosaurus extends EntityNewPrehistoric {
     @Override
     public Response aiResponseType() {
 
-        return Response.TERRITORIAL;
+        return Response.TERITORIAL;
     }
 
     @Override
@@ -124,6 +125,7 @@ public class EntityPachycephalosaurus extends EntityNewPrehistoric {
     }
 
     public void updateSize() {
+
         double healthStep;
         double attackStep;
         double speedStep;

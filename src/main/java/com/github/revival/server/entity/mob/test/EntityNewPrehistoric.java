@@ -133,11 +133,13 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	public int ticksEating;
 	private int dinoAge;
 	public double attackSpeedBoost;
+	public float pediaScale;
 
 	public EntityNewPrehistoric(World world, EnumPrehistoric selfType) {
 		super(world);
 		this.updateSize();
 		this.selfType = selfType;
+		this.pediaScale = 1.0F;
 		this.currentOrder = EnumOrderType.FreeMove;
 		animation_speak.duration = this.getSpeakLength();
 		animation_attack.duration = this.getAttackLength();
@@ -1610,5 +1612,22 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 			Revival.channel.sendToAll(new MessageFoodParticles(getEntityId(), block));
 
 		}
+	}
+	
+	public String getTempermentString(){
+		String s = null;
+		if(this.aiResponseType() == Response.AGRESSIVE || this.aiResponseType() == Response.WATERAGRESSIVE){
+			s = "agressive";
+		}
+		else if(this.aiResponseType() == Response.SCARED){
+			s = "scared";
+		}
+		else if(this.aiResponseType() == Response.NONE || this.aiResponseType() == Response.WATERCALM){
+			s = "none";
+		}
+		else if(this.aiResponseType() == Response.TERITORIAL){
+			s = "territorial";
+		}
+		return "pedia.temperament." + s;
 	}
 }

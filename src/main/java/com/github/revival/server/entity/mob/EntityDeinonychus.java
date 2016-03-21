@@ -36,6 +36,7 @@ public class EntityDeinonychus extends EntityNewPrehistoric {
 
     public EntityDeinonychus(World world) {
         super(world, EnumPrehistoric.Deinonychus);
+        this.pediaScale = 24F;
         this.tasks.addTask(3, new DinoAILeapAtTarget(this));
         this.hasFeatherToggle = true;
         this.featherToggle = FossilConfig.featheredDeinonychus;
@@ -98,7 +99,7 @@ public class EntityDeinonychus extends EntityNewPrehistoric {
     @Override
     public Response aiResponseType() {
 
-        return Response.TERRITORIAL;
+        return Response.TERITORIAL;
     }
 
     @Override

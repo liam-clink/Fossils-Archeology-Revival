@@ -26,6 +26,7 @@ public class EntityGallimimus extends EntityNewPrehistoric {
     public EntityGallimimus(World world) {
         super(world, EnumPrehistoric.Gallimimus);
         this.setSize(1.1F, 2F);
+        this.pediaScale = 6F;
         this.hasFeatherToggle = true;
         this.featherToggle = FossilConfig.featheredGallimimus;
         minSize = 0.5F;

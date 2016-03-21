@@ -22,7 +22,7 @@ public enum EnumPrehistoric {
     Nautilus(EntityNautilus.class, EnumMobType.FISH, EnumTimePeriod.MESOZOIC, EnumDiet.NONE, I.NOTHING, true),
     Coelacanth(EntityCoelacanth.class, EnumMobType.FISH, EnumTimePeriod.MESOZOIC, EnumDiet.NONE, I.NOTHING, true),
     Triceratops(EntityTriceratops.class, EnumMobType.DINOSAUR, EnumTimePeriod.MESOZOIC, EnumDiet.HERBIVORE, I.MODEL | I.TAME | I.RIDE | I.HERBIVORE, true),
-    Velociraptor(EntityVelociraptor.class, EnumMobType.DINOSAUR, EnumTimePeriod.MESOZOIC, EnumDiet.CARNIVORE, I.TAME | I.CARNIVORE, true),
+    Velociraptor(EntityVelociraptor.class, EnumMobType.DINOSAUR, EnumTimePeriod.MESOZOIC, EnumDiet.CARNIVORE_EGG, I.TAME | I.CARNIVORE, true),
     Tyrannosaurus(EntityTyrannosaurus.class, EnumMobType.DINOSAUR, EnumTimePeriod.MESOZOIC, EnumDiet.CARNIVORE, I.MODEL | I.TAME | I.RIDE | I.CARNIVORE, true),
     Pterosaur(EntityPterosaur.class, EnumMobType.DINOSAUR, EnumTimePeriod.MESOZOIC, EnumDiet.PISCIVORE, I.MODEL | I.TAME | I.CARNIVORE, true),
     Plesiosaur(EntityPlesiosaurus.class, EnumMobType.DINOSAUR, EnumTimePeriod.MESOZOIC, EnumDiet.PISCIVORE, I.MODEL | I.TAME | I.RIDE | I.CARNIVORE, true),

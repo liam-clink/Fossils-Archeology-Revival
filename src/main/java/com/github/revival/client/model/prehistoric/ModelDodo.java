@@ -19,6 +19,7 @@ public class ModelDodo extends ModelNewPrehistoric {
 	public MowzieModelRenderer bottom;
 	public MowzieModelRenderer neck;
 	public MowzieModelRenderer head;
+	public MowzieModelRenderer headPivot;
 	public MowzieModelRenderer beakUpper;
 	public MowzieModelRenderer beakLower;
 	public MowzieModelRenderer rightFoot;
@@ -67,9 +68,10 @@ public class ModelDodo extends ModelNewPrehistoric {
 		this.rightLeg.setRotationPoint(-1.5F, 21.0F, 0.0F);
 		this.rightLeg.addBox(-1.5F, 0.0F, 0.0F, 3, 3, 0, 0.0F);
 		this.head = new MowzieModelRenderer(this, 35, 5);
-		this.head.setRotationPoint(0.0F, -6.0F, 0.3F);
 		this.head.addBox(-2.5F, -3.0F, -4.0F, 5, 4, 4, 0.0F);
-		this.setRotateAngle(head, 0.33161255787892263F, 0.0F, 0.0F);
+		this.headPivot = new MowzieModelRenderer(this, 0, 0);
+		this.headPivot.setRotationPoint(0.0F, -6.0F, 0.3F);
+		this.setRotateAngle(headPivot, 0.33161255787892263F, 0.0F, 0.0F);
 		this.body.addChild(this.leftWing);
 		this.leftLeg.addChild(this.leftFoot);
 		this.body.addChild(this.neck);
@@ -79,7 +81,8 @@ public class ModelDodo extends ModelNewPrehistoric {
 		this.body.addChild(this.rightWing);
 		this.body.addChild(this.bottom);
 		this.body.addChild(this.tail);
-		this.neck.addChild(this.head);
+		this.headPivot.addChild(this.head);
+		this.neck.addChild(this.headPivot);
 		this.setInitPose();
 		animator = new Animator(this);
 	}
@@ -130,9 +133,7 @@ public class ModelDodo extends ModelNewPrehistoric {
 		float speed2 = 0.1F;
 		float sitProgress = ((EntityNewPrehistoric) (entity)).sitProgress;
 		
-        ModelUtils.faceTargetMod(neck, f3, f4, 0.5F);
-        ModelUtils.faceTargetMod(head, f3, f4, 0.5F);
-        
+        ModelUtils.faceTargetMod(head, f3, f4, 1F);
         this.bob(body, speed2, -0.4F, false, entity.ticksExisted, 1);
 		this.walk(leftLeg, speed, 1.9F, false, 0F, 0F, f, f1);
 		this.walk(rightLeg, speed, 1.9F, true, 0F, 0F, f, f1);

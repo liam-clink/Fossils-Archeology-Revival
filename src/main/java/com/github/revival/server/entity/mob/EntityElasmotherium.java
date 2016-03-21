@@ -74,7 +74,7 @@ public class EntityElasmotherium extends EntityNewPrehistoric {
     @Override
     public Response aiResponseType() {
 
-        return Response.TERRITORIAL;
+        return Response.TERITORIAL;
     }
 
     @Override
@@ -120,6 +120,7 @@ public class EntityElasmotherium extends EntityNewPrehistoric {
     }
 
     public void updateSize() {
+    	this.pediaScale = 6F;
         double healthStep;
         double attackStep;
         double speedStep;

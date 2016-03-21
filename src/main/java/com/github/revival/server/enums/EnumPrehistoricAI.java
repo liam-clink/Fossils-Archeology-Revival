@@ -6,7 +6,7 @@ public class EnumPrehistoricAI {
     }
 
     public enum Response {
-        NONE, SCARED, TERRITORIAL, AGRESSIVE, WATERAGRESSIVE, WATERCALM;
+        NONE, SCARED, TERITORIAL, AGRESSIVE, WATERAGRESSIVE, WATERCALM;
     }
 
     public enum Following {

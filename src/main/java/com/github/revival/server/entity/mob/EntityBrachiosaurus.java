@@ -23,6 +23,7 @@ public class EntityBrachiosaurus extends EntityNewPrehistoric {
     public EntityBrachiosaurus(World world) {
         super(world, EnumPrehistoric.Brachiosaurus);
         this.setSize(1.5F, 2.0F);
+        this.pediaScale = 0.7F;
         minSize = 1;
         maxSize = 5.8F;
         teenAge = 9;
@@ -127,6 +128,7 @@ public class EntityBrachiosaurus extends EntityNewPrehistoric {
     }
 
     public void updateSize() {
+
         double healthStep;
         double attackStep;
         double speedStep;

@@ -31,6 +31,7 @@ public class EntityTyrannosaurus extends EntityNewPrehistoric {
     public EntityTyrannosaurus(World world) {
         super(world, EnumPrehistoric.Tyrannosaurus);
         this.setSize(1.8F, 1.25F);
+        this.pediaScale = 1.5F;
         this.hasFeatherToggle = true;
         this.featherToggle = FossilConfig.featheredTRex;
         minSize = 0.4F;

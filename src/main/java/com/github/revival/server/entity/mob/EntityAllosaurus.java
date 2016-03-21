@@ -27,6 +27,7 @@ public class EntityAllosaurus extends EntityNewPrehistoric {
 	public EntityAllosaurus(World world) {
 		super(world, EnumPrehistoric.Allosaurus);
 		this.setSize(1.4F, 1.3F);
+        this.pediaScale = 3F;
 		minSize = 0.55F;
 		maxSize = 3.1F;
 		developsResistance = true;
@@ -108,7 +109,7 @@ public class EntityAllosaurus extends EntityNewPrehistoric {
 
 	@Override
 	public Response aiResponseType() {
-		return Response.TERRITORIAL;
+		return Response.TERITORIAL;
 	}
 
 	@Override

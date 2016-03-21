@@ -26,6 +26,7 @@ public class EntityAnkylosaurus extends EntityNewPrehistoric {
 	public EntityAnkylosaurus(World world) {
 		super(world, EnumPrehistoric.Ankylosaurus);
 		this.setSize(2.2F, 1.0F);
+        this.pediaScale = 3F;
 		minSize = 1.0F;
 		maxSize = 3.0F;
 		teenAge = 5;
@@ -39,6 +40,7 @@ public class EntityAnkylosaurus extends EntityNewPrehistoric {
 	}
 
 	public void updateSize() {
+
 		double healthStep;
 		double attackStep;
 		double speedStep;
@@ -113,7 +115,7 @@ public class EntityAnkylosaurus extends EntityNewPrehistoric {
 	@Override
 	public Response aiResponseType() {
 
-		return Response.TERRITORIAL;
+		return Response.TERITORIAL;
 	}
 
 	@Override

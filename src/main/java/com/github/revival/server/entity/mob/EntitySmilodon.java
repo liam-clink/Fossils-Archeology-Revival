@@ -25,6 +25,7 @@ public class EntitySmilodon extends EntityNewPrehistoric {
     public EntitySmilodon(World world) {
         super(world, EnumPrehistoric.Smilodon);
         this.setSize(0.9F, 0.8F);
+    	this.pediaScale = 17F;
         minSize = 0.5F;
         maxSize = 1.7F;
         teenAge = 4;
@@ -83,7 +84,7 @@ public class EntitySmilodon extends EntityNewPrehistoric {
     @Override
     public Response aiResponseType() {
 
-        return Response.TERRITORIAL;
+        return Response.TERITORIAL;
     }
 
     @Override
@@ -129,6 +130,7 @@ public class EntitySmilodon extends EntityNewPrehistoric {
     }
 
     public void updateSize() {
+
         double healthStep;
         double attackStep;
         double speedStep;

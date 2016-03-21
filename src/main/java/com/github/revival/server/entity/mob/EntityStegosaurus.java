@@ -25,6 +25,7 @@ public class EntityStegosaurus extends EntityNewPrehistoric {
     public EntityStegosaurus(World world) {
         super(world, EnumPrehistoric.Stegosaurus);
         this.setSize(1.0F, 0.8F);
+    	this.pediaScale = 4F;
         minSize = 1F;
         maxSize = 2.5F;
         teenAge = 5;
@@ -90,7 +91,7 @@ public class EntityStegosaurus extends EntityNewPrehistoric {
     @Override
     public Response aiResponseType() {
 
-        return Response.TERRITORIAL;
+        return Response.TERITORIAL;
     }
 
     @Override

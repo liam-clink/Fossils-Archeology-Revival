@@ -59,7 +59,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
     private static final ResourceLocation pediafood = new ResourceLocation(
             "fossil:textures/gui/PediaFood.png");
     private static final ResourceLocation pediaheart = new ResourceLocation(
-            "fossil:textures/gui/PediaHeart.png");
+            "foFssil:textures/gui/PediaHeart.png");
     public float RiderStrafe = 0.0F;
     public float RiderForward = 0.0F;
     public boolean RiderJump = false;

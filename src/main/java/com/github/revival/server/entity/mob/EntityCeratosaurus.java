@@ -26,6 +26,7 @@ public class EntityCeratosaurus extends EntityNewPrehistoric {
     public EntityCeratosaurus(World world) {
         super(world, EnumPrehistoric.Ceratosaurus);
         this.setSize(1.55F, 1.3F);
+        this.pediaScale = 7F;
         minSize = 0.4F;
         maxSize = 1.9F;
         teenAge = 5;
@@ -153,6 +154,7 @@ public class EntityCeratosaurus extends EntityNewPrehistoric {
 	}
 	
 	public void onLivingUpdate(){
+
 		super.onLivingUpdate();
 		if(this.getAnimation() == this.animation_attack && this.getAnimationTick() == 12 && this.getAttackTarget() != null){
 			this.attackEntityAsMob(this.getAttackTarget());

@@ -201,6 +201,8 @@ public class EntityDodo extends EntityNewPrehistoric {
 
     @Override
     public void onLivingUpdate() {
+        this.pediaScale = 40F;
+
         super.onLivingUpdate();
         this.motionX *= 0; this.motionZ *= 0;
         if (this.getFat() > 5) {

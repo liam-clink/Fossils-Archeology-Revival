@@ -36,6 +36,7 @@ public class EntityMammoth extends EntityNewPrehistoric implements IShearable {
     public EntityMammoth(World world) {
         super(world, EnumPrehistoric.Mammoth);
         this.setSize(0.7F, 0.7F);
+    	this.pediaScale = 1.5F;
         this.tasks.addTask(10, aiEatGrass);
         minSize = 1.3F;
         maxSize = 5F;
@@ -180,7 +181,7 @@ public class EntityMammoth extends EntityNewPrehistoric implements IShearable {
     @Override
     public Response aiResponseType() {
 
-        return Response.TERRITORIAL;
+        return Response.TERITORIAL;
     }
 
     @Override

@@ -28,6 +28,7 @@ public class EntityVelociraptor extends EntityNewPrehistoric {
         super(world, EnumPrehistoric.Velociraptor);
         this.tasks.addTask(3, new DinoAILeapAtTarget(this));
         this.hasFeatherToggle = true;
+        this.pediaScale = 45F;
         this.featherToggle = FossilConfig.featheredVelociraptor;
         this.setSize(1.5F, 1.5F);
         minSize = 0.3F;
@@ -112,7 +113,7 @@ public class EntityVelociraptor extends EntityNewPrehistoric {
     @Override
     public Response aiResponseType() {
 
-        return isChild() ? Response.SCARED : Response.TERRITORIAL;
+        return isChild() ? Response.SCARED : Response.TERITORIAL;
     }
 
     @Override

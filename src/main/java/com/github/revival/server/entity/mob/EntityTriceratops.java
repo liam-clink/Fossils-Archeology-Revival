@@ -92,7 +92,7 @@ public class EntityTriceratops extends EntityNewPrehistoric {
     @Override
     public Response aiResponseType() {
 
-        return this.isChild() ? Response.SCARED : Response.TERRITORIAL;
+        return this.isChild() ? Response.SCARED : Response.TERITORIAL;
     }
 
     @Override

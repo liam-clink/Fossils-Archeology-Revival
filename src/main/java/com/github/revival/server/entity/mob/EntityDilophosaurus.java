@@ -25,6 +25,7 @@ public class EntityDilophosaurus extends EntityNewPrehistoric {
     public EntityDilophosaurus(World world) {
         super(world, EnumPrehistoric.Dilophosaurus);
         this.setSize(1.5F, 0.9F);
+        this.pediaScale = 6.5F;
         minSize = 0.5F;
         maxSize = 2F;
         teenAge = 4;
@@ -43,6 +44,7 @@ public class EntityDilophosaurus extends EntityNewPrehistoric {
     
     public void onLivingUpdate(){
     	super.onLivingUpdate();
+
     	if(this.getAnimation() == this.animation_attack && this.getAnimationTick() == 12 && this.getAttackTarget() != null){
     		this.attackEntityAsMob(this.getAttackTarget());
     	}
@@ -89,7 +91,7 @@ public class EntityDilophosaurus extends EntityNewPrehistoric {
     @Override
     public Response aiResponseType() {
 
-        return Response.TERRITORIAL;
+        return Response.TERITORIAL;
     }
 
     @Override

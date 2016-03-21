@@ -57,7 +57,7 @@ public class DinoAITerratorial extends EntityAIBase {
     public boolean shouldExecute() {
         if (this.dino instanceof EntityNewPrehistoric) {
             EntityNewPrehistoric prehistoric = (EntityNewPrehistoric) dino;
-            if (prehistoric.aiResponseType() != Response.TERRITORIAL) {
+            if (prehistoric.aiResponseType() != Response.TERITORIAL) {
                 return false;
             }
         }
