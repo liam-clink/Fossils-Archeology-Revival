@@ -1613,7 +1613,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
 		}
 	}
-	
+
 	public String getTempermentString(){
 		String s = null;
 		if(this.aiResponseType() == Response.AGRESSIVE || this.aiResponseType() == Response.WATERAGRESSIVE){

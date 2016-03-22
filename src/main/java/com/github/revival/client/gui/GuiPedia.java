@@ -78,8 +78,8 @@ public class GuiPedia extends GuiContainer {
 		buttonList.clear();
 		int centerX = (this.width - this.xGui) / 2;
 		int centerY = (this.height - this.yGui) / 2;
-		this.buttonList.add(this.buttonNextPage = new FossilGuiPage(0, centerX + 212, centerY + 115, true, bookPages));
-		this.buttonList.add(this.buttonPreviousPage = new FossilGuiPage(1, centerX + 7, centerY + 115, false, bookPages));
+		this.buttonList.add(this.buttonNextPage = new FossilGuiPage(0, centerX + 350, centerY + 210, true, bookPages));
+		this.buttonList.add(this.buttonPreviousPage = new FossilGuiPage(1, centerX + 7, centerY + 210, false, bookPages));
 		this.itemRender = new RenderItem();
 		addButtonByPage(bookPages);
 		super.initGui();

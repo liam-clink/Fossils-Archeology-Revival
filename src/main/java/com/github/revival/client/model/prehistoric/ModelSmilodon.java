@@ -163,7 +163,7 @@ public class ModelSmilodon extends ModelNewPrehistoric {
         ModelUtils.faceTargetMod(neck, f3, f4, 0.5F);
         ModelUtils.faceTargetMod(head, f3, f4, 0.5F);
         float speed = 0.1F;
-        float speed2 = 1.1F;
+        float speed2 = 0.6F;
         float sitProgress = ((EntityNewPrehistoric)(entity)).sitProgress;
         this.chainWave(tailParts, speed, 0.05F, -3, entity.ticksExisted, 1);
         this.chainSwing(tailParts, speed, 0.15F, -2, entity.ticksExisted, 1);
@@ -172,8 +172,8 @@ public class ModelSmilodon extends ModelNewPrehistoric {
         this.walk(upperBody, speed, 0.01F, true, 0.1F, 0F, entity.ticksExisted, 1);
         this.walk(leftFrontThigh, speed2, 0.6F, true, 0F, -0.4F, f, f1);
         this.walk(rightFrontThigh, speed2, 0.6F, false, 0F, -0.4F, f, f1);
-        this.walk(leftHindThigh, speed2, 0.6F, true, 0F, 0.4F, f, f1);
-        this.walk(rightHindThigh, speed2, 0.6F, false, 0F, 0.4F, f, f1);
+        this.walk(leftHindThigh, speed2, 0.6F, false, 0F, 0.4F, f, f1);
+        this.walk(rightHindThigh, speed2, 0.6F, true, 0F, 0.4F, f, f1);
         this.walk(leftFrontLeg, speed2, 0.4F, true, 0F, -0.4F, f, f1);
         this.walk(rightFrontLeg, speed2, 0.4F, false, 0F, -0.4F, f, f1);
         this.walk(leftHindLeg, speed2, 0.4F, true, 0F, 0.4F, f, f1);
