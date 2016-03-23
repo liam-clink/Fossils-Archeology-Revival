@@ -1594,7 +1594,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	}
 
 	public void eatItem(ItemStack stack){
-		if(stack.stackSize > 0 && stack != null && stack.getItem() != null){
+		if(stack != null && stack.stackSize > 0 && stack.getItem() != null){
 			if(FoodMappings.instance().getItemFoodAmount(stack.getItem(), selfType.diet) != 0){
 				doFoodEffect(stack.getItem());
 				Revival.channel.sendToAll(new MessageFoodParticles(getEntityId(), Item.getIdFromItem(stack.getItem())));
