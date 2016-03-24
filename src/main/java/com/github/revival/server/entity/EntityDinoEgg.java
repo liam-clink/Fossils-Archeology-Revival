@@ -671,7 +671,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData 
                             ((EntityDinosaur) var5).setOwner(player.getUniqueID().toString());
                             ((EntityDinosaur) var5).setOwnerDisplayName(player.getCommandSenderName());
                             // Locked to follow for first day
-                            ((EntityDinosaur) var5).OrderStatus = EnumOrderType.Follow;
+                            ((EntityDinosaur) var5).OrderStatus = EnumOrderType.FOLLOW;
                         }
                     }
                 }

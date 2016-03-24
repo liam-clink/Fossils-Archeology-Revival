@@ -35,7 +35,7 @@ public class TileEntityDrum extends TileEntity {
     // public boolean previousRedstoneState;
 
     public TileEntityDrum() {
-        this.Order = EnumOrderType.Stay;
+        this.Order = EnumOrderType.STAY;
         // this.note = 0;
         // this.previousRedstoneState = false;
     }

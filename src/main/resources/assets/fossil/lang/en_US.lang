@@ -737,3 +737,6 @@ pedia.order=Current Order:
 pedia.order.stay=Stay
 pedia.order.wander=Wander
 pedia.order.follow=Follow
+pedia.order.stay.desc=This mob will not move.
+pedia.order.wander.desc=This mob is free to wander around.
+pedia.order.follow.desc=This mob will follow it's owner.

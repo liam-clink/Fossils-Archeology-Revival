@@ -84,7 +84,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
     public EntityDinosaur(World var1, EnumPrehistoric T0) {
         super(var1);
         this.SelfType = T0;
-        this.OrderStatus = EnumOrderType.FreeMove;
+        this.OrderStatus = EnumOrderType.WANDER;
         // this.tasks.addTask(0, new DinoAIGrowup(this));
         this.tasks.addTask(0, new DinoAIStarvation(this));
         this.BreedTick = this.SelfType.BreedingTicks;
@@ -689,7 +689,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
      */
 
     public boolean isSitting() {
-        return this.getOrderType() == EnumOrderType.Stay;
+        return this.getOrderType() == EnumOrderType.STAY;
     }
 
     public boolean canBePushed() {
@@ -700,7 +700,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
      * Disables a mob's ability to move on its own while true.
      */
     protected boolean isMovementCeased() {
-        return this.getOrderType() == EnumOrderType.Stay;
+        return this.getOrderType() == EnumOrderType.STAY;
     }
 
     public Vec3 getBlockToEat(int SEARCH_RANGE) {
@@ -1444,7 +1444,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
                             && this.riddenByEntity == null
                             && func_152114_e(player)) {
                         this.setSitting(false);
-                        this.SetOrder(EnumOrderType.FreeMove);
+                        this.SetOrder(EnumOrderType.WANDER);
                         // this.OrderStatus = EnumOrderType.FreeMove;
                         setRidingPlayer(player);
                     }
@@ -1462,7 +1462,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
 
                             this.SendOrderMessage(this.OrderStatus);
 
-                            if (this.OrderStatus == EnumOrderType.Stay) {
+                            if (this.OrderStatus == EnumOrderType.STAY) {
                                 this.getNavigator().clearPathEntity();
                                 this.setPathToEntity(null);
                                 this.setSitting(true);

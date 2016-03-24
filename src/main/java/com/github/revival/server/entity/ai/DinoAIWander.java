@@ -24,12 +24,12 @@ public class DinoAIWander extends EntityAIBase {
      */
     public boolean shouldExecute() {
         if (this.entity.OrderStatus == null) {
-            this.entity.OrderStatus = EnumOrderType.FreeMove;
+            this.entity.OrderStatus = EnumOrderType.WANDER;
         }
 
         if (this.entity.getRNG().nextInt(120) != 0) {
             return false;
-        } else if (this.entity.isTamed() && this.entity.OrderStatus != EnumOrderType.FreeMove) {
+        } else if (this.entity.isTamed() && this.entity.OrderStatus != EnumOrderType.WANDER) {
             return false;
         } else {
             Vec3 vec3 = RandomPositionGenerator.findRandomTarget(this.entity, 10, 7);

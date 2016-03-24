@@ -160,7 +160,7 @@ public class DinoAIFeeder extends EntityAIBase {
 	public void updateTask() {
 		int range = this.searchRange;
 		this.dinosaur.setSitting(false);
-		this.dinosaur.setOrder(EnumOrderType.FreeMove);
+		this.dinosaur.setOrder(EnumOrderType.WANDER);
 		double distance = Math.sqrt(Math.pow(this.dinosaur.posX - this.destX, 2.0D) + Math.pow(this.dinosaur.posZ - this.destZ, 2.0D));
 		if (this.typeofTarget == FEEDER) {
 			if (this.targetFeeder == null) {

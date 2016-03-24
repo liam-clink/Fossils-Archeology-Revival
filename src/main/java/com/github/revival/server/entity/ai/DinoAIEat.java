@@ -194,7 +194,7 @@ public class DinoAIEat extends EntityAIBase {
 
         int Range = this.SEARCH_RANGE;
         this.dinosaur.setSitting(false);
-        this.dinosaur.SetOrder(EnumOrderType.FreeMove);
+        this.dinosaur.SetOrder(EnumOrderType.WANDER);
         double Distance = Math.sqrt(Math.pow(this.dinosaur.posX - this.destX, 2.0D) + Math.pow(this.dinosaur.posZ - this.destZ, 2.0D));
 
         if (this.typeofTarget == FEEDER) {

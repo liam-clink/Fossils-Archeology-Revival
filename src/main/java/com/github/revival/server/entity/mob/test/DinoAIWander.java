@@ -21,7 +21,7 @@ public class DinoAIWander extends EntityAIBase {
      */
     public boolean shouldExecute() {
         if (this.entity.currentOrder == null) {
-            this.entity.currentOrder = EnumOrderType.FreeMove;
+            this.entity.currentOrder = EnumOrderType.WANDER;
         }
 
         if (entity.isSitting()) {
@@ -30,7 +30,7 @@ public class DinoAIWander extends EntityAIBase {
 
         if (this.entity.getRNG().nextInt(20) != 0) {
             return false;
-        } else if (this.entity.isTamed() && this.entity.currentOrder != EnumOrderType.FreeMove) {
+        } else if (this.entity.isTamed() && this.entity.currentOrder != EnumOrderType.WANDER) {
             return false;
         } else {
             Vec3 vec3 = RandomPositionGenerator.findRandomTarget(this.entity, 30, 7);

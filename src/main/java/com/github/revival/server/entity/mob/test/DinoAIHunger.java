@@ -36,8 +36,8 @@ public class DinoAIHunger extends EntityAIBase {
 
         if (!this.mover.worldObj.isRemote) {
             if (this.mover.IsDeadlyHungry()) {
-                if (this.mover.currentOrder != EnumOrderType.FreeMove) {
-                    this.mover.currentOrder = EnumOrderType.FreeMove;
+                if (this.mover.currentOrder != EnumOrderType.WANDER) {
+                    this.mover.currentOrder = EnumOrderType.WANDER;
                     this.mover.sendStatusMessage(EnumSituation.StarveEsc);
                 } else {
                     this.mover.sendStatusMessage(EnumSituation.Hungry);

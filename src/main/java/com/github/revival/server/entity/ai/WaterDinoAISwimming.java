@@ -61,7 +61,7 @@ public class WaterDinoAISwimming extends EntityAIBase {
     public void updateTask() {
         EntityPlayer var1 = (EntityPlayer) ((EntityPlayer) this.entity.getOwner());
 
-        if (this.entity.getOrderType() == EnumOrderType.Follow && var1 != null && var1.isInWater()) {
+        if (this.entity.getOrderType() == EnumOrderType.FOLLOW && var1 != null && var1.isInWater()) {
             double var10000 = Math.abs(this.entity.posY - var1.posY);
             this.getClass();
 

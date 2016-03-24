@@ -139,7 +139,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		this.updateSize();
 		this.selfType = selfType;
 		this.pediaScale = 1.0F;
-		this.currentOrder = EnumOrderType.FreeMove;
+		this.currentOrder = EnumOrderType.WANDER;
 		animation_speak.duration = this.getSpeakLength();
 		animation_attack.duration = this.getAttackLength();
 		attackSpeedBoost = 1.3D;
@@ -272,7 +272,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	}
 
 	protected boolean isMovementCeased() {
-		return this.getOrderType() == EnumOrderType.Stay || this.isSitting();
+		return this.getOrderType() == EnumOrderType.STAY || this.isSitting();
 	}
 
 	public EnumOrderType getOrderType() {
@@ -432,7 +432,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 						if (!worldObj.isRemote) {
 							if (getEntityToAttack() == null) {
 								if (rand.nextInt(400) == 0) {
-									if (!this.getOrderType().equals(this.currentOrder.Stay)) {
+									if (!this.getOrderType().equals(this.currentOrder.STAY)) {
 										if (!isFlying) {
 											isFlying = true;
 										} else {
@@ -1241,7 +1241,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 							&& this.riddenByEntity == null
 							&& func_152114_e(player)) {
 						this.setSitting(false);
-						this.setOrder(EnumOrderType.FreeMove);
+						this.setOrder(EnumOrderType.WANDER);
 						// this.currentOrder = EnumOrderType.FreeMove;
 						setRidingPlayer(player);
 					}
@@ -1259,7 +1259,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
 							this.sendOrderMessage(this.currentOrder);
 
-							if (this.currentOrder == EnumOrderType.Stay) {
+							if (this.currentOrder == EnumOrderType.STAY) {
 								this.getNavigator().clearPathEntity();
 								this.setPathToEntity(null);
 								this.setSitting(true);

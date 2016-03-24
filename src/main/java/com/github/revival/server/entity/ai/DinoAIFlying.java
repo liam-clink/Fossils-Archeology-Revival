@@ -35,7 +35,7 @@ public class DinoAIFlying extends EntityAIBase {
         if (!dino.isAdult()) {
             return false;
         }
-        if (dino.getOrderType().equals(dino.OrderStatus.Stay)) {
+        if (dino.getOrderType().equals(dino.OrderStatus.STAY)) {
             return false;
         }
         return true;

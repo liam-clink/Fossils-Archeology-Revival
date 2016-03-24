@@ -35,7 +35,7 @@ public class DinoAIFollow extends EntityAIBase {
         if (!this.DinoEntity.isTamed()) {
             return false;
         } else {
-            if (DinoEntity.currentOrder != EnumOrderType.Follow) {
+            if (DinoEntity.currentOrder != EnumOrderType.FOLLOW) {
                 return false;
             }
 
@@ -43,7 +43,7 @@ public class DinoAIFollow extends EntityAIBase {
 
             if (entitylivingbase == null) {
                 return false;
-            } else if (this.DinoEntity.getOrderType() != null && this.DinoEntity.getOrderType() != EnumOrderType.Follow) {
+            } else if (this.DinoEntity.getOrderType() != null && this.DinoEntity.getOrderType() != EnumOrderType.FOLLOW) {
                 return false;
             } else if (this.DinoEntity.isSitting()) {
                 return false;

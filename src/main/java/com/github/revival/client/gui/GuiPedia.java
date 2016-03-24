@@ -307,6 +307,26 @@ public class GuiPedia extends GuiContainer {
 
 				printStringXY(dino.isTamed() ? s2 :s1, wordLength / 2, 160, 157, 126, 103);
 			}
+			{
+				ScaledResolution scaledResolution = new ScaledResolution(mc, mc.displayWidth, mc.displayHeight);
+				final int width = scaledResolution.getScaledWidth();
+				final int height = scaledResolution.getScaledHeight();
+				final int mouseX = (Mouse.getX() * width / mc.displayWidth) - guiLeft;
+				final int mouseY = (height - Mouse.getY() * height / mc.displayHeight - 1) - guiTop;
+				String s1 = StatCollector.translateToLocal("pedia.order") + " " + StatCollector.translateToLocal("pedia.order." + dino.currentOrder.toString().toLowerCase());
+				int x = wordLength / 2;
+				int y = 170;
+				printStringXY(s1, x, y, 157, 126, 103);
+				if (mouseX > x && mouseX < x + this.fontRendererObj.getStringWidth(s1)) {
+					if (mouseY > y && mouseY < y + 10) {
+						List<String> text = new ArrayList<String>();
+						text.add(StatCollector.translateToLocal(StatCollector.translateToLocal("pedia.order." + dino.currentOrder.toString().toLowerCase() + ".desc")));
+						GL11.glPushMatrix();
+						this.drawHoveringText(text, mouseX, mouseY, fontRendererObj);
+						GL11.glPopMatrix();
+					}
+				}
+			}
 		}
 
 	}
