@@ -740,3 +740,6 @@ pedia.order.follow=Follow
 pedia.order.stay.desc=This mob will not move.
 pedia.order.wander.desc=This mob is free to wander around.
 pedia.order.follow.desc=This mob will follow it's owner.
+pigman.summon=Tamed Zombie Pigman: My Lord! I will fight for you till the death!
+pigman.sit=Tamed Zombie Pigman: I will do whatever my Lord commands me to do.
+pigman.kill=Tamed Zombie Pigman: I have killed another creature for you!
