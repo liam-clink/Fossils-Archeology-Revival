@@ -131,7 +131,6 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	public ChainBuffer tailbuffer;
 	public float jumpLength;
 	public int ticksEating;
-	private int dinoAge;
 	public double attackSpeedBoost;
 	public float pediaScale;
 
@@ -241,7 +240,6 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		} else {
 			this.setOwnerDisplayName(compound.getString("OwnerDisplayName"));
 		}
-		super.readEntityFromNBT(compound);
 	}
 
 	@Override
@@ -668,7 +666,14 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	}
 
 	public float getDinosaurSize() {
-		return ((maxSize - minSize) / this.getAdultAge() * Math.min(this.getDinoAge(), this.getAdultAge())) + minSize;
+		float step;
+		step = (this.maxSize - this.minSize) / (this.getAdultAge() + 1);
+
+		if (this.getDinoAge() > this.getAdultAge()) {
+			return this.minSize + (step * this.getAdultAge());
+		}
+
+		return this.minSize + (step * this.getDinoAge());
 	}
 
 	protected int getExperiencePoints(EntityPlayer par1EntityPlayer) {
@@ -730,6 +735,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
 	@Override
 	public void setScaleForAge(boolean par1) {
+		//System.out.println(maxSize + " " + this.getDinosaurSize());
 		this.setScale(this.getDinosaurSize());
 	}
 
@@ -766,12 +772,11 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	}
 
 	public int getDinoAge() {
-		return worldObj.isRemote ? this.dataWatcher.getWatchableObjectInt(AGE_DATA_INDEX) : dinoAge;
+		return this.dataWatcher.getWatchableObjectInt(AGE_DATA_INDEX);
 	}
 
 	public void setDinoAge(int age) {
 		this.dataWatcher.updateObject(AGE_DATA_INDEX, age);
-		this.dinoAge = age;
 	}
 
 	public boolean increaseDinoAge() {
@@ -1162,8 +1167,10 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 							if (!player.capabilities.isCreativeMode) {
 								player.inventory.addItemStackToInventory(new ItemStack(Items.glass_bottle, 1));
 							}
-							this.setDinoAgeTick(this.getDinoAge() + 2000);
+							Revival.channel.sendToAll(new MessageFoodParticles(getEntityId(), Item.getIdFromItem(FAItemRegistry.chickenEss)));
+							this.increaseDinoAge();
 							this.setHunger(1 + (new Random()).nextInt(this.getHunger()));
+							this.setOwner(player.getDisplayName());
 							return true;
 						}
 					}

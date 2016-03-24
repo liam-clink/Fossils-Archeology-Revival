@@ -12,8 +12,8 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
@@ -29,7 +29,6 @@ import com.github.revival.Revival;
 import com.github.revival.client.gui.elements.FossilGuiButton;
 import com.github.revival.client.gui.elements.FossilGuiPage;
 import com.github.revival.server.container.PediaContainer;
-import com.github.revival.server.entity.mob.EntityDodo;
 import com.github.revival.server.entity.mob.EntityFishBase;
 import com.github.revival.server.entity.mob.EntityQuagga;
 import com.github.revival.server.entity.mob.EntityTerrorBird;
@@ -61,7 +60,7 @@ public class GuiPedia extends GuiContainer {
 
 	private float mouseY;
 
-	public GuiPedia(/*InventoryPlayer var1*/) {
+	public GuiPedia() {
 		super(new PediaContainer());
 		left = 0;
 		right = 0;
@@ -298,6 +297,16 @@ public class GuiPedia extends GuiContainer {
 					}
 				}
 			}
+			{
+				String s1 = StatCollector.translateToLocal("pedia.gender") + " " + (dino.getGender() == 0 ? StatCollector.translateToLocal("pedia.gender.female") : StatCollector.translateToLocal("pedia.gender.male"));
+				printStringXY(s1, wordLength / 2, 150, 157, 126, 103);
+			}
+			{
+				String s1 = StatCollector.translateToLocal("pedia.untame");
+				String s2 = StatCollector.translateToLocal("pedia.owner") + " " + dino.getOwnerDisplayName();
+
+				printStringXY(dino.isTamed() ? s2 :s1, wordLength / 2, 160, 157, 126, 103);
+			}
 		}
 
 	}
@@ -400,10 +409,8 @@ public class GuiPedia extends GuiContainer {
 		GL11.glPushMatrix();
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
 		GL11.glTranslatef((float)posX, (float)posY, 50.0F);
-		GL11.glScalef((float)(-scaleValue), -(float)scaleValue, (float)scaleValue);
-		if(mob instanceof EntityNewPrehistoric){
-			GL11.glScalef(-((EntityNewPrehistoric)mob).getDinosaurSize(), -((EntityNewPrehistoric)mob).getDinosaurSize(), -((EntityNewPrehistoric)mob).getDinosaurSize());
-		}
+		GL11.glScalef(-(float)(scaleValue), -(float)scaleValue, (float)scaleValue);
+	
 		float f2 = 0;
 		float f3 = 0;
 		float f4 = 0;
@@ -420,13 +427,17 @@ public class GuiPedia extends GuiContainer {
 		mob.prevRotationYawHead = mob.rotationYaw;
 		GL11.glTranslatef(0.0F, mob.yOffset, 0.0F);
 		RenderManager.instance.playerViewY = 180.0F;
-		RenderManager.instance.renderEntityWithPosYaw(mob, 0.0D, 0.0D, 0.0D, 0.0F, 1.0F);
+		if(mob instanceof EntityNewPrehistoric){
+			GL11.glScalef(-((EntityNewPrehistoric)mob).getDinosaurSize(), -((EntityNewPrehistoric)mob).getDinosaurSize(), -((EntityNewPrehistoric)mob).getDinosaurSize());
+		}
+		RenderManager.instance.renderEntityWithPosYaw(mob, 0.0D, 0.0D, 0.0D, 0.0F, 0F);
 		mob.renderYawOffset = f2;
 		mob.rotationYaw = f3;
 		mob.rotationPitch = f4;
 		mob.prevRotationYawHead = f5;
 		mob.rotationYawHead = f6;
 		GL11.glDisable(GL11.GL_DEPTH_TEST);
+		
 		GL11.glPopMatrix();
 		RenderHelper.disableStandardItemLighting();
 		GL11.glDisable(GL12.GL_RESCALE_NORMAL);

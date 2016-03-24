@@ -219,14 +219,14 @@ public class ModelStegosaurus extends ModelPrehistoric {
         this.bob(rightHindThigh, speed, -0.4F, false, entity.ticksExisted, 1);
         this.bob(leftHindThigh, speed, -0.4F, false, entity.ticksExisted, 1);
 
-        this.walk(rightFrontThigh, speed2, 0.8F, true, 0F, -0.4F, f, f1);
-        this.walk(leftFrontThigh, speed2, 0.8F, false, 0F, -0.4F, f, f1);
-        this.walk(leftHindThigh, speed2, 0.8F, true, 0F, 0.4F, f, f1);
-        this.walk(rightHindThigh, speed2, 0.8F, false, 0F, 0.4F, f, f1);
+        this.walk(rightFrontThigh, speed2, 0.7F, true, 0F, 0.1F, f, f1);
+        this.walk(leftFrontThigh, speed2, 0.7F, false, 0F, 0.1F, f, f1);
+        this.walk(leftHindThigh, speed2, 0.6F, true, 0F, -0.1F, f, f1);
+        this.walk(rightHindThigh, speed2, 0.6F, false, 0F, -0.1F, f, f1);
         this.walk(leftFrontLeg, speed2, 0.6F, true, 0F, -0.4F, f, f1);
         this.walk(rightFrontLeg, speed2, 0.6F, false, 0F, -0.4F, f, f1);
-        this.walk(leftHindLeg, speed2, 0.6F, false, 0F, 0.4F, f, f1);
-        this.walk(rightHindLeg, speed2, 0.6F, true, 0F, 0.4F, f, f1);
+        this.walk(leftHindLeg, speed2, 0.6F, true, 0.3F, 0.4F, f, f1);
+        this.walk(rightHindLeg, speed2, 0.6F, false, 0.3F, 0.4F, f, f1);
         ((EntityNewPrehistoric)entity).tailbuffer.applyChainSwingBuffer(tailParts);
     }
 
