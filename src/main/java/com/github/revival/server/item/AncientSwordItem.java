@@ -12,6 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.world.EnumDifficulty;
 
+import com.github.revival.server.entity.EntityMLighting;
 import com.github.revival.server.entity.mob.EntityFriendlyPigZombie;
 
 public class AncientSwordItem extends ItemSword {
@@ -49,11 +50,12 @@ public class AncientSwordItem extends ItemSword {
 						targetentity.worldObj.spawnEntityInWorld(fpz);
 						targetentity.setDead();
 						targetentity.worldObj.spawnEntityInWorld(new EntityLightningBolt(targetentity.worldObj, targetentity.posX, targetentity.posY, targetentity.posZ));
-						}else{
-						if (targetentity != null && (new Random()).nextInt(5) == 0) {
-							//targetentity.worldObj.addWeatherEffect(new EntityMLighting(targetentity.worldObj, targetentity.posX, targetentity.posY, targetentity.posZ));
-						}	
 					}
+				}else{
+					if (targetentity != null && (new Random()).nextInt(5) == 0) {
+						targetentity.worldObj.addWeatherEffect(new EntityMLighting(targetentity.worldObj, targetentity.posX, targetentity.posY, targetentity.posZ));
+					}	
+
 
 
 				}
@@ -61,21 +63,21 @@ public class AncientSwordItem extends ItemSword {
 
 			par1ItemStack.damageItem(1, player);
 		}
-			return true;
-		}
-
-		private boolean checkHelmet(EntityPlayer player) {
-			ItemStack item = player.inventory.armorInventory[3];
-			if(item != null && item.getItem() != null){
-				if (item.getItem() == FAItemRegistry.ancienthelmet) {
-					return true;
-				}
-			}
-			return false;
-		}
-
-		@Override
-		public void registerIcons(IIconRegister iconRegister) {
-			itemIcon = iconRegister.registerIcon("fossil:Ancient_Sword");
-		}
+		return true;
 	}
+
+	private boolean checkHelmet(EntityPlayer player) {
+		ItemStack item = player.inventory.armorInventory[3];
+		if(item != null && item.getItem() != null){
+			if (item.getItem() == FAItemRegistry.ancienthelmet) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public void registerIcons(IIconRegister iconRegister) {
+		itemIcon = iconRegister.registerIcon("fossil:Ancient_Sword");
+	}
+}
