@@ -1,7 +1,10 @@
 package com.github.revival.client.gui;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.ScaledResolution;
@@ -13,14 +16,16 @@ import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
@@ -34,6 +39,8 @@ import com.github.revival.server.entity.mob.EntityQuagga;
 import com.github.revival.server.entity.mob.EntityTerrorBird;
 import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 import com.github.revival.server.enums.EnumPrehistoric;
+import com.github.revival.server.enums.EnumPrehistoricMood;
+import com.github.revival.server.util.FoodMappings;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -43,6 +50,8 @@ public class GuiPedia extends GuiContainer {
 	public static final int rightIndent = 30; //Left aligntment position for text on the RIGHT page of the pedia
 	public static final int leftIndent = 30; //Left aligntment position for text on the LEFT page of the pedia
 	private static final ResourceLocation background_image = new ResourceLocation("fossil:textures/gui/Dinopedia.png");
+	private static final ResourceLocation moods = new ResourceLocation("fossil:textures/gui/dinopedia_mood.png");
+
 	public int xGui = 390;
 	public int yGui = 320;
 	public FossilGuiPage buttonNextPage;
@@ -57,7 +66,6 @@ public class GuiPedia extends GuiContainer {
 	int items;//counter for the minipics down
 	private RenderItem itemRender;
 	private float mouseX;
-
 	private float mouseY;
 
 	public GuiPedia() {
@@ -140,65 +148,61 @@ public class GuiPedia extends GuiContainer {
 	 * Print a Symbol at X,Y with zoom factor zoom: x*16 pixels. 0 means 8,-1 means 4
 	 */
 	public void printItemXY(Item item, int x, int y) {
-		this.printItemXY(item, x, y, 1);
+		this.printItemXY(item, x, y, 100);
 	}
 
 	public void printItemXY(Item item, int x, int y, int zoom) {
+		if(item instanceof ItemBlock){
 
-		ScaledResolution scaledResolution = new ScaledResolution(mc, mc.displayWidth, mc.displayHeight);
-		final int width = scaledResolution.getScaledWidth();
-		final int height = scaledResolution.getScaledHeight();
-		final int guiLeft = (width - this.xSize) / 2;
-		final int guiTop = (height - this.ySize) / 2;
-		final int mouseX = (Mouse.getX() * width / mc.displayWidth) - guiLeft;
-		final int mouseY = (height - Mouse.getY() * height / mc.displayHeight - 1) - guiTop;
+		}else{
+			ScaledResolution scaledResolution = new ScaledResolution(mc, mc.displayWidth, mc.displayHeight);
+			final int width = scaledResolution.getScaledWidth();
+			final int height = scaledResolution.getScaledHeight();
+			final int guiLeft = (width - this.xSize) / 2;
+			final int guiTop = (height - this.ySize) / 2;
+			final int mouseX = (Mouse.getX() * width / mc.displayWidth) - guiLeft;
+			final int mouseY = (height - Mouse.getY() * height / mc.displayHeight - 1) - guiTop;
 
-		int drawSize = zoom * 16;
+			int drawSize = zoom * 16;
 
-		if (drawSize < 0) {
-			drawSize = 4;
-		}
+			if (drawSize < 0) {
+				drawSize = 4;
+			}
 
-		if (drawSize == 0) {
-			drawSize = 8;
-		}
+			if (drawSize == 0) {
+				drawSize = 8;
+			}
 
-		if (drawSize > 160) {
-			drawSize = 160;
-		}
+			if (drawSize > 160) {
+				drawSize = 160;
+			}
 
-		GL11.glDisable(GL11.GL_LIGHTING);
-		this.mc.getTextureManager().bindTexture(TextureMap.locationItemsTexture);
-		ItemStack it = new ItemStack(item, 1);
-		IIcon icon = it.getIconIndex();
-		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		this.drawTexturedModelRectFromIcon(x, y, icon, drawSize, drawSize);
-		GL11.glEnable(GL11.GL_LIGHTING);
+			GL11.glDisable(GL11.GL_LIGHTING);
+			this.mc.getTextureManager().bindTexture(TextureMap.locationItemsTexture);
+			ItemStack it = new ItemStack(item, 1);
+			IIcon icon = it.getIconIndex();
+			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+			this.drawTexturedModelRectFromIcon(x, y, icon, drawSize, drawSize);
+			GL11.glEnable(GL11.GL_LIGHTING);
 
-		if (mouseX > x && mouseX < x + drawSize) {
-			if (mouseY > y && mouseY < y + drawSize) {
-				List<String> text = new ArrayList<String>();
-				text.add((new ItemStack(item)).getDisplayName());
-				this.drawHoveringText(text, rightIndent - 8, 130 + 24, fontRendererObj);
+			if (mouseX > x && mouseX < x + drawSize) {
+				if (mouseY > y && mouseY < y + drawSize) {
+					List<String> text = new ArrayList<String>();
+					String s1 = (new ItemStack(item)).getDisplayName();
+					text.add(s1);
+					this.drawHoveringText(text, (-this.fontRendererObj.getStringWidth(s1) / 2) + 280, 222, fontRendererObj);
+				}
 			}
 		}
 	}
 
 	public void addMiniItem(Item item) {
-		this.printItemXY(item, rightIndent + 8 * (items % 8), 130 - 8 * (items / 8), 0);
+		this.printItemXY(item, 230 + 16 * (items % 8), 70 + 16 * (items / 8), 1);
 		items++;
 	}
 
-	public void printPicture(ResourceLocation resourceLocation, int x, int y, int width, int height) {
-		this.mc.getTextureManager().bindTexture(resourceLocation);
-		GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.2F);
-		Tessellator tesselator = Tessellator.instance;
-		tesselator.startDrawingQuads();
-		tesselator.addVertexWithUV((double) x, (double) (y + height), 0D, 0D, 1D);
-		tesselator.addVertexWithUV((double) (x + width), (double) (y + height), 0D, 1D, 1D);
-		tesselator.addVertexWithUV((double) (x + width), (double) y, 0D, 1D, 0D);
-		tesselator.addVertexWithUV((double) x, (double) y, 0D, 0D, 0D);
-		tesselator.draw();
+	public void printHappyBar(ResourceLocation resourceLocation, int x, int y, int width, int height, float modifiedU, float modifiedV) {
+
 	}
 
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
@@ -241,7 +245,8 @@ public class GuiPedia extends GuiContainer {
 
 	public void renderFirstPage(EntityLivingBase entity){
 		reset();
-		int wordLength = 120;
+		renderFirstPageRight(entity);
+		int wordLength = 90;
 		GL11.glPushMatrix();
 		String s = StatCollector.translateToLocal(entity.getCommandSenderName());
 		GL11.glScalef(1.5F, 1.5F, 1.5F);
@@ -328,7 +333,93 @@ public class GuiPedia extends GuiContainer {
 				}
 			}
 		}
+	}
 
+	private void renderFirstPageRight(EntityLivingBase entity) {
+		if(entity instanceof EntityNewPrehistoric){
+			{
+
+				float scale = 1.75F;
+				GL11.glPushMatrix();
+				GL11.glTranslatef(1F, 0, 0);
+				GL11.glScalef(scale, scale, scale);
+				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+				mc.renderEngine.bindTexture(moods);
+				this.drawTexturedModalRect(160, 7, EnumPrehistoricMood.CALM.uv, 10, 16, 15);
+				GL11.glPopMatrix();
+
+			}
+			{
+				float scale = 0.75F;
+				GL11.glPushMatrix();
+				GL11.glScalef(scale, scale, scale);
+				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+				mc.renderEngine.bindTexture(moods);
+				this.drawTexturedModalRect(290, 60, 0, 0, 206, 9);
+				GL11.glPopMatrix();
+			}
+			{
+				GL11.glPushMatrix();
+				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+				mc.renderEngine.bindTexture(moods);
+				this.drawTexturedModalRect(293 - EnumPrehistoricMood.CALM.value, 43, 0, 26, 4, 10);
+				GL11.glPopMatrix();
+			}
+
+			{
+				{
+					ScaledResolution scaledResolution = new ScaledResolution(mc, mc.displayWidth, mc.displayHeight);
+					final int width = scaledResolution.getScaledWidth();
+					final int height = scaledResolution.getScaledHeight();
+					final int mouseX = (Mouse.getX() * width / mc.displayWidth) - guiLeft;
+					final int mouseY = (height - Mouse.getY() * height / mc.displayHeight - 1) - guiTop;
+					int x = 218;
+					int y = 40;
+					if (mouseX > x && mouseX < x + 154) {
+						if (mouseY > y && mouseY < y + 13) {
+							List<String> text = new ArrayList<String>();
+							text.add(StatCollector.translateToLocal("pedia.moodstatus") + EnumPrehistoricMood.CALM.color + 0);
+							GL11.glPushMatrix();
+							this.drawHoveringText(text, mouseX, mouseY, fontRendererObj);
+							GL11.glPopMatrix();
+						}
+					}
+				}
+				{
+					ScaledResolution scaledResolution = new ScaledResolution(mc, mc.displayWidth, mc.displayHeight);
+					final int width = scaledResolution.getScaledWidth();
+					final int height = scaledResolution.getScaledHeight();
+					final int mouseX = (Mouse.getX() * width / mc.displayWidth) - guiLeft;
+					final int mouseY = (height - Mouse.getY() * height / mc.displayHeight - 1) - guiTop;
+					int x = 280;
+					int y = 10;
+					if (mouseX > x && mouseX < x + 28) {
+						if (mouseY > y && mouseY < y + 28) {
+							List<String> text = new ArrayList<String>();
+							text.add(EnumPrehistoricMood.CALM.color + StatCollector.translateToLocal(StatCollector.translateToLocal("pedia.") + EnumPrehistoricMood.CALM.toString().toLowerCase()));
+							text.add(EnumChatFormatting.GRAY + StatCollector.translateToLocal(StatCollector.translateToLocal("pedia.") + EnumPrehistoricMood.CALM.toString().toLowerCase() +  StatCollector.translateToLocal(".desc")));
+							GL11.glPushMatrix();
+							this.drawHoveringText(text, mouseX, mouseY, fontRendererObj);
+							GL11.glPopMatrix();
+						}
+					}
+				}
+			}
+			EntityNewPrehistoric dino = (EntityNewPrehistoric)entity;
+			Map<Integer, Integer> foodMap = FoodMappings.instance().getFoodRenderList(dino.selfType.diet);
+			List<Integer> keys = Collections.list(Collections.enumeration(foodMap.keySet()));
+			Collections.sort(keys);
+			int[] keyArray = ArrayUtils.toPrimitive(keys.toArray(new Integer[0]));
+			for(int i : keyArray){
+				Item item = Item.getItemById(i);
+				if(items < 64){
+					addMiniItem(item);
+				}
+			}
+
+		}else{
+
+		}
 	}
 
 	public void renderSecondPage(EntityLivingBase entity){
@@ -430,7 +521,7 @@ public class GuiPedia extends GuiContainer {
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
 		GL11.glTranslatef((float)posX, (float)posY, 50.0F);
 		GL11.glScalef(-(float)(scaleValue), -(float)scaleValue, (float)scaleValue);
-	
+
 		float f2 = 0;
 		float f3 = 0;
 		float f4 = 0;
@@ -457,7 +548,7 @@ public class GuiPedia extends GuiContainer {
 		mob.prevRotationYawHead = f5;
 		mob.rotationYawHead = f6;
 		GL11.glDisable(GL11.GL_DEPTH_TEST);
-		
+
 		GL11.glPopMatrix();
 		RenderHelper.disableStandardItemLighting();
 		GL11.glDisable(GL12.GL_RESCALE_NORMAL);

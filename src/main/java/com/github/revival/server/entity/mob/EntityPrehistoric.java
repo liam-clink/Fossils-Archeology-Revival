@@ -201,7 +201,7 @@ public class EntityPrehistoric extends EntityTameable implements IPrehistoricAI 
 
     @Override
     public Activity aiActivityType() {
-        return Activity.DURINAL;
+        return Activity.DIURINAL;
     }
 
     @Override

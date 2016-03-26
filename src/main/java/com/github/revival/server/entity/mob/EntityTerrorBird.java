@@ -613,9 +613,9 @@ public class EntityTerrorBird extends EntityTameable {
         }
 
         p0.printStringXY(Character.toString(this.names[this.getSkin()].charAt(0)).toUpperCase() + this.names[this.getSkin()].substring(1), p0.rightIndent, 34, 0, 0, 0);
-        p0.printPicture(new ResourceLocation(Revival.MODID + ":" + "textures/items/TerrorBird/" + "Egg_Cultivated_" + names[this.getSkin()] + ".png"), ((p0.xGui / 2) + (p0.xGui / 4)), 7, 16, 16);
+        //p0.printHappyBar(new ResourceLocation(Revival.MODID + ":" + "textures/items/TerrorBird/" + "Egg_Cultivated_" + names[this.getSkin()] + ".png"), ((p0.xGui / 2) + (p0.xGui / 4)), 7, 16, 16);
 
-        p0.printPicture(pediaheart, p0.rightIndent, 58, 9, 9);
+        //p0.printHappyBar(pediaheart, p0.rightIndent, 58, 9, 9);
 
         //Display Health
         p0.printStringXY(String.valueOf(this.getHealth()) + '/' + this.getMaxHealth(), p0.rightIndent + 12, 58);

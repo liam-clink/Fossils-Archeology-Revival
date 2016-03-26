@@ -92,6 +92,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	public static final int GENDER_INDEX = 25;
 	public static final int CLIMBING_INDEX = 26;
 	public static final int SLEEPING_INDEX = 27;
+	public static final int MOOD_INDEX = 28;
 	public static final byte HEART_MESSAGE = 35;
 	public static final byte SMOKE_MESSAGE = 36;
 	public static final byte AGING_MESSAGE = 37;
@@ -192,7 +193,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		this.dataWatcher.addObject(CLIMBING_INDEX, 0);
 		this.dataWatcher.addObject(SLEEPING_INDEX, 0);
 		this.dataWatcher.addObject(GENDER_INDEX, 0);
-
+		this.dataWatcher.addObject(MOOD_INDEX, 0);
 	}
 
 	public void writeEntityToNBT(NBTTagCompound compound) {
@@ -208,6 +209,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		compound.setString("OwnerDisplayName", this.getOwnerDisplayName());
 		compound.setInteger("Gender", this.getGender());
 		compound.setInteger("Sleeping", this.getSleeping());
+		compound.setInteger("Mood", this.getMood());
 		compound.setBoolean("Sitting", this.isSitting);
 	}
 
@@ -232,6 +234,8 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		this.setGender(compound.getInteger("Gender"));
 		this.setSleeping(compound.getInteger("Sleeping"));
 		this.setSitting(compound.getBoolean("Sitting"));
+		this.setMood(compound.getInteger("Mood"));
+
 		this.setOrder(EnumOrderType.values()[compound.getByte("currentOrder")]);
 		String owner;
 		if (compound.hasKey("Owner", 8)) {
@@ -388,7 +392,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	}
 
 	public boolean canSleep() {
-		if (this.aiActivityType() == Activity.DURINAL && !this.worldObj.isDaytime()) {
+		if (this.aiActivityType() == Activity.DIURINAL && !this.worldObj.isDaytime()) {
 			return true;
 		} else if (this.aiActivityType() == Activity.NOCTURNAL && this.worldObj.isDaytime()) {
 			return false;
@@ -1007,6 +1011,18 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		return this.dataWatcher.getWatchableObjectInt(SLEEPING_INDEX);
 	}
 
+	public void setSleeping(int var1) {
+		this.dataWatcher.updateObject(SLEEPING_INDEX, var1);
+	}
+	
+	public int getMood() {
+		return this.dataWatcher.getWatchableObjectInt(MOOD_INDEX);
+	}
+
+	public void setMood(int var1) {
+		this.dataWatcher.updateObject(MOOD_INDEX, var1);
+	}
+	
 	public void setSitting(boolean sitting) {
 		super.setSitting(sitting);
 
@@ -1026,10 +1042,6 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	public void dismountEntity(Entity entity){
 		super.dismountEntity(entity);
 		this.posY += 1;
-	}
-
-	public void setSleeping(int var1) {
-		this.dataWatcher.updateObject(SLEEPING_INDEX, var1);
 	}
 
 	@Override
@@ -1340,9 +1352,9 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	public void showPedia(GuiPedia p0) {
 
 		p0.reset();
-		p0.printPicture(new ResourceLocation(Revival.MODID + ":"
-				+ "textures/items/" + this.selfType.toString() + "_DNA.png"),
-				((p0.xGui / 2) + (p0.xGui / 4)), 7, 16, 16); // 185
+		//p0.printHappyBar(new ResourceLocation(Revival.MODID + ":"
+		//		+ "textures/items/" + this.selfType.toString() + "_DNA.png"),
+		//		((p0.xGui / 2) + (p0.xGui / 4)), 7, 16, 16); // 185
 
 		/*
 		 * LEFT PAGE
@@ -1365,9 +1377,9 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 				StatCollector.translateToLocal("entity.fossil."
 						+ this.selfType.toString() + ".name"), GuiPedia.rightIndent,
 						34, 0, 0, 0);
-		p0.printPicture(pediaclock, GuiPedia.rightIndent, 46, 8, 8);
-		p0.printPicture(pediaheart, GuiPedia.rightIndent, 58, 9, 9);
-		p0.printPicture(pediafood, GuiPedia.rightIndent, 70, 9, 9);
+		//p0.printHappyBar(pediaclock, GuiPedia.rightIndent, 46, 8, 8);
+		//p0.printHappyBar(pediaheart, GuiPedia.rightIndent, 58, 9, 9);
+		//p0.printHappyBar(pediafood, GuiPedia.rightIndent, 70, 9, 9);
 
 		// Print "Day" after age
 		if (this.getDinoAge() == 1) {

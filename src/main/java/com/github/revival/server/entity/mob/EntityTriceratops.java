@@ -62,7 +62,7 @@ public class EntityTriceratops extends EntityNewPrehistoric {
     @Override
     public Activity aiActivityType() {
 
-        return Activity.DURINAL;
+        return Activity.DIURINAL;
     }
 
     @Override

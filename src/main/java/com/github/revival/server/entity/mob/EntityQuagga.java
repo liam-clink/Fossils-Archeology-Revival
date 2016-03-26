@@ -1246,7 +1246,7 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic {
 
 
         p0.reset();
-        p0.printPicture(new ResourceLocation(Revival.MODID + ":" + "textures/items/" + "Quagga" + "_DNA.png"), ((p0.xGui / 2) + (p0.xGui / 4)), 7, 16, 16); //185
+      //  p0.printHappyBar(new ResourceLocation(Revival.MODID + ":" + "textures/items/" + "Quagga" + "_DNA.png"), ((p0.xGui / 2) + (p0.xGui / 4)), 7, 16, 16); //185
 
         
         /* LEFT PAGE
@@ -1276,7 +1276,7 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic {
         }
 
         p0.printStringXY(StatCollector.translateToLocal(LocalizationStrings.ANIMAL_QUAGGA), p0.rightIndent, 34, 0, 0, 0);
-        p0.printPicture(pediaheart, p0.rightIndent, 58, 9, 9);
+      //  p0.printHappyBar(pediaheart, p0.rightIndent, 58, 9, 9);
 
         //Display Health
         p0.printStringXY(String.valueOf(this.getHealth()) + '/' + this.getMaxHealth(), p0.rightIndent + 12, 58);

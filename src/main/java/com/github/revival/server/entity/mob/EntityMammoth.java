@@ -151,7 +151,7 @@ public class EntityMammoth extends EntityNewPrehistoric implements IShearable {
     @Override
     public Activity aiActivityType() {
 
-        return Activity.DURINAL;
+        return Activity.DIURINAL;
     }
 
     @Override

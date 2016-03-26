@@ -452,9 +452,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
     public void ShowPedia(GuiPedia p0) {
 
         p0.reset();
-        p0.printPicture(new ResourceLocation(Revival.MODID + ":"
-                        + "textures/items/" + this.SelfType.toString() + "_DNA.png"),
-                ((p0.xGui / 2) + (p0.xGui / 4)), 7, 16, 16); // 185
+         // 185
 
 		/*
          * LEFT PAGE
@@ -477,9 +475,9 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
                 StatCollector.translateToLocal("entity.fossil."
                         + this.SelfType.toString() + ".name"), GuiPedia.rightIndent,
                 34, 0, 0, 0);
-        p0.printPicture(pediaclock, GuiPedia.rightIndent, 46, 8, 8);
-        p0.printPicture(pediaheart, GuiPedia.rightIndent, 58, 9, 9);
-        p0.printPicture(pediafood, GuiPedia.rightIndent, 70, 9, 9);
+       // p0.printHappyBar(pediaclock, GuiPedia.rightIndent, 46, 8, 8);
+       // p0.printHappyBar(pediaheart, GuiPedia.rightIndent, 58, 9, 9);
+       // p0.printHappyBar(pediafood, GuiPedia.rightIndent, 70, 9, 9);
 
         // Print "Day" after age
         if (this.getDinoAge() == 1) {
