@@ -36,6 +36,7 @@ public class EntityDeinonychus extends EntityNewPrehistoric {
 
     public EntityDeinonychus(World world) {
         super(world, EnumPrehistoric.Deinonychus);
+        this.nearByMobsAllowed = 9;
         this.pediaScale = 24F;
         this.tasks.addTask(3, new DinoAILeapAtTarget(this));
         this.hasFeatherToggle = true;

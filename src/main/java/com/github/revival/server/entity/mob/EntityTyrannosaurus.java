@@ -40,6 +40,7 @@ public class EntityTyrannosaurus extends EntityNewPrehistoric {
         developsResistance = true;
         breaksBlocks = true;
         favoriteFood = Items.beef;
+    	this.nearByMobsAllowed = 2;
     }
     
 	public int getAttackLength() {

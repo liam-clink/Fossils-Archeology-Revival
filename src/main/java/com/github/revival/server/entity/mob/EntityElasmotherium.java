@@ -20,6 +20,7 @@ public class EntityElasmotherium extends EntityNewPrehistoric {
     public EntityElasmotherium(World world) {
         super(world, EnumPrehistoric.Elasmotherium);
         this.setSize(1F, 1F);
+        this.nearByMobsAllowed = 9;
         minSize = 0.5F;
         maxSize = 2.6F;
         teenAge = 4;

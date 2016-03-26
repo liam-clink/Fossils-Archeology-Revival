@@ -25,6 +25,7 @@ public class EntityDilophosaurus extends EntityNewPrehistoric {
     public EntityDilophosaurus(World world) {
         super(world, EnumPrehistoric.Dilophosaurus);
         this.setSize(1.5F, 0.9F);
+        this.nearByMobsAllowed = 7;
         this.pediaScale = 6.5F;
         minSize = 0.5F;
         maxSize = 2F;

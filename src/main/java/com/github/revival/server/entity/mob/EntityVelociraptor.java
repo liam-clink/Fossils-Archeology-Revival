@@ -38,6 +38,7 @@ public class EntityVelociraptor extends EntityNewPrehistoric {
         breaksBlocks = false;
         favoriteFood = Items.beef;
         jumpLength = 3.5F;
+    	this.nearByMobsAllowed = 9;
     }
 
     @Override

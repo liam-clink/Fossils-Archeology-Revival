@@ -27,6 +27,7 @@ public class EntityCompsognathus extends EntityNewPrehistoric {
 	public EntityCompsognathus(World world) {
 		super(world, EnumPrehistoric.Compsognathus);
         this.pediaScale = 100F;
+        this.nearByMobsAllowed = 20;
 		this.tasks.addTask(3, new DinoAILeapAtTarget(this));
 		this.hasFeatherToggle = true;
 		this.featherToggle = FossilConfig.featheredCompsognathus;

@@ -26,6 +26,7 @@ public class EntityStegosaurus extends EntityNewPrehistoric {
         super(world, EnumPrehistoric.Stegosaurus);
         this.setSize(1.0F, 0.8F);
     	this.pediaScale = 4F;
+    	this.nearByMobsAllowed = 7;
         minSize = 1F;
         maxSize = 2.5F;
         teenAge = 5;

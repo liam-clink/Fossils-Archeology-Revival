@@ -26,6 +26,7 @@ public class EntitySmilodon extends EntityNewPrehistoric {
         super(world, EnumPrehistoric.Smilodon);
         this.setSize(0.9F, 0.8F);
     	this.pediaScale = 17F;
+    	this.nearByMobsAllowed = 7;
         minSize = 0.5F;
         maxSize = 1.7F;
         teenAge = 4;

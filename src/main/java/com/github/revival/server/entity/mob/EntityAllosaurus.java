@@ -28,6 +28,7 @@ public class EntityAllosaurus extends EntityNewPrehistoric {
 		super(world, EnumPrehistoric.Allosaurus);
 		this.setSize(1.4F, 1.3F);
         this.pediaScale = 3F;
+        this.nearByMobsAllowed = 5;
 		minSize = 0.55F;
 		maxSize = 3.1F;
 		developsResistance = true;

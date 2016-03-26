@@ -27,6 +27,7 @@ public class EntityCeratosaurus extends EntityNewPrehistoric {
         super(world, EnumPrehistoric.Ceratosaurus);
         this.setSize(1.55F, 1.3F);
         this.pediaScale = 7F;
+        this.nearByMobsAllowed = 5;
         minSize = 0.4F;
         maxSize = 1.9F;
         teenAge = 5;

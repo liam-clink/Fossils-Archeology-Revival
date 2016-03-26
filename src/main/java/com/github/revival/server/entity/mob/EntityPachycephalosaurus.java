@@ -25,6 +25,7 @@ public class EntityPachycephalosaurus extends EntityNewPrehistoric {
     public EntityPachycephalosaurus(World world) {
         super(world, EnumPrehistoric.Pachycephalosaurus);
         this.setSize(1.0F, 1.5F);
+        this.nearByMobsAllowed = 4;
     	this.pediaScale = 10F;
         minSize = 0.5F;
         maxSize = 2F;

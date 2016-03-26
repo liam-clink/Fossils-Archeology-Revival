@@ -19,11 +19,12 @@ public class EntityDodo extends EntityNewPrehistoric {
     public static final double maxHealth = 10;
     public static final double baseSpeed = 0.15D;
     public static final double maxSpeed = 0.25D;
-    public static final int FAT_INDEX = 28;
+    public static final int FAT_INDEX = 29;
 
     public EntityDodo(World world) {
         super(world, EnumPrehistoric.Dodo);
         this.setSize(0.8F, 0.7F);
+        this.nearByMobsAllowed = 10;
         minSize = 0.5F;
         maxSize = 1F;
         teenAge = 2;
