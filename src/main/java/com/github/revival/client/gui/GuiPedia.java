@@ -124,7 +124,7 @@ public class GuiPedia extends GuiContainer {
 	 * Also set the offset for margin position. Useful when using odd sized text.
 	 */
 	public void addStringLR(String string, int marginOffset, boolean left0) {
-		this.fontRendererObj.drawString(string, 30 + (left0 ? 0 + marginOffset : 121 + marginOffset), 12 * ((left0 ? this.left++ : this.right++) + 1), 4210752);
+		this.fontRendererObj.drawString(string, 30 + (left0 ? 0 + marginOffset : 121 + marginOffset), 12 * ((left0 ? this.left++ : this.right++) + 1), 0X9D7E67);
 	}
 
 	public void addStringLR(String string, boolean left0, int r, int g, int b) {
@@ -337,6 +337,7 @@ public class GuiPedia extends GuiContainer {
 
 	private void renderFirstPageRight(EntityLivingBase entity) {
 		if(entity instanceof EntityNewPrehistoric){
+			EntityNewPrehistoric dino = (EntityNewPrehistoric)entity;
 			{
 
 				float scale = 1.75F;
@@ -345,7 +346,7 @@ public class GuiPedia extends GuiContainer {
 				GL11.glScalef(scale, scale, scale);
 				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 				mc.renderEngine.bindTexture(moods);
-				this.drawTexturedModalRect(160, 7, EnumPrehistoricMood.CALM.uv, 10, 16, 15);
+				this.drawTexturedModalRect(160, 7, dino.getMoodFace().uv, 10, 16, 15);
 				GL11.glPopMatrix();
 
 			}
@@ -362,7 +363,7 @@ public class GuiPedia extends GuiContainer {
 				GL11.glPushMatrix();
 				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 				mc.renderEngine.bindTexture(moods);
-				this.drawTexturedModalRect(293 - EnumPrehistoricMood.CALM.value, 43, 0, 26, 4, 10);
+				this.drawTexturedModalRect(293 - dino.getScaledMood(), 43, 0, 26, 4, 10);
 				GL11.glPopMatrix();
 			}
 
@@ -378,7 +379,7 @@ public class GuiPedia extends GuiContainer {
 					if (mouseX > x && mouseX < x + 154) {
 						if (mouseY > y && mouseY < y + 13) {
 							List<String> text = new ArrayList<String>();
-							text.add(StatCollector.translateToLocal("pedia.moodstatus") + EnumPrehistoricMood.CALM.color + 0);
+							text.add(StatCollector.translateToLocal("pedia.moodstatus") + dino.getMoodFace().color + dino.getMood());
 							GL11.glPushMatrix();
 							this.drawHoveringText(text, mouseX, mouseY, fontRendererObj);
 							GL11.glPopMatrix();
@@ -396,8 +397,8 @@ public class GuiPedia extends GuiContainer {
 					if (mouseX > x && mouseX < x + 28) {
 						if (mouseY > y && mouseY < y + 28) {
 							List<String> text = new ArrayList<String>();
-							text.add(EnumPrehistoricMood.CALM.color + StatCollector.translateToLocal(StatCollector.translateToLocal("pedia.") + EnumPrehistoricMood.CALM.toString().toLowerCase()));
-							text.add(EnumChatFormatting.GRAY + StatCollector.translateToLocal(StatCollector.translateToLocal("pedia.") + EnumPrehistoricMood.CALM.toString().toLowerCase() +  StatCollector.translateToLocal(".desc")));
+							text.add(dino.getMoodFace().color + StatCollector.translateToLocal(StatCollector.translateToLocal("pedia.") + dino.getMoodFace().toString().toLowerCase()));
+							text.add(EnumChatFormatting.GRAY + StatCollector.translateToLocal(StatCollector.translateToLocal("pedia.") + dino.getMoodFace().toString().toLowerCase() +  StatCollector.translateToLocal(".desc")));
 							GL11.glPushMatrix();
 							this.drawHoveringText(text, mouseX, mouseY, fontRendererObj);
 							GL11.glPopMatrix();
@@ -405,7 +406,6 @@ public class GuiPedia extends GuiContainer {
 					}
 				}
 			}
-			EntityNewPrehistoric dino = (EntityNewPrehistoric)entity;
 			Map<Integer, Integer> foodMap = FoodMappings.instance().getFoodRenderList(dino.selfType.diet);
 			List<Integer> keys = Collections.list(Collections.enumeration(foodMap.keySet()));
 			Collections.sort(keys);

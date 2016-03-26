@@ -6,7 +6,7 @@ public enum EnumPrehistoricMood {
 	ANGRY(0, -71, EnumChatFormatting.DARK_RED),
 	SAD(48, -36, EnumChatFormatting.GOLD),
 	CALM(95, 0, EnumChatFormatting.YELLOW),
-	CONTENT(145, 36, EnumChatFormatting.GREEN),
+	CONTENT(142, 36, EnumChatFormatting.GREEN),
 	HAPPY(190, 71, EnumChatFormatting.DARK_GREEN);
 	public int uv;
 	public int value;

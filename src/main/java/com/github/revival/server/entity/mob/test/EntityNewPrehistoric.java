@@ -70,6 +70,7 @@ import com.github.revival.server.enums.EnumPrehistoricAI.Stalking;
 import com.github.revival.server.enums.EnumPrehistoricAI.Taming;
 import com.github.revival.server.enums.EnumPrehistoricAI.Untaming;
 import com.github.revival.server.enums.EnumPrehistoricAI.WaterAbility;
+import com.github.revival.server.enums.EnumPrehistoricMood;
 import com.github.revival.server.enums.EnumSituation;
 import com.github.revival.server.handler.LocalizationStrings;
 import com.github.revival.server.item.FAItemRegistry;
@@ -408,6 +409,12 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		if(this.getHunger() > 100){
 			this.setHunger(100);
 		}
+		if(this.getMood() > 100){
+			this.setMood(100);
+		}
+		if(this.getMood() < -100){
+			this.setMood(-100);
+		}
 		if (this.isSitting()) {
 			if(!this.getNavigator().noPath()){
 				this.getNavigator().clearPathEntity();
@@ -564,8 +571,8 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		p0.reset();
 		p0.addStringLR("", 150, false);
 		String translatePath = "assets/fossil/dinopedia/" + Minecraft.getMinecraft().gameSettings.language + "/";
-		String bioFile = String.valueOf(mobName) + ".txt";
-
+		//String bioFile = String.valueOf(mobName) + ".txt";
+		String bioFile = "template.txt";
 		if (getClass().getClassLoader().getResourceAsStream(translatePath) == null) {
 			translatePath = "assets/fossil/dinopedia/" + "en_US" + "/";
 		}
@@ -578,8 +585,8 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 				String line;
 				while ((line = bufferedReader.readLine()) != null) {
 					GL11.glPushMatrix();
-					GL11.glScalef(0.5F, 0.5F, 0.5F);
-					p0.addStringLR(line, 150, false);
+					GL11.glScalef(0.75F, 0.75F, 0.75F);
+					p0.addStringLR(line, -125, false);
 					GL11.glPopMatrix();
 				}
 				fileReader.close();
@@ -1014,13 +1021,35 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	public void setSleeping(int var1) {
 		this.dataWatcher.updateObject(SLEEPING_INDEX, var1);
 	}
-	
+
 	public int getMood() {
 		return this.dataWatcher.getWatchableObjectInt(MOOD_INDEX);
 	}
 
 	public void setMood(int var1) {
 		this.dataWatcher.updateObject(MOOD_INDEX, var1);
+	}
+
+	public EnumPrehistoricMood getMoodFace(){
+		if(this.getMood() == 100){
+			return EnumPrehistoricMood.HAPPY;
+		}
+		else if(this.getMood() >= 50){
+			return EnumPrehistoricMood.CONTENT;
+		}
+		else if(this.getMood() == -100){
+			return EnumPrehistoricMood.ANGRY;
+		}
+		else if(this.getMood() <= -50){
+			return EnumPrehistoricMood.SAD;
+		}
+		else{
+			return EnumPrehistoricMood.CALM;	
+		}
+	}
+	
+	public int getScaledMood(){
+		return (int) (71 * -(this.getMood() * 0.01));
 	}
 	
 	public void setSitting(boolean sitting) {
@@ -1053,9 +1082,11 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		if (this.getLastAttacker() instanceof EntityPlayer) {
 			if (this.getOwner() == this.getLastAttacker()) {
 				this.setTamed(false);
+				this.setMood(this.getMood() - 15);
 				this.sendStatusMessage(EnumSituation.Betrayed);
 			}
 		}
+		this.setMood(this.getMood() - 5);
 		if (this.getHurtSound() != null) {
 			if (this.getAnimation() != null) {
 				if (this.getAnimation().animationId == 0 && worldObj.isRemote) {
@@ -1615,6 +1646,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	public void eatItem(ItemStack stack){
 		if(stack != null && stack.stackSize > 0 && stack.getItem() != null){
 			if(FoodMappings.instance().getItemFoodAmount(stack.getItem(), selfType.diet) != 0){
+				this.setMood(this.getMood() + 5);
 				doFoodEffect(stack.getItem());
 				Revival.channel.sendToAll(new MessageFoodParticles(getEntityId(), Item.getIdFromItem(stack.getItem())));
 				this.setHunger(this.getHunger() + FoodMappings.instance().getItemFoodAmount(stack.getItem(), selfType.diet));
