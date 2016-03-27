@@ -670,7 +670,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		if(this.ridingEntity != null){
 			if(this.ridingEntity.isDead){
 				this.mountEntity(null);
-				this.posY += 1;
+				//this.posY += 1;
 			}
 		}
 		boolean sitting = isSitting();
@@ -1130,7 +1130,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
 	public void dismountEntity(Entity entity){
 		super.dismountEntity(entity);
-		this.posY += 1;
+		//this.posY += 1;
 	}
 
 	@Override
