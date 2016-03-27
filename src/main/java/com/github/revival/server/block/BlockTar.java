@@ -32,7 +32,7 @@ public class BlockTar extends BlockFluidClassic {
 	}
 
 	public void updateTick(World world, int x, int y, int z, Random rand) {
-		if(rand.nextInt(15) == 0){
+		if(rand.nextInt(55) == 0){
 			EntityTarSlime slime = new EntityTarSlime(world);
 			slime.setPositionAndRotation(x + 0.5D, y + 1D, z + 0.5, rand.nextInt(360), 0);
 			world.spawnEntityInWorld(slime);

@@ -44,11 +44,11 @@ public class FossilRecipes {
         GameRegistry.addShapelessRecipe(new ItemStack(FABlockRegistry.INSTANCE.denseSand, 2), new Object[]{Items.quartz, Blocks.sand});
         // GameRegistry.addShapelessRecipe(new ItemStack(FAItemRegistry.INSTANCE.toothDagger, 1), new Object[]{new ItemStack(FAItemRegistry.INSTANCE.claw, 1, EnumDinoType.TRex.ordinal()), Items.stick});
         GameRegistry.addRecipe(new ShapelessOreRecipe(FAItemRegistry.INSTANCE.dinoPedia,  new Object[]{Items.book, "fossil"}));
-
         // for (int i = 0; i < EnumDinoType.values().length; i++)
         //     GameRegistry.addShapelessRecipe(new ItemStack(FAItemRegistry.INSTANCE.dinoPedia), new Object[]{Items.book, EnumDinoType.values()[i].DNAItem});
         // GameRegistry.addShapelessRecipe(new ItemStack(FAItemRegistry.INSTANCE.dinoPedia), new Object[]{Items.book, FAItemRegistry.INSTANCE.dnaCoelacanth});
         //GameRegistry.addShapelessRecipe(new ItemStack(Revival.archNotebook), new Object[] {Item.book, Revival.relic});
+        GameRegistry.addShapelessRecipe(new ItemStack(FAItemRegistry.INSTANCE.tardrop, 4, 0), new Object[]{FAItemRegistry.INSTANCE.tar_bucket});
         GameRegistry.addShapelessRecipe(new ItemStack(FAItemRegistry.INSTANCE.rawChickenSoup, 1, 0), new Object[]{Items.bucket, Items.chicken});
         GameRegistry.addShapelessRecipe(new ItemStack(FAItemRegistry.INSTANCE.magicConch, 1, 1), new Object[]{new ItemStack(FAItemRegistry.INSTANCE.magicConch, 1, 0)});
         GameRegistry.addShapelessRecipe(new ItemStack(FAItemRegistry.INSTANCE.magicConch, 1, 2), new Object[]{new ItemStack(FAItemRegistry.INSTANCE.magicConch, 1, 1)});
