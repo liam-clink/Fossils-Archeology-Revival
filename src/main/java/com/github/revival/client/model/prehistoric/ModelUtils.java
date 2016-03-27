@@ -1,10 +1,12 @@
 package com.github.revival.client.model.prehistoric;
 
+import java.lang.reflect.Field;
+
 import net.ilexiconn.llibrary.client.model.ModelAnimator;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelRenderer;
-
-import java.lang.reflect.Field;
+import cpw.mods.fml.relauncher.ReflectionHelper;
 
 public class ModelUtils {
 
@@ -33,77 +35,36 @@ public class ModelUtils {
         AdvancedModelRenderer.rotateAngleY = (float) Math.toRadians(y);
         AdvancedModelRenderer.rotateAngleZ = (float) Math.toRadians(z);
     }
-
-    private static Field defaultRotationX;
-    private static Field defaultRotationY;
-    private static Field defaultRotationZ;
-    private static Field defaultPositionX;
-    private static Field defaultPositionY;
-    private static Field defaultPositionZ;
-    static {
-        try {
-            defaultRotationX = AdvancedModelRenderer.class.getField("defaultRotationX");
-            defaultRotationX.setAccessible(true);
-            defaultRotationY = AdvancedModelRenderer.class.getField("defaultRotationY");
-            defaultRotationY.setAccessible(true);
-            defaultRotationZ = AdvancedModelRenderer.class.getField("defaultRotationZ");
-            defaultRotationZ.setAccessible(true);
-            defaultPositionX = AdvancedModelRenderer.class.getField("defaultPositionX");
-            defaultPositionX.setAccessible(true);
-            defaultPositionY = AdvancedModelRenderer.class.getField("defaultPositionY");
-            defaultPositionY.setAccessible(true);
-            defaultPositionZ = AdvancedModelRenderer.class.getField("defaultPositionZ");
-            defaultPositionZ.setAccessible(true);
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
-        }
-    }
     public static float getDefaultRotationX(AdvancedModelRenderer box) {
-        try {
-            return defaultRotationX.getFloat(box);
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-            return 0.0F;
-        }
+            return getField(box, "defaultRotationX");
     }
     public static float getDefaultRotationY(AdvancedModelRenderer box) {
-        try {
-            return defaultRotationY.getFloat(box);
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-            return 0.0F;
-        }
+            return getField(box, "defaultRotationY");
+
     }
     public static float getDefaultRotationZ(AdvancedModelRenderer box) {
-        try {
-            return defaultRotationZ.getFloat(box);
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-            return 0.0F;
-        }
+            return getField(box, "defaultRotationZ");
+
     }
     public static float getDefaultPositionX(AdvancedModelRenderer box) {
-        try {
-            return defaultPositionX.getFloat(box);
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-            return 0.0F;
-        }
+            return getField(box, "defaultPositionX");
+
     }
     public static float getDefaultPositionY(AdvancedModelRenderer box) {
-        try {
-            return defaultPositionY.getFloat(box);
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-            return 0.0F;
-        }
+            return getField(box, "defaultPositionY");
     }
     public static float getDefaultPositionZ(AdvancedModelRenderer box) {
-        try {
-            return defaultPositionZ.getFloat(box);
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-            return 0.0F;
-        }
+            return getField(box, "defaultPositionZ");
     }
+    private static float getField(AdvancedModelRenderer box, String name){
+		float f = 0;
+		try {
+			f = ReflectionHelper.findField(AdvancedModelRenderer.class, new String[]{name, name}).getFloat(box);
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
+		return f;
+	}
 }
