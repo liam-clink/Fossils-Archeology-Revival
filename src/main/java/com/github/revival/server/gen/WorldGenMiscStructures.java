@@ -28,14 +28,14 @@ public class WorldGenMiscStructures implements IWorldGenerator {
                 }
             }
         }
-        if (world.getChunkFromChunkCoords(chunkX, chunkZ) == world.getChunkFromBlockCoords(-70, -70) && world.provider.dimensionId == FossilConfig.dimIdDarknessLair) {
+        if (world.getChunkFromChunkCoords(chunkX, chunkZ) == world.getChunkFromBlockCoords(-70, -70) && world.provider.dimensionId == FossilConfig.dimensionIDDarknessLair) {
             int counter = 0;
             counter++;
             if (counter == 1) {
                 new AnuCastleWorldGen().generate(world, random, -70, 61, -70);
             }
         }
-        if (world.getChunkFromChunkCoords(chunkX, chunkZ) == world.getChunkFromBlockCoords(-80, -120) && world.provider.dimensionId == FossilConfig.dimIdTreasure) {
+        if (world.getChunkFromChunkCoords(chunkX, chunkZ) == world.getChunkFromBlockCoords(-80, -120) && world.provider.dimensionId == FossilConfig.dimensionIDTreasure) {
             int counter = 0;
             counter++;
             if (counter == 1) {

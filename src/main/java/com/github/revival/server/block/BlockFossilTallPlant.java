@@ -55,17 +55,17 @@ public class BlockFossilTallPlant extends BlockDoublePlant implements IGrowable,
 
     @SideOnly(Side.CLIENT)
     public void randomDisplayTick(World world, int i, int j, int k, Random random) {
-        if (this == FABlockRegistry.mutantPlant) {
+        if (this == FABlockRegistry.INSTANCE.mutantPlant) {
             if (world.getBlockMetadata(i, j, k) != 0) {
                 int l = ((MathHelper.floor_double((double) (1 * 4.0F / 360.0F) + 0.5D) & 3) + 2) % 4;
                 int q = 8 | l;
-                world.spawnParticle("blockcrack_" + Block.getIdFromBlock(FABlockRegistry.mutantPlant) + "_" + q, i + ((double) random.nextFloat()), j + ((double) random.nextFloat()), k + ((double) random.nextFloat()), 4.0D * ((double) random.nextFloat()), 0.5D, ((double) random.nextFloat()) * 4.0D);
-                world.spawnParticle("blockcrack_" + Block.getIdFromBlock(FABlockRegistry.mutantPlant) + "_" + q, i + ((double) random.nextFloat()), j + ((double) random.nextFloat()), k + ((double) random.nextFloat()), 4.0D * ((double) random.nextFloat()), 0.5D, ((double) random.nextFloat()) * 4.0D);
-                world.spawnParticle("blockcrack_" + Block.getIdFromBlock(FABlockRegistry.mutantPlant) + "_" + q, i + ((double) random.nextFloat()), j + ((double) random.nextFloat()), k + ((double) random.nextFloat()), 4.0D * ((double) random.nextFloat() - 0.5D), 0.5D, ((double) random.nextFloat() - 0.5D) * 4.0D);
-                world.spawnParticle("blockcrack_" + Block.getIdFromBlock(FABlockRegistry.mutantPlant) + "_" + q, i + ((double) random.nextFloat()), j + ((double) random.nextFloat()), k + ((double) random.nextFloat()), 4.0D * ((double) random.nextFloat() - 0.5D), 0.5D, ((double) random.nextFloat() - 0.5D) * 4.0D);
+                world.spawnParticle("blockcrack_" + Block.getIdFromBlock(FABlockRegistry.INSTANCE.mutantPlant) + "_" + q, i + ((double) random.nextFloat()), j + ((double) random.nextFloat()), k + ((double) random.nextFloat()), 4.0D * ((double) random.nextFloat()), 0.5D, ((double) random.nextFloat()) * 4.0D);
+                world.spawnParticle("blockcrack_" + Block.getIdFromBlock(FABlockRegistry.INSTANCE.mutantPlant) + "_" + q, i + ((double) random.nextFloat()), j + ((double) random.nextFloat()), k + ((double) random.nextFloat()), 4.0D * ((double) random.nextFloat()), 0.5D, ((double) random.nextFloat()) * 4.0D);
+                world.spawnParticle("blockcrack_" + Block.getIdFromBlock(FABlockRegistry.INSTANCE.mutantPlant) + "_" + q, i + ((double) random.nextFloat()), j + ((double) random.nextFloat()), k + ((double) random.nextFloat()), 4.0D * ((double) random.nextFloat() - 0.5D), 0.5D, ((double) random.nextFloat() - 0.5D) * 4.0D);
+                world.spawnParticle("blockcrack_" + Block.getIdFromBlock(FABlockRegistry.INSTANCE.mutantPlant) + "_" + q, i + ((double) random.nextFloat()), j + ((double) random.nextFloat()), k + ((double) random.nextFloat()), 4.0D * ((double) random.nextFloat() - 0.5D), 0.5D, ((double) random.nextFloat() - 0.5D) * 4.0D);
             }
         }
-        if (this == FABlockRegistry.sarracina) {
+        if (this == FABlockRegistry.INSTANCE.sarracina) {
             if (world.getBlockMetadata(i, j, k) == 0) {
                 FossilFX.spawnParticle("flies", i + 0.7, j + 0.8, k + 0.6, 0.0D, 1.5D, 0.0D, 3);
                 FossilFX.spawnParticle("flies", i + 0.7, j + 0.5, k, 0.0D, 1.5D, 0.0D, 2);

@@ -18,7 +18,7 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class TileEntityAncientChestRender extends TileEntitySpecialRenderer {
     private static final ResourceLocation texture = new ResourceLocation("fossil:textures/blocks/AncientChest.png");
-    EntityItem key = new EntityItem(Minecraft.getMinecraft().theWorld, 0D, 0D, 0D, new ItemStack(FAItemRegistry.ancientKey));
+    EntityItem key = new EntityItem(Minecraft.getMinecraft().theWorld, 0D, 0D, 0D, new ItemStack(FAItemRegistry.INSTANCE.ancientKey));
     private ModelChest model = new ModelChest();
 
     public void renderTileEntityAt(TileEntityAncientChest chest, double x, double y, double z, float i1) {

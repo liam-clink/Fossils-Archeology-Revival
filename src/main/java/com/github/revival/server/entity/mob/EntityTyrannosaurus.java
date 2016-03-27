@@ -1,14 +1,12 @@
 package com.github.revival.server.entity.mob;
 
-import com.github.revival.Revival;
 import com.github.revival.server.config.FossilConfig;
 import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 import com.github.revival.server.enums.EnumPrehistoric;
 import com.github.revival.server.enums.EnumPrehistoricAI.*;
 import com.github.revival.server.handler.FossilAchievementHandler;
 import com.github.revival.server.item.FAItemRegistry;
-
-import net.ilexiconn.llibrary.common.animation.Animation;
+import net.ilexiconn.llibrary.server.animation.Animation;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
@@ -26,7 +24,7 @@ public class EntityTyrannosaurus extends EntityNewPrehistoric {
     public static final double maxHealth = 82;
     public static final double baseSpeed = 0.25D;
     public static final double maxSpeed = 0.4D;
-    public static Animation animation_roar = new Animation(3, 100);
+    public static Animation animation_roar = Animation.create(3, 100);
 
     public EntityTyrannosaurus(World world) {
         super(world, EnumPrehistoric.Tyrannosaurus);
@@ -56,7 +54,7 @@ public class EntityTyrannosaurus extends EntityNewPrehistoric {
     
     public boolean attackEntityAsMob(Entity entity)
 	{
-		if(this.getAnimation() == animation_none){
+		if(this.getAnimation() == NO_ANIMATION){
 			this.setAnimation(animation_attack);
 			return false;
 		}
@@ -168,7 +166,7 @@ public class EntityTyrannosaurus extends EntityNewPrehistoric {
     @Override
     public Item getOrderItem() {
 
-        return FAItemRegistry.skullStick;
+        return FAItemRegistry.INSTANCE.skullStick;
     }
 
     public void onUpdate() {
@@ -176,7 +174,7 @@ public class EntityTyrannosaurus extends EntityNewPrehistoric {
 
         //Revival.proxy.doChainBuffer(tailbuffer, this);
         if (!this.isSleeping() && this.rand.nextInt(500) == 0 && !worldObj.isRemote && !this.isSitting() && this.getAttackTarget() == null) {
-            if (this.getAnimation() == this.animation_none) {
+            if (this.getAnimation() == this.NO_ANIMATION) {
                 this.setAnimation(animation_roar);
             }
         }
@@ -221,8 +219,8 @@ public class EntityTyrannosaurus extends EntityNewPrehistoric {
     }
 
     @Override
-    public Animation[] animations() {
-        return new Animation[]{this.animation_none, this.animation_speak, this.animation_attack, this.animation_roar};
+    public Animation[] getAnimations() {
+        return new Animation[]{this.NO_ANIMATION, this.animation_speak, this.animation_attack, this.animation_roar};
     }
 
 	public int getTailSegments() {

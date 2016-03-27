@@ -149,7 +149,7 @@ public class BlockAncientChest extends BlockContainer {
         if (tile.chestState == 0) {
             if (player.getHeldItem() != null) {
                 if (player.getHeldItem().getItem() != null) {
-                    if (player.getHeldItem().getItem() == FAItemRegistry.ancientKey) {
+                    if (player.getHeldItem().getItem() == FAItemRegistry.INSTANCE.ancientKey) {
                         tile.setChestState(1);
                         world.markBlockForUpdate(x, y, z);
                         if (!player.capabilities.isCreativeMode) {

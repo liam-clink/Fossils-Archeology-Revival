@@ -13,7 +13,7 @@ public class BlockVolcanicAsh extends Block {
         setHardness(0.2F);
         setStepSound(Block.soundTypeGrass);
         setBlockName(LocalizationStrings.VOLCANIC_ASH_NAME);
-        setCreativeTab(FATabRegistry.tabFBlocks);
+        setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
     }
 
     @Override

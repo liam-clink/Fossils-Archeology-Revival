@@ -115,7 +115,7 @@ public class EntitySpinosaurus extends EntityNewPrehistoric {
 
     @Override
     public Item getOrderItem() {
-        return FAItemRegistry.skullStick;
+        return FAItemRegistry.INSTANCE.skullStick;
     }
 
     public void updateSize() {

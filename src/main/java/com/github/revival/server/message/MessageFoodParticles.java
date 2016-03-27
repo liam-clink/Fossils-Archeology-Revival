@@ -1,10 +1,11 @@
 package com.github.revival.server.message;
 
+import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
+import cpw.mods.fml.common.network.simpleimpl.MessageContext;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import io.netty.buffer.ByteBuf;
-
-import java.util.Random;
-
-import net.ilexiconn.llibrary.common.message.AbstractMessage;
+import net.ilexiconn.llibrary.server.network.AbstractMessage;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityBlockDustFX;
@@ -13,10 +14,11 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.server.MinecraftServer;
 
-import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
+import java.util.Random;
 
-public class MessageFoodParticles extends AbstractMessage<MessageFoodParticles>{
+public class MessageFoodParticles extends AbstractMessage<MessageFoodParticles> {
 
 	public int dinosaurID;
 	public int foodItemID;
@@ -45,7 +47,9 @@ public class MessageFoodParticles extends AbstractMessage<MessageFoodParticles>{
 	{
 	}
 
-	public void handleClientMessage(MessageFoodParticles message, EntityPlayer player)
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void onClientReceived(Minecraft client, MessageFoodParticles message, EntityPlayer player, MessageContext messageContext)
 	{
 		Entity entity = player.worldObj.getEntityByID(message.dinosaurID);
 
@@ -120,7 +124,7 @@ public class MessageFoodParticles extends AbstractMessage<MessageFoodParticles>{
 
 	}
 
-	public void handleServerMessage(MessageFoodParticles message, EntityPlayer player)
+	public void onServerReceived(MinecraftServer server, MessageFoodParticles message, EntityPlayer player, MessageContext messageContext)
 	{
 
 	}

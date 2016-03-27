@@ -19,8 +19,8 @@ public class TileEntityAnuTotem extends TileEntity {
             }
         }
 
-        if (worldObj.getBlock(this.xCoord - 1, yCoord, zCoord - 1) == FABlockRegistry.figurineBlock && worldObj.getBlock(xCoord + 1, yCoord, zCoord - 1) == FABlockRegistry.figurineBlock &&
-                worldObj.getBlock(xCoord + 1, yCoord, zCoord + 1) == FABlockRegistry.figurineBlock && worldObj.getBlock(xCoord - 1, yCoord, zCoord + 1) == FABlockRegistry.figurineBlock
+        if (worldObj.getBlock(this.xCoord - 1, yCoord, zCoord - 1) == FABlockRegistry.INSTANCE.figurineBlock && worldObj.getBlock(xCoord + 1, yCoord, zCoord - 1) == FABlockRegistry.INSTANCE.figurineBlock &&
+                worldObj.getBlock(xCoord + 1, yCoord, zCoord + 1) == FABlockRegistry.INSTANCE.figurineBlock && worldObj.getBlock(xCoord - 1, yCoord, zCoord + 1) == FABlockRegistry.INSTANCE.figurineBlock
                 && worldObj.getBlock(xCoord - 1, yCoord, zCoord) == Blocks.redstone_wire && worldObj.getBlock(xCoord + 1, yCoord, zCoord) == Blocks.redstone_wire
                 && worldObj.getBlock(xCoord, yCoord, zCoord - 1) == Blocks.redstone_wire && worldObj.getBlock(xCoord, yCoord, zCoord + 1) == Blocks.redstone_wire) {
             for (int var7 = 0; var7 < worldObj.playerEntities.size(); ++var7) {

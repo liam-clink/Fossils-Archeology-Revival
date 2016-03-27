@@ -254,7 +254,7 @@ public class AncientChestWorldGen extends WorldGenerator {
         world.setBlock(x + 10, y + 0, z + 1, Blocks.bedrock, 0, 3);
         world.setBlock(x + 0, y + 0, z + 2, Blocks.bedrock, 0, 3);
         world.setBlock(x + 1, y + 0, z + 2, Blocks.stonebrick, 3, 3);
-        world.setBlock(x + 5, y + 0, z + 2, FABlockRegistry.ancientChest, 3, 3);
+        world.setBlock(x + 5, y + 0, z + 2, FABlockRegistry.INSTANCE.ancientChest, 3, 3);
         world.setBlock(x + 9, y + 0, z + 2, Blocks.stonebrick, 3, 3);
         world.setBlock(x + 10, y + 0, z + 2, Blocks.bedrock, 0, 3);
         world.setBlock(x + 0, y + 0, z + 3, Blocks.bedrock, 0, 3);
@@ -430,9 +430,9 @@ public class AncientChestWorldGen extends WorldGenerator {
         world.setBlock(x + 1, y + 2, z + 8, Blocks.stonebrick, 0, 3);
         world.setBlock(x + 2, y + 2, z + 8, Blocks.stonebrick, 0, 3);
         world.setBlock(x + 3, y + 2, z + 8, Blocks.obsidian, 0, 3);
-        world.setBlock(x + 4, y + 2, z + 8, FABlockRegistry.homePortal, 0, 3);
-        world.setBlock(x + 5, y + 2, z + 8, FABlockRegistry.homePortal, 0, 3);
-        world.setBlock(x + 6, y + 2, z + 8, FABlockRegistry.homePortal, 0, 3);
+        world.setBlock(x + 4, y + 2, z + 8, FABlockRegistry.INSTANCE.homePortal, 0, 3);
+        world.setBlock(x + 5, y + 2, z + 8, FABlockRegistry.INSTANCE.homePortal, 0, 3);
+        world.setBlock(x + 6, y + 2, z + 8, FABlockRegistry.INSTANCE.homePortal, 0, 3);
         world.setBlock(x + 7, y + 2, z + 8, Blocks.obsidian, 0, 3);
         world.setBlock(x + 8, y + 2, z + 8, Blocks.stonebrick, 0, 3);
         world.setBlock(x + 9, y + 2, z + 8, Blocks.stonebrick, 0, 3);
@@ -498,9 +498,9 @@ public class AncientChestWorldGen extends WorldGenerator {
         world.setBlock(x + 1, y + 3, z + 8, Blocks.stonebrick, 3, 3);
         world.setBlock(x + 2, y + 3, z + 8, Blocks.stonebrick, 3, 3);
         world.setBlock(x + 3, y + 3, z + 8, Blocks.obsidian, 0, 3);
-        world.setBlock(x + 4, y + 3, z + 8, FABlockRegistry.homePortal, 0, 3);
-        world.setBlock(x + 5, y + 3, z + 8, FABlockRegistry.homePortal, 0, 3);
-        world.setBlock(x + 6, y + 3, z + 8, FABlockRegistry.homePortal, 0, 3);
+        world.setBlock(x + 4, y + 3, z + 8, FABlockRegistry.INSTANCE.homePortal, 0, 3);
+        world.setBlock(x + 5, y + 3, z + 8, FABlockRegistry.INSTANCE.homePortal, 0, 3);
+        world.setBlock(x + 6, y + 3, z + 8, FABlockRegistry.INSTANCE.homePortal, 0, 3);
         world.setBlock(x + 7, y + 3, z + 8, Blocks.obsidian, 0, 3);
         world.setBlock(x + 8, y + 3, z + 8, Blocks.stonebrick, 3, 3);
         world.setBlock(x + 9, y + 3, z + 8, Blocks.stonebrick, 3, 3);
@@ -566,9 +566,9 @@ public class AncientChestWorldGen extends WorldGenerator {
         world.setBlock(x + 1, y + 4, z + 8, Blocks.stonebrick, 0, 3);
         world.setBlock(x + 2, y + 4, z + 8, Blocks.stonebrick, 0, 3);
         world.setBlock(x + 3, y + 4, z + 8, Blocks.obsidian, 0, 3);
-        world.setBlock(x + 4, y + 4, z + 8, FABlockRegistry.homePortal, 0, 3);
-        world.setBlock(x + 5, y + 4, z + 8, FABlockRegistry.homePortal, 0, 3);
-        world.setBlock(x + 6, y + 4, z + 8, FABlockRegistry.homePortal, 0, 3);
+        world.setBlock(x + 4, y + 4, z + 8, FABlockRegistry.INSTANCE.homePortal, 0, 3);
+        world.setBlock(x + 5, y + 4, z + 8, FABlockRegistry.INSTANCE.homePortal, 0, 3);
+        world.setBlock(x + 6, y + 4, z + 8, FABlockRegistry.INSTANCE.homePortal, 0, 3);
         world.setBlock(x + 7, y + 4, z + 8, Blocks.obsidian, 0, 3);
         world.setBlock(x + 8, y + 4, z + 8, Blocks.stonebrick, 0, 3);
         world.setBlock(x + 9, y + 4, z + 8, Blocks.stonebrick, 0, 3);

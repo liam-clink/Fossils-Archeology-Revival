@@ -160,7 +160,7 @@ public class EntityStoneboard extends Entity implements IEntityAdditionalSpawnDa
 
             if (!this.onValidSurface()) {
                 this.setDead();
-                this.worldObj.spawnEntityInWorld(new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, new ItemStack(FAItemRegistry.stoneboard)));
+                this.worldObj.spawnEntityInWorld(new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, new ItemStack(FAItemRegistry.INSTANCE.stoneboard)));
             }
         }
     }
@@ -238,7 +238,7 @@ public class EntityStoneboard extends Entity implements IEntityAdditionalSpawnDa
         if (!this.isDead && !this.worldObj.isRemote) {
             this.setDead();
             this.setBeenAttacked();
-            this.worldObj.spawnEntityInWorld(new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, new ItemStack(FAItemRegistry.stoneboard)));
+            this.worldObj.spawnEntityInWorld(new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, new ItemStack(FAItemRegistry.INSTANCE.stoneboard)));
         }
 
         return true;

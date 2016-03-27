@@ -21,12 +21,12 @@ public class VolcanicRockGenerator implements IWorldGenerator {
 
     private void generateSurface(World world, Random random, int BlockX,
                                  int BlockZ) {
-        if (FossilConfig.genVolcanicRock == true) {
+        if (FossilConfig.generateVolcanicRock == true) {
             for (int i = 0; i < 10; i++) {
                 int Xcoord = BlockX + random.nextInt(16);
                 int Zcoord = BlockZ + random.nextInt(16);
                 int Ycoord = random.nextInt(16);
-                (new WorldGenMinable(FABlockRegistry.volcanicRock, 6)).generate(world,
+                (new WorldGenMinable(FABlockRegistry.INSTANCE.volcanicRock, 6)).generate(world,
                         random, Xcoord, Ycoord, Zcoord);
             }
         }

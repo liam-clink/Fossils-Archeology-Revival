@@ -20,7 +20,7 @@ public class BlockAncientWoodPillar extends Block {
 
     public BlockAncientWoodPillar() {
         super(Material.wood);
-        setCreativeTab(FATabRegistry.tabFBlocks);
+        setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
         setHardness(2.0F);
         setBlockName(LocalizationStrings.ANCIENT_WOOD_PILLAR_NAME);
     }
@@ -43,7 +43,7 @@ public class BlockAncientWoodPillar extends Block {
     // this tells the game what to drop if the block is brocken with an explosion. an example of this would be creeper explosions
     // making stone drop cobblestone.
     public Item getItemDropped(int var1, Random rand, int var3) {
-        return Item.getItemFromBlock(FABlockRegistry.palmLog);
+        return Item.getItemFromBlock(FABlockRegistry.INSTANCE.palmLog);
     }
 
     /**

@@ -118,7 +118,7 @@ public class EntityPlesiosaurus extends EntityNewPrehistoric {
     @Override
     public Item getOrderItem() {
 
-        return FAItemRegistry.emptyShell;
+        return FAItemRegistry.INSTANCE.emptyShell;
     }
 
     public void updateSize() {

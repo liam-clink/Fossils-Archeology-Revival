@@ -25,7 +25,7 @@ public class FossilInteractEvent {
             if (event.target != null) {
                 if (itemstack != null) {
                     if (event.target instanceof EntityHorse) {
-                        if (player.getHeldItem().getItem() == FAItemRegistry.dinoPedia) {
+                        if (player.getHeldItem().getItem() == FAItemRegistry.INSTANCE.dinoPedia) {
                             EntityPregnantHorse props = EntityPregnantHorse.get((EntityHorse) event.target);
 
                             if (props.Embryo != null) {
@@ -38,7 +38,7 @@ public class FossilInteractEvent {
                     }
 
                     if (event.target instanceof EntityCow) {
-                        if (player.getHeldItem().getItem() == FAItemRegistry.dinoPedia) {
+                        if (player.getHeldItem().getItem() == FAItemRegistry.INSTANCE.dinoPedia) {
                             EntityPregnantCow props = EntityPregnantCow.get((EntityCow) event.target);
 
                             if (props.Embryo != null) {
@@ -51,7 +51,7 @@ public class FossilInteractEvent {
                     }
 
                     if (event.target instanceof EntityPig) {
-                        if (player.getHeldItem().getItem() == FAItemRegistry.dinoPedia) {
+                        if (player.getHeldItem().getItem() == FAItemRegistry.INSTANCE.dinoPedia) {
                             EntityPregnantPig props = EntityPregnantPig.get((EntityPig) event.target);
 
                             if (props.Embryo != null) {
@@ -64,7 +64,7 @@ public class FossilInteractEvent {
                     }
 
                     if (event.target instanceof EntitySheep) {
-                        if (player.getHeldItem().getItem() == FAItemRegistry.dinoPedia) {
+                        if (player.getHeldItem().getItem() == FAItemRegistry.INSTANCE.dinoPedia) {
                             EntityPregnantSheep props = EntityPregnantSheep.get((EntitySheep) event.target);
 
                             if (props.Embryo != null) {

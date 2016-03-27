@@ -15,7 +15,7 @@ import net.minecraft.item.ItemStack;
 public class AncientHelmetItem extends ItemArmor {
     public AncientHelmetItem(ArmorMaterial par2ArmorMaterial, int par3, int par4) {
         super(par2ArmorMaterial, par3, par4);
-        this.setCreativeTab(FATabRegistry.tabFItems);
+        this.setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
     }
 
     @Override

@@ -14,7 +14,7 @@ public class TabFBlocks extends CreativeTabs {
 
     @SideOnly(Side.CLIENT)
     public Item getTabIconItem() {
-        return Item.getItemFromBlock(FABlockRegistry.blockworktableActive);
+        return Item.getItemFromBlock(FABlockRegistry.INSTANCE.blockworktableActive);
     }
 
     public String getTranslatedTabLabel() {

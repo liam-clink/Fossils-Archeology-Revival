@@ -14,7 +14,7 @@ public class TabFCombat extends CreativeTabs {
 
     @SideOnly(Side.CLIENT)
     public Item getTabIconItem() {
-        return FAItemRegistry.ancientSword;
+        return FAItemRegistry.INSTANCE.ancientSword;
     }
 
     public String getTranslatedTabLabel() {

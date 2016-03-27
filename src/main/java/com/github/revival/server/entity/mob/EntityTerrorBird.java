@@ -253,7 +253,7 @@ public class EntityTerrorBird extends EntityTameable {
 
         if (!this.isChild() && !this.worldObj.isRemote && --this.timeUntilNextEgg <= 0) {
             this.playSound("mob.chicken.plop", 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
-            //    this.entityDropItem(new ItemStack(FAItemRegistry.terrorBirdEgg, 1, this.getSkin()), 1);
+            //    this.entityDropItem(new ItemStack(FAItemRegistry.INSTANCE.terrorBirdEgg, 1, this.getSkin()), 1);
             this.timeUntilNextEgg = this.nextTimeUntilNextEgg;
         }
     }
@@ -335,9 +335,9 @@ public class EntityTerrorBird extends EntityTameable {
         }
 
         if (this.isBurning()) {
-            //       this.dropItem(FAItemRegistry.terrorBirdMeatCooked, 1);
+            //       this.dropItem(FAItemRegistry.INSTANCE.terrorBirdMeatCooked, 1);
         } else {
-            //       this.dropItem(FAItemRegistry.terrorBirdMeat, 1);
+            //       this.dropItem(FAItemRegistry.INSTANCE.terrorBirdMeat, 1);
         }
     }
 
@@ -448,7 +448,7 @@ public class EntityTerrorBird extends EntityTameable {
             return true;
         }
 
-        if (itemstack != null && FMLCommonHandler.instance().getSide().isClient() && itemstack.getItem() == FAItemRegistry.dinoPedia) {
+        if (itemstack != null && FMLCommonHandler.instance().getSide().isClient() && itemstack.getItem() == FAItemRegistry.INSTANCE.dinoPedia) {
             this.setPedia();
             player.openGui(Revival.instance, 4, this.worldObj, (int) this.posX, (int) this.posY, (int) this.posZ);
             return true;
@@ -470,7 +470,7 @@ public class EntityTerrorBird extends EntityTameable {
             }
         } else if (itemstack != null) {
             if ((this.getSkin() == 0 && itemstack.getItem() == Item.getItemFromBlock(Blocks.pumpkin)))
-            //         || (this.getSkin() != 0 && itemstack.getItem() == FAItemRegistry.quaggaMeat))
+            //         || (this.getSkin() != 0 && itemstack.getItem() == FAItemRegistry.INSTANCE.quaggaMeat))
             {
                 if (!player.capabilities.isCreativeMode) {
                     --itemstack.stackSize;
@@ -545,7 +545,7 @@ public class EntityTerrorBird extends EntityTameable {
             return itemstack != null && itemstack.getItem() == Item.getItemFromBlock(Blocks.pumpkin);
         }
 
-        return itemstack != null; //&& itemstack.getItem() == FAItemRegistry.quaggaMeat;
+        return itemstack != null; //&& itemstack.getItem() == FAItemRegistry.INSTANCE.quaggaMeat;
     }
 
     public EntityAgeable createChild(EntityAgeable par1EntityAgeable) {

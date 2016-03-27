@@ -14,7 +14,7 @@ public class TabFFigurines extends CreativeTabs {
 
     @SideOnly(Side.CLIENT)
     public Item getTabIconItem() {
-        return Item.getItemFromBlock(FABlockRegistry.figurineBlock);
+        return Item.getItemFromBlock(FABlockRegistry.INSTANCE.figurineBlock);
     }
 
     public String getTranslatedTabLabel() {

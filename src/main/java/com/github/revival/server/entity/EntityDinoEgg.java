@@ -737,7 +737,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData 
             }
 
             return true;
-        } else if (FMLCommonHandler.instance().getSide().isClient() && itemstack.getItem() == FAItemRegistry.dinoPedia) {
+        } else if (FMLCommonHandler.instance().getSide().isClient() && itemstack.getItem() == FAItemRegistry.INSTANCE.dinoPedia) {
             this.setPedia();
             player.openGui(Revival.instance, 4, worldObj, (int) posX, (int) posY, (int) posZ);
             return true;

@@ -67,7 +67,7 @@ public class EntityAncientJavelin extends EntityJavelin {
     }
 
     protected boolean addJavelinToPlayer(EntityPlayer var1) {
-        ItemStack var2 = new ItemStack(FAItemRegistry.ancientJavelin, 1);
+        ItemStack var2 = new ItemStack(FAItemRegistry.INSTANCE.ancientJavelin, 1);
         var2.setItemDamage(var2.getMaxDamage() - damaged);
         return var1.inventory.addItemStackToInventory(var2);
     }

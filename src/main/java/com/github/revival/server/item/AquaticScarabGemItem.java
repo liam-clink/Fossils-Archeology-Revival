@@ -9,7 +9,7 @@ public class AquaticScarabGemItem extends Item {
     public AquaticScarabGemItem() {
         super();
         this.maxStackSize = 64;
-        this.setCreativeTab(FATabRegistry.tabFItems);
+        this.setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
     }
 
     @Override

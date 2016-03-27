@@ -574,7 +574,7 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic {
 
         if (itemstack != null && itemstack.getItem() == Items.spawn_egg) {
             return super.interact(player);
-        } else if (itemstack != null && FMLCommonHandler.instance().getSide().isClient() && itemstack.getItem() == FAItemRegistry.dinoPedia) {
+        } else if (itemstack != null && FMLCommonHandler.instance().getSide().isClient() && itemstack.getItem() == FAItemRegistry.INSTANCE.dinoPedia) {
             this.setPedia();
             player.openGui(Revival.instance, 4, this.worldObj, (int) this.posX, (int) this.posY, (int) this.posZ);
             return true;
@@ -1234,9 +1234,9 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic {
 
         for (k = 0; k < j; ++k) {
             if (this.isBurning()) {
-                //     this.dropItem(FAItemRegistry.quaggaMeatCooked, 1);
+                //     this.dropItem(FAItemRegistry.INSTANCE.quaggaMeatCooked, 1);
             } else {
-                //     this.dropItem(FAItemRegistry.quaggaMeat, 1);
+                //     this.dropItem(FAItemRegistry.INSTANCE.quaggaMeat, 1);
             }
         }
     }

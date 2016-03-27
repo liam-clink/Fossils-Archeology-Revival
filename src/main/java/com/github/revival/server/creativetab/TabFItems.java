@@ -14,7 +14,7 @@ public class TabFItems extends CreativeTabs {
 
     @SideOnly(Side.CLIENT)
     public Item getTabIconItem() {
-        return FAItemRegistry.biofossil;
+        return FAItemRegistry.INSTANCE.biofossil;
     }
 
     public String getTranslatedTabLabel() {

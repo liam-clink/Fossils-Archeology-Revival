@@ -45,12 +45,12 @@ public class AnuTeleporter extends Teleporter {
         int k = MathHelper.floor_double(p_77185_1_.posZ);
         byte b0 = 1;
         byte b1 = 0;
-        if (worldServerInstance.provider.dimensionId == FossilConfig.dimIdTreasure) {
+        if (worldServerInstance.provider.dimensionId == FossilConfig.dimensionIDTreasure) {
             if (p_77185_1_ instanceof EntityPlayer) {
                 ((EntityPlayer) p_77185_1_).triggerAchievement(FossilAchievementHandler.wtf);
             }
         }
-        if (worldServerInstance.provider.dimensionId == FossilConfig.dimIdDarknessLair) {
+        if (worldServerInstance.provider.dimensionId == FossilConfig.dimensionIDDarknessLair) {
 
             for (int l = -2; l <= 2; ++l) {
                 for (int i1 = -2; i1 <= 2; ++i1) {

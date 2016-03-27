@@ -31,7 +31,7 @@ public class BlockVolcanicSlab extends BlockSlab {
             setBlockName(LocalizationStrings.VOLCANIC_DOUBLESLAB_NAME);
         } else {
             setBlockName(LocalizationStrings.VOLCANIC_SINGLESLAB_NAME);
-            setCreativeTab(FATabRegistry.tabFBlocks);
+            setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
         }
     }
 
@@ -42,11 +42,11 @@ public class BlockVolcanicSlab extends BlockSlab {
     }
 
     public Item getItemDropped(int par1, Random par2Random, int par3) {
-        return Item.getItemFromBlock(FABlockRegistry.volcanicSingleSlab);
+        return Item.getItemFromBlock(FABlockRegistry.INSTANCE.volcanicSingleSlab);
     }
 
     protected ItemStack createStackedBlock(int par1) {
-        return new ItemStack(FABlockRegistry.volcanicSingleSlab, 2, par1 & 7);
+        return new ItemStack(FABlockRegistry.INSTANCE.volcanicSingleSlab, 2, par1 & 7);
     }
 
     /**
@@ -68,7 +68,7 @@ public class BlockVolcanicSlab extends BlockSlab {
      * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
      */
     public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List par3List) {
-        if (par1 != Item.getItemFromBlock(FABlockRegistry.volcanicDoubleSlab)) {
+        if (par1 != Item.getItemFromBlock(FABlockRegistry.INSTANCE.volcanicDoubleSlab)) {
             par3List.add(new ItemStack(par1, 1, 0));
         }
     }

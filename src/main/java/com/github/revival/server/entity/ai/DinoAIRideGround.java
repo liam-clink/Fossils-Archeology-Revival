@@ -49,7 +49,7 @@ public class DinoAIRideGround extends DinoAIRide {
 
     public boolean shouldExecute() {
         super.shouldExecute();
-        if (hasEquipped(rider, FAItemRegistry.whip)) {
+        if (hasEquipped(rider, FAItemRegistry.INSTANCE.whip)) {
             this.lastTimeSeenWhip = 0;
         }
 
@@ -76,7 +76,7 @@ public class DinoAIRideGround extends DinoAIRide {
             float speedX = rider.moveForward / PLAYER_SPEED;
             float speedY = rider.moveStrafing / PLAYER_SPEED;
 
-            if (hasEquipped(rider, FAItemRegistry.whip) || (this.lastTimeSeenWhip < FollowTimeWithoutWhip && this.lastTimeSeenWhip != -1)) {
+            if (hasEquipped(rider, FAItemRegistry.INSTANCE.whip) || (this.lastTimeSeenWhip < FollowTimeWithoutWhip && this.lastTimeSeenWhip != -1)) {
                 float speedPlayer = Math.max(Math.abs(speedX), Math.abs(speedY));
                 Vec3 look = rider.getLookVec();
                 float dir = Math.min(speedX, 0) * -1;

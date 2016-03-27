@@ -140,7 +140,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
                         for (int c = (int) Math.round(this.boundingBox.minZ) - 1; c <= (int) Math.round(this.boundingBox.maxZ) + 1; c++) {
 
                             Block block = worldObj.getBlock(a, b, c);
-                            if (!(block instanceof BlockBush) && !(block instanceof BlockLiquid) && block != Blocks.bedrock && block != FABlockRegistry.ancientGlass && block != FABlockRegistry.strongGlass && block.getBlockHardness(worldObj, a, b, c) < hardness) {
+                            if (!(block instanceof BlockBush) && !(block instanceof BlockLiquid) && block != Blocks.bedrock && block != FABlockRegistry.INSTANCE.ancientGlass && block != FABlockRegistry.INSTANCE.strongGlass && block.getBlockHardness(worldObj, a, b, c) < hardness) {
                                 this.motionX *= 0.6D;
                                 this.motionZ *= 0.6D;
 
@@ -1010,31 +1010,31 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
 
         switch (j) {
             case 0:
-                item = FAItemRegistry.legBone;
+                item = FAItemRegistry.INSTANCE.legBone;
                 break;
 
             case 1:
-                item = FAItemRegistry.claw;
+                item = FAItemRegistry.INSTANCE.claw;
                 break;
 
             case 2:
-                item = FAItemRegistry.foot;
+                item = FAItemRegistry.INSTANCE.foot;
                 break;
 
             case 3:
-                item = FAItemRegistry.skull;
+                item = FAItemRegistry.INSTANCE.skull;
                 break;
 
             case 4:
-                item = FAItemRegistry.vertebrae;
+                item = FAItemRegistry.INSTANCE.vertebrae;
                 break;
 
             case 5:
-                item = FAItemRegistry.armBone;
+                item = FAItemRegistry.INSTANCE.armBone;
                 break;
 
             case 6:
-                item = FAItemRegistry.dinoRibCage;
+                item = FAItemRegistry.INSTANCE.dinoRibCage;
                 break;
         }
 
@@ -1050,31 +1050,31 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
 
             switch (j) {
                 case 0:
-                    item = FAItemRegistry.legBone;
+                    item = FAItemRegistry.INSTANCE.legBone;
                     break;
 
                 case 1:
-                    item = FAItemRegistry.claw;
+                    item = FAItemRegistry.INSTANCE.claw;
                     break;
 
                 case 2:
-                    item = FAItemRegistry.foot;
+                    item = FAItemRegistry.INSTANCE.foot;
                     break;
 
                 case 3:
-                    item = FAItemRegistry.skull;
+                    item = FAItemRegistry.INSTANCE.skull;
                     break;
 
                 case 4:
-                    item = FAItemRegistry.vertebrae;
+                    item = FAItemRegistry.INSTANCE.vertebrae;
                     break;
 
                 case 5:
-                    item = FAItemRegistry.armBone;
+                    item = FAItemRegistry.INSTANCE.armBone;
                     break;
 
                 case 6:
-                    item = FAItemRegistry.dinoRibCage;
+                    item = FAItemRegistry.INSTANCE.dinoRibCage;
                     break;
             }
             this.entityDropItem(
@@ -1254,7 +1254,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
     protected boolean modelizedDrop() {
         if (this.isModelized()) {
             if (!this.worldObj.isRemote && !this.isDead) {
-                this.entityDropItem(new ItemStack(FAItemRegistry.biofossil, 1), 0.0F);
+                this.entityDropItem(new ItemStack(FAItemRegistry.INSTANCE.biofossil, 1), 0.0F);
                 this.setDead();
             }
             return true;
@@ -1296,7 +1296,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
             ItemStack itemstack = player.inventory.getCurrentItem();
 
             if (itemstack != null) {
-                if (itemstack.getItem() == FAItemRegistry.chickenEss
+                if (itemstack.getItem() == FAItemRegistry.INSTANCE.chickenEss
                         && !player.worldObj.isRemote) {
                     // Be grown up by chicken essence
                     if (this.getDinoAge() < this.SelfType.AdultAge
@@ -1426,7 +1426,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
                     }
 
                     if (FMLCommonHandler.instance().getSide().isClient()
-                            && itemstack.getItem() == FAItemRegistry.dinoPedia) {
+                            && itemstack.getItem() == FAItemRegistry.INSTANCE.dinoPedia) {
                         // DINOPEDIA
                         // EntityDinosaur.pediaingDino = this;
                         this.setPedia();
@@ -1436,7 +1436,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
                         return true;
                     }
 
-                    if (itemstack.getItem() == FAItemRegistry.whip && this.isTamed()
+                    if (itemstack.getItem() == FAItemRegistry.INSTANCE.whip && this.isTamed()
                             && this.SelfType.isRideable() && this.isAdult()
                             && !this.worldObj.isRemote
                             && this.riddenByEntity == null
@@ -1473,7 +1473,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
                     }
 
                     if (this.SelfType.canCarryItems()
-                            && itemstack.getItem() != FAItemRegistry.dinoPedia
+                            && itemstack.getItem() != FAItemRegistry.INSTANCE.dinoPedia
                             && this.ItemInMouth == null
                             && ((this.isTamed() && player == this.getOwner()) || (new Random())
                             .nextInt(40) == 1)) {

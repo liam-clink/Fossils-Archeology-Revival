@@ -2,16 +2,14 @@ package com.github.revival.client.model.base;
 
 import com.github.revival.client.renderer.entity.RenderPrehistoric;
 import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
-import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelBase;
-import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelRenderer;
+import net.ilexiconn.llibrary.client.model.tools.AdvancedModelBase;
+import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 
-import java.util.Iterator;
-
-public class ModelPrehistoric extends MowzieModelBase {
+public class ModelPrehistoric extends AdvancedModelBase {
     public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
-        doMowzieStuff(true);
+        doAdvancedStuff(true);
         renderAll();
         if (entity instanceof EntityNewPrehistoric) {
             EntityNewPrehistoric mob = (EntityNewPrehistoric) entity;
@@ -49,11 +47,9 @@ public class ModelPrehistoric extends MowzieModelBase {
     }
 
     public void renderAll() {
-        Iterator itr = this.boxList.iterator();
-        while (itr.hasNext()) {
-            Object element = itr.next();
-            if (element instanceof MowzieModelRenderer) {
-                MowzieModelRenderer box = (MowzieModelRenderer) element;
+        for (Object element : this.boxList) {
+            if (element instanceof AdvancedModelRenderer) {
+                AdvancedModelRenderer box = (AdvancedModelRenderer) element;
                 if (box.getParent() == null) {
                     box.render(0.0625F);
                 }
@@ -61,22 +57,20 @@ public class ModelPrehistoric extends MowzieModelBase {
         }
     }
 
-    public void doMowzieStuff(boolean reset) {
-        Iterator iterator = this.boxList.iterator();
-        while (iterator.hasNext()) {
-            Object element = iterator.next();
-            if (element instanceof MowzieModelRenderer) {
-                MowzieModelRenderer box = (MowzieModelRenderer) element;
+    public void doAdvancedStuff(boolean reset) {
+        for (Object element : this.boxList) {
+            if (element instanceof AdvancedModelRenderer) {
+                AdvancedModelRenderer box = (AdvancedModelRenderer) element;
                 if (reset) {
-                    box.setCurrentPoseToInitValues();
+                    box.resetToDefaultPose();
                 } else {
-                    box.setInitValuesToCurrentPose();
+                    box.updateDefaultPose();
                 }
             }
         }
     }
 
-    public void setRotateAngle(MowzieModelRenderer modelRenderer, float x, float y, float z) {
+    public void setRotateAngle(AdvancedModelRenderer modelRenderer, float x, float y, float z) {
         modelRenderer.rotateAngleX = x;
         modelRenderer.rotateAngleY = y;
         modelRenderer.rotateAngleZ = z;

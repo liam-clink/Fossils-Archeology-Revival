@@ -48,7 +48,7 @@ public class BlockCultivate extends BlockContainer {
             setBlockName(LocalizationStrings.BLOCK_CULTIVATE_ACTIVE_NAME);
         } else {
             setBlockName(LocalizationStrings.BLOCK_CULTIVATE_IDLE_NAME);
-            setCreativeTab(FATabRegistry.tabFBlocks);
+            setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
         }
     }
 
@@ -58,9 +58,9 @@ public class BlockCultivate extends BlockContainer {
         keepFurnaceInventory = true;
 
         if (isActive) {
-            world.setBlock(x, y, z, FABlockRegistry.blockcultivateActive);
+            world.setBlock(x, y, z, FABlockRegistry.INSTANCE.blockcultivateActive);
         } else {
-            world.setBlock(x, y, z, FABlockRegistry.blockcultivateIdle);
+            world.setBlock(x, y, z, FABlockRegistry.INSTANCE.blockcultivateIdle);
         }
 
         keepFurnaceInventory = false;
@@ -75,7 +75,7 @@ public class BlockCultivate extends BlockContainer {
     }
 
     public Item getItemDropped(int par1, Random rand, int par2) {
-        return Item.getItemFromBlock(FABlockRegistry.blockcultivateIdle);
+        return Item.getItemFromBlock(FABlockRegistry.INSTANCE.blockcultivateIdle);
     }
 
     /**
@@ -297,8 +297,8 @@ public class BlockCultivate extends BlockContainer {
 
                     if (tileentity.getDNAType() == 2 || tileentity.getDNAType() == 3) {
                         world.playAuxSFX(2001, x, y, z, Block.getIdFromBlock(Blocks.glass));
-                        world.setBlock(x, y + 1, z, FABlockRegistry.mutantPlant);
-                        world.setBlock(x, y + 2, z, FABlockRegistry.mutantPlant, 8, 3);
+                        world.setBlock(x, y + 1, z, FABlockRegistry.INSTANCE.mutantPlant);
+                        world.setBlock(x, y + 2, z, FABlockRegistry.INSTANCE.mutantPlant, 8, 3);
                         world.setBlock(x, y, z, Blocks.dirt);
 
                     } else {
@@ -416,6 +416,6 @@ public class BlockCultivate extends BlockContainer {
     @SideOnly(Side.CLIENT)
     public Item getItem(World world, int x, int y, int z) {
 
-        return Item.getItemFromBlock(FABlockRegistry.blockcultivateActive);
+        return Item.getItemFromBlock(FABlockRegistry.INSTANCE.blockcultivateActive);
     }
 }

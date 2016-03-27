@@ -10,7 +10,7 @@ public class BlockMagnoliaFlower extends BlockBush {
 
     public BlockMagnoliaFlower(Material material) {
         super(material.plants);
-        this.setCreativeTab(FATabRegistry.tabFBlocks);
+        this.setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
         setBlockName(LocalizationStrings.BLOCK_MAGNOLIA_NAME);
     }
 

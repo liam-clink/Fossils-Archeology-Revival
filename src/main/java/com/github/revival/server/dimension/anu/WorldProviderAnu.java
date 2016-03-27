@@ -15,7 +15,7 @@ import net.minecraft.world.chunk.IChunkProvider;
 public class WorldProviderAnu extends WorldProvider {
     public void registerWorldChunkManager() {
         this.worldChunkMgr = new WorldChunkManagerHell(Revival.anuBiome, 0);
-        this.dimensionId = FossilConfig.dimIdDarknessLair;
+        this.dimensionId = FossilConfig.dimensionIDDarknessLair;
         this.hasNoSky = true;
         this.isHellWorld = true;
 

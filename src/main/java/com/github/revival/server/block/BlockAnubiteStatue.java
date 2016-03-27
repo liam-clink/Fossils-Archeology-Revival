@@ -25,7 +25,7 @@ public class BlockAnubiteStatue extends BlockContainer implements ISubBlocksBloc
     public BlockAnubiteStatue() {
         super(Material.rock);
         this.setBlockBounds(0F, 0.0F, 0F, 1F, 2F, 1);
-        this.setCreativeTab(FATabRegistry.tabFBlocks);
+        this.setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
         this.setTickRandomly(true);
         this.setBlockUnbreakable();
         this.setResistance(60000000.0F);

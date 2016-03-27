@@ -15,7 +15,7 @@ public class BlockVolcanicRock extends Block {
         setResistance(5.0F);
         setStepSound(Block.soundTypeStone);
         setBlockName(LocalizationStrings.VOLCANIC_ROCK_NAME);
-        setCreativeTab(FATabRegistry.tabFBlocks);
+        setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
     }
 
     @Override
@@ -25,7 +25,7 @@ public class BlockVolcanicRock extends Block {
 
     public void updateTick(World var1, int var2, int var3, int var4, int var5, int var6, int var7, int var8) {
         if (var1.getBlock(var2 + var6, var3 + var7, var4 + var8) == Blocks.stone) {
-            var1.setBlock(var2 + var6, var3 + var7, var4 + var8, FABlockRegistry.volcanicAsh);
+            var1.setBlock(var2 + var6, var3 + var7, var4 + var8, FABlockRegistry.INSTANCE.volcanicAsh);
         }
     }
 }

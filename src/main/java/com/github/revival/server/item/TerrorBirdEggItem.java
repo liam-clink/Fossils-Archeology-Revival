@@ -26,7 +26,7 @@ public class TerrorBirdEggItem extends Item {
     public TerrorBirdEggItem(boolean isCultivated) {
         super();
         this.maxStackSize = 16;
-        this.setCreativeTab(FATabRegistry.tabFItems);
+        this.setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
         this.setHasSubtypes(true);
         this.isCultivated = isCultivated;
     }

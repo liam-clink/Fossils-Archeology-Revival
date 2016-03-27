@@ -60,7 +60,7 @@ public class FossilSeedsItem extends Item
     public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int i, float a, float b, float c) {
 
         if (!isFossil && player.canPlayerEdit(x, y, z, i, stack) && player.canPlayerEdit(x, y + 1, z, i, stack)) {
-            if (Blocks.sapling.canBlockStay(world, x, y, z) && world.isAirBlock(x, y + 1, z) && world.getBlock(x, y, z) != FABlockRegistry.welwitschia) {
+            if (Blocks.sapling.canBlockStay(world, x, y, z) && world.isAirBlock(x, y + 1, z) && world.getBlock(x, y, z) != FABlockRegistry.INSTANCE.welwitschia) {
                 this.placePlantBlock(stack, world, x, y, z, new Random());
                 --stack.stackSize;
                 return true;
@@ -73,36 +73,36 @@ public class FossilSeedsItem extends Item
     }
 
     private void placePlantBlock(ItemStack stack, World world, int x, int y, int z, Random rand) {
-        world.playSound((double) x + 0.5D, (double) y + 0.5D, (double) z + 0.5D, FABlockRegistry.dillhoffia.stepSound.getBreakSound(), 1F, rand.nextFloat() * 0.1F + 0.8F, false);
+        world.playSound((double) x + 0.5D, (double) y + 0.5D, (double) z + 0.5D, FABlockRegistry.INSTANCE.dillhoffia.stepSound.getBreakSound(), 1F, rand.nextFloat() * 0.1F + 0.8F, false);
         switch (stack.getItemDamage()) {
             case 0:
-                world.setBlock(x, y + 1, z, FABlockRegistry.dillhoffia);
+                world.setBlock(x, y + 1, z, FABlockRegistry.INSTANCE.dillhoffia);
                 break;
             case 1:
-                world.setBlock(x, y + 1, z, FABlockRegistry.sarracina);
-                world.setBlock(x, y + 2, z, FABlockRegistry.sarracina, 8, 3);
+                world.setBlock(x, y + 1, z, FABlockRegistry.INSTANCE.sarracina);
+                world.setBlock(x, y + 2, z, FABlockRegistry.INSTANCE.sarracina, 8, 3);
                 break;
             case 2:
-                world.setBlock(x, y + 1, z, FABlockRegistry.cephalotaxus);
+                world.setBlock(x, y + 1, z, FABlockRegistry.INSTANCE.cephalotaxus);
                 break;
             case 3:
-                world.setBlock(x, y + 1, z, FABlockRegistry.licopodiophyta);
+                world.setBlock(x, y + 1, z, FABlockRegistry.INSTANCE.licopodiophyta);
                 break;
             case 4:
-                world.setBlock(x, y + 1, z, FABlockRegistry.paleopanax);
-                world.setBlock(x, y + 2, z, FABlockRegistry.paleopanax, 8, 3);
+                world.setBlock(x, y + 1, z, FABlockRegistry.INSTANCE.paleopanax);
+                world.setBlock(x, y + 2, z, FABlockRegistry.INSTANCE.paleopanax, 8, 3);
                 break;
             case 5:
-                world.setBlock(x, y + 1, z, FABlockRegistry.zamites);
+                world.setBlock(x, y + 1, z, FABlockRegistry.INSTANCE.zamites);
                 break;
             case 6:
-                world.setBlock(x, y + 1, z, FABlockRegistry.bennettitales_small);
+                world.setBlock(x, y + 1, z, FABlockRegistry.INSTANCE.bennettitales_small);
                 break;
             case 7:
-                world.setBlock(x, y + 1, z, FABlockRegistry.welwitschia);
+                world.setBlock(x, y + 1, z, FABlockRegistry.INSTANCE.welwitschia);
                 break;
             case 8:
-                world.setBlock(x, y + 1, z, FABlockRegistry.horsetail_small);
+                world.setBlock(x, y + 1, z, FABlockRegistry.INSTANCE.horsetail_small);
                 break;
         }
     }

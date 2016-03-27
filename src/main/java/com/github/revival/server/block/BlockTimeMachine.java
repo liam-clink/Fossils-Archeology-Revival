@@ -29,7 +29,7 @@ public class BlockTimeMachine extends BlockContainer {
         this.setHardness(0.3F);
         this.setStepSound(Block.soundTypeGlass);
         this.setBlockName(LocalizationStrings.BLOCK_TIMEMACHINE_NAME);
-        this.setCreativeTab(FATabRegistry.tabFBlocks);
+        this.setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
     }
 
 	/*

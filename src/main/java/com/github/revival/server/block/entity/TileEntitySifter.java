@@ -250,7 +250,7 @@ public class TileEntitySifter extends TileEntity implements IInventory,
                         || (input == Item.getItemFromBlock(Blocks.dirt))
                         || (input == Item.getItemFromBlock(Blocks.gravel))
                         || (input == Item.getItemFromBlock(Blocks.clay))
-                        || (input == Item.getItemFromBlock(FABlockRegistry.volcanicAsh))) {
+                        || (input == Item.getItemFromBlock(FABlockRegistry.INSTANCE.volcanicAsh))) {
                     this.RawIndex = var1;
                     break;
                 }
@@ -287,7 +287,7 @@ public class TileEntitySifter extends TileEntity implements IInventory,
                     || this.sifterItemStacks[this.RawIndex].getItem() == Item
                     .getItemFromBlock(Blocks.clay)
                     || this.sifterItemStacks[this.RawIndex].getItem() == Item
-                    .getItemFromBlock(FABlockRegistry.volcanicAsh)
+                    .getItemFromBlock(FABlockRegistry.INSTANCE.volcanicAsh)
 
                     ) {
                 if (randomloot < 80) {
@@ -304,9 +304,9 @@ public class TileEntitySifter extends TileEntity implements IInventory,
                         Revival.printDebug("Sifter successful loot: " + randomloot);
                     }
                     if (random < 0.4) {
-                        result = new ItemStack(FAItemRegistry.DominicanAmber, 1);
+                        result = new ItemStack(FAItemRegistry.INSTANCE.DominicanAmber, 1);
                     } else if (random < 15) {
-                        result = new ItemStack(FAItemRegistry.brokenSapling, 1);
+                        result = new ItemStack(FAItemRegistry.INSTANCE.brokenSapling, 1);
                     } else if (random < 30) {
                         result = new ItemStack(Items.potato, 1);
                     } else if (random < 40) {
@@ -316,9 +316,9 @@ public class TileEntitySifter extends TileEntity implements IInventory,
                     } else if (random < 80) {
                         result = new ItemStack(Blocks.sand, 1);
                     } else if (random < 90) {
-                        result = new ItemStack(FAItemRegistry.fernSeed, 2);
+                        result = new ItemStack(FAItemRegistry.INSTANCE.fernSeed, 2);
                     } else if (random < 95) {
-                        result = new ItemStack(FAItemRegistry.potteryShards, 3);
+                        result = new ItemStack(FAItemRegistry.INSTANCE.potteryShards, 3);
                     } else if (random <= 100) {
                         int i = (new Random()).nextInt(15);
                         // for
@@ -327,9 +327,9 @@ public class TileEntitySifter extends TileEntity implements IInventory,
                         Item i0 = null;
 
                         if (i == 0) {
-                            i0 = FAItemRegistry.brokenSapling;
+                            i0 = FAItemRegistry.INSTANCE.brokenSapling;
                         } else {
-                            i0 = FAItemRegistry.biofossil;
+                            i0 = FAItemRegistry.INSTANCE.biofossil;
                         }
 
                         result = new ItemStack(i0, 1);

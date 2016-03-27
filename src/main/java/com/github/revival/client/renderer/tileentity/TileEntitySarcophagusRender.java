@@ -20,7 +20,7 @@ import org.lwjgl.opengl.GL11;
 public class TileEntitySarcophagusRender extends TileEntitySpecialRenderer {
     private static final ResourceLocation texture = new ResourceLocation("fossil:textures/blocks/sarcophagus.png");
     private static final ResourceLocation texture_anu = new ResourceLocation("fossil:textures/mob/PigBoss.png");
-    EntityItem key = new EntityItem(Minecraft.getMinecraft().theWorld, 0D, 0D, 0D, new ItemStack(FAItemRegistry.gem));
+    EntityItem key = new EntityItem(Minecraft.getMinecraft().theWorld, 0D, 0D, 0D, new ItemStack(FAItemRegistry.INSTANCE.gem));
     private ModelSarcophagus model = new ModelSarcophagus();
     private ModelPigBoss model_anu = new ModelPigBoss();
 

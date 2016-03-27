@@ -96,11 +96,11 @@ public class BlockFern extends BlockBush {
                         --var6;
                     } else//create new top block
                     {
-                        var1.setBlock(var2, var3 + 1, var4, FABlockRegistry.ferns);//fernUpper
+                        var1.setBlock(var2, var3 + 1, var4, FABlockRegistry.INSTANCE.ferns);//fernUpper
                         var1.setBlockMetadataWithNotify(var2, var3 + 1, var4, this.CheckSubType(var6) == 0 ? var6 + 2 : var6 + 1, 2);
                     }
                 } else if (this.HasLv2(var6)) {
-                    if (var1.getBlock(var2, var3 + 1, var4) == FABlockRegistry.ferns)//fernUpper
+                    if (var1.getBlock(var2, var3 + 1, var4) == FABlockRegistry.INSTANCE.ferns)//fernUpper
                     {
                         var1.setBlockMetadataWithNotify(var2, var3 + 1, var4, this.CheckSubType(var6) == 0 ? var6 + 2 : var6 + 1, 2);    //update top block meta data
                     } else {
@@ -129,7 +129,7 @@ public class BlockFern extends BlockBush {
                 for (int var9 = -1; var9 <= 1; ++var9) {
                     for (int var10 = -1; var10 <= 1; ++var10) {
                         if ((var8 != 0 || var10 != 0 || var9 != 0) && var1.getBlock(var2 + var8, var9 + var3 - 1, var4 + var10) == Blocks.grass && (var1.isAirBlock(var2 + var8, var9 + var3, var4 + var10) || var1.getBlock(var2 + var8, var9 + var3, var4 + var10) == Blocks.tallgrass) && CheckUnderTree(var1, var2 + var8, var9 + var3, var4 + var10) && (new Random()).nextInt(10) <= 9) {
-                            var1.setBlock(var2 + var8, var9 + var3, var4 + var10, FABlockRegistry.ferns);
+                            var1.setBlock(var2 + var8, var9 + var3, var4 + var10, FABlockRegistry.INSTANCE.ferns);
                             var1.setBlockMetadataWithNotify(var2 + var8, var9 + var3, var4 + var10, 0 + 8 * this.CheckSubType(var6), 2);
                         }
                     }
@@ -153,9 +153,9 @@ public class BlockFern extends BlockBush {
         Block var11 = var1.getBlock(var2 + 1, var3, var4 - 1);
         Block var12 = var1.getBlock(var2 + 1, var3, var4 + 1);
         Block var13 = var1.getBlock(var2 - 1, var3, var4 + 1);
-        boolean var14 = var8 == FABlockRegistry.ferns || var9 == FABlockRegistry.ferns;
-        boolean var15 = var6 == FABlockRegistry.ferns || var7 == FABlockRegistry.ferns;
-        boolean var16 = var10 == FABlockRegistry.ferns || var11 == FABlockRegistry.ferns || var12 == FABlockRegistry.ferns || var13 == FABlockRegistry.ferns;
+        boolean var14 = var8 == FABlockRegistry.INSTANCE.ferns || var9 == FABlockRegistry.INSTANCE.ferns;
+        boolean var15 = var6 == FABlockRegistry.INSTANCE.ferns || var7 == FABlockRegistry.INSTANCE.ferns;
+        boolean var16 = var10 == FABlockRegistry.INSTANCE.ferns || var11 == FABlockRegistry.INSTANCE.ferns || var12 == FABlockRegistry.INSTANCE.ferns || var13 == FABlockRegistry.INSTANCE.ferns;
 
         for (int var17 = var2 - 1; var17 <= var2 + 1; ++var17) {
             for (int var18 = var4 - 1; var18 <= var4 + 1; ++var18) {
@@ -208,7 +208,7 @@ public class BlockFern extends BlockBush {
      */
     public Item getItemDropped(int var1, Random var2, int var3) {
         if (var2.nextInt(4) == 0) {
-            return FAItemRegistry.fernSeed;
+            return FAItemRegistry.INSTANCE.fernSeed;
         }
         return null;
     }
@@ -227,12 +227,12 @@ public class BlockFern extends BlockBush {
         boolean var5 = true;
 
         if (this.CheckLevel(var1.getBlockMetadata(var2, var3, var4))) {
-            return var1.getBlock(var2, var3 - 1, var4) == FABlockRegistry.ferns;    //fernblock below
+            return var1.getBlock(var2, var3 - 1, var4) == FABlockRegistry.INSTANCE.ferns;    //fernblock below
         } else {
             var5 = var1.getBlock(var2, var3 - 1, var4) == Blocks.grass && CheckUnderTree(var1, var2, var3, var4);//on grass, under tree
 
             if (this.HasLv2(var1.getBlockMetadata(var2, var3, var4))) {
-                var5 &= var1.getBlock(var2, var3 + 1, var4) == FABlockRegistry.ferns;    //and has the upper block it needs//fernUpper
+                var5 &= var1.getBlock(var2, var3 + 1, var4) == FABlockRegistry.INSTANCE.ferns;    //and has the upper block it needs//fernUpper
             }
 
             return var5;
@@ -263,7 +263,7 @@ public class BlockFern extends BlockBush {
     }
 
     public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z, EntityPlayer player) {
-        return new ItemStack(FAItemRegistry.fernSeed);
+        return new ItemStack(FAItemRegistry.INSTANCE.fernSeed);
     }
 
     @Override

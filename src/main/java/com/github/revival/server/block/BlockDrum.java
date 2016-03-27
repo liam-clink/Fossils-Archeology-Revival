@@ -23,7 +23,7 @@ public class BlockDrum extends BlockContainer {
         super(Material.wood);
         this.setBlockName(LocalizationStrings.DRUM_NAME);
         this.setHardness(0.8F);
-        this.setCreativeTab(FATabRegistry.tabFBlocks);
+        this.setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
     }
 
 	/*

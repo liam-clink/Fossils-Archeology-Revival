@@ -32,7 +32,7 @@ public class BlockAncientStoneSlab extends BlockSlab {
             setBlockName(LocalizationStrings.ANCIENT_STONE_DOUBLESLAB_NAME);
         } else {
             setBlockName(LocalizationStrings.ANCIENT_STONE_SINGLESLAB_NAME);
-            setCreativeTab(FATabRegistry.tabFBlocks);
+            setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
         }
     }
 
@@ -43,11 +43,11 @@ public class BlockAncientStoneSlab extends BlockSlab {
     }
 
     public Item getItemDropped(int var1, Random rand, int var3) {
-        return Item.getItemFromBlock(FABlockRegistry.ancientStoneSingleSlab);
+        return Item.getItemFromBlock(FABlockRegistry.INSTANCE.ancientStoneSingleSlab);
     }
 
     protected ItemStack createStackedBlock(int meta) {
-        return new ItemStack(FABlockRegistry.ancientStoneSingleSlab, 2, meta & 7);
+        return new ItemStack(FABlockRegistry.INSTANCE.ancientStoneSingleSlab, 2, meta & 7);
     }
 
     @SideOnly(Side.CLIENT)
@@ -74,7 +74,7 @@ public class BlockAncientStoneSlab extends BlockSlab {
     @Override
     @SideOnly(Side.CLIENT)
     public void getSubBlocks(Item item, CreativeTabs tab, List subBlocks) {
-        if (item != Item.getItemFromBlock(FABlockRegistry.ancientStoneDoubleSlab)) {
+        if (item != Item.getItemFromBlock(FABlockRegistry.INSTANCE.ancientStoneDoubleSlab)) {
             subBlocks.add(new ItemStack(item, 1, 0));
         }
     }

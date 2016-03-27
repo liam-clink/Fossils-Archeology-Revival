@@ -44,7 +44,7 @@ public class BlockAnalyzer extends BlockContainer {
             setBlockName(LocalizationStrings.BLOCK_ANALYZER_ACTIVE_NAME);
         } else {
             setBlockName(LocalizationStrings.BLOCK_ANALYZER_IDLE_NAME);
-            setCreativeTab(FATabRegistry.tabFBlocks);
+            setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
         }
         // this.blockIndexInTexture = 45;
     }
@@ -59,9 +59,9 @@ public class BlockAnalyzer extends BlockContainer {
         keepFurnaceInventory = true;
 
         if (isActive) {
-            world.setBlock(x, y, z, FABlockRegistry.blockanalyzerActive);
+            world.setBlock(x, y, z, FABlockRegistry.INSTANCE.blockanalyzerActive);
         } else {
-            world.setBlock(x, y, z, FABlockRegistry.blockanalyzerIdle);
+            world.setBlock(x, y, z, FABlockRegistry.INSTANCE.blockanalyzerIdle);
         }
 
         keepFurnaceInventory = false;
@@ -86,7 +86,7 @@ public class BlockAnalyzer extends BlockContainer {
      */
     @Override
     public Item getItemDropped(int var1, Random rand, int var3) {
-        return Item.getItemFromBlock(FABlockRegistry.blockanalyzerIdle);
+        return Item.getItemFromBlock(FABlockRegistry.INSTANCE.blockanalyzerIdle);
     }
 
     /**
@@ -280,6 +280,6 @@ public class BlockAnalyzer extends BlockContainer {
      */
     @SideOnly(Side.CLIENT)
     public Item getItem(World world, int x, int y, int z) {
-        return Item.getItemFromBlock(FABlockRegistry.blockanalyzerIdle);
+        return Item.getItemFromBlock(FABlockRegistry.INSTANCE.blockanalyzerIdle);
     }
 }

@@ -7614,7 +7614,7 @@ public class AnuCastlePiece08 {
         world.setBlock(x + 135, y + 3, z + 7, Blocks.stone_slab, 6, 3);
         world.setBlock(x + 136, y + 3, z + 7, Blocks.nether_brick, 0, 3);
         world.setBlock(x + 4, y + 3, z + 8, Blocks.nether_brick, 0, 3);
-        world.setBlock(x + 7, y + 3, z + 8, FABlockRegistry.anubiteStatue, 0, 3);
+        world.setBlock(x + 7, y + 3, z + 8, FABlockRegistry.INSTANCE.anubiteStatue, 0, 3);
         world.setBlock(x + 10, y + 3, z + 8, Blocks.nether_brick, 0, 3);
         world.setBlock(x + 17, y + 3, z + 8, Blocks.stonebrick, 0, 3);
         world.setBlock(x + 18, y + 3, z + 8, Blocks.nether_brick, 0, 3);
@@ -7629,7 +7629,7 @@ public class AnuCastlePiece08 {
         world.setBlock(x + 42, y + 3, z + 8, Blocks.dark_oak_stairs, 2, 3);
         world.setBlock(x + 45, y + 3, z + 8, Blocks.bookshelf, 0, 3);
         world.setBlock(x + 46, y + 3, z + 8, Blocks.nether_brick, 0, 3);
-        world.setBlock(x + 49, y + 3, z + 8, FABlockRegistry.anubiteStatue, 0, 3);
+        world.setBlock(x + 49, y + 3, z + 8, FABlockRegistry.INSTANCE.anubiteStatue, 0, 3);
         world.setBlock(x + 50, y + 3, z + 8, Blocks.nether_brick_stairs, 3, 3);
         world.setBlock(x + 51, y + 3, z + 8, Blocks.nether_brick_stairs, 3, 3);
         world.setBlock(x + 52, y + 3, z + 8, Blocks.nether_brick, 0, 3);
@@ -7646,7 +7646,7 @@ public class AnuCastlePiece08 {
         world.setBlock(x + 88, y + 3, z + 8, Blocks.nether_brick, 0, 3);
         world.setBlock(x + 89, y + 3, z + 8, Blocks.nether_brick_stairs, 3, 3);
         world.setBlock(x + 90, y + 3, z + 8, Blocks.nether_brick_stairs, 3, 3);
-        world.setBlock(x + 91, y + 3, z + 8, FABlockRegistry.anubiteStatue, 0, 3);
+        world.setBlock(x + 91, y + 3, z + 8, FABlockRegistry.INSTANCE.anubiteStatue, 0, 3);
         world.setBlock(x + 94, y + 3, z + 8, Blocks.nether_brick, 0, 3);
         world.setBlock(x + 95, y + 3, z + 8, Blocks.bookshelf, 0, 3);
         world.setBlock(x + 98, y + 3, z + 8, Blocks.dark_oak_stairs, 2, 3);
@@ -7657,7 +7657,7 @@ public class AnuCastlePiece08 {
         world.setBlock(x + 122, y + 3, z + 8, Blocks.nether_brick, 0, 3);
         world.setBlock(x + 123, y + 3, z + 8, Blocks.stonebrick, 0, 3);
         world.setBlock(x + 130, y + 3, z + 8, Blocks.nether_brick, 0, 3);
-        world.setBlock(x + 133, y + 3, z + 8, FABlockRegistry.anubiteStatue, 0, 3);
+        world.setBlock(x + 133, y + 3, z + 8, FABlockRegistry.INSTANCE.anubiteStatue, 0, 3);
         world.setBlock(x + 136, y + 3, z + 8, Blocks.nether_brick, 0, 3);
         world.setBlock(x + 4, y + 3, z + 9, Blocks.nether_brick, 0, 3);
         world.setBlock(x + 10, y + 3, z + 9, Blocks.nether_brick, 0, 3);
@@ -8400,8 +8400,8 @@ public class AnuCastlePiece08 {
         world.setBlock(x + 26, y + 3, z + 28, Blocks.nether_brick, 0, 3);
         world.setBlock(x + 27, y + 3, z + 28, Blocks.nether_brick, 0, 3);
         world.setBlock(x + 28, y + 3, z + 28, Blocks.stonebrick, 0, 3);
-        world.setBlock(x + 29, y + 3, z + 28, FABlockRegistry.anubiteStatue, 3, 3);
-        world.setBlock(x + 111, y + 3, z + 28, FABlockRegistry.anubiteStatue, 1, 3);
+        world.setBlock(x + 29, y + 3, z + 28, FABlockRegistry.INSTANCE.anubiteStatue, 3, 3);
+        world.setBlock(x + 111, y + 3, z + 28, FABlockRegistry.INSTANCE.anubiteStatue, 1, 3);
         world.setBlock(x + 112, y + 3, z + 28, Blocks.stonebrick, 0, 3);
         world.setBlock(x + 113, y + 3, z + 28, Blocks.nether_brick, 0, 3);
         world.setBlock(x + 114, y + 3, z + 28, Blocks.nether_brick, 0, 3);
@@ -9243,7 +9243,7 @@ public class AnuCastlePiece08 {
         world.setBlock(x + 136, y + 3, z + 48, Blocks.nether_brick, 0, 3);
         world.setBlock(x + 4, y + 3, z + 49, Blocks.nether_brick, 0, 3);
         world.setBlock(x + 7, y + 3, z + 49, Blocks.stonebrick, 0, 3);
-        world.setBlock(x + 8, y + 3, z + 49, FABlockRegistry.anubiteStatue, 3, 3);
+        world.setBlock(x + 8, y + 3, z + 49, FABlockRegistry.INSTANCE.anubiteStatue, 3, 3);
         world.setBlock(x + 16, y + 3, z + 49, Blocks.dark_oak_stairs, 1, 3);
         world.setBlock(x + 17, y + 3, z + 49, Blocks.stone_slab, 8, 3);
         world.setBlock(x + 18, y + 3, z + 49, Blocks.nether_brick, 0, 3);
@@ -9265,7 +9265,7 @@ public class AnuCastlePiece08 {
         world.setBlock(x + 122, y + 3, z + 49, Blocks.nether_brick, 0, 3);
         world.setBlock(x + 123, y + 3, z + 49, Blocks.stone_slab, 8, 3);
         world.setBlock(x + 124, y + 3, z + 49, Blocks.dark_oak_stairs, 0, 3);
-        world.setBlock(x + 132, y + 3, z + 49, FABlockRegistry.anubiteStatue, 1, 3);
+        world.setBlock(x + 132, y + 3, z + 49, FABlockRegistry.INSTANCE.anubiteStatue, 1, 3);
         world.setBlock(x + 133, y + 3, z + 49, Blocks.stonebrick, 0, 3);
         world.setBlock(x + 136, y + 3, z + 49, Blocks.nether_brick, 0, 3);
         world.setBlock(x + 4, y + 3, z + 50, Blocks.nether_brick, 0, 3);
@@ -10169,7 +10169,7 @@ public class AnuCastlePiece08 {
         world.setBlock(x + 136, y + 3, z + 90, Blocks.nether_brick, 0, 3);
         world.setBlock(x + 4, y + 3, z + 91, Blocks.nether_brick, 0, 3);
         world.setBlock(x + 7, y + 3, z + 91, Blocks.stonebrick, 0, 3);
-        world.setBlock(x + 8, y + 3, z + 91, FABlockRegistry.anubiteStatue, 3, 3);
+        world.setBlock(x + 8, y + 3, z + 91, FABlockRegistry.INSTANCE.anubiteStatue, 3, 3);
         world.setBlock(x + 17, y + 3, z + 91, Blocks.stone_slab, 8, 3);
         world.setBlock(x + 18, y + 3, z + 91, Blocks.nether_brick, 0, 3);
         world.setBlock(x + 38, y + 3, z + 91, Blocks.nether_brick, 0, 3);
@@ -10187,7 +10187,7 @@ public class AnuCastlePiece08 {
         world.setBlock(x + 121, y + 3, z + 91, Blocks.iron_block, 0, 3);
         world.setBlock(x + 122, y + 3, z + 91, Blocks.nether_brick, 0, 3);
         world.setBlock(x + 123, y + 3, z + 91, Blocks.stone_slab, 8, 3);
-        world.setBlock(x + 132, y + 3, z + 91, FABlockRegistry.anubiteStatue, 1, 3);
+        world.setBlock(x + 132, y + 3, z + 91, FABlockRegistry.INSTANCE.anubiteStatue, 1, 3);
         world.setBlock(x + 133, y + 3, z + 91, Blocks.stonebrick, 0, 3);
         world.setBlock(x + 136, y + 3, z + 91, Blocks.nether_brick, 0, 3);
         world.setBlock(x + 4, y + 3, z + 92, Blocks.nether_brick, 0, 3);

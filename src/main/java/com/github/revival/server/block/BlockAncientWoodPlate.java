@@ -18,7 +18,7 @@ public class BlockAncientWoodPlate extends Block {
     public BlockAncientWoodPlate() {
         super(Material.wood);
         setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.125F, 1.0F);
-        setCreativeTab(FATabRegistry.tabFBlocks);
+        setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
         setHardness(0.6F);
         setBlockName(LocalizationStrings.ANCIENT_WOOD_PLATE_NAME);
     }

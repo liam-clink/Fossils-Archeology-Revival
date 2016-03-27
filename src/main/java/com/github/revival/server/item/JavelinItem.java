@@ -61,7 +61,7 @@ public class JavelinItem extends Item {
 
             Object var8;
 
-            if (this != FAItemRegistry.ancientJavelin) //!this.isAncient)
+            if (this != FAItemRegistry.INSTANCE.ancientJavelin) //!this.isAncient)
             {
                 var8 = new EntityJavelin(var2, var3, var7 * 2.0F, this.SelfMaterial, var1.getMaxDamage() - (var1.getItemDamage() + 1));
             } else {

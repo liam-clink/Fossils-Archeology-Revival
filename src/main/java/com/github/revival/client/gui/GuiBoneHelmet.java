@@ -49,7 +49,7 @@ public class GuiBoneHelmet extends Gui {
 
         ItemStack helmet = Minecraft.getMinecraft().thePlayer.inventory.armorItemInSlot(3);
 
-        if (Minecraft.getMinecraft().gameSettings.thirdPersonView == 0 && helmet != null && helmet.getItem() == FAItemRegistry.skullHelmet) {
+        if (Minecraft.getMinecraft().gameSettings.thirdPersonView == 0 && helmet != null && helmet.getItem() == FAItemRegistry.INSTANCE.skullHelmet) {
             // Starting position for the buff bar - 2 pixels from the top left corner.
             int xPos = 0;
             int yPos = 0;

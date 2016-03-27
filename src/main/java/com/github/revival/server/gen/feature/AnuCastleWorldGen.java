@@ -17,16 +17,16 @@ import java.util.Random;
 
 public class AnuCastleWorldGen extends WorldGenerator {
     protected static final WeightedRandomChestContent[] treasure = new WeightedRandomChestContent[]{
-            new WeightedRandomChestContent(Item.getItemFromBlock(FABlockRegistry.ancientGlass), 0, 2, 5, 25),
-            new WeightedRandomChestContent(FAItemRegistry.relic, 0, 1, 2, 76),
-            new WeightedRandomChestContent(FAItemRegistry.ancientSword, 0, 1, 3, 15),
-            new WeightedRandomChestContent(Item.getItemFromBlock(FABlockRegistry.blockSkull), 0, 1, 2, 70),
-            new WeightedRandomChestContent(Item.getItemFromBlock(FABlockRegistry.skullLantern), 0, 1, 2, 55),
-            new WeightedRandomChestContent(Item.getItemFromBlock(FABlockRegistry.drum), 0, 1, 1, 38),
-            new WeightedRandomChestContent(FAItemRegistry.potteryShards, 0, 1, 3, 80),
-            new WeightedRandomChestContent(FAItemRegistry.goldjavelin, 0, 1, 1, 33),
-            new WeightedRandomChestContent(FAItemRegistry.ironjavelin, 0, 1, 1, 56),
-            new WeightedRandomChestContent(FAItemRegistry.stoneboard, 0, 1, 3, 75),
+            new WeightedRandomChestContent(Item.getItemFromBlock(FABlockRegistry.INSTANCE.ancientGlass), 0, 2, 5, 25),
+            new WeightedRandomChestContent(FAItemRegistry.INSTANCE.relic, 0, 1, 2, 76),
+            new WeightedRandomChestContent(FAItemRegistry.INSTANCE.ancientSword, 0, 1, 3, 15),
+            new WeightedRandomChestContent(Item.getItemFromBlock(FABlockRegistry.INSTANCE.blockSkull), 0, 1, 2, 70),
+            new WeightedRandomChestContent(Item.getItemFromBlock(FABlockRegistry.INSTANCE.skullLantern), 0, 1, 2, 55),
+            new WeightedRandomChestContent(Item.getItemFromBlock(FABlockRegistry.INSTANCE.drum), 0, 1, 1, 38),
+            new WeightedRandomChestContent(FAItemRegistry.INSTANCE.potteryShards, 0, 1, 3, 80),
+            new WeightedRandomChestContent(FAItemRegistry.INSTANCE.goldjavelin, 0, 1, 1, 33),
+            new WeightedRandomChestContent(FAItemRegistry.INSTANCE.ironjavelin, 0, 1, 1, 56),
+            new WeightedRandomChestContent(FAItemRegistry.INSTANCE.stoneboard, 0, 1, 3, 75),
             new WeightedRandomChestContent(Items.bone, 0, 1, 3, 85),
             new WeightedRandomChestContent(Items.emerald, 0, 1, 3, 25),
             new WeightedRandomChestContent(Items.flint, 0, 1, 3, 55),
@@ -37,7 +37,7 @@ public class AnuCastleWorldGen extends WorldGenerator {
             new WeightedRandomChestContent(Item.getItemFromBlock(Blocks.glowstone), 0, 1, 4, 65),
             new WeightedRandomChestContent(Item.getItemFromBlock(Blocks.obsidian), 0, 1, 6, 55),
             new WeightedRandomChestContent(Items.netherbrick, 0, 1, 12, 65),
-            new WeightedRandomChestContent(FAItemRegistry.recordNano_Anu, 0, 1, 1, 6),
+            new WeightedRandomChestContent(FAItemRegistry.INSTANCE.recordNano_Anu, 0, 1, 1, 6),
             new WeightedRandomChestContent(Items.netherbrick, 0, 1, 12, 65),
 
             new WeightedRandomChestContent(Item.getItemFromBlock(Blocks.tnt), 0, 1, 6, 45)
@@ -170,7 +170,7 @@ public class AnuCastleWorldGen extends WorldGenerator {
         ItemDoor.placeDoorBlock(world, x + 65, y + 13, z + 122, 1, Blocks.iron_door);
         ItemDoor.placeDoorBlock(world, x + 75, y + 13, z + 122, 1, Blocks.iron_door);
 
-        world.setBlock(x + 70, y + 9, z + 70, FABlockRegistry.sarcophagus, 3, 2);
+        world.setBlock(x + 70, y + 9, z + 70, FABlockRegistry.INSTANCE.sarcophagus, 3, 2);
         world.markBlockForUpdate(x + 70, y + 9, z + 70);
 
     }

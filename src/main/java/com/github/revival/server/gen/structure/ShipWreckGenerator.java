@@ -1,8 +1,8 @@
 package com.github.revival.server.gen.structure;
 
 import com.github.revival.Revival;
+import com.github.revival.server.structure.util.Structure;
 import cpw.mods.fml.common.IWorldGenerator;
-import net.ilexiconn.llibrary.common.structure.util.Structure;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;

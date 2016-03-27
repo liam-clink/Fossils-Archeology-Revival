@@ -46,10 +46,10 @@ public class FossilFoodMappings {
         FoodMappings.instance().addToItemMappings(Items.porkchop, 35, EnumDiet.CARNIVORE_EGG);
         FoodMappings.instance().addToItemMappings(Items.cooked_porkchop, 55, EnumDiet.CARNIVORE_EGG);
         FoodMappings.instance().addToItemMappings(Items.egg, 7, EnumDiet.CARNIVORE_EGG);
-        FoodMappings.instance().addToItemMappings(FAItemRegistry.sjl, 65, EnumDiet.PISCIVORE);
-        FoodMappings.instance().addToItemMappings(FAItemRegistry.failuresaurusFlesh, 15, EnumDiet.CARNIVORE);
-        FoodMappings.instance().addToItemMappings(FAItemRegistry.failuresaurusFlesh, 15, EnumDiet.CARNIVORE_EGG);
-        FoodMappings.instance().addToItemMappings(FAItemRegistry.livingCoelacanth, 35, EnumDiet.PISCIVORE);
+        FoodMappings.instance().addToItemMappings(FAItemRegistry.INSTANCE.sjl, 65, EnumDiet.PISCIVORE);
+        FoodMappings.instance().addToItemMappings(FAItemRegistry.INSTANCE.failuresaurusFlesh, 15, EnumDiet.CARNIVORE);
+        FoodMappings.instance().addToItemMappings(FAItemRegistry.INSTANCE.failuresaurusFlesh, 15, EnumDiet.CARNIVORE_EGG);
+        FoodMappings.instance().addToItemMappings(FAItemRegistry.INSTANCE.livingCoelacanth, 35, EnumDiet.PISCIVORE);
         for (int i = 0; i < EnumPrehistoric.values().length; i++) {
             if (EnumPrehistoric.values()[i].timeperiod != EnumTimePeriod.CURRENT) {
                 if (EnumPrehistoric.values()[i].type != EnumMobType.FISH) {
@@ -91,7 +91,7 @@ public class FossilFoodMappings {
         FoodMappings.instance().addToItemMappings(Items.porkchop, 35, EnumDiet.OMNIVORE);
         FoodMappings.instance().addToItemMappings(Items.cooked_porkchop, 55, EnumDiet.OMNIVORE);
         FoodMappings.instance().addToItemMappings(Items.egg, 7, EnumDiet.OMNIVORE);
-        FoodMappings.instance().addToItemMappings(FAItemRegistry.failuresaurusFlesh, 15, EnumDiet.OMNIVORE);
+        FoodMappings.instance().addToItemMappings(FAItemRegistry.INSTANCE.failuresaurusFlesh, 15, EnumDiet.OMNIVORE);
         for (int i = 0; i < EnumPrehistoric.values().length; i++) {
             if (EnumPrehistoric.values()[i].timeperiod != EnumTimePeriod.CURRENT) {
                 if (EnumPrehistoric.values()[i].type != EnumMobType.FISH) {
@@ -116,10 +116,10 @@ public class FossilFoodMappings {
         FoodMappings.instance().addToItemMappings(Items.porkchop, 35, EnumDiet.PISCCARNIVORE);
         FoodMappings.instance().addToItemMappings(Items.cooked_porkchop, 55, EnumDiet.PISCCARNIVORE);
         FoodMappings.instance().addToItemMappings(Items.egg, 7, EnumDiet.PISCCARNIVORE);
-        FoodMappings.instance().addToItemMappings(FAItemRegistry.failuresaurusFlesh, 15, EnumDiet.PISCCARNIVORE);
+        FoodMappings.instance().addToItemMappings(FAItemRegistry.INSTANCE.failuresaurusFlesh, 15, EnumDiet.PISCCARNIVORE);
         FoodMappings.instance().addToItemMappings(Items.fish, 30, EnumDiet.PISCCARNIVORE);
         FoodMappings.instance().addToItemMappings(Items.cooked_fished, 45, EnumDiet.PISCCARNIVORE);
-        FoodMappings.instance().addToItemMappings(FAItemRegistry.livingCoelacanth, 35, EnumDiet.PISCCARNIVORE);
+        FoodMappings.instance().addToItemMappings(FAItemRegistry.INSTANCE.livingCoelacanth, 35, EnumDiet.PISCCARNIVORE);
         for (int i = 0; i < EnumPrehistoric.values().length; i++) {
             if (EnumPrehistoric.values()[i].timeperiod != EnumTimePeriod.CURRENT) {
                 if (EnumPrehistoric.values()[i].type != EnumMobType.FISH) {
@@ -144,8 +144,8 @@ public class FossilFoodMappings {
         FoodMappings.instance().addToBlockMappings(Blocks.reeds, 15, EnumDiet.HERBIVORE, false);
         FoodMappings.instance().addToBlockMappings(Blocks.sapling, 15, EnumDiet.HERBIVORE, true);
         FoodMappings.instance().addToBlockMappings(Blocks.tallgrass, 5, EnumDiet.HERBIVORE, true);
-        FoodMappings.instance().addToBlockMappings(FABlockRegistry.ferns, 55, EnumDiet.HERBIVORE, false);
-        FoodMappings.instance().addToBlockMappings(FABlockRegistry.palmLeaves, 40, EnumDiet.HERBIVORE, true);
+        FoodMappings.instance().addToBlockMappings(FABlockRegistry.INSTANCE.ferns, 55, EnumDiet.HERBIVORE, false);
+        FoodMappings.instance().addToBlockMappings(FABlockRegistry.INSTANCE.palmLeaves, 40, EnumDiet.HERBIVORE, true);
         FoodMappings.instance().addToBlockMappings(Blocks.cake, 35, EnumDiet.OMNIVORE, false);
         FoodMappings.instance().addToBlockMappings(Blocks.carrots, 20, EnumDiet.OMNIVORE, false);
         FoodMappings.instance().addToBlockMappings(Blocks.wheat, 10, EnumDiet.OMNIVORE, false);
@@ -160,8 +160,8 @@ public class FossilFoodMappings {
         FoodMappings.instance().addToBlockMappings(Blocks.reeds, 15, EnumDiet.OMNIVORE, false);
         FoodMappings.instance().addToBlockMappings(Blocks.sapling, 15, EnumDiet.OMNIVORE, true);
         FoodMappings.instance().addToBlockMappings(Blocks.tallgrass, 5, EnumDiet.OMNIVORE, true);
-        FoodMappings.instance().addToBlockMappings(FABlockRegistry.ferns, 55, EnumDiet.OMNIVORE, false);
-        FoodMappings.instance().addToBlockMappings(FABlockRegistry.palmLeaves, 40, EnumDiet.OMNIVORE, true);
+        FoodMappings.instance().addToBlockMappings(FABlockRegistry.INSTANCE.ferns, 55, EnumDiet.OMNIVORE, false);
+        FoodMappings.instance().addToBlockMappings(FABlockRegistry.INSTANCE.palmLeaves, 40, EnumDiet.OMNIVORE, true);
         FoodMappings.instance().addToEntityMappings(EntityPlayer.class, 27, EnumDiet.CARNIVORE);
         FoodMappings.instance().addToEntityMappings(EntityVillager.class, 27, EnumDiet.CARNIVORE);
         FoodMappings.instance().addToEntityMappings(EntityZombie.class, 23, EnumDiet.CARNIVORE);

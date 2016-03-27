@@ -14,7 +14,7 @@ public class TabFBones extends CreativeTabs {
 
     @SideOnly(Side.CLIENT)
     public Item getTabIconItem() {
-        return FAItemRegistry.skull;
+        return FAItemRegistry.INSTANCE.skull;
     }
 
     public String getTranslatedTabLabel() {

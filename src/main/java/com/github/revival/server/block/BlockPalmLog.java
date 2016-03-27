@@ -21,7 +21,7 @@ public class BlockPalmLog extends Block {
 
     public BlockPalmLog() {
         super(Material.wood);
-        this.setCreativeTab(FATabRegistry.tabFBlocks);
+        this.setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
         this.setStepSound(Block.soundTypeWood);
         this.setHardness(1.4F);
         this.setResistance(1.0F);
@@ -62,7 +62,7 @@ public class BlockPalmLog extends Block {
     // this tells the game what to drop if the block is brocken with an explosion. an example of this would be creeper explosions
     // making stone drop cobblestone.
     public Item getItemDropped(int par1, Random par2Random, int par3) {
-        return Item.getItemFromBlock(FABlockRegistry.palmLog);
+        return Item.getItemFromBlock(FABlockRegistry.INSTANCE.palmLog);
     }
 
     // this essentially helps leaves to decay when they are not conected to wood.
@@ -76,7 +76,7 @@ public class BlockPalmLog extends Block {
                     for (int var11 = -var7; var11 <= var7; ++var11) {
                         Block var12 = var1.getBlock(var2 + var9, var3 + var10, var4 + var11);
 
-                        if (var12 == FABlockRegistry.palmLeaves || var12 == FABlockRegistry.palmLeaves) {
+                        if (var12 == FABlockRegistry.INSTANCE.palmLeaves || var12 == FABlockRegistry.INSTANCE.palmLeaves) {
                             int var13 = var1.getBlockMetadata(var2 + var9, var3 + var10, var4 + var11);
 
                             if ((var13 & 8) == 0) {

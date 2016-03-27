@@ -42,7 +42,7 @@ public class BlockVaseVolute extends BlockContainer implements ISubBlocksBlock {
 
     public BlockVaseVolute() {
         super(Material.clay);
-        setCreativeTab(FATabRegistry.tabFBlocks);
+        setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
         setBlockName(LocalizationStrings.VASE_VOLUTE);
     }
 

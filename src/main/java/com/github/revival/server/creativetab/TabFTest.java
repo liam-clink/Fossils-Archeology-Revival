@@ -12,7 +12,7 @@ public class TabFTest extends CreativeTabs {
 
     @Override
     public Item getTabIconItem() {
-        return Item.getItemFromBlock(FABlockRegistry.blockTimeMachine);
+        return Item.getItemFromBlock(FABlockRegistry.INSTANCE.blockTimeMachine);
     }
 
 }

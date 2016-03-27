@@ -118,7 +118,7 @@ public class EntitySarcosuchus extends EntityNewPrehistoric {
 
     @Override
     public Item getOrderItem() {
-        return FAItemRegistry.skullStick;
+        return FAItemRegistry.INSTANCE.skullStick;
     }
 
     public void updateSize() {

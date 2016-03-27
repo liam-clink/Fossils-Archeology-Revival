@@ -105,7 +105,7 @@ public class DinoAIControlledByPlayer extends EntityAIBase {
             //decrease the whips uses left
             ItemStack I = P.getHeldItem();
 
-            if (I != null && I.getItem() == FAItemRegistry.whip) {
+            if (I != null && I.getItem() == FAItemRegistry.INSTANCE.whip) {
                 //var21.damageItem(1, P);
                 I.setItemDamage(I.getItemDamage() + 1);
                 /*if (var21.stackSize == 0)

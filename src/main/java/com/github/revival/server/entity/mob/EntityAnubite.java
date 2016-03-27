@@ -55,7 +55,7 @@ public class EntityAnubite extends EntityMob {
     private boolean shouldAttackPlayer(EntityPlayer player) {
         ItemStack itemstack = player.inventory.armorInventory[3];
 
-        if (itemstack != null && itemstack.getItem() == FAItemRegistry.ancienthelmet) {
+        if (itemstack != null && itemstack.getItem() == FAItemRegistry.INSTANCE.ancienthelmet) {
             return false;
         } else {
             return true;

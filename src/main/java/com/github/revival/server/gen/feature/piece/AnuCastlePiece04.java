@@ -524,7 +524,7 @@ public class AnuCastlePiece04 {
         world.setBlock(x + 136, y + 0, z + 59, Blocks.stonebrick, 0, 3);
         world.setBlock(x + 137, y + 0, z + 59, Blocks.stonebrick, 0, 3);
         world.setBlock(x + 138, y + 0, z + 59, Blocks.stone_brick_stairs, 1, 3);
-        world.setBlock(x + 2, y + 0, z + 60, FABlockRegistry.anubiteStatue, 1, 3);
+        world.setBlock(x + 2, y + 0, z + 60, FABlockRegistry.INSTANCE.anubiteStatue, 1, 3);
         world.setBlock(x + 3, y + 0, z + 60, Blocks.nether_brick, 0, 3);
         world.setBlock(x + 4, y + 0, z + 60, Blocks.nether_brick, 0, 3);
         world.setBlock(x + 5, y + 0, z + 60, Blocks.nether_brick, 0, 3);
@@ -660,7 +660,7 @@ public class AnuCastlePiece04 {
         world.setBlock(x + 135, y + 0, z + 60, Blocks.nether_brick, 0, 3);
         world.setBlock(x + 136, y + 0, z + 60, Blocks.nether_brick, 0, 3);
         world.setBlock(x + 137, y + 0, z + 60, Blocks.nether_brick, 0, 3);
-        world.setBlock(x + 138, y + 0, z + 60, FABlockRegistry.anubiteStatue, 3, 3);
+        world.setBlock(x + 138, y + 0, z + 60, FABlockRegistry.INSTANCE.anubiteStatue, 3, 3);
         world.setBlock(x + 2, y + 0, z + 61, Blocks.stone_brick_stairs, 0, 3);
         world.setBlock(x + 3, y + 0, z + 61, Blocks.stonebrick, 0, 3);
         world.setBlock(x + 4, y + 0, z + 61, Blocks.stonebrick, 0, 3);
@@ -1888,7 +1888,7 @@ public class AnuCastlePiece04 {
         world.setBlock(x + 136, y + 0, z + 69, Blocks.stonebrick, 0, 3);
         world.setBlock(x + 137, y + 0, z + 69, Blocks.stonebrick, 0, 3);
         world.setBlock(x + 138, y + 0, z + 69, Blocks.stone_brick_stairs, 1, 3);
-        world.setBlock(x + 2, y + 0, z + 70, FABlockRegistry.anubiteStatue, 1, 3);
+        world.setBlock(x + 2, y + 0, z + 70, FABlockRegistry.INSTANCE.anubiteStatue, 1, 3);
         world.setBlock(x + 3, y + 0, z + 70, Blocks.nether_brick, 0, 3);
         world.setBlock(x + 4, y + 0, z + 70, Blocks.nether_brick, 0, 3);
         world.setBlock(x + 5, y + 0, z + 70, Blocks.nether_brick, 0, 3);
@@ -2024,7 +2024,7 @@ public class AnuCastlePiece04 {
         world.setBlock(x + 135, y + 0, z + 70, Blocks.nether_brick, 0, 3);
         world.setBlock(x + 136, y + 0, z + 70, Blocks.nether_brick, 0, 3);
         world.setBlock(x + 137, y + 0, z + 70, Blocks.nether_brick, 0, 3);
-        world.setBlock(x + 138, y + 0, z + 70, FABlockRegistry.anubiteStatue, 3, 3);
+        world.setBlock(x + 138, y + 0, z + 70, FABlockRegistry.INSTANCE.anubiteStatue, 3, 3);
         world.setBlock(x + 2, y + 0, z + 71, Blocks.stone_brick_stairs, 0, 3);
         world.setBlock(x + 3, y + 0, z + 71, Blocks.stonebrick, 0, 3);
         world.setBlock(x + 4, y + 0, z + 71, Blocks.stonebrick, 0, 3);
@@ -3252,7 +3252,7 @@ public class AnuCastlePiece04 {
         world.setBlock(x + 136, y + 0, z + 79, Blocks.stonebrick, 0, 3);
         world.setBlock(x + 137, y + 0, z + 79, Blocks.stonebrick, 0, 3);
         world.setBlock(x + 138, y + 0, z + 79, Blocks.stone_brick_stairs, 1, 3);
-        world.setBlock(x + 2, y + 0, z + 80, FABlockRegistry.anubiteStatue, 1, 3);
+        world.setBlock(x + 2, y + 0, z + 80, FABlockRegistry.INSTANCE.anubiteStatue, 1, 3);
         world.setBlock(x + 3, y + 0, z + 80, Blocks.nether_brick, 0, 3);
         world.setBlock(x + 4, y + 0, z + 80, Blocks.nether_brick, 0, 3);
         world.setBlock(x + 5, y + 0, z + 80, Blocks.nether_brick, 0, 3);
@@ -3388,7 +3388,7 @@ public class AnuCastlePiece04 {
         world.setBlock(x + 135, y + 0, z + 80, Blocks.nether_brick, 0, 3);
         world.setBlock(x + 136, y + 0, z + 80, Blocks.nether_brick, 0, 3);
         world.setBlock(x + 137, y + 0, z + 80, Blocks.nether_brick, 0, 3);
-        world.setBlock(x + 138, y + 0, z + 80, FABlockRegistry.anubiteStatue, 3, 3);
+        world.setBlock(x + 138, y + 0, z + 80, FABlockRegistry.INSTANCE.anubiteStatue, 3, 3);
         world.setBlock(x + 2, y + 0, z + 81, Blocks.stone_brick_stairs, 0, 3);
         world.setBlock(x + 3, y + 0, z + 81, Blocks.stonebrick, 0, 3);
         world.setBlock(x + 4, y + 0, z + 81, Blocks.stonebrick, 0, 3);

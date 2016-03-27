@@ -213,7 +213,7 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory,
                 for (slots = 12; slots > 8; --slots) {
                     if (this.analyzerItemStacks[slots] != null) {
                         if (this.analyzerItemStacks[slots].getItem() != null) {
-                            if (this.analyzerItemStacks[slots].getItem() == FAItemRegistry.stoneboard) {
+                            if (this.analyzerItemStacks[slots].getItem() == FAItemRegistry.INSTANCE.stoneboard) {
                                 P.addStat(FossilAchievementHandler.tablet, 1);
                             }
                             //if (Revival.isDNA(this.analyzerItemStacks[slots].getItem())) {
@@ -277,17 +277,17 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory,
 
                 if (EnumPrehistoric.isFoodItem(this.analyzerItemStacks[var1]
                         .getItem())
-                        || (var2 == FAItemRegistry.biofossil)
-                        || (var2 == FAItemRegistry.failuresaurusFlesh)
-                        || (var2 == FAItemRegistry.relic)
+                        || (var2 == FAItemRegistry.INSTANCE.biofossil)
+                        || (var2 == FAItemRegistry.INSTANCE.failuresaurusFlesh)
+                        || (var2 == FAItemRegistry.INSTANCE.relic)
                         || (var2 == Items.porkchop)
                         || (var2 == Items.beef)
                         || (var2 == Items.egg)
                         || (var2 == Items.chicken)
                         || (var2 == Item.getItemFromBlock(Blocks.wool))
-                        || (var2 == FAItemRegistry.icedMeat)
+                        || (var2 == FAItemRegistry.INSTANCE.icedMeat)
                         || (var2 == Items.leather)
-                        || (var2 == FAItemRegistry.brokenSapling)) {
+                        || (var2 == FAItemRegistry.INSTANCE.brokenSapling)) {
                     this.RawIndex = var1;
                     break;
                 }
@@ -314,7 +314,7 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory,
             int rand = new Random().nextInt(100);
             int var3;
 
-            if (this.analyzerItemStacks[this.RawIndex].getItem() == FAItemRegistry.biofossil) {
+            if (this.analyzerItemStacks[this.RawIndex].getItem() == FAItemRegistry.INSTANCE.biofossil) {
 
                 if (!Revival.enableDebugging()) {
                     if (rand > -1 && rand <= 50) {
@@ -333,7 +333,7 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory,
                     System.out.println(EnumPrehistoric.getRandomMesozoicDNA().getUnlocalizedName());
                 }
             }
-            if (this.analyzerItemStacks[this.RawIndex].getItem() == FAItemRegistry.brokenSapling) {
+            if (this.analyzerItemStacks[this.RawIndex].getItem() == FAItemRegistry.INSTANCE.brokenSapling) {
                 if (rand > 0) {
                     itemstack = new ItemStack(Blocks.sand, 2, 0);
                 }
@@ -341,13 +341,13 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory,
                     itemstack = new ItemStack(Items.coal, 1, 0);
                 }
                 if (rand > 65 && rand <= 75) {
-                    itemstack = new ItemStack(FAItemRegistry.palaeSaplingFossil, 1, 0);
+                    itemstack = new ItemStack(FAItemRegistry.INSTANCE.palaeSaplingFossil, 1, 0);
                 }
                 if (rand > 75 && rand <= 85) {
                     itemstack = new ItemStack(Items.dye, 1, 2);
                 }
                 if (rand > 85) {
-                    itemstack = new ItemStack(FAItemRegistry.fossilSeed, 1, new Random().nextInt(8));
+                    itemstack = new ItemStack(FAItemRegistry.INSTANCE.fossilSeed, 1, new Random().nextInt(8));
                 }
 
             }
@@ -381,7 +381,7 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory,
             if (this.analyzerItemStacks[this.RawIndex].getItem() == Items.beef) {
                 itemstack = new ItemStack(EnumPrehistoric.Cow.DNAItem, 2);
             }
-            if (this.analyzerItemStacks[this.RawIndex].getItem() == FAItemRegistry.failuresaurusFlesh) {
+            if (this.analyzerItemStacks[this.RawIndex].getItem() == FAItemRegistry.INSTANCE.failuresaurusFlesh) {
                 int randChoice = new Random().nextInt(3);
                 if (randChoice == 0) {
                     itemstack = new ItemStack(Items.rotten_flesh, 1);
@@ -408,7 +408,7 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory,
             }
 
 
-            if (this.analyzerItemStacks[this.RawIndex].getItem() == FAItemRegistry.icedMeat) {
+            if (this.analyzerItemStacks[this.RawIndex].getItem() == FAItemRegistry.INSTANCE.icedMeat) {
 
                 if (rand >= 15) {
                     itemstack = new ItemStack(Items.chicken, 1);
@@ -432,13 +432,13 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory,
                 }
             }
 
-            if (this.analyzerItemStacks[this.RawIndex].getItem() == FAItemRegistry.relic) {
+            if (this.analyzerItemStacks[this.RawIndex].getItem() == FAItemRegistry.INSTANCE.relic) {
                 if (rand <= 40) {
                     itemstack = new ItemStack(Blocks.gravel, 2);
                 }
 
                 if (rand > 40 && rand <= 70) {
-                    itemstack = new ItemStack(FAItemRegistry.stoneboard, 1);
+                    itemstack = new ItemStack(FAItemRegistry.INSTANCE.stoneboard, 1);
                 }
 
                 if (rand > 70 && rand <= 88) {
@@ -446,33 +446,33 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory,
                 }
 
                 if (rand > 88 && rand <= 92) {
-                    itemstack = new ItemStack(FAItemRegistry.potteryShards, 1);
+                    itemstack = new ItemStack(FAItemRegistry.INSTANCE.potteryShards, 1);
                 }
 
                 if (rand > 92 && rand <= 96) {
                     if (new Random().nextFloat() < 0.7) {
-                        itemstack = new ItemStack(FABlockRegistry.figurineBlock, 1,
+                        itemstack = new ItemStack(FABlockRegistry.INSTANCE.figurineBlock, 1,
                                 new Random().nextInt(5) + 10);
                     } else {
-                        itemstack = new ItemStack(FABlockRegistry.figurineBlock, 1,
+                        itemstack = new ItemStack(FABlockRegistry.INSTANCE.figurineBlock, 1,
                                 new Random().nextInt(5) + 5);
                     }
                 }
 
                 if (rand > 96) {
-                    itemstack = new ItemStack(FAItemRegistry.brokenSword, 1);
+                    itemstack = new ItemStack(FAItemRegistry.INSTANCE.brokenSword, 1);
                 }
             }
 
             if (itemstack != null) {
                 if (itemstack.getItem() == Items.dye
-                        || itemstack.getItem() == FAItemRegistry.fernSeed
-                        || itemstack.getItem() == FAItemRegistry.stoneboard
+                        || itemstack.getItem() == FAItemRegistry.INSTANCE.fernSeed
+                        || itemstack.getItem() == FAItemRegistry.INSTANCE.stoneboard
                         || itemstack.getItem() == Items.flint
                         || itemstack.getItem() == Item
                         .getItemFromBlock(Blocks.gravel)
-                        || itemstack.getItem() == FAItemRegistry.relic
-                        || itemstack.getItem() == FAItemRegistry.brokenSapling
+                        || itemstack.getItem() == FAItemRegistry.INSTANCE.relic
+                        || itemstack.getItem() == FAItemRegistry.INSTANCE.brokenSapling
                         || itemstack.getItem() == Item
                         .getItemFromBlock(Blocks.sand)
                         || itemstack.getItem() == Items.string
@@ -596,7 +596,7 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory,
                 for (slots = 12; slots > 8; --slots) {
                     if (this.analyzerItemStacks[slots] != null) {
                         if (this.analyzerItemStacks[slots].getItem() != null) {
-                            if (this.analyzerItemStacks[slots].getItem() == FAItemRegistry.stoneboard) {
+                            if (this.analyzerItemStacks[slots].getItem() == FAItemRegistry.INSTANCE.stoneboard) {
                                 P.addStat(FossilAchievementHandler.tablet, 1);
                             }
                             //if (Revival.isDNA(this.analyzerItemStacks[slots].getItem())) {

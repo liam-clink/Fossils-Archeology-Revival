@@ -17,16 +17,16 @@ import java.util.Random;
 
 public class HellBoatWorldGen extends WorldGenerator {
     protected static final WeightedRandomChestContent[] field_111019_a = new WeightedRandomChestContent[]{
-            new WeightedRandomChestContent(Item.getItemFromBlock(FABlockRegistry.ancientGlass), 0, 2, 5, 25),
-            new WeightedRandomChestContent(FAItemRegistry.relic, 0, 1, 2, 76),
-            new WeightedRandomChestContent(FAItemRegistry.ancientSword, 0, 1, 3, 15),
-            new WeightedRandomChestContent(Item.getItemFromBlock(FABlockRegistry.blockSkull), 0, 1, 2, 60),
-            new WeightedRandomChestContent(Item.getItemFromBlock(FABlockRegistry.skullLantern), 0, 1, 2, 45),
-            new WeightedRandomChestContent(Item.getItemFromBlock(FABlockRegistry.drum), 0, 1, 1, 28),
-            new WeightedRandomChestContent(FAItemRegistry.potteryShards, 0, 1, 3, 70),
-            new WeightedRandomChestContent(FAItemRegistry.goldjavelin, 0, 1, 1, 33),
-            new WeightedRandomChestContent(FAItemRegistry.ironjavelin, 0, 1, 1, 46),
-            new WeightedRandomChestContent(FAItemRegistry.stoneboard, 0, 1, 3, 25),
+            new WeightedRandomChestContent(Item.getItemFromBlock(FABlockRegistry.INSTANCE.ancientGlass), 0, 2, 5, 25),
+            new WeightedRandomChestContent(FAItemRegistry.INSTANCE.relic, 0, 1, 2, 76),
+            new WeightedRandomChestContent(FAItemRegistry.INSTANCE.ancientSword, 0, 1, 3, 15),
+            new WeightedRandomChestContent(Item.getItemFromBlock(FABlockRegistry.INSTANCE.blockSkull), 0, 1, 2, 60),
+            new WeightedRandomChestContent(Item.getItemFromBlock(FABlockRegistry.INSTANCE.skullLantern), 0, 1, 2, 45),
+            new WeightedRandomChestContent(Item.getItemFromBlock(FABlockRegistry.INSTANCE.drum), 0, 1, 1, 28),
+            new WeightedRandomChestContent(FAItemRegistry.INSTANCE.potteryShards, 0, 1, 3, 70),
+            new WeightedRandomChestContent(FAItemRegistry.INSTANCE.goldjavelin, 0, 1, 1, 33),
+            new WeightedRandomChestContent(FAItemRegistry.INSTANCE.ironjavelin, 0, 1, 1, 46),
+            new WeightedRandomChestContent(FAItemRegistry.INSTANCE.stoneboard, 0, 1, 3, 25),
             new WeightedRandomChestContent(Items.bone, 0, 1, 3, 85),
             new WeightedRandomChestContent(Items.emerald, 0, 1, 3, 25),
             new WeightedRandomChestContent(Items.flint, 0, 1, 3, 35),
@@ -336,7 +336,7 @@ public class HellBoatWorldGen extends WorldGenerator {
         world.setBlock(x + 19, y + 1, z + 1, Blocks.nether_brick, 0, 3);
         world.setBlock(x + 20, y + 1, z + 1, Blocks.nether_brick, 0, 3);
         world.setBlock(x + 3, y + 1, z + 2, Blocks.nether_brick, 0, 3);
-        world.setBlock(x + 4, y + 1, z + 2, FABlockRegistry.blockSkull, 0, 3);
+        world.setBlock(x + 4, y + 1, z + 2, FABlockRegistry.INSTANCE.blockSkull, 0, 3);
         world.setBlock(x + 5, y + 1, z + 2, Blocks.air, 0, 3);
         world.setBlock(x + 6, y + 1, z + 2, Blocks.air, 0, 3);
         world.setBlock(x + 7, y + 1, z + 2, Blocks.air, 0, 3);
@@ -518,10 +518,10 @@ public class HellBoatWorldGen extends WorldGenerator {
         world.setBlock(x + 6, y + 2, z + 1, Blocks.nether_brick, 0, 3);
         world.setBlock(x + 7, y + 2, z + 1, Blocks.nether_brick, 0, 3);
         world.setBlock(x + 8, y + 2, z + 1, Blocks.nether_brick, 0, 3);
-        world.setBlock(x + 9, y + 2, z + 1, FABlockRegistry.ancientGlass, 0, 3);
-        world.setBlock(x + 10, y + 2, z + 1, FABlockRegistry.ancientGlass, 0, 3);
-        world.setBlock(x + 11, y + 2, z + 1, FABlockRegistry.ancientGlass, 0, 3);
-        world.setBlock(x + 12, y + 2, z + 1, FABlockRegistry.ancientGlass, 0, 3);
+        world.setBlock(x + 9, y + 2, z + 1, FABlockRegistry.INSTANCE.ancientGlass, 0, 3);
+        world.setBlock(x + 10, y + 2, z + 1, FABlockRegistry.INSTANCE.ancientGlass, 0, 3);
+        world.setBlock(x + 11, y + 2, z + 1, FABlockRegistry.INSTANCE.ancientGlass, 0, 3);
+        world.setBlock(x + 12, y + 2, z + 1, FABlockRegistry.INSTANCE.ancientGlass, 0, 3);
         world.setBlock(x + 13, y + 2, z + 1, Blocks.nether_brick, 0, 3);
         world.setBlock(x + 14, y + 2, z + 1, Blocks.nether_brick, 0, 3);
         world.setBlock(x + 15, y + 2, z + 1, Blocks.nether_brick, 0, 3);
@@ -563,7 +563,7 @@ public class HellBoatWorldGen extends WorldGenerator {
         world.setBlock(x + 9, y + 2, z + 3, Blocks.air, 0, 3);
         world.setBlock(x + 10, y + 2, z + 3, Blocks.air, 0, 3);
         world.setBlock(x + 11, y + 2, z + 3, Blocks.air, 0, 3);
-        world.setBlock(x + 12, y + 2, z + 3, FABlockRegistry.skullLantern, 1, 3);
+        world.setBlock(x + 12, y + 2, z + 3, FABlockRegistry.INSTANCE.skullLantern, 1, 3);
         world.setBlock(x + 13, y + 2, z + 3, Blocks.air, 0, 3);
         world.setBlock(x + 14, y + 2, z + 3, Blocks.air, 0, 3);
         world.setBlock(x + 15, y + 2, z + 3, Blocks.iron_bars, 0, 3);
@@ -619,7 +619,7 @@ public class HellBoatWorldGen extends WorldGenerator {
         world.setBlock(x + 20, y + 2, z + 5, Blocks.air, 0, 3);
         world.setBlock(x + 21, y + 2, z + 5, Blocks.air, 0, 3);
         world.setBlock(x + 22, y + 2, z + 5, Blocks.air, 0, 3);
-        world.setBlock(x + 23, y + 2, z + 5, FABlockRegistry.skullLantern, 1, 3);
+        world.setBlock(x + 23, y + 2, z + 5, FABlockRegistry.INSTANCE.skullLantern, 1, 3);
         world.setBlock(x + 24, y + 2, z + 5, Blocks.nether_brick, 0, 3);
         world.setBlock(x + 25, y + 2, z + 5, Blocks.nether_brick, 0, 3);
         world.setBlock(x + 26, y + 2, z + 5, Blocks.nether_brick, 0, 3);
@@ -634,7 +634,7 @@ public class HellBoatWorldGen extends WorldGenerator {
         world.setBlock(x + 9, y + 2, z + 6, Blocks.air, 0, 3);
         world.setBlock(x + 10, y + 2, z + 6, Blocks.air, 0, 3);
         world.setBlock(x + 11, y + 2, z + 6, Blocks.air, 0, 3);
-        world.setBlock(x + 12, y + 2, z + 6, FABlockRegistry.skullLantern, 1, 3);
+        world.setBlock(x + 12, y + 2, z + 6, FABlockRegistry.INSTANCE.skullLantern, 1, 3);
         world.setBlock(x + 13, y + 2, z + 6, Blocks.air, 0, 3);
         world.setBlock(x + 14, y + 2, z + 6, Blocks.air, 0, 3);
         world.setBlock(x + 15, y + 2, z + 6, Blocks.double_stone_slab, 0, 3);
@@ -696,10 +696,10 @@ public class HellBoatWorldGen extends WorldGenerator {
         world.setBlock(x + 6, y + 2, z + 9, Blocks.nether_brick, 0, 3);
         world.setBlock(x + 7, y + 2, z + 9, Blocks.nether_brick, 0, 3);
         world.setBlock(x + 8, y + 2, z + 9, Blocks.nether_brick, 0, 3);
-        world.setBlock(x + 9, y + 2, z + 9, FABlockRegistry.ancientGlass, 0, 3);
-        world.setBlock(x + 10, y + 2, z + 9, FABlockRegistry.ancientGlass, 0, 3);
-        world.setBlock(x + 11, y + 2, z + 9, FABlockRegistry.ancientGlass, 0, 3);
-        world.setBlock(x + 12, y + 2, z + 9, FABlockRegistry.ancientGlass, 0, 3);
+        world.setBlock(x + 9, y + 2, z + 9, FABlockRegistry.INSTANCE.ancientGlass, 0, 3);
+        world.setBlock(x + 10, y + 2, z + 9, FABlockRegistry.INSTANCE.ancientGlass, 0, 3);
+        world.setBlock(x + 11, y + 2, z + 9, FABlockRegistry.INSTANCE.ancientGlass, 0, 3);
+        world.setBlock(x + 12, y + 2, z + 9, FABlockRegistry.INSTANCE.ancientGlass, 0, 3);
         world.setBlock(x + 13, y + 2, z + 9, Blocks.nether_brick, 0, 3);
         world.setBlock(x + 14, y + 2, z + 9, Blocks.nether_brick, 0, 3);
         world.setBlock(x + 15, y + 2, z + 9, Blocks.nether_brick, 0, 3);
@@ -941,7 +941,7 @@ public class HellBoatWorldGen extends WorldGenerator {
         world.setBlock(x + 22, y + 4, z + 4, Blocks.obsidian, 0, 3);
         world.setBlock(x + 2, y + 4, z + 5, Blocks.obsidian, 0, 3);
         world.setBlock(x + 3, y + 4, z + 5, Blocks.obsidian, 0, 3);
-        world.setBlock(x + 11, y + 4, z + 5, FABlockRegistry.anuTotem, 5, 3);
+        world.setBlock(x + 11, y + 4, z + 5, FABlockRegistry.INSTANCE.anuTotem, 5, 3);
         world.setBlock(x + 15, y + 4, z + 5, Blocks.obsidian, 0, 3);
         world.setBlock(x + 22, y + 4, z + 5, Blocks.obsidian, 0, 3);
         world.setBlock(x + 23, y + 4, z + 5, Blocks.obsidian, 0, 3);

@@ -37,7 +37,7 @@ public class EventOverlay {
         if (Minecraft.getMinecraft().gameSettings.thirdPersonView == 0) {
             if (Minecraft.getMinecraft().thePlayer.getCurrentArmor(3) != null) {
                 if (Minecraft.getMinecraft().thePlayer.getCurrentArmor(3).getItem() != null) {
-                    if (Minecraft.getMinecraft().thePlayer.getCurrentArmor(3).getItem() == FAItemRegistry.skullHelmet) {
+                    if (Minecraft.getMinecraft().thePlayer.getCurrentArmor(3).getItem() == FAItemRegistry.INSTANCE.skullHelmet) {
                         GL11.glPushMatrix();
                         GL11.glDisable(GL11.GL_ALPHA_TEST);
                         GL11.glDepthMask(true);
@@ -59,7 +59,7 @@ public class EventOverlay {
         if (Minecraft.getMinecraft().gameSettings.thirdPersonView == 0) {
             if (Minecraft.getMinecraft().thePlayer.getCurrentArmor(3) != null) {
                 if (Minecraft.getMinecraft().thePlayer.getCurrentArmor(3).getItem() != null) {
-                    if (Minecraft.getMinecraft().thePlayer.getCurrentArmor(3).getItem() == FAItemRegistry.ancienthelmet) {
+                    if (Minecraft.getMinecraft().thePlayer.getCurrentArmor(3).getItem() == FAItemRegistry.INSTANCE.ancienthelmet) {
                         GL11.glPushMatrix();
                         GL11.glDisable(GL11.GL_ALPHA_TEST);
                         GL11.glDepthMask(true);

@@ -47,7 +47,7 @@ public class EntityCoelacanth extends EntityFishBase {
 
     @Override
     public Item getItem() {
-        return FAItemRegistry.livingCoelacanth;
+        return FAItemRegistry.INSTANCE.livingCoelacanth;
     }
 
 }

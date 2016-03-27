@@ -33,7 +33,7 @@ public class BlockStrongGlass extends Block {
         this.setBlockName("strongGlass");
         this.setHardness(3F);
         this.setResistance(25F);
-        this.setCreativeTab(FATabRegistry.tabFBlocks);
+        this.setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
     }
 
     @Override

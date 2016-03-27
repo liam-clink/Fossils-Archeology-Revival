@@ -23,13 +23,13 @@ public class PickupHandler {
         if (EnumPrehistoric.isDNA(event.smelting.getItem())) {
             event.player.addStat(FossilAchievementHandler.dinoDna, 1);
         }
-        if (event.smelting.getItem() == FAItemRegistry.stoneboard) {
+        if (event.smelting.getItem() == FAItemRegistry.INSTANCE.stoneboard) {
             event.player.addStat(FossilAchievementHandler.tablet, 1);
         }
-        if (event.smelting.getItem() == FAItemRegistry.fossilSeed || event.smelting.getItem() == FAItemRegistry.fossilSeed_fern) {
+        if (event.smelting.getItem() == FAItemRegistry.INSTANCE.fossilSeed || event.smelting.getItem() == FAItemRegistry.INSTANCE.fossilSeed_fern) {
             event.player.addStat(FossilAchievementHandler.fossilSeeds, 1);
         }
-        if (event.smelting.getItem() == FAItemRegistry.failuresaurusFlesh) {
+        if (event.smelting.getItem() == FAItemRegistry.INSTANCE.failuresaurusFlesh) {
             event.player.addStat(FossilAchievementHandler.failuresaurusAnalyzer, 1);
         }
 
@@ -47,15 +47,15 @@ public class PickupHandler {
 
 
         //Workbench Achievements
-        if (event.smelting.getItem() == FAItemRegistry.ancientSword) {
+        if (event.smelting.getItem() == FAItemRegistry.INSTANCE.ancientSword) {
             event.player.addStat(FossilAchievementHandler.fixedSword, 1);
         }
-        if (event.smelting.getItem() == FAItemRegistry.ancienthelmet) {
+        if (event.smelting.getItem() == FAItemRegistry.INSTANCE.ancienthelmet) {
             event.player.addStat(FossilAchievementHandler.fixedHelmet, 1);
         }
-        if (event.smelting.getItem() == Item.getItemFromBlock(FABlockRegistry.vaseAmphoraBlock)
-                || event.smelting.getItem() == Item.getItemFromBlock(FABlockRegistry.vaseKylixBlock)
-                || event.smelting.getItem() == Item.getItemFromBlock(FABlockRegistry.vaseVoluteBlock)) {
+        if (event.smelting.getItem() == Item.getItemFromBlock(FABlockRegistry.INSTANCE.vaseAmphoraBlock)
+                || event.smelting.getItem() == Item.getItemFromBlock(FABlockRegistry.INSTANCE.vaseKylixBlock)
+                || event.smelting.getItem() == Item.getItemFromBlock(FABlockRegistry.INSTANCE.vaseVoluteBlock)) {
             event.player.addStat(FossilAchievementHandler.fixedVase, 1);
         }
     }

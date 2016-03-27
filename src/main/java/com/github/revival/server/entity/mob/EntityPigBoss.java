@@ -261,7 +261,7 @@ public class EntityPigBoss extends EntityMob implements IBossDisplayData, IRange
                             return super.attackEntityFrom(damageSource, var2);
                         }
                     } else {
-                        if (itemstack.getItem() == FAItemRegistry.ancientSword && this.getAttackMode() != 0) {
+                        if (itemstack.getItem() == FAItemRegistry.INSTANCE.ancientSword && this.getAttackMode() != 0) {
 
                             if (!this.worldObj.isRemote) {
                                 Revival.showMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " +
@@ -274,7 +274,7 @@ public class EntityPigBoss extends EntityMob implements IBossDisplayData, IRange
                         }
 
 
-                        if (itemstack.getItem() != FAItemRegistry.ancientSword && itemstack.getItem() instanceof ItemSword && this.getAttackMode() != 0) {
+                        if (itemstack.getItem() != FAItemRegistry.INSTANCE.ancientSword && itemstack.getItem() instanceof ItemSword && this.getAttackMode() != 0) {
 
                             if (!this.worldObj.isRemote) {
                                 Revival.showMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " +
@@ -534,7 +534,7 @@ public class EntityPigBoss extends EntityMob implements IBossDisplayData, IRange
 
     public ItemStack getHeldItem() {
         if (this.getAttackMode() == Melee) {
-            return new ItemStack(FAItemRegistry.ancientSword);
+            return new ItemStack(FAItemRegistry.INSTANCE.ancientSword);
         }
         return defaultHeldItem;
     }
@@ -719,7 +719,7 @@ public class EntityPigBoss extends EntityMob implements IBossDisplayData, IRange
         par1EntityLivingData = super.onSpawnWithEgg(par1EntityLivingData);
 
         this.tasks.addTask(4, this.aiAttackOnCollide);
-        this.setCurrentItemOrArmor(0, new ItemStack(FAItemRegistry.ancientSword));
+        this.setCurrentItemOrArmor(0, new ItemStack(FAItemRegistry.INSTANCE.ancientSword));
         this.tasks.addTask(4, this.aiArrowAttack);
         this.enchantEquipment();
 

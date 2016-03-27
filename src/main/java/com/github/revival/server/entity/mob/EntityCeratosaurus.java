@@ -165,7 +165,7 @@ public class EntityCeratosaurus extends EntityNewPrehistoric {
 
 	public boolean attackEntityAsMob(Entity entity)
 	{
-		if(this.getAnimation() == animation_none){
+		if(this.getAnimation() == NO_ANIMATION){
 			this.setAnimation(animation_attack);
 			return false;
 		}

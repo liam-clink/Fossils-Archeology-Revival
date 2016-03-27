@@ -21,7 +21,7 @@ public class BioFossilItem extends Item {
         maxStackSize = 64;
         setMaxDamage(0);
         setUnlocalizedName(LocalizationStrings.BIO_FOSSIL_NAME);
-        setCreativeTab(FATabRegistry.tabFItems);
+        setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
     }
 
 

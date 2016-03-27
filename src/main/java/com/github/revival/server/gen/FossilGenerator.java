@@ -25,22 +25,22 @@ public class FossilGenerator implements IWorldGenerator {
 
     private void generateSurface(World world, Random random, int blockX,
                                  int blockZ) {
-        if (FossilConfig.genFossils == true) {
+        if (FossilConfig.generateFossils == true) {
             for (int i = 0; i < 38; i++) {
                 int Xcoord = blockX + random.nextInt(16);
                 int Ycoord = random.nextInt(100);
                 int Zcoord = blockZ + random.nextInt(16);
-                (new WorldGenMinable(FABlockRegistry.blockFossil, 5 + random.nextInt(6)))
+                (new WorldGenMinable(FABlockRegistry.INSTANCE.blockFossil, 5 + random.nextInt(6)))
                         .generate(world, random, Xcoord, Ycoord, Zcoord);
             }
         }
 
-        if (FossilConfig.genPermafrost == true) {
+        if (FossilConfig.generatePermafrost == true) {
             for (int i = 0; i < 8; i++) {
                 int Xcoord = blockX + random.nextInt(16);
                 int Ycoord = random.nextInt(30);
                 int Zcoord = blockZ + random.nextInt(16);
-                (new WorldGenMinable(FABlockRegistry.blockPermafrost, 2 + random.nextInt(4)))
+                (new WorldGenMinable(FABlockRegistry.INSTANCE.blockPermafrost, 2 + random.nextInt(4)))
                         .generate(world, random, Xcoord, Ycoord, Zcoord);
             }
         }

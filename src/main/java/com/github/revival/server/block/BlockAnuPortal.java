@@ -44,9 +44,9 @@ public class BlockAnuPortal extends Block {
             EntityPlayerMP thePlayer = (EntityPlayerMP) entity;
             if (thePlayer.timeUntilPortal > 0) {
                 thePlayer.timeUntilPortal = 10;
-            } else if (thePlayer.dimension != FossilConfig.dimIdDarknessLair) {
+            } else if (thePlayer.dimension != FossilConfig.dimensionIDDarknessLair) {
                 thePlayer.timeUntilPortal = 10;
-                thePlayer.mcServer.getConfigurationManager().transferPlayerToDimension(thePlayer, FossilConfig.dimIdDarknessLair, new AnuTeleporter(thePlayer.mcServer.worldServerForDimension(FossilConfig.dimIdDarknessLair)));
+                thePlayer.mcServer.getConfigurationManager().transferPlayerToDimension(thePlayer, FossilConfig.dimensionIDDarknessLair, new AnuTeleporter(thePlayer.mcServer.worldServerForDimension(FossilConfig.dimensionIDDarknessLair)));
             } else {
                 thePlayer.timeUntilPortal = 10;
                 thePlayer.mcServer.getConfigurationManager().transferPlayerToDimension(thePlayer, 0, new AnuTeleporter(thePlayer.mcServer.worldServerForDimension(0)));

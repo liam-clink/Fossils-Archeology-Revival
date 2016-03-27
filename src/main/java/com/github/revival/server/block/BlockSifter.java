@@ -44,7 +44,7 @@ public class BlockSifter extends BlockContainer {
             setBlockName(LocalizationStrings.BLOCK_SIFTER_ACTIVE);
         } else {
             setBlockName(LocalizationStrings.BLOCK_SIFTER_IDLE);
-            setCreativeTab(FATabRegistry.tabFBlocks);
+            setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
         }
     }
 
@@ -59,9 +59,9 @@ public class BlockSifter extends BlockContainer {
         keepFurnaceInventory = true;
 
         if (isActive) {
-            world.setBlock(x, y, z, FABlockRegistry.blockSifterActive);
+            world.setBlock(x, y, z, FABlockRegistry.INSTANCE.blockSifterActive);
         } else {
-            world.setBlock(x, y, z, FABlockRegistry.blockSifterIdle);
+            world.setBlock(x, y, z, FABlockRegistry.INSTANCE.blockSifterIdle);
         }
 
         keepFurnaceInventory = false;
@@ -302,6 +302,6 @@ public class BlockSifter extends BlockContainer {
      * only called by clickMiddleMouseButton , and passed to inventory.setCurrentItem (along with isCreative)
      */
     public Item getItem(World world, int x, int y, int z) {
-        return Item.getItemFromBlock(FABlockRegistry.blockSifterIdle);
+        return Item.getItemFromBlock(FABlockRegistry.INSTANCE.blockSifterIdle);
     }
 }

@@ -11,7 +11,7 @@ public class DominicanAmberItem extends Item {
 
     public DominicanAmberItem() {
         setUnlocalizedName(LocalizationStrings.DOMINICAN_AMBER_NAME);
-        setCreativeTab(FATabRegistry.tabFItems);
+        setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
     }
 
     @SideOnly(Side.CLIENT)

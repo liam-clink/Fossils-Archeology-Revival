@@ -118,7 +118,7 @@ public class TileEntityAncientChest extends TileEntity {
             }
             if (chestLidCounter == 91) {
                 this.setChestState(3);
-                EntityItem item = new EntityItem(this.worldObj, this.xCoord + 0.5, this.yCoord + 1, this.zCoord + 0.5, new ItemStack(FAItemRegistry.ancientClock));
+                EntityItem item = new EntityItem(this.worldObj, this.xCoord + 0.5, this.yCoord + 1, this.zCoord + 0.5, new ItemStack(FAItemRegistry.INSTANCE.ancientClock));
                 if (!worldObj.isRemote) {
                     this.worldObj.spawnEntityInWorld(item);
                     item.motionX = 0D;

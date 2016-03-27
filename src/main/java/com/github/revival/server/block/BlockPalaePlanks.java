@@ -13,7 +13,7 @@ public class BlockPalaePlanks extends Block {
         setResistance(5.0F);
         setStepSound(Block.soundTypeWood);
         setBlockName(LocalizationStrings.PALAE_PLANKS_NAME);
-        this.setCreativeTab(FATabRegistry.tabFBlocks);
+        this.setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
     }
 
     @Override

@@ -16,11 +16,11 @@ public class FemursItem extends ItemArmor {
     }
 
     public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
-        if (stack.getItem() == FAItemRegistry.skullHelmet || stack.getItem() == FAItemRegistry.ribCage || stack.getItem() == FAItemRegistry.feet) {
+        if (stack.getItem() == FAItemRegistry.INSTANCE.skullHelmet || stack.getItem() == FAItemRegistry.INSTANCE.ribCage || stack.getItem() == FAItemRegistry.INSTANCE.feet) {
             return "fossil:textures/armor/bone_1.png";
         }
 
-        if (stack.getItem() == FAItemRegistry.femurs) {
+        if (stack.getItem() == FAItemRegistry.INSTANCE.femurs) {
             return "fossil:textures/armor/bone_2.png";
         }
 

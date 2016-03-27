@@ -110,7 +110,7 @@ public class TileEntityDrum extends TileEntity {
         // (double)(this.Order.ordinal()/*ToInt()
         // - 1*/)));
 
-        if (item != FAItemRegistry.skullStick) // That is treated specially ;)
+        if (item != FAItemRegistry.INSTANCE.skullStick) // That is treated specially ;)
         {
             for (int i = 0; i < EnumPrehistoric.values().length; ++i) {
                 if (EnumPrehistoric.values()[i].orderItem != null

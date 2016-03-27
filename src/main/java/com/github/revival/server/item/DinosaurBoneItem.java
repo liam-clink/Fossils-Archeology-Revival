@@ -23,7 +23,7 @@ public class DinosaurBoneItem extends Item {
         this.itemType = _itemType;
         setMaxDamage(0);
 
-        this.setCreativeTab(FATabRegistry.tabFItems);
+        this.setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
         setHasSubtypes(true);
     }
 

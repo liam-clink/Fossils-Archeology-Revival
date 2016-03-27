@@ -16,7 +16,7 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 public class FossilClientEvents {
 	@SubscribeEvent
 	public void onBlockOverlay(RenderBlockOverlayEvent e){
-		if(e.player.worldObj.getBlock(e.blockX, e.blockY, e.blockZ) == FABlockRegistry.tar){
+		if(e.player.worldObj.getBlock(e.blockX, e.blockY, e.blockZ) == FABlockRegistry.INSTANCE.tar){
 			e.setCanceled(true);
 			Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation("fossil:textures/blocks/tar.png"));
 	        Tessellator tessellator = Tessellator.instance;

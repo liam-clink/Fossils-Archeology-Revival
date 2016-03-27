@@ -32,7 +32,7 @@ public class BlockAncientWoodSlab extends BlockSlab {
             setBlockName(LocalizationStrings.ANCIENT_WOOD_DOUBLESLAB_NAME);
         } else {
             setBlockName(LocalizationStrings.ANCIENT_WOOD_SINGLESLAB_NAME);
-            setCreativeTab(FATabRegistry.tabFBlocks);
+            setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
         }
     }
 
@@ -47,23 +47,23 @@ public class BlockAncientWoodSlab extends BlockSlab {
     }
 
     public Item getItemDropped(int var1, Random rand, int var3) {
-        return Item.getItemFromBlock(FABlockRegistry.ancientWoodSingleSlab);
+        return Item.getItemFromBlock(FABlockRegistry.INSTANCE.ancientWoodSingleSlab);
     }
 
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving placer) {
-        if (world.getBlock(x, y - 1, z) == FABlockRegistry.ancientWoodSingleSlab) {
+        if (world.getBlock(x, y - 1, z) == FABlockRegistry.INSTANCE.ancientWoodSingleSlab) {
             world.setBlock(x, y, z, Blocks.air, 0, 2);
-            world.setBlock(x, y - 1, z, FABlockRegistry.ancientWoodDoubleSlab);
+            world.setBlock(x, y - 1, z, FABlockRegistry.INSTANCE.ancientWoodDoubleSlab);
         }
 
-        if (world.getBlock(x, y + 1, z) == FABlockRegistry.ancientWoodSingleSlab) {
+        if (world.getBlock(x, y + 1, z) == FABlockRegistry.INSTANCE.ancientWoodSingleSlab) {
             world.setBlock(x, y, z, Blocks.air, 0, 2);
-            world.setBlock(x, y + 1, z, FABlockRegistry.ancientWoodDoubleSlab);
+            world.setBlock(x, y + 1, z, FABlockRegistry.INSTANCE.ancientWoodDoubleSlab);
         }
     }
 
     protected ItemStack createStackedBlock(int meta) {
-        return new ItemStack(FABlockRegistry.ancientWoodSingleSlab, 2, meta & 7);
+        return new ItemStack(FABlockRegistry.INSTANCE.ancientWoodSingleSlab, 2, meta & 7);
     }
 
     public String func_150002_b(int meta) {
@@ -75,7 +75,7 @@ public class BlockAncientWoodSlab extends BlockSlab {
     }
 
     public void getSubBlocks(Item item, CreativeTabs tab, List subBlocks) {
-        if (item != Item.getItemFromBlock(FABlockRegistry.ancientWoodDoubleSlab)) {
+        if (item != Item.getItemFromBlock(FABlockRegistry.INSTANCE.ancientWoodDoubleSlab)) {
             subBlocks.add(new ItemStack(item, 1, 0));
         }
     }

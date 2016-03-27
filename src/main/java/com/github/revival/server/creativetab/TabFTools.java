@@ -14,7 +14,7 @@ public class TabFTools extends CreativeTabs {
 
     @SideOnly(Side.CLIENT)
     public Item getTabIconItem() {
-        return FAItemRegistry.gemHoe;
+        return FAItemRegistry.INSTANCE.gemHoe;
     }
 
     public String getTranslatedTabLabel() {

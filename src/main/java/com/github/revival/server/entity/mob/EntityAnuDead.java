@@ -52,9 +52,9 @@ public class EntityAnuDead extends EntityLiving {
 
             if (thePlayer.timeUntilPortal > 0) {
                 thePlayer.timeUntilPortal = 10;
-            } else if (thePlayer.dimension != FossilConfig.dimIdTreasure) {
+            } else if (thePlayer.dimension != FossilConfig.dimensionIDTreasure) {
                 thePlayer.timeUntilPortal = 10;
-                thePlayer.mcServer.getConfigurationManager().transferPlayerToDimension(thePlayer, FossilConfig.dimIdTreasure, new AnuTeleporter(thePlayer.mcServer.worldServerForDimension(FossilConfig.dimIdTreasure)));
+                thePlayer.mcServer.getConfigurationManager().transferPlayerToDimension(thePlayer, FossilConfig.dimensionIDTreasure, new AnuTeleporter(thePlayer.mcServer.worldServerForDimension(FossilConfig.dimensionIDTreasure)));
             } else {
                 thePlayer.timeUntilPortal = 10;
                 thePlayer.mcServer.getConfigurationManager().transferPlayerToDimension(thePlayer, 0, new AnuTeleporter(thePlayer.mcServer.worldServerForDimension(0)));

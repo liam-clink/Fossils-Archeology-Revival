@@ -33,7 +33,7 @@ public class TarGenerator implements IWorldGenerator {
                 int l = i + random.nextInt(9);
                 int i1 = random.nextInt(128);
                 int j1 = j + random.nextInt(9);
-                (new TarPitWorldGen(FABlockRegistry.tar)).generate(world, random, l, i1,
+                (new TarPitWorldGen(FABlockRegistry.INSTANCE.tar)).generate(world, random, l, i1,
                         j1);
             }
         }

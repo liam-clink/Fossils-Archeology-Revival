@@ -20,7 +20,7 @@ public class BlockIcedStone extends Block {
         setResistance(10.0F);
         setStepSound(Block.soundTypeStone);
         setBlockName(LocalizationStrings.BLOCK_ICEDSTONE_NAME);
-        setCreativeTab(FATabRegistry.tabFBlocks);
+        setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
     }
 
     /**

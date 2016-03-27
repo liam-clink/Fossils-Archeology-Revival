@@ -33,7 +33,7 @@ public class BlockAncientGlass extends Block {
         this.setBlockName(LocalizationStrings.ANCIENT_GLASS_NAME);
         this.setStepSound(soundTypeGlass);
         this.setHardness(1F);
-        this.setCreativeTab(FATabRegistry.tabFBlocks);
+        this.setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
     }
 
     public boolean shouldSideBeRendered(IBlockAccess world, int x, int y, int z, int side) {

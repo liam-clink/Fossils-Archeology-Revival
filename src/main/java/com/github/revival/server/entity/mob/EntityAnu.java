@@ -109,7 +109,7 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
 
                         if (itemstack != null) {
                             if (itemstack.getItem() != null) {
-                                if (itemstack.getItem() == FAItemRegistry.ancientSword) {
+                                if (itemstack.getItem() == FAItemRegistry.INSTANCE.ancientSword) {
 
                                     if (!this.worldObj.isRemote) {
                                         Revival.showMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " +
@@ -120,7 +120,7 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
                                 }
 
 
-                                if (itemstack.getItem() != FAItemRegistry.ancientSword && itemstack.getItem() instanceof ItemSword) {
+                                if (itemstack.getItem() != FAItemRegistry.INSTANCE.ancientSword && itemstack.getItem() instanceof ItemSword) {
 
                                     if (!this.worldObj.isRemote) {
                                         Revival.showMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " +
@@ -240,7 +240,7 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
     }
 
     protected void dropFewItems(boolean par1, int par2) {
-        this.dropItem(FAItemRegistry.ancientKey, 1);
+        this.dropItem(FAItemRegistry.INSTANCE.ancientKey, 1);
     }
 
     public void onLivingUpdate() {
@@ -443,12 +443,12 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
     }
 
     public ItemStack getHeldItem() {
-        return new ItemStack(FAItemRegistry.ancientSword);
+        return new ItemStack(FAItemRegistry.INSTANCE.ancientSword);
     }
 
     public void initializeMob() {
         this.setAttackMode(0);
-        this.setCurrentItemOrArmor(0, new ItemStack(FAItemRegistry.ancientSword));
+        this.setCurrentItemOrArmor(0, new ItemStack(FAItemRegistry.INSTANCE.ancientSword));
         this.enchantEquipment();
         EntityPlayer entityplayer = this.worldObj.getClosestPlayer(posX, posY, posZ, 100F);
 

@@ -39,7 +39,7 @@ public class TileEntityCultivate extends TileEntity implements IInventory,
         if (itemstack != null) {
             Item output = itemstack.getItem();
 
-            if (output == FAItemRegistry.biofossil) {
+            if (output == FAItemRegistry.INSTANCE.biofossil) {
                 return 300;
             }
 
@@ -291,7 +291,7 @@ public class TileEntityCultivate extends TileEntity implements IInventory,
             this.markDirty();
         }
         if (this.furnaceCookTime == 3001 && (new Random()).nextInt(100) < 20) {
-            ((BlockCultivate) FABlockRegistry.blockcultivateIdle).onBlockRemovalLost(this.worldObj, this.xCoord, this.yCoord, this.zCoord, true);
+            ((BlockCultivate) FABlockRegistry.INSTANCE.blockcultivateIdle).onBlockRemovalLost(this.worldObj, this.xCoord, this.yCoord, this.zCoord, true);
         }
     }
 
@@ -351,19 +351,19 @@ public class TileEntityCultivate extends TileEntity implements IInventory,
     }
 
     private ItemStack CheckSmelt(ItemStack itemstack) {
-        if (itemstack.getItem() == FAItemRegistry.fossilSeed_fern) {
-            return new ItemStack(FAItemRegistry.fernSeed, 1);
+        if (itemstack.getItem() == FAItemRegistry.INSTANCE.fossilSeed_fern) {
+            return new ItemStack(FAItemRegistry.INSTANCE.fernSeed, 1);
         }
-        if (itemstack.getItem() == FAItemRegistry.palaeSaplingFossil) {
-            return new ItemStack(FABlockRegistry.palmSap, 1);
+        if (itemstack.getItem() == FAItemRegistry.INSTANCE.palaeSaplingFossil) {
+            return new ItemStack(FABlockRegistry.INSTANCE.palmSap, 1);
         }
-        if (itemstack.getItem() == FAItemRegistry.fossilSeed) {
-            return new ItemStack(FAItemRegistry.seed, 1, itemstack.getItemDamage());
+        if (itemstack.getItem() == FAItemRegistry.INSTANCE.fossilSeed) {
+            return new ItemStack(FAItemRegistry.INSTANCE.seed, 1, itemstack.getItemDamage());
         }
 
-       /* if (itemstack.getItem() == FAItemRegistry.dnaTerrorBird)
+       /* if (itemstack.getItem() == FAItemRegistry.INSTANCE.dnaTerrorBird)
         {
-            return new ItemStack(FAItemRegistry.cultivatedTerrorBirdEgg, 1,
+            return new ItemStack(FAItemRegistry.INSTANCE.cultivatedTerrorBirdEgg, 1,
                     new Random().nextInt(EntityTerrorBird.names.length));
         }*/
 
@@ -379,9 +379,9 @@ public class TileEntityCultivate extends TileEntity implements IInventory,
             return new ItemStack(EnumPrehistoric.getBestBirdEgg(itemstack.getItem()), 1);
         }
 
-       /* if (itemstack.getItem() == FAItemRegistry.dnaCoelacanth)
+       /* if (itemstack.getItem() == FAItemRegistry.INSTANCE.dnaCoelacanth)
         {
-            return new ItemStack(FAItemRegistry.livingCoelacanth, 1,
+            return new ItemStack(FAItemRegistry.INSTANCE.livingCoelacanth, 1,
                     new Random().nextInt(LivingCoelacanthItem.names.length));
         }*/
 
@@ -483,7 +483,7 @@ public class TileEntityCultivate extends TileEntity implements IInventory,
                 if (this.getStackInSlot(0).getItem() == EnumPrehistoric.Coelacanth.DNAItem) {
                     return 1;
                 }
-                if (this.getStackInSlot(0).getItem() == FAItemRegistry.fossilSeed_fern || this.getStackInSlot(0).getItem() == FAItemRegistry.palaeSaplingFossil || this.getStackInSlot(0).getItem() == FAItemRegistry.fossilSeed) {
+                if (this.getStackInSlot(0).getItem() == FAItemRegistry.INSTANCE.fossilSeed_fern || this.getStackInSlot(0).getItem() == FAItemRegistry.INSTANCE.palaeSaplingFossil || this.getStackInSlot(0).getItem() == FAItemRegistry.INSTANCE.fossilSeed) {
                     return 2;
                 }
 

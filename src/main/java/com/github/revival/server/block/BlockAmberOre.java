@@ -14,7 +14,7 @@ import java.util.Random;
 public class BlockAmberOre extends Block {
     public BlockAmberOre() {
         super(Material.rock);
-        this.setCreativeTab(FATabRegistry.tabFBlocks);
+        this.setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
         setHardness(3.0F);
         setBlockName(LocalizationStrings.AMBER_ORE_NAME);
     }
@@ -23,14 +23,14 @@ public class BlockAmberOre extends Block {
      * Returns the ID of the items to drop on destruction.
      */
     public Item getItemDropped(int var1, Random rand, int var3) {
-        return this == FABlockRegistry.amberOre ? FAItemRegistry.amber : Item.getItemFromBlock(this);
+        return this == FABlockRegistry.INSTANCE.amberOre ? FAItemRegistry.INSTANCE.amber : Item.getItemFromBlock(this);
     }
 
     /**
      * Returns the quantity of items to drop on block destruction.
      */
     public int quantityDropped(Random par1Random) {
-        return this == FABlockRegistry.amberOre ? 2 + par1Random.nextInt(2) : 1;
+        return this == FABlockRegistry.INSTANCE.amberOre ? 2 + par1Random.nextInt(2) : 1;
     }
 
     /**
@@ -59,7 +59,7 @@ public class BlockAmberOre extends Block {
         if (this.getItemDropped(par5, world.rand, par7) != Item.getItemFromBlock(this)) {
             int j1 = 0;
 
-            if (this == FABlockRegistry.amberOre) {
+            if (this == FABlockRegistry.INSTANCE.amberOre) {
                 j1 = 1;
             }
 
@@ -71,7 +71,7 @@ public class BlockAmberOre extends Block {
      * Determines the damage on the item the block drops. Used in cloth and wood.
      */
     public int damageDropped(int damage) {
-        return this == FABlockRegistry.amberOre ? 4 : 0;
+        return this == FABlockRegistry.INSTANCE.amberOre ? 4 : 0;
     }
 
     public void registerBlockIcons(IIconRegister iconRegistry) {

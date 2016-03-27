@@ -16,7 +16,7 @@ public class StoneBoardItem extends Item {
     public StoneBoardItem() {
         this.setCreativeTab(CreativeTabs.tabDecorations);
         setUnlocalizedName(LocalizationStrings.TABLET_NAME);
-        setCreativeTab(FATabRegistry.tabFItems);
+        setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
     }
 
     public boolean onItemUse(ItemStack var1, EntityPlayer var2, World world, int x, int y, int z, int direction, float par8, float par9, float par10) {

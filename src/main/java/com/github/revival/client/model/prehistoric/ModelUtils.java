@@ -1,88 +1,109 @@
 package com.github.revival.client.model.prehistoric;
 
-import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelRenderer;
-import net.ilexiconn.llibrary.common.animation.Animator;
+import net.ilexiconn.llibrary.client.model.ModelAnimator;
+import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.minecraft.client.model.ModelRenderer;
 
-import java.util.Iterator;
-import java.util.List;
+import java.lang.reflect.Field;
 
 public class ModelUtils {
 
-    public static void animateOrSetRotation(Animator animator, boolean animate, MowzieModelRenderer part, float x, float y, float z, boolean override) {
-        if (animate) {
-            if (override) {
-                animator.rotate(part, -part.initRotateAngleX, -part.initRotateAngleY, -part.initRotateAngleZ);
-            } else {
-                animator.rotate(part, x, y, z);
-            }
-        } else {
-            ModelUtils.setRotateAngle(part, x, y, z);
-        }
-    }
-
-    public static void animateToPos(Animator animator, boolean animate, MowzieModelRenderer part, float x, float y, float z, boolean override) {
-        if (animate) {
-            if (override) {
-                animator.move(part, x, y, z);
-
-            } else {
-                animator.move(part, x == 0 ? 0 : x - part.initRotationPointY, y == 0 ? y : y - part.initRotationPointY, z == 0 ? z : z - part.initRotationPointZ);
-            }
-        }
-    }
-
-    public static void setPos(Animator animator, boolean animate, MowzieModelRenderer part, float x, float y, float z, boolean override) {
-        if (!animate) {
-            if (!override) {
-                part.setRotationPoint(x, y, z);
-            } else {
-                part.setRotationPoint(x == 0 ? 0 : x - part.initRotationPointY, y == 0 ? y : y - part.initRotationPointY, z == 0 ? z : z - part.initRotationPointZ);
-            }
-        }
-    }
-
-    public static void rotate(Animator animator, ModelRenderer box, double x, double y, double z) {
+    public static void rotate(ModelAnimator animator, ModelRenderer box, double x, double y, double z) {
         animator.rotate(box, (float) Math.toRadians(x), (float) Math.toRadians(y), (float) Math.toRadians(z));
     }
 
-    public static void rotateToInit(Animator animator, MowzieModelRenderer box) {
-        animator.rotate(box, box.initRotateAngleX, box.initRotateAngleY, box.initRotateAngleZ);
+    public static void rotateToInit(ModelAnimator animator, AdvancedModelRenderer box) {
+        animator.rotate(box, getDefaultRotationX(box), getDefaultRotationY(box), getDefaultRotationZ(box));
     }
 
-    public static void rotateAllToInit(Animator animator, List boxList) {
-        Iterator itr = boxList.iterator();
-        while (itr.hasNext()) {
-            Object element = itr.next();
-            if (element instanceof MowzieModelRenderer) {
-                MowzieModelRenderer box = (MowzieModelRenderer) element;
-
-                animator.rotate(box, box.rotateAngleX == box.initRotateAngleX ? 0 : box.initRotateAngleX,
-                        box.rotateAngleY == box.initRotateAngleY ? 0 : box.initRotateAngleY,
-                        box.rotateAngleZ == box.initRotateAngleZ ? 0 : box.initRotateAngleZ);
-                animator.move(box, box.rotationPointX == box.initRotationPointX ? 0 : box.initRotationPointX,
-                        box.rotationPointY == box.initRotationPointY ? 0 : box.initRotationPointY,
-                        box.rotationPointZ == box.initRotationPointZ ? 0 : box.initRotationPointZ);
-            }
-        }
-    }
-    
-    public static void faceTargetMod(MowzieModelRenderer part, float f3, float f4, float multi){
+    public static void faceTargetMod(AdvancedModelRenderer part, float f3, float f4, float multi){
     	part.rotateAngleY += f3 / (180F / (float)Math.PI) * multi;
     	part.rotateAngleX += f4 / (180F / (float)Math.PI) * multi;
 
     }
 
-    public static void setRotateAngle(MowzieModelRenderer MowzieModelRenderer, float x, float y, float z) {
-        MowzieModelRenderer.rotateAngleX = x;
-        MowzieModelRenderer.rotateAngleY = y;
-        MowzieModelRenderer.rotateAngleZ = z;
+    public static void setRotateAngle(AdvancedModelRenderer AdvancedModelRenderer, float x, float y, float z) {
+        AdvancedModelRenderer.rotateAngleX = x;
+        AdvancedModelRenderer.rotateAngleY = y;
+        AdvancedModelRenderer.rotateAngleZ = z;
     }
 
-    public static void setRotateAngleAlt(MowzieModelRenderer MowzieModelRenderer, float x, float y, float z) {
-        MowzieModelRenderer.rotateAngleX = (float) Math.toRadians(x);
-        MowzieModelRenderer.rotateAngleY = (float) Math.toRadians(y);
-        MowzieModelRenderer.rotateAngleZ = (float) Math.toRadians(z);
+    public static void setRotateAngleAlt(AdvancedModelRenderer AdvancedModelRenderer, float x, float y, float z) {
+        AdvancedModelRenderer.rotateAngleX = (float) Math.toRadians(x);
+        AdvancedModelRenderer.rotateAngleY = (float) Math.toRadians(y);
+        AdvancedModelRenderer.rotateAngleZ = (float) Math.toRadians(z);
     }
 
+    private static Field defaultRotationX;
+    private static Field defaultRotationY;
+    private static Field defaultRotationZ;
+    private static Field defaultPositionX;
+    private static Field defaultPositionY;
+    private static Field defaultPositionZ;
+    static {
+        try {
+            defaultRotationX = AdvancedModelRenderer.class.getField("defaultRotationX");
+            defaultRotationX.setAccessible(true);
+            defaultRotationY = AdvancedModelRenderer.class.getField("defaultRotationY");
+            defaultRotationY.setAccessible(true);
+            defaultRotationZ = AdvancedModelRenderer.class.getField("defaultRotationZ");
+            defaultRotationZ.setAccessible(true);
+            defaultPositionX = AdvancedModelRenderer.class.getField("defaultPositionX");
+            defaultPositionX.setAccessible(true);
+            defaultPositionY = AdvancedModelRenderer.class.getField("defaultPositionY");
+            defaultPositionY.setAccessible(true);
+            defaultPositionZ = AdvancedModelRenderer.class.getField("defaultPositionZ");
+            defaultPositionZ.setAccessible(true);
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        }
+    }
+    public static float getDefaultRotationX(AdvancedModelRenderer box) {
+        try {
+            return defaultRotationX.getFloat(box);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+            return 0.0F;
+        }
+    }
+    public static float getDefaultRotationY(AdvancedModelRenderer box) {
+        try {
+            return defaultRotationY.getFloat(box);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+            return 0.0F;
+        }
+    }
+    public static float getDefaultRotationZ(AdvancedModelRenderer box) {
+        try {
+            return defaultRotationZ.getFloat(box);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+            return 0.0F;
+        }
+    }
+    public static float getDefaultPositionX(AdvancedModelRenderer box) {
+        try {
+            return defaultPositionX.getFloat(box);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+            return 0.0F;
+        }
+    }
+    public static float getDefaultPositionY(AdvancedModelRenderer box) {
+        try {
+            return defaultPositionY.getFloat(box);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+            return 0.0F;
+        }
+    }
+    public static float getDefaultPositionZ(AdvancedModelRenderer box) {
+        try {
+            return defaultPositionZ.getFloat(box);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+            return 0.0F;
+        }
+    }
 }

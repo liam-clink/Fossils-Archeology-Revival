@@ -3,14 +3,12 @@ package com.github.revival.server.entity.mob;
 import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 import com.github.revival.server.enums.EnumPrehistoric;
 import com.github.revival.server.enums.EnumPrehistoricAI.*;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 
@@ -167,7 +165,7 @@ public class EntityAnkylosaurus extends EntityNewPrehistoric {
 
 	public boolean attackEntityAsMob(Entity entity)
 	{
-		if(this.getAnimation() == animation_none){
+		if(this.getAnimation() == NO_ANIMATION){
 			this.setAnimation(animation_attack);
 			return false;
 		}

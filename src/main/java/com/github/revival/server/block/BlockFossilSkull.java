@@ -23,7 +23,7 @@ public class BlockFossilSkull extends BlockDirectional {
         super(Material.rock);
         this.setTickRandomly(true);
         this.isActive = isActive;
-        this.setCreativeTab(FATabRegistry.tabFBlocks);
+        this.setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
         this.setBlockName(isActive ? "skullLantern" : "skullBlock");
     }
 

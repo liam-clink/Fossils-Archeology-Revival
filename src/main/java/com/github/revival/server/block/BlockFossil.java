@@ -30,7 +30,7 @@ public class BlockFossil extends BlockStone {
         this.setResistance(5.0F);
         this.setStepSound(Block.soundTypeStone);
         this.setBlockName(LocalizationStrings.BLOCK_FOSSIL_NAME);
-        this.setCreativeTab(FATabRegistry.tabFBlocks);
+        this.setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
         this.setHarvestLevel("pickaxe", 2);
         randomMeta = 0;
     }
@@ -43,17 +43,17 @@ public class BlockFossil extends BlockStone {
 
         if (i < 1) {
             this.randomMeta = 0;
-            return FAItemRegistry.gem;
+            return FAItemRegistry.INSTANCE.gem;
         }
 
         if (i < 6) {
             this.randomMeta = 0;
-            return FAItemRegistry.brokenSword;
+            return FAItemRegistry.INSTANCE.brokenSword;
         }
 
         if (i < 11) {
             this.randomMeta = 0;
-            return FAItemRegistry.brokenhelmet;
+            return FAItemRegistry.INSTANCE.brokenhelmet;
         }
 
         if (i < 13) {
@@ -61,7 +61,7 @@ public class BlockFossil extends BlockStone {
             if (dropRandom != 4) {
                 this.randomMeta = dropRandom;
             }
-            return FAItemRegistry.legBone;
+            return FAItemRegistry.INSTANCE.legBone;
         }
 
         if (i < 15) {
@@ -69,7 +69,7 @@ public class BlockFossil extends BlockStone {
             if (dropRandom != 4) {
                 this.randomMeta = dropRandom;
             }
-            return FAItemRegistry.skull;
+            return FAItemRegistry.INSTANCE.skull;
         }
 
         if (i < 17) {
@@ -77,7 +77,7 @@ public class BlockFossil extends BlockStone {
             if (dropRandom != 4) {
                 this.randomMeta = dropRandom;
             }
-            return FAItemRegistry.claw;
+            return FAItemRegistry.INSTANCE.claw;
         }
 
         if (i < 19) {
@@ -85,7 +85,7 @@ public class BlockFossil extends BlockStone {
             if (dropRandom != 4) {
                 this.randomMeta = dropRandom;
             }
-            return FAItemRegistry.foot;
+            return FAItemRegistry.INSTANCE.foot;
         }
 
         if (i < 21) {
@@ -93,7 +93,7 @@ public class BlockFossil extends BlockStone {
             if (dropRandom != 4) {
                 this.randomMeta = dropRandom;
             }
-            return FAItemRegistry.vertebrae;
+            return FAItemRegistry.INSTANCE.vertebrae;
         }
 
         if (i < 23) {
@@ -101,7 +101,7 @@ public class BlockFossil extends BlockStone {
             if (dropRandom != 4) {
                 this.randomMeta = dropRandom;
             }
-            return FAItemRegistry.armBone;
+            return FAItemRegistry.INSTANCE.armBone;
         }
 
         if (i < 25) {
@@ -109,22 +109,22 @@ public class BlockFossil extends BlockStone {
             if (dropRandom != 4) {
                 this.randomMeta = dropRandom;
             }
-            return FAItemRegistry.dinoRibCage;
+            return FAItemRegistry.INSTANCE.dinoRibCage;
         }
 
         if (i < 50) {
             this.randomMeta = 0;
-            return Item.getItemFromBlock(FABlockRegistry.blockSkull);
+            return Item.getItemFromBlock(FABlockRegistry.INSTANCE.blockSkull);
         }
 
         if (i < 350) {
             this.randomMeta = 0;
-            return FAItemRegistry.biofossil;
+            return FAItemRegistry.INSTANCE.biofossil;
         }
 
         if (i < 550) {
             this.randomMeta = 0;
-            return FAItemRegistry.relic;
+            return FAItemRegistry.INSTANCE.relic;
         }
 
         if (i < 900) {
@@ -133,7 +133,7 @@ public class BlockFossil extends BlockStone {
         }
         if (i < 1200) {
             this.randomMeta = 0;
-            return FAItemRegistry.brokenSapling;
+            return FAItemRegistry.INSTANCE.brokenSapling;
         }
         this.randomMeta = 0;
         return Item.getItemFromBlock(Blocks.cobblestone);

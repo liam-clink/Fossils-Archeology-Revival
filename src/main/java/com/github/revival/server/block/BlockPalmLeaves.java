@@ -34,7 +34,7 @@ public class BlockPalmLeaves extends BlockLeaves {
 
     public BlockPalmLeaves() {
         this.setTickRandomly(true);
-        this.setCreativeTab(FATabRegistry.tabFBlocks);
+        this.setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
         this.setStepSound(Block.soundTypeGrass);
         this.setHardness(0.2F);
         this.setResistance(1F);
@@ -228,7 +228,7 @@ public class BlockPalmLeaves extends BlockLeaves {
      * Returns the ID of the items to drop on destruction.
      */
     public Item getItemDropped(int par1, Random par2Random, int par3) {
-        return Item.getItemFromBlock(FABlockRegistry.palmSap);
+        return Item.getItemFromBlock(FABlockRegistry.INSTANCE.palmSap);
     }
 
     /**

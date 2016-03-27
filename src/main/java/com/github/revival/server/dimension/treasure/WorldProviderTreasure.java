@@ -16,7 +16,7 @@ import net.minecraft.world.chunk.IChunkProvider;
 public class WorldProviderTreasure extends WorldProvider {
     public void registerWorldChunkManager() {
         this.worldChunkMgr = new WorldChunkManagerHell(Revival.treasureBiome, 0);
-        this.dimensionId = FossilConfig.dimIdTreasure;
+        this.dimensionId = FossilConfig.dimensionIDTreasure;
         this.hasNoSky = true;
         this.isHellWorld = true;
 

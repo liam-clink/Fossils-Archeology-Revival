@@ -70,7 +70,7 @@ public abstract class EntityFishBase extends EntityWaterMob {
     public boolean interact(EntityPlayer var1) {
         ItemStack var2 = var1.inventory.getCurrentItem();
 
-        if (var2 != null && FMLCommonHandler.instance().getSide().isClient() && var2.getItem() == FAItemRegistry.dinoPedia) {
+        if (var2 != null && FMLCommonHandler.instance().getSide().isClient() && var2.getItem() == FAItemRegistry.INSTANCE.dinoPedia) {
             this.setPedia();
             var1.openGui(Revival.instance, 4, this.worldObj, (int) this.posX, (int) this.posY, (int) this.posZ);
             return true;

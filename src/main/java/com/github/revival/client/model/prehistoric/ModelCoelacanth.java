@@ -2,20 +2,20 @@ package com.github.revival.client.model.prehistoric;
 
 import com.github.revival.client.model.base.ModelPrehistoric;
 import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
-import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelRenderer;
+import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 
 public class ModelCoelacanth extends ModelPrehistoric {
-    MowzieModelRenderer tail;
-    MowzieModelRenderer head;
-    MowzieModelRenderer fin2;
-    MowzieModelRenderer fin4;
-    MowzieModelRenderer DorsalFin2;
-    MowzieModelRenderer DorsalFin3;
-    MowzieModelRenderer fin1;
-    MowzieModelRenderer fin3;
-    MowzieModelRenderer DorsalFin1;
+    AdvancedModelRenderer tail;
+    AdvancedModelRenderer head;
+    AdvancedModelRenderer fin2;
+    AdvancedModelRenderer fin4;
+    AdvancedModelRenderer DorsalFin2;
+    AdvancedModelRenderer DorsalFin3;
+    AdvancedModelRenderer fin1;
+    AdvancedModelRenderer fin3;
+    AdvancedModelRenderer DorsalFin1;
 
     public ModelCoelacanth() {
         textureWidth = 64;
@@ -30,63 +30,63 @@ public class ModelCoelacanth extends ModelPrehistoric {
         setTextureOffset("fin3.Fin3", 0, 0);
         setTextureOffset("DorsalFin1.DorsalFin", 18, 0);
 
-        tail = new MowzieModelRenderer(this, "tail");
+        tail = new AdvancedModelRenderer(this, "tail");
         tail.setRotationPoint(0F, 15F, 0F);
         setRotation(tail, 0F, 0F, 0F);
         tail.mirror = true;
         tail.addBox("tail", -0.5F, -1F, 0F, 1, 4, 10);
-        fin2 = new MowzieModelRenderer(this, "fin2");
+        fin2 = new AdvancedModelRenderer(this, "fin2");
         fin2.setRotationPoint(-0.5F, 2F, 1F);
         setRotation(fin2, 0F, 0F, 0F);
         fin2.mirror = true;
         fin2.addBox("Fin2", -1F, -0.3F, 0F, 1, 2, 3);
         tail.addChild(fin2);
-        fin4 = new MowzieModelRenderer(this, "fin4");
+        fin4 = new AdvancedModelRenderer(this, "fin4");
         fin4.setRotationPoint(0.5F, 2F, 1F);
         setRotation(fin4, 0F, 0F, 0F);
         fin4.mirror = true;
         fin4.addBox("Fin4", 0F, -0.3F, 0F, 1, 2, 3);
         tail.addChild(fin4);
-        DorsalFin2 = new MowzieModelRenderer(this, "DorsalFin2");
+        DorsalFin2 = new AdvancedModelRenderer(this, "DorsalFin2");
         DorsalFin2.setRotationPoint(0F, 0F, 0F);
         setRotation(DorsalFin2, 0F, 0F, 0F);
         DorsalFin2.mirror = true;
         DorsalFin2.addBox("DorsalFin2", 0F, 1F, 2F, 0, 2, 3);
         tail.addChild(DorsalFin2);
-        DorsalFin3 = new MowzieModelRenderer(this, "DorsalFin3");
+        DorsalFin3 = new AdvancedModelRenderer(this, "DorsalFin3");
         DorsalFin3.setRotationPoint(0F, 0F, 0F);
         setRotation(DorsalFin3, 0F, 0F, 0F);
         DorsalFin3.mirror = true;
         DorsalFin3.addBox("DorsalFin3", 0F, -0.5F, 3F, 0, 2, 3);
         tail.addChild(DorsalFin3);
-        head = new MowzieModelRenderer(this, "head");
+        head = new AdvancedModelRenderer(this, "head");
         head.setRotationPoint(0F, 15F, 0F);
         setRotation(head, 0F, 0F, 0F);
         head.mirror = true;
         head.addBox("Body", -1F, -1F, -7.5F, 2, 5, 8);
-        fin1 = new MowzieModelRenderer(this, "fin1");
+        fin1 = new AdvancedModelRenderer(this, "fin1");
         fin1.setRotationPoint(0.9333333F, 2F, -2F);
         setRotation(fin1, 0F, 0F, 0F);
         fin1.mirror = true;
         fin1.addBox("Fin1", 0F, 0F, -0.5F, 1, 2, 3);
         head.addChild(fin1);
-        fin3 = new MowzieModelRenderer(this, "fin3");
+        fin3 = new AdvancedModelRenderer(this, "fin3");
         fin3.setRotationPoint(-1F, 2F, -2F);
         setRotation(fin3, 0F, 0F, 0F);
         fin3.mirror = true;
         fin3.addBox("Fin3", -1F, 0F, -0.5F, 1, 2, 3);
         head.addChild(fin3);
-        DorsalFin1 = new MowzieModelRenderer(this, "DorsalFin1");
+        DorsalFin1 = new AdvancedModelRenderer(this, "DorsalFin1");
         DorsalFin1.setRotationPoint(0F, -1F, -1F);
         setRotation(DorsalFin1, -0.6320364F, 0F, 0F);
         DorsalFin1.mirror = true;
         DorsalFin1.addBox("DorsalFin", -0.5F, -1F, -0.5F, 1, 2, 2);
         head.addChild(DorsalFin1);
-        doMowzieStuff(false);
+        doAdvancedStuff(false);
     }
 
 
-    private void setRotation(MowzieModelRenderer model, float x, float y, float z) {
+    private void setRotation(AdvancedModelRenderer model, float x, float y, float z) {
         model.rotateAngleX = x;
         model.rotateAngleY = y;
         model.rotateAngleZ = z;

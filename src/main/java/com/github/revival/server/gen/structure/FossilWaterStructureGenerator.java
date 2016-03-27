@@ -8,8 +8,8 @@ import com.github.revival.server.gen.structure.shipwreck.ShipWreck2;
 import com.github.revival.server.gen.structure.shipwreck.ShipWreck3;
 import com.github.revival.server.gen.structure.shipwreck.ShipWreckUtil;
 import com.github.revival.server.item.FAItemRegistry;
-import net.ilexiconn.llibrary.common.structure.util.Structure;
-import net.ilexiconn.llibrary.common.structure.util.StructureGeneratorBase;
+import com.github.revival.server.structure.util.Structure;
+import com.github.revival.server.structure.util.StructureGeneratorBase;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntityVillager;
@@ -217,7 +217,7 @@ public class FossilWaterStructureGenerator extends StructureGeneratorBase {
                             addItemToTileInventory(
                                     world,
                                     (new ItemStack(
-                                            Item.getItemFromBlock(FABlockRegistry.figurineBlock),
+                                            Item.getItemFromBlock(FABlockRegistry.INSTANCE.figurineBlock),
                                             rand.nextInt(2) + 1, rand.nextInt(15))),
                                     x, y, z);
                         } else if (loot < 80) {
@@ -226,7 +226,7 @@ public class FossilWaterStructureGenerator extends StructureGeneratorBase {
                                     z);
                         } else if (loot < 90) {
                             addItemToTileInventory(world, new ItemStack(
-                                            FAItemRegistry.ironjavelin, rand.nextInt(16) + 1), x,
+                                            FAItemRegistry.INSTANCE.ironjavelin, rand.nextInt(16) + 1), x,
                                     y, z);
                         } else if (loot < 101) {
                             addItemToTileInventory(world, new ItemStack(
@@ -256,7 +256,7 @@ public class FossilWaterStructureGenerator extends StructureGeneratorBase {
                                     Items.gunpowder, rand.nextInt(10) + 1), x, y, z);
                         } else if (loot < 85) {
                             addItemToTileInventory(world, new ItemStack(
-                                            FAItemRegistry.woodjavelin, rand.nextInt(8) + 1), x, y,
+                                            FAItemRegistry.INSTANCE.woodjavelin, rand.nextInt(8) + 1), x, y,
                                     z);
                         } else if (loot < 95) {
                             addItemToTileInventory(world, new ItemStack(

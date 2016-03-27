@@ -10,6 +10,6 @@ public class BlockDenseSand extends BlockFalling {
         this.setBlockTextureName("fossil:dense_sand");
         this.setBlockName("denseSand");
         this.setStepSound(soundTypeSand);
-        this.setCreativeTab(FATabRegistry.tabFBlocks);
+        this.setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
     }
 }

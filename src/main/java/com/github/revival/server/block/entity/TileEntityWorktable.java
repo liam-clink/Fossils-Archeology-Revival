@@ -292,7 +292,7 @@ public class TileEntityWorktable extends TileEntity implements IInventory,
             return 0;
         } else {
             Item var2 = itemstack.getItem();
-            return var2 == FAItemRegistry.relic ? 300 : 0;
+            return var2 == FAItemRegistry.INSTANCE.relic ? 300 : 0;
         }
     }
 
@@ -321,40 +321,40 @@ public class TileEntityWorktable extends TileEntity implements IInventory,
     private ItemStack CheckSmelt(ItemStack itemstack) {
         ItemStack output = null;
 
-        if (itemstack.getItem() == FAItemRegistry.brokenSword) {
-            return new ItemStack(FAItemRegistry.ancientSword);
+        if (itemstack.getItem() == FAItemRegistry.INSTANCE.brokenSword) {
+            return new ItemStack(FAItemRegistry.INSTANCE.ancientSword);
         }
 
-        if (itemstack.getItem() == FAItemRegistry.brokenhelmet) {
-            return new ItemStack(FAItemRegistry.ancienthelmet);
+        if (itemstack.getItem() == FAItemRegistry.INSTANCE.brokenhelmet) {
+            return new ItemStack(FAItemRegistry.INSTANCE.ancienthelmet);
         }
 
-        if (itemstack.getItem() == FAItemRegistry.ancientSword) {
-            output = new ItemStack(FAItemRegistry.ancientSword);
+        if (itemstack.getItem() == FAItemRegistry.INSTANCE.ancientSword) {
+            output = new ItemStack(FAItemRegistry.INSTANCE.ancientSword);
         }
 
-        if (itemstack.getItem() == FAItemRegistry.ancienthelmet) {
-            output = new ItemStack(FAItemRegistry.ancienthelmet);
+        if (itemstack.getItem() == FAItemRegistry.INSTANCE.ancienthelmet) {
+            output = new ItemStack(FAItemRegistry.INSTANCE.ancienthelmet);
         }
 
-        if (itemstack.getItem() == FAItemRegistry.gemAxe) {
-            output = new ItemStack(FAItemRegistry.gemAxe);
+        if (itemstack.getItem() == FAItemRegistry.INSTANCE.gemAxe) {
+            output = new ItemStack(FAItemRegistry.INSTANCE.gemAxe);
         }
 
-        if (itemstack.getItem() == FAItemRegistry.gemPickaxe) {
-            output = new ItemStack(FAItemRegistry.gemPickaxe);
+        if (itemstack.getItem() == FAItemRegistry.INSTANCE.gemPickaxe) {
+            output = new ItemStack(FAItemRegistry.INSTANCE.gemPickaxe);
         }
 
-        if (itemstack.getItem() == FAItemRegistry.gemSword) {
-            output = new ItemStack(FAItemRegistry.gemSword);
+        if (itemstack.getItem() == FAItemRegistry.INSTANCE.gemSword) {
+            output = new ItemStack(FAItemRegistry.INSTANCE.gemSword);
         }
 
-        if (itemstack.getItem() == FAItemRegistry.gemHoe) {
-            output = new ItemStack(FAItemRegistry.gemHoe);
+        if (itemstack.getItem() == FAItemRegistry.INSTANCE.gemHoe) {
+            output = new ItemStack(FAItemRegistry.INSTANCE.gemHoe);
         }
 
-        if (itemstack.getItem() == FAItemRegistry.gemShovel) {
-            output = new ItemStack(FAItemRegistry.gemShovel);
+        if (itemstack.getItem() == FAItemRegistry.INSTANCE.gemShovel) {
+            output = new ItemStack(FAItemRegistry.INSTANCE.gemShovel);
         }
 
         if (output != null) {
@@ -368,24 +368,24 @@ public class TileEntityWorktable extends TileEntity implements IInventory,
             return output;
         }
 
-        if (itemstack.getItem() == FAItemRegistry.woodjavelin) {
-            output = new ItemStack(FAItemRegistry.woodjavelin, 1);
+        if (itemstack.getItem() == FAItemRegistry.INSTANCE.woodjavelin) {
+            output = new ItemStack(FAItemRegistry.INSTANCE.woodjavelin, 1);
         }
 
-        if (itemstack.getItem() == FAItemRegistry.stonejavelin) {
-            output = new ItemStack(FAItemRegistry.stonejavelin, 1);
+        if (itemstack.getItem() == FAItemRegistry.INSTANCE.stonejavelin) {
+            output = new ItemStack(FAItemRegistry.INSTANCE.stonejavelin, 1);
         }
 
-        if (itemstack.getItem() == FAItemRegistry.ironjavelin) {
-            output = new ItemStack(FAItemRegistry.ironjavelin, 1);
+        if (itemstack.getItem() == FAItemRegistry.INSTANCE.ironjavelin) {
+            output = new ItemStack(FAItemRegistry.INSTANCE.ironjavelin, 1);
         }
 
-        if (itemstack.getItem() == FAItemRegistry.goldjavelin) {
-            output = new ItemStack(FAItemRegistry.goldjavelin, 1);
+        if (itemstack.getItem() == FAItemRegistry.INSTANCE.goldjavelin) {
+            output = new ItemStack(FAItemRegistry.INSTANCE.goldjavelin, 1);
         }
 
-        if (itemstack.getItem() == FAItemRegistry.diamondjavelin) {
-            output = new ItemStack(FAItemRegistry.diamondjavelin, 1);
+        if (itemstack.getItem() == FAItemRegistry.INSTANCE.diamondjavelin) {
+            output = new ItemStack(FAItemRegistry.INSTANCE.diamondjavelin, 1);
         }
 
         if (output != null) {
@@ -398,8 +398,8 @@ public class TileEntityWorktable extends TileEntity implements IInventory,
             return output;
         }
 
-        if (itemstack.getItem() == FAItemRegistry.ancientJavelin) {
-            output = new ItemStack(FAItemRegistry.ancientJavelin, 1);
+        if (itemstack.getItem() == FAItemRegistry.INSTANCE.ancientJavelin) {
+            output = new ItemStack(FAItemRegistry.INSTANCE.ancientJavelin, 1);
 
             if (itemstack.getItemDamage() > 3) {
                 output.setItemDamage(itemstack.getItemDamage() - 3);
@@ -410,21 +410,21 @@ public class TileEntityWorktable extends TileEntity implements IInventory,
             return output;
         }
 
-        if (itemstack.getItem() == new ItemStack(FABlockRegistry.vaseKylixBlock)
+        if (itemstack.getItem() == new ItemStack(FABlockRegistry.INSTANCE.vaseKylixBlock)
                 .getItem() && itemstack.getItemDamage() == 0) {
-            output = new ItemStack(FABlockRegistry.vaseKylixBlock, 1, 1);
+            output = new ItemStack(FABlockRegistry.INSTANCE.vaseKylixBlock, 1, 1);
             return output;
         }
 
-        if (itemstack.getItem() == new ItemStack(FABlockRegistry.vaseAmphoraBlock)
+        if (itemstack.getItem() == new ItemStack(FABlockRegistry.INSTANCE.vaseAmphoraBlock)
                 .getItem() && itemstack.getItemDamage() == 0) {
-            output = new ItemStack(FABlockRegistry.vaseAmphoraBlock, 1, 1);
+            output = new ItemStack(FABlockRegistry.INSTANCE.vaseAmphoraBlock, 1, 1);
             return output;
         }
 
-        if (itemstack.getItem() == new ItemStack(FABlockRegistry.vaseVoluteBlock)
+        if (itemstack.getItem() == new ItemStack(FABlockRegistry.INSTANCE.vaseVoluteBlock)
                 .getItem() && itemstack.getItemDamage() == 0) {
-            output = new ItemStack(FABlockRegistry.vaseVoluteBlock, 1, 1);
+            output = new ItemStack(FABlockRegistry.INSTANCE.vaseVoluteBlock, 1, 1);
             return output;
         }
 
@@ -436,11 +436,11 @@ public class TileEntityWorktable extends TileEntity implements IInventory,
             return 3000;
         }
 
-        if (this.furnaceItemStacks[0].getItem() == FAItemRegistry.brokenSword) {
+        if (this.furnaceItemStacks[0].getItem() == FAItemRegistry.INSTANCE.brokenSword) {
             return 3000;
         }
 
-        if (this.furnaceItemStacks[0].getItem() == FAItemRegistry.brokenhelmet) {
+        if (this.furnaceItemStacks[0].getItem() == FAItemRegistry.INSTANCE.brokenhelmet) {
             return 3000;
         }
 

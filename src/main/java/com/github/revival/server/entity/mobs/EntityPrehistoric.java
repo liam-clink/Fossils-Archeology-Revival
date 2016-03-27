@@ -162,31 +162,31 @@ public abstract class EntityPrehistoric extends EntityAgeable {
         Item toDrop = null;
         switch ((new Random()).nextInt(7)) {
             case 0:
-                toDrop = FAItemRegistry.legBone;
+                toDrop = FAItemRegistry.INSTANCE.legBone;
                 break;
 
             case 1:
-                toDrop = FAItemRegistry.claw;
+                toDrop = FAItemRegistry.INSTANCE.claw;
                 break;
 
             case 2:
-                toDrop = FAItemRegistry.foot;
+                toDrop = FAItemRegistry.INSTANCE.foot;
                 break;
 
             case 3:
-                toDrop = FAItemRegistry.skull;
+                toDrop = FAItemRegistry.INSTANCE.skull;
                 break;
 
             case 4:
-                toDrop = FAItemRegistry.vertebrae;
+                toDrop = FAItemRegistry.INSTANCE.vertebrae;
                 break;
 
             case 5:
-                toDrop = FAItemRegistry.armBone;
+                toDrop = FAItemRegistry.INSTANCE.armBone;
                 break;
 
             case 6:
-                toDrop = FAItemRegistry.dinoRibCage;
+                toDrop = FAItemRegistry.INSTANCE.dinoRibCage;
                 break;
         }
         entityDropItem(new ItemStack(toDrop, 1, type.ordinal()), 0.5F);
@@ -198,31 +198,31 @@ public abstract class EntityPrehistoric extends EntityAgeable {
         if ((new Random()).nextInt(20) == 0) {
             switch ((new Random()).nextInt(7)) {
                 case 0:
-                    toDrop = FAItemRegistry.legBone;
+                    toDrop = FAItemRegistry.INSTANCE.legBone;
                     break;
 
                 case 1:
-                    toDrop = FAItemRegistry.claw;
+                    toDrop = FAItemRegistry.INSTANCE.claw;
                     break;
 
                 case 2:
-                    toDrop = FAItemRegistry.foot;
+                    toDrop = FAItemRegistry.INSTANCE.foot;
                     break;
 
                 case 3:
-                    toDrop = FAItemRegistry.skull;
+                    toDrop = FAItemRegistry.INSTANCE.skull;
                     break;
 
                 case 4:
-                    toDrop = FAItemRegistry.vertebrae;
+                    toDrop = FAItemRegistry.INSTANCE.vertebrae;
                     break;
 
                 case 5:
-                    toDrop = FAItemRegistry.armBone;
+                    toDrop = FAItemRegistry.INSTANCE.armBone;
                     break;
 
                 case 6:
-                    toDrop = FAItemRegistry.dinoRibCage;
+                    toDrop = FAItemRegistry.INSTANCE.dinoRibCage;
                     break;
             }
             entityDropItem(new ItemStack(toDrop, 1, type.ordinal()), 0.5F);
@@ -310,7 +310,7 @@ public abstract class EntityPrehistoric extends EntityAgeable {
     @Override
     protected Item getDropItem() {
         if (this.isStatue) {
-            return FAItemRegistry.biofossil;
+            return FAItemRegistry.INSTANCE.biofossil;
         }
         return type.getDropItem();
     }
@@ -387,7 +387,7 @@ public abstract class EntityPrehistoric extends EntityAgeable {
     public boolean dropStatue() {
         if (isStatue()) {
             if (!this.worldObj.isRemote && !this.isDead) {
-                this.entityDropItem(new ItemStack(FAItemRegistry.biofossil, 1), 0.0F);
+                this.entityDropItem(new ItemStack(FAItemRegistry.INSTANCE.biofossil, 1), 0.0F);
                 this.setDead();
             }
             return true;

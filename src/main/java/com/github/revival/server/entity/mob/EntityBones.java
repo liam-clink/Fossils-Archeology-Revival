@@ -137,7 +137,7 @@ public class EntityBones extends EntityMob {
      */
     @Override
     protected Item getDropItem() {
-        return Item.getItemFromBlock(FABlockRegistry.blockSkull);
+        return Item.getItemFromBlock(FABlockRegistry.INSTANCE.blockSkull);
     }
 
     /**
@@ -148,7 +148,7 @@ public class EntityBones extends EntityMob {
         int var4;
 
         for (var4 = 0; var4 < var3; ++var4) {
-            this.dropItem(Item.getItemFromBlock(FABlockRegistry.blockSkull), 1);
+            this.dropItem(Item.getItemFromBlock(FABlockRegistry.INSTANCE.blockSkull), 1);
         }
 
         int var5 = this.rand.nextInt(3 + var2);

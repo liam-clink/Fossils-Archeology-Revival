@@ -25,7 +25,7 @@ public class EntityTarSlime extends EntitySlime {
 
     @Override
     protected String getSlimeParticle() {
-        return "blockcrack_" + Block.getIdFromBlock(FABlockRegistry.tar) + "_0";
+        return "blockcrack_" + Block.getIdFromBlock(FABlockRegistry.INSTANCE.tar) + "_0";
     }
 
     @Override
@@ -43,7 +43,7 @@ public class EntityTarSlime extends EntitySlime {
         int j = MathHelper.floor_double(this.posX);
         int k = MathHelper.floor_double(this.posY);
         int l = MathHelper.floor_double(this.posZ);
-        if(this.worldObj.getBlock(j, k, l) == FABlockRegistry.tar)
+        if(this.worldObj.getBlock(j, k, l) == FABlockRegistry.INSTANCE.tar)
         {
         	this.motionY *= 1.3;
         }
@@ -108,7 +108,7 @@ public class EntityTarSlime extends EntitySlime {
     }
 
     protected Item getDropItem() {
-        return FAItemRegistry.tardrop;
+        return FAItemRegistry.INSTANCE.tardrop;
     }
 
     @Override
@@ -140,7 +140,7 @@ public class EntityTarSlime extends EntitySlime {
             int k = MathHelper.floor_double(this.posY + (double)this.getEyeHeight() + (double)f1);
             int l = MathHelper.floor_double(this.posZ + (double)f2);
 
-            if (this.worldObj.getBlock(j, k, l).isNormalCube() && this.worldObj.getBlock(j, k, l) != FABlockRegistry.tar)
+            if (this.worldObj.getBlock(j, k, l).isNormalCube() && this.worldObj.getBlock(j, k, l) != FABlockRegistry.INSTANCE.tar)
             {
                 return true;
             }

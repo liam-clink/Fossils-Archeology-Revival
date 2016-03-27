@@ -32,7 +32,7 @@ public class BlockPalaeSlab extends BlockSlab {
             setBlockName(LocalizationStrings.PALAE_DOUBLESLAB_NAME);
         } else {
             setBlockName(LocalizationStrings.PALAE_SINGLESLAB_NAME);
-            setCreativeTab(FATabRegistry.tabFBlocks);
+            setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
         }
     }
 
@@ -47,23 +47,23 @@ public class BlockPalaeSlab extends BlockSlab {
     }
 
     public Item getItemDropped(int var1, Random var2, int var3) {
-        return Item.getItemFromBlock(FABlockRegistry.palaeSingleSlab);
+        return Item.getItemFromBlock(FABlockRegistry.INSTANCE.palaeSingleSlab);
     }
 
     public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLiving par5EntityLiving) {
-        if (par1World.getBlock(par2, par3 - 1, par4) == FABlockRegistry.palaeSingleSlab) {
+        if (par1World.getBlock(par2, par3 - 1, par4) == FABlockRegistry.INSTANCE.palaeSingleSlab) {
             par1World.setBlock(par2, par3, par4, Blocks.air, 0, 2);
-            par1World.setBlock(par2, par3 - 1, par4, FABlockRegistry.palaeDoubleSlab);
+            par1World.setBlock(par2, par3 - 1, par4, FABlockRegistry.INSTANCE.palaeDoubleSlab);
         }
 
-        if (par1World.getBlock(par2, par3 + 1, par4) == FABlockRegistry.palaeSingleSlab) {
+        if (par1World.getBlock(par2, par3 + 1, par4) == FABlockRegistry.INSTANCE.palaeSingleSlab) {
             par1World.setBlock(par2, par3, par4, Blocks.air, 0, 2);
-            par1World.setBlock(par2, par3 + 1, par4, FABlockRegistry.palaeDoubleSlab);
+            par1World.setBlock(par2, par3 + 1, par4, FABlockRegistry.INSTANCE.palaeDoubleSlab);
         }
     }
 
     protected ItemStack createStackedBlock(int par1) {
-        return new ItemStack(FABlockRegistry.palaeSingleSlab, 2, par1 & 7);
+        return new ItemStack(FABlockRegistry.INSTANCE.palaeSingleSlab, 2, par1 & 7);
     }
 
     public String func_150002_b(int par1) {
@@ -75,7 +75,7 @@ public class BlockPalaeSlab extends BlockSlab {
     }
 
     public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List par3List) {
-        if (par1 != Item.getItemFromBlock(FABlockRegistry.palaeDoubleSlab)) {
+        if (par1 != Item.getItemFromBlock(FABlockRegistry.INSTANCE.palaeDoubleSlab)) {
             par3List.add(new ItemStack(par1, 1, 0));
         }
     }

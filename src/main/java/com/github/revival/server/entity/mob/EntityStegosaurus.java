@@ -175,7 +175,7 @@ public class EntityStegosaurus extends EntityNewPrehistoric {
 	{
 		System.out.println(this.getAnimationTick());
 
-		if(this.getAnimation() == animation_none){
+		if(this.getAnimation() == NO_ANIMATION){
 			this.setAnimation(animation_attack);
 			return false;
 		}

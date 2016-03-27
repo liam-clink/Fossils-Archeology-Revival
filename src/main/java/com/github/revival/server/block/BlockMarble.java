@@ -9,7 +9,7 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 public class BlockMarble extends Block {
     public BlockMarble() {
         super(Material.rock);
-        setCreativeTab(FATabRegistry.tabFBlocks);
+        setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
         setHardness(2.0F);
         setHardness(1.5F);
         setBlockName(LocalizationStrings.MARBLE_NAME);

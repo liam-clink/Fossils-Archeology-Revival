@@ -21,7 +21,7 @@ public class FossilRecordItem extends ItemRecord {
         this.recordName = string;
         this.maxStackSize = 1;
         this.texture = texture;
-        setCreativeTab(FATabRegistry.tabFItems);
+        setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
     }
 
     @SideOnly(Side.CLIENT)

@@ -27,7 +27,7 @@ public class BlockPermafrost extends BlockBreakable {
         setLightOpacity(3);
         setStepSound(Block.soundTypeGrass);
         setBlockName(LocalizationStrings.BLOCK_PERMAFROST_NAME);
-        setCreativeTab(FATabRegistry.tabFBlocks);
+        setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
     }
 
     public void harvestBlock(World world, EntityPlayer player, int x, int y, int z, int i) {
@@ -85,7 +85,7 @@ public class BlockPermafrost extends BlockBreakable {
      */
     public Item getItemDropped(int var1, Random var2, int var3) {
         int var4 = (new Random()).nextInt(20000);
-        return var4 >= 0 && var4 < 4000 ? FAItemRegistry.fernSeed : (var4 >= 4000 && var4 < 8000 ? Item.getItemFromBlock(FABlockRegistry.blockSkull) : (var4 >= 8000 && var4 < 12000 ? FAItemRegistry.icedMeat : (var4 >= 12000 && var4 < 16000 ? Items.bone : (var4 >= 16000 && var4 < 20000 ? Items.book : Item.getItemFromBlock(Blocks.dirt)))));
+        return var4 >= 0 && var4 < 4000 ? FAItemRegistry.INSTANCE.fernSeed : (var4 >= 4000 && var4 < 8000 ? Item.getItemFromBlock(FABlockRegistry.INSTANCE.blockSkull) : (var4 >= 8000 && var4 < 12000 ? FAItemRegistry.INSTANCE.icedMeat : (var4 >= 12000 && var4 < 16000 ? Items.bone : (var4 >= 16000 && var4 < 20000 ? Items.book : Item.getItemFromBlock(Blocks.dirt)))));
     }
 
     @Override

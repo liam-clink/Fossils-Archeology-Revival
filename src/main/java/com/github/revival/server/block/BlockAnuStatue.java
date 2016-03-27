@@ -25,7 +25,7 @@ public class BlockAnuStatue extends BlockContainer implements ISubBlocksBlock {
     public BlockAnuStatue() {
         super(Material.rock);
         this.setBlockBounds(0F, 0.0F, 0F, 1F, 1.9F, 1);
-        this.setCreativeTab(FATabRegistry.tabFBlocks);
+        this.setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
         this.setTickRandomly(true);
         this.setBlockUnbreakable();
         this.setResistance(60000000.0F);

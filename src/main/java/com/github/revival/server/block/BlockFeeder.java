@@ -53,7 +53,7 @@ public class BlockFeeder extends BlockContainer {
         setStepSound(Block.soundTypeMetal);
 
         if (!isActive) {
-            setCreativeTab(FATabRegistry.tabFBlocks);
+            setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
             setBlockName(LocalizationStrings.FEEDER_ACTIVE_NAME);
         }else{
             setBlockName(LocalizationStrings.FEEDER_IDLE_NAME);
@@ -65,7 +65,7 @@ public class BlockFeeder extends BlockContainer {
         int meta = world.getBlockMetadata(x, y, z);
         TileEntity tileentity = world.getTileEntity(x, y, z);
 
-        //world.setBlock(x, y, z, FABlockRegistry.feederActive);
+        //world.setBlock(x, y, z, FABlockRegistry.INSTANCE.feederActive);
 
         if (herb) // If there's VEGGIES
         {
@@ -93,7 +93,7 @@ public class BlockFeeder extends BlockContainer {
 
     @SideOnly(Side.CLIENT)
     public Item getItem(World world, int x, int y, int z) {
-        return Item.getItemFromBlock(FABlockRegistry.feederActive);
+        return Item.getItemFromBlock(FABlockRegistry.INSTANCE.feederActive);
     }
 
     /**
@@ -101,7 +101,7 @@ public class BlockFeeder extends BlockContainer {
      */
     @Override
     public Item getItemDropped(int var1, Random var2, int var3) {
-        return Item.getItemFromBlock(FABlockRegistry.feederActive);
+        return Item.getItemFromBlock(FABlockRegistry.INSTANCE.feederActive);
     }
 
     /**

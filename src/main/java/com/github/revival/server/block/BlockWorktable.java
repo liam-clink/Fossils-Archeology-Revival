@@ -40,7 +40,7 @@ public class BlockWorktable extends BlockContainer {
             setBlockName(LocalizationStrings.BLOCK_WORKTABLE_ACTIVE_NAME);
         } else {
             setBlockName(LocalizationStrings.BLOCK_WORKTABLE_IDLE_NAME);
-            setCreativeTab(FATabRegistry.tabFBlocks);
+            setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
         }
         // this.blockIndexInTexture = 45;
     }
@@ -52,9 +52,9 @@ public class BlockWorktable extends BlockContainer {
         keepFurnaceInventory = true;
 
         if (active) {
-            world.setBlock(x, y, z, FABlockRegistry.blockworktableActive);
+            world.setBlock(x, y, z, FABlockRegistry.INSTANCE.blockworktableActive);
         } else {
-            world.setBlock(x, y, z, FABlockRegistry.blockworktableIdle);
+            world.setBlock(x, y, z, FABlockRegistry.INSTANCE.blockworktableIdle);
         }
 
         keepFurnaceInventory = false;
@@ -68,7 +68,7 @@ public class BlockWorktable extends BlockContainer {
 
     @SideOnly(Side.CLIENT)
     public Item getItem(World world, int x, int y, int z) {
-        return Item.getItemFromBlock(FABlockRegistry.blockworktableIdle);
+        return Item.getItemFromBlock(FABlockRegistry.INSTANCE.blockworktableIdle);
     }
 
     /**
@@ -76,7 +76,7 @@ public class BlockWorktable extends BlockContainer {
      */
     @Override
     public Item getItemDropped(int var1, Random var2, int var3) {
-        return Item.getItemFromBlock(FABlockRegistry.blockworktableIdle);
+        return Item.getItemFromBlock(FABlockRegistry.INSTANCE.blockworktableIdle);
     }
 
     /**

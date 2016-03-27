@@ -14,7 +14,7 @@ public class RenderFeeder implements ISimpleBlockRenderingHandler {
     public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
         int meta = 3;
 
-        /*if (block == FABlockRegistry.feederActive)
+        /*if (block == FABlockRegistry.INSTANCE.feederActive)
         {
             meta = 1;
         }*/

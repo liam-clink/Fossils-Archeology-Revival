@@ -2,47 +2,47 @@ package com.github.revival.client.model.prehistoric;
 
 import com.github.revival.client.model.base.ModelPrehistoric;
 import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
-import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelRenderer;
+import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 
 public class ModelSarcosuchus extends ModelPrehistoric {
-    MowzieModelRenderer body;
-    MowzieModelRenderer LowerBody;
-    MowzieModelRenderer leftHindLeg;
-    MowzieModelRenderer leftHindThigh;
-    MowzieModelRenderer leftHindFoot;
-    MowzieModelRenderer rightLowerBodyOsteoderms;
-    MowzieModelRenderer leftLowerBodyOsteoderms;
-    MowzieModelRenderer middleLowerBodyOsteoderms;
-    MowzieModelRenderer tail1;
-    MowzieModelRenderer bottomJawBase;
-    MowzieModelRenderer tail2;
-    MowzieModelRenderer tail2Osteoderms;
-    MowzieModelRenderer tail3;
-    MowzieModelRenderer tail3Osteoderms;
-    MowzieModelRenderer tail1Osteoderms;
-    MowzieModelRenderer rightHindThigh;
-    MowzieModelRenderer rightHindFoot;
-    MowzieModelRenderer rightHindLeg;
-    MowzieModelRenderer upperBody;
-    MowzieModelRenderer neck;
-    MowzieModelRenderer head;
-    MowzieModelRenderer bottomJaw;
-    MowzieModelRenderer lowerJaw;
-    MowzieModelRenderer upperJaw;
-    MowzieModelRenderer teeth;
-    MowzieModelRenderer snout;
-    MowzieModelRenderer leftFrontThigh;
-    MowzieModelRenderer leftFrontLeg;
-    MowzieModelRenderer leftFrontFoot;
-    MowzieModelRenderer rightFrontThigh;
-    MowzieModelRenderer rightFrontLeg;
-    MowzieModelRenderer rightFrontFoot;
-    MowzieModelRenderer middleBodyOsteoderms;
-    MowzieModelRenderer middleUpperBodyOsteoderms;
-    MowzieModelRenderer leftUpperBodyOsteoderms;
-    MowzieModelRenderer rightUpperBodyOsteoderms;
-    MowzieModelRenderer rightBodyOsteoderms;
-    MowzieModelRenderer leftBodyOsteoderms;
+    AdvancedModelRenderer body;
+    AdvancedModelRenderer LowerBody;
+    AdvancedModelRenderer leftHindLeg;
+    AdvancedModelRenderer leftHindThigh;
+    AdvancedModelRenderer leftHindFoot;
+    AdvancedModelRenderer rightLowerBodyOsteoderms;
+    AdvancedModelRenderer leftLowerBodyOsteoderms;
+    AdvancedModelRenderer middleLowerBodyOsteoderms;
+    AdvancedModelRenderer tail1;
+    AdvancedModelRenderer bottomJawBase;
+    AdvancedModelRenderer tail2;
+    AdvancedModelRenderer tail2Osteoderms;
+    AdvancedModelRenderer tail3;
+    AdvancedModelRenderer tail3Osteoderms;
+    AdvancedModelRenderer tail1Osteoderms;
+    AdvancedModelRenderer rightHindThigh;
+    AdvancedModelRenderer rightHindFoot;
+    AdvancedModelRenderer rightHindLeg;
+    AdvancedModelRenderer upperBody;
+    AdvancedModelRenderer neck;
+    AdvancedModelRenderer head;
+    AdvancedModelRenderer bottomJaw;
+    AdvancedModelRenderer lowerJaw;
+    AdvancedModelRenderer upperJaw;
+    AdvancedModelRenderer teeth;
+    AdvancedModelRenderer snout;
+    AdvancedModelRenderer leftFrontThigh;
+    AdvancedModelRenderer leftFrontLeg;
+    AdvancedModelRenderer leftFrontFoot;
+    AdvancedModelRenderer rightFrontThigh;
+    AdvancedModelRenderer rightFrontLeg;
+    AdvancedModelRenderer rightFrontFoot;
+    AdvancedModelRenderer middleBodyOsteoderms;
+    AdvancedModelRenderer middleUpperBodyOsteoderms;
+    AdvancedModelRenderer leftUpperBodyOsteoderms;
+    AdvancedModelRenderer rightUpperBodyOsteoderms;
+    AdvancedModelRenderer rightBodyOsteoderms;
+    AdvancedModelRenderer leftBodyOsteoderms;
 
     public ModelSarcosuchus() {
         textureWidth = 256;
@@ -91,27 +91,27 @@ public class ModelSarcosuchus extends ModelPrehistoric {
         setTextureOffset("rightBodyOsteoderms.rightBodyOsteoderms", 117, 23);
         setTextureOffset("leftBodyOsteoderms.leftBodyOsteoderms", 117, 23);
 
-        body = new MowzieModelRenderer(this, "body");
+        body = new AdvancedModelRenderer(this, "body");
         body.setRotationPoint(0F, 10F, 13F);
         setRotateAngle(body, 0F, 0F, 0F);
         body.mirror = true;
         body.addBox("body", -9F, 0F, 0F, 18, 13, 21);
-        LowerBody = new MowzieModelRenderer(this, "LowerBody");
+        LowerBody = new AdvancedModelRenderer(this, "LowerBody");
         LowerBody.setRotationPoint(0F, 1F, 19F);
         setRotateAngle(LowerBody, 0F, 0F, 0F);
         LowerBody.mirror = true;
         LowerBody.addBox("lowerBody", -8.5F, 0F, 0F, 17, 11, 11);
-        leftHindThigh = new MowzieModelRenderer(this, "leftHindThigh");
+        leftHindThigh = new AdvancedModelRenderer(this, "leftHindThigh");
         leftHindThigh.setRotationPoint(8F, 2F, 3.48F);
         setRotateAngle(leftHindThigh, 0F, 0F, 0F);
         leftHindThigh.mirror = true;
         leftHindThigh.addBox("leftHindThigh", 0F, 0F, -3.5F, 6, 5, 7);
-        leftHindLeg = new MowzieModelRenderer(this, "leftHindLeg");
+        leftHindLeg = new AdvancedModelRenderer(this, "leftHindLeg");
         leftHindLeg.setRotationPoint(5.1F, 4.1F, 1.6F);
         setRotateAngle(leftHindLeg, 0F, 0F, 0F);
         leftHindLeg.mirror = false;
         leftHindLeg.addBox("leftHindLeg", -2F, 0F, -2.5F, 4, 7, 5);
-        leftHindFoot = new MowzieModelRenderer(this, "leftHindFoot");
+        leftHindFoot = new AdvancedModelRenderer(this, "leftHindFoot");
         leftHindFoot.setRotationPoint(0F, 5.1F, -2F);
         setRotateAngle(leftHindFoot, 0F, 0F, 0F);
         leftHindFoot.mirror = true;
@@ -119,7 +119,7 @@ public class ModelSarcosuchus extends ModelPrehistoric {
         leftHindLeg.addChild(leftHindFoot);
         leftHindThigh.addChild(leftHindLeg);
         LowerBody.addChild(leftHindThigh);
-        rightLowerBodyOsteoderms = new MowzieModelRenderer(this,
+        rightLowerBodyOsteoderms = new AdvancedModelRenderer(this,
                 "rightLowerBodyOsteoderms");
         rightLowerBodyOsteoderms.setRotationPoint(-5F, 4F, 5F);
         setRotateAngle(rightLowerBodyOsteoderms, 0F, 0F, 0F);
@@ -127,7 +127,7 @@ public class ModelSarcosuchus extends ModelPrehistoric {
         rightLowerBodyOsteoderms.addBox("rightLowerBodyOsteoderms", 0F, -5F,
                 0F, 1, 5, 9);
         LowerBody.addChild(rightLowerBodyOsteoderms);
-        leftLowerBodyOsteoderms = new MowzieModelRenderer(this,
+        leftLowerBodyOsteoderms = new AdvancedModelRenderer(this,
                 "leftLowerBodyOsteoderms");
         leftLowerBodyOsteoderms.setRotationPoint(5F, 4F, 5F);
         setRotateAngle(leftLowerBodyOsteoderms, 0F, 0F, 0F);
@@ -135,7 +135,7 @@ public class ModelSarcosuchus extends ModelPrehistoric {
         leftLowerBodyOsteoderms.addBox("leftLowerBodyOsteoderms", 0F, -5F, 0F,
                 1, 5, 9);
         LowerBody.addChild(leftLowerBodyOsteoderms);
-        middleLowerBodyOsteoderms = new MowzieModelRenderer(this,
+        middleLowerBodyOsteoderms = new AdvancedModelRenderer(this,
                 "middleLowerBodyOsteoderms");
         middleLowerBodyOsteoderms.setRotationPoint(0F, 4F, 5F);
         setRotateAngle(middleLowerBodyOsteoderms, 0F, 0F, 0F);
@@ -143,28 +143,28 @@ public class ModelSarcosuchus extends ModelPrehistoric {
         middleLowerBodyOsteoderms.addBox("middleLowerBodyOsteoderms", 0F, -5F,
                 0F, 1, 5, 9);
         LowerBody.addChild(middleLowerBodyOsteoderms);
-        tail1 = new MowzieModelRenderer(this, "tail1");
+        tail1 = new AdvancedModelRenderer(this, "tail1");
         tail1.setRotationPoint(0F, 2.5F, 11F);
         setRotateAngle(tail1, 0F, 0F, 0F);
         tail1.mirror = true;
         tail1.addBox("tail1", -7F, 0F, 0F, 14, 8, 18);
-        tail2 = new MowzieModelRenderer(this, "tail2");
+        tail2 = new AdvancedModelRenderer(this, "tail2");
         tail2.setRotationPoint(0F, 0F, 18F);
         setRotateAngle(tail2, 0F, 0F, 0F);
         tail2.mirror = true;
         tail2.addBox("tail2", -5F, 1F, 0F, 10, 7, 24);
-        tail2Osteoderms = new MowzieModelRenderer(this, "tail2Osteoderms");
+        tail2Osteoderms = new AdvancedModelRenderer(this, "tail2Osteoderms");
         tail2Osteoderms.setRotationPoint(0F, 1F, 3F);
         setRotateAngle(tail2Osteoderms, 0F, 0F, 0F);
         tail2Osteoderms.mirror = true;
         tail2Osteoderms.addBox("tail2Osteoderms", 0F, -5F, 0F, 1, 5, 20);
         tail2.addChild(tail2Osteoderms);
-        tail3 = new MowzieModelRenderer(this, "tail3");
+        tail3 = new AdvancedModelRenderer(this, "tail3");
         tail3.setRotationPoint(0F, 3F, 24F);
         setRotateAngle(tail3, 0F, 0F, 0F);
         tail3.mirror = true;
         tail3.addBox("tail3", -4F, 0F, 0F, 8, 5, 27);
-        tail3Osteoderms = new MowzieModelRenderer(this, "tail3Osteoderms");
+        tail3Osteoderms = new AdvancedModelRenderer(this, "tail3Osteoderms");
         tail3Osteoderms.setRotationPoint(0F, 1F, 0F);
         setRotateAngle(tail3Osteoderms, 0F, 0F, 0F);
         tail3Osteoderms.mirror = true;
@@ -172,28 +172,28 @@ public class ModelSarcosuchus extends ModelPrehistoric {
         tail3.addChild(tail3Osteoderms);
         tail2.addChild(tail3);
         tail1.addChild(tail2);
-        tail1Osteoderms = new MowzieModelRenderer(this, "tail1Osteoderms");
+        tail1Osteoderms = new AdvancedModelRenderer(this, "tail1Osteoderms");
         tail1Osteoderms.setRotationPoint(0F, 1F, 0F);
         setRotateAngle(tail1Osteoderms, 0F, 0F, 0F);
         tail1Osteoderms.mirror = true;
         tail1Osteoderms.addBox("tail1Osteoderms", 0F, -5F, 0F, 1, 5, 24);
         tail1.addChild(tail1Osteoderms);
         LowerBody.addChild(tail1);
-        rightHindThigh = new MowzieModelRenderer(this, "rightHindThigh");
+        rightHindThigh = new AdvancedModelRenderer(this, "rightHindThigh");
         rightHindThigh.setRotationPoint(-8F, 2F, 3.5F);
         setRotateAngle(rightHindThigh, 0F, 0F, 0F);
         rightHindThigh.mirror = true;
         rightHindThigh.mirror = true;
         rightHindThigh.addBox("rightHindThigh", -6F, 0F, -3.5F, 6, 5, 7);
         rightHindThigh.mirror = false;
-        rightHindLeg = new MowzieModelRenderer(this, "rightHindLeg");
+        rightHindLeg = new AdvancedModelRenderer(this, "rightHindLeg");
         rightHindLeg.setRotationPoint(-5.1F, 4.1F, 1.6F);
         setRotateAngle(rightHindLeg, 0F, 0F, 0F);
         rightHindLeg.mirror = true;
         rightHindLeg.mirror = true;
         rightHindLeg.addBox("rightHindLeg", -2F, 0F, -2.5F, 4, 7, 5);
         rightHindLeg.mirror = false;
-        rightHindFoot = new MowzieModelRenderer(this, "rightHindFoot");
+        rightHindFoot = new AdvancedModelRenderer(this, "rightHindFoot");
         rightHindFoot.setRotationPoint(0F, 5.1F, -2F);
         setRotateAngle(rightHindFoot, 0F, 0F, 0F);
         rightHindFoot.mirror = true;
@@ -202,45 +202,45 @@ public class ModelSarcosuchus extends ModelPrehistoric {
         rightHindThigh.addChild(rightHindLeg);
         LowerBody.addChild(rightHindThigh);
         body.addChild(LowerBody);
-        upperBody = new MowzieModelRenderer(this, "upperBody");
+        upperBody = new AdvancedModelRenderer(this, "upperBody");
         upperBody.setRotationPoint(0F, 1F, 0F);
         setRotateAngle(upperBody, 0F, 0F, 0F);
         upperBody.mirror = true;
         upperBody.addBox("upperBody", -8.5F, 0F, -12F, 17, 11, 12);
-        neck = new MowzieModelRenderer(this, "neck");
+        neck = new AdvancedModelRenderer(this, "neck");
         neck.setRotationPoint(0F, 1F, -12F);
         setRotateAngle(neck, 0F, 0F, 0F);
         neck.mirror = true;
         neck.addBox("neck", -6.5F, 0F, -8F, 13, 9, 8);
-        head = new MowzieModelRenderer(this, "head");
+        head = new AdvancedModelRenderer(this, "head");
         head.setRotationPoint(0F, 1F, -7F);
         setRotateAngle(head, 0F, 0F, 0F);
         head.mirror = true;
         head.addBox("head", -8F, -3.5F, -9F, 16, 7, 9);
-        bottomJawBase = new MowzieModelRenderer(this, "bottomJawBase");
+        bottomJawBase = new AdvancedModelRenderer(this, "bottomJawBase");
         bottomJawBase.setRotationPoint(-0.5F, 3.5F, -1F);
         setRotateAngle(bottomJawBase, 0F, 0F, 0F);
         bottomJawBase.mirror = true;
         bottomJawBase.addBox("bottomJaw", -6F, 0F, -8F, 13, 4, 8);
-        bottomJaw = new MowzieModelRenderer(this, "bottomJaw");
+        bottomJaw = new AdvancedModelRenderer(this, "bottomJaw");
         bottomJaw.setRotationPoint(1F, 1F, -8F);
         setRotateAngle(bottomJaw, 0F, 0F, 0F);
         bottomJaw.mirror = true;
         bottomJaw.addBox("lowerJaw", -4F, 0F, -21F, 7, 3, 21);
         bottomJawBase.addChild(bottomJaw);
         head.addChild(bottomJawBase);
-        upperJaw = new MowzieModelRenderer(this, "upperJaw");
+        upperJaw = new AdvancedModelRenderer(this, "upperJaw");
         upperJaw.setRotationPoint(0F, -0.5F, -9F);
         setRotateAngle(upperJaw, 0F, 0F, 0F);
         upperJaw.mirror = true;
         upperJaw.addBox("upperJaw", -3.5F, 0F, -18F, 7, 5, 18);
-        teeth = new MowzieModelRenderer(this, "teeth");
+        teeth = new AdvancedModelRenderer(this, "teeth");
         teeth.setRotationPoint(0F, 4F, 1F);
         setRotateAngle(teeth, 0F, 0F, 0F);
         teeth.mirror = true;
         teeth.addBox("teeth", -4F, 0F, -24F, 8, 4, 24);
         upperJaw.addChild(teeth);
-        snout = new MowzieModelRenderer(this, "snout");
+        snout = new AdvancedModelRenderer(this, "snout");
         snout.setRotationPoint(0F, -1F, -17.5F);
         setRotateAngle(snout, 0F, 0F, 0F);
         snout.mirror = true;
@@ -249,17 +249,17 @@ public class ModelSarcosuchus extends ModelPrehistoric {
         head.addChild(upperJaw);
         neck.addChild(head);
         upperBody.addChild(neck);
-        leftFrontThigh = new MowzieModelRenderer(this, "leftFrontThigh");
+        leftFrontThigh = new AdvancedModelRenderer(this, "leftFrontThigh");
         leftFrontThigh.setRotationPoint(8F, 2F, 0F);
         setRotateAngle(leftFrontThigh, 0F, 0F, 0F);
         leftFrontThigh.mirror = true;
         leftFrontThigh.addBox("leftFrontThigh", 0F, 0F, -3.5F, 6, 5, 7);
-        leftFrontLeg = new MowzieModelRenderer(this, "leftFrontLeg");
+        leftFrontLeg = new AdvancedModelRenderer(this, "leftFrontLeg");
         leftFrontLeg.setRotationPoint(5.1F, 4.1F, 1.6F);
         setRotateAngle(leftFrontLeg, 0F, 0F, 0F);
         leftFrontLeg.mirror = false;
         leftFrontLeg.addBox("leftFrontLeg", -2F, 0F, -2.5F, 4, 7, 5);
-        leftFrontFoot = new MowzieModelRenderer(this, "leftFrontFoot");
+        leftFrontFoot = new AdvancedModelRenderer(this, "leftFrontFoot");
         leftFrontFoot.setRotationPoint(0F, 5.1F, -2F);
         setRotateAngle(leftFrontFoot, 0F, 0F, 0F);
         leftFrontFoot.mirror = false;
@@ -267,21 +267,21 @@ public class ModelSarcosuchus extends ModelPrehistoric {
         leftFrontLeg.addChild(leftFrontFoot);
         leftFrontThigh.addChild(leftFrontLeg);
         upperBody.addChild(leftFrontThigh);
-        rightFrontThigh = new MowzieModelRenderer(this, "rightFrontThigh");
+        rightFrontThigh = new AdvancedModelRenderer(this, "rightFrontThigh");
         rightFrontThigh.setRotationPoint(-8F, 2F, 0F);
         setRotateAngle(rightFrontThigh, 0F, 0F, 0F);
         rightFrontThigh.mirror = true;
         rightFrontThigh.mirror = true;
         rightFrontThigh.addBox("rightFrontThigh", -6F, 0F, -3.5F, 6, 5, 7);
         rightFrontThigh.mirror = false;
-        rightFrontLeg = new MowzieModelRenderer(this, "rightFrontLeg");
+        rightFrontLeg = new AdvancedModelRenderer(this, "rightFrontLeg");
         rightFrontLeg.setRotationPoint(-5.1F, 4.1F, 1.6F);
         setRotateAngle(rightFrontLeg, 0F, 0F, 0F);
         rightFrontLeg.mirror = true;
         rightFrontLeg.mirror = true;
         rightFrontLeg.addBox("rightFrontLeg", -2F, 0F, -2.5F, 4, 7, 5);
         rightFrontLeg.mirror = true;
-        rightFrontFoot = new MowzieModelRenderer(this, "rightFrontFoot");
+        rightFrontFoot = new AdvancedModelRenderer(this, "rightFrontFoot");
         rightFrontFoot.setRotationPoint(0F, 5.1F, -2F);
         setRotateAngle(rightFrontFoot, 0F, 0F, 0F);
         rightFrontFoot.mirror = true;
@@ -291,7 +291,7 @@ public class ModelSarcosuchus extends ModelPrehistoric {
         rightFrontLeg.addChild(rightFrontFoot);
         rightFrontThigh.addChild(rightFrontLeg);
         upperBody.addChild(rightFrontThigh);
-        rightUpperBodyOsteoderms = new MowzieModelRenderer(this,
+        rightUpperBodyOsteoderms = new AdvancedModelRenderer(this,
                 "rightUpperBodyOsteoderms");
         rightUpperBodyOsteoderms.setRotationPoint(-5F, 4F, -17F);
         setRotateAngle(rightUpperBodyOsteoderms, 0F, 0F, 0F);
@@ -299,7 +299,7 @@ public class ModelSarcosuchus extends ModelPrehistoric {
         rightUpperBodyOsteoderms.addBox("rightUpperBodyOsteoderms", 0F, -5F,
                 0F, 1, 5, 17);
         upperBody.addChild(rightUpperBodyOsteoderms);
-        leftUpperBodyOsteoderms = new MowzieModelRenderer(this,
+        leftUpperBodyOsteoderms = new AdvancedModelRenderer(this,
                 "leftUpperBodyOsteoderms");
         leftUpperBodyOsteoderms.setRotationPoint(5F, 4F, -18F);
         setRotateAngle(leftUpperBodyOsteoderms, 0F, 0F, 0F);
@@ -307,7 +307,7 @@ public class ModelSarcosuchus extends ModelPrehistoric {
         leftUpperBodyOsteoderms.addBox("leftUpperBodyOsteoderms", 0F, -5F, 0F,
                 1, 5, 17);
         upperBody.addChild(leftUpperBodyOsteoderms);
-        middleUpperBodyOsteoderms = new MowzieModelRenderer(this,
+        middleUpperBodyOsteoderms = new AdvancedModelRenderer(this,
                 "middleUpperBodyOsteoderms");
         middleUpperBodyOsteoderms.setRotationPoint(0F, 3F, -17F);
         setRotateAngle(middleUpperBodyOsteoderms, 0F, 0F, 0F);
@@ -316,21 +316,21 @@ public class ModelSarcosuchus extends ModelPrehistoric {
                 0F, 1, 5, 17);
         upperBody.addChild(middleUpperBodyOsteoderms);
         body.addChild(upperBody);
-        middleBodyOsteoderms = new MowzieModelRenderer(this, "middleBodyOsteoderms");
+        middleBodyOsteoderms = new AdvancedModelRenderer(this, "middleBodyOsteoderms");
         middleBodyOsteoderms.setRotationPoint(0F, 3F, -2F);
         setRotateAngle(middleBodyOsteoderms, 0F, 0F, 0F);
         middleBodyOsteoderms.mirror = true;
         middleBodyOsteoderms.addBox("middleBodyOsteoderms", 0F, -5F, 0F, 1, 5,
                 24);
         body.addChild(middleBodyOsteoderms);
-        rightBodyOsteoderms = new MowzieModelRenderer(this, "rightBodyOsteoderms");
+        rightBodyOsteoderms = new AdvancedModelRenderer(this, "rightBodyOsteoderms");
         rightBodyOsteoderms.setRotationPoint(-5F, 4F, -2F);
         setRotateAngle(rightBodyOsteoderms, 0F, 0F, 0F);
         rightBodyOsteoderms.mirror = true;
         rightBodyOsteoderms
                 .addBox("rightBodyOsteoderms", 0F, -5F, 0F, 1, 5, 24);
         body.addChild(rightBodyOsteoderms);
-        leftBodyOsteoderms = new MowzieModelRenderer(this, "leftBodyOsteoderms");
+        leftBodyOsteoderms = new AdvancedModelRenderer(this, "leftBodyOsteoderms");
         leftBodyOsteoderms.setRotationPoint(5F, 4F, -2F);
         setRotateAngle(leftBodyOsteoderms, 0F, 0F, 0F);
         leftBodyOsteoderms.mirror = true;

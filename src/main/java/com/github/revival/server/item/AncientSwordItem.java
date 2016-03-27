@@ -69,7 +69,7 @@ public class AncientSwordItem extends ItemSword {
 	private boolean checkHelmet(EntityPlayer player) {
 		ItemStack item = player.inventory.armorInventory[3];
 		if(item != null && item.getItem() != null){
-			if (item.getItem() == FAItemRegistry.ancienthelmet) {
+			if (item.getItem() == FAItemRegistry.INSTANCE.ancienthelmet) {
 				return true;
 			}
 		}

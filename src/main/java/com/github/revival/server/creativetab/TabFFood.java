@@ -14,7 +14,7 @@ public class TabFFood extends CreativeTabs {
 
     @SideOnly(Side.CLIENT)
     public Item getTabIconItem() {
-        return FAItemRegistry.cookedChickenSoup;
+        return FAItemRegistry.INSTANCE.cookedChickenSoup;
     }
 
     public String getTranslatedTabLabel() {

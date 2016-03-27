@@ -14,8 +14,8 @@ public class SpikesBlockWorldGen extends WorldGenerator {
             int j1 = p_76484_4_ + p_76484_2_.nextInt(4) - p_76484_2_.nextInt(4);
             int k1 = p_76484_5_ + p_76484_2_.nextInt(8) - p_76484_2_.nextInt(8);
 
-            if (p_76484_1_.isAirBlock(i1, j1, k1) && p_76484_1_.getBlock(i1, j1 - 1, k1).isOpaqueCube() && FABlockRegistry.obsidianSpikes.canPlaceBlockAt(p_76484_1_, i1, j1, k1)) {
-                p_76484_1_.setBlock(i1, j1, k1, FABlockRegistry.obsidianSpikes, p_76484_2_.nextInt(4), 2);
+            if (p_76484_1_.isAirBlock(i1, j1, k1) && p_76484_1_.getBlock(i1, j1 - 1, k1).isOpaqueCube() && FABlockRegistry.INSTANCE.obsidianSpikes.canPlaceBlockAt(p_76484_1_, i1, j1, k1)) {
+                p_76484_1_.setBlock(i1, j1, k1, FABlockRegistry.INSTANCE.obsidianSpikes, p_76484_2_.nextInt(4), 2);
             }
         }
 

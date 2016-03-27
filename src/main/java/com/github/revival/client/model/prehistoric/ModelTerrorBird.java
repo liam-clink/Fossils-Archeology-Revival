@@ -2,28 +2,28 @@ package com.github.revival.client.model.prehistoric;
 
 import com.github.revival.client.model.base.ModelPrehistoric;
 import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
-import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelRenderer;
+import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 
 public class ModelTerrorBird extends ModelPrehistoric {
     //fields
-    private MowzieModelRenderer Body;
-    private MowzieModelRenderer RightThigh;
-    private MowzieModelRenderer RightLeg;
-    private MowzieModelRenderer LeftThigh;
-    private MowzieModelRenderer LeftLeg;
-    private MowzieModelRenderer Neck;
-    private MowzieModelRenderer Head;
-    private MowzieModelRenderer LowerBeak;
-    private MowzieModelRenderer LeftFoot;
-    private MowzieModelRenderer RightFoot;
-    private MowzieModelRenderer TailFeathers;
-    private MowzieModelRenderer BottomTailFeathers;
-    private MowzieModelRenderer Crest1;
-    private MowzieModelRenderer Crest2;
-    private MowzieModelRenderer RightWing;
-    private MowzieModelRenderer LeftWing;
-    private MowzieModelRenderer headpivot;
-    private MowzieModelRenderer headdummy;
+    private AdvancedModelRenderer Body;
+    private AdvancedModelRenderer RightThigh;
+    private AdvancedModelRenderer RightLeg;
+    private AdvancedModelRenderer LeftThigh;
+    private AdvancedModelRenderer LeftLeg;
+    private AdvancedModelRenderer Neck;
+    private AdvancedModelRenderer Head;
+    private AdvancedModelRenderer LowerBeak;
+    private AdvancedModelRenderer LeftFoot;
+    private AdvancedModelRenderer RightFoot;
+    private AdvancedModelRenderer TailFeathers;
+    private AdvancedModelRenderer BottomTailFeathers;
+    private AdvancedModelRenderer Crest1;
+    private AdvancedModelRenderer Crest2;
+    private AdvancedModelRenderer RightWing;
+    private AdvancedModelRenderer LeftWing;
+    private AdvancedModelRenderer headpivot;
+    private AdvancedModelRenderer headdummy;
 
     public ModelTerrorBird() {
         textureWidth = 128;
@@ -50,26 +50,26 @@ public class ModelTerrorBird extends ModelPrehistoric {
         setTextureOffset("headdummy.headdummy", 16, 34);
         setTextureOffset("headpivot.headpivot", 16, 27);
 
-        Body = new MowzieModelRenderer(this, "Body");
+        Body = new AdvancedModelRenderer(this, "Body");
         Body.setRotationPoint(0F, 0.5F, -8F);
         setRotateAngle(Body, 0F, 0F, 0F);
         Body.mirror = true;
         Body.addBox("Body", -6F, 0F, 0F, 12, 10, 15);
-        LeftThigh = new MowzieModelRenderer(this, "LeftThigh");
+        LeftThigh = new AdvancedModelRenderer(this, "LeftThigh");
         LeftThigh.setRotationPoint(4.5F, 6F, 10F);
         setRotateAngle(LeftThigh, 0F, 0F, 0F);
         LeftThigh.mirror = true;
         LeftThigh.mirror = true;
         LeftThigh.addBox("LeftThigh", -2F, 0F, -2F, 4, 7, 5);
         LeftThigh.mirror = false;
-        LeftLeg = new MowzieModelRenderer(this, "LeftLeg");
+        LeftLeg = new AdvancedModelRenderer(this, "LeftLeg");
         LeftLeg.setRotationPoint(0F, 5F, 2.5F);
         setRotateAngle(LeftLeg, 0F, 0F, 0F);
         LeftLeg.mirror = true;
         LeftLeg.mirror = true;
         LeftLeg.addBox("LeftLeg", -1.5F, 0F, -2F, 3, 12, 3);
         LeftLeg.mirror = false;
-        LeftFoot = new MowzieModelRenderer(this, "LeftFoot");
+        LeftFoot = new AdvancedModelRenderer(this, "LeftFoot");
         LeftFoot.setRotationPoint(0F, 11.5F, 0F);
         setRotateAngle(LeftFoot, 0F, 0F, 0F);
         LeftFoot.mirror = true;
@@ -79,12 +79,12 @@ public class ModelTerrorBird extends ModelPrehistoric {
         LeftLeg.addChild(LeftFoot);
         LeftThigh.addChild(LeftLeg);
         Body.addChild(LeftThigh);
-        TailFeathers = new MowzieModelRenderer(this, "TailFeathers");
+        TailFeathers = new AdvancedModelRenderer(this, "TailFeathers");
         TailFeathers.setRotationPoint(0F, 0F, 15F);
         setRotateAngle(TailFeathers, 0F, 0F, 0F);
         TailFeathers.mirror = true;
         TailFeathers.addBox("TailFeathers", -2F, 0F, 0F, 4, 1, 10);
-        BottomTailFeathers = new MowzieModelRenderer(this, "BottomTailFeathers");
+        BottomTailFeathers = new AdvancedModelRenderer(this, "BottomTailFeathers");
         BottomTailFeathers.setRotationPoint(0F, 0F, 0F);
         setRotateAngle(BottomTailFeathers, 0F, 0F, 0F);
         BottomTailFeathers.mirror = true;
@@ -92,34 +92,34 @@ public class ModelTerrorBird extends ModelPrehistoric {
         TailFeathers.addChild(BottomTailFeathers);
         Body.addChild(TailFeathers);
 
-        headpivot = new MowzieModelRenderer(this, "headpivot");
+        headpivot = new AdvancedModelRenderer(this, "headpivot");
         headpivot.setRotationPoint(0F, 0F, 0.0F);
         //headpivot.addBox("headpivot", 0F, 0F, 0F, 1, 1, 1);
         setRotateAngle(headpivot, 0F, 0F, 0F);
 
-        headdummy = new MowzieModelRenderer(this, "headdummy");
+        headdummy = new AdvancedModelRenderer(this, "headdummy");
         headdummy.setRotationPoint(0F, -14F, -1.5F);
         //headdummy.addBox("headdummy", -0.5F, -0.5F, -0.5F, 1, 1, 1);
         setRotateAngle(headpivot, 0F, 0F, 0F);
 
-        Neck = new MowzieModelRenderer(this, "Neck");
+        Neck = new AdvancedModelRenderer(this, "Neck");
         Neck.setRotationPoint(0F, 5F, 3F);
         setRotateAngle(Neck, 0F, 0F, 0F);
         Neck.mirror = true;
         Neck.addBox("Neck", -2F, -14F, -4F, 4, 14, 4);
-        Head = new MowzieModelRenderer(this, "Head");
+        Head = new AdvancedModelRenderer(this, "Head");
         Head.setRotationPoint(0F, 0F, 0F);
         setRotateAngle(Head, 0F, 0F, 0F);
         Head.mirror = true;
         Head.addBox("Head", -4F, -8F, -15F, 8, 8, 16);
         Head.addBox("Throat", -3.5F, -4.5F, -3.9F, 7, 4, 2);
         Head.addBox("Mouth", -3.5F, -3.5F, -13.9F, 7, 1, 10);
-        Crest1 = new MowzieModelRenderer(this, "Crest1");
+        Crest1 = new AdvancedModelRenderer(this, "Crest1");
         Crest1.setRotationPoint(0F, -6F, 0.4F);
         setRotateAngle(Crest1, 0F, 0F, 0F);
         Crest1.mirror = true;
         Crest1.addBox("Crest1", -2F, -2.2F, 0F, 4, 6, 4);
-        Crest2 = new MowzieModelRenderer(this, "Crest2");
+        Crest2 = new AdvancedModelRenderer(this, "Crest2");
         Crest2.setRotationPoint(0F, -1F, 2F);
         setRotateAngle(Crest2, 0F, 0F, 0F);
         Crest2.mirror = true;
@@ -127,7 +127,7 @@ public class ModelTerrorBird extends ModelPrehistoric {
         Crest2.addBox("Crest3", -1F, -1.5F, 4F, 2, 6, 4);
         Crest1.addChild(Crest2);
         Head.addChild(Crest1);
-        LowerBeak = new MowzieModelRenderer(this, "LowerBeak");
+        LowerBeak = new AdvancedModelRenderer(this, "LowerBeak");
         LowerBeak.setRotationPoint(0.5F, 5F, 0F);
         setRotateAngle(LowerBeak, 0F, 0F, 0F);
         LowerBeak.mirror = true;
@@ -136,13 +136,13 @@ public class ModelTerrorBird extends ModelPrehistoric {
         Neck.addChild(headdummy);
         headpivot.addChild(Head);
         Body.addChild(Neck);
-        RightWing = new MowzieModelRenderer(this, "RightWing");
+        RightWing = new AdvancedModelRenderer(this, "RightWing");
         RightWing.setRotationPoint(-6F, 2F, 6.5F);
         setRotateAngle(RightWing, 0F, 0F, 0F);
         RightWing.mirror = true;
         RightWing.addBox("RightWing", -1F, 0F, -4.5F, 1, 5, 9);
         Body.addChild(RightWing);
-        LeftWing = new MowzieModelRenderer(this, "LeftWing");
+        LeftWing = new AdvancedModelRenderer(this, "LeftWing");
         LeftWing.setRotationPoint(6F, 2F, 5.5F);
         setRotateAngle(LeftWing, 0F, 0F, 0F);
         LeftWing.mirror = true;
@@ -150,17 +150,17 @@ public class ModelTerrorBird extends ModelPrehistoric {
         LeftWing.addBox("LeftWing", 0F, 0F, -4.5F, 1, 5, 9);
         LeftWing.mirror = false;
         Body.addChild(LeftWing);
-        RightThigh = new MowzieModelRenderer(this, "RightThigh");
+        RightThigh = new AdvancedModelRenderer(this, "RightThigh");
         RightThigh.setRotationPoint(-4.5F, 6F, 10F);
         setRotateAngle(RightThigh, 0F, 0F, 0F);
         RightThigh.mirror = true;
         RightThigh.addBox("RightThigh", -2F, 0F, -2F, 4, 7, 5);
-        RightLeg = new MowzieModelRenderer(this, "RightLeg");
+        RightLeg = new AdvancedModelRenderer(this, "RightLeg");
         RightLeg.setRotationPoint(0F, 5F, 2.5F);
         setRotateAngle(RightLeg, 0F, 0F, 0F);
         RightLeg.mirror = true;
         RightLeg.addBox("RightLeg", -1.5F, 0F, -2F, 3, 12, 3);
-        RightFoot = new MowzieModelRenderer(this, "RightFoot");
+        RightFoot = new AdvancedModelRenderer(this, "RightFoot");
         RightFoot.setRotationPoint(0F, 11.5F, 0F);
         setRotateAngle(RightFoot, 0F, 0F, 0F);
         RightFoot.mirror = true;
@@ -168,7 +168,7 @@ public class ModelTerrorBird extends ModelPrehistoric {
         RightLeg.addChild(RightFoot);
         RightThigh.addChild(RightLeg);
         Body.addChild(RightThigh);
-        doMowzieStuff(false);
+        doAdvancedStuff(false);
     }
 
    /* public void render(Entity var1, float var2, float var3, float var4, float var5, float var6, float var7)

@@ -46,7 +46,7 @@ public class TileEntityTimeMachine extends TileEntity implements IInventory,
     public boolean isClockInPlace() {
         if (this.getStackInSlot(6) != null) {
             if (this.getStackInSlot(6).getItem() != null) {
-                if (this.getStackInSlot(6).getItem() == FAItemRegistry.ancientClock) {
+                if (this.getStackInSlot(6).getItem() == FAItemRegistry.INSTANCE.ancientClock) {
                     return true;
                 }
             }
@@ -371,7 +371,7 @@ public class TileEntityTimeMachine extends TileEntity implements IInventory,
                     }
 
                     if (var4 == Blocks.dirt) {
-                        var4 = FABlockRegistry.palaePlanks;
+                        var4 = FABlockRegistry.INSTANCE.palaePlanks;
                     }
 
                     // this.memoryArray[var1][var2][var3] = var4.getBlock;

@@ -11,7 +11,7 @@ public class BlockAncientStone extends Block {
         super(Material.rock);
         setHardness(1.5F);
         setBlockName(LocalizationStrings.ANCIENT_STONE_NAME);
-        setCreativeTab(FATabRegistry.tabFBlocks);
+        setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
     }
 
     /**

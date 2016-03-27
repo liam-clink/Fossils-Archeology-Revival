@@ -53,7 +53,7 @@ public class AnubiteAINearestAttackableTarget extends EntityAITarget {
                         EntityPlayer player = (EntityPlayer) prey;
                         if (player.getCurrentArmor(3) != null) {
                             if (player.getCurrentArmor(3).getItem() != null) {
-                                if (player.getCurrentArmor(3).getItem() == FAItemRegistry.ancienthelmet) {
+                                if (player.getCurrentArmor(3).getItem() == FAItemRegistry.INSTANCE.ancienthelmet) {
                                     return false;
                                 }
                             }

@@ -1,28 +1,33 @@
 package com.github.revival.server.entity.mob.test;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
-
-import net.ilexiconn.llibrary.client.model.modelbase.ChainBuffer;
-import net.ilexiconn.llibrary.common.animation.Animation;
-import net.ilexiconn.llibrary.common.animation.IAnimated;
+import com.github.revival.Revival;
+import com.github.revival.client.gui.GuiPedia;
+import com.github.revival.server.api.IPrehistoricAI;
+import com.github.revival.server.block.FABlockRegistry;
+import com.github.revival.server.block.entity.TileEntityNewFeeder;
+import com.github.revival.server.config.FossilConfig;
+import com.github.revival.server.entity.EnumDiet;
+import com.github.revival.server.entity.ai.DinoAIAttackOnCollide;
+import com.github.revival.server.enums.*;
+import com.github.revival.server.enums.EnumPrehistoricAI.*;
+import com.github.revival.server.handler.LocalizationStrings;
+import com.github.revival.server.item.FAItemRegistry;
+import com.github.revival.server.message.MessageFoodParticles;
+import com.github.revival.server.util.FoodMappings;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.ilexiconn.llibrary.client.model.tools.ChainBuffer;
+import net.ilexiconn.llibrary.server.animation.Animation;
+import net.ilexiconn.llibrary.server.animation.AnimationHandler;
+import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.command.IEntitySelector;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityAgeable;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.IEntityLivingData;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIOwnerHurtByTarget;
@@ -37,51 +42,21 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ChunkCoordinates;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
-import net.minecraft.util.Vec3;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
-
 import org.lwjgl.opengl.GL11;
 
-import com.github.revival.Revival;
-import com.github.revival.client.gui.GuiPedia;
-import com.github.revival.server.api.IPrehistoricAI;
-import com.github.revival.server.block.FABlockRegistry;
-import com.github.revival.server.block.entity.TileEntityNewFeeder;
-import com.github.revival.server.config.FossilConfig;
-import com.github.revival.server.entity.EnumDiet;
-import com.github.revival.server.entity.ai.DinoAIAttackOnCollide;
-import com.github.revival.server.enums.EnumAnimation;
-import com.github.revival.server.enums.EnumOrderType;
-import com.github.revival.server.enums.EnumPrehistoric;
-import com.github.revival.server.enums.EnumPrehistoricAI.Activity;
-import com.github.revival.server.enums.EnumPrehistoricAI.Attacking;
-import com.github.revival.server.enums.EnumPrehistoricAI.Climbing;
-import com.github.revival.server.enums.EnumPrehistoricAI.Following;
-import com.github.revival.server.enums.EnumPrehistoricAI.Jumping;
-import com.github.revival.server.enums.EnumPrehistoricAI.Moving;
-import com.github.revival.server.enums.EnumPrehistoricAI.Response;
-import com.github.revival.server.enums.EnumPrehistoricAI.Stalking;
-import com.github.revival.server.enums.EnumPrehistoricAI.Taming;
-import com.github.revival.server.enums.EnumPrehistoricAI.Untaming;
-import com.github.revival.server.enums.EnumPrehistoricAI.WaterAbility;
-import com.github.revival.server.enums.EnumPrehistoricMood;
-import com.github.revival.server.enums.EnumSituation;
-import com.github.revival.server.handler.LocalizationStrings;
-import com.github.revival.server.item.FAItemRegistry;
-import com.github.revival.server.message.MessageFoodParticles;
-import com.github.revival.server.util.FoodMappings;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
-public abstract class EntityNewPrehistoric extends EntityTameable implements IPrehistoricAI, IAnimated {
+public abstract class EntityNewPrehistoric extends EntityTameable implements IPrehistoricAI, IAnimatedEntity {
 
 	public static final int OWNER_DISPLAY_NAME_INDEX = 24;
 	public static final int HUNGER_TICK_DATA_INDEX = 18;
@@ -100,8 +75,8 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	protected static final ResourceLocation pediaclock = new ResourceLocation("fossil:textures/gui/PediaClock.png");
 	protected static final ResourceLocation pediafood = new ResourceLocation("fossil:textures/gui/PediaFood.png");
 	protected static final ResourceLocation pediaheart = new ResourceLocation("fossil:textures/gui/PediaHeart.png");
-	public static Animation animation_speak = new Animation(1, 20);
-	public static Animation animation_attack = new Animation(2, 20);
+	public static Animation animation_speak = Animation.create(1, 20);
+	public static Animation animation_attack = Animation.create(2, 20);
 	public float minSize;
 	public float maxSize;
 	public int teenAge;
@@ -130,6 +105,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	protected boolean breaksBlocks;
 	private Animation currentAnimation;
 	private int animTick;
+	@SideOnly(Side.CLIENT)
 	public ChainBuffer tailbuffer;
 	public float jumpLength;
 	public int ticksEating;
@@ -147,8 +123,8 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		this.pediaScale = 1.0F;
 		nearByMobsAllowed = 15;
 		this.currentOrder = EnumOrderType.WANDER;
-		animation_speak.duration = this.getSpeakLength();
-		animation_attack.duration = this.getAttackLength();
+		//animation_speak.duration = this.getSpeakLength();
+		//animation_attack.duration = this.getAttackLength();
 		attackSpeedBoost = 1.3D;
 		this.tasks.addTask(0, new DinoAIAge(this));
 		this.tasks.addTask(0, new DinoAIHunger(this));
@@ -172,7 +148,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
 		//this.targetTasks.addTask(2, new EntityAITargetNonTamed(this, EntityLivingBase.class, 200, false));
 		hasBabyTexture = true;
-		tailbuffer = new ChainBuffer(this.getTailSegments());
+		tailbuffer = new ChainBuffer();
 	}
 
 	public static boolean isCannibal() {
@@ -501,7 +477,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 			ticksSitted++;
 		}
 
-		if (!worldObj.isRemote && !this.isSitting() && this.getRNG().nextInt(1000) == 1 && !this.isRiding() && (this.getAnimation() == this.animation_none || this.getAnimation() == this.animation_speak)) {
+		if (!worldObj.isRemote && !this.isSitting() && this.getRNG().nextInt(1000) == 1 && !this.isRiding() && (this.getAnimation() == this.NO_ANIMATION || this.getAnimation() == this.animation_speak)) {
 			this.setSitting(true);
 			ticksSitted = 0;
 		}
@@ -705,7 +681,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 			sitProgress -= 0.5F;
 			//Revival.channel.sendToServer(new MessageDinoSit(this.getEntityId(), sitProgress));
 		}
-		Animation.tickAnimations(this);
+		AnimationHandler.INSTANCE.updateAnimations(this);
 		if (!this.worldObj.isRemote && this.aiClimbType() == Climbing.ARTHROPOD) {
 			this.setBesideClimbableBlock(this.isCollidedHorizontally);
 		}
@@ -789,7 +765,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 						for (int c = (int) Math.round(this.boundingBox.minZ) - 1; c <= (int) Math.round(this.boundingBox.maxZ) + 1; c++) {
 
 							Block block = worldObj.getBlock(a, b, c);
-							if (!(block instanceof BlockBush) && !(block instanceof BlockLiquid) && block != Blocks.bedrock && block != FABlockRegistry.ancientGlass && block != FABlockRegistry.strongGlass && block.getBlockHardness(worldObj, a, b, c) < hardness) {
+							if (!(block instanceof BlockBush) && !(block instanceof BlockLiquid) && block != Blocks.bedrock && block != FABlockRegistry.INSTANCE.ancientGlass && block != FABlockRegistry.INSTANCE.strongGlass && block.getBlockHardness(worldObj, a, b, c) < hardness) {
 								this.motionX *= 0.6D;
 								this.motionZ *= 0.6D;
 
@@ -1173,7 +1149,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		if(dmg.getEntity() != null)this.setMood(this.getMood() - 5);
 		if (this.getHurtSound() != null) {
 			if (this.getAnimation() != null) {
-				if (this.getAnimation().animationId == 0 && worldObj.isRemote) {
+				if (this.getAnimation().getID() == 0 && worldObj.isRemote) {
 					this.setAnimation(animation_speak);
 				}
 			}
@@ -1257,7 +1233,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
 			if (itemstack != null) {
 				if (itemstack.getItem() != null) {
-					if (this.aiTameType() == Taming.GEM && itemstack.getItem() == FAItemRegistry.gem || this.aiTameType() == Taming.BLUEGEM && itemstack.getItem() == FAItemRegistry.gem_blue) {
+					if (this.aiTameType() == Taming.GEM && itemstack.getItem() == FAItemRegistry.INSTANCE.gem || this.aiTameType() == Taming.BLUEGEM && itemstack.getItem() == FAItemRegistry.INSTANCE.gem_blue) {
 						if (!this.isTamed()) {
 							this.triggerTamingAcheivement(player);
 							this.heal(200);
@@ -1278,7 +1254,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 			}
 
 			if (itemstack != null) {
-				if (itemstack.getItem() == FAItemRegistry.chickenEss && !player.worldObj.isRemote) {
+				if (itemstack.getItem() == FAItemRegistry.INSTANCE.chickenEss && !player.worldObj.isRemote) {
 					// Be grown up by chicken essence
 					if (this.getDinoAge() < this.getAdultAge() && this.getHunger() > 0) {
 						if (this.getHunger() > 0) {
@@ -1294,7 +1270,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 							if (!player.capabilities.isCreativeMode) {
 								player.inventory.addItemStackToInventory(new ItemStack(Items.glass_bottle, 1));
 							}
-							Revival.channel.sendToAll(new MessageFoodParticles(getEntityId(), Item.getIdFromItem(FAItemRegistry.chickenEss)));
+							Revival.channel.sendToAll(new MessageFoodParticles(getEntityId(), Item.getIdFromItem(FAItemRegistry.INSTANCE.chickenEss)));
 							this.increaseDinoAge();
 							this.setHunger(1 + (new Random()).nextInt(this.getHunger()));
 							this.setOwner(player.getDisplayName());
@@ -1355,34 +1331,34 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 					}
 
 					if (FMLCommonHandler.instance().getSide().isClient()
-							&& itemstack.getItem() == FAItemRegistry.dinoPedia) {
+							&& itemstack.getItem() == FAItemRegistry.INSTANCE.dinoPedia) {
 
 						this.setPedia();
 						player.openGui(Revival.instance, 4, this.worldObj, (int) this.posX, (int) this.posY, (int) this.posZ);
 						return true;
 					}
 
-					if (itemstack.getItem() == FAItemRegistry.whip 
+					if (itemstack.getItem() == FAItemRegistry.INSTANCE.whip
 								&& this.selfType.isRideable() && this.isAdult()
 								&& !this.worldObj.isRemote
 							) {
 
 						if(this.isTamed() && func_152114_e(player)){
 							if(this.getRidingPlayer() == null){
-								Revival.channel.sendToAll(new MessageFoodParticles(getEntityId(), FABlockRegistry.volcanicRock));
+								Revival.channel.sendToAll(new MessageFoodParticles(getEntityId(), FABlockRegistry.INSTANCE.volcanicRock));
 								this.setOrder(EnumOrderType.WANDER);
 								setRidingPlayer(player);
 							}
 							else if(this.getRidingPlayer() == player){
 								this.setSprinting(true);
-								Revival.channel.sendToAll(new MessageFoodParticles(getEntityId(), FABlockRegistry.volcanicRock));
+								Revival.channel.sendToAll(new MessageFoodParticles(getEntityId(), FABlockRegistry.INSTANCE.volcanicRock));
 								this.setMood(this.getMood() - 1);
 							}
 						}else {
 							System.out.println(player.getDisplayName());
 
 							this.setMood(this.getMood() - 1);
-							Revival.channel.sendToAll(new MessageFoodParticles(getEntityId(), FABlockRegistry.volcanicRock));
+							Revival.channel.sendToAll(new MessageFoodParticles(getEntityId(), FABlockRegistry.INSTANCE.volcanicRock));
 							if(getRNG().nextInt(15) == 0){
 								this.setMood(this.getMood() - 25);
 								this.setTamed(true);
@@ -1651,14 +1627,14 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		currentAnimation = animation;
 	}
 
-	public Animation[] animations() {
-		return new Animation[]{this.animation_none, this.animation_speak, this.animation_attack};
+	public Animation[] getAnimations() {
+		return new Animation[]{this.NO_ANIMATION, this.animation_speak, this.animation_attack};
 	}
 
 	public void playLivingSound() {
 		super.playLivingSound();
 		if (this.getAnimation() != null) {
-			if (this.getAnimation().animationId == 0 && !worldObj.isRemote) {
+			if (this.getAnimation().getID() == 0 && !worldObj.isRemote) {
 				this.setAnimation(animation_speak);
 			}
 		}

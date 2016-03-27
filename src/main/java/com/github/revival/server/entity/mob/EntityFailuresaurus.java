@@ -95,7 +95,7 @@ public class EntityFailuresaurus extends EntityMob {
      * Returns the item ID for the item the mob drops on death.
      */
     protected Item getDropItem() {
-        return FAItemRegistry.failuresaurusFlesh;
+        return FAItemRegistry.INSTANCE.failuresaurusFlesh;
     }
 
     public void onLivingUpdate() {
@@ -108,8 +108,8 @@ public class EntityFailuresaurus extends EntityMob {
             j = MathHelper.floor_double(this.posY);
             k = MathHelper.floor_double(this.posZ + (double) ((float) (l / 2 % 2 * 2 - 1) * 0.25F));
 
-            if (this.worldObj.getBlock(i, j, k).getMaterial() == Material.air && FABlockRegistry.blockSlimeTrail.canPlaceBlockAt(this.worldObj, i, j, k)) {
-                this.worldObj.setBlock(i, j, k, FABlockRegistry.blockSlimeTrail);
+            if (this.worldObj.getBlock(i, j, k).getMaterial() == Material.air && FABlockRegistry.INSTANCE.blockSlimeTrail.canPlaceBlockAt(this.worldObj, i, j, k)) {
+                this.worldObj.setBlock(i, j, k, FABlockRegistry.INSTANCE.blockSlimeTrail);
             }
         }
     }

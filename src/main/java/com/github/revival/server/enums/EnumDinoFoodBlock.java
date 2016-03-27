@@ -20,8 +20,8 @@ public enum EnumDinoFoodBlock {
     Reed(Blocks.reeds, 15, 2),
     Sapling(Blocks.sapling, 15, 1),
     TallGrass(Blocks.tallgrass, 5, 1),
-    Ferns(FABlockRegistry.ferns, 55, 4),
-    Palae(FABlockRegistry.palmLeaves, 40, 4);
+    Ferns(FABlockRegistry.INSTANCE.ferns, 55, 4),
+    Palae(FABlockRegistry.INSTANCE.palmLeaves, 40, 4);
     public Block block;
     public int FoodValue;
     public int HealValue;

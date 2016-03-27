@@ -358,19 +358,19 @@ public class EntityJavelin extends EntityArrow implements IEntityAdditionalSpawn
         {
             case 0:
             default:
-                return FAItemRegistry.woodjavelin;
+                return FAItemRegistry.INSTANCE.woodjavelin;
 
             case 2:
-                return FAItemRegistry.ironjavelin;
+                return FAItemRegistry.INSTANCE.ironjavelin;
 
             case 3:
-                return FAItemRegistry.diamondjavelin;
+                return FAItemRegistry.INSTANCE.diamondjavelin;
 
             case 1:
-                return FAItemRegistry.stonejavelin;
+                return FAItemRegistry.INSTANCE.stonejavelin;
 
             case 4:
-                return FAItemRegistry.goldjavelin;
+                return FAItemRegistry.INSTANCE.goldjavelin;
         }
     }
 

@@ -20,7 +20,7 @@ public class BlockPalmSapling extends BlockBush implements IGrowable {
         super();
         float f = 0.4F;
         setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, f * 2.0F, 0.5F + f);
-        this.setCreativeTab(FATabRegistry.tabFBlocks);
+        this.setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
         this.setStepSound(Block.soundTypeGrass);
         this.setHardness(0.2F);
         this.setResistance(1F);
@@ -72,7 +72,7 @@ public class BlockPalmSapling extends BlockBush implements IGrowable {
 
         if (!canGenerate(world, i, j, k) && (j1 == Blocks.grass || j1 == Blocks.dirt) && j < 128 - 12 - 1) {
             w0.generate(world, random, i, j, k);
-            world.setBlock(i, j, k, FABlockRegistry.palmLog);
+            world.setBlock(i, j, k, FABlockRegistry.INSTANCE.palmLog);
         }
     }
 

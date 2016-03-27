@@ -30,12 +30,12 @@ public class BlockFossilPlant extends BlockBush {
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int var6, float var7, float var8, float var9) {
         ItemStack itemstack = player.getCurrentEquippedItem();
-        if (this == FABlockRegistry.bennettitales_small) {
-            this.grow(FABlockRegistry.bennettitales_large, itemstack, world, x, y, z, player);
+        if (this == FABlockRegistry.INSTANCE.bennettitales_small) {
+            this.grow(FABlockRegistry.INSTANCE.bennettitales_large, itemstack, world, x, y, z, player);
             return true;
         }
-        if (this == FABlockRegistry.horsetail_small) {
-            this.grow(FABlockRegistry.horsetail_large, itemstack, world, x, y, z, player);
+        if (this == FABlockRegistry.INSTANCE.horsetail_small) {
+            this.grow(FABlockRegistry.INSTANCE.horsetail_large, itemstack, world, x, y, z, player);
             return true;
         }
         return false;

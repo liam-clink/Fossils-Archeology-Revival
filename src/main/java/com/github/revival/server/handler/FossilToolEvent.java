@@ -41,12 +41,12 @@ public class FossilToolEvent {
 
             if (hasPaleontologyBonus == true) {
 
-                if (block == FABlockRegistry.blockFossil) {
+                if (block == FABlockRegistry.INSTANCE.blockFossil) {
                     switch (paleontologyBonus) {
                         case 1:
                             if (player.worldObj.rand.nextFloat() < 0.70) {
                                 event.drops.remove(0);
-                                event.drops.add(new ItemStack(FAItemRegistry.biofossil, 1));
+                                event.drops.add(new ItemStack(FAItemRegistry.INSTANCE.biofossil, 1));
                                 break;
                             } else {
                                 break;
@@ -54,7 +54,7 @@ public class FossilToolEvent {
                         case 2:
                             if (player.worldObj.rand.nextFloat() < 0.80) {
                                 event.drops.remove(0);
-                                event.drops.add(new ItemStack(FAItemRegistry.biofossil, 1));
+                                event.drops.add(new ItemStack(FAItemRegistry.INSTANCE.biofossil, 1));
                                 break;
                             } else {
                                 break;
@@ -62,7 +62,7 @@ public class FossilToolEvent {
                         case 3:
                             if (player.worldObj.rand.nextFloat() < 0.90) {
                                 event.drops.remove(0);
-                                event.drops.add(new ItemStack(FAItemRegistry.biofossil, 1));
+                                event.drops.add(new ItemStack(FAItemRegistry.INSTANCE.biofossil, 1));
                                 break;
                             } else {
                                 break;
@@ -74,12 +74,12 @@ public class FossilToolEvent {
 
                 }
 
-                if (block == FABlockRegistry.blockPermafrost) {
+                if (block == FABlockRegistry.INSTANCE.blockPermafrost) {
                     switch (paleontologyBonus) {
                         case 1:
                             if (player.worldObj.rand.nextFloat() < 0.50) {
                                 event.drops.remove(0);
-                                event.drops.add(new ItemStack(FAItemRegistry.icedMeat, 1));
+                                event.drops.add(new ItemStack(FAItemRegistry.INSTANCE.icedMeat, 1));
                                 break;
                             } else {
                                 break;
@@ -87,7 +87,7 @@ public class FossilToolEvent {
                         case 2:
                             if (player.worldObj.rand.nextFloat() < 0.70) {
                                 event.drops.remove(0);
-                                event.drops.add(new ItemStack(FAItemRegistry.icedMeat, 1));
+                                event.drops.add(new ItemStack(FAItemRegistry.INSTANCE.icedMeat, 1));
                                 break;
                             } else {
                                 break;
@@ -95,7 +95,7 @@ public class FossilToolEvent {
                         case 3:
                             if (player.worldObj.rand.nextFloat() < 0.90) {
                                 event.drops.remove(0);
-                                event.drops.add(new ItemStack(FAItemRegistry.icedMeat, 1));
+                                event.drops.add(new ItemStack(FAItemRegistry.INSTANCE.icedMeat, 1));
                                 break;
                             } else {
                                 break;
@@ -111,12 +111,12 @@ public class FossilToolEvent {
 
                 float rand = player.worldObj.rand.nextInt(1000);
 
-                if (block == FABlockRegistry.blockFossil) {
+                if (block == FABlockRegistry.INSTANCE.blockFossil) {
                     switch (archeologyBonus) {
                         case 1:
                             if (rand < 500) {
                                 event.drops.remove(0);
-                                event.drops.add(new ItemStack(FAItemRegistry.relic, 1));
+                                event.drops.add(new ItemStack(FAItemRegistry.INSTANCE.relic, 1));
                                 break;
                             } else {
                                 break;
@@ -124,7 +124,7 @@ public class FossilToolEvent {
                         case 2:
                             if (rand < 700) {
                                 event.drops.remove(0);
-                                event.drops.add(new ItemStack(FAItemRegistry.relic, 1));
+                                event.drops.add(new ItemStack(FAItemRegistry.INSTANCE.relic, 1));
                                 break;
                             } else {
                                 break;
@@ -132,11 +132,11 @@ public class FossilToolEvent {
                         case 3:
                             if (rand < 900) {
                                 event.drops.remove(0);
-                                event.drops.add(new ItemStack(FAItemRegistry.relic, 1));
+                                event.drops.add(new ItemStack(FAItemRegistry.INSTANCE.relic, 1));
                                 break;
                             } else if (rand < 904) {
                                 event.drops.remove(0);
-                                event.drops.add(new ItemStack(FAItemRegistry.gem, 1));
+                                event.drops.add(new ItemStack(FAItemRegistry.INSTANCE.gem, 1));
                                 break;
                             } else {
                                 break;

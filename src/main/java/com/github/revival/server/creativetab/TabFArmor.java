@@ -14,7 +14,7 @@ public class TabFArmor extends CreativeTabs {
 
     @SideOnly(Side.CLIENT)
     public Item getTabIconItem() {
-        return FAItemRegistry.ancienthelmet;
+        return FAItemRegistry.INSTANCE.ancienthelmet;
     }
 
     public String getTranslatedTabLabel() {

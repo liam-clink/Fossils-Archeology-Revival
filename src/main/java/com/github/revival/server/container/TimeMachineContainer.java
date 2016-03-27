@@ -51,7 +51,7 @@ public class TimeMachineContainer extends Container {
         if (var2 == 6) {
             if (slot.getStack() != null) {
                 if (slot.getStack().getItem() != null) {
-                    if (slot.getStack().getItem() == FAItemRegistry.ancientClock) {
+                    if (slot.getStack().getItem() == FAItemRegistry.INSTANCE.ancientClock) {
                         par1EntityPlayer.addStat(FossilAchievementHandler.clock, 1);
                     }
                 }

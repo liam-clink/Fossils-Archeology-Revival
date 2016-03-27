@@ -477,13 +477,13 @@ public class AnuCastlePiece05 {
         world.setBlock(x + 52, y + 0, z + 138, Blocks.stonebrick, 0, 3);
         world.setBlock(x + 53, y + 0, z + 138, Blocks.stone_brick_stairs, 3, 3);
         world.setBlock(x + 59, y + 0, z + 138, Blocks.stone_brick_stairs, 3, 3);
-        world.setBlock(x + 60, y + 0, z + 138, FABlockRegistry.anubiteStatue, 0, 3);
+        world.setBlock(x + 60, y + 0, z + 138, FABlockRegistry.INSTANCE.anubiteStatue, 0, 3);
         world.setBlock(x + 61, y + 0, z + 138, Blocks.stone_brick_stairs, 3, 3);
         world.setBlock(x + 69, y + 0, z + 138, Blocks.stone_brick_stairs, 3, 3);
-        world.setBlock(x + 70, y + 0, z + 138, FABlockRegistry.anubiteStatue, 0, 3);
+        world.setBlock(x + 70, y + 0, z + 138, FABlockRegistry.INSTANCE.anubiteStatue, 0, 3);
         world.setBlock(x + 71, y + 0, z + 138, Blocks.stone_brick_stairs, 3, 3);
         world.setBlock(x + 79, y + 0, z + 138, Blocks.stone_brick_stairs, 3, 3);
-        world.setBlock(x + 80, y + 0, z + 138, FABlockRegistry.anubiteStatue, 0, 3);
+        world.setBlock(x + 80, y + 0, z + 138, FABlockRegistry.INSTANCE.anubiteStatue, 0, 3);
         world.setBlock(x + 81, y + 0, z + 138, Blocks.stone_brick_stairs, 3, 3);
         world.setBlock(x + 87, y + 0, z + 138, Blocks.stone_brick_stairs, 3, 3);
         world.setBlock(x + 88, y + 0, z + 138, Blocks.stonebrick, 0, 3);

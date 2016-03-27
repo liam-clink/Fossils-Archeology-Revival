@@ -13,7 +13,7 @@ public class BlockVolcanicBrick extends Block {
         setResistance(5.0F);
         setStepSound(Block.soundTypeStone);
         setBlockName(LocalizationStrings.VOLCANIC_BRICK_NAME);
-        setCreativeTab(FATabRegistry.tabFBlocks);
+        setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
     }
 
     @Override

@@ -118,8 +118,8 @@ public class EntityAnuEffect extends EntityLiving {
      * Creates the ender portal leading back to the normal world after defeating the enderdragon.
      */
     private void createEnderPortal(int x, int y, int z) {
-        worldObj.setBlock(x, y, z, FABlockRegistry.anuPortal);
-        worldObj.setBlock(x, y + 1, z, FABlockRegistry.anuPortal);
+        worldObj.setBlock(x, y, z, FABlockRegistry.INSTANCE.anuPortal);
+        worldObj.setBlock(x, y + 1, z, FABlockRegistry.INSTANCE.anuPortal);
         worldObj.setBlock(x, y + 2, z, Blocks.obsidian);
         worldObj.setBlock(x, y - 1, z, Blocks.obsidian);
     }
