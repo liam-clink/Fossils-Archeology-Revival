@@ -138,6 +138,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	public boolean mood_nospace;
 	public boolean mood_noplants;
 	protected int nearByMobsAllowed;
+	public int ticksSprinted;
 
 	public EntityNewPrehistoric(World world, EnumPrehistoric selfType) {
 		super(world);
@@ -232,7 +233,6 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	}
 
 	public void readEntityFromNBT(NBTTagCompound compound) {
-		super.readEntityFromNBT(compound);
 		this.setDinoAge(compound.getInteger("DinoAge"));
 		this.setDinoAgeTick(compound.getInteger("AgeTick"));
 		this.setModelized(compound.getBoolean("isModelized"));
@@ -682,6 +682,13 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
 	public void onUpdate() {
 		super.onUpdate();
+		if(this.isSprinting()){
+			ticksSprinted++;
+		}
+		if(ticksSprinted == 40){
+			ticksSprinted = 0;
+			this.setSprinting(false);
+		}
 		tailbuffer.calculateChainSwingBuffer(70, 10, 4, this);
 		this.updateSize();
 		if(this.ridingEntity != null){
@@ -1356,17 +1363,24 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 					}
 
 					if (itemstack.getItem() == FAItemRegistry.whip 
-							//	&& this.isTamed()
-							//	&& this.selfType.isRideable() && this.isAdult()
-							//	&& !this.worldObj.isRemote
-							//	&& this.riddenByEntity == null
-							//	&& func_152114_e(player)
+								&& this.selfType.isRideable() && this.isAdult()
+								&& !this.worldObj.isRemote
 							) {
-						System.out.println(player.getDisplayName());
 
-						if(this.isTamed()){
+						if(this.isTamed() && func_152114_e(player)){
+							if(this.getRidingPlayer() == null){
+								Revival.channel.sendToAll(new MessageFoodParticles(getEntityId(), FABlockRegistry.volcanicRock));
+								this.setOrder(EnumOrderType.WANDER);
+								setRidingPlayer(player);
+							}
+							else if(this.getRidingPlayer() == player){
+								this.setSprinting(true);
+								Revival.channel.sendToAll(new MessageFoodParticles(getEntityId(), FABlockRegistry.volcanicRock));
+								this.setMood(this.getMood() - 1);
+							}
+						}else {
+							System.out.println(player.getDisplayName());
 
-						}else if (this.aiTameType() == Taming.FEEDING || this.aiTameType() == Taming.IMPRINTING){
 							this.setMood(this.getMood() - 1);
 							Revival.channel.sendToAll(new MessageFoodParticles(getEntityId(), FABlockRegistry.volcanicRock));
 							if(getRNG().nextInt(15) == 0){

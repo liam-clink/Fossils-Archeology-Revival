@@ -1,11 +1,8 @@
 package com.github.revival.server.block;
 
-import com.github.revival.Revival;
-import com.github.revival.server.creativetab.FATabRegistry;
-import com.github.revival.server.enums.EnumPrehistoric;
-import com.github.revival.server.handler.FossilAchievementHandler;
-import com.github.revival.server.handler.LocalizationStrings;
-import com.github.revival.server.item.FAItemRegistry;
+import java.util.ArrayList;
+import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStone;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -16,8 +13,12 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import java.util.ArrayList;
-import java.util.Random;
+import com.github.revival.Revival;
+import com.github.revival.server.creativetab.FATabRegistry;
+import com.github.revival.server.enums.EnumDinoBones;
+import com.github.revival.server.handler.FossilAchievementHandler;
+import com.github.revival.server.handler.LocalizationStrings;
+import com.github.revival.server.item.FAItemRegistry;
 
 public class BlockFossil extends BlockStone {
     Random rand = new Random();
@@ -56,7 +57,7 @@ public class BlockFossil extends BlockStone {
         }
 
         if (i < 13) {
-            int dropRandom = rand.nextInt(EnumPrehistoric.values().length);
+            int dropRandom = rand.nextInt(EnumDinoBones.values().length);
             if (dropRandom != 4) {
                 this.randomMeta = dropRandom;
             }
@@ -64,7 +65,7 @@ public class BlockFossil extends BlockStone {
         }
 
         if (i < 15) {
-            int dropRandom = rand.nextInt(EnumPrehistoric.values().length);
+            int dropRandom = rand.nextInt(EnumDinoBones.values().length);
             if (dropRandom != 4) {
                 this.randomMeta = dropRandom;
             }
@@ -72,7 +73,7 @@ public class BlockFossil extends BlockStone {
         }
 
         if (i < 17) {
-            int dropRandom = rand.nextInt(EnumPrehistoric.values().length);
+            int dropRandom = rand.nextInt(EnumDinoBones.values().length);
             if (dropRandom != 4) {
                 this.randomMeta = dropRandom;
             }
@@ -80,7 +81,7 @@ public class BlockFossil extends BlockStone {
         }
 
         if (i < 19) {
-            int dropRandom = rand.nextInt(EnumPrehistoric.values().length);
+            int dropRandom = rand.nextInt(EnumDinoBones.values().length);
             if (dropRandom != 4) {
                 this.randomMeta = dropRandom;
             }
@@ -88,7 +89,7 @@ public class BlockFossil extends BlockStone {
         }
 
         if (i < 21) {
-            int dropRandom = rand.nextInt(EnumPrehistoric.values().length);
+            int dropRandom = rand.nextInt(EnumDinoBones.values().length);
             if (dropRandom != 4) {
                 this.randomMeta = dropRandom;
             }
@@ -96,7 +97,7 @@ public class BlockFossil extends BlockStone {
         }
 
         if (i < 23) {
-            int dropRandom = rand.nextInt(EnumPrehistoric.values().length);
+            int dropRandom = rand.nextInt(EnumDinoBones.values().length);
             if (dropRandom != 4) {
                 this.randomMeta = dropRandom;
             }
@@ -104,7 +105,7 @@ public class BlockFossil extends BlockStone {
         }
 
         if (i < 25) {
-            int dropRandom = rand.nextInt(EnumPrehistoric.values().length);
+            int dropRandom = rand.nextInt(EnumDinoBones.values().length);
             if (dropRandom != 4) {
                 this.randomMeta = dropRandom;
             }
