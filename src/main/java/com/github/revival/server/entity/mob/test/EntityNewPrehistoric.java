@@ -14,6 +14,7 @@ import com.github.revival.server.handler.LocalizationStrings;
 import com.github.revival.server.item.FAItemRegistry;
 import com.github.revival.server.message.MessageFoodParticles;
 import com.github.revival.server.util.FoodMappings;
+
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -45,6 +46,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
+
 import org.lwjgl.opengl.GL11;
 
 import java.io.BufferedReader;
@@ -1129,8 +1131,43 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	}
 
 	public void dismountEntity(Entity entity){
-		super.dismountEntity(entity);
-		//this.posY += 1;
+		if(!worldObj.isRemote){
+			double d0 = entity.posX;
+			double d1 = entity.boundingBox.minY + (double)this.height;
+			double d2 = entity.posZ;
+			byte b0 = 1;
+
+			for (int i = -b0; i <= b0; ++i)
+			{
+				for (int j = -b0; j < b0; ++j)
+				{
+					if (i != 0 || j != 0)
+					{
+						int k = (int)(this.posX + (double)i);
+						int l = (int)(this.posZ + (double)j);
+						AxisAlignedBB axisalignedbb = this.boundingBox.getOffsetBoundingBox((double)i, 1.0D, (double)j);
+
+						if (this.worldObj.func_147461_a(axisalignedbb).isEmpty())
+						{
+							if (World.doesBlockHaveSolidTopSurface(this.worldObj, k, (int)this.posY, l))
+							{
+								this.setPositionAndUpdate(this.posX + (double)i, this.posY + 2.0D, this.posZ + (double)j);
+								return;
+							}
+
+							if (World.doesBlockHaveSolidTopSurface(this.worldObj, k, (int)this.posY - 1, l) || this.worldObj.getBlock(k, (int)this.posY - 1, l).getMaterial() == Material.water)
+							{
+								d0 = this.posX + (double)i;
+								d1 = this.posY + 1.0D;
+								d2 = this.posZ + (double)j;
+							}
+						}
+					}
+				}
+			}
+
+			this.setPositionAndUpdate(d0, d1, d2);
+		}
 	}
 
 	@Override
@@ -1146,6 +1183,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 				this.sendStatusMessage(EnumSituation.Betrayed);
 			}
 		}
+		if(i > 0)this.setSitting(false);
 		if(dmg.getEntity() != null)this.setMood(this.getMood() - 5);
 		if (this.getHurtSound() != null) {
 			if (this.getAnimation() != null) {
@@ -1339,8 +1377,8 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 					}
 
 					if (itemstack.getItem() == FAItemRegistry.INSTANCE.whip
-								&& this.selfType.isRideable() && this.isAdult()
-								&& !this.worldObj.isRemote
+							&& this.selfType.isRideable() && this.isAdult()
+							&& !this.worldObj.isRemote
 							) {
 
 						if(this.isTamed() && func_152114_e(player)){

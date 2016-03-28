@@ -50,7 +50,7 @@ public class EntityStegosaurus extends EntityNewPrehistoric {
 
 	public void onLivingUpdate(){
 		super.onLivingUpdate();
-		if(this.getAnimation() == this.animation_attack && this.getAnimationTick() == 19 && this.getAttackTarget() != null){
+		if(this.getAnimation() == this.animation_attack && (this.getAnimationTick() >= 17 && this.getAnimationTick() <= 19) && this.getAttackTarget() != null){
 			this.attackEntityAsMob(this.getAttackTarget());
 		}
 	}
@@ -173,15 +173,16 @@ public class EntityStegosaurus extends EntityNewPrehistoric {
 	
 	public boolean attackEntityAsMob(Entity entity)
 	{
-		System.out.println(this.getAnimationTick());
 
 		if(this.getAnimation() == NO_ANIMATION){
 			this.setAnimation(animation_attack);
 			return false;
 		}
-		if(this.getAnimation() == animation_attack && this.getAnimationTick() == 19){
+		
+		if(this.getAnimation() == animation_attack && (this.getAnimationTick() >= 17 && this.getAnimationTick() <= 20)){
 			IAttributeInstance iattributeinstance = this.getEntityAttribute(SharedMonsterAttributes.attackDamage);
 			boolean flag = entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float)iattributeinstance.getAttributeValue());
+			System.out.println(this.getAnimationTick());
 
 			if (flag)
 			{

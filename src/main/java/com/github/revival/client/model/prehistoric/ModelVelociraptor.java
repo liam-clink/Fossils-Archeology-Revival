@@ -316,12 +316,6 @@ public class ModelVelociraptor extends ModelNewPrehistoric {
         sitAnimationPos(rightThigh, sitProgress, 0F, 19.40F - ModelUtils.getDefaultPositionY(rightThigh), 0F);
         sitAnimationPos(leftThigh, sitProgress, 0F, 19.40F - ModelUtils.getDefaultPositionY(leftThigh), 0F);
         this.bob(lowerBody, speed, 0.7F, false, entity.ticksExisted, 1);
-        this.walk(leftThigh, speed2, 0.8F, false, 0F, 0.4F, f, f1);
-        this.walk(leftLeg, speed2, 0.2F, false, 0F, -0.6F, f, f1);
-        this.walk(leftFoot, speed2, -0.4F, true, 2.5F, 0.4F, f, f1);
-        this.walk(rightThigh, speed2, 0.8F, true, 0F, 0.4F, f, f1);
-        this.walk(rightLeg, speed2, 0.2F, true, 0F, -0.6F, f, f1);
-        this.walk(rightFoot, speed2, -0.4F, false, 2.5F, 0.4F, f, f1);
         this.walk(upperBody, speed, 0.1F, false, 0, 0, entity.ticksExisted, 1);
         this.chainWave(tailParts, speed, 0.05F, -3, entity.ticksExisted, 1);
         this.chainWave(leftArmParts, speed, 0.05F, -3, entity.ticksExisted, 1);
@@ -329,6 +323,15 @@ public class ModelVelociraptor extends ModelNewPrehistoric {
         this.chainSwing(tailParts, speed, 0.15F, -3, entity.ticksExisted, 1);
         this.chainSwing(tailParts, speed2, 0.25F, -3, f, f1);
         this.chainWave(neckParts, speed, 0.15F, 3, entity.ticksExisted, 1);
+        this.walk(leftThigh, speed2, 0.8F, false, 0F, -0.4F, f, f1);
+		this.walk(leftLeg, speed2, 0.2F, false, 0F, 0.6F, f, f1);
+		this.walk(leftFoot, speed2, -0.4F, true, -0.5F, -0.2F, f, f1);
+		this.walk(rightThigh, speed2, 0.8F, true, 0F, 0.4F, f, f1);
+		this.walk(rightLeg, speed2, 0.2F, true, 0F, -0.6F, f, f1);
+		this.walk(rightFoot, speed2, -0.4F, false, -0.5F, -0.2F, f, f1);
+		this.chainWave(neckParts, speed2, 0.5F, 4, f, f1);
+		this.chainWave(tailParts, speed2, 0.3F, -4, f, f1);
+
         if (((EntityVelociraptor) entity).getAnimation() != EntityVelociraptor.animation_attack && ((EntityVelociraptor) entity).ridingEntity != null) {
             ModelUtils.setRotateAngleAlt(lowerBody, -15, 0, 0);
             ModelUtils.setRotateAngleAlt(leftLeg, 20, 0, 0);
@@ -340,7 +343,7 @@ public class ModelVelociraptor extends ModelNewPrehistoric {
             ModelUtils.setRotateAngleAlt(head, 40, 0, 0);
             EntityVelociraptor dino = (EntityVelociraptor) entity;
             float speed3 = 0.5F;
-            this.walk(lowerJaw, speed3, -0.3F, true, 0.5F, 0.3F, entity.ticksExisted, 1);
+            this.walk(lowerJaw, speed3, -0.3F, true, 0.5F, -0.3F, entity.ticksExisted, 1);
             this.walk(neck, speed3, 0.4F, false, 0F, 0.4F, entity.ticksExisted, 1);
             this.walk(head, speed3, 0.4F, true, 0F, 0.2F, entity.ticksExisted, 1);
             this.flap(leftUpperArm, 0.8F, -0.4F, true, 0.3F, -0.2F, entity.ticksExisted, 1);
@@ -351,162 +354,4 @@ public class ModelVelociraptor extends ModelNewPrehistoric {
 
     }
 
-    //	@Override
-    //	public void sitPose(boolean animate) {
-    //		/*ModelUtils.animateOrSetRotation(animator, animate, tailFeather3, -0.004886921905584123F, -0.0F, 0.0F, false);
-    //        ModelUtils.animateOrSetRotation(animator, animate, lowerJaw, -0.06924167156799095F, 0.0F, 0.0F, false);
-    //        ModelUtils.animateOrSetRotation(animator, animate, upperCrest, 0.4961971063419879F, -0.0F, 0.0F, false);
-    //        ModelUtils.animateOrSetRotation(animator, animate, rightUpperArmFeather, 1.4493214108560915F, -0.0F, 0.0F, false);
-    //        ModelUtils.animateOrSetRotation(animator, animate, rightLowerArmFeather, 6.981317007977319E-4F, -0.0F, 0.0F, false);
-    //        ModelUtils.animateOrSetRotation(animator, animate, leftLowerArmFeather, 6.981317007977319E-4F, -0.0F, 0.0F, false);
-    //        ModelUtils.animateOrSetRotation(animator, animate, tailFeather2, -0.004886921905584123F, -0.0F, 0.0F, false);
-    //        ModelUtils.animateOrSetRotation(animator, animate, rightLowerArm, 0.8726646259971648F, 0.0F, 0.0F, false);
-    //        ModelUtils.animateOrSetRotation(animator, animate, leftToeClaw2, -1.7627825445142729F, -0.0F, 0.0F, false);
-    //        ModelUtils.animateOrSetRotation(animator, animate, neck, -1.4114477660878142F, -0.0F, 0.0F, false);
-    //        ModelUtils.animateOrSetRotation(animator, animate, rightUpperArm, -0.06981317007977318F, -0.0F, 1.0471975511965976F, false);
-    //        ModelUtils.animateOrSetRotation(animator, animate, leftThigh, -1.1344640137963142F, -0.0F, 0.0F, false);
-    //        ModelUtils.animateOrSetRotation(animator, animate, tailFeather1, -0.004886921905584123F, -0.0F, 0.0F, false);
-    //        ModelUtils.animateOrSetRotation(animator, animate, lowerCrest, 0.13578661580515886F, 0.0F, 0.0F, false);
-    //        ModelUtils.animateOrSetRotation(animator, animate, leftUpperArm, -0.06981317007977318F, -0.0F, -1.0471975511965976F, false);
-    //        ModelUtils.animateOrSetRotation(animator, animate, leftUpperArmFeather, 1.4493214108560915F, -0.0F, 0.0F, false);
-    //        ModelUtils.animateOrSetRotation(animator, animate, leftToeClaw1, -0.8726646259971648F, -0.0F, 0.0F, false);
-    //        ModelUtils.animateOrSetRotation(animator, animate, tail1, -0.091106186954104F, -0.0F, 0.0F, false);
-    //        ModelUtils.animateOrSetRotation(animator, animate, tail3, 0.045553093477052F, -0.0F, 0.0F, false);
-    //        ModelUtils.animateOrSetRotation(animator, animate, leftFoot, 0.17453292519943295F, -0.0F, 0.0F, false);
-    //        ModelUtils.animateOrSetRotation(animator, animate, rightLeg, 0.9948376736367678F, -0.0F, 0.0F, false);
-    //        ModelUtils.animateOrSetRotation(animator, animate, rightFoot, 0.17453292519943295F, -0.0F, 0.0F, false);
-    //        ModelUtils.animateOrSetRotation(animator, animate, upperBody, 0.19338248112097173F, -0.0F, 0.0F, false);
-    //        ModelUtils.animateOrSetRotation(animator, animate, rightToeClaw2, -1.7627825445142729F, -0.0F, 0.0F, false);
-    //        ModelUtils.animateOrSetRotation(animator, animate, leftLowerArm, 0.8726646259971648F, -0.0F, 0.0F, false);
-    //        ModelUtils.animateOrSetRotation(animator, animate, leftLeg, 0.9948376736367678F, -0.0F, 0.0F, false);
-    //        ModelUtils.animateOrSetRotation(animator, animate, rightToeClaw1, -0.8726646259971648F, -0.0F, 0.0F, false);
-    //        ModelUtils.animateOrSetRotation(animator, animate, upperJaw, -0.0017453292519943296F, -0.0F, 0.0F, false);
-    //        ModelUtils.animateOrSetRotation(animator, animate, headPivot, 1.5481070465189704F, 0.0F, 0.0F, false);
-    //        ModelUtils.animateOrSetRotation(animator, animate, lowerBody, -0.091106186954104F, 0.0F, 0.0F, false);
-    //        ModelUtils.animateOrSetRotation(animator, animate, rightThigh, -1.1344640137963142F, -0.0F, 0.0F, false);
-    //        ModelUtils.animateToPos(animator, animate, lowerBody, 0F, 16.40F - lowerBody.initRotationPointY, 0F, true);
-    //		ModelUtils.animateToPos(animator, animate, rightThigh, 0F, 19.40F - rightThigh.initRotationPointY, 0F, true);
-    //		ModelUtils.animateToPos(animator, animate, leftThigh, 0F, 19.40F - leftThigh.initRotationPointY, 0F, true);
-    //		ModelUtils.setPos(animator, animate, lowerBody, 0F, 16.40F, -2.5F, false);
-    //		ModelUtils.setPos(animator, animate, rightThigh, -3F, 19.40F, 3F, false);
-    //		ModelUtils.setPos(animator, animate, leftThigh, 3F, 19.40F, 3F, false);*/
-    //	}
-
-    public void renderHeldItem(RenderPrehistoric renderPrehistoric, EntityLiving entity, float f) {
-        GL11.glColor3f(1.0F, 1.0F, 1.0F);
-        renderPrehistoric.superRenderEquippedItems(entity, f);
-        ItemStack itemstack = entity.getHeldItem();
-        ItemStack itemstack1 = entity.func_130225_q(3);
-        Item item;
-        float f1;
-
-        if (itemstack1 != null) {
-            GL11.glPushMatrix();
-            item = itemstack1.getItem();
-
-            net.minecraftforge.client.IItemRenderer customRenderer = net.minecraftforge.client.MinecraftForgeClient.getItemRenderer(itemstack1, net.minecraftforge.client.IItemRenderer.ItemRenderType.EQUIPPED);
-            boolean is3D = (customRenderer != null && customRenderer.shouldUseRenderHelper(net.minecraftforge.client.IItemRenderer.ItemRenderType.EQUIPPED, itemstack1, net.minecraftforge.client.IItemRenderer.ItemRendererHelper.BLOCK_3D));
-
-            if (item instanceof ItemBlock) {
-                if (is3D || RenderBlocks.renderItemIn3d(Block.getBlockFromItem(item).getRenderType())) {
-                    f1 = 0.625F;
-                    GL11.glTranslatef(0.0F, -0.2F, 0.0F);
-                    GL11.glRotatef(90.0F, 0.0F, 1.0F, 0.0F);
-                    GL11.glScalef(f1, f1, f1);
-                }
-
-                renderPrehistoric.getRenderManager().itemRenderer.renderItem(entity, itemstack1, 0);
-            } else if (item == Items.skull) {
-                f1 = 1.0625F;
-                GL11.glScalef(f1, f1, f1);
-                GameProfile gameprofile = null;
-
-                if (itemstack1.hasTagCompound()) {
-                    NBTTagCompound nbttagcompound = itemstack1.getTagCompound();
-
-                    if (nbttagcompound.hasKey("SkullOwner", 10)) {
-                        gameprofile = NBTUtil.func_152459_a(nbttagcompound.getCompoundTag("SkullOwner"));
-                    } else if (nbttagcompound.hasKey("SkullOwner", 8) && !StringUtils.isNullOrEmpty(nbttagcompound.getString("SkullOwner"))) {
-                        gameprofile = new GameProfile((UUID) null, nbttagcompound.getString("SkullOwner"));
-                    }
-                }
-
-                TileEntitySkullRenderer.field_147536_b.func_152674_a(-0.5F, 0.0F, -0.5F, 1, 180.0F, itemstack1.getItemDamage(), gameprofile);
-            }
-
-            GL11.glPopMatrix();
-        }
-
-        if (itemstack != null && itemstack.getItem() != null) {
-            item = itemstack.getItem();
-            GL11.glPushMatrix();
-            GL11.glTranslatef(0, 0.55F, -0.55F);
-            GL11.glTranslatef(0, -(head.rotateAngleX - neck.rotateAngleX) + 0.75F, 0);
-
-            this.head.postRender(0.0625F);
-
-            net.minecraftforge.client.IItemRenderer customRenderer = net.minecraftforge.client.MinecraftForgeClient.getItemRenderer(itemstack, net.minecraftforge.client.IItemRenderer.ItemRenderType.EQUIPPED);
-            boolean is3D = (customRenderer != null && customRenderer.shouldUseRenderHelper(net.minecraftforge.client.IItemRenderer.ItemRenderType.EQUIPPED, itemstack, net.minecraftforge.client.IItemRenderer.ItemRendererHelper.BLOCK_3D));
-
-            if (item instanceof ItemBlock && (is3D || RenderBlocks.renderItemIn3d(Block.getBlockFromItem(item).getRenderType()))) {
-                f1 = 0.5F;
-                GL11.glTranslatef(0.0F, 0.1875F, -0.3125F);
-                f1 *= 0.75F;
-                GL11.glRotatef(20.0F, 1.0F, 0.0F, 0.0F);
-                GL11.glRotatef(45.0F, 0.0F, 1.0F, 0.0F);
-                GL11.glScalef(f1, f1, f1);
-            } else if (item == Items.bow) {
-                f1 = 0.625F;
-                GL11.glTranslatef(0.0F, 0.125F, 0.3125F);
-                GL11.glRotatef(-20.0F, 0.0F, 1.0F, 0.0F);
-                GL11.glScalef(f1, f1, f1);
-                GL11.glRotatef(-100.0F, 1.0F, 0.0F, 0.0F);
-                GL11.glRotatef(45.0F, 0.0F, 1.0F, 0.0F);
-            } else if (item.isFull3D()) {
-                f1 = 0.625F;
-
-                if (item.shouldRotateAroundWhenRendering()) {
-                    GL11.glRotatef(180.0F, 0.0F, 0.0F, 1.0F);
-                    GL11.glTranslatef(0.0F, -0.125F, 0.0F);
-                }
-
-                GL11.glTranslatef(0.0F, 0.1875F, 0.0F);
-                GL11.glScalef(f1, f1, f1);
-                GL11.glRotatef(-100.0F, 1.0F, 0.0F, 0.0F);
-                GL11.glRotatef(45.0F, 0.0F, 1.0F, 0.0F);
-            } else {
-                f1 = 0.375F;
-                GL11.glScalef(f1, f1, f1);
-                GL11.glTranslatef(0.4F, 0.2F, -1.8F);
-                GL11.glRotatef(90.0F, 0.0F, 0.0F, 1.0F);
-                GL11.glRotatef(-150.0F, 0.0F, 1.0F, 0.0F);
-                float speed = -0.1F;
-                float degree = -0.02F;
-
-            }
-
-            float f2;
-            int i;
-            float f5;
-            if (itemstack.getItem().requiresMultipleRenderPasses()) {
-                for (i = 0; i < itemstack.getItem().getRenderPasses(itemstack.getItemDamage()); ++i) {
-                    int j = itemstack.getItem().getColorFromItemStack(itemstack, i);
-                    f5 = (float) (j >> 16 & 255) / 255.0F;
-                    f2 = (float) (j >> 8 & 255) / 255.0F;
-                    float f3 = (float) (j & 255) / 255.0F;
-                    GL11.glColor4f(f5, f2, f3, 1.0F);
-                    renderPrehistoric.getRenderManager().itemRenderer.renderItem(entity, itemstack, i);
-                }
-            } else {
-                i = itemstack.getItem().getColorFromItemStack(itemstack, 0);
-                float f4 = (float) (i >> 16 & 255) / 255.0F;
-                f5 = (float) (i >> 8 & 255) / 255.0F;
-                f2 = (float) (i & 255) / 255.0F;
-                GL11.glColor4f(f4, f5, f2, 1.0F);
-                renderPrehistoric.getRenderManager().itemRenderer.renderItem(entity, itemstack, 0);
-            }
-
-            GL11.glPopMatrix();
-        }
-    }
 }
