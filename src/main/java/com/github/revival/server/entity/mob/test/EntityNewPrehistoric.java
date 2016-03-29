@@ -433,6 +433,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
+        this.setScale(this.getDinosaurSize());
 		if(this.getHunger() > 100){
 			this.setHunger(100);
 		}
