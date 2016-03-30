@@ -804,13 +804,8 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		}
 	}
 
-	public boolean attackEntityAsMob(Entity entity) {
-		return entity.attackEntityFrom(DamageSource.causeMobDamage(this), 3.0F);
-	}
-
 	@Override
 	public void setScaleForAge(boolean par1) {
-		//System.out.println(maxSize + " " + this.getDinosaurSize());
 		this.setScale(this.getDinosaurSize());
 	}
 

@@ -77,7 +77,6 @@ public class DinoAIAttackOnCollide extends EntityAIBase {
 					if (this.dino.getHeldItem() != null) {
 						this.dino.swingItem();
 					}
-
 					this.dino.attackEntityAsMob(entitylivingbase);
 					return;
 				}

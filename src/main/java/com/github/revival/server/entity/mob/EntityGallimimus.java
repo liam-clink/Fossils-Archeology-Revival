@@ -373,7 +373,7 @@ public class EntityGallimimus extends EntityNewPrehistoric {
 	
 	public void onLivingUpdate(){
     	super.onLivingUpdate();
-    	if(this.getAnimation() == this.animation_attack && this.getAnimationTick() == 12 && this.getAttackTarget() != null){
+    	if(this.getAnimation() == this.animation_attack && (this.getAnimationTick() >= 10 && this.getAnimationTick() <= 13) && this.getAttackTarget() != null){
     		this.attackEntityAsMob(this.getAttackTarget());
     	}
     }
@@ -384,9 +384,9 @@ public class EntityGallimimus extends EntityNewPrehistoric {
 			this.setAnimation(animation_attack);
 			return false;
 		}
-		if(this.getAnimation() == animation_attack && this.getAnimationTick() == 12){
+		if(this.getAnimation() == animation_attack && (this.getAnimationTick() >= 10 && this.getAnimationTick() <= 13)){
 			IAttributeInstance iattributeinstance = this.getEntityAttribute(SharedMonsterAttributes.attackDamage);
-			boolean flag = entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float)iattributeinstance.getAttributeValue());
+			boolean flag = entity.attackEntityFrom(DamageSource.generic, (float)iattributeinstance.getAttributeValue());
 
 			if (flag)
 			{
@@ -396,7 +396,7 @@ public class EntityGallimimus extends EntityNewPrehistoric {
 					}
 				}
 				entity.motionY += (0.4000000059604645D / 2);
-                knockbackEntity(entity, 1F, 0.1F);	
+                knockbackEntity(entity, 0.5F, 0.1F);	
 				
 			}
 
@@ -404,4 +404,5 @@ public class EntityGallimimus extends EntityNewPrehistoric {
 		}
 		return false;
 	}
+	//public boolean canDinoHunt(Entity target){
 }
