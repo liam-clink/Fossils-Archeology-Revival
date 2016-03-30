@@ -175,7 +175,7 @@ public class EntityCompsognathus extends EntityNewPrehistoric {
 
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
-		if(this.getAttackTarget() != null && this.getAnimation() == this.animation_attack && this.getAnimationTick() == 20 && this.onGround){
+		if(this.getAttackTarget() != null && this.getAnimation() == this.animation_attack && (this.getAnimationTick() <= 20 && this.getAnimationTick() >= 17) && this.onGround){
 			double d0 = this.getAttackTarget().posX - this.posX;
 			double d1 = this.getAttackTarget().posZ - this.posZ;
 			float f = MathHelper.sqrt_double(d0 * d0 + d1 * d1);

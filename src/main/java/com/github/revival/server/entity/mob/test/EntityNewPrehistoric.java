@@ -1712,6 +1712,10 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	public boolean canDinoHunt(Entity target){
 		if(this.selfType.diet != EnumDiet.HERBIVORE && this.selfType.diet != EnumDiet.NONE && canAttackClass(target.getClass())){
 			if(width >= target.width){
+				if(target instanceof EntityNewPrehistoric){
+					EntityNewPrehistoric mob = (EntityNewPrehistoric)target;
+					if(mob.selfType.diet.fearIndex > selfType.diet.fearIndex);
+				}
 				return isHungry();
 			}
 		}
