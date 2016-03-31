@@ -1,14 +1,15 @@
 package com.github.revival.client.model.prehistoric;
 
-import com.github.revival.client.model.base.ModelPrehistoric;
-import com.github.revival.server.entity.mob.EntityAnkylosaurus;
-import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 import net.ilexiconn.llibrary.client.model.ModelAnimator;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
 import net.minecraft.entity.Entity;
 
-public class ModelStegosaurus extends ModelPrehistoric {
+import com.github.revival.client.model.prehistoric.test.ModelNewPrehistoric;
+import com.github.revival.server.entity.mob.EntityAnkylosaurus;
+import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
+
+public class ModelStegosaurus extends ModelNewPrehistoric {
     public AdvancedModelRenderer lowerBody;
     public AdvancedModelRenderer rightFrontThigh;
     public AdvancedModelRenderer leftFrontThigh;
@@ -178,6 +179,7 @@ public class ModelStegosaurus extends ModelPrehistoric {
 
     public void animate(IAnimatedEntity entity, float f, float f1, float f2, float f3, float f4, float f5) {
         animator.update(entity);
+        blockMovement(f, f1, f2, f3, f4, f5, (Entity) entity);
         this.resetToDefaultPose();
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
         animator.setAnimation(EntityAnkylosaurus.animation_attack);

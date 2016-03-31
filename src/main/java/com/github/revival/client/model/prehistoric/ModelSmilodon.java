@@ -140,6 +140,7 @@ public class ModelSmilodon extends ModelNewPrehistoric {
 
     public void animate(IAnimatedEntity entity, float f, float f1, float f2, float f3, float f4, float f5) {
         animator.update(entity);
+        blockMovement(f, f1, f2, f3, f4, f5, (Entity) entity);
         this.resetToDefaultPose();
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
         animator.setAnimation(EntitySmilodon.animation_attack);

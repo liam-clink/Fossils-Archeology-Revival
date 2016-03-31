@@ -103,6 +103,9 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	public float sitProgress;
 	public int ticksSitted;
 	protected boolean isSitting;
+	public float sleepProgress;
+	public int ticksSlept;
+	protected boolean isSleeping;
 	protected boolean developsResistance;
 	protected boolean breaksBlocks;
 	private Animation currentAnimation;
@@ -175,7 +178,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		this.dataWatcher.addObject(MODELIZED_INDEX, (byte) -1);
 		this.dataWatcher.addObject(OWNER_DISPLAY_NAME_INDEX, "");
 		this.dataWatcher.addObject(CLIMBING_INDEX, 0);
-		this.dataWatcher.addObject(SLEEPING_INDEX, 0);
+		this.dataWatcher.addObject(SLEEPING_INDEX, Byte.valueOf((byte)0));
 		this.dataWatcher.addObject(GENDER_INDEX, 0);
 		this.dataWatcher.addObject(MOOD_INDEX, 0);
 	}
@@ -192,7 +195,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		compound.setByte("currentOrder", (byte) this.currentOrder.ordinal());
 		compound.setString("OwnerDisplayName", this.getOwnerDisplayName());
 		compound.setInteger("Gender", this.getGender());
-		compound.setInteger("Sleeping", this.getSleeping());
+		compound.setBoolean("Sleeping", this.isSleeping);
 		compound.setInteger("Mood", this.getMood());
 		compound.setBoolean("Sitting", this.isSitting);
 		compound.setBoolean("MoodNoSpace", this.mood_nospace);
@@ -219,7 +222,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		this.setHungerTick(compound.getInteger("HungerTick"));
 		this.setSubSpecies(compound.getInteger("SubSpecies"));
 		this.setGender(compound.getInteger("Gender"));
-		this.setSleeping(compound.getInteger("Sleeping"));
+		this.setSleeping(compound.getBoolean("Sleeping"));
 		this.setSitting(compound.getBoolean("Sitting"));
 		this.setMood(compound.getInteger("Mood"));
 		this.setOrder(EnumOrderType.values()[compound.getByte("currentOrder")]);
@@ -273,7 +276,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
 	@Override
 	public boolean isMovementBlocked() {
-		return isSitting();
+		return this.getHealth() <= 0.0F || isSitting() || isSleeping();
 	}
 
 	public boolean isSitting() {
@@ -288,6 +291,22 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 			this.isSitting = isSitting;
 
 			return isSitting;
+		}
+
+		return isSitting;
+	}
+
+	public boolean isSleeping() {
+		if (worldObj.isRemote) {
+			boolean isSleeping= (this.dataWatcher.getWatchableObjectByte(SLEEPING_INDEX) & 1) != 0;
+
+			if ((isSleeping = this.isSleeping))
+			{
+				ticksSlept = 0;
+			}
+
+			this.isSleeping = isSleeping;
+			return isSleeping;
 		}
 
 		return isSitting;
@@ -433,7 +452,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
-        this.setScale(this.getDinosaurSize());
+		this.setScale(this.getDinosaurSize());
 		if(this.getHunger() > 100){
 			this.setHunger(100);
 		}
@@ -478,6 +497,12 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 				this.getNavigator().clearPathEntity();
 			}
 			ticksSitted++;
+		}
+		if (this.isSleeping()) {
+			if(!this.getNavigator().noPath()){
+				this.getNavigator().clearPathEntity();
+			}
+			ticksSlept++;
 		}
 
 		if (!worldObj.isRemote && !this.isSitting() && this.getRNG().nextInt(1000) == 1 && !this.isRiding() && (this.getAnimation() == this.NO_ANIMATION || this.getAnimation() == this.animation_speak)) {
@@ -679,10 +704,14 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		boolean sitting = isSitting();
 		if (sitting && sitProgress < 20.0F) {
 			sitProgress += 0.5F;
-			//Revival.channel.sendToServer(new MessageDinoSit(this.getEntityId(), sitProgress));
 		} else if (!sitting && sitProgress > 0.0F) {
 			sitProgress -= 0.5F;
-			//Revival.channel.sendToServer(new MessageDinoSit(this.getEntityId(), sitProgress));
+		}
+		boolean sleeping = isSleeping();
+		if (sleeping && sleepProgress < 20.0F) {
+			sleepProgress += 0.5F;
+		} else if (!sleeping && sleepProgress > 0.0F) {
+			sleepProgress -= 0.5F;
 		}
 		AnimationHandler.INSTANCE.updateAnimations(this);
 		if (!this.worldObj.isRemote && this.aiClimbType() == Climbing.ARTHROPOD) {
@@ -1073,11 +1102,24 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	}
 
 	public int getSleeping() {
-		return this.dataWatcher.getWatchableObjectInt(SLEEPING_INDEX);
+		return 0;
 	}
 
-	public void setSleeping(int var1) {
-		this.dataWatcher.updateObject(SLEEPING_INDEX, var1);
+	public void setSleeping(boolean sleeping) {
+		byte b0 = this.dataWatcher.getWatchableObjectByte(SLEEPING_INDEX);
+
+		if (sleeping)
+		{
+			this.dataWatcher.updateObject(SLEEPING_INDEX, Byte.valueOf((byte)(b0 | 1)));
+		}
+		else
+		{
+			this.dataWatcher.updateObject(SLEEPING_INDEX, Byte.valueOf((byte)(b0 & -2)));
+		}
+
+		if (!worldObj.isRemote) {
+			this.isSleeping = sleeping;
+		}
 	}
 
 	public int getMood() {
@@ -1115,14 +1157,6 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
 		if (!worldObj.isRemote) {
 			this.isSitting = sitting;
-		}
-	}
-
-	public boolean isSleeping() {
-		if (getSleeping() == 0) {
-			return false;
-		} else {
-			return true;
 		}
 	}
 
