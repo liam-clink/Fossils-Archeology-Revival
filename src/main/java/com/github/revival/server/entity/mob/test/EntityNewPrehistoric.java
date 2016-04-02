@@ -120,7 +120,8 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	public boolean mood_noplants;
 	protected int nearByMobsAllowed;
 	public int ticksSprinted;
-
+	public int ticksTillPlay;
+	
 	public EntityNewPrehistoric(World world, EnumPrehistoric selfType) {
 		super(world);
 		this.updateSize();
@@ -200,6 +201,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		compound.setBoolean("Sitting", this.isSitting);
 		compound.setBoolean("MoodNoSpace", this.mood_nospace);
 		compound.setBoolean("MoodNoPlants", this.mood_noplants);
+		compound.setInteger("TicksSincePlay", this.ticksTillPlay);
 
 	}
 
@@ -235,6 +237,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		}
 		this.mood_nospace = compound.getBoolean("MoodNoSpace");
 		this.mood_noplants = compound.getBoolean("MoodNoPlants");
+		this.ticksTillPlay = compound.getInteger("TicksSincePlay");
 	}
 
 	@Override
@@ -246,12 +249,18 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		this.heal(200);
 		this.setSpawnValues();
 		this.setGender(random.nextInt(2));
+		ticksTillPlay = 0;
 		return par1EntityLivingData;
 	}
 
 	@Override
 	public boolean isAIEnabled() {
 		return true;
+	}
+	
+	public void doPlayBonus(){
+		ticksTillPlay = this.rand.nextInt(6000) + 6000;
+		this.setMood(this.getMood());
 	}
 
 	public abstract void setSpawnValues();
