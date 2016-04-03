@@ -52,7 +52,12 @@ public class EntityTarSlime extends EntitySlime {
         }
 
     }
-
+    
+    protected void alterSquishAmount()
+    {
+        this.squishAmount *= 1F;
+    }
+    
     @Override
     public void updateRidden() {
         super.updateRidden();

@@ -1,5 +1,24 @@
 package com.github.revival;
 
+import net.ilexiconn.llibrary.server.config.ConfigHandler;
+import net.minecraft.block.material.Material;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnumEnchantmentType;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.Item.ToolMaterial;
+import net.minecraft.item.ItemArmor.ArmorMaterial;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.StatCollector;
+import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.common.util.EnumHelper;
+import net.minecraftforge.fluids.Fluid;
+
+import org.apache.logging.log4j.Level;
+
 import com.github.revival.client.renderer.tileentity.RenderFeeder;
 import com.github.revival.server.ModState;
 import com.github.revival.server.ServerProxy;
@@ -25,30 +44,6 @@ import com.github.revival.server.dimension.anu.WorldProviderAnu;
 import com.github.revival.server.dimension.treasure.WorldProviderTreasure;
 import com.github.revival.server.enchantment.ArcheologyEnchantment;
 import com.github.revival.server.enchantment.PaleontologyEnchantment;
-import com.github.revival.server.entity.EntityAncientJavelin;
-import com.github.revival.server.entity.EntityAnuEffect;
-import com.github.revival.server.entity.EntityDinoEgg;
-import com.github.revival.server.entity.EntityJavelin;
-import com.github.revival.server.entity.EntityMLighting;
-import com.github.revival.server.entity.EntityStoneboard;
-import com.github.revival.server.entity.EntityTerrorBirdEgg;
-import com.github.revival.server.entity.mob.EntityAnu;
-import com.github.revival.server.entity.mob.EntityAnuDead;
-import com.github.revival.server.entity.mob.EntityAnubite;
-import com.github.revival.server.entity.mob.EntityBones;
-import com.github.revival.server.entity.mob.EntityCoelacanth;
-import com.github.revival.server.entity.mob.EntityDodo;
-import com.github.revival.server.entity.mob.EntityDodoEgg;
-import com.github.revival.server.entity.mob.EntityElasmotherium;
-import com.github.revival.server.entity.mob.EntityFailuresaurus;
-import com.github.revival.server.entity.mob.EntityFriendlyPigZombie;
-import com.github.revival.server.entity.mob.EntityMammoth;
-import com.github.revival.server.entity.mob.EntityNautilus;
-import com.github.revival.server.entity.mob.EntityQuagga;
-import com.github.revival.server.entity.mob.EntitySentryPigman;
-import com.github.revival.server.entity.mob.EntitySmilodon;
-import com.github.revival.server.entity.mob.EntityTarSlime;
-import com.github.revival.server.entity.mob.EntityTerrorBird;
 import com.github.revival.server.enums.EnumDinoFoodMob;
 import com.github.revival.server.enums.EnumPrehistoric;
 import com.github.revival.server.gen.FossilGenerator;
@@ -63,12 +58,12 @@ import com.github.revival.server.handler.EventPlayer;
 import com.github.revival.server.handler.FossilAchievementHandler;
 import com.github.revival.server.handler.FossilBonemealEvent;
 import com.github.revival.server.handler.FossilConnectionEvent;
+import com.github.revival.server.handler.FossilEntities;
 import com.github.revival.server.handler.FossilGuiHandler;
 import com.github.revival.server.handler.FossilInteractEvent;
 import com.github.revival.server.handler.FossilLivingEvent;
 import com.github.revival.server.handler.FossilOreDictionary;
 import com.github.revival.server.handler.FossilRecipes;
-import com.github.revival.server.handler.FossilSpawnEggs;
 import com.github.revival.server.handler.FossilToolEvent;
 import com.github.revival.server.handler.FossilTradeHandler;
 import com.github.revival.server.handler.LocalizationStrings;
@@ -76,6 +71,7 @@ import com.github.revival.server.handler.PickupHandler;
 import com.github.revival.server.item.FAItemRegistry;
 import com.github.revival.server.message.MessageFoodParticles;
 import com.github.revival.server.util.FossilFoodMappings;
+
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.FMLLog;
@@ -85,28 +81,9 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
-import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.relauncher.Side;
-import net.ilexiconn.llibrary.server.config.ConfigHandler;
-import net.minecraft.block.material.Material;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnumEnchantmentType;
-import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.Item.ToolMaterial;
-import net.minecraft.item.ItemArmor.ArmorMaterial;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.StatCollector;
-import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraftforge.common.DimensionManager;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.common.util.EnumHelper;
-import net.minecraftforge.fluids.Fluid;
-import org.apache.logging.log4j.Level;
 
 @Mod(modid = Revival.MODID, name = "Fossils and Archeology Revival", version = Revival.VERSION, dependencies = "required-after:llibrary@[" + Revival.LLIBRARY_VERSION + ",)")
 public class Revival {
@@ -177,38 +154,7 @@ public class Revival {
         anuBiome = new BasicBiome(FossilConfig.biomeIDDarknessLair, Blocks.netherrack, Blocks.netherrack, true, 0, 0).setDisableRain().setBiomeName(LocalizationStrings.BIOME_ANU).setTemperatureRainfall(0.8F, 0F).setHeight(new BiomeGenBase.Height(0F, 0F));
         treasureBiome = new BasicBiome(FossilConfig.biomeIDTreasure, Blocks.air, Blocks.air, true, 1, 0).setDisableRain().setBiomeName(StatCollector.translateToLocal("biome.treasure.name")).setTemperatureRainfall(0.8F, 0F).setHeight(new BiomeGenBase.Height(0F, 0F));
 
-        EntityRegistry.registerModEntity(EntityStoneboard.class, "StoneBoard", 1, this, 250, Integer.MAX_VALUE, false);
-        EntityRegistry.registerModEntity(EntityJavelin.class, "Javelin", 2, this, 250, 5, true);
-        EntityRegistry.registerModEntity(EntityAncientJavelin.class, "AncientJavelin", 3, this, 250, 5, true);
-        EntityRegistry.registerModEntity(EntityMLighting.class, "FriendlyLighting", 4, this, 250, 5, true);
-        EntityRegistry.registerModEntity(EntityFailuresaurus.class, "Failuresaurus", 5, this, 250, 3, true);
-        EntityRegistry.registerModEntity(EntityBones.class, "Bones", 6, this, 250, 3, true);
-        EntityRegistry.registerModEntity(EntityDinoEgg.class, "DinoEgg", 8, this, 250, 5, true);
-        EntityRegistry.registerModEntity(EntityFriendlyPigZombie.class, "FriendlyPigZombie", 12, this, 250, 3, true);
-        EntityRegistry.registerModEntity(EntityAnu.class, "PigBoss", 13, this, 250, 3, true);
-        EntityRegistry.registerModEntity(EntitySmilodon.class, "Smilodon", 22, this, 250, 3, true);
-        EntityRegistry.registerModEntity(EntityMammoth.class, "Mammoth", 24, this, 250, 3, true);
-        EntityRegistry.registerModEntity(EntityDodo.class, "Dodo", 25, this, 250, 3, true);
-        EntityRegistry.registerModEntity(EntityDodoEgg.class, "DodoEgg", 26, this, 250, 5, true);
-        EntityRegistry.registerModEntity(EntityCoelacanth.class, "Coelacanth", 28, this, 250, 5, true);
-        EntityRegistry.registerModEntity(EntityQuagga.class, "Quagga", 30, this, 250, 3, true);
-        EntityRegistry.registerModEntity(EntityTerrorBird.class, "TerrorBird", 31, this, 250, 3, true);
-        EntityRegistry.registerModEntity(EntityTerrorBirdEgg.class, "TerrorBirdEgg", 32, this, 250, 5, true);
-        EntityRegistry.registerModEntity(EntityElasmotherium.class, "Elasmotherium", 33, this, 250, 3, true);
-        EntityRegistry.registerModEntity(EntityAnuEffect.class, "AnuEffect", 34, this, 250, 5, true);
-        EntityRegistry.registerModEntity(EntityAnubite.class, "Anubite", 39, this, 250, 3, true);
-        EntityRegistry.registerModEntity(EntitySentryPigman.class, "SentryPigman", 40, this, 250, 3, true);
-        EntityRegistry.registerModEntity(EntityAnuDead.class, "AnuDead", 41, this, 250, 3, true);
-        EntityRegistry.registerModEntity(EntityTarSlime.class, "TarSlime", 42, this, 250, 3, true);
-
-        for (int i = 0; i < EnumPrehistoric.values().length; i++) {
-            EntityRegistry.registerModEntity(EnumPrehistoric.values()[i].getDinoClass(), EnumPrehistoric.values()[i].name(), 200 + i, this, 250, 3, true);
-        }
-
-        EntityRegistry.addSpawn(EntityCoelacanth.class, 1, 2, 4, EnumCreatureType.waterCreature, BiomeGenBase.ocean);
-        EntityRegistry.addSpawn(EntityNautilus.class, 5, 4, 14, EnumCreatureType.waterCreature, BiomeGenBase.river, BiomeGenBase.ocean);
-
-        FossilSpawnEggs.addSpawnEggs();
+        FossilEntities.registerEntities();
         EnumDinoFoodMob.init();
 
         GameRegistry.registerWorldGenerator(new FossilGenerator(), 0);
