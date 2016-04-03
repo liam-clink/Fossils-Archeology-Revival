@@ -43,6 +43,7 @@ public class WaterDinoAIWander extends EntityAIBase {
     /**
      * Returns whether the EntityAIBase should begin execution.
      */
+    @Override
     public boolean shouldExecute() {
         return !this.entity.isDead && this.entity.isInsideOfMaterial(Material.water);
     }
@@ -50,6 +51,7 @@ public class WaterDinoAIWander extends EntityAIBase {
     /**
      * Returns whether an in-progress EntityAIBase should continue executing
      */
+    @Override
     public boolean continueExecuting() {
         return !this.entity.isDead;
     }

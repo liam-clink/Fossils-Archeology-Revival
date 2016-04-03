@@ -36,22 +36,27 @@ public class BlockAncientGlass extends Block {
         this.setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
     }
 
+    @Override
     public boolean shouldSideBeRendered(IBlockAccess world, int x, int y, int z, int side) {
         return world.getBlock(x, y, z) != this && super.shouldSideBeRendered(world, x, y, z, side);
     }
 
+    @Override
     public boolean isOpaqueCube() {
         return false;
     }
 
+    @Override
     public int getRenderBlockPass() {
         return 0;
     }
 
+    @Override
     public boolean renderAsNormalBlock() {
         return false;
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister iconRegister) {
         for (int i = 0; i < 47; i++) {
@@ -64,6 +69,7 @@ public class BlockAncientGlass extends Block {
         return textures[0];
     }
 
+    @Override
     public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
         boolean[] bitMatrix = new boolean[8];
 

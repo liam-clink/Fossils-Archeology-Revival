@@ -21,7 +21,11 @@ import net.minecraft.block.BlockBush;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.client.Minecraft;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.IEntityLivingData;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
@@ -32,7 +36,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.*;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.MathHelper;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
@@ -116,6 +124,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
         this.setScale(this.getDinosaurSize());
     }
 
+    @Override
     protected int getExperiencePoints(EntityPlayer par1EntityPlayer) {
         return MathHelper.floor_float(this.SelfType.Exp0
                 + (float) this.getDinoAge() * this.SelfType.ExpInc);
@@ -195,6 +204,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
                 && this.getDinoAge() < this.SelfType.AdultAge;
     }
 
+    @Override
     public boolean isChild() {
         return this.getDinoAge() < this.SelfType.TeenAge;
     }
@@ -218,6 +228,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
         }
     }
 
+    @Override
     protected void entityInit() {
         super.entityInit();
         this.dataWatcher.addObject(AGE_DATA_INDEX, 0);
@@ -371,6 +382,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
                 + "textures/mob/DinoModel" + this.SelfType.toString() + ".png";
     }
 
+    @Override
     public void moveEntityWithHeading(float par1, float par2) {
         if (!isModelized()) {
             super.moveEntityWithHeading(par1, par2);
@@ -391,6 +403,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
      * Get number of ticks, at least during which the living entity will be
      * silent.
      */
+    @Override
     public int getTalkInterval() {
         return 360;
     }
@@ -434,6 +447,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
     /**
      * Gets the pitch of living sounds in living entities.
      */
+    @Override
     protected float getSoundPitch() {
         return (!this.isAdult() && !this.isTeen()) ? (this.rand.nextFloat() - this.rand
                 .nextFloat()) * 0.2F + 2.5F
@@ -443,6 +457,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
     /**
      * Returns the volume for the sounds this mob makes.
      */
+    @Override
     protected float getSoundVolume() {
         return (!this.isAdult() && !this.isTeen()) ? 0.4F : 1.0F;
     }
@@ -452,7 +467,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
     public void ShowPedia(GuiPedia p0) {
 
         p0.reset();
-         // 185
+        // 185
 
 		/*
          * LEFT PAGE
@@ -475,9 +490,9 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
                 StatCollector.translateToLocal("entity.fossil."
                         + this.SelfType.toString() + ".name"), GuiPedia.rightIndent,
                 34, 0, 0, 0);
-       // p0.printHappyBar(pediaclock, GuiPedia.rightIndent, 46, 8, 8);
-       // p0.printHappyBar(pediaheart, GuiPedia.rightIndent, 58, 9, 9);
-       // p0.printHappyBar(pediafood, GuiPedia.rightIndent, 70, 9, 9);
+        // p0.printHappyBar(pediaclock, GuiPedia.rightIndent, 46, 8, 8);
+        // p0.printHappyBar(pediaheart, GuiPedia.rightIndent, 58, 9, 9);
+        // p0.printHappyBar(pediafood, GuiPedia.rightIndent, 70, 9, 9);
 
         // Print "Day" after age
         if (this.getDinoAge() == 1) {
@@ -686,10 +701,12 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
      * Tells if the dino is sitting
      */
 
+    @Override
     public boolean isSitting() {
         return this.getOrderType() == EnumOrderType.STAY;
     }
 
+    @Override
     public boolean canBePushed() {
         return !this.isSitting();
     }
@@ -697,6 +714,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
     /**
      * Disables a mob's ability to move on its own while true.
      */
+    @Override
     protected boolean isMovementCeased() {
         return this.getOrderType() == EnumOrderType.STAY;
     }
@@ -884,33 +902,36 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
 
     @Override
     public boolean attackEntityAsMob(Entity victim) {
-        float attackDamage = (float) getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue();
-        int knockback = 0;
+        if (this.boundingBox.intersectsWith(victim.boundingBox)) {
+            float attackDamage = (float) getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue();
+            int knockback = 0;
 
-        if (victim instanceof EntityLivingBase) {
-            attackDamage += EnchantmentHelper.getEnchantmentModifierLiving(this, (EntityLivingBase) victim);
-            knockback += EnchantmentHelper.getKnockbackModifier(this, (EntityLivingBase) victim);
-        }
-
-        boolean attacked = victim.attackEntityFrom(
-                DamageSource.causeMobDamage(this), attackDamage);
-
-        if (attacked) {
-            if (knockback > 0) {
-                double vx = -Math.sin(Math.toRadians(rotationYaw)) * knockback
-                        * 0.5;
-                double vy = 0.1;
-                double vz = Math.cos(Math.toRadians(rotationYaw)) * knockback
-                        * 0.5;
-                victim.addVelocity(vx, vy, vz);
-                motionX *= 0.6;
-                motionZ *= 0.6;
+            if (victim instanceof EntityLivingBase) {
+                attackDamage += EnchantmentHelper.getEnchantmentModifierLiving(this, (EntityLivingBase) victim);
+                knockback += EnchantmentHelper.getKnockbackModifier(this, (EntityLivingBase) victim);
             }
 
-            setLastAttacker(victim);
-        }
+            boolean attacked = victim.attackEntityFrom(
+                    DamageSource.causeMobDamage(this), attackDamage);
 
-        return attacked;
+            if (attacked) {
+                if (knockback > 0) {
+                    double vx = -Math.sin(Math.toRadians(rotationYaw)) * knockback
+                            * 0.5;
+                    double vy = 0.1;
+                    double vz = Math.cos(Math.toRadians(rotationYaw)) * knockback
+                            * 0.5;
+                    victim.addVelocity(vx, vy, vz);
+                    motionX *= 0.6;
+                    motionZ *= 0.6;
+                }
+
+                setLastAttacker(victim);
+            }
+
+            return attacked;
+        }
+        return false;
     }
 
     public void SendOrderMessage(EnumOrderType var1) {
@@ -966,7 +987,6 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
         float var4;
 
         for (var4 = var2 - var1; var4 < -180.0F; var4 += 360.0F) {
-            ;
         }
 
         while (var4 >= 180.0F) {
@@ -987,6 +1007,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
     /**
      * Returns the item ID for the item the mob drops on death.
      */
+    @Override
     protected Item getDropItem() {
         if (this.isModelized()) {
             return Items.bone;
@@ -1086,6 +1107,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
      * Strange function Handling some additional effect when healing, but
      * parameter is absolute unclear
      */
+    @Override
     public void handleHealthUpdate(byte var1) {
         if (var1 == HEART_MESSAGE) {
             this.showHeartsOrSmokeFX(true, true);
@@ -1103,6 +1125,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
     /**
      * Drop 0-2 items of this living's type
      */
+    @Override
     protected void dropFewItems(boolean var1, int var2) {
         Item var3 = this.getDropItem();
 
@@ -1131,6 +1154,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
     /**
      * Called to update the entity's position/logic.
      */
+    @Override
     public void onUpdate() {
         super.onUpdate();
 
@@ -1174,6 +1198,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
                 this.posZ + (player.posZ - this.posZ) * 0.01F);
     }
 
+    @Override
     protected void updateEntityActionState() {
         if (!this.isModelized()) {
             super.updateEntityActionState();
@@ -1196,6 +1221,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
+    @Override
     public void writeEntityToNBT(NBTTagCompound compound) {
         super.writeEntityToNBT(compound);
         compound.setBoolean("isModelized", this.isModelized());
@@ -1206,7 +1232,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
         compound.setInteger("AgeTick", this.getDinoAgeTick());
         compound.setInteger("SubSpecies", this.getSubSpecies());
         compound.setByte("OrderStatus", (byte) this.OrderStatus.ordinal()/*
-		 * (byte)
+         * (byte)
 		 * Revival
 		 * .
 		 * EnumToInt
@@ -1228,6 +1254,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
+    @Override
     public void readEntityFromNBT(NBTTagCompound compound) {
         super.readEntityFromNBT(compound);
         this.setModelized(compound.getBoolean("isModelized"));
@@ -1271,6 +1298,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
         return this.OrderStatus;
     }
 
+    @Override
     public void onLivingUpdate() {
         if (!this.isModelized()) {
             if (!this.worldObj.isRemote) {
@@ -1287,6 +1315,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
      * Called when a player interacts with a mob. e.g. gets milk from a cow,
      * gets into the saddle on a pig.
      */
+    @Override
     public boolean interact(EntityPlayer player) {
         // this.getClass();//needed to set which is the actual instance using
         // this function
@@ -1503,6 +1532,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
 
     // public void CheckSkin() {}
 
+    @Override
     public boolean allowLeashing() {
         return !this.getLeashed() && !(this instanceof IMob) && this.isTamed();
     }
@@ -1550,6 +1580,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
         return par1EntityLivingData;
     }
 
+    @Override
     public EntityPlayer getRidingPlayer() {
         if (riddenByEntity instanceof EntityPlayer) {
             return (EntityPlayer) riddenByEntity;
@@ -1587,6 +1618,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
      * Call this function when a player is riding a dinosaur and right clicks
      * with whip. Override in dinosaur classes to create unique actions.
      */
+    @Override
     public void onWhipRightClick() {
     }
 }

@@ -80,6 +80,7 @@ public class HellBoatWorldGen extends WorldGenerator {
         return false;
     }
 
+    @Override
     public boolean generate(World world, Random rand, int x, int y, int z) {
         generate_r0(world, rand, x, y, z);
         return true;

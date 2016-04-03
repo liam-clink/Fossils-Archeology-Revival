@@ -16,6 +16,7 @@ public class FeetItem extends ItemArmor {
         itemIcon = iconRegister.registerIcon("fossil:Bone_Boots");
     }
 
+    @Override
     public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
         if (stack.getItem() == FAItemRegistry.INSTANCE.skullHelmet || stack.getItem() == FAItemRegistry.INSTANCE.ribCage || stack.getItem() == FAItemRegistry.INSTANCE.feet) {
             return "fossil:textures/armor/bone_1.png";

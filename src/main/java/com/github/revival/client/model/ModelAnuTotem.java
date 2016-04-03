@@ -83,6 +83,7 @@ public class ModelAnuTotem extends ModelBase {
         this.Head.render(f5);
     }
 
+    @Override
     public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
         this.field_78112_f.render(f5);
         this.field_78124_i.render(f5);

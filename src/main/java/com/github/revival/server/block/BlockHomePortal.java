@@ -25,17 +25,21 @@ public class BlockHomePortal extends Block {
 
     }
 
+    @Override
     public boolean isOpaqueCube() {
         return false;
     }
 
+    @Override
     public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB bb, List list, Entity entity) {
     }
 
+    @Override
     public boolean renderAsNormalBlock() {
         return false;
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public int getRenderBlockPass() {
         return 1;
@@ -47,6 +51,7 @@ public class BlockHomePortal extends Block {
         this.blockIcon = iconregister.registerIcon("fossil:overworldPortal");
     }
 
+    @Override
     public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity) {
         if ((par5Entity.ridingEntity == null) && (par5Entity.riddenByEntity == null) && (par5Entity instanceof EntityPlayerMP)) {
             EntityPlayerMP thePlayer = (EntityPlayerMP) par5Entity;
@@ -60,6 +65,7 @@ public class BlockHomePortal extends Block {
         }
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public void randomDisplayTick(World world, int x, int y, int z, Random rand) {
         super.randomDisplayTick(world, x, y, z, rand);

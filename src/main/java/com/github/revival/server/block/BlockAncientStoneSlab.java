@@ -42,14 +42,17 @@ public class BlockAncientStoneSlab extends BlockSlab {
         this.icon = iconRegister.registerIcon("fossil:Ancient_Stonebricks");
     }
 
+    @Override
     public Item getItemDropped(int var1, Random rand, int var3) {
         return Item.getItemFromBlock(FABlockRegistry.INSTANCE.ancientStoneSingleSlab);
     }
 
+    @Override
     protected ItemStack createStackedBlock(int meta) {
         return new ItemStack(FABlockRegistry.INSTANCE.ancientStoneSingleSlab, 2, meta & 7);
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public Item getItem(World world, int x, int y, int z) {
         return Item.getItemFromBlock(this);

@@ -23,6 +23,7 @@ public class ChickenEssItem extends ForgeFoodItem {
         //return super.onFoodEaten(var1, var2, var3);
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean i) {
         list.add("Feed this to your dinosaurs to make them grow!");

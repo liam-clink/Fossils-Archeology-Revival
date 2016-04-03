@@ -2,8 +2,17 @@ package com.github.revival.server.entity.mob;
 
 import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 import com.github.revival.server.enums.EnumPrehistoric;
-import com.github.revival.server.enums.EnumPrehistoricAI.*;
-
+import com.github.revival.server.enums.EnumPrehistoricAI.Activity;
+import com.github.revival.server.enums.EnumPrehistoricAI.Attacking;
+import com.github.revival.server.enums.EnumPrehistoricAI.Climbing;
+import com.github.revival.server.enums.EnumPrehistoricAI.Following;
+import com.github.revival.server.enums.EnumPrehistoricAI.Jumping;
+import com.github.revival.server.enums.EnumPrehistoricAI.Moving;
+import com.github.revival.server.enums.EnumPrehistoricAI.Response;
+import com.github.revival.server.enums.EnumPrehistoricAI.Stalking;
+import com.github.revival.server.enums.EnumPrehistoricAI.Taming;
+import com.github.revival.server.enums.EnumPrehistoricAI.Untaming;
+import com.github.revival.server.enums.EnumPrehistoricAI.WaterAbility;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIEatGrass;
@@ -36,7 +45,7 @@ public class EntityMammoth extends EntityNewPrehistoric implements IShearable {
     public EntityMammoth(World world) {
         super(world, EnumPrehistoric.Mammoth);
         this.setSize(0.7F, 0.7F);
-    	this.pediaScale = 1.5F;
+        this.pediaScale = 1.5F;
         this.tasks.addTask(10, aiEatGrass);
         minSize = 1.3F;
         maxSize = 5F;
@@ -46,10 +55,11 @@ public class EntityMammoth extends EntityNewPrehistoric implements IShearable {
         favoriteFood = Items.potato;
     }
 
+    @Override
     public int getAttackLength() {
-		return 35;
-	}
-    
+        return 35;
+    }
+
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
@@ -58,6 +68,7 @@ public class EntityMammoth extends EntityNewPrehistoric implements IShearable {
         getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(baseDamage);
     }
 
+    @Override
     protected void entityInit() {
         super.entityInit();
         this.dataWatcher.addObject(30, new Byte((byte) 3));
@@ -101,18 +112,21 @@ public class EntityMammoth extends EntityNewPrehistoric implements IShearable {
         }
     }
 
+    @Override
     public void writeEntityToNBT(NBTTagCompound var1) {
         super.writeEntityToNBT(var1);
         var1.setBoolean("Sheared", this.getSheared());
     }
 
 
+    @Override
     public void readEntityFromNBT(NBTTagCompound var1) {
         super.readEntityFromNBT(var1);
         this.setSheared(var1.getBoolean("Sheared"));
 
     }
 
+    @Override
     public void eatGrassBonus() {
         if (this.getSheared()) {
             ++this.eatGrassTimes;
@@ -134,6 +148,7 @@ public class EntityMammoth extends EntityNewPrehistoric implements IShearable {
         }
     }
 
+    @Override
     public void onLivingUpdate() {
         int i = MathHelper.floor_double(this.posX);
         int j = MathHelper.floor_double(this.posY);
@@ -225,20 +240,21 @@ public class EntityMammoth extends EntityNewPrehistoric implements IShearable {
         return Items.stick;
     }
 
+    @Override
     public void updateSize() {
         double healthStep;
         double attackStep;
         double speedStep;
-        healthStep = (this.maxHealth - this.baseHealth) / (this.getAdultAge() + 1);
-        attackStep = (this.maxDamage - this.baseDamage) / (this.getAdultAge() + 1);
-        speedStep = (this.maxSpeed - this.baseSpeed) / (this.getAdultAge() + 1);
+        healthStep = (maxHealth - baseHealth) / (this.getAdultAge() + 1);
+        attackStep = (maxDamage - baseDamage) / (this.getAdultAge() + 1);
+        speedStep = (maxSpeed - baseSpeed) / (this.getAdultAge() + 1);
 
 
         if (this.getDinoAge() <= this.getAdultAge()) {
 
-            this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(Math.round(this.baseHealth + (healthStep * this.getDinoAge())));
-            this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(Math.round(this.baseDamage + (attackStep * this.getDinoAge())));
-            this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(this.baseSpeed + (speedStep * this.getDinoAge()));
+            this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(Math.round(baseHealth + (healthStep * this.getDinoAge())));
+            this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(Math.round(baseDamage + (attackStep * this.getDinoAge())));
+            this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(baseSpeed + (speedStep * this.getDinoAge()));
 
             if (this.isTeen()) {
                 this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.5D);
@@ -255,39 +271,41 @@ public class EntityMammoth extends EntityNewPrehistoric implements IShearable {
         return 14;
     }
 
+    @Override
     public float getMaleSize() {
         return 1.2F;
     }
-    
-	public boolean attackEntityAsMob(Entity entity)
-	{
-		if(this.getAnimation() == NO_ANIMATION){
-			this.setAnimation(animation_attack);
-			return false;
-		}
 
-		if(this.getAnimation() == animation_attack && this.getAnimationTick() == 20){
-			IAttributeInstance iattributeinstance = this.getEntityAttribute(SharedMonsterAttributes.attackDamage);
-			boolean flag = entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float)iattributeinstance.getAttributeValue());
+    @Override
+    public boolean attackEntityAsMob(Entity entity) {
+        if (this.boundingBox.intersectsWith(entity.boundingBox)) {
+            if (this.getAnimation() == NO_ANIMATION) {
+                this.setAnimation(animation_attack);
+                return false;
+            }
 
-			if (flag)
-			{
-				if(entity.ridingEntity != null){
-					if(entity.ridingEntity  == this){
-						entity.mountEntity(null);
-					}
-				}
-				entity.motionY += 0.4000000059604645D;
-				double d0 = this.getAttackTarget().posX - this.posX;
-				double d1 = this.getAttackTarget().posZ - this.posZ;
-				float f = MathHelper.sqrt_double(d0 * d0 + d1 * d1);
-                entity.addVelocity((double)(-MathHelper.sin((this.rotationYaw - 180) * (float)Math.PI / 180.0F) * 2 * 0.5F), 0.1D, (double)(MathHelper.cos((this.rotationYaw - 180) * (float)Math.PI / 180.0F) * 2 * 0.5F));
+            if (this.getAnimation() == animation_attack && this.getAnimationTick() == 20) {
+                IAttributeInstance iattributeinstance = this.getEntityAttribute(SharedMonsterAttributes.attackDamage);
+                boolean flag = entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) iattributeinstance.getAttributeValue());
 
-				
-			}
+                if (flag) {
+                    if (entity.ridingEntity != null) {
+                        if (entity.ridingEntity == this) {
+                            entity.mountEntity(null);
+                        }
+                    }
+                    entity.motionY += 0.4000000059604645D;
+                    double d0 = this.getAttackTarget().posX - this.posX;
+                    double d1 = this.getAttackTarget().posZ - this.posZ;
+                    float f = MathHelper.sqrt_double(d0 * d0 + d1 * d1);
+                    entity.addVelocity((double) (-MathHelper.sin((this.rotationYaw - 180) * (float) Math.PI / 180.0F) * 2 * 0.5F), 0.1D, (double) (MathHelper.cos((this.rotationYaw - 180) * (float) Math.PI / 180.0F) * 2 * 0.5F));
 
-			return flag;
-		}
-		return false;
-	}
+
+                }
+
+                return flag;
+            }
+        }
+        return false;
+    }
 }

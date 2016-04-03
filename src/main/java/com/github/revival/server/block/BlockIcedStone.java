@@ -26,6 +26,7 @@ public class BlockIcedStone extends Block {
     /**
      * Returns the ID of the items to drop on destruction.
      */
+    @Override
     public Item getItemDropped(int var1, Random var2, int var3) {
         return Item.getItemFromBlock(Blocks.cobblestone);
     }
@@ -33,6 +34,7 @@ public class BlockIcedStone extends Block {
     /**
      * Ticks the block if it's been scheduled
      */
+    @Override
     public void updateTick(World var1, int var2, int var3, int var4, Random var5) {
         if (var1.getSavedLightValue(EnumSkyBlock.Block, var2, var3, var4) <= 11 - this.lightOpacity && (!var1.canBlockSeeTheSky(var2, var3 + 1, var4) || !var1.isDaytime())) {
             int var6 = 0;
@@ -97,6 +99,7 @@ public class BlockIcedStone extends Block {
      * When this method is called, your block should register all the icons it needs with the given IconRegister. This
      * is the only chance you get to register icons.
      */
+    @Override
     public void registerBlockIcons(IIconRegister par1IconRegister) {
         this.blockIcon = par1IconRegister.registerIcon("fossil:Iced_Stone");
     }

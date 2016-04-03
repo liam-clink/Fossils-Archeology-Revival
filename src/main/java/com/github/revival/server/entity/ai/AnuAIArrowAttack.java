@@ -11,6 +11,7 @@ public class AnuAIArrowAttack extends EntityAIArrowAttack {
         theEntity = p_i1650_1_;
     }
 
+    @Override
     public boolean shouldExecute() {
         if (theEntity.getAttackMode() == 1) {
             return super.shouldExecute();

@@ -174,6 +174,7 @@ public class ModelGallimimus extends ModelNewPrehistoric {
         animator = ModelAnimator.create();
     }
 
+    @Override
     public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
         animate((IAnimatedEntity) entity, f, f1, f2, f3, f4, f5);
         this.rightThigh.render(f5);
@@ -188,26 +189,27 @@ public class ModelGallimimus extends ModelNewPrehistoric {
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
         animator.setAnimation(EntityDilophosaurus.animation_attack);
         animator.startKeyframe(10);
-		ModelUtils.rotate(animator, neck, -36, 0, 0);
-		ModelUtils.rotate(animator, head, 47, 0, 0);
-		ModelUtils.rotate(animator, lowerJaw, 15, 0, 0);
-		ModelUtils.rotate(animator, leftUpperArm, 10, 0, -40);
-		ModelUtils.rotate(animator, rightUpperArm, 10, 0, 40);
-		ModelUtils.rotate(animator, leftLowerArm, -20, 0, 0);
-		ModelUtils.rotate(animator, rightLowerArm, -20, 0, 0);
+        ModelUtils.rotate(animator, neck, -36, 0, 0);
+        ModelUtils.rotate(animator, head, 47, 0, 0);
+        ModelUtils.rotate(animator, lowerJaw, 15, 0, 0);
+        ModelUtils.rotate(animator, leftUpperArm, 10, 0, -40);
+        ModelUtils.rotate(animator, rightUpperArm, 10, 0, 40);
+        ModelUtils.rotate(animator, leftLowerArm, -20, 0, 0);
+        ModelUtils.rotate(animator, rightLowerArm, -20, 0, 0);
         animator.endKeyframe();
         animator.startKeyframe(5);
-		ModelUtils.rotate(animator, neck, 6, 0, 0);
-		ModelUtils.rotate(animator, head, -14, 0, 0);
-		ModelUtils.rotate(animator, lowerJaw, 15, 0, 0);
-		ModelUtils.rotate(animator, leftUpperArm, 10, 0, -40);
-		ModelUtils.rotate(animator, rightUpperArm, 10, 0, 40);
-		ModelUtils.rotate(animator, leftLowerArm, -20, 0, 0);
-		ModelUtils.rotate(animator, rightLowerArm, -20, 0, 0);
+        ModelUtils.rotate(animator, neck, 6, 0, 0);
+        ModelUtils.rotate(animator, head, -14, 0, 0);
+        ModelUtils.rotate(animator, lowerJaw, 15, 0, 0);
+        ModelUtils.rotate(animator, leftUpperArm, 10, 0, -40);
+        ModelUtils.rotate(animator, rightUpperArm, 10, 0, 40);
+        ModelUtils.rotate(animator, leftLowerArm, -20, 0, 0);
+        ModelUtils.rotate(animator, rightLowerArm, -20, 0, 0);
         animator.endKeyframe();
         animator.resetKeyframe(10);
     }
 
+    @Override
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
         AdvancedModelRenderer[] tailParts = {this.tail1, this.tail2, this.tail3};
         AdvancedModelRenderer[] neckParts = {this.neck, this.head};
@@ -216,7 +218,7 @@ public class ModelGallimimus extends ModelNewPrehistoric {
 
         ModelUtils.faceTargetMod(neck, f3, f4, 0.5F);
         ModelUtils.faceTargetMod(head, f3, f4, 0.5F);
-        
+
         float speed = 0.1F;
         float speed2 = 0.4F;
         float sitProgress = ((EntityNewPrehistoric) (entity)).sitProgress;
@@ -247,14 +249,14 @@ public class ModelGallimimus extends ModelNewPrehistoric {
         this.chainWave(neckParts, speed, 0.05F, 3, entity.ticksExisted, 1);
         this.chainWave(neckParts, speed, 0.15F, 3, f, f1);
         this.walk(leftThigh, speed2, 0.8F, false, 0F, -0.4F, f, f1);
-		this.walk(leftLeg, speed2, 0.2F, false, 0F, 0.6F, f, f1);
-		this.walk(leftFoot, speed2, -0.4F, true, -0.5F, -0.2F, f, f1);
-		this.walk(rightThigh, speed2, 0.8F, true, 0F, 0.4F, f, f1);
-		this.walk(rightLeg, speed2, 0.2F, true, 0F, -0.6F, f, f1);
-		this.walk(rightFoot, speed2, -0.4F, false, -0.5F, -0.2F, f, f1);
-		this.chainWave(neckParts, speed2, 0.5F, 4, f, f1);
-		this.chainWave(tailParts, speed2, 0.3F, -4, f, f1);
-        ((EntityNewPrehistoric)entity).tailbuffer.applyChainSwingBuffer(tailParts);
+        this.walk(leftLeg, speed2, 0.2F, false, 0F, 0.6F, f, f1);
+        this.walk(leftFoot, speed2, -0.4F, true, -0.5F, -0.2F, f, f1);
+        this.walk(rightThigh, speed2, 0.8F, true, 0F, 0.4F, f, f1);
+        this.walk(rightLeg, speed2, 0.2F, true, 0F, -0.6F, f, f1);
+        this.walk(rightFoot, speed2, -0.4F, false, -0.5F, -0.2F, f, f1);
+        this.chainWave(neckParts, speed2, 0.5F, 4, f, f1);
+        this.chainWave(tailParts, speed2, 0.3F, -4, f, f1);
+        ((EntityNewPrehistoric) entity).tailbuffer.applyChainSwingBuffer(tailParts);
     }
 
 

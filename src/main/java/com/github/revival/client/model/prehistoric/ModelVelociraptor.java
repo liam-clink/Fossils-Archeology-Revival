@@ -1,29 +1,13 @@
 package com.github.revival.client.model.prehistoric;
 
 import com.github.revival.client.model.prehistoric.test.ModelNewPrehistoric;
-import com.github.revival.client.renderer.entity.RenderPrehistoric;
 import com.github.revival.server.entity.mob.EntityDeinonychus;
 import com.github.revival.server.entity.mob.EntityVelociraptor;
 import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
-import com.mojang.authlib.GameProfile;
 import net.ilexiconn.llibrary.client.model.ModelAnimator;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
-import net.minecraft.block.Block;
-import net.minecraft.client.renderer.RenderBlocks;
-import net.minecraft.client.renderer.tileentity.TileEntitySkullRenderer;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTUtil;
-import net.minecraft.util.StringUtils;
-import org.lwjgl.opengl.GL11;
-
-import java.util.UUID;
 
 public class ModelVelociraptor extends ModelNewPrehistoric {
     public AdvancedModelRenderer lowerBody;
@@ -239,6 +223,7 @@ public class ModelVelociraptor extends ModelNewPrehistoric {
         animator = ModelAnimator.create();
     }
 
+    @Override
     public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
         animate((IAnimatedEntity) entity, f, f1, f2, f3, f4, f5);
         this.leftThigh.render(f5);
@@ -253,37 +238,38 @@ public class ModelVelociraptor extends ModelNewPrehistoric {
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
         animator.setAnimation(EntityDeinonychus.animation_attack);
         animator.startKeyframe(10);
-		animator.move(leftThigh, 0, 3.2F, -0.5F);
-		animator.move(rightThigh, 0, 3.2F, -0.5F);
-		animator.move(lowerBody, 0, 5.2F, -0.5F);
-		ModelUtils.rotate(animator, lowerBody, 15, 0, 0);
-		ModelUtils.rotate(animator, rightLeg, -30, 0, 0);
-		ModelUtils.rotate(animator, leftLeg, -30, 0, 0);
-		ModelUtils.rotate(animator, rightFoot, 30, 0, 0);
-		ModelUtils.rotate(animator, leftFoot, 30, 0, 0);
-		ModelUtils.rotate(animator, leftUpperArm, 0, 0, -50);
-		ModelUtils.rotate(animator, rightUpperArm, 0, 0, 50);
-		ModelUtils.rotate(animator, head, -20, 0, 0);
-		animator.endKeyframe();
-		animator.setStaticKeyframe(5);
+        animator.move(leftThigh, 0, 3.2F, -0.5F);
+        animator.move(rightThigh, 0, 3.2F, -0.5F);
+        animator.move(lowerBody, 0, 5.2F, -0.5F);
+        ModelUtils.rotate(animator, lowerBody, 15, 0, 0);
+        ModelUtils.rotate(animator, rightLeg, -30, 0, 0);
+        ModelUtils.rotate(animator, leftLeg, -30, 0, 0);
+        ModelUtils.rotate(animator, rightFoot, 30, 0, 0);
+        ModelUtils.rotate(animator, leftFoot, 30, 0, 0);
+        ModelUtils.rotate(animator, leftUpperArm, 0, 0, -50);
+        ModelUtils.rotate(animator, rightUpperArm, 0, 0, 50);
+        ModelUtils.rotate(animator, head, -20, 0, 0);
+        animator.endKeyframe();
+        animator.setStaticKeyframe(5);
         animator.startKeyframe(5);
-		animator.move(leftThigh, 0, -6F, 0F);
-		animator.move(rightThigh, 0, -6F, 0F);
-		animator.move(lowerBody, 0, -10F, 0F);
-		ModelUtils.rotate(animator, lowerBody, -25, 0, 0);
-		ModelUtils.rotate(animator, rightThigh, -35, 0, 0);
-		ModelUtils.rotate(animator, leftThigh, -35, 0, 0);
-		ModelUtils.rotate(animator, rightLeg, -30, 0, 0);
-		ModelUtils.rotate(animator, leftLeg, -30, 0, 0);
-		ModelUtils.rotate(animator, rightFoot, -55, 0, 0);
-		ModelUtils.rotate(animator, leftFoot, -55, 0, 0);
-		ModelUtils.rotate(animator, leftUpperArm, 0, 0, -50);
-		ModelUtils.rotate(animator, rightUpperArm, 0, 0, 50);
-		animator.endKeyframe();
-		animator.setStaticKeyframe(5);
-		animator.resetKeyframe(5);
+        animator.move(leftThigh, 0, -6F, 0F);
+        animator.move(rightThigh, 0, -6F, 0F);
+        animator.move(lowerBody, 0, -10F, 0F);
+        ModelUtils.rotate(animator, lowerBody, -25, 0, 0);
+        ModelUtils.rotate(animator, rightThigh, -35, 0, 0);
+        ModelUtils.rotate(animator, leftThigh, -35, 0, 0);
+        ModelUtils.rotate(animator, rightLeg, -30, 0, 0);
+        ModelUtils.rotate(animator, leftLeg, -30, 0, 0);
+        ModelUtils.rotate(animator, rightFoot, -55, 0, 0);
+        ModelUtils.rotate(animator, leftFoot, -55, 0, 0);
+        ModelUtils.rotate(animator, leftUpperArm, 0, 0, -50);
+        ModelUtils.rotate(animator, rightUpperArm, 0, 0, 50);
+        animator.endKeyframe();
+        animator.setStaticKeyframe(5);
+        animator.resetKeyframe(5);
     }
 
+    @Override
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
         AdvancedModelRenderer[] tailParts = {this.tail1, this.tail2, this.tail3};
         AdvancedModelRenderer[] neckParts = {this.neck, this.head};
@@ -325,13 +311,13 @@ public class ModelVelociraptor extends ModelNewPrehistoric {
         this.chainSwing(tailParts, speed2, 0.25F, -3, f, f1);
         this.chainWave(neckParts, speed, 0.15F, 3, entity.ticksExisted, 1);
         this.walk(leftThigh, speed2, 0.8F, false, 0F, -0.4F, f, f1);
-		this.walk(leftLeg, speed2, 0.2F, false, 0F, 0.6F, f, f1);
-		this.walk(leftFoot, speed2, -0.4F, true, -0.5F, -0.2F, f, f1);
-		this.walk(rightThigh, speed2, 0.8F, true, 0F, 0.4F, f, f1);
-		this.walk(rightLeg, speed2, 0.2F, true, 0F, -0.6F, f, f1);
-		this.walk(rightFoot, speed2, -0.4F, false, -0.5F, -0.2F, f, f1);
-		this.chainWave(neckParts, speed2, 0.5F, 4, f, f1);
-		this.chainWave(tailParts, speed2, 0.3F, -4, f, f1);
+        this.walk(leftLeg, speed2, 0.2F, false, 0F, 0.6F, f, f1);
+        this.walk(leftFoot, speed2, -0.4F, true, -0.5F, -0.2F, f, f1);
+        this.walk(rightThigh, speed2, 0.8F, true, 0F, 0.4F, f, f1);
+        this.walk(rightLeg, speed2, 0.2F, true, 0F, -0.6F, f, f1);
+        this.walk(rightFoot, speed2, -0.4F, false, -0.5F, -0.2F, f, f1);
+        this.chainWave(neckParts, speed2, 0.5F, 4, f, f1);
+        this.chainWave(tailParts, speed2, 0.3F, -4, f, f1);
 
         if (((EntityVelociraptor) entity).getAnimation() != EntityVelociraptor.animation_attack && ((EntityVelociraptor) entity).ridingEntity != null) {
             ModelUtils.setRotateAngleAlt(lowerBody, -15, 0, 0);
@@ -350,7 +336,7 @@ public class ModelVelociraptor extends ModelNewPrehistoric {
             this.flap(leftUpperArm, 0.8F, -0.4F, true, 0.3F, -0.2F, entity.ticksExisted, 1);
             this.flap(rightUpperArm, 0.8F, -0.4F, false, 0.3F, 0.2F, entity.ticksExisted, 1);
         }
-        ((EntityNewPrehistoric)entity).tailbuffer.applyChainSwingBuffer(tailParts);
+        ((EntityNewPrehistoric) entity).tailbuffer.applyChainSwingBuffer(tailParts);
         //((ChainBuffer)((EntityVelociraptor)entity).tailbuffer).applyChainSwingBuffer(tailParts);
 
     }

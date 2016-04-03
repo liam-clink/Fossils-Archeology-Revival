@@ -32,6 +32,7 @@ public class DinoAILook extends EntityAIBase {
     /**
      * Returns whether the EntityAIBase should begin execution.
      */
+    @Override
     public boolean shouldExecute() {
         return this.idleEntity.getRNG().nextFloat() < 0.02F;
     }
@@ -39,6 +40,7 @@ public class DinoAILook extends EntityAIBase {
     /**
      * Returns whether an in-progress EntityAIBase should continue executing
      */
+    @Override
     public boolean continueExecuting() {
         return this.idleTime >= 0;
     }
@@ -46,6 +48,7 @@ public class DinoAILook extends EntityAIBase {
     /**
      * Execute a one shot task or start executing a continuous task
      */
+    @Override
     public void startExecuting() {
         double d0 = (Math.PI * 2D) * this.idleEntity.getRNG().nextDouble();
         this.lookX = Math.cos(d0 / necklength);
@@ -56,6 +59,7 @@ public class DinoAILook extends EntityAIBase {
     /**
      * Updates the task
      */
+    @Override
     public void updateTask() {
         --this.idleTime;
         this.idleEntity.getLookHelper().setLookPosition(this.idleEntity.posX + this.lookX, this.idleEntity.posY + (double) this.idleEntity.getEyeHeight(), this.idleEntity.posZ + this.lookZ, 10.0F, (float) this.idleEntity.getVerticalFaceSpeed());

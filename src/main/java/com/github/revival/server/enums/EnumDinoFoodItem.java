@@ -74,7 +74,7 @@ public enum EnumDinoFoodItem {
     public int FoodValue;
     public int HealValue;
 
-    private EnumDinoFoodItem(Item item0, int Food, int Heal) {
+    EnumDinoFoodItem(Item item0, int Food, int Heal) {
         this.item = item0;
         this.FoodValue = Food;
         this.HealValue = Heal;

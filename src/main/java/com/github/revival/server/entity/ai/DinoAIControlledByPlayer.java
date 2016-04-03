@@ -38,6 +38,7 @@ public class DinoAIControlledByPlayer extends EntityAIBase {
     /**
      * Execute a one shot task or start executing a continuous task
      */
+    @Override
     public void startExecuting() {
         this.currentSpeed = 0.0F;
         this.lastTimeSeenWhip = -1;
@@ -46,6 +47,7 @@ public class DinoAIControlledByPlayer extends EntityAIBase {
     /**
      * Resets the task
      */
+    @Override
     public void resetTask() {
         this.speedBoosted = false;
         this.currentSpeed = 0.0F;
@@ -55,6 +57,7 @@ public class DinoAIControlledByPlayer extends EntityAIBase {
     /**
      * Returns whether the EntityAIBase should begin execution.
      */
+    @Override
     public boolean shouldExecute() {
         /*System.out.println(String.valueOf(this.speedBoosted));
         if(this.motionTarget.riddenByEntity != null)
@@ -87,6 +90,7 @@ public class DinoAIControlledByPlayer extends EntityAIBase {
     /**
      * Updates the task
      */
+    @Override
     public void updateTask() {
         this.motionTarget.decreaseHungerTick();
 

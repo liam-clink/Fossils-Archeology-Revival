@@ -16,6 +16,7 @@ public class Teir2BlockItem extends ItemBlock {
         super(block);
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
         list.add(StatCollector.translateToLocal("tile.cultureVat.teir2"));

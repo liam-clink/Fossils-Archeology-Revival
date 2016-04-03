@@ -44,6 +44,7 @@ public class WaterDinoAIHunt extends EntityAITarget {
         this.targetSorter = new DinoAINearestAttackableTargetSorter(this, this.dinosaur);
     }
 
+    @Override
     public boolean isInterruptible() {
         return true;
     }
@@ -71,7 +72,7 @@ public class WaterDinoAIHunt extends EntityAITarget {
                 EntityLiving entity = (EntityLiving) iterator.next();
 
                 if (this.dinosaur.SelfType.FoodMobList.CheckMobByClass(entity.getClass())) {//It's food
-                    if (!(entity instanceof EntityDinosaur) || (entity instanceof EntityDinosaur && ((EntityDinosaur) entity).isModelized() == false)) {//No modelized Dinos for Lunch!
+                    if (!(entity instanceof EntityDinosaur) || (entity instanceof EntityDinosaur && !((EntityDinosaur) entity).isModelized())) {//No modelized Dinos for Lunch!
                         this.targetEntity = entity;
                         //this.dinosaur.setAttackTarget(entity);
                         return true;
@@ -87,13 +88,15 @@ public class WaterDinoAIHunt extends EntityAITarget {
     /**
      * Returns whether an in-progress EntityAIBase should continue executing
      */
+    @Override
     public boolean continueExecuting() {
-        return !this.targetEntity.isEntityAlive() ? false : (this.dinosaur.getDistanceSqToEntity(this.targetEntity) > SEARCH_RANGE ? false : this.shouldExecute());
+        return this.targetEntity.isEntityAlive() && (this.dinosaur.getDistanceSqToEntity(this.targetEntity) <= SEARCH_RANGE && this.shouldExecute());
     }
 
     /**
      * Resets the task
      */
+    @Override
     public void resetTask() {
         this.targetEntity = null;
         this.dinosaur.getNavigator().clearPathEntity();
@@ -102,6 +105,7 @@ public class WaterDinoAIHunt extends EntityAITarget {
     /**
      * Updates the task
      */
+    @Override
     public void updateTask() {
         double distance = SEARCH_RANGE;
         this.dinosaur.getLookHelper().setLookPositionWithEntity(this.targetEntity, 30.0F, 30.0F);

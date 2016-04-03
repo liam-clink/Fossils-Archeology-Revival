@@ -2,7 +2,6 @@ package com.github.revival.server.structure.util;
 
 import com.github.revival.server.structure.StructureGenerator;
 import com.google.common.collect.Lists;
-import net.ilexiconn.llibrary.LLibrary;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 

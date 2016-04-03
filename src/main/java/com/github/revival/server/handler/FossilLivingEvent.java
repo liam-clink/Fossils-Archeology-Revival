@@ -1,13 +1,25 @@
 package com.github.revival.server.handler;
 
 import com.github.revival.Revival;
-import com.github.revival.server.entity.mob.*;
+import com.github.revival.server.entity.mob.EntityElasmotherium;
+import com.github.revival.server.entity.mob.EntityMammoth;
+import com.github.revival.server.entity.mob.EntityPregnantCow;
+import com.github.revival.server.entity.mob.EntityPregnantHorse;
+import com.github.revival.server.entity.mob.EntityPregnantPig;
+import com.github.revival.server.entity.mob.EntityPregnantSheep;
+import com.github.revival.server.entity.mob.EntityQuagga;
+import com.github.revival.server.entity.mob.EntitySmilodon;
 import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 import com.github.revival.server.enums.EnumPrehistoric;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.passive.*;
+import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.entity.passive.EntityChicken;
+import net.minecraft.entity.passive.EntityCow;
+import net.minecraft.entity.passive.EntityHorse;
+import net.minecraft.entity.passive.EntityPig;
+import net.minecraft.entity.passive.EntitySheep;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.AchievementEvent;

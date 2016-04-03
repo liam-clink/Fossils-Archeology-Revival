@@ -75,6 +75,7 @@ public class EntityPregnantSheep implements IViviparous, IExtendedEntityProperti
     public void init(Entity entity, World world) {
     }
 
+    @Override
     public void setEmbryo(EnumPrehistoric animalType) {
         this.Embryo = animalType;
     }

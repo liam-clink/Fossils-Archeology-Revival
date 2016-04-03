@@ -173,6 +173,7 @@ public class ModelAnkylosaurus extends ModelNewPrehistoric {
         animator = ModelAnimator.create();
     }
 
+    @Override
     public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
         animate((IAnimatedEntity) entity, f, f1, f2, f3, f4, f5);
         this.Body.render(f5);
@@ -185,24 +186,25 @@ public class ModelAnkylosaurus extends ModelNewPrehistoric {
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
         animator.setAnimation(EntityAnkylosaurus.animation_attack);
         animator.startKeyframe(5);
-		ModelUtils.rotate(animator, Body, 0, 15, 0);
-		ModelUtils.rotate(animator, Tail1, 0, 10, 0);
-		ModelUtils.rotate(animator, Tail2, 0, 18, 0);
-		ModelUtils.rotate(animator, Tail3, 0, 20, 0);
-		ModelUtils.rotate(animator, TailClub, 0, 20, 0);
-		animator.endKeyframe();
-		animator.setStaticKeyframe(5);
-		animator.startKeyframe(10);
-		ModelUtils.rotate(animator, Body, 0, -127, 0);
-		ModelUtils.rotate(animator, Tail1, 0, -10, 0);
-		ModelUtils.rotate(animator, Tail2, 0, -18, 0);
-		ModelUtils.rotate(animator, Tail3, 0, -20, 0);
-		ModelUtils.rotate(animator, TailClub, 0, -23, 0);
-		animator.endKeyframe();
-		animator.setStaticKeyframe(5);
-		animator.resetKeyframe(5);
+        ModelUtils.rotate(animator, Body, 0, 15, 0);
+        ModelUtils.rotate(animator, Tail1, 0, 10, 0);
+        ModelUtils.rotate(animator, Tail2, 0, 18, 0);
+        ModelUtils.rotate(animator, Tail3, 0, 20, 0);
+        ModelUtils.rotate(animator, TailClub, 0, 20, 0);
+        animator.endKeyframe();
+        animator.setStaticKeyframe(5);
+        animator.startKeyframe(10);
+        ModelUtils.rotate(animator, Body, 0, -127, 0);
+        ModelUtils.rotate(animator, Tail1, 0, -10, 0);
+        ModelUtils.rotate(animator, Tail2, 0, -18, 0);
+        ModelUtils.rotate(animator, Tail3, 0, -20, 0);
+        ModelUtils.rotate(animator, TailClub, 0, -23, 0);
+        animator.endKeyframe();
+        animator.setStaticKeyframe(5);
+        animator.resetKeyframe(5);
     }
 
+    @Override
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
         AdvancedModelRenderer[] tailParts = {this.Tail1, this.Tail2, this.Tail3, this.TailClub};
         AdvancedModelRenderer[] neckParts = {this.Neck, this.Head};
@@ -249,7 +251,7 @@ public class ModelAnkylosaurus extends ModelNewPrehistoric {
         sitAnimationRotation(BackThighL, sitProgress, (float) Math.toRadians(65.22D), 0, -((float) Math.toRadians(41.74D)));
         sitAnimationRotation(HornL1, sitProgress, (float) Math.toRadians(36.0D), -((float) Math.toRadians(5.0D)), (float) Math.toRadians(50.0D));
         sitAnimationPos(Body, sitProgress, 0, 4.3F, -3);
-        ((EntityNewPrehistoric)entity).tailbuffer.applyChainSwingBuffer(tailParts);
+        ((EntityNewPrehistoric) entity).tailbuffer.applyChainSwingBuffer(tailParts);
     }
 
 }

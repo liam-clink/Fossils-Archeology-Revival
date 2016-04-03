@@ -31,6 +31,7 @@ public class BlockPalmSapling extends BlockBush implements IGrowable {
      * When this method is called, your block should register all the icons it needs with the given IIconRegister. This
      * is the only chance you get to register icons.
      */
+    @Override
     public void registerBlockIcons(IIconRegister var1) {
         this.blockIcon = var1.registerIcon("fossil:Palae_Sapling");
     }
@@ -38,6 +39,7 @@ public class BlockPalmSapling extends BlockBush implements IGrowable {
     /**
      * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
      */
+    @Override
     public IIcon getIcon(int var1, int var2) {
         return this.blockIcon;
     }
@@ -45,6 +47,7 @@ public class BlockPalmSapling extends BlockBush implements IGrowable {
     /**
      * Ticks the block if it's been scheduled
      */
+    @Override
     public void updateTick(World world, int i, int j, int k, Random random) {
         super.updateTick(world, i, j, k, random);
 
@@ -76,6 +79,7 @@ public class BlockPalmSapling extends BlockBush implements IGrowable {
         }
     }
 
+    @Override
     public boolean func_149851_a(World p_149851_1_, int p_149851_2_, int p_149851_3_, int p_149851_4_, boolean p_149851_5_) {
         return true;
     }
@@ -84,10 +88,12 @@ public class BlockPalmSapling extends BlockBush implements IGrowable {
         this.generateTree(p_149879_1_, p_149879_2_, p_149879_3_, p_149879_4_, p_149879_5_);
     }
 
+    @Override
     public boolean func_149852_a(World p_149852_1_, Random p_149852_2_, int p_149852_3_, int p_149852_4_, int p_149852_5_) {
         return (double) p_149852_1_.rand.nextFloat() < 0.45D;
     }
 
+    @Override
     public void func_149853_b(World p_149853_1_, Random p_149853_2_, int p_149853_3_, int p_149853_4_, int p_149853_5_) {
         this.func_149879_c(p_149853_1_, p_149853_3_, p_149853_4_, p_149853_5_, p_149853_2_);
     }

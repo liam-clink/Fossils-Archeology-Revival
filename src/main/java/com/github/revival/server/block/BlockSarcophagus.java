@@ -35,6 +35,7 @@ public class BlockSarcophagus extends BlockContainer {
         this.blockIcon = iconregister.registerIcon("fossil:sarcophagus");
     }
 
+    @Override
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack) {
         byte b0 = 0;
         int l = MathHelper.floor_double((double) (entity.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
@@ -63,10 +64,12 @@ public class BlockSarcophagus extends BlockContainer {
         super.onBlockPlacedBy(world, x, y, z, entity, stack);
     }
 
+    @Override
     public int getRenderType() {
         return -91;
     }
 
+    @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int i, float f, float f1, float f2) {
         TileEntitySarcophagus chest = (TileEntitySarcophagus) world.getTileEntity(x, y, z);
         if (chest.chestState == 0) {
@@ -98,14 +101,17 @@ public class BlockSarcophagus extends BlockContainer {
         return true;
     }
 
+    @Override
     public boolean isOpaqueCube() {
         return false;
     }
 
+    @Override
     public boolean renderAsNormalBlock() {
         return false;
     }
 
+    @Override
     public TileEntity createNewTileEntity(World world, int i) {
         return new TileEntitySarcophagus();
     }

@@ -96,6 +96,7 @@ public class DinosaurModelItem extends Item {
     /**
      * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
      */
+    @Override
     public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer player) {
         float var4 = 1.0F;
         float var5 = player.prevRotationPitch + (player.rotationPitch - player.prevRotationPitch) * var4;

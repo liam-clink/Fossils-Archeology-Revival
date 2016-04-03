@@ -30,6 +30,7 @@ public class BasicBiome extends BiomeGenBase {
         }
     }
 
+    @Override
     public void decorate(World world, Random rand, int x, int z) {
         super.decorate(world, rand, x, z);
         if (genSelector == 0) {

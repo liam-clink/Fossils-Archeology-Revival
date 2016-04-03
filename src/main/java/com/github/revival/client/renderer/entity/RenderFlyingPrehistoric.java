@@ -31,7 +31,7 @@ public class RenderFlyingPrehistoric extends RenderPrehistoric {
 	        }*/
 
         if (!((EntityNewPrehistoric) par1EntityLivingBase).onGround) {
-            if (!(this.mainModel.getClass() != flightModel.getClass())) {
+            if (this.mainModel.getClass() == flightModel.getClass()) {
                 this.mainModel = flightModel;
             }
         } else if (this.mainModel.getClass() != groundModel.getClass()) {

@@ -3,7 +3,17 @@ package com.github.revival.server.entity.mob;
 import com.github.revival.client.gui.GuiPedia;
 import com.github.revival.server.api.IPrehistoricAI;
 import com.github.revival.server.enums.EnumPrehistoricAI;
-import com.github.revival.server.enums.EnumPrehistoricAI.*;
+import com.github.revival.server.enums.EnumPrehistoricAI.Activity;
+import com.github.revival.server.enums.EnumPrehistoricAI.Attacking;
+import com.github.revival.server.enums.EnumPrehistoricAI.Climbing;
+import com.github.revival.server.enums.EnumPrehistoricAI.Following;
+import com.github.revival.server.enums.EnumPrehistoricAI.Jumping;
+import com.github.revival.server.enums.EnumPrehistoricAI.Moving;
+import com.github.revival.server.enums.EnumPrehistoricAI.Response;
+import com.github.revival.server.enums.EnumPrehistoricAI.Stalking;
+import com.github.revival.server.enums.EnumPrehistoricAI.Taming;
+import com.github.revival.server.enums.EnumPrehistoricAI.Untaming;
+import com.github.revival.server.enums.EnumPrehistoricAI.WaterAbility;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
@@ -40,6 +50,7 @@ public class EntityPrehistoric extends EntityTameable implements IPrehistoricAI 
         super(world);
     }
 
+    @Override
     protected void entityInit() {
         super.entityInit();
         this.dataWatcher.addObject(OWNER_DISPLAY_NAME_INDEX, "");
@@ -108,6 +119,7 @@ public class EntityPrehistoric extends EntityTameable implements IPrehistoricAI 
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
+    @Override
     public void writeEntityToNBT(NBTTagCompound compound) {
         super.writeEntityToNBT(compound);
         compound.setString("OwnerDisplayName", this.getOwnerDisplayName());
@@ -116,6 +128,7 @@ public class EntityPrehistoric extends EntityTameable implements IPrehistoricAI 
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
+    @Override
     public void readEntityFromNBT(NBTTagCompound compound) {
         String s = "";
 
@@ -185,14 +198,14 @@ public class EntityPrehistoric extends EntityTameable implements IPrehistoricAI 
 
     }
 
+    @Override
     public void onUpdate() {
         super.onUpdate();
         animation_frame++;
     }
 
     public String getOwnerDisplayName() {
-        String s = this.dataWatcher.getWatchableObjectString(OWNER_DISPLAY_NAME_INDEX);
-        return s;
+        return this.dataWatcher.getWatchableObjectString(OWNER_DISPLAY_NAME_INDEX);
     }
 
     public void setOwnerDisplayName(String displayName) {

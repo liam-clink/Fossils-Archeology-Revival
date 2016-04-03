@@ -42,6 +42,7 @@ public class MagicConchItem extends Item {
     /**
      * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
      */
+    @Override
     public ItemStack onItemRightClick(ItemStack var1, World var2, EntityPlayer var3) {
         // String var4 = "Drum.";
         //  String var5 = "Msg.";

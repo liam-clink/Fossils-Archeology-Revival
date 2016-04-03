@@ -28,6 +28,7 @@ public class EntityMLighting extends EntityLightningBolt {
     /**
      * Called to update the entity's position/logic.
      */
+    @Override
     public void onUpdate() {
         super.onUpdate();
 

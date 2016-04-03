@@ -36,6 +36,7 @@ public class EntityTerrorBirdEgg extends EntityThrowable {
     /**
      * Called when this EntityThrowable hits a block or entity.
      */
+    @Override
     protected void onImpact(MovingObjectPosition par1MovingObjectPosition) {
         if (par1MovingObjectPosition.entityHit != null) {
             par1MovingObjectPosition.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), 0);

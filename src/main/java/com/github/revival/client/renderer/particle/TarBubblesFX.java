@@ -26,6 +26,7 @@ public class TarBubblesFX extends EntityFX {
         this.setParticleTextureIndex(49);
     }
 
+    @Override
     public int getBrightnessForRender(float par1) {
         float f1 = ((float) this.particleAge + par1) / (float) this.particleMaxAge;
 
@@ -46,10 +47,12 @@ public class TarBubblesFX extends EntityFX {
     /**
      * Gets how bright this entity is.
      */
+    @Override
     public float getBrightness(float par1) {
         return 0.0F;
     }
 
+    @Override
     public void renderParticle(Tessellator par1Tessellator, float par2, float par3, float par4, float par5, float par6, float par7) {
         float f6 = ((float) this.particleAge + par2) / (float) this.particleMaxAge;
         this.particleScale = this.lavaParticleScale * (2.0F - f6 * f6);
@@ -59,6 +62,7 @@ public class TarBubblesFX extends EntityFX {
     /**
      * Called to update the entity's position/logic.
      */
+    @Override
     public void onUpdate() {
         this.prevPosX = this.posX;
         this.prevPosY = this.posY;

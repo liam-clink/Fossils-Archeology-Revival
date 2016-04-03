@@ -10,8 +10,24 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.EntityList;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.ai.EntityAIFollowOwner;
+import net.minecraft.entity.ai.EntityAIFollowParent;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAILeapAtTarget;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAIMate;
+import net.minecraft.entity.ai.EntityAIOwnerHurtByTarget;
+import net.minecraft.entity.ai.EntityAIOwnerHurtTarget;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAITempt;
+import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.passive.EntityTameable;
@@ -86,6 +102,7 @@ public class EntityTerrorBird extends EntityTameable {
     /**
      * Returns true if the newer Entity AI code should be run
      */
+    @Override
     public boolean isAIEnabled() {
         return true;
     }
@@ -93,6 +110,7 @@ public class EntityTerrorBird extends EntityTameable {
     /**
      * Sets the active target the Task system uses for tracking
      */
+    @Override
     public void setAttackTarget(EntityLivingBase entityLivingBase) {
         super.setAttackTarget(entityLivingBase);
 
@@ -103,6 +121,7 @@ public class EntityTerrorBird extends EntityTameable {
         }
     }
 
+    @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.getAttributeMap().registerAttribute(SharedMonsterAttributes.attackDamage);
@@ -139,6 +158,7 @@ public class EntityTerrorBird extends EntityTameable {
         this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(attackValue);
     }
 
+    @Override
     protected void entityInit() {
         super.entityInit();
         this.dataWatcher.addObject(18, Byte.valueOf((byte) 0)); // For skin
@@ -182,6 +202,7 @@ public class EntityTerrorBird extends EntityTameable {
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
+    @Override
     public void writeEntityToNBT(NBTTagCompound compound) {
         super.writeEntityToNBT(compound);
         compound.setBoolean("Angry", this.isAngry());
@@ -191,6 +212,7 @@ public class EntityTerrorBird extends EntityTameable {
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
+    @Override
     public void readEntityFromNBT(NBTTagCompound compound) {
         super.readEntityFromNBT(compound);
         this.setAngry(compound.getBoolean("Angry"));
@@ -228,6 +250,7 @@ public class EntityTerrorBird extends EntityTameable {
      * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
      * use this to react to sunlight and start to burn.
      */
+    @Override
     public void onLivingUpdate() {
         super.onLivingUpdate();
 
@@ -261,6 +284,7 @@ public class EntityTerrorBird extends EntityTameable {
     /**
      * Called to update the entity's position/logic.
      */
+    @Override
     public void onUpdate() {
         super.onUpdate();
         this.rotationAngle = this.prevRotationAngle;
@@ -298,6 +322,7 @@ public class EntityTerrorBird extends EntityTameable {
      * The speed it takes to move the entityliving's rotationPitch through the faceEntity method. This is only currently
      * use in wolves.
      */
+    @Override
     public int getVerticalFaceSpeed() {
         return this.isSitting() ? 20 : super.getVerticalFaceSpeed();
     }
@@ -305,6 +330,7 @@ public class EntityTerrorBird extends EntityTameable {
     /**
      * Returns the volume for the sounds this mob makes.
      */
+    @Override
     protected float getSoundVolume() {
         return 0.2F;
     }
@@ -319,6 +345,7 @@ public class EntityTerrorBird extends EntityTameable {
     /**
      * Returns the item ID for the item the mob drops on death.
      */
+    @Override
     protected Item getDropItem() {
         return Items.feather;
     }
@@ -327,6 +354,7 @@ public class EntityTerrorBird extends EntityTameable {
      * Drop 0-2 items of this living's type. @param par1 - Whether this entity has recently been hit by a player. @param
      * par2 - Level of Looting used to kill this mob.
      */
+    @Override
     protected void dropFewItems(boolean par1, int par2) {
         int j = this.rand.nextInt(3) + this.rand.nextInt(1 + par2);
 
@@ -344,6 +372,7 @@ public class EntityTerrorBird extends EntityTameable {
     /**
      * Called when the entity is attacked.
      */
+    @Override
     public boolean attackEntityFrom(DamageSource damageSource, float damageAmount) {
         if (this.isEntityInvulnerable()) {
             return false;
@@ -362,38 +391,42 @@ public class EntityTerrorBird extends EntityTameable {
 
     @Override
     public boolean attackEntityAsMob(Entity entity) {
-        float attackdamage = (float) this.getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue();
-        int i = 0;
-
-        if (entity instanceof EntityLivingBase) {
-            attackdamage += EnchantmentHelper.getEnchantmentModifierLiving(this, (EntityLivingBase) entity);
-            i += EnchantmentHelper.getKnockbackModifier(this, (EntityLivingBase) entity);
-        }
-
-        boolean flag = entity.attackEntityFrom(DamageSource.causeMobDamage(this), attackdamage);
-
-        if (flag) {
-            if (i > 0) {
-                entity.addVelocity((double) (-MathHelper.sin(this.rotationYaw * (float) Math.PI / 180.0F) * (float) i * 0.5F), 0.1D, (double) (MathHelper.cos(this.rotationYaw * (float) Math.PI / 180.0F) * (float) i * 0.5F));
-                this.motionX *= 0.6D;
-                this.motionZ *= 0.6D;
-            }
-
-            int j = EnchantmentHelper.getFireAspectModifier(this);
-
-            if (j > 0) {
-                entity.setFire(j * 4);
-            }
+        if (this.boundingBox.intersectsWith(entity.boundingBox)) {
+            float attackdamage = (float) this.getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue();
+            int i = 0;
 
             if (entity instanceof EntityLivingBase) {
-                EnchantmentHelper.func_151384_a((EntityLivingBase) entity, this);
+                attackdamage += EnchantmentHelper.getEnchantmentModifierLiving(this, (EntityLivingBase) entity);
+                i += EnchantmentHelper.getKnockbackModifier(this, (EntityLivingBase) entity);
             }
 
-            EnchantmentHelper.func_151385_b(this, entity);
+            boolean flag = entity.attackEntityFrom(DamageSource.causeMobDamage(this), attackdamage);
+
+            if (flag) {
+                if (i > 0) {
+                    entity.addVelocity((double) (-MathHelper.sin(this.rotationYaw * (float) Math.PI / 180.0F) * (float) i * 0.5F), 0.1D, (double) (MathHelper.cos(this.rotationYaw * (float) Math.PI / 180.0F) * (float) i * 0.5F));
+                    this.motionX *= 0.6D;
+                    this.motionZ *= 0.6D;
+                }
+
+                int j = EnchantmentHelper.getFireAspectModifier(this);
+
+                if (j > 0) {
+                    entity.setFire(j * 4);
+                }
+
+                if (entity instanceof EntityLivingBase) {
+                    EnchantmentHelper.func_151384_a((EntityLivingBase) entity, this);
+                }
+
+                EnchantmentHelper.func_151385_b(this, entity);
+            }
+
+            return flag;
         }
 
         //this.playSound(Revival.MODID + ":" + "terror_bird_attack", this.getSoundVolume(), this.getSoundPitch());
-        return flag;
+        return false;
     }
 
     /**
@@ -407,6 +440,7 @@ public class EntityTerrorBird extends EntityTameable {
         }
     }
 
+    @Override
     public void setTamed(boolean tamed) {
         super.setTamed(tamed);
     }
@@ -414,6 +448,7 @@ public class EntityTerrorBird extends EntityTameable {
     /**
      * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
      */
+    @Override
     public boolean interact(EntityPlayer player) {
         ItemStack itemstack = player.inventory.getCurrentItem();
 
@@ -532,6 +567,7 @@ public class EntityTerrorBird extends EntityTameable {
         return entity;
     }
 
+    @Override
     public float getEyeHeight() {
         return this.height * 0.8F;
     }
@@ -540,6 +576,7 @@ public class EntityTerrorBird extends EntityTameable {
      * Checks if the parameter is an item which this animal can be fed to breed it (wheat, carrots or seeds depending on
      * the animal type)
      */
+    @Override
     public boolean isBreedingItem(ItemStack itemstack) {
         if (this.getSkin() == 0) {
             return itemstack != null && itemstack.getItem() == Item.getItemFromBlock(Blocks.pumpkin);
@@ -548,6 +585,7 @@ public class EntityTerrorBird extends EntityTameable {
         return itemstack != null; //&& itemstack.getItem() == FAItemRegistry.INSTANCE.quaggaMeat;
     }
 
+    @Override
     public EntityAgeable createChild(EntityAgeable par1EntityAgeable) {
         return this.spawnBabyAnimal(par1EntityAgeable);
     }
@@ -559,6 +597,7 @@ public class EntityTerrorBird extends EntityTameable {
     /**
      * Determines if an entity can be despawned, used on idle far away entities
      */
+    @Override
     protected boolean canDespawn() {
         return false;
     }
@@ -587,6 +626,7 @@ public class EntityTerrorBird extends EntityTameable {
     /**
      * Returns true if the mob is currently able to mate with the specified mob.
      */
+    @Override
     public boolean canMateWith(EntityAnimal entityAnimal) {
         if (entityAnimal == this) {
             return false;
@@ -599,7 +639,7 @@ public class EntityTerrorBird extends EntityTameable {
             if (this.getSkin() != entity.getSkin()) {
                 return false;
             }
-            return !entity.isTamed() ? false : (entity.isSitting() ? false : this.isInLove() && entity.isInLove());
+            return entity.isTamed() && (!entity.isSitting() && this.isInLove() && entity.isInLove());
         }
     }
 
@@ -609,16 +649,16 @@ public class EntityTerrorBird extends EntityTameable {
         p0.reset();
 
         if (this.hasCustomNameTag()) {
-            p0.printStringXY(this.getCustomNameTag(), p0.rightIndent, 24, 40, 90, 245);
+            p0.printStringXY(this.getCustomNameTag(), GuiPedia.rightIndent, 24, 40, 90, 245);
         }
 
-        p0.printStringXY(Character.toString(this.names[this.getSkin()].charAt(0)).toUpperCase() + this.names[this.getSkin()].substring(1), p0.rightIndent, 34, 0, 0, 0);
+        p0.printStringXY(Character.toString(names[this.getSkin()].charAt(0)).toUpperCase() + names[this.getSkin()].substring(1), GuiPedia.rightIndent, 34, 0, 0, 0);
         //p0.printHappyBar(new ResourceLocation(Revival.MODID + ":" + "textures/items/TerrorBird/" + "Egg_Cultivated_" + names[this.getSkin()] + ".png"), ((p0.xGui / 2) + (p0.xGui / 4)), 7, 16, 16);
 
         //p0.printHappyBar(pediaheart, p0.rightIndent, 58, 9, 9);
 
         //Display Health
-        p0.printStringXY(String.valueOf(this.getHealth()) + '/' + this.getMaxHealth(), p0.rightIndent + 12, 58);
+        p0.printStringXY(String.valueOf(this.getHealth()) + '/' + this.getMaxHealth(), GuiPedia.rightIndent + 12, 58);
 
         if (this.hasCustomNameTag()) {
             p0.addStringLR("No Despawn", true);
@@ -645,6 +685,6 @@ public class EntityTerrorBird extends EntityTameable {
 
     @SideOnly(Side.CLIENT)
     public void showPedia2(GuiPedia p0) {
-        entityPrehistoricClass.ShowPedia2(p0, this.names[this.getSkin()]);
+        entityPrehistoricClass.ShowPedia2(p0, names[this.getSkin()]);
     }
 }

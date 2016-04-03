@@ -24,6 +24,7 @@ public class GuiSifter extends GuiContainer {
     /**
      * Draw the foreground layer for the GuiContainer (everything in front of the items)
      */
+    @Override
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
         String inventoryName = this.sifterInventory.hasCustomInventoryName() ? this.sifterInventory.getInventoryName() : I18n.format(this.sifterInventory.getInventoryName());
         this.fontRendererObj.drawString(inventoryName, this.xSize / 8 - this.fontRendererObj.getStringWidth(inventoryName) / 2, 6, 4210752);
@@ -32,6 +33,7 @@ public class GuiSifter extends GuiContainer {
     /**
      * Draw the background layer for the GuiContainer (everything behind the items)
      */
+    @Override
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.getTextureManager().bindTexture(furnaceGuiTextures);

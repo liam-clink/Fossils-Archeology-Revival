@@ -5,7 +5,14 @@ import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.*;
+import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAIMoveTowardsTarget;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityVillager;
@@ -35,6 +42,7 @@ public class EntitySentryPigman extends EntityMob {
 
     }
 
+    @Override
     protected void entityInit() {
         super.entityInit();
         this.dataWatcher.addObject(13, new Byte((byte) 0));
@@ -43,10 +51,12 @@ public class EntitySentryPigman extends EntityMob {
     /**
      * Returns true if the newer Entity AI code should be run
      */
+    @Override
     public boolean isAIEnabled() {
         return true;
     }
 
+    @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.25D);
@@ -55,6 +65,7 @@ public class EntitySentryPigman extends EntityMob {
     /**
      * Returns the sound this mob makes while it's alive.
      */
+    @Override
     protected String getLivingSound() {
         return "mob.zombiepig.zpigangry";
     }
@@ -62,6 +73,7 @@ public class EntitySentryPigman extends EntityMob {
     /**
      * Returns the sound this mob makes when it is hurt.
      */
+    @Override
     protected String getHurtSound() {
         return "mob.zombiepig.zpighurt";
     }
@@ -69,10 +81,12 @@ public class EntitySentryPigman extends EntityMob {
     /**
      * Returns the sound this mob makes on death.
      */
+    @Override
     protected String getDeathSound() {
         return "mob.zombiepig.zpigdeath";
     }
 
+    @Override
     protected void func_145780_a(int p_145780_1_, int p_145780_2_, int p_145780_3_, Block p_145780_4_) {
         this.playSound("mob.zombie.step", 0.15F, 1.0F);
     }
@@ -80,6 +94,7 @@ public class EntitySentryPigman extends EntityMob {
     /**
      * Get this Entity's EnumCreatureAttribute
      */
+    @Override
     public EnumCreatureAttribute getCreatureAttribute() {
         return EnumCreatureAttribute.UNDEAD;
     }
@@ -87,6 +102,7 @@ public class EntitySentryPigman extends EntityMob {
     /**
      * Handles updating while being ridden by an entity
      */
+    @Override
     public void updateRidden() {
         super.updateRidden();
 
@@ -101,6 +117,7 @@ public class EntitySentryPigman extends EntityMob {
      * Drop 0-2 items of this living's type. @param par1 - Whether this entity has recently been hit by a player. @param
      * par2 - Level of Looting used to kill this mob.
      */
+    @Override
     protected void dropFewItems(boolean p_70628_1_, int p_70628_2_) {
         int j;
         int k;
@@ -120,6 +137,7 @@ public class EntitySentryPigman extends EntityMob {
         }
     }
 
+    @Override
     protected void dropRareDrop(int p_70600_1_) {
         this.entityDropItem(new ItemStack(Blocks.gold_block, 1, 1), 0.0F);
     }
@@ -127,12 +145,14 @@ public class EntitySentryPigman extends EntityMob {
     /**
      * Makes entity wear random armor based on difficulty
      */
+    @Override
     protected void addRandomArmor() {
         super.addRandomArmor();
         this.setCurrentItemOrArmor(0, new ItemStack(Items.iron_sword));
     }
 
 
+    @Override
     public void readEntityFromNBT(NBTTagCompound p_70037_1_) {
         super.readEntityFromNBT(p_70037_1_);
     }

@@ -1,16 +1,14 @@
 package com.github.revival.server.handler;
 
+import com.github.revival.server.block.FABlockRegistry;
+import com.github.revival.server.item.FAItemRegistry;
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
-
-import com.github.revival.server.block.FABlockRegistry;
-import com.github.revival.server.item.FAItemRegistry;
-
-import cpw.mods.fml.common.registry.GameRegistry;
 
 public class FossilRecipes {
     public static void addRecipe() {
@@ -43,7 +41,7 @@ public class FossilRecipes {
         GameRegistry.addShapelessRecipe(new ItemStack(FAItemRegistry.INSTANCE.gemShovel), new Object[]{Items.diamond_shovel, FAItemRegistry.INSTANCE.gem});
         GameRegistry.addShapelessRecipe(new ItemStack(FABlockRegistry.INSTANCE.denseSand, 2), new Object[]{Items.quartz, Blocks.sand});
         // GameRegistry.addShapelessRecipe(new ItemStack(FAItemRegistry.INSTANCE.toothDagger, 1), new Object[]{new ItemStack(FAItemRegistry.INSTANCE.claw, 1, EnumDinoType.TRex.ordinal()), Items.stick});
-        GameRegistry.addRecipe(new ShapelessOreRecipe(FAItemRegistry.INSTANCE.dinoPedia,  new Object[]{Items.book, "fossil"}));
+        GameRegistry.addRecipe(new ShapelessOreRecipe(FAItemRegistry.INSTANCE.dinoPedia, new Object[]{Items.book, "fossil"}));
         // for (int i = 0; i < EnumDinoType.values().length; i++)
         //     GameRegistry.addShapelessRecipe(new ItemStack(FAItemRegistry.INSTANCE.dinoPedia), new Object[]{Items.book, EnumDinoType.values()[i].DNAItem});
         // GameRegistry.addShapelessRecipe(new ItemStack(FAItemRegistry.INSTANCE.dinoPedia), new Object[]{Items.book, FAItemRegistry.INSTANCE.dnaCoelacanth});

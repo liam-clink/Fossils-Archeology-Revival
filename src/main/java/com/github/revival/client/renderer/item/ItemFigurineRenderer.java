@@ -65,59 +65,59 @@ public class ItemFigurineRenderer implements IItemRenderer {
         switch (meta) {
             case 0:
             default:
-                this.bindTexture(pristine_steve);
+                bindTexture(pristine_steve);
                 break;
             case 1:
-                this.bindTexture(pristine_skeleton);
+                bindTexture(pristine_skeleton);
                 break;
             case 2:
-                this.bindTexture(pristine_zombie);
+                bindTexture(pristine_zombie);
                 break;
             case 3:
-                this.bindTexture(pristine_enderman);
+                bindTexture(pristine_enderman);
                 break;
             case 4:
-                this.bindTexture(pristine_zombiepig);
+                bindTexture(pristine_zombiepig);
                 break;
             case 5:
-                this.bindTexture(damaged_steve);
+                bindTexture(damaged_steve);
                 break;
             case 6:
-                this.bindTexture(damaged_skeleton);
+                bindTexture(damaged_skeleton);
                 break;
             case 7:
-                this.bindTexture(damaged_zombie);
+                bindTexture(damaged_zombie);
                 break;
             case 8:
-                this.bindTexture(damaged_enderman);
+                bindTexture(damaged_enderman);
                 break;
             case 9:
-                this.bindTexture(damaged_zombiepig);
+                bindTexture(damaged_zombiepig);
                 break;
             case 10:
-                this.bindTexture(broken_steve);
+                bindTexture(broken_steve);
                 break;
             case 11:
-                this.bindTexture(broken_skeleton);
+                bindTexture(broken_skeleton);
                 break;
             case 12:
-                this.bindTexture(broken_zombie);
+                bindTexture(broken_zombie);
                 break;
             case 13:
-                this.bindTexture(broken_enderman);
+                bindTexture(broken_enderman);
                 break;
             case 14:
-                this.bindTexture(broken_zombiepig);
+                bindTexture(broken_zombiepig);
                 break;
             case 15:
-                this.bindTexture(mysterious);
+                bindTexture(mysterious);
                 break;
         }
 
         if (meta < 10 || meta == 15) {
-            this.modelfigurine.render((Entity) data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+            modelfigurine.render((Entity) data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
         } else {
-            this.modelbroken.render((Entity) data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+            modelbroken.render((Entity) data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
         }
 
         glPopMatrix();

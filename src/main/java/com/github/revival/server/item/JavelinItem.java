@@ -43,6 +43,7 @@ public class JavelinItem extends Item {
     /**
      * called when the player releases the use item button. Args: itemstack, world, entityplayer, itemInUseCount
      */
+    @Override
     public void onPlayerStoppedUsing(ItemStack var1, World var2, EntityPlayer var3, int var4) {
         boolean var5 = EnchantmentHelper.getEnchantmentLevel(Enchantment.infinity.effectId, var1) > 0;
 
@@ -109,6 +110,7 @@ public class JavelinItem extends Item {
     /**
      * How long it takes to use or consume an item
      */
+    @Override
     public int getMaxItemUseDuration(ItemStack var1) {
         return 720000;
     }
@@ -116,6 +118,7 @@ public class JavelinItem extends Item {
     /**
      * returns the action that specifies what animation to play when the items is being used
      */
+    @Override
     public EnumAction getItemUseAction(ItemStack var1) {
         return EnumAction.bow;
     }
@@ -123,6 +126,7 @@ public class JavelinItem extends Item {
     /**
      * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
      */
+    @Override
     public ItemStack onItemRightClick(ItemStack var1, World var2, EntityPlayer var3) {
         if (var3.capabilities.isCreativeMode || var3.inventory.hasItem(this)) {
             var3.setItemInUse(var1, this.getMaxItemUseDuration(var1));
@@ -134,6 +138,7 @@ public class JavelinItem extends Item {
     /**
      * Return the enchantability factor of the item, most of the time is based on material.
      */
+    @Override
     public int getItemEnchantability() {
         return 1;
     }

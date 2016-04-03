@@ -36,6 +36,7 @@ public class RenderPigBoss extends RenderLiving {
         return new ResourceLocation("fossil:textures/model/PigBoss.png");
     }
 
+    @Override
     protected ResourceLocation getEntityTexture(Entity par1Entity) {
         return this.func_110919_a((EntityAnu) par1Entity);
     }
@@ -46,6 +47,7 @@ public class RenderPigBoss extends RenderLiving {
         }
     }
 
+    @Override
     protected int shouldRenderPass(EntityLivingBase entity, int i, float q) {
         if (((EntityAnu) entity).getAttackMode() == 2) {
 
@@ -78,6 +80,7 @@ public class RenderPigBoss extends RenderLiving {
      * Allows the render to do any OpenGL state modifications necessary before the model is rendered. Args:
      * entityLiving, partialTickTime
      */
+    @Override
     protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2) {
         this.preRenderScale((EntityAnu) par1EntityLivingBase, par2);
     }
@@ -210,6 +213,7 @@ public class RenderPigBoss extends RenderLiving {
         GL11.glTranslatef(0.0F, 0.1875F, 0.0F);
     }
 
+    @Override
     protected void renderEquippedItems(EntityLivingBase p_77029_1_, float p_77029_2_) {
         this.renderEquippedItems((EntityLiving) p_77029_1_, p_77029_2_);
     }

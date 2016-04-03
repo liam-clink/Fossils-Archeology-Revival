@@ -13,6 +13,7 @@ public class RenderFish extends RenderLiving {
         super(model, 0.3F);
     }
 
+    @Override
     protected ResourceLocation getEntityTexture(Entity entity) {
         if (entity instanceof EntityFishBase) {
             EntityFishBase prehistoric = (EntityFishBase) entity;

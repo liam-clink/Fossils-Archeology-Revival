@@ -33,6 +33,7 @@ public class FliesFX extends EntityFX {
         this.setParticleTextureIndex(0);
     }
 
+    @Override
     public void renderParticle(Tessellator tessellator, float f, float f1, float f2, float f3, float f4, float f5) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         Tessellator tessellator1 = new Tessellator();
@@ -72,6 +73,7 @@ public class FliesFX extends EntityFX {
     /**
      * Called to update the entity's position/logic.
      */
+    @Override
     public void onUpdate() {
         this.prevPosX = this.posX;
         this.prevPosY = this.posY;

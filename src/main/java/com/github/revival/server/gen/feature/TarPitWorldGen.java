@@ -15,6 +15,7 @@ public class TarPitWorldGen extends WorldGenerator {
         blockIndex = block;
     }
 
+    @Override
     public boolean generate(World world, Random random, int x, int y, int z) {
         x -= 8;
         Block block = world.getBlock(x, y, z);

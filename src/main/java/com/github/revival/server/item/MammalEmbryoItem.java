@@ -6,7 +6,11 @@ import com.github.revival.server.entity.mob.EntityPregnantPig;
 import com.github.revival.server.entity.mob.EntityPregnantSheep;
 import com.github.revival.server.enums.EnumPrehistoric;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.passive.*;
+import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.entity.passive.EntityCow;
+import net.minecraft.entity.passive.EntityHorse;
+import net.minecraft.entity.passive.EntityPig;
+import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -33,8 +37,9 @@ public class MammalEmbryoItem extends Item {
     /**
      * dye sheep, place saddles, etc ...
      */
+    @Override
     public boolean itemInteractionForEntity(ItemStack itemstack, EntityPlayer player, EntityLivingBase thisEntity) {
-        embryo = this.getEmbryo(AnimalType);
+        embryo = getEmbryo(AnimalType);
 
         if (thisEntity instanceof EntityAnimal && ((EntityAnimal) thisEntity).getGrowingAge() == 0) {
             Object pregnantEntity = null;

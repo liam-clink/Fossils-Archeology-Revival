@@ -11,7 +11,6 @@ public class DinoAIFlying extends EntityAIBase {
 
     public static eFlyingState currentState = eFlyingState.FS_ON_GROUND;
 
-    ;
     private static Vec3 motionVector = Vec3.createVectorHelper(0.0D, 0.0D, 0.0D);
     protected eFlyingState previousState = eFlyingState.FS_ON_GROUND;
     protected boolean isAscending = false;
@@ -35,10 +34,7 @@ public class DinoAIFlying extends EntityAIBase {
         if (!dino.isAdult()) {
             return false;
         }
-        if (dino.getOrderType().equals(dino.OrderStatus.STAY)) {
-            return false;
-        }
-        return true;
+        return !dino.getOrderType().equals(dino.OrderStatus.STAY);
     }
 
     @Override

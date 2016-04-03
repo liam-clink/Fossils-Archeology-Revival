@@ -29,6 +29,7 @@ public class RenderFailuresaurus extends RenderLiving {
         }
     }
 
+    @Override
     protected ResourceLocation getEntityTexture(Entity entity) {
         return this.getResourceLocation((EntityFailuresaurus) entity);
     }

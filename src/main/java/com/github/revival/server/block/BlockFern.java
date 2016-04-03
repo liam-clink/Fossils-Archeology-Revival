@@ -54,6 +54,7 @@ public class BlockFern extends BlockBush {
     {
         this(var1, var2);
     }*/
+    @Override
     @SideOnly(Side.CLIENT)
 
     /**
@@ -61,25 +62,27 @@ public class BlockFern extends BlockBush {
      * is the only chance you get to register icons.
      */
     public void registerBlockIcons(IIconRegister par1IIconRegister) {
-        this.fernPics[0] = par1IIconRegister.registerIcon("fossil:Fern_1S1");
-        this.fernPics[1] = par1IIconRegister.registerIcon("fossil:Fern_1S2");
-        this.fernPics[2] = par1IIconRegister.registerIcon("fossil:Fern_1S3");
-        this.fernPics[3] = par1IIconRegister.registerIcon("fossil:Fern_1S4");
-        this.fernPics[4] = par1IIconRegister.registerIcon("fossil:Fern_1S5");
-        this.fernPics[5] = par1IIconRegister.registerIcon("fossil:Fern_1S6");
-        this.fernPics[6] = par1IIconRegister.registerIcon("fossil:Fern_1S7");
-        this.fernPics[7] = par1IIconRegister.registerIcon("fossil:Fern_1S8");
-        this.fernPics[8] = par1IIconRegister.registerIcon("fossil:Fern_2S1");
-        this.fernPics[9] = par1IIconRegister.registerIcon("fossil:Fern_2S2");
-        this.fernPics[10] = par1IIconRegister.registerIcon("fossil:Fern_2S3");
-        this.fernPics[11] = par1IIconRegister.registerIcon("fossil:Fern_2S4");
-        this.fernPics[12] = par1IIconRegister.registerIcon("fossil:Fern_2S5");
+        fernPics[0] = par1IIconRegister.registerIcon("fossil:Fern_1S1");
+        fernPics[1] = par1IIconRegister.registerIcon("fossil:Fern_1S2");
+        fernPics[2] = par1IIconRegister.registerIcon("fossil:Fern_1S3");
+        fernPics[3] = par1IIconRegister.registerIcon("fossil:Fern_1S4");
+        fernPics[4] = par1IIconRegister.registerIcon("fossil:Fern_1S5");
+        fernPics[5] = par1IIconRegister.registerIcon("fossil:Fern_1S6");
+        fernPics[6] = par1IIconRegister.registerIcon("fossil:Fern_1S7");
+        fernPics[7] = par1IIconRegister.registerIcon("fossil:Fern_1S8");
+        fernPics[8] = par1IIconRegister.registerIcon("fossil:Fern_2S1");
+        fernPics[9] = par1IIconRegister.registerIcon("fossil:Fern_2S2");
+        fernPics[10] = par1IIconRegister.registerIcon("fossil:Fern_2S3");
+        fernPics[11] = par1IIconRegister.registerIcon("fossil:Fern_2S4");
+        fernPics[12] = par1IIconRegister.registerIcon("fossil:Fern_2S5");
     }
 
+    @Override
     protected boolean canPlaceBlockOn(Block block) {
         return block == Blocks.grass;
     }
 
+    @Override
     public void updateTick(World var1, int var2, int var3, int var4, Random var5) {
         super.updateTick(var1, var2, var3, var4, var5);
         int var6 = var1.getBlockMetadata(var2, var3, var4);
@@ -188,6 +191,7 @@ public class BlockFern extends BlockBush {
     /**
      * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
      */
+    @Override
     public IIcon getIcon(int var1, int var2) {
         if (var2 < 0 || var2 >= fernPics.length) {
             var2 = 0;
@@ -199,6 +203,7 @@ public class BlockFern extends BlockBush {
     /**
      * Drops the block items with a specified chance of dropping the specified items
      */
+    @Override
     public void dropBlockAsItemWithChance(World var1, int var2, int var3, int var4, int var5, float var6, int var7) {
         super.dropBlockAsItemWithChance(var1, var2, var3, var4, var5, var6, var7);
     }
@@ -206,6 +211,7 @@ public class BlockFern extends BlockBush {
     /**
      * Returns the ID of the items to drop on destruction.
      */
+    @Override
     public Item getItemDropped(int var1, Random var2, int var3) {
         if (var2.nextInt(4) == 0) {
             return FAItemRegistry.INSTANCE.fernSeed;
@@ -216,6 +222,7 @@ public class BlockFern extends BlockBush {
     /**
      * Returns the quantity of items to drop on block destruction.
      */
+    @Override
     public int quantityDropped(Random var1) {
         return 1;
     }
@@ -223,6 +230,7 @@ public class BlockFern extends BlockBush {
     /**
      * Can this block stay at this position.  Similar to canPlaceBlockAt except gets checked often with plants.
      */
+    @Override
     public boolean canBlockStay(World var1, int var2, int var3, int var4) {
         boolean var5 = true;
 
@@ -262,6 +270,7 @@ public class BlockFern extends BlockBush {
         return (var1 == 4) || (var1 == 11);
     }
 
+    @Override
     public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z, EntityPlayer player) {
         return new ItemStack(FAItemRegistry.INSTANCE.fernSeed);
     }

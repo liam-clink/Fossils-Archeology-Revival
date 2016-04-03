@@ -36,6 +36,7 @@ public class BlockAncientWoodSlab extends BlockSlab {
         }
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public Item getItem(World world, int x, int y, int z) {
         return Item.getItemFromBlock(this);
@@ -46,6 +47,7 @@ public class BlockAncientWoodSlab extends BlockSlab {
         this.blockIcon = iconRegister.registerIcon("fossil:Ancient_Wood");
     }
 
+    @Override
     public Item getItemDropped(int var1, Random rand, int var3) {
         return Item.getItemFromBlock(FABlockRegistry.INSTANCE.ancientWoodSingleSlab);
     }
@@ -62,10 +64,12 @@ public class BlockAncientWoodSlab extends BlockSlab {
         }
     }
 
+    @Override
     protected ItemStack createStackedBlock(int meta) {
         return new ItemStack(FABlockRegistry.INSTANCE.ancientWoodSingleSlab, 2, meta & 7);
     }
 
+    @Override
     public String func_150002_b(int meta) {
         if ((meta < 0) || (meta >= woodType.length)) {
             meta = 0;
@@ -74,6 +78,7 @@ public class BlockAncientWoodSlab extends BlockSlab {
         return super.getUnlocalizedName() + "." + woodType[meta];
     }
 
+    @Override
     public void getSubBlocks(Item item, CreativeTabs tab, List subBlocks) {
         if (item != Item.getItemFromBlock(FABlockRegistry.INSTANCE.ancientWoodDoubleSlab)) {
             subBlocks.add(new ItemStack(item, 1, 0));

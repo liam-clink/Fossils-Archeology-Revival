@@ -1,8 +1,11 @@
 package com.github.revival.server.block;
 
-import java.util.ArrayList;
-import java.util.Random;
-
+import com.github.revival.Revival;
+import com.github.revival.server.creativetab.FATabRegistry;
+import com.github.revival.server.enums.EnumDinoBones;
+import com.github.revival.server.handler.FossilAchievementHandler;
+import com.github.revival.server.handler.LocalizationStrings;
+import com.github.revival.server.item.FAItemRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStone;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -13,12 +16,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import com.github.revival.Revival;
-import com.github.revival.server.creativetab.FATabRegistry;
-import com.github.revival.server.enums.EnumDinoBones;
-import com.github.revival.server.handler.FossilAchievementHandler;
-import com.github.revival.server.handler.LocalizationStrings;
-import com.github.revival.server.item.FAItemRegistry;
+import java.util.ArrayList;
+import java.util.Random;
 
 public class BlockFossil extends BlockStone {
     Random rand = new Random();
@@ -38,6 +37,7 @@ public class BlockFossil extends BlockStone {
     /**
      * Returns the ID of the items to drop on destruction.
      */
+    @Override
     public Item getItemDropped(int var1, Random var2, int var3) {
         int i = (new Random()).nextInt(1100);
 
@@ -139,6 +139,7 @@ public class BlockFossil extends BlockStone {
         return Item.getItemFromBlock(Blocks.cobblestone);
     }
 
+    @Override
     public void harvestBlock(World world, EntityPlayer player, int x, int y, int z, int i) {
         super.harvestBlock(world, player, x, y, z, i);
         player.triggerAchievement(FossilAchievementHandler.firstFossil);

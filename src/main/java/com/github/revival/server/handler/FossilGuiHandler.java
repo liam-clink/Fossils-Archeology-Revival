@@ -1,9 +1,25 @@
 package com.github.revival.server.handler;
 
-import com.github.revival.client.gui.*;
+import com.github.revival.client.gui.ContainerQuagga;
+import com.github.revival.client.gui.GuiAnalyzer;
+import com.github.revival.client.gui.GuiCultivate;
+import com.github.revival.client.gui.GuiFeeder;
+import com.github.revival.client.gui.GuiNotebook;
+import com.github.revival.client.gui.GuiPedia;
+import com.github.revival.client.gui.GuiQuagga;
+import com.github.revival.client.gui.GuiSifter;
+import com.github.revival.client.gui.GuiTimeMachine;
+import com.github.revival.client.gui.GuiWorktable;
 import com.github.revival.server.block.entity.TileEntitySifter;
 import com.github.revival.server.block.entity.TileEntityTimeMachine;
-import com.github.revival.server.container.*;
+import com.github.revival.server.container.AnalyzerContainer;
+import com.github.revival.server.container.CultivateContainer;
+import com.github.revival.server.container.FeederContainer;
+import com.github.revival.server.container.NotebookContainer;
+import com.github.revival.server.container.PediaContainer;
+import com.github.revival.server.container.SifterContainer;
+import com.github.revival.server.container.TimeMachineContainer;
+import com.github.revival.server.container.WorktableContainer;
 import com.github.revival.server.entity.mob.EntityQuagga;
 import cpw.mods.fml.common.network.IGuiHandler;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,6 +27,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 public class FossilGuiHandler implements IGuiHandler {
+    @Override
     public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
         TileEntity tileEntity = world.getTileEntity(x, y, z);
 
@@ -40,6 +57,7 @@ public class FossilGuiHandler implements IGuiHandler {
         return null;
     }
 
+    @Override
     public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
         TileEntity tileEntity = world.getTileEntity(x, y, z);
 

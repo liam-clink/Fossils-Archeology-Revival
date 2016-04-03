@@ -26,12 +26,14 @@ public class EntityAnuDead extends EntityLiving {
 
     }
 
+    @Override
     public void moveEntityWithHeading(float par1, float par2) {
         this.motionX *= 0.0D;
         this.motionY *= 0.0D;
         this.motionZ *= 0.0D;
     }
 
+    @Override
     protected void entityInit() {
         super.entityInit();
         this.dataWatcher.addObject(16, new Byte((byte) 0));
@@ -41,11 +43,13 @@ public class EntityAnuDead extends EntityLiving {
         this.playSound("fossil:anu_death_effect", 1F, 1F);
     }
 
+    @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(300.0D);
     }
 
+    @Override
     public boolean interact(EntityPlayer entity) {
         if ((entity.ridingEntity == null) && (entity.riddenByEntity == null) && (entity instanceof EntityPlayerMP)) {
             EntityPlayerMP thePlayer = (EntityPlayerMP) entity;
@@ -66,6 +70,7 @@ public class EntityAnuDead extends EntityLiving {
     /**
      * handles entity death timer, experience orb and particle creation
      */
+    @Override
     protected void onDeathUpdate() {
         if (deathTicks < this.maxLifespan) {
             deathTicks++;
@@ -87,6 +92,7 @@ public class EntityAnuDead extends EntityLiving {
     /**
      * Makes the entity despawn if requirements are reached
      */
+    @Override
     protected void despawnEntity() {
 
     }
@@ -94,6 +100,7 @@ public class EntityAnuDead extends EntityLiving {
     /**
      * Returns true if other Entities should be prevented from moving through this Entity.
      */
+    @Override
     public boolean canBeCollidedWith() {
         return true;
     }
@@ -101,6 +108,7 @@ public class EntityAnuDead extends EntityLiving {
     /**
      * Returns the volume for the sounds this mob makes.
      */
+    @Override
     protected float getSoundVolume() {
         return 5.0F;
     }

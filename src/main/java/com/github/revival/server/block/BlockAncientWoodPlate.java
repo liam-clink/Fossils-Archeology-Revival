@@ -23,6 +23,7 @@ public class BlockAncientWoodPlate extends Block {
         setBlockName(LocalizationStrings.ANCIENT_WOOD_PLATE_NAME);
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     /**
      * When this method is called, your block should register all the icons it needs with the given IconRegister. This
@@ -36,6 +37,7 @@ public class BlockAncientWoodPlate extends Block {
      * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
      * cleared to be reused)
      */
+    @Override
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {
         int meta = world.getBlockMetadata(x, y, z) & 7;
         float f = 0.125F;
@@ -46,6 +48,7 @@ public class BlockAncientWoodPlate extends Block {
      * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
      * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
      */
+    @Override
     public boolean isOpaqueCube() {
         return false;
     }
@@ -53,6 +56,7 @@ public class BlockAncientWoodPlate extends Block {
     /**
      * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
      */
+    @Override
     public boolean renderAsNormalBlock() {
         return false;
     }
@@ -60,6 +64,7 @@ public class BlockAncientWoodPlate extends Block {
     /**
      * Checks to see if its valid to put this block at the specified coordinates. Args: world, x, y, z
      */
+    @Override
     public boolean canPlaceBlockAt(World world, int x, int y, int z) {
         return super.canPlaceBlockAt(world, x, y, z) && this.canBlockStay(world, x, y, z);
     }
@@ -68,6 +73,7 @@ public class BlockAncientWoodPlate extends Block {
      * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
      * their own) Args: x, y, z, neighbor blockID
      */
+    @Override
     public void onNeighborBlockChange(World world, int x, int y, int z, Block block) {
         this.func_111046_k(world, x, y, z);
     }
@@ -86,6 +92,7 @@ public class BlockAncientWoodPlate extends Block {
      * Called when the player destroys a block with an item that can harvest it. (i, j, k) are the coordinates of the
      * block and l is the block's subtype/damage.
      */
+    @Override
     public void harvestBlock(World world, EntityPlayer player, int x, int y, int z, int meta) {
         super.harvestBlock(world, player, x, y, z, meta);
         world.setBlockToAir(x, y, z);
@@ -94,10 +101,12 @@ public class BlockAncientWoodPlate extends Block {
     /**
      * Returns the quantity of items to drop on block destruction.
      */
+    @Override
     public int quantityDropped(Random rand) {
         return 1;
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     /**
      * Returns true if the given side of this block type should be rendered, if the adjacent block is at the given

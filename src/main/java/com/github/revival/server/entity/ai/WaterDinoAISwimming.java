@@ -46,8 +46,9 @@ public class WaterDinoAISwimming extends EntityAIBase {
     /**
      * Returns whether the EntityAIBase should begin execution.
      */
+    @Override
     public boolean shouldExecute() {
-        return this.entityInterface == null ? false : this.entity.isInWater() || this.entity.handleLavaMovement();
+        return this.entityInterface != null && (this.entity.isInWater() || this.entity.handleLavaMovement());
     }
 
     public EntityAIBase setDiveAtNight() {
@@ -58,6 +59,7 @@ public class WaterDinoAISwimming extends EntityAIBase {
     /**
      * Updates the task
      */
+    @Override
     public void updateTask() {
         EntityPlayer var1 = (EntityPlayer) ((EntityPlayer) this.entity.getOwner());
 

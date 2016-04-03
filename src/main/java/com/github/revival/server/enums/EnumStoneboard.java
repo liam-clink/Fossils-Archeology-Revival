@@ -39,7 +39,7 @@ public enum EnumStoneboard {
     public final int offsetY;
     //   public static final EnumStoneboard[] allArt = new EnumStoneboard[]{Lighting, Sociel, Greatwar, Killboss, Portol, Herobine, FlatCreep, annoyangry, Rex1, Rex2, Rex3, Rex4, Puzzle, GunFight, Pricess, Mosa, HolyMosa, AnciTM, ModTM, VigTM};
 
-    private EnumStoneboard(String title, int xSize, int ySize, int textureX, int textureY) {
+    EnumStoneboard(String title, int xSize, int ySize, int textureX, int textureY) {
         this.title = title;
         this.sizeX = xSize;
         this.sizeY = ySize;

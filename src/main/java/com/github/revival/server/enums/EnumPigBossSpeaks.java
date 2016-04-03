@@ -12,5 +12,5 @@ public enum EnumPigBossSpeaks {
     summon,
     Trans,
     Qi,
-    FireRain;
+    FireRain
 }

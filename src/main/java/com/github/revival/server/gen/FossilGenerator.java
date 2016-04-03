@@ -25,7 +25,7 @@ public class FossilGenerator implements IWorldGenerator {
 
     private void generateSurface(World world, Random random, int blockX,
                                  int blockZ) {
-        if (FossilConfig.generateFossils == true) {
+        if (FossilConfig.generateFossils) {
             for (int i = 0; i < 38; i++) {
                 int Xcoord = blockX + random.nextInt(16);
                 int Ycoord = random.nextInt(100);
@@ -35,7 +35,7 @@ public class FossilGenerator implements IWorldGenerator {
             }
         }
 
-        if (FossilConfig.generatePermafrost == true) {
+        if (FossilConfig.generatePermafrost) {
             for (int i = 0; i < 8; i++) {
                 int Xcoord = blockX + random.nextInt(16);
                 int Ycoord = random.nextInt(30);

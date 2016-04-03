@@ -66,6 +66,7 @@ public class DeathOrbFX extends EntityFX {
     /**
      * Called to update the entity's position/logic.
      */
+    @Override
     public void onUpdate() {
         this.prevPosX = this.posX;
         this.prevPosY = this.posY;

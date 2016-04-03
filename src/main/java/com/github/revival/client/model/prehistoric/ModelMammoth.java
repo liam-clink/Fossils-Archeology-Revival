@@ -202,26 +202,27 @@ public class ModelMammoth extends ModelNewPrehistoric {
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
         animator.setAnimation(EntityAnkylosaurus.animation_attack);
         animator.startKeyframe(5);
-		ModelUtils.rotate(animator, neck, 0, 20, 0);
-		ModelUtils.rotate(animator, head, 0, 5, 10);
-		ModelUtils.rotate(animator, nose3, 0, 0, 7);
-		ModelUtils.rotate(animator, nose4, 0, 0, 10);
-		animator.endKeyframe();
-		animator.setStaticKeyframe(5);
-		animator.startKeyframe(10);
-		ModelUtils.rotate(animator, neck, 0, -30, 0);
-		ModelUtils.rotate(animator, head, 0, -5, -15);
-		ModelUtils.rotate(animator, nose1, -40, 0, 0);
-		ModelUtils.rotate(animator, nose2, -12, 0, 0);
-		ModelUtils.rotate(animator, nose3, -31, 0, 0);
-		ModelUtils.rotate(animator, nose4, -18, 0, 0);
-		animator.move(nose2, 0, -0.2F, 0);
-		animator.move(nose3, 0, -0.7F, 0.3F);
-		animator.endKeyframe();
-		animator.setStaticKeyframe(10);
-		animator.resetKeyframe(5);
+        ModelUtils.rotate(animator, neck, 0, 20, 0);
+        ModelUtils.rotate(animator, head, 0, 5, 10);
+        ModelUtils.rotate(animator, nose3, 0, 0, 7);
+        ModelUtils.rotate(animator, nose4, 0, 0, 10);
+        animator.endKeyframe();
+        animator.setStaticKeyframe(5);
+        animator.startKeyframe(10);
+        ModelUtils.rotate(animator, neck, 0, -30, 0);
+        ModelUtils.rotate(animator, head, 0, -5, -15);
+        ModelUtils.rotate(animator, nose1, -40, 0, 0);
+        ModelUtils.rotate(animator, nose2, -12, 0, 0);
+        ModelUtils.rotate(animator, nose3, -31, 0, 0);
+        ModelUtils.rotate(animator, nose4, -18, 0, 0);
+        animator.move(nose2, 0, -0.2F, 0);
+        animator.move(nose3, 0, -0.7F, 0.3F);
+        animator.endKeyframe();
+        animator.setStaticKeyframe(10);
+        animator.resetKeyframe(5);
     }
 
+    @Override
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
         AdvancedModelRenderer[] tailParts = {this.Tail};
         AdvancedModelRenderer[] neckParts = {this.neck, this.head};

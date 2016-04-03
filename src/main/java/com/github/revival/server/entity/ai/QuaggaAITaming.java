@@ -23,6 +23,7 @@ public class QuaggaAITaming extends EntityAIBase {
     /**
      * Returns whether the EntityAIBase should begin execution.
      */
+    @Override
     public boolean shouldExecute() {
         if (!this.horseHost.isTame() && this.horseHost.riddenByEntity != null) {
             Vec3 vec3 = RandomPositionGenerator.findRandomTarget(this.horseHost, 5, 4);
@@ -43,6 +44,7 @@ public class QuaggaAITaming extends EntityAIBase {
     /**
      * Execute a one shot task or start executing a continuous task
      */
+    @Override
     public void startExecuting() {
         this.horseHost.getNavigator().tryMoveToXYZ(this.field_111179_c, this.field_111176_d, this.field_111177_e, this.field_111178_b);
     }
@@ -50,6 +52,7 @@ public class QuaggaAITaming extends EntityAIBase {
     /**
      * Returns whether an in-progress EntityAIBase should continue executing
      */
+    @Override
     public boolean continueExecuting() {
         return !this.horseHost.getNavigator().noPath() && this.horseHost.riddenByEntity != null;
     }
@@ -57,6 +60,7 @@ public class QuaggaAITaming extends EntityAIBase {
     /**
      * Updates the task
      */
+    @Override
     public void updateTask() {
         if (this.horseHost.getRNG().nextInt(50) == 0) {
             if (this.horseHost.riddenByEntity instanceof EntityPlayer) {

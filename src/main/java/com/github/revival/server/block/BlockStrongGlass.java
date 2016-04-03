@@ -41,19 +41,23 @@ public class BlockStrongGlass extends Block {
         return 0;
     }
 
+    @Override
     public boolean shouldSideBeRendered(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5) {
         Block i1 = par1IBlockAccess.getBlock(par2, par3, par4);
-        return i1 == this ? false : super.shouldSideBeRendered(par1IBlockAccess, par2, par3, par4, par5);
+        return i1 != this && super.shouldSideBeRendered(par1IBlockAccess, par2, par3, par4, par5);
     }
 
+    @Override
     public boolean isOpaqueCube() {
         return false;
     }
 
+    @Override
     public boolean renderAsNormalBlock() {
         return false;
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister iconRegistry) {
         for (int i = 0; i < 47; i++) {
@@ -68,6 +72,7 @@ public class BlockStrongGlass extends Block {
 
     }
 
+    @Override
     public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
         boolean[] bitMatrix = new boolean[8];
 

@@ -12,6 +12,7 @@ public class WorldGenPalaeoraphe extends WorldGenerator {
     public WorldGenPalaeoraphe() {
     }
 
+    @Override
     public boolean generate(World var1, Random var2, int var3, int var4,
                             int var5) {
         Block j1 = var1.getBlock(var3, var4 - 1, var5);

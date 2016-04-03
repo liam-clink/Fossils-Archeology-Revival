@@ -16,6 +16,7 @@ public class RenderPrehistoric extends RenderLiving {
         super(model, 0.3F);
     }
 
+    @Override
     protected ResourceLocation getEntityTexture(Entity entity) {
         if (entity instanceof EntityNewPrehistoric) {
             EntityNewPrehistoric prehistoric = (EntityNewPrehistoric) entity;
@@ -25,6 +26,7 @@ public class RenderPrehistoric extends RenderLiving {
         }
     }
 
+    @Override
     protected void preRenderCallback(EntityLivingBase entity, float f) {
         EntityNewPrehistoric dino = (EntityNewPrehistoric) entity;
         GL11.glScalef(dino.getDinosaurSize(), dino.getDinosaurSize(), dino.getDinosaurSize());

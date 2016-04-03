@@ -50,6 +50,7 @@ public class DinoAIWaterAgressive extends EntityAIBase {
     /**
      * Returns whether the EntityAIBase should begin execution.
      */
+    @Override
     public boolean shouldExecute() {
         double distance = 64.0D;
         if (entity.aiMovingType() != Moving.AQUATIC || entity.aiMovingType() != Moving.SEMIAQUATIC) {
@@ -75,6 +76,7 @@ public class DinoAIWaterAgressive extends EntityAIBase {
     /**
      * Returns whether an in-progress EntityAIBase should continue executing
      */
+    @Override
     public boolean continueExecuting() {
         double distance = 64.0D;
         this.targetedEntity = this.entity.worldObj.getClosestVulnerablePlayerToEntity(this.entity, 20.0D);

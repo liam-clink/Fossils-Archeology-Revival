@@ -6,8 +6,21 @@ import com.github.revival.server.enums.EnumPigmenSpeaks;
 import com.github.revival.server.handler.FossilAchievementHandler;
 import com.github.revival.server.item.FAItemRegistry;
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EnumCreatureAttribute;
+import net.minecraft.entity.IEntityLivingData;
+import net.minecraft.entity.IRangedAttackMob;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIArrowAttack;
+import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.boss.IBossDisplayData;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.monster.EntityGhast;
@@ -68,10 +81,12 @@ public class EntityPigBoss extends EntityMob implements IBossDisplayData, IRange
     /**
      * Returns true if the newer Entity AI code should be run
      */
+    @Override
     public boolean isAIEnabled() {
         return true;
     }
 
+    @Override
     protected void entityInit() {
         super.entityInit();
 
@@ -79,6 +94,7 @@ public class EntityPigBoss extends EntityMob implements IBossDisplayData, IRange
         this.setSkin("fossil:textures/mob/PigBoss.png");
     }
 
+    @Override
     public void onDeath(DamageSource p_70645_1_) {
 
     }
@@ -101,6 +117,7 @@ public class EntityPigBoss extends EntityMob implements IBossDisplayData, IRange
     /**
      * Makes entity wear random armor based on difficulty
      */
+    @Override
     protected void addRandomArmor() {
         super.addRandomArmor();
         this.setCurrentItemOrArmor(0, new ItemStack(Items.bow));
@@ -108,11 +125,7 @@ public class EntityPigBoss extends EntityMob implements IBossDisplayData, IRange
 
     public boolean checkGround() {
         if (!this.onGround) {
-            if (this.worldObj.isAirBlock((int) this.posX, (int) this.posY - 1, (int) this.posZ)) {
-                return true;
-            } else {
-                return false;
-            }
+            return this.worldObj.isAirBlock((int) this.posX, (int) this.posY - 1, (int) this.posZ);
         } else {
             return false;
         }
@@ -126,6 +139,7 @@ public class EntityPigBoss extends EntityMob implements IBossDisplayData, IRange
         this.dataWatcher.updateObject(18, string);
     }
 
+    @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(40.0D);
@@ -139,6 +153,7 @@ public class EntityPigBoss extends EntityMob implements IBossDisplayData, IRange
     /**
      * Get this Entity's EnumCreatureAttribute
      */
+    @Override
     public EnumCreatureAttribute getCreatureAttribute() {
         return EnumCreatureAttribute.UNDEAD;
     }
@@ -146,6 +161,7 @@ public class EntityPigBoss extends EntityMob implements IBossDisplayData, IRange
     /**
      * Called to update the entity's position/logic.
      */
+    @Override
     public void onUpdate() {
         for (int var7 = 0; var7 < worldObj.playerEntities.size(); ++var7) {
             EntityPlayer P = (EntityPlayer) worldObj.playerEntities.get(var7);
@@ -170,6 +186,7 @@ public class EntityPigBoss extends EntityMob implements IBossDisplayData, IRange
      * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
      * use this to react to sunlight and start to burn.
      */
+    @Override
     public void onLivingUpdate() {
         super.onLivingUpdate();
 
@@ -234,6 +251,7 @@ public class EntityPigBoss extends EntityMob implements IBossDisplayData, IRange
     /**
      * Called when the entity is attacked.
      */
+    @Override
     public boolean attackEntityFrom(DamageSource damageSource, float var2) {
         Entity targetEntity = damageSource.getEntity();
 
@@ -352,6 +370,7 @@ public class EntityPigBoss extends EntityMob implements IBossDisplayData, IRange
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
+    @Override
     public void writeEntityToNBT(NBTTagCompound var1) {
         super.writeEntityToNBT(var1);
         var1.setString("AnuSkin", this.getSkin());
@@ -362,6 +381,7 @@ public class EntityPigBoss extends EntityMob implements IBossDisplayData, IRange
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
+    @Override
     public void readEntityFromNBT(NBTTagCompound var1) {
         super.readEntityFromNBT(var1);
         this.setSkin(var1.getString("AnuSkin"));
@@ -375,6 +395,7 @@ public class EntityPigBoss extends EntityMob implements IBossDisplayData, IRange
     /**
      * Returns the sound this mob makes while it's alive.
      */
+    @Override
     protected String getLivingSound() {
         return "mob.zombiepig.zpig";
     }
@@ -382,6 +403,7 @@ public class EntityPigBoss extends EntityMob implements IBossDisplayData, IRange
     /**
      * Returns the sound this mob makes when it is hurt.
      */
+    @Override
     protected String getHurtSound() {
         return "mob.zombiepig.zpighurt";
     }
@@ -389,6 +411,7 @@ public class EntityPigBoss extends EntityMob implements IBossDisplayData, IRange
     /**
      * Returns the sound this mob makes on death.
      */
+    @Override
     protected String getDeathSound() {
         return "mob.zombiepig.zpigdeath";
     }
@@ -404,6 +427,7 @@ public class EntityPigBoss extends EntityMob implements IBossDisplayData, IRange
     /**
      * Determines if an entity can be despawned, used on idle far away entities
      */
+    @Override
     protected boolean canDespawn() {
 
         return false;// !this.worldObj.provider.isHellWorld;
@@ -413,6 +437,7 @@ public class EntityPigBoss extends EntityMob implements IBossDisplayData, IRange
      * Finds the closest player within 16 blocks to attack, or null if this Entity isn't interested in attacking
      * (Animals, Spiders at day, peaceful PigZombies).
      */
+    @Override
     protected Entity findPlayerToAttack() {
         EntityPlayer entityplayer = this.worldObj.getClosestVulnerablePlayerToEntity(this, 16.0D);
 
@@ -436,6 +461,7 @@ public class EntityPigBoss extends EntityMob implements IBossDisplayData, IRange
         return null;
     }
 
+    @Override
     public void updateAITasks() {
 
         if (this.ticksExisted % 20 == 0) {
@@ -524,6 +550,7 @@ public class EntityPigBoss extends EntityMob implements IBossDisplayData, IRange
     /**
      * Sets the held item, or an armor slot. Slot 0 is held item. Slot 1-4 is armor. Params: Item, slot
      */
+    @Override
     public void setCurrentItemOrArmor(int par1, ItemStack par2ItemStack) {
         super.setCurrentItemOrArmor(par1, par2ItemStack);
     }
@@ -532,6 +559,7 @@ public class EntityPigBoss extends EntityMob implements IBossDisplayData, IRange
      * Returns the item that this EntityLiving is holding, if any.
      */
 
+    @Override
     public ItemStack getHeldItem() {
         if (this.getAttackMode() == Melee) {
             return new ItemStack(FAItemRegistry.INSTANCE.ancientSword);
@@ -715,6 +743,7 @@ public class EntityPigBoss extends EntityMob implements IBossDisplayData, IRange
         }
     }
 
+    @Override
     public IEntityLivingData onSpawnWithEgg(IEntityLivingData par1EntityLivingData) {
         par1EntityLivingData = super.onSpawnWithEgg(par1EntityLivingData);
 

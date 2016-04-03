@@ -14,6 +14,7 @@ public class BlockSlimeTrail extends BlockRail {
 
     }
 
+    @Override
     public Item getItemDropped(int var1, Random var2, int var3) {
         if (var2.nextInt(3) == 0) {
             return Items.slime_ball;

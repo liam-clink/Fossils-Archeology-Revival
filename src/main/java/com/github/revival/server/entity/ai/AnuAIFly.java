@@ -15,6 +15,7 @@ public class AnuAIFly extends EntityAIBase {
     /**
      * Returns whether the EntityAIBase should begin execution.
      */
+    @Override
     public boolean shouldExecute() {
         return entity.getAttackMode() == 1;
     }
@@ -23,6 +24,7 @@ public class AnuAIFly extends EntityAIBase {
     /**
      * Updates the task
      */
+    @Override
     public void updateTask() {
     }
 }

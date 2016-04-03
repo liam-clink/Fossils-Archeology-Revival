@@ -6,7 +6,13 @@ import com.github.revival.server.creativetab.FATabRegistry;
 import com.github.revival.server.entity.BehaviorJavelinDispense;
 import com.github.revival.server.handler.BucketEvent;
 import com.github.revival.server.handler.LocalizationStrings;
-import com.github.revival.server.item.forge.*;
+import com.github.revival.server.item.forge.ForgeAxeItem;
+import com.github.revival.server.item.forge.ForgeFoodItem;
+import com.github.revival.server.item.forge.ForgeHoeItem;
+import com.github.revival.server.item.forge.ForgeItemItem;
+import com.github.revival.server.item.forge.ForgePickaxeItem;
+import com.github.revival.server.item.forge.ForgeShovelItem;
+import com.github.revival.server.item.forge.ForgeSwordItem;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.init.Items;
@@ -23,7 +29,7 @@ import java.lang.reflect.Field;
 
 public enum FAItemRegistry {
     INSTANCE;
-    
+
     public Item biofossil;
     public Item tarfossil;
     public Item relic;

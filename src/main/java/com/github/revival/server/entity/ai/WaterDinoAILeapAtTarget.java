@@ -28,6 +28,7 @@ public class WaterDinoAILeapAtTarget extends EntityAILeapAtTarget {
     /**
      * Returns whether the EntityAIBase should begin execution.
      */
+    @Override
     public boolean shouldExecute() {
         this.leapTarget = this.leaper.getAttackTarget();
 
@@ -35,13 +36,14 @@ public class WaterDinoAILeapAtTarget extends EntityAILeapAtTarget {
             return false;
         } else {
             double d0 = this.leaper.getDistanceSqToEntity(this.leapTarget);
-            return d0 >= 4.0D && d0 <= 16.0D ? (!this.leaper.onGround ? false : this.leaper.getRNG().nextInt(5) == 0) : false;
+            return d0 >= 4.0D && d0 <= 16.0D && (!this.leaper.onGround ? false : this.leaper.getRNG().nextInt(5) == 0);
         }
     }
 
     /**
      * Returns whether an in-progress EntityAIBase should continue executing
      */
+    @Override
     public boolean continueExecuting() {
         return false;
     }
@@ -49,6 +51,7 @@ public class WaterDinoAILeapAtTarget extends EntityAILeapAtTarget {
     /**
      * Execute a one shot task or start executing a continuous task
      */
+    @Override
     public void startExecuting() {
         double var1 = this.leapTarget.posX - this.leaper.posX;
         double var3 = this.leapTarget.posZ - this.leaper.posZ;

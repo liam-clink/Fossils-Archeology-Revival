@@ -166,30 +166,31 @@ public class ModelBrachiosaurus extends ModelNewPrehistoric {
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
         animator.setAnimation(EntityBrachiosaurus.animation_attack);
         animator.startKeyframe(20);
-		animator.move(FrontThighLeft, 0, -4, 3);
-		animator.move(FrontThighRight, 0, -4, 3);
-		animator.move(BackThighLeft, 0, 1, 0);
-		animator.move(BackThighRight, 0, 1, 0);
-		ModelUtils.rotate(animator, LowerBody, -50, 0, 0);
-		ModelUtils.rotate(animator, Neck2, 2, 0, 0);
-		ModelUtils.rotate(animator, Neck3, 1, 0, 0);
-		ModelUtils.rotate(animator, Neck4, 14, 0, 0);
-		ModelUtils.rotate(animator, FrontThighRight, -28, 0, 0);
-		ModelUtils.rotate(animator, FrontThighLeft, -28, 0, 0);
-		ModelUtils.rotate(animator, FrontLegRight, 28, 0, 0);
-		ModelUtils.rotate(animator, FrontLegLeft, 28, 0, 0);
-		ModelUtils.rotate(animator, BackThighRight, -32, 0, 0);
-		ModelUtils.rotate(animator, BackThighLeft, -32, 0, 0);
-		ModelUtils.rotate(animator, BackLegRight, 32, 0, 0);
-		ModelUtils.rotate(animator, BackLegLeft, 32, 0, 0);
-		ModelUtils.rotate(animator, Tail, 0, 0, 0);
-		ModelUtils.rotate(animator, Tail2, 16, 0, 0);
-		ModelUtils.rotate(animator, Tail3, 14, 0, 0);
-		animator.endKeyframe();
-		animator.setStaticKeyframe(5);
-		animator.resetKeyframe(5);
+        animator.move(FrontThighLeft, 0, -4, 3);
+        animator.move(FrontThighRight, 0, -4, 3);
+        animator.move(BackThighLeft, 0, 1, 0);
+        animator.move(BackThighRight, 0, 1, 0);
+        ModelUtils.rotate(animator, LowerBody, -50, 0, 0);
+        ModelUtils.rotate(animator, Neck2, 2, 0, 0);
+        ModelUtils.rotate(animator, Neck3, 1, 0, 0);
+        ModelUtils.rotate(animator, Neck4, 14, 0, 0);
+        ModelUtils.rotate(animator, FrontThighRight, -28, 0, 0);
+        ModelUtils.rotate(animator, FrontThighLeft, -28, 0, 0);
+        ModelUtils.rotate(animator, FrontLegRight, 28, 0, 0);
+        ModelUtils.rotate(animator, FrontLegLeft, 28, 0, 0);
+        ModelUtils.rotate(animator, BackThighRight, -32, 0, 0);
+        ModelUtils.rotate(animator, BackThighLeft, -32, 0, 0);
+        ModelUtils.rotate(animator, BackLegRight, 32, 0, 0);
+        ModelUtils.rotate(animator, BackLegLeft, 32, 0, 0);
+        ModelUtils.rotate(animator, Tail, 0, 0, 0);
+        ModelUtils.rotate(animator, Tail2, 16, 0, 0);
+        ModelUtils.rotate(animator, Tail3, 14, 0, 0);
+        animator.endKeyframe();
+        animator.setStaticKeyframe(5);
+        animator.resetKeyframe(5);
     }
 
+    @Override
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
         AdvancedModelRenderer[] tailParts = {this.Tail, this.Tail2, this.Tail3};
         AdvancedModelRenderer[] neckParts = {this.Neck1, this.Neck2, this.Neck3, this.Neck4, this.Neck5, this.Head};
@@ -242,7 +243,7 @@ public class ModelBrachiosaurus extends ModelNewPrehistoric {
         sitAnimationPos(FrontThighRight, sitProgress, 0F, 4F, 2F);
         sitAnimationPos(BackThighLeft, sitProgress, 0F, 5.1F, 2F);
         sitAnimationPos(BackThighRight, sitProgress, 0F, 5.1F, 2F);
-        ((EntityNewPrehistoric)entity).tailbuffer.applyChainSwingBuffer(tailParts);
+        ((EntityNewPrehistoric) entity).tailbuffer.applyChainSwingBuffer(tailParts);
     }
 
 

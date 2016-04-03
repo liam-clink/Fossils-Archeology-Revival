@@ -1,14 +1,5 @@
 package com.github.revival.server.entity.mob;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.attributes.IAttributeInstance;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
-import net.minecraft.world.World;
-
 import com.github.revival.server.config.FossilConfig;
 import com.github.revival.server.entity.ai.DinoAILeapAtTarget;
 import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
@@ -24,6 +15,14 @@ import com.github.revival.server.enums.EnumPrehistoricAI.Stalking;
 import com.github.revival.server.enums.EnumPrehistoricAI.Taming;
 import com.github.revival.server.enums.EnumPrehistoricAI.Untaming;
 import com.github.revival.server.enums.EnumPrehistoricAI.WaterAbility;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.IAttributeInstance;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.MathHelper;
+import net.minecraft.world.World;
 
 public class EntityDeinonychus extends EntityNewPrehistoric {
 
@@ -50,6 +49,7 @@ public class EntityDeinonychus extends EntityNewPrehistoric {
         favoriteFood = Items.chicken;
         jumpLength = 5;
     }
+
     @Override
     public int getAttackLength() {
         return 35;
@@ -145,20 +145,21 @@ public class EntityDeinonychus extends EntityNewPrehistoric {
         return Items.bone;
     }
 
+    @Override
     public void updateSize() {
         double healthStep;
         double attackStep;
         double speedStep;
-        healthStep = (this.maxHealth - this.baseHealth) / (this.getAdultAge() + 1);
-        attackStep = (this.maxDamage - this.baseDamage) / (this.getAdultAge() + 1);
-        speedStep = (this.maxSpeed - this.baseSpeed) / (this.getAdultAge() + 1);
+        healthStep = (maxHealth - baseHealth) / (this.getAdultAge() + 1);
+        attackStep = (maxDamage - baseDamage) / (this.getAdultAge() + 1);
+        speedStep = (maxSpeed - baseSpeed) / (this.getAdultAge() + 1);
 
 
         if (this.getDinoAge() <= this.getAdultAge()) {
 
-            this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(Math.round(this.baseHealth + (healthStep * this.getDinoAge())));
-            this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(Math.round(this.baseDamage + (attackStep * this.getDinoAge())));
-            this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(this.baseSpeed + (speedStep * this.getDinoAge()));
+            this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(Math.round(baseHealth + (healthStep * this.getDinoAge())));
+            this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(Math.round(baseDamage + (attackStep * this.getDinoAge())));
+            this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(baseSpeed + (speedStep * this.getDinoAge()));
         }
     }
 
@@ -167,52 +168,57 @@ public class EntityDeinonychus extends EntityNewPrehistoric {
         return 10;
     }
 
+    @Override
     public void onLivingUpdate() {
         super.onLivingUpdate();
-        if(this.getAttackTarget() != null && this.ridingEntity != null){
-        	if(this.ridingEntity == this.getAttackTarget() && this.ticksExisted % 20 == 0){
+        if (this.getAttackTarget() != null && this.ridingEntity != null) {
+            if (this.ridingEntity == this.getAttackTarget() && this.ticksExisted % 20 == 0) {
                 IAttributeInstance iattributeinstance = this.getEntityAttribute(SharedMonsterAttributes.attackDamage);
-                this.getAttackTarget().attackEntityFrom(DamageSource.causeMobDamage(this), (float)iattributeinstance.getAttributeValue());
-    		}
+                this.getAttackTarget().attackEntityFrom(DamageSource.causeMobDamage(this), (float) iattributeinstance.getAttributeValue());
+            }
         }
-		if(this.getAttackTarget() != null && this.getAnimation() == this.animation_attack && (this.getAnimationTick() >= 17 && this.getAnimationTick() <= 20) && this.onGround){
-    		double d0 = this.getAttackTarget().posX - this.posX;
-			double d1 = this.getAttackTarget().posZ - this.posZ;
-			float f = MathHelper.sqrt_double(d0 * d0 + d1 * d1);
-			this.motionX += d0 / (double)f * 1.4D * 0.800000011920929D + this.motionX * 0.20000000298023224D;
-			this.motionZ += d1 / (double)f * 1.4D * 0.800000011920929D + this.motionZ * 0.20000000298023224D;
-			this.getLookHelper().setLookPositionWithEntity(this.getAttackTarget(), 10, 12);
-			this.motionY = (double)0.6;
-    	}
+        if (this.getAttackTarget() != null && this.getAnimation() == animation_attack && (this.getAnimationTick() >= 17 && this.getAnimationTick() <= 20) && this.onGround) {
+            double d0 = this.getAttackTarget().posX - this.posX;
+            double d1 = this.getAttackTarget().posZ - this.posZ;
+            float f = MathHelper.sqrt_double(d0 * d0 + d1 * d1);
+            this.motionX += d0 / (double) f * 1.4D * 0.800000011920929D + this.motionX * 0.20000000298023224D;
+            this.motionZ += d1 / (double) f * 1.4D * 0.800000011920929D + this.motionZ * 0.20000000298023224D;
+            this.getLookHelper().setLookPositionWithEntity(this.getAttackTarget(), 10, 12);
+            this.motionY = (double) 0.6;
+        }
     }
 
+    @Override
     public boolean attackEntityAsMob(Entity entity) {
         return false;
     }
-    
-    public void applyEntityCollision(Entity entity){
-    	super.applyEntityCollision(entity);
-    	if(this.getAttackTarget() != null){
-    		if(this.getAttackTarget() == entity && this.getAnimation() == this.animation_attack && !onGround && this.ridingEntity != entity){
+
+    @Override
+    public void applyEntityCollision(Entity entity) {
+        super.applyEntityCollision(entity);
+        if (this.getAttackTarget() != null) {
+            if (this.getAttackTarget() == entity && this.getAnimation() == animation_attack && !onGround && this.ridingEntity != entity) {
                 this.mountEntity(entity);
-    		}
-    	}
+            }
+        }
     }
-    
-    public boolean canAttackClass(Class clazz){
-    	return (clazz == EntityVelociraptor.class) ? false : super.canAttackClass(clazz);
+
+    @Override
+    public boolean canAttackClass(Class clazz) {
+        return (clazz != EntityVelociraptor.class) && super.canAttackClass(clazz);
     }
-    
+
+    @Override
     public boolean attackEntityFrom(DamageSource dmg, float i) {
-		if(this.ridingEntity != null){
-			if(this.getLastAttacker() != null){
-				if(this.getLastAttacker() == this.ridingEntity){
-					if(this.getRNG().nextInt(2) == 0){
-						this.mountEntity(null);
-					}
-				}
-			}
-		}
-		return super.attackEntityFrom(dmg, i);
-	}
+        if (this.ridingEntity != null) {
+            if (this.getLastAttacker() != null) {
+                if (this.getLastAttacker() == this.ridingEntity) {
+                    if (this.getRNG().nextInt(2) == 0) {
+                        this.mountEntity(null);
+                    }
+                }
+            }
+        }
+        return super.attackEntityFrom(dmg, i);
+    }
 }

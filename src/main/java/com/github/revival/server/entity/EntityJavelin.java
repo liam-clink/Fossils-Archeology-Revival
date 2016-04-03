@@ -19,7 +19,11 @@ import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.play.server.S2BPacketChangeGameState;
-import net.minecraft.util.*;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.MathHelper;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -67,6 +71,7 @@ public class EntityJavelin extends EntityArrow implements IEntityAdditionalSpawn
     /**
      * Called to update the entity's position/logic.
      */
+    @Override
     @SuppressWarnings("rawtypes")
     public void onUpdate() {
         super.onUpdate();
@@ -258,7 +263,6 @@ public class EntityJavelin extends EntityArrow implements IEntityAdditionalSpawn
             this.rotationYaw = (float) (Math.atan2(this.motionX, this.motionZ) * 180.0D / Math.PI);
 
             for (this.rotationPitch = (float) (Math.atan2(this.motionY, (double) f2) * 180.0D / Math.PI); this.rotationPitch - this.prevRotationPitch < -180.0F; this.prevRotationPitch -= 360.0F) {
-                ;
             }
 
             while (this.rotationPitch - this.prevRotationPitch >= 180.0F) {
@@ -299,6 +303,7 @@ public class EntityJavelin extends EntityArrow implements IEntityAdditionalSpawn
     /**
      * Called by a player entity when they collide with an entity
      */
+    @Override
     public void onCollideWithPlayer(EntityPlayer var1) {
         if (!this.worldObj.isRemote && this.inGround && this.arrowShake <= 0) {
             boolean var2 = this.canBePickedUp == 1 || this.canBePickedUp == 2 && var1.capabilities.isCreativeMode;
@@ -345,10 +350,12 @@ public class EntityJavelin extends EntityArrow implements IEntityAdditionalSpawn
         return var1.inventory.addItemStackToInventory(var2);
     }
 
+    @Override
     public float getShadowSize() {
         return 0.0F;
     }
 
+    @Override
     public void setDamage(double var1) {
         this.damage = var1;
     }

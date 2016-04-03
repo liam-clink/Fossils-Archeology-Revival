@@ -32,6 +32,7 @@ public class EntityAnuEffect extends EntityLiving {
         this.dataWatcher.updateObject(18, Byte.valueOf((byte) par1));
     }
 
+    @Override
     public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {
         super.writeEntityToNBT(par1NBTTagCompound);
         par1NBTTagCompound.setInteger("AnuRotation", this.getAnuRotation());
@@ -40,17 +41,20 @@ public class EntityAnuEffect extends EntityLiving {
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
+    @Override
     public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {
         super.readEntityFromNBT(par1NBTTagCompound);
         this.setAnuRotation(par1NBTTagCompound.getInteger("AnuRotation"));
     }
 
+    @Override
     public void moveEntityWithHeading(float par1, float par2) {
         this.motionX *= 0.0D;
         this.motionY *= 0.0D;
         this.motionZ *= 0.0D;
     }
 
+    @Override
     protected void entityInit() {
         super.entityInit();
         this.dataWatcher.addObject(16, new Byte((byte) 0));
@@ -61,6 +65,7 @@ public class EntityAnuEffect extends EntityLiving {
         this.playSound("fossil:anuTotem", 0.15F, 1F);
     }
 
+    @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(20.0D);
@@ -70,6 +75,7 @@ public class EntityAnuEffect extends EntityLiving {
     /**
      * handles entity death timer, experience orb and particle creation
      */
+    @Override
     protected void onDeathUpdate() {
         ++this.deathTicks;
 
@@ -127,6 +133,7 @@ public class EntityAnuEffect extends EntityLiving {
     /**
      * Makes the entity despawn if requirements are reached
      */
+    @Override
     protected void despawnEntity() {
 
     }
@@ -134,6 +141,7 @@ public class EntityAnuEffect extends EntityLiving {
     /**
      * Returns true if other Entities should be prevented from moving through this Entity.
      */
+    @Override
     public boolean canBeCollidedWith() {
         return false;
     }
@@ -141,6 +149,7 @@ public class EntityAnuEffect extends EntityLiving {
     /**
      * Returns the volume for the sounds this mob makes.
      */
+    @Override
     protected float getSoundVolume() {
         return 5.0F;
     }

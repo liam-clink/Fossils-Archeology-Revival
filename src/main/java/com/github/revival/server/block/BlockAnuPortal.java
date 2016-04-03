@@ -26,10 +26,12 @@ public class BlockAnuPortal extends Block {
         setBlockName(LocalizationStrings.BLOCK_ANU_PORTAL_NAME);
     }
 
+    @Override
     public boolean isOpaqueCube() {
         return false;
     }
 
+    @Override
     public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB bb, List list, Entity entity) {
     }
 
@@ -39,6 +41,7 @@ public class BlockAnuPortal extends Block {
         this.blockIcon = iconRegister.registerIcon("portal");
     }
 
+    @Override
     public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity) {
         if ((entity.ridingEntity == null) && (entity.riddenByEntity == null) && (entity instanceof EntityPlayerMP)) {
             EntityPlayerMP thePlayer = (EntityPlayerMP) entity;
@@ -54,6 +57,7 @@ public class BlockAnuPortal extends Block {
         }
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public void randomDisplayTick(World world, int x, int y, int z, Random rand) {
         super.randomDisplayTick(world, x, y, z, rand);

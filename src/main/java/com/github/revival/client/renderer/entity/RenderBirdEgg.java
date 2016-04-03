@@ -20,6 +20,7 @@ import org.lwjgl.opengl.GL12;
 public class RenderBirdEgg extends Render {
     private Item item;
 
+    @Override
     public void doRender(Entity entity, double x, double y, double z, float u, float v) {
         item = ((EntityBirdEgg) entity).item;
         IIcon iicon = this.item.getIconFromDamage(0);
@@ -53,6 +54,7 @@ public class RenderBirdEgg extends Render {
     /**
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
+    @Override
     protected ResourceLocation getEntityTexture(Entity entity) {
         return TextureMap.locationItemsTexture;
     }

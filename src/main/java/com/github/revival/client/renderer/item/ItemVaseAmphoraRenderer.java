@@ -50,24 +50,24 @@ public class ItemVaseAmphoraRenderer implements IItemRenderer {
         switch (meta) {
             case 0:
             default:
-                this.bindTexture(damaged_amphora);
+                bindTexture(damaged_amphora);
                 break;
             case 1:
-                this.bindTexture(restored_amphora);
+                bindTexture(restored_amphora);
                 break;
             case 2:
-                this.bindTexture(redFigure_amphora);
+                bindTexture(redFigure_amphora);
                 break;
             case 3:
-                this.bindTexture(blackFigure_amphora);
+                bindTexture(blackFigure_amphora);
                 break;
             case 4:
-                this.bindTexture(porcelain_amphora);
+                bindTexture(porcelain_amphora);
                 break;
         }
 
 
-        this.model.render((Entity) data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+        model.render((Entity) data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
 
         glPopMatrix();
     }

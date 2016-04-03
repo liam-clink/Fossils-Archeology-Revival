@@ -45,6 +45,7 @@ public class ContainerQuagga extends Container {
         }
     }
 
+    @Override
     public boolean canInteractWith(EntityPlayer player) {
         return this.inventory.isUseableByPlayer(player) && this.entity.isEntityAlive() && this.entity.getDistanceToEntity(player) < 8.0F;
     }
@@ -52,6 +53,7 @@ public class ContainerQuagga extends Container {
     /**
      * Called when a player shift-clicks on a slot. You must override this or you will crash when someone does that.
      */
+    @Override
     public ItemStack transferStackInSlot(EntityPlayer player, int slotIndex) {
         ItemStack transferred = null;
         Slot slot = (Slot) this.inventorySlots.get(slotIndex);
@@ -89,6 +91,7 @@ public class ContainerQuagga extends Container {
     /**
      * Called when the container is closed.
      */
+    @Override
     public void onContainerClosed(EntityPlayer player) {
         super.onContainerClosed(player);
         this.inventory.closeInventory();

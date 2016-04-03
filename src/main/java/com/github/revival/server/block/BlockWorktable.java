@@ -66,6 +66,7 @@ public class BlockWorktable extends BlockContainer {
         }
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public Item getItem(World world, int x, int y, int z) {
         return Item.getItemFromBlock(FABlockRegistry.INSTANCE.blockworktableIdle);
@@ -82,6 +83,7 @@ public class BlockWorktable extends BlockContainer {
     /**
      * Called whenever the block is added into the world. Args: world, x, y, z
      */
+    @Override
     public void onBlockAdded(World world, int x, int y, int z) {
         super.onBlockAdded(world, x, y, z);
         this.setDefaultDirection(world, x, y, z);
@@ -118,6 +120,7 @@ public class BlockWorktable extends BlockContainer {
         }
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     /**
      * When this method is called, your block should register all the icons it needs with the given IconRegister. This
@@ -139,6 +142,7 @@ public class BlockWorktable extends BlockContainer {
      * From the specified side and block metadata retrieves the blocks texture.
      * Args: side, metadata
      */
+    @Override
     public IIcon getIcon(int par1, int par2) {
         return par1 == 1 ? this.Top : (par1 == 0 ? this.Bottom
                 : (par1 != par2 ? this.blockIcon : this.Side1));
@@ -147,6 +151,7 @@ public class BlockWorktable extends BlockContainer {
     /**
      * Called upon block activation (right click on the block.)
      */
+    @Override
     public boolean onBlockActivated(World var1, int var2, int var3, int var4,
                                     EntityPlayer var5, int var6, float var7, float var8, float var9) {
         if (var1.isRemote) {
@@ -167,6 +172,7 @@ public class BlockWorktable extends BlockContainer {
      * Returns a new instance of a block's tile entity class. Called on placing
      * the block.
      */
+    @Override
     public TileEntity createNewTileEntity(World world, int par2) {
         return new TileEntityWorktable();
     }
@@ -174,6 +180,7 @@ public class BlockWorktable extends BlockContainer {
     /**
      * Called when the block is placed in the world.
      */
+    @Override
     public void onBlockPlacedBy(World par1World, int par2, int par3, int par4,
                                 EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack) {
         int l = MathHelper
@@ -205,6 +212,7 @@ public class BlockWorktable extends BlockContainer {
      * ejects contained items into the world, and notifies neighbours of an
      * update, as appropriate
      */
+    @Override
     public void breakBlock(World world, int x, int y, int z, Block block,
                            int var6) {
         if (!keepFurnaceInventory) {

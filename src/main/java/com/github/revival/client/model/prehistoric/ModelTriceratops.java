@@ -182,6 +182,7 @@ public class ModelTriceratops extends ModelNewPrehistoric {
         animator = ModelAnimator.create();
     }
 
+    @Override
     public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
         animate((IAnimatedEntity) entity, f, f1, f2, f3, f4, f5);
         this.rightFrontThigh.render(f5);
@@ -199,17 +200,17 @@ public class ModelTriceratops extends ModelNewPrehistoric {
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
         animator.setAnimation(EntityAnkylosaurus.animation_attack);
         animator.startKeyframe(5);
-		ModelUtils.rotate(animator, head, 30, 0, 0);
-		ModelUtils.rotate(animator, neck, 25, 0, 0);
-		animator.endKeyframe();
-		animator.setStaticKeyframe(5);
-		animator.startKeyframe(10);
-		ModelUtils.rotate(animator, neck, -30, 0, 0);
-		ModelUtils.rotate(animator, head, -30, 0, 0);
-		animator.endKeyframe();
-		animator.setStaticKeyframe(5);
-		animator.resetKeyframe(5);
-		
+        ModelUtils.rotate(animator, head, 30, 0, 0);
+        ModelUtils.rotate(animator, neck, 25, 0, 0);
+        animator.endKeyframe();
+        animator.setStaticKeyframe(5);
+        animator.startKeyframe(10);
+        ModelUtils.rotate(animator, neck, -30, 0, 0);
+        ModelUtils.rotate(animator, head, -30, 0, 0);
+        animator.endKeyframe();
+        animator.setStaticKeyframe(5);
+        animator.resetKeyframe(5);
+
 //		animator.setAnimationId(EntityNewPrehistoric.animation_sit.animationId);
 //		animator.startPhase(20);
 //		sitPose(true);
@@ -225,6 +226,7 @@ public class ModelTriceratops extends ModelNewPrehistoric {
     }
 
 
+    @Override
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
         AdvancedModelRenderer[] tailParts = {this.tail1, this.tail2, this.tail3};
         AdvancedModelRenderer[] neckParts = {this.neck, this.head};
@@ -270,7 +272,7 @@ public class ModelTriceratops extends ModelNewPrehistoric {
         this.chainWave(tailParts, speed2, 0.05F, -3, entity.ticksExisted, 1);
         this.chainSwing(tailParts, speed2, 0.35F, -3, entity.ticksExisted, 1);
         this.chainWave(neckParts, speed2, 0.05F, -3, entity.ticksExisted, 1);
-        ((EntityNewPrehistoric)entity).tailbuffer.applyChainSwingBuffer(tailParts);
+        ((EntityNewPrehistoric) entity).tailbuffer.applyChainSwingBuffer(tailParts);
     }
 
 //	@Override

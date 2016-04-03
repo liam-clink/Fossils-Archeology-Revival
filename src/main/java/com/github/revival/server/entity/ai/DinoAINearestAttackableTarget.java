@@ -20,7 +20,7 @@ public class DinoAINearestAttackableTarget extends EntityAINearestAttackableTarg
     @Override
     public boolean shouldExecute() {
         if (this.entity.isChild()) {
-            if (this.asChild == true) {
+            if (this.asChild) {
                 return super.shouldExecute();
             }
         } else {

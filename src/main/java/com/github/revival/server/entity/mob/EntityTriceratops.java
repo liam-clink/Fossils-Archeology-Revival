@@ -1,11 +1,19 @@
 package com.github.revival.server.entity.mob;
 
-import com.github.revival.Revival;
 import com.github.revival.server.config.FossilConfig;
 import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 import com.github.revival.server.enums.EnumPrehistoric;
-import com.github.revival.server.enums.EnumPrehistoricAI.*;
-
+import com.github.revival.server.enums.EnumPrehistoricAI.Activity;
+import com.github.revival.server.enums.EnumPrehistoricAI.Attacking;
+import com.github.revival.server.enums.EnumPrehistoricAI.Climbing;
+import com.github.revival.server.enums.EnumPrehistoricAI.Following;
+import com.github.revival.server.enums.EnumPrehistoricAI.Jumping;
+import com.github.revival.server.enums.EnumPrehistoricAI.Moving;
+import com.github.revival.server.enums.EnumPrehistoricAI.Response;
+import com.github.revival.server.enums.EnumPrehistoricAI.Stalking;
+import com.github.revival.server.enums.EnumPrehistoricAI.Taming;
+import com.github.revival.server.enums.EnumPrehistoricAI.Untaming;
+import com.github.revival.server.enums.EnumPrehistoricAI.WaterAbility;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
@@ -13,7 +21,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 public class EntityTriceratops extends EntityNewPrehistoric {
@@ -29,7 +36,7 @@ public class EntityTriceratops extends EntityNewPrehistoric {
         this.hasFeatherToggle = true;
         this.featherToggle = !FossilConfig.quilledTriceratops;
         this.setSize(0.8F, 0.6F);
-    	this.nearByMobsAllowed = 7;
+        this.nearByMobsAllowed = 7;
         minSize = 1F;
         maxSize = 8F;
         teenAge = 5;
@@ -38,10 +45,12 @@ public class EntityTriceratops extends EntityNewPrehistoric {
         favoriteFood = Item.getItemFromBlock(Blocks.leaves);
     }
 
+    @Override
     public int getAttackLength() {
-		return 30;
-	}
-    
+        return 30;
+    }
+
+    @Override
     public void onUpdate() {
         super.onUpdate();
         //Revival.proxy.doChainBuffer(tailbuffer, this);
@@ -136,20 +145,21 @@ public class EntityTriceratops extends EntityNewPrehistoric {
         return Items.stick;
     }
 
+    @Override
     public void updateSize() {
         double healthStep;
         double attackStep;
         double speedStep;
-        healthStep = (this.maxHealth - this.baseHealth) / (this.getAdultAge() + 1);
-        attackStep = (this.maxDamage - this.baseDamage) / (this.getAdultAge() + 1);
-        speedStep = (this.maxSpeed - this.baseSpeed) / (this.getAdultAge() + 1);
+        healthStep = (maxHealth - baseHealth) / (this.getAdultAge() + 1);
+        attackStep = (maxDamage - baseDamage) / (this.getAdultAge() + 1);
+        speedStep = (maxSpeed - baseSpeed) / (this.getAdultAge() + 1);
 
 
         if (this.getDinoAge() <= this.getAdultAge()) {
 
-            this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(Math.round(this.baseHealth + (healthStep * this.getDinoAge())));
-            this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(Math.round(this.baseDamage + (attackStep * this.getDinoAge())));
-            this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(this.baseSpeed + (speedStep * this.getDinoAge()));
+            this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(Math.round(baseHealth + (healthStep * this.getDinoAge())));
+            this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(Math.round(baseDamage + (attackStep * this.getDinoAge())));
+            this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(baseSpeed + (speedStep * this.getDinoAge()));
 
             if (this.isTeen()) {
                 this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.5D);
@@ -165,42 +175,46 @@ public class EntityTriceratops extends EntityNewPrehistoric {
     public int getAdultAge() {
         return 12;
     }
-    
-	public int getTailSegments() {
-		return 3;
-	}
-    public void onLivingUpdate(){
-    	super.onLivingUpdate();
-    	if(this.getAnimation() == this.animation_attack && this.getAnimationTick() == 12 && this.getAttackTarget() != null){
-    		this.attackEntityAsMob(this.getAttackTarget());
-    	}
+
+    @Override
+    public int getTailSegments() {
+        return 3;
     }
-    
-	public boolean attackEntityAsMob(Entity entity)
-	{
-		if(this.getAnimation() == NO_ANIMATION){
-			this.setAnimation(animation_attack);
-			return false;
-		}
 
-		if(this.getAnimation() == animation_attack && this.getAnimationTick() == 12){
-			IAttributeInstance iattributeinstance = this.getEntityAttribute(SharedMonsterAttributes.attackDamage);
-			boolean flag = entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float)iattributeinstance.getAttributeValue());
+    @Override
+    public void onLivingUpdate() {
+        super.onLivingUpdate();
+        if (this.getAnimation() == animation_attack && this.getAnimationTick() == 12 && this.getAttackTarget() != null) {
+            this.attackEntityAsMob(this.getAttackTarget());
+        }
+    }
 
-			if (flag)
-			{
-				if(entity.ridingEntity != null){
-					if(entity.ridingEntity  == this){
-						entity.mountEntity(null);
-					}
-				}
-				//entity.motionY += 0.4000000059604645D;
-                knockbackEntity(entity, 2.5F, 0.1F);
-				
-			}
+    @Override
+    public boolean attackEntityAsMob(Entity entity) {
+        if (this.boundingBox.intersectsWith(entity.boundingBox)) {
+            if (this.getAnimation() == NO_ANIMATION) {
+                this.setAnimation(animation_attack);
+                return false;
+            }
 
-			return flag;
-		}
-		return false;
-	}
+            if (this.getAnimation() == animation_attack && this.getAnimationTick() == 12) {
+                IAttributeInstance iattributeinstance = this.getEntityAttribute(SharedMonsterAttributes.attackDamage);
+                boolean flag = entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) iattributeinstance.getAttributeValue());
+
+                if (flag) {
+                    if (entity.ridingEntity != null) {
+                        if (entity.ridingEntity == this) {
+                            entity.mountEntity(null);
+                        }
+                    }
+                    //entity.motionY += 0.4000000059604645D;
+                    knockbackEntity(entity, 2.5F, 0.1F);
+
+                }
+
+                return flag;
+            }
+        }
+        return false;
+    }
 }

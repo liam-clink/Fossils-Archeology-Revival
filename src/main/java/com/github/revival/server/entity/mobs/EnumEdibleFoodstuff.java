@@ -10,7 +10,7 @@ public enum EnumEdibleFoodstuff {
     private int baseHungerHeal;
     private float baseHealthHeal;
 
-    private EnumEdibleFoodstuff(Item item, int baseHungerHeal, float baseHealthHeal) {
+    EnumEdibleFoodstuff(Item item, int baseHungerHeal, float baseHealthHeal) {
         this.item = item;
         this.baseHungerHeal = baseHungerHeal;
         this.baseHealthHeal = baseHealthHeal;

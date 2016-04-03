@@ -129,6 +129,7 @@ public class ModelSmilodon extends ModelNewPrehistoric {
         animator = ModelAnimator.create();
     }
 
+    @Override
     public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
         animate((IAnimatedEntity) entity, f, f1, f2, f3, f4, f5);
         this.leftHindThigh.render(f5);
@@ -145,18 +146,19 @@ public class ModelSmilodon extends ModelNewPrehistoric {
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
         animator.setAnimation(EntitySmilodon.animation_attack);
         animator.startKeyframe(10);
-		ModelUtils.rotate(animator, neck, -31, 0, 0);
-		ModelUtils.rotate(animator, head, -40, 0, 0);
-		ModelUtils.rotate(animator, lowerJaw, 70, 0, 0);
+        ModelUtils.rotate(animator, neck, -31, 0, 0);
+        ModelUtils.rotate(animator, head, -40, 0, 0);
+        ModelUtils.rotate(animator, lowerJaw, 70, 0, 0);
         animator.endKeyframe();
         animator.startKeyframe(5);
-		ModelUtils.rotate(animator, neck, 6, 0, 0);
-		ModelUtils.rotate(animator, head, -14, 0, 0);
-		ModelUtils.rotate(animator, lowerJaw, 70, 0, 0);
+        ModelUtils.rotate(animator, neck, 6, 0, 0);
+        ModelUtils.rotate(animator, head, -14, 0, 0);
+        ModelUtils.rotate(animator, lowerJaw, 70, 0, 0);
         animator.endKeyframe();
         animator.resetKeyframe(10);
     }
 
+    @Override
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
         AdvancedModelRenderer[] tailParts = {this.tail};
         AdvancedModelRenderer[] neckParts = {this.neck, this.head};
@@ -164,7 +166,7 @@ public class ModelSmilodon extends ModelNewPrehistoric {
         ModelUtils.faceTargetMod(head, f3, f4, 0.5F);
         float speed = 0.1F;
         float speed2 = 0.6F;
-        float sitProgress = ((EntityNewPrehistoric)(entity)).sitProgress;
+        float sitProgress = ((EntityNewPrehistoric) (entity)).sitProgress;
         this.chainWave(tailParts, speed, 0.05F, -3, entity.ticksExisted, 1);
         this.chainSwing(tailParts, speed, 0.15F, -2, entity.ticksExisted, 1);
         this.chainWave(neckParts, speed, 0.15F, 3, entity.ticksExisted, 1);

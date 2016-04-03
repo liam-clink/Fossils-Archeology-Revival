@@ -65,6 +65,6 @@ public enum EnumAnimation {
     /**
      * Mob charges at Prey or Competitor
      */
-    CHARGE;
+    CHARGE
 
 }

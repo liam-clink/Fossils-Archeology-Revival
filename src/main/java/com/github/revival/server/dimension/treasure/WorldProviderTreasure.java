@@ -14,6 +14,7 @@ import net.minecraft.world.biome.WorldChunkManagerHell;
 import net.minecraft.world.chunk.IChunkProvider;
 
 public class WorldProviderTreasure extends WorldProvider {
+    @Override
     public void registerWorldChunkManager() {
         this.worldChunkMgr = new WorldChunkManagerHell(Revival.treasureBiome, 0);
         this.dimensionId = FossilConfig.dimensionIDTreasure;
@@ -22,14 +23,17 @@ public class WorldProviderTreasure extends WorldProvider {
 
     }
 
+    @Override
     public float calculateCelestialAngle(long p_76563_1_, float p_76563_3_) {
         return 0.0F;
     }
 
+    @Override
     public boolean canRespawnHere() {
         return false;
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public Vec3 getFogColor(float p_76562_1_, float p_76562_2_) {
         int i = 10518688;
@@ -52,11 +56,13 @@ public class WorldProviderTreasure extends WorldProvider {
         return Vec3.createVectorHelper((double) f3, (double) f4, (double) f5);
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public boolean isSkyColored() {
         return false;
     }
 
+    @Override
     public boolean isSurfaceWorld() {
         return false;
     }
@@ -64,6 +70,7 @@ public class WorldProviderTreasure extends WorldProvider {
     /**
      * Creates the light to brightness table
      */
+    @Override
     protected void generateLightBrightnessTable() {
         float f = 0.1F;
 
@@ -76,6 +83,7 @@ public class WorldProviderTreasure extends WorldProvider {
     /**
      * Returns array with sunrise/sunset colors
      */
+    @Override
     @SideOnly(Side.CLIENT)
     public float[] calcSunriseSunsetColors(float p_76560_1_, float p_76560_2_) {
         return null;
@@ -86,14 +94,17 @@ public class WorldProviderTreasure extends WorldProvider {
         return "the Ancient Treasure Room";
     }
 
+    @Override
     public String getWelcomeMessage() {
         return "Entering the Ancient Treasure Room";
     }
 
+    @Override
     public IChunkProvider createChunkGenerator() {
         return new ChunkProviderTreasure(worldObj, 0);
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public float getCloudHeight() {
         return 8.0F;
@@ -102,6 +113,7 @@ public class WorldProviderTreasure extends WorldProvider {
     /**
      * Will check if the x, z position specified is alright to be set as the map spawn point
      */
+    @Override
     public boolean canCoordinateBeSpawn(int x, int y) {
         return this.worldObj.getTopBlock(x, y).getMaterial().blocksMovement();
     }
@@ -109,10 +121,12 @@ public class WorldProviderTreasure extends WorldProvider {
     /**
      * Gets the hard-coded portal location to use when entering this dimension.
      */
+    @Override
     public ChunkCoordinates getEntrancePortalLocation() {
         return new ChunkCoordinates(0, 50, 0);
     }
 
+    @Override
     public int getAverageGroundLevel() {
         return 50;
     }
@@ -120,11 +134,13 @@ public class WorldProviderTreasure extends WorldProvider {
     /**
      * Returns true if the given X,Z coordinate should show environmental fog.
      */
+    @Override
     @SideOnly(Side.CLIENT)
     public boolean doesXZShowFog(int p_76568_1_, int p_76568_2_) {
         return false;
     }
 
+    @Override
     public int getRespawnDimension(EntityPlayerMP player) {
         return 0;
     }

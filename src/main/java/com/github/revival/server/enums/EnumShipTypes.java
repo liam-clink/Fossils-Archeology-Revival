@@ -9,7 +9,7 @@ public enum EnumShipTypes {
     MetalTrader(3);
     private final int MetaData;
 
-    private EnumShipTypes(int var3) {
+    EnumShipTypes(int var3) {
         this.MetaData = var3;
     }
 

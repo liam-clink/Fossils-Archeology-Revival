@@ -159,6 +159,7 @@ public class ModelCompsognathus extends ModelNewPrehistoric {
         animator = ModelAnimator.create();
     }
 
+    @Override
     public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
         animate((IAnimatedEntity) entity, f, f1, f2, f3, f4, f5);
         RightUpperLeg.render(f5);
@@ -173,37 +174,38 @@ public class ModelCompsognathus extends ModelNewPrehistoric {
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
         animator.setAnimation(EntityDeinonychus.animation_attack);
         animator.startKeyframe(15);
-		animator.move(LeftUpperLeg, 0, 1F, -0.5F);
-		animator.move(RightUpperLeg, 0, 1F, -0.5F);
-		animator.move(body, 0, 1F, -0.5F);
-		ModelUtils.rotate(animator, body, 15, 0, 0);
-		ModelUtils.rotate(animator, RightLowerLeg, -30, 0, 0);
-		ModelUtils.rotate(animator, LeftLowerLeg, -30, 0, 0);
-		ModelUtils.rotate(animator, RightFoot, 30, 0, 0);
-		ModelUtils.rotate(animator, LeftFoot, 30, 0, 0);
-		ModelUtils.rotate(animator, LeftUpperArm, 0, 0, -50);
-		ModelUtils.rotate(animator, RightUpperArm, 0, 0, 50);
-		ModelUtils.rotate(animator, head, -20, 0, 0);
-		animator.endKeyframe();
-		animator.setStaticKeyframe(5);
+        animator.move(LeftUpperLeg, 0, 1F, -0.5F);
+        animator.move(RightUpperLeg, 0, 1F, -0.5F);
+        animator.move(body, 0, 1F, -0.5F);
+        ModelUtils.rotate(animator, body, 15, 0, 0);
+        ModelUtils.rotate(animator, RightLowerLeg, -30, 0, 0);
+        ModelUtils.rotate(animator, LeftLowerLeg, -30, 0, 0);
+        ModelUtils.rotate(animator, RightFoot, 30, 0, 0);
+        ModelUtils.rotate(animator, LeftFoot, 30, 0, 0);
+        ModelUtils.rotate(animator, LeftUpperArm, 0, 0, -50);
+        ModelUtils.rotate(animator, RightUpperArm, 0, 0, 50);
+        ModelUtils.rotate(animator, head, -20, 0, 0);
+        animator.endKeyframe();
+        animator.setStaticKeyframe(5);
         animator.startKeyframe(5);
-		animator.move(LeftUpperLeg, 0, -9F, 0F);
-		animator.move(RightUpperLeg, 0, -9F, 0F);
-		animator.move(body, 0, -10F, 0F);
-		ModelUtils.rotate(animator, body, -25, 0, 0);
-		ModelUtils.rotate(animator, RightUpperLeg, -35, 0, 0);
-		ModelUtils.rotate(animator, LeftUpperLeg, -35, 0, 0);
-		ModelUtils.rotate(animator, RightLowerLeg, -30, 0, 0);
-		ModelUtils.rotate(animator, LeftLowerLeg, -30, 0, 0);
-		ModelUtils.rotate(animator, RightFoot, -55, 0, 0);
-		ModelUtils.rotate(animator, LeftFoot, -55, 0, 0);
-		ModelUtils.rotate(animator, LeftUpperArm, 0, 0, -50);
-		ModelUtils.rotate(animator, RightUpperArm, 0, 0, 50);
-		animator.endKeyframe();
-		animator.setStaticKeyframe(5);
-		animator.resetKeyframe(5);
+        animator.move(LeftUpperLeg, 0, -9F, 0F);
+        animator.move(RightUpperLeg, 0, -9F, 0F);
+        animator.move(body, 0, -10F, 0F);
+        ModelUtils.rotate(animator, body, -25, 0, 0);
+        ModelUtils.rotate(animator, RightUpperLeg, -35, 0, 0);
+        ModelUtils.rotate(animator, LeftUpperLeg, -35, 0, 0);
+        ModelUtils.rotate(animator, RightLowerLeg, -30, 0, 0);
+        ModelUtils.rotate(animator, LeftLowerLeg, -30, 0, 0);
+        ModelUtils.rotate(animator, RightFoot, -55, 0, 0);
+        ModelUtils.rotate(animator, LeftFoot, -55, 0, 0);
+        ModelUtils.rotate(animator, LeftUpperArm, 0, 0, -50);
+        ModelUtils.rotate(animator, RightUpperArm, 0, 0, 50);
+        animator.endKeyframe();
+        animator.setStaticKeyframe(5);
+        animator.resetKeyframe(5);
     }
 
+    @Override
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
         AdvancedModelRenderer[] tailParts = {this.tail1, this.tail2};
         AdvancedModelRenderer[] neckParts = {this.neck, this.head};
@@ -212,7 +214,7 @@ public class ModelCompsognathus extends ModelNewPrehistoric {
 
         ModelUtils.faceTargetMod(neck, f3, f4, 0.5F);
         ModelUtils.faceTargetMod(head, f3, f4, 0.5F);
-        
+
         float speed = 0.1F;
         float speed2 = 0.5F;
         float sitProgress = ((EntityNewPrehistoric) (entity)).sitProgress;
@@ -246,7 +248,7 @@ public class ModelCompsognathus extends ModelNewPrehistoric {
         this.chainSwing(tailParts, speed, 0.15F, -3, entity.ticksExisted, 1);
         this.chainSwing(tailParts, speed2, 0.25F, -3, f, f1);
         this.chainWave(neckParts, speed, 0.15F, 3, entity.ticksExisted, 1);
-        ((EntityNewPrehistoric)entity).tailbuffer.applyChainSwingBuffer(tailParts);
+        ((EntityNewPrehistoric) entity).tailbuffer.applyChainSwingBuffer(tailParts);
     }
 
 

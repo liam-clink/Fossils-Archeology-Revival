@@ -13,6 +13,6 @@ public class WaterDinoAINearestAttackableTarget extends EntityAINearestAttackabl
      * A method used to see if an entity is a suitable target through a number of checks.
      */
     protected boolean isSuitableTarget(EntityLiving var1, boolean var2) {
-        return var1 != null && !var1.isInWater() ? false : super.isSuitableTarget(var1, var2);
+        return !(var1 != null && !var1.isInWater()) && super.isSuitableTarget(var1, var2);
     }
 }

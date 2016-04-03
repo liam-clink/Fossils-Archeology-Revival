@@ -5,7 +5,13 @@ import com.github.revival.server.block.entity.TileEntityFigurine;
 import com.github.revival.server.block.entity.TileEntityVase;
 import com.github.revival.server.config.FossilConfig;
 import com.github.revival.server.enums.EnumPrehistoric;
-import com.github.revival.server.gen.structure.academy.*;
+import com.github.revival.server.gen.structure.academy.Academy1;
+import com.github.revival.server.gen.structure.academy.Academy2;
+import com.github.revival.server.gen.structure.academy.Academy3;
+import com.github.revival.server.gen.structure.academy.Academy4;
+import com.github.revival.server.gen.structure.academy.Academy5;
+import com.github.revival.server.gen.structure.academy.Academy6;
+import com.github.revival.server.gen.structure.academy.AcademyUtil;
 import com.github.revival.server.gen.structure.temple.Temple1;
 import com.github.revival.server.gen.structure.temple.Temple2;
 import com.github.revival.server.gen.structure.temple.Temple3;
@@ -174,6 +180,7 @@ public class FossilStructureGenerator extends StructureGeneratorBase {
      * @param customData1 Custom data used to subtype events for given fakeID
      * @param customData2 Additional custom data
      */
+    @Override
     public void onCustomBlockAdded(World world, int x, int y, int z,
                                    int fakeID, int customData1, int customData2) {
         if (!value_set) {

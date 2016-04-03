@@ -47,6 +47,7 @@ public class BlockVaseVolute extends BlockContainer implements ISubBlocksBlock {
     }
 
 
+    @Override
     @SideOnly(Side.CLIENT)
     /**
      * returns a list of items with the same ID, but different meta (eg: dye returns 16 items)
@@ -60,10 +61,12 @@ public class BlockVaseVolute extends BlockContainer implements ISubBlocksBlock {
     /**
      * The type of render function that is called for this block
      */
+    @Override
     public int getRenderType() {
         return -1;
     }
 
+    @Override
     public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9) {
         return false;
     }
@@ -72,6 +75,7 @@ public class BlockVaseVolute extends BlockContainer implements ISubBlocksBlock {
      * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
      * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
      */
+    @Override
     public boolean isOpaqueCube() {
         return false;
     }
@@ -79,6 +83,7 @@ public class BlockVaseVolute extends BlockContainer implements ISubBlocksBlock {
     /**
      * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
      */
+    @Override
     public boolean renderAsNormalBlock() {
         return false;
     }
@@ -86,6 +91,7 @@ public class BlockVaseVolute extends BlockContainer implements ISubBlocksBlock {
     /**
      * Updates the blocks bounds based on its current state. Args: world, x, y, z
      */
+    @Override
     public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4) {
         this.setBlockBounds(0.1F, 0.0F, 0.1F, 0.9F, 0.9F, 0.9F);
     }
@@ -94,6 +100,7 @@ public class BlockVaseVolute extends BlockContainer implements ISubBlocksBlock {
      * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
      * cleared to be reused)
      */
+    @Override
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4) {
         this.setBlockBoundsBasedOnState(par1World, par2, par3, par4);
         return super.getCollisionBoundingBoxFromPool(par1World, par2, par3, par4);
@@ -102,6 +109,7 @@ public class BlockVaseVolute extends BlockContainer implements ISubBlocksBlock {
     /**
      * Called when the block is placed in the world.
      */
+    @Override
     public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack) {
         int l = MathHelper.floor_double((double) (par5EntityLivingBase.rotationYaw * 4.0F / 360.0F) + 1.5D) & 3;
         par1World.setBlockMetadataWithNotify(par2, par3, par4, l, 2);
@@ -128,6 +136,7 @@ public class BlockVaseVolute extends BlockContainer implements ISubBlocksBlock {
     /**
      * Get the block's damage value (for use with pick block).
      */
+    @Override
     public int getDamageValue(World par1World, int par2, int par3, int par4) {
         TileEntity tileentity = par1World.getTileEntity(par2, par3, par4);
         return tileentity != null && tileentity instanceof TileEntityVase ? ((TileEntityVase) tileentity).getVaseTypeMeta() : super.getDamageValue(par1World, par2, par3, par4);
@@ -142,6 +151,7 @@ public class BlockVaseVolute extends BlockContainer implements ISubBlocksBlock {
         return this.getMeta;
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     /**
      * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
@@ -150,6 +160,7 @@ public class BlockVaseVolute extends BlockContainer implements ISubBlocksBlock {
         return icons[meta];
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister iconregister) {
         icons = new IIcon[shortname.length];
@@ -159,6 +170,7 @@ public class BlockVaseVolute extends BlockContainer implements ISubBlocksBlock {
         }
     }
 
+    @Override
     public Class<? extends ItemBlock> getItemBlockClass() {
         return VaseVoluteBlockItem.class;
     }

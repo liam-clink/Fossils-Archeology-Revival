@@ -5,5 +5,5 @@ public enum EnumEra {
     StoneAge,
     Cretaceous,
     Jurassic,
-    Triassic;
+    Triassic
 }

@@ -41,10 +41,12 @@ public class BlockVolcanicSlab extends BlockSlab {
         this.theIcon = par1IconRegister.registerIcon("fossil:Volcanic_Brick");
     }
 
+    @Override
     public Item getItemDropped(int par1, Random par2Random, int par3) {
         return Item.getItemFromBlock(FABlockRegistry.INSTANCE.volcanicSingleSlab);
     }
 
+    @Override
     protected ItemStack createStackedBlock(int par1) {
         return new ItemStack(FABlockRegistry.INSTANCE.volcanicSingleSlab, 2, par1 & 7);
     }
@@ -62,6 +64,7 @@ public class BlockVolcanicSlab extends BlockSlab {
         return super.getUnlocalizedName() + "." + blockStepTypes[par1];
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
 
     /**

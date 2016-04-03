@@ -9,6 +9,7 @@ import java.util.Random;
 
 public class AncientChestWorldGen extends WorldGenerator {
 
+    @Override
     public boolean generate(World world, Random rand, int x, int y, int z) {
         world.setBlock(x + 0, y + -2, z + 0, Blocks.bedrock, 0, 3);
         world.setBlock(x + 1, y + -2, z + 0, Blocks.bedrock, 0, 3);

@@ -39,6 +39,7 @@ public class BlockTempskya extends BlockBush {
         this.setHardness(0.5F);
     }
 
+    @Override
     public boolean canBlockStay(World world, int x, int y, int z) {
         if (world.getBlock(x, y, z) != this) {
             return super.canBlockStay(world, x, y, z);
@@ -53,6 +54,7 @@ public class BlockTempskya extends BlockBush {
         }
     }
 
+    @Override
     protected void checkAndDropBlock(World w, int x, int y, int z) {
         if (!this.canBlockStay(w, x, y, z)) {
             int l = w.getBlockMetadata(x, y, z);
@@ -64,6 +66,7 @@ public class BlockTempskya extends BlockBush {
         }
     }
 
+    @Override
     public Item getItemDropped(int i, Random rand, int il) {
         if (i == 0) {
             return Item.getItemFromBlock(this);
@@ -73,6 +76,7 @@ public class BlockTempskya extends BlockBush {
 
     }
 
+    @Override
     public void harvestBlock(World world, EntityPlayer entity, int x, int y, int z, int i) {
         if (i == 0) {
             super.harvestBlock(world, entity, x, y, z, i);
@@ -86,6 +90,7 @@ public class BlockTempskya extends BlockBush {
         world.setBlock(x, y + 3, z, this, 3, 2);
     }
 
+    @Override
     public boolean canPlaceBlockAt(World world, int x, int y, int z) {
         if (world.getBlock(x, y, z) != Blocks.air &&
                 world.getBlock(x, y + 1, z) != Blocks.air &&
@@ -98,11 +103,13 @@ public class BlockTempskya extends BlockBush {
 
     }
 
+    @Override
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack i) {
         makeTempskya(world, x, y, z);
         super.onBlockPlacedBy(world, x, y, z, entity, i);
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public IIcon getIcon(int i, int z) {
         switch (z) {
@@ -118,6 +125,7 @@ public class BlockTempskya extends BlockBush {
 
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister iicon) {
         super.registerBlockIcons(iicon);
@@ -127,6 +135,7 @@ public class BlockTempskya extends BlockBush {
         tex3 = iicon.registerIcon("fossil:" + textureName + "_4");
     }
 
+    @Override
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4) {
         float f = 0.375F;
         float f1 = 0.625F;

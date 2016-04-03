@@ -26,6 +26,7 @@ public class DinoAIRunAway extends EntityAIBase {
         /**
          * Return whether the specified entity is applicable to this filter.
          */
+        @Override
         public boolean isEntityApplicable(Entity entity) {
             return entity.isEntityAlive() && DinoAIRunAway.this.theEntity.getEntitySenses().canSee(entity);
         }
@@ -60,6 +61,7 @@ public class DinoAIRunAway extends EntityAIBase {
     /**
      * Returns whether the EntityAIBase should begin execution.
      */
+    @Override
     public boolean shouldExecute() {
         if (this.theEntity instanceof EntityNewPrehistoric) {
             EntityNewPrehistoric prehistoric = (EntityNewPrehistoric) theEntity;
@@ -103,13 +105,14 @@ public class DinoAIRunAway extends EntityAIBase {
             return false;
         } else {
             this.entityPathEntity = this.entityPathNavigate.getPathToXYZ(vec3.xCoord, vec3.yCoord, vec3.zCoord);
-            return this.entityPathEntity == null ? false : this.entityPathEntity.isDestinationSame(vec3);
+            return this.entityPathEntity != null && this.entityPathEntity.isDestinationSame(vec3);
         }
     }
 
     /**
      * Returns whether an in-progress EntityAIBase should continue executing
      */
+    @Override
     public boolean continueExecuting() {
         return !this.entityPathNavigate.noPath();
     }
@@ -117,6 +120,7 @@ public class DinoAIRunAway extends EntityAIBase {
     /**
      * Execute a one shot task or start executing a continuous task
      */
+    @Override
     public void startExecuting() {
         this.entityPathNavigate.setPath(this.entityPathEntity, this.farSpeed);
     }
@@ -124,6 +128,7 @@ public class DinoAIRunAway extends EntityAIBase {
     /**
      * Resets the task
      */
+    @Override
     public void resetTask() {
         this.closestLivingEntity = null;
     }
@@ -131,6 +136,7 @@ public class DinoAIRunAway extends EntityAIBase {
     /**
      * Updates the task
      */
+    @Override
     public void updateTask() {
         if (this.theEntity.getDistanceSqToEntity(this.closestLivingEntity) < 49.0D) {
             this.theEntity.getNavigator().setSpeed(this.nearSpeed);

@@ -69,11 +69,13 @@ public class BlockCultivate extends BlockContainer {
         world.setTileEntity(x, y, z, tile);
     }
 
+    @Override
     public void onBlockDestroyedByPlayer(World world, int x, int y, int z, int i) {
         this.returnDNA(world, x, y, z);
         super.onBlockDestroyedByPlayer(world, x, y, z, i);
     }
 
+    @Override
     public Item getItemDropped(int par1, Random rand, int par2) {
         return Item.getItemFromBlock(FABlockRegistry.INSTANCE.blockcultivateIdle);
     }
@@ -81,6 +83,7 @@ public class BlockCultivate extends BlockContainer {
     /**
      * Called whenever the block is added into the world. Args: world, x, y, z
      */
+    @Override
     public void onBlockAdded(World world, int x, int y, int z) {
         super.onBlockAdded(world, x, y, z);
         this.setDefaultDirection(world, x, y, z);
@@ -142,6 +145,7 @@ public class BlockCultivate extends BlockContainer {
      * needs with the given IconRegister. This is the only chance you get to
      * register icons.
      */
+    @Override
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister iconRegister) {
         this.blockIcon = iconRegister.registerIcon("fossil:Culture_Sides_Idle");
@@ -154,6 +158,7 @@ public class BlockCultivate extends BlockContainer {
      * public int getBlockTextureFromSide(int var1) { return var1 == 1 ? 36 :
 	 * (var1 == 0 ? 36 : (var1 == 3 ? 20 : 20)); }
 	 */
+    @Override
     @SideOnly(Side.CLIENT)
     /**
      * A randomly called display update to be able to add particles or other items for display
@@ -165,6 +170,7 @@ public class BlockCultivate extends BlockContainer {
     /**
      * Called upon block activation (right click on the block.)
      */
+    @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
         if (world.isRemote) {
             return true;
@@ -342,6 +348,7 @@ public class BlockCultivate extends BlockContainer {
      * ejects contained items into the world, and notifies neighbours of an
      * update, as appropriate
      */
+    @Override
     public void breakBlock(World world, int x, int y, int z, Block block, int var6) {
         if (!keepFurnaceInventory) {
             TileEntityCultivate tileentity = (TileEntityCultivate) world.getTileEntity(x, y, z);
@@ -398,6 +405,7 @@ public class BlockCultivate extends BlockContainer {
      * use the value from getComparatorInputOverride instead of the actual
      * redstone signal strength.
      */
+    @Override
     public boolean hasComparatorInputOverride() {
         return true;
     }
@@ -407,12 +415,14 @@ public class BlockCultivate extends BlockContainer {
      * used instead of the redstone signal strength when this block inputs to a
      * comparator.
      */
+    @Override
     public int getComparatorInputOverride(World par1World, int par2, int par3,
                                           int par4, int par5) {
         return Container.calcRedstoneFromInventory((IInventory) par1World
                 .getTileEntity(par2, par3, par4));
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public Item getItem(World world, int x, int y, int z) {
 

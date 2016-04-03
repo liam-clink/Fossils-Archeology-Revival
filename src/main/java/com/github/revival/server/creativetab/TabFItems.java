@@ -12,11 +12,13 @@ public class TabFItems extends CreativeTabs {
         super(par2Str);
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public Item getTabIconItem() {
         return FAItemRegistry.INSTANCE.biofossil;
     }
 
+    @Override
     public String getTranslatedTabLabel() {
         return LocalizationStrings.FITEMS_NAME;
     }

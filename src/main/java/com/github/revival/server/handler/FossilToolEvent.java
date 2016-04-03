@@ -39,7 +39,7 @@ public class FossilToolEvent {
                 }
             }
 
-            if (hasPaleontologyBonus == true) {
+            if (hasPaleontologyBonus) {
 
                 if (block == FABlockRegistry.INSTANCE.blockFossil) {
                     switch (paleontologyBonus) {
@@ -107,7 +107,7 @@ public class FossilToolEvent {
             }
 
             //Handle archeology bonus
-            if (hasArcheologyBonus == true) {
+            if (hasArcheologyBonus) {
 
                 float rand = player.worldObj.rand.nextInt(1000);
 

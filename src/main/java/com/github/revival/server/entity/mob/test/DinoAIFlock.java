@@ -61,10 +61,12 @@ public class DinoAIFlock extends EntityAIBase {
         return flock.get(index);
     }
 
+    @Override
     public boolean continueExecuting() {
         return !flock.isEmpty();
     }
 
+    @Override
     public void updateTask() {
         if (leader.getRNG().nextInt(140) == 0) {
             System.out.println("The flock has a new path!!!");

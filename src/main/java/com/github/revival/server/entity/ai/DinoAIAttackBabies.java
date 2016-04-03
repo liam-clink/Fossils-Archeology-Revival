@@ -45,8 +45,9 @@ public class DinoAIAttackBabies extends EntityAITarget {
             /**
              * Return whether the specified entity is applicable to this filter.
              */
+            @Override
             public boolean isEntityApplicable(Entity p_82704_1_) {
-                return !(p_82704_1_ instanceof EntityLivingBase) ? false : (selector != null && !selector.isEntityApplicable(p_82704_1_) ? false : DinoAIAttackBabies.this.isSuitableTarget((EntityLivingBase) p_82704_1_, false));
+                return p_82704_1_ instanceof EntityLivingBase && (!(selector != null && !selector.isEntityApplicable(p_82704_1_)) && DinoAIAttackBabies.this.isSuitableTarget((EntityLivingBase) p_82704_1_, false));
             }
         };
     }
@@ -54,6 +55,7 @@ public class DinoAIAttackBabies extends EntityAITarget {
     /**
      * Returns whether the EntityAIBase should begin execution.
      */
+    @Override
     public boolean shouldExecute() {
         if (targetEntity != null) {
             if (targetEntity.isChild()) {
@@ -82,6 +84,7 @@ public class DinoAIAttackBabies extends EntityAITarget {
     /**
      * Execute a one shot task or start executing a continuous task
      */
+    @Override
     public void startExecuting() {
         this.taskOwner.setAttackTarget(this.targetEntity);
         super.startExecuting();
@@ -101,6 +104,7 @@ public class DinoAIAttackBabies extends EntityAITarget {
             return d0 < d1 ? -1 : (d0 > d1 ? 1 : 0);
         }
 
+        @Override
         public int compare(Object p_compare_1_, Object p_compare_2_) {
             return this.compare((Entity) p_compare_1_, (Entity) p_compare_2_);
         }

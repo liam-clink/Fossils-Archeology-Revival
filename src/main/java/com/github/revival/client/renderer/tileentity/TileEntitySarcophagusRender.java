@@ -162,6 +162,7 @@ public class TileEntitySarcophagusRender extends TileEntitySpecialRenderer {
 
     }
 
+    @Override
     public void renderTileEntityAt(TileEntity chest, double x, double y, double z, float i1) {
         this.renderTileEntityAt((TileEntitySarcophagus) chest, x, y, z, i1);
     }

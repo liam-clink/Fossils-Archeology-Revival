@@ -12,6 +12,7 @@ public class BlockFossilStairs extends BlockStairs {
 
     }
 
+    @Override
     public boolean isOpaqueCube() {
         return false;
     }

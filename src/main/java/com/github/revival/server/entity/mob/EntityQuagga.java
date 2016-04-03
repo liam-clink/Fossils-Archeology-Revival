@@ -11,8 +11,20 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.IEntityLivingData;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.ai.EntityAIAvoidEntity;
+import net.minecraft.entity.ai.EntityAIFollowParent;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAIMate;
+import net.minecraft.entity.ai.EntityAIPanic;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.ai.attributes.IAttribute;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.ai.attributes.RangedAttribute;
@@ -93,6 +105,7 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic {
         return item == Items.iron_horse_armor || item == Items.golden_horse_armor || item == Items.diamond_horse_armor;
     }
 
+    @Override
     protected void entityInit() {
         super.entityInit();
         this.dataWatcher.addObject(16, Integer.valueOf(0));
@@ -190,6 +203,7 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic {
     /**
      * "Sets the scale for an ageable entity according to the boolean parameter, which says if it's a child."
      */
+    @Override
     public void setScaleForAge(boolean par1) {
         if (par1) {
             this.setScale(this.getHorseSize());
@@ -210,10 +224,12 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic {
         this.setHorseWatchableBoolean(2, par1);
     }
 
+    @Override
     public boolean allowLeashing() {
         return super.allowLeashing();
     }
 
+    @Override
     protected void func_142017_o(float par1) {
         if (par1 > 6.0F && this.isEatingHaystack()) {
             this.setEatingHaystack(false);
@@ -297,14 +313,16 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic {
     /**
      * Called when the entity is attacked.
      */
+    @Override
     public boolean attackEntityFrom(DamageSource par1DamageSource, float par2) {
         Entity entity = par1DamageSource.getEntity();
-        return this.riddenByEntity != null && this.riddenByEntity.equals(entity) ? false : super.attackEntityFrom(par1DamageSource, par2);
+        return !(this.riddenByEntity != null && this.riddenByEntity.equals(entity)) && super.attackEntityFrom(par1DamageSource, par2);
     }
 
     /**
      * Returns the current armor value as determined by a call to InventoryPlayer.getTotalArmorValue
      */
+    @Override
     public int getTotalArmorValue() {
         return armorValues[this.horseArmor()];
     }
@@ -312,6 +330,7 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic {
     /**
      * Returns true if this entity should push and be pushed by other entities when colliding.
      */
+    @Override
     public boolean canBePushed() {
         return this.riddenByEntity == null;
     }
@@ -338,6 +357,7 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic {
     /**
      * Called when the mob is falling. Calculates and applies fall damage.
      */
+    @Override
     protected void fall(float par1) {
         if (par1 > 1.0F) {
             this.playSound("mob.horse.land", 0.4F, 1.0F);
@@ -402,6 +422,7 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic {
     /**
      * Called by InventoryBasic.onInventoryChanged() on a array that is never filled.
      */
+    @Override
     public void onInventoryChanged(InventoryBasic par1InventoryBasic) {
         int i = this.horseArmor();
         boolean flag = this.isHorseSaddled();
@@ -421,6 +442,7 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic {
     /**
      * Checks if the entity's current position is a valid location to spawn this entity.
      */
+    @Override
     public boolean getCanSpawnHere() {
         this.prepareChunkForSpawn();
         return super.getCanSpawnHere();
@@ -433,6 +455,7 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic {
     /**
      * Returns the sound this mob makes on death.
      */
+    @Override
     protected String getDeathSound() {
         this.openHorseMouth();
         return "mob.horse.death";
@@ -441,6 +464,7 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic {
     /**
      * Returns the item ID for the item the mob drops on death.
      */
+    @Override
     protected Item getDropItem() {
         return Items.leather;
     }
@@ -448,6 +472,7 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic {
     /**
      * Returns the sound this mob makes when it is hurt.
      */
+    @Override
     protected String getHurtSound() {
         this.openHorseMouth();
 
@@ -468,6 +493,7 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic {
     /**
      * Returns the sound this mob makes while it's alive.
      */
+    @Override
     protected String getLivingSound() {
         this.openHorseMouth();
 
@@ -488,6 +514,7 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic {
      * Plays step sound at given x, y, z for the entity
      */
     //playStepSound
+    @Override
     protected void func_145780_a(int x, int y, int z, Block block) {
         Block.SoundType soundtype = block.stepSound;
 
@@ -516,6 +543,7 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic {
         }
     }
 
+    @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.getAttributeMap().registerAttribute(horseJumpStrength);
@@ -526,6 +554,7 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic {
     /**
      * Will return how many at most can spawn in a chunk at once.
      */
+    @Override
     public int getMaxSpawnedInChunk() {
         return 6;
     }
@@ -537,6 +566,7 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic {
     /**
      * Returns the volume for the sounds this mob makes.
      */
+    @Override
     protected float getSoundVolume() {
         return 0.8F;
     }
@@ -544,6 +574,7 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic {
     /**
      * Get number of ticks, at least during which the living entity will be silent.
      */
+    @Override
     public int getTalkInterval() {
         return 400;
     }
@@ -569,6 +600,7 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic {
     /**
      * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
      */
+    @Override
     public boolean interact(EntityPlayer player) {
         ItemStack itemstack = player.inventory.getCurrentItem();
 
@@ -728,14 +760,16 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic {
     /**
      * Dead and sleeping entities cannot move
      */
+    @Override
     protected boolean isMovementBlocked() {
-        return this.riddenByEntity != null && this.isHorseSaddled() ? true : this.isEatingHaystack() || this.isRearing();
+        return this.riddenByEntity != null && this.isHorseSaddled() || this.isEatingHaystack() || this.isRearing();
     }
 
     /**
      * Checks if the parameter is an item which this animal can be fed to breed it (wheat, carrots or seeds depending on
      * the animal type)
      */
+    @Override
     public boolean isBreedingItem(ItemStack par1ItemStack) {
         return false;
     }
@@ -747,6 +781,7 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic {
     /**
      * Called when the mob's health reaches 0.
      */
+    @Override
     public void onDeath(DamageSource par1DamageSource) {
         super.onDeath(par1DamageSource);
 
@@ -759,6 +794,7 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic {
      * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
      * use this to react to sunlight and start to burn.
      */
+    @Override
     public void onLivingUpdate() {
         if (this.rand.nextInt(200) == 0) {
             this.func_110210_cH();
@@ -785,6 +821,7 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic {
     /**
      * Called to update the entity's position/logic.
      */
+    @Override
     public void onUpdate() {
         super.onUpdate();
 
@@ -873,6 +910,7 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic {
         }
     }
 
+    @Override
     public void setEating(boolean par1) {
         this.setHorseWatchableBoolean(32, par1);
     }
@@ -919,6 +957,7 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic {
     /**
      * Moves the entity based on the specified heading.  Args: strafe, forward
      */
+    @Override
     public void moveEntityWithHeading(float par1, float par2) {
         if (this.riddenByEntity != null && this.isHorseSaddled()) {
             this.prevRotationYaw = this.rotationYaw = this.riddenByEntity.rotationYaw;
@@ -993,6 +1032,7 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic {
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
+    @Override
     public void writeEntityToNBT(NBTTagCompound compound) {
         super.writeEntityToNBT(compound);
         compound.setBoolean("EatingHaystack", this.isEatingHaystack());
@@ -1032,6 +1072,7 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic {
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
+    @Override
     public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {
         super.readEntityFromNBT(par1NBTTagCompound);
         this.setEatingHaystack(par1NBTTagCompound.getBoolean("EatingHaystack"));
@@ -1091,10 +1132,12 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic {
     /**
      * Returns true if the mob is currently able to mate with the specified mob.
      */
+    @Override
     public boolean canMateWith(EntityAnimal par1EntityAnimal) {
-        return par1EntityAnimal == this || par1EntityAnimal.getClass() != this.getClass() ? false : true;
+        return !(par1EntityAnimal == this || par1EntityAnimal.getClass() != this.getClass());
     }
 
+    @Override
     public EntityAgeable createChild(EntityAgeable par1EntityAgeable) {
         EntityQuagga entityQuagga = (EntityQuagga) par1EntityAgeable;
         EntityQuagga babyQuagga = new EntityQuagga(this.worldObj);
@@ -1108,6 +1151,7 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic {
         return babyQuagga;
     }
 
+    @Override
     public IEntityLivingData onSpawnWithEgg(IEntityLivingData par1EntityLivingData) {
         Object par1EntityLivingData1 = super.onSpawnWithEgg(par1EntityLivingData);
         boolean flag = false;
@@ -1141,6 +1185,7 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic {
     /**
      * Returns true if the newer Entity AI code should be run
      */
+    @Override
     protected boolean isAIEnabled() {
         return true;
     }
@@ -1178,6 +1223,7 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic {
         }
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public void handleHealthUpdate(byte par1) {
         if (par1 == 7) {
@@ -1189,6 +1235,7 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic {
         }
     }
 
+    @Override
     public void updateRiderPosition() {
         super.updateRiderPosition();
 
@@ -1220,6 +1267,7 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic {
     /**
      * returns true if this entity is by a ladder, false otherwise
      */
+    @Override
     public boolean isOnLadder() {
         return false;
     }
@@ -1228,6 +1276,7 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic {
      * Drop 0-2 items of this living's type. @param par1 - Whether this entity has recently been hit by a player. @param
      * par2 - Level of Looting used to kill this mob.
      */
+    @Override
     protected void dropFewItems(boolean hasBeenHit, int looting) {
         int j = this.rand.nextInt(3) + this.rand.nextInt(1 + looting);
         int k;
@@ -1246,7 +1295,7 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic {
 
 
         p0.reset();
-      //  p0.printHappyBar(new ResourceLocation(Revival.MODID + ":" + "textures/items/" + "Quagga" + "_DNA.png"), ((p0.xGui / 2) + (p0.xGui / 4)), 7, 16, 16); //185
+        //  p0.printHappyBar(new ResourceLocation(Revival.MODID + ":" + "textures/items/" + "Quagga" + "_DNA.png"), ((p0.xGui / 2) + (p0.xGui / 4)), 7, 16, 16); //185
 
         
         /* LEFT PAGE
@@ -1272,14 +1321,14 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic {
          * 
          */
         if (this.hasCustomNameTag()) {
-            p0.printStringXY(this.getCustomNameTag(), p0.rightIndent, 24, 40, 90, 245);
+            p0.printStringXY(this.getCustomNameTag(), GuiPedia.rightIndent, 24, 40, 90, 245);
         }
 
-        p0.printStringXY(StatCollector.translateToLocal(LocalizationStrings.ANIMAL_QUAGGA), p0.rightIndent, 34, 0, 0, 0);
-      //  p0.printHappyBar(pediaheart, p0.rightIndent, 58, 9, 9);
+        p0.printStringXY(StatCollector.translateToLocal(LocalizationStrings.ANIMAL_QUAGGA), GuiPedia.rightIndent, 34, 0, 0, 0);
+        //  p0.printHappyBar(pediaheart, p0.rightIndent, 58, 9, 9);
 
         //Display Health
-        p0.printStringXY(String.valueOf(this.getHealth()) + '/' + this.getMaxHealth(), p0.rightIndent + 12, 58);
+        p0.printStringXY(String.valueOf(this.getHealth()) + '/' + this.getMaxHealth(), GuiPedia.rightIndent + 12, 58);
 
         //Display owner name
         if (this.isTame()) {

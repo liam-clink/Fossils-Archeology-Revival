@@ -43,6 +43,7 @@ public class TileEntityFeeder extends TileEntity implements IInventory,
     /**
      * Returns the number of slots in the inventory.
      */
+    @Override
     public int getSizeInventory() {
         return this.feederItemStacks.length;
     }
@@ -50,6 +51,7 @@ public class TileEntityFeeder extends TileEntity implements IInventory,
     /**
      * Returns the stack in slot i
      */
+    @Override
     public ItemStack getStackInSlot(int var1) {
         return this.feederItemStacks[var1];
     }
@@ -58,6 +60,7 @@ public class TileEntityFeeder extends TileEntity implements IInventory,
      * Removes from an inventory slot (first arg) up to a specified number
      * (second arg) of items and returns them in a new stack.
      */
+    @Override
     public ItemStack decrStackSize(int var1, int var2) {
         if (this.feederItemStacks[var1] != null) {
             ItemStack var3;
@@ -84,6 +87,7 @@ public class TileEntityFeeder extends TileEntity implements IInventory,
      * Sets the given item stack to the specified slot in the inventory (can be
      * crafting or armor sections).
      */
+    @Override
     public void setInventorySlotContents(int var1, ItemStack var2) {
         this.feederItemStacks[var1] = var2;
 
@@ -95,6 +99,7 @@ public class TileEntityFeeder extends TileEntity implements IInventory,
     /**
      * Reads a tile entity from NBT.
      */
+    @Override
     public void readFromNBT(NBTTagCompound var1) {
         super.readFromNBT(var1);
         NBTTagList var2 = var1.getTagList("Items", 10);
@@ -121,6 +126,7 @@ public class TileEntityFeeder extends TileEntity implements IInventory,
     /**
      * Writes a tile entity to NBT.
      */
+    @Override
     public void writeToNBT(NBTTagCompound var1) {
         super.writeToNBT(var1);
         NBTTagList var2 = new NBTTagList();
@@ -147,6 +153,7 @@ public class TileEntityFeeder extends TileEntity implements IInventory,
      * Returns the maximum stack size for a inventory slot. Seems to always be
      * 64, possibly will be extended. *Isn't this more of a set than a get?*
      */
+    @Override
     public int getInventoryStackLimit() {
         return 64;
     }
@@ -169,6 +176,7 @@ public class TileEntityFeeder extends TileEntity implements IInventory,
      * e.g. the mob spawner uses this to count ticks and creates a new spawn
      * inside its implementation.
      */
+    @Override
     public void updateEntity() {
         boolean var1 = false;
         int var2 = ((this.MeatCurrent > 0) ? 2 : 0)
@@ -267,9 +275,10 @@ public class TileEntityFeeder extends TileEntity implements IInventory,
      * Do not make give this method the name canInteractWith because it clashes
      * with Container
      */
+    @Override
     public boolean isUseableByPlayer(EntityPlayer var1) {
         return this.worldObj.getTileEntity(this.xCoord, this.yCoord,
-                this.zCoord) != this ? false : var1.getDistanceSq(
+                this.zCoord) == this && var1.getDistanceSq(
                 (double) this.xCoord + 0.5D, (double) this.yCoord + 0.5D,
                 (double) this.zCoord + 0.5D) <= 64.0D;
     }
@@ -286,15 +295,9 @@ public class TileEntityFeeder extends TileEntity implements IInventory,
      * feeder
      */
     public boolean CheckIsEmpty(EnumPrehistoric selfType) {
-        if (((!selfType.isHerbivore() || this.VegCurrent == 0) && (!selfType
-                .isCarnivore() || this.MeatCurrent == 0))) // ||
-        // this.ContainType[dinotype.ordinal()])
-        {
-            return true; // the dino wont eat from the feeder if it can smell
-            // its own flesh (filled with raw flesh)
-        }
+        return ((!selfType.isHerbivore() || this.VegCurrent == 0) && (!selfType
+                .isCarnivore() || this.MeatCurrent == 0));
 
-        return false;
     }
 
     public int Feed(EntityDinosaur dinosaur, EnumPrehistoric dinotype) {
@@ -360,6 +363,7 @@ public class TileEntityFeeder extends TileEntity implements IInventory,
      * whatever it returns as an EntityItem - like when you close a workbench
      * GUI.
      */
+    @Override
     public ItemStack getStackInSlotOnClosing(int var1) {
         return null;
     }
@@ -386,6 +390,7 @@ public class TileEntityFeeder extends TileEntity implements IInventory,
      * Returns true if automation is allowed to insert the given stack (ignoring
      * stack size) into the given slot.
      */
+    @Override
     public boolean isItemValidForSlot(int par1, ItemStack itemstack) {
         // return par1 == 2 ? false : (par1 == 1 ?
         // (EnumDinoFoodItem.foodtype(itemstack.itemID) ==
@@ -397,12 +402,9 @@ public class TileEntityFeeder extends TileEntity implements IInventory,
             return true;
         }
 
-        if (par1 == 0
-                && EnumDinoFoodItem.foodtype(itemstack.getItem()) == EnumDinoFoodItem.ISCARNIVOROUS) {
-            return true;
-        }
+        return par1 == 0
+                && EnumDinoFoodItem.foodtype(itemstack.getItem()) == EnumDinoFoodItem.ISCARNIVOROUS;
 
-        return false;
     }
 
     // (EnumDinoFoodItem.foodtype(this.feederItemStacks[1].itemID) ==
@@ -413,6 +415,7 @@ public class TileEntityFeeder extends TileEntity implements IInventory,
      * Returns an array containing the indices of the slots that can be accessed
      * by automation on the given side of this block.
      */
+    @Override
     public int[] getAccessibleSlotsFromSide(int par1) {
         if (par1 == 3) {
             return slots_carn;
@@ -428,6 +431,7 @@ public class TileEntityFeeder extends TileEntity implements IInventory,
      * Returns true if automation can insert the given item in the given slot
      * from the given side. Args: Slot, item, side
      */
+    @Override
     public boolean canInsertItem(int par1, ItemStack par2ItemStack, int par3) {
         return this.isItemValidForSlot(par1, par2ItemStack);
     }
@@ -436,6 +440,7 @@ public class TileEntityFeeder extends TileEntity implements IInventory,
      * Returns true if automation can extract the given item in the given slot
      * from the given side. Args: Slot, item, side
      */
+    @Override
     public boolean canExtractItem(int par1, ItemStack par2ItemStack, int par3) {
         return false;
     }

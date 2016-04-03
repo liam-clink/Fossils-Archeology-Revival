@@ -39,6 +39,7 @@ public class FeederContainer extends Container {
         }
     }
 
+    @Override
     public void addCraftingToCrafters(ICrafting var1) {
         super.addCraftingToCrafters(var1);
         var1.sendProgressBarUpdate(this, 0, this.feeder.currentPlant);
@@ -48,6 +49,7 @@ public class FeederContainer extends Container {
     /**
      * Updates crafting matrix; called from onCraftMatrixChanged. Args: none
      */
+    @Override
     public void detectAndSendChanges() {
         super.detectAndSendChanges();
         Iterator var1 = this.crafters.iterator();
@@ -70,6 +72,7 @@ public class FeederContainer extends Container {
         this.lastMeatValue = this.feeder.currentMeat;
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public void updateProgressBar(int var1, int var2) {
         if (var1 == 0) {
@@ -81,6 +84,7 @@ public class FeederContainer extends Container {
         }
     }
 
+    @Override
     public boolean canInteractWith(EntityPlayer var1) {
         return this.feeder.isUseableByPlayer(var1);
     }
@@ -89,6 +93,7 @@ public class FeederContainer extends Container {
      * Called when a player shift-clicks on a slot. You must override this or
      * you will crash when someone does that.
      */
+    @Override
     public ItemStack transferStackInSlot(EntityPlayer player, int getSlot) {
         ItemStack itemstack = null;
         Slot slot = (Slot) this.inventorySlots.get(getSlot);

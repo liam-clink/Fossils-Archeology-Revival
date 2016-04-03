@@ -31,6 +31,7 @@ public class TerrorBirdEggItem extends Item {
         this.isCultivated = isCultivated;
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister iconregister) {
         icons = new IIcon[names.length];
@@ -49,6 +50,7 @@ public class TerrorBirdEggItem extends Item {
 
     }
 
+    @Override
     public IIcon getIconFromDamage(int par1) {
         return icons[par1];
     }
@@ -61,6 +63,7 @@ public class TerrorBirdEggItem extends Item {
         }
     }
 
+    @Override
     public String getUnlocalizedName(ItemStack itemstack) {
         int i = MathHelper.clamp_int(itemstack.getItemDamage(), 0, 15);
         return super.getUnlocalizedName() + "." + names[i];
@@ -69,6 +72,7 @@ public class TerrorBirdEggItem extends Item {
     /**
      * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
      */
+    @Override
     public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer player) {
         if (!player.capabilities.isCreativeMode) {
             --itemstack.stackSize;

@@ -10,6 +10,7 @@ public class AnubiteStatueBlockItem extends ItemBlock {
         super(b);
     }
 
+    @Override
     public EnumRarity getRarity(ItemStack item) {
         return EnumRarity.rare;
     }

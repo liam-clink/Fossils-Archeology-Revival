@@ -43,6 +43,7 @@ public class DinoAIWaterWander extends EntityAIBase {
     /**
      * Returns whether the EntityAIBase should begin execution.
      */
+    @Override
     public boolean shouldExecute() {
         if (entity.aiMovingType() != Moving.AQUATIC && entity.aiMovingType() != Moving.SEMIAQUATIC) {
             return false;
@@ -53,6 +54,7 @@ public class DinoAIWaterWander extends EntityAIBase {
     /**
      * Returns whether an in-progress EntityAIBase should continue executing
      */
+    @Override
     public boolean continueExecuting() {
         return !this.entity.isDead;
     }

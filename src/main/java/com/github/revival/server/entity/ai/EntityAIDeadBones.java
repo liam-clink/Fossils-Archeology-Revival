@@ -13,6 +13,7 @@ public class EntityAIDeadBones extends EntityAIBase {
     /**
      * Returns whether the EntityAIBase should begin execution.
      */
+    @Override
     public boolean shouldExecute() {
         return true;
     }
@@ -20,6 +21,7 @@ public class EntityAIDeadBones extends EntityAIBase {
     /**
      * Updates the task
      */
+    @Override
     public void updateTask() {
         float var1 = this.asker.rotationYaw;
         this.asker.rotationPitch = 45.0F;

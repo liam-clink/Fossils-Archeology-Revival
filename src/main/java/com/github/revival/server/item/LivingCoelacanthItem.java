@@ -12,8 +12,12 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.*;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.IIcon;
+import net.minecraft.util.MathHelper;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
 import java.util.Iterator;
@@ -52,6 +56,7 @@ public class LivingCoelacanthItem extends Item {
         return var8 != null;
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister par1IconRegister) {
         icons = new IIcon[3];
@@ -75,6 +80,7 @@ public class LivingCoelacanthItem extends Item {
         //this.itemIcon = par1IconRegister.registerIcon("fossil:" + "Coelacanth_live_Ocean");
     }
 
+    @Override
     public IIcon getIconFromDamage(int par1) {
         return icons[par1];
     }
@@ -87,6 +93,7 @@ public class LivingCoelacanthItem extends Item {
         }
     }
 
+    @Override
     public String getUnlocalizedName(ItemStack par1ItemStack) {
         int i = MathHelper.clamp_int(par1ItemStack.getItemDamage(), 0, 15);
         return super.getUnlocalizedName() + "." + names[i];
@@ -95,6 +102,7 @@ public class LivingCoelacanthItem extends Item {
     /**
      * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
      */
+    @Override
     public ItemStack onItemRightClick(ItemStack var1, World var2, EntityPlayer var3) {
         float var4 = 1.0F;
         float var5 = var3.prevRotationPitch + (var3.rotationPitch - var3.prevRotationPitch) * var4;

@@ -10,6 +10,7 @@ import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityAnuTotem extends TileEntity {
 
+    @Override
     public void updateEntity() {
         for (int var7 = 0; var7 < worldObj.playerEntities.size(); ++var7) {
             EntityPlayer P = (EntityPlayer) worldObj.playerEntities.get(var7);
