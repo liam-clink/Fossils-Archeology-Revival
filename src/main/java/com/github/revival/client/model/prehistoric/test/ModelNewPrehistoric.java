@@ -17,7 +17,6 @@ public abstract class ModelNewPrehistoric extends AdvancedModelBase {
 			f1 = 0;
 			f3 = 0;
 			f4 = 0;
-			
 		}
 	}
 	public void setRotateAngle(AdvancedModelRenderer modelRenderer, float x, float y, float z) {
