@@ -180,14 +180,14 @@ public class ModelAllosaurus extends ModelNewPrehistoric {
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
         animator.setAnimation(EntityAllosaurus.animation_attack);
         animator.startKeyframe(10);
-		ModelUtils.rotate(animator, neck, -31, 0, 0);
-		ModelUtils.rotate(animator, head, -40, 0, 0);
-		ModelUtils.rotate(animator, lowerJaw, 60, 0, 0);
+        ModelUtils.rotate(animator, neck, -31, 0, 0);
+        ModelUtils.rotate(animator, head, -40, 0, 0);
+        ModelUtils.rotate(animator, lowerJaw, 60, 0, 0);
         animator.endKeyframe();
         animator.startKeyframe(5);
-		ModelUtils.rotate(animator, neck, 6, 0, 0);
-		ModelUtils.rotate(animator, head, -14, 0, 0);
-		ModelUtils.rotate(animator, lowerJaw, 50, 0, 0);
+        ModelUtils.rotate(animator, neck, 6, 0, 0);
+        ModelUtils.rotate(animator, head, -14, 0, 0);
+        ModelUtils.rotate(animator, lowerJaw, 50, 0, 0);
         animator.endKeyframe();
         animator.resetKeyframe(10);
     }
@@ -242,7 +242,7 @@ public class ModelAllosaurus extends ModelNewPrehistoric {
         this.chainSwing(tailParts, speed, 0.15F, -3, entity.ticksExisted, 1);
         this.chainSwing(tailParts, speed2, 0.25F, -3, f, f1);
         this.chainWave(neckParts, speed, 0.15F, 3, entity.ticksExisted, 1);
-        ((EntityNewPrehistoric)entity).tailbuffer.applyChainSwingBuffer(tailParts);
+        ((EntityNewPrehistoric) entity).tailbuffer.applyChainSwingBuffer(tailParts);
 
     }
 }

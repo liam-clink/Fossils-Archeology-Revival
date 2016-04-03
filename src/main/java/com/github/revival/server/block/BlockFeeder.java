@@ -4,7 +4,6 @@ import com.github.revival.Revival;
 import com.github.revival.server.block.entity.TileEntityNewFeeder;
 import com.github.revival.server.creativetab.FATabRegistry;
 import com.github.revival.server.handler.LocalizationStrings;
-
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -46,8 +45,8 @@ public class BlockFeeder extends BlockContainer {
 
     public BlockFeeder(boolean isActive) {
         super(Material.iron);
-        if(isActive){
-        	GameRegistry.registerTileEntity(TileEntityNewFeeder.class, "NewFeeder");
+        if (isActive) {
+            GameRegistry.registerTileEntity(TileEntityNewFeeder.class, "NewFeeder");
         }
         setHardness(3.5F);
         setStepSound(Block.soundTypeMetal);
@@ -55,7 +54,7 @@ public class BlockFeeder extends BlockContainer {
         if (!isActive) {
             setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
             setBlockName(LocalizationStrings.FEEDER_ACTIVE_NAME);
-        }else{
+        } else {
             setBlockName(LocalizationStrings.FEEDER_IDLE_NAME);
 
         }

@@ -1,13 +1,12 @@
 package com.github.revival.client.model.prehistoric;
 
+import com.github.revival.client.model.prehistoric.test.ModelNewPrehistoric;
+import com.github.revival.server.entity.mob.EntityAnkylosaurus;
+import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 import net.ilexiconn.llibrary.client.model.ModelAnimator;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
 import net.minecraft.entity.Entity;
-
-import com.github.revival.client.model.prehistoric.test.ModelNewPrehistoric;
-import com.github.revival.server.entity.mob.EntityAnkylosaurus;
-import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 
 public class ModelStegosaurus extends ModelNewPrehistoric {
     public AdvancedModelRenderer lowerBody;
@@ -184,20 +183,20 @@ public class ModelStegosaurus extends ModelNewPrehistoric {
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
         animator.setAnimation(EntityAnkylosaurus.animation_attack);
         animator.startKeyframe(5);
-		ModelUtils.rotate(animator, lowerBody, 0, 15, 0);
-		ModelUtils.rotate(animator, tail1, 0, 10, 0);
-		ModelUtils.rotate(animator, tail2, 0, 18, 0);
-		ModelUtils.rotate(animator, tail3, 0, 20, 0);
-		animator.endKeyframe();
-		animator.setStaticKeyframe(5);
-		animator.startKeyframe(10);
-		ModelUtils.rotate(animator, lowerBody, 0, -127, 0);
-		ModelUtils.rotate(animator, tail1, 0, -15, 0);
-		ModelUtils.rotate(animator, tail2, 0, -25, 0);
-		ModelUtils.rotate(animator, tail3, 0, -20, 0);
-		animator.endKeyframe();
-		animator.setStaticKeyframe(5);
-		animator.resetKeyframe(5);
+        ModelUtils.rotate(animator, lowerBody, 0, 15, 0);
+        ModelUtils.rotate(animator, tail1, 0, 10, 0);
+        ModelUtils.rotate(animator, tail2, 0, 18, 0);
+        ModelUtils.rotate(animator, tail3, 0, 20, 0);
+        animator.endKeyframe();
+        animator.setStaticKeyframe(5);
+        animator.startKeyframe(10);
+        ModelUtils.rotate(animator, lowerBody, 0, -127, 0);
+        ModelUtils.rotate(animator, tail1, 0, -15, 0);
+        ModelUtils.rotate(animator, tail2, 0, -25, 0);
+        ModelUtils.rotate(animator, tail3, 0, -20, 0);
+        animator.endKeyframe();
+        animator.setStaticKeyframe(5);
+        animator.resetKeyframe(5);
     }
 
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
@@ -227,7 +226,7 @@ public class ModelStegosaurus extends ModelNewPrehistoric {
         this.walk(rightFrontLeg, speed2, 0.5F, false, 0F, 0F, f, f1);
         this.walk(leftHindLeg, speed2, 0.5F, false, 0F, 0F, f, f1);
         this.walk(rightHindLeg, speed2, 0.5F, true, 0F, 0F, f, f1);
-        ((EntityNewPrehistoric)entity).tailbuffer.applyChainSwingBuffer(tailParts);
+        ((EntityNewPrehistoric) entity).tailbuffer.applyChainSwingBuffer(tailParts);
     }
 
 }

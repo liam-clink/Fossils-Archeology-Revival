@@ -2,8 +2,17 @@ package com.github.revival.server.entity.mob;
 
 import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 import com.github.revival.server.enums.EnumPrehistoric;
-import com.github.revival.server.enums.EnumPrehistoricAI.*;
-
+import com.github.revival.server.enums.EnumPrehistoricAI.Activity;
+import com.github.revival.server.enums.EnumPrehistoricAI.Attacking;
+import com.github.revival.server.enums.EnumPrehistoricAI.Climbing;
+import com.github.revival.server.enums.EnumPrehistoricAI.Following;
+import com.github.revival.server.enums.EnumPrehistoricAI.Jumping;
+import com.github.revival.server.enums.EnumPrehistoricAI.Moving;
+import com.github.revival.server.enums.EnumPrehistoricAI.Response;
+import com.github.revival.server.enums.EnumPrehistoricAI.Stalking;
+import com.github.revival.server.enums.EnumPrehistoricAI.Taming;
+import com.github.revival.server.enums.EnumPrehistoricAI.Untaming;
+import com.github.revival.server.enums.EnumPrehistoricAI.WaterAbility;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
@@ -32,7 +41,7 @@ public class EntityBrachiosaurus extends EntityNewPrehistoric {
         breaksBlocks = true;
         favoriteFood = Items.wheat;
     }
-    
+
     @Override
     public int getAttackLength() {
         return 40;
@@ -158,44 +167,44 @@ public class EntityBrachiosaurus extends EntityNewPrehistoric {
     public int getAdultAge() {
         return 20;
     }
-    
-	public int getTailSegments() {
-		return 3;
-	}
-	
-    public void onLivingUpdate(){
-    	super.onLivingUpdate();
-    	if(this.getAnimation() == this.animation_attack && this.getAnimationTick() == 25 && this.getAttackTarget() != null){
-    		this.attackEntityAsMob(this.getAttackTarget());
-    	}
+
+    public int getTailSegments() {
+        return 3;
     }
-    
-	public boolean attackEntityAsMob(Entity entity)
-	{
-		if(this.getAnimation() == NO_ANIMATION){
-			this.setAnimation(animation_attack);
-			return false;
-		}
 
-		if(this.getAnimation() == animation_attack && this.getAnimationTick() == 25){
-			IAttributeInstance iattributeinstance = this.getEntityAttribute(SharedMonsterAttributes.attackDamage);
-			boolean flag = entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float)iattributeinstance.getAttributeValue());
+    public void onLivingUpdate() {
+        super.onLivingUpdate();
+        if (this.getAnimation() == this.animation_attack && this.getAnimationTick() == 25 && this.getAttackTarget() != null) {
+            this.attackEntityAsMob(this.getAttackTarget());
+        }
+    }
 
-			if (flag)
-			{
-				if(entity.ridingEntity != null){
-					if(entity.ridingEntity  == this){
-						entity.mountEntity(null);
-					}
-				}
-				entity.motionY -= 0.4000000059604645D;
-                knockbackEntity(entity, -2F, -0.1F);
-				
-			}
+    public boolean attackEntityAsMob(Entity entity) {
+        if (this.boundingBox.intersectsWith(entity.boundingBox)) {
+            if (this.getAnimation() == NO_ANIMATION) {
+                this.setAnimation(animation_attack);
+                return false;
+            }
 
-			return flag;
-		}
-		return false;
-	}
+            if (this.getAnimation() == animation_attack && this.getAnimationTick() == 25) {
+                IAttributeInstance iattributeinstance = this.getEntityAttribute(SharedMonsterAttributes.attackDamage);
+                boolean flag = entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) iattributeinstance.getAttributeValue());
+
+                if (flag) {
+                    if (entity.ridingEntity != null) {
+                        if (entity.ridingEntity == this) {
+                            entity.mountEntity(null);
+                        }
+                    }
+                    entity.motionY -= 0.4000000059604645D;
+                    knockbackEntity(entity, -2F, -0.1F);
+
+                }
+
+                return flag;
+            }
+        }
+        return false;
+    }
 
 }

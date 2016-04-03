@@ -182,7 +182,7 @@ public class TileEntityDrum extends TileEntity {
         }
 
         return true;
-		/*
+        /*
 		 * if (var1 != Item.stick.itemID && var1 != Items.bone && var1 !=
 		 * Revival.skullStick.itemID && var1 != Item.arrow.itemID) { return
 		 * false; } else { if (var1 == Item.stick.itemID) { this.OrderTri();

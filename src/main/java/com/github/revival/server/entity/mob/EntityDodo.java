@@ -2,7 +2,17 @@ package com.github.revival.server.entity.mob;
 
 import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 import com.github.revival.server.enums.EnumPrehistoric;
-import com.github.revival.server.enums.EnumPrehistoricAI.*;
+import com.github.revival.server.enums.EnumPrehistoricAI.Activity;
+import com.github.revival.server.enums.EnumPrehistoricAI.Attacking;
+import com.github.revival.server.enums.EnumPrehistoricAI.Climbing;
+import com.github.revival.server.enums.EnumPrehistoricAI.Following;
+import com.github.revival.server.enums.EnumPrehistoricAI.Jumping;
+import com.github.revival.server.enums.EnumPrehistoricAI.Moving;
+import com.github.revival.server.enums.EnumPrehistoricAI.Response;
+import com.github.revival.server.enums.EnumPrehistoricAI.Stalking;
+import com.github.revival.server.enums.EnumPrehistoricAI.Taming;
+import com.github.revival.server.enums.EnumPrehistoricAI.Untaming;
+import com.github.revival.server.enums.EnumPrehistoricAI.WaterAbility;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -205,7 +215,8 @@ public class EntityDodo extends EntityNewPrehistoric {
         this.pediaScale = 40F;
 
         super.onLivingUpdate();
-        this.motionX *= 0; this.motionZ *= 0;
+        this.motionX *= 0;
+        this.motionZ *= 0;
         if (this.getFat() > 5) {
             this.motionY += 0.1D;
             if (this.posY > 200) {

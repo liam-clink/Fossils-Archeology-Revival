@@ -1,12 +1,9 @@
 package com.github.revival.client.model.prehistoric;
 
-import java.lang.reflect.Field;
-
+import cpw.mods.fml.relauncher.ReflectionHelper;
 import net.ilexiconn.llibrary.client.model.ModelAnimator;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelRenderer;
-import cpw.mods.fml.relauncher.ReflectionHelper;
 
 public class ModelUtils {
 
@@ -18,9 +15,9 @@ public class ModelUtils {
         animator.rotate(box, getDefaultRotationX(box), getDefaultRotationY(box), getDefaultRotationZ(box));
     }
 
-    public static void faceTargetMod(AdvancedModelRenderer part, float f3, float f4, float multi){
-    	part.rotateAngleY += f3 / (180F / (float)Math.PI) * multi;
-    	part.rotateAngleX += f4 / (180F / (float)Math.PI) * multi;
+    public static void faceTargetMod(AdvancedModelRenderer part, float f3, float f4, float multi) {
+        part.rotateAngleY += f3 / (180F / (float) Math.PI) * multi;
+        part.rotateAngleX += f4 / (180F / (float) Math.PI) * multi;
 
     }
 
@@ -35,36 +32,43 @@ public class ModelUtils {
         AdvancedModelRenderer.rotateAngleY = (float) Math.toRadians(y);
         AdvancedModelRenderer.rotateAngleZ = (float) Math.toRadians(z);
     }
+
     public static float getDefaultRotationX(AdvancedModelRenderer box) {
-            return getField(box, "defaultRotationX");
+        return getField(box, "defaultRotationX");
     }
+
     public static float getDefaultRotationY(AdvancedModelRenderer box) {
-            return getField(box, "defaultRotationY");
+        return getField(box, "defaultRotationY");
 
     }
+
     public static float getDefaultRotationZ(AdvancedModelRenderer box) {
-            return getField(box, "defaultRotationZ");
+        return getField(box, "defaultRotationZ");
 
     }
+
     public static float getDefaultPositionX(AdvancedModelRenderer box) {
-            return getField(box, "defaultPositionX");
+        return getField(box, "defaultPositionX");
 
     }
+
     public static float getDefaultPositionY(AdvancedModelRenderer box) {
-            return getField(box, "defaultPositionY");
+        return getField(box, "defaultPositionY");
     }
+
     public static float getDefaultPositionZ(AdvancedModelRenderer box) {
-            return getField(box, "defaultPositionZ");
+        return getField(box, "defaultPositionZ");
     }
-    private static float getField(AdvancedModelRenderer box, String name){
-		float f = 0;
-		try {
-			f = ReflectionHelper.findField(AdvancedModelRenderer.class, new String[]{name, name}).getFloat(box);
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		}
-		return f;
-	}
+
+    private static float getField(AdvancedModelRenderer box, String name) {
+        float f = 0;
+        try {
+            f = ReflectionHelper.findField(AdvancedModelRenderer.class, new String[]{name, name}).getFloat(box);
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return f;
+    }
 }

@@ -197,14 +197,14 @@ public class ModelTyrannosaurus extends ModelNewPrehistoric {
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
         animator.setAnimation(EntityTyrannosaurus.animation_attack);
         animator.startKeyframe(10);
-		ModelUtils.rotate(animator, neck, -31, 0, 0);
-		ModelUtils.rotate(animator, head, 37, 0, -20);
-		ModelUtils.rotate(animator, lowerJaw, 25, 0, 0);
+        ModelUtils.rotate(animator, neck, -31, 0, 0);
+        ModelUtils.rotate(animator, head, 37, 0, -20);
+        ModelUtils.rotate(animator, lowerJaw, 25, 0, 0);
         animator.endKeyframe();
         animator.startKeyframe(5);
-		ModelUtils.rotate(animator, neck, 6, 0, 0);
-		ModelUtils.rotate(animator, head, -14, 0, 20);
-		ModelUtils.rotate(animator, lowerJaw, 25, 0, 0);
+        ModelUtils.rotate(animator, neck, 6, 0, 0);
+        ModelUtils.rotate(animator, head, -14, 0, 20);
+        ModelUtils.rotate(animator, lowerJaw, 25, 0, 0);
         animator.endKeyframe();
         animator.resetKeyframe(10);
         animator.setAnimation(EntityTyrannosaurus.animation_roar);
@@ -242,7 +242,7 @@ public class ModelTyrannosaurus extends ModelNewPrehistoric {
             ModelUtils.faceTargetMod(head, f3, f4, 0.5F);
 
         }
-        
+
     }
 
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
@@ -296,6 +296,6 @@ public class ModelTyrannosaurus extends ModelNewPrehistoric {
         this.chainWave(rightArmParts, speed2, 0.05F, -3, entity.ticksExisted, 1);
         this.chainSwing(tailParts, speed2, 0.15F, -3, entity.ticksExisted, 1);
         this.chainWave(neckParts, speed2, 0.05F, -3, entity.ticksExisted, 1);
-        ((EntityNewPrehistoric)entity).tailbuffer.applyChainSwingBuffer(tailParts);
+        ((EntityNewPrehistoric) entity).tailbuffer.applyChainSwingBuffer(tailParts);
     }
 }

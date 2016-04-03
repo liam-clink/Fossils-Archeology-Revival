@@ -2,8 +2,17 @@ package com.github.revival.server.entity.mob;
 
 import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 import com.github.revival.server.enums.EnumPrehistoric;
-import com.github.revival.server.enums.EnumPrehistoricAI.*;
-
+import com.github.revival.server.enums.EnumPrehistoricAI.Activity;
+import com.github.revival.server.enums.EnumPrehistoricAI.Attacking;
+import com.github.revival.server.enums.EnumPrehistoricAI.Climbing;
+import com.github.revival.server.enums.EnumPrehistoricAI.Following;
+import com.github.revival.server.enums.EnumPrehistoricAI.Jumping;
+import com.github.revival.server.enums.EnumPrehistoricAI.Moving;
+import com.github.revival.server.enums.EnumPrehistoricAI.Response;
+import com.github.revival.server.enums.EnumPrehistoricAI.Stalking;
+import com.github.revival.server.enums.EnumPrehistoricAI.Taming;
+import com.github.revival.server.enums.EnumPrehistoricAI.Untaming;
+import com.github.revival.server.enums.EnumPrehistoricAI.WaterAbility;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIEatGrass;
@@ -36,7 +45,7 @@ public class EntityMammoth extends EntityNewPrehistoric implements IShearable {
     public EntityMammoth(World world) {
         super(world, EnumPrehistoric.Mammoth);
         this.setSize(0.7F, 0.7F);
-    	this.pediaScale = 1.5F;
+        this.pediaScale = 1.5F;
         this.tasks.addTask(10, aiEatGrass);
         minSize = 1.3F;
         maxSize = 5F;
@@ -47,9 +56,9 @@ public class EntityMammoth extends EntityNewPrehistoric implements IShearable {
     }
 
     public int getAttackLength() {
-		return 35;
-	}
-    
+        return 35;
+    }
+
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
@@ -258,36 +267,36 @@ public class EntityMammoth extends EntityNewPrehistoric implements IShearable {
     public float getMaleSize() {
         return 1.2F;
     }
-    
-	public boolean attackEntityAsMob(Entity entity)
-	{
-		if(this.getAnimation() == NO_ANIMATION){
-			this.setAnimation(animation_attack);
-			return false;
-		}
 
-		if(this.getAnimation() == animation_attack && this.getAnimationTick() == 20){
-			IAttributeInstance iattributeinstance = this.getEntityAttribute(SharedMonsterAttributes.attackDamage);
-			boolean flag = entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float)iattributeinstance.getAttributeValue());
+    public boolean attackEntityAsMob(Entity entity) {
+        if (this.boundingBox.intersectsWith(entity.boundingBox)) {
+            if (this.getAnimation() == NO_ANIMATION) {
+                this.setAnimation(animation_attack);
+                return false;
+            }
 
-			if (flag)
-			{
-				if(entity.ridingEntity != null){
-					if(entity.ridingEntity  == this){
-						entity.mountEntity(null);
-					}
-				}
-				entity.motionY += 0.4000000059604645D;
-				double d0 = this.getAttackTarget().posX - this.posX;
-				double d1 = this.getAttackTarget().posZ - this.posZ;
-				float f = MathHelper.sqrt_double(d0 * d0 + d1 * d1);
-                entity.addVelocity((double)(-MathHelper.sin((this.rotationYaw - 180) * (float)Math.PI / 180.0F) * 2 * 0.5F), 0.1D, (double)(MathHelper.cos((this.rotationYaw - 180) * (float)Math.PI / 180.0F) * 2 * 0.5F));
+            if (this.getAnimation() == animation_attack && this.getAnimationTick() == 20) {
+                IAttributeInstance iattributeinstance = this.getEntityAttribute(SharedMonsterAttributes.attackDamage);
+                boolean flag = entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) iattributeinstance.getAttributeValue());
 
-				
-			}
+                if (flag) {
+                    if (entity.ridingEntity != null) {
+                        if (entity.ridingEntity == this) {
+                            entity.mountEntity(null);
+                        }
+                    }
+                    entity.motionY += 0.4000000059604645D;
+                    double d0 = this.getAttackTarget().posX - this.posX;
+                    double d1 = this.getAttackTarget().posZ - this.posZ;
+                    float f = MathHelper.sqrt_double(d0 * d0 + d1 * d1);
+                    entity.addVelocity((double) (-MathHelper.sin((this.rotationYaw - 180) * (float) Math.PI / 180.0F) * 2 * 0.5F), 0.1D, (double) (MathHelper.cos((this.rotationYaw - 180) * (float) Math.PI / 180.0F) * 2 * 0.5F));
 
-			return flag;
-		}
-		return false;
-	}
+
+                }
+
+                return flag;
+            }
+        }
+        return false;
+    }
 }

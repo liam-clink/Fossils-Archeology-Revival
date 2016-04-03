@@ -3,7 +3,17 @@ package com.github.revival.server.entity.mob;
 import com.github.revival.server.config.FossilConfig;
 import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 import com.github.revival.server.enums.EnumPrehistoric;
-import com.github.revival.server.enums.EnumPrehistoricAI.*;
+import com.github.revival.server.enums.EnumPrehistoricAI.Activity;
+import com.github.revival.server.enums.EnumPrehistoricAI.Attacking;
+import com.github.revival.server.enums.EnumPrehistoricAI.Climbing;
+import com.github.revival.server.enums.EnumPrehistoricAI.Following;
+import com.github.revival.server.enums.EnumPrehistoricAI.Jumping;
+import com.github.revival.server.enums.EnumPrehistoricAI.Moving;
+import com.github.revival.server.enums.EnumPrehistoricAI.Response;
+import com.github.revival.server.enums.EnumPrehistoricAI.Stalking;
+import com.github.revival.server.enums.EnumPrehistoricAI.Taming;
+import com.github.revival.server.enums.EnumPrehistoricAI.Untaming;
+import com.github.revival.server.enums.EnumPrehistoricAI.WaterAbility;
 import com.github.revival.server.handler.FossilAchievementHandler;
 import com.github.revival.server.item.FAItemRegistry;
 import net.ilexiconn.llibrary.server.animation.Animation;
@@ -38,46 +48,45 @@ public class EntityTyrannosaurus extends EntityNewPrehistoric {
         developsResistance = true;
         breaksBlocks = true;
         favoriteFood = Items.beef;
-    	this.nearByMobsAllowed = 2;
+        this.nearByMobsAllowed = 2;
     }
-    
-	public int getAttackLength() {
-		return 30;
-	}
-	
-    public void onLivingUpdate(){
-    	super.onLivingUpdate();
-    	if(this.getAnimation() == this.animation_attack && this.getAnimationTick() == 12 && this.getAttackTarget() != null){
-    		this.attackEntityAsMob(this.getAttackTarget());
-    	}
+
+    public int getAttackLength() {
+        return 30;
     }
-    
-    public boolean attackEntityAsMob(Entity entity)
-	{
-		if(this.getAnimation() == NO_ANIMATION){
-			this.setAnimation(animation_attack);
-			return false;
-		}
-		if(this.getAnimation() == animation_attack && this.getAnimationTick() == 12){
-			IAttributeInstance iattributeinstance = this.getEntityAttribute(SharedMonsterAttributes.attackDamage);
-			boolean flag = entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float)iattributeinstance.getAttributeValue());
 
-			if (flag)
-			{
-				if(entity.ridingEntity != null){
-					if(entity.ridingEntity  == this){
-						entity.mountEntity(null);
-					}
-				}
-				entity.motionY += (0.4000000059604645D / 2);
-                knockbackEntity(entity, 1F, 0.1F);	
-				
-			}
+    public void onLivingUpdate() {
+        super.onLivingUpdate();
+        if (this.getAnimation() == this.animation_attack && this.getAnimationTick() == 12 && this.getAttackTarget() != null) {
+            this.attackEntityAsMob(this.getAttackTarget());
+        }
+    }
 
-			return flag;
-		}
-		return false;
-	}
+    public boolean attackEntityAsMob(Entity entity) {
+        if (this.boundingBox.intersectsWith(entity.boundingBox)) {
+            if (this.getAnimation() == NO_ANIMATION) {
+                this.setAnimation(animation_attack);
+                return false;
+            }
+            if (this.getAnimation() == animation_attack && this.getAnimationTick() == 12) {
+                IAttributeInstance attackDamage = this.getEntityAttribute(SharedMonsterAttributes.attackDamage);
+                boolean hurt = entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) attackDamage.getAttributeValue());
+
+                if (hurt) {
+                    if (entity.ridingEntity != null) {
+                        if (entity.ridingEntity == this) {
+                            entity.mountEntity(null);
+                        }
+                    }
+                    entity.motionY += (0.4000000059604645D / 2);
+                    knockbackEntity(entity, 1F, 0.1F);
+                }
+
+                return hurt;
+            }
+        }
+        return false;
+    }
 
     @Override
     public void setSpawnValues() {
@@ -223,7 +232,7 @@ public class EntityTyrannosaurus extends EntityNewPrehistoric {
         return new Animation[]{this.NO_ANIMATION, this.animation_speak, this.animation_attack, this.animation_roar};
     }
 
-	public int getTailSegments() {
-		return 3;
-	}
+    public int getTailSegments() {
+        return 3;
+    }
 }

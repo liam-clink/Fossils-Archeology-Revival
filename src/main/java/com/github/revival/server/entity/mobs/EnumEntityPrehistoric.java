@@ -1,6 +1,22 @@
 package com.github.revival.server.entity.mobs;
 
-import com.github.revival.server.entity.mob.*;
+import com.github.revival.server.entity.mob.EntityAnkylosaurus;
+import com.github.revival.server.entity.mob.EntityBrachiosaurus;
+import com.github.revival.server.entity.mob.EntityCompsognathus;
+import com.github.revival.server.entity.mob.EntityDeinonychus;
+import com.github.revival.server.entity.mob.EntityDilophosaurus;
+import com.github.revival.server.entity.mob.EntityGallimimus;
+import com.github.revival.server.entity.mob.EntityLiopleurodon;
+import com.github.revival.server.entity.mob.EntityMosasaurus;
+import com.github.revival.server.entity.mob.EntityNautilus;
+import com.github.revival.server.entity.mob.EntityPachycephalosaurus;
+import com.github.revival.server.entity.mob.EntityPlesiosaurus;
+import com.github.revival.server.entity.mob.EntityPterosaur;
+import com.github.revival.server.entity.mob.EntitySpinosaurus;
+import com.github.revival.server.entity.mob.EntityStegosaurus;
+import com.github.revival.server.entity.mob.EntityTriceratops;
+import com.github.revival.server.entity.mob.EntityTyrannosaurus;
+import com.github.revival.server.entity.mob.EntityVelociraptor;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.item.Item;

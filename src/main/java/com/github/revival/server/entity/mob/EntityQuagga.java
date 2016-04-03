@@ -11,8 +11,20 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.IEntityLivingData;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.ai.EntityAIAvoidEntity;
+import net.minecraft.entity.ai.EntityAIFollowParent;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAIMate;
+import net.minecraft.entity.ai.EntityAIPanic;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.ai.attributes.IAttribute;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.ai.attributes.RangedAttribute;
@@ -1246,7 +1258,7 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic {
 
 
         p0.reset();
-      //  p0.printHappyBar(new ResourceLocation(Revival.MODID + ":" + "textures/items/" + "Quagga" + "_DNA.png"), ((p0.xGui / 2) + (p0.xGui / 4)), 7, 16, 16); //185
+        //  p0.printHappyBar(new ResourceLocation(Revival.MODID + ":" + "textures/items/" + "Quagga" + "_DNA.png"), ((p0.xGui / 2) + (p0.xGui / 4)), 7, 16, 16); //185
 
         
         /* LEFT PAGE
@@ -1276,7 +1288,7 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic {
         }
 
         p0.printStringXY(StatCollector.translateToLocal(LocalizationStrings.ANIMAL_QUAGGA), p0.rightIndent, 34, 0, 0, 0);
-      //  p0.printHappyBar(pediaheart, p0.rightIndent, 58, 9, 9);
+        //  p0.printHappyBar(pediaheart, p0.rightIndent, 58, 9, 9);
 
         //Display Health
         p0.printStringXY(String.valueOf(this.getHealth()) + '/' + this.getMaxHealth(), p0.rightIndent + 12, 58);

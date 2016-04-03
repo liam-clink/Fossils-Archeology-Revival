@@ -2,15 +2,23 @@ package com.github.revival.server.entity.mob;
 
 import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 import com.github.revival.server.enums.EnumPrehistoric;
-import com.github.revival.server.enums.EnumPrehistoricAI.*;
-
+import com.github.revival.server.enums.EnumPrehistoricAI.Activity;
+import com.github.revival.server.enums.EnumPrehistoricAI.Attacking;
+import com.github.revival.server.enums.EnumPrehistoricAI.Climbing;
+import com.github.revival.server.enums.EnumPrehistoricAI.Following;
+import com.github.revival.server.enums.EnumPrehistoricAI.Jumping;
+import com.github.revival.server.enums.EnumPrehistoricAI.Moving;
+import com.github.revival.server.enums.EnumPrehistoricAI.Response;
+import com.github.revival.server.enums.EnumPrehistoricAI.Stalking;
+import com.github.revival.server.enums.EnumPrehistoricAI.Taming;
+import com.github.revival.server.enums.EnumPrehistoricAI.Untaming;
+import com.github.revival.server.enums.EnumPrehistoricAI.WaterAbility;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 public class EntityDilophosaurus extends EntityNewPrehistoric {
@@ -35,20 +43,20 @@ public class EntityDilophosaurus extends EntityNewPrehistoric {
         favoriteFood = Items.beef;
     }
 
-	public int getAttackLength() {
-		return 30;
-	}
-	
+    public int getAttackLength() {
+        return 30;
+    }
+
     @Override
     public void setSpawnValues() {
     }
-    
-    public void onLivingUpdate(){
-    	super.onLivingUpdate();
 
-    	if(this.getAnimation() == this.animation_attack && this.getAnimationTick() == 12 && this.getAttackTarget() != null){
-    		this.attackEntityAsMob(this.getAttackTarget());
-    	}
+    public void onLivingUpdate() {
+        super.onLivingUpdate();
+
+        if (this.getAnimation() == this.animation_attack && this.getAnimationTick() == 12 && this.getAttackTarget() != null) {
+            this.attackEntityAsMob(this.getAttackTarget());
+        }
     }
 
     @Override
@@ -155,32 +163,32 @@ public class EntityDilophosaurus extends EntityNewPrehistoric {
     public int getAdultAge() {
         return 8;
     }
-    
-	public boolean attackEntityAsMob(Entity entity)
-	{
-		if(this.getAnimation() == NO_ANIMATION){
-			this.setAnimation(animation_attack);
-			return false;
-		}
-		if(this.getAnimation() == animation_attack && this.getAnimationTick() == 12){
-			IAttributeInstance iattributeinstance = this.getEntityAttribute(SharedMonsterAttributes.attackDamage);
-			boolean flag = entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float)iattributeinstance.getAttributeValue());
 
-			if (flag)
-			{
-				if(entity.ridingEntity != null){
-					if(entity.ridingEntity  == this){
-						entity.mountEntity(null);
-					}
-				}
-				entity.motionY += (0.4000000059604645D / 2);
-                knockbackEntity(entity, 1F, 0.1F);	
-				
-			}
+    public boolean attackEntityAsMob(Entity entity) {
+        if (this.boundingBox.intersectsWith(entity.boundingBox)) {
+            if (this.getAnimation() == NO_ANIMATION) {
+                this.setAnimation(animation_attack);
+                return false;
+            }
+            if (this.getAnimation() == animation_attack && this.getAnimationTick() == 12) {
+                IAttributeInstance iattributeinstance = this.getEntityAttribute(SharedMonsterAttributes.attackDamage);
+                boolean flag = entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) iattributeinstance.getAttributeValue());
 
-			return flag;
-		}
-		return false;
-	}
+                if (flag) {
+                    if (entity.ridingEntity != null) {
+                        if (entity.ridingEntity == this) {
+                            entity.mountEntity(null);
+                        }
+                    }
+                    entity.motionY += (0.4000000059604645D / 2);
+                    knockbackEntity(entity, 1F, 0.1F);
+
+                }
+
+                return flag;
+            }
+        }
+        return false;
+    }
 
 }

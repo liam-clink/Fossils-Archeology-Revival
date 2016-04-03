@@ -13,23 +13,17 @@ public class EventFossilAchivements {
         EntityPlayer player = event.player;
         if (event.crafting.getItem() == Item.getItemFromBlock(FABlockRegistry.INSTANCE.blockanalyzerIdle)) {
             player.addStat(FossilAchievementHandler.analyzer, 1);
-        }
-        else if (event.crafting.getItem() == Item.getItemFromBlock(FABlockRegistry.INSTANCE.blockcultivateIdle)) {
+        } else if (event.crafting.getItem() == Item.getItemFromBlock(FABlockRegistry.INSTANCE.blockcultivateIdle)) {
             player.addStat(FossilAchievementHandler.cultivate, 1);
-        }
-        else if (event.crafting.getItem() == Item.getItemFromBlock(FABlockRegistry.INSTANCE.blockSifterIdle)) {
+        } else if (event.crafting.getItem() == Item.getItemFromBlock(FABlockRegistry.INSTANCE.blockSifterIdle)) {
             player.addStat(FossilAchievementHandler.sifter, 1);
-        }
-        else if (event.crafting.getItem() == Item.getItemFromBlock(FABlockRegistry.INSTANCE.blockworktableIdle)) {
+        } else if (event.crafting.getItem() == Item.getItemFromBlock(FABlockRegistry.INSTANCE.blockworktableIdle)) {
             player.addStat(FossilAchievementHandler.arcWorkbench, 1);
-        }
-        else if (event.crafting.getItem() == FAItemRegistry.INSTANCE.gem_blue) {
+        } else if (event.crafting.getItem() == FAItemRegistry.INSTANCE.gem_blue) {
             player.addStat(FossilAchievementHandler.blueScarab, 1);
-        }
-        else if (event.crafting.getItem() == FAItemRegistry.INSTANCE.dinoPedia) {
+        } else if (event.crafting.getItem() == FAItemRegistry.INSTANCE.dinoPedia) {
             player.addStat(FossilAchievementHandler.dinopedia, 1);
-        }
-        else if (event.crafting.getItem() == FAItemRegistry.INSTANCE.gemAxe || event.crafting.getItem() == FAItemRegistry.INSTANCE.gemHoe ||
+        } else if (event.crafting.getItem() == FAItemRegistry.INSTANCE.gemAxe || event.crafting.getItem() == FAItemRegistry.INSTANCE.gemHoe ||
                 event.crafting.getItem() == FAItemRegistry.INSTANCE.gemSword || event.crafting.getItem() == FAItemRegistry.INSTANCE.gemPickaxe
                 || event.crafting.getItem() == FAItemRegistry.INSTANCE.gemShovel) {
             player.addStat(FossilAchievementHandler.scarabTools, 1);

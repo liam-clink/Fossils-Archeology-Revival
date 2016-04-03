@@ -10,8 +10,24 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.EntityList;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.ai.EntityAIFollowOwner;
+import net.minecraft.entity.ai.EntityAIFollowParent;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAILeapAtTarget;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAIMate;
+import net.minecraft.entity.ai.EntityAIOwnerHurtByTarget;
+import net.minecraft.entity.ai.EntityAIOwnerHurtTarget;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAITempt;
+import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.passive.EntityTameable;
@@ -362,38 +378,42 @@ public class EntityTerrorBird extends EntityTameable {
 
     @Override
     public boolean attackEntityAsMob(Entity entity) {
-        float attackdamage = (float) this.getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue();
-        int i = 0;
-
-        if (entity instanceof EntityLivingBase) {
-            attackdamage += EnchantmentHelper.getEnchantmentModifierLiving(this, (EntityLivingBase) entity);
-            i += EnchantmentHelper.getKnockbackModifier(this, (EntityLivingBase) entity);
-        }
-
-        boolean flag = entity.attackEntityFrom(DamageSource.causeMobDamage(this), attackdamage);
-
-        if (flag) {
-            if (i > 0) {
-                entity.addVelocity((double) (-MathHelper.sin(this.rotationYaw * (float) Math.PI / 180.0F) * (float) i * 0.5F), 0.1D, (double) (MathHelper.cos(this.rotationYaw * (float) Math.PI / 180.0F) * (float) i * 0.5F));
-                this.motionX *= 0.6D;
-                this.motionZ *= 0.6D;
-            }
-
-            int j = EnchantmentHelper.getFireAspectModifier(this);
-
-            if (j > 0) {
-                entity.setFire(j * 4);
-            }
+        if (this.boundingBox.intersectsWith(entity.boundingBox)) {
+            float attackdamage = (float) this.getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue();
+            int i = 0;
 
             if (entity instanceof EntityLivingBase) {
-                EnchantmentHelper.func_151384_a((EntityLivingBase) entity, this);
+                attackdamage += EnchantmentHelper.getEnchantmentModifierLiving(this, (EntityLivingBase) entity);
+                i += EnchantmentHelper.getKnockbackModifier(this, (EntityLivingBase) entity);
             }
 
-            EnchantmentHelper.func_151385_b(this, entity);
+            boolean flag = entity.attackEntityFrom(DamageSource.causeMobDamage(this), attackdamage);
+
+            if (flag) {
+                if (i > 0) {
+                    entity.addVelocity((double) (-MathHelper.sin(this.rotationYaw * (float) Math.PI / 180.0F) * (float) i * 0.5F), 0.1D, (double) (MathHelper.cos(this.rotationYaw * (float) Math.PI / 180.0F) * (float) i * 0.5F));
+                    this.motionX *= 0.6D;
+                    this.motionZ *= 0.6D;
+                }
+
+                int j = EnchantmentHelper.getFireAspectModifier(this);
+
+                if (j > 0) {
+                    entity.setFire(j * 4);
+                }
+
+                if (entity instanceof EntityLivingBase) {
+                    EnchantmentHelper.func_151384_a((EntityLivingBase) entity, this);
+                }
+
+                EnchantmentHelper.func_151385_b(this, entity);
+            }
+
+            return flag;
         }
 
         //this.playSound(Revival.MODID + ":" + "terror_bird_attack", this.getSoundVolume(), this.getSoundPitch());
-        return flag;
+        return false;
     }
 
     /**

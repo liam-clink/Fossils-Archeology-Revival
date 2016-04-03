@@ -174,14 +174,14 @@ public class ModelCeratosaurus extends ModelNewPrehistoric {
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
         animator.setAnimation(EntityCeratosaurus.animation_attack);
         animator.startKeyframe(10);
-		ModelUtils.rotate(animator, neck, -41, 0, 0);
-		ModelUtils.rotate(animator, head, 57, 0, 0);
-		ModelUtils.rotate(animator, lowerJaw, 25, 0, 0);
+        ModelUtils.rotate(animator, neck, -41, 0, 0);
+        ModelUtils.rotate(animator, head, 57, 0, 0);
+        ModelUtils.rotate(animator, lowerJaw, 25, 0, 0);
         animator.endKeyframe();
         animator.startKeyframe(5);
-		ModelUtils.rotate(animator, neck, 6, 0, 0);
-		ModelUtils.rotate(animator, head, -14, 0, 0);
-		ModelUtils.rotate(animator, lowerJaw, 25, 0, 0);
+        ModelUtils.rotate(animator, neck, 6, 0, 0);
+        ModelUtils.rotate(animator, head, -14, 0, 0);
+        ModelUtils.rotate(animator, lowerJaw, 25, 0, 0);
         animator.endKeyframe();
         animator.resetKeyframe(10);
     }
@@ -235,6 +235,6 @@ public class ModelCeratosaurus extends ModelNewPrehistoric {
         sitAnimationPos(lowerBody, sitProgress, 0, 8.1F, 0);
         sitAnimationPos(leftThigh, sitProgress, 0, 7.6F, 0);
         sitAnimationPos(rightThigh, sitProgress, 0, 7.6F, 0);
-        ((EntityNewPrehistoric)entity).tailbuffer.applyChainSwingBuffer(tailParts);
+        ((EntityNewPrehistoric) entity).tailbuffer.applyChainSwingBuffer(tailParts);
     }
 }

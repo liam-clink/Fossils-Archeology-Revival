@@ -1,7 +1,12 @@
 package com.github.revival.server.block.entity;
 
+import com.github.revival.server.block.BlockFeeder;
+import com.github.revival.server.entity.EnumDiet;
+import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
+import com.github.revival.server.enums.EnumPrehistoric;
+import com.github.revival.server.handler.LocalizationStrings;
+import com.github.revival.server.util.FoodMappings;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
@@ -9,261 +14,256 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 
-import com.github.revival.server.block.BlockFeeder;
-import com.github.revival.server.entity.EnumDiet;
-import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
-import com.github.revival.server.enums.EnumPrehistoric;
-import com.github.revival.server.handler.LocalizationStrings;
-import com.github.revival.server.util.FoodMappings;
-
 public class TileEntityNewFeeder extends TileEntity implements IInventory, ISidedInventory {
 
-	private static final int[] slots_carn = new int[]{0};
-	private static final int[] slots_herb = new int[]{1};
-	public int currentMeat = 0;
-	public int maxMeat = 10000;
-	public int currentPlant = 0;
-	public int maxPlant = 10000;
-	private ItemStack[] feederItemStacks = new ItemStack[2];
-	private String customName;
-	private int ticksExisted;
+    private static final int[] slots_carn = new int[]{0};
+    private static final int[] slots_herb = new int[]{1};
+    public int currentMeat = 0;
+    public int maxMeat = 10000;
+    public int currentPlant = 0;
+    public int maxPlant = 10000;
+    private ItemStack[] feederItemStacks = new ItemStack[2];
+    private String customName;
+    private int ticksExisted;
 
-	public int[] getAccessibleSlotsFromSide(int i) {
-		return i == 1 ? slots_herb : slots_carn; 
-	}
+    public int[] getAccessibleSlotsFromSide(int i) {
+        return i == 1 ? slots_herb : slots_carn;
+    }
 
-	public boolean canInsertItem(int i, ItemStack stack, int ammount) {
-		return isItemValidForSlot(i, stack);
-	}
+    public boolean canInsertItem(int i, ItemStack stack, int ammount) {
+        return isItemValidForSlot(i, stack);
+    }
 
-	public boolean canExtractItem(int i, ItemStack stack, int ammount) {
-		return false;
-	}
+    public boolean canExtractItem(int i, ItemStack stack, int ammount) {
+        return false;
+    }
 
-	public int getSizeInventory() {
-		return this.feederItemStacks.length;
-	}
+    public int getSizeInventory() {
+        return this.feederItemStacks.length;
+    }
 
-	public ItemStack getStackInSlot(int i) {
-		return this.feederItemStacks[i];
-	}
+    public ItemStack getStackInSlot(int i) {
+        return this.feederItemStacks[i];
+    }
 
-	public ItemStack decrStackSize(int i, int amount) {
-		if (this.feederItemStacks[i] != null) {
-			ItemStack stack;
+    public ItemStack decrStackSize(int i, int amount) {
+        if (this.feederItemStacks[i] != null) {
+            ItemStack stack;
 
-			if (this.feederItemStacks[i].stackSize <= amount) {
-				stack = this.feederItemStacks[i];
-				this.feederItemStacks[i] = null;
-				return stack;
-			} else {
-				stack = this.feederItemStacks[i].splitStack(amount);
+            if (this.feederItemStacks[i].stackSize <= amount) {
+                stack = this.feederItemStacks[i];
+                this.feederItemStacks[i] = null;
+                return stack;
+            } else {
+                stack = this.feederItemStacks[i].splitStack(amount);
 
-				if (this.feederItemStacks[i].stackSize == 0) {
-					this.feederItemStacks[i] = null;
-				}
+                if (this.feederItemStacks[i].stackSize == 0) {
+                    this.feederItemStacks[i] = null;
+                }
 
-				return stack;
-			}
-		} else {
-			return null;
-		}
-	}
+                return stack;
+            }
+        } else {
+            return null;
+        }
+    }
 
-	public void readFromNBT(NBTTagCompound tag) {
-		super.readFromNBT(tag);
-		NBTTagList tag2 = tag.getTagList("Items", 10);
-		this.feederItemStacks = new ItemStack[this.getSizeInventory()];
+    public void readFromNBT(NBTTagCompound tag) {
+        super.readFromNBT(tag);
+        NBTTagList tag2 = tag.getTagList("Items", 10);
+        this.feederItemStacks = new ItemStack[this.getSizeInventory()];
 
-		for (int i = 0; i < tag2.tagCount(); ++i) {
-			NBTTagCompound var4 = (NBTTagCompound) tag2.getCompoundTagAt(i);
-			byte slots = var4.getByte("Slot");
+        for (int i = 0; i < tag2.tagCount(); ++i) {
+            NBTTagCompound var4 = (NBTTagCompound) tag2.getCompoundTagAt(i);
+            byte slots = var4.getByte("Slot");
 
-			if (slots >= 0 && slots < this.feederItemStacks.length) {
-				this.feederItemStacks[slots] = ItemStack
-						.loadItemStackFromNBT(var4);
-			}
-		}
+            if (slots >= 0 && slots < this.feederItemStacks.length) {
+                this.feederItemStacks[slots] = ItemStack
+                        .loadItemStackFromNBT(var4);
+            }
+        }
 
-		this.currentMeat = tag.getShort("MeatCurrent");
-		this.currentPlant = tag.getShort("VegCurrent");
+        this.currentMeat = tag.getShort("MeatCurrent");
+        this.currentPlant = tag.getShort("VegCurrent");
 
-		if (tag.hasKey("CustomName")) {
-			this.customName = tag.getString("CustomName");
-		}
-	}
+        if (tag.hasKey("CustomName")) {
+            this.customName = tag.getString("CustomName");
+        }
+    }
 
-	public void writeToNBT(NBTTagCompound tag) {
-		super.writeToNBT(tag);
-		NBTTagList tag2 = new NBTTagList();
+    public void writeToNBT(NBTTagCompound tag) {
+        super.writeToNBT(tag);
+        NBTTagList tag2 = new NBTTagList();
 
-		for (int i = 0; i < this.feederItemStacks.length; ++i) {
-			if (this.feederItemStacks[i] != null) {
-				NBTTagCompound tag3 = new NBTTagCompound();
-				tag3.setByte("Slot", (byte) i);
-				this.feederItemStacks[i].writeToNBT(tag3);
-				tag2.appendTag(tag3);
-			}
-		}
+        for (int i = 0; i < this.feederItemStacks.length; ++i) {
+            if (this.feederItemStacks[i] != null) {
+                NBTTagCompound tag3 = new NBTTagCompound();
+                tag3.setByte("Slot", (byte) i);
+                this.feederItemStacks[i].writeToNBT(tag3);
+                tag2.appendTag(tag3);
+            }
+        }
 
-		tag.setTag("Items", tag2);
-		tag.setInteger("MeatCurrent", this.currentMeat);
-		tag.setInteger("VegCurrent", this.currentPlant);
+        tag.setTag("Items", tag2);
+        tag.setInteger("MeatCurrent", this.currentMeat);
+        tag.setInteger("VegCurrent", this.currentPlant);
 
-		if (this.hasCustomInventoryName()) {
-			tag.setString("CustomName", this.customName);
-		}
-	}
+        if (this.hasCustomInventoryName()) {
+            tag.setString("CustomName", this.customName);
+        }
+    }
 
-	@Override
-	public ItemStack getStackInSlotOnClosing(int i) {
-		return null;
-	}
+    @Override
+    public ItemStack getStackInSlotOnClosing(int i) {
+        return null;
+    }
 
-	public void setInventorySlotContents(int i, ItemStack stack) {
-		this.feederItemStacks[i] = stack;
+    public void setInventorySlotContents(int i, ItemStack stack) {
+        this.feederItemStacks[i] = stack;
 
-		if (stack != null && stack.stackSize > this.getInventoryStackLimit()) {
-			stack.stackSize = this.getInventoryStackLimit();
-		}
-	}
+        if (stack != null && stack.stackSize > this.getInventoryStackLimit()) {
+            stack.stackSize = this.getInventoryStackLimit();
+        }
+    }
 
-	public int getMeatBarScaled(int i) {
-		return this.currentMeat * i / this.maxMeat;
-	}
+    public int getMeatBarScaled(int i) {
+        return this.currentMeat * i / this.maxMeat;
+    }
 
-	public int getVegBarScaled(int i) {
-		return this.currentPlant * i / this.maxPlant;
-	}
+    public int getVegBarScaled(int i) {
+        return this.currentPlant * i / this.maxPlant;
+    }
 
-	public int getInventoryStackLimit() {
-		return 64;
-	}
+    public int getInventoryStackLimit() {
+        return 64;
+    }
 
-	public boolean isUseableByPlayer(EntityPlayer player) {
-		return this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord) != this ? false : player.getDistanceSq((double) this.xCoord + 0.5D, (double) this.yCoord + 0.5D, (double) this.zCoord + 0.5D) <= 64.0D;
-	}
+    public boolean isUseableByPlayer(EntityPlayer player) {
+        return this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord) != this ? false : player.getDistanceSq((double) this.xCoord + 0.5D, (double) this.yCoord + 0.5D, (double) this.zCoord + 0.5D) <= 64.0D;
+    }
 
-	public void openInventory() {}
+    public void openInventory() {
+    }
 
-	public void closeInventory() {}
+    public void closeInventory() {
+    }
 
-	public int getCurrentMeat() {
-		return this.currentMeat;
-	}
+    public int getCurrentMeat() {
+        return this.currentMeat;
+    }
 
-	public int getCurrentPlant() {
-		return this.currentPlant;
-	}
+    public int getCurrentPlant() {
+        return this.currentPlant;
+    }
 
-	public void setGuiDisplayName(String par1Str) {
-		this.customName = par1Str;
-	}
+    public void setGuiDisplayName(String par1Str) {
+        this.customName = par1Str;
+    }
 
-	public String getInventoryName() {
-		return this.hasCustomInventoryName() ? this.customName : "tile." + LocalizationStrings.FEEDER_ACTIVE_NAME + ".name";
-	}
+    public String getInventoryName() {
+        return this.hasCustomInventoryName() ? this.customName : "tile." + LocalizationStrings.FEEDER_ACTIVE_NAME + ".name";
+    }
 
-	@Override
-	public boolean hasCustomInventoryName() {
-		return this.customName != null && this.customName.length() > 0;
-	}
+    @Override
+    public boolean hasCustomInventoryName() {
+        return this.customName != null && this.customName.length() > 0;
+    }
 
-	public boolean isItemValidForSlot(int i, ItemStack stack) {
-		if(stack != null && stack.getItem() != null){
-			if(i == 1){
-				return FoodMappings.instance().getItemFoodAmount(stack.getItem(), EnumDiet.CARNIVORE_EGG) != 0;
-			}else{
-				return FoodMappings.instance().getItemFoodAmount(stack.getItem(), EnumDiet.HERBIVORE) != 0;
-			}
-		}
-		return false;
-	}
+    public boolean isItemValidForSlot(int i, ItemStack stack) {
+        if (stack != null && stack.getItem() != null) {
+            if (i == 1) {
+                return FoodMappings.instance().getItemFoodAmount(stack.getItem(), EnumDiet.CARNIVORE_EGG) != 0;
+            } else {
+                return FoodMappings.instance().getItemFoodAmount(stack.getItem(), EnumDiet.HERBIVORE) != 0;
+            }
+        }
+        return false;
+    }
 
-	public boolean isEmpty(EnumPrehistoric type){
-		if(type.diet == EnumDiet.CARNIVORE || type.diet == EnumDiet.CARNIVORE_EGG || type.diet == EnumDiet.PISCCARNIVORE){
-			return currentMeat == 0;
-		}
-		if(type.diet == EnumDiet.HERBIVORE){
-			return currentPlant == 0;
-		}	
-		if(type.diet == EnumDiet.OMNIVORE){
-			return currentMeat == 0 && currentPlant == 0;
-		}
-		return true;
-	}
+    public boolean isEmpty(EnumPrehistoric type) {
+        if (type.diet == EnumDiet.CARNIVORE || type.diet == EnumDiet.CARNIVORE_EGG || type.diet == EnumDiet.PISCCARNIVORE) {
+            return currentMeat == 0;
+        }
+        if (type.diet == EnumDiet.HERBIVORE) {
+            return currentPlant == 0;
+        }
+        if (type.diet == EnumDiet.OMNIVORE) {
+            return currentMeat == 0 && currentPlant == 0;
+        }
+        return true;
+    }
 
-	public int feedDinosaur(EntityNewPrehistoric mob){
-		int feedamount = 0;
+    public int feedDinosaur(EntityNewPrehistoric mob) {
+        int feedamount = 0;
 
-		if(!this.isEmpty(mob.selfType)){
-			if(mob.selfType.diet == EnumDiet.CARNIVORE || mob.selfType.diet == EnumDiet.CARNIVORE_EGG || mob.selfType.diet == EnumDiet.PISCCARNIVORE){
-				currentMeat--;
-				feedamount++;
-			}
-			if(mob.selfType.diet == EnumDiet.HERBIVORE){
-				currentPlant--;
-				feedamount++;
-			}	
-			if(mob.selfType.diet == EnumDiet.OMNIVORE){
-				if(currentMeat == 0 && currentPlant != 0){
-					currentPlant--;
-					feedamount++;
-				}
-				if(currentMeat != 0 && currentPlant == 0){
-					currentMeat--;
-					feedamount++;
-				}
-			}
-			BlockFeeder.updateFeederBlockState(this.currentPlant > 0, this.currentMeat > 0, this.worldObj, this.xCoord, this.yCoord, this.zCoord);	
-		}
-		mob.setHunger(mob.getHunger() + feedamount);
-		return feedamount;
-	}
+        if (!this.isEmpty(mob.selfType)) {
+            if (mob.selfType.diet == EnumDiet.CARNIVORE || mob.selfType.diet == EnumDiet.CARNIVORE_EGG || mob.selfType.diet == EnumDiet.PISCCARNIVORE) {
+                currentMeat--;
+                feedamount++;
+            }
+            if (mob.selfType.diet == EnumDiet.HERBIVORE) {
+                currentPlant--;
+                feedamount++;
+            }
+            if (mob.selfType.diet == EnumDiet.OMNIVORE) {
+                if (currentMeat == 0 && currentPlant != 0) {
+                    currentPlant--;
+                    feedamount++;
+                }
+                if (currentMeat != 0 && currentPlant == 0) {
+                    currentMeat--;
+                    feedamount++;
+                }
+            }
+            BlockFeeder.updateFeederBlockState(this.currentPlant > 0, this.currentMeat > 0, this.worldObj, this.xCoord, this.yCoord, this.zCoord);
+        }
+        mob.setHunger(mob.getHunger() + feedamount);
+        return feedamount;
+    }
 
-	public void updateEntity() {
-		super.updateEntity();
-		ticksExisted++;
-		if(ticksExisted % 5 == 0){
-			if(this.feederItemStacks[0] != null && this.feederItemStacks[0].getItem() != null){
-				{
-					if(this.currentMeat < this.maxMeat){
-						int carnivoreValue = FoodMappings.instance().getItemFoodAmount(this.feederItemStacks[0].getItem(), EnumDiet.CARNIVORE_EGG);
-						if(carnivoreValue != 0){
-							int foodLeft = this.maxMeat - this.currentMeat;
-							if(carnivoreValue > foodLeft){
-								this.currentMeat = this.maxMeat;
-								this.decrStackSize(0, 1);
-								BlockFeeder.updateFeederBlockState(this.currentPlant > 0, this.currentMeat > 0, this.worldObj, this.xCoord, this.yCoord, this.zCoord);	
+    public void updateEntity() {
+        super.updateEntity();
+        ticksExisted++;
+        if (ticksExisted % 5 == 0) {
+            if (this.feederItemStacks[0] != null && this.feederItemStacks[0].getItem() != null) {
+                {
+                    if (this.currentMeat < this.maxMeat) {
+                        int carnivoreValue = FoodMappings.instance().getItemFoodAmount(this.feederItemStacks[0].getItem(), EnumDiet.CARNIVORE_EGG);
+                        if (carnivoreValue != 0) {
+                            int foodLeft = this.maxMeat - this.currentMeat;
+                            if (carnivoreValue > foodLeft) {
+                                this.currentMeat = this.maxMeat;
+                                this.decrStackSize(0, 1);
+                                BlockFeeder.updateFeederBlockState(this.currentPlant > 0, this.currentMeat > 0, this.worldObj, this.xCoord, this.yCoord, this.zCoord);
 
-							}else{
-								this.currentMeat += carnivoreValue;
-								this.decrStackSize(0, 1);
-								BlockFeeder.updateFeederBlockState(this.currentPlant > 0, this.currentMeat > 0, this.worldObj, this.xCoord, this.yCoord, this.zCoord);	
-							}
-						}
-					}
-				}
-			}
-			if(this.feederItemStacks[1] != null && this.feederItemStacks[1].getItem() != null){
-				{
-					if(this.currentPlant < this.maxPlant){
-						int herbivoreValue = FoodMappings.instance().getItemFoodAmount(this.feederItemStacks[1].getItem(), EnumDiet.HERBIVORE);
-						if(herbivoreValue != 0){
-							int foodLeft = this.maxPlant - this.currentPlant;
-							if(herbivoreValue > foodLeft){
-								this.currentPlant = this.maxPlant;
-								this.decrStackSize(1, 1);
-								BlockFeeder.updateFeederBlockState(this.currentPlant > 0, this.currentMeat > 0, this.worldObj, this.xCoord, this.yCoord, this.zCoord);	
-							}else{
-								this.currentPlant += herbivoreValue;
-								this.decrStackSize(1, 1);
-								BlockFeeder.updateFeederBlockState(this.currentPlant > 0, this.currentMeat > 0, this.worldObj, this.xCoord, this.yCoord, this.zCoord);	
-							}
-						}
-					}
-				}
-			}
-		}
-	}
+                            } else {
+                                this.currentMeat += carnivoreValue;
+                                this.decrStackSize(0, 1);
+                                BlockFeeder.updateFeederBlockState(this.currentPlant > 0, this.currentMeat > 0, this.worldObj, this.xCoord, this.yCoord, this.zCoord);
+                            }
+                        }
+                    }
+                }
+            }
+            if (this.feederItemStacks[1] != null && this.feederItemStacks[1].getItem() != null) {
+                {
+                    if (this.currentPlant < this.maxPlant) {
+                        int herbivoreValue = FoodMappings.instance().getItemFoodAmount(this.feederItemStacks[1].getItem(), EnumDiet.HERBIVORE);
+                        if (herbivoreValue != 0) {
+                            int foodLeft = this.maxPlant - this.currentPlant;
+                            if (herbivoreValue > foodLeft) {
+                                this.currentPlant = this.maxPlant;
+                                this.decrStackSize(1, 1);
+                                BlockFeeder.updateFeederBlockState(this.currentPlant > 0, this.currentMeat > 0, this.worldObj, this.xCoord, this.yCoord, this.zCoord);
+                            } else {
+                                this.currentPlant += herbivoreValue;
+                                this.decrStackSize(1, 1);
+                                BlockFeeder.updateFeederBlockState(this.currentPlant > 0, this.currentMeat > 0, this.worldObj, this.xCoord, this.yCoord, this.zCoord);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

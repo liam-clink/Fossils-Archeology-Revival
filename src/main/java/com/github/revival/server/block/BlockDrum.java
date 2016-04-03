@@ -89,7 +89,7 @@ public class BlockDrum extends BlockContainer {
 	 * neighbor blockID
 	 */
     /*
-	 * public void onNeighborBlockChange(World var1, int var2, int var3, int
+     * public void onNeighborBlockChange(World var1, int var2, int var3, int
 	 * var4, int var5) {//plays a sound when powered....what for, this does
 	 * nothing.....but keep the code... if (var5 > 0 &&
 	 * Block.blocksList[var5].canProvidePower()) { boolean var6 =

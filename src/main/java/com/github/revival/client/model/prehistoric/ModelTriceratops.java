@@ -199,17 +199,17 @@ public class ModelTriceratops extends ModelNewPrehistoric {
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
         animator.setAnimation(EntityAnkylosaurus.animation_attack);
         animator.startKeyframe(5);
-		ModelUtils.rotate(animator, head, 30, 0, 0);
-		ModelUtils.rotate(animator, neck, 25, 0, 0);
-		animator.endKeyframe();
-		animator.setStaticKeyframe(5);
-		animator.startKeyframe(10);
-		ModelUtils.rotate(animator, neck, -30, 0, 0);
-		ModelUtils.rotate(animator, head, -30, 0, 0);
-		animator.endKeyframe();
-		animator.setStaticKeyframe(5);
-		animator.resetKeyframe(5);
-		
+        ModelUtils.rotate(animator, head, 30, 0, 0);
+        ModelUtils.rotate(animator, neck, 25, 0, 0);
+        animator.endKeyframe();
+        animator.setStaticKeyframe(5);
+        animator.startKeyframe(10);
+        ModelUtils.rotate(animator, neck, -30, 0, 0);
+        ModelUtils.rotate(animator, head, -30, 0, 0);
+        animator.endKeyframe();
+        animator.setStaticKeyframe(5);
+        animator.resetKeyframe(5);
+
 //		animator.setAnimationId(EntityNewPrehistoric.animation_sit.animationId);
 //		animator.startPhase(20);
 //		sitPose(true);
@@ -270,7 +270,7 @@ public class ModelTriceratops extends ModelNewPrehistoric {
         this.chainWave(tailParts, speed2, 0.05F, -3, entity.ticksExisted, 1);
         this.chainSwing(tailParts, speed2, 0.35F, -3, entity.ticksExisted, 1);
         this.chainWave(neckParts, speed2, 0.05F, -3, entity.ticksExisted, 1);
-        ((EntityNewPrehistoric)entity).tailbuffer.applyChainSwingBuffer(tailParts);
+        ((EntityNewPrehistoric) entity).tailbuffer.applyChainSwingBuffer(tailParts);
     }
 
 //	@Override

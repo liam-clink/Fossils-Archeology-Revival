@@ -21,7 +21,11 @@ import net.minecraft.block.BlockBush;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.client.Minecraft;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.IEntityLivingData;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
@@ -32,7 +36,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.*;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.MathHelper;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
@@ -452,7 +460,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
     public void ShowPedia(GuiPedia p0) {
 
         p0.reset();
-         // 185
+        // 185
 
 		/*
          * LEFT PAGE
@@ -475,9 +483,9 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
                 StatCollector.translateToLocal("entity.fossil."
                         + this.SelfType.toString() + ".name"), GuiPedia.rightIndent,
                 34, 0, 0, 0);
-       // p0.printHappyBar(pediaclock, GuiPedia.rightIndent, 46, 8, 8);
-       // p0.printHappyBar(pediaheart, GuiPedia.rightIndent, 58, 9, 9);
-       // p0.printHappyBar(pediafood, GuiPedia.rightIndent, 70, 9, 9);
+        // p0.printHappyBar(pediaclock, GuiPedia.rightIndent, 46, 8, 8);
+        // p0.printHappyBar(pediaheart, GuiPedia.rightIndent, 58, 9, 9);
+        // p0.printHappyBar(pediafood, GuiPedia.rightIndent, 70, 9, 9);
 
         // Print "Day" after age
         if (this.getDinoAge() == 1) {
@@ -884,33 +892,36 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
 
     @Override
     public boolean attackEntityAsMob(Entity victim) {
-        float attackDamage = (float) getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue();
-        int knockback = 0;
+        if (this.boundingBox.intersectsWith(victim.boundingBox)) {
+            float attackDamage = (float) getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue();
+            int knockback = 0;
 
-        if (victim instanceof EntityLivingBase) {
-            attackDamage += EnchantmentHelper.getEnchantmentModifierLiving(this, (EntityLivingBase) victim);
-            knockback += EnchantmentHelper.getKnockbackModifier(this, (EntityLivingBase) victim);
-        }
-
-        boolean attacked = victim.attackEntityFrom(
-                DamageSource.causeMobDamage(this), attackDamage);
-
-        if (attacked) {
-            if (knockback > 0) {
-                double vx = -Math.sin(Math.toRadians(rotationYaw)) * knockback
-                        * 0.5;
-                double vy = 0.1;
-                double vz = Math.cos(Math.toRadians(rotationYaw)) * knockback
-                        * 0.5;
-                victim.addVelocity(vx, vy, vz);
-                motionX *= 0.6;
-                motionZ *= 0.6;
+            if (victim instanceof EntityLivingBase) {
+                attackDamage += EnchantmentHelper.getEnchantmentModifierLiving(this, (EntityLivingBase) victim);
+                knockback += EnchantmentHelper.getKnockbackModifier(this, (EntityLivingBase) victim);
             }
 
-            setLastAttacker(victim);
-        }
+            boolean attacked = victim.attackEntityFrom(
+                    DamageSource.causeMobDamage(this), attackDamage);
 
-        return attacked;
+            if (attacked) {
+                if (knockback > 0) {
+                    double vx = -Math.sin(Math.toRadians(rotationYaw)) * knockback
+                            * 0.5;
+                    double vy = 0.1;
+                    double vz = Math.cos(Math.toRadians(rotationYaw)) * knockback
+                            * 0.5;
+                    victim.addVelocity(vx, vy, vz);
+                    motionX *= 0.6;
+                    motionZ *= 0.6;
+                }
+
+                setLastAttacker(victim);
+            }
+
+            return attacked;
+        }
+        return false;
     }
 
     public void SendOrderMessage(EnumOrderType var1) {
@@ -1206,7 +1217,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
         compound.setInteger("AgeTick", this.getDinoAgeTick());
         compound.setInteger("SubSpecies", this.getSubSpecies());
         compound.setByte("OrderStatus", (byte) this.OrderStatus.ordinal()/*
-		 * (byte)
+         * (byte)
 		 * Revival
 		 * .
 		 * EnumToInt

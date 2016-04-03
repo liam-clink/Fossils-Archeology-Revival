@@ -176,19 +176,19 @@ public class ModelPachycephalosaurus extends ModelNewPrehistoric {
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
         animator.setAnimation(EntityAnkylosaurus.animation_attack);
         animator.startKeyframe(5);
-		animator.move(lowerBody, 0, 5, -2);
-		ModelUtils.rotate(animator, lowerBody, 20, 0, 0);
-		ModelUtils.rotate(animator, head, 30, 0, 0);
-		ModelUtils.rotate(animator, neck, -50, 0, 0);
-		animator.endKeyframe();
-		animator.setStaticKeyframe(5);
-		animator.startKeyframe(10);
-		animator.move(lowerBody, 0, -2, 2);
-		ModelUtils.rotate(animator, lowerBody, -20, 0, 0);
-		ModelUtils.rotate(animator, head, -10, 0, 0);
-		animator.endKeyframe();
-		animator.setStaticKeyframe(5);
-		animator.resetKeyframe(5);
+        animator.move(lowerBody, 0, 5, -2);
+        ModelUtils.rotate(animator, lowerBody, 20, 0, 0);
+        ModelUtils.rotate(animator, head, 30, 0, 0);
+        ModelUtils.rotate(animator, neck, -50, 0, 0);
+        animator.endKeyframe();
+        animator.setStaticKeyframe(5);
+        animator.startKeyframe(10);
+        animator.move(lowerBody, 0, -2, 2);
+        ModelUtils.rotate(animator, lowerBody, -20, 0, 0);
+        ModelUtils.rotate(animator, head, -10, 0, 0);
+        animator.endKeyframe();
+        animator.setStaticKeyframe(5);
+        animator.resetKeyframe(5);
     }
 
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
@@ -236,6 +236,6 @@ public class ModelPachycephalosaurus extends ModelNewPrehistoric {
         sitAnimationPos(lowerBody, sitProgress, 0, 4.1F, 0);
         sitAnimationPos(rightThigh, sitProgress, 0, 5F, 0);
         sitAnimationPos(leftThigh, sitProgress, 0, 5F, 0);
-        ((EntityNewPrehistoric)entity).tailbuffer.applyChainSwingBuffer(tailParts);
+        ((EntityNewPrehistoric) entity).tailbuffer.applyChainSwingBuffer(tailParts);
     }
 }

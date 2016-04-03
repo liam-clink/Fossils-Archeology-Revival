@@ -116,7 +116,7 @@ public class BlockTimeMachine extends BlockContainer {
     /**
      * Returns the block texture based on the side being looked at. Args: side
      */
-	/*
+    /*
 	 * public int getBlockTextureFromSide(int var1) { return var1 == 0 ?
 	 * this.blockIndexInTexture : (var1 == 1 ? this.blockIndexInTexture :
 	 * this.blockIndexInTexture + 16); }

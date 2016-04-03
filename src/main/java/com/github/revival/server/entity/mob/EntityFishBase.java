@@ -16,7 +16,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
@@ -105,7 +104,7 @@ public abstract class EntityFishBase extends EntityWaterMob {
 
         p0.printStringXY(StatCollector.translateToLocal(getCodeName()), p0.rightIndent, 34, 0, 0, 0);
 
-       // p0.printHappyBar(new ResourceLocation(this.getItemTexture()), ((p0.xGui / 2) + (p0.xGui / 4)), 7, 16, 16);
+        // p0.printHappyBar(new ResourceLocation(this.getItemTexture()), ((p0.xGui / 2) + (p0.xGui / 4)), 7, 16, 16);
         if (this.hasCustomNameTag()) {
             p0.addStringLR("No Despawn", true);
         }

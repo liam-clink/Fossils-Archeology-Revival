@@ -2,7 +2,6 @@ package com.github.revival.server.structure.util;
 
 import com.mojang.authlib.GameProfile;
 import cpw.mods.fml.common.FMLCommonHandler;
-import net.ilexiconn.llibrary.LLibrary;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRedstoneRepeater;
 import net.minecraft.block.BlockRedstoneTorch;
@@ -29,7 +28,12 @@ import net.minecraft.world.WorldServer;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.common.util.FakePlayer;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import java.util.UUID;
 
 public abstract class StructureGeneratorBase extends WorldGenerator {
     /**

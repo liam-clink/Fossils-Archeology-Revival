@@ -6,7 +6,6 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.entity.RenderBiped;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
@@ -20,7 +19,7 @@ public class RenderFPZ extends RenderBiped {
     }
 
     protected void scalePigman(EntityFriendlyPigZombie par1EntitySkeleton, float par2) {
-        if(par1EntitySkeleton.isSitting())GL11.glTranslatef(0F, 0.4F, 0F);
+        if (par1EntitySkeleton.isSitting()) GL11.glTranslatef(0F, 0.4F, 0F);
     }
 
 

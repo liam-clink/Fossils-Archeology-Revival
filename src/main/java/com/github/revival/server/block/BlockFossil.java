@@ -1,8 +1,11 @@
 package com.github.revival.server.block;
 
-import java.util.ArrayList;
-import java.util.Random;
-
+import com.github.revival.Revival;
+import com.github.revival.server.creativetab.FATabRegistry;
+import com.github.revival.server.enums.EnumDinoBones;
+import com.github.revival.server.handler.FossilAchievementHandler;
+import com.github.revival.server.handler.LocalizationStrings;
+import com.github.revival.server.item.FAItemRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStone;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -13,12 +16,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import com.github.revival.Revival;
-import com.github.revival.server.creativetab.FATabRegistry;
-import com.github.revival.server.enums.EnumDinoBones;
-import com.github.revival.server.handler.FossilAchievementHandler;
-import com.github.revival.server.handler.LocalizationStrings;
-import com.github.revival.server.item.FAItemRegistry;
+import java.util.ArrayList;
+import java.util.Random;
 
 public class BlockFossil extends BlockStone {
     Random rand = new Random();

@@ -1,8 +1,39 @@
 package com.github.revival.server.enums;
 
-import com.github.revival.server.entity.mob.*;
+import com.github.revival.server.entity.mob.EntityAllosaurus;
+import com.github.revival.server.entity.mob.EntityAnkylosaurus;
+import com.github.revival.server.entity.mob.EntityBrachiosaurus;
+import com.github.revival.server.entity.mob.EntityCeratosaurus;
+import com.github.revival.server.entity.mob.EntityCoelacanth;
+import com.github.revival.server.entity.mob.EntityCompsognathus;
+import com.github.revival.server.entity.mob.EntityConfuciusornis;
+import com.github.revival.server.entity.mob.EntityDeinonychus;
+import com.github.revival.server.entity.mob.EntityDilophosaurus;
+import com.github.revival.server.entity.mob.EntityDodo;
+import com.github.revival.server.entity.mob.EntityElasmotherium;
+import com.github.revival.server.entity.mob.EntityGallimimus;
+import com.github.revival.server.entity.mob.EntityLiopleurodon;
+import com.github.revival.server.entity.mob.EntityMammoth;
+import com.github.revival.server.entity.mob.EntityMosasaurus;
+import com.github.revival.server.entity.mob.EntityNautilus;
+import com.github.revival.server.entity.mob.EntityPachycephalosaurus;
+import com.github.revival.server.entity.mob.EntityPlesiosaurus;
+import com.github.revival.server.entity.mob.EntityPterosaur;
+import com.github.revival.server.entity.mob.EntityQuagga;
+import com.github.revival.server.entity.mob.EntitySarcosuchus;
+import com.github.revival.server.entity.mob.EntitySpinosaurus;
+import com.github.revival.server.entity.mob.EntityStegosaurus;
+import com.github.revival.server.entity.mob.EntityTerrorBird;
+import com.github.revival.server.entity.mob.EntityTriceratops;
+import com.github.revival.server.entity.mob.EntityTyrannosaurus;
+import com.github.revival.server.entity.mob.EntityVelociraptor;
 import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.passive.*;
+import net.minecraft.entity.passive.EntityChicken;
+import net.minecraft.entity.passive.EntityCow;
+import net.minecraft.entity.passive.EntityHorse;
+import net.minecraft.entity.passive.EntityPig;
+import net.minecraft.entity.passive.EntitySheep;
+import net.minecraft.entity.passive.EntitySquid;
 import net.minecraft.entity.player.EntityPlayer;
 
 public enum EnumDinoFoodMob {
