@@ -209,7 +209,6 @@ public class ModelStegosaurus extends ModelNewPrehistoric {
 
         float speed = 0.1F;
         float speed2 = 0.5F;
-        float sitProgress = ((EntityNewPrehistoric) (entity)).sitProgress;
         this.chainWave(tailParts, speed, 0.05F, -3, entity.ticksExisted, 1);
         this.chainSwing(tailParts, speed, 0.15F, -2, entity.ticksExisted, 1);
         this.chainWave(neckParts, speed, 0.05F, 3, entity.ticksExisted, 1);
@@ -218,7 +217,6 @@ public class ModelStegosaurus extends ModelNewPrehistoric {
         this.bob(leftFrontThigh, speed, -0.4F, false, entity.ticksExisted, 1);
         this.bob(rightHindThigh, speed, -0.4F, false, entity.ticksExisted, 1);
         this.bob(leftHindThigh, speed, -0.4F, false, entity.ticksExisted, 1);
-
         this.walk(leftFrontThigh, speed2, 0.8F, true, 0F, 0F, f, f1);
         this.walk(rightFrontThigh, speed2, 0.8F, false, 0F, 0F, f, f1);
         this.walk(leftHindThigh, speed2, 0.8F, false, 0F, 0F, f, f1);
@@ -227,6 +225,10 @@ public class ModelStegosaurus extends ModelNewPrehistoric {
         this.walk(rightFrontLeg, speed2, 0.5F, false, 0F, 0F, f, f1);
         this.walk(leftHindLeg, speed2, 0.5F, false, 0F, 0F, f, f1);
         this.walk(rightHindLeg, speed2, 0.5F, true, 0F, 0F, f, f1);
+        {
+	        float sitProgress = 0;//((EntityNewPrehistoric) (entity)).sleepProgress;
+
+        }
         ((EntityNewPrehistoric) entity).tailbuffer.applyChainSwingBuffer(tailParts);
     }
 

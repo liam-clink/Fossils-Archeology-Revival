@@ -31,6 +31,7 @@ public class EntityElasmotherium extends EntityNewPrehistoric {
         super(world, EnumPrehistoric.Elasmotherium);
         this.setSize(1F, 1F);
         this.nearByMobsAllowed = 9;
+        this.pediaScale = 6;
         minSize = 0.5F;
         maxSize = 2.6F;
         teenAge = 4;
@@ -132,7 +133,6 @@ public class EntityElasmotherium extends EntityNewPrehistoric {
 
     @Override
     public void updateSize() {
-        this.pediaScale = 6F;
         double healthStep;
         double attackStep;
         double speedStep;

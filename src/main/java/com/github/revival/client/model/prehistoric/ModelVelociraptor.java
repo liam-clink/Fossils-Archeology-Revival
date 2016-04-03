@@ -280,6 +280,7 @@ public class ModelVelociraptor extends ModelNewPrehistoric {
 
         float speed = 0.1F;
         float speed2 = 0.7F;
+        {
         float sitProgress = ((EntityNewPrehistoric) (entity)).sitProgress;
         sitAnimationRotation(rightThigh, sitProgress, -((float) Math.toRadians(75.0D)), 0, 0);
         sitAnimationRotation(leftLowerArm, sitProgress, 0, 0, 0);
@@ -302,6 +303,32 @@ public class ModelVelociraptor extends ModelNewPrehistoric {
         sitAnimationPos(lowerBody, sitProgress, 0F, 16.40F - ModelUtils.getDefaultPositionY(lowerBody), 0F);
         sitAnimationPos(rightThigh, sitProgress, 0F, 19.40F - ModelUtils.getDefaultPositionY(rightThigh), 0F);
         sitAnimationPos(leftThigh, sitProgress, 0F, 19.40F - ModelUtils.getDefaultPositionY(leftThigh), 0F);
+        }
+        {
+            float sitProgress = ((EntityNewPrehistoric) (entity)).sleepProgress;
+            sitAnimationRotation(rightThigh, sitProgress, -((float) Math.toRadians(75.0D)), 0, 0);
+            sitAnimationRotation(leftLowerArm, sitProgress, 0, 0, 0);
+            sitAnimationRotation(lowerBody, sitProgress, -((float) Math.toRadians(5.22D)), 0, 0);
+            sitAnimationRotation(rightFoot, sitProgress, (float) Math.toRadians(75.0D), 0, 0);
+            sitAnimationRotation(leftFoot, sitProgress, (float) Math.toRadians(75.0D), 0, 0);
+            sitAnimationRotation(leftLeg, sitProgress, 0, 0, 0);
+            sitAnimationRotation(tail1, sitProgress, -((float) Math.toRadians(5.22D)), 0, 0);
+            sitAnimationRotation(rightUpperArm, sitProgress, -((float) Math.toRadians(4.0D)), 0, (float) Math.toRadians(60.0D));
+            sitAnimationRotation(leftThigh, sitProgress, -((float) Math.toRadians(75.0D)), 0, 0);
+            sitAnimationRotation(rightLeg, sitProgress, 0, 0, 0);
+            sitAnimationRotation(leftUpperArm, sitProgress, -((float) Math.toRadians(4.0D)), 0, -((float) Math.toRadians(60.0D)));
+            sitAnimationRotation(tail3, sitProgress, (float) Math.toRadians(2.61D), 0, 0);
+            sitAnimationRotation(upperBody, sitProgress, (float) Math.toRadians(11.08D), 0, 0);
+            sitAnimationRotation(lowerJaw, sitProgress, -((float) Math.toRadians(3.9672555472768707D)), 0, 0);
+            sitAnimationRotation(upperJaw, sitProgress, -((float) Math.toRadians(0.1D)), 0, 0);
+            sitAnimationRotation(rightLowerArm, sitProgress, 0, 0, 0);
+            sitAnimationPos(lowerBody, sitProgress, 0F, 16.40F - ModelUtils.getDefaultPositionY(lowerBody), 0F);
+            sitAnimationPos(rightThigh, sitProgress, 0F, 19.40F - ModelUtils.getDefaultPositionY(rightThigh), 0F);
+            sitAnimationPos(leftThigh, sitProgress, 0F, 19.40F - ModelUtils.getDefaultPositionY(leftThigh), 0F);
+            sitAnimationRotation(head, sitProgress, (float)Math.toRadians(100.22D), 0, 0);
+            sitAnimationRotation(neck, sitProgress, -((float)Math.toRadians(50.65D)), (float)Math.toRadians(18.26D), 0);
+       
+        }
         this.bob(lowerBody, speed, 0.7F, false, entity.ticksExisted, 1);
         this.walk(upperBody, speed, 0.1F, false, 0, 0, entity.ticksExisted, 1);
         this.chainWave(tailParts, speed, 0.05F, -3, entity.ticksExisted, 1);

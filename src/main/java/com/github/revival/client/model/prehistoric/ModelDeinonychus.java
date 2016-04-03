@@ -361,7 +361,7 @@ public class ModelDeinonychus extends ModelNewPrehistoric {
 			ModelUtils.setRotateAngleAlt(head, 40, 0, 0);
 			EntityDeinonychus dino = (EntityDeinonychus) entity;
 			float speed3 = 0.5F;
-			this.walk(lowerJaw, speed3, -0.3F, true, 0.5F, 0.3F, entity.ticksExisted, 1);
+			this.walk(lowerJaw, speed3, -0.3F, false, 0.5F, 0.3F, entity.ticksExisted, 1);
 			this.walk(neck, speed3, 0.4F, false, 0F, 0.4F, entity.ticksExisted, 1);
 			this.walk(head, speed3, 0.4F, true, 0F, 0.2F, entity.ticksExisted, 1);
 			this.flap(leftUpperArm, 0.8F, -0.4F, true, 0.3F, -0.2F, entity.ticksExisted, 1);
