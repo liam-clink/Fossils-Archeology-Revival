@@ -35,6 +35,7 @@ public class RenderThrowableEgg extends Render {
      * (Render<T extends Entity) and this method has signature public void func_76986_a(T entity, double d, double d1,
      * double d2, float f, float f1). But JAD is pre 1.5 so doesn't do that.
      */
+    @Override
     public void doRender(Entity entity, double d1, double d2, double d3, float float1, float float2) {
         IIcon iicon = this.item.getIconFromDamage(this.damage);
 
@@ -67,6 +68,7 @@ public class RenderThrowableEgg extends Render {
     /**
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
+    @Override
     protected ResourceLocation getEntityTexture(Entity entity) {
         return TextureMap.locationItemsTexture;
     }

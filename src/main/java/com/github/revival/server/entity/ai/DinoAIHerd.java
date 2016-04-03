@@ -27,10 +27,7 @@ public class DinoAIHerd extends EntityAIBase {
 
     @Override
     public boolean shouldExecute() {
-        if (dinosaur.isInHerd()) {
-            return true;
-        }
-        return false;
+        return dinosaur.isInHerd();
     }
 
     @Override

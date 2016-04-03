@@ -196,6 +196,7 @@ public class ModelQuagga extends ModelBase {
     /**
      * Sets the models various rotation angles then renders the model.
      */
+    @Override
     public void render(Entity par1Entity, float par2, float par3, float par4, float par5, float par6, float par7) {
         EntityQuagga entityhorse = (EntityQuagga) par1Entity;
         float f6 = entityhorse.getGrassEatingAmount(0.0F);
@@ -294,7 +295,6 @@ public class ModelQuagga extends ModelBase {
         float f3;
 
         for (f3 = par2 - par1; f3 < -180.0F; f3 += 360.0F) {
-            ;
         }
 
         while (f3 >= 180.0F) {
@@ -308,6 +308,7 @@ public class ModelQuagga extends ModelBase {
      * Used for easily adding entity-dependent animations. The second and third float params here are the same second
      * and third as in the setRotationAngles method.
      */
+    @Override
     public void setLivingAnimations(EntityLivingBase par1EntityLivingBase, float par2, float par3, float par4) {
         super.setLivingAnimations(par1EntityLivingBase, par2, par3, par4);
         float f3 = this.func_110683_a(par1EntityLivingBase.prevRenderYawOffset, par1EntityLivingBase.renderYawOffset, par4);

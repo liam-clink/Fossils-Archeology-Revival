@@ -15,7 +15,7 @@ public enum EnumAnimalType {
 
     public int GrowTime;
 
-    private EnumAnimalType(int grow0) {
+    EnumAnimalType(int grow0) {
         if (Revival.enableDebugging()) {
             GrowTime = 100;
         } else {

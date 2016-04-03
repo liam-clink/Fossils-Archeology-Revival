@@ -44,6 +44,7 @@ public class EntitySmilodon extends EntityNewPrehistoric {
         hasBabyTexture = false;
     }
 
+    @Override
     public int getAttackLength() {
         return 30;
     }
@@ -138,21 +139,22 @@ public class EntitySmilodon extends EntityNewPrehistoric {
         return Items.bone;
     }
 
+    @Override
     public void updateSize() {
 
         double healthStep;
         double attackStep;
         double speedStep;
-        healthStep = (this.maxHealth - this.baseHealth) / (this.getAdultAge() + 1);
-        attackStep = (this.maxDamage - this.baseDamage) / (this.getAdultAge() + 1);
-        speedStep = (this.maxSpeed - this.baseSpeed) / (this.getAdultAge() + 1);
+        healthStep = (maxHealth - baseHealth) / (this.getAdultAge() + 1);
+        attackStep = (maxDamage - baseDamage) / (this.getAdultAge() + 1);
+        speedStep = (maxSpeed - baseSpeed) / (this.getAdultAge() + 1);
 
 
         if (this.getDinoAge() <= this.getAdultAge()) {
 
-            this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(Math.round(this.baseHealth + (healthStep * this.getDinoAge())));
-            this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(Math.round(this.baseDamage + (attackStep * this.getDinoAge())));
-            this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(this.baseSpeed + (speedStep * this.getDinoAge()));
+            this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(Math.round(baseHealth + (healthStep * this.getDinoAge())));
+            this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(Math.round(baseDamage + (attackStep * this.getDinoAge())));
+            this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(baseSpeed + (speedStep * this.getDinoAge()));
 
         }
     }
@@ -162,18 +164,21 @@ public class EntitySmilodon extends EntityNewPrehistoric {
         return 8;
     }
 
+    @Override
     public float getMaleSize() {
         return 1.2F;
     }
 
+    @Override
     public void onLivingUpdate() {
         super.onLivingUpdate();
-        if (this.getAnimation() == this.animation_attack && this.getAnimationTick() == 12 && this.getAttackTarget() != null) {
+        if (this.getAnimation() == animation_attack && this.getAnimationTick() == 12 && this.getAttackTarget() != null) {
             this.attackEntityAsMob(this.getAttackTarget());
         }
     }
 
 
+    @Override
     public boolean attackEntityAsMob(Entity entity) {
         if (this.boundingBox.intersectsWith(entity.boundingBox)) {
             if (this.getAnimation() == NO_ANIMATION) {

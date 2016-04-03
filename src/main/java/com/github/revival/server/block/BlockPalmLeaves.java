@@ -41,6 +41,7 @@ public class BlockPalmLeaves extends BlockLeaves {
         this.setBlockName(LocalizationStrings.PALAE_LEAVES_NAME);
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public int getBlockColor() {
         double d0 = 0.5D;
@@ -48,6 +49,7 @@ public class BlockPalmLeaves extends BlockLeaves {
         return ColorizerFoliage.getFoliageColor(d0, d1);
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
 
     /**
@@ -57,6 +59,7 @@ public class BlockPalmLeaves extends BlockLeaves {
         return (par1 & 3) == 1 ? ColorizerFoliage.getFoliageColorPine() : ((par1 & 3) == 2 ? ColorizerFoliage.getFoliageColorBirch() : ColorizerFoliage.getFoliageColorBasic());
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
 
     /**
@@ -93,6 +96,7 @@ public class BlockPalmLeaves extends BlockLeaves {
      * different metadata value, but before the new metadata value is set. Args: World, x, y, z, old block ID, old
      * metadata
      */
+    @Override
     public void breakBlock(World world, int x, int y, int z, Block oldblock, int metadata) {
         byte b0 = 1;
         int i1 = b0 + 1;
@@ -114,6 +118,7 @@ public class BlockPalmLeaves extends BlockLeaves {
     /**
      * Ticks the block if it's been scheduled
      */
+    @Override
     public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random) {
         if (!par1World.isRemote) {
             int l = par1World.getBlockMetadata(par2, par3, par4);
@@ -198,13 +203,14 @@ public class BlockPalmLeaves extends BlockLeaves {
         }
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
 
     /**
      * A randomly called display update to be able to add particles or other items for display
      */
     public void randomDisplayTick(World par1World, int par2, int par3, int par4, Random par5Random) {
-        if (par1World.canLightningStrikeAt(par2, par3 + 1, par4) && !par1World.doesBlockHaveSolidTopSurface(par1World, par2, par3 - 1, par4) && par5Random.nextInt(15) == 1) {
+        if (par1World.canLightningStrikeAt(par2, par3 + 1, par4) && !World.doesBlockHaveSolidTopSurface(par1World, par2, par3 - 1, par4) && par5Random.nextInt(15) == 1) {
             double d0 = (double) ((float) par2 + par5Random.nextFloat());
             double d1 = (double) par3 - 0.05D;
             double d2 = (double) ((float) par4 + par5Random.nextFloat());
@@ -220,6 +226,7 @@ public class BlockPalmLeaves extends BlockLeaves {
     /**
      * Returns the quantity of items to drop on block destruction.
      */
+    @Override
     public int quantityDropped(Random par1Random) {
         return par1Random.nextInt(20) == 0 ? 1 : 0;
     }
@@ -227,6 +234,7 @@ public class BlockPalmLeaves extends BlockLeaves {
     /**
      * Returns the ID of the items to drop on destruction.
      */
+    @Override
     public Item getItemDropped(int par1, Random par2Random, int par3) {
         return Item.getItemFromBlock(FABlockRegistry.INSTANCE.palmSap);
     }
@@ -234,6 +242,7 @@ public class BlockPalmLeaves extends BlockLeaves {
     /**
      * Drops the block items with a specified chance of dropping the specified items
      */
+    @Override
     public void dropBlockAsItemWithChance(World par1World, int par2, int par3, int par4, int par5, float par6, int par7) {
         if (!par1World.isRemote) {
             int j1 = 20;
@@ -271,9 +280,11 @@ public class BlockPalmLeaves extends BlockLeaves {
         }
     }
 
+    @Override
     protected void func_150124_c(World p_150124_1_, int p_150124_2_, int p_150124_3_, int p_150124_4_, int p_150124_5_, int p_150124_6_) {
     }
 
+    @Override
     protected int func_150123_b(int p_150123_1_) {
         return 20;
     }
@@ -282,6 +293,7 @@ public class BlockPalmLeaves extends BlockLeaves {
      * Called when the player destroys a block with an item that can harvest it. (i, j, k) are the coordinates of the
      * block and l is the block's subtype/damage.
      */
+    @Override
     public void harvestBlock(World par1World, EntityPlayer par2EntityPlayer, int par3, int par4, int par5, int par6) {
         super.harvestBlock(par1World, par2EntityPlayer, par3, par4, par5, par6);
     }
@@ -289,6 +301,7 @@ public class BlockPalmLeaves extends BlockLeaves {
     /**
      * Determines the damage on the item the block drops. Used in cloth and wood.
      */
+    @Override
     public int damageDropped(int par1) {
         return par1 & 3;
     }
@@ -297,6 +310,7 @@ public class BlockPalmLeaves extends BlockLeaves {
      * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
      * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
      */
+    @Override
     public boolean isOpaqueCube() {
         return !this.field_150121_P;
     }
@@ -304,6 +318,7 @@ public class BlockPalmLeaves extends BlockLeaves {
     /**
      * Gets the block's texture. Args: side, meta
      */
+    @Override
     @SideOnly(Side.CLIENT)
     public IIcon getIcon(int side, int meta) {
         this.setGraphicsLevel(Minecraft.getMinecraft().gameSettings.fancyGraphics);
@@ -314,6 +329,7 @@ public class BlockPalmLeaves extends BlockLeaves {
     /**
      * Pass true to draw this block using fancy graphics, or false for fast graphics.
      */
+    @Override
     @SideOnly(Side.CLIENT)
     public void setGraphicsLevel(boolean p_150122_1_) {
         this.field_150121_P = p_150122_1_;
@@ -324,10 +340,12 @@ public class BlockPalmLeaves extends BlockLeaves {
      * Returns an item stack containing a single instance of the current block type. 'i' is the block's subtype/damage
      * and is ignored for blocks which do not support subtypes. Blocks which cannot be harvested should return null.
      */
+    @Override
     protected ItemStack createStackedBlock(int par1) {
         return new ItemStack(this, 1, par1 & 3);
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
 
     /**

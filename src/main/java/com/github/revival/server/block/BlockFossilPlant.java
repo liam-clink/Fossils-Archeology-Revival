@@ -69,6 +69,7 @@ public class BlockFossilPlant extends BlockBush {
     /**
      * Returns the quantity of items to drop on block destruction.
      */
+    @Override
     public int quantityDropped(Random var1) {
         return 1;
     }

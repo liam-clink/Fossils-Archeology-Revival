@@ -119,10 +119,12 @@ public class MessageFoodParticles extends AbstractMessage<MessageFoodParticles> 
 
     }
 
+    @Override
     public void onServerReceived(MinecraftServer server, MessageFoodParticles message, EntityPlayer player, MessageContext messageContext) {
 
     }
 
+    @Override
     public void fromBytes(ByteBuf buf) {
         dinosaurID = buf.readInt();
         foodItemID = buf.readInt();
@@ -130,6 +132,7 @@ public class MessageFoodParticles extends AbstractMessage<MessageFoodParticles> 
 
     }
 
+    @Override
     public void toBytes(ByteBuf buf) {
         buf.writeInt(dinosaurID);
         buf.writeInt(foodItemID);

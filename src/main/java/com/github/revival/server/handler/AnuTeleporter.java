@@ -36,6 +36,7 @@ public class AnuTeleporter extends Teleporter {
     /**
      * Place an entity in a nearby portal, creating one if necessary.
      */
+    @Override
     public void placeInPortal(Entity p_77185_1_, double p_77185_2_, double p_77185_4_, double p_77185_6_, float p_77185_8_) {
 
         p_77185_1_.setLocationAndAngles((double) -74, (double) 63, (double) -115, p_77185_1_.rotationYaw, 0.0F);
@@ -68,6 +69,7 @@ public class AnuTeleporter extends Teleporter {
     }
 
 
+    @Override
     public boolean makePortal(Entity p_85188_1_) {
         byte b0 = 16;
         double d0 = -1.0D;
@@ -259,6 +261,7 @@ public class AnuTeleporter extends Teleporter {
      * called periodically to remove out-of-date portal locations from the cache list. Argument par1 is a
      * WorldServer.getTotalWorldTime() value.
      */
+    @Override
     public void removeStalePortalLocations(long p_85189_1_) {
         if (p_85189_1_ % 100L == 0L) {
             Iterator iterator = this.destinationCoordinateKeys.iterator();

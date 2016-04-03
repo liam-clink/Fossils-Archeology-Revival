@@ -32,6 +32,7 @@ public class BlockAnubiteStatue extends BlockContainer implements ISubBlocksBloc
         setBlockName("AnubiteStatue");
     }
 
+    @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
         world.newExplosion(null, x + 0.5F, y, z + 0.5, 5F, true, true);
         EntityAnubite newMob = new EntityAnubite(world);
@@ -50,6 +51,7 @@ public class BlockAnubiteStatue extends BlockContainer implements ISubBlocksBloc
         this.blockIcon = iconRegister.registerIcon("nether_brick");
     }
 
+    @Override
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack) {
         byte b0 = 0;
         int l = MathHelper.floor_double((double) (entity.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
@@ -77,22 +79,27 @@ public class BlockAnubiteStatue extends BlockContainer implements ISubBlocksBloc
         super.onBlockPlacedBy(world, x, y, z, entity, stack);
     }
 
+    @Override
     public int getRenderType() {
         return -94;
     }
 
+    @Override
     public boolean isOpaqueCube() {
         return false;
     }
 
+    @Override
     public boolean renderAsNormalBlock() {
         return false;
     }
 
+    @Override
     public TileEntity createNewTileEntity(World world, int i) {
         return new TileEntityAnubiteStatue();
     }
 
+    @Override
     public Class<? extends ItemBlock> getItemBlockClass() {
         return AnubiteStatueBlockItem.class;
     }

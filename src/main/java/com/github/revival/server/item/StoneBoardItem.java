@@ -19,6 +19,7 @@ public class StoneBoardItem extends Item {
         setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
     }
 
+    @Override
     public boolean onItemUse(ItemStack var1, EntityPlayer var2, World world, int x, int y, int z, int direction, float par8, float par9, float par10) {
         if (direction == 0 || direction == 1) {
             return false;

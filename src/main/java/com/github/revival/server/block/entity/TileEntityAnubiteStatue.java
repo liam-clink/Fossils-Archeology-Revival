@@ -9,6 +9,7 @@ import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityAnubiteStatue extends TileEntity {
 
+    @Override
     public void updateEntity() {
         EntityPlayer player = this.worldObj.getClosestPlayer(xCoord, yCoord, zCoord, 5);
         if (player != null) {

@@ -34,9 +34,11 @@ public class TimeMachineContainer extends Container {
         }
     }
 
+    @Override
     public void updateProgressBar(int var1, int var2) {
     }
 
+    @Override
     public boolean canInteractWith(EntityPlayer var1) {
         return this.timeMachine.isUseableByPlayer(var1);
     }
@@ -45,6 +47,7 @@ public class TimeMachineContainer extends Container {
      * Called when a player shift-clicks on a slot. You must override this or
      * you will crash when someone does that.
      */
+    @Override
     public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int var2) {
         Slot slot = (Slot) this.inventorySlots.get(var2);
 

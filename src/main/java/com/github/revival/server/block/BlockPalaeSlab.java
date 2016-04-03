@@ -36,6 +36,7 @@ public class BlockPalaeSlab extends BlockSlab {
         }
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public Item getItem(World world, int x, int y, int z) {
         return Item.getItemFromBlock(this);
@@ -46,6 +47,7 @@ public class BlockPalaeSlab extends BlockSlab {
         this.blockIcon = par1IconRegister.registerIcon("fossil:Palae_Planks");
     }
 
+    @Override
     public Item getItemDropped(int var1, Random var2, int var3) {
         return Item.getItemFromBlock(FABlockRegistry.INSTANCE.palaeSingleSlab);
     }
@@ -62,10 +64,12 @@ public class BlockPalaeSlab extends BlockSlab {
         }
     }
 
+    @Override
     protected ItemStack createStackedBlock(int par1) {
         return new ItemStack(FABlockRegistry.INSTANCE.palaeSingleSlab, 2, par1 & 7);
     }
 
+    @Override
     public String func_150002_b(int par1) {
         if ((par1 < 0) || (par1 >= woodType.length)) {
             par1 = 0;
@@ -74,6 +78,7 @@ public class BlockPalaeSlab extends BlockSlab {
         return super.getUnlocalizedName() + "." + woodType[par1];
     }
 
+    @Override
     public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List par3List) {
         if (par1 != Item.getItemFromBlock(FABlockRegistry.INSTANCE.palaeDoubleSlab)) {
             par3List.add(new ItemStack(par1, 1, 0));

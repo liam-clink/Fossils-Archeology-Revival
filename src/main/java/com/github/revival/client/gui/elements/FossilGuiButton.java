@@ -18,6 +18,7 @@ public class FossilGuiButton extends GuiButton {
         iconIndexWidth = width;
     }
 
+    @Override
     public void drawButton(Minecraft mc, int mouseX, int mouseY) {
     }
 }

@@ -51,6 +51,7 @@ public class AnuCastleWorldGen extends WorldGenerator {
                 };
     }
 
+    @Override
     public boolean generate(World world, Random rand, int x, int y, int z) {
         generate_r0(world, rand, x, y, z);
         generateChests(world, rand, x, y, z);

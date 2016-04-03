@@ -12,11 +12,13 @@ public class TabFBlocks extends CreativeTabs {
         super(par2Str);
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public Item getTabIconItem() {
         return Item.getItemFromBlock(FABlockRegistry.INSTANCE.blockworktableActive);
     }
 
+    @Override
     public String getTranslatedTabLabel() {
         return LocalizationStrings.FBLOCKS_NAME;
     }

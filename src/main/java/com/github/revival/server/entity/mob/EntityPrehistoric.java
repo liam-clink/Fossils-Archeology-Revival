@@ -50,6 +50,7 @@ public class EntityPrehistoric extends EntityTameable implements IPrehistoricAI 
         super(world);
     }
 
+    @Override
     protected void entityInit() {
         super.entityInit();
         this.dataWatcher.addObject(OWNER_DISPLAY_NAME_INDEX, "");
@@ -118,6 +119,7 @@ public class EntityPrehistoric extends EntityTameable implements IPrehistoricAI 
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
+    @Override
     public void writeEntityToNBT(NBTTagCompound compound) {
         super.writeEntityToNBT(compound);
         compound.setString("OwnerDisplayName", this.getOwnerDisplayName());
@@ -126,6 +128,7 @@ public class EntityPrehistoric extends EntityTameable implements IPrehistoricAI 
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
+    @Override
     public void readEntityFromNBT(NBTTagCompound compound) {
         String s = "";
 
@@ -195,14 +198,14 @@ public class EntityPrehistoric extends EntityTameable implements IPrehistoricAI 
 
     }
 
+    @Override
     public void onUpdate() {
         super.onUpdate();
         animation_frame++;
     }
 
     public String getOwnerDisplayName() {
-        String s = this.dataWatcher.getWatchableObjectString(OWNER_DISPLAY_NAME_INDEX);
-        return s;
+        return this.dataWatcher.getWatchableObjectString(OWNER_DISPLAY_NAME_INDEX);
     }
 
     public void setOwnerDisplayName(String displayName) {

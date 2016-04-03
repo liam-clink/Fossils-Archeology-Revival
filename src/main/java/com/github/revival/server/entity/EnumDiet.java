@@ -5,7 +5,7 @@ public enum EnumDiet {
 
     public int fearIndex;
 
-    private EnumDiet(int fearIndex) {
+    EnumDiet(int fearIndex) {
         this.fearIndex = fearIndex;
     }
 }

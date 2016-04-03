@@ -53,6 +53,7 @@ public class BlockFigurine extends BlockContainer implements ISubBlocksBlock {
         setBlockName(LocalizationStrings.FIGURINE_NAME);
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public void getSubBlocks(Item par1, CreativeTabs creativetabs, List list) {
         for (int j = 0; j < 16; ++j) {
@@ -60,22 +61,27 @@ public class BlockFigurine extends BlockContainer implements ISubBlocksBlock {
         }
     }
 
+    @Override
     public int getRenderType() {
         return -1;
     }
 
+    @Override
     public boolean isOpaqueCube() {
         return false;
     }
 
+    @Override
     public boolean canProvidePower() {
         return true;
     }
 
+    @Override
     public boolean renderAsNormalBlock() {
         return false;
     }
 
+    @Override
     public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack) {
         int l = MathHelper.floor_double((double) (par5EntityLivingBase.rotationYaw * 4.0F / 360.0F) + 1.5D) & 3;
         par1World.setBlockMetadataWithNotify(par2, par3, par4, l, 2);
@@ -84,24 +90,29 @@ public class BlockFigurine extends BlockContainer implements ISubBlocksBlock {
         ((TileEntityFigurine) tileentity).setFigurineRotation(1);
     }
 
+    @Override
     public TileEntity createNewTileEntity(World world, int par2) {
         return new TileEntityFigurine();
     }
 
+    @Override
     public int getDamageValue(World par1World, int par2, int par3, int par4) {
         TileEntity tileentity = par1World.getTileEntity(par2, par3, par4);
         return tileentity != null && tileentity instanceof TileEntityFigurine ? ((TileEntityFigurine) tileentity).getFigurineType() : super.getDamageValue(par1World, par2, par3, par4);
     }
 
+    @Override
     public int damageDropped(int meta) {
         return meta;
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public IIcon getIcon(int side, int meta) {
         return icons[meta];
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister iconregister) {
         icons = new IIcon[shortname.length];
@@ -111,6 +122,7 @@ public class BlockFigurine extends BlockContainer implements ISubBlocksBlock {
         }
     }
 
+    @Override
     public Class<? extends ItemBlock> getItemBlockClass() {
         return FigurineBlockItem.class;
     }

@@ -26,16 +26,18 @@ public class DinoAIFish extends EntityAIBase {
     /**
      * Returns whether the EntityAIBase should begin execution.
      */
+    @Override
     public boolean shouldExecute() {
         if (theEntity.aiWaterAbilityType() != WaterAbility.IGNOREANDFISH) {
             return false;
         }
-        return !this.nearbyGotWater() ? false : this.theEntity.IsHungry()/*(float)this.theEntity.getHunger() < this.huntLimit*/ && this.theEntity.getRNG().nextInt(100) < this.percentage;
+        return this.nearbyGotWater() && this.theEntity.IsHungry()/*(float)this.theEntity.getHunger() < this.huntLimit*/ && this.theEntity.getRNG().nextInt(100) < this.percentage;
     }
 
     /**
      * Updates the task
      */
+    @Override
     public void updateTask() {
         Random var1 = this.theEntity.getRNG();
 

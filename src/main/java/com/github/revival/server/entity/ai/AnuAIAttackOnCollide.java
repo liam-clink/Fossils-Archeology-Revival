@@ -11,6 +11,7 @@ public class AnuAIAttackOnCollide extends EntityAIAttackOnCollide {
         theEntity = p_i1616_1_;
     }
 
+    @Override
     public boolean shouldExecute() {
         if (theEntity.getAttackMode() == 0) {
             return super.shouldExecute();

@@ -55,11 +55,7 @@ public abstract class EntityPrehistoric extends EntityAgeable {
         this.subSpecies = subSpecies;
         this.hunger = type.getMaxHunger() / 2;
         this.setSize(type.getBaseBoundingBoxHeight(), type.getBaseBoundingBoxWidth());
-        if ((new Random()).nextBoolean()) {
-            male = true;
-        } else {
-            male = false;
-        }
+        male = (new Random()).nextBoolean();
         //this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(type.getMaxHealth());
     }
 
@@ -484,6 +480,7 @@ public abstract class EntityPrehistoric extends EntityAgeable {
     /**
      * Gets the age of the mob
      */
+    @Override
     public int getAge() {
         return age;
     }
@@ -611,6 +608,7 @@ public abstract class EntityPrehistoric extends EntityAgeable {
     /**
      * Returns true if the mob is a child
      */
+    @Override
     public boolean isChild() {
         return this.age < type.getTeenAge();
     }

@@ -24,6 +24,7 @@ public class EntityFailuresaurus extends EntityMob {
 
     }
 
+    @Override
     protected void entityInit() {
         super.entityInit();
         this.dataWatcher.addObject(16, new Byte((byte) 0));
@@ -31,18 +32,22 @@ public class EntityFailuresaurus extends EntityMob {
         this.setSkin(this.worldObj.rand.nextInt(3));
     }
 
+    @Override
     protected boolean canDespawn() {
         return false;
     }
 
+    @Override
     public boolean allowLeashing() {
         return true;
     }
 
+    @Override
     public boolean isOnLadder() {
         return this.isBesideClimbableBlock();
     }
 
+    @Override
     public void onUpdate() {
         super.onUpdate();
 
@@ -78,6 +83,7 @@ public class EntityFailuresaurus extends EntityMob {
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
+    @Override
     public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {
         super.writeEntityToNBT(par1NBTTagCompound);
         par1NBTTagCompound.setInteger("FailuresaurusSkin", this.getSkin());
@@ -86,6 +92,7 @@ public class EntityFailuresaurus extends EntityMob {
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
+    @Override
     public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {
         super.readEntityFromNBT(par1NBTTagCompound);
         this.setSkin(par1NBTTagCompound.getInteger("FailuresaurusSkin"));
@@ -94,10 +101,12 @@ public class EntityFailuresaurus extends EntityMob {
     /**
      * Returns the item ID for the item the mob drops on death.
      */
+    @Override
     protected Item getDropItem() {
         return FAItemRegistry.INSTANCE.failuresaurusFlesh;
     }
 
+    @Override
     public void onLivingUpdate() {
         super.onLivingUpdate();
         int i = MathHelper.floor_double(this.posX);
@@ -114,6 +123,7 @@ public class EntityFailuresaurus extends EntityMob {
         }
     }
 
+    @Override
     protected String getLivingSound() {
         return "mob.zombie.say";
     }
@@ -121,6 +131,7 @@ public class EntityFailuresaurus extends EntityMob {
     /**
      * Returns the sound this mob makes when it is hurt.
      */
+    @Override
     protected String getHurtSound() {
         return "mob.zombie.hurt";
     }
@@ -128,6 +139,7 @@ public class EntityFailuresaurus extends EntityMob {
     /**
      * Returns the sound this mob makes on death.
      */
+    @Override
     protected String getDeathSound() {
         return "mob.zombie.death";
     }
@@ -135,6 +147,7 @@ public class EntityFailuresaurus extends EntityMob {
     /**
      * Causes this entity to do an upwards motion (jumping).
      */
+    @Override
     protected void jump() {
     }
 

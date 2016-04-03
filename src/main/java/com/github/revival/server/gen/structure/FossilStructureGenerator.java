@@ -180,6 +180,7 @@ public class FossilStructureGenerator extends StructureGeneratorBase {
      * @param customData1 Custom data used to subtype events for given fakeID
      * @param customData2 Additional custom data
      */
+    @Override
     public void onCustomBlockAdded(World world, int x, int y, int z,
                                    int fakeID, int customData1, int customData2) {
         if (!value_set) {

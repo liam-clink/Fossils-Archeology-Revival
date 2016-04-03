@@ -32,8 +32,7 @@ public class Flock {
     private PathNavigate flockPathNavigate;
 
     public static int generateVarience(int max, int min) {
-        int ii = -min + (int) (Math.random() * ((max - (-min)) + 1));
-        return ii;
+        return -min + (int) (Math.random() * ((max - (-min)) + 1));
     }
 
     public void createFlock(EntityPrehistoric creator) {

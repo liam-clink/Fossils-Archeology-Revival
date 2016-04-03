@@ -26,26 +26,32 @@ public class TileEntityNewFeeder extends TileEntity implements IInventory, ISide
     private String customName;
     private int ticksExisted;
 
+    @Override
     public int[] getAccessibleSlotsFromSide(int i) {
         return i == 1 ? slots_herb : slots_carn;
     }
 
+    @Override
     public boolean canInsertItem(int i, ItemStack stack, int ammount) {
         return isItemValidForSlot(i, stack);
     }
 
+    @Override
     public boolean canExtractItem(int i, ItemStack stack, int ammount) {
         return false;
     }
 
+    @Override
     public int getSizeInventory() {
         return this.feederItemStacks.length;
     }
 
+    @Override
     public ItemStack getStackInSlot(int i) {
         return this.feederItemStacks[i];
     }
 
+    @Override
     public ItemStack decrStackSize(int i, int amount) {
         if (this.feederItemStacks[i] != null) {
             ItemStack stack;
@@ -68,6 +74,7 @@ public class TileEntityNewFeeder extends TileEntity implements IInventory, ISide
         }
     }
 
+    @Override
     public void readFromNBT(NBTTagCompound tag) {
         super.readFromNBT(tag);
         NBTTagList tag2 = tag.getTagList("Items", 10);
@@ -91,6 +98,7 @@ public class TileEntityNewFeeder extends TileEntity implements IInventory, ISide
         }
     }
 
+    @Override
     public void writeToNBT(NBTTagCompound tag) {
         super.writeToNBT(tag);
         NBTTagList tag2 = new NBTTagList();
@@ -118,6 +126,7 @@ public class TileEntityNewFeeder extends TileEntity implements IInventory, ISide
         return null;
     }
 
+    @Override
     public void setInventorySlotContents(int i, ItemStack stack) {
         this.feederItemStacks[i] = stack;
 
@@ -134,17 +143,21 @@ public class TileEntityNewFeeder extends TileEntity implements IInventory, ISide
         return this.currentPlant * i / this.maxPlant;
     }
 
+    @Override
     public int getInventoryStackLimit() {
         return 64;
     }
 
+    @Override
     public boolean isUseableByPlayer(EntityPlayer player) {
-        return this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord) != this ? false : player.getDistanceSq((double) this.xCoord + 0.5D, (double) this.yCoord + 0.5D, (double) this.zCoord + 0.5D) <= 64.0D;
+        return this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord) == this && player.getDistanceSq((double) this.xCoord + 0.5D, (double) this.yCoord + 0.5D, (double) this.zCoord + 0.5D) <= 64.0D;
     }
 
+    @Override
     public void openInventory() {
     }
 
+    @Override
     public void closeInventory() {
     }
 
@@ -160,6 +173,7 @@ public class TileEntityNewFeeder extends TileEntity implements IInventory, ISide
         this.customName = par1Str;
     }
 
+    @Override
     public String getInventoryName() {
         return this.hasCustomInventoryName() ? this.customName : "tile." + LocalizationStrings.FEEDER_ACTIVE_NAME + ".name";
     }
@@ -169,6 +183,7 @@ public class TileEntityNewFeeder extends TileEntity implements IInventory, ISide
         return this.customName != null && this.customName.length() > 0;
     }
 
+    @Override
     public boolean isItemValidForSlot(int i, ItemStack stack) {
         if (stack != null && stack.getItem() != null) {
             if (i == 1) {
@@ -221,6 +236,7 @@ public class TileEntityNewFeeder extends TileEntity implements IInventory, ISide
         return feedamount;
     }
 
+    @Override
     public void updateEntity() {
         super.updateEntity();
         ticksExisted++;

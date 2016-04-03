@@ -8,6 +8,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 
 public class ModelPrehistoric extends AdvancedModelBase {
+    @Override
     public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
         doAdvancedStuff(true);
         renderAll();

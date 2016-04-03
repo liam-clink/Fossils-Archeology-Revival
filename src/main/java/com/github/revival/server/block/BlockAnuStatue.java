@@ -43,6 +43,7 @@ public class BlockAnuStatue extends BlockContainer implements ISubBlocksBlock {
 
     }
 
+    @Override
     public boolean canProvidePower() {
         return true;
     }
@@ -52,6 +53,7 @@ public class BlockAnuStatue extends BlockContainer implements ISubBlocksBlock {
         return 15;
     }
 
+    @Override
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack) {
         byte b0 = 0;
         int l = MathHelper.floor_double((double) (entity.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
@@ -80,22 +82,27 @@ public class BlockAnuStatue extends BlockContainer implements ISubBlocksBlock {
         super.onBlockPlacedBy(world, x, y, z, entity, stack);
     }
 
+    @Override
     public int getRenderType() {
         return -93;
     }
 
+    @Override
     public boolean isOpaqueCube() {
         return false;
     }
 
+    @Override
     public boolean renderAsNormalBlock() {
         return false;
     }
 
+    @Override
     public TileEntity createNewTileEntity(World world, int i) {
         return new TileEntityAnuTotem();
     }
 
+    @Override
     public Class<? extends ItemBlock> getItemBlockClass() {
         return AnuStatueBlockItem.class;
     }

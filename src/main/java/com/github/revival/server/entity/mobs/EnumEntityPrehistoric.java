@@ -89,7 +89,7 @@ public enum EnumEntityPrehistoric {
     private boolean attacksPlayersAsAdult;
     private boolean territorial;
 
-    private EnumEntityPrehistoric(Class entityClass, boolean tameable, boolean rideable, boolean canCarry, boolean canFormHerds, boolean territorial, int targetFoodHabbit) {
+    EnumEntityPrehistoric(Class entityClass, boolean tameable, boolean rideable, boolean canCarry, boolean canFormHerds, boolean territorial, int targetFoodHabbit) {
         this.entityClass = entityClass;
         this.tameable = tameable;
         this.rideable = rideable;
@@ -345,11 +345,11 @@ public enum EnumEntityPrehistoric {
     }
 
     public boolean eatsMeat() {
-        return targetFoodHabbit == this.FOOD_HABBIT_CARNIVORE || targetFoodHabbit == this.FOOD_HABBIT_OMNIVORE;
+        return targetFoodHabbit == FOOD_HABBIT_CARNIVORE || targetFoodHabbit == FOOD_HABBIT_OMNIVORE;
     }
 
     public boolean eatsVegetables() {
-        return targetFoodHabbit == this.FOOD_HABBIT_HERBIVORE || targetFoodHabbit == this.FOOD_HABBIT_OMNIVORE;
+        return targetFoodHabbit == FOOD_HABBIT_HERBIVORE || targetFoodHabbit == FOOD_HABBIT_OMNIVORE;
     }
 
     public boolean eatsBlocks() {

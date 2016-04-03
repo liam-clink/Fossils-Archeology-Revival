@@ -11,6 +11,7 @@ public class AnuAIAvoidEntity extends EntityAIAvoidEntity {
         theEntity = p_i1616_1_;
     }
 
+    @Override
     public boolean shouldExecute() {
         if (theEntity.getAttackMode() == 2) {
             return super.shouldExecute();

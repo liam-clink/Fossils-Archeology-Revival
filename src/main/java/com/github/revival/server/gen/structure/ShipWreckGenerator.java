@@ -44,7 +44,7 @@ public class ShipWreckGenerator implements IWorldGenerator {
         FossilWaterStructureGenerator gen = new FossilWaterStructureGenerator();
         int struct; // This will store a random index of the structure to
         // generate
-        struct = rand.nextInt(gen.structures.size());
+        struct = rand.nextInt(FossilWaterStructureGenerator.structures.size());
         int x = chunkX + rand.nextInt(16);
         int z = chunkZ + rand.nextInt(16);
         // nice way of getting a height to work from; it returns the topmost
@@ -53,7 +53,7 @@ public class ShipWreckGenerator implements IWorldGenerator {
 
         // find ground level, ignoring blocks such as grass and water
 
-        while ((!world.doesBlockHaveSolidTopSurface(world, x, y, z))// && y >
+        while ((!World.doesBlockHaveSolidTopSurface(world, x, y, z))// && y >
             // world.provider.getAverageGroundLevel())
             // && (!world.doesBlockHaveSolidTopSurface(world, x + 10, y+4, z + 11)
             // || !world.doesBlockHaveSolidTopSurface(world, x - 10, y+4, z - 11)
@@ -63,7 +63,7 @@ public class ShipWreckGenerator implements IWorldGenerator {
             --y;
         }
 
-        if (!world.doesBlockHaveSolidTopSurface(world, x, y, z)
+        if (!World.doesBlockHaveSolidTopSurface(world, x, y, z)
                 || (Block.getIdFromBlock(world.getBlock(x, y + 2, z)) != Block
                 .getIdFromBlock(Blocks.water))
             // || !world.doesBlockHaveSolidTopSurface(world, x + 10, y, z + 11)
@@ -77,11 +77,11 @@ public class ShipWreckGenerator implements IWorldGenerator {
             Revival.printDebug("Gen: Shipwreck Spawn at " + x + ", " + y + ", " + z);
         }
 
-        int widthX = ((Structure) gen.structures.get(struct)).getWidthX();
-        int widthZ = ((Structure) gen.structures.get(struct)).getWidthZ();
-        int height = ((Structure) gen.structures.get(struct)).getHeight();
+        int widthX = ((Structure) FossilWaterStructureGenerator.structures.get(struct)).getWidthX();
+        int widthZ = ((Structure) FossilWaterStructureGenerator.structures.get(struct)).getWidthZ();
+        int height = ((Structure) FossilWaterStructureGenerator.structures.get(struct)).getHeight();
         // Set structure and random facing, then generate; no offset needed here
-        gen.setStructure((Structure) gen.structures.get(struct));
+        gen.setStructure((Structure) FossilWaterStructureGenerator.structures.get(struct));
         gen.setStructureFacing(rand.nextInt(4));
         gen.generate(world, rand, x, y - (rand.nextInt(3) + 3), z);
     }

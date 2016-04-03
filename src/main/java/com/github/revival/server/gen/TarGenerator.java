@@ -12,6 +12,7 @@ import net.minecraft.world.gen.feature.WorldGenSwamp;
 import java.util.Random;
 
 public class TarGenerator implements IWorldGenerator {
+    @Override
     public void generate(Random random, int chunkX, int chunkZ, World world,
                          IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
         switch (world.provider.dimensionId) {

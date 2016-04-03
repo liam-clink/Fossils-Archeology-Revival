@@ -50,24 +50,24 @@ public class ItemVaseVoluteRenderer implements IItemRenderer {
         switch (meta) {
             case 0:
             default:
-                this.bindTexture(damaged_volute);
+                bindTexture(damaged_volute);
                 break;
             case 1:
-                this.bindTexture(restored_volute);
+                bindTexture(restored_volute);
                 break;
             case 2:
-                this.bindTexture(redFigure_volute);
+                bindTexture(redFigure_volute);
                 break;
             case 3:
-                this.bindTexture(blackFigure_volute);
+                bindTexture(blackFigure_volute);
                 break;
             case 4:
-                this.bindTexture(porcelain_volute);
+                bindTexture(porcelain_volute);
                 break;
         }
 
 
-        this.model.render((Entity) data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+        model.render((Entity) data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
 
         glPopMatrix();
     }

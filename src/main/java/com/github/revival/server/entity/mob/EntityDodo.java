@@ -44,6 +44,7 @@ public class EntityDodo extends EntityNewPrehistoric {
         hasTeenTexture = false;
     }
 
+    @Override
     public boolean isAIEnabled() {
         return false;
     }
@@ -62,11 +63,13 @@ public class EntityDodo extends EntityNewPrehistoric {
         this.dataWatcher.updateObject(FAT_INDEX, var1);
     }
 
+    @Override
     public void readEntityFromNBT(NBTTagCompound compound) {
         super.readEntityFromNBT(compound);
         this.setFat(compound.getInteger("FatLevel"));
     }
 
+    @Override
     public void writeEntityToNBT(NBTTagCompound compound) {
         super.writeEntityToNBT(compound);
         compound.setInteger("FatLevel", this.getFat());
@@ -160,20 +163,21 @@ public class EntityDodo extends EntityNewPrehistoric {
         return Items.stick;
     }
 
+    @Override
     public void updateSize() {
         double healthStep;
         double attackStep;
         double speedStep;
-        healthStep = (this.maxHealth - this.baseHealth) / (this.getAdultAge() + 1);
-        attackStep = (this.maxDamage - this.baseDamage) / (this.getAdultAge() + 1);
-        speedStep = (this.maxSpeed - this.baseSpeed) / (this.getAdultAge() + 1);
+        healthStep = (maxHealth - baseHealth) / (this.getAdultAge() + 1);
+        attackStep = (maxDamage - baseDamage) / (this.getAdultAge() + 1);
+        speedStep = (maxSpeed - baseSpeed) / (this.getAdultAge() + 1);
 
 
         if (this.getDinoAge() <= this.getAdultAge()) {
 
-            this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(Math.round(this.baseHealth + (healthStep * this.getDinoAge())));
-            this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(Math.round(this.baseDamage + (attackStep * this.getDinoAge())));
-            this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(this.baseSpeed + (speedStep * this.getDinoAge()));
+            this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(Math.round(baseHealth + (healthStep * this.getDinoAge())));
+            this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(Math.round(baseDamage + (attackStep * this.getDinoAge())));
+            this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(baseSpeed + (speedStep * this.getDinoAge()));
         }
     }
 
@@ -182,6 +186,7 @@ public class EntityDodo extends EntityNewPrehistoric {
         return 5;
     }
 
+    @Override
     public boolean interact(EntityPlayer player) {
         super.interact(player);
         ItemStack itemstack = player.inventory.getCurrentItem();
@@ -206,6 +211,7 @@ public class EntityDodo extends EntityNewPrehistoric {
         return super.interact(player);
     }
 
+    @Override
     public boolean allowLeashing() {
         return true;
     }
@@ -229,14 +235,17 @@ public class EntityDodo extends EntityNewPrehistoric {
         }
     }
 
+    @Override
     protected String getLivingSound() {
         return "fossil:dodo_living";
     }
 
+    @Override
     protected String getHurtSound() {
         return "fossil:dodo_hurt";
     }
 
+    @Override
     protected String getDeathSound() {
         return "fossil:dodo_death";
     }

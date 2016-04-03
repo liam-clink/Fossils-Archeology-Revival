@@ -82,13 +82,13 @@ public enum EnumDinoFoodMob {
     public int FoodValue;
     public int HealValue;
 
-    private EnumDinoFoodMob(Class pClass, int Food, int Heal) {
+    EnumDinoFoodMob(Class pClass, int Food, int Heal) {
         preyClass = pClass;
         FoodValue = Food;
         HealValue = Heal;
     }
 
-    private EnumDinoFoodMob(EnumDinoFoodMob mob0) {
+    EnumDinoFoodMob(EnumDinoFoodMob mob0) {
         preyClass = mob0.preyClass;
         FoodValue = mob0.FoodValue;
         HealValue = mob0.HealValue;

@@ -90,6 +90,7 @@ public class BlockFeeder extends BlockContainer {
         }
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public Item getItem(World world, int x, int y, int z) {
         return Item.getItemFromBlock(FABlockRegistry.INSTANCE.feederActive);
@@ -106,11 +107,13 @@ public class BlockFeeder extends BlockContainer {
     /**
      * Called whenever the block is added into the world. Args: world, x, y, z
      */
+    @Override
     public void onBlockAdded(World world, int x, int y, int z) {
         super.onBlockAdded(world, x, y, z);
         this.setDefaultDirection(world, x, y, z);
     }
 
+    @Override
     public int getRenderType() {
         return Revival.feederRenderID;
     }
@@ -152,6 +155,7 @@ public class BlockFeeder extends BlockContainer {
      * needs with the given IconRegister. This is the only chance you get to
      * register icons.
      */
+    @Override
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister par1IconRegister) {
         this.blockIcon = par1IconRegister.registerIcon("fossil:Feeder_Sides");
@@ -170,6 +174,7 @@ public class BlockFeeder extends BlockContainer {
      * From the specified side and block metadata retrieves the blocks texture.
      * Args: side, metadata
      */
+    @Override
     public IIcon getIcon(int side, int meta) {
         if (side == 0) {
             return this.Bottom;
@@ -214,6 +219,7 @@ public class BlockFeeder extends BlockContainer {
     /**
      * Called upon block activation (right click on the block.)
      */
+    @Override
     public boolean onBlockActivated(World world, int x, int y, int z,
                                     EntityPlayer player, int var6, float var7, float var8, float var9) {
         if (world.isRemote) {
@@ -234,6 +240,7 @@ public class BlockFeeder extends BlockContainer {
      * Returns a new instance of a block's tile entity class. Called on placing
      * the block.
      */
+    @Override
     public TileEntity createNewTileEntity(World world, int par2) {
         return new TileEntityNewFeeder();
     }
@@ -241,6 +248,7 @@ public class BlockFeeder extends BlockContainer {
     /**
      * Called when the block is placed in the world.
      */
+    @Override
     public void onBlockPlacedBy(World world, int x, int y, int z,
                                 EntityLivingBase entityLivingBase, ItemStack itemstack) {
         int entityDirection = MathHelper
@@ -272,6 +280,7 @@ public class BlockFeeder extends BlockContainer {
      * ejects contained items into the world, and notifies neighbours of an
      * update, as appropriate
      */
+    @Override
     public void breakBlock(World world, int x, int y, int z, Block block,
                            int var6) {
         TileEntityNewFeeder tileentity = (TileEntityNewFeeder) world.getTileEntity(x,
@@ -327,6 +336,7 @@ public class BlockFeeder extends BlockContainer {
      * use the value from getComparatorInputOverride instead of the actual
      * redstone signal strength.
      */
+    @Override
     public boolean hasComparatorInputOverride() {
         return true;
     }
@@ -336,6 +346,7 @@ public class BlockFeeder extends BlockContainer {
      * used instead of the redstone signal strength when this block inputs to a
      * comparator.
      */
+    @Override
     public int getComparatorInputOverride(World par1World, int par2, int par3,
                                           int par4, int par5) {
         return Container.calcRedstoneFromInventory((IInventory) par1World

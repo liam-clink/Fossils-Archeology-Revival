@@ -19,6 +19,7 @@ public class FossilGuiPage extends GuiButton {
         page = bookpage;
     }
 
+    @Override
     public void drawButton(Minecraft mc, int mouseX, int mouseY) {
         if (this.enabled) {
             boolean hovering = mouseX >= this.xPosition && mouseY >= this.yPosition && mouseX < this.xPosition + this.width && mouseY < this.yPosition + this.height;

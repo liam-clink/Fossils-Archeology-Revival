@@ -63,6 +63,7 @@ public class RenderQuagga extends RenderLiving {
      * Allows the render to do any OpenGL state modifications necessary before the model is rendered. Args:
      * entityLiving, partialTickTime
      */
+    @Override
     protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2) {
         this.scale((EntityQuagga) par1EntityLivingBase, par2);
     }
@@ -70,6 +71,7 @@ public class RenderQuagga extends RenderLiving {
     /**
      * Renders the model in RenderLiving
      */
+    @Override
     protected void renderModel(EntityLivingBase par1EntityLivingBase, float par2, float par3, float par4, float par5, float par6, float par7) {
         this.func_110846_a((EntityQuagga) par1EntityLivingBase, par2, par3, par4, par5, par6, par7);
     }
@@ -77,6 +79,7 @@ public class RenderQuagga extends RenderLiving {
     /**
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
+    @Override
     protected ResourceLocation getEntityTexture(Entity par1Entity) {
         return this.func_110849_a((EntityQuagga) par1Entity);
     }

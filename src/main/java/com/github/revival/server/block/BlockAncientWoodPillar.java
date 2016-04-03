@@ -36,12 +36,14 @@ public class BlockAncientWoodPillar extends Block {
     }
 
     // this sets the amount droped when broken.
+    @Override
     public int quantityDropped(Random rand) {
         return 1;
     }
 
     // this tells the game what to drop if the block is brocken with an explosion. an example of this would be creeper explosions
     // making stone drop cobblestone.
+    @Override
     public Item getItemDropped(int var1, Random rand, int var3) {
         return Item.getItemFromBlock(FABlockRegistry.INSTANCE.palmLog);
     }
@@ -49,6 +51,7 @@ public class BlockAncientWoodPillar extends Block {
     /**
      * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
      */
+    @Override
     public IIcon getIcon(int side, int meta) {
         return ((meta & 12) == 0 && side < 2) || ((meta & 12) == 8 && side > 1 && side < 4) || ((meta & 12) == 4 && side > 3) ? this.top : this.blockIcon;
     }
@@ -56,6 +59,7 @@ public class BlockAncientWoodPillar extends Block {
     /**
      * Called when a block is placed using its ItemBlock. Args: World, X, Y, Z, side, hitX, hitY, hitZ, block metadata
      */
+    @Override
     public int onBlockPlaced(World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int metadata) {
         int validMeta = metadata & 3;
         byte modifier = 0;
@@ -78,6 +82,7 @@ public class BlockAncientWoodPillar extends Block {
         return validMeta | modifier;
     }
 
+    @Override
     public int damageDropped(int meta) {
         return meta & 3;
     }
@@ -86,6 +91,7 @@ public class BlockAncientWoodPillar extends Block {
      * Returns an item stack containing a single instance of the current block type. 'i' is the block's subtype/damage
      * and is ignored for blocks which do not support subtypes. Blocks which cannot be harvested should return null.
      */
+    @Override
     protected ItemStack createStackedBlock(int var1) {
         return new ItemStack(this, 1, limitToValidMetadata(var1));
     }

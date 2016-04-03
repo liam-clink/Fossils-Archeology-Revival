@@ -14,6 +14,7 @@ public class DominicanAmberItem extends Item {
         setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister iconRegister) {
         itemIcon = iconRegister.registerIcon("fossil:dominican_amber");

@@ -29,6 +29,7 @@ public class BlockTar extends BlockFluidClassic {
         setBlockTextureName("fossil:Tar");
     }
 
+    @Override
     public void updateTick(World world, int x, int y, int z, Random rand) {
         if (rand.nextInt(55) == 0) {
             EntityTarSlime slime = new EntityTarSlime(world);
@@ -54,6 +55,7 @@ public class BlockTar extends BlockFluidClassic {
         return super.displaceIfPossible(world, x, y, z);
     }
 
+    @Override
     public void onEntityCollidedWithBlock(World world, int i, int j, int k, Entity entity) {
         if (!(entity instanceof EntityTarSlime)) {
             entity.setInWeb();
@@ -99,6 +101,7 @@ public class BlockTar extends BlockFluidClassic {
         }
     }
 
+    @Override
     public boolean isNormalCube() {
         return true;
     }

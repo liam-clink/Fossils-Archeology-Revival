@@ -54,6 +54,7 @@ public class AnalyzerContainer extends Container {
         }
     }
 
+    @Override
     public void addCraftingToCrafters(ICrafting var1) {
         super.addCraftingToCrafters(var1);
         var1.sendProgressBarUpdate(this, 0, this.analyzer.analyzerCookTime);
@@ -64,6 +65,7 @@ public class AnalyzerContainer extends Container {
     /**
      * Updates crafting matrix; called from onCraftMatrixChanged. Args: none
      */
+    @Override
     public void detectAndSendChanges() {
         super.detectAndSendChanges();
 
@@ -91,6 +93,7 @@ public class AnalyzerContainer extends Container {
         this.itemBurnTime = this.analyzer.currentItemBurnTime;
     }
 
+    @Override
     public void updateProgressBar(int var1, int var2) {
         if (var1 == 0) {
             this.analyzer.analyzerCookTime = var2;
@@ -105,6 +108,7 @@ public class AnalyzerContainer extends Container {
         }
     }
 
+    @Override
     public boolean canInteractWith(EntityPlayer var1) {
         return this.analyzer.isUseableByPlayer(var1);
     }
@@ -113,6 +117,7 @@ public class AnalyzerContainer extends Container {
      * Called when a player shift-clicks on a slot. You must override this or
      * you will crash when someone does that.
      */
+    @Override
     public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2) {
         ItemStack itemstack = null;
         Slot slot = (Slot) this.inventorySlots.get(par2);

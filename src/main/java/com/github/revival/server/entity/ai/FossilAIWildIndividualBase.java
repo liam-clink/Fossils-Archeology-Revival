@@ -69,11 +69,13 @@ public abstract class FossilAIWildIndividualBase extends EntityAIBase {
         return taskDone && !entity.hasOwner() && !entity.isInHerd();
     }
 
+    @Override
     public boolean continueExecuting() {
         return !taskDone && !entity.hasOwner() && !entity.isInHerd();
     }
 
     // TODO get entities from chunks not world
+    @Override
     public void startExecuting() {
         taskDone = false;
         // ArrayLists to store found entities
@@ -142,10 +144,10 @@ public abstract class FossilAIWildIndividualBase extends EntityAIBase {
                 });
                 switch (entity.distanceStatus(fleeingTargets.get(0))) {
                     case 1:
-                        task = this.taskFleeNear;
+                        task = taskFleeNear;
                         break;
                     case 2:
-                        task = this.taskFleeFar;
+                        task = taskFleeFar;
                         break;
                 }
                 target = fleeingTargets.get(0);
@@ -160,10 +162,10 @@ public abstract class FossilAIWildIndividualBase extends EntityAIBase {
             });
             switch (entity.distanceStatus(nearbyPlayers.get(0))) {
                 case 1:
-                    task = this.taskFleeFar;
+                    task = taskFleeFar;
                     break;
                 case 2:
-                    task = this.taskFleeNear;
+                    task = taskFleeNear;
                     break;
             }
             target = nearbyPlayers.get(0);
@@ -195,7 +197,7 @@ public abstract class FossilAIWildIndividualBase extends EntityAIBase {
                         return totalFood1 - totalFood2;
                     }
                 });
-                task = this.taskFeedFromFeeder;
+                task = taskFeedFromFeeder;
                 target = feeders.get(0);
                 return;
             }
@@ -219,7 +221,7 @@ public abstract class FossilAIWildIndividualBase extends EntityAIBase {
                     }
                 });
 
-                task = this.taskTrackAndAttack;
+                task = taskTrackAndAttack;
                 target = possibleFood.get(0);
                 return;
             }
@@ -238,7 +240,7 @@ public abstract class FossilAIWildIndividualBase extends EntityAIBase {
                     }
                 });
 
-                task = this.taskPickupItem;
+                task = taskPickupItem;
                 target = possibleItemFood.get(0);
                 return;
             }
@@ -266,14 +268,14 @@ public abstract class FossilAIWildIndividualBase extends EntityAIBase {
                         }
                     });
 
-                    task = this.taskEatBlock;
+                    task = taskEatBlock;
                     target = foodBlocks.get(0);
                     return;
                 }
             }
 
             if (entity.hungerLevel() > 1) {
-                task = this.taskWanderFast;
+                task = taskWanderFast;
                 setWanderTarget(true);
                 return;
             }
@@ -287,9 +289,9 @@ public abstract class FossilAIWildIndividualBase extends EntityAIBase {
                 }
             });
             if (nearbyPrehistoricEntitiesOfSameSpecies.get(0).isInHerd()) {
-                task = this.taskAskJoinHerd;
+                task = taskAskJoinHerd;
             } else {
-                task = this.taskFormHerd;
+                task = taskFormHerd;
             }
             target = nearbyPrehistoricEntitiesOfSameSpecies.get(0);
             return;
@@ -304,14 +306,14 @@ public abstract class FossilAIWildIndividualBase extends EntityAIBase {
             });
             if (entity.isAdult()) {
                 if (entity.getType().attacksPlayersAsAdult()) {
-                    task = this.taskTrackAndAttack;
+                    task = taskTrackAndAttack;
                 } else {
-                    task = this.taskFollow;
+                    task = taskFollow;
                 }
                 target = nearbyPlayers.get(0);
                 return;
             } else if (entity.isChild()) {
-                task = this.taskAvoid;
+                task = taskAvoid;
                 target = nearbyPlayers.get(0);
                 return;
             }
@@ -340,10 +342,10 @@ public abstract class FossilAIWildIndividualBase extends EntityAIBase {
 
         if (waterBlock == null) {
             if ((new Random()).nextDouble() >= 0.5) {
-                task = this.taskWanderSlow;
+                task = taskWanderSlow;
                 setWanderTarget(false);
             } else {
-                task = this.taskIdle;
+                task = taskIdle;
             }
         } else {
             int i = 1;
@@ -354,11 +356,12 @@ public abstract class FossilAIWildIndividualBase extends EntityAIBase {
             waterBlock = waterBlock.addVector(0, i, 0);
             Vec3 targetBlock = Vec3.createVectorHelper(entity.posX, waterBlock.yCoord, entity.posZ);
             MovingObjectPosition hit = entity.worldObj.rayTraceBlocks(waterBlock, targetBlock);
-            task = this.taskFindAndDrinkWater;
+            task = taskFindAndDrinkWater;
             target = Vec3.createVectorHelper(hit.blockX, hit.blockY, hit.blockZ);
         }
     }
 
+    @Override
     public void updateTask() {
 
         if (tickCounter % fleeInterruptTicks == 0 && task != taskFleeNear && task != taskFleeFar) {
@@ -395,10 +398,10 @@ public abstract class FossilAIWildIndividualBase extends EntityAIBase {
                 });
                 switch (entity.distanceStatus(possibleFleeTargets.get(0))) {
                     case 1:
-                        task = this.taskFleeFar;
+                        task = taskFleeFar;
                         break;
                     case 2:
-                        task = this.taskFleeNear;
+                        task = taskFleeNear;
                         break;
                 }
                 target = possibleFleeTargets.get(0);
@@ -411,10 +414,10 @@ public abstract class FossilAIWildIndividualBase extends EntityAIBase {
                 });
                 switch (entity.distanceStatus(possibleFleeTargetPlayers.get(0))) {
                     case 1:
-                        task = this.taskFleeFar;
+                        task = taskFleeFar;
                         break;
                     case 2:
-                        task = this.taskFleeNear;
+                        task = taskFleeNear;
                         break;
                 }
                 target = possibleFleeTargetPlayers.get(0);

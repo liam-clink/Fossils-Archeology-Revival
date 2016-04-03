@@ -24,6 +24,7 @@ public class DinoAIAttackOnCollide extends EntityAIBase {
         this.field_75437_f = par4;
     }
 
+    @Override
     public boolean shouldExecute() {
         EntityLivingBase entitylivingbase = this.dino.getAttackTarget();
 
@@ -41,20 +42,24 @@ public class DinoAIAttackOnCollide extends EntityAIBase {
         }
     }
 
+    @Override
     public boolean continueExecuting() {
         EntityLivingBase entitylivingbase = this.dino.getAttackTarget();
-        return entitylivingbase == null ? false : (!entitylivingbase.isEntityAlive() ? false : (!this.field_75437_f ? !this.dino.getNavigator().noPath() : this.dino.isWithinHomeDistance(MathHelper.floor_double(entitylivingbase.posX), MathHelper.floor_double(entitylivingbase.posY), MathHelper.floor_double(entitylivingbase.posZ))));
+        return entitylivingbase != null && (entitylivingbase.isEntityAlive() && (!this.field_75437_f ? !this.dino.getNavigator().noPath() : this.dino.isWithinHomeDistance(MathHelper.floor_double(entitylivingbase.posX), MathHelper.floor_double(entitylivingbase.posY), MathHelper.floor_double(entitylivingbase.posZ))));
     }
 
+    @Override
     public void startExecuting() {
         this.dino.getNavigator().setPath(this.entityPathEntity, dino.attackSpeedBoost);
         this.field_75445_i = 0;
     }
 
+    @Override
     public void resetTask() {
         this.dino.getNavigator().clearPathEntity();
     }
 
+    @Override
     public void updateTask() {
         EntityLivingBase entitylivingbase = this.dino.getAttackTarget();
         this.dino.getLookHelper().setLookPositionWithEntity(entitylivingbase, 30.0F, 30.0F);

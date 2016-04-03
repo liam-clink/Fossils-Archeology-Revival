@@ -39,10 +39,12 @@ public class EntityBones extends EntityMob {
     /**
      * Returns true if the newer Entity AI code should be run
      */
+    @Override
     public boolean isAIEnabled() {
         return true;
     }
 
+    @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(20.0D);
@@ -52,6 +54,7 @@ public class EntityBones extends EntityMob {
     /**
      * Returns the sound this mob makes when it is hurt.
      */
+    @Override
     protected String getHurtSound() {
         return "mob.skeletonhurt";
     }
@@ -59,6 +62,7 @@ public class EntityBones extends EntityMob {
     /**
      * Returns the sound this mob makes on death.
      */
+    @Override
     protected String getDeathSound() {
         return "mob.skeletonhurt";
     }
@@ -72,6 +76,7 @@ public class EntityBones extends EntityMob {
         return var3;
     }
 
+    @Override
     public boolean canBreatheUnderwater() {
         return true;
     }
@@ -80,6 +85,7 @@ public class EntityBones extends EntityMob {
      * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
      * use this to react to sunlight and start to burn.
      */
+    @Override
     public void onLivingUpdate() {
         if (this.worldObj.isDaytime() && !this.worldObj.isRemote) {
             float var1 = this.getBrightness(1.0F);
@@ -92,12 +98,14 @@ public class EntityBones extends EntityMob {
         super.onLivingUpdate();
     }
 
+    @Override
     protected void updateEntityActionState() {
     }
 
     /**
      * Determines if an entity can be despawned, used on idle far away entities
      */
+    @Override
     protected boolean canDespawn() {
         return false;
     }
@@ -105,6 +113,7 @@ public class EntityBones extends EntityMob {
     /**
      * Causes this entity to do an upwards motion (jumping).
      */
+    @Override
     protected void jump() {
         super.jump();
     }
@@ -113,6 +122,7 @@ public class EntityBones extends EntityMob {
      * Finds the closest player within 16 blocks to attack, or null if this Entity isn't interested in attacking
      * (Animals, Spiders at day, peaceful PigZombies).
      */
+    @Override
     protected Entity findPlayerToAttack() {
         return null;
     }
@@ -120,12 +130,14 @@ public class EntityBones extends EntityMob {
     /**
      * Basic mob attack. Default to touch of death in EntityCreature. Overridden by each mob to define their attack.
      */
+    @Override
     protected void attackEntity(Entity var1, float var2) {
     }
 
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
+    @Override
     public void writeEntityToNBT(NBTTagCompound var1) {
         super.writeEntityToNBT(var1);
     }
@@ -133,6 +145,7 @@ public class EntityBones extends EntityMob {
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
+    @Override
     public void readEntityFromNBT(NBTTagCompound var1) {
         super.readEntityFromNBT(var1);
     }
@@ -148,6 +161,7 @@ public class EntityBones extends EntityMob {
     /**
      * Drop 0-2 items of this living's type
      */
+    @Override
     protected void dropFewItems(boolean var1, int var2) {
         byte var3 = 1;
         int var4;
@@ -166,6 +180,7 @@ public class EntityBones extends EntityMob {
     /**
      * Returns the item that this EntityLiving is holding, if any.
      */
+    @Override
     public ItemStack getHeldItem() {
         return defaultHeldItem;
     }
@@ -173,6 +188,7 @@ public class EntityBones extends EntityMob {
     /**
      * Get this Entity's EnumCreatureAttribute
      */
+    @Override
     public EnumCreatureAttribute getCreatureAttribute() {
         return EnumCreatureAttribute.UNDEAD;
     }

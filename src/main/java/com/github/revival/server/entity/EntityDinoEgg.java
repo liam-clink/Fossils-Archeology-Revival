@@ -78,7 +78,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData 
         this.setSize(0.5F, 1.0F);
         this.yOffset = this.height + 0.5F;
         this.DinoInside = var12;
-        this.lastBirthTick = 0;
+        lastBirthTick = 0;
     }
 
     public EntityDinoEgg(World var1) {
@@ -117,10 +117,12 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData 
      * returns if this entity triggers Block.onEntityWalking on the blocks they walk on. used for spiders and wolves to
      * prevent them from trampling crops
      */
+    @Override
     protected boolean canTriggerWalking() {
         return false;
     }
 
+    @Override
     protected void entityInit() {
         if (Revival.enableDebugging()) {
             this.HatchTime = 100;
@@ -143,6 +145,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData 
      * Returns a boundingBox used to collide the entity with other entities and blocks. This enables the entity to be
      * pushable on contact, like boats or minecarts.
      */
+    @Override
     public AxisAlignedBB getCollisionBox(Entity var1) {
         return var1.boundingBox;
     }
@@ -150,6 +153,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData 
     /**
      * returns the bounding box for this entity
      */
+    @Override
     public AxisAlignedBB getBoundingBox() {
         return this.boundingBox;
     }
@@ -157,6 +161,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData 
     /**
      * Returns true if this entity should push and be pushed by other entities when colliding.
      */
+    @Override
     public boolean canBePushed() {
         return true;
     }
@@ -164,6 +169,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData 
     /**
      * Returns the Y offset from the entity's position for any entity riding this one.
      */
+    @Override
     public double getMountedYOffset() {
         return (double) this.height * 0.0D - 0.30000001192092896D;
     }
@@ -194,6 +200,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData 
     /**
      * Setups the entity to do the hurt animation. Only used by packets in multiplayer.
      */
+    @Override
     public void performHurtAnimation() {
         this.timeSinceHit = 10;
         this.damageTaken += this.damageTaken * 10;
@@ -202,6 +209,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData 
     /**
      * Returns true if other Entities should be prevented from moving through this Entity.
      */
+    @Override
     public boolean canBeCollidedWith() {
         return !this.isDead;
     }
@@ -209,6 +217,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData 
     /**
      * Called to update the entity's position/logic.
      */
+    @Override
     public void onUpdate() {
         super.onUpdate();
         //if(!this.worldObj.isRemote)
@@ -324,7 +333,6 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData 
         double var14;
 
         for (var14 = var8 - (double) this.rotationYaw; var14 >= 180.0D; var14 -= 360.0D) {
-            ;
         }
 
         while (var14 < -180.0D) {
@@ -369,6 +377,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData 
         }
     }
 
+    @Override
     public void updateRiderPosition() {
         if (this.riddenByEntity != null) {
             double var1 = Math.cos((double) this.rotationYaw * Math.PI / 180.0D) * 0.4D;
@@ -388,7 +397,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData 
 
         if (this.DinoInside == EnumPrehistoric.Mosasaurus || this.DinoInside == EnumPrehistoric.Liopleurodon) {
             if (this.inWater) {
-                this.lastBirthTick = this.getBirthTick();
+                lastBirthTick = this.getBirthTick();
                 this.setBirthTick(this.getBirthTick() + 1);
 
             } else {
@@ -396,7 +405,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData 
             }
 
         } else if ((double) brightness >= 0.5D && !this.inWater) {
-            this.lastBirthTick = this.getBirthTick();
+            lastBirthTick = this.getBirthTick();
             this.setBirthTick(this.getBirthTick() + 1);
 
         } else {
@@ -723,6 +732,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData 
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
+    @Override
     protected void writeEntityToNBT(NBTTagCompound var1) {
         var1.setInteger("BirthTick", this.getBirthTick());
         var1.setInteger("DinoType", this.EnumToInt(this.DinoInside));
@@ -732,6 +742,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData 
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
+    @Override
     protected void readEntityFromNBT(NBTTagCompound var1) {
         EnumPrehistoric[] var2 = EnumPrehistoric.values();
         this.setBirthTick(var1.getInteger("BirthTick"));
@@ -800,7 +811,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData 
                 stat = StatCollector.translateToLocal(LocalizationStrings.PEDIA_EGG_DRY);
             }
         } else {
-            if ((this.getBirthTick() >= 0 && this.getBirthTick() > this.lastBirthTick) || this.getBirthTick() >= 100) {
+            if ((this.getBirthTick() >= 0 && this.getBirthTick() > lastBirthTick) || this.getBirthTick() >= 100) {
                 stat = StatCollector.translateToLocal(LocalizationStrings.PEDIA_EGG_WARM);
             } else {
                 stat = StatCollector.translateToLocal(LocalizationStrings.PEDIA_EGG_COLD);

@@ -53,6 +53,7 @@ public class DinoAIAvoidEntityWhenYoung extends EntityAIAvoidEntity {
     /**
      * Returns whether the EntityAIBase should begin execution.
      */
+    @Override
     public boolean shouldExecute() {
         if (this.targetEntityClass == EntityPlayer.class) {
             this.closestLivingEntity = this.theEntity.worldObj.getClosestPlayerToEntity(this.theEntity, (double) this.distanceFromEntity);
@@ -78,7 +79,7 @@ public class DinoAIAvoidEntityWhenYoung extends EntityAIAvoidEntity {
             return false;
         } else {
             this.entityPathEntity = this.entityPathNavigate.getPathToXYZ(vec3.xCoord, vec3.yCoord, vec3.zCoord);
-            return this.entityPathEntity == null ? false : this.entityPathEntity.isDestinationSame(vec3);
+            return this.entityPathEntity != null && this.entityPathEntity.isDestinationSame(vec3);
         }
     }
 
@@ -86,6 +87,7 @@ public class DinoAIAvoidEntityWhenYoung extends EntityAIAvoidEntity {
     /**
      * Returns whether an in-progress EntityAIBase should continue executing
      */
+    @Override
     public boolean continueExecuting() {
         return !this.entityPathNavigate.noPath();
     }
@@ -93,6 +95,7 @@ public class DinoAIAvoidEntityWhenYoung extends EntityAIAvoidEntity {
     /**
      * Execute a one shot task or start executing a continuous task
      */
+    @Override
     public void startExecuting() {
         this.entityPathNavigate.setPath(this.entityPathEntity, this.farSpeed);
     }
@@ -100,6 +103,7 @@ public class DinoAIAvoidEntityWhenYoung extends EntityAIAvoidEntity {
     /**
      * Resets the task
      */
+    @Override
     public void resetTask() {
         this.closestLivingEntity = null;
     }
@@ -107,6 +111,7 @@ public class DinoAIAvoidEntityWhenYoung extends EntityAIAvoidEntity {
     /**
      * Updates the task
      */
+    @Override
     public void updateTask() {
         if (this.theEntity.getDistanceSqToEntity(this.closestLivingEntity) < 49.0D) {
             this.theEntity.getNavigator().setSpeed(this.nearSpeed);

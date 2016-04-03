@@ -24,6 +24,7 @@ public class DinoAITerratorial extends EntityAIBase {
         /**
          * Return whether the specified entity is applicable to this filter.
          */
+        @Override
         public boolean isEntityApplicable(Entity entity) {
             return entity.isEntityAlive() && DinoAITerratorial.this.dino.getEntitySenses().canSee(entity);
         }
@@ -54,6 +55,7 @@ public class DinoAITerratorial extends EntityAIBase {
     /**
      * Returns whether the EntityAIBase should begin execution.
      */
+    @Override
     public boolean shouldExecute() {
         if (this.dino instanceof EntityNewPrehistoric) {
             EntityNewPrehistoric prehistoric = (EntityNewPrehistoric) dino;
@@ -92,16 +94,13 @@ public class DinoAITerratorial extends EntityAIBase {
 
             this.closestLivingEntity = (Entity) list.get(0);
         }
-        if (closestLivingEntity.getClass() == targetEntityClass) {
-            return true;
-        } else {
-            return false;
-        }
+        return closestLivingEntity.getClass() == targetEntityClass;
     }
 
     /**
      * Returns whether an in-progress EntityAIBase should continue executing
      */
+    @Override
     public boolean continueExecuting() {
         return !this.entityPathNavigate.noPath();
     }
@@ -109,6 +108,7 @@ public class DinoAITerratorial extends EntityAIBase {
     /**
      * Execute a one shot task or start executing a continuous task
      */
+    @Override
     public void startExecuting() {
         dino.setAttackTarget((EntityLiving) closestLivingEntity);
     }
@@ -116,6 +116,7 @@ public class DinoAITerratorial extends EntityAIBase {
     /**
      * Resets the task
      */
+    @Override
     public void resetTask() {
         this.closestLivingEntity = null;
     }
@@ -123,6 +124,7 @@ public class DinoAITerratorial extends EntityAIBase {
     /**
      * Updates the task
      */
+    @Override
     public void updateTask() {
     }
 }

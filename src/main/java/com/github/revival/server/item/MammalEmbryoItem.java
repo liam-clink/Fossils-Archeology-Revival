@@ -37,8 +37,9 @@ public class MammalEmbryoItem extends Item {
     /**
      * dye sheep, place saddles, etc ...
      */
+    @Override
     public boolean itemInteractionForEntity(ItemStack itemstack, EntityPlayer player, EntityLivingBase thisEntity) {
-        embryo = this.getEmbryo(AnimalType);
+        embryo = getEmbryo(AnimalType);
 
         if (thisEntity instanceof EntityAnimal && ((EntityAnimal) thisEntity).getGrowingAge() == 0) {
             Object pregnantEntity = null;

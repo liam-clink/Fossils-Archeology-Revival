@@ -48,21 +48,25 @@ public class EntityFriendlyPigZombie extends EntityTameable {
         this.setTamed(false);
     }
 
+    @Override
     protected void entityInit() {
         super.entityInit();
         this.dataWatcher.addObject(19, new Byte((byte) 0));
     }
 
+    @Override
     public void onLivingUpdate() {
         super.onLivingUpdate();
     }
 
+    @Override
     public void onKillEntity(EntityLivingBase entity) {
         super.onKillEntity(entity);
         sendMessageToOwner("pigman.kill");
     }
 
 
+    @Override
     public void setAttackTarget(EntityLivingBase mob) {
         super.setAttackTarget(mob);
         if (mob == null) {
@@ -72,6 +76,7 @@ public class EntityFriendlyPigZombie extends EntityTameable {
         }
     }
 
+    @Override
     public void writeEntityToNBT(NBTTagCompound compound) {
         super.writeEntityToNBT(compound);
         compound.setBoolean("Angry", this.isAngry());
@@ -80,11 +85,13 @@ public class EntityFriendlyPigZombie extends EntityTameable {
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
+    @Override
     public void readEntityFromNBT(NBTTagCompound compound) {
         super.readEntityFromNBT(compound);
         this.setAngry(compound.getBoolean("Angry"));
     }
 
+    @Override
     public boolean attackEntityFrom(DamageSource damage, float f) {
         if (this.isEntityInvulnerable()) {
             return false;
@@ -100,6 +107,7 @@ public class EntityFriendlyPigZombie extends EntityTameable {
         }
     }
 
+    @Override
     public boolean attackEntityAsMob(Entity entity) {
         boolean flag = entity.attackEntityFrom(DamageSource.causeMobDamage(this), 5);
 
@@ -114,10 +122,12 @@ public class EntityFriendlyPigZombie extends EntityTameable {
         return flag;
     }
 
+    @Override
     protected void func_145780_a(int i, int i1, int i2, Block block) {
         this.playSound("mob.zombie.step", 0.15F, 1.0F);
     }
 
+    @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.30000001192092896D);
@@ -151,6 +161,7 @@ public class EntityFriendlyPigZombie extends EntityTameable {
 
     }
 
+    @Override
     public boolean func_142018_a(EntityLivingBase entity, EntityLivingBase thisMobsOwner) {
 
         if (entity instanceof EntityWolf) {
@@ -168,26 +179,31 @@ public class EntityFriendlyPigZombie extends EntityTameable {
             }
         }
 
-        return entity instanceof EntityPlayer && thisMobsOwner instanceof EntityPlayer && !((EntityPlayer) thisMobsOwner).canAttackPlayer((EntityPlayer) entity) ? false : !(entity instanceof EntityHorse) || !((EntityHorse) entity).isTame();
+        return !(entity instanceof EntityPlayer && thisMobsOwner instanceof EntityPlayer && !((EntityPlayer) thisMobsOwner).canAttackPlayer((EntityPlayer) entity)) && (!(entity instanceof EntityHorse) || !((EntityHorse) entity).isTame());
 
     }
 
+    @Override
     protected boolean isAIEnabled() {
         return true;
     }
 
+    @Override
     protected String getLivingSound() {
         return "mob.zombiepig.zpig";
     }
 
+    @Override
     protected String getHurtSound() {
         return "mob.zombiepig.zpighurt";
     }
 
+    @Override
     protected String getDeathSound() {
         return "mob.zombiepig.zpigdeath";
     }
 
+    @Override
     public boolean interact(EntityPlayer player) {
         if (this.func_152114_e(player) && !this.worldObj.isRemote) {
             this.aiSit.setSitting(!this.isSitting());
@@ -201,6 +217,7 @@ public class EntityFriendlyPigZombie extends EntityTameable {
         return false;
     }
 
+    @Override
     public ItemStack getHeldItem() {
         return defaultHeldItem;
     }

@@ -23,10 +23,12 @@ public class RenderFPZ extends RenderBiped {
     }
 
 
+    @Override
     protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2) {
         this.scalePigman((EntityFriendlyPigZombie) par1EntityLivingBase, par2);
     }
 
+    @Override
     protected ResourceLocation getEntityTexture(Entity par1Entity) {
         return texture;
     }

@@ -26,5 +26,5 @@ public enum EnumDinoBones {
     Mammoth,
     Smilodon,
     Quagga,
-    Elasmotherium;
+    Elasmotherium
 }

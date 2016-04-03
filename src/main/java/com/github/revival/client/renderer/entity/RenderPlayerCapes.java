@@ -188,8 +188,7 @@ public class RenderPlayerCapes {
         float f3;
 
         for (f3 = p_77034_2_ - p_77034_1_; f3 < -180.0F; f3 += 360.0F) {
-            ;
-        }
+		}
 
         while (f3 >= 180.0F) {
             f3 -= 360.0F;

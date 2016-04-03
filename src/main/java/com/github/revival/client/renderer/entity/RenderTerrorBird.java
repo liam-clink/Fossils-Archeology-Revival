@@ -49,6 +49,7 @@ public class RenderTerrorBird extends RenderLiving {
     /**
      * Defines what float the third param in setRotationAngles of ModelBase is
      */
+    @Override
     protected float handleRotationFloat(EntityLivingBase entityLivingBase, float angle) {
         return this.handleRotationFloat((EntityTerrorBird) entityLivingBase, angle);
     }
@@ -80,6 +81,7 @@ public class RenderTerrorBird extends RenderLiving {
      * Allows the render to do any OpenGL state modifications necessary before the model is rendered. Args:
      * entityLiving, partialTickTime
      */
+    @Override
     protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2) {
         this.preRenderScale((EntityTerrorBird) par1EntityLivingBase, par2);
     }
@@ -119,10 +121,12 @@ public class RenderTerrorBird extends RenderLiving {
         return (MathHelper.sin(f1) + 1.0F) * f2;
     }
 
+    @Override
     public void doRender(EntityLiving entityLiving, double par2, double par4, double par6, float par8, float par9) {
         this.renderDodo((EntityTerrorBird) entityLiving, par2, par4, par6, par8, par9);
     }
 
+    @Override
     protected ResourceLocation getEntityTexture(Entity entity) {
         return this.func_110919_a((EntityTerrorBird) entity);
     }
@@ -133,6 +137,7 @@ public class RenderTerrorBird extends RenderLiving {
      * (Render<T extends Entity) and this method has signature public void doRender(T entity, double d, double d1,
      * double d2, float f, float f1). But JAD is pre 1.5 so doesn't do that.
      */
+    @Override
     public void doRender(Entity entity, double par2, double par4, double par6, float par8, float par9) {
         this.renderDodo((EntityTerrorBird) entity, par2, par4, par6, par8, par9);
     }

@@ -15,6 +15,7 @@ public class EntityChildAIPanic extends EntityAIPanic {
         this.setMutexBits(1);
     }
 
+    @Override
     public boolean shouldExecute() {
         if (!this.theEntityCreature.isChild()) {
             return false;

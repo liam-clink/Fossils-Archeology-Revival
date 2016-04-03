@@ -76,6 +76,7 @@ public class BlockSifter extends BlockContainer {
     /**
      * Called whenever the block is added into the world. Args: world, x, y, z
      */
+    @Override
     public void onBlockAdded(World world, int x, int y, int z) {
         super.onBlockAdded(world, x, y, z);
         this.setDefaultDirection(world, x, y, z);
@@ -117,6 +118,7 @@ public class BlockSifter extends BlockContainer {
      * needs with the given IconRegister. This is the only chance you get to
      * register icons.
      */
+    @Override
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister par1IconRegister) {
         this.blockIcon = par1IconRegister.registerIcon("fossil:SifterSides");
@@ -130,6 +132,7 @@ public class BlockSifter extends BlockContainer {
      * From the specified side and block metadata retrieves the blocks texture.
      * Args: side, metadata
      */
+    @Override
     public IIcon getIcon(int par1, int par2) {
         return par1 == 1 ? this.Top
                 : (par1 != 0 ? this.blockIcon : this.Bottom);
@@ -142,6 +145,7 @@ public class BlockSifter extends BlockContainer {
      * public int getBlockTextureFromSide(int var1) { return var1 == 1 ? 36 :
 	 * (var1 == 0 ? 36 : (var1 == 3 ? 20 : 20)); }
 	 */
+    @Override
     @SideOnly(Side.CLIENT)
     /**
      * A randomly called display update to be able to add particles or other items for display
@@ -153,6 +157,7 @@ public class BlockSifter extends BlockContainer {
     /**
      * Called upon block activation (right click on the block.)
      */
+    @Override
     public boolean onBlockActivated(World var1, int var2, int var3, int var4,
                                     EntityPlayer var5, int var6, float var7, float var8, float var9) {
         if (var1.isRemote) {
@@ -223,6 +228,7 @@ public class BlockSifter extends BlockContainer {
      * ejects contained items into the world, and notifies neighbours of an
      * update, as appropriate
      */
+    @Override
     public void breakBlock(World world, int x, int y, int z, Block block,
                            int var6) {
         if (!keepFurnaceInventory) {
@@ -282,6 +288,7 @@ public class BlockSifter extends BlockContainer {
      * use the value from getComparatorInputOverride instead of the actual
      * redstone signal strength.
      */
+    @Override
     public boolean hasComparatorInputOverride() {
         return true;
     }
@@ -291,12 +298,14 @@ public class BlockSifter extends BlockContainer {
      * used instead of the redstone signal strength when this block inputs to a
      * comparator.
      */
+    @Override
     public int getComparatorInputOverride(World par1World, int par2, int par3,
                                           int par4, int par5) {
         return Container.calcRedstoneFromInventory((IInventory) par1World
                 .getTileEntity(par2, par3, par4));
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     /**
      * only called by clickMiddleMouseButton , and passed to inventory.setCurrentItem (along with isCreative)

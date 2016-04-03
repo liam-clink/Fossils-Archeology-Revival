@@ -13,6 +13,7 @@ import net.minecraft.world.biome.WorldChunkManagerHell;
 import net.minecraft.world.chunk.IChunkProvider;
 
 public class WorldProviderAnu extends WorldProvider {
+    @Override
     public void registerWorldChunkManager() {
         this.worldChunkMgr = new WorldChunkManagerHell(Revival.anuBiome, 0);
         this.dimensionId = FossilConfig.dimensionIDDarknessLair;
@@ -21,19 +22,23 @@ public class WorldProviderAnu extends WorldProvider {
 
     }
 
+    @Override
     public float calculateCelestialAngle(long p_76563_1_, float p_76563_3_) {
         return 0.0F;
     }
 
+    @Override
     public boolean canRespawnHere() {
         return false;
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public Vec3 getFogColor(float p_76562_1_, float p_76562_2_) {
         return Vec3.createVectorHelper(0.20000000298023224D, 0.029999999329447746D, 0.029999999329447746D);
     }
 
+    @Override
     public boolean isSurfaceWorld() {
         return false;
     }
@@ -41,6 +46,7 @@ public class WorldProviderAnu extends WorldProvider {
     /**
      * Creates the light to brightness table
      */
+    @Override
     protected void generateLightBrightnessTable() {
         float f = 0.1F;
 
@@ -53,6 +59,7 @@ public class WorldProviderAnu extends WorldProvider {
     /**
      * Returns array with sunrise/sunset colors
      */
+    @Override
     @SideOnly(Side.CLIENT)
     public float[] calcSunriseSunsetColors(float p_76560_1_, float p_76560_2_) {
         return null;
@@ -63,14 +70,17 @@ public class WorldProviderAnu extends WorldProvider {
         return "Land of Darkness";
     }
 
+    @Override
     public String getWelcomeMessage() {
         return "Entering the Land of Darkness";
     }
 
+    @Override
     public IChunkProvider createChunkGenerator() {
         return new ChunkProviderAnu(worldObj, worldObj.getSeed());
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public float getCloudHeight() {
         return 8.0F;
@@ -79,6 +89,7 @@ public class WorldProviderAnu extends WorldProvider {
     /**
      * Will check if the x, z position specified is alright to be set as the map spawn point
      */
+    @Override
     public boolean canCoordinateBeSpawn(int p_76566_1_, int p_76566_2_) {
         return this.worldObj.getTopBlock(p_76566_1_, p_76566_2_).getMaterial().blocksMovement();
     }
@@ -86,10 +97,12 @@ public class WorldProviderAnu extends WorldProvider {
     /**
      * Gets the hard-coded portal location to use when entering this dimension.
      */
+    @Override
     public ChunkCoordinates getEntrancePortalLocation() {
         return new ChunkCoordinates(0, 50, 0);
     }
 
+    @Override
     public int getAverageGroundLevel() {
         return 50;
     }
@@ -97,11 +110,13 @@ public class WorldProviderAnu extends WorldProvider {
     /**
      * Returns true if the given X,Z coordinate should show environmental fog.
      */
+    @Override
     @SideOnly(Side.CLIENT)
     public boolean doesXZShowFog(int p_76568_1_, int p_76568_2_) {
         return false;
     }
 
+    @Override
     public int getRespawnDimension(EntityPlayerMP player) {
         return 0;
     }

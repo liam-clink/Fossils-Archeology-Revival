@@ -21,10 +21,12 @@ public class PaleontologyEnchantment extends Enchantment {
     /**
      * Returns the minimal value of enchantability needed on the enchantment level passed.
      */
+    @Override
     public int getMinEnchantability(int par1) {
         return 5 + (par1 - 1) * 10;
     }
 
+    @Override
     public int getWeight() {
         return this.weight;
     }
@@ -32,6 +34,7 @@ public class PaleontologyEnchantment extends Enchantment {
     /**
      * Returns the maximum value of enchantability nedded on the enchantment level passed.
      */
+    @Override
     public int getMaxEnchantability(int par1) {
         return super.getMinEnchantability(par1) + 50;
     }
@@ -39,6 +42,7 @@ public class PaleontologyEnchantment extends Enchantment {
     /**
      * Returns the maximum level that the enchantment can have.
      */
+    @Override
     public int getMaxLevel() {
         return 3;
     }
@@ -56,13 +60,10 @@ public class PaleontologyEnchantment extends Enchantment {
     //Allow clients to toggle whether or not they want to allow this enchantment on books on an enchantment table
     @Override
     public boolean isAllowedOnBooks() {
-        if (FossilConfig.allowBookEnchantments) {
-            return true;
-        } else {
-            return false;
-        }
+        return FossilConfig.allowBookEnchantments;
     }
 
+    @Override
     public boolean canApply(ItemStack itemStack) {
         if (itemStack.isItemStackDamageable()) {
             if (itemStack.getItem() instanceof ItemPickaxe) {
@@ -76,6 +77,7 @@ public class PaleontologyEnchantment extends Enchantment {
      * Determines if the enchantment passed can be applyied together with this enchantment.
      */
 
+    @Override
     public boolean canApplyTogether(Enchantment enchantment) {
         //    return super.canApplyTogether(par1Enchantment) && par1Enchantment.effectId != archeology.effectId;
         return super.canApplyTogether(enchantment) && enchantment.effectId != silkTouch.effectId && enchantment.effectId != Revival.archeology.effectId;

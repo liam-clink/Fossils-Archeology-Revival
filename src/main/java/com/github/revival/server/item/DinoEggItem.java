@@ -50,6 +50,7 @@ public class DinoEggItem extends Item {
         return var8 != null;
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister par1IconRegister) {
         this.itemIcon = par1IconRegister.registerIcon("fossil:prehistoric/dinoEggs/"
@@ -60,6 +61,7 @@ public class DinoEggItem extends Item {
      * Called whenever this item is equipped and the right mouse button is
      * pressed. Args: itemStack, world, entityPlayer
      */
+    @Override
     public ItemStack onItemRightClick(ItemStack var1, World var2,
                                       EntityPlayer var3) {
         float var4 = 1.0F;

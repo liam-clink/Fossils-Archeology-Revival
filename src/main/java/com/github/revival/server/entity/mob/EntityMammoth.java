@@ -55,6 +55,7 @@ public class EntityMammoth extends EntityNewPrehistoric implements IShearable {
         favoriteFood = Items.potato;
     }
 
+    @Override
     public int getAttackLength() {
         return 35;
     }
@@ -67,6 +68,7 @@ public class EntityMammoth extends EntityNewPrehistoric implements IShearable {
         getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(baseDamage);
     }
 
+    @Override
     protected void entityInit() {
         super.entityInit();
         this.dataWatcher.addObject(30, new Byte((byte) 3));
@@ -110,18 +112,21 @@ public class EntityMammoth extends EntityNewPrehistoric implements IShearable {
         }
     }
 
+    @Override
     public void writeEntityToNBT(NBTTagCompound var1) {
         super.writeEntityToNBT(var1);
         var1.setBoolean("Sheared", this.getSheared());
     }
 
 
+    @Override
     public void readEntityFromNBT(NBTTagCompound var1) {
         super.readEntityFromNBT(var1);
         this.setSheared(var1.getBoolean("Sheared"));
 
     }
 
+    @Override
     public void eatGrassBonus() {
         if (this.getSheared()) {
             ++this.eatGrassTimes;
@@ -143,6 +148,7 @@ public class EntityMammoth extends EntityNewPrehistoric implements IShearable {
         }
     }
 
+    @Override
     public void onLivingUpdate() {
         int i = MathHelper.floor_double(this.posX);
         int j = MathHelper.floor_double(this.posY);
@@ -234,20 +240,21 @@ public class EntityMammoth extends EntityNewPrehistoric implements IShearable {
         return Items.stick;
     }
 
+    @Override
     public void updateSize() {
         double healthStep;
         double attackStep;
         double speedStep;
-        healthStep = (this.maxHealth - this.baseHealth) / (this.getAdultAge() + 1);
-        attackStep = (this.maxDamage - this.baseDamage) / (this.getAdultAge() + 1);
-        speedStep = (this.maxSpeed - this.baseSpeed) / (this.getAdultAge() + 1);
+        healthStep = (maxHealth - baseHealth) / (this.getAdultAge() + 1);
+        attackStep = (maxDamage - baseDamage) / (this.getAdultAge() + 1);
+        speedStep = (maxSpeed - baseSpeed) / (this.getAdultAge() + 1);
 
 
         if (this.getDinoAge() <= this.getAdultAge()) {
 
-            this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(Math.round(this.baseHealth + (healthStep * this.getDinoAge())));
-            this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(Math.round(this.baseDamage + (attackStep * this.getDinoAge())));
-            this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(this.baseSpeed + (speedStep * this.getDinoAge()));
+            this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(Math.round(baseHealth + (healthStep * this.getDinoAge())));
+            this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(Math.round(baseDamage + (attackStep * this.getDinoAge())));
+            this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(baseSpeed + (speedStep * this.getDinoAge()));
 
             if (this.isTeen()) {
                 this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.5D);
@@ -264,10 +271,12 @@ public class EntityMammoth extends EntityNewPrehistoric implements IShearable {
         return 14;
     }
 
+    @Override
     public float getMaleSize() {
         return 1.2F;
     }
 
+    @Override
     public boolean attackEntityAsMob(Entity entity) {
         if (this.boundingBox.intersectsWith(entity.boundingBox)) {
             if (this.getAnimation() == NO_ANIMATION) {

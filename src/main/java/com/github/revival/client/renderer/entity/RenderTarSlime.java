@@ -12,6 +12,7 @@ public class RenderTarSlime extends RenderSlime {
         super(new ModelTarSlime(), new ModelTarSlimeOuter(), 0.3F);
     }
 
+    @Override
     protected ResourceLocation getEntityTexture(EntitySlime entity) {
         return new ResourceLocation("fossil:textures/model/tar_slime.png");
     }

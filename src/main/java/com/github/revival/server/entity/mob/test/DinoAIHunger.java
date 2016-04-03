@@ -17,6 +17,7 @@ public class DinoAIHunger extends EntityAIBase {
     /**
      * Returns whether the EntityAIBase should begin execution.
      */
+    @Override
     public boolean shouldExecute() {
         //if (fossilOptions.DinoHunger)
         //{
@@ -29,6 +30,7 @@ public class DinoAIHunger extends EntityAIBase {
     /**
      * Execute a one shot task or start executing a continuous task
      */
+    @Override
     public void startExecuting() {
         //this.mover.getClass();
         this.mover.setHungerTick(300);

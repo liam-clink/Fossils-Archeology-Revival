@@ -41,6 +41,7 @@ public class EntityBirdEgg extends EntityThrowable {
     /**
      * Called when this EntityThrowable hits a block or entity.
      */
+    @Override
     protected void onImpact(MovingObjectPosition par1MovingObjectPosition) {
         if (par1MovingObjectPosition.entityHit != null) {
             par1MovingObjectPosition.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), 0);
@@ -92,7 +93,6 @@ public class EntityBirdEgg extends EntityThrowable {
                 break;
 
         }
-        ;
         if (!worldObj.isRemote) {
             mob.setGrowingAge(-24000);
             mob.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, 0.0F);

@@ -30,6 +30,7 @@ public class GuiQuagga extends GuiContainer {
     /**
      * Draw the foreground layer for the GuiContainer (everything in front of the items)
      */
+    @Override
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
         this.fontRendererObj.drawString(this.entityInventory.hasCustomInventoryName() ? this.entityInventory.getInventoryName() : I18n.format(this.entityInventory.getInventoryName()), 8, 6, 4210752);
         this.fontRendererObj.drawString(this.playerInventory.hasCustomInventoryName() ? this.playerInventory.getInventoryName() : I18n.format(this.playerInventory.getInventoryName()), 8, this.ySize - 96 + 2, 4210752);
@@ -38,6 +39,7 @@ public class GuiQuagga extends GuiContainer {
     /**
      * Draw the background layer for the GuiContainer (everything behind the items)
      */
+    @Override
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.getTextureManager().bindTexture(gui);
@@ -57,6 +59,7 @@ public class GuiQuagga extends GuiContainer {
     /**
      * Draws the screen and all the components in it.
      */
+    @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         this.mouseX = (float) mouseX;
         this.mouseY = (float) mouseY;

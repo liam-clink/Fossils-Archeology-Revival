@@ -4,7 +4,7 @@ public enum EnumOrderType {
     STAY, FOLLOW, WANDER;
 
     public final EnumOrderType Next() {
-        return this.values()[(this.ordinal() + 1) % this.values().length];
+        return EnumOrderType.values()[(this.ordinal() + 1) % EnumOrderType.values().length];
     }
 
 }

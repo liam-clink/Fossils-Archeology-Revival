@@ -153,6 +153,7 @@ public class ClientProxy extends ServerProxy {
     private static final ModelAncientHelmet helmetModel = new ModelAncientHelmet(1.0f);
     // private JsonTabulaModel velociraptor = ModelHelper.parseModelFromJson(Revival.class.getResourceAsStream("/assets/fossil/models/Velociraptor.json"));
 
+    @Override
     public void init() {
         super.init();
         RenderingRegistry.registerEntityRenderingHandler(EntityTriceratops.class, new RenderPrehistoric(new ModelTriceratops()));
@@ -244,6 +245,7 @@ public class ClientProxy extends ServerProxy {
         MinecraftForge.EVENT_BUS.register(new EventNewMenu());
     }
 
+    @Override
     public ModelBiped getArmorModel(int id) {
         switch (id) {
             case 0:
@@ -255,29 +257,35 @@ public class ClientProxy extends ServerProxy {
         return helmetModel;
     }
 
+    @Override
     public void playSound(String soundName) {
         Minecraft.getMinecraft().getSoundHandler().playSound(PositionedSoundRecord.func_147673_a(new ResourceLocation(soundName)));
     }
 
+    @Override
     public void stopSound() {
         Minecraft.getMinecraft().getSoundHandler().stopSounds();
     }
 
+    @Override
     public void spawnAnuParticle(World world, double posX, double posY, double posZ) {
         EntityFX particle1 = new DeathOrbFX(world, posX, posY, posZ, 0, 0, 0);
         Minecraft.getMinecraft().effectRenderer.addEffect(particle1);
     }
 
+    @Override
     public void spawnSleepParticle(World world, double posX, double posY, double posZ) {
         EntityFX particle1 = new SleepFX(world, posX, posY, posZ, 0, 0, 0);
         Minecraft.getMinecraft().effectRenderer.addEffect(particle1);
     }
 
+    @Override
     public void spawnTarParticle(World world, double posX, double posY, double posZ) {
         EntityFX particle1 = new TarDropsFX(world, posX, posY, posZ);
         Minecraft.getMinecraft().effectRenderer.addEffect(particle1);
     }
 
+    @Override
     public void animate(int animateID) {
     }
 
@@ -285,6 +293,7 @@ public class ClientProxy extends ServerProxy {
         buffer.calculateChainSwingBuffer(70F, 5, 4, entity);
     }
 
+    @Override
     public ChainBuffer getChainBuffer(int tailSegments) {
         return new ChainBuffer();
     }

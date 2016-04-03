@@ -22,6 +22,7 @@ public class HellMushroomWorldGen extends WorldGenerator {
         super(false);
     }
 
+    @Override
     public boolean generate(World world, Random rand, int x, int y, int z) {
         int mushroomType = rand.nextInt(2);
 

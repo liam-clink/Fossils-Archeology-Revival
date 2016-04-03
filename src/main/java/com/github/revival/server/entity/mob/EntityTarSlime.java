@@ -32,6 +32,7 @@ public class EntityTarSlime extends EntitySlime {
         return new EntityTarSlime(this.worldObj);
     }
 
+    @Override
     protected float getSoundPitch() {
         return 0.5F;
     }
@@ -105,6 +106,7 @@ public class EntityTarSlime extends EntitySlime {
         }
     }
 
+    @Override
     protected Item getDropItem() {
         return FAItemRegistry.INSTANCE.tardrop;
     }
@@ -119,17 +121,20 @@ public class EntityTarSlime extends EntitySlime {
         }
     }
 
+    @Override
     protected boolean makesSoundOnLand() {
         return false;
     }
 
+    @Override
     protected boolean makesSoundOnJump() {
         return false;
     }
 
+    @Override
     public boolean isEntityInsideOpaqueBlock() {
         for (int i = 0; i < 8; ++i) {
-            float f = ((float) ((i >> 0) % 2) - 0.5F) * this.width * 0.8F;
+            float f = ((float) ((i) % 2) - 0.5F) * this.width * 0.8F;
             float f1 = ((float) ((i >> 1) % 2) - 0.5F) * 0.1F;
             float f2 = ((float) ((i >> 2) % 2) - 0.5F) * this.width * 0.8F;
             int j = MathHelper.floor_double(this.posX + (double) f);

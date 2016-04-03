@@ -19,6 +19,7 @@ public class ModelFPZ extends ModelBiped {
         super(par1, 0.0F, 64, par2 ? 32 : 64);
     }
 
+    @Override
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
         super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
         float f6 = MathHelper.sin(this.onGround * (float) Math.PI);

@@ -83,10 +83,12 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
         isFlying = state;
     }
 
+    @Override
     public boolean isAIEnabled() {
         return true;
     }
 
+    @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(40.0D);
@@ -94,6 +96,7 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
         this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.35D);
     }
 
+    @Override
     protected String getLivingSound() {
         if (this.getAttackMode() == 0) {
             return "fossil:anu_living_healthy";
@@ -103,14 +106,17 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
         return "fossil:anu_living_middle";
     }
 
+    @Override
     protected String getHurtSound() {
         return "random.break";
     }
 
+    @Override
     protected String getDeathSound() {
         return "mob.irongolem.death";
     }
 
+    @Override
     public boolean attackEntityFrom(DamageSource damageSource, float var2) {
         Entity targetEntity = damageSource.getEntity();
 
@@ -169,6 +175,7 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
         return super.attackEntityFrom(damageSource, var2);
     }
 
+    @Override
     public void updateAITasks() {
         if (this.getAttackMode() == 2 || this.getAttackMode() == 1) {
             if (this.ticksExisted % 20 == 0) {
@@ -178,6 +185,7 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
         super.updateAITasks();
     }
 
+    @Override
     protected Entity findPlayerToAttack() {
         EntityPlayer entityplayer = this.worldObj.getClosestVulnerablePlayerToEntity(this, 16.0D);
 
@@ -197,6 +205,7 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
         return null;
     }
 
+    @Override
     public void onDeath(DamageSource dmg) {
         if (dmg.getSourceOfDamage() instanceof EntityArrow || dmg.getEntity() instanceof EntityPlayer) {
             EntityPlayer entityplayer = (EntityPlayer) dmg.getEntity();
@@ -224,6 +233,7 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
     /**
      * Called when the mob is falling. Calculates and applies fall damage.
      */
+    @Override
     protected void fall(float i) {
     }
 
@@ -231,10 +241,12 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
      * Takes in the distance the entity has fallen this tick and whether its on the ground to update the fall distance
      * and deal fall damage if landing on the ground.  Args: distanceFallenThisTick, onGround
      */
+    @Override
     protected void updateFallState(double x, boolean y) {
     }
 
 
+    @Override
     public boolean attackEntityAsMob(Entity entity) {
         if (this.getRNG().nextInt(4) == 0) {
             this.worldObj.addWeatherEffect(new EntityMLighting(this.worldObj, entity.posX, entity.posY, entity.posZ));
@@ -258,10 +270,12 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
         }
     }
 
+    @Override
     protected void dropFewItems(boolean par1, int par2) {
         this.dropItem(FAItemRegistry.INSTANCE.ancientKey, 1);
     }
 
+    @Override
     public void onLivingUpdate() {
         if (songCounter < songLength) {
             songCounter++;
@@ -451,16 +465,13 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
 
     public boolean checkGround() {
         if (!this.onGround) {
-            if (this.worldObj.isAirBlock((int) this.posX, (int) this.posY - 1, (int) this.posZ)) {
-                return true;
-            } else {
-                return false;
-            }
+            return this.worldObj.isAirBlock((int) this.posX, (int) this.posY - 1, (int) this.posZ);
         } else {
             return false;
         }
     }
 
+    @Override
     public ItemStack getHeldItem() {
         return new ItemStack(FAItemRegistry.INSTANCE.ancientSword);
     }
@@ -495,6 +506,7 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
+    @Override
     public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {
         super.writeEntityToNBT(par1NBTTagCompound);
         par1NBTTagCompound.setInteger("AttackMode", this.getAttackMode());
@@ -503,20 +515,24 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
+    @Override
     public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {
         super.readEntityFromNBT(par1NBTTagCompound);
         this.setAttackMode(par1NBTTagCompound.getInteger("AttackMode"));
     }
 
+    @Override
     protected void entityInit() {
         super.entityInit();
         this.dataWatcher.addObject(19, Byte.valueOf((byte) 0));
     }
 
+    @Override
     protected boolean canDespawn() {
         return false;
     }
 
+    @Override
     public IEntityLivingData onSpawnWithEgg(IEntityLivingData par1EntityLivingData) {
         par1EntityLivingData = super.onSpawnWithEgg(par1EntityLivingData);
         this.initializeMob();
@@ -539,6 +555,7 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
         this.worldObj.spawnEntityInWorld(entitylargefireball);
     }
 
+    @Override
     public void onKillEntity(EntityLivingBase entity) {
         if (entity instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) entity;

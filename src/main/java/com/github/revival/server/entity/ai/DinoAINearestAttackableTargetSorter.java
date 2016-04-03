@@ -20,6 +20,7 @@ public class DinoAINearestAttackableTargetSorter implements Comparator {
         return var3 < var5 ? -1 : (var3 > var5 ? 1 : 0);
     }
 
+    @Override
     public int compare(Object var1, Object var2) {
         return this.func_48469_a((Entity) var1, (Entity) var2);
     }

@@ -30,6 +30,7 @@ public class HeadRelicItem extends ItemArmor {
         this.setMaxDamage(0);
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
 
     /**
@@ -44,6 +45,7 @@ public class HeadRelicItem extends ItemArmor {
      * Returns the unlocalized name of this item. This version accepts an ItemStack so different stacks can have
      * different names based on their damage or NBT.
      */
+    @Override
     public String getUnlocalizedName(ItemStack par1ItemStack) {
         int i = MathHelper.clamp_int(par1ItemStack.getItemDamage(), 0, 1);
         return super.getUnlocalizedName() + "." + headbandItemNames[i];
@@ -69,6 +71,7 @@ public class HeadRelicItem extends ItemArmor {
     }
 
 
+    @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister par1IIconRegister) {
         this.headbandIcons = new IIcon[headbandItemNames.length];

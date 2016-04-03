@@ -43,6 +43,7 @@ public class TileEntityDrum extends TileEntity {
     /**
      * Writes a tile entity to NBT.
      */
+    @Override
     public void writeToNBT(NBTTagCompound var1) {
         super.writeToNBT(var1);
         var1.setByte("Order", (byte) this.Order.ordinal());// Revival.EnumToInt(this.Order));
@@ -51,6 +52,7 @@ public class TileEntityDrum extends TileEntity {
     /**
      * Reads a tile entity from NBT.
      */
+    @Override
     public void readFromNBT(NBTTagCompound var1) {
         super.readFromNBT(var1);
         this.Order = EnumOrderType.values()[var1.getByte("Order")];

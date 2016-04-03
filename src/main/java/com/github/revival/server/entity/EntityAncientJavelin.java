@@ -35,6 +35,7 @@ public class EntityAncientJavelin extends EntityJavelin {
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
+    @Override
     public void writeEntityToNBT(NBTTagCompound var1) {
         super.writeEntityToNBT(var1);
         var1.setBoolean("lighteningShot", this.lighteningShot);
@@ -43,6 +44,7 @@ public class EntityAncientJavelin extends EntityJavelin {
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
+    @Override
     public void readEntityFromNBT(NBTTagCompound var1) {
         super.readEntityFromNBT(var1);
 
@@ -54,6 +56,7 @@ public class EntityAncientJavelin extends EntityJavelin {
     /**
      * Called to update the entity's position/logic.
      */
+    @Override
     public void onUpdate() {
         if (this.inGround && !this.lighteningShot) {
             if ((new Random()).nextInt(100) < 30) {
@@ -66,6 +69,7 @@ public class EntityAncientJavelin extends EntityJavelin {
         super.onUpdate();
     }
 
+    @Override
     protected boolean addJavelinToPlayer(EntityPlayer var1) {
         ItemStack var2 = new ItemStack(FAItemRegistry.INSTANCE.ancientJavelin, 1);
         var2.setItemDamage(var2.getMaxDamage() - damaged);

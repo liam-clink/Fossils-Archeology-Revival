@@ -30,6 +30,7 @@ public class AncientSwordItem extends ItemSword {
      * Current implementations of this method in child classes do not use the entry argument beside ev. They just raise
      * the damage on the stack.
      */
+    @Override
     public boolean hitEntity(ItemStack par1ItemStack, EntityLivingBase targetentity, EntityLivingBase player) {
         if (player instanceof EntityPlayer) {
             if (player != null && this.checkHelmet((EntityPlayer) player)) {

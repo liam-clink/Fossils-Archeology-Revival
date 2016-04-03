@@ -32,6 +32,7 @@ public class BlockPalmLog extends Block {
         return var0 & 3;
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     /**
      * When this method is called, your block should register all the icons it needs with the given IIconRegister. This
@@ -45,22 +46,26 @@ public class BlockPalmLog extends Block {
     /**
      * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
      */
+    @Override
     public IIcon getIcon(int var1, int var2) {
         return ((var2 & 12) == 0 && var1 < 2) || ((var2 & 12) == 8 && var1 > 1 && var1 < 4) || ((var2 & 12) == 4 && var1 > 3) ? this.Top : this.blockIcon;
     }
 
     // this sets how the block is rendered. i recomend keeping it at 31.
+    @Override
     public int getRenderType() {
         return 31;
     }
 
     // this sets the amount droped when broken.
+    @Override
     public int quantityDropped(Random par1Random) {
         return 1;
     }
 
     // this tells the game what to drop if the block is brocken with an explosion. an example of this would be creeper explosions
     // making stone drop cobblestone.
+    @Override
     public Item getItemDropped(int par1, Random par2Random, int par3) {
         return Item.getItemFromBlock(FABlockRegistry.INSTANCE.palmLog);
     }
@@ -92,6 +97,7 @@ public class BlockPalmLog extends Block {
     /**
      * Called when a block is placed using its ItemBlock. Args: World, X, Y, Z, side, hitX, hitY, hitZ, block metadata
      */
+    @Override
     public int onBlockPlaced(World var1, int var2, int var3, int var4, int var5, float var6, float var7, float var8, int var9) {
         int var10 = var9 & 3;
         byte var11 = 0;
@@ -118,6 +124,7 @@ public class BlockPalmLog extends Block {
     /**
      * Determines the damage on the item the block drops. Used in cloth and wood.
      */
+    @Override
     public int damageDropped(int var1) {
         return var1 & 3;
     }
@@ -126,6 +133,7 @@ public class BlockPalmLog extends Block {
      * Returns an item stack containing a single instance of the current block type. 'i' is the block's subtype/damage
      * and is ignored for blocks which do not support subtypes. Blocks which cannot be harvested should return null.
      */
+    @Override
     protected ItemStack createStackedBlock(int var1) {
         return new ItemStack(this, 1, limitToValidMetadata(var1));
     }

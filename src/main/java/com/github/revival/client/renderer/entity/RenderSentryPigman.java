@@ -19,6 +19,7 @@ public class RenderSentryPigman extends RenderBiped {
     }
 
 
+    @Override
     protected void func_82422_c() {
         GL11.glTranslatef(0.09375F, 0.1875F, 0.0F);
     }
@@ -33,6 +34,7 @@ public class RenderSentryPigman extends RenderBiped {
     /**
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
+    @Override
     protected ResourceLocation getEntityTexture(EntityLiving mob) {
         return this.getEntityTexture((EntitySentryPigman) mob);
     }
@@ -40,6 +42,7 @@ public class RenderSentryPigman extends RenderBiped {
     /**
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
+    @Override
     protected ResourceLocation getEntityTexture(Entity mob) {
         return this.getEntityTexture((EntitySentryPigman) mob);
     }

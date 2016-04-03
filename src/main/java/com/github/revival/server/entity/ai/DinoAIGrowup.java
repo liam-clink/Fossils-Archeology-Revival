@@ -17,6 +17,7 @@ public class DinoAIGrowup extends EntityAIBase {
     /**
      * Returns whether the EntityAIBase should begin execution.
      */
+    @Override
     public boolean shouldExecute() {
 
         if (/*fossilOptions.DinoGrows && */this.AITarget.getDinoAge() < this.AITarget.selfType.MaxAge) {
@@ -30,6 +31,7 @@ public class DinoAIGrowup extends EntityAIBase {
     /**
      * Returns whether an in-progress EntityAIBase should continue executing
      */
+    @Override
     public boolean continueExecuting() {
         return this.shouldExecute();
     }
@@ -38,6 +40,7 @@ public class DinoAIGrowup extends EntityAIBase {
     /**
      * Updates the task
      */
+    @Override
     public void startExecuting() {
         if (!this.AITarget.worldObj.isRemote) {
             this.AITarget.setPosition(this.AITarget.posX, this.AITarget.posY + 1, this.AITarget.posZ);
@@ -49,7 +52,7 @@ public class DinoAIGrowup extends EntityAIBase {
                     || (this.AITarget.isInWater() && this.AITarget.selfType == EnumPrehistoric.Plesiosaur)) {
                 this.AITarget.setDinoAgeTick(0);
                 this.AITarget.increaseDinoAge();
-                this.AITarget.worldObj.setEntityState(this.AITarget, this.AITarget.AGING_MESSAGE);
+                this.AITarget.worldObj.setEntityState(this.AITarget, EntityNewPrehistoric.AGING_MESSAGE);
                 //this.AITarget.CheckSkin();
                 this.AITarget.updateSize();
 

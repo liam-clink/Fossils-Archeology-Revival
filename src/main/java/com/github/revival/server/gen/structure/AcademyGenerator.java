@@ -53,7 +53,7 @@ public class AcademyGenerator implements IWorldGenerator {
         // {
         int struct; // This will store a random index of the structure to
         // generate
-        struct = rand.nextInt(gen.structures.size());
+        struct = rand.nextInt(FossilStructureGenerator.structures.size());
         int x = chunkX + rand.nextInt(16);
         int z = chunkZ + rand.nextInt(16);
         // nice way of getting a height to work from; it returns the topmost
@@ -62,27 +62,27 @@ public class AcademyGenerator implements IWorldGenerator {
 
         // find ground level, ignoring blocks such as grass and water
 
-        while ((!world.doesBlockHaveSolidTopSurface(world, x, y, z))// && y >
+        while ((!World.doesBlockHaveSolidTopSurface(world, x, y, z))// && y >
                 // world.provider.getAverageGroundLevel())
-                && (!world.doesBlockHaveSolidTopSurface(world, x + 10, y,
+                && (!World.doesBlockHaveSolidTopSurface(world, x + 10, y,
                 z + 11)
-                || !world.doesBlockHaveSolidTopSurface(world, x - 10,
+                || !World.doesBlockHaveSolidTopSurface(world, x - 10,
                 y, z - 11)
-                || !world.doesBlockHaveSolidTopSurface(world, x + 10,
-                y, z - 11) || !world
+                || !World.doesBlockHaveSolidTopSurface(world, x + 10,
+                y, z - 11) || !World
                 .doesBlockHaveSolidTopSurface(world, x - 10, y,
                         z + 11))) {
             --y;
         }
 
-        if (!world.doesBlockHaveSolidTopSurface(world, x, y, z)
-                || !world
+        if (!World.doesBlockHaveSolidTopSurface(world, x, y, z)
+                || !World
                 .doesBlockHaveSolidTopSurface(world, x + 10, y, z + 11)
-                || !world
+                || !World
                 .doesBlockHaveSolidTopSurface(world, x - 10, y, z - 11)
-                || !world
+                || !World
                 .doesBlockHaveSolidTopSurface(world, x + 10, y, z - 11)
-                || !world
+                || !World
                 .doesBlockHaveSolidTopSurface(world, x - 10, y, z + 11)
                 && world.canBlockSeeTheSky(x, y, z)
                 || Block.getIdFromBlock(world.getBlock(x, y + 1, z)) == Block
@@ -92,11 +92,11 @@ public class AcademyGenerator implements IWorldGenerator {
             Revival.printDebug("Gen: Academy Spawn at " + x + ", " + y + ", " + z);
         }
 
-        int widthX = gen.structures.get(struct).getWidthX();
-        int widthZ = gen.structures.get(struct).getWidthZ();
-        int height = gen.structures.get(struct).getHeight();
+        int widthX = FossilStructureGenerator.structures.get(struct).getWidthX();
+        int widthZ = FossilStructureGenerator.structures.get(struct).getWidthZ();
+        int height = FossilStructureGenerator.structures.get(struct).getHeight();
         // Set structure and random facing, then generate; no offset needed here
-        gen.setStructure(gen.structures.get(struct));
+        gen.setStructure(FossilStructureGenerator.structures.get(struct));
         gen.setStructureFacing(rand.nextInt(4));
         gen.generate(world, rand, x, y, z);
     }

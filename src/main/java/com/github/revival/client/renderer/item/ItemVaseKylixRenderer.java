@@ -50,24 +50,24 @@ public class ItemVaseKylixRenderer implements IItemRenderer {
         switch (meta) {
             case 0:
             default:
-                this.bindTexture(damaged_kylix);
+                bindTexture(damaged_kylix);
                 break;
             case 1:
-                this.bindTexture(restored_kylix);
+                bindTexture(restored_kylix);
                 break;
             case 2:
-                this.bindTexture(redFigure_kylix);
+                bindTexture(redFigure_kylix);
                 break;
             case 3:
-                this.bindTexture(blackFigure_kylix);
+                bindTexture(blackFigure_kylix);
                 break;
             case 4:
-                this.bindTexture(porcelain_kylix);
+                bindTexture(porcelain_kylix);
                 break;
         }
 
 
-        this.model.render((Entity) data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+        model.render((Entity) data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
 
         glPopMatrix();
     }

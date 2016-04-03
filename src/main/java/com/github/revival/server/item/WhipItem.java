@@ -16,6 +16,7 @@ public class WhipItem extends ItemCarrotOnAStick {
         this.setMaxStackSize(1);
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
 
     /**
@@ -25,6 +26,7 @@ public class WhipItem extends ItemCarrotOnAStick {
         return true;
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
 
     /**
@@ -38,6 +40,7 @@ public class WhipItem extends ItemCarrotOnAStick {
     /**
      * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
      */
+    @Override
     public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer player) {
         if (player.isRiding() && player.ridingEntity instanceof EntityDinosaur) {
             EntityDinosaur dinosaur = (EntityDinosaur) player.ridingEntity;

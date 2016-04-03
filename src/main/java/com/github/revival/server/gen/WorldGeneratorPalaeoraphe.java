@@ -9,6 +9,7 @@ import net.minecraft.world.chunk.IChunkProvider;
 import java.util.Random;
 
 public class WorldGeneratorPalaeoraphe implements IWorldGenerator {
+    @Override
     public void generate(Random random, int chunkX, int chunkZ, World world,
                          IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
         switch (world.provider.dimensionId) {

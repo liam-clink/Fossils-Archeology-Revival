@@ -35,6 +35,7 @@ public class GuiFeeder extends GuiContainer {
     /**
      * Draws the screen and all the components in it.
      */
+    @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         this.drawDefaultBackground();
         int left = this.guiLeft;
@@ -77,6 +78,7 @@ public class GuiFeeder extends GuiContainer {
     /**
      * Draw the background layer for the GuiContainer (everything behind the items)
      */
+    @Override
     protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3) {
         //int var4 = this.mc.renderEngine.getTexture("/fossil/textures/UIFeeder.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);

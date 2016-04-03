@@ -59,6 +59,7 @@ public class TileEntityTimeMachine extends TileEntity implements IInventory,
      * e.g. the mob spawner uses this to count ticks and creates a new spawn
      * inside its implementation.
      */
+    @Override
     public void updateEntity() {
         super.updateEntity();
         this.UpdateClock();
@@ -235,6 +236,7 @@ public class TileEntityTimeMachine extends TileEntity implements IInventory,
      * whatever it returns as an EntityItem - like when you close a workbench
      * GUI.
      */
+    @Override
     public ItemStack getStackInSlotOnClosing(int var1) {
         if (this.insideStack[var1] != null) {
             ItemStack var2 = this.insideStack[var1];
@@ -248,6 +250,7 @@ public class TileEntityTimeMachine extends TileEntity implements IInventory,
     /**
      * Returns the number of slots in the inventory.
      */
+    @Override
     public int getSizeInventory() {
         return this.insideStack.length;
     }
@@ -255,6 +258,7 @@ public class TileEntityTimeMachine extends TileEntity implements IInventory,
     /**
      * Returns the stack in slot i
      */
+    @Override
     public ItemStack getStackInSlot(int var1) {
         return this.insideStack[var1];
     }
@@ -263,6 +267,7 @@ public class TileEntityTimeMachine extends TileEntity implements IInventory,
      * Removes from an inventory slot (first arg) up to a specified number
      * (second arg) of items and returns them in a new stack.
      */
+    @Override
     public ItemStack decrStackSize(int var1, int var2) {
         if (this.insideStack[var1] != null) {
             ItemStack var3;
@@ -289,6 +294,7 @@ public class TileEntityTimeMachine extends TileEntity implements IInventory,
      * Sets the given item stack to the specified slot in the inventory (can be
      * crafting or armor sections).
      */
+    @Override
     public void setInventorySlotContents(int var1, ItemStack var2) {
         this.insideStack[var1] = var2;
 
@@ -302,6 +308,7 @@ public class TileEntityTimeMachine extends TileEntity implements IInventory,
      * Returns the maximum stack size for a inventory slot. Seems to always be
      * 64, possibly will be extended. *Isn't this more of a set than a get?*
      */
+    @Override
     public int getInventoryStackLimit() {
         return 64;
     }
@@ -310,9 +317,10 @@ public class TileEntityTimeMachine extends TileEntity implements IInventory,
      * Do not make give this method the name canInteractWith because it clashes
      * with Container
      */
+    @Override
     public boolean isUseableByPlayer(EntityPlayer var1) {
         return this.worldObj.getTileEntity(this.xCoord, this.yCoord,
-                this.zCoord) != this ? false : var1.getDistanceSq(
+                this.zCoord) == this && var1.getDistanceSq(
                 (double) this.xCoord + 0.5D, (double) this.yCoord + 0.5D,
                 (double) this.zCoord + 0.5D) <= 64.0D;
     }
@@ -384,6 +392,7 @@ public class TileEntityTimeMachine extends TileEntity implements IInventory,
         return block != null && (block.hasTileEntity(0) || block == Blocks.diamond_block || block == Blocks.diamond_ore);
     }
 
+    @Override
     public void readFromNBT(NBTTagCompound var1) {
         super.readFromNBT(var1);
         NBTTagList var2 = var1.getTagList("Items", 10);
@@ -407,6 +416,7 @@ public class TileEntityTimeMachine extends TileEntity implements IInventory,
         }
     }
 
+    @Override
     public void writeToNBT(NBTTagCompound var1) {
         super.writeToNBT(var1);
         var1.setShort("chargeLevel", (short) this.chargeLevel);

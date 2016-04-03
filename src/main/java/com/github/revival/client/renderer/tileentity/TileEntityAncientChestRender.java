@@ -136,6 +136,7 @@ public class TileEntityAncientChestRender extends TileEntitySpecialRenderer {
 
     }
 
+    @Override
     public void renderTileEntityAt(TileEntity chest, double x, double y, double z, float i1) {
         this.renderTileEntityAt((TileEntityAncientChest) chest, x, y, z, i1);
     }

@@ -31,12 +31,14 @@ public class DinoAIAgressive extends EntityAITarget {
         this.theNearestAttackableTargetSorter = new DinoAIAgressive.Sorter(mob);
         this.setMutexBits(1);
         this.targetEntitySelector = new IEntitySelector() {
+            @Override
             public boolean isEntityApplicable(Entity entity) {
-                return !(entity instanceof EntityLivingBase) ? false : (selector != null && !selector.isEntityApplicable(entity) ? false : DinoAIAgressive.this.isSuitableTarget((EntityLivingBase) entity, false));
+                return entity instanceof EntityLivingBase && (!(selector != null && !selector.isEntityApplicable(entity)) && DinoAIAgressive.this.isSuitableTarget((EntityLivingBase) entity, false));
             }
         };
     }
 
+    @Override
     public boolean shouldExecute() {
         if (this.targetChance > 0 && this.taskOwner.getRNG().nextInt(this.targetChance) != 0) {
             return false;
@@ -54,6 +56,7 @@ public class DinoAIAgressive extends EntityAITarget {
         }
     }
 
+    @Override
     public void startExecuting() {
         this.taskOwner.setAttackTarget(this.targetEntity);
         super.startExecuting();
@@ -72,6 +75,7 @@ public class DinoAIAgressive extends EntityAITarget {
             return d0 < d1 ? -1 : (d0 > d1 ? 1 : 0);
         }
 
+        @Override
         public int compare(Object firstEntity, Object secondEntity) {
             return this.compare((Entity) firstEntity, (Entity) secondEntity);
         }

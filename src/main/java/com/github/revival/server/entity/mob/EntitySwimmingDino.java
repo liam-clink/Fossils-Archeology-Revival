@@ -16,6 +16,7 @@ public abstract class EntitySwimmingDino extends EntityDinosaur {
         this.rand = new Random();
     }
 
+    @Override
     public boolean canBreatheUnderwater() {
         return true;
     }

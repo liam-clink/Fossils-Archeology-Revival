@@ -57,10 +57,12 @@ public class DinoAIFeeder extends EntityAIBase {
         this.TimeAtThisTarget = 0;
     }
 
+    @Override
     public boolean isInterruptible() {
         return false;
     }
 
+    @Override
     public boolean shouldExecute() {
 
         int range = this.searchRange;
@@ -153,6 +155,7 @@ public class DinoAIFeeder extends EntityAIBase {
         }
     }
 
+    @Override
     public void updateTask() {
         int range = this.searchRange;
         this.dinosaur.setSitting(false);
@@ -203,7 +206,7 @@ public class DinoAIFeeder extends EntityAIBase {
         }
 
         if (this.typeofTarget == BLOCK) {
-            if (!(FoodMappings.instance().getBlockFoodAmount(this.dinosaur.worldObj.getBlock((int) destX, (int) destY, (int) destZ), dinosaur.selfType.diet) != 0)) {
+            if (FoodMappings.instance().getBlockFoodAmount(this.dinosaur.worldObj.getBlock((int) destX, (int) destY, (int) destZ), dinosaur.selfType.diet) == 0) {
                 endTask();
             }
             if (distance < range) {
@@ -231,6 +234,7 @@ public class DinoAIFeeder extends EntityAIBase {
         this.typeofTarget = NO_TARGET;
     }
 
+    @Override
     public void resetTask() {
         this.TimeAtThisTarget = 0;
         targetItem = null;

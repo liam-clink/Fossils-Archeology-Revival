@@ -10,6 +10,7 @@ public class FigurineBlockItem extends ItemBlockWithMetadata {
         super(block, block);
     }
 
+    @Override
     public String getUnlocalizedName(ItemStack itemstack) {
         return getUnlocalizedName() + "." + BlockFigurine.shortname[itemstack.getItemDamage()];
     }

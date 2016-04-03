@@ -32,7 +32,6 @@ public class RenderTNClock extends TileEntitySpecialRenderer {
         float var10;
 
         for (var10 = var1.CurrectFacingAngle - var1.SendingCurrentFacing; var10 >= (float) Math.PI; var10 -= ((float) Math.PI * 2F)) {
-            ;
         }
 
         while (var10 < -(float) Math.PI) {
@@ -90,6 +89,7 @@ public class RenderTNClock extends TileEntitySpecialRenderer {
         var1.UpdateTime(0.0F, var10002 / 1000.0F * ((float) Math.PI * 2F));
     }
 
+    @Override
     public void renderTileEntityAt(TileEntity var1, double var2, double var4, double var6, float var8) {
         this.renderTileEntityEnchantmentTableAt((TileEntityTimeMachine) var1, var2, var4, var6, var8);
     }

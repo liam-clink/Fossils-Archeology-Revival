@@ -15,8 +15,9 @@ public class DinoAITargetNonTamedExceptSelfClass extends EntityAITargetNonTamed 
     /**
      * Returns whether the EntityAIBase should begin execution.
      */
+    @Override
     public boolean shouldExecute() {
         boolean var1 = super.shouldExecute();
-        return var1 && this.taskOwner instanceof EntityDinosaur && ((EntityDinosaur) this.taskOwner).SelfType == ((EntityDinosaur) this.taskOwner).SelfType ? false : var1;
+        return !(var1 && this.taskOwner instanceof EntityDinosaur && ((EntityDinosaur) this.taskOwner).SelfType == ((EntityDinosaur) this.taskOwner).SelfType) && var1;
     }
 }

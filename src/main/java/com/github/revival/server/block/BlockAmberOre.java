@@ -22,6 +22,7 @@ public class BlockAmberOre extends Block {
     /**
      * Returns the ID of the items to drop on destruction.
      */
+    @Override
     public Item getItemDropped(int var1, Random rand, int var3) {
         return this == FABlockRegistry.INSTANCE.amberOre ? FAItemRegistry.INSTANCE.amber : Item.getItemFromBlock(this);
     }
@@ -29,6 +30,7 @@ public class BlockAmberOre extends Block {
     /**
      * Returns the quantity of items to drop on block destruction.
      */
+    @Override
     public int quantityDropped(Random par1Random) {
         return this == FABlockRegistry.INSTANCE.amberOre ? 2 + par1Random.nextInt(2) : 1;
     }
@@ -36,6 +38,7 @@ public class BlockAmberOre extends Block {
     /**
      * Returns the usual quantity dropped by the block plus a bonus of 1 to 'i' (inclusive).
      */
+    @Override
     public int quantityDroppedWithBonus(int bonus, Random rand) {
         if (bonus > 0 && Item.getItemFromBlock(this) != this.getItemDropped(0, rand, bonus)) {
             int quantityMultiplier = rand.nextInt(bonus + 1) - 1;
@@ -53,6 +56,7 @@ public class BlockAmberOre extends Block {
     /**
      * Drops the block items with a specified chance of dropping the specified items
      */
+    @Override
     public void dropBlockAsItemWithChance(World world, int x, int y, int z, int par5, float par6, int par7) {
         super.dropBlockAsItemWithChance(world, x, y, z, par5, par6, par7);
 
@@ -70,10 +74,12 @@ public class BlockAmberOre extends Block {
     /**
      * Determines the damage on the item the block drops. Used in cloth and wood.
      */
+    @Override
     public int damageDropped(int damage) {
         return this == FABlockRegistry.INSTANCE.amberOre ? 4 : 0;
     }
 
+    @Override
     public void registerBlockIcons(IIconRegister iconRegistry) {
         this.blockIcon = iconRegistry.registerIcon("fossil:Amber_Ore");
     }

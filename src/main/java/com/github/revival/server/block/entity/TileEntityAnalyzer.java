@@ -53,6 +53,7 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory,
     /**
      * Returns the number of slots in the inventory.
      */
+    @Override
     public int getSizeInventory() {
         return this.analyzerItemStacks.length;
     }
@@ -60,6 +61,7 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory,
     /**
      * Returns the stack in slot i
      */
+    @Override
     public ItemStack getStackInSlot(int var1) {
         return this.analyzerItemStacks[var1];
     }
@@ -68,6 +70,7 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory,
      * Removes from an inventory slot (first arg) up to a specified number
      * (second arg) of items and returns them in a new stack.
      */
+    @Override
     public ItemStack decrStackSize(int var1, int var2) {
         if (this.analyzerItemStacks[var1] != null) {
             ItemStack var3;
@@ -94,6 +97,7 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory,
      * Sets the given item stack to the specified slot in the inventory (can be
      * crafting or armor sections).
      */
+    @Override
     public void setInventorySlotContents(int var1, ItemStack var2) {
         this.analyzerItemStacks[var1] = var2;
 
@@ -124,6 +128,7 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory,
     /**
      * Reads a tile entity from NBT.
      */
+    @Override
     public void readFromNBT(NBTTagCompound var1) {
         super.readFromNBT(var1);
         NBTTagList var2 = var1.getTagList("Items", 10);
@@ -151,6 +156,7 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory,
     /**
      * Writes a tile entity to NBT.
      */
+    @Override
     public void writeToNBT(NBTTagCompound var1) {
         super.writeToNBT(var1);
         var1.setShort("BurnTime", (short) this.analyzerBurnTime);
@@ -177,6 +183,7 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory,
      * Returns the maximum stack size for a inventory slot. Seems to always be
      * 64, possibly will be extended. *Isn't this more of a set than a get?*
      */
+    @Override
     public int getInventoryStackLimit() {
         return 64;
     }
@@ -202,6 +209,7 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory,
      * e.g. the mob spawner uses this to count ticks and creates a new spawn
      * inside its implementation.
      */
+    @Override
     public void updateEntity() {
         int slots;
         //System.out.println(EnumPrehistoric.getRandomMezoic());
@@ -551,9 +559,10 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory,
      * with Container
      */
 
+    @Override
     public boolean isUseableByPlayer(EntityPlayer player) {
         return this.worldObj.getTileEntity(this.xCoord, this.yCoord,
-                this.zCoord) != this ? false : player.getDistanceSq(
+                this.zCoord) == this && player.getDistanceSq(
                 (double) this.xCoord + 0.5D, (double) this.yCoord + 0.5D,
                 (double) this.zCoord + 0.5D) <= 64.0D;
     }
@@ -571,7 +580,7 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory,
 	 */
 
     public boolean isStackValidForSlot(int par1, ItemStack par2ItemStack) {
-        return par1 > 8 ? false : (par1 < 8 ? isItemFuel(par2ItemStack) : true);
+        return par1 <= 8 && (par1 >= 8 || isItemFuel(par2ItemStack));
     }
 
     /*
@@ -579,6 +588,7 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory,
      * whatever it returns as an EntityItem - like when you close a workbench
      * GUI.
      */
+    @Override
     public ItemStack getStackInSlotOnClosing(int var1) {
         return null;
     }
@@ -588,9 +598,9 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory,
 	 * stack size) into the given slot.
 	 */
 
+    @Override
     public boolean isItemValidForSlot(int par1, ItemStack par2ItemStack) {
-        return par1 == 2 ? false : (par1 == 1 ? isItemFuel(par2ItemStack)
-                : true);
+        return par1 != 2 && (par1 != 1 || isItemFuel(par2ItemStack));
     }
 
 	/*
@@ -598,6 +608,7 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory,
 	 * by automation on the given side of this block.
 	 */
 
+    @Override
     public int[] getAccessibleSlotsFromSide(int par1) {
         return par1 == 0 ? slots_bottom : (par1 == 1 ? slots_top : slots_sides);
     }
@@ -607,6 +618,7 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory,
 	 * from the given side. Args: Slot, item, side
 	 */
 
+    @Override
     public boolean canInsertItem(int par1, ItemStack par2ItemStack, int par3) {
         return this.isItemValidForSlot(par1, par2ItemStack);
     }
@@ -616,6 +628,7 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory,
 	 * from the given side. Args: Slot, item, side
 	 */
 
+    @Override
     public boolean canExtractItem(int par1, ItemStack itemstack, int par3) {
         return par3 != 0 || par1 != 1;
     }

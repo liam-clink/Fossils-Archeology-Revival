@@ -5,7 +5,7 @@ public enum EnumCoinType {
     HELL(0);
     public int targetDimension;
 
-    private EnumCoinType(int var3) {
+    EnumCoinType(int var3) {
         this.targetDimension = var3;
     }
 }

@@ -26,7 +26,7 @@ public enum EnumDinoFoodBlock {
     public int FoodValue;
     public int HealValue;
 
-    private EnumDinoFoodBlock(Block Block, int Food, int Heal) {
+    EnumDinoFoodBlock(Block Block, int Food, int Heal) {
         block = Block;
         FoodValue = Food;
         HealValue = Heal;

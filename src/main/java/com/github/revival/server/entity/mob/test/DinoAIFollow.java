@@ -31,6 +31,7 @@ public class DinoAIFollow extends EntityAIBase {
     /**
      * Returns whether the EntityAIBase should begin execution.
      */
+    @Override
     public boolean shouldExecute() {
         if (!this.DinoEntity.isTamed()) {
             return false;
@@ -59,6 +60,7 @@ public class DinoAIFollow extends EntityAIBase {
     /**
      * Returns whether an in-progress EntityAIBase should continue executing
      */
+    @Override
     public boolean continueExecuting() {
         return !this.petPathfinder.noPath() && this.DinoEntity.getDistanceSqToEntity(this.theOwner) > (double) (this.maxDist * this.maxDist) && !this.DinoEntity.isSitting();
     }
@@ -66,6 +68,7 @@ public class DinoAIFollow extends EntityAIBase {
     /**
      * Execute a one shot task or start executing a continuous task
      */
+    @Override
     public void startExecuting() {
         this.counter = 0;
         this.avoidsWater = this.DinoEntity.getNavigator().getAvoidsWater();
@@ -75,6 +78,7 @@ public class DinoAIFollow extends EntityAIBase {
     /**
      * Resets the task
      */
+    @Override
     public void resetTask() {
         this.theOwner = null;
         this.petPathfinder.clearPathEntity();
@@ -84,6 +88,7 @@ public class DinoAIFollow extends EntityAIBase {
     /**
      * Updates the task
      */
+    @Override
     public void updateTask() {
         this.DinoEntity.getLookHelper().setLookPositionWithEntity(this.theOwner, 10.0F, (float) this.DinoEntity.getVerticalFaceSpeed());
 

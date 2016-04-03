@@ -37,6 +37,7 @@ public class BlockFossil extends BlockStone {
     /**
      * Returns the ID of the items to drop on destruction.
      */
+    @Override
     public Item getItemDropped(int var1, Random var2, int var3) {
         int i = (new Random()).nextInt(1100);
 
@@ -138,6 +139,7 @@ public class BlockFossil extends BlockStone {
         return Item.getItemFromBlock(Blocks.cobblestone);
     }
 
+    @Override
     public void harvestBlock(World world, EntityPlayer player, int x, int y, int z, int i) {
         super.harvestBlock(world, player, x, y, z, i);
         player.triggerAchievement(FossilAchievementHandler.firstFossil);

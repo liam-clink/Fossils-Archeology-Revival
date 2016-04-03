@@ -56,6 +56,7 @@ public class DinoAIFollowWild extends EntityAIBase {
     /**
      * Returns whether the EntityAIBase should begin execution.
      */
+    @Override
     public boolean shouldExecute() {
         if (temptedEntity.aiFollowType() == Following.NONE) {
             return false;
@@ -75,7 +76,7 @@ public class DinoAIFollowWild extends EntityAIBase {
                 return false;
             } else {
                 ItemStack itemstack = this.temptingPlayer.getCurrentEquippedItem();
-                return itemstack == null ? false : itemstack.getItem() == this.field_151484_k;
+                return itemstack != null && itemstack.getItem() == this.field_151484_k;
             }
         }
     }
@@ -83,6 +84,7 @@ public class DinoAIFollowWild extends EntityAIBase {
     /**
      * Returns whether an in-progress EntityAIBase should continue executing
      */
+    @Override
     public boolean continueExecuting() {
         if (this.temptedEntity.aiFollowType() == Following.SKITTISH) {
             if (this.temptedEntity.getDistanceSqToEntity(this.temptingPlayer) < 36.0D) {
@@ -109,6 +111,7 @@ public class DinoAIFollowWild extends EntityAIBase {
     /**
      * Execute a one shot task or start executing a continuous task
      */
+    @Override
     public void startExecuting() {
         this.targetX = this.temptingPlayer.posX;
         this.targetY = this.temptingPlayer.posY;
@@ -121,6 +124,7 @@ public class DinoAIFollowWild extends EntityAIBase {
     /**
      * Resets the task
      */
+    @Override
     public void resetTask() {
         this.temptingPlayer = null;
         this.temptedEntity.getNavigator().clearPathEntity();
@@ -132,6 +136,7 @@ public class DinoAIFollowWild extends EntityAIBase {
     /**
      * Updates the task
      */
+    @Override
     public void updateTask() {
         if (temptedEntity.aiFollowType() == Following.AGRESSIVE && temptedEntity.isTamed()) {
             if (temptedEntity.getOwner() != temptingPlayer) {

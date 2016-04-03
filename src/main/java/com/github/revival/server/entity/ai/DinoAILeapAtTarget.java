@@ -13,6 +13,7 @@ public class DinoAILeapAtTarget extends EntityAIBase {
         this.setMutexBits(5);
     }
 
+    @Override
     public boolean shouldExecute() {
         this.leapTarget = this.dino.getAttackTarget();
 
@@ -33,13 +34,15 @@ public class DinoAILeapAtTarget extends EntityAIBase {
         }
     }
 
+    @Override
     public boolean continueExecuting() {
         return !this.dino.onGround;
     }
 
+    @Override
     public void startExecuting() {
-        if (dino.getAnimation() != dino.animation_attack) {
-            dino.setAnimation(dino.animation_attack);
+        if (dino.getAnimation() != EntityNewPrehistoric.animation_attack) {
+            dino.setAnimation(EntityNewPrehistoric.animation_attack);
         }
     }
 

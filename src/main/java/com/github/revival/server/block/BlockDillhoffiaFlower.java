@@ -14,6 +14,7 @@ public class BlockDillhoffiaFlower extends BlockBush {
         setBlockName(LocalizationStrings.BLOCK_DILLHOFFIA_NAME);
     }
 
+    @Override
     public void registerBlockIcons(IIconRegister par1IconRegister) {
         this.blockIcon = par1IconRegister.registerIcon("fossil:Dillhoffia");
     }

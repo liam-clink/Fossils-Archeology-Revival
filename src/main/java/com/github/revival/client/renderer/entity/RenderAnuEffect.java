@@ -200,14 +200,17 @@ public class RenderAnuEffect extends RenderLiving {
     /**
      * Queries whether should render the specified pass or not.
      */
+    @Override
     protected int shouldRenderPass(EntityLivingBase entity, int x, float i) {
         return this.shouldRenderPass((EntityAnuEffect) entity, x, i);
     }
 
+    @Override
     protected void renderEquippedItems(EntityLivingBase entity, float i1) {
         this.renderEquippedItems((EntityAnuEffect) entity, i1);
     }
 
+    @Override
     protected void rotateCorpse(EntityLivingBase entity, float x, float y, float z) {
         this.rotateCorpse((EntityAnuEffect) entity, x, y, z);
     }
@@ -215,6 +218,7 @@ public class RenderAnuEffect extends RenderLiving {
     /**
      * Renders the model in RenderLiving
      */
+    @Override
     protected void renderModel(EntityLivingBase entity, float x, float y, float z, float i, float j, float u) {
         this.renderModel((EntityAnuEffect) entity, x, y, z, i, j, u);
     }
@@ -222,6 +226,7 @@ public class RenderAnuEffect extends RenderLiving {
     /**
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
+    @Override
     protected ResourceLocation getEntityTexture(Entity entity) {
         return this.getEntityTexture((EntityAnuEffect) entity);
     }
@@ -232,6 +237,7 @@ public class RenderAnuEffect extends RenderLiving {
      * (Render<T extends Entity) and this method has signature public void func_76986_a(T entity, double d, double d1,
      * double d2, float f, float f1). But JAD is pre 1.5 so doesn't do that.
      */
+    @Override
     public void doRender(Entity entity, double x, double y, double z, float i, float j) {
         this.doRender((EntityAnuEffect) entity, x, y, z, i, j);
     }

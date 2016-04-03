@@ -36,6 +36,7 @@ public class BlockAncientChest extends BlockContainer {
      * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
      * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
      */
+    @Override
     public boolean isOpaqueCube() {
         return false;
     }
@@ -43,6 +44,7 @@ public class BlockAncientChest extends BlockContainer {
     /**
      * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
      */
+    @Override
     public boolean renderAsNormalBlock() {
         return false;
     }
@@ -50,6 +52,7 @@ public class BlockAncientChest extends BlockContainer {
     /**
      * The type of render function that is called for this block
      */
+    @Override
     public int getRenderType() {
         return 22;
     }
@@ -57,6 +60,7 @@ public class BlockAncientChest extends BlockContainer {
     /**
      * Updates the blocks bounds based on its current state. Args: world, x, y, z
      */
+    @Override
     public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z) {
         this.setBlockBounds(0.0625F, 0.0F, 0.0625F, 0.9375F, 0.875F, 0.9375F);
     }
@@ -65,6 +69,7 @@ public class BlockAncientChest extends BlockContainer {
     /**
      * Called when the block is placed in the world.
      */
+    @Override
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase placer, ItemStack stack) {
 
         byte facing = 0;
@@ -93,6 +98,7 @@ public class BlockAncientChest extends BlockContainer {
      * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
      * their own) Args: x, y, z, neighbor Block
      */
+    @Override
     public void onNeighborBlockChange(World world, int x, int y, int z, Block block) {
         super.onNeighborBlockChange(world, x, y, z, block);
         TileEntityAncientChest tile = (TileEntityAncientChest) world.getTileEntity(x, y, z);
@@ -102,6 +108,7 @@ public class BlockAncientChest extends BlockContainer {
         }
     }
 
+    @Override
     public void breakBlock(World world, int x, int y, int z, Block block, int i) {
         TileEntityAncientChest tile = (TileEntityAncientChest) world.getTileEntity(x, y, z);
 
@@ -144,6 +151,7 @@ public class BlockAncientChest extends BlockContainer {
     /**
      * Called upon block activation (right click on the block.)
      */
+    @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int i, float f, float f1, float f2) {
         TileEntityAncientChest tile = (TileEntityAncientChest) world.getTileEntity(x, y, z);
         if (tile.chestState == 0) {
@@ -188,10 +196,12 @@ public class BlockAncientChest extends BlockContainer {
     /**
      * Returns a new instance of a block's tile entity class. Called on placing the block.
      */
+    @Override
     public TileEntity createNewTileEntity(World world, int p_149915_2_) {
         return new TileEntityAncientChest();
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister iconRegister) {
         this.blockIcon = iconRegister.registerIcon("fossil:AncientChestSquare");

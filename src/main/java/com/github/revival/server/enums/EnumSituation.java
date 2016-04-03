@@ -13,5 +13,5 @@ public enum EnumSituation {
     Full,
     Nervous,
     GemErrorYoung,
-    GemErrorHealth;
+    GemErrorHealth
 }

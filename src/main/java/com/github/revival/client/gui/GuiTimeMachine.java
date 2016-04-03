@@ -26,6 +26,7 @@ public class GuiTimeMachine extends GuiContainer {
     /**
      * Adds the buttons (and other controls) to the screen in question.
      */
+    @Override
     public void initGui() {
         super.initGui();
     }
@@ -50,6 +51,7 @@ public class GuiTimeMachine extends GuiContainer {
     /**
      * Draw the background layer for the GuiContainer (everything behind the items)
      */
+    @Override
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         mc.getTextureManager().bindTexture(loc);
@@ -66,6 +68,7 @@ public class GuiTimeMachine extends GuiContainer {
     /**
      * Fired when a control is clicked. This is the equivalent of ActionListener.actionPerformed(ActionEvent e).
      */
+    @Override
     protected void actionPerformed(GuiButton button) {
         switch (button.id) {
             case 1:
@@ -83,6 +86,7 @@ public class GuiTimeMachine extends GuiContainer {
     /**
      * Called from the main game loop to update the screen.
      */
+    @Override
     public void updateScreen() {
         super.updateScreen();
         //((GuiButton)this.controlList.get(0)).enabled = this.timeMachineInstance.isCharged() && !this.timeMachineInstance.isRestoring;

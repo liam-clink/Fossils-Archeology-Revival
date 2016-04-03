@@ -15,6 +15,7 @@ public class RenderAnubite extends RenderBiped {
         super(new ModelAnubite(), 0.3F);
     }
 
+    @Override
     protected ResourceLocation getEntityTexture(EntityLiving entity) {
         return skeletonTextures;
     }

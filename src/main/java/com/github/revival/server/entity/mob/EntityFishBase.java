@@ -38,6 +38,7 @@ public abstract class EntityFishBase extends EntityWaterMob {
         this.setSize(this.width * 3.5F, this.height * 0.5F);
     }
 
+    @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(10.0D);
@@ -51,6 +52,7 @@ public abstract class EntityFishBase extends EntityWaterMob {
     /**
      * Returns the item ID for the item the mob drops on death.
      */
+    @Override
     protected Item getDropItem() {
         return Items.fish;
     }
@@ -59,6 +61,7 @@ public abstract class EntityFishBase extends EntityWaterMob {
      * returns if this entity triggers Block.onEntityWalking on the blocks they walk on. used for spiders and wolves to
      * prevent them from trampling crops
      */
+    @Override
     protected boolean canTriggerWalking() {
         return false;
     }
@@ -66,6 +69,7 @@ public abstract class EntityFishBase extends EntityWaterMob {
     /**
      * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
      */
+    @Override
     public boolean interact(EntityPlayer var1) {
         ItemStack var2 = var1.inventory.getCurrentItem();
 
@@ -99,10 +103,10 @@ public abstract class EntityFishBase extends EntityWaterMob {
         p0.reset();
 
         if (this.hasCustomNameTag()) {
-            p0.printStringXY(this.getCustomNameTag(), p0.rightIndent, 24, 40, 90, 245);
+            p0.printStringXY(this.getCustomNameTag(), GuiPedia.rightIndent, 24, 40, 90, 245);
         }
 
-        p0.printStringXY(StatCollector.translateToLocal(getCodeName()), p0.rightIndent, 34, 0, 0, 0);
+        p0.printStringXY(StatCollector.translateToLocal(getCodeName()), GuiPedia.rightIndent, 34, 0, 0, 0);
 
         // p0.printHappyBar(new ResourceLocation(this.getItemTexture()), ((p0.xGui / 2) + (p0.xGui / 4)), 7, 16, 16);
         if (this.hasCustomNameTag()) {
@@ -155,6 +159,7 @@ public abstract class EntityFishBase extends EntityWaterMob {
     /**
      * Called to update the entity's position/logic.
      */
+    @Override
     public void onUpdate() {
         super.onUpdate();
         HandleBreed();
@@ -164,6 +169,7 @@ public abstract class EntityFishBase extends EntityWaterMob {
      * Checks if this entity is inside water (if inWater field is true as a result of handleWaterMovement() returning
      * true)
      */
+    @Override
     public boolean isInWater() {
         return this.worldObj.handleMaterialAcceleration(this.boundingBox.expand(0.0D, -0.6000000238418579D, 0.0D), Material.water, this);
     }
@@ -172,6 +178,7 @@ public abstract class EntityFishBase extends EntityWaterMob {
      * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
      * use this to react to sunlight and start to burn.
      */
+    @Override
     public void onLivingUpdate() {
         super.onLivingUpdate();
 
@@ -200,10 +207,12 @@ public abstract class EntityFishBase extends EntityWaterMob {
     /**
      * Moves the entity based on the specified heading.  Args: strafe, forward
      */
+    @Override
     public void moveEntityWithHeading(float par1, float par2) {
         this.moveEntity(this.motionX, this.motionY, this.motionZ);
     }
 
+    @Override
     protected void updateEntityActionState() {
         ++this.entityAge;
 
@@ -222,6 +231,7 @@ public abstract class EntityFishBase extends EntityWaterMob {
     /**
      * Checks if the entity's current position is a valid location to spawn this entity.
      */
+    @Override
     public boolean getCanSpawnHere() {
         return this.posY > 45.0D && this.posY < 63.0D && super.getCanSpawnHere();
     }
@@ -254,7 +264,7 @@ public abstract class EntityFishBase extends EntityWaterMob {
 
             if (!var1) {
                 if (var2 > 30) {
-                    ;//no more
+                    //no more
                 } else {
                     spawnBaby(var2);
                 }

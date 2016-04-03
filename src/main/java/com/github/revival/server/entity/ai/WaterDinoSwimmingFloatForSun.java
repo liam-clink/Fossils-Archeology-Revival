@@ -10,6 +10,7 @@ public class WaterDinoSwimmingFloatForSun extends WaterDinoAISwimming {
     /**
      * Updates the task
      */
+    @Override
     public void updateTask() {
     }
 }

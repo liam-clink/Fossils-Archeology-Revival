@@ -8,6 +8,7 @@ public class TileEntitySarcophagus extends TileEntity {
     public int chestLidCounter;
     public int chestLidCounter2;
 
+    @Override
     public void updateEntity() {
         super.updateEntity();
 

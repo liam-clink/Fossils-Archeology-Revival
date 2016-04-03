@@ -77,6 +77,7 @@ public class BlockAnalyzer extends BlockContainer {
      * public String getTextureFile() { return
      * "/fossil/textures/Fos_terrian.png"; }
      */
+    @Override
     public int getRenderType() {
         return 2303;
     }
@@ -92,6 +93,7 @@ public class BlockAnalyzer extends BlockContainer {
     /**
      * Called whenever the block is added into the world. Args: world, x, y, z
      */
+    @Override
     public void onBlockAdded(World world, int x, int y, int z) {
         super.onBlockAdded(world, x, y, z);
         this.setDefaultDirection(world, x, y, z);
@@ -133,6 +135,7 @@ public class BlockAnalyzer extends BlockContainer {
      * needs with the given IconRegister. This is the only chance you get to
      * register icons.
      */
+    @Override
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister iconRegister) {
         this.blockIcon = iconRegister.registerIcon("fossil:Analyser_Sides");
@@ -144,6 +147,7 @@ public class BlockAnalyzer extends BlockContainer {
      * From the specified side and block metadata retrieves the blocks texture.
      * Args: side, metadata
      */
+    @Override
     public IIcon getIcon(int side, int metadata) {
         return side == 1 ? this.top : (side == 0 ? this.blockIcon : (side != metadata ? this.blockIcon : this.front));
 
@@ -154,6 +158,7 @@ public class BlockAnalyzer extends BlockContainer {
     /**
      * Called upon block activation (right click on the block.)
      */
+    @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
         if (world.isRemote) {
             return true;
@@ -166,6 +171,7 @@ public class BlockAnalyzer extends BlockContainer {
     /**
      * Called when the block is placed in the world.
      */
+    @Override
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase placer, ItemStack stack) {
         int rotate = MathHelper.floor_double((double) (placer.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
 
@@ -194,6 +200,7 @@ public class BlockAnalyzer extends BlockContainer {
      * ejects contained items into the world, and notifies neighbours of an
      * update, as appropriate
      */
+    @Override
     public void breakBlock(World world, int x, int y, int z, Block block, int var6) {
         if (!keepFurnaceInventory) {
             TileEntityAnalyzer tileentity = (TileEntityAnalyzer) world.getTileEntity(x, y, z);
@@ -259,6 +266,7 @@ public class BlockAnalyzer extends BlockContainer {
      * use the value from getComparatorInputOverride instead of the actual
      * redstone signal strength.
      */
+    @Override
     public boolean hasComparatorInputOverride() {
         return true;
     }
@@ -268,6 +276,7 @@ public class BlockAnalyzer extends BlockContainer {
      * used instead of the redstone signal strength when this block inputs to a
      * comparator.
      */
+    @Override
     public int getComparatorInputOverride(World par1World, int par2, int par3,
                                           int par4, int par5) {
         return Container.calcRedstoneFromInventory((IInventory) par1World
@@ -278,6 +287,7 @@ public class BlockAnalyzer extends BlockContainer {
      * only called by clickMiddleMouseButton , and passed to
      * inventory.setCurrentItem (along with isCreative)
      */
+    @Override
     @SideOnly(Side.CLIENT)
     public Item getItem(World world, int x, int y, int z) {
         return Item.getItemFromBlock(FABlockRegistry.INSTANCE.blockanalyzerIdle);

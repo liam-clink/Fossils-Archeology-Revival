@@ -24,6 +24,7 @@ public class GuiNotebook extends GuiScreen {
     private int bookImageWidth = 254;
     private int bookImageHeight = 188;
 
+    @Override
     public void initGui() {
         buttonList.clear();
         int centerX = (this.width - this.bookImageWidth) / 2;
@@ -124,6 +125,7 @@ public class GuiNotebook extends GuiScreen {
         this.updateScreen();
     }
 
+    @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.renderEngine.bindTexture(notebook_background);
@@ -148,6 +150,7 @@ public class GuiNotebook extends GuiScreen {
     /**
      * Returns true if this GUI should pause the game when it is displayed in single-player
      */
+    @Override
     public boolean doesGuiPauseGame() {
         return false;
     }
@@ -155,6 +158,7 @@ public class GuiNotebook extends GuiScreen {
     /**
      * Called when the screen is unloaded. Used to disable keyboard repeat events
      */
+    @Override
     public void onGuiClosed() {
         super.onGuiClosed();
     }

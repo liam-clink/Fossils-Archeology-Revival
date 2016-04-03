@@ -12,6 +12,7 @@ import com.github.revival.server.enums.EnumPrehistoric;
 import com.github.revival.server.util.FoodMappings;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -75,6 +76,7 @@ public class GuiPedia extends GuiContainer {
     /**
      * Adds the buttons (and other controls) to the screen in question.
      */
+    @Override
     public void initGui() {
         buttonList.clear();
         int centerX = (this.width - this.xGui) / 2;
@@ -199,6 +201,7 @@ public class GuiPedia extends GuiContainer {
 
     }
 
+    @Override
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
 
         if (bookPages == 0) {
@@ -420,12 +423,13 @@ public class GuiPedia extends GuiContainer {
 
     }
 
+    @Override
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         mc.getTextureManager().bindTexture(background_image);
         int k = (this.width - this.xSize) / 2;
         int l = (this.height - this.ySize) / 2;
-        this.func_146110_a(k, l, 0, 0, this.xSize, this.ySize, (390.625F), (390.625F));
+        func_146110_a(k, l, 0, 0, this.xSize, this.ySize, (390.625F), (390.625F));
         if (bookPages == 0) {
             GL11.glPushMatrix();
             if (Revival.toPedia instanceof EntityLivingBase) {
@@ -455,6 +459,7 @@ public class GuiPedia extends GuiContainer {
     /**
      * Called when the screen is unloaded. Used to disable keyboard repeat events
      */
+    @Override
     public void onGuiClosed() {
         super.onGuiClosed();
     }

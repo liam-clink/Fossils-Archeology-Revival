@@ -68,6 +68,7 @@ public class TileEntityAncientChest extends TileEntity {
         chestState = state;
     }
 
+    @Override
     public void readFromNBT(NBTTagCompound p_145839_1_) {
         super.readFromNBT(p_145839_1_);
         NBTTagList nbttaglist = p_145839_1_.getTagList("Items", 10);
@@ -84,6 +85,7 @@ public class TileEntityAncientChest extends TileEntity {
         }
     }
 
+    @Override
     public void writeToNBT(NBTTagCompound p_145841_1_) {
         super.writeToNBT(p_145841_1_);
         NBTTagList nbttaglist = new NBTTagList();
@@ -108,6 +110,7 @@ public class TileEntityAncientChest extends TileEntity {
         return 1;
     }
 
+    @Override
     public void updateEntity() {
         super.updateEntity();
         ++this.ticksSinceSync;
@@ -180,6 +183,7 @@ public class TileEntityAncientChest extends TileEntity {
     /**
      * Called when a client event is received with the event number and argument, see World.sendClientEvent
      */
+    @Override
     public boolean receiveClientEvent(int p_145842_1_, int p_145842_2_) {
         if (p_145842_1_ == 1) {
             this.numPlayersUsing = p_145842_2_;
@@ -220,6 +224,7 @@ public class TileEntityAncientChest extends TileEntity {
     /**
      * invalidates a tile entity
      */
+    @Override
     public void invalidate() {
         super.invalidate();
         this.updateContainingBlockInfo();

@@ -145,20 +145,21 @@ public class EntityDeinonychus extends EntityNewPrehistoric {
         return Items.bone;
     }
 
+    @Override
     public void updateSize() {
         double healthStep;
         double attackStep;
         double speedStep;
-        healthStep = (this.maxHealth - this.baseHealth) / (this.getAdultAge() + 1);
-        attackStep = (this.maxDamage - this.baseDamage) / (this.getAdultAge() + 1);
-        speedStep = (this.maxSpeed - this.baseSpeed) / (this.getAdultAge() + 1);
+        healthStep = (maxHealth - baseHealth) / (this.getAdultAge() + 1);
+        attackStep = (maxDamage - baseDamage) / (this.getAdultAge() + 1);
+        speedStep = (maxSpeed - baseSpeed) / (this.getAdultAge() + 1);
 
 
         if (this.getDinoAge() <= this.getAdultAge()) {
 
-            this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(Math.round(this.baseHealth + (healthStep * this.getDinoAge())));
-            this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(Math.round(this.baseDamage + (attackStep * this.getDinoAge())));
-            this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(this.baseSpeed + (speedStep * this.getDinoAge()));
+            this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(Math.round(baseHealth + (healthStep * this.getDinoAge())));
+            this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(Math.round(baseDamage + (attackStep * this.getDinoAge())));
+            this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(baseSpeed + (speedStep * this.getDinoAge()));
         }
     }
 
@@ -167,6 +168,7 @@ public class EntityDeinonychus extends EntityNewPrehistoric {
         return 10;
     }
 
+    @Override
     public void onLivingUpdate() {
         super.onLivingUpdate();
         if (this.getAttackTarget() != null && this.ridingEntity != null) {
@@ -175,7 +177,7 @@ public class EntityDeinonychus extends EntityNewPrehistoric {
                 this.getAttackTarget().attackEntityFrom(DamageSource.causeMobDamage(this), (float) iattributeinstance.getAttributeValue());
             }
         }
-        if (this.getAttackTarget() != null && this.getAnimation() == this.animation_attack && (this.getAnimationTick() >= 17 && this.getAnimationTick() <= 20) && this.onGround) {
+        if (this.getAttackTarget() != null && this.getAnimation() == animation_attack && (this.getAnimationTick() >= 17 && this.getAnimationTick() <= 20) && this.onGround) {
             double d0 = this.getAttackTarget().posX - this.posX;
             double d1 = this.getAttackTarget().posZ - this.posZ;
             float f = MathHelper.sqrt_double(d0 * d0 + d1 * d1);
@@ -186,23 +188,27 @@ public class EntityDeinonychus extends EntityNewPrehistoric {
         }
     }
 
+    @Override
     public boolean attackEntityAsMob(Entity entity) {
         return false;
     }
 
+    @Override
     public void applyEntityCollision(Entity entity) {
         super.applyEntityCollision(entity);
         if (this.getAttackTarget() != null) {
-            if (this.getAttackTarget() == entity && this.getAnimation() == this.animation_attack && !onGround && this.ridingEntity != entity) {
+            if (this.getAttackTarget() == entity && this.getAnimation() == animation_attack && !onGround && this.ridingEntity != entity) {
                 this.mountEntity(entity);
             }
         }
     }
 
+    @Override
     public boolean canAttackClass(Class clazz) {
-        return (clazz == EntityVelociraptor.class) ? false : super.canAttackClass(clazz);
+        return (clazz != EntityVelociraptor.class) && super.canAttackClass(clazz);
     }
 
+    @Override
     public boolean attackEntityFrom(DamageSource dmg, float i) {
         if (this.ridingEntity != null) {
             if (this.getLastAttacker() != null) {

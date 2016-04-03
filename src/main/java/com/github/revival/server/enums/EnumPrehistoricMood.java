@@ -12,7 +12,7 @@ public enum EnumPrehistoricMood {
     public int value;
     public EnumChatFormatting color;
 
-    private EnumPrehistoricMood(int uv, int value, EnumChatFormatting color) {
+    EnumPrehistoricMood(int uv, int value, EnumChatFormatting color) {
         this.uv = uv;
         this.value = value;
         this.color = color;

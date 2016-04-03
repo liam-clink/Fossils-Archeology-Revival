@@ -47,10 +47,12 @@ public class EntityAnubite extends EntityMob {
 
     }
 
+    @Override
     public boolean isAIEnabled() {
         return true;
     }
 
+    @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(20.0D);
@@ -61,13 +63,10 @@ public class EntityAnubite extends EntityMob {
     private boolean shouldAttackPlayer(EntityPlayer player) {
         ItemStack itemstack = player.inventory.armorInventory[3];
 
-        if (itemstack != null && itemstack.getItem() == FAItemRegistry.INSTANCE.ancienthelmet) {
-            return false;
-        } else {
-            return true;
-        }
+        return !(itemstack != null && itemstack.getItem() == FAItemRegistry.INSTANCE.ancienthelmet);
     }
 
+    @Override
     public void onLivingUpdate() {
         super.onLivingUpdate();
 
@@ -176,10 +175,12 @@ public class EntityAnubite extends EntityMob {
         }
     }
 
+    @Override
     protected String getLivingSound() {
         return "mob.wither.idle";
     }
 
+    @Override
     protected String getHurtSound() {
         return "random.break";
     }
@@ -187,10 +188,12 @@ public class EntityAnubite extends EntityMob {
     /**
      * Returns the sound this mob makes on death.
      */
+    @Override
     protected String getDeathSound() {
         return "mob.irongolem.death";
     }
 
+    @Override
     public boolean attackEntityFrom(DamageSource source, float i) {
         if (this.isEntityInvulnerable()) {
             return false;
@@ -200,6 +203,7 @@ public class EntityAnubite extends EntityMob {
         }
     }
 
+    @Override
     public boolean attackEntityAsMob(Entity entity) {
         super.attackEntityAsMob(entity);
         if (rand.nextInt(3) == 0) {

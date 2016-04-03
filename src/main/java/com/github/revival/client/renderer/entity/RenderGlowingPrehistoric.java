@@ -20,6 +20,7 @@ public class RenderGlowingPrehistoric extends RenderLiving {
 
     }
 
+    @Override
     protected ResourceLocation getEntityTexture(Entity entity) {
         if (entity instanceof EntityNewPrehistoric) {
             EntityNewPrehistoric prehistoric = (EntityNewPrehistoric) entity;
@@ -29,6 +30,7 @@ public class RenderGlowingPrehistoric extends RenderLiving {
         }
     }
 
+    @Override
     protected void preRenderCallback(EntityLivingBase entity, float f) {
         if (entity instanceof EntityNewPrehistoric) {
             EntityNewPrehistoric prehistoric = (EntityNewPrehistoric) entity;
@@ -36,6 +38,7 @@ public class RenderGlowingPrehistoric extends RenderLiving {
         }
     }
 
+    @Override
     protected int shouldRenderPass(EntityLivingBase entity, int i, float q) {
         if (i == 2 && entity instanceof EntityNewPrehistoric) {
             this.bindTexture(new ResourceLocation(((EntityNewPrehistoric) entity).getOverlayTexture()));

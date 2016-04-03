@@ -22,13 +22,12 @@ public class BehaviorConfuciusornisEggDispense extends BehaviorProjectileDispens
     /**
      * Return the projectile entity spawned by this dispense behavior.
      */
+    @Override
     protected IProjectile getProjectileEntity(World par1World, IPosition par2IPosition) {
         if (this.javelin < 0) {
-            EntityConfuciusornisEgg var3 = new EntityConfuciusornisEgg(par1World, par2IPosition.getX(), par2IPosition.getY(), par2IPosition.getZ());
-            return var3;
+            return new EntityConfuciusornisEgg(par1World, par2IPosition.getX(), par2IPosition.getY(), par2IPosition.getZ());
         }
 
-        EntityConfuciusornisEgg var3 = new EntityConfuciusornisEgg(par1World, par2IPosition.getX(), par2IPosition.getY(), par2IPosition.getZ());
-        return var3;
+        return new EntityConfuciusornisEgg(par1World, par2IPosition.getX(), par2IPosition.getY(), par2IPosition.getZ());
     }
 }
