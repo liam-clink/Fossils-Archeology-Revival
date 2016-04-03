@@ -309,34 +309,24 @@ public class ModelDeinonychus extends ModelNewPrehistoric {
 			sitAnimationPos(leftThigh, sitProgress, 0F, 16.20F - ModelUtils.getDefaultPositionY(leftThigh), 0F);
 		}
 		{
-			float sitProgress = ((EntityNewPrehistoric) (entity)).sitProgress;
-			sitAnimationRotation(leftUpperArm, sitProgress, (float)Math.toRadians(0.39D), (float)Math.toRadians(13.0D), -((float)Math.toRadians(40.0D)));
-	        sitAnimationRotation(rightToeClaw2, sitProgress, -((float)Math.toRadians(101.0D)), 0, 0);
-	        sitAnimationRotation(rightUpperArmWing, sitProgress, (float)Math.toRadians(87.0D), 0, 0);
+			float sitProgress = ((EntityNewPrehistoric) (entity)).sleepProgress;
+			
+			
+			sitAnimationRotation(rightFoot, sitProgress, ((float) Math.toRadians(26D)), 0, 0);
+			sitAnimationRotation(leftFoot, sitProgress, ((float) Math.toRadians(26D)), 0, 0);
+			sitAnimationRotation(rightLeg, sitProgress, -(float) Math.toRadians(30.0D), 0, 0);
+			sitAnimationRotation(leftLeg, sitProgress, -(float) Math.toRadians(30.0D), 0, 0);
+			
+			sitAnimationRotation(leftUpperArm, sitProgress, (float) Math.toRadians(7D), (float) Math.toRadians(13.0D), -((float) Math.toRadians(76.0D)));
 	        sitAnimationRotation(lowerBody, sitProgress, -((float)Math.toRadians(5.22D)), 0, 0);
-	        sitAnimationRotation(rightUpperArm, sitProgress, (float)Math.toRadians(7.83D), -((float)Math.toRadians(13.04D)), (float)Math.toRadians(40.0D));
-	        sitAnimationRotation(leftFoot, sitProgress, -((float)Math.toRadians(28.7D)), 0, 0);
+			sitAnimationRotation(rightUpperArm, sitProgress, (float) Math.toRadians(7D), -((float) Math.toRadians(13.04D)), (float) Math.toRadians(76.0D));
 	        sitAnimationRotation(tail1, sitProgress, -((float)Math.toRadians(9.33D)), -((float)Math.toRadians(5.22D)), 0);
-	        sitAnimationRotation(leftLeg, sitProgress, (float)Math.toRadians(30.0D), 0, 0);
-	        sitAnimationRotation(leftToeClaw2, sitProgress, -((float)Math.toRadians(101.0D)), 0, 0);
-	        sitAnimationRotation(crest, sitProgress, (float)Math.toRadians(21.06752757370227D), 0, 0);
-	        sitAnimationRotation(crest2, sitProgress, -((float)Math.toRadians(18.0D)), (float)Math.toRadians(10.0D), (float)Math.toRadians(5.0D));
-	        sitAnimationRotation(neck, sitProgress, -((float)Math.toRadians(73.04D)), 0, 0);
-	        sitAnimationRotation(leftToeClaw1, sitProgress, -((float)Math.toRadians(50.0D)), 0, 0);
+	        sitAnimationRotation(neck, sitProgress, -((float)Math.toRadians(15D)), 0, 0);
 	        sitAnimationRotation(tail2, sitProgress, (float)Math.toRadians(5.22D), -((float)Math.toRadians(10.43D)), -((float)Math.toRadians(5.22D)));
-	        sitAnimationRotation(leftLowerArmWing, sitProgress, (float)Math.toRadians(0.78D), 0, 0);
-	        sitAnimationRotation(leftUpperArmWing, sitProgress, (float)Math.toRadians(87.0D), 0, 0);
-	        sitAnimationRotation(leftLowerArm, sitProgress, (float)Math.toRadians(40.35D), 0, 0);
-	        sitAnimationRotation(lowerJaw, sitProgress, -((float)Math.toRadians(3.567098181861509D)), 0, 0);
-	        sitAnimationRotation(rightFoot, sitProgress, -((float)Math.toRadians(26.09D)), 0, 0);
-	        sitAnimationRotation(rightToeClaw1, sitProgress, -((float)Math.toRadians(50.0D)), 0, 0);
-	        sitAnimationRotation(rightLowerArm, sitProgress, (float)Math.toRadians(40.35D), 0, 0);
-	        sitAnimationRotation(head, sitProgress, (float)Math.toRadians(122.61D), (float)Math.toRadians(20.87D), (float)Math.toRadians(23.48D));
-	        sitAnimationRotation(upperJaw, sitProgress, (float)Math.toRadians(4.39D), 0, 0);
+			sitAnimationRotation(leftLowerArm, sitProgress, -(float) Math.toRadians(10D), 0, 0);
+			sitAnimationRotation(rightLowerArm, sitProgress, -(float) Math.toRadians(10D), 0, 0);
+	        sitAnimationRotation(head, sitProgress, (float)Math.toRadians(90D), (float)Math.toRadians(15D), (float)Math.toRadians(23.48D));
 	        sitAnimationRotation(tail3, sitProgress, (float)Math.toRadians(5.22D), -((float)Math.toRadians(15.65D)), 0);
-	        sitAnimationRotation(rightLeg, sitProgress, (float)Math.toRadians(30.0D), 0, 0);
-	        sitAnimationRotation(rightLowerArmWing, sitProgress, (float)Math.toRadians(0.78D), 0, 0);
-	        sitAnimationRotation(crest3, sitProgress, -((float)Math.toRadians(18.0D)), -((float)Math.toRadians(10.0D)), -((float)Math.toRadians(5.0D)));
 	        sitAnimationRotation(upperBody, sitProgress, (float)Math.toRadians(13.13D), 0, 0);
 	        sitAnimationPos(lowerBody, sitProgress, 0F, 17.50F - ModelUtils.getDefaultPositionY(lowerBody), 0F);
 			sitAnimationPos(rightThigh, sitProgress, 0F, 16.20F - ModelUtils.getDefaultPositionY(rightThigh), 0F);
