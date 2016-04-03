@@ -27,7 +27,7 @@ public class EntityBrachiosaurus extends EntityNewPrehistoric {
     public static final double baseHealth = 20;
     public static final double maxHealth = 200;
     public static final double baseSpeed = 0.2;
-    public static final double maxSpeed = 0.25;
+    public static final double maxSpeed = 0.45;
 
     public EntityBrachiosaurus(World world) {
         super(world, EnumPrehistoric.Brachiosaurus);
