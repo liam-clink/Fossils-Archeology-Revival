@@ -276,7 +276,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	}
 
 	protected boolean isMovementCeased() {
-		return this.getOrderType() == EnumOrderType.STAY || this.isSitting();
+		return this.getOrderType() == EnumOrderType.STAY || this.isSitting() || this.isSleeping();
 	}
 
 	public EnumOrderType getOrderType() {
@@ -318,7 +318,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 			return isSleeping;
 		}
 
-		return isSitting;
+		return isSleeping;
 	}
 
 	public Vec3 getBlockToEat(int range) {
@@ -713,14 +713,19 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		boolean sitting = isSitting();
 		if (sitting && sitProgress < 20.0F) {
 			sitProgress += 0.5F;
+			if(sleepProgress != 0)sleepProgress = 0F;
 		} else if (!sitting && sitProgress > 0.0F) {
 			sitProgress -= 0.5F;
+			if(sleepProgress != 0)sleepProgress = 0F;
 		}
 		boolean sleeping = isSleeping();
 		if (sleeping && sleepProgress < 20.0F) {
 			sleepProgress += 0.5F;
+			if(sitProgress != 0)sitProgress = 0F;
+
 		} else if (!sleeping && sleepProgress > 0.0F) {
 			sleepProgress -= 0.5F;
+			if(sitProgress != 0)sitProgress = 0F;
 		}
 		AnimationHandler.INSTANCE.updateAnimations(this);
 		if (!this.worldObj.isRemote && this.aiClimbType() == Climbing.ARTHROPOD) {
@@ -1538,7 +1543,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		String toggle = this.hasFeatherToggle ? !this.featherToggle ? "feathered/" : "scaled/" : "";
 		boolean isBaby = this.isChild() && this.hasBabyTexture;
 		String gender = this.hasTeenTexture ? this.isTeen() ? "_teen" : this.isChild() ? "_baby" : this.getGender() == 0 ? "_female" : "_male" : this.isChild() ? "_baby" : this.getGender() == 0 ? "_female" : "_male";
-		String sleeping = this.getSleeping() == 0 ? "" : "_sleeping";
+		String sleeping = !this.isSleeping() ? "" : "_sleeping";
 		String toggleList = this.hasFeatherToggle ? !this.featherToggle ? "_feathered" : "_scaled" : "";
 		return "fossil:textures/model/" + selfType.toString().toLowerCase() + "_0/" + toggle + selfType.toString().toLowerCase() + gender + toggleList + sleeping + ".png";
 	}
