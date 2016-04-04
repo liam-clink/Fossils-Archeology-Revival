@@ -3,21 +3,10 @@ package com.github.revival.server.entity.mob;
 import com.github.revival.server.config.FossilConfig;
 import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 import com.github.revival.server.enums.EnumPrehistoric;
-import com.github.revival.server.enums.EnumPrehistoricAI.Activity;
-import com.github.revival.server.enums.EnumPrehistoricAI.Attacking;
-import com.github.revival.server.enums.EnumPrehistoricAI.Climbing;
-import com.github.revival.server.enums.EnumPrehistoricAI.Following;
-import com.github.revival.server.enums.EnumPrehistoricAI.Jumping;
-import com.github.revival.server.enums.EnumPrehistoricAI.Moving;
-import com.github.revival.server.enums.EnumPrehistoricAI.Response;
-import com.github.revival.server.enums.EnumPrehistoricAI.Stalking;
-import com.github.revival.server.enums.EnumPrehistoricAI.Taming;
-import com.github.revival.server.enums.EnumPrehistoricAI.Untaming;
-import com.github.revival.server.enums.EnumPrehistoricAI.WaterAbility;
+import com.github.revival.server.enums.EnumPrehistoricAI.*;
 import com.github.revival.server.handler.FossilAchievementHandler;
 import com.github.revival.server.item.FAItemRegistry;
 import net.ilexiconn.llibrary.server.animation.Animation;
-import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
@@ -67,7 +56,7 @@ public class EntityTyrannosaurus extends EntityNewPrehistoric {
 
     @Override
     public boolean attackEntityAsMob(Entity entity) {
-        if (this.boundingBox.intersectsWith(entity.boundingBox)) {
+        if (getAttackBounds().intersectsWith(entity.boundingBox)) {
             if (this.getAnimation() == NO_ANIMATION) {
                 this.setAnimation(animation_attack);
                 return false;

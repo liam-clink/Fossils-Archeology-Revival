@@ -902,7 +902,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
 
     @Override
     public boolean attackEntityAsMob(Entity victim) {
-        if (this.boundingBox.intersectsWith(victim.boundingBox)) {
+        if (this.boundingBox.expand(1.0, 1.0, 1.0).intersectsWith(victim.boundingBox)) {
             float attackDamage = (float) getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue();
             int knockback = 0;
 

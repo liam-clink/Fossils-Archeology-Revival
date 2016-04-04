@@ -173,7 +173,7 @@ public class EntityPachycephalosaurus extends EntityNewPrehistoric {
 
     @Override
     public boolean attackEntityAsMob(Entity entity) {
-        if (this.boundingBox.intersectsWith(entity.boundingBox)) {
+        if (this.getAttackBounds().intersectsWith(entity.boundingBox)) {
             if (this.getAnimation() == NO_ANIMATION) {
                 this.setAnimation(animation_attack);
                 return false;

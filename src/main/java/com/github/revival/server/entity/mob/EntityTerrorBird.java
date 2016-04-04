@@ -391,7 +391,7 @@ public class EntityTerrorBird extends EntityTameable {
 
     @Override
     public boolean attackEntityAsMob(Entity entity) {
-        if (this.boundingBox.intersectsWith(entity.boundingBox)) {
+        if (this.boundingBox.expand(1.0F, 1.0F, 1.0F).intersectsWith(entity.boundingBox)) {
             float attackdamage = (float) this.getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue();
             int i = 0;
 

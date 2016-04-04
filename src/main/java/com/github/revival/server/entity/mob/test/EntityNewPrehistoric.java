@@ -265,6 +265,10 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		this.ticksTillPlay = compound.getInteger("TicksSincePlay");
 	}
 
+	protected AxisAlignedBB getAttackBounds() {
+		return this.boundingBox.expand(1.0F, 1.0, 1.0);
+	}
+
 	@Override
 	public IEntityLivingData onSpawnWithEgg(IEntityLivingData par1EntityLivingData) {
 		par1EntityLivingData = super.onSpawnWithEgg(par1EntityLivingData);
