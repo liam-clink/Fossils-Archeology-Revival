@@ -143,7 +143,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
     protected int nearByMobsAllowed;
     public int ticksSprinted;
     public int ticksTillPlay;
-    private float prevDinosaurSize;
+    public int prevAge;
 
     public EntityNewPrehistoric(World world, EnumPrehistoric selfType) {
         super(world);
@@ -178,6 +178,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
         //this.targetTasks.addTask(2, new EntityAITargetNonTamed(this, EntityLivingBase.class, 200, false));
         hasBabyTexture = true;
         tailbuffer = new ChainBuffer();
+        this.setScale(this.getDinosaurSize());
     }
 
     public static boolean isCannibal() {
@@ -267,7 +268,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
     }
 
     protected AxisAlignedBB getAttackBounds() {
-        return this.boundingBox.expand(1.0F, 1.0, 1.0);
+        return this.boundingBox.expand(1.0F, 1.0F, 1.0F);
     }
 
     @Override
@@ -489,11 +490,6 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
     @Override
     public void onLivingUpdate() {
         super.onLivingUpdate();
-        float dinosaurSize = this.getDinosaurSize();
-        if (Math.abs(dinosaurSize - prevDinosaurSize) > 0.01) {
-            this.setScale(dinosaurSize);
-            this.prevDinosaurSize = dinosaurSize;
-        }
         if (this.getHunger() > 100) {
             this.setHunger(100);
         }
@@ -725,6 +721,11 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
     @Override
     public void onUpdate() {
         super.onUpdate();
+        int currentAge = getDinoAge();
+        if (currentAge != prevAge) {
+            this.setScale(this.getDinosaurSize());
+            prevAge = currentAge;
+        }
         if (this.isSprinting()) {
             ticksSprinted++;
         }
