@@ -734,7 +734,6 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
             this.setSprinting(false);
         }
         tailbuffer.calculateChainSwingBuffer(70, 10, 4, this);
-        this.updateSize();
         if (this.ridingEntity != null) {
             if (this.ridingEntity.isDead) {
                 this.mountEntity(null);
@@ -759,8 +758,12 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
         }
         if(this.ticksExisted > 1)
             AnimationHandler.INSTANCE.updateAnimations(this);
-        if (!this.worldObj.isRemote && this.aiClimbType() == Climbing.ARTHROPOD) {
+        if (!this.worldObj.isRemote) {
+        	if(this.aiClimbType() == Climbing.ARTHROPOD){
             this.setBesideClimbableBlock(this.isCollidedHorizontally);
+        	}else{
+                this.setBesideClimbableBlock(false);
+        	}
         }
     }
 
