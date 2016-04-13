@@ -252,12 +252,16 @@ public class GuiPedia extends GuiContainer {
         if (entity instanceof EntityNewPrehistoric) {
             EntityNewPrehistoric dino = (EntityNewPrehistoric) entity;
             {
-                String s1 = StatCollector.translateToLocal("pedia.health") + " " + dino.getHealth() + "/" + dino.getMaxHealth();
+                String s1 = StatCollector.translateToLocal("pedia.age") + " " + dino.getDinoAge();
                 printStringXY(s1, wordLength / 2, 110, 157, 126, 103);
             }
             {
-                String s1 = StatCollector.translateToLocal("pedia.hunger") + " " + dino.getHunger() + "/" + dino.getMaxHunger();
+                String s1 = StatCollector.translateToLocal("pedia.health") + " " + dino.getHealth() + "/" + dino.getMaxHealth();
                 printStringXY(s1, wordLength / 2, 120, 157, 126, 103);
+            }
+            {
+                String s1 = StatCollector.translateToLocal("pedia.hunger") + " " + dino.getHunger() + "/" + dino.getMaxHunger();
+                printStringXY(s1, wordLength / 2, 130, 157, 126, 103);
             }
             {
                 ScaledResolution scaledResolution = new ScaledResolution(mc, mc.displayWidth, mc.displayHeight);
@@ -267,7 +271,7 @@ public class GuiPedia extends GuiContainer {
                 final int mouseY = (height - Mouse.getY() * height / mc.displayHeight - 1) - guiTop;
                 String s1 = StatCollector.translateToLocal("pedia.diet") + " " + StatCollector.translateToLocal("pedia.diet." + dino.selfType.diet.toString().toLowerCase());
                 int x = wordLength / 2;
-                int y = 130;
+                int y = 140;
                 printStringXY(s1, x, y, 157, 126, 103);
                 if (mouseX > x && mouseX < x + this.fontRendererObj.getStringWidth(s1)) {
                     if (mouseY > y && mouseY < y + 10) {
@@ -287,7 +291,7 @@ public class GuiPedia extends GuiContainer {
                 final int mouseY = (height - Mouse.getY() * height / mc.displayHeight - 1) - guiTop;
                 String s1 = StatCollector.translateToLocal("pedia.temperament") + " " + StatCollector.translateToLocal(dino.getTempermentString());
                 int x = wordLength / 2;
-                int y = 140;
+                int y = 150;
                 printStringXY(s1, x, y, 157, 126, 103);
                 if (mouseX > x && mouseX < x + this.fontRendererObj.getStringWidth(s1)) {
                     if (mouseY > y && mouseY < y + 10) {
@@ -301,13 +305,13 @@ public class GuiPedia extends GuiContainer {
             }
             {
                 String s1 = StatCollector.translateToLocal("pedia.gender") + " " + (dino.getGender() == 0 ? StatCollector.translateToLocal("pedia.gender.female") : StatCollector.translateToLocal("pedia.gender.male"));
-                printStringXY(s1, wordLength / 2, 150, 157, 126, 103);
+                printStringXY(s1, wordLength / 2, 160, 157, 126, 103);
             }
             {
                 String s1 = StatCollector.translateToLocal("pedia.untame");
                 String s2 = StatCollector.translateToLocal("pedia.owner") + " " + dino.getOwnerDisplayName();
 
-                printStringXY(dino.isTamed() ? s2 : s1, wordLength / 2, 160, 157, 126, 103);
+                printStringXY(dino.isTamed() ? s2 : s1, wordLength / 2, 170, 157, 126, 103);
             }
             {
                 ScaledResolution scaledResolution = new ScaledResolution(mc, mc.displayWidth, mc.displayHeight);
@@ -317,12 +321,32 @@ public class GuiPedia extends GuiContainer {
                 final int mouseY = (height - Mouse.getY() * height / mc.displayHeight - 1) - guiTop;
                 String s1 = StatCollector.translateToLocal("pedia.order") + " " + StatCollector.translateToLocal("pedia.order." + dino.currentOrder.toString().toLowerCase());
                 int x = wordLength / 2;
-                int y = 170;
+                int y = 180;
                 printStringXY(s1, x, y, 157, 126, 103);
                 if (mouseX > x && mouseX < x + this.fontRendererObj.getStringWidth(s1)) {
                     if (mouseY > y && mouseY < y + 10) {
                         List<String> text = new ArrayList<String>();
                         text.add(StatCollector.translateToLocal(StatCollector.translateToLocal("pedia.order." + dino.currentOrder.toString().toLowerCase() + ".desc")));
+                        GL11.glPushMatrix();
+                        this.drawHoveringText(text, mouseX, mouseY, fontRendererObj);
+                        GL11.glPopMatrix();
+                    }
+                }
+            }
+            {
+                ScaledResolution scaledResolution = new ScaledResolution(mc, mc.displayWidth, mc.displayHeight);
+                final int width = scaledResolution.getScaledWidth();
+                final int height = scaledResolution.getScaledHeight();
+                final int mouseX = (Mouse.getX() * width / mc.displayWidth) - guiLeft;
+                final int mouseY = (height - Mouse.getY() * height / mc.displayHeight - 1) - guiTop;
+                String s1 = StatCollector.translateToLocal("pedia.activity") + " " + StatCollector.translateToLocal("pedia.activity." + dino.aiActivityType().toString().toLowerCase());
+                int x = wordLength / 2;
+                int y = 190;
+                printStringXY(s1, x, y, 157, 126, 103);
+                if (mouseX > x && mouseX < x + this.fontRendererObj.getStringWidth(s1)) {
+                    if (mouseY > y && mouseY < y + 10) {
+                        List<String> text = new ArrayList<String>();
+                        text.add(StatCollector.translateToLocal(StatCollector.translateToLocal("pedia.activity." + dino.aiActivityType().toString().toLowerCase() + ".desc")));
                         GL11.glPushMatrix();
                         this.drawHoveringText(text, mouseX, mouseY, fontRendererObj);
                         GL11.glPopMatrix();
@@ -409,7 +433,7 @@ public class GuiPedia extends GuiContainer {
             int[] keyArray = ArrayUtils.toPrimitive(keys.toArray(new Integer[0]));
             for (int i : keyArray) {
                 Item item = Item.getItemById(i);
-                if (items < 64) {
+                if (items < 64 && !(item instanceof ItemBlock)) {
                     addMiniItem(item);
                 }
             }

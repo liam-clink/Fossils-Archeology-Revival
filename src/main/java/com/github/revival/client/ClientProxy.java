@@ -60,6 +60,7 @@ import com.github.revival.client.renderer.item.ItemRenderAnuTotem;
 import com.github.revival.client.renderer.item.ItemRenderAnubite;
 import com.github.revival.client.renderer.item.ItemRenderSarcophagus;
 import com.github.revival.client.renderer.item.ItemRenderTileEntity;
+import com.github.revival.client.renderer.item.ItemToyBallRender;
 import com.github.revival.client.renderer.item.ItemVaseAmphoraRenderer;
 import com.github.revival.client.renderer.item.ItemVaseKylixRenderer;
 import com.github.revival.client.renderer.item.ItemVaseVoluteRenderer;
@@ -132,6 +133,7 @@ import com.github.revival.server.handler.EventNewMenu;
 import com.github.revival.server.handler.EventOverlay;
 import com.github.revival.server.handler.FossilClientEvents;
 import com.github.revival.server.item.FAItemRegistry;
+
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
@@ -206,6 +208,7 @@ public class ClientProxy extends ServerProxy {
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(FABlockRegistry.INSTANCE.vaseAmphoraBlock), new ItemVaseAmphoraRenderer());
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(FABlockRegistry.INSTANCE.vaseKylixBlock), new ItemVaseKylixRenderer());
         MinecraftForgeClient.registerItemRenderer(FAItemRegistry.INSTANCE.ancientClock, new ItemAncientClocRender());
+        MinecraftForgeClient.registerItemRenderer(FAItemRegistry.INSTANCE.toyBall, new ItemToyBallRender());
 
         RenderingRegistry.registerBlockHandler(Revival.feederRenderID, new RenderFeeder());
 

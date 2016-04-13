@@ -1,5 +1,18 @@
 package com.github.revival.server.item;
 
+import java.lang.reflect.Field;
+
+import net.minecraft.block.BlockDispenser;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ItemBucket;
+import net.minecraft.item.ItemStack;
+import net.minecraft.server.MinecraftServer;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.FluidRegistry;
+
 import com.github.revival.Revival;
 import com.github.revival.server.block.FABlockRegistry;
 import com.github.revival.server.creativetab.FATabRegistry;
@@ -13,19 +26,8 @@ import com.github.revival.server.item.forge.ForgeItemItem;
 import com.github.revival.server.item.forge.ForgePickaxeItem;
 import com.github.revival.server.item.forge.ForgeShovelItem;
 import com.github.revival.server.item.forge.ForgeSwordItem;
-import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.block.BlockDispenser;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemArmor;
-import net.minecraft.item.ItemBucket;
-import net.minecraft.item.ItemStack;
-import net.minecraft.server.MinecraftServer;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fluids.FluidContainerRegistry;
-import net.minecraftforge.fluids.FluidRegistry;
 
-import java.lang.reflect.Field;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 public enum FAItemRegistry {
     INSTANCE;
@@ -93,6 +95,7 @@ public enum FAItemRegistry {
     public Item legBone;
     public Item foot;
     public Item dinosaurModels;
+    public Item toyBall;
 
     public void init() {
         biofossil = new BioFossilItem();
@@ -154,6 +157,7 @@ public enum FAItemRegistry {
         tardrop = new ForgeItemItem("tardrop").setUnlocalizedName("tardrop").setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
         tarfossil = new ForgeItemItem("tar_fossil").setUnlocalizedName("tarfossil").setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
         tar_bucket = new ItemBucket(FABlockRegistry.INSTANCE.tar).setUnlocalizedName("tar_bucket").setTextureName("fossil:bucket_tar").setContainerItem(Items.bucket).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
+        toyBall = new ItemToyBall().setUnlocalizedName("toyBall").setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
         FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluidStack("tar", FluidContainerRegistry.BUCKET_VOLUME), new ItemStack(tar_bucket), new ItemStack(Items.bucket));
         BucketEvent.INSTANCE.buckets.put(FABlockRegistry.INSTANCE.tar, tar_bucket);
         MinecraftForge.EVENT_BUS.register(BucketEvent.INSTANCE);
