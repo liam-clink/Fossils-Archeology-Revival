@@ -93,7 +93,7 @@ public class Revival {
     public static final String MODID = "fossil";
     public static final ModState STATE = ModState.DEV;
     public static final String VERSION = "7.3.0-develop";
-    public static final String LLIBRARY_VERSION = "1.1.0";
+    public static final String LLIBRARY_VERSION = "1.2.0";
     public static final FossilSoundType soundTypeSlime = new FossilSoundType(1.0F, 1.0F);
     @SidedProxy(clientSide = "com.github.revival.client.ClientProxy", serverSide = "com.github.revival.server.ServerProxy")
     public static ServerProxy proxy;
