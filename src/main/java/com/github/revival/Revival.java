@@ -133,10 +133,6 @@ public class Revival {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         channel = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
-        channel.registerMessage(MessageFoodParticles.class, MessageFoodParticles.class, 0, Side.CLIENT);
-        channel.registerMessage(MessageSetDay.class, MessageSetDay.class, 1, Side.CLIENT);
-        channel.registerMessage(MessageRollBall.class, MessageRollBall.class, 2, Side.CLIENT);
-        channel.registerMessage(MessageHappyParticles.class, MessageHappyParticles.class, 3, Side.CLIENT);
         MinecraftForge.EVENT_BUS.register(new FossilBonemealEvent());
         MinecraftForge.EVENT_BUS.register(new EventPlayer());
         VillagerRegistry.instance().registerVillageTradeHandler(10, new FossilTradeHandler());

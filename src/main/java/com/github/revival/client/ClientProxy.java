@@ -148,10 +148,15 @@ import com.github.revival.server.handler.EventNewMenu;
 import com.github.revival.server.handler.EventOverlay;
 import com.github.revival.server.handler.FossilClientEvents;
 import com.github.revival.server.item.FAItemRegistry;
+import com.github.revival.server.message.MessageFoodParticles;
+import com.github.revival.server.message.MessageHappyParticles;
+import com.github.revival.server.message.MessageRollBall;
+import com.github.revival.server.message.MessageSetDay;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
+import cpw.mods.fml.relauncher.Side;
 
 
 public class ClientProxy extends ServerProxy {
@@ -161,6 +166,10 @@ public class ClientProxy extends ServerProxy {
     @Override
     public void init() {
         super.init();
+        Revival.channel.registerMessage(MessageFoodParticles.class, MessageFoodParticles.class, 0, Side.CLIENT);
+        Revival.channel.registerMessage(MessageSetDay.class, MessageSetDay.class, 1, Side.CLIENT);
+        Revival.channel.registerMessage(MessageRollBall.class, MessageRollBall.class, 2, Side.CLIENT);
+        Revival.channel.registerMessage(MessageHappyParticles.class, MessageHappyParticles.class, 3, Side.CLIENT);
         RenderingRegistry.registerEntityRenderingHandler(EntityTriceratops.class, new RenderPrehistoric(new ModelTriceratops()));
         RenderingRegistry.registerEntityRenderingHandler(EntityVelociraptor.class, new RenderPrehistoric(new ModelVelociraptor()));
         RenderingRegistry.registerEntityRenderingHandler(EntityTyrannosaurus.class, new RenderPrehistoric(new ModelTyrannosaurus()));
