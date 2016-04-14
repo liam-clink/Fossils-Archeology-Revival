@@ -1,19 +1,9 @@
 package com.github.revival.server.entity.mob;
 
-import com.github.revival.server.config.FossilConfig;
+import com.github.revival.Revival;
 import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 import com.github.revival.server.enums.EnumPrehistoric;
-import com.github.revival.server.enums.EnumPrehistoricAI.Activity;
-import com.github.revival.server.enums.EnumPrehistoricAI.Attacking;
-import com.github.revival.server.enums.EnumPrehistoricAI.Climbing;
-import com.github.revival.server.enums.EnumPrehistoricAI.Following;
-import com.github.revival.server.enums.EnumPrehistoricAI.Jumping;
-import com.github.revival.server.enums.EnumPrehistoricAI.Moving;
-import com.github.revival.server.enums.EnumPrehistoricAI.Response;
-import com.github.revival.server.enums.EnumPrehistoricAI.Stalking;
-import com.github.revival.server.enums.EnumPrehistoricAI.Taming;
-import com.github.revival.server.enums.EnumPrehistoricAI.Untaming;
-import com.github.revival.server.enums.EnumPrehistoricAI.WaterAbility;
+import com.github.revival.server.enums.EnumPrehistoricAI.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
@@ -35,7 +25,7 @@ public class EntityGallimimus extends EntityNewPrehistoric {
 		this.setSize(1.1F, 2F);
 		this.pediaScale = 6F;
 		this.hasFeatherToggle = true;
-		this.featherToggle = FossilConfig.featheredGallimimus;
+		this.featherToggle = Revival.CONFIG.featheredGallimimus;
 		minSize = 0.5F;
 		maxSize = 2.2F;
 		teenAge = 4;
@@ -86,7 +76,7 @@ public class EntityGallimimus extends EntityNewPrehistoric {
 		// Size of dinosaur at age Adult.
 		this.maxSize = 2.2F;
 
-		if (!FossilConfig.featheredGallimimus)
+		if (!Revival.CONFIG.featheredGallimimus)
 			texturePath = Revival.MODID + ":textures/mob/" + this.selfType.toString() + "/feathered/" + "Feathered_";
 		else
 			texturePath = Revival.MODID + ":textures/mob/" + this.selfType.toString() + "/";
@@ -385,7 +375,7 @@ public class EntityGallimimus extends EntityNewPrehistoric {
 	@Override
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
-		if (this.getAnimation() == animation_attack && (this.getAnimationTick() >= 10 && this.getAnimationTick() <= 13) && this.getAttackTarget() != null) {
+		if (this.getAnimation() == ATTACK_ANIMATION && (this.getAnimationTick() >= 10 && this.getAnimationTick() <= 13) && this.getAttackTarget() != null) {
 			this.attackEntityAsMob(this.getAttackTarget());
 		}
 	}
@@ -394,10 +384,10 @@ public class EntityGallimimus extends EntityNewPrehistoric {
 	public boolean attackEntityAsMob(Entity entity) {
 		if (this.getAttackBounds().intersectsWith(entity.boundingBox)) {
 			if (this.getAnimation() == NO_ANIMATION) {
-				this.setAnimation(animation_attack);
+				this.setAnimation(ATTACK_ANIMATION);
 				return false;
 			}
-			if (this.getAnimation() == animation_attack && (this.getAnimationTick() >= 10 && this.getAnimationTick() <= 13)) {
+			if (this.getAnimation() == ATTACK_ANIMATION && (this.getAnimationTick() >= 10 && this.getAnimationTick() <= 13)) {
 				IAttributeInstance iattributeinstance = this.getEntityAttribute(SharedMonsterAttributes.attackDamage);
 				boolean flag = entity.attackEntityFrom(DamageSource.generic, (float) iattributeinstance.getAttributeValue());
 						if (entity.ridingEntity != null) {

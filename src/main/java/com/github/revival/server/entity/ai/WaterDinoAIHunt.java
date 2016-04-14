@@ -1,6 +1,6 @@
 package com.github.revival.server.entity.ai;
 
-import com.github.revival.server.config.FossilConfig;
+import com.github.revival.Revival;
 import com.github.revival.server.entity.mob.EntityDinosaur;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -52,7 +52,7 @@ public class WaterDinoAIHunt extends EntityAITarget {
     @Override
     public boolean shouldExecute() {
         if (!theWorld.isRemote) {
-            if (!FossilConfig.starvingDinos) {
+            if (!Revival.CONFIG.starvingDinos) {
                 return false;
             }
         }

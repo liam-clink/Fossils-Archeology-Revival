@@ -174,7 +174,7 @@ public class ModelPachycephalosaurus extends ModelNewPrehistoric {
 		blockMovement(f, f1, f2, f3, f4, f5, (Entity) entity);
 		this.resetToDefaultPose();
 		setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
-		animator.setAnimation(EntityAnkylosaurus.animation_attack);
+		animator.setAnimation(EntityAnkylosaurus.ATTACK_ANIMATION);
 		animator.startKeyframe(5);
 		animator.move(lowerBody, 0, 5, -2);
 		ModelUtils.rotate(animator, lowerBody, 20, 0, 0);

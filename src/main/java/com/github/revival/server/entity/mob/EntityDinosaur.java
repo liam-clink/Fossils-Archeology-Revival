@@ -142,7 +142,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
      * Call this in onLivingUpdate() if your dino breaks blocks.
      */
     public void breakBlock(float hardness) {
-        if (FossilConfig.dinoBlockBreaking) {
+        if (Revival.CONFIG.dinoBlockBreaking) {
             if (!isModelized() && this.isAdult() && this.IsHungry()) {
                 for (int a = (int) Math.round(this.boundingBox.minX) - 1; a <= (int) Math.round(this.boundingBox.maxX) + 1; a++) {
                     for (int b = (int) Math.round(this.boundingBox.minY) + 1; (b <= (int) Math.round(this.boundingBox.maxY) + 3) && (b <= 127); b++) {
@@ -1302,7 +1302,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
     public void onLivingUpdate() {
         if (!this.isModelized()) {
             if (!this.worldObj.isRemote) {
-                if (FossilConfig.allowBreeding) {
+                if (Revival.CONFIG.allowBreeding) {
                     this.HandleBreed();
                 }
             }
@@ -1378,7 +1378,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
                                     + this.SelfType.FoodBlockList
                                     .getBlockFood(itemstack.getItem()));
 
-                            if (FossilConfig.healingDinos) {
+                            if (Revival.CONFIG.healingDinos) {
                                 // System.out.println("Hbefore:"+String.valueOf(this.health));
                                 this.heal(this.SelfType.FoodItemList
                                         .getItemHeal(itemstack.getItem())
@@ -1459,7 +1459,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
                         // DINOPEDIA
                         // EntityDinosaur.pediaingDino = this;
                         this.setPedia();
-                        player.openGui(Revival.instance/* player */, 4,
+                        player.openGui(Revival.INSTANCE/* player */, 4,
                                 this.worldObj, (int) this.posX,
                                 (int) this.posY, (int) this.posZ);
                         return true;

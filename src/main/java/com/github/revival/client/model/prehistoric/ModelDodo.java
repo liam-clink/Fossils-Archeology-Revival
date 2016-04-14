@@ -101,7 +101,7 @@ public class ModelDodo extends ModelNewPrehistoric {
 		blockMovement(f, f1, f2, f3, f4, f5, (Entity) entity);
 		this.resetToDefaultPose();
 		setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
-		animator.setAnimation(EntityNewPrehistoric.animation_speak);
+		animator.setAnimation(EntityNewPrehistoric.SPEAK_ANIMATION);
 		animator.startKeyframe(10);
 		ModelUtils.rotate(animator, beakLower, 29, 0, 0);
 		animator.endKeyframe();

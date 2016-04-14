@@ -2,6 +2,7 @@ package com.github.revival.server.handler;
 
 import com.github.revival.Revival;
 import com.github.revival.server.block.FABlockRegistry;
+import com.github.revival.server.enchantment.FAEnchantmentRegistry;
 import com.github.revival.server.item.FAItemRegistry;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.block.Block;
@@ -24,8 +25,8 @@ public class FossilToolEvent {
 
         EntityPlayer player = event.harvester;
         if (player != null) {
-            paleontologyBonus = EnchantmentHelper.getEnchantmentLevel(Revival.paleontology.effectId, event.harvester.inventory.getCurrentItem());
-            archeologyBonus = EnchantmentHelper.getEnchantmentLevel(Revival.archeology.effectId, event.harvester.inventory.getCurrentItem());
+            paleontologyBonus = EnchantmentHelper.getEnchantmentLevel(FAEnchantmentRegistry.INSTANCE.paleontology.effectId, event.harvester.inventory.getCurrentItem());
+            archeologyBonus = EnchantmentHelper.getEnchantmentLevel(FAEnchantmentRegistry.INSTANCE.archeology.effectId, event.harvester.inventory.getCurrentItem());
 
             if (event.harvester.inventory.getCurrentItem() == null) {
                 return;

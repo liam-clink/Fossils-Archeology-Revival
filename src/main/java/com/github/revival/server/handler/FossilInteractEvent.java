@@ -30,7 +30,7 @@ public class FossilInteractEvent {
 
                             if (props.Embryo != null) {
                                 props.setPedia();
-                                player.openGui(Revival.instance, 4, event.target.worldObj, (int) event.target.posX, (int) event.target.posY, (int) event.target.posZ);
+                                player.openGui(Revival.INSTANCE, 4, event.target.worldObj, (int) event.target.posX, (int) event.target.posY, (int) event.target.posZ);
                             }
                         } else {
                             ((EntityHorse) event.target).interact(player);
@@ -43,7 +43,7 @@ public class FossilInteractEvent {
 
                             if (props.Embryo != null) {
                                 props.setPedia();
-                                player.openGui(Revival.instance, 4, event.target.worldObj, (int) event.target.posX, (int) event.target.posY, (int) event.target.posZ);
+                                player.openGui(Revival.INSTANCE, 4, event.target.worldObj, (int) event.target.posX, (int) event.target.posY, (int) event.target.posZ);
                             }
                         } else {
                             ((EntityCow) event.target).interact(player);
@@ -56,7 +56,7 @@ public class FossilInteractEvent {
 
                             if (props.Embryo != null) {
                                 props.setPedia();
-                                player.openGui(Revival.instance, 4, event.target.worldObj, (int) event.target.posX, (int) event.target.posY, (int) event.target.posZ);
+                                player.openGui(Revival.INSTANCE, 4, event.target.worldObj, (int) event.target.posX, (int) event.target.posY, (int) event.target.posZ);
                             }
                         } else {
                             ((EntityPig) event.target).interact(player);
@@ -69,7 +69,7 @@ public class FossilInteractEvent {
 
                             if (props.Embryo != null) {
                                 props.setPedia();
-                                player.openGui(Revival.instance, 4, event.target.worldObj, (int) event.target.posX, (int) event.target.posY, (int) event.target.posZ);
+                                player.openGui(Revival.INSTANCE, 4, event.target.worldObj, (int) event.target.posX, (int) event.target.posY, (int) event.target.posZ);
                             }
                         } else {
                             ((EntitySheep) event.target).interact(player);

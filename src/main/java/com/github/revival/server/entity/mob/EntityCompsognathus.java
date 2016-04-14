@@ -1,20 +1,10 @@
 package com.github.revival.server.entity.mob;
 
-import com.github.revival.server.config.FossilConfig;
+import com.github.revival.Revival;
 import com.github.revival.server.entity.ai.DinoAILeapAtTarget;
 import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 import com.github.revival.server.enums.EnumPrehistoric;
-import com.github.revival.server.enums.EnumPrehistoricAI.Activity;
-import com.github.revival.server.enums.EnumPrehistoricAI.Attacking;
-import com.github.revival.server.enums.EnumPrehistoricAI.Climbing;
-import com.github.revival.server.enums.EnumPrehistoricAI.Following;
-import com.github.revival.server.enums.EnumPrehistoricAI.Jumping;
-import com.github.revival.server.enums.EnumPrehistoricAI.Moving;
-import com.github.revival.server.enums.EnumPrehistoricAI.Response;
-import com.github.revival.server.enums.EnumPrehistoricAI.Stalking;
-import com.github.revival.server.enums.EnumPrehistoricAI.Taming;
-import com.github.revival.server.enums.EnumPrehistoricAI.Untaming;
-import com.github.revival.server.enums.EnumPrehistoricAI.WaterAbility;
+import com.github.revival.server.enums.EnumPrehistoricAI.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
@@ -38,7 +28,7 @@ public class EntityCompsognathus extends EntityNewPrehistoric {
 		this.nearByMobsAllowed = 20;
 		this.tasks.addTask(3, new DinoAILeapAtTarget(this));
 		this.hasFeatherToggle = true;
-		this.featherToggle = FossilConfig.featheredCompsognathus;
+		this.featherToggle = Revival.CONFIG.featheredCompsognathus;
 		this.setSize(1.1F, 1.1F);
 		minSize = 0.25F;
 		maxSize = 0.65F;
@@ -184,7 +174,7 @@ public class EntityCompsognathus extends EntityNewPrehistoric {
 	@Override
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
-		if (this.getAttackTarget() != null && this.getAnimation() == animation_attack && (this.getAnimationTick() <= 20 && this.getAnimationTick() >= 17) && this.onGround) {
+		if (this.getAttackTarget() != null && this.getAnimation() == ATTACK_ANIMATION && (this.getAnimationTick() <= 20 && this.getAnimationTick() >= 17) && this.onGround) {
 			double d0 = this.getAttackTarget().posX - this.posX;
 			double d1 = this.getAttackTarget().posZ - this.posZ;
 			float f = MathHelper.sqrt_double(d0 * d0 + d1 * d1);
@@ -204,7 +194,7 @@ public class EntityCompsognathus extends EntityNewPrehistoric {
 	public void applyEntityCollision(Entity entity) {
 		super.applyEntityCollision(entity);
 		if (this.getAttackTarget() != null) {
-			if (this.getAttackTarget() == entity && this.getAnimation() == animation_attack && !onGround && this.ridingEntity != entity) {
+			if (this.getAttackTarget() == entity && this.getAnimation() == ATTACK_ANIMATION && !onGround && this.ridingEntity != entity) {
 				IAttributeInstance iattributeinstance = this.getEntityAttribute(SharedMonsterAttributes.attackDamage);
 				this.getAttackTarget().attackEntityFrom(DamageSource.causeMobDamage(this), (float) iattributeinstance.getAttributeValue());
 			}

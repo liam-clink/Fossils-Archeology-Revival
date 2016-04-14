@@ -94,9 +94,9 @@ public class HeadRelicItem extends ItemArmor {
                 int type = ((ItemArmor) itemStack.getItem()).armorType;
 
                 if (type == 1 || type == 3) {
-                    armorModel = Revival.proxy.getArmorModel(0);
+                    armorModel = Revival.PROXY.getArmorModel(0);
                 } else {
-                    armorModel = Revival.proxy.getArmorModel(1);
+                    armorModel = Revival.PROXY.getArmorModel(1);
                 }
             }
             if (armorModel != null) {

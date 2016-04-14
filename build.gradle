@@ -11,16 +11,13 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+        classpath "net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT"
     }
 }
 
-project.ext.buildnumber = ""
-if (System.getenv().BUILD_NUMBER) project.buildnumber = "-" + System.getenv().BUILD_NUMBER
-
 apply plugin: "forge"
 
-version = getVersion("VERSION") + project.buildnumber
+version = getVersion("VERSION")
 def llibrary_version = getVersion("LLIBRARY_VERSION")
 group = "com.github.revival"
 archivesBaseName = "fossils_and_archeology_revival"
@@ -48,12 +45,12 @@ processResources {
     inputs.property "llibrary_version", llibrary_version
 
     from(sourceSets.main.resources.srcDirs) {
-        include 'mcmod.info'
-        expand 'version': project.version, 'mcversion': project.minecraft.version, 'llibrary_version': llibrary_version
+        include "mcmod.info"
+        expand "version": project.version, "mcversion": project.minecraft.version, "llibrary_version": llibrary_version
     }
         
     from(sourceSets.main.resources.srcDirs) {
-        exclude 'mcmod.info'
+        exclude "mcmod.info"
     }
 }
 

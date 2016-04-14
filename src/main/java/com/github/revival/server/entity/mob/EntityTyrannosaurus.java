@@ -1,6 +1,6 @@
 package com.github.revival.server.entity.mob;
 
-import com.github.revival.server.config.FossilConfig;
+import com.github.revival.Revival;
 import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 import com.github.revival.server.enums.EnumPrehistoric;
 import com.github.revival.server.enums.EnumPrehistoricAI.*;
@@ -24,14 +24,14 @@ public class EntityTyrannosaurus extends EntityNewPrehistoric {
     public static final double maxHealth = 82;
     public static final double baseSpeed = 0.25D;
     public static final double maxSpeed = 0.4D;
-    public static Animation animation_roar = Animation.create(3, 100);
+    public static Animation ROAR_ANIMATION = Animation.create(100);
 
     public EntityTyrannosaurus(World world) {
         super(world, EnumPrehistoric.Tyrannosaurus);
         this.setSize(1.8F, 1.25F);
         this.pediaScale = 1.5F;
         this.hasFeatherToggle = true;
-        this.featherToggle = FossilConfig.featheredTRex;
+        this.featherToggle = Revival.CONFIG.featheredTRex;
         minSize = 0.4F;
         maxSize = 4.5F;
         teenAge = 5;
@@ -49,7 +49,7 @@ public class EntityTyrannosaurus extends EntityNewPrehistoric {
     @Override
     public void onLivingUpdate() {
         super.onLivingUpdate();
-        if (this.getAnimation() == animation_attack && this.getAnimationTick() == 12 && this.getAttackTarget() != null) {
+        if (this.getAnimation() == ATTACK_ANIMATION && this.getAnimationTick() == 12 && this.getAttackTarget() != null) {
             this.attackEntityAsMob(this.getAttackTarget());
         }
     }
@@ -58,10 +58,10 @@ public class EntityTyrannosaurus extends EntityNewPrehistoric {
     public boolean attackEntityAsMob(Entity entity) {
         if (getAttackBounds().intersectsWith(entity.boundingBox)) {
             if (this.getAnimation() == NO_ANIMATION) {
-                this.setAnimation(animation_attack);
+                this.setAnimation(ATTACK_ANIMATION);
                 return false;
             }
-            if (this.getAnimation() == animation_attack && this.getAnimationTick() == 12) {
+            if (this.getAnimation() == ATTACK_ANIMATION && this.getAnimationTick() == 12) {
                 IAttributeInstance attackDamage = this.getEntityAttribute(SharedMonsterAttributes.attackDamage);
                 boolean hurt = entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) attackDamage.getAttributeValue());
                     if (entity.ridingEntity != null) {
@@ -174,10 +174,10 @@ public class EntityTyrannosaurus extends EntityNewPrehistoric {
         //Revival.proxy.doChainBuffer(tailBuffer, this);
         if (!this.isSleeping() && this.rand.nextInt(500) == 0 && !worldObj.isRemote && !this.isSitting() && this.getAttackTarget() == null) {
             if (this.getAnimation() == NO_ANIMATION) {
-                this.setAnimation(animation_roar);
+                this.setAnimation(ROAR_ANIMATION);
             }
         }
-        if (getAnimation() == EntityTyrannosaurus.animation_roar && getAnimationTick() == 10) {
+        if (getAnimation() == EntityTyrannosaurus.ROAR_ANIMATION && getAnimationTick() == 10) {
             this.playSound("fossil:tyrannosaurus_roar", 1, 1);
         }
     }
@@ -220,7 +220,7 @@ public class EntityTyrannosaurus extends EntityNewPrehistoric {
 
     @Override
     public Animation[] getAnimations() {
-        return new Animation[]{NO_ANIMATION, animation_speak, animation_attack, animation_roar};
+        return new Animation[]{SPEAK_ANIMATION, ATTACK_ANIMATION, ROAR_ANIMATION};
     }
 
     @Override

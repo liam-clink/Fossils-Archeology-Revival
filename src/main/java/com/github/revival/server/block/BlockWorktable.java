@@ -161,7 +161,7 @@ public class BlockWorktable extends BlockContainer {
                     .getTileEntity(var2, var3, var4);
 
             if (tileentityworktable != null) {
-                var5.openGui(Revival.instance, 3, var1, var2, var3, var4);
+                var5.openGui(Revival.INSTANCE, 3, var1, var2, var3, var4);
             }
 
             return true;

@@ -1,8 +1,8 @@
 package com.github.revival.server.block;
 
-import com.github.revival.Revival;
 import com.github.revival.server.api.INamedBlock;
 import com.github.revival.server.api.ISubBlocksBlock;
+import com.github.revival.server.block.sound.FossilSoundType;
 import com.github.revival.server.creativetab.FATabRegistry;
 import com.github.revival.server.handler.LocalizationStrings;
 import com.google.common.collect.Lists;
@@ -10,6 +10,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
+import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 
 import java.lang.reflect.Field;
@@ -91,17 +92,21 @@ public enum FABlockRegistry {
     public Block horsetail_large;
     public Block mutantPlant;
     public Block tempskya;
+    public Fluid tar_fluid;
+
+    public Material tar_material;
+    public FossilSoundType soundTypeSlime = new FossilSoundType(1.0F, 1.0F);
 
     public void init() {
-        Revival.tar_material = new MaterialTar(MapColor.blackColor);
-        Revival.tar_fluid = new FluidTar("tar").setBlock(tar);
-        FluidRegistry.registerFluid(Revival.tar_fluid);
+        tar_material = new MaterialTar(MapColor.blackColor);
+        tar_fluid = new FluidTar("tar").setBlock(tar);
+        FluidRegistry.registerFluid(tar_fluid);
         skullLantern = new BlockFossilSkull(true).setLightLevel(1F);
         blockanalyzerIdle = new BlockAnalyzer(false);
         blockanalyzerActive = new BlockAnalyzer(true);
         blockcultivateIdle = new BlockCultivate(false);
         blockcultivateActive = new BlockCultivate(true);
-        blockSlimeTrail = new BlockSlimeTrail().setHardness(0.3F).setBlockTextureName("fossil:Slime_Trail").setStepSound(Revival.soundTypeSlime).setBlockName(LocalizationStrings.BLOCK_SLIME_TRAIL_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
+        blockSlimeTrail = new BlockSlimeTrail().setHardness(0.3F).setBlockTextureName("fossil:Slime_Trail").setStepSound(soundTypeSlime).setBlockName(LocalizationStrings.BLOCK_SLIME_TRAIL_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
         blockworktableIdle = new BlockWorktable(false);
         blockworktableActive = new BlockWorktable(true);
         denseSand = new BlockDenseSand();

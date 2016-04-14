@@ -3,16 +3,14 @@ package com.github.revival;
 import com.github.revival.client.renderer.tileentity.RenderFeeder;
 import com.github.revival.server.ModState;
 import com.github.revival.server.ServerProxy;
-import com.github.revival.server.biome.BasicBiome;
+import com.github.revival.server.biome.FABiomeRegistry;
 import com.github.revival.server.block.FABlockRegistry;
 import com.github.revival.server.block.entity.*;
-import com.github.revival.server.block.sound.FossilSoundType;
 import com.github.revival.server.config.FossilConfig;
 import com.github.revival.server.creativetab.FATabRegistry;
 import com.github.revival.server.dimension.anu.WorldProviderAnu;
 import com.github.revival.server.dimension.treasure.WorldProviderTreasure;
-import com.github.revival.server.enchantment.ArcheologyEnchantment;
-import com.github.revival.server.enchantment.PaleontologyEnchantment;
+import com.github.revival.server.enchantment.FAEnchantmentRegistry;
 import com.github.revival.server.enums.EnumDinoFoodMob;
 import com.github.revival.server.enums.EnumPrehistoric;
 import com.github.revival.server.gen.*;
@@ -20,6 +18,10 @@ import com.github.revival.server.gen.structure.AcademyGenerator;
 import com.github.revival.server.gen.structure.ShipWreckGenerator;
 import com.github.revival.server.handler.*;
 import com.github.revival.server.item.FAItemRegistry;
+import com.github.revival.server.message.MessageFoodParticles;
+import com.github.revival.server.message.MessageHappyParticles;
+import com.github.revival.server.message.MessageRollBall;
+import com.github.revival.server.message.MessageSetDay;
 import com.github.revival.server.util.FossilFoodMappings;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -32,22 +34,12 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
-import net.ilexiconn.llibrary.server.config.ConfigHandler;
-import net.minecraft.block.material.Material;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnumEnchantmentType;
+import net.ilexiconn.llibrary.server.config.Config;
+import net.ilexiconn.llibrary.server.network.NetworkWrapper;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.Item.ToolMaterial;
-import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.StatCollector;
-import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.common.util.EnumHelper;
-import net.minecraftforge.fluids.Fluid;
 import org.apache.logging.log4j.Level;
 
 @Mod(modid = Revival.MODID, name = "Fossils and Archeology Revival", version = Revival.VERSION, dependencies = "required-after:llibrary@[" + Revival.LLIBRARY_VERSION + ",)")
@@ -56,25 +48,17 @@ public class Revival {
     public static final ModState STATE = ModState.DEV;
     public static final String VERSION = "7.3.0-develop";
     public static final String LLIBRARY_VERSION = "1.2.1";
-    public static final FossilSoundType soundTypeSlime = new FossilSoundType(1.0F, 1.0F);
+
     @SidedProxy(clientSide = "com.github.revival.client.ClientProxy", serverSide = "com.github.revival.server.ServerProxy")
-    public static ServerProxy proxy;
+    public static ServerProxy PROXY;
     @Instance(MODID)
-    public static Revival instance;
-    public static FossilGuiHandler guiHandler = new FossilGuiHandler();
+    public static Revival INSTANCE;
+    @NetworkWrapper({MessageFoodParticles.class, MessageSetDay.class, MessageRollBall.class, MessageHappyParticles.class})
+    public static SimpleNetworkWrapper NETWORK_WRAPPER;
+    @Config
+    public static FossilConfig CONFIG;
+
     public static Object toPedia;
-    public static int feederRenderID;
-    public static Enchantment paleontology;
-    public static Enchantment archeology;
-    public static BiomeGenBase anuBiome;
-    public static BiomeGenBase treasureBiome;
-    public static ArmorMaterial bone = EnumHelper.addArmorMaterial("Bone", 25, new int[]{2, 7, 6, 2}, 15);
-    public static ToolMaterial scarab = EnumHelper.addToolMaterial("Scarab", 3, 1861, 8.0F, 4.0F, 25);
-    public static ToolMaterial toothDaggerMaterial = EnumHelper.addToolMaterial("toothDagger", 3, 250, 70.0F, 1.5F, 25);
-    public static Material tar_material;
-    public static Fluid tar_fluid;
-    public Configuration config;
-    public static SimpleNetworkWrapper channel;
 
     public static boolean enableDebugging() {
         return STATE == ModState.DEV;
@@ -94,42 +78,37 @@ public class Revival {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        channel = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
         MinecraftForge.EVENT_BUS.register(new FossilBonemealEvent());
         MinecraftForge.EVENT_BUS.register(new EventPlayer());
         VillagerRegistry.instance().registerVillageTradeHandler(10, new FossilTradeHandler());
         VillagerRegistry.instance().registerVillagerId(10);
 
-        ConfigHandler.INSTANCE.registerConfig(this, event.getSuggestedConfigurationFile(), new FossilConfig());
         FATabRegistry.INSTANCE.init();
         FABlockRegistry.INSTANCE.init();
         FAItemRegistry.INSTANCE.init();
+        FABiomeRegistry.INSTANCE.init();
+        FAEnchantmentRegistry.INSTANCE.init();
+
         EnumPrehistoric.init();
         FossilOreDictionary.oreRegistration();
         FossilFoodMappings.init();
-        DimensionManager.registerProviderType(FossilConfig.dimensionIDDarknessLair, WorldProviderAnu.class, false);
-        DimensionManager.registerDimension(FossilConfig.dimensionIDDarknessLair, FossilConfig.dimensionIDDarknessLair);
-        DimensionManager.registerProviderType(FossilConfig.dimensionIDTreasure, WorldProviderTreasure.class, false);
-        DimensionManager.registerDimension(FossilConfig.dimensionIDTreasure, FossilConfig.dimensionIDTreasure);
-
-        paleontology = new PaleontologyEnchantment(FossilConfig.enchantmentIDPaleontology, 2, EnumEnchantmentType.digger);
-        archeology = new ArcheologyEnchantment(FossilConfig.enchantmentIDArcheology, 2, EnumEnchantmentType.digger);
-
-        anuBiome = new BasicBiome(FossilConfig.biomeIDDarknessLair, Blocks.netherrack, Blocks.netherrack, true, 0, 0).setDisableRain().setBiomeName(LocalizationStrings.BIOME_ANU).setTemperatureRainfall(0.8F, 0F).setHeight(new BiomeGenBase.Height(0F, 0F));
-        treasureBiome = new BasicBiome(FossilConfig.biomeIDTreasure, Blocks.air, Blocks.air, true, 1, 0).setDisableRain().setBiomeName(StatCollector.translateToLocal("biome.treasure.name")).setTemperatureRainfall(0.8F, 0F).setHeight(new BiomeGenBase.Height(0F, 0F));
+        DimensionManager.registerProviderType(Revival.CONFIG.dimensionIDDarknessLair, WorldProviderAnu.class, false);
+        DimensionManager.registerDimension(Revival.CONFIG.dimensionIDDarknessLair, Revival.CONFIG.dimensionIDDarknessLair);
+        DimensionManager.registerProviderType(Revival.CONFIG.dimensionIDTreasure, WorldProviderTreasure.class, false);
+        DimensionManager.registerDimension(Revival.CONFIG.dimensionIDTreasure, Revival.CONFIG.dimensionIDTreasure);
 
         FossilEntities.registerEntities();
         EnumDinoFoodMob.init();
 
         GameRegistry.registerWorldGenerator(new FossilGenerator(), 0);
 
-        if (FossilConfig.generatePalaeoraphe) {
+        if (Revival.CONFIG.generatePalaeoraphe) {
             GameRegistry.registerWorldGenerator(new WorldGeneratorPalaeoraphe(), 0);
         }
-        if (FossilConfig.generateAcademy) {
+        if (Revival.CONFIG.generateAcademy) {
             GameRegistry.registerWorldGenerator(new AcademyGenerator(), 0);
         }
-        if (FossilConfig.generateShips) {
+        if (Revival.CONFIG.generateShips) {
             GameRegistry.registerWorldGenerator(new ShipWreckGenerator(), 0);
         }
 
@@ -138,9 +117,7 @@ public class Revival {
         GameRegistry.registerWorldGenerator(new TarGenerator(), 0);
         GameRegistry.registerWorldGenerator(new VolcanicRockGenerator(), 13);
 
-        feederRenderID = RenderingRegistry.getNextAvailableRenderId();
-
-        NetworkRegistry.INSTANCE.registerGuiHandler(this, guiHandler);
+        NetworkRegistry.INSTANCE.registerGuiHandler(this, new FossilGuiHandler());
 
         GameRegistry.registerTileEntity(TileEntityCultivate.class, LocalizationStrings.BLOCK_CULTIVATE_IDLE_NAME);
         GameRegistry.registerTileEntity(TileEntityAnalyzer.class, LocalizationStrings.BLOCK_ANALYZER_IDLE_NAME);
@@ -157,20 +134,19 @@ public class Revival {
         GameRegistry.registerTileEntity(TileEntitySarcophagus.class, "sarcophagus");
 
         RenderingRegistry.registerBlockHandler(2303, RenderFeeder.INSTANCE);
-        proxy.init();
+        PROXY.init();
 
         FossilRecipes.addRecipe();
 
         FMLCommonHandler.instance().bus().register(new PickupHandler());
         FMLCommonHandler.instance().bus().register(new EventFossilAchivements());
 
-        proxy.registerChestLoot();
+        PROXY.registerChestLoot();
         FossilAchievementHandler.loadAchievements();
         MinecraftForge.EVENT_BUS.register(new FossilToolEvent());
         MinecraftForge.EVENT_BUS.register(new FossilLivingEvent());
         MinecraftForge.EVENT_BUS.register(new FossilInteractEvent());
 
         FMLCommonHandler.instance().bus().register(new FossilConnectionEvent());
-
     }
 }

@@ -53,7 +53,7 @@ public class EntityToyBall extends EntityToyBase{
 		super.onUpdate();
 		if(this.motionX > 0 || this.motionZ < 0 || this.motionZ > 0 || this.motionZ < 0){
 			rollValue++;
-			Revival.channel.sendToAll(new MessageRollBall(this.getEntityId(), this.rollValue));
+			Revival.NETWORK_WRAPPER.sendToAll(new MessageRollBall(this.getEntityId(), this.rollValue));
 		}
 	}
 

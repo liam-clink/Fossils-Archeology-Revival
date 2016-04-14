@@ -1,6 +1,6 @@
 package com.github.revival.server.gen;
 
-import com.github.revival.server.config.FossilConfig;
+import com.github.revival.Revival;
 import com.github.revival.server.gen.feature.AncientChestWorldGen;
 import com.github.revival.server.gen.feature.AnuCastleWorldGen;
 import com.github.revival.server.gen.feature.HellBoatWorldGen;
@@ -17,7 +17,7 @@ public class WorldGenMiscStructures implements IWorldGenerator {
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
         BiomeGenBase biome = world.getWorldChunkManager().getBiomeGenAt(chunkX, chunkZ);
-        if (FossilConfig.generateHellShips) {
+        if (Revival.CONFIG.generateHellShips) {
             if (BiomeDictionary.isBiomeOfType(biome, Type.NETHER)) {
                 if (random.nextInt(48) == 0) {
                     int Xcoord1 = chunkX * 16 + random.nextInt(16);
@@ -28,14 +28,14 @@ public class WorldGenMiscStructures implements IWorldGenerator {
                 }
             }
         }
-        if (world.getChunkFromChunkCoords(chunkX, chunkZ) == world.getChunkFromBlockCoords(-70, -70) && world.provider.dimensionId == FossilConfig.dimensionIDDarknessLair) {
+        if (world.getChunkFromChunkCoords(chunkX, chunkZ) == world.getChunkFromBlockCoords(-70, -70) && world.provider.dimensionId == Revival.CONFIG.dimensionIDDarknessLair) {
             int counter = 0;
             counter++;
             if (counter == 1) {
                 new AnuCastleWorldGen().generate(world, random, -70, 61, -70);
             }
         }
-        if (world.getChunkFromChunkCoords(chunkX, chunkZ) == world.getChunkFromBlockCoords(-80, -120) && world.provider.dimensionId == FossilConfig.dimensionIDTreasure) {
+        if (world.getChunkFromChunkCoords(chunkX, chunkZ) == world.getChunkFromBlockCoords(-80, -120) && world.provider.dimensionId == Revival.CONFIG.dimensionIDTreasure) {
             int counter = 0;
             counter++;
             if (counter == 1) {

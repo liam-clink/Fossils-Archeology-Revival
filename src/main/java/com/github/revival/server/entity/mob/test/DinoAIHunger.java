@@ -1,6 +1,6 @@
 package com.github.revival.server.entity.mob.test;
 
-import com.github.revival.server.config.FossilConfig;
+import com.github.revival.Revival;
 import com.github.revival.server.enums.EnumOrderType;
 import com.github.revival.server.enums.EnumPrehistoricAI.Untaming;
 import com.github.revival.server.enums.EnumSituation;
@@ -22,7 +22,7 @@ public class DinoAIHunger extends EntityAIBase {
         //if (fossilOptions.DinoHunger)
         //{
         this.mover.decreaseHungerTick();
-        return this.mover.getHungerTick() <= 0 && FossilConfig.starvingDinos;// && this.mover.worldObj.difficultySetting > 0;
+        return this.mover.getHungerTick() <= 0 && Revival.CONFIG.starvingDinos;// && this.mover.worldObj.difficultySetting > 0;
         //}
         //return false;
     }

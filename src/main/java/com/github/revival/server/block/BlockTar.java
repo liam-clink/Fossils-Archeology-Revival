@@ -1,6 +1,5 @@
 package com.github.revival.server.block;
 
-import com.github.revival.Revival;
 import com.github.revival.client.renderer.particle.FossilFX;
 import com.github.revival.server.entity.mob.EntityTarSlime;
 import com.github.revival.server.handler.LocalizationStrings;
@@ -23,7 +22,7 @@ public class BlockTar extends BlockFluidClassic {
     public static IIcon tar_flowing;
 
     public BlockTar() {
-        super(Revival.tar_fluid, Revival.tar_material);
+        super(FABlockRegistry.INSTANCE.tar_fluid, FABlockRegistry.INSTANCE.tar_material);
         setTickRandomly(true);
         setBlockName(LocalizationStrings.TAR_NAME);
         setBlockTextureName("fossil:Tar");

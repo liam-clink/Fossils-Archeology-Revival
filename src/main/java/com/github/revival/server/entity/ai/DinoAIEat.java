@@ -87,7 +87,7 @@ public class DinoAIEat extends EntityAIBase {
         int Range = this.SEARCH_RANGE;// Current Searching range
 
         if (!theWorld.isRemote) {
-            if (!FossilConfig.starvingDinos) {
+            if (!Revival.CONFIG.starvingDinos) {
                 return false;
             }
         }

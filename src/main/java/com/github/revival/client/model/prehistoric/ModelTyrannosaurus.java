@@ -196,7 +196,7 @@ public class ModelTyrannosaurus extends ModelNewPrehistoric {
 		blockMovement(f, f1, f2, f3, f4, f5, (Entity) entity);
 		this.resetToDefaultPose();
 		setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
-		animator.setAnimation(EntityTyrannosaurus.animation_attack);
+		animator.setAnimation(EntityTyrannosaurus.ATTACK_ANIMATION);
 		animator.startKeyframe(10);
 		ModelUtils.rotate(animator, neck, -31, 0, 0);
 		ModelUtils.rotate(animator, head, 37, 0, -20);
@@ -208,7 +208,7 @@ public class ModelTyrannosaurus extends ModelNewPrehistoric {
 		ModelUtils.rotate(animator, lowerJaw, 25, 0, 0);
 		animator.endKeyframe();
 		animator.resetKeyframe(10);
-		animator.setAnimation(EntityTyrannosaurus.animation_roar);
+		animator.setAnimation(EntityTyrannosaurus.ROAR_ANIMATION);
 		animator.startKeyframe(20);
 		ModelUtils.rotate(animator, lowerBody, -5.22, 0, 0);
 		ModelUtils.rotate(animator, neck, -41, 0, 0);
@@ -221,7 +221,7 @@ public class ModelTyrannosaurus extends ModelNewPrehistoric {
 		animator.move(rightThigh, 0F, 1.4F, -1F);
 		ModelUtils.rotate(animator, lowerJaw, 39.13, 0, 0);
 		EntityTyrannosaurus mob = ((EntityTyrannosaurus) animator.getEntity());
-		if (mob.getAnimation() == EntityTyrannosaurus.animation_roar && mob.getAnimationTick() >= 20 && mob.getAnimationTick() <= 60) {
+		if (mob.getAnimation() == EntityTyrannosaurus.ROAR_ANIMATION && mob.getAnimationTick() >= 20 && mob.getAnimationTick() <= 60) {
 			this.flap(head, 0.4F, 0.1F, false, 0, 0, ((Entity) entity).ticksExisted, 1);
 			this.flap(neck, 0.4F, 0.1F, false, 0, 0, ((Entity) entity).ticksExisted, 1);
 		}

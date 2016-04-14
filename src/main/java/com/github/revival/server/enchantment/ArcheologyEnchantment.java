@@ -1,7 +1,6 @@
 package com.github.revival.server.enchantment;
 
 import com.github.revival.Revival;
-import com.github.revival.server.config.FossilConfig;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.item.ItemPickaxe;
@@ -49,7 +48,7 @@ public class ArcheologyEnchantment extends Enchantment {
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
-        if (FossilConfig.allowTableEnchantments) {
+        if (Revival.CONFIG.allowTableEnchantments) {
             return canApply(stack);
         } else {
             return false;
@@ -58,7 +57,7 @@ public class ArcheologyEnchantment extends Enchantment {
 
     @Override
     public boolean isAllowedOnBooks() {
-        return FossilConfig.allowBookEnchantments;
+        return Revival.CONFIG.allowBookEnchantments;
     }
 
     @Override
@@ -78,7 +77,7 @@ public class ArcheologyEnchantment extends Enchantment {
     @Override
     public boolean canApplyTogether(Enchantment enchantment) {
         //    return super.canApplyTogether(par1Enchantment) && par1Enchantment.effectId != archeology.effectId;
-        return super.canApplyTogether(enchantment) && enchantment.effectId != silkTouch.effectId && enchantment.effectId != Revival.paleontology.effectId;
+        return super.canApplyTogether(enchantment) && enchantment.effectId != silkTouch.effectId && enchantment.effectId != FAEnchantmentRegistry.INSTANCE.paleontology.effectId;
     }
 
 

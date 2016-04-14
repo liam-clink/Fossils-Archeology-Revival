@@ -164,7 +164,7 @@ public class ModelBrachiosaurus extends ModelNewPrehistoric {
 		blockMovement(f, f1, f2, f3, f4, f5, (Entity) entity);
 		this.resetToDefaultPose();
 		setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
-		animator.setAnimation(EntityBrachiosaurus.animation_attack);
+		animator.setAnimation(EntityBrachiosaurus.ATTACK_ANIMATION);
 		animator.startKeyframe(20);
 		animator.move(FrontThighLeft, 0, -4, 3);
 		animator.move(FrontThighRight, 0, -4, 3);

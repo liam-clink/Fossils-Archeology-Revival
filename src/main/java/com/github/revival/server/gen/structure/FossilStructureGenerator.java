@@ -1,17 +1,11 @@
 package com.github.revival.server.gen.structure;
 
+import com.github.revival.Revival;
 import com.github.revival.server.block.FABlockRegistry;
 import com.github.revival.server.block.entity.TileEntityFigurine;
 import com.github.revival.server.block.entity.TileEntityVase;
-import com.github.revival.server.config.FossilConfig;
 import com.github.revival.server.enums.EnumPrehistoric;
-import com.github.revival.server.gen.structure.academy.Academy1;
-import com.github.revival.server.gen.structure.academy.Academy2;
-import com.github.revival.server.gen.structure.academy.Academy3;
-import com.github.revival.server.gen.structure.academy.Academy4;
-import com.github.revival.server.gen.structure.academy.Academy5;
-import com.github.revival.server.gen.structure.academy.Academy6;
-import com.github.revival.server.gen.structure.academy.AcademyUtil;
+import com.github.revival.server.gen.structure.academy.*;
 import com.github.revival.server.gen.structure.temple.Temple1;
 import com.github.revival.server.gen.structure.temple.Temple2;
 import com.github.revival.server.gen.structure.temple.Temple3;
@@ -46,7 +40,7 @@ public class FossilStructureGenerator extends StructureGeneratorBase {
      */
     static {
         Structure structure = new Structure("Academy");
-        if (FossilConfig.generateAcademy) {
+        if (Revival.CONFIG.generateAcademy) {
             structure.addBlockArray(Academy1.blockArrayAcademy);
             structure.addBlockArray(Academy2.blockArrayAcademy);
             structure.addBlockArray(Academy3.blockArrayAcademy);
@@ -58,7 +52,7 @@ public class FossilStructureGenerator extends StructureGeneratorBase {
         }
 
         structure = new Structure("Temple");
-        if (FossilConfig.generateTemple) {
+        if (Revival.CONFIG.generateTemple) {
             structure.addBlockArray(Temple1.blockArrayTemple);
             structure.addBlockArray(Temple2.blockArrayTemple);
             structure.addBlockArray(Temple3.blockArrayTemple);

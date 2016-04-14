@@ -2,7 +2,7 @@ package com.github.revival.server.dimension.anu;
 
 
 import com.github.revival.Revival;
-import com.github.revival.server.config.FossilConfig;
+import com.github.revival.server.biome.FABiomeRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -15,8 +15,8 @@ import net.minecraft.world.chunk.IChunkProvider;
 public class WorldProviderAnu extends WorldProvider {
     @Override
     public void registerWorldChunkManager() {
-        this.worldChunkMgr = new WorldChunkManagerHell(Revival.anuBiome, 0);
-        this.dimensionId = FossilConfig.dimensionIDDarknessLair;
+        this.worldChunkMgr = new WorldChunkManagerHell(FABiomeRegistry.INSTANCE.anuBiome, 0);
+        this.dimensionId = Revival.CONFIG.dimensionIDDarknessLair;
         this.hasNoSky = true;
         this.isHellWorld = true;
 

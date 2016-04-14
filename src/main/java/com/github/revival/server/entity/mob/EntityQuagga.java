@@ -114,7 +114,7 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic {
     }
 
     private void setPedia() {
-        Revival.toPedia = (Object) this;
+        Revival.toPedia = this;
     }
 
     /**
@@ -592,7 +592,7 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic {
         if (!this.worldObj.isRemote && (this.riddenByEntity == null || this.riddenByEntity == player) && this.isTame()) {
             this.quaggaChest.func_110133_a(this.getCommandSenderName());
             if (!worldObj.isRemote) {
-                player.openGui(Revival.instance, 8, worldObj, this.getEntityId(), 0, 0);
+                player.openGui(Revival.INSTANCE, 8, worldObj, this.getEntityId(), 0, 0);
             }
         }
     }
@@ -608,7 +608,7 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic {
             return super.interact(player);
         } else if (itemstack != null && FMLCommonHandler.instance().getSide().isClient() && itemstack.getItem() == FAItemRegistry.INSTANCE.dinoPedia) {
             this.setPedia();
-            player.openGui(Revival.instance, 4, this.worldObj, (int) this.posX, (int) this.posY, (int) this.posZ);
+            player.openGui(Revival.INSTANCE, 4, this.worldObj, (int) this.posX, (int) this.posY, (int) this.posZ);
             return true;
         } else if (this.isTame() && this.isAdultHorse() && player.isSneaking()) {
             this.openGUI(player);

@@ -160,7 +160,7 @@ public class BlockTimeMachine extends BlockContainer {
                     .getTileEntity(var2, var3, var4);
 
             if (var10 != null) {
-                var5.openGui(Revival.instance, 5, var1, var2, var3, var4);
+                var5.openGui(Revival.INSTANCE, 5, var1, var2, var3, var4);
             }
 
             return true;

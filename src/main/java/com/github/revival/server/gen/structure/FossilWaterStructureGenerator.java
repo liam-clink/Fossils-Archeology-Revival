@@ -1,7 +1,7 @@
 package com.github.revival.server.gen.structure;
 
+import com.github.revival.Revival;
 import com.github.revival.server.block.FABlockRegistry;
-import com.github.revival.server.config.FossilConfig;
 import com.github.revival.server.enums.EnumPrehistoric;
 import com.github.revival.server.gen.structure.shipwreck.ShipWreck1;
 import com.github.revival.server.gen.structure.shipwreck.ShipWreck2;
@@ -34,7 +34,7 @@ public class FossilWaterStructureGenerator extends StructureGeneratorBase {
      */
     static {
         Structure structure = new Structure("ShipWreck");
-        if (FossilConfig.generateShips) {
+        if (Revival.CONFIG.generateShips) {
             structure.addBlockArray(ShipWreck1.blockArrayShipWreck1);
             structure.addBlockArray(ShipWreck2.blockArrayShipWreck2);
             structure.addBlockArray(ShipWreck3.blockArrayShipWreck3);

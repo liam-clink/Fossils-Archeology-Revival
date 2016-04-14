@@ -68,7 +68,7 @@ public class DinoAIFeeder extends EntityAIBase {
         int range = this.searchRange;
 
         if (!theWorld.isRemote) {
-            if (!FossilConfig.starvingDinos) {
+            if (!Revival.CONFIG.starvingDinos) {
                 return false;
             }
         }
@@ -175,7 +175,7 @@ public class DinoAIFeeder extends EntityAIBase {
                             int healval = MathHelper.floor_double(this.targetFeeder.feedDinosaur(this.dinosaur) / 15D);
                             this.dinosaur.heal(healval);
                             this.dinosaur.doFoodEffect(null);
-                            Revival.channel.sendToAll(new MessageFoodParticles(dinosaur.getEntityId()));
+                            Revival.NETWORK_WRAPPER.sendToAll(new MessageFoodParticles(dinosaur.getEntityId()));
                         } else {
                             dinosaur.ticksEating = 0;
                             endTask();

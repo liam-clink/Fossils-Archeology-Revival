@@ -280,11 +280,11 @@ public class EntityMammoth extends EntityNewPrehistoric implements IShearable {
 	public boolean attackEntityAsMob(Entity entity) {
 		if (this.getAttackBounds().intersectsWith(entity.boundingBox)) {
 			if (this.getAnimation() == NO_ANIMATION) {
-				this.setAnimation(animation_attack);
+				this.setAnimation(ATTACK_ANIMATION);
 				return false;
 			}
 
-			if (this.getAnimation() == animation_attack && this.getAnimationTick() == 20) {
+			if (this.getAnimation() == ATTACK_ANIMATION && this.getAnimationTick() == 20) {
 				IAttributeInstance iattributeinstance = this.getEntityAttribute(SharedMonsterAttributes.attackDamage);
 				boolean flag = entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) iattributeinstance.getAttributeValue());
 				if (entity.ridingEntity != null) {

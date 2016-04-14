@@ -4,6 +4,7 @@ import com.github.revival.Revival;
 import com.github.revival.server.config.FossilConfig;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
+import net.ilexiconn.llibrary.server.config.ConfigHandler;
 import net.minecraft.entity.player.EntityPlayer;
 
 public class FossilConnectionEvent {
@@ -19,32 +20,30 @@ public class FossilConnectionEvent {
         switch (Revival.STATE) {
             case DEV:
 
-                if (FossilConfig.loginMessage) {
+                if (Revival.CONFIG.loginMessage) {
                     Revival.showMessage("You are running F/A:Revival Dev Build, " + Revival.VERSION + ".", player);
                     Revival.showMessage("Github: https://github.com/FossilsArcheologyRevival/FossilArcheology1.7", player);
                 }
                 return;
 
             case BETA:
-                if (FossilConfig.loginMessage) {
+                if (Revival.CONFIG.loginMessage) {
                     Revival.showMessage("You are running Fossils and Archaeology Revival " + Revival.VERSION + ".", player);
                     Revival.showMessage("This mod is currently in a BETA state. Be sure to backup worlds.", player);
                     Revival.showMessage("Forum and support: http://www.minecraftforum.net/topic/1708636-", player);
                     Revival.showMessage("Github: https://github.com/FossilsArcheologyRevival/FossilArcheology1.7", player);
-                    Revival.instance.config.load();
-                    Revival.instance.config.get("option", "Display_Login_Message", false).set(false);
-                    Revival.instance.config.save();
+                    Revival.CONFIG.loginMessage = false;
+                    ConfigHandler.INSTANCE.saveConfigForID(Revival.MODID);
                 }
                 return;
 
             case RELEASE:
-                if (FossilConfig.loginMessage) {
+                if (Revival.CONFIG.loginMessage) {
                     Revival.showMessage("You are running Fossils and Archaeology Revival " + Revival.VERSION + ".", player);
                     Revival.showMessage("Forum and support: http://www.minecraftforum.net/topic/1708636-", player);
                     Revival.showMessage("Github: https://github.com/FossilsArcheologyRevival/FossilArcheology1.7", player);
-                    Revival.instance.config.load();
-                    Revival.instance.config.get("option", "Display_Login_Message", false).set(false);
-                    Revival.instance.config.save();
+                    Revival.CONFIG.loginMessage = false;
+                    ConfigHandler.INSTANCE.saveConfigForID(Revival.MODID);
                 }
                 return;
 

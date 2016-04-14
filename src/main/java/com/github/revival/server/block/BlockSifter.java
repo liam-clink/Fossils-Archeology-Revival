@@ -163,7 +163,7 @@ public class BlockSifter extends BlockContainer {
         if (var1.isRemote) {
             return true;
         } else {
-            var5.openGui(Revival.instance, 7, var1, var2, var3, var4);
+            var5.openGui(Revival.INSTANCE, 7, var1, var2, var3, var4);
             return true;
         }
     }

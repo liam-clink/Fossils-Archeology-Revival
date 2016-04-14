@@ -1,7 +1,7 @@
 package com.github.revival.server.entity.mob.test;
 
 
-import com.github.revival.server.config.FossilConfig;
+import com.github.revival.Revival;
 import com.github.revival.server.enums.EnumPrehistoric;
 import com.github.revival.server.enums.EnumSituation;
 import net.minecraft.entity.ai.EntityAIBase;
@@ -56,7 +56,7 @@ public class DinoAIAge extends EntityAIBase {
                 this.AITarget.updateSize();
 
                 if (this.AITarget.getMaxHealth() < this.AITarget.getHealth()) {
-                    if (FossilConfig.healingDinos) {
+                    if (Revival.CONFIG.healingDinos) {
                         this.AITarget.heal(MathHelper.ceiling_double_int(this.AITarget.getHealth() * 0.15f));
                     }
                 }

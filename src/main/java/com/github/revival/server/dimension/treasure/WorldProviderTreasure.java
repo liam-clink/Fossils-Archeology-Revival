@@ -2,7 +2,7 @@ package com.github.revival.server.dimension.treasure;
 
 
 import com.github.revival.Revival;
-import com.github.revival.server.config.FossilConfig;
+import com.github.revival.server.biome.FABiomeRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -16,8 +16,8 @@ import net.minecraft.world.chunk.IChunkProvider;
 public class WorldProviderTreasure extends WorldProvider {
     @Override
     public void registerWorldChunkManager() {
-        this.worldChunkMgr = new WorldChunkManagerHell(Revival.treasureBiome, 0);
-        this.dimensionId = FossilConfig.dimensionIDTreasure;
+        this.worldChunkMgr = new WorldChunkManagerHell(FABiomeRegistry.INSTANCE.treasureBiome, 0);
+        this.dimensionId = Revival.CONFIG.dimensionIDTreasure;
         this.hasNoSky = true;
         this.isHellWorld = true;
 

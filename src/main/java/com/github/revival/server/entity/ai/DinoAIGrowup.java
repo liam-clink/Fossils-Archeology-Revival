@@ -1,6 +1,6 @@
 package com.github.revival.server.entity.ai;
 
-import com.github.revival.server.config.FossilConfig;
+import com.github.revival.Revival;
 import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 import com.github.revival.server.enums.EnumPrehistoric;
 import com.github.revival.server.enums.EnumSituation;
@@ -58,7 +58,7 @@ public class DinoAIGrowup extends EntityAIBase {
 
                 if (this.AITarget.getMaxHealth() < this.AITarget.getHealth()) {
                     //the dino heals itself 15% when growing up
-                    if (FossilConfig.healingDinos) {
+                    if (Revival.CONFIG.healingDinos) {
                         this.AITarget.heal(MathHelper.ceiling_double_int(this.AITarget.getHealth() * 0.15f));
                     }
                 }

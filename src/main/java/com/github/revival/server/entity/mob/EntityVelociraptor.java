@@ -1,22 +1,11 @@
 package com.github.revival.server.entity.mob;
 
-import com.github.revival.server.config.FossilConfig;
+import com.github.revival.Revival;
 import com.github.revival.server.entity.ai.DinoAILeapAtTarget;
 import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 import com.github.revival.server.entity.mob.test.EntityToyBase;
 import com.github.revival.server.enums.EnumPrehistoric;
-import com.github.revival.server.enums.EnumPrehistoricAI.Activity;
-import com.github.revival.server.enums.EnumPrehistoricAI.Attacking;
-import com.github.revival.server.enums.EnumPrehistoricAI.Climbing;
-import com.github.revival.server.enums.EnumPrehistoricAI.Following;
-import com.github.revival.server.enums.EnumPrehistoricAI.Jumping;
-import com.github.revival.server.enums.EnumPrehistoricAI.Moving;
-import com.github.revival.server.enums.EnumPrehistoricAI.Response;
-import com.github.revival.server.enums.EnumPrehistoricAI.Stalking;
-import com.github.revival.server.enums.EnumPrehistoricAI.Taming;
-import com.github.revival.server.enums.EnumPrehistoricAI.Untaming;
-import com.github.revival.server.enums.EnumPrehistoricAI.WaterAbility;
-
+import com.github.revival.server.enums.EnumPrehistoricAI.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
@@ -39,7 +28,7 @@ public class EntityVelociraptor extends EntityNewPrehistoric {
         this.tasks.addTask(3, new DinoAILeapAtTarget(this));
         this.hasFeatherToggle = true;
         this.pediaScale = 45F;
-        this.featherToggle = FossilConfig.featheredVelociraptor;
+        this.featherToggle = Revival.CONFIG.featheredVelociraptor;
         this.setSize(1.5F, 1.5F);
         minSize = 0.3F;
         maxSize = 0.8F;
@@ -177,7 +166,7 @@ public class EntityVelociraptor extends EntityNewPrehistoric {
                 this.getAttackTarget().attackEntityFrom(DamageSource.causeMobDamage(this), (float) iattributeinstance.getAttributeValue());
             }
         }
-        if (this.getAttackTarget() != null && this.getAnimation() == animation_attack && (this.getAnimationTick() >= 17 && this.getAnimationTick() <= 20) && this.onGround) {
+        if (this.getAttackTarget() != null && this.getAnimation() == ATTACK_ANIMATION && (this.getAnimationTick() >= 17 && this.getAnimationTick() <= 20) && this.onGround) {
             double d0 = this.getAttackTarget().posX - this.posX;
             double d1 = this.getAttackTarget().posZ - this.posZ;
             float f = MathHelper.sqrt_double(d0 * d0 + d1 * d1);
@@ -196,11 +185,11 @@ public class EntityVelociraptor extends EntityNewPrehistoric {
     public void applyEntityCollision(Entity entity) {
         super.applyEntityCollision(entity);
         if (this.getAttackTarget() != null) {
-            if (this.getAttackTarget() == entity && this.getAnimation() == animation_attack && !onGround && this.ridingEntity != entity && (entity instanceof EntityToyBase)) {
+            if (this.getAttackTarget() == entity && this.getAnimation() == ATTACK_ANIMATION && !onGround && this.ridingEntity != entity && (entity instanceof EntityToyBase)) {
             	this.knockBackMob(entity, 0.1F, 0.1F, 0.1F);
             	entity.attackEntityFrom(DamageSource.causeMobDamage(this), 1);
             }
-            else if (this.getAttackTarget() == entity && this.getAnimation() == animation_attack && !onGround && this.ridingEntity != entity) {
+            else if (this.getAttackTarget() == entity && this.getAnimation() == ATTACK_ANIMATION && !onGround && this.ridingEntity != entity) {
                 this.mountEntity(entity);
             }
         }

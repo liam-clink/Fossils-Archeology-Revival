@@ -1,6 +1,6 @@
 package com.github.revival.client.gui;
 
-import com.github.revival.server.config.FossilConfig;
+import com.github.revival.Revival;
 import com.github.revival.server.item.FAItemRegistry;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -43,7 +43,7 @@ public class GuiBoneHelmet extends Gui {
             return;
         }
 
-        if (!FossilConfig.skullOverlay) {
+        if (!Revival.CONFIG.skullOverlay) {
             return;
         }
 

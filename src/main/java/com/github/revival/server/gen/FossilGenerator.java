@@ -1,7 +1,7 @@
 package com.github.revival.server.gen;
 
+import com.github.revival.Revival;
 import com.github.revival.server.block.FABlockRegistry;
-import com.github.revival.server.config.FossilConfig;
 import cpw.mods.fml.common.IWorldGenerator;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
@@ -25,7 +25,7 @@ public class FossilGenerator implements IWorldGenerator {
 
     private void generateSurface(World world, Random random, int blockX,
                                  int blockZ) {
-        if (FossilConfig.generateFossils) {
+        if (Revival.CONFIG.generateFossils) {
             for (int i = 0; i < 38; i++) {
                 int Xcoord = blockX + random.nextInt(16);
                 int Ycoord = random.nextInt(100);
@@ -35,7 +35,7 @@ public class FossilGenerator implements IWorldGenerator {
             }
         }
 
-        if (FossilConfig.generatePermafrost) {
+        if (Revival.CONFIG.generatePermafrost) {
             for (int i = 0; i < 8; i++) {
                 int Xcoord = blockX + random.nextInt(16);
                 int Ycoord = random.nextInt(30);

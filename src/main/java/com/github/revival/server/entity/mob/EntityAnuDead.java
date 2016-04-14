@@ -56,9 +56,9 @@ public class EntityAnuDead extends EntityLiving {
 
             if (thePlayer.timeUntilPortal > 0) {
                 thePlayer.timeUntilPortal = 10;
-            } else if (thePlayer.dimension != FossilConfig.dimensionIDTreasure) {
+            } else if (thePlayer.dimension != Revival.CONFIG.dimensionIDTreasure) {
                 thePlayer.timeUntilPortal = 10;
-                thePlayer.mcServer.getConfigurationManager().transferPlayerToDimension(thePlayer, FossilConfig.dimensionIDTreasure, new AnuTeleporter(thePlayer.mcServer.worldServerForDimension(FossilConfig.dimensionIDTreasure)));
+                thePlayer.mcServer.getConfigurationManager().transferPlayerToDimension(thePlayer, Revival.CONFIG.dimensionIDTreasure, new AnuTeleporter(thePlayer.mcServer.worldServerForDimension(Revival.CONFIG.dimensionIDTreasure)));
             } else {
                 thePlayer.timeUntilPortal = 10;
                 thePlayer.mcServer.getConfigurationManager().transferPlayerToDimension(thePlayer, 0, new AnuTeleporter(thePlayer.mcServer.worldServerForDimension(0)));
@@ -83,7 +83,7 @@ public class EntityAnuDead extends EntityLiving {
         }
         for (int i = 0; i < 2; ++i) {
             if (worldObj.isRemote) {
-                Revival.proxy.spawnAnuParticle(worldObj, posX, posY, posZ);
+                Revival.PROXY.spawnAnuParticle(worldObj, posX, posY, posZ);
 
             }
         }

@@ -17,7 +17,7 @@ public class DinoAILeapAtTarget extends EntityAIBase {
     public boolean shouldExecute() {
         this.leapTarget = this.dino.getAttackTarget();
 
-        if (dino.getAnimation() == EntityNewPrehistoric.animation_attack) {
+        if (dino.getAnimation() == EntityNewPrehistoric.ATTACK_ANIMATION) {
             return false;
         }
         if (dino.isSitting()) {
@@ -41,8 +41,8 @@ public class DinoAILeapAtTarget extends EntityAIBase {
 
     @Override
     public void startExecuting() {
-        if (dino.getAnimation() != EntityNewPrehistoric.animation_attack) {
-            dino.setAnimation(EntityNewPrehistoric.animation_attack);
+        if (dino.getAnimation() != EntityNewPrehistoric.ATTACK_ANIMATION) {
+            dino.setAnimation(EntityNewPrehistoric.ATTACK_ANIMATION);
         }
     }
 

@@ -196,7 +196,7 @@ public class EntityTerrorBird extends EntityTameable {
     }
 
     private void setPedia() {
-        Revival.toPedia = (Object) this;
+        Revival.toPedia = this;
     }
 
     /**
@@ -485,7 +485,7 @@ public class EntityTerrorBird extends EntityTameable {
 
         if (itemstack != null && FMLCommonHandler.instance().getSide().isClient() && itemstack.getItem() == FAItemRegistry.INSTANCE.dinoPedia) {
             this.setPedia();
-            player.openGui(Revival.instance, 4, this.worldObj, (int) this.posX, (int) this.posY, (int) this.posZ);
+            player.openGui(Revival.INSTANCE, 4, this.worldObj, (int) this.posX, (int) this.posY, (int) this.posZ);
             return true;
         }
 

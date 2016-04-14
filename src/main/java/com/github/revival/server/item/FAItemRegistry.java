@@ -1,7 +1,12 @@
 package com.github.revival.server.item;
 
-import java.lang.reflect.Field;
-
+import com.github.revival.server.block.FABlockRegistry;
+import com.github.revival.server.creativetab.FATabRegistry;
+import com.github.revival.server.entity.BehaviorJavelinDispense;
+import com.github.revival.server.handler.BucketEvent;
+import com.github.revival.server.handler.LocalizationStrings;
+import com.github.revival.server.item.forge.*;
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -10,27 +15,18 @@ import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 
-import com.github.revival.Revival;
-import com.github.revival.server.block.FABlockRegistry;
-import com.github.revival.server.creativetab.FATabRegistry;
-import com.github.revival.server.entity.BehaviorJavelinDispense;
-import com.github.revival.server.handler.BucketEvent;
-import com.github.revival.server.handler.LocalizationStrings;
-import com.github.revival.server.item.forge.ForgeAxeItem;
-import com.github.revival.server.item.forge.ForgeFoodItem;
-import com.github.revival.server.item.forge.ForgeHoeItem;
-import com.github.revival.server.item.forge.ForgeItemItem;
-import com.github.revival.server.item.forge.ForgePickaxeItem;
-import com.github.revival.server.item.forge.ForgeShovelItem;
-import com.github.revival.server.item.forge.ForgeSwordItem;
-
-import cpw.mods.fml.common.registry.GameRegistry;
+import java.lang.reflect.Field;
 
 public enum FAItemRegistry {
     INSTANCE;
+
+    public ItemArmor.ArmorMaterial bone = EnumHelper.addArmorMaterial("Bone", 25, new int[]{2, 7, 6, 2}, 15);
+    public Item.ToolMaterial scarab = EnumHelper.addToolMaterial("Scarab", 3, 1861, 8.0F, 4.0F, 25);
+    public Item.ToolMaterial toothDaggerMaterial = EnumHelper.addToolMaterial("toothDagger", 3, 250, 70.0F, 1.5F, 25);
 
     public Item biofossil;
     public Item tarfossil;
@@ -110,11 +106,11 @@ public enum FAItemRegistry {
         brokenhelmet = new ForgeItemItem("Broken_Ancient_Helm").setMaxStackSize(1).setUnlocalizedName(LocalizationStrings.BROKEN_HELMET_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
         skullStick = new ForgeItemItem("Skull_Stick").setUnlocalizedName(LocalizationStrings.SKULL_STICK_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
         gem = new ForgeItemItem("Scarab_Gem").setUnlocalizedName(LocalizationStrings.SCARAB_GEM_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
-        gemAxe = new ForgeAxeItem(Revival.scarab, "Gem_Axe").setUnlocalizedName(LocalizationStrings.SCARAB_AXE_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
-        gemPickaxe = new ForgePickaxeItem(Revival.scarab, "Gem_Pickaxe").setUnlocalizedName(LocalizationStrings.SCARAB_PICKAXE_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
-        gemSword = new ForgeSwordItem(Revival.scarab, "Gem_Sword").setUnlocalizedName(LocalizationStrings.SCARAB_SWORD_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
-        gemHoe = new ForgeHoeItem(Revival.scarab, "Gem_Hoe").setUnlocalizedName(LocalizationStrings.SCARAB_HOE_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
-        gemShovel = new ForgeShovelItem(Revival.scarab, "Gem_Shovel").setUnlocalizedName(LocalizationStrings.SCARAB_SHOVEL_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
+        gemAxe = new ForgeAxeItem(scarab, "Gem_Axe").setUnlocalizedName(LocalizationStrings.SCARAB_AXE_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
+        gemPickaxe = new ForgePickaxeItem(scarab, "Gem_Pickaxe").setUnlocalizedName(LocalizationStrings.SCARAB_PICKAXE_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
+        gemSword = new ForgeSwordItem(scarab, "Gem_Sword").setUnlocalizedName(LocalizationStrings.SCARAB_SWORD_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
+        gemHoe = new ForgeHoeItem(scarab, "Gem_Hoe").setUnlocalizedName(LocalizationStrings.SCARAB_HOE_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
+        gemShovel = new ForgeShovelItem(scarab, "Gem_Shovel").setUnlocalizedName(LocalizationStrings.SCARAB_SHOVEL_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
         dinoPedia = new ForgeItemItem("Dinopedia").setUnlocalizedName(LocalizationStrings.DINOPEDIA_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
         emptyShell = new ForgeItemItem("Empty_Shell").setUnlocalizedName(LocalizationStrings.EMPTY_SHELL_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
         magicConch = new MagicConchItem().setUnlocalizedName(LocalizationStrings.MAGIC_CONCH_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
@@ -125,8 +121,8 @@ public enum FAItemRegistry {
         ironjavelin = new JavelinItem(Item.ToolMaterial.IRON, "Iron_Javelin").setUnlocalizedName(LocalizationStrings.IRON_JAVELIN_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
         goldjavelin = new JavelinItem(Item.ToolMaterial.GOLD, "Gold_Javelin").setUnlocalizedName(LocalizationStrings.GOLD_JAVELIN_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
         diamondjavelin = new JavelinItem(Item.ToolMaterial.EMERALD, "Diamond_Javelin").setUnlocalizedName(LocalizationStrings.DIAMOND_JAVELIN_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
-        ancientJavelin = new JavelinItem(Revival.scarab, "Ancient_Javelin").setUnlocalizedName(LocalizationStrings.ANCIENT_JAVELIN_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
-        toothDagger = new ToothDaggerItem(Revival.toothDaggerMaterial).setTextureName("fossil:toothDagger").setUnlocalizedName("toothDagger").setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
+        ancientJavelin = new JavelinItem(scarab, "Ancient_Javelin").setUnlocalizedName(LocalizationStrings.ANCIENT_JAVELIN_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
+        toothDagger = new ToothDaggerItem(toothDaggerMaterial).setTextureName("fossil:toothDagger").setUnlocalizedName("toothDagger").setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
         whip = new WhipItem().setUnlocalizedName(LocalizationStrings.WHIP_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
         legBone = new DinosaurBoneItem("legBone").setUnlocalizedName(LocalizationStrings.LEGBONE_NAME);
         claw = new DinosaurBoneItem("uniqueItem").setUnlocalizedName(LocalizationStrings.CLAW_NAME);
@@ -139,10 +135,10 @@ public enum FAItemRegistry {
         failuresaurusFlesh = new ForgeItemItem("flesh").setUnlocalizedName(LocalizationStrings.FAILURESAURUS_FLESH_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
         potteryShards = new ForgeItemItem("PotteryShard").setUnlocalizedName(LocalizationStrings.POTTERY_SHARDS).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
         livingCoelacanth = new LivingCoelacanthItem(1).setUnlocalizedName(LocalizationStrings.LIVING_COELACANTH_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
-        skullHelmet = new SkullHelmetItem(Revival.bone, 3, 0).setUnlocalizedName(LocalizationStrings.SKULL_HELMET_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
-        ribCage = new RibCageItem(Revival.bone, 3, 1).setUnlocalizedName(LocalizationStrings.RIBCAGE_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
-        femurs = new FemursItem(Revival.bone, 3, 2).setUnlocalizedName(LocalizationStrings.FEMURS_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
-        feet = new FeetItem(Revival.bone, 3, 3).setUnlocalizedName(LocalizationStrings.FEET_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
+        skullHelmet = new SkullHelmetItem(bone, 3, 0).setUnlocalizedName(LocalizationStrings.SKULL_HELMET_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
+        ribCage = new RibCageItem(bone, 3, 1).setUnlocalizedName(LocalizationStrings.RIBCAGE_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
+        femurs = new FemursItem(bone, 3, 2).setUnlocalizedName(LocalizationStrings.FEMURS_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
+        feet = new FeetItem(bone, 3, 3).setUnlocalizedName(LocalizationStrings.FEET_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
         cookedDinoMeat = new ForgeFoodItem(8, 0.8F, true, "Dino_Steak").setUnlocalizedName(LocalizationStrings.DINO_STEAK_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
         cookedChickenSoup = new ForgeItemItem("Cooked_Chicken_Soup").setUnlocalizedName(LocalizationStrings.COOKED_CHICKEN_SOUP_NAME).setMaxStackSize(1).setContainerItem(Items.bucket).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
         rawChickenSoup = new ForgeItemItem("Raw_Chicken_Soup").setUnlocalizedName(LocalizationStrings.RAW_CHICKEN_SOUP_NAME).setMaxStackSize(1).setContainerItem(Items.bucket).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);

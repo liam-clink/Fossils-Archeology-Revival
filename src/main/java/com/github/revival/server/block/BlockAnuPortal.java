@@ -1,6 +1,6 @@
 package com.github.revival.server.block;
 
-import com.github.revival.server.config.FossilConfig;
+import com.github.revival.Revival;
 import com.github.revival.server.handler.AnuTeleporter;
 import com.github.revival.server.handler.LocalizationStrings;
 import cpw.mods.fml.relauncher.Side;
@@ -47,9 +47,9 @@ public class BlockAnuPortal extends Block {
             EntityPlayerMP thePlayer = (EntityPlayerMP) entity;
             if (thePlayer.timeUntilPortal > 0) {
                 thePlayer.timeUntilPortal = 10;
-            } else if (thePlayer.dimension != FossilConfig.dimensionIDDarknessLair) {
+            } else if (thePlayer.dimension != Revival.CONFIG.dimensionIDDarknessLair) {
                 thePlayer.timeUntilPortal = 10;
-                thePlayer.mcServer.getConfigurationManager().transferPlayerToDimension(thePlayer, FossilConfig.dimensionIDDarknessLair, new AnuTeleporter(thePlayer.mcServer.worldServerForDimension(FossilConfig.dimensionIDDarknessLair)));
+                thePlayer.mcServer.getConfigurationManager().transferPlayerToDimension(thePlayer, Revival.CONFIG.dimensionIDDarknessLair, new AnuTeleporter(thePlayer.mcServer.worldServerForDimension(Revival.CONFIG.dimensionIDDarknessLair)));
             } else {
                 thePlayer.timeUntilPortal = 10;
                 thePlayer.mcServer.getConfigurationManager().transferPlayerToDimension(thePlayer, 0, new AnuTeleporter(thePlayer.mcServer.worldServerForDimension(0)));

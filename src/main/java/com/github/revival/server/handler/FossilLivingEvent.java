@@ -52,7 +52,7 @@ public class FossilLivingEvent {
     @SubscribeEvent
     public void onAchievementGet(AchievementEvent event) {
         if (event.achievement == FossilAchievementHandler.firstDino) {
-            Revival.proxy.playSound("fossil:music.first_dinosaur");
+            Revival.PROXY.playSound("fossil:music.first_dinosaur");
         }
     }
 

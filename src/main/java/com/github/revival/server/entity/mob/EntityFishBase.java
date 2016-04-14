@@ -46,7 +46,7 @@ public abstract class EntityFishBase extends EntityWaterMob {
     }
 
     private void setPedia() {
-        Revival.toPedia = (Object) this;
+        Revival.toPedia = this;
     }
 
     /**
@@ -75,7 +75,7 @@ public abstract class EntityFishBase extends EntityWaterMob {
 
         if (var2 != null && FMLCommonHandler.instance().getSide().isClient() && var2.getItem() == FAItemRegistry.INSTANCE.dinoPedia) {
             this.setPedia();
-            var1.openGui(Revival.instance, 4, this.worldObj, (int) this.posX, (int) this.posY, (int) this.posZ);
+            var1.openGui(Revival.INSTANCE, 4, this.worldObj, (int) this.posX, (int) this.posY, (int) this.posZ);
             return true;
         }
 

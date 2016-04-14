@@ -1,6 +1,7 @@
 package com.github.revival.client.renderer.tileentity;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+import cpw.mods.fml.client.registry.RenderingRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
@@ -9,6 +10,7 @@ import org.lwjgl.opengl.GL11;
 
 public class RenderFeeder implements ISimpleBlockRenderingHandler {
     public static final RenderFeeder INSTANCE = new RenderFeeder();
+    public static int feederRenderID = RenderingRegistry.getNextAvailableRenderId();
 
     @Override
     public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {

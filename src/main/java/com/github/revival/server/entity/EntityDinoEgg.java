@@ -110,7 +110,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData 
     }
 
     private void setPedia() {
-        Revival.toPedia = (Object) this;
+        Revival.toPedia = this;
     }
 
     /**
@@ -769,7 +769,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData 
             return true;
         } else if (FMLCommonHandler.instance().getSide().isClient() && itemstack.getItem() == FAItemRegistry.INSTANCE.dinoPedia) {
             this.setPedia();
-            player.openGui(Revival.instance, 4, worldObj, (int) posX, (int) posY, (int) posZ);
+            player.openGui(Revival.INSTANCE, 4, worldObj, (int) posX, (int) posY, (int) posZ);
             return true;
         }
 

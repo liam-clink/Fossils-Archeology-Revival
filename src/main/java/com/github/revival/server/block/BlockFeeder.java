@@ -1,6 +1,7 @@
 package com.github.revival.server.block;
 
 import com.github.revival.Revival;
+import com.github.revival.client.renderer.tileentity.RenderFeeder;
 import com.github.revival.server.block.entity.TileEntityNewFeeder;
 import com.github.revival.server.creativetab.FATabRegistry;
 import com.github.revival.server.handler.LocalizationStrings;
@@ -115,7 +116,7 @@ public class BlockFeeder extends BlockContainer {
 
     @Override
     public int getRenderType() {
-        return Revival.feederRenderID;
+        return RenderFeeder.feederRenderID;
     }
 
     /**
@@ -229,7 +230,7 @@ public class BlockFeeder extends BlockContainer {
                     .getTileEntity(x, y, z);
 
             if (tileentity != null) {
-                player.openGui(Revival.instance, 2, world, x, y, z);
+                player.openGui(Revival.INSTANCE, 2, world, x, y, z);
             }
 
             return true;

@@ -173,7 +173,7 @@ public class ModelCompsognathus extends ModelNewPrehistoric {
 		blockMovement(f, f1, f2, f3, f4, f5, (Entity) entity);
 		this.resetToDefaultPose();
 		setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
-		animator.setAnimation(EntityCompsognathus.animation_attack);
+		animator.setAnimation(EntityCompsognathus.ATTACK_ANIMATION);
 		animator.startKeyframe(15);
 		animator.move(LeftUpperLeg, 0, 1F, -0.5F);
 		animator.move(RightUpperLeg, 0, 1F, -0.5F);

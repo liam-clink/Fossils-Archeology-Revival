@@ -1,19 +1,9 @@
 package com.github.revival.server.entity.mob;
 
-import com.github.revival.server.config.FossilConfig;
+import com.github.revival.Revival;
 import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 import com.github.revival.server.enums.EnumPrehistoric;
-import com.github.revival.server.enums.EnumPrehistoricAI.Activity;
-import com.github.revival.server.enums.EnumPrehistoricAI.Attacking;
-import com.github.revival.server.enums.EnumPrehistoricAI.Climbing;
-import com.github.revival.server.enums.EnumPrehistoricAI.Following;
-import com.github.revival.server.enums.EnumPrehistoricAI.Jumping;
-import com.github.revival.server.enums.EnumPrehistoricAI.Moving;
-import com.github.revival.server.enums.EnumPrehistoricAI.Response;
-import com.github.revival.server.enums.EnumPrehistoricAI.Stalking;
-import com.github.revival.server.enums.EnumPrehistoricAI.Taming;
-import com.github.revival.server.enums.EnumPrehistoricAI.Untaming;
-import com.github.revival.server.enums.EnumPrehistoricAI.WaterAbility;
+import com.github.revival.server.enums.EnumPrehistoricAI.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
@@ -34,7 +24,7 @@ public class EntityTriceratops extends EntityNewPrehistoric {
 	public EntityTriceratops(World world) {
 		super(world, EnumPrehistoric.Triceratops);
 		this.hasFeatherToggle = true;
-		this.featherToggle = !FossilConfig.quilledTriceratops;
+		this.featherToggle = !Revival.CONFIG.quilledTriceratops;
 		this.setSize(0.8F, 0.6F);
 		this.nearByMobsAllowed = 7;
 		minSize = 1F;
@@ -184,7 +174,7 @@ public class EntityTriceratops extends EntityNewPrehistoric {
 	@Override
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
-		if (this.getAnimation() == animation_attack && this.getAnimationTick() == 12 && this.getAttackTarget() != null) {
+		if (this.getAnimation() == ATTACK_ANIMATION && this.getAnimationTick() == 12 && this.getAttackTarget() != null) {
 			this.attackEntityAsMob(this.getAttackTarget());
 		}
 	}
@@ -193,11 +183,11 @@ public class EntityTriceratops extends EntityNewPrehistoric {
 	public boolean attackEntityAsMob(Entity entity) {
 		if (this.getAttackBounds().intersectsWith(entity.boundingBox)) {
 			if (this.getAnimation() == NO_ANIMATION) {
-				this.setAnimation(animation_attack);
+				this.setAnimation(ATTACK_ANIMATION);
 				return false;
 			}
 
-			if (this.getAnimation() == animation_attack && this.getAnimationTick() == 12) {
+			if (this.getAnimation() == ATTACK_ANIMATION && this.getAnimationTick() == 12) {
 				IAttributeInstance iattributeinstance = this.getEntityAttribute(SharedMonsterAttributes.attackDamage);
 				boolean flag = entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) iattributeinstance.getAttributeValue());
 				if (entity.ridingEntity != null) {

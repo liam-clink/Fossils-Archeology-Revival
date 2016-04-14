@@ -81,7 +81,7 @@ public class EntityPregnantSheep implements IViviparous, IExtendedEntityProperti
     }
 
     public void setPedia() {
-        Revival.toPedia = (Object) this;
+        Revival.toPedia = this;
     }
 
     @Override

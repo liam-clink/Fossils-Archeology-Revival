@@ -175,7 +175,7 @@ public class BlockCultivate extends BlockContainer {
         if (world.isRemote) {
             return true;
         } else {
-            player.openGui(Revival.instance, 1, world, x, y, z);
+            player.openGui(Revival.INSTANCE, 1, world, x, y, z);
             return true;
         }
     }

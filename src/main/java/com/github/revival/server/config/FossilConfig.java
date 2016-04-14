@@ -4,71 +4,71 @@ import net.ilexiconn.llibrary.server.config.ConfigEntry;
 
 public class FossilConfig {
     @ConfigEntry(category = "generation")
-    public static boolean generatePalaeoraphe = false;
+    public boolean generatePalaeoraphe = false;
     @ConfigEntry(category = "generation")
-    public static boolean generateHellShips = true;
+    public boolean generateHellShips = true;
     @ConfigEntry(category = "generation")
-    public static boolean generateAcademy = true;
+    public boolean generateAcademy = true;
     @ConfigEntry(category = "generation")
-    public static boolean generateShips = true;
+    public boolean generateShips = true;
     @ConfigEntry(category = "generation")
-    public static boolean generateTemple = true;
+    public boolean generateTemple = true;
     @ConfigEntry(category = "generation")
-    public static boolean generateFossils = true;
+    public boolean generateFossils = true;
     @ConfigEntry(category = "generation")
-    public static boolean generatePermafrost = true;
+    public boolean generatePermafrost = true;
     @ConfigEntry(category = "generation")
-    public static boolean generateVolcanicRock = true;
+    public boolean generateVolcanicRock = true;
 
     @ConfigEntry
-    public static boolean allowFlying = false;
+    public boolean allowFlying = false;
     @ConfigEntry
-    public static boolean healingDinos = true;
+    public boolean healingDinos = true;
     @ConfigEntry
-    public static boolean starvingDinos = true;
+    public boolean starvingDinos = true;
     @ConfigEntry
-    public static boolean dinoBlockBreaking = true;
+    public boolean dinoBlockBreaking = true;
     @ConfigEntry
-    public static boolean skullOverlay = true;
+    public boolean skullOverlay = true;
     @ConfigEntry
-    public static boolean loginMessage = true;
+    public boolean loginMessage = true;
     @ConfigEntry
-    public static boolean anuSpawn = false;
+    public boolean anuSpawn = false;
     @ConfigEntry
-    public static boolean anuAllowedOverworld = false;
+    public boolean anuAllowedOverworld = false;
     @ConfigEntry
-    public static boolean allowTableEnchantments = true;
+    public boolean allowTableEnchantments = true;
     @ConfigEntry
-    public static boolean allowBookEnchantments = true;
+    public boolean allowBookEnchantments = true;
     @ConfigEntry
-    public static boolean allowBreeding = true;
+    public boolean allowBreeding = true;
     @ConfigEntry
-    public static boolean customMainMenu = true;
+    public boolean customMainMenu = true;
 
     @ConfigEntry(category = "dinosaurs")
-    public static boolean featheredTRex = false;
+    public boolean featheredTRex = false;
     @ConfigEntry(category = "dinosaurs")
-    public static boolean featheredDeinonychus = false;
+    public boolean featheredDeinonychus = false;
     @ConfigEntry(category = "dinosaurs")
-    public static boolean featheredGallimimus = false;
+    public boolean featheredGallimimus = false;
     @ConfigEntry(category = "dinosaurs")
-    public static boolean featheredCompsognathus = false;
+    public boolean featheredCompsognathus = false;
     @ConfigEntry(category = "dinosaurs")
-    public static boolean quilledTriceratops = true;
+    public boolean quilledTriceratops = true;
     @ConfigEntry(category = "dinosaurs")
-    public static boolean featheredVelociraptor = false;
+    public boolean featheredVelociraptor = false;
 
     @ConfigEntry(category = "ids")
-    public static int biomeIDDarknessLair = 128;
+    public int biomeIDDarknessLair = 128;
     @ConfigEntry(category = "ids")
-    public static int biomeIDTreasure = 127;
+    public int biomeIDTreasure = 127;
     @ConfigEntry(category = "ids")
-    public static int dimensionIDDarknessLair = -23;
+    public int dimensionIDDarknessLair = -23;
     @ConfigEntry(category = "ids")
-    public static int dimensionIDTreasure = -34;
+    public int dimensionIDTreasure = -34;
 
     @ConfigEntry(category = "ids")
-    public static int enchantmentIDArcheology = 91;
+    public int enchantmentIDArcheology = 91;
     @ConfigEntry(category = "ids")
-    public static int enchantmentIDPaleontology = 90;
+    public int enchantmentIDPaleontology = 90;
 }

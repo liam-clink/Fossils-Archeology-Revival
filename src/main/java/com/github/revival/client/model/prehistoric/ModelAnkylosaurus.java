@@ -184,7 +184,7 @@ public class ModelAnkylosaurus extends ModelNewPrehistoric {
         blockMovement(f, f1, f2, f3, f4, f5, (Entity) entity);
         this.resetToDefaultPose();
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
-        animator.setAnimation(EntityAnkylosaurus.animation_attack);
+        animator.setAnimation(EntityAnkylosaurus.ATTACK_ANIMATION);
         animator.startKeyframe(5);
         ModelUtils.rotate(animator, Body, 0, 15, 0);
         ModelUtils.rotate(animator, Tail1, 0, 10, 0);

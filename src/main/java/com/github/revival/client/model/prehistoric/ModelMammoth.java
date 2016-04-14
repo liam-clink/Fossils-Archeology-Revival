@@ -200,7 +200,7 @@ public class ModelMammoth extends ModelNewPrehistoric {
 		blockMovement(f, f1, f2, f3, f4, f5, (Entity) entity);
 		this.resetToDefaultPose();
 		setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
-		animator.setAnimation(EntityAnkylosaurus.animation_attack);
+		animator.setAnimation(EntityAnkylosaurus.ATTACK_ANIMATION);
 		animator.startKeyframe(5);
 		ModelUtils.rotate(animator, neck, 0, 20, 0);
 		ModelUtils.rotate(animator, head, 0, 5, 10);
