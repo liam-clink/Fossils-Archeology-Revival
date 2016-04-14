@@ -53,7 +53,7 @@ public class EntityTriceratops extends EntityNewPrehistoric {
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
-		//Revival.proxy.doChainBuffer(tailbuffer, this);
+		//Revival.proxy.doChainBuffer(tailBuffer, this);
 	}
 
 	@Override

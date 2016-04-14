@@ -266,6 +266,6 @@ public class ModelCeratosaurus extends ModelNewPrehistoric {
 			sitAnimationPos(leftThigh, sitProgress, 0, 7.6F, 0);
 			sitAnimationPos(rightThigh, sitProgress, 0, 7.6F, 0);
 		}
-		((EntityNewPrehistoric) entity).tailbuffer.applyChainSwingBuffer(tailParts);
+		((EntityNewPrehistoric) entity).tailBuffer.applyChainSwingBuffer(tailParts);
 	}
 }

@@ -279,7 +279,7 @@ public class ModelGallimimus extends ModelNewPrehistoric {
 		this.walk(rightFoot, speed2, -0.4F, false, -0.5F, -0.2F, f, f1);
 		this.chainWave(neckParts, speed2, 0.5F, 4, f, f1);
 		this.chainWave(tailParts, speed2, 0.3F, -4, f, f1);
-		((EntityNewPrehistoric) entity).tailbuffer.applyChainSwingBuffer(tailParts);
+		((EntityNewPrehistoric) entity).tailBuffer.applyChainSwingBuffer(tailParts);
 	}
 
 

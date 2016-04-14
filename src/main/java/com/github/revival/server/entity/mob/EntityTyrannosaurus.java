@@ -171,7 +171,7 @@ public class EntityTyrannosaurus extends EntityNewPrehistoric {
     public void onUpdate() {
         super.onUpdate();
 
-        //Revival.proxy.doChainBuffer(tailbuffer, this);
+        //Revival.proxy.doChainBuffer(tailBuffer, this);
         if (!this.isSleeping() && this.rand.nextInt(500) == 0 && !worldObj.isRemote && !this.isSitting() && this.getAttackTarget() == null) {
             if (this.getAnimation() == NO_ANIMATION) {
                 this.setAnimation(animation_roar);

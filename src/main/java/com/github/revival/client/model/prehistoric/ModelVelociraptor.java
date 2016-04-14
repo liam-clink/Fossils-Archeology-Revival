@@ -363,8 +363,8 @@ public class ModelVelociraptor extends ModelNewPrehistoric {
             this.flap(leftUpperArm, 0.8F, -0.4F, true, 0.3F, -0.2F, entity.ticksExisted, 1);
             this.flap(rightUpperArm, 0.8F, -0.4F, false, 0.3F, 0.2F, entity.ticksExisted, 1);
         }
-        ((EntityNewPrehistoric) entity).tailbuffer.applyChainSwingBuffer(tailParts);
-        //((ChainBuffer)((EntityVelociraptor)entity).tailbuffer).applyChainSwingBuffer(tailParts);
+        ((EntityNewPrehistoric) entity).tailBuffer.applyChainSwingBuffer(tailParts);
+        //((ChainBuffer)((EntityVelociraptor)entity).tailBuffer).applyChainSwingBuffer(tailParts);
 
     }
 

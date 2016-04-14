@@ -277,7 +277,7 @@ public class ModelAnkylosaurus extends ModelNewPrehistoric {
 			sitAnimationRotation(BodyUpper, sitProgress, (float)Math.toRadians(2.61D), 0, 0);
 			sitAnimationPos(Body, sitProgress, 0, 4.3F, -3);
 		}
-		((EntityNewPrehistoric)entity).tailbuffer.applyChainSwingBuffer(tailParts);
+		((EntityNewPrehistoric)entity).tailBuffer.applyChainSwingBuffer(tailParts);
     }
 
 }

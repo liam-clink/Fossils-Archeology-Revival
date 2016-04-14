@@ -138,7 +138,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	private Animation currentAnimation;
 	private int animTick;
 	@SideOnly(Side.CLIENT)
-	public ChainBuffer tailbuffer;
+	public ChainBuffer tailBuffer = new ChainBuffer();
 	public float jumpLength;
 	public int ticksEating;
 	public double attackSpeedBoost;
@@ -183,7 +183,6 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
 		//this.targetTasks.addTask(2, new EntityAITargetNonTamed(this, EntityLivingBase.class, 200, false));
 		hasBabyTexture = true;
-		tailbuffer = new ChainBuffer();
 		this.setScale(this.getDinosaurSize());
 	}
 
@@ -772,7 +771,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 			ticksSprinted = 0;
 			this.setSprinting(false);
 		}
-		tailbuffer.calculateChainSwingBuffer(70, 10, 4, this);
+		tailBuffer.calculateChainSwingBuffer(70, 10, 4, this);
 		if (this.ridingEntity != null) {
 			if (this.ridingEntity.isDead) {
 				this.mountEntity(null);

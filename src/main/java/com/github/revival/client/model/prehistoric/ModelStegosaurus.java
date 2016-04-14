@@ -229,7 +229,7 @@ public class ModelStegosaurus extends ModelNewPrehistoric {
 	        float sitProgress = 0;//((EntityNewPrehistoric) (entity)).sleepProgress;
 
         }
-        ((EntityNewPrehistoric) entity).tailbuffer.applyChainSwingBuffer(tailParts);
+        ((EntityNewPrehistoric) entity).tailBuffer.applyChainSwingBuffer(tailParts);
     }
 
 }

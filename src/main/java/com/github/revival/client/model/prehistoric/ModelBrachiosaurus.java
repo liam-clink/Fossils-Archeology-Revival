@@ -276,7 +276,7 @@ public class ModelBrachiosaurus extends ModelNewPrehistoric {
 			sitAnimationPos(BackThighLeft, sitProgress, 0F, 5.1F, 2F);
 			sitAnimationPos(BackThighRight, sitProgress, 0F, 5.1F, 2F);
 		}
-		((EntityNewPrehistoric) entity).tailbuffer.applyChainSwingBuffer(tailParts);
+		((EntityNewPrehistoric) entity).tailBuffer.applyChainSwingBuffer(tailParts);
 	}
 
 

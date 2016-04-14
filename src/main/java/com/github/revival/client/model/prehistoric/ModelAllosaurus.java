@@ -271,7 +271,7 @@ public class ModelAllosaurus extends ModelNewPrehistoric {
 		this.chainSwing(tailParts, speed, 0.15F, -3, entity.ticksExisted, 1);
 		this.chainSwing(tailParts, speed2, 0.25F, -3, f, f1);
 		this.chainWave(neckParts, speed, 0.15F, 3, entity.ticksExisted, 1);
-		((EntityNewPrehistoric)entity).tailbuffer.applyChainSwingBuffer(tailParts);
+		((EntityNewPrehistoric)entity).tailBuffer.applyChainSwingBuffer(tailParts);
 
 	}
 

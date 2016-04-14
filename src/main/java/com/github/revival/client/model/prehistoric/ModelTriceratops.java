@@ -297,7 +297,7 @@ public class ModelTriceratops extends ModelNewPrehistoric {
 		this.chainWave(tailParts, speed2, 0.05F, -3, entity.ticksExisted, 1);
 		this.chainSwing(tailParts, speed2, 0.35F, -3, entity.ticksExisted, 1);
 		this.chainWave(neckParts, speed2, 0.05F, -3, entity.ticksExisted, 1);
-		((EntityNewPrehistoric) entity).tailbuffer.applyChainSwingBuffer(tailParts);
+		((EntityNewPrehistoric) entity).tailBuffer.applyChainSwingBuffer(tailParts);
 	}
 
 	//	@Override
