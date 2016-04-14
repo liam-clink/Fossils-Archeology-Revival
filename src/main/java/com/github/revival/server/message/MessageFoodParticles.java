@@ -39,9 +39,7 @@ public class MessageFoodParticles extends AbstractMessage<MessageFoodParticles> 
         this.blockItemID = Block.getIdFromBlock(block);
     }
 
-
-    public MessageFoodParticles() {
-    }
+    public MessageFoodParticles() {}
 
     @Override
     @SideOnly(Side.CLIENT)
@@ -137,5 +135,6 @@ public class MessageFoodParticles extends AbstractMessage<MessageFoodParticles> 
         buf.writeInt(dinosaurID);
         buf.writeInt(foodItemID);
         buf.writeInt(blockItemID);
+
     }
 }

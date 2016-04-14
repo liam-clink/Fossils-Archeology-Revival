@@ -4,6 +4,8 @@ import net.ilexiconn.llibrary.client.model.tools.AdvancedModelBase;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.minecraft.entity.Entity;
 
+import com.github.revival.server.entity.toy.EntityToyBall;
+
 public class ModelToyBall extends AdvancedModelBase {
     public AdvancedModelRenderer ball;
 
@@ -23,6 +25,6 @@ public class ModelToyBall extends AdvancedModelBase {
     
     @Override
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
-    	
+    	ball.rotateAngleX = (float) Math.toRadians(((EntityToyBall)entity).rollValue * 7);
     }
 }

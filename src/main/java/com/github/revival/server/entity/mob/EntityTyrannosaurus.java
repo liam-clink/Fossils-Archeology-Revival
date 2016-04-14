@@ -64,8 +64,6 @@ public class EntityTyrannosaurus extends EntityNewPrehistoric {
             if (this.getAnimation() == animation_attack && this.getAnimationTick() == 12) {
                 IAttributeInstance attackDamage = this.getEntityAttribute(SharedMonsterAttributes.attackDamage);
                 boolean hurt = entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) attackDamage.getAttributeValue());
-
-                if (hurt) {
                     if (entity.ridingEntity != null) {
                         if (entity.ridingEntity == this) {
                             entity.mountEntity(null);
@@ -73,8 +71,6 @@ public class EntityTyrannosaurus extends EntityNewPrehistoric {
                     }
                     entity.motionY += (0.4000000059604645D / 2);
                     knockbackEntity(entity, 1F, 0.1F);
-                }
-
                 return hurt;
             }
         }

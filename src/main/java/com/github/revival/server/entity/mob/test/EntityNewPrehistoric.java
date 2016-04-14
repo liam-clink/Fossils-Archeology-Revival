@@ -77,6 +77,7 @@ import com.github.revival.server.enums.EnumSituation;
 import com.github.revival.server.handler.LocalizationStrings;
 import com.github.revival.server.item.FAItemRegistry;
 import com.github.revival.server.message.MessageFoodParticles;
+import com.github.revival.server.message.MessageHappyParticles;
 import com.github.revival.server.message.MessageSetDay;
 import com.github.revival.server.util.FoodMappings;
 
@@ -294,9 +295,10 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		return true;
 	}
 
-	public void doPlayBonus() {
-		ticksTillPlay = this.rand.nextInt(6000) + 6000;
-		this.setMood(this.getMood());
+	public void doPlayBonus(int playBonus) {
+		ticksTillPlay = this.rand.nextInt(600) + 600;
+		this.setMood(this.getMood() + playBonus);
+		Revival.channel.sendToAll(new MessageHappyParticles(this.getEntityId()));
 	}
 
 	public abstract void setSpawnValues();
@@ -497,7 +499,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 			return false;
 		}
 	}
-	
+
 	public boolean isDaytime(){
 		if(worldObj.isRemote){
 			return isDaytime;
@@ -510,6 +512,9 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	@Override
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
+		if(this.getAttackTarget() != null && !this.canAttackClass(this.getAttackTarget().getClass())){
+			this.setAttackTarget(null);
+		}
 		if (this.getHunger() > 100) {
 			this.setHunger(100);
 		}
@@ -518,6 +523,9 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		}
 		if (this.getMood() < -100) {
 			this.setMood(-100);
+		}
+		if(this.ticksTillPlay > 0){
+			this.ticksTillPlay--;
 		}
 		if (!this.arePlantsNearby(16) && !mood_noplants) {
 			boolean inital_mood_noplants = mood_noplants;

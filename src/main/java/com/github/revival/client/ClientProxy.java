@@ -1,5 +1,18 @@
 package com.github.revival.client;
 
+import net.ilexiconn.llibrary.client.model.tools.ChainBuffer;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.audio.PositionedSoundRecord;
+import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.particle.EntityFX;
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
+import net.minecraftforge.client.MinecraftForgeClient;
+import net.minecraftforge.common.MinecraftForge;
+
 import com.github.revival.Revival;
 import com.github.revival.client.model.ModelDeadAnu;
 import com.github.revival.client.model.ModelFailuresaurus;
@@ -54,6 +67,7 @@ import com.github.revival.client.renderer.entity.RenderSentryPigman;
 import com.github.revival.client.renderer.entity.RenderStoneboard;
 import com.github.revival.client.renderer.entity.RenderTarSlime;
 import com.github.revival.client.renderer.entity.RenderTerrorBird;
+import com.github.revival.client.renderer.entity.RenderToyBall;
 import com.github.revival.client.renderer.item.ItemAncientClocRender;
 import com.github.revival.client.renderer.item.ItemFigurineRenderer;
 import com.github.revival.client.renderer.item.ItemRenderAnuTotem;
@@ -129,6 +143,7 @@ import com.github.revival.server.entity.mob.EntityTriceratops;
 import com.github.revival.server.entity.mob.EntityTyrannosaurus;
 import com.github.revival.server.entity.mob.EntityVelociraptor;
 import com.github.revival.server.entity.mob.projectile.EntityBirdEgg;
+import com.github.revival.server.entity.toy.EntityToyBall;
 import com.github.revival.server.handler.EventNewMenu;
 import com.github.revival.server.handler.EventOverlay;
 import com.github.revival.server.handler.FossilClientEvents;
@@ -137,18 +152,6 @@ import com.github.revival.server.item.FAItemRegistry;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
-import net.ilexiconn.llibrary.client.model.tools.ChainBuffer;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.audio.PositionedSoundRecord;
-import net.minecraft.client.model.ModelBiped;
-import net.minecraft.client.particle.EntityFX;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.item.Item;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
-import net.minecraftforge.client.MinecraftForgeClient;
-import net.minecraftforge.common.MinecraftForge;
 
 
 public class ClientProxy extends ServerProxy {
@@ -203,6 +206,9 @@ public class ClientProxy extends ServerProxy {
         RenderingRegistry.registerEntityRenderingHandler(EntityQuagga.class, new RenderQuagga(new ModelQuagga(), 0.5F));
         RenderingRegistry.registerEntityRenderingHandler(EntityTerrorBird.class, new RenderTerrorBird(new ModelTerrorBird(), 0.5F));
 
+        RenderingRegistry.registerEntityRenderingHandler(EntityToyBall.class, new RenderToyBall());
+
+        
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(FABlockRegistry.INSTANCE.figurineBlock), new ItemFigurineRenderer());
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(FABlockRegistry.INSTANCE.vaseVoluteBlock), new ItemVaseVoluteRenderer());
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(FABlockRegistry.INSTANCE.vaseAmphoraBlock), new ItemVaseAmphoraRenderer());

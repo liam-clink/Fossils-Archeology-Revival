@@ -70,6 +70,8 @@ import com.github.revival.server.handler.LocalizationStrings;
 import com.github.revival.server.handler.PickupHandler;
 import com.github.revival.server.item.FAItemRegistry;
 import com.github.revival.server.message.MessageFoodParticles;
+import com.github.revival.server.message.MessageHappyParticles;
+import com.github.revival.server.message.MessageRollBall;
 import com.github.revival.server.message.MessageSetDay;
 import com.github.revival.server.util.FossilFoodMappings;
 
@@ -133,6 +135,8 @@ public class Revival {
         channel = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
         channel.registerMessage(MessageFoodParticles.class, MessageFoodParticles.class, 0, Side.CLIENT);
         channel.registerMessage(MessageSetDay.class, MessageSetDay.class, 1, Side.CLIENT);
+        channel.registerMessage(MessageRollBall.class, MessageRollBall.class, 2, Side.CLIENT);
+        channel.registerMessage(MessageHappyParticles.class, MessageHappyParticles.class, 3, Side.CLIENT);
         MinecraftForge.EVENT_BUS.register(new FossilBonemealEvent());
         MinecraftForge.EVENT_BUS.register(new EventPlayer());
         VillagerRegistry.instance().registerVillageTradeHandler(10, new FossilTradeHandler());

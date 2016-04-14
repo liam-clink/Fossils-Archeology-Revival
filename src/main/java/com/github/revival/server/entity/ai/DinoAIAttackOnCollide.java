@@ -1,11 +1,13 @@
 package com.github.revival.server.entity.ai;
 
-import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+
+import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
+import com.github.revival.server.entity.mob.test.EntityToyBase;
 
 public class DinoAIAttackOnCollide extends EntityAIBase {
     private final EntityNewPrehistoric dino;
@@ -62,8 +64,11 @@ public class DinoAIAttackOnCollide extends EntityAIBase {
     @Override
     public void updateTask() {
         EntityLivingBase entitylivingbase = this.dino.getAttackTarget();
+        if(entitylivingbase instanceof EntityToyBase && dino.ticksTillPlay > 0){
+        	dino.setAttackTarget(null);
+        	return;
+        }
         this.dino.getLookHelper().setLookPositionWithEntity(entitylivingbase, 30.0F, 30.0F);
-
         if ((this.field_75437_f || this.dino.getEntitySenses().canSee(entitylivingbase)) && --this.field_75445_i <= 0) {
             this.field_75445_i = 4 + this.dino.getRNG().nextInt(7);
 

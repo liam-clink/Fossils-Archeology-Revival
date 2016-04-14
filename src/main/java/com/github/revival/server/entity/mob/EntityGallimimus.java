@@ -23,39 +23,39 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
 public class EntityGallimimus extends EntityNewPrehistoric {
-    public static final double baseDamage = 1;
-    public static final double maxDamage = 3;
-    public static final double baseHealth = 8;
-    public static final double maxHealth = 40;
-    public static final double baseSpeed = 0.25D;
-    public static final double maxSpeed = 0.4D;
+	public static final double baseDamage = 1;
+	public static final double maxDamage = 3;
+	public static final double baseHealth = 8;
+	public static final double maxHealth = 40;
+	public static final double baseSpeed = 0.25D;
+	public static final double maxSpeed = 0.4D;
 
-    public EntityGallimimus(World world) {
-        super(world, EnumPrehistoric.Gallimimus);
-        this.setSize(1.1F, 2F);
-        this.pediaScale = 6F;
-        this.hasFeatherToggle = true;
-        this.featherToggle = FossilConfig.featheredGallimimus;
-        minSize = 0.5F;
-        maxSize = 2.2F;
-        teenAge = 4;
-        developsResistance = true;
-        breaksBlocks = false;
-        favoriteFood = Items.carrot;
-    }
+	public EntityGallimimus(World world) {
+		super(world, EnumPrehistoric.Gallimimus);
+		this.setSize(1.1F, 2F);
+		this.pediaScale = 6F;
+		this.hasFeatherToggle = true;
+		this.featherToggle = FossilConfig.featheredGallimimus;
+		minSize = 0.5F;
+		maxSize = 2.2F;
+		teenAge = 4;
+		developsResistance = true;
+		breaksBlocks = false;
+		favoriteFood = Items.carrot;
+	}
 
-    @Override
+	@Override
 	public int getAttackLength() {
-        return 30;
-    }
+		return 30;
+	}
 
-    @Override
-    protected void applyEntityAttributes() {
-        super.applyEntityAttributes();
-        getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(baseSpeed);
-        getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(baseHealth);
-        getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(baseDamage);
-    }
+	@Override
+	protected void applyEntityAttributes() {
+		super.applyEntityAttributes();
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(baseSpeed);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(baseHealth);
+		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(baseDamage);
+	}
 
 	/*public static final double baseHealth = EnumPrehistoric.Gallimimus.Health0;
 
@@ -77,7 +77,7 @@ public class EntityGallimimus extends EntityNewPrehistoric {
 	{
 		super(var1, EnumPrehistoric.Gallimimus);
 		this.updateSize();
-		
+
 		this.adultAge = EnumPrehistoric.Gallimimus.AdultAge;
 		// Set initial size for hitbox. (length/width, height)
 		this.setSize(1.0F, 2.0F);
@@ -267,155 +267,149 @@ public class EntityGallimimus extends EntityNewPrehistoric {
 		return baby;
 	}*/
 
-    @Override
-    public void setSpawnValues() {
-    }
+	@Override
+	public void setSpawnValues() {
+	}
 
-    @Override
-    public Activity aiActivityType() {
-        return Activity.DIURINAL;
-    }
+	@Override
+	public Activity aiActivityType() {
+		return Activity.DIURINAL;
+	}
 
-    @Override
-    public Attacking aiAttackType() {
+	@Override
+	public Attacking aiAttackType() {
 
-        return Attacking.BASIC;
-    }
+		return Attacking.BASIC;
+	}
 
-    @Override
-    public Climbing aiClimbType() {
+	@Override
+	public Climbing aiClimbType() {
 
-        return Climbing.NONE;
-    }
+		return Climbing.NONE;
+	}
 
-    @Override
-    public Following aiFollowType() {
+	@Override
+	public Following aiFollowType() {
 
-        return Following.SKITTISH;
-    }
+		return Following.SKITTISH;
+	}
 
-    @Override
-    public Jumping aiJumpType() {
+	@Override
+	public Jumping aiJumpType() {
 
-        return Jumping.TWOBLOCKS;
-    }
+		return Jumping.TWOBLOCKS;
+	}
 
-    @Override
-    public Response aiResponseType() {
+	@Override
+	public Response aiResponseType() {
 
-        return Response.SCARED;
-    }
+		return Response.SCARED;
+	}
 
-    @Override
-    public Stalking aiStalkType() {
+	@Override
+	public Stalking aiStalkType() {
 
-        return Stalking.NONE;
-    }
+		return Stalking.NONE;
+	}
 
-    @Override
-    public Taming aiTameType() {
+	@Override
+	public Taming aiTameType() {
 
-        return Taming.FEEDING;
-    }
+		return Taming.FEEDING;
+	}
 
-    @Override
-    public Untaming aiUntameType() {
+	@Override
+	public Untaming aiUntameType() {
 
-        return Untaming.ATTACK;
-    }
+		return Untaming.ATTACK;
+	}
 
-    @Override
-    public Moving aiMovingType() {
+	@Override
+	public Moving aiMovingType() {
 
-        return Moving.WALK;
-    }
+		return Moving.WALK;
+	}
 
-    @Override
-    public WaterAbility aiWaterAbilityType() {
+	@Override
+	public WaterAbility aiWaterAbilityType() {
 
-        return WaterAbility.NONE;
-    }
+		return WaterAbility.NONE;
+	}
 
-    @Override
-    public boolean doesFlock() {
+	@Override
+	public boolean doesFlock() {
 
-        return true;
-    }
+		return true;
+	}
 
-    @Override
-    public Item getOrderItem() {
+	@Override
+	public Item getOrderItem() {
 
-        return Items.stick;
-    }
+		return Items.stick;
+	}
 
-    @Override
+	@Override
 	public void onUpdate() {
-        super.onUpdate();
-        //Revival.proxy.doChainBuffer(tailbuffer, this);
-    }
+		super.onUpdate();
+		//Revival.proxy.doChainBuffer(tailbuffer, this);
+	}
 
-    @Override
+	@Override
 	public void updateSize() {
-        double healthStep;
-        double attackStep;
-        double speedStep;
-        healthStep = (maxHealth - baseHealth) / (this.getAdultAge() + 1);
-        attackStep = (maxDamage - baseDamage) / (this.getAdultAge() + 1);
-        speedStep = (maxSpeed - baseSpeed) / (this.getAdultAge() + 1);
+		double healthStep;
+		double attackStep;
+		double speedStep;
+		healthStep = (maxHealth - baseHealth) / (this.getAdultAge() + 1);
+		attackStep = (maxDamage - baseDamage) / (this.getAdultAge() + 1);
+		speedStep = (maxSpeed - baseSpeed) / (this.getAdultAge() + 1);
 
 
-        if (this.getDinoAge() <= this.getAdultAge()) {
+		if (this.getDinoAge() <= this.getAdultAge()) {
 
-            this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(Math.round(baseHealth + (healthStep * this.getDinoAge())));
-            this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(Math.round(baseDamage + (attackStep * this.getDinoAge())));
-            this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(baseSpeed + (speedStep * this.getDinoAge()));
-        }
-    }
+			this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(Math.round(baseHealth + (healthStep * this.getDinoAge())));
+			this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(Math.round(baseDamage + (attackStep * this.getDinoAge())));
+			this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(baseSpeed + (speedStep * this.getDinoAge()));
+		}
+	}
 
-    @Override
-    public int getAdultAge() {
-        return 10;
-    }
+	@Override
+	public int getAdultAge() {
+		return 10;
+	}
 
-    @Override
+	@Override
 	public int getTailSegments() {
-        return 3;
-    }
+		return 3;
+	}
 
-    @Override
+	@Override
 	public void onLivingUpdate() {
-        super.onLivingUpdate();
-        if (this.getAnimation() == animation_attack && (this.getAnimationTick() >= 10 && this.getAnimationTick() <= 13) && this.getAttackTarget() != null) {
-            this.attackEntityAsMob(this.getAttackTarget());
-        }
-    }
+		super.onLivingUpdate();
+		if (this.getAnimation() == animation_attack && (this.getAnimationTick() >= 10 && this.getAnimationTick() <= 13) && this.getAttackTarget() != null) {
+			this.attackEntityAsMob(this.getAttackTarget());
+		}
+	}
 
-    @Override
+	@Override
 	public boolean attackEntityAsMob(Entity entity) {
-        if (this.getAttackBounds().intersectsWith(entity.boundingBox)) {
-            if (this.getAnimation() == NO_ANIMATION) {
-                this.setAnimation(animation_attack);
-                return false;
-            }
-            if (this.getAnimation() == animation_attack && (this.getAnimationTick() >= 10 && this.getAnimationTick() <= 13)) {
-                IAttributeInstance iattributeinstance = this.getEntityAttribute(SharedMonsterAttributes.attackDamage);
-                boolean flag = entity.attackEntityFrom(DamageSource.generic, (float) iattributeinstance.getAttributeValue());
-
-                if (flag) {
-                    if (entity.ridingEntity != null) {
-                        if (entity.ridingEntity == this) {
-                            entity.mountEntity(null);
-                        }
-                    }
-                    entity.motionY += (0.4000000059604645D / 2);
-                    knockbackEntity(entity, 0.5F, 0.1F);
-
-                }
-
-                return flag;
-            }
-        }
-        return false;
-    }
-    //public boolean canDinoHunt(Entity target){
-}
+		if (this.getAttackBounds().intersectsWith(entity.boundingBox)) {
+			if (this.getAnimation() == NO_ANIMATION) {
+				this.setAnimation(animation_attack);
+				return false;
+			}
+			if (this.getAnimation() == animation_attack && (this.getAnimationTick() >= 10 && this.getAnimationTick() <= 13)) {
+				IAttributeInstance iattributeinstance = this.getEntityAttribute(SharedMonsterAttributes.attackDamage);
+				boolean flag = entity.attackEntityFrom(DamageSource.generic, (float) iattributeinstance.getAttributeValue());
+						if (entity.ridingEntity != null) {
+							if (entity.ridingEntity == this) {
+								entity.mountEntity(null);
+							}
+						}
+				entity.motionY += (0.4000000059604645D / 2);
+				knockbackEntity(entity, 0.5F, 0.1F);
+			}
+		}
+		return false;
+	}
+	//public boolean canDinoHunt(Entity target){
+	}

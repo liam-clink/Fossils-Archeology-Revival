@@ -1,8 +1,18 @@
 package com.github.revival.server.entity.mob;
 
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.IAttributeInstance;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.MathHelper;
+import net.minecraft.world.World;
+
 import com.github.revival.server.config.FossilConfig;
 import com.github.revival.server.entity.ai.DinoAILeapAtTarget;
 import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
+import com.github.revival.server.entity.mob.test.EntityToyBase;
 import com.github.revival.server.enums.EnumPrehistoric;
 import com.github.revival.server.enums.EnumPrehistoricAI.Activity;
 import com.github.revival.server.enums.EnumPrehistoricAI.Attacking;
@@ -15,14 +25,6 @@ import com.github.revival.server.enums.EnumPrehistoricAI.Stalking;
 import com.github.revival.server.enums.EnumPrehistoricAI.Taming;
 import com.github.revival.server.enums.EnumPrehistoricAI.Untaming;
 import com.github.revival.server.enums.EnumPrehistoricAI.WaterAbility;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.attributes.IAttributeInstance;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
-import net.minecraft.world.World;
 
 public class EntityDeinonychus extends EntityNewPrehistoric {
 
@@ -197,7 +199,11 @@ public class EntityDeinonychus extends EntityNewPrehistoric {
     public void applyEntityCollision(Entity entity) {
         super.applyEntityCollision(entity);
         if (this.getAttackTarget() != null) {
-            if (this.getAttackTarget() == entity && this.getAnimation() == animation_attack && !onGround && this.ridingEntity != entity) {
+            if (this.getAttackTarget() == entity && this.getAnimation() == animation_attack && !onGround && this.ridingEntity != entity && (entity instanceof EntityToyBase)) {
+            	this.knockBackMob(entity, 0.1F, 0.1F, 0.1F);
+            	entity.attackEntityFrom(DamageSource.causeMobDamage(this), 1);
+            }
+            else if (this.getAttackTarget() == entity && this.getAnimation() == animation_attack && !onGround && this.ridingEntity != entity) {
                 this.mountEntity(entity);
             }
         }
