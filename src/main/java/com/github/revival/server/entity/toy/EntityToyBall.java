@@ -1,8 +1,10 @@
 package com.github.revival.server.entity.toy;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 import com.github.revival.Revival;
@@ -25,7 +27,7 @@ public class EntityToyBall extends EntityToyBase{
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0);
 		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(1);
 	}
-	
+
 	protected void entityInit(){
 		super.entityInit();
 		this.dataWatcher.addObject(20, 0);
@@ -49,6 +51,14 @@ public class EntityToyBall extends EntityToyBase{
 		return this.dataWatcher.getWatchableObjectInt(20);
 	}
 
+	@Override
+	public void applyEntityCollision(Entity entity) {
+		if(entity != null && !(entity instanceof EntityToyBase)){
+		this.rotationYaw = entity.rotationYaw;
+        this.addVelocity((double)(-MathHelper.sin(this.rotationYaw * (float)Math.PI / 180.0F) * 0.5F), 0.4D, (double)(MathHelper.cos(this.rotationYaw * (float)Math.PI / 180.0F) * 0.5F));
+		}
+	}
+
 	public void onUpdate(){
 		super.onUpdate();
 		if(this.motionX > 0 || this.motionZ < 0 || this.motionZ > 0 || this.motionZ < 0){
@@ -61,7 +71,7 @@ public class EntityToyBall extends EntityToyBase{
 	protected ItemStack getItem() {
 		return new ItemStack(FAItemRegistry.INSTANCE.toyBall, 1, this.getColor());
 	}
-	
+
 	@Override
 	protected String getAttackNoise() {
 		return "mob.slime.attack";

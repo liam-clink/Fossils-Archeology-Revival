@@ -197,6 +197,7 @@ public class ModelDilophosaurus extends ModelNewPrehistoric {
 		this.chainWave(rightArmParts, speed, 0.15F, -3, entity.ticksExisted, 1);
 		this.chainSwing(tailParts, speed, 0.15F, -3, entity.ticksExisted, 1);
 		this.chainSwing(tailParts, speed2, 0.25F, -3, f, f1);
+		this.chainSwing(neckParts, speed2, 0.5F, 3, f, f1);
 		this.chainWave(neckParts, speed, 0.15F, 3, entity.ticksExisted, 1);
 		{
 			float sitProgress = ((EntityNewPrehistoric) (entity)).sitProgress;

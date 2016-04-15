@@ -189,6 +189,7 @@ public class EntityDeinonychus extends EntityNewPrehistoric {
         super.applyEntityCollision(entity);
         if (this.getAttackTarget() != null) {
             if (this.getAttackTarget() == entity && this.getAnimation() == ATTACK_ANIMATION && !onGround && this.ridingEntity != entity && (entity instanceof EntityToyBase)) {
+                this.mountEntity(entity);
             	this.knockBackMob(entity, 0.1F, 0.1F, 0.1F);
             	entity.attackEntityFrom(DamageSource.causeMobDamage(this), 1);
             }
