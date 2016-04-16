@@ -15,9 +15,12 @@ buildscript {
     }
 }
 
-apply plugin: "forge"
+project.ext.buildnumber = ""
+if (System.getenv().BUILD_NUMBER) project.buildnumber = "-" + System.getenv().BUILD_NUMBER
 
-version = getVersion("VERSION")
+apply plugin: "forge"
+  
+version = getVersion("VERSION") + project.buildnumber
 def llibrary_version = getVersion("LLIBRARY_VERSION")
 group = "com.github.revival"
 archivesBaseName = "fossils_and_archeology_revival"
