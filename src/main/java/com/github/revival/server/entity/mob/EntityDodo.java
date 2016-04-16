@@ -115,7 +115,7 @@ public class EntityDodo extends EntityNewPrehistoric {
     @Override
     public Response aiResponseType() {
 
-        return Response.NONE;
+        return Response.SCARED;
     }
 
     @Override
