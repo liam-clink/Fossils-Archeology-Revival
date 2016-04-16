@@ -1,22 +1,24 @@
 package com.github.revival.server.message;
 
-import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import io.netty.buffer.ByteBuf;
+
+import java.util.Random;
+
 import net.ilexiconn.llibrary.server.network.AbstractMessage;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.particle.EntityBlockDustFX;
-import net.minecraft.client.particle.EntityBreakingFX;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.server.MinecraftServer;
 
-import java.util.Random;
+import com.github.revival.Revival;
+import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
+
+import cpw.mods.fml.common.network.simpleimpl.MessageContext;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class MessageFoodParticles extends AbstractMessage<MessageFoodParticles> {
 
@@ -101,8 +103,7 @@ public class MessageFoodParticles extends AbstractMessage<MessageFoodParticles> 
         float f = (float) (rand.nextFloat() * (entity.boundingBox.maxX - entity.boundingBox.minX) + entity.boundingBox.minX);
         float f1 = (float) (rand.nextFloat() * (entity.boundingBox.maxY - entity.boundingBox.minY) + entity.boundingBox.minY);
         float f2 = (float) (rand.nextFloat() * (entity.boundingBox.maxZ - entity.boundingBox.minZ) + entity.boundingBox.minZ);
-        Minecraft.getMinecraft().effectRenderer.addEffect(new EntityBreakingFX(entity.worldObj, f, f1, f2, motionX, motionY, motionZ, item, 0));
-
+        Revival.PROXY.spawnPacketItemParticles(entity.worldObj, f, f1, f2, motionX, motionY, motionZ, item);
     }
 
     public static final void spawnBlockParticle(Entity entity, Block block) {
@@ -113,7 +114,7 @@ public class MessageFoodParticles extends AbstractMessage<MessageFoodParticles> 
         float f = (float) (rand.nextFloat() * (entity.boundingBox.maxX - entity.boundingBox.minX) + entity.boundingBox.minX);
         float f1 = (float) (rand.nextFloat() * (entity.boundingBox.maxY - entity.boundingBox.minY) + entity.boundingBox.minY);
         float f2 = (float) (rand.nextFloat() * (entity.boundingBox.maxZ - entity.boundingBox.minZ) + entity.boundingBox.minZ);
-        Minecraft.getMinecraft().effectRenderer.addEffect(new EntityBlockDustFX(entity.worldObj, f, f1, f2, motionX, motionY, motionZ, block, 0));
+        Revival.PROXY.spawnPacketBlockParticles(entity.worldObj, f, f1, f2, motionX, motionY, motionZ, block);
 
     }
 

@@ -5,15 +5,13 @@ import io.netty.buffer.ByteBuf;
 import java.util.Random;
 
 import net.ilexiconn.llibrary.server.network.AbstractMessage;
-import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.particle.EntityBlockDustFX;
-import net.minecraft.client.particle.EntityHeartFX;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.server.MinecraftServer;
 
+import com.github.revival.Revival;
 import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
@@ -49,7 +47,7 @@ public class MessageHappyParticles extends AbstractMessage<MessageHappyParticles
         float f = (float) (rand.nextFloat() * (entity.boundingBox.maxX - entity.boundingBox.minX) + entity.boundingBox.minX);
         float f1 = (float) (rand.nextFloat() * (entity.boundingBox.maxY - entity.boundingBox.minY) + entity.boundingBox.minY);
         float f2 = (float) (rand.nextFloat() * (entity.boundingBox.maxZ - entity.boundingBox.minZ) + entity.boundingBox.minZ);
-        Minecraft.getMinecraft().effectRenderer.addEffect(new EntityHeartFX(entity.worldObj, f, f1, f2, motionX, motionY, motionZ));
+        Revival.PROXY.spawnPacketHeartParticles(entity.worldObj, f, f1, f2, motionX, motionY, motionZ);
 
     }
 

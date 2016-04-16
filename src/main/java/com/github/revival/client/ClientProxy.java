@@ -24,14 +24,19 @@ import com.github.revival.server.handler.EventNewMenu;
 import com.github.revival.server.handler.EventOverlay;
 import com.github.revival.server.handler.FossilClientEvents;
 import com.github.revival.server.item.FAItemRegistry;
+
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import net.ilexiconn.llibrary.client.model.tools.ChainBuffer;
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.particle.EntityBlockDustFX;
+import net.minecraft.client.particle.EntityBreakingFX;
 import net.minecraft.client.particle.EntityFX;
+import net.minecraft.client.particle.EntityHeartFX;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
@@ -192,5 +197,17 @@ public class ClientProxy extends ServerProxy {
     @Override
     public ChainBuffer getChainBuffer(int tailSegments) {
         return new ChainBuffer();
+    }
+    
+    public void spawnPacketHeartParticles(World world, float f, float f1, float f2, double motionX, double motionY, double motionZ){
+        Minecraft.getMinecraft().effectRenderer.addEffect(new EntityHeartFX(world, f, f1, f2, motionX, motionY, motionZ));
+    }
+    
+    public void spawnPacketItemParticles(World world, float f, float f1, float f2, double motionX, double motionY, double motionZ, Item item){
+        Minecraft.getMinecraft().effectRenderer.addEffect(new EntityBreakingFX(world, f, f1, f2, motionX, motionY, motionZ, item, 0));
+    }
+    
+    public void spawnPacketBlockParticles(World world, float f, float f1, float f2, double motionX, double motionY, double motionZ, Block block){
+        Minecraft.getMinecraft().effectRenderer.addEffect(new EntityBlockDustFX(world, f, f1, f2, motionX, motionY, motionZ, block, 0));
     }
 }
