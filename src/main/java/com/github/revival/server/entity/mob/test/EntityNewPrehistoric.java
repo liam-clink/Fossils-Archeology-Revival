@@ -320,7 +320,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		if (worldObj.isRemote) {
 			boolean isSleeping = (this.dataWatcher.getWatchableObjectByte(SLEEPING_INDEX) & 1) != 0;
 
-			if ((isSleeping = this.isSleeping)) {
+			if ((isSleeping != this.isSleeping)) {
 				ticksSlept = 0;
 			}
 
