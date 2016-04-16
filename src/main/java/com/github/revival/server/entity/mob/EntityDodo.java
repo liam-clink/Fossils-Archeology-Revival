@@ -27,8 +27,8 @@ public class EntityDodo extends EntityNewPrehistoric {
     public static final double maxDamage = 1;
     public static final double baseHealth = 4;
     public static final double maxHealth = 10;
-    public static final double baseSpeed = 0.15D;
-    public static final double maxSpeed = 0.45D;
+    public static final double baseSpeed = 0.2D;
+    public static final double maxSpeed = 0.4D;
     public static final int FAT_INDEX = 29;
 
     public EntityDodo(World world) {
@@ -42,11 +42,6 @@ public class EntityDodo extends EntityNewPrehistoric {
         breaksBlocks = false;
         favoriteFood = Items.melon;
         hasTeenTexture = false;
-    }
-
-    @Override
-    public boolean isAIEnabled() {
-        return false;
     }
 
     @Override

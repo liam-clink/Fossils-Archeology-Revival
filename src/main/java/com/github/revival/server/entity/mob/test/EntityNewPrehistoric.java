@@ -16,6 +16,7 @@ import com.github.revival.server.message.MessageFoodParticles;
 import com.github.revival.server.message.MessageHappyParticles;
 import com.github.revival.server.message.MessageSetDay;
 import com.github.revival.server.util.FoodMappings;
+
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -47,6 +48,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
+
 import org.lwjgl.opengl.GL11;
 
 import java.io.BufferedReader;
@@ -139,7 +141,6 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		this.tasks.addTask(0, aiSit);
 		this.setHunger(100 / 2);
 		this.tasks.addTask(7, new DinoAIAttackOnCollide(this, 1.0D, true));
-		this.tasks.addTask(1, new DinoAIRunAway(this, EntityLivingBase.class, 16.0F, this.getSpeed() / 2, this.getSpeed()));
 		this.tasks.addTask(1, new DinoAITerratorial(this, EntityLivingBase.class, 4.0F));
 		this.tasks.addTask(2, new DinoAIWaterAgressive(this, 0.009D));
 		this.tasks.addTask(2, new DinoAIFish(this, 1));
@@ -151,6 +152,8 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		this.tasks.addTask(5, new DinoAIFeeder(this, 48));
 		this.tasks.addTask(5, new DinoAIWaterFeeder(this, 50, 0.0017D));
 		this.tasks.addTask(6, new DinoAILookAtEntity(this, EntityLivingBase.class, 8));
+		this.tasks.addTask(7, new DinoAIHideFromSun(this));
+		this.tasks.addTask(8, new DinoAIRunAway(this, EntityLivingBase.class, 16.0F, this.getSpeed() / 2, this.getSpeed()));
 		this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
 		this.targetTasks.addTask(2, new DinoAIAgressive(this, EntityLivingBase.class, 1, true, isCannibal()));
 		this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
@@ -462,7 +465,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		if (this.aiActivityType() == Activity.DIURINAL && !this.isDaytime()) {
 			return true;
 		}
-		if (this.aiActivityType() == Activity.NOCTURNAL && this.isDaytime()) {
+		if (this.aiActivityType() == Activity.NOCTURNAL && this.isDaytime() && !this.worldObj.canBlockSeeTheSky(MathHelper.floor_double(this.posX), (int)this.boundingBox.minY, MathHelper.floor_double(this.posZ))) {
 			return true;
 		}
 		if (this.aiActivityType() == Activity.BOTH) {
@@ -542,16 +545,16 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 			ticksSlept++;
 		}
 
-		if (!worldObj.isRemote && !this.isSitting() && this.getRNG().nextInt(1000) == 1 && !this.isRiding() && (this.getAnimation() == NO_ANIMATION || this.getAnimation() == SPEAK_ANIMATION) && !this.isSleeping()) {
+		if (!worldObj.isRemote && !this.isSitting() && this.getRNG().nextInt(100) == 1 && !this.isRiding() && (this.getAnimation() == NO_ANIMATION || this.getAnimation() == SPEAK_ANIMATION) && !this.isSleeping()) {
 			this.setSitting(true);
 			ticksSitted = 0;
 		}
 
-		if (!worldObj.isRemote && (this.isSitting() && ticksSitted > 100 && this.getRNG().nextInt(1000) == 1 || this.getAttackTarget() != null) && !this.isSleeping()) {
+		if (!worldObj.isRemote && (this.isSitting() && ticksSitted > 100 && this.getRNG().nextInt(100) == 1 || this.getAttackTarget() != null) && !this.isSleeping()) {
 			this.setSitting(false);
 			ticksSitted = 0;
 		}
-		if (!worldObj.isRemote && this.getRNG().nextInt(10) == 1 && this.canSleep() && (this.getAnimation() == NO_ANIMATION || this.getAnimation() == SPEAK_ANIMATION)) {
+		if (!worldObj.isRemote && this.getRNG().nextInt(500) == 1 && this.canSleep() && (this.getAnimation() == NO_ANIMATION || this.getAnimation() == SPEAK_ANIMATION)) {
 			this.setSitting(false);
 			this.setSleeping(true);
 			ticksSlept = 0;
@@ -1260,7 +1263,10 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 				this.sendStatusMessage(EnumSituation.Betrayed);
 			}
 		}
-		if (i > 0) this.setSitting(false);
+		if (i > 0){
+			this.setSitting(false);
+			this.setSleeping(false);
+		}
 		if (dmg.getEntity() != null) this.setMood(this.getMood() - 5);
 		if (this.getHurtSound() != null) {
 			if (this.getAnimation() != null) {
@@ -1915,6 +1921,26 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 			s = "territorial";
 		}
 		return "pedia.temperament." + s;
+	}
+
+	public boolean canRunFrom(Entity entity) {
+		if (width <= entity.width) {
+			if (entity instanceof EntityNewPrehistoric) {
+				EntityNewPrehistoric mob = (EntityNewPrehistoric) entity;
+				if (mob.selfType.diet != EnumDiet.HERBIVORE){
+					return true;
+				}
+			}else{
+				if(entity instanceof EntityPlayer){
+					EntityPlayer player = (EntityPlayer)entity;
+					if(this.getOwner() == player){
+						return false;
+					}
+				}
+				return true;		
+			}
+		}
+		return false;
 	}
 
 }

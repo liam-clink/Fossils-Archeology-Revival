@@ -129,7 +129,7 @@ public class ModelDodo extends ModelNewPrehistoric {
 			this.beakUpper.rotationPointZ = -4F;
 			this.beakLower.rotationPointZ = -4F;
 		}
-		float speed = 1.8F;
+		float speed = 0.9F;
 		float speed2 = 0.1F;
 
 		ModelUtils.faceTargetMod(head, f3, f4, 1F);

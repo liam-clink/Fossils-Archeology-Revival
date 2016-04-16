@@ -22,8 +22,8 @@ public class EntityTyrannosaurus extends EntityNewPrehistoric {
     public static final double maxDamage = 14;
     public static final double baseHealth = 15;
     public static final double maxHealth = 82;
-    public static final double baseSpeed = 0.25D;
-    public static final double maxSpeed = 0.4D;
+    public static final double baseSpeed = 0.4D;
+    public static final double maxSpeed = 0.5D;
     public static Animation ROAR_ANIMATION = Animation.create(100);
 
     public EntityTyrannosaurus(World world) {
