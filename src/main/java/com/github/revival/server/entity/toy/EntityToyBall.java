@@ -55,7 +55,7 @@ public class EntityToyBall extends EntityToyBase{
 	public void applyEntityCollision(Entity entity) {
 		if(entity != null && !(entity instanceof EntityToyBase)){
 		this.rotationYaw = entity.rotationYaw;
-        this.addVelocity((double)(-MathHelper.sin(this.rotationYaw * (float)Math.PI / 180.0F) * 0.5F), 0.4D, (double)(MathHelper.cos(this.rotationYaw * (float)Math.PI / 180.0F) * 0.5F));
+        this.addVelocity((double)(-MathHelper.sin(this.rotationYaw * (float)Math.PI / 180.0F) * 0.5F), 0.1D, (double)(MathHelper.cos(this.rotationYaw * (float)Math.PI / 180.0F) * 0.5F));
 		}
 	}
 
