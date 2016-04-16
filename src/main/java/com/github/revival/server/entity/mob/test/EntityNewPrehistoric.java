@@ -106,6 +106,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	public int ticksSitted;
 	protected boolean isSitting;
 	public float sleepProgress;
+	public float climbProgress;
 	public int ticksSlept;
 	protected boolean isSleeping;
 	protected boolean developsResistance;
@@ -768,6 +769,14 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 			if(sitProgress != 0)sitProgress = 0F;
 		} else if (!sleeping && sleepProgress > 0.0F) {
 			sleepProgress -= 0.5F;
+			if(sitProgress != 0)sitProgress = 0F;
+		}
+		boolean climbing = this.aiClimbType() == Climbing.ARTHROPOD ? this.isBesideClimbableBlock() && !this.onGround : false;
+		if (climbing && climbProgress < 20.0F) {
+			climbProgress += 1F;
+			if(sitProgress != 0)sitProgress = 0F;
+		} else if (!climbing && climbProgress > 0.0F) {
+			climbProgress -= 1F;
 			if(sitProgress != 0)sitProgress = 0F;
 		}
 		if(this.ticksExisted > 1)
