@@ -80,7 +80,6 @@ public enum FAItemRegistry {
     public Item goldjavelin;
     public Item diamondjavelin;
     public Item ancientJavelin;
-    public Item cookedDinoMeat;
     public Item fossilrecordBones;
     public Item recordNano_Anu;
     public Item skull;
@@ -139,7 +138,6 @@ public enum FAItemRegistry {
         ribCage = new RibCageItem(bone, 3, 1).setUnlocalizedName(LocalizationStrings.RIBCAGE_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
         femurs = new FemursItem(bone, 3, 2).setUnlocalizedName(LocalizationStrings.FEMURS_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
         feet = new FeetItem(bone, 3, 3).setUnlocalizedName(LocalizationStrings.FEET_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
-        cookedDinoMeat = new ForgeFoodItem(8, 0.8F, true, "Dino_Steak").setUnlocalizedName(LocalizationStrings.DINO_STEAK_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
         cookedChickenSoup = new ForgeItemItem("Cooked_Chicken_Soup").setUnlocalizedName(LocalizationStrings.COOKED_CHICKEN_SOUP_NAME).setMaxStackSize(1).setContainerItem(Items.bucket).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
         rawChickenSoup = new ForgeItemItem("Raw_Chicken_Soup").setUnlocalizedName(LocalizationStrings.RAW_CHICKEN_SOUP_NAME).setMaxStackSize(1).setContainerItem(Items.bucket).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
         chickenEss = new ChickenEssItem(10, 0.0F, false, "Essence_Of_Chicken").setUnlocalizedName(LocalizationStrings.EOC_NAME).setContainerItem(Items.glass_bottle).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);

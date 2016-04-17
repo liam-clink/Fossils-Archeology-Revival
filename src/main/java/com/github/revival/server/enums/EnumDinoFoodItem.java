@@ -56,7 +56,6 @@ public enum EnumDinoFoodItem {
     Pachycephalosaurus(EnumPrehistoric.Pachycephalosaurus.foodItem, 40, 3),
     Deinonychus(EnumPrehistoric.Deinonychus.foodItem, 35, 4),
     Gallimimus(EnumPrehistoric.Gallimimus.foodItem, 58, 5),
-    DinoMeatCooked(FAItemRegistry.INSTANCE.cookedDinoMeat, 75, 8),
     DodoWing(EnumPrehistoric.Dodo.foodItem, 23, 3),
     DodoWingCooked(EnumPrehistoric.Dodo.cookedFoodItem, 40, 5),
     DodoEgg(EnumPrehistoric.Dodo.birdEggItem, 10, 3),
@@ -137,7 +136,6 @@ public enum EnumDinoFoodItem {
         dinoType.FoodItemList.addItem(Pachycephalosaurus);
         dinoType.FoodItemList.addItem(Deinonychus);
         dinoType.FoodItemList.addItem(Gallimimus);
-        dinoType.FoodItemList.addItem(DinoMeatCooked);
         dinoType.FoodItemList.addItem(DodoWing);
         dinoType.FoodItemList.addItem(DodoWingCooked);
         dinoType.FoodItemList.addItem(TerrorBirdMeat);

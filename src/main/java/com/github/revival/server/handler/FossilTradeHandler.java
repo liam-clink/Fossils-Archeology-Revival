@@ -17,7 +17,6 @@ public class FossilTradeHandler implements IVillageTradeHandler {
         recipeList.add(new MerchantRecipe(new ItemStack(Items.emerald, 12), new ItemStack(FAItemRegistry.INSTANCE.stonejavelin, 2, 0)));
         recipeList.add(new MerchantRecipe(new ItemStack(Items.emerald, 14), new ItemStack(FAItemRegistry.INSTANCE.chickenEss, 24, 0)));
         // recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald, 2, Revival.relic, 5 ), new ItemStack(Revival.stoneboard, 1, 0)));
-        recipeList.add(new MerchantRecipe(new ItemStack(Items.emerald, 23), new ItemStack(FAItemRegistry.INSTANCE.cookedDinoMeat, 4, 0)));
         recipeList.add(new MerchantRecipe(new ItemStack(FAItemRegistry.INSTANCE.fernSeed, 13), new ItemStack(Items.emerald, 1, 0)));
     }
 }

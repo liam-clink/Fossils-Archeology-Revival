@@ -3,7 +3,7 @@ package com.github.revival.server.enums;
 public enum EnumDinoBones {
     Triceratops,
     Velociraptor,
-    TRex,
+    Tyrannosaurus,
     Pterosaur,
     Plesiosaur,
     Mosasaurus,
