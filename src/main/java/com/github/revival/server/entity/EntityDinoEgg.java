@@ -58,7 +58,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData 
     private static final String COLD = "cold";
     private static final String DRY = "dry";
     private static final String PEDIA = "PediaText.egg.";
-    private static int lastBirthTick;
+    public static int lastBirthTick;
     public final int HatchingNeedTime;
     public int damageTaken;
     public int timeSinceHit;

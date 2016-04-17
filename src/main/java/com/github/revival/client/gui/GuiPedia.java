@@ -39,6 +39,7 @@ import com.github.revival.server.entity.mob.EntityQuagga;
 import com.github.revival.server.entity.mob.EntityTerrorBird;
 import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 import com.github.revival.server.enums.EnumPrehistoric;
+import com.github.revival.server.handler.LocalizationStrings;
 import com.github.revival.server.util.FoodMappings;
 
 import cpw.mods.fml.relauncher.Side;
@@ -366,7 +367,16 @@ public class GuiPedia extends GuiContainer {
         	{
                 int time = (int) Math.floor(((float) egg.getBirthTick() / (float) egg.HatchingNeedTime * 100.0F));
                 String s1 = StatCollector.translateToLocal("pedia.egg.time") + " " + time + "%";
-                printStringXY(s1, wordLength / 2, 160, 157, 126, 103);
+                printStringXY(s1, wordLength / 2, 120, 157, 126, 103);
+            }
+        	{
+                String s1;
+                if ((egg.getBirthTick() >= 0 && egg.getBirthTick() > egg.lastBirthTick) || egg.getBirthTick() >= 100) {
+                	s1 = StatCollector.translateToLocal(LocalizationStrings.PEDIA_EGG_WARM);
+                } else {
+                	s1 = StatCollector.translateToLocal(LocalizationStrings.PEDIA_EGG_COLD);
+                }
+                printStringXY(s1, wordLength / 2, 120, 157, 126, 103);
             }
         }
     }
@@ -480,7 +490,7 @@ public class GuiPedia extends GuiContainer {
                 }
             }
             if (Revival.toPedia instanceof EntityDinoEgg) {
-                renderEgg(k + 100, l + 80, 80, 0, 0, (EntityDinoEgg) Revival.toPedia);
+                renderEgg(k + 100, l + 80, 100, 0, 0, (EntityDinoEgg) Revival.toPedia);
             }
             GL11.glPopMatrix();
         }
@@ -603,7 +613,7 @@ public class GuiPedia extends GuiContainer {
         GL11.glPushMatrix();
         GL11.glEnable(GL11.GL_DEPTH_TEST);
         GL11.glTranslatef((float) posX, (float) posY, 50.0F);
-        GL11.glScalef(-(float) (scaleValue), -(float) scaleValue, (float) scaleValue);
+        GL11.glScalef(-(float) (scaleValue), (float) scaleValue, (float) scaleValue);
         float f2 = 0;
         float f3 = 0;
         float f4 = 0;
@@ -618,9 +628,6 @@ public class GuiPedia extends GuiContainer {
         GL11.glTranslatef(0.0F, mob.yOffset, 0.0F);
         GL11.glRotatef(mob.ticksExisted, 0.0F, 1.0F, 0.0F);
         RenderManager.instance.playerViewY = 180.0F;
-        if (mob instanceof EntityNewPrehistoric) {
-            GL11.glScalef(-((EntityNewPrehistoric) mob).getDinosaurSize(), -((EntityNewPrehistoric) mob).getDinosaurSize(), -((EntityNewPrehistoric) mob).getDinosaurSize());
-        }
         RenderManager.instance.renderEntityWithPosYaw(mob, 0.0D, 0.0D, 0.0D, 0.0F, 0F);
         mob.rotationYaw = f3;
         mob.rotationPitch = f4;
