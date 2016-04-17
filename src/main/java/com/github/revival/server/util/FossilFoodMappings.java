@@ -80,7 +80,7 @@ public class FossilFoodMappings {
         FoodMappings.instance().addToItemMappings(FAItemRegistry.INSTANCE.sjl, 65, EnumDiet.PISCIVORE);
         FoodMappings.instance().addToItemMappings(FAItemRegistry.INSTANCE.failuresaurusFlesh, 15, EnumDiet.CARNIVORE);
         FoodMappings.instance().addToItemMappings(FAItemRegistry.INSTANCE.failuresaurusFlesh, 15, EnumDiet.CARNIVORE_EGG);
-        FoodMappings.instance().addToItemMappings(FAItemRegistry.INSTANCE.livingCoelacanth, 35, EnumDiet.PISCIVORE);
+
         for (int i = 0; i < EnumPrehistoric.values().length; i++) {
             if (EnumPrehistoric.values()[i].timeperiod != EnumTimePeriod.CURRENT) {
                 if (EnumPrehistoric.values()[i].type != EnumMobType.FISH) {
@@ -150,7 +150,6 @@ public class FossilFoodMappings {
         FoodMappings.instance().addToItemMappings(FAItemRegistry.INSTANCE.failuresaurusFlesh, 15, EnumDiet.PISCCARNIVORE);
         FoodMappings.instance().addToItemMappings(Items.fish, 30, EnumDiet.PISCCARNIVORE);
         FoodMappings.instance().addToItemMappings(Items.cooked_fished, 45, EnumDiet.PISCCARNIVORE);
-        FoodMappings.instance().addToItemMappings(FAItemRegistry.INSTANCE.livingCoelacanth, 35, EnumDiet.PISCCARNIVORE);
         for (int i = 0; i < EnumPrehistoric.values().length; i++) {
             if (EnumPrehistoric.values()[i].timeperiod != EnumTimePeriod.CURRENT) {
                 if (EnumPrehistoric.values()[i].type != EnumMobType.FISH) {

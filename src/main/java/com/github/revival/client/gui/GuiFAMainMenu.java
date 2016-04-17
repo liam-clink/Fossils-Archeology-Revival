@@ -1,19 +1,96 @@
 package com.github.revival.client.gui;
 
-import com.github.revival.Revival;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Random;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiMainMenu;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.ResourceLocation;
+
+import org.apache.commons.io.Charsets;
 import org.lwjgl.opengl.GL11;
+
+import com.github.revival.Revival;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class GuiFAMainMenu extends GuiMainMenu {
     public static final int LAYER_COUNT = 2;
-
+    public static final ResourceLocation splash = new ResourceLocation("fossil:splashes.txt");
     private ResourceLocation[] layerTextures = new ResourceLocation[GuiFAMainMenu.LAYER_COUNT];
     private int layerTick;
+    private int backAdd;
+    private int frontAdd;
+    
+    public GuiFAMainMenu(){
+    	super();
+    	backAdd = new Random().nextInt(1027);
+    	frontAdd = new Random().nextInt(2047);
+
+        BufferedReader bufferedreader = null;
+    	 try
+         {
+             ArrayList arraylist = new ArrayList();
+             bufferedreader = new BufferedReader(new InputStreamReader(Minecraft.getMinecraft().getResourceManager().getResource(splash).getInputStream(), Charsets.UTF_8));
+             String s;
+
+             while ((s = bufferedreader.readLine()) != null)
+             {
+                 s = s.trim();
+
+                 if (!s.isEmpty())
+                 {
+                     arraylist.add(s);
+                 }
+             }
+
+             if (!arraylist.isEmpty())
+             {
+                 do
+                 {
+                     this.splashText = (String)arraylist.get(rand.nextInt(arraylist.size()));
+                 }
+                 while (this.splashText.hashCode() == 125780783);
+             }
+         }
+         catch (IOException ioexception1)
+         {
+             ;
+         }
+         finally
+         {
+             if (bufferedreader != null)
+             {
+                 try
+                 {
+                     bufferedreader.close();
+                 }
+                 catch (IOException ioexception)
+                 {
+                     ;
+                 }
+             }
+         }
+
+    }
+    
+    @Override
+    public void drawCenteredString(FontRenderer fontrender, String sting, int x, int y, int color)
+    {
+    	if(sting.equals(splashText)){
+            fontrender.drawStringWithShadow(sting, x - fontrender.getStringWidth(sting) / 2, y, 0X933B3E);
+    	}else{
+            fontrender.drawStringWithShadow(sting, x - fontrender.getStringWidth(sting) / 2, y, color);
+    	}
+    }
 
     @Override
     public void initGui() {
@@ -39,7 +116,7 @@ public class GuiFAMainMenu extends GuiMainMenu {
         for (int i = 0; i < this.layerTextures.length; i++) {
             ResourceLocation layerTexture = this.layerTextures[i];
             this.mc.getTextureManager().bindTexture(layerTexture);
-            drawTexturedModalRect(0, 0, (layerTick / (float) (this.layerTextures.length - i)) + partialTicks / (float) (i + 1) + 2048 * i / 4.0F, 0, this.width, this.height, 2048 / (this.layerTextures.length - i) * (this.height / 128.0F), this.height, this.zLevel);
+            drawTexturedModalRect(0, 0, (i == 1 ? backAdd : frontAdd) + (layerTick / (float) (this.layerTextures.length - i)) + partialTicks / (float) (i + 1) + 2048 * i / 4.0F, 0, this.width, this.height, 2048 / (this.layerTextures.length - i) * (this.height / 128.0F), this.height, this.zLevel);
         }
 
         super.drawScreen(mouseX, mouseY, partialTicks);

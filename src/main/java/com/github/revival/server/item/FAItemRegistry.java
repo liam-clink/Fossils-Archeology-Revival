@@ -54,7 +54,6 @@ public enum FAItemRegistry {
     public Item emptyShell;
     public Item sjl;
     public Item magicConch;
-    public Item livingCoelacanth;
     public Item rawChickenSoup;
     public Item cookedChickenSoup;
     public Item chickenEss;
@@ -133,7 +132,6 @@ public enum FAItemRegistry {
         brokenSapling = new ForgeItemItem("fossilPlant").setUnlocalizedName(LocalizationStrings.BROKEN_SAPLING_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
         failuresaurusFlesh = new ForgeItemItem("flesh").setUnlocalizedName(LocalizationStrings.FAILURESAURUS_FLESH_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
         potteryShards = new ForgeItemItem("PotteryShard").setUnlocalizedName(LocalizationStrings.POTTERY_SHARDS).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
-        livingCoelacanth = new LivingCoelacanthItem(1).setUnlocalizedName(LocalizationStrings.LIVING_COELACANTH_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
         skullHelmet = new SkullHelmetItem(bone, 3, 0).setUnlocalizedName(LocalizationStrings.SKULL_HELMET_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
         ribCage = new RibCageItem(bone, 3, 1).setUnlocalizedName(LocalizationStrings.RIBCAGE_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
         femurs = new FemursItem(bone, 3, 2).setUnlocalizedName(LocalizationStrings.FEMURS_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
