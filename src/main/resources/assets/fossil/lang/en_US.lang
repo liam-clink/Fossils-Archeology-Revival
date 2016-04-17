@@ -609,6 +609,7 @@ entity.fossil.Elasmotherium.name=Elasmotherium
 entity.fossil.Confuciusornis.name=Confuciusornis
 entity.fossil.Anubite.name=Anubite
 entity.fossil.AnuDead.name=Anu
+entity.AnuEffect.name=Anu
 
 #Pedia text
 pedia.text.owner=Owner: 
