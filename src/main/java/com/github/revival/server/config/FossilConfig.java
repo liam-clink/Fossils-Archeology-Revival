@@ -21,7 +21,7 @@ public class FossilConfig {
     @ConfigEntry(category = "generation")
     public boolean generateVolcanicRock = true;
     @ConfigEntry(category = "generation")
-    public int[] oreGenerationDimensions = {};
+    public int[] oreGenerationDimensions = {0};
 
     @ConfigEntry
     public boolean allowFlying = false;
