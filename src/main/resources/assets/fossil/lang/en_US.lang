@@ -1,4 +1,4 @@
-﻿#Build 7.2.0 - Updated June 04 2015
+ï»¿#BuildÂ 7.2.0 - UpdatedÂ June 04Â 2015
 #English (en_US) Localization File
 #Contribution Credits - 
 #Keys last updated June 04 2015
@@ -418,7 +418,7 @@ item.eggAnkylosaurus.name=Ankylosaurus Egg
 item.eggPachycephalosaurus.name=Pachycephalosaurus Egg
 item.eggDeinonychus.name=Deinonychus Egg
 item.eggGallimimus.name=Gallimimus Egg
-item.eggAllosaurus.name=Allosaurus�Egg
+item.eggAllosaurus.name=Allosaurus Egg
 item.eggSarcosuchus.name=Sarcosuchus Egg
 item.eggCeratosaurus.name=Ceratosaurus Egg
 item.eggCoelacanth.first.name=Ocean Coelacanth
@@ -685,7 +685,7 @@ drum.Tyrannosaurus3=Ordering T-Rexes to dinner.
 #Hostile mob names
 entity.fossil.Bones.name=Bones
 entity.fossil.FriendlyPigZombie.name=Friendly Pig Zombies
-entity.fossil.Failuresaurus.name=Failursaurus
+entity.fossil.Failuresaurus.name=Failuresaurus
 entity.fossil.PigBoss.name=Anu
 
 #Records
