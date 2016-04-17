@@ -181,7 +181,7 @@ public enum EnumPrehistoric {
         }
         for (int i = 0; i < EnumPrehistoric.values().length; i++) {
             if (EnumPrehistoric.values()[i].timeperiod != EnumTimePeriod.CURRENT) {
-                EnumPrehistoric.values()[i].cookedFoodItem = new ForgeFoodItem(8, 0.8F, true, "prehistoric/cookedFood/" + EnumPrehistoric.values()[i].name() + "_Meat_Cooked").setUnlocalizedName("cooked" + EnumPrehistoric.values()[i].name()).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
+                EnumPrehistoric.values()[i].cookedFoodItem = new ForgeFoodItem(8, 0.8F, true, "prehistoric/cookedFood/" + EnumPrehistoric.values()[i].name() + "_Meat").setUnlocalizedName("cooked" + EnumPrehistoric.values()[i].name()).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
                 GameRegistry.registerItem(EnumPrehistoric.values()[i].cookedFoodItem, "cooked" + EnumPrehistoric.values()[i].name());
             }
         }

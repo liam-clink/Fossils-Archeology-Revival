@@ -174,7 +174,7 @@ public enum FABlockRegistry {
         horsetail_small = new BlockFossilPlant("plants/plant_horsetail_small", 1).setBlockName("plant_horsetail_small").setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
         horsetail_large = new BlockFossilTallPlant("plants/plant_horsetail_large").setBlockName("plant_horsetail_large").setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
         mutantPlant = new BlockFossilTallPlant("plants/plant_mutant").setBlockName("plant_mutant").setLightLevel(0.4F).setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
-        tempskya = new BlockTempskya("plants/plant_tempskya").setBlockName("plant_tempskya").setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
+        tempskya = new BlockTempskya("plants/plant_tempskya").setBlockTextureName("fossil:plants/plant_tempskya").setBlockName("plant_tempskya").setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
 
         try {
             for (Field f : FABlockRegistry.class.getDeclaredFields()) {
