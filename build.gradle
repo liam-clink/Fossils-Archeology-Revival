@@ -31,6 +31,12 @@ minecraft {
     runDir = "minecraft"
 }
 
+jar {
+        manifest {
+        attributes 'FMLAT': 'fossil_at.cfg'
+    }
+}
+
 repositories {
     mavenCentral()
     maven {

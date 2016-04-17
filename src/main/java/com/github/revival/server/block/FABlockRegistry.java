@@ -74,6 +74,7 @@ public enum FABlockRegistry {
     public Block volcanicStairs;
     public Block volcanicSingleSlab;
     public Block volcanicDoubleSlab;
+    public Block bubbleMachine;
     public Block vaseAmphoraBlock;
     public Block vaseKylixBlock;
     public Block vaseVoluteBlock;
@@ -156,6 +157,7 @@ public enum FABlockRegistry {
         volcanicStairs = new BlockFossilStairs(volcanicBrick, 0).setBlockName(LocalizationStrings.VOLCANIC_STAIRS);
         volcanicDoubleSlab = new BlockVolcanicSlab(true);
         volcanicSingleSlab = new BlockVolcanicSlab(false);
+        bubbleMachine = new BlockBubbleMachine();
         vaseVoluteBlock = new BlockVaseVolute();
         vaseAmphoraBlock = new BlockVaseAmphora();
         vaseKylixBlock = new BlockVaseKylix();

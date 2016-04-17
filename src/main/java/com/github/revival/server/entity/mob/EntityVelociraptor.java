@@ -26,6 +26,7 @@ public class EntityVelociraptor extends EntityNewPrehistoric {
     public EntityVelociraptor(World world) {
         super(world, EnumPrehistoric.Velociraptor);
         this.tasks.addTask(3, new DinoAILeapAtTarget(this));
+		this.setNavigator();
         this.hasFeatherToggle = true;
         this.pediaScale = 45F;
         this.featherToggle = Revival.CONFIG.featheredVelociraptor;

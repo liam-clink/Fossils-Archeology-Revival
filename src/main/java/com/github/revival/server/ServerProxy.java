@@ -61,6 +61,8 @@ public class ServerProxy {
     public void spawnTarParticle(World world, double posX, double posY, double posZ) {
     }
     
+    public void spawnBubbleParticles(World world, float f, float f1, float f2, double motionX, double motionY, double motionZ){}
+
     public void spawnPacketHeartParticles(World world, float f, float f1, float f2, double motionX, double motionY, double motionZ){}
     
     public void spawnPacketItemParticles(World world, float f, float f1, float f2, double motionX, double motionY, double motionZ, Item item){}
