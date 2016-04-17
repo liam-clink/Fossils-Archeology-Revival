@@ -105,7 +105,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData 
      * Returns the texture's file path as a String.
      */
     public String getTexture() {
-        return "fossil:textures/mob/DinosaurEggs/eggTexture_" + DinoInside.name() + ".png";
+        return "fossil:textures/model/egg/" + DinoInside.name() + "_Egg.png";
 
     }
 
@@ -125,7 +125,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData 
     @Override
     protected void entityInit() {
         if (Revival.enableDebugging()) {
-            this.HatchTime = 100;
+            this.HatchTime = 1000;
         } else {
             this.HatchTime = 3000;
         }

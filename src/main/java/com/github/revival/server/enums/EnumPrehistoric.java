@@ -486,6 +486,10 @@ public enum EnumPrehistoric {
             this.HungryLevel = HLevel;
         }
     }
+    
+    public boolean isAquatic(){
+    	return this == Plesiosaur || this == Mosasaurus || this == Liopleurodon;
+    }
 
     /**
      * sets the breeding time, the aging time and the hungry-level

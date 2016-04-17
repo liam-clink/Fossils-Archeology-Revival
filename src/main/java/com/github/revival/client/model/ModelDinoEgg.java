@@ -1,65 +1,43 @@
 package com.github.revival.client.model;
 
-import net.minecraft.client.model.ModelBase;
+import net.ilexiconn.llibrary.client.model.tools.AdvancedModelBase;
+import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-public class ModelDinoEgg extends ModelBase {
-    ModelRenderer egg4 = new ModelRenderer(this, 24, 18);
-    ModelRenderer egg3;
-    ModelRenderer egg2;
-    ModelRenderer egg1;
+public class ModelDinoEgg extends AdvancedModelBase {
+    public AdvancedModelRenderer Egg1;
+    public AdvancedModelRenderer Egg2;
+    public AdvancedModelRenderer Egg3;
+    public AdvancedModelRenderer Egg4;
 
     public ModelDinoEgg() {
-        this.egg4.addBox(-1.5F, -9.0F, -1.5F, 3, 3, 3);
-        this.egg4.setRotationPoint(0.0F, 24.13333F, 0.0F);
-        this.egg4.rotateAngleX = 0.0F;
-        this.egg4.rotateAngleY = 0.0F;
-        this.egg4.rotateAngleZ = 0.0F;
-        this.egg4.mirror = false;
-        this.egg3 = new ModelRenderer(this, 24, 24);
-        this.egg3.addBox(-2.5F, -8.0F, -2.5F, 5, 3, 5);
-        this.egg3.setRotationPoint(0.0F, 24.13333F, 0.0F);
-        this.egg3.rotateAngleX = 0.0F;
-        this.egg3.rotateAngleY = 0.0F;
-        this.egg3.rotateAngleZ = 0.0F;
-        this.egg3.mirror = false;
-        this.egg2 = new ModelRenderer(this, 0, 21);
-        this.egg2.addBox(-3.0F, -6.0F, -3.0F, 6, 5, 6);
-        this.egg2.setRotationPoint(0.0F, 24.13333F, 0.0F);
-        this.egg2.rotateAngleX = 0.0F;
-        this.egg2.rotateAngleY = 0.0F;
-        this.egg2.rotateAngleZ = 0.0F;
-        this.egg2.mirror = false;
-        this.egg1 = new ModelRenderer(this, 0, 14);
-        this.egg1.addBox(-2.5F, -2.0F, -2.5F, 5, 2, 5);
-        this.egg1.setRotationPoint(0.0F, 24.13333F, 0.0F);
-        this.egg1.rotateAngleX = 0.0F;
-        this.egg1.rotateAngleY = 0.0F;
-        this.egg1.rotateAngleZ = 0.0F;
-        this.egg1.mirror = false;
+        this.textureWidth = 64;
+        this.textureHeight = 32;
+        this.Egg1 = new AdvancedModelRenderer(this, 0, 12);
+        this.Egg1.setRotationPoint(0.0F, 19.6F, 0.0F);
+        this.Egg1.addBox(-3.0F, -2.8F, -3.0F, 6, 6, 6, 0.0F);
+        this.Egg4 = new AdvancedModelRenderer(this, 28, 16);
+        this.Egg4.setRotationPoint(0.0F, -0.9F, 0.0F);
+        this.Egg4.addBox(-2.0F, -4.8F, -2.0F, 4, 4, 4, 0.0F);
+        this.Egg2 = new AdvancedModelRenderer(this, 22, 2);
+        this.Egg2.setRotationPoint(0.0F, 0.0F, 0.0F);
+        this.Egg2.addBox(-2.5F, -0.6F, -2.5F, 5, 5, 5, 0.0F);
+        this.Egg3 = new AdvancedModelRenderer(this, 0, 0);
+        this.Egg3.setRotationPoint(0.0F, 0.0F, 0.0F);
+        this.Egg3.addBox(-2.5F, -4.6F, -2.5F, 5, 5, 5, 0.0F);
+        this.Egg3.addChild(this.Egg4);
+        this.Egg1.addChild(this.Egg2);
+        this.Egg1.addChild(this.Egg3);
     }
 
-    /**
-     * Sets the models various rotation angles then renders the model.
-     */
     @Override
-    public void render(Entity var1, float var2, float var3, float var4, float var5, float var6, float var7) {
-        super.render(var1, var2, var3, var4, var5, var6, var7);
-        this.setRotationAngles(var2, var3, var4, var5, var6, var7, var1);
-        this.egg4.render(var7);
-        this.egg3.render(var7);
-        this.egg2.render(var7);
-        this.egg1.render(var7);
+    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) { 
+        this.Egg1.render(f5);
+    }
+    
+    public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
+    	
     }
 
-    /**
-     * Sets the model's various rotation angles. For bipeds, par1 and par2 are used for animating the movement of arms
-     * and legs, where par1 represents the time(so that arms and legs swing back and forth) and par2 represents how
-     * "far" arms and legs can swing at most.
-     */
-    @Override
-    public void setRotationAngles(float var1, float var2, float var3, float var4, float var5, float var6, Entity var7) {
-        super.setRotationAngles(var1, var2, var3, var4, var5, var6, var7);
-    }
 }

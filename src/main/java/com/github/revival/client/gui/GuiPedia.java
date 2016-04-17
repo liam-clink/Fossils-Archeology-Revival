@@ -1,18 +1,10 @@
 package com.github.revival.client.gui;
 
-import com.github.revival.Revival;
-import com.github.revival.client.gui.elements.FossilGuiButton;
-import com.github.revival.client.gui.elements.FossilGuiPage;
-import com.github.revival.server.container.PediaContainer;
-import com.github.revival.server.entity.mob.EntityFishBase;
-import com.github.revival.server.entity.mob.EntityQuagga;
-import com.github.revival.server.entity.mob.EntityTerrorBird;
-import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
-import com.github.revival.server.enums.EnumPrehistoric;
-import com.github.revival.server.util.FoodMappings;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.gui.Gui;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -21,6 +13,7 @@ import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.texture.TextureMap;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -30,15 +23,26 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
+
 import org.apache.commons.lang3.ArrayUtils;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import com.github.revival.Revival;
+import com.github.revival.client.gui.elements.FossilGuiButton;
+import com.github.revival.client.gui.elements.FossilGuiPage;
+import com.github.revival.server.container.PediaContainer;
+import com.github.revival.server.entity.EntityDinoEgg;
+import com.github.revival.server.entity.mob.EntityFishBase;
+import com.github.revival.server.entity.mob.EntityQuagga;
+import com.github.revival.server.entity.mob.EntityTerrorBird;
+import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
+import com.github.revival.server.enums.EnumPrehistoric;
+import com.github.revival.server.util.FoodMappings;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class GuiPedia extends GuiContainer {
@@ -208,6 +212,9 @@ public class GuiPedia extends GuiContainer {
             if (Revival.toPedia instanceof EntityLivingBase) {
                 renderFirstPage((EntityLivingBase) Revival.toPedia);
             }
+            else if (Revival.toPedia instanceof EntityDinoEgg) {
+            	renderFirstPage((EntityDinoEgg) Revival.toPedia);
+			}
             /*if (Revival.toPedia instanceof EntityDinoEgg) {
 				((EntityDinoEgg) Revival.toPedia).showPedia(this);
 			} else if (Revival.toPedia instanceof EntityPregnantCow) {
@@ -240,9 +247,8 @@ public class GuiPedia extends GuiContainer {
         }
     }
 
-    public void renderFirstPage(EntityLivingBase entity) {
+    public void renderFirstPage(Entity entity) {
         reset();
-        renderFirstPageRight(entity);
         int wordLength = 90;
         GL11.glPushMatrix();
         String s = StatCollector.translateToLocal(entity.getCommandSenderName());
@@ -251,6 +257,7 @@ public class GuiPedia extends GuiContainer {
         GL11.glPopMatrix();
         if (entity instanceof EntityNewPrehistoric) {
             EntityNewPrehistoric dino = (EntityNewPrehistoric) entity;
+            renderFirstPageRight(dino);
             {
                 String s1 = StatCollector.translateToLocal("pedia.age") + " " + dino.getDinoAge();
                 printStringXY(s1, wordLength / 2, 110, 157, 126, 103);
@@ -352,6 +359,14 @@ public class GuiPedia extends GuiContainer {
                         GL11.glPopMatrix();
                     }
                 }
+            }
+        }
+        if(entity instanceof EntityDinoEgg){
+        	EntityDinoEgg egg = (EntityDinoEgg)entity;
+        	{
+                int time = (int) Math.floor(((float) egg.getBirthTick() / (float) egg.HatchingNeedTime * 100.0F));
+                String s1 = StatCollector.translateToLocal("pedia.egg.time") + " " + time + "%";
+                printStringXY(s1, wordLength / 2, 160, 157, 126, 103);
             }
         }
     }
@@ -463,6 +478,9 @@ public class GuiPedia extends GuiContainer {
                 } else {
                     renderDinosaur(k + 100, l + 80, 80, 0, 0, (EntityLivingBase) Revival.toPedia);
                 }
+            }
+            if (Revival.toPedia instanceof EntityDinoEgg) {
+                renderEgg(k + 100, l + 80, 80, 0, 0, (EntityDinoEgg) Revival.toPedia);
             }
             GL11.glPopMatrix();
         }
@@ -580,6 +598,43 @@ public class GuiPedia extends GuiContainer {
 
     }
 
+    public static void renderEgg(int posX, int posY, int scaleValue, float renderYaw, float renderPitch, Entity mob) {
+        GL11.glEnable(GL11.GL_COLOR_MATERIAL);
+        GL11.glPushMatrix();
+        GL11.glEnable(GL11.GL_DEPTH_TEST);
+        GL11.glTranslatef((float) posX, (float) posY, 50.0F);
+        GL11.glScalef(-(float) (scaleValue), -(float) scaleValue, (float) scaleValue);
+        float f2 = 0;
+        float f3 = 0;
+        float f4 = 0;
+        float f5 = 0;
+        float f6 = 0;
+        GL11.glRotatef(-45.0F, 0.0F, 1.0F, 0.0F);
+        RenderHelper.enableStandardItemLighting();
+        GL11.glRotatef(-135.0F, 0.0F, 0.0F, 0.0F);
+        GL11.glRotatef(-((float) Math.atan((double) (renderPitch / 40.0F))) * 20.0F, 1.0F, 0.0F, 0.0F);
+        mob.rotationYaw = (float) Math.atan((double) (renderYaw / 40.0F)) * 40.0F;
+        mob.rotationPitch = -((float) Math.atan((double) (renderPitch / 40.0F))) * 20.0F;
+        GL11.glTranslatef(0.0F, mob.yOffset, 0.0F);
+        GL11.glRotatef(mob.ticksExisted, 0.0F, 1.0F, 0.0F);
+        RenderManager.instance.playerViewY = 180.0F;
+        if (mob instanceof EntityNewPrehistoric) {
+            GL11.glScalef(-((EntityNewPrehistoric) mob).getDinosaurSize(), -((EntityNewPrehistoric) mob).getDinosaurSize(), -((EntityNewPrehistoric) mob).getDinosaurSize());
+        }
+        RenderManager.instance.renderEntityWithPosYaw(mob, 0.0D, 0.0D, 0.0D, 0.0F, 0F);
+        mob.rotationYaw = f3;
+        mob.rotationPitch = f4;
+        GL11.glDisable(GL11.GL_DEPTH_TEST);
+
+        GL11.glPopMatrix();
+        RenderHelper.disableStandardItemLighting();
+        GL11.glDisable(GL12.GL_RESCALE_NORMAL);
+        OpenGlHelper.setActiveTexture(OpenGlHelper.lightmapTexUnit);
+        GL11.glDisable(GL11.GL_TEXTURE_2D);
+        OpenGlHelper.setActiveTexture(OpenGlHelper.defaultTexUnit);
+
+    }
+    
     @Override
     public void actionPerformed(GuiButton button) {
         if (button.id == 0 && bookPages < bookPagesTotal) {

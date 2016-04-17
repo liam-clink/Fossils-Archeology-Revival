@@ -36,7 +36,6 @@ public enum EnumDinoFoodItem {
     Egg(Items.egg, 7, 2),
     Sjl(FAItemRegistry.INSTANCE.sjl, 65, 7), //SioChiuLe
     Nautilus(EnumPrehistoric.Nautilus.foodItem, 28, 2),
-    Coelacanth(FAItemRegistry.INSTANCE.livingCoelacanth, 33, 2),
     ChickenSoupRaw(FAItemRegistry.INSTANCE.rawChickenSoup, 25, 1),
     ChickenSoupCooked(FAItemRegistry.INSTANCE.cookedChickenSoup, 50, 5),
     Triceratops(EnumPrehistoric.Triceratops.foodItem, 55, 5),

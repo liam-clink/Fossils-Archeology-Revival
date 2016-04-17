@@ -761,6 +761,7 @@ pedia.activity.none.desc=This mob is active throughout the day.
 pedia.activity.both.desc=This mob is active throughout the day.
 pedia.activity.diurinal.desc=This mob is active during the day.
 pedia.activity.nocturnal.desc=This mob is active at night.
+pedia.egg.time=Hatch Progress:
 pigman.summon=Tamed Zombie Pigman: My Lord! I will fight for you till the death!
 pigman.sit=Tamed Zombie Pigman: I will do whatever my Lord commands me to do.
 pigman.kill=Tamed Zombie Pigman: I have killed another creature for you!
