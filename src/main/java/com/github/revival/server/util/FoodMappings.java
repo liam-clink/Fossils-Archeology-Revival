@@ -357,4 +357,8 @@ public class FoodMappings {
         }
     }
 
+	public void removeItemMapping(Item item, EnumDiet diet) {
+	    this.getFoodRenderList(diet).remove(Item.getIdFromItem(item));
+    }
+
 }

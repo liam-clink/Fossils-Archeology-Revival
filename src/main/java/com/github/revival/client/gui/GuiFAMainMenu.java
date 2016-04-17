@@ -86,7 +86,7 @@ public class GuiFAMainMenu extends GuiMainMenu {
     public void drawCenteredString(FontRenderer fontrender, String sting, int x, int y, int color)
     {
     	if(sting.equals(splashText)){
-            fontrender.drawStringWithShadow(sting, x - fontrender.getStringWidth(sting) / 2, y, 0X933B3E);
+            fontrender.drawStringWithShadow(sting, x - fontrender.getStringWidth(sting) / 2, y, 0XF1E961);
     	}else{
             fontrender.drawStringWithShadow(sting, x - fontrender.getStringWidth(sting) / 2, y, color);
     	}

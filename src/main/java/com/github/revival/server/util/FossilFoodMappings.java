@@ -160,6 +160,7 @@ public class FossilFoodMappings {
                 FoodMappings.instance().addToItemMappings(EnumPrehistoric.values()[i].cookedFoodItem, 75, EnumDiet.PISCCARNIVORE);
             }
         }
+        FoodMappings.instance().removeItemMapping(EnumPrehistoric.Horse.embryoItem, EnumDiet.CARNIVORE_EGG);
         FoodMappings.instance().addToBlockMappings(Blocks.cake, 35, EnumDiet.HERBIVORE, false);
         FoodMappings.instance().addToBlockMappings(Blocks.carrots, 20, EnumDiet.HERBIVORE, false);
         FoodMappings.instance().addToBlockMappings(Blocks.wheat, 10, EnumDiet.HERBIVORE, false);

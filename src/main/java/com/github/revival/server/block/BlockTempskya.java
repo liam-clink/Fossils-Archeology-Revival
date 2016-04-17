@@ -129,10 +129,10 @@ public class BlockTempskya extends BlockBush {
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister iicon) {
         super.registerBlockIcons(iicon);
-        blockIcon = iicon.registerIcon("fossil:plants/tempskya_1");
-        tex1 = iicon.registerIcon("fossil:plants/tempskya_2");
-        tex2 = iicon.registerIcon("fossil:plants/tempskya_3");
-        tex3 = iicon.registerIcon("fossil:plants/tempskya_4");
+        blockIcon = iicon.registerIcon("fossil:plants/plant_tempskya_1");
+        tex1 = iicon.registerIcon("fossil:plants/plant_tempskya_2");
+        tex2 = iicon.registerIcon("fossil:plants/plant_tempskya_3");
+        tex3 = iicon.registerIcon("fossil:plants/plant_tempskya_4");
     }
 
     @Override

@@ -489,6 +489,9 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	}
 
 	public boolean canSleep() {
+		if(!this.onGround){
+			return false;
+		}
 		if (this.aiActivityType() == Activity.DIURINAL && !this.isDaytime()) {
 			return true;
 		}
