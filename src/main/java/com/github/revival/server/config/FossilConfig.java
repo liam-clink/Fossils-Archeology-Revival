@@ -1,5 +1,6 @@
 package com.github.revival.server.config;
 
+import cpw.mods.fml.relauncher.Side;
 import net.ilexiconn.llibrary.server.config.ConfigEntry;
 
 public class FossilConfig {
@@ -42,7 +43,7 @@ public class FossilConfig {
     public boolean allowBookEnchantments = true;
     @ConfigEntry
     public boolean allowBreeding = true;
-    @ConfigEntry
+    @ConfigEntry(side = Side.CLIENT, category = "client")
     public boolean customMainMenu = true;
 
     @ConfigEntry(category = "dinosaurs")
