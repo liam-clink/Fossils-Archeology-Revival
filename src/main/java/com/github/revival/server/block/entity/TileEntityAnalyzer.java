@@ -389,7 +389,7 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory,
                     itemstack = new ItemStack(Items.dye, 1, 2);
                 }
                 if (rand > 85) {
-                    itemstack = new ItemStack(FAItemRegistry.INSTANCE.fossilSeed, 1, new Random().nextInt(8));
+                    itemstack = new ItemStack(FAItemRegistry.INSTANCE.fossilSeed, 1, new Random().nextInt(9));
                 }
 
             }
