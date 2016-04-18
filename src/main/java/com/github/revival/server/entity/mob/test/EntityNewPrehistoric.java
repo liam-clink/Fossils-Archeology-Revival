@@ -1530,7 +1530,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
 				if (FoodMappings.instance().getItemFoodAmount(itemstack.getItem(), this.selfType.diet) != 0) {
 					if (!player.worldObj.isRemote) {
-						if (this.getMaxHunger() > this.getHunger()) {
+						if (this.getMaxHunger() > this.getHunger() || this.getHealth() > this.getMaxHealth() && Revival.CONFIG.healingDinos) {
 
 							this.setHunger(this.getHunger() + FoodMappings.instance().getItemFoodAmount(itemstack.getItem(), this.selfType.diet));
 							if (!worldObj.isRemote) this.eatItem(itemstack);
