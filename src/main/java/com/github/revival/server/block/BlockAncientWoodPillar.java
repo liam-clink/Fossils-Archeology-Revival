@@ -45,7 +45,7 @@ public class BlockAncientWoodPillar extends Block {
     // making stone drop cobblestone.
     @Override
     public Item getItemDropped(int var1, Random rand, int var3) {
-        return Item.getItemFromBlock(FABlockRegistry.INSTANCE.palmLog);
+        return Item.getItemFromBlock(FABlockRegistry.INSTANCE.ancientWoodPillar);
     }
 
     /**
