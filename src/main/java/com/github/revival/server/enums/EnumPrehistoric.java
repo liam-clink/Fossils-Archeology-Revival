@@ -1,60 +1,23 @@
 package com.github.revival.server.enums;
 
+import com.github.revival.server.creativetab.FATabRegistry;
+import com.github.revival.server.entity.EnumDiet;
+import com.github.revival.server.entity.mob.*;
+import com.github.revival.server.item.BirdEggItem;
+import com.github.revival.server.item.DinoEggItem;
+import com.github.revival.server.item.MammalEmbryoItem;
+import com.github.revival.server.item.forge.ForgeFoodItem;
+import cpw.mods.fml.common.registry.GameRegistry;
 import io.netty.util.internal.ThreadLocalRandom;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.passive.*;
+import net.minecraft.item.Item;
+import net.minecraft.world.World;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.passive.EntityChicken;
-import net.minecraft.entity.passive.EntityCow;
-import net.minecraft.entity.passive.EntityHorse;
-import net.minecraft.entity.passive.EntityPig;
-import net.minecraft.entity.passive.EntitySheep;
-import net.minecraft.item.Item;
-import net.minecraft.world.World;
-
-import com.github.revival.server.creativetab.FATabRegistry;
-import com.github.revival.server.entity.EnumDiet;
-import com.github.revival.server.entity.mob.DinoFoodBlockList;
-import com.github.revival.server.entity.mob.DinoFoodItemList;
-import com.github.revival.server.entity.mob.DinoFoodMobList;
-import com.github.revival.server.entity.mob.EntityAllosaurus;
-import com.github.revival.server.entity.mob.EntityAnkylosaurus;
-import com.github.revival.server.entity.mob.EntityBrachiosaurus;
-import com.github.revival.server.entity.mob.EntityCeratosaurus;
-import com.github.revival.server.entity.mob.EntityCoelacanth;
-import com.github.revival.server.entity.mob.EntityCompsognathus;
-import com.github.revival.server.entity.mob.EntityConfuciusornis;
-import com.github.revival.server.entity.mob.EntityDeinonychus;
-import com.github.revival.server.entity.mob.EntityDilophosaurus;
-import com.github.revival.server.entity.mob.EntityDodo;
-import com.github.revival.server.entity.mob.EntityElasmotherium;
-import com.github.revival.server.entity.mob.EntityGallimimus;
-import com.github.revival.server.entity.mob.EntityLiopleurodon;
-import com.github.revival.server.entity.mob.EntityMammoth;
-import com.github.revival.server.entity.mob.EntityMosasaurus;
-import com.github.revival.server.entity.mob.EntityNautilus;
-import com.github.revival.server.entity.mob.EntityPachycephalosaurus;
-import com.github.revival.server.entity.mob.EntityPlesiosaurus;
-import com.github.revival.server.entity.mob.EntityPterosaur;
-import com.github.revival.server.entity.mob.EntityQuagga;
-import com.github.revival.server.entity.mob.EntitySarcosuchus;
-import com.github.revival.server.entity.mob.EntitySmilodon;
-import com.github.revival.server.entity.mob.EntitySpinosaurus;
-import com.github.revival.server.entity.mob.EntityStegosaurus;
-import com.github.revival.server.entity.mob.EntityTerrorBird;
-import com.github.revival.server.entity.mob.EntityTriceratops;
-import com.github.revival.server.entity.mob.EntityTyrannosaurus;
-import com.github.revival.server.entity.mob.EntityVelociraptor;
-import com.github.revival.server.item.BirdEggItem;
-import com.github.revival.server.item.DinoEggItem;
-import com.github.revival.server.item.MammalEmbryoItem;
-import com.github.revival.server.item.forge.ForgeFoodItem;
-
-import cpw.mods.fml.common.registry.GameRegistry;
 
 
 public enum EnumPrehistoric {
@@ -96,7 +59,7 @@ public enum EnumPrehistoric {
 	private static float sizeBaby = 1;
 	private static float sizeTeen = 1;
 	private static float sizeAdult = 1;
-	private final Class dinoClass;
+	private final Class<? extends Entity> dinoClass;
 	public EnumMobType type;
 	public EnumDiet diet;
 	public EnumTimePeriod timeperiod;
@@ -419,9 +382,9 @@ public enum EnumPrehistoric {
 
 	public Entity invokeClass(World world){
 		Entity entity = null;
-		if(dinoClass.isAssignableFrom(Entity.class)){
+		if(Entity.class.isAssignableFrom(dinoClass)){
 			try {
-				dinoClass.getDeclaredConstructor(World.class).newInstance(world);
+				entity = dinoClass.getDeclaredConstructor(World.class).newInstance(world);
 			} catch (InstantiationException e) {
 				e.printStackTrace();
 			} catch (IllegalAccessException e) {
