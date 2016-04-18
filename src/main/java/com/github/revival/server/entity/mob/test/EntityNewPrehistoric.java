@@ -517,7 +517,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 						case 2:
 							return z;
 						}
-						}
+					}
 				}
 			}
 
@@ -575,6 +575,21 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		}
 		if(this.ticksTillMate > 0){
 			this.ticksTillMate--;
+		}
+		int blockX = MathHelper.floor_double(this.posX);
+		int blockY = MathHelper.floor_double(this.boundingBox.minY)-1;
+		int blockZ = MathHelper.floor_double(this.posZ);
+		if(this.getBlockUnder() == FABlockRegistry.INSTANCE.bubbleMachine && this.worldObj.isBlockIndirectlyGettingPowered(blockX, blockY, blockZ) && this.ticksTillPlay == 0){
+			this.jump();
+			for (int i = 0; i < 1; ++i)
+			{
+				double dd = this.getRNG().nextGaussian() * 0.02D;
+				double dd1 = this.getRNG().nextGaussian() * 0.02D;
+				double dd2 = this.getRNG().nextGaussian() * 0.02D;
+				Revival.PROXY.spawnPacketHeartParticles(this.worldObj, (float)(this.posX + (this.getRNG().nextFloat() * this.width * 2.0F) - this.width), (float)(this.posY + 0.5D + (this.getRNG().nextFloat() * this.height)), (float)(this.posZ + (this.getRNG().nextFloat() * this.width * 2.0F) - this.width), dd, dd1, dd2);
+			}
+			System.out.println("1");
+			this.doPlayBonus(15);
 		}
 		if(this.ticksTillMate == 0 && this.getGender() == 1){
 			this.mate();
@@ -715,6 +730,14 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 			}
 		}*/
 		}
+	}
+
+	public Block getBlockUnder()
+	{
+		int blockX = MathHelper.floor_double(this.posX);
+		int blockY = MathHelper.floor_double(this.boundingBox.minY)-1;
+		int blockZ = MathHelper.floor_double(this.posZ);
+		return this.worldObj.getBlock(blockX, blockY, blockZ);
 	}
 
 	public void flyTowardsTarget() {

@@ -28,11 +28,11 @@ public class DinoAIFindBubbleBlock extends EntityAIBase {
 	@Override
 	public boolean shouldExecute() {
 		if(isThereActuallyABlock()){
-			blockX = dinosaur.getNearestBubbleBlock(32, 0);
-			blockY = dinosaur.getNearestBubbleBlock(32, 1);
-			blockZ = dinosaur.getNearestBubbleBlock(32, 3);
+			blockX = dinosaur.getNearestBubbleBlock(48, 0);
+			blockY = dinosaur.getNearestBubbleBlock(48, 1);
+			blockZ = dinosaur.getNearestBubbleBlock(48, 3);
 			if (dinosaur.worldObj.getBlock(blockX, blockY, blockZ) == FABlockRegistry.INSTANCE.bubbleMachine && dinosaur.worldObj.isBlockIndirectlyGettingPowered(blockX, blockY, blockZ)) {
-				return true;
+				return this.dinosaur.ticksTillPlay == 0;
 			}
 		}
 		return false;
@@ -40,12 +40,12 @@ public class DinoAIFindBubbleBlock extends EntityAIBase {
 
 	@Override
 	public boolean continueExecuting() {
-		return dinosaur.worldObj.getBlock(blockX, blockY, blockZ) == FABlockRegistry.INSTANCE.bubbleMachine && dinosaur.worldObj.isBlockIndirectlyGettingPowered(blockX, blockY, blockZ);
+		return this.dinosaur.ticksTillPlay == 0 && dinosaur.worldObj.getBlock(blockX, blockY, blockZ) == FABlockRegistry.INSTANCE.bubbleMachine && dinosaur.worldObj.isBlockIndirectlyGettingPowered(blockX, blockY, blockZ);
 	}
 
 	@Override
 	public void updateTask() {
-		int range = 32;
+		int range = 48;
 		this.dinosaur.setSitting(false);
 		this.dinosaur.setOrder(EnumOrderType.WANDER);
 		double distance = Math.sqrt(Math.pow(this.dinosaur.posX - this.blockX, 2.0D) + Math.pow(this.dinosaur.posZ - this.blockZ, 2.0D));
@@ -53,19 +53,13 @@ public class DinoAIFindBubbleBlock extends EntityAIBase {
 			endTask();
 		}
 		if (distance < range) {
-			this.dinosaur.getNavigator().tryMoveToXYZ(this.blockX, this.blockY, this.blockZ, 1.0D);
-
-			if (distance < 4.5D) {
-				if (!continueExecuting()) {
-					for (int i = 0; i < 7; ++i)
-					{
-						double dd = this.dinosaur.getRNG().nextGaussian() * 0.02D;
-						double dd1 = this.dinosaur.getRNG().nextGaussian() * 0.02D;
-						double dd2 = this.dinosaur.getRNG().nextGaussian() * 0.02D;
-						Revival.PROXY.spawnPacketHeartParticles(this.dinosaur.worldObj, (float)(this.dinosaur.posX + (this.dinosaur.getRNG().nextFloat() * this.dinosaur.width * 2.0F) - this.dinosaur.width), (float)(this.dinosaur.posY + 0.5D + (this.dinosaur.getRNG().nextFloat() * this.dinosaur.height)), (float)(this.dinosaur.posZ + (this.dinosaur.getRNG().nextFloat() * this.dinosaur.width * 2.0F) - this.dinosaur.width), dd, dd1, dd2);
-					}
-					this.dinosaur.doPlayBonus(15);
-				}
+			this.dinosaur.getNavigator().tryMoveToXYZ(this.blockX, this.blockY + 1, this.blockZ, 1.0D);
+			for (int i = 0; i < 1; ++i)
+			{
+				double dd = this.dinosaur.getRNG().nextGaussian() * 0.02D;
+				double dd1 = this.dinosaur.getRNG().nextGaussian() * 0.02D;
+				double dd2 = this.dinosaur.getRNG().nextGaussian() * 0.02D;
+				Revival.PROXY.spawnPacketHeartParticles(this.dinosaur.worldObj, (float)(this.dinosaur.posX + (this.dinosaur.getRNG().nextFloat() * this.dinosaur.width * 2.0F) - this.dinosaur.width), (float)(this.dinosaur.posY + 0.5D + (this.dinosaur.getRNG().nextFloat() * this.dinosaur.height)), (float)(this.dinosaur.posZ + (this.dinosaur.getRNG().nextFloat() * this.dinosaur.width * 2.0F) - this.dinosaur.width), dd, dd1, dd2);
 			}
 		} else {
 			endTask();
@@ -74,10 +68,10 @@ public class DinoAIFindBubbleBlock extends EntityAIBase {
 
 	private void endTask() {
 		blockX = blockY = blockZ = 0;
-    }
+	}
 
 	public boolean isThereActuallyABlock(){
-		return dinosaur.getNearestBubbleBlock(32, 0) != 0 && dinosaur.getNearestBubbleBlock(32, 1) != 0 && dinosaur.getNearestBubbleBlock(32, 2) != 0;
+		return dinosaur.getNearestBubbleBlock(48, 0) != 0 && dinosaur.getNearestBubbleBlock(48, 1) != 0 && dinosaur.getNearestBubbleBlock(48, 2) != 0;
 	}
 
 }
