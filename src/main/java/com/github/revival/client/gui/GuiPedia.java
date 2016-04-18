@@ -39,7 +39,6 @@ import com.github.revival.server.entity.mob.EntityQuagga;
 import com.github.revival.server.entity.mob.EntityTerrorBird;
 import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 import com.github.revival.server.enums.EnumPrehistoric;
-import com.github.revival.server.handler.LocalizationStrings;
 import com.github.revival.server.util.FoodMappings;
 
 import cpw.mods.fml.relauncher.Side;
@@ -208,7 +207,9 @@ public class GuiPedia extends GuiContainer {
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-
+		if(!(Revival.toPedia instanceof EntityNewPrehistoric)){
+			this.buttonNextPage.enabled = false;
+		}
 		if (bookPages == 0) {
 			if (Revival.toPedia instanceof EntityLivingBase) {
 				renderFirstPage((EntityLivingBase) Revival.toPedia);
@@ -251,14 +252,14 @@ public class GuiPedia extends GuiContainer {
 	public void renderFirstPage(Entity entity) {
 		reset();
 		int wordLength = 90;
-		GL11.glPushMatrix();
-		String s = StatCollector.translateToLocal(entity.getCommandSenderName());
-		GL11.glScalef(1.5F, 1.5F, 1.5F);
-		printStringXY(StatCollector.translateToLocal(entity.getCommandSenderName()), (-this.fontRendererObj.getStringWidth(s) / 2) + 65, 60, 66, 48, 36);
-		GL11.glPopMatrix();
 		if (entity instanceof EntityNewPrehistoric) {
 			EntityNewPrehistoric dino = (EntityNewPrehistoric) entity;
 			renderFirstPageRight(dino);
+			GL11.glPushMatrix();
+			String s = StatCollector.translateToLocal(entity.getCommandSenderName());
+			GL11.glScalef(1.5F, 1.5F, 1.5F);
+			printStringXY(StatCollector.translateToLocal(entity.getCommandSenderName()), (-this.fontRendererObj.getStringWidth(s) / 2) + 65, 60, 66, 48, 36);
+			GL11.glPopMatrix();
 			{
 				String s1 = StatCollector.translateToLocal("pedia.age") + " " + dino.getDinoAge();
 				printStringXY(s1, wordLength / 2, 110, 157, 126, 103);
@@ -364,6 +365,11 @@ public class GuiPedia extends GuiContainer {
 		}
 		if(entity instanceof EntityDinoEgg){
 			EntityDinoEgg egg = (EntityDinoEgg)entity;
+			GL11.glPushMatrix();
+			String s = StatCollector.translateToLocal(egg.selfType.toString() + " " + StatCollector.translateToLocal("pedia.egg"));
+			GL11.glScalef(1.5F, 1.5F, 1.5F);
+			printStringXY(s, (-this.fontRendererObj.getStringWidth(s) / 2) + 65, 60, 66, 48, 36);
+			GL11.glPopMatrix();
 			{
 				int time = (int) Math.floor(((float) egg.getBirthTick() / (float) egg.HatchingNeedTime * 100.0F));
 				String s1 = StatCollector.translateToLocal("pedia.egg.time") + " " + time + "%";
@@ -375,9 +381,9 @@ public class GuiPedia extends GuiContainer {
 					s1 = StatCollector.translateToLocal("pedia.egg.status" + " " + EnumChatFormatting.AQUA + StatCollector.translateToLocal("pedia.egg.status.wet"));
 				}else{
 					if ((egg.getBirthTick() >= 0 && egg.getBirthTick() > egg.lastBirthTick) || egg.getBirthTick() >= 100) {
-						s1 = StatCollector.translateToLocal("pedia.egg.status" + " " + EnumChatFormatting.GOLD + StatCollector.translateToLocal("pedia.egg.status.warm"));
+						s1 = StatCollector.translateToLocal("pedia.egg.status") + " " + EnumChatFormatting.GOLD + StatCollector.translateToLocal("pedia.egg.status.warm");
 					} else {
-						s1 = StatCollector.translateToLocal("pedia.egg.status" + " " + EnumChatFormatting.BLUE + StatCollector.translateToLocal("pedia.egg.status.cold"));
+						s1 = StatCollector.translateToLocal("pedia.egg.status") + " " + EnumChatFormatting.BLUE + StatCollector.translateToLocal("pedia.egg.status.cold");
 					}
 				}
 				printStringXY(s1, wordLength / 2, 140, 157, 126, 103);
@@ -485,7 +491,10 @@ public class GuiPedia extends GuiContainer {
 		func_146110_a(k, l, 0, 0, this.xSize, this.ySize, (390.625F), (390.625F));
 		if (bookPages == 0) {
 			GL11.glPushMatrix();
-			if (Revival.toPedia instanceof EntityLivingBase) {
+			if (Revival.toPedia instanceof EntityDinoEgg) {
+				renderEgg(k + 100, l + 280, 250, 0, 0, (EntityDinoEgg) Revival.toPedia);
+			}
+			else if (Revival.toPedia instanceof EntityLivingBase) {
 				if (Revival.toPedia instanceof EntityNewPrehistoric) {
 					renderDinosaur(k + 100, l + 80, Math.round(2 * ((EntityNewPrehistoric) Revival.toPedia).pediaScale), 0, 0, (EntityLivingBase) Revival.toPedia);
 
@@ -493,9 +502,7 @@ public class GuiPedia extends GuiContainer {
 					renderDinosaur(k + 100, l + 80, 80, 0, 0, (EntityLivingBase) Revival.toPedia);
 				}
 			}
-			if (Revival.toPedia instanceof EntityDinoEgg) {
-				renderEgg(k + 100, l + 80, 100, 0, 0, (EntityDinoEgg) Revival.toPedia);
-			}
+			
 			GL11.glPopMatrix();
 		}
 		/*
@@ -617,7 +624,7 @@ public class GuiPedia extends GuiContainer {
 		GL11.glPushMatrix();
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
 		GL11.glTranslatef((float) posX, (float) posY, 50.0F);
-		GL11.glScalef(-(float) (scaleValue), (float) scaleValue, (float) scaleValue);
+		GL11.glScalef((float) (scaleValue), (float) scaleValue, (float) scaleValue);
 		float f2 = 0;
 		float f3 = 0;
 		float f4 = 0;

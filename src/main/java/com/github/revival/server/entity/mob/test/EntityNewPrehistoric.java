@@ -55,9 +55,11 @@ import com.github.revival.client.gui.GuiPedia;
 import com.github.revival.server.api.IPrehistoricAI;
 import com.github.revival.server.block.FABlockRegistry;
 import com.github.revival.server.block.entity.TileEntityNewFeeder;
+import com.github.revival.server.entity.EntityDinoEgg;
 import com.github.revival.server.entity.EnumDiet;
 import com.github.revival.server.entity.ai.DinoAIAttackOnCollide;
 import com.github.revival.server.enums.EnumAnimation;
+import com.github.revival.server.enums.EnumMobType;
 import com.github.revival.server.enums.EnumOrderType;
 import com.github.revival.server.enums.EnumPrehistoric;
 import com.github.revival.server.enums.EnumPrehistoricAI.Activity;
@@ -149,6 +151,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	protected int nearByMobsAllowed;
 	public int ticksSprinted;
 	public int ticksTillPlay;
+	public int ticksTillMate;
 	public int prevAge;
 	public boolean isDaytime;
 
@@ -236,6 +239,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		compound.setBoolean("MoodNoSpace", this.mood_nospace);
 		compound.setBoolean("MoodNoPlants", this.mood_noplants);
 		compound.setInteger("TicksSincePlay", this.ticksTillPlay);
+		compound.setInteger("TicksSinceMate", this.ticksTillMate);
 
 	}
 
@@ -273,6 +277,8 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		this.mood_nospace = compound.getBoolean("MoodNoSpace");
 		this.mood_noplants = compound.getBoolean("MoodNoPlants");
 		this.ticksTillPlay = compound.getInteger("TicksSincePlay");
+		this.ticksTillMate = compound.getInteger("TicksSinceMate");
+
 	}
 
 	protected AxisAlignedBB getAttackBounds() {
@@ -531,6 +537,12 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		}
 		if(this.ticksTillPlay > 0){
 			this.ticksTillPlay--;
+		}
+		if(this.ticksTillMate > 0){
+			this.ticksTillMate--;
+		}
+		if(this.ticksTillMate == 0 && this.getGender() == 1){
+			this.mate();
 		}
 		if (!this.arePlantsNearby(16) && !mood_noplants) {
 			boolean inital_mood_noplants = mood_noplants;
@@ -866,7 +878,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
 	@Override
 	public boolean canAttackClass(Class clazz) {
-		return this.getClass() != clazz;
+		return this.getClass() != clazz && clazz != EntityDinoEgg.class;
 	}
 
 	public float getDinosaurSize() {
@@ -939,9 +951,20 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		this.setScale(this.getDinosaurSize());
 	}
 
-	@Override
-	public EntityAgeable createChild(EntityAgeable entity) {
-		return null;
+	public Entity createEgg(EntityAgeable entity) {
+		Entity baby = null;
+		if(this.selfType.type == EnumMobType.MAMMAL){
+			baby = this.selfType.invokeClass(this.worldObj);
+		}
+		if(this.selfType.type == EnumMobType.BIRD){
+			baby = new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, new ItemStack(this.selfType.birdEggItem));
+		}
+		if(this.selfType.type == EnumMobType.DINOSAUR){
+			//baby = new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, new ItemStack(this.selfType.birdEggItem));
+			baby = new EntityDinoEgg(this.worldObj);
+			((EntityDinoEgg)baby).selfType = this.selfType;
+		}
+		return baby;
 	}
 
 	public boolean isAdult() {
@@ -1836,6 +1859,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	}
 
 	public boolean canDinoHunt(Entity target) {
+		
 		if (this.selfType.diet != EnumDiet.HERBIVORE && this.selfType.diet != EnumDiet.NONE && canAttackClass(target.getClass())) {
 			if (width >= target.width) {
 				if (target instanceof EntityNewPrehistoric) {
@@ -1881,6 +1905,60 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		} else {
 			return (EntityLivingBase) list.get(0);
 		}
+	}
+
+	public void mate(){
+		Entity targetEntity;
+		EntityAINearestAttackableTarget.Sorter theNearestAttackableTargetSorter = new EntityAINearestAttackableTarget.Sorter(this);
+		IEntitySelector targetEntitySelector = new IEntitySelector() {
+			@Override
+			public boolean isEntityApplicable(Entity entity) {
+				return (entity instanceof EntityNewPrehistoric);
+			}
+		};
+		double d0 = 64;
+		List<EntityNewPrehistoric> list = worldObj.selectEntitiesWithinAABB(EntityNewPrehistoric.class, this.boundingBox.expand(d0, 4.0D, d0), targetEntitySelector);
+		Collections.sort(list, theNearestAttackableTargetSorter);
+		List<EntityNewPrehistoric> listOfFemales = new ArrayList<EntityNewPrehistoric>();
+		if (!list.isEmpty()) {
+			for (EntityNewPrehistoric mob : list) {
+				if (mob.selfType == this.selfType && mob.isAdult() && mob.getGender() == 0 && mob.ticksTillMate == 0) {
+					listOfFemales.add(mob);
+				}
+			}
+		}
+		if(!listOfFemales.isEmpty()){
+			EntityNewPrehistoric prehistoric = (EntityNewPrehistoric)listOfFemales.get(0);
+			prehistoric.procreate(this);
+			this.ticksTillMate = this.rand.nextInt(600) + 600;
+			prehistoric.ticksTillMate = this.rand.nextInt(600) + 600;
+		}
+	}
+	
+	public void procreate(EntityNewPrehistoric mob){
+		Entity hatchling = this.createEgg(mob);
+        if (hatchling != null)
+        {
+            this.entityToAttack = null;
+            mob.entityToAttack = null;
+            hatchling.setPositionAndRotation(this.posX, this.posY, this.posZ, this.rotationYaw, 0);
+            if(hatchling instanceof EntityDinoEgg){
+            	
+            }else{
+            	if(hatchling instanceof EntityNewPrehistoric){
+            		((EntityNewPrehistoric) hatchling).onSpawnWithEgg(null);
+            		((EntityNewPrehistoric) hatchling).setDinoAge(1);
+            	}
+            }
+            for (int i = 0; i < 7; ++i)
+            {
+                double d0 = this.rand.nextGaussian() * 0.02D;
+                double d1 = this.rand.nextGaussian() * 0.02D;
+                double d2 = this.rand.nextGaussian() * 0.02D;
+                this.worldObj.spawnParticle("heart", this.posX + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, this.posY + 0.5D + (double)(this.rand.nextFloat() * this.height), this.posZ + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, d0, d1, d2);
+            }
+            this.worldObj.spawnEntityInWorld(hatchling);
+        }
 	}
 
 	public boolean isThereNearbyTypes() {
@@ -1980,7 +2058,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		}
 		return false;
 	}
-	
+
 	public void setNavigator(){
 		float f = 0;
 		try {
