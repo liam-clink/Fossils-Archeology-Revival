@@ -11,6 +11,7 @@
 	"record_bones_disc": {"category": "record","sounds": [{"name": "record_bones","stream": true}]},
 	"music.first_dinosaur": {"category": "record","sounds": [{"name": "music_first_dinosaur","stream": true}]},
     "music.anu": {"category": "record","sounds": [{"name": "music_anu","stream": true}]},
+    "music.mating": {"category": "neutral","sounds": [{"name": "music_mating_0", "stream": true}, {"name": "music_mating_1", "stream": true}, {"name": "music_mating_2", "stream": true}]},	
 	"anu_living_healthy": {"category": "neutral","sounds": ["anu_living_stage1_0", "anu_living_stage1_1", "anu_living_stage1_2", "anu_living_stage1_3"]},
 	"anu_living_middle": {"category": "neutral","sounds": ["anu_living_stage2_0"]},
 	"anu_death_effect": {"category": "neutral","sounds": ["anu_death_effect"]}

@@ -44,7 +44,7 @@ public class EntityDinoEgg extends EntityLiving{
 	}
 
 	public EntityDinoEgg(World var1) {
-		this(var1, (EnumPrehistoric) null);
+		this(var1, EnumPrehistoric.Triceratops);
 	}
 
 	protected void entityInit(){
@@ -126,6 +126,7 @@ public class EntityDinoEgg extends EntityLiving{
 	}
 
 	private void tickHatching() {
+		this.setDead();
 		float brightness = this.getBrightness(1.0F);
 		EntityPlayer player = null;
 		if ((this.ParentOwner == "" || this.worldObj.getPlayerEntityByName(this.ParentOwner) == null) && this.worldObj.getClosestPlayerToEntity(this, 16.0D) != null) {
@@ -153,54 +154,54 @@ public class EntityDinoEgg extends EntityLiving{
 			}
 		}
 
-			if (this.getBirthTick() >= this.HatchingNeedTime) {
-				if (this.worldObj.isRemote) {
-					return;
+		if (this.getBirthTick() >= this.HatchingNeedTime) {
+			if (this.worldObj.isRemote) {
+				return;
+			}
+
+			BiomeGenBase var3 = this.worldObj.provider.worldChunkMgr.getBiomeGenAt((int) Math.floor(this.posX), (int) Math.floor(this.posZ));
+			Object var5 = this.selfType.invokeClass(this.worldObj);
+			if(var5 != null){
+
+				if (var5 instanceof EntityNewPrehistoric) {
+					if (player != null) {
+						player.addStat(FossilAchievementHandler.firstDino, 1);
+					}
+					if (((EntityNewPrehistoric) var5).selfType.isTameable() && player != null) {
+						if (((EntityNewPrehistoric) var5).selfType != EnumPrehistoric.Tyrannosaurus && ((EntityNewPrehistoric) var5).selfType != EnumPrehistoric.Allosaurus && ((EntityNewPrehistoric) var5).selfType != EnumPrehistoric.Sarcosuchus) {
+							((EntityNewPrehistoric) var5).setTamed(true);
+							((EntityNewPrehistoric) var5).setOwner(player.getUniqueID().toString());
+							((EntityNewPrehistoric) var5).setOwnerDisplayName(player.getCommandSenderName());
+							((EntityNewPrehistoric) var5).currentOrder = EnumOrderType.FOLLOW;
+						}
+					}
 				}
 
-				BiomeGenBase var3 = this.worldObj.provider.worldChunkMgr.getBiomeGenAt((int) Math.floor(this.posX), (int) Math.floor(this.posZ));
-				Object var5 = this.selfType.invokeClass(this.worldObj);
-				if(var5 != null){
+				((EntityLiving) var5).setLocationAndAngles((double) ((int) Math.floor(this.posX)), (double) ((int) Math.floor(this.posY) + 1), (double) ((int) Math.floor(this.posZ)), this.worldObj.rand.nextFloat() * 360.0F, 0.0F);
 
-					if (var5 instanceof EntityNewPrehistoric) {
+				if (this.worldObj.checkNoEntityCollision(((EntityLiving) var5).boundingBox)
+						&& this.worldObj.getCollidingBoundingBoxes((Entity) var5, ((EntityLiving) var5).boundingBox).size() == 0
+						&& (!this.worldObj.isAnyLiquid(((EntityLiving) var5).boundingBox)
+								|| this.selfType == EnumPrehistoric.Mosasaurus || this.selfType == EnumPrehistoric.Liopleurodon)) {
+					//if (!this.worldObj.isRemote)
+					{
+						this.worldObj.spawnEntityInWorld((Entity) var5);
+
 						if (player != null) {
-							player.addStat(FossilAchievementHandler.firstDino, 1);
-						}
-						if (((EntityNewPrehistoric) var5).selfType.isTameable() && player != null) {
-							if (((EntityNewPrehistoric) var5).selfType != EnumPrehistoric.Tyrannosaurus && ((EntityNewPrehistoric) var5).selfType != EnumPrehistoric.Allosaurus && ((EntityNewPrehistoric) var5).selfType != EnumPrehistoric.Sarcosuchus) {
-								((EntityNewPrehistoric) var5).setTamed(true);
-								((EntityNewPrehistoric) var5).setOwner(player.getUniqueID().toString());
-								((EntityNewPrehistoric) var5).setOwnerDisplayName(player.getCommandSenderName());
-								((EntityNewPrehistoric) var5).currentOrder = EnumOrderType.FOLLOW;
-							}
+							Revival.showMessage(StatCollector.translateToLocal(LocalizationStrings.DINOEGG_HATCHED), player);
 						}
 					}
-
-					((EntityLiving) var5).setLocationAndAngles((double) ((int) Math.floor(this.posX)), (double) ((int) Math.floor(this.posY) + 1), (double) ((int) Math.floor(this.posZ)), this.worldObj.rand.nextFloat() * 360.0F, 0.0F);
-
-					if (this.worldObj.checkNoEntityCollision(((EntityLiving) var5).boundingBox)
-							&& this.worldObj.getCollidingBoundingBoxes((Entity) var5, ((EntityLiving) var5).boundingBox).size() == 0
-							&& (!this.worldObj.isAnyLiquid(((EntityLiving) var5).boundingBox)
-									|| this.selfType == EnumPrehistoric.Mosasaurus || this.selfType == EnumPrehistoric.Liopleurodon)) {
-						//if (!this.worldObj.isRemote)
-						{
-							this.worldObj.spawnEntityInWorld((Entity) var5);
-
-							if (player != null) {
-								Revival.showMessage(StatCollector.translateToLocal(LocalizationStrings.DINOEGG_HATCHED), player);
-							}
-						}
-						this.setDead();
-					} else {
-						//System.err.println("EGGERROR-NOPLACE");
-						Revival.showMessage(StatCollector.translateToLocal(LocalizationStrings.DINOEGG_NOSPACE), player);
-						this.setBirthTick(this.getBirthTick() - 500);
-						//System.err.println("EGGERROR3"+String.valueOf(i));
-					}
+					this.setDead();
+				} else {
+					//System.err.println("EGGERROR-NOPLACE");
+					Revival.showMessage(StatCollector.translateToLocal(LocalizationStrings.DINOEGG_NOSPACE), player);
+					this.setBirthTick(this.getBirthTick() - 500);
+					//System.err.println("EGGERROR3"+String.valueOf(i));
 				}
 			}
 		}
-	
+	}
+
 
 	@Override
 	public void writeEntityToNBT(NBTTagCompound var1) {
@@ -236,12 +237,13 @@ public class EntityDinoEgg extends EntityLiving{
 
 		if (itemstack == null) {
 			Item i0 = this.selfType.eggItem;
-			ItemStack var3 = new ItemStack(i0, 1, 1);
-
-			if (player.inventory.addItemStackToInventory(var3)) {
-				this.worldObj.playSoundAtEntity(player, "random.pop", 0.2F, ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
-				this.setDead();
+			ItemStack var3 = new ItemStack(i0);
+			if(!player.capabilities.isCreativeMode){
+				if (player.inventory.addItemStackToInventory(var3)) {
+					this.worldObj.playSoundAtEntity(player, "random.pop", 0.2F, ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
+				}
 			}
+			this.setDead();
 
 			return true;
 		} else if (FMLCommonHandler.instance().getSide().isClient() && itemstack.getItem() == FAItemRegistry.INSTANCE.dinoPedia) {

@@ -184,6 +184,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		this.tasks.addTask(7, new DinoAIHideFromSun(this));
 		this.tasks.addTask(8, new DinoAIRunAway(this, EntityLivingBase.class, 16.0F, this.getSpeed() / 2, this.getSpeed()));
 		this.tasks.addTask(9, new DinoAIFlee(this));
+		this.tasks.addTask(10, new DinoAIFindBubbleBlock(this));
 		this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
 		this.targetTasks.addTask(2, new DinoAIAgressive(this, EntityLivingBase.class, 1, true, isCannibal()));
 		this.targetTasks.addTask(3, new DinoAIHurtByTarget(this));
@@ -443,7 +444,6 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 						TileEntity feeder = this.worldObj.getTileEntity(MathHelper.floor_double(this.posX + dx), MathHelper.floor_double(this.posY + dy), MathHelper.floor_double(this.posZ + dz));
 
 						if (feeder != null && feeder instanceof TileEntityNewFeeder && !((TileEntityNewFeeder) feeder).isEmpty(selfType)) {
-							System.out.println(feeder);
 							return (TileEntityNewFeeder) feeder;
 						}
 					}
@@ -488,6 +488,41 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		}
 
 		return false;
+	}
+
+	public int getNearestBubbleBlock(int range, int type){
+		for (int r = 1; r <= range; r++) {
+			for (int ds = -r; ds <= r; ds++) {
+				for (int dy = 4; dy > -5; dy--) {
+					int x = MathHelper.floor_double(this.posX + ds);
+					int y = MathHelper.floor_double(this.posY + dy);
+					int z = MathHelper.floor_double(this.posZ - r);
+					if (this.posY + dy >= 0 && this.posY + dy <= this.worldObj.getHeight() && this.worldObj.getBlock(x, y, z) == FABlockRegistry.INSTANCE.bubbleMachine && this.worldObj.isBlockIndirectlyGettingPowered(x, y, z)) {
+						switch(type){
+						case 0:
+							return x;
+						case 1:
+							return y;
+						case 2:
+							return z;
+						}
+					}
+
+					if (this.posY + dy >= 0 && this.posY + dy <= this.worldObj.getHeight() && this.worldObj.getBlock(x, y, z) == FABlockRegistry.INSTANCE.bubbleMachine && this.worldObj.isBlockIndirectlyGettingPowered(x, y, z)) {
+						switch(type){
+						case 0:
+							return x;
+						case 1:
+							return y;
+						case 2:
+							return z;
+						}
+						}
+				}
+			}
+
+		}
+		return 0;
 	}
 
 	public boolean isPlantBlock(Block block) {
@@ -1539,7 +1574,6 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 								this.setMood(this.getMood() - 1);
 							}
 						} else {
-							System.out.println(player.getDisplayName());
 
 							this.setMood(this.getMood() - 1);
 							Revival.NETWORK_WRAPPER.sendToAll(new MessageFoodParticles(getEntityId(), FABlockRegistry.INSTANCE.volcanicRock));
@@ -1649,119 +1683,6 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		return "fossil:textures/model/" + selfType.toString().toLowerCase() + "_0/" + toggle + selfType.toString().toLowerCase() + gender + toggleList + sleeping + ".png";
 	}
 
-	@SideOnly(Side.CLIENT)
-	public void showPedia(GuiPedia p0) {
-
-		p0.reset();
-		//p0.printHappyBar(new ResourceLocation(Revival.MODID + ":"
-		//		+ "textures/items/" + this.selfType.toString() + "_DNA.png"),
-		//		((p0.xGui / 2) + (p0.xGui / 4)), 7, 16, 16); // 185
-
-		/*
-		 * LEFT PAGE
-		 *
-		 * OWNER: (+2) OWNER NAME RIDEABLE ORDER ABLE TO FLY ABLE TO CHEST
-		 * DANGEROUS
-		 */
-
-		/*
-		 * RIGHT PAGE
-		 *
-		 * CUSTOM NAME DINOSAUR NAME DINO AGE HEALTH HUNGER
-		 */
-		if (this.hasCustomNameTag()) {
-			p0.printStringXY(this.getCustomNameTag(), GuiPedia.rightIndent, 24, 40,
-					90, 245);
-		}
-
-		p0.printStringXY(
-				StatCollector.translateToLocal("entity.fossil."
-						+ this.selfType.toString() + ".name"), GuiPedia.rightIndent,
-						34, 0, 0, 0);
-		//p0.printHappyBar(pediaclock, GuiPedia.rightIndent, 46, 8, 8);
-		//p0.printHappyBar(pediaheart, GuiPedia.rightIndent, 58, 9, 9);
-		//p0.printHappyBar(pediafood, GuiPedia.rightIndent, 70, 9, 9);
-
-		// Print "Day" after age
-		if (this.getDinoAge() == 1) {
-			p0.printStringXY(
-					String.valueOf(this.getDinoAge())
-					+ " "
-					+ StatCollector
-					.translateToLocal(LocalizationStrings.PEDIA_EGG_DAY),
-					GuiPedia.rightIndent + 12, 46);
-		} else {
-			p0.printStringXY(
-					String.valueOf(this.getDinoAge())
-					+ " "
-					+ StatCollector
-					.translateToLocal(LocalizationStrings.PEDIA_EGG_DAYS),
-					GuiPedia.rightIndent + 12, 46);
-		}
-
-		// Display Health
-		p0.printStringXY(
-				String.valueOf(this.getHealth()) + '/' + this.getMaxHealth(),
-				GuiPedia.rightIndent + 12, 58);
-		// Display Hunger
-		p0.printStringXY(
-				String.valueOf(this.getHunger()) + '/' + this.getMaxHunger(),
-				GuiPedia.rightIndent + 12, 70);
-
-		// Display owner name
-		if (this.selfType.isTameable() && this.isTamed()) {
-			if (this.getOwnerDisplayName().length() > 0) {
-				p0.addStringLR(
-						StatCollector
-						.translateToLocal(LocalizationStrings.PEDIA_TEXT_OWNER),
-						true);
-
-				// //////////1.7.10 BLOCK //////////////
-
-				String s0 = String.valueOf(this.getOwnerDisplayName());
-				if (s0.length() > 11) {
-					s0 = this.getOwnerDisplayName().substring(0, 11);
-				}
-
-				p0.addStringLR(s0, true);
-				// /////////////////////////////////////
-
-				// //////////1.7.2 BLOCK //////////////
-				/*
-				 * String s0 = this.getOwnerName(); if (s0.length() > 11) { s0 =
-				 * this.getOwnerName().substring(0, 11); }
-				 *
-				 * p0.addStringLR(s0, true);
-				 */
-				// /////////////////////////////////////
-			} else {
-				p0.addStringLR(StatCollector.translateToLocal("Tamed"), true);
-			}
-		} else {
-			p0.addStringLR(StatCollector.translateToLocal("Untamed"), true);
-		}
-		// Display if Rideable
-		if (this.selfType.isRideable() && this.isAdult()) {
-			p0.addStringLR(StatCollector
-					.translateToLocal(LocalizationStrings.PEDIA_TEXT_RIDEABLE),
-					true);
-		}
-
-		if (this.selfType.orderItem != null) {
-			p0.addStringLR(
-					StatCollector.translateToLocal("Order: "
-							+ (new ItemStack(this.selfType.orderItem))
-							.getDisplayName()), true);
-		}
-
-		for (int i = 0; i < this.selfType.FoodItemList.index; i++) {
-			if (this.selfType.FoodItemList.getItem(i) != null) {
-				p0.addMiniItem(this.selfType.FoodItemList.getItem(i));
-			}
-		}
-
-	}
-
 	public int getTailSegments() {
 		return 3;
 	}
@@ -1859,7 +1780,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	}
 
 	public boolean canDinoHunt(Entity target) {
-		
+
 		if (this.selfType.diet != EnumDiet.HERBIVORE && this.selfType.diet != EnumDiet.NONE && canAttackClass(target.getClass())) {
 			if (width >= target.width) {
 				if (target instanceof EntityNewPrehistoric) {
@@ -1929,36 +1850,44 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		}
 		if(!listOfFemales.isEmpty()){
 			EntityNewPrehistoric prehistoric = (EntityNewPrehistoric)listOfFemales.get(0);
-			prehistoric.procreate(this);
-			this.ticksTillMate = this.rand.nextInt(600) + 600;
-			prehistoric.ticksTillMate = this.rand.nextInt(600) + 600;
+			this.getNavigator().tryMoveToEntityLiving(prehistoric, 1);
+			for (int i = 0; i < 7; ++i)
+			{
+				double dd = this.rand.nextGaussian() * 0.02D;
+				double dd1 = this.rand.nextGaussian() * 0.02D;
+				double dd2 = this.rand.nextGaussian() * 0.02D;
+				Revival.PROXY.spawnPacketHeartParticles(this.worldObj, (float)(this.posX + (this.rand.nextFloat() * this.width * 2.0F) - this.width), (float)(this.posY + 0.5D + (this.rand.nextFloat() * this.height)), (float)(this.posZ + (this.rand.nextFloat() * this.width * 2.0F) - this.width), dd, dd1, dd2);
+				Revival.PROXY.spawnPacketHeartParticles(prehistoric.worldObj, (float)(prehistoric.posX + (prehistoric.rand.nextFloat() * prehistoric.width * 2.0F) - prehistoric.width), (float)(prehistoric.posY + 0.5D + (prehistoric.rand.nextFloat() * prehistoric.height)), (float)(prehistoric.posZ + (prehistoric.rand.nextFloat() * prehistoric.width * 2.0F) - prehistoric.width), dd, dd1, dd2);
+
+			}
+			double distance = (double) (this.width * 8.0F * this.width * 8.0F + prehistoric.width);
+
+			if(this.getDistanceSq(prehistoric.posX, prehistoric.boundingBox.minY, prehistoric.posZ) <= distance){
+				prehistoric.procreate(this);
+				this.ticksTillMate = this.rand.nextInt(6000) + 6000;
+				prehistoric.ticksTillMate = this.rand.nextInt(12000) + 24000;
+			}
 		}
 	}
-	
+
 	public void procreate(EntityNewPrehistoric mob){
+		this.playSound("fossil:music.mating", 1, 1);
 		Entity hatchling = this.createEgg(mob);
-        if (hatchling != null)
-        {
-            this.entityToAttack = null;
-            mob.entityToAttack = null;
-            hatchling.setPositionAndRotation(this.posX, this.posY, this.posZ, this.rotationYaw, 0);
-            if(hatchling instanceof EntityDinoEgg){
-            	
-            }else{
-            	if(hatchling instanceof EntityNewPrehistoric){
-            		((EntityNewPrehistoric) hatchling).onSpawnWithEgg(null);
-            		((EntityNewPrehistoric) hatchling).setDinoAge(1);
-            	}
-            }
-            for (int i = 0; i < 7; ++i)
-            {
-                double d0 = this.rand.nextGaussian() * 0.02D;
-                double d1 = this.rand.nextGaussian() * 0.02D;
-                double d2 = this.rand.nextGaussian() * 0.02D;
-                this.worldObj.spawnParticle("heart", this.posX + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, this.posY + 0.5D + (double)(this.rand.nextFloat() * this.height), this.posZ + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, d0, d1, d2);
-            }
-            this.worldObj.spawnEntityInWorld(hatchling);
-        }
+		if (hatchling != null)
+		{
+			this.entityToAttack = null;
+			mob.entityToAttack = null;
+			hatchling.setPositionAndRotation(this.posX, this.posY + 1, this.posZ, this.rotationYaw, 0);
+			if(hatchling instanceof EntityDinoEgg){
+
+			}else{
+				if(hatchling instanceof EntityNewPrehistoric){
+					((EntityNewPrehistoric) hatchling).onSpawnWithEgg(null);
+					((EntityNewPrehistoric) hatchling).setDinoAge(1);
+				}
+			}
+			this.worldObj.spawnEntityInWorld(hatchling);
+		}
 	}
 
 	public boolean isThereNearbyTypes() {
@@ -2068,5 +1997,10 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		} catch (IllegalAccessException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public EntityAgeable createChild(EntityAgeable entity) {
+		return null;
 	}
 }

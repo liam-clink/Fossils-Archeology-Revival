@@ -84,6 +84,7 @@ import com.github.revival.client.renderer.item.ItemVaseKylixRenderer;
 import com.github.revival.client.renderer.item.ItemVaseVoluteRenderer;
 import com.github.revival.client.renderer.particle.BubbleFX;
 import com.github.revival.client.renderer.particle.DeathOrbFX;
+import com.github.revival.client.renderer.particle.HeartFX;
 import com.github.revival.client.renderer.particle.SleepFX;
 import com.github.revival.client.renderer.particle.TarDropsFX;
 import com.github.revival.client.renderer.tileentity.RenderFeeder;
@@ -316,7 +317,7 @@ public class ClientProxy extends ServerProxy {
     }
        
     public void spawnPacketHeartParticles(World world, float f, float f1, float f2, double motionX, double motionY, double motionZ){
-        Minecraft.getMinecraft().effectRenderer.addEffect(new EntityHeartFX(world, f, f1, f2, motionX, motionY, motionZ));
+        Minecraft.getMinecraft().effectRenderer.addEffect(new HeartFX(world, f, f1, f2, motionX, motionY, motionZ));
     }
 
     public void spawnPacketItemParticles(World world, float f, float f1, float f2, double motionX, double motionY, double motionZ, Item item){
