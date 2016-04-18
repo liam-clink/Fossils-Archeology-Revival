@@ -38,7 +38,7 @@ public class ServerProxy {
 
     }
 
-    public void stopSound() {
+    public void stopSound(String soundName) {
 
     }
 

@@ -287,11 +287,11 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
             Revival.PROXY.playSound("fossil:music.anu");
         }
         if (this.isDead) {
-            Revival.PROXY.stopSound();
+            Revival.PROXY.stopSound("fossil:music.anu");
         }
         if (this.attackingPlayer != null) {
             if (this.attackingPlayer.isDead) {
-                Revival.PROXY.stopSound();
+                Revival.PROXY.stopSound("fossil:music.anu");
             }
         }
         super.onLivingUpdate();
