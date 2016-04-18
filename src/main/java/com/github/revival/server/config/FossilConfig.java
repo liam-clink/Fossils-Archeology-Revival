@@ -20,6 +20,8 @@ public class FossilConfig {
     public boolean generatePermafrost = true;
     @ConfigEntry(category = "generation")
     public boolean generateVolcanicRock = true;
+    @ConfigEntry(category = "generation")
+    public int[] oreGenerationDimensions = {0};
 
     @ConfigEntry
     public boolean allowFlying = false;
