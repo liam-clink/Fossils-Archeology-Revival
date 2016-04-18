@@ -296,6 +296,7 @@ public class BlockCultivate extends BlockContainer {
         }
 
         this.returnIron(world, x, y, z);
+        this.returnDNA(world, x, y, z);
         if (!world.isRemote) {
             if (isActive) {
                 TileEntityCultivate tileentity = (TileEntityCultivate) world.getTileEntity(x, y, z);
