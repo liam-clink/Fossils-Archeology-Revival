@@ -141,7 +141,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	private Animation currentAnimation;
 	private int animTick;
 	@SideOnly(Side.CLIENT)
-	public ChainBuffer tailBuffer = new ChainBuffer();
+	public UnproblematicChainBuffer tailBuffer = new UnproblematicChainBuffer();
 	public float jumpLength;
 	public int ticksEating;
 	public double attackSpeedBoost;
