@@ -126,7 +126,6 @@ public class EntityDinoEgg extends EntityLiving{
 	}
 
 	private void tickHatching() {
-		this.setDead();
 		float brightness = this.getBrightness(1.0F);
 		EntityPlayer player = null;
 		if ((this.ParentOwner == "" || this.worldObj.getPlayerEntityByName(this.ParentOwner) == null) && this.worldObj.getClosestPlayerToEntity(this, 16.0D) != null) {
