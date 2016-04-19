@@ -8,10 +8,13 @@ import net.minecraftforge.oredict.OreDictionary;
 public class FossilOreDictionary {
     public static void oreRegistration() {
         OreDictionary.registerOre("plankWood", new ItemStack(FABlockRegistry.INSTANCE.palaePlanks));
+        OreDictionary.registerOre("plankWood", new ItemStack(FABlockRegistry.INSTANCE.ancientWood));
         OreDictionary.registerOre("logWood", new ItemStack(FABlockRegistry.INSTANCE.palmLog));
         OreDictionary.registerOre("treeLeaves", new ItemStack(FABlockRegistry.INSTANCE.palmLeaves));
         OreDictionary.registerOre("slabWood", new ItemStack(FABlockRegistry.INSTANCE.palaeSingleSlab));
+        OreDictionary.registerOre("slabWood", new ItemStack(FABlockRegistry.INSTANCE.ancientWoodSingleSlab));
         OreDictionary.registerOre("stairWood", new ItemStack(FABlockRegistry.INSTANCE.palaeStairs));
+        OreDictionary.registerOre("stairWood", new ItemStack(FABlockRegistry.INSTANCE.ancientWoodStairs));
         OreDictionary.registerOre("treeSapling", new ItemStack(FABlockRegistry.INSTANCE.palmSap));
         OreDictionary.registerOre("record", new ItemStack(FAItemRegistry.INSTANCE.fossilrecordBones));
         OreDictionary.registerOre("oreFossil", new ItemStack(FABlockRegistry.INSTANCE.blockFossil));
