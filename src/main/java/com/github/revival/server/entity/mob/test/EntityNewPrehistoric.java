@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
-
-import net.ilexiconn.llibrary.client.model.tools.ChainBuffer;
 import net.ilexiconn.llibrary.server.animation.Animation;
 import net.ilexiconn.llibrary.server.animation.AnimationHandler;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
@@ -1896,7 +1894,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	public void procreate(EntityNewPrehistoric mob){
 		this.playSound("fossil:music.mating", 1, 1);
 		Entity hatchling = this.createEgg(mob);
-		if (hatchling != null)
+		if (hatchling != null && !worldObj.isRemote)
 		{
 			this.entityToAttack = null;
 			mob.entityToAttack = null;

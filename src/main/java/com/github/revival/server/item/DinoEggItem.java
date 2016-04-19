@@ -49,30 +49,14 @@ public class DinoEggItem extends Item {
 				var8 = (Entity) null;
 			}
 
-			if (var8 != null) {
-				((Entity) var8).setLocationAndAngles(var2, var4, var6,
-						var0.rand.nextFloat() * 360.0F, 0.0F);
+			if (var8 != null && !var0.isRemote) {
+				((Entity) var8).setLocationAndAngles(var2, var4, var6, var0.rand.nextFloat() * 360.0F, 0.0F);
 				var0.spawnEntityInWorld((Entity) var8);
 			}
 
 			return var8 != null;
 		}else{
-			if (var1.type == EnumMobType.DINOSAUR ) {
-				switch(var1){
-				case Liopleurodon:
-					var8 = new EntityLiopleurodon(var0);
-					break;
-				case Mosasaurus:
-					var8 = new EntityMosasaurus(var0);
-					break;
-				default:
-					var8 = new EntityPlesiosaurus(var0);
-					break;
-				}
-			} else {
-				var8 = (Entity) null;
-			}
-
+			var8 = var1.invokeClass(var0);
 			if (var8 != null) {
 				((Entity) var8).setLocationAndAngles(var2, var4, var6, var0.rand.nextFloat() * 360.0F, 0.0F);
 				var0.spawnEntityInWorld((Entity) var8);
