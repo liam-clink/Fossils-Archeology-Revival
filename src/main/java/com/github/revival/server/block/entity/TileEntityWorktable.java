@@ -417,19 +417,19 @@ public class TileEntityWorktable extends TileEntity implements IInventory,
 
         if (itemstack.getItem() == new ItemStack(FABlockRegistry.INSTANCE.vaseKylixBlock)
                 .getItem() && itemstack.getItemDamage() == 0) {
-            output = new ItemStack(FABlockRegistry.INSTANCE.vaseKylixBlock, 1, 1);
+            output = new ItemStack(FABlockRegistry.INSTANCE.vaseKylixBlock, itemstack.stackSize, 1);
             return output;
         }
 
         if (itemstack.getItem() == new ItemStack(FABlockRegistry.INSTANCE.vaseAmphoraBlock)
                 .getItem() && itemstack.getItemDamage() == 0) {
-            output = new ItemStack(FABlockRegistry.INSTANCE.vaseAmphoraBlock, 1, 1);
+            output = new ItemStack(FABlockRegistry.INSTANCE.vaseAmphoraBlock, itemstack.stackSize, 1);
             return output;
         }
 
         if (itemstack.getItem() == new ItemStack(FABlockRegistry.INSTANCE.vaseVoluteBlock)
                 .getItem() && itemstack.getItemDamage() == 0) {
-            output = new ItemStack(FABlockRegistry.INSTANCE.vaseVoluteBlock, 1, 1);
+            output = new ItemStack(FABlockRegistry.INSTANCE.vaseVoluteBlock, itemstack.stackSize, 1);
             return output;
         }
 
