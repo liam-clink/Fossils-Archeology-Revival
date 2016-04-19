@@ -6,6 +6,7 @@ import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 import net.ilexiconn.llibrary.client.model.ModelAnimator;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
+import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
 public class ModelTriceratops extends ModelNewPrehistoric {
@@ -297,7 +298,7 @@ public class ModelTriceratops extends ModelNewPrehistoric {
 		this.chainWave(tailParts, speed2, 0.05F, -3, entity.ticksExisted, 1);
 		this.chainSwing(tailParts, speed2, 0.35F, -3, entity.ticksExisted, 1);
 		this.chainWave(neckParts, speed2, 0.05F, -3, entity.ticksExisted, 1);
-		((EntityNewPrehistoric) entity).tailBuffer.applyChainSwingBuffer(tailParts);
+		((EntityNewPrehistoric) entity).chainBuffer.applyChainSwingBuffer((ModelRenderer[]) tailParts);
 	}
 
 	//	@Override

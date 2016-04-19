@@ -6,6 +6,7 @@ import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 import net.ilexiconn.llibrary.client.model.ModelAnimator;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
+import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
 public class ModelAllosaurus extends ModelNewPrehistoric {
@@ -271,7 +272,7 @@ public class ModelAllosaurus extends ModelNewPrehistoric {
 		this.chainSwing(tailParts, speed, 0.15F, -3, entity.ticksExisted, 1);
 		this.chainSwing(tailParts, speed2, 0.25F, -3, f, f1);
 		this.chainWave(neckParts, speed, 0.15F, 3, entity.ticksExisted, 1);
-		((EntityNewPrehistoric)entity).tailBuffer.applyChainSwingBuffer(tailParts);
+		((EntityNewPrehistoric)entity).chainBuffer.applyChainSwingBuffer((ModelRenderer[]) tailParts);
 
 	}
 

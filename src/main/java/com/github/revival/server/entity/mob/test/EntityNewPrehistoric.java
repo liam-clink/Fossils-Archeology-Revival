@@ -1,13 +1,26 @@
 package com.github.revival.server.entity.mob.test;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import com.github.revival.Revival;
+import com.github.revival.client.gui.GuiPedia;
+import com.github.revival.server.api.IPrehistoricAI;
+import com.github.revival.server.block.FABlockRegistry;
+import com.github.revival.server.block.entity.TileEntityNewFeeder;
+import com.github.revival.server.entity.EntityDinoEgg;
+import com.github.revival.server.entity.EnumDiet;
+import com.github.revival.server.entity.ai.DinoAIAttackOnCollide;
+import com.github.revival.server.enums.*;
+import com.github.revival.server.enums.EnumPrehistoricAI.*;
+import com.github.revival.server.handler.LocalizationStrings;
+import com.github.revival.server.item.FAItemRegistry;
+import com.github.revival.server.message.MessageFoodParticles;
+import com.github.revival.server.message.MessageHappyParticles;
+import com.github.revival.server.message.MessageSetDay;
+import com.github.revival.server.util.FoodMappings;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.relauncher.ReflectionHelper;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.ilexiconn.llibrary.client.model.tools.ChainBuffer;
 import net.ilexiconn.llibrary.server.animation.Animation;
 import net.ilexiconn.llibrary.server.animation.AnimationHandler;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
@@ -17,12 +30,7 @@ import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.command.IEntitySelector;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityAgeable;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.IEntityLivingData;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIOwnerHurtByTarget;
 import net.minecraft.entity.item.EntityItem;
@@ -36,54 +44,19 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.ChunkCoordinates;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
-import net.minecraft.util.Vec3;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
-
 import org.lwjgl.opengl.GL11;
 
-import com.github.revival.Revival;
-import com.github.revival.client.gui.GuiPedia;
-import com.github.revival.server.api.IPrehistoricAI;
-import com.github.revival.server.block.FABlockRegistry;
-import com.github.revival.server.block.entity.TileEntityNewFeeder;
-import com.github.revival.server.entity.EntityDinoEgg;
-import com.github.revival.server.entity.EnumDiet;
-import com.github.revival.server.entity.ai.DinoAIAttackOnCollide;
-import com.github.revival.server.enums.EnumAnimation;
-import com.github.revival.server.enums.EnumMobType;
-import com.github.revival.server.enums.EnumOrderType;
-import com.github.revival.server.enums.EnumPrehistoric;
-import com.github.revival.server.enums.EnumPrehistoricAI.Activity;
-import com.github.revival.server.enums.EnumPrehistoricAI.Attacking;
-import com.github.revival.server.enums.EnumPrehistoricAI.Climbing;
-import com.github.revival.server.enums.EnumPrehistoricAI.Following;
-import com.github.revival.server.enums.EnumPrehistoricAI.Jumping;
-import com.github.revival.server.enums.EnumPrehistoricAI.Moving;
-import com.github.revival.server.enums.EnumPrehistoricAI.Response;
-import com.github.revival.server.enums.EnumPrehistoricAI.Stalking;
-import com.github.revival.server.enums.EnumPrehistoricAI.Taming;
-import com.github.revival.server.enums.EnumPrehistoricAI.Untaming;
-import com.github.revival.server.enums.EnumPrehistoricAI.WaterAbility;
-import com.github.revival.server.enums.EnumPrehistoricMood;
-import com.github.revival.server.enums.EnumSituation;
-import com.github.revival.server.handler.LocalizationStrings;
-import com.github.revival.server.item.FAItemRegistry;
-import com.github.revival.server.message.MessageFoodParticles;
-import com.github.revival.server.message.MessageHappyParticles;
-import com.github.revival.server.message.MessageSetDay;
-import com.github.revival.server.util.FoodMappings;
-
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.relauncher.ReflectionHelper;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 
 public abstract class EntityNewPrehistoric extends EntityTameable implements IPrehistoricAI, IAnimatedEntity {
 
@@ -138,7 +111,8 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	protected boolean breaksBlocks;
 	private Animation currentAnimation;
 	private int animTick;
-	public UnproblematicChainBuffer tailBuffer = new UnproblematicChainBuffer();
+	@SideOnly(Side.CLIENT)
+	public ChainBuffer chainBuffer;
 	public float jumpLength;
 	public int ticksEating;
 	public double attackSpeedBoost;
@@ -188,6 +162,9 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		//this.targetTasks.addTask(2, new EntityAITargetNonTamed(this, EntityLivingBase.class, 200, false));
 		hasBabyTexture = true;
 		this.setScale(this.getDinosaurSize());
+		if (FMLCommonHandler.instance().getEffectiveSide().isClient()) {
+			this.chainBuffer = new ChainBuffer();
+		}
 	}
 
 	public static boolean isCannibal() {
@@ -844,7 +821,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 			ticksSprinted = 0;
 			this.setSprinting(false);
 		}
-		tailBuffer.calculateChainSwingBuffer(70, 10, 4, this);
+		Revival.PROXY.calculateChainBuffer(this);
 		if (this.ridingEntity != null) {
 			if (this.ridingEntity.isDead) {
 				this.mountEntity(null);

@@ -8,6 +8,7 @@ import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 import net.ilexiconn.llibrary.client.model.ModelAnimator;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
+import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
 public class ModelVelociraptor extends ModelNewPrehistoric {
@@ -402,7 +403,7 @@ public class ModelVelociraptor extends ModelNewPrehistoric {
             this.flap(leftUpperArm, 0.8F, -0.4F, true, 0.3F, -0.2F, entity.ticksExisted, 1);
             this.flap(rightUpperArm, 0.8F, -0.4F, false, 0.3F, 0.2F, entity.ticksExisted, 1);
         }
-        ((EntityNewPrehistoric) entity).tailBuffer.applyChainSwingBuffer(tailParts);
+        ((EntityNewPrehistoric) entity).chainBuffer.applyChainSwingBuffer((ModelRenderer[]) tailParts);
         //((ChainBuffer)((EntityVelociraptor)entity).tailBuffer).applyChainSwingBuffer(tailParts);
 
     }

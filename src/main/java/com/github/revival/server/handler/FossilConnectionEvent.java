@@ -1,7 +1,6 @@
 package com.github.revival.server.handler;
 
 import com.github.revival.Revival;
-import com.github.revival.server.config.FossilConfig;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
 import net.ilexiconn.llibrary.server.config.ConfigHandler;

@@ -6,6 +6,7 @@ import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 import net.ilexiconn.llibrary.client.model.ModelAnimator;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
+import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
 public class ModelDilophosaurus extends ModelNewPrehistoric {
@@ -252,7 +253,7 @@ public class ModelDilophosaurus extends ModelNewPrehistoric {
 			sitAnimationPos(rightThigh, sitProgress, 0, 5.8F, 0);
 	 
 		}
-		((EntityNewPrehistoric) entity).tailBuffer.applyChainSwingBuffer(tailParts);
+		((EntityNewPrehistoric) entity).chainBuffer.applyChainSwingBuffer((ModelRenderer[]) tailParts);
 	}
 
 

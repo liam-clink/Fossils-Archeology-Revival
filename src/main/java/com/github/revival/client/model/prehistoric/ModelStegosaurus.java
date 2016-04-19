@@ -6,6 +6,7 @@ import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 import net.ilexiconn.llibrary.client.model.ModelAnimator;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
+import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
 public class ModelStegosaurus extends ModelNewPrehistoric {
@@ -229,7 +230,7 @@ public class ModelStegosaurus extends ModelNewPrehistoric {
 	        float sitProgress = 0;//((EntityNewPrehistoric) (entity)).sleepProgress;
 
         }
-        ((EntityNewPrehistoric) entity).tailBuffer.applyChainSwingBuffer(tailParts);
+        ((EntityNewPrehistoric) entity).chainBuffer.applyChainSwingBuffer((ModelRenderer[]) tailParts);
     }
 
 }
