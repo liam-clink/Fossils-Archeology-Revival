@@ -127,11 +127,7 @@ public class EntityDinoEgg extends EntityLiving{
 
 	private void tickHatching() {
 		float brightness = this.getBrightness(1.0F);
-		EntityPlayer player = null;
-		if ((this.ParentOwner == "" || this.worldObj.getPlayerEntityByName(this.ParentOwner) == null) && this.worldObj.getClosestPlayerToEntity(this, 16.0D) != null) {
-			player = this.worldObj.getClosestPlayerToEntity(this, 16.0D);
-		}
-
+		EntityPlayer player = this.worldObj.getClosestPlayerToEntity(this, 16.0D);
 		if (this.selfType == EnumPrehistoric.Mosasaurus || this.selfType == EnumPrehistoric.Liopleurodon) {
 			if (this.inWater) {
 				lastBirthTick = this.getBirthTick();
