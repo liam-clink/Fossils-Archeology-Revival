@@ -138,7 +138,6 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	protected boolean breaksBlocks;
 	private Animation currentAnimation;
 	private int animTick;
-	@SideOnly(Side.CLIENT)
 	public UnproblematicChainBuffer tailBuffer = new UnproblematicChainBuffer();
 	public float jumpLength;
 	public int ticksEating;
