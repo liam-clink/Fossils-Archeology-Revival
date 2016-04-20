@@ -20,7 +20,7 @@ public class EntityCompsognathus extends EntityNewPrehistoric {
 	public static final double baseHealth = 4;
 	public static final double maxHealth = 12;
 	public static final double baseSpeed = 0.25D;
-	public static final double maxSpeed = 1.8D;
+	public static final double maxSpeed = 0.4D;
 
 	public EntityCompsognathus(World world) {
 		super(world, EnumPrehistoric.Compsognathus);

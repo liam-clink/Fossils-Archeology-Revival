@@ -101,7 +101,7 @@ public class EntityDinoEgg extends EntityLiving{
 
 	@Override
 	public AxisAlignedBB getCollisionBox(Entity entity) {
-		return null;
+		return this.boundingBox;
 	}
 
 	@Override

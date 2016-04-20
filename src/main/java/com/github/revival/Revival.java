@@ -1,11 +1,32 @@
 package com.github.revival;
 
+import net.ilexiconn.llibrary.server.config.Config;
+import net.ilexiconn.llibrary.server.network.NetworkWrapper;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ChatComponentText;
+import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.common.MinecraftForge;
+
+import org.apache.logging.log4j.Level;
+
 import com.github.revival.client.renderer.tileentity.RenderFeeder;
 import com.github.revival.server.ModState;
 import com.github.revival.server.ServerProxy;
 import com.github.revival.server.biome.FABiomeRegistry;
 import com.github.revival.server.block.FABlockRegistry;
-import com.github.revival.server.block.entity.*;
+import com.github.revival.server.block.entity.TileEntityAnalyzer;
+import com.github.revival.server.block.entity.TileEntityAncientChest;
+import com.github.revival.server.block.entity.TileEntityAnuTotem;
+import com.github.revival.server.block.entity.TileEntityAnubiteStatue;
+import com.github.revival.server.block.entity.TileEntityCultivate;
+import com.github.revival.server.block.entity.TileEntityDrum;
+import com.github.revival.server.block.entity.TileEntityFeeder;
+import com.github.revival.server.block.entity.TileEntityFigurine;
+import com.github.revival.server.block.entity.TileEntitySarcophagus;
+import com.github.revival.server.block.entity.TileEntitySifter;
+import com.github.revival.server.block.entity.TileEntityTimeMachine;
+import com.github.revival.server.block.entity.TileEntityVase;
+import com.github.revival.server.block.entity.TileEntityWorktable;
 import com.github.revival.server.config.FossilConfig;
 import com.github.revival.server.creativetab.FATabRegistry;
 import com.github.revival.server.dimension.anu.WorldProviderAnu;
@@ -13,16 +34,36 @@ import com.github.revival.server.dimension.treasure.WorldProviderTreasure;
 import com.github.revival.server.enchantment.FAEnchantmentRegistry;
 import com.github.revival.server.enums.EnumDinoFoodMob;
 import com.github.revival.server.enums.EnumPrehistoric;
-import com.github.revival.server.gen.*;
+import com.github.revival.server.gen.FossilGenerator;
+import com.github.revival.server.gen.TarGenerator;
+import com.github.revival.server.gen.VolcanicRockGenerator;
+import com.github.revival.server.gen.WorldGenMiscStructures;
+import com.github.revival.server.gen.WorldGeneratorPalaeoraphe;
 import com.github.revival.server.gen.structure.AcademyGenerator;
 import com.github.revival.server.gen.structure.ShipWreckGenerator;
-import com.github.revival.server.handler.*;
+import com.github.revival.server.handler.EventFossilAchivements;
+import com.github.revival.server.handler.EventPlayer;
+import com.github.revival.server.handler.FossilAchievementHandler;
+import com.github.revival.server.handler.FossilBonemealEvent;
+import com.github.revival.server.handler.FossilConnectionEvent;
+import com.github.revival.server.handler.FossilEntities;
+import com.github.revival.server.handler.FossilGuiHandler;
+import com.github.revival.server.handler.FossilInteractEvent;
+import com.github.revival.server.handler.FossilLivingEvent;
+import com.github.revival.server.handler.FossilOreDictionary;
+import com.github.revival.server.handler.FossilRecipes;
+import com.github.revival.server.handler.FossilToolEvent;
+import com.github.revival.server.handler.FossilTradeHandler;
+import com.github.revival.server.handler.LocalizationStrings;
+import com.github.revival.server.handler.PickupHandler;
 import com.github.revival.server.item.FAItemRegistry;
 import com.github.revival.server.message.MessageFoodParticles;
 import com.github.revival.server.message.MessageHappyParticles;
 import com.github.revival.server.message.MessageRollBall;
 import com.github.revival.server.message.MessageSetDay;
+import com.github.revival.server.message.MessageUpdateEgg;
 import com.github.revival.server.util.FossilFoodMappings;
+
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.FMLLog;
@@ -34,13 +75,6 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
-import net.ilexiconn.llibrary.server.config.Config;
-import net.ilexiconn.llibrary.server.network.NetworkWrapper;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.ChatComponentText;
-import net.minecraftforge.common.DimensionManager;
-import net.minecraftforge.common.MinecraftForge;
-import org.apache.logging.log4j.Level;
 
 @Mod(modid = Revival.MODID, name = "Fossils and Archeology Revival", version = Revival.VERSION, dependencies = "required-after:llibrary@[" + Revival.LLIBRARY_VERSION + ",)")
 public class Revival {
@@ -53,7 +87,7 @@ public class Revival {
     public static ServerProxy PROXY;
     @Instance(MODID)
     public static Revival INSTANCE;
-    @NetworkWrapper({MessageFoodParticles.class, MessageSetDay.class, MessageRollBall.class, MessageHappyParticles.class})
+    @NetworkWrapper({MessageFoodParticles.class, MessageSetDay.class, MessageRollBall.class, MessageHappyParticles.class, MessageUpdateEgg.class})
     public static SimpleNetworkWrapper NETWORK_WRAPPER;
     @Config
     public static FossilConfig CONFIG;

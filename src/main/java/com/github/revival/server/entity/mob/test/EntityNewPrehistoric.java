@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+
 import net.ilexiconn.llibrary.server.animation.Animation;
 import net.ilexiconn.llibrary.server.animation.AnimationHandler;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
@@ -78,6 +79,7 @@ import com.github.revival.server.item.FAItemRegistry;
 import com.github.revival.server.message.MessageFoodParticles;
 import com.github.revival.server.message.MessageHappyParticles;
 import com.github.revival.server.message.MessageSetDay;
+import com.github.revival.server.message.MessageUpdateEgg;
 import com.github.revival.server.util.FoodMappings;
 
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -188,6 +190,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		//this.targetTasks.addTask(2, new EntityAITargetNonTamed(this, EntityLivingBase.class, 200, false));
 		hasBabyTexture = true;
 		this.setScale(this.getDinosaurSize());
+		ticksTillMate = 0;
 	}
 
 	public static boolean isCannibal() {
@@ -585,10 +588,9 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 				double dd2 = this.getRNG().nextGaussian() * 0.02D;
 				Revival.PROXY.spawnPacketHeartParticles(this.worldObj, (float)(this.posX + (this.getRNG().nextFloat() * this.width * 2.0F) - this.width), (float)(this.posY + 0.5D + (this.getRNG().nextFloat() * this.height)), (float)(this.posZ + (this.getRNG().nextFloat() * this.width * 2.0F) - this.width), dd, dd1, dd2);
 			}
-			System.out.println("1");
 			this.doPlayBonus(15);
 		}
-		if(this.ticksTillMate == 0 && this.getGender() == 1){
+		if(ticksTillMate == 0 && this.getGender() == 1){
 			this.mate();
 		}
 		if (!this.arePlantsNearby(16) && !mood_noplants) {
@@ -1016,7 +1018,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		}
 		if(this.selfType.type == EnumMobType.DINOSAUR){
 			//baby = new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, new ItemStack(this.selfType.birdEggItem));
-			baby = new EntityDinoEgg(this.worldObj);
+			baby = new EntityDinoEgg(this.worldObj, this.selfType);
 			((EntityDinoEgg)baby).selfType = this.selfType;
 		}
 		return baby;
@@ -1803,14 +1805,10 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
 		if (this.selfType.diet != EnumDiet.HERBIVORE && this.selfType.diet != EnumDiet.NONE && canAttackClass(target.getClass())) {
 			if (width >= target.width) {
-				if (target instanceof EntityNewPrehistoric) {
-					EntityNewPrehistoric mob = (EntityNewPrehistoric) target;
-					if (mob.selfType.diet.fearIndex > selfType.diet.fearIndex) ;
-				}
-				return isHungry();
+				return isHungry() || target instanceof EntityToyBase && this.ticksTillPlay == 0;
 			}
 		}
-		return false;
+		return target instanceof EntityToyBase && this.ticksTillPlay == 0;
 		/*	if(this.selfType.diet != EnumDiet.HERBIVORE && this.selfType.diet != EnumDiet.NONE){
 			if(mobBoundingBoxDistance >= targetBoundingBoxDistance){	
 				return true;
@@ -1868,18 +1866,9 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 				}
 			}
 		}
-		if(!listOfFemales.isEmpty()){
+		if(!listOfFemales.isEmpty() && this.ticksTillMate == 0){
 			EntityNewPrehistoric prehistoric = (EntityNewPrehistoric)listOfFemales.get(0);
 			this.getNavigator().tryMoveToEntityLiving(prehistoric, 1);
-			for (int i = 0; i < 7; ++i)
-			{
-				double dd = this.rand.nextGaussian() * 0.02D;
-				double dd1 = this.rand.nextGaussian() * 0.02D;
-				double dd2 = this.rand.nextGaussian() * 0.02D;
-				Revival.PROXY.spawnPacketHeartParticles(this.worldObj, (float)(this.posX + (this.rand.nextFloat() * this.width * 2.0F) - this.width), (float)(this.posY + 0.5D + (this.rand.nextFloat() * this.height)), (float)(this.posZ + (this.rand.nextFloat() * this.width * 2.0F) - this.width), dd, dd1, dd2);
-				Revival.PROXY.spawnPacketHeartParticles(prehistoric.worldObj, (float)(prehistoric.posX + (prehistoric.rand.nextFloat() * prehistoric.width * 2.0F) - prehistoric.width), (float)(prehistoric.posY + 0.5D + (prehistoric.rand.nextFloat() * prehistoric.height)), (float)(prehistoric.posZ + (prehistoric.rand.nextFloat() * prehistoric.width * 2.0F) - prehistoric.width), dd, dd1, dd2);
-
-			}
 			double distance = (double) (this.width * 8.0F * this.width * 8.0F + prehistoric.width);
 
 			if(this.getDistanceSq(prehistoric.posX, prehistoric.boundingBox.minY, prehistoric.posZ) <= distance){
@@ -1891,7 +1880,16 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	}
 
 	public void procreate(EntityNewPrehistoric mob){
-		this.playSound("fossil:music.mating", 1, 1);
+		for (int i = 0; i < 7; ++i)
+		{
+			double dd = this.rand.nextGaussian() * 0.02D;
+			double dd1 = this.rand.nextGaussian() * 0.02D;
+			double dd2 = this.rand.nextGaussian() * 0.02D;
+			Revival.PROXY.spawnPacketHeartParticles(this.worldObj, (float)(this.posX + (this.rand.nextFloat() * this.width * 2.0F) - this.width), (float)(this.posY + 0.5D + (this.rand.nextFloat() * this.height)), (float)(this.posZ + (this.rand.nextFloat() * this.width * 2.0F) - this.width), dd, dd1, dd2);
+			Revival.PROXY.spawnPacketHeartParticles(mob.worldObj, (float)(mob.posX + (mob.rand.nextFloat() * mob.width * 2.0F) - mob.width), (float)(mob.posY + 0.5D + (mob.rand.nextFloat() * mob.height)), (float)(mob.posZ + (mob.rand.nextFloat() * mob.width * 2.0F) - mob.width), dd, dd1, dd2);
+
+		}
+		if(this.rand.nextInt(15) == 0)this.playSound("fossil:music.mating", 1, 1);
 		Entity hatchling = this.createEgg(mob);
 		if (hatchling != null && !worldObj.isRemote)
 		{
@@ -1899,7 +1897,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 			mob.entityToAttack = null;
 			hatchling.setPositionAndRotation(this.posX, this.posY + 1, this.posZ, this.rotationYaw, 0);
 			if(hatchling instanceof EntityDinoEgg){
-
+				Revival.NETWORK_WRAPPER.sendToAll(new MessageUpdateEgg(((EntityDinoEgg) hatchling).getEntityId(), this.selfType.ordinal()));
 			}else{
 				if(hatchling instanceof EntityNewPrehistoric){
 					((EntityNewPrehistoric) hatchling).onSpawnWithEgg(null);

@@ -18,7 +18,7 @@ public class RenderDinoEgg extends RenderLiving {
     
 	@Override
     protected void preRenderCallback(EntityLivingBase entity, float f) {
-    	GL11.glScalef(((EntityDinoEgg)entity).selfType.eggScale, ((EntityDinoEgg)entity).selfType.eggScale, ((EntityDinoEgg)entity).selfType.eggScale);
+    	//GL11.glScalef(((EntityDinoEgg)entity).selfType.eggScale, ((EntityDinoEgg)entity).selfType.eggScale, ((EntityDinoEgg)entity).selfType.eggScale);
     }
 
 	@Override
