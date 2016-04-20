@@ -6,6 +6,7 @@ import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 import net.ilexiconn.llibrary.client.model.ModelAnimator;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
+import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
 public class ModelGallimimus extends ModelNewPrehistoric {
@@ -279,7 +280,7 @@ public class ModelGallimimus extends ModelNewPrehistoric {
 		this.walk(rightFoot, speed2, -0.4F, false, -0.5F, -0.2F, f, f1);
 		this.chainWave(neckParts, speed2, 0.5F, 4, f, f1);
 		this.chainWave(tailParts, speed2, 0.3F, -4, f, f1);
-		((EntityNewPrehistoric) entity).tailBuffer.applyChainSwingBuffer(tailParts);
+		((EntityNewPrehistoric) entity).chainBuffer.applyChainSwingBuffer((ModelRenderer[]) tailParts);
 	}
 
 

@@ -1,18 +1,17 @@
 package com.github.revival.server;
 
-import java.util.Random;
-
+import com.github.revival.server.block.FABlockRegistry;
+import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
+import com.github.revival.server.item.FAItemRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.client.model.ModelBiped;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ChestGenHooks;
 
-import com.github.revival.server.block.FABlockRegistry;
-import com.github.revival.server.item.FAItemRegistry;
+import java.util.Random;
 
 public class ServerProxy {
     public void init() {
@@ -45,22 +44,13 @@ public class ServerProxy {
     public void spawnAnuParticle(World world, double posX, double posY, double posZ) {
     }
 
-    public void spawnSleepParticle(World world, double posX, double posY, double posZ) {
-    }
-
     public void animate(int animateID) {
     }
 
-    public void doChainBuffer(Object buffer, EntityLivingBase entity) {
+    public void calculateChainBuffer(EntityNewPrehistoric entity) {
+
     }
 
-    public Object getChainBuffer(int tailsegments) {
-        return null;
-    }
-
-    public void spawnTarParticle(World world, double posX, double posY, double posZ) {
-    }
-    
     public void spawnBubbleParticles(World world, float f, float f1, float f2, double motionX, double motionY, double motionZ){}
 
     public void spawnPacketHeartParticles(World world, float f, float f1, float f2, double motionX, double motionY, double motionZ){}

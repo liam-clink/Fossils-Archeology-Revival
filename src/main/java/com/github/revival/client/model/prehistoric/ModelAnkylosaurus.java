@@ -6,6 +6,7 @@ import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 import net.ilexiconn.llibrary.client.model.ModelAnimator;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
+import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
 public class ModelAnkylosaurus extends ModelNewPrehistoric {
@@ -277,7 +278,7 @@ public class ModelAnkylosaurus extends ModelNewPrehistoric {
 			sitAnimationRotation(BodyUpper, sitProgress, (float)Math.toRadians(2.61D), 0, 0);
 			sitAnimationPos(Body, sitProgress, 0, 4.3F, -3);
 		}
-		((EntityNewPrehistoric)entity).tailBuffer.applyChainSwingBuffer(tailParts);
+		((EntityNewPrehistoric)entity).chainBuffer.applyChainSwingBuffer((ModelRenderer[]) tailParts);
     }
 
 }

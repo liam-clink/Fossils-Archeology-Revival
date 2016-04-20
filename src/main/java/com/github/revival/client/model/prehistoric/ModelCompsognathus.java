@@ -3,6 +3,7 @@ package com.github.revival.client.model.prehistoric;
 import net.ilexiconn.llibrary.client.model.ModelAnimator;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
+import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
 import com.github.revival.client.model.prehistoric.test.ModelNewPrehistoric;
@@ -273,7 +274,7 @@ public class ModelCompsognathus extends ModelNewPrehistoric {
 		this.chainSwing(tailParts, speed, 0.15F, -3, entity.ticksExisted, 1);
 		this.chainSwing(tailParts, speed2, 0.25F, -3, f, f1);
 		this.chainWave(neckParts, speed, 0.15F, 3, entity.ticksExisted, 1);
-		((EntityNewPrehistoric) entity).tailBuffer.applyChainSwingBuffer(tailParts);
+		((EntityNewPrehistoric) entity).chainBuffer.applyChainSwingBuffer((ModelRenderer[]) tailParts);
 	}
 
 

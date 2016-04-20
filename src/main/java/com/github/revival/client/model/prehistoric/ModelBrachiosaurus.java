@@ -6,6 +6,7 @@ import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 import net.ilexiconn.llibrary.client.model.ModelAnimator;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
+import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
 public class ModelBrachiosaurus extends ModelNewPrehistoric {
@@ -276,7 +277,7 @@ public class ModelBrachiosaurus extends ModelNewPrehistoric {
 			sitAnimationPos(BackThighLeft, sitProgress, 0F, 5.1F, 2F);
 			sitAnimationPos(BackThighRight, sitProgress, 0F, 5.1F, 2F);
 		}
-		((EntityNewPrehistoric) entity).tailBuffer.applyChainSwingBuffer(tailParts);
+		((EntityNewPrehistoric) entity).chainBuffer.applyChainSwingBuffer((ModelRenderer[]) tailParts);
 	}
 
 
