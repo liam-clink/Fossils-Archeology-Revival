@@ -9,6 +9,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import net.ilexiconn.llibrary.client.model.tools.ChainBuffer;
 import net.ilexiconn.llibrary.server.animation.Animation;
 import net.ilexiconn.llibrary.server.animation.AnimationHandler;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
@@ -140,7 +141,8 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	protected boolean breaksBlocks;
 	private Animation currentAnimation;
 	private int animTick;
-	public UnproblematicChainBuffer tailBuffer = new UnproblematicChainBuffer();
+	@SideOnly(Side.CLIENT)
+	public ChainBuffer chainBuffer;
 	public float jumpLength;
 	public int ticksEating;
 	public double attackSpeedBoost;
@@ -846,7 +848,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 			ticksSprinted = 0;
 			this.setSprinting(false);
 		}
-		tailBuffer.calculateChainSwingBuffer(70, 10, 4, this);
+		Revival.PROXY.calculateChainBuffer(this);
 		if (this.ridingEntity != null) {
 			if (this.ridingEntity.isDead) {
 				this.mountEntity(null);
