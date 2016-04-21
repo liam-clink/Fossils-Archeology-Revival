@@ -57,6 +57,7 @@ public enum FAItemRegistry {
     public Item rawChickenSoup;
     public Item cookedChickenSoup;
     public Item chickenEss;
+    public Item cookedEgg;
     public Item amber;
     public Item DominicanAmber;
     public Item gem;
@@ -139,6 +140,7 @@ public enum FAItemRegistry {
         cookedChickenSoup = new ForgeItemItem("Cooked_Chicken_Soup").setUnlocalizedName(LocalizationStrings.COOKED_CHICKEN_SOUP_NAME).setMaxStackSize(1).setContainerItem(Items.bucket).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
         rawChickenSoup = new ForgeItemItem("Raw_Chicken_Soup").setUnlocalizedName(LocalizationStrings.RAW_CHICKEN_SOUP_NAME).setMaxStackSize(1).setContainerItem(Items.bucket).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
         chickenEss = new ChickenEssItem(10, 0.0F, false, "Essence_Of_Chicken").setUnlocalizedName(LocalizationStrings.EOC_NAME).setContainerItem(Items.glass_bottle).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
+        cookedEgg = new ForgeFoodItem(4, 2.0F, false, "cooked_egg").setUnlocalizedName("cooked_egg").setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
         sjl = new ForgeFoodItem(8, 2.0F, false, "Sio_Chiu_Le").setUnlocalizedName(LocalizationStrings.SJL_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
         fossilrecordBones = new FossilRecordItem(LocalizationStrings.RECORD_BONES_NAME, "fossil:record_bones").setUnlocalizedName(LocalizationStrings.FOSSIL_RECORD_NAME);
         recordNano_Anu = new FossilRecordItem(LocalizationStrings.FOSSIL_RECORD_NANO_ANU, "fossil:record_anu").setUnlocalizedName(LocalizationStrings.RECORD_BONES_NAME);

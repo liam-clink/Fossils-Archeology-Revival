@@ -1,14 +1,18 @@
 package com.github.revival.server.handler;
 
-import com.github.revival.server.block.FABlockRegistry;
-import com.github.revival.server.item.FAItemRegistry;
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
+
+import com.github.revival.server.block.FABlockRegistry;
+import com.github.revival.server.enums.EnumMobType;
+import com.github.revival.server.enums.EnumPrehistoric;
+import com.github.revival.server.item.FAItemRegistry;
+
+import cpw.mods.fml.common.registry.GameRegistry;
 
 public class FossilRecipes {
     public static void addRecipe() {
@@ -95,41 +99,42 @@ public class FossilRecipes {
         GameRegistry.addRecipe(new ItemStack(FAItemRegistry.INSTANCE.femurs, 1), new Object[]{"###", "* *", "# #", '#', Items.bone, '*', new ItemStack(FAItemRegistry.INSTANCE.legBone, 1, OreDictionary.WILDCARD_VALUE)});
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(FAItemRegistry.INSTANCE.ribCage, 1), new Object[]{"B B", " R ", "BVB", 'B', Items.bone, 'R', "dinosaurRibCage", 'V', "dinosaurVertebrae"}));
         GameRegistry.addRecipe(new ItemStack(FAItemRegistry.INSTANCE.skullHelmet, 1), new Object[]{"#X#", "# #", '#', Items.bone, 'X', new ItemStack(FAItemRegistry.INSTANCE.skull, 1, OreDictionary.WILDCARD_VALUE)});
-
-        //Craft damaged vases
         GameRegistry.addRecipe(new ItemStack(FABlockRegistry.INSTANCE.vaseVoluteBlock, 1), new Object[]{"X X", "X X", "XXX", 'X', FAItemRegistry.INSTANCE.potteryShards});
         GameRegistry.addRecipe(new ItemStack(FABlockRegistry.INSTANCE.vaseAmphoraBlock, 1), new Object[]{"XX ", "XX ", "XX ", 'X', FAItemRegistry.INSTANCE.potteryShards});
         GameRegistry.addRecipe(new ItemStack(FABlockRegistry.INSTANCE.vaseAmphoraBlock, 1), new Object[]{" XX", " XX", " XX", 'X', FAItemRegistry.INSTANCE.potteryShards});
         GameRegistry.addRecipe(new ItemStack(FABlockRegistry.INSTANCE.vaseKylixBlock, 1), new Object[]{"   ", "XXX", " X ", 'X', FAItemRegistry.INSTANCE.potteryShards});
         GameRegistry.addRecipe(new ItemStack(FABlockRegistry.INSTANCE.vaseKylixBlock, 1), new Object[]{"XXX", " X ", "   ", 'X', FAItemRegistry.INSTANCE.potteryShards});
-
-        //Shapeless vase recipies for dying them metadata > 1 = dye colors
         GameRegistry.addShapelessRecipe(new ItemStack(FABlockRegistry.INSTANCE.vaseVoluteBlock, 1, 2), new Object[]{new ItemStack(Items.dye, 1, 0), new ItemStack(Items.dye, 1, 0), new ItemStack(Items.dye, 1, 14), new ItemStack(FABlockRegistry.INSTANCE.vaseVoluteBlock, 1, 1)});
         GameRegistry.addShapelessRecipe(new ItemStack(FABlockRegistry.INSTANCE.vaseVoluteBlock, 1, 3), new Object[]{new ItemStack(Items.dye, 1, 0), new ItemStack(Items.dye, 1, 14), new ItemStack(Items.dye, 1, 14), new ItemStack(FABlockRegistry.INSTANCE.vaseVoluteBlock, 1, 1)});
         GameRegistry.addShapelessRecipe(new ItemStack(FABlockRegistry.INSTANCE.vaseVoluteBlock, 1, 4), new Object[]{new ItemStack(Items.dye, 1, 4), new ItemStack(Items.dye, 1, 15), new ItemStack(Items.dye, 1, 15), new ItemStack(FABlockRegistry.INSTANCE.vaseVoluteBlock, 1, 1)});
-
         GameRegistry.addShapelessRecipe(new ItemStack(FABlockRegistry.INSTANCE.vaseAmphoraBlock, 1, 2), new Object[]{new ItemStack(Items.dye, 1, 0), new ItemStack(Items.dye, 1, 0), new ItemStack(Items.dye, 1, 14), new ItemStack(FABlockRegistry.INSTANCE.vaseAmphoraBlock, 1, 1)});
         GameRegistry.addShapelessRecipe(new ItemStack(FABlockRegistry.INSTANCE.vaseAmphoraBlock, 1, 3), new Object[]{new ItemStack(Items.dye, 1, 0), new ItemStack(Items.dye, 1, 14), new ItemStack(Items.dye, 1, 14), new ItemStack(FABlockRegistry.INSTANCE.vaseAmphoraBlock, 1, 1)});
         GameRegistry.addShapelessRecipe(new ItemStack(FABlockRegistry.INSTANCE.vaseAmphoraBlock, 1, 4), new Object[]{new ItemStack(Items.dye, 1, 4), new ItemStack(Items.dye, 1, 15), new ItemStack(Items.dye, 1, 15), new ItemStack(FABlockRegistry.INSTANCE.vaseAmphoraBlock, 1, 1)});
-
         GameRegistry.addShapelessRecipe(new ItemStack(FABlockRegistry.INSTANCE.vaseKylixBlock, 1, 2), new Object[]{new ItemStack(Items.dye, 1, 0), new ItemStack(Items.dye, 1, 0), new ItemStack(Items.dye, 1, 14), new ItemStack(FABlockRegistry.INSTANCE.vaseKylixBlock, 1, 1)});
         GameRegistry.addShapelessRecipe(new ItemStack(FABlockRegistry.INSTANCE.vaseKylixBlock, 1, 3), new Object[]{new ItemStack(Items.dye, 1, 0), new ItemStack(Items.dye, 1, 14), new ItemStack(Items.dye, 1, 14), new ItemStack(FABlockRegistry.INSTANCE.vaseKylixBlock, 1, 1)});
         GameRegistry.addShapelessRecipe(new ItemStack(FABlockRegistry.INSTANCE.vaseKylixBlock, 1, 4), new Object[]{new ItemStack(Items.dye, 1, 4), new ItemStack(Items.dye, 1, 15), new ItemStack(Items.dye, 1, 15), new ItemStack(FABlockRegistry.INSTANCE.vaseKylixBlock, 1, 1)});
-
         GameRegistry.addSmelting(FAItemRegistry.INSTANCE.rawChickenSoup, new ItemStack(FAItemRegistry.INSTANCE.cookedChickenSoup), 3.0F);
-        //GameRegistry.addSmelting(EnumDinoType.values()[4].EggItem, new ItemStack(FAItemRegistry.INSTANCE.sjl), 3.0F);
         GameRegistry.addSmelting(FABlockRegistry.INSTANCE.denseSand, new ItemStack(FABlockRegistry.INSTANCE.strongGlass), 3.0F);
-
-       /* for (int i = 0; i < EnumDinoType.values().length; i++)
-            if (i != 4) //Nautilus treated specially
-            {
-                GameRegistry.addSmelting(EnumDinoType.values()[i].DropItem, new ItemStack(FAItemRegistry.INSTANCE.cookedDinoMeat), 3.0F);
-            }*/
-
+        
+        GameRegistry.addSmelting(Items.egg, new ItemStack(FAItemRegistry.INSTANCE.cookedEgg), 3.0F);
+		for (int i = 0; i < EnumPrehistoric.values().length; i++){
+			if(EnumPrehistoric.values()[i].type == EnumMobType.DINOSAUR && !EnumPrehistoric.values()[i].isAquatic()){
+		        GameRegistry.addSmelting(EnumPrehistoric.values()[i].eggItem, new ItemStack(FAItemRegistry.INSTANCE.cookedEgg), 3.0F);
+			}
+			if(EnumPrehistoric.values()[i].type == EnumMobType.BIRD){
+		        GameRegistry.addSmelting(EnumPrehistoric.values()[i].birdEggItem, new ItemStack(FAItemRegistry.INSTANCE.cookedEgg), 3.0F);
+		        GameRegistry.addSmelting(EnumPrehistoric.values()[i].bestBirdEggItem, new ItemStack(FAItemRegistry.INSTANCE.cookedEgg), 3.0F);
+			}
+			if(EnumPrehistoric.values()[i].type == EnumMobType.CHICKEN){
+		        GameRegistry.addSmelting(EnumPrehistoric.values()[i].bestBirdEggItem, new ItemStack(FAItemRegistry.INSTANCE.cookedEgg), 3.0F);
+			}
+			if(EnumPrehistoric.values()[i].foodItem != null){
+		        GameRegistry.addSmelting(EnumPrehistoric.values()[i].foodItem, new ItemStack(EnumPrehistoric.values()[i].cookedFoodItem), 3.0F);
+			}
+			/*if(EnumPrehistoric.values()[i].type == EnumMobType.FISH){
+		        GameRegistry.addSmelting(EnumPrehistoric.values()[i].eggItem, new ItemStack(EnumPrehistoric.values()[i].cookedFoodItem), 3.0F);
+			}*/
+		}
         GameRegistry.addSmelting(FAItemRegistry.INSTANCE.icedMeat, new ItemStack(Items.beef), 3.0F);
-        // GameRegistry.addSmelting(FAItemRegistry.INSTANCE.dodoWing, new ItemStack(FAItemRegistry.INSTANCE.dodoWingCooked), 3.0F);
-        // GameRegistry.addSmelting(FAItemRegistry.INSTANCE.terrorBirdMeat, new ItemStack(FAItemRegistry.INSTANCE.terrorBirdMeatCooked), 3.0F);
-        // GameRegistry.addSmelting(FAItemRegistry.INSTANCE.quaggaMeat, new ItemStack(FAItemRegistry.INSTANCE.quaggaMeatCooked), 3.0F);
-
     }
 }
