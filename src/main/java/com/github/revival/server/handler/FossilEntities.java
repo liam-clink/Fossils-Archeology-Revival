@@ -24,6 +24,7 @@ import com.github.revival.server.entity.mob.EntityNautilus;
 import com.github.revival.server.entity.mob.EntitySentryPigman;
 import com.github.revival.server.entity.mob.EntityTarSlime;
 import com.github.revival.server.entity.toy.EntityToyBall;
+import com.github.revival.server.entity.toy.EntityToyTetheredLog;
 import com.github.revival.server.enums.EnumMobType;
 import com.github.revival.server.enums.EnumPrehistoric;
 
@@ -54,6 +55,7 @@ public class FossilEntities {
 		registerSpawnable(EntityAnu.class, "PigBoss", 101, 0X0F0F0F, 0XF72D00);
 		registerSpawnable(EntitySentryPigman.class, "SentryPigman", 102, 15373203, 0XD0A750);
 		EntityRegistry.registerModEntity(EntityToyBall.class, "ToyBall", 103, Revival.INSTANCE, 250, 5, true);
+		EntityRegistry.registerModEntity(EntityToyTetheredLog.class, "ToyTetheredLog", 104, Revival.INSTANCE, 250, 5, true);
 		for (int i = 0; i < EnumPrehistoric.values().length; i++) {
 			if(EnumPrehistoric.values()[i].type != EnumMobType.CHICKEN && EnumPrehistoric.values()[i].type != EnumMobType.VANILLA)
 				registerSpawnable(EnumPrehistoric.values()[i].getDinoClass(), EnumPrehistoric.values()[i].name(), 200 + i, EnumPrehistoric.values()[i].mainSpawnColor, EnumPrehistoric.values()[i].secondSpawnColor);

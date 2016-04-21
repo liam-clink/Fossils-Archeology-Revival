@@ -697,6 +697,9 @@ item.record.music.anu.desc=Nanotyrano - Awakening
 #4f wants new stuff at bottom
 anu.breakblock=You cannot break this block until its guardian has been destroyed.
 entity.fossil.TarSlime.name=Tar Slime
+entity.fossil.ToyBall.name=Toy Ball
+entity.fossil.ToyTetheredLog.name=Toy Tethered Log
+entity.fossil.StoneBoard.name=Stone Board
 item.tardrop.name=Tar Drop
 item.tarfossil.name=Tar Fossil
 item.tar_bucket.name=Tar Bucket
@@ -786,6 +789,7 @@ item.toyBall.lightBlue.name=Light Blue Ball
 item.toyBall.magenta.name=Magenta Ball
 item.toyBall.orange.name=Orange Ball
 item.toyBall.white.name=White Ball
+item.toyTetheredLog.name=Tethered Log
 tile.bubbleMachine.name=Bubble Blower
 item.skull.Confuciusornis.name=Confuciusornis Skull
 item.skull.Dodo.name=Dodo Skull

@@ -91,6 +91,7 @@ public enum FAItemRegistry {
     public Item foot;
     public Item dinosaurModels;
     public Item toyBall;
+    public Item toyTetheredLog;
 
     public void init() {
         biofossil = new BioFossilItem();
@@ -153,6 +154,7 @@ public enum FAItemRegistry {
         tarfossil = new ForgeItemItem("tar_fossil").setUnlocalizedName("tarfossil").setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
         tar_bucket = new ItemBucket(FABlockRegistry.INSTANCE.tar).setUnlocalizedName("tar_bucket").setTextureName("fossil:bucket_tar").setContainerItem(Items.bucket).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
         toyBall = new ItemToyBall().setUnlocalizedName("toyBall").setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
+        toyTetheredLog = new ItemToyTetheredLog().setUnlocalizedName("toyTetheredLog").setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
         FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluidStack("tar", FluidContainerRegistry.BUCKET_VOLUME), new ItemStack(tar_bucket), new ItemStack(Items.bucket));
         BucketEvent.INSTANCE.buckets.put(FABlockRegistry.INSTANCE.tar, tar_bucket);
         MinecraftForge.EVENT_BUS.register(BucketEvent.INSTANCE);
