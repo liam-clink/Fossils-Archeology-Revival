@@ -21,6 +21,7 @@ public class ItemToyTetheredLog extends Item{
 			ball.setLocationAndAngles(x + 0.5, y - 1.9, z + 0.5, 0, 0);
 			if(!world.isRemote)
 				world.spawnEntityInWorld(ball);
+			ball.rotationYaw = player.rotationYawHead;
 			if(!player.capabilities.isCreativeMode)
 				--stack.stackSize;
 			return true;

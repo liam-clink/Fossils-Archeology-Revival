@@ -1,5 +1,6 @@
 package com.github.revival.server.entity.mob.test;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -8,21 +9,21 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
 public abstract class EntityToyBase extends EntityLiving{
-	
-	public int toyBonus;
-	
-	public EntityToyBase(World world, int toyBonus) {
-	    super(world);
-	    this.toyBonus = toyBonus;
 
-    }
-	
-    protected boolean isAIEnabled(){
+	public int toyBonus;
+
+	public EntityToyBase(World world, int toyBonus) {
+		super(world);
+		this.toyBonus = toyBonus;
+
+	}
+
+	protected boolean isAIEnabled(){
 		return true;
 	}
-	
+
 	public boolean attackEntityFrom(DamageSource dmg, float f)
-    {
+	{
 		if(dmg.getEntity() != null){
 			if(dmg.getEntity() instanceof EntityPlayer){
 				if(!this.worldObj.isRemote)this.worldObj.spawnEntityInWorld(new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, this.getItem()));
@@ -37,15 +38,15 @@ public abstract class EntityToyBase extends EntityLiving{
 			}
 		}
 		return dmg != DamageSource.outOfWorld;
-    }
+	}
 
-    public boolean canBreatheUnderwater()
-    {
-        return true;
-    }
-    
+	public boolean canBreatheUnderwater()
+	{
+		return true;
+	}
+
 	protected abstract ItemStack getItem();
-	
+
 	protected abstract String getAttackNoise();
 
 }

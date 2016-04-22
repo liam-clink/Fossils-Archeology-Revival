@@ -2,6 +2,7 @@ package com.github.revival.client.model;
 
 import com.github.revival.client.model.prehistoric.ModelUtils;
 import com.github.revival.server.entity.mob.EntitySmilodon;
+import com.github.revival.server.entity.toy.EntityToyTetheredLog;
 
 import net.ilexiconn.llibrary.client.model.ModelAnimator;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelBase;
@@ -40,13 +41,28 @@ public class ModelToyTetheredLog extends AdvancedModelBase {
 
     @Override
     public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) { 
-        this.rope0.render(f5);
 		animate((IAnimatedEntity) entity, f, f1, f2, f3, f4, f5);
+        this.rope0.render(f5);
     }
 
     public void animate(IAnimatedEntity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		animator.update(entity);
 		this.resetToDefaultPose();
 		setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
+		animator.setAnimation(EntityToyTetheredLog.KNOCKBACK_ANIMATION);
+		animator.startKeyframe(5);
+		ModelUtils.rotate(animator, rope0, -15, 0, 0);
+		ModelUtils.rotate(animator, rope1, -15, 0, 0);
+		ModelUtils.rotate(animator, rope2, -15, 0, 0);
+		ModelUtils.rotate(animator, log, -15, 0, 0);
+		animator.endKeyframe();
+		animator.resetKeyframe(5);
+		animator.startKeyframe(5);
+		ModelUtils.rotate(animator, rope0, 15, 0, 0);
+		ModelUtils.rotate(animator, rope1, 15, 0, 0);
+		ModelUtils.rotate(animator, rope2, 15, 0, 0);
+		ModelUtils.rotate(animator, log, 15, 0, 0);
+		animator.endKeyframe();
+		animator.resetKeyframe(5);
 	}
 }
