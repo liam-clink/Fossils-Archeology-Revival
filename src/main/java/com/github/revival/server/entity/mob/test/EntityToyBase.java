@@ -33,7 +33,7 @@ public abstract class EntityToyBase extends EntityLiving{
 			if(dmg.getEntity() instanceof EntityNewPrehistoric){
 				((EntityNewPrehistoric)dmg.getEntity()).doPlayBonus(toyBonus);
 				if(getAttackNoise() != null){
-					this.playSound(getAttackNoise(), 1, 1);
+					this.playSound(getAttackNoise(), 1, this.getSoundPitch());
 				}
 			}
 		}
