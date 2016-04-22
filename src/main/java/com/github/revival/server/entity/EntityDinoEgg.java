@@ -122,7 +122,7 @@ public class EntityDinoEgg extends EntityLiving{
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
-		this.tickHatching();
+		//this.tickHatching();
 	}
 
 	private void tickHatching() {

@@ -492,7 +492,7 @@ public class GuiPedia extends GuiContainer {
 		if (bookPages == 0) {
 			GL11.glPushMatrix();
 			if (Revival.toPedia instanceof EntityDinoEgg) {
-				renderEgg(k + 100, l + 280, 250, 0, 0, (EntityDinoEgg) Revival.toPedia);
+				renderEgg(k + 100, l + 200, 150, 0, 0, (EntityDinoEgg) Revival.toPedia);
 			}
 			else if (Revival.toPedia instanceof EntityLivingBase) {
 				if (Revival.toPedia instanceof EntityNewPrehistoric) {

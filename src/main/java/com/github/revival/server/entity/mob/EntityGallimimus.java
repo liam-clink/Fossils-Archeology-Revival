@@ -401,5 +401,8 @@ public class EntityGallimimus extends EntityNewPrehistoric {
 		}
 		return false;
 	}
-	//public boolean canDinoHunt(Entity target){
+	
+	public boolean canDinoHunt(Entity target){
+		return target.width <= 0.6D && super.canDinoHunt(target);
+	}
 	}
