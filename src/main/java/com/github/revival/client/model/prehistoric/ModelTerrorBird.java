@@ -202,7 +202,7 @@ public class ModelTerrorBird extends ModelNewPrehistoric {
 			sitAnimationPos(upperBody, sitProgress, 0F, 17.30F - ModelUtils.getDefaultPositionY(leftThigh), 0F);
 		}
 		{
-			float sitProgress = 20;//((EntityNewPrehistoric) (entity)).sitProgress;
+			float sitProgress = ((EntityNewPrehistoric) (entity)).sleepProgress;
 			sitAnimationRotation(head, sitProgress, -((float)Math.toRadians(104.35D)), 0, 0);
 			sitAnimationRotation(tail2, sitProgress, -((float)Math.toRadians(2.61D)), 0, 0);
 			sitAnimationRotation(rightWing, sitProgress, 0, -((float)Math.toRadians(46.96D)), 0);
