@@ -126,6 +126,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	public int ticksTillMate;
 	public int prevAge;
 	public boolean isDaytime;
+	public Flock flockObj;
 
 	public EntityNewPrehistoric(World world, EnumPrehistoric selfType) {
 		super(world);
@@ -670,40 +671,18 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 				}
 			}
 		}
-		if (this.doesFlock()) {
-			/*	IEntitySelector selector =IEntitySelector.selectAnything;
-            List<Entity> entities = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.expand((double)herdMemberRange, 3.0D, (double)herdMemberRange), selector);
-			for(Entity mob: entities){
-				if(mob instanceof EntityNewPrehistoric){
-					if(((EntityNewPrehistoric)mob).selfType == this.selfType){
-						EntityNewPrehistoric member = (EntityNewPrehistoric)mob;
-						flock.add(member);
-						System.out.println("A Newb Dino joined the Flock!!!");
-
-						if(member.isDead){
-							System.out.println("Oh No!!! A dino Died and left the flock :(");
-							flock.remove(member);
-						}
-						if(flockLeader == null || flockLeader.isDead){
-							System.out.println("The Flock found a new Leader!!!");
-							flockLeader = findLeader(flock);
-						}
-						member.motionX = flockLeader.motionX;
-						member.motionY = flockLeader.motionY;
-						member.motionZ = flockLeader.motionZ;
-
-					}
-					if(!worldObj.isRemote && flockLeader != null){
-						if(flockLeader == this && this.rand.nextInt(100) == 0)
-						{
-							this.moveEntity((int) posX + rand.nextInt(90)
-									- rand.nextInt(60), (int) posY + rand.nextInt(60) - 2,
-									(int) posZ + rand.nextInt(90) - rand.nextInt(60));
-						}
-					}
-				}
+		if (this.doesFlock() && flockObj == null) {
+			if(this.getNearbyFlock() != null){
+				this.getNearbyFlock().flockMembers.add(this);
+			}else{
+				flockObj = new Flock();
+				flockObj.createFlock(this);
 			}
-		}*/
+		}
+		if(this.flockObj != null){
+			if(this == flockObj.flockLeader){
+				this.flockObj.onUpdate();
+			}
 		}
 	}
 
@@ -1823,6 +1802,27 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		} else {
 			return (EntityLivingBase) list.get(0);
 		}
+	}
+		
+	public Flock getNearbyFlock(){
+		EntityAINearestAttackableTarget.Sorter theNearestAttackableTargetSorter = new EntityAINearestAttackableTarget.Sorter(this);
+		IEntitySelector targetEntitySelector = new IEntitySelector() {
+			@Override
+			public boolean isEntityApplicable(Entity entity) {
+				return (entity instanceof EntityNewPrehistoric);
+			}
+		};
+		double d0 = 64;
+		List<EntityNewPrehistoric> list = worldObj.selectEntitiesWithinAABB(EntityNewPrehistoric.class, this.boundingBox.expand(d0, 4.0D, d0), targetEntitySelector);
+		Collections.sort(list, theNearestAttackableTargetSorter);
+		if (!list.isEmpty()) {
+			for (EntityNewPrehistoric mob : list) {
+				if (mob.selfType == this.selfType && mob.flockObj != null && mob.flockObj.flockLeader == mob) {
+					return mob.flockObj;
+				}
+			}
+		}
+		return null;
 	}
 
 	public void mate(){
