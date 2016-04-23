@@ -1,11 +1,13 @@
 package com.github.revival.client.model.prehistoric;
 
-import com.github.revival.client.model.prehistoric.test.ModelNewPrehistoric;
-import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 import net.ilexiconn.llibrary.client.model.ModelAnimator;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
 import net.minecraft.entity.Entity;
+
+import com.github.revival.client.model.prehistoric.test.ModelNewPrehistoric;
+import com.github.revival.server.entity.mob.EntityElasmotherium;
+import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 
 public class ModelElasmotherium extends ModelNewPrehistoric {
 	public AdvancedModelRenderer middleBody;
@@ -143,6 +145,18 @@ public class ModelElasmotherium extends ModelNewPrehistoric {
 		blockMovement(f, f1, f2, f3, f4, f5, (Entity) entity);
 		this.resetToDefaultPose();
 		setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
+		animator.setAnimation(EntityElasmotherium.ATTACK_ANIMATION);
+		animator.startKeyframe(5);
+		ModelUtils.rotate(animator, head, 15, 0, 0);
+		ModelUtils.rotate(animator, neck, 23, 0, 0);
+		animator.endKeyframe();
+		animator.setStaticKeyframe(5);
+		animator.startKeyframe(10);
+		ModelUtils.rotate(animator, head, -15, 0, 0);
+		ModelUtils.rotate(animator, neck, -23, 0, 0);
+		animator.endKeyframe();
+		animator.setStaticKeyframe(5);
+		animator.resetKeyframe(5);
 	}
 
 	@Override

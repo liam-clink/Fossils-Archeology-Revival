@@ -13,9 +13,13 @@ import com.github.revival.server.enums.EnumPrehistoricAI.Stalking;
 import com.github.revival.server.enums.EnumPrehistoricAI.Taming;
 import com.github.revival.server.enums.EnumPrehistoricAI.Untaming;
 import com.github.revival.server.enums.EnumPrehistoricAI.WaterAbility;
+
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
 public class EntityElasmotherium extends EntityNewPrehistoric {
@@ -40,6 +44,11 @@ public class EntityElasmotherium extends EntityNewPrehistoric {
         favoriteFood = Items.potato;
         hasBabyTexture = false;
     }
+    
+    @Override
+	public int getAttackLength() {
+		return 30;
+	}
 
     @Override
     protected void applyEntityAttributes() {
@@ -125,6 +134,37 @@ public class EntityElasmotherium extends EntityNewPrehistoric {
         return false;
     }
 
+    @Override
+	public void onLivingUpdate() {
+		super.onLivingUpdate();
+		if (this.getAnimation() == ATTACK_ANIMATION && this.getAnimationTick() == 12 && this.getAttackTarget() != null) {
+			this.attackEntityAsMob(this.getAttackTarget());
+		}
+	}
+    
+    @Override
+	public boolean attackEntityAsMob(Entity entity) {
+		if (this.getAttackBounds().intersectsWith(entity.boundingBox)) {
+			if (this.getAnimation() == NO_ANIMATION) {
+				this.setAnimation(ATTACK_ANIMATION);
+				return false;
+			}
+
+			if (this.getAnimation() == ATTACK_ANIMATION && this.getAnimationTick() == 12) {
+				IAttributeInstance iattributeinstance = this.getEntityAttribute(SharedMonsterAttributes.attackDamage);
+				boolean flag = entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) iattributeinstance.getAttributeValue());
+				if (entity.ridingEntity != null) {
+					if (entity.ridingEntity == this) {
+						entity.mountEntity(null);
+					}
+				}
+				knockbackEntity(entity, 2F, 0.1F);
+				return flag;
+			}
+		}
+		return false;
+	}
+    
     @Override
     public Item getOrderItem() {
 

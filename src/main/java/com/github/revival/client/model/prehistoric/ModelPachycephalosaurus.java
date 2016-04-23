@@ -1,13 +1,14 @@
 package com.github.revival.client.model.prehistoric;
 
-import com.github.revival.client.model.prehistoric.test.ModelNewPrehistoric;
-import com.github.revival.server.entity.mob.EntityAnkylosaurus;
-import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 import net.ilexiconn.llibrary.client.model.ModelAnimator;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+
+import com.github.revival.client.model.prehistoric.test.ModelNewPrehistoric;
+import com.github.revival.server.entity.mob.EntityElasmotherium;
+import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 
 public class ModelPachycephalosaurus extends ModelNewPrehistoric {
 
@@ -175,7 +176,7 @@ public class ModelPachycephalosaurus extends ModelNewPrehistoric {
 		blockMovement(f, f1, f2, f3, f4, f5, (Entity) entity);
 		this.resetToDefaultPose();
 		setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
-		animator.setAnimation(EntityAnkylosaurus.ATTACK_ANIMATION);
+		animator.setAnimation(EntityElasmotherium.ATTACK_ANIMATION);
 		animator.startKeyframe(5);
 		animator.move(lowerBody, 0, 5, -2);
 		ModelUtils.rotate(animator, lowerBody, 20, 0, 0);

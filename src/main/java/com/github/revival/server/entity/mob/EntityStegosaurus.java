@@ -198,7 +198,6 @@ public class EntityStegosaurus extends EntityNewPrehistoric {
 						entity.mountEntity(null);
 					}
 				}
-				entity.motionY += 0.4000000059604645D;
 				knockbackEntity(entity, 1.5F, 0.2F);
 				return flag;
 			}

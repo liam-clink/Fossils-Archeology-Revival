@@ -1750,7 +1750,10 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	}
 
 	public void knockbackEntity(Entity knockBackMob, float knockbackStrength, float knockbackStrengthUp) {
-		knockBackMob(knockBackMob, 1, 0.4D, 1);
+		if(!(knockBackMob instanceof EntityToyBase)){
+			knockBackMob.motionY += 0.4000000059604645D;
+			knockBackMob(knockBackMob, 1, 0.4D, 1);
+		}
 	}
 
 	public static void knockBackMob(Entity entity, double xMotion, double yMotion, double zMotion) {
