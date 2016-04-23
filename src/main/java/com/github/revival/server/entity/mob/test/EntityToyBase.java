@@ -26,6 +26,7 @@ public abstract class EntityToyBase extends EntityLiving{
 	{
 		if(dmg.getEntity() != null){
 			if(dmg.getEntity() instanceof EntityPlayer){
+				this.playSound(getAttackNoise(), 1, this.getSoundPitch());
 				if(!this.worldObj.isRemote)this.worldObj.spawnEntityInWorld(new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, this.getItem()));
 				this.setDead();
 				return true;

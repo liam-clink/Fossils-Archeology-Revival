@@ -70,6 +70,7 @@ import com.github.revival.client.renderer.entity.RenderStoneboard;
 import com.github.revival.client.renderer.entity.RenderTarSlime;
 import com.github.revival.client.renderer.entity.RenderTerrorBird;
 import com.github.revival.client.renderer.entity.RenderToyBall;
+import com.github.revival.client.renderer.entity.RenderToyScratchingPost;
 import com.github.revival.client.renderer.entity.RenderToyTetheredLog;
 import com.github.revival.client.renderer.item.ItemAncientClocRender;
 import com.github.revival.client.renderer.item.ItemFigurineRenderer;
@@ -78,6 +79,7 @@ import com.github.revival.client.renderer.item.ItemRenderAnubite;
 import com.github.revival.client.renderer.item.ItemRenderSarcophagus;
 import com.github.revival.client.renderer.item.ItemRenderTileEntity;
 import com.github.revival.client.renderer.item.ItemToyBallRender;
+import com.github.revival.client.renderer.item.ItemToyScratchingPostRender;
 import com.github.revival.client.renderer.item.ItemToyTetheredBallRender;
 import com.github.revival.client.renderer.item.ItemVaseAmphoraRenderer;
 import com.github.revival.client.renderer.item.ItemVaseKylixRenderer;
@@ -148,6 +150,7 @@ import com.github.revival.server.entity.mob.EntityVelociraptor;
 import com.github.revival.server.entity.mob.projectile.EntityBirdEgg;
 import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 import com.github.revival.server.entity.toy.EntityToyBall;
+import com.github.revival.server.entity.toy.EntityToyScratchingPost;
 import com.github.revival.server.entity.toy.EntityToyTetheredLog;
 import com.github.revival.server.handler.EventNewMenu;
 import com.github.revival.server.handler.EventOverlay;
@@ -213,7 +216,7 @@ public class ClientProxy extends ServerProxy {
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityToyBall.class, new RenderToyBall());
 		RenderingRegistry.registerEntityRenderingHandler(EntityToyTetheredLog.class, new RenderToyTetheredLog());
-
+		RenderingRegistry.registerEntityRenderingHandler(EntityToyScratchingPost.class, new RenderToyScratchingPost());
 
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(FABlockRegistry.INSTANCE.figurineBlock), new ItemFigurineRenderer());
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(FABlockRegistry.INSTANCE.vaseVoluteBlock), new ItemVaseVoluteRenderer());
@@ -222,6 +225,7 @@ public class ClientProxy extends ServerProxy {
 		MinecraftForgeClient.registerItemRenderer(FAItemRegistry.INSTANCE.ancientClock, new ItemAncientClocRender());
 		MinecraftForgeClient.registerItemRenderer(FAItemRegistry.INSTANCE.toyBall, new ItemToyBallRender());
 		MinecraftForgeClient.registerItemRenderer(FAItemRegistry.INSTANCE.toyTetheredLog, new ItemToyTetheredBallRender());
+		MinecraftForgeClient.registerItemRenderer(FAItemRegistry.INSTANCE.toyScratchingPost, new ItemToyScratchingPostRender());
 
 		RenderingRegistry.registerBlockHandler(RenderFeeder.feederRenderID, new RenderFeeder());
 
