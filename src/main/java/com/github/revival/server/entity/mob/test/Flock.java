@@ -55,9 +55,7 @@ public class Flock {
 			EntityNewPrehistoric member = ((EntityNewPrehistoric) flockMembers.toArray()[i]);
 			if (member != null && flockLeader != null && this.flockPathNavigate != null && this.flockPathNavigate.getPath() != null) {
 				if(member.getNavigator().noPath()){
-					member.getNavigator().setPath(this.flockLeader.getNavigator().getPath(), 1);
-				}else{
-					member.canWander = false;
+					member.getNavigator().setPath(this.flockPathNavigate.getPath(), 1);
 				}
 			}
 		}

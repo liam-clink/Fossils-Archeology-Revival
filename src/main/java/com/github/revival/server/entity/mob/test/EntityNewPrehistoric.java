@@ -87,6 +87,10 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	public int BreedTick;
 	public ItemStack ItemInMouth = null;
 	public EnumOrderType currentOrder;
+	public ChunkCoordinates currentHerdTarget;
+	public float herdMemberRange = 32;
+	public List<EntityNewPrehistoric> flock = new ArrayList<EntityNewPrehistoric>();
+	public EntityNewPrehistoric flockLeader = null;
 	public boolean isFlying;
 	public ChunkCoordinates currentTarget;
 	public Item favoriteFood;
@@ -123,7 +127,6 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	public int prevAge;
 	public boolean isDaytime;
 	public Flock flockObj;
-	public boolean canWander;
 
 	public EntityNewPrehistoric(World world, EnumPrehistoric selfType) {
 		super(world);
@@ -677,9 +680,6 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 			}
 		}
 		if(this.flockObj != null){
-			if(canWander){
-				canWander = false;
-			}
 			if(this == flockObj.flockLeader){
 				this.flockObj.onUpdate();
 			}

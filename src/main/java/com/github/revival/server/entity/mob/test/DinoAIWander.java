@@ -24,9 +24,7 @@ public class DinoAIWander extends EntityAIBase {
         if (this.entity.currentOrder == null) {
             this.entity.currentOrder = EnumOrderType.WANDER;
         }
-    	if(!entity.canWander){
-    		return false;
-    	}
+
         if (entity.isSitting()) {
             return false;
         }
