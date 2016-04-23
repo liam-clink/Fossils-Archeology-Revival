@@ -129,11 +129,14 @@ import com.github.revival.server.entity.mob.EntityElasmotherium;
 import com.github.revival.server.entity.mob.EntityFailuresaurus;
 import com.github.revival.server.entity.mob.EntityFriendlyPigZombie;
 import com.github.revival.server.entity.mob.EntityGallimimus;
+import com.github.revival.server.entity.mob.EntityGastornis;
+import com.github.revival.server.entity.mob.EntityKelenken;
 import com.github.revival.server.entity.mob.EntityLiopleurodon;
 import com.github.revival.server.entity.mob.EntityMammoth;
 import com.github.revival.server.entity.mob.EntityMosasaurus;
 import com.github.revival.server.entity.mob.EntityNautilus;
 import com.github.revival.server.entity.mob.EntityPachycephalosaurus;
+import com.github.revival.server.entity.mob.EntityPhorusrhacos;
 import com.github.revival.server.entity.mob.EntityPlesiosaurus;
 import com.github.revival.server.entity.mob.EntityPterosaur;
 import com.github.revival.server.entity.mob.EntityQuagga;
@@ -144,6 +147,7 @@ import com.github.revival.server.entity.mob.EntitySpinosaurus;
 import com.github.revival.server.entity.mob.EntityStegosaurus;
 import com.github.revival.server.entity.mob.EntityTarSlime;
 import com.github.revival.server.entity.mob.EntityTerrorBird;
+import com.github.revival.server.entity.mob.EntityTitanis;
 import com.github.revival.server.entity.mob.EntityTriceratops;
 import com.github.revival.server.entity.mob.EntityTyrannosaurus;
 import com.github.revival.server.entity.mob.EntityVelociraptor;
@@ -195,7 +199,10 @@ public class ClientProxy extends ServerProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityElasmotherium.class, new RenderPrehistoric(new ModelElasmotherium()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityCeratosaurus.class, new RenderPrehistoric(new ModelCeratosaurus()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityConfuciusornis.class, new RenderFlyingPrehistoric(new ModelConfuciusornis(), new ModelFlyingConfuciusornis()));
-
+		RenderingRegistry.registerEntityRenderingHandler(EntityGastornis.class, new RenderPrehistoric(new ModelTerrorBird()));
+		RenderingRegistry.registerEntityRenderingHandler(EntityKelenken.class, new RenderPrehistoric(new ModelTerrorBird()));
+		RenderingRegistry.registerEntityRenderingHandler(EntityPhorusrhacos.class, new RenderPrehistoric(new ModelTerrorBird()));
+		RenderingRegistry.registerEntityRenderingHandler(EntityTitanis.class, new RenderPrehistoric(new ModelTerrorBird()));
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityStoneboard.class, new RenderStoneboard());
 		RenderingRegistry.registerEntityRenderingHandler(EntityFailuresaurus.class, new RenderFailuresaurus(new ModelFailuresaurus(), 0.5F));

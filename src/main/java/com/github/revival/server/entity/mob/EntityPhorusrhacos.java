@@ -1,5 +1,13 @@
 package com.github.revival.server.entity.mob;
 
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.IAttributeInstance;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.util.DamageSource;
+import net.minecraft.world.World;
+
 import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 import com.github.revival.server.enums.EnumPrehistoric;
 import com.github.revival.server.enums.EnumPrehistoricAI.Activity;
@@ -13,34 +21,28 @@ import com.github.revival.server.enums.EnumPrehistoricAI.Stalking;
 import com.github.revival.server.enums.EnumPrehistoricAI.Taming;
 import com.github.revival.server.enums.EnumPrehistoricAI.Untaming;
 import com.github.revival.server.enums.EnumPrehistoricAI.WaterAbility;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.attributes.IAttributeInstance;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.util.DamageSource;
-import net.minecraft.world.World;
+import com.github.revival.server.item.FAItemRegistry;
 
-public class EntityGastornis extends EntityNewPrehistoric {
+public class EntityPhorusrhacos extends EntityNewPrehistoric {
 
 	public static final double baseDamage = 1;
-	public static final double maxDamage = 4;
-	public static final double baseHealth = 8;
-	public static final double maxHealth = 30;
+	public static final double maxDamage = 5;
+	public static final double baseHealth = 10;
+	public static final double maxHealth = 38;
 	public static final double baseSpeed = 0.25D;
-	public static final double maxSpeed = 0.3D;
+	public static final double maxSpeed = 0.35D;
 
-	public EntityGastornis(World world) {
-		super(world, EnumPrehistoric.Gastornis);
+	public EntityPhorusrhacos(World world) {
+		super(world, EnumPrehistoric.Phorusrhacos);
 		this.setSize(1.4F, 2.5F);
 		this.pediaScale = 17F;
 		this.nearByMobsAllowed = 3;
 		minSize = 0.4F;
-		maxSize = 1F;
+		maxSize = 1.3F;
 		teenAge = 4;
 		developsResistance = true;
 		breaksBlocks = false;
-		favoriteFood = Items.sugar;
+		favoriteFood = EnumPrehistoric.Quagga.foodItem;
 	}
 
 	@Override
@@ -80,7 +82,7 @@ public class EntityGastornis extends EntityNewPrehistoric {
 	@Override
 	public Following aiFollowType() {
 
-		return Following.NORMAL;
+		return Following.AGRESSIVE;
 	}
 
 	@Override

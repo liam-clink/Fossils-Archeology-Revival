@@ -46,10 +46,10 @@ public enum EnumPrehistoric {
 	Ceratosaurus(EntityCeratosaurus.class, EnumMobType.DINOSAUR, EnumTimePeriod.MESOZOIC, EnumDiet.CARNIVORE, I.MODEL | I.TAME | I.RIDE | I.CARNIVORE, true, 0XB4B4A7, 0X776446, 0.6F),
 	Confuciusornis(EntityConfuciusornis.class, EnumMobType.BIRD, EnumTimePeriod.MESOZOIC, EnumDiet.HERBIVORE, I.TAME | I.HERBIVORE, true, 0XDAE5E9, 0X8B8B8D),
 	Dodo(EntityDodo.class, EnumMobType.BIRD, EnumTimePeriod.CENOZOIC, EnumDiet.HERBIVORE, I.TAME | I.HERBIVORE, true, 0X655751, 0XBEA47B),
-	Gastornis(EntityGastornis.class, EnumMobType.BIRD, EnumTimePeriod.CENOZOIC, EnumDiet.CARNIVORE, I.TAME, true, 0X346C5E, 0XF2EBD5),
-	Kelenken(EntityTerrorBird.class, EnumMobType.BIRD, EnumTimePeriod.CENOZOIC, EnumDiet.CARNIVORE, I.TAME, true, 0X346C5E, 0XF2EBD5),
-	Phorusrhacos(EntityTerrorBird.class, EnumMobType.BIRD, EnumTimePeriod.CENOZOIC, EnumDiet.CARNIVORE, I.TAME, true, 0X346C5E, 0XF2EBD5),
-	Titanis(EntityTerrorBird.class, EnumMobType.BIRD, EnumTimePeriod.CENOZOIC, EnumDiet.CARNIVORE, I.TAME, true, 0X346C5E, 0XF2EBD5),
+	Gastornis(EntityGastornis.class, EnumMobType.BIRD, EnumTimePeriod.CENOZOIC, EnumDiet.HERBIVORE, I.TAME, true, 0X392F24, 0XF2EBD5),
+	Kelenken(EntityKelenken.class, EnumMobType.BIRD, EnumTimePeriod.CENOZOIC, EnumDiet.CARNIVORE, I.TAME, true, 0X346C5E, 0XC8C8C8),
+	Phorusrhacos(EntityPhorusrhacos.class, EnumMobType.BIRD, EnumTimePeriod.CENOZOIC, EnumDiet.CARNIVORE, I.TAME, true, 0X5F4E3E, 0XD4D4D4),
+	Titanis(EntityTitanis.class, EnumMobType.BIRD, EnumTimePeriod.CENOZOIC, EnumDiet.CARNIVORE, I.TAME, true, 0X484848, 0XEFEFEF),
 	Mammoth(EntityMammoth.class, EnumMobType.MAMMAL, EnumTimePeriod.CENOZOIC, EnumDiet.HERBIVORE, I.TAME | I.RIDE | I.HERBIVORE, true, 0X3D2E19, 0X24170B),
 	Smilodon(EntitySmilodon.class, EnumMobType.MAMMAL, EnumTimePeriod.CENOZOIC, EnumDiet.CARNIVORE, I.TAME | I.CARNIVORE, true, 0XB88C64, 0XECDFCE),
 	Quagga(EntityQuagga.class, EnumMobType.MAMMAL, EnumTimePeriod.CENOZOIC, EnumDiet.HERBIVORE, I.TAME | I.RIDE | I.HERBIVORE, true, 0X763C24, 0XD3B9AB),
@@ -166,7 +166,7 @@ public enum EnumPrehistoric {
 			}
 		}
 		for (int i = 0; i < EnumPrehistoric.values().length; i++) {
-			if (EnumPrehistoric.values()[i].timeperiod != EnumTimePeriod.CURRENT) {
+			if (EnumPrehistoric.values()[i].timeperiod != EnumTimePeriod.CURRENT && EnumPrehistoric.values()[i] != Nautilus) {
 				EnumPrehistoric.values()[i].cookedFoodItem = new ForgeFoodItem(8, 0.8F, true, "prehistoric/cookedFood/" + EnumPrehistoric.values()[i].name() + "_Meat").setUnlocalizedName("cooked" + EnumPrehistoric.values()[i].name()).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
 				GameRegistry.registerItem(EnumPrehistoric.values()[i].cookedFoodItem, "cooked" + EnumPrehistoric.values()[i].name());
 			}
