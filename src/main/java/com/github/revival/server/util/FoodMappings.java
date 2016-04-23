@@ -37,51 +37,53 @@ public class FoodMappings {
     }
 
     public void addToItemMappings(Item item, int food, EnumDiet diet) {
-        switch (diet) {
-            case CARNIVORE:
-                if (carnivoreItemDiet == null) {
-                    carnivoreItemDiet = Maps.newHashMap();
-                }
-                carnivoreItemDiet.put(Item.getIdFromItem(item), food);
-                break;
-            case HERBIVORE:
-                if (herbivoreItemDiet == null) {
-                    herbivoreItemDiet = Maps.newHashMap();
-                }
-                herbivoreItemDiet.put(Item.getIdFromItem(item), food);
-                break;
-            case OMNIVORE:
-                if (omnivoreItemDiet == null) {
-                    omnivoreItemDiet = Maps.newHashMap();
-                }
-                omnivoreItemDiet.put(Item.getIdFromItem(item), food);
-                break;
-            case PISCIVORE:
-                if (piscivoreItemDiet == null) {
-                    piscivoreItemDiet = Maps.newHashMap();
-                }
-                piscivoreItemDiet.put(Item.getIdFromItem(item), food);
-                break;
-            case CARNIVORE_EGG:
-                if (carnivore_eggItemDiet == null) {
-                    carnivore_eggItemDiet = Maps.newHashMap();
-                }
-                carnivore_eggItemDiet.put(Item.getIdFromItem(item), food);
-                break;
-            case INSECTIVORE:
-                if (insectivoreItemDiet == null) {
-                    insectivoreItemDiet = Maps.newHashMap();
-                }
-                insectivoreItemDiet.put(Item.getIdFromItem(item), food);
-                break;
-            case PISCCARNIVORE:
-                if (pisccarnivoreItemDiet == null) {
-                    pisccarnivoreItemDiet = Maps.newHashMap();
-                }
-                pisccarnivoreItemDiet.put(Item.getIdFromItem(item), food);
-                break;
-            default:
-                break;
+        if (item != null) {
+            switch (diet) {
+                case CARNIVORE:
+                    if (carnivoreItemDiet == null) {
+                        carnivoreItemDiet = Maps.newHashMap();
+                    }
+                    carnivoreItemDiet.put(Item.getIdFromItem(item), food);
+                    break;
+                case HERBIVORE:
+                    if (herbivoreItemDiet == null) {
+                        herbivoreItemDiet = Maps.newHashMap();
+                    }
+                    herbivoreItemDiet.put(Item.getIdFromItem(item), food);
+                    break;
+                case OMNIVORE:
+                    if (omnivoreItemDiet == null) {
+                        omnivoreItemDiet = Maps.newHashMap();
+                    }
+                    omnivoreItemDiet.put(Item.getIdFromItem(item), food);
+                    break;
+                case PISCIVORE:
+                    if (piscivoreItemDiet == null) {
+                        piscivoreItemDiet = Maps.newHashMap();
+                    }
+                    piscivoreItemDiet.put(Item.getIdFromItem(item), food);
+                    break;
+                case CARNIVORE_EGG:
+                    if (carnivore_eggItemDiet == null) {
+                        carnivore_eggItemDiet = Maps.newHashMap();
+                    }
+                    carnivore_eggItemDiet.put(Item.getIdFromItem(item), food);
+                    break;
+                case INSECTIVORE:
+                    if (insectivoreItemDiet == null) {
+                        insectivoreItemDiet = Maps.newHashMap();
+                    }
+                    insectivoreItemDiet.put(Item.getIdFromItem(item), food);
+                    break;
+                case PISCCARNIVORE:
+                    if (pisccarnivoreItemDiet == null) {
+                        pisccarnivoreItemDiet = Maps.newHashMap();
+                    }
+                    pisccarnivoreItemDiet.put(Item.getIdFromItem(item), food);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
@@ -357,8 +359,8 @@ public class FoodMappings {
         }
     }
 
-	public void removeItemMapping(Item item, EnumDiet diet) {
-	    this.getFoodRenderList(diet).remove(Item.getIdFromItem(item));
+    public void removeItemMapping(Item item, EnumDiet diet) {
+        this.getFoodRenderList(diet).remove(Item.getIdFromItem(item));
     }
 
 }

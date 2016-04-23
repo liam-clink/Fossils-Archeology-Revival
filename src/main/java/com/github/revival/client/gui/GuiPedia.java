@@ -151,7 +151,7 @@ public class GuiPedia extends GuiContainer {
 		this.printItemXY(item, x, y, 100);
 	}
 
-	public void printItemXY(Item item, int x, int y, int zoom) {
+	public boolean printItemXY(Item item, int x, int y, int zoom) {
 		if (item instanceof ItemBlock) {
 
 		} else {
@@ -179,14 +179,13 @@ public class GuiPedia extends GuiContainer {
 
 			GL11.glDisable(GL11.GL_LIGHTING);
 			this.mc.getTextureManager().bindTexture(TextureMap.locationItemsTexture);
-			ItemStack it = new ItemStack(item, 1);
-			if(it != null){
-				IIcon icon = it.getItem().getIconFromDamage(0);
+			if(item != null){
+				IIcon icon = item.getIconFromDamage(0);
 				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-				if(icon != null)
+				if(icon != null) {
 					this.drawTexturedModelRectFromIcon(x, y, icon, drawSize, drawSize);
+				}
 				GL11.glEnable(GL11.GL_LIGHTING);
-
 				if (mouseX > x && mouseX < x + drawSize) {
 					if (mouseY > y && mouseY < y + drawSize) {
 						List<String> text = new ArrayList<String>();
@@ -195,13 +194,16 @@ public class GuiPedia extends GuiContainer {
 						this.drawHoveringText(text, (-this.fontRendererObj.getStringWidth(s1) / 2) + 280, 222, fontRendererObj);
 					}
 				}
+                return true;
 			}
 		}
+        return false;
 	}
 
 	public void addMiniItem(Item item) {
-		this.printItemXY(item, 230 + 16 * (items % 8), 70 + 16 * (items / 8), 1);
-		items++;
+		if (this.printItemXY(item, 230 + 16 * (items % 8), 70 + 16 * (items / 8), 1)) {
+            items++;
+        }
 	}
 
 	public void printHappyBar(ResourceLocation resourceLocation, int x, int y, int width, int height, float modifiedU, float modifiedV) {
