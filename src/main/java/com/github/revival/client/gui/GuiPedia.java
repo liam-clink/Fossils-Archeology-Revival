@@ -180,17 +180,20 @@ public class GuiPedia extends GuiContainer {
 			GL11.glDisable(GL11.GL_LIGHTING);
 			this.mc.getTextureManager().bindTexture(TextureMap.locationItemsTexture);
 			ItemStack it = new ItemStack(item, 1);
-			IIcon icon = it.getIconIndex();
-			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-			this.drawTexturedModelRectFromIcon(x, y, icon, drawSize, drawSize);
-			GL11.glEnable(GL11.GL_LIGHTING);
+			if(it != null){
+				IIcon icon = it.getItem().getIconFromDamage(0);
+				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+				if(icon != null)
+					this.drawTexturedModelRectFromIcon(x, y, icon, drawSize, drawSize);
+				GL11.glEnable(GL11.GL_LIGHTING);
 
-			if (mouseX > x && mouseX < x + drawSize) {
-				if (mouseY > y && mouseY < y + drawSize) {
-					List<String> text = new ArrayList<String>();
-					String s1 = (new ItemStack(item)).getDisplayName();
-					text.add(s1);
-					this.drawHoveringText(text, (-this.fontRendererObj.getStringWidth(s1) / 2) + 280, 222, fontRendererObj);
+				if (mouseX > x && mouseX < x + drawSize) {
+					if (mouseY > y && mouseY < y + drawSize) {
+						List<String> text = new ArrayList<String>();
+						String s1 = (new ItemStack(item)).getDisplayName();
+						text.add(s1);
+						this.drawHoveringText(text, (-this.fontRendererObj.getStringWidth(s1) / 2) + 280, 222, fontRendererObj);
+					}
 				}
 			}
 		}
@@ -502,7 +505,7 @@ public class GuiPedia extends GuiContainer {
 					renderDinosaur(k + 100, l + 80, 80, 0, 0, (EntityLivingBase) Revival.toPedia);
 				}
 			}
-			
+
 			GL11.glPopMatrix();
 		}
 		/*
