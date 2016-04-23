@@ -169,6 +169,13 @@ public class ModelDodo extends ModelNewPrehistoric {
 			sitAnimationPos(leftLeg, sitProgress, 0, 3F, 0);
 
 		}
+		
+		if(((EntityNewPrehistoric) (entity)).isChild()){
+			 this.head.setScale(1.5F, 1.5F, 1.5F);
+		}else{
+			 this.head.setScale(1F, 1F, 1F);
+
+		}
 
 		if (dodo.getFat() > 0) {
 			float scale = 1 + (dodo.getFat() * 0.1F);
