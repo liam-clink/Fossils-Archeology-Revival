@@ -152,8 +152,8 @@ public class ModelElasmotherium extends ModelNewPrehistoric {
 		animator.endKeyframe();
 		animator.setStaticKeyframe(5);
 		animator.startKeyframe(10);
-		ModelUtils.rotate(animator, head, -15, 0, 0);
-		ModelUtils.rotate(animator, neck, -23, 0, 0);
+		ModelUtils.rotate(animator, head, -25, 0, 0);
+		ModelUtils.rotate(animator, neck, -33, 0, 0);
 		animator.endKeyframe();
 		animator.setStaticKeyframe(5);
 		animator.resetKeyframe(5);

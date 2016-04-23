@@ -45,7 +45,7 @@ public class EntityGastornis extends EntityNewPrehistoric {
 
 	@Override
 	public int getAttackLength() {
-		return 30;
+		return 25;
 	}
 
 	@Override
@@ -165,7 +165,7 @@ public class EntityGastornis extends EntityNewPrehistoric {
 	@Override
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
-		if (this.getAnimation() == ATTACK_ANIMATION && this.getAnimationTick() == 12 && this.getAttackTarget() != null) {
+		if (this.getAnimation() == ATTACK_ANIMATION && this.getAnimationTick() == 15 && this.getAttackTarget() != null) {
 			this.attackEntityAsMob(this.getAttackTarget());
 		}
 	}
@@ -177,7 +177,7 @@ public class EntityGastornis extends EntityNewPrehistoric {
 				this.setAnimation(ATTACK_ANIMATION);
 				return false;
 			}
-			if (this.getAnimation() == ATTACK_ANIMATION && this.getAnimationTick() == 12) {
+			if (this.getAnimation() == ATTACK_ANIMATION && this.getAnimationTick() == 15) {
 				IAttributeInstance iattributeinstance = this.getEntityAttribute(SharedMonsterAttributes.attackDamage);
 				boolean flag = entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) iattributeinstance.getAttributeValue());
 				if (entity.ridingEntity != null) {

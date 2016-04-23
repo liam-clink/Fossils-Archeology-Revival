@@ -1,8 +1,10 @@
 package com.github.revival.client.model.prehistoric;
 
 import com.github.revival.client.model.prehistoric.test.ModelNewPrehistoric;
+import com.github.revival.server.entity.mob.EntityDilophosaurus;
 import com.github.revival.server.entity.mob.EntityDodo;
 import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
+
 import net.ilexiconn.llibrary.client.model.ModelAnimator;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
@@ -92,8 +94,6 @@ public class ModelDodo extends ModelNewPrehistoric {
 		this.body.render(f5);
 		this.leftLeg.render(f5);
 		this.rightLeg.render(f5);
-
-
 	}
 
 	public void animate(IAnimatedEntity entity, float f, float f1, float f2, float f3, float f4, float f5) {
@@ -104,6 +104,18 @@ public class ModelDodo extends ModelNewPrehistoric {
 		animator.setAnimation(EntityNewPrehistoric.SPEAK_ANIMATION);
 		animator.startKeyframe(10);
 		ModelUtils.rotate(animator, beakLower, 29, 0, 0);
+		animator.endKeyframe();
+		animator.resetKeyframe(10);
+		animator.setAnimation(EntityDodo.ATTACK_ANIMATION);
+		animator.startKeyframe(10);
+		ModelUtils.rotate(animator, neck, -41, 0, 0);
+		ModelUtils.rotate(animator, head, 57, 0, 0);
+		ModelUtils.rotate(animator, beakLower, 15, 0, 0);
+		animator.endKeyframe();
+		animator.startKeyframe(5);
+		ModelUtils.rotate(animator, neck, 16, 0, 0);
+		ModelUtils.rotate(animator, head, 14, 0, 0);
+		ModelUtils.rotate(animator, beakLower, -15, 0, 0);
 		animator.endKeyframe();
 		animator.resetKeyframe(10);
 	}

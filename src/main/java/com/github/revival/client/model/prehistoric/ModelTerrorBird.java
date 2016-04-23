@@ -6,6 +6,7 @@ import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
 import net.minecraft.entity.Entity;
 
 import com.github.revival.client.model.prehistoric.test.ModelNewPrehistoric;
+import com.github.revival.server.entity.mob.EntityDodo;
 import com.github.revival.server.entity.mob.EntityKelenken;
 import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 
@@ -153,6 +154,19 @@ public class ModelTerrorBird extends ModelNewPrehistoric {
 		blockMovement(f, f1, f2, f3, f4, f5, (Entity) entity);
 		this.resetToDefaultPose();
 		setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
+		animator.setAnimation(EntityDodo.ATTACK_ANIMATION);
+		animator.startKeyframe(10);
+		ModelUtils.rotate(animator, neck, -19, 0, 0);
+		ModelUtils.rotate(animator, head, 13, 0, 0);
+		ModelUtils.rotate(animator, lowerBeak, 25, 0, 0);
+		animator.endKeyframe();
+		animator.startKeyframe(5);
+		ModelUtils.rotate(animator, neck, 110, 0, 0);
+		ModelUtils.rotate(animator, neck_1, 10, 0, 0);
+		ModelUtils.rotate(animator, head, -25, 0, 0);
+		ModelUtils.rotate(animator, lowerBeak, -25, 0, 0);
+		animator.endKeyframe();
+		animator.resetKeyframe(10);
 	}
 
 	@Override

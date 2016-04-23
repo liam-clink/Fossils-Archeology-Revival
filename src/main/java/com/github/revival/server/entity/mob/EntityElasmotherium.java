@@ -137,7 +137,7 @@ public class EntityElasmotherium extends EntityNewPrehistoric {
     @Override
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
-		if (this.getAnimation() == ATTACK_ANIMATION && this.getAnimationTick() == 12 && this.getAttackTarget() != null) {
+		if (this.getAnimation() == ATTACK_ANIMATION && this.getAnimationTick() == 15 && this.getAttackTarget() != null) {
 			this.attackEntityAsMob(this.getAttackTarget());
 		}
 	}
@@ -150,7 +150,7 @@ public class EntityElasmotherium extends EntityNewPrehistoric {
 				return false;
 			}
 
-			if (this.getAnimation() == ATTACK_ANIMATION && this.getAnimationTick() == 12) {
+			if (this.getAnimation() == ATTACK_ANIMATION && this.getAnimationTick() == 15) {
 				IAttributeInstance iattributeinstance = this.getEntityAttribute(SharedMonsterAttributes.attackDamage);
 				boolean flag = entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) iattributeinstance.getAttributeValue());
 				if (entity.ridingEntity != null) {
