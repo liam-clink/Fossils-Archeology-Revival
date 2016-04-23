@@ -217,11 +217,10 @@ public enum EnumPrehistoric {
 		return null;
 	}
 
-	public static boolean isEmbryo(Item i0) {
+	public static boolean isEmbryo(Item item) {
 		for (int i = 0; i < values().length; i++) {
 			if (values()[i].type == EnumMobType.MAMMAL) {
-
-				if (values()[i].embryoItem == i0) {
+				if (values()[i].embryoItem == item) {
 					return true;
 				}
 			}
@@ -230,11 +229,11 @@ public enum EnumPrehistoric {
 		return false;
 	}
 
-	public static boolean isBirdEgg(Item i0) {
+	public static boolean isBirdEgg(Item item) {
 		for (int i = 0; i < values().length; i++) {
 			if (values()[i].type == EnumMobType.BIRD) {
 
-				if (values()[i].birdEggItem == i0) {
+				if (values()[i].birdEggItem == item) {
 					return true;
 				}
 			}
@@ -385,17 +384,7 @@ public enum EnumPrehistoric {
 		if(Entity.class.isAssignableFrom(dinoClass)){
 			try {
 				entity = dinoClass.getDeclaredConstructor(World.class).newInstance(world);
-			} catch (InstantiationException e) {
-				e.printStackTrace();
-			} catch (IllegalAccessException e) {
-				e.printStackTrace();
-			} catch (IllegalArgumentException e) {
-				e.printStackTrace();
-			} catch (InvocationTargetException e) {
-				e.printStackTrace();
-			} catch (NoSuchMethodException e) {
-				e.printStackTrace();
-			} catch (SecurityException e) {
+			} catch (ReflectiveOperationException e) {
 				e.printStackTrace();
 			}
 		}

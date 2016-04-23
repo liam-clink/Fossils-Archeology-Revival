@@ -33,16 +33,13 @@ public class DinoEggItem extends Item {
 		Object egg;
 		if(!prehistoricEnum.isAquatic()){
 			egg = new EntityDinoEgg(world, prehistoricEnum);
-			if (egg != null) {
-				((Entity) egg).setLocationAndAngles(x, y, z, world.rand.nextFloat() * 360.0F, 0.0F);
-				if(!world.isRemote){
-					world.spawnEntityInWorld((Entity) egg);
-				}
-				((EntityDinoEgg) egg).selfType = prehistoricEnum;
-				if(!world.isRemote)Revival.NETWORK_WRAPPER.sendToAll(new MessageUpdateEgg(((EntityDinoEgg) egg).getEntityId(), prehistoricEnum.ordinal()));
-			}
-
-			return egg != null;
+			((Entity) egg).setLocationAndAngles(x, y + 1.0F, z, world.rand.nextFloat() * 360.0F, 0.0F);
+			if(!world.isRemote){
+                world.spawnEntityInWorld((Entity) egg);
+            }
+			((EntityDinoEgg) egg).selfType = prehistoricEnum;
+			if(!world.isRemote)Revival.NETWORK_WRAPPER.sendToAll(new MessageUpdateEgg(((EntityDinoEgg) egg).getEntityId(), prehistoricEnum.ordinal()));
+			return true;
 		}else{
 			egg = prehistoricEnum.invokeClass(world);
 			if (egg != null) {

@@ -371,7 +371,7 @@ public class GuiPedia extends GuiContainer {
 			printStringXY(s, (-this.fontRendererObj.getStringWidth(s) / 2) + 65, 60, 66, 48, 36);
 			GL11.glPopMatrix();
 			{
-				int time = (int) Math.floor(((float) egg.getBirthTick() / (float) egg.HatchingNeedTime * 100.0F));
+				int time = (int) Math.floor(((float) egg.getBirthTick() / (float) egg.totalHatchTime * 100.0F));
 				String s1 = StatCollector.translateToLocal("pedia.egg.time") + " " + time + "%";
 				printStringXY(s1, wordLength / 2, 120, 157, 126, 103);
 			}
