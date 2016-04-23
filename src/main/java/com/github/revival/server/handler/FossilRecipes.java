@@ -15,7 +15,9 @@ import com.github.revival.server.item.FAItemRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class FossilRecipes {
-    public static void addRecipe() {
+	public static String[] dyes = {"Black", "Red", "Green", "Brown", "Blue", "Purple", "Cyan", "LightGray", "Gray", "Pink", "Lime", "Yellow", "LightBlue", "Magenta", "Orange", "White"};
+
+	public static void addRecipe() {
         GameRegistry.addRecipe(new ItemStack(FABlockRegistry.INSTANCE.skullLantern, 1), new Object[]{"X", "Y", 'X', FABlockRegistry.INSTANCE.blockSkull, 'Y', Blocks.torch});
         GameRegistry.addRecipe(new ItemStack(Items.dye, 5, 15), new Object[]{"X", 'X', FABlockRegistry.INSTANCE.blockSkull});
         GameRegistry.addRecipe(new ItemStack(Items.dye, 5, 15), new Object[]{"X", 'X', FABlockRegistry.INSTANCE.skullLantern});
@@ -136,5 +138,12 @@ public class FossilRecipes {
 			}*/
 		}
         GameRegistry.addSmelting(FAItemRegistry.INSTANCE.icedMeat, new ItemStack(Items.beef), 3.0F);
-    }
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(FAItemRegistry.INSTANCE.toyBall, 1, 15), new Object[]{"XYX", "YZY", "XYX", 'X', Items.string, 'Y', Blocks.wool, 'Z', "slimeball"}));
+        for(int i = 0; i < 16; i++){
+            GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(FAItemRegistry.INSTANCE.toyBall, 1, i), new ItemStack(FAItemRegistry.INSTANCE.toyBall, 1, OreDictionary.WILDCARD_VALUE), "dye" + dyes[i]));
+        }
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(FAItemRegistry.INSTANCE.toyTetheredLog), new Object[]{"X", "X", "Y", 'X', Items.string, 'Y', "logWood"}));
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(FAItemRegistry.INSTANCE.toyScratchingPost), new Object[]{"YYY", "YZY", " X ", 'X', "slabWood", 'Z', "stickWood", 'Y', Blocks.wool}));
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(FABlockRegistry.INSTANCE.bubbleMachine), new Object[]{"XYX", "YZY", "XYX", 'X', "nuggetGold", 'Y', "ingotGold", 'Z', Items.water_bucket}));
+	}
 }

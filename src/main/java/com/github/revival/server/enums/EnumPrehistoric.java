@@ -7,6 +7,7 @@ import com.github.revival.server.item.BirdEggItem;
 import com.github.revival.server.item.DinoEggItem;
 import com.github.revival.server.item.MammalEmbryoItem;
 import com.github.revival.server.item.forge.ForgeFoodItem;
+
 import cpw.mods.fml.common.registry.GameRegistry;
 import io.netty.util.internal.ThreadLocalRandom;
 import net.minecraft.entity.Entity;
@@ -45,7 +46,10 @@ public enum EnumPrehistoric {
 	Ceratosaurus(EntityCeratosaurus.class, EnumMobType.DINOSAUR, EnumTimePeriod.MESOZOIC, EnumDiet.CARNIVORE, I.MODEL | I.TAME | I.RIDE | I.CARNIVORE, true, 0XB4B4A7, 0X776446, 0.6F),
 	Confuciusornis(EntityConfuciusornis.class, EnumMobType.BIRD, EnumTimePeriod.MESOZOIC, EnumDiet.HERBIVORE, I.TAME | I.HERBIVORE, true, 0XDAE5E9, 0X8B8B8D),
 	Dodo(EntityDodo.class, EnumMobType.BIRD, EnumTimePeriod.CENOZOIC, EnumDiet.HERBIVORE, I.TAME | I.HERBIVORE, true, 0X655751, 0XBEA47B),
-	TerrorBird(EntityTerrorBird.class, EnumMobType.TERRORBIRD, EnumTimePeriod.CENOZOIC, EnumDiet.CARNIVORE, I.TAME, true, 0X346C5E, 0XF2EBD5),
+	Gastornis(EntityGastornis.class, EnumMobType.BIRD, EnumTimePeriod.CENOZOIC, EnumDiet.CARNIVORE, I.TAME, true, 0X346C5E, 0XF2EBD5),
+	Kelenken(EntityTerrorBird.class, EnumMobType.BIRD, EnumTimePeriod.CENOZOIC, EnumDiet.CARNIVORE, I.TAME, true, 0X346C5E, 0XF2EBD5),
+	Phorusrhacos(EntityTerrorBird.class, EnumMobType.BIRD, EnumTimePeriod.CENOZOIC, EnumDiet.CARNIVORE, I.TAME, true, 0X346C5E, 0XF2EBD5),
+	Titanis(EntityTerrorBird.class, EnumMobType.BIRD, EnumTimePeriod.CENOZOIC, EnumDiet.CARNIVORE, I.TAME, true, 0X346C5E, 0XF2EBD5),
 	Mammoth(EntityMammoth.class, EnumMobType.MAMMAL, EnumTimePeriod.CENOZOIC, EnumDiet.HERBIVORE, I.TAME | I.RIDE | I.HERBIVORE, true, 0X3D2E19, 0X24170B),
 	Smilodon(EntitySmilodon.class, EnumMobType.MAMMAL, EnumTimePeriod.CENOZOIC, EnumDiet.CARNIVORE, I.TAME | I.CARNIVORE, true, 0XB88C64, 0XECDFCE),
 	Quagga(EntityQuagga.class, EnumMobType.MAMMAL, EnumTimePeriod.CENOZOIC, EnumDiet.HERBIVORE, I.TAME | I.RIDE | I.HERBIVORE, true, 0X763C24, 0XD3B9AB),
