@@ -14,7 +14,7 @@ public class FossilClientEvents {
     public void onBlockOverlay(RenderBlockOverlayEvent e) {
         if (e.player.worldObj.getBlock(e.blockX, e.blockY, e.blockZ) == FABlockRegistry.INSTANCE.tar) {
             e.setCanceled(true);
-            Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation("fossil:textures/blocks/tar.png"));
+            Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation("fossil:textures/blocks/Tar.png"));
             Tessellator tessellator = Tessellator.instance;
             float f1 = 0.5F;
             GL11.glColor4f(f1, f1, f1, 0.7F);

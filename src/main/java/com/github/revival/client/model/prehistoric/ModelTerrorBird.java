@@ -239,5 +239,6 @@ public class ModelTerrorBird extends ModelNewPrehistoric {
 			sitAnimationPos(upperBody, sitProgress, 0F, 17.30F - ModelUtils.getDefaultPositionY(leftThigh), 0F);
 		}
 		((EntityNewPrehistoric)entity).chainBuffer.applyChainSwingBuffer(tailParts);
+		
 	}
 }
