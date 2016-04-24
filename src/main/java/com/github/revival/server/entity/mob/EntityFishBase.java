@@ -121,13 +121,11 @@ public abstract class EntityFishBase extends EntityTameable {
 		Revival.PROXY.calculateChainBuffer(this);
 		if(this.getClosestMate() != null && this.getGrowingAge() == 0 && this.getClosestMate().getGrowingAge() == 0 && !this.worldObj.isRemote){
 			this.setGrowingAge(12000);
-			if(this.getGrowingAge() == 12000){
-				this.worldObj.spawnEntityInWorld(new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, new ItemStack(this.selfType.eggItem)));
-			}
+			this.worldObj.spawnEntityInWorld(new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, new ItemStack(this.selfType.eggItem)));
 			this.getClosestMate().setGrowingAge(12000);
 		}
 	}
-	
+
 	@Override
 	public IEntityLivingData onSpawnWithEgg(IEntityLivingData par1EntityLivingData) {
 		this.setGrowingAge(12000);
@@ -154,7 +152,7 @@ public abstract class EntityFishBase extends EntityTameable {
 			return null;
 		}
 	}
-	
+
 	public boolean isInsideNautilusShell(){
 		return this instanceof EntityNautilus && ((EntityNautilus)this).isInShell();
 	}

@@ -19,8 +19,6 @@ import java.util.Random;
 
 public class BlockPalmLeaves extends BlockLeaves {
     public static final String[][] TEXTURES = new String[][]{{"leaves_palaeoraphe"}, {"leaves_palaeoraphe_fast"}};
-
-    @SideOnly(Side.CLIENT)
     private IIcon[][] icons = new IIcon[2][];
     
     private byte[] adjacentTreeBlocks;
