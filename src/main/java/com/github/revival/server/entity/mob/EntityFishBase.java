@@ -84,7 +84,7 @@ public abstract class EntityFishBase extends EntityTameable {
 	private void swimAround() {
 		if(!isInsideNautilusShell()){
 			if (currentTarget != null){
-				if(!isDirectPathBetweenPoints(this.getPosition(1.0F), Vec3.createVectorHelper(shelterX, shelterY, shelterZ))){
+				if(!isDirectPathBetweenPoints(new ChunkCoordinates(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY), MathHelper.floor_double(this.posZ)), currentTarget)){
 					currentTarget = null;
 				}
 				if (!isTargetInWater() || this.getDistance(currentTarget.posX, currentTarget.posY, currentTarget.posZ) < 1.78F){
@@ -350,10 +350,9 @@ public abstract class EntityFishBase extends EntityTameable {
 		return null;
 	}
 
-	public boolean isDirectPathBetweenPoints(Vec3 vec1, Vec3 vec2)
+	public boolean isDirectPathBetweenPoints(ChunkCoordinates vec1, ChunkCoordinates vec2)
 	{
-		MovingObjectPosition movingobjectposition = this.worldObj.func_147447_a(vec1, Vec3.createVectorHelper(vec2.xCoord, vec2.yCoord + (double)this.height * 0.5D, vec2.zCoord), false, true, false);
-		return movingobjectposition == null || movingobjectposition.typeOfHit != MovingObjectPosition.MovingObjectType.BLOCK;
+		return vec1.getDistanceSquaredToChunkCoordinates(vec2) > 16;
 	}
 
 	@Override

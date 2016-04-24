@@ -27,16 +27,9 @@ public class EntityAIWaterFindTarget extends EntityAIBase
 		this.theWorld = mob.worldObj;
 		this.setMutexBits(1);
 	}
-
-	public boolean isDirectPathBetweenPoints(Vec3 vec1, Vec3 vec2)
-	{
-		MovingObjectPosition movingobjectposition = this.theWorld.func_147447_a(vec1, Vec3.createVectorHelper(vec2.xCoord, vec2.yCoord, vec2.zCoord), false, true, false);
-		return movingobjectposition == null || movingobjectposition.typeOfHit != MovingObjectPosition.MovingObjectType.BLOCK;
-	}
-
 	
 	public boolean shouldExecute(){
-		if(isDirectPathBetweenPoints(mob.getPosition(1.0F), Vec3.createVectorHelper(shelterX, shelterY, shelterZ))){
+		if(!mob.isDirectPathBetweenPoints(new ChunkCoordinates(MathHelper.floor_double(mob.posX), MathHelper.floor_double(mob.posY), MathHelper.floor_double(mob.posZ)), new ChunkCoordinates(MathHelper.floor_double(shelterX), MathHelper.floor_double(shelterY), MathHelper.floor_double(shelterZ)))){
 			mob.currentTarget = null;
 		}
 
