@@ -1,7 +1,7 @@
 package com.github.revival.server;
 
 import com.github.revival.server.block.FABlockRegistry;
-import com.github.revival.server.entity.mob.EntityFishBase;
+import com.github.revival.server.entity.mob.test.EntityFishBase;
 import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 import com.github.revival.server.item.FAItemRegistry;
 

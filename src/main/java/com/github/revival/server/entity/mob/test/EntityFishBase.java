@@ -1,4 +1,4 @@
-package com.github.revival.server.entity.mob;
+package com.github.revival.server.entity.mob.test;
 
 import java.util.Collections;
 import java.util.List;
@@ -24,7 +24,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 import com.github.revival.Revival;
-import com.github.revival.server.entity.mob.test.EntityAIWaterFindTarget;
+import com.github.revival.server.entity.mob.EntityNautilus;
 import com.github.revival.server.enums.EnumPrehistoric;
 import com.github.revival.server.item.FAItemRegistry;
 
@@ -36,15 +36,12 @@ public abstract class EntityFishBase extends EntityTameable {
 
 	public EnumPrehistoric selfType;
 	public ChunkCoordinates currentTarget;
-	public double shelterX;
-	public double shelterY;
-	public double shelterZ;
 	@SideOnly(Side.CLIENT)
 	public ChainBuffer chainBuffer;
 
 	public EntityFishBase(World par1World, EnumPrehistoric selfType) {
 		super(par1World);
-		this.tasks.addTask(1, new EntityAIWaterFindTarget(this, 0));
+		this.tasks.addTask(1, new FishAIWaterFindTarget(this, 0));
 		this.tasks.addTask(2, new EntityAILookIdle(this));
 		this.selfType = selfType;
 		if (FMLCommonHandler.instance().getSide().isClient()) {

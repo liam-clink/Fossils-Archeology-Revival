@@ -1,5 +1,6 @@
 package com.github.revival.server.entity.mob;
 
+import com.github.revival.server.entity.mob.test.EntityFishBase;
 import com.github.revival.server.enums.EnumPrehistoric;
 import com.github.revival.server.item.FAItemRegistry;
 

@@ -6,27 +6,22 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.MathHelper;
-import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
-import com.github.revival.server.entity.mob.EntityFishBase;
-
-public class EntityAIWaterFindTarget extends EntityAIBase
+public class DinoAIFindAirTarget extends EntityAIBase
 {
-	private EntityFishBase mob;
+	private EntityFlyingPrehistoric mob;
 	private double shelterX;
 	private double shelterY;
 	private double shelterZ;
-	private double movementSpeed;
 	private World theWorld;
 
-	public EntityAIWaterFindTarget(EntityFishBase mob, double speed){
+	public DinoAIFindAirTarget(EntityFlyingPrehistoric mob){
 		this.mob = mob;
-		this.movementSpeed = speed;
 		this.theWorld = mob.worldObj;
 		this.setMutexBits(1);
 	}
-	
+
 	public boolean shouldExecute(){
 		if(!mob.isDirectPathBetweenPoints(new ChunkCoordinates(MathHelper.floor_double(mob.posX), MathHelper.floor_double(mob.posY), MathHelper.floor_double(mob.posZ)), new ChunkCoordinates(MathHelper.floor_double(shelterX), MathHelper.floor_double(shelterY), MathHelper.floor_double(shelterZ)))){
 			mob.currentTarget = null;
@@ -48,9 +43,6 @@ public class EntityAIWaterFindTarget extends EntityAIBase
 				this.shelterX = vec3.posX;
 				this.shelterY = vec3.posY;
 				this.shelterZ = vec3.posZ;
-				mob.shelterX = this.shelterX;
-				mob.shelterY = this.shelterY;
-				mob.shelterZ = this.shelterZ;
 				return true;
 			}
 		}
@@ -71,22 +63,18 @@ public class EntityAIWaterFindTarget extends EntityAIBase
 			ChunkCoordinates chunkCoordinates = getCoords();
 			for (int i = 0; i < 10; ++i)
 			{
-				ChunkCoordinates chunkCoordinates1 = new ChunkCoordinates(chunkCoordinates.posX + random.nextInt(20) - 10, chunkCoordinates.posY + random.nextInt(6) - 3, chunkCoordinates.posZ + random.nextInt(20) - 10);
-				if (mob.worldObj.getBlock(chunkCoordinates1.posX, chunkCoordinates1.posY, chunkCoordinates1.posZ).getMaterial() == Material.water)
+				ChunkCoordinates chunkCoordinates1 = new ChunkCoordinates(chunkCoordinates.posX + random.nextInt(60) - 30, chunkCoordinates.posY + random.nextInt(32) - 16, chunkCoordinates.posZ + random.nextInt(60) - 30);
+				if (mob.worldObj.getBlock(chunkCoordinates1.posX, chunkCoordinates1.posY, chunkCoordinates1.posZ).getMaterial() == Material.air)
 				{
 					return chunkCoordinates1;
 				}
 			}
 		}else{
 			Random random = this.mob.getRNG();
-			ChunkCoordinates ChunkCoordinates = getCoords();
-			for (int i = 0; i < 10; ++i)
+			ChunkCoordinates coords = getCoords();
+			if (mob.worldObj.getBlock(coords.posX, coords.posY, coords.posZ).getMaterial() == Material.air)
 			{
-				ChunkCoordinates blockpos1 = getCoords();
-				if (mob.worldObj.getBlock(blockpos1.posX, blockpos1.posY, blockpos1.posZ).getMaterial() == Material.water)
-				{
-					return blockpos1;
-				}
+				return coords;
 			}
 		}
 
@@ -97,8 +85,7 @@ public class EntityAIWaterFindTarget extends EntityAIBase
 		int i = MathHelper.floor_double(mob.posX);
 		int j = MathHelper.floor_double(mob.posY);
 		int k = MathHelper.floor_double(mob.posZ);
-		boolean b = mob.worldObj.getBlock(i, j + 1, k).getMaterial() == Material.water;
-		return new ChunkCoordinates((int)this.mob.posX, (int)this.mob.boundingBox.minY, (int)this.mob.posZ);
+		return new ChunkCoordinates((int)this.mob.getAttackTarget().posX, (int)this.mob.getAttackTarget().posY, (int)this.mob.getAttackTarget().posZ);
 	}
 
 

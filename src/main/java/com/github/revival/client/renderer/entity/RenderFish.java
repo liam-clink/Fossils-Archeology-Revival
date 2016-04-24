@@ -2,7 +2,7 @@ package com.github.revival.client.renderer.entity;
 
 import org.lwjgl.opengl.GL11;
 
-import com.github.revival.server.entity.mob.EntityFishBase;
+import com.github.revival.server.entity.mob.test.EntityFishBase;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;

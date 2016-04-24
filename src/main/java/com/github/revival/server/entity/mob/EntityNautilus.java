@@ -13,6 +13,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
 import com.github.revival.Revival;
+import com.github.revival.server.entity.mob.test.EntityFishBase;
 import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 import com.github.revival.server.enums.EnumPrehistoric;
 import com.github.revival.server.item.FAItemRegistry;
