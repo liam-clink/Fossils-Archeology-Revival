@@ -6,6 +6,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
@@ -27,8 +28,15 @@ public class EntityAIWaterFindTarget extends EntityAIBase
 		this.setMutexBits(1);
 	}
 
+	public boolean isDirectPathBetweenPoints(Vec3 vec1, Vec3 vec2)
+	{
+		MovingObjectPosition movingobjectposition = this.theWorld.func_147447_a(vec1, Vec3.createVectorHelper(vec2.xCoord, vec2.yCoord, vec2.zCoord), false, true, false);
+		return movingobjectposition == null || movingobjectposition.typeOfHit != MovingObjectPosition.MovingObjectType.BLOCK;
+	}
+
+	
 	public boolean shouldExecute(){
-		if(mob.isDirectPathBetweenPoints(mob.getPosition(1.0F), Vec3.createVectorHelper(shelterX, shelterY, shelterZ))){
+		if(isDirectPathBetweenPoints(mob.getPosition(1.0F), Vec3.createVectorHelper(shelterX, shelterY, shelterZ))){
 			mob.currentTarget = null;
 		}
 
