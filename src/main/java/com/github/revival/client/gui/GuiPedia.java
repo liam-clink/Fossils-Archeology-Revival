@@ -194,16 +194,16 @@ public class GuiPedia extends GuiContainer {
 						this.drawHoveringText(text, (-this.fontRendererObj.getStringWidth(s1) / 2) + 280, 222, fontRendererObj);
 					}
 				}
-                return true;
+				return true;
 			}
 		}
-        return false;
+		return false;
 	}
 
 	public void addMiniItem(Item item) {
 		if (this.printItemXY(item, 230 + 16 * (items % 8), 70 + 16 * (items / 8), 1)) {
-            items++;
-        }
+			items++;
+		}
 	}
 
 	public void printHappyBar(ResourceLocation resourceLocation, int x, int y, int width, int height, float modifiedU, float modifiedV) {
@@ -221,6 +221,9 @@ public class GuiPedia extends GuiContainer {
 			}
 			else if (Revival.toPedia instanceof EntityDinoEgg) {
 				renderFirstPage((EntityDinoEgg) Revival.toPedia);
+			}
+			else if (Revival.toPedia instanceof EntityFishBase) {
+				renderFirstPage((EntityFishBase) Revival.toPedia);
 			}
 			/*if (Revival.toPedia instanceof EntityDinoEgg) {
 				((EntityDinoEgg) Revival.toPedia).showPedia(this);
@@ -393,6 +396,11 @@ public class GuiPedia extends GuiContainer {
 				}
 				printStringXY(s1, wordLength / 2, 140, 157, 126, 103);
 			}
+		}
+		if(entity instanceof EntityFishBase){
+			String s1 = StatCollector.translateToLocal(entity.getCommandSenderName());
+			GL11.glScalef(1.5F, 1.5F, 1.5F);
+			printStringXY(StatCollector.translateToLocal(entity.getCommandSenderName()), (-this.fontRendererObj.getStringWidth(s1) / 2) + 65, 60, 66, 48, 36);
 		}
 	}
 
@@ -586,14 +594,14 @@ public class GuiPedia extends GuiContainer {
 		GL11.glPushMatrix();
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
 		GL11.glTranslatef((float) posX, (float) posY, 50.0F);
-		GL11.glScalef(-(float) (scaleValue), -(float) scaleValue, (float) scaleValue);
+		GL11.glScalef((float) -(scaleValue), -(float) scaleValue, (float) scaleValue);
 
 		float f2 = 0;
 		float f3 = 0;
 		float f4 = 0;
 		float f5 = 0;
 		float f6 = 0;
-		GL11.glRotatef(-45.0F, 0.0F, 1.0F, 0.0F);
+		GL11.glRotatef(-90.0F, 0.0F, 1.0F, 0.0F);
 		RenderHelper.enableStandardItemLighting();
 		GL11.glRotatef(-135.0F, 0.0F, 0.0F, 0.0F);
 		GL11.glRotatef(-((float) Math.atan((double) (renderPitch / 40.0F))) * 20.0F, 1.0F, 0.0F, 0.0F);

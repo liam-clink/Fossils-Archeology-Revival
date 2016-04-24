@@ -128,6 +128,8 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	public EntityNewPrehistoric(World world, EnumPrehistoric selfType) {
 		super(world);
 		this.updateSize();
+		this.getNavigator().setAvoidsWater(true);
+		this.getNavigator().setCanSwim(true);
 		this.selfType = selfType;
 		this.pediaScale = 1.0F;
 		nearByMobsAllowed = 15;

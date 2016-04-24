@@ -116,7 +116,7 @@ public abstract class EntityFishBase extends EntityTameable {
 		super.onUpdate();
 		swimAround();
 		Revival.PROXY.calculateChainBuffer(this);
-		if(this.getClosestMate() != null && this.getGrowingAge() == 0 && this.getClosestMate().getGrowingAge() == 0 && !this.worldObj.isRemote){
+		if(this.isInWater() && this.getClosestMate() != null && this.getGrowingAge() == 0 && this.getClosestMate().getGrowingAge() == 0 && !this.worldObj.isRemote){
 			this.setGrowingAge(12000);
 			this.getClosestMate().setGrowingAge(12000);
 			this.worldObj.spawnEntityInWorld(new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, new ItemStack(this.selfType.eggItem)));

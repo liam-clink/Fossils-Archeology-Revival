@@ -120,8 +120,6 @@ public class ModelSturgeon extends AdvancedModelBase {
 		this.chainWave(tailParts, speed, 0.05F, -3, entity.ticksExisted, 1);
 		this.chainSwing(tailParts, speed, 0.5F, -3, entity.ticksExisted, 1);
 		this.swing(Body, speed, 0.3F, true, 0, 0, entity.ticksExisted, 1);
-		this.flap(RightFrontFlipper, speed, 1.0F, true, 0, -1.0F, entity.ticksExisted, 1);
-		this.flap(LeftFrontFlipper, speed, 1.0F, false, 0, -1.0F, entity.ticksExisted, 1);
 		this.walk(BottomJaw, 0.1F, 0.2F, true, 0, -0.2F, entity.ticksExisted, 1);
 		if(!entity.isInWater()){
 			this.Body.rotateAngleZ = (float) Math.toRadians(90);
