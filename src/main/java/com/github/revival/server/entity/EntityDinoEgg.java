@@ -121,25 +121,15 @@ public class EntityDinoEgg extends EntityLiving implements IEntityAdditionalSpaw
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
-		//this.tickHatching();
+		this.tickHatching();
 	}
 
 	private void tickHatching() {
 		float brightness = this.getBrightness(1.0F);
 		EntityPlayer player = this.worldObj.getClosestPlayerToEntity(this, 16.0D);
-		if (this.selfType == EnumPrehistoric.Mosasaurus || this.selfType == EnumPrehistoric.Liopleurodon) {
-			if (this.inWater) {
-				lastBirthTick = this.getBirthTick();
-				this.setBirthTick(this.getBirthTick() + 1);
-
-			} else {
-				this.setBirthTick(this.getBirthTick() - 1);
-			}
-
-		} else if ((double) brightness >= 0.5D && !this.inWater) {
+		if ((double) brightness >= 0.5D && !this.inWater) {
 			lastBirthTick = this.getBirthTick();
 			this.setBirthTick(this.getBirthTick() + 1);
-
 		} else {
 			BiomeGenBase biome = this.worldObj.getBiomeGenForCoords((int) this.posX, (int) this.posZ);
 			float temperature = biome.temperature;
