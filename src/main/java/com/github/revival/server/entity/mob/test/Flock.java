@@ -1,6 +1,7 @@
 package com.github.revival.server.entity.mob.test;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -9,7 +10,9 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.RandomPositionGenerator;
 import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.pathfinding.PathNavigate;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Vec3;
+import net.minecraft.world.World;
 
 import com.github.revival.server.enums.EnumPrehistoric;
 
@@ -48,13 +51,9 @@ public class Flock {
 		if (flockLeader == null || flockLeader.isDead) {
 			setNewLeader();
 		}
-		if (flockLeader != null) {
-			flockYaw = flockLeader.rotationYaw;
-		}
-		for (int i = 0; i < flockMembers.size(); i++) {
-			EntityNewPrehistoric member = ((EntityNewPrehistoric) flockMembers.toArray()[i]);
+		for (EntityNewPrehistoric member : flockMembers) {
 			if (member != null && flockLeader != null && this.flockPathNavigate != null && this.flockPathNavigate.getPath() != null) {
-				if(member.getNavigator().noPath()){
+				if(member.getNavigator().noPath() && member != this.flockLeader){
 					member.getNavigator().setPath(this.flockLeader.getNavigator().getPath(), 1);
 				}else{
 					member.canWander = false;
@@ -66,10 +65,10 @@ public class Flock {
 		if (flockPathNavigate == null) {
 			flockPathNavigate = flockLeader.getNavigator();
 		}
-		if (closestEntity() != null) {
-			if (closestEntity().getClass() == flockLeader.getClass()) {
+		if (flockLeader != null) {
+			if (findNewMember(flockLeader.worldObj, flockLeader.boundingBox.expand(5, 5, 5), flockLeader) != null) {
 				if (flockLeader.getRNG().nextInt(20) == 0) {
-					Vec3 vec3 = RandomPositionGenerator.findRandomTargetBlockAwayFrom(closestEntity(), 32, 7, Vec3.createVectorHelper(closestEntity().posX, closestEntity().posY, closestEntity().posZ));
+					Vec3 vec3 = RandomPositionGenerator.findRandomTargetBlockAwayFrom(flockLeader, 32, 7, Vec3.createVectorHelper(flockLeader.posX, flockLeader.posY, flockLeader.posZ));
 					this.flockPathEntity = this.flockPathNavigate.getPathToXYZ(vec3.xCoord, vec3.yCoord, vec3.zCoord);
 					this.flockPathNavigate.setPath(this.flockPathEntity, 0.7);
 				}
@@ -77,20 +76,32 @@ public class Flock {
 		}
 	}
 
-	public EntityNewPrehistoric closestEntity() {
-		IEntitySelector selector = IEntitySelector.selectAnything;
-		List<Entity> entities = flockLeader.worldObj.getEntitiesWithinAABBExcludingEntity(flockLeader, flockLeader.boundingBox.expand((double) 12, 3.0D, (double) 12), selector);
-		for (Entity mob : entities) {
-			if (mob instanceof EntityNewPrehistoric) {
-				return (EntityNewPrehistoric) mob;
+	public EntityNewPrehistoric findNewMember(World world, AxisAlignedBB bb, EntityNewPrehistoric leader)
+	{
+		List list = world.getEntitiesWithinAABB(EntityNewPrehistoric.class, bb);
+		EntityNewPrehistoric entity1 = null;
+		double d0 = Double.MAX_VALUE;
+
+		for (int i = 0; i < list.size(); ++i)
+		{
+			EntityNewPrehistoric entity2 = (EntityNewPrehistoric)list.get(i);
+
+			if (entity2 != leader && !this.flockMembers.contains(entity2) && entity2.selfType == leader.selfType)
+			{
+				double d1 = leader.getDistanceSqToEntity(entity2);
+
+				if (d1 <= d0)
+				{
+					entity1 = entity2;
+					d0 = d1;
+				}
 			}
 		}
-		return null;
+		return entity1;
 	}
 
 	public void setNewLeader() {
-		int index = new Random().nextInt(flockMembers.size());
-		flockLeader = flockMembers.get(index);
+		flockLeader = flockMembers.get(new Random().nextInt(flockMembers.size()));
 	}
 
 	public void disband() {
