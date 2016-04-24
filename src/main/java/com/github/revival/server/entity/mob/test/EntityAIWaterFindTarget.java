@@ -7,7 +7,6 @@ import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
 import com.github.revival.server.entity.mob.EntityFishBase;
@@ -38,7 +37,7 @@ public class EntityAIWaterFindTarget extends EntityAIBase
 		}
 		else
 		{
-			Vec3 vec3 = this.findWaterTarget();
+			ChunkCoordinates vec3 = this.findWaterTarget();
 
 			if (vec3 == null)
 			{
@@ -46,9 +45,9 @@ public class EntityAIWaterFindTarget extends EntityAIBase
 			}
 			else
 			{
-				this.shelterX = vec3.xCoord;
-				this.shelterY = vec3.yCoord;
-				this.shelterZ = vec3.zCoord;
+				this.shelterX = vec3.posX;
+				this.shelterY = vec3.posY;
+				this.shelterZ = vec3.posZ;
 				mob.shelterX = this.shelterX;
 				mob.shelterY = this.shelterY;
 				mob.shelterZ = this.shelterZ;
@@ -65,7 +64,7 @@ public class EntityAIWaterFindTarget extends EntityAIBase
 		this.mob.currentTarget = new ChunkCoordinates((int)shelterX, (int)shelterY, (int)shelterZ);
 	}
 
-	public Vec3 findWaterTarget(){
+	public ChunkCoordinates findWaterTarget(){
 		if(mob.getAttackTarget() == null || mob.ridingEntity != null && mob.getAttackTarget() != null){
 			Random random = this.mob.getRNG();
 			mob.setAttackTarget(null);
@@ -75,7 +74,7 @@ public class EntityAIWaterFindTarget extends EntityAIBase
 				ChunkCoordinates chunkCoordinates1 = new ChunkCoordinates(chunkCoordinates.posX + random.nextInt(20) - 10, chunkCoordinates.posY + random.nextInt(6) - 3, chunkCoordinates.posZ + random.nextInt(20) - 10);
 				if (mob.worldObj.getBlock(chunkCoordinates1.posX, chunkCoordinates1.posY, chunkCoordinates1.posZ).getMaterial() == Material.water)
 				{
-					return Vec3.createVectorHelper((double)chunkCoordinates1.posX, (double)chunkCoordinates1.posY, (double)chunkCoordinates1.posZ);
+					return chunkCoordinates1;
 				}
 			}
 		}else{
@@ -86,7 +85,7 @@ public class EntityAIWaterFindTarget extends EntityAIBase
 				ChunkCoordinates blockpos1 = getCoords();
 				if (mob.worldObj.getBlock(blockpos1.posX, blockpos1.posY, blockpos1.posZ).getMaterial() == Material.water)
 				{
-					return Vec3.createVectorHelper((double)blockpos1.posX, (double)blockpos1.posY, (double)blockpos1.posZ);
+					return blockpos1;
 				}
 			}
 		}
