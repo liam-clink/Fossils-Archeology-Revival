@@ -239,11 +239,5 @@ public class ModelTerrorBird extends ModelNewPrehistoric {
 			sitAnimationPos(upperBody, sitProgress, 0F, 17.30F - ModelUtils.getDefaultPositionY(leftThigh), 0F);
 		}
 		((EntityNewPrehistoric)entity).chainBuffer.applyChainSwingBuffer(tailParts);
-		if(entity instanceof EntityKelenken){
-			this.head.setScale(1.2F, 1.2F, 1.2F);
-			for(int i = 0; i < this.head.childModels.size(); i++){
-				((AdvancedModelRenderer)this.head.childModels.get(i)).setScale(1.2F, 1.2F, 1.2F);
-			}
-		}
 	}
 }

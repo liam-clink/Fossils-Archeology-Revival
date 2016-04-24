@@ -89,10 +89,10 @@ public class ModelNautilus extends AdvancedModelBase {
 			sitAnimationRotation(flap, shellProgress, (float) Math.toRadians(75), 0, 0);
 			sitAnimationRotation(tenticle_0, shellProgress, -(float) Math.toRadians(20), 0, 0);
 			sitAnimationRotation(tenticle_1, shellProgress, -(float) Math.toRadians(25), 0, 0);
-			sitAnimationRotation(tenticle_2, shellProgress, -(float) Math.toRadians(20), 0, 0);
+			sitAnimationRotation(tenticle_2, shellProgress, -(float) Math.toRadians(20), -(float) Math.toRadians(20), 0);
 			sitAnimationRotation(tenticle_3, shellProgress, (float) Math.toRadians(20), 0, 0);
 			sitAnimationRotation(tenticle_4, shellProgress, (float) Math.toRadians(25), 0, 0);
-			sitAnimationRotation(tenticle_5, shellProgress, (float) Math.toRadians(20), 0, 0);
+			sitAnimationRotation(tenticle_5, shellProgress, (float) Math.toRadians(20), (float) Math.toRadians(20), 0);
 
 			sitAnimationOffset(tenticle_0, shellProgress, -0.1F, 0, -0.25F);
 			sitAnimationOffset(tenticle_1, shellProgress, -0.1F, 0, -0.25F);
@@ -100,7 +100,7 @@ public class ModelNautilus extends AdvancedModelBase {
 			sitAnimationOffset(tenticle_3, shellProgress, 0.1F, 0, -0.25F);
 			sitAnimationOffset(tenticle_4, shellProgress, 0.1F, 0, -0.25F);
 			sitAnimationOffset(tenticle_5, shellProgress, 0.1F, 0, -0.25F);
-			sitAnimationOffset(head, shellProgress, 0, 0, -0.25F);
+			sitAnimationOffset(head, shellProgress, 0, 0, -0.35F);
 			if(shellProgress == 0){
 				tenticle_0.swing(speed, 0.4F, false, 0, 0, entity.ticksExisted, 1);
 				tenticle_1.swing(speed, 0.4F, false, 0, 0, entity.ticksExisted, 1);

@@ -24,6 +24,7 @@ public class EntityNautilus extends EntityFishBase {
 	public float shellProgress;
 	public static final int SHELL_INDEX = 24;
 	public boolean isInShell;
+	public int ticksToShell;
 
 	public EntityNautilus(World world) {
 		super(world, EnumPrehistoric.Nautilus);
@@ -40,12 +41,14 @@ public class EntityNautilus extends EntityFishBase {
 	public void writeEntityToNBT(NBTTagCompound compound) {
 		super.writeEntityToNBT(compound);
 		compound.setBoolean("InShell", this.isInShell);
+		compound.setInteger("ShellTick", this.ticksToShell);
 	}
 
 	@Override
 	public void readEntityFromNBT(NBTTagCompound compound) {
 		super.writeEntityToNBT(compound);
 		this.setInShell(compound.getBoolean("InShell"));
+		this.ticksToShell = compound.getInteger("ShellTick");
 	}
 
 	public void setInShell(boolean inShell) {
@@ -80,8 +83,11 @@ public class EntityNautilus extends EntityFishBase {
 		} else if (!inshell && shellProgress > 0.0F) {
 			shellProgress -= 0.5F;
 		}
+		if(ticksToShell > 0){
+			ticksToShell--;
+		}
 		if(!this.worldObj.isRemote){
-			if(isThereNearbyMobs() || !this.isInWater() && this.onGround){
+			if(isThereNearbyMobs() && this.ticksToShell == 0 || !this.isInWater() && this.onGround && this.ticksToShell == 0){
 				if(!this.isInShell()){
 					this.setInShell(true);
 					Revival.NETWORK_WRAPPER.sendToAll(new MessageUpdateNautilus(this.getEntityId(), true));
@@ -139,6 +145,10 @@ public class EntityNautilus extends EntityFishBase {
 		if(f > 0 && this.isInShell() && dmg.getEntity() != null){
 			this.playSound("random.break", 1, this.getRNG().nextFloat() + 0.8F);
 			return false;
+		}
+		if(!this.isInShell()){
+			this.setInShell(true);
+			Revival.NETWORK_WRAPPER.sendToAll(new MessageUpdateNautilus(this.getEntityId(), true));
 		}
 		return super.attackEntityFrom(dmg, f);
 	}

@@ -22,6 +22,7 @@ import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+
 import com.github.revival.Revival;
 import com.github.revival.server.entity.mob.test.EntityAIWaterFindTarget;
 import com.github.revival.server.enums.EnumPrehistoric;
@@ -117,8 +118,8 @@ public abstract class EntityFishBase extends EntityTameable {
 		Revival.PROXY.calculateChainBuffer(this);
 		if(this.getClosestMate() != null && this.getGrowingAge() == 0 && this.getClosestMate().getGrowingAge() == 0 && !this.worldObj.isRemote){
 			this.setGrowingAge(12000);
-			this.worldObj.spawnEntityInWorld(new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, new ItemStack(this.selfType.eggItem)));
 			this.getClosestMate().setGrowingAge(12000);
+			this.worldObj.spawnEntityInWorld(new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, new ItemStack(this.selfType.eggItem)));
 		}
 	}
 
@@ -136,14 +137,15 @@ public abstract class EntityFishBase extends EntityTameable {
 				return entity instanceof EntityFishBase;
 			}
 		};
-		List<EntityFishBase> list = worldObj.selectEntitiesWithinAABB(Entity.class, this.boundingBox.expand(2.0D, 2.0D, 2.0D), targetEntitySelector);
+		List<EntityFishBase> list = worldObj.selectEntitiesWithinAABB(EntityFishBase.class, this.boundingBox.expand(2.0D, 2.0D, 2.0D), targetEntitySelector);
 		Collections.sort(list, theNearestAttackableTargetSorter);
 
 		if (list.isEmpty()) {
 			return null;
 		} else {
 			for(EntityFishBase entity : list){
-				return entity.selfType == this.selfType ? entity : null;
+				if(entity != this)
+					return entity.selfType == this.selfType ? entity : null;
 			}
 			return null;
 		}
@@ -264,12 +266,6 @@ public abstract class EntityFishBase extends EntityTameable {
 
 	@Override
 	public boolean interact(EntityPlayer var1) {
-
-		if(this.isInsideNautilusShell()){
-			this.playSound("random.break", 1, this.getRNG().nextFloat() + 0.8F);
-			return true;
-		}
-
 		ItemStack var2 = var1.inventory.getCurrentItem();
 
 		if (var2 != null && FMLCommonHandler.instance().getSide().isClient() && var2.getItem() == FAItemRegistry.INSTANCE.dinoPedia) {
@@ -277,8 +273,16 @@ public abstract class EntityFishBase extends EntityTameable {
 			var1.openGui(Revival.INSTANCE, 4, this.worldObj, (int) this.posX, (int) this.posY, (int) this.posZ);
 			return true;
 		}
-
-		if (var2 == null) {
+		if(this.isInsideNautilusShell()){
+			if(var2 != null && var2.getItem() == Items.flint){
+				((EntityNautilus)this).setInShell(false);
+				((EntityNautilus)this).ticksToShell = 60;
+			}else{
+				this.playSound("random.break", 1, this.getRNG().nextFloat() + 0.8F);
+				return false;
+			}
+		}
+		if (var2 == null && this.getGrowingAge() > 0) {
 			ItemStack var3 = new ItemStack(this.selfType.fishItem, 1);
 
 			if (var1.inventory.addItemStackToInventory(var3)) {

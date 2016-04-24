@@ -37,6 +37,8 @@ public class ItemFish extends Item {
 				EntityFishBase prehistoric = (EntityFishBase)egg;
 				if(isEggs){
 					prehistoric.setGrowingAge(-24000);
+				}else{
+					prehistoric.setGrowingAge(12000);
 				}
 				if(!world.isRemote){
 					world.spawnEntityInWorld((Entity) egg);
