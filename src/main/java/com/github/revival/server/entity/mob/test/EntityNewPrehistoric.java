@@ -116,7 +116,9 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	public boolean isDaytime;
 	public Flock flockObj;
 	public boolean canWander;
-
+	public float jumpLength;
+	public int ticksEating;
+	
 	public EntityNewPrehistoric(World world, EnumPrehistoric selfType) {
 		super(world);
 		this.updateSize();
