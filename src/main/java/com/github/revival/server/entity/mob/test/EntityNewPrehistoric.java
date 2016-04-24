@@ -632,7 +632,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		}
 
 		if (this.aiMovingType() == Moving.FLIGHT) {
-			if (this.riddenByEntity == null) {
+			/*if (this.riddenByEntity == null) {
 				if (!this.isSitting()) {
 					if (this.isAdult()) {
 						if (!worldObj.isRemote) {
@@ -661,9 +661,8 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 							}
 						}
 					}
-				}
+				}*/
 			}
-		}
 		if (this.doesFlock() && flockObj == null) {
 			if(this.getNearbyFlock() != null){
 				this.getNearbyFlock().flockMembers.add(this);

@@ -71,7 +71,7 @@ public class DinoAIFindAirTarget extends EntityAIBase
 			}
 		}else{
 			Random random = this.mob.getRNG();
-			ChunkCoordinates coords = getCoords();
+			ChunkCoordinates coords = getTargetCoords();
 			if (mob.worldObj.getBlock(coords.posX, coords.posY, coords.posZ).getMaterial() == Material.air)
 			{
 				return coords;
@@ -80,8 +80,15 @@ public class DinoAIFindAirTarget extends EntityAIBase
 
 		return null;
 	}
-
+	
 	public ChunkCoordinates getCoords(){
+		int i = MathHelper.floor_double(mob.posX);
+		int j = MathHelper.floor_double(mob.posY);
+		int k = MathHelper.floor_double(mob.posZ);
+		return new ChunkCoordinates((int)this.mob.posX, (int)this.mob.posY, (int)this.mob.posZ);
+	}
+
+	public ChunkCoordinates getTargetCoords(){
 		int i = MathHelper.floor_double(mob.posX);
 		int j = MathHelper.floor_double(mob.posY);
 		int k = MathHelper.floor_double(mob.posZ);

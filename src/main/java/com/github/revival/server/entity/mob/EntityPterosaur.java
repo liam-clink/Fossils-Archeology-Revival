@@ -1,6 +1,11 @@
 package com.github.revival.server.entity.mob;
 
-import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.world.World;
+
+import com.github.revival.server.entity.mob.test.EntityFlyingPrehistoric;
 import com.github.revival.server.enums.EnumPrehistoric;
 import com.github.revival.server.enums.EnumPrehistoricAI.Activity;
 import com.github.revival.server.enums.EnumPrehistoricAI.Attacking;
@@ -13,12 +18,8 @@ import com.github.revival.server.enums.EnumPrehistoricAI.Stalking;
 import com.github.revival.server.enums.EnumPrehistoricAI.Taming;
 import com.github.revival.server.enums.EnumPrehistoricAI.Untaming;
 import com.github.revival.server.enums.EnumPrehistoricAI.WaterAbility;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.world.World;
 
-public class EntityPterosaur extends EntityNewPrehistoric {
+public class EntityPterosaur extends EntityFlyingPrehistoric {
 
     public static final double baseDamage = 1;
     public static final double maxDamage = 3;
@@ -29,14 +30,14 @@ public class EntityPterosaur extends EntityNewPrehistoric {
 
     public EntityPterosaur(World world) {
         super(world, EnumPrehistoric.Pterosaur);
-        this.setSize(2F, 1.8F);
+        this.setSize(1.1F, 1.1F);
         minSize = 0.3F;
-        maxSize = 1F;
+        maxSize = 1.2F;
         teenAge = 4;
         developsResistance = false;
         breaksBlocks = false;
         favoriteFood = Items.fish;
-
+        pediaScale = 25;
     }
 
     @Override
@@ -161,5 +162,12 @@ public class EntityPterosaur extends EntityNewPrehistoric {
         return Items.arrow;
     }
 
+	@Override
+    protected double getFlySpeed() {
+	    return 0.4;
+    }
 
+	public float getMaleSize() {
+		return 1.3F;
+	}
 }

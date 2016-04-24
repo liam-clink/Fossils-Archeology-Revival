@@ -505,7 +505,7 @@ public class GuiPedia extends GuiContainer {
 		if (bookPages == 0) {
 			GL11.glPushMatrix();
 			if (Revival.toPedia instanceof EntityDinoEgg) {
-				renderEgg(k + 100, l + 200, 150, 0, 0, (EntityDinoEgg) Revival.toPedia);
+				renderEgg(k + 100, l + 80, 150, 0, 0, (EntityDinoEgg) Revival.toPedia);
 			}
 			else if (Revival.toPedia instanceof EntityLivingBase) {
 				if (Revival.toPedia instanceof EntityNewPrehistoric) {
@@ -594,8 +594,12 @@ public class GuiPedia extends GuiContainer {
 		GL11.glPushMatrix();
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
 		GL11.glTranslatef((float) posX, (float) posY, 50.0F);
+		if(mob instanceof EntityNewPrehistoric){
 		GL11.glScalef((float) -(scaleValue), -(float) scaleValue, (float) scaleValue);
-
+		}else{
+			GL11.glScalef((float) (scaleValue), (float) scaleValue, (float) scaleValue);
+	
+		}
 		float f2 = 0;
 		float f3 = 0;
 		float f4 = 0;

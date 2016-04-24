@@ -1,25 +1,13 @@
 package com.github.revival.server.entity.mob.test;
 
-import net.minecraft.block.material.Material;
-import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
-import com.github.revival.server.enums.EnumOrderType;
 import com.github.revival.server.enums.EnumPrehistoric;
-import com.github.revival.server.enums.EnumPrehistoricAI.Activity;
-import com.github.revival.server.enums.EnumPrehistoricAI.Attacking;
-import com.github.revival.server.enums.EnumPrehistoricAI.Climbing;
-import com.github.revival.server.enums.EnumPrehistoricAI.Following;
-import com.github.revival.server.enums.EnumPrehistoricAI.Jumping;
-import com.github.revival.server.enums.EnumPrehistoricAI.Moving;
-import com.github.revival.server.enums.EnumPrehistoricAI.Response;
-import com.github.revival.server.enums.EnumPrehistoricAI.Stalking;
-import com.github.revival.server.enums.EnumPrehistoricAI.Taming;
-import com.github.revival.server.enums.EnumPrehistoricAI.Untaming;
-import com.github.revival.server.enums.EnumPrehistoricAI.WaterAbility;
 
 public abstract class EntityFlyingPrehistoric extends EntityNewPrehistoric{
 
@@ -30,13 +18,18 @@ public abstract class EntityFlyingPrehistoric extends EntityNewPrehistoric{
 
 	public EntityFlyingPrehistoric(World world, EnumPrehistoric selfType) {
 		super(world, selfType);
-		this.tasks.addTask(11, new DinoAIFindAirTarget(this));
 	}
 
+	public boolean isDirectPathBetweenPoints(Vec3 vec1, Vec3 vec2)
+	{
+		MovingObjectPosition movingobjectposition = this.worldObj.rayTraceBlocks(vec1, Vec3.createVectorHelper(vec2.xCoord, vec2.yCoord + (double)this.height * 0.5D, vec2.zCoord), false);
+		return movingobjectposition == null || movingobjectposition.typeOfHit != MovingObjectPosition.MovingObjectType.BLOCK;
+	}
+	
 	@Override
 	protected void entityInit() {
 		super.entityInit();
-		this.dataWatcher.addObject(SLEEPING_INDEX, Byte.valueOf((byte) 0));
+		this.dataWatcher.addObject(FLYING_INDEX, Byte.valueOf((byte) 0));
 	}
 
 	@Override
@@ -64,7 +57,7 @@ public abstract class EntityFlyingPrehistoric extends EntityNewPrehistoric{
 	public void onLivingUpdate(){
 		super.onLivingUpdate();
 		this.motionY *= 0.6;
-		boolean flying = isSleeping();
+		boolean flying = isFlying();
 		if (flying && flyProgress < 20.0F) {
 			flyProgress += 0.5F;
 			if(sitProgress != 0)sitProgress = sleepProgress = 0F;
@@ -72,11 +65,19 @@ public abstract class EntityFlyingPrehistoric extends EntityNewPrehistoric{
 			flyProgress -= 0.5F;
 			if(sitProgress != 0)sitProgress = sleepProgress = 0F;
 		}
-		if(this.onGround && this.getRNG().nextInt(50) == 0 && !this.isMovementCeased() || this.getAttackTarget() != null && !this.isMovementCeased()){
-			this.flyAround();
+		this.flyAround();
+		if(!this.isMovementBlocked() && rand.nextInt(400) == 0 && !this.worldObj.isRemote && this.isAdult() && this.riddenByEntity == null){
+			this.setFlying(!this.isFlying());
 		}
-		if(this.onGround && this.isFlying()){
+		if (this.isFlying()) {
+			flyAround();
+		}
+		if(currentTarget == null && this.isFlying()){
 			this.setFlying(false);
+		}
+		if (getEntityToAttack() != null) {
+			currentTarget = new ChunkCoordinates((int) getEntityToAttack().posX, (int) ((int) getEntityToAttack().posY + getEntityToAttack().getEyeHeight()), (int) getEntityToAttack().posZ);
+			flyTowardsTarget();
 		}
 	}
 
@@ -95,21 +96,22 @@ public abstract class EntityFlyingPrehistoric extends EntityNewPrehistoric{
 	}
 
 	public void flyAround() {
-		this.setFlying(true);
-		if (currentTarget != null){
-			if(!isDirectPathBetweenPoints(new ChunkCoordinates(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY), MathHelper.floor_double(this.posZ)), currentTarget)){
+		if (currentTarget != null) {
+			if (!worldObj.isAirBlock(currentTarget.posX, currentTarget.posY, currentTarget.posZ) || currentTarget.posY == 0 || !isDirectPathBetweenPoints(Vec3.createVectorHelper(this.posX, this.posY, this.posZ), Vec3.createVectorHelper(currentTarget.posX, currentTarget.posY, currentTarget.posZ))) {
 				currentTarget = null;
 			}
-			if (!isTargetReachable() || this.getDistance(currentTarget.posX, currentTarget.posY, currentTarget.posZ) < 2.78F){
-				currentTarget = null;
-			}
-			flyTowardsTarget();
 		}
+
+		if (currentTarget == null || rand.nextInt(30) == 0 || currentTarget.getDistanceSquared((int) posX, (int) posY, (int) posZ) < 10F) {
+			currentTarget = new ChunkCoordinates((int) posX + rand.nextInt(120) - rand.nextInt(60), (int) posY + rand.nextInt(60) - 15, (int) posZ + rand.nextInt(120) - rand.nextInt(60));
+		}
+		flyTowardsTarget();
 	}
+
 
 	public void flyTowardsTarget()
 	{
-		if (currentTarget != null && isTargetReachable() && this.inWater)
+		if (currentTarget != null)
 		{
 			double targetX = currentTarget.posX + 0.5D - posX;
 			double targetY = currentTarget.posY + 1D - posY;
@@ -122,10 +124,6 @@ public abstract class EntityFlyingPrehistoric extends EntityNewPrehistoric{
 			moveForward = 0.5F;
 			rotationYaw += rotation;
 		}
-	}
-
-	private boolean isTargetReachable(){
-		return currentTarget == null ? false : worldObj.getBlock(currentTarget.posX, currentTarget.posY, currentTarget.posZ).getMaterial() == Material.air ? true : worldObj.getBlock(currentTarget.posX, currentTarget.posY + 3, currentTarget.posZ).getMaterial() == Material.air;
 	}
 
 	public boolean isDirectPathBetweenPoints(ChunkCoordinates vec1, ChunkCoordinates vec2)

@@ -6,8 +6,9 @@ import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
 import net.minecraft.entity.Entity;
 
 import com.github.revival.client.model.prehistoric.test.ModelNewPrehistoric;
-import com.github.revival.server.entity.mob.EntityDilophosaurus;
 import com.github.revival.server.entity.mob.EntityPterosaur;
+import com.github.revival.server.entity.mob.test.EntityFlyingPrehistoric;
+import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 
 public class ModelPteranodon extends ModelNewPrehistoric {
     public AdvancedModelRenderer LegLeft;
@@ -32,6 +33,7 @@ public class ModelPteranodon extends ModelNewPrehistoric {
     public AdvancedModelRenderer CrestBase;
     public AdvancedModelRenderer Beak1;
     public AdvancedModelRenderer Crest;
+    public AdvancedModelRenderer HeadPivot;
 	private ModelAnimator animator;
 
     public ModelPteranodon() {
@@ -62,11 +64,12 @@ public class ModelPteranodon extends ModelNewPrehistoric {
         this.Beak2.addBox(-0.99F, 0.0F, -7.0F, 2, 2, 8, 0.0F);
         this.setRotateAngle(Beak2, 0.05462880558742251F, -0.0F, 0.0F);
         this.Head = new AdvancedModelRenderer(this, 0, 55);
-        this.Head.setRotationPoint(0.0F, -0.6F, -3.4F);
         this.Head.addBox(-2.0F, -3.0F, -5.0F, 4, 4, 5, 0.0F);
-        this.setRotateAngle(Head, 1.1383037381507017F, 0.0F, 0.0F);
+        this.HeadPivot = new AdvancedModelRenderer(this, 0, 0);
+        this.HeadPivot.setRotationPoint(0.0F, -0.6F, -3.4F);
+        this.setRotateAngle(HeadPivot, 1.1383037381507017F, 0.0F, 0.0F);
         this.LegRight = new AdvancedModelRenderer(this, 20, 45);
-        this.LegRight.setRotationPoint(-1.5F, 21.0F, 6.400000095367432F);
+        this.LegRight.setRotationPoint(-1.5F, 21.0F, 6.5F);
         this.LegRight.addBox(-0.30000001192092896F, 0.0F, -0.5F, 1, 3, 1, 0.0F);
         this.WingL1Child = new AdvancedModelRenderer(this, 58, 32);
         this.WingL1Child.setRotationPoint(9.5F, 0.10000000149011612F, -2.5F);
@@ -126,11 +129,12 @@ public class ModelPteranodon extends ModelNewPrehistoric {
         this.Body.addChild(this.Neck1);
         this.Head.addChild(this.CrestBase);
         this.Head.addChild(this.Beak2);
-        this.Neck2.addChild(this.Head);
+        this.Neck2.addChild(this.HeadPivot);
         this.WingL1.addChild(this.WingL1Child);
         this.WingR1.addChild(this.WingR1Child);
         this.Body.addChild(this.Fibre2);
         this.WingR1.addChild(this.WingR1Child_1);
+        this.HeadPivot.addChild(this.Head);
         this.Head.addChild(this.Jaw);
         this.WingL1.addChild(this.WingL1Child_1);
         this.Body.addChild(this.FibreR);
@@ -149,6 +153,8 @@ public class ModelPteranodon extends ModelNewPrehistoric {
 		this.Body.render(f5);
 		this.LegLeft.render(f5);
 		this.LegRight.render(f5);
+		this.WingL1.render(f5);
+		this.WingR1.render(f5);
 	}
 
 
@@ -173,6 +179,58 @@ public class ModelPteranodon extends ModelNewPrehistoric {
 
 	@Override
 	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
-	
+		AdvancedModelRenderer[] neckParts = {this.Neck1, this.Neck2, this.Head};
+		AdvancedModelRenderer[] rightWingParts = {this.WingR1, this.WingR1Child_1};
+		AdvancedModelRenderer[] leftWingParts = {this.WingL1, this.WingL1Child_1};
+		ModelUtils.faceTargetMod(Neck1, f3, f4, 0.3F);
+		ModelUtils.faceTargetMod(Neck2, f3, f4, 0.3F);
+		ModelUtils.faceTargetMod(Head, f3, f4, 0.3F);
+		float speed = 0.1F;
+		float speed2 = 0.2F;
+		this.bob(Body, speed, -0.3F, false, entity.ticksExisted, 1);
+		this.chainWave(neckParts, speed, 0.15F, 3, entity.ticksExisted, 1);
+		{
+			float sitProgress = ((EntityNewPrehistoric)entity).sleepProgress;
+	        sitAnimationRotation(WingL1, sitProgress, (float)Math.toRadians(23.48D), (float)Math.toRadians(1D), -(float)Math.toRadians(8D));
+	        sitAnimationRotation(Body, sitProgress, -((float)Math.toRadians(23.43D)), -((float)Math.toRadians(7.83D)), 0);
+	        sitAnimationRotation(Neck1, sitProgress, -((float)Math.toRadians(55D)), (float)Math.toRadians(5.22D), (float)Math.toRadians(18.26D));
+	        sitAnimationRotation(WingR1, sitProgress, (float)Math.toRadians(13.04D), (float)Math.toRadians(19D), ((float)Math.toRadians(16D)));
+	        sitAnimationRotation(Head, sitProgress, (float)Math.toRadians(50D), -((float)Math.toRadians(7.83D)), -((float)Math.toRadians(23.48D)));
+	        sitAnimationRotation(Neck2, sitProgress, (float)Math.toRadians(50D), 0, 0);
+	        sitAnimationPos(LegRight, sitProgress, -0.5F, 0, -3.4F);
+			sitAnimationPos(LegLeft, sitProgress, -0.4F, 0, -3.4F);
+		}
+		{
+			float sitProgress = ((EntityFlyingPrehistoric)entity).flyProgress;
+			sitAnimationRotation(WingR1Child, sitProgress, (float)Math.toRadians(18.999999959540737D), (float)Math.toRadians(2.609999910412874D), (float)Math.toRadians(58.919998497711354D));
+	        sitAnimationRotation(WingR1Child_1, sitProgress, 0, -(float)Math.toRadians(180D), 0);
+	        sitAnimationRotation(WingR1, sitProgress, (float)Math.toRadians(7.0D), (float)Math.toRadians(19.0D), ((float)Math.toRadians(55.0D)));
+	        sitAnimationRotation(WingL1Child_1, sitProgress, 0, ((float)Math.toRadians(180D)), 0);
+	        sitAnimationRotation(Head, sitProgress, -(float)Math.toRadians(60D), 0, 0);
+	        sitAnimationRotation(Body, sitProgress, ((float)Math.toRadians(16D)), 0, 0);
+	        sitAnimationRotation(LegRight, sitProgress, (float)Math.toRadians(60.0D), 0, 0);
+	        sitAnimationRotation(Neck2, sitProgress, ((float)Math.toRadians(10.43D)), 0, 0);
+	        sitAnimationRotation(Tail, sitProgress, -((float)Math.toRadians(17.04D)), 0, 0);
+	        sitAnimationRotation(LegLeft, sitProgress, (float)Math.toRadians(60.0D), 0, 0);
+	        sitAnimationRotation(WingL1, sitProgress, (float)Math.toRadians(7.0D), -(float)Math.toRadians(19.0D), -(float)Math.toRadians(55.0D));
+	        sitAnimationRotation(Neck1, sitProgress, (float)Math.toRadians(18D), 0, 0);
+	        sitAnimationRotation(WingL1Child, sitProgress, (float)Math.toRadians(18.999999959540737D), -((float)Math.toRadians(2.609999910412874D)), -((float)Math.toRadians(58.919998497711354D)));
+			sitAnimationPos(WingR1Child_1, sitProgress, 0, 0.4F, -4F);
+			sitAnimationPos(WingL1Child_1, sitProgress, 0, 0.4F, -4F);
+			sitAnimationPos(LegRight, sitProgress, 0, -1.5F, -1F);
+			sitAnimationPos(LegLeft, sitProgress, 0, -1.5F, -1F);
+			sitAnimationPos(Head, sitProgress, 0, 1F, -0.8F);
+			if(sitProgress >= 10){
+				this.chainFlap(rightWingParts, speed2, 1.6F, 5, f, f1);
+				this.chainFlap(leftWingParts, speed2, -1.6F, 5, f, f1);
+				this.chainSwing(rightWingParts, speed2, -1.6F, 5, f, f1);
+				this.chainSwing(leftWingParts, speed2, 1.6F, 5, f, f1);
+			}else{
+				this.walk(LegLeft, speed2, 0.9F, true, 0F, 0F, f, f1);
+				this.walk(LegRight, speed2, 0.9F, false, 0F, 0F, f, f1);
+				this.swing(WingR1, speed2, 0.7F, false, 0F, 0F, f, f1);
+				this.swing(WingL1, speed2, 0.7F, false, 0F, 0F, f, f1);
+			}
+		}
 	}
 }
