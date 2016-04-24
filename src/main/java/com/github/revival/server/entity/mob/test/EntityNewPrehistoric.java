@@ -75,9 +75,6 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	public static final byte HEART_MESSAGE = 35;
 	public static final byte SMOKE_MESSAGE = 36;
 	public static final byte AGING_MESSAGE = 37;
-	protected static final ResourceLocation pediaclock = new ResourceLocation("fossil:textures/gui/PediaClock.png");
-	protected static final ResourceLocation pediafood = new ResourceLocation("fossil:textures/gui/PediaFood.png");
-	protected static final ResourceLocation pediaheart = new ResourceLocation("fossil:textures/gui/PediaHeart.png");
 	public static Animation SPEAK_ANIMATION = Animation.create(20);
 	public static Animation ATTACK_ANIMATION = Animation.create(20);
 	public float minSize;
@@ -94,9 +91,6 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	public boolean featherToggle;
 	public boolean hasTeenTexture = false;
 	public boolean hasBabyTexture;
-	public int necklength = 2;
-	public boolean clientSitting;
-	public boolean clientSleeping;
 	public float sitProgress;
 	public int ticksSitted;
 	protected boolean isSitting;
@@ -110,8 +104,6 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	private int animTick;
 	@SideOnly(Side.CLIENT)
 	public ChainBuffer chainBuffer;
-	public float jumpLength;
-	public int ticksEating;
 	public double attackSpeedBoost;
 	public float pediaScale;
 	public boolean mood_nospace;
