@@ -81,7 +81,7 @@ public class ModelTerrorBird extends ModelNewPrehistoric {
 		this.tail2.addBox(-1.5F, 0.0F, 0.2F, 3, 3, 5, 0.0F);
 		this.setRotateAngle(tail2, -0.045553093477052F, -0.0F, 0.0F);
 		this.neck_1 = new AdvancedModelRenderer(this, 88, 0);
-		this.neck_1.setRotationPoint(0.01F, -8.3F, -0.87F);
+		this.neck_1.setRotationPoint(0F, -8.3F, -0.87F);
 		this.neck_1.addBox(-2.0F, -10.7F, -1.6F, 4, 11, 5, 0.0F);
 		this.setRotateAngle(neck_1, -0.40980330836826856F, 0.0F, 0.0F);
 		this.rightThigh = new AdvancedModelRenderer(this, 44, 51);
@@ -171,6 +171,7 @@ public class ModelTerrorBird extends ModelNewPrehistoric {
 
 	@Override
 	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
+		neck_1.setScale(1.01F, 1.01F, 1.01F);
 		AdvancedModelRenderer[] neckParts = {this.neck, this.neck_1, this.head};
 		AdvancedModelRenderer[] tailParts = {this.lowerBody, this.tail1, this.tail2};
 		ModelUtils.faceTargetMod(neck, f3, f4, 0.5F);

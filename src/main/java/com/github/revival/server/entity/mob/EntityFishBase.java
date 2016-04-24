@@ -1,304 +1,369 @@
 package com.github.revival.server.entity.mob;
 
-import com.github.revival.Revival;
-import com.github.revival.client.gui.GuiPedia;
-import com.github.revival.server.item.FAItemRegistry;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import java.util.Collections;
+import java.util.List;
+
+import net.ilexiconn.llibrary.client.model.tools.ChainBuffer;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.Minecraft;
+import net.minecraft.command.IEntitySelector;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.passive.EntityWaterMob;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-import org.lwjgl.opengl.GL11;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.List;
+import com.github.revival.Revival;
+import com.github.revival.server.entity.mob.test.EntityAIWaterFindTarget;
+import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
+import com.github.revival.server.enums.EnumPrehistoric;
+import com.github.revival.server.item.FAItemRegistry;
 
-public abstract class EntityFishBase extends EntityWaterMob {
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
-    public int BreedTick = 3000;
-    private float randomMotionVecX;
-    private float randomMotionVecY;
-    private float randomMotionVecZ;
+public abstract class EntityFishBase extends EntityTameable {
 
-    public EntityFishBase(World par1World) {
-        super(par1World);
-        this.setSize(this.width * 3.5F, this.height * 0.5F);
-    }
+	public EnumPrehistoric selfType;
+	public ChunkCoordinates currentTarget;
+	public double shelterX;
+	public double shelterY;
+	public double shelterZ;
+	@SideOnly(Side.CLIENT)
+	public ChainBuffer chainBuffer;
 
-    @Override
-    protected void applyEntityAttributes() {
-        super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(10.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.25D);
-    }
+	public EntityFishBase(World par1World, EnumPrehistoric selfType) {
+		super(par1World);
+		this.tasks.addTask(1, new EntityAIWaterFindTarget(this, 0));
+		this.tasks.addTask(2, new EntityAILookIdle(this));
+		this.selfType = selfType;
+		if (FMLCommonHandler.instance().getSide().isClient()) {
+			this.chainBuffer = new ChainBuffer();
+		}
+	}
 
-    private void setPedia() {
-        Revival.toPedia = this;
-    }
+	public boolean isAIEnabled()
+	{
+		return true;
+	}
 
-    /**
-     * Returns the item ID for the item the mob drops on death.
-     */
-    @Override
-    protected Item getDropItem() {
-        return Items.fish;
-    }
+	@Override
+	protected void applyEntityAttributes() {
+		super.applyEntityAttributes();
+		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(20.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.25D);
+	}
 
-    /**
-     * returns if this entity triggers Block.onEntityWalking on the blocks they walk on. used for spiders and wolves to
-     * prevent them from trampling crops
-     */
-    @Override
-    protected boolean canTriggerWalking() {
-        return false;
-    }
+	private void setPedia() {
+		Revival.toPedia = this;
+	}
 
-    /**
-     * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
-     */
-    @Override
-    public boolean interact(EntityPlayer var1) {
-        ItemStack var2 = var1.inventory.getCurrentItem();
+	@Override
+	protected Item getDropItem() {
+		return Items.fish;
+	}
 
-        if (var2 != null && FMLCommonHandler.instance().getSide().isClient() && var2.getItem() == FAItemRegistry.INSTANCE.dinoPedia) {
-            this.setPedia();
-            var1.openGui(Revival.INSTANCE, 4, this.worldObj, (int) this.posX, (int) this.posY, (int) this.posZ);
-            return true;
-        }
+	@Override
+	protected boolean canTriggerWalking() {
+		return false;
+	}
 
-        if (var2 == null) {
+	private void swimAround() {
+		if(!isInsideNautilusShell()){
+			if (currentTarget != null){
+				if(!isDirectPathBetweenPoints(this.getPosition(1.0F), Vec3.createVectorHelper(shelterX, shelterY, shelterZ))){
+					currentTarget = null;
+				}
+				if (!isTargetInWater() || this.getDistance(currentTarget.posX, currentTarget.posY, currentTarget.posZ) < 1.78F){
+					currentTarget = null;
+				}
+				swimTowardsTarget();
+			}
+		}
+	}
 
+	public void swimTowardsTarget()
+	{
+		if (currentTarget != null && isTargetInWater() && this.inWater)
+		{
+			double targetX = currentTarget.posX + 0.5D - posX;
+			double targetY = currentTarget.posY + 1D - posY;
+			double targetZ = currentTarget.posZ + 0.5D - posZ;
+			motionX += (Math.signum(targetX) * 0.5D - motionX) *  0.100000000372529 * getSwimSpeed(); //0.10000000149011612D / 2;
+			motionY += (Math.signum(targetY) * 0.5D - motionY) *  0.100000000372529 * getSwimSpeed();//0.10000000149011612D / 2;
+			motionZ += (Math.signum(targetZ) * 0.5D - motionZ) *  0.100000000372529 * getSwimSpeed(); //0.10000000149011612D / 2;
+			float angle = (float) (Math.atan2(motionZ, motionX) * 180.0D / Math.PI) - 90.0F;
+			float rotation = MathHelper.wrapAngleTo180_float(angle - rotationYaw);
+			moveForward = 0.5F;
+			rotationYaw += rotation;
+		}
+	}
 
-            ItemStack var3 = new ItemStack(this.getItem(), 1);
+	protected abstract double getSwimSpeed();
 
+	@Override
+	public void onUpdate(){
+		super.onUpdate();
+		swimAround();
+		Revival.PROXY.calculateChainBuffer(this);
+		if(this.getClosestMate() != null && this.getGrowingAge() == 0 && this.getClosestMate().getGrowingAge() == 0 && !this.worldObj.isRemote){
+			this.setGrowingAge(12000);
+			if(this.getGrowingAge() == 12000){
+				this.worldObj.spawnEntityInWorld(new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, new ItemStack(this.selfType.eggItem)));
+			}
+			this.getClosestMate().setGrowingAge(12000);
+		}
+	}
+	
+	@Override
+	public IEntityLivingData onSpawnWithEgg(IEntityLivingData par1EntityLivingData) {
+		this.setGrowingAge(12000);
+		return super.onSpawnWithEgg(par1EntityLivingData);
+	}
 
-            if (var1.inventory.addItemStackToInventory(var3)) {
-                if (!this.worldObj.isRemote) {
-                    this.worldObj.playSoundAtEntity(var1, "random.pop", 0.2F, ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
-                    this.setDead();
-                }
+	public EntityFishBase getClosestMate() {
+		EntityAINearestAttackableTarget.Sorter theNearestAttackableTargetSorter = new EntityAINearestAttackableTarget.Sorter(this);
+		IEntitySelector targetEntitySelector = new IEntitySelector() {
+			@Override
+			public boolean isEntityApplicable(Entity entity) {
+				return entity instanceof EntityFishBase;
+			}
+		};
+		List<EntityFishBase> list = worldObj.selectEntitiesWithinAABB(Entity.class, this.boundingBox.expand(2.0D, 2.0D, 2.0D), targetEntitySelector);
+		Collections.sort(list, theNearestAttackableTargetSorter);
 
-                return true;
-            }
-        }
+		if (list.isEmpty()) {
+			return null;
+		} else {
+			for(EntityFishBase entity : list){
+				return entity.selfType == this.selfType ? entity : null;
+			}
+			return null;
+		}
+	}
+	
+	public boolean isInsideNautilusShell(){
+		return this instanceof EntityNautilus && ((EntityNautilus)this).isInShell();
+	}
 
-        return super.interact(var1);
-    }
+	public void moveEntityWithHeading(float x, float z){
+		double d0;
+		float f6;
+		if (!worldObj.isRemote)
+		{
+			float f4;
+			float f5;
 
-    @SideOnly(Side.CLIENT)
-    public void showPedia(GuiPedia p0) {
-        p0.reset();
+			if (this.isInWater())
+			{
+				d0 = this.posY;
+				f4 = 0.8F;
+				f5 = 0.02F;
 
-        if (this.hasCustomNameTag()) {
-            p0.printStringXY(this.getCustomNameTag(), GuiPedia.rightIndent, 24, 40, 90, 245);
-        }
+				this.moveEntity(this.motionX, this.motionY, this.motionZ);
+				this.motionX *= (double)f4;
+				this.motionX *= 0.900000011920929D;
+				this.motionY *= 0.900000011920929D;
+				this.motionZ *= 0.900000011920929D;
+				this.motionZ *= (double)f4;	
+			}
+			else
+			{
+				float f2 = 0.91F;
 
-        p0.printStringXY(StatCollector.translateToLocal(getCodeName()), GuiPedia.rightIndent, 34, 0, 0, 0);
+				if (this.onGround)
+				{
+					f2 = this.worldObj.getBlock(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.boundingBox.minY) - 1, MathHelper.floor_double(this.posZ)).slipperiness * 0.91F;
+				}
 
-        // p0.printHappyBar(new ResourceLocation(this.getItemTexture()), ((p0.xGui / 2) + (p0.xGui / 4)), 7, 16, 16);
-        if (this.hasCustomNameTag()) {
-            p0.addStringLR("No Despawn", true);
-        }
-    }
+				float f3 = 0.16277136F / (f2 * f2 * f2);
 
+				if (this.onGround)
+				{
+					f4 = this.getAIMoveSpeed() * f3;
+				}
+				else
+				{
+					f4 = this.jumpMovementFactor;
+				}
 
-    @SideOnly(Side.CLIENT)
-    public void showPedia2(GuiPedia p0) {
-        this.showPedia2(p0, this.getName());
-    }
+				this.moveFlying(x, z, f4);
+				f2 = 0.91F;
 
-    @SideOnly(Side.CLIENT)
-    public void showPedia2(GuiPedia p0, String mobName) {
-        p0.reset();
-        p0.addStringLR("", 150, false);
-        String translatePath = "assets/fossil/dinopedia/" + Minecraft.getMinecraft().gameSettings.language + "/";
-        String bioFile = String.valueOf(mobName) + ".txt";
+				if (this.onGround)
+				{
+					f2 = this.worldObj.getBlock(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.boundingBox.minY) - 1, MathHelper.floor_double(this.posZ)).slipperiness * 0.91F;
+				}
 
-        if (getClass().getClassLoader().getResourceAsStream(translatePath) == null) {
-            translatePath = "assets/fossil/dinopedia/" + "en_US" + "/";
-        }
+				if (this.isOnLadder())
+				{
+					f5 = 0.15F;
+					this.motionX = MathHelper.clamp_double(this.motionX, (double)(-f5), (double)f5);
+					this.motionZ = MathHelper.clamp_double(this.motionZ, (double)(-f5), (double)f5);
+					this.fallDistance = 0.0F;
 
-        if (getClass().getClassLoader().getResourceAsStream(translatePath + bioFile) != null) {
-            InputStream fileReader = getClass().getClassLoader().getResourceAsStream(translatePath + bioFile);
-            try {
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(fileReader));
-                StringBuffer stringBuffer = new StringBuffer();
-                String line;
-                while ((line = bufferedReader.readLine()) != null) {
-                    GL11.glPushMatrix();
-                    GL11.glScalef(0.5F, 0.5F, 0.5F);
-                    p0.addStringLR(line, 150, false);
-                    GL11.glPopMatrix();
-                }
-                fileReader.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } else {
-            p0.addStringLR("File not found.", false);
-            GL11.glPushMatrix();
-            GL11.glScalef(0.5F, 0.5F, 0.5F);
-            p0.addStringLR(translatePath + bioFile, 150, false);
-            GL11.glPopMatrix();
-        }
-    }
-
-    /**
-     * Called to update the entity's position/logic.
-     */
-    @Override
-    public void onUpdate() {
-        super.onUpdate();
-        HandleBreed();
-    }
-
-    /**
-     * Checks if this entity is inside water (if inWater field is true as a result of handleWaterMovement() returning
-     * true)
-     */
-    @Override
-    public boolean isInWater() {
-        return this.worldObj.handleMaterialAcceleration(this.boundingBox.expand(0.0D, -0.6000000238418579D, 0.0D), Material.water, this);
-    }
-
-    /**
-     * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
-     * use this to react to sunlight and start to burn.
-     */
-    @Override
-    public void onLivingUpdate() {
-        super.onLivingUpdate();
-
-        if (this.isInWater()) {
-            float f;
-            if (!this.worldObj.isRemote) {
-                this.motionX = (double) (this.randomMotionVecX);
-                this.motionY = (double) (this.randomMotionVecY);
-                this.motionZ = (double) (this.randomMotionVecZ);
-            }
-
-            f = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionZ * this.motionZ);
-            this.renderYawOffset += (-((float) Math.atan2(this.motionX, this.motionZ)) * 180.0F / (float) Math.PI - this.renderYawOffset) * 0.1F;
-            this.rotationYaw = this.renderYawOffset;
-        } else {
-            if (!this.worldObj.isRemote) {
-                this.motionX = 0.0D;
-                this.motionY -= 0.08D;
-                this.motionY *= 0.9800000190734863D;
-                this.motionZ = 0.0D;
-            }
-
-        }
-    }
-
-    /**
-     * Moves the entity based on the specified heading.  Args: strafe, forward
-     */
-    @Override
-    public void moveEntityWithHeading(float par1, float par2) {
-        this.moveEntity(this.motionX, this.motionY, this.motionZ);
-    }
-
-    @Override
-    protected void updateEntityActionState() {
-        ++this.entityAge;
-
-        if (this.entityAge > 100) {
-            this.randomMotionVecX = this.randomMotionVecY = this.randomMotionVecZ = 0.0F;
-        } else if (this.rand.nextInt(50) == 0 || !this.inWater || this.randomMotionVecX == 0.0F && this.randomMotionVecY == 0.0F && this.randomMotionVecZ == 0.0F) {
-            float f = this.rand.nextFloat() * (float) Math.PI * 2.0F;
-            this.randomMotionVecX = MathHelper.cos(f) * 0.2F;
-            this.randomMotionVecY = -0.1F + this.rand.nextFloat() * 0.2F;
-            this.randomMotionVecZ = MathHelper.sin(f) * 0.2F;
-        }
-
-        this.despawnEntity();
-    }
-
-    /**
-     * Checks if the entity's current position is a valid location to spawn this entity.
-     */
-    @Override
-    public boolean getCanSpawnHere() {
-        return this.posY > 45.0D && this.posY < 63.0D && super.getCanSpawnHere();
-    }
-
-    public void HandleBreed() {
-        boolean var1 = false;
-        --this.BreedTick;
-
-        if (this.BreedTick == 0) {
-            int var2 = 0;
-            List var3 = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.expand(32.0D, 32.0D, 32.0D));
-
-            for (int var4 = 0; var4 < var3.size(); ++var4) {
-                if (var3.get(var4) instanceof EntityFishBase) {
-                    if (!var1) {
-                        ++var2;
-
-                        if (var2 > 30)//too many, start damaging them
-                        {
-                            var1 = true;//restart
-                            var4 = 0;
-                        }
-                    } else {
-                        //damage them
-                        EntityFishBase var5 = (EntityFishBase) ((EntityFishBase) var3.get(var4));
-                        var5.attackEntityFrom(DamageSource.starve, 100);
-                    }
-                }
-            }
-
-            if (!var1) {
-                if (var2 > 30) {
-                    //no more
-                } else {
-                    spawnBaby(var2);
-                }
-                /*	EntityFishBase var6 = null;
-
-					if ((new Random()).nextInt(100) + 1 < var2)
+					if (this.motionY < -0.15D)
 					{
-						var6 = new EntityFishBase(this.worldObj);
-						var6.setLocationAndAngles(this.posX + (double) ((new Random()).nextInt(3) - 1), this.posY, this.posZ + (double) ((new Random()).nextInt(3) - 1), this.worldObj.rand.nextFloat() * 360.0F, 0.0F);
-
-						if (this.worldObj.checkNoEntityCollision(var6.boundingBox) && this.worldObj.getCollidingBoundingBoxes(var6, var6.boundingBox).size() == 0 && this.worldObj.isAnyLiquid(var6.boundingBox))
-						{
-							this.worldObj.spawnEntityInWorld(var6);
-						}
+						this.motionY = -0.15D;
 					}
-					*/
-            }
-        }
+				}
 
-        this.BreedTick = 3000;
-    }
+				this.moveEntity(this.motionX, this.motionY, this.motionZ);
 
-    public abstract String getItemTexture();
+				if (this.isCollidedHorizontally && this.isOnLadder())
+				{
+					this.motionY = 0.2D;
+				}
 
-    public abstract String getTexture();
+				if (this.worldObj.isRemote && (!this.worldObj.blockExists((int)this.posX, 0, (int)this.posZ)) || !this.worldObj.getChunkFromBlockCoords((int)this.posX, (int)this.posZ).isChunkLoaded)
+				{
+					if (this.posY > 0.0D)
+					{
+						this.motionY = -0.1D;
+					}
+					else
+					{
+						this.motionY = 0.0D;
+					}
+				}
+				else
+				{
+					this.motionY -= 0.08D;
+				}
 
-    public abstract void spawnBaby(int i);
+				this.motionY *= 0.9800000190734863D;
+				this.motionX *= (double)f2;
+				this.motionZ *= (double)f2;
+			}
+		}
 
-    public abstract String getName();
+		this.prevLimbSwingAmount = this.limbSwingAmount;
+		d0 = this.posX - this.prevPosX;
+		double d1 = this.posZ - this.prevPosZ;
+		f6 = MathHelper.sqrt_double(d0 * d0 + d1 * d1) * 4.0F;
 
-    public abstract String getCodeName();
+		if (f6 > 1.0F)
+		{
+			f6 = 1.0F;
+		}
 
-    public abstract Item getItem();
+		this.limbSwingAmount += (f6 - this.limbSwingAmount) * 0.4F;
+		this.limbSwing += this.limbSwingAmount;
+	}
 
+	protected boolean isTargetInWater(){
+		return currentTarget == null ? false : worldObj.getBlock(currentTarget.posX, currentTarget.posY, currentTarget.posZ).getMaterial() == Material.water && worldObj.getBlock(currentTarget.posX, currentTarget.posY + 1, currentTarget.posZ).getMaterial() == Material.water;
+	}
+
+	@Override
+	public boolean interact(EntityPlayer var1) {
+
+		if(this.isInsideNautilusShell()){
+			this.playSound("random.break", 1, this.getRNG().nextFloat() + 0.8F);
+			return true;
+		}
+
+		ItemStack var2 = var1.inventory.getCurrentItem();
+
+		if (var2 != null && FMLCommonHandler.instance().getSide().isClient() && var2.getItem() == FAItemRegistry.INSTANCE.dinoPedia) {
+			this.setPedia();
+			var1.openGui(Revival.INSTANCE, 4, this.worldObj, (int) this.posX, (int) this.posY, (int) this.posZ);
+			return true;
+		}
+
+		if (var2 == null) {
+			ItemStack var3 = new ItemStack(this.selfType.fishItem, 1);
+
+			if (var1.inventory.addItemStackToInventory(var3)) {
+				if (!this.worldObj.isRemote) {
+					this.worldObj.playSoundAtEntity(var1, "random.pop", 0.2F, ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
+					this.setDead();
+				}
+
+				return true;
+			}
+		}
+
+		return super.interact(var1);
+	}
+
+	public boolean canBreatheUnderwater()
+	{
+		return true;
+	}
+
+	public boolean getCanSpawnHere()
+	{
+		return this.worldObj.checkNoEntityCollision(this.boundingBox);
+	}
+
+	public int getTalkInterval()
+	{
+		return 120;
+	}
+
+	protected boolean canDespawn()
+	{
+		return true;
+	}
+
+	protected int getExperiencePoints(EntityPlayer player)
+	{
+		return 1 + this.worldObj.rand.nextInt(3);
+	}
+
+	public void onEntityUpdate()
+	{
+		int i = this.getAir();
+		super.onEntityUpdate();
+		if(!this.isInsideNautilusShell()){
+			if (this.isEntityAlive() && !this.isInWater())
+			{
+				--i;
+				this.setAir(i);
+
+				if (this.getAir() == -20)
+				{
+					this.setAir(0);
+					this.attackEntityFrom(DamageSource.drown, 2.0F);
+				}
+			}
+			else
+			{
+				this.setAir(300);
+			}
+		}
+	}
+
+	public EntityAgeable createChild(EntityAgeable entity){
+		return null;
+	}
+
+	public boolean isDirectPathBetweenPoints(Vec3 vec1, Vec3 vec2)
+	{
+		MovingObjectPosition movingobjectposition = this.worldObj.func_147447_a(vec1, Vec3.createVectorHelper(vec2.xCoord, vec2.yCoord + (double)this.height * 0.5D, vec2.zCoord), false, true, false);
+		return movingobjectposition == null || movingobjectposition.typeOfHit != MovingObjectPosition.MovingObjectType.BLOCK;
+	}
+
+	@Override
+	public boolean shouldDismountInWater(Entity rider)
+	{
+		return false;
+	}
+
+	public abstract String getTexture();
 }
 
-	

@@ -20,6 +20,7 @@ import com.github.revival.client.model.ModelDeadAnu;
 import com.github.revival.client.model.ModelFailuresaurus;
 import com.github.revival.client.model.ModelPigBoss;
 import com.github.revival.client.model.armor.ModelAncientHelmet;
+import com.github.revival.client.model.prehistoric.ModelAlligatorGar;
 import com.github.revival.client.model.prehistoric.ModelAllosaurus;
 import com.github.revival.client.model.prehistoric.ModelAnkylosaurus;
 import com.github.revival.client.model.prehistoric.ModelBrachiosaurus;
@@ -44,6 +45,7 @@ import com.github.revival.client.model.prehistoric.ModelSarcosuchus;
 import com.github.revival.client.model.prehistoric.ModelSmilodon;
 import com.github.revival.client.model.prehistoric.ModelSpinosaurus;
 import com.github.revival.client.model.prehistoric.ModelStegosaurus;
+import com.github.revival.client.model.prehistoric.ModelSturgeon;
 import com.github.revival.client.model.prehistoric.ModelTerrorBird;
 import com.github.revival.client.model.prehistoric.ModelTriceratops;
 import com.github.revival.client.model.prehistoric.ModelTyrannosaurus;
@@ -111,6 +113,7 @@ import com.github.revival.server.entity.EntityAnuEffect;
 import com.github.revival.server.entity.EntityDinoEgg;
 import com.github.revival.server.entity.EntityJavelin;
 import com.github.revival.server.entity.EntityStoneboard;
+import com.github.revival.server.entity.mob.EntityAlligatorGar;
 import com.github.revival.server.entity.mob.EntityAllosaurus;
 import com.github.revival.server.entity.mob.EntityAnkylosaurus;
 import com.github.revival.server.entity.mob.EntityAnu;
@@ -127,6 +130,7 @@ import com.github.revival.server.entity.mob.EntityDilophosaurus;
 import com.github.revival.server.entity.mob.EntityDodo;
 import com.github.revival.server.entity.mob.EntityElasmotherium;
 import com.github.revival.server.entity.mob.EntityFailuresaurus;
+import com.github.revival.server.entity.mob.EntityFishBase;
 import com.github.revival.server.entity.mob.EntityFriendlyPigZombie;
 import com.github.revival.server.entity.mob.EntityGallimimus;
 import com.github.revival.server.entity.mob.EntityGastornis;
@@ -145,6 +149,7 @@ import com.github.revival.server.entity.mob.EntitySentryPigman;
 import com.github.revival.server.entity.mob.EntitySmilodon;
 import com.github.revival.server.entity.mob.EntitySpinosaurus;
 import com.github.revival.server.entity.mob.EntityStegosaurus;
+import com.github.revival.server.entity.mob.EntitySturgeon;
 import com.github.revival.server.entity.mob.EntityTarSlime;
 import com.github.revival.server.entity.mob.EntityTerrorBird;
 import com.github.revival.server.entity.mob.EntityTitanis;
@@ -177,7 +182,6 @@ public class ClientProxy extends ServerProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityVelociraptor.class, new RenderPrehistoric(new ModelVelociraptor()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityTyrannosaurus.class, new RenderPrehistoric(new ModelTyrannosaurus()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityPterosaur.class, new RenderPrehistoric(new ModelPteranodon()));
-		RenderingRegistry.registerEntityRenderingHandler(EntityNautilus.class, new RenderFish(new ModelNautilus()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityPlesiosaurus.class, new RenderPrehistoric(new ModelPlesiosaurus()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityMosasaurus.class, new RenderPrehistoric(new ModelMosasaurus()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityStegosaurus.class, new RenderPrehistoric(new ModelStegosaurus()));
@@ -195,6 +199,8 @@ public class ClientProxy extends ServerProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntitySarcosuchus.class, new RenderPrehistoric(new ModelSarcosuchus()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityAllosaurus.class, new RenderPrehistoric(new ModelAllosaurus()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityCoelacanth.class, new RenderFish(new ModelCoelacanth()));
+		RenderingRegistry.registerEntityRenderingHandler(EntityAlligatorGar.class, new RenderFish(new ModelAlligatorGar()));
+		RenderingRegistry.registerEntityRenderingHandler(EntitySturgeon.class, new RenderFish(new ModelSturgeon()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityLiopleurodon.class, new RenderPrehistoric(new ModelLiopleurodon()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityElasmotherium.class, new RenderPrehistoric(new ModelElasmotherium()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityCeratosaurus.class, new RenderPrehistoric(new ModelCeratosaurus()));
@@ -203,7 +209,7 @@ public class ClientProxy extends ServerProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityKelenken.class, new RenderPrehistoric(new ModelTerrorBird()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityPhorusrhacos.class, new RenderPrehistoric(new ModelTerrorBird()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityTitanis.class, new RenderPrehistoric(new ModelTerrorBird()));
-
+		RenderingRegistry.registerEntityRenderingHandler(EntityNautilus.class, new RenderFish(new ModelNautilus()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityStoneboard.class, new RenderStoneboard());
 		RenderingRegistry.registerEntityRenderingHandler(EntityFailuresaurus.class, new RenderFailuresaurus(new ModelFailuresaurus(), 0.5F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityAnu.class, new RenderPigBoss(new ModelPigBoss(), 0.5F));
@@ -310,6 +316,10 @@ public class ClientProxy extends ServerProxy {
 		entity.chainBuffer.calculateChainSwingBuffer(70, 10, 4, entity);
 	}
 
+	public void calculateChainBuffer(EntityFishBase entity) {
+		entity.chainBuffer.calculateChainSwingBuffer(70, 10, 4, entity);
+	}
+	
 	public void spawnBubbleParticles(World world, float f, float f1, float f2, double motionX, double motionY, double motionZ){
 		Minecraft.getMinecraft().effectRenderer.addEffect(new BubbleFX(world, f, f1, f2, motionX, motionY, motionZ));
 	}

@@ -62,9 +62,6 @@ public class FossilEntities {
 			if(EnumPrehistoric.values()[i].type != EnumMobType.CHICKEN && EnumPrehistoric.values()[i].type != EnumMobType.VANILLA)
 				registerSpawnable(EnumPrehistoric.values()[i].getDinoClass(), EnumPrehistoric.values()[i].name(), 200 + i, EnumPrehistoric.values()[i].mainSpawnColor, EnumPrehistoric.values()[i].secondSpawnColor);
 		}
-		EntityRegistry.addSpawn(EntityCoelacanth.class, 1, 2, 4, EnumCreatureType.waterCreature, BiomeGenBase.ocean);
-		EntityRegistry.addSpawn(EntityNautilus.class, 5, 4, 14, EnumCreatureType.waterCreature, BiomeGenBase.river, BiomeGenBase.ocean);
-
 	}
 
 	public static void registerSpawnable(Class entityClass, String name, int entityId, int mainColor, int subColor){

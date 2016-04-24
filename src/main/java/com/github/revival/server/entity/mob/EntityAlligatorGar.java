@@ -8,24 +8,19 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class EntityCoelacanth extends EntityFishBase {
-    public EntityCoelacanth(World par1World) {
-        super(par1World, EnumPrehistoric.Coelacanth);
+public class EntityAlligatorGar extends EntityFishBase {
+    public EntityAlligatorGar(World par1World) {
+        super(par1World, EnumPrehistoric.Alligator_Gar);
 		this.setSize(1.9F, 1F);
-    }
-
-    @Override
-    public boolean getCanSpawnHere() {
-        return this.posY > 45.0D && this.posY < 63.0D && super.getCanSpawnHere();
     }
     
     @Override
     public String getTexture() {
-        return "fossil:textures/model/fish/coelacanth.png";
+        return "fossil:textures/model/fish/alligator_gar.png";
     }
 
 	@Override
     protected double getSwimSpeed() {
-		return 0.35D;
+		return 0.45D;
     }
 }

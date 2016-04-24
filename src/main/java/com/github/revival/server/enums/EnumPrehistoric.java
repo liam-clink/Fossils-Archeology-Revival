@@ -5,6 +5,7 @@ import com.github.revival.server.entity.EnumDiet;
 import com.github.revival.server.entity.mob.*;
 import com.github.revival.server.item.BirdEggItem;
 import com.github.revival.server.item.DinoEggItem;
+import com.github.revival.server.item.ItemFish;
 import com.github.revival.server.item.MammalEmbryoItem;
 import com.github.revival.server.item.forge.ForgeFoodItem;
 
@@ -25,6 +26,8 @@ public enum EnumPrehistoric {
 
 	Nautilus(EntityNautilus.class, EnumMobType.FISH, EnumTimePeriod.MESOZOIC, EnumDiet.NONE, I.NOTHING, true, 0XC55F47, 0XF5F5F5),
 	Coelacanth(EntityCoelacanth.class, EnumMobType.FISH, EnumTimePeriod.MESOZOIC, EnumDiet.NONE, I.NOTHING, true, 0X363941, 0X9BA1A9),
+	Alligator_Gar(EntityAlligatorGar.class, EnumMobType.FISH, EnumTimePeriod.MESOZOIC, EnumDiet.NONE, I.NOTHING, true, 0X43462A, 0XAF4231),
+	Sturgeon(EntitySturgeon.class, EnumMobType.FISH, EnumTimePeriod.MESOZOIC, EnumDiet.NONE, I.NOTHING, true, 0X655D5B, 0XE6E3E3),
 	Triceratops(EntityTriceratops.class, EnumMobType.DINOSAUR, EnumTimePeriod.MESOZOIC, EnumDiet.HERBIVORE, I.MODEL | I.TAME | I.RIDE | I.HERBIVORE, true, 0X64352D, 0X251A17, 0.8F),
 	Velociraptor(EntityVelociraptor.class, EnumMobType.DINOSAUR, EnumTimePeriod.MESOZOIC, EnumDiet.CARNIVORE_EGG, I.TAME | I.CARNIVORE, true, 0X4A0D04, 0XC9C9C9, 0.5F),
 	Tyrannosaurus(EntityTyrannosaurus.class, EnumMobType.DINOSAUR, EnumTimePeriod.MESOZOIC, EnumDiet.CARNIVORE, I.MODEL | I.TAME | I.RIDE | I.CARNIVORE, true, 0X9D8A74, 0X4C3116, 0.9F),
@@ -87,6 +90,7 @@ public enum EnumPrehistoric {
 	public float ExpInc = 0.2f;
 	public int Flags = 0;
 	public Item orderItem;
+	public Item fishItem;
 	public Item foodItem;
 	public Item cookedFoodItem;
 	public Item DNAItem;
@@ -134,6 +138,10 @@ public enum EnumPrehistoric {
 			GameRegistry.registerItem(EnumPrehistoric.values()[i].DNAItem, "dna" + EnumPrehistoric.values()[i].name());
 		}
 		for (int i = 0; i < EnumPrehistoric.values().length; i++) {
+			if (EnumPrehistoric.values()[i].type == EnumMobType.FISH) {
+				EnumPrehistoric.values()[i].eggItem = new ItemFish(EnumPrehistoric.values()[i], true).setUnlocalizedName("egg" + EnumPrehistoric.values()[i].name()).setTextureName("fossil:prehistoric/dinoEggs/" + EnumPrehistoric.values()[i].name() + "_Egg").setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
+				GameRegistry.registerItem(EnumPrehistoric.values()[i].eggItem, "egg" + EnumPrehistoric.values()[i].name());
+			}
 			if (EnumPrehistoric.values()[i].type == EnumMobType.DINOSAUR) {
 				EnumPrehistoric.values()[i].eggItem = new DinoEggItem(EnumPrehistoric.values()[i]).setUnlocalizedName("egg" + EnumPrehistoric.values()[i].name()).setTextureName("fossil:prehistoric/dinoEggs/" + EnumPrehistoric.values()[i].name() + "_Egg").setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
 				GameRegistry.registerItem(EnumPrehistoric.values()[i].eggItem, "egg" + EnumPrehistoric.values()[i].name());
@@ -143,6 +151,12 @@ public enum EnumPrehistoric {
 			if (EnumPrehistoric.values()[i].type == EnumMobType.MAMMAL || EnumPrehistoric.values()[i].type == EnumMobType.VANILLA) {
 				EnumPrehistoric.values()[i].embryoItem = new MammalEmbryoItem(i).setUnlocalizedName("embryo" + EnumPrehistoric.values()[i].name()).setTextureName("fossil:prehistoric/embryos/" + EnumPrehistoric.values()[i].name() + "_Syringe").setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
 				GameRegistry.registerItem(EnumPrehistoric.values()[i].embryoItem, "embryo" + EnumPrehistoric.values()[i].name());
+			}
+		}
+		for (int i = 0; i < EnumPrehistoric.values().length; i++) {
+			if (EnumPrehistoric.values()[i].type == EnumMobType.FISH) {
+				EnumPrehistoric.values()[i].fishItem = new ItemFish(EnumPrehistoric.values()[i], false).setUnlocalizedName("fish" + EnumPrehistoric.values()[i].name()).setTextureName("fossil:prehistoric/embryos/" + EnumPrehistoric.values()[i].name() + "_Syringe").setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
+				GameRegistry.registerItem(EnumPrehistoric.values()[i].fishItem, "fish" + EnumPrehistoric.values()[i].name());
 			}
 		}
 		for (int i = 0; i < EnumPrehistoric.values().length; i++) {

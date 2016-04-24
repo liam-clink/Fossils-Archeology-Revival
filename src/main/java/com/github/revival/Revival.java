@@ -62,6 +62,7 @@ import com.github.revival.server.message.MessageHappyParticles;
 import com.github.revival.server.message.MessageRollBall;
 import com.github.revival.server.message.MessageSetDay;
 import com.github.revival.server.message.MessageUpdateEgg;
+import com.github.revival.server.message.MessageUpdateNautilus;
 import com.github.revival.server.util.FossilFoodMappings;
 
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -87,7 +88,7 @@ public class Revival {
     public static ServerProxy PROXY;
     @Instance(MODID)
     public static Revival INSTANCE;
-    @NetworkWrapper({MessageFoodParticles.class, MessageSetDay.class, MessageRollBall.class, MessageHappyParticles.class, MessageUpdateEgg.class})
+    @NetworkWrapper({MessageFoodParticles.class, MessageSetDay.class, MessageRollBall.class, MessageHappyParticles.class, MessageUpdateEgg.class, MessageUpdateNautilus.class})
     public static SimpleNetworkWrapper NETWORK_WRAPPER;
     @Config
     public static FossilConfig CONFIG;

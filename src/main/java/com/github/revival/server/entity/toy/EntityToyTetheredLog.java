@@ -25,9 +25,9 @@ public class EntityToyTetheredLog extends EntityToyBase implements IAnimatedEnti
 	public static Animation KNOCKBACK_ANIMATION = Animation.create(1, 20);
 
 	public EntityToyTetheredLog(World world) {
-	    super(world, 30);
+		super(world, 30);
 		this.setSize(0.6F, 1.9375F);
-    }
+	}
 
 	@Override
 	public void onUpdate(){
@@ -42,7 +42,7 @@ public class EntityToyTetheredLog extends EntityToyBase implements IAnimatedEnti
 			this.playSound(getAttackNoise(), 1, 1);
 		}
 	}
-	
+
 	public boolean isAttachedToBlock()
 	{
 		int blockX = MathHelper.floor_double(this.posX);
@@ -69,34 +69,34 @@ public class EntityToyTetheredLog extends EntityToyBase implements IAnimatedEnti
 	public boolean canBeCollidedWith() {
 		return !this.isDead;
 	}
-	
+
 	public boolean attackEntityFrom(DamageSource dmg, float f)
-    {
+	{
 		if(dmg.getEntity() != null)
-		this.rotationYaw = dmg.getEntity().rotationYaw;
+			this.rotationYaw = dmg.getEntity().rotationYaw;
 		if (this.getAnimation() == NO_ANIMATION && !worldObj.isRemote) {
 			this.setAnimation(KNOCKBACK_ANIMATION);
 		}
 		return super.attackEntityFrom(dmg, f);
-    }
-	
-	
+	}
+
+
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0);
 		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(1);
 	}
-	
-	@Override
-    protected ItemStack getItem() {
-	    return new ItemStack(FAItemRegistry.INSTANCE.toyTetheredLog);
-    }
 
 	@Override
-    protected String getAttackNoise() {
-	    return "dig.wood";
-    }
+	protected ItemStack getItem() {
+		return new ItemStack(FAItemRegistry.INSTANCE.toyTetheredLog);
+	}
+
+	@Override
+	protected String getAttackNoise() {
+		return "dig.wood";
+	}
 
 	@Override
 	public int getAnimationTick() {
@@ -119,10 +119,10 @@ public class EntityToyTetheredLog extends EntityToyBase implements IAnimatedEnti
 	}
 
 	@Override
-    public Animation[] getAnimations() {
+	public Animation[] getAnimations() {
 		return new Animation[]{KNOCKBACK_ANIMATION};
-    }
-	
+	}
+
 	protected void collideWithEntity(Entity entity)
 	{
 		if(entity instanceof EntityNewPrehistoric && ((EntityNewPrehistoric)entity).ticksTillPlay == 0){
@@ -135,11 +135,11 @@ public class EntityToyTetheredLog extends EntityToyBase implements IAnimatedEnti
 			}
 		}
 	}
-	
+
 	protected float getSoundPitch()
-    {
-        return super.getSoundPitch() * 0.2F;
-    }
+	{
+		return super.getSoundPitch() * 0.2F;
+	}
 
 
 }

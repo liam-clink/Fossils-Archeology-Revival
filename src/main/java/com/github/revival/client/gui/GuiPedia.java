@@ -245,7 +245,7 @@ public class GuiPedia extends GuiContainer {
 			if (Revival.toPedia instanceof EntityNewPrehistoric) {
 				((EntityNewPrehistoric) Revival.toPedia).showPedia2(this, ((EntityNewPrehistoric) Revival.toPedia).selfType.toString());
 			} else if (Revival.toPedia instanceof EntityFishBase) {
-				((EntityFishBase) Revival.toPedia).showPedia2(this);
+				//((EntityFishBase) Revival.toPedia).showPedia2(this);
 			} else if (Revival.toPedia instanceof EntityQuagga) {
 				((EntityQuagga) Revival.toPedia).showPedia2(this);
 			} else if (Revival.toPedia instanceof EntityTerrorBird) {

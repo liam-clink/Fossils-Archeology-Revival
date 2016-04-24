@@ -1,8 +1,10 @@
 package com.github.revival.server;
 
 import com.github.revival.server.block.FABlockRegistry;
+import com.github.revival.server.entity.mob.EntityFishBase;
 import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 import com.github.revival.server.item.FAItemRegistry;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.item.Item;
@@ -51,6 +53,10 @@ public class ServerProxy {
 
     }
 
+	public void calculateChainBuffer(EntityFishBase entity) {
+
+	}
+	
     public void spawnBubbleParticles(World world, float f, float f1, float f2, double motionX, double motionY, double motionZ){}
 
     public void spawnPacketHeartParticles(World world, float f, float f1, float f2, double motionX, double motionY, double motionZ){}
