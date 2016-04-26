@@ -63,14 +63,6 @@ public class EntityPterosaur extends EntityFlyingPrehistoric {
             this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(Math.round(baseHealth + (healthStep * this.getDinoAge())));
             this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(Math.round(baseDamage + (attackStep * this.getDinoAge())));
             this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(baseSpeed + (speedStep * this.getDinoAge()));
-
-            if (this.isTeen()) {
-                this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.5D);
-            } else if (this.isAdult()) {
-                this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(2.0D);
-            } else {
-                this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.0D);
-            }
         }
     }
 
@@ -164,7 +156,7 @@ public class EntityPterosaur extends EntityFlyingPrehistoric {
 
 	@Override
     protected double getFlySpeed() {
-	    return 0.4;
+	    return 1;
     }
 
 	public float getMaleSize() {

@@ -1,5 +1,6 @@
 package com.github.revival.server.entity.mob.test;
 
+import net.minecraft.entity.ai.RandomPositionGenerator;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.MathHelper;
@@ -11,7 +12,7 @@ import com.github.revival.server.enums.EnumPrehistoric;
 
 public abstract class EntityFlyingPrehistoric extends EntityNewPrehistoric{
 
-	public ChunkCoordinates currentTarget;
+	public Vec3 currentTarget;
 	public static final int FLYING_INDEX = 29;
 	private boolean isFlying;
 	public float flyProgress;
@@ -25,7 +26,7 @@ public abstract class EntityFlyingPrehistoric extends EntityNewPrehistoric{
 		MovingObjectPosition movingobjectposition = this.worldObj.rayTraceBlocks(vec1, Vec3.createVectorHelper(vec2.xCoord, vec2.yCoord + (double)this.height * 0.5D, vec2.zCoord), false);
 		return movingobjectposition == null || movingobjectposition.typeOfHit != MovingObjectPosition.MovingObjectType.BLOCK;
 	}
-	
+
 	@Override
 	protected void entityInit() {
 		super.entityInit();
@@ -65,18 +66,14 @@ public abstract class EntityFlyingPrehistoric extends EntityNewPrehistoric{
 			flyProgress -= 0.5F;
 			if(sitProgress != 0)sitProgress = sleepProgress = 0F;
 		}
-		this.flyAround();
-		if(!this.isMovementBlocked() && rand.nextInt(400) == 0 && !this.worldObj.isRemote && this.isAdult() && this.riddenByEntity == null){
-			this.setFlying(!this.isFlying());
+		if(!this.isMovementBlocked() && rand.nextInt(400) == 0 && !this.worldObj.isRemote && this.isAdult() && this.riddenByEntity == null && this.onGround){
+			this.setFlying(true);
 		}
 		if (this.isFlying()) {
 			flyAround();
 		}
-		if(currentTarget == null && this.isFlying()){
-			this.setFlying(false);
-		}
 		if (getEntityToAttack() != null) {
-			currentTarget = new ChunkCoordinates((int) getEntityToAttack().posX, (int) ((int) getEntityToAttack().posY + getEntityToAttack().getEyeHeight()), (int) getEntityToAttack().posZ);
+			currentTarget = Vec3.createVectorHelper(getEntityToAttack().posX, getEntityToAttack().posY + getEntityToAttack().height, getEntityToAttack().posZ);
 			flyTowardsTarget();
 		}
 	}
@@ -97,39 +94,50 @@ public abstract class EntityFlyingPrehistoric extends EntityNewPrehistoric{
 
 	public void flyAround() {
 		if (currentTarget != null) {
-			if (!worldObj.isAirBlock(currentTarget.posX, currentTarget.posY, currentTarget.posZ) || currentTarget.posY == 0 || !isDirectPathBetweenPoints(Vec3.createVectorHelper(this.posX, this.posY, this.posZ), Vec3.createVectorHelper(currentTarget.posX, currentTarget.posY, currentTarget.posZ))) {
+			if (!worldObj.isAirBlock((int)currentTarget.xCoord, (int)currentTarget.yCoord, (int)currentTarget.zCoord) || getDistanceSquared(currentTarget) > 1 || currentTarget.yCoord < 1 || !isDirectPathBetweenPoints(Vec3.createVectorHelper(this.posX, this.posY, this.posZ), Vec3.createVectorHelper(currentTarget.xCoord, currentTarget.yCoord, currentTarget.zCoord))) {
 				currentTarget = null;
 			}
 		}
 
-		if (currentTarget == null || rand.nextInt(30) == 0 || currentTarget.getDistanceSquared((int) posX, (int) posY, (int) posZ) < 10F) {
-			currentTarget = new ChunkCoordinates((int) posX + rand.nextInt(120) - rand.nextInt(60), (int) posY + rand.nextInt(60) - 15, (int) posZ + rand.nextInt(120) - rand.nextInt(60));
+		if (currentTarget == null || rand.nextInt(140) == 0) {
+			resetTarget(90, 90);
 		}
 		flyTowardsTarget();
 	}
 
+	protected void resetTarget(int xz, int y){
+		currentTarget = Vec3.createVectorHelper(this.posX + this.rand.nextInt(2 * xz) - xz, this.posY + this.rand.nextInt(2 * y), this.posZ + this.rand.nextInt(2 * xz) - xz);
+	}
 
 	public void flyTowardsTarget()
 	{
-		if (currentTarget != null)
-		{
-			double targetX = currentTarget.posX + 0.5D - posX;
-			double targetY = currentTarget.posY + 1D - posY;
-			double targetZ = currentTarget.posZ + 0.5D - posZ;
-			motionX += (Math.signum(targetX) * 0.5D - motionX) *  0.100000000372529 * getFlySpeed(); //0.10000000149011612D / 2;
-			motionY += (Math.signum(targetY) * 0.5D - motionY) *  0.100000000372529 * getFlySpeed();//0.10000000149011612D / 2;
-			motionZ += (Math.signum(targetZ) * 0.5D - motionZ) *  0.100000000372529 * getFlySpeed(); //0.10000000149011612D / 2;
+		if (currentTarget != null) {
+			double targetX = currentTarget.xCoord + 0.5D - posX;
+			double targetY = currentTarget.yCoord + 1D - posY;
+			double targetZ = currentTarget.zCoord + 0.5D - posZ;
+			motionX += (Math.signum(targetX) * 0.5D - motionX) * 0.10000000149011612D * this.getFlySpeed();
+			motionY += (Math.signum(targetY) * 0.699999988079071D - motionY) * 0.10000000149011612D;
+			motionZ += (Math.signum(targetZ) * 0.5D - motionZ) * 0.10000000149011612D * this.getFlySpeed();
 			float angle = (float) (Math.atan2(motionZ, motionX) * 180.0D / Math.PI) - 90.0F;
-			float rotation = MathHelper.wrapAngleTo180_float(angle - rotationYaw);
+			float rotation = MathHelper.wrapAngleTo180_float(angle
+					- rotationYaw);
 			moveForward = 0.5F;
 			rotationYaw += rotation;
 		}
+	}
+
+	public float getDistanceSquared(Vec3 vec)
+	{
+		float f = (float)(this.posX - vec.xCoord);
+		float f1 = (float)(this.posY - vec.yCoord);
+		float f2 = (float)(this.posZ - vec.zCoord);
+		return f * f + f1 * f1 + f2 * f2;
 	}
 
 	public boolean isDirectPathBetweenPoints(ChunkCoordinates vec1, ChunkCoordinates vec2)
 	{
 		return vec1.getDistanceSquaredToChunkCoordinates(vec2) > 16;
 	}
-	
+
 	protected abstract double getFlySpeed();
 }
