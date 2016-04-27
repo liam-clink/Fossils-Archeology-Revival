@@ -1845,7 +1845,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 			this.getNavigator().tryMoveToEntityLiving(prehistoric, 1);
 			double distance = (double) (this.width * 8.0F * this.width * 8.0F + prehistoric.width);
 
-			if(this.getDistanceSq(prehistoric.posX, prehistoric.boundingBox.minY, prehistoric.posZ) <= distance){
+			if(this.getDistanceSq(prehistoric.posX, prehistoric.boundingBox.minY, prehistoric.posZ) <= distance && prehistoric.onGround && this.onGround){
 				prehistoric.procreate(this);
 				this.ticksTillMate = this.rand.nextInt(6000) + 6000;
 				prehistoric.ticksTillMate = this.rand.nextInt(12000) + 24000;
