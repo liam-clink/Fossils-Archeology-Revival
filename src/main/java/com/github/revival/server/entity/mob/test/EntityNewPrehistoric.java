@@ -266,6 +266,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		this.setSpawnValues();
 		this.setGender(random.nextInt(2));
 		ticksTillPlay = 0;
+		ticksTillMate = 24000;
 		return par1EntityLivingData;
 	}
 

@@ -88,6 +88,10 @@ public class FossilFoodMappings {
                     FoodMappings.instance().addToItemMappings(EnumPrehistoric.values()[i].foodItem, 35, EnumDiet.CARNIVORE_EGG);
 
                 } else {
+                    FoodMappings.instance().addToItemMappings(EnumPrehistoric.values()[i].fishItem, 35, EnumDiet.PISCCARNIVORE);
+                    FoodMappings.instance().addToItemMappings(EnumPrehistoric.values()[i].fishItem, 35, EnumDiet.PISCIVORE);
+                    FoodMappings.instance().addToItemMappings(EnumPrehistoric.values()[i].cookedFoodItem, 75, EnumDiet.PISCCARNIVORE);
+                    FoodMappings.instance().addToItemMappings(EnumPrehistoric.values()[i].cookedFoodItem, 75, EnumDiet.PISCIVORE);
 
                 }
                 FoodMappings.instance().addToItemMappings(EnumPrehistoric.values()[i].cookedFoodItem, 75, EnumDiet.CARNIVORE);
