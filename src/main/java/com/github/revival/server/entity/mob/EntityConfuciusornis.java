@@ -1,6 +1,11 @@
 package com.github.revival.server.entity.mob;
 
-import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.world.World;
+
+import com.github.revival.server.entity.mob.test.EntityFlyingPrehistoric;
 import com.github.revival.server.enums.EnumPrehistoric;
 import com.github.revival.server.enums.EnumPrehistoricAI.Activity;
 import com.github.revival.server.enums.EnumPrehistoricAI.Attacking;
@@ -13,18 +18,14 @@ import com.github.revival.server.enums.EnumPrehistoricAI.Stalking;
 import com.github.revival.server.enums.EnumPrehistoricAI.Taming;
 import com.github.revival.server.enums.EnumPrehistoricAI.Untaming;
 import com.github.revival.server.enums.EnumPrehistoricAI.WaterAbility;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.world.World;
 
-public class EntityConfuciusornis extends EntityNewPrehistoric {
+public class EntityConfuciusornis extends EntityFlyingPrehistoric {
 
     public static final double baseDamage = 0;
     public static final double maxDamage = 0;
     public static final double baseHealth = 4;
     public static final double maxHealth = 12;
-    public static final double baseSpeed = 0.25D;
+    public static final double baseSpeed = 0.15D;
     public static final double maxSpeed = 0.25D;
 
     public EntityConfuciusornis(World world) {
@@ -47,11 +48,7 @@ public class EntityConfuciusornis extends EntityNewPrehistoric {
     }
 
     @Override
-    public void setSpawnValues() {
-
-
-    }
-
+    public void setSpawnValues() {}
 
     @Override
     public Activity aiActivityType() {
@@ -139,6 +136,11 @@ public class EntityConfuciusornis extends EntityNewPrehistoric {
     @Override
     public int getAdultAge() {
         return 3;
+    }
+
+	@Override
+    protected double getFlySpeed() {
+	    return 0;
     }
 
 }

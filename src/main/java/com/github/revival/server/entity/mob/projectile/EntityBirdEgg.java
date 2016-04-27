@@ -1,16 +1,14 @@
 package com.github.revival.server.entity.mob.projectile;
 
-import com.github.revival.server.entity.mob.EntityConfuciusornis;
-import com.github.revival.server.entity.mob.EntityDodo;
-import com.github.revival.server.enums.EnumPrehistoric;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+
+import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
+import com.github.revival.server.enums.EnumPrehistoric;
 
 public class EntityBirdEgg extends EntityThrowable {
     public Item item;
@@ -74,27 +72,9 @@ public class EntityBirdEgg extends EntityThrowable {
     }
 
     private void spawnAnimal() {
-        EntityAnimal mob;
-        switch (type) {
-            case Dodo:
-                mob = new EntityDodo(this.worldObj);
-                break;
-
-            case Confuciusornis:
-                mob = new EntityConfuciusornis(this.worldObj);
-                break;
-
-            case Chicken:
-                mob = new EntityChicken(this.worldObj);
-                break;
-
-            default:
-                mob = new EntityChicken(this.worldObj);
-                break;
-
-        }
-        if (!worldObj.isRemote) {
-            mob.setGrowingAge(-24000);
+        EntityNewPrehistoric mob = (EntityNewPrehistoric)type.invokeClass(worldObj);
+        if (!worldObj.isRemote && mob != null) {
+            mob.setDinoAge(1);
             mob.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, 0.0F);
             this.worldObj.spawnEntityInWorld(mob);
         }

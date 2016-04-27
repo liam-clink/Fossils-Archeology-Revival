@@ -32,6 +32,16 @@ public abstract class EntityFlyingPrehistoric extends EntityNewPrehistoric{
 	}
 
 	@Override
+	public boolean isMovementBlocked() {
+		return this.isLanding() || super.isMovementBlocked();
+	}
+	
+	@Override
+	public boolean isMovementCeased() {
+		return this.isLanding() || super.isMovementCeased();
+	}
+	
+	@Override
 	protected void entityInit() {
 		super.entityInit();
 		this.dataWatcher.addObject(FLYING_INDEX, Byte.valueOf((byte) 0));
@@ -118,8 +128,9 @@ public abstract class EntityFlyingPrehistoric extends EntityNewPrehistoric{
 			currentTarget = Vec3.createVectorHelper(getEntityToAttack().posX, getEntityToAttack().posY + getEntityToAttack().height, getEntityToAttack().posZ);
 			flyTowardsTarget();
 		}
-		if(this.isFlying() && this.isLanding()){
+		if(this.isLanding() && this.onGround){
 			this.setFlying(false);
+			this.setLanding(false);
 		}
 	}
 
@@ -158,7 +169,6 @@ public abstract class EntityFlyingPrehistoric extends EntityNewPrehistoric{
 					currentTarget = null;
 				}
 			}else{
-				this.setFlying(false);
 				this.setLanding(true);
 			}
 		}
@@ -175,7 +185,7 @@ public abstract class EntityFlyingPrehistoric extends EntityNewPrehistoric{
 
 	public void flyTowardsTarget()
 	{
-		if (currentTarget != null) {
+		if (currentTarget != null && !this.isLanding()) {
 			double targetX = currentTarget.xCoord - posX;
 			double targetY = currentTarget.yCoord - posY;
 			double targetZ = currentTarget.zCoord - posZ;
