@@ -52,5 +52,27 @@ public class FossilOreDictionary {
 		OreDictionary.registerOre("dinosaurArmBone", new ItemStack(FAItemRegistry.INSTANCE.armBone, 1, OreDictionary.WILDCARD_VALUE));
 		OreDictionary.registerOre("dinosaurVertebrae", new ItemStack(FAItemRegistry.INSTANCE.vertebrae, 1, OreDictionary.WILDCARD_VALUE));
 		OreDictionary.registerOre("dinosaurRibCage", new ItemStack(FAItemRegistry.INSTANCE.dinoRibCage, 1, OreDictionary.WILDCARD_VALUE));
+
+
+		for(EnumPrehistoric prehistoric : EnumPrehistoric.values()){
+			if(prehistoric.eggItem != null){
+				OreDictionary.registerOre("listAllegg", prehistoric.eggItem);
+				OreDictionary.registerOre("objectEgg", prehistoric.eggItem);
+				OreDictionary.registerOre("bakingEgg", prehistoric.eggItem);
+				if(prehistoric.type == EnumMobType.FISH){
+					OreDictionary.registerOre("foodRoe", prehistoric.eggItem);
+					OreDictionary.registerOre("foodCaviar", prehistoric.eggItem);
+				}
+			}
+			if(prehistoric.foodItem != null){
+				OreDictionary.registerOre("listAllmeatraw", prehistoric.foodItem);
+			}
+			if(prehistoric.cookedFoodItem != null){
+				OreDictionary.registerOre("listAllmeatcooked", prehistoric.cookedFoodItem);
+			}
+		}
+		OreDictionary.registerOre("foodCalamariraw", EnumPrehistoric.Nautilus.fishItem);
+		OreDictionary.registerOre("foodCalamaricooked", FAItemRegistry.INSTANCE.sjl);
+
 	}
 }
