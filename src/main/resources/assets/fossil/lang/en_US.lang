@@ -1,4 +1,4 @@
-﻿#Build 7.2.0 - Updated June 04 2015
+ï»¿#BuildÂ 7.2.0 - UpdatedÂ June 04Â 2015
 #English (en_US) Localization File
 #Contribution Credits - 
 #Keys last updated June 04 2015
@@ -416,7 +416,7 @@ item.eggAnkylosaurus.name=Ankylosaurus Egg
 item.eggPachycephalosaurus.name=Pachycephalosaurus Egg
 item.eggDeinonychus.name=Deinonychus Egg
 item.eggGallimimus.name=Gallimimus Egg
-item.eggAllosaurus.name=Allosaurus�Egg
+item.eggAllosaurus.name=Allosaurus Egg
 item.eggSarcosuchus.name=Sarcosuchus Egg
 item.eggCeratosaurus.name=Ceratosaurus Egg
 item.eggCoelacanth.first.name=Ocean Coelacanth
@@ -763,7 +763,7 @@ pedia.moodstatus=This mob's mood is
 pedia.activity=Activity:
 pedia.activity.none=Cathemeral
 pedia.activity.both=Cathemeral
-pedia.activity.diurinal=Diurinal
+pedia.activity.diurinal=Diurnal
 pedia.activity.nocturnal=Nocturnal
 pedia.activity.none.desc=This mob is active throughout the day.
 pedia.activity.both.desc=This mob is active throughout the day.
