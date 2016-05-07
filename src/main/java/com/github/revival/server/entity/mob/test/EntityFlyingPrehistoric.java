@@ -1,5 +1,7 @@
 package com.github.revival.server.entity.mob.test;
 
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.RandomPositionGenerator;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChunkCoordinates;
@@ -35,12 +37,12 @@ public abstract class EntityFlyingPrehistoric extends EntityNewPrehistoric{
 	public boolean isMovementBlocked() {
 		return this.isLanding() || super.isMovementBlocked();
 	}
-	
+
 	@Override
 	public boolean isMovementCeased() {
 		return this.isLanding() || super.isMovementCeased();
 	}
-	
+
 	@Override
 	protected void entityInit() {
 		super.entityInit();
@@ -94,7 +96,7 @@ public abstract class EntityFlyingPrehistoric extends EntityNewPrehistoric{
 
 		return isFlying;
 	}
-	
+
 	public boolean isLanding() {
 		if (worldObj.isRemote) {
 			boolean isLanding = (this.dataWatcher.getWatchableObjectByte(LANDING_INDEX) & 1) != 0;
@@ -132,6 +134,9 @@ public abstract class EntityFlyingPrehistoric extends EntityNewPrehistoric{
 			this.setFlying(false);
 			this.setLanding(false);
 		}
+		if(this.currentTarget != null){
+			this.faceTarget(30, 30);
+		}
 	}
 
 	public void setFlying(boolean flying) {
@@ -147,7 +152,7 @@ public abstract class EntityFlyingPrehistoric extends EntityNewPrehistoric{
 			this.isFlying = flying;
 		}
 	}
-	
+
 	public void setLanding(boolean landing) {
 		byte b0 = this.dataWatcher.getWatchableObjectByte(LANDING_INDEX);
 
@@ -192,9 +197,38 @@ public abstract class EntityFlyingPrehistoric extends EntityNewPrehistoric{
 			motionX += (Math.signum(targetX) * 0.5D - motionX) * 0.10000000149011612D;
 			motionY += (Math.signum(targetY) * 0.699999988079071D - motionY) * 0.10000000149011612D;
 			motionZ += (Math.signum(targetZ) * 0.5D - motionZ) * 0.10000000149011612D;
-	        this.rotationYaw = (float)(Math.atan2(motionX, motionZ) * 180.0D / Math.PI);
 		}
 	}
+
+	public void faceTarget(float yawAmount, float pitchAmount)
+	{
+		double d0 = currentTarget.xCoord - this.posX;
+		double d2 = currentTarget.xCoord - this.posZ;
+		double d1 = currentTarget.yCoord - this.posY + (double)this.getEyeHeight();
+		double d3 = (double)MathHelper.sqrt_double(d0 * d0 + d2 * d2);
+		float f2 = (float)(Math.atan2(d2, d0) * 180.0D / Math.PI) - 90.0F;
+		float f3 = (float)(-(Math.atan2(d1, d3) * 180.0D / Math.PI));
+		this.rotationPitch = this.updateRotation(this.rotationPitch, f3, pitchAmount);
+		this.rotationYaw = this.updateRotation(this.rotationYaw, f2, yawAmount);
+	}
+
+	private float updateRotation(float f, float f1, float f2)
+	{
+		float f3 = MathHelper.wrapAngleTo180_float(f1 - f);
+
+		if (f3 > f2)
+		{
+			f3 = f2;
+		}
+
+		if (f3 < -f2)
+		{
+			f3 = -f2;
+		}
+
+		return f + f3;
+	}
+
 
 	public float getDistanceSquared(Vec3 vec)
 	{
