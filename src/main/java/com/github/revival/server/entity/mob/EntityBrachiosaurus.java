@@ -31,7 +31,7 @@ public class EntityBrachiosaurus extends EntityNewPrehistoric {
 
 	public EntityBrachiosaurus(World world) {
 		super(world, EnumPrehistoric.Brachiosaurus);
-		this.setSize(1.5F, 2.0F);
+		this.setSize(1.5F, 1.7F);
 		this.pediaScale = 0.7F;
 		this.nearByMobsAllowed = 10;
 		minSize = 1;
