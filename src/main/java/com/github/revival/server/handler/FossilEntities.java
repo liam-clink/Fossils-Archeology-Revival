@@ -44,11 +44,6 @@ public class FossilEntities {
 		registerSpawnable(EntityBones.class, "Bones", 6, 12698049, 4802889);
 		EntityRegistry.registerModEntity(EntityDinoEgg.class, "DinoEgg", 8, Revival.INSTANCE, 80, 1, false);
 		EntityRegistry.registerModEntity(EntityFriendlyPigZombie.class, "FriendlyPigZombie", 12, Revival.INSTANCE, 80, 3, true);
-		EntityRegistry.registerModEntity(EntityDodoEgg.class, "DodoEgg", 26, Revival.INSTANCE, 80, 3, true);
-		//registerSpawnable(EntityCoelacanth.class, "Coelacanth", 28, 0X363941, 0X9BA1A9);
-		//registerSpawnable(EntityQuagga.class, "Quagga", 30, 0X763C24, 0XD3B9AB);
-		//registerSpawnable(EntityTerrorBird.class, "TerrorBird", 31, 0X346C5E, 0XF2EBD5);
-		EntityRegistry.registerModEntity(EntityTerrorBirdEgg.class, "TerrorBirdEgg", 32, Revival.INSTANCE, 80, 3, true);
 		EntityRegistry.registerModEntity(EntityAnuEffect.class, "AnuEffect", 34, Revival.INSTANCE, 80, 3, true);
 		registerSpawnable(EntityAnubite.class, "Anubite", 39, 0X2E1E14, 0X601200);
 		EntityRegistry.registerModEntity(EntityAnuDead.class, "AnuDead", 41, Revival.INSTANCE, 80, 3, true);
