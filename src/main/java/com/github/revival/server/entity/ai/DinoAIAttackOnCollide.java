@@ -24,6 +24,7 @@ public class DinoAIAttackOnCollide extends EntityAIBase {
         this.worldObj = entityNewPrehistoric.worldObj;
         this.field_75440_e = par2;
         this.field_75437_f = par4;
+        this.setMutexBits(3);
     }
 
     @Override

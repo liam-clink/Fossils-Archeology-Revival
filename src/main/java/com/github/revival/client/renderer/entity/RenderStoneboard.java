@@ -10,11 +10,9 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 public class RenderStoneboard extends Render {
-    private static final ResourceLocation field_110807_a = new ResourceLocation("textures/painting/paintings_kristoffer_zetterstrand.png");
 
     public void func_158_a(EntityStoneboard entitystoneboard, double var2, double var4, double var6, float var8, float var9) {
         if (entitystoneboard.art != null) {
-            //this.rand.setSeed(187L);
             GL11.glPushMatrix();
             GL11.glTranslatef((float) var2, (float) var4, (float) var6);
             GL11.glRotatef(var8, 0.0F, 1.0F, 0.0F);

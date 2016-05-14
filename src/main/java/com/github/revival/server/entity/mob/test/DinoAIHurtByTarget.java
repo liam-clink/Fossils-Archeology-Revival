@@ -8,6 +8,7 @@ public class DinoAIHurtByTarget extends EntityAIHurtByTarget{
 
 	public DinoAIHurtByTarget(EntityCreature mob) {
 	    super(mob, true);
+	    this.setMutexBits(1);
     }
 	
 	public boolean shouldExecute()

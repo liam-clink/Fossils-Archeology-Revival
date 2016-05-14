@@ -79,7 +79,6 @@ public class DinoAIWaterFeeder extends EntityAIBase {
         this.targetFeeder = null;
         this.dinosaur = Dino0;
         this.speed = speed;
-        this.setMutexBits(1);
         this.SEARCH_RANGE = Range0;
         this.targetSorter = new DinoAINearestAttackableTargetSorter(this, this.dinosaur);
         this.TimeAtThisTarget = 0;

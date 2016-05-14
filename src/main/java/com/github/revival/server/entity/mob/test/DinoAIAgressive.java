@@ -18,10 +18,12 @@ public class DinoAIAgressive extends EntityAITarget {
 
 	public DinoAIAgressive(EntityNewPrehistoric mob, Class targetClass, int selectorTime, boolean sight) {
 		this(mob, targetClass, selectorTime, sight, false);
+		this.setMutexBits(1);
 	}
 
 	public DinoAIAgressive(EntityNewPrehistoric mob, Class targetClass, int selectorTime, boolean sight, boolean nearbyOnly) {
 		this(mob, targetClass, selectorTime, sight, nearbyOnly, (IEntitySelector) null);
+		this.setMutexBits(1);
 	}
 
 	public DinoAIAgressive(EntityNewPrehistoric mob, Class targetClass, int selectorTime, boolean sight, boolean nearbyOnly, final IEntitySelector selector) {

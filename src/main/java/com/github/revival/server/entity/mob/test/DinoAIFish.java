@@ -17,10 +17,9 @@ public class DinoAIFish extends EntityAIBase {
 
     public DinoAIFish(EntityNewPrehistoric var1/*, float var2*/, int var3) {
         this.theEntity = var1;
-        this.setMutexBits(4);
         var1.getNavigator().setCanSwim(true);
         this.percentage = var3 > 100 ? 100 : (var3 < 0 ? 0 : var3);
-        //this.huntLimit = var2;
+        this.setMutexBits(3);
     }
 
     /**
@@ -52,6 +51,8 @@ public class DinoAIFish extends EntityAIBase {
             var3.motionY = var6 * var12 + (double) MathHelper.sqrt_double(var10) * 0.08D;
             var3.motionZ = var8 * var12;
             this.theEntity.worldObj.spawnEntityInWorld(var3);
+            theEntity.eatItem(var3.getEntityItem());
+            var3.setDead();
         }
     }
 

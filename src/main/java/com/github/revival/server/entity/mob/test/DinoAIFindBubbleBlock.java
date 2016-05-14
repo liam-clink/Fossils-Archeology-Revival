@@ -17,7 +17,7 @@ public class DinoAIFindBubbleBlock extends EntityAIBase {
 
 	public DinoAIFindBubbleBlock(EntityNewPrehistoric dinosaur) {
 		this.dinosaur = dinosaur;
-
+        this.setMutexBits(1);
 	}
 
 	@Override

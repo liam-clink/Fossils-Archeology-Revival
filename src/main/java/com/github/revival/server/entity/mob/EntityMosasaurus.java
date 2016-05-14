@@ -1,6 +1,11 @@
 package com.github.revival.server.entity.mob;
 
-import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.world.World;
+
+import com.github.revival.server.entity.mob.test.EntitySwimmingPrehistoric;
 import com.github.revival.server.enums.EnumPrehistoric;
 import com.github.revival.server.enums.EnumPrehistoricAI.Activity;
 import com.github.revival.server.enums.EnumPrehistoricAI.Attacking;
@@ -14,12 +19,8 @@ import com.github.revival.server.enums.EnumPrehistoricAI.Taming;
 import com.github.revival.server.enums.EnumPrehistoricAI.Untaming;
 import com.github.revival.server.enums.EnumPrehistoricAI.WaterAbility;
 import com.github.revival.server.item.FAItemRegistry;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.world.World;
 
-public class EntityMosasaurus extends EntityNewPrehistoric {
+public class EntityMosasaurus extends EntitySwimmingPrehistoric {
     public static final double baseDamage = 2;
     public static final double maxDamage = 9;
     public static final double baseHealth = 12;
@@ -29,14 +30,16 @@ public class EntityMosasaurus extends EntityNewPrehistoric {
 
     public EntityMosasaurus(World world) {
         super(world, EnumPrehistoric.Mosasaurus);
+        this.hasBabyTexture = false;
         this.setSize(1.5F, 0.6F);
-        minSize = 1.2F;
-        maxSize = 3.4F;
+        minSize = 0.6F;
+        maxSize = 2.1F;
         teenAge = 5;
         developsResistance = true;
         breaksBlocks = true;
         favoriteFood = Items.fish;
         hasBabyTexture = false;
+        pediaScale = 6;
     }
 
     @Override
@@ -48,10 +51,7 @@ public class EntityMosasaurus extends EntityNewPrehistoric {
     }
 
     @Override
-    public void setSpawnValues() {
-
-
-    }
+    public void setSpawnValues() {}
 
     @Override
     public Activity aiActivityType() {
@@ -159,6 +159,11 @@ public class EntityMosasaurus extends EntityNewPrehistoric {
     @Override
     public int getAdultAge() {
         return 11;
+    }
+
+	@Override
+    protected double getSwimSpeed() {
+	    return 4;
     }
 
 }

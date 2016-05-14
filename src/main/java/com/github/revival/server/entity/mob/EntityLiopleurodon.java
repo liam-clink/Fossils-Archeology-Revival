@@ -1,6 +1,11 @@
 package com.github.revival.server.entity.mob;
 
-import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.world.World;
+
+import com.github.revival.server.entity.mob.test.EntitySwimmingPrehistoric;
 import com.github.revival.server.enums.EnumPrehistoric;
 import com.github.revival.server.enums.EnumPrehistoricAI.Activity;
 import com.github.revival.server.enums.EnumPrehistoricAI.Attacking;
@@ -13,12 +18,8 @@ import com.github.revival.server.enums.EnumPrehistoricAI.Stalking;
 import com.github.revival.server.enums.EnumPrehistoricAI.Taming;
 import com.github.revival.server.enums.EnumPrehistoricAI.Untaming;
 import com.github.revival.server.enums.EnumPrehistoricAI.WaterAbility;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.world.World;
 
-public class EntityLiopleurodon extends EntityNewPrehistoric {
+public class EntityLiopleurodon extends EntitySwimmingPrehistoric {
 
     public static final double baseDamage = 2;
     public static final double maxDamage = 12;
@@ -29,6 +30,7 @@ public class EntityLiopleurodon extends EntityNewPrehistoric {
 
     public EntityLiopleurodon(World world) {
         super(world, EnumPrehistoric.Liopleurodon);
+        this.hasBabyTexture = false;
         this.setSize(1.5F, 0.5F);
         minSize = 0.8F;
         maxSize = 1.8F;
@@ -37,6 +39,7 @@ public class EntityLiopleurodon extends EntityNewPrehistoric {
         breaksBlocks = false;
         favoriteFood = Items.fish;
         hasBabyTexture = false;
+        pediaScale = 6;
     }
 
     @Override
@@ -159,6 +162,11 @@ public class EntityLiopleurodon extends EntityNewPrehistoric {
     @Override
     public int getAdultAge() {
         return 13;
+    }
+
+	@Override
+    protected double getSwimSpeed() {
+	    return 3;
     }
 
 }

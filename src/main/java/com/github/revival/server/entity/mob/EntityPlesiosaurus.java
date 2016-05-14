@@ -1,6 +1,11 @@
 package com.github.revival.server.entity.mob;
 
-import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.world.World;
+
+import com.github.revival.server.entity.mob.test.EntitySwimmingPrehistoric;
 import com.github.revival.server.enums.EnumPrehistoric;
 import com.github.revival.server.enums.EnumPrehistoricAI.Activity;
 import com.github.revival.server.enums.EnumPrehistoricAI.Attacking;
@@ -14,12 +19,8 @@ import com.github.revival.server.enums.EnumPrehistoricAI.Taming;
 import com.github.revival.server.enums.EnumPrehistoricAI.Untaming;
 import com.github.revival.server.enums.EnumPrehistoricAI.WaterAbility;
 import com.github.revival.server.item.FAItemRegistry;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.world.World;
 
-public class EntityPlesiosaurus extends EntityNewPrehistoric {
+public class EntityPlesiosaurus extends EntitySwimmingPrehistoric {
 
     public static final double baseDamage = 2;
     public static final double maxDamage = 12;
@@ -31,13 +32,13 @@ public class EntityPlesiosaurus extends EntityNewPrehistoric {
     public EntityPlesiosaurus(World world) {
         super(world, EnumPrehistoric.Plesiosaur);
         this.setSize(1.0F, 1.0F);
-        minSize = 1F;
-        maxSize = 6F;
+        minSize = 0.3F;
+        maxSize = 1.5F;
         teenAge = 3;
         developsResistance = true;
         breaksBlocks = true;
         favoriteFood = Items.fish;
-
+        pediaScale = 15;
     }
 
     @Override
@@ -49,9 +50,7 @@ public class EntityPlesiosaurus extends EntityNewPrehistoric {
     }
 
     @Override
-    public void setSpawnValues() {
-    }
-
+    public void setSpawnValues() {}
 
     @Override
     public Activity aiActivityType() {
@@ -160,6 +159,20 @@ public class EntityPlesiosaurus extends EntityNewPrehistoric {
     @Override
     public int getAdultAge() {
         return 7;
+    }
+    
+	public String getTexture() {
+		String toggle = this.hasFeatherToggle ? !this.featherToggle ? "feathered/" : "scaled/" : "";
+		boolean isBaby = this.isChild() && this.hasBabyTexture;
+		String gender = this.hasTeenTexture ? this.isTeen() ? "_teen" : this.isChild() ? "_baby" : this.getGender() == 0 ? "_female" : "_male" : this.isChild() ? "_baby" : this.getGender() == 0 ? "_female" : "_male";
+		String sleeping = !this.isSleeping() ? "" : "_sleeping";
+		String toggleList = this.hasFeatherToggle ? !this.featherToggle ? "_feathered" : "_scaled" : "";
+		return "fossil:textures/model/plesiosaurus_0/" + toggle + "plesiosaurus" + gender + toggleList + sleeping + ".png";
+	}
+
+	@Override
+    protected double getSwimSpeed() {
+	    return 3;
     }
 
 }

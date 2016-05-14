@@ -49,7 +49,6 @@ public class DinoAITerratorial extends EntityAIBase {
         this.targetEntityClass = target;
         this.distanceFromEntity = distance;
         this.entityPathNavigate = creature.getNavigator();
-        this.setMutexBits(1);
     }
 
     /**

@@ -85,7 +85,6 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	public ItemStack ItemInMouth = null;
 	public EnumOrderType currentOrder;
 	public boolean isFlying;
-	public ChunkCoordinates currentTarget;
 	public Item favoriteFood;
 	public boolean hasFeatherToggle = false;
 	public boolean featherToggle;
@@ -135,26 +134,22 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		this.tasks.addTask(0, new DinoAIHunger(this));
 		this.tasks.addTask(0, aiSit);
 		this.setHunger(100 / 2);
-		this.tasks.addTask(7, new DinoAIAttackOnCollide(this, 1.0D, true));
-		this.tasks.addTask(1, new DinoAITerratorial(this, EntityLivingBase.class, 4.0F));
-		this.tasks.addTask(2, new DinoAIWaterAgressive(this, 0.009D));
-		this.tasks.addTask(2, new DinoAIFish(this, 1));
-		this.tasks.addTask(3, new DinoAIWander(this));
-		this.tasks.addTask(3, new DinoAIWaterWander(this, 1));
-		this.tasks.addTask(4, new DinoAIFollow(this, 1.0D, 10.0F, 2.0F));
-		this.tasks.addTask(4, new DinoAIFollowWild(this, 1, favoriteFood));
-		this.tasks.addTask(4, aiSit);
-		this.tasks.addTask(5, new DinoAIFeeder(this, 48));
-		this.tasks.addTask(5, new DinoAIWaterFeeder(this, 50, 0.0017D));
-		this.tasks.addTask(6, new DinoAILookAtEntity(this, EntityLivingBase.class, 8));
-		this.tasks.addTask(7, new DinoAIHideFromSun(this));
-		this.tasks.addTask(8, new DinoAIRunAway(this, EntityLivingBase.class, 16.0F, this.getSpeed() / 2, this.getSpeed()));
-		this.tasks.addTask(9, new DinoAIFlee(this));
-		this.tasks.addTask(10, new DinoAIFindBubbleBlock(this));
+		this.tasks.addTask(5, new DinoAITerratorial(this, EntityLivingBase.class, 4.0F));
+		this.tasks.addTask(6, new DinoAIFish(this, 1));
+		this.tasks.addTask(7, new DinoAIRunAway(this, EntityLivingBase.class, 16.0F, this.getSpeed() / 2, this.getSpeed()));
+		this.tasks.addTask(8, new DinoAIFollow(this, 1.0D, 10.0F, 2.0F));
+		this.tasks.addTask(8, new DinoAIFollowWild(this, 1, favoriteFood));
+		this.tasks.addTask(9, new DinoAIFeeder(this, 48));
+		this.tasks.addTask(10, new DinoAIWaterFeeder(this, 50, 0.0017D));
+		this.tasks.addTask(11, new DinoAILookAtEntity(this, EntityLivingBase.class, 8));
+		this.tasks.addTask(12, new DinoAIHideFromSun(this));
+		this.tasks.addTask(12, new DinoAIAttackOnCollide(this, 1.0D, true));
+		this.tasks.addTask(13, new DinoAIWander(this));
+		this.tasks.addTask(14, new DinoAIFlee(this));
+		this.tasks.addTask(15, new DinoAIFindBubbleBlock(this));
 		this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
 		this.targetTasks.addTask(2, new DinoAIAgressive(this, EntityLivingBase.class, 1, true, isCannibal()));
 		this.targetTasks.addTask(3, new DinoAIHurtByTarget(this));
-		//this.targetTasks.addTask(2, new EntityAITargetNonTamed(this, EntityLivingBase.class, 200, false));
 		hasBabyTexture = true;
 		this.setScale(this.getDinosaurSize());
 		ticksTillMate = 0;
@@ -688,43 +683,6 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		int blockY = MathHelper.floor_double(this.boundingBox.minY)-1;
 		int blockZ = MathHelper.floor_double(this.posZ);
 		return this.worldObj.getBlock(blockX, blockY, blockZ);
-	}
-
-	public void flyTowardsTarget() {
-		if (currentTarget != null) {
-			double targetX = currentTarget.posX + 0.5D - posX;
-			double targetY = currentTarget.posY + 1D - posY;
-			double targetZ = currentTarget.posZ + 0.5D - posZ;
-			motionX += (Math.signum(targetX) * 0.5D - motionX) * 0.10000000149011612D;
-			motionY += (Math.signum(targetY) * 0.699999988079071D - motionY) * 0.10000000149011612D;
-			motionZ += (Math.signum(targetZ) * 0.5D - motionZ) * 0.10000000149011612D;
-			float angle = (float) (Math.atan2(motionZ, motionX) * 180.0D / Math.PI) - 90.0F;
-			float rotation = MathHelper.wrapAngleTo180_float(angle
-					- rotationYaw);
-			moveForward = 0.5F;
-			rotationYaw += rotation;
-		}
-
-	}
-
-	public void flyAround() {
-		if (currentTarget != null) {
-			if (!worldObj.isAirBlock(currentTarget.posX, currentTarget.posY,
-					currentTarget.posZ) || currentTarget.posY < 1) {
-				currentTarget = null;
-			}
-		}
-
-		if (currentTarget == null
-				|| rand.nextInt(30) == 0
-				|| currentTarget.getDistanceSquared((int) posX, (int) posY,
-						(int) posZ) < 10F) {
-			currentTarget = new ChunkCoordinates((int) posX + rand.nextInt(90)
-					- rand.nextInt(60), (int) posY + rand.nextInt(60) - 2,
-					(int) posZ + rand.nextInt(90) - rand.nextInt(60));
-		}
-
-		flyTowardsTarget();
 	}
 
 	public EntityNewPrehistoric findLeader(List<EntityNewPrehistoric> flock) {
