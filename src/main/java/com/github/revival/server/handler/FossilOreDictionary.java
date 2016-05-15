@@ -31,6 +31,16 @@ public class FossilOreDictionary {
 		OreDictionary.registerOre("blockGlass", new ItemStack(FABlockRegistry.INSTANCE.ancientGlass));
 		OreDictionary.registerOre("glass", new ItemStack(FABlockRegistry.INSTANCE.ancientGlass));
 		OreDictionary.registerOre("dustAsh", new ItemStack(FABlockRegistry.INSTANCE.volcanicAsh));
+		OreDictionary.registerOre("blockAsh", new ItemStack(FABlockRegistry.INSTANCE.volcanicAsh));
+		OreDictionary.registerOre("blockTar", new ItemStack(FABlockRegistry.INSTANCE.tar));
+		OreDictionary.registerOre("skull", new ItemStack(FABlockRegistry.INSTANCE.blockSkull));
+		OreDictionary.registerOre("denseSand", new ItemStack(FABlockRegistry.INSTANCE.denseSand));
+		OreDictionary.registerOre("skullLantern", new ItemStack(FABlockRegistry.INSTANCE.skullLantern));
+		OreDictionary.registerOre("chest", new ItemStack(FABlockRegistry.INSTANCE.ancientChest));
+		OreDictionary.registerOre("stoneAncient", new ItemStack(FABlockRegistry.INSTANCE.ancientStone));
+		OreDictionary.registerOre("stoneAncientBrick", new ItemStack(FABlockRegistry.INSTANCE.ancientStonebrick));
+		OreDictionary.registerOre("stone", new ItemStack(FABlockRegistry.INSTANCE.ancientStone));
+		OreDictionary.registerOre("stoneBrick", new ItemStack(FABlockRegistry.INSTANCE.ancientStonebrick));
 
 		OreDictionary.registerOre("artifact", new ItemStack(FAItemRegistry.INSTANCE.relic));
 		OreDictionary.registerOre("fossil", new ItemStack(FAItemRegistry.INSTANCE.biofossil));
@@ -44,7 +54,15 @@ public class FossilOreDictionary {
 		OreDictionary.registerOre("dinosaurClaw", new ItemStack(FAItemRegistry.INSTANCE.claw, 1, 14));
 		OreDictionary.registerOre("dinosaurClaw", new ItemStack(FAItemRegistry.INSTANCE.claw, 1, 15));
 		OreDictionary.registerOre("listAllseed", new ItemStack(FAItemRegistry.INSTANCE.seed));
+		OreDictionary.registerOre("flowerSeed", new ItemStack(FAItemRegistry.INSTANCE.seed));
 		OreDictionary.registerOre("listAllseed", new ItemStack(FAItemRegistry.INSTANCE.fernSeed));
+		OreDictionary.registerOre("sporeFern", new ItemStack(FAItemRegistry.INSTANCE.fernSeed));
+		OreDictionary.registerOre("materialRotten", new ItemStack(FAItemRegistry.INSTANCE.failuresaurusFlesh));
+		OreDictionary.registerOre("slimeball", new ItemStack(FAItemRegistry.INSTANCE.failuresaurusFlesh));
+		OreDictionary.registerOre("tar", new ItemStack(FAItemRegistry.INSTANCE.tardrop));
+		OreDictionary.registerOre("slimeball", new ItemStack(FAItemRegistry.INSTANCE.tardrop));
+		OreDictionary.registerOre("tarBucket", new ItemStack(FAItemRegistry.INSTANCE.tar_bucket));
+		OreDictionary.registerOre("bucketTar", new ItemStack(FAItemRegistry.INSTANCE.tar_bucket));
 		OreDictionary.registerOre("record", new ItemStack(FAItemRegistry.INSTANCE.recordNano_Anu));
 
 		OreDictionary.registerOre("dinosaurSkull", new ItemStack(FAItemRegistry.INSTANCE.skull, 1, OreDictionary.WILDCARD_VALUE));
