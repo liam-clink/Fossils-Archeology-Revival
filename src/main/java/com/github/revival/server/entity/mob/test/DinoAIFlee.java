@@ -17,7 +17,9 @@ public class DinoAIFlee extends EntityAIPanic{
 		if(!creature.canWander){
 			return false;
 		}
-
+		if (creature instanceof EntityFlyingPrehistoric && ((EntityFlyingPrehistoric)creature).isFlying()) {
+			return false;
+		}
 		if(this.creature instanceof EntityNewPrehistoric && ((EntityNewPrehistoric)creature).aiResponseType() == Response.SCARED){
 			return super.shouldExecute();
 		}

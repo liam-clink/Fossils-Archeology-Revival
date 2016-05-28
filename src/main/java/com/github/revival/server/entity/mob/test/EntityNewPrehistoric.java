@@ -117,7 +117,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	public boolean canWander;
 	public float jumpLength;
 	public int ticksEating;
-	
+
 	public EntityNewPrehistoric(World world, EnumPrehistoric selfType) {
 		super(world);
 		this.updateSize();
@@ -134,25 +134,27 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		this.tasks.addTask(0, new DinoAIHunger(this));
 		this.tasks.addTask(0, aiSit);
 		this.setHunger(100 / 2);
-		this.tasks.addTask(5, new DinoAITerratorial(this, EntityLivingBase.class, 4.0F));
-		this.tasks.addTask(6, new DinoAIFish(this, 1));
-		this.tasks.addTask(7, new DinoAIRunAway(this, EntityLivingBase.class, 16.0F, this.getSpeed() / 2, this.getSpeed()));
-		this.tasks.addTask(8, new DinoAIFollow(this, 1.0D, 10.0F, 2.0F));
-		this.tasks.addTask(8, new DinoAIFollowWild(this, 1, favoriteFood));
-		this.tasks.addTask(9, new DinoAIFeeder(this, 48));
-		this.tasks.addTask(10, new DinoAIWaterFeeder(this, 50, 0.0017D));
-		this.tasks.addTask(11, new DinoAILookAtEntity(this, EntityLivingBase.class, 8));
-		this.tasks.addTask(12, new DinoAIHideFromSun(this));
-		this.tasks.addTask(12, new DinoAIAttackOnCollide(this, 1.0D, true));
-		this.tasks.addTask(13, new DinoAIWander(this));
-		this.tasks.addTask(14, new DinoAIFlee(this));
-		this.tasks.addTask(15, new DinoAIFindBubbleBlock(this));
-		this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
-		this.targetTasks.addTask(2, new DinoAIAgressive(this, EntityLivingBase.class, 1, true, isCannibal()));
-		this.targetTasks.addTask(3, new DinoAIHurtByTarget(this));
+		this.tasks.addTask(1, new DinoAITerratorial(this, EntityLivingBase.class, 4.0F));
+		this.tasks.addTask(2, new DinoAIFish(this, 1));
+		this.tasks.addTask(3, new DinoAIRunAway(this, EntityLivingBase.class, 16.0F, this.getSpeed() / 2, this.getSpeed()));
+		this.tasks.addTask(4, new DinoAIFollow(this, 1.0D, 10.0F, 2.0F));
+		this.tasks.addTask(5, new DinoAIFollowWild(this, 1, favoriteFood));
+		this.tasks.addTask(6, new DinoAIFeeder(this, 48));
+		this.tasks.addTask(7, new DinoAIWaterFeeder(this, 50, 0.0017D));
+		this.tasks.addTask(8, new DinoAILookAtEntity(this, EntityLivingBase.class, 8));
+		this.tasks.addTask(9, new DinoAIHideFromSun(this));
+		this.tasks.addTask(10, new DinoAIAttackOnCollide(this, 1.0D, true));
+		this.tasks.addTask(11, new DinoAIFindBubbleBlock(this));
+		this.tasks.addTask(12, new DinoAIWander(this));
+		this.tasks.addTask(13, new DinoAIFlee(this));
+		this.tasks.addTask(14, new DinoAIFindBubbleBlock(this));
+		//this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
+		//this.targetTasks.addTask(2, new DinoAIAgressive(this, EntityLivingBase.class, 1, true, isCannibal()));
+		//this.targetTasks.addTask(3, new DinoAIHurtByTarget(this));
 		hasBabyTexture = true;
 		this.setScale(this.getDinosaurSize());
-		ticksTillMate = 0;
+		if(ticksTillMate == 0)
+			ticksTillMate = this.rand.nextInt(6000) + 6000;
 		if (FMLCommonHandler.instance().getSide().isClient()) {
 			this.chainBuffer = new ChainBuffer();
 		}
@@ -658,7 +660,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 						}
 					}
 				}*/
-			}
+		}
 		if (this.doesFlock() && flockObj == null) {
 			if(this.getNearbyFlock() != null){
 				this.getNearbyFlock().flockMembers.add(this);
@@ -1055,93 +1057,6 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 			String Dino = this.selfType.toString();
 			String Status2 = StatCollector.translateToLocal("status." + var1.toString());
 			Revival.showMessage(Status1 + Dino + " " + Status2, (EntityPlayer) this.getOwner());
-		}
-	}
-
-	@Override
-	public void moveEntityWithHeading(float par1, float par2) {
-		if (!isModelized() && !this.isSleeping()) {
-			super.moveEntityWithHeading(par1, par2);
-
-			// this.stepHeight = 0.5F;
-
-			if (this.riddenByEntity != null || this.isAdult()) {
-				this.stepHeight = 1.0F;
-			}
-		}
-
-
-		if (this.aiMovingType() == Moving.AQUATIC || this.aiMovingType() == Moving.SEMIAQUATIC) {
-			double d0;
-
-			if (this.isInWater()) {
-				this.moveFlying(par1, par2, 0.02F);
-				this.moveEntity(this.motionX, this.motionY, this.motionZ);
-				this.motionX *= 0.900000011920929D;
-				this.motionY *= 0.900000011920929D;
-				this.motionZ *= 0.900000011920929D;
-			} else if (this.handleLavaMovement()) {
-				this.moveFlying(par1, par2, 0.02F);
-				this.moveEntity(this.motionX, this.motionY, this.motionZ);
-				this.motionX *= 0.5D;
-				this.motionY *= 0.5D;
-				this.motionZ *= 0.5D;
-			} else {
-				if (this.aiMovingType() == Moving.AQUATIC) {
-					float f2 = 0.91F;
-
-					if (this.onGround) {
-						f2 = this.worldObj.getBlock(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.boundingBox.minY) - 1, MathHelper.floor_double(this.posZ)).slipperiness * 0.91F;
-
-					}
-
-					float f3 = 0.16277136F / (f2 * f2 * f2);
-					float f4;
-
-					if (this.onGround) {
-						f4 = this.getAIMoveSpeed() * f3;
-					} else {
-						f4 = this.jumpMovementFactor;
-					}
-
-					this.moveFlying(par1, par2, f4);
-					f2 = 0.91F;
-
-					if (this.onGround) {
-						f2 = this.worldObj.getBlock(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.boundingBox.minY) - 1, MathHelper.floor_double(this.posZ)).slipperiness * 0.91F;
-
-					}
-
-
-					this.moveEntity(this.motionX, this.motionY, this.motionZ);
-
-					if (this.isInsideOfMaterial(Material.water)) {
-						this.motionY = 0.0D;
-						this.motionX *= (double) f2;
-						this.motionY *= (double) f2;
-						this.motionZ *= (double) f2;
-					} else {
-						this.motionY -= 0.08D;
-						this.motionY *= 0.9800000190734863D;
-						this.motionX *= (double) f2;
-						this.motionZ *= (double) f2;
-					}
-				} else {
-					super.moveEntityWithHeading(par1, par2);
-				}
-			}
-
-			this.prevLimbSwingAmount = this.limbSwingAmount;
-			d0 = this.posX - this.prevPosX;
-			double d1 = this.posZ - this.prevPosZ;
-			float f6 = MathHelper.sqrt_double(d0 * d0 + d1 * d1) * 4.0F;
-
-			if (f6 > 1.0F) {
-				f6 = 1.0F;
-			}
-
-			this.limbSwingAmount += (f6 - this.limbSwingAmount) * 0.4F;
-			this.limbSwing += this.limbSwingAmount;
 		}
 	}
 
@@ -1757,7 +1672,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 			return (EntityLivingBase) list.get(0);
 		}
 	}
-		
+
 	public Flock getNearbyFlock(){
 		EntityAINearestAttackableTarget.Sorter theNearestAttackableTargetSorter = new EntityAINearestAttackableTarget.Sorter(this);
 		IEntitySelector targetEntitySelector = new IEntitySelector() {

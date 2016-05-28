@@ -1,6 +1,7 @@
 package com.github.revival.server.entity.mob.test;
 
 import com.github.revival.server.enums.EnumOrderType;
+
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.RandomPositionGenerator;
 import net.minecraft.util.Vec3;
@@ -30,7 +31,9 @@ public class DinoAIWander extends EntityAIBase {
         if (entity.isSitting()) {
             return false;
         }
-
+        if (this.entity instanceof EntityFlyingPrehistoric && ((EntityFlyingPrehistoric)this.entity).isFlying()) {
+            return false;
+        }
         if (this.entity.getRNG().nextInt(20) != 0) {
             return false;
         } else if (this.entity.isTamed() && this.entity.currentOrder != EnumOrderType.WANDER) {

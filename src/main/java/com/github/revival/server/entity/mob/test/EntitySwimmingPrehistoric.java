@@ -18,7 +18,8 @@ public abstract class EntitySwimmingPrehistoric extends EntityNewPrehistoric{
 
 	public EntitySwimmingPrehistoric(World world, EnumPrehistoric selfType) {
 		super(world, selfType);
-		this.tasks.addTask(4, new DinoAIWaterFindTarget(this));
+		this.getNavigator().setAvoidsWater(false);
+		this.tasks.addTask(15, new DinoAIWaterFindTarget(this));
 	}
 
 	@Override
@@ -64,6 +65,39 @@ public abstract class EntitySwimmingPrehistoric extends EntityNewPrehistoric{
 			}
 			swimTowardsTarget();
 		}
+		if(this.currentTarget != null){
+			this.faceTarget(180, 0);
+		}
+	}
+	
+
+	public void faceTarget(float yawAmount, float pitchAmount)
+	{
+		double d0 = currentTarget.posX - this.posX;
+		double d2 = currentTarget.posY - this.posZ;
+		double d1 = currentTarget.posZ - this.posY + (double)this.getEyeHeight();
+		double d3 = (double)MathHelper.sqrt_double(d0 * d0 + d2 * d2);
+		float f2 = (float)(Math.atan2(d2, d0) * 180.0D / Math.PI) - 90.0F;
+		float f3 = (float)(-(Math.atan2(d1, d3) * 180.0D / Math.PI));
+		this.rotationPitch = this.updateRotation(this.rotationPitch, f3, pitchAmount);
+		this.rotationYaw = this.updateRotation(this.rotationYaw, f2, yawAmount);
+	}
+
+	private float updateRotation(float f, float f1, float f2)
+	{
+		float f3 = MathHelper.wrapAngleTo180_float(f1 - f);
+
+		if (f3 > f2)
+		{
+			f3 = f2;
+		}
+
+		if (f3 < -f2)
+		{
+			f3 = -f2;
+		}
+
+		return f + f3;
 	}
 
 	private void swimTowardsTarget() {

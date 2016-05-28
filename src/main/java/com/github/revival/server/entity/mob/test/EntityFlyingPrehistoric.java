@@ -110,8 +110,9 @@ public abstract class EntityFlyingPrehistoric extends EntityNewPrehistoric{
 	@Override
 	public void onLivingUpdate(){
 		super.onLivingUpdate();
-		this.motionY *= 0.6;
 		boolean flying = isFlying();
+		if(!this.onGround)
+			this.motionY *= 0.6;
 		if (flying && flyProgress < 20.0F) {
 			flyProgress += 0.5F;
 			if(sitProgress != 0)sitProgress = sleepProgress = 0F;
@@ -135,7 +136,7 @@ public abstract class EntityFlyingPrehistoric extends EntityNewPrehistoric{
 			this.setLanding(false);
 		}
 		if(this.currentTarget != null){
-			this.faceTarget(30, 30);
+			worldObj.spawnParticle("explosion", currentTarget.xCoord, currentTarget.yCoord, currentTarget.zCoord, 0, 0, 0);
 		}
 	}
 
@@ -169,6 +170,7 @@ public abstract class EntityFlyingPrehistoric extends EntityNewPrehistoric{
 
 	public void flyAround() {
 		if (currentTarget != null && !this.isLanding()) {
+			faceTarget();
 			if(ticksFlying < 1200){
 				if (!worldObj.isAirBlock((int)currentTarget.xCoord, (int)currentTarget.yCoord, (int)currentTarget.zCoord) || getDistanceSquared(currentTarget) < 1 || currentTarget.yCoord < 1) {
 					currentTarget = null;
@@ -200,29 +202,18 @@ public abstract class EntityFlyingPrehistoric extends EntityNewPrehistoric{
 		}
 	}
 
-	public void faceTarget(float yawAmount, float pitchAmount)
-	{
-		double d0 = currentTarget.xCoord - this.posX;
-		double d2 = currentTarget.xCoord - this.posZ;
-		double d1 = currentTarget.yCoord - this.posY + (double)this.getEyeHeight();
-		double d3 = (double)MathHelper.sqrt_double(d0 * d0 + d2 * d2);
-		float f2 = (float)(Math.atan2(d2, d0) * 180.0D / Math.PI) - 90.0F;
-		float f3 = (float)(-(Math.atan2(d1, d3) * 180.0D / Math.PI));
-		this.rotationPitch = this.updateRotation(this.rotationPitch, f3, pitchAmount);
-		this.rotationYaw = this.updateRotation(this.rotationYaw, f2, yawAmount);
+	public void faceTarget(){
+        this.getLookHelper().setLookPosition(currentTarget.xCoord, currentTarget.yCoord, currentTarget.zCoord, 40, 40);
 	}
 
-	private float updateRotation(float f, float f1, float f2)
-	{
+	private float updateRotation(float f, float f1, float f2){
 		float f3 = MathHelper.wrapAngleTo180_float(f1 - f);
 
-		if (f3 > f2)
-		{
+		if (f3 > f2){
 			f3 = f2;
 		}
 
-		if (f3 < -f2)
-		{
+		if (f3 < -f2){
 			f3 = -f2;
 		}
 
@@ -230,16 +221,14 @@ public abstract class EntityFlyingPrehistoric extends EntityNewPrehistoric{
 	}
 
 
-	public float getDistanceSquared(Vec3 vec)
-	{
+	public float getDistanceSquared(Vec3 vec){
 		float f = (float)(this.posX - vec.xCoord);
 		float f1 = (float)(this.posY - vec.yCoord);
 		float f2 = (float)(this.posZ - vec.zCoord);
 		return f * f + f1 * f1 + f2 * f2;
 	}
 
-	public boolean isDirectPathBetweenPoints(ChunkCoordinates vec1, ChunkCoordinates vec2)
-	{
+	public boolean isDirectPathBetweenPoints(ChunkCoordinates vec1, ChunkCoordinates vec2){
 		return vec1.getDistanceSquaredToChunkCoordinates(vec2) > 16;
 	}
 
