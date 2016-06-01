@@ -20,7 +20,6 @@ import com.github.revival.server.block.entity.TileEntityAnuTotem;
 import com.github.revival.server.block.entity.TileEntityAnubiteStatue;
 import com.github.revival.server.block.entity.TileEntityCultivate;
 import com.github.revival.server.block.entity.TileEntityDrum;
-import com.github.revival.server.block.entity.TileEntityFeeder;
 import com.github.revival.server.block.entity.TileEntityFigurine;
 import com.github.revival.server.block.entity.TileEntitySarcophagus;
 import com.github.revival.server.block.entity.TileEntitySifter;
@@ -32,7 +31,6 @@ import com.github.revival.server.creativetab.FATabRegistry;
 import com.github.revival.server.dimension.anu.WorldProviderAnu;
 import com.github.revival.server.dimension.treasure.WorldProviderTreasure;
 import com.github.revival.server.enchantment.FAEnchantmentRegistry;
-import com.github.revival.server.enums.EnumDinoFoodMob;
 import com.github.revival.server.enums.EnumPrehistoric;
 import com.github.revival.server.gen.FossilGenerator;
 import com.github.revival.server.gen.TarGenerator;
@@ -133,8 +131,6 @@ public class Revival {
         DimensionManager.registerDimension(Revival.CONFIG.dimensionIDTreasure, Revival.CONFIG.dimensionIDTreasure);
 
         FossilEntities.registerEntities();
-        EnumDinoFoodMob.init();
-
         GameRegistry.registerWorldGenerator(new FossilGenerator(), 0);
 
         if (Revival.CONFIG.generatePalaeoraphe) {
@@ -158,7 +154,6 @@ public class Revival {
         GameRegistry.registerTileEntity(TileEntityAnalyzer.class, LocalizationStrings.BLOCK_ANALYZER_IDLE_NAME);
         GameRegistry.registerTileEntity(TileEntityWorktable.class, LocalizationStrings.BLOCK_WORKTABLE_IDLE_NAME);
         GameRegistry.registerTileEntity(TileEntityDrum.class, LocalizationStrings.DRUM_NAME);
-        GameRegistry.registerTileEntity(TileEntityFeeder.class, LocalizationStrings.T_FEEDER_IDLE_NAME);
         GameRegistry.registerTileEntity(TileEntityTimeMachine.class, LocalizationStrings.BLOCK_TIMEMACHINE_NAME);
         GameRegistry.registerTileEntity(TileEntitySifter.class, LocalizationStrings.BLOCK_SIFTER_IDLE);
         GameRegistry.registerTileEntity(TileEntityFigurine.class, "figurineType");

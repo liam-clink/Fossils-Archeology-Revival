@@ -1,9 +1,7 @@
 package com.github.revival.server.item;
 
-import com.github.revival.server.creativetab.FATabRegistry;
-import com.github.revival.server.entity.mob.EntityDinosaur;
-import com.github.revival.server.enums.EnumPrehistoric;
-import com.github.revival.server.handler.LocalizationStrings;
+import java.util.Random;
+
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -14,7 +12,10 @@ import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
-import java.util.Random;
+import com.github.revival.server.creativetab.FATabRegistry;
+import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
+import com.github.revival.server.enums.EnumPrehistoric;
+import com.github.revival.server.handler.LocalizationStrings;
 
 public class BioFossilItem extends Item {
     public BioFossilItem() {
@@ -35,10 +36,10 @@ public class BioFossilItem extends Item {
             return true;
         } else {
             Class var11 = this.getRandomModel().getDinoClass();
-            EntityDinosaur var12;
+            EntityNewPrehistoric var12;
 
             try {
-                var12 = (EntityDinosaur) var11.getConstructor(new Class[]{World.class}).newInstance(new Object[]{var3});
+                var12 = (EntityNewPrehistoric) var11.getConstructor(new Class[]{World.class}).newInstance(new Object[]{var3});
             } catch (Throwable var14) {
                 var14.printStackTrace();
                 return false;

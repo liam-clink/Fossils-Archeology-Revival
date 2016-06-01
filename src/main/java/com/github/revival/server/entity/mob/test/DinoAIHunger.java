@@ -46,25 +46,6 @@ public class DinoAIHunger extends EntityAIBase {
                 }
             }
 
-            if (this.mover.ItemInMouth != null) //The Dino has something in its mouth and gets hungry
-            {
-                if (this.mover.selfType.FoodItemList.CheckItem(this.mover.ItemInMouth.getItem())) {
-                    //its food
-                    if (this.mover.IsHungry() || this.mover.selfType.MaxHunger - this.mover.getHunger() > this.mover.selfType.FoodItemList.getItemFood(this.mover.ItemInMouth.getItem())) {
-                        //it's hungry or there is enough place in the stomach free
-                        this.mover.setHunger(this.mover.getHunger() + this.mover.selfType.FoodItemList.getItemFood(this.mover.ItemInMouth.getItem()));
-                        this.mover.ItemInMouth = null;
-                    }
-                } else {
-                    //no food
-                    if (this.mover.IsHungry()) {
-                        //The Dino gets hungry and because of that spits the object out of the mouth
-                        this.mover.entityDropItem(new ItemStack(this.mover.ItemInMouth.getItem(), 1, 0), 0.5F);
-                        this.mover.ItemInMouth = null;
-                    }
-                }
-            }
-
             if (this.mover.getHunger() <= 0) {
                 this.handleStarvation();
             }

@@ -28,19 +28,19 @@ public class DinoAIWander extends EntityAIBase {
     	if(!entity.canWander){
     		return false;
     	}
-        if (entity.isSitting()) {
+        if (entity.isMovementBlocked()) {
             return false;
         }
         if (this.entity instanceof EntityFlyingPrehistoric && ((EntityFlyingPrehistoric)this.entity).isFlying()) {
             return false;
         }
-        if (this.entity.getRNG().nextInt(20) != 0) {
+        if (this.entity.getRNG().nextInt(120) != 0) {
             return false;
         } else if (this.entity.isTamed() && this.entity.currentOrder != EnumOrderType.WANDER) {
             return false;
         } else {
-            Vec3 vec3 = RandomPositionGenerator.findRandomTarget(this.entity, 30, 7);
-
+            Vec3 vec3 = RandomPositionGenerator.findRandomTarget(this.entity, 10, 7);
+            System.out.print(vec3);
             if (vec3 == null) {
                 return false;
             } else {

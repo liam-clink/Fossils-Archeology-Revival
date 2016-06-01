@@ -1,9 +1,8 @@
 package com.github.revival.server.item;
 
-import com.github.revival.Revival;
-import com.github.revival.server.entity.mob.EntityDinosaur;
-import com.github.revival.server.entity.mob.EntityPlesiosaurus;
-import com.github.revival.server.enums.EnumOrderType;
+import java.util.Iterator;
+import java.util.List;
+
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,8 +12,10 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
-import java.util.Iterator;
-import java.util.List;
+import com.github.revival.Revival;
+import com.github.revival.server.entity.mob.EntityPlesiosaurus;
+import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
+import com.github.revival.server.enums.EnumOrderType;
 
 public class MagicConchItem extends Item {
     public MagicConchItem() {
@@ -59,10 +60,10 @@ public class MagicConchItem extends Item {
 
         while (var15.hasNext()) {
             Entity var16 = (Entity) var15.next();
-            EntityDinosaur var17 = (EntityDinosaur) var16;
+            EntityNewPrehistoric var17 = (EntityNewPrehistoric) var16;
 
             if (var17.isTamed()) {
-                var17.SetOrder(EnumOrderType.values()[var1.getItemDamage()]);
+                var17.setOrder(EnumOrderType.values()[var1.getItemDamage()]);
                 var2.spawnParticle("note", var16.posX, var16.posY + 1.2D, var16.posZ, 0.0D, 0.0D, 0.0D);
             }
         }
@@ -70,7 +71,7 @@ public class MagicConchItem extends Item {
         var13 = StatCollector.translateToLocal("order." + EnumOrderType.values()[var1.getItemDamage()].toString());
         // Revival.ShowMessage(var10 + var9 + var11 + " " + var13 + var12, var3);
         if (!var3.worldObj.isRemote) {
-            Revival.showMessage(var10 + var9 + " " + var13, var3);
+            Revival.showMessage("Try asking again.", var3);
         }
         return var1;
     }

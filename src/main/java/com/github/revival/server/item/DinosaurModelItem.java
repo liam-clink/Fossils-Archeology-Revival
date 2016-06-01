@@ -1,10 +1,7 @@
 package com.github.revival.server.item;
 
-import com.github.revival.Revival;
-import com.github.revival.server.entity.mob.EntityDinosaur;
-import com.github.revival.server.enums.EnumPrehistoric;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import java.util.List;
+
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,7 +14,12 @@ import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
-import java.util.List;
+import com.github.revival.Revival;
+import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
+import com.github.revival.server.enums.EnumPrehistoric;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class DinosaurModelItem extends Item {
 
@@ -70,10 +72,10 @@ public class DinosaurModelItem extends Item {
             return true;
         } else {
             Class var11 = EnumPrehistoric.values()[var1.getItemDamage()].getDinoClass();
-            EntityDinosaur var12;
+            EntityNewPrehistoric var12;
 
             try {
-                var12 = (EntityDinosaur) var11.getConstructor(new Class[]{World.class}).newInstance(new Object[]{var3});
+                var12 = (EntityNewPrehistoric) var11.getConstructor(new Class[]{World.class}).newInstance(new Object[]{var3});
             } catch (Throwable var14) {
                 var14.printStackTrace();
                 return false;

@@ -70,9 +70,6 @@ public enum EnumPrehistoric {
 	public EnumMobType type;
 	public EnumDiet diet;
 	public EnumTimePeriod timeperiod;
-	public DinoFoodItemList FoodItemList;
-	public DinoFoodBlockList FoodBlockList;
-	public DinoFoodMobList FoodMobList;
 	public int MaxAge = 999;
 	public int AdultAge = 6;
 	public int TeenAge = 3;
@@ -109,9 +106,6 @@ public enum EnumPrehistoric {
 		this.timeperiod = timeperiod;
 		this.diet = diet;
 		this.Flags = f0;
-		this.FoodItemList = new DinoFoodItemList();
-		this.FoodBlockList = new DinoFoodBlockList();
-		this.FoodMobList = new DinoFoodMobList();
 		this.mainSpawnColor = mainSpawnColor;
 		this.secondSpawnColor = secondSpawnColor;
 		this.eggScale = 1;
@@ -123,9 +117,6 @@ public enum EnumPrehistoric {
 		this.timeperiod = timeperiod;
 		this.diet = diet;
 		this.Flags = f0;
-		this.FoodItemList = new DinoFoodItemList();
-		this.FoodBlockList = new DinoFoodBlockList();
-		this.FoodMobList = new DinoFoodMobList();
 		this.mainSpawnColor = mainSpawnColor;
 		this.secondSpawnColor = secondSpawnColor;
 		this.eggScale = eggScale;

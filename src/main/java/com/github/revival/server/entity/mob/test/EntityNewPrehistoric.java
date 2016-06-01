@@ -133,7 +133,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		this.tasks.addTask(0, new DinoAIAge(this));
 		this.tasks.addTask(0, new DinoAIHunger(this));
 		this.tasks.addTask(0, aiSit);
-		this.setHunger(100 / 2);
+		this.setHunger(502);
 		this.tasks.addTask(1, new DinoAITerratorial(this, EntityLivingBase.class, 4.0F));
 		this.tasks.addTask(2, new DinoAIFish(this, 1));
 		this.tasks.addTask(3, new DinoAIRunAway(this, EntityLivingBase.class, 16.0F, this.getSpeed() / 2, this.getSpeed()));
@@ -148,9 +148,9 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		this.tasks.addTask(12, new DinoAIWander(this));
 		this.tasks.addTask(13, new DinoAIFlee(this));
 		this.tasks.addTask(14, new DinoAIFindBubbleBlock(this));
-		//this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
-		//this.targetTasks.addTask(2, new DinoAIAgressive(this, EntityLivingBase.class, 1, true, isCannibal()));
-		//this.targetTasks.addTask(3, new DinoAIHurtByTarget(this));
+		this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
+		this.targetTasks.addTask(2, new DinoAIAgressive(this, EntityLivingBase.class, 1, true, isCannibal()));
+		this.targetTasks.addTask(3, new DinoAIHurtByTarget(this));
 		hasBabyTexture = true;
 		this.setScale(this.getDinosaurSize());
 		if(ticksTillMate == 0)
@@ -526,9 +526,6 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	@Override
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
-		if(this.getAttackTarget() != null && !this.canAttackClass(this.getAttackTarget().getClass())){
-			this.setAttackTarget(null);
-		}
 		if (this.getHunger() > 100) {
 			this.setHunger(100);
 		}
@@ -629,38 +626,6 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 			this.breakBlock(5);
 		}
 
-		if (this.aiMovingType() == Moving.FLIGHT) {
-			/*if (this.riddenByEntity == null) {
-				if (!this.isSitting()) {
-					if (this.isAdult()) {
-						if (!worldObj.isRemote) {
-							if (getEntityToAttack() == null) {
-								if (rand.nextInt(400) == 0) {
-									if (!this.getOrderType().equals(EnumOrderType.STAY)) {
-										isFlying = !isFlying;
-									}
-								}
-
-								if (isFlying) {
-									flyAround();
-								} else {
-
-								}
-
-								if (getEntityToAttack() != null) {
-									currentTarget = new ChunkCoordinates(
-											(int) getEntityToAttack().posX,
-											(int) ((int) getEntityToAttack().posY + getEntityToAttack()
-													.getEyeHeight()),
-													(int) getEntityToAttack().posZ);
-									isFlying = false;
-									flyTowardsTarget();
-								}
-							}
-						}
-					}
-				}*/
-		}
 		if (this.doesFlock() && flockObj == null) {
 			if(this.getNearbyFlock() != null){
 				this.getNearbyFlock().flockMembers.add(this);
