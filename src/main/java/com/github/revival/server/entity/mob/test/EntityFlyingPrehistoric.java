@@ -170,7 +170,6 @@ public abstract class EntityFlyingPrehistoric extends EntityNewPrehistoric{
 
 	public void flyAround() {
 		if (currentTarget != null && !this.isLanding()) {
-			faceTarget();
 			if(ticksFlying < 1200){
 				if (!worldObj.isAirBlock((int)currentTarget.xCoord, (int)currentTarget.yCoord, (int)currentTarget.zCoord) || getDistanceSquared(currentTarget) < 1 || currentTarget.yCoord < 1) {
 					currentTarget = null;
@@ -199,11 +198,12 @@ public abstract class EntityFlyingPrehistoric extends EntityNewPrehistoric{
 			motionX += (Math.signum(targetX) * 0.5D - motionX) * 0.10000000149011612D;
 			motionY += (Math.signum(targetY) * 0.699999988079071D - motionY) * 0.10000000149011612D;
 			motionZ += (Math.signum(targetZ) * 0.5D - motionZ) * 0.10000000149011612D;
+			float angle = (float) (Math.atan2(motionZ, motionX) * 180.0D / Math.PI) + 45.0F;
+			float rotation = MathHelper.wrapAngleTo180_float(angle - rotationYaw);
+			moveForward = 0.5F;
+			prevRotationYaw += rotation;
+			rotationYaw += rotation;
 		}
-	}
-
-	public void faceTarget(){
-        this.getLookHelper().setLookPosition(currentTarget.xCoord, currentTarget.yCoord, currentTarget.zCoord, 40, 40);
 	}
 
 	private float updateRotation(float f, float f1, float f2){
