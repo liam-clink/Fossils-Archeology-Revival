@@ -13,9 +13,10 @@ public class FossilOreDictionary {
 	public static void oreRegistration() {
 		OreDictionary.registerOre("plankWood", new ItemStack(FABlockRegistry.INSTANCE.palaePlanks));
 		OreDictionary.registerOre("plankWood", new ItemStack(FABlockRegistry.INSTANCE.ancientWood));
-		OreDictionary.registerOre("aercaleWood", new ItemStack(FABlockRegistry.INSTANCE.palaePlanks));
-		OreDictionary.registerOre("ancientWood", new ItemStack(FABlockRegistry.INSTANCE.ancientWood));
+		OreDictionary.registerOre("plankAercale", new ItemStack(FABlockRegistry.INSTANCE.palaePlanks));
+		OreDictionary.registerOre("plankAncient", new ItemStack(FABlockRegistry.INSTANCE.ancientWood));
 		OreDictionary.registerOre("logWood", new ItemStack(FABlockRegistry.INSTANCE.palmLog));
+		OreDictionary.registerOre("logAercale", new ItemStack(FABlockRegistry.INSTANCE.palmLog));
 		OreDictionary.registerOre("treeLeaves", new ItemStack(FABlockRegistry.INSTANCE.palmLeaves));
 		OreDictionary.registerOre("slabWood", new ItemStack(FABlockRegistry.INSTANCE.palaeSingleSlab));
 		OreDictionary.registerOre("slabWood", new ItemStack(FABlockRegistry.INSTANCE.ancientWoodSingleSlab));
