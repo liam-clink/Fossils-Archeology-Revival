@@ -50,8 +50,8 @@ public class EntityVelociraptor extends EntityNewPrehistoric {
         this.getNavigator().setAvoidSun(true);
         this.tasks.addTask(1, new EntityAISwimming(this));
         this.tasks.addTask(2, this.aiSit);
-        this.tasks.addTask(3, new DinoAILeapAtTarget(this));
-        this.tasks.addTask(4, new DinoAIAvoidEntity(this, 16.0F, 0.8D, 1.33D));
+        this.tasks.addTask(3, new DinoAIAvoidEntity(this, 16.0F, 0.8D, 1.33D));
+        this.tasks.addTask(4, new DinoAILeapAtTarget(this));
         this.tasks.addTask(5, new EntityAIRestrictSun(this));
         this.tasks.addTask(6, new EntityAIFleeSun(this, 1.0D));
         this.tasks.addTask(7, new DinoAIFollowOwner(this, 1.0D, 10.0F, 2.0F));

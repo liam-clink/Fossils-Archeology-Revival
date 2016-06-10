@@ -203,7 +203,7 @@ public class ModelBrachiosaurus extends ModelNewPrehistoric {
         ModelUtils.faceTargetMod(Neck5, f3, f4, 0.16F);
 
         float speed = 0.1F;
-        float speed2 = 0.9F;
+        float speed2 = 0.3F;
         {
             float sitProgress = ((EntityNewPrehistoric) (entity)).sitProgress;
             this.chainWave(tailParts, speed, 0.05F, -3, entity.ticksExisted, 1);
@@ -212,14 +212,14 @@ public class ModelBrachiosaurus extends ModelNewPrehistoric {
             this.bob(LowerBody, speed, 0.7F, false, entity.ticksExisted, 1);
             this.walk(UpperBody, speed, 0.05F, true, 0F, 0F, entity.ticksExisted, 1);
             this.walk(MidBody, speed, 0.05F, true, 0F, 0F, entity.ticksExisted, 1);
-            this.walk(FrontThighLeft, speed2, 0.8F, true, 0F, -0.4F, f, f1);
-            this.walk(FrontThighRight, speed2, 0.8F, false, 0F, -0.4F, f, f1);
-            this.walk(BackThighLeft, speed2, 0.8F, false, 0F, 0.4F, f, f1);
-            this.walk(BackThighRight, speed2, 0.8F, true, 0F, 0.4F, f, f1);
-            this.walk(FrontLegLeft, speed2, 0.6F, true, 0F, 0.4F, f, f1);
-            this.walk(FrontLegRight, speed2, 0.6F, false, 0F, 0.4F, f, f1);
-            this.walk(BackLegLeft, speed2, 0.6F, false, 0F, 0.4F, f, f1);
-            this.walk(BackLegRight, speed2, 0.6F, true, 0F, 0.4F, f, f1);
+            this.walk(FrontThighLeft, speed2, 0.25F, true, 0F, 0.2F, f, f1);
+            this.walk(FrontThighRight, speed2, 0.25F, false, 0F, -0.2F, f, f1);
+            this.walk(BackThighLeft, speed2, 0.25F, false, 0F, -0.2F, f, f1);
+            this.walk(BackThighRight, speed2, 0.25F, true, 0F, 0.2F, f, f1);
+            this.walk(FrontLegLeft, speed2, 0.2F, true, 0F, 0.2F, f, f1);
+            this.walk(FrontLegRight, speed2, 0.2F, false, 0F, -0.2F, f, f1);
+            this.walk(BackLegLeft, speed2, 0.2F, false, 0F, 0.2F, f, f1);
+            this.walk(BackLegRight, speed2, 0.2F, true, 0F, -0.2F, f, f1);
             sitAnimationRotation(Neck3, sitProgress, -((float) Math.toRadians(2.0D)), 0, 0);
             sitAnimationRotation(BackLegLeft, sitProgress, (float) Math.toRadians(58.0D), 0, 0);
             sitAnimationRotation(Neck2, sitProgress, -((float) Math.toRadians(5.22D)), 0, 0);

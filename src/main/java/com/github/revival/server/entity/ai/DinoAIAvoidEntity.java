@@ -7,7 +7,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.RandomPositionGenerator;
-import net.minecraft.entity.passive.EntityTameable;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.util.Vec3;
@@ -38,16 +38,8 @@ public class DinoAIAvoidEntity extends EntityAIBase {
 	}
 
 	public boolean shouldExecute() {
-		if (this.prehistoric instanceof EntityTameable && ((EntityTameable) this.prehistoric).isTamed()) {
-			return false;
-		}
-
-		this.closestLivingEntity = this.prehistoric.worldObj.getClosestPlayerToEntity(this.prehistoric, (double) this.distanceFromEntity);
-
-		if (this.closestLivingEntity == null) {
-			return false;
-		}
 		
+
 		List list = this.prehistoric.worldObj.selectEntitiesWithinAABB(EntityLivingBase.class, this.prehistoric.boundingBox.expand((double) this.distanceFromEntity, 3.0D, (double) this.distanceFromEntity), this.field_98218_a);
 
 		if (list.isEmpty()) {
@@ -55,7 +47,10 @@ public class DinoAIAvoidEntity extends EntityAIBase {
 		}
 
 		this.closestLivingEntity = (Entity) list.get(0);
-		if(closestLivingEntity.width > this.prehistoric.width * 1.6F){
+		if(this.prehistoric.canDinoHunt(closestLivingEntity, false)){
+			return false;
+		}
+		if (this.prehistoric.isTamed() && closestLivingEntity instanceof EntityPlayer) {
 			return false;
 		}
 		Vec3 vec3 = RandomPositionGenerator.findRandomTargetBlockAwayFrom(this.prehistoric, 16, 7, Vec3.createVectorHelper(this.closestLivingEntity.posX, this.closestLivingEntity.posY, this.closestLivingEntity.posZ));

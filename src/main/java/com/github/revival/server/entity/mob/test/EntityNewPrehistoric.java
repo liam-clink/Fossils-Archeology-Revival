@@ -585,7 +585,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
             this.updateAbilities();
         }
 
-        if (this.getAgeInTicks() % 120 == 0 && this.getHunger() > 0) {
+        if (this.getAgeInTicks() % 1200 == 0 && this.getHunger() > 0) {
             this.setHunger(this.getHunger() - 1);
         }
 
@@ -1353,11 +1353,11 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
         }
     }
 
-    public boolean canDinoHunt(Entity target) {
+    public boolean canDinoHunt(Entity target, boolean hunger) {
 
         if (this.type.diet != EnumDiet.HERBIVORE && this.type.diet != EnumDiet.NONE && canAttackClass(target.getClass())) {
             if (width >= target.width) {
-                return isHungry() || target instanceof EntityToyBase && this.ticksTillPlay == 0;
+                return (hunger ? isHungry() : true) || target instanceof EntityToyBase && this.ticksTillPlay == 0;
             }
         }
         return target instanceof EntityToyBase && this.ticksTillPlay == 0;
