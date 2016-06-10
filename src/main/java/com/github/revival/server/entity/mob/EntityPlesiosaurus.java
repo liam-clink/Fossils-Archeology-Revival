@@ -131,7 +131,7 @@ public class EntityPlesiosaurus extends EntitySwimmingPrehistoric {
 
 	@Override
 	protected double getSwimSpeed() {
-		return 3;
+		return 2;
 	}
 
 }

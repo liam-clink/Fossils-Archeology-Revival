@@ -11,17 +11,19 @@ import net.minecraft.world.chunk.Chunk;
 
 import com.github.revival.server.enums.EnumPrehistoric;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 public abstract class EntitySwimmingPrehistoric extends EntityNewPrehistoric {
+
+	public boolean movesOnLand;
+	public ChunkCoordinates currentTarget;
 
 	public EntitySwimmingPrehistoric(World world, EnumPrehistoric type, double baseDamage, double maxDamage, double baseHealth, double maxHealth, double baseSpeed, double maxSpeed) {
 		super(world, type, baseDamage, maxDamage, baseHealth, maxHealth, baseSpeed, maxSpeed);
 		this.getNavigator().setAvoidsWater(false);
 		this.tasks.addTask(15, new DinoAIWaterFindTarget(this));
 	}
-
-	public boolean movesOnLand;
-	public ChunkCoordinates currentTarget;
-
 
 	@Override
 	protected void applyEntityAttributes() {
@@ -50,15 +52,12 @@ public abstract class EntitySwimmingPrehistoric extends EntityNewPrehistoric {
 
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
-		if (this.isInWater()) {
-			swimAround();
-		}
+		swimAround();
 	}
 
 	private void swimAround() {
-
 		if (currentTarget != null) {
-			if (!isDirectPathBetweenPoints(this.getPositionVector(), Vec3.createVectorHelper(currentTarget.posX + 0.5F, currentTarget.posY + 0.5F, currentTarget.posZ + 0.5F))) {
+			if (!isDirectPathBetweenPoints(this.getPosition(), Vec3.createVectorHelper(currentTarget.posX, currentTarget.posY, currentTarget.posZ))) {
 				currentTarget = null;
 			}
 			if (!isTargetInWater() || this.getDistance(currentTarget.posX, currentTarget.posY, currentTarget.posZ) < 1.78F) {
@@ -66,44 +65,16 @@ public abstract class EntitySwimmingPrehistoric extends EntityNewPrehistoric {
 			}
 			swimTowardsTarget();
 		}
-		if (this.currentTarget != null) {
-			this.faceTarget(180, 0);
-		}
 	}
 
-	public void faceTarget(float yawAmount, float pitchAmount) {
-		double d0 = currentTarget.posX - this.posX;
-		double d2 = currentTarget.posY - this.posZ;
-		double d1 = currentTarget.posZ - this.posY + (double) this.getEyeHeight();
-		double d3 = (double) MathHelper.sqrt_double(d0 * d0 + d2 * d2);
-		float f2 = (float) (Math.atan2(d2, d0) * 180.0D / Math.PI) - 90.0F;
-		float f3 = (float) (-(Math.atan2(d1, d3) * 180.0D / Math.PI));
-		this.rotationPitch = this.updateRotation(this.rotationPitch, f3, pitchAmount);
-		this.rotationYaw = this.updateRotation(this.rotationYaw, f2, yawAmount);
-	}
-
-	private float updateRotation(float f, float f1, float f2) {
-		float f3 = MathHelper.wrapAngleTo180_float(f1 - f);
-
-		if (f3 > f2) {
-			f3 = f2;
-		}
-
-		if (f3 < -f2) {
-			f3 = -f2;
-		}
-
-		return f + f3;
-	}
-
-	private void swimTowardsTarget() {
-		if (currentTarget != null) {
-			double targetX = currentTarget.posX - posX;
-			double targetY = currentTarget.posY - posY;
-			double targetZ = currentTarget.posZ - posZ;
-			motionX += (Math.signum(targetX) * 0.5D - motionX) * 0.10000000149011612D * getSwimSpeed();
-			motionY += (Math.signum(targetY) * 0.699999988079071D - motionY) * 0.10000000149011612D * getSwimSpeed();
-			motionZ += (Math.signum(targetZ) * 0.5D - motionZ) * 0.10000000149011612D * getSwimSpeed();
+	public void swimTowardsTarget() {
+		if (currentTarget != null && isTargetInWater() && this.inWater) {
+			double targetX = currentTarget.posX + 0.5D - posX;
+			double targetY = currentTarget.posY + 1D - posY;
+			double targetZ = currentTarget.posZ + 0.5D - posZ;
+			motionX += (Math.signum(targetX) * 0.5D - motionX) * 0.100000000372529 * getSwimSpeed();
+			motionY += (Math.signum(targetY) * 0.5D - motionY) * 0.100000000372529 * getSwimSpeed();
+			motionZ += (Math.signum(targetZ) * 0.5D - motionZ) * 0.100000000372529 * getSwimSpeed();
 			float angle = (float) (Math.atan2(motionZ, motionX) * 180.0D / Math.PI) - 90.0F;
 			float rotation = MathHelper.wrapAngleTo180_float(angle - rotationYaw);
 			moveForward = 0.5F;
@@ -113,10 +84,6 @@ public abstract class EntitySwimmingPrehistoric extends EntityNewPrehistoric {
 
 	protected abstract double getSwimSpeed();
 
-	public Vec3 getPositionVector() {
-		return Vec3.createVectorHelper(posX, posY, posZ);
-	}
-
 	protected boolean isTargetInWater() {
 		return currentTarget == null ? false : worldObj.getBlock(currentTarget.posX, currentTarget.posY, currentTarget.posZ).getMaterial() == Material.water && worldObj.getBlock(currentTarget.posX, currentTarget.posY + 1, currentTarget.posZ).getMaterial() == Material.water;
 	}
@@ -124,15 +91,15 @@ public abstract class EntitySwimmingPrehistoric extends EntityNewPrehistoric {
 	public void moveEntityWithHeading(float x, float z) {
 		double d0;
 		float f6;
+
 		if (!worldObj.isRemote) {
 			float f4;
 			float f5;
 
 			if (this.isInWater()) {
 				d0 = this.posY;
-				f4 = 1.1F;
+				f4 = 0.8F;
 				f5 = 0.02F;
-
 				this.moveEntity(this.motionX, this.motionY, this.motionZ);
 				this.motionX *= (double) f4;
 				this.motionX *= 0.900000011920929D;
@@ -207,4 +174,7 @@ public abstract class EntitySwimmingPrehistoric extends EntityNewPrehistoric {
 		this.limbSwing += this.limbSwingAmount;
 	}
 
+	public Vec3 getPosition() {
+		return Vec3.createVectorHelper(this.posX, this.posY, this.posZ);
+	}
 }

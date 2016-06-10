@@ -10,14 +10,14 @@ import net.minecraft.world.World;
 
 import com.sun.javafx.geom.Vec3d;
 
-public class DinoAIWaterFindTarget extends EntityAIBase {
-	private EntitySwimmingPrehistoric prehistoric;
+public class DinoAIFindAirTarget extends EntityAIBase {
+	private EntityFlyingPrehistoric prehistoric;
 	private int shelterX;
 	private int shelterY;
 	private int shelterZ;
 	private World theWorld;
 
-	public DinoAIWaterFindTarget(EntitySwimmingPrehistoric prehistoric) {
+	public DinoAIFindAirTarget(EntityFlyingPrehistoric prehistoric) {
 		this.prehistoric = prehistoric;
 		this.theWorld = prehistoric.worldObj;
 	}
@@ -30,7 +30,8 @@ public class DinoAIWaterFindTarget extends EntityAIBase {
 		if (prehistoric.currentTarget != null && prehistoric.getDistance(prehistoric.currentTarget.posX, prehistoric.currentTarget.posY, prehistoric.currentTarget.posZ) < 10F) {
 			return false;
 		} else {
-			Vec3 vec = this.findWaterTarget();
+			System.out.println(1);
+			Vec3 vec = this.findAirTarget();
 			if (vec == null) {
 				return false;
 			} else {
@@ -50,19 +51,19 @@ public class DinoAIWaterFindTarget extends EntityAIBase {
 		this.prehistoric.currentTarget = new ChunkCoordinates(shelterX, shelterY, shelterZ);
 	}
 
-	public Vec3 findWaterTarget() {
+	public Vec3 findAirTarget() {
 		Random random = this.prehistoric.getRNG();
 
 		if (prehistoric.getAttackTarget() == null) {
 			for (int i = 0; i < 10; ++i) {
 				ChunkCoordinates blockpos1 = new ChunkCoordinates((int) this.prehistoric.posX + ((6 + random.nextInt(10)) * (random.nextBoolean() ? -1 : 1)), (int) this.prehistoric.posY + (random.nextInt(6) * (random.nextBoolean() ? -1 : 1)), (int) this.prehistoric.posZ  + ((6 + random.nextInt(10)) * (random.nextBoolean() ? -1 : 1)));
-				if (prehistoric.worldObj.getBlock(blockpos1.posX, blockpos1.posY, blockpos1.posZ).getMaterial() == Material.water) {
+				if (prehistoric.worldObj.getBlock(blockpos1.posX, blockpos1.posY, blockpos1.posZ).getMaterial() == Material.air) {
 					return Vec3.createVectorHelper(blockpos1.posX, blockpos1.posY, blockpos1.posZ);
 				}
 			}
 		} else {
 			ChunkCoordinates blockpos1 = new ChunkCoordinates((int) prehistoric.getAttackTarget().posX, (int) prehistoric.getAttackTarget().posY, (int) prehistoric.getAttackTarget().posZ);
-			if (prehistoric.worldObj.getBlock(blockpos1.posX, blockpos1.posY, blockpos1.posZ).getMaterial() == Material.water) {
+			if (prehistoric.worldObj.getBlock(blockpos1.posX, blockpos1.posY, blockpos1.posZ).getMaterial() == Material.air) {
 				return Vec3.createVectorHelper(blockpos1.posX, blockpos1.posY, blockpos1.posZ);
 			}
 		}
