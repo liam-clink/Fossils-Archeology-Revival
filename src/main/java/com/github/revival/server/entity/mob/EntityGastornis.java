@@ -179,4 +179,8 @@ public class EntityGastornis extends EntityNewPrehistoric {
         }
         return false;
     }
+    
+    public int getMaxHunger() {
+        return 75;
+    }
 }

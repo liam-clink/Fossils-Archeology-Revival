@@ -184,4 +184,7 @@ public class EntityBrachiosaurus extends EntityNewPrehistoric {
         return false;
     }
 
+    public int getMaxHunger() {
+        return 250;
+    }
 }

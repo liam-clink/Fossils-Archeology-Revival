@@ -98,4 +98,7 @@ public class EntityConfuciusornis extends EntityFlyingPrehistoric {
         return 0;
     }
 
+    public int getMaxHunger() {
+        return 25;
+    }
 }

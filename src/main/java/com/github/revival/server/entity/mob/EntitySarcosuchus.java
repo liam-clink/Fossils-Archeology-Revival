@@ -105,5 +105,8 @@ public class EntitySarcosuchus extends EntityNewPrehistoric {
     public int getAdultAge() {
         return 12;
     }
-
+    
+	public int getMaxHunger() {
+		return 150;
+	}
 }

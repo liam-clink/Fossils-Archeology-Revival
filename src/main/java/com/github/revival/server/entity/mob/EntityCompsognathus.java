@@ -192,4 +192,8 @@ public class EntityCompsognathus extends EntityNewPrehistoric {
             }
         }
     }
+    
+    public int getMaxHunger() {
+        return 50;
+    }
 }

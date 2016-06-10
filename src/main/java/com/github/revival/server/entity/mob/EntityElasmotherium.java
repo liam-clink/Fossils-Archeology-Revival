@@ -178,4 +178,8 @@ public class EntityElasmotherium extends EntityNewPrehistoric {
     public float getMaleSize() {
         return 1.2F;
     }
+    
+    public int getMaxHunger() {
+        return 125;
+    }
 }

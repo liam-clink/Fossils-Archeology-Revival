@@ -178,4 +178,7 @@ public class EntityDilophosaurus extends EntityNewPrehistoric {
         return false;
     }
 
+    public int getMaxHunger() {
+        return 100;
+    }
 }

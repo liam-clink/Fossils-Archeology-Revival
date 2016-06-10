@@ -211,4 +211,8 @@ public class EntityDeinonychus extends EntityNewPrehistoric {
         }
         return super.attackEntityFrom(dmg, i);
     }
+    
+    public int getMaxHunger() {
+        return 100;
+    }
 }

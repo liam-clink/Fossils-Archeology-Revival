@@ -170,4 +170,8 @@ public class EntityAnkylosaurus extends EntityNewPrehistoric {
         }
         return false;
     }
+    
+    public int getMaxHunger() {
+        return 175;
+    }
 }

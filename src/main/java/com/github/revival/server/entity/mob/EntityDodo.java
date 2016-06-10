@@ -187,4 +187,7 @@ public class EntityDodo extends EntityNewPrehistoric {
         return "fossil:dodo_death";
     }
 
+    public int getMaxHunger() {
+        return 50;
+    }
 }

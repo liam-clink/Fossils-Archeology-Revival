@@ -121,4 +121,7 @@ public class EntityPlesiosaurus extends EntitySwimmingPrehistoric {
         return 2;
     }
 
+	public int getMaxHunger() {
+		return 125;
+	}
 }

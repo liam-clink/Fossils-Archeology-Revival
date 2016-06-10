@@ -276,4 +276,8 @@ public class EntityMammoth extends EntityNewPrehistoric implements IShearable {
         }
         return false;
     }
+    
+	public int getMaxHunger() {
+		return 150;
+	}
 }

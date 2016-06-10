@@ -213,4 +213,8 @@ public class EntityTyrannosaurus extends EntityNewPrehistoric {
     public int getTailSegments() {
         return 3;
     }
+    
+	public int getMaxHunger() {
+		return 150;
+	}
 }

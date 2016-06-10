@@ -144,4 +144,8 @@ public class EntityPterosaur extends EntityFlyingPrehistoric {
     public float getMaleSize() {
         return 1.3F;
     }
+    
+	public int getMaxHunger() {
+		return 50;
+	}
 }

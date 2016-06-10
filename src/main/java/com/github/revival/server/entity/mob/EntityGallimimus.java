@@ -193,4 +193,8 @@ public class EntityGallimimus extends EntityNewPrehistoric {
     public boolean canDinoHunt(Entity target, boolean hunger) {
         return target.width <= 0.6D && super.canDinoHunt(target, hunger);
     }
+    
+    public int getMaxHunger() {
+        return 100;
+    }
 }

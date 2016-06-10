@@ -110,4 +110,7 @@ public class EntitySpinosaurus extends EntityNewPrehistoric {
         return 3;
     }
 
+	public int getMaxHunger() {
+		return 175;
+	}
 }

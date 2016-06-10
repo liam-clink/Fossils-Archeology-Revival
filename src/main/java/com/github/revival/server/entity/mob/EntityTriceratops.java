@@ -183,4 +183,8 @@ public class EntityTriceratops extends EntityNewPrehistoric {
         }
         return false;
     }
+    
+	public int getMaxHunger() {
+		return 175;
+	}
 }

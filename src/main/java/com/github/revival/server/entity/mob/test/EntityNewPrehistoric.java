@@ -95,7 +95,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
     public EntityNewPrehistoric(World world, EnumPrehistoric type, double baseDamage, double maxDamage, double baseHealth, double maxHealth, double baseSpeed, double maxSpeed) {
         super(world);
-        this.setHunger(50);
+        this.setHunger(this.getMaxHunger() / 2);
         this.setScale(this.getAgeScale());
         SPEAK_ANIMATION = Animation.create(this.getSpeakLength());
         ATTACK_ANIMATION = Animation.create(this.getAttackLength());
@@ -443,8 +443,8 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
     @Override
     public void onLivingUpdate() {
         super.onLivingUpdate();
-        if (this.getHunger() > 100) {
-            this.setHunger(100);
+        if (this.getHunger() > this.getMaxHunger()) {
+            this.setHunger(this.getMaxHunger());
         }
         if (this.getMood() > 100) {
             this.setMood(100);

@@ -176,4 +176,8 @@ public class EntityPachycephalosaurus extends EntityNewPrehistoric {
         }
         return false;
     }
+    
+	public int getMaxHunger() {
+		return 100;
+	}
 }

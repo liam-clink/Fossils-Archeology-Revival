@@ -206,4 +206,8 @@ public class EntityVelociraptor extends EntityNewPrehistoric {
     public int getTailSegments() {
         return 3;
     }
+    
+	public int getMaxHunger() {
+		return 75;
+	}
 }

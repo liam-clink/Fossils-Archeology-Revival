@@ -113,4 +113,7 @@ public class EntityMosasaurus extends EntitySwimmingPrehistoric {
         return 4;
     }
 
+	public int getMaxHunger() {
+		return 125;
+	}
 }

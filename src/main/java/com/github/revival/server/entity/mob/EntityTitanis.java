@@ -179,4 +179,8 @@ public class EntityTitanis extends EntityNewPrehistoric {
         }
         return false;
     }
+    
+	public int getMaxHunger() {
+		return 75;
+	}
 }
