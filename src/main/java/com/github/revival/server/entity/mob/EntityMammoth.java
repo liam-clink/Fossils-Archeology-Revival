@@ -33,39 +33,26 @@ import net.minecraftforge.common.IShearable;
 import java.util.ArrayList;
 
 public class EntityMammoth extends EntityNewPrehistoric implements IShearable {
-	public static final double baseDamage = 2;
-	public static final double maxDamage = 12;
-	public static final double baseHealth = 10;
-	public static final double maxHealth = 66;
-	public static final double baseSpeed = 0.2D;
-	public static final double maxSpeed = 0.3D;
+
 	private EntityAIEatGrass aiEatGrass = new EntityAIEatGrass(this);
 	private int eatGrassTimes = 0;
-
+	private static PotionEffect BIOME_EFFECT = new PotionEffect(Potion.weakness.id, 60, 1);
+	
 	public EntityMammoth(World world) {
-		super(world, EnumPrehistoric.Mammoth);
+		super(world, EnumPrehistoric.Mammoth, 2, 12, 10, 66, 0.2, 0.3);
 		this.setSize(0.7F, 0.7F);
-		this.pediaScale = 1.5F;
 		this.tasks.addTask(10, aiEatGrass);
+		this.pediaScale = 1.5F;
 		minSize = 1.3F;
 		maxSize = 5F;
 		teenAge = 7;
 		developsResistance = true;
 		breaksBlocks = true;
-		favoriteFood = Items.potato;
 	}
 
 	@Override
 	public int getAttackLength() {
 		return 35;
-	}
-
-	@Override
-	protected void applyEntityAttributes() {
-		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(baseSpeed);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(baseHealth);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(baseDamage);
 	}
 
 	@Override
@@ -88,7 +75,6 @@ public class EntityMammoth extends EntityNewPrehistoric implements IShearable {
 		for (int var9 = 0; var9 < var8; ++var9) {
 
 			var7.add(new ItemStack(Blocks.wool, 1, 12));
-
 
 		}
 		return var7;
@@ -117,7 +103,6 @@ public class EntityMammoth extends EntityNewPrehistoric implements IShearable {
 		super.writeEntityToNBT(var1);
 		var1.setBoolean("Sheared", this.getSheared());
 	}
-
 
 	@Override
 	public void readEntityFromNBT(NBTTagCompound var1) {
@@ -153,15 +138,12 @@ public class EntityMammoth extends EntityNewPrehistoric implements IShearable {
 		int i = MathHelper.floor_double(this.posX);
 		int j = MathHelper.floor_double(this.posY);
 		int k = MathHelper.floor_double(this.posZ);
-		PotionEffect BIOME_EFFECT = new PotionEffect(Potion.weakness.id, 60, 1);
 		if (!this.isPotionActive(Potion.weakness) && this.worldObj.getBiomeGenForCoords(i, k).getFloatTemperature(i, j, k) > 1.0 && !this.getSheared()) {
-			//this.addPotionEffect(BIOME_EFFECT);
-
+			this.addPotionEffect(BIOME_EFFECT);
 		}
 
 		super.onLivingUpdate();
 	}
-
 
 	@Override
 	public Activity aiActivityType() {
@@ -238,32 +220,6 @@ public class EntityMammoth extends EntityNewPrehistoric implements IShearable {
 	public Item getOrderItem() {
 
 		return Items.stick;
-	}
-
-	@Override
-	public void updateSize() {
-		double healthStep;
-		double attackStep;
-		double speedStep;
-		healthStep = (maxHealth - baseHealth) / (this.getAdultAge() + 1);
-		attackStep = (maxDamage - baseDamage) / (this.getAdultAge() + 1);
-		speedStep = (maxSpeed - baseSpeed) / (this.getAdultAge() + 1);
-
-
-		if (this.getDinoAge() <= this.getAdultAge()) {
-
-			this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(Math.round(baseHealth + (healthStep * this.getDinoAge())));
-			this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(Math.round(baseDamage + (attackStep * this.getDinoAge())));
-			this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(baseSpeed + (speedStep * this.getDinoAge()));
-
-			if (this.isTeen()) {
-				this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.5D);
-			} else if (this.isAdult()) {
-				this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(2.0D);
-			} else {
-				this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.0D);
-			}
-		}
 	}
 
 	@Override

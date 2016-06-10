@@ -8,15 +8,15 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 
 public class BlockMagnoliaFlower extends BlockBush {
 
-    public BlockMagnoliaFlower(Material material) {
-        super(Material.plants);
-        this.setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
-        setBlockName(LocalizationStrings.BLOCK_MAGNOLIA_NAME);
-    }
+	public BlockMagnoliaFlower(Material material) {
+		super(Material.plants);
+		this.setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
+		setBlockName(LocalizationStrings.BLOCK_MAGNOLIA_NAME);
+	}
 
-    @Override
-    public void registerBlockIcons(IIconRegister par1IconRegister) {
-        this.blockIcon = par1IconRegister.registerIcon("fossil:Magnolia");
-    }
+	@Override
+	public void registerBlockIcons(IIconRegister par1IconRegister) {
+		this.blockIcon = par1IconRegister.registerIcon("fossil:Magnolia");
+	}
 
 }

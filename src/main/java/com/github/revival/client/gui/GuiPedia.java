@@ -1,10 +1,15 @@
 package com.github.revival.client.gui;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -15,6 +20,7 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -46,8 +52,12 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class GuiPedia extends GuiContainer {
-	public static final int rightIndent = 30; //Left aligntment position for text on the RIGHT page of the pedia
-	public static final int leftIndent = 30; //Left aligntment position for text on the LEFT page of the pedia
+	public static final int rightIndent = 30; // Left aligntment position for
+											  // text on the RIGHT page of the
+											  // pedia
+	public static final int leftIndent = 30; // Left aligntment position for
+											 // text on the LEFT page of the
+											 // pedia
 	private static final ResourceLocation background_image = new ResourceLocation("fossil:textures/gui/Dinopedia.png");
 	private static final ResourceLocation moods = new ResourceLocation("fossil:textures/gui/dinopedia_mood.png");
 
@@ -60,9 +70,9 @@ public class GuiPedia extends GuiContainer {
 	public FossilGuiButton buttonIcon;
 	public EnumPrehistoric selfType = null;
 	int update = 0;
-	int left;//counter for text added on the left side
-	int right;//same for the right side
-	int items;//counter for the minipics down
+	int left;// counter for text added on the left side
+	int right;// same for the right side
+	int items;// counter for the minipics down
 	private RenderItem itemRender;
 	private float mouseX;
 	private float mouseY;
@@ -92,7 +102,8 @@ public class GuiPedia extends GuiContainer {
 		super.initGui();
 	}
 
-	/* Resets the y-offset for left and right side
+	/*
+	 * Resets the y-offset for left and right side
 	 */
 	public void reset() {
 		this.left = 0;
@@ -120,8 +131,8 @@ public class GuiPedia extends GuiContainer {
 	}
 
 	/**
-	 * Add a String to the left or right side, starting with 0
-	 * Also set the offset for margin position. Useful when using odd sized text.
+	 * Add a String to the left or right side, starting with 0 Also set the
+	 * offset for margin position. Useful when using odd sized text.
 	 */
 	public void addStringLR(String string, int marginOffset, boolean left0) {
 		this.fontRendererObj.drawString(string, 30 + (left0 ? 0 + marginOffset : 121 + marginOffset), 12 * ((left0 ? this.left++ : this.right++) + 1), 0X9D7E67);
@@ -145,7 +156,8 @@ public class GuiPedia extends GuiContainer {
 	}
 
 	/**
-	 * Print a Symbol at X,Y with zoom factor zoom: x*16 pixels. 0 means 8,-1 means 4
+	 * Print a Symbol at X,Y with zoom factor zoom: x*16 pixels. 0 means 8,-1
+	 * means 4
 	 */
 	public void printItemXY(Item item, int x, int y) {
 		this.printItemXY(item, x, y, 100);
@@ -179,10 +191,10 @@ public class GuiPedia extends GuiContainer {
 
 			GL11.glDisable(GL11.GL_LIGHTING);
 			this.mc.getTextureManager().bindTexture(TextureMap.locationItemsTexture);
-			if(item != null){
+			if (item != null) {
 				IIcon icon = item.getIconFromDamage(0);
 				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-				if(icon != null) {
+				if (icon != null) {
 					this.drawTexturedModelRectFromIcon(x, y, icon, drawSize, drawSize);
 				}
 				GL11.glEnable(GL11.GL_LIGHTING);
@@ -212,43 +224,42 @@ public class GuiPedia extends GuiContainer {
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-		if(!(Revival.toPedia instanceof EntityNewPrehistoric)){
+		if (!(Revival.toPedia instanceof EntityNewPrehistoric)) {
 			this.buttonNextPage.enabled = false;
 		}
 		if (bookPages == 0) {
 			if (Revival.toPedia instanceof EntityLivingBase) {
 				renderFirstPage((EntityLivingBase) Revival.toPedia);
-			}
-			else if (Revival.toPedia instanceof EntityDinoEgg) {
+			} else if (Revival.toPedia instanceof EntityDinoEgg) {
 				renderFirstPage((EntityDinoEgg) Revival.toPedia);
-			}
-			else if (Revival.toPedia instanceof EntityFishBase) {
+			} else if (Revival.toPedia instanceof EntityFishBase) {
 				renderFirstPage((EntityFishBase) Revival.toPedia);
 			}
-			/*if (Revival.toPedia instanceof EntityDinoEgg) {
-				((EntityDinoEgg) Revival.toPedia).showPedia(this);
-			} else if (Revival.toPedia instanceof EntityPregnantCow) {
-				((EntityPregnantCow) Revival.toPedia).showPedia(this);
-			} else if (Revival.toPedia instanceof EntityPregnantPig) {
-				((EntityPregnantPig) Revival.toPedia).showPedia(this);
-			} else if (Revival.toPedia instanceof EntityPregnantHorse) {
-				((EntityPregnantHorse) Revival.toPedia).showPedia(this);
-			} else if (Revival.toPedia instanceof EntityPregnantSheep) {
-				((EntityPregnantSheep) Revival.toPedia).showPedia(this);
-			} else if (Revival.toPedia instanceof EntityNewPrehistoric) {
-				((EntityNewPrehistoric) Revival.toPedia).showPedia(this);
-			} else if (Revival.toPedia instanceof EntityFishBase) {
-				((EntityFishBase) Revival.toPedia).showPedia(this);
-			} else if (Revival.toPedia instanceof EntityQuagga) {
-				((EntityQuagga) Revival.toPedia).showPedia(this);
-			} else if (Revival.toPedia instanceof EntityTerrorBird) {
-				((EntityTerrorBird) Revival.toPedia).showPedia(this);
-			}*/
+			/*
+			 * if (Revival.toPedia instanceof EntityDinoEgg) { ((EntityDinoEgg)
+			 * Revival.toPedia).showPedia(this); } else if (Revival.toPedia
+			 * instanceof EntityPregnantCow) { ((EntityPregnantCow)
+			 * Revival.toPedia).showPedia(this); } else if (Revival.toPedia
+			 * instanceof EntityPregnantPig) { ((EntityPregnantPig)
+			 * Revival.toPedia).showPedia(this); } else if (Revival.toPedia
+			 * instanceof EntityPregnantHorse) { ((EntityPregnantHorse)
+			 * Revival.toPedia).showPedia(this); } else if (Revival.toPedia
+			 * instanceof EntityPregnantSheep) { ((EntityPregnantSheep)
+			 * Revival.toPedia).showPedia(this); } else if (Revival.toPedia
+			 * instanceof EntityNewPrehistoric) { ((EntityNewPrehistoric)
+			 * Revival.toPedia).showPedia(this); } else if (Revival.toPedia
+			 * instanceof EntityFishBase) { ((EntityFishBase)
+			 * Revival.toPedia).showPedia(this); } else if (Revival.toPedia
+			 * instanceof EntityQuagga) { ((EntityQuagga)
+			 * Revival.toPedia).showPedia(this); } else if (Revival.toPedia
+			 * instanceof EntityTerrorBird) { ((EntityTerrorBird)
+			 * Revival.toPedia).showPedia(this); }
+			 */
 		} else {
 			if (Revival.toPedia instanceof EntityNewPrehistoric) {
-				((EntityNewPrehistoric) Revival.toPedia).showPedia2(this, ((EntityNewPrehistoric) Revival.toPedia).selfType.toString());
+				showPrehistoricBio(((EntityNewPrehistoric) Revival.toPedia).type.toString());
 			} else if (Revival.toPedia instanceof EntityFishBase) {
-				//((EntityFishBase) Revival.toPedia).showPedia2(this);
+				// ((EntityFishBase) Revival.toPedia).showPedia2(this);
 			} else if (Revival.toPedia instanceof EntityQuagga) {
 				((EntityQuagga) Revival.toPedia).showPedia2(this);
 			} else if (Revival.toPedia instanceof EntityTerrorBird) {
@@ -257,6 +268,41 @@ public class GuiPedia extends GuiContainer {
 		}
 	}
 
+	public void showPrehistoricBio(String mobName) {
+		this.reset();
+		this.addStringLR("", 150, false);
+		String translatePath = "assets/fossil/dinopedia/" + Minecraft.getMinecraft().gameSettings.language + "/";
+		// String bioFile = String.valueOf(mobName) + ".txt";
+		String bioFile = "template.txt";
+		if (getClass().getClassLoader().getResourceAsStream(translatePath) == null) {
+			translatePath = "assets/fossil/dinopedia/" + "en_US" + "/";
+		}
+
+		if (getClass().getClassLoader().getResourceAsStream(translatePath + bioFile) != null) {
+			InputStream fileReader = getClass().getClassLoader().getResourceAsStream(translatePath + bioFile);
+			try {
+				BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(fileReader));
+				StringBuffer stringBuffer = new StringBuffer();
+				String line;
+				while ((line = bufferedReader.readLine()) != null) {
+					GL11.glPushMatrix();
+					GL11.glScalef(0.75F, 0.75F, 0.75F);
+					this.addStringLR(line, -125, false);
+					GL11.glPopMatrix();
+				}
+				fileReader.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else {
+			this.addStringLR("File not found.", false);
+			GL11.glPushMatrix();
+			GL11.glScalef(0.5F, 0.5F, 0.5F);
+			this.addStringLR(translatePath + bioFile, 150, false);
+			GL11.glPopMatrix();
+		}
+	}
+	
 	public void renderFirstPage(Entity entity) {
 		reset();
 		int wordLength = 90;
@@ -269,7 +315,7 @@ public class GuiPedia extends GuiContainer {
 			printStringXY(StatCollector.translateToLocal(entity.getCommandSenderName()), (-this.fontRendererObj.getStringWidth(s) / 2) + 65, 60, 66, 48, 36);
 			GL11.glPopMatrix();
 			{
-				String s1 = StatCollector.translateToLocal("pedia.age") + " " + dino.getDinoAge();
+				String s1 = StatCollector.translateToLocal("pedia.age") + " " + dino.getAgeInDays();
 				printStringXY(s1, wordLength / 2, 110, 157, 126, 103);
 			}
 			{
@@ -286,14 +332,14 @@ public class GuiPedia extends GuiContainer {
 				final int height = scaledResolution.getScaledHeight();
 				final int mouseX = (Mouse.getX() * width / mc.displayWidth) - guiLeft;
 				final int mouseY = (height - Mouse.getY() * height / mc.displayHeight - 1) - guiTop;
-				String s1 = StatCollector.translateToLocal("pedia.diet") + " " + StatCollector.translateToLocal("pedia.diet." + dino.selfType.diet.toString().toLowerCase());
+				String s1 = StatCollector.translateToLocal("pedia.diet") + " " + StatCollector.translateToLocal("pedia.diet." + dino.type.diet.toString().toLowerCase());
 				int x = wordLength / 2;
 				int y = 140;
 				printStringXY(s1, x, y, 157, 126, 103);
 				if (mouseX > x && mouseX < x + this.fontRendererObj.getStringWidth(s1)) {
 					if (mouseY > y && mouseY < y + 10) {
 						List<String> text = new ArrayList<String>();
-						text.add(StatCollector.translateToLocal("pedia.diet." + dino.selfType.diet.toString().toLowerCase() + ".desc"));
+						text.add(StatCollector.translateToLocal("pedia.diet." + dino.type.diet.toString().toLowerCase() + ".desc"));
 						GL11.glPushMatrix();
 						this.drawHoveringText(text, mouseX, mouseY, fontRendererObj);
 						GL11.glPopMatrix();
@@ -325,9 +371,9 @@ public class GuiPedia extends GuiContainer {
 				printStringXY(s1, wordLength / 2, 160, 157, 126, 103);
 			}
 			{
+				String name = (dino.getOwner() != null && dino.getOwner() instanceof EntityPlayer) ? ((EntityPlayer)dino.getOwner()).getDisplayName() : "";
 				String s1 = StatCollector.translateToLocal("pedia.untame");
-				String s2 = StatCollector.translateToLocal("pedia.owner") + " " + dino.getOwnerDisplayName();
-
+				String s2 = StatCollector.translateToLocal("pedia.owner") + " " + name;
 				printStringXY(dino.isTamed() ? s2 : s1, wordLength / 2, 170, 157, 126, 103);
 			}
 			{
@@ -371,8 +417,8 @@ public class GuiPedia extends GuiContainer {
 				}
 			}
 		}
-		if(entity instanceof EntityDinoEgg){
-			EntityDinoEgg egg = (EntityDinoEgg)entity;
+		if (entity instanceof EntityDinoEgg) {
+			EntityDinoEgg egg = (EntityDinoEgg) entity;
 			GL11.glPushMatrix();
 			String s = StatCollector.translateToLocal(egg.selfType.toString() + " " + StatCollector.translateToLocal("pedia.egg"));
 			GL11.glScalef(1.5F, 1.5F, 1.5F);
@@ -385,9 +431,9 @@ public class GuiPedia extends GuiContainer {
 			}
 			{
 				String s1;
-				if(egg.isInWater()){
+				if (egg.isInWater()) {
 					s1 = StatCollector.translateToLocal("pedia.egg.status" + " " + EnumChatFormatting.AQUA + StatCollector.translateToLocal("pedia.egg.status.wet"));
-				}else{
+				} else {
 					if ((egg.getBirthTick() >= 0 && egg.getBirthTick() > egg.lastBirthTick) || egg.getBirthTick() >= 100) {
 						s1 = StatCollector.translateToLocal("pedia.egg.status") + " " + EnumChatFormatting.GOLD + StatCollector.translateToLocal("pedia.egg.status.warm");
 					} else {
@@ -397,7 +443,7 @@ public class GuiPedia extends GuiContainer {
 				printStringXY(s1, wordLength / 2, 140, 157, 126, 103);
 			}
 		}
-		if(entity instanceof EntityFishBase){
+		if (entity instanceof EntityFishBase) {
 			String s1 = StatCollector.translateToLocal(entity.getCommandSenderName());
 			GL11.glScalef(1.5F, 1.5F, 1.5F);
 			printStringXY(StatCollector.translateToLocal(entity.getCommandSenderName()), (-this.fontRendererObj.getStringWidth(s1) / 2) + 65, 60, 66, 48, 36);
@@ -475,7 +521,7 @@ public class GuiPedia extends GuiContainer {
 					}
 				}
 			}
-			Map<Integer, Integer> foodMap = FoodMappings.instance().getFoodRenderList(dino.selfType.diet);
+			Map<Integer, Integer> foodMap = FoodMappings.instance().getFoodRenderList(dino.type.diet);
 			List<Integer> keys = Collections.list(Collections.enumeration(foodMap.keySet()));
 			Collections.sort(keys);
 			int[] keyArray = ArrayUtils.toPrimitive(keys.toArray(new Integer[0]));
@@ -506,8 +552,7 @@ public class GuiPedia extends GuiContainer {
 			GL11.glPushMatrix();
 			if (Revival.toPedia instanceof EntityDinoEgg) {
 				renderEgg(k + 100, l + 80, 150, 0, 0, (EntityDinoEgg) Revival.toPedia);
-			}
-			else if (Revival.toPedia instanceof EntityLivingBase) {
+			} else if (Revival.toPedia instanceof EntityLivingBase) {
 				if (Revival.toPedia instanceof EntityNewPrehistoric) {
 					renderDinosaur(k + 100, l + 80, Math.round(2 * ((EntityNewPrehistoric) Revival.toPedia).pediaScale), 0, 0, (EntityLivingBase) Revival.toPedia);
 
@@ -519,21 +564,17 @@ public class GuiPedia extends GuiContainer {
 			GL11.glPopMatrix();
 		}
 		/*
-        addTextByPage(bookPages);
-        if (bookPages == 0)
-        {
-            this.drawTexturedModalRect(((this.width - this.xGui) / 2) + 22, ((this.height - this.yGui) / 2) + 11, 0, 240, 136, 15);
-        }
-
-        if (bookPages >= 9)
-        {
-            var3 = 4;
-        }
+		 * addTextByPage(bookPages); if (bookPages == 0) {
+		 * this.drawTexturedModalRect(((this.width - this.xGui) / 2) + 22,
+		 * ((this.height - this.yGui) / 2) + 11, 0, 240, 136, 15); }
+		 * 
+		 * if (bookPages >= 9) { var3 = 4; }
 		 */
 	}
 
 	/**
-	 * Called when the screen is unloaded. Used to disable keyboard repeat events
+	 * Called when the screen is unloaded. Used to disable keyboard repeat
+	 * events
 	 */
 	@Override
 	public void onGuiClosed() {
@@ -594,11 +635,11 @@ public class GuiPedia extends GuiContainer {
 		GL11.glPushMatrix();
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
 		GL11.glTranslatef((float) posX, (float) posY, 50.0F);
-		if(mob instanceof EntityNewPrehistoric){
-		GL11.glScalef((float) -(scaleValue), -(float) scaleValue, (float) scaleValue);
-		}else{
+		if (mob instanceof EntityNewPrehistoric) {
+			GL11.glScalef((float) -(scaleValue), -(float) scaleValue, (float) scaleValue);
+		} else {
 			GL11.glScalef((float) (scaleValue), (float) scaleValue, (float) scaleValue);
-	
+
 		}
 		float f2 = 0;
 		float f3 = 0;
@@ -617,7 +658,7 @@ public class GuiPedia extends GuiContainer {
 		GL11.glTranslatef(0.0F, mob.yOffset, 0.0F);
 		RenderManager.instance.playerViewY = 180.0F;
 		if (mob instanceof EntityNewPrehistoric) {
-			GL11.glScalef(-((EntityNewPrehistoric) mob).getDinosaurSize(), -((EntityNewPrehistoric) mob).getDinosaurSize(), -((EntityNewPrehistoric) mob).getDinosaurSize());
+			GL11.glScalef(-((EntityNewPrehistoric) mob).getAgeScale(), -((EntityNewPrehistoric) mob).getAgeScale(), -((EntityNewPrehistoric) mob).getAgeScale());
 		}
 		RenderManager.instance.renderEntityWithPosYaw(mob, 0.0D, 0.0D, 0.0D, 0.0F, 0F);
 		mob.renderYawOffset = f2;

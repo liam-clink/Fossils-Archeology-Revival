@@ -10,7 +10,6 @@ import com.github.revival.client.model.prehistoric.test.ModelNewPrehistoric;
 import com.github.revival.server.entity.mob.EntityCompsognathus;
 import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 
-
 public class ModelCompsognathus extends ModelNewPrehistoric {
 
 	public AdvancedModelRenderer body;
@@ -209,10 +208,10 @@ public class ModelCompsognathus extends ModelNewPrehistoric {
 
 	@Override
 	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
-		AdvancedModelRenderer[] tailParts = {this.tail1, this.tail2};
-		AdvancedModelRenderer[] neckParts = {this.neck, this.head};
-		AdvancedModelRenderer[] leftArmParts = {this.LeftUpperArm, this.LeftLowerArm};
-		AdvancedModelRenderer[] rightArmParts = {this.RightUpperArm, this.RightLowerArm};
+		AdvancedModelRenderer[] tailParts = { this.tail1, this.tail2 };
+		AdvancedModelRenderer[] neckParts = { this.neck, this.head };
+		AdvancedModelRenderer[] leftArmParts = { this.LeftUpperArm, this.LeftLowerArm };
+		AdvancedModelRenderer[] rightArmParts = { this.RightUpperArm, this.RightLowerArm };
 
 		ModelUtils.faceTargetMod(neck, f3, f4, 0.5F);
 		ModelUtils.faceTargetMod(head, f3, f4, 0.5F);
@@ -247,16 +246,16 @@ public class ModelCompsognathus extends ModelNewPrehistoric {
 			sitAnimationRotation(RightUpperLeg, sitProgress, -1.0471975511965976F + (float) Math.toRadians(25D), 0.0F, 0.0F);
 			sitAnimationRotation(LeftUpperLeg, sitProgress, -1.0471975511965976F + (float) Math.toRadians(25D), 0.0F, 0.0F);
 			sitAnimationRotation(RightFoot, sitProgress, -0.7853981633974483F - (float) Math.toRadians(55D), 0.0F, 0.0F);
-	        sitAnimationRotation(neck, sitProgress, (float)Math.toRadians(93.91D), -((float)Math.toRadians(15.65D)), (float)Math.toRadians(75.65D));
-	        sitAnimationRotation(LeftLowerArm, sitProgress, -((float)Math.toRadians(13.0D)), 0, 0);
-	        sitAnimationRotation(tail2, sitProgress, (float)Math.toRadians(7.83D), -((float)Math.toRadians(10.43D)), (float)Math.toRadians(2.61D));
-	        sitAnimationRotation(RightUpperArm, sitProgress, -((float)Math.toRadians(10.0D)), 0, (float)Math.toRadians(44.35D));
-	        sitAnimationRotation(head, sitProgress, -((float)Math.toRadians(67.83D)), -((float)Math.toRadians(7.83D)), -((float)Math.toRadians(5.22D)));
-	        sitAnimationRotation(tail1, sitProgress, -((float)Math.toRadians(23.48D)), -((float)Math.toRadians(18.26D)), 0);
-	        sitAnimationRotation(LeftUpperArm, sitProgress, -((float)Math.toRadians(10.0D)), 0, -((float)Math.toRadians(36.52D)));
-	        sitAnimationRotation(RightLowerArm, sitProgress, -((float)Math.toRadians(13.0D)), 0, 0);
-	        sitAnimationRotation(crest, sitProgress, (float)Math.toRadians(18.26D), 0, 0);
-	        sitAnimationPos(body, sitProgress, 0F, 22F - ModelUtils.getDefaultPositionY(body), 0F);
+			sitAnimationRotation(neck, sitProgress, (float) Math.toRadians(93.91D), -((float) Math.toRadians(15.65D)), (float) Math.toRadians(75.65D));
+			sitAnimationRotation(LeftLowerArm, sitProgress, -((float) Math.toRadians(13.0D)), 0, 0);
+			sitAnimationRotation(tail2, sitProgress, (float) Math.toRadians(7.83D), -((float) Math.toRadians(10.43D)), (float) Math.toRadians(2.61D));
+			sitAnimationRotation(RightUpperArm, sitProgress, -((float) Math.toRadians(10.0D)), 0, (float) Math.toRadians(44.35D));
+			sitAnimationRotation(head, sitProgress, -((float) Math.toRadians(67.83D)), -((float) Math.toRadians(7.83D)), -((float) Math.toRadians(5.22D)));
+			sitAnimationRotation(tail1, sitProgress, -((float) Math.toRadians(23.48D)), -((float) Math.toRadians(18.26D)), 0);
+			sitAnimationRotation(LeftUpperArm, sitProgress, -((float) Math.toRadians(10.0D)), 0, -((float) Math.toRadians(36.52D)));
+			sitAnimationRotation(RightLowerArm, sitProgress, -((float) Math.toRadians(13.0D)), 0, 0);
+			sitAnimationRotation(crest, sitProgress, (float) Math.toRadians(18.26D), 0, 0);
+			sitAnimationPos(body, sitProgress, 0F, 22F - ModelUtils.getDefaultPositionY(body), 0F);
 			sitAnimationPos(RightUpperLeg, sitProgress, 0F, 19F - ModelUtils.getDefaultPositionY(RightUpperLeg), 0F);
 			sitAnimationPos(LeftUpperLeg, sitProgress, 0F, 19F - ModelUtils.getDefaultPositionY(LeftUpperLeg), 0F);
 
@@ -276,6 +275,5 @@ public class ModelCompsognathus extends ModelNewPrehistoric {
 		this.chainWave(neckParts, speed, 0.15F, 3, entity.ticksExisted, 1);
 		((EntityNewPrehistoric) entity).chainBuffer.applyChainSwingBuffer((ModelRenderer[]) tailParts);
 	}
-
 
 }

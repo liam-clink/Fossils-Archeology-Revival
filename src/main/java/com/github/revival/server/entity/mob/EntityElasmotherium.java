@@ -24,125 +24,109 @@ import net.minecraft.world.World;
 
 public class EntityElasmotherium extends EntityNewPrehistoric {
 
-    public static final double baseDamage = 1;
-    public static final double maxDamage = 9;
-    public static final double baseHealth = 12;
-    public static final double maxHealth = 62;
-    public static final double baseSpeed = 0.2D;
-    public static final double maxSpeed = 0.45D;
+	public EntityElasmotherium(World world) {
+		super(world, EnumPrehistoric.Elasmotherium, 1, 9, 12, 62, 0.2, 0.45);
+		this.setSize(1F, 1F);
+		this.nearByMobsAllowed = 9;
+		this.pediaScale = 6;
+		minSize = 0.5F;
+		maxSize = 2.6F;
+		teenAge = 4;
+		developsResistance = true;
+		breaksBlocks = true;
+		hasBabyTexture = false;
+	}
 
-    public EntityElasmotherium(World world) {
-        super(world, EnumPrehistoric.Elasmotherium);
-        this.setSize(1F, 1F);
-        this.nearByMobsAllowed = 9;
-        this.pediaScale = 6;
-        minSize = 0.5F;
-        maxSize = 2.6F;
-        teenAge = 4;
-        developsResistance = true;
-        breaksBlocks = true;
-        favoriteFood = Items.potato;
-        hasBabyTexture = false;
-    }
-    
-    @Override
+	@Override
 	public int getAttackLength() {
 		return 30;
 	}
+	
+	@Override
+	public void setSpawnValues() {
+	}
 
-    @Override
-    protected void applyEntityAttributes() {
-        super.applyEntityAttributes();
-        getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(baseSpeed);
-        getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(baseHealth);
-        getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(baseDamage);
-    }
+	@Override
+	public Activity aiActivityType() {
 
-    @Override
-    public void setSpawnValues() {
-    }
+		return Activity.DIURINAL;
+	}
 
-    @Override
-    public Activity aiActivityType() {
+	@Override
+	public Attacking aiAttackType() {
 
-        return Activity.DIURINAL;
-    }
+		return Attacking.KNOCKUP;
+	}
 
-    @Override
-    public Attacking aiAttackType() {
+	@Override
+	public Climbing aiClimbType() {
 
-        return Attacking.KNOCKUP;
-    }
+		return Climbing.NONE;
+	}
 
-    @Override
-    public Climbing aiClimbType() {
+	@Override
+	public Following aiFollowType() {
 
-        return Climbing.NONE;
-    }
+		return Following.AGRESSIVE;
+	}
 
-    @Override
-    public Following aiFollowType() {
+	@Override
+	public Jumping aiJumpType() {
 
-        return Following.AGRESSIVE;
-    }
+		return Jumping.BASIC;
+	}
 
-    @Override
-    public Jumping aiJumpType() {
+	@Override
+	public Response aiResponseType() {
 
-        return Jumping.BASIC;
-    }
+		return Response.TERITORIAL;
+	}
 
-    @Override
-    public Response aiResponseType() {
+	@Override
+	public Stalking aiStalkType() {
 
-        return Response.TERITORIAL;
-    }
+		return Stalking.NONE;
+	}
 
-    @Override
-    public Stalking aiStalkType() {
+	@Override
+	public Taming aiTameType() {
 
-        return Stalking.NONE;
-    }
+		return Taming.IMPRINTING;
+	}
 
-    @Override
-    public Taming aiTameType() {
+	@Override
+	public Untaming aiUntameType() {
 
-        return Taming.IMPRINTING;
-    }
+		return Untaming.ATTACK;
+	}
 
-    @Override
-    public Untaming aiUntameType() {
+	@Override
+	public Moving aiMovingType() {
 
-        return Untaming.ATTACK;
-    }
+		return Moving.WALK;
+	}
 
-    @Override
-    public Moving aiMovingType() {
+	@Override
+	public WaterAbility aiWaterAbilityType() {
 
-        return Moving.WALK;
-    }
+		return WaterAbility.NONE;
+	}
 
-    @Override
-    public WaterAbility aiWaterAbilityType() {
+	@Override
+	public boolean doesFlock() {
 
-        return WaterAbility.NONE;
-    }
+		return false;
+	}
 
-    @Override
-    public boolean doesFlock() {
-
-        return false;
-    }
-
-    @Override
+	@Override
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
 		if (this.getAnimation() == ATTACK_ANIMATION && this.getAnimationTick() == 15 && this.getAttackTarget() != null) {
 			this.attackEntityAsMob(this.getAttackTarget());
 		}
 	}
-    
-    @Override
+
+	@Override
 	public boolean attackEntityAsMob(Entity entity) {
 		if (this.getAttackBounds().intersectsWith(entity.boundingBox)) {
 			if (this.getAnimation() == NO_ANIMATION) {
@@ -164,46 +148,20 @@ public class EntityElasmotherium extends EntityNewPrehistoric {
 		}
 		return false;
 	}
-    
-    @Override
-    public Item getOrderItem() {
 
-        return Items.stick;
-    }
+	@Override
+	public Item getOrderItem() {
 
-    @Override
-    public void updateSize() {
-        double healthStep;
-        double attackStep;
-        double speedStep;
-        healthStep = (maxHealth - baseHealth) / (this.getAdultAge() + 1);
-        attackStep = (maxDamage - baseDamage) / (this.getAdultAge() + 1);
-        speedStep = (maxSpeed - baseSpeed) / (this.getAdultAge() + 1);
+		return Items.stick;
+	}
+	
+	@Override
+	public int getAdultAge() {
+		return 9;
+	}
 
-
-        if (this.getDinoAge() <= this.getAdultAge()) {
-
-            this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(Math.round(baseHealth + (healthStep * this.getDinoAge())));
-            this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(Math.round(baseDamage + (attackStep * this.getDinoAge())));
-            this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(baseSpeed + (speedStep * this.getDinoAge()));
-
-            if (this.isTeen()) {
-                this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.5D);
-            } else if (this.isAdult()) {
-                this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(2.0D);
-            } else {
-                this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.0D);
-            }
-        }
-    }
-
-    @Override
-    public int getAdultAge() {
-        return 9;
-    }
-
-    @Override
-    public float getMaleSize() {
-        return 1.2F;
-    }
+	@Override
+	public float getMaleSize() {
+		return 1.2F;
+	}
 }

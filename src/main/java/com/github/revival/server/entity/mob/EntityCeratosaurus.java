@@ -24,17 +24,10 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-
 public class EntityCeratosaurus extends EntityNewPrehistoric {
-	public static final double baseDamage = 1;
-	public static final double maxDamage = 10;
-	public static final double baseHealth = 8;
-	public static final double maxHealth = 50;
-	public static final double baseSpeed = 0.25D;
-	public static final double maxSpeed = 0.42D;
 
 	public EntityCeratosaurus(World world) {
-		super(world, EnumPrehistoric.Ceratosaurus);
+		super(world, EnumPrehistoric.Ceratosaurus, 1, 10, 8, 50, 0.25, 0.42);
 		this.setSize(1.55F, 1.3F);
 		this.pediaScale = 7F;
 		this.nearByMobsAllowed = 5;
@@ -43,20 +36,11 @@ public class EntityCeratosaurus extends EntityNewPrehistoric {
 		teenAge = 5;
 		developsResistance = true;
 		breaksBlocks = true;
-		favoriteFood = Items.beef;
 	}
 
 	@Override
 	public int getAttackLength() {
 		return 30;
-	}
-
-	@Override
-	protected void applyEntityAttributes() {
-		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(baseSpeed);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(baseHealth);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(baseDamage);
 	}
 
 	@Override
@@ -140,24 +124,6 @@ public class EntityCeratosaurus extends EntityNewPrehistoric {
 	}
 
 	@Override
-	public void updateSize() {
-		double healthStep;
-		double attackStep;
-		double speedStep;
-		healthStep = (maxHealth - baseHealth) / (this.getAdultAge() + 1);
-		attackStep = (maxDamage - baseDamage) / (this.getAdultAge() + 1);
-		speedStep = (maxSpeed - baseSpeed) / (this.getAdultAge() + 1);
-
-
-		if (this.getDinoAge() <= this.getAdultAge()) {
-
-			this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(Math.round(baseHealth + (healthStep * this.getDinoAge())));
-			this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(Math.round(baseDamage + (attackStep * this.getDinoAge())));
-			this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(baseSpeed + (speedStep * this.getDinoAge()));
-		}
-	}
-
-	@Override
 	public int getAdultAge() {
 		return 10;
 	}
@@ -175,7 +141,6 @@ public class EntityCeratosaurus extends EntityNewPrehistoric {
 			this.attackEntityAsMob(this.getAttackTarget());
 		}
 	}
-
 
 	@Override
 	public boolean attackEntityAsMob(Entity entity) {

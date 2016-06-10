@@ -44,7 +44,6 @@ public class Flock {
 		flockPosY = creator.posY;
 		flockPosZ = creator.posZ;
 
-
 	}
 
 	public void onUpdate() {
@@ -53,14 +52,11 @@ public class Flock {
 		}
 		for (EntityNewPrehistoric member : flockMembers) {
 			if (member != null && flockLeader != null && this.flockPathNavigate != null && this.flockPathNavigate.getPath() != null) {
-				if(member.getNavigator().noPath() && member != this.flockLeader){
+				if (member.getNavigator().noPath() && member != this.flockLeader) {
 					member.getNavigator().setPath(this.flockLeader.getNavigator().getPath(), 1);
-				}else{
-					member.canWander = false;
 				}
 			}
 		}
-
 
 		if (flockPathNavigate == null) {
 			flockPathNavigate = flockLeader.getNavigator();
@@ -76,22 +72,18 @@ public class Flock {
 		}
 	}
 
-	public EntityNewPrehistoric findNewMember(World world, AxisAlignedBB bb, EntityNewPrehistoric leader)
-	{
+	public EntityNewPrehistoric findNewMember(World world, AxisAlignedBB bb, EntityNewPrehistoric leader) {
 		List list = world.getEntitiesWithinAABB(EntityNewPrehistoric.class, bb);
 		EntityNewPrehistoric entity1 = null;
 		double d0 = Double.MAX_VALUE;
 
-		for (int i = 0; i < list.size(); ++i)
-		{
-			EntityNewPrehistoric entity2 = (EntityNewPrehistoric)list.get(i);
+		for (int i = 0; i < list.size(); ++i) {
+			EntityNewPrehistoric entity2 = (EntityNewPrehistoric) list.get(i);
 
-			if (entity2 != leader && !this.flockMembers.contains(entity2) && entity2.selfType == leader.selfType)
-			{
+			if (entity2 != leader && !this.flockMembers.contains(entity2) && entity2.type == leader.type) {
 				double d1 = leader.getDistanceSqToEntity(entity2);
 
-				if (d1 <= d0)
-				{
+				if (d1 <= d0) {
 					entity1 = entity2;
 					d0 = d1;
 				}

@@ -21,149 +21,109 @@ import com.github.revival.server.enums.EnumPrehistoricAI.WaterAbility;
 import com.github.revival.server.item.FAItemRegistry;
 
 public class EntityMosasaurus extends EntitySwimmingPrehistoric {
-    public static final double baseDamage = 2;
-    public static final double maxDamage = 9;
-    public static final double baseHealth = 12;
-    public static final double maxHealth = 70;
-    public static final double baseSpeed = 0.3D;
-    public static final double maxSpeed = 0.35D;
 
-    public EntityMosasaurus(World world) {
-        super(world, EnumPrehistoric.Mosasaurus);
-        this.hasBabyTexture = false;
-        this.setSize(1.5F, 0.6F);
-        minSize = 0.6F;
-        maxSize = 2.1F;
-        teenAge = 5;
-        developsResistance = true;
-        breaksBlocks = true;
-        favoriteFood = Items.fish;
-        hasBabyTexture = false;
-        pediaScale = 6;
-    }
-
-    @Override
-    protected void applyEntityAttributes() {
-        super.applyEntityAttributes();
-        getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(baseSpeed);
-        getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(baseHealth);
-        getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(baseDamage);
-    }
-
-    @Override
-    public void setSpawnValues() {}
-
-    @Override
-    public Activity aiActivityType() {
-
-        return Activity.DIURINAL;
-    }
-
-    @Override
-    public Attacking aiAttackType() {
-
-        return Attacking.DROWN;
-    }
-
-    @Override
-    public Climbing aiClimbType() {
-
-        return Climbing.NONE;
-    }
-
-    @Override
-    public Following aiFollowType() {
-
-        return Following.AGRESSIVE;
-    }
-
-    @Override
-    public Jumping aiJumpType() {
-
-        return Jumping.BASIC;
-    }
-
-    @Override
-    public Response aiResponseType() {
-
-        return Response.AGRESSIVE;
-    }
-
-    @Override
-    public Stalking aiStalkType() {
-
-        return Stalking.NONE;
-    }
-
-    @Override
-    public Taming aiTameType() {
-
-        return Taming.BLUEGEM;
-    }
-
-    @Override
-    public Untaming aiUntameType() {
-
-        return Untaming.NONE;
-    }
-
-    @Override
-    public Moving aiMovingType() {
-
-        return Moving.AQUATIC;
-    }
-
-    @Override
-    public WaterAbility aiWaterAbilityType() {
-
-        return WaterAbility.ATTACK;
-    }
-
-    @Override
-    public boolean doesFlock() {
-        return false;
-    }
-
-    @Override
-    public Item getOrderItem() {
-
-        return FAItemRegistry.INSTANCE.skullStick;
-    }
-
-    @Override
-    public void updateSize() {
-        double healthStep;
-        double attackStep;
-        double speedStep;
-        healthStep = (maxHealth - baseHealth) / (this.getAdultAge() + 1);
-        attackStep = (maxDamage - baseDamage) / (this.getAdultAge() + 1);
-        speedStep = (maxSpeed - baseSpeed) / (this.getAdultAge() + 1);
-
-
-        if (this.getDinoAge() <= this.getAdultAge()) {
-
-            this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(Math.round(baseHealth + (healthStep * this.getDinoAge())));
-            this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(Math.round(baseDamage + (attackStep * this.getDinoAge())));
-            this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(baseSpeed + (speedStep * this.getDinoAge()));
-
-            if (this.isTeen()) {
-                this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.5D);
-            } else if (this.isAdult()) {
-                this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(2.0D);
-            } else {
-                this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.0D);
-            }
-        }
-    }
-
-    @Override
-    public int getAdultAge() {
-        return 11;
-    }
+	public EntityMosasaurus(World world) {
+		super(world, EnumPrehistoric.Mosasaurus, 2, 9, 12, 70, 0.3, 0.35);
+		this.hasBabyTexture = false;
+		this.setSize(1.5F, 0.6F);
+		minSize = 0.6F;
+		maxSize = 2.1F;
+		teenAge = 5;
+		developsResistance = true;
+		breaksBlocks = true;
+		hasBabyTexture = false;
+		pediaScale = 6;
+	}
 
 	@Override
-    protected double getSwimSpeed() {
-	    return 4;
-    }
+	public void setSpawnValues() {
+	}
+
+	@Override
+	public Activity aiActivityType() {
+
+		return Activity.DIURINAL;
+	}
+
+	@Override
+	public Attacking aiAttackType() {
+
+		return Attacking.DROWN;
+	}
+
+	@Override
+	public Climbing aiClimbType() {
+
+		return Climbing.NONE;
+	}
+
+	@Override
+	public Following aiFollowType() {
+
+		return Following.AGRESSIVE;
+	}
+
+	@Override
+	public Jumping aiJumpType() {
+
+		return Jumping.BASIC;
+	}
+
+	@Override
+	public Response aiResponseType() {
+
+		return Response.AGRESSIVE;
+	}
+
+	@Override
+	public Stalking aiStalkType() {
+
+		return Stalking.NONE;
+	}
+
+	@Override
+	public Taming aiTameType() {
+
+		return Taming.BLUEGEM;
+	}
+
+	@Override
+	public Untaming aiUntameType() {
+
+		return Untaming.NONE;
+	}
+
+	@Override
+	public Moving aiMovingType() {
+
+		return Moving.AQUATIC;
+	}
+
+	@Override
+	public WaterAbility aiWaterAbilityType() {
+
+		return WaterAbility.ATTACK;
+	}
+
+	@Override
+	public boolean doesFlock() {
+		return false;
+	}
+
+	@Override
+	public Item getOrderItem() {
+
+		return FAItemRegistry.INSTANCE.skullStick;
+	}
+
+	@Override
+	public int getAdultAge() {
+		return 11;
+	}
+
+	@Override
+	protected double getSwimSpeed() {
+		return 4;
+	}
 
 }

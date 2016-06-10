@@ -49,8 +49,7 @@ public abstract class EntityFishBase extends EntityTameable {
 		}
 	}
 
-	public boolean isAIEnabled()
-	{
+	public boolean isAIEnabled() {
 		return true;
 	}
 
@@ -76,12 +75,12 @@ public abstract class EntityFishBase extends EntityTameable {
 	}
 
 	private void swimAround() {
-		if(!isInsideNautilusShell()){
-			if (currentTarget != null){
-				if(!isDirectPathBetweenPoints(new ChunkCoordinates(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY), MathHelper.floor_double(this.posZ)), currentTarget)){
+		if (!isInsideNautilusShell()) {
+			if (currentTarget != null) {
+				if (!isDirectPathBetweenPoints(new ChunkCoordinates(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY), MathHelper.floor_double(this.posZ)), currentTarget)) {
 					currentTarget = null;
 				}
-				if (!isTargetInWater() || this.getDistance(currentTarget.posX, currentTarget.posY, currentTarget.posZ) < 1.78F){
+				if (!isTargetInWater() || this.getDistance(currentTarget.posX, currentTarget.posY, currentTarget.posZ) < 1.78F) {
 					currentTarget = null;
 				}
 				swimTowardsTarget();
@@ -89,16 +88,20 @@ public abstract class EntityFishBase extends EntityTameable {
 		}
 	}
 
-	public void swimTowardsTarget()
-	{
-		if (currentTarget != null && isTargetInWater() && this.inWater)
-		{
+	public void swimTowardsTarget() {
+		if (currentTarget != null && isTargetInWater() && this.inWater) {
 			double targetX = currentTarget.posX + 0.5D - posX;
 			double targetY = currentTarget.posY + 1D - posY;
 			double targetZ = currentTarget.posZ + 0.5D - posZ;
-			motionX += (Math.signum(targetX) * 0.5D - motionX) *  0.100000000372529 * getSwimSpeed(); //0.10000000149011612D / 2;
-			motionY += (Math.signum(targetY) * 0.5D - motionY) *  0.100000000372529 * getSwimSpeed();//0.10000000149011612D / 2;
-			motionZ += (Math.signum(targetZ) * 0.5D - motionZ) *  0.100000000372529 * getSwimSpeed(); //0.10000000149011612D / 2;
+			motionX += (Math.signum(targetX) * 0.5D - motionX) * 0.100000000372529 * getSwimSpeed(); // 0.10000000149011612D
+																									 // /
+																									 // 2;
+			motionY += (Math.signum(targetY) * 0.5D - motionY) * 0.100000000372529 * getSwimSpeed();// 0.10000000149011612D
+																									// /
+																									// 2;
+			motionZ += (Math.signum(targetZ) * 0.5D - motionZ) * 0.100000000372529 * getSwimSpeed(); // 0.10000000149011612D
+																									 // /
+																									 // 2;
 			float angle = (float) (Math.atan2(motionZ, motionX) * 180.0D / Math.PI) - 90.0F;
 			float rotation = MathHelper.wrapAngleTo180_float(angle - rotationYaw);
 			moveForward = 0.5F;
@@ -109,11 +112,11 @@ public abstract class EntityFishBase extends EntityTameable {
 	protected abstract double getSwimSpeed();
 
 	@Override
-	public void onUpdate(){
+	public void onUpdate() {
 		super.onUpdate();
 		swimAround();
 		Revival.PROXY.calculateChainBuffer(this);
-		if(this.isInWater() && this.getClosestMate() != null && this.getGrowingAge() == 0 && this.getClosestMate().getGrowingAge() == 0 && !this.worldObj.isRemote){
+		if (this.isInWater() && this.getClosestMate() != null && this.getGrowingAge() == 0 && this.getClosestMate().getGrowingAge() == 0 && !this.worldObj.isRemote) {
 			this.setGrowingAge(12000);
 			this.getClosestMate().setGrowingAge(12000);
 			this.worldObj.spawnEntityInWorld(new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, new ItemStack(this.selfType.eggItem)));
@@ -140,106 +143,88 @@ public abstract class EntityFishBase extends EntityTameable {
 		if (list.isEmpty()) {
 			return null;
 		} else {
-			for(EntityFishBase entity : list){
-				if(entity != this)
+			for (EntityFishBase entity : list) {
+				if (entity != this)
 					return entity.selfType == this.selfType ? entity : null;
 			}
 			return null;
 		}
 	}
 
-	public boolean isInsideNautilusShell(){
-		return this instanceof EntityNautilus && ((EntityNautilus)this).isInShell();
+	public boolean isInsideNautilusShell() {
+		return this instanceof EntityNautilus && ((EntityNautilus) this).isInShell();
 	}
 
-	public void moveEntityWithHeading(float x, float z){
+	public void moveEntityWithHeading(float x, float z) {
 		double d0;
 		float f6;
-		if (!worldObj.isRemote)
-		{
+		if (!worldObj.isRemote) {
 			float f4;
 			float f5;
 
-			if (this.isInWater())
-			{
+			if (this.isInWater()) {
 				d0 = this.posY;
 				f4 = 0.8F;
 				f5 = 0.02F;
 
 				this.moveEntity(this.motionX, this.motionY, this.motionZ);
-				this.motionX *= (double)f4;
+				this.motionX *= (double) f4;
 				this.motionX *= 0.900000011920929D;
 				this.motionY *= 0.900000011920929D;
 				this.motionZ *= 0.900000011920929D;
-				this.motionZ *= (double)f4;	
-			}
-			else
-			{
+				this.motionZ *= (double) f4;
+			} else {
 				float f2 = 0.91F;
 
-				if (this.onGround)
-				{
+				if (this.onGround) {
 					f2 = this.worldObj.getBlock(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.boundingBox.minY) - 1, MathHelper.floor_double(this.posZ)).slipperiness * 0.91F;
 				}
 
 				float f3 = 0.16277136F / (f2 * f2 * f2);
 
-				if (this.onGround)
-				{
+				if (this.onGround) {
 					f4 = this.getAIMoveSpeed() * f3;
-				}
-				else
-				{
+				} else {
 					f4 = this.jumpMovementFactor;
 				}
 
 				this.moveFlying(x, z, f4);
 				f2 = 0.91F;
 
-				if (this.onGround)
-				{
+				if (this.onGround) {
 					f2 = this.worldObj.getBlock(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.boundingBox.minY) - 1, MathHelper.floor_double(this.posZ)).slipperiness * 0.91F;
 				}
 
-				if (this.isOnLadder())
-				{
+				if (this.isOnLadder()) {
 					f5 = 0.15F;
-					this.motionX = MathHelper.clamp_double(this.motionX, (double)(-f5), (double)f5);
-					this.motionZ = MathHelper.clamp_double(this.motionZ, (double)(-f5), (double)f5);
+					this.motionX = MathHelper.clamp_double(this.motionX, (double) (-f5), (double) f5);
+					this.motionZ = MathHelper.clamp_double(this.motionZ, (double) (-f5), (double) f5);
 					this.fallDistance = 0.0F;
 
-					if (this.motionY < -0.15D)
-					{
+					if (this.motionY < -0.15D) {
 						this.motionY = -0.15D;
 					}
 				}
 
 				this.moveEntity(this.motionX, this.motionY, this.motionZ);
 
-				if (this.isCollidedHorizontally && this.isOnLadder())
-				{
+				if (this.isCollidedHorizontally && this.isOnLadder()) {
 					this.motionY = 0.2D;
 				}
 
-				if (this.worldObj.isRemote && (!this.worldObj.blockExists((int)this.posX, 0, (int)this.posZ)) || !this.worldObj.getChunkFromBlockCoords((int)this.posX, (int)this.posZ).isChunkLoaded)
-				{
-					if (this.posY > 0.0D)
-					{
+				if (this.worldObj.isRemote && (!this.worldObj.blockExists((int) this.posX, 0, (int) this.posZ)) || !this.worldObj.getChunkFromBlockCoords((int) this.posX, (int) this.posZ).isChunkLoaded) {
+					if (this.posY > 0.0D) {
 						this.motionY = -0.1D;
-					}
-					else
-					{
+					} else {
 						this.motionY = 0.0D;
 					}
-				}
-				else
-				{
+				} else {
 					this.motionY -= 0.08D;
 				}
 
 				this.motionY *= 0.9800000190734863D;
-				this.motionX *= (double)f2;
-				this.motionZ *= (double)f2;
+				this.motionX *= (double) f2;
+				this.motionZ *= (double) f2;
 			}
 		}
 
@@ -248,8 +233,7 @@ public abstract class EntityFishBase extends EntityTameable {
 		double d1 = this.posZ - this.prevPosZ;
 		f6 = MathHelper.sqrt_double(d0 * d0 + d1 * d1) * 4.0F;
 
-		if (f6 > 1.0F)
-		{
+		if (f6 > 1.0F) {
 			f6 = 1.0F;
 		}
 
@@ -257,7 +241,7 @@ public abstract class EntityFishBase extends EntityTameable {
 		this.limbSwing += this.limbSwingAmount;
 	}
 
-	protected boolean isTargetInWater(){
+	protected boolean isTargetInWater() {
 		return currentTarget == null ? false : worldObj.getBlock(currentTarget.posX, currentTarget.posY, currentTarget.posZ).getMaterial() == Material.water && worldObj.getBlock(currentTarget.posX, currentTarget.posY + 1, currentTarget.posZ).getMaterial() == Material.water;
 	}
 
@@ -270,11 +254,11 @@ public abstract class EntityFishBase extends EntityTameable {
 			var1.openGui(Revival.INSTANCE, 4, this.worldObj, (int) this.posX, (int) this.posY, (int) this.posZ);
 			return true;
 		}
-		if(this.isInsideNautilusShell()){
-			if(var2 != null && var2.getItem() == Items.flint){
-				((EntityNautilus)this).setInShell(false);
-				((EntityNautilus)this).ticksToShell = 60;
-			}else{
+		if (this.isInsideNautilusShell()) {
+			if (var2 != null && var2.getItem() == Items.flint) {
+				((EntityNautilus) this).setInShell(false);
+				((EntityNautilus) this).ticksToShell = 60;
+			} else {
 				this.playSound("random.break", 1, this.getRNG().nextFloat() + 0.8F);
 				return false;
 			}
@@ -295,69 +279,56 @@ public abstract class EntityFishBase extends EntityTameable {
 		return super.interact(var1);
 	}
 
-	public boolean canBreatheUnderwater()
-	{
+	public boolean canBreatheUnderwater() {
 		return true;
 	}
 
-	public boolean getCanSpawnHere()
-	{
+	public boolean getCanSpawnHere() {
 		return this.worldObj.checkNoEntityCollision(this.boundingBox);
 	}
 
-	public int getTalkInterval()
-	{
+	public int getTalkInterval() {
 		return 120;
 	}
 
-	protected boolean canDespawn()
-	{
+	protected boolean canDespawn() {
 		return true;
 	}
 
-	protected int getExperiencePoints(EntityPlayer player)
-	{
+	protected int getExperiencePoints(EntityPlayer player) {
 		return 1 + this.worldObj.rand.nextInt(3);
 	}
 
-	public void onEntityUpdate()
-	{
+	public void onEntityUpdate() {
 		int i = this.getAir();
 		super.onEntityUpdate();
-		if(!this.isInsideNautilusShell()){
-			if (this.isEntityAlive() && !this.isInWater())
-			{
+		if (!this.isInsideNautilusShell()) {
+			if (this.isEntityAlive() && !this.isInWater()) {
 				--i;
 				this.setAir(i);
 
-				if (this.getAir() == -20)
-				{
+				if (this.getAir() == -20) {
 					this.setAir(0);
 					this.attackEntityFrom(DamageSource.drown, 2.0F);
 				}
-			}
-			else
-			{
+			} else {
 				this.setAir(300);
 			}
 		}
 	}
 
-	public EntityAgeable createChild(EntityAgeable entity){
+	public EntityAgeable createChild(EntityAgeable entity) {
 		return null;
 	}
 
-	public boolean isDirectPathBetweenPoints(ChunkCoordinates vec1, ChunkCoordinates vec2)
-	{
+	public boolean isDirectPathBetweenPoints(ChunkCoordinates vec1, ChunkCoordinates vec2) {
 		return vec1.getDistanceSquaredToChunkCoordinates(vec2) > 16;
 	}
 
 	@Override
-	public boolean shouldDismountInWater(Entity rider)
-	{
+	public boolean shouldDismountInWater(Entity rider) {
 		return false;
 	}
 
 	public abstract String getTexture();
 }
-

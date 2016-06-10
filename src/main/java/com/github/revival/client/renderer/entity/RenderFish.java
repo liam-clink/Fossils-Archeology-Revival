@@ -12,26 +12,25 @@ import net.minecraft.util.ResourceLocation;
 
 public class RenderFish extends RenderLiving {
 
+	public RenderFish(ModelBase model) {
+		super(model, 0.3F);
+	}
 
-    public RenderFish(ModelBase model) {
-        super(model, 0.3F);
-    }
+	@Override
+	protected ResourceLocation getEntityTexture(Entity entity) {
+		if (entity instanceof EntityFishBase) {
+			EntityFishBase prehistoric = (EntityFishBase) entity;
+			return new ResourceLocation(prehistoric.getTexture());
+		} else {
+			return null;
+		}
+	}
 
-    @Override
-    protected ResourceLocation getEntityTexture(Entity entity) {
-        if (entity instanceof EntityFishBase) {
-            EntityFishBase prehistoric = (EntityFishBase) entity;
-            return new ResourceLocation(prehistoric.getTexture());
-        } else {
-            return null;
-        }
-    }
-
-    @Override
-    protected void preRenderCallback(EntityLivingBase entity, float f) {
-    	if(((EntityFishBase)entity).isChild()){
-    		GL11.glScalef(0.5F, 0.5F, 0.5F);
-    	}
-    }
+	@Override
+	protected void preRenderCallback(EntityLivingBase entity, float f) {
+		if (((EntityFishBase) entity).isChild()) {
+			GL11.glScalef(0.5F, 0.5F, 0.5F);
+		}
+	}
 
 }

@@ -5,25 +5,25 @@ import com.github.revival.server.enums.EnumPrehistoricAI.Response;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.ai.EntityAIPanic;
 
-public class DinoAIFlee extends EntityAIPanic{
-	EntityNewPrehistoric creature;
+public class DinoAIFlee extends EntityAIPanic {
+	EntityNewPrehistoric prehistoric;
+
 	public DinoAIFlee(EntityNewPrehistoric creature) {
 		super(creature, 1.7);
-		this.creature = creature;
+		this.prehistoric = creature;
 	}
 
-	public boolean shouldExecute()
-	{
-		if(!creature.canWander){
+	public boolean shouldExecute() {
+		if (!prehistoric.isMovementBlocked()) {
 			return false;
 		}
-		if (creature instanceof EntityFlyingPrehistoric && ((EntityFlyingPrehistoric)creature).isFlying()) {
+		if (prehistoric instanceof EntityFlyingPrehistoric && ((EntityFlyingPrehistoric) prehistoric).isFlying()) {
 			return false;
 		}
-		if(this.creature instanceof EntityNewPrehistoric && ((EntityNewPrehistoric)creature).aiResponseType() == Response.SCARED){
+		if (prehistoric.aiResponseType() == Response.SCARED) {
 			return super.shouldExecute();
 		}
-		if(this.creature instanceof EntityNewPrehistoric && ((EntityNewPrehistoric)creature).aiResponseType() == Response.NONE){
+		if (prehistoric.aiResponseType() == Response.NONE) {
 			return super.shouldExecute();
 		}
 		return false;

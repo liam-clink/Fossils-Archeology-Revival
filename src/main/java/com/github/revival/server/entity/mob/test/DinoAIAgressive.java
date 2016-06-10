@@ -43,9 +43,9 @@ public class DinoAIAgressive extends EntityAITarget {
 	@Override
 	public boolean shouldExecute() {
 
-		if(!((EntityNewPrehistoric)this.taskOwner).canWander){
-			if(((EntityNewPrehistoric)this.taskOwner).flockObj != null){
-				if(((EntityNewPrehistoric)this.taskOwner).flockObj.flockLeader != this.taskOwner){
+		if (!((EntityNewPrehistoric) this.taskOwner).isMovementBlocked()) {
+			if (((EntityNewPrehistoric) this.taskOwner).flockObj != null) {
+				if (((EntityNewPrehistoric) this.taskOwner).flockObj.flockLeader != this.taskOwner) {
 					return false;
 				}
 			}
@@ -69,14 +69,14 @@ public class DinoAIAgressive extends EntityAITarget {
 
 	@Override
 	public void startExecuting() {
-		if(((EntityNewPrehistoric)this.taskOwner).ticksTillPlay > 0 && targetEntity instanceof EntityToyBase){
+		if (((EntityNewPrehistoric) this.taskOwner).ticksTillPlay > 0 && targetEntity instanceof EntityToyBase) {
 			this.taskOwner.setAttackTarget(null);
 
-		}else{
+		} else {
 			this.taskOwner.setAttackTarget(this.targetEntity);
-			if(((EntityNewPrehistoric)this.taskOwner).flockObj != null){
-				if(((EntityNewPrehistoric)this.taskOwner).flockObj.flockLeader == this.taskOwner){
-					for(EntityNewPrehistoric prehistoric : ((EntityNewPrehistoric)this.taskOwner).flockObj.flockMembers){
+			if (((EntityNewPrehistoric) this.taskOwner).flockObj != null) {
+				if (((EntityNewPrehistoric) this.taskOwner).flockObj.flockLeader == this.taskOwner) {
+					for (EntityNewPrehistoric prehistoric : ((EntityNewPrehistoric) this.taskOwner).flockObj.flockMembers) {
 						prehistoric.setAttackTarget(this.targetEntity);
 					}
 				}

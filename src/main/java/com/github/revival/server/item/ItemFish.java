@@ -33,14 +33,14 @@ public class ItemFish extends Item {
 		Entity egg = prehistoricEnum.invokeClass(world);
 		if (egg != null) {
 			((Entity) egg).setLocationAndAngles(x, y + 1, z, world.rand.nextFloat() * 360.0F, 0.0F);
-			if(egg instanceof EntityFishBase){
-				EntityFishBase prehistoric = (EntityFishBase)egg;
-				if(isEggs){
+			if (egg instanceof EntityFishBase) {
+				EntityFishBase prehistoric = (EntityFishBase) egg;
+				if (isEggs) {
 					prehistoric.setGrowingAge(-24000);
-				}else{
+				} else {
 					prehistoric.setGrowingAge(12000);
 				}
-				if(!world.isRemote){
+				if (!world.isRemote) {
 					world.spawnEntityInWorld((Entity) egg);
 				}
 			}
@@ -59,7 +59,7 @@ public class ItemFish extends Item {
 		boolean b = spawnCreature(world, dino, (double) ((float) x + 0.5F), (double) ((float) y), (double) ((float) z + 0.5F));
 		if (b && !player.capabilities.isCreativeMode) {
 			--stack.stackSize;
-		}	
+		}
 		return b;
 	}
 }

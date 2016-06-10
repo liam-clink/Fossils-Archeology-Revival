@@ -33,9 +33,9 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 
 public class FossilEntities {
 
-    static int startEntityId = 300;
-    
-	public static void registerEntities() {		
+	static int startEntityId = 300;
+
+	public static void registerEntities() {
 		EntityRegistry.registerModEntity(EntityStoneboard.class, "StoneBoard", 1, Revival.INSTANCE, 80, Integer.MAX_VALUE, false);
 		EntityRegistry.registerModEntity(EntityJavelin.class, "Javelin", 2, Revival.INSTANCE, 80, 3, true);
 		EntityRegistry.registerModEntity(EntityAncientJavelin.class, "AncientJavelin", 3, Revival.INSTANCE, 80, 3, true);
@@ -54,25 +54,23 @@ public class FossilEntities {
 		EntityRegistry.registerModEntity(EntityToyTetheredLog.class, "ToyTetheredLog", 104, Revival.INSTANCE, 80, 3, true);
 		EntityRegistry.registerModEntity(EntityToyScratchingPost.class, "ToyScratchingPost", 105, Revival.INSTANCE, 80, 3, true);
 		for (int i = 0; i < EnumPrehistoric.values().length; i++) {
-			if(EnumPrehistoric.values()[i].type != EnumMobType.CHICKEN && EnumPrehistoric.values()[i].type != EnumMobType.VANILLA)
+			if (EnumPrehistoric.values()[i].type != EnumMobType.CHICKEN && EnumPrehistoric.values()[i].type != EnumMobType.VANILLA)
 				registerSpawnable(EnumPrehistoric.values()[i].getDinoClass(), EnumPrehistoric.values()[i].name(), 200 + i, EnumPrehistoric.values()[i].mainSpawnColor, EnumPrehistoric.values()[i].secondSpawnColor);
 		}
 	}
 
-	public static void registerSpawnable(Class entityClass, String name, int entityId, int mainColor, int subColor){
+	public static void registerSpawnable(Class entityClass, String name, int entityId, int mainColor, int subColor) {
 		EntityRegistry.registerModEntity(entityClass, name, entityId, Revival.INSTANCE, 80, 3, true);
 		int id = getUniqueEntityId();
 		EntityList.IDtoClassMapping.put(id, entityClass);
 		EntityList.entityEggs.put(id, new EntityList.EntityEggInfo(id, mainColor, subColor));
 	}
-	
 
-    public static int getUniqueEntityId() {
-        do {
-            startEntityId++;
-        }
-        while (EntityList.getStringFromID(startEntityId) != null);
+	public static int getUniqueEntityId() {
+		do {
+			startEntityId++;
+		} while (EntityList.getStringFromID(startEntityId) != null);
 
-        return startEntityId;
-    }
+		return startEntityId;
+	}
 }

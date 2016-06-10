@@ -17,7 +17,7 @@ public class DinoAIFindBubbleBlock extends EntityAIBase {
 
 	public DinoAIFindBubbleBlock(EntityNewPrehistoric dinosaur) {
 		this.dinosaur = dinosaur;
-        this.setMutexBits(1);
+		this.setMutexBits(1);
 	}
 
 	@Override
@@ -27,7 +27,7 @@ public class DinoAIFindBubbleBlock extends EntityAIBase {
 
 	@Override
 	public boolean shouldExecute() {
-		if(isThereActuallyABlock()){
+		if (isThereActuallyABlock()) {
 			blockX = dinosaur.getNearestBubbleBlock(48, 0);
 			blockY = dinosaur.getNearestBubbleBlock(48, 1);
 			blockZ = dinosaur.getNearestBubbleBlock(48, 3);
@@ -54,12 +54,11 @@ public class DinoAIFindBubbleBlock extends EntityAIBase {
 		}
 		if (distance < range) {
 			this.dinosaur.getNavigator().tryMoveToXYZ(this.blockX, this.blockY + 1, this.blockZ, 1.0D);
-			for (int i = 0; i < 1; ++i)
-			{
+			for (int i = 0; i < 1; ++i) {
 				double dd = this.dinosaur.getRNG().nextGaussian() * 0.02D;
 				double dd1 = this.dinosaur.getRNG().nextGaussian() * 0.02D;
 				double dd2 = this.dinosaur.getRNG().nextGaussian() * 0.02D;
-				Revival.PROXY.spawnPacketHeartParticles(this.dinosaur.worldObj, (float)(this.dinosaur.posX + (this.dinosaur.getRNG().nextFloat() * this.dinosaur.width * 2.0F) - this.dinosaur.width), (float)(this.dinosaur.posY + 0.5D + (this.dinosaur.getRNG().nextFloat() * this.dinosaur.height)), (float)(this.dinosaur.posZ + (this.dinosaur.getRNG().nextFloat() * this.dinosaur.width * 2.0F) - this.dinosaur.width), dd, dd1, dd2);
+				Revival.PROXY.spawnPacketHeartParticles(this.dinosaur.worldObj, (float) (this.dinosaur.posX + (this.dinosaur.getRNG().nextFloat() * this.dinosaur.width * 2.0F) - this.dinosaur.width), (float) (this.dinosaur.posY + 0.5D + (this.dinosaur.getRNG().nextFloat() * this.dinosaur.height)), (float) (this.dinosaur.posZ + (this.dinosaur.getRNG().nextFloat() * this.dinosaur.width * 2.0F) - this.dinosaur.width), dd, dd1, dd2);
 			}
 		} else {
 			endTask();
@@ -70,7 +69,7 @@ public class DinoAIFindBubbleBlock extends EntityAIBase {
 		blockX = blockY = blockZ = 0;
 	}
 
-	public boolean isThereActuallyABlock(){
+	public boolean isThereActuallyABlock() {
 		return dinosaur.getNearestBubbleBlock(48, 0) != 0 && dinosaur.getNearestBubbleBlock(48, 1) != 0 && dinosaur.getNearestBubbleBlock(48, 2) != 0;
 	}
 

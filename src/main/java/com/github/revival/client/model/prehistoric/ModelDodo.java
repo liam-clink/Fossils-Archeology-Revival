@@ -122,21 +122,21 @@ public class ModelDodo extends ModelNewPrehistoric {
 
 	@Override
 	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
-		AdvancedModelRenderer[] tailParts = {this.tail};
-		AdvancedModelRenderer[] neckParts = {this.neck, this.head};
+		AdvancedModelRenderer[] tailParts = { this.tail };
+		AdvancedModelRenderer[] neckParts = { this.neck, this.head };
 		EntityDodo dodo = (EntityDodo) entity;
 		if (this.isChild) {
-			//this.head.setScale(1.5F, 1.5F, 1.5F); ew scaling
-			//this.beakUpper.setScale(0.5F, 0.5F, 0.5F);
-			//this.beakLower.setScale(0.5F, 0.5F, 0.5F);
+			// this.head.setScale(1.5F, 1.5F, 1.5F); ew scaling
+			// this.beakUpper.setScale(0.5F, 0.5F, 0.5F);
+			// this.beakLower.setScale(0.5F, 0.5F, 0.5F);
 			this.beakLower.rotationPointY = -0.5F;
 			this.beakUpper.rotationPointZ = -3.5F;
 			this.beakLower.rotationPointZ = -3.5F;
 
 		} else {
-			//this.head.setScale(1F, 1F, 1F);
-			//this.beakUpper.setScale(1F, 1F, 1F);
-			//this.beakLower.setScale(1F, 1F, 1F);
+			// this.head.setScale(1F, 1F, 1F);
+			// this.beakUpper.setScale(1F, 1F, 1F);
+			// this.beakLower.setScale(1F, 1F, 1F);
 			this.beakLower.rotationPointY = 0F;
 			this.beakUpper.rotationPointZ = -4F;
 			this.beakLower.rotationPointZ = -4F;
@@ -181,17 +181,12 @@ public class ModelDodo extends ModelNewPrehistoric {
 			sitAnimationPos(leftLeg, sitProgress, 0, 3F, 0);
 
 		}
-		
-		if(((EntityNewPrehistoric) (entity)).isChild()){
-			 this.head.setScale(1.5F, 1.5F, 1.5F);
-		}else{
-			 this.head.setScale(1F, 1F, 1F);
 
-		}
+		if (((EntityNewPrehistoric) (entity)).isChild()) {
+			this.head.setScale(1.5F, 1.5F, 1.5F);
+		} else {
+			this.head.setScale(1F, 1F, 1F);
 
-		if (dodo.getFat() > 0) {
-			float scale = 1 + (dodo.getFat() * 0.1F);
-			//body.setScale(scale, scale, scale);
 		}
 	}
 }

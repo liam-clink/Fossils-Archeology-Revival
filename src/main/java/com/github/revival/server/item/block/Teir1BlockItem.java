@@ -12,14 +12,14 @@ import java.util.List;
 
 public class Teir1BlockItem extends ItemBlock {
 
-    public Teir1BlockItem(Block block) {
-        super(block);
-    }
+	public Teir1BlockItem(Block block) {
+		super(block);
+	}
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
-        list.add(StatCollector.translateToLocal("tile.cultureVat.teir1"));
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
+		list.add(StatCollector.translateToLocal("tile.cultureVat.teir1"));
 
-    }
+	}
 }

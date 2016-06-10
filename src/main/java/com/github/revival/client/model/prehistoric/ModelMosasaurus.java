@@ -107,7 +107,7 @@ public class ModelMosasaurus extends ModelNewPrehistoric {
 	}
 
 	@Override
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) { 
+	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		animate((IAnimatedEntity) entity, f, f1, f2, f3, f4, f5);
 		this.upperBody.render(f5);
 	}
@@ -121,8 +121,8 @@ public class ModelMosasaurus extends ModelNewPrehistoric {
 
 	@Override
 	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
-		AdvancedModelRenderer[] tailParts = {this.lowerBody, this.tail1, this.tail2, this.upperTailFin};
-		AdvancedModelRenderer[] neckParts = {this.neck, this.head};
+		AdvancedModelRenderer[] tailParts = { this.lowerBody, this.tail1, this.tail2, this.upperTailFin };
+		AdvancedModelRenderer[] neckParts = { this.neck, this.head };
 		this.lowerTailFin.rotateAngleY = this.upperTailFin.rotateAngleY;
 		ModelUtils.faceTargetMod(neck, f3, f4, 0.5F);
 		ModelUtils.faceTargetMod(head, f3, f4, 0.5F);

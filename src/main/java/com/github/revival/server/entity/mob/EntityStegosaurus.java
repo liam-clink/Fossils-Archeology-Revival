@@ -1,5 +1,13 @@
 package com.github.revival.server.entity.mob;
 
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.IAttributeInstance;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.util.DamageSource;
+import net.minecraft.world.World;
+
 import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 import com.github.revival.server.enums.EnumPrehistoric;
 import com.github.revival.server.enums.EnumPrehistoricAI.Activity;
@@ -13,25 +21,11 @@ import com.github.revival.server.enums.EnumPrehistoricAI.Stalking;
 import com.github.revival.server.enums.EnumPrehistoricAI.Taming;
 import com.github.revival.server.enums.EnumPrehistoricAI.Untaming;
 import com.github.revival.server.enums.EnumPrehistoricAI.WaterAbility;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.attributes.IAttributeInstance;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.util.DamageSource;
-import net.minecraft.world.World;
 
 public class EntityStegosaurus extends EntityNewPrehistoric {
-	public static final double baseDamage = 2;
-	public static final double maxDamage = 9;
-	public static final double baseHealth = 12;
-	public static final double maxHealth = 66;
-	public static final double baseSpeed = 0.25D;
-	public static final double maxSpeed = 0.3D;
 
 	public EntityStegosaurus(World world) {
-		super(world, EnumPrehistoric.Stegosaurus);
+		super(world, EnumPrehistoric.Stegosaurus, 2, 9, 12, 66, 0.25, 0.3);
 		this.setSize(1.0F, 0.8F);
 		this.pediaScale = 4F;
 		this.nearByMobsAllowed = 7;
@@ -40,20 +34,11 @@ public class EntityStegosaurus extends EntityNewPrehistoric {
 		teenAge = 5;
 		developsResistance = true;
 		breaksBlocks = true;
-		favoriteFood = Item.getItemFromBlock(Blocks.leaves);
 	}
 
 	@Override
 	public int getAttackLength() {
 		return 30;
-	}
-
-	@Override
-	protected void applyEntityAttributes() {
-		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(baseSpeed);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(baseHealth);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(baseDamage);
 	}
 
 	@Override
@@ -144,32 +129,6 @@ public class EntityStegosaurus extends EntityNewPrehistoric {
 	public Item getOrderItem() {
 
 		return Items.stick;
-	}
-
-	@Override
-	public void updateSize() {
-		double healthStep;
-		double attackStep;
-		double speedStep;
-		healthStep = (maxHealth - baseHealth) / (this.getAdultAge() + 1);
-		attackStep = (maxDamage - baseDamage) / (this.getAdultAge() + 1);
-		speedStep = (maxSpeed - baseSpeed) / (this.getAdultAge() + 1);
-
-
-		if (this.getDinoAge() <= this.getAdultAge()) {
-
-			this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(Math.round(baseHealth + (healthStep * this.getDinoAge())));
-			this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(Math.round(baseDamage + (attackStep * this.getDinoAge())));
-			this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(baseSpeed + (speedStep * this.getDinoAge()));
-
-			if (this.isTeen()) {
-				this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.5D);
-			} else if (this.isAdult()) {
-				this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(2.0D);
-			} else {
-				this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.0D);
-			}
-		}
 	}
 
 	@Override

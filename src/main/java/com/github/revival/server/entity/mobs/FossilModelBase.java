@@ -5,12 +5,12 @@ import net.minecraft.util.Vec3;
 
 public abstract class FossilModelBase extends ModelBase {
 
-    public FossilModelBase() {
+	public FossilModelBase() {
 
-    }
+	}
 
-    abstract void setLookVector(Vec3 lookVector);
+	abstract void setLookVector(Vec3 lookVector);
 
-    abstract void setAnimationToRun(int animationIndex);
+	abstract void setAnimationToRun(int animationIndex);
 
 }

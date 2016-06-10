@@ -18,68 +18,69 @@ import java.util.List;
 import java.util.Random;
 
 public class BlockAncientStoneSlab extends BlockSlab {
-    public static final String[] blockStepTypes = {"ancientStone"};
-    private IIcon icon;
+	public static final String[] blockStepTypes = { "ancientStone" };
+	private IIcon icon;
 
-    public BlockAncientStoneSlab(boolean doubleSlabbed) {
-        super(doubleSlabbed, Material.rock);
-        this.setLightOpacity(0);
-        this.useNeighborBrightness = true;
-        setHardness(1.4F);
-        setResistance(7.5F);
-        setStepSound(Block.soundTypeWood);
-        if (doubleSlabbed) {
-            setBlockName(LocalizationStrings.ANCIENT_STONE_DOUBLESLAB_NAME);
-        } else {
-            setBlockName(LocalizationStrings.ANCIENT_STONE_SINGLESLAB_NAME);
-            setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
-        }
-    }
+	public BlockAncientStoneSlab(boolean doubleSlabbed) {
+		super(doubleSlabbed, Material.rock);
+		this.setLightOpacity(0);
+		this.useNeighborBrightness = true;
+		setHardness(1.4F);
+		setResistance(7.5F);
+		setStepSound(Block.soundTypeWood);
+		if (doubleSlabbed) {
+			setBlockName(LocalizationStrings.ANCIENT_STONE_DOUBLESLAB_NAME);
+		} else {
+			setBlockName(LocalizationStrings.ANCIENT_STONE_SINGLESLAB_NAME);
+			setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
+		}
+	}
 
-    @Override
-    public void registerBlockIcons(IIconRegister iconRegister) {
-        this.blockIcon = iconRegister.registerIcon("fossil:Ancient_Stonebricks");
-        this.icon = iconRegister.registerIcon("fossil:Ancient_Stonebricks");
-    }
+	@Override
+	public void registerBlockIcons(IIconRegister iconRegister) {
+		this.blockIcon = iconRegister.registerIcon("fossil:Ancient_Stonebricks");
+		this.icon = iconRegister.registerIcon("fossil:Ancient_Stonebricks");
+	}
 
-    @Override
-    public Item getItemDropped(int var1, Random rand, int var3) {
-        return Item.getItemFromBlock(FABlockRegistry.INSTANCE.ancientStoneSingleSlab);
-    }
+	@Override
+	public Item getItemDropped(int var1, Random rand, int var3) {
+		return Item.getItemFromBlock(FABlockRegistry.INSTANCE.ancientStoneSingleSlab);
+	}
 
-    @Override
-    protected ItemStack createStackedBlock(int meta) {
-        return new ItemStack(FABlockRegistry.INSTANCE.ancientStoneSingleSlab, 2, meta & 7);
-    }
+	@Override
+	protected ItemStack createStackedBlock(int meta) {
+		return new ItemStack(FABlockRegistry.INSTANCE.ancientStoneSingleSlab, 2, meta & 7);
+	}
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public Item getItem(World world, int x, int y, int z) {
-        return Item.getItemFromBlock(this);
-    }
+	@Override
+	@SideOnly(Side.CLIENT)
+	public Item getItem(World world, int x, int y, int z) {
+		return Item.getItemFromBlock(this);
+	}
 
-    /**
-     * Returns the slab block name with step type.
-     */
-    // 1.6.4 - getFullSlabName
-    @Override
-    public String func_150002_b(int meta) {
-        if (meta < 0 || meta >= blockStepTypes.length) {
-            meta = 0;
-        }
+	/**
+	 * Returns the slab block name with step type.
+	 */
+	// 1.6.4 - getFullSlabName
+	@Override
+	public String func_150002_b(int meta) {
+		if (meta < 0 || meta >= blockStepTypes.length) {
+			meta = 0;
+		}
 
-        return super.getUnlocalizedName() + "." + blockStepTypes[meta];
-    }
+		return super.getUnlocalizedName() + "." + blockStepTypes[meta];
+	}
 
-    /**
-     * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
-     */
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void getSubBlocks(Item item, CreativeTabs tab, List subBlocks) {
-        if (item != Item.getItemFromBlock(FABlockRegistry.INSTANCE.ancientStoneDoubleSlab)) {
-            subBlocks.add(new ItemStack(item, 1, 0));
-        }
-    }
+	/**
+	 * returns a list of blocks with the same ID, but different meta (eg: wood
+	 * returns 4 blocks)
+	 */
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void getSubBlocks(Item item, CreativeTabs tab, List subBlocks) {
+		if (item != Item.getItemFromBlock(FABlockRegistry.INSTANCE.ancientStoneDoubleSlab)) {
+			subBlocks.add(new ItemStack(item, 1, 0));
+		}
+	}
 
 }

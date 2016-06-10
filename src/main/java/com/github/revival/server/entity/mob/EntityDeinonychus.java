@@ -33,17 +33,9 @@ import cpw.mods.fml.relauncher.ReflectionHelper;
 
 public class EntityDeinonychus extends EntityNewPrehistoric {
 
-	public static final double baseDamage = 2;
-	public static final double maxDamage = 6;
-	public static final double baseHealth = 10;
-	public static final double maxHealth = 32;
-	public static final double baseSpeed = 0.23D;
-	public static final double maxSpeed = 0.35D;
-
 	public EntityDeinonychus(World world) {
-		super(world, EnumPrehistoric.Deinonychus);
+		super(world, EnumPrehistoric.Deinonychus, 2, 6, 10, 32, 0.23, 0.35);
 		this.nearByMobsAllowed = 9;
-		this.setNavigator();
 		this.pediaScale = 24F;
 		this.tasks.addTask(3, new DinoAILeapAtTarget(this));
 		this.hasFeatherToggle = true;
@@ -54,21 +46,11 @@ public class EntityDeinonychus extends EntityNewPrehistoric {
 		teenAge = 4;
 		developsResistance = false;
 		breaksBlocks = false;
-		favoriteFood = Items.chicken;
-		jumpLength = 5;
 	}
 
 	@Override
 	public int getAttackLength() {
 		return 35;
-	}
-
-	@Override
-	protected void applyEntityAttributes() {
-		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(baseSpeed);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(baseHealth);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(baseDamage);
 	}
 
 	@Override
@@ -154,24 +136,6 @@ public class EntityDeinonychus extends EntityNewPrehistoric {
 	}
 
 	@Override
-	public void updateSize() {
-		double healthStep;
-		double attackStep;
-		double speedStep;
-		healthStep = (maxHealth - baseHealth) / (this.getAdultAge() + 1);
-		attackStep = (maxDamage - baseDamage) / (this.getAdultAge() + 1);
-		speedStep = (maxSpeed - baseSpeed) / (this.getAdultAge() + 1);
-
-
-		if (this.getDinoAge() <= this.getAdultAge()) {
-
-			this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(Math.round(baseHealth + (healthStep * this.getDinoAge())));
-			this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(Math.round(baseDamage + (attackStep * this.getDinoAge())));
-			this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(baseSpeed + (speedStep * this.getDinoAge()));
-		}
-	}
-
-	@Override
 	public int getAdultAge() {
 		return 10;
 	}
@@ -207,8 +171,7 @@ public class EntityDeinonychus extends EntityNewPrehistoric {
 		if (this.getAttackTarget() != null) {
 			if (this.getAttackTarget() == entity && this.getAnimation() == ATTACK_ANIMATION && !onGround && this.ridingEntity != entity && (entity instanceof EntityToyBase)) {
 				entity.attackEntityFrom(DamageSource.causeMobDamage(this), 1);
-			}
-			else if (this.getAttackTarget() == entity && this.getAnimation() == ATTACK_ANIMATION && !onGround && this.ridingEntity != entity) {
+			} else if (this.getAttackTarget() == entity && this.getAnimation() == ATTACK_ANIMATION && !onGround && this.ridingEntity != entity) {
 				this.mountEntity(entity);
 			}
 		}

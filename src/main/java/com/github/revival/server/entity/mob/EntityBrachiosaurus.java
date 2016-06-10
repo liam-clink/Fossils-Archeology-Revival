@@ -22,15 +22,9 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
 public class EntityBrachiosaurus extends EntityNewPrehistoric {
-	public static final double baseDamage = 2;
-	public static final double maxDamage = 46;
-	public static final double baseHealth = 20;
-	public static final double maxHealth = 200;
-	public static final double baseSpeed = 0.2;
-	public static final double maxSpeed = 0.45;
 
 	public EntityBrachiosaurus(World world) {
-		super(world, EnumPrehistoric.Brachiosaurus);
+		super(world, EnumPrehistoric.Brachiosaurus, 2, 46, 20, 200, 0.2, 0.45);
 		this.setSize(1.5F, 1.7F);
 		this.pediaScale = 0.7F;
 		this.nearByMobsAllowed = 10;
@@ -39,20 +33,11 @@ public class EntityBrachiosaurus extends EntityNewPrehistoric {
 		teenAge = 9;
 		developsResistance = true;
 		breaksBlocks = true;
-		favoriteFood = Items.wheat;
 	}
 
 	@Override
 	public int getAttackLength() {
 		return 40;
-	}
-
-	@Override
-	protected void applyEntityAttributes() {
-		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(baseSpeed);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(baseHealth);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(baseDamage);
 	}
 
 	@Override
@@ -135,33 +120,6 @@ public class EntityBrachiosaurus extends EntityNewPrehistoric {
 	public Item getOrderItem() {
 
 		return Items.stick;
-	}
-
-	@Override
-	public void updateSize() {
-
-		double healthStep;
-		double attackStep;
-		double speedStep;
-		healthStep = (maxHealth - baseHealth) / (this.getAdultAge() + 1);
-		attackStep = (maxDamage - baseDamage) / (this.getAdultAge() + 1);
-		speedStep = (maxSpeed - baseSpeed) / (this.getAdultAge() + 1);
-
-
-		if (this.getDinoAge() <= this.getAdultAge()) {
-
-			this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(Math.round(baseHealth + (healthStep * this.getDinoAge())));
-			this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(Math.round(baseDamage + (attackStep * this.getDinoAge())));
-			this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(baseSpeed + (speedStep * this.getDinoAge()));
-
-			if (this.isTeen()) {
-				this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.5D);
-			} else if (this.isAdult()) {
-				this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(2.0D);
-			} else {
-				this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.0D);
-			}
-		}
 	}
 
 	@Override

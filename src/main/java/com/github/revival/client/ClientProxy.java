@@ -170,10 +170,11 @@ import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 
-
 public class ClientProxy extends ServerProxy {
 	private static final ModelAncientHelmet helmetModel = new ModelAncientHelmet(1.0f);
-	// private JsonTabulaModel velociraptor = ModelHelper.parseModelFromJson(Revival.class.getResourceAsStream("/assets/fossil/models/Velociraptor.json"));
+
+	// private JsonTabulaModel velociraptor =
+	// ModelHelper.parseModelFromJson(Revival.class.getResourceAsStream("/assets/fossil/models/Velociraptor.json"));
 
 	@Override
 	public void init() {
@@ -298,7 +299,7 @@ public class ClientProxy extends ServerProxy {
 	@Override
 	public void stopSound(String soundName) {
 		ISound sound = PositionedSoundRecord.func_147673_a(new ResourceLocation(soundName));
-		if(Minecraft.getMinecraft().getSoundHandler().isSoundPlaying(sound))
+		if (Minecraft.getMinecraft().getSoundHandler().isSoundPlaying(sound))
 			Minecraft.getMinecraft().getSoundHandler().stopSound(sound);
 	}
 
@@ -319,20 +320,20 @@ public class ClientProxy extends ServerProxy {
 	public void calculateChainBuffer(EntityFishBase entity) {
 		entity.chainBuffer.calculateChainSwingBuffer(70, 10, 4, entity);
 	}
-	
-	public void spawnBubbleParticles(World world, float f, float f1, float f2, double motionX, double motionY, double motionZ){
+
+	public void spawnBubbleParticles(World world, float f, float f1, float f2, double motionX, double motionY, double motionZ) {
 		Minecraft.getMinecraft().effectRenderer.addEffect(new BubbleFX(world, f, f1, f2, motionX, motionY, motionZ));
 	}
 
-	public void spawnPacketHeartParticles(World world, float f, float f1, float f2, double motionX, double motionY, double motionZ){
+	public void spawnPacketHeartParticles(World world, float f, float f1, float f2, double motionX, double motionY, double motionZ) {
 		Minecraft.getMinecraft().effectRenderer.addEffect(new HeartFX(world, f, f1, f2, motionX, motionY, motionZ));
 	}
 
-	public void spawnPacketItemParticles(World world, float f, float f1, float f2, double motionX, double motionY, double motionZ, Item item){
+	public void spawnPacketItemParticles(World world, float f, float f1, float f2, double motionX, double motionY, double motionZ, Item item) {
 		Minecraft.getMinecraft().effectRenderer.addEffect(new EntityBreakingFX(world, f, f1, f2, motionX, motionY, motionZ, item, 0));
 	}
 
-	public void spawnPacketBlockParticles(World world, float f, float f1, float f2, double motionX, double motionY, double motionZ, Block block){
+	public void spawnPacketBlockParticles(World world, float f, float f1, float f2, double motionX, double motionY, double motionZ, Block block) {
 		Minecraft.getMinecraft().effectRenderer.addEffect(new EntityBlockDustFX(world, f, f1, f2, motionX, motionY, motionZ, block, 0));
 	}
 }

@@ -44,16 +44,16 @@ public class DinoAIRunAway extends EntityAIBase {
 		if (list.isEmpty()) {
 			return false;
 		}
-		for(int i = 0; i < list.size(); i++){
-			EntityLivingBase mob = (EntityLivingBase)list.get(i);
-			if(this.dinosaur.canRunFrom(mob)){
+		for (int i = 0; i < list.size(); i++) {
+			EntityLivingBase mob = (EntityLivingBase) list.get(i);
+			if (this.dinosaur.canRunFrom(mob)) {
 				secondList.add(mob);
 			}
 		}
 		if (secondList.isEmpty()) {
 			return false;
 		}
-		this.closestLivingEntity = (Entity)secondList.get(0);
+		this.closestLivingEntity = (Entity) secondList.get(0);
 
 		Vec3 vec3 = RandomPositionGenerator.findRandomTargetBlockAwayFrom(this.dinosaur, 16, 7, Vec3.createVectorHelper(this.closestLivingEntity.posX, this.closestLivingEntity.posY, this.closestLivingEntity.posZ));
 		if (vec3 == null) {
@@ -81,6 +81,7 @@ public class DinoAIRunAway extends EntityAIBase {
 	public void resetTask() {
 		this.closestLivingEntity = null;
 	}
+
 	@Override
 	public void updateTask() {
 		if (this.dinosaur.getDistanceSqToEntity(this.closestLivingEntity) < 49.0D) {

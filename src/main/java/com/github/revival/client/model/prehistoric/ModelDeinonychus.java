@@ -236,7 +236,7 @@ public class ModelDeinonychus extends ModelNewPrehistoric {
 	}
 
 	public void animate(IAnimatedEntity entity, float f, float f1, float f2, float f3, float f4, float f5) {
-		AdvancedModelRenderer[] neckParts = {this.neck, this.head};
+		AdvancedModelRenderer[] neckParts = { this.neck, this.head };
 		animator.update(entity);
 		blockMovement(f, f1, f2, f3, f4, f5, (Entity) entity);
 		this.resetToDefaultPose();
@@ -276,10 +276,10 @@ public class ModelDeinonychus extends ModelNewPrehistoric {
 
 	@Override
 	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
-		AdvancedModelRenderer[] tailParts = {this.tail1, this.tail2, this.tail3};
-		AdvancedModelRenderer[] neckParts = {this.neck, this.head};
-		AdvancedModelRenderer[] leftArmParts = {this.leftUpperArm, this.leftLowerArm};
-		AdvancedModelRenderer[] rightArmParts = {this.rightUpperArm, this.rightLowerArm};
+		AdvancedModelRenderer[] tailParts = { this.tail1, this.tail2, this.tail3 };
+		AdvancedModelRenderer[] neckParts = { this.neck, this.head };
+		AdvancedModelRenderer[] leftArmParts = { this.leftUpperArm, this.leftLowerArm };
+		AdvancedModelRenderer[] rightArmParts = { this.rightUpperArm, this.rightLowerArm };
 
 		ModelUtils.faceTargetMod(neck, f3, f4, 0.5F);
 		ModelUtils.faceTargetMod(head, f3, f4, 0.5F);
@@ -317,16 +317,16 @@ public class ModelDeinonychus extends ModelNewPrehistoric {
 			sitAnimationRotation(rightLeg, sitProgress, -(float) Math.toRadians(30.0D), 0, 0);
 			sitAnimationRotation(leftLeg, sitProgress, -(float) Math.toRadians(30.0D), 0, 0);
 			sitAnimationRotation(leftUpperArm, sitProgress, (float) Math.toRadians(7D), (float) Math.toRadians(13.0D), -((float) Math.toRadians(76.0D)));
-			sitAnimationRotation(lowerBody, sitProgress, -((float)Math.toRadians(5.22D)), 0, 0);
+			sitAnimationRotation(lowerBody, sitProgress, -((float) Math.toRadians(5.22D)), 0, 0);
 			sitAnimationRotation(rightUpperArm, sitProgress, (float) Math.toRadians(7D), -((float) Math.toRadians(13.04D)), (float) Math.toRadians(76.0D));
-			sitAnimationRotation(tail1, sitProgress, -((float)Math.toRadians(9.33D)), -((float)Math.toRadians(5.22D)), 0);
-			sitAnimationRotation(neck, sitProgress, -((float)Math.toRadians(15D)), 0, 0);
-			sitAnimationRotation(tail2, sitProgress, (float)Math.toRadians(5.22D), -((float)Math.toRadians(10.43D)), -((float)Math.toRadians(5.22D)));
+			sitAnimationRotation(tail1, sitProgress, -((float) Math.toRadians(9.33D)), -((float) Math.toRadians(5.22D)), 0);
+			sitAnimationRotation(neck, sitProgress, -((float) Math.toRadians(15D)), 0, 0);
+			sitAnimationRotation(tail2, sitProgress, (float) Math.toRadians(5.22D), -((float) Math.toRadians(10.43D)), -((float) Math.toRadians(5.22D)));
 			sitAnimationRotation(leftLowerArm, sitProgress, -(float) Math.toRadians(10D), 0, 0);
 			sitAnimationRotation(rightLowerArm, sitProgress, -(float) Math.toRadians(10D), 0, 0);
-			sitAnimationRotation(head, sitProgress, (float)Math.toRadians(90D), (float)Math.toRadians(15D), (float)Math.toRadians(23.48D));
-			sitAnimationRotation(tail3, sitProgress, (float)Math.toRadians(5.22D), -((float)Math.toRadians(15.65D)), 0);
-			sitAnimationRotation(upperBody, sitProgress, (float)Math.toRadians(13.13D), 0, 0);
+			sitAnimationRotation(head, sitProgress, (float) Math.toRadians(90D), (float) Math.toRadians(15D), (float) Math.toRadians(23.48D));
+			sitAnimationRotation(tail3, sitProgress, (float) Math.toRadians(5.22D), -((float) Math.toRadians(15.65D)), 0);
+			sitAnimationRotation(upperBody, sitProgress, (float) Math.toRadians(13.13D), 0, 0);
 			sitAnimationPos(lowerBody, sitProgress, 0F, 17.50F - ModelUtils.getDefaultPositionY(lowerBody), 0F);
 			sitAnimationPos(rightThigh, sitProgress, 0F, 16.20F - ModelUtils.getDefaultPositionY(rightThigh), 0F);
 			sitAnimationPos(leftThigh, sitProgress, 0F, 16.20F - ModelUtils.getDefaultPositionY(leftThigh), 0F);
@@ -334,29 +334,29 @@ public class ModelDeinonychus extends ModelNewPrehistoric {
 		{
 			float sitProgress = ((EntityNewPrehistoric) (entity)).climbProgress;
 
-			sitAnimationRotation(leftLowerArm, sitProgress, (float)Math.toRadians(40.35D), 0, 0);
-			sitAnimationRotation(leftLeg, sitProgress, -(float)Math.toRadians(40.0D), 0, 0);
-			sitAnimationRotation(rightFoot, sitProgress, ((float)Math.toRadians(30.0D)), 0, 0);
-			sitAnimationRotation(upperBody, sitProgress, (float)Math.toRadians(13.13D), 0, 0);
-			sitAnimationRotation(leftFoot, sitProgress, ((float)Math.toRadians(30.0D)), 0, 0);
-			sitAnimationRotation(rightThigh, sitProgress, -((float)Math.toRadians(90.0D)), 0, 0);
-			sitAnimationRotation(rightLowerArm, sitProgress, (float)Math.toRadians(40.35D), 0, 0);
-			sitAnimationRotation(rightToeClaw1, sitProgress, ((float)Math.toRadians(50.0D)), 0, 0);
-			sitAnimationRotation(tail3, sitProgress, (float)Math.toRadians(5.22D), 0, 0);
-			sitAnimationRotation(leftUpperArm, sitProgress, (float)Math.toRadians(0.39D), (float)Math.toRadians(13.0D), -((float)Math.toRadians(50.0D)));
-			sitAnimationRotation(neck, sitProgress, ((float)Math.toRadians(28.7D)), 0, 0);
-			sitAnimationRotation(rightUpperArm, sitProgress, (float)Math.toRadians(7.83D), -((float)Math.toRadians(13.0D)), (float)Math.toRadians(50.0D));
-			sitAnimationRotation(tail2, sitProgress, -((float)Math.toRadians(2.61D)), 0, 0);
-			sitAnimationRotation(leftToeClaw1, sitProgress, ((float)Math.toRadians(50.0D)), 0, 0);
-			sitAnimationRotation(rightLeg, sitProgress, -(float)Math.toRadians(40.0D), 0, 0);
-			sitAnimationRotation(head, sitProgress, -(float)Math.toRadians(33.91D), 0, 0);
-			sitAnimationRotation(leftThigh, sitProgress, -((float)Math.toRadians(90.0D)), 0, 0);
-			sitAnimationRotation(lowerBody, sitProgress, -((float)Math.toRadians(90.0D)), 0, 0);
-			sitAnimationRotation(tail1, sitProgress, (float)Math.toRadians(5.22D), 0, 0);
+			sitAnimationRotation(leftLowerArm, sitProgress, (float) Math.toRadians(40.35D), 0, 0);
+			sitAnimationRotation(leftLeg, sitProgress, -(float) Math.toRadians(40.0D), 0, 0);
+			sitAnimationRotation(rightFoot, sitProgress, ((float) Math.toRadians(30.0D)), 0, 0);
+			sitAnimationRotation(upperBody, sitProgress, (float) Math.toRadians(13.13D), 0, 0);
+			sitAnimationRotation(leftFoot, sitProgress, ((float) Math.toRadians(30.0D)), 0, 0);
+			sitAnimationRotation(rightThigh, sitProgress, -((float) Math.toRadians(90.0D)), 0, 0);
+			sitAnimationRotation(rightLowerArm, sitProgress, (float) Math.toRadians(40.35D), 0, 0);
+			sitAnimationRotation(rightToeClaw1, sitProgress, ((float) Math.toRadians(50.0D)), 0, 0);
+			sitAnimationRotation(tail3, sitProgress, (float) Math.toRadians(5.22D), 0, 0);
+			sitAnimationRotation(leftUpperArm, sitProgress, (float) Math.toRadians(0.39D), (float) Math.toRadians(13.0D), -((float) Math.toRadians(50.0D)));
+			sitAnimationRotation(neck, sitProgress, ((float) Math.toRadians(28.7D)), 0, 0);
+			sitAnimationRotation(rightUpperArm, sitProgress, (float) Math.toRadians(7.83D), -((float) Math.toRadians(13.0D)), (float) Math.toRadians(50.0D));
+			sitAnimationRotation(tail2, sitProgress, -((float) Math.toRadians(2.61D)), 0, 0);
+			sitAnimationRotation(leftToeClaw1, sitProgress, ((float) Math.toRadians(50.0D)), 0, 0);
+			sitAnimationRotation(rightLeg, sitProgress, -(float) Math.toRadians(40.0D), 0, 0);
+			sitAnimationRotation(head, sitProgress, -(float) Math.toRadians(33.91D), 0, 0);
+			sitAnimationRotation(leftThigh, sitProgress, -((float) Math.toRadians(90.0D)), 0, 0);
+			sitAnimationRotation(lowerBody, sitProgress, -((float) Math.toRadians(90.0D)), 0, 0);
+			sitAnimationRotation(tail1, sitProgress, (float) Math.toRadians(5.22D), 0, 0);
 			sitAnimationPos(lowerBody, sitProgress, 0F, 15F - ModelUtils.getDefaultPositionY(lowerBody), -3.4F);
-			sitAnimationPos(rightThigh, sitProgress, 0F, 23F - ModelUtils.getDefaultPositionY(rightThigh),  -9.7F);
+			sitAnimationPos(rightThigh, sitProgress, 0F, 23F - ModelUtils.getDefaultPositionY(rightThigh), -9.7F);
 			sitAnimationPos(leftThigh, sitProgress, 0F, 23F - ModelUtils.getDefaultPositionY(leftThigh), -9.7F);
-			if(sitProgress >= 10){
+			if (sitProgress >= 10) {
 				this.walk(leftThigh, speed2, -0.8F, false, 0F, -0.4F, entity.ticksExisted, 1);
 				this.walk(leftLeg, speed2, 0.2F, true, 0F, -0.6F, entity.ticksExisted, 1);
 				this.walk(leftFoot, speed2, -0.4F, true, -0.5F, -0.2F, entity.ticksExisted, 1);

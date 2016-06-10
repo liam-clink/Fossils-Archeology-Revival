@@ -68,7 +68,7 @@ public class ModelNautilus extends AdvancedModelBase {
 	}
 
 	@Override
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) { 
+	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
 		this.shell.render(f5);
 	}
@@ -79,13 +79,13 @@ public class ModelNautilus extends AdvancedModelBase {
 		float speed = 0.2F;
 		shell.rotateAngleY = (float) Math.toRadians(180);
 
-		if(!entity.isInWater()){
+		if (!entity.isInWater()) {
 			this.shell.rotateAngleZ = (float) Math.toRadians(90);
-		}else{
+		} else {
 			this.bob(shell, -speed, 0.5F, true, entity.ticksExisted, 1);
 		}
 		{
-			float shellProgress = ((EntityNautilus)entity).shellProgress;
+			float shellProgress = ((EntityNautilus) entity).shellProgress;
 			sitAnimationRotation(flap, shellProgress, (float) Math.toRadians(75), 0, 0);
 			sitAnimationRotation(tenticle_0, shellProgress, -(float) Math.toRadians(20), 0, 0);
 			sitAnimationRotation(tenticle_1, shellProgress, -(float) Math.toRadians(25), 0, 0);
@@ -101,7 +101,7 @@ public class ModelNautilus extends AdvancedModelBase {
 			sitAnimationOffset(tenticle_4, shellProgress, 0.1F, 0, -0.25F);
 			sitAnimationOffset(tenticle_5, shellProgress, 0.1F, 0, -0.25F);
 			sitAnimationOffset(head, shellProgress, 0, 0, -0.35F);
-			if(shellProgress == 0){
+			if (shellProgress == 0) {
 				tenticle_0.swing(speed, 0.4F, false, 0, 0, entity.ticksExisted, 1);
 				tenticle_1.swing(speed, 0.4F, false, 0, 0, entity.ticksExisted, 1);
 				tenticle_2.swing(speed, 0.4F, false, 0, 0, entity.ticksExisted, 1);
@@ -111,22 +111,22 @@ public class ModelNautilus extends AdvancedModelBase {
 			}
 		}
 	}
-	
-		public void sitAnimationOffset(AdvancedModelRenderer modelRenderer, float progress, float x, float y, float z){
-			modelRenderer.offsetX -= progress * x / 20.0F;
-			modelRenderer.offsetY -= progress * y / 20.0F;
-			modelRenderer.offsetZ -= progress * z / 20.0F;
-		}
 
-		public void sitAnimationRotation(AdvancedModelRenderer modelRenderer, float sitProgress, float rotX, float rotY, float rotZ) {
-			modelRenderer.rotateAngleX = sitProgress * rotX / 20.0F;
-			modelRenderer.rotateAngleY += sitProgress * rotY / 20.0F;
-			modelRenderer.rotateAngleZ += sitProgress * rotZ / 20.0F;
-		}
-
-		public void setRotateAngle(AdvancedModelRenderer modelRenderer, float x, float y, float z) {
-			modelRenderer.rotateAngleX = x;
-			modelRenderer.rotateAngleY = y;
-			modelRenderer.rotateAngleZ = z;
-		}
+	public void sitAnimationOffset(AdvancedModelRenderer modelRenderer, float progress, float x, float y, float z) {
+		modelRenderer.offsetX -= progress * x / 20.0F;
+		modelRenderer.offsetY -= progress * y / 20.0F;
+		modelRenderer.offsetZ -= progress * z / 20.0F;
 	}
+
+	public void sitAnimationRotation(AdvancedModelRenderer modelRenderer, float sitProgress, float rotX, float rotY, float rotZ) {
+		modelRenderer.rotateAngleX = sitProgress * rotX / 20.0F;
+		modelRenderer.rotateAngleY += sitProgress * rotY / 20.0F;
+		modelRenderer.rotateAngleZ += sitProgress * rotZ / 20.0F;
+	}
+
+	public void setRotateAngle(AdvancedModelRenderer modelRenderer, float x, float y, float z) {
+		modelRenderer.rotateAngleX = x;
+		modelRenderer.rotateAngleY = y;
+		modelRenderer.rotateAngleZ = z;
+	}
+}

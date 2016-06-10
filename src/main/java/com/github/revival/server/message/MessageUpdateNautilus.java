@@ -15,40 +15,42 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class MessageUpdateNautilus extends AbstractMessage<MessageUpdateNautilus> {
 
-    public int dinosaurID;
-    public boolean isInShell;
+	public int dinosaurID;
+	public boolean isInShell;
 
-    public MessageUpdateNautilus(int dinosaurID, boolean isInShell) {
-        this.dinosaurID = dinosaurID;
-        this.isInShell = isInShell;
-    }
+	public MessageUpdateNautilus(int dinosaurID, boolean isInShell) {
+		this.dinosaurID = dinosaurID;
+		this.isInShell = isInShell;
+	}
 
-    public MessageUpdateNautilus() {}
+	public MessageUpdateNautilus() {
+	}
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void onClientReceived(Minecraft client, MessageUpdateNautilus message, EntityPlayer player, MessageContext messageContext) {
-        Entity entity = player.worldObj.getEntityByID(message.dinosaurID);
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void onClientReceived(Minecraft client, MessageUpdateNautilus message, EntityPlayer player, MessageContext messageContext) {
+		Entity entity = player.worldObj.getEntityByID(message.dinosaurID);
 
-        if (entity instanceof EntityNautilus) {
-        	EntityNautilus prehistoric = (EntityNautilus) entity;
-            prehistoric.isInShell = message.isInShell;
-        }
-    }
+		if (entity instanceof EntityNautilus) {
+			EntityNautilus prehistoric = (EntityNautilus) entity;
+			prehistoric.isInShell = message.isInShell;
+		}
+	}
 
-    @Override
-    public void onServerReceived(MinecraftServer server, MessageUpdateNautilus message, EntityPlayer player, MessageContext messageContext) {}
+	@Override
+	public void onServerReceived(MinecraftServer server, MessageUpdateNautilus message, EntityPlayer player, MessageContext messageContext) {
+	}
 
-    @Override
-    public void fromBytes(ByteBuf buf) {
-        dinosaurID = buf.readInt();
-        isInShell = buf.readBoolean();
+	@Override
+	public void fromBytes(ByteBuf buf) {
+		dinosaurID = buf.readInt();
+		isInShell = buf.readBoolean();
 
-    }
+	}
 
-    @Override
-    public void toBytes(ByteBuf buf) {
-        buf.writeInt(dinosaurID);
-        buf.writeBoolean(isInShell);
-    }
+	@Override
+	public void toBytes(ByteBuf buf) {
+		buf.writeInt(dinosaurID);
+		buf.writeBoolean(isInShell);
+	}
 }

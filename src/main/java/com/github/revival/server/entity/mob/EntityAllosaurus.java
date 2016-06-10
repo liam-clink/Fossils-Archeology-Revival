@@ -25,15 +25,9 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 public class EntityAllosaurus extends EntityNewPrehistoric {
-	public static final double baseDamage = 2;
-	public static final double maxDamage = 11;
-	public static final double baseHealth = 10;
-	public static final double maxHealth = 58;
-	public static final double baseSpeed = 0.25D;
-	public static final double maxSpeed = 0.42D;
-
+	
 	public EntityAllosaurus(World world) {
-		super(world, EnumPrehistoric.Allosaurus);
+		super(world, EnumPrehistoric.Allosaurus, 2, 11, 10, 58, 0.25, 0.42);
 		this.setSize(1.4F, 1.3F);
 		this.pediaScale = 3F;
 		this.nearByMobsAllowed = 5;
@@ -41,38 +35,11 @@ public class EntityAllosaurus extends EntityNewPrehistoric {
 		maxSize = 3.1F;
 		developsResistance = true;
 		breaksBlocks = true;
-		favoriteFood = Items.beef;
 	}
 
 	@Override
 	public int getAttackLength() {
 		return 30;
-	}
-
-	@Override
-	public void updateSize() {
-		double healthStep;
-		double attackStep;
-		double speedStep;
-		healthStep = (maxHealth - baseHealth) / (this.getAdultAge() + 1);
-		attackStep = (maxDamage - baseDamage) / (this.getAdultAge() + 1);
-		speedStep = (maxSpeed - baseSpeed) / (this.getAdultAge() + 1);
-
-
-		if (this.getDinoAge() <= this.getAdultAge()) {
-
-			this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(Math.round(baseHealth + (healthStep * this.getDinoAge())));
-			this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(Math.round(baseDamage + (attackStep * this.getDinoAge())));
-			this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(baseSpeed + (speedStep * this.getDinoAge()));
-
-			if (this.isTeen()) {
-				this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.5D);
-			} else if (this.isAdult()) {
-				this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(2.0D);
-			} else {
-				this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.0D);
-			}
-		}
 	}
 
 	@Override
@@ -82,14 +49,6 @@ public class EntityAllosaurus extends EntityNewPrehistoric {
 
 	@Override
 	public void setSpawnValues() {
-	}
-
-	@Override
-	protected void applyEntityAttributes() {
-		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(baseSpeed);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(baseHealth);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(baseDamage);
 	}
 
 	@Override
@@ -173,7 +132,6 @@ public class EntityAllosaurus extends EntityNewPrehistoric {
 			this.attackEntityAsMob(this.getAttackTarget());
 		}
 	}
-
 
 	@Override
 	public boolean attackEntityAsMob(Entity entity) {

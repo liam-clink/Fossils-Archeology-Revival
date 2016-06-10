@@ -19,7 +19,6 @@ import com.github.revival.server.enums.EnumPrehistoric;
 import com.github.revival.server.item.FAItemRegistry;
 import com.github.revival.server.message.MessageUpdateNautilus;
 
-
 public class EntityNautilus extends EntityFishBase {
 
 	public float shellProgress;
@@ -76,7 +75,7 @@ public class EntityNautilus extends EntityFishBase {
 	}
 
 	@Override
-	public void onLivingUpdate(){
+	public void onLivingUpdate() {
 		super.onLivingUpdate();
 		boolean inshell = isInShell();
 		if (inshell && shellProgress < 20.0F) {
@@ -84,18 +83,17 @@ public class EntityNautilus extends EntityFishBase {
 		} else if (!inshell && shellProgress > 0.0F) {
 			shellProgress -= 0.5F;
 		}
-		if(ticksToShell > 0){
+		if (ticksToShell > 0) {
 			ticksToShell--;
 		}
-		if(!this.worldObj.isRemote){
-			if(isThereNearbyMobs() && this.ticksToShell == 0 || !this.isInWater() && this.onGround && this.ticksToShell == 0){
-				if(!this.isInShell()){
+		if (!this.worldObj.isRemote) {
+			if (isThereNearbyMobs() && this.ticksToShell == 0 || !this.isInWater() && this.onGround && this.ticksToShell == 0) {
+				if (!this.isInShell()) {
 					this.setInShell(true);
 					Revival.NETWORK_WRAPPER.sendToAll(new MessageUpdateNautilus(this.getEntityId(), true));
 				}
-			}
-			else{
-				if(this.isInShell()){
+			} else {
+				if (this.isInShell()) {
 					this.setInShell(false);
 					Revival.NETWORK_WRAPPER.sendToAll(new MessageUpdateNautilus(this.getEntityId(), false));
 				}
@@ -123,31 +121,30 @@ public class EntityNautilus extends EntityFishBase {
 		if (list.isEmpty()) {
 			return false;
 		} else {
-			for(Entity entity : list){
+			for (Entity entity : list) {
 				return isAScaryAnimal(entity);
 			}
 			return false;
 		}
 	}
 
-	public boolean isAScaryAnimal(Entity entity){
-		if(entity instanceof EntityPlayer){
+	public boolean isAScaryAnimal(Entity entity) {
+		if (entity instanceof EntityPlayer) {
 			return true;
 		}
-		if(entity instanceof EntityNewPrehistoric){
-			return ((EntityNewPrehistoric)entity).selfType.diet.fearIndex >= 2;
+		if (entity instanceof EntityNewPrehistoric) {
+			return ((EntityNewPrehistoric) entity).type.diet.fearIndex >= 2;
 		}
 		return entity.width >= 1.2;
 	}
-	
+
 	@Override
-	public boolean attackEntityFrom(DamageSource dmg, float f)
-	{
-		if(f > 0 && this.isInShell() && dmg.getEntity() != null){
+	public boolean attackEntityFrom(DamageSource dmg, float f) {
+		if (f > 0 && this.isInShell() && dmg.getEntity() != null) {
 			this.playSound("random.break", 1, this.getRNG().nextFloat() + 0.8F);
 			return false;
 		}
-		if(!this.isInShell()){
+		if (!this.isInShell()) {
 			this.setInShell(true);
 			Revival.NETWORK_WRAPPER.sendToAll(new MessageUpdateNautilus(this.getEntityId(), true));
 		}

@@ -21,18 +21,10 @@ import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
-
 public class EntityAnkylosaurus extends EntityNewPrehistoric {
 
-	public static final double baseDamage = 2;
-	public static final double maxDamage = 9;
-	public static final double baseHealth = 25;
-	public static final double maxHealth = 70;
-	public static final double baseSpeed = 0.15D;
-	public static final double maxSpeed = 0.25D;
-
 	public EntityAnkylosaurus(World world) {
-		super(world, EnumPrehistoric.Ankylosaurus);
+		super(world, EnumPrehistoric.Ankylosaurus, 2, 9, 25, 70, 0.15, 0.25);
 		this.setSize(2.2F, 1.0F);
 		this.pediaScale = 3F;
 		this.nearByMobsAllowed = 6;
@@ -41,39 +33,11 @@ public class EntityAnkylosaurus extends EntityNewPrehistoric {
 		teenAge = 5;
 		developsResistance = true;
 		breaksBlocks = true;
-		favoriteFood = Items.apple;
 	}
 
 	@Override
 	public int getAttackLength() {
 		return 30;
-	}
-
-	@Override
-	public void updateSize() {
-
-		double healthStep;
-		double attackStep;
-		double speedStep;
-		healthStep = (maxHealth - baseHealth) / (this.getAdultAge() + 1);
-		attackStep = (maxDamage - baseDamage) / (this.getAdultAge() + 1);
-		speedStep = (maxSpeed - baseSpeed) / (this.getAdultAge() + 1);
-
-
-		if (this.getDinoAge() <= this.getAdultAge()) {
-
-			this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(Math.round(baseHealth + (healthStep * this.getDinoAge())));
-			this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(Math.round(baseDamage + (attackStep * this.getDinoAge())));
-			this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(baseSpeed + (speedStep * this.getDinoAge()));
-
-			if (this.isTeen()) {
-				this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.5D);
-			} else if (this.isAdult()) {
-				this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(2.0D);
-			} else {
-				this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.0D);
-			}
-		}
 	}
 
 	@Override
@@ -84,15 +48,7 @@ public class EntityAnkylosaurus extends EntityNewPrehistoric {
 	@Override
 	public void setSpawnValues() {
 	}
-
-	@Override
-	protected void applyEntityAttributes() {
-		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(baseSpeed);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(baseHealth);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(baseDamage);
-	}
-
+	
 	@Override
 	public Activity aiActivityType() {
 

@@ -6,18 +6,18 @@ import net.minecraft.item.ItemBlockWithMetadata;
 import net.minecraft.item.ItemStack;
 
 public class VaseKylixBlockItem extends ItemBlockWithMetadata {
-    public VaseKylixBlockItem(Block block) {
-        super(block, block);
-        setHasSubtypes(true);
-    }
+	public VaseKylixBlockItem(Block block) {
+		super(block, block);
+		setHasSubtypes(true);
+	}
 
-    @Override
-    public String getUnlocalizedName(ItemStack itemstack) {
-        return getUnlocalizedName() + "." + BlockVaseKylix.shortname[itemstack.getItemDamage()];
-    }
+	@Override
+	public String getUnlocalizedName(ItemStack itemstack) {
+		return getUnlocalizedName() + "." + BlockVaseKylix.shortname[itemstack.getItemDamage()];
+	}
 
-    @Override
-    public int getMetadata(int meta) {
-        return meta;
-    }
+	@Override
+	public int getMetadata(int meta) {
+		return meta;
+	}
 }

@@ -11,10 +11,10 @@ import net.minecraft.world.World;
 
 import com.github.revival.server.entity.toy.EntityToyBall;
 
-public class ItemToyBall extends Item{
+public class ItemToyBall extends Item {
 	private static final String[] balls = ItemDye.field_150923_a;
 
-	public ItemToyBall(){
+	public ItemToyBall() {
 		setMaxDamage(0);
 		setHasSubtypes(true);
 		this.setTextureName("dye_powder_gray");
@@ -32,7 +32,7 @@ public class ItemToyBall extends Item{
 		EntityToyBall ball = new EntityToyBall(world);
 		ball.setColor(stack.getItemDamage());
 		ball.setLocationAndAngles(x + 0.5, y + 1, z + 0.5, 0, 0);
-		if(!world.isRemote)
+		if (!world.isRemote)
 			world.spawnEntityInWorld(ball);
 		--stack.stackSize;
 		return true;

@@ -12,18 +12,18 @@ import com.github.revival.server.entity.EntityDinoEgg;
 
 public class RenderDinoEgg extends RenderLiving {
 
-    public RenderDinoEgg(float var1) {
-    	super(new ModelDinoEgg(), var1);
-    }
-    
-	@Override
-    protected void preRenderCallback(EntityLivingBase entity, float f) {
-    	GL11.glScalef(((EntityDinoEgg)entity).selfType.eggScale, ((EntityDinoEgg)entity).selfType.eggScale, ((EntityDinoEgg)entity).selfType.eggScale);
-    }
+	public RenderDinoEgg(float var1) {
+		super(new ModelDinoEgg(), var1);
+	}
 
 	@Override
-    protected ResourceLocation getEntityTexture(Entity entity) {
-	    return new ResourceLocation(((EntityDinoEgg)entity).getTexture());
-    }
+	protected void preRenderCallback(EntityLivingBase entity, float f) {
+		GL11.glScalef(((EntityDinoEgg) entity).selfType.eggScale, ((EntityDinoEgg) entity).selfType.eggScale, ((EntityDinoEgg) entity).selfType.eggScale);
+	}
+
+	@Override
+	protected ResourceLocation getEntityTexture(Entity entity) {
+		return new ResourceLocation(((EntityDinoEgg) entity).getTexture());
+	}
 
 }

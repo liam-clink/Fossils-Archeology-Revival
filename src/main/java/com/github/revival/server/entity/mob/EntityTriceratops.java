@@ -22,7 +22,7 @@ public class EntityTriceratops extends EntityNewPrehistoric {
 	public static final double maxSpeed = 0.35D;
 
 	public EntityTriceratops(World world) {
-		super(world, EnumPrehistoric.Triceratops);
+		super(world, EnumPrehistoric.Triceratops, 1, 9, 12, 64, 0.2, 0.35);
 		this.hasFeatherToggle = true;
 		this.featherToggle = !Revival.CONFIG.quilledTriceratops;
 		this.setSize(0.8F, 0.6F);
@@ -32,7 +32,6 @@ public class EntityTriceratops extends EntityNewPrehistoric {
 		teenAge = 5;
 		developsResistance = true;
 		breaksBlocks = true;
-		favoriteFood = Item.getItemFromBlock(Blocks.leaves);
 	}
 
 	@Override
@@ -41,23 +40,8 @@ public class EntityTriceratops extends EntityNewPrehistoric {
 	}
 
 	@Override
-	public void onUpdate() {
-		super.onUpdate();
-		//Revival.proxy.doChainBuffer(tailBuffer, this);
-	}
-
-	@Override
 	public void setSpawnValues() {
 	}
-
-	@Override
-	protected void applyEntityAttributes() {
-		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(baseSpeed);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(baseHealth);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(baseDamage);
-	}
-
 
 	@Override
 	public Activity aiActivityType() {
@@ -136,32 +120,6 @@ public class EntityTriceratops extends EntityNewPrehistoric {
 	}
 
 	@Override
-	public void updateSize() {
-		double healthStep;
-		double attackStep;
-		double speedStep;
-		healthStep = (maxHealth - baseHealth) / (this.getAdultAge() + 1);
-		attackStep = (maxDamage - baseDamage) / (this.getAdultAge() + 1);
-		speedStep = (maxSpeed - baseSpeed) / (this.getAdultAge() + 1);
-
-
-		if (this.getDinoAge() <= this.getAdultAge()) {
-
-			this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(Math.round(baseHealth + (healthStep * this.getDinoAge())));
-			this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(Math.round(baseDamage + (attackStep * this.getDinoAge())));
-			this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(baseSpeed + (speedStep * this.getDinoAge()));
-
-			if (this.isTeen()) {
-				this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.5D);
-			} else if (this.isAdult()) {
-				this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(2.0D);
-			} else {
-				this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.0D);
-			}
-		}
-	}
-
-	@Override
 	public int getAdultAge() {
 		return 12;
 	}
@@ -195,7 +153,7 @@ public class EntityTriceratops extends EntityNewPrehistoric {
 						entity.mountEntity(null);
 					}
 				}
-				//entity.motionY += 0.4000000059604645D;
+				// entity.motionY += 0.4000000059604645D;
 				return flag;
 			}
 		}

@@ -47,7 +47,7 @@ public class EntityDinoEgg extends EntityLiving implements IEntityAdditionalSpaw
 		this(world, EnumPrehistoric.Triceratops);
 	}
 
-	protected void entityInit(){
+	protected void entityInit() {
 		super.entityInit();
 		if (Revival.enableDebugging()) {
 			this.hatchTime = 1000;
@@ -62,7 +62,7 @@ public class EntityDinoEgg extends EntityLiving implements IEntityAdditionalSpaw
 		this.parentOwner = entity.getCommandSenderName();
 	}
 
-	protected boolean isAIEnabled(){
+	protected boolean isAIEnabled() {
 		return true;
 	}
 
@@ -142,17 +142,16 @@ public class EntityDinoEgg extends EntityLiving implements IEntityAdditionalSpaw
 				return;
 			}
 			Entity entity = this.selfType.invokeClass(this.worldObj);
-			if(entity != null){
+			if (entity != null) {
 				if (entity instanceof EntityNewPrehistoric) {
 					if (player != null) {
 						player.addStat(FossilAchievementHandler.firstDino, 1);
 					}
 					EntityNewPrehistoric prehistoricEntity = (EntityNewPrehistoric) entity;
-					if (prehistoricEntity.selfType.isTameable() && player != null) {
-						if (prehistoricEntity.selfType != EnumPrehistoric.Tyrannosaurus && prehistoricEntity.selfType != EnumPrehistoric.Allosaurus && prehistoricEntity.selfType != EnumPrehistoric.Sarcosuchus) {
+					if (prehistoricEntity.type.isTameable() && player != null) {
+						if (prehistoricEntity.type != EnumPrehistoric.Tyrannosaurus && prehistoricEntity.type != EnumPrehistoric.Allosaurus && prehistoricEntity.type != EnumPrehistoric.Sarcosuchus) {
 							prehistoricEntity.setTamed(true);
-							prehistoricEntity.setOwner(player.getUniqueID().toString());
-							prehistoricEntity.setOwnerDisplayName(player.getCommandSenderName());
+							prehistoricEntity.func_152115_b(player.getUniqueID().toString());
 							prehistoricEntity.currentOrder = EnumOrderType.FOLLOW;
 						}
 					}
@@ -160,29 +159,19 @@ public class EntityDinoEgg extends EntityLiving implements IEntityAdditionalSpaw
 
 				entity.setLocationAndAngles((double) ((int) Math.floor(this.posX)), (double) ((int) Math.floor(this.posY) + 1), (double) ((int) Math.floor(this.posZ)), this.worldObj.rand.nextFloat() * 360.0F, 0.0F);
 
-				if (this.worldObj.checkNoEntityCollision(((EntityLiving) entity).boundingBox)
-						&& this.worldObj.getCollidingBoundingBoxes(entity, ((EntityLiving) entity).boundingBox).size() == 0
-						&& (!this.worldObj.isAnyLiquid(((EntityLiving) entity).boundingBox)
-								|| this.selfType == EnumPrehistoric.Mosasaurus || this.selfType == EnumPrehistoric.Liopleurodon)) {
-					//if (!this.worldObj.isRemote)
-					{
-						this.worldObj.spawnEntityInWorld(entity);
-
-						if (player != null) {
-							Revival.showMessage(StatCollector.translateToLocal(LocalizationStrings.DINOEGG_HATCHED), player);
-						}
+				if (this.worldObj.getCollidingBoundingBoxes(entity, ((EntityLiving) entity).boundingBox).size() == 0 && (!this.worldObj.isAnyLiquid(((EntityLiving) entity).boundingBox) || this.selfType == EnumPrehistoric.Mosasaurus || this.selfType == EnumPrehistoric.Liopleurodon)) {
+					this.worldObj.spawnEntityInWorld(entity);
+					if (player != null) {
+						Revival.showMessage(StatCollector.translateToLocal(LocalizationStrings.DINOEGG_HATCHED), player);
 					}
 					this.setDead();
 				} else {
-					//System.err.println("EGGERROR-NOPLACE");
 					Revival.showMessage(StatCollector.translateToLocal(LocalizationStrings.DINOEGG_NOSPACE), player);
 					this.setBirthTick(this.getBirthTick() - 500);
-					//System.err.println("EGGERROR3"+String.valueOf(i));
 				}
 			}
 		}
 	}
-
 
 	@Override
 	public void writeEntityToNBT(NBTTagCompound compound) {
@@ -200,7 +189,7 @@ public class EntityDinoEgg extends EntityLiving implements IEntityAdditionalSpaw
 
 	@Override
 	public boolean attackEntityFrom(DamageSource source, float damage) {
-		if(damage > 0 && !this.worldObj.isRemote){
+		if (damage > 0 && !this.worldObj.isRemote) {
 			Item item = this.selfType.eggItem;
 			ItemStack stack = new ItemStack(item, 1, 1);
 			this.worldObj.spawnEntityInWorld(new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, stack));
@@ -216,7 +205,7 @@ public class EntityDinoEgg extends EntityLiving implements IEntityAdditionalSpaw
 		if (itemstack == null) {
 			Item item = this.selfType.eggItem;
 			ItemStack stack = new ItemStack(item);
-			if(!player.capabilities.isCreativeMode){
+			if (!player.capabilities.isCreativeMode) {
 				if (player.inventory.addItemStackToInventory(stack)) {
 					this.worldObj.playSoundAtEntity(player, "random.pop", 0.2F, ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
 				}
@@ -231,13 +220,13 @@ public class EntityDinoEgg extends EntityLiving implements IEntityAdditionalSpaw
 		return false;
 	}
 
-    @Override
-    public void writeSpawnData(ByteBuf buffer) {
-        buffer.writeInt(this.selfType.ordinal());
-    }
+	@Override
+	public void writeSpawnData(ByteBuf buffer) {
+		buffer.writeInt(this.selfType.ordinal());
+	}
 
-    @Override
-    public void readSpawnData(ByteBuf additionalData) {
-        this.selfType = EnumPrehistoric.values()[additionalData.readInt()];
-    }
+	@Override
+	public void readSpawnData(ByteBuf additionalData) {
+		this.selfType = EnumPrehistoric.values()[additionalData.readInt()];
+	}
 }

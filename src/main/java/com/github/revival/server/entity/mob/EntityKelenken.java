@@ -25,15 +25,8 @@ import com.github.revival.server.item.FAItemRegistry;
 
 public class EntityKelenken extends EntityNewPrehistoric {
 
-	public static final double baseDamage = 1;
-	public static final double maxDamage = 6;
-	public static final double baseHealth = 10;
-	public static final double maxHealth = 40;
-	public static final double baseSpeed = 0.25D;
-	public static final double maxSpeed = 0.35D;
-
 	public EntityKelenken(World world) {
-		super(world, EnumPrehistoric.Kelenken);
+		super(world, EnumPrehistoric.Kelenken, 1, 6, 10, 40, 0.25, 0.35);
 		this.setSize(1.4F, 2.5F);
 		this.pediaScale = 17F;
 		this.nearByMobsAllowed = 3;
@@ -42,7 +35,6 @@ public class EntityKelenken extends EntityNewPrehistoric {
 		teenAge = 4;
 		developsResistance = true;
 		breaksBlocks = false;
-		favoriteFood = EnumPrehistoric.Quagga.foodItem;
 	}
 
 	@Override
@@ -51,15 +43,8 @@ public class EntityKelenken extends EntityNewPrehistoric {
 	}
 
 	@Override
-	protected void applyEntityAttributes() {
-		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(baseSpeed);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(baseHealth);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(baseDamage);
+	public void setSpawnValues() {
 	}
-
-	@Override
-	public void setSpawnValues() {}
 
 	@Override
 	public Activity aiActivityType() {
@@ -138,23 +123,6 @@ public class EntityKelenken extends EntityNewPrehistoric {
 	}
 
 	@Override
-	public void updateSize() {
-
-		double healthStep;
-		double attackStep;
-		double speedStep;
-		healthStep = (maxHealth - baseHealth) / (this.getAdultAge() + 1);
-		attackStep = (maxDamage - baseDamage) / (this.getAdultAge() + 1);
-		speedStep = (maxSpeed - baseSpeed) / (this.getAdultAge() + 1);
-
-		if (this.getDinoAge() <= this.getAdultAge()) {
-			this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(Math.round(baseHealth + (healthStep * this.getDinoAge())));
-			this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(Math.round(baseDamage + (attackStep * this.getDinoAge())));
-			this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(baseSpeed + (speedStep * this.getDinoAge()));
-		}
-	}
-
-	@Override
 	public int getAdultAge() {
 		return 8;
 	}
@@ -171,7 +139,7 @@ public class EntityKelenken extends EntityNewPrehistoric {
 			this.attackEntityAsMob(this.getAttackTarget());
 		}
 	}
-	
+
 	@Override
 	public boolean attackEntityAsMob(Entity entity) {
 		if (this.getAttackBounds().intersectsWith(entity.boundingBox)) {

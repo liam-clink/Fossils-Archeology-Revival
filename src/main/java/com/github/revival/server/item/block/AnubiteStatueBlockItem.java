@@ -6,12 +6,12 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
 public class AnubiteStatueBlockItem extends ItemBlock {
-    public AnubiteStatueBlockItem(Block b) {
-        super(b);
-    }
+	public AnubiteStatueBlockItem(Block b) {
+		super(b);
+	}
 
-    @Override
-    public EnumRarity getRarity(ItemStack item) {
-        return EnumRarity.rare;
-    }
+	@Override
+	public EnumRarity getRarity(ItemStack item) {
+		return EnumRarity.rare;
+	}
 }

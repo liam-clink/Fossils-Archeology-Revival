@@ -31,26 +31,27 @@ public class DinoEggItem extends Item {
 
 	public static boolean spawnCreature(World world, EnumPrehistoric prehistoricEnum, double x, double y, double z) {
 		Object egg;
-		if(!prehistoricEnum.isAquatic()){
+		if (!prehistoricEnum.isAquatic()) {
 			egg = new EntityDinoEgg(world, prehistoricEnum);
 			((Entity) egg).setLocationAndAngles(x, y + 1.0F, z, world.rand.nextFloat() * 360.0F, 0.0F);
-			if(!world.isRemote){
-                world.spawnEntityInWorld((Entity) egg);
-            }
+			if (!world.isRemote) {
+				world.spawnEntityInWorld((Entity) egg);
+			}
 			((EntityDinoEgg) egg).selfType = prehistoricEnum;
-			if(!world.isRemote)Revival.NETWORK_WRAPPER.sendToAll(new MessageUpdateEgg(((EntityDinoEgg) egg).getEntityId(), prehistoricEnum.ordinal()));
+			if (!world.isRemote)
+				Revival.NETWORK_WRAPPER.sendToAll(new MessageUpdateEgg(((EntityDinoEgg) egg).getEntityId(), prehistoricEnum.ordinal()));
 			return true;
-		}else{
+		} else {
 			egg = prehistoricEnum.invokeClass(world);
 			if (egg != null) {
 				((Entity) egg).setLocationAndAngles(x, y, z, world.rand.nextFloat() * 360.0F, 0.0F);
 				world.spawnEntityInWorld((Entity) egg);
-				if(egg instanceof EntityNewPrehistoric){
-					EntityNewPrehistoric prehistoric = (EntityNewPrehistoric)egg;
-					if(prehistoric.aiTameType() == Taming.IMPRINTING){
+				if (egg instanceof EntityNewPrehistoric) {
+					EntityNewPrehistoric prehistoric = (EntityNewPrehistoric) egg;
+					if (prehistoric.aiTameType() == Taming.IMPRINTING) {
 						prehistoric.setTamed(true);
-						prehistoric.setDinoAge(1);
-						prehistoric.setOwner(world.getClosestPlayerToEntity(prehistoric, 10).getDisplayName());
+						prehistoric.setAgeInDays(1);
+						prehistoric.func_152115_b(world.getClosestPlayerToEntity(prehistoric, 10).getDisplayName());
 					}
 				}
 			}
@@ -69,7 +70,7 @@ public class DinoEggItem extends Item {
 		boolean b = spawnCreature(world, dino, (double) ((float) x + 0.5F), (double) ((float) y), (double) ((float) z + 0.5F));
 		if (b && !player.capabilities.isCreativeMode) {
 			--stack.stackSize;
-		}	
+		}
 		return b;
 	}
 }

@@ -23,15 +23,8 @@ import net.minecraft.world.World;
 
 public class EntitySmilodon extends EntityNewPrehistoric {
 
-	public static final double baseDamage = 1;
-	public static final double maxDamage = 5;
-	public static final double baseHealth = 8;
-	public static final double maxHealth = 34;
-	public static final double baseSpeed = 0.25D;
-	public static final double maxSpeed = 0.3D;
-
 	public EntitySmilodon(World world) {
-		super(world, EnumPrehistoric.Smilodon);
+		super(world, EnumPrehistoric.Smilodon, 1, 5, 8, 34, 0.25, 0.3);
 		this.setSize(0.9F, 0.8F);
 		this.pediaScale = 17F;
 		this.nearByMobsAllowed = 7;
@@ -40,7 +33,6 @@ public class EntitySmilodon extends EntityNewPrehistoric {
 		teenAge = 4;
 		developsResistance = true;
 		breaksBlocks = false;
-		favoriteFood = Items.beef;
 		hasBabyTexture = false;
 	}
 
@@ -48,15 +40,7 @@ public class EntitySmilodon extends EntityNewPrehistoric {
 	public int getAttackLength() {
 		return 30;
 	}
-
-	@Override
-	protected void applyEntityAttributes() {
-		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(baseSpeed);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(baseHealth);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(baseDamage);
-	}
-
+	
 	@Override
 	public void setSpawnValues() {
 	}
@@ -140,26 +124,6 @@ public class EntitySmilodon extends EntityNewPrehistoric {
 	}
 
 	@Override
-	public void updateSize() {
-
-		double healthStep;
-		double attackStep;
-		double speedStep;
-		healthStep = (maxHealth - baseHealth) / (this.getAdultAge() + 1);
-		attackStep = (maxDamage - baseDamage) / (this.getAdultAge() + 1);
-		speedStep = (maxSpeed - baseSpeed) / (this.getAdultAge() + 1);
-
-
-		if (this.getDinoAge() <= this.getAdultAge()) {
-
-			this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(Math.round(baseHealth + (healthStep * this.getDinoAge())));
-			this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(Math.round(baseDamage + (attackStep * this.getDinoAge())));
-			this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(baseSpeed + (speedStep * this.getDinoAge()));
-
-		}
-	}
-
-	@Override
 	public int getAdultAge() {
 		return 8;
 	}
@@ -176,7 +140,6 @@ public class EntitySmilodon extends EntityNewPrehistoric {
 			this.attackEntityAsMob(this.getAttackTarget());
 		}
 	}
-
 
 	@Override
 	public boolean attackEntityAsMob(Entity entity) {

@@ -13,10 +13,7 @@ public class FossilOreDictionary {
 	public static void oreRegistration() {
 		OreDictionary.registerOre("plankWood", new ItemStack(FABlockRegistry.INSTANCE.palaePlanks));
 		OreDictionary.registerOre("plankWood", new ItemStack(FABlockRegistry.INSTANCE.ancientWood));
-		OreDictionary.registerOre("plankAercale", new ItemStack(FABlockRegistry.INSTANCE.palaePlanks));
-		OreDictionary.registerOre("plankAncient", new ItemStack(FABlockRegistry.INSTANCE.ancientWood));
 		OreDictionary.registerOre("logWood", new ItemStack(FABlockRegistry.INSTANCE.palmLog));
-		OreDictionary.registerOre("logAercale", new ItemStack(FABlockRegistry.INSTANCE.palmLog));
 		OreDictionary.registerOre("treeLeaves", new ItemStack(FABlockRegistry.INSTANCE.palmLeaves));
 		OreDictionary.registerOre("slabWood", new ItemStack(FABlockRegistry.INSTANCE.palaeSingleSlab));
 		OreDictionary.registerOre("slabWood", new ItemStack(FABlockRegistry.INSTANCE.ancientWoodSingleSlab));
@@ -74,21 +71,20 @@ public class FossilOreDictionary {
 		OreDictionary.registerOre("dinosaurVertebrae", new ItemStack(FAItemRegistry.INSTANCE.vertebrae, 1, OreDictionary.WILDCARD_VALUE));
 		OreDictionary.registerOre("dinosaurRibCage", new ItemStack(FAItemRegistry.INSTANCE.dinoRibCage, 1, OreDictionary.WILDCARD_VALUE));
 
-
-		for(EnumPrehistoric prehistoric : EnumPrehistoric.values()){
-			if(prehistoric.eggItem != null){
+		for (EnumPrehistoric prehistoric : EnumPrehistoric.values()) {
+			if (prehistoric.eggItem != null) {
 				OreDictionary.registerOre("listAllegg", prehistoric.eggItem);
 				OreDictionary.registerOre("objectEgg", prehistoric.eggItem);
 				OreDictionary.registerOre("bakingEgg", prehistoric.eggItem);
-				if(prehistoric.type == EnumMobType.FISH){
+				if (prehistoric.type == EnumMobType.FISH) {
 					OreDictionary.registerOre("foodRoe", prehistoric.eggItem);
 					OreDictionary.registerOre("foodCaviar", prehistoric.eggItem);
 				}
 			}
-			if(prehistoric.foodItem != null){
+			if (prehistoric.foodItem != null) {
 				OreDictionary.registerOre("listAllmeatraw", prehistoric.foodItem);
 			}
-			if(prehistoric.cookedFoodItem != null){
+			if (prehistoric.cookedFoodItem != null) {
 				OreDictionary.registerOre("listAllmeatcooked", prehistoric.cookedFoodItem);
 			}
 		}

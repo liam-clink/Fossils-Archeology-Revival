@@ -250,10 +250,10 @@ public class ModelTyrannosaurus extends ModelNewPrehistoric {
 	@Override
 	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
 		super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-		AdvancedModelRenderer[] tailParts = {this.tail1, this.tail2, this.tail3};
-		AdvancedModelRenderer[] neckParts = {this.neck, this.head};
-		AdvancedModelRenderer[] leftArmParts = {this.leftUpperArm, this.leftLowerArm};
-		AdvancedModelRenderer[] rightArmParts = {this.rightUpperArm, this.rightLowerArm};
+		AdvancedModelRenderer[] tailParts = { this.tail1, this.tail2, this.tail3 };
+		AdvancedModelRenderer[] neckParts = { this.neck, this.head };
+		AdvancedModelRenderer[] leftArmParts = { this.leftUpperArm, this.leftLowerArm };
+		AdvancedModelRenderer[] rightArmParts = { this.rightUpperArm, this.rightLowerArm };
 
 		float speed = 0.4F;
 		float speed2 = 0.1F;
@@ -290,32 +290,32 @@ public class ModelTyrannosaurus extends ModelNewPrehistoric {
 		{
 			float sitProgress = ((EntityNewPrehistoric) (entity)).sleepProgress;
 
-			sitAnimationRotation(leftLeg, sitProgress, -((float)Math.toRadians(40.0D)), 0, 0);
-			sitAnimationRotation(leftUpperArm, sitProgress, (float)Math.toRadians(54.0D), 0, 0);
-			sitAnimationRotation(leftLowerArm, sitProgress, -((float)Math.toRadians(30.0D)), 0, 0);
-			sitAnimationRotation(middleCrest, sitProgress, (float)Math.toRadians(9.21D), 0, 0);
-			sitAnimationRotation(middleTailBackFeather, sitProgress, (float)Math.toRadians(10.08D), 0, 0);
-			sitAnimationRotation(rightLowerArm, sitProgress, -((float)Math.toRadians(30.0D)), 0, 0);
-			sitAnimationRotation(rightLeg, sitProgress, -((float)Math.toRadians(40.0D)), 0, 0);
-			sitAnimationRotation(head, sitProgress, -((float)Math.toRadians(75D)), -((float)Math.toRadians(10.43D)), (float)Math.toRadians(7.83D));
-			sitAnimationRotation(rightThigh, sitProgress, -((float)Math.toRadians(50.0D)), 0, 0);
-			sitAnimationRotation(middleTailFrontFeather, sitProgress, (float)Math.toRadians(18.73D), 0, 0);
-			sitAnimationRotation(upperBody, sitProgress, (float)Math.toRadians(6.48D), -((float)Math.toRadians(7.83D)), 0);
-			sitAnimationRotation(tail3, sitProgress, (float)Math.toRadians(7.83D), (float)Math.toRadians(10.43D), (float)Math.toRadians(7.83D));
-			sitAnimationRotation(lowerJaw, sitProgress, (float)Math.toRadians(1.26D), 0, 0);
-			sitAnimationRotation(rightCrest, sitProgress, -((float)Math.toRadians(4.05D)), 0, 0);
-			sitAnimationRotation(leftCrest, sitProgress, -((float)Math.toRadians(4.05D)), 0, 0);
-			sitAnimationRotation(tail1, sitProgress, -((float)Math.toRadians(10.43D)), (float)Math.toRadians(7.83D), 0);
-			sitAnimationRotation(tail2, sitProgress, -((float)Math.toRadians(7.83D)), (float)Math.toRadians(13.04D), 0);
-			sitAnimationRotation(leftFoot, sitProgress, (float)Math.toRadians(90.0D), 0, 0);
-			sitAnimationRotation(rightUpperArm, sitProgress, (float)Math.toRadians(54.0D), 0, 0);
-			sitAnimationRotation(lowerBody, sitProgress, -((float)Math.toRadians(2.0D)), 0, 0);
-			sitAnimationRotation(leftThigh, sitProgress, -((float)Math.toRadians(50.0D)), 0, 0);
-			sitAnimationRotation(rightFoot, sitProgress, (float)Math.toRadians(90.0D), 0, 0);
-			sitAnimationRotation(leftTailFeather, sitProgress, (float)Math.toRadians(5.95D), 0, 0);
-			sitAnimationRotation(rightTailFeather, sitProgress, (float)Math.toRadians(5.95D), 0, 0);
-			sitAnimationRotation(neck, sitProgress, (float)Math.toRadians(55D), 0, 0);
-			sitAnimationRotation(upperJaw, sitProgress, (float)Math.toRadians(2.0D), 0, 0);
+			sitAnimationRotation(leftLeg, sitProgress, -((float) Math.toRadians(40.0D)), 0, 0);
+			sitAnimationRotation(leftUpperArm, sitProgress, (float) Math.toRadians(54.0D), 0, 0);
+			sitAnimationRotation(leftLowerArm, sitProgress, -((float) Math.toRadians(30.0D)), 0, 0);
+			sitAnimationRotation(middleCrest, sitProgress, (float) Math.toRadians(9.21D), 0, 0);
+			sitAnimationRotation(middleTailBackFeather, sitProgress, (float) Math.toRadians(10.08D), 0, 0);
+			sitAnimationRotation(rightLowerArm, sitProgress, -((float) Math.toRadians(30.0D)), 0, 0);
+			sitAnimationRotation(rightLeg, sitProgress, -((float) Math.toRadians(40.0D)), 0, 0);
+			sitAnimationRotation(head, sitProgress, -((float) Math.toRadians(75D)), -((float) Math.toRadians(10.43D)), (float) Math.toRadians(7.83D));
+			sitAnimationRotation(rightThigh, sitProgress, -((float) Math.toRadians(50.0D)), 0, 0);
+			sitAnimationRotation(middleTailFrontFeather, sitProgress, (float) Math.toRadians(18.73D), 0, 0);
+			sitAnimationRotation(upperBody, sitProgress, (float) Math.toRadians(6.48D), -((float) Math.toRadians(7.83D)), 0);
+			sitAnimationRotation(tail3, sitProgress, (float) Math.toRadians(7.83D), (float) Math.toRadians(10.43D), (float) Math.toRadians(7.83D));
+			sitAnimationRotation(lowerJaw, sitProgress, (float) Math.toRadians(1.26D), 0, 0);
+			sitAnimationRotation(rightCrest, sitProgress, -((float) Math.toRadians(4.05D)), 0, 0);
+			sitAnimationRotation(leftCrest, sitProgress, -((float) Math.toRadians(4.05D)), 0, 0);
+			sitAnimationRotation(tail1, sitProgress, -((float) Math.toRadians(10.43D)), (float) Math.toRadians(7.83D), 0);
+			sitAnimationRotation(tail2, sitProgress, -((float) Math.toRadians(7.83D)), (float) Math.toRadians(13.04D), 0);
+			sitAnimationRotation(leftFoot, sitProgress, (float) Math.toRadians(90.0D), 0, 0);
+			sitAnimationRotation(rightUpperArm, sitProgress, (float) Math.toRadians(54.0D), 0, 0);
+			sitAnimationRotation(lowerBody, sitProgress, -((float) Math.toRadians(2.0D)), 0, 0);
+			sitAnimationRotation(leftThigh, sitProgress, -((float) Math.toRadians(50.0D)), 0, 0);
+			sitAnimationRotation(rightFoot, sitProgress, (float) Math.toRadians(90.0D), 0, 0);
+			sitAnimationRotation(leftTailFeather, sitProgress, (float) Math.toRadians(5.95D), 0, 0);
+			sitAnimationRotation(rightTailFeather, sitProgress, (float) Math.toRadians(5.95D), 0, 0);
+			sitAnimationRotation(neck, sitProgress, (float) Math.toRadians(55D), 0, 0);
+			sitAnimationRotation(upperJaw, sitProgress, (float) Math.toRadians(2.0D), 0, 0);
 			sitAnimationPos(rightThigh, sitProgress, 0F, 16.90F - ModelUtils.getDefaultPositionY(rightThigh), 0F);
 			sitAnimationPos(lowerBody, sitProgress, 0F, 10.80F - ModelUtils.getDefaultPositionY(lowerBody), 0F);
 			sitAnimationPos(leftThigh, sitProgress, 0F, 16.90F - ModelUtils.getDefaultPositionY(leftThigh), 0F);

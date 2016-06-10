@@ -9,14 +9,14 @@ import net.minecraft.item.Item;
 
 public class DominicanAmberItem extends Item {
 
-    public DominicanAmberItem() {
-        setUnlocalizedName(LocalizationStrings.DOMINICAN_AMBER_NAME);
-        setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
-    }
+	public DominicanAmberItem() {
+		setUnlocalizedName(LocalizationStrings.DOMINICAN_AMBER_NAME);
+		setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
+	}
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void registerIcons(IIconRegister iconRegister) {
-        itemIcon = iconRegister.registerIcon("fossil:dominican_amber");
-    }
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IIconRegister iconRegister) {
+		itemIcon = iconRegister.registerIcon("fossil:dominican_amber");
+	}
 }

@@ -212,25 +212,24 @@ public class ModelTriceratops extends ModelNewPrehistoric {
 		animator.setStaticKeyframe(5);
 		animator.resetKeyframe(5);
 
-		//		animator.setAnimationId(EntityNewPrehistoric.animation_sit.animationId);
-		//		animator.startPhase(20);
-		//		sitPose(true);
-		//		animator.endPhase();
+		// animator.setAnimationId(EntityNewPrehistoric.animation_sit.animationId);
+		// animator.startPhase(20);
+		// sitPose(true);
+		// animator.endPhase();
 		//
-		//		animator.setAnimationId(EntityNewPrehistoric.animation_getUp.animationId);
-		//		animator.startPhase(0);
-		//		sitPose(true);
-		//		animator.endPhase();
-		//		animator.resetPhase(20);
-		//		animator.endPhase();
+		// animator.setAnimationId(EntityNewPrehistoric.animation_getUp.animationId);
+		// animator.startPhase(0);
+		// sitPose(true);
+		// animator.endPhase();
+		// animator.resetPhase(20);
+		// animator.endPhase();
 
 	}
 
-
 	@Override
 	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
-		AdvancedModelRenderer[] tailParts = {this.tail1, this.tail2, this.tail3};
-		AdvancedModelRenderer[] neckParts = {this.neck, this.head};
+		AdvancedModelRenderer[] tailParts = { this.tail1, this.tail2, this.tail3 };
+		AdvancedModelRenderer[] neckParts = { this.neck, this.head };
 
 		ModelUtils.faceTargetMod(neck, f3, f4, 0.5F);
 		ModelUtils.faceTargetMod(head, f3, f4, 0.5F);
@@ -263,21 +262,21 @@ public class ModelTriceratops extends ModelNewPrehistoric {
 		}
 		{
 			float sitProgress = ((EntityNewPrehistoric) (entity)).sleepProgress;
-			sitAnimationRotation(upperBody, sitProgress, 0, (float)Math.toRadians(2.61D), -((float)Math.toRadians(18.26D)));
-			sitAnimationRotation(rightFrontThigh, sitProgress, -((float)Math.toRadians(30D)), (float)Math.toRadians(2.61D), 0);
-			sitAnimationRotation(head, sitProgress, (float)Math.toRadians(26.09D), (float)Math.toRadians(5.22D), -((float)Math.toRadians(20.87D)));
-			sitAnimationRotation(leftFrontThigh, sitProgress, -((float)Math.toRadians(13.0D)), -((float)Math.toRadians(2.61D)), -((float)Math.toRadians(41.74D)));
-			sitAnimationRotation(tail3, sitProgress, (float)Math.toRadians(14.64D), 0, 0);
-			sitAnimationRotation(leftHindThigh, sitProgress, (float)Math.toRadians(10D), -((float)Math.toRadians(10.43D)), -((float)Math.toRadians(18.26D)));
-			sitAnimationRotation(rightFrontLeg, sitProgress, -(float)Math.toRadians(83.48D), 0, 0);
-			sitAnimationRotation(rightHindThigh, sitProgress, -(float)Math.toRadians(10.0D), -((float)Math.toRadians(5.22D)), (float)Math.toRadians(26.09D));
-			sitAnimationRotation(neck, sitProgress, (float)Math.toRadians(10.43D), -((float)Math.toRadians(15.65D)), -((float)Math.toRadians(20.87D)));
-			sitAnimationRotation(leftFrontLeg, sitProgress, -(float)Math.toRadians(50D), 0, 0);
-			sitAnimationRotation(rightHindLeg, sitProgress, (float)Math.toRadians(93.91D), (float)Math.toRadians(2.61D), 0);
-			sitAnimationRotation(lowerBody, sitProgress, -((float)Math.toRadians(7.83D)), -((float)Math.toRadians(5.22D)), 0);
-			sitAnimationRotation(tail1, sitProgress, -((float)Math.toRadians(23.48D)), 0, (float)Math.toRadians(5.22D));
-			sitAnimationRotation(leftHindLeg, sitProgress, (float)Math.toRadians(80.87D), 0, 0);
-			sitAnimationRotation(tail2, sitProgress, (float)Math.toRadians(18.26D), -((float)Math.toRadians(13.04D)), (float)Math.toRadians(7.83D));
+			sitAnimationRotation(upperBody, sitProgress, 0, (float) Math.toRadians(2.61D), -((float) Math.toRadians(18.26D)));
+			sitAnimationRotation(rightFrontThigh, sitProgress, -((float) Math.toRadians(30D)), (float) Math.toRadians(2.61D), 0);
+			sitAnimationRotation(head, sitProgress, (float) Math.toRadians(26.09D), (float) Math.toRadians(5.22D), -((float) Math.toRadians(20.87D)));
+			sitAnimationRotation(leftFrontThigh, sitProgress, -((float) Math.toRadians(13.0D)), -((float) Math.toRadians(2.61D)), -((float) Math.toRadians(41.74D)));
+			sitAnimationRotation(tail3, sitProgress, (float) Math.toRadians(14.64D), 0, 0);
+			sitAnimationRotation(leftHindThigh, sitProgress, (float) Math.toRadians(10D), -((float) Math.toRadians(10.43D)), -((float) Math.toRadians(18.26D)));
+			sitAnimationRotation(rightFrontLeg, sitProgress, -(float) Math.toRadians(83.48D), 0, 0);
+			sitAnimationRotation(rightHindThigh, sitProgress, -(float) Math.toRadians(10.0D), -((float) Math.toRadians(5.22D)), (float) Math.toRadians(26.09D));
+			sitAnimationRotation(neck, sitProgress, (float) Math.toRadians(10.43D), -((float) Math.toRadians(15.65D)), -((float) Math.toRadians(20.87D)));
+			sitAnimationRotation(leftFrontLeg, sitProgress, -(float) Math.toRadians(50D), 0, 0);
+			sitAnimationRotation(rightHindLeg, sitProgress, (float) Math.toRadians(93.91D), (float) Math.toRadians(2.61D), 0);
+			sitAnimationRotation(lowerBody, sitProgress, -((float) Math.toRadians(7.83D)), -((float) Math.toRadians(5.22D)), 0);
+			sitAnimationRotation(tail1, sitProgress, -((float) Math.toRadians(23.48D)), 0, (float) Math.toRadians(5.22D));
+			sitAnimationRotation(leftHindLeg, sitProgress, (float) Math.toRadians(80.87D), 0, 0);
+			sitAnimationRotation(tail2, sitProgress, (float) Math.toRadians(18.26D), -((float) Math.toRadians(13.04D)), (float) Math.toRadians(7.83D));
 			sitAnimationPos(upperBody, sitProgress, 0F, 16.20F - ModelUtils.getDefaultPositionY(upperBody), 0F);
 			sitAnimationPos(rightFrontThigh, sitProgress, 1F, 21.30F - ModelUtils.getDefaultPositionY(rightFrontThigh), 0F);
 			sitAnimationPos(leftFrontThigh, sitProgress, 1F, 21.30F - ModelUtils.getDefaultPositionY(leftFrontThigh), 0F);
@@ -301,35 +300,62 @@ public class ModelTriceratops extends ModelNewPrehistoric {
 		((EntityNewPrehistoric) entity).chainBuffer.applyChainSwingBuffer((ModelRenderer[]) tailParts);
 	}
 
-	//	@Override
-	//	public void sitPose(boolean animate) {
-	//        ModelUtils.animateOrSetRotation(animator, animate, lowerBody, -0.17907078125461823F, 0.0F, 0.0F, false);
-	//        ModelUtils.animateOrSetRotation(animator, animate, leftHindLeg, 0.45378560551852565F, -0.0F, 0.0F, false);
-	//        ModelUtils.animateOrSetRotation(animator, animate, leftFrontThigh, -0.22689280275926282F, -0.0F, 0.0F, false);
-	//        ModelUtils.animateOrSetRotation(animator, animate, neck, -0.31869712141416456F, -0.0F, 0.0F, false);
-	//        ModelUtils.animateOrSetRotation(animator, animate, rightHindLeg, 0.45378560551852565F, -0.0F, 0.0F, false);
-	//        ModelUtils.animateOrSetRotation(animator, animate, tail1, -0.40980330836826856F, -0.0F, 0.0F, false);
-	//        ModelUtils.animateOrSetRotation(animator, animate, upperBody, -0.045553093477052F, -0.0F, 0.0F, false);
-	//        ModelUtils.animateOrSetRotation(animator, animate, quills_1, 0.05235987755982988F, 0.0F, 0.0F, false);
-	//        ModelUtils.animateOrSetRotation(animator, animate, tail2, 0.22759093446006054F, -0.0F, 0.0F, false);
-	//        ModelUtils.animateOrSetRotation(animator, animate, rightFrontThigh, -0.22689280275926282F, -0.0F, 0.0F, false);
-	//        ModelUtils.animateOrSetRotation(animator, animate, rightFrontLeg, 0.22689280275926282F, 0.0F, 0.0F, false);
-	//        ModelUtils.animateOrSetRotation(animator, animate, beak, 0.2808606942177475F, -0.0F, 0.0F, false);
-	//        ModelUtils.animateOrSetRotation(animator, animate, head, 0.5462880558742251F, -0.0F, 0.0F, false);
-	//        ModelUtils.animateOrSetRotation(animator, animate, leftFrontLeg, 0.22689280275926282F, -0.0F, 0.0F, false);
-	//        ModelUtils.animateOrSetRotation(animator, animate, quills, 0.05235987755982988F, 0.0F, 0.0F, false);
-	//        ModelUtils.animateOrSetRotation(animator, animate, beakbottom, 0.2513223807039196F, -0.0F, 0.0F, false);
-	//        ModelUtils.animateOrSetRotation(animator, animate, tail3, 0.2555162024919699F, -0.0F, 0.0F, false);
-	//        ModelUtils.animateOrSetRotation(animator, animate, quills_2, 0.05235987755982988F, 0.0F, 0.0F, false);
-	//        ModelUtils.animateToPos(animator, animate, upperBody, 0F, 16.20F - upperBody.initRotationPointY, 0F, true);
-	//		ModelUtils.animateToPos(animator, animate, rightFrontThigh, 0F, 21.3F - rightFrontThigh.initRotationPointY, 0F, true);
-	//		ModelUtils.animateToPos(animator, animate, leftFrontThigh, 0F, 21.3F - leftFrontThigh.initRotationPointY, 0F, true);
-	//		ModelUtils.animateToPos(animator, animate, rightHindThigh, 0F, 19.9F - rightHindThigh.initRotationPointY, 0F, true);
-	//		ModelUtils.animateToPos(animator, animate, leftHindThigh, 0F, 19.9F - leftHindThigh.initRotationPointY, 0F, true);
-	//		ModelUtils.setPos(animator, animate, upperBody, 0F, 16.20F, 1F, false);
-	//		ModelUtils.setPos(animator, animate, rightFrontThigh, -2.8F, 21.30F, -3F, false);
-	//		ModelUtils.setPos(animator, animate, leftFrontThigh, 2.8F, 21.30F, -3F, false);
-	//		ModelUtils.setPos(animator, animate, rightHindThigh, -2.4F, 19.90F, 4F, false);
-	//		ModelUtils.setPos(animator, animate, leftHindThigh, 2.4F, 19.90F, 4F, false);
-	//	}
+	// @Override
+	// public void sitPose(boolean animate) {
+	// ModelUtils.animateOrSetRotation(animator, animate, lowerBody,
+	// -0.17907078125461823F, 0.0F, 0.0F, false);
+	// ModelUtils.animateOrSetRotation(animator, animate, leftHindLeg,
+	// 0.45378560551852565F, -0.0F, 0.0F, false);
+	// ModelUtils.animateOrSetRotation(animator, animate, leftFrontThigh,
+	// -0.22689280275926282F, -0.0F, 0.0F, false);
+	// ModelUtils.animateOrSetRotation(animator, animate, neck,
+	// -0.31869712141416456F, -0.0F, 0.0F, false);
+	// ModelUtils.animateOrSetRotation(animator, animate, rightHindLeg,
+	// 0.45378560551852565F, -0.0F, 0.0F, false);
+	// ModelUtils.animateOrSetRotation(animator, animate, tail1,
+	// -0.40980330836826856F, -0.0F, 0.0F, false);
+	// ModelUtils.animateOrSetRotation(animator, animate, upperBody,
+	// -0.045553093477052F, -0.0F, 0.0F, false);
+	// ModelUtils.animateOrSetRotation(animator, animate, quills_1,
+	// 0.05235987755982988F, 0.0F, 0.0F, false);
+	// ModelUtils.animateOrSetRotation(animator, animate, tail2,
+	// 0.22759093446006054F, -0.0F, 0.0F, false);
+	// ModelUtils.animateOrSetRotation(animator, animate, rightFrontThigh,
+	// -0.22689280275926282F, -0.0F, 0.0F, false);
+	// ModelUtils.animateOrSetRotation(animator, animate, rightFrontLeg,
+	// 0.22689280275926282F, 0.0F, 0.0F, false);
+	// ModelUtils.animateOrSetRotation(animator, animate, beak,
+	// 0.2808606942177475F, -0.0F, 0.0F, false);
+	// ModelUtils.animateOrSetRotation(animator, animate, head,
+	// 0.5462880558742251F, -0.0F, 0.0F, false);
+	// ModelUtils.animateOrSetRotation(animator, animate, leftFrontLeg,
+	// 0.22689280275926282F, -0.0F, 0.0F, false);
+	// ModelUtils.animateOrSetRotation(animator, animate, quills,
+	// 0.05235987755982988F, 0.0F, 0.0F, false);
+	// ModelUtils.animateOrSetRotation(animator, animate, beakbottom,
+	// 0.2513223807039196F, -0.0F, 0.0F, false);
+	// ModelUtils.animateOrSetRotation(animator, animate, tail3,
+	// 0.2555162024919699F, -0.0F, 0.0F, false);
+	// ModelUtils.animateOrSetRotation(animator, animate, quills_2,
+	// 0.05235987755982988F, 0.0F, 0.0F, false);
+	// ModelUtils.animateToPos(animator, animate, upperBody, 0F, 16.20F -
+	// upperBody.initRotationPointY, 0F, true);
+	// ModelUtils.animateToPos(animator, animate, rightFrontThigh, 0F, 21.3F -
+	// rightFrontThigh.initRotationPointY, 0F, true);
+	// ModelUtils.animateToPos(animator, animate, leftFrontThigh, 0F, 21.3F -
+	// leftFrontThigh.initRotationPointY, 0F, true);
+	// ModelUtils.animateToPos(animator, animate, rightHindThigh, 0F, 19.9F -
+	// rightHindThigh.initRotationPointY, 0F, true);
+	// ModelUtils.animateToPos(animator, animate, leftHindThigh, 0F, 19.9F -
+	// leftHindThigh.initRotationPointY, 0F, true);
+	// ModelUtils.setPos(animator, animate, upperBody, 0F, 16.20F, 1F, false);
+	// ModelUtils.setPos(animator, animate, rightFrontThigh, -2.8F, 21.30F, -3F,
+	// false);
+	// ModelUtils.setPos(animator, animate, leftFrontThigh, 2.8F, 21.30F, -3F,
+	// false);
+	// ModelUtils.setPos(animator, animate, rightHindThigh, -2.4F, 19.90F, 4F,
+	// false);
+	// ModelUtils.setPos(animator, animate, leftHindThigh, 2.4F, 19.90F, 4F,
+	// false);
+	// }
 }

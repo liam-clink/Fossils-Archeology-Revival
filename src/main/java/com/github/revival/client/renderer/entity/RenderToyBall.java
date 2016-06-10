@@ -19,7 +19,7 @@ public class RenderToyBall extends RenderLiving {
 	}
 
 	protected void preRenderCallback(EntityLivingBase living, float f) {
-		int i = BlockColored.func_150032_b(((EntityToyBall)living).getColor());
+		int i = BlockColored.func_150032_b(((EntityToyBall) living).getColor());
 		GL11.glColor3f(EntitySheep.fleeceColorTable[i][0], EntitySheep.fleeceColorTable[i][1], EntitySheep.fleeceColorTable[i][2]);
 	}
 

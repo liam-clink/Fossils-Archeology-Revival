@@ -4,27 +4,25 @@ import com.github.revival.server.entity.mob.EntityAnu;
 import net.minecraft.entity.ai.EntityAIBase;
 
 public class AnuAIFly extends EntityAIBase {
-    protected EntityAnu entity;
+	protected EntityAnu entity;
 
-    public AnuAIFly(EntityAnu var1) {
-        this.entity = var1;
+	public AnuAIFly(EntityAnu var1) {
+		this.entity = var1;
 
-    }
+	}
 
+	/**
+	 * Returns whether the EntityAIBase should begin execution.
+	 */
+	@Override
+	public boolean shouldExecute() {
+		return entity.getAttackMode() == 1;
+	}
 
-    /**
-     * Returns whether the EntityAIBase should begin execution.
-     */
-    @Override
-    public boolean shouldExecute() {
-        return entity.getAttackMode() == 1;
-    }
-
-
-    /**
-     * Updates the task
-     */
-    @Override
-    public void updateTask() {
-    }
+	/**
+	 * Updates the task
+	 */
+	@Override
+	public void updateTask() {
+	}
 }

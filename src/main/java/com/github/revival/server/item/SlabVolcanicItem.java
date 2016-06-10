@@ -7,7 +7,7 @@ import net.minecraft.item.ItemSlab;
 
 public class SlabVolcanicItem extends ItemSlab {
 
-    public SlabVolcanicItem(Block block) {
-        super(block, (BlockSlab) FABlockRegistry.INSTANCE.volcanicSingleSlab, (BlockSlab) FABlockRegistry.INSTANCE.volcanicDoubleSlab, false);
-    }
+	public SlabVolcanicItem(Block block) {
+		super(block, (BlockSlab) FABlockRegistry.INSTANCE.volcanicSingleSlab, (BlockSlab) FABlockRegistry.INSTANCE.volcanicDoubleSlab, false);
+	}
 }

@@ -86,7 +86,8 @@ public class DinoAIWaterFeeder extends EntityAIBase {
 	}
 
 	/**
-	 * Determine if this AI Task is interruptible by a higher (= lower value) priority task.
+	 * Determine if this AI Task is interruptible by a higher (= lower value)
+	 * priority task.
 	 */
 	@Override
 	public boolean isInterruptible() {
@@ -121,9 +122,9 @@ public class DinoAIWaterFeeder extends EntityAIBase {
 			this.entityPosZ = pathpoint.zCoord;
 
 			if (this.dinosaur.getDistanceSq((double) this.entityPosX, this.dinosaur.posY, (double) this.entityPosZ) <= 5.25D) {
-				//Feeder has priority over other food sources.
-				if (this.dinosaur.selfType.useFeeder()) {
-					//targetFeeder = this.dinosaur.GetNearestFeeder(Range/2);
+				// Feeder has priority over other food sources.
+				if (this.dinosaur.type.useFeeder()) {
+					// targetFeeder = this.dinosaur.GetNearestFeeder(Range/2);
 					this.targetFeeder = null;
 
 					if (this.targetFeeder != null) {
@@ -137,7 +138,7 @@ public class DinoAIWaterFeeder extends EntityAIBase {
 				}
 			}
 		}
-		//Check for items and then blocks.
+		// Check for items and then blocks.
 		this.targetItem = this.getNearestItem2(this.SEARCH_RANGE);
 		if (this.targetItem != null) {
 			this.destX = targetItem.posX;
@@ -148,7 +149,7 @@ public class DinoAIWaterFeeder extends EntityAIBase {
 		}
 		Vec3 targetBlock = this.dinosaur.getBlockToEat(this.SEARCH_RANGE);
 
-		if (targetBlock != null)//Found Item, go there and eat it
+		if (targetBlock != null)// Found Item, go there and eat it
 		{
 			this.destX = targetBlock.xCoord;
 			this.destY = targetBlock.yCoord;
@@ -182,16 +183,17 @@ public class DinoAIWaterFeeder extends EntityAIBase {
 		case ITEM:
 			return this.targetItem.isEntityAlive() && this.targetItem != null;
 		case BLOCK:
-			return FoodMappings.instance().getBlockFoodAmount(this.dinosaur.worldObj.getBlock((int) destX, (int) destY, (int) destZ), dinosaur.selfType.diet) != 0 && this.targetBlock != null;
+			return FoodMappings.instance().getBlockFoodAmount(this.dinosaur.worldObj.getBlock((int) destX, (int) destY, (int) destZ), dinosaur.type.diet) != 0 && this.targetBlock != null;
 		case MOB:
 			return this.targetMob != null && this.targetMob.isEntityAlive();
 		case FEEDER:
 			return !this.targetFeeder.isInvalid();
-			//return targetFeeder != null;
+			// return targetFeeder != null;
 
 		}
 
-		//return ((this.dinosaur.IsHungry() || this.dinosaur.IsDeadlyHungry()) && (this.typeofTarget != -1));
+		// return ((this.dinosaur.IsHungry() || this.dinosaur.IsDeadlyHungry())
+		// && (this.typeofTarget != -1));
 	}
 
 	/**
@@ -203,11 +205,9 @@ public class DinoAIWaterFeeder extends EntityAIBase {
 		this.dinosaur.setSitting(false);
 		double Distance = Math.sqrt(Math.pow(this.dinosaur.posX - this.destX, 2.0D) + Math.pow(this.dinosaur.posZ - this.destZ, 2.0D));
 
-
 		if (Distance > Range) {
 			endTask();
 		}
-
 
 		if (this.typeofTarget == FEEDER) {
 
@@ -221,7 +221,9 @@ public class DinoAIWaterFeeder extends EntityAIBase {
 				this.TimeAtThisTarget++;
 				if (Distance < 4.5D) {
 					if (this.targetFeeder != null) {
-						//int healval = MathHelper.floor_double(this.targetFeeder.Feed(this.dinosaur, this.dinosaur.selfType) / 15D);
+						// int healval =
+						// MathHelper.floor_double(this.targetFeeder.Feed(this.dinosaur,
+						// this.dinosaur.selfType) / 15D);
 						// this.dinosaur.heal(healval);
 					}
 				}
@@ -243,18 +245,16 @@ public class DinoAIWaterFeeder extends EntityAIBase {
 				if (Distance < 2.5) {
 
 					if (this.targetItem != null && this.targetItem.isEntityAlive()) {
-						/*int i = this.dinosaur.PickUpItem(this.targetItem.getEntityItem());
-
-                        if (i > 0)
-                        {
-                            this.targetItem.getEntityItem().stackSize = i;
-                            endTask();
-                        }
-                        else
-                        {
-                            this.targetItem.setDead();
-                            endTask();
-                        }*/
+						/*
+						 * int i =
+						 * this.dinosaur.PickUpItem(this.targetItem.getEntityItem
+						 * ());
+						 * 
+						 * if (i > 0) {
+						 * this.targetItem.getEntityItem().stackSize = i;
+						 * endTask(); } else { this.targetItem.setDead();
+						 * endTask(); }
+						 */
 					}
 				}
 			} else {
@@ -263,7 +263,7 @@ public class DinoAIWaterFeeder extends EntityAIBase {
 		}
 
 		if (this.typeofTarget == BLOCK) {
-			if (FoodMappings.instance().getBlockFoodAmount(this.dinosaur.worldObj.getBlock((int) destX, (int) destY, (int) destZ), dinosaur.selfType.diet) == 0) {
+			if (FoodMappings.instance().getBlockFoodAmount(this.dinosaur.worldObj.getBlock((int) destX, (int) destY, (int) destZ), dinosaur.type.diet) == 0) {
 				endTask();
 			}
 			if (Distance < SEARCH_RANGE) {
@@ -284,7 +284,7 @@ public class DinoAIWaterFeeder extends EntityAIBase {
 	}
 
 	public void endTask() {
-		//        this.dinosaur.getNavigator().clearPathEntity();
+		// this.dinosaur.getNavigator().clearPathEntity();
 		this.TimeAtThisTarget = 0;
 		targetItem = null;
 		targetBlock = null;
@@ -313,7 +313,7 @@ public class DinoAIWaterFeeder extends EntityAIBase {
 		for (TileEntity entityFeeder : nearbyEntities) {
 			TileEntityNewFeeder nearbyFeeder = (TileEntityNewFeeder) entityFeeder;
 
-			if (this.dinosaur.selfType.useFeeder()) {
+			if (this.dinosaur.type.useFeeder()) {
 				return nearbyFeeder;
 			}
 		}
@@ -331,7 +331,7 @@ public class DinoAIWaterFeeder extends EntityAIBase {
 
 			EntityItem entityItem1 = (EntityItem) iterateNearbyItems.next();
 			if (entityItem1.getEntityItem() != null && entityItem1.getEntityItem().getItem() != null)
-				if ((FoodMappings.instance().getItemFoodAmount(entityItem1.getEntityItem().getItem(), dinosaur.selfType.diet) != 0) && this.dinosaur.getDistanceSqToEntity(entityItem1) < range) {
+				if ((FoodMappings.instance().getItemFoodAmount(entityItem1.getEntityItem().getItem(), dinosaur.type.diet) != 0) && this.dinosaur.getDistanceSqToEntity(entityItem1) < range) {
 					entityItem = entityItem1;
 				}
 		}
@@ -345,7 +345,7 @@ public class DinoAIWaterFeeder extends EntityAIBase {
 		this.deltaX = this.destX - this.dinosaur.posX;
 		this.deltaY = this.destY - this.dinosaur.posY;
 		this.deltaZ = this.destZ - this.dinosaur.posZ;
-		//rotate entity to face target
+		// rotate entity to face target
 		this.dinosaur.renderYawOffset = this.dinosaur.rotationYaw = -((float) Math.atan2(deltaX, deltaZ)) * 180.0F / (float) Math.PI;
 
 		this.movePosX = this.deltaX;
