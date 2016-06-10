@@ -702,7 +702,6 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
                     this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.0D);
                 }
             }
-            System.out.println(this.getEntityAttribute(SharedMonsterAttributes.maxHealth).getAttributeValue());
         }
     }
 
@@ -1215,7 +1214,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
     }
 
     private void sendOrderMessage(EnumOrderType var1) {
-        String S = StatCollector.translateToLocal(LocalizationStrings.ORDER_HEAD) + StatCollector.translateToLocal("order." + var1.toString());
+        String S = StatCollector.translateToLocal(LocalizationStrings.ORDER_HEAD) + StatCollector.translateToLocal("order." + var1.toString().toLowerCase());
         Revival.showMessage(S, (EntityPlayer) this.getOwner());
     }
 

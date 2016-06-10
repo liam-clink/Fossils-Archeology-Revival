@@ -1,0 +1,71 @@
+package com.github.revival.server.entity.ai;
+
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.entity.player.EntityPlayer;
+
+import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
+
+public class DinoAIWatchClosest extends EntityAIBase {
+	private EntityNewPrehistoric prehsitoric;
+	protected Entity closestEntity;
+	private float maxDistanceForPlayer;
+	private int lookTime;
+	private float chance;
+	private Class watchedClass;
+
+	public DinoAIWatchClosest(EntityNewPrehistoric prehsitoric, Class watchedClass, float distance) {
+		this.prehsitoric = prehsitoric;
+		this.watchedClass = watchedClass;
+		this.maxDistanceForPlayer = distance;
+		this.chance = 0.02F;
+		this.setMutexBits(2);
+	}
+
+	public DinoAIWatchClosest(EntityNewPrehistoric prehsitoric, Class watchedClass, float distance, float chance) {
+		this.prehsitoric = prehsitoric;
+		this.watchedClass = watchedClass;
+		this.maxDistanceForPlayer = distance;
+		this.chance = chance;
+		this.setMutexBits(2);
+	}
+
+	public boolean shouldExecute() {
+		if (this.prehsitoric.isSleeping()) {
+			return false;
+		}
+
+		if (this.prehsitoric.getRNG().nextFloat() >= this.chance) {
+			return false;
+		} else {
+			if (this.prehsitoric.getAttackTarget() != null) {
+				this.closestEntity = this.prehsitoric.getAttackTarget();
+			}
+
+			if (this.watchedClass == EntityPlayer.class) {
+				this.closestEntity = this.prehsitoric.worldObj.getClosestPlayerToEntity(this.prehsitoric, (double) this.maxDistanceForPlayer);
+			} else {
+				this.closestEntity = this.prehsitoric.worldObj.findNearestEntityWithinAABB(this.watchedClass, this.prehsitoric.boundingBox.expand((double) this.maxDistanceForPlayer, 3.0D, (double) this.maxDistanceForPlayer), this.prehsitoric);
+			}
+
+			return this.closestEntity != null;
+		}
+	}
+
+	public boolean continueExecuting() {
+		return !this.closestEntity.isEntityAlive() ? false : (this.prehsitoric.getDistanceSqToEntity(this.closestEntity) > (double) (this.maxDistanceForPlayer * this.maxDistanceForPlayer) ? false : this.lookTime > 0);
+	}
+
+	public void startExecuting() {
+		this.lookTime = 40 + this.prehsitoric.getRNG().nextInt(40);
+	}
+
+	public void resetTask() {
+		this.closestEntity = null;
+	}
+
+	public void updateTask() {
+		this.prehsitoric.getLookHelper().setLookPosition(this.closestEntity.posX, this.closestEntity.posY + (double) this.closestEntity.getEyeHeight(), this.closestEntity.posZ, 10.0F, (float) this.prehsitoric.getVerticalFaceSpeed());
+		--this.lookTime;
+	}
+}

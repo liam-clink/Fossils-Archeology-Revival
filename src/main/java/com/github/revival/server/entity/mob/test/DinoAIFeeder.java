@@ -95,7 +95,6 @@ public class DinoAIFeeder extends EntityAIBase {
                     this.targetFeeder = this.dinosaur.getNearestFeeder(range / 2);
 
                     if (this.targetFeeder != null) {
-                        Revival.printDebug("Found Feeder at: " + this.targetFeeder.xCoord + ", " + this.targetFeeder.yCoord + ", " + this.targetFeeder.zCoord);
                         this.destX = this.targetFeeder.xCoord;
                         this.destY = this.targetFeeder.yCoord;
                         this.destZ = this.targetFeeder.zCoord;
