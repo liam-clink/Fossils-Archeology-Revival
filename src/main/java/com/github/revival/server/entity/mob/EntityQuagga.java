@@ -64,7 +64,6 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic {
      */
     protected int temper;
     protected float jumpPower;
-    EntityPrehistoric entityPrehistoricClass = new EntityPrehistoric(worldObj);
     private int eatingHaystackCounter;
     private int openMouthCounter;
     private int jumpRearingCounter;
@@ -1350,6 +1349,5 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic {
 
     @SideOnly(Side.CLIENT)
     public void showPedia2(GuiPedia p0) {
-        entityPrehistoricClass.ShowPedia2(p0, "Quagga");
     }
 }

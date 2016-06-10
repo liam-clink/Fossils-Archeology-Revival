@@ -15,6 +15,7 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAIOwnerHurtByTarget;
 import net.minecraft.entity.ai.EntityAIOwnerHurtTarget;
+import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -26,6 +27,10 @@ public class EntityAnkylosaurus extends EntityNewPrehistoric {
 
     public EntityAnkylosaurus(World world) {
         super(world, EnumPrehistoric.Ankylosaurus, 2, 9, 25, 70, 0.15, 0.25);
+        this.getNavigator().setAvoidsWater(true);
+        this.getNavigator().setCanSwim(true);
+        this.tasks.addTask(1, new EntityAISwimming(this));
+        this.tasks.addTask(2, this.aiSit);
         this.tasks.addTask(3, new DinoAIAttackOnCollide(this, 1.0D, false));
         this.tasks.addTask(4, new DinoAIFollowOwner(this, 1.0D, 10.0F, 2.0F));
         this.tasks.addTask(5, new DinoAIFeeder(this, 16));
@@ -35,7 +40,7 @@ public class EntityAnkylosaurus extends EntityNewPrehistoric {
         this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
         this.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
-        this.setSize(2.2F, 1.0F);
+        this.setSize(1.7F, 1.0F);
         this.pediaScale = 3F;
         this.nearByMobsAllowed = 6;
         minSize = 1.0F;

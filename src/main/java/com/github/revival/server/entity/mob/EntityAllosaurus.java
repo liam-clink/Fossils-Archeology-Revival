@@ -36,7 +36,6 @@ public class EntityAllosaurus extends EntityNewPrehistoric {
         super(world, EnumPrehistoric.Allosaurus, 2, 11, 10, 58, 0.25, 0.42);
         this.getNavigator().setAvoidsWater(true);
         this.getNavigator().setCanSwim(true);
-        this.getNavigator().setAvoidSun(true);
         this.tasks.addTask(1, new EntityAISwimming(this));
         this.tasks.addTask(2, this.aiSit);
         this.tasks.addTask(3, new DinoAIAvoidEntity(this, 16.0F, 0.8D, 1.33D));

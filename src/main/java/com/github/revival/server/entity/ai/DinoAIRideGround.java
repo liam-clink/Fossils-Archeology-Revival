@@ -1,35 +1,28 @@
-/*
- ** 2012 April 25
- **
- ** The author disclaims copyright to this source code.  In place of
- ** a legal notice, here is a blessing:
- **    May you do good and not evil.
- **    May you find forgiveness for yourself and forgive others.
- **    May you share freely, never taking more than you give.
- */
 package com.github.revival.server.entity.ai;
 
-import com.github.revival.server.entity.mob.EntityPrehistoric;
-import com.github.revival.server.item.FAItemRegistry;
+import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Vec3;
 
-/**
- * AI for player-controlled ground movements.
- *
- * @author Nico Bergemann <barracuda415 at yahoo.de>
- */
-public class DinoAIRideGround extends DinoAIRide {
+import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
+import com.github.revival.server.item.FAItemRegistry;
+
+public class DinoAIRideGround extends EntityAIBase {
     private static final float PLAYER_SPEED = 0.98f;
     private final double speed;
     public int FollowTimeWithoutWhip = 120;
     private int lastTimeSeenWhip = -1;
-
-    public DinoAIRideGround(EntityPrehistoric dinosaur, double speed) {
-        super(dinosaur);
+    private EntityNewPrehistoric prehistoric;
+    private EntityPlayer rider;
+    
+    public DinoAIRideGround(EntityNewPrehistoric dinosaur, double speed) {
+        super();
+        this.prehistoric = dinosaur;
         this.speed = speed;
+        setMutexBits(-1);
+
     }
 
     public static boolean hasEquipped(EntityPlayer player, Item item) {
@@ -45,18 +38,21 @@ public class DinoAIRideGround extends DinoAIRide {
 
     @Override
     public boolean shouldExecute() {
-        super.shouldExecute();
+        rider = prehistoric.getRidingPlayer();
+        if(rider == null){
+        	return false;
+        }
         if (hasEquipped(rider, FAItemRegistry.INSTANCE.whip)) {
             this.lastTimeSeenWhip = 0;
         }
 
-        return this.lastTimeSeenWhip != -1 && this.dinosaur.riddenByEntity != null;
+        return this.lastTimeSeenWhip != -1 && this.prehistoric.riddenByEntity != null;
 
     }
 
     @Override
     public void startExecuting() {
-        dinosaur.getNavigator().clearPathEntity();
+        prehistoric.getNavigator().clearPathEntity();
         this.lastTimeSeenWhip = -1;
     }
 
@@ -82,16 +78,10 @@ public class DinoAIRideGround extends DinoAIRide {
                 }
 
                 if (speedPlayer > 0) {
-                    dinosaur.getMoveHelper().setMoveTo(dinosaur.posX + look.xCoord, dinosaur.posY, dinosaur.posZ + look.zCoord, speed * speedPlayer);
-
-                    // This block checks if the dinosaur can be ridden in water,
-                    // if so, handle Y velocity. Still looking for elegant way.
-                    if (!dinosaur.shouldDismountInWater(rider) && dinosaur.isInWater()) {
+                    prehistoric.getMoveHelper().setMoveTo(prehistoric.posX + look.xCoord, prehistoric.posY, prehistoric.posZ + look.zCoord, speed * speedPlayer);
+                    if (!prehistoric.shouldDismountInWater(rider) && prehistoric.isInWater()) {
                         if (Math.abs(look.yCoord) > 0.4) {
-                            dinosaur.motionY = Math.max(-0.15, Math.min(0.15, look.yCoord));
-                            // dinosaur.setVelocity(dinosaur.motionX,
-                            // Math.max(-0.15, Math.min(0.15, look.yCoord)),
-                            // dinosaur.motionZ);
+                            prehistoric.motionY = Math.max(-0.15, Math.min(0.15, look.yCoord));
                         }
                     }
                 }
