@@ -12,7 +12,7 @@ public class EntityCoelacanth extends EntityFishBase {
 
     @Override
     public boolean getCanSpawnHere() {
-        return this.posY > 45.0D && this.posY < 63.0D && super.getCanSpawnHere();
+        return this.posY < 35.0D && super.getCanSpawnHere();
     }
 
     @Override
@@ -24,4 +24,5 @@ public class EntityCoelacanth extends EntityFishBase {
     protected double getSwimSpeed() {
         return 0.35D;
     }
+
 }

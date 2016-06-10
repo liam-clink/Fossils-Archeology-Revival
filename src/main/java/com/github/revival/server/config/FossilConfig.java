@@ -23,6 +23,15 @@ public class FossilConfig {
     @ConfigEntry(category = "generation")
     public int[] oreGenerationDimensions = {0};
 
+    @ConfigEntry(category = "entity spawning")
+    public boolean spawnCoelacanth = true;
+    @ConfigEntry(category = "entity spawning")
+    public boolean spawnSturgeon = true;
+    @ConfigEntry(category = "entity spawning")
+    public boolean spawnAlligatorGar = true;
+    @ConfigEntry(category = "entity spawning")
+    public boolean spawnNautilus = true;
+    
     @ConfigEntry
     public boolean allowFlying = false;
     @ConfigEntry
@@ -74,4 +83,6 @@ public class FossilConfig {
     public int enchantmentIDArcheology = 91;
     @ConfigEntry(category = "ids")
     public int enchantmentIDPaleontology = 90;
+    @ConfigEntry(category = "ids")
+    public int villagerId = 303;
 }

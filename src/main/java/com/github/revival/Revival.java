@@ -76,8 +76,8 @@ public class Revival {
     public void preInit(FMLPreInitializationEvent event) {
         MinecraftForge.EVENT_BUS.register(new FossilBonemealEvent());
         MinecraftForge.EVENT_BUS.register(new EventPlayer());
-        VillagerRegistry.instance().registerVillageTradeHandler(10, new FossilTradeHandler());
-        VillagerRegistry.instance().registerVillagerId(10);
+        VillagerRegistry.instance().registerVillageTradeHandler(CONFIG.villagerId, new FossilTradeHandler());
+        VillagerRegistry.instance().registerVillagerId(CONFIG.villagerId);
 
         FATabRegistry.INSTANCE.init();
         FABlockRegistry.INSTANCE.init();
