@@ -7,7 +7,7 @@ import net.minecraft.item.ItemSlab;
 
 public class SlabAncientWoodItem extends ItemSlab {
 
-	public SlabAncientWoodItem(Block block) {
-		super(block, (BlockSlab) FABlockRegistry.INSTANCE.ancientWoodSingleSlab, (BlockSlab) FABlockRegistry.INSTANCE.ancientWoodDoubleSlab, false);
-	}
+    public SlabAncientWoodItem(Block block) {
+        super(block, (BlockSlab) FABlockRegistry.INSTANCE.ancientWoodSingleSlab, (BlockSlab) FABlockRegistry.INSTANCE.ancientWoodDoubleSlab, false);
+    }
 }

@@ -8,21 +8,21 @@ import java.util.Random;
 
 public class BlockSlimeTrail extends BlockRail {
 
-	public BlockSlimeTrail() {
-		super();
-		this.slipperiness = 1.12F;
+    public BlockSlimeTrail() {
+        super();
+        this.slipperiness = 1.12F;
 
-	}
+    }
 
-	@Override
-	public Item getItemDropped(int var1, Random var2, int var3) {
-		if (var2.nextInt(3) == 0) {
-			return Items.slime_ball;
-		} else {
-			return Item.getItemById(0);
+    @Override
+    public Item getItemDropped(int var1, Random var2, int var3) {
+        if (var2.nextInt(3) == 0) {
+            return Items.slime_ball;
+        } else {
+            return Item.getItemById(0);
 
-		}
+        }
 
-	}
+    }
 
 }

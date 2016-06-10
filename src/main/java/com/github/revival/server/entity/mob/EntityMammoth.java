@@ -2,17 +2,7 @@ package com.github.revival.server.entity.mob;
 
 import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 import com.github.revival.server.enums.EnumPrehistoric;
-import com.github.revival.server.enums.EnumPrehistoricAI.Activity;
-import com.github.revival.server.enums.EnumPrehistoricAI.Attacking;
-import com.github.revival.server.enums.EnumPrehistoricAI.Climbing;
-import com.github.revival.server.enums.EnumPrehistoricAI.Following;
-import com.github.revival.server.enums.EnumPrehistoricAI.Jumping;
-import com.github.revival.server.enums.EnumPrehistoricAI.Moving;
-import com.github.revival.server.enums.EnumPrehistoricAI.Response;
-import com.github.revival.server.enums.EnumPrehistoricAI.Stalking;
-import com.github.revival.server.enums.EnumPrehistoricAI.Taming;
-import com.github.revival.server.enums.EnumPrehistoricAI.Untaming;
-import com.github.revival.server.enums.EnumPrehistoricAI.WaterAbility;
+import com.github.revival.server.enums.EnumPrehistoricAI.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIEatGrass;
@@ -34,228 +24,228 @@ import java.util.ArrayList;
 
 public class EntityMammoth extends EntityNewPrehistoric implements IShearable {
 
-	private EntityAIEatGrass aiEatGrass = new EntityAIEatGrass(this);
-	private int eatGrassTimes = 0;
-	private static PotionEffect BIOME_EFFECT = new PotionEffect(Potion.weakness.id, 60, 1);
-	
-	public EntityMammoth(World world) {
-		super(world, EnumPrehistoric.Mammoth, 2, 12, 10, 66, 0.2, 0.3);
-		this.setSize(0.7F, 0.7F);
-		this.tasks.addTask(10, aiEatGrass);
-		this.pediaScale = 1.5F;
-		minSize = 1.3F;
-		maxSize = 5F;
-		teenAge = 7;
-		developsResistance = true;
-		breaksBlocks = true;
-	}
+    private EntityAIEatGrass aiEatGrass = new EntityAIEatGrass(this);
+    private int eatGrassTimes = 0;
+    private static PotionEffect BIOME_EFFECT = new PotionEffect(Potion.weakness.id, 60, 1);
 
-	@Override
-	public int getAttackLength() {
-		return 35;
-	}
+    public EntityMammoth(World world) {
+        super(world, EnumPrehistoric.Mammoth, 2, 12, 10, 66, 0.2, 0.3);
+        this.setSize(0.7F, 0.7F);
+        this.tasks.addTask(10, aiEatGrass);
+        this.pediaScale = 1.5F;
+        minSize = 1.3F;
+        maxSize = 5F;
+        teenAge = 7;
+        developsResistance = true;
+        breaksBlocks = true;
+    }
 
-	@Override
-	protected void entityInit() {
-		super.entityInit();
-		this.dataWatcher.addObject(30, new Byte((byte) 3));
-	}
+    @Override
+    public int getAttackLength() {
+        return 35;
+    }
 
-	@Override
-	public boolean isShearable(ItemStack item, IBlockAccess world, int x, int y, int z) {
-		this.eatGrassTimes = 0;
-		return !this.getSheared() && !this.isChild();
-	}
+    @Override
+    protected void entityInit() {
+        super.entityInit();
+        this.dataWatcher.addObject(30, (byte) 3);
+    }
 
-	@Override
-	public ArrayList<ItemStack> onSheared(ItemStack item, IBlockAccess world, int x, int y, int z, int fortune) {
-		ArrayList var7 = new ArrayList();
-		int var8 = 1 + this.rand.nextInt(20);
+    @Override
+    public boolean isShearable(ItemStack item, IBlockAccess world, int x, int y, int z) {
+        this.eatGrassTimes = 0;
+        return !this.getSheared() && !this.isChild();
+    }
 
-		for (int var9 = 0; var9 < var8; ++var9) {
+    @Override
+    public ArrayList<ItemStack> onSheared(ItemStack item, IBlockAccess world, int x, int y, int z, int fortune) {
+        ArrayList var7 = new ArrayList();
+        int var8 = 1 + this.rand.nextInt(20);
 
-			var7.add(new ItemStack(Blocks.wool, 1, 12));
+        for (int var9 = 0; var9 < var8; ++var9) {
 
-		}
-		return var7;
-	}
+            var7.add(new ItemStack(Blocks.wool, 1, 12));
 
-	@Override
-	public void setSpawnValues() {
-	}
+        }
+        return var7;
+    }
 
-	public boolean getSheared() {
-		return (this.dataWatcher.getWatchableObjectByte(30) & 16) != 0;
-	}
+    @Override
+    public void setSpawnValues() {
+    }
 
-	public void setSheared(boolean var1) {
-		byte var2 = this.dataWatcher.getWatchableObjectByte(30);
+    public boolean getSheared() {
+        return (this.dataWatcher.getWatchableObjectByte(30) & 16) != 0;
+    }
 
-		if (var1) {
-			this.dataWatcher.updateObject(30, Byte.valueOf((byte) (var2 | 16)));
-		} else {
-			this.dataWatcher.updateObject(30, Byte.valueOf((byte) (var2 & -17)));
-		}
-	}
+    public void setSheared(boolean var1) {
+        byte var2 = this.dataWatcher.getWatchableObjectByte(30);
 
-	@Override
-	public void writeEntityToNBT(NBTTagCompound var1) {
-		super.writeEntityToNBT(var1);
-		var1.setBoolean("Sheared", this.getSheared());
-	}
+        if (var1) {
+            this.dataWatcher.updateObject(30, (byte) (var2 | 16));
+        } else {
+            this.dataWatcher.updateObject(30, (byte) (var2 & -17));
+        }
+    }
 
-	@Override
-	public void readEntityFromNBT(NBTTagCompound var1) {
-		super.readEntityFromNBT(var1);
-		this.setSheared(var1.getBoolean("Sheared"));
+    @Override
+    public void writeEntityToNBT(NBTTagCompound var1) {
+        super.writeEntityToNBT(var1);
+        var1.setBoolean("Sheared", this.getSheared());
+    }
 
-	}
+    @Override
+    public void readEntityFromNBT(NBTTagCompound var1) {
+        super.readEntityFromNBT(var1);
+        this.setSheared(var1.getBoolean("Sheared"));
 
-	@Override
-	public void eatGrassBonus() {
-		if (this.getSheared()) {
-			++this.eatGrassTimes;
+    }
 
-			if (this.eatGrassTimes >= 5) {
-				this.setSheared(false);
-				this.eatGrassTimes = 0;
-			}
-		}
+    @Override
+    public void eatGrassBonus() {
+        if (this.getSheared()) {
+            ++this.eatGrassTimes;
 
-		if (this.isChild()) {
-			int var1 = this.getGrowingAge() + 1200;
+            if (this.eatGrassTimes >= 5) {
+                this.setSheared(false);
+                this.eatGrassTimes = 0;
+            }
+        }
 
-			if (var1 > 0) {
-				var1 = 0;
-			}
+        if (this.isChild()) {
+            int var1 = this.getGrowingAge() + 1200;
 
-			this.setGrowingAge(var1);
-		}
-	}
+            if (var1 > 0) {
+                var1 = 0;
+            }
 
-	@Override
-	public void onLivingUpdate() {
-		int i = MathHelper.floor_double(this.posX);
-		int j = MathHelper.floor_double(this.posY);
-		int k = MathHelper.floor_double(this.posZ);
-		if (!this.isPotionActive(Potion.weakness) && this.worldObj.getBiomeGenForCoords(i, k).getFloatTemperature(i, j, k) > 1.0 && !this.getSheared()) {
-			this.addPotionEffect(BIOME_EFFECT);
-		}
+            this.setGrowingAge(var1);
+        }
+    }
 
-		super.onLivingUpdate();
-	}
+    @Override
+    public void onLivingUpdate() {
+        int i = MathHelper.floor_double(this.posX);
+        int j = MathHelper.floor_double(this.posY);
+        int k = MathHelper.floor_double(this.posZ);
+        if (!this.isPotionActive(Potion.weakness) && this.worldObj.getBiomeGenForCoords(i, k).getFloatTemperature(i, j, k) > 1.0 && !this.getSheared()) {
+            this.addPotionEffect(BIOME_EFFECT);
+        }
 
-	@Override
-	public Activity aiActivityType() {
+        super.onLivingUpdate();
+    }
 
-		return Activity.DIURINAL;
-	}
+    @Override
+    public Activity aiActivityType() {
 
-	@Override
-	public Attacking aiAttackType() {
+        return Activity.DIURINAL;
+    }
 
-		return Attacking.KNOCKUP;
-	}
+    @Override
+    public Attacking aiAttackType() {
 
-	@Override
-	public Climbing aiClimbType() {
+        return Attacking.KNOCKUP;
+    }
 
-		return Climbing.NONE;
-	}
+    @Override
+    public Climbing aiClimbType() {
 
-	@Override
-	public Following aiFollowType() {
+        return Climbing.NONE;
+    }
 
-		return Following.NONE;
-	}
+    @Override
+    public Following aiFollowType() {
 
-	@Override
-	public Jumping aiJumpType() {
+        return Following.NONE;
+    }
 
-		return Jumping.BASIC;
-	}
+    @Override
+    public Jumping aiJumpType() {
 
-	@Override
-	public Response aiResponseType() {
+        return Jumping.BASIC;
+    }
 
-		return Response.TERITORIAL;
-	}
+    @Override
+    public Response aiResponseType() {
 
-	@Override
-	public Stalking aiStalkType() {
+        return Response.TERITORIAL;
+    }
 
-		return Stalking.NONE;
-	}
+    @Override
+    public Stalking aiStalkType() {
 
-	@Override
-	public Taming aiTameType() {
+        return Stalking.NONE;
+    }
 
-		return Taming.IMPRINTING;
-	}
+    @Override
+    public Taming aiTameType() {
 
-	@Override
-	public Untaming aiUntameType() {
+        return Taming.IMPRINTING;
+    }
 
-		return Untaming.ATTACK;
-	}
+    @Override
+    public Untaming aiUntameType() {
 
-	@Override
-	public Moving aiMovingType() {
+        return Untaming.ATTACK;
+    }
 
-		return Moving.WALK;
-	}
+    @Override
+    public Moving aiMovingType() {
 
-	@Override
-	public WaterAbility aiWaterAbilityType() {
+        return Moving.WALK;
+    }
 
-		return WaterAbility.NONE;
-	}
+    @Override
+    public WaterAbility aiWaterAbilityType() {
 
-	@Override
-	public boolean doesFlock() {
-		return true;
-	}
+        return WaterAbility.NONE;
+    }
 
-	@Override
-	public Item getOrderItem() {
+    @Override
+    public boolean doesFlock() {
+        return true;
+    }
 
-		return Items.stick;
-	}
+    @Override
+    public Item getOrderItem() {
 
-	@Override
-	public int getAdultAge() {
-		return 14;
-	}
+        return Items.stick;
+    }
 
-	@Override
-	public float getMaleSize() {
-		return 1.2F;
-	}
+    @Override
+    public int getAdultAge() {
+        return 14;
+    }
 
-	@Override
-	public boolean attackEntityAsMob(Entity entity) {
-		if (this.getAttackBounds().intersectsWith(entity.boundingBox)) {
-			if (this.getAnimation() == NO_ANIMATION) {
-				this.setAnimation(ATTACK_ANIMATION);
-				return false;
-			}
+    @Override
+    public float getMaleSize() {
+        return 1.2F;
+    }
 
-			if (this.getAnimation() == ATTACK_ANIMATION && this.getAnimationTick() == 20) {
-				IAttributeInstance iattributeinstance = this.getEntityAttribute(SharedMonsterAttributes.attackDamage);
-				boolean flag = entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) iattributeinstance.getAttributeValue());
-				if (entity.ridingEntity != null) {
-					if (entity.ridingEntity == this) {
-						entity.mountEntity(null);
-					}
-				}
-				entity.motionY += 0.4000000059604645D;
-				double d0 = this.getAttackTarget().posX - this.posX;
-				double d1 = this.getAttackTarget().posZ - this.posZ;
-				float f = MathHelper.sqrt_double(d0 * d0 + d1 * d1);
-				entity.addVelocity((double) (-MathHelper.sin((this.rotationYaw - 180) * (float) Math.PI / 180.0F) * 2 * 0.5F), 0.1D, (double) (MathHelper.cos((this.rotationYaw - 180) * (float) Math.PI / 180.0F) * 2 * 0.5F));
-				return flag;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean attackEntityAsMob(Entity entity) {
+        if (this.getAttackBounds().intersectsWith(entity.boundingBox)) {
+            if (this.getAnimation() == NO_ANIMATION) {
+                this.setAnimation(ATTACK_ANIMATION);
+                return false;
+            }
+
+            if (this.getAnimation() == ATTACK_ANIMATION && this.getAnimationTick() == 20) {
+                IAttributeInstance iattributeinstance = this.getEntityAttribute(SharedMonsterAttributes.attackDamage);
+                boolean flag = entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) iattributeinstance.getAttributeValue());
+                if (entity.ridingEntity != null) {
+                    if (entity.ridingEntity == this) {
+                        entity.mountEntity(null);
+                    }
+                }
+                entity.motionY += 0.4000000059604645D;
+                double d0 = this.getAttackTarget().posX - this.posX;
+                double d1 = this.getAttackTarget().posZ - this.posZ;
+                float f = MathHelper.sqrt_double(d0 * d0 + d1 * d1);
+                entity.addVelocity((double) (-MathHelper.sin((this.rotationYaw - 180) * (float) Math.PI / 180.0F) * 2 * 0.5F), 0.1D, (double) (MathHelper.cos((this.rotationYaw - 180) * (float) Math.PI / 180.0F) * 2 * 0.5F));
+                return flag;
+            }
+        }
+        return false;
+    }
 }

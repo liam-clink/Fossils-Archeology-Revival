@@ -8,30 +8,30 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 public class BirdEggItem extends Item {
-	EnumPrehistoric creature;
-	boolean cultivated;
+    EnumPrehistoric creature;
+    boolean cultivated;
 
-	public BirdEggItem(EnumPrehistoric creature, boolean cultivated) {
-		super();
-		this.creature = creature;
-		this.cultivated = cultivated;
-		this.maxStackSize = 16;
-	}
+    public BirdEggItem(EnumPrehistoric creature, boolean cultivated) {
+        super();
+        this.creature = creature;
+        this.cultivated = cultivated;
+        this.maxStackSize = 16;
+    }
 
-	/**
-	 * Called whenever this item is equipped and the right mouse button is
-	 * pressed. Args: itemStack, world, entityPlayer
-	 */
-	@Override
-	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
-		if (!par3EntityPlayer.capabilities.isCreativeMode) {
-			--par1ItemStack.stackSize;
-		}
+    /**
+     * Called whenever this item is equipped and the right mouse button is
+     * pressed. Args: itemStack, world, entityPlayer
+     */
+    @Override
+    public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
+        if (!par3EntityPlayer.capabilities.isCreativeMode) {
+            --par1ItemStack.stackSize;
+        }
 
-		par2World.playSoundAtEntity(par3EntityPlayer, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
-		par2World.spawnEntityInWorld(new EntityBirdEgg(par2World, par3EntityPlayer, creature, cultivated, this));
+        par2World.playSoundAtEntity(par3EntityPlayer, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+        par2World.spawnEntityInWorld(new EntityBirdEgg(par2World, par3EntityPlayer, creature, cultivated, this));
 
-		return par1ItemStack;
-	}
+        return par1ItemStack;
+    }
 
 }

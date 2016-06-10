@@ -8,47 +8,46 @@ import net.minecraft.entity.player.EntityPlayer;
 
 public class FossilConnectionEvent {
 
-	@SubscribeEvent
-	public void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
-		EntityPlayer player = event.player;
+    @SubscribeEvent
+    public void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
+        EntityPlayer player = event.player;
 
-		if (Revival.enableDebugging()) {
-			Revival.showMessage("------- DEBUG MODE IS ON. TURN OFF BEFORE RELEASING! --------", player);
-		}
+        if (Revival.enableDebugging()) {
+            Revival.showMessage("------- DEBUG MODE IS ON. TURN OFF BEFORE RELEASING! --------", player);
+        }
 
-		switch (Revival.STATE) {
-		case DEV:
+        switch (Revival.STATE) {
+            case DEV:
 
-			if (Revival.CONFIG.loginMessage) {
-				Revival.showMessage("You are running F/A:Revival Dev Build, " + Revival.VERSION + ".", player);
-				Revival.showMessage("Github: https://github.com/FossilsArcheologyRevival/FossilArcheology1.7", player);
-			}
-			return;
+                if (Revival.CONFIG.loginMessage) {
+                    Revival.showMessage("You are running F/A:Revival Dev Build, " + Revival.VERSION + ".", player);
+                    Revival.showMessage("Github: https://github.com/FossilsArcheologyRevival/FossilArcheology1.7", player);
+                }
+                return;
 
-		case BETA:
-			if (Revival.CONFIG.loginMessage) {
-				Revival.showMessage("You are running Fossils and Archaeology Revival " + Revival.VERSION + ".", player);
-				Revival.showMessage("This mod is currently in a BETA state. Be sure to backup worlds.", player);
-				Revival.showMessage("Forum and support: http://www.minecraftforum.net/topic/1708636-", player);
-				Revival.showMessage("Github: https://github.com/FossilsArcheologyRevival/FossilArcheology1.7", player);
-				Revival.CONFIG.loginMessage = false;
-				ConfigHandler.INSTANCE.saveConfigForID(Revival.MODID);
-			}
-			return;
+            case BETA:
+                if (Revival.CONFIG.loginMessage) {
+                    Revival.showMessage("You are running Fossils and Archaeology Revival " + Revival.VERSION + ".", player);
+                    Revival.showMessage("This mod is currently in a BETA state. Be sure to backup worlds.", player);
+                    Revival.showMessage("Forum and support: http://www.minecraftforum.net/topic/1708636-", player);
+                    Revival.showMessage("Github: https://github.com/FossilsArcheologyRevival/FossilArcheology1.7", player);
+                    Revival.CONFIG.loginMessage = false;
+                    ConfigHandler.INSTANCE.saveConfigForID(Revival.MODID);
+                }
+                return;
 
-		case RELEASE:
-			if (Revival.CONFIG.loginMessage) {
-				Revival.showMessage("You are running Fossils and Archaeology Revival " + Revival.VERSION + ".", player);
-				Revival.showMessage("Forum and support: http://www.minecraftforum.net/topic/1708636-", player);
-				Revival.showMessage("Github: https://github.com/FossilsArcheologyRevival/FossilArcheology1.7", player);
-				Revival.CONFIG.loginMessage = false;
-				ConfigHandler.INSTANCE.saveConfigForID(Revival.MODID);
-			}
-			return;
+            case RELEASE:
+                if (Revival.CONFIG.loginMessage) {
+                    Revival.showMessage("You are running Fossils and Archaeology Revival " + Revival.VERSION + ".", player);
+                    Revival.showMessage("Forum and support: http://www.minecraftforum.net/topic/1708636-", player);
+                    Revival.showMessage("Github: https://github.com/FossilsArcheologyRevival/FossilArcheology1.7", player);
+                    Revival.CONFIG.loginMessage = false;
+                    ConfigHandler.INSTANCE.saveConfigForID(Revival.MODID);
+                }
+                return;
 
-		default:
-			return;
-		}
-	}
+            default:
+        }
+    }
 
 }

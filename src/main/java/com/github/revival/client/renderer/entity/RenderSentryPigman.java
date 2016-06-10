@@ -12,40 +12,40 @@ import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class RenderSentryPigman extends RenderBiped {
-	private static final ResourceLocation skeletonTextures = new ResourceLocation("fossil:textures/model/sentryPigman.png");
+    private static final ResourceLocation skeletonTextures = new ResourceLocation("fossil:textures/model/sentryPigman.png");
 
-	public RenderSentryPigman() {
-		super(new ModelZombie(), 0.5F);
-	}
+    public RenderSentryPigman() {
+        super(new ModelZombie(), 0.5F);
+    }
 
-	@Override
-	protected void func_82422_c() {
-		GL11.glTranslatef(0.09375F, 0.1875F, 0.0F);
-	}
+    @Override
+    protected void func_82422_c() {
+        GL11.glTranslatef(0.09375F, 0.1875F, 0.0F);
+    }
 
-	/**
-	 * Returns the location of an entity's texture. Doesn't seem to be called
-	 * unless you call Render.bindEntityTexture.
-	 */
-	protected ResourceLocation getEntityTexture(EntitySentryPigman mob) {
-		return skeletonTextures;
-	}
+    /**
+     * Returns the location of an entity's texture. Doesn't seem to be called
+     * unless you call Render.bindEntityTexture.
+     */
+    protected ResourceLocation getEntityTexture(EntitySentryPigman mob) {
+        return skeletonTextures;
+    }
 
-	/**
-	 * Returns the location of an entity's texture. Doesn't seem to be called
-	 * unless you call Render.bindEntityTexture.
-	 */
-	@Override
-	protected ResourceLocation getEntityTexture(EntityLiving mob) {
-		return this.getEntityTexture((EntitySentryPigman) mob);
-	}
+    /**
+     * Returns the location of an entity's texture. Doesn't seem to be called
+     * unless you call Render.bindEntityTexture.
+     */
+    @Override
+    protected ResourceLocation getEntityTexture(EntityLiving mob) {
+        return this.getEntityTexture((EntitySentryPigman) mob);
+    }
 
-	/**
-	 * Returns the location of an entity's texture. Doesn't seem to be called
-	 * unless you call Render.bindEntityTexture.
-	 */
-	@Override
-	protected ResourceLocation getEntityTexture(Entity mob) {
-		return this.getEntityTexture((EntitySentryPigman) mob);
-	}
+    /**
+     * Returns the location of an entity's texture. Doesn't seem to be called
+     * unless you call Render.bindEntityTexture.
+     */
+    @Override
+    protected ResourceLocation getEntityTexture(Entity mob) {
+        return this.getEntityTexture((EntitySentryPigman) mob);
+    }
 }

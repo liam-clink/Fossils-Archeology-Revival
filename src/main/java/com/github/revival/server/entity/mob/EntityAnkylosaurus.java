@@ -2,17 +2,7 @@ package com.github.revival.server.entity.mob;
 
 import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 import com.github.revival.server.enums.EnumPrehistoric;
-import com.github.revival.server.enums.EnumPrehistoricAI.Activity;
-import com.github.revival.server.enums.EnumPrehistoricAI.Attacking;
-import com.github.revival.server.enums.EnumPrehistoricAI.Climbing;
-import com.github.revival.server.enums.EnumPrehistoricAI.Following;
-import com.github.revival.server.enums.EnumPrehistoricAI.Jumping;
-import com.github.revival.server.enums.EnumPrehistoricAI.Moving;
-import com.github.revival.server.enums.EnumPrehistoricAI.Response;
-import com.github.revival.server.enums.EnumPrehistoricAI.Stalking;
-import com.github.revival.server.enums.EnumPrehistoricAI.Taming;
-import com.github.revival.server.enums.EnumPrehistoricAI.Untaming;
-import com.github.revival.server.enums.EnumPrehistoricAI.WaterAbility;
+import com.github.revival.server.enums.EnumPrehistoricAI.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
@@ -23,136 +13,136 @@ import net.minecraft.world.World;
 
 public class EntityAnkylosaurus extends EntityNewPrehistoric {
 
-	public EntityAnkylosaurus(World world) {
-		super(world, EnumPrehistoric.Ankylosaurus, 2, 9, 25, 70, 0.15, 0.25);
-		this.setSize(2.2F, 1.0F);
-		this.pediaScale = 3F;
-		this.nearByMobsAllowed = 6;
-		minSize = 1.0F;
-		maxSize = 3.0F;
-		teenAge = 5;
-		developsResistance = true;
-		breaksBlocks = true;
-	}
+    public EntityAnkylosaurus(World world) {
+        super(world, EnumPrehistoric.Ankylosaurus, 2, 9, 25, 70, 0.15, 0.25);
+        this.setSize(2.2F, 1.0F);
+        this.pediaScale = 3F;
+        this.nearByMobsAllowed = 6;
+        minSize = 1.0F;
+        maxSize = 3.0F;
+        teenAge = 5;
+        developsResistance = true;
+        breaksBlocks = true;
+    }
 
-	@Override
-	public int getAttackLength() {
-		return 30;
-	}
+    @Override
+    public int getAttackLength() {
+        return 30;
+    }
 
-	@Override
-	public int getAdultAge() {
-		return 12;
-	}
+    @Override
+    public int getAdultAge() {
+        return 12;
+    }
 
-	@Override
-	public void setSpawnValues() {
-	}
-	
-	@Override
-	public Activity aiActivityType() {
+    @Override
+    public void setSpawnValues() {
+    }
 
-		return Activity.DIURINAL;
-	}
+    @Override
+    public Activity aiActivityType() {
 
-	@Override
-	public Attacking aiAttackType() {
+        return Activity.DIURINAL;
+    }
 
-		return Attacking.TAILSWING;
-	}
+    @Override
+    public Attacking aiAttackType() {
 
-	@Override
-	public Climbing aiClimbType() {
+        return Attacking.TAILSWING;
+    }
 
-		return Climbing.NONE;
-	}
+    @Override
+    public Climbing aiClimbType() {
 
-	@Override
-	public Following aiFollowType() {
+        return Climbing.NONE;
+    }
 
-		return Following.NONE;
-	}
+    @Override
+    public Following aiFollowType() {
 
-	@Override
-	public Jumping aiJumpType() {
+        return Following.NONE;
+    }
 
-		return Jumping.BASIC;
-	}
+    @Override
+    public Jumping aiJumpType() {
 
-	@Override
-	public Response aiResponseType() {
+        return Jumping.BASIC;
+    }
 
-		return Response.TERITORIAL;
-	}
+    @Override
+    public Response aiResponseType() {
 
-	@Override
-	public Stalking aiStalkType() {
+        return Response.TERITORIAL;
+    }
 
-		return Stalking.NONE;
-	}
+    @Override
+    public Stalking aiStalkType() {
 
-	@Override
-	public Taming aiTameType() {
+        return Stalking.NONE;
+    }
 
-		return Taming.IMPRINTING;
-	}
+    @Override
+    public Taming aiTameType() {
 
-	@Override
-	public Untaming aiUntameType() {
+        return Taming.IMPRINTING;
+    }
 
-		return Untaming.STARVE;
-	}
+    @Override
+    public Untaming aiUntameType() {
 
-	@Override
-	public Moving aiMovingType() {
+        return Untaming.STARVE;
+    }
 
-		return Moving.WALK;
-	}
+    @Override
+    public Moving aiMovingType() {
 
-	@Override
-	public WaterAbility aiWaterAbilityType() {
+        return Moving.WALK;
+    }
 
-		return WaterAbility.NONE;
-	}
+    @Override
+    public WaterAbility aiWaterAbilityType() {
 
-	@Override
-	public boolean doesFlock() {
+        return WaterAbility.NONE;
+    }
 
-		return false;
-	}
+    @Override
+    public boolean doesFlock() {
 
-	@Override
-	public Item getOrderItem() {
+        return false;
+    }
 
-		return Items.stick;
-	}
+    @Override
+    public Item getOrderItem() {
 
-	@Override
-	public int getTailSegments() {
-		return 4;
-	}
+        return Items.stick;
+    }
 
-	@Override
-	public boolean attackEntityAsMob(Entity entity) {
-		if (this.getAttackBounds().intersectsWith(entity.boundingBox)) {
-			if (this.getAnimation() == NO_ANIMATION) {
-				this.setAnimation(ATTACK_ANIMATION);
-				return false;
-			}
+    @Override
+    public int getTailSegments() {
+        return 4;
+    }
 
-			if (this.getAnimation() == ATTACK_ANIMATION && this.getAnimationTick() == 20) {
-				IAttributeInstance iattributeinstance = this.getEntityAttribute(SharedMonsterAttributes.attackDamage);
-				boolean flag = entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) iattributeinstance.getAttributeValue());
-				if (entity.ridingEntity != null) {
-					if (entity.ridingEntity == this) {
-						entity.mountEntity(null);
-					}
-				}
-				entity.motionY += 0.4000000059604645D;
-				knockbackEntity(entity, 2F, 0.1F);
-				return flag;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean attackEntityAsMob(Entity entity) {
+        if (this.getAttackBounds().intersectsWith(entity.boundingBox)) {
+            if (this.getAnimation() == NO_ANIMATION) {
+                this.setAnimation(ATTACK_ANIMATION);
+                return false;
+            }
+
+            if (this.getAnimation() == ATTACK_ANIMATION && this.getAnimationTick() == 20) {
+                IAttributeInstance iattributeinstance = this.getEntityAttribute(SharedMonsterAttributes.attackDamage);
+                boolean flag = entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) iattributeinstance.getAttributeValue());
+                if (entity.ridingEntity != null) {
+                    if (entity.ridingEntity == this) {
+                        entity.mountEntity(null);
+                    }
+                }
+                entity.motionY += 0.4000000059604645D;
+                knockbackEntity(entity, 2F, 0.1F);
+                return flag;
+            }
+        }
+        return false;
+    }
 }

@@ -18,76 +18,76 @@ import net.minecraft.world.World;
 import java.util.List;
 
 public class TerrorBirdEggItem extends Item {
-	public static final String[] names = EntityTerrorBird.names;
-	@SideOnly(Side.CLIENT)
-	private IIcon[] icons;
-	private boolean isCultivated;
+    public static final String[] names = EntityTerrorBird.names;
+    @SideOnly(Side.CLIENT)
+    private IIcon[] icons;
+    private boolean isCultivated;
 
-	public TerrorBirdEggItem(boolean isCultivated) {
-		super();
-		this.maxStackSize = 16;
-		this.setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
-		this.setHasSubtypes(true);
-		this.isCultivated = isCultivated;
-	}
+    public TerrorBirdEggItem(boolean isCultivated) {
+        super();
+        this.maxStackSize = 16;
+        this.setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
+        this.setHasSubtypes(true);
+        this.isCultivated = isCultivated;
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister iconregister) {
-		icons = new IIcon[names.length];
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void registerIcons(IIconRegister iconregister) {
+        icons = new IIcon[names.length];
 
-		for (int i = 0; i < icons.length; i++) {
-			icons[i] = iconregister.registerIcon(Revival.MODID + ":TerrorBird/" + "Egg_" + this.cultivatedPrefix() + names[i]);
-		}
-	}
+        for (int i = 0; i < icons.length; i++) {
+            icons[i] = iconregister.registerIcon(Revival.MODID + ":TerrorBird/" + "Egg_" + this.cultivatedPrefix() + names[i]);
+        }
+    }
 
-	private String cultivatedPrefix() {
-		if (this.isCultivated) {
-			return "Cultivated_";
-		}
+    private String cultivatedPrefix() {
+        if (this.isCultivated) {
+            return "Cultivated_";
+        }
 
-		return "";
+        return "";
 
-	}
+    }
 
-	@Override
-	public IIcon getIconFromDamage(int par1) {
-		return icons[par1];
-	}
+    @Override
+    public IIcon getIconFromDamage(int par1) {
+        return icons[par1];
+    }
 
-	@SideOnly(Side.CLIENT)
-	@Override
-	public void getSubItems(Item item, CreativeTabs creativeTab, List list) {
-		for (int x = 0; x < (names.length); x++) {
-			list.add(new ItemStack(this, 1, x));
-		}
-	}
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void getSubItems(Item item, CreativeTabs creativeTab, List list) {
+        for (int x = 0; x < (names.length); x++) {
+            list.add(new ItemStack(this, 1, x));
+        }
+    }
 
-	@Override
-	public String getUnlocalizedName(ItemStack itemstack) {
-		int i = MathHelper.clamp_int(itemstack.getItemDamage(), 0, 15);
-		return super.getUnlocalizedName() + "." + names[i];
-	}
+    @Override
+    public String getUnlocalizedName(ItemStack itemstack) {
+        int i = MathHelper.clamp_int(itemstack.getItemDamage(), 0, 15);
+        return super.getUnlocalizedName() + "." + names[i];
+    }
 
-	/**
-	 * Called whenever this item is equipped and the right mouse button is
-	 * pressed. Args: itemStack, world, entityPlayer
-	 */
-	@Override
-	public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer player) {
-		if (!player.capabilities.isCreativeMode) {
-			--itemstack.stackSize;
-		}
+    /**
+     * Called whenever this item is equipped and the right mouse button is
+     * pressed. Args: itemStack, world, entityPlayer
+     */
+    @Override
+    public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer player) {
+        if (!player.capabilities.isCreativeMode) {
+            --itemstack.stackSize;
+        }
 
-		world.playSoundAtEntity(player, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+        world.playSoundAtEntity(player, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
 
-		if (!world.isRemote) {
-			Item item = player.inventory.getCurrentItem().getItem();
-			int subitem = itemstack.getItemDamage();
+        if (!world.isRemote) {
+            Item item = player.inventory.getCurrentItem().getItem();
+            int subitem = itemstack.getItemDamage();
 
-			world.spawnEntityInWorld(new EntityTerrorBirdEgg(world, player, subitem, isCultivated));
-		}
+            world.spawnEntityInWorld(new EntityTerrorBirdEgg(world, player, subitem, isCultivated));
+        }
 
-		return itemstack;
-	}
+        return itemstack;
+    }
 }

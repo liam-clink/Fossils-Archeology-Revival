@@ -15,149 +15,149 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 public class EntityCompsognathus extends EntityNewPrehistoric {
-	
-	public EntityCompsognathus(World world) {
-		super(world, EnumPrehistoric.Compsognathus, 1, 1, 4, 12, 0.25, 0.4);
-		this.setSize(1.1F, 1.1F);
-		this.pediaScale = 100F;
-		this.nearByMobsAllowed = 20;
-		this.tasks.addTask(3, new DinoAILeapAtTarget(this));
-		this.hasFeatherToggle = true;
-		this.featherToggle = Revival.CONFIG.featheredCompsognathus;
-		minSize = 0.25F;
-		maxSize = 0.65F;
-		teenAge = 1;
-		developsResistance = false;
-		breaksBlocks = false;
-	}
 
-	@Override
-	public int getAttackLength() {
-		return 35;
-	}
-	
-	@Override
-	public void setSpawnValues() {
-	}
+    public EntityCompsognathus(World world) {
+        super(world, EnumPrehistoric.Compsognathus, 1, 1, 4, 12, 0.25, 0.4);
+        this.setSize(1.1F, 1.1F);
+        this.pediaScale = 100F;
+        this.nearByMobsAllowed = 20;
+        this.tasks.addTask(3, new DinoAILeapAtTarget(this));
+        this.hasFeatherToggle = true;
+        this.featherToggle = Revival.CONFIG.featheredCompsognathus;
+        minSize = 0.25F;
+        maxSize = 0.65F;
+        teenAge = 1;
+        developsResistance = false;
+        breaksBlocks = false;
+    }
 
-	@Override
-	public Activity aiActivityType() {
+    @Override
+    public int getAttackLength() {
+        return 35;
+    }
 
-		return Activity.NOCTURNAL;
-	}
+    @Override
+    public void setSpawnValues() {
+    }
 
-	@Override
-	public Attacking aiAttackType() {
+    @Override
+    public Activity aiActivityType() {
 
-		return Attacking.BASIC;
-	}
+        return Activity.NOCTURNAL;
+    }
 
-	@Override
-	public Climbing aiClimbType() {
+    @Override
+    public Attacking aiAttackType() {
 
-		return Climbing.NONE;
-	}
+        return Attacking.BASIC;
+    }
 
-	@Override
-	public Following aiFollowType() {
+    @Override
+    public Climbing aiClimbType() {
 
-		return Following.AGRESSIVE;
-	}
+        return Climbing.NONE;
+    }
 
-	@Override
-	public Jumping aiJumpType() {
+    @Override
+    public Following aiFollowType() {
 
-		return Jumping.TWOBLOCKS;
-	}
+        return Following.AGRESSIVE;
+    }
 
-	@Override
-	public Response aiResponseType() {
+    @Override
+    public Jumping aiJumpType() {
 
-		return Response.SCARED;
-	}
+        return Jumping.TWOBLOCKS;
+    }
 
-	@Override
-	public Stalking aiStalkType() {
+    @Override
+    public Response aiResponseType() {
 
-		return Stalking.STEALTH;
-	}
+        return Response.SCARED;
+    }
 
-	@Override
-	public Taming aiTameType() {
+    @Override
+    public Stalking aiStalkType() {
 
-		return Taming.FEEDING;
-	}
+        return Stalking.STEALTH;
+    }
 
-	@Override
-	public Untaming aiUntameType() {
+    @Override
+    public Taming aiTameType() {
 
-		return Untaming.ATTACK;
-	}
+        return Taming.FEEDING;
+    }
 
-	@Override
-	public Moving aiMovingType() {
+    @Override
+    public Untaming aiUntameType() {
 
-		return Moving.WALK;
-	}
+        return Untaming.ATTACK;
+    }
 
-	@Override
-	public WaterAbility aiWaterAbilityType() {
+    @Override
+    public Moving aiMovingType() {
 
-		return WaterAbility.NONE;
-	}
+        return Moving.WALK;
+    }
 
-	@Override
-	public boolean doesFlock() {
-		return false;
-	}
+    @Override
+    public WaterAbility aiWaterAbilityType() {
 
-	@Override
-	public Item getOrderItem() {
-		return Items.bone;
-	}
-	
-	@Override
-	public int getAdultAge() {
-		return 3;
-	}
+        return WaterAbility.NONE;
+    }
 
-	@Override
-	public String getOverlayTexture() {
-		return "fossil:textures/blank.png";
-	}
+    @Override
+    public boolean doesFlock() {
+        return false;
+    }
 
-	@Override
-	public int getTailSegments() {
-		return 2;
-	}
+    @Override
+    public Item getOrderItem() {
+        return Items.bone;
+    }
 
-	@Override
-	public void onLivingUpdate() {
-		super.onLivingUpdate();
-		if (this.getAttackTarget() != null && this.getAnimation() == ATTACK_ANIMATION && (this.getAnimationTick() <= 20 && this.getAnimationTick() >= 17) && this.onGround) {
-			double d0 = this.getAttackTarget().posX - this.posX;
-			double d1 = this.getAttackTarget().posZ - this.posZ;
-			float f = MathHelper.sqrt_double(d0 * d0 + d1 * d1);
-			this.motionX += d0 / (double) f * 0.4D * 0.800000011920929D + this.motionX * 0.20000000298023224D;
-			this.motionZ += d1 / (double) f * 0.4D * 0.800000011920929D + this.motionZ * 0.20000000298023224D;
-			this.getLookHelper().setLookPositionWithEntity(this.getAttackTarget(), 10, 12);
-			this.motionY = (double) 0.3;
-		}
-	}
+    @Override
+    public int getAdultAge() {
+        return 3;
+    }
 
-	@Override
-	public boolean attackEntityAsMob(Entity entity) {
-		return false;
-	}
+    @Override
+    public String getOverlayTexture() {
+        return "fossil:textures/blank.png";
+    }
 
-	@Override
-	public void applyEntityCollision(Entity entity) {
-		super.applyEntityCollision(entity);
-		if (this.getAttackTarget() != null) {
-			if (this.getAttackTarget() == entity && this.getAnimation() == ATTACK_ANIMATION && !onGround && this.ridingEntity != entity) {
-				IAttributeInstance iattributeinstance = this.getEntityAttribute(SharedMonsterAttributes.attackDamage);
-				this.getAttackTarget().attackEntityFrom(DamageSource.causeMobDamage(this), (float) iattributeinstance.getAttributeValue());
-			}
-		}
-	}
+    @Override
+    public int getTailSegments() {
+        return 2;
+    }
+
+    @Override
+    public void onLivingUpdate() {
+        super.onLivingUpdate();
+        if (this.getAttackTarget() != null && this.getAnimation() == ATTACK_ANIMATION && (this.getAnimationTick() <= 20 && this.getAnimationTick() >= 17) && this.onGround) {
+            double d0 = this.getAttackTarget().posX - this.posX;
+            double d1 = this.getAttackTarget().posZ - this.posZ;
+            float f = MathHelper.sqrt_double(d0 * d0 + d1 * d1);
+            this.motionX += d0 / (double) f * 0.4D * 0.800000011920929D + this.motionX * 0.20000000298023224D;
+            this.motionZ += d1 / (double) f * 0.4D * 0.800000011920929D + this.motionZ * 0.20000000298023224D;
+            this.getLookHelper().setLookPositionWithEntity(this.getAttackTarget(), 10, 12);
+            this.motionY = 0.3;
+        }
+    }
+
+    @Override
+    public boolean attackEntityAsMob(Entity entity) {
+        return false;
+    }
+
+    @Override
+    public void applyEntityCollision(Entity entity) {
+        super.applyEntityCollision(entity);
+        if (this.getAttackTarget() != null) {
+            if (this.getAttackTarget() == entity && this.getAnimation() == ATTACK_ANIMATION && !onGround && this.ridingEntity != entity) {
+                IAttributeInstance iattributeinstance = this.getEntityAttribute(SharedMonsterAttributes.attackDamage);
+                this.getAttackTarget().attackEntityFrom(DamageSource.causeMobDamage(this), (float) iattributeinstance.getAttributeValue());
+            }
+        }
+    }
 }

@@ -3,13 +3,13 @@ package com.github.revival.server.creativetab;
 import net.minecraft.creativetab.CreativeTabs;
 
 public enum FATabRegistry {
-	INSTANCE;
+    INSTANCE;
 
-	public CreativeTabs tabFBlocks;
-	public CreativeTabs tabFItems;
+    public CreativeTabs tabFBlocks;
+    public CreativeTabs tabFItems;
 
-	public void init() {
-		tabFBlocks = new TabFBlocks("Fossil Blocks");
-		tabFItems = new TabFItems("Fossil Items");
-	}
+    public void init() {
+        tabFBlocks = new TabFBlocks("Fossil Blocks");
+        tabFItems = new TabFItems("Fossil Items");
+    }
 }

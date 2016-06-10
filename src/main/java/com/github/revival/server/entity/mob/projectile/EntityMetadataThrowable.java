@@ -7,23 +7,23 @@ import net.minecraft.world.World;
 
 public class EntityMetadataThrowable extends EntityThrowable {
 
-	public EntityMetadataThrowable(World world) {
-		super(world);
-	}
+    public EntityMetadataThrowable(World world) {
+        super(world);
+    }
 
-	public EntityMetadataThrowable(World world, EntityLivingBase entityLivingBase) {
-		super(world, entityLivingBase);
-	}
+    public EntityMetadataThrowable(World world, EntityLivingBase entityLivingBase) {
+        super(world, entityLivingBase);
+    }
 
-	public EntityMetadataThrowable(World world, double x, double y, double z) {
-		super(world);
-	}
+    public EntityMetadataThrowable(World world, double x, double y, double z) {
+        super(world);
+    }
 
-	@Override
-	protected void onImpact(MovingObjectPosition p_70184_1_) {
-	}
+    @Override
+    protected void onImpact(MovingObjectPosition p_70184_1_) {
+    }
 
-	public String getTexture() {
-		return "";
-	}
+    public String getTexture() {
+        return "";
+    }
 }

@@ -1,8 +1,12 @@
 package com.github.revival.server.block.entity;
 
-import java.util.Iterator;
-import java.util.List;
-
+import com.github.revival.Revival;
+import com.github.revival.server.entity.mob.EntityTyrannosaurus;
+import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
+import com.github.revival.server.enums.EnumOrderType;
+import com.github.revival.server.enums.EnumPrehistoric;
+import com.github.revival.server.handler.LocalizationStrings;
+import com.github.revival.server.item.FAItemRegistry;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -11,56 +15,51 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.StatCollector;
 
-import com.github.revival.Revival;
-import com.github.revival.server.entity.mob.EntityTyrannosaurus;
-import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
-import com.github.revival.server.enums.EnumOrderType;
-import com.github.revival.server.enums.EnumPrehistoric;
-import com.github.revival.server.handler.LocalizationStrings;
-import com.github.revival.server.item.FAItemRegistry;
+import java.util.Iterator;
+import java.util.List;
 
 //import fossil.entity.mob.EntityPterosaur;
 //import fossil.entity.mob.EntityRaptor;
 //import fossil.entity.mob.EntityTriceratops;
 
 public class TileEntityDrum extends TileEntity {
+    /*
+     * final String DRUM = "Drum."; final String MSG = "Msg."; final String
+     * ORDER = "Order."; final String HEAD = "Head"; final String MIDDLE =
+     * "Middle"; final String TAIL = "Tail"; final String TREXMSG = "Msg.TRex.";
+     * final String DINO = "Dino.";
+     */
+    public EnumOrderType Order;
+
+    // public byte note;
+    // public boolean previousRedstoneState;
+
+    public TileEntityDrum() {
+        this.Order = EnumOrderType.STAY;
+        // this.note = 0;
+        // this.previousRedstoneState = false;
+    }
+
+    /**
+     * Writes a tile entity to NBT.
+     */
+    @Override
+    public void writeToNBT(NBTTagCompound var1) {
+        super.writeToNBT(var1);
+        var1.setByte("Order", (byte) this.Order.ordinal());// Revival.EnumToInt(this.Order));
+    }
+
+    /**
+     * Reads a tile entity from NBT.
+     */
+    @Override
+    public void readFromNBT(NBTTagCompound var1) {
+        super.readFromNBT(var1);
+        this.Order = EnumOrderType.values()[var1.getByte("Order")];
+    }
+
 	/*
-	 * final String DRUM = "Drum."; final String MSG = "Msg."; final String
-	 * ORDER = "Order."; final String HEAD = "Head"; final String MIDDLE =
-	 * "Middle"; final String TAIL = "Tail"; final String TREXMSG = "Msg.TRex.";
-	 * final String DINO = "Dino.";
-	 */
-	public EnumOrderType Order;
-
-	// public byte note;
-	// public boolean previousRedstoneState;
-
-	public TileEntityDrum() {
-		this.Order = EnumOrderType.STAY;
-		// this.note = 0;
-		// this.previousRedstoneState = false;
-	}
-
-	/**
-	 * Writes a tile entity to NBT.
-	 */
-	@Override
-	public void writeToNBT(NBTTagCompound var1) {
-		super.writeToNBT(var1);
-		var1.setByte("Order", (byte) this.Order.ordinal());// Revival.EnumToInt(this.Order));
-	}
-
-	/**
-	 * Reads a tile entity from NBT.
-	 */
-	@Override
-	public void readFromNBT(NBTTagCompound var1) {
-		super.readFromNBT(var1);
-		this.Order = EnumOrderType.values()[var1.getByte("Order")];
-	}
-
-	/*
-	 * public void triggerNote(World var1, int var2, int var3, int var4) { if
+     * public void triggerNote(World var1, int var2, int var3, int var4) { if
 	 * (var1.getBlockMaterial(var2, var3 + 1, var4) == Material.air) { Material
 	 * var5 = var1.getBlockMaterial(var2, var3 - 1, var4); byte var6 = 0;
 	 * 
@@ -81,67 +80,65 @@ public class TileEntityDrum extends TileEntity {
 	 * Revival.GetLangTextByKey("Order." + this.Order.toString()); }
 	 */
 
-	public void TriggerOrder(EntityPlayer player) {
-		this.Order = this.Order.Next();
-		this.worldObj.playSoundEffect((double) this.xCoord, (double) this.yCoord, (double) this.zCoord, "fossil:drum_single", 8.0F, 1.0F);// (float)Math.pow(2.0D,
-		// (double)(this.Order.ordinal()/*.ToInt()
-		// - 1*/)));
-		// String var2 = Revival.GetLangTextByKey("Drum.Head");
-		// String var3 = this.GetOrderString();
-		Revival.showMessage(StatCollector.translateToLocal(LocalizationStrings.DRUM_TRIGGER) + StatCollector.translateToLocal("order." + this.Order.toString()), player);
-		this.markDirty();
-	}
+    public void TriggerOrder(EntityPlayer player) {
+        this.Order = this.Order.Next();
+        this.worldObj.playSoundEffect((double) this.xCoord, (double) this.yCoord, (double) this.zCoord, "fossil:drum_single", 8.0F, 1.0F);// (float)Math.pow(2.0D,
+        // (double)(this.Order.ordinal()/*.ToInt()
+        // - 1*/)));
+        // String var2 = Revival.GetLangTextByKey("Drum.Head");
+        // String var3 = this.GetOrderString();
+        Revival.showMessage(StatCollector.translateToLocal(LocalizationStrings.DRUM_TRIGGER) + StatCollector.translateToLocal("order." + this.Order.toString()), player);
+        this.markDirty();
+    }
 
-	public boolean SendOrder(Item item, EntityPlayer var2) {
-		// var2.itemID == this.ItemToControl.itemID && this.isTamed() &&
-		// var1.username.equalsIgnoreCase(this.getOwnerName())
+    public boolean SendOrder(Item item, EntityPlayer var2) {
+        // var2.itemID == this.ItemToControl.itemID && this.isTamed() &&
+        // var1.username.equalsIgnoreCase(this.getOwnerName())
 		/*
 		 * String var3 = ""; String var4 = ""; String var5 =
 		 * Revival.GetLangTextByKey("Drum.Msg.Head"); String var6 =
 		 * Revival.GetLangTextByKey("Drum.Msg.Middle"); String var7 =
 		 * Revival.GetLangTextByKey("Drum.Msg.Tail");
 		 */
-		this.worldObj.playSoundEffect((double) this.xCoord, (double) this.yCoord, (double) this.zCoord, "fossil:drum_triple", 8.0F, 1.0F); // (float)Math.pow(2.0D,
-		// (double)(this.Order.ordinal()/*ToInt()
-		// - 1*/)));
+        this.worldObj.playSoundEffect((double) this.xCoord, (double) this.yCoord, (double) this.zCoord, "fossil:drum_triple", 8.0F, 1.0F); // (float)Math.pow(2.0D,
+        // (double)(this.Order.ordinal()/*ToInt()
+        // - 1*/)));
 
-		if (item != FAItemRegistry.INSTANCE.skullStick) // That is treated
-														// specially ;)
-		{
-			for (int i = 0; i < EnumPrehistoric.values().length; ++i) {
-				if (EnumPrehistoric.values()[i].orderItem != null && EnumPrehistoric.values()[i].orderItem == item) {
-					Revival.showMessage(StatCollector.translateToLocal(LocalizationStrings.DRUM_ORDERING) + StatCollector.translateToLocal("fossil.entity." + EnumPrehistoric.values()[i].toString()) + ": " + StatCollector.translateToLocal("order." + this.Order.toString()), var2);
-				}
-			} // Output: Ordering Triceratops: Stay
+        if (item != FAItemRegistry.INSTANCE.skullStick) // That is treated
+        // specially ;)
+        {
+            for (int i = 0; i < EnumPrehistoric.values().length; ++i) {
+                if (EnumPrehistoric.values()[i].orderItem != null && EnumPrehistoric.values()[i].orderItem == item) {
+                    Revival.showMessage(StatCollector.translateToLocal(LocalizationStrings.DRUM_ORDERING) + StatCollector.translateToLocal("fossil.entity." + EnumPrehistoric.values()[i].toString()) + ": " + StatCollector.translateToLocal("order." + this.Order.toString()), var2);
+                }
+            } // Output: Ordering Triceratops: Stay
 
-			List list = this.worldObj.getEntitiesWithinAABB(EntityNewPrehistoric.class, AxisAlignedBB.getBoundingBox((double) this.xCoord, (double) this.yCoord, (double) this.zCoord, (double) this.xCoord + 1.0D, (double) this.yCoord + 1.0D, (double) this.zCoord + 1.0D).expand(30.0D, 4.0D, 30.0D));
-			Iterator it = list.iterator();
+            List list = this.worldObj.getEntitiesWithinAABB(EntityNewPrehistoric.class, AxisAlignedBB.getBoundingBox((double) this.xCoord, (double) this.yCoord, (double) this.zCoord, (double) this.xCoord + 1.0D, (double) this.yCoord + 1.0D, (double) this.zCoord + 1.0D).expand(30.0D, 4.0D, 30.0D));
 
-			while (it.hasNext()) {
-				Entity var3 = (Entity) it.next();
-				EntityNewPrehistoric var4 = (EntityNewPrehistoric) var3;
-				if (item == var4.type.orderItem && var4.isTamed() && var2.getCommandSenderName().equalsIgnoreCase(var4.getCommandSenderName())) {
-					var4.setOrder(this.Order);
-				}
-			}
+            for (Object aList : list) {
+                Entity var3 = (Entity) aList;
+                EntityNewPrehistoric var4 = (EntityNewPrehistoric) var3;
+                if (item == var4.type.orderItem && var4.isTamed() && var2.getCommandSenderName().equalsIgnoreCase(var4.getCommandSenderName())) {
+                    var4.setOrder(this.Order);
+                }
+            }
 
-		} else {
-			Revival.showMessage(StatCollector.translateToLocal(LocalizationStrings.DRUM_TREX + String.valueOf(this.Order.ordinal() + 1)), var2);
-			List list = this.worldObj.getEntitiesWithinAABB(EntityTyrannosaurus.class, AxisAlignedBB.getBoundingBox((double) this.xCoord, (double) this.yCoord, (double) this.zCoord, (double) this.xCoord + 1.0D, (double) this.yCoord + 1.0D, (double) this.zCoord + 1.0D).expand(50.0D, 4.0D, 50.0D));
-			Iterator it = list.iterator();
+        } else {
+            Revival.showMessage(StatCollector.translateToLocal(LocalizationStrings.DRUM_TREX + String.valueOf(this.Order.ordinal() + 1)), var2);
+            List list = this.worldObj.getEntitiesWithinAABB(EntityTyrannosaurus.class, AxisAlignedBB.getBoundingBox((double) this.xCoord, (double) this.yCoord, (double) this.zCoord, (double) this.xCoord + 1.0D, (double) this.yCoord + 1.0D, (double) this.zCoord + 1.0D).expand(50.0D, 4.0D, 50.0D));
 
-			while (it.hasNext()) {
-				Entity var4 = (Entity) it.next();
-				EntityTyrannosaurus var5 = (EntityTyrannosaurus) var4;
+            for (Object aList : list) {
+                Entity var4 = (Entity) aList;
+                EntityTyrannosaurus var5 = (EntityTyrannosaurus) var4;
 
-				if (var5.isAdult() && !var5.isTamed()) {
-					var5.setAngry(true);
-					var5.setAttackTarget(var2);
-				}
-			}
-		}
+                if (var5.isAdult() && !var5.isTamed()) {
+                    var5.setAngry(true);
+                    var5.setAttackTarget(var2);
+                }
+            }
+        }
 
-		return true;
+        return true;
 		/*
 		 * if (var1 != Item.stick.itemID && var1 != Items.bone && var1 !=
 		 * Revival.skullStick.itemID && var1 != Item.arrow.itemID) { return
@@ -164,7 +161,7 @@ public class TileEntityDrum extends TileEntity {
 		 * String.valueOf(this.Order.ordinal()/*ToInt() + 1*));
 		 * Revival.ShowMessage(var8, var2); return true; } }
 		 */
-	}
+    }
 
 	/*
 	 * private void OrderRaptor() { List var1 =
@@ -217,9 +214,9 @@ public class TileEntityDrum extends TileEntity {
 	 * var5.setAttackTarget(var1); } } }
 	 */
 
-	@Override
-	public boolean canUpdate() {
-		return false;
-	}
+    @Override
+    public boolean canUpdate() {
+        return false;
+    }
 
 }

@@ -8,18 +8,18 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
 public class TabFBlocks extends CreativeTabs {
-	public TabFBlocks(String par2Str) {
-		super(par2Str);
-	}
+    public TabFBlocks(String par2Str) {
+        super(par2Str);
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public Item getTabIconItem() {
-		return Item.getItemFromBlock(FABlockRegistry.INSTANCE.blockworktableActive);
-	}
+    @Override
+    @SideOnly(Side.CLIENT)
+    public Item getTabIconItem() {
+        return Item.getItemFromBlock(FABlockRegistry.INSTANCE.blockworktableActive);
+    }
 
-	@Override
-	public String getTranslatedTabLabel() {
-		return LocalizationStrings.FBLOCKS_NAME;
-	}
+    @Override
+    public String getTranslatedTabLabel() {
+        return LocalizationStrings.FBLOCKS_NAME;
+    }
 }

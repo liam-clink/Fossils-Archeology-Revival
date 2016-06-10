@@ -1,137 +1,124 @@
 package com.github.revival.server.entity.mob;
 
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.init.Items;
+import com.github.revival.server.entity.mob.test.EntitySwimmingPrehistoric;
+import com.github.revival.server.enums.EnumPrehistoric;
+import com.github.revival.server.enums.EnumPrehistoricAI.*;
+import com.github.revival.server.item.FAItemRegistry;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
 
-import com.github.revival.server.entity.mob.test.EntitySwimmingPrehistoric;
-import com.github.revival.server.enums.EnumPrehistoric;
-import com.github.revival.server.enums.EnumPrehistoricAI.Activity;
-import com.github.revival.server.enums.EnumPrehistoricAI.Attacking;
-import com.github.revival.server.enums.EnumPrehistoricAI.Climbing;
-import com.github.revival.server.enums.EnumPrehistoricAI.Following;
-import com.github.revival.server.enums.EnumPrehistoricAI.Jumping;
-import com.github.revival.server.enums.EnumPrehistoricAI.Moving;
-import com.github.revival.server.enums.EnumPrehistoricAI.Response;
-import com.github.revival.server.enums.EnumPrehistoricAI.Stalking;
-import com.github.revival.server.enums.EnumPrehistoricAI.Taming;
-import com.github.revival.server.enums.EnumPrehistoricAI.Untaming;
-import com.github.revival.server.enums.EnumPrehistoricAI.WaterAbility;
-import com.github.revival.server.item.FAItemRegistry;
-
 public class EntityPlesiosaurus extends EntitySwimmingPrehistoric {
 
-	public EntityPlesiosaurus(World world) {
-		super(world, EnumPrehistoric.Plesiosaur, 2, 12, 10, 30, 0.2, 0.3);
-		this.setSize(1.0F, 1.0F);
-		minSize = 0.3F;
-		maxSize = 1.5F;
-		teenAge = 3;
-		developsResistance = true;
-		breaksBlocks = true;
-		pediaScale = 15;
-	}
+    public EntityPlesiosaurus(World world) {
+        super(world, EnumPrehistoric.Plesiosaur, 2, 12, 10, 30, 0.2, 0.3);
+        this.setSize(1.0F, 1.0F);
+        minSize = 0.3F;
+        maxSize = 1.5F;
+        teenAge = 3;
+        developsResistance = true;
+        breaksBlocks = true;
+        pediaScale = 15;
+    }
 
-	@Override
-	public void setSpawnValues() {
-	}
+    @Override
+    public void setSpawnValues() {
+    }
 
-	@Override
-	public Activity aiActivityType() {
+    @Override
+    public Activity aiActivityType() {
 
-		return Activity.BOTH;
-	}
+        return Activity.BOTH;
+    }
 
-	@Override
-	public Attacking aiAttackType() {
+    @Override
+    public Attacking aiAttackType() {
 
-		return Attacking.DROWN;
-	}
+        return Attacking.DROWN;
+    }
 
-	@Override
-	public Climbing aiClimbType() {
+    @Override
+    public Climbing aiClimbType() {
 
-		return Climbing.NONE;
-	}
+        return Climbing.NONE;
+    }
 
-	@Override
-	public Following aiFollowType() {
+    @Override
+    public Following aiFollowType() {
 
-		return Following.NORMAL;
-	}
+        return Following.NORMAL;
+    }
 
-	@Override
-	public Jumping aiJumpType() {
+    @Override
+    public Jumping aiJumpType() {
 
-		return Jumping.BASIC;
-	}
+        return Jumping.BASIC;
+    }
 
-	@Override
-	public Response aiResponseType() {
+    @Override
+    public Response aiResponseType() {
 
-		return Response.WATERCALM;
-	}
+        return Response.WATERCALM;
+    }
 
-	@Override
-	public Stalking aiStalkType() {
+    @Override
+    public Stalking aiStalkType() {
 
-		return Stalking.NONE;
-	}
+        return Stalking.NONE;
+    }
 
-	@Override
-	public Taming aiTameType() {
+    @Override
+    public Taming aiTameType() {
 
-		return Taming.IMPRINTING;
-	}
+        return Taming.IMPRINTING;
+    }
 
-	@Override
-	public Untaming aiUntameType() {
+    @Override
+    public Untaming aiUntameType() {
 
-		return Untaming.NONE;
-	}
+        return Untaming.NONE;
+    }
 
-	@Override
-	public Moving aiMovingType() {
+    @Override
+    public Moving aiMovingType() {
 
-		return Moving.AQUATIC;
-	}
+        return Moving.AQUATIC;
+    }
 
-	@Override
-	public WaterAbility aiWaterAbilityType() {
+    @Override
+    public WaterAbility aiWaterAbilityType() {
 
-		return WaterAbility.IGNOREANDFISH;
-	}
+        return WaterAbility.IGNOREANDFISH;
+    }
 
-	@Override
-	public boolean doesFlock() {
+    @Override
+    public boolean doesFlock() {
 
-		return false;
-	}
+        return false;
+    }
 
-	@Override
-	public Item getOrderItem() {
+    @Override
+    public Item getOrderItem() {
 
-		return FAItemRegistry.INSTANCE.emptyShell;
-	}
+        return FAItemRegistry.INSTANCE.emptyShell;
+    }
 
-	@Override
-	public int getAdultAge() {
-		return 7;
-	}
+    @Override
+    public int getAdultAge() {
+        return 7;
+    }
 
-	public String getTexture() {
-		String toggle = this.hasFeatherToggle ? !this.featherToggle ? "feathered/" : "scaled/" : "";
-		boolean isBaby = this.isChild() && this.hasBabyTexture;
-		String gender = this.hasTeenTexture ? this.isTeen() ? "_teen" : this.isChild() ? "_baby" : this.getGender() == 0 ? "_female" : "_male" : this.isChild() ? "_baby" : this.getGender() == 0 ? "_female" : "_male";
-		String sleeping = !this.isSleeping() ? "" : "_sleeping";
-		String toggleList = this.hasFeatherToggle ? !this.featherToggle ? "_feathered" : "_scaled" : "";
-		return "fossil:textures/model/plesiosaurus_0/" + toggle + "plesiosaurus" + gender + toggleList + sleeping + ".png";
-	}
+    public String getTexture() {
+        String toggle = this.hasFeatherToggle ? !this.featherToggle ? "feathered/" : "scaled/" : "";
+        boolean isBaby = this.isChild() && this.hasBabyTexture;
+        String gender = this.hasTeenTexture ? this.isTeen() ? "_teen" : this.isChild() ? "_baby" : this.getGender() == 0 ? "_female" : "_male" : this.isChild() ? "_baby" : this.getGender() == 0 ? "_female" : "_male";
+        String sleeping = !this.isSleeping() ? "" : "_sleeping";
+        String toggleList = this.hasFeatherToggle ? !this.featherToggle ? "_feathered" : "_scaled" : "";
+        return "fossil:textures/model/plesiosaurus_0/" + toggle + "plesiosaurus" + gender + toggleList + sleeping + ".png";
+    }
 
-	@Override
-	protected double getSwimSpeed() {
-		return 2;
-	}
+    @Override
+    protected double getSwimSpeed() {
+        return 2;
+    }
 
 }

@@ -6,19 +6,19 @@ import net.minecraft.entity.EntityLivingBase;
 
 public class RenderFlyingPrehistoric extends RenderPrehistoric {
 
-	public ModelBase flightModel;
-	public ModelBase groundModel;
+    public ModelBase flightModel;
+    public ModelBase groundModel;
 
-	public RenderFlyingPrehistoric(ModelBase groundModel, ModelBase flightModel) {
-		super(groundModel);
-		this.flightModel = flightModel;
-		this.groundModel = groundModel;
+    public RenderFlyingPrehistoric(ModelBase groundModel, ModelBase flightModel) {
+        super(groundModel);
+        this.flightModel = flightModel;
+        this.groundModel = groundModel;
 
-	}
+    }
 
-	@Override
-	protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2) {
-		/*
+    @Override
+    protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2) {
+        /*
 		 * if (par1EntityLivingBase.isChild()) { GL11.glScalef(0.3F, 0.3F,
 		 * 0.3F); super.preRenderCallback(par1EntityLivingBase, par2);
 		 * 
@@ -26,13 +26,13 @@ public class RenderFlyingPrehistoric extends RenderPrehistoric {
 		 * super.preRenderCallback(par1EntityLivingBase, par2); }
 		 */
 
-		if (!((EntityNewPrehistoric) par1EntityLivingBase).onGround) {
-			if (this.mainModel.getClass() == flightModel.getClass()) {
-				this.mainModel = flightModel;
-			}
-		} else if (this.mainModel.getClass() != groundModel.getClass()) {
-			this.mainModel = groundModel;
-		}
-	}
+        if (!((EntityNewPrehistoric) par1EntityLivingBase).onGround) {
+            if (this.mainModel.getClass() == flightModel.getClass()) {
+                this.mainModel = flightModel;
+            }
+        } else if (this.mainModel.getClass() != groundModel.getClass()) {
+            this.mainModel = groundModel;
+        }
+    }
 
 }

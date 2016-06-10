@@ -2,124 +2,112 @@ package com.github.revival.server.entity.mob;
 
 import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 import com.github.revival.server.enums.EnumPrehistoric;
-import com.github.revival.server.enums.EnumPrehistoricAI.Activity;
-import com.github.revival.server.enums.EnumPrehistoricAI.Attacking;
-import com.github.revival.server.enums.EnumPrehistoricAI.Climbing;
-import com.github.revival.server.enums.EnumPrehistoricAI.Following;
-import com.github.revival.server.enums.EnumPrehistoricAI.Jumping;
-import com.github.revival.server.enums.EnumPrehistoricAI.Moving;
-import com.github.revival.server.enums.EnumPrehistoricAI.Response;
-import com.github.revival.server.enums.EnumPrehistoricAI.Stalking;
-import com.github.revival.server.enums.EnumPrehistoricAI.Taming;
-import com.github.revival.server.enums.EnumPrehistoricAI.Untaming;
-import com.github.revival.server.enums.EnumPrehistoricAI.WaterAbility;
+import com.github.revival.server.enums.EnumPrehistoricAI.*;
 import com.github.revival.server.item.FAItemRegistry;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
 
 public class EntitySpinosaurus extends EntityNewPrehistoric {
 
-	public EntitySpinosaurus(World world) {
-		super(world, EnumPrehistoric.Spinosaurus, 2, 14, 15, 70, 0.25, 0.3);
-		this.setSize(1.5F, 1.0F);
-		minSize = 1F;
-		maxSize = 7.75F;
-		teenAge = 5;
-		developsResistance = true;
-		breaksBlocks = true;
-	}
+    public EntitySpinosaurus(World world) {
+        super(world, EnumPrehistoric.Spinosaurus, 2, 14, 15, 70, 0.25, 0.3);
+        this.setSize(1.5F, 1.0F);
+        minSize = 1F;
+        maxSize = 7.75F;
+        teenAge = 5;
+        developsResistance = true;
+        breaksBlocks = true;
+    }
 
-	@Override
-	public void setSpawnValues() {
-	}
+    @Override
+    public void setSpawnValues() {
+    }
 
-	@Override
-	public Activity aiActivityType() {
+    @Override
+    public Activity aiActivityType() {
 
-		return Activity.BOTH;
-	}
+        return Activity.BOTH;
+    }
 
-	@Override
-	public Attacking aiAttackType() {
+    @Override
+    public Attacking aiAttackType() {
 
-		return Attacking.DROWN;
-	}
+        return Attacking.DROWN;
+    }
 
-	@Override
-	public Climbing aiClimbType() {
+    @Override
+    public Climbing aiClimbType() {
 
-		return Climbing.NONE;
-	}
+        return Climbing.NONE;
+    }
 
-	@Override
-	public Following aiFollowType() {
+    @Override
+    public Following aiFollowType() {
 
-		return Following.AGRESSIVE;
-	}
+        return Following.AGRESSIVE;
+    }
 
-	@Override
-	public Jumping aiJumpType() {
+    @Override
+    public Jumping aiJumpType() {
 
-		return Jumping.BASIC;
-	}
+        return Jumping.BASIC;
+    }
 
-	@Override
-	public Response aiResponseType() {
+    @Override
+    public Response aiResponseType() {
 
-		return Response.AGRESSIVE;
-	}
+        return Response.AGRESSIVE;
+    }
 
-	@Override
-	public Stalking aiStalkType() {
+    @Override
+    public Stalking aiStalkType() {
 
-		return Stalking.NONE;
-	}
+        return Stalking.NONE;
+    }
 
-	@Override
-	public Taming aiTameType() {
+    @Override
+    public Taming aiTameType() {
 
-		return Taming.BLUEGEM;
-	}
+        return Taming.BLUEGEM;
+    }
 
-	@Override
-	public Untaming aiUntameType() {
+    @Override
+    public Untaming aiUntameType() {
 
-		return Untaming.NONE;
-	}
+        return Untaming.NONE;
+    }
 
-	@Override
-	public Moving aiMovingType() {
+    @Override
+    public Moving aiMovingType() {
 
-		return Moving.SEMIAQUATIC;
-	}
+        return Moving.SEMIAQUATIC;
+    }
 
-	@Override
-	public WaterAbility aiWaterAbilityType() {
+    @Override
+    public WaterAbility aiWaterAbilityType() {
 
-		return WaterAbility.ATTACK;
-	}
+        return WaterAbility.ATTACK;
+    }
 
-	@Override
-	public boolean doesFlock() {
+    @Override
+    public boolean doesFlock() {
 
-		return false;
-	}
+        return false;
+    }
 
-	@Override
-	public Item getOrderItem() {
-		return FAItemRegistry.INSTANCE.skullStick;
-	}
+    @Override
+    public Item getOrderItem() {
+        return FAItemRegistry.INSTANCE.skullStick;
+    }
 
-	@Override
-	public int getAdultAge() {
-		return 12;
-	}
+    @Override
+    public int getAdultAge() {
+        return 12;
+    }
 
-	@Override
-	public int getTailSegments() {
-		return 3;
-	}
+    @Override
+    public int getTailSegments() {
+        return 3;
+    }
 
 }

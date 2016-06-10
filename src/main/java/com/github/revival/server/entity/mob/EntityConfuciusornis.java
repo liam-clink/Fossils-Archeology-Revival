@@ -1,113 +1,101 @@
 package com.github.revival.server.entity.mob;
 
-import net.minecraft.entity.SharedMonsterAttributes;
+import com.github.revival.server.entity.mob.test.EntityFlyingPrehistoric;
+import com.github.revival.server.enums.EnumPrehistoric;
+import com.github.revival.server.enums.EnumPrehistoricAI.*;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
 
-import com.github.revival.server.entity.mob.test.EntityFlyingPrehistoric;
-import com.github.revival.server.enums.EnumPrehistoric;
-import com.github.revival.server.enums.EnumPrehistoricAI.Activity;
-import com.github.revival.server.enums.EnumPrehistoricAI.Attacking;
-import com.github.revival.server.enums.EnumPrehistoricAI.Climbing;
-import com.github.revival.server.enums.EnumPrehistoricAI.Following;
-import com.github.revival.server.enums.EnumPrehistoricAI.Jumping;
-import com.github.revival.server.enums.EnumPrehistoricAI.Moving;
-import com.github.revival.server.enums.EnumPrehistoricAI.Response;
-import com.github.revival.server.enums.EnumPrehistoricAI.Stalking;
-import com.github.revival.server.enums.EnumPrehistoricAI.Taming;
-import com.github.revival.server.enums.EnumPrehistoricAI.Untaming;
-import com.github.revival.server.enums.EnumPrehistoricAI.WaterAbility;
-
 public class EntityConfuciusornis extends EntityFlyingPrehistoric {
 
-	public EntityConfuciusornis(World world) {
-		super(world, EnumPrehistoric.Confuciusornis, 1, 1, 4, 12, 0.15, 0.25);
-		this.setSize(0.5F, 0.5F);
-		minSize = 0.3F;
-		maxSize = 0.6F;
-		teenAge = 1;
-		developsResistance = false;
-		breaksBlocks = false;
-	}
+    public EntityConfuciusornis(World world) {
+        super(world, EnumPrehistoric.Confuciusornis, 1, 1, 4, 12, 0.15, 0.25);
+        this.setSize(0.5F, 0.5F);
+        minSize = 0.3F;
+        maxSize = 0.6F;
+        teenAge = 1;
+        developsResistance = false;
+        breaksBlocks = false;
+    }
 
-	@Override
-	public void setSpawnValues() {
-	}
+    @Override
+    public void setSpawnValues() {
+    }
 
-	@Override
-	public Activity aiActivityType() {
-		return Activity.DIURINAL;
-	}
+    @Override
+    public Activity aiActivityType() {
+        return Activity.DIURINAL;
+    }
 
-	@Override
-	public Attacking aiAttackType() {
-		return Attacking.BASIC;
-	}
+    @Override
+    public Attacking aiAttackType() {
+        return Attacking.BASIC;
+    }
 
-	@Override
-	public Climbing aiClimbType() {
-		return Climbing.NONE;
-	}
+    @Override
+    public Climbing aiClimbType() {
+        return Climbing.NONE;
+    }
 
-	@Override
-	public Following aiFollowType() {
-		return Following.SKITTISH;
-	}
+    @Override
+    public Following aiFollowType() {
+        return Following.SKITTISH;
+    }
 
-	@Override
-	public Jumping aiJumpType() {
-		return Jumping.BASIC;
-	}
+    @Override
+    public Jumping aiJumpType() {
+        return Jumping.BASIC;
+    }
 
-	@Override
-	public Response aiResponseType() {
-		return Response.SCARED;
-	}
+    @Override
+    public Response aiResponseType() {
+        return Response.SCARED;
+    }
 
-	@Override
-	public Stalking aiStalkType() {
-		return Stalking.STEALTH;
-	}
+    @Override
+    public Stalking aiStalkType() {
+        return Stalking.STEALTH;
+    }
 
-	@Override
-	public Taming aiTameType() {
-		return Taming.FEEDING;
-	}
+    @Override
+    public Taming aiTameType() {
+        return Taming.FEEDING;
+    }
 
-	@Override
-	public Untaming aiUntameType() {
-		return Untaming.NONE;
-	}
+    @Override
+    public Untaming aiUntameType() {
+        return Untaming.NONE;
+    }
 
-	@Override
-	public Moving aiMovingType() {
-		return Moving.WALK;
-	}
+    @Override
+    public Moving aiMovingType() {
+        return Moving.WALK;
+    }
 
-	@Override
-	public WaterAbility aiWaterAbilityType() {
-		return WaterAbility.NONE;
-	}
+    @Override
+    public WaterAbility aiWaterAbilityType() {
+        return WaterAbility.NONE;
+    }
 
-	@Override
-	public boolean doesFlock() {
-		return false;
-	}
+    @Override
+    public boolean doesFlock() {
+        return false;
+    }
 
-	@Override
-	public Item getOrderItem() {
-		return Items.stick;
-	}
+    @Override
+    public Item getOrderItem() {
+        return Items.stick;
+    }
 
-	@Override
-	public int getAdultAge() {
-		return 3;
-	}
+    @Override
+    public int getAdultAge() {
+        return 3;
+    }
 
-	@Override
-	protected double getFlySpeed() {
-		return 0;
-	}
+    @Override
+    protected double getFlySpeed() {
+        return 0;
+    }
 
 }

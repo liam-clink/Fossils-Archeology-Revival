@@ -15,21 +15,21 @@ import net.minecraft.entity.player.EntityPlayer;
 
 /**
  * Abstract "AI" for player-controlled movements.
- * 
+ *
  * @author Nico Bergemann <barracuda415 at yahoo.de>
  */
 public abstract class DinoAIRide extends EntityAIBase {
-	protected final EntityPrehistoric dinosaur;
-	protected EntityPlayer rider;
+    protected final EntityPrehistoric dinosaur;
+    protected EntityPlayer rider;
 
-	public DinoAIRide(EntityPrehistoric dinosaur) {
-		this.dinosaur = dinosaur;
-		setMutexBits(0xffffffff);
-	}
+    public DinoAIRide(EntityPrehistoric dinosaur) {
+        this.dinosaur = dinosaur;
+        setMutexBits(0xffffffff);
+    }
 
-	@Override
-	public boolean shouldExecute() {
-		rider = dinosaur.getRidingPlayer();
-		return rider != null;
-	}
+    @Override
+    public boolean shouldExecute() {
+        rider = dinosaur.getRidingPlayer();
+        return rider != null;
+    }
 }
