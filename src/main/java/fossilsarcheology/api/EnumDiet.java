@@ -1,7 +1,22 @@
 package fossilsarcheology.api;
 
 public enum EnumDiet {
-    CARNIVORE(3), HERBIVORE(0), OMNIVORE(1), PISCIVORE(1), CARNIVORE_EGG(2), INSECTIVORE(0), PISCCARNIVORE(3), NONE(0);
+	/**Eats exclusively meat.*/
+    CARNIVORE(3),
+	/**Eats exclusively plants.*/
+    HERBIVORE(0),
+	/**Eats meat,eggs and plants.*/
+    OMNIVORE(1),
+	/**Eats exclusively fish.*/
+    PISCIVORE(1),
+	/**Eats meat and eggs.*/
+    CARNIVORE_EGG(2),
+	/**Eats arthropods.*/
+    INSECTIVORE(0),
+	/**Eats meat and fish.*/
+    PISCCARNIVORE(3),
+	/**Animal does not eat.*/
+    NONE(0);
 
     public int fearIndex;
 

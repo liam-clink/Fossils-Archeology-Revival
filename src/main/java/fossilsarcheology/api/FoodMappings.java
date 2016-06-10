@@ -52,43 +52,57 @@ public class FoodMappings {
 				if (carnivoreItemDiet == null) {
 					carnivoreItemDiet = Maps.newHashMap();
 				}
-				carnivoreItemDiet.put(Item.getIdFromItem(item), food);
+				if(!carnivoreItemDiet.containsKey(Item.getIdFromItem(item))){
+					carnivoreItemDiet.put(Item.getIdFromItem(item), food);
+				}
 				break;
 			case HERBIVORE:
 				if (herbivoreItemDiet == null) {
 					herbivoreItemDiet = Maps.newHashMap();
 				}
-				herbivoreItemDiet.put(Item.getIdFromItem(item), food);
+				if(!herbivoreItemDiet.containsKey(Item.getIdFromItem(item))){
+					herbivoreItemDiet.put(Item.getIdFromItem(item), food);
+				}
 				break;
 			case OMNIVORE:
 				if (omnivoreItemDiet == null) {
 					omnivoreItemDiet = Maps.newHashMap();
 				}
-				omnivoreItemDiet.put(Item.getIdFromItem(item), food);
+				if(!omnivoreItemDiet.containsKey(Item.getIdFromItem(item))){
+					omnivoreItemDiet.put(Item.getIdFromItem(item), food);
+				}
 				break;
 			case PISCIVORE:
 				if (piscivoreItemDiet == null) {
 					piscivoreItemDiet = Maps.newHashMap();
 				}
-				piscivoreItemDiet.put(Item.getIdFromItem(item), food);
+				if(!piscivoreItemDiet.containsKey(Item.getIdFromItem(item))){
+					piscivoreItemDiet.put(Item.getIdFromItem(item), food);
+				}
 				break;
 			case CARNIVORE_EGG:
 				if (carnivore_eggItemDiet == null) {
 					carnivore_eggItemDiet = Maps.newHashMap();
 				}
-				carnivore_eggItemDiet.put(Item.getIdFromItem(item), food);
+				if(!carnivore_eggItemDiet.containsKey(Item.getIdFromItem(item))){
+					carnivore_eggItemDiet.put(Item.getIdFromItem(item), food);
+				}
 				break;
 			case INSECTIVORE:
 				if (insectivoreItemDiet == null) {
 					insectivoreItemDiet = Maps.newHashMap();
 				}
-				insectivoreItemDiet.put(Item.getIdFromItem(item), food);
+				if(!insectivoreItemDiet.containsKey(Item.getIdFromItem(item))){
+					insectivoreItemDiet.put(Item.getIdFromItem(item), food);
+				}
 				break;
 			case PISCCARNIVORE:
 				if (pisccarnivoreItemDiet == null) {
 					pisccarnivoreItemDiet = Maps.newHashMap();
 				}
-				pisccarnivoreItemDiet.put(Item.getIdFromItem(item), food);
+				if(!pisccarnivoreItemDiet.containsKey(Item.getIdFromItem(item))){
+					pisccarnivoreItemDiet.put(Item.getIdFromItem(item), food);
+				}
 				break;
 			default:
 				break;
@@ -157,31 +171,41 @@ public class FoodMappings {
 			if (carnivoreBlockDiet == null) {
 				carnivoreBlockDiet = Maps.newHashMap();
 			}
-			carnivoreBlockDiet.put(Block.getIdFromBlock(block), food);
+			if(!carnivoreBlockDiet.containsKey(Block.getIdFromBlock(block))){
+				carnivoreBlockDiet.put(Block.getIdFromBlock(block), food);
+			}
 			break;
 		case HERBIVORE:
 			if (herbivoreBlockDiet == null) {
 				herbivoreBlockDiet = Maps.newHashMap();
 			}
-			herbivoreBlockDiet.put(Block.getIdFromBlock(block), food);
+			if(!herbivoreBlockDiet.containsKey(Block.getIdFromBlock(block))){
+				herbivoreBlockDiet.put(Block.getIdFromBlock(block), food);
+			}
 			break;
 		case OMNIVORE:
 			if (omnivoreBlockDiet == null) {
 				omnivoreBlockDiet = Maps.newHashMap();
 			}
-			omnivoreBlockDiet.put(Block.getIdFromBlock(block), food);
+			if(!omnivoreBlockDiet.containsKey(Block.getIdFromBlock(block))){
+				omnivoreBlockDiet.put(Block.getIdFromBlock(block), food);
+			}
 			break;
 		case PISCIVORE:
 			if (piscivoreBlockDiet == null) {
 				piscivoreBlockDiet = Maps.newHashMap();
 			}
-			piscivoreBlockDiet.put(Block.getIdFromBlock(block), food);
+			if(!piscivoreBlockDiet.containsKey(Block.getIdFromBlock(block))){
+				piscivoreBlockDiet.put(Block.getIdFromBlock(block), food);
+			}
 			break;
 		case CARNIVORE_EGG:
 			if (carnivore_eggBlockDiet == null) {
 				carnivore_eggBlockDiet = Maps.newHashMap();
 			}
-			carnivore_eggBlockDiet.put(Block.getIdFromBlock(block), food);
+			if(!carnivore_eggBlockDiet.containsKey(Block.getIdFromBlock(block))){
+				carnivore_eggBlockDiet.put(Block.getIdFromBlock(block), food);
+			}
 			break;
 		case INSECTIVORE:
 			if (insectivoreBlockDiet == null) {
@@ -251,7 +275,7 @@ public class FoodMappings {
 		return 0;
 	}
 
-	
+
 	public void addToEntityMappings(Class<? extends Entity> entity, int food, EnumDiet diet) {
 		switch (diet) {
 		case CARNIVORE:
@@ -449,7 +473,7 @@ public class FoodMappings {
 			this.addToEntityMappings((Class)object, food, EnumDiet.OMNIVORE);
 		}
 	}
-	
+
 	/**
 	 *  Adds a item, block, or entity class to all the piscivore mappings.
 	 * @param object The item, block, or entity class being registered.
@@ -469,7 +493,7 @@ public class FoodMappings {
 			this.addToEntityMappings((Class)object, food, EnumDiet.PISCIVORE);
 		}
 	}
-	
+
 	/**
 	 *  Adds a item, block, or entity class to all the egg eating mappings.
 	 * @param object The item, block, or entity class being registered.
