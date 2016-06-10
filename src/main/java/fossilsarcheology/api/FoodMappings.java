@@ -211,13 +211,17 @@ public class FoodMappings {
 			if (insectivoreBlockDiet == null) {
 				insectivoreBlockDiet = Maps.newHashMap();
 			}
-			insectivoreBlockDiet.put(Block.getIdFromBlock(block), food);
+			if(!insectivoreBlockDiet.containsKey(Block.getIdFromBlock(block))){
+				insectivoreBlockDiet.put(Block.getIdFromBlock(block), food);
+			}
 			break;
 		case PISCCARNIVORE:
 			if (pisccarnivoreBlockDiet == null) {
 				pisccarnivoreBlockDiet = Maps.newHashMap();
 			}
-			pisccarnivoreBlockDiet.put(Block.getIdFromBlock(block), food);
+			if(!pisccarnivoreBlockDiet.containsKey(Block.getIdFromBlock(block))){
+				pisccarnivoreBlockDiet.put(Block.getIdFromBlock(block), food);
+			}	
 			break;
 		default:
 			break;
@@ -282,43 +286,57 @@ public class FoodMappings {
 			if (carnivoreEntityDiet == null) {
 				carnivoreEntityDiet = Maps.newHashMap();
 			}
-			carnivoreEntityDiet.put(entity, food);
+			if(!carnivoreEntityDiet.containsKey(entity)){
+				carnivoreEntityDiet.put(entity, food);
+			}	
 			break;
 		case HERBIVORE:
 			if (herbivoreEntityDiet == null) {
 				herbivoreEntityDiet = Maps.newHashMap();
 			}
-			herbivoreEntityDiet.put(entity, food);
+			if(!herbivoreEntityDiet.containsKey(entity)){
+				herbivoreEntityDiet.put(entity, food);
+			}	
 			break;
 		case OMNIVORE:
 			if (omnivoreEntityDiet == null) {
 				omnivoreEntityDiet = Maps.newHashMap();
 			}
-			omnivoreEntityDiet.put(entity, food);
+			if(!omnivoreEntityDiet.containsKey(entity)){
+				omnivoreEntityDiet.put(entity, food);
+			}	
 			break;
 		case PISCIVORE:
 			if (piscivoreEntityDiet == null) {
 				piscivoreEntityDiet = Maps.newHashMap();
 			}
-			piscivoreEntityDiet.put(entity, food);
+			if(!piscivoreEntityDiet.containsKey(entity)){
+				piscivoreEntityDiet.put(entity, food);
+			}	
 			break;
 		case CARNIVORE_EGG:
 			if (carnivore_eggEntityDiet == null) {
 				carnivore_eggEntityDiet = Maps.newHashMap();
 			}
-			carnivore_eggEntityDiet.put(entity, food);
+			if(!carnivore_eggEntityDiet.containsKey(entity)){
+				carnivore_eggEntityDiet.put(entity, food);
+			}
 			break;
 		case INSECTIVORE:
 			if (insectivoreEntityDiet == null) {
 				insectivoreEntityDiet = Maps.newHashMap();
 			}
-			insectivoreEntityDiet.put(entity, food);
+			if(!insectivoreEntityDiet.containsKey(entity)){
+				insectivoreEntityDiet.put(entity, food);
+			}
 			break;
 		case PISCCARNIVORE:
 			if (pisccarnivoreEntityDiet == null) {
 				pisccarnivoreEntityDiet = Maps.newHashMap();
 			}
-			pisccarnivoreEntityDiet.put(entity, food);
+			if(!pisccarnivoreEntityDiet.containsKey(entity)){
+				pisccarnivoreEntityDiet.put(entity, food);
+			}	
 			break;
 		default:
 			break;
