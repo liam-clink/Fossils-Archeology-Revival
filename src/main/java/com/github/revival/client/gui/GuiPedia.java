@@ -1,18 +1,14 @@
 package com.github.revival.client.gui;
 
-import com.github.revival.Revival;
-import com.github.revival.client.gui.elements.FossilGuiButton;
-import com.github.revival.client.gui.elements.FossilGuiPage;
-import com.github.revival.server.container.PediaContainer;
-import com.github.revival.server.entity.EntityDinoEgg;
-import com.github.revival.server.entity.mob.EntityQuagga;
-import com.github.revival.server.entity.mob.EntityTerrorBird;
-import com.github.revival.server.entity.mob.test.EntityFishBase;
-import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
-import com.github.revival.server.enums.EnumPrehistoric;
-import com.github.revival.server.util.FoodMappings;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.ScaledResolution;
@@ -28,20 +24,30 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.*;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.IIcon;
+import net.minecraft.util.MathHelper;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
+
 import org.apache.commons.lang3.ArrayUtils;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import com.github.revival.Revival;
+import com.github.revival.client.gui.elements.FossilGuiButton;
+import com.github.revival.client.gui.elements.FossilGuiPage;
+import com.github.revival.server.container.PediaContainer;
+import com.github.revival.server.entity.EntityDinoEgg;
+import com.github.revival.server.entity.mob.EntityQuagga;
+import com.github.revival.server.entity.mob.test.EntityFishBase;
+import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
+import com.github.revival.server.enums.EnumPrehistoric;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import fossilsarcheology.api.FoodMappings;
 
 @SideOnly(Side.CLIENT)
 public class GuiPedia extends GuiContainer {
@@ -255,8 +261,6 @@ public class GuiPedia extends GuiContainer {
                 // ((EntityFishBase) Revival.toPedia).showPedia2(this);
             } else if (Revival.toPedia instanceof EntityQuagga) {
                 ((EntityQuagga) Revival.toPedia).showPedia2(this);
-            } else if (Revival.toPedia instanceof EntityTerrorBird) {
-                ((EntityTerrorBird) Revival.toPedia).showPedia2(this);
             }
         }
     }

@@ -20,7 +20,7 @@ public class FossilEntities {
         EntityRegistry.registerModEntity(EntityStoneboard.class, "StoneBoard", 1, Revival.INSTANCE, 80, Integer.MAX_VALUE, false);
         EntityRegistry.registerModEntity(EntityJavelin.class, "Javelin", 2, Revival.INSTANCE, 80, 3, true);
         EntityRegistry.registerModEntity(EntityAncientJavelin.class, "AncientJavelin", 3, Revival.INSTANCE, 80, 3, true);
-        EntityRegistry.registerModEntity(EntityMLighting.class, "FriendlyLighting", 4, Revival.INSTANCE, 80, 3, true);
+        EntityRegistry.registerModEntity(EntityAnuLightning.class, "FriendlyLighting", 4, Revival.INSTANCE, 80, 3, true);
         registerSpawnable(EntityFailuresaurus.class, "Failuresaurus", 5, 0x61ffbd, 0xf4eee6);
         registerSpawnable(EntityBones.class, "Bones", 6, 12698049, 4802889);
         EntityRegistry.registerModEntity(EntityDinoEgg.class, "DinoEgg", 8, Revival.INSTANCE, 80, 1, false);

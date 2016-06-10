@@ -2,7 +2,7 @@ package com.github.revival.server.entity.mob;
 
 import com.github.revival.Revival;
 import com.github.revival.server.entity.EntityFAPlayer;
-import com.github.revival.server.entity.EntityMLighting;
+import com.github.revival.server.entity.EntityAnuLightning;
 import com.github.revival.server.entity.ai.AnuAIArrowAttack;
 import com.github.revival.server.entity.ai.AnuAIAttackOnCollide;
 import com.github.revival.server.entity.ai.AnuAIAvoidEntity;
@@ -222,7 +222,7 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
     @Override
     public boolean attackEntityAsMob(Entity entity) {
         if (this.getRNG().nextInt(4) == 0) {
-            this.worldObj.addWeatherEffect(new EntityMLighting(this.worldObj, entity.posX, entity.posY, entity.posZ));
+            this.worldObj.addWeatherEffect(new EntityAnuLightning(this.worldObj, entity.posX, entity.posY, entity.posZ));
         }
         return super.attackEntityAsMob(entity);
     }

@@ -1,6 +1,6 @@
 package com.github.revival.server.item;
 
-import com.github.revival.server.entity.EntityMLighting;
+import com.github.revival.server.entity.EntityAnuLightning;
 import com.github.revival.server.entity.mob.EntityFriendlyPigZombie;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
@@ -52,7 +52,7 @@ public class AncientSwordItem extends ItemSword {
                     }
                 } else {
                     if (targetentity != null && (new Random()).nextInt(5) == 0) {
-                        targetentity.worldObj.addWeatherEffect(new EntityMLighting(targetentity.worldObj, targetentity.posX, targetentity.posY, targetentity.posZ));
+                        targetentity.worldObj.addWeatherEffect(new EntityAnuLightning(targetentity.worldObj, targetentity.posX, targetentity.posY, targetentity.posZ));
                     }
 
                 }

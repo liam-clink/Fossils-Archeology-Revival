@@ -1,10 +1,11 @@
 package com.github.revival.server.container;
 
 import com.github.revival.server.block.entity.TileEntityNewFeeder;
-import com.github.revival.server.entity.EnumDiet;
-import com.github.revival.server.util.FoodMappings;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import fossilsarcheology.api.EnumDiet;
+import fossilsarcheology.api.FoodMappings;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;

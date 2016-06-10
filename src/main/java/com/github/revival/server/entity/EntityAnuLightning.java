@@ -12,7 +12,7 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-public class EntityMLighting extends EntityLightningBolt {
+public class EntityAnuLightning extends EntityLightningBolt {
     /**
      * A random long that is used to change the vertex of the lightning rendered
      * in RenderLightningBolt
@@ -21,7 +21,7 @@ public class EntityMLighting extends EntityLightningBolt {
     private int lightningState = 2;
     private int boltLivingTime;
 
-    public EntityMLighting(World var1, double var2, double var4, double var6) {
+    public EntityAnuLightning(World var1, double var2, double var4, double var6) {
         super(var1, var2, var4, var6);
         this.boltLivingTime = this.rand.nextInt(3) + 1;
     }

@@ -1,313 +1,134 @@
 package com.github.revival.server.util;
 
+import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.entity.passive.EntityChicken;
+import net.minecraft.entity.passive.EntityCow;
+import net.minecraft.entity.passive.EntityHorse;
+import net.minecraft.entity.passive.EntityPig;
+import net.minecraft.entity.passive.EntitySheep;
+import net.minecraft.entity.passive.EntitySquid;
+import net.minecraft.entity.passive.EntityVillager;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+
 import com.github.revival.server.block.FABlockRegistry;
 import com.github.revival.server.entity.EntityDinoEgg;
-import com.github.revival.server.entity.EnumDiet;
 import com.github.revival.server.entity.mob.*;
 import com.github.revival.server.enums.EnumMobType;
 import com.github.revival.server.enums.EnumPrehistoric;
 import com.github.revival.server.enums.EnumTimePeriod;
 import com.github.revival.server.item.FAItemRegistry;
-import net.minecraft.entity.monster.EntityZombie;
-import net.minecraft.entity.passive.*;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
+
+import fossilsarcheology.api.EnumDiet;
+import fossilsarcheology.api.FoodMappings;
 
 public class FossilFoodMappings {
 
     public static void init() {
-        FoodMappings.instance().addToItemMappings(Items.reeds, 15, EnumDiet.HERBIVORE);
-        FoodMappings.instance().addToItemMappings(Items.wheat, 13, EnumDiet.HERBIVORE);
-        FoodMappings.instance().addToItemMappings(Items.melon, 10, EnumDiet.HERBIVORE);
-        FoodMappings.instance().addToItemMappings(Items.apple, 20, EnumDiet.HERBIVORE);
-        FoodMappings.instance().addToItemMappings(Items.baked_potato, 35, EnumDiet.HERBIVORE);
-        FoodMappings.instance().addToItemMappings(Items.cake, 50, EnumDiet.HERBIVORE);
-        FoodMappings.instance().addToItemMappings(Items.carrot, 15, EnumDiet.HERBIVORE);
-        FoodMappings.instance().addToItemMappings(Items.cookie, 10, EnumDiet.HERBIVORE);
-        FoodMappings.instance().addToItemMappings(Items.pumpkin_pie, 25, EnumDiet.HERBIVORE);
-        FoodMappings.instance().addToItemMappings(Items.sugar, 7, EnumDiet.HERBIVORE);
-        FoodMappings.instance().addToItemMappings(Items.bread, 25, EnumDiet.HERBIVORE);
-        FoodMappings.instance().addToItemMappings(Items.wheat_seeds, 5, EnumDiet.HERBIVORE);
-        FoodMappings.instance().addToItemMappings(Items.melon_seeds, 5, EnumDiet.HERBIVORE);
-        FoodMappings.instance().addToItemMappings(Items.pumpkin_seeds, 5, EnumDiet.HERBIVORE);
-        FoodMappings.instance().addToItemMappings(Items.fish, 30, EnumDiet.PISCIVORE);
-        FoodMappings.instance().addToItemMappings(Items.cooked_fished, 45, EnumDiet.PISCIVORE);
-        FoodMappings.instance().addToItemMappings(Items.cooked_beef, 60, EnumDiet.CARNIVORE);
-        FoodMappings.instance().addToItemMappings(Items.beef, 40, EnumDiet.CARNIVORE);
-        FoodMappings.instance().addToItemMappings(Items.cooked_chicken, 15, EnumDiet.CARNIVORE);
-        FoodMappings.instance().addToItemMappings(Items.chicken, 10, EnumDiet.CARNIVORE);
-        FoodMappings.instance().addToItemMappings(Items.porkchop, 35, EnumDiet.CARNIVORE);
-        FoodMappings.instance().addToItemMappings(Items.cooked_porkchop, 55, EnumDiet.CARNIVORE);
-        FoodMappings.instance().addToItemMappings(Items.cooked_beef, 60, EnumDiet.CARNIVORE_EGG);
-        FoodMappings.instance().addToItemMappings(Items.beef, 40, EnumDiet.CARNIVORE_EGG);
-        FoodMappings.instance().addToItemMappings(Items.cooked_chicken, 15, EnumDiet.CARNIVORE_EGG);
-        FoodMappings.instance().addToItemMappings(Items.chicken, 10, EnumDiet.CARNIVORE_EGG);
-        FoodMappings.instance().addToItemMappings(Items.porkchop, 35, EnumDiet.CARNIVORE_EGG);
-        FoodMappings.instance().addToItemMappings(Items.cooked_porkchop, 55, EnumDiet.CARNIVORE_EGG);
-        FoodMappings.instance().addToItemMappings(Items.egg, 7, EnumDiet.CARNIVORE_EGG);
-        FoodMappings.instance().addToItemMappings(FAItemRegistry.INSTANCE.sjl, 65, EnumDiet.PISCIVORE);
-        FoodMappings.instance().addToItemMappings(FAItemRegistry.INSTANCE.failuresaurusFlesh, 15, EnumDiet.CARNIVORE);
-        FoodMappings.instance().addToItemMappings(FAItemRegistry.INSTANCE.failuresaurusFlesh, 15, EnumDiet.CARNIVORE_EGG);
+        FoodMappings.instance().addPlant(Items.reeds, 15);
+        FoodMappings.instance().addPlant(Items.wheat, 13);
+        FoodMappings.instance().addPlant(Items.melon, 10);
+        FoodMappings.instance().addPlant(Items.apple, 20);
+        FoodMappings.instance().addPlant(Items.baked_potato, 35);
+        FoodMappings.instance().addPlant(Items.cake, 50);
+        FoodMappings.instance().addPlant(Items.carrot, 15);
+        FoodMappings.instance().addPlant(Items.cookie, 10);
+        FoodMappings.instance().addPlant(Items.pumpkin_pie, 25);
+        FoodMappings.instance().addPlant(Items.sugar, 7);
+        FoodMappings.instance().addPlant(Items.bread, 25);
+        FoodMappings.instance().addPlant(Items.wheat_seeds, 5);
+        FoodMappings.instance().addPlant(Items.melon_seeds, 5);
+        FoodMappings.instance().addPlant(Items.pumpkin_seeds, 5);
+        FoodMappings.instance().addPlant(Blocks.cake, 35);
+        FoodMappings.instance().addPlant(Blocks.carrots, 20);
+        FoodMappings.instance().addPlant(Blocks.wheat, 10);
+        FoodMappings.instance().addPlant(Blocks.leaves, 20);
+        FoodMappings.instance().addPlant(Blocks.melon_block, 65);
+        FoodMappings.instance().addPlant(Blocks.brown_mushroom, 15);
+        FoodMappings.instance().addPlant(Blocks.red_mushroom, 15);
+        FoodMappings.instance().addPlant(Blocks.red_flower, 5);
+        FoodMappings.instance().addPlant(Blocks.yellow_flower, 5);
+        FoodMappings.instance().addPlant(Blocks.potatoes, 25);
+        FoodMappings.instance().addPlant(Blocks.pumpkin, 30);
+        FoodMappings.instance().addPlant(Blocks.reeds, 15);
+        FoodMappings.instance().addPlant(Blocks.sapling, 15);
+        FoodMappings.instance().addPlant(Blocks.tallgrass, 5);
+        FoodMappings.instance().addPlant(FABlockRegistry.INSTANCE.ferns, 55);
+        FoodMappings.instance().addPlant(FABlockRegistry.INSTANCE.palmLeaves, 40);
+        
+        FoodMappings.instance().addFish(Items.fish, 30);
+        FoodMappings.instance().addFish(Items.cooked_fished, 45);
+        FoodMappings.instance().addFish(FAItemRegistry.INSTANCE.sjl, 65);
+        
+        FoodMappings.instance().addMeat(Items.cooked_beef, 60);
+        FoodMappings.instance().addMeat(Items.beef, 40);
+        FoodMappings.instance().addMeat(Items.cooked_chicken, 15);
+        FoodMappings.instance().addMeat(Items.chicken, 10);
+        FoodMappings.instance().addMeat(Items.porkchop, 35);
+        FoodMappings.instance().addMeat(Items.cooked_porkchop, 55);
+        FoodMappings.instance().addMeat(FAItemRegistry.INSTANCE.failuresaurusFlesh, 15);
+
+        FoodMappings.instance().addEgg(Items.egg, 7);
 
         for (int i = 0; i < EnumPrehistoric.values().length; i++) {
             if (EnumPrehistoric.values()[i].timeperiod != EnumTimePeriod.CURRENT) {
                 if (EnumPrehistoric.values()[i].type != EnumMobType.FISH) {
-                    FoodMappings.instance().addToItemMappings(EnumPrehistoric.values()[i].foodItem, 35, EnumDiet.CARNIVORE);
-                    FoodMappings.instance().addToItemMappings(EnumPrehistoric.values()[i].foodItem, 35, EnumDiet.CARNIVORE_EGG);
-
+                    FoodMappings.instance().addMeat(EnumPrehistoric.values()[i].foodItem, 35);
+                    FoodMappings.instance().addMeat(EnumPrehistoric.values()[i].cookedFoodItem, 7);
                 } else {
-                    FoodMappings.instance().addToItemMappings(EnumPrehistoric.values()[i].eggItem, 35, EnumDiet.PISCCARNIVORE);
-                    FoodMappings.instance().addToItemMappings(EnumPrehistoric.values()[i].eggItem, 35, EnumDiet.PISCIVORE);
-                    FoodMappings.instance().addToItemMappings(EnumPrehistoric.values()[i].fishItem, 35, EnumDiet.PISCCARNIVORE);
-                    FoodMappings.instance().addToItemMappings(EnumPrehistoric.values()[i].fishItem, 35, EnumDiet.PISCIVORE);
-                    FoodMappings.instance().addToItemMappings(EnumPrehistoric.values()[i].cookedFoodItem, 75, EnumDiet.PISCCARNIVORE);
-                    FoodMappings.instance().addToItemMappings(EnumPrehistoric.values()[i].cookedFoodItem, 75, EnumDiet.PISCIVORE);
-
+                    FoodMappings.instance().addFish(EnumPrehistoric.values()[i].eggItem, 35);
+                    FoodMappings.instance().addFish(EnumPrehistoric.values()[i].fishItem, 35);
+                    FoodMappings.instance().addFish(EnumPrehistoric.values()[i].cookedFoodItem, 75);
                 }
-                FoodMappings.instance().addToItemMappings(EnumPrehistoric.values()[i].cookedFoodItem, 75, EnumDiet.CARNIVORE);
-                FoodMappings.instance().addToItemMappings(EnumPrehistoric.values()[i].cookedFoodItem, 75, EnumDiet.CARNIVORE_EGG);
             }
             if (EnumPrehistoric.values()[i].type == EnumMobType.BIRD || EnumPrehistoric.values()[i].type == EnumMobType.CHICKEN) {
-                FoodMappings.instance().addToItemMappings(EnumPrehistoric.values()[i].bestBirdEggItem, 15, EnumDiet.CARNIVORE_EGG);
+                FoodMappings.instance().addEgg(EnumPrehistoric.values()[i].bestBirdEggItem, 15);
                 if (EnumPrehistoric.values()[i].type != EnumMobType.CHICKEN) {
-                    FoodMappings.instance().addToItemMappings(EnumPrehistoric.values()[i].birdEggItem, 10, EnumDiet.CARNIVORE_EGG);
-
+                    FoodMappings.instance().addEgg(EnumPrehistoric.values()[i].birdEggItem, 10);
                 }
             }
         }
-        FoodMappings.instance().addToItemMappings(Items.reeds, 15, EnumDiet.OMNIVORE);
-        FoodMappings.instance().addToItemMappings(Items.wheat, 13, EnumDiet.OMNIVORE);
-        FoodMappings.instance().addToItemMappings(Items.melon, 10, EnumDiet.OMNIVORE);
-        FoodMappings.instance().addToItemMappings(Items.apple, 20, EnumDiet.OMNIVORE);
-        FoodMappings.instance().addToItemMappings(Items.baked_potato, 35, EnumDiet.OMNIVORE);
-        FoodMappings.instance().addToItemMappings(Items.cake, 50, EnumDiet.OMNIVORE);
-        FoodMappings.instance().addToItemMappings(Items.carrot, 15, EnumDiet.OMNIVORE);
-        FoodMappings.instance().addToItemMappings(Items.cookie, 10, EnumDiet.OMNIVORE);
-        FoodMappings.instance().addToItemMappings(Items.pumpkin_pie, 25, EnumDiet.OMNIVORE);
-        FoodMappings.instance().addToItemMappings(Items.sugar, 7, EnumDiet.OMNIVORE);
-        FoodMappings.instance().addToItemMappings(Items.bread, 25, EnumDiet.OMNIVORE);
-        FoodMappings.instance().addToItemMappings(Items.wheat_seeds, 5, EnumDiet.OMNIVORE);
-        FoodMappings.instance().addToItemMappings(Items.melon_seeds, 5, EnumDiet.OMNIVORE);
-        FoodMappings.instance().addToItemMappings(Items.pumpkin_seeds, 5, EnumDiet.OMNIVORE);
-        FoodMappings.instance().addToItemMappings(Items.cooked_beef, 60, EnumDiet.OMNIVORE);
-        FoodMappings.instance().addToItemMappings(Items.beef, 40, EnumDiet.OMNIVORE);
-        FoodMappings.instance().addToItemMappings(Items.cooked_chicken, 15, EnumDiet.OMNIVORE);
-        FoodMappings.instance().addToItemMappings(Items.chicken, 10, EnumDiet.OMNIVORE);
-        FoodMappings.instance().addToItemMappings(Items.porkchop, 35, EnumDiet.OMNIVORE);
-        FoodMappings.instance().addToItemMappings(Items.cooked_porkchop, 55, EnumDiet.OMNIVORE);
-        FoodMappings.instance().addToItemMappings(Items.egg, 7, EnumDiet.OMNIVORE);
-        FoodMappings.instance().addToItemMappings(FAItemRegistry.INSTANCE.failuresaurusFlesh, 15, EnumDiet.OMNIVORE);
-        for (int i = 0; i < EnumPrehistoric.values().length; i++) {
-            if (EnumPrehistoric.values()[i].timeperiod != EnumTimePeriod.CURRENT) {
-                if (EnumPrehistoric.values()[i].type != EnumMobType.FISH) {
-                    FoodMappings.instance().addToItemMappings(EnumPrehistoric.values()[i].foodItem, 35, EnumDiet.OMNIVORE);
-                } else {
 
-                }
-                FoodMappings.instance().addToItemMappings(EnumPrehistoric.values()[i].cookedFoodItem, 75, EnumDiet.OMNIVORE);
-            }
-            if (EnumPrehistoric.values()[i].type == EnumMobType.BIRD || EnumPrehistoric.values()[i].type == EnumMobType.CHICKEN) {
-                FoodMappings.instance().addToItemMappings(EnumPrehistoric.values()[i].bestBirdEggItem, 15, EnumDiet.OMNIVORE);
-                if (EnumPrehistoric.values()[i].type != EnumMobType.CHICKEN) {
-                    FoodMappings.instance().addToItemMappings(EnumPrehistoric.values()[i].birdEggItem, 10, EnumDiet.OMNIVORE);
+        FoodMappings.instance().addMeat(EntityPlayer.class, 27);
+        FoodMappings.instance().addMeat(EntityVillager.class, 27);
+        FoodMappings.instance().addMeat(EntityZombie.class, 23);
+        FoodMappings.instance().addMeat(EntityChicken.class, 5);
+        FoodMappings.instance().addMeat(EntityCow.class, 40);
+        FoodMappings.instance().addMeat(EntityHorse.class, 55);
+        FoodMappings.instance().addMeat(EntityPig.class, 20);
+        FoodMappings.instance().addMeat(EntitySheep.class, 35);
+        FoodMappings.instance().addMeat(EntitySquid.class, 30);
+        FoodMappings.instance().addMeat(EntityNautilus.class, 100);
+        FoodMappings.instance().addMeat(EntityTriceratops.class, 50);
+        FoodMappings.instance().addMeat(EntityVelociraptor.class, 20);
+        FoodMappings.instance().addMeat(EntityTyrannosaurus.class, 70);
+        FoodMappings.instance().addMeat(EntityPterosaur.class, 35);
+        FoodMappings.instance().addMeat(EntityMosasaurus.class, 50);
+        FoodMappings.instance().addMeat(EntitySarcosuchus.class, 50);
+        FoodMappings.instance().addMeat(EntityLiopleurodon.class, 50);
+        FoodMappings.instance().addMeat(EntityStegosaurus.class, 50);
+        FoodMappings.instance().addMeat(EntityDilophosaurus.class, 25);
+        FoodMappings.instance().addMeat(EntityBrachiosaurus.class, 90);
+        FoodMappings.instance().addMeat(EntitySpinosaurus.class, 70);
+        FoodMappings.instance().addMeat(EntityCompsognathus.class, 10);
+        FoodMappings.instance().addMeat(EntityAnkylosaurus.class, 50);
+        FoodMappings.instance().addMeat(EntityPachycephalosaurus.class, 50);
+        FoodMappings.instance().addMeat(EntityDeinonychus.class, 35);
+        FoodMappings.instance().addMeat(EntityGallimimus.class, 40);
+        FoodMappings.instance().addMeat(EntityAllosaurus.class, 25);
+        FoodMappings.instance().addMeat(EntityDodo.class, 20);
+        FoodMappings.instance().addMeat(EntityCoelacanth.class, 20);
+        FoodMappings.instance().addMeat(EntityQuagga.class, 50);
+        FoodMappings.instance().addMeat(EntityTitanis.class, 40);
+        FoodMappings.instance().addMeat(EntityPhorusrhacos.class, 40);
+        FoodMappings.instance().addMeat(EntityKelenken.class, 40);
+        FoodMappings.instance().addMeat(EntityTitanis.class, 40);
+        FoodMappings.instance().addMeat(EntityMammoth.class, 100);
+        FoodMappings.instance().addMeat(EntityElasmotherium.class, 80);
+        FoodMappings.instance().addMeat(EntityConfuciusornis.class, 15);
+        FoodMappings.instance().addMeat(EntityCeratosaurus.class, 25);
 
-                }
-            }
-        }
-        FoodMappings.instance().addToItemMappings(Items.cooked_beef, 60, EnumDiet.PISCCARNIVORE);
-        FoodMappings.instance().addToItemMappings(Items.beef, 40, EnumDiet.PISCCARNIVORE);
-        FoodMappings.instance().addToItemMappings(Items.cooked_chicken, 15, EnumDiet.PISCCARNIVORE);
-        FoodMappings.instance().addToItemMappings(Items.chicken, 10, EnumDiet.PISCCARNIVORE);
-        FoodMappings.instance().addToItemMappings(Items.porkchop, 35, EnumDiet.PISCCARNIVORE);
-        FoodMappings.instance().addToItemMappings(Items.cooked_porkchop, 55, EnumDiet.PISCCARNIVORE);
-        FoodMappings.instance().addToItemMappings(Items.egg, 7, EnumDiet.PISCCARNIVORE);
-        FoodMappings.instance().addToItemMappings(FAItemRegistry.INSTANCE.failuresaurusFlesh, 15, EnumDiet.PISCCARNIVORE);
-        FoodMappings.instance().addToItemMappings(Items.fish, 30, EnumDiet.PISCCARNIVORE);
-        FoodMappings.instance().addToItemMappings(Items.cooked_fished, 45, EnumDiet.PISCCARNIVORE);
-        for (int i = 0; i < EnumPrehistoric.values().length; i++) {
-            if (EnumPrehistoric.values()[i].timeperiod != EnumTimePeriod.CURRENT) {
-                if (EnumPrehistoric.values()[i].type != EnumMobType.FISH) {
-                    FoodMappings.instance().addToItemMappings(EnumPrehistoric.values()[i].foodItem, 35, EnumDiet.PISCCARNIVORE);
-                } else {
-
-                }
-                FoodMappings.instance().addToItemMappings(EnumPrehistoric.values()[i].cookedFoodItem, 75, EnumDiet.PISCCARNIVORE);
-            }
-        }
         FoodMappings.instance().removeItemMapping(EnumPrehistoric.Horse.embryoItem, EnumDiet.CARNIVORE_EGG);
-        FoodMappings.instance().addToBlockMappings(Blocks.cake, 35, EnumDiet.HERBIVORE, false);
-        FoodMappings.instance().addToBlockMappings(Blocks.carrots, 20, EnumDiet.HERBIVORE, false);
-        FoodMappings.instance().addToBlockMappings(Blocks.wheat, 10, EnumDiet.HERBIVORE, false);
-        FoodMappings.instance().addToBlockMappings(Blocks.leaves, 20, EnumDiet.HERBIVORE, true);
-        FoodMappings.instance().addToBlockMappings(Blocks.melon_block, 65, EnumDiet.HERBIVORE, true);
-        FoodMappings.instance().addToBlockMappings(Blocks.brown_mushroom, 15, EnumDiet.HERBIVORE, true);
-        FoodMappings.instance().addToBlockMappings(Blocks.red_mushroom, 15, EnumDiet.HERBIVORE, true);
-        FoodMappings.instance().addToBlockMappings(Blocks.red_flower, 5, EnumDiet.HERBIVORE, true);
-        FoodMappings.instance().addToBlockMappings(Blocks.yellow_flower, 5, EnumDiet.HERBIVORE, true);
-        FoodMappings.instance().addToBlockMappings(Blocks.potatoes, 25, EnumDiet.HERBIVORE, false);
-        FoodMappings.instance().addToBlockMappings(Blocks.pumpkin, 30, EnumDiet.HERBIVORE, true);
-        FoodMappings.instance().addToBlockMappings(Blocks.reeds, 15, EnumDiet.HERBIVORE, false);
-        FoodMappings.instance().addToBlockMappings(Blocks.sapling, 15, EnumDiet.HERBIVORE, true);
-        FoodMappings.instance().addToBlockMappings(Blocks.tallgrass, 5, EnumDiet.HERBIVORE, true);
-        FoodMappings.instance().addToBlockMappings(FABlockRegistry.INSTANCE.ferns, 55, EnumDiet.HERBIVORE, false);
-        FoodMappings.instance().addToBlockMappings(FABlockRegistry.INSTANCE.palmLeaves, 40, EnumDiet.HERBIVORE, true);
-        FoodMappings.instance().addToBlockMappings(Blocks.cake, 35, EnumDiet.OMNIVORE, false);
-        FoodMappings.instance().addToBlockMappings(Blocks.carrots, 20, EnumDiet.OMNIVORE, false);
-        FoodMappings.instance().addToBlockMappings(Blocks.wheat, 10, EnumDiet.OMNIVORE, false);
-        FoodMappings.instance().addToBlockMappings(Blocks.leaves, 20, EnumDiet.OMNIVORE, true);
-        FoodMappings.instance().addToBlockMappings(Blocks.melon_block, 65, EnumDiet.OMNIVORE, true);
-        FoodMappings.instance().addToBlockMappings(Blocks.brown_mushroom, 15, EnumDiet.OMNIVORE, true);
-        FoodMappings.instance().addToBlockMappings(Blocks.red_mushroom, 15, EnumDiet.OMNIVORE, true);
-        FoodMappings.instance().addToBlockMappings(Blocks.red_flower, 5, EnumDiet.OMNIVORE, true);
-        FoodMappings.instance().addToBlockMappings(Blocks.yellow_flower, 5, EnumDiet.OMNIVORE, true);
-        FoodMappings.instance().addToBlockMappings(Blocks.potatoes, 25, EnumDiet.OMNIVORE, false);
-        FoodMappings.instance().addToBlockMappings(Blocks.pumpkin, 30, EnumDiet.OMNIVORE, true);
-        FoodMappings.instance().addToBlockMappings(Blocks.reeds, 15, EnumDiet.OMNIVORE, false);
-        FoodMappings.instance().addToBlockMappings(Blocks.sapling, 15, EnumDiet.OMNIVORE, true);
-        FoodMappings.instance().addToBlockMappings(Blocks.tallgrass, 5, EnumDiet.OMNIVORE, true);
-        FoodMappings.instance().addToBlockMappings(FABlockRegistry.INSTANCE.ferns, 55, EnumDiet.OMNIVORE, false);
-        FoodMappings.instance().addToBlockMappings(FABlockRegistry.INSTANCE.palmLeaves, 40, EnumDiet.OMNIVORE, true);
-        FoodMappings.instance().addToEntityMappings(EntityPlayer.class, 27, EnumDiet.CARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityVillager.class, 27, EnumDiet.CARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityZombie.class, 23, EnumDiet.CARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityChicken.class, 5, EnumDiet.CARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityCow.class, 40, EnumDiet.CARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityHorse.class, 55, EnumDiet.CARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityPig.class, 20, EnumDiet.CARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntitySheep.class, 35, EnumDiet.CARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntitySquid.class, 30, EnumDiet.CARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityNautilus.class, 100, EnumDiet.CARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityTriceratops.class, 50, EnumDiet.CARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityVelociraptor.class, 20, EnumDiet.CARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityTyrannosaurus.class, 70, EnumDiet.CARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityPterosaur.class, 35, EnumDiet.CARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityMosasaurus.class, 50, EnumDiet.CARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntitySarcosuchus.class, 50, EnumDiet.CARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityLiopleurodon.class, 50, EnumDiet.CARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityStegosaurus.class, 50, EnumDiet.CARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityDilophosaurus.class, 25, EnumDiet.CARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityBrachiosaurus.class, 90, EnumDiet.CARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntitySpinosaurus.class, 70, EnumDiet.CARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityCompsognathus.class, 10, EnumDiet.CARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityAnkylosaurus.class, 50, EnumDiet.CARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityPachycephalosaurus.class, 50, EnumDiet.CARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityDeinonychus.class, 35, EnumDiet.CARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityGallimimus.class, 40, EnumDiet.CARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityAllosaurus.class, 25, EnumDiet.CARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityDodo.class, 20, EnumDiet.CARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityCoelacanth.class, 20, EnumDiet.CARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityQuagga.class, 50, EnumDiet.CARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityTerrorBird.class, 40, EnumDiet.CARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityMammoth.class, 100, EnumDiet.CARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityElasmotherium.class, 80, EnumDiet.CARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityConfuciusornis.class, 15, EnumDiet.CARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityCeratosaurus.class, 25, EnumDiet.CARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityPlayer.class, 27, EnumDiet.CARNIVORE_EGG);
-        FoodMappings.instance().addToEntityMappings(EntityVillager.class, 27, EnumDiet.CARNIVORE_EGG);
-        FoodMappings.instance().addToEntityMappings(EntityZombie.class, 23, EnumDiet.CARNIVORE_EGG);
-        FoodMappings.instance().addToEntityMappings(EntityChicken.class, 5, EnumDiet.CARNIVORE_EGG);
-        FoodMappings.instance().addToEntityMappings(EntityCow.class, 40, EnumDiet.CARNIVORE_EGG);
-        FoodMappings.instance().addToEntityMappings(EntityHorse.class, 55, EnumDiet.CARNIVORE_EGG);
-        FoodMappings.instance().addToEntityMappings(EntityPig.class, 20, EnumDiet.CARNIVORE_EGG);
-        FoodMappings.instance().addToEntityMappings(EntitySheep.class, 35, EnumDiet.CARNIVORE_EGG);
-        FoodMappings.instance().addToEntityMappings(EntitySquid.class, 30, EnumDiet.CARNIVORE_EGG);
-        FoodMappings.instance().addToEntityMappings(EntityNautilus.class, 100, EnumDiet.CARNIVORE_EGG);
-        FoodMappings.instance().addToEntityMappings(EntityTriceratops.class, 50, EnumDiet.CARNIVORE_EGG);
-        FoodMappings.instance().addToEntityMappings(EntityVelociraptor.class, 20, EnumDiet.CARNIVORE_EGG);
-        FoodMappings.instance().addToEntityMappings(EntityTyrannosaurus.class, 70, EnumDiet.CARNIVORE_EGG);
-        FoodMappings.instance().addToEntityMappings(EntityPterosaur.class, 35, EnumDiet.CARNIVORE_EGG);
-        FoodMappings.instance().addToEntityMappings(EntityMosasaurus.class, 50, EnumDiet.CARNIVORE_EGG);
-        FoodMappings.instance().addToEntityMappings(EntitySarcosuchus.class, 50, EnumDiet.CARNIVORE_EGG);
-        FoodMappings.instance().addToEntityMappings(EntityLiopleurodon.class, 50, EnumDiet.CARNIVORE_EGG);
-        FoodMappings.instance().addToEntityMappings(EntityStegosaurus.class, 50, EnumDiet.CARNIVORE_EGG);
-        FoodMappings.instance().addToEntityMappings(EntityDilophosaurus.class, 25, EnumDiet.CARNIVORE_EGG);
-        FoodMappings.instance().addToEntityMappings(EntityBrachiosaurus.class, 90, EnumDiet.CARNIVORE_EGG);
-        FoodMappings.instance().addToEntityMappings(EntitySpinosaurus.class, 70, EnumDiet.CARNIVORE_EGG);
-        FoodMappings.instance().addToEntityMappings(EntityCompsognathus.class, 10, EnumDiet.CARNIVORE_EGG);
-        FoodMappings.instance().addToEntityMappings(EntityAnkylosaurus.class, 50, EnumDiet.CARNIVORE_EGG);
-        FoodMappings.instance().addToEntityMappings(EntityPachycephalosaurus.class, 50, EnumDiet.CARNIVORE_EGG);
-        FoodMappings.instance().addToEntityMappings(EntityDeinonychus.class, 35, EnumDiet.CARNIVORE_EGG);
-        FoodMappings.instance().addToEntityMappings(EntityGallimimus.class, 40, EnumDiet.CARNIVORE_EGG);
-        FoodMappings.instance().addToEntityMappings(EntityAllosaurus.class, 25, EnumDiet.CARNIVORE_EGG);
-        FoodMappings.instance().addToEntityMappings(EntityDodo.class, 20, EnumDiet.CARNIVORE_EGG);
-        FoodMappings.instance().addToEntityMappings(EntityCoelacanth.class, 20, EnumDiet.CARNIVORE_EGG);
-        FoodMappings.instance().addToEntityMappings(EntityQuagga.class, 50, EnumDiet.CARNIVORE_EGG);
-        FoodMappings.instance().addToEntityMappings(EntityTerrorBird.class, 40, EnumDiet.CARNIVORE_EGG);
-        FoodMappings.instance().addToEntityMappings(EntityMammoth.class, 100, EnumDiet.CARNIVORE_EGG);
-        FoodMappings.instance().addToEntityMappings(EntityElasmotherium.class, 80, EnumDiet.CARNIVORE_EGG);
-        FoodMappings.instance().addToEntityMappings(EntityConfuciusornis.class, 15, EnumDiet.CARNIVORE_EGG);
-        FoodMappings.instance().addToEntityMappings(EntityCeratosaurus.class, 25, EnumDiet.CARNIVORE_EGG);
-        FoodMappings.instance().addToEntityMappings(EntityDinoEgg.class, 25, EnumDiet.CARNIVORE_EGG);
-        FoodMappings.instance().addToEntityMappings(EntityPlayer.class, 27, EnumDiet.OMNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityVillager.class, 27, EnumDiet.OMNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityZombie.class, 23, EnumDiet.OMNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityChicken.class, 5, EnumDiet.OMNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityCow.class, 40, EnumDiet.OMNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityHorse.class, 55, EnumDiet.OMNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityPig.class, 20, EnumDiet.OMNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntitySheep.class, 35, EnumDiet.OMNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntitySquid.class, 30, EnumDiet.OMNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityNautilus.class, 100, EnumDiet.OMNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityTriceratops.class, 50, EnumDiet.OMNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityVelociraptor.class, 20, EnumDiet.OMNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityTyrannosaurus.class, 70, EnumDiet.OMNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityPterosaur.class, 35, EnumDiet.OMNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityMosasaurus.class, 50, EnumDiet.OMNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntitySarcosuchus.class, 50, EnumDiet.OMNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityLiopleurodon.class, 50, EnumDiet.OMNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityStegosaurus.class, 50, EnumDiet.OMNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityDilophosaurus.class, 25, EnumDiet.OMNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityBrachiosaurus.class, 90, EnumDiet.OMNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntitySpinosaurus.class, 70, EnumDiet.OMNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityCompsognathus.class, 10, EnumDiet.OMNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityAnkylosaurus.class, 50, EnumDiet.OMNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityPachycephalosaurus.class, 50, EnumDiet.OMNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityDeinonychus.class, 35, EnumDiet.OMNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityGallimimus.class, 40, EnumDiet.OMNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityAllosaurus.class, 25, EnumDiet.OMNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityDodo.class, 20, EnumDiet.OMNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityCoelacanth.class, 20, EnumDiet.OMNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityQuagga.class, 50, EnumDiet.OMNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityTerrorBird.class, 40, EnumDiet.OMNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityMammoth.class, 100, EnumDiet.OMNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityElasmotherium.class, 80, EnumDiet.OMNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityConfuciusornis.class, 15, EnumDiet.OMNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityCeratosaurus.class, 25, EnumDiet.OMNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityPlayer.class, 27, EnumDiet.PISCCARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityVillager.class, 27, EnumDiet.PISCCARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityZombie.class, 23, EnumDiet.PISCCARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityChicken.class, 5, EnumDiet.PISCCARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityCow.class, 40, EnumDiet.PISCCARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityHorse.class, 55, EnumDiet.PISCCARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityPig.class, 20, EnumDiet.PISCCARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntitySheep.class, 35, EnumDiet.PISCCARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntitySquid.class, 30, EnumDiet.PISCCARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityNautilus.class, 100, EnumDiet.PISCCARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityTriceratops.class, 50, EnumDiet.PISCCARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityVelociraptor.class, 20, EnumDiet.PISCCARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityTyrannosaurus.class, 70, EnumDiet.PISCCARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityPterosaur.class, 35, EnumDiet.PISCCARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityMosasaurus.class, 50, EnumDiet.PISCCARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntitySarcosuchus.class, 50, EnumDiet.PISCCARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityLiopleurodon.class, 50, EnumDiet.PISCCARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityStegosaurus.class, 50, EnumDiet.PISCCARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityDilophosaurus.class, 25, EnumDiet.PISCCARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityBrachiosaurus.class, 90, EnumDiet.PISCCARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntitySpinosaurus.class, 70, EnumDiet.PISCCARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityCompsognathus.class, 10, EnumDiet.PISCCARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityAnkylosaurus.class, 50, EnumDiet.PISCCARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityPachycephalosaurus.class, 50, EnumDiet.PISCCARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityDeinonychus.class, 35, EnumDiet.PISCCARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityGallimimus.class, 40, EnumDiet.PISCCARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityAllosaurus.class, 25, EnumDiet.PISCCARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityDodo.class, 20, EnumDiet.PISCCARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityCoelacanth.class, 20, EnumDiet.PISCCARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityQuagga.class, 50, EnumDiet.PISCCARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityTerrorBird.class, 40, EnumDiet.PISCCARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityMammoth.class, 100, EnumDiet.PISCCARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityElasmotherium.class, 80, EnumDiet.PISCCARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityConfuciusornis.class, 15, EnumDiet.PISCCARNIVORE);
-        FoodMappings.instance().addToEntityMappings(EntityCeratosaurus.class, 25, EnumDiet.PISCCARNIVORE);
     }
 }

@@ -1,14 +1,15 @@
 package com.github.revival.server.enums;
 
 import com.github.revival.server.creativetab.FATabRegistry;
-import com.github.revival.server.entity.EnumDiet;
 import com.github.revival.server.entity.mob.*;
 import com.github.revival.server.item.BirdEggItem;
 import com.github.revival.server.item.DinoEggItem;
 import com.github.revival.server.item.ItemFish;
 import com.github.revival.server.item.MammalEmbryoItem;
 import com.github.revival.server.item.forge.ForgeFoodItem;
+
 import cpw.mods.fml.common.registry.GameRegistry;
+import fossilsarcheology.api.EnumDiet;
 import io.netty.util.internal.ThreadLocalRandom;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.*;

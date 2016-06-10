@@ -1,4 +1,4 @@
-package com.github.revival.server.entity;
+package fossilsarcheology.api;
 
 public enum EnumDiet {
     CARNIVORE(3), HERBIVORE(0), OMNIVORE(1), PISCIVORE(1), CARNIVORE_EGG(2), INSECTIVORE(0), PISCCARNIVORE(3), NONE(0);

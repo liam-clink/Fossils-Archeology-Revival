@@ -1,19 +1,21 @@
 package com.github.revival.server.entity.mob;
 
-import com.github.revival.Revival;
-import com.github.revival.client.gui.GuiPedia;
-import com.github.revival.server.entity.ai.DinoAINearestAttackableTarget;
-import com.github.revival.server.entity.ai.QuaggaAITaming;
-import com.github.revival.server.handler.LocalizationStrings;
-import com.github.revival.server.item.FAItemRegistry;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
+import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.IEntityLivingData;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.ai.EntityAIAvoidEntity;
+import net.minecraft.entity.ai.EntityAIFollowParent;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAIMate;
+import net.minecraft.entity.ai.EntityAIPanic;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.ai.attributes.IAttribute;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.ai.attributes.RangedAttribute;
@@ -35,6 +37,16 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+
+import com.github.revival.Revival;
+import com.github.revival.client.gui.GuiPedia;
+import com.github.revival.server.entity.ai.QuaggaAITaming;
+import com.github.revival.server.handler.LocalizationStrings;
+import com.github.revival.server.item.FAItemRegistry;
+
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class EntityQuagga extends EntityAnimal implements IInvBasic {
     protected static final ResourceLocation pediaheart = new ResourceLocation("fossil:textures/gui/PediaHeart.png");
@@ -84,10 +96,9 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic {
         this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
         this.tasks.addTask(8, new EntityAILookIdle(this));
         this.func_110226_cD();
-
-        this.targetTasks.addTask(4, new DinoAINearestAttackableTarget(this, EntityMob.class, 40, true, true, false));
-        this.tasks.addTask(3, new EntityAIAvoidEntity(this, EntityTerrorBird.class, 16.0F, 1D, 1.2D));
-
+        this.tasks.addTask(3, new EntityAIAvoidEntity(this, EntityTitanis.class, 16.0F, 1D, 1.2D));
+        this.tasks.addTask(4, new EntityAIAvoidEntity(this, EntityPhorusrhacos.class, 16.0F, 1D, 1.2D));
+        this.tasks.addTask(5, new EntityAIAvoidEntity(this, EntityKelenken.class, 16.0F, 1D, 1.2D));
     }
 
     public static boolean func_110211_v(Item item) {

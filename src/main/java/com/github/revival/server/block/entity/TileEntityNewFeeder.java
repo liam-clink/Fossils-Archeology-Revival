@@ -1,11 +1,12 @@
 package com.github.revival.server.block.entity;
 
 import com.github.revival.server.block.BlockFeeder;
-import com.github.revival.server.entity.EnumDiet;
 import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 import com.github.revival.server.enums.EnumPrehistoric;
 import com.github.revival.server.handler.LocalizationStrings;
-import com.github.revival.server.util.FoodMappings;
+
+import fossilsarcheology.api.EnumDiet;
+import fossilsarcheology.api.FoodMappings;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;

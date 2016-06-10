@@ -1,11 +1,11 @@
 package com.github.revival.server.entity.mob.test;
 
-import com.github.revival.Revival;
-import com.github.revival.server.block.entity.TileEntityNewFeeder;
-import com.github.revival.server.entity.ai.DinoAINearestAttackableTargetSorter;
-import com.github.revival.server.enums.EnumOrderType;
-import com.github.revival.server.message.MessageFoodParticles;
-import com.github.revival.server.util.FoodMappings;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.List;
+
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
@@ -19,9 +19,12 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
+import com.github.revival.Revival;
+import com.github.revival.server.block.entity.TileEntityNewFeeder;
+import com.github.revival.server.enums.EnumOrderType;
+import com.github.revival.server.message.MessageFoodParticles;
+
+import fossilsarcheology.api.FoodMappings;
 
 public class DinoAIFeeder extends EntityAIBase {
     private static final int NO_TARGET = -1;
@@ -41,7 +44,7 @@ public class DinoAIFeeder extends EntityAIBase {
     private EntityItem targetItem;
     private Vec3 targetBlock;
     private EntityLivingBase targetEntity;
-    private DinoAINearestAttackableTargetSorter targetSorter;
+    private TargetSorter targetSorter;
     private World theWorld;
     private int entityPosX;
     private int entityPosY;
@@ -53,7 +56,7 @@ public class DinoAIFeeder extends EntityAIBase {
         this.targetFeeder = null;
         this.dinosaur = dinosaur;
         this.searchRange = targetRange;
-        this.targetSorter = new DinoAINearestAttackableTargetSorter(this, this.dinosaur);
+        this.targetSorter = new TargetSorter(this, this.dinosaur);
         this.TimeAtThisTarget = 0;
     }
 
@@ -276,6 +279,27 @@ public class DinoAIFeeder extends EntityAIBase {
                 }
         }
         return entityItem;
+    }
+
+    public class TargetSorter implements Comparator {
+        final EntityAIBase ai;
+        private Entity entit;
+
+        public TargetSorter(EntityAIBase var1, Entity var2) {
+            this.ai = var1;
+            this.entit = var2;
+        }
+
+        public int func_48469_a(Entity var1, Entity var2) {
+            double var3 = this.entit.getDistanceSqToEntity(var1);
+            double var5 = this.entit.getDistanceSqToEntity(var2);
+            return var3 < var5 ? -1 : (var3 > var5 ? 1 : 0);
+        }
+
+        @Override
+        public int compare(Object var1, Object var2) {
+            return this.func_48469_a((Entity) var1, (Entity) var2);
+        }
     }
 
 }
