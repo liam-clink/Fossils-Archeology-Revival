@@ -95,8 +95,6 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
     public EntityNewPrehistoric(World world, EnumPrehistoric type, double baseDamage, double maxDamage, double baseHealth, double maxHealth, double baseSpeed, double maxSpeed) {
         super(world);
-        this.getNavigator().setAvoidsWater(true);
-        this.getNavigator().setCanSwim(true);
         this.setHunger(50);
         this.setScale(this.getAgeScale());
         SPEAK_ANIMATION = Animation.create(this.getSpeakLength());
@@ -118,6 +116,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
         this.maxHealth = maxHealth;
         this.baseSpeed = baseSpeed;
         this.maxSpeed = maxSpeed;
+        this.updateAbilities();
     }
 
     public static boolean isCannibalistic() {
@@ -167,11 +166,10 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(this.maxSpeed);
-        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(this.maxHealth);
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.30000001192092896D);
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(20);
         this.getAttributeMap().registerAttribute(SharedMonsterAttributes.attackDamage);
-        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(this.maxDamage);
-        this.updateAbilities();
+        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(1D);
     }
 
     @Override
@@ -202,10 +200,10 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
         data = super.onSpawnWithEgg(data);
         Random random = new Random();
         this.setAgeInDays(this.getAdultAge());
-        this.updateAbilities();
         this.heal(200);
         this.setSpawnValues();
         this.setGender(random.nextInt(2));
+        this.updateAbilities();
         ticksTillPlay = 0;
         ticksTillMate = 24000;
         return data;
@@ -224,9 +222,6 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
     public abstract void setSpawnValues();
 
-    public boolean isHungry() {
-        return this.getHunger() < this.getMaxHunger() * this.type.HungryLevel;
-    }
 
     public boolean isDeadlyHungry() {
         return this.getHunger() < this.getMaxHunger() * (1 - this.type.HungryLevel);
@@ -516,22 +511,22 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
             ticksSlept++;
         }
 
-        if (!worldObj.isRemote && !this.isSitting() && this.getRNG().nextInt(100) == 1 && !this.isRiding() && (this.getAnimation() == NO_ANIMATION || this.getAnimation() == SPEAK_ANIMATION) && !this.isSleeping()) {
+        if (!worldObj.isRemote && !this.isInWater() && !this.isSitting() && this.getRNG().nextInt(100) == 1 && !this.isRiding() && (this.getAnimation() == NO_ANIMATION || this.getAnimation() == SPEAK_ANIMATION) && !this.isSleeping()) {
             this.setSitting(true);
             ticksSitted = 0;
         }
 
-        if (!worldObj.isRemote && (this.isSitting() && ticksSitted > 100 && this.getRNG().nextInt(100) == 1 || this.getAttackTarget() != null) && !this.isSleeping()) {
+        if (!worldObj.isRemote && !this.isInWater() && (this.isSitting() && ticksSitted > 100 && this.getRNG().nextInt(100) == 1 || this.getAttackTarget() != null) && !this.isSleeping()) {
             this.setSitting(false);
             ticksSitted = 0;
         }
-        if (!worldObj.isRemote && this.getRNG().nextInt(500) == 1 && this.canSleep() && (this.getAnimation() == NO_ANIMATION || this.getAnimation() == SPEAK_ANIMATION)) {
+        if (!worldObj.isRemote && !this.isInWater() && this.getRNG().nextInt(500) == 1 && this.canSleep() && (this.getAnimation() == NO_ANIMATION || this.getAnimation() == SPEAK_ANIMATION)) {
             this.setSitting(false);
             this.setSleeping(true);
             ticksSlept = 0;
         }
 
-        if (!worldObj.isRemote && (!this.canSleep() || (this.isSleeping() && ticksSlept > 200 && this.getRNG().nextInt(1000) == 1 || this.getAttackTarget() != null))) {
+        if (!worldObj.isRemote && !this.isInWater() && (!this.canSleep() || (this.isSleeping() && ticksSlept > 200 && this.getRNG().nextInt(1000) == 1 || this.getAttackTarget() != null))) {
             this.setSitting(false);
             this.setSleeping(false);
             ticksSlept = 0;
@@ -585,6 +580,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
     @Override
     public void onUpdate() {
         super.onUpdate();
+		this.setAgeinTicks(this.getAgeInTicks() + 1);
         if (this.getAgeInTicks() % 24000 == 0) {
             this.updateAbilities();
         }
@@ -690,9 +686,9 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
     }
 
     public void updateAbilities() {
-        double healthStep = (maxHealth - baseHealth) / (this.getAdultAge() + 1);
-        double attackStep = (maxDamage - baseDamage) / (this.getAdultAge() + 1);
-        double speedStep = (maxSpeed - baseSpeed) / (this.getAdultAge() + 1);
+        double healthStep = (maxHealth - baseHealth) / (this.getAdultAge());
+        double attackStep = (maxDamage - baseDamage) / (this.getAdultAge());
+        double speedStep = (maxSpeed - baseSpeed) / (this.getAdultAge());
         if (this.getAgeInDays() <= this.getAdultAge()) {
             this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(Math.round(baseHealth + (healthStep * this.getAgeInDays())));
             this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(Math.round(baseDamage + (attackStep * this.getAgeInDays())));
@@ -706,12 +702,13 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
                     this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.0D);
                 }
             }
+            System.out.println(this.getEntityAttribute(SharedMonsterAttributes.maxHealth).getAttributeValue());
         }
     }
 
     public void breakBlock(float hardness) {
         if (Revival.CONFIG.dinoBlockBreaking) {
-            if (!isSkeleton() && this.isAdult() && this.IsHungry()) {
+            if (!isSkeleton() && this.isAdult() && this.isHungry()) {
                 for (int a = (int) Math.round(this.boundingBox.minX) - 1; a <= (int) Math.round(this.boundingBox.maxX) + 1; a++) {
                     for (int b = (int) Math.round(this.boundingBox.minY) + 1; (b <= (int) Math.round(this.boundingBox.maxY) + 3) && (b <= 127); b++) {
                         for (int c = (int) Math.round(this.boundingBox.minZ) - 1; c <= (int) Math.round(this.boundingBox.maxZ) + 1; c++) {
@@ -830,7 +827,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
         this.setMood(this.getMood() + 25);
     }
 
-    public boolean IsHungry() {
+    public boolean isHungry() {
         return this.getHunger() < this.getMaxHunger() * 0.75F;
     }
 
@@ -1365,16 +1362,6 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
             }
         }
         return target instanceof EntityToyBase && this.ticksTillPlay == 0;
-        /*
-		 * if(this.selfType.diet != EnumDiet.HERBIVORE && this.selfType.diet !=
-		 * EnumDiet.NONE){ if(mobBoundingBoxDistance >=
-		 * targetBoundingBoxDistance){ return true; if(target instanceof
-		 * EntityNewPrehistoric){ EntityNewPrehistoric prehistoric =
-		 * (EntityNewPrehistoric)target; if(prehistoric.selfType.diet.fearIndex
-		 * <= mob.selfType.diet.fearIndex){
-		 * 
-		 * return true; } }else{ return true; } } } return false;
-		 */
     }
 
     public EntityLivingBase getClosestEntity() {

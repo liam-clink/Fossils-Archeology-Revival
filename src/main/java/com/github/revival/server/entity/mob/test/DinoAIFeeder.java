@@ -76,7 +76,7 @@ public class DinoAIFeeder extends EntityAIBase {
             }
         }
 
-        if (!this.dinosaur.IsHungry()) {
+        if (!this.dinosaur.isHungry()) {
             this.typeofTarget = NO_TARGET;
             return false;
         }
@@ -133,7 +133,7 @@ public class DinoAIFeeder extends EntityAIBase {
     public boolean continueExecuting() {
         double Distance = Math.sqrt(Math.pow(this.dinosaur.posX - this.destX, 2.0D) + Math.pow(this.dinosaur.posZ - this.destZ, 2.0D));
 
-        if (!this.dinosaur.IsHungry()) {
+        if (!this.dinosaur.isHungry()) {
             endTask();
             return false;
         }
