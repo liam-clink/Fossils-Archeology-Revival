@@ -2,6 +2,7 @@ package com.github.revival.server.entity.mob;
 
 import com.github.revival.server.entity.ai.DinoAIAttackOnCollide;
 import com.github.revival.server.entity.ai.DinoAIFollowOwner;
+import com.github.revival.server.entity.ai.DinoAIHunt;
 import com.github.revival.server.entity.ai.DinoAILookIdle;
 import com.github.revival.server.entity.ai.DinoAIWander;
 import com.github.revival.server.entity.ai.DinoAIWatchClosest;
@@ -40,6 +41,7 @@ public class EntityStegosaurus extends EntityNewPrehistoric {
         this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
         this.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
+        this.targetTasks.addTask(4, new DinoAIHunt(this, 200, false));
         this.setSize(1.0F, 0.8F);
         this.pediaScale = 4F;
         this.nearByMobsAllowed = 7;

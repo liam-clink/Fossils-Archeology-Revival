@@ -1,8 +1,16 @@
 package com.github.revival.server.entity.mob;
 
+import com.github.revival.server.entity.ai.DinoAIHunt;
+import com.github.revival.server.entity.ai.DinoAILookIdle;
+import com.github.revival.server.entity.ai.DinoAIWatchClosest;
+import com.github.revival.server.entity.mob.test.DinoAIFeeder;
+import com.github.revival.server.entity.mob.test.DinoAIWaterFindTarget;
 import com.github.revival.server.entity.mob.test.EntitySwimmingPrehistoric;
 import com.github.revival.server.enums.EnumPrehistoric;
 import com.github.revival.server.enums.EnumPrehistoricAI.*;
+
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
@@ -18,6 +26,14 @@ public class EntityLiopleurodon extends EntitySwimmingPrehistoric {
 
 	public EntityLiopleurodon(World world) {
 		super(world, EnumPrehistoric.Liopleurodon, 2, 12, 10, 45, 0.3, 0.4);
+        this.getNavigator().setAvoidsWater(false);
+        this.tasks.addTask(1, this.aiSit);
+        this.tasks.addTask(2, new DinoAIWaterFindTarget(this));
+        this.tasks.addTask(3, new DinoAIFeeder(this, 16));
+        this.tasks.addTask(4, new DinoAIWatchClosest(this, EntityPlayer.class, 8.0F));
+        this.tasks.addTask(4, new DinoAILookIdle(this));
+        this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
+        this.targetTasks.addTask(2, new DinoAIHunt(this, 200, false));
 		this.hasBabyTexture = false;
 		this.setSize(1.5F, 0.5F);
 		minSize = 0.8F;
@@ -118,7 +134,7 @@ public class EntityLiopleurodon extends EntitySwimmingPrehistoric {
 
 	@Override
 	protected double getSwimSpeed() {
-		return 3;
+		return 2.5D;
 	}
 
 	public int getMaxHunger() {

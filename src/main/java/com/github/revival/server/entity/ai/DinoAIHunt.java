@@ -47,10 +47,10 @@ public class DinoAIHunt extends EntityAITarget {
 			double d0 = this.getTargetDistance();
 			List list = this.taskOwner.worldObj.selectEntitiesWithinAABB(EntityLivingBase.class, this.taskOwner.boundingBox.expand(d0, 4.0D, d0), this.targetEntitySelector);
 			Collections.sort(list, this.theNearestAttackableTargetSorter);
-
 			if (list.isEmpty()) {
 				return false;
 			} else {
+				System.out.println(list);
 				this.targetEntity = (EntityLivingBase) list.get(0);
 				if(this.taskOwner instanceof EntityNewPrehistoric){
 					EntityNewPrehistoric prehistoric = (EntityNewPrehistoric)this.taskOwner;

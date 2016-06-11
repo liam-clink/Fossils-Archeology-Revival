@@ -1248,7 +1248,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
     public String getTexture() {
         String toggle = this.hasFeatherToggle ? !this.featherToggle ? "feathered/" : "scaled/" : "";
         boolean isBaby = this.isChild() && this.hasBabyTexture;
-        String gender = this.hasTeenTexture ? this.isTeen() ? "_teen" : this.isChild() ? "_baby" : this.getGender() == 0 ? "_female" : "_male" : this.isChild() ? "_baby" : this.getGender() == 0 ? "_female" : "_male";
+        String gender = this.hasTeenTexture ? this.isTeen() ? "_teen" : isBaby ? "_baby" : this.getGender() == 0 ? "_female" : "_male" : this.isChild() ? "_baby" : this.getGender() == 0 ? "_female" : "_male";
         String sleeping = !this.isSleeping() ? "" : "_sleeping";
         String toggleList = this.hasFeatherToggle ? !this.featherToggle ? "_feathered" : "_scaled" : "";
         return "fossil:textures/model/" + type.toString().toLowerCase() + "_0/" + toggle + type.toString().toLowerCase() + gender + toggleList + sleeping + ".png";
@@ -1524,6 +1524,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
         Block block = worldObj.getBlock(destX, destY, destZ);
         if (FoodMappings.instance().getBlockFoodAmount(block, type.diet) != 0) {
             this.heal(Math.round(FoodMappings.instance().getBlockFoodAmount(block, type.diet) / 10));
+            this.setHunger(this.getHunger() + FoodMappings.instance().getBlockFoodAmount(block, type.diet));
             doFoodEffect(Item.getItemFromBlock(block));
             Revival.NETWORK_WRAPPER.sendToAll(new MessageFoodParticles(getEntityId(), block));
         }

@@ -1,9 +1,20 @@
 package com.github.revival.server.entity.mob;
 
+import com.github.revival.server.entity.ai.DinoAIAvoidEntity;
+import com.github.revival.server.entity.ai.DinoAIHunt;
+import com.github.revival.server.entity.ai.DinoAILookIdle;
+import com.github.revival.server.entity.ai.DinoAIWatchClosest;
+import com.github.revival.server.entity.mob.test.DinoAIFeeder;
+import com.github.revival.server.entity.mob.test.DinoAIWaterFindTarget;
 import com.github.revival.server.entity.mob.test.EntitySwimmingPrehistoric;
 import com.github.revival.server.enums.EnumPrehistoric;
 import com.github.revival.server.enums.EnumPrehistoricAI.*;
 import com.github.revival.server.item.FAItemRegistry;
+
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAIOwnerHurtByTarget;
+import net.minecraft.entity.ai.EntityAIOwnerHurtTarget;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
 
@@ -11,6 +22,14 @@ public class EntityPlesiosaurus extends EntitySwimmingPrehistoric {
 
     public EntityPlesiosaurus(World world) {
         super(world, EnumPrehistoric.Plesiosaur, 2, 12, 10, 30, 0.2, 0.3);
+        this.getNavigator().setAvoidsWater(false);
+        this.tasks.addTask(1, this.aiSit);
+        this.tasks.addTask(2, new DinoAIWaterFindTarget(this));
+        this.tasks.addTask(3, new DinoAIFeeder(this, 16));
+        this.tasks.addTask(4, new DinoAIWatchClosest(this, EntityPlayer.class, 8.0F));
+        this.tasks.addTask(4, new DinoAILookIdle(this));
+        this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
+        this.targetTasks.addTask(2, new DinoAIHunt(this, 200, false));
         this.setSize(1.0F, 1.0F);
         minSize = 0.3F;
         maxSize = 1.5F;

@@ -123,8 +123,6 @@ public class ModelMosasaurus extends ModelNewPrehistoric {
         AdvancedModelRenderer[] tailParts = {this.lowerBody, this.tail1, this.tail2, this.upperTailFin};
         AdvancedModelRenderer[] neckParts = {this.neck, this.head};
         this.lowerTailFin.rotateAngleY = this.upperTailFin.rotateAngleY;
-        ModelUtils.faceTargetMod(neck, f3, f4, 0.5F);
-        ModelUtils.faceTargetMod(head, f3, f4, 0.5F);
         float speed = 0.1F;
         float speed2 = 0.4F;
         this.lowerTailFin.setScale(1.01F, 1.01F, 1.01F);
@@ -137,6 +135,13 @@ public class ModelMosasaurus extends ModelNewPrehistoric {
         this.flap(leftHindFlipper, speed2, 0.6F, false, 0, 0, f, f1);
         this.flap(rightHindFlipper, speed2, 0.6F, true, 0, 0, f, f1);
         ((EntityNewPrehistoric) entity).chainBuffer.applyChainSwingBuffer((ModelRenderer[]) tailParts);
+        if(entity.riddenByEntity != null){
+        	this.head.rotateAngleX = (float) Math.toRadians(-15);
+        	this.jawBase.rotateAngleX = (float) Math.toRadians(31);
+        }else{
+            ModelUtils.faceTargetMod(neck, f3, f4, 0.5F);
+            ModelUtils.faceTargetMod(head, f3, f4, 0.5F);
+        }
     }
 
 }

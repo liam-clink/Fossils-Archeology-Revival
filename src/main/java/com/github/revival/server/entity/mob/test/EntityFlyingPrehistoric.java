@@ -21,7 +21,6 @@ public abstract class EntityFlyingPrehistoric extends EntityNewPrehistoric {
 
     public EntityFlyingPrehistoric(World world, EnumPrehistoric type, double baseDamage, double maxDamage, double baseHealth, double maxHealth, double baseSpeed, double maxSpeed) {
         super(world, type, baseDamage, maxDamage, baseHealth, maxHealth, baseSpeed, maxSpeed);
-        this.tasks.addTask(15, new DinoAIFindAirTarget(this));
     }
 
     public boolean isDirectPathBetweenPoints(Vec3 vec1, Vec3 vec2) {

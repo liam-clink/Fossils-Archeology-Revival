@@ -8,6 +8,7 @@ import com.github.revival.server.entity.ai.DinoAILookIdle;
 import com.github.revival.server.entity.ai.DinoAIWander;
 import com.github.revival.server.entity.ai.DinoAIWatchClosest;
 import com.github.revival.server.entity.mob.test.DinoAIFeeder;
+import com.github.revival.server.entity.mob.test.DinoAIFindAirTarget;
 import com.github.revival.server.entity.mob.test.EntityFlyingPrehistoric;
 import com.github.revival.server.enums.EnumPrehistoric;
 import com.github.revival.server.enums.EnumPrehistoricAI.*;
@@ -38,6 +39,7 @@ public class EntityPterosaur extends EntityFlyingPrehistoric {
         this.tasks.addTask(6, new DinoAIWander(this, 1.0D));
         this.tasks.addTask(7, new DinoAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(7, new DinoAILookIdle(this));
+        this.tasks.addTask(8, new DinoAIFindAirTarget(this));
         this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
         this.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));

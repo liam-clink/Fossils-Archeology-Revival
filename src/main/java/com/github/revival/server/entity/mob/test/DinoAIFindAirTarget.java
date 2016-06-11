@@ -28,7 +28,6 @@ public class DinoAIFindAirTarget extends EntityAIBase {
         if (prehistoric.currentTarget != null && prehistoric.getDistance(prehistoric.currentTarget.posX, prehistoric.currentTarget.posY, prehistoric.currentTarget.posZ) < 10F) {
             return false;
         } else {
-            System.out.println(1);
             Vec3 vec = this.findAirTarget();
             if (vec == null) {
                 return false;
@@ -54,7 +53,7 @@ public class DinoAIFindAirTarget extends EntityAIBase {
 
         if (prehistoric.getAttackTarget() == null) {
             for (int i = 0; i < 10; ++i) {
-                ChunkCoordinates blockpos1 = new ChunkCoordinates((int) this.prehistoric.posX + ((6 + random.nextInt(10)) * (random.nextBoolean() ? -1 : 1)), (int) this.prehistoric.posY + (random.nextInt(6) * (random.nextBoolean() ? -1 : 1)), (int) this.prehistoric.posZ + ((6 + random.nextInt(10)) * (random.nextBoolean() ? -1 : 1)));
+                ChunkCoordinates blockpos1 = new ChunkCoordinates((int) this.prehistoric.posX + ((6 + random.nextInt(10)) * (random.nextBoolean() ? -1 : 1)), (int) this.prehistoric.posY + ((2 + random.nextInt(6)) * (random.nextBoolean() ? -1 : 1)), (int) this.prehistoric.posZ + ((6 + random.nextInt(10)) * (random.nextBoolean() ? -1 : 1)));
                 if (prehistoric.worldObj.getBlock(blockpos1.posX, blockpos1.posY, blockpos1.posZ).getMaterial() == Material.air) {
                     return Vec3.createVectorHelper(blockpos1.posX, blockpos1.posY, blockpos1.posZ);
                 }

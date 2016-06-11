@@ -17,6 +17,7 @@ import net.minecraft.world.World;
 import com.github.revival.Revival;
 import com.github.revival.server.entity.ai.DinoAIAttackOnCollide;
 import com.github.revival.server.entity.ai.DinoAIFollowOwner;
+import com.github.revival.server.entity.ai.DinoAIHunt;
 import com.github.revival.server.entity.ai.DinoAILookIdle;
 import com.github.revival.server.entity.ai.DinoAIWander;
 import com.github.revival.server.entity.ai.DinoAIWatchClosest;
@@ -53,6 +54,7 @@ public class EntityGallimimus extends EntityNewPrehistoric {
         this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
         this.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
+        this.targetTasks.addTask(4, new DinoAIHunt(this, 200, false));
         this.setSize(1.1F, 2F);
         this.pediaScale = 6F;
         this.hasFeatherToggle = true;

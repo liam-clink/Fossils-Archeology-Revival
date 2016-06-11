@@ -43,6 +43,7 @@ public class EntityPachycephalosaurus extends EntityNewPrehistoric {
         this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
         this.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
+        this.targetTasks.addTask(4, new DinoAIHunt(this, 200, false));
         this.setSize(1.0F, 1.5F);
         this.nearByMobsAllowed = 4;
         this.pediaScale = 10F;

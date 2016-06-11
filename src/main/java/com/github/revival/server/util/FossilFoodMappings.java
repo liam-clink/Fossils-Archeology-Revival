@@ -13,8 +13,36 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 
 import com.github.revival.server.block.FABlockRegistry;
-import com.github.revival.server.entity.EntityDinoEgg;
-import com.github.revival.server.entity.mob.*;
+import com.github.revival.server.entity.mob.EntityAlligatorGar;
+import com.github.revival.server.entity.mob.EntityAllosaurus;
+import com.github.revival.server.entity.mob.EntityAnkylosaurus;
+import com.github.revival.server.entity.mob.EntityBrachiosaurus;
+import com.github.revival.server.entity.mob.EntityCeratosaurus;
+import com.github.revival.server.entity.mob.EntityCoelacanth;
+import com.github.revival.server.entity.mob.EntityCompsognathus;
+import com.github.revival.server.entity.mob.EntityConfuciusornis;
+import com.github.revival.server.entity.mob.EntityDeinonychus;
+import com.github.revival.server.entity.mob.EntityDilophosaurus;
+import com.github.revival.server.entity.mob.EntityDodo;
+import com.github.revival.server.entity.mob.EntityElasmotherium;
+import com.github.revival.server.entity.mob.EntityGallimimus;
+import com.github.revival.server.entity.mob.EntityKelenken;
+import com.github.revival.server.entity.mob.EntityLiopleurodon;
+import com.github.revival.server.entity.mob.EntityMammoth;
+import com.github.revival.server.entity.mob.EntityMosasaurus;
+import com.github.revival.server.entity.mob.EntityNautilus;
+import com.github.revival.server.entity.mob.EntityPachycephalosaurus;
+import com.github.revival.server.entity.mob.EntityPhorusrhacos;
+import com.github.revival.server.entity.mob.EntityPterosaur;
+import com.github.revival.server.entity.mob.EntityQuagga;
+import com.github.revival.server.entity.mob.EntitySarcosuchus;
+import com.github.revival.server.entity.mob.EntitySpinosaurus;
+import com.github.revival.server.entity.mob.EntityStegosaurus;
+import com.github.revival.server.entity.mob.EntitySturgeon;
+import com.github.revival.server.entity.mob.EntityTitanis;
+import com.github.revival.server.entity.mob.EntityTriceratops;
+import com.github.revival.server.entity.mob.EntityTyrannosaurus;
+import com.github.revival.server.entity.mob.EntityVelociraptor;
 import com.github.revival.server.enums.EnumMobType;
 import com.github.revival.server.enums.EnumPrehistoric;
 import com.github.revival.server.enums.EnumTimePeriod;
@@ -118,7 +146,6 @@ public class FossilFoodMappings {
         FoodMappings.instance().addMeat(EntityGallimimus.class, 40);
         FoodMappings.instance().addMeat(EntityAllosaurus.class, 25);
         FoodMappings.instance().addMeat(EntityDodo.class, 20);
-        FoodMappings.instance().addMeat(EntityCoelacanth.class, 20);
         FoodMappings.instance().addMeat(EntityQuagga.class, 50);
         FoodMappings.instance().addMeat(EntityTitanis.class, 40);
         FoodMappings.instance().addMeat(EntityPhorusrhacos.class, 40);
@@ -129,6 +156,11 @@ public class FossilFoodMappings {
         FoodMappings.instance().addMeat(EntityConfuciusornis.class, 15);
         FoodMappings.instance().addMeat(EntityCeratosaurus.class, 25);
 
+        FoodMappings.instance().addFish(EntityCoelacanth.class, 20);
+        FoodMappings.instance().addFish(EntitySturgeon.class, 20);
+        FoodMappings.instance().addFish(EntityAlligatorGar.class, 20);
+
+        
         FoodMappings.instance().removeItemMapping(EnumPrehistoric.Horse.embryoItem, EnumDiet.CARNIVORE_EGG);
     }
 }

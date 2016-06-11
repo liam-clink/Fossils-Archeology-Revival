@@ -29,12 +29,12 @@ import net.minecraft.world.World;
 public class EntityDodo extends EntityNewPrehistoric {
 
     public EntityDodo(World world) {
-        super(world, EnumPrehistoric.Dodo, 1, 1, 4, 10, 0.2, 0.4);
+        super(world, EnumPrehistoric.Dodo, 1, 1, 4, 10, 0.2, 0.3);
         this.getNavigator().setAvoidsWater(true);
         this.getNavigator().setCanSwim(true);
         this.tasks.addTask(1, new EntityAISwimming(this));
         this.tasks.addTask(2, this.aiSit);
-        this.tasks.addTask(3, new EntityAIPanic(this, 1.25D));
+        this.tasks.addTask(3, new EntityAIPanic(this, 1D));
         this.tasks.addTask(4, new DinoAIAvoidEntity(this, 16.0F, 0.8D, 1.33D));
         this.tasks.addTask(5, new DinoAIAttackOnCollide(this, 1.0D, false));
         this.tasks.addTask(6, new DinoAIFollowOwner(this, 1.0D, 10.0F, 2.0F));
@@ -42,6 +42,7 @@ public class EntityDodo extends EntityNewPrehistoric {
         this.tasks.addTask(8, new DinoAIWander(this, 1.0D));
         this.tasks.addTask(9, new DinoAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(9, new DinoAILookIdle(this));
+        this.targetTasks.addTask(4, new DinoAIHunt(this, 200, false));
         this.setSize(0.8F, 0.7F);
         this.nearByMobsAllowed = 10;
         minSize = 0.5F;
