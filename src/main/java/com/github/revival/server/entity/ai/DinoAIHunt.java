@@ -50,7 +50,6 @@ public class DinoAIHunt extends EntityAITarget {
 			if (list.isEmpty()) {
 				return false;
 			} else {
-				System.out.println(list);
 				this.targetEntity = (EntityLivingBase) list.get(0);
 				if(this.taskOwner instanceof EntityNewPrehistoric){
 					EntityNewPrehistoric prehistoric = (EntityNewPrehistoric)this.taskOwner;
