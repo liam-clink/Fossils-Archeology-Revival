@@ -53,7 +53,7 @@ public class DinoAIHunt extends EntityAITarget {
 				this.targetEntity = (EntityLivingBase) list.get(0);
 				if(this.taskOwner instanceof EntityNewPrehistoric){
 					EntityNewPrehistoric prehistoric = (EntityNewPrehistoric)this.taskOwner;
-					if(prehistoric.isMovementBlocked() && !prehistoric.canDinoHunt(targetEntity, true)){
+					if(prehistoric.isMovementBlocked() && !prehistoric.canDinoHunt(targetEntity, true) && prehistoric.isHungry()){
 						return false;
 					}
 					if(FoodMappings.instance().getEntityFoodAmount(this.targetEntity.getClass(), prehistoric.type.diet) == 0){

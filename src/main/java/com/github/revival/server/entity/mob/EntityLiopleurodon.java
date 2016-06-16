@@ -30,7 +30,7 @@ public class EntityLiopleurodon extends EntitySwimmingPrehistoric {
 		super(world, EnumPrehistoric.Liopleurodon, 2, 12, 10, 45, 0.3, 0.4);
         this.getNavigator().setAvoidsWater(false);
         this.tasks.addTask(1, this.aiSit);
-        this.tasks.addTask(2, new DinoAIWaterFindTarget(this));
+        this.tasks.addTask(2, new DinoAIWaterFindTarget(this, false));
 		this.tasks.addTask(3, new DinoAIWaterFeeder(this, 16));
         this.tasks.addTask(4, new DinoAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(4, new DinoAILookIdle(this));

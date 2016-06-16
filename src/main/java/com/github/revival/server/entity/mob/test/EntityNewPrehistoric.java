@@ -987,7 +987,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	@Override
 	public void jump() {
 		super.jump();
-		this.motionY = 1;
+        this.motionY = 0.5D;
 	}
 
 	@Override

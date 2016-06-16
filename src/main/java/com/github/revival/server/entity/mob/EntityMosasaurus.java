@@ -39,7 +39,7 @@ public class EntityMosasaurus extends EntitySwimmingPrehistoric {
 		super(world, EnumPrehistoric.Mosasaurus, 2, 9, 12, 70, 0.3, 0.35);
 		this.getNavigator().setAvoidsWater(false);
 		this.tasks.addTask(1, this.aiSit);
-		this.tasks.addTask(2, new DinoAIWaterFindTarget(this));
+		this.tasks.addTask(2, new DinoAIWaterFindTarget(this, false));
 		this.tasks.addTask(3, new DinoAIWaterFeeder(this, 16));
 		this.tasks.addTask(4, new DinoAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		this.tasks.addTask(4, new DinoAILookIdle(this));
@@ -179,7 +179,7 @@ public class EntityMosasaurus extends EntitySwimmingPrehistoric {
 				this.onKillEntity((EntityLivingBase) this.riddenByEntity);
 				this.setAttackTarget(null);
 			}
-
+			
 			float modTick_1 = 5 * MathHelper.sin((float) (Math.PI + (this.getAnimationTick() * 0.275F)));
 			rotationYaw = renderYawOffset;
 			float radius = 0.5F * (0.7F * getAgeScale()) * -3;

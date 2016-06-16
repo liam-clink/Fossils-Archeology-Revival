@@ -17,10 +17,12 @@ public class DinoAIWaterFindTarget extends EntityAIBase {
 	private int shelterY;
 	private int shelterZ;
 	private World theWorld;
-
-	public DinoAIWaterFindTarget(EntitySwimmingPrehistoric prehistoric) {
+	private boolean canGoOnLand;
+	
+	public DinoAIWaterFindTarget(EntitySwimmingPrehistoric prehistoric, boolean canGoOnLand) {
 		this.prehistoric = prehistoric;
 		this.theWorld = prehistoric.worldObj;
+		this.canGoOnLand = canGoOnLand;
 	}
 
 	public boolean shouldExecute() {
@@ -61,7 +63,7 @@ public class DinoAIWaterFindTarget extends EntityAIBase {
 		Random random = this.prehistoric.getRNG();
 		if (prehistoric.isTamed() && prehistoric.currentOrder == EnumOrderType.FOLLOW) {
 			ChunkCoordinates blockpos1 = new ChunkCoordinates((int) prehistoric.getOwner().posX, (int) prehistoric.getOwner().posY, (int) prehistoric.getOwner().posZ);
-			if (prehistoric.worldObj.getBlock(blockpos1.posX, blockpos1.posY, blockpos1.posZ).getMaterial() == Material.water) {
+			if (canGoToBlock(blockpos1.posX, blockpos1.posY, blockpos1.posZ)) {
 				return Vec3.createVectorHelper(blockpos1.posX, blockpos1.posY, blockpos1.posZ);
 			}
 		}
@@ -69,18 +71,26 @@ public class DinoAIWaterFindTarget extends EntityAIBase {
 		if (prehistoric.getAttackTarget() == null) {
 			for (int i = 0; i < 10; ++i) {
 				ChunkCoordinates blockpos1 = new ChunkCoordinates((int) this.prehistoric.posX + ((2 + random.nextInt(10)) * (random.nextBoolean() ? -1 : 1)), (int) this.prehistoric.posY + (random.nextInt(6) * (random.nextBoolean() ? -1 : 1)), (int) this.prehistoric.posZ + ((2 + random.nextInt(10)) * (random.nextBoolean() ? -1 : 1)));
-				if (prehistoric.worldObj.getBlock(blockpos1.posX, blockpos1.posY, blockpos1.posZ).getMaterial() == Material.water) {
+				if (canGoToBlock(blockpos1.posX, blockpos1.posY, blockpos1.posZ)) {
 					return Vec3.createVectorHelper(blockpos1.posX, blockpos1.posY, blockpos1.posZ);
 				}
 			}
 		} else {
 			ChunkCoordinates blockpos1 = new ChunkCoordinates((int) prehistoric.getAttackTarget().posX, (int) prehistoric.getAttackTarget().posY, (int) prehistoric.getAttackTarget().posZ);
-			if (prehistoric.worldObj.getBlock(blockpos1.posX, blockpos1.posY, blockpos1.posZ).getMaterial() == Material.water) {
+			if (canGoToBlock(blockpos1.posX, blockpos1.posY, blockpos1.posZ)) {
 				return Vec3.createVectorHelper(blockpos1.posX, blockpos1.posY, blockpos1.posZ);
 			}
 		}
 
 		return null;
+	}
+	
+	public boolean canGoToBlock(int x, int y, int z){
+		if(this.canGoOnLand){
+			return prehistoric.worldObj.getBlock(x, y, z).getMaterial() == Material.water || prehistoric.worldObj.getBlock(x, y, z).getMaterial() == Material.air;
+		}else{
+			return prehistoric.worldObj.getBlock(x, y, z).getMaterial() == Material.water;
+		}
 	}
 
 }
