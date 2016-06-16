@@ -269,10 +269,10 @@ public class ModelConfuciusornis extends ModelNewPrehistoric {
             sitAnimationRotationPrev(leftWing3, sitProgress, (float)Math.toRadians(5.22D), 0, 0);
             sitAnimationRotationPrev(rightLeg, sitProgress, (float)Math.toRadians(65.0D), 0, (float)Math.toRadians(1.0D));
             if (sitProgress >= 10) {
-                this.chainFlap(rightWingParts, speed3, 0.9F, 1, f, f1);
-                this.chainFlap(leftWingParts, speed3, -0.9F, 1, f, f1);
-                this.swing(RightWing, speed3, 0.7F, false, 0F, 0F, f, f1);
-                this.swing(leftWing, speed3, 0.7F, true, 0F, 0F, f, f1);
+                this.chainFlap(rightWingParts, speed3, 0.6F, 0, f, f1);
+                this.chainFlap(leftWingParts, speed3, -0.6F, 0, f, f1);
+                this.swing(RightWing, speed3, 0.5F, false, 0F, 0F, f, f1);
+                this.swing(leftWing, speed3, 0.5F, true, 0F, 0F, f, f1);
             } else {
                 this.walk(leftLeg, speed2, 1.9F, false, 0F, 0F, f, f1);
                 this.walk(rightLeg, speed2, 1.9F, true, 0F, 0F, f, f1);

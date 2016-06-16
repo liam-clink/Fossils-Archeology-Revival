@@ -223,7 +223,6 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
 	public abstract void setSpawnValues();
 
-
 	public boolean isDeadlyHungry() {
 		return this.getHunger() < this.getMaxHunger() * (1 - this.type.HungryLevel);
 	}
@@ -745,7 +744,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		}
 		if (this.type.type == EnumMobType.DINOSAUR) {
 			// baby = new EntityItem(this.worldObj, this.posX, this.posY,
-					// this.posZ, new ItemStack(this.selfType.birdEggItem));
+			// this.posZ, new ItemStack(this.selfType.birdEggItem));
 			baby = new EntityDinoEgg(this.worldObj, this.type);
 			((EntityDinoEgg) baby).selfType = this.type;
 		}
@@ -986,7 +985,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	}
 
 	@Override
-	public void jump() { 
+	public void jump() {
 		super.jump();
 		this.motionY = 1;
 	}
@@ -1213,28 +1212,31 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		return new ArrayList<Class<? extends Entity>>();
 	}
 
-	public void playerRoar(EntityPlayer player) {
-	}
+	public void playerRoar(EntityPlayer player) {}
 
-	public void playerAttack(EntityPlayer player) {
-	}
+	public void playerAttack(EntityPlayer player) {}
 
-	public void playerJump(EntityPlayer player) {
-	}
+	public void playerJump(EntityPlayer player) {}
 
-	public void playerFlyUp(EntityPlayer player) {
-	}
+	public void playerFlyUp(EntityPlayer player) {}
 
-	public void playerFlyDown(EntityPlayer player) {
-	}
+	public void playerFlyDown(EntityPlayer player) {}
 
 	public String getTexture() {
-		String toggle = this.hasFeatherToggle ? !this.featherToggle ? "feathered/" : "scaled/" : "";
-		boolean isBaby = this.isChild() && this.hasBabyTexture;
-		String gender = this.hasTeenTexture ? this.isTeen() ? "_teen" : isBaby ? "_baby" : this.getGender() == 0 ? "_female" : "_male" : this.isChild() ? "_baby" : this.getGender() == 0 ? "_female" : "_male";
-		String sleeping = !this.isSleeping() ? "" : "_sleeping";
-		String toggleList = this.hasFeatherToggle ? !this.featherToggle ? "_feathered" : "_scaled" : "";
-		return "fossil:textures/model/" + type.toString().toLowerCase() + "_0/" + toggle + type.toString().toLowerCase() + gender + toggleList + sleeping + ".png";
+		if (this.hasBabyTexture) {
+			String toggle = this.hasFeatherToggle ? !this.featherToggle ? "feathered/" : "scaled/" : "";
+			boolean isBaby = this.isChild() && this.hasBabyTexture;
+			String gender = this.hasTeenTexture ? this.isTeen() ? "_teen" : isBaby ? "_baby" : this.getGender() == 0 ? "_female" : "_male" : this.isChild() ? "_baby" : this.getGender() == 0 ? "_female" : "_male";
+			String sleeping = !this.isSleeping() ? "" : "_sleeping";
+			String toggleList = this.hasFeatherToggle ? !this.featherToggle ? "_feathered" : "_scaled" : "";
+			return "fossil:textures/model/" + type.toString().toLowerCase() + "_0/" + toggle + type.toString().toLowerCase() + gender + toggleList + sleeping + ".png";
+		} else {
+			String toggle = this.hasFeatherToggle ? !this.featherToggle ? "feathered/" : "scaled/" : "";
+			String gender = this.getGender() == 0 ? "_female" : "_male";
+			String sleeping = !this.isSleeping() ? "" : "_sleeping";
+			String toggleList = this.hasFeatherToggle ? !this.featherToggle ? "_feathered" : "_scaled" : "";
+			return "fossil:textures/model/" + type.toString().toLowerCase() + "_0/" + toggle + type.toString().toLowerCase() + gender + toggleList + sleeping + ".png";
+		}
 	}
 
 	public int getTailSegments() {
@@ -1290,7 +1292,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
 	@Override
 	public Animation[] getAnimations() {
-		return new Animation[]{SPEAK_ANIMATION, ATTACK_ANIMATION};
+		return new Animation[] { SPEAK_ANIMATION, ATTACK_ANIMATION };
 	}
 
 	@Override
