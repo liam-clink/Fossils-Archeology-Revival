@@ -15,6 +15,7 @@ public abstract class EntitySwimmingPrehistoric extends EntityNewPrehistoric {
 
 	public boolean movesOnLand;
 	public ChunkCoordinates currentTarget;
+	protected boolean isAmphibious;
 	public static Animation FISH_ANIMATION;
 
 	public EntitySwimmingPrehistoric(World world, EnumPrehistoric type, double baseDamage, double maxDamage, double baseHealth, double maxHealth, double baseSpeed, double maxSpeed) {
@@ -87,9 +88,21 @@ public abstract class EntitySwimmingPrehistoric extends EntityNewPrehistoric {
 	}
 
 	public void moveEntityWithHeading(float x, float z) {
+			if(this.isAmphibious){
+				if(this.isInWater()){
+					moveEntityWithHeadingWater(x, z);
+				}else{
+					super.moveEntityWithHeading(x, z);
+				}
+			}else{
+				moveEntityWithHeadingWater(x, z);
+			}
+	}
+
+	public void moveEntityWithHeadingWater(float x, float z) {
 		double d0;
 		float f6;
-
+		
 		if (!worldObj.isRemote) {
 			float f4;
 			float f5;
@@ -172,6 +185,7 @@ public abstract class EntitySwimmingPrehistoric extends EntityNewPrehistoric {
 		this.limbSwing += this.limbSwingAmount;
 	}
 
+	
 	public Vec3 getPosition() {
 		return Vec3.createVectorHelper(this.posX, this.posY, this.posZ);
 	}

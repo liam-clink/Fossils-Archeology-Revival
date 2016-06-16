@@ -1,353 +1,261 @@
 package com.github.revival.client.model.prehistoric;
 
-import com.github.revival.client.model.base.ModelPrehistoric;
-import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
+import net.ilexiconn.llibrary.client.model.ModelAnimator;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
+import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
+import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.entity.Entity;
 
-public class ModelSpinosaurus extends ModelPrehistoric {
-    public AdvancedModelRenderer headpivot;
-    public AdvancedModelRenderer headdummy;
-    // fields
-    private AdvancedModelRenderer lowerBody;
-    private AdvancedModelRenderer sail7_lowerBody;
-    private AdvancedModelRenderer sail6_lowerBody;
-    private AdvancedModelRenderer sail5_lowerBody;
-    private AdvancedModelRenderer sail4_lowerBody;
-    private AdvancedModelRenderer sail3_lowerBody;
-    private AdvancedModelRenderer tail1;
-    private AdvancedModelRenderer tail2;
-    private AdvancedModelRenderer tail3;
-    private AdvancedModelRenderer sail8_tail1;
-    private AdvancedModelRenderer sail9_tail1;
-    private AdvancedModelRenderer rightUpperLeg;
-    private AdvancedModelRenderer rightLowerLeg;
-    private AdvancedModelRenderer rightFoot;
-    private AdvancedModelRenderer leftUpperLeg;
-    private AdvancedModelRenderer leftLowerLeg;
-    private AdvancedModelRenderer leftFoot;
-    private AdvancedModelRenderer upperBody;
-    private AdvancedModelRenderer rightLowerArm;
-    private AdvancedModelRenderer leftUpperArm;
-    private AdvancedModelRenderer leftLowerArm;
-    private AdvancedModelRenderer neck;
-    private AdvancedModelRenderer head;
-    private AdvancedModelRenderer lowerJaw;
-    private AdvancedModelRenderer upperJaw;
-    private AdvancedModelRenderer teeth;
-    private AdvancedModelRenderer crest;
-    private AdvancedModelRenderer sail2_upperBody;
-    private AdvancedModelRenderer sail1_upperBody;
-    private AdvancedModelRenderer rightUpperArm;
+import com.github.revival.client.model.prehistoric.test.ModelNewPrehistoric;
+import com.github.revival.server.entity.mob.EntitySpinosaurus;
+import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 
-    public ModelSpinosaurus() {
-        textureWidth = 64;
-        textureHeight = 64;
-        setTextureOffset("lowerBody.lowerBody", 0, 46);
-        setTextureOffset("sail7_lowerBody.sail7_lowerBody", 40, 52);
-        setTextureOffset("sail6_lowerBody.sail6_lowerBody", 46, 52);
-        setTextureOffset("sail5_lowerBody.sail5_lowerBody", 46, 52);
-        setTextureOffset("sail4_lowerBody.sail4_lowerBody", 46, 52);
-        setTextureOffset("sail3_lowerBody.sail3_lowerBody", 40, 52);
-        setTextureOffset("tail1.tail1", 40, 0);
-        setTextureOffset("tail2.tail2", 42, 13);
-        setTextureOffset("tail3.tail3", 50, 24);
-        setTextureOffset("sail8_tail1.sail8_tail1", 52, 52);
-        setTextureOffset("sail9_tail1.sail9_tail1", 52, 52);
-        setTextureOffset("rightUpperLeg.rightUpperLeg", 22, 11);
-        setTextureOffset("rightLowerLeg.rightLowerLeg", 30, 2);
-        setTextureOffset("rightFoot.rightFoot", 16, 21);
-        setTextureOffset("leftUpperLeg.leftUpperLeg", 22, 11);
-        setTextureOffset("leftLowerLeg.leftLowerLeg", 30, 2);
-        setTextureOffset("leftFoot.leftFoot", 16, 21);
-        setTextureOffset("upperBody.upperBody", 0, 27);
-        setTextureOffset("rightUpperArm.rightUpperArm", 40, 24);
-        setTextureOffset("rightLowerArm.rightLowerArm", 42, 13);
-        setTextureOffset("leftUpperArm.leftUpperArm", 40, 24);
-        setTextureOffset("leftLowerArm.leftLowerArm", 42, 13);
-        setTextureOffset("neck.neck", 22, 30);
-        setTextureOffset("head.head", 0, 0);
-        setTextureOffset("lowerJaw.lowerJaw", 0, 20);
-        setTextureOffset("upperJaw.upperJaw", 0, 10);
-        setTextureOffset("teeth.teeth", 15, 0);
-        setTextureOffset("crest.crest", 0, 10);
-        setTextureOffset("sail2_upperBody.sail2_upperBody", 34, 52);
-        setTextureOffset("sail1_upperBody.sail1_upperBody", 34, 52);
-        setTextureOffset("headdummy.headdummy", 0, 21);
-        setTextureOffset("headpivot.headpivot", 0, 46);
+public class ModelSpinosaurus extends ModelNewPrehistoric {
+	public AdvancedModelRenderer lowerBody;
+	public AdvancedModelRenderer leftThigh;
+	public AdvancedModelRenderer rightThigh;
+	public AdvancedModelRenderer tail1;
+	public AdvancedModelRenderer upperBody;
+	public AdvancedModelRenderer Sail4;
+	public AdvancedModelRenderer Sail6;
+	public AdvancedModelRenderer Sail5;
+	public AdvancedModelRenderer Sail7;
+	public AdvancedModelRenderer tail2;
+	public AdvancedModelRenderer Sail8;
+	public AdvancedModelRenderer Sail9;
+	public AdvancedModelRenderer Sail9_1;
+	public AdvancedModelRenderer Sail4_1;
+	public AdvancedModelRenderer tail3;
+	public AdvancedModelRenderer neck;
+	public AdvancedModelRenderer leftUpperArm;
+	public AdvancedModelRenderer rightUpperArm;
+	public AdvancedModelRenderer Sail2;
+	public AdvancedModelRenderer Sail3;
+	public AdvancedModelRenderer head;
+	public AdvancedModelRenderer upperJaw;
+	public AdvancedModelRenderer lowerJaw;
+	public AdvancedModelRenderer crest;
+	public AdvancedModelRenderer teeth;
+	public AdvancedModelRenderer leftLowerArm;
+	public AdvancedModelRenderer rightLowerArm;
+	public AdvancedModelRenderer leftLeg;
+	public AdvancedModelRenderer leftFoot;
+	public AdvancedModelRenderer rightLeg;
+	public AdvancedModelRenderer rightFoot;
+	private ModelAnimator animator;
 
-        lowerBody = new AdvancedModelRenderer(this, "lowerBody");
-        lowerBody.setRotationPoint(0F, 14F, -3F);
-        setRotateAngle(lowerBody, 0F, 0F, 0F);
-        lowerBody.mirror = true;
-        lowerBody.addBox("lowerBody", -3.5F, -4F, 0F, 7, 8, 10);
-        sail7_lowerBody = new AdvancedModelRenderer(this, "sail7_lowerBody");
-        sail7_lowerBody.setRotationPoint(0F, -2.5F, 10F);
-        setRotateAngle(sail7_lowerBody, 0F, 0F, 0F);
-        sail7_lowerBody.mirror = true;
-        sail7_lowerBody.addBox("sail7_lowerBody", -0.5F, -10F, -1F, 1, 10, 2);
-        lowerBody.addChild(sail7_lowerBody);
-        sail6_lowerBody = new AdvancedModelRenderer(this, "sail6_lowerBody");
-        sail6_lowerBody.setRotationPoint(0F, -3.5F, 8F);
-        setRotateAngle(sail6_lowerBody, 0F, 0F, 0F);
-        sail6_lowerBody.mirror = true;
-        sail6_lowerBody.addBox("sail6_lowerBody", -0.5F, -10F, -1F, 1, 10, 2);
-        lowerBody.addChild(sail6_lowerBody);
-        sail5_lowerBody = new AdvancedModelRenderer(this, "sail5_lowerBody");
-        sail5_lowerBody.setRotationPoint(0F, -3.5F, 6F);
-        setRotateAngle(sail5_lowerBody, 0F, 0F, 0F);
-        sail5_lowerBody.mirror = true;
-        sail5_lowerBody.addBox("sail5_lowerBody", -0.5F, -10F, -1F, 1, 10, 2);
-        lowerBody.addChild(sail5_lowerBody);
-        sail4_lowerBody = new AdvancedModelRenderer(this, "sail4_lowerBody");
-        sail4_lowerBody.setRotationPoint(0F, -3.5F, 4F);
-        setRotateAngle(sail4_lowerBody, 0F, 0F, 0F);
-        sail4_lowerBody.mirror = true;
-        sail4_lowerBody.addBox("sail4_lowerBody", -0.5F, -10F, -1F, 1, 10, 2);
-        lowerBody.addChild(sail4_lowerBody);
-        sail3_lowerBody = new AdvancedModelRenderer(this, "sail3_lowerBody");
-        sail3_lowerBody.setRotationPoint(0F, -2.5F, 2F);
-        setRotateAngle(sail3_lowerBody, 0F, 0F, 0F);
-        sail3_lowerBody.mirror = true;
-        sail3_lowerBody.addBox("sail3_lowerBody", -0.5F, -10F, -1F, 1, 10, 2);
-        lowerBody.addChild(sail3_lowerBody);
-        tail1 = new AdvancedModelRenderer(this, "tail1");
-        tail1.setRotationPoint(0F, -1.03F, 10F);
-        setRotateAngle(tail1, 0F, 0F, 0F);
-        tail1.mirror = true;
-        tail1.addBox("tail1", -2F, -2.5F, 0F, 4, 5, 8);
-        tail2 = new AdvancedModelRenderer(this, "tail2");
-        tail2.setRotationPoint(0F, 0.5F, 7.5F);
-        setRotateAngle(tail2, 0F, 0F, 0F);
-        tail2.mirror = true;
-        tail2.addBox("tail2", -1.5F, -2F, 0F, 3, 3, 8);
-        tail3 = new AdvancedModelRenderer(this, "tail3");
-        tail3.setRotationPoint(0F, 0F, 7F);
-        setRotateAngle(tail3, 0F, 0F, 0F);
-        tail3.mirror = true;
-        tail3.addBox("tail3", -1F, -1F, 0F, 2, 2, 5);
-        tail2.addChild(tail3);
-        tail1.addChild(tail2);
-        sail8_tail1 = new AdvancedModelRenderer(this, "sail8_tail1");
-        sail8_tail1.setRotationPoint(0F, -0.5F, 2F);
-        setRotateAngle(sail8_tail1, 0F, 0F, 0F);
-        sail8_tail1.mirror = true;
-        sail8_tail1.addBox("sail8_tail1", -0.5F, -10F, -1F, 1, 10, 2);
-        tail1.addChild(sail8_tail1);
-        sail9_tail1 = new AdvancedModelRenderer(this, "sail9_tail1");
-        sail9_tail1.setRotationPoint(0F, 1.5F, 4F);
-        setRotateAngle(sail9_tail1, 0F, 0F, 0F);
-        sail9_tail1.mirror = true;
-        sail9_tail1.addBox("sail9_tail1", -0.5F, -10F, -1F, 1, 10, 2);
-        tail1.addChild(sail9_tail1);
-        lowerBody.addChild(tail1);
-        rightUpperLeg = new AdvancedModelRenderer(this, "rightUpperLeg");
-        rightUpperLeg.setRotationPoint(-3F, -2F, 8F);
-        setRotateAngle(rightUpperLeg, 0F, 0F, 0F);
-        rightUpperLeg.mirror = true;
-        rightUpperLeg.addBox("rightUpperLeg", -3F, 0F, -2F, 3, 6, 4);
-        rightLowerLeg = new AdvancedModelRenderer(this, "rightLowerLeg");
-        rightLowerLeg.setRotationPoint(-1F, 5F, 1.5F);
-        setRotateAngle(rightLowerLeg, 0F, 0F, 0F);
-        rightLowerLeg.mirror = true;
-        rightLowerLeg.addBox("rightLowerLeg", -1F, 0F, -1.5F, 2, 6, 3);
-        rightFoot = new AdvancedModelRenderer(this, "rightFoot");
-        rightFoot.setRotationPoint(0F, 5F, -1F);
-        setRotateAngle(rightFoot, 0F, 0F, 0F);
-        rightFoot.mirror = true;
-        rightFoot.addBox("rightFoot", -1.5F, 0F, -4F, 3, 2, 7);
-        rightLowerLeg.addChild(rightFoot);
-        rightUpperLeg.addChild(rightLowerLeg);
-        lowerBody.addChild(rightUpperLeg);
-        leftUpperLeg = new AdvancedModelRenderer(this, "leftUpperLeg");
-        leftUpperLeg.setRotationPoint(3F, -2F, 8F);
-        setRotateAngle(leftUpperLeg, 0F, 0F, 0F);
-        leftUpperLeg.mirror = true;
-        leftUpperLeg.addBox("leftUpperLeg", 0F, 0F, -2F, 3, 6, 4);
-        leftLowerLeg = new AdvancedModelRenderer(this, "leftLowerLeg");
-        leftLowerLeg.setRotationPoint(1F, 5F, 1.5F);
-        setRotateAngle(leftLowerLeg, 0F, 0F, 0F);
-        leftLowerLeg.mirror = true;
-        leftLowerLeg.addBox("leftLowerLeg", -1F, 0F, -1.5F, 2, 6, 3);
-        leftFoot = new AdvancedModelRenderer(this, "leftFoot");
-        leftFoot.setRotationPoint(0F, 5F, -1F);
-        setRotateAngle(leftFoot, 0F, 0F, 0F);
-        leftFoot.mirror = true;
-        leftFoot.addBox("leftFoot", -1.5F, 0F, -4F, 3, 2, 7);
-        leftLowerLeg.addChild(leftFoot);
-        leftUpperLeg.addChild(leftLowerLeg);
-        lowerBody.addChild(leftUpperLeg);
-        upperBody = new AdvancedModelRenderer(this, "upperBody");
-        upperBody.setRotationPoint(0F, -3.8F, 0F);
-        setRotateAngle(upperBody, 0F, 0F, 0F);
-        upperBody.mirror = true;
-        upperBody.addBox("upperBody", -2.5F, 0F, -6F, 5, 6, 6);
-        rightUpperArm = new AdvancedModelRenderer(this, "rightUpperArm");
-        rightUpperArm.setRotationPoint(-2.5F, 2.8F, -2.5F);
-        setRotateAngle(rightUpperArm, 0F, 0F, 0F);
-        rightUpperArm.mirror = true;
-        rightUpperArm.addBox("rightUpperArm", -2F, 0F, -1.5F, 2, 4, 3);
-        rightLowerArm = new AdvancedModelRenderer(this, "rightLowerArm");
-        rightLowerArm.setRotationPoint(-1F, 3F, 1.5F);
-        setRotateAngle(rightLowerArm, 0F, 0F, 0F);
-        rightLowerArm.mirror = true;
-        rightLowerArm.addBox("rightLowerArm", -1.1F, 0F, -1F, 2, 4, 2);
-        rightUpperArm.addChild(rightLowerArm);
-        upperBody.addChild(rightUpperArm);
-        leftUpperArm = new AdvancedModelRenderer(this, "leftUpperArm");
-        leftUpperArm.setRotationPoint(2.5F, 2.8F, -2.5F);
-        setRotateAngle(leftUpperArm, 0F, 0F, 0F);
-        leftUpperArm.mirror = true;
-        leftUpperArm.addBox("leftUpperArm", 0F, 0F, -1.5F, 2, 4, 3);
-        leftLowerArm = new AdvancedModelRenderer(this, "leftLowerArm");
-        leftLowerArm.setRotationPoint(1F, 3F, 1.5F);
-        setRotateAngle(leftLowerArm, 0F, 0F, 0F);
-        leftLowerArm.mirror = true;
-        leftLowerArm.addBox("leftLowerArm", -0.9F, 0F, -1F, 2, 4, 2);
-        leftUpperArm.addChild(leftLowerArm);
-        upperBody.addChild(leftUpperArm);
+	public ModelSpinosaurus() {
+		this.textureWidth = 64;
+		this.textureHeight = 64;
+		this.tail2 = new AdvancedModelRenderer(this, 38, 13);
+		this.tail2.setRotationPoint(0.0F, 1.0F, 7.9F);
+		this.tail2.addBox(-1.5F, 0.0F, 0.0F, 3, 3, 10, 0.0F);
+		this.setRotateAngle(tail2, 0.030368728984701335F, -0.0F, 0.0F);
+		this.Sail4_1 = new AdvancedModelRenderer(this, 30, 42);
+		this.Sail4_1.setRotationPoint(0.0F, 1.4F, 0.1F);
+		this.Sail4_1.addBox(-0.5F, -10.0F, -1.0F, 1, 10, 2, 0.0F);
+		this.setRotateAngle(Sail4_1, 0.017453292519943295F, 0.0F, 0.0F);
+		this.leftThigh = new AdvancedModelRenderer(this, 22, 11);
+		this.leftThigh.mirror = true;
+		this.leftThigh.setRotationPoint(3.0F, 13.2F, 4.9F);
+		this.leftThigh.addBox(0.0F, -1.0F, -2.0F, 3, 6, 4, 0.0F);
+		this.crest = new AdvancedModelRenderer(this, 0, 10);
+		this.crest.setRotationPoint(0.0F, -1.3F, -1.0F);
+		this.crest.addBox(-0.5F, -1.0F, -1.0F, 1, 1, 2, 0.0F);
+		this.teeth = new AdvancedModelRenderer(this, 15, 0);
+		this.teeth.setRotationPoint(0.0F, 1.5F, -3.0F);
+		this.teeth.addBox(-2.0F, 0.0F, -4.0F, 4, 1, 4, 0.0F);
+		this.leftFoot = new AdvancedModelRenderer(this, 18, 23);
+		this.leftFoot.setRotationPoint(0.0F, 4.8F, 0.5F);
+		this.leftFoot.addBox(-1.5F, 0.0F, -5.0F, 3, 2, 5, 0.0F);
+		this.setRotateAngle(leftFoot, 0.2617993877991494F, -0.0F, 0.0F);
+		this.Sail8 = new AdvancedModelRenderer(this, 40, 52);
+		this.Sail8.setRotationPoint(0.0F, 0.46F, -1.91F);
+		this.Sail8.addBox(-0.5F, -10.0F, -1.0F, 1, 10, 2, 0.0F);
+		this.setRotateAngle(Sail8, 0.017453292519943295F, -0.0F, 0.0F);
+		this.leftUpperArm = new AdvancedModelRenderer(this, 40, 26);
+		this.leftUpperArm.mirror = true;
+		this.leftUpperArm.setRotationPoint(2.5F, 0.0F, -4.5F);
+		this.leftUpperArm.addBox(0.0F, 0.0F, -1.5F, 2, 4, 3, 0.0F);
+		this.setRotateAngle(leftUpperArm, 0.22689280275926282F, -0.0F, 0.0F);
+		this.Sail2 = new AdvancedModelRenderer(this, 0, 40);
+		this.Sail2.setRotationPoint(0.0F, 1.97F, -4.13F);
+		this.Sail2.addBox(-0.5F, -10.0F, -1.0F, 1, 10, 2, 0.0F);
+		this.setRotateAngle(Sail2, -0.03490658503988659F, -0.0F, 0.0F);
+		this.neck = new AdvancedModelRenderer(this, 22, 30);
+		this.neck.setRotationPoint(0.0F, -0.5F, -4.6F);
+		this.neck.addBox(-2.0F, -1.5F, -7.0F, 4, 4, 7, 0.0F);
+		this.setRotateAngle(neck, -0.5213298475707062F, -0.0F, 0.0F);
+		this.Sail9 = new AdvancedModelRenderer(this, 52, 52);
+		this.Sail9.setRotationPoint(0.0F, 2.5F, 2.1F);
+		this.Sail9.addBox(-0.5F, -10.0F, -1.0F, 1, 10, 2, 0.0F);
+		this.setRotateAngle(Sail9, 0.017453292519943295F, 0.0F, 0.0F);
+		this.head = new AdvancedModelRenderer(this, 0, 0);
+		this.head.setRotationPoint(0.0F, 0.2F, -6.1F);
+		this.head.addBox(-2.5F, -2.0F, -5.0F, 5, 5, 5, 0.0F);
+		this.setRotateAngle(head, 0.593411945678072F, -0.0F, 0.0F);
+		this.Sail7 = new AdvancedModelRenderer(this, 24, 42);
+		this.Sail7.setRotationPoint(0.0F, 0.86F, 6.0F);
+		this.Sail7.addBox(-0.5F, -10.0F, -1.0F, 1, 10, 2, 0.0F);
+		this.setRotateAngle(Sail7, 0.03490658503988659F, -0.0F, 0.0F);
+		this.lowerBody = new AdvancedModelRenderer(this, 0, 46);
+		this.lowerBody.setRotationPoint(0.0F, 9.7F, -3.0F);
+		this.lowerBody.addBox(-3.5F, 0.0F, 0.0F, 7, 7, 10, 0.0F);
+		this.setRotateAngle(lowerBody, -0.03490658503988659F, -0.0F, 0.0F);
+		this.Sail6 = new AdvancedModelRenderer(this, 46, 33);
+		this.Sail6.setRotationPoint(0.0F, 0.93F, 4.0F);
+		this.Sail6.addBox(-0.5F, -10.0F, -1.0F, 1, 10, 2, 0.0F);
+		this.setRotateAngle(Sail6, 0.03490658503988659F, -0.0F, 0.0F);
+		this.rightThigh = new AdvancedModelRenderer(this, 22, 11);
+		this.rightThigh.setRotationPoint(-3.0F, 13.2F, 4.9F);
+		this.rightThigh.addBox(-3.0F, -1.0F, -2.0F, 3, 6, 4, 0.0F);
+		this.lowerJaw = new AdvancedModelRenderer(this, 0, 20);
+		this.lowerJaw.setRotationPoint(0.0F, 1.9F, -5.0F);
+		this.lowerJaw.addBox(-1.5F, 0.0F, -6.0F, 3, 1, 6, 0.0F);
+		this.rightLowerArm = new AdvancedModelRenderer(this, 38, 13);
+		this.rightLowerArm.mirror = true;
+		this.rightLowerArm.setRotationPoint(-0.99F, 2.9F, 0.1F);
+		this.rightLowerArm.addBox(-1.0F, 0.0F, 0.0F, 2, 4, 2, 0.0F);
+		this.setRotateAngle(rightLowerArm, -0.6457718232379019F, -0.0F, 0.0F);
+		this.tail1 = new AdvancedModelRenderer(this, 40, 0);
+		this.tail1.setRotationPoint(0.0F, 0.3F, 9.9F);
+		this.tail1.addBox(-2.0F, 0.0F, 0.0F, 4, 5, 8, 0.0F);
+		this.setRotateAngle(tail1, 0.017453292519943295F, -0.0F, 0.0F);
+		this.tail3 = new AdvancedModelRenderer(this, 50, 26);
+		this.tail3.setRotationPoint(0.0F, 0.5F, 10.0F);
+		this.tail3.addBox(-1.0F, 0.0F, 0.0F, 2, 2, 5, 0.0F);
+		this.setRotateAngle(tail3, -0.10698868314725239F, -0.0F, 0.0F);
+		this.Sail9_1 = new AdvancedModelRenderer(this, 58, 52);
+		this.Sail9_1.setRotationPoint(0.0F, 4.6F, 4.1F);
+		this.Sail9_1.addBox(-0.5F, -10.0F, -1.0F, 1, 10, 2, 0.0F);
+		this.setRotateAngle(Sail9_1, 0.017453292519943295F, 0.0F, 0.0F);
+		this.Sail3 = new AdvancedModelRenderer(this, 34, 52);
+		this.Sail3.setRotationPoint(0.0F, 0.0F, -2.06F);
+		this.Sail3.addBox(-0.5F, -10.0F, -1.0F, 1, 10, 2, 0.0F);
+		this.setRotateAngle(Sail3, -0.03490658503988659F, -0.0F, 0.0F);
+		this.leftLeg = new AdvancedModelRenderer(this, 30, 2);
+		this.leftLeg.setRotationPoint(1.5F, 4.0F, 2.0F);
+		this.leftLeg.addBox(-1.0F, 0.0F, -2.0F, 2, 6, 3, 0.0F);
+		this.setRotateAngle(leftLeg, -0.2617993877991494F, -0.0F, 0.0F);
+		this.leftLowerArm = new AdvancedModelRenderer(this, 38, 13);
+		this.leftLowerArm.setRotationPoint(0.99F, 2.9F, 0.1F);
+		this.leftLowerArm.addBox(-1.0F, 0.0F, 0.0F, 2, 4, 2, 0.0F);
+		this.setRotateAngle(leftLowerArm, -0.6457718232379019F, -0.0F, 0.0F);
+		this.rightLeg = new AdvancedModelRenderer(this, 30, 2);
+		this.rightLeg.setRotationPoint(-1.5F, 4.0F, 2.0F);
+		this.rightLeg.addBox(-1.0F, 0.0F, -2.0F, 2, 6, 3, 0.0F);
+		this.setRotateAngle(rightLeg, -0.2617993877991494F, -0.0F, 0.0F);
+		this.Sail4 = new AdvancedModelRenderer(this, 30, 42);
+		this.Sail4.setRotationPoint(0.0F, 2.0F, 0.07F);
+		this.Sail4.addBox(-0.5F, -10.0F, -1.0F, 1, 10, 2, 0.0F);
+		this.setRotateAngle(Sail4, 0.03490658503988659F, -0.0F, 0.0F);
+		this.Sail5 = new AdvancedModelRenderer(this, 52, 33);
+		this.Sail5.setRotationPoint(0.0F, 1.0F, 2.0F);
+		this.Sail5.addBox(-0.5F, -10.0F, -1.0F, 1, 10, 2, 0.0F);
+		this.setRotateAngle(Sail5, 0.03490658503988659F, -0.0F, 0.0F);
+		this.upperJaw = new AdvancedModelRenderer(this, 0, 10);
+		this.upperJaw.setRotationPoint(0.0F, 0.5F, -4.8F);
+		this.upperJaw.addBox(-2.0F, -1.5F, -7.0F, 4, 3, 7, 0.0F);
+		this.upperBody = new AdvancedModelRenderer(this, 0, 27);
+		this.upperBody.setRotationPoint(0.0F, 3.0F, 0.2F);
+		this.upperBody.addBox(-2.5F, -2.5F, -6.0F, 5, 6, 6, 0.0F);
+		this.setRotateAngle(upperBody, 0.07347836150896127F, -0.0F, 0.0F);
+		this.rightUpperArm = new AdvancedModelRenderer(this, 40, 26);
+		this.rightUpperArm.setRotationPoint(-2.5F, 0.0F, -4.5F);
+		this.rightUpperArm.addBox(-2.0F, 0.0F, -1.5F, 2, 4, 3, 0.0F);
+		this.setRotateAngle(rightUpperArm, 0.22689280275926282F, -0.0F, 0.0F);
+		this.rightFoot = new AdvancedModelRenderer(this, 18, 23);
+		this.rightFoot.setRotationPoint(0.0F, 4.8F, 0.5F);
+		this.rightFoot.addBox(-1.5F, 0.0F, -5.0F, 3, 2, 5, 0.0F);
+		this.setRotateAngle(rightFoot, 0.2617993877991494F, -0.0F, 0.0F);
+		this.tail1.addChild(this.tail2);
+		this.tail1.addChild(this.Sail4_1);
+		this.upperJaw.addChild(this.crest);
+		this.upperJaw.addChild(this.teeth);
+		this.leftLeg.addChild(this.leftFoot);
+		this.tail1.addChild(this.Sail8);
+		this.upperBody.addChild(this.leftUpperArm);
+		this.upperBody.addChild(this.Sail2);
+		this.upperBody.addChild(this.neck);
+		this.tail1.addChild(this.Sail9);
+		this.neck.addChild(this.head);
+		this.lowerBody.addChild(this.Sail7);
+		this.lowerBody.addChild(this.Sail6);
+		this.head.addChild(this.lowerJaw);
+		this.rightUpperArm.addChild(this.rightLowerArm);
+		this.lowerBody.addChild(this.tail1);
+		this.tail2.addChild(this.tail3);
+		this.tail1.addChild(this.Sail9_1);
+		this.upperBody.addChild(this.Sail3);
+		this.leftThigh.addChild(this.leftLeg);
+		this.leftUpperArm.addChild(this.leftLowerArm);
+		this.rightThigh.addChild(this.rightLeg);
+		this.lowerBody.addChild(this.Sail4);
+		this.lowerBody.addChild(this.Sail5);
+		this.head.addChild(this.upperJaw);
+		this.lowerBody.addChild(this.upperBody);
+		this.upperBody.addChild(this.rightUpperArm);
+		this.rightLeg.addChild(this.rightFoot);
+		this.updateDefaultPose();
+		animator = ModelAnimator.create();
+	}
 
-        headdummy = new AdvancedModelRenderer(this, "headdummy");
-        headdummy.setRotationPoint(0F, -1.9F, -5F);
-        headdummy.addBox("headdummy", -1F, -1F, -1F, 1, 1, 1);
-        setRotateAngle(headdummy, 0F, 0F, 0F);
+	@Override
+	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+		animate((IAnimatedEntity) entity, f, f1, f2, f3, f4, f5);
+		this.leftThigh.render(f5);
+		this.lowerBody.render(f5);
+		this.rightThigh.render(f5);
+	}
 
-        headpivot = new AdvancedModelRenderer(this, "headpivot");
-        headpivot.setRotationPoint(0, 0, 0);
-        headpivot.addBox("headpivot", -0.5F, -0.5F, -0.5F, 1, 1, 1);
-        setRotateAngle(headpivot, 0F, 0F, 0F);
+	public void animate(IAnimatedEntity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+		animator.update(entity);
+		blockMovement(f, f1, f2, f3, f4, f5, (Entity) entity);
+		this.resetToDefaultPose();
+		setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
+		animator.setAnimation(EntitySpinosaurus.ATTACK_ANIMATION);
+		animator.startKeyframe(10);
+		ModelUtils.rotate(animator, neck, -36, 0, 0);
+		ModelUtils.rotate(animator, head, 46, 0, 0);
+		ModelUtils.rotate(animator, lowerJaw, 31, 0, 0);
+		animator.endKeyframe();
+		animator.startKeyframe(10);
+		ModelUtils.rotate(animator, neck, -18, 0, 0);
+		ModelUtils.rotate(animator, head, 26, 0, 0);
+		animator.endKeyframe();
+		animator.resetKeyframe(5);
+	}
 
-        neck = new AdvancedModelRenderer(this, "neck");
-        neck.setRotationPoint(0F, 4F, -6F);
-        setRotateAngle(neck, 0F, 0F, 0F);
-        neck.mirror = true;
-        neck.addBox("neck", -2F, -4F, -6F, 4, 4, 6);
-        head = new AdvancedModelRenderer(this, "head");
-        head.setRotationPoint(0F, 0F, 0F);
-        setRotateAngle(head, 0F, 0F, 0F);
-        head.mirror = true;
-        head.addBox("head", -2.5F, -2F, -5F, 5, 5, 5);
-        lowerJaw = new AdvancedModelRenderer(this, "lowerJaw");
-        lowerJaw.setRotationPoint(0F, 2F, -5F);
-        setRotateAngle(lowerJaw, 0F, 0F, 0F);
-        lowerJaw.mirror = true;
-        lowerJaw.addBox("lowerJaw", -1.5F, 0F, -6F, 3, 1, 6);
-        head.addChild(lowerJaw);
-        upperJaw = new AdvancedModelRenderer(this, "upperJaw");
-        upperJaw.setRotationPoint(0F, 0.5F, -4.5F);
-        setRotateAngle(upperJaw, 0F, 0F, 0F);
-        upperJaw.mirror = true;
-        upperJaw.addBox("upperJaw", -2F, -1.5F, -7F, 4, 3, 7);
-        teeth = new AdvancedModelRenderer(this, "teeth");
-        teeth.setRotationPoint(0F, 1.5F, -3F);
-        setRotateAngle(teeth, 0F, 0F, 0F);
-        teeth.mirror = true;
-        teeth.addBox("teeth", -2F, 0F, -4F, 4, 1, 4);
-        upperJaw.addChild(teeth);
-        crest = new AdvancedModelRenderer(this, "crest");
-        crest.setRotationPoint(0F, -1F, -0.5F);
-        setRotateAngle(crest, 0F, 0F, 0F);
-        crest.mirror = true;
-        crest.addBox("crest", -0.5F, -1F, -2F, 1, 1, 2);
-        upperJaw.addChild(crest);
-        head.addChild(upperJaw);
-        neck.addChild(headdummy);
-        headpivot.addChild(head);
-        upperBody.addChild(neck);
-        sail2_upperBody = new AdvancedModelRenderer(this, "sail2_upperBody");
-        sail2_upperBody.setRotationPoint(0F, 2.3F, -0.2F);
-        setRotateAngle(sail2_upperBody, 0F, 0F, 0F);
-        sail2_upperBody.mirror = true;
-        sail2_upperBody.addBox("sail2_upperBody", -0.5F, -10F, -1F, 1, 10, 2);
-        upperBody.addChild(sail2_upperBody);
-        sail1_upperBody = new AdvancedModelRenderer(this, "sail1_upperBody");
-        sail1_upperBody.setRotationPoint(0F, 4.5F, -2.4F);
-        setRotateAngle(sail1_upperBody, 0F, 0F, 0F);
-        sail1_upperBody.mirror = true;
-        sail1_upperBody.addBox("sail1_upperBody", -0.5F, -10F, -1F, 1, 10, 2);
-        upperBody.addChild(sail1_upperBody);
-        lowerBody.addChild(upperBody);
-        this.headpivot.rotationPointX = this.headdummy.rotationPointX;
-        this.headpivot.rotationPointY = this.headdummy.rotationPointY + 12.5F;
-        this.headpivot.rotationPointZ = this.headdummy.rotationPointZ - 7;
-        this.upperBody.rotateAngleX = (float) Math.toRadians(6);
-        this.sail1_upperBody.rotateAngleX = this.sail2_upperBody.rotateAngleX = -(this.upperBody.rotateAngleX);
-        this.neck.rotateAngleX = (float) Math.toRadians(-34);
-        this.tail2.rotateAngleX = (float) Math.toRadians(-4);
-        this.tail3.rotateAngleX = (float) Math.toRadians(2);
-        this.leftUpperArm.rotateAngleX = (float) Math.toRadians(-6);
-        this.rightUpperArm.rotateAngleX = (float) Math.toRadians(-6);
-        this.leftLowerArm.rotateAngleX = (float) Math.toRadians(-30);
-        this.rightLowerArm.rotateAngleX = (float) Math.toRadians(-30);
-        this.leftUpperLeg.rotateAngleX = (float) Math.toRadians(-15);
-        this.rightUpperLeg.rotateAngleX = (float) Math.toRadians(-15);
-        this.leftFoot.rotateAngleX = (float) Math.toRadians(15);
-        this.rightFoot.rotateAngleX = (float) Math.toRadians(15);
-        doAdvancedStuff(false);
-    }
-
-	/*
-     * @Override protected void setRotationAngles(float var1, float var2, float
-	 * var3, float var4, float var5, float var6, boolean modelized) {
-	 * this.headpivot.rotationPointX = this.headdummy.rotationPointX;
-	 * this.headpivot.rotationPointY = this.headdummy.rotationPointY + 12.5F;
-	 * this.headpivot.rotationPointZ = this.headdummy.rotationPointZ - 7;
-	 * 
-	 * this.upperBody.rotateAngleX = (float) Math.toRadians(6);
-	 * this.sail1_upperBody.rotateAngleX = this.sail2_upperBody.rotateAngleX =
-	 * -(this.upperBody.rotateAngleX); this.neck.rotateAngleX = (float)
-	 * Math.toRadians(-34); this.tail2.rotateAngleX = (float)
-	 * Math.toRadians(-4); this.tail3.rotateAngleX = (float) Math.toRadians(2);
-	 * this.leftUpperArm.rotateAngleX = (float) Math.toRadians(-6);
-	 * this.rightUpperArm.rotateAngleX = (float) Math.toRadians(-6);
-	 * this.leftLowerArm.rotateAngleX = (float) Math.toRadians(-30);
-	 * this.rightLowerArm.rotateAngleX = (float) Math.toRadians(-30);
-	 * this.leftUpperLeg.rotateAngleX = (float) Math.toRadians(-15);
-	 * this.rightUpperLeg.rotateAngleX = (float) Math.toRadians(-15);
-	 * this.leftFoot.rotateAngleX = (float) Math.toRadians(15);
-	 * this.rightFoot.rotateAngleX = (float) Math.toRadians(15);
-	 * 
-	 * if (!modelized) { this.tail1.rotateAngleY = 0.08F * MathHelper.sin(var3 *
-	 * (float) 0.1F + (var2 + 2)); this.tail2.rotateAngleY = 0.10F *
-	 * MathHelper.sin(var3 * (float) 0.1F + var2 + 1); this.tail3.rotateAngleY =
-	 * 0.15F * MathHelper.sin(var3 * (float) 0.1F + var2);
-	 * 
-	 * this.rightUpperLeg.rotateAngleX = (float) Math.toRadians(-15) +
-	 * MathHelper.cos(var1 * 0.5662F) * 1.0F * var2;
-	 * this.leftUpperLeg.rotateAngleX = (float) Math.toRadians(-15) +
-	 * MathHelper.cos(var1 * 0.5662F + (float) Math.PI) * 1.0F * var2;
-	 * 
-	 * this.headpivot.rotateAngleX = (var5 / (180F / (float) Math.PI));
-	 * this.headpivot.rotateAngleY = (var4 / (180F / (float) Math.PI)); } else {
-	 * this.standingPose(); }
-	 * 
-	 * 
-	 * }
-	 */
-
-	/*
-	 * public void standingPose() { this.tail1.rotateAngleY = 0;
-	 * this.tail2.rotateAngleY = 0; this.tail3.rotateAngleY = 0;
-	 * 
-	 * this.leftUpperLeg.rotateAngleX = (float) Math.toRadians(-15);
-	 * this.rightUpperLeg.rotateAngleX = (float) Math.toRadians(-15);
-	 * 
-	 * this.headpivot.rotateAngleX = (float) Math.toRadians(5);
-	 * this.headpivot.rotateAngleY = 0; }
-	 */
-
-    @Override
-    public void renderFossil(EntityNewPrehistoric entity, float f, float f1, float f2, float f3, float f4, float f5) {
-
-    }
-
-    @Override
-    public void renderLiving(EntityNewPrehistoric entity, float f, float f1, float f2, float f3, float f4, float f5) {
-
-    }
-
-    @Override
-    public void renderSleeping(EntityNewPrehistoric entity, float f, float f1, float f2, float f3, float f4, float f5) {
-
-    }
-
+	@Override
+	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
+		AdvancedModelRenderer[] tailParts = { this.lowerBody, this.tail1, this.tail2 };
+		AdvancedModelRenderer[] neckParts = { this.neck, this.head };
+		AdvancedModelRenderer[] leftArmParts = { this.leftUpperArm, this.leftLowerArm };
+		AdvancedModelRenderer[] rightArmParts = { this.rightUpperArm, this.rightLowerArm };
+		float speed = 0.1F;
+		float speed2 = 0.3F;
+		this.walk(upperBody, speed, 0.1F, false, 1F, 0F, entity.ticksExisted, 1);
+		this.bob(lowerBody, speed, 0.7F, false, entity.ticksExisted, 1);
+		this.walk(leftThigh, speed2, 0.8F, false, 0F, 0.4F, f, f1);
+		this.walk(leftLeg, speed2, 0.2F, false, 0F, -0.6F, f, f1);
+		this.walk(leftFoot, speed2, -0.8F, true, 2.5F, -0.4F, f, f1);
+		this.walk(rightThigh, speed2, 0.8F, true, 0F, -0.4F, f, f1);
+		this.walk(rightLeg, speed2, 0.2F, true, 0F, 0.6F, f, f1);
+		this.walk(rightFoot, speed2, -0.8F, false, 2.5F, 0.4F, f, f1);
+		this.chainWave(tailParts, speed, 0.05F, -3, entity.ticksExisted, 1);
+		this.chainWave(leftArmParts, speed, 0.15F, -3, entity.ticksExisted, 1);
+		this.chainWave(rightArmParts, speed, 0.15F, -3, entity.ticksExisted, 1);
+		this.chainSwing(tailParts, speed, 0.15F, -3, entity.ticksExisted, 1);
+		this.chainSwing(tailParts, speed2, 0.25F, -3, f, f1);
+		this.chainSwing(neckParts, speed2, 0.5F, 3, f, f1);
+		this.chainWave(neckParts, speed, 0.15F, 3, entity.ticksExisted, 1);
+		((EntityNewPrehistoric) entity).chainBuffer.applyChainSwingBuffer((ModelRenderer[]) tailParts);
+		if (entity.riddenByEntity == null) {
+			ModelUtils.faceTargetMod(neck, f3, f4, 0.5F);
+			ModelUtils.faceTargetMod(head, f3, f4, 0.5F);
+		}
+		{
+			float sitProgress = ((EntitySpinosaurus)entity).sitProgress;
+		}
+	}
 }

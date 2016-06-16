@@ -67,15 +67,15 @@ public class DinoAIFeeder extends EntityAIBase {
 
     @Override
     public boolean shouldExecute() {
-
         int range = this.searchRange;
-
+        if(this.dinosaur instanceof EntitySwimmingPrehistoric && this.dinosaur.isInWater()){
+        	return false;
+        }
         if (!theWorld.isRemote) {
             if (!Revival.CONFIG.starvingDinos) {
                 return false;
             }
         }
-
         if (!this.dinosaur.isHungry()) {
             this.typeofTarget = NO_TARGET;
             return false;
