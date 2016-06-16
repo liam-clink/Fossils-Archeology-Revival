@@ -5,12 +5,15 @@ import com.github.revival.server.entity.ai.DinoAIHunt;
 import com.github.revival.server.entity.ai.DinoAILookIdle;
 import com.github.revival.server.entity.ai.DinoAIWatchClosest;
 import com.github.revival.server.entity.mob.test.DinoAIFeeder;
+import com.github.revival.server.entity.mob.test.DinoAIMakeFish;
+import com.github.revival.server.entity.mob.test.DinoAIWaterFeeder;
 import com.github.revival.server.entity.mob.test.DinoAIWaterFindTarget;
 import com.github.revival.server.entity.mob.test.EntitySwimmingPrehistoric;
 import com.github.revival.server.enums.EnumPrehistoric;
 import com.github.revival.server.enums.EnumPrehistoricAI.*;
 import com.github.revival.server.item.FAItemRegistry;
 
+import net.ilexiconn.llibrary.server.animation.Animation;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAIOwnerHurtByTarget;
 import net.minecraft.entity.ai.EntityAIOwnerHurtTarget;
@@ -23,13 +26,15 @@ public class EntityPlesiosaurus extends EntitySwimmingPrehistoric {
     public EntityPlesiosaurus(World world) {
         super(world, EnumPrehistoric.Plesiosaur, 2, 12, 10, 30, 0.2, 0.3);
         this.getNavigator().setAvoidsWater(false);
+        FISH_ANIMATION = Animation.create(40);
         this.tasks.addTask(1, this.aiSit);
         this.tasks.addTask(2, new DinoAIWaterFindTarget(this));
-        this.tasks.addTask(3, new DinoAIFeeder(this, 16));
-        this.tasks.addTask(4, new DinoAIWatchClosest(this, EntityPlayer.class, 8.0F));
-        this.tasks.addTask(4, new DinoAILookIdle(this));
+        this.tasks.addTask(3, new DinoAIWaterFeeder(this, 16));
+        this.tasks.addTask(4, new DinoAIMakeFish(this));
+        this.tasks.addTask(5, new DinoAIWatchClosest(this, EntityPlayer.class, 8.0F));
+        this.tasks.addTask(5, new DinoAILookIdle(this));
         this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
-        this.targetTasks.addTask(2, new DinoAIHunt(this, 200, false));
+        this.targetTasks.addTask(2, new DinoAIHunt(this, 20, false));
         this.setSize(1.0F, 1.0F);
         minSize = 0.3F;
         maxSize = 1.5F;
@@ -143,4 +148,10 @@ public class EntityPlesiosaurus extends EntitySwimmingPrehistoric {
 	public int getMaxHunger() {
 		return 125;
 	}
+	
+	@Override
+	public Animation[] getAnimations() {
+		return new Animation[] { SPEAK_ANIMATION, ATTACK_ANIMATION, FISH_ANIMATION };
+	}
+
 }

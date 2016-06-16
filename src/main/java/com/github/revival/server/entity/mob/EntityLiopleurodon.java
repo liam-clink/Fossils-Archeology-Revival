@@ -4,6 +4,7 @@ import com.github.revival.server.entity.ai.DinoAIHunt;
 import com.github.revival.server.entity.ai.DinoAILookIdle;
 import com.github.revival.server.entity.ai.DinoAIWatchClosest;
 import com.github.revival.server.entity.mob.test.DinoAIFeeder;
+import com.github.revival.server.entity.mob.test.DinoAIWaterFeeder;
 import com.github.revival.server.entity.mob.test.DinoAIWaterFindTarget;
 import com.github.revival.server.entity.mob.test.EntitySwimmingPrehistoric;
 import com.github.revival.server.enums.EnumPrehistoric;
@@ -30,7 +31,7 @@ public class EntityLiopleurodon extends EntitySwimmingPrehistoric {
         this.getNavigator().setAvoidsWater(false);
         this.tasks.addTask(1, this.aiSit);
         this.tasks.addTask(2, new DinoAIWaterFindTarget(this));
-        this.tasks.addTask(3, new DinoAIFeeder(this, 16));
+		this.tasks.addTask(3, new DinoAIWaterFeeder(this, 16));
         this.tasks.addTask(4, new DinoAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(4, new DinoAILookIdle(this));
         this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));

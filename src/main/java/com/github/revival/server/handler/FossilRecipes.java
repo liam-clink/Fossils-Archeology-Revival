@@ -72,7 +72,7 @@ public class FossilRecipes {
         GameRegistry.addShapelessRecipe(new ItemStack(FAItemRegistry.INSTANCE.magicConch, 1, 1), new ItemStack(FAItemRegistry.INSTANCE.magicConch, 1, 0));
         GameRegistry.addShapelessRecipe(new ItemStack(FAItemRegistry.INSTANCE.magicConch, 1, 2), new ItemStack(FAItemRegistry.INSTANCE.magicConch, 1, 1));
         GameRegistry.addShapelessRecipe(new ItemStack(FAItemRegistry.INSTANCE.magicConch, 1, 0), new ItemStack(FAItemRegistry.INSTANCE.magicConch, 1, 2));
-        GameRegistry.addRecipe(new ItemStack(FAItemRegistry.INSTANCE.chickenEss, 8), "XXX", "XYX", "XXX", 'X', Items.glass_bottle, 'Y', FAItemRegistry.INSTANCE.cookedChickenSoup);
+        GameRegistry.addRecipe(new ItemStack(FAItemRegistry.INSTANCE.chickenEssence, 8), "XXX", "XYX", "XXX", 'X', Items.glass_bottle, 'Y', FAItemRegistry.INSTANCE.cookedChickenSoup);
         GameRegistry.addRecipe(new ItemStack(FAItemRegistry.INSTANCE.whip, 1), "XXS", "XTS", "TXS", 'T', Items.stick, 'S', Items.string);
         GameRegistry.addRecipe(new ItemStack(FABlockRegistry.INSTANCE.volcanicBrick, 4), "VV", "VV", 'V', FABlockRegistry.INSTANCE.volcanicRock);
         GameRegistry.addRecipe(new ItemStack(FABlockRegistry.INSTANCE.volcanicSingleSlab, 6), "PPP", 'P', FABlockRegistry.INSTANCE.volcanicBrick);

@@ -1,15 +1,7 @@
 package com.github.revival.server.entity.mob.test;
 
-import java.util.Collections;
-import java.util.List;
-
-import com.github.revival.server.entity.ai.DinoAIHunt;
-import com.github.revival.server.enums.EnumPrehistoric;
-
+import net.ilexiconn.llibrary.server.animation.Animation;
 import net.minecraft.block.material.Material;
-import net.minecraft.command.IEntitySelector;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.MathHelper;
@@ -17,10 +9,13 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
+import com.github.revival.server.enums.EnumPrehistoric;
+
 public abstract class EntitySwimmingPrehistoric extends EntityNewPrehistoric {
 
 	public boolean movesOnLand;
 	public ChunkCoordinates currentTarget;
+	public static Animation FISH_ANIMATION;
 
 	public EntitySwimmingPrehistoric(World world, EnumPrehistoric type, double baseDamage, double maxDamage, double baseHealth, double maxHealth, double baseSpeed, double maxSpeed) {
 		super(world, type, baseDamage, maxDamage, baseHealth, maxHealth, baseSpeed, maxSpeed);

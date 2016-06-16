@@ -1,12 +1,14 @@
 package com.github.revival.client.model.prehistoric;
 
-import com.github.revival.client.model.prehistoric.test.ModelNewPrehistoric;
-import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 import net.ilexiconn.llibrary.client.model.ModelAnimator;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+
+import com.github.revival.client.model.prehistoric.test.ModelNewPrehistoric;
+import com.github.revival.server.entity.mob.EntityPlesiosaurus;
+import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 
 public class ModelPlesiosaurus extends ModelNewPrehistoric {
     public AdvancedModelRenderer uppperBody;
@@ -142,6 +144,38 @@ public class ModelPlesiosaurus extends ModelNewPrehistoric {
         blockMovement(f, f1, f2, f3, f4, f5, (Entity) entity);
         this.resetToDefaultPose();
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
+		animator.setAnimation(EntityPlesiosaurus.FISH_ANIMATION);
+		animator.startKeyframe(10);
+		ModelUtils.rotate(animator, neck1, 0, 15F, 0);
+		ModelUtils.rotate(animator, neck2, 0, 15F, 0);
+		ModelUtils.rotate(animator, neck3, 0, 15F, 0);
+		ModelUtils.rotate(animator, neck4, 0, 15F, 0);
+		ModelUtils.rotate(animator, neck5, 0, 15F, 0);
+		ModelUtils.rotate(animator, neck6, 0, 15F, 0);
+		ModelUtils.rotate(animator, head, 0, 15F, 0);
+		ModelUtils.rotate(animator, lowerJaw, -15, 0, 0);
+		animator.endKeyframe();
+		animator.startKeyframe(10);
+		ModelUtils.rotate(animator, neck1, 0, -15F, 0);
+		ModelUtils.rotate(animator, neck2, 0, -15F, 0);
+		ModelUtils.rotate(animator, neck3, 0, -15F, 0);
+		ModelUtils.rotate(animator, neck4, 0, -15F, 0);
+		ModelUtils.rotate(animator, neck5, 0, -15F, 0);
+		ModelUtils.rotate(animator, neck6, 0, -15F, 0);
+		ModelUtils.rotate(animator, head, 0, -15F, 0);
+		ModelUtils.rotate(animator, lowerJaw, -15, 0, 0);
+		animator.endKeyframe();
+		animator.startKeyframe(10);
+		ModelUtils.rotate(animator, neck1, 0, 15F, 0);
+		ModelUtils.rotate(animator, neck2, 0, 15F, 0);
+		ModelUtils.rotate(animator, neck3, 0, 15F, 0);
+		ModelUtils.rotate(animator, neck4, 0, 15F, 0);
+		ModelUtils.rotate(animator, neck5, 0, 15F, 0);
+		ModelUtils.rotate(animator, neck6, 0, 15F, 0);
+		ModelUtils.rotate(animator, head, 0, 15F, 0);
+		ModelUtils.rotate(animator, lowerJaw, -15, 0, 0);
+		animator.endKeyframe();
+		animator.resetKeyframe(10);
     }
 
     @Override

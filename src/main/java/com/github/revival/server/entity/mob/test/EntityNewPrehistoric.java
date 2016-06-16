@@ -798,7 +798,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
 	public void setHunger(int hunger) {
 		if (this.getHunger() > this.getMaxHunger()) {
-			this.dataWatcher.updateObject(19, 100);
+			this.dataWatcher.updateObject(19, this.getMaxHunger());
 		} else {
 			this.dataWatcher.updateObject(19, hunger);
 		}
@@ -1040,8 +1040,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 			}
 
 			if (itemstack != null) {
-				if (itemstack.getItem() == FAItemRegistry.INSTANCE.chickenEss && !player.worldObj.isRemote) {
-					// Be grown up by chicken essence
+				if (itemstack.getItem() == FAItemRegistry.INSTANCE.chickenEssence && !player.worldObj.isRemote) {
 					if (this.getAgeInDays() < this.getAdultAge() && this.getHunger() > 0) {
 						if (this.getHunger() > 0) {
 							if (!player.capabilities.isCreativeMode) {
@@ -1055,7 +1054,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 							if (!player.capabilities.isCreativeMode) {
 								player.inventory.addItemStackToInventory(new ItemStack(Items.glass_bottle, 1));
 							}
-							Revival.NETWORK_WRAPPER.sendToAll(new MessageFoodParticles(getEntityId(), Item.getIdFromItem(FAItemRegistry.INSTANCE.chickenEss)));
+							Revival.NETWORK_WRAPPER.sendToAll(new MessageFoodParticles(getEntityId(), Item.getIdFromItem(FAItemRegistry.INSTANCE.chickenEssence)));
 							// this.increaseDinoAge();
 							this.setHunger(1 + (new Random()).nextInt(this.getHunger()));
 							this.func_152115_b(player.getDisplayName());
