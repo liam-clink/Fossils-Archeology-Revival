@@ -87,7 +87,7 @@ public class DinoAIWaterFindTarget extends EntityAIBase {
 	
 	public boolean canGoToBlock(int x, int y, int z){
 		if(this.canGoOnLand){
-			return prehistoric.worldObj.getBlock(x, y, z).getMaterial() == Material.water || prehistoric.worldObj.getBlock(x, y, z).getMaterial() == Material.air;
+			return prehistoric.worldObj.getBlock(x, y, z).getMaterial() == Material.water || prehistoric.worldObj.getBlock(x, y, z).getMaterial() == Material.air && prehistoric.worldObj.getBlock(x, y - 1, z).getMaterial() != Material.air && prehistoric.worldObj.getBlock(x, y - 1, z).getMaterial() != Material.water;
 		}else{
 			return prehistoric.worldObj.getBlock(x, y, z).getMaterial() == Material.water;
 		}
