@@ -41,18 +41,18 @@ public class EntityConfuciusornis extends EntityFlyingPrehistoric {
         this.getNavigator().setCanSwim(true);
         this.tasks.addTask(1, new EntityAISwimming(this));
         this.tasks.addTask(2, this.aiSit);
-        this.tasks.addTask(3, new DinoAIAvoidEntity(this, 16.0F, 0.8D, 1.33D));
-        this.tasks.addTask(4, new DinoAILeapAtTarget(this));
-        this.tasks.addTask(5, new DinoAIFollowOwner(this, 1.0D, 10.0F, 2.0F));
-        this.tasks.addTask(6, new DinoAIFeeder(this, 16));
-        this.tasks.addTask(6, new DinoAIWander(this, 1.0D));
-        this.tasks.addTask(7, new DinoAIWatchClosest(this, EntityPlayer.class, 8.0F));
-        this.tasks.addTask(7, new DinoAILookIdle(this));
-        this.tasks.addTask(8, new DinoAIFindAirTarget(this));
+        this.tasks.addTask(3, new DinoAIFindAirTarget(this));
+        this.tasks.addTask(4, new DinoAIAvoidEntity(this, 16.0F, 0.8D, 1.33D));
+        this.tasks.addTask(5, new DinoAILeapAtTarget(this));
+        this.tasks.addTask(6, new DinoAIFollowOwner(this, 1.0D, 10.0F, 2.0F));
+        this.tasks.addTask(7, new DinoAIFeeder(this, 16));
+        this.tasks.addTask(7, new DinoAIWander(this, 1.0D));
+        this.tasks.addTask(8, new DinoAIWatchClosest(this, EntityPlayer.class, 8.0F));
+        this.tasks.addTask(8, new DinoAILookIdle(this));
         this.targetTasks.addTask(4, new DinoAIHunt(this, 200, false));
-        this.setSize(0.5F, 0.5F);
+        this.setSize(0.7F, 0.8F);
         minSize = 0.3F;
-        maxSize = 0.6F;
+        maxSize = 0.8F;
         teenAge = 1;
         developsResistance = false;
         breaksBlocks = false;
@@ -134,7 +134,7 @@ public class EntityConfuciusornis extends EntityFlyingPrehistoric {
 
     @Override
     protected double getFlySpeed() {
-        return 0;
+        return 1;
     }
 
     public int getMaxHunger() {

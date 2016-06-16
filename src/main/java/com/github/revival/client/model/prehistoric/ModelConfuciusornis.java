@@ -3,6 +3,7 @@ package com.github.revival.client.model.prehistoric;
 import net.ilexiconn.llibrary.client.model.ModelAnimator;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
+import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
 import com.github.revival.client.model.prehistoric.test.ModelNewPrehistoric;
@@ -190,6 +191,9 @@ public class ModelConfuciusornis extends ModelNewPrehistoric {
         AdvancedModelRenderer[] neckParts = {this.neck, this.head};
         AdvancedModelRenderer[] rightWingParts = {this.RightWing, this.RightWing2, this.RightWing3};
         AdvancedModelRenderer[] leftWingParts = {this.leftWing, this.leftWing2, this.leftWing3};
+        AdvancedModelRenderer[] leftTailParts = {this.leftTail1, this.leftTail2, this.leftTail3, this.leftTailFan};
+        AdvancedModelRenderer[] rightTailParts = {this.rightTail1, this.rightTail2, this.rightTail3, this.rightTailFan};
+
         ModelUtils.faceTargetMod(neck, f3, f4, 0.5F);
         ModelUtils.faceTargetMod(head, f3, f4, 0.5F);
         float speed = 0.1F;
@@ -274,7 +278,15 @@ public class ModelConfuciusornis extends ModelNewPrehistoric {
                 this.walk(rightLeg, speed2, 1.9F, true, 0F, 0F, f, f1);
                 this.walk(leftFoot, speed2, 1.9F, true, 0.3F, 0F, f, f1);
                 this.walk(rightFoot, speed2, 1.9F, false, 0.3F, 0F, f, f1);
+                this.chainWave(rightTailParts, speed2, 0.05F, -3, entity.ticksExisted, 1);
+                this.chainSwing(rightTailParts, speed2, 0.15F, -3, entity.ticksExisted, 1);
+                this.chainWave(leftTailParts, speed2, 0.05F, -3, entity.ticksExisted, 1);
+                this.chainSwing(leftTailParts, speed2, 0.15F, -3, entity.ticksExisted, 1);
+                this.chainWave(neckParts, speed2, 0.1F, -3, entity.ticksExisted, 1);
+                this.chainWave(neckParts, speed, 0.4F, -3, f, f1);
             }
 		}
+        ((EntityNewPrehistoric) entity).chainBuffer.applyChainSwingBuffer((ModelRenderer[]) rightTailParts);
+        ((EntityNewPrehistoric) entity).chainBuffer.applyChainSwingBuffer((ModelRenderer[]) leftTailParts);
 	}
 }

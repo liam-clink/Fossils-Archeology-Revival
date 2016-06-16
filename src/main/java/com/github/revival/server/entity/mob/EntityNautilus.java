@@ -143,6 +143,9 @@ public class EntityNautilus extends EntityFishBase {
     public boolean attackEntityFrom(DamageSource dmg, float f) {
         if (f > 0 && this.isInShell() && dmg.getEntity() != null) {
             this.playSound("random.break", 1, this.getRNG().nextFloat() + 0.8F);
+        	if(this.ridingEntity != null){
+                return super.attackEntityFrom(dmg, f);
+        	}
             return false;
         }
         if (!this.isInShell()) {

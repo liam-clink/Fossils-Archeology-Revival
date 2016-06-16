@@ -79,7 +79,6 @@ public abstract class EntityFlyingPrehistoric extends EntityNewPrehistoric {
     public void onLivingUpdate() {
         super.onLivingUpdate();
         boolean flying = isFlying();
-        if (!this.onGround)
             this.motionY *= 0.6;
         if (flying && flyProgress < 20.0F) {
             flyProgress += 0.5F;
@@ -96,6 +95,9 @@ public abstract class EntityFlyingPrehistoric extends EntityNewPrehistoric {
         if (this.isFlying()) {
             flyAround();
             ticksFlying++;
+        }
+        if(this.onGround && ticksFlying > 0){
+        	ticksFlying = 0;
         }
         if (getEntityToAttack() != null) {
             flyTowardsTarget();
@@ -143,7 +145,7 @@ public abstract class EntityFlyingPrehistoric extends EntityNewPrehistoric {
             if (!isDirectPathBetweenPoints(this.getPosition(), Vec3.createVectorHelper(currentTarget.posX, currentTarget.posY, currentTarget.posZ))) {
                 currentTarget = null;
             }
-            if (!isTargetInAir() || this.getDistance(currentTarget.posX, currentTarget.posY, currentTarget.posZ) < 1.78F) {
+            if (!isTargetInAir() || this.getDistance(currentTarget.posX, currentTarget.posY, currentTarget.posZ) < 3F || ticksFlying > 6000) {
                 currentTarget = null;
             }
             flyTowardsTarget();
@@ -162,6 +164,8 @@ public abstract class EntityFlyingPrehistoric extends EntityNewPrehistoric {
             float rotation = MathHelper.wrapAngleTo180_float(angle - rotationYaw);
             moveForward = 0.5F;
             rotationYaw += rotation;
+        }else{
+        	this.currentTarget = null;
         }
     }
 
@@ -177,7 +181,7 @@ public abstract class EntityFlyingPrehistoric extends EntityNewPrehistoric {
     }
 
     public boolean isDirectPathBetweenPoints(ChunkCoordinates vec1, ChunkCoordinates vec2) {
-        return vec1.getDistanceSquaredToChunkCoordinates(vec2) > 16;
+        return vec1.getDistanceSquaredToChunkCoordinates(vec2) > 20;
     }
 
     protected abstract double getFlySpeed();

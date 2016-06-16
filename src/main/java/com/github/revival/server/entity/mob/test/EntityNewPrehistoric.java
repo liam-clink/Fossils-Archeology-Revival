@@ -765,9 +765,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		return this.getAgeInDays() < teenAge;
 	}
 
-	public int getMaxHunger() {
-		return 100;
-	}
+	public abstract int getMaxHunger();
 
 	public boolean isSkeleton() {
 		return this.dataWatcher.getWatchableObjectByte(21) >= 0;
