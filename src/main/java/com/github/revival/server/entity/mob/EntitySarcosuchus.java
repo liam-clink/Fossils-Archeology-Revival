@@ -10,6 +10,7 @@ import net.minecraft.entity.ai.EntityAIOwnerHurtByTarget;
 import net.minecraft.entity.ai.EntityAIOwnerHurtTarget;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
@@ -42,7 +43,9 @@ import com.github.revival.server.item.FAItemRegistry;
 public class EntitySarcosuchus extends EntitySwimmingPrehistoric {
 
 	public static Animation ROLL_ANIMATION = Animation.create(65);
-
+	private boolean isSwimming;
+	public float swimProgress;
+	
     public EntitySarcosuchus(World world) {
         super(world, EnumPrehistoric.Sarcosuchus, 1, 3, 5, 70, 0.25, 0.25);
         this.setSize(4.0F, 1.0F);
@@ -190,6 +193,16 @@ public class EntitySarcosuchus extends EntitySwimmingPrehistoric {
 	@Override
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
+		boolean swimming = this.isSwimming();
+        if (swimming && swimProgress < 20.0F) {
+        	swimProgress += 0.5F;
+            if (sitProgress != 0)
+                sitProgress = sleepProgress = 0F;
+        } else if (!swimming && swimProgress > 0.0F) {
+        	swimProgress -= 0.5F;
+            if (sitProgress != 0)
+                sitProgress = sleepProgress = 0F;
+        }
 		if (this.getAttackTarget() != null) {
 			double d0 = this.getDistanceSqToEntity(this.getAttackTarget());
 			if (d0 < 3 * this.getAgeScale()) {
@@ -226,5 +239,48 @@ public class EntitySarcosuchus extends EntitySwimmingPrehistoric {
 	@Override
 	public Animation[] getAnimations() {
 		return new Animation[] { SPEAK_ANIMATION, ATTACK_ANIMATION, ROLL_ANIMATION };
+	}
+	
+	@Override
+	protected void entityInit() {
+		super.entityInit();
+		this.dataWatcher.addObject(29, (byte) 0);
+	}
+
+	@Override
+	public void writeEntityToNBT(NBTTagCompound compound) {
+		super.writeEntityToNBT(compound);
+		compound.setBoolean("Swimming", this.isSwimming);
+	}
+
+	@Override
+	public void readEntityFromNBT(NBTTagCompound compound) {
+		super.readEntityFromNBT(compound);
+		this.setSwimming(compound.getBoolean("Swimming"));
+
+	}
+
+	public boolean isSwimming() {
+		if (worldObj.isRemote) {
+			boolean isSwimming = (this.dataWatcher.getWatchableObjectByte(29) & 1) != 0;
+			this.isSwimming = isSwimming;
+			return isSwimming;
+		}
+
+		return isSwimming;
+	}
+
+	public void setSwimming(boolean swimming) {
+		byte b0 = this.dataWatcher.getWatchableObjectByte(29);
+
+		if (swimming) {
+			this.dataWatcher.updateObject(29, (byte) (b0 | 1));
+		} else {
+			this.dataWatcher.updateObject(29, (byte) (b0 & -2));
+		}
+
+		if (!worldObj.isRemote) {
+			this.isSwimming = swimming;
+		}
 	}
 }
