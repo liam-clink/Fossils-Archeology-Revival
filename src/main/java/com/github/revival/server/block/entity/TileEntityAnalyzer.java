@@ -208,8 +208,6 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
     @Override
     public void updateEntity() {
         int slots;
-        // System.out.println(EnumPrehistoric.getRandomMezoic());
-
         for (int var7 = 0; var7 < worldObj.playerEntities.size(); ++var7) {
             EntityPlayer P = (EntityPlayer) worldObj.playerEntities.get(var7);
 
@@ -220,11 +218,6 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
                             if (this.analyzerItemStacks[slots].getItem() == FAItemRegistry.INSTANCE.stoneboard) {
                                 P.addStat(FossilAchievementHandler.tablet, 1);
                             }
-                            // if
-                            // (Revival.isDNA(this.analyzerItemStacks[slots].getItem()))
-                            // {
-                            // P.addStat(FossilAchievementHandler.dinoDna, 1);
-                            // }
                         }
                     }
 
@@ -375,7 +368,7 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
                 }
 
             }
-
+            
             if (this.analyzerItemStacks[this.RawIndex].getItem() == Item.getItemFromBlock(Blocks.wool)) {
                 if ((new Random()).nextInt(50) <= 30) {
                     itemstack = new ItemStack(Items.string, 4);

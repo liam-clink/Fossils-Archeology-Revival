@@ -221,9 +221,7 @@ public class EntitySpinosaurus extends EntitySwimmingPrehistoric {
                 sitProgress = sleepProgress = 0F;
         }
 		if (this.getAttackTarget() != null) {
-			double d0 = this.getDistanceSqToEntity(this.getAttackTarget());
-			if (d0 < 3 * this.getAgeScale()) {
-				this.attackEntityAsMob(this.getAttackTarget());
+	        if (getAttackBounds().intersectsWith(this.getAttackTarget().boundingBox)) {
 				if (this.getAttackTarget().width > 1.5F) {
 					if (this.getAnimation() != ATTACK_ANIMATION) {
 						this.setAnimation(ATTACK_ANIMATION);
@@ -231,6 +229,7 @@ public class EntitySpinosaurus extends EntitySwimmingPrehistoric {
 					if (this.getAnimation() == ATTACK_ANIMATION && this.getAnimationTick() > 10) {
 						this.getAttackTarget().attackEntityFrom(DamageSource.causeMobDamage(this), (float) this.getAttributeMap().getAttributeInstance(SharedMonsterAttributes.maxHealth).getAttributeValue());
 					}
+					this.attackEntityAsMob(this.getAttackTarget());
 				} else if(this.riddenByEntity != null){
 					this.getAttackTarget().mountEntity(this);
 					if (this.getAnimation() != SHAKE_ANIMATION) {
