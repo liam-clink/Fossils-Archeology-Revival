@@ -6,6 +6,7 @@ import com.github.revival.server.entity.ai.DinoAIFollowOwner;
 import com.github.revival.server.entity.ai.DinoAIHunt;
 import com.github.revival.server.entity.ai.DinoAILeapAtTarget;
 import com.github.revival.server.entity.ai.DinoAILookIdle;
+import com.github.revival.server.entity.ai.DinoAIRiding;
 import com.github.revival.server.entity.ai.DinoAIWander;
 import com.github.revival.server.entity.ai.DinoAIWatchClosest;
 import com.github.revival.server.entity.mob.test.DinoAIFeeder;
@@ -36,6 +37,7 @@ public class EntityBrachiosaurus extends EntityNewPrehistoric {
         this.getNavigator().setCanSwim(true);
         this.tasks.addTask(1, new EntityAISwimming(this));
         this.tasks.addTask(2, this.aiSit);
+        this.tasks.addTask(3, new DinoAIRiding(this, 1.0F));
         this.tasks.addTask(3, new DinoAIAttackOnCollide(this, 1.0D, false));
         this.tasks.addTask(4, new DinoAIFollowOwner(this, 1.0D, 10.0F, 2.0F));
         this.tasks.addTask(5, new DinoAIFeeder(this, 16));
@@ -54,6 +56,8 @@ public class EntityBrachiosaurus extends EntityNewPrehistoric {
         teenAge = 9;
         developsResistance = true;
         breaksBlocks = true;
+        this.ridingY = 1.5F;
+        this.ridingXZ = -0.2F;
     }
 
     @Override

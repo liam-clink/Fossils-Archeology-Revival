@@ -76,6 +76,9 @@ public class DinoAIFeeder extends EntityAIBase {
                 return false;
             }
         }
+        if(this.dinosaur.riddenByEntity != null){
+        	return false;
+        }
         if (!this.dinosaur.isHungry()) {
             this.typeofTarget = NO_TARGET;
             return false;

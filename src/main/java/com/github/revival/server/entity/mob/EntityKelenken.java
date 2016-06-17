@@ -1,17 +1,5 @@
 package com.github.revival.server.entity.mob;
 
-import com.github.revival.server.entity.ai.DinoAIAttackOnCollide;
-import com.github.revival.server.entity.ai.DinoAIAvoidEntity;
-import com.github.revival.server.entity.ai.DinoAIFollowOwner;
-import com.github.revival.server.entity.ai.DinoAIHunt;
-import com.github.revival.server.entity.ai.DinoAILookIdle;
-import com.github.revival.server.entity.ai.DinoAIWander;
-import com.github.revival.server.entity.ai.DinoAIWatchClosest;
-import com.github.revival.server.entity.mob.test.DinoAIFeeder;
-import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
-import com.github.revival.server.enums.EnumPrehistoric;
-import com.github.revival.server.enums.EnumPrehistoricAI.*;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
@@ -25,6 +13,29 @@ import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
+import com.github.revival.server.entity.ai.DinoAIAttackOnCollide;
+import com.github.revival.server.entity.ai.DinoAIAvoidEntity;
+import com.github.revival.server.entity.ai.DinoAIFollowOwner;
+import com.github.revival.server.entity.ai.DinoAIHunt;
+import com.github.revival.server.entity.ai.DinoAILookIdle;
+import com.github.revival.server.entity.ai.DinoAIRiding;
+import com.github.revival.server.entity.ai.DinoAIWander;
+import com.github.revival.server.entity.ai.DinoAIWatchClosest;
+import com.github.revival.server.entity.mob.test.DinoAIFeeder;
+import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
+import com.github.revival.server.enums.EnumPrehistoric;
+import com.github.revival.server.enums.EnumPrehistoricAI.Activity;
+import com.github.revival.server.enums.EnumPrehistoricAI.Attacking;
+import com.github.revival.server.enums.EnumPrehistoricAI.Climbing;
+import com.github.revival.server.enums.EnumPrehistoricAI.Following;
+import com.github.revival.server.enums.EnumPrehistoricAI.Jumping;
+import com.github.revival.server.enums.EnumPrehistoricAI.Moving;
+import com.github.revival.server.enums.EnumPrehistoricAI.Response;
+import com.github.revival.server.enums.EnumPrehistoricAI.Stalking;
+import com.github.revival.server.enums.EnumPrehistoricAI.Taming;
+import com.github.revival.server.enums.EnumPrehistoricAI.Untaming;
+import com.github.revival.server.enums.EnumPrehistoricAI.WaterAbility;
+
 public class EntityKelenken extends EntityNewPrehistoric {
 
     public EntityKelenken(World world) {
@@ -33,6 +44,7 @@ public class EntityKelenken extends EntityNewPrehistoric {
         this.getNavigator().setCanSwim(true);
         this.tasks.addTask(1, new EntityAISwimming(this));
         this.tasks.addTask(2, this.aiSit);
+        this.tasks.addTask(3, new DinoAIRiding(this, 1.0F));
         this.tasks.addTask(3, new DinoAIAvoidEntity(this, 16.0F, 0.8D, 1.33D));
         this.tasks.addTask(4, new DinoAIAttackOnCollide(this, 2.0D, false));
         this.tasks.addTask(5, new DinoAIFollowOwner(this, 1.0D, 10.0F, 2.0F));

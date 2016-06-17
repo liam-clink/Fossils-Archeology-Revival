@@ -19,6 +19,7 @@ import com.github.revival.server.entity.ai.DinoAIAttackOnCollide;
 import com.github.revival.server.entity.ai.DinoAIFollowOwner;
 import com.github.revival.server.entity.ai.DinoAIHunt;
 import com.github.revival.server.entity.ai.DinoAILookIdle;
+import com.github.revival.server.entity.ai.DinoAIRiding;
 import com.github.revival.server.entity.ai.DinoAIWander;
 import com.github.revival.server.entity.ai.DinoAIWatchClosest;
 import com.github.revival.server.entity.mob.test.DinoAIFeeder;
@@ -54,6 +55,7 @@ public class EntitySpinosaurus extends EntitySwimmingPrehistoric {
 		this.getNavigator().setAvoidsWater(false);
 		this.tasks.addTask(1, this.aiSit);
 		this.tasks.addTask(2, new DinoAIWaterFindTarget(this, true));
+        this.tasks.addTask(3, new DinoAIRiding(this, 1.0F));
 		this.tasks.addTask(3, new DinoAIAttackOnCollide(this, 1.5D, false));
 		this.tasks.addTask(4, new DinoAIWaterFeeder(this, 16));
 		this.tasks.addTask(4, new DinoAIFeeder(this, 16));
@@ -72,6 +74,8 @@ public class EntitySpinosaurus extends EntitySwimmingPrehistoric {
 		developsResistance = true;
 		breaksBlocks = true;
 		this.hasBabyTexture = true;
+		this.ridingXZ = -0.3F;
+		this.ridingY = 1.2F;
 	}
 
 	@Override
@@ -176,7 +180,12 @@ public class EntitySpinosaurus extends EntitySwimmingPrehistoric {
 
 	@Override
 	public void updateRiderPosition() {
-		if (this.riddenByEntity != null && riddenByEntity instanceof EntityLivingBase) {
+		if(this.getRidingPlayer() != null && this.func_152114_e(this.getRidingPlayer())){
+			super.updateRiderPosition();
+			return;
+		}
+		
+		if (this.riddenByEntity != null && riddenByEntity instanceof EntityLivingBase && !this.func_152114_e(((EntityLivingBase) this.riddenByEntity))) {
 			if(this.getAnimationTick() > 55 && this.riddenByEntity != null){
 				this.riddenByEntity.attackEntityFrom(DamageSource.causeMobDamage(this), ((EntityLivingBase) this.riddenByEntity).getMaxHealth());
 				this.onKillEntity((EntityLivingBase) this.riddenByEntity);
@@ -222,7 +231,7 @@ public class EntitySpinosaurus extends EntitySwimmingPrehistoric {
 					if (this.getAnimation() == ATTACK_ANIMATION && this.getAnimationTick() > 10) {
 						this.getAttackTarget().attackEntityFrom(DamageSource.causeMobDamage(this), (float) this.getAttributeMap().getAttributeInstance(SharedMonsterAttributes.maxHealth).getAttributeValue());
 					}
-				} else {
+				} else if(this.riddenByEntity != null){
 					this.getAttackTarget().mountEntity(this);
 					if (this.getAnimation() != SHAKE_ANIMATION) {
 						this.setAnimation(SHAKE_ANIMATION);

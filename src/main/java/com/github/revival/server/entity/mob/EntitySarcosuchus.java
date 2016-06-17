@@ -19,6 +19,7 @@ import com.github.revival.server.entity.ai.DinoAIAttackOnCollide;
 import com.github.revival.server.entity.ai.DinoAIFollowOwner;
 import com.github.revival.server.entity.ai.DinoAIHunt;
 import com.github.revival.server.entity.ai.DinoAILookIdle;
+import com.github.revival.server.entity.ai.DinoAIRiding;
 import com.github.revival.server.entity.ai.DinoAIWander;
 import com.github.revival.server.entity.ai.DinoAIWatchClosest;
 import com.github.revival.server.entity.mob.test.DinoAIFeeder;
@@ -53,6 +54,7 @@ public class EntitySarcosuchus extends EntitySwimmingPrehistoric {
 		this.getNavigator().setAvoidsWater(false);
 		this.tasks.addTask(1, this.aiSit);
 		this.tasks.addTask(2, new DinoAIWaterFindTarget(this, true));
+        this.tasks.addTask(3, new DinoAIRiding(this, 1.0F));
 		this.tasks.addTask(3, new DinoAIAttackOnCollide(this, 1.5D, false));
 		this.tasks.addTask(4, new DinoAIWaterFeeder(this, 16));
 		this.tasks.addTask(4, new DinoAIFeeder(this, 16));
@@ -169,8 +171,13 @@ public class EntitySarcosuchus extends EntitySwimmingPrehistoric {
 	
 	@Override
 	public void updateRiderPosition() {
-		if (this.riddenByEntity != null && riddenByEntity instanceof EntityLivingBase) {
-			if(this.getAnimationTick() % 20 == 0 && this.riddenByEntity != null){
+		this.ridingY = 1.5F;
+		if(this.getRidingPlayer() != null && this.func_152114_e(this.getRidingPlayer())){
+			super.updateRiderPosition();
+			return;
+		}
+		
+		if (this.riddenByEntity != null && riddenByEntity instanceof EntityLivingBase && !this.func_152114_e(((EntityLivingBase) this.riddenByEntity))) {			if(this.getAnimationTick() % 20 == 0 && this.riddenByEntity != null){
 				this.riddenByEntity.attackEntityFrom(DamageSource.drown, 10);
 				if(riddenByEntity.isDead){
 				this.onKillEntity((EntityLivingBase) this.riddenByEntity);

@@ -19,6 +19,7 @@ import com.github.revival.server.entity.ai.DinoAIAttackOnCollide;
 import com.github.revival.server.entity.ai.DinoAIFollowOwner;
 import com.github.revival.server.entity.ai.DinoAIHunt;
 import com.github.revival.server.entity.ai.DinoAILookIdle;
+import com.github.revival.server.entity.ai.DinoAIRiding;
 import com.github.revival.server.entity.ai.DinoAIWander;
 import com.github.revival.server.entity.ai.DinoAIWatchClosest;
 import com.github.revival.server.entity.mob.test.DinoAIFeeder;
@@ -44,6 +45,7 @@ public class EntityGallimimus extends EntityNewPrehistoric {
         this.getNavigator().setCanSwim(true);
         this.tasks.addTask(1, new EntityAISwimming(this));
         this.tasks.addTask(2, this.aiSit);
+        this.tasks.addTask(3, new DinoAIRiding(this, 2F));
         this.tasks.addTask(3, new EntityAIPanic(this, 1.25D));
         this.tasks.addTask(4, new DinoAIAttackOnCollide(this, 1.0D, false));
         this.tasks.addTask(5, new DinoAIFollowOwner(this, 1.0D, 10.0F, 2.0F));
@@ -64,6 +66,7 @@ public class EntityGallimimus extends EntityNewPrehistoric {
         teenAge = 4;
         developsResistance = true;
         breaksBlocks = false;
+        this.ridingY = 1.6F;
     }
 
     @Override
@@ -165,6 +168,9 @@ public class EntityGallimimus extends EntityNewPrehistoric {
     @Override
     public void onLivingUpdate() {
         super.onLivingUpdate();
+        if(this.getRidingPlayer() != null){
+        	this.stepHeight = 2;
+        }
         if (this.getAnimation() == ATTACK_ANIMATION && (this.getAnimationTick() >= 10 && this.getAnimationTick() <= 13) && this.getAttackTarget() != null) {
             this.attackEntityAsMob(this.getAttackTarget());
         }

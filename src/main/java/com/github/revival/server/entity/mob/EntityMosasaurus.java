@@ -13,6 +13,7 @@ import net.minecraft.world.World;
 
 import com.github.revival.server.entity.ai.DinoAIHunt;
 import com.github.revival.server.entity.ai.DinoAILookIdle;
+import com.github.revival.server.entity.ai.DinoAIRiding;
 import com.github.revival.server.entity.ai.DinoAIWatchClosest;
 import com.github.revival.server.entity.mob.test.DinoAIWaterFeeder;
 import com.github.revival.server.entity.mob.test.DinoAIWaterFindTarget;
@@ -40,6 +41,7 @@ public class EntityMosasaurus extends EntitySwimmingPrehistoric {
 		this.getNavigator().setAvoidsWater(false);
 		this.tasks.addTask(1, this.aiSit);
 		this.tasks.addTask(2, new DinoAIWaterFindTarget(this, false));
+        this.tasks.addTask(3, new DinoAIRiding(this, 1.0F));
 		this.tasks.addTask(3, new DinoAIWaterFeeder(this, 16));
 		this.tasks.addTask(4, new DinoAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		this.tasks.addTask(4, new DinoAILookIdle(this));
@@ -190,6 +192,7 @@ public class EntityMosasaurus extends EntitySwimmingPrehistoric {
 			super.updateRiderPosition();
 			riddenByEntity.setPosition(this.posX + extraX, this.posY + extraY, this.posZ + extraZ);
 		}
+		super.updateRiderPosition();
 	}
 
 	@Override

@@ -115,6 +115,8 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	public double maxHealth;
 	public double baseSpeed;
 	public double maxSpeed;
+	public float ridingXZ;
+	public float ridingY;
 
 	public EntityNewPrehistoric(World world, EnumPrehistoric type, double baseDamage, double maxDamage, double baseHealth, double maxHealth, double baseSpeed, double maxSpeed) {
 		super(world);
@@ -482,6 +484,9 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		}
 		if (this.ticksTillMate > 0) {
 			this.ticksTillMate--;
+		}
+		if(this.getRidingPlayer() != null){
+			this.stepHeight = 1;
 		}
 		int blockX = MathHelper.floor_double(this.posX);
 		int blockY = MathHelper.floor_double(this.boundingBox.minY) - 1;
@@ -1601,8 +1606,24 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
     public double getMountedYOffset()
     {
-        return (double)this.height * 0.55D;
+        return (double)this.height * 0.65D;
     }
+    
+    @Override
+	public void updateRiderPosition() {
+		if ((this.ridingY != 0 || this.ridingXZ != 0) && this.func_152114_e(this.getRidingPlayer()) && this.getAttackTarget() != this.getRidingPlayer()) {
+			rotationYaw = renderYawOffset;
+			float radius = ridingXZ * (0.7F * getAgeScale()) * -3;
+			float angle = (0.01745329251F * this.renderYawOffset);
+			double extraX = (double) (radius * MathHelper.sin((float) (Math.PI + angle)));
+			double extraZ = (double) (radius * MathHelper.cos(angle));
+			double extraY = ridingY * (getAgeScale());
+			super.updateRiderPosition();
+			riddenByEntity.setPosition(this.posX + extraX, this.posY + extraY, this.posZ + extraZ);
+			return;
+		}
+		super.updateRiderPosition();
+	}
     
 	@Override
 	public EntityAgeable createChild(EntityAgeable entity) {

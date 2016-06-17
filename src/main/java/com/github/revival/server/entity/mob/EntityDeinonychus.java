@@ -6,6 +6,7 @@ import com.github.revival.server.entity.ai.DinoAIFollowOwner;
 import com.github.revival.server.entity.ai.DinoAIHunt;
 import com.github.revival.server.entity.ai.DinoAILeapAtTarget;
 import com.github.revival.server.entity.ai.DinoAILookIdle;
+import com.github.revival.server.entity.ai.DinoAIRiding;
 import com.github.revival.server.entity.ai.DinoAIWander;
 import com.github.revival.server.entity.ai.DinoAIWatchClosest;
 import com.github.revival.server.entity.mob.test.DinoAIFeeder;
@@ -39,6 +40,7 @@ public class EntityDeinonychus extends EntityNewPrehistoric {
         this.getNavigator().setAvoidSun(true);
         this.tasks.addTask(1, new EntityAISwimming(this));
         this.tasks.addTask(2, this.aiSit);
+        this.tasks.addTask(3, new DinoAIRiding(this, 1.0F));
         this.tasks.addTask(3, new DinoAIAvoidEntity(this, 16.0F, 0.8D, 1.33D));
         this.tasks.addTask(4, new DinoAILeapAtTarget(this));
         this.tasks.addTask(5, new EntityAIRestrictSun(this));
