@@ -2,6 +2,7 @@ package com.github.revival.server.gen;
 
 import java.util.Random;
 
+import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
@@ -12,8 +13,10 @@ import com.github.revival.Revival;
 import com.github.revival.server.gen.feature.AncientChestWorldGen;
 import com.github.revival.server.gen.feature.AnuCastleWorldGen;
 import com.github.revival.server.gen.feature.AztecWeaponsShopWorldGen;
+import com.github.revival.server.gen.feature.FossilSiteWorldGen;
 import com.github.revival.server.gen.feature.HellBoatWorldGen;
 import com.github.revival.server.gen.feature.MoaiWorldGen;
+import com.github.revival.server.gen.feature.WorldGenTarSite;
 
 import cpw.mods.fml.common.IWorldGenerator;
 
@@ -39,7 +42,6 @@ public class WorldGenMiscStructures implements IWorldGenerator {
 				int Ycoord1 = world.getHeightValue(Xcoord1, Zcoord1) - random.nextInt(4);
 				BiomeGenBase biome = world.getWorldChunkManager().getBiomeGenAt(Xcoord1, Zcoord1);
 				if (BiomeDictionary.isBiomeOfType(biome, Type.BEACH)) {
-					System.out.println("halp");
 					new MoaiWorldGen().generate(world, random, Xcoord1, Ycoord1, Zcoord1);
 				}
 			}
@@ -50,9 +52,42 @@ public class WorldGenMiscStructures implements IWorldGenerator {
 				int Zcoord1 = chunkZ * 16 + random.nextInt(16);
 				int Ycoord1 = world.getHeightValue(Xcoord1, Zcoord1) - 4;
 				BiomeGenBase biome = world.getWorldChunkManager().getBiomeGenAt(Xcoord1, Zcoord1);
-				//if (BiomeDictionary.isBiomeOfType(biome, Type.PLAINS)) {
+				if (BiomeDictionary.isBiomeOfType(biome, Type.JUNGLE)) {
 					new AztecWeaponsShopWorldGen().generate(world, random, Xcoord1, Ycoord1, Zcoord1);
-				//}
+				}
+			}
+		}
+		if (Revival.CONFIG.generateAztecWeaponShops) {
+			if (random.nextInt(48) == 0) {
+				int Xcoord1 = chunkX * 16 + random.nextInt(16);
+				int Zcoord1 = chunkZ * 16 + random.nextInt(16);
+				int Ycoord1 = world.getHeightValue(Xcoord1, Zcoord1) - 4;
+				BiomeGenBase biome = world.getWorldChunkManager().getBiomeGenAt(Xcoord1, Zcoord1);
+				if (BiomeDictionary.isBiomeOfType(biome, Type.JUNGLE)) {
+					new AztecWeaponsShopWorldGen().generate(world, random, Xcoord1, Ycoord1, Zcoord1);
+				}
+			}
+		}
+		if (Revival.CONFIG.generateTarSites) {
+			if (random.nextInt(48) == 0) {
+				int Xcoord1 = chunkX * 16 + random.nextInt(16);
+				int Zcoord1 = chunkZ * 16 + random.nextInt(16);
+				int Ycoord1 = world.getHeightValue(Xcoord1, Zcoord1);
+				BiomeGenBase biome = world.getWorldChunkManager().getBiomeGenAt(Xcoord1, Zcoord1);
+				if (!world.provider.hasNoSky && !world.provider.isHellWorld && biome.topBlock == Blocks.grass && world.getBlock(Xcoord1, Ycoord1, Zcoord1) == biome.topBlock) {
+					new WorldGenTarSite().generate(world, random, Xcoord1, Ycoord1, Zcoord1);
+				}
+			}
+		}
+		if (Revival.CONFIG.generateFossilSites) {
+			if (random.nextInt(48) == 0) {
+				int Xcoord1 = chunkX * 16 + random.nextInt(16);
+				int Zcoord1 = chunkZ * 16 + random.nextInt(16);
+				int Ycoord1 = world.getHeightValue(Xcoord1, Zcoord1);
+				BiomeGenBase biome = world.getWorldChunkManager().getBiomeGenAt(Xcoord1, Zcoord1);
+				if (!world.provider.hasNoSky && !world.provider.isHellWorld && biome.topBlock == Blocks.grass && world.getBlock(Xcoord1, Ycoord1, Zcoord1) == biome.topBlock) {
+					new FossilSiteWorldGen().generate(world, random, Xcoord1, Ycoord1, Zcoord1);
+				}
 			}
 		}
 		if (world.getChunkFromChunkCoords(chunkX, chunkZ) == world.getChunkFromBlockCoords(-70, -70) && world.provider.dimensionId == Revival.CONFIG.dimensionIDDarknessLair) {

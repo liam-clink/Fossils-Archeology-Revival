@@ -25,6 +25,10 @@ public class FossilConfig {
     @ConfigEntry(category = "generation")
     public boolean generateMoai = true;
     @ConfigEntry(category = "generation")
+    public boolean generateTarSites = true;
+    @ConfigEntry(category = "generation")
+    public boolean generateFossilSites = true;
+    @ConfigEntry(category = "generation")
     public int[] oreGenerationDimensions = {0};
 
     @ConfigEntry(category = "entity spawning")
