@@ -87,6 +87,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	public boolean featherToggle;
 	public boolean hasTeenTexture = false;
 	public boolean hasBabyTexture;
+	public float weakProgress;
 	public float sitProgress;
 	public int ticksSitted;
 	protected boolean isSitting;
@@ -649,6 +650,16 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 			if (sitProgress != 0)
 				sitProgress = 0F;
 		}
+		boolean weak = this.isWeak() && (this.aiTameType() == Taming.GEM && this.aiTameType() == Taming.BLUEGEM);
+		if (weak && weakProgress < 20.0F) {
+			weakProgress += 1F;
+			sitProgress = 0F;
+			sleepProgress = 0F;
+		} else if (!weak && weakProgress > 0.0F) {
+			weakProgress -= 1F;
+			sitProgress = 0F;
+			sleepProgress = 0F;
+		}
 		if (!this.worldObj.isRemote) {
 			if (this.aiClimbType() == Climbing.ARTHROPOD) {
 				this.setBesideClimbableBlock(this.isCollidedHorizontally);
@@ -867,7 +878,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 			String Status1 = StatCollector.translateToLocal(("status." + var1.toString() + ".head"));
 			String Dino = this.type.toString();
 			String Status2 = StatCollector.translateToLocal("status." + var1.toString());
-			Revival.showMessage(Status1 + Dino + " " + Status2, (EntityPlayer) this.getOwner());
+			Revival.showMessage(Status1 + Dino + Status2, (EntityPlayer) this.getOwner());
 		}
 	}
 
@@ -1214,7 +1225,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
 	}
 
-	private boolean isWeak() {
+	public boolean isWeak() {
 		return (this.getHealth() < 8) && (this.getAgeInDays() >= this.getAdultAge()) && !this.isTamed();
 	}
 
@@ -1254,13 +1265,13 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 			String toggle = this.hasFeatherToggle ? !this.featherToggle ? "feathered/" : "scaled/" : "";
 			boolean isBaby = this.isChild() && this.hasBabyTexture;
 			String gender = this.hasTeenTexture ? this.isTeen() ? "_teen" : isBaby ? "_baby" : this.getGender() == 0 ? "_female" : "_male" : this.isChild() ? "_baby" : this.getGender() == 0 ? "_female" : "_male";
-			String sleeping = !this.isSleeping() ? "" : "_sleeping";
+			String sleeping = !this.isSleeping() || !this.isWeak() ? "" : "_sleeping";
 			String toggleList = this.hasFeatherToggle ? !this.featherToggle ? "_feathered" : "_scaled" : "";
 			return "fossil:textures/model/" + type.toString().toLowerCase() + "_0/" + toggle + type.toString().toLowerCase() + gender + toggleList + sleeping + ".png";
 		} else {
 			String toggle = this.hasFeatherToggle ? !this.featherToggle ? "feathered/" : "scaled/" : "";
 			String gender = this.getGender() == 0 ? "_female" : "_male";
-			String sleeping = !this.isSleeping() ? "" : "_sleeping";
+			String sleeping = !this.isSleeping() || !this.isWeak() ? "" : "_sleeping";
 			String toggleList = this.hasFeatherToggle ? !this.featherToggle ? "_feathered" : "_scaled" : "";
 			return "fossil:textures/model/" + type.toString().toLowerCase() + "_0/" + toggle + type.toString().toLowerCase() + gender + toggleList + sleeping + ".png";
 		}
@@ -1448,9 +1459,9 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 			}
 		}
 	}
-	
+
 	public abstract boolean canBeRidden();
-	
+
 	public boolean canBeSteered(){
 		return canBeRidden() && (this.getRidingPlayer() != null && this.func_152114_e(this.getRidingPlayer()));
 	}
@@ -1604,12 +1615,12 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		}
 	}
 
-    public double getMountedYOffset()
-    {
-        return (double)this.height * 0.65D;
-    }
-    
-    @Override
+	public double getMountedYOffset()
+	{
+		return (double)this.height * 0.65D;
+	}
+
+	@Override
 	public void updateRiderPosition() {
 		if ((this.ridingY != 0 || this.ridingXZ != 0) && this.func_152114_e(this.getRidingPlayer()) && this.getAttackTarget() != this.getRidingPlayer()) {
 			rotationYaw = renderYawOffset;
@@ -1624,7 +1635,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		}
 		super.updateRiderPosition();
 	}
-    
+
 	@Override
 	public EntityAgeable createChild(EntityAgeable entity) {
 		return null;

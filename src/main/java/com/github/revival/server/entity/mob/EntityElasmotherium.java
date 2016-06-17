@@ -53,6 +53,7 @@ public class EntityElasmotherium extends EntityNewPrehistoric {
         developsResistance = true;
         breaksBlocks = true;
         hasBabyTexture = false;
+        this.ridingY = 1.35F;
     }
 
     @Override

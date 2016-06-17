@@ -152,6 +152,20 @@ public class ModelMosasaurus extends ModelNewPrehistoric {
 	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
 		AdvancedModelRenderer[] tailParts = { this.lowerBody, this.tail1, this.tail2, this.upperTailFin };
 		AdvancedModelRenderer[] neckParts = { this.neck, this.head };
+		{
+			float sitProgress = ((EntityNewPrehistoric) (entity)).weakProgress;
+			sitAnimationRotationPrev(rightFrontFlipper, sitProgress, (float)Math.toRadians(30.0D), 0, (float)Math.toRadians(30.0D));
+			sitAnimationRotationPrev(lowerTailFin, sitProgress, (float)Math.toRadians(64.95D), 0, 0);
+			sitAnimationRotationPrev(upperTailFin, sitProgress, (float)Math.toRadians(108.51D), 0, 0);
+			sitAnimationRotationPrev(leftFrontFlipper, sitProgress, (float)Math.toRadians(30.0D), (float)Math.toRadians(18.26D), -((float)Math.toRadians(30.0D)));
+			sitAnimationRotationPrev(lowerBody, sitProgress, -((float)Math.toRadians(7.83D)), (float)Math.toRadians(5.22D), -((float)Math.toRadians(2.61D)));
+			sitAnimationRotationPrev(head, sitProgress, (float)Math.toRadians(2.61D), (float)Math.toRadians(13.04D), -((float)Math.toRadians(13.04D)));
+			sitAnimationRotationPrev(neck, sitProgress, (float)Math.toRadians(7.83D), 0, 0);
+			sitAnimationRotationPrev(tail2, sitProgress, (float)Math.toRadians(10.43D), -((float)Math.toRadians(13.04D)), -((float)Math.toRadians(5.22D)));
+			sitAnimationRotationPrev(leftHindFlipper, sitProgress, (float)Math.toRadians(30.0D), 0, -((float)Math.toRadians(30.0D)));
+			sitAnimationRotationPrev(rightHindFlipper, sitProgress, (float)Math.toRadians(30.0D), 0, (float)Math.toRadians(30.0D));
+			sitAnimationRotationPrev(jawBase, sitProgress, (float)Math.toRadians(13.04D), 0, 0);
+		}
 		this.lowerTailFin.rotateAngleY = this.upperTailFin.rotateAngleY;
 		float speed = 0.1F;
 		float speed2 = 0.4F;

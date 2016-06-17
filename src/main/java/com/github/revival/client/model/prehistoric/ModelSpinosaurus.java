@@ -359,7 +359,7 @@ public class ModelSpinosaurus extends ModelNewPrehistoric {
 	        sitAnimationPos(rightFoot, sitProgress, 0, -2, -1.5F);
 		}
 		{
-			float sitProgress = ((EntitySpinosaurus) entity).sleepProgress;
+			float sitProgress = ((EntitySpinosaurus) entity).isWeak() ? ((EntitySpinosaurus) entity).weakProgress : ((EntitySpinosaurus) entity).sleepProgress;
 			sitAnimationRotationPrev(lowerBody, sitProgress, -((float)Math.toRadians(2.0D)), -((float)Math.toRadians(11.0D)), 0);
 	        sitAnimationRotationPrev(Sail10, sitProgress, (float)Math.toRadians(19.8D), 0, (float)Math.toRadians(1.0D));
 	        sitAnimationRotationPrev(Sail6, sitProgress, (float)Math.toRadians(2.0D), 0, 0);

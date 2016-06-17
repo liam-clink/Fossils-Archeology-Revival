@@ -348,7 +348,7 @@ public class ModelSarcosuchus extends ModelNewPrehistoric {
 
 		}
 		{
-			float sitProgress = ((EntitySarcosuchus)entity).sleepProgress;
+			float sitProgress = ((EntitySpinosaurus) entity).isWeak() ? ((EntitySpinosaurus) entity).weakProgress : ((EntitySpinosaurus) entity).sleepProgress;
 			sitAnimationRotationPrev(OsteodermUpper, sitProgress, (float)Math.toRadians(5.22D), 0, 0);
 	        sitAnimationRotationPrev(leftHindFoot, sitProgress, (float)Math.toRadians(38.0D), 0, 0);
 	        sitAnimationRotationPrev(upperBody, sitProgress, (float)Math.toRadians(5.22D), 0, 0);

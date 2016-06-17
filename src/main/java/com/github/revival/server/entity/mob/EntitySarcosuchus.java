@@ -72,6 +72,7 @@ public class EntitySarcosuchus extends EntitySwimmingPrehistoric {
         developsResistance = true;
         breaksBlocks = true;
 		this.hasBabyTexture = true;
+		this.ridingY = 1.5F;
     }
 
     @Override
@@ -171,7 +172,6 @@ public class EntitySarcosuchus extends EntitySwimmingPrehistoric {
 	
 	@Override
 	public void updateRiderPosition() {
-		this.ridingY = 1.5F;
 		if(this.getRidingPlayer() != null && this.func_152114_e(this.getRidingPlayer())){
 			super.updateRiderPosition();
 			return;

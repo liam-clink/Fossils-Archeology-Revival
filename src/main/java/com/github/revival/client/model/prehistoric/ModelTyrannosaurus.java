@@ -320,6 +320,38 @@ public class ModelTyrannosaurus extends ModelNewPrehistoric {
             sitAnimationPos(lowerBody, sitProgress, 0F, 10.80F - ModelUtils.getDefaultPositionY(lowerBody), 0F);
             sitAnimationPos(leftThigh, sitProgress, 0F, 16.90F - ModelUtils.getDefaultPositionY(leftThigh), 0F);
         }
+        {
+            float sitProgress = ((EntityNewPrehistoric) (entity)).weakProgress;
+        	 sitAnimationRotationPrev(tail2, sitProgress, -((float)Math.toRadians(7.83D)), -((float)Math.toRadians(15.65D)), 0);
+             sitAnimationRotationPrev(middleTailBackFeather, sitProgress, (float)Math.toRadians(10.08D), 0, 0);
+             sitAnimationRotationPrev(neck, sitProgress, (float)Math.toRadians(18.26D), 0, 0);
+             sitAnimationRotationPrev(rightUpperArm, sitProgress, (float)Math.toRadians(54.0D), 0, 0);
+             sitAnimationRotationPrev(lowerBody, sitProgress, -((float)Math.toRadians(2.0D)), 0, 0);
+             sitAnimationRotationPrev(leftFoot, sitProgress, (float)Math.toRadians(90.0D), 0, 0);
+             sitAnimationRotationPrev(rightCrest, sitProgress, -((float)Math.toRadians(4.05D)), 0, 0);
+             sitAnimationRotationPrev(rightFoot, sitProgress, (float)Math.toRadians(90.0D), 0, 0);
+             sitAnimationRotationPrev(middleTailFrontFeather, sitProgress, (float)Math.toRadians(18.73D), 0, 0);
+             sitAnimationRotationPrev(tail1, sitProgress, -((float)Math.toRadians(10.43D)), (float)Math.toRadians(7.83D), 0);
+             sitAnimationRotationPrev(leftCrest, sitProgress, -((float)Math.toRadians(4.05D)), 0, 0);
+             sitAnimationRotationPrev(rightLowerArm, sitProgress, -((float)Math.toRadians(30.0D)), 0, 0);
+             sitAnimationRotationPrev(rightLeg, sitProgress, -((float)Math.toRadians(40.0D)), 0, 0);
+             sitAnimationRotationPrev(leftUpperArm, sitProgress, (float)Math.toRadians(54.0D), 0, 0);
+             sitAnimationRotationPrev(upperBody, sitProgress, (float)Math.toRadians(6.48D), -((float)Math.toRadians(7.83D)), 0);
+             sitAnimationRotationPrev(leftTailFeather, sitProgress, (float)Math.toRadians(5.95D), 0, 0);
+             sitAnimationRotationPrev(leftLowerArm, sitProgress, -((float)Math.toRadians(30.0D)), 0, 0);
+             sitAnimationRotationPrev(lowerJaw, sitProgress, (float)Math.toRadians(26.09D), 0, 0);
+             sitAnimationRotationPrev(leftLeg, sitProgress, -((float)Math.toRadians(40.0D)), 0, 0);
+             sitAnimationRotationPrev(rightThigh, sitProgress, -((float)Math.toRadians(20.87D)), -((float)Math.toRadians(7.83D)), (float)Math.toRadians(54.78D));
+             sitAnimationRotationPrev(leftThigh, sitProgress, -((float)Math.toRadians(15.65D)), -((float)Math.toRadians(20.87D)), -((float)Math.toRadians(44.35D)));
+             sitAnimationRotationPrev(upperJaw, sitProgress, (float)Math.toRadians(2.0D), 0, 0);
+             sitAnimationRotationPrev(head, sitProgress, -((float)Math.toRadians(18.26D)), -((float)Math.toRadians(13.04D)), -((float)Math.toRadians(31.3D)));
+             sitAnimationRotationPrev(rightTailFeather, sitProgress, (float)Math.toRadians(5.95D), 0, 0);
+             sitAnimationRotationPrev(middleCrest, sitProgress, (float)Math.toRadians(9.21D), 0, 0);
+             sitAnimationRotationPrev(tail3, sitProgress, (float)Math.toRadians(7.83D), (float)Math.toRadians(10.43D), (float)Math.toRadians(7.83D));
+             sitAnimationPos(rightThigh, sitProgress, 0F, 16.90F - ModelUtils.getDefaultPositionY(rightThigh), 0F);
+             sitAnimationPos(lowerBody, sitProgress, 0F, 12.80F - ModelUtils.getDefaultPositionY(lowerBody), 0F);
+             sitAnimationPos(leftThigh, sitProgress, 0F, 16.90F - ModelUtils.getDefaultPositionY(leftThigh), 0F);
+        }
         this.walk(upperBody, speed2, 0.05F, false, 1F, 0F, entity.ticksExisted, 1);
         this.bob(lowerBody, speed2, 0.4F, false, entity.ticksExisted, 1);
         this.walk(upperBody, speed2, 0.05F, false, 1F, 0F, entity.ticksExisted, 1);

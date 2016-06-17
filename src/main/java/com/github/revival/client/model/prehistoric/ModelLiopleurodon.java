@@ -167,6 +167,20 @@ public class ModelLiopleurodon extends ModelNewPrehistoric {
 			ModelUtils.faceTargetMod(Neck, f3, f4, 0.5F);
 			ModelUtils.faceTargetMod(Head, f3, f4, 0.5F);
 		}
+		{
+			float sitProgress = ((EntityNewPrehistoric) (entity)).weakProgress;
+			sitAnimationRotationPrev(BackFlipper_Left, sitProgress, (float)Math.toRadians(30.0D), -((float)Math.toRadians(5.0D)), -((float)Math.toRadians(50.0D)));
+			sitAnimationRotationPrev(FrontFlipper_Left, sitProgress, (float)Math.toRadians(10.0D), (float)Math.toRadians(15.0D), -((float)Math.toRadians(44.0D)));
+			sitAnimationRotationPrev(FrontFlipper_Right, sitProgress, (float)Math.toRadians(10.0D), -((float)Math.toRadians(15.0D)), (float)Math.toRadians(44.0D));
+			sitAnimationRotationPrev(LowerBody, sitProgress, -((float)Math.toRadians(2.61D)), 0, 0);
+			sitAnimationRotationPrev(JawBottomBase, sitProgress, (float)Math.toRadians(15.65D), 0, 0);
+			sitAnimationRotationPrev(Neck, sitProgress, (float)Math.toRadians(5.22D), 0, 0);
+			sitAnimationRotationPrev(Head, sitProgress, (float)Math.toRadians(7.83D), -((float)Math.toRadians(2.61D)), -((float)Math.toRadians(31.3D)));
+			sitAnimationRotationPrev(Tail2, sitProgress, -((float)Math.toRadians(10.43D)), -((float)Math.toRadians(20.87D)), 0);
+			sitAnimationRotationPrev(BackFlipper_Right, sitProgress, (float)Math.toRadians(30.0D), (float)Math.toRadians(5.0D), (float)Math.toRadians(50.0D));
+			sitAnimationRotationPrev(Tail, sitProgress, -((float)Math.toRadians(10.43D)), 0, 0);
+			sitAnimationRotationPrev(Tail1, sitProgress, -((float)Math.toRadians(5.22D)), -((float)Math.toRadians(18.26D)), 0);
+		}
 		float speed = 0.1F;
 		float speed2 = 0.4F;
 		this.JawBottomBase.setScale(1.01F, 1.01F, 1.01F);

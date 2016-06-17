@@ -55,6 +55,7 @@ public class EntityCeratosaurus extends EntityNewPrehistoric {
         teenAge = 5;
         developsResistance = true;
         breaksBlocks = true;
+		this.ridingY = 1.8F;
     }
 
     @Override
@@ -154,7 +155,6 @@ public class EntityCeratosaurus extends EntityNewPrehistoric {
 
     @Override
     public void onLivingUpdate() {
-
         super.onLivingUpdate();
         if (this.getAnimation() == ATTACK_ANIMATION && this.getAnimationTick() == 12 && this.getAttackTarget() != null) {
             this.attackEntityAsMob(this.getAttackTarget());
