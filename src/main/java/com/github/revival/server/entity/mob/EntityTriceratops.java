@@ -60,7 +60,7 @@ public class EntityTriceratops extends EntityNewPrehistoric {
         teenAge = 5;
         developsResistance = true;
         breaksBlocks = true;
-        this.ridingY = 0.73F;
+        this.ridingY = 0.93F;
         this.ridingXZ = -0.05F;
     }
 

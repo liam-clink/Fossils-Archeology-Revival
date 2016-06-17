@@ -174,6 +174,10 @@ public class EntityMosasaurus extends EntitySwimmingPrehistoric {
 
 	@Override
 	public void updateRiderPosition() {
+		if(this.getRidingPlayer() != null && this.func_152114_e(this.getRidingPlayer())){
+			super.updateRiderPosition();
+			return;
+		}
 		if (this.riddenByEntity != null && riddenByEntity instanceof EntityLivingBase) {
 			if (this.getAnimationTick() > 45) {
 				this.riddenByEntity.attackEntityFrom(DamageSource.causeMobDamage(this), ((EntityLivingBase) this.riddenByEntity).getMaxHealth());
@@ -188,10 +192,8 @@ public class EntityMosasaurus extends EntitySwimmingPrehistoric {
 			double extraX = (double) (radius * MathHelper.sin((float) (Math.PI + angle)));
 			double extraZ = (double) (radius * MathHelper.cos(angle));
 			double extraY = -0.15F * (getAgeScale());
-			super.updateRiderPosition();
 			riddenByEntity.setPosition(this.posX + extraX, this.posY + extraY, this.posZ + extraZ);
 		}
-		super.updateRiderPosition();
 	}
 
 	@Override

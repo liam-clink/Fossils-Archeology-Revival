@@ -21,6 +21,10 @@ public class FossilConfig {
     @ConfigEntry(category = "generation")
     public boolean generateVolcanicRock = true;
     @ConfigEntry(category = "generation")
+    public boolean generateAztecWeaponShops = true;
+    @ConfigEntry(category = "generation")
+    public boolean generateMoai = true;
+    @ConfigEntry(category = "generation")
     public int[] oreGenerationDimensions = {0};
 
     @ConfigEntry(category = "entity spawning")

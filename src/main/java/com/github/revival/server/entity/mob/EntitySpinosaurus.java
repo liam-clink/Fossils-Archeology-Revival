@@ -202,7 +202,6 @@ public class EntitySpinosaurus extends EntitySwimmingPrehistoric {
 			double extraX = (double) (radius * MathHelper.sin((float) (Math.PI + angle)));
 			double extraZ = (double) (radius * MathHelper.cos(angle));
 			double extraY = 0.5F * (getAgeScale() + (modTick_1 * 0.05) + (modTick_2 * 0.15) - 2);
-			super.updateRiderPosition();
 			riddenByEntity.setPosition(this.posX + extraX, this.posY + extraY, this.posZ + extraZ);		
 		}
 	}

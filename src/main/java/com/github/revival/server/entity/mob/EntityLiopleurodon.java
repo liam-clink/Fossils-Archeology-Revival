@@ -169,6 +169,10 @@ public class EntityLiopleurodon extends EntitySwimmingPrehistoric {
 
 	@Override
 	public void updateRiderPosition() {
+		if(this.getRidingPlayer() != null && this.func_152114_e(this.getRidingPlayer())){
+			super.updateRiderPosition();
+			return;
+		}
 		if (this.riddenByEntity != null && riddenByEntity instanceof EntityLivingBase) {
 			if (this.getAnimationTick() > 45) {
 				this.riddenByEntity.attackEntityFrom(DamageSource.causeMobDamage(this), ((EntityLivingBase) this.riddenByEntity).getMaxHealth());

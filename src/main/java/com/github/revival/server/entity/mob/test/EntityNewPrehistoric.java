@@ -452,7 +452,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		if (!this.onGround) {
 			return false;
 		}
-		if (!this.isInWater()) {
+		if (this.isInWater()) {
 			return false;
 		}
 		if (this.aiActivityType() == Activity.DIURINAL && !this.isDaytime()) {
@@ -476,6 +476,10 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	@Override
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
+		if(this.currentOrder == EnumOrderType.STAY && !this.isSitting()){
+			this.setSitting(true);
+			this.setSleeping(false);
+		}
 		if (this.getHunger() > this.getMaxHunger()) {
 			this.setHunger(this.getMaxHunger());
 		}
@@ -1623,7 +1627,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
 	public double getMountedYOffset()
 	{
-		return (double)this.height * 0.65D;
+		return (double)this.height * 0.75D;
 	}
 
 	@Override
