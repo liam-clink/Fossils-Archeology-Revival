@@ -292,7 +292,7 @@ public class ModelSarcosuchus extends ModelNewPrehistoric {
 		AdvancedModelRenderer[] tailParts = { this.tail1, this.tail2, this.tail3 };
 		AdvancedModelRenderer[] neckParts = { this.neck, this.head };
 		float speed = 0.1F;
-		float speed2 = 0.9F;
+		float speed2 = entity.isInWater() ? 0.45F : 0.9F;
 		if(((EntityNewPrehistoric) entity).isSkeleton()){
 			return;
 		}
