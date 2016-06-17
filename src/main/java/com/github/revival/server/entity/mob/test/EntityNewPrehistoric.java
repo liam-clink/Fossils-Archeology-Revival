@@ -403,11 +403,11 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
 		return false;
 	}
-	
-    @Override
-    public boolean canBePushed() {
-        return this.isSkeleton() ? false : super.canBePushed();
-    }
+
+	@Override
+	public boolean canBePushed() {
+		return this.isSkeleton() ? false : super.canBePushed();
+	}
 
 	public int getNearestBubbleBlock(int range, int type) {
 		for (int r = 1; r <= range; r++) {
@@ -476,7 +476,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	@Override
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
-		if(this.currentOrder == EnumOrderType.STAY && !this.isSitting()){
+		if (this.currentOrder == EnumOrderType.STAY && !this.isSitting()) {
 			this.setSitting(true);
 			this.setSleeping(false);
 		}
@@ -495,7 +495,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		if (this.ticksTillMate > 0) {
 			this.ticksTillMate--;
 		}
-		if(this.getRidingPlayer() != null){
+		if (this.getRidingPlayer() != null) {
 			this.stepHeight = 1;
 		}
 		int blockX = MathHelper.floor_double(this.posX);
@@ -793,10 +793,12 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 			baby = new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, new ItemStack(this.type.birdEggItem));
 		}
 		if (this.type.type == EnumMobType.DINOSAUR) {
-			// baby = new EntityItem(this.worldObj, this.posX, this.posY,
-			// this.posZ, new ItemStack(this.selfType.birdEggItem));
-			baby = new EntityDinoEgg(this.worldObj, this.type);
-			((EntityDinoEgg) baby).selfType = this.type;
+			if (Revival.CONFIG.eggsLikeChickens) {
+				baby = new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, new ItemStack(this.type.eggItem));
+			} else {
+				baby = new EntityDinoEgg(this.worldObj, this.type);
+				((EntityDinoEgg) baby).selfType = this.type;
+			}
 		}
 		return baby;
 	}
@@ -1268,7 +1270,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	public void playerFlyDown(EntityPlayer player) {}
 
 	public String getTexture() {
-		if(this.isSkeleton()){
+		if (this.isSkeleton()) {
 			return "fossil:textures/model/" + type.toString().toLowerCase() + "_0/" + type.toString().toLowerCase() + "_skeleton.png";
 		}
 		if (this.hasBabyTexture) {
@@ -1472,7 +1474,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
 	public abstract boolean canBeRidden();
 
-	public boolean canBeSteered(){
+	public boolean canBeSteered() {
 		return canBeRidden() && (this.getRidingPlayer() != null && this.func_152114_e(this.getRidingPlayer()));
 	}
 
@@ -1625,9 +1627,8 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		}
 	}
 
-	public double getMountedYOffset()
-	{
-		return (double)this.height * 0.75D;
+	public double getMountedYOffset() {
+		return (double) this.height * 0.75D;
 	}
 
 	@Override

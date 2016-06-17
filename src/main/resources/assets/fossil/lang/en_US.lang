@@ -951,3 +951,7 @@ item.dnaAlligator_Gar.name=Alligator Gar DNA
 item.dnaSturgeon.name=Sturgeon DNA
 prehistoric.autotame=You have tamed this 
 prehistoric.period=.
+achievement.deadDodo=Re-Extinction
+achievement.deadDodo.desc=Kill a Dodo.
+achievement.trexKill=Call Me Jaime
+achievement.trexKill=kill a Tyrannosaurus.

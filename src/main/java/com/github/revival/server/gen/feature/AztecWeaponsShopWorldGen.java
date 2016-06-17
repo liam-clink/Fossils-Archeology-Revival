@@ -2,13 +2,48 @@ package com.github.revival.server.gen.feature;
 
 import java.util.Random;
 
+import com.github.revival.server.block.FABlockRegistry;
+import com.github.revival.server.item.FAItemRegistry;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.tileentity.TileEntityChest;
+import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class AztecWeaponsShopWorldGen extends WorldGenerator {
+	protected static final WeightedRandomChestContent[] treasure = new WeightedRandomChestContent[]{
+		new WeightedRandomChestContent(FAItemRegistry.INSTANCE.relic, 0, 1, 2, 76),
+		new WeightedRandomChestContent(FAItemRegistry.INSTANCE.woodjavelin, 0, 1, 8, 50),
+		new WeightedRandomChestContent(FAItemRegistry.INSTANCE.stonejavelin, 0, 1, 8, 50),
+		new WeightedRandomChestContent(FAItemRegistry.INSTANCE.ironjavelin, 0, 1, 8, 25),
+		new WeightedRandomChestContent(FAItemRegistry.INSTANCE.goldjavelin, 0, 1, 8, 25),
+		new WeightedRandomChestContent(Items.wooden_sword, 0, 1, 1, 25),
+		new WeightedRandomChestContent(Items.stone_sword, 0, 1, 1, 25),
+		new WeightedRandomChestContent(Items.golden_sword, 0, 1, 1, 25),
+		new WeightedRandomChestContent(Item.getItemFromBlock(FABlockRegistry.INSTANCE.blockSkull), 0, 1, 2, 70),
+		new WeightedRandomChestContent(Item.getItemFromBlock(FABlockRegistry.INSTANCE.skullLantern), 0, 1, 2, 55),
+		new WeightedRandomChestContent(Item.getItemFromBlock(FABlockRegistry.INSTANCE.drum), 0, 1, 1, 38),
+		new WeightedRandomChestContent(FAItemRegistry.INSTANCE.potteryShards, 0, 1, 3, 80),
+		new WeightedRandomChestContent(FAItemRegistry.INSTANCE.goldjavelin, 0, 1, 1, 33),
+		new WeightedRandomChestContent(FAItemRegistry.INSTANCE.ironjavelin, 0, 1, 1, 56),
+		new WeightedRandomChestContent(FAItemRegistry.INSTANCE.stoneboard, 0, 1, 3, 75),
+		new WeightedRandomChestContent(Items.bone, 0, 1, 3, 85),
+		new WeightedRandomChestContent(Items.gold_ingot, 0, 1, 3, 90),
+		new WeightedRandomChestContent(Items.emerald, 0, 1, 3, 25),
+		new WeightedRandomChestContent(Items.coal, 0, 1, 7, 55),
+		new WeightedRandomChestContent(Item.getItemFromBlock(Blocks.bookshelf), 0, 1, 5, 55),
+		new WeightedRandomChestContent(Item.getItemFromBlock(Blocks.glowstone), 0, 1, 4, 65),
+		new WeightedRandomChestContent(Item.getItemFromBlock(Blocks.obsidian), 0, 1, 6, 55),
+		new WeightedRandomChestContent(FAItemRegistry.INSTANCE.recordNano_Discovering, 0, 1, 1, 6),
+		new WeightedRandomChestContent(Items.bowl, 0, 1, 8, 25),
+		new WeightedRandomChestContent(Item.getItemFromBlock(Blocks.tnt), 0, 1, 6, 45)
+
+	};
 	public boolean generate(World world, Random rand, int x, int y, int z) {
 		generate_r0(world, rand, x, y, z);
 		return true;
@@ -805,7 +840,7 @@ public class AztecWeaponsShopWorldGen extends WorldGenerator {
 		world.setBlock(x + 6, y + 3, z + 5, Blocks.dirt, 0, 3);
 		world.setBlock(x + 7, y + 3, z + 5, Blocks.dirt, 0, 3);
 		world.setBlock(x + 8, y + 3, z + 5, Blocks.stonebrick, 0, 3);
-		world.setBlock(x + 9, y + 3, z + 5, Blocks.furnace, 3, 3);
+		//world.setBlock(x + 9, y + 3, z + 5, Blocks.furnace, 3, 3);
 		world.setBlock(x + 10, y + 3, z + 5, Blocks.stonebrick, 0, 3);
 		world.setBlock(x + 11, y + 3, z + 5, Blocks.dirt, 0, 3);
 		world.setBlock(x + 12, y + 3, z + 5, Blocks.dirt, 0, 3);
@@ -859,13 +894,13 @@ public class AztecWeaponsShopWorldGen extends WorldGenerator {
 		world.setBlock(x + 3, y + 3, z + 8, Blocks.dirt, 0, 3);
 		world.setBlock(x + 4, y + 3, z + 8, Blocks.dirt, 0, 3);
 		world.setBlock(x + 5, y + 3, z + 8, Blocks.stonebrick, 0, 3);
-		world.setBlock(x + 6, y + 3, z + 8, Blocks.furnace, 3, 3);
+		//world.setBlock(x + 6, y + 3, z + 8, Blocks.furnace, 3, 3);
 		world.setBlock(x + 7, y + 3, z + 8, Blocks.air, 0, 3);
 		world.setBlock(x + 8, y + 3, z + 8, Blocks.air, 0, 3);
 		world.setBlock(x + 9, y + 3, z + 8, Blocks.obsidian, 0, 3);
 		world.setBlock(x + 10, y + 3, z + 8, Blocks.air, 0, 3);
 		world.setBlock(x + 11, y + 3, z + 8, Blocks.air, 0, 3);
-		world.setBlock(x + 12, y + 3, z + 8, Blocks.furnace, 4, 3);
+		//world.setBlock(x + 12, y + 3, z + 8, Blocks.furnace, 4, 3);
 		world.setBlock(x + 13, y + 3, z + 8, Blocks.stonebrick, 0, 3);
 		world.setBlock(x + 14, y + 3, z + 8, Blocks.dirt, 0, 3);
 		world.setBlock(x + 15, y + 3, z + 8, Blocks.dirt, 0, 3);
@@ -1750,7 +1785,7 @@ public class AztecWeaponsShopWorldGen extends WorldGenerator {
 		world.setBlock(x + 6, y + 7, z + 8, Blocks.stonebrick, 0, 3);
 		world.setBlock(x + 7, y + 7, z + 8, Blocks.glowstone, 0, 3);
 		world.setBlock(x + 8, y + 7, z + 8, Blocks.stonebrick, 0, 3);
-		world.setBlock(x + 9, y + 7, z + 8, Blocks.bedrock, 0, 3);
+		world.setBlock(x + 9, y + 7, z + 8, Blocks.gold_block, 0, 3);
 		world.setBlock(x + 10, y + 7, z + 8, Blocks.stonebrick, 0, 3);
 		world.setBlock(x + 11, y + 7, z + 8, Blocks.glowstone, 0, 3);
 		world.setBlock(x + 12, y + 7, z + 8, Blocks.stonebrick, 0, 3);
@@ -2793,7 +2828,7 @@ public class AztecWeaponsShopWorldGen extends WorldGenerator {
 		world.setBlock(x + 5, y + 3, z + 12, Blocks.dirt, 0, 3);
 		world.setBlock(x + 5, y + 3, z + 11, Blocks.dirt, 0, 3);
 		world.setBlock(x + 5, y + 3, z + 10, Blocks.stonebrick, 0, 3);
-		world.setBlock(x + 5, y + 3, z + 9, Blocks.furnace, 3, 3);
+		//world.setBlock(x + 5, y + 3, z + 9, Blocks.furnace, 3, 3);
 		world.setBlock(x + 5, y + 3, z + 8, Blocks.stonebrick, 0, 3);
 		world.setBlock(x + 5, y + 3, z + 7, Blocks.dirt, 0, 3);
 		world.setBlock(x + 5, y + 3, z + 6, Blocks.dirt, 0, 3);
@@ -2847,13 +2882,13 @@ public class AztecWeaponsShopWorldGen extends WorldGenerator {
 		world.setBlock(x + 8, y + 3, z + 15, Blocks.dirt, 0, 3);
 		world.setBlock(x + 8, y + 3, z + 14, Blocks.dirt, 0, 3);
 		world.setBlock(x + 8, y + 3, z + 13, Blocks.stonebrick, 0, 3);
-		world.setBlock(x + 8, y + 3, z + 12, Blocks.furnace, 3, 3);
+		//world.setBlock(x + 8, y + 3, z + 12, Blocks.furnace, 3, 3);
 		world.setBlock(x + 8, y + 3, z + 11, Blocks.air, 0, 3);
 		world.setBlock(x + 8, y + 3, z + 10, Blocks.air, 0, 3);
 		world.setBlock(x + 8, y + 3, z + 9, Blocks.obsidian, 0, 3);
 		world.setBlock(x + 8, y + 3, z + 8, Blocks.air, 0, 3);
 		world.setBlock(x + 8, y + 3, z + 7, Blocks.air, 0, 3);
-		world.setBlock(x + 8, y + 3, z + 6, Blocks.furnace, 4, 3);
+		//world.setBlock(x + 8, y + 3, z + 6, Blocks.furnace, 4, 3);
 		world.setBlock(x + 8, y + 3, z + 5, Blocks.stonebrick, 0, 3);
 		world.setBlock(x + 8, y + 3, z + 4, Blocks.dirt, 0, 3);
 		world.setBlock(x + 8, y + 3, z + 3, Blocks.dirt, 0, 3);
@@ -3730,7 +3765,7 @@ public class AztecWeaponsShopWorldGen extends WorldGenerator {
 		world.setBlock(x + 8, y + 7, z + 12, Blocks.stonebrick, 0, 3);
 		world.setBlock(x + 8, y + 7, z + 11, Blocks.glowstone, 0, 3);
 		world.setBlock(x + 8, y + 7, z + 10, Blocks.stonebrick, 0, 3);
-		world.setBlock(x + 8, y + 7, z + 9, Blocks.bedrock, 0, 3);
+		world.setBlock(x + 8, y + 7, z + 9, Blocks.gold_block, 0, 3);
 		world.setBlock(x + 8, y + 7, z + 8, Blocks.stonebrick, 0, 3);
 		world.setBlock(x + 8, y + 7, z + 7, Blocks.glowstone, 0, 3);
 		world.setBlock(x + 8, y + 7, z + 6, Blocks.stonebrick, 0, 3);
@@ -4773,7 +4808,7 @@ public class AztecWeaponsShopWorldGen extends WorldGenerator {
 		world.setBlock(x + 12, y + 3, z + 12, Blocks.dirt, 0, 3);
 		world.setBlock(x + 11, y + 3, z + 12, Blocks.dirt, 0, 3);
 		world.setBlock(x + 10, y + 3, z + 12, Blocks.stonebrick, 0, 3);
-		world.setBlock(x + 9, y + 3, z + 12, Blocks.furnace, 3, 3);
+		//world.setBlock(x + 9, y + 3, z + 12, Blocks.furnace, 3, 3);
 		world.setBlock(x + 8, y + 3, z + 12, Blocks.stonebrick, 0, 3);
 		world.setBlock(x + 7, y + 3, z + 12, Blocks.dirt, 0, 3);
 		world.setBlock(x + 6, y + 3, z + 12, Blocks.dirt, 0, 3);
@@ -4827,13 +4862,13 @@ public class AztecWeaponsShopWorldGen extends WorldGenerator {
 		world.setBlock(x + 15, y + 3, z + 9, Blocks.dirt, 0, 3);
 		world.setBlock(x + 14, y + 3, z + 9, Blocks.dirt, 0, 3);
 		world.setBlock(x + 13, y + 3, z + 9, Blocks.stonebrick, 0, 3);
-		world.setBlock(x + 12, y + 3, z + 9, Blocks.furnace, 3, 3);
+		//world.setBlock(x + 12, y + 3, z + 9, Blocks.furnace, 3, 3);
 		world.setBlock(x + 11, y + 3, z + 9, Blocks.air, 0, 3);
 		world.setBlock(x + 10, y + 3, z + 9, Blocks.air, 0, 3);
 		world.setBlock(x + 9, y + 3, z + 9, Blocks.obsidian, 0, 3);
 		world.setBlock(x + 8, y + 3, z + 9, Blocks.air, 0, 3);
 		world.setBlock(x + 7, y + 3, z + 9, Blocks.air, 0, 3);
-		world.setBlock(x + 6, y + 3, z + 9, Blocks.furnace, 4, 3);
+		//world.setBlock(x + 6, y + 3, z + 9, Blocks.furnace, 4, 3);
 		world.setBlock(x + 5, y + 3, z + 9, Blocks.stonebrick, 0, 3);
 		world.setBlock(x + 4, y + 3, z + 9, Blocks.dirt, 0, 3);
 		world.setBlock(x + 3, y + 3, z + 9, Blocks.dirt, 0, 3);
@@ -5718,7 +5753,7 @@ public class AztecWeaponsShopWorldGen extends WorldGenerator {
 		world.setBlock(x + 12, y + 7, z + 9, Blocks.stonebrick, 0, 3);
 		world.setBlock(x + 11, y + 7, z + 9, Blocks.glowstone, 0, 3);
 		world.setBlock(x + 10, y + 7, z + 9, Blocks.stonebrick, 0, 3);
-		world.setBlock(x + 9, y + 7, z + 9, Blocks.bedrock, 0, 3);
+		world.setBlock(x + 9, y + 7, z + 9, Blocks.gold_block, 0, 3);
 		world.setBlock(x + 8, y + 7, z + 9, Blocks.stonebrick, 0, 3);
 		world.setBlock(x + 7, y + 7, z + 9, Blocks.glowstone, 0, 3);
 		world.setBlock(x + 6, y + 7, z + 9, Blocks.stonebrick, 0, 3);
@@ -6761,7 +6796,7 @@ public class AztecWeaponsShopWorldGen extends WorldGenerator {
 		world.setBlock(x + 12, y + 3, z + 6, Blocks.dirt, 0, 3);
 		world.setBlock(x + 12, y + 3, z + 7, Blocks.dirt, 0, 3);
 		world.setBlock(x + 12, y + 3, z + 8, Blocks.stonebrick, 0, 3);
-		world.setBlock(x + 12, y + 3, z + 9, Blocks.furnace, 3, 3);
+		//world.setBlock(x + 12, y + 3, z + 9, Blocks.furnace, 3, 3);
 		world.setBlock(x + 12, y + 3, z + 10, Blocks.stonebrick, 0, 3);
 		world.setBlock(x + 12, y + 3, z + 11, Blocks.dirt, 0, 3);
 		world.setBlock(x + 12, y + 3, z + 12, Blocks.dirt, 0, 3);
@@ -6815,13 +6850,13 @@ public class AztecWeaponsShopWorldGen extends WorldGenerator {
 		world.setBlock(x + 9, y + 3, z + 3, Blocks.dirt, 0, 3);
 		world.setBlock(x + 9, y + 3, z + 4, Blocks.dirt, 0, 3);
 		world.setBlock(x + 9, y + 3, z + 5, Blocks.stonebrick, 0, 3);
-		world.setBlock(x + 9, y + 3, z + 6, Blocks.furnace, 3, 3);
+		//world.setBlock(x + 9, y + 3, z + 6, Blocks.furnace, 3, 3);
 		world.setBlock(x + 9, y + 3, z + 7, Blocks.air, 0, 3);
 		world.setBlock(x + 9, y + 3, z + 8, Blocks.air, 0, 3);
 		world.setBlock(x + 9, y + 3, z + 9, Blocks.obsidian, 0, 3);
 		world.setBlock(x + 9, y + 3, z + 10, Blocks.air, 0, 3);
 		world.setBlock(x + 9, y + 3, z + 11, Blocks.air, 0, 3);
-		world.setBlock(x + 9, y + 3, z + 12, Blocks.furnace, 4, 3);
+		//world.setBlock(x + 9, y + 3, z + 12, Blocks.furnace, 4, 3);
 		world.setBlock(x + 9, y + 3, z + 13, Blocks.stonebrick, 0, 3);
 		world.setBlock(x + 9, y + 3, z + 14, Blocks.dirt, 0, 3);
 		world.setBlock(x + 9, y + 3, z + 15, Blocks.dirt, 0, 3);
@@ -7698,7 +7733,7 @@ public class AztecWeaponsShopWorldGen extends WorldGenerator {
 		world.setBlock(x + 9, y + 7, z + 6, Blocks.stonebrick, 0, 3);
 		world.setBlock(x + 9, y + 7, z + 7, Blocks.glowstone, 0, 3);
 		world.setBlock(x + 9, y + 7, z + 8, Blocks.stonebrick, 0, 3);
-		world.setBlock(x + 9, y + 7, z + 9, Blocks.bedrock, 0, 3);
+		world.setBlock(x + 9, y + 7, z + 9, Blocks.gold_block, 0, 3);
 		world.setBlock(x + 9, y + 7, z + 10, Blocks.stonebrick, 0, 3);
 		world.setBlock(x + 9, y + 7, z + 11, Blocks.glowstone, 0, 3);
 		world.setBlock(x + 9, y + 7, z + 12, Blocks.stonebrick, 0, 3);
@@ -7917,5 +7952,15 @@ public class AztecWeaponsShopWorldGen extends WorldGenerator {
 		world.setBlock(x + 10, y + 11, z + 12, Blocks.stone_brick_stairs, 3, 3);
 		world.setBlock(x + 9, y + 11, z + 6, Blocks.stone_brick_stairs, 2, 3);
 		return true;
+	}
+
+
+	protected void chestWithLoot(int i1, int j1, int k1, World world, Random rand, WeightedRandomChestContent[] content, int i) {
+		world.setBlock(i1, j1, k1, Blocks.chest, 0, 2);
+		TileEntityChest tileentitychest = (TileEntityChest) world.getTileEntity(i1, j1, k1);
+
+		if (tileentitychest != null) {
+			WeightedRandomChestContent.generateChestContents(rand, content, tileentitychest, i);
+		}
 	}
 }
