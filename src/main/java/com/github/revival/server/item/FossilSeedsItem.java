@@ -18,7 +18,7 @@ import com.github.revival.server.block.FABlockRegistry;
 public class FossilSeedsItem extends Item
 
 {
-    private static final String[] fossilSeeds = new String[]{"dillhoffia", "sarracina", "cephalotaxus", "licopodiophyta", "paleopanax", "zamites", "bennettitales", "welwitschia", "horsetail", "tempskya", "vaccinium", "crataegus", "osmunda"};
+    private static final String[] fossilSeeds = new String[]{"dillhoffia", "sarracina", "cephalotaxus", "licopodiophyta", "paleopanax", "zamites", "bennettitales", "welwitschia", "horsetail", "tempskya", "vaccinium", "osmunda", "crataegus"};
     public boolean isFossil;
     private IIcon[] textures;
 
@@ -107,8 +107,8 @@ public class FossilSeedsItem extends Item
                 world.setBlock(x, y + 1, z, FABlockRegistry.INSTANCE.horsetail_small);
                 return true;
             case 9:
-                if(((BlockTempskya)FABlockRegistry.INSTANCE.tempskya).canPlaceBlockAt(world, x, y, z)){
-                	((BlockTempskya)FABlockRegistry.INSTANCE.tempskya).makeTempskya(world, x, y, z);
+                if(((BlockTempskya)FABlockRegistry.INSTANCE.tempskya).canPlaceBlockAt(world, x, y + 1, z)){
+                	((BlockTempskya)FABlockRegistry.INSTANCE.tempskya).makeTempskya(world, x, y + 1, z);
                 	return true;
                 }
             case 10:
@@ -118,6 +118,7 @@ public class FossilSeedsItem extends Item
                 world.setBlock(x, y + 1, z, FABlockRegistry.INSTANCE.osmunda);
             case 12:
                 world.setBlock(x, y + 1, z, FABlockRegistry.INSTANCE.crataegus);
+                world.setBlock(x, y + 2, z, FABlockRegistry.INSTANCE.crataegus, 8, 3);
                 return true;
         }
         return false;
