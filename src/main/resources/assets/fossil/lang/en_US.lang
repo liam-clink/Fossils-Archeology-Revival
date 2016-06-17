@@ -1,4 +1,4 @@
-ï»¿#BuildÂ 7.2.0 - UpdatedÂ June 04Â 2015
+﻿ï»¿#BuildÂ 7.2.0 - UpdatedÂ June 04Â 2015
 #English (en_US) Localization File
 #Contribution Credits - 
 #Keys last updated June 04 2015
@@ -934,3 +934,5 @@ item.cookedAlligator_Gar.name=Cooked Alligator Gar Meat
 item.cookedSturgeon.name=Cooked Sturgeon Meat
 item.dnaAlligator_Gar.name=Alligator Gar DNA
 item.dnaSturgeon.name=Sturgeon DNA
+prehistoric.autotame=You have tamed this 
+prehistoric.period=.

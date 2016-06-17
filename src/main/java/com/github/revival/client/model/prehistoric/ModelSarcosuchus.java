@@ -216,13 +216,12 @@ public class ModelSarcosuchus extends ModelNewPrehistoric {
 
 	public void animate(IAnimatedEntity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		animator.update(entity);
-		blockMovement(f, f1, f2, f3, f4, f5, (Entity) entity);
 		this.resetToDefaultPose();
 		setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
 		animator.setAnimation(EntitySarcosuchus.ATTACK_ANIMATION);
 		animator.startKeyframe(5);
 		ModelUtils.rotate(animator, head, -31F, 0, 0);
-		ModelUtils.rotate(animator, head, 44F, 0, 0);
+		ModelUtils.rotate(animator, LowerJaw, 44F, 0, 0);
 		ModelUtils.rotate(animator, neck, 5F, 0, 0);
 		animator.endKeyframe();
 		animator.resetKeyframe(10);
@@ -295,6 +294,11 @@ public class ModelSarcosuchus extends ModelNewPrehistoric {
 		float speed = 0.1F;
 		float speed2 = 0.9F;
 		this.bob(lowerBody, speed, 0.7F, false, entity.ticksExisted, 1);
+		this.bob(leftFrontThigh, speed, -0.7F, false, entity.ticksExisted, 1);
+		this.bob(rightFrontThigh, speed, -0.7F, false, entity.ticksExisted, 1);
+		this.bob(rightHindThigh, speed, -0.7F, false, entity.ticksExisted, 1);
+		this.bob(leftHindThigh, speed, -0.7F, false, entity.ticksExisted, 1);
+
 		this.walk(leftFrontThigh, speed2, 0.6F, false, 0F, 0.4F, f, f1);
 		this.walk(leftFrontLeg, speed2, 0.2F, false, 0F, -0.6F, f, f1);
 		this.walk(leftFrontFoot, speed2, -0.6F, true, 2.5F, -0.4F, f, f1);

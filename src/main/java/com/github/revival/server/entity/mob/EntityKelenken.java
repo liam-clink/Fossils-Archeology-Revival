@@ -183,4 +183,9 @@ public class EntityKelenken extends EntityNewPrehistoric {
     public int getMaxHunger() {
         return 75;
     }
+    
+	@Override
+	public boolean canBeRidden() {
+		return true;
+	}
 }

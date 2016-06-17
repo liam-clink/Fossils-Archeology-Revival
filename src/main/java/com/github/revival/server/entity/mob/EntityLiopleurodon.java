@@ -193,4 +193,9 @@ public class EntityLiopleurodon extends EntitySwimmingPrehistoric {
 	public boolean attackEntityAsMob(Entity entityIn) {
 		return true;
 	}
+	
+	@Override
+	public boolean canBeRidden() {
+		return true;
+	}
 }

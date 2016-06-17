@@ -187,4 +187,9 @@ public class EntitySmilodon extends EntityNewPrehistoric {
 	public int getMaxHunger() {
 		return 100;
 	}
+	
+	@Override
+	public boolean canBeRidden() {
+		return false;
+	}
 }

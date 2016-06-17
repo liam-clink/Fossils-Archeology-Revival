@@ -184,4 +184,9 @@ public class EntityAllosaurus extends EntityNewPrehistoric {
     public int getMaxHunger() {
         return 125;
     }
+
+	@Override
+	public boolean canBeRidden() {
+		return true;
+	}
 }

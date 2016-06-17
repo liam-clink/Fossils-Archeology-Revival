@@ -286,4 +286,9 @@ public class EntitySarcosuchus extends EntitySwimmingPrehistoric {
 			this.isSwimming = swimming;
 		}
 	}
+	
+	@Override
+	public boolean canBeRidden() {
+		return true;
+	}
 }

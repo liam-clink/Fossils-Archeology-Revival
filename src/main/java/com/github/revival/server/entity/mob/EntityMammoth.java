@@ -281,4 +281,9 @@ public class EntityMammoth extends EntityNewPrehistoric implements IShearable {
 	public int getMaxHunger() {
 		return 150;
 	}
+	
+	@Override
+	public boolean canBeRidden() {
+		return true;
+	}
 }

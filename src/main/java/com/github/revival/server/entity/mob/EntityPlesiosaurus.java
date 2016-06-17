@@ -154,4 +154,8 @@ public class EntityPlesiosaurus extends EntitySwimmingPrehistoric {
 		return new Animation[] { SPEAK_ANIMATION, ATTACK_ANIMATION, FISH_ANIMATION };
 	}
 
+	@Override
+	public boolean canBeRidden() {
+		return false;
+	}
 }

@@ -183,4 +183,9 @@ public class EntityStegosaurus extends EntityNewPrehistoric {
 	public int getMaxHunger() {
 		return 175;
 	}
+	
+	@Override
+	public boolean canBeRidden() {
+		return false;
+	}
 }

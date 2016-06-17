@@ -5,6 +5,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
+import com.github.revival.server.enums.EnumPrehistoricMood;
 
 import fossilsarcheology.api.FoodMappings;
 import net.minecraft.command.IEntitySelector;
@@ -53,12 +54,16 @@ public class DinoAIHunt extends EntityAITarget {
 				this.targetEntity = (EntityLivingBase) list.get(0);
 				if(this.taskOwner instanceof EntityNewPrehistoric){
 					EntityNewPrehistoric prehistoric = (EntityNewPrehistoric)this.taskOwner;
+					if(!prehistoric.isMovementBlocked() && prehistoric.func_152114_e(targetEntity) && (prehistoric.getMoodFace() == EnumPrehistoricMood.ANGRY || prehistoric.getMoodFace() == EnumPrehistoricMood.SAD)){
+						return true;
+					}
 					if(prehistoric.isMovementBlocked() && !prehistoric.canDinoHunt(targetEntity, true) && prehistoric.isHungry()){
 						return false;
 					}
 					if(FoodMappings.instance().getEntityFoodAmount(this.targetEntity.getClass(), prehistoric.type.diet) == 0){
 						return false;
 					}
+			
 				}
 				return true;
 			}

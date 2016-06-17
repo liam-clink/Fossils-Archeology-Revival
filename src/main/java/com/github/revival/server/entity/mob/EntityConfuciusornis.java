@@ -140,4 +140,9 @@ public class EntityConfuciusornis extends EntityFlyingPrehistoric {
     public int getMaxHunger() {
         return 25;
     }
+    
+	@Override
+	public boolean canBeRidden() {
+		return false;
+	}
 }

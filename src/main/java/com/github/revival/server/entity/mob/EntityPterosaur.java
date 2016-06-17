@@ -150,4 +150,9 @@ public class EntityPterosaur extends EntityFlyingPrehistoric {
 	public int getMaxHunger() {
 		return 50;
 	}
+	
+	@Override
+	public boolean canBeRidden() {
+		return false;
+	}
 }

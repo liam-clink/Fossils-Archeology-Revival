@@ -206,4 +206,9 @@ public class EntityMosasaurus extends EntitySwimmingPrehistoric {
 	public Animation[] getAnimations() {
 		return new Animation[] { SPEAK_ANIMATION, ATTACK_ANIMATION, SHAKE_ANIMATION };
 	}
+	
+	@Override
+	public boolean canBeRidden() {
+		return false;
+	}
 }

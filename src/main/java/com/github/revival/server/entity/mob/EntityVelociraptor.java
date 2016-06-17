@@ -210,4 +210,9 @@ public class EntityVelociraptor extends EntityNewPrehistoric {
 	public int getMaxHunger() {
 		return 75;
 	}
+	
+	@Override
+	public boolean canBeRidden() {
+		return false;
+	}
 }

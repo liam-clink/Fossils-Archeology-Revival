@@ -1027,7 +1027,6 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 				}
 			} else {
 				if (itemstack.getItem() == Items.bone) {
-					// this.increaseDinoAge();
 
 					if (!player.capabilities.isCreativeMode) {
 						--itemstack.stackSize;
@@ -1140,15 +1139,13 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 					}
 
 					if (FMLCommonHandler.instance().getSide().isClient() && itemstack.getItem() == FAItemRegistry.INSTANCE.dinoPedia) {
-
 						this.setPedia();
 						player.openGui(Revival.INSTANCE, 4, this.worldObj, (int) this.posX, (int) this.posY, (int) this.posZ);
 						return true;
 					}
 
-					if (itemstack.getItem() == FAItemRegistry.INSTANCE.whip && this.type.isRideable() && this.isAdult() && !this.worldObj.isRemote) {
-
-						if (this.isTamed() && func_152114_e(player)) {
+					if (itemstack.getItem() == FAItemRegistry.INSTANCE.whip && this.aiTameType() != Taming.NONE && this.isAdult() && !this.worldObj.isRemote) {
+						if (this.isTamed() && func_152114_e(player) && this.canBeRidden()) {
 							if (this.getRidingPlayer() == null) {
 								Revival.NETWORK_WRAPPER.sendToAll(new MessageFoodParticles(getEntityId(), FABlockRegistry.INSTANCE.volcanicRock));
 								this.setOrder(EnumOrderType.WANDER);
@@ -1158,11 +1155,12 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 								Revival.NETWORK_WRAPPER.sendToAll(new MessageFoodParticles(getEntityId(), FABlockRegistry.INSTANCE.volcanicRock));
 								this.setMood(this.getMood() - 1);
 							}
-						} else {
+						} else if (this.aiTameType() != Taming.BLUEGEM && this.aiTameType() != Taming.GEM) {
 
 							this.setMood(this.getMood() - 1);
 							Revival.NETWORK_WRAPPER.sendToAll(new MessageFoodParticles(getEntityId(), FABlockRegistry.INSTANCE.volcanicRock));
-							if (getRNG().nextInt(15) == 0) {
+							if (getRNG().nextInt(5) == 0) {
+								Revival.showMessage(StatCollector.translateToLocal("prehistoric.autotame") + this.getCommandSenderName() + StatCollector.translateToLocal("prehistoric.period"), player);
 								this.setMood(this.getMood() - 25);
 								this.setTamed(true);
 								Revival.NETWORK_WRAPPER.sendToAll(new MessageFoodParticles(getEntityId(), Item.getIdFromItem(Items.gold_ingot)));
@@ -1445,6 +1443,12 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 			}
 		}
 	}
+	
+	public abstract boolean canBeRidden();
+	
+	public boolean canBeSteered(){
+		return canBeRidden() && (this.getRidingPlayer() != null && this.func_152114_e(this.getRidingPlayer()));
+	}
 
 	public void procreate(EntityNewPrehistoric mob) {
 		for (int i = 0; i < 7; ++i) {
@@ -1575,17 +1579,17 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
 	protected void dropFewItems(boolean bool, int rand) {
 		int j = this.rand.nextInt(3) + this.rand.nextInt(1 + rand);
-		if(this.type.type == EnumMobType.BIRD || this.type.type == EnumMobType.TERRORBIRD){
+		if (this.type.type == EnumMobType.BIRD || this.type.type == EnumMobType.TERRORBIRD) {
 			for (int k = 0; k < j; ++k) {
 				this.dropItem(Items.feather, 1);
 			}
 		}
 		if (this.isBurning() && this.type.cookedFoodItem != null) {
 			this.dropItem(this.type.cookedFoodItem, Math.min(this.getAgeInDays(), this.getAdultAge()));
-		} else if(this.type.foodItem != null){
+		} else if (this.type.foodItem != null) {
 			this.dropItem(this.type.foodItem, Math.min(this.getAgeInDays(), this.getAdultAge()));
 		}
-		if(EnumDinoBones.get(this.type) != null){
+		if (EnumDinoBones.get(this.type) != null) {
 			this.entityDropItem(new ItemStack(FAItemRegistry.INSTANCE.skull, this.rand.nextInt(1), EnumDinoBones.get(this.type).ordinal()), 0);
 			this.entityDropItem(new ItemStack(FAItemRegistry.INSTANCE.armBone, this.rand.nextInt(2), EnumDinoBones.get(this.type).ordinal()), 0);
 			this.entityDropItem(new ItemStack(FAItemRegistry.INSTANCE.dinoRibCage, this.rand.nextInt(1), EnumDinoBones.get(this.type).ordinal()), 0);
@@ -1595,6 +1599,11 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		}
 	}
 
+    public double getMountedYOffset()
+    {
+        return (double)this.height * 0.55D;
+    }
+    
 	@Override
 	public EntityAgeable createChild(EntityAgeable entity) {
 		return null;
