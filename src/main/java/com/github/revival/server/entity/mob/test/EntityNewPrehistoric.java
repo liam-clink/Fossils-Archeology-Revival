@@ -1,12 +1,65 @@
 package com.github.revival.server.entity.mob.test;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+
+import net.ilexiconn.llibrary.client.model.tools.ChainBuffer;
+import net.ilexiconn.llibrary.server.animation.Animation;
+import net.ilexiconn.llibrary.server.animation.AnimationHandler;
+import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockBush;
+import net.minecraft.block.BlockLiquid;
+import net.minecraft.block.material.Material;
+import net.minecraft.command.IEntitySelector;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.IEntityLivingData;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.monster.IMob;
+import net.minecraft.entity.passive.EntityTameable;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.MathHelper;
+import net.minecraft.util.StatCollector;
+import net.minecraft.util.Vec3;
+import net.minecraft.world.World;
+
 import com.github.revival.Revival;
 import com.github.revival.server.api.IPrehistoricAI;
 import com.github.revival.server.block.FABlockRegistry;
 import com.github.revival.server.block.entity.TileEntityNewFeeder;
 import com.github.revival.server.entity.EntityDinoEgg;
-import com.github.revival.server.enums.*;
-import com.github.revival.server.enums.EnumPrehistoricAI.*;
+import com.github.revival.server.enums.EnumAnimation;
+import com.github.revival.server.enums.EnumDinoBones;
+import com.github.revival.server.enums.EnumMobType;
+import com.github.revival.server.enums.EnumOrderType;
+import com.github.revival.server.enums.EnumPrehistoric;
+import com.github.revival.server.enums.EnumPrehistoricAI.Activity;
+import com.github.revival.server.enums.EnumPrehistoricAI.Attacking;
+import com.github.revival.server.enums.EnumPrehistoricAI.Climbing;
+import com.github.revival.server.enums.EnumPrehistoricAI.Following;
+import com.github.revival.server.enums.EnumPrehistoricAI.Jumping;
+import com.github.revival.server.enums.EnumPrehistoricAI.Moving;
+import com.github.revival.server.enums.EnumPrehistoricAI.Response;
+import com.github.revival.server.enums.EnumPrehistoricAI.Stalking;
+import com.github.revival.server.enums.EnumPrehistoricAI.Taming;
+import com.github.revival.server.enums.EnumPrehistoricAI.Untaming;
+import com.github.revival.server.enums.EnumPrehistoricAI.WaterAbility;
+import com.github.revival.server.enums.EnumPrehistoricMood;
+import com.github.revival.server.enums.EnumSituation;
 import com.github.revival.server.handler.LocalizationStrings;
 import com.github.revival.server.item.FAItemRegistry;
 import com.github.revival.server.message.MessageFoodParticles;
@@ -19,36 +72,6 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import fossilsarcheology.api.EnumDiet;
 import fossilsarcheology.api.FoodMappings;
-import net.ilexiconn.llibrary.client.model.tools.ChainBuffer;
-import net.ilexiconn.llibrary.server.animation.Animation;
-import net.ilexiconn.llibrary.server.animation.AnimationHandler;
-import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockBush;
-import net.minecraft.block.BlockLiquid;
-import net.minecraft.block.material.Material;
-import net.minecraft.command.IEntitySelector;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.monster.IMob;
-import net.minecraft.entity.passive.EntityTameable;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.potion.Potion;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.*;
-import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeHooks;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
 
 public abstract class EntityNewPrehistoric extends EntityTameable implements IPrehistoricAI, IAnimatedEntity {
 
@@ -117,7 +140,6 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		this.baseSpeed = baseSpeed;
 		this.maxSpeed = maxSpeed;
 		this.updateAbilities();
-		this.setHealth(this.getMaxHealth());
 	}
 
 	public static boolean isCannibalistic() {
@@ -201,12 +223,12 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		data = super.onSpawnWithEgg(data);
 		Random random = new Random();
 		this.setAgeInDays(this.getAdultAge());
-		this.heal(200);
 		this.setSpawnValues();
 		this.setGender(random.nextInt(2));
 		this.updateAbilities();
 		ticksTillPlay = 0;
 		ticksTillMate = 24000;
+		this.heal(1000);
 		return data;
 	}
 
@@ -422,6 +444,9 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		if (!this.onGround) {
 			return false;
 		}
+		if (!this.isInWater()) {
+			return false;
+		}
 		if (this.aiActivityType() == Activity.DIURINAL && !this.isDaytime()) {
 			return true;
 		}
@@ -526,7 +551,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 			ticksSlept = 0;
 		}
 
-		if (!worldObj.isRemote && !this.isInWater() && (!this.canSleep() || (this.isSleeping() && ticksSlept > 200 && this.getRNG().nextInt(1000) == 1 || this.getAttackTarget() != null))) {
+		if (!worldObj.isRemote && (!this.canSleep() || (this.isSleeping() && ticksSlept > 200 && this.getRNG().nextInt(1000) == 1 || this.getAttackTarget() != null || this.isInWater()))) {
 			this.setSitting(false);
 			this.setSleeping(false);
 			ticksSlept = 0;
@@ -987,7 +1012,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	@Override
 	public void jump() {
 		super.jump();
-        this.motionY = 0.5D;
+		this.motionY = 0.5D;
 	}
 
 	@Override
@@ -1546,6 +1571,28 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 			}
 		}
 		return false;
+	}
+
+	protected void dropFewItems(boolean bool, int rand) {
+		int j = this.rand.nextInt(3) + this.rand.nextInt(1 + rand);
+		if(this.type.type == EnumMobType.BIRD || this.type.type == EnumMobType.TERRORBIRD){
+			for (int k = 0; k < j; ++k) {
+				this.dropItem(Items.feather, 1);
+			}
+		}
+		if (this.isBurning() && this.type.cookedFoodItem != null) {
+			this.dropItem(this.type.cookedFoodItem, Math.min(this.getAgeInDays(), this.getAdultAge()));
+		} else if(this.type.foodItem != null){
+			this.dropItem(this.type.foodItem, Math.min(this.getAgeInDays(), this.getAdultAge()));
+		}
+		if(EnumDinoBones.get(this.type) != null){
+			this.entityDropItem(new ItemStack(FAItemRegistry.INSTANCE.skull, this.rand.nextInt(1), EnumDinoBones.get(this.type).ordinal()), 0);
+			this.entityDropItem(new ItemStack(FAItemRegistry.INSTANCE.armBone, this.rand.nextInt(2), EnumDinoBones.get(this.type).ordinal()), 0);
+			this.entityDropItem(new ItemStack(FAItemRegistry.INSTANCE.dinoRibCage, this.rand.nextInt(1), EnumDinoBones.get(this.type).ordinal()), 0);
+			this.entityDropItem(new ItemStack(FAItemRegistry.INSTANCE.vertebrae, this.rand.nextInt(5), EnumDinoBones.get(this.type).ordinal()), 0);
+			this.entityDropItem(new ItemStack(FAItemRegistry.INSTANCE.foot, this.rand.nextInt(2), EnumDinoBones.get(this.type).ordinal()), 0);
+			this.entityDropItem(new ItemStack(FAItemRegistry.INSTANCE.claw, this.rand.nextInt(2), EnumDinoBones.get(this.type).ordinal()), 0);
+		}
 	}
 
 	@Override

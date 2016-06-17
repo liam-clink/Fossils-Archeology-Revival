@@ -42,13 +42,13 @@ import com.github.revival.server.item.FAItemRegistry;
 
 public class EntitySarcosuchus extends EntitySwimmingPrehistoric {
 
-	public static Animation ROLL_ANIMATION = Animation.create(65);
+	public static Animation ROLL_ANIMATION = Animation.create(115);
 	private boolean isSwimming;
 	public float swimProgress;
 	
     public EntitySarcosuchus(World world) {
-        super(world, EnumPrehistoric.Sarcosuchus, 1, 3, 5, 70, 0.25, 0.25);
-        this.setSize(4.0F, 1.0F);
+        super(world, EnumPrehistoric.Sarcosuchus, 1, 3, 15, 70, 0.25, 0.25);
+        this.setSize(2.0F, 1.0F);
         isAmphibious = true;
 		this.getNavigator().setAvoidsWater(false);
 		this.tasks.addTask(1, this.aiSit);
@@ -164,7 +164,7 @@ public class EntitySarcosuchus extends EntitySwimmingPrehistoric {
 
 	@Override
 	protected double getSwimSpeed() {
-		return 1;
+		return 2;
 	}
 	
 	@Override
@@ -180,7 +180,7 @@ public class EntitySarcosuchus extends EntitySwimmingPrehistoric {
 			this.rotationYaw *= 0;
 			riddenByEntity.rotationYaw = this.rotationYaw + this.rotationYawHead + 180;
 			rotationYaw = renderYawOffset;
-			float radius = 0.6F * (0.7F * getAgeScale()) * -3;
+			float radius = 0.4F * (0.7F * getAgeScale()) * -3;
 			float angle = (0.01745329251F * this.renderYawOffset) + 3.15F * 0.05F;
 			double extraX = (double) (radius * MathHelper.sin((float) (Math.PI + angle)));
 			double extraZ = (double) (radius * MathHelper.cos(angle));
@@ -205,7 +205,7 @@ public class EntitySarcosuchus extends EntitySwimmingPrehistoric {
         }
 		if (this.getAttackTarget() != null) {
 			double d0 = this.getDistanceSqToEntity(this.getAttackTarget());
-			if (d0 < 3 * this.getAgeScale()) {
+			if (d0 < 2 * this.getAgeScale()) {
 				this.attackEntityAsMob(this.getAttackTarget());
 				if (!this.isInWater()) {
 					if (this.getAnimation() != ATTACK_ANIMATION) {
@@ -221,6 +221,9 @@ public class EntitySarcosuchus extends EntitySwimmingPrehistoric {
 					}
 				}
 			}
+		}
+		if(this.isInsideOfMaterial(Material.water)){
+			this.setSwimming(true);
 		}
 	}
 	

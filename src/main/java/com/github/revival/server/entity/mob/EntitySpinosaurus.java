@@ -47,7 +47,7 @@ public class EntitySpinosaurus extends EntitySwimmingPrehistoric {
 	public float swimProgress;
 
 	public EntitySpinosaurus(World world) {
-		super(world, EnumPrehistoric.Spinosaurus, 2, 14, 15, 20, 0.25, 0.3);
+		super(world, EnumPrehistoric.Spinosaurus, 2, 14, 15, 60, 0.25, 0.3);
 		this.setSize(1.5F, 1.0F);
 		isAmphibious = true;
 		FISH_ANIMATION = Animation.create(35);

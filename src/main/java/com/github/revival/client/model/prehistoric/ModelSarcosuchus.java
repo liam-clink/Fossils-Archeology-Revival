@@ -233,9 +233,9 @@ public class ModelSarcosuchus extends ModelNewPrehistoric {
 		ModelUtils.rotate(animator, neck, 5F, 0, 0);
 		animator.endKeyframe();
 		animator.resetKeyframe(10);
-		animator.startKeyframe(10);
-		ModelUtils.rotate(animator, lowerBody, 180F, 0, 0);
-		animator.move(lowerBody, 0, 10, 0);
+		animator.startKeyframe(20);
+		ModelUtils.rotate(animator, lowerBody, 0, 0, 180F);
+		animator.move(lowerBody, 0, 20, 0);
 		ModelUtils.rotate(animator, rightFrontThigh, 45F, 0, 0);
 		ModelUtils.rotate(animator, rightFrontFoot, 73F, 0, 0);
 		ModelUtils.rotate(animator, leftFrontThigh, 45F, 0, 0);
@@ -245,34 +245,8 @@ public class ModelSarcosuchus extends ModelNewPrehistoric {
 		ModelUtils.rotate(animator, leftHindThigh, 45F, 0, 0);
 		ModelUtils.rotate(animator, leftHindFoot, 73F, 0, 0);
 		animator.endKeyframe();
-		animator.startKeyframe(10);
-		ModelUtils.rotate(animator, lowerBody, 360F, 0, 0);
-		ModelUtils.rotate(animator, rightFrontThigh, 45F, 0, 0);
-		ModelUtils.rotate(animator, rightFrontFoot, 73F, 0, 0);
-		ModelUtils.rotate(animator, leftFrontThigh, 45F, 0, 0);
-		ModelUtils.rotate(animator, leftFrontFoot, 73F, 0, 0);
-		ModelUtils.rotate(animator, rightHindThigh, 45F, 0, 0);
-		ModelUtils.rotate(animator, rightHindFoot, 73F, 0, 0);
-		ModelUtils.rotate(animator, leftHindThigh, 45F, 0, 0);
-		ModelUtils.rotate(animator, leftHindFoot, 73F, 0, 0);
-		animator.endKeyframe();
-		animator.startKeyframe(0);
-		ModelUtils.rotate(animator, lowerBody, 0, 0, 0);
-		animator.endKeyframe();
-		animator.startKeyframe(10);
-		ModelUtils.rotate(animator, lowerBody, 180F, 0, 0);
-		animator.move(lowerBody, 0, 10, 0);
-		ModelUtils.rotate(animator, rightFrontThigh, 45F, 0, 0);
-		ModelUtils.rotate(animator, rightFrontFoot, 73F, 0, 0);
-		ModelUtils.rotate(animator, leftFrontThigh, 45F, 0, 0);
-		ModelUtils.rotate(animator, leftFrontFoot, 73F, 0, 0);
-		ModelUtils.rotate(animator, rightHindThigh, 45F, 0, 0);
-		ModelUtils.rotate(animator, rightHindFoot, 73F, 0, 0);
-		ModelUtils.rotate(animator, leftHindThigh, 45F, 0, 0);
-		ModelUtils.rotate(animator, leftHindFoot, 73F, 0, 0);
-		animator.endKeyframe();
-		animator.startKeyframe(10);
-		ModelUtils.rotate(animator, lowerBody, 360F, 0, 0);
+		animator.startKeyframe(20);
+		ModelUtils.rotate(animator, lowerBody, 0, 360F, 0);
 		ModelUtils.rotate(animator, rightFrontThigh, 45F, 0, 0);
 		ModelUtils.rotate(animator, rightFrontFoot, 73F, 0, 0);
 		ModelUtils.rotate(animator, leftFrontThigh, 45F, 0, 0);
@@ -285,7 +259,33 @@ public class ModelSarcosuchus extends ModelNewPrehistoric {
 		animator.startKeyframe(0);
 		ModelUtils.rotate(animator, lowerBody, 0, 0, 0);
 		animator.endKeyframe();
-		animator.resetKeyframe(10);
+		animator.startKeyframe(20);
+		ModelUtils.rotate(animator, lowerBody, 0, 180F, 0);
+		animator.move(lowerBody, 0, 10, 0);
+		ModelUtils.rotate(animator, rightFrontThigh, 45F, 0, 0);
+		ModelUtils.rotate(animator, rightFrontFoot, 73F, 0, 0);
+		ModelUtils.rotate(animator, leftFrontThigh, 45F, 0, 0);
+		ModelUtils.rotate(animator, leftFrontFoot, 73F, 0, 0);
+		ModelUtils.rotate(animator, rightHindThigh, 45F, 0, 0);
+		ModelUtils.rotate(animator, rightHindFoot, 73F, 0, 0);
+		ModelUtils.rotate(animator, leftHindThigh, 45F, 0, 0);
+		ModelUtils.rotate(animator, leftHindFoot, 73F, 0, 0);
+		animator.endKeyframe();
+		animator.startKeyframe(20);
+		ModelUtils.rotate(animator, lowerBody, 0, 360F, 0);
+		ModelUtils.rotate(animator, rightFrontThigh, 45F, 0, 0);
+		ModelUtils.rotate(animator, rightFrontFoot, 73F, 0, 0);
+		ModelUtils.rotate(animator, leftFrontThigh, 45F, 0, 0);
+		ModelUtils.rotate(animator, leftFrontFoot, 73F, 0, 0);
+		ModelUtils.rotate(animator, rightHindThigh, 45F, 0, 0);
+		ModelUtils.rotate(animator, rightHindFoot, 73F, 0, 0);
+		ModelUtils.rotate(animator, leftHindThigh, 45F, 0, 0);
+		ModelUtils.rotate(animator, leftHindFoot, 73F, 0, 0);
+		animator.endKeyframe();
+		animator.startKeyframe(0);
+		ModelUtils.rotate(animator, lowerBody, 0, 0, 0);
+		animator.endKeyframe();
+		animator.resetKeyframe(20);
 	}
 
 	@Override
@@ -293,7 +293,7 @@ public class ModelSarcosuchus extends ModelNewPrehistoric {
 		AdvancedModelRenderer[] tailParts = { this.tail1, this.tail2, this.tail3 };
 		AdvancedModelRenderer[] neckParts = { this.neck, this.head };
 		float speed = 0.1F;
-		float speed2 = 0.5F;
+		float speed2 = 0.9F;
 		this.bob(lowerBody, speed, 0.7F, false, entity.ticksExisted, 1);
 		this.walk(leftFrontThigh, speed2, 0.6F, false, 0F, 0.4F, f, f1);
 		this.walk(leftFrontLeg, speed2, 0.2F, false, 0F, -0.6F, f, f1);
@@ -308,7 +308,7 @@ public class ModelSarcosuchus extends ModelNewPrehistoric {
 		this.walk(rightHindLeg, speed2, 0.2F, false, 0F, 0.6F, f, f1);
 		this.walk(rightHindFoot, speed2, -0.6F, true, 2.5F, 0.4F, f, f1);
 		this.chainSwing(tailParts, speed, 0.15F, -3, entity.ticksExisted, 1);
-		this.chainSwing(tailParts, speed2, 0.25F, -3, f, f1);
+		this.chainSwing(tailParts, speed2, 0.5F, -3, f, f1);
 		this.chainWave(neckParts, speed, 0.15F, 3, entity.ticksExisted, 1);
 		((EntityNewPrehistoric) entity).chainBuffer.applyChainSwingBuffer((AdvancedModelRenderer[]) tailParts);
 		if (entity.riddenByEntity == null) {
@@ -391,16 +391,16 @@ public class ModelSarcosuchus extends ModelNewPrehistoric {
 	        sitAnimationRotationPrev(head, sitProgress, -((float)Math.toRadians(5.22D)), 0, 0);
 	        sitAnimationRotationPrev(upperJaw, sitProgress, -((float)Math.toRadians(2.61D)), 0, 0);
 	        sitAnimationRotationPrev(Teethright, sitProgress, (float)Math.toRadians(3.0D), 0, 0);
-	        sitAnimationRotationPrev(leftFrontFoot, sitProgress, (float)Math.toRadians(90.0D), (float)Math.toRadians(90.0D), 0);
+	        sitAnimationRotationPrev(leftFrontFoot, sitProgress, (float)Math.toRadians(90.0D), -(float)Math.toRadians(90.0D), 0);
 	        sitAnimationRotationPrev(OsteodermTail1, sitProgress, -((float)Math.toRadians(2.61D)), 0, 0);
-	        sitAnimationRotationPrev(leftHindFoot, sitProgress, (float)Math.toRadians(90.0D), (float)Math.toRadians(90.0D), 0);
+	        sitAnimationRotationPrev(leftHindFoot, sitProgress, (float)Math.toRadians(90.0D), -(float)Math.toRadians(90.0D), 0);
 	        sitAnimationRotationPrev(rightHindFoot, sitProgress, (float)Math.toRadians(90.0D), (float)Math.toRadians(90.0D), 0);
 	        sitAnimationRotationPrev(neck, sitProgress, (float)Math.toRadians(5.22D), 0, 0);
 	        sitAnimationRotationPrev(leftFrontThigh, sitProgress, (float)Math.toRadians(90.0D), (float)Math.toRadians(23.0D), 0);
 	        sitAnimationRotationPrev(leftHindLeg, sitProgress, 0, 0, (float)Math.toRadians(20.0D));
 	        sitAnimationPos(rightFrontThigh, sitProgress, 0, 3, 0);
 	        sitAnimationPos(leftFrontThigh, sitProgress, 0, 3, 0);
-	        sitAnimationPos(rightHindThigh, sitProgress, -1, 1, -2);
+	        sitAnimationPos(rightHindThigh, sitProgress, 1, 1, -2);
 	        sitAnimationPos(leftHindThigh, sitProgress, -1, 1, -2);
 
 		}

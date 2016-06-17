@@ -70,7 +70,7 @@ public class DinoAIWaterFindTarget extends EntityAIBase {
 
 		if (prehistoric.getAttackTarget() == null) {
 			for (int i = 0; i < 10; ++i) {
-				ChunkCoordinates blockpos1 = new ChunkCoordinates((int) this.prehistoric.posX + ((2 + random.nextInt(10)) * (random.nextBoolean() ? -1 : 1)), (int) this.prehistoric.posY + (random.nextInt(6) * (random.nextBoolean() ? -1 : 1)), (int) this.prehistoric.posZ + ((2 + random.nextInt(10)) * (random.nextBoolean() ? -1 : 1)));
+				ChunkCoordinates blockpos1 = new ChunkCoordinates((int) this.prehistoric.posX + ((4 + random.nextInt(10)) * (random.nextBoolean() ? -1 : 1)), (int) this.prehistoric.posY + (random.nextInt(6) * (random.nextBoolean() ? -1 : 1)), (int) this.prehistoric.posZ + ((4 + random.nextInt(10)) * (random.nextBoolean() ? -1 : 1)));
 				if (canGoToBlock(blockpos1.posX, blockpos1.posY, blockpos1.posZ)) {
 					return Vec3.createVectorHelper(blockpos1.posX, blockpos1.posY, blockpos1.posZ);
 				}
