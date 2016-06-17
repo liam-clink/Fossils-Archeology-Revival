@@ -153,7 +153,7 @@ public abstract class EntityFlyingPrehistoric extends EntityNewPrehistoric {
     }
 
     public void flyTowardsTarget() {
-        if (currentTarget != null && isTargetInAir() && this.isFlying() && this.getDistanceSquared(Vec3.createVectorHelper(currentTarget.posX, this.posY, currentTarget.posZ)) > 2) {
+        if (currentTarget != null && isTargetInAir() && this.isFlying() && this.getDistanceSquared(Vec3.createVectorHelper(currentTarget.posX, this.posY, currentTarget.posZ)) > 3) {
             double targetX = currentTarget.posX + 0.5D - posX;
             double targetY = currentTarget.posY + 1D - posY;
             double targetZ = currentTarget.posZ + 0.5D - posZ;

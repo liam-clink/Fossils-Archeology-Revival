@@ -53,7 +53,7 @@ public class DinoAIFindAirTarget extends EntityAIBase {
 
         if (prehistoric.getAttackTarget() == null) {
             for (int i = 0; i < 10; ++i) {
-                ChunkCoordinates blockpos1 = new ChunkCoordinates((int) this.prehistoric.posX + ((16 + random.nextInt(10)) * (random.nextBoolean() ? -1 : 1)), (int) this.prehistoric.posY + ((7 + random.nextInt(6)) * (random.nextBoolean() ? -1 : 1)), (int) this.prehistoric.posZ + ((6 + random.nextInt(10)) * (random.nextBoolean() ? -1 : 1)));
+                ChunkCoordinates blockpos1 = new ChunkCoordinates((int) this.prehistoric.posX + ((16 + random.nextInt(10)) * (random.nextBoolean() ? -1 : 1)), (int) this.prehistoric.posY + ((random.nextInt(6)) * (random.nextBoolean() ? -1 : 1)), (int) this.prehistoric.posZ + ((6 + random.nextInt(10)) * (random.nextBoolean() ? -1 : 1)));
                 if (prehistoric.worldObj.getBlock(blockpos1.posX, blockpos1.posY, blockpos1.posZ).getMaterial() == Material.air) {
                     return Vec3.createVectorHelper(blockpos1.posX, blockpos1.posY, blockpos1.posZ);
                 }
