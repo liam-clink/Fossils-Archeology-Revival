@@ -148,7 +148,7 @@ public class BlockCultivate extends BlockContainer {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister iconRegister) {
-        this.blockIcon = iconRegister.registerIcon("fossil:Culture_Sides_Idle");
+        this.blockIcon = iconRegister.registerIcon("fossil:Culture_Top");
     }
 
     /**

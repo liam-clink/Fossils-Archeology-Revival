@@ -93,6 +93,9 @@ public enum FABlockRegistry {
     public Block horsetail_large;
     public Block mutantPlant;
     public Block tempskya;
+    public Block vaccinium;
+    public Block osmunda;
+    public Block crataegus;
     public Fluid tar_fluid;
 
     public Material tar_material;
@@ -174,7 +177,10 @@ public enum FABlockRegistry {
         horsetail_small = new BlockFossilPlant("plants/plant_horsetail_small", 1).setBlockName("plant_horsetail_small").setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
         horsetail_large = new BlockFossilTallPlant("plants/plant_horsetail_large").setBlockName("plant_horsetail_large").setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
         mutantPlant = new BlockFossilTallPlant("plants/plant_mutant").setBlockName("plant_mutant").setLightLevel(0.4F).setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
-        tempskya = new BlockTempskya("plants/plant_tempskya_1").setBlockTextureName("fossil:plants/plant_tempskya").setBlockName("plant_tempskya").setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
+        vaccinium = new BlockFossilPlant("plants/plant_vaccinium", 1).setBlockName("plant_vaccinium").setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
+        tempskya = new BlockTempskya().setBlockTextureName("fossil:plants/plant_tempskya_1").setBlockName("plant_tempskya").setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
+        crataegus = new BlockFossilTallPlant("plants/plant_crataegus").setBlockName("plant_crataegus").setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
+        osmunda = new BlockFossilPlant("plants/plant_osmunda", 1).setBlockName("plant_osmunda").setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
 
         try {
             for (Field f : FABlockRegistry.class.getDeclaredFields()) {

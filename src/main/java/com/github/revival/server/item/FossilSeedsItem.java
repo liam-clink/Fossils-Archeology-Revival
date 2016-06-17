@@ -1,6 +1,8 @@
 package com.github.revival.server.item;
 
-import com.github.revival.server.block.FABlockRegistry;
+import java.util.List;
+import java.util.Random;
+
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,13 +12,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-import java.util.List;
-import java.util.Random;
+import com.github.revival.server.block.BlockTempskya;
+import com.github.revival.server.block.FABlockRegistry;
 
 public class FossilSeedsItem extends Item
 
 {
-    private static final String[] fossilSeeds = new String[]{"dillhoffia", "sarracina", "cephalotaxus", "licopodiophyta", "paleopanax", "zamites", "bennettitales", "welwitschia", "horsetail"};
+    private static final String[] fossilSeeds = new String[]{"dillhoffia", "sarracina", "cephalotaxus", "licopodiophyta", "paleopanax", "zamites", "bennettitales", "welwitschia", "horsetail", "tempskya", "vaccinium", "crataegus", "osmunda"};
     public boolean isFossil;
     private IIcon[] textures;
 
@@ -60,7 +62,9 @@ public class FossilSeedsItem extends Item
 
         if (!isFossil && player.canPlayerEdit(x, y, z, i, stack) && player.canPlayerEdit(x, y + 1, z, i, stack)) {
             if (Blocks.sapling.canBlockStay(world, x, y, z) && world.isAirBlock(x, y + 1, z) && world.getBlock(x, y, z) != FABlockRegistry.INSTANCE.welwitschia) {
-                this.placePlantBlock(stack, world, x, y, z, new Random());
+                if(this.placePlantBlock(stack, world, x, y, z, new Random())){
+                    world.playSound((double) x + 0.5D, (double) y + 0.5D, (double) z + 0.5D, FABlockRegistry.INSTANCE.dillhoffia.stepSound.getBreakSound(), 1F, new Random().nextFloat() * 0.1F + 0.8F, false);
+                }
                 --stack.stackSize;
                 return true;
             } else {
@@ -71,39 +75,52 @@ public class FossilSeedsItem extends Item
         }
     }
 
-    private void placePlantBlock(ItemStack stack, World world, int x, int y, int z, Random rand) {
-        world.playSound((double) x + 0.5D, (double) y + 0.5D, (double) z + 0.5D, FABlockRegistry.INSTANCE.dillhoffia.stepSound.getBreakSound(), 1F, rand.nextFloat() * 0.1F + 0.8F, false);
+    private boolean placePlantBlock(ItemStack stack, World world, int x, int y, int z, Random rand) {
         switch (stack.getItemDamage()) {
             case 0:
                 world.setBlock(x, y + 1, z, FABlockRegistry.INSTANCE.dillhoffia);
-                break;
+               return true;
             case 1:
                 world.setBlock(x, y + 1, z, FABlockRegistry.INSTANCE.sarracina);
                 world.setBlock(x, y + 2, z, FABlockRegistry.INSTANCE.sarracina, 8, 3);
-                break;
+               return true;
             case 2:
                 world.setBlock(x, y + 1, z, FABlockRegistry.INSTANCE.cephalotaxus);
-                break;
+               return true;
             case 3:
                 world.setBlock(x, y + 1, z, FABlockRegistry.INSTANCE.licopodiophyta);
-                break;
+               return true;
             case 4:
                 world.setBlock(x, y + 1, z, FABlockRegistry.INSTANCE.paleopanax);
                 world.setBlock(x, y + 2, z, FABlockRegistry.INSTANCE.paleopanax, 8, 3);
-                break;
+               return true;
             case 5:
                 world.setBlock(x, y + 1, z, FABlockRegistry.INSTANCE.zamites);
-                break;
+               return true;
             case 6:
                 world.setBlock(x, y + 1, z, FABlockRegistry.INSTANCE.bennettitales_small);
-                break;
+               return true;
             case 7:
                 world.setBlock(x, y + 1, z, FABlockRegistry.INSTANCE.welwitschia);
-                break;
+               return true;
             case 8:
                 world.setBlock(x, y + 1, z, FABlockRegistry.INSTANCE.horsetail_small);
-                break;
+                return true;
+            case 9:
+                if(((BlockTempskya)FABlockRegistry.INSTANCE.tempskya).canPlaceBlockAt(world, x, y, z)){
+                	((BlockTempskya)FABlockRegistry.INSTANCE.tempskya).makeTempskya(world, x, y, z);
+                	return true;
+                }
+            case 10:
+                world.setBlock(x, y + 1, z, FABlockRegistry.INSTANCE.vaccinium);
+                return true;
+            case 11:
+                world.setBlock(x, y + 1, z, FABlockRegistry.INSTANCE.osmunda);
+            case 12:
+                world.setBlock(x, y + 1, z, FABlockRegistry.INSTANCE.crataegus);
+                return true;
         }
+        return false;
     }
 
     @Override

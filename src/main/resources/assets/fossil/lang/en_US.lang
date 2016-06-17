@@ -502,7 +502,10 @@ item.fossilSeed.paleopanax.name=Fossilized Foozia Spores
 item.fossilSeed.zamites.name=Fossilized Zamites Seeds
 item.fossilSeed.bennettitales.name=Fossilized Bennettitales Seeds
 item.fossilSeed.welwitschia.name=Fossilized Welwitschia Seeds
-item.fossilSeed.horsetail.name=Fossilized Horsetail Spores
+item.fossilSeed.tempskya.name=Fossilized Tempskya Seeds
+item.fossilSeed.vaccinium.name=Fossilized Vaccinium Seeds
+item.fossilSeed.osmunda.name=Fossilized Osmunda Spores
+item.fossilSeed.crataegus.name=Fossilized Crataegus Seeds
 item.fernSeeds.name=Ancient Fern Spores
 item.seed.dillhoffia.name=Dillhoffia Seeds
 item.seed.sarracina.name=Sarracenia Seeds
@@ -513,6 +516,10 @@ item.seed.zamites.name=Zamites Seeds
 item.seed.bennettitales.name=Bennettitales Seeds
 item.seed.welwitschia.name=Welwitschia Seeds
 item.seed.horsetail.name=Horsetail Spores
+item.seed.tempskya.name=Tempskya Seeds
+item.seed.vaccinium.name=Vaccinium Seeds
+item.seed.osmunda.name=Osmunda Spores
+item.seed.crataegus.name=Crataegus Seeds
 tile.plant_dillhoffia.name=Dillhoffia
 tile.plant_sarracina.name=Sarracenia 
 tile.plant_cephalotaxus.name=Cephalotaxus
@@ -526,7 +533,9 @@ tile.plant_horsetail_small.name=Horsetail
 tile.plant_horsetail_large.name=Tall Horsetail
 tile.plant_mutant.name=Failure Plant
 tile.plant_tempskya.name=Tempskya
-
+tile.plant_vaccinium.name=Vaccinium
+tile.plant_osmunda.name=Osmunda
+tile.plant_crataegus.name=Crataegus
 #Dinosaur related chat messages
 dnaName.head=DNA of 
 dnaName.tail=
@@ -566,8 +575,8 @@ status.Nervous.Head=You made the little
 status.Nervous= too nervous to hunt itself.
 status.GemErrorYoung=This dinosaur is still too young.
 status.GemErrorHealth=The scarab cannot afford such strong life energy.
-status.GemErrorTamed=This dinosaur  has already been tamed.
-status.essencefail=Essence of Chicken had no effect.
+status.GemErrorTamed=This dinosaur has already been tamed.
+status.essencefail=The Essence of Chicken had no effect.
 
 #Dinosaur Names
 entity.fossil.Triceratops.name=Triceratops

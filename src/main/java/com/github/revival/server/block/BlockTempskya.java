@@ -18,7 +18,6 @@ import net.minecraft.world.World;
 import java.util.Random;
 
 public class BlockTempskya extends BlockBush {
-    public String textureName;
     @SideOnly(Side.CLIENT)
     private IIcon tex1;
     @SideOnly(Side.CLIENT)
@@ -26,10 +25,9 @@ public class BlockTempskya extends BlockBush {
     @SideOnly(Side.CLIENT)
     private IIcon tex3;
 
-    public BlockTempskya(String texture) {
+    public BlockTempskya() {
         super(Material.plants);
         this.setHardness(0);
-        this.textureName = texture;
         this.setStepSound(soundTypeGrass);
         float f = 0.375F;
         float f1 = 0.625F;

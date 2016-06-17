@@ -10,24 +10,7 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class AztecWeaponsShopWorldGen extends WorldGenerator {
 	public boolean generate(World world, Random rand, int x, int y, int z) {
-		int i = rand.nextInt(4);
-
-		if (i == 0) {
-			generate_r0(world, rand, x, y, z);
-		}
-
-		if (i == 1) {
-			generate_r1(world, rand, x, y, z);
-		}
-
-		if (i == 2) {
-			generate_r2(world, rand, x, y, z);
-		}
-
-		if (i == 3) {
-			generate_r3(world, rand, x, y, z);
-		}
-
+		generate_r0(world, rand, x, y, z);
 		return true;
 
 	}
