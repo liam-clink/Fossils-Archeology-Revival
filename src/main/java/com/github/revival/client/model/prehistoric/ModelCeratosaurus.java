@@ -193,7 +193,9 @@ public class ModelCeratosaurus extends ModelNewPrehistoric {
         AdvancedModelRenderer[] neckParts = {this.neck, this.head};
         AdvancedModelRenderer[] leftArmParts = {this.leftUpperArm, this.leftLowerArm};
         AdvancedModelRenderer[] rightArmParts = {this.rightUpperArm, this.rightLowerArm};
-
+		if(((EntityNewPrehistoric) entity).isSkeleton()){
+			return;
+		}
         ModelUtils.faceTargetMod(neck, f3, f4, 0.5F);
         ModelUtils.faceTargetMod(head, f3, f4, 0.5F);
 

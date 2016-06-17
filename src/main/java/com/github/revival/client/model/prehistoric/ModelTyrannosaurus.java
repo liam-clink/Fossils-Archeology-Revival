@@ -254,7 +254,9 @@ public class ModelTyrannosaurus extends ModelNewPrehistoric {
         AdvancedModelRenderer[] neckParts = {this.neck, this.head};
         AdvancedModelRenderer[] leftArmParts = {this.leftUpperArm, this.leftLowerArm};
         AdvancedModelRenderer[] rightArmParts = {this.rightUpperArm, this.rightLowerArm};
-
+		if(((EntityNewPrehistoric) entity).isSkeleton()){
+			return;
+		}
         float speed = 0.4F;
         float speed2 = 0.1F;
         {

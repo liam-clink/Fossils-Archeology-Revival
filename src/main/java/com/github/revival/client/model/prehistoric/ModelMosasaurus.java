@@ -152,6 +152,9 @@ public class ModelMosasaurus extends ModelNewPrehistoric {
 	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
 		AdvancedModelRenderer[] tailParts = { this.lowerBody, this.tail1, this.tail2, this.upperTailFin };
 		AdvancedModelRenderer[] neckParts = { this.neck, this.head };
+		if(((EntityNewPrehistoric) entity).isSkeleton()){
+			return;
+		}
 		{
 			float sitProgress = ((EntityNewPrehistoric) (entity)).weakProgress;
 			sitAnimationRotationPrev(rightFrontFlipper, sitProgress, (float)Math.toRadians(30.0D), 0, (float)Math.toRadians(30.0D));

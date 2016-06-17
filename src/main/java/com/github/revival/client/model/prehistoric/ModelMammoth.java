@@ -227,6 +227,9 @@ public class ModelMammoth extends ModelNewPrehistoric {
         AdvancedModelRenderer[] tailParts = {this.Tail};
         AdvancedModelRenderer[] neckParts = {this.neck, this.head};
         AdvancedModelRenderer[] trunkParts = {this.nose2, this.nose3, this.nose4};
+		if(((EntityNewPrehistoric) entity).isSkeleton()){
+			return;
+		}
         ModelUtils.faceTargetMod(neck, f3, f4, 0.5F);
         ModelUtils.faceTargetMod(head, f3, f4, 0.5F);
         float speed = 0.1F;

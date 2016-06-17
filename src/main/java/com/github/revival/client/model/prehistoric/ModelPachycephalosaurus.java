@@ -198,6 +198,9 @@ public class ModelPachycephalosaurus extends ModelNewPrehistoric {
         AdvancedModelRenderer[] neckParts = {this.neck, this.head};
         AdvancedModelRenderer[] leftArmParts = {this.leftUpperArm, this.leftLowerArm};
         AdvancedModelRenderer[] rightArmParts = {this.rightUpperArm, this.rightLowerArm};
+		if(((EntityNewPrehistoric) entity).isSkeleton()){
+			return;
+		}
         head.rotateAngleZ += (f3 / (180f / (float) Math.PI)) * 0.5F;
         head.rotateAngleX += (f4 / (180f / (float) Math.PI)) * 0.5F;
         ModelUtils.faceTargetMod(neck, f3, f4, 0.5F);

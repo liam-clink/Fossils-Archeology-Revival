@@ -195,6 +195,9 @@ public class ModelBrachiosaurus extends ModelNewPrehistoric {
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
         AdvancedModelRenderer[] tailParts = {this.Tail, this.Tail2, this.Tail3};
         AdvancedModelRenderer[] neckParts = {this.Neck1, this.Neck2, this.Neck3, this.Neck4, this.Neck5, this.Head};
+		if(((EntityNewPrehistoric) entity).isSkeleton()){
+			return;
+		}
         ModelUtils.faceTargetMod(Head, f3, f4, 0.16F);
         ModelUtils.faceTargetMod(Neck1, f3, f4, 0.16F);
         ModelUtils.faceTargetMod(Neck2, f3, f4, 0.16F);

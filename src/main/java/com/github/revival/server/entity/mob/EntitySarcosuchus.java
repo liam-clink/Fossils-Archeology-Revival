@@ -67,7 +67,7 @@ public class EntitySarcosuchus extends EntitySwimmingPrehistoric {
 		this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
 		this.targetTasks.addTask(4, new DinoAIHunt(this, 20, false));
         minSize = 0.2F;
-        maxSize = 1.3F;
+        maxSize = 2.3F;
         teenAge = 5;
         developsResistance = true;
         breaksBlocks = true;

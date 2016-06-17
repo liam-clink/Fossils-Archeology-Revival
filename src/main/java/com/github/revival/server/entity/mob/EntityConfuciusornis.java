@@ -109,7 +109,7 @@ public class EntityConfuciusornis extends EntityFlyingPrehistoric {
 
     @Override
     public Moving aiMovingType() {
-        return Moving.WALK;
+        return Moving.FLIGHT;
     }
 
     @Override

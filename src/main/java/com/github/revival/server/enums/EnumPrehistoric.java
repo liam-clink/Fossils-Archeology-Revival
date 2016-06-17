@@ -341,7 +341,28 @@ public enum EnumPrehistoric {
 		return list.get(index);
 
 	}
+	
+	public static EnumPrehistoric getRandomBioFossil(boolean tar) {
+		List<EnumPrehistoric> list = new ArrayList<EnumPrehistoric>();
+		for (int i = 0; i < values().length; i++) {
+			if (values()[i].type != EnumMobType.VANILLA && values()[i].type != EnumMobType.CHICKEN && values()[i].type != EnumMobType.FISH) {
+				if(tar){
+					if(values()[i].timeperiod == EnumTimePeriod.CENOZOIC){
+						list.add(values()[i]);
+					}
+				}else{
+					if(values()[i].timeperiod == EnumTimePeriod.MESOZOIC || values()[i].timeperiod == EnumTimePeriod.PALEOZOIC){
+						list.add(values()[i]);
+					}
+				}
+			}
+		}
+		int index = new Random().nextInt(list.size());
+		return list.get(index);
 
+	}
+
+	
 	public static EnumPrehistoric getRandom() {
 		List<EnumPrehistoric> list = new ArrayList<EnumPrehistoric>();
 		for (int i = 0; i < values().length; i++) {

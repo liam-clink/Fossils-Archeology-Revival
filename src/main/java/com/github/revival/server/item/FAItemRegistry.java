@@ -95,7 +95,8 @@ public enum FAItemRegistry {
     public Item dinosaurModels;
 
     public void init() {
-        biofossil = new BioFossilItem();
+        biofossil = new ItemBioFossil(false);
+        tarfossil = new ItemBioFossil(true);
         DominicanAmber = new DominicanAmberItem();
         gem_blue = new AquaticScarabGemItem().setUnlocalizedName("AquaticScarabGem");
         relic = new ForgeItemItem("Relic_Scrap").setUnlocalizedName(LocalizationStrings.RELIC_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
@@ -152,7 +153,6 @@ public enum FAItemRegistry {
         palaeSaplingFossil = new ForgeItemItem("Palae_Fossil").setUnlocalizedName("fossilSapling_palae").setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
         ancientClock = new Item().setTextureName("gold_ingot").setUnlocalizedName("ancientClock").setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
         tardrop = new ForgeItemItem("tardrop").setUnlocalizedName("tardrop").setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
-        tarfossil = new ForgeItemItem("tar_fossil").setUnlocalizedName("tarfossil").setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
         tar_bucket = new ItemBucket(FABlockRegistry.INSTANCE.tar).setUnlocalizedName("tar_bucket").setTextureName("fossil:bucket_tar").setContainerItem(Items.bucket).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
         toyBall = new ItemToyBall().setUnlocalizedName("toyBall").setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
         toyTetheredLog = new ItemToyTetheredLog().setUnlocalizedName("toyTetheredLog").setCreativeTab(FATabRegistry.INSTANCE.tabFItems);

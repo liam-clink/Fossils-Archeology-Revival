@@ -441,11 +441,12 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
                     itemstack = new ItemStack(Items.porkchop, 1);
                 }
 
-                if (rand >= 45 && rand < 85) {
+                if (rand >= 45 && rand < 65) {
                     itemstack = new ItemStack(EnumPrehistoric.getRandomMezoic().DNAItem);
-
                 }
-
+                if (rand >= 65 && rand < 85) {
+                    itemstack = new ItemStack(FAItemRegistry.INSTANCE.tarfossil);
+                }
                 if (itemstack == null) {
                     itemstack = new ItemStack(Items.beef);
                 }

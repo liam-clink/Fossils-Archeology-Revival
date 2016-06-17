@@ -293,6 +293,9 @@ public class ModelSarcosuchus extends ModelNewPrehistoric {
 		AdvancedModelRenderer[] neckParts = { this.neck, this.head };
 		float speed = 0.1F;
 		float speed2 = 0.9F;
+		if(((EntityNewPrehistoric) entity).isSkeleton()){
+			return;
+		}
 		this.bob(lowerBody, speed, 0.7F, false, entity.ticksExisted, 1);
 		this.bob(leftFrontThigh, speed, -0.7F, false, entity.ticksExisted, 1);
 		this.bob(rightFrontThigh, speed, -0.7F, false, entity.ticksExisted, 1);

@@ -237,7 +237,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
 	@Override
 	public boolean isAIEnabled() {
-		return true;
+		return !this.isSkeleton();
 	}
 
 	public void doPlayBonus(int playBonus) {
@@ -258,7 +258,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
 	@Override
 	public boolean isMovementBlocked() {
-		return this.getHealth() <= 0.0F || isSitting() || isSleeping();
+		return this.getHealth() <= 0.0F || isSitting() || isSleeping() || this.isSkeleton();
 	}
 
 	@Override
@@ -403,6 +403,11 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
 		return false;
 	}
+	
+    @Override
+    public boolean canBePushed() {
+        return this.isSkeleton() ? false : super.canBePushed();
+    }
 
 	public int getNearestBubbleBlock(int range, int type) {
 		for (int r = 1; r <= range; r++) {
@@ -812,9 +817,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	}
 
 	public void setSkeleton(boolean skeleton) {
-		if (this.type.isModelable()) {
-			this.dataWatcher.updateObject(21, (byte) (skeleton ? 0 : -1));
-		}
+		this.dataWatcher.updateObject(21, (byte) (skeleton ? 0 : -1));
 	}
 
 	public int getAgeInDays() {
@@ -1043,7 +1046,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 				}
 			} else {
 				if (itemstack.getItem() == Items.bone) {
-
+					this.setAgeInDays(this.getAgeInDays() + 1);
 					if (!player.capabilities.isCreativeMode) {
 						--itemstack.stackSize;
 					}
@@ -1261,6 +1264,9 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	public void playerFlyDown(EntityPlayer player) {}
 
 	public String getTexture() {
+		if(this.isSkeleton()){
+			return "fossil:textures/model/" + type.toString().toLowerCase() + "_0/" + type.toString().toLowerCase() + "_skeleton.png";
+		}
 		if (this.hasBabyTexture) {
 			String toggle = this.hasFeatherToggle ? !this.featherToggle ? "feathered/" : "scaled/" : "";
 			boolean isBaby = this.isChild() && this.hasBabyTexture;

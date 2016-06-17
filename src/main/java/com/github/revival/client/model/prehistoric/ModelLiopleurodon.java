@@ -163,6 +163,9 @@ public class ModelLiopleurodon extends ModelNewPrehistoric {
 	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
 		AdvancedModelRenderer[] tailParts = {this.Tail, this.Tail1, this.Tail2};
 		AdvancedModelRenderer[] neckParts = {this.Neck, this.Head};
+		if(((EntityNewPrehistoric) entity).isSkeleton()){
+			return;
+		}
 		if(entity.riddenByEntity == null){
 			ModelUtils.faceTargetMod(Neck, f3, f4, 0.5F);
 			ModelUtils.faceTargetMod(Head, f3, f4, 0.5F);

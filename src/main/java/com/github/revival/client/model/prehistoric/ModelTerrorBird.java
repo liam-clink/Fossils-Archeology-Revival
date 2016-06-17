@@ -172,6 +172,9 @@ public class ModelTerrorBird extends ModelNewPrehistoric {
         neck_1.setScale(1.01F, 1.01F, 1.01F);
         AdvancedModelRenderer[] neckParts = {this.neck, this.neck_1, this.head};
         AdvancedModelRenderer[] tailParts = {this.lowerBody, this.tail1, this.tail2};
+		if(((EntityNewPrehistoric) entity).isSkeleton()){
+			return;
+		}
         ModelUtils.faceTargetMod(neck, f3, f4, 0.5F);
         ModelUtils.faceTargetMod(head, f3, f4, 0.5F);
         float speed = 0.1F;

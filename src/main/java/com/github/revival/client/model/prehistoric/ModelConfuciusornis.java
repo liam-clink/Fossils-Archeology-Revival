@@ -193,7 +193,9 @@ public class ModelConfuciusornis extends ModelNewPrehistoric {
         AdvancedModelRenderer[] leftWingParts = {this.leftWing, this.leftWing2, this.leftWing3};
         AdvancedModelRenderer[] leftTailParts = {this.leftTail1, this.leftTail2, this.leftTail3, this.leftTailFan};
         AdvancedModelRenderer[] rightTailParts = {this.rightTail1, this.rightTail2, this.rightTail3, this.rightTailFan};
-
+		if(((EntityNewPrehistoric) entity).isSkeleton()){
+			return;
+		}
         ModelUtils.faceTargetMod(neck, f3, f4, 0.5F);
         ModelUtils.faceTargetMod(head, f3, f4, 0.5F);
         float speed = 0.1F;

@@ -209,6 +209,9 @@ public class ModelAnkylosaurus extends ModelNewPrehistoric {
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
         AdvancedModelRenderer[] tailParts = {this.Tail1, this.Tail2, this.Tail3, this.TailClub};
         AdvancedModelRenderer[] neckParts = {this.Neck, this.Head};
+		if(((EntityNewPrehistoric) entity).isSkeleton()){
+			return;
+		}
         ModelUtils.faceTargetMod(Head, f3, f4, 0.5F);
         ModelUtils.faceTargetMod(Neck, f3, f4, 0.5F);
         float speed = 0.1F;

@@ -16,37 +16,27 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class BioFossilItem extends Item {
-    public BioFossilItem() {
+public class ItemBioFossil extends Item {
+	private boolean tar_fossil;
+	
+    public ItemBioFossil(boolean tar_fossil) {
         maxStackSize = 64;
         setMaxDamage(0);
-        setUnlocalizedName(LocalizationStrings.BIO_FOSSIL_NAME);
+        this.tar_fossil = tar_fossil;
+        setUnlocalizedName(tar_fossil ? "tar_fossil" : LocalizationStrings.BIO_FOSSIL_NAME);
         setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
     }
 
     @Override
     public void registerIcons(IIconRegister iconRegister) {
-        itemIcon = iconRegister.registerIcon("fossil:Bio_Fossil");
+        itemIcon = iconRegister.registerIcon(tar_fossil ? "fossil:tar_fossil" : "fossil:Bio_Fossil");
     }
 
-    public boolean tryPlaceIntoWorld(ItemStack var1, EntityPlayer var2, World var3, int var4, int var5, int var6/*
-                                                                                                                 * ,
-																												 * int
-																												 * var7
-																												 * ,
-																												 * float
-																												 * var8
-																												 * ,
-																												 * float
-																												 * var9
-																												 * ,
-																												 * float
-																												 * var10
-																												 */) {
+    public boolean tryPlaceIntoWorld(ItemStack var1, EntityPlayer var2, World var3, int var4, int var5, int var6) {
         if (var3.isRemote) {
             return true;
         } else {
-            Class var11 = this.getRandomModel().getDinoClass();
+            Class var11 = EnumPrehistoric.getRandomBioFossil(tar_fossil).getDinoClass();
             EntityNewPrehistoric var12;
 
             try {
@@ -56,9 +46,9 @@ public class BioFossilItem extends Item {
                 return false;
             }
 
-            var12.setSkeleton(true);
             var12.setLocationAndAngles((double) var4, (double) (var5 + 1), (double) var6, var3.rand.nextFloat() * 360.0F, 0.0F);
             var12.faceEntity(var2, 360.0F, 360.0F);
+            var12.setSkeleton(true);
 
             if (var3.checkNoEntityCollision(var12.boundingBox) && var3.getCollidingBoundingBoxes(var12, var12.boundingBox).size() == 0) {
                 var3.spawnEntityInWorld(var12);
@@ -70,23 +60,6 @@ public class BioFossilItem extends Item {
         }
     }
 
-    private EnumPrehistoric getRandomModel() {
-        EnumPrehistoric[] var1 = EnumPrehistoric.values();
-        int var2 = var1.length;
-        Random var4 = new Random();
-        EnumPrehistoric var3;
-
-        do {
-            var3 = var1[var4.nextInt(var2)];
-        } while (!var3.isModelable());
-
-        return var3;
-    }
-
-    /**
-     * Called whenever this item is equipped and the right mouse button is
-     * pressed. Args: itemStack, world, entityPlayer
-     */
     @Override
     public ItemStack onItemRightClick(ItemStack var1, World var2, EntityPlayer var3) {
         float var4 = 1.0F;
