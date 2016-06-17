@@ -33,7 +33,7 @@ public class BlockFossilPlant extends BlockBush {
             this.grow(FABlockRegistry.INSTANCE.bennettitales_large, itemstack, world, x, y, z, player);
             return true;
         }
-        if (this == FABlockRegistry.INSTANCE.horsetail_small) {
+        else if (this == FABlockRegistry.INSTANCE.horsetail_small) {
             this.grow(FABlockRegistry.INSTANCE.horsetail_large, itemstack, world, x, y, z, player);
             return true;
         }

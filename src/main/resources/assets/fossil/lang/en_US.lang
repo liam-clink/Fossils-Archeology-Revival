@@ -1,4 +1,4 @@
-﻿ï»¿#BuildÂ 7.2.0 - UpdatedÂ June 04Â 2015
+#Build�7.3.0 - Updated July 6 2016
 #English (en_US) Localization File
 #Contribution Credits - 
 #Keys last updated June 04 2015
@@ -506,6 +506,8 @@ item.fossilSeed.tempskya.name=Fossilized Tempskya Seeds
 item.fossilSeed.vaccinium.name=Fossilized Vaccinium Seeds
 item.fossilSeed.osmunda.name=Fossilized Osmunda Spores
 item.fossilSeed.crataegus.name=Fossilized Crataegus Seeds
+item.fossilSeed.florissantia.name=Fossilized Florissantia Seeds
+item.fossilSeed.ephedra.name=Fossilized Ephedra Seeds
 item.fernSeeds.name=Ancient Fern Spores
 item.seed.dillhoffia.name=Dillhoffia Seeds
 item.seed.sarracina.name=Sarracenia Seeds
@@ -520,6 +522,8 @@ item.seed.tempskya.name=Tempskya Seeds
 item.seed.vaccinium.name=Vaccinium Seeds
 item.seed.osmunda.name=Osmunda Spores
 item.seed.crataegus.name=Crataegus Seeds
+item.seed.florissantia.name=Florissantia Seeds
+item.seed.ephedra.name=Ephedra Seeds
 tile.plant_dillhoffia.name=Dillhoffia
 tile.plant_sarracina.name=Sarracenia 
 tile.plant_cephalotaxus.name=Cephalotaxus
@@ -536,6 +540,8 @@ tile.plant_tempskya.name=Tempskya
 tile.plant_vaccinium.name=Vaccinium
 tile.plant_osmunda.name=Osmunda
 tile.plant_crataegus.name=Crataegus
+tile.plant_florissantia.name=Florissantia
+tile.plant_ephedra.name=Ephedra
 #Dinosaur related chat messages
 dnaName.head=DNA of 
 dnaName.tail=

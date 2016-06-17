@@ -18,7 +18,7 @@ import com.github.revival.server.block.FABlockRegistry;
 public class FossilSeedsItem extends Item
 
 {
-    private static final String[] fossilSeeds = new String[]{"dillhoffia", "sarracina", "cephalotaxus", "licopodiophyta", "paleopanax", "zamites", "bennettitales", "welwitschia", "horsetail", "tempskya", "vaccinium", "osmunda", "crataegus"};
+    private static final String[] fossilSeeds = new String[]{"dillhoffia", "sarracina", "cephalotaxus", "licopodiophyta", "paleopanax", "zamites", "bennettitales", "welwitschia", "horsetail", "tempskya", "vaccinium", "osmunda", "crataegus", "florissantia", "ephedra"};
     public boolean isFossil;
     private IIcon[] textures;
 
@@ -116,9 +116,16 @@ public class FossilSeedsItem extends Item
                 return true;
             case 11:
                 world.setBlock(x, y + 1, z, FABlockRegistry.INSTANCE.osmunda);
+                return true;
             case 12:
                 world.setBlock(x, y + 1, z, FABlockRegistry.INSTANCE.crataegus);
                 world.setBlock(x, y + 2, z, FABlockRegistry.INSTANCE.crataegus, 8, 3);
+                return true;
+            case 13:
+                world.setBlock(x, y + 1, z, FABlockRegistry.INSTANCE.florissantia);
+                return true;
+            case 14:
+                world.setBlock(x, y + 1, z, FABlockRegistry.INSTANCE.ephedra);
                 return true;
         }
         return false;

@@ -96,8 +96,9 @@ public enum FABlockRegistry {
     public Block vaccinium;
     public Block osmunda;
     public Block crataegus;
+    public Block florissantia;
+    public Block ephedra;
     public Fluid tar_fluid;
-
     public Material tar_material;
     public FossilSoundType soundTypeSlime = new FossilSoundType(1.0F, 1.0F);
 
@@ -181,6 +182,8 @@ public enum FABlockRegistry {
         tempskya = new BlockTempskya().setBlockTextureName("fossil:plants/plant_tempskya_1").setBlockName("plant_tempskya").setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
         crataegus = new BlockFossilTallPlant("plants/plant_crataegus").setBlockName("plant_crataegus").setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
         osmunda = new BlockFossilPlant("plants/plant_osmunda", 1).setBlockName("plant_osmunda").setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
+        florissantia = new BlockFossilPlant("plants/plant_florissantia", 1).setBlockName("plant_florissantia").setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
+        ephedra = new BlockFossilPlant("plants/plant_ephedra", 1).setBlockName("plant_ephedra").setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
 
         try {
             for (Field f : FABlockRegistry.class.getDeclaredFields()) {

@@ -73,6 +73,7 @@ public class EntitySarcosuchus extends EntitySwimmingPrehistoric {
         breaksBlocks = true;
 		this.hasBabyTexture = true;
 		this.ridingY = 1.5F;
+		this.pediaScale = 3;
     }
 
     @Override
