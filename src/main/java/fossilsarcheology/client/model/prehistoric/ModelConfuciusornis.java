@@ -272,8 +272,8 @@ public class ModelConfuciusornis extends ModelNewPrehistoric {
             if (sitProgress >= 10) {
                 this.chainFlap(rightWingParts, speed3, 0.6F, 0, f, f1);
                 this.chainFlap(leftWingParts, speed3, -0.6F, 0, f, f1);
-                this.swing(RightWing, speed3, 0.5F, false, 0F, 0F, f, f1);
-                this.swing(leftWing, speed3, 0.5F, true, 0F, 0F, f, f1);
+                this.swing(RightWing, speed3, 0.3F, false, 0F, 0F, f, f1);
+                this.swing(leftWing, speed3, 0.3F, true, 0F, 0F, f, f1);
             } else {
                 this.walk(leftLeg, speed2, 1.9F, false, 0F, 0F, f, f1);
                 this.walk(rightLeg, speed2, 1.9F, true, 0F, 0F, f, f1);
