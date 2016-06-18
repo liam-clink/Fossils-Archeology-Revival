@@ -32,6 +32,7 @@ public class EntityFriendlyPigZombie extends EntityTameable {
 
     public EntityFriendlyPigZombie(World var1) {
         super(var1);
+        this.setSize(0.5F, 1.9F);
         this.isImmuneToFire = true;
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(1, new EntityAISwimming(this));

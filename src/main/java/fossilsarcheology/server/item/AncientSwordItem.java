@@ -33,10 +33,11 @@ public class AncientSwordItem extends ItemSword {
     public boolean hitEntity(ItemStack par1ItemStack, EntityLivingBase targetentity, EntityLivingBase player) {
         if (player instanceof EntityPlayer) {
             if (player != null && this.checkHelmet((EntityPlayer) player)) {
-                if (targetentity != null && player.worldObj.difficultySetting != EnumDifficulty.PEACEFUL && (targetentity instanceof EntityPig || targetentity instanceof EntityPigZombie)) {
+                if (targetentity != null && (targetentity instanceof EntityPig || targetentity instanceof EntityPigZombie)) {
 
                     if (!targetentity.worldObj.isRemote) {
                         EntityFriendlyPigZombie fpz = new EntityFriendlyPigZombie(targetentity.worldObj);
+                        fpz.setLocationAndAngles(targetentity.posX, targetentity.posY, targetentity.posZ, targetentity.rotationYaw, targetentity.rotationPitch);
                         targetentity.worldObj.spawnEntityInWorld(fpz);
                         if (player instanceof EntityPlayer) {
                             EntityPlayer playerUUID = (EntityPlayer) player;
@@ -45,7 +46,6 @@ public class AncientSwordItem extends ItemSword {
                         }
                         System.out.println(fpz.getOwner());
                         fpz.setTamed(true);
-                        fpz.setLocationAndAngles(targetentity.posX, targetentity.posY, targetentity.posZ, targetentity.rotationYaw, targetentity.rotationPitch);
                         targetentity.worldObj.spawnEntityInWorld(fpz);
                         targetentity.setDead();
                         targetentity.worldObj.spawnEntityInWorld(new EntityLightningBolt(targetentity.worldObj, targetentity.posX, targetentity.posY, targetentity.posZ));
