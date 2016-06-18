@@ -165,7 +165,6 @@ public class EntitySarcosuchus extends EntitySwimmingPrehistoric {
 			super.updateRiderPosition();
 			return;
 		}
-		
 		if (this.riddenByEntity != null && riddenByEntity instanceof EntityLivingBase && !this.func_152114_e(((EntityLivingBase) this.riddenByEntity))) {			if(this.getAnimationTick() % 20 == 0 && this.riddenByEntity != null){
 				this.riddenByEntity.attackEntityFrom(DamageSource.drown, 10);
 				if(riddenByEntity.isDead){
@@ -176,12 +175,11 @@ public class EntitySarcosuchus extends EntitySwimmingPrehistoric {
 			this.rotationYaw *= 0;
 			riddenByEntity.rotationYaw = this.rotationYaw + this.rotationYawHead + 180;
 			rotationYaw = renderYawOffset;
-			float radius = 0.4F * (0.7F * getAgeScale()) * -3;
+			float radius = -0.7F * (0.7F * getAgeScale()) * -3;
 			float angle = (0.01745329251F * this.renderYawOffset) + 3.15F * 0.05F;
 			double extraX = (double) (radius * MathHelper.sin((float) (Math.PI + angle)));
 			double extraZ = (double) (radius * MathHelper.cos(angle));
 			double extraY = 0.5F * getAgeScale();
-			super.updateRiderPosition();
 			riddenByEntity.setPosition(this.posX + extraX, this.posY + extraY, this.posZ + extraZ);		
 		}
 	}
