@@ -23,6 +23,7 @@ import cpw.mods.fml.common.IWorldGenerator;
 public class WorldGenMiscStructures implements IWorldGenerator {
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
+		random.setSeed(world.getSeed() + chunkX + chunkZ);
 		if (Revival.CONFIG.generateHellShips) {
 			BiomeGenBase biome = world.getWorldChunkManager().getBiomeGenAt(chunkX, chunkZ);
 			if (BiomeDictionary.isBiomeOfType(biome, Type.NETHER)) {
