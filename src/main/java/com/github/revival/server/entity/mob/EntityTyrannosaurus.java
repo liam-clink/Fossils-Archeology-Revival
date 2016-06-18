@@ -193,7 +193,7 @@ public class EntityTyrannosaurus extends EntityNewPrehistoric {
 			}
 		}
 		if (getAnimation() == EntityTyrannosaurus.ROAR_ANIMATION && getAnimationTick() == 10) {
-			this.playSound("fossil:tyrannosaurus_roar", 1, 1);
+			this.playSound("fossil:tyrannosaurus_roar", this.getSoundPitch(), this.getSoundVolume());
 		}
 	}
 
