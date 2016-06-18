@@ -4,15 +4,15 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
-import fossilsarcheology.server.enums.EnumPrehistoricMood;
-
-import fossilsarcheology.api.FoodMappings;
 import net.minecraft.command.IEntitySelector;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAITarget;
+import fossilsarcheology.api.FoodMappings;
+import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
+import fossilsarcheology.server.entity.mob.test.EntityToyBase;
+import fossilsarcheology.server.enums.EnumPrehistoricMood;
 
 public class DinoAIHunt extends EntityAITarget {
 	private final int targetTicks;
@@ -54,10 +54,13 @@ public class DinoAIHunt extends EntityAITarget {
 				this.targetEntity = (EntityLivingBase) list.get(0);
 				if(this.taskOwner instanceof EntityNewPrehistoric){
 					EntityNewPrehistoric prehistoric = (EntityNewPrehistoric)this.taskOwner;
+					if(targetEntity instanceof EntityToyBase && prehistoric.ticksTillPlay == 0){
+						return true;
+					}
 					if(!prehistoric.isMovementBlocked() && prehistoric.func_152114_e(targetEntity) && (prehistoric.getMoodFace() == EnumPrehistoricMood.ANGRY || prehistoric.getMoodFace() == EnumPrehistoricMood.SAD)){
 						return true;
 					}
-					if(prehistoric.isMovementBlocked() && !prehistoric.canDinoHunt(targetEntity, true) && prehistoric.isHungry()){
+					if(prehistoric.isMovementBlocked() && !prehistoric.canDinoHunt(targetEntity, true)){
 						return false;
 					}
 					if(FoodMappings.INSTANCE.getEntityFoodAmount(this.targetEntity.getClass(), prehistoric.type.diet) == 0){

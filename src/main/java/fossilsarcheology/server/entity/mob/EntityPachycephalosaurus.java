@@ -13,10 +13,10 @@ import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import fossilsarcheology.server.entity.ai.DinoAIAttackOnCollide;
-import fossilsarcheology.server.entity.ai.DinoAIAvoidEntity;
 import fossilsarcheology.server.entity.ai.DinoAIFollowOwner;
 import fossilsarcheology.server.entity.ai.DinoAIHunt;
 import fossilsarcheology.server.entity.ai.DinoAILookIdle;
+import fossilsarcheology.server.entity.ai.DinoAIRiding;
 import fossilsarcheology.server.entity.ai.DinoAIWander;
 import fossilsarcheology.server.entity.ai.DinoAIWatchClosest;
 import fossilsarcheology.server.entity.mob.test.DinoAIFeeder;
@@ -32,7 +32,7 @@ public class EntityPachycephalosaurus extends EntityNewPrehistoric {
         this.getNavigator().setCanSwim(true);
         this.tasks.addTask(1, new EntityAISwimming(this));
         this.tasks.addTask(2, this.aiSit);
-        this.tasks.addTask(3, new DinoAIAvoidEntity(this, 16.0F, 0.8D, 1.33D));
+        this.tasks.addTask(3, new DinoAIRiding(this, 1.5D));
         this.tasks.addTask(4, new DinoAIAttackOnCollide(this, 1.5D, false));
         this.tasks.addTask(5, new DinoAIFollowOwner(this, 1.0D, 10.0F, 2.0F));
         this.tasks.addTask(6, new DinoAIFeeder(this, 16));
@@ -52,6 +52,7 @@ public class EntityPachycephalosaurus extends EntityNewPrehistoric {
         developsResistance = true;
         breaksBlocks = false;
         hasBabyTexture = false;
+        this.ridingY = 1.55F;
     }
 
     @Override
@@ -183,6 +184,6 @@ public class EntityPachycephalosaurus extends EntityNewPrehistoric {
 	
 	@Override
 	public boolean canBeRidden() {
-		return false;
+		return true;
 	}
 }

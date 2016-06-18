@@ -26,7 +26,7 @@ import fossilsarcheology.server.handler.FossilAchievementHandler;
 public class EntityDodo extends EntityNewPrehistoric {
 
     public EntityDodo(World world) {
-        super(world, EnumPrehistoric.Dodo, 1, 1, 4, 10, 0.2, 0.3);
+        super(world, EnumPrehistoric.Dodo, 1, 1, 4, 10, 0.2, 0.25);
         this.getNavigator().setAvoidsWater(true);
         this.getNavigator().setCanSwim(true);
         this.tasks.addTask(1, new EntityAISwimming(this));

@@ -525,7 +525,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 			ticksSlept++;
 		}
 
-		if (!worldObj.isRemote && !this.isInWater() && !this.isSitting() && this.getRNG().nextInt(100) == 1 && !this.isRiding() && (this.getAnimation() == NO_ANIMATION || this.getAnimation() == SPEAK_ANIMATION) && !this.isSleeping()) {
+		if (!worldObj.isRemote && !this.isInWater() && this.riddenByEntity == null && !this.isSitting() && this.getRNG().nextInt(100) == 1 && !this.isRiding() && (this.getAnimation() == NO_ANIMATION || this.getAnimation() == SPEAK_ANIMATION) && !this.isSleeping()) {
 			this.setSitting(true);
 			ticksSitted = 0;
 		}
@@ -1150,6 +1150,8 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 								Revival.NETWORK_WRAPPER.sendToAll(new MessageFoodParticles(getEntityId(), FABlockRegistry.INSTANCE.volcanicRock));
 								this.setOrder(EnumOrderType.WANDER);
 								setRidingPlayer(player);
+								this.setSitting(false);
+								this.setSleeping(false);
 							} else if (this.getRidingPlayer() == player) {
 								this.setSprinting(true);
 								Revival.NETWORK_WRAPPER.sendToAll(new MessageFoodParticles(getEntityId(), FABlockRegistry.INSTANCE.volcanicRock));
@@ -1369,10 +1371,14 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
 		if (this.type.diet != EnumDiet.HERBIVORE && this.type.diet != EnumDiet.NONE && canAttackClass(target.getClass())) {
 			if (width >= target.width) {
-				return (hunger ? isHungry() : true) || target instanceof EntityToyBase && this.ticksTillPlay == 0;
+				return (hunger ? isHungry() : this.isAngry()) || target instanceof EntityToyBase && this.ticksTillPlay == 0;
 			}
 		}
 		return target instanceof EntityToyBase && this.ticksTillPlay == 0;
+	}
+	
+	public boolean isMad(){
+		return this.getMoodFace()  == EnumPrehistoricMood.SAD;
 	}
 
 	public Flock getNearbyFlock() {
