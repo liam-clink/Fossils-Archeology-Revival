@@ -534,7 +534,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 			this.setSitting(false);
 			ticksSitted = 0;
 		}
-		if (!worldObj.isRemote && !this.isInWater() && this.getRNG().nextInt(500) == 1 && this.canSleep() && (this.getAnimation() == NO_ANIMATION || this.getAnimation() == SPEAK_ANIMATION)) {
+		if (!worldObj.isRemote && !this.isInWater() && this.riddenByEntity == null && !this.isActuallyWeak() && this.getRNG().nextInt(500) == 1 && this.canSleep() && (this.getAnimation() == NO_ANIMATION || this.getAnimation() == SPEAK_ANIMATION)) {
 			this.setSitting(false);
 			this.setSleeping(true);
 			ticksSlept = 0;
@@ -966,6 +966,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 				this.sendStatusMessage(EnumSituation.Betrayed);
 			}
 		}
+		
 		if (i > 0) {
 			this.setSitting(false);
 			this.setSleeping(false);
@@ -1250,19 +1251,19 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 			String toggle = this.hasFeatherToggle ? !this.featherToggle ? "feathered/" : "scaled/" : "";
 			boolean isBaby = this.isChild() && this.hasBabyTexture;
 			String gender = this.hasTeenTexture ? this.isTeen() ? "_teen" : isBaby ? "_baby" : this.getGender() == 0 ? "_female" : "_male" : this.isChild() ? "_baby" : this.getGender() == 0 ? "_female" : "_male";
-			String sleeping = !this.isSleeping() ? this.canBeWeak()? "_sleeping": "" : "_sleeping";
+			String sleeping = !this.isSleeping() ? this.isActuallyWeak()? "_sleeping": "" : "_sleeping";
 			String toggleList = this.hasFeatherToggle ? !this.featherToggle ? "_feathered" : "_scaled" : "";
 			return "fossil:textures/model/" + type.toString().toLowerCase() + "_0/" + toggle + type.toString().toLowerCase() + gender + toggleList + sleeping + ".png";
 		} else {
 			String toggle = this.hasFeatherToggle ? !this.featherToggle ? "feathered/" : "scaled/" : "";
 			String gender = this.getGender() == 0 ? "_female" : "_male";
-			String sleeping = !this.isSleeping() ? this.canBeWeak()? "_sleeping": "" : "_sleeping";
+			String sleeping = !this.isSleeping() ? this.isActuallyWeak()? "_sleeping": "" : "_sleeping";
 			String toggleList = this.hasFeatherToggle ? !this.featherToggle ? "_feathered" : "_scaled" : "";
 			return "fossil:textures/model/" + type.toString().toLowerCase() + "_0/" + toggle + type.toString().toLowerCase() + gender + toggleList + sleeping + ".png";
 		}
 	}
 	
-	public boolean canBeWeak(){
+	public boolean isActuallyWeak(){
 		return (this.aiTameType() == Taming.BLUEGEM || this.aiTameType() == Taming.GEM) && this.isWeak();
 	}
 	public int getTailSegments() {

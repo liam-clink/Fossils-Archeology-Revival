@@ -361,7 +361,79 @@ public class ModelSpinosaurus extends ModelNewPrehistoric {
 	        sitAnimationPos(rightFoot, sitProgress, 0, -2, -1.5F);
 		}
 		{
-			float sitProgress = ((EntitySpinosaurus) entity).isWeak() ? ((EntitySpinosaurus) entity).weakProgress : ((EntitySpinosaurus) entity).sleepProgress;
+			float sitProgress = ((EntitySpinosaurus) entity).sleepProgress;
+			sitAnimationRotationPrev(lowerBody, sitProgress, -((float)Math.toRadians(2.0D)), -((float)Math.toRadians(11.0D)), 0);
+	        sitAnimationRotationPrev(Sail10, sitProgress, (float)Math.toRadians(19.8D), 0, (float)Math.toRadians(1.0D));
+	        sitAnimationRotationPrev(Sail6, sitProgress, (float)Math.toRadians(2.0D), 0, 0);
+	        sitAnimationRotationPrev(Sail14, sitProgress, (float)Math.toRadians(8.8D), 0, -((float)Math.toRadians(6.0D)));
+	        sitAnimationRotationPrev(leftThigh, sitProgress, -((float)Math.toRadians(60.0D)), -((float)Math.toRadians(11.0D)), 0);
+	        sitAnimationRotationPrev(rightThigh, sitProgress, -((float)Math.toRadians(60.0D)), -((float)Math.toRadians(11.0D)), 0);
+	        sitAnimationRotationPrev(Sail7, sitProgress, (float)Math.toRadians(2.0D), 0, 0);
+	        sitAnimationRotationPrev(Sail2, sitProgress, (float)Math.toRadians(1.0D), (float)Math.toRadians(4.0D), (float)Math.toRadians(3.0D));
+	        sitAnimationRotationPrev(Sail11, sitProgress, (float)Math.toRadians(20.0D), 0, 0);
+	        sitAnimationRotationPrev(upperBody, sitProgress, (float)Math.toRadians(4.21D), (float)Math.toRadians(28.0D), 0);
+	        sitAnimationRotationPrev(Sail9, sitProgress, (float)Math.toRadians(2.0D), 0, 0);
+	        sitAnimationRotationPrev(leftLowerArm, sitProgress, -((float)Math.toRadians(62.0D)), 0, 0);
+	        sitAnimationRotationPrev(tail1, sitProgress, -((float)Math.toRadians(19.0D)), -((float)Math.toRadians(15.0D)), 0);
+	        sitAnimationRotationPrev(rightLowerArm, sitProgress, -((float)Math.toRadians(62.0D)), 0, 0);
+	        sitAnimationRotationPrev(leftLeg, sitProgress, -((float)Math.toRadians(20.0D)), 0, 0);
+	        sitAnimationRotationPrev(leftUpperArm, sitProgress, -((float)Math.toRadians(22.0D)), (float)Math.toRadians(11.0D), 0);
+	        sitAnimationRotationPrev(Sail8, sitProgress, (float)Math.toRadians(2.0D), 0, 0);
+	        sitAnimationRotationPrev(rightFoot, sitProgress, (float)Math.toRadians(80.0D), 0, 0);
+	        sitAnimationRotationPrev(Sail5, sitProgress, (float)Math.toRadians(2.0D), 0, 0);
+	        sitAnimationRotationPrev(Sail12, sitProgress, (float)Math.toRadians(19.0D), 0, 0);
+	        sitAnimationRotationPrev(head, sitProgress, -((float)Math.toRadians(29.0D)), (float)Math.toRadians(35.0D), -((float)Math.toRadians(20.0D)));
+	        sitAnimationRotationPrev(Sail3, sitProgress, -((float)Math.toRadians(3.0D)), 0, (float)Math.toRadians(2.0D));
+	        sitAnimationRotationPrev(rightLeg, sitProgress, -((float)Math.toRadians(20.0D)), 0, 0);
+	        sitAnimationRotationPrev(rightUpperArm, sitProgress, -((float)Math.toRadians(22.0D)), (float)Math.toRadians(11.0D), 0);
+	        sitAnimationRotationPrev(Sail13, sitProgress, (float)Math.toRadians(19.1D), -((float)Math.toRadians(12.0D)), -((float)Math.toRadians(1.0D)));
+	        sitAnimationRotationPrev(leftFoot, sitProgress, (float)Math.toRadians(80.0D), 0, 0);
+	        sitAnimationRotationPrev(Sail4, sitProgress, (float)Math.toRadians(2.0D), 0, 0);
+	        sitAnimationRotationPrev(tail2, sitProgress, (float)Math.toRadians(8.74D), -((float)Math.toRadians(28.0D)), 0);
+	        sitAnimationRotationPrev(tail3, sitProgress, -((float)Math.toRadians(0.13D)), -((float)Math.toRadians(29.0D)), -((float)Math.toRadians(7.0D)));
+	        sitAnimationRotationPrev(neck, sitProgress, (float)Math.toRadians(27.13D), (float)Math.toRadians(22.0D), 0);
+	        sitAnimationPos(lowerBody, sitProgress, 0, 5, 0);
+	        sitAnimationPos(rightThigh, sitProgress, 0, 5, 0);
+	        sitAnimationPos(leftThigh, sitProgress, 0, 5, 0);
+	        sitAnimationPos(leftFoot, sitProgress, 0, -2, -1.5F);
+	        sitAnimationPos(rightFoot, sitProgress, 0, -2, -1.5F);
+
+		}
+		{
+			float sitProgress = ((EntitySpinosaurus) entity).swimProgress;
+			sitAnimationRotationPrev(leftThigh, sitProgress, (float)Math.toRadians(65.0D), 0, 0);
+	        sitAnimationRotationPrev(Sail4, sitProgress, (float)Math.toRadians(2.0D), 0, 0);
+	        sitAnimationRotationPrev(rightLeg, sitProgress, -((float)Math.toRadians(15.0D)), 0, 0);
+	        sitAnimationRotationPrev(neck, sitProgress, -((float)Math.toRadians(13.04D)), 0, 0);
+	        sitAnimationRotationPrev(leftUpperArm, sitProgress, (float)Math.toRadians(44.0D), 0, 0);
+	        sitAnimationRotationPrev(head, sitProgress, (float)Math.toRadians(13.04D), 0, 0);
+	        sitAnimationRotationPrev(rightThigh, sitProgress, (float)Math.toRadians(65.0D), 0, 0);
+	        sitAnimationRotationPrev(Sail7, sitProgress, (float)Math.toRadians(2.0D), 0, 0);
+	        sitAnimationRotationPrev(Sail8, sitProgress, (float)Math.toRadians(1.0D), 0, 0);
+	        sitAnimationRotationPrev(Sail5, sitProgress, (float)Math.toRadians(2.0D), 0, 0);
+	        sitAnimationRotationPrev(leftLeg, sitProgress, -((float)Math.toRadians(15.0D)), 0, 0);
+	        sitAnimationRotationPrev(leftFoot, sitProgress, (float)Math.toRadians(83.0D), -((float)Math.toRadians(83.0D)), 0);
+	        sitAnimationRotationPrev(tail1, sitProgress, (float)Math.toRadians(1.0D), 0, 0);
+	        sitAnimationRotationPrev(rightFoot, sitProgress, (float)Math.toRadians(83.0D), (float)Math.toRadians(83.0D), 0);
+	        sitAnimationRotationPrev(lowerBody, sitProgress, -((float)Math.toRadians(2.0D)), 0, 0);
+	        sitAnimationRotationPrev(rightLowerArm, sitProgress, -((float)Math.toRadians(3.0D)), 0, 0);
+	        sitAnimationRotationPrev(tail3, sitProgress, -((float)Math.toRadians(6.13D)), 0, 0);
+	        sitAnimationRotationPrev(Sail2, sitProgress, -((float)Math.toRadians(2.0D)), 0, 0);
+	        sitAnimationRotationPrev(Sail6, sitProgress, (float)Math.toRadians(2.0D), 0, 0);
+	        sitAnimationRotationPrev(upperBody, sitProgress, (float)Math.toRadians(4.21D), 0, 0);
+	        sitAnimationRotationPrev(Sail9, sitProgress, (float)Math.toRadians(1.0D), 0, 0);
+	        sitAnimationRotationPrev(Sail3, sitProgress, -((float)Math.toRadians(2.0D)), 0, 0);
+	        sitAnimationRotationPrev(rightUpperArm, sitProgress, (float)Math.toRadians(44.0D), 0, 0);
+	        sitAnimationRotationPrev(leftLowerArm, sitProgress, -((float)Math.toRadians(3.0D)), 0, 0);
+	        sitAnimationRotationPrev(tail2, sitProgress, (float)Math.toRadians(1.74D), 0, 0);
+	        sitAnimationPos(lowerBody, sitProgress, 0, 5, 0);
+	        sitAnimationPos(rightThigh, sitProgress, 0, 5, 0);
+	        sitAnimationPos(leftThigh, sitProgress, 0, 5, 0);
+	        sitAnimationPos(leftFoot, sitProgress, 0, -2, -1.5F);
+	        sitAnimationPos(rightFoot, sitProgress, 0, -2, -1.5F);
+		}
+		{
+			float sitProgress = ((EntitySpinosaurus) entity).weakProgress;
 			sitAnimationRotationPrev(lowerBody, sitProgress, -((float)Math.toRadians(2.0D)), -((float)Math.toRadians(11.0D)), 0);
 	        sitAnimationRotationPrev(Sail10, sitProgress, (float)Math.toRadians(19.8D), 0, (float)Math.toRadians(1.0D));
 	        sitAnimationRotationPrev(Sail6, sitProgress, (float)Math.toRadians(2.0D), 0, 0);

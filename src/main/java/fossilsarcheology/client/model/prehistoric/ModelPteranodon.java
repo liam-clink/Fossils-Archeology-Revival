@@ -222,8 +222,8 @@ public class ModelPteranodon extends ModelNewPrehistoric {
             if (sitProgress >= 10) {
                 this.chainFlap(rightWingParts, speed3, 0.9F, 1, f, f1);
                 this.chainFlap(leftWingParts, speed3, -0.9F, 1, f, f1);
-                this.swing(WingR1, speed3, 0.7F, false, 0F, 0F, f, f1);
-                this.swing(WingL1, speed3, 0.7F, true, 0F, 0F, f, f1);
+                this.swing(WingR1, speed3, 0.7F, false, 0F, -0.1F, f, f1);
+                this.swing(WingL1, speed3, 0.7F, true, 0F, -0.1F, f, f1);
             } else {
                 this.walk(LegLeft, speed2, 0.9F, false, 0F, 0F, f, f1);
                 this.walk(LegRight, speed2, 0.9F, true, 0F, 0F, f, f1);

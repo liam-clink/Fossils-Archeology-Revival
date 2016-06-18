@@ -341,7 +341,36 @@ public class ModelSarcosuchus extends ModelNewPrehistoric {
 
 		}
 		{
-			float sitProgress = ((EntitySarcosuchus) entity).isWeak() ? ((EntitySarcosuchus) entity).weakProgress : ((EntitySarcosuchus) entity).sleepProgress;
+			float sitProgress = ((EntitySarcosuchus) entity).sleepProgress;
+			sitAnimationRotationPrev(OsteodermUpper, sitProgress, (float)Math.toRadians(5.22D), 0, 0);
+	        sitAnimationRotationPrev(leftHindFoot, sitProgress, (float)Math.toRadians(38.0D), 0, 0);
+	        sitAnimationRotationPrev(upperBody, sitProgress, (float)Math.toRadians(5.22D), 0, 0);
+	        sitAnimationRotationPrev(Teethleft, sitProgress, (float)Math.toRadians(3.0D), 0, 0);
+	        sitAnimationRotationPrev(tail3, sitProgress, (float)Math.toRadians(5.22D), (float)Math.toRadians(13.04D), (float)Math.toRadians(7.83D));
+	        sitAnimationRotationPrev(leftHindLeg, sitProgress, (float)Math.toRadians(68.0D), 0, 0);
+	        sitAnimationRotationPrev(upperJawBulb, sitProgress, (float)Math.toRadians(7.83D), 0, 0);
+	        sitAnimationRotationPrev(OsteodermTail1, sitProgress, -((float)Math.toRadians(2.61D)), 0, 0);
+	        sitAnimationRotationPrev(leftFrontFoot, sitProgress, (float)Math.toRadians(40.0D), 0, 0);
+	        sitAnimationRotationPrev(leftHindThigh, sitProgress, (float)Math.toRadians(26.0D), (float)Math.toRadians(15.65D), 0);
+	        sitAnimationRotationPrev(Teethright, sitProgress, (float)Math.toRadians(3.0D), 0, 0);
+	        sitAnimationRotationPrev(tail1, sitProgress, -((float)Math.toRadians(5.22D)), (float)Math.toRadians(10.43D), 0);
+	        sitAnimationRotationPrev(rightFrontThigh, sitProgress, 0, 0, (float)Math.toRadians(18.26D));
+	        sitAnimationRotationPrev(upperJaw, sitProgress, -((float)Math.toRadians(2.61D)), 0, 0);
+	        sitAnimationRotationPrev(OsteodermTail2, sitProgress, (float)Math.toRadians(2.61D), 0, 0);
+	        sitAnimationRotationPrev(leftFrontLeg, sitProgress, -((float)Math.toRadians(40.0D)), 0, 0);
+	        sitAnimationRotationPrev(rightFrontLeg, sitProgress, -((float)Math.toRadians(40.43D)), 0, 0);
+	        sitAnimationRotationPrev(LowerJaw, sitProgress, -((float)Math.toRadians(7.83D)), 0, 0);
+	        sitAnimationRotationPrev(neck, sitProgress, (float)Math.toRadians(2.61D), (float)Math.toRadians(7.83D), 0);
+	        sitAnimationRotationPrev(head, sitProgress, -((float)Math.toRadians(2.61D)), (float)Math.toRadians(15.65D), 0);
+	        sitAnimationRotationPrev(rightHindLeg, sitProgress, (float)Math.toRadians(68.0D), 0, 0);
+	        sitAnimationRotationPrev(leftFrontThigh, sitProgress, 0, (float)Math.toRadians(13.04D), 0);
+	        sitAnimationRotationPrev(rightFrontFoot, sitProgress, (float)Math.toRadians(40.0D), (float)Math.toRadians(20.87D), 0);
+	        sitAnimationRotationPrev(rightHindThigh, sitProgress, (float)Math.toRadians(26.09D), -((float)Math.toRadians(2.61D)), (float)Math.toRadians(18.26D));
+	        sitAnimationRotationPrev(rightHindFoot, sitProgress, (float)Math.toRadians(38.0D), 0, 0);
+	        sitAnimationPos(lowerBody, sitProgress, 0, 3, 0);
+		}
+		{
+			float sitProgress = ((EntitySarcosuchus) entity).weakProgress;
 			sitAnimationRotationPrev(OsteodermUpper, sitProgress, (float)Math.toRadians(5.22D), 0, 0);
 	        sitAnimationRotationPrev(leftHindFoot, sitProgress, (float)Math.toRadians(38.0D), 0, 0);
 	        sitAnimationRotationPrev(upperBody, sitProgress, (float)Math.toRadians(5.22D), 0, 0);
