@@ -1,5 +1,10 @@
 package fossilsarcheology.server.entity.mob;
 
+import net.ilexiconn.llibrary.server.animation.Animation;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.world.World;
 import fossilsarcheology.server.entity.ai.DinoAIHunt;
 import fossilsarcheology.server.entity.ai.DinoAILookIdle;
 import fossilsarcheology.server.entity.ai.DinoAIWatchClosest;
@@ -8,13 +13,18 @@ import fossilsarcheology.server.entity.mob.test.DinoAIWaterFeeder;
 import fossilsarcheology.server.entity.mob.test.DinoAIWaterFindTarget;
 import fossilsarcheology.server.entity.mob.test.EntitySwimmingPrehistoric;
 import fossilsarcheology.server.enums.EnumPrehistoric;
+import fossilsarcheology.server.enums.EnumPrehistoricAI.Activity;
+import fossilsarcheology.server.enums.EnumPrehistoricAI.Attacking;
+import fossilsarcheology.server.enums.EnumPrehistoricAI.Climbing;
+import fossilsarcheology.server.enums.EnumPrehistoricAI.Following;
+import fossilsarcheology.server.enums.EnumPrehistoricAI.Jumping;
+import fossilsarcheology.server.enums.EnumPrehistoricAI.Moving;
+import fossilsarcheology.server.enums.EnumPrehistoricAI.Response;
+import fossilsarcheology.server.enums.EnumPrehistoricAI.Stalking;
+import fossilsarcheology.server.enums.EnumPrehistoricAI.Taming;
+import fossilsarcheology.server.enums.EnumPrehistoricAI.Untaming;
+import fossilsarcheology.server.enums.EnumPrehistoricAI.WaterAbility;
 import fossilsarcheology.server.item.FAItemRegistry;
-
-import net.ilexiconn.llibrary.server.animation.Animation;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.world.World;
 
 public class EntityPlesiosaurus extends EntitySwimmingPrehistoric {
 

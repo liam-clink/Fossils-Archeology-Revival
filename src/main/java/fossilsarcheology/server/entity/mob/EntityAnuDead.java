@@ -1,13 +1,13 @@
 package fossilsarcheology.server.entity.mob;
 
-import fossilsarcheology.Revival;
-import fossilsarcheology.server.handler.AnuTeleporter;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.World;
+import fossilsarcheology.Revival;
+import fossilsarcheology.server.handler.AnuTeleporter;
 
 public class EntityAnuDead extends EntityLiving {
 

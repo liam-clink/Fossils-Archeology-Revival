@@ -512,7 +512,7 @@ public class GuiPedia extends GuiContainer {
             }
             Map<Item, Integer> foodMap = FoodMappings.INSTANCE.getFoodRenderList(dino.type.diet);
             List<Item> keys = Collections.list(Collections.enumeration(foodMap.keySet()));
-            keys.sort((item1, item2) -> Integer.compare(Item.getIdFromItem((Item) item1), Item.getIdFromItem((Item) item2)));
+            //keys.sort((item1, item2) -> Integer.compare(Item.getIdFromItem((Item) item1), Item.getIdFromItem((Item) item2)));
             Item[] keyArray = keys.toArray(new Item[0]);
             for (Item item : keyArray) {
                 if (items < 64 && !(item instanceof ItemBlock)) {

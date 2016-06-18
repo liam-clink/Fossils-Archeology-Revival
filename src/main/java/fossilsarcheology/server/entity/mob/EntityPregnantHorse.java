@@ -1,16 +1,16 @@
 package fossilsarcheology.server.entity.mob;
 
-import fossilsarcheology.Revival;
-import fossilsarcheology.client.gui.GuiPedia;
-import fossilsarcheology.server.entity.IViviparous;
-import fossilsarcheology.server.enums.EnumPrehistoric;
-import fossilsarcheology.server.handler.LocalizationStrings;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
+import fossilsarcheology.Revival;
+import fossilsarcheology.client.gui.GuiPedia;
+import fossilsarcheology.server.entity.IViviparous;
+import fossilsarcheology.server.enums.EnumPrehistoric;
+import fossilsarcheology.server.handler.LocalizationStrings;
 
 public class EntityPregnantHorse implements IViviparous, IExtendedEntityProperties {
     public final static String PREGNANT_HORSE_PROP = "EntityPregnantHorse";

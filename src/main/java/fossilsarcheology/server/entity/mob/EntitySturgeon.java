@@ -1,8 +1,8 @@
 package fossilsarcheology.server.entity.mob;
 
+import net.minecraft.world.World;
 import fossilsarcheology.server.entity.mob.test.EntityFishBase;
 import fossilsarcheology.server.enums.EnumPrehistoric;
-import net.minecraft.world.World;
 
 public class EntitySturgeon extends EntityFishBase {
     public EntitySturgeon(World par1World) {

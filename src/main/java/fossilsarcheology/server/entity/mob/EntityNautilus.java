@@ -1,11 +1,8 @@
 package fossilsarcheology.server.entity.mob;
 
-import fossilsarcheology.Revival;
-import fossilsarcheology.server.entity.mob.test.EntityFishBase;
-import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
-import fossilsarcheology.server.enums.EnumPrehistoric;
-import fossilsarcheology.server.item.FAItemRegistry;
-import fossilsarcheology.server.message.MessageUpdateNautilus;
+import java.util.Collections;
+import java.util.List;
+
 import net.minecraft.command.IEntitySelector;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
@@ -14,9 +11,12 @@ import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
-
-import java.util.Collections;
-import java.util.List;
+import fossilsarcheology.Revival;
+import fossilsarcheology.server.entity.mob.test.EntityFishBase;
+import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
+import fossilsarcheology.server.enums.EnumPrehistoric;
+import fossilsarcheology.server.item.FAItemRegistry;
+import fossilsarcheology.server.message.MessageUpdateNautilus;
 
 public class EntityNautilus extends EntityFishBase {
 

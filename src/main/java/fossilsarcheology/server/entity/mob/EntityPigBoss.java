@@ -1,13 +1,24 @@
 package fossilsarcheology.server.entity.mob;
 
-import fossilsarcheology.Revival;
-import fossilsarcheology.server.enums.EnumPigmenSpeaks;
-import fossilsarcheology.server.handler.FossilAchievementHandler;
-import fossilsarcheology.server.item.FAItemRegistry;
+import java.util.List;
+import java.util.Random;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EnumCreatureAttribute;
+import net.minecraft.entity.IEntityLivingData;
+import net.minecraft.entity.IRangedAttackMob;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIArrowAttack;
+import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.boss.IBossDisplayData;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.monster.EntityGhast;
@@ -28,9 +39,10 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.StatCollector;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-
-import java.util.List;
-import java.util.Random;
+import fossilsarcheology.Revival;
+import fossilsarcheology.server.enums.EnumPigmenSpeaks;
+import fossilsarcheology.server.handler.FossilAchievementHandler;
+import fossilsarcheology.server.item.FAItemRegistry;
 
 public class EntityPigBoss extends EntityMob implements IBossDisplayData, IRangedAttackMob {
 

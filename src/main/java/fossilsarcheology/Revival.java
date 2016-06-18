@@ -45,7 +45,7 @@ public class Revival {
     public static final String VERSION = "7.3.0-develop";
     public static final String LLIBRARY_VERSION = "1.3.0";
 
-    @SidedProxy(clientSide = "ClientProxy", serverSide = "ServerProxy")
+    @SidedProxy(clientSide = "fossilsarcheology.client.ClientProxy", serverSide = "fossilsarcheology.server.ServerProxy")
     public static ServerProxy PROXY;
     @Instance(MODID)
     public static Revival INSTANCE;

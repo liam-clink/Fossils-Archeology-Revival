@@ -1,7 +1,5 @@
 package fossilsarcheology.server.entity.mob;
 
-import fossilsarcheology.server.block.FABlockRegistry;
-import fossilsarcheology.server.item.FAItemRegistry;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
@@ -12,6 +10,8 @@ import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import fossilsarcheology.server.block.FABlockRegistry;
+import fossilsarcheology.server.item.FAItemRegistry;
 
 public class EntityFailuresaurus extends EntityMob {
     public EntityFailuresaurus(World var1) {

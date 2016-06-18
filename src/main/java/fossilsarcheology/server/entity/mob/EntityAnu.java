@@ -1,19 +1,25 @@
 package fossilsarcheology.server.entity.mob;
 
-import fossilsarcheology.Revival;
-import fossilsarcheology.server.entity.EntityFAPlayer;
-import fossilsarcheology.server.entity.EntityAnuLightning;
-import fossilsarcheology.server.entity.ai.AnuAIArrowAttack;
-import fossilsarcheology.server.entity.ai.AnuAIAttackOnCollide;
-import fossilsarcheology.server.entity.ai.AnuAIAvoidEntity;
-import fossilsarcheology.server.gen.feature.SpikesBlockWorldGen;
-import fossilsarcheology.server.handler.FossilAchievementHandler;
-import fossilsarcheology.server.item.FAItemRegistry;
+import java.util.List;
+
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.IEntityLivingData;
+import net.minecraft.entity.IRangedAttackMob;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.boss.IBossDisplayData;
-import net.minecraft.entity.monster.*;
+import net.minecraft.entity.monster.EntityBlaze;
+import net.minecraft.entity.monster.EntityGhast;
+import net.minecraft.entity.monster.EntityGolem;
+import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.entity.projectile.EntityLargeFireball;
@@ -22,10 +28,22 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.*;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.ChunkCoordinates;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.MathHelper;
+import net.minecraft.util.StatCollector;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-
-import java.util.List;
+import fossilsarcheology.Revival;
+import fossilsarcheology.server.entity.EntityAnuLightning;
+import fossilsarcheology.server.entity.EntityFAPlayer;
+import fossilsarcheology.server.entity.ai.AnuAIArrowAttack;
+import fossilsarcheology.server.entity.ai.AnuAIAttackOnCollide;
+import fossilsarcheology.server.entity.ai.AnuAIAvoidEntity;
+import fossilsarcheology.server.gen.feature.SpikesBlockWorldGen;
+import fossilsarcheology.server.handler.FossilAchievementHandler;
+import fossilsarcheology.server.item.FAItemRegistry;
 
 public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAttackMob {
 
