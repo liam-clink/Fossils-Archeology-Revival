@@ -171,7 +171,7 @@ public class DinoAIFeeder extends EntityAIBase {
                 endTask();
             }
             if (distance < range) {
-                this.dinosaur.getNavigator().tryMoveToXYZ(this.destX, this.destY, this.destZ, 1.0D);
+                this.dinosaur.getNavigator().tryMoveToXYZ(this.destX, this.destY, this.destZ, 0.5D);
 
                 if (distance < 4.5D) {
                     if (this.targetFeeder != null) {

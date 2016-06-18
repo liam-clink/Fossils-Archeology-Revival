@@ -28,7 +28,7 @@ import fossilsarcheology.server.enums.EnumPrehistoricAI;
 public class EntityDilophosaurus extends EntityNewPrehistoric {
 
     public EntityDilophosaurus(World world) {
-        super(world, EnumPrehistoric.Dilophosaurus, 1, 8, 8, 40, 0.25, 0.4);
+        super(world, EnumPrehistoric.Dilophosaurus, 1, 8, 8, 40, 0.25, 0.35);
         this.getNavigator().setAvoidsWater(true);
         this.getNavigator().setCanSwim(true);
         this.tasks.addTask(1, new EntityAISwimming(this));

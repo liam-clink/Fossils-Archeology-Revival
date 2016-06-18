@@ -1010,12 +1010,6 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	}
 
 	@Override
-	public void jump() {
-		super.jump();
-		this.motionY = 0.5D;
-	}
-
-	@Override
 	public boolean interact(EntityPlayer player) {
 		ItemStack itemstack = player.inventory.getCurrentItem();
 		if (this.isSkeleton()) {
