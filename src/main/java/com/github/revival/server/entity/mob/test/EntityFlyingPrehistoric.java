@@ -98,6 +98,7 @@ public abstract class EntityFlyingPrehistoric extends EntityNewPrehistoric {
         }
         if(this.onGround && ticksFlying > 0){
         	ticksFlying = 0;
+        	this.setFlying(false);
         }
         if (getEntityToAttack() != null) {
             flyTowardsTarget();
