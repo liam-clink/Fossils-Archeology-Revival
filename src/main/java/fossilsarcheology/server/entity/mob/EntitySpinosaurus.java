@@ -60,6 +60,8 @@ public class EntitySpinosaurus extends EntitySwimmingPrehistoric {
         developsResistance = true;
         breaksBlocks = true;
         this.hasBabyTexture = true;
+		this.ridingY = 1.21F;
+		this.ridingXZ = -0.3F;
     }
 
     @Override
@@ -184,7 +186,7 @@ public class EntitySpinosaurus extends EntitySwimmingPrehistoric {
 			float angle = (0.01745329251F * this.renderYawOffset) + 3.15F + (modTick_1 * 1.75F) * 0.05F;
 			double extraX = (double) (radius * MathHelper.sin((float) (Math.PI + angle)));
 			double extraZ = (double) (radius * MathHelper.cos(angle));
-			double extraY = 0.5F * (getAgeScale() + (modTick_1 * 0.05) + (modTick_2 * 0.15) - 2);
+			double extraY = 0.8F * (getAgeScale() + (modTick_1 * 0.05) + (modTick_2 * 0.15) - 2);
 			super.updateRiderPosition();
 			riddenByEntity.setPosition(this.posX + extraX, this.posY + extraY, this.posZ + extraZ);		
 		}
@@ -193,11 +195,8 @@ public class EntitySpinosaurus extends EntitySwimmingPrehistoric {
 	@Override
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
-		this.ridingY = 1.21F;
-		this.ridingXZ = -0.3F;
 		if (this.getAttackTarget() != null) {
-			double d0 = this.getDistanceSqToEntity(this.getAttackTarget());
-			if (d0 < 3 * this.getAgeScale()) {
+	        if (getAttackBounds().intersectsWith(this.getAttackTarget().boundingBox)) {
 				this.attackEntityAsMob(this.getAttackTarget());
 				if (this.getAttackTarget().width > 1.5F) {
 					if (this.getAnimation() != ATTACK_ANIMATION) {

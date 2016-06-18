@@ -245,7 +245,7 @@ public class ModelSarcosuchus extends ModelNewPrehistoric {
 		ModelUtils.rotate(animator, leftHindFoot, 73F, 0, 0);
 		animator.endKeyframe();
 		animator.startKeyframe(20);
-		ModelUtils.rotate(animator, lowerBody, 0, 360F, 0);
+		ModelUtils.rotate(animator, lowerBody, 0, 0, 360F);
 		ModelUtils.rotate(animator, rightFrontThigh, 45F, 0, 0);
 		ModelUtils.rotate(animator, rightFrontFoot, 73F, 0, 0);
 		ModelUtils.rotate(animator, leftFrontThigh, 45F, 0, 0);
@@ -259,7 +259,7 @@ public class ModelSarcosuchus extends ModelNewPrehistoric {
 		ModelUtils.rotate(animator, lowerBody, 0, 0, 0);
 		animator.endKeyframe();
 		animator.startKeyframe(20);
-		ModelUtils.rotate(animator, lowerBody, 0, 180F, 0);
+		ModelUtils.rotate(animator, lowerBody, 0, 0, 180F);
 		animator.move(lowerBody, 0, 10, 0);
 		ModelUtils.rotate(animator, rightFrontThigh, 45F, 0, 0);
 		ModelUtils.rotate(animator, rightFrontFoot, 73F, 0, 0);
@@ -271,7 +271,7 @@ public class ModelSarcosuchus extends ModelNewPrehistoric {
 		ModelUtils.rotate(animator, leftHindFoot, 73F, 0, 0);
 		animator.endKeyframe();
 		animator.startKeyframe(20);
-		ModelUtils.rotate(animator, lowerBody, 0, 360F, 0);
+		ModelUtils.rotate(animator, lowerBody, 0, 0, 360F);
 		ModelUtils.rotate(animator, rightFrontThigh, 45F, 0, 0);
 		ModelUtils.rotate(animator, rightFrontFoot, 73F, 0, 0);
 		ModelUtils.rotate(animator, leftFrontThigh, 45F, 0, 0);
@@ -284,7 +284,10 @@ public class ModelSarcosuchus extends ModelNewPrehistoric {
 		animator.startKeyframe(0);
 		ModelUtils.rotate(animator, lowerBody, 0, 0, 0);
 		animator.endKeyframe();
-		animator.resetKeyframe(20);
+		animator.setStaticKeyframe(5);
+		animator.endKeyframe();
+		animator.resetKeyframe(15);
+
 	}
 
 	@Override
