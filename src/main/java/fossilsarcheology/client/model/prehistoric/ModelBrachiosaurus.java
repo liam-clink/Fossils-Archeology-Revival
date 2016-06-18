@@ -83,7 +83,7 @@ public class ModelBrachiosaurus extends ModelNewPrehistoric {
         this.Crest.setRotationPoint(0.0F, 0.9F, -2.8F);
         this.Crest.addBox(-1.0F, -3.7F, -2.6F, 2, 4, 4, 0.0F);
         this.setRotateAngle(Crest, -0.5918411493512771F, 0.0F, 0.0F);
-        this.MidBody = new AdvancedModelRenderer(this, 44, 34);
+        this.MidBody = new AdvancedModelRenderer(this, 45, 34);
         this.MidBody.setRotationPoint(0.0F, -0.7F, 0.9F);
         this.MidBody.addBox(-3.5F, -4.5F, -3.9F, 7, 9, 4, 0.0F);
         this.BackLegLeft = new AdvancedModelRenderer(this, 0, 24);

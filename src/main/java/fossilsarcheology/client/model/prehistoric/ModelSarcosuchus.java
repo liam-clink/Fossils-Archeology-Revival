@@ -304,19 +304,6 @@ public class ModelSarcosuchus extends ModelNewPrehistoric {
 		this.bob(rightFrontThigh, speed, -0.7F, false, entity.ticksExisted, 1);
 		this.bob(rightHindThigh, speed, -0.7F, false, entity.ticksExisted, 1);
 		this.bob(leftHindThigh, speed, -0.7F, false, entity.ticksExisted, 1);
-
-		this.walk(leftFrontThigh, speed2, 0.6F, false, 0F, 0.4F, f, f1);
-		this.walk(leftFrontLeg, speed2, 0.2F, false, 0F, -0.6F, f, f1);
-		this.walk(leftFrontFoot, speed2, -0.6F, true, 2.5F, -0.4F, f, f1);
-		this.walk(rightFrontThigh, speed2, 0.6F, true, 0F, -0.4F, f, f1);
-		this.walk(rightFrontLeg, speed2, 0.2F, true, 0F, 0.6F, f, f1);
-		this.walk(rightFrontFoot, speed2, -0.6F, false, 2.5F, 0.4F, f, f1);
-		this.walk(leftHindThigh, speed2, 0.6F, true, 0F, 0.4F, f, f1);
-		this.walk(leftHindLeg, speed2, 0.2F, true, 0F, -0.6F, f, f1);
-		this.walk(leftHindFoot, speed2, -0.6F, false, 2.5F, -0.4F, f, f1);
-		this.walk(rightHindThigh, speed2, 0.6F, false, 0F, -0.4F, f, f1);
-		this.walk(rightHindLeg, speed2, 0.2F, false, 0F, 0.6F, f, f1);
-		this.walk(rightHindFoot, speed2, -0.6F, true, 2.5F, 0.4F, f, f1);
 		this.chainSwing(tailParts, speed, 0.15F, -3, entity.ticksExisted, 1);
 		this.chainSwing(tailParts, speed2, 0.5F, -3, f, f1);
 		this.chainWave(neckParts, speed, 0.15F, 3, entity.ticksExisted, 1);
@@ -412,7 +399,20 @@ public class ModelSarcosuchus extends ModelNewPrehistoric {
 	        sitAnimationPos(leftFrontThigh, sitProgress, 0, 3, 0);
 	        sitAnimationPos(rightHindThigh, sitProgress, 1, 1, -2);
 	        sitAnimationPos(leftHindThigh, sitProgress, -1, 1, -2);
-
+	        if(sitProgress < 10){
+	        	this.walk(leftFrontThigh, speed2, 0.6F, false, 0F, 0.4F, f, f1);
+	    		this.walk(leftFrontLeg, speed2, 0.2F, false, 0F, -0.6F, f, f1);
+	    		this.walk(leftFrontFoot, speed2, -0.6F, true, 2.5F, -0.4F, f, f1);
+	    		this.walk(rightFrontThigh, speed2, 0.6F, true, 0F, -0.4F, f, f1);
+	    		this.walk(rightFrontLeg, speed2, 0.2F, true, 0F, 0.6F, f, f1);
+	    		this.walk(rightFrontFoot, speed2, -0.6F, false, 2.5F, 0.4F, f, f1);
+	    		this.walk(leftHindThigh, speed2, 0.6F, true, 0F, 0.4F, f, f1);
+	    		this.walk(leftHindLeg, speed2, 0.2F, true, 0F, -0.6F, f, f1);
+	    		this.walk(leftHindFoot, speed2, -0.6F, false, 2.5F, -0.4F, f, f1);
+	    		this.walk(rightHindThigh, speed2, 0.6F, false, 0F, -0.4F, f, f1);
+	    		this.walk(rightHindLeg, speed2, 0.2F, false, 0F, 0.6F, f, f1);
+	    		this.walk(rightHindFoot, speed2, -0.6F, true, 2.5F, 0.4F, f, f1);
+	        }
 		}
 	}
 }
