@@ -149,8 +149,8 @@ public enum FAItemRegistry {
         sjl = new ForgeFoodItem(8, 2.0F, false, "Sio_Chiu_Le").setUnlocalizedName(LocalizationStrings.SJL_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
         fossilrecordBones = new FossilRecordItem(LocalizationStrings.RECORD_BONES_NAME, "fossil:record_bones").setUnlocalizedName(LocalizationStrings.FOSSIL_RECORD_NAME);
         recordNano_Anu = new FossilRecordItem(LocalizationStrings.FOSSIL_RECORD_NANO_ANU, "fossil:record_anu").setUnlocalizedName(LocalizationStrings.RECORD_BONES_NAME);
-        recordNano_Scarab = new FossilRecordItem("music.scarab", "fossil:record_scarab").setUnlocalizedName(LocalizationStrings.RECORD_BONES_NAME);
-        recordNano_Discovering = new FossilRecordItem("music.discovering", "fossil:record_discovering").setUnlocalizedName(LocalizationStrings.RECORD_BONES_NAME);
+        recordNano_Scarab = new FossilRecordItem("music.scarab", "fossil:record_scarab").setUnlocalizedName("record_scarab");
+        recordNano_Discovering = new FossilRecordItem("music.discovery", "fossil:record_discovering").setUnlocalizedName("record_discovery");
         fossilSeed_fern = new ForgeItemItem("plants/fossilSeed_fern").setUnlocalizedName("fossilSeed_fern").setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
         fossilSeed = new FossilSeedsItem(true).setUnlocalizedName("fossilSeed").setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
         seed = new FossilSeedsItem(false).setUnlocalizedName("seed").setCreativeTab(FATabRegistry.INSTANCE.tabFItems);

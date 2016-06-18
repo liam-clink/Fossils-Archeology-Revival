@@ -9,6 +9,8 @@
 	"whip": {"category": "player","sounds": ["whip1"]},
 	"anuTotem": {"category": "player","sounds": ["anuTotem"]},
 	"record_bones_disc": {"category": "record","sounds": [{"name": "record_bones","stream": true}]},
+	"music.discovery": {"category": "record","sounds": [{"name": "music_discovery","stream": true}]},
+	"music.scarab": {"category": "record","sounds": [{"name": "music_scarab","stream": true}]},
 	"music.first_dinosaur": {"category": "record","sounds": [{"name": "music_first_dinosaur","stream": true}]},
     "music.anu": {"category": "record","sounds": [{"name": "music_anu","stream": true}]},
     "music.mating": {"category": "neutral","sounds": [{"name": "music_mating_0", "stream": true}, {"name": "music_mating_1", "stream": true}, {"name": "music_mating_2", "stream": true}]},	
