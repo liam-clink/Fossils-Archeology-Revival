@@ -6,6 +6,7 @@ import fossilsarcheology.server.block.FABlockRegistry;
 import fossilsarcheology.server.block.entity.TileEntityNewFeeder;
 import fossilsarcheology.server.entity.EntityDinoEgg;
 import fossilsarcheology.server.enums.*;
+import fossilsarcheology.server.enums.EnumPrehistoricAI.Taming;
 import fossilsarcheology.server.handler.LocalizationStrings;
 import fossilsarcheology.server.item.FAItemRegistry;
 import fossilsarcheology.server.message.MessageFoodParticles;
@@ -1249,18 +1250,21 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 			String toggle = this.hasFeatherToggle ? !this.featherToggle ? "feathered/" : "scaled/" : "";
 			boolean isBaby = this.isChild() && this.hasBabyTexture;
 			String gender = this.hasTeenTexture ? this.isTeen() ? "_teen" : isBaby ? "_baby" : this.getGender() == 0 ? "_female" : "_male" : this.isChild() ? "_baby" : this.getGender() == 0 ? "_female" : "_male";
-			String sleeping = !this.isSleeping() || !this.isWeak() ? "" : "_sleeping";
+			String sleeping = !this.isSleeping() ? this.canBeWeak()? "_sleeping": "" : "_sleeping";
 			String toggleList = this.hasFeatherToggle ? !this.featherToggle ? "_feathered" : "_scaled" : "";
 			return "fossil:textures/model/" + type.toString().toLowerCase() + "_0/" + toggle + type.toString().toLowerCase() + gender + toggleList + sleeping + ".png";
 		} else {
 			String toggle = this.hasFeatherToggle ? !this.featherToggle ? "feathered/" : "scaled/" : "";
 			String gender = this.getGender() == 0 ? "_female" : "_male";
-			String sleeping = !this.isSleeping() || !this.isWeak() ? "" : "_sleeping";
+			String sleeping = !this.isSleeping() ? this.canBeWeak()? "_sleeping": "" : "_sleeping";
 			String toggleList = this.hasFeatherToggle ? !this.featherToggle ? "_feathered" : "_scaled" : "";
 			return "fossil:textures/model/" + type.toString().toLowerCase() + "_0/" + toggle + type.toString().toLowerCase() + gender + toggleList + sleeping + ".png";
 		}
 	}
-
+	
+	public boolean canBeWeak(){
+		return (this.aiTameType() == Taming.BLUEGEM || this.aiTameType() == Taming.GEM) && this.isWeak();
+	}
 	public int getTailSegments() {
 		return 3;
 	}

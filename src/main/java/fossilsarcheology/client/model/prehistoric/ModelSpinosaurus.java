@@ -336,7 +336,6 @@ public class ModelSpinosaurus extends ModelNewPrehistoric {
 	        sitAnimationRotationPrev(tail3, sitProgress, -((float)Math.toRadians(6.13D)), 0, 0);
 	        sitAnimationRotationPrev(rightLeg, sitProgress, -((float)Math.toRadians(70.0D)), 0, 0);
 	        sitAnimationRotationPrev(head, sitProgress, (float)Math.toRadians(41.0D), 0, 0);
-	        sitAnimationRotationPrev(Sail1, sitProgress, (float)Math.toRadians(40.0D), 0, 0);
 	        sitAnimationRotationPrev(rightFoot, sitProgress, (float)Math.toRadians(80.0D), 0, 0);
 	        sitAnimationRotationPrev(Sail12, sitProgress, (float)Math.toRadians(10.0D), 0, 0);
 	        sitAnimationRotationPrev(Sail4, sitProgress, (float)Math.toRadians(2.0D), 0, 0);
@@ -385,7 +384,6 @@ public class ModelSpinosaurus extends ModelNewPrehistoric {
 	        sitAnimationRotationPrev(Sail12, sitProgress, (float)Math.toRadians(19.0D), 0, 0);
 	        sitAnimationRotationPrev(head, sitProgress, -((float)Math.toRadians(29.0D)), (float)Math.toRadians(35.0D), -((float)Math.toRadians(20.0D)));
 	        sitAnimationRotationPrev(Sail3, sitProgress, -((float)Math.toRadians(3.0D)), 0, (float)Math.toRadians(2.0D));
-	        sitAnimationRotationPrev(Sail1, sitProgress, -((float)Math.toRadians(28.0D)), 0, (float)Math.toRadians(2.0D));
 	        sitAnimationRotationPrev(rightLeg, sitProgress, -((float)Math.toRadians(20.0D)), 0, 0);
 	        sitAnimationRotationPrev(rightUpperArm, sitProgress, -((float)Math.toRadians(22.0D)), (float)Math.toRadians(11.0D), 0);
 	        sitAnimationRotationPrev(Sail13, sitProgress, (float)Math.toRadians(19.1D), -((float)Math.toRadians(12.0D)), -((float)Math.toRadians(1.0D)));
