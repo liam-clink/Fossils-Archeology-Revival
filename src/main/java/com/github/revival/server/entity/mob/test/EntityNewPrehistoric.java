@@ -1180,8 +1180,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 								Revival.NETWORK_WRAPPER.sendToAll(new MessageFoodParticles(getEntityId(), FABlockRegistry.INSTANCE.volcanicRock));
 								this.setMood(this.getMood() - 1);
 							}
-						} else if (this.aiTameType() != Taming.BLUEGEM && this.aiTameType() != Taming.GEM) {
-
+						} else if (!this.isTamed() && this.aiTameType() != Taming.BLUEGEM && this.aiTameType() != Taming.GEM) {
 							this.setMood(this.getMood() - 1);
 							Revival.NETWORK_WRAPPER.sendToAll(new MessageFoodParticles(getEntityId(), FABlockRegistry.INSTANCE.volcanicRock));
 							if (getRNG().nextInt(5) == 0) {
@@ -1396,26 +1395,6 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 			}
 		}
 		return target instanceof EntityToyBase && this.ticksTillPlay == 0;
-	}
-
-	public EntityLivingBase getClosestEntity() {
-		Entity targetEntity;
-		EntityAINearestAttackableTarget.Sorter theNearestAttackableTargetSorter = new EntityAINearestAttackableTarget.Sorter(this);
-		IEntitySelector targetEntitySelector = new IEntitySelector() {
-			@Override
-			public boolean isEntityApplicable(Entity entity) {
-				return (entity instanceof EntityLivingBase);
-			}
-		};
-		double d0 = 64;
-		List list = worldObj.selectEntitiesWithinAABB(EntityLivingBase.class, this.boundingBox.expand(d0, 4.0D, d0), targetEntitySelector);
-		Collections.sort(list, theNearestAttackableTargetSorter);
-
-		if (list.isEmpty()) {
-			return null;
-		} else {
-			return (EntityLivingBase) list.get(0);
-		}
 	}
 
 	public Flock getNearbyFlock() {

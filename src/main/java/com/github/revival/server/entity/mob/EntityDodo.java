@@ -11,6 +11,7 @@ import com.github.revival.server.entity.mob.test.DinoAIFeeder;
 import com.github.revival.server.entity.mob.test.EntityNewPrehistoric;
 import com.github.revival.server.enums.EnumPrehistoric;
 import com.github.revival.server.enums.EnumPrehistoricAI.*;
+import com.github.revival.server.handler.FossilAchievementHandler;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -191,6 +192,12 @@ public class EntityDodo extends EntityNewPrehistoric {
     public int getMaxHunger() {
         return 50;
     }
+    
+	public void onDeath(DamageSource source) {
+		if (source.getEntity() != null && source.getEntity() instanceof EntityPlayer) {
+			((EntityPlayer) source.getEntity()).triggerAchievement(FossilAchievementHandler.deadDodo);
+		}
+	}
     
 	@Override
 	public boolean canBeRidden() {
