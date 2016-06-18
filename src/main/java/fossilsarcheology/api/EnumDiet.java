@@ -18,9 +18,13 @@ public enum EnumDiet {
 	/**Animal does not eat.*/
     NONE(0);
 
-    public int fearIndex;
+    private int fearIndex;
 
     EnumDiet(int fearIndex) {
         this.fearIndex = fearIndex;
+    }
+
+    public int getFearIndex() {
+        return fearIndex;
     }
 }
