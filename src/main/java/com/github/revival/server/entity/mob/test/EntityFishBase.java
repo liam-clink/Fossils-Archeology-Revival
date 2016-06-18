@@ -132,7 +132,7 @@ public abstract class EntityFishBase extends EntityTameable {
         IEntitySelector targetEntitySelector = new IEntitySelector() {
             @Override
             public boolean isEntityApplicable(Entity entity) {
-                return entity instanceof EntityFishBase;
+                return EntityFishBase.class != null && entity instanceof EntityFishBase;
             }
         };
         List<EntityFishBase> list = worldObj.selectEntitiesWithinAABB(EntityFishBase.class, this.boundingBox.expand(2.0D, 2.0D, 2.0D), targetEntitySelector);
