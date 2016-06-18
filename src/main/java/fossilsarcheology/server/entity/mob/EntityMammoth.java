@@ -68,7 +68,7 @@ public class EntityMammoth extends EntityNewPrehistoric implements IShearable {
         teenAge = 7;
         developsResistance = true;
         breaksBlocks = true;
-		this.ridingY = 1.35F;
+		this.ridingY = 1.05F;
     }
 
     @Override

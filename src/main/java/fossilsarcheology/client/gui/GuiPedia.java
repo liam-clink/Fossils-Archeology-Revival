@@ -226,6 +226,7 @@ public class GuiPedia extends GuiContainer {
             } else if (Revival.toPedia instanceof EntityFishBase) {
                 renderFirstPage((EntityFishBase) Revival.toPedia);
             }
+        }
             /*
 			 * if (Revival.toPedia instanceof EntityDinoEgg) { ((EntityDinoEgg)
 			 * Revival.toPedia).showPedia(this); } else if (Revival.toPedia
@@ -246,11 +247,10 @@ public class GuiPedia extends GuiContainer {
 			 * instanceof EntityTerrorBird) { ((EntityTerrorBird)
 			 * Revival.toPedia).showPedia(this); }
 			 */
-        } else {
+        else {
             if (Revival.toPedia instanceof EntityNewPrehistoric) {
                 showPrehistoricBio(((EntityNewPrehistoric) Revival.toPedia).type.toString());
             } else if (Revival.toPedia instanceof EntityFishBase) {
-                // ((EntityFishBase) Revival.toPedia).showPedia2(this);
             } else if (Revival.toPedia instanceof EntityQuagga) {
                 ((EntityQuagga) Revival.toPedia).showPedia2(this);
             }
@@ -437,6 +437,11 @@ public class GuiPedia extends GuiContainer {
             GL11.glScalef(1.5F, 1.5F, 1.5F);
             printStringXY(StatCollector.translateToLocal(entity.getCommandSenderName()), (-this.fontRendererObj.getStringWidth(s1) / 2) + 65, 60, 66, 48, 36);
         }
+        if (entity instanceof EntityQuagga) {
+            String s1 = StatCollector.translateToLocal(entity.getCommandSenderName());
+            GL11.glScalef(1.5F, 1.5F, 1.5F);
+            printStringXY(StatCollector.translateToLocal(entity.getCommandSenderName()), (-this.fontRendererObj.getStringWidth(s1) / 2) + 65, 60, 66, 48, 36);
+        }
     }
 
     private void renderFirstPageRight(EntityLivingBase entity) {
@@ -545,7 +550,11 @@ public class GuiPedia extends GuiContainer {
                     renderDinosaur(k + 100, l + 80, Math.round(2 * ((EntityNewPrehistoric) Revival.toPedia).pediaScale), 0, 0, (EntityLivingBase) Revival.toPedia);
 
                 } else {
-                    renderDinosaur(k + 100, l + 80, 80, 0, 0, (EntityLivingBase) Revival.toPedia);
+                	if(Revival.toPedia instanceof EntityQuagga){
+                        renderDinosaur(k + 100, l + 30, 80, 0, 0, (EntityLivingBase) Revival.toPedia);
+                	}else{
+                		renderDinosaur(k + 100, l + 80, 80, 0, 0, (EntityLivingBase) Revival.toPedia);
+                	}
                 }
             }
 

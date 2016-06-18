@@ -169,7 +169,7 @@ public class EntityAnkylosaurus extends EntityNewPrehistoric {
                 return false;
             }
 
-            if (this.getAnimation() == ATTACK_ANIMATION && this.getAnimationTick() == 20) {
+            if (this.getAnimation() == ATTACK_ANIMATION && this.getAnimationTick() > 15) {
                 IAttributeInstance iattributeinstance = this.getEntityAttribute(SharedMonsterAttributes.attackDamage);
                 boolean flag = entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) iattributeinstance.getAttributeValue());
                 if (entity.ridingEntity != null) {
