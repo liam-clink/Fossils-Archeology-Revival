@@ -36,40 +36,29 @@ public class WorldGenMiscStructures implements IWorldGenerator {
 			}
 		}
 		if (Revival.CONFIG.generateMoai) {
-			if (random.nextInt(30) == 0) {
+			if (random.nextInt(25) == 0) {
 				int Xcoord1 = chunkX * 16 + random.nextInt(16);
 				int Zcoord1 = chunkZ * 16 + random.nextInt(16);
 				int Ycoord1 = world.getHeightValue(Xcoord1, Zcoord1) - random.nextInt(4);
 				BiomeGenBase biome = world.getWorldChunkManager().getBiomeGenAt(Xcoord1, Zcoord1);
-				if (BiomeDictionary.isBiomeOfType(biome, Type.BEACH)) {
+				if (BiomeDictionary.isBiomeOfType(biome, Type.BEACH) && !world.provider.hasNoSky && !world.provider.isHellWorld && world.getBlock(Xcoord1, Ycoord1, Zcoord1) == biome.topBlock) {
 					new MoaiWorldGen().generate(world, random, Xcoord1, Ycoord1, Zcoord1);
 				}
 			}
 		}
 		if (Revival.CONFIG.generateAztecWeaponShops) {
-			if (random.nextInt(48) == 0) {
+			if (random.nextInt(12) == 0) {
 				int Xcoord1 = chunkX * 16 + random.nextInt(16);
 				int Zcoord1 = chunkZ * 16 + random.nextInt(16);
 				int Ycoord1 = world.getHeightValue(Xcoord1, Zcoord1) - 4;
 				BiomeGenBase biome = world.getWorldChunkManager().getBiomeGenAt(Xcoord1, Zcoord1);
-				if (BiomeDictionary.isBiomeOfType(biome, Type.JUNGLE)) {
-					new AztecWeaponsShopWorldGen().generate(world, random, Xcoord1, Ycoord1, Zcoord1);
-				}
-			}
-		}
-		if (Revival.CONFIG.generateAztecWeaponShops) {
-			if (random.nextInt(48) == 0) {
-				int Xcoord1 = chunkX * 16 + random.nextInt(16);
-				int Zcoord1 = chunkZ * 16 + random.nextInt(16);
-				int Ycoord1 = world.getHeightValue(Xcoord1, Zcoord1) - 4;
-				BiomeGenBase biome = world.getWorldChunkManager().getBiomeGenAt(Xcoord1, Zcoord1);
-				if (BiomeDictionary.isBiomeOfType(biome, Type.JUNGLE)) {
+				if (BiomeDictionary.isBiomeOfType(biome, Type.JUNGLE) && !world.provider.hasNoSky && !world.provider.isHellWorld && world.getBlock(Xcoord1, Ycoord1, Zcoord1) == biome.topBlock){
 					new AztecWeaponsShopWorldGen().generate(world, random, Xcoord1, Ycoord1, Zcoord1);
 				}
 			}
 		}
 		if (Revival.CONFIG.generateTarSites) {
-			if (random.nextInt(48) == 0) {
+			if (random.nextInt(45) == 0) {
 				int Xcoord1 = chunkX * 16 + random.nextInt(16);
 				int Zcoord1 = chunkZ * 16 + random.nextInt(16);
 				int Ycoord1 = world.getHeightValue(Xcoord1, Zcoord1);
@@ -80,7 +69,7 @@ public class WorldGenMiscStructures implements IWorldGenerator {
 			}
 		}
 		if (Revival.CONFIG.generateFossilSites) {
-			if (random.nextInt(48) == 0) {
+			if (random.nextInt(45) == 0) {
 				int Xcoord1 = chunkX * 16 + random.nextInt(16);
 				int Zcoord1 = chunkZ * 16 + random.nextInt(16);
 				int Ycoord1 = world.getHeightValue(Xcoord1, Zcoord1);
