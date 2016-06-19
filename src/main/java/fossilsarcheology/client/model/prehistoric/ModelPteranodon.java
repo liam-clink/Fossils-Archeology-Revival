@@ -205,7 +205,7 @@ public class ModelPteranodon extends ModelNewPrehistoric {
             sitAnimationPos(LegLeft, sitProgress, -0.4F, 0, -3.4F);
         }
         {
-            float sitProgress = ((EntityFlyingPrehistoric) entity).isLanding() ? 20 : ((EntityFlyingPrehistoric) entity).flyProgress;
+            float sitProgress = ((EntityFlyingPrehistoric) entity).flyProgress;
             sitAnimationRotation(WingR1Child, sitProgress, (float) Math.toRadians(18.999999959540737D), (float) Math.toRadians(2.609999910412874D), (float) Math.toRadians(58.919998497711354D));
             sitAnimationRotation(WingR1Child_1, sitProgress, 0, -(float) Math.toRadians(180D), 0);
             sitAnimationRotation(WingR1, sitProgress, (float) Math.toRadians(7.0D), (float) Math.toRadians(19.0D), ((float) Math.toRadians(55.0D)));
