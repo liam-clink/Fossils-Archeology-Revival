@@ -40,7 +40,6 @@ public class EntityPterosaur extends EntityFlyingPrehistoric {
         this.tasks.addTask(1, new EntityAISwimming(this));
         this.tasks.addTask(2, this.aiSit);
         this.tasks.addTask(3, new DinoAIFindAirTarget(this));
-        this.tasks.addTask(4, new DinoAIAvoidEntity(this, 16.0F, 0.8D, 1.33D));
         this.tasks.addTask(5, new DinoAILeapAtTarget(this));
         this.tasks.addTask(6, new DinoAIFollowOwner(this, 1.0D, 10.0F, 2.0F));
         this.tasks.addTask(7, new DinoAIFeeder(this, 16));

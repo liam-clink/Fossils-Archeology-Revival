@@ -13,9 +13,7 @@ public abstract class EntityFlyingPrehistoric extends EntityNewPrehistoric {
 
 	public ChunkCoordinates currentTarget;
 	public static final int FLYING_INDEX = 29;
-	public static final int LANDING_INDEX = 30;
 	private boolean isFlying;
-	private boolean isLanding;
 	public float flyProgress;
 	private int ticksFlying;
 
@@ -29,29 +27,21 @@ public abstract class EntityFlyingPrehistoric extends EntityNewPrehistoric {
 	}
 
 	@Override
-	public boolean isMovementBlocked() {
-		return this.isLanding() || super.isMovementBlocked();
-	}
-
-	@Override
 	protected void entityInit() {
 		super.entityInit();
 		this.dataWatcher.addObject(FLYING_INDEX, (byte) 0);
-		this.dataWatcher.addObject(LANDING_INDEX, (byte) 0);
 	}
 
 	@Override
 	public void writeEntityToNBT(NBTTagCompound compound) {
 		super.writeEntityToNBT(compound);
 		compound.setBoolean("Flying", this.isFlying);
-		compound.setBoolean("Landing", this.isLanding);
 	}
 
 	@Override
 	public void readEntityFromNBT(NBTTagCompound compound) {
 		super.readEntityFromNBT(compound);
 		this.setFlying(compound.getBoolean("Flying"));
-		this.setLanding(compound.getBoolean("Landing"));
 
 	}
 
@@ -65,27 +55,17 @@ public abstract class EntityFlyingPrehistoric extends EntityNewPrehistoric {
 		return isFlying;
 	}
 
-	public boolean isLanding() {
-		if (worldObj.isRemote) {
-			boolean isLanding = (this.dataWatcher.getWatchableObjectByte(LANDING_INDEX) & 1) != 0;
-			this.isLanding = isLanding;
-			return isLanding;
-		}
-
-		return isLanding;
-	}
-
 	@Override
 	public void jump() {
 		super.jump();
 		this.motionY = 0.7D;
 	}
-	
+
 	@Override
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
 		boolean flying = isFlying();
-		if(!this.onGround)
+		if (!this.onGround)
 			this.motionY *= 0.6;
 		if (flying && flyProgress < 20.0F) {
 			flyProgress += 0.5F;
@@ -96,23 +76,14 @@ public abstract class EntityFlyingPrehistoric extends EntityNewPrehistoric {
 			if (sitProgress != 0)
 				sitProgress = sleepProgress = 0F;
 		}
-		if (!this.isMovementBlocked() && rand.nextInt(400) == 0 && !this.worldObj.isRemote && this.isAdult() && this.riddenByEntity == null && this.onGround) {
+		if (!this.isFlying() && !this.isMovementBlocked() && rand.nextInt(400) == 0 && !this.worldObj.isRemote && this.isAdult() && this.riddenByEntity == null && this.onGround) {
 			this.setFlying(true);
 		}
-		if (this.isFlying()) {
+		if (this.isFlying() && getEntityToAttack() == null) {
 			flyAround();
 			ticksFlying++;
-		}
-		if(this.onGround && ticksFlying > 40){
-			ticksFlying = 0;
-			this.setFlying(false);
-		}
-		if (getEntityToAttack() != null) {
+		} else if (getEntityToAttack() != null) {
 			flyTowardsTarget();
-		}
-		if (this.isLanding() && this.onGround) {
-			this.setFlying(false);
-			this.setLanding(false);
 		}
 	}
 
@@ -127,20 +98,6 @@ public abstract class EntityFlyingPrehistoric extends EntityNewPrehistoric {
 
 		if (!worldObj.isRemote) {
 			this.isFlying = flying;
-		}
-	}
-
-	public void setLanding(boolean landing) {
-		byte b0 = this.dataWatcher.getWatchableObjectByte(LANDING_INDEX);
-
-		if (landing) {
-			this.dataWatcher.updateObject(LANDING_INDEX, (byte) (b0 | 1));
-		} else {
-			this.dataWatcher.updateObject(LANDING_INDEX, (byte) (b0 & -2));
-		}
-
-		if (!worldObj.isRemote) {
-			this.isLanding = landing;
 		}
 	}
 
@@ -172,7 +129,7 @@ public abstract class EntityFlyingPrehistoric extends EntityNewPrehistoric {
 			float rotation = MathHelper.wrapAngleTo180_float(angle - rotationYaw);
 			moveForward = 0.5F;
 			rotationYaw += rotation;
-		}else{
+		} else {
 			this.currentTarget = null;
 		}
 	}
