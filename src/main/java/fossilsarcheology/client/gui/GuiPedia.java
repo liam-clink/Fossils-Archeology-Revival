@@ -238,20 +238,20 @@ public class GuiPedia extends GuiContainer {
 				String s1 = StatCollector.translateToLocal(entity.getCommandSenderName());
 				String s2 = StatCollector.translateToLocal("prehistoric.pregnant");
 	            int quot = (int) Math.floor(((float) ((EntityPregnantHorse)Revival.toPedia).EmbryoProgress / (float) ((EntityPregnantHorse)Revival.toPedia).Embryo.growTime * 100.0F));
-				String s3 = StatCollector.translateToLocal("prehistoric.pregnantTime") + String.valueOf(quot) + "%";
+	            String s3 = StatCollector.translateToLocal("prehistoric.pregnantTime") + String.valueOf(quot) + "%";
+				printStringXY(s3, (-this.fontRendererObj.getStringWidth(s3) / 2) + 100, 110, 157, 126, 103);
 				GL11.glScalef(1.5F, 1.5F, 1.5F);
 				printStringXY(s2 + StatCollector.translateToLocal(entity.getCommandSenderName()), (-this.fontRendererObj.getStringWidth(s2 + s1) / 2) + 65, 60, 66, 48, 36);
-				printStringXY(s3, (-this.fontRendererObj.getStringWidth(s3) / 2), 110, 157, 126, 103);
 			}
 			if (Revival.toPedia instanceof EntityPregnantCow) {
 				EntityCow entity = ((EntityPregnantCow)Revival.toPedia).cow;
 				String s1 = StatCollector.translateToLocal(entity.getCommandSenderName());
 				String s2 = StatCollector.translateToLocal("prehistoric.pregnant");
 	            int quot = (int) Math.floor(((float) ((EntityPregnantCow)Revival.toPedia).EmbryoProgress / (float) ((EntityPregnantCow)Revival.toPedia).Embryo.growTime * 100.0F));
-				String s3 = StatCollector.translateToLocal("prehistoric.pregnantTime") + String.valueOf(quot) + "%";
+	            String s3 = StatCollector.translateToLocal("prehistoric.pregnantTime") + String.valueOf(quot) + "%";
+				printStringXY(s3, (-this.fontRendererObj.getStringWidth(s3) / 2) + 100, 110, 157, 126, 103);
 				GL11.glScalef(1.5F, 1.5F, 1.5F);
 				printStringXY(s2 + StatCollector.translateToLocal(entity.getCommandSenderName()), (-this.fontRendererObj.getStringWidth(s2 + s1) / 2) + 65, 60, 66, 48, 36);
-				printStringXY(s3, (-this.fontRendererObj.getStringWidth(s3) / 2), 110, 157, 126, 103);
 			}
 			if (Revival.toPedia instanceof EntityPregnantSheep) {
 				EntitySheep entity = ((EntityPregnantSheep)Revival.toPedia).sheep;
@@ -259,9 +259,9 @@ public class GuiPedia extends GuiContainer {
 				String s2 = StatCollector.translateToLocal("prehistoric.pregnant");
 	            int quot = (int) Math.floor(((float) ((EntityPregnantSheep)Revival.toPedia).EmbryoProgress / (float) ((EntityPregnantSheep)Revival.toPedia).Embryo.growTime * 100.0F));
 				String s3 = StatCollector.translateToLocal("prehistoric.pregnantTime") + String.valueOf(quot) + "%";
+				printStringXY(s3, (-this.fontRendererObj.getStringWidth(s3) / 2) + 100, 110, 157, 126, 103);
 				GL11.glScalef(1.5F, 1.5F, 1.5F);
 				printStringXY(s2 + StatCollector.translateToLocal(entity.getCommandSenderName()), (-this.fontRendererObj.getStringWidth(s2 + s1) / 2) + 65, 60, 66, 48, 36);
-				printStringXY(s3, (-this.fontRendererObj.getStringWidth(s3) / 2), 110, 157, 126, 103);
 			}
 			if (Revival.toPedia instanceof EntityPregnantPig) {
 				EntityPig entity = ((EntityPregnantPig)Revival.toPedia).pig;
@@ -269,9 +269,9 @@ public class GuiPedia extends GuiContainer {
 				String s2 = StatCollector.translateToLocal("prehistoric.pregnant");
 	            int quot = (int) Math.floor(((float) ((EntityPregnantPig)Revival.toPedia).EmbryoProgress / (float) ((EntityPregnantPig)Revival.toPedia).Embryo.growTime * 100.0F));
 				String s3 = StatCollector.translateToLocal("prehistoric.pregnantTime") + String.valueOf(quot) + "%";
+				printStringXY(s3, (-this.fontRendererObj.getStringWidth(s3) / 2) + 100, 110, 157, 126, 103);
 				GL11.glScalef(1.5F, 1.5F, 1.5F);
 				printStringXY(s2 + StatCollector.translateToLocal(entity.getCommandSenderName()), (-this.fontRendererObj.getStringWidth(s2 + s1) / 2) + 65, 60, 66, 48, 36);
-				printStringXY(s3, (-this.fontRendererObj.getStringWidth(s3) / 2), 110, 157, 126, 103);
 			}
 
 			if (Revival.toPedia instanceof EntityLivingBase) {
@@ -603,10 +603,10 @@ public class GuiPedia extends GuiContainer {
 				renderDinosaur(k + 100, l + 80, 80, 0, 0, ((EntityPregnantPig) Revival.toPedia).pig);
 			}
 			if(Revival.toPedia instanceof EntityPregnantCow){
-				renderDinosaur(k + 100, l + 80, 80, 0, 0, ((EntityPregnantCow) Revival.toPedia).cow);
+				renderDinosaur(k + 100, l + 80, 60, 0, 0, ((EntityPregnantCow) Revival.toPedia).cow);
 			}
 			if(Revival.toPedia instanceof EntityPregnantSheep){
-				renderDinosaur(k + 100, l + 80, 80, 0, 0, ((EntityPregnantSheep) Revival.toPedia).sheep);
+				renderDinosaur(k + 100, l + 80, 60, 0, 0, ((EntityPregnantSheep) Revival.toPedia).sheep);
 			}
 			if(Revival.toPedia instanceof EntityPregnantHorse){
 				renderDinosaur(k + 100, l + 80, 50, 0, 0, ((EntityPregnantHorse) Revival.toPedia).horse);
