@@ -3,7 +3,6 @@ package fossilsarcheology.client.model.prehistoric;
 import fossilsarcheology.client.model.prehistoric.test.ModelNewPrehistoric;
 import fossilsarcheology.server.entity.mob.EntityLiopleurodon;
 import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
-
 import net.ilexiconn.llibrary.client.model.ModelAnimator;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
@@ -128,6 +127,11 @@ public class ModelLiopleurodon extends ModelNewPrehistoric {
 		blockMovement(f, f1, f2, f3, f4, f5, (Entity) entity);
 		this.resetToDefaultPose();
 		setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
+		animator.setAnimation(EntityNewPrehistoric.SPEAK_ANIMATION);
+        animator.startKeyframe(10);
+        ModelUtils.rotate(animator, JawBottom, 15, 0, 0);
+        animator.endKeyframe();
+        animator.resetKeyframe(10);
 		animator.setAnimation(EntityLiopleurodon.SHAKE_ANIMATION);
 		animator.startKeyframe(10);
 		ModelUtils.rotate(animator, Neck, 0, -23F, 0);

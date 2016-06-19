@@ -188,6 +188,11 @@ public class ModelGallimimus extends ModelNewPrehistoric {
         blockMovement(f, f1, f2, f3, f4, f5, (Entity) entity);
         this.resetToDefaultPose();
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
+        animator.setAnimation(EntityNewPrehistoric.SPEAK_ANIMATION);
+        animator.startKeyframe(10);
+        animator.move(lowerJaw, 0, 0, 0.5F);
+        ModelUtils.rotate(animator, lowerJaw, 30, 0, 0);
+        animator.endKeyframe();
         animator.setAnimation(EntityDilophosaurus.ATTACK_ANIMATION);
         animator.startKeyframe(10);
         ModelUtils.rotate(animator, neck, -36, 0, 0);
@@ -224,6 +229,7 @@ public class ModelGallimimus extends ModelNewPrehistoric {
 
         float speed = 0.1F;
         float speed2 = 0.4F;
+        float degree = 0.5F;
         {
             float sitProgress = ((EntityNewPrehistoric) (entity)).sitProgress;
             sitAnimationRotation(tail3, sitProgress, (float) Math.toRadians(5.22D), 0, 0);
@@ -265,23 +271,23 @@ public class ModelGallimimus extends ModelNewPrehistoric {
             sitAnimationPos(rightThigh, sitProgress, 0F, 16.60F - ModelUtils.getDefaultPositionY(rightThigh), 0F);
             sitAnimationPos(leftThigh, sitProgress, 0F, 16.60F - ModelUtils.getDefaultPositionY(leftThigh), 0F);
         }
-        this.walk(upperBody, speed, 0.05F, false, 1F, 0F, entity.ticksExisted, 1);
-        this.bob(lowerBody, speed, 0.5F, false, entity.ticksExisted, 1);
-        this.chainWave(tailParts, speed, 0.05F, -3, entity.ticksExisted, 1);
-        this.chainWave(leftArmParts, speed, -0.15F, -3, entity.ticksExisted, 1);
-        this.chainWave(rightArmParts, speed, -0.15F, -3, entity.ticksExisted, 1);
-        this.chainSwing(tailParts, speed, 0.15F, -3, entity.ticksExisted, 1);
-        this.chainSwing(tailParts, speed2, 0.25F, -3, f, f1);
-        this.chainWave(neckParts, speed, 0.05F, 3, entity.ticksExisted, 1);
-        this.chainWave(neckParts, speed, 0.15F, 3, f, f1);
-        this.walk(leftThigh, speed2, 0.8F, false, 0F, -0.4F, f, f1);
-        this.walk(leftLeg, speed2, 0.2F, false, 0F, 0.6F, f, f1);
-        this.walk(leftFoot, speed2, -0.4F, true, -0.5F, -0.2F, f, f1);
-        this.walk(rightThigh, speed2, 0.8F, true, 0F, 0.4F, f, f1);
-        this.walk(rightLeg, speed2, 0.2F, true, 0F, -0.6F, f, f1);
-        this.walk(rightFoot, speed2, -0.4F, false, -0.5F, -0.2F, f, f1);
-        this.chainWave(neckParts, speed2, 0.5F, 4, f, f1);
-        this.chainWave(tailParts, speed2, 0.3F, -4, f, f1);
+        this.walk(upperBody, speed, degree * 0.05F, false, 1F, 0F, entity.ticksExisted, 1);
+        this.bob(lowerBody, speed, degree * 0.5F, false, entity.ticksExisted, 1);
+        this.chainWave(tailParts, speed, degree * 0.05F, -3, entity.ticksExisted, 1);
+        this.chainWave(leftArmParts, speed, degree * -0.15F, -3, entity.ticksExisted, 1);
+        this.chainWave(rightArmParts, speed, degree * -0.15F, -3, entity.ticksExisted, 1);
+        this.chainSwing(tailParts, speed, degree * 0.15F, -3, entity.ticksExisted, 1);
+        this.chainSwing(tailParts, speed2, degree * 0.25F, -3, f, f1);
+        this.chainWave(neckParts, speed, degree * 0.05F, 3, entity.ticksExisted, 1);
+        this.chainWave(neckParts, speed, degree * 0.15F, 3, f, f1);
+        this.walk(leftThigh, speed2, degree * 0.8F, false, 0F, -0.4F, f, f1);
+        this.walk(leftLeg, speed2, degree * 0.2F, false, 0F, 0.6F, f, f1);
+        this.walk(leftFoot, speed2, degree * -0.4F, true, -0.5F, -0.2F, f, f1);
+        this.walk(rightThigh, speed2, degree * 0.8F, true, 0F, 0.4F, f, f1);
+        this.walk(rightLeg, speed2, degree * 0.2F, true, 0F, -0.6F, f, f1);
+        this.walk(rightFoot, speed2, degree * -0.4F, false, -0.5F, -0.2F, f, f1);
+        this.chainWave(neckParts, speed2, degree * 0.5F, 4, f, f1);
+        this.chainWave(tailParts, speed2, degree * 0.3F, -4, f, f1);
         ((EntityNewPrehistoric) entity).chainBuffer.applyChainSwingBuffer((ModelRenderer[]) tailParts);
     }
 }
