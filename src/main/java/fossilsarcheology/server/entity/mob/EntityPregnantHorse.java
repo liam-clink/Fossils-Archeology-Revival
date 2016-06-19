@@ -14,7 +14,7 @@ import fossilsarcheology.server.handler.LocalizationStrings;
 
 public class EntityPregnantHorse implements IViviparous, IExtendedEntityProperties {
     public final static String PREGNANT_HORSE_PROP = "EntityPregnantHorse";
-    private final EntityHorse horse;
+    public final EntityHorse horse;
 
     public int EmbryoProgress;
     public EnumPrehistoric Embryo;

@@ -56,7 +56,7 @@ public enum EnumPrehistoric {
 	public Item embryoItem;
 	public Item birdEggItem;
 	public Item bestBirdEggItem;
-	public int growTime = 100;
+	public int growTime = 10000;
 	public int mainSpawnColor;
 	public int secondSpawnColor;
 	public float eggScale;
