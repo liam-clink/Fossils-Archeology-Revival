@@ -5,7 +5,6 @@ import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-
 import fossilsarcheology.client.model.prehistoric.test.ModelNewPrehistoric;
 import fossilsarcheology.server.entity.mob.test.EntityFlyingPrehistoric;
 import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
@@ -183,6 +182,11 @@ public class ModelConfuciusornis extends ModelNewPrehistoric {
 		blockMovement(f, f1, f2, f3, f4, f5, (Entity) entity);
 		this.resetToDefaultPose();
 		setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
+		animator.setAnimation(EntityNewPrehistoric.SPEAK_ANIMATION);
+        animator.startKeyframe(10);
+        ModelUtils.rotate(animator, lowerBeak, 29, 0, 0);
+        animator.endKeyframe();
+        animator.resetKeyframe(10);
 	}
 
 	@Override
@@ -249,7 +253,7 @@ public class ModelConfuciusornis extends ModelNewPrehistoric {
             sitAnimationRotationPrev(head, sitProgress, -((float)Math.toRadians(18.0D)), -((float)Math.toRadians(52.17D)), (float)Math.toRadians(78.26D));
 		}
 		{
-            float sitProgress = ((EntityFlyingPrehistoric) entity).isLanding() ? 20 : ((EntityFlyingPrehistoric) entity).flyProgress;
+            float sitProgress = ((EntityFlyingPrehistoric) entity).flyProgress;
             sitAnimationRotationPrev(rightTailFan, sitProgress, (float)Math.toRadians(1.0D), 0, 0);
             sitAnimationRotationPrev(RightWing, sitProgress, -((float)Math.toRadians(8.0D)), 0, (float)Math.toRadians(90.0D));
             sitAnimationRotationPrev(neck, sitProgress, (float)Math.toRadians(80.0D), 0, 0);
