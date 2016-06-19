@@ -237,29 +237,41 @@ public class GuiPedia extends GuiContainer {
 				EntityHorse entity = ((EntityPregnantHorse)Revival.toPedia).horse;
 				String s1 = StatCollector.translateToLocal(entity.getCommandSenderName());
 				String s2 = StatCollector.translateToLocal("prehistoric.pregnant");
+	            int quot = (int) Math.floor(((float) ((EntityPregnantHorse)Revival.toPedia).EmbryoProgress / (float) ((EntityPregnantHorse)Revival.toPedia).Embryo.growTime * 100.0F));
+				String s3 = StatCollector.translateToLocal("prehistoric.pregnantTime") + String.valueOf(quot) + "%";
 				GL11.glScalef(1.5F, 1.5F, 1.5F);
 				printStringXY(s2 + StatCollector.translateToLocal(entity.getCommandSenderName()), (-this.fontRendererObj.getStringWidth(s2 + s1) / 2) + 65, 60, 66, 48, 36);
+				printStringXY(s3, (-this.fontRendererObj.getStringWidth(s3) / 2), 110, 157, 126, 103);
 			}
 			if (Revival.toPedia instanceof EntityPregnantCow) {
 				EntityCow entity = ((EntityPregnantCow)Revival.toPedia).cow;
 				String s1 = StatCollector.translateToLocal(entity.getCommandSenderName());
 				String s2 = StatCollector.translateToLocal("prehistoric.pregnant");
+	            int quot = (int) Math.floor(((float) ((EntityPregnantCow)Revival.toPedia).EmbryoProgress / (float) ((EntityPregnantCow)Revival.toPedia).Embryo.growTime * 100.0F));
+				String s3 = StatCollector.translateToLocal("prehistoric.pregnantTime") + String.valueOf(quot) + "%";
 				GL11.glScalef(1.5F, 1.5F, 1.5F);
 				printStringXY(s2 + StatCollector.translateToLocal(entity.getCommandSenderName()), (-this.fontRendererObj.getStringWidth(s2 + s1) / 2) + 65, 60, 66, 48, 36);
+				printStringXY(s3, (-this.fontRendererObj.getStringWidth(s3) / 2), 110, 157, 126, 103);
 			}
 			if (Revival.toPedia instanceof EntityPregnantSheep) {
 				EntitySheep entity = ((EntityPregnantSheep)Revival.toPedia).sheep;
 				String s1 = StatCollector.translateToLocal(entity.getCommandSenderName());
 				String s2 = StatCollector.translateToLocal("prehistoric.pregnant");
+	            int quot = (int) Math.floor(((float) ((EntityPregnantSheep)Revival.toPedia).EmbryoProgress / (float) ((EntityPregnantSheep)Revival.toPedia).Embryo.growTime * 100.0F));
+				String s3 = StatCollector.translateToLocal("prehistoric.pregnantTime") + String.valueOf(quot) + "%";
 				GL11.glScalef(1.5F, 1.5F, 1.5F);
 				printStringXY(s2 + StatCollector.translateToLocal(entity.getCommandSenderName()), (-this.fontRendererObj.getStringWidth(s2 + s1) / 2) + 65, 60, 66, 48, 36);
+				printStringXY(s3, (-this.fontRendererObj.getStringWidth(s3) / 2), 110, 157, 126, 103);
 			}
 			if (Revival.toPedia instanceof EntityPregnantPig) {
 				EntityPig entity = ((EntityPregnantPig)Revival.toPedia).pig;
 				String s1 = StatCollector.translateToLocal(entity.getCommandSenderName());
 				String s2 = StatCollector.translateToLocal("prehistoric.pregnant");
+	            int quot = (int) Math.floor(((float) ((EntityPregnantPig)Revival.toPedia).EmbryoProgress / (float) ((EntityPregnantPig)Revival.toPedia).Embryo.growTime * 100.0F));
+				String s3 = StatCollector.translateToLocal("prehistoric.pregnantTime") + String.valueOf(quot) + "%";
 				GL11.glScalef(1.5F, 1.5F, 1.5F);
 				printStringXY(s2 + StatCollector.translateToLocal(entity.getCommandSenderName()), (-this.fontRendererObj.getStringWidth(s2 + s1) / 2) + 65, 60, 66, 48, 36);
+				printStringXY(s3, (-this.fontRendererObj.getStringWidth(s3) / 2), 110, 157, 126, 103);
 			}
 
 			if (Revival.toPedia instanceof EntityLivingBase) {
