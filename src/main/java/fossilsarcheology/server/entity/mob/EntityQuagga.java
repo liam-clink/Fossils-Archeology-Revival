@@ -1296,53 +1296,6 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic {
 
     @SideOnly(Side.CLIENT)
     public void showPedia(GuiPedia p0) {
-
-        p0.reset();
-        // p0.printHappyBar(new ResourceLocation(Revival.MODID + ":" +
-        // "textures/items/" + "Quagga" + "_DNA.png"), ((p0.xGui / 2) + (p0.xGui
-        // / 4)), 7, 16, 16); //185
-
-		/*
-         * LEFT PAGE
-		 * 
-		 * OWNER: (+2) OWNER NAME RIDEABLE ORDER ABLE TO FLY ABLE TO CHEST
-		 * DANGEROUS
-		 */
-
-		/*
-		 * RIGHT PAGE
-		 * 
-		 * CUSTOM NAME DINOSAUR NAME DINO AGE HEALTH HUNGER
-		 */
-        if (this.hasCustomNameTag()) {
-            p0.printStringXY(this.getCustomNameTag(), GuiPedia.rightIndent, 24, 40, 90, 245);
-        }
-
-        p0.printStringXY(StatCollector.translateToLocal(LocalizationStrings.ANIMAL_QUAGGA), GuiPedia.rightIndent, 34, 0, 0, 0);
-        // p0.printHappyBar(pediaheart, p0.rightIndent, 58, 9, 9);
-
-        // Display Health
-        p0.printStringXY(String.valueOf(this.getHealth()) + '/' + this.getMaxHealth(), GuiPedia.rightIndent + 12, 58);
-
-        // Display owner name
-        if (this.isTame()) {
-            p0.addStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_OWNER), true);
-            String s0 = this.getOwnerName();
-
-            if (s0.length() > 11) {
-                s0 = this.getOwnerName().substring(0, 11);
-            }
-
-            p0.addStringLR(s0, true);
-        }
-
-        // Display if Rideable
-
-        if (this.isAdultHorse()) {
-            p0.addStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_RIDEABLE), true);
-        }
-
-        // TODO show all blocks the dino can eat
     }
 
     @SideOnly(Side.CLIENT)

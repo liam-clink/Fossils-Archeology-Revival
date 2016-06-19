@@ -57,15 +57,8 @@ import fossilsarcheology.server.enums.EnumPrehistoric;
 
 @SideOnly(Side.CLIENT)
 public class GuiPedia extends GuiContainer {
-	public static final int rightIndent = 30; // Left aligntment position for
-	// text on the RIGHT page of the
-	// pedia
-	public static final int leftIndent = 30; // Left aligntment position for
-	// text on the LEFT page of the
-	// pedia
 	private static final ResourceLocation background_image = new ResourceLocation("fossil:textures/gui/Dinopedia.png");
 	private static final ResourceLocation moods = new ResourceLocation("fossil:textures/gui/dinopedia_mood.png");
-
 	public int xGui = 390;
 	public int yGui = 320;
 	public FossilGuiPage buttonNextPage;
