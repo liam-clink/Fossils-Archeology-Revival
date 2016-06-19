@@ -67,7 +67,7 @@ public class EntityBrachiosaurus extends EntityNewPrehistoric {
 
     @Override
     public int getAttackLength() {
-        return 40;
+        return 30;
     }
 
     @Override
@@ -165,19 +165,17 @@ public class EntityBrachiosaurus extends EntityNewPrehistoric {
     @Override
     public void onLivingUpdate() {
         super.onLivingUpdate();
-        if (this.getAnimation() == ATTACK_ANIMATION && this.getAnimationTick() > 25 && this.getAttackTarget() != null) {
+        if (this.getAnimation() == ATTACK_ANIMATION && this.getAnimationTick() > 25 && this.getAttackTarget() != null && this.getAttackBounds().intersectsWith(this.getAttackTarget().boundingBox)) {
             this.attackEntityAsMob(this.getAttackTarget());
         }
     }
 
     @Override
     public boolean attackEntityAsMob(Entity entity) {
-        if (this.getAttackBounds().intersectsWith(entity.boundingBox)) {
             if (this.getAnimation() != ATTACK_ANIMATION) {
                 this.setAnimation(ATTACK_ANIMATION);
                 return false;
             }
-
             if (this.getAnimation() == ATTACK_ANIMATION && this.getAnimationTick() > 25) {
                 IAttributeInstance iattributeinstance = this.getEntityAttribute(SharedMonsterAttributes.attackDamage);
                 boolean flag = entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) iattributeinstance.getAttributeValue());
@@ -190,7 +188,6 @@ public class EntityBrachiosaurus extends EntityNewPrehistoric {
                 knockbackEntity(entity, -2F, -0.1F);
                 return flag;
             }
-        }
         return false;
     }
 
