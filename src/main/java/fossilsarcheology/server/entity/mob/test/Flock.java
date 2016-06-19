@@ -49,7 +49,8 @@ public class Flock {
         for (EntityNewPrehistoric member : flockMembers) {
             if (member != null && flockLeader != null && this.flockPathNavigate != null && this.flockPathNavigate.getPath() != null) {
                 if (member.getNavigator().noPath() && member != this.flockLeader) {
-                    member.getNavigator().setPath(this.flockLeader.getNavigator().getPath(), 1);
+                	PathEntity path = this.flockLeader.getNavigator().getPath();
+                    member.getNavigator().setPath(this.flockPathNavigate.getPathToXYZ(path.getFinalPathPoint().xCoord + generateVarience(-4, -4), path.getFinalPathPoint().yCoord + generateVarience(-4, -4), path.getFinalPathPoint().zCoord + generateVarience(-4, -4)), 1);
                 }
             }
         }

@@ -83,7 +83,6 @@ public class DinoAIFeeder extends EntityAIBase {
             this.typeofTarget = NO_TARGET;
             return false;
         }
-
         PathNavigate pathnavigate = this.dinosaur.getNavigator();
         PathEntity pathentity = pathnavigate.getPath();
 
@@ -134,7 +133,6 @@ public class DinoAIFeeder extends EntityAIBase {
     @Override
     public boolean continueExecuting() {
         double Distance = Math.sqrt(Math.pow(this.dinosaur.posX - this.destX, 2.0D) + Math.pow(this.dinosaur.posZ - this.destZ, 2.0D));
-
         if (!this.dinosaur.isHungry()) {
             endTask();
             return false;
@@ -162,6 +160,7 @@ public class DinoAIFeeder extends EntityAIBase {
 
     @Override
     public void updateTask() {
+    	
         int range = this.searchRange;
         this.dinosaur.setSitting(false);
         this.dinosaur.setOrder(EnumOrderType.WANDER);
