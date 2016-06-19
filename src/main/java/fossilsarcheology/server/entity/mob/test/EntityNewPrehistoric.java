@@ -95,7 +95,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
 	public EntityNewPrehistoric(World world, EnumPrehistoric type, double baseDamage, double maxDamage, double baseHealth, double maxHealth, double baseSpeed, double maxSpeed) {
 		super(world);
-		this.setHunger(this.getMaxHunger() / 2);
+		this.setHunger(this.getMaxHunger());
 		this.setScale(this.getAgeScale());
 		SPEAK_ANIMATION = Animation.create(this.getSpeakLength());
 		ATTACK_ANIMATION = Animation.create(this.getAttackLength());
