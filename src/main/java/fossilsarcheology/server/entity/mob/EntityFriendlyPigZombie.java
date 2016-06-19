@@ -222,7 +222,7 @@ public class EntityFriendlyPigZombie extends EntityTameable {
     }
 
     @Override
-    public EntityAgeable createChild(EntityAgeable p_90011_1_) {
+    public EntityAgeable createChild(EntityAgeable ageble) {
         return null;
     }
 }

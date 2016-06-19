@@ -1608,4 +1608,19 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	public EntityAgeable createChild(EntityAgeable entity) {
 		return null;
 	}
+
+    @Override
+    protected String getLivingSound() {
+        return "fossil:" + this.type.name().toLowerCase() + "_living";
+    }
+
+    @Override
+    protected String getHurtSound() {
+        return "fossil:" + this.type.name().toLowerCase() + "_hurt";
+    }
+
+    @Override
+    protected String getDeathSound() {
+        return "fossil:" + this.type.name().toLowerCase() + "_death";
+    }
 }

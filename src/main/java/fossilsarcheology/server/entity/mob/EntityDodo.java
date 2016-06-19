@@ -170,21 +170,6 @@ public class EntityDodo extends EntityNewPrehistoric {
         return false;
     }
 
-    @Override
-    protected String getLivingSound() {
-        return "fossil:dodo_living";
-    }
-
-    @Override
-    protected String getHurtSound() {
-        return "fossil:dodo_hurt";
-    }
-
-    @Override
-    protected String getDeathSound() {
-        return "fossil:dodo_death";
-    }
-
     public int getMaxHunger() {
         return 50;
     }

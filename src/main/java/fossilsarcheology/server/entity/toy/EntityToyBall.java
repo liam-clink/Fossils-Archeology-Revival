@@ -1,13 +1,17 @@
 package fossilsarcheology.server.entity.toy;
 
 import fossilsarcheology.Revival;
+import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
 import fossilsarcheology.server.entity.mob.test.EntityToyBase;
 import fossilsarcheology.server.item.FAItemRegistry;
 import fossilsarcheology.server.message.MessageRollBall;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
@@ -69,6 +73,27 @@ public class EntityToyBall extends EntityToyBase {
     @Override
     protected ItemStack getItem() {
         return new ItemStack(FAItemRegistry.INSTANCE.toyBall, 1, this.getColor());
+    }
+    
+    public boolean attackEntityFrom(DamageSource dmg, float f) {
+        if (dmg.getEntity() != null) {
+            if (dmg.getEntity() instanceof EntityPlayer) {
+                this.playSound(getAttackNoise(), 1, this.getSoundPitch());
+                if (!this.worldObj.isRemote)
+                    this.worldObj.spawnEntityInWorld(new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, this.getItem()));
+                this.setDead();
+                return true;
+            }
+            if (dmg.getEntity() instanceof EntityNewPrehistoric) {
+                ((EntityNewPrehistoric) dmg.getEntity()).doPlayBonus(toyBonus);
+                if (getAttackNoise() != null) {
+                    this.playSound(getAttackNoise(), 1, this.getSoundPitch());
+                    this.rotationYaw = dmg.getEntity().rotationYaw;
+                    this.addVelocity((double) (-MathHelper.sin(this.rotationYaw * (float) Math.PI / 180.0F) * 0.5F), 0.1D, (double) (MathHelper.cos(this.rotationYaw * (float) Math.PI / 180.0F) * 0.5F));
+                }
+            }
+        }
+        return dmg != DamageSource.outOfWorld;
     }
 
     @Override

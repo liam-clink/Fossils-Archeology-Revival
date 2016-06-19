@@ -89,6 +89,13 @@ public class WorldGenMiscStructures implements IWorldGenerator {
 				counter++;
 				if (counter == 1) {
 					new AncientChestWorldGen().generate(world, random, -80, 63, -120);
+					for(int x = -80; x < 80; x++){
+						for(int y = 60; y < 63; y++){
+							for(int z = -80; z < 80; z++){
+								world.setBlock(x, y, z, Blocks.netherrack);
+							}
+						}	
+					}
 				}
 			}
 		}

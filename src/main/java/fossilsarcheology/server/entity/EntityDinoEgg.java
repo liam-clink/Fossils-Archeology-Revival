@@ -142,6 +142,7 @@ public class EntityDinoEgg extends EntityLiving implements IEntityAdditionalSpaw
 				if (entity instanceof EntityNewPrehistoric) {
 					if (player != null) {
 						player.addStat(FossilAchievementHandler.firstDino, 1);
+					
 					}
 					EntityNewPrehistoric prehistoricEntity = (EntityNewPrehistoric) entity;
 					if (prehistoricEntity.type.isTameable() && player != null) {

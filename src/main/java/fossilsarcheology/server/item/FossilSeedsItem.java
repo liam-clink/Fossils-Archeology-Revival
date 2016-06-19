@@ -38,7 +38,6 @@ public class FossilSeedsItem extends Item
     @Override
     public void registerIcons(IIconRegister iconRegister) {
         textures = new IIcon[fossilSeeds.length];
-
         for (int i = 0; i < fossilSeeds.length; ++i) {
             if (isFossil) {
                 textures[i] = iconRegister.registerIcon("fossil:" + "plants/fossilSeed_" + fossilSeeds[i]);
@@ -53,13 +52,11 @@ public class FossilSeedsItem extends Item
         if (meta < 0 || meta >= textures.length) {
             meta = 0;
         }
-
         return textures[meta];
     }
 
     @Override
     public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int i, float a, float b, float c) {
-
         if (!isFossil && player.canPlayerEdit(x, y, z, i, stack) && player.canPlayerEdit(x, y + 1, z, i, stack)) {
             if (Blocks.sapling.canBlockStay(world, x, y, z) && world.isAirBlock(x, y + 1, z) && world.getBlock(x, y, z) != FABlockRegistry.INSTANCE.welwitschia) {
                 if(this.placePlantBlock(stack, world, x, y, z, new Random())){

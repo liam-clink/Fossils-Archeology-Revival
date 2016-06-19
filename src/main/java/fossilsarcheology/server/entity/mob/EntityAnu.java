@@ -91,7 +91,7 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(40.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(1D);
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(600D);
         this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.35D);
     }
 
