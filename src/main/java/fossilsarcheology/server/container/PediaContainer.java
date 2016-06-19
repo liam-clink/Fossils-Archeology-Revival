@@ -6,6 +6,6 @@ import net.minecraft.inventory.Container;
 public class PediaContainer extends Container {
     @Override
     public boolean canInteractWith(EntityPlayer var1) {
-        return false;
+        return true;
     }
 }
