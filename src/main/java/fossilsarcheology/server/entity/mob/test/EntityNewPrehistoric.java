@@ -192,7 +192,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	}
 
 	protected AxisAlignedBB getAttackBounds() {
-		return this.boundingBox.expand(1.0F, 1.0F, 1.0F);
+		return this.boundingBox.expand(3.0F, 3.0F, 3.0F);
 	}
 
 	@Override
