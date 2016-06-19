@@ -237,6 +237,13 @@ public class ModelVelociraptor extends ModelNewPrehistoric {
         blockMovement(f, f1, f2, f3, f4, f5, (Entity) entity);
         this.resetToDefaultPose();
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
+        animator.setAnimation(EntityNewPrehistoric.SPEAK_ANIMATION);
+        animator.startKeyframe(10);
+        ModelUtils.rotate(animator, neck, 15, 0, 0);
+        ModelUtils.rotate(animator, head, -20, 0, 0);
+        ModelUtils.rotate(animator, lowerJaw, 24, 0, 0);;
+        animator.endKeyframe();
+        animator.resetKeyframe(10);
         animator.setAnimation(EntityDeinonychus.ATTACK_ANIMATION);
         animator.startKeyframe(10);
         animator.move(leftThigh, 0, 3.2F, -0.5F);

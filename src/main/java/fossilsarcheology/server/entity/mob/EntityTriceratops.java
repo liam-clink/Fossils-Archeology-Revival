@@ -140,7 +140,7 @@ public class EntityTriceratops extends EntityNewPrehistoric {
 
     @Override
     public boolean doesFlock() {
-        return true;
+        return false;
     }
 
     @Override

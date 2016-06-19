@@ -232,7 +232,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
 	@Override
 	public boolean isMovementBlocked() {
-		return this.getHealth() <= 0.0F || isSitting() || isSleeping() || this.isSkeleton();
+		return this.getHealth() <= 0.0F || isSitting() || isSleeping() || this.isSkeleton() || this.isActuallyWeak();
 	}
 
 	@Override
@@ -633,13 +633,13 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 			if (sitProgress != 0)
 				sitProgress = 0F;
 		}
-		boolean weak = this.isWeak() && (this.aiTameType() == EnumPrehistoricAI.Taming.GEM && this.aiTameType() == EnumPrehistoricAI.Taming.BLUEGEM);
+		boolean weak = this.isActuallyWeak();
 		if (weak && weakProgress < 20.0F) {
-			weakProgress += 1F;
+			weakProgress += 0.5F;
 			sitProgress = 0F;
 			sleepProgress = 0F;
 		} else if (!weak && weakProgress > 0.0F) {
-			weakProgress -= 1F;
+			weakProgress -= 0.5F;
 			sitProgress = 0F;
 			sleepProgress = 0F;
 		}
@@ -966,7 +966,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 				this.sendStatusMessage(EnumSituation.Betrayed);
 			}
 		}
-		
+
 		if (i > 0) {
 			this.setSitting(false);
 			this.setSleeping(false);
@@ -1258,7 +1258,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 			return "fossil:textures/model/" + type.toString().toLowerCase() + "_0/" + toggle + type.toString().toLowerCase() + gender + toggleList + sleeping + ".png";
 		}
 	}
-	
+
 	public boolean isActuallyWeak(){
 		return (this.aiTameType() == Taming.BLUEGEM || this.aiTameType() == Taming.GEM) && this.isWeak();
 	}
@@ -1370,7 +1370,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		}
 		return target instanceof EntityToyBase && this.ticksTillPlay == 0;
 	}
-	
+
 	public boolean isMad(){
 		return this.getMoodFace()  == EnumPrehistoricMood.SAD;
 	}
@@ -1418,13 +1418,15 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		}
 		if (!listOfFemales.isEmpty() && this.ticksTillMate == 0) {
 			EntityNewPrehistoric prehistoric = listOfFemales.get(0);
-			this.getNavigator().tryMoveToEntityLiving(prehistoric, 1);
-			double distance = (double) (this.width * 8.0F * this.width * 8.0F + prehistoric.width);
+			if(prehistoric.ticksTillMate == 0){
+				this.getNavigator().tryMoveToEntityLiving(prehistoric, 1);
+				double distance = (double) (this.width * 8.0F * this.width * 8.0F + prehistoric.width);
 
-			if (this.getDistanceSq(prehistoric.posX, prehistoric.boundingBox.minY, prehistoric.posZ) <= distance && prehistoric.onGround && this.onGround) {
-				prehistoric.procreate(this);
-				this.ticksTillMate = this.rand.nextInt(6000) + 6000;
-				prehistoric.ticksTillMate = this.rand.nextInt(12000) + 24000;
+				if (this.getDistanceSq(prehistoric.posX, prehistoric.boundingBox.minY, prehistoric.posZ) <= distance && prehistoric.onGround && this.onGround) {
+					prehistoric.procreate(this);
+					this.ticksTillMate = this.rand.nextInt(6000) + 6000;
+					prehistoric.ticksTillMate = this.rand.nextInt(12000) + 24000;
+				}
 			}
 		}
 	}
@@ -1609,18 +1611,18 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		return null;
 	}
 
-    @Override
-    protected String getLivingSound() {
-        return "fossil:" + this.type.name().toLowerCase() + "_living";
-    }
+	@Override
+	protected String getLivingSound() {
+		return "fossil:" + this.type.name().toLowerCase() + "_living";
+	}
 
-    @Override
-    protected String getHurtSound() {
-        return "fossil:" + this.type.name().toLowerCase() + "_hurt";
-    }
+	@Override
+	protected String getHurtSound() {
+		return "fossil:" + this.type.name().toLowerCase() + "_hurt";
+	}
 
-    @Override
-    protected String getDeathSound() {
-        return "fossil:" + this.type.name().toLowerCase() + "_death";
-    }
+	@Override
+	protected String getDeathSound() {
+		return "fossil:" + this.type.name().toLowerCase() + "_death";
+	}
 }

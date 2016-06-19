@@ -1,13 +1,13 @@
 package fossilsarcheology.client.model.prehistoric;
 
-import fossilsarcheology.client.model.prehistoric.test.ModelNewPrehistoric;
-import fossilsarcheology.server.entity.mob.EntityAnkylosaurus;
-import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
 import net.ilexiconn.llibrary.client.model.ModelAnimator;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import fossilsarcheology.client.model.prehistoric.test.ModelNewPrehistoric;
+import fossilsarcheology.server.entity.mob.EntityTriceratops;
+import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
 
 public class ModelTriceratops extends ModelNewPrehistoric {
     public AdvancedModelRenderer upperBody;
@@ -199,7 +199,12 @@ public class ModelTriceratops extends ModelNewPrehistoric {
         blockMovement(f, f1, f2, f3, f4, f5, (Entity) entity);
         this.resetToDefaultPose();
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
-        animator.setAnimation(EntityAnkylosaurus.ATTACK_ANIMATION);
+        animator.setAnimation(EntityNewPrehistoric.SPEAK_ANIMATION);
+        animator.startKeyframe(10);
+        ModelUtils.rotate(animator, beakbottom, 24, 0, 0);
+        animator.endKeyframe();
+        animator.resetKeyframe(10);
+        animator.setAnimation(EntityTriceratops.ATTACK_ANIMATION);
         animator.startKeyframe(5);
         ModelUtils.rotate(animator, head, 30, 0, 0);
         ModelUtils.rotate(animator, neck, 25, 0, 0);
@@ -238,6 +243,7 @@ public class ModelTriceratops extends ModelNewPrehistoric {
 
         float speed = 0.5F;
         float speed2 = 0.1F;
+        float degree = 0.5F;
         {
             float sitProgress = ((EntityNewPrehistoric) (entity)).sitProgress;
             sitAnimationRotation(rightHindLeg, sitProgress, (float) Math.toRadians(110.0D), 0, 0);
@@ -285,20 +291,20 @@ public class ModelTriceratops extends ModelNewPrehistoric {
             sitAnimationPos(rightHindThigh, sitProgress, 1F, 20.50F - ModelUtils.getDefaultPositionY(rightHindThigh), 0F);
             sitAnimationPos(leftHindThigh, sitProgress, 1F, 20.50F - ModelUtils.getDefaultPositionY(leftHindThigh), 0F);
         }
-        this.walk(upperBody, speed2, 0.05F, false, 1F, 0F, entity.ticksExisted, 1);
-        this.walk(lowerBody, speed2, -0.05F, false, 1F, 0F, entity.ticksExisted, 1);
-        this.bob(upperBody, speed2, 0.2F, false, entity.ticksExisted, 1);
-        this.walk(leftHindThigh, speed, 0.8F, false, 0F, 0.4F, f, f1);
-        this.walk(leftHindLeg, speed, 0.2F, false, 0F, -0.6F, f, f1);
-        this.walk(rightHindThigh, speed, 0.8F, true, 0F, 0.4F, f, f1);
-        this.walk(rightHindLeg, speed, 0.2F, true, 0F, -0.6F, f, f1);
-        this.walk(leftFrontThigh, speed, 0.8F, true, 0F, 0.4F, f, f1);
-        this.walk(leftFrontLeg, speed, 0.2F, true, 0F, -0.6F, f, f1);
-        this.walk(rightFrontThigh, speed, 0.8F, false, 0F, 0.4F, f, f1);
-        this.walk(rightFrontLeg, speed, 0.2F, false, 0F, -0.6F, f, f1);
-        this.chainWave(tailParts, speed2, 0.05F, -3, entity.ticksExisted, 1);
-        this.chainSwing(tailParts, speed2, 0.35F, -3, entity.ticksExisted, 1);
-        this.chainWave(neckParts, speed2, 0.05F, -3, entity.ticksExisted, 1);
+        this.walk(upperBody, speed2, degree * 0.05F, false, 1F, 0F, entity.ticksExisted, 1);
+        this.walk(lowerBody, speed2, degree * -0.05F, false, 1F, 0F, entity.ticksExisted, 1);
+        this.bob(upperBody, speed2, degree * 0.2F, false, entity.ticksExisted, 1);
+        this.walk(leftHindThigh, speed, degree * 0.8F, false, 0F, 0.4F, f, f1);
+        this.walk(leftHindLeg, speed, degree * 0.2F, false, 0F, -0.6F, f, f1);
+        this.walk(rightHindThigh, speed, degree * 0.8F, true, 0F, 0.4F, f, f1);
+        this.walk(rightHindLeg, speed, degree * 0.2F, true, 0F, -0.6F, f, f1);
+        this.walk(leftFrontThigh, speed, degree * 0.8F, true, 0F, 0.4F, f, f1);
+        this.walk(leftFrontLeg, speed, degree * 0.2F, true, 0F, -0.6F, f, f1);
+        this.walk(rightFrontThigh, speed, degree * 0.8F, false, 0F, 0.4F, f, f1);
+        this.walk(rightFrontLeg, speed, degree * 0.2F, false, 0F, -0.6F, f, f1);
+        this.chainWave(tailParts, speed2, degree * 0.05F, -3, entity.ticksExisted, 1);
+        this.chainSwing(tailParts, speed2, degree * 0.35F, -3, entity.ticksExisted, 1);
+        this.chainWave(neckParts, speed2, degree * 0.05F, -3, entity.ticksExisted, 1);
         ((EntityNewPrehistoric) entity).chainBuffer.applyChainSwingBuffer((ModelRenderer[]) tailParts);
     }
 
