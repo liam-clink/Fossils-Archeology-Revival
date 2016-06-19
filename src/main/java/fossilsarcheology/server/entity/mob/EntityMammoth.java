@@ -76,6 +76,11 @@ public class EntityMammoth extends EntityNewPrehistoric implements IShearable {
 	}
 
 	@Override
+	public int getSpeakLength() {
+		return 35;
+	}
+	
+	@Override
 	protected void entityInit() {
 		super.entityInit();
 		this.dataWatcher.addObject(30, (byte) 3);

@@ -12,7 +12,6 @@
     "compsognathus_living": {"category": "neutral","sounds": ["prehistoric/compsognathus_living1", "prehistoric/compsognathus_living2"]},
     "compsognathus_death": {"category": "neutral","sounds": ["prehistoric/compsognathus_death"]},
     "compsognathus_hurt": {"category": "neutral","sounds": ["prehistoric/compsognathus_hurt"]},
-    "compsognathus_living_wild": {"category": "neutral","sounds": ["prehistoric/compsognathus_living"]},
     "confuciusornis_death": {"category": "neutral","sounds": ["prehistoric/confuciusornis_death1", "prehistoric/confuciusornis_death2"]},
     "confuciusornis_hurt": {"category": "neutral","sounds": ["prehistoric/confuciusornis_hurt1", "prehistoric/confuciusornis_hurt2"]},
     "confuciusornis_living": {"category": "neutral","sounds": ["prehistoric/confuciusornis_living1", "prehistoric/confuciusornis_living2", "prehistoric/confuciusornis_living3", "prehistoric/confuciusornis_living4", "prehistoric/confuciusornis_living5"]},

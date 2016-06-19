@@ -188,12 +188,12 @@ public class ModelTerrorBird extends ModelNewPrehistoric {
         float degree = 0.5F;
         this.bob(upperBody, speed, degree * 0.4F, false, entity.ticksExisted, 1);
 
-        this.walk(leftThigh, speed2, degree * 0.8F, false, 0F, 0F, f, f1);
-        this.walk(leftLeg, speed2, degree * 0.2F, false, 0F, -0.1F, f, f1);
-        this.walk(leftFoot, speed2, degree * -0.4F, true, -0.5F, -0.2F, f, f1);
-        this.walk(rightThigh, speed2, degree * 0.8F, true, 0F, 0F, f, f1);
-        this.walk(rightLeg, speed2, degree * 0.2F, true, 0F, 0.1F, f, f1);
-        this.walk(rightFoot, speed2, degree * -0.4F, false, -0.5F, 0.2F, f, f1);
+		this.walk(leftThigh, speed2, 0.6F, false, 0F, 0.4F, f, f1);
+		this.walk(leftLeg, speed2, 0.2F, false, 0F, -0.6F, f, f1);
+		this.walk(leftFoot, speed2, -0.6F, true, 2.5F, -0.4F, f, f1);
+		this.walk(rightThigh, speed2, 0.6F, true, 0F, -0.4F, f, f1);
+		this.walk(rightLeg, speed2, 0.2F, true, 0F, 0.6F, f, f1);
+		this.walk(rightFoot, speed2, -0.6F, false, 2.5F, 0.4F, f, f1);
         this.chainWave(neckParts, speed2, degree * 0.3F, 4, f, f1);
         if (((EntityNewPrehistoric) (entity)).isSleeping()) {
             this.walk(upperBody, speed, degree * 0.05F, false, 0, 0, entity.ticksExisted, 1);

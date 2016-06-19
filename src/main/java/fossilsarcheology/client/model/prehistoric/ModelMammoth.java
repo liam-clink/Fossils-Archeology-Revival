@@ -1,12 +1,12 @@
 package fossilsarcheology.client.model.prehistoric;
 
-import fossilsarcheology.client.model.prehistoric.test.ModelNewPrehistoric;
-import fossilsarcheology.server.entity.mob.EntityAnkylosaurus;
-import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
 import net.ilexiconn.llibrary.client.model.ModelAnimator;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
 import net.minecraft.entity.Entity;
+import fossilsarcheology.client.model.prehistoric.test.ModelNewPrehistoric;
+import fossilsarcheology.server.entity.mob.EntityMammoth;
+import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
 
 public class ModelMammoth extends ModelNewPrehistoric {
     public AdvancedModelRenderer leftFrontLeg;
@@ -200,7 +200,16 @@ public class ModelMammoth extends ModelNewPrehistoric {
         blockMovement(f, f1, f2, f3, f4, f5, (Entity) entity);
         this.resetToDefaultPose();
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
-        animator.setAnimation(EntityAnkylosaurus.ATTACK_ANIMATION);
+        animator.setAnimation(EntityNewPrehistoric.SPEAK_ANIMATION);
+        animator.startKeyframe(20);
+        ModelUtils.rotate(animator, head, -25, 0, 0);
+        ModelUtils.rotate(animator, bottomjaw, 45, 0, 0);
+        ModelUtils.rotate(animator, nose2, -15, 0, 0);
+        ModelUtils.rotate(animator, nose3, -35, 0, 0);
+        ModelUtils.rotate(animator, nose4, -35, 0, 0);
+        animator.endKeyframe();
+        animator.resetKeyframe(15);
+        animator.setAnimation(EntityMammoth.ATTACK_ANIMATION);
         animator.startKeyframe(5);
         ModelUtils.rotate(animator, neck, 0, 20, 0);
         ModelUtils.rotate(animator, head, 0, 5, 10);
