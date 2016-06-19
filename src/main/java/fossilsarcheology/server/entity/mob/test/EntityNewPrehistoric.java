@@ -450,7 +450,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	@Override
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
-		if (this.currentOrder == EnumOrderType.STAY && !this.isSitting()) {
+		if (this.currentOrder == EnumOrderType.STAY && !this.isSitting() && !this.isActuallyWeak()) {
 			this.setSitting(true);
 			this.setSleeping(false);
 		}
@@ -540,7 +540,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 			ticksSlept = 0;
 		}
 
-		if (!worldObj.isRemote && (!this.canSleep() || (this.isSleeping() && ticksSlept > 200 && this.getRNG().nextInt(1000) == 1 || this.getAttackTarget() != null || this.isInWater()))) {
+		if (!worldObj.isRemote && (!this.canSleep() || this.isActuallyWeak() || (this.isSleeping() && ticksSlept > 200 && this.getRNG().nextInt(1000) == 1 || this.getAttackTarget() != null || this.isInWater()))) {
 			this.setSitting(false);
 			this.setSleeping(false);
 			ticksSlept = 0;

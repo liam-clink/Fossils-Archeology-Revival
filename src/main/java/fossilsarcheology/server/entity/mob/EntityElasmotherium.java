@@ -37,7 +37,7 @@ import fossilsarcheology.server.enums.EnumPrehistoricAI.WaterAbility;
 public class EntityElasmotherium extends EntityNewPrehistoric {
 
     public EntityElasmotherium(World world) {
-        super(world, EnumPrehistoric.Elasmotherium, 1, 9, 12, 62, 0.2, 0.35);
+        super(world, EnumPrehistoric.Elasmotherium, 1, 9, 12, 62, 0.1, 0.35);
         this.getNavigator().setAvoidsWater(true);
         this.getNavigator().setCanSwim(true);
         this.tasks.addTask(1, new EntityAISwimming(this));
