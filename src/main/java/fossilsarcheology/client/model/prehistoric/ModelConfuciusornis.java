@@ -283,11 +283,11 @@ public class ModelConfuciusornis extends ModelNewPrehistoric {
                 this.walk(rightLeg, speed2, 1.9F, true, 0F, 0F, f, f1);
                 this.walk(leftFoot, speed2, 1.9F, true, 0.3F, 0F, f, f1);
                 this.walk(rightFoot, speed2, 1.9F, false, 0.3F, 0F, f, f1);
-                this.chainWave(rightTailParts, speed2, 0.05F, -3, entity.ticksExisted, 1);
-                this.chainSwing(rightTailParts, speed2, 0.15F, -3, entity.ticksExisted, 1);
-                this.chainWave(leftTailParts, speed2, 0.05F, -3, entity.ticksExisted, 1);
-                this.chainSwing(leftTailParts, speed2, 0.15F, -3, entity.ticksExisted, 1);
-                this.chainWave(neckParts, speed2, 0.1F, -3, entity.ticksExisted, 1);
+                this.chainWave(rightTailParts, speed2, 0.05F, -3, f, f1);
+                this.chainSwing(rightTailParts, speed2, 0.15F, -3, f, f1);
+                this.chainWave(leftTailParts, speed2, 0.05F, -3, f, f1);
+                this.chainSwing(leftTailParts, speed2, 0.15F, -3, f, f1);
+                this.chainWave(neckParts, speed2, 0.1F, -3, f, f1);
                 this.chainWave(neckParts, speed, 0.4F, -3, f, f1);
             }
 		}

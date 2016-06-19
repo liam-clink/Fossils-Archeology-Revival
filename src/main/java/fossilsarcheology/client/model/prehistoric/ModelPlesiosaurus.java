@@ -7,7 +7,6 @@ import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-
 import fossilsarcheology.client.model.prehistoric.test.ModelNewPrehistoric;
 
 public class ModelPlesiosaurus extends ModelNewPrehistoric {
@@ -144,6 +143,11 @@ public class ModelPlesiosaurus extends ModelNewPrehistoric {
         blockMovement(f, f1, f2, f3, f4, f5, (Entity) entity);
         this.resetToDefaultPose();
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
+        animator.setAnimation(EntityNewPrehistoric.SPEAK_ANIMATION);
+        animator.startKeyframe(10);
+        ModelUtils.rotate(animator, lowerJaw, 29, 0, 0);
+        animator.endKeyframe();
+        animator.resetKeyframe(10);
 		animator.setAnimation(EntityPlesiosaurus.FISH_ANIMATION);
 		animator.startKeyframe(10);
 		ModelUtils.rotate(animator, neck1, 0, 15F, 0);
