@@ -34,15 +34,15 @@ public class EntitySarcosuchus extends EntitySwimmingPrehistoric {
 	public static Animation ROLL_ANIMATION = Animation.create(115);
 	private boolean isSwimming;
 	public float swimProgress;
-	
-    public EntitySarcosuchus(World world) {
-        super(world, EnumPrehistoric.Sarcosuchus, 1, 3, 15, 70, 0.25, 0.25);
-        this.setSize(2.0F, 1.0F);
-        isAmphibious = true;
+
+	public EntitySarcosuchus(World world) {
+		super(world, EnumPrehistoric.Sarcosuchus, 1, 3, 15, 70, 0.25, 0.25);
+		this.setSize(2.0F, 1.0F);
+		isAmphibious = true;
 		this.getNavigator().setAvoidsWater(false);
 		this.tasks.addTask(1, this.aiSit);
 		this.tasks.addTask(2, new DinoAIWaterFindTarget(this, true));
-        this.tasks.addTask(3, new DinoAIRiding(this, 1.0F));
+		this.tasks.addTask(3, new DinoAIRiding(this, 1.0F));
 		this.tasks.addTask(3, new DinoAIAttackOnCollide(this, 1.5D, false));
 		this.tasks.addTask(4, new DinoAIWaterFeeder(this, 16));
 		this.tasks.addTask(4, new DinoAIFeeder(this, 16));
@@ -54,102 +54,102 @@ public class EntitySarcosuchus extends EntitySwimmingPrehistoric {
 		this.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));
 		this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
 		this.targetTasks.addTask(4, new DinoAIHunt(this, 20, false));
-        minSize = 0.2F;
-        maxSize = 2.3F;
-        teenAge = 5;
-        developsResistance = true;
-        breaksBlocks = true;
+		minSize = 0.2F;
+		maxSize = 2.3F;
+		teenAge = 5;
+		developsResistance = true;
+		breaksBlocks = true;
 		this.hasBabyTexture = true;
 		this.ridingY = 1.5F;
 		this.pediaScale = 3;
-    }
+	}
 
-    @Override
-    public void setSpawnValues() {
+	@Override
+	public void setSpawnValues() {
 
-    }
+	}
 
-    @Override
-    public EnumPrehistoricAI.Activity aiActivityType() {
+	@Override
+	public EnumPrehistoricAI.Activity aiActivityType() {
 
-        return EnumPrehistoricAI.Activity.BOTH;
-    }
+		return EnumPrehistoricAI.Activity.BOTH;
+	}
 
-    @Override
-    public EnumPrehistoricAI.Attacking aiAttackType() {
+	@Override
+	public EnumPrehistoricAI.Attacking aiAttackType() {
 
-        return EnumPrehistoricAI.Attacking.DROWN;
-    }
+		return EnumPrehistoricAI.Attacking.DROWN;
+	}
 
-    @Override
-    public EnumPrehistoricAI.Climbing aiClimbType() {
+	@Override
+	public EnumPrehistoricAI.Climbing aiClimbType() {
 
-        return EnumPrehistoricAI.Climbing.NONE;
-    }
+		return EnumPrehistoricAI.Climbing.NONE;
+	}
 
-    @Override
-    public EnumPrehistoricAI.Following aiFollowType() {
+	@Override
+	public EnumPrehistoricAI.Following aiFollowType() {
 
-        return EnumPrehistoricAI.Following.AGRESSIVE;
-    }
+		return EnumPrehistoricAI.Following.AGRESSIVE;
+	}
 
-    @Override
-    public EnumPrehistoricAI.Jumping aiJumpType() {
+	@Override
+	public EnumPrehistoricAI.Jumping aiJumpType() {
 
-        return EnumPrehistoricAI.Jumping.BASIC;
-    }
+		return EnumPrehistoricAI.Jumping.BASIC;
+	}
 
-    @Override
-    public EnumPrehistoricAI.Response aiResponseType() {
+	@Override
+	public EnumPrehistoricAI.Response aiResponseType() {
 
-        return EnumPrehistoricAI.Response.AGRESSIVE;
-    }
+		return EnumPrehistoricAI.Response.AGRESSIVE;
+	}
 
-    @Override
-    public EnumPrehistoricAI.Stalking aiStalkType() {
+	@Override
+	public EnumPrehistoricAI.Stalking aiStalkType() {
 
-        return EnumPrehistoricAI.Stalking.NONE;
-    }
+		return EnumPrehistoricAI.Stalking.NONE;
+	}
 
-    @Override
-    public EnumPrehistoricAI.Taming aiTameType() {
+	@Override
+	public EnumPrehistoricAI.Taming aiTameType() {
 
-        return EnumPrehistoricAI.Taming.BLUEGEM;
-    }
+		return EnumPrehistoricAI.Taming.BLUEGEM;
+	}
 
-    @Override
-    public EnumPrehistoricAI.Untaming aiUntameType() {
+	@Override
+	public EnumPrehistoricAI.Untaming aiUntameType() {
 
-        return EnumPrehistoricAI.Untaming.NONE;
-    }
+		return EnumPrehistoricAI.Untaming.NONE;
+	}
 
-    @Override
-    public EnumPrehistoricAI.Moving aiMovingType() {
+	@Override
+	public EnumPrehistoricAI.Moving aiMovingType() {
 
-        return EnumPrehistoricAI.Moving.SEMIAQUATIC;
-    }
+		return EnumPrehistoricAI.Moving.SEMIAQUATIC;
+	}
 
-    @Override
-    public EnumPrehistoricAI.WaterAbility aiWaterAbilityType() {
+	@Override
+	public EnumPrehistoricAI.WaterAbility aiWaterAbilityType() {
 
-        return EnumPrehistoricAI.WaterAbility.ATTACK;
-    }
+		return EnumPrehistoricAI.WaterAbility.ATTACK;
+	}
 
-    @Override
-    public boolean doesFlock() {
-        return false;
-    }
+	@Override
+	public boolean doesFlock() {
+		return false;
+	}
 
-    @Override
-    public Item getOrderItem() {
-        return FAItemRegistry.INSTANCE.skullStick;
-    }
+	@Override
+	public Item getOrderItem() {
+		return FAItemRegistry.INSTANCE.skullStick;
+	}
 
-    @Override
-    public int getAdultAge() {
-        return 12;
-    }
-    
+	@Override
+	public int getAdultAge() {
+		return 12;
+	}
+
 	public int getMaxHunger() {
 		return 150;
 	}
@@ -158,17 +158,18 @@ public class EntitySarcosuchus extends EntitySwimmingPrehistoric {
 	protected double getSwimSpeed() {
 		return 2;
 	}
-	
+
 	@Override
 	public void updateRiderPosition() {
-		if(this.getRidingPlayer() != null && this.func_152114_e(this.getRidingPlayer())){
+		if (this.getRidingPlayer() != null && this.func_152114_e(this.getRidingPlayer())) {
 			super.updateRiderPosition();
 			return;
 		}
-		if (this.riddenByEntity != null && riddenByEntity instanceof EntityLivingBase && !this.func_152114_e(((EntityLivingBase) this.riddenByEntity))) {			if(this.getAnimationTick() % 20 == 0 && this.riddenByEntity != null){
+		if (this.riddenByEntity != null && riddenByEntity instanceof EntityLivingBase && !this.func_152114_e(((EntityLivingBase) this.riddenByEntity))) {
+			if (this.getAnimationTick() % 20 == 0 && this.riddenByEntity != null) {
 				this.riddenByEntity.attackEntityFrom(DamageSource.drown, 10);
-				if(riddenByEntity.isDead){
-				this.onKillEntity((EntityLivingBase) this.riddenByEntity);
+				if (riddenByEntity.isDead) {
+					this.onKillEntity((EntityLivingBase) this.riddenByEntity);
 				}
 			}
 			riddenByEntity.setPosition(this.posX, this.posY + this.getMountedYOffset() + riddenByEntity.getYOffset(), this.posZ);
@@ -180,7 +181,7 @@ public class EntitySarcosuchus extends EntitySwimmingPrehistoric {
 			double extraX = (double) (radius * MathHelper.sin((float) (Math.PI + angle)));
 			double extraZ = (double) (radius * MathHelper.cos(angle));
 			double extraY = 0.5F * getAgeScale();
-			riddenByEntity.setPosition(this.posX + extraX, this.posY + extraY, this.posZ + extraZ);		
+			riddenByEntity.setPosition(this.posX + extraX, this.posY + extraY, this.posZ + extraZ);
 		}
 	}
 
@@ -188,23 +189,23 @@ public class EntitySarcosuchus extends EntitySwimmingPrehistoric {
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
 		boolean swimming = this.isSwimming();
-        if (swimming && swimProgress < 20.0F) {
-        	swimProgress += 0.5F;
-            if (sitProgress != 0)
-                sitProgress = sleepProgress = 0F;
-        } else if (!swimming && swimProgress > 0.0F) {
-        	swimProgress -= 0.5F;
-            if (sitProgress != 0)
-                sitProgress = sleepProgress = 0F;
-        }
+		if (swimming && swimProgress < 20.0F) {
+			swimProgress += 0.5F;
+			if (sitProgress != 0)
+				sitProgress = sleepProgress = 0F;
+		} else if (!swimming && swimProgress > 0.0F) {
+			swimProgress -= 0.5F;
+			if (sitProgress != 0)
+				sitProgress = sleepProgress = 0F;
+		}
 		if (this.getAttackTarget() != null) {
-	        if (getAttackBounds().intersectsWith(this.getAttackTarget().boundingBox)) {
+			if (getAttackBounds().intersectsWith(this.getAttackTarget().boundingBox)) {
 				if (!this.isInWater()) {
 					if (this.getAnimation() != ATTACK_ANIMATION) {
 						this.setAnimation(ATTACK_ANIMATION);
 					}
 					if (this.getAnimation() == ATTACK_ANIMATION && this.getAnimationTick() > 5) {
-						this.getAttackTarget().attackEntityFrom(DamageSource.causeMobDamage(this), (float) this.getAttributeMap().getAttributeInstance(SharedMonsterAttributes.maxHealth).getAttributeValue());
+						this.getAttackTarget().attackEntityFrom(DamageSource.causeMobDamage(this), (float) this.getAttributeMap().getAttributeInstance(SharedMonsterAttributes.attackDamage).getAttributeValue());
 					}
 					this.attackEntityAsMob(this.getAttackTarget());
 				} else {
@@ -215,28 +216,28 @@ public class EntitySarcosuchus extends EntitySwimmingPrehistoric {
 				}
 			}
 		}
-		if(this.isInsideOfMaterial(Material.water)){
+		if (this.isInsideOfMaterial(Material.water)) {
 			this.setSwimming(true);
 		}
 	}
-	
-	public int getAttackLength(){
+
+	public int getAttackLength() {
 		return 15;
 	}
 
 	@Override
 	public boolean attackEntityAsMob(Entity entityIn) {
-		if(this.isInWater()){
+		if (this.isInWater()) {
 			return false;
 		}
-	return true;
+		return true;
 	}
 
 	@Override
 	public Animation[] getAnimations() {
 		return new Animation[] { SPEAK_ANIMATION, ATTACK_ANIMATION, ROLL_ANIMATION };
 	}
-	
+
 	@Override
 	protected void entityInit() {
 		super.entityInit();
@@ -279,12 +280,12 @@ public class EntitySarcosuchus extends EntitySwimmingPrehistoric {
 			this.isSwimming = swimming;
 		}
 	}
-	
+
 	@Override
 	protected String getLivingSound() {
 		return this.isChild() ? "fossil:sarcosuchus_baby_living" : "fossil:sarcosuchus_living";
 	}
-	
+
 	@Override
 	public boolean canBeRidden() {
 		return true;
