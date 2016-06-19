@@ -57,15 +57,14 @@ public abstract class EntityFlyingPrehistoric extends EntityNewPrehistoric {
 
 	@Override
 	public void jump() {
+		this.motionY = 1.7D;
 		super.jump();
-		this.motionY = 0.7D;
 	}
 
 	@Override
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
 		boolean flying = isFlying();
-		if (!this.onGround)
 			this.motionY *= 0.6;
 		if (flying && flyProgress < 20.0F) {
 			flyProgress += 0.5F;
