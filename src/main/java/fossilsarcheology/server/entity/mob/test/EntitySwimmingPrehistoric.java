@@ -8,7 +8,6 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-
 import fossilsarcheology.server.enums.EnumPrehistoric;
 
 public abstract class EntitySwimmingPrehistoric extends EntityNewPrehistoric {
@@ -23,6 +22,13 @@ public abstract class EntitySwimmingPrehistoric extends EntityNewPrehistoric {
 		this.getNavigator().setAvoidsWater(false);
 		this.hasBabyTexture = false;
 	}
+	
+
+	@Override
+	protected String getLivingSound() {
+		return this.isAmphibious ? super.getLivingSound() : this.isInWater() ? super.getLivingSound() + "_inside" : super.getLivingSound() + "_outside";
+	}
+	
 
 	@Override
 	protected void applyEntityAttributes() {

@@ -745,12 +745,12 @@ public class FossilSiteWorldGen extends WorldGenerator {
 		world.setBlock(x + 0, y + 3, z + 2, Blocks.wool, 0, 3);
 		world.setBlock(x + 1, y + 3, z + 2, Blocks.bed, 10, 3);
 		world.setBlock(x + 2, y + 3, z + 2, Blocks.air, 0, 3);
-		world.setBlock(x + 3, y + 3, z + 2, Blocks.crafting_table, 0, 3);
+		world.setBlock(x + 3, y + 3, z + 2, FABlockRegistry.INSTANCE.blockworktableIdle, 0, 3);
 		world.setBlock(x + 4, y + 3, z + 2, Blocks.wool, 0, 3);
 		world.setBlock(x + 0, y + 3, z + 3, Blocks.wool, 0, 3);
 		world.setBlock(x + 1, y + 3, z + 3, Blocks.bed, 2, 3);
 		world.setBlock(x + 2, y + 3, z + 3, Blocks.air, 0, 3);
-		world.setBlock(x + 3, y + 3, z + 3, Blocks.bookshelf, 0, 3);
+		world.setBlock(x + 3, y + 3, z + 3, FABlockRegistry.INSTANCE.blockanalyzerIdle, 0, 3);
 		world.setBlock(x + 4, y + 3, z + 3, Blocks.wool, 0, 3);
 		world.setBlock(x + 0, y + 3, z + 4, Blocks.wool, 0, 3);
 		world.setBlock(x + 1, y + 3, z + 4, Blocks.fence, 0, 3);

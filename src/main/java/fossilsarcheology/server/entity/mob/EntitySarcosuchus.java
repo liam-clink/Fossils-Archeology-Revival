@@ -281,6 +281,11 @@ public class EntitySarcosuchus extends EntitySwimmingPrehistoric {
 	}
 	
 	@Override
+	protected String getLivingSound() {
+		return this.isChild() ? "fossil:sarcosuchus_baby_living" : "fossil:sarcosuchus_living";
+	}
+	
+	@Override
 	public boolean canBeRidden() {
 		return true;
 	}

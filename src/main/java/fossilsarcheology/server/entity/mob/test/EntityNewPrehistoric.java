@@ -1320,7 +1320,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
 	@Override
 	public void playLivingSound() {
-		if (this.isSleeping()) {
+		if (!this.isSleeping()) {
 			super.playLivingSound();
 			if (this.getAnimation() != null) {
 				if (this.getAnimation() == NO_ANIMATION && !worldObj.isRemote) {
