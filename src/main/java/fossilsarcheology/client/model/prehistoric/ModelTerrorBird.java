@@ -152,6 +152,12 @@ public class ModelTerrorBird extends ModelNewPrehistoric {
         blockMovement(f, f1, f2, f3, f4, f5, (Entity) entity);
         this.resetToDefaultPose();
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
+        animator.setAnimation(EntityNewPrehistoric.SPEAK_ANIMATION);
+        animator.startKeyframe(10);
+        ModelUtils.rotate(animator, head, -15, 0, 0);
+        ModelUtils.rotate(animator, lowerBeak, 45, 0, 0);
+        animator.endKeyframe();
+        animator.resetKeyframe(10);
         animator.setAnimation(EntityDodo.ATTACK_ANIMATION);
         animator.startKeyframe(10);
         ModelUtils.rotate(animator, neck, -19, 0, 0);
@@ -179,21 +185,22 @@ public class ModelTerrorBird extends ModelNewPrehistoric {
         ModelUtils.faceTargetMod(head, f3, f4, 0.5F);
         float speed = 0.1F;
         float speed2 = 0.5F;
-        this.bob(upperBody, speed, 0.4F, false, entity.ticksExisted, 1);
+        float degree = 0.5F;
+        this.bob(upperBody, speed, degree * 0.4F, false, entity.ticksExisted, 1);
 
-        this.walk(leftThigh, speed2, 0.8F, false, 0F, 0F, f, f1);
-        this.walk(leftLeg, speed2, 0.2F, false, 0F, -0.1F, f, f1);
-        this.walk(leftFoot, speed2, -0.4F, true, -0.5F, -0.2F, f, f1);
-        this.walk(rightThigh, speed2, 0.8F, true, 0F, 0F, f, f1);
-        this.walk(rightLeg, speed2, 0.2F, true, 0F, 0.1F, f, f1);
-        this.walk(rightFoot, speed2, -0.4F, false, -0.5F, 0.2F, f, f1);
-        this.chainWave(neckParts, speed2, 0.3F, 4, f, f1);
+        this.walk(leftThigh, speed2, degree * 0.8F, false, 0F, 0F, f, f1);
+        this.walk(leftLeg, speed2, degree * 0.2F, false, 0F, -0.1F, f, f1);
+        this.walk(leftFoot, speed2, degree * -0.4F, true, -0.5F, -0.2F, f, f1);
+        this.walk(rightThigh, speed2, degree * 0.8F, true, 0F, 0F, f, f1);
+        this.walk(rightLeg, speed2, degree * 0.2F, true, 0F, 0.1F, f, f1);
+        this.walk(rightFoot, speed2, degree * -0.4F, false, -0.5F, 0.2F, f, f1);
+        this.chainWave(neckParts, speed2, degree * 0.3F, 4, f, f1);
         if (((EntityNewPrehistoric) (entity)).isSleeping()) {
-            this.walk(upperBody, speed, 0.05F, false, 0, 0, entity.ticksExisted, 1);
-            this.chainWave(neckParts, speed, 0.05F, 3, entity.ticksExisted, 1);
+            this.walk(upperBody, speed, degree * 0.05F, false, 0, 0, entity.ticksExisted, 1);
+            this.chainWave(neckParts, speed, degree * 0.05F, 3, entity.ticksExisted, 1);
         } else {
-            this.walk(upperBody, speed, 0.1F, false, 0, 0, entity.ticksExisted, 1);
-            this.chainWave(neckParts, speed, 0.15F, 3, entity.ticksExisted, 1);
+            this.walk(upperBody, speed, degree * 0.1F, false, 0, 0, entity.ticksExisted, 1);
+            this.chainWave(neckParts, speed, degree * 0.15F, 3, entity.ticksExisted, 1);
         }
         {
             float sitProgress = ((EntityNewPrehistoric) (entity)).sitProgress;
