@@ -29,7 +29,7 @@ import fossilsarcheology.server.enums.EnumPrehistoricAI;
 public class EntityCeratosaurus extends EntityNewPrehistoric {
 
     public EntityCeratosaurus(World world) {
-        super(world, EnumPrehistoric.Ceratosaurus, 1, 10, 8, 50, 0.35, 0.5);
+        super(world, EnumPrehistoric.Ceratosaurus, 1, 10, 8, 50, 0.2, 0.35);
         this.getNavigator().setAvoidsWater(true);
         this.getNavigator().setCanSwim(true);
         this.tasks.addTask(1, new EntityAISwimming(this));

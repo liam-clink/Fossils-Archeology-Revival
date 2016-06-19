@@ -4,7 +4,6 @@ import net.ilexiconn.llibrary.client.model.ModelAnimator;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
 import net.minecraft.entity.Entity;
-
 import fossilsarcheology.client.model.prehistoric.test.ModelNewPrehistoric;
 import fossilsarcheology.server.entity.mob.EntitySarcosuchus;
 import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
@@ -218,6 +217,12 @@ public class ModelSarcosuchus extends ModelNewPrehistoric {
 		animator.update(entity);
 		this.resetToDefaultPose();
 		setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
+		animator.setAnimation(EntityNewPrehistoric.SPEAK_ANIMATION);
+		animator.startKeyframe(10);
+		ModelUtils.rotate(animator, head, -15, 0, 0);
+		ModelUtils.rotate(animator, LowerJaw, 25, 0, 0);
+		animator.endKeyframe();
+		animator.resetKeyframe(10);
 		animator.setAnimation(EntitySarcosuchus.ATTACK_ANIMATION);
 		animator.startKeyframe(5);
 		ModelUtils.rotate(animator, head, -31F, 0, 0);
@@ -295,18 +300,19 @@ public class ModelSarcosuchus extends ModelNewPrehistoric {
 		AdvancedModelRenderer[] tailParts = { this.tail1, this.tail2, this.tail3 };
 		AdvancedModelRenderer[] neckParts = { this.neck, this.head };
 		float speed = 0.1F;
-		float speed2 = entity.isInWater() ? 0.45F : 0.9F;
+		float speed2 = entity.isInWater() ? 0.35F : 0.7F;
+		float degree = 0.5F;
 		if(((EntityNewPrehistoric) entity).isSkeleton()){
 			return;
 		}
-		this.bob(lowerBody, speed, 0.7F, false, entity.ticksExisted, 1);
-		this.bob(leftFrontThigh, speed, -0.7F, false, entity.ticksExisted, 1);
-		this.bob(rightFrontThigh, speed, -0.7F, false, entity.ticksExisted, 1);
-		this.bob(rightHindThigh, speed, -0.7F, false, entity.ticksExisted, 1);
-		this.bob(leftHindThigh, speed, -0.7F, false, entity.ticksExisted, 1);
-		this.chainSwing(tailParts, speed, 0.15F, -3, entity.ticksExisted, 1);
-		this.chainSwing(tailParts, speed2, 0.5F, -3, f, f1);
-		this.chainWave(neckParts, speed, 0.15F, 3, entity.ticksExisted, 1);
+		this.bob(lowerBody, speed, degree * 0.7F, false, entity.ticksExisted, 1);
+		this.bob(leftFrontThigh, speed, degree * -0.7F, false, entity.ticksExisted, 1);
+		this.bob(rightFrontThigh, speed, degree * -0.7F, false, entity.ticksExisted, 1);
+		this.bob(rightHindThigh, speed, degree * -0.7F, false, entity.ticksExisted, 1);
+		this.bob(leftHindThigh, speed, degree * -0.7F, false, entity.ticksExisted, 1);
+		this.chainSwing(tailParts, speed, degree * 0.15F, -3, entity.ticksExisted, 1);
+		this.chainSwing(tailParts, speed2, degree * 0.5F, -3, f, f1);
+		this.chainWave(neckParts, speed, degree * 0.15F, 3, entity.ticksExisted, 1);
 		((EntityNewPrehistoric) entity).chainBuffer.applyChainSwingBuffer((AdvancedModelRenderer[]) tailParts);
 		if (entity.riddenByEntity == null) {
 			ModelUtils.faceTargetMod(neck, f3, f4, 0.5F);
@@ -429,18 +435,18 @@ public class ModelSarcosuchus extends ModelNewPrehistoric {
 	        sitAnimationPos(rightHindThigh, sitProgress, 1, 1, -2);
 	        sitAnimationPos(leftHindThigh, sitProgress, -1, 1, -2);
 	        if(sitProgress < 10){
-	        	this.walk(leftFrontThigh, speed2, 0.6F, false, 0F, 0.4F, f, f1);
-	    		this.walk(leftFrontLeg, speed2, 0.2F, false, 0F, -0.6F, f, f1);
-	    		this.walk(leftFrontFoot, speed2, -0.6F, true, 2.5F, -0.4F, f, f1);
-	    		this.walk(rightFrontThigh, speed2, 0.6F, true, 0F, -0.4F, f, f1);
-	    		this.walk(rightFrontLeg, speed2, 0.2F, true, 0F, 0.6F, f, f1);
-	    		this.walk(rightFrontFoot, speed2, -0.6F, false, 2.5F, 0.4F, f, f1);
-	    		this.walk(leftHindThigh, speed2, 0.6F, true, 0F, 0.4F, f, f1);
-	    		this.walk(leftHindLeg, speed2, 0.2F, true, 0F, -0.6F, f, f1);
-	    		this.walk(leftHindFoot, speed2, -0.6F, false, 2.5F, -0.4F, f, f1);
-	    		this.walk(rightHindThigh, speed2, 0.6F, false, 0F, -0.4F, f, f1);
-	    		this.walk(rightHindLeg, speed2, 0.2F, false, 0F, 0.6F, f, f1);
-	    		this.walk(rightHindFoot, speed2, -0.6F, true, 2.5F, 0.4F, f, f1);
+	        	this.walk(leftFrontThigh, speed2, degree * 0.6F, false, 0F, 0.4F, f, f1);
+	    		this.walk(leftFrontLeg, speed2, degree * 0.2F, false, 0F, -0.6F, f, f1);
+	    		this.walk(leftFrontFoot, speed2, degree * -0.6F, true, 2.5F, -0.4F, f, f1);
+	    		this.walk(rightFrontThigh, speed2, degree * 0.6F, true, 0F, -0.4F, f, f1);
+	    		this.walk(rightFrontLeg, speed2, degree * 0.2F, true, 0F, 0.6F, f, f1);
+	    		this.walk(rightFrontFoot, speed2, degree * -0.6F, false, 2.5F, 0.4F, f, f1);
+	    		this.walk(leftHindThigh, speed2, degree * 0.6F, true, 0F, 0.4F, f, f1);
+	    		this.walk(leftHindLeg, speed2, degree * 0.2F, true, 0F, -0.6F, f, f1);
+	    		this.walk(leftHindFoot, speed2, degree * -0.6F, false, 2.5F, -0.4F, f, f1);
+	    		this.walk(rightHindThigh, speed2, degree * 0.6F, false, 0F, -0.4F, f, f1);
+	    		this.walk(rightHindLeg, speed2, degree * 0.2F, false, 0F, 0.6F, f, f1);
+	    		this.walk(rightHindFoot, speed2, degree * -0.6F, true, 2.5F, 0.4F, f, f1);
 	        }
 		}
 	}
