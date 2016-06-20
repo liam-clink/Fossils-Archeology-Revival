@@ -47,7 +47,7 @@ public class EntityMosasaurus extends EntitySwimmingPrehistoric {
 		this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
 		this.targetTasks.addTask(2, new DinoAIHunt(this, 20, false));
 		this.hasBabyTexture = false;
-		this.setSize(1.5F, 0.6F);
+		this.setActualSize(1.5F, 0.6F);
 		minSize = 0.6F;
 		maxSize = 2.1F;
 		teenAge = 5;

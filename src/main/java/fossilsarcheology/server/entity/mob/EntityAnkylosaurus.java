@@ -53,7 +53,7 @@ public class EntityAnkylosaurus extends EntityNewPrehistoric {
         this.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
         this.targetTasks.addTask(4, new DinoAIHunt(this, 200, false));
-        this.setSize(1.7F, 1.0F);
+        this.setActualSize(1.7F, 1.0F);
         this.pediaScale = 3F;
         this.nearByMobsAllowed = 6;
         minSize = 1.0F;

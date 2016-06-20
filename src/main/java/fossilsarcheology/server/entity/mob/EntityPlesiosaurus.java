@@ -40,7 +40,7 @@ public class EntityPlesiosaurus extends EntitySwimmingPrehistoric {
         this.tasks.addTask(5, new DinoAILookIdle(this));
         this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
         this.targetTasks.addTask(2, new DinoAIHunt(this, 20, false));
-        this.setSize(1.0F, 1.0F);
+        this.setActualSize(1.0F, 1.0F);
         minSize = 0.3F;
         maxSize = 1.5F;
         teenAge = 3;

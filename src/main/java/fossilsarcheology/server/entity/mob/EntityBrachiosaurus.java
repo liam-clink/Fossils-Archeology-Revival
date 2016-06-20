@@ -53,7 +53,7 @@ public class EntityBrachiosaurus extends EntityNewPrehistoric {
         this.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
         this.targetTasks.addTask(4, new DinoAIHunt(this, 200, false));
-        this.setSize(1.5F, 1.7F);
+        this.setActualSize(1.5F, 1.7F);
         this.pediaScale = 0.7F;
         this.nearByMobsAllowed = 10;
         minSize = 1;

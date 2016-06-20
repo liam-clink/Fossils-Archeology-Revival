@@ -35,7 +35,7 @@ public class EntityLiopleurodon extends EntitySwimmingPrehistoric {
         this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
         this.targetTasks.addTask(2, new DinoAIHunt(this, 20, false));
 		this.hasBabyTexture = false;
-		this.setSize(1.5F, 0.5F);
+		this.setActualSize(1.5F, 0.5F);
 		minSize = 0.8F;
 		maxSize = 1.8F;
 		teenAge = 6;

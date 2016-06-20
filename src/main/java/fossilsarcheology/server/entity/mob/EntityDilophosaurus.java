@@ -44,7 +44,7 @@ public class EntityDilophosaurus extends EntityNewPrehistoric {
         this.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
         this.targetTasks.addTask(4, new DinoAIHunt(this, 200, false));
-        this.setSize(1.5F, 0.9F);
+        this.setActualSize(1.5F, 0.9F);
         this.nearByMobsAllowed = 7;
         this.pediaScale = 6.5F;
         minSize = 0.5F;

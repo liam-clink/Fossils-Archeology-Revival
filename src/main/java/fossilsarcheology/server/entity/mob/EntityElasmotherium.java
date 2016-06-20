@@ -53,7 +53,7 @@ public class EntityElasmotherium extends EntityNewPrehistoric {
         this.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
         this.targetTasks.addTask(4, new DinoAIHunt(this, 200, false));
-        this.setSize(1F, 1F);
+        this.setActualSize(1F, 1F);
         this.nearByMobsAllowed = 9;
         this.pediaScale = 6;
         minSize = 0.5F;

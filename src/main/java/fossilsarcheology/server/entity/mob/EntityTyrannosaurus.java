@@ -49,7 +49,7 @@ public class EntityTyrannosaurus extends EntityNewPrehistoric {
 		this.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));
 		this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
 		this.targetTasks.addTask(4, new DinoAIHunt(this, 200, false));
-		this.setSize(1.8F, 1.25F);
+		this.setActualSize(1.8F, 1.25F);
 		this.pediaScale = 1.5F;
 		this.hasFeatherToggle = true;
 		this.featherToggle = Revival.CONFIG.featheredTRex;

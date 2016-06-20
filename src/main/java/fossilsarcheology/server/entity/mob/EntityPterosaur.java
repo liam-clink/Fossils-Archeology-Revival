@@ -50,7 +50,7 @@ public class EntityPterosaur extends EntityFlyingPrehistoric {
         this.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
         this.targetTasks.addTask(4, new DinoAIHunt(this, 200, false));
-        this.setSize(1.1F, 1.1F);
+        this.setActualSize(1.1F, 1.1F);
         minSize = 0.3F;
         maxSize = 1.2F;
         teenAge = 4;

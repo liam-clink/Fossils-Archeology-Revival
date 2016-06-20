@@ -37,7 +37,7 @@ public class EntitySarcosuchus extends EntitySwimmingPrehistoric {
 
 	public EntitySarcosuchus(World world) {
 		super(world, EnumPrehistoric.Sarcosuchus, 1, 3, 15, 70, 0.25, 0.25);
-		this.setSize(2.0F, 1.0F);
+		this.setActualSize(2.0F, 1.0F);
 		isAmphibious = true;
 		this.getNavigator().setAvoidsWater(false);
 		this.tasks.addTask(1, this.aiSit);

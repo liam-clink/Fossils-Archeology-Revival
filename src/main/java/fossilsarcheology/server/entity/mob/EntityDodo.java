@@ -40,7 +40,7 @@ public class EntityDodo extends EntityNewPrehistoric {
         this.tasks.addTask(9, new DinoAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(9, new DinoAILookIdle(this));
         this.targetTasks.addTask(4, new DinoAIHunt(this, 200, false));
-        this.setSize(0.8F, 0.7F);
+        this.setActualSize(0.8F, 0.7F);
         this.nearByMobsAllowed = 10;
         minSize = 0.5F;
         maxSize = 1F;

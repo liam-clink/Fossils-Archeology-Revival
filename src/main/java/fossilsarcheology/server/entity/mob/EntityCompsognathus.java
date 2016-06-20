@@ -50,7 +50,7 @@ public class EntityCompsognathus extends EntityNewPrehistoric {
         this.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
         this.targetTasks.addTask(4, new DinoAIHunt(this, 200, false));
-        this.setSize(1.1F, 1.1F);
+        this.setActualSize(1.1F, 1.1F);
         this.pediaScale = 100F;
         this.nearByMobsAllowed = 20;
         this.hasFeatherToggle = true;
