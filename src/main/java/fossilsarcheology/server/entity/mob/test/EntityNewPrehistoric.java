@@ -1364,11 +1364,15 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	public boolean canDinoHunt(Entity target, boolean hunger) {
 
 		if (this.type.diet != EnumDiet.HERBIVORE && this.type.diet != EnumDiet.NONE && canAttackClass(target.getClass())) {
-			if (width >= target.width) {
-				return (hunger ? isHungry() : this.isAngry()) || target instanceof EntityToyBase && this.ticksTillPlay == 0;
+			if (this.boundingBox.getAverageEdgeLength() >= target.width || target instanceof EntityPlayer && this.boundingBox.getAverageEdgeLength() > 0.3F) {
+				if(hunger){
+					return isHungry() || target instanceof EntityToyBase && this.ticksTillPlay == 0;
+				}else{
+					return true;
+				}
 			}
 		}
-		return target instanceof EntityToyBase && this.ticksTillPlay == 0;
+		return false;
 	}
 
 	public boolean isMad(){

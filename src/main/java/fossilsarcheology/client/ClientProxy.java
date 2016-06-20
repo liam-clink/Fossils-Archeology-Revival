@@ -54,7 +54,7 @@ public class ClientProxy extends ServerProxy {
     @Override
     public void init() {
         super.init();
-        VillagerRegistry.instance().registerVillagerSkin(Revival.CONFIG.villagerId, new ResourceLocation("fossil:textures/model/Archeologist"));
+        VillagerRegistry.instance().registerVillagerSkin(Revival.CONFIG.villagerId, new ResourceLocation("fossil:textures/model/Archeologist.png"));
         RenderingRegistry.registerEntityRenderingHandler(EntityTriceratops.class, new RenderPrehistoric(new ModelTriceratops()));
         RenderingRegistry.registerEntityRenderingHandler(EntityVelociraptor.class, new RenderPrehistoric(new ModelVelociraptor()));
         RenderingRegistry.registerEntityRenderingHandler(EntityTyrannosaurus.class, new RenderPrehistoric(new ModelTyrannosaurus()));
