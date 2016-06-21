@@ -123,6 +123,9 @@ public class ModelDodo extends ModelNewPrehistoric {
         AdvancedModelRenderer[] tailParts = {this.tail};
         AdvancedModelRenderer[] neckParts = {this.neck, this.head};
         EntityDodo dodo = (EntityDodo) entity;
+		if(((EntityNewPrehistoric) entity).isSkeleton()){
+			return;
+		}
         if (this.isChild) {
             // this.head.setScale(1.5F, 1.5F, 1.5F); ew scaling
             // this.beakUpper.setScale(0.5F, 0.5F, 0.5F);
