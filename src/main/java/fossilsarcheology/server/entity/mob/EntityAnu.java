@@ -388,54 +388,54 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
     }
 
     private void generateDefenseHutP2(int x, int y, int z) {
-        this.worldObj.setBlock(x - 3, y, z, Blocks.obsidian);
-        this.worldObj.setBlock(x - 3, y, z + 1, Blocks.obsidian);
-        this.worldObj.setBlock(x - 3, y, z + 2, Blocks.obsidian);
-        this.worldObj.setBlock(x - 3, y, z - 1, Blocks.obsidian);
-        this.worldObj.setBlock(x - 3, y, z - 2, Blocks.obsidian);
-        this.worldObj.setBlock(x + 3, y, z, Blocks.obsidian);
-        this.worldObj.setBlock(x + 3, y, z + 1, Blocks.obsidian);
-        this.worldObj.setBlock(x + 3, y, z + 2, Blocks.obsidian);
-        this.worldObj.setBlock(x + 3, y, z - 1, Blocks.obsidian);
-        this.worldObj.setBlock(x + 3, y, z - 2, Blocks.obsidian);
-        this.worldObj.setBlock(x, y, z + 3, Blocks.obsidian);
-        this.worldObj.setBlock(x + 1, y, z + 3, Blocks.obsidian);
-        this.worldObj.setBlock(x + 2, y, z + 3, Blocks.obsidian);
-        this.worldObj.setBlock(x - 1, y, z + 3, Blocks.obsidian);
-        this.worldObj.setBlock(x - 2, y, z + 3, Blocks.obsidian);
-        this.worldObj.setBlock(x, y, z - 3, Blocks.obsidian);
-        this.worldObj.setBlock(x + 1, y, z - 3, Blocks.obsidian);
-        this.worldObj.setBlock(x + 2, y, z - 3, Blocks.obsidian);
-        this.worldObj.setBlock(x - 1, y, z - 3, Blocks.obsidian);
-        this.worldObj.setBlock(x - 2, y, z - 3, Blocks.obsidian);
+        this.worldObj.setBlock(x - 3, y, z, Blocks.obsidian.setHardness(3));
+        this.worldObj.setBlock(x - 3, y, z + 1, Blocks.obsidian.setHardness(3));
+        this.worldObj.setBlock(x - 3, y, z + 2, Blocks.obsidian.setHardness(3));
+        this.worldObj.setBlock(x - 3, y, z - 1, Blocks.obsidian.setHardness(3));
+        this.worldObj.setBlock(x - 3, y, z - 2, Blocks.obsidian.setHardness(3));
+        this.worldObj.setBlock(x + 3, y, z, Blocks.obsidian.setHardness(3));
+        this.worldObj.setBlock(x + 3, y, z + 1, Blocks.obsidian.setHardness(3));
+        this.worldObj.setBlock(x + 3, y, z + 2, Blocks.obsidian.setHardness(3));
+        this.worldObj.setBlock(x + 3, y, z - 1, Blocks.obsidian.setHardness(3));
+        this.worldObj.setBlock(x + 3, y, z - 2, Blocks.obsidian.setHardness(3));
+        this.worldObj.setBlock(x, y, z + 3, Blocks.obsidian.setHardness(3));
+        this.worldObj.setBlock(x + 1, y, z + 3, Blocks.obsidian.setHardness(3));
+        this.worldObj.setBlock(x + 2, y, z + 3, Blocks.obsidian.setHardness(3));
+        this.worldObj.setBlock(x - 1, y, z + 3, Blocks.obsidian.setHardness(3));
+        this.worldObj.setBlock(x - 2, y, z + 3, Blocks.obsidian.setHardness(3));
+        this.worldObj.setBlock(x, y, z - 3, Blocks.obsidian.setHardness(3));
+        this.worldObj.setBlock(x + 1, y, z - 3, Blocks.obsidian.setHardness(3));
+        this.worldObj.setBlock(x + 2, y, z - 3, Blocks.obsidian.setHardness(3));
+        this.worldObj.setBlock(x - 1, y, z - 3, Blocks.obsidian.setHardness(3));
+        this.worldObj.setBlock(x - 2, y, z - 3, Blocks.obsidian.setHardness(3));
     }
 
     private void generateDefenseHutP1(int x, int y, int z) {
-        this.worldObj.setBlock(x, y - 1, z, Blocks.obsidian);
-        this.worldObj.setBlock(x + 1, y - 1, z, Blocks.obsidian);
-        this.worldObj.setBlock(x + 2, y - 1, z, Blocks.obsidian);
-        this.worldObj.setBlock(x - 1, y - 1, z, Blocks.obsidian);
-        this.worldObj.setBlock(x - 2, y - 1, z, Blocks.obsidian);
-        this.worldObj.setBlock(x, y - 1, z + 1, Blocks.obsidian);
-        this.worldObj.setBlock(x + 1, y - 1, z + 1, Blocks.obsidian);
-        this.worldObj.setBlock(x + 2, y - 1, z + 1, Blocks.obsidian);
-        this.worldObj.setBlock(x - 1, y - 1, z + 1, Blocks.obsidian);
-        this.worldObj.setBlock(x - 2, y - 1, z + 1, Blocks.obsidian);
-        this.worldObj.setBlock(x, y - 1, z + 2, Blocks.obsidian);
-        this.worldObj.setBlock(x + 1, y - 1, z + 2, Blocks.obsidian);
-        this.worldObj.setBlock(x + 2, y - 1, z + 2, Blocks.obsidian);
-        this.worldObj.setBlock(x - 1, y - 1, z + 2, Blocks.obsidian);
-        this.worldObj.setBlock(x - 2, y - 1, z + 2, Blocks.obsidian);
-        this.worldObj.setBlock(x, y - 1, z - 1, Blocks.obsidian);
-        this.worldObj.setBlock(x + 1, y - 1, z - 1, Blocks.obsidian);
-        this.worldObj.setBlock(x + 2, y - 1, z - 1, Blocks.obsidian);
-        this.worldObj.setBlock(x - 1, y - 1, z - 1, Blocks.obsidian);
-        this.worldObj.setBlock(x - 2, y - 1, z - 1, Blocks.obsidian);
-        this.worldObj.setBlock(x, y - 1, z - 2, Blocks.obsidian);
-        this.worldObj.setBlock(x + 1, y - 1, z - 2, Blocks.obsidian);
-        this.worldObj.setBlock(x + 2, y - 1, z - 2, Blocks.obsidian);
-        this.worldObj.setBlock(x - 1, y - 1, z - 2, Blocks.obsidian);
-        this.worldObj.setBlock(x - 2, y - 1, z - 2, Blocks.obsidian);
+        this.worldObj.setBlock(x, y - 1, z, Blocks.obsidian.setHardness(3));
+        this.worldObj.setBlock(x + 1, y - 1, z, Blocks.obsidian.setHardness(3));
+        this.worldObj.setBlock(x + 2, y - 1, z, Blocks.obsidian.setHardness(3));
+        this.worldObj.setBlock(x - 1, y - 1, z, Blocks.obsidian.setHardness(3));
+        this.worldObj.setBlock(x - 2, y - 1, z, Blocks.obsidian.setHardness(3));
+        this.worldObj.setBlock(x, y - 1, z + 1, Blocks.obsidian.setHardness(3));
+        this.worldObj.setBlock(x + 1, y - 1, z + 1, Blocks.obsidian.setHardness(3));
+        this.worldObj.setBlock(x + 2, y - 1, z + 1, Blocks.obsidian.setHardness(3));
+        this.worldObj.setBlock(x - 1, y - 1, z + 1, Blocks.obsidian.setHardness(3));
+        this.worldObj.setBlock(x - 2, y - 1, z + 1, Blocks.obsidian.setHardness(3));
+        this.worldObj.setBlock(x, y - 1, z + 2, Blocks.obsidian.setHardness(3));
+        this.worldObj.setBlock(x + 1, y - 1, z + 2, Blocks.obsidian.setHardness(3));
+        this.worldObj.setBlock(x + 2, y - 1, z + 2, Blocks.obsidian.setHardness(3));
+        this.worldObj.setBlock(x - 1, y - 1, z + 2, Blocks.obsidian.setHardness(3));
+        this.worldObj.setBlock(x - 2, y - 1, z + 2, Blocks.obsidian.setHardness(3));
+        this.worldObj.setBlock(x, y - 1, z - 1, Blocks.obsidian.setHardness(3));
+        this.worldObj.setBlock(x + 1, y - 1, z - 1, Blocks.obsidian.setHardness(3));
+        this.worldObj.setBlock(x + 2, y - 1, z - 1, Blocks.obsidian.setHardness(3));
+        this.worldObj.setBlock(x - 1, y - 1, z - 1, Blocks.obsidian.setHardness(3));
+        this.worldObj.setBlock(x - 2, y - 1, z - 1, Blocks.obsidian.setHardness(3));
+        this.worldObj.setBlock(x, y - 1, z - 2, Blocks.obsidian.setHardness(3));
+        this.worldObj.setBlock(x + 1, y - 1, z - 2, Blocks.obsidian.setHardness(3));
+        this.worldObj.setBlock(x + 2, y - 1, z - 2, Blocks.obsidian.setHardness(3));
+        this.worldObj.setBlock(x - 1, y - 1, z - 2, Blocks.obsidian.setHardness(3));
+        this.worldObj.setBlock(x - 2, y - 1, z - 2, Blocks.obsidian.setHardness(3));
 
     }
 
