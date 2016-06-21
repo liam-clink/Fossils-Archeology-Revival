@@ -138,7 +138,7 @@ public class EntityPlesiosaurus extends EntitySwimmingPrehistoric {
 
     public String getTexture() {
     	if(isSkeleton()){
-    		return super.getTexture();
+    		return "fossil:textures/model/plesiosaurus_0/" + "plesiosaurus_skeleton.png";
     	}
         String toggle = this.hasFeatherToggle ? !this.featherToggle ? "feathered/" : "scaled/" : "";
         boolean isBaby = this.isChild() && this.hasBabyTexture;
