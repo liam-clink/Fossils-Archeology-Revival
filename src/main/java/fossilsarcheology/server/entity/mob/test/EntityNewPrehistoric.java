@@ -1011,6 +1011,15 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		super.attackEntityFrom(dmg, i);
 		return super.attackEntityFrom(dmg, i);
 	}
+	
+	public static boolean isEntitySmallerThan(Entity entity, float size){
+		if(entity instanceof EntityNewPrehistoric){
+			return ((EntityNewPrehistoric) entity).getActualWidth() <= size;
+		}
+		else{
+			return entity.width <= size;
+		}
+	}
 
 	public boolean isBesideClimbableBlock() {
 		return (this.dataWatcher.getWatchableObjectInt(22) & 1) != 0;
