@@ -1,12 +1,7 @@
 package fossilsarcheology.server.block.entity;
 
-import fossilsarcheology.Revival;
-import fossilsarcheology.server.block.BlockAnalyzer;
-import fossilsarcheology.server.block.FABlockRegistry;
-import fossilsarcheology.server.enums.EnumPrehistoric;
-import fossilsarcheology.server.handler.FossilAchievementHandler;
-import fossilsarcheology.server.handler.LocalizationStrings;
-import fossilsarcheology.server.item.FAItemRegistry;
+import java.util.Random;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -17,8 +12,15 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
-
-import java.util.Random;
+import fossilsarcheology.Revival;
+import fossilsarcheology.server.block.BlockAnalyzer;
+import fossilsarcheology.server.block.FABlockRegistry;
+import fossilsarcheology.server.enums.EnumDinoBones;
+import fossilsarcheology.server.enums.EnumPrehistoric;
+import fossilsarcheology.server.handler.FossilAchievementHandler;
+import fossilsarcheology.server.handler.LocalizationStrings;
+import fossilsarcheology.server.item.DinosaurBoneItem;
+import fossilsarcheology.server.item.FAItemRegistry;
 
 public class TileEntityAnalyzer extends TileEntity implements IInventory, ISidedInventory {
 
@@ -272,7 +274,7 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
             if (this.analyzerItemStacks[var1] != null) {
                 Item var2 = this.analyzerItemStacks[var1].getItem();
 
-                if (EnumPrehistoric.isFoodItem(this.analyzerItemStacks[var1].getItem()) || (var2 == FAItemRegistry.INSTANCE.biofossil) || (var2 == FAItemRegistry.INSTANCE.tarfossil) || (var2 == FAItemRegistry.INSTANCE.tardrop) || (var2 == FAItemRegistry.INSTANCE.failuresaurusFlesh) || (var2 == FAItemRegistry.INSTANCE.relic) || (var2 == Items.porkchop) || (var2 == Items.beef) || (var2 == Items.egg) || (var2 == Items.chicken) || (var2 == Item.getItemFromBlock(Blocks.wool)) || (var2 == FAItemRegistry.INSTANCE.icedMeat) || (var2 == Items.leather) || (var2 == FAItemRegistry.INSTANCE.brokenSapling)) {
+                if (EnumPrehistoric.isFoodItem(this.analyzerItemStacks[var1].getItem()) || (var2 instanceof DinosaurBoneItem) || (var2 == FAItemRegistry.INSTANCE.biofossil) || (var2 == FAItemRegistry.INSTANCE.tarfossil) || (var2 == FAItemRegistry.INSTANCE.tardrop) || (var2 == FAItemRegistry.INSTANCE.failuresaurusFlesh) || (var2 == FAItemRegistry.INSTANCE.relic) || (var2 == Items.porkchop) || (var2 == Items.beef) || (var2 == Items.egg) || (var2 == Items.chicken) || (var2 == Item.getItemFromBlock(Blocks.wool)) || (var2 == FAItemRegistry.INSTANCE.icedMeat) || (var2 == Items.leather) || (var2 == FAItemRegistry.INSTANCE.brokenSapling)) {
                     this.RawIndex = var1;
                     break;
                 }
@@ -299,6 +301,24 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
             int rand = new Random().nextInt(100);
             int var3;
 
+            if (this.analyzerItemStacks[this.RawIndex].getItem() instanceof DinosaurBoneItem) {
+
+                if (!Revival.enableDebugging()) {
+                    if (rand > -1 && rand <= 30) {
+                        itemstack = new ItemStack(Items.dye, 3, 15);
+                    }
+
+                    if (rand > 30 && rand <= 65) {
+                        itemstack = new ItemStack(Items.bone, 3);
+                    }
+
+                    if (rand > 65) {
+                        itemstack = new ItemStack(EnumDinoBones.from(EnumDinoBones.values()[this.analyzerItemStacks[this.RawIndex].getItemDamage()]).DNAItem, 1);
+                    }
+                } else {
+                    itemstack = new ItemStack(EnumPrehistoric.getRandomMezoic().DNAItem, 1);
+                }
+            }
             if (this.analyzerItemStacks[this.RawIndex].getItem() == FAItemRegistry.INSTANCE.biofossil) {
 
                 if (!Revival.enableDebugging()) {
@@ -315,7 +335,6 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
                     }
                 } else {
                     itemstack = new ItemStack(EnumPrehistoric.getRandomMezoic().DNAItem, 1);
-                    System.out.println(EnumPrehistoric.getRandomMesozoicDNA().getUnlocalizedName());
                 }
             }
             if (this.analyzerItemStacks[this.RawIndex].getItem() == FAItemRegistry.INSTANCE.tarfossil) {

@@ -11,4 +11,13 @@ public enum EnumDinoBones {
     	}
 		return null;
     }
+    
+    public static EnumPrehistoric from(EnumDinoBones bone){
+    	for(EnumPrehistoric prehistorics : EnumPrehistoric.values()){
+    		if(prehistorics.name().equals(bone.name())){
+    			return prehistorics;
+    		}
+    	}
+		return null;
+    }
 }
