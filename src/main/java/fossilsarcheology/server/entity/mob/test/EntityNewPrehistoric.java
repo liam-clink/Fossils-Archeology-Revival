@@ -975,7 +975,6 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	@Override
 	public boolean attackEntityFrom(DamageSource dmg, float i) {
 		if (i > 0 && this.isSkeleton()) {
-			this.setDead();
 			this.playSound("mob.skeleton.hurt", 0.8F, 1);
 			if (!worldObj.isRemote) {
 				if (this.type.timeperiod == EnumTimePeriod.CENOZOIC) {
@@ -983,7 +982,9 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 				} else {
 					this.dropItem(FAItemRegistry.INSTANCE.biofossil, 1);
 				}
+				this.entityDropItem(new ItemStack(Items.bone, Math.min(this.getAgeInDays(), this.getAdultAge()), 1), 1);
 			}
+			this.setDead();
 			return false;
 		}
 		if (this.getLastAttacker() instanceof EntityPlayer) {
