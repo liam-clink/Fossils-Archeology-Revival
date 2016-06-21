@@ -1,24 +1,61 @@
 package fossilsarcheology.server.enums;
 
+import io.netty.util.internal.ThreadLocalRandom;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.passive.EntityChicken;
+import net.minecraft.entity.passive.EntityCow;
+import net.minecraft.entity.passive.EntityHorse;
+import net.minecraft.entity.passive.EntityPig;
+import net.minecraft.entity.passive.EntitySheep;
+import net.minecraft.item.Item;
+import net.minecraft.world.World;
+import cpw.mods.fml.common.registry.GameRegistry;
+import fossilsarcheology.api.EnumDiet;
 import fossilsarcheology.server.creativetab.FATabRegistry;
+import fossilsarcheology.server.entity.mob.EntityAlligatorGar;
+import fossilsarcheology.server.entity.mob.EntityAllosaurus;
+import fossilsarcheology.server.entity.mob.EntityAnkylosaurus;
+import fossilsarcheology.server.entity.mob.EntityBrachiosaurus;
+import fossilsarcheology.server.entity.mob.EntityCeratosaurus;
+import fossilsarcheology.server.entity.mob.EntityCoelacanth;
+import fossilsarcheology.server.entity.mob.EntityCompsognathus;
+import fossilsarcheology.server.entity.mob.EntityConfuciusornis;
+import fossilsarcheology.server.entity.mob.EntityDeinonychus;
+import fossilsarcheology.server.entity.mob.EntityDilophosaurus;
+import fossilsarcheology.server.entity.mob.EntityDodo;
+import fossilsarcheology.server.entity.mob.EntityElasmotherium;
+import fossilsarcheology.server.entity.mob.EntityGallimimus;
+import fossilsarcheology.server.entity.mob.EntityGastornis;
+import fossilsarcheology.server.entity.mob.EntityKelenken;
+import fossilsarcheology.server.entity.mob.EntityLiopleurodon;
+import fossilsarcheology.server.entity.mob.EntityMammoth;
+import fossilsarcheology.server.entity.mob.EntityMosasaurus;
+import fossilsarcheology.server.entity.mob.EntityNautilus;
+import fossilsarcheology.server.entity.mob.EntityPachycephalosaurus;
+import fossilsarcheology.server.entity.mob.EntityPhorusrhacos;
+import fossilsarcheology.server.entity.mob.EntityPlesiosaurus;
+import fossilsarcheology.server.entity.mob.EntityPterosaur;
+import fossilsarcheology.server.entity.mob.EntityQuagga;
+import fossilsarcheology.server.entity.mob.EntitySarcosuchus;
+import fossilsarcheology.server.entity.mob.EntitySmilodon;
+import fossilsarcheology.server.entity.mob.EntitySpinosaurus;
+import fossilsarcheology.server.entity.mob.EntityStegosaurus;
+import fossilsarcheology.server.entity.mob.EntitySturgeon;
+import fossilsarcheology.server.entity.mob.EntityTitanis;
+import fossilsarcheology.server.entity.mob.EntityTriceratops;
+import fossilsarcheology.server.entity.mob.EntityTyrannosaurus;
+import fossilsarcheology.server.entity.mob.EntityVelociraptor;
+import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
 import fossilsarcheology.server.item.BirdEggItem;
 import fossilsarcheology.server.item.DinoEggItem;
 import fossilsarcheology.server.item.ItemFish;
 import fossilsarcheology.server.item.MammalEmbryoItem;
 import fossilsarcheology.server.item.forge.ForgeFoodItem;
-
-import cpw.mods.fml.common.registry.GameRegistry;
-import fossilsarcheology.api.EnumDiet;
-import fossilsarcheology.server.entity.mob.*;
-import io.netty.util.internal.ThreadLocalRandom;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.passive.*;
-import net.minecraft.item.Item;
-import net.minecraft.world.World;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 public enum EnumPrehistoric {
 
@@ -347,7 +384,7 @@ public enum EnumPrehistoric {
 		for (int i = 0; i < values().length; i++) {
 			if (values()[i].type != EnumMobType.VANILLA && values()[i].type != EnumMobType.CHICKEN && values()[i].type != EnumMobType.FISH) {
 				if(tar){
-					if(values()[i].timeperiod == EnumTimePeriod.CENOZOIC){
+					if(values()[i].timeperiod == EnumTimePeriod.CENOZOIC && values()[i].getDinoClass().isAssignableFrom(EntityNewPrehistoric.class)){
 						list.add(values()[i]);
 					}
 				}else{

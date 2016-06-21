@@ -93,7 +93,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	public float ridingXZ;
 	public float ridingY;
 	public float actualWidth;
-	
+
 	public EntityNewPrehistoric(World world, EnumPrehistoric type, double baseDamage, double maxDamage, double baseHealth, double maxHealth, double baseSpeed, double maxSpeed) {
 		super(world);
 		this.setHunger(this.getMaxHunger());
@@ -214,7 +214,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		this.actualWidth = width;
 		this.setSize(width, height);
 	}
-	
+
 	@Override
 	public boolean isAIEnabled() {
 		return !this.isSkeleton();
@@ -351,7 +351,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	public float getActualWidth(){
 		return this.actualWidth * this.getAgeScale();
 	}
-	
+
 	public boolean arePlantsNearby(int range) {
 		for (int r = 1; r <= range; r++) {
 			for (int ds = -r; ds <= r; ds++) {
@@ -460,7 +460,6 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	@Override
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
-		System.out.println(this.getActualWidth());
 		if (this.currentOrder == EnumOrderType.STAY && !this.isSitting() && !this.isActuallyWeak()) {
 			this.setSitting(true);
 			this.setSleeping(false);
@@ -970,6 +969,16 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
 	@Override
 	public boolean attackEntityFrom(DamageSource dmg, float i) {
+		if( i > 0 && this.isSkeleton()){
+			this.setDead();
+			if(!worldObj.isRemote){
+				if(this.type.timeperiod == EnumTimePeriod.CENOZOIC){
+					this.dropItem(FAItemRegistry.INSTANCE.tarfossil, 1);
+				}else{
+					this.dropItem(FAItemRegistry.INSTANCE.biofossil, 1);
+				}
+			}
+		}
 		if (this.getLastAttacker() instanceof EntityPlayer) {
 			if (this.getOwner() == this.getLastAttacker()) {
 				this.setTamed(false);
@@ -1331,7 +1340,12 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
 	@Override
 	public void playLivingSound() {
-		if (!this.isSleeping()) {
+		if(this.isSkeleton()){
+			this.motionX *= 0;
+	        this.motionY *= 0;
+	        this.motionZ *= 0;
+		}
+		if (!this.isSleeping() && !this.isSkeleton()) {
 			super.playLivingSound();
 			if (this.getAnimation() != null) {
 				if (this.getAnimation() == NO_ANIMATION && !worldObj.isRemote) {
@@ -1374,7 +1388,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
 	public boolean canDinoHunt(Entity target, boolean hunger) {
 		boolean isAnotherDino = target instanceof EntityNewPrehistoric;
-		
+
 		if (this.type.diet != EnumDiet.HERBIVORE && this.type.diet != EnumDiet.NONE && canAttackClass(target.getClass())) {
 			if (isAnotherDino ? this.getActualWidth() >= ((EntityNewPrehistoric)target).getActualWidth() : this.getActualWidth() >= target.width) {
 				if(hunger){
