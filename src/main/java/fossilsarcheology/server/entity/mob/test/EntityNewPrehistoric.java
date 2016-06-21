@@ -1057,7 +1057,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 					this.faceEntity(player, 360.0F, 360.0F);
 				}
 			} else {
-				if (itemstack.getItem() == Items.bone) {
+				if (itemstack.getItem() == Items.bone && this.getAgeInDays() < this.getAdultAge()) {
 					this.playSound("mob.skeleton.say", 0.8F, 1);
 					this.setAgeInDays(this.getAgeInDays() + 1);
 					if (!player.capabilities.isCreativeMode) {

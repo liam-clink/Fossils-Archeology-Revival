@@ -246,6 +246,9 @@ public class ModelTyrannosaurus extends ModelNewPrehistoric {
         ModelUtils.rotateToInit(animator, head);
         animator.endKeyframe();
         animator.resetKeyframe(20);
+		if(((EntityNewPrehistoric) entity).isSkeleton()){
+			return;
+		}
         if (mob.getAnimation() == EntityTyrannosaurus.NO_ANIMATION && !mob.isActuallyWeak()) {
             ModelUtils.faceTargetMod(neck, f3, f4, 0.5F);
             ModelUtils.faceTargetMod(head, f3, f4, 0.5F);

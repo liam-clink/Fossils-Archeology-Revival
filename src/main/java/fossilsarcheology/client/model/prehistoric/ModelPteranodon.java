@@ -185,6 +185,9 @@ public class ModelPteranodon extends ModelNewPrehistoric {
         AdvancedModelRenderer[] neckParts = {this.Neck1, this.Neck2, this.Head};
         AdvancedModelRenderer[] rightWingParts = {this.WingR1, this.WingR1Child_1};
         AdvancedModelRenderer[] leftWingParts = {this.WingL1, this.WingL1Child_1};
+		if(((EntityNewPrehistoric) entity).isSkeleton()){
+			return;
+		}
         ModelUtils.faceTargetMod(Neck1, f3, f4, 0.3F);
         ModelUtils.faceTargetMod(Neck2, f3, f4, 0.3F);
         ModelUtils.faceTargetMod(Head, f3, f4, 0.3F);
