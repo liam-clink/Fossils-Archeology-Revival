@@ -384,7 +384,7 @@ public enum EnumPrehistoric {
 		for (int i = 0; i < values().length; i++) {
 			if (values()[i].type != EnumMobType.VANILLA && values()[i].type != EnumMobType.CHICKEN && values()[i].type != EnumMobType.FISH) {
 				if(tar){
-					if(values()[i].timeperiod == EnumTimePeriod.CENOZOIC && values()[i].getDinoClass().isAssignableFrom(EntityNewPrehistoric.class)){
+					if(values()[i].timeperiod == EnumTimePeriod.CENOZOIC && EntityNewPrehistoric.class.isAssignableFrom(values()[i].dinoClass)){
 						list.add(values()[i]);
 					}
 				}else{
