@@ -210,7 +210,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		return data;
 	}
 
-	public void setActualSize(float width, float height){
+	public void setActualSize(float width, float height) {
 		this.actualWidth = width;
 		this.setSize(width, height);
 	}
@@ -348,7 +348,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		return null;
 	}
 
-	public float getActualWidth(){
+	public float getActualWidth() {
 		return this.actualWidth * this.getAgeScale();
 	}
 
@@ -460,10 +460,10 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	@Override
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
-		if(this.isSkeleton()){
+		if (this.isSkeleton()) {
 			this.motionX *= 0;
-	        this.motionY *= 0;
-	        this.motionZ *= 0;
+			this.motionY *= 0;
+			this.motionZ *= 0;
 		}
 		if (this.currentOrder == EnumOrderType.STAY && !this.isSitting() && !this.isActuallyWeak()) {
 			this.setSitting(true);
@@ -974,15 +974,16 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
 	@Override
 	public boolean attackEntityFrom(DamageSource dmg, float i) {
-		if( i > 0 && this.isSkeleton()){
+		if (i > 0 && this.isSkeleton()) {
 			this.setDead();
-			if(!worldObj.isRemote){
-				if(this.type.timeperiod == EnumTimePeriod.CENOZOIC){
+			if (!worldObj.isRemote) {
+				if (this.type.timeperiod == EnumTimePeriod.CENOZOIC) {
 					this.dropItem(FAItemRegistry.INSTANCE.tarfossil, 1);
-				}else{
+				} else {
 					this.dropItem(FAItemRegistry.INSTANCE.biofossil, 1);
 				}
 			}
+			return false;
 		}
 		if (this.getLastAttacker() instanceof EntityPlayer) {
 			if (this.getOwner() == this.getLastAttacker()) {
@@ -1272,21 +1273,22 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 			String toggle = this.hasFeatherToggle ? !this.featherToggle ? "feathered/" : "scaled/" : "";
 			boolean isBaby = this.isChild() && this.hasBabyTexture;
 			String gender = this.hasTeenTexture ? this.isTeen() ? "_teen" : isBaby ? "_baby" : this.getGender() == 0 ? "_female" : "_male" : this.isChild() ? "_baby" : this.getGender() == 0 ? "_female" : "_male";
-			String sleeping = !this.isSleeping() ? this.isActuallyWeak()? "_sleeping": "" : "_sleeping";
+			String sleeping = !this.isSleeping() ? this.isActuallyWeak() ? "_sleeping" : "" : "_sleeping";
 			String toggleList = this.hasFeatherToggle ? !this.featherToggle ? "_feathered" : "_scaled" : "";
 			return "fossil:textures/model/" + type.toString().toLowerCase() + "_0/" + toggle + type.toString().toLowerCase() + gender + toggleList + sleeping + ".png";
 		} else {
 			String toggle = this.hasFeatherToggle ? !this.featherToggle ? "feathered/" : "scaled/" : "";
 			String gender = this.getGender() == 0 ? "_female" : "_male";
-			String sleeping = !this.isSleeping() ? this.isActuallyWeak()? "_sleeping": "" : "_sleeping";
+			String sleeping = !this.isSleeping() ? this.isActuallyWeak() ? "_sleeping" : "" : "_sleeping";
 			String toggleList = this.hasFeatherToggle ? !this.featherToggle ? "_feathered" : "_scaled" : "";
 			return "fossil:textures/model/" + type.toString().toLowerCase() + "_0/" + toggle + type.toString().toLowerCase() + gender + toggleList + sleeping + ".png";
 		}
 	}
 
-	public boolean isActuallyWeak(){
+	public boolean isActuallyWeak() {
 		return (this.aiTameType() == Taming.BLUEGEM || this.aiTameType() == Taming.GEM) && this.isWeak();
 	}
+
 	public int getTailSegments() {
 		return 3;
 	}
@@ -1390,10 +1392,10 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		boolean isAnotherDino = target instanceof EntityNewPrehistoric;
 
 		if (this.type.diet != EnumDiet.HERBIVORE && this.type.diet != EnumDiet.NONE && canAttackClass(target.getClass())) {
-			if (isAnotherDino ? this.getActualWidth() >= ((EntityNewPrehistoric)target).getActualWidth() : this.getActualWidth() >= target.width) {
-				if(hunger){
+			if (isAnotherDino ? this.getActualWidth() >= ((EntityNewPrehistoric) target).getActualWidth() : this.getActualWidth() >= target.width) {
+				if (hunger) {
 					return isHungry() || target instanceof EntityToyBase && this.ticksTillPlay == 0;
-				}else{
+				} else {
 					return true;
 				}
 			}
@@ -1401,8 +1403,8 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		return false;
 	}
 
-	public boolean isMad(){
-		return this.getMoodFace()  == EnumPrehistoricMood.SAD;
+	public boolean isMad() {
+		return this.getMoodFace() == EnumPrehistoricMood.SAD;
 	}
 
 	public Flock getNearbyFlock() {
@@ -1448,7 +1450,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		}
 		if (!listOfFemales.isEmpty() && this.ticksTillMate == 0) {
 			EntityNewPrehistoric prehistoric = listOfFemales.get(0);
-			if(prehistoric.ticksTillMate == 0){
+			if (prehistoric.ticksTillMate == 0) {
 				this.getNavigator().tryMoveToEntityLiving(prehistoric, 1);
 				double distance = (double) (this.width * 8.0F * this.width * 8.0F + prehistoric.width);
 
