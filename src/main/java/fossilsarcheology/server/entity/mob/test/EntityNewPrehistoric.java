@@ -460,6 +460,11 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	@Override
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
+		if(this.isSkeleton()){
+			this.motionX *= 0;
+	        this.motionY *= 0;
+	        this.motionZ *= 0;
+		}
 		if (this.currentOrder == EnumOrderType.STAY && !this.isSitting() && !this.isActuallyWeak()) {
 			this.setSitting(true);
 			this.setSleeping(false);
@@ -1340,11 +1345,6 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
 	@Override
 	public void playLivingSound() {
-		if(this.isSkeleton()){
-			this.motionX *= 0;
-	        this.motionY *= 0;
-	        this.motionZ *= 0;
-		}
 		if (!this.isSleeping() && !this.isSkeleton()) {
 			super.playLivingSound();
 			if (this.getAnimation() != null) {
