@@ -308,8 +308,7 @@ public class GuiPedia extends GuiContainer {
 		this.reset();
 		this.addStringLR("", 150, false);
 		String translatePath = "assets/fossil/dinopedia/" + Minecraft.getMinecraft().gameSettings.language + "/";
-		// String bioFile = String.valueOf(mobName) + ".txt";
-		String bioFile = "template.txt";
+		String bioFile = String.valueOf(mobName) + ".txt";
 		if (getClass().getClassLoader().getResourceAsStream(translatePath) == null) {
 			translatePath = "assets/fossil/dinopedia/" + "en_US" + "/";
 		}
@@ -320,11 +319,23 @@ public class GuiPedia extends GuiContainer {
 				BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(fileReader));
 				StringBuilder stringBuffer = new StringBuilder();
 				String line;
+				int linenumber = 0;
+				if(linenumber <= 20){
 				while ((line = bufferedReader.readLine()) != null) {
 					GL11.glPushMatrix();
 					GL11.glScalef(0.75F, 0.75F, 0.75F);
 					this.addStringLR(line, -125, false);
+					linenumber++;
 					GL11.glPopMatrix();
+				}
+				}else{
+					while ((line = bufferedReader.readLine()) != null) {
+						GL11.glPushMatrix();
+						GL11.glScalef(0.75F, 0.75F, 0.75F);
+						this.addStringLR(line, -225, false);
+						linenumber++;
+						GL11.glPopMatrix();
+					}	
 				}
 				fileReader.close();
 			} catch (IOException e) {

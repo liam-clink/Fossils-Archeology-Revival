@@ -53,6 +53,7 @@ public class EntityKelenken extends EntityNewPrehistoric {
 		developsResistance = true;
 		breaksBlocks = false;
 		this.ridingY = 2.4F;
+		this.pediaScale = 9F;
 	}
 
 	@Override

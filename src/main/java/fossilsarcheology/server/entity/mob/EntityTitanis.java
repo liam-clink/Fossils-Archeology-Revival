@@ -53,7 +53,7 @@ public class EntityTitanis extends EntityNewPrehistoric {
 		this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
 		this.targetTasks.addTask(4, new DinoAIHunt(this, 200, false));
 		this.setActualSize(1.4F, 2.5F);
-		this.pediaScale = 17F;
+		this.pediaScale = 15F;
 		this.nearByMobsAllowed = 3;
 		minSize = 0.4F;
 		maxSize = 1.1F;
