@@ -320,22 +320,17 @@ public class GuiPedia extends GuiContainer {
 				StringBuilder stringBuffer = new StringBuilder();
 				String line;
 				int linenumber = 0;
-				if(linenumber <= 20){
+				this.addStringLR("", 250, true);
 				while ((line = bufferedReader.readLine()) != null) {
 					GL11.glPushMatrix();
 					GL11.glScalef(0.75F, 0.75F, 0.75F);
+					if(linenumber <= 20){
 					this.addStringLR(line, -125, false);
+					}else{
+						this.addStringLR(line, 250, true);
+					}
 					linenumber++;
 					GL11.glPopMatrix();
-				}
-				}else{
-					while ((line = bufferedReader.readLine()) != null) {
-						GL11.glPushMatrix();
-						GL11.glScalef(0.75F, 0.75F, 0.75F);
-						this.addStringLR(line, -225, false);
-						linenumber++;
-						GL11.glPopMatrix();
-					}	
 				}
 				fileReader.close();
 			} catch (IOException e) {
