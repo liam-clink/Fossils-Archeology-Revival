@@ -79,7 +79,7 @@ public class DinoAIAttackOnCollide extends EntityAIBase {
 			this.dino.getNavigator().tryMoveToEntityLiving(entitylivingbase, speed);
 		}
 		this.attackTick = Math.max(this.attackTick - 1, 0);
-		double d0 = (double) (this.dino.getActualWidth() * 2.0F * this.dino.getActualWidth() * 2.0F + entitylivingbase.width);
+		double d0 = (double) (this.dino.getActualWidth() * 8.0F * this.dino.getActualWidth() * 8.0F + entitylivingbase.width);
 
 		if (this.dino.getDistanceSq(entitylivingbase.posX, entitylivingbase.boundingBox.minY, entitylivingbase.posZ) <= d0) {
 			if (this.attackTick <= 0) {

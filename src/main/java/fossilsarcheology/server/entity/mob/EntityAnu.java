@@ -71,9 +71,9 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
         this.tasks.addTask(4, aiFear);
         this.tasks.addTask(5, aiArrowAttack);
         this.tasks.addTask(5, aiAttackOnCollide);
+		this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
         this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
         this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityGolem.class, 0, true));
-
         this.isImmuneToFire = true;
         this.experienceValue = 50;
     }

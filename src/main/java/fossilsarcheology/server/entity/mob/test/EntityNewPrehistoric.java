@@ -228,10 +228,6 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
 	public abstract void setSpawnValues();
 
-	public boolean isDeadlyHungry() {
-		return this.getHunger() < this.getMaxHunger() * (1 - this.type.HungryLevel);
-	}
-
 	public EnumOrderType getOrderType() {
 		return this.currentOrder;
 	}
