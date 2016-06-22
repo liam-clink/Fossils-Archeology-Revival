@@ -180,7 +180,6 @@ public class EntityTitanis extends EntityNewPrehistoric {
 						entity.mountEntity(null);
 					}
 				}
-				knockbackEntity(entity, 0.05F, -1.1F);
 				return flag;
 			}
 		}

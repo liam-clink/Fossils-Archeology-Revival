@@ -75,11 +75,11 @@ public class DinoAIAttackOnCollide extends EntityAIBase {
 			this.field_75445_i = 4 + this.dino.getRNG().nextInt(7);
 
 		}
-		double d0 = (double) (this.dino.getActualWidth() * 8.0F * this.dino.getActualWidth() * 8.0F + entitylivingbase.width);
-		if(this.dino.riddenByEntity == null && this.dino.getDistanceSq(entitylivingbase.posX, entitylivingbase.boundingBox.minY, entitylivingbase.posZ) >= d0){
+		if(this.dino.riddenByEntity == null){
 			this.dino.getNavigator().tryMoveToEntityLiving(entitylivingbase, speed);
 		}
 		this.attackTick = Math.max(this.attackTick - 1, 0);
+		double d0 = (double) (this.dino.getActualWidth() * 8.0F * this.dino.getActualWidth() * 8.0F + entitylivingbase.width);
 
 		if (this.dino.getDistanceSq(entitylivingbase.posX, entitylivingbase.boundingBox.minY, entitylivingbase.posZ) <= d0) {
 			if (this.attackTick <= 0) {
@@ -88,6 +88,7 @@ public class DinoAIAttackOnCollide extends EntityAIBase {
 				if (this.dino.getHeldItem() != null) {
 					this.dino.swingItem();
 				}
+				this.dino.getNavigator().clearPathEntity();
 				this.dino.attackEntityAsMob(entitylivingbase);
 			}
 		}
