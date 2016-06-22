@@ -5,7 +5,7 @@ public enum EnumDinoBones {
     
     public static EnumDinoBones get(EnumPrehistoric prehistoric){
     	for(EnumDinoBones bones : EnumDinoBones.values()){
-    		if(bones.name().equals(prehistoric.name())){
+    		if(bones.name().toLowerCase().equals(prehistoric.name().toLowerCase())){
     			return bones;
     		}
     	}

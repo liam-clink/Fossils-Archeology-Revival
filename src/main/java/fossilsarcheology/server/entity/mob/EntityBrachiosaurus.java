@@ -1,5 +1,6 @@
 package fossilsarcheology.server.entity.mob;
 
+import net.ilexiconn.llibrary.server.animation.Animation;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
@@ -63,6 +64,7 @@ public class EntityBrachiosaurus extends EntityNewPrehistoric {
         breaksBlocks = true;
         this.ridingY = 1.5F;
         this.ridingXZ = -0.2F;
+		ATTACK_ANIMATION = Animation.create(30);
     }
 
     @Override
@@ -165,7 +167,7 @@ public class EntityBrachiosaurus extends EntityNewPrehistoric {
     @Override
     public void onLivingUpdate() {
         super.onLivingUpdate();
-        if (this.getAnimation() == ATTACK_ANIMATION && this.getAnimationTick() > 25 && this.getAttackTarget() != null && this.getAttackBounds().intersectsWith(this.getAttackTarget().boundingBox)) {
+        if (this.getAnimation() == ATTACK_ANIMATION && this.getAnimationTick() > 19 && this.getAttackTarget() != null && this.getAttackBounds().intersectsWith(this.getAttackTarget().boundingBox)) {
             this.attackEntityAsMob(this.getAttackTarget());
         }
     }
@@ -176,7 +178,7 @@ public class EntityBrachiosaurus extends EntityNewPrehistoric {
                 this.setAnimation(ATTACK_ANIMATION);
                 return false;
             }
-            if (this.getAnimation() == ATTACK_ANIMATION && this.getAnimationTick() > 25) {
+            if (this.getAnimation() == ATTACK_ANIMATION && this.getAnimationTick() > 19) {
                 IAttributeInstance iattributeinstance = this.getEntityAttribute(SharedMonsterAttributes.attackDamage);
                 boolean flag = entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) iattributeinstance.getAttributeValue());
                 if (entity.ridingEntity != null) {

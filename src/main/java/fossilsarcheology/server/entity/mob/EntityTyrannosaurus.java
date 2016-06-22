@@ -226,6 +226,7 @@ public class EntityTyrannosaurus extends EntityNewPrehistoric {
 		if (source.getEntity() != null && source.getEntity() instanceof EntityPlayer) {
 			((EntityPlayer) source.getEntity()).triggerAchievement(FossilAchievementHandler.trexKill);
 		}
+		super.onDeath(source);
 	}
 
 	@Override
