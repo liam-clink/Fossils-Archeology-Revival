@@ -444,7 +444,7 @@ public class GuiPedia extends GuiContainer {
 				final int height = scaledResolution.getScaledHeight();
 				final int mouseX = (Mouse.getX() * width / mc.displayWidth) - guiLeft;
 				final int mouseY = (height - Mouse.getY() * height / mc.displayHeight - 1) - guiTop;
-				String s1 = StatCollector.translateToLocal("pedia.order.item") + " " + StatCollector.translateToLocal(dino.getOrderItem().getUnlocalizedName() + ".name");
+				String s1 = StatCollector.translateToLocal("pedia.order.item") + new ItemStack(dino.getOrderItem()).getDisplayName();
 				int x = wordLength / 2;
 				int y = 190;
 				printStringXY(s1, x, y, 157, 126, 103);
