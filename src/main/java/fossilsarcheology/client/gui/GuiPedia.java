@@ -449,9 +449,20 @@ public class GuiPedia extends GuiContainer {
 				final int height = scaledResolution.getScaledHeight();
 				final int mouseX = (Mouse.getX() * width / mc.displayWidth) - guiLeft;
 				final int mouseY = (height - Mouse.getY() * height / mc.displayHeight - 1) - guiTop;
-				String s1 = StatCollector.translateToLocal("pedia.activity") + " " + StatCollector.translateToLocal("pedia.activity." + dino.aiActivityType().toString().toLowerCase());
+				String s1 = StatCollector.translateToLocal("pedia.order.item") + " " + StatCollector.translateToLocal(dino.getOrderItem().getUnlocalizedName() + ".name");
 				int x = wordLength / 2;
 				int y = 190;
+				printStringXY(s1, x, y, 157, 126, 103);
+			}
+			{
+				ScaledResolution scaledResolution = new ScaledResolution(mc, mc.displayWidth, mc.displayHeight);
+				final int width = scaledResolution.getScaledWidth();
+				final int height = scaledResolution.getScaledHeight();
+				final int mouseX = (Mouse.getX() * width / mc.displayWidth) - guiLeft;
+				final int mouseY = (height - Mouse.getY() * height / mc.displayHeight - 1) - guiTop;
+				String s1 = StatCollector.translateToLocal("pedia.activity") + " " + StatCollector.translateToLocal("pedia.activity." + dino.aiActivityType().toString().toLowerCase());
+				int x = wordLength / 2;
+				int y = 200;
 				printStringXY(s1, x, y, 157, 126, 103);
 				if (mouseX > x && mouseX < x + this.fontRendererObj.getStringWidth(s1)) {
 					if (mouseY > y && mouseY < y + 10) {
