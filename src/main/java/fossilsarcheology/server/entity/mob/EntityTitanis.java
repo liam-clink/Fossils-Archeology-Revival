@@ -180,7 +180,6 @@ public class EntityTitanis extends EntityNewPrehistoric {
 						entity.mountEntity(null);
 					}
 				}
-				entity.motionY += (0.4000000059604645D / 2);
 				knockbackEntity(entity, 0.05F, -1.1F);
 				return flag;
 			}
