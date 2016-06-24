@@ -193,6 +193,7 @@ public class ModelBrachiosaurus extends ModelNewPrehistoric {
         ModelUtils.rotate(animator, Tail3, 14, 0, 0);
         animator.endKeyframe();
         animator.setStaticKeyframe(5);
+        animator.endKeyframe();
         animator.resetKeyframe(5);
     }
 
