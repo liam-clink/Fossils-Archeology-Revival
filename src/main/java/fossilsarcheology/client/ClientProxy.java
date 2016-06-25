@@ -30,6 +30,7 @@ import fossilsarcheology.client.render.tileentity.*;
 import fossilsarcheology.server.block.entity.*;
 import fossilsarcheology.server.entity.*;
 import fossilsarcheology.server.entity.mob.*;
+import net.ilexiconn.llibrary.client.lang.LanguageHandler;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.ISound;
@@ -150,6 +151,12 @@ public class ClientProxy extends ServerProxy {
         MinecraftForge.EVENT_BUS.register(new FossilClientEvents());
         MinecraftForge.EVENT_BUS.register(new RenderPlayerCapes());
         MinecraftForge.EVENT_BUS.register(new EventNewMenu());
+
+        try {
+            LanguageHandler.INSTANCE.loadRemoteLocalization(Revival.MODID);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

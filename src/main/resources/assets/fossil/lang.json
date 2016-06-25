@@ -1,0 +1,56 @@
+{
+  "languages": [
+    {
+      "locale": "cs_CZ",
+      "downloadURL": "https://raw.githubusercontent.com/FossilsArcheologyRevival/FossilsArcheologyLocalizations/master/cs_CZ.lang"
+    },
+    {
+      "locale": "de_DE",
+      "downloadURL": "https://raw.githubusercontent.com/FossilsArcheologyRevival/FossilsArcheologyLocalizations/master/de_DE.lang"
+    },
+    {
+      "locale": "en_PT",
+      "downloadURL": "https://raw.githubusercontent.com/FossilsArcheologyRevival/FossilsArcheologyLocalizations/master/en_PT.lang"
+    },
+    {
+      "locale": "en_US",
+      "downloadURL": "https://raw.githubusercontent.com/FossilsArcheologyRevival/FossilsArcheologyLocalizations/master/en_US.lang"
+    },
+    {
+      "locale": "es_ES",
+      "downloadURL": "https://raw.githubusercontent.com/FossilsArcheologyRevival/FossilsArcheologyLocalizations/master/es_ES.lang"
+    },
+    {
+      "locale": "fr_FR",
+      "downloadURL": "https://raw.githubusercontent.com/FossilsArcheologyRevival/FossilsArcheologyLocalizations/master/fr_FR.lang"
+    },
+    {
+      "locale": "ko_KR",
+      "downloadURL": "https://raw.githubusercontent.com/FossilsArcheologyRevival/FossilsArcheologyLocalizations/master/ko_KR.lang"
+    },
+    {
+      "locale": "nl_NL",
+      "downloadURL": "https://raw.githubusercontent.com/FossilsArcheologyRevival/FossilsArcheologyLocalizations/master/nl_NL.lang"
+    },
+    {
+      "locale": "pl_PL",
+      "downloadURL": "https://raw.githubusercontent.com/FossilsArcheologyRevival/FossilsArcheologyLocalizations/master/pl_PL.lang"
+    },
+    {
+      "locale": "pt_PT",
+      "downloadURL": "https://raw.githubusercontent.com/FossilsArcheologyRevival/FossilsArcheologyLocalizations/master/pt_PT.lang"
+    },
+    {
+      "locale": "ru_RU",
+      "downloadURL": "https://raw.githubusercontent.com/FossilsArcheologyRevival/FossilsArcheologyLocalizations/master/ru_RU.lang"
+    },
+    {
+      "locale": "zh_CN",
+      "downloadURL": "https://raw.githubusercontent.com/FossilsArcheologyRevival/FossilsArcheologyLocalizations/master/zh_CN.lang"
+    },
+    {
+      "locale": "zh_TW",
+      "downloadURL": "https://raw.githubusercontent.com/FossilsArcheologyRevival/FossilsArcheologyLocalizations/master/zh_TW.lang"
+    }
+  ]
+}
