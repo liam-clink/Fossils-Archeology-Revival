@@ -7,6 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
+import fossilsarcheology.server.entity.mob.test.EntitySwimmingPrehistoric;
 import fossilsarcheology.server.item.FAItemRegistry;
 
 public class DinoAIRiding extends EntityAIBase {
@@ -86,19 +87,11 @@ public class DinoAIRiding extends EntityAIBase {
 
 					if (speedPlayer > 0) {
 						if (!prehistoric.shouldDismountInWater(rider) && prehistoric.isInWater()) {
-							if (Math.abs(look.yCoord) > 0.4) {
+							if (Math.abs(look.yCoord) > 0.4 && prehistoric instanceof EntitySwimmingPrehistoric) {
 								prehistoric.motionY = Math.max(-0.15, Math.min(0.15, look.yCoord));
 							}
-							double targetX = look.xCoord;
-							double targetY = prehistoric.posY;
-							double targetZ = look.zCoord;
-							prehistoric.motionX += (Math.signum(targetX) * 0.5D - prehistoric.motionX) * 0.100000000372529 * speed * 6;
-							prehistoric.motionY += (Math.signum(targetY) * 0.5D - prehistoric. motionY) * 0.100000000372529 * speed * 6;
-							prehistoric.motionZ += (Math.signum(targetZ) * 0.5D - prehistoric.motionZ) * 0.100000000372529 * speed * 6;
-							float angle = (float) (Math.atan2(prehistoric.motionZ, prehistoric.motionX) * 180.0D / Math.PI) - 90.0F;
-							float rotation = MathHelper.wrapAngleTo180_float(angle - prehistoric.rotationYaw);
-							prehistoric.moveForward = 0.5F;
-							prehistoric.rotationYaw += rotation;
+							prehistoric.motionX = (double)(-MathHelper.sin(rider.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(rider.rotationPitch / 180.0F * (float)Math.PI));
+							prehistoric.motionZ = (double)(MathHelper.cos(rider.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(rider.rotationPitch / 180.0F * (float)Math.PI));
 						}else{
 							prehistoric.getMoveHelper().setMoveTo(prehistoric.posX + look.xCoord, prehistoric.posY, prehistoric.posZ + look.zCoord, speed);
 						}

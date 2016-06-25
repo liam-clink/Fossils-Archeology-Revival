@@ -193,6 +193,7 @@ public class ModelGallimimus extends ModelNewPrehistoric {
         animator.move(lowerJaw, 0, 0, 0.5F);
         ModelUtils.rotate(animator, lowerJaw, 30, 0, 0);
         animator.endKeyframe();
+        animator.resetKeyframe(10);
         animator.setAnimation(EntityDilophosaurus.ATTACK_ANIMATION);
         animator.startKeyframe(10);
         ModelUtils.rotate(animator, neck, -36, 0, 0);

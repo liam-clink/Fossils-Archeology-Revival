@@ -1,6 +1,7 @@
 package fossilsarcheology.server.entity.mob;
 
 import net.ilexiconn.llibrary.server.animation.Animation;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -195,6 +196,16 @@ public class EntitySpinosaurus extends EntitySwimmingPrehistoric {
 	@Override
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
+		boolean swimming = this.isSwimming();
+		if (swimming && swimProgress < 20.0F) {
+			swimProgress += 0.5F;
+			if (sitProgress != 0)
+				sitProgress = sleepProgress = 0F;
+		} else if (!swimming && swimProgress > 0.0F) {
+			swimProgress -= 0.5F;
+			if (sitProgress != 0)
+				sitProgress = sleepProgress = 0F;
+		}
 		if (this.getAttackTarget() != null) {
 	        if (getAttackBounds().intersectsWith(this.getAttackTarget().boundingBox)) {
 				this.attackEntityAsMob(this.getAttackTarget());
@@ -213,7 +224,9 @@ public class EntitySpinosaurus extends EntitySwimmingPrehistoric {
 				}
 			}
 		}
-
+		if (this.isInsideOfMaterial(Material.water)) {
+			this.setSwimming(true);
+		}
 	}
 
 	@Override
