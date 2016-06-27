@@ -1,10 +1,9 @@
 package fossilsarcheology.server.block.entity;
 
 import fossilsarcheology.server.block.BlockFeeder;
-import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
+import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.enums.EnumPrehistoric;
 import fossilsarcheology.server.handler.LocalizationStrings;
-
 import fossilsarcheology.api.EnumDiet;
 import fossilsarcheology.api.FoodMappings;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,7 +14,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 
-public class TileEntityNewFeeder extends TileEntity implements IInventory, ISidedInventory {
+public class TileEntityFeeder extends TileEntity implements IInventory, ISidedInventory {
 
     private static final int[] slots_carn = new int[]{0};
     private static final int[] slots_herb = new int[]{1};
@@ -205,7 +204,7 @@ public class TileEntityNewFeeder extends TileEntity implements IInventory, ISide
         return type.diet != EnumDiet.OMNIVORE || currentMeat == 0 && currentPlant == 0;
     }
 
-    public int feedDinosaur(EntityNewPrehistoric mob) {
+    public int feedDinosaur(EntityPrehistoric mob) {
         int feedamount = 0;
 
         if (!this.isEmpty(mob.type)) {

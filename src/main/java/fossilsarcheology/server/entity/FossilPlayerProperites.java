@@ -6,23 +6,23 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
 
-public class EntityFAPlayer implements IExtendedEntityProperties {
+public class FossilPlayerProperites implements IExtendedEntityProperties {
 
     public final static String EXT_PROP_NAME = "FAPlayer";
     private final EntityPlayer player;
     private boolean hasKilledAnu;
 
-    public EntityFAPlayer(EntityPlayer player) {
+    public FossilPlayerProperites(EntityPlayer player) {
         this.player = player;
         hasKilledAnu = false;
     }
 
     public static final void register(EntityPlayer player) {
-        player.registerExtendedProperties(EntityFAPlayer.EXT_PROP_NAME, new EntityFAPlayer(player));
+        player.registerExtendedProperties(FossilPlayerProperites.EXT_PROP_NAME, new FossilPlayerProperites(player));
     }
 
-    public static final EntityFAPlayer get(EntityPlayer player) {
-        return (EntityFAPlayer) player.getExtendedProperties(EXT_PROP_NAME);
+    public static final FossilPlayerProperites get(EntityPlayer player) {
+        return (FossilPlayerProperites) player.getExtendedProperties(EXT_PROP_NAME);
     }
 
     @Override

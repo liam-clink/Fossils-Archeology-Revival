@@ -1,4 +1,4 @@
-package fossilsarcheology.server.entity.mob.test;
+package fossilsarcheology.server.entity;
 
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityItem;
@@ -30,8 +30,8 @@ public abstract class EntityToyBase extends EntityLiving {
                 this.setDead();
                 return true;
             }
-            if (dmg.getEntity() instanceof EntityNewPrehistoric) {
-                ((EntityNewPrehistoric) dmg.getEntity()).doPlayBonus(toyBonus);
+            if (dmg.getEntity() instanceof EntityPrehistoric) {
+                ((EntityPrehistoric) dmg.getEntity()).doPlayBonus(toyBonus);
                 if (getAttackNoise() != null) {
                     this.playSound(getAttackNoise(), 1, this.getSoundPitch());
                 }

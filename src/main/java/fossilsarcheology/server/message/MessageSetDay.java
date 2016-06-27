@@ -1,6 +1,6 @@
 package fossilsarcheology.server.message;
 
-import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
+import fossilsarcheology.server.entity.EntityPrehistoric;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -29,8 +29,8 @@ public class MessageSetDay extends AbstractMessage<MessageSetDay> {
     public void onClientReceived(Minecraft client, MessageSetDay message, EntityPlayer player, MessageContext messageContext) {
         Entity entity = player.worldObj.getEntityByID(message.dinosaurID);
 
-        if (entity instanceof EntityNewPrehistoric) {
-            EntityNewPrehistoric prehistoric = (EntityNewPrehistoric) entity;
+        if (entity instanceof EntityPrehistoric) {
+            EntityPrehistoric prehistoric = (EntityPrehistoric) entity;
             prehistoric.isDaytime = message.isDay;
         }
     }

@@ -1,4 +1,4 @@
-package fossilsarcheology.server.entity;
+package fossilsarcheology.server.entity.mob.projectile;
 
 import fossilsarcheology.server.item.FAItemRegistry;
 import net.minecraft.entity.EntityLiving;

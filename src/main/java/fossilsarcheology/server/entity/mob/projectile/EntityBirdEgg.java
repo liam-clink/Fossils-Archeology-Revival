@@ -7,7 +7,7 @@ import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
-import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
+import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.enums.EnumPrehistoric;
 
 public class EntityBirdEgg extends EntityThrowable {
@@ -72,7 +72,7 @@ public class EntityBirdEgg extends EntityThrowable {
 
 	private void spawnAnimal() {
 		if (type != EnumPrehistoric.Chicken) {
-			EntityNewPrehistoric mob = (EntityNewPrehistoric) type.invokeClass(worldObj);
+			EntityPrehistoric mob = (EntityPrehistoric) type.invokeClass(worldObj);
 			if (!worldObj.isRemote && mob != null) {
 				mob.setAgeInDays(1);
 				mob.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, 0.0F);

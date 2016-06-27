@@ -1,8 +1,8 @@
 package fossilsarcheology.client.model.prehistoric;
 
 import fossilsarcheology.client.model.prehistoric.test.ModelNewPrehistoric;
+import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.entity.mob.EntityCompsognathus;
-import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
 import net.ilexiconn.llibrary.client.model.ModelAnimator;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
@@ -172,7 +172,7 @@ public class ModelCompsognathus extends ModelNewPrehistoric {
         blockMovement(f, f1, f2, f3, f4, f5, (Entity) entity);
         this.resetToDefaultPose();
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
-        animator.setAnimation(EntityNewPrehistoric.SPEAK_ANIMATION);
+        animator.setAnimation(EntityPrehistoric.SPEAK_ANIMATION);
         animator.startKeyframe(10);
         ModelUtils.rotate(animator, headFront_1, 29, 0, 0);
         animator.endKeyframe();
@@ -216,7 +216,7 @@ public class ModelCompsognathus extends ModelNewPrehistoric {
         AdvancedModelRenderer[] neckParts = {this.neck, this.head};
         AdvancedModelRenderer[] leftArmParts = {this.LeftUpperArm, this.LeftLowerArm};
         AdvancedModelRenderer[] rightArmParts = {this.RightUpperArm, this.RightLowerArm};
-		if(((EntityNewPrehistoric) entity).isSkeleton()){
+		if(((EntityPrehistoric) entity).isSkeleton()){
 			return;
 		}
         ModelUtils.faceTargetMod(neck, f3, f4, 0.5F);
@@ -226,7 +226,7 @@ public class ModelCompsognathus extends ModelNewPrehistoric {
         float speed2 = 0.5F;
         float degree = 0.5F;
         {
-            float sitProgress = ((EntityNewPrehistoric) (entity)).sitProgress;
+            float sitProgress = ((EntityPrehistoric) (entity)).sitProgress;
             sitAnimationRotation(neck, sitProgress, 0.18203784098300857F, 0.0F, 0.0F);
             sitAnimationRotation(RightLowerLeg, sitProgress, 2.0943951023931953F + (float) Math.toRadians(15D), 0.0F, 0.0F);
             sitAnimationRotation(tail2, sitProgress, 0.091106186954104F, 0.0F, 0.0F);
@@ -246,7 +246,7 @@ public class ModelCompsognathus extends ModelNewPrehistoric {
             sitAnimationPos(LeftUpperLeg, sitProgress, 0F, 19F - ModelUtils.getDefaultPositionY(LeftUpperLeg), 0F);
         }
         {
-            float sitProgress = ((EntityNewPrehistoric) (entity)).sleepProgress;
+            float sitProgress = ((EntityPrehistoric) (entity)).sleepProgress;
             sitAnimationRotation(RightLowerLeg, sitProgress, 2.0943951023931953F + (float) Math.toRadians(15D), 0.0F, 0.0F);
             sitAnimationRotation(LeftLowerLeg, sitProgress, 2.0943951023931953F + (float) Math.toRadians(15D), 0.0F, 0.0F);
             sitAnimationRotation(LeftFoot, sitProgress, -0.7853981633974483F - (float) Math.toRadians(55D), 0.0F, 0.0F);
@@ -280,7 +280,7 @@ public class ModelCompsognathus extends ModelNewPrehistoric {
         this.chainSwing(tailParts, speed, degree * 0.15F, -3, entity.ticksExisted, 1);
         this.chainSwing(tailParts, speed2, degree * 0.25F, -3, f, f1);
         this.chainWave(neckParts, speed, degree * 0.15F, 3, entity.ticksExisted, 1);
-        ((EntityNewPrehistoric) entity).chainBuffer.applyChainSwingBuffer((ModelRenderer[]) tailParts);
+        ((EntityPrehistoric) entity).chainBuffer.applyChainSwingBuffer((ModelRenderer[]) tailParts);
     }
 
 }

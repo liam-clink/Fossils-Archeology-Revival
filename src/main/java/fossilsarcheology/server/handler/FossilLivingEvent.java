@@ -17,6 +17,7 @@ import net.minecraftforge.event.entity.player.AchievementEvent;
 import net.minecraftforge.event.entity.player.EntityInteractEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import fossilsarcheology.Revival;
+import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.entity.mob.EntityElasmotherium;
 import fossilsarcheology.server.entity.mob.EntityMammoth;
 import fossilsarcheology.server.entity.mob.EntityPregnantCow;
@@ -25,7 +26,6 @@ import fossilsarcheology.server.entity.mob.EntityPregnantPig;
 import fossilsarcheology.server.entity.mob.EntityPregnantSheep;
 import fossilsarcheology.server.entity.mob.EntityQuagga;
 import fossilsarcheology.server.entity.mob.EntitySmilodon;
-import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
 import fossilsarcheology.server.enums.EnumPrehistoric;
 import fossilsarcheology.server.item.FAItemRegistry;
 
@@ -217,18 +217,18 @@ public class FossilLivingEvent {
 
 		case Mammoth:
 			birthEntity = (new EntityMammoth(event.entityLiving.worldObj));
-			((EntityNewPrehistoric) birthEntity).func_152114_e(event.entityLiving.worldObj.getClosestPlayerToEntity(((EntityNewPrehistoric) birthEntity), 8));
+			((EntityPrehistoric) birthEntity).func_152114_e(event.entityLiving.worldObj.getClosestPlayerToEntity(((EntityPrehistoric) birthEntity), 8));
 			if (event.entityLiving.worldObj.getClosestPlayerToEntity(event.entityLiving, 15) != null) {
-				((EntityNewPrehistoric) birthEntity).setTamed(true);
-				((EntityNewPrehistoric) birthEntity).func_152115_b(event.entityLiving.worldObj.getClosestPlayerToEntity(event.entityLiving, 15).getCommandSenderName());
+				((EntityPrehistoric) birthEntity).setTamed(true);
+				((EntityPrehistoric) birthEntity).func_152115_b(event.entityLiving.worldObj.getClosestPlayerToEntity(event.entityLiving, 15).getCommandSenderName());
 			}
 			break;
 
 		case Elasmotherium:
 			birthEntity = (new EntityElasmotherium(event.entityLiving.worldObj));
 			if (event.entityLiving.worldObj.getClosestPlayerToEntity(event.entityLiving, 15) != null) {
-				((EntityNewPrehistoric) birthEntity).setTamed(true);
-				((EntityNewPrehistoric) birthEntity).func_152115_b(event.entityLiving.worldObj.getClosestPlayerToEntity(event.entityLiving, 15).getCommandSenderName());
+				((EntityPrehistoric) birthEntity).setTamed(true);
+				((EntityPrehistoric) birthEntity).func_152115_b(event.entityLiving.worldObj.getClosestPlayerToEntity(event.entityLiving, 15).getCommandSenderName());
 			}
 			break;
 
@@ -244,7 +244,7 @@ public class FossilLivingEvent {
 		default:
 			birthEntity = new EntityPig(event.entityLiving.worldObj);
 		}
-		if (!(birthEntity instanceof EntityNewPrehistoric)) {
+		if (!(birthEntity instanceof EntityPrehistoric)) {
 			((EntityAnimal) birthEntity).setGrowingAge(-24000);
 		}
 		((EntityAnimal) birthEntity).setLocationAndAngles(event.entityLiving.posX, event.entityLiving.posY, event.entityLiving.posZ, event.entityLiving.rotationYaw, event.entityLiving.rotationPitch);

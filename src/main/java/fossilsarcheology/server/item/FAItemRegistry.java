@@ -2,7 +2,7 @@ package fossilsarcheology.server.item;
 
 import fossilsarcheology.server.block.FABlockRegistry;
 import fossilsarcheology.server.creativetab.FATabRegistry;
-import fossilsarcheology.server.entity.BehaviorJavelinDispense;
+import fossilsarcheology.server.entity.mob.projectile.BehaviorJavelinDispense;
 import fossilsarcheology.server.handler.BucketEvent;
 import fossilsarcheology.server.handler.LocalizationStrings;
 import cpw.mods.fml.common.registry.GameRegistry;

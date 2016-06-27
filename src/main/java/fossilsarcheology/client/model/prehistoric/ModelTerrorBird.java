@@ -1,8 +1,8 @@
 package fossilsarcheology.client.model.prehistoric;
 
 import fossilsarcheology.client.model.prehistoric.test.ModelNewPrehistoric;
+import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.entity.mob.EntityDodo;
-import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
 import net.ilexiconn.llibrary.client.model.ModelAnimator;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
@@ -152,7 +152,7 @@ public class ModelTerrorBird extends ModelNewPrehistoric {
         blockMovement(f, f1, f2, f3, f4, f5, (Entity) entity);
         this.resetToDefaultPose();
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
-        animator.setAnimation(EntityNewPrehistoric.SPEAK_ANIMATION);
+        animator.setAnimation(EntityPrehistoric.SPEAK_ANIMATION);
         animator.startKeyframe(10);
         ModelUtils.rotate(animator, head, -15, 0, 0);
         ModelUtils.rotate(animator, lowerBeak, 45, 0, 0);
@@ -178,7 +178,7 @@ public class ModelTerrorBird extends ModelNewPrehistoric {
         neck_1.setScale(1.01F, 1.01F, 1.01F);
         AdvancedModelRenderer[] neckParts = {this.neck, this.neck_1, this.head};
         AdvancedModelRenderer[] tailParts = {this.lowerBody, this.tail1, this.tail2};
-		if(((EntityNewPrehistoric) entity).isSkeleton()){
+		if(((EntityPrehistoric) entity).isSkeleton()){
 			return;
 		}
         ModelUtils.faceTargetMod(neck, f3, f4, 0.5F);
@@ -195,7 +195,7 @@ public class ModelTerrorBird extends ModelNewPrehistoric {
 		this.walk(rightLeg, speed2, 0.2F, true, 0F, 0.6F, f, f1);
 		this.walk(rightFoot, speed2, -0.6F, false, 2.5F, 0.4F, f, f1);
         this.chainWave(neckParts, speed2, degree * 0.3F, 4, f, f1);
-        if (((EntityNewPrehistoric) (entity)).isSleeping()) {
+        if (((EntityPrehistoric) (entity)).isSleeping()) {
             this.walk(upperBody, speed, degree * 0.05F, false, 0, 0, entity.ticksExisted, 1);
             this.chainWave(neckParts, speed, degree * 0.05F, 3, entity.ticksExisted, 1);
         } else {
@@ -203,7 +203,7 @@ public class ModelTerrorBird extends ModelNewPrehistoric {
             this.chainWave(neckParts, speed, degree * 0.15F, 3, entity.ticksExisted, 1);
         }
         {
-            float sitProgress = ((EntityNewPrehistoric) (entity)).sitProgress;
+            float sitProgress = ((EntityPrehistoric) (entity)).sitProgress;
             sitAnimationRotation(rightWing, sitProgress, 0, -((float) Math.toRadians(1.0D)), 0);
             sitAnimationRotation(tail2, sitProgress, -((float) Math.toRadians(2.61D)), 0, 0);
             sitAnimationRotation(crest11, sitProgress, -((float) Math.toRadians(10.0D)), 0, 0);
@@ -225,7 +225,7 @@ public class ModelTerrorBird extends ModelNewPrehistoric {
             sitAnimationPos(upperBody, sitProgress, 0F, 17.30F - ModelUtils.getDefaultPositionY(leftThigh), 0F);
         }
         {
-            float sitProgress = ((EntityNewPrehistoric) (entity)).sleepProgress;
+            float sitProgress = ((EntityPrehistoric) (entity)).sleepProgress;
             sitAnimationRotation(head, sitProgress, -((float) Math.toRadians(104.35D)), 0, 0);
             sitAnimationRotation(tail2, sitProgress, -((float) Math.toRadians(2.61D)), 0, 0);
             sitAnimationRotation(rightWing, sitProgress, 0, -((float) Math.toRadians(46.96D)), 0);
@@ -246,7 +246,7 @@ public class ModelTerrorBird extends ModelNewPrehistoric {
             sitAnimationPos(leftThigh, sitProgress, 0F, 14.30F - ModelUtils.getDefaultPositionY(leftThigh), 0F);
             sitAnimationPos(upperBody, sitProgress, 0F, 17.30F - ModelUtils.getDefaultPositionY(leftThigh), 0F);
         }
-        ((EntityNewPrehistoric) entity).chainBuffer.applyChainSwingBuffer(tailParts);
+        ((EntityPrehistoric) entity).chainBuffer.applyChainSwingBuffer(tailParts);
 
     }
 }

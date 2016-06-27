@@ -1,8 +1,8 @@
 package fossilsarcheology.client.model.prehistoric;
 
 import fossilsarcheology.client.model.prehistoric.test.ModelNewPrehistoric;
+import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.entity.mob.EntityAllosaurus;
-import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
 import net.ilexiconn.llibrary.client.model.ModelAnimator;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
@@ -180,7 +180,7 @@ public class ModelAllosaurus extends ModelNewPrehistoric {
 		blockMovement(f, f1, f2, f3, f4, f5, (Entity) entity);
 		this.resetToDefaultPose();
 		setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
-		animator.setAnimation(EntityNewPrehistoric.SPEAK_ANIMATION);
+		animator.setAnimation(EntityPrehistoric.SPEAK_ANIMATION);
         animator.startKeyframe(10);
         ModelUtils.rotate(animator, lowerJaw, 25, 0, 0);
         animator.endKeyframe();
@@ -206,13 +206,13 @@ public class ModelAllosaurus extends ModelNewPrehistoric {
 		AdvancedModelRenderer[] leftArmParts = { this.leftUpperArm, this.leftLowerArm };
 		AdvancedModelRenderer[] rightArmParts = { this.rightUpperArm, this.rightLowerArm };
 		this.blockMovement(f, f1, f2, f3, f4, f5, entity);
-		if(((EntityNewPrehistoric) entity).isSkeleton()){
+		if(((EntityPrehistoric) entity).isSkeleton()){
 			return;
 		}
 		ModelUtils.faceTargetMod(neck, f3, f4, 0.5F);
 		ModelUtils.faceTargetMod(head, f3, f4, 0.5F);
 
-		EntityNewPrehistoric prehistoric = (EntityNewPrehistoric) entity;
+		EntityPrehistoric prehistoric = (EntityPrehistoric) entity;
 		{
 			float sitProgress = prehistoric.sitProgress;
 			sitAnimationRotation(lowerBody, sitProgress, -((float) Math.toRadians(2.0D)), 0, 0);
@@ -265,7 +265,7 @@ public class ModelAllosaurus extends ModelNewPrehistoric {
 
 		}
 		{
-			float sitProgress = ((EntityNewPrehistoric) (entity)).weakProgress;
+			float sitProgress = ((EntityPrehistoric) (entity)).weakProgress;
 			sitAnimationRotationPrev(rightLowerLeg, sitProgress, -((float) Math.toRadians(60.0D)), 0, 0);
 			sitAnimationRotationPrev(head, sitProgress, (float) Math.toRadians(5.22D), -((float) Math.toRadians(7.83D)), -((float) Math.toRadians(44.35D)));
 			sitAnimationRotationPrev(rightUpperArm, sitProgress, (float) Math.toRadians(9.23D), -((float) Math.toRadians(7.83D)), (float) Math.toRadians(23.48D));
@@ -309,7 +309,7 @@ public class ModelAllosaurus extends ModelNewPrehistoric {
 		this.chainWave(neckParts, speed2, degree * 0.25F, 3, f, f1);
 		this.walk(upperBody, speed2, degree * -0.1F, false, 1F, 0.1F, f, f1);
 		this.chainWave(neckParts, speed, degree * 0.15F, 3, entity.ticksExisted, 1);
-		((EntityNewPrehistoric) entity).chainBuffer.applyChainSwingBuffer((ModelRenderer[]) tailParts);
+		((EntityPrehistoric) entity).chainBuffer.applyChainSwingBuffer((ModelRenderer[]) tailParts);
 
 	}
 

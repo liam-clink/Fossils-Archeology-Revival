@@ -12,20 +12,20 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.entity.ai.DinoAIAttackOnCollide;
 import fossilsarcheology.server.entity.ai.DinoAIAvoidEntity;
+import fossilsarcheology.server.entity.ai.DinoAIFeeder;
 import fossilsarcheology.server.entity.ai.DinoAIFollowOwner;
 import fossilsarcheology.server.entity.ai.DinoAIHunt;
 import fossilsarcheology.server.entity.ai.DinoAILookIdle;
 import fossilsarcheology.server.entity.ai.DinoAIRiding;
 import fossilsarcheology.server.entity.ai.DinoAIWander;
 import fossilsarcheology.server.entity.ai.DinoAIWatchClosest;
-import fossilsarcheology.server.entity.mob.test.DinoAIFeeder;
-import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
 import fossilsarcheology.server.enums.EnumPrehistoric;
 import fossilsarcheology.server.enums.EnumPrehistoricAI;
 
-public class EntityDilophosaurus extends EntityNewPrehistoric {
+public class EntityDilophosaurus extends EntityPrehistoric {
 
     public EntityDilophosaurus(World world) {
         super(world, EnumPrehistoric.Dilophosaurus, 1, 8, 8, 40, 0.25, 0.35);

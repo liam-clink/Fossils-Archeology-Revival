@@ -14,22 +14,22 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import fossilsarcheology.server.entity.EntityPrehistoricSwimming;
 import fossilsarcheology.server.entity.ai.DinoAIAttackOnCollide;
+import fossilsarcheology.server.entity.ai.DinoAIFeeder;
 import fossilsarcheology.server.entity.ai.DinoAIFollowOwner;
 import fossilsarcheology.server.entity.ai.DinoAIHunt;
 import fossilsarcheology.server.entity.ai.DinoAILookIdle;
 import fossilsarcheology.server.entity.ai.DinoAIRiding;
 import fossilsarcheology.server.entity.ai.DinoAIWander;
 import fossilsarcheology.server.entity.ai.DinoAIWatchClosest;
-import fossilsarcheology.server.entity.mob.test.DinoAIFeeder;
-import fossilsarcheology.server.entity.mob.test.DinoAIWaterFeeder;
-import fossilsarcheology.server.entity.mob.test.DinoAIWaterFindTarget;
-import fossilsarcheology.server.entity.mob.test.EntitySwimmingPrehistoric;
+import fossilsarcheology.server.entity.ai.DinoAIWaterFeeder;
+import fossilsarcheology.server.entity.ai.DinoAIWaterFindTarget;
 import fossilsarcheology.server.enums.EnumPrehistoric;
 import fossilsarcheology.server.enums.EnumPrehistoricAI;
 import fossilsarcheology.server.item.FAItemRegistry;
 
-public class EntitySarcosuchus extends EntitySwimmingPrehistoric {
+public class EntitySarcosuchus extends EntityPrehistoricSwimming {
 
 	public static Animation ROLL_ANIMATION = Animation.create(115);
 	private boolean isSwimming;

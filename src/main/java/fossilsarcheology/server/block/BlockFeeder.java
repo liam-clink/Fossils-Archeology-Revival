@@ -2,7 +2,7 @@ package fossilsarcheology.server.block;
 
 import fossilsarcheology.Revival;
 import fossilsarcheology.client.render.tileentity.RenderFeeder;
-import fossilsarcheology.server.block.entity.TileEntityNewFeeder;
+import fossilsarcheology.server.block.entity.TileEntityFeeder;
 import fossilsarcheology.server.creativetab.FATabRegistry;
 import fossilsarcheology.server.handler.LocalizationStrings;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -47,7 +47,7 @@ public class BlockFeeder extends BlockContainer {
     public BlockFeeder(boolean isActive) {
         super(Material.iron);
         if (isActive) {
-            GameRegistry.registerTileEntity(TileEntityNewFeeder.class, "NewFeeder");
+            GameRegistry.registerTileEntity(TileEntityFeeder.class, "NewFeeder");
         }
         setHardness(3.5F);
         setStepSound(Block.soundTypeMetal);
@@ -225,7 +225,7 @@ public class BlockFeeder extends BlockContainer {
         if (world.isRemote) {
             return true;
         } else {
-            TileEntityNewFeeder tileentity = (TileEntityNewFeeder) world.getTileEntity(x, y, z);
+            TileEntityFeeder tileentity = (TileEntityFeeder) world.getTileEntity(x, y, z);
 
             if (tileentity != null) {
                 player.openGui(Revival.INSTANCE, 2, world, x, y, z);
@@ -241,7 +241,7 @@ public class BlockFeeder extends BlockContainer {
      */
     @Override
     public TileEntity createNewTileEntity(World world, int par2) {
-        return new TileEntityNewFeeder();
+        return new TileEntityFeeder();
     }
 
     /**
@@ -268,7 +268,7 @@ public class BlockFeeder extends BlockContainer {
         }
 
         if (itemstack.hasDisplayName()) {
-            ((TileEntityNewFeeder) world.getTileEntity(x, y, z)).setGuiDisplayName(itemstack.getDisplayName());
+            ((TileEntityFeeder) world.getTileEntity(x, y, z)).setGuiDisplayName(itemstack.getDisplayName());
         }
     }
 
@@ -278,7 +278,7 @@ public class BlockFeeder extends BlockContainer {
      */
     @Override
     public void breakBlock(World world, int x, int y, int z, Block block, int var6) {
-        TileEntityNewFeeder tileentity = (TileEntityNewFeeder) world.getTileEntity(x, y, z);
+        TileEntityFeeder tileentity = (TileEntityFeeder) world.getTileEntity(x, y, z);
 
         if (tileentity != null) {
             for (int i = 0; i < tileentity.getSizeInventory(); ++i) {

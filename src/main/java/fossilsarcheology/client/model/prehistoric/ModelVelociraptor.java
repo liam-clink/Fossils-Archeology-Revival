@@ -1,9 +1,9 @@
 package fossilsarcheology.client.model.prehistoric;
 
 import fossilsarcheology.client.model.prehistoric.test.ModelNewPrehistoric;
+import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.entity.mob.EntityDeinonychus;
 import fossilsarcheology.server.entity.mob.EntityVelociraptor;
-import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
 import net.ilexiconn.llibrary.client.model.ModelAnimator;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
@@ -237,7 +237,7 @@ public class ModelVelociraptor extends ModelNewPrehistoric {
         blockMovement(f, f1, f2, f3, f4, f5, (Entity) entity);
         this.resetToDefaultPose();
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
-        animator.setAnimation(EntityNewPrehistoric.SPEAK_ANIMATION);
+        animator.setAnimation(EntityPrehistoric.SPEAK_ANIMATION);
         animator.startKeyframe(10);
         ModelUtils.rotate(animator, neck, 15, 0, 0);
         ModelUtils.rotate(animator, head, -20, 0, 0);
@@ -283,7 +283,7 @@ public class ModelVelociraptor extends ModelNewPrehistoric {
         AdvancedModelRenderer[] neckParts = {this.neck, this.head};
         AdvancedModelRenderer[] leftArmParts = {this.leftUpperArm, this.leftLowerArm};
         AdvancedModelRenderer[] rightArmParts = {this.rightUpperArm, this.rightLowerArm};
-		if(((EntityNewPrehistoric) entity).isSkeleton()){
+		if(((EntityPrehistoric) entity).isSkeleton()){
 			return;
 		}
         ModelUtils.faceTargetMod(neck, f3, f4, 0.5F);
@@ -293,7 +293,7 @@ public class ModelVelociraptor extends ModelNewPrehistoric {
         float speed2 = 0.7F;
         float degree = 0.5F;
         {
-            float sitProgress = ((EntityNewPrehistoric) (entity)).sitProgress;
+            float sitProgress = ((EntityPrehistoric) (entity)).sitProgress;
             sitAnimationRotation(rightThigh, sitProgress, -((float) Math.toRadians(75.0D)), 0, 0);
             sitAnimationRotation(leftLowerArm, sitProgress, 0, 0, 0);
             sitAnimationRotation(lowerBody, sitProgress, -((float) Math.toRadians(5.22D)), 0, 0);
@@ -317,7 +317,7 @@ public class ModelVelociraptor extends ModelNewPrehistoric {
             sitAnimationPos(leftThigh, sitProgress, 0F, 19.40F - ModelUtils.getDefaultPositionY(leftThigh), 0F);
         }
         {
-            float sitProgress = ((EntityNewPrehistoric) (entity)).sleepProgress;
+            float sitProgress = ((EntityPrehistoric) (entity)).sleepProgress;
             sitAnimationRotation(rightThigh, sitProgress, -((float) Math.toRadians(75.0D)), 0, 0);
             sitAnimationRotation(leftLowerArm, sitProgress, 0, 0, 0);
             sitAnimationRotation(lowerBody, sitProgress, -((float) Math.toRadians(5.22D)), 0, 0);
@@ -342,7 +342,7 @@ public class ModelVelociraptor extends ModelNewPrehistoric {
 
         }
         {
-            float sitProgress = ((EntityNewPrehistoric) (entity)).climbProgress;
+            float sitProgress = ((EntityPrehistoric) (entity)).climbProgress;
 
             sitAnimationRotation(leftLowerArm, sitProgress, (float) Math.toRadians(40.35D), 0, 0);
             sitAnimationRotation(leftLeg, sitProgress, -(float) Math.toRadians(40.0D), 0, 0);
@@ -413,7 +413,7 @@ public class ModelVelociraptor extends ModelNewPrehistoric {
             this.flap(leftUpperArm, 0.8F, -0.4F, true, 0.3F, -0.2F, entity.ticksExisted, 1);
             this.flap(rightUpperArm, 0.8F, -0.4F, false, 0.3F, 0.2F, entity.ticksExisted, 1);
         }
-        ((EntityNewPrehistoric) entity).chainBuffer.applyChainSwingBuffer((ModelRenderer[]) tailParts);
+        ((EntityPrehistoric) entity).chainBuffer.applyChainSwingBuffer((ModelRenderer[]) tailParts);
         // ((ChainBuffer)((EntityVelociraptor)entity).tailBuffer).applyChainSwingBuffer(tailParts);
 
     }

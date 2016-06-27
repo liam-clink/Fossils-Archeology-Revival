@@ -1,10 +1,9 @@
-package fossilsarcheology.server.entity.mob.test;
+package fossilsarcheology.server.entity;
 
 import fossilsarcheology.Revival;
-import fossilsarcheology.server.entity.IPrehistoricAI;
 import fossilsarcheology.server.block.FABlockRegistry;
-import fossilsarcheology.server.block.entity.TileEntityNewFeeder;
-import fossilsarcheology.server.entity.EntityDinoEgg;
+import fossilsarcheology.server.block.entity.TileEntityFeeder;
+import fossilsarcheology.server.entity.mob.Flock;
 import fossilsarcheology.server.enums.*;
 import fossilsarcheology.server.enums.EnumPrehistoricAI.Taming;
 import fossilsarcheology.server.handler.LocalizationStrings;
@@ -47,7 +46,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public abstract class EntityNewPrehistoric extends EntityTameable implements IPrehistoricAI, IAnimatedEntity {
+public abstract class EntityPrehistoric extends EntityTameable implements IPrehistoricAI, IAnimatedEntity {
 
 	public static Animation SPEAK_ANIMATION;
 	public static Animation ATTACK_ANIMATION;
@@ -94,7 +93,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	public float ridingY;
 	public float actualWidth;
 
-	public EntityNewPrehistoric(World world, EnumPrehistoric type, double baseDamage, double maxDamage, double baseHealth, double maxHealth, double baseSpeed, double maxSpeed) {
+	public EntityPrehistoric(World world, EnumPrehistoric type, double baseDamage, double maxDamage, double baseHealth, double maxHealth, double baseSpeed, double maxSpeed) {
 		super(world);
 		this.setHunger(this.getMaxHunger());
 		this.setScale(this.getAgeScale());
@@ -326,15 +325,15 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		return false;
 	}
 
-	public TileEntityNewFeeder getNearestFeeder(int feederRange) {
+	public TileEntityFeeder getNearestFeeder(int feederRange) {
 		for (int dx = -2; dx != -(feederRange + 1); dx += (dx < 0) ? (dx * -2) : (-(2 * dx + 1))) {
 			for (int dy = -5; dy < 4; dy++) {
 				for (int dz = -2; dz != -(feederRange + 1); dz += (dz < 0) ? (dz * -2) : (-(2 * dz + 1))) {
 					if (this.posY + dy >= 0 && this.posY + dy <= this.worldObj.getHeight()) {
 						TileEntity feeder = this.worldObj.getTileEntity(MathHelper.floor_double(this.posX + dx), MathHelper.floor_double(this.posY + dy), MathHelper.floor_double(this.posZ + dz));
 
-						if (feeder != null && feeder instanceof TileEntityNewFeeder && !((TileEntityNewFeeder) feeder).isEmpty(type)) {
-							return (TileEntityNewFeeder) feeder;
+						if (feeder != null && feeder instanceof TileEntityFeeder && !((TileEntityFeeder) feeder).isEmpty(type)) {
+							return (TileEntityFeeder) feeder;
 						}
 					}
 				}
@@ -583,7 +582,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		return this.worldObj.getBlock(blockX, blockY, blockZ);
 	}
 
-	public EntityNewPrehistoric findFlockLeader(List<EntityNewPrehistoric> flock) {
+	public EntityPrehistoric findFlockLeader(List<EntityPrehistoric> flock) {
 		int index = new Random().nextInt(flock.size());
 		return flock.get(index);
 	}
@@ -704,7 +703,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
 	@Override
 	public boolean canAttackClass(Class clazz) {
-		return this.getClass() != clazz && clazz != EntityDinoEgg.class;
+		return this.getClass() != clazz && clazz != EntityDinosaurEgg.class;
 	}
 
 	public float getAgeScale() {
@@ -781,8 +780,8 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 			if (Revival.CONFIG.eggsLikeChickens) {
 				baby = new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, new ItemStack(this.type.eggItem));
 			} else {
-				baby = new EntityDinoEgg(this.worldObj, this.type);
-				((EntityDinoEgg) baby).selfType = this.type;
+				baby = new EntityDinosaurEgg(this.worldObj, this.type);
+				((EntityDinosaurEgg) baby).selfType = this.type;
 			}
 		}
 		return baby;
@@ -1009,8 +1008,8 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	}
 	
 	public static boolean isEntitySmallerThan(Entity entity, float size){
-		if(entity instanceof EntityNewPrehistoric){
-			return ((EntityNewPrehistoric) entity).getActualWidth() <= size;
+		if(entity instanceof EntityPrehistoric){
+			return ((EntityPrehistoric) entity).getActualWidth() <= size;
 		}
 		else{
 			return entity.width <= size;
@@ -1386,7 +1385,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
 	@Override
 	public void knockBack(Entity entity, float f, double x, double z) {
-		if (entity != null && entity instanceof EntityNewPrehistoric) {
+		if (entity != null && entity instanceof EntityPrehistoric) {
 			if (this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).getAttributeValue() <= 0 && this.onGround) {
 				this.velocityChanged = false;
 				knockBackMob(entity, 1, 0.4D, 1);
@@ -1397,10 +1396,10 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 	}
 
 	public boolean canDinoHunt(Entity target, boolean hunger) {
-		boolean isAnotherDino = target instanceof EntityNewPrehistoric;
+		boolean isAnotherDino = target instanceof EntityPrehistoric;
 
 		if (this.type.diet != EnumDiet.HERBIVORE && this.type.diet != EnumDiet.NONE && canAttackClass(target.getClass())) {
-			if (isAnotherDino ? this.getActualWidth() >= ((EntityNewPrehistoric) target).getActualWidth() : this.getActualWidth() >= target.width) {
+			if (isAnotherDino ? this.getActualWidth() >= ((EntityPrehistoric) target).getActualWidth() : this.getActualWidth() >= target.width) {
 				if (hunger) {
 					return isHungry() || target instanceof EntityToyBase && this.ticksTillPlay == 0;
 				} else {
@@ -1420,14 +1419,14 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		IEntitySelector targetEntitySelector = new IEntitySelector() {
 			@Override
 			public boolean isEntityApplicable(Entity entity) {
-				return (entity instanceof EntityNewPrehistoric);
+				return (entity instanceof EntityPrehistoric);
 			}
 		};
 		double d0 = 64;
-		List<EntityNewPrehistoric> list = worldObj.selectEntitiesWithinAABB(EntityNewPrehistoric.class, this.boundingBox.expand(d0, 4.0D, d0), targetEntitySelector);
+		List<EntityPrehistoric> list = worldObj.selectEntitiesWithinAABB(EntityPrehistoric.class, this.boundingBox.expand(d0, 4.0D, d0), targetEntitySelector);
 		Collections.sort(list, theNearestAttackableTargetSorter);
 		if (!list.isEmpty()) {
-			for (EntityNewPrehistoric mob : list) {
+			for (EntityPrehistoric mob : list) {
 				if (mob.type == this.type && mob.flockObj != null && mob.flockObj.flockLeader == mob) {
 					return mob.flockObj;
 				}
@@ -1442,22 +1441,22 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		IEntitySelector targetEntitySelector = new IEntitySelector() {
 			@Override
 			public boolean isEntityApplicable(Entity entity) {
-				return (entity instanceof EntityNewPrehistoric);
+				return (entity instanceof EntityPrehistoric);
 			}
 		};
 		double d0 = 64;
-		List<EntityNewPrehistoric> list = worldObj.selectEntitiesWithinAABB(EntityNewPrehistoric.class, this.boundingBox.expand(d0, 4.0D, d0), targetEntitySelector);
+		List<EntityPrehistoric> list = worldObj.selectEntitiesWithinAABB(EntityPrehistoric.class, this.boundingBox.expand(d0, 4.0D, d0), targetEntitySelector);
 		Collections.sort(list, theNearestAttackableTargetSorter);
-		List<EntityNewPrehistoric> listOfFemales = new ArrayList<EntityNewPrehistoric>();
+		List<EntityPrehistoric> listOfFemales = new ArrayList<EntityPrehistoric>();
 		if (!list.isEmpty()) {
-			for (EntityNewPrehistoric mob : list) {
+			for (EntityPrehistoric mob : list) {
 				if (mob.type == this.type && mob.isAdult() && mob.getGender() == 0 && mob.ticksTillMate == 0) {
 					listOfFemales.add(mob);
 				}
 			}
 		}
 		if (!listOfFemales.isEmpty() && this.ticksTillMate == 0) {
-			EntityNewPrehistoric prehistoric = listOfFemales.get(0);
+			EntityPrehistoric prehistoric = listOfFemales.get(0);
 			if (prehistoric.ticksTillMate == 0) {
 				this.getNavigator().tryMoveToEntityLiving(prehistoric, 1);
 				double distance = (double) (this.width * 8.0F * this.width * 8.0F + prehistoric.width);
@@ -1477,7 +1476,7 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		return canBeRidden() && (this.getRidingPlayer() != null && this.func_152114_e(this.getRidingPlayer()));
 	}
 
-	public void procreate(EntityNewPrehistoric mob) {
+	public void procreate(EntityPrehistoric mob) {
 		for (int i = 0; i < 7; ++i) {
 			double dd = this.rand.nextGaussian() * 0.02D;
 			double dd1 = this.rand.nextGaussian() * 0.02D;
@@ -1493,12 +1492,12 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 			this.entityToAttack = null;
 			mob.entityToAttack = null;
 			hatchling.setPositionAndRotation(this.posX, this.posY + 1, this.posZ, this.rotationYaw, 0);
-			if (hatchling instanceof EntityDinoEgg) {
+			if (hatchling instanceof EntityDinosaurEgg) {
 				Revival.NETWORK_WRAPPER.sendToAll(new MessageUpdateEgg(hatchling.getEntityId(), this.type.ordinal()));
 			} else {
-				if (hatchling instanceof EntityNewPrehistoric) {
-					((EntityNewPrehistoric) hatchling).onSpawnWithEgg(null);
-					((EntityNewPrehistoric) hatchling).setAgeInDays(1);
+				if (hatchling instanceof EntityPrehistoric) {
+					((EntityPrehistoric) hatchling).onSpawnWithEgg(null);
+					((EntityPrehistoric) hatchling).setAgeInDays(1);
 				}
 			}
 			this.worldObj.spawnEntityInWorld(hatchling);
@@ -1511,18 +1510,18 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 		IEntitySelector targetEntitySelector = new IEntitySelector() {
 			@Override
 			public boolean isEntityApplicable(Entity entity) {
-				return (entity instanceof EntityNewPrehistoric);
+				return (entity instanceof EntityPrehistoric);
 			}
 		};
 		double d0 = 64;
-		List<EntityNewPrehistoric> list = worldObj.selectEntitiesWithinAABB(EntityNewPrehistoric.class, this.boundingBox.expand(d0, 4.0D, d0), targetEntitySelector);
+		List<EntityPrehistoric> list = worldObj.selectEntitiesWithinAABB(EntityPrehistoric.class, this.boundingBox.expand(d0, 4.0D, d0), targetEntitySelector);
 		Collections.sort(list, theNearestAttackableTargetSorter);
 
 		if (list.isEmpty() || this.doesFlock()) {
 			return false;
 		} else {
-			List<EntityNewPrehistoric> listOfType = new ArrayList<EntityNewPrehistoric>();
-			for (EntityNewPrehistoric mob : list) {
+			List<EntityPrehistoric> listOfType = new ArrayList<EntityPrehistoric>();
+			for (EntityPrehistoric mob : list) {
 				if (mob.type == this.type && mob.isAdult()) {
 					listOfType.add(mob);
 				}
@@ -1586,8 +1585,8 @@ public abstract class EntityNewPrehistoric extends EntityTameable implements IPr
 
 	public boolean canRunFrom(Entity entity) {
 		if (width <= entity.width) {
-			if (entity instanceof EntityNewPrehistoric) {
-				EntityNewPrehistoric mob = (EntityNewPrehistoric) entity;
+			if (entity instanceof EntityPrehistoric) {
+				EntityPrehistoric mob = (EntityPrehistoric) entity;
 				if (mob.type.diet != EnumDiet.HERBIVORE) {
 					return true;
 				}

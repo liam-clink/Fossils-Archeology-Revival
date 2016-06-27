@@ -10,9 +10,9 @@ import fossilsarcheology.client.render.particle.DeathOrbFX;
 import fossilsarcheology.client.render.particle.HeartFX;
 import fossilsarcheology.server.ServerProxy;
 import fossilsarcheology.server.block.FABlockRegistry;
+import fossilsarcheology.server.entity.mob.projectile.EntityAncientJavelin;
 import fossilsarcheology.server.entity.mob.projectile.EntityBirdEgg;
-import fossilsarcheology.server.entity.mob.test.EntityFishBase;
-import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
+import fossilsarcheology.server.entity.mob.projectile.EntityJavelin;
 import fossilsarcheology.server.entity.toy.EntityToyBall;
 import fossilsarcheology.server.entity.toy.EntityToyScratchingPost;
 import fossilsarcheology.server.entity.toy.EntityToyTetheredLog;
@@ -92,7 +92,7 @@ public class ClientProxy extends ServerProxy {
         RenderingRegistry.registerEntityRenderingHandler(EntityFailuresaurus.class, new RenderFailuresaurus(new ModelFailuresaurus(), 0.5F));
         RenderingRegistry.registerEntityRenderingHandler(EntityAnu.class, new RenderPigBoss(new ModelPigBoss(), 0.5F));
         RenderingRegistry.registerEntityRenderingHandler(EntityFriendlyPigZombie.class, new RenderFPZ());
-        RenderingRegistry.registerEntityRenderingHandler(EntityDinoEgg.class, new RenderDinoEgg(0.2F));
+        RenderingRegistry.registerEntityRenderingHandler(EntityDinosaurEgg.class, new RenderDinoEgg(0.2F));
         RenderingRegistry.registerEntityRenderingHandler(EntityJavelin.class, new RenderJavelin());
         RenderingRegistry.registerEntityRenderingHandler(EntityAncientJavelin.class, new RenderJavelin());
         RenderingRegistry.registerEntityRenderingHandler(EntityBones.class, new RenderBones());
@@ -193,7 +193,7 @@ public class ClientProxy extends ServerProxy {
     public void animate(int animateID) {
     }
 
-    public void calculateChainBuffer(EntityNewPrehistoric entity) {
+    public void calculateChainBuffer(EntityPrehistoric entity) {
         entity.chainBuffer.calculateChainSwingBuffer(70, 10, 4, entity);
     }
 

@@ -12,18 +12,18 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.entity.ai.DinoAIAttackOnCollide;
+import fossilsarcheology.server.entity.ai.DinoAIFeeder;
 import fossilsarcheology.server.entity.ai.DinoAIFollowOwner;
 import fossilsarcheology.server.entity.ai.DinoAIHunt;
 import fossilsarcheology.server.entity.ai.DinoAILookIdle;
 import fossilsarcheology.server.entity.ai.DinoAIWander;
 import fossilsarcheology.server.entity.ai.DinoAIWatchClosest;
-import fossilsarcheology.server.entity.mob.test.DinoAIFeeder;
-import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
 import fossilsarcheology.server.enums.EnumPrehistoric;
 import fossilsarcheology.server.enums.EnumPrehistoricAI;
 
-public class EntityStegosaurus extends EntityNewPrehistoric {
+public class EntityStegosaurus extends EntityPrehistoric {
 
     public EntityStegosaurus(World world) {
         super(world, EnumPrehistoric.Stegosaurus, 2, 9, 12, 66, 0.25, 0.3);

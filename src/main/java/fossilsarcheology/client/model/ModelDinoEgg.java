@@ -1,6 +1,6 @@
 package fossilsarcheology.client.model;
 
-import fossilsarcheology.server.entity.EntityDinoEgg;
+import fossilsarcheology.server.entity.EntityDinosaurEgg;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelBase;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.minecraft.entity.Entity;
@@ -40,7 +40,7 @@ public class ModelDinoEgg extends AdvancedModelBase {
 
 	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
 		this.resetToDefaultPose();
-		if(((EntityDinoEgg)entity).getBirthTick() > ((EntityDinoEgg)entity).totalHatchTime * 0.9F){
+		if(((EntityDinosaurEgg)entity).getBirthTick() > ((EntityDinosaurEgg)entity).totalHatchTime * 0.9F){
 			this.swing(Egg1, 0.3F, 0.5F, false, 0.25F, 0, entity.ticksExisted, 1);
 			this.flap(Egg1, 0.3F, 0.5F, true, 0.25F, 0, entity.ticksExisted, 1);
 			this.bob(Egg1, 0.3F, 0.9F, true, entity.ticksExisted, 1);

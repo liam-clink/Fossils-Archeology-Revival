@@ -1,6 +1,6 @@
 package fossilsarcheology.server.item;
 
-import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
+import fossilsarcheology.server.entity.EntityPrehistoric;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -41,8 +41,8 @@ public class WhipItem extends ItemCarrotOnAStick {
      */
     @Override
     public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer player) {
-        if (player.isRiding() && player.ridingEntity instanceof EntityNewPrehistoric) {
-            EntityNewPrehistoric dinosaur = (EntityNewPrehistoric) player.ridingEntity;
+        if (player.isRiding() && player.ridingEntity instanceof EntityPrehistoric) {
+            EntityPrehistoric dinosaur = (EntityPrehistoric) player.ridingEntity;
             // dinosaur.onWhipRightClick();
             itemstack.damageItem(1, player);
             player.swingItem();

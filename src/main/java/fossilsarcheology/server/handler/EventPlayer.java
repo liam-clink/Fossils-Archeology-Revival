@@ -1,7 +1,7 @@
 package fossilsarcheology.server.handler;
 
 import fossilsarcheology.Revival;
-import fossilsarcheology.server.entity.EntityFAPlayer;
+import fossilsarcheology.server.entity.FossilPlayerProperites;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -15,23 +15,23 @@ public class EventPlayer {
     @SubscribeEvent
     public void onClonePlayer(PlayerEvent.Clone event) {
         NBTTagCompound compound = new NBTTagCompound();
-        EntityFAPlayer.get(event.original).saveNBTData(compound);
-        EntityFAPlayer.get(event.entityPlayer).loadNBTData(compound);
+        FossilPlayerProperites.get(event.original).saveNBTData(compound);
+        FossilPlayerProperites.get(event.entityPlayer).loadNBTData(compound);
     }
 
     @SubscribeEvent
     public void onEntityConstructing(EntityConstructing event) {
-        if (event.entity instanceof EntityPlayer && EntityFAPlayer.get((EntityPlayer) event.entity) == null) {
-            EntityFAPlayer.register((EntityPlayer) event.entity);
+        if (event.entity instanceof EntityPlayer && FossilPlayerProperites.get((EntityPlayer) event.entity) == null) {
+            FossilPlayerProperites.register((EntityPlayer) event.entity);
         }
-        if (event.entity instanceof EntityPlayer && event.entity.getExtendedProperties(EntityFAPlayer.EXT_PROP_NAME) == null) {
-            event.entity.registerExtendedProperties(EntityFAPlayer.EXT_PROP_NAME, new EntityFAPlayer((EntityPlayer) event.entity));
+        if (event.entity instanceof EntityPlayer && event.entity.getExtendedProperties(FossilPlayerProperites.EXT_PROP_NAME) == null) {
+            event.entity.registerExtendedProperties(FossilPlayerProperites.EXT_PROP_NAME, new FossilPlayerProperites((EntityPlayer) event.entity));
         }
     }
 
     @SubscribeEvent
     public void onBreakBlock(BlockEvent.BreakEvent event) {
-        if (event.world.provider.dimensionId == Revival.CONFIG.dimensionIDDarknessLair && event.block != Blocks.obsidian && !EntityFAPlayer.get(event.getPlayer()).isKilledAnu()) {
+        if (event.world.provider.dimensionId == Revival.CONFIG.dimensionIDDarknessLair && event.block != Blocks.obsidian && !FossilPlayerProperites.get(event.getPlayer()).isKilledAnu()) {
             Revival.showMessage(StatCollector.translateToLocal("anu.breakblock"), event.getPlayer());
             event.setCanceled(true);
         }

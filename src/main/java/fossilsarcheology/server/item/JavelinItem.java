@@ -1,7 +1,7 @@
 package fossilsarcheology.server.item;
 
-import fossilsarcheology.server.entity.EntityAncientJavelin;
-import fossilsarcheology.server.entity.EntityJavelin;
+import fossilsarcheology.server.entity.mob.projectile.EntityAncientJavelin;
+import fossilsarcheology.server.entity.mob.projectile.EntityJavelin;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;

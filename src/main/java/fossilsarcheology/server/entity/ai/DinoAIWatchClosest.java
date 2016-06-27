@@ -1,19 +1,19 @@
 package fossilsarcheology.server.entity.ai;
 
-import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
+import fossilsarcheology.server.entity.EntityPrehistoric;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.player.EntityPlayer;
 
 public class DinoAIWatchClosest extends EntityAIBase {
-	private EntityNewPrehistoric prehsitoric;
+	private EntityPrehistoric prehsitoric;
 	protected Entity closestEntity;
 	private float maxDistanceForPlayer;
 	private int lookTime;
 	private float chance;
 	private Class watchedClass;
 
-	public DinoAIWatchClosest(EntityNewPrehistoric prehsitoric, Class watchedClass, float distance) {
+	public DinoAIWatchClosest(EntityPrehistoric prehsitoric, Class watchedClass, float distance) {
 		this.prehsitoric = prehsitoric;
 		this.watchedClass = watchedClass;
 		this.maxDistanceForPlayer = distance;
@@ -21,7 +21,7 @@ public class DinoAIWatchClosest extends EntityAIBase {
 		this.setMutexBits(2);
 	}
 
-	public DinoAIWatchClosest(EntityNewPrehistoric prehsitoric, Class watchedClass, float distance, float chance) {
+	public DinoAIWatchClosest(EntityPrehistoric prehsitoric, Class watchedClass, float distance, float chance) {
 		this.prehsitoric = prehsitoric;
 		this.watchedClass = watchedClass;
 		this.maxDistanceForPlayer = distance;

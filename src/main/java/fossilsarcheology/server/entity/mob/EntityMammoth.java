@@ -23,20 +23,20 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
+import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.entity.ai.DinoAIAttackOnCollide;
 import fossilsarcheology.server.entity.ai.DinoAIAvoidEntity;
+import fossilsarcheology.server.entity.ai.DinoAIFeeder;
 import fossilsarcheology.server.entity.ai.DinoAIFollowOwner;
 import fossilsarcheology.server.entity.ai.DinoAIHunt;
 import fossilsarcheology.server.entity.ai.DinoAILookIdle;
 import fossilsarcheology.server.entity.ai.DinoAIRiding;
 import fossilsarcheology.server.entity.ai.DinoAIWander;
 import fossilsarcheology.server.entity.ai.DinoAIWatchClosest;
-import fossilsarcheology.server.entity.mob.test.DinoAIFeeder;
-import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
 import fossilsarcheology.server.enums.EnumPrehistoric;
 import fossilsarcheology.server.enums.EnumPrehistoricAI;
 
-public class EntityMammoth extends EntityNewPrehistoric implements IShearable {
+public class EntityMammoth extends EntityPrehistoric implements IShearable {
 
 	private EntityAIEatGrass aiEatGrass = new EntityAIEatGrass(this);
 	private int eatGrassTimes = 0;

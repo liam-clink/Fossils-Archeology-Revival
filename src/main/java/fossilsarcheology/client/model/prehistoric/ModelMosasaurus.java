@@ -1,8 +1,8 @@
 package fossilsarcheology.client.model.prehistoric;
 
 import fossilsarcheology.client.model.prehistoric.test.ModelNewPrehistoric;
+import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.entity.mob.EntityMosasaurus;
-import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
 import net.ilexiconn.llibrary.client.model.ModelAnimator;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
@@ -117,7 +117,7 @@ public class ModelMosasaurus extends ModelNewPrehistoric {
 		blockMovement(f, f1, f2, f3, f4, f5, (Entity) entity);
 		this.resetToDefaultPose();
 		setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
-        animator.setAnimation(EntityNewPrehistoric.SPEAK_ANIMATION);
+        animator.setAnimation(EntityPrehistoric.SPEAK_ANIMATION);
         animator.startKeyframe(10);
         ModelUtils.rotate(animator, jawBase, 15, 0, 0);
         animator.endKeyframe();
@@ -156,11 +156,11 @@ public class ModelMosasaurus extends ModelNewPrehistoric {
 	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
 		AdvancedModelRenderer[] tailParts = { this.lowerBody, this.tail1, this.tail2, this.upperTailFin };
 		AdvancedModelRenderer[] neckParts = { this.neck, this.head };
-		if(((EntityNewPrehistoric) entity).isSkeleton()){
+		if(((EntityPrehistoric) entity).isSkeleton()){
 			return;
 		}
 		{
-			float sitProgress = ((EntityNewPrehistoric) (entity)).weakProgress;
+			float sitProgress = ((EntityPrehistoric) (entity)).weakProgress;
 			sitAnimationRotationPrev(rightFrontFlipper, sitProgress, (float)Math.toRadians(30.0D), 0, (float)Math.toRadians(30.0D));
 			sitAnimationRotationPrev(lowerTailFin, sitProgress, (float)Math.toRadians(64.95D), 0, 0);
 			sitAnimationRotationPrev(upperTailFin, sitProgress, (float)Math.toRadians(108.51D), 0, 0);
@@ -185,7 +185,7 @@ public class ModelMosasaurus extends ModelNewPrehistoric {
 		this.flap(rightFrontFlipper, speed2, 0.6F, false, 0, 0, f, f1);
 		this.flap(leftHindFlipper, speed2, 0.6F, false, 0, 0, f, f1);
 		this.flap(rightHindFlipper, speed2, 0.6F, true, 0, 0, f, f1);
-		((EntityNewPrehistoric) entity).chainBuffer.applyChainSwingBuffer((ModelRenderer[]) tailParts);
+		((EntityPrehistoric) entity).chainBuffer.applyChainSwingBuffer((ModelRenderer[]) tailParts);
 		if (entity.riddenByEntity == null) {
 			ModelUtils.faceTargetMod(neck, f3, f4, 0.5F);
 			ModelUtils.faceTargetMod(head, f3, f4, 0.5F);

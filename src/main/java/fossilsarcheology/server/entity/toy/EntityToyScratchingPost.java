@@ -1,6 +1,6 @@
 package fossilsarcheology.server.entity.toy;
 
-import fossilsarcheology.server.entity.mob.test.EntityToyBase;
+import fossilsarcheology.server.entity.EntityToyBase;
 import fossilsarcheology.server.item.FAItemRegistry;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;

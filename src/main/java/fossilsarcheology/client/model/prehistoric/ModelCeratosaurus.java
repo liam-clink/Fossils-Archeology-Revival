@@ -1,8 +1,8 @@
 package fossilsarcheology.client.model.prehistoric;
 
 import fossilsarcheology.client.model.prehistoric.test.ModelNewPrehistoric;
+import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.entity.mob.EntityCeratosaurus;
-import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
 import net.ilexiconn.llibrary.client.model.ModelAnimator;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
@@ -173,7 +173,7 @@ public class ModelCeratosaurus extends ModelNewPrehistoric {
         blockMovement(f, f1, f2, f3, f4, f5, (Entity) entity);
         this.resetToDefaultPose();
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
-        animator.setAnimation(EntityNewPrehistoric.SPEAK_ANIMATION);
+        animator.setAnimation(EntityPrehistoric.SPEAK_ANIMATION);
         animator.startKeyframe(10);
         ModelUtils.rotate(animator, lowerJaw, 20, 0, 0);
         animator.endKeyframe();
@@ -198,7 +198,7 @@ public class ModelCeratosaurus extends ModelNewPrehistoric {
         AdvancedModelRenderer[] neckParts = {this.neck, this.head};
         AdvancedModelRenderer[] leftArmParts = {this.leftUpperArm, this.leftLowerArm};
         AdvancedModelRenderer[] rightArmParts = {this.rightUpperArm, this.rightLowerArm};
-		if(((EntityNewPrehistoric) entity).isSkeleton()){
+		if(((EntityPrehistoric) entity).isSkeleton()){
 			return;
 		}
         ModelUtils.faceTargetMod(neck, f3, f4, 0.5F);
@@ -221,7 +221,7 @@ public class ModelCeratosaurus extends ModelNewPrehistoric {
         this.chainSwing(tailParts, speed2, degree * 0.25F, -3, f, f1);
         this.chainWave(neckParts, speed, degree * 0.15F, 3, entity.ticksExisted, 1);
         {
-            float sitProgress = ((EntityNewPrehistoric) (entity)).sitProgress;
+            float sitProgress = ((EntityPrehistoric) (entity)).sitProgress;
             sitAnimationRotation(rightUpperArm, sitProgress, -((float) Math.toRadians(44.0D)), 0, 0);
             sitAnimationRotation(head, sitProgress, (float) Math.toRadians(22.0D), 0, 0);
             sitAnimationRotation(tail2, sitProgress, (float) Math.toRadians(4.0D), 0, 0);
@@ -248,7 +248,7 @@ public class ModelCeratosaurus extends ModelNewPrehistoric {
             sitAnimationPos(rightThigh, sitProgress, 0, 7.6F, 0);
         }
         {
-            float sitProgress = ((EntityNewPrehistoric) (entity)).sleepProgress;
+            float sitProgress = ((EntityPrehistoric) (entity)).sleepProgress;
             sitAnimationRotation(rightThigh, sitProgress, -((float) Math.toRadians(20.0D)), 0, 0);
             sitAnimationRotation(leftFoot, sitProgress, (float) Math.toRadians(86.0D), 0, 0);
             sitAnimationRotation(rightLowerArm, sitProgress, -((float) Math.toRadians(42.35D)), 0, 0);
@@ -274,6 +274,6 @@ public class ModelCeratosaurus extends ModelNewPrehistoric {
             sitAnimationPos(leftThigh, sitProgress, 0, 7.6F, 0);
             sitAnimationPos(rightThigh, sitProgress, 0, 7.6F, 0);
         }
-        ((EntityNewPrehistoric) entity).chainBuffer.applyChainSwingBuffer((ModelRenderer[]) tailParts);
+        ((EntityPrehistoric) entity).chainBuffer.applyChainSwingBuffer((ModelRenderer[]) tailParts);
     }
 }

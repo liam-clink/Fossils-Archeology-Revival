@@ -1,13 +1,14 @@
 package fossilsarcheology.client.render.entity;
 
-import fossilsarcheology.server.entity.EntityAncientJavelin;
-import fossilsarcheology.server.entity.EntityJavelin;
+import fossilsarcheology.server.entity.mob.projectile.EntityAncientJavelin;
+import fossilsarcheology.server.entity.mob.projectile.EntityJavelin;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 

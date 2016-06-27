@@ -1,4 +1,4 @@
-package fossilsarcheology.server.entity.mob.test;
+package fossilsarcheology.server.entity;
 
 import net.ilexiconn.llibrary.server.animation.Animation;
 import net.minecraft.block.material.Material;
@@ -10,14 +10,14 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import fossilsarcheology.server.enums.EnumPrehistoric;
 
-public abstract class EntitySwimmingPrehistoric extends EntityNewPrehistoric {
+public abstract class EntityPrehistoricSwimming extends EntityPrehistoric {
 
 	public boolean movesOnLand;
 	public ChunkCoordinates currentTarget;
 	protected boolean isAmphibious;
 	public static Animation FISH_ANIMATION;
 
-	public EntitySwimmingPrehistoric(World world, EnumPrehistoric type, double baseDamage, double maxDamage, double baseHealth, double maxHealth, double baseSpeed, double maxSpeed) {
+	public EntityPrehistoricSwimming(World world, EnumPrehistoric type, double baseDamage, double maxDamage, double baseHealth, double maxHealth, double baseSpeed, double maxSpeed) {
 		super(world, type, baseDamage, maxDamage, baseHealth, maxHealth, baseSpeed, maxSpeed);
 		this.getNavigator().setAvoidsWater(false);
 		this.hasBabyTexture = false;

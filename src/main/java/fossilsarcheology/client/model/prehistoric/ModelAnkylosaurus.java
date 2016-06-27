@@ -1,8 +1,8 @@
 package fossilsarcheology.client.model.prehistoric;
 
 import fossilsarcheology.client.model.prehistoric.test.ModelNewPrehistoric;
+import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.entity.mob.EntityAnkylosaurus;
-import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
 import net.ilexiconn.llibrary.client.model.ModelAnimator;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
@@ -185,7 +185,7 @@ public class ModelAnkylosaurus extends ModelNewPrehistoric {
         blockMovement(f, f1, f2, f3, f4, f5, (Entity) entity);
         this.resetToDefaultPose();
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
-        animator.setAnimation(EntityNewPrehistoric.SPEAK_ANIMATION);
+        animator.setAnimation(EntityPrehistoric.SPEAK_ANIMATION);
 		animator.startKeyframe(10);
 		ModelUtils.rotate(animator, Mouth_1, -30, 0, 0);
 		animator.endKeyframe();
@@ -214,7 +214,7 @@ public class ModelAnkylosaurus extends ModelNewPrehistoric {
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
         AdvancedModelRenderer[] tailParts = {this.Tail1, this.Tail2, this.Tail3, this.TailClub};
         AdvancedModelRenderer[] neckParts = {this.Neck, this.Head};
-		if(((EntityNewPrehistoric) entity).isSkeleton()){
+		if(((EntityPrehistoric) entity).isSkeleton()){
 			return;
 		}
         ModelUtils.faceTargetMod(Head, f3, f4, 0.5F);
@@ -239,7 +239,7 @@ public class ModelAnkylosaurus extends ModelNewPrehistoric {
         this.walk(BackLegL, speed2, degree * 0.6F, false, 0F, 0.4F, f, f1);
         this.walk(BackLegR, speed2, degree * 0.6F, true, 0F, 0.4F, f, f1);
         {
-            float sitProgress = ((EntityNewPrehistoric) (entity)).sitProgress;
+            float sitProgress = ((EntityPrehistoric) (entity)).sitProgress;
             sitAnimationRotation(BackThighR, sitProgress, (float) Math.toRadians(70.43D), -((float) Math.toRadians(2.61D)), (float) Math.toRadians(2.61D));
             sitAnimationRotation(Neck, sitProgress, -((float) Math.toRadians(31.3D)), 0, 0);
             sitAnimationRotation(FrontThighR, sitProgress, -((float) Math.toRadians(78.26D)), -((float) Math.toRadians(23.48D)), (float) Math.toRadians(49.57D));
@@ -264,7 +264,7 @@ public class ModelAnkylosaurus extends ModelNewPrehistoric {
             sitAnimationPos(Body, sitProgress, 0, 4.3F, -3);
         }
         {
-            float sitProgress = ((EntityNewPrehistoric) (entity)).sleepProgress;
+            float sitProgress = ((EntityPrehistoric) (entity)).sleepProgress;
             sitAnimationRotation(HornR2, sitProgress, (float) Math.toRadians(50.0D), (float) Math.toRadians(20.0D), -((float) Math.toRadians(30.0D)));
             sitAnimationRotation(HornL2, sitProgress, (float) Math.toRadians(50.0D), -((float) Math.toRadians(20.0D)), (float) Math.toRadians(30.0D));
             sitAnimationRotation(BackThighR, sitProgress, (float) Math.toRadians(78.26D), -((float) Math.toRadians(13.04D)), (float) Math.toRadians(26.09D));
@@ -287,7 +287,7 @@ public class ModelAnkylosaurus extends ModelNewPrehistoric {
             sitAnimationRotation(BodyUpper, sitProgress, (float) Math.toRadians(2.61D), 0, 0);
             sitAnimationPos(Body, sitProgress, 0, 4.3F, -3);
         }
-        ((EntityNewPrehistoric) entity).chainBuffer.applyChainSwingBuffer((ModelRenderer[]) tailParts);
+        ((EntityPrehistoric) entity).chainBuffer.applyChainSwingBuffer((ModelRenderer[]) tailParts);
     }
 
 }

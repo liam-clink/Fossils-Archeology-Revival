@@ -1,7 +1,7 @@
 package fossilsarcheology.server.item;
 
 import fossilsarcheology.Revival;
-import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
+import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.enums.EnumPrehistoric;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -82,10 +82,10 @@ public class DinosaurModelItem extends Item {
             return true;
         } else {
             Class var11 = EnumPrehistoric.values()[var1.getItemDamage()].getDinoClass();
-            EntityNewPrehistoric var12;
+            EntityPrehistoric var12;
 
             try {
-                var12 = (EntityNewPrehistoric) var11.getConstructor(new Class[]{World.class}).newInstance(var3);
+                var12 = (EntityPrehistoric) var11.getConstructor(new Class[]{World.class}).newInstance(var3);
             } catch (Throwable var14) {
                 var14.printStackTrace();
                 return false;

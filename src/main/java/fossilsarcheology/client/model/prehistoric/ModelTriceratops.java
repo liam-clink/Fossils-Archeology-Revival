@@ -6,8 +6,8 @@ import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import fossilsarcheology.client.model.prehistoric.test.ModelNewPrehistoric;
+import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.entity.mob.EntityTriceratops;
-import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
 
 public class ModelTriceratops extends ModelNewPrehistoric {
     public AdvancedModelRenderer upperBody;
@@ -199,7 +199,7 @@ public class ModelTriceratops extends ModelNewPrehistoric {
         blockMovement(f, f1, f2, f3, f4, f5, (Entity) entity);
         this.resetToDefaultPose();
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
-        animator.setAnimation(EntityNewPrehistoric.SPEAK_ANIMATION);
+        animator.setAnimation(EntityPrehistoric.SPEAK_ANIMATION);
         animator.startKeyframe(10);
         ModelUtils.rotate(animator, beakbottom, 24, 0, 0);
         animator.endKeyframe();
@@ -235,7 +235,7 @@ public class ModelTriceratops extends ModelNewPrehistoric {
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
         AdvancedModelRenderer[] tailParts = {this.tail1, this.tail2, this.tail3};
         AdvancedModelRenderer[] neckParts = {this.neck, this.head};
-		if(((EntityNewPrehistoric) entity).isSkeleton()){
+		if(((EntityPrehistoric) entity).isSkeleton()){
 			return;
 		}
         ModelUtils.faceTargetMod(neck, f3, f4, 0.5F);
@@ -245,7 +245,7 @@ public class ModelTriceratops extends ModelNewPrehistoric {
         float speed2 = 0.1F;
         float degree = 0.5F;
         {
-            float sitProgress = ((EntityNewPrehistoric) (entity)).sitProgress;
+            float sitProgress = ((EntityPrehistoric) (entity)).sitProgress;
             sitAnimationRotation(rightHindLeg, sitProgress, (float) Math.toRadians(110.0D), 0, 0);
             sitAnimationRotation(lowerBody, sitProgress, -((float) Math.toRadians(13.04D)), 0, 0);
             sitAnimationRotation(tail3, sitProgress, -(float) Math.toRadians(14.64D), 0, 0);
@@ -269,7 +269,7 @@ public class ModelTriceratops extends ModelNewPrehistoric {
             sitAnimationPos(leftHindThigh, sitProgress, 0F, 20.50F - ModelUtils.getDefaultPositionY(leftHindThigh), 0F);
         }
         {
-            float sitProgress = ((EntityNewPrehistoric) (entity)).sleepProgress;
+            float sitProgress = ((EntityPrehistoric) (entity)).sleepProgress;
             sitAnimationRotation(upperBody, sitProgress, 0, (float) Math.toRadians(2.61D), -((float) Math.toRadians(18.26D)));
             sitAnimationRotation(rightFrontThigh, sitProgress, -((float) Math.toRadians(30D)), (float) Math.toRadians(2.61D), 0);
             sitAnimationRotation(head, sitProgress, (float) Math.toRadians(26.09D), (float) Math.toRadians(5.22D), -((float) Math.toRadians(20.87D)));
@@ -305,7 +305,7 @@ public class ModelTriceratops extends ModelNewPrehistoric {
         this.chainWave(tailParts, speed2, degree * 0.05F, -3, entity.ticksExisted, 1);
         this.chainSwing(tailParts, speed2, degree * 0.35F, -3, entity.ticksExisted, 1);
         this.chainWave(neckParts, speed2, degree * 0.05F, -3, entity.ticksExisted, 1);
-        ((EntityNewPrehistoric) entity).chainBuffer.applyChainSwingBuffer((ModelRenderer[]) tailParts);
+        ((EntityPrehistoric) entity).chainBuffer.applyChainSwingBuffer((ModelRenderer[]) tailParts);
     }
 
     // @Override

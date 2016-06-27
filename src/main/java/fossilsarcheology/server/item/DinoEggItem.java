@@ -1,8 +1,8 @@
 package fossilsarcheology.server.item;
 
 import fossilsarcheology.Revival;
-import fossilsarcheology.server.entity.EntityDinoEgg;
-import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
+import fossilsarcheology.server.entity.EntityDinosaurEgg;
+import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.enums.EnumPrehistoric;
 import fossilsarcheology.server.message.MessageUpdateEgg;
 import cpw.mods.fml.relauncher.Side;
@@ -30,14 +30,14 @@ public class DinoEggItem extends Item {
 	public static boolean spawnCreature(World world, EnumPrehistoric prehistoricEnum, double x, double y, double z) {
 		Object egg;
 		if (!prehistoricEnum.isAquatic()) {
-			egg = new EntityDinoEgg(world, prehistoricEnum);
+			egg = new EntityDinosaurEgg(world, prehistoricEnum);
 			((Entity) egg).setLocationAndAngles(x, y + 1.0F, z, world.rand.nextFloat() * 360.0F, 0.0F);
 			if (!world.isRemote) {
 				world.spawnEntityInWorld((Entity) egg);
 			}
-			((EntityDinoEgg) egg).selfType = prehistoricEnum;
+			((EntityDinosaurEgg) egg).selfType = prehistoricEnum;
 			if (!world.isRemote)
-				Revival.NETWORK_WRAPPER.sendToAll(new MessageUpdateEgg(((EntityDinoEgg) egg).getEntityId(), prehistoricEnum.ordinal()));
+				Revival.NETWORK_WRAPPER.sendToAll(new MessageUpdateEgg(((EntityDinosaurEgg) egg).getEntityId(), prehistoricEnum.ordinal()));
 			return true;
 		} else {
 			egg = prehistoricEnum.invokeClass(world);
@@ -46,8 +46,8 @@ public class DinoEggItem extends Item {
 				if(!world.isRemote){
 					world.spawnEntityInWorld((Entity) egg);
 				}
-				if (egg instanceof EntityNewPrehistoric) {
-					EntityNewPrehistoric prehistoric = (EntityNewPrehistoric) egg;
+				if (egg instanceof EntityPrehistoric) {
+					EntityPrehistoric prehistoric = (EntityPrehistoric) egg;
 					if (prehistoric.aiTameType() == EnumPrehistoricAI.Taming.IMPRINTING) {
 						prehistoric.setTamed(true);
 						prehistoric.setAgeInDays(1);

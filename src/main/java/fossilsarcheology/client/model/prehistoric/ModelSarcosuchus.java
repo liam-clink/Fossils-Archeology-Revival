@@ -5,8 +5,8 @@ import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
 import net.minecraft.entity.Entity;
 import fossilsarcheology.client.model.prehistoric.test.ModelNewPrehistoric;
+import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.entity.mob.EntitySarcosuchus;
-import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
 
 public class ModelSarcosuchus extends ModelNewPrehistoric {
 	public AdvancedModelRenderer lowerBody;
@@ -217,7 +217,7 @@ public class ModelSarcosuchus extends ModelNewPrehistoric {
 		animator.update(entity);
 		this.resetToDefaultPose();
 		setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
-		animator.setAnimation(EntityNewPrehistoric.SPEAK_ANIMATION);
+		animator.setAnimation(EntityPrehistoric.SPEAK_ANIMATION);
 		animator.startKeyframe(10);
 		ModelUtils.rotate(animator, head, -15, 0, 0);
 		ModelUtils.rotate(animator, LowerJaw, 25, 0, 0);
@@ -302,7 +302,7 @@ public class ModelSarcosuchus extends ModelNewPrehistoric {
 		float speed = 0.1F;
 		float speed2 = entity.isInWater() ? 0.35F : 0.7F;
 		float degree = 0.5F;
-		if(((EntityNewPrehistoric) entity).isSkeleton()){
+		if(((EntityPrehistoric) entity).isSkeleton()){
 			return;
 		}
 		this.bob(lowerBody, speed, degree * 0.7F, false, entity.ticksExisted, 1);
@@ -313,7 +313,7 @@ public class ModelSarcosuchus extends ModelNewPrehistoric {
 		this.chainSwing(tailParts, speed, degree * 0.15F, -3, entity.ticksExisted, 1);
 		this.chainSwing(tailParts, speed2, degree * 0.5F, -3, f, f1);
 		this.chainWave(neckParts, speed, degree * 0.15F, 3, entity.ticksExisted, 1);
-		((EntityNewPrehistoric) entity).chainBuffer.applyChainSwingBuffer((AdvancedModelRenderer[]) tailParts);
+		((EntityPrehistoric) entity).chainBuffer.applyChainSwingBuffer((AdvancedModelRenderer[]) tailParts);
 		if (entity.riddenByEntity == null) {
 			ModelUtils.faceTargetMod(neck, f3, f4, 0.5F);
 			ModelUtils.faceTargetMod(head, f3, f4, 0.5F);

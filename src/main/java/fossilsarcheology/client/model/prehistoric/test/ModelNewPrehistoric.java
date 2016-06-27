@@ -1,6 +1,6 @@
 package fossilsarcheology.client.model.prehistoric.test;
 
-import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
+import fossilsarcheology.server.entity.EntityPrehistoric;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelBase;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.minecraft.entity.Entity;
@@ -11,7 +11,7 @@ public abstract class ModelNewPrehistoric extends AdvancedModelBase {
     }
 
     public void blockMovement(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
-        if (entity instanceof EntityNewPrehistoric && ((EntityNewPrehistoric) entity).isMovementBlocked()) {
+        if (entity instanceof EntityPrehistoric && ((EntityPrehistoric) entity).isMovementBlocked()) {
             f = 0;
             f1 = 0;
             f3 = 0;

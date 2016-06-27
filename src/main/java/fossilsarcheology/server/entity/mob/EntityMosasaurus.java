@@ -10,13 +10,13 @@ import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import fossilsarcheology.server.entity.EntityPrehistoricSwimming;
 import fossilsarcheology.server.entity.ai.DinoAIHunt;
 import fossilsarcheology.server.entity.ai.DinoAILookIdle;
 import fossilsarcheology.server.entity.ai.DinoAIRiding;
 import fossilsarcheology.server.entity.ai.DinoAIWatchClosest;
-import fossilsarcheology.server.entity.mob.test.DinoAIWaterFeeder;
-import fossilsarcheology.server.entity.mob.test.DinoAIWaterFindTarget;
-import fossilsarcheology.server.entity.mob.test.EntitySwimmingPrehistoric;
+import fossilsarcheology.server.entity.ai.DinoAIWaterFeeder;
+import fossilsarcheology.server.entity.ai.DinoAIWaterFindTarget;
 import fossilsarcheology.server.enums.EnumPrehistoric;
 import fossilsarcheology.server.enums.EnumPrehistoricAI.Activity;
 import fossilsarcheology.server.enums.EnumPrehistoricAI.Attacking;
@@ -31,7 +31,7 @@ import fossilsarcheology.server.enums.EnumPrehistoricAI.Untaming;
 import fossilsarcheology.server.enums.EnumPrehistoricAI.WaterAbility;
 import fossilsarcheology.server.item.FAItemRegistry;
 
-public class EntityMosasaurus extends EntitySwimmingPrehistoric {
+public class EntityMosasaurus extends EntityPrehistoricSwimming {
 
 	public static Animation SHAKE_ANIMATION = Animation.create(50);
 

@@ -1,7 +1,7 @@
 package fossilsarcheology.client.model.base;
 
 import fossilsarcheology.client.render.entity.RenderPrehistoric;
-import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
+import fossilsarcheology.server.entity.EntityPrehistoric;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelBase;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.minecraft.entity.Entity;
@@ -12,8 +12,8 @@ public class ModelPrehistoric extends AdvancedModelBase {
     public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
         doAdvancedStuff(true);
         renderAll();
-        if (entity instanceof EntityNewPrehistoric) {
-            EntityNewPrehistoric mob = (EntityNewPrehistoric) entity;
+        if (entity instanceof EntityPrehistoric) {
+            EntityPrehistoric mob = (EntityPrehistoric) entity;
             if (mob.isSkeleton()) {
                 renderFossil(mob, f, f1, f2, f3, f4, f5);
             } else {
@@ -25,19 +25,19 @@ public class ModelPrehistoric extends AdvancedModelBase {
     /**
      * PreRender and setAngles
      */
-    public void renderFossil(EntityNewPrehistoric entity, float f, float f1, float f2, float f3, float f4, float f5) {
+    public void renderFossil(EntityPrehistoric entity, float f, float f1, float f2, float f3, float f4, float f5) {
     }
 
     /**
      * PreRender and setAngles
      */
-    public void renderLiving(EntityNewPrehistoric entity, float f, float f1, float f2, float f3, float f4, float f5) {
+    public void renderLiving(EntityPrehistoric entity, float f, float f1, float f2, float f3, float f4, float f5) {
     }
 
     /**
      * PreRender and setAngles
      */
-    public void renderSleeping(EntityNewPrehistoric entity, float f, float f1, float f2, float f3, float f4, float f5) {
+    public void renderSleeping(EntityPrehistoric entity, float f, float f1, float f2, float f3, float f4, float f5) {
     }
 
     public void renderHeldItem(RenderPrehistoric renderPrehistoric, EntityLivingBase entity, float i) {

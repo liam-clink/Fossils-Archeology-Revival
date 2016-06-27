@@ -12,8 +12,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import fossilsarcheology.Revival;
-import fossilsarcheology.server.entity.mob.test.EntityFishBase;
-import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
+import fossilsarcheology.server.entity.EntityFishBase;
+import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.enums.EnumPrehistoric;
 import fossilsarcheology.server.item.FAItemRegistry;
 import fossilsarcheology.server.message.MessageUpdateNautilus;
@@ -114,7 +114,7 @@ public class EntityNautilus extends EntityFishBase {
                 return (!(entity instanceof EntityFishBase));
             }
         };
-        List<EntityNewPrehistoric> list = worldObj.selectEntitiesWithinAABB(Entity.class, this.boundingBox.expand(2.0D, 2.0D, 2.0D), targetEntitySelector);
+        List<EntityPrehistoric> list = worldObj.selectEntitiesWithinAABB(Entity.class, this.boundingBox.expand(2.0D, 2.0D, 2.0D), targetEntitySelector);
         Collections.sort(list, theNearestAttackableTargetSorter);
 
         if (list.isEmpty()) {
@@ -133,8 +133,8 @@ public class EntityNautilus extends EntityFishBase {
         if (entity instanceof EntityPlayer) {
             return true;
         }
-        if (entity instanceof EntityNewPrehistoric) {
-            return ((EntityNewPrehistoric) entity).type.diet.getFearIndex() >= 2;
+        if (entity instanceof EntityPrehistoric) {
+            return ((EntityPrehistoric) entity).type.diet.getFearIndex() >= 2;
         }
         return entity.width >= 1.2;
     }

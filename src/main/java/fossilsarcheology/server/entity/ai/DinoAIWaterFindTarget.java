@@ -1,4 +1,4 @@
-package fossilsarcheology.server.entity.mob.test;
+package fossilsarcheology.server.entity.ai;
 
 import java.util.Random;
 
@@ -7,18 +7,18 @@ import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-
+import fossilsarcheology.server.entity.EntityPrehistoricSwimming;
 import fossilsarcheology.server.enums.EnumOrderType;
 
 public class DinoAIWaterFindTarget extends EntityAIBase {
-	private EntitySwimmingPrehistoric prehistoric;
+	private EntityPrehistoricSwimming prehistoric;
 	private int shelterX;
 	private int shelterY;
 	private int shelterZ;
 	private World theWorld;
 	private boolean canGoOnLand;
 	
-	public DinoAIWaterFindTarget(EntitySwimmingPrehistoric prehistoric, boolean canGoOnLand) {
+	public DinoAIWaterFindTarget(EntityPrehistoricSwimming prehistoric, boolean canGoOnLand) {
 		this.prehistoric = prehistoric;
 		this.theWorld = prehistoric.worldObj;
 		this.canGoOnLand = canGoOnLand;

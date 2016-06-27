@@ -1,8 +1,8 @@
 package fossilsarcheology.client.model.prehistoric;
 
 import fossilsarcheology.client.model.prehistoric.test.ModelNewPrehistoric;
+import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.entity.mob.EntityLiopleurodon;
-import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
 import net.ilexiconn.llibrary.client.model.ModelAnimator;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
@@ -127,7 +127,7 @@ public class ModelLiopleurodon extends ModelNewPrehistoric {
 		blockMovement(f, f1, f2, f3, f4, f5, (Entity) entity);
 		this.resetToDefaultPose();
 		setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
-		animator.setAnimation(EntityNewPrehistoric.SPEAK_ANIMATION);
+		animator.setAnimation(EntityPrehistoric.SPEAK_ANIMATION);
         animator.startKeyframe(10);
         ModelUtils.rotate(animator, JawBottom, 15, 0, 0);
         animator.endKeyframe();
@@ -166,7 +166,7 @@ public class ModelLiopleurodon extends ModelNewPrehistoric {
 	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
 		AdvancedModelRenderer[] tailParts = {this.Tail, this.Tail1, this.Tail2};
 		AdvancedModelRenderer[] neckParts = {this.Neck, this.Head};
-		if(((EntityNewPrehistoric) entity).isSkeleton()){
+		if(((EntityPrehistoric) entity).isSkeleton()){
 			return;
 		}
 		if(entity.riddenByEntity == null){
@@ -174,7 +174,7 @@ public class ModelLiopleurodon extends ModelNewPrehistoric {
 			ModelUtils.faceTargetMod(Head, f3, f4, 0.5F);
 		}
 		{
-			float sitProgress = ((EntityNewPrehistoric) (entity)).weakProgress;
+			float sitProgress = ((EntityPrehistoric) (entity)).weakProgress;
 			sitAnimationRotationPrev(BackFlipper_Left, sitProgress, (float)Math.toRadians(30.0D), -((float)Math.toRadians(5.0D)), -((float)Math.toRadians(50.0D)));
 			sitAnimationRotationPrev(FrontFlipper_Left, sitProgress, (float)Math.toRadians(10.0D), (float)Math.toRadians(15.0D), -((float)Math.toRadians(44.0D)));
 			sitAnimationRotationPrev(FrontFlipper_Right, sitProgress, (float)Math.toRadians(10.0D), -((float)Math.toRadians(15.0D)), (float)Math.toRadians(44.0D));
@@ -198,6 +198,6 @@ public class ModelLiopleurodon extends ModelNewPrehistoric {
 		this.flap(FrontFlipper_Left, speed2, 0.6F, false, 0, 0, f, f1);
 		this.flap(BackFlipper_Right, speed2, 0.6F, false, 0, 0, f, f1);
 		this.flap(BackFlipper_Left, speed2, 0.6F, true, 0, 0, f, f1);
-		((EntityNewPrehistoric) entity).chainBuffer.applyChainSwingBuffer((ModelRenderer[]) tailParts);
+		((EntityPrehistoric) entity).chainBuffer.applyChainSwingBuffer((ModelRenderer[]) tailParts);
 	}
 }

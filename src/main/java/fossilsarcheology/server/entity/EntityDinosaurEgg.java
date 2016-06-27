@@ -1,7 +1,6 @@
 package fossilsarcheology.server.entity;
 
 import fossilsarcheology.Revival;
-import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
 import fossilsarcheology.server.enums.EnumOrderType;
 import fossilsarcheology.server.enums.EnumPrehistoric;
 import fossilsarcheology.server.handler.FossilAchievementHandler;
@@ -23,7 +22,7 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 
-public class EntityDinoEgg extends EntityLiving implements IEntityAdditionalSpawnData {
+public class EntityDinosaurEgg extends EntityLiving implements IEntityAdditionalSpawnData {
 	public static final int HATCHING_INDEX = 20;
 	public static int lastBirthTick;
 	public final int totalHatchTime;
@@ -31,7 +30,7 @@ public class EntityDinoEgg extends EntityLiving implements IEntityAdditionalSpaw
 	public String parentOwner;
 	private int hatchTime;
 
-	public EntityDinoEgg(World world, EnumPrehistoric prehistoric) {
+	public EntityDinosaurEgg(World world, EnumPrehistoric prehistoric) {
 		super(world);
 		this.parentOwner = "";
 		this.totalHatchTime = this.hatchTime;
@@ -41,7 +40,7 @@ public class EntityDinoEgg extends EntityLiving implements IEntityAdditionalSpaw
 		lastBirthTick = 0;
 	}
 
-	public EntityDinoEgg(World world) {
+	public EntityDinosaurEgg(World world) {
 		this(world, EnumPrehistoric.Triceratops);
 	}
 
@@ -55,7 +54,7 @@ public class EntityDinoEgg extends EntityLiving implements IEntityAdditionalSpaw
 		this.dataWatcher.addObject(HATCHING_INDEX, 0);
 	}
 
-	public EntityDinoEgg(World world, EnumPrehistoric prehistoric, EntityNewPrehistoric entity) {
+	public EntityDinosaurEgg(World world, EnumPrehistoric prehistoric, EntityPrehistoric entity) {
 		this(world, prehistoric);
 		this.parentOwner = entity.getCommandSenderName();
 	}
@@ -64,7 +63,7 @@ public class EntityDinoEgg extends EntityLiving implements IEntityAdditionalSpaw
 		return true;
 	}
 
-	public EntityDinoEgg(World world, double x, double y, double z, EnumPrehistoric prehistoric) {
+	public EntityDinosaurEgg(World world, double x, double y, double z, EnumPrehistoric prehistoric) {
 		this(world, prehistoric);
 		this.setPosition(x, y, z);
 		this.motionX = 0.0D;
@@ -139,12 +138,12 @@ public class EntityDinoEgg extends EntityLiving implements IEntityAdditionalSpaw
 
 			Entity entity = this.selfType.invokeClass(this.worldObj);
 			if (entity != null) {
-				if (entity instanceof EntityNewPrehistoric) {
+				if (entity instanceof EntityPrehistoric) {
 					if (player != null) {
 						player.addStat(FossilAchievementHandler.firstDino, 1);
 					
 					}
-					EntityNewPrehistoric prehistoricEntity = (EntityNewPrehistoric) entity;
+					EntityPrehistoric prehistoricEntity = (EntityPrehistoric) entity;
 					if (prehistoricEntity.type.isTameable() && player != null) {
 						if (prehistoricEntity.type != EnumPrehistoric.Tyrannosaurus && prehistoricEntity.type != EnumPrehistoric.Allosaurus && prehistoricEntity.type != EnumPrehistoric.Sarcosuchus) {
 							prehistoricEntity.setTamed(true);

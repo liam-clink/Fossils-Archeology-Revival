@@ -9,10 +9,10 @@ import net.minecraft.world.biome.BiomeGenBase;
 
 import java.util.Random;
 
-public class BasicBiome extends BiomeGenBase {
+public class FossilsBiome extends BiomeGenBase {
     public int genSelector;
 
-    public BasicBiome(int id, Block topBlock, Block fillerBlock, boolean clearAnimals, int lifeSelector, int genSelector) {
+    public FossilsBiome(int id, Block topBlock, Block fillerBlock, boolean clearAnimals, int lifeSelector, int genSelector) {
         super(id);
         this.topBlock = topBlock;
         this.fillerBlock = fillerBlock;

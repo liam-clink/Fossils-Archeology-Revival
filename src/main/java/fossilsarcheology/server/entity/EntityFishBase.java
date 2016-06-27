@@ -1,6 +1,7 @@
-package fossilsarcheology.server.entity.mob.test;
+package fossilsarcheology.server.entity;
 
 import fossilsarcheology.Revival;
+import fossilsarcheology.server.entity.ai.FishAIWaterFindTarget;
 import fossilsarcheology.server.entity.mob.EntityNautilus;
 import fossilsarcheology.server.enums.EnumPrehistoric;
 import fossilsarcheology.server.item.FAItemRegistry;

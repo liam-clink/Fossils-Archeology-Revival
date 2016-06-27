@@ -1,9 +1,9 @@
 package fossilsarcheology.client.model.prehistoric;
 
 import fossilsarcheology.client.model.prehistoric.test.ModelNewPrehistoric;
+import fossilsarcheology.server.entity.EntityPrehistoricFlying;
+import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.entity.mob.EntityPterosaur;
-import fossilsarcheology.server.entity.mob.test.EntityFlyingPrehistoric;
-import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
 import net.ilexiconn.llibrary.client.model.ModelAnimator;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
@@ -161,7 +161,7 @@ public class ModelPteranodon extends ModelNewPrehistoric {
         blockMovement(f, f1, f2, f3, f4, f5, (Entity) entity);
         this.resetToDefaultPose();
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
-        animator.setAnimation(EntityNewPrehistoric.SPEAK_ANIMATION);
+        animator.setAnimation(EntityPrehistoric.SPEAK_ANIMATION);
         animator.startKeyframe(10);
         ModelUtils.rotate(animator, Beak1, 40, 0, 0);
         animator.endKeyframe();
@@ -185,7 +185,7 @@ public class ModelPteranodon extends ModelNewPrehistoric {
         AdvancedModelRenderer[] neckParts = {this.Neck1, this.Neck2, this.Head};
         AdvancedModelRenderer[] rightWingParts = {this.WingR1, this.WingR1Child_1};
         AdvancedModelRenderer[] leftWingParts = {this.WingL1, this.WingL1Child_1};
-		if(((EntityNewPrehistoric) entity).isSkeleton()){
+		if(((EntityPrehistoric) entity).isSkeleton()){
 			return;
 		}
         ModelUtils.faceTargetMod(Neck1, f3, f4, 0.3F);
@@ -197,7 +197,7 @@ public class ModelPteranodon extends ModelNewPrehistoric {
         this.bob(Body, speed, -0.3F, false, entity.ticksExisted, 1);
         this.chainWave(neckParts, speed, 0.15F, 3, entity.ticksExisted, 1);
         {
-            float sitProgress = ((EntityNewPrehistoric) entity).sleepProgress;
+            float sitProgress = ((EntityPrehistoric) entity).sleepProgress;
             sitAnimationRotation(WingL1, sitProgress, (float) Math.toRadians(23.48D), (float) Math.toRadians(1D), -(float) Math.toRadians(8D));
             sitAnimationRotation(Body, sitProgress, -((float) Math.toRadians(23.43D)), -((float) Math.toRadians(7.83D)), 0);
             sitAnimationRotation(Neck1, sitProgress, -((float) Math.toRadians(55D)), (float) Math.toRadians(5.22D), (float) Math.toRadians(18.26D));
@@ -208,7 +208,7 @@ public class ModelPteranodon extends ModelNewPrehistoric {
             sitAnimationPos(LegLeft, sitProgress, -0.4F, 0, -3.4F);
         }
         {
-            float sitProgress = ((EntityFlyingPrehistoric) entity).flyProgress;
+            float sitProgress = ((EntityPrehistoricFlying) entity).flyProgress;
             sitAnimationRotation(WingR1Child, sitProgress, (float) Math.toRadians(18.999999959540737D), (float) Math.toRadians(2.609999910412874D), (float) Math.toRadians(58.919998497711354D));
             sitAnimationRotation(WingR1Child_1, sitProgress, 0, -(float) Math.toRadians(180D), 0);
             sitAnimationRotation(WingR1, sitProgress, (float) Math.toRadians(7.0D), (float) Math.toRadians(19.0D), ((float) Math.toRadians(55.0D)));

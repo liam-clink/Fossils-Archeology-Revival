@@ -45,14 +45,14 @@ import fossilsarcheology.api.FoodMappings;
 import fossilsarcheology.client.gui.elements.FossilGuiButton;
 import fossilsarcheology.client.gui.elements.FossilGuiPage;
 import fossilsarcheology.server.container.PediaContainer;
-import fossilsarcheology.server.entity.EntityDinoEgg;
+import fossilsarcheology.server.entity.EntityDinosaurEgg;
+import fossilsarcheology.server.entity.EntityFishBase;
+import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.entity.mob.EntityPregnantCow;
 import fossilsarcheology.server.entity.mob.EntityPregnantHorse;
 import fossilsarcheology.server.entity.mob.EntityPregnantPig;
 import fossilsarcheology.server.entity.mob.EntityPregnantSheep;
 import fossilsarcheology.server.entity.mob.EntityQuagga;
-import fossilsarcheology.server.entity.mob.test.EntityFishBase;
-import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
 import fossilsarcheology.server.enums.EnumPrehistoric;
 
 @SideOnly(Side.CLIENT)
@@ -222,7 +222,7 @@ public class GuiPedia extends GuiContainer {
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-		if (Revival.toPedia instanceof EntityNewPrehistoric || Revival.toPedia instanceof EntityFishBase || Revival.toPedia instanceof EntityQuagga) {
+		if (Revival.toPedia instanceof EntityPrehistoric || Revival.toPedia instanceof EntityFishBase || Revival.toPedia instanceof EntityQuagga) {
 			this.buttonNextPage.enabled = true;
 		}
 		if (bookPages == 0) {
@@ -269,8 +269,8 @@ public class GuiPedia extends GuiContainer {
 
 			if (Revival.toPedia instanceof EntityLivingBase) {
 				renderFirstPage((EntityLivingBase) Revival.toPedia);
-			} else if (Revival.toPedia instanceof EntityDinoEgg) {
-				renderFirstPage((EntityDinoEgg) Revival.toPedia);
+			} else if (Revival.toPedia instanceof EntityDinosaurEgg) {
+				renderFirstPage((EntityDinosaurEgg) Revival.toPedia);
 			} else if (Revival.toPedia instanceof EntityFishBase) {
 				renderFirstPage((EntityFishBase) Revival.toPedia);
 			}
@@ -296,8 +296,8 @@ public class GuiPedia extends GuiContainer {
 		 * Revival.toPedia).showPedia(this); }
 		 */
 		else {
-			if (Revival.toPedia instanceof EntityNewPrehistoric) {
-				showPrehistoricBio(((EntityNewPrehistoric) Revival.toPedia).type.toString());
+			if (Revival.toPedia instanceof EntityPrehistoric) {
+				showPrehistoricBio(((EntityPrehistoric) Revival.toPedia).type.toString());
 			} else if (Revival.toPedia instanceof EntityFishBase) {
 				showPrehistoricBio(((EntityFishBase) Revival.toPedia).selfType.toString());
 			} else if (Revival.toPedia instanceof EntityQuagga) {
@@ -350,8 +350,8 @@ public class GuiPedia extends GuiContainer {
 	public void renderFirstPage(Entity entity) {
 		reset();
 		int wordLength = 90;
-		if (entity instanceof EntityNewPrehistoric) {
-			EntityNewPrehistoric dino = (EntityNewPrehistoric) entity;
+		if (entity instanceof EntityPrehistoric) {
+			EntityPrehistoric dino = (EntityPrehistoric) entity;
 			renderFirstPageRight(dino);
 			GL11.glPushMatrix();
 			String s = StatCollector.translateToLocal(entity.getCommandSenderName());
@@ -472,8 +472,8 @@ public class GuiPedia extends GuiContainer {
 				}
 			}
 		}
-		if (entity instanceof EntityDinoEgg) {
-			EntityDinoEgg egg = (EntityDinoEgg) entity;
+		if (entity instanceof EntityDinosaurEgg) {
+			EntityDinosaurEgg egg = (EntityDinosaurEgg) entity;
 			GL11.glPushMatrix();
 			String s = StatCollector.translateToLocal(egg.selfType.toString() + " " + StatCollector.translateToLocal("pedia.egg"));
 			GL11.glScalef(1.5F, 1.5F, 1.5F);
@@ -489,7 +489,7 @@ public class GuiPedia extends GuiContainer {
 				if (egg.isInWater()) {
 					s1 = StatCollector.translateToLocal("pedia.egg.status" + " " + EnumChatFormatting.AQUA + StatCollector.translateToLocal("pedia.egg.status.wet"));
 				} else {
-					if ((egg.getBirthTick() >= 0 && egg.getBirthTick() > EntityDinoEgg.lastBirthTick) || egg.getBirthTick() >= 100) {
+					if ((egg.getBirthTick() >= 0 && egg.getBirthTick() > EntityDinosaurEgg.lastBirthTick) || egg.getBirthTick() >= 100) {
 						s1 = StatCollector.translateToLocal("pedia.egg.status") + " " + EnumChatFormatting.GOLD + StatCollector.translateToLocal("pedia.egg.status.warm");
 					} else {
 						s1 = StatCollector.translateToLocal("pedia.egg.status") + " " + EnumChatFormatting.BLUE + StatCollector.translateToLocal("pedia.egg.status.cold");
@@ -511,8 +511,8 @@ public class GuiPedia extends GuiContainer {
 	}
 
 	private void renderFirstPageRight(EntityLivingBase entity) {
-		if (entity instanceof EntityNewPrehistoric) {
-			EntityNewPrehistoric dino = (EntityNewPrehistoric) entity;
+		if (entity instanceof EntityPrehistoric) {
+			EntityPrehistoric dino = (EntityPrehistoric) entity;
 			{
 
 				float scale = 1.75F;
@@ -623,11 +623,11 @@ public class GuiPedia extends GuiContainer {
 			if(Revival.toPedia instanceof EntityPregnantHorse){
 				renderDinosaur(k + 100, l + 80, 50, 0, 0, ((EntityPregnantHorse) Revival.toPedia).horse);
 			}
-			if (Revival.toPedia instanceof EntityDinoEgg) {
-				renderEgg(k + 100, l + 80, 150, 0, 0, (EntityDinoEgg) Revival.toPedia);
+			if (Revival.toPedia instanceof EntityDinosaurEgg) {
+				renderEgg(k + 100, l + 80, 150, 0, 0, (EntityDinosaurEgg) Revival.toPedia);
 			} else if (Revival.toPedia instanceof EntityLivingBase) {
-				if (Revival.toPedia instanceof EntityNewPrehistoric) {
-					renderDinosaur(k + 100, l + 80, Math.round(2 * ((EntityNewPrehistoric) Revival.toPedia).pediaScale), 0, 0, (EntityLivingBase) Revival.toPedia);
+				if (Revival.toPedia instanceof EntityPrehistoric) {
+					renderDinosaur(k + 100, l + 80, Math.round(2 * ((EntityPrehistoric) Revival.toPedia).pediaScale), 0, 0, (EntityLivingBase) Revival.toPedia);
 
 				} else {
 					if (Revival.toPedia instanceof EntityQuagga) {
@@ -711,7 +711,7 @@ public class GuiPedia extends GuiContainer {
 		GL11.glPushMatrix();
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
 		GL11.glTranslatef((float) posX, (float) posY, 50.0F);
-		if (mob instanceof EntityNewPrehistoric) {
+		if (mob instanceof EntityPrehistoric) {
 			GL11.glScalef((float) -(scaleValue), -(float) scaleValue, (float) scaleValue);
 		} else {
 			GL11.glScalef((float) (scaleValue), (float) scaleValue, (float) scaleValue);
@@ -733,8 +733,8 @@ public class GuiPedia extends GuiContainer {
 		mob.prevRotationYawHead = mob.rotationYaw;
 		GL11.glTranslatef(0.0F, mob.yOffset, 0.0F);
 		RenderManager.instance.playerViewY = 180.0F;
-		if (mob instanceof EntityNewPrehistoric) {
-			GL11.glScalef(-((EntityNewPrehistoric) mob).getAgeScale(), -((EntityNewPrehistoric) mob).getAgeScale(), -((EntityNewPrehistoric) mob).getAgeScale());
+		if (mob instanceof EntityPrehistoric) {
+			GL11.glScalef(-((EntityPrehistoric) mob).getAgeScale(), -((EntityPrehistoric) mob).getAgeScale(), -((EntityPrehistoric) mob).getAgeScale());
 		}
 		RenderManager.instance.renderEntityWithPosYaw(mob, 0.0D, 0.0D, 0.0D, 0.0F, 0F);
 		mob.renderYawOffset = f2;

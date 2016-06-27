@@ -1,7 +1,7 @@
 package fossilsarcheology.server.entity.toy;
 
-import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
-import fossilsarcheology.server.entity.mob.test.EntityToyBase;
+import fossilsarcheology.server.entity.EntityPrehistoric;
+import fossilsarcheology.server.entity.EntityToyBase;
 import fossilsarcheology.server.item.FAItemRegistry;
 import net.ilexiconn.llibrary.server.animation.Animation;
 import net.ilexiconn.llibrary.server.animation.AnimationHandler;
@@ -119,8 +119,8 @@ public class EntityToyTetheredLog extends EntityToyBase implements IAnimatedEnti
     }
 
     protected void collideWithEntity(Entity entity) {
-        if (entity instanceof EntityNewPrehistoric && ((EntityNewPrehistoric) entity).ticksTillPlay == 0) {
-            ((EntityNewPrehistoric) entity).doPlayBonus(toyBonus);
+        if (entity instanceof EntityPrehistoric && ((EntityPrehistoric) entity).ticksTillPlay == 0) {
+            ((EntityPrehistoric) entity).doPlayBonus(toyBonus);
             if (this.getAnimation() != KNOCKBACK_ANIMATION) {
                 this.setAnimation(KNOCKBACK_ANIMATION);
             }

@@ -1,18 +1,18 @@
 package fossilsarcheology.server.entity.ai;
 
-import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
+import fossilsarcheology.server.entity.EntityPrehistoric;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.RandomPositionGenerator;
 import net.minecraft.util.Vec3;
 
 public class DinoAIWander extends EntityAIBase {
-	private EntityNewPrehistoric prehistoric;
+	private EntityPrehistoric prehistoric;
 	private double xPosition;
 	private double yPosition;
 	private double zPosition;
 	private double speed;
 
-	public DinoAIWander(EntityNewPrehistoric prehistoric, double speed) {
+	public DinoAIWander(EntityPrehistoric prehistoric, double speed) {
 		this.prehistoric = prehistoric;
 		this.speed = speed;
 		this.setMutexBits(1);

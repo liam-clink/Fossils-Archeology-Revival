@@ -6,8 +6,8 @@ import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import fossilsarcheology.client.model.prehistoric.test.ModelNewPrehistoric;
-import fossilsarcheology.server.entity.mob.test.EntityFlyingPrehistoric;
-import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
+import fossilsarcheology.server.entity.EntityPrehistoricFlying;
+import fossilsarcheology.server.entity.EntityPrehistoric;
 
 public class ModelConfuciusornis extends ModelNewPrehistoric {
 	public AdvancedModelRenderer rightLeg;
@@ -182,7 +182,7 @@ public class ModelConfuciusornis extends ModelNewPrehistoric {
 		blockMovement(f, f1, f2, f3, f4, f5, (Entity) entity);
 		this.resetToDefaultPose();
 		setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
-		animator.setAnimation(EntityNewPrehistoric.SPEAK_ANIMATION);
+		animator.setAnimation(EntityPrehistoric.SPEAK_ANIMATION);
         animator.startKeyframe(10);
         ModelUtils.rotate(animator, lowerBeak, 29, 0, 0);
         animator.endKeyframe();
@@ -196,7 +196,7 @@ public class ModelConfuciusornis extends ModelNewPrehistoric {
         AdvancedModelRenderer[] leftWingParts = {this.leftWing, this.leftWing2, this.leftWing3};
         AdvancedModelRenderer[] leftTailParts = {this.leftTail1, this.leftTail2, this.leftTail3, this.leftTailFan};
         AdvancedModelRenderer[] rightTailParts = {this.rightTail1, this.rightTail2, this.rightTail3, this.rightTailFan};
-		if(((EntityNewPrehistoric) entity).isSkeleton()){
+		if(((EntityPrehistoric) entity).isSkeleton()){
 			return;
 		}
         ModelUtils.faceTargetMod(neck, f3, f4, 0.5F);
@@ -207,7 +207,7 @@ public class ModelConfuciusornis extends ModelNewPrehistoric {
         this.bob(body, speed, -0.3F, false, entity.ticksExisted, 1);
         this.chainWave(neckParts, speed, 0.15F, 3, entity.ticksExisted, 1);
 		{
-            float sitProgress = ((EntityNewPrehistoric) entity).sitProgress;
+            float sitProgress = ((EntityPrehistoric) entity).sitProgress;
 			sitAnimationRotationPrev(leftLeg, sitProgress, 0, 0, (float)Math.toRadians(1.0D));
 	        sitAnimationRotationPrev(leftWing2, sitProgress, (float)Math.toRadians(93.91D), 0, 0);
 	        sitAnimationRotationPrev(RightWing, sitProgress, -((float)Math.toRadians(8.0D)), 0, 0);
@@ -230,7 +230,7 @@ public class ModelConfuciusornis extends ModelNewPrehistoric {
 	        sitAnimationRotationPrev(RightWing3, sitProgress, (float)Math.toRadians(5.22D), 0, 0);
 		}
 		{
-            float sitProgress = ((EntityNewPrehistoric) entity).sleepProgress;
+            float sitProgress = ((EntityPrehistoric) entity).sleepProgress;
             sitAnimationRotationPrev(tailFeathers, sitProgress, (float)Math.toRadians(78.26D), 0, 0);
             sitAnimationRotationPrev(neck, sitProgress, (float)Math.toRadians(62.61D), (float)Math.toRadians(15.65D), (float)Math.toRadians(2.61D));
             sitAnimationRotationPrev(RightWing2, sitProgress, (float)Math.toRadians(93.91D), 0, 0);
@@ -253,7 +253,7 @@ public class ModelConfuciusornis extends ModelNewPrehistoric {
             sitAnimationRotationPrev(head, sitProgress, -((float)Math.toRadians(18.0D)), -((float)Math.toRadians(52.17D)), (float)Math.toRadians(78.26D));
 		}
 		{
-            float sitProgress = ((EntityFlyingPrehistoric) entity).flyProgress;
+            float sitProgress = ((EntityPrehistoricFlying) entity).flyProgress;
             sitAnimationRotationPrev(rightTailFan, sitProgress, (float)Math.toRadians(1.0D), 0, 0);
             sitAnimationRotationPrev(RightWing, sitProgress, -((float)Math.toRadians(8.0D)), 0, (float)Math.toRadians(90.0D));
             sitAnimationRotationPrev(neck, sitProgress, (float)Math.toRadians(80.0D), 0, 0);
@@ -291,7 +291,7 @@ public class ModelConfuciusornis extends ModelNewPrehistoric {
                 this.chainWave(neckParts, speed, 0.4F, -3, f, f1);
             }
 		}
-        ((EntityNewPrehistoric) entity).chainBuffer.applyChainSwingBuffer((ModelRenderer[]) rightTailParts);
-        ((EntityNewPrehistoric) entity).chainBuffer.applyChainSwingBuffer((ModelRenderer[]) leftTailParts);
+        ((EntityPrehistoric) entity).chainBuffer.applyChainSwingBuffer((ModelRenderer[]) rightTailParts);
+        ((EntityPrehistoric) entity).chainBuffer.applyChainSwingBuffer((ModelRenderer[]) leftTailParts);
 	}
 }

@@ -13,8 +13,8 @@ import net.minecraftforge.common.ChestGenHooks;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import fossilsarcheology.Revival;
 import fossilsarcheology.server.block.FABlockRegistry;
-import fossilsarcheology.server.entity.mob.test.EntityFishBase;
-import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
+import fossilsarcheology.server.entity.EntityFishBase;
+import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.item.FAItemRegistry;
 
 public class ServerProxy {
@@ -60,7 +60,7 @@ public class ServerProxy {
     public void animate(int animateID) {
     }
 
-    public void calculateChainBuffer(EntityNewPrehistoric entity) {
+    public void calculateChainBuffer(EntityPrehistoric entity) {
 
     }
 

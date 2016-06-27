@@ -13,15 +13,15 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.entity.ai.DinoAIAttackOnCollide;
+import fossilsarcheology.server.entity.ai.DinoAIFeeder;
 import fossilsarcheology.server.entity.ai.DinoAIFollowOwner;
 import fossilsarcheology.server.entity.ai.DinoAIHunt;
 import fossilsarcheology.server.entity.ai.DinoAILookIdle;
 import fossilsarcheology.server.entity.ai.DinoAIRiding;
 import fossilsarcheology.server.entity.ai.DinoAIWander;
 import fossilsarcheology.server.entity.ai.DinoAIWatchClosest;
-import fossilsarcheology.server.entity.mob.test.DinoAIFeeder;
-import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
 import fossilsarcheology.server.enums.EnumPrehistoric;
 import fossilsarcheology.server.enums.EnumPrehistoricAI.Activity;
 import fossilsarcheology.server.enums.EnumPrehistoricAI.Attacking;
@@ -35,7 +35,7 @@ import fossilsarcheology.server.enums.EnumPrehistoricAI.Taming;
 import fossilsarcheology.server.enums.EnumPrehistoricAI.Untaming;
 import fossilsarcheology.server.enums.EnumPrehistoricAI.WaterAbility;
 
-public class EntityBrachiosaurus extends EntityNewPrehistoric {
+public class EntityBrachiosaurus extends EntityPrehistoric {
 
     public EntityBrachiosaurus(World world) {
         super(world, EnumPrehistoric.Brachiosaurus, 2, 46, 20, 200, 0.2, 0.4);

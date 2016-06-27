@@ -1,4 +1,4 @@
-package fossilsarcheology.server.entity.mob.test;
+package fossilsarcheology.server.entity;
 
 import fossilsarcheology.server.enums.EnumPrehistoric;
 import net.minecraft.block.material.Material;
@@ -9,7 +9,7 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
-public abstract class EntityFlyingPrehistoric extends EntityNewPrehistoric {
+public abstract class EntityPrehistoricFlying extends EntityPrehistoric {
 
 	public ChunkCoordinates currentTarget;
 	public static final int FLYING_INDEX = 29;
@@ -17,7 +17,7 @@ public abstract class EntityFlyingPrehistoric extends EntityNewPrehistoric {
 	public float flyProgress;
 	private int ticksFlying;
 
-	public EntityFlyingPrehistoric(World world, EnumPrehistoric type, double baseDamage, double maxDamage, double baseHealth, double maxHealth, double baseSpeed, double maxSpeed) {
+	public EntityPrehistoricFlying(World world, EnumPrehistoric type, double baseDamage, double maxDamage, double baseHealth, double maxHealth, double baseSpeed, double maxSpeed) {
 		super(world, type, baseDamage, maxDamage, baseHealth, maxHealth, baseSpeed, maxSpeed);
 	}
 

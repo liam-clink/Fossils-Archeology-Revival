@@ -1,6 +1,6 @@
 package fossilsarcheology.server.container;
 
-import fossilsarcheology.server.block.entity.TileEntityNewFeeder;
+import fossilsarcheology.server.block.entity.TileEntityFeeder;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -18,10 +18,10 @@ public class FeederContainer extends Container {
     public static final int CARN_INPUT = 0, HERB_INPUT = 1;
     int lastVegValue = 0;
     int lastMeatValue = 0;
-    private TileEntityNewFeeder feeder;
+    private TileEntityFeeder feeder;
 
     public FeederContainer(IInventory var1, TileEntity var2) {
-        this.feeder = (TileEntityNewFeeder) var2;
+        this.feeder = (TileEntityFeeder) var2;
         this.addSlotToContainer(new Slot(this.feeder, 0, 60, 62));
         this.addSlotToContainer(new Slot(this.feeder, 1, 104, 62));
         int var3;

@@ -1,5 +1,6 @@
-package fossilsarcheology.server.entity.mob.test;
+package fossilsarcheology.server.entity.ai;
 
+import fossilsarcheology.server.entity.EntityPrehistoricSwimming;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -7,10 +8,10 @@ import net.minecraft.world.World;
 
 public class DinoAIMakeFish extends EntityAIBase {
 
-	private EntitySwimmingPrehistoric dinosaur;
+	private EntityPrehistoricSwimming dinosaur;
 	private World world;
 
-	public DinoAIMakeFish(EntitySwimmingPrehistoric dinosaur) {
+	public DinoAIMakeFish(EntityPrehistoricSwimming dinosaur) {
 		this.dinosaur = dinosaur;
 		this.world = dinosaur.worldObj;
 	}

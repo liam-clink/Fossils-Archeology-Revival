@@ -1,8 +1,8 @@
 package fossilsarcheology.client.model.prehistoric;
 
 import fossilsarcheology.client.model.prehistoric.test.ModelNewPrehistoric;
+import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.entity.mob.EntityTyrannosaurus;
-import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
 import net.ilexiconn.llibrary.client.model.ModelAnimator;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
@@ -197,7 +197,7 @@ public class ModelTyrannosaurus extends ModelNewPrehistoric {
         blockMovement(f, f1, f2, f3, f4, f5, (Entity) entity);
         this.resetToDefaultPose();
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
-        animator.setAnimation(EntityNewPrehistoric.SPEAK_ANIMATION);
+        animator.setAnimation(EntityPrehistoric.SPEAK_ANIMATION);
         animator.startKeyframe(10);
         ModelUtils.rotate(animator, neck, 15, 0, 0);
         ModelUtils.rotate(animator, head, -20, 0, 0);
@@ -246,7 +246,7 @@ public class ModelTyrannosaurus extends ModelNewPrehistoric {
         ModelUtils.rotateToInit(animator, head);
         animator.endKeyframe();
         animator.resetKeyframe(20);
-		if(((EntityNewPrehistoric) entity).isSkeleton()){
+		if(((EntityPrehistoric) entity).isSkeleton()){
 			return;
 		}
         if (mob.getAnimation() == EntityTyrannosaurus.NO_ANIMATION && !mob.isActuallyWeak()) {
@@ -264,14 +264,14 @@ public class ModelTyrannosaurus extends ModelNewPrehistoric {
         AdvancedModelRenderer[] neckParts = {this.neck, this.head};
         AdvancedModelRenderer[] leftArmParts = {this.leftUpperArm, this.leftLowerArm};
         AdvancedModelRenderer[] rightArmParts = {this.rightUpperArm, this.rightLowerArm};
-		if(((EntityNewPrehistoric) entity).isSkeleton()){
+		if(((EntityPrehistoric) entity).isSkeleton()){
 			return;
 		}
         float speed = 0.4F;
         float speed2 = 0.1F;
         float degree = 1F;
         {
-            float sitProgress = ((EntityNewPrehistoric) (entity)).sitProgress;
+            float sitProgress = ((EntityPrehistoric) (entity)).sitProgress;
             sitAnimationRotation(neck, sitProgress, -((float) Math.toRadians(15D)), 0, 0);
             sitAnimationRotation(leftLowerArm, sitProgress, -((float) Math.toRadians(30.0D)), 0, 0);
             sitAnimationRotation(lowerBody, sitProgress, -((float) Math.toRadians(13.04D)), 0, 0);
@@ -301,7 +301,7 @@ public class ModelTyrannosaurus extends ModelNewPrehistoric {
             sitAnimationPos(leftThigh, sitProgress, 0F, 16.90F - ModelUtils.getDefaultPositionY(leftThigh), 0F);
         }
         {
-            float sitProgress = ((EntityNewPrehistoric) (entity)).sleepProgress;
+            float sitProgress = ((EntityPrehistoric) (entity)).sleepProgress;
 
             sitAnimationRotation(leftLeg, sitProgress, -((float) Math.toRadians(40.0D)), 0, 0);
             sitAnimationRotation(leftUpperArm, sitProgress, (float) Math.toRadians(54.0D), 0, 0);
@@ -334,7 +334,7 @@ public class ModelTyrannosaurus extends ModelNewPrehistoric {
             sitAnimationPos(leftThigh, sitProgress, 0F, 16.90F - ModelUtils.getDefaultPositionY(leftThigh), 0F);
         }
         {
-            float sitProgress = ((EntityNewPrehistoric) (entity)).weakProgress;
+            float sitProgress = ((EntityPrehistoric) (entity)).weakProgress;
         	 sitAnimationRotationPrev(tail2, sitProgress, -((float)Math.toRadians(7.83D)), -((float)Math.toRadians(15.65D)), 0);
              sitAnimationRotationPrev(middleTailBackFeather, sitProgress, (float)Math.toRadians(10.08D), 0, 0);
              sitAnimationRotationPrev(neck, sitProgress, -(float)Math.toRadians(7D), 0, 0);
@@ -382,6 +382,6 @@ public class ModelTyrannosaurus extends ModelNewPrehistoric {
         this.chainWave(neckParts, speed2, degree * 0.25F, 3, f, f1);
         this.walk(upperBody, speed2, -0.1F, false, 1F, 0.1F, f, f1);
         this.chainWave(tailParts, speed2, degree * 0.15F, -3, f, f1);
-        ((EntityNewPrehistoric) entity).chainBuffer.applyChainSwingBuffer((ModelRenderer[]) tailParts);
+        ((EntityPrehistoric) entity).chainBuffer.applyChainSwingBuffer((ModelRenderer[]) tailParts);
     }
 }

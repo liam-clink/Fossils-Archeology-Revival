@@ -5,8 +5,8 @@ import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
 import net.minecraft.entity.Entity;
 import fossilsarcheology.client.model.prehistoric.test.ModelNewPrehistoric;
+import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.entity.mob.EntityMammoth;
-import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
 
 public class ModelMammoth extends ModelNewPrehistoric {
     public AdvancedModelRenderer leftFrontLeg;
@@ -200,7 +200,7 @@ public class ModelMammoth extends ModelNewPrehistoric {
         blockMovement(f, f1, f2, f3, f4, f5, (Entity) entity);
         this.resetToDefaultPose();
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
-        animator.setAnimation(EntityNewPrehistoric.SPEAK_ANIMATION);
+        animator.setAnimation(EntityPrehistoric.SPEAK_ANIMATION);
         animator.startKeyframe(20);
         ModelUtils.rotate(animator, head, -25, 0, 0);
         ModelUtils.rotate(animator, bottomjaw, 45, 0, 0);
@@ -236,7 +236,7 @@ public class ModelMammoth extends ModelNewPrehistoric {
         AdvancedModelRenderer[] tailParts = {this.Tail};
         AdvancedModelRenderer[] neckParts = {this.neck, this.head};
         AdvancedModelRenderer[] trunkParts = {this.nose2, this.nose3, this.nose4};
-		if(((EntityNewPrehistoric) entity).isSkeleton()){
+		if(((EntityPrehistoric) entity).isSkeleton()){
 			return;
 		}
         ModelUtils.faceTargetMod(neck, f3, f4, 0.5F);
@@ -256,7 +256,7 @@ public class ModelMammoth extends ModelNewPrehistoric {
         this.walk(leftHindLeg, speed2, 0.6F, false, 0F, 0.4F, f, f1);
         this.walk(rightHindLeg, speed2, 0.6F, true, 0F, 0.4F, f, f1);
         {
-            float sitProgress = ((EntityNewPrehistoric) (entity)).sitProgress;
+            float sitProgress = ((EntityPrehistoric) (entity)).sitProgress;
             sitAnimationRotation(Tail, sitProgress, (float) Math.toRadians(20.87D), 0, 0);
             sitAnimationRotation(EarR, sitProgress, (float) Math.toRadians(5.0D), -((float) Math.toRadians(30.0D)), 0);
             sitAnimationRotation(neck, sitProgress, -((float) Math.toRadians(13.04D)), 0, 0);
@@ -273,7 +273,7 @@ public class ModelMammoth extends ModelNewPrehistoric {
             sitAnimationPos(rightHindLeg, sitProgress, 0, 0, -3);
         }
         {
-            float sitProgress = ((EntityNewPrehistoric) (entity)).sleepProgress;
+            float sitProgress = ((EntityPrehistoric) (entity)).sleepProgress;
             sitAnimationRotation(nose3, sitProgress, (float) Math.toRadians(33.91D), -((float) Math.toRadians(15.65D)), -((float) Math.toRadians(2.61D)));
             sitAnimationRotation(lowerBodyFur, sitProgress, (float) Math.toRadians(13.04D), 0, 0);
             sitAnimationRotation(neck, sitProgress, -((float) Math.toRadians(23.48D)), (float) Math.toRadians(7.83D), 0);

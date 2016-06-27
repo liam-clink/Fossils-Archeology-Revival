@@ -12,16 +12,16 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.entity.ai.DinoAIAttackOnCollide;
 import fossilsarcheology.server.entity.ai.DinoAIAvoidEntity;
+import fossilsarcheology.server.entity.ai.DinoAIFeeder;
 import fossilsarcheology.server.entity.ai.DinoAIFollowOwner;
 import fossilsarcheology.server.entity.ai.DinoAIHunt;
 import fossilsarcheology.server.entity.ai.DinoAILookIdle;
 import fossilsarcheology.server.entity.ai.DinoAIRiding;
 import fossilsarcheology.server.entity.ai.DinoAIWander;
 import fossilsarcheology.server.entity.ai.DinoAIWatchClosest;
-import fossilsarcheology.server.entity.mob.test.DinoAIFeeder;
-import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
 import fossilsarcheology.server.enums.EnumPrehistoric;
 import fossilsarcheology.server.enums.EnumPrehistoricAI.Activity;
 import fossilsarcheology.server.enums.EnumPrehistoricAI.Attacking;
@@ -35,7 +35,7 @@ import fossilsarcheology.server.enums.EnumPrehistoricAI.Taming;
 import fossilsarcheology.server.enums.EnumPrehistoricAI.Untaming;
 import fossilsarcheology.server.enums.EnumPrehistoricAI.WaterAbility;
 
-public class EntitySmilodon extends EntityNewPrehistoric {
+public class EntitySmilodon extends EntityPrehistoric {
 
     public EntitySmilodon(World world) {
         super(world, EnumPrehistoric.Smilodon, 1, 5, 8, 34, 0.25, 0.3);

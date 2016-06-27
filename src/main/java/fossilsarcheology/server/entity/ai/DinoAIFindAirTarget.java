@@ -1,4 +1,4 @@
-package fossilsarcheology.server.entity.mob.test;
+package fossilsarcheology.server.entity.ai;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.ai.EntityAIBase;
@@ -8,14 +8,16 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
+import fossilsarcheology.server.entity.EntityPrehistoricFlying;
+
 public class DinoAIFindAirTarget extends EntityAIBase {
-	private EntityFlyingPrehistoric prehistoric;
+	private EntityPrehistoricFlying prehistoric;
 	private int shelterX;
 	private int shelterY;
 	private int shelterZ;
 	private World theWorld;
 
-	public DinoAIFindAirTarget(EntityFlyingPrehistoric prehistoric) {
+	public DinoAIFindAirTarget(EntityPrehistoricFlying prehistoric) {
 		this.prehistoric = prehistoric;
 		this.theWorld = prehistoric.worldObj;
 	}

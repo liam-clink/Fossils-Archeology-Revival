@@ -6,8 +6,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
-import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
-import fossilsarcheology.server.entity.mob.test.EntitySwimmingPrehistoric;
+import fossilsarcheology.server.entity.EntityPrehistoric;
+import fossilsarcheology.server.entity.EntityPrehistoricSwimming;
 import fossilsarcheology.server.item.FAItemRegistry;
 
 public class DinoAIRiding extends EntityAIBase {
@@ -15,10 +15,10 @@ public class DinoAIRiding extends EntityAIBase {
 	private final double speed;
 	public int FollowTimeWithoutWhip = 120;
 	private int lastTimeSeenWhip = -1;
-	private EntityNewPrehistoric prehistoric;
+	private EntityPrehistoric prehistoric;
 	private EntityPlayer rider;
 
-	public DinoAIRiding(EntityNewPrehistoric dinosaur, double speed) {
+	public DinoAIRiding(EntityPrehistoric dinosaur, double speed) {
 		super();
 		this.prehistoric = dinosaur;
 		this.speed = speed;
@@ -87,7 +87,7 @@ public class DinoAIRiding extends EntityAIBase {
 
 					if (speedPlayer > 0) {
 						if (!prehistoric.shouldDismountInWater(rider) && prehistoric.isInWater()) {
-							if (Math.abs(look.yCoord) > 0.4 && prehistoric instanceof EntitySwimmingPrehistoric) {
+							if (Math.abs(look.yCoord) > 0.4 && prehistoric instanceof EntityPrehistoricSwimming) {
 								prehistoric.motionY = Math.max(-0.15, Math.min(0.15, look.yCoord));
 							}
 							prehistoric.motionX = (double)(-MathHelper.sin(rider.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(rider.rotationPitch / 180.0F * (float)Math.PI));

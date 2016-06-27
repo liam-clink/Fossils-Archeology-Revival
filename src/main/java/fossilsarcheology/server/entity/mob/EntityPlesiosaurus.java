@@ -5,13 +5,13 @@ import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
+import fossilsarcheology.server.entity.EntityPrehistoricSwimming;
 import fossilsarcheology.server.entity.ai.DinoAIHunt;
 import fossilsarcheology.server.entity.ai.DinoAILookIdle;
+import fossilsarcheology.server.entity.ai.DinoAIMakeFish;
 import fossilsarcheology.server.entity.ai.DinoAIWatchClosest;
-import fossilsarcheology.server.entity.mob.test.DinoAIMakeFish;
-import fossilsarcheology.server.entity.mob.test.DinoAIWaterFeeder;
-import fossilsarcheology.server.entity.mob.test.DinoAIWaterFindTarget;
-import fossilsarcheology.server.entity.mob.test.EntitySwimmingPrehistoric;
+import fossilsarcheology.server.entity.ai.DinoAIWaterFeeder;
+import fossilsarcheology.server.entity.ai.DinoAIWaterFindTarget;
 import fossilsarcheology.server.enums.EnumPrehistoric;
 import fossilsarcheology.server.enums.EnumPrehistoricAI.Activity;
 import fossilsarcheology.server.enums.EnumPrehistoricAI.Attacking;
@@ -26,7 +26,7 @@ import fossilsarcheology.server.enums.EnumPrehistoricAI.Untaming;
 import fossilsarcheology.server.enums.EnumPrehistoricAI.WaterAbility;
 import fossilsarcheology.server.item.FAItemRegistry;
 
-public class EntityPlesiosaurus extends EntitySwimmingPrehistoric {
+public class EntityPlesiosaurus extends EntityPrehistoricSwimming {
 
     public EntityPlesiosaurus(World world) {
         super(world, EnumPrehistoric.Plesiosaur, 2, 12, 10, 30, 0.2, 0.3);

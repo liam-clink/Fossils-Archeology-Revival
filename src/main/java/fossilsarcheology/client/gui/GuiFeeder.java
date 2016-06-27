@@ -1,6 +1,6 @@
 package fossilsarcheology.client.gui;
 
-import fossilsarcheology.server.block.entity.TileEntityNewFeeder;
+import fossilsarcheology.server.block.entity.TileEntityFeeder;
 import fossilsarcheology.server.container.FeederContainer;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -17,11 +17,11 @@ import org.lwjgl.opengl.GL12;
 @SideOnly(Side.CLIENT)
 public class GuiFeeder extends GuiContainer {
     private static final ResourceLocation loc = new ResourceLocation("fossil:textures/gui/Feeder.png");
-    private TileEntityNewFeeder FeederInventory;
+    private TileEntityFeeder FeederInventory;
 
     public GuiFeeder(InventoryPlayer var1, TileEntity var2) {
         super(new FeederContainer(var1, var2));
-        this.FeederInventory = (TileEntityNewFeeder) var2;
+        this.FeederInventory = (TileEntityFeeder) var2;
     }
 
     @Override

@@ -1,5 +1,6 @@
-package fossilsarcheology.server.entity.mob.test;
+package fossilsarcheology.server.entity.mob;
 
+import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.enums.EnumPrehistoric;
 import net.minecraft.entity.ai.RandomPositionGenerator;
 import net.minecraft.pathfinding.PathEntity;
@@ -14,8 +15,8 @@ import java.util.Random;
 
 public class Flock {
     public float flockYaw;
-    public List<EntityNewPrehistoric> flockMembers = new ArrayList<EntityNewPrehistoric>();
-    public EntityNewPrehistoric flockLeader;
+    public List<EntityPrehistoric> flockMembers = new ArrayList<EntityPrehistoric>();
+    public EntityPrehistoric flockLeader;
     public EnumPrehistoric type;
     private double flockPosX;
     private double flockPosY;
@@ -33,7 +34,7 @@ public class Flock {
         return new Random().nextInt(max - min) + min;
     }
 
-    public void createFlock(EntityNewPrehistoric creator) {
+    public void createFlock(EntityPrehistoric creator) {
         flockMembers.add(creator);
         flockLeader = creator;
         flockPosX = creator.posX;
@@ -46,7 +47,7 @@ public class Flock {
         if (flockLeader == null || flockLeader.isDead) {
             setNewLeader();
         }
-        for (EntityNewPrehistoric member : flockMembers) {
+        for (EntityPrehistoric member : flockMembers) {
             if (member != null && flockLeader != null && this.flockPathNavigate != null && this.flockPathNavigate.getPath() != null) {
                 if (member.getNavigator().noPath() && member != this.flockLeader) {
                 	PathEntity path = this.flockLeader.getNavigator().getPath();
@@ -69,13 +70,13 @@ public class Flock {
         }
     }
 
-    public EntityNewPrehistoric findNewMember(World world, AxisAlignedBB bb, EntityNewPrehistoric leader) {
-        List list = world.getEntitiesWithinAABB(EntityNewPrehistoric.class, bb);
-        EntityNewPrehistoric entity1 = null;
+    public EntityPrehistoric findNewMember(World world, AxisAlignedBB bb, EntityPrehistoric leader) {
+        List list = world.getEntitiesWithinAABB(EntityPrehistoric.class, bb);
+        EntityPrehistoric entity1 = null;
         double d0 = Double.MAX_VALUE;
 
         for (int i = 0; i < list.size(); ++i) {
-            EntityNewPrehistoric entity2 = (EntityNewPrehistoric) list.get(i);
+            EntityPrehistoric entity2 = (EntityPrehistoric) list.get(i);
 
             if (entity2 != leader && !this.flockMembers.contains(entity2) && entity2.type == leader.type) {
                 double d1 = leader.getDistanceSqToEntity(entity2);

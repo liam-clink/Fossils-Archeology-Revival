@@ -1,7 +1,7 @@
 package fossilsarcheology.server.entity.ai;
 
-import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
-import fossilsarcheology.server.entity.mob.test.EntityToyBase;
+import fossilsarcheology.server.entity.EntityPrehistoric;
+import fossilsarcheology.server.entity.EntityToyBase;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.pathfinding.PathEntity;
@@ -9,7 +9,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 public class DinoAIAttackOnCollide extends EntityAIBase {
-	private final EntityNewPrehistoric dino;
+	private final EntityPrehistoric dino;
 	private World worldObj;
 	private int attackTick;
 	private double speed;
@@ -18,7 +18,7 @@ public class DinoAIAttackOnCollide extends EntityAIBase {
 	private Class classTarget;
 	private int field_75445_i;
 
-	public DinoAIAttackOnCollide(EntityNewPrehistoric entityNewPrehistoric, double speed, boolean par4) {
+	public DinoAIAttackOnCollide(EntityPrehistoric entityNewPrehistoric, double speed, boolean par4) {
 		this.dino = entityNewPrehistoric;
 		this.worldObj = entityNewPrehistoric.worldObj;
 		this.speed = speed;

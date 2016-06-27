@@ -1,8 +1,8 @@
 package fossilsarcheology.server.item;
 
 import fossilsarcheology.Revival;
+import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.entity.mob.EntityPlesiosaurus;
-import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
 import fossilsarcheology.server.enums.EnumOrderType;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
@@ -59,7 +59,7 @@ public class MagicConchItem extends Item {
 
         for (Object aVar14 : var14) {
             Entity var16 = (Entity) aVar14;
-            EntityNewPrehistoric var17 = (EntityNewPrehistoric) var16;
+            EntityPrehistoric var17 = (EntityPrehistoric) var16;
 
             if (var17.isTamed()) {
                 var17.setOrder(EnumOrderType.values()[var1.getItemDamage()]);

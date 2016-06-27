@@ -1,12 +1,13 @@
 package fossilsarcheology.client.render.entity;
 
-import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
+import fossilsarcheology.server.entity.EntityPrehistoric;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.opengl.GL11;
 
 public class RenderGlowingPrehistoric extends RenderLiving {
@@ -22,8 +23,8 @@ public class RenderGlowingPrehistoric extends RenderLiving {
 
     @Override
     protected ResourceLocation getEntityTexture(Entity entity) {
-        if (entity instanceof EntityNewPrehistoric) {
-            EntityNewPrehistoric prehistoric = (EntityNewPrehistoric) entity;
+        if (entity instanceof EntityPrehistoric) {
+            EntityPrehistoric prehistoric = (EntityPrehistoric) entity;
             return new ResourceLocation(prehistoric.getTexture());
         } else {
             return null;
@@ -32,16 +33,16 @@ public class RenderGlowingPrehistoric extends RenderLiving {
 
     @Override
     protected void preRenderCallback(EntityLivingBase entity, float f) {
-        if (entity instanceof EntityNewPrehistoric) {
-            EntityNewPrehistoric prehistoric = (EntityNewPrehistoric) entity;
+        if (entity instanceof EntityPrehistoric) {
+            EntityPrehistoric prehistoric = (EntityPrehistoric) entity;
             GL11.glScalef(prehistoric.getAgeScale(), prehistoric.getAgeScale(), prehistoric.getAgeScale());
         }
     }
 
     @Override
     protected int shouldRenderPass(EntityLivingBase entity, int i, float q) {
-        if (i == 2 && entity instanceof EntityNewPrehistoric) {
-            this.bindTexture(new ResourceLocation(((EntityNewPrehistoric) entity).getOverlayTexture()));
+        if (i == 2 && entity instanceof EntityPrehistoric) {
+            this.bindTexture(new ResourceLocation(((EntityPrehistoric) entity).getOverlayTexture()));
             GL11.glEnable(GL11.GL_BLEND);
             GL11.glDisable(GL11.GL_ALPHA_TEST);
             GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE);

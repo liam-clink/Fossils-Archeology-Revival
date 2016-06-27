@@ -1,7 +1,7 @@
 package fossilsarcheology.server.entity.mob;
 
 import net.minecraft.world.World;
-import fossilsarcheology.server.entity.mob.test.EntityFishBase;
+import fossilsarcheology.server.entity.EntityFishBase;
 import fossilsarcheology.server.enums.EnumPrehistoric;
 
 public class EntityCoelacanth extends EntityFishBase {

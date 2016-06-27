@@ -1,6 +1,6 @@
 package fossilsarcheology.client.render.entity;
 
-import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
+import fossilsarcheology.server.entity.EntityPrehistoric;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.entity.EntityLivingBase;
 
@@ -26,7 +26,7 @@ public class RenderFlyingPrehistoric extends RenderPrehistoric {
 		 * super.preRenderCallback(par1EntityLivingBase, par2); }
 		 */
 
-        if (!((EntityNewPrehistoric) par1EntityLivingBase).onGround) {
+        if (!((EntityPrehistoric) par1EntityLivingBase).onGround) {
             if (this.mainModel.getClass() == flightModel.getClass()) {
                 this.mainModel = flightModel;
             }

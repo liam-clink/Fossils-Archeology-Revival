@@ -1,8 +1,8 @@
 package fossilsarcheology.client.model.prehistoric;
 
 import fossilsarcheology.client.model.prehistoric.test.ModelNewPrehistoric;
+import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.entity.mob.EntityDodo;
-import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
 import net.ilexiconn.llibrary.client.model.ModelAnimator;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
@@ -99,7 +99,7 @@ public class ModelDodo extends ModelNewPrehistoric {
         blockMovement(f, f1, f2, f3, f4, f5, (Entity) entity);
         this.resetToDefaultPose();
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
-        animator.setAnimation(EntityNewPrehistoric.SPEAK_ANIMATION);
+        animator.setAnimation(EntityPrehistoric.SPEAK_ANIMATION);
         animator.startKeyframe(10);
         ModelUtils.rotate(animator, beakLower, 29, 0, 0);
         animator.endKeyframe();
@@ -123,7 +123,7 @@ public class ModelDodo extends ModelNewPrehistoric {
         AdvancedModelRenderer[] tailParts = {this.tail};
         AdvancedModelRenderer[] neckParts = {this.neck, this.head};
         EntityDodo dodo = (EntityDodo) entity;
-		if(((EntityNewPrehistoric) entity).isSkeleton()){
+		if(((EntityPrehistoric) entity).isSkeleton()){
 			return;
 		}
         if (this.isChild) {
@@ -156,7 +156,7 @@ public class ModelDodo extends ModelNewPrehistoric {
         this.chainWave(neckParts, speed2, 0.1F, -3, entity.ticksExisted, 1);
         this.chainWave(neckParts, speed, 0.4F, -3, f, f1);
         {
-            float sitProgress = ((EntityNewPrehistoric) (entity)).sitProgress;
+            float sitProgress = ((EntityPrehistoric) (entity)).sitProgress;
             sitAnimationRotation(neck, sitProgress, -((float) Math.toRadians(16.0D)), 0, 0);
             sitAnimationRotation(rightLeg, sitProgress, -((float) Math.toRadians(90.0D)), 0, 0);
             sitAnimationRotation(rightFoot, sitProgress, (float) Math.toRadians(90.0D), 0, 0);
@@ -169,7 +169,7 @@ public class ModelDodo extends ModelNewPrehistoric {
             sitAnimationPos(leftLeg, sitProgress, 0, 3F, 0);
         }
         {
-            float sitProgress = ((EntityNewPrehistoric) (entity)).sleepProgress;
+            float sitProgress = ((EntityPrehistoric) (entity)).sleepProgress;
             sitAnimationRotation(neck, sitProgress, -((float) Math.toRadians(16.0D)), -((float) Math.toRadians(16.0D)), 0);
             sitAnimationRotation(rightLeg, sitProgress, -((float) Math.toRadians(90.0D)), 0, 0);
             sitAnimationRotation(rightFoot, sitProgress, (float) Math.toRadians(90.0D), 0, 0);
@@ -183,7 +183,7 @@ public class ModelDodo extends ModelNewPrehistoric {
 
         }
 
-        if (((EntityNewPrehistoric) (entity)).isChild()) {
+        if (((EntityPrehistoric) (entity)).isChild()) {
             this.head.setScale(1.5F, 1.5F, 1.5F);
         } else {
             this.head.setScale(1F, 1F, 1F);

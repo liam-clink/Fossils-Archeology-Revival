@@ -1,8 +1,8 @@
 package fossilsarcheology.client.model.prehistoric;
 
 import fossilsarcheology.client.model.prehistoric.test.ModelNewPrehistoric;
+import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.entity.mob.EntityElasmotherium;
-import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
 import net.ilexiconn.llibrary.client.model.ModelAnimator;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
@@ -144,7 +144,7 @@ public class ModelElasmotherium extends ModelNewPrehistoric {
         blockMovement(f, f1, f2, f3, f4, f5, (Entity) entity);
         this.resetToDefaultPose();
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
-        animator.setAnimation(EntityNewPrehistoric.SPEAK_ANIMATION);
+        animator.setAnimation(EntityPrehistoric.SPEAK_ANIMATION);
         animator.startKeyframe(10);
         ModelUtils.rotate(animator, neck, 15, 0, 0);
         ModelUtils.rotate(animator, head, -20, 0, 0);
@@ -169,7 +169,7 @@ public class ModelElasmotherium extends ModelNewPrehistoric {
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
         AdvancedModelRenderer[] tailParts = {this.tail};
         AdvancedModelRenderer[] neckParts = {this.neck, this.head};
-		if(((EntityNewPrehistoric) entity).isSkeleton()){
+		if(((EntityPrehistoric) entity).isSkeleton()){
 			return;
 		}
         ModelUtils.faceTargetMod(head, f3, f4, 1);
@@ -190,7 +190,7 @@ public class ModelElasmotherium extends ModelNewPrehistoric {
         this.walk(leftHindLeg, speed2, 0.6F, false, 0F, 0.4F, f, f1);
         this.walk(rightHindLeg, speed2, 0.6F, true, 0F, 0.4F, f, f1);
         {
-            float sitProgress = ((EntityNewPrehistoric) (entity)).sitProgress;
+            float sitProgress = ((EntityPrehistoric) (entity)).sitProgress;
             sitAnimationRotation(upperBody, sitProgress, (float) Math.toRadians(26.09D), 0, 0);
             sitAnimationRotation(leftHindLeg, sitProgress, (float) Math.toRadians(136.0D), 0, 0);
             sitAnimationRotation(lowerJaw, sitProgress, -((float) Math.toRadians(18.26D)), 0, 0);
@@ -208,7 +208,7 @@ public class ModelElasmotherium extends ModelNewPrehistoric {
             sitAnimationPos(leftHindThigh, sitProgress, 0, 3.3F, -4);
         }
         {
-            float sitProgress = ((EntityNewPrehistoric) (entity)).sleepProgress;
+            float sitProgress = ((EntityPrehistoric) (entity)).sleepProgress;
             sitAnimationRotation(rightHindThigh, sitProgress, -((float) Math.toRadians(18.0D)), (float) Math.toRadians(15.65D), 0);
             sitAnimationRotation(head, sitProgress, (float) Math.toRadians(5.65D), -((float) Math.toRadians(2.61D)), -((float) Math.toRadians(26.09D)));
             sitAnimationRotation(leftHindThigh, sitProgress, -((float) Math.toRadians(18.0D)), 0, 0);

@@ -11,8 +11,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.util.Vec3;
-
-import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
+import fossilsarcheology.server.entity.EntityPrehistoric;
 
 public class DinoAIAvoidEntity extends EntityAIBase {
 	public final IEntitySelector field_98218_a = new IEntitySelector() {
@@ -20,7 +19,7 @@ public class DinoAIAvoidEntity extends EntityAIBase {
 			return entity.isEntityAlive() && DinoAIAvoidEntity.this.prehistoric.getEntitySenses().canSee(entity);
 		}
 	};
-	private EntityNewPrehistoric prehistoric;
+	private EntityPrehistoric prehistoric;
 	private double farSpeed;
 	private double nearSpeed;
 	private Entity closestLivingEntity;
@@ -28,7 +27,7 @@ public class DinoAIAvoidEntity extends EntityAIBase {
 	private PathEntity entityPathEntity;
 	private PathNavigate entityPathNavigate;
 
-	public DinoAIAvoidEntity(EntityNewPrehistoric prehistoric, float distance, double farSpeed, double nearSpeed) {
+	public DinoAIAvoidEntity(EntityPrehistoric prehistoric, float distance, double farSpeed, double nearSpeed) {
 		this.prehistoric = prehistoric;
 		this.distanceFromEntity = distance;
 		this.farSpeed = farSpeed;

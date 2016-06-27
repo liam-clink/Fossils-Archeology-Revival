@@ -1,6 +1,6 @@
 package fossilsarcheology.server.item;
 
-import fossilsarcheology.server.entity.mob.test.EntityFishBase;
+import fossilsarcheology.server.entity.EntityFishBase;
 import fossilsarcheology.server.enums.EnumPrehistoric;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

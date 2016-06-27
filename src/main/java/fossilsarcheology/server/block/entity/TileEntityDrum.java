@@ -1,8 +1,8 @@
 package fossilsarcheology.server.block.entity;
 
 import fossilsarcheology.Revival;
+import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.entity.mob.EntityTyrannosaurus;
-import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
 import fossilsarcheology.server.enums.EnumOrderType;
 import fossilsarcheology.server.enums.EnumPrehistoric;
 import fossilsarcheology.server.handler.LocalizationStrings;
@@ -112,11 +112,11 @@ public class TileEntityDrum extends TileEntity {
                 }
             } // Output: Ordering Triceratops: Stay
 
-            List list = this.worldObj.getEntitiesWithinAABB(EntityNewPrehistoric.class, AxisAlignedBB.getBoundingBox((double) this.xCoord, (double) this.yCoord, (double) this.zCoord, (double) this.xCoord + 1.0D, (double) this.yCoord + 1.0D, (double) this.zCoord + 1.0D).expand(30.0D, 4.0D, 30.0D));
+            List list = this.worldObj.getEntitiesWithinAABB(EntityPrehistoric.class, AxisAlignedBB.getBoundingBox((double) this.xCoord, (double) this.yCoord, (double) this.zCoord, (double) this.xCoord + 1.0D, (double) this.yCoord + 1.0D, (double) this.zCoord + 1.0D).expand(30.0D, 4.0D, 30.0D));
 
             for (Object aList : list) {
                 Entity var3 = (Entity) aList;
-                EntityNewPrehistoric var4 = (EntityNewPrehistoric) var3;
+                EntityPrehistoric var4 = (EntityPrehistoric) var3;
                 if (item == var4.type.orderItem && var4.isTamed() && var2.getCommandSenderName().equalsIgnoreCase(var4.getCommandSenderName())) {
                     var4.setOrder(this.Order);
                 }

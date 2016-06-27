@@ -1,8 +1,8 @@
 package fossilsarcheology.server.entity.toy;
 
 import fossilsarcheology.Revival;
-import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
-import fossilsarcheology.server.entity.mob.test.EntityToyBase;
+import fossilsarcheology.server.entity.EntityPrehistoric;
+import fossilsarcheology.server.entity.EntityToyBase;
 import fossilsarcheology.server.item.FAItemRegistry;
 import fossilsarcheology.server.message.MessageRollBall;
 import net.minecraft.entity.Entity;
@@ -84,8 +84,8 @@ public class EntityToyBall extends EntityToyBase {
                 this.setDead();
                 return true;
             }
-            if (dmg.getEntity() instanceof EntityNewPrehistoric) {
-                ((EntityNewPrehistoric) dmg.getEntity()).doPlayBonus(toyBonus);
+            if (dmg.getEntity() instanceof EntityPrehistoric) {
+                ((EntityPrehistoric) dmg.getEntity()).doPlayBonus(toyBonus);
                 if (getAttackNoise() != null) {
                     this.playSound(getAttackNoise(), 1, this.getSoundPitch());
                     this.rotationYaw = dmg.getEntity().rotationYaw;

@@ -1,8 +1,8 @@
 package fossilsarcheology.client.model.prehistoric;
 
 import fossilsarcheology.client.model.prehistoric.test.ModelNewPrehistoric;
+import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.entity.mob.EntityBrachiosaurus;
-import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
 import net.ilexiconn.llibrary.client.model.ModelAnimator;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
@@ -165,7 +165,7 @@ public class ModelBrachiosaurus extends ModelNewPrehistoric {
         blockMovement(f, f1, f2, f3, f4, f5, (Entity) entity);
         this.resetToDefaultPose();
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
-        animator.setAnimation(EntityNewPrehistoric.SPEAK_ANIMATION);
+        animator.setAnimation(EntityPrehistoric.SPEAK_ANIMATION);
         animator.startKeyframe(10);
         ModelUtils.rotate(animator, JawBottom, 20, 0, 0);
         animator.endKeyframe();
@@ -201,7 +201,7 @@ public class ModelBrachiosaurus extends ModelNewPrehistoric {
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
         AdvancedModelRenderer[] tailParts = {this.Tail, this.Tail2, this.Tail3};
         AdvancedModelRenderer[] neckParts = {this.Neck1, this.Neck2, this.Neck3, this.Neck4, this.Neck5, this.Head};
-		if(((EntityNewPrehistoric) entity).isSkeleton()){
+		if(((EntityPrehistoric) entity).isSkeleton()){
 			return;
 		}
         ModelUtils.faceTargetMod(Head, f3, f4, 0.16F);
@@ -215,7 +215,7 @@ public class ModelBrachiosaurus extends ModelNewPrehistoric {
         float speed2 = 0.3F;
         float degree = 0.5F;
         {
-            float sitProgress = ((EntityNewPrehistoric) (entity)).sitProgress;
+            float sitProgress = ((EntityPrehistoric) (entity)).sitProgress;
             this.chainWave(tailParts, speed, degree * 0.05F, -3, entity.ticksExisted, 1);
             this.chainSwing(tailParts, speed, degree * 0.15F, -2, entity.ticksExisted, 1);
             this.chainWave(neckParts, speed, degree * 0.05F, 3, entity.ticksExisted, 1);
@@ -257,7 +257,7 @@ public class ModelBrachiosaurus extends ModelNewPrehistoric {
             sitAnimationPos(BackThighRight, sitProgress, 0F, 5.1F, 2F);
         }
         {
-            float sitProgress = ((EntityNewPrehistoric) (entity)).sleepProgress;
+            float sitProgress = ((EntityPrehistoric) (entity)).sleepProgress;
             sitAnimationRotation(LowerBody, sitProgress, -((float) Math.toRadians(13.04D)), 0, 0);
             sitAnimationRotation(Head, sitProgress, (float) Math.toRadians(13.04D), (float) Math.toRadians(5.22D), (float) Math.toRadians(7.83D));
             sitAnimationRotation(TopJaw, sitProgress, -((float) Math.toRadians(7.83D)), 0, 0);
@@ -287,7 +287,7 @@ public class ModelBrachiosaurus extends ModelNewPrehistoric {
             sitAnimationPos(BackThighLeft, sitProgress, 0F, 5.1F, 2F);
             sitAnimationPos(BackThighRight, sitProgress, 0F, 5.1F, 2F);
         }
-        ((EntityNewPrehistoric) entity).chainBuffer.applyChainSwingBuffer((ModelRenderer[]) tailParts);
+        ((EntityPrehistoric) entity).chainBuffer.applyChainSwingBuffer((ModelRenderer[]) tailParts);
     }
 
 }

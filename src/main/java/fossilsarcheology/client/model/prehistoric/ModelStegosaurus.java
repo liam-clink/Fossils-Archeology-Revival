@@ -1,8 +1,8 @@
 package fossilsarcheology.client.model.prehistoric;
 
 import fossilsarcheology.client.model.prehistoric.test.ModelNewPrehistoric;
+import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.entity.mob.EntityAnkylosaurus;
-import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
 import net.ilexiconn.llibrary.client.model.ModelAnimator;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
@@ -182,7 +182,7 @@ public class ModelStegosaurus extends ModelNewPrehistoric {
         blockMovement(f, f1, f2, f3, f4, f5, (Entity) entity);
         this.resetToDefaultPose();
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
-        animator.setAnimation(EntityNewPrehistoric.SPEAK_ANIMATION);
+        animator.setAnimation(EntityPrehistoric.SPEAK_ANIMATION);
         animator.startKeyframe(10);
         ModelUtils.rotate(animator, head_2, 29, 0, 0);
         animator.endKeyframe();
@@ -209,7 +209,7 @@ public class ModelStegosaurus extends ModelNewPrehistoric {
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
         AdvancedModelRenderer[] tailParts = {this.tail1, this.tail2, this.tail3};
         AdvancedModelRenderer[] neckParts = {this.neck1, this.neck2, this.head};
-		if(((EntityNewPrehistoric) entity).isSkeleton()){
+		if(((EntityPrehistoric) entity).isSkeleton()){
 			return;
 		}
         ModelUtils.faceTargetMod(neck1, f3, f4, 0.33F);
@@ -235,7 +235,7 @@ public class ModelStegosaurus extends ModelNewPrehistoric {
         this.walk(leftHindLeg, speed2, degree * 0.5F, false, 0F, 0F, f, f1);
         this.walk(rightHindLeg, speed2, degree * 0.5F, true, 0F, 0F, f, f1);
         {
-            float sitProgress = ((EntityNewPrehistoric) (entity)).sitProgress;
+            float sitProgress = ((EntityPrehistoric) (entity)).sitProgress;
             sitAnimationRotation(neck2, sitProgress, -((float) Math.toRadians(26.09D)), 0, 0);
             sitAnimationRotation(leftFrontThigh, sitProgress, -((float) Math.toRadians(20.0D)), 0, 0);
             sitAnimationRotation(head, sitProgress, (float) Math.toRadians(28.7D), 0, 0);
@@ -255,7 +255,7 @@ public class ModelStegosaurus extends ModelNewPrehistoric {
             sitAnimationPos(lowerBody, sitProgress, 0F, 13.70F - ModelUtils.getDefaultPositionY(lowerBody), 0F);
         }
         {
-            float sitProgress = ((EntityNewPrehistoric) (entity)).sleepProgress;
+            float sitProgress = ((EntityPrehistoric) (entity)).sleepProgress;
             sitAnimationRotation(tail1, sitProgress, -((float) Math.toRadians(36.52D)), (float) Math.toRadians(31.3D), -((float) Math.toRadians(5.22D)));
             sitAnimationRotation(rightHindThigh, sitProgress, 0, (float) Math.toRadians(5.22D), (float) Math.toRadians(26.09D));
             sitAnimationRotation(tail3, sitProgress, (float) Math.toRadians(7.0D), (float) Math.toRadians(39.13D), (float) Math.toRadians(41.74D));
@@ -276,7 +276,7 @@ public class ModelStegosaurus extends ModelNewPrehistoric {
             sitAnimationRotation(head_2, sitProgress, (float) Math.toRadians(8.0D), 0, 0);
             sitAnimationPos(lowerBody, sitProgress, 0F, 13.70F - ModelUtils.getDefaultPositionY(lowerBody), 0F);
         }
-        ((EntityNewPrehistoric) entity).chainBuffer.applyChainSwingBuffer((ModelRenderer[]) tailParts);
+        ((EntityPrehistoric) entity).chainBuffer.applyChainSwingBuffer((ModelRenderer[]) tailParts);
     }
 
 }

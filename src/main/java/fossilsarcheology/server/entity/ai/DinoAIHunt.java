@@ -11,8 +11,8 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAITarget;
 import net.minecraft.entity.player.EntityPlayer;
 import fossilsarcheology.api.FoodMappings;
-import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
-import fossilsarcheology.server.entity.mob.test.EntityToyBase;
+import fossilsarcheology.server.entity.EntityPrehistoric;
+import fossilsarcheology.server.entity.EntityToyBase;
 import fossilsarcheology.server.enums.EnumPrehistoricMood;
 
 public class DinoAIHunt extends EntityAITarget {
@@ -53,8 +53,8 @@ public class DinoAIHunt extends EntityAITarget {
 				return false;
 			} else {
 				this.targetEntity = (EntityLivingBase) list.get(0);
-				if(this.taskOwner instanceof EntityNewPrehistoric){
-					EntityNewPrehistoric prehistoric = (EntityNewPrehistoric)this.taskOwner;
+				if(this.taskOwner instanceof EntityPrehistoric){
+					EntityPrehistoric prehistoric = (EntityPrehistoric)this.taskOwner;
 					if(targetEntity instanceof EntityPlayer && (prehistoric.getMoodFace() == EnumPrehistoricMood.ANGRY || prehistoric.getMoodFace() == EnumPrehistoricMood.SAD)){
 						return true;
 					}

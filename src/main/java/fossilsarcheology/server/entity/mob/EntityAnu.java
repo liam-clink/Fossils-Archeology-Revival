@@ -37,7 +37,7 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import fossilsarcheology.Revival;
 import fossilsarcheology.server.entity.EntityAnuLightning;
-import fossilsarcheology.server.entity.EntityFAPlayer;
+import fossilsarcheology.server.entity.FossilPlayerProperites;
 import fossilsarcheology.server.entity.ai.AnuAIArrowAttack;
 import fossilsarcheology.server.entity.ai.AnuAIAttackOnCollide;
 import fossilsarcheology.server.entity.ai.AnuAIAvoidEntity;
@@ -529,7 +529,7 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
     public void onKillEntity(EntityLivingBase entity) {
         if (entity instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) entity;
-            EntityFAPlayer.get(player).setKilledAnu(true);
+            FossilPlayerProperites.get(player).setKilledAnu(true);
         }
     }
 

@@ -1,16 +1,15 @@
 package fossilsarcheology.server.entity.ai;
 
-import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
+import fossilsarcheology.server.entity.EntityPrehistoric;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-
 import fossilsarcheology.server.enums.EnumOrderType;
 
 public class DinoAIFollowOwner extends EntityAIBase {
-	private EntityNewPrehistoric prehistoric;
+	private EntityPrehistoric prehistoric;
 	private EntityLivingBase theOwner;
 	World theWorld;
 	private double speed;
@@ -20,7 +19,7 @@ public class DinoAIFollowOwner extends EntityAIBase {
 	float minDist;
 	private boolean avoidsWater;
 
-	public DinoAIFollowOwner(EntityNewPrehistoric prehistoric, double speed, float minDist, float maxDist) {
+	public DinoAIFollowOwner(EntityPrehistoric prehistoric, double speed, float minDist, float maxDist) {
 		this.prehistoric = prehistoric;
 		this.theWorld = prehistoric.worldObj;
 		this.speed = speed;

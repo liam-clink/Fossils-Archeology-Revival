@@ -1,7 +1,6 @@
 package fossilsarcheology.server.handler;
 
-import fossilsarcheology.server.entity.EntityDinoEgg;
-import fossilsarcheology.server.entity.EntityJavelin;
+import fossilsarcheology.server.entity.EntityDinosaurEgg;
 import fossilsarcheology.server.entity.toy.EntityToyBall;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EnumCreatureType;
@@ -9,9 +8,7 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.BiomeGenBase.SpawnListEntry;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
-
 import fossilsarcheology.Revival;
-import fossilsarcheology.server.entity.EntityAncientJavelin;
 import fossilsarcheology.server.entity.EntityAnuEffect;
 import fossilsarcheology.server.entity.EntityAnuLightning;
 import fossilsarcheology.server.entity.EntityStoneboard;
@@ -27,11 +24,12 @@ import fossilsarcheology.server.entity.mob.EntityNautilus;
 import fossilsarcheology.server.entity.mob.EntitySentryPigman;
 import fossilsarcheology.server.entity.mob.EntitySturgeon;
 import fossilsarcheology.server.entity.mob.EntityTarSlime;
+import fossilsarcheology.server.entity.mob.projectile.EntityAncientJavelin;
+import fossilsarcheology.server.entity.mob.projectile.EntityJavelin;
 import fossilsarcheology.server.entity.toy.EntityToyScratchingPost;
 import fossilsarcheology.server.entity.toy.EntityToyTetheredLog;
 import fossilsarcheology.server.enums.EnumMobType;
 import fossilsarcheology.server.enums.EnumPrehistoric;
-
 import cpw.mods.fml.common.registry.EntityRegistry;
 
 public class FossilEntities {
@@ -45,7 +43,7 @@ public class FossilEntities {
 		EntityRegistry.registerModEntity(EntityAnuLightning.class, "FriendlyLighting", 4, Revival.INSTANCE, 80, 3, true);
 		registerSpawnable(EntityFailuresaurus.class, "Failuresaurus", 5, 0x61ffbd, 0xf4eee6);
 		registerSpawnable(EntityBones.class, "Bones", 6, 12698049, 4802889);
-		EntityRegistry.registerModEntity(EntityDinoEgg.class, "DinoEgg", 8, Revival.INSTANCE, 80, 1, false);
+		EntityRegistry.registerModEntity(EntityDinosaurEgg.class, "DinoEgg", 8, Revival.INSTANCE, 80, 1, false);
 		EntityRegistry.registerModEntity(EntityFriendlyPigZombie.class, "FriendlyPigZombie", 12, Revival.INSTANCE, 80, 3, true);
 		EntityRegistry.registerModEntity(EntityAnuEffect.class, "AnuEffect", 34, Revival.INSTANCE, 80, 3, true);
 		registerSpawnable(EntityAnubite.class, "Anubite", 39, 0X2E1E14, 0X601200);

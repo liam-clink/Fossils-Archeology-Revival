@@ -1,4 +1,4 @@
-package fossilsarcheology.server.entity;
+package fossilsarcheology.server.entity.mob.projectile;
 
 import net.minecraft.dispenser.BehaviorProjectileDispense;
 import net.minecraft.dispenser.IPosition;

@@ -1,14 +1,14 @@
 package fossilsarcheology.server.entity.ai;
 
-import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
+import fossilsarcheology.server.entity.EntityPrehistoric;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
 
 public class DinoAILeapAtTarget extends EntityAIBase {
-    EntityNewPrehistoric dino;
+    EntityPrehistoric dino;
     EntityLivingBase leapTarget;
 
-    public DinoAILeapAtTarget(EntityNewPrehistoric dino) {
+    public DinoAILeapAtTarget(EntityPrehistoric dino) {
         this.dino = dino;
         this.setMutexBits(5);
     }
@@ -17,7 +17,7 @@ public class DinoAILeapAtTarget extends EntityAIBase {
     public boolean shouldExecute() {
         this.leapTarget = this.dino.getAttackTarget();
 
-        if (dino.getAnimation() == EntityNewPrehistoric.ATTACK_ANIMATION) {
+        if (dino.getAnimation() == EntityPrehistoric.ATTACK_ANIMATION) {
             return false;
         }
         if (dino.isSitting()) {
@@ -41,8 +41,8 @@ public class DinoAILeapAtTarget extends EntityAIBase {
 
     @Override
     public void startExecuting() {
-        if (dino.getAnimation() != EntityNewPrehistoric.ATTACK_ANIMATION) {
-            dino.setAnimation(EntityNewPrehistoric.ATTACK_ANIMATION);
+        if (dino.getAnimation() != EntityPrehistoric.ATTACK_ANIMATION) {
+            dino.setAnimation(EntityPrehistoric.ATTACK_ANIMATION);
         }
     }
 

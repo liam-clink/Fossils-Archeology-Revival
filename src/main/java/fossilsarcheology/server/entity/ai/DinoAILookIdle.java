@@ -1,15 +1,15 @@
 package fossilsarcheology.server.entity.ai;
 
-import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
+import fossilsarcheology.server.entity.EntityPrehistoric;
 import net.minecraft.entity.ai.EntityAIBase;
 
 public class DinoAILookIdle extends EntityAIBase {
-	private EntityNewPrehistoric prehistoric;
+	private EntityPrehistoric prehistoric;
 	private double lookX;
 	private double lookZ;
 	private int idleTime;
 
-	public DinoAILookIdle(EntityNewPrehistoric prehistoric) {
+	public DinoAILookIdle(EntityPrehistoric prehistoric) {
 		this.prehistoric = prehistoric;
 		this.setMutexBits(3);
 	}

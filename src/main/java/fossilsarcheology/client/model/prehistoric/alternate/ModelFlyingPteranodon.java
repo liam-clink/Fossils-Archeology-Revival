@@ -1,7 +1,7 @@
 package fossilsarcheology.client.model.prehistoric.alternate;
 
 import fossilsarcheology.client.model.base.ModelPrehistoric;
-import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
+import fossilsarcheology.server.entity.EntityPrehistoric;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 
 public class ModelFlyingPteranodon extends ModelPrehistoric {
@@ -133,17 +133,17 @@ public class ModelFlyingPteranodon extends ModelPrehistoric {
     }
 
     @Override
-    public void renderFossil(EntityNewPrehistoric entity, float f, float f1, float f2, float f3, float f4, float f5) {
+    public void renderFossil(EntityPrehistoric entity, float f, float f1, float f2, float f3, float f4, float f5) {
 
     }
 
     @Override
-    public void renderLiving(EntityNewPrehistoric entity, float f, float f1, float f2, float f3, float f4, float f5) {
+    public void renderLiving(EntityPrehistoric entity, float f, float f1, float f2, float f3, float f4, float f5) {
 
     }
 
     @Override
-    public void renderSleeping(EntityNewPrehistoric entity, float f, float f1, float f2, float f3, float f4, float f5) {
+    public void renderSleeping(EntityPrehistoric entity, float f, float f1, float f2, float f3, float f4, float f5) {
 
     }
 

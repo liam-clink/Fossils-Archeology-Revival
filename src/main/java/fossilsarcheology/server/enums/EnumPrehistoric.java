@@ -17,6 +17,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.common.registry.GameRegistry;
 import fossilsarcheology.api.EnumDiet;
 import fossilsarcheology.server.creativetab.FATabRegistry;
+import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.entity.mob.EntityAlligatorGar;
 import fossilsarcheology.server.entity.mob.EntityAllosaurus;
 import fossilsarcheology.server.entity.mob.EntityAnkylosaurus;
@@ -50,7 +51,6 @@ import fossilsarcheology.server.entity.mob.EntityTitanis;
 import fossilsarcheology.server.entity.mob.EntityTriceratops;
 import fossilsarcheology.server.entity.mob.EntityTyrannosaurus;
 import fossilsarcheology.server.entity.mob.EntityVelociraptor;
-import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
 import fossilsarcheology.server.item.BirdEggItem;
 import fossilsarcheology.server.item.DinoEggItem;
 import fossilsarcheology.server.item.ItemFish;
@@ -384,7 +384,7 @@ public enum EnumPrehistoric {
 		for (int i = 0; i < values().length; i++) {
 			if (values()[i].type != EnumMobType.VANILLA && values()[i].type != EnumMobType.CHICKEN && values()[i].type != EnumMobType.FISH) {
 				if(tar){
-					if(values()[i].timeperiod == EnumTimePeriod.CENOZOIC && EntityNewPrehistoric.class.isAssignableFrom(values()[i].dinoClass)){
+					if(values()[i].timeperiod == EnumTimePeriod.CENOZOIC && EntityPrehistoric.class.isAssignableFrom(values()[i].dinoClass)){
 						list.add(values()[i]);
 					}
 				}else{

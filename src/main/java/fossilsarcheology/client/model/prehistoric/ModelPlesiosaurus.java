@@ -1,7 +1,7 @@
 package fossilsarcheology.client.model.prehistoric;
 
+import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.entity.mob.EntityPlesiosaurus;
-import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
 import net.ilexiconn.llibrary.client.model.ModelAnimator;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
@@ -143,7 +143,7 @@ public class ModelPlesiosaurus extends ModelNewPrehistoric {
         blockMovement(f, f1, f2, f3, f4, f5, (Entity) entity);
         this.resetToDefaultPose();
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
-        animator.setAnimation(EntityNewPrehistoric.SPEAK_ANIMATION);
+        animator.setAnimation(EntityPrehistoric.SPEAK_ANIMATION);
         animator.startKeyframe(10);
         ModelUtils.rotate(animator, lowerJaw, 29, 0, 0);
         animator.endKeyframe();
@@ -186,7 +186,7 @@ public class ModelPlesiosaurus extends ModelNewPrehistoric {
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
         AdvancedModelRenderer[] tailParts = {this.tail1, this.tail2, this.tail3};
         AdvancedModelRenderer[] neckParts = {this.neck1, this.neck2, this.neck3, this.neck4, this.neck5, this.neck5, this.head};
-		if(((EntityNewPrehistoric) entity).isSkeleton()){
+		if(((EntityPrehistoric) entity).isSkeleton()){
 			return;
 		}
         ModelUtils.faceTargetMod(neck1, f3, f4, 0.14F);
@@ -208,6 +208,6 @@ public class ModelPlesiosaurus extends ModelNewPrehistoric {
         this.flap(rightFrontFlipper, speed2, 0.6F, false, 0, 0, f, f1);
         this.flap(leftBackFlipper, speed2, 0.6F, false, 0, 0, f, f1);
         this.flap(rightBackFlipper, speed2, 0.6F, true, 0, 0, f, f1);
-        ((EntityNewPrehistoric) entity).chainBuffer.applyChainSwingBuffer((ModelRenderer[]) tailParts);
+        ((EntityPrehistoric) entity).chainBuffer.applyChainSwingBuffer((ModelRenderer[]) tailParts);
     }
 }

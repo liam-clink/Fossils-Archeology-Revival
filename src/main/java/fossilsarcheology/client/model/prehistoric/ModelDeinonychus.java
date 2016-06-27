@@ -1,8 +1,8 @@
 package fossilsarcheology.client.model.prehistoric;
 
 import fossilsarcheology.client.model.prehistoric.test.ModelNewPrehistoric;
+import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.entity.mob.EntityDeinonychus;
-import fossilsarcheology.server.entity.mob.test.EntityNewPrehistoric;
 import net.ilexiconn.llibrary.client.model.ModelAnimator;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
@@ -241,7 +241,7 @@ public class ModelDeinonychus extends ModelNewPrehistoric {
         blockMovement(f, f1, f2, f3, f4, f5, (Entity) entity);
         this.resetToDefaultPose();
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
-        animator.setAnimation(EntityNewPrehistoric.SPEAK_ANIMATION);
+        animator.setAnimation(EntityPrehistoric.SPEAK_ANIMATION);
         animator.startKeyframe(10);
         animator.move(lowerJaw, 0, 0, 0.5F);
         ModelUtils.rotate(animator, lowerJaw, 30, 0, 0);
@@ -286,7 +286,7 @@ public class ModelDeinonychus extends ModelNewPrehistoric {
         AdvancedModelRenderer[] neckParts = {this.neck, this.head};
         AdvancedModelRenderer[] leftArmParts = {this.leftUpperArm, this.leftLowerArm};
         AdvancedModelRenderer[] rightArmParts = {this.rightUpperArm, this.rightLowerArm};
-		if(((EntityNewPrehistoric) entity).isSkeleton()){
+		if(((EntityPrehistoric) entity).isSkeleton()){
 			return;
 		}
         ModelUtils.faceTargetMod(neck, f3, f4, 0.5F);
@@ -295,7 +295,7 @@ public class ModelDeinonychus extends ModelNewPrehistoric {
         float speed2 = 0.3F;
         float degree = 0.5F;
         {
-            float sitProgress = ((EntityNewPrehistoric) (entity)).sitProgress;
+            float sitProgress = ((EntityPrehistoric) (entity)).sitProgress;
             sitAnimationRotation(upperBody, sitProgress, (float) Math.toRadians(13.13D), 0, 0);
             sitAnimationRotation(rightFoot, sitProgress, ((float) Math.toRadians(26D)), 0, 0);
             sitAnimationRotation(leftLowerArm, sitProgress, -(float) Math.toRadians(10D), 0, 0);
@@ -318,7 +318,7 @@ public class ModelDeinonychus extends ModelNewPrehistoric {
             sitAnimationPos(leftThigh, sitProgress, 0F, 16.20F - ModelUtils.getDefaultPositionY(leftThigh), 0F);
         }
         {
-            float sitProgress = ((EntityNewPrehistoric) (entity)).sleepProgress;
+            float sitProgress = ((EntityPrehistoric) (entity)).sleepProgress;
 
             sitAnimationRotation(rightFoot, sitProgress, ((float) Math.toRadians(26D)), 0, 0);
             sitAnimationRotation(leftFoot, sitProgress, ((float) Math.toRadians(26D)), 0, 0);
@@ -340,7 +340,7 @@ public class ModelDeinonychus extends ModelNewPrehistoric {
             sitAnimationPos(leftThigh, sitProgress, 0F, 16.20F - ModelUtils.getDefaultPositionY(leftThigh), 0F);
         }
         {
-            float sitProgress = ((EntityNewPrehistoric) (entity)).climbProgress;
+            float sitProgress = ((EntityPrehistoric) (entity)).climbProgress;
 
             sitAnimationRotation(leftLowerArm, sitProgress, (float) Math.toRadians(40.35D), 0, 0);
             sitAnimationRotation(leftLeg, sitProgress, -(float) Math.toRadians(40.0D), 0, 0);
@@ -412,6 +412,6 @@ public class ModelDeinonychus extends ModelNewPrehistoric {
             this.flap(rightUpperArm, 0.8F, -0.4F, false, 0.3F, 0.2F, entity.ticksExisted, 1);
 
         }
-        ((EntityNewPrehistoric) entity).chainBuffer.applyChainSwingBuffer((ModelRenderer[]) tailParts);
+        ((EntityPrehistoric) entity).chainBuffer.applyChainSwingBuffer((ModelRenderer[]) tailParts);
     }
 }
