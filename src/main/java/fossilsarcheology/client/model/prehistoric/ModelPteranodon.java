@@ -1,6 +1,5 @@
 package fossilsarcheology.client.model.prehistoric;
 
-import fossilsarcheology.client.model.prehistoric.test.ModelNewPrehistoric;
 import fossilsarcheology.server.entity.EntityPrehistoricFlying;
 import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.entity.mob.EntityPterosaur;
@@ -9,7 +8,7 @@ import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
 import net.minecraft.entity.Entity;
 
-public class ModelPteranodon extends ModelNewPrehistoric {
+public class ModelPteranodon extends ModelPrehistoric {
     public AdvancedModelRenderer LegLeft;
     public AdvancedModelRenderer WingL1;
     public AdvancedModelRenderer LegRight;

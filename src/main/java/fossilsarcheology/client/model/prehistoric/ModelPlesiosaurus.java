@@ -7,9 +7,8 @@ import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-import fossilsarcheology.client.model.prehistoric.test.ModelNewPrehistoric;
 
-public class ModelPlesiosaurus extends ModelNewPrehistoric {
+public class ModelPlesiosaurus extends ModelPrehistoric {
     public AdvancedModelRenderer uppperBody;
     public AdvancedModelRenderer lowerBody;
     public AdvancedModelRenderer neck1;

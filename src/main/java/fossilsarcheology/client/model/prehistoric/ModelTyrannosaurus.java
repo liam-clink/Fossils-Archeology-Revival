@@ -1,6 +1,5 @@
 package fossilsarcheology.client.model.prehistoric;
 
-import fossilsarcheology.client.model.prehistoric.test.ModelNewPrehistoric;
 import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.entity.mob.EntityTyrannosaurus;
 import net.ilexiconn.llibrary.client.model.ModelAnimator;
@@ -9,7 +8,7 @@ import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-public class ModelTyrannosaurus extends ModelNewPrehistoric {
+public class ModelTyrannosaurus extends ModelPrehistoric {
     public AdvancedModelRenderer lowerBody;
     public AdvancedModelRenderer rightThigh;
     public AdvancedModelRenderer leftThigh;
@@ -268,7 +267,7 @@ public class ModelTyrannosaurus extends ModelNewPrehistoric {
 			return;
 		}
         float speed = 0.4F;
-        float speed2 = 0.1F;
+        float speed2 = 0.2F;
         float degree = 1F;
         {
             float sitProgress = ((EntityPrehistoric) (entity)).sitProgress;

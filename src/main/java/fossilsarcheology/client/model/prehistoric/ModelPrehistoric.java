@@ -1,13 +1,13 @@
-package fossilsarcheology.client.model.prehistoric.test;
+package fossilsarcheology.client.model.prehistoric;
 
 import fossilsarcheology.server.entity.EntityPrehistoric;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelBase;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.minecraft.entity.Entity;
 
-public abstract class ModelNewPrehistoric extends AdvancedModelBase {
+public abstract class ModelPrehistoric extends AdvancedModelBase {
 
-    public ModelNewPrehistoric() {
+    public ModelPrehistoric() {
     }
 
     public void blockMovement(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {

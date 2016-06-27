@@ -4,11 +4,10 @@ import net.ilexiconn.llibrary.client.model.ModelAnimator;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
 import net.minecraft.entity.Entity;
-import fossilsarcheology.client.model.prehistoric.test.ModelNewPrehistoric;
 import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.entity.mob.EntityMammoth;
 
-public class ModelMammoth extends ModelNewPrehistoric {
+public class ModelMammoth extends ModelPrehistoric {
     public AdvancedModelRenderer leftFrontLeg;
     public AdvancedModelRenderer rightFrontLeg;
     public AdvancedModelRenderer rightHindLeg;

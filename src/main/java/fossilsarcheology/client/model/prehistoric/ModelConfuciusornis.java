@@ -5,11 +5,10 @@ import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-import fossilsarcheology.client.model.prehistoric.test.ModelNewPrehistoric;
 import fossilsarcheology.server.entity.EntityPrehistoricFlying;
 import fossilsarcheology.server.entity.EntityPrehistoric;
 
-public class ModelConfuciusornis extends ModelNewPrehistoric {
+public class ModelConfuciusornis extends ModelPrehistoric {
 	public AdvancedModelRenderer rightLeg;
 	public AdvancedModelRenderer rightFoot;
 	public AdvancedModelRenderer leftLeg;

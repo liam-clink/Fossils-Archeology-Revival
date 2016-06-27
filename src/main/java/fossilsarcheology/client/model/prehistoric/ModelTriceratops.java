@@ -5,11 +5,10 @@ import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-import fossilsarcheology.client.model.prehistoric.test.ModelNewPrehistoric;
 import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.entity.mob.EntityTriceratops;
 
-public class ModelTriceratops extends ModelNewPrehistoric {
+public class ModelTriceratops extends ModelPrehistoric {
     public AdvancedModelRenderer upperBody;
     public AdvancedModelRenderer rightFrontThigh;
     public AdvancedModelRenderer leftFrontThigh;

@@ -1,6 +1,5 @@
 package fossilsarcheology.client.model.prehistoric;
 
-import fossilsarcheology.client.model.prehistoric.test.ModelNewPrehistoric;
 import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.entity.mob.EntitySmilodon;
 import net.ilexiconn.llibrary.client.model.ModelAnimator;
@@ -8,7 +7,7 @@ import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
 import net.minecraft.entity.Entity;
 
-public class ModelSmilodon extends ModelNewPrehistoric {
+public class ModelSmilodon extends ModelPrehistoric {
     public AdvancedModelRenderer lowerBody;
     public AdvancedModelRenderer leftFrontThigh;
     public AdvancedModelRenderer rightFrontThigh;

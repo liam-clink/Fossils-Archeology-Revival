@@ -1,6 +1,5 @@
 package fossilsarcheology.client.model.prehistoric;
 
-import fossilsarcheology.client.model.prehistoric.test.ModelNewPrehistoric;
 import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.entity.mob.EntityDodo;
 import net.ilexiconn.llibrary.client.model.ModelAnimator;
@@ -8,7 +7,7 @@ import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
 import net.minecraft.entity.Entity;
 
-public class ModelDodo extends ModelNewPrehistoric {
+public class ModelDodo extends ModelPrehistoric {
     public AdvancedModelRenderer body;
     public AdvancedModelRenderer rightLeg;
     public AdvancedModelRenderer leftLeg;

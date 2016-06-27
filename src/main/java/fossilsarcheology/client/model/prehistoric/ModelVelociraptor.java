@@ -1,6 +1,5 @@
 package fossilsarcheology.client.model.prehistoric;
 
-import fossilsarcheology.client.model.prehistoric.test.ModelNewPrehistoric;
 import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.entity.mob.EntityDeinonychus;
 import fossilsarcheology.server.entity.mob.EntityVelociraptor;
@@ -10,7 +9,7 @@ import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-public class ModelVelociraptor extends ModelNewPrehistoric {
+public class ModelVelociraptor extends ModelPrehistoric {
     public AdvancedModelRenderer lowerBody;
     public AdvancedModelRenderer leftThigh;
     public AdvancedModelRenderer rightThigh;

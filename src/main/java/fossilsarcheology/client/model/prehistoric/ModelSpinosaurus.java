@@ -6,9 +6,8 @@ import net.ilexiconn.llibrary.client.model.ModelAnimator;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
 import net.minecraft.entity.Entity;
-import fossilsarcheology.client.model.prehistoric.test.ModelNewPrehistoric;
 
-public class ModelSpinosaurus extends ModelNewPrehistoric {
+public class ModelSpinosaurus extends ModelPrehistoric {
 	public AdvancedModelRenderer lowerBody;
 	public AdvancedModelRenderer leftThigh;
 	public AdvancedModelRenderer rightThigh;

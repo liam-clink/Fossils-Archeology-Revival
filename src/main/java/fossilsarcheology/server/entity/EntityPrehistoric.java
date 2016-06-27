@@ -1075,6 +1075,7 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
 						if (!this.isTamed()) {
 							this.triggerTamingAcheivement(player);
 							this.heal(200);
+							this.setMood(100);
 							this.increaseHunger(500);
 							this.setTamed(true);
 							setPathToEntity(null);

@@ -1,6 +1,5 @@
 package fossilsarcheology.client.model.prehistoric;
 
-import fossilsarcheology.client.model.prehistoric.test.ModelNewPrehistoric;
 import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.entity.mob.EntityBrachiosaurus;
 import net.ilexiconn.llibrary.client.model.ModelAnimator;
@@ -9,7 +8,7 @@ import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-public class ModelBrachiosaurus extends ModelNewPrehistoric {
+public class ModelBrachiosaurus extends ModelPrehistoric {
     public AdvancedModelRenderer BackThighRight;
     public AdvancedModelRenderer BackThighLeft;
     public AdvancedModelRenderer FrontThighRight;
