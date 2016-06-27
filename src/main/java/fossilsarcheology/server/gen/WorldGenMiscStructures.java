@@ -35,7 +35,7 @@ public class WorldGenMiscStructures implements IWorldGenerator {
 			}
 		}
 		if (Revival.CONFIG.generateMoai) {
-			if (random.nextInt(40) == 0) {
+			if (random.nextInt(100) == 0) {
 				int Xcoord1 = chunkX * 16 + random.nextInt(16);
 				int Zcoord1 = chunkZ * 16 + random.nextInt(16);
 				int Ycoord1 = world.getHeightValue(Xcoord1, Zcoord1);
@@ -45,7 +45,7 @@ public class WorldGenMiscStructures implements IWorldGenerator {
 				}
 			}
 			if (Revival.CONFIG.generateAztecWeaponShops) {
-				if (random.nextInt(20) == 0) {
+				if (random.nextInt(35) == 0) {
 					int Xcoord1 = chunkX * 16 + random.nextInt(16);
 					int Zcoord1 = chunkZ * 16 + random.nextInt(16);
 					int Ycoord1 = world.getHeightValue(Xcoord1, Zcoord1);

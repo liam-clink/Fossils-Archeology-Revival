@@ -222,8 +222,8 @@ public class GuiPedia extends GuiContainer {
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-		if (!(Revival.toPedia instanceof EntityNewPrehistoric)) {
-			this.buttonNextPage.enabled = false;
+		if (Revival.toPedia instanceof EntityNewPrehistoric || Revival.toPedia instanceof EntityFishBase || Revival.toPedia instanceof EntityQuagga) {
+			this.buttonNextPage.enabled = true;
 		}
 		if (bookPages == 0) {
 			if (Revival.toPedia instanceof EntityPregnantHorse) {
@@ -298,8 +298,10 @@ public class GuiPedia extends GuiContainer {
 		else {
 			if (Revival.toPedia instanceof EntityNewPrehistoric) {
 				showPrehistoricBio(((EntityNewPrehistoric) Revival.toPedia).type.toString());
-			} else if (Revival.toPedia instanceof EntityFishBase) {} else if (Revival.toPedia instanceof EntityQuagga) {
-				((EntityQuagga) Revival.toPedia).showPedia2(this);
+			} else if (Revival.toPedia instanceof EntityFishBase) {
+				showPrehistoricBio(((EntityFishBase) Revival.toPedia).selfType.toString());
+			} else if (Revival.toPedia instanceof EntityQuagga) {
+				showPrehistoricBio("Quagga");
 			}
 		}
 	}
