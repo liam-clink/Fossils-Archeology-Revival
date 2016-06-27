@@ -25,6 +25,7 @@ public class JavelinItem extends Item {
 		this.hasSubtypes = false;
 		this.material = var2;
 		this.name = name;
+		this.bFull3D = true;
 	}
 
 	@Override
