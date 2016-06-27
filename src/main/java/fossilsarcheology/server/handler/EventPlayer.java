@@ -32,7 +32,7 @@ public class EventPlayer {
     @SubscribeEvent
     public void onBreakBlock(BlockEvent.BreakEvent event) {
         if (event.world.provider.dimensionId == Revival.CONFIG.dimensionIDDarknessLair && event.block != Blocks.obsidian && !FossilPlayerProperites.get(event.getPlayer()).isKilledAnu()) {
-            Revival.showMessage(StatCollector.translateToLocal("anu.breakblock"), event.getPlayer());
+            Revival.messagePlayer(StatCollector.translateToLocal("anu.breakblock"), event.getPlayer());
             event.setCanceled(true);
         }
     }

@@ -168,11 +168,11 @@ public class EntityDinosaurEgg extends EntityLiving implements IEntityAdditional
 				if (this.worldObj.getCollidingBoundingBoxes(entity, ((EntityLiving) entity).boundingBox).size() == 0 && (!this.worldObj.isAnyLiquid(((EntityLiving) entity).boundingBox) || this.selfType == EnumPrehistoric.Mosasaurus || this.selfType == EnumPrehistoric.Liopleurodon)) {
 					this.worldObj.spawnEntityInWorld(entity);
 					if (player != null) {
-						Revival.showMessage(StatCollector.translateToLocal(LocalizationStrings.DINOEGG_HATCHED), player);
+						Revival.messagePlayer(StatCollector.translateToLocal(LocalizationStrings.DINOEGG_HATCHED), player);
 					}
 					this.setDead();
 				} else {
-					Revival.showMessage(StatCollector.translateToLocal(LocalizationStrings.DINOEGG_NOSPACE), player);
+					Revival.messagePlayer(StatCollector.translateToLocal(LocalizationStrings.DINOEGG_NOSPACE), player);
 					this.setBirthTick(this.getBirthTick() - 500);
 				}
 			}

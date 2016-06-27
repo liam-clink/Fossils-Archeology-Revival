@@ -155,7 +155,7 @@ public class EntityFriendlyPigZombie extends EntityTameable {
 
     public void sendMessageToOwner(String words) {
         if (this.getOwner() instanceof EntityPlayer) {
-            Revival.showMessage(StatCollector.translateToLocal(words), (EntityPlayer) this.getOwner());
+            Revival.messagePlayer(StatCollector.translateToLocal(words), (EntityPlayer) this.getOwner());
         }
 
     }

@@ -27,7 +27,7 @@ public class BehaviorJavelinDispense extends BehaviorProjectileDispense {
         if (this.javelin < 0) {
             EntityAncientJavelin var3 = new EntityAncientJavelin(par1World, par2IPosition.getX(), par2IPosition.getY(), par2IPosition.getZ());
             var3.canBePickedUp = 1;
-            var3.SelfMaterial = ToolMaterial.IRON;
+            var3.material = ToolMaterial.IRON;
             return var3;
         }
 
@@ -37,23 +37,23 @@ public class BehaviorJavelinDispense extends BehaviorProjectileDispense {
         switch (this.javelin) {
             default:
             case 0:
-                var3.SelfMaterial = ToolMaterial.WOOD;
+                var3.material = ToolMaterial.WOOD;
                 break;
 
             case 1:
-                var3.SelfMaterial = ToolMaterial.STONE;
+                var3.material = ToolMaterial.STONE;
                 break;
 
             case 2:
-                var3.SelfMaterial = ToolMaterial.IRON;
+                var3.material = ToolMaterial.IRON;
                 break;
 
             case 3:
-                var3.SelfMaterial = ToolMaterial.EMERALD;
+                var3.material = ToolMaterial.EMERALD;
                 break;
 
             case 4:
-                var3.SelfMaterial = ToolMaterial.GOLD;
+                var3.material = ToolMaterial.GOLD;
                 break;
         }
 

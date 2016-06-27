@@ -281,7 +281,7 @@ public class BlockCultivate extends BlockContainer {
             // Metres
             {
                 P.addStat(FossilAchievementHandler.failuresaurus, 1);
-                Revival.showMessage(var6, P);
+                Revival.messagePlayer(var6, P);
             }
         }
 

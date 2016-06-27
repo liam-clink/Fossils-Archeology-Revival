@@ -38,7 +38,7 @@ import net.minecraft.world.World;
 import fossilsarcheology.Revival;
 import fossilsarcheology.server.entity.EntityAnuLightning;
 import fossilsarcheology.server.entity.FossilPlayerProperites;
-import fossilsarcheology.server.entity.ai.AnuAIArrowAttack;
+import fossilsarcheology.server.entity.ai.AnuAIFireballAttack;
 import fossilsarcheology.server.entity.ai.AnuAIAttackOnCollide;
 import fossilsarcheology.server.entity.ai.AnuAIAvoidEntity;
 import fossilsarcheology.server.gen.feature.SpikesBlockWorldGen;
@@ -56,7 +56,7 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
     public boolean isFlying;
     private AnuAIAvoidEntity aiFear = new AnuAIAvoidEntity(this, EntityPlayer.class, 5.0F, 0.8D, 1.33D);
     private AnuAIAttackOnCollide aiAttackOnCollide = new AnuAIAttackOnCollide(this, EntityPlayer.class, 1.2D, false);
-    private AnuAIArrowAttack aiArrowAttack = new AnuAIArrowAttack(this, 1.0D, 20, 60, 15.0F);
+    private AnuAIFireballAttack aiFireballAttack = new AnuAIFireballAttack(this, 1.0D, 10, 20, 15.0F);
     private ChunkCoordinates currentTarget;
 
     public EntityAnu(World world) {
@@ -69,11 +69,10 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
         this.tasks.addTask(6, new EntityAILookIdle(this));
         this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
         this.tasks.addTask(4, aiFear);
-        this.tasks.addTask(5, aiArrowAttack);
+        this.tasks.addTask(5, aiFireballAttack);
         this.tasks.addTask(5, aiAttackOnCollide);
-		this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
+        this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
         this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityGolem.class, 0, true));
         this.isImmuneToFire = true;
         this.experienceValue = 50;
     }
@@ -136,7 +135,7 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
                                 if (itemstack.getItem() == FAItemRegistry.INSTANCE.ancientSword) {
 
                                     if (!this.worldObj.isRemote) {
-                                        Revival.showMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.mySword"), (EntityPlayer) targetEntity);
+                                        Revival.messagePlayer(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.mySword"), (EntityPlayer) targetEntity);
                                     }
 
                                     return super.attackEntityFrom(damageSource, var2);
@@ -145,7 +144,7 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
                                 if (itemstack.getItem() != FAItemRegistry.INSTANCE.ancientSword && itemstack.getItem() instanceof ItemSword) {
 
                                     if (!this.worldObj.isRemote) {
-                                        Revival.showMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.draw"), (EntityPlayer) targetEntity);
+                                        Revival.messagePlayer(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.draw"), (EntityPlayer) targetEntity);
                                     }
 
                                     return super.attackEntityFrom(damageSource, var2);
@@ -153,7 +152,7 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
 
                                 if (damageSource.damageType.equals("arrow")) {
                                     if (!this.worldObj.isRemote) {
-                                        Revival.showMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.coward"), (EntityPlayer) targetEntity);
+                                        Revival.messagePlayer(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.coward"), (EntityPlayer) targetEntity);
                                     }
 
                                     return super.attackEntityFrom(damageSource, var2);
@@ -186,9 +185,9 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
 
         if (entityplayer != null && this.canEntityBeSeen(entityplayer)) {
             if (this.getRNG().nextInt(1) == 0) {
-                Revival.showMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.hello"), entityplayer);
+                Revival.messagePlayer(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.hello"), entityplayer);
             } else {
-                Revival.showMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.fewBeaten"), entityplayer);
+                Revival.messagePlayer(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.fewBeaten"), entityplayer);
             }
 
             super.findPlayerToAttack();
@@ -217,7 +216,7 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
             this.worldObj.spawnEntityInWorld(entity);
         }
         entity.setHealth(0F);
-        Revival.showMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.no"), this.worldObj.getClosestPlayerToEntity(this, 50));
+        Revival.messagePlayer(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.no"), this.worldObj.getClosestPlayerToEntity(this, 50));
         super.onDeath(dmg);
     }
 
@@ -343,16 +342,16 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
                 }
             }
             if (spawnPigmenChoice == 0) {
-                Revival.showMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.trans"), this.worldObj.getClosestPlayerToEntity(this, 50));
+                Revival.messagePlayer(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.trans"), this.worldObj.getClosestPlayerToEntity(this, 50));
                 this.spawnMobs(new EntitySentryPigman(worldObj));
             }
             if (spawnWitherChoice == 0) {
                 this.spawnMobs(new EntitySkeleton(worldObj));
-                Revival.showMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.archers"), this.worldObj.getClosestPlayerToEntity(this, 50));
+                Revival.messagePlayer(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.archers"), this.worldObj.getClosestPlayerToEntity(this, 50));
             }
             if (spawnBlazeChoice == 0) {
                 this.spawnMobs(new EntityBlaze(worldObj));
-                Revival.showMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.blaze"), this.worldObj.getClosestPlayerToEntity(this, 50));
+                Revival.messagePlayer(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.blaze"), this.worldObj.getClosestPlayerToEntity(this, 50));
             }
         }
     }
@@ -456,9 +455,9 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
 
         if (entityplayer != null) {
             if (this.getRNG().nextInt(1) == 0) {
-                Revival.showMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.hello"), entityplayer);
+                Revival.messagePlayer(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.hello"), entityplayer);
             } else {
-                Revival.showMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.fewBeaten"), entityplayer);
+                Revival.messagePlayer(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.fewBeaten"), entityplayer);
             }
         }
     }

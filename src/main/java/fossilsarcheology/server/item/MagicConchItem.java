@@ -71,7 +71,7 @@ public class MagicConchItem extends Item {
         // Revival.ShowMessage(var10 + var9 + var11 + " " + var13 + var12,
         // var3);
         if (!var3.worldObj.isRemote) {
-            Revival.showMessage("Try asking again.", var3);
+            Revival.messagePlayer("Try asking again.", var3);
         }
         return var1;
     }

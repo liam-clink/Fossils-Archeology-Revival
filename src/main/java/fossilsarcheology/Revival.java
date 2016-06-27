@@ -69,6 +69,7 @@ import fossilsarcheology.server.handler.PickupHandler;
 import fossilsarcheology.server.item.FAItemRegistry;
 import fossilsarcheology.server.message.MessageFoodParticles;
 import fossilsarcheology.server.message.MessageHappyParticles;
+import fossilsarcheology.server.message.MessageJavelinType;
 import fossilsarcheology.server.message.MessageRollBall;
 import fossilsarcheology.server.message.MessageSetDay;
 import fossilsarcheology.server.message.MessageUpdateEgg;
@@ -86,7 +87,7 @@ public class Revival {
     public static ServerProxy PROXY;
     @Instance(MODID)
     public static Revival INSTANCE;
-    @NetworkWrapper({MessageFoodParticles.class, MessageSetDay.class, MessageRollBall.class, MessageHappyParticles.class, MessageUpdateEgg.class, MessageUpdateNautilus.class})
+    @NetworkWrapper({MessageFoodParticles.class, MessageSetDay.class, MessageJavelinType.class, MessageRollBall.class, MessageHappyParticles.class, MessageUpdateEgg.class, MessageUpdateNautilus.class})
     public static SimpleNetworkWrapper NETWORK_WRAPPER;
     @Config
     public static FossilConfig CONFIG;
@@ -97,7 +98,7 @@ public class Revival {
         return STATE == ModState.DEV;
     }
 
-    public static void showMessage(String message, EntityPlayer player) {
+    public static void messagePlayer(String message, EntityPlayer player) {
         if (player != null) {
             player.addChatMessage(new ChatComponentText(message));
         }

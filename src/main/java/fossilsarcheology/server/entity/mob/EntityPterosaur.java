@@ -9,7 +9,6 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
 import fossilsarcheology.server.entity.EntityPrehistoricFlying;
-import fossilsarcheology.server.entity.ai.DinoAIAvoidEntity;
 import fossilsarcheology.server.entity.ai.DinoAIFeeder;
 import fossilsarcheology.server.entity.ai.DinoAIFindAirTarget;
 import fossilsarcheology.server.entity.ai.DinoAIFollowOwner;

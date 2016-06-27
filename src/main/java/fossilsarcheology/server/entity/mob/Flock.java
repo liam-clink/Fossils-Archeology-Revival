@@ -1,17 +1,17 @@
 package fossilsarcheology.server.entity.mob;
 
-import fossilsarcheology.server.entity.EntityPrehistoric;
-import fossilsarcheology.server.enums.EnumPrehistoric;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 import net.minecraft.entity.ai.RandomPositionGenerator;
 import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import fossilsarcheology.server.entity.EntityPrehistoric;
+import fossilsarcheology.server.enums.EnumPrehistoric;
 
 public class Flock {
     public float flockYaw;

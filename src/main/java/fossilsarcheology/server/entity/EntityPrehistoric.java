@@ -871,7 +871,7 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
 			String Status1 = StatCollector.translateToLocal(("status." + var1.toString() + ".head"));
 			String Dino = this.type.toString();
 			String Status2 = StatCollector.translateToLocal("status." + var1.toString());
-			Revival.showMessage(Status1 + Dino + Status2, (EntityPlayer) this.getOwner());
+			Revival.messagePlayer(Status1 + Dino + Status2, (EntityPlayer) this.getOwner());
 		}
 	}
 
@@ -1114,7 +1114,7 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
 					}
 
 					if (!this.worldObj.isRemote) {
-						Revival.showMessage(StatCollector.translateToLocal(LocalizationStrings.STATUS_ESSENCE_FAIL), player);
+						Revival.messagePlayer(StatCollector.translateToLocal(LocalizationStrings.STATUS_ESSENCE_FAIL), player);
 					}
 
 					return false;
@@ -1188,7 +1188,7 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
 							this.setMood(this.getMood() - 1);
 							Revival.NETWORK_WRAPPER.sendToAll(new MessageFoodParticles(getEntityId(), FABlockRegistry.INSTANCE.volcanicRock));
 							if (getRNG().nextInt(5) == 0) {
-								Revival.showMessage(StatCollector.translateToLocal("prehistoric.autotame") + this.getCommandSenderName() + StatCollector.translateToLocal("prehistoric.period"), player);
+								Revival.messagePlayer(StatCollector.translateToLocal("prehistoric.autotame") + this.getCommandSenderName() + StatCollector.translateToLocal("prehistoric.period"), player);
 								this.setMood(this.getMood() - 25);
 								this.setTamed(true);
 								Revival.NETWORK_WRAPPER.sendToAll(new MessageFoodParticles(getEntityId(), Item.getIdFromItem(Items.gold_ingot)));
@@ -1247,7 +1247,7 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
 
 	private void sendOrderMessage(EnumOrderType var1) {
 		String S = StatCollector.translateToLocal(LocalizationStrings.ORDER_HEAD) + StatCollector.translateToLocal("order." + var1.toString().toLowerCase());
-		Revival.showMessage(S, (EntityPlayer) this.getOwner());
+		Revival.messagePlayer(S, (EntityPlayer) this.getOwner());
 	}
 
 	public void nudgeEntity(EntityPlayer player) {

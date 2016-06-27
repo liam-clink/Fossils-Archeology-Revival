@@ -3,12 +3,12 @@ package fossilsarcheology.server.entity.ai;
 import fossilsarcheology.server.entity.mob.EntityAnu;
 import net.minecraft.entity.ai.EntityAIArrowAttack;
 
-public class AnuAIArrowAttack extends EntityAIArrowAttack {
+public class AnuAIFireballAttack extends EntityAIArrowAttack {
     private EntityAnu theEntity;
 
-    public AnuAIArrowAttack(EntityAnu p_i1650_1_, double p_i1650_2_, int p_i1650_4_, int p_i1650_5_, float p_i1650_6_) {
-        super(p_i1650_1_, p_i1650_2_, p_i1650_4_, p_i1650_5_, p_i1650_6_);
-        theEntity = p_i1650_1_;
+    public AnuAIFireballAttack(EntityAnu anu, double entityMoveSpeed, int timedeductor, int maxRangedAttackTime, float sqDistance) {
+        super(anu, entityMoveSpeed, timedeductor, maxRangedAttackTime, sqDistance);
+        theEntity = anu;
     }
 
     @Override

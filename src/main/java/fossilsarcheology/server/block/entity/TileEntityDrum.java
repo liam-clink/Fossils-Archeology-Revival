@@ -86,7 +86,7 @@ public class TileEntityDrum extends TileEntity {
         // - 1*/)));
         // String var2 = Revival.GetLangTextByKey("Drum.Head");
         // String var3 = this.GetOrderString();
-        Revival.showMessage(StatCollector.translateToLocal(LocalizationStrings.DRUM_TRIGGER) + StatCollector.translateToLocal("order." + this.Order.toString()), player);
+        Revival.messagePlayer(StatCollector.translateToLocal(LocalizationStrings.DRUM_TRIGGER) + StatCollector.translateToLocal("order." + this.Order.toString()), player);
         this.markDirty();
     }
 
@@ -108,7 +108,7 @@ public class TileEntityDrum extends TileEntity {
         {
             for (int i = 0; i < EnumPrehistoric.values().length; ++i) {
                 if (EnumPrehistoric.values()[i].orderItem != null && EnumPrehistoric.values()[i].orderItem == item) {
-                    Revival.showMessage(StatCollector.translateToLocal(LocalizationStrings.DRUM_ORDERING) + StatCollector.translateToLocal("fossil.entity." + EnumPrehistoric.values()[i].toString()) + ": " + StatCollector.translateToLocal("order." + this.Order.toString()), var2);
+                    Revival.messagePlayer(StatCollector.translateToLocal(LocalizationStrings.DRUM_ORDERING) + StatCollector.translateToLocal("fossil.entity." + EnumPrehistoric.values()[i].toString()) + ": " + StatCollector.translateToLocal("order." + this.Order.toString()), var2);
                 }
             } // Output: Ordering Triceratops: Stay
 
@@ -123,7 +123,7 @@ public class TileEntityDrum extends TileEntity {
             }
 
         } else {
-            Revival.showMessage(StatCollector.translateToLocal(LocalizationStrings.DRUM_TREX + String.valueOf(this.Order.ordinal() + 1)), var2);
+            Revival.messagePlayer(StatCollector.translateToLocal(LocalizationStrings.DRUM_TREX + String.valueOf(this.Order.ordinal() + 1)), var2);
             List list = this.worldObj.getEntitiesWithinAABB(EntityTyrannosaurus.class, AxisAlignedBB.getBoundingBox((double) this.xCoord, (double) this.yCoord, (double) this.zCoord, (double) this.xCoord + 1.0D, (double) this.yCoord + 1.0D, (double) this.zCoord + 1.0D).expand(50.0D, 4.0D, 50.0D));
 
             for (Object aList : list) {

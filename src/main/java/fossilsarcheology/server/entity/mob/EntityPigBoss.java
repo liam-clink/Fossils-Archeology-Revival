@@ -264,7 +264,7 @@ public class EntityPigBoss extends EntityMob implements IBossDisplayData, IRange
                     if (itemstack == null) {
                         if (this.getAttackMode() != 0) {
                             if (!this.worldObj.isRemote) {
-                                Revival.showMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.draw"), (EntityPlayer) targetEntity);
+                                Revival.messagePlayer(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.draw"), (EntityPlayer) targetEntity);
                             }
 
                             this.SetAttackMode(0);
@@ -275,7 +275,7 @@ public class EntityPigBoss extends EntityMob implements IBossDisplayData, IRange
                         if (itemstack.getItem() == FAItemRegistry.INSTANCE.ancientSword && this.getAttackMode() != 0) {
 
                             if (!this.worldObj.isRemote) {
-                                Revival.showMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.mySword"), (EntityPlayer) targetEntity);
+                                Revival.messagePlayer(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.mySword"), (EntityPlayer) targetEntity);
                             }
 
                             this.SetAttackMode(0);
@@ -286,7 +286,7 @@ public class EntityPigBoss extends EntityMob implements IBossDisplayData, IRange
                         if (itemstack.getItem() != FAItemRegistry.INSTANCE.ancientSword && itemstack.getItem() instanceof ItemSword && this.getAttackMode() != 0) {
 
                             if (!this.worldObj.isRemote) {
-                                Revival.showMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.draw"), (EntityPlayer) targetEntity);
+                                Revival.messagePlayer(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.draw"), (EntityPlayer) targetEntity);
                             }
 
                             this.SetAttackMode(0);
@@ -296,7 +296,7 @@ public class EntityPigBoss extends EntityMob implements IBossDisplayData, IRange
 
                         if (damageSource.damageType.equals("arrow") && this.getAttackMode() != 1) {
                             if (!this.worldObj.isRemote) {
-                                Revival.showMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.coward"), (EntityPlayer) targetEntity);
+                                Revival.messagePlayer(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.coward"), (EntityPlayer) targetEntity);
                             }
 
                             this.SetAttackMode(1);
@@ -311,11 +311,11 @@ public class EntityPigBoss extends EntityMob implements IBossDisplayData, IRange
 
                                 if (this.worldObj.provider.isHellWorld) {
                                     if (!this.worldObj.isRemote) {
-                                        Revival.showMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.leartHere"), (EntityPlayer) targetEntity);
+                                        Revival.messagePlayer(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.leartHere"), (EntityPlayer) targetEntity);
                                     }
                                 } else {
                                     if (!this.worldObj.isRemote) {
-                                        Revival.showMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.leartThere"), (EntityPlayer) targetEntity);
+                                        Revival.messagePlayer(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.leartThere"), (EntityPlayer) targetEntity);
                                     }
                                 }
 
@@ -326,7 +326,7 @@ public class EntityPigBoss extends EntityMob implements IBossDisplayData, IRange
 
                             if (var5 < 6.0D && this.getAttackMode() != 0) {
                                 if (!this.worldObj.isRemote) {
-                                    Revival.showMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.unknownRanged"), (EntityPlayer) targetEntity);
+                                    Revival.messagePlayer(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.unknownRanged"), (EntityPlayer) targetEntity);
                                 }
 
                                 this.SetAttackMode(0);
@@ -338,7 +338,7 @@ public class EntityPigBoss extends EntityMob implements IBossDisplayData, IRange
                 } else if (this.getAttackMode() != 1) {
 
                     if (!this.worldObj.isRemote) {
-                        Revival.showMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.unknownMelee"), (EntityPlayer) targetEntity);
+                        Revival.messagePlayer(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.unknownMelee"), (EntityPlayer) targetEntity);
                     }
 
                     this.SetAttackMode(1);
@@ -428,9 +428,9 @@ public class EntityPigBoss extends EntityMob implements IBossDisplayData, IRange
 
         if (entityplayer != null && this.canEntityBeSeen(entityplayer)) {
             if (this.getRNG().nextInt(1) == 0) {
-                Revival.showMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.hello"), entityplayer);
+                Revival.messagePlayer(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.hello"), entityplayer);
             } else {
-                Revival.showMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.fewBeaten"), entityplayer);
+                Revival.messagePlayer(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.fewBeaten"), entityplayer);
             }
 
             if (!this.worldObj.provider.isHellWorld) {
@@ -485,7 +485,7 @@ public class EntityPigBoss extends EntityMob implements IBossDisplayData, IRange
                             double distance = this.getDistanceSqToEntity(player);
 
                             if (distance < 30.0D) {
-                                Revival.showMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.fireRain"), player);
+                                Revival.messagePlayer(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.fireRain"), player);
                             }
                         }
                     }
@@ -606,7 +606,7 @@ public class EntityPigBoss extends EntityMob implements IBossDisplayData, IRange
                     double distance = this.getDistanceSqToEntity(player);
 
                     if (distance < 30.0D) {
-                        Revival.showMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.qi"), player);
+                        Revival.messagePlayer(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.qi"), player);
                     }
                 }
             }
@@ -646,7 +646,7 @@ public class EntityPigBoss extends EntityMob implements IBossDisplayData, IRange
                 double distance = this.getDistanceSqToEntity(player);
 
                 if (distance < 30.0D) {
-                    Revival.showMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.summon"), player);
+                    Revival.messagePlayer(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.summon"), player);
                 }
             }
         }
@@ -674,7 +674,7 @@ public class EntityPigBoss extends EntityMob implements IBossDisplayData, IRange
                 double distance = this.getDistanceSqToEntity(player);
 
                 if (distance < 30.0D) {
-                    Revival.showMessage(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.trans"), player);
+                    Revival.messagePlayer(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.trans"), player);
                 }
             }
         }

@@ -43,7 +43,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 import fossilsarcheology.Revival;
 import fossilsarcheology.client.gui.GuiPedia;
 import fossilsarcheology.server.entity.ai.QuaggaAITaming;
-import fossilsarcheology.server.handler.LocalizationStrings;
 import fossilsarcheology.server.item.FAItemRegistry;
 
 public class EntityQuagga extends EntityAnimal implements IInvBasic {
