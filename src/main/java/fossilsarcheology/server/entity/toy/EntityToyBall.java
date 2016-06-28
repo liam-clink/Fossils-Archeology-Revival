@@ -1,10 +1,5 @@
 package fossilsarcheology.server.entity.toy;
 
-import fossilsarcheology.Revival;
-import fossilsarcheology.server.entity.EntityPrehistoric;
-import fossilsarcheology.server.entity.EntityToyBase;
-import fossilsarcheology.server.item.FAItemRegistry;
-import fossilsarcheology.server.message.MessageRollBall;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.item.EntityItem;
@@ -14,6 +9,12 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import fossilsarcheology.Revival;
+import fossilsarcheology.server.entity.EntityPrehistoric;
+import fossilsarcheology.server.entity.EntityToyBase;
+import fossilsarcheology.server.entity.mob.projectile.EntityJavelin;
+import fossilsarcheology.server.item.FAItemRegistry;
+import fossilsarcheology.server.message.MessageRollBall;
 
 public class EntityToyBall extends EntityToyBase {
 
@@ -82,6 +83,12 @@ public class EntityToyBall extends EntityToyBase {
                 if (!this.worldObj.isRemote)
                     this.worldObj.spawnEntityInWorld(new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, this.getItem()));
                 this.setDead();
+                return true;
+            }
+            if (dmg.getEntity() instanceof EntityJavelin) {
+                this.playSound(getAttackNoise(), 1, this.getSoundPitch());
+                this.rotationYaw = dmg.getEntity().rotationYaw;
+                this.addVelocity((double) (-MathHelper.sin(this.rotationYaw * (float) Math.PI / 180.0F) * 0.5F), 0.1D, (double) (MathHelper.cos(this.rotationYaw * (float) Math.PI / 180.0F) * 0.5F));
                 return true;
             }
             if (dmg.getEntity() instanceof EntityPrehistoric) {
