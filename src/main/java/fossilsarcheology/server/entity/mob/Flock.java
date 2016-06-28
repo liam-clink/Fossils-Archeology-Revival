@@ -51,7 +51,7 @@ public class Flock {
             if (member != null && flockLeader != null && this.flockPathNavigate != null && this.flockPathNavigate.getPath() != null) {
                 if (member.getNavigator().noPath() && member != this.flockLeader) {
                 	PathEntity path = this.flockLeader.getNavigator().getPath();
-                    member.getNavigator().setPath(this.flockPathNavigate.getPathToXYZ(path.getFinalPathPoint().xCoord + generateVarience(-4, -4), path.getFinalPathPoint().yCoord + generateVarience(-4, -4), path.getFinalPathPoint().zCoord + generateVarience(-4, -4)), 1);
+                    member.getNavigator().setPath(this.flockPathNavigate.getPathToXYZ(path.getFinalPathPoint().xCoord + generateVarience(4, -4), path.getFinalPathPoint().yCoord + generateVarience(4, -4), path.getFinalPathPoint().zCoord + generateVarience(4, -4)), 1);
                 }
             }
         }
