@@ -56,7 +56,7 @@ public class WorldGenMiscStructures implements IWorldGenerator {
 				}
 			}
 			if (Revival.CONFIG.generateTarSites) {
-				if (random.nextInt(200) == 0) {
+				if (random.nextInt(300) == 0) {
 					int Xcoord1 = chunkX * 16 + random.nextInt(16);
 					int Zcoord1 = chunkZ * 16 + random.nextInt(16);
 					int Ycoord1 = world.getHeightValue(Xcoord1, Zcoord1);
@@ -67,7 +67,7 @@ public class WorldGenMiscStructures implements IWorldGenerator {
 				}
 			}
 			if (Revival.CONFIG.generateFossilSites) {
-				if (random.nextInt(200) == 0) {
+				if (random.nextInt(300) == 0) {
 					int Xcoord1 = chunkX * 16 + random.nextInt(16);
 					int Zcoord1 = chunkZ * 16 + random.nextInt(16);
 					int Ycoord1 = world.getHeightValue(Xcoord1, Zcoord1);
@@ -82,6 +82,16 @@ public class WorldGenMiscStructures implements IWorldGenerator {
 				counter++;
 				if (counter == 1) {
 					new AnuCastleWorldGen().generate(world, random, -70, 61, -70);
+					int structurebase = 140;
+					int base = 14;
+					for (int y = 50; y < 63; y++) {
+						base--;
+						for (int x = -70 - base; x < structurebase - 70 + base; x++) {
+							for (int z = -70 - base; z < structurebase - 70 + base; z++) {
+								world.setBlock(x, y, z, Blocks.netherrack);
+							}
+						}
+					}
 				}
 			}
 			if (world.getChunkFromChunkCoords(chunkX, chunkZ) == world.getChunkFromBlockCoords(-80, -120) && world.provider.dimensionId == Revival.CONFIG.dimensionIDTreasure) {
@@ -89,13 +99,6 @@ public class WorldGenMiscStructures implements IWorldGenerator {
 				counter++;
 				if (counter == 1) {
 					new AncientChestWorldGen().generate(world, random, -80, 63, -120);
-					for(int x = -80; x < 80; x++){
-						for(int y = 60; y < 63; y++){
-							for(int z = -80; z < 80; z++){
-								world.setBlock(x, y, z, Blocks.netherrack);
-							}
-						}	
-					}
 				}
 			}
 		}
