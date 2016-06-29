@@ -1,5 +1,13 @@
 Velociraptor, the "Speedy Thief,"
-is an insanely popular dinosaur,
+is an insanely popular dinosaur due
+to its star status in popular
+movies. However, the real veloci-
+raptor is very different from the 
+man-sized, scaly monsters depicted
+by Hollywood. True velociraptors
+were unimposingly small, only two
+meters long and one and a half 
+meters tall. They also had feathers,
 but unlike common thought, a truely
 speedy, almost unimposingly small
 velociraptor similar to a bird
@@ -11,7 +19,9 @@ vibrant pattern to attract
 potential mates. It assisted
 in covering nests for brooding
 and increased the speed of the
-animal. Discovered in modern day
+animal. 
+
+Discovered in modern day
 Mongolia, the velociraptor lived
 in the current continent of Asia
 in arid environments consisting
