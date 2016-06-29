@@ -1,7 +1,5 @@
 package fossilsarcheology.server.util;
 
-import fossilsarcheology.server.block.FABlockRegistry;
-import fossilsarcheology.server.enums.EnumTimePeriod;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.passive.EntityCow;
@@ -11,9 +9,12 @@ import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.passive.EntitySquid;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-
+import fossilsarcheology.api.EnumDiet;
+import fossilsarcheology.api.FoodMappings;
+import fossilsarcheology.server.block.FABlockRegistry;
 import fossilsarcheology.server.entity.mob.EntityAlligatorGar;
 import fossilsarcheology.server.entity.mob.EntityAllosaurus;
 import fossilsarcheology.server.entity.mob.EntityAnkylosaurus;
@@ -46,10 +47,8 @@ import fossilsarcheology.server.entity.mob.EntityTyrannosaurus;
 import fossilsarcheology.server.entity.mob.EntityVelociraptor;
 import fossilsarcheology.server.enums.EnumMobType;
 import fossilsarcheology.server.enums.EnumPrehistoric;
+import fossilsarcheology.server.enums.EnumTimePeriod;
 import fossilsarcheology.server.item.FAItemRegistry;
-
-import fossilsarcheology.api.EnumDiet;
-import fossilsarcheology.api.FoodMappings;
 
 public class FossilFoodMappings {
 
@@ -119,6 +118,7 @@ public class FossilFoodMappings {
         }
 
         FoodMappings.INSTANCE.addMeat(EntityPlayer.class, 27);
+        FoodMappings.INSTANCE.addMeat(EntityPlayerMP.class, 27);
         FoodMappings.INSTANCE.addMeat(EntityVillager.class, 27);
         FoodMappings.INSTANCE.addMeat(EntityZombie.class, 23);
         FoodMappings.INSTANCE.addMeat(EntityChicken.class, 5);
