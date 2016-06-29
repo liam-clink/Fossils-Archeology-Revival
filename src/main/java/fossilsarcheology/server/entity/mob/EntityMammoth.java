@@ -65,7 +65,7 @@ public class EntityMammoth extends EntityPrehistoric implements IShearable {
 		teenAge = 7;
 		developsResistance = true;
 		breaksBlocks = true;
-		this.ridingY = 1.05F;
+		this.ridingY = 1.25F;
 		this.eatGrassTimes = 0;
 		this.setSheared(false);
 	}
