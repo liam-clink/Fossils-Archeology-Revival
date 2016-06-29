@@ -12,16 +12,6 @@ import fossilsarcheology.server.item.FAItemRegistry;
 
 public class FossilAchievementHandler {
 	public static AchievementPage FossilsAchievementPage;
-
-	/*
-	 * public static Achievement FirstEgg; public static Achievement AllEggs;
-	 * public static Achievement FoundFossils; public static Achievement
-	 * Permafrost; public static Achievement ArchWorkbench; public static
-	 * Achievement Analyzer; public static Achievement CultVat; public static
-	 * Achievement Sifter; public static Achievement Dinopedia; public static
-	 * Achievement IceAge; public static Achievement TheKing; public static
-	 * Achievement pigBossOnEarth;
-	 */
 	public static Achievement firstFossil;
 	public static Achievement analyzer;
 	public static Achievement tablet;
@@ -68,8 +58,8 @@ public class FossilAchievementHandler {
 		birdEgg = new Achievement("achievement.birdEgg", "birdEgg", 4, -2, new ItemStack(EnumPrehistoric.Confuciusornis.bestBirdEggItem), cultivate).registerStat();
 		sifter = new Achievement("achievement.sifter", "sifter", -2, 0, new ItemStack(FABlockRegistry.INSTANCE.blockSifterActive), null).registerStat();
 		fossilSeeds = new Achievement("achievement.fossilSeeds", "fossilSeeds", -2, -3, new ItemStack(FAItemRegistry.INSTANCE.fossilSeed), analyzer).registerStat();
-		failuresaurus = new Achievement("achievement.failuresaurus", "failuresaurus", 4, 0, new ItemStack(FABlockRegistry.INSTANCE.blockSlimeTrail), cultivate).registerStat();
-		failuresaurusAnalyzer = new Achievement("achievement.failuresaurusAnalyzer", "failuresaurusAnalyzer", 4, 2, new ItemStack(FAItemRegistry.INSTANCE.failuresaurusFlesh), failuresaurus).registerStat();
+		failuresaurus = new Achievement("achievement.failuresaurus", "failuresaurus", 4, 22, new ItemStack(FABlockRegistry.INSTANCE.blockSlimeTrail), cultivate).registerStat();
+		failuresaurusAnalyzer = new Achievement("achievement.failuresaurusAnalyzer", "failuresaurusAnalyzer", 4, 4, new ItemStack(FAItemRegistry.INSTANCE.failuresaurusFlesh), failuresaurus).registerStat();
 		findAnuTotem = new Achievement("achievement.findAnuTotem", "findAnuTotem", -6, 6, new ItemStack(FABlockRegistry.INSTANCE.anuTotem), null).registerStat();
 		anuPortal = new Achievement("achievement.anuPortal", "anuPortal", -4, 5, new ItemStack(FABlockRegistry.INSTANCE.anuPortal), findAnuTotem).registerStat();
 		anubiteEncounter = new Achievement("achievement.anubiteEncounter", "anubiteEncounter", -2, 5, new ItemStack(FABlockRegistry.INSTANCE.anubiteStatue), anuPortal).registerStat();
@@ -91,8 +81,8 @@ public class FossilAchievementHandler {
 		usurper = new Achievement("achievement.usurper", "usurper", 8, -3, new ItemStack(FAItemRegistry.INSTANCE.skull, 1, EnumDinoBones.Spinosaurus.ordinal()), (Achievement) firstDino).registerStat().setSpecial();
 		squire = new Achievement("achievement.squire", "squire", 7, -1, new ItemStack(FAItemRegistry.INSTANCE.skull, 1, 17), firstDino).registerStat();
 		shear = new Achievement("achievement.shear", "shear", 6, -6, new ItemStack(Blocks.wool, 1, 12), mammalEmbryo).registerStat();
-		deadDodo = new Achievement("achievement.deadDodo", "deadDodo", 4, -4, new ItemStack(FAItemRegistry.INSTANCE.skull, 1, EnumDinoBones.Dodo.ordinal()), birdEgg).registerStat();
-		trexKill = new Achievement("achievement.trexKill", "trexKill", 8, -1, new ItemStack(FAItemRegistry.INSTANCE.toothDagger), firstDino).registerStat();
+		deadDodo = new Achievement("achievement.deadDodo", "deadDodo", 4, 0, new ItemStack(FAItemRegistry.INSTANCE.skull, 1, EnumDinoBones.Dodo.ordinal()), birdEgg).registerStat();
+		trexKill = new Achievement("achievement.trexKill", "trexKill", 8, -7, new ItemStack(FAItemRegistry.INSTANCE.toothDagger), firstDino).registerStat();
 		AchievementPage.registerAchievementPage(new AchievementPage("Fossils and Archeology", firstFossil, analyzer, tablet, dinoDna, cultivate, dinoEgg, mammalEmbryo, birdEgg, sifter, fossilSeeds, failuresaurus, failuresaurusAnalyzer, findAnuTotem, anuPortal, anubiteEncounter, anuAttack, anuDead, arcWorkbench, fixedSword, fixedHelmet, fixedVase, dinopedia, scarab, scarabTools, blueScarab, key, wtf, clock, firstDino, theKing, usurper, squire, shear, deadDodo, trexKill));
 	}
 
