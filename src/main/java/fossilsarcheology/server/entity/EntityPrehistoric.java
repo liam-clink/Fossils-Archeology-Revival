@@ -1,22 +1,10 @@
 package fossilsarcheology.server.entity;
 
-import fossilsarcheology.Revival;
-import fossilsarcheology.server.block.FABlockRegistry;
-import fossilsarcheology.server.block.entity.TileEntityFeeder;
-import fossilsarcheology.server.entity.mob.Flock;
-import fossilsarcheology.server.enums.*;
-import fossilsarcheology.server.enums.EnumPrehistoricAI.Taming;
-import fossilsarcheology.server.handler.LocalizationStrings;
-import fossilsarcheology.server.item.FAItemRegistry;
-import fossilsarcheology.server.message.MessageFoodParticles;
-import fossilsarcheology.server.message.MessageHappyParticles;
-import fossilsarcheology.server.message.MessageSetDay;
-import fossilsarcheology.server.message.MessageUpdateEgg;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import fossilsarcheology.api.EnumDiet;
-import fossilsarcheology.api.FoodMappings;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+
 import net.ilexiconn.llibrary.client.model.tools.ChainBuffer;
 import net.ilexiconn.llibrary.server.animation.Animation;
 import net.ilexiconn.llibrary.server.animation.AnimationHandler;
@@ -26,7 +14,11 @@ import net.minecraft.block.BlockBush;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
 import net.minecraft.command.IEntitySelector;
-import net.minecraft.entity.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.IEntityLivingData;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.IMob;
@@ -35,16 +27,41 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.*;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.MathHelper;
+import net.minecraft.util.StatCollector;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import fossilsarcheology.Revival;
+import fossilsarcheology.api.EnumDiet;
+import fossilsarcheology.api.FoodMappings;
+import fossilsarcheology.server.block.FABlockRegistry;
+import fossilsarcheology.server.block.entity.TileEntityFeeder;
+import fossilsarcheology.server.entity.mob.Flock;
+import fossilsarcheology.server.enums.EnumAnimation;
+import fossilsarcheology.server.enums.EnumDinoBones;
+import fossilsarcheology.server.enums.EnumMobType;
+import fossilsarcheology.server.enums.EnumOrderType;
+import fossilsarcheology.server.enums.EnumPrehistoric;
+import fossilsarcheology.server.enums.EnumPrehistoricAI;
+import fossilsarcheology.server.enums.EnumPrehistoricAI.Taming;
+import fossilsarcheology.server.enums.EnumPrehistoricMood;
+import fossilsarcheology.server.enums.EnumSituation;
+import fossilsarcheology.server.enums.EnumTimePeriod;
+import fossilsarcheology.server.handler.LocalizationStrings;
+import fossilsarcheology.server.item.FAItemRegistry;
+import fossilsarcheology.server.message.MessageFoodParticles;
+import fossilsarcheology.server.message.MessageHappyParticles;
+import fossilsarcheology.server.message.MessageSetDay;
+import fossilsarcheology.server.message.MessageUpdateEgg;
 
 public abstract class EntityPrehistoric extends EntityTameable implements IPrehistoricAI, IAnimatedEntity {
 
@@ -1006,12 +1023,11 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
 		super.attackEntityFrom(dmg, i);
 		return super.attackEntityFrom(dmg, i);
 	}
-	
-	public static boolean isEntitySmallerThan(Entity entity, float size){
-		if(entity instanceof EntityPrehistoric){
+
+	public static boolean isEntitySmallerThan(Entity entity, float size) {
+		if (entity instanceof EntityPrehistoric) {
 			return ((EntityPrehistoric) entity).getActualWidth() <= size;
-		}
-		else{
+		} else {
 			return entity.width <= size;
 		}
 	}
@@ -1107,7 +1123,7 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
 								player.inventory.addItemStackToInventory(new ItemStack(Items.glass_bottle, 1));
 							}
 							Revival.NETWORK_WRAPPER.sendToAll(new MessageFoodParticles(getEntityId(), Item.getIdFromItem(FAItemRegistry.INSTANCE.chickenEssence)));
-							// this.increaseDinoAge();
+							this.setAgeInDays(this.getAgeInDays() + 1);
 							this.setHunger(1 + (new Random()).nextInt(this.getHunger()));
 							this.func_152115_b(player.getDisplayName());
 							return true;
@@ -1533,19 +1549,27 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
 
 	public void doFoodEffect(Item item) {
 		if (item != null) {
-			spawnItemParticle(item);
+			if (item instanceof ItemBlock) {
+				spawnItemParticle(item, true);
+			}else{
+				spawnItemParticle(item, false);
+			}
 		}
 		this.worldObj.playSoundAtEntity(this, "random.eat", this.getSoundVolume(), this.getSoundPitch());
 	}
 
-	public void spawnItemParticle(Item item) {
+	public void spawnItemParticle(Item item, boolean itemBlock) {
 		double motionX = rand.nextGaussian() * 0.07D;
 		double motionY = rand.nextGaussian() * 0.07D;
 		double motionZ = rand.nextGaussian() * 0.07D;
 		float f = (float) (getRNG().nextFloat() * (this.boundingBox.maxX - this.boundingBox.minX) + this.boundingBox.minX);
 		float f1 = (float) (getRNG().nextFloat() * (this.boundingBox.maxY - this.boundingBox.minY) + this.boundingBox.minY);
 		float f2 = (float) (getRNG().nextFloat() * (this.boundingBox.maxZ - this.boundingBox.minZ) + this.boundingBox.minZ);
-		worldObj.spawnParticle("iconcrack_" + Item.getIdFromItem(item) + "_0", f, f1, f2, motionX, motionY, motionZ);
+		if (itemBlock && item instanceof ItemBlock) {
+			worldObj.spawnParticle("blockcrack_" + Block.getIdFromBlock(((ItemBlock)item).field_150939_a) + "_0", f, f1, f2, motionX, motionY, motionZ);
+		} else {
+			worldObj.spawnParticle("iconcrack_" + Item.getIdFromItem(item) + "_0", f, f1, f2, motionX, motionY, motionZ);
+		}
 	}
 
 	public void eatItem(ItemStack stack) {
@@ -1648,6 +1672,12 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
 
 	@Override
 	public EntityAgeable createChild(EntityAgeable entity) {
+		Entity baby = this.type.invokeClass(this.worldObj);
+		if (entity instanceof EntityPrehistoric) {
+			((EntityPrehistoric) baby).onSpawnWithEgg(null);
+			((EntityPrehistoric) baby).setAgeInDays(1);
+			return ((EntityPrehistoric) baby);
+		}
 		return null;
 	}
 

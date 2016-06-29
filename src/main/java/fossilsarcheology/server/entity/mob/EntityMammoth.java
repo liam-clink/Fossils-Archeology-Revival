@@ -37,9 +37,9 @@ import fossilsarcheology.server.enums.EnumPrehistoricAI;
 
 public class EntityMammoth extends EntityPrehistoric implements IShearable {
 
-	private EntityAIEatGrass aiEatGrass = new EntityAIEatGrass(this);
 	private int eatGrassTimes = 0;
 	private static PotionEffect BIOME_EFFECT = new PotionEffect(Potion.weakness.id, 60, 1);
+	protected boolean isSheared;
 
 	public EntityMammoth(World world) {
 		super(world, EnumPrehistoric.Mammoth, 2, 12, 10, 66, 0.2, 0.3);
@@ -59,7 +59,6 @@ public class EntityMammoth extends EntityPrehistoric implements IShearable {
 		this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
 		this.targetTasks.addTask(4, new DinoAIHunt(this, 200, false));
 		this.setActualSize(0.7F, 0.7F);
-		this.tasks.addTask(10, aiEatGrass);
 		this.pediaScale = 1.5F;
 		minSize = 1.3F;
 		maxSize = 5F;
@@ -67,6 +66,8 @@ public class EntityMammoth extends EntityPrehistoric implements IShearable {
 		developsResistance = true;
 		breaksBlocks = true;
 		this.ridingY = 1.05F;
+		this.eatGrassTimes = 0;
+		this.setSheared(false);
 	}
 
 	@Override
@@ -87,20 +88,18 @@ public class EntityMammoth extends EntityPrehistoric implements IShearable {
 
 	@Override
 	public boolean isShearable(ItemStack item, IBlockAccess world, int x, int y, int z) {
-		this.eatGrassTimes = 0;
-		return !this.getSheared() && !this.isChild() && !this.isSkeleton();
+		return !this.isSheared() && !this.isChild() && !this.isSkeleton();
 	}
 
 	@Override
 	public ArrayList<ItemStack> onSheared(ItemStack item, IBlockAccess world, int x, int y, int z, int fortune) {
 		ArrayList var7 = new ArrayList();
 		int var8 = 1 + this.rand.nextInt(20);
-
 		for (int var9 = 0; var9 < var8; ++var9) {
-
 			var7.add(new ItemStack(Blocks.wool, 1, 12));
-
 		}
+		this.setSheared(true);
+        this.playSound("mob.sheep.shear", 1.0F, 1.0F);
 		return var7;
 	}
 
@@ -112,45 +111,32 @@ public class EntityMammoth extends EntityPrehistoric implements IShearable {
 		String gender = this.getGender() == 0 ? "_female" : "_male";
 		String sleeping = !this.isSleeping() ? this.isActuallyWeak()? "_sleeping": "" : "_sleeping";
 		String toggleList = this.hasFeatherToggle ? !this.featherToggle ? "_feathered" : "_scaled" : "";
-		return "fossil:textures/model/" + type.toString().toLowerCase() + "_0/" + toggle + type.toString().toLowerCase() + gender + toggleList + sleeping + (this.getSheared() ? "_sheared" : "") + ".png";
+		return "fossil:textures/model/" + type.toString().toLowerCase() + "_0/" + toggle + type.toString().toLowerCase() + gender + toggleList + sleeping + (this.isSheared() ? "_sheared" : "") + ".png";
 	}
 
 	@Override
 	public void setSpawnValues() {
 	}
 
-	public boolean getSheared() {
-		return (this.dataWatcher.getWatchableObjectByte(30) & 16) != 0;
-	}
-
-	public void setSheared(boolean var1) {
-		byte var2 = this.dataWatcher.getWatchableObjectByte(30);
-
-		if (var1) {
-			this.dataWatcher.updateObject(30, (byte) (var2 | 16));
-		} else {
-			this.dataWatcher.updateObject(30, (byte) (var2 & -17));
-		}
-	}
-
 	@Override
 	public void writeEntityToNBT(NBTTagCompound var1) {
 		super.writeEntityToNBT(var1);
-		var1.setBoolean("Sheared", this.getSheared());
+		var1.setInteger("GrassTicks", this.eatGrassTimes);
+		var1.setBoolean("Sheared", this.isSheared());
 	}
 
 	@Override
 	public void readEntityFromNBT(NBTTagCompound var1) {
 		super.readEntityFromNBT(var1);
 		this.setSheared(var1.getBoolean("Sheared"));
-
+		this.eatGrassTimes = var1.getInteger("GrassTicks");
 	}
-
+	
 	@Override
-	public void eatGrassBonus() {
-		if (this.getSheared()) {
+	public void doFoodEffect(Item item) {
+		super.doFoodEffect(item);
+		if (this.isSheared()) {
 			++this.eatGrassTimes;
-
 			if (this.eatGrassTimes >= 5) {
 				this.setSheared(false);
 				this.eatGrassTimes = 0;
@@ -163,76 +149,64 @@ public class EntityMammoth extends EntityPrehistoric implements IShearable {
 		int i = MathHelper.floor_double(this.posX);
 		int j = MathHelper.floor_double(this.posY);
 		int k = MathHelper.floor_double(this.posZ);
-		if (!this.isPotionActive(Potion.weakness) && this.worldObj.getBiomeGenForCoords(i, k).getFloatTemperature(i, j, k) > 1.0 && !this.getSheared()) {
+		if (!this.isPotionActive(Potion.weakness) && this.worldObj.getBiomeGenForCoords(i, k).getFloatTemperature(i, j, k) > 1.0 && !this.isSheared()) {
 			this.addPotionEffect(BIOME_EFFECT);
 		}
-
 		super.onLivingUpdate();
 	}
 
 	@Override
 	public EnumPrehistoricAI.Activity aiActivityType() {
-
 		return EnumPrehistoricAI.Activity.DIURINAL;
 	}
 
 	@Override
 	public EnumPrehistoricAI.Attacking aiAttackType() {
-
 		return EnumPrehistoricAI.Attacking.KNOCKUP;
 	}
 
 	@Override
 	public EnumPrehistoricAI.Climbing aiClimbType() {
-
 		return EnumPrehistoricAI.Climbing.NONE;
 	}
 
 	@Override
 	public EnumPrehistoricAI.Following aiFollowType() {
-
 		return EnumPrehistoricAI.Following.NONE;
 	}
 
 	@Override
 	public EnumPrehistoricAI.Jumping aiJumpType() {
-
 		return EnumPrehistoricAI.Jumping.BASIC;
 	}
 
 	@Override
 	public EnumPrehistoricAI.Response aiResponseType() {
-
 		return EnumPrehistoricAI.Response.TERITORIAL;
 	}
 
 	@Override
 	public EnumPrehistoricAI.Stalking aiStalkType() {
-
 		return EnumPrehistoricAI.Stalking.NONE;
 	}
 
 	@Override
 	public EnumPrehistoricAI.Taming aiTameType() {
-
 		return EnumPrehistoricAI.Taming.IMPRINTING;
 	}
 
 	@Override
 	public EnumPrehistoricAI.Untaming aiUntameType() {
-
 		return EnumPrehistoricAI.Untaming.ATTACK;
 	}
 
 	@Override
 	public EnumPrehistoricAI.Moving aiMovingType() {
-
 		return EnumPrehistoricAI.Moving.WALK;
 	}
 
 	@Override
 	public EnumPrehistoricAI.WaterAbility aiWaterAbilityType() {
-
 		return EnumPrehistoricAI.WaterAbility.NONE;
 	}
 
@@ -243,7 +217,6 @@ public class EntityMammoth extends EntityPrehistoric implements IShearable {
 
 	@Override
 	public Item getOrderItem() {
-
 		return Items.stick;
 	}
 
@@ -287,7 +260,31 @@ public class EntityMammoth extends EntityPrehistoric implements IShearable {
 	public int getMaxHunger() {
 		return 150;
 	}
+	
+	public void setSheared(boolean sheared) {
+		byte b0 = this.dataWatcher.getWatchableObjectByte(30);
+		if (sheared) {
+			this.dataWatcher.updateObject(30, (byte) (b0 | 1));
+		} else {
+			this.dataWatcher.updateObject(30, (byte) (b0 & -2));
+		}
+		if (!worldObj.isRemote) {
+			this.isSheared = sheared;
+		}
+	}
 
+	public boolean isSheared() {
+		if (worldObj.isRemote) {
+			boolean isSheared = (this.dataWatcher.getWatchableObjectByte(30) & 1) != 0;
+			if ((isSheared != this.isSheared)) {
+				ticksSlept = 0;
+			}
+			this.isSheared = isSheared;
+			return isSheared;
+		}
+		return isSheared;
+	}
+	
 	@Override
 	public boolean canBeRidden() {
 		return true;

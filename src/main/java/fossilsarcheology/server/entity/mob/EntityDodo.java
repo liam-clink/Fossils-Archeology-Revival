@@ -26,6 +26,7 @@ public class EntityDodo extends EntityPrehistoric {
 
     public EntityDodo(World world) {
         super(world, EnumPrehistoric.Dodo, 1, 1, 4, 10, 0.2, 0.25);
+        this.teenAge = 3;
         this.getNavigator().setAvoidsWater(true);
         this.getNavigator().setCanSwim(true);
         this.tasks.addTask(1, new EntityAISwimming(this));

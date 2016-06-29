@@ -182,7 +182,7 @@ public class ModelDodo extends ModelPrehistoric {
 
         }
 
-        if (((EntityPrehistoric) (entity)).isChild()) {
+        if (((EntityPrehistoric) (entity)).isChild() && !((EntityPrehistoric) (entity)).isSkeleton()) {
             this.head.setScale(1.5F, 1.5F, 1.5F);
         } else {
             this.head.setScale(1F, 1F, 1F);
