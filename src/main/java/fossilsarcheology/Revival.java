@@ -1,15 +1,5 @@
 package fossilsarcheology;
 
-import net.ilexiconn.llibrary.server.config.Config;
-import net.ilexiconn.llibrary.server.network.NetworkWrapper;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.DimensionManager;
-import net.minecraftforge.common.MinecraftForge;
-
-import org.apache.logging.log4j.Level;
-
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.FMLLog;
@@ -26,62 +16,34 @@ import fossilsarcheology.server.ModState;
 import fossilsarcheology.server.ServerProxy;
 import fossilsarcheology.server.biome.FABiomeRegistry;
 import fossilsarcheology.server.block.FABlockRegistry;
-import fossilsarcheology.server.block.entity.TileEntityAnalyzer;
-import fossilsarcheology.server.block.entity.TileEntityAncientChest;
-import fossilsarcheology.server.block.entity.TileEntityAnuTotem;
-import fossilsarcheology.server.block.entity.TileEntityAnubiteStatue;
-import fossilsarcheology.server.block.entity.TileEntityCultivate;
-import fossilsarcheology.server.block.entity.TileEntityDrum;
-import fossilsarcheology.server.block.entity.TileEntityFigurine;
-import fossilsarcheology.server.block.entity.TileEntitySarcophagus;
-import fossilsarcheology.server.block.entity.TileEntitySifter;
-import fossilsarcheology.server.block.entity.TileEntityTimeMachine;
-import fossilsarcheology.server.block.entity.TileEntityVase;
-import fossilsarcheology.server.block.entity.TileEntityWorktable;
+import fossilsarcheology.server.block.entity.*;
 import fossilsarcheology.server.config.FossilConfig;
 import fossilsarcheology.server.creativetab.FATabRegistry;
 import fossilsarcheology.server.dimension.anu.WorldProviderAnu;
 import fossilsarcheology.server.dimension.treasure.WorldProviderTreasure;
 import fossilsarcheology.server.enchantment.FAEnchantmentRegistry;
 import fossilsarcheology.server.enums.EnumPrehistoric;
-import fossilsarcheology.server.gen.FossilGenerator;
-import fossilsarcheology.server.gen.TarGenerator;
-import fossilsarcheology.server.gen.VolcanicRockGenerator;
-import fossilsarcheology.server.gen.WorldGenMiscStructures;
-import fossilsarcheology.server.gen.WorldGeneratorPalaeoraphe;
+import fossilsarcheology.server.gen.*;
 import fossilsarcheology.server.gen.structure.AcademyGenerator;
 import fossilsarcheology.server.gen.structure.ShipWreckGenerator;
-import fossilsarcheology.server.handler.EventFossilAchivements;
-import fossilsarcheology.server.handler.EventPlayer;
-import fossilsarcheology.server.handler.FossilAchievementHandler;
-import fossilsarcheology.server.handler.FossilBonemealEvent;
-import fossilsarcheology.server.handler.FossilConnectionEvent;
-import fossilsarcheology.server.handler.FossilEntities;
-import fossilsarcheology.server.handler.FossilGuiHandler;
-import fossilsarcheology.server.handler.FossilInteractEvent;
-import fossilsarcheology.server.handler.FossilLivingEvent;
-import fossilsarcheology.server.handler.FossilOreDictionary;
-import fossilsarcheology.server.handler.FossilRecipes;
-import fossilsarcheology.server.handler.FossilToolEvent;
-import fossilsarcheology.server.handler.FossilTradeHandler;
-import fossilsarcheology.server.handler.LocalizationStrings;
-import fossilsarcheology.server.handler.PickupHandler;
+import fossilsarcheology.server.handler.*;
 import fossilsarcheology.server.item.FAItemRegistry;
-import fossilsarcheology.server.message.MessageFoodParticles;
-import fossilsarcheology.server.message.MessageHappyParticles;
-import fossilsarcheology.server.message.MessageJavelinType;
-import fossilsarcheology.server.message.MessageRollBall;
-import fossilsarcheology.server.message.MessageSetDay;
-import fossilsarcheology.server.message.MessageUpdateEgg;
-import fossilsarcheology.server.message.MessageUpdateNautilus;
+import fossilsarcheology.server.message.*;
 import fossilsarcheology.server.util.FossilFoodMappings;
+import net.ilexiconn.llibrary.server.config.Config;
+import net.ilexiconn.llibrary.server.network.NetworkWrapper;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ChatComponentText;
+import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.common.MinecraftForge;
+import org.apache.logging.log4j.Level;
 
 @Mod(modid = Revival.MODID, name = "Fossils and Archeology Revival", version = Revival.VERSION, dependencies = "required-after:llibrary@[" + Revival.LLIBRARY_VERSION + ",)")
 public class Revival {
     public static final String MODID = "fossil";
     public static final ModState STATE = ModState.RELEASE;
     public static final String VERSION = "7.3.0-develop";
-    public static final String LLIBRARY_VERSION = "1.3.0";
+    public static final String LLIBRARY_VERSION = "1.4.0";
 
     @SidedProxy(clientSide = "fossilsarcheology.client.ClientProxy", serverSide = "fossilsarcheology.server.ServerProxy")
     public static ServerProxy PROXY;
