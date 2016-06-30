@@ -16,7 +16,6 @@ buildscript {
 }
 
 apply plugin: "forge"
-apply plugin: "maven-publish"
 
 def mod_file = getModFile()
 version = getVersion("VERSION", mod_file)
@@ -103,32 +102,4 @@ String getModFile() {
         }
     }
     return path;
-}
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            groupId "fossilsarcheology"
-            artifactId "fossilsarcheology"
-            from components.java
-        }
-    }
-    repositories {
-        maven {
-            credentials {
-                if (System.getenv().PASSWORD) {
-                    username System.getenv().USERNAME
-                    password System.getenv().PASSWORD
-                } else {
-                    username ""
-                    password ""
-                }
-            }
-            if (System.getenv().PASSWORD) {
-                url "sftp://connect.ilexiconn.net:22/home/ilexiconn/maven/"
-            } else {
-                url "file:///var/www/maven/"
-            }
-        }
-    }
 }
