@@ -24,10 +24,6 @@ group = "fossilsarcheology"
 archivesBaseName = "fossilsarcheology"
 sourceCompatibility = targetCompatibility = "1.8"
 
-if (System.getenv().BUILD_NUMBER) {
-    version = version + "." + "${System.getenv().BUILD_NUMBER}"
-}
-
 minecraft {
     version = "1.7.10-10.13.4.1558-1.7.10"
     runDir = "minecraft"
