@@ -16,7 +16,7 @@ buildscript {
 }
 
 apply plugin: "forge"
-apply plugin: "maven"
+apply plugin: "maven-publish"
 
 def mod_file = getModFile()
 version = getVersion("VERSION", mod_file)
