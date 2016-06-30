@@ -15,17 +15,19 @@ buildscript {
     }
 }
 
-project.ext.buildnumber = ""
-if (System.getenv().BUILD_NUMBER) project.buildnumber = "-" + System.getenv().BUILD_NUMBER
-
 apply plugin: "forge"
+apply plugin: "maven"
 
 def mod_file = getModFile()
-version = getVersion("VERSION", mod_file) + project.buildnumber
+version = getVersion("VERSION", mod_file)
 def llibrary_version = getVersion("LLIBRARY_VERSION", mod_file)
-group = "com.github.revival"
-archivesBaseName = "fossils_and_archeology_revival"
+group = "fossilsarcheology"
+archivesBaseName = "fossilsarcheology"
 sourceCompatibility = targetCompatibility = "1.8"
+
+if (System.getenv().BUILD_NUMBER) {
+    version = version + "." + "${System.getenv().BUILD_NUMBER}"
+}
 
 minecraft {
     version = "1.7.10-10.13.4.1558-1.7.10"
@@ -101,4 +103,32 @@ String getModFile() {
         }
     }
     return path;
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            groupId "fossilsarcheology"
+            artifactId "fossilsarcheology"
+            from components.java
+        }
+    }
+    repositories {
+        maven {
+            credentials {
+                if (System.getenv().PASSWORD) {
+                    username System.getenv().USERNAME
+                    password System.getenv().PASSWORD
+                } else {
+                    username ""
+                    password ""
+                }
+            }
+            if (System.getenv().PASSWORD) {
+                url "sftp://connect.ilexiconn.net:22/home/ilexiconn/maven/"
+            } else {
+                url "file:///var/www/maven/"
+            }
+        }
+    }
 }
