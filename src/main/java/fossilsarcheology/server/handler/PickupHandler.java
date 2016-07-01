@@ -37,7 +37,7 @@ public class PickupHandler {
         if (EnumPrehistoric.isDinoEgg(event.smelting.getItem())) {
             event.player.addStat(FossilAchievementHandler.dinoEgg, 1);
         }
-        if (EnumPrehistoric.isDNA(event.smelting.getItem())) {
+        if (EnumPrehistoric.isEmbryo(event.smelting.getItem())) {
             event.player.addStat(FossilAchievementHandler.mammalEmbryo, 1);
         }
 
