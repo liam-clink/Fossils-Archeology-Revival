@@ -42,7 +42,7 @@ public class DinoAIHunt extends EntityAITarget {
 	}
 
 	public boolean shouldExecute() {
-		
+
 		if (this.targetTicks > 0 && this.taskOwner.getRNG().nextInt(this.targetTicks) != 0) {
 			return false;
 		} else {
@@ -53,24 +53,24 @@ public class DinoAIHunt extends EntityAITarget {
 				return false;
 			} else {
 				this.targetEntity = (EntityLivingBase) list.get(0);
-				if(this.taskOwner instanceof EntityPrehistoric){
-					EntityPrehistoric prehistoric = (EntityPrehistoric)this.taskOwner;
-					if(targetEntity instanceof EntityPlayer && (prehistoric.getMoodFace() == EnumPrehistoricMood.ANGRY || prehistoric.getMoodFace() == EnumPrehistoricMood.SAD)){
-						return true;
-					}
-					if(FoodMappings.INSTANCE.getEntityFoodAmount(this.targetEntity.getClass(), prehistoric.type.diet) == 0){
+				if (this.taskOwner instanceof EntityPrehistoric) {
+					EntityPrehistoric prehistoric = (EntityPrehistoric) this.taskOwner;
+					if (targetEntity instanceof EntityPlayer && ((EntityPlayer) targetEntity).capabilities.isCreativeMode) {
 						return false;
 					}
-					if(targetEntity instanceof EntityToyBase && prehistoric.ticksTillPlay == 0){
+					if (targetEntity instanceof EntityPlayer && (prehistoric.getMoodFace() == EnumPrehistoricMood.ANGRY || prehistoric.getMoodFace() == EnumPrehistoricMood.SAD)) {
+						return !((EntityPlayer) targetEntity).capabilities.isCreativeMode;
+					}
+					if (FoodMappings.INSTANCE.getEntityFoodAmount(this.targetEntity.getClass(), prehistoric.type.diet) == 0) {
+						return !prehistoric.func_152114_e(targetEntity);
+					}
+					if (targetEntity instanceof EntityToyBase && prehistoric.ticksTillPlay == 0) {
 						return true;
 					}
-					if(prehistoric.func_152114_e(targetEntity) && (prehistoric.getMoodFace() == EnumPrehistoricMood.ANGRY || prehistoric.getMoodFace() == EnumPrehistoricMood.SAD)){
-						return true;
-					}
-					if(prehistoric.isMovementBlocked() || !prehistoric.canDinoHunt(targetEntity, true)){
+					if (prehistoric.isMovementBlocked() || !prehistoric.canDinoHunt(targetEntity, true)) {
 						return false;
 					}
-			
+
 				}
 				return true;
 			}
