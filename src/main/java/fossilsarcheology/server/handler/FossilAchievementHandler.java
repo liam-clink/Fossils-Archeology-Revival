@@ -58,7 +58,7 @@ public class FossilAchievementHandler {
 		birdEgg = new Achievement("achievement.birdEgg", "birdEgg", 4, -2, new ItemStack(EnumPrehistoric.Confuciusornis.bestBirdEggItem), cultivate).registerStat();
 		sifter = new Achievement("achievement.sifter", "sifter", -2, 0, new ItemStack(FABlockRegistry.INSTANCE.blockSifterActive), null).registerStat();
 		fossilSeeds = new Achievement("achievement.fossilSeeds", "fossilSeeds", -2, -3, new ItemStack(FAItemRegistry.INSTANCE.fossilSeed), analyzer).registerStat();
-		failuresaurus = new Achievement("achievement.failuresaurus", "failuresaurus", 4, 22, new ItemStack(FABlockRegistry.INSTANCE.blockSlimeTrail), cultivate).registerStat();
+		failuresaurus = new Achievement("achievement.failuresaurus", "failuresaurus", 4, 2, new ItemStack(FABlockRegistry.INSTANCE.blockSlimeTrail), cultivate).registerStat();
 		failuresaurusAnalyzer = new Achievement("achievement.failuresaurusAnalyzer", "failuresaurusAnalyzer", 4, 4, new ItemStack(FAItemRegistry.INSTANCE.failuresaurusFlesh), failuresaurus).registerStat();
 		findAnuTotem = new Achievement("achievement.findAnuTotem", "findAnuTotem", -6, 6, new ItemStack(FABlockRegistry.INSTANCE.anuTotem), null).registerStat();
 		anuPortal = new Achievement("achievement.anuPortal", "anuPortal", -4, 5, new ItemStack(FABlockRegistry.INSTANCE.anuPortal), findAnuTotem).registerStat();
@@ -71,7 +71,7 @@ public class FossilAchievementHandler {
 		fixedVase = new Achievement("achievement.fixedVase", "fixedVase", -4, 0, new ItemStack(FABlockRegistry.INSTANCE.vaseAmphoraBlock, 1, 1), arcWorkbench).registerStat();
 		dinopedia = new Achievement("achievement.dinopedia", "dinopedia", 0, -6, new ItemStack(FAItemRegistry.INSTANCE.dinoPedia), dinoDna).registerStat();
 		scarab = new Achievement("achievement.scarab", "scarab", 0, 2, new ItemStack(FAItemRegistry.INSTANCE.gem), firstFossil).registerStat();
-		scarabTools = new Achievement("achievement.scarabTools", "scarabTools", 2, 2, new ItemStack(FAItemRegistry.INSTANCE.gemSword), scarab).registerStat();
+		scarabTools = new Achievement("achievement.scarabTools", "scarabTools", 0, 4, new ItemStack(FAItemRegistry.INSTANCE.gemSword), scarab).registerStat();
 		blueScarab = new Achievement("achievement.blueScarab", "blueScarab", -2, 2, new ItemStack(FAItemRegistry.INSTANCE.gem_blue), scarab).registerStat();
 		key = new Achievement("achievement.key", "key", 2, 7, new ItemStack(FAItemRegistry.INSTANCE.ancientKey), anuDead).registerStat();
 		wtf = new Achievement("achievement.inTreasure", "inTreasure", 4, 7, new ItemStack(Blocks.stonebrick), key).registerStat();
@@ -82,7 +82,7 @@ public class FossilAchievementHandler {
 		squire = new Achievement("achievement.squire", "squire", 7, -1, new ItemStack(FAItemRegistry.INSTANCE.skull, 1, 17), firstDino).registerStat();
 		shear = new Achievement("achievement.shear", "shear", 6, -6, new ItemStack(Blocks.wool, 1, 12), mammalEmbryo).registerStat();
 		deadDodo = new Achievement("achievement.deadDodo", "deadDodo", 4, 0, new ItemStack(FAItemRegistry.INSTANCE.skull, 1, EnumDinoBones.Dodo.ordinal()), birdEgg).registerStat();
-		trexKill = new Achievement("achievement.trexKill", "trexKill", 8, -7, new ItemStack(FAItemRegistry.INSTANCE.toothDagger), firstDino).registerStat();
+		trexKill = new Achievement("achievement.trexKill", "trexKill", 8, -7, new ItemStack(FAItemRegistry.INSTANCE.toothDagger), theKing).registerStat();
 		AchievementPage.registerAchievementPage(new AchievementPage("Fossils and Archeology", firstFossil, analyzer, tablet, dinoDna, cultivate, dinoEgg, mammalEmbryo, birdEgg, sifter, fossilSeeds, failuresaurus, failuresaurusAnalyzer, findAnuTotem, anuPortal, anubiteEncounter, anuAttack, anuDead, arcWorkbench, fixedSword, fixedHelmet, fixedVase, dinopedia, scarab, scarabTools, blueScarab, key, wtf, clock, firstDino, theKing, usurper, squire, shear, deadDodo, trexKill));
 	}
 
