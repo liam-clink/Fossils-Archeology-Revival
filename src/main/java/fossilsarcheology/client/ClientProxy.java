@@ -202,10 +202,6 @@ public class ClientProxy extends ServerProxy {
     public void calculateChainBuffer(EntityFishBase entity) {
         entity.chainBuffer.calculateChainSwingBuffer(70, 10, 4, entity);
     }
-    
-    public void updateAnimations(IAnimatedEntity entity) {
-		AnimationHandler.INSTANCE.updateAnimations(entity);
-    }
 
     public void spawnBubbleParticles(World world, float f, float f1, float f2, double motionX, double motionY, double motionZ) {
         Minecraft.getMinecraft().effectRenderer.addEffect(new BubbleFX(world, f, f1, f2, motionX, motionY, motionZ));

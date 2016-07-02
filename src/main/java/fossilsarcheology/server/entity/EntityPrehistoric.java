@@ -7,6 +7,7 @@ import java.util.Random;
 
 import net.ilexiconn.llibrary.client.model.tools.ChainBuffer;
 import net.ilexiconn.llibrary.server.animation.Animation;
+import net.ilexiconn.llibrary.server.animation.AnimationHandler;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
@@ -677,7 +678,9 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
 			}
 		}
 		Revival.PROXY.calculateChainBuffer(this);
-		Revival.PROXY.updateAnimations(this);
+		if(worldObj.isRemote){
+			AnimationHandler.INSTANCE.updateAnimations(this);
+		}
 	}
 
 	@Override

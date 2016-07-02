@@ -5,6 +5,7 @@ import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.entity.EntityToyBase;
 import fossilsarcheology.server.item.FAItemRegistry;
 import net.ilexiconn.llibrary.server.animation.Animation;
+import net.ilexiconn.llibrary.server.animation.AnimationHandler;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -29,8 +30,10 @@ public class EntityToyTetheredLog extends EntityToyBase implements IAnimatedEnti
     @Override
     public void onUpdate() {
         super.onUpdate();
-        Revival.PROXY.updateAnimations(this);
-        this.motionX *= 0;
+		if(worldObj.isRemote){
+			AnimationHandler.INSTANCE.updateAnimations(this);
+		}
+		this.motionX *= 0;
         this.motionY *= 0;
         this.motionZ *= 0;
         if (!isAttachedToBlock()) {

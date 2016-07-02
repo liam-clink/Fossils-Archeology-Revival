@@ -65,10 +65,7 @@ public class ServerProxy {
     public void calculateChainBuffer(EntityFishBase entity) {
 
     }
-    
-    public void updateAnimations(IAnimatedEntity entity) {
-
-    }
+   
 
     public void spawnBubbleParticles(World world, float f, float f1, float f2, double motionX, double motionY, double motionZ) {
     }
