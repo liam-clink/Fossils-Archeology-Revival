@@ -1,6 +1,7 @@
 package fossilsarcheology.server.entity.mob;
 
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.monster.EntityMob;
@@ -14,147 +15,155 @@ import fossilsarcheology.server.block.FABlockRegistry;
 import fossilsarcheology.server.item.FAItemRegistry;
 
 public class EntityFailuresaurus extends EntityMob {
-    public EntityFailuresaurus(World var1) {
-        super(var1);
-        this.setSize(0.8F, 0.8F);
-        this.experienceValue = 4;
-        this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.0D, false));
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityVillager.class, 0, true));
+	public EntityFailuresaurus(World var1) {
+		super(var1);
+		this.setSize(0.8F, 0.8F);
+		this.experienceValue = 4;
+		this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.0D, false));
+		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityVillager.class, 0, true));
 
-    }
+	}
 
-    @Override
-    protected void entityInit() {
-        super.entityInit();
-        this.dataWatcher.addObject(16, (byte) 0);
-        this.dataWatcher.addObject(18, (byte) 0);
-        this.setSkin(this.worldObj.rand.nextInt(3));
-    }
+	@Override
+	protected void entityInit() {
+		super.entityInit();
+		this.dataWatcher.addObject(16, (byte) 0);
+		this.dataWatcher.addObject(18, (byte) 0);
+		this.setSkin(this.worldObj.rand.nextInt(3));
+	}
 
-    @Override
-    protected boolean canDespawn() {
-        return false;
-    }
+	protected void applyEntityAttributes() {
+		super.applyEntityAttributes();
+		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.20000000149011612D);
+	}
 
-    @Override
-    public boolean allowLeashing() {
-        return true;
-    }
+	protected boolean isAIEnabled() {
+		return true;
+	}
 
-    @Override
-    public boolean isOnLadder() {
-        return this.isBesideClimbableBlock();
-    }
+	@Override
+	protected boolean canDespawn() {
+		return false;
+	}
 
-    @Override
-    public void onUpdate() {
-        super.onUpdate();
+	@Override
+	public boolean allowLeashing() {
+		return true;
+	}
 
-        if (!this.worldObj.isRemote) {
-            this.setBesideClimbableBlock(this.isCollidedHorizontally);
-        }
-    }
+	@Override
+	public boolean isOnLadder() {
+		return this.isBesideClimbableBlock();
+	}
 
-    public int getSkin() {
-        return this.dataWatcher.getWatchableObjectByte(18);
-    }
+	@Override
+	public void onUpdate() {
+		super.onUpdate();
 
-    public void setSkin(int par1) {
-        this.dataWatcher.updateObject(18, (byte) par1);
-    }
+		if (!this.worldObj.isRemote) {
+			this.setBesideClimbableBlock(this.isCollidedHorizontally);
+		}
+	}
 
-    public boolean isBesideClimbableBlock() {
-        return (this.dataWatcher.getWatchableObjectByte(16) & 1) != 0;
-    }
+	public int getSkin() {
+		return this.dataWatcher.getWatchableObjectByte(18);
+	}
 
-    public void setBesideClimbableBlock(boolean isClollided) {
-        byte b0 = this.dataWatcher.getWatchableObjectByte(16);
+	public void setSkin(int par1) {
+		this.dataWatcher.updateObject(18, (byte) par1);
+	}
 
-        if (isClollided) {
-            b0 = (byte) (b0 | 1);
-        } else {
-            b0 &= -2;
-        }
+	public boolean isBesideClimbableBlock() {
+		return (this.dataWatcher.getWatchableObjectByte(16) & 1) != 0;
+	}
 
-        this.dataWatcher.updateObject(16, b0);
-    }
+	public void setBesideClimbableBlock(boolean isClollided) {
+		byte b0 = this.dataWatcher.getWatchableObjectByte(16);
 
-    /**
-     * (abstract) Protected helper method to write subclass entity data to NBT.
-     */
-    @Override
-    public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {
-        super.writeEntityToNBT(par1NBTTagCompound);
-        par1NBTTagCompound.setInteger("FailuresaurusSkin", this.getSkin());
-    }
+		if (isClollided) {
+			b0 = (byte) (b0 | 1);
+		} else {
+			b0 &= -2;
+		}
 
-    /**
-     * (abstract) Protected helper method to read subclass entity data from NBT.
-     */
-    @Override
-    public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {
-        super.readEntityFromNBT(par1NBTTagCompound);
-        this.setSkin(par1NBTTagCompound.getInteger("FailuresaurusSkin"));
-    }
+		this.dataWatcher.updateObject(16, b0);
+	}
 
-    /**
-     * Returns the item ID for the item the mob drops on death.
-     */
-    @Override
-    protected Item getDropItem() {
-        return FAItemRegistry.INSTANCE.failuresaurusFlesh;
-    }
+	/**
+	 * (abstract) Protected helper method to write subclass entity data to NBT.
+	 */
+	@Override
+	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {
+		super.writeEntityToNBT(par1NBTTagCompound);
+		par1NBTTagCompound.setInteger("FailuresaurusSkin", this.getSkin());
+	}
 
-    @Override
-    public void onLivingUpdate() {
-        super.onLivingUpdate();
-        int i = MathHelper.floor_double(this.posX);
-        int j = MathHelper.floor_double(this.posY);
-        int k = MathHelper.floor_double(this.posZ);
-        for (int l = 0; l < 4; ++l) {
-            i = MathHelper.floor_double(this.posX + (double) ((float) (l % 2 * 2 - 1) * 0.25F));
-            j = MathHelper.floor_double(this.posY);
-            k = MathHelper.floor_double(this.posZ + (double) ((float) (l / 2 % 2 * 2 - 1) * 0.25F));
+	/**
+	 * (abstract) Protected helper method to read subclass entity data from NBT.
+	 */
+	@Override
+	public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {
+		super.readEntityFromNBT(par1NBTTagCompound);
+		this.setSkin(par1NBTTagCompound.getInteger("FailuresaurusSkin"));
+	}
 
-            if (this.worldObj.getBlock(i, j, k).getMaterial() == Material.air && FABlockRegistry.INSTANCE.blockSlimeTrail.canPlaceBlockAt(this.worldObj, i, j, k)) {
-                this.worldObj.setBlock(i, j, k, FABlockRegistry.INSTANCE.blockSlimeTrail);
-            }
-        }
-    }
+	/**
+	 * Returns the item ID for the item the mob drops on death.
+	 */
+	@Override
+	protected Item getDropItem() {
+		return FAItemRegistry.INSTANCE.failuresaurusFlesh;
+	}
 
-    @Override
-    protected String getLivingSound() {
-        return "mob.zombie.say";
-    }
+	@Override
+	public void onLivingUpdate() {
+		super.onLivingUpdate();
+		int i = MathHelper.floor_double(this.posX);
+		int j = MathHelper.floor_double(this.posY);
+		int k = MathHelper.floor_double(this.posZ);
+		for (int l = 0; l < 4; ++l) {
+			i = MathHelper.floor_double(this.posX + (double) ((float) (l % 2 * 2 - 1) * 0.25F));
+			j = MathHelper.floor_double(this.posY);
+			k = MathHelper.floor_double(this.posZ + (double) ((float) (l / 2 % 2 * 2 - 1) * 0.25F));
 
-    /**
-     * Returns the sound this mob makes when it is hurt.
-     */
-    @Override
-    protected String getHurtSound() {
-        return "mob.zombie.hurt";
-    }
+			if (this.worldObj.getBlock(i, j, k).getMaterial() == Material.air && FABlockRegistry.INSTANCE.blockSlimeTrail.canPlaceBlockAt(this.worldObj, i, j, k)) {
+				this.worldObj.setBlock(i, j, k, FABlockRegistry.INSTANCE.blockSlimeTrail);
+			}
+		}
+	}
 
-    /**
-     * Returns the sound this mob makes on death.
-     */
-    @Override
-    protected String getDeathSound() {
-        return "mob.zombie.death";
-    }
+	@Override
+	protected String getLivingSound() {
+		return "mob.zombie.say";
+	}
 
-    /**
-     * Causes this entity to do an upwards motion (jumping).
-     */
-    @Override
-    protected void jump() {
-    }
+	/**
+	 * Returns the sound this mob makes when it is hurt.
+	 */
+	@Override
+	protected String getHurtSound() {
+		return "mob.zombie.hurt";
+	}
 
-    /**
-     * Returns the texture's file path as a String.
-     */
-    public String getTexture() {
-        return "fossil:textures/mob/Failuresaurus.png";
-    }
+	/**
+	 * Returns the sound this mob makes on death.
+	 */
+	@Override
+	protected String getDeathSound() {
+		return "mob.zombie.death";
+	}
+
+	/**
+	 * Causes this entity to do an upwards motion (jumping).
+	 */
+	@Override
+	protected void jump() {}
+
+	/**
+	 * Returns the texture's file path as a String.
+	 */
+	public String getTexture() {
+		return "fossil:textures/mob/Failuresaurus.png";
+	}
 }
