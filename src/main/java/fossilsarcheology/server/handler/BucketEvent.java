@@ -36,16 +36,11 @@ public class BucketEvent {
     private ItemStack fillCustomBucket(World world, MovingObjectPosition pos) {
 
         Block block = world.getBlock(pos.blockX, pos.blockY, pos.blockZ);
-
         Item bucket = buckets.get(block);
-        if (new Random().nextInt(30) == 0) {
-            if (bucket != null && world.getBlockMetadata(pos.blockX, pos.blockY, pos.blockZ) == 0) {
-                world.playSoundEffect(pos.blockX, pos.blockY, pos.blockZ, "dig.sand", 1, 1);
-                world.setBlockToAir(pos.blockX, pos.blockY, pos.blockZ);
-                return new ItemStack(bucket);
-            } else {
-                return null;
-            }
+        if (bucket != null && world.getBlockMetadata(pos.blockX, pos.blockY, pos.blockZ) == 0) {
+             world.playSoundEffect(pos.blockX, pos.blockY, pos.blockZ, "dig.sand", 1, 1);
+            world.setBlockToAir(pos.blockX, pos.blockY, pos.blockZ);
+            return new ItemStack(bucket);
         } else {
             return null;
         }
