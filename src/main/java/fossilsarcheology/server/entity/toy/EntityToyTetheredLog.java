@@ -5,7 +5,6 @@ import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.entity.EntityToyBase;
 import fossilsarcheology.server.item.FAItemRegistry;
 import net.ilexiconn.llibrary.server.animation.Animation;
-import net.ilexiconn.llibrary.server.animation.AnimationHandler;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
