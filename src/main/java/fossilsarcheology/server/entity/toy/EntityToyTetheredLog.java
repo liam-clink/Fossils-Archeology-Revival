@@ -1,5 +1,6 @@
 package fossilsarcheology.server.entity.toy;
 
+import fossilsarcheology.Revival;
 import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.entity.EntityToyBase;
 import fossilsarcheology.server.item.FAItemRegistry;
@@ -29,7 +30,7 @@ public class EntityToyTetheredLog extends EntityToyBase implements IAnimatedEnti
     @Override
     public void onUpdate() {
         super.onUpdate();
-        AnimationHandler.INSTANCE.updateAnimations(this);
+        Revival.PROXY.updateAnimations(this);
         this.motionX *= 0;
         this.motionY *= 0;
         this.motionZ *= 0;

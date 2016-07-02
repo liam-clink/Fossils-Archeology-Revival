@@ -31,6 +31,8 @@ import fossilsarcheology.server.block.entity.*;
 import fossilsarcheology.server.entity.*;
 import fossilsarcheology.server.entity.mob.*;
 import net.ilexiconn.llibrary.client.lang.LanguageHandler;
+import net.ilexiconn.llibrary.server.animation.AnimationHandler;
+import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.ISound;
@@ -199,6 +201,10 @@ public class ClientProxy extends ServerProxy {
 
     public void calculateChainBuffer(EntityFishBase entity) {
         entity.chainBuffer.calculateChainSwingBuffer(70, 10, 4, entity);
+    }
+    
+    public void updateAnimations(IAnimatedEntity entity) {
+		AnimationHandler.INSTANCE.updateAnimations(entity);
     }
 
     public void spawnBubbleParticles(World world, float f, float f1, float f2, double motionX, double motionY, double motionZ) {

@@ -678,7 +678,7 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
 			}
 		}
 		Revival.PROXY.calculateChainBuffer(this);
-		AnimationHandler.INSTANCE.updateAnimations(this);
+		Revival.PROXY.updateAnimations(this);
 	}
 
 	@Override
