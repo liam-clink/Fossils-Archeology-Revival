@@ -153,6 +153,8 @@ public class EntityDinosaurEgg extends EntityLiving implements IEntityAdditional
 					}
 					prehistoricEntity.onSpawnWithEgg(null);
 					prehistoricEntity.setAgeInDays(0);
+					prehistoricEntity.updateAbilities();
+
 				}
 				for(int i = 0; i < 4; i++){
 					double motionX = rand.nextGaussian() * 0.1D;

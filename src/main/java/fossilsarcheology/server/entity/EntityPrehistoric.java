@@ -1517,6 +1517,8 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
 				if (hatchling instanceof EntityPrehistoric) {
 					((EntityPrehistoric) hatchling).onSpawnWithEgg(null);
 					((EntityPrehistoric) hatchling).setAgeInDays(1);
+					((EntityPrehistoric) hatchling).updateAbilities();
+
 				}
 			}
 			this.worldObj.spawnEntityInWorld(hatchling);
@@ -1677,7 +1679,8 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
 		Entity baby = this.type.invokeClass(this.worldObj);
 		if (entity instanceof EntityPrehistoric) {
 			((EntityPrehistoric) baby).onSpawnWithEgg(null);
-			((EntityPrehistoric) baby).setAgeInDays(1);
+			((EntityPrehistoric) baby).setAgeInDays(0);
+			((EntityPrehistoric) baby).updateAbilities();
 			return ((EntityPrehistoric) baby);
 		}
 		return null;
