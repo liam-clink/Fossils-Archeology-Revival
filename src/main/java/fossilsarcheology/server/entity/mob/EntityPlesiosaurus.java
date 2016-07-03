@@ -141,8 +141,7 @@ public class EntityPlesiosaurus extends EntityPrehistoricSwimming {
     		return "fossil:textures/model/plesiosaurus_0/" + "plesiosaurus_skeleton.png";
     	}
         String toggle = this.hasFeatherToggle ? !this.featherToggle ? "feathered/" : "scaled/" : "";
-        boolean isBaby = this.isChild() && this.hasBabyTexture;
-        String gender = this.hasTeenTexture ? this.isTeen() ? "_teen" : this.isChild() ? "_baby" : this.getGender() == 0 ? "_female" : "_male" : this.isChild() ? "_baby" : this.getGender() == 0 ? "_female" : "_male";
+        String gender = this.getGender() == 0 ? "_female" : "_male";
         String sleeping = !this.isSleeping() ? "" : "_sleeping";
         String toggleList = this.hasFeatherToggle ? !this.featherToggle ? "_feathered" : "_scaled" : "";
         return "fossil:textures/model/plesiosaurus_0/" + toggle + "plesiosaurus" + gender + toggleList + sleeping + ".png";
