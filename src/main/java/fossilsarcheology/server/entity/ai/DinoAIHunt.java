@@ -13,6 +13,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import fossilsarcheology.api.FoodMappings;
 import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.entity.EntityToyBase;
+import fossilsarcheology.server.enums.EnumPrehistoricAI.Response;
 import fossilsarcheology.server.enums.EnumPrehistoricMood;
 
 public class DinoAIHunt extends EntityAITarget {

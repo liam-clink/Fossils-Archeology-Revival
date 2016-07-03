@@ -177,7 +177,7 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
         compound.setBoolean("MoodNoPlants", this.mood_noplants);
         compound.setInteger("TicksSincePlay", this.ticksTillPlay);
         compound.setInteger("TicksSinceMate", this.ticksTillMate);
-        compound.setByte("CurrentOrder", (byte) this.currentOrder.ordinal());
+        compound.setByte("Order", (byte) this.currentOrder.ordinal());
     }
 
     @Override
@@ -206,6 +206,7 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
         this.mood_noplants = compound.getBoolean("MoodNoPlants");
         this.ticksTillPlay = compound.getInteger("TicksSincePlay");
         this.ticksTillMate = compound.getInteger("TicksSinceMate");
+        this.currentOrder = EnumOrderType.values()[compound.getByte("Order")];
     }
 
     public AxisAlignedBB getAttackBounds() {
@@ -1385,7 +1386,7 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
     public void knockbackEntity(Entity knockBackMob, float knockbackStrength, float knockbackStrengthUp) {
         if (!(knockBackMob instanceof EntityToyBase)) {
             knockBackMob.motionY += 0.4000000059604645D;
-            knockBackMob(knockBackMob, 1, 0.4D, 1);
+            knockBackMob(knockBackMob, 0.25D, 0.2D, 0.25D);
         }
     }
 

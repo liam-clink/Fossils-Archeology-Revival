@@ -187,7 +187,7 @@ public class EntityTyrannosaurus extends EntityPrehistoric {
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
-		if (!this.isSleeping() && this.rand.nextInt(500) == 0 && !worldObj.isRemote && !this.isSkeleton() && !this.isActuallyWeak() && !this.isSitting() && this.getAttackTarget() == null) {
+		if (!this.isSleeping() && this.rand.nextInt(1500) == 0 && !worldObj.isRemote && !this.isSkeleton() && !this.isActuallyWeak() && !this.isSitting() && this.getAttackTarget() == null) {
 			if (this.getAnimation() == NO_ANIMATION) {
 				this.setAnimation(ROAR_ANIMATION);
 			}
