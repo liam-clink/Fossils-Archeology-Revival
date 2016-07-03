@@ -108,7 +108,7 @@ public class EntityMammoth extends EntityPrehistoric implements IShearable {
 			return "fossil:textures/model/" + type.toString().toLowerCase() + "_0/" + type.toString().toLowerCase() + "_skeleton.png";
 		}
 		String toggle = this.hasFeatherToggle ? !this.featherToggle ? "feathered/" : "scaled/" : "";
-		String gender = this.getGender() == 0 ? "_female" : "_male";
+		String gender = this.isChild() ? "_baby" : this.getGender() == 0 ? "_female" : "_male";
 		String sleeping = !this.isSleeping() ? this.isActuallyWeak()? "_sleeping": "" : "_sleeping";
 		String toggleList = this.hasFeatherToggle ? !this.featherToggle ? "_feathered" : "_scaled" : "";
 		return "fossil:textures/model/" + type.toString().toLowerCase() + "_0/" + toggle + type.toString().toLowerCase() + gender + toggleList + sleeping + (this.isSheared() ? "_sheared" : "") + ".png";
