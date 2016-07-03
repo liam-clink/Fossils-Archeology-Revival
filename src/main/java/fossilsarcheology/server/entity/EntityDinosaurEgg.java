@@ -151,8 +151,10 @@ public class EntityDinosaurEgg extends EntityLiving implements IEntityAdditional
 							prehistoricEntity.currentOrder = EnumOrderType.FOLLOW;
 						}
 					}
+					prehistoricEntity.onSpawnWithEgg(null);
+					prehistoricEntity.setAgeInDays(0);
 				}
-				for(int i = 0; i < 8; i++){
+				for(int i = 0; i < 4; i++){
 					double motionX = rand.nextGaussian() * 0.1D;
 					double motionY = rand.nextGaussian() * 0.1D;
 					double motionZ = rand.nextGaussian() * 0.1D;
