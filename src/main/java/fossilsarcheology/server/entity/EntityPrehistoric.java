@@ -477,10 +477,6 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
 			this.motionY *= 0;
 			this.motionZ *= 0;
 		}
-		if (this.currentOrder == EnumOrderType.STAY && !this.isSitting() && !this.isActuallyWeak()) {
-			this.setSitting(true);
-			this.setSleeping(false);
-		}
 		if (this.getHunger() > this.getMaxHunger()) {
 			this.setHunger(this.getMaxHunger());
 		}
@@ -573,6 +569,11 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
 			ticksSlept = 0;
 		}
 
+		if (this.currentOrder == EnumOrderType.STAY && !this.isSitting() && !this.isActuallyWeak()) {
+			this.setSitting(true);
+			this.setSleeping(false);
+		}
+		
 		if (breaksBlocks) {
 			this.breakBlock(5);
 		}

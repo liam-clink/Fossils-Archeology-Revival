@@ -148,7 +148,7 @@ public class EntityDinosaurEgg extends EntityLiving implements IEntityAdditional
 						if (prehistoricEntity.type != EnumPrehistoric.Tyrannosaurus && prehistoricEntity.type != EnumPrehistoric.Allosaurus && prehistoricEntity.type != EnumPrehistoric.Sarcosuchus) {
 							prehistoricEntity.setTamed(true);
 							prehistoricEntity.func_152115_b(player.getUniqueID().toString());
-							prehistoricEntity.currentOrder = EnumOrderType.FOLLOW;
+							prehistoricEntity.currentOrder = EnumOrderType.WANDER;
 						}
 					}
 					prehistoricEntity.onSpawnWithEgg(null);
