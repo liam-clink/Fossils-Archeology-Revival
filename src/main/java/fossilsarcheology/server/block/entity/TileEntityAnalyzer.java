@@ -347,10 +347,10 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
                     itemstack = new ItemStack(FABlockRegistry.INSTANCE.volcanicRock, 1);
                 }
 
-                if (rand > 80 && rand <= 85) {
+                if (rand > 80 && rand <= 75) {
                     itemstack = new ItemStack(Blocks.obsidian, 1);
                 }
-                if (rand > 85) {
+                if (rand > 75) {
                     itemstack = new ItemStack(EnumPrehistoric.getRandomCenozoic().DNAItem, 1);
                 }
 
@@ -454,7 +454,7 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
                 }
 
                 if (rand >= 45 && rand < 65) {
-                    itemstack = new ItemStack(EnumPrehistoric.getRandomMezoic().DNAItem);
+                    itemstack = new ItemStack(EnumPrehistoric.getRandomCenozoic().DNAItem);
                 }
                 if (rand >= 65 && rand < 85) {
                     itemstack = new ItemStack(FAItemRegistry.INSTANCE.tarfossil);
