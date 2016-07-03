@@ -62,6 +62,7 @@ public class EntityAnkylosaurus extends EntityPrehistoric {
         breaksBlocks = true;
         this.ridingY = 1.3F;
         this.pediaScale = 45F;
+        this.hasBabyTexture = false;
     }
 
     @Override

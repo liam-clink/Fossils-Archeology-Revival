@@ -222,7 +222,7 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
 		this.updateAbilities();
 		ticksTillPlay = 0;
 		ticksTillMate = 24000;
-		this.setHealth((float) this.maxHealth);
+		this.heal(this.getMaxHealth());
 		return data;
 	}
 
@@ -1519,6 +1519,7 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
 					((EntityPrehistoric) hatchling).onSpawnWithEgg(null);
 					((EntityPrehistoric) hatchling).setAgeInDays(1);
 					((EntityPrehistoric) hatchling).updateAbilities();
+					((EntityPrehistoric) hatchling).setHealth((float) this.baseHealth);
 
 				}
 			}
@@ -1682,6 +1683,7 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
 			((EntityPrehistoric) baby).onSpawnWithEgg(null);
 			((EntityPrehistoric) baby).setAgeInDays(0);
 			((EntityPrehistoric) baby).updateAbilities();
+			((EntityPrehistoric) baby).setHealth((float) this.baseHealth);
 			return ((EntityPrehistoric) baby);
 		}
 		return null;

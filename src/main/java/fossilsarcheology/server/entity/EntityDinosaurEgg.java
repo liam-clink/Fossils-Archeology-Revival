@@ -149,6 +149,8 @@ public class EntityDinosaurEgg extends EntityLiving implements IEntityAdditional
 							prehistoricEntity.setTamed(true);
 							prehistoricEntity.func_152115_b(player.getUniqueID().toString());
 							prehistoricEntity.currentOrder = EnumOrderType.WANDER;
+							prehistoricEntity.setHealth((float) prehistoricEntity.baseHealth);
+
 						}
 					}
 					prehistoricEntity.onSpawnWithEgg(null);
