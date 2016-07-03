@@ -52,6 +52,7 @@ public class EntityAllosaurus extends EntityPrehistoric {
         maxSize = 3.1F;
         developsResistance = true;
         breaksBlocks = true;
+        this.teenAge = 5;
         this.ridingY = 1.3F;
     }
 

@@ -54,7 +54,7 @@ public class EntityCompsognathus extends EntityPrehistoric {
         this.featherToggle = Revival.CONFIG.featheredCompsognathus;
         minSize = 0.25F;
         maxSize = 0.65F;
-        teenAge = 1;
+        teenAge = 2;
         developsResistance = false;
         breaksBlocks = false;
         this.pediaScale = 50F;
@@ -147,7 +147,7 @@ public class EntityCompsognathus extends EntityPrehistoric {
 
     @Override
     public int getAdultAge() {
-        return 3;
+        return 4;
     }
 
     @Override
