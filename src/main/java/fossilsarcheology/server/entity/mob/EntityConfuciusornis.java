@@ -46,9 +46,10 @@ public class EntityConfuciusornis extends EntityPrehistoricFlying {
         this.setActualSize(0.7F, 0.8F);
         minSize = 0.3F;
         maxSize = 0.8F;
-        teenAge = 1;
+        teenAge = 2;
         developsResistance = false;
         breaksBlocks = false;
+        pediaScale = 47;
     }
 
     @Override
@@ -122,7 +123,7 @@ public class EntityConfuciusornis extends EntityPrehistoricFlying {
 
     @Override
     public int getAdultAge() {
-        return 3;
+        return 4;
     }
 
     @Override

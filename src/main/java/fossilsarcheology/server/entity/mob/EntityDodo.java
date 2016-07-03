@@ -47,6 +47,7 @@ public class EntityDodo extends EntityPrehistoric {
         developsResistance = false;
         breaksBlocks = false;
         hasTeenTexture = false;
+        pediaScale = 40;
     }
 
     @Override
