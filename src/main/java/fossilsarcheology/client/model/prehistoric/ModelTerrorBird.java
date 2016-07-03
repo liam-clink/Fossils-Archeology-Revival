@@ -2,6 +2,7 @@ package fossilsarcheology.client.model.prehistoric;
 
 import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.entity.mob.EntityDodo;
+import fossilsarcheology.server.entity.mob.EntityTitanis;
 import net.ilexiconn.llibrary.client.model.ModelAnimator;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
@@ -147,17 +148,18 @@ public class ModelTerrorBird extends ModelPrehistoric {
     }
 
     public void animate(IAnimatedEntity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+        EntityTitanis titanis = (EntityTitanis) entity;
         animator.update(entity);
         blockMovement(f, f1, f2, f3, f4, f5, (Entity) entity);
         this.resetToDefaultPose();
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
-        animator.setAnimation(EntityPrehistoric.SPEAK_ANIMATION);
+        animator.setAnimation(titanis.SPEAK_ANIMATION);
         animator.startKeyframe(10);
         ModelUtils.rotate(animator, head, -15, 0, 0);
         ModelUtils.rotate(animator, lowerBeak, 45, 0, 0);
         animator.endKeyframe();
         animator.resetKeyframe(10);
-        animator.setAnimation(EntityDodo.ATTACK_ANIMATION);
+        animator.setAnimation(titanis.ATTACK_ANIMATION);
         animator.startKeyframe(10);
         ModelUtils.rotate(animator, neck, -19, 0, 0);
         ModelUtils.rotate(animator, head, 13, 0, 0);

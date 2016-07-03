@@ -230,16 +230,17 @@ public class ModelSpinosaurus extends ModelPrehistoric {
 	}
 
 	public void animate(IAnimatedEntity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+		EntitySpinosaurus spinosaurus = (EntitySpinosaurus) entity;
 		animator.update(entity);
 		blockMovement(f, f1, f2, f3, f4, f5, (Entity) entity);
 		this.resetToDefaultPose();
 		setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
-		animator.setAnimation(EntityPrehistoric.SPEAK_ANIMATION);
+		animator.setAnimation(spinosaurus.SPEAK_ANIMATION);
 		animator.startKeyframe(10);
 		ModelUtils.rotate(animator, lowerJaw, 20, 0, 0);
 		animator.endKeyframe();
 		animator.resetKeyframe(10);
-		animator.setAnimation(EntitySpinosaurus.SHAKE_ANIMATION);
+		animator.setAnimation(spinosaurus.SHAKE_ANIMATION);
 		animator.startKeyframe(15);
 		ModelUtils.rotate(animator, lowerBody, 10F, 0, 0);
 		ModelUtils.rotate(animator, neck, 2F, 0, 0);
@@ -267,7 +268,7 @@ public class ModelSpinosaurus extends ModelPrehistoric {
 		ModelUtils.rotate(animator, lowerJaw, 21F, 0, 0);
 		animator.endKeyframe();
 		animator.resetKeyframe(10);
-		animator.setAnimation(EntitySpinosaurus.ATTACK_ANIMATION);
+		animator.setAnimation(spinosaurus.ATTACK_ANIMATION);
 		animator.startKeyframe(10);
 		ModelUtils.rotate(animator, neck, -36, 0, 0);
 		ModelUtils.rotate(animator, head, 46, 0, 0);
@@ -278,7 +279,7 @@ public class ModelSpinosaurus extends ModelPrehistoric {
 		ModelUtils.rotate(animator, head, 26, 0, 0);
 		animator.endKeyframe();
 		animator.resetKeyframe(5);
-		animator.setAnimation(EntitySpinosaurus.FISH_ANIMATION);
+		animator.setAnimation(spinosaurus.FISH_ANIMATION);
 		animator.startKeyframe(15);
 		ModelUtils.rotate(animator, lowerBody, -14, 0, 0);
 		ModelUtils.rotate(animator, head, 73, 0, 0);

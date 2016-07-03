@@ -1,6 +1,5 @@
 package fossilsarcheology.server.entity.toy;
 
-import fossilsarcheology.Revival;
 import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.entity.EntityToyBase;
 import fossilsarcheology.server.item.FAItemRegistry;
@@ -20,7 +19,7 @@ public class EntityToyTetheredLog extends EntityToyBase implements IAnimatedEnti
 
     private Animation currentAnimation;
     private int animTick;
-    public static Animation KNOCKBACK_ANIMATION = Animation.create(1, 20);
+    public static Animation KNOCKBACK_ANIMATION = Animation.create(20);
 
     public EntityToyTetheredLog(World world) {
         super(world, 30);

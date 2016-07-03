@@ -15,7 +15,7 @@ public abstract class EntityPrehistoricSwimming extends EntityPrehistoric {
 	public boolean movesOnLand;
 	public ChunkCoordinates currentTarget;
 	protected boolean isAmphibious;
-	public static Animation FISH_ANIMATION;
+	public Animation FISH_ANIMATION;
 
 	public EntityPrehistoricSwimming(World world, EnumPrehistoric type, double baseDamage, double maxDamage, double baseHealth, double maxHealth, double baseSpeed, double maxSpeed) {
 		super(world, type, baseDamage, maxDamage, baseHealth, maxHealth, baseSpeed, maxSpeed);

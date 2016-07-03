@@ -177,16 +177,17 @@ public class ModelStegosaurus extends ModelPrehistoric {
     }
 
     public void animate(IAnimatedEntity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+        EntityPrehistoric prehistoric = (EntityPrehistoric) entity;
         animator.update(entity);
         blockMovement(f, f1, f2, f3, f4, f5, (Entity) entity);
         this.resetToDefaultPose();
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
-        animator.setAnimation(EntityPrehistoric.SPEAK_ANIMATION);
+        animator.setAnimation(prehistoric.SPEAK_ANIMATION);
         animator.startKeyframe(10);
         ModelUtils.rotate(animator, head_2, 29, 0, 0);
         animator.endKeyframe();
         animator.resetKeyframe(10);
-        animator.setAnimation(EntityAnkylosaurus.ATTACK_ANIMATION);
+        animator.setAnimation(prehistoric.ATTACK_ANIMATION);
         animator.startKeyframe(5);
         ModelUtils.rotate(animator, lowerBody, 0, 15, 0);
         ModelUtils.rotate(animator, tail1, 0, 10, 0);

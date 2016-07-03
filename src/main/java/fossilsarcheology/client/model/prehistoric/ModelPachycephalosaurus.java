@@ -2,6 +2,7 @@ package fossilsarcheology.client.model.prehistoric;
 
 import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.entity.mob.EntityElasmotherium;
+import fossilsarcheology.server.entity.mob.EntityPachycephalosaurus;
 import net.ilexiconn.llibrary.client.model.ModelAnimator;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
@@ -170,16 +171,17 @@ public class ModelPachycephalosaurus extends ModelPrehistoric {
     }
 
     public void animate(IAnimatedEntity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+        EntityPachycephalosaurus pachycephalosaurus = (EntityPachycephalosaurus) entity;
         animator.update(entity);
         blockMovement(f, f1, f2, f3, f4, f5, (Entity) entity);
         this.resetToDefaultPose();
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
-        animator.setAnimation(EntityPrehistoric.SPEAK_ANIMATION);
+        animator.setAnimation(pachycephalosaurus.SPEAK_ANIMATION);
         animator.startKeyframe(10);
         ModelUtils.rotate(animator, beaklower, 30, 0, 0);
         animator.endKeyframe();
         animator.resetKeyframe(10);
-        animator.setAnimation(EntityElasmotherium.ATTACK_ANIMATION);
+        animator.setAnimation(pachycephalosaurus.ATTACK_ANIMATION);
         animator.startKeyframe(5);
         animator.move(lowerBody, 0, 5, -2);
         ModelUtils.rotate(animator, lowerBody, 20, 0, 0);

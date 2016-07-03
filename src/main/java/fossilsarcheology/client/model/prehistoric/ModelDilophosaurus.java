@@ -153,16 +153,17 @@ public class ModelDilophosaurus extends ModelPrehistoric {
     }
 
     public void animate(IAnimatedEntity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+        EntityPrehistoric prehistoric = (EntityPrehistoric) entity;
         animator.update(entity);
         blockMovement(f, f1, f2, f3, f4, f5, (Entity) entity);
         this.resetToDefaultPose();
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
-        animator.setAnimation(EntityPrehistoric.SPEAK_ANIMATION);
+        animator.setAnimation(prehistoric.SPEAK_ANIMATION);
         animator.startKeyframe(10);
         ModelUtils.rotate(animator, lowerJaw, 20, 0, 0);
         animator.endKeyframe();
         animator.resetKeyframe(10);
-        animator.setAnimation(EntityDilophosaurus.ATTACK_ANIMATION);
+        animator.setAnimation(prehistoric.ATTACK_ANIMATION);
         animator.startKeyframe(10);
         ModelUtils.rotate(animator, neck, -41, 0, 0);
         ModelUtils.rotate(animator, head, 57, 0, 0);

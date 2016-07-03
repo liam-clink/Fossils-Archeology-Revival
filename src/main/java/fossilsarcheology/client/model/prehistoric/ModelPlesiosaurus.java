@@ -138,16 +138,17 @@ public class ModelPlesiosaurus extends ModelPrehistoric {
     }
 
     public void animate(IAnimatedEntity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+        EntityPlesiosaurus prehistoric = (EntityPlesiosaurus) entity;
         animator.update(entity);
         blockMovement(f, f1, f2, f3, f4, f5, (Entity) entity);
         this.resetToDefaultPose();
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
-        animator.setAnimation(EntityPrehistoric.SPEAK_ANIMATION);
+        animator.setAnimation(prehistoric.SPEAK_ANIMATION);
         animator.startKeyframe(10);
         ModelUtils.rotate(animator, lowerJaw, 29, 0, 0);
         animator.endKeyframe();
         animator.resetKeyframe(10);
-		animator.setAnimation(EntityPlesiosaurus.FISH_ANIMATION);
+		animator.setAnimation(prehistoric.FISH_ANIMATION);
 		animator.startKeyframe(10);
 		ModelUtils.rotate(animator, neck1, 0, 15F, 0);
 		ModelUtils.rotate(animator, neck2, 0, 15F, 0);

@@ -2,6 +2,7 @@ package fossilsarcheology.client.model.prehistoric;
 
 import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.entity.mob.EntityDilophosaurus;
+import fossilsarcheology.server.entity.mob.EntityGallimimus;
 import net.ilexiconn.llibrary.client.model.ModelAnimator;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
@@ -183,17 +184,18 @@ public class ModelGallimimus extends ModelPrehistoric {
     }
 
     public void animate(IAnimatedEntity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+        EntityGallimimus gallimimus = (EntityGallimimus) entity;
         animator.update(entity);
         blockMovement(f, f1, f2, f3, f4, f5, (Entity) entity);
         this.resetToDefaultPose();
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
-        animator.setAnimation(EntityPrehistoric.SPEAK_ANIMATION);
+        animator.setAnimation(gallimimus.SPEAK_ANIMATION);
         animator.startKeyframe(10);
         animator.move(lowerJaw, 0, 0, 0.5F);
         ModelUtils.rotate(animator, lowerJaw, 30, 0, 0);
         animator.endKeyframe();
         animator.resetKeyframe(10);
-        animator.setAnimation(EntityDilophosaurus.ATTACK_ANIMATION);
+        animator.setAnimation(gallimimus.ATTACK_ANIMATION);
         animator.startKeyframe(10);
         ModelUtils.rotate(animator, neck, -36, 0, 0);
         ModelUtils.rotate(animator, head, 47, 0, 0);

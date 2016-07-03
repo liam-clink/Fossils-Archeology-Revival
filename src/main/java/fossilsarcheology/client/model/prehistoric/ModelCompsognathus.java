@@ -167,16 +167,17 @@ public class ModelCompsognathus extends ModelPrehistoric {
     }
 
     public void animate(IAnimatedEntity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+        EntityCompsognathus compsognathus = (EntityCompsognathus) entity;
         animator.update(entity);
         blockMovement(f, f1, f2, f3, f4, f5, (Entity) entity);
         this.resetToDefaultPose();
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
-        animator.setAnimation(EntityPrehistoric.SPEAK_ANIMATION);
+        animator.setAnimation(compsognathus.SPEAK_ANIMATION);
         animator.startKeyframe(10);
         ModelUtils.rotate(animator, headFront_1, 29, 0, 0);
         animator.endKeyframe();
         animator.resetKeyframe(10);
-        animator.setAnimation(EntityCompsognathus.ATTACK_ANIMATION);
+        animator.setAnimation(compsognathus.ATTACK_ANIMATION);
         animator.startKeyframe(15);
         animator.move(LeftUpperLeg, 0, 1F, -0.5F);
         animator.move(RightUpperLeg, 0, 1F, -0.5F);

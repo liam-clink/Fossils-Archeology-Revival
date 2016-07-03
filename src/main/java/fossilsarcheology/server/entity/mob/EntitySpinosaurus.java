@@ -31,7 +31,7 @@ import fossilsarcheology.server.item.FAItemRegistry;
 
 public class EntitySpinosaurus extends EntityPrehistoricSwimming {
 
-	public static Animation SHAKE_ANIMATION = Animation.create(65);
+	public Animation SHAKE_ANIMATION = Animation.create(65);
     private boolean isSwimming;
 	public float swimProgress;
 
