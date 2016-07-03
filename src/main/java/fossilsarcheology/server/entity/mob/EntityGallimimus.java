@@ -47,7 +47,7 @@ public class EntityGallimimus extends EntityPrehistoric {
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
         this.targetTasks.addTask(4, new DinoAIHunt(this, 200, false));
         this.setActualSize(1.1F, 2F);
-        this.pediaScale = 6F;
+        this.pediaScale = 35F;
         this.hasFeatherToggle = true;
         this.featherToggle = Revival.CONFIG.featheredGallimimus;
         minSize = 0.5F;

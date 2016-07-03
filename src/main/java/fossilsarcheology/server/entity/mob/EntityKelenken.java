@@ -44,7 +44,6 @@ public class EntityKelenken extends EntityPrehistoric {
 		this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
 		this.targetTasks.addTask(4, new DinoAIHunt(this, 200, false));
 		this.setActualSize(1.4F, 2.5F);
-		this.pediaScale = 17F;
 		this.nearByMobsAllowed = 3;
 		minSize = 0.4F;
 		maxSize = 1.4F;
@@ -52,7 +51,7 @@ public class EntityKelenken extends EntityPrehistoric {
 		developsResistance = true;
 		breaksBlocks = false;
 		this.ridingY = 2.4F;
-		this.pediaScale = 9F;
+		this.pediaScale = 25F;
 	}
 
 	@Override

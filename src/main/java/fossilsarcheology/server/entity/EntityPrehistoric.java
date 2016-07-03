@@ -222,7 +222,7 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
 		this.updateAbilities();
 		ticksTillPlay = 0;
 		ticksTillMate = 24000;
-		this.heal(1000);
+		this.setHealth((float) this.maxHealth);
 		return data;
 	}
 

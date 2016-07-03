@@ -42,7 +42,7 @@ public class EntityLiopleurodon extends EntityPrehistoricSwimming {
 		developsResistance = true;
 		breaksBlocks = false;
 		hasBabyTexture = false;
-		pediaScale = 6;
+		pediaScale = 30;
 	}
 
 	@Override

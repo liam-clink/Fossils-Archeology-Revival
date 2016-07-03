@@ -42,13 +42,13 @@ public class EntityStegosaurus extends EntityPrehistoric {
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
         this.targetTasks.addTask(4, new DinoAIHunt(this, 200, false));
         this.setActualSize(1.0F, 0.8F);
-        this.pediaScale = 4F;
         this.nearByMobsAllowed = 7;
         minSize = 1F;
         maxSize = 2.5F;
         teenAge = 5;
         developsResistance = true;
         breaksBlocks = true;
+        this.pediaScale = 20F;
     }
 
     @Override

@@ -711,6 +711,7 @@ public class GuiPedia extends GuiContainer {
 		GL11.glPushMatrix();
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
 		GL11.glTranslatef((float) posX, (float) posY, 50.0F);
+		scaleValue -= scaleValue * 0.25F;
 		if (mob instanceof EntityPrehistoric) {
 			GL11.glScalef((float) -(scaleValue), -(float) scaleValue, (float) scaleValue);
 		} else {
@@ -734,8 +735,10 @@ public class GuiPedia extends GuiContainer {
 		GL11.glTranslatef(0.0F, mob.yOffset, 0.0F);
 		RenderManager.instance.playerViewY = 180.0F;
 		if (mob instanceof EntityPrehistoric) {
-			GL11.glScalef(-((EntityPrehistoric) mob).getAgeScale(), -((EntityPrehistoric) mob).getAgeScale(), -((EntityPrehistoric) mob).getAgeScale());
+			EntityPrehistoric prehistoric = (EntityPrehistoric)mob;
+			GL11.glScalef(1 / prehistoric.getAgeScale(), -1 / prehistoric.getAgeScale(), -1 / prehistoric.getAgeScale());
 		}
+		GL11.glRotatef(-45.0F, 0.0F, 1.0F, -0.1F);
 		RenderManager.instance.renderEntityWithPosYaw(mob, 0.0D, 0.0D, 0.0D, 0.0F, 0F);
 		mob.renderYawOffset = f2;
 		mob.rotationYaw = f3;

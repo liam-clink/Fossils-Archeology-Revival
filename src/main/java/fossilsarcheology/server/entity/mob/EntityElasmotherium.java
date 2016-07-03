@@ -55,7 +55,7 @@ public class EntityElasmotherium extends EntityPrehistoric {
         this.targetTasks.addTask(4, new DinoAIHunt(this, 200, false));
         this.setActualSize(1F, 1F);
         this.nearByMobsAllowed = 9;
-        this.pediaScale = 6;
+        this.pediaScale = 54;
         minSize = 0.5F;
         maxSize = 2.6F;
         teenAge = 4;

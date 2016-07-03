@@ -45,7 +45,7 @@ public class EntityCeratosaurus extends EntityPrehistoric {
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
         this.targetTasks.addTask(4, new DinoAIHunt(this, 200, false));
         this.setActualSize(1.55F, 1.3F);
-        this.pediaScale = 7F;
+        this.pediaScale = 25F;
         this.nearByMobsAllowed = 5;
         minSize = 0.4F;
         maxSize = 1.9F;

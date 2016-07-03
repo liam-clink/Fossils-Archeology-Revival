@@ -52,7 +52,6 @@ public class EntityDeinonychus extends EntityPrehistoric {
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
         this.targetTasks.addTask(4, new DinoAIHunt(this, 200, false));
         this.nearByMobsAllowed = 9;
-        this.pediaScale = 24F;
         this.hasFeatherToggle = true;
         this.featherToggle = Revival.CONFIG.featheredDeinonychus;
         this.setActualSize(1.8F, 1.25F);
@@ -61,6 +60,7 @@ public class EntityDeinonychus extends EntityPrehistoric {
         teenAge = 4;
         developsResistance = false;
         breaksBlocks = false;
+        this.pediaScale = 34F;
     }
 
     @Override

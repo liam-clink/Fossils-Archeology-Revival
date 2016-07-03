@@ -45,7 +45,6 @@ public class EntityPachycephalosaurus extends EntityPrehistoric {
         this.targetTasks.addTask(4, new DinoAIHunt(this, 200, false));
         this.setActualSize(1.0F, 1.5F);
         this.nearByMobsAllowed = 4;
-        this.pediaScale = 10F;
         minSize = 0.5F;
         maxSize = 2F;
         teenAge = 4;
@@ -53,6 +52,7 @@ public class EntityPachycephalosaurus extends EntityPrehistoric {
         breaksBlocks = false;
         hasBabyTexture = false;
         this.ridingY = 1.55F;
+        this.pediaScale = 40F;
     }
 
     @Override

@@ -45,7 +45,7 @@ public class EntityDilophosaurus extends EntityPrehistoric {
         this.targetTasks.addTask(4, new DinoAIHunt(this, 200, false));
         this.setActualSize(1.5F, 0.9F);
         this.nearByMobsAllowed = 7;
-        this.pediaScale = 6.5F;
+        this.pediaScale = 26F;
         minSize = 0.5F;
         maxSize = 2F;
         teenAge = 4;

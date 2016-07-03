@@ -54,7 +54,7 @@ public class EntityMosasaurus extends EntityPrehistoricSwimming {
 		developsResistance = true;
 		breaksBlocks = true;
 		hasBabyTexture = false;
-		pediaScale = 6;
+		pediaScale = 30;
 	}
 
 	@Override

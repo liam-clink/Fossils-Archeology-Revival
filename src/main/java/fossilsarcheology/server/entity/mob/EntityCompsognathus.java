@@ -49,8 +49,7 @@ public class EntityCompsognathus extends EntityPrehistoric {
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
         this.targetTasks.addTask(4, new DinoAIHunt(this, 200, false));
         this.setActualSize(1.1F, 1.1F);
-        this.pediaScale = 100F;
-        this.nearByMobsAllowed = 20;
+        this.nearByMobsAllowed = 5;
         this.hasFeatherToggle = true;
         this.featherToggle = Revival.CONFIG.featheredCompsognathus;
         minSize = 0.25F;
@@ -58,6 +57,7 @@ public class EntityCompsognathus extends EntityPrehistoric {
         teenAge = 1;
         developsResistance = false;
         breaksBlocks = false;
+        this.pediaScale = 50F;
     }
 
     @Override

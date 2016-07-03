@@ -54,7 +54,6 @@ public class EntityAnkylosaurus extends EntityPrehistoric {
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
         this.targetTasks.addTask(4, new DinoAIHunt(this, 200, false));
         this.setActualSize(1.7F, 1.0F);
-        this.pediaScale = 3F;
         this.nearByMobsAllowed = 6;
         minSize = 1.0F;
         maxSize = 3.0F;
@@ -62,6 +61,7 @@ public class EntityAnkylosaurus extends EntityPrehistoric {
         developsResistance = true;
         breaksBlocks = true;
         this.ridingY = 1.3F;
+        this.pediaScale = 45F;
     }
 
     @Override

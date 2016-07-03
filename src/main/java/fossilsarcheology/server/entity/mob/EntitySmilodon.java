@@ -54,7 +54,7 @@ public class EntitySmilodon extends EntityPrehistoric {
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
         this.targetTasks.addTask(4, new DinoAIHunt(this, 200, false));
         this.setActualSize(0.9F, 0.8F);
-        this.pediaScale = 17F;
+        this.pediaScale = 47F;
         this.nearByMobsAllowed = 7;
         minSize = 0.5F;
         maxSize = 1.7F;
