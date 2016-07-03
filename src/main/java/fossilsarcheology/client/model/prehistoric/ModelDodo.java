@@ -126,25 +126,8 @@ public class ModelDodo extends ModelPrehistoric {
 		if(((EntityPrehistoric) entity).isSkeleton()){
 			return;
 		}
-        if (this.isChild) {
-            // this.head.setScale(1.5F, 1.5F, 1.5F); ew scaling
-            // this.beakUpper.setScale(0.5F, 0.5F, 0.5F);
-            // this.beakLower.setScale(0.5F, 0.5F, 0.5F);
-            this.beakLower.rotationPointY = -0.5F;
-            this.beakUpper.rotationPointZ = -3.5F;
-            this.beakLower.rotationPointZ = -3.5F;
-
-        } else {
-            // this.head.setScale(1F, 1F, 1F);
-            // this.beakUpper.setScale(1F, 1F, 1F);
-            // this.beakLower.setScale(1F, 1F, 1F);
-            this.beakLower.rotationPointY = 0F;
-            this.beakUpper.rotationPointZ = -4F;
-            this.beakLower.rotationPointZ = -4F;
-        }
         float speed = 0.9F;
         float speed2 = 0.1F;
-
         ModelUtils.faceTargetMod(head, f3, f4, 1F);
         this.bob(body, speed2, -0.4F, false, entity.ticksExisted, 1);
         this.walk(leftLeg, speed, 1.9F, false, 0F, 0F, f, f1);
@@ -183,11 +166,29 @@ public class ModelDodo extends ModelPrehistoric {
 
         }
 
-        if (((EntityPrehistoric) (entity)).isChild() && !((EntityPrehistoric) (entity)).isSkeleton()) {
+        if (((EntityPrehistoric) (entity)).isChild()) {
             this.head.setScale(1.5F, 1.5F, 1.5F);
         } else {
+        }
+        if(((EntityPrehistoric) (entity)).isSkeleton()){
             this.head.setScale(1F, 1F, 1F);
+        }else{
+            if (this.isChild) {
+                // this.head.setScale(1.5F, 1.5F, 1.5F); ew scaling
+                // this.beakUpper.setScale(0.5F, 0.5F, 0.5F);
+                // this.beakLower.setScale(0.5F, 0.5F, 0.5F);
+                this.beakLower.rotationPointY = -0.5F;
+                this.beakUpper.rotationPointZ = -3.5F;
+                this.beakLower.rotationPointZ = -3.5F;
 
+            } else {
+                // this.head.setScale(1F, 1F, 1F);
+                // this.beakUpper.setScale(1F, 1F, 1F);
+                // this.beakLower.setScale(1F, 1F, 1F);
+                this.beakLower.rotationPointY = 0F;
+                this.beakUpper.rotationPointZ = -4F;
+                this.beakLower.rotationPointZ = -4F;
+            }
         }
     }
 }
