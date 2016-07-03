@@ -220,7 +220,7 @@ public class ModelMammoth extends ModelPrehistoric {
         animator.startKeyframe(10);
         ModelUtils.rotate(animator, neck, 0, -30, 0);
         ModelUtils.rotate(animator, head, 0, -5, -15);
-        ModelUtils.rotate(animator, nose1, -40, 0, 0);
+        ModelUtils.rotate(animator, nose1, -10, 0, 0);
         ModelUtils.rotate(animator, nose2, -12, 0, 0);
         ModelUtils.rotate(animator, nose3, -31, 0, 0);
         ModelUtils.rotate(animator, nose4, -18, 0, 0);

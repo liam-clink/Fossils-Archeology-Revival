@@ -10,6 +10,7 @@ import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAITarget;
 import net.minecraft.entity.player.EntityPlayer;
+import fossilsarcheology.api.EnumDiet;
 import fossilsarcheology.api.FoodMappings;
 import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.entity.EntityToyBase;
@@ -62,8 +63,8 @@ public class DinoAIHunt extends EntityAITarget {
 					if (targetEntity instanceof EntityPlayer && (prehistoric.getMoodFace() == EnumPrehistoricMood.ANGRY || prehistoric.getMoodFace() == EnumPrehistoricMood.SAD)) {
 						return !((EntityPlayer) targetEntity).capabilities.isCreativeMode;
 					}
-					if (FoodMappings.INSTANCE.getEntityFoodAmount(this.targetEntity.getClass(), prehistoric.type.diet) == 0) {
-						return !prehistoric.func_152114_e(targetEntity);
+					if (FoodMappings.INSTANCE.getEntityFoodAmount(this.targetEntity.getClass(), prehistoric.type.diet) > 0) {
+						return !prehistoric.func_152114_e(targetEntity) && prehistoric.canDinoHunt(targetEntity, true);
 					}
 					if (targetEntity instanceof EntityToyBase && prehistoric.ticksTillPlay == 0) {
 						return true;
