@@ -40,6 +40,11 @@ public class EntityDinosaurEgg extends EntityLiving implements IEntityAdditional
 		lastBirthTick = 0;
 	}
 
+	@Override
+	protected boolean canDespawn() {
+		return false;
+	}
+	
 	public EntityDinosaurEgg(World world) {
 		this(world, EnumPrehistoric.Triceratops);
 	}
