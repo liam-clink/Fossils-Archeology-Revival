@@ -363,7 +363,7 @@ public class GuiPedia extends GuiContainer {
 				printStringXY(s1, wordLength / 2, 110, 157, 126, 103);
 			}
 			{
-				String s1 = StatCollector.translateToLocal("pedia.health") + " " + dino.getHealth() + "/" + dino.getMaxHealth();
+				String s1 = StatCollector.translateToLocal("pedia.health") + " " + Math.min(dino.getHealth(), dino.getMaxHealth()) + "/" + dino.getMaxHealth();
 				printStringXY(s1, wordLength / 2, 120, 157, 126, 103);
 			}
 			{
