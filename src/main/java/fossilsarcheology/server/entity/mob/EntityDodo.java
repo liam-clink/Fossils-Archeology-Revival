@@ -134,6 +134,11 @@ public class EntityDodo extends EntityPrehistoric {
     public Item getOrderItem() {
         return Items.stick;
     }
+    
+    @Override
+    public boolean isChild() {
+        return !this.isSkeleton() && super.isChild();
+    }
 
     @Override
     public int getAdultAge() {
