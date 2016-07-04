@@ -46,7 +46,7 @@ public class EntityPlesiosaurus extends EntityPrehistoricSwimming {
         teenAge = 3;
         developsResistance = true;
         breaksBlocks = true;
-        pediaScale = 25;
+        pediaScale = 40;
     }
 
     @Override
