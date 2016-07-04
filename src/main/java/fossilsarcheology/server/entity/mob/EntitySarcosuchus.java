@@ -198,6 +198,10 @@ public class EntitySarcosuchus extends EntityPrehistoricSwimming {
 			if (sitProgress != 0)
 				sitProgress = sleepProgress = 0F;
 		}
+		if(this.isSwimming() && (this.isSitting() || this.isSleeping())){
+			this.setSitting(false);
+			this.setSleeping(false);
+		}
 		if (this.getAttackTarget() != null) {
 			if (getAttackBounds().intersectsWith(this.getAttackTarget().boundingBox)) {
 				if (!this.isInWater()) {
