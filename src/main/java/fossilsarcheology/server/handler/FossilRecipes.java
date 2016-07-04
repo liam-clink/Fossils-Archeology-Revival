@@ -163,6 +163,9 @@ public class FossilRecipes {
             if (EnumPrehistoric.values()[i].foodItem != null) {
                 GameRegistry.addSmelting(EnumPrehistoric.values()[i].foodItem, new ItemStack(EnumPrehistoric.values()[i].cookedFoodItem), 3.0F);
             }
+            if (EnumPrehistoric.values()[i].fishItem != null) {
+                GameRegistry.addSmelting(EnumPrehistoric.values()[i].fishItem, new ItemStack(EnumPrehistoric.values()[i].cookedFoodItem), 3.0F);
+            }
             /*
 			 * if(EnumPrehistoric.values()[i].type == EnumMobType.FISH){
 			 * GameRegistry.addSmelting(EnumPrehistoric.values()[i].eggItem, new

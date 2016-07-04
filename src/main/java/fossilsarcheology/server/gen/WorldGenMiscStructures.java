@@ -56,7 +56,7 @@ public class WorldGenMiscStructures implements IWorldGenerator {
 				}
 			}
 			if (Revival.CONFIG.generateTarSites) {
-				if (random.nextInt(300) == 0) {
+				if (random.nextInt(600) == 0) {
 					int Xcoord1 = chunkX * 16 + random.nextInt(16);
 					int Zcoord1 = chunkZ * 16 + random.nextInt(16);
 					int Ycoord1 = world.getHeightValue(Xcoord1, Zcoord1);
@@ -67,7 +67,7 @@ public class WorldGenMiscStructures implements IWorldGenerator {
 				}
 			}
 			if (Revival.CONFIG.generateFossilSites) {
-				if (random.nextInt(300) == 0) {
+				if (random.nextInt(600) == 0) {
 					int Xcoord1 = chunkX * 16 + random.nextInt(16);
 					int Zcoord1 = chunkZ * 16 + random.nextInt(16);
 					int Ycoord1 = world.getHeightValue(Xcoord1, Zcoord1);
