@@ -365,8 +365,8 @@ public class ModelTyrannosaurus extends ModelPrehistoric {
              sitAnimationPos(lowerBody, sitProgress, 0F, 12.80F - ModelUtils.getDefaultPositionY(lowerBody), 0F);
              sitAnimationPos(leftThigh, sitProgress, 0F, 16.90F - ModelUtils.getDefaultPositionY(leftThigh), 0F);
         }
-        this.bob(lowerBody, speed2, degree * 0.4F, false, entity.ticksExisted, 1);
-        this.walk(upperBody, speed2, degree * 0.05F, false, 1F, 0F, entity.ticksExisted, 1);
+        this.bob(lowerBody, speed2 * 0.5F, degree * 0.4F, false, entity.ticksExisted, 1);
+        this.walk(upperBody, speed2 * 0.5F, degree * 0.05F, false, 1F, 0F, entity.ticksExisted, 1);
         this.walk(lowerBody, speed, degree * 0.05F, true, 0F, 0F, f, f1);
 		this.walk(leftThigh, speed2, 0.6F, false, 0F, 0.4F, f, f1);
 		this.walk(leftLeg, speed2, 0.2F, false, 0F, -0.6F, f, f1);
