@@ -839,6 +839,7 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
 
 	public void setAgeInDays(int days) {
 		this.dataWatcher.updateObject(20, days * 24000);
+		this.updateAbilities();
 	}
 
 	public int getAgeInTicks() {
