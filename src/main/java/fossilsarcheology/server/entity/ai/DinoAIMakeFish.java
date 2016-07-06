@@ -21,7 +21,7 @@ public class DinoAIMakeFish extends EntityAIBase {
 		if (!this.dinosaur.isHungry()) {
 			return false;
 		}
-		if (this.dinosaur.getRNG().nextInt(15) != 0) {
+		if (this.dinosaur.getRNG().nextInt(205) != 0) {
 			return false;
 		}
 		if (!this.dinosaur.isInWater()) {
@@ -53,7 +53,7 @@ public class DinoAIMakeFish extends EntityAIBase {
     
     public void updateTask() {
     	if(this.dinosaur.getAnimation() == this.dinosaur.FISH_ANIMATION){
-    		if(this.dinosaur.getAnimationTick() > 20){
+    		if(this.dinosaur.getAnimationTick() == 20){
     			ItemStack stack2 = new ItemStack(Items.fish, 1 +  this.dinosaur.getRNG().nextInt(2), this.dinosaur.getRNG().nextInt(2));
     			this.dinosaur.entityDropItem(stack2, 1);
     			resetTask();

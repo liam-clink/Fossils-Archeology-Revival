@@ -238,6 +238,7 @@ public class DinoAIWaterFeeder extends EntityAIBase {
         targetFeeder = null;
         this.targetEntity = null;
         this.typeofTarget = NO_TARGET;
+        this.dinosaur.currentTarget = null;
     }
 
     @Override

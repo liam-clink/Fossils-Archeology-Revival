@@ -28,13 +28,9 @@ public class DinoAIWaterFindTarget extends EntityAIBase {
 		if (prehistoric.isMovementBlocked()) {
 			return false;
 		}
-		if (prehistoric.getRNG().nextInt(10) == 0) {
-			return false;
-		}
 		if (prehistoric.isDirectPathBetweenPoints(prehistoric.getPosition(), Vec3.createVectorHelper(shelterX, shelterY, shelterZ))) {
 			prehistoric.currentTarget = null;
 		}
-
 		if (prehistoric.currentTarget != null && prehistoric.getDistance(prehistoric.currentTarget.posX, prehistoric.currentTarget.posY, prehistoric.currentTarget.posZ) < 10F) {
 			return false;
 		} else {
