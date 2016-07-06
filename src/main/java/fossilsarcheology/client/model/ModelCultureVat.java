@@ -4,14 +4,14 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import org.lwjgl.opengl.GL11;
 
-public class ModelBlock extends ModelBase {
+public class ModelCultureVat extends ModelBase {
     // fields
     ModelRenderer main;
     ModelRenderer bottom;
     ModelRenderer opening;
     ModelRenderer opening1;
 
-    public ModelBlock() {
+    public ModelCultureVat() {
         textureWidth = 64;
         textureHeight = 128;
 
