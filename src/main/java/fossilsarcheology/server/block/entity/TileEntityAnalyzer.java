@@ -327,7 +327,7 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
 					}
 
 					if (rand > 50 && rand <= 85) {
-						itemstack = new ItemStack(Blocks.sand, 3);
+						itemstack = new ItemStack(Blocks.sand, 1 + new Random().nextInt(2));
 					}
 
 					if (rand > 85) {
@@ -371,7 +371,7 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
 			}
 			if (this.analyzerItemStacks[this.RawIndex].getItem() == FAItemRegistry.INSTANCE.brokenSapling) {
 				if (rand > 0) {
-					itemstack = new ItemStack(Blocks.sand, 2, 0);
+					itemstack = new ItemStack(Blocks.sand, 1 + new Random().nextInt(1), 0);
 				}
 				if (rand > 35 && rand <= 65) {
 					itemstack = new ItemStack(Items.coal, 1, 0);
@@ -466,7 +466,7 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
 
 			if (this.analyzerItemStacks[this.RawIndex].getItem() == FAItemRegistry.INSTANCE.relic) {
 				if (rand <= 40) {
-					itemstack = new ItemStack(Blocks.gravel, 2);
+					itemstack = new ItemStack(Blocks.gravel, 1 + new Random().nextInt(2));
 				}
 
 				if (rand > 40 && rand <= 70) {
@@ -474,7 +474,7 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
 				}
 
 				if (rand > 70 && rand <= 88) {
-					itemstack = new ItemStack(Items.flint, 2);
+					itemstack = new ItemStack(Items.flint, 1 + new Random().nextInt(1));
 				}
 
 				if (rand > 88 && rand <= 92) {
@@ -494,16 +494,18 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
 				}
 			}
 			if (itemstack != null) {
-				for (int slots = 9; slots < 12; slots++) {
+				for (int slots = 9; slots < 13; slots++) {
 					ItemStack stackInSlot = this.analyzerItemStacks[slots];
 					if (stackInSlot != null) {
 						if (stackInSlot.isItemEqual(itemstack) && stackInSlot.stackSize + itemstack.stackSize < 64) {
 							stackInSlot.stackSize += itemstack.stackSize;
+							this.analyzerItemStacks[this.RawIndex].stackSize--;
 							break;
 						}
 					}
-					if (stackInSlot == null) {
+					else if (stackInSlot == null) {
 						this.analyzerItemStacks[slots] = itemstack;
+						this.analyzerItemStacks[this.RawIndex].stackSize--;
 						break;
 					}
 				}

@@ -39,7 +39,7 @@ public class GuiAnalyzer extends GuiContainer {
         int drawX = (this.width - this.xSize) / 2;
         int drawY = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(drawX, drawY, 0, 0, this.xSize, this.ySize);
-        int progress = this.analyzerInventory.getAnalyzeProgressScaled(21);
-        this.drawTexturedModalRect(drawX + 80, drawY + 22, 177, 18, progress + 1, 9);
+        int progress = this.analyzerInventory.getAnalyzeProgressScaled(22);
+        this.drawTexturedModalRect(drawX + 80, drawY + 22, 177, 18, progress, 9);
     }
 }
