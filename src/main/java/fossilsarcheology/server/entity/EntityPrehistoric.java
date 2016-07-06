@@ -838,7 +838,7 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
 
 	@Override
 	public boolean isChild() {
-		return this.getAgeInDays() < teenAge;
+		return this.getAgeInDays() < teenAge && !this.isSkeleton();
 	}
 
 	public abstract int getMaxHunger();
