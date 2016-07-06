@@ -41,7 +41,7 @@ public class EntityStegosaurus extends EntityPrehistoric {
         this.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
         this.targetTasks.addTask(4, new DinoAIHunt(this, 200, false));
-        this.setActualSize(1.0F, 0.8F);
+        this.setActualSize(1.4F, 1.3F);
         this.nearByMobsAllowed = 7;
         minSize = 1F;
         maxSize = 2.5F;
