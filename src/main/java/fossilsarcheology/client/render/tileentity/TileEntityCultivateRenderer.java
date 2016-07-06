@@ -4,9 +4,11 @@ import fossilsarcheology.client.model.ModelBlock;
 import fossilsarcheology.client.model.ModelEmbryoGeneric;
 import fossilsarcheology.client.model.ModelEmbryoPlant;
 import fossilsarcheology.server.block.entity.TileEntityCultivate;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.opengl.GL11;
 
 public class TileEntityCultivateRenderer extends TileEntitySpecialRenderer {
@@ -29,7 +31,8 @@ public class TileEntityCultivateRenderer extends TileEntitySpecialRenderer {
 
     public void renderCultureVatAt(TileEntityCultivate tileentity, double x, double y, double z, float f) {
 
-        float rot = (float) (720.0 * (System.currentTimeMillis() & 0x3FFFL) / 0x3FFFL);
+        float rot = Minecraft.getMinecraft().thePlayer.ticksExisted * 1;
+        float bob = (float) (Math.sin( Minecraft.getMinecraft().thePlayer.ticksExisted * 0.1F) * 1 * 0.05F - 1 * 0.05F);
 
         GL11.glPushMatrix();
         GL11.glTranslatef(0f, 0f, 0f);
@@ -40,7 +43,7 @@ public class TileEntityCultivateRenderer extends TileEntitySpecialRenderer {
 
             if (tileentity.getDNAType() == 1) {
                 GL11.glPushMatrix();
-                GL11.glTranslatef(0, 0.5F, 0);
+                GL11.glTranslatef(0, 0.5F + bob, 0);
                 GL11.glPushMatrix();
                 GL11.glScalef(0.5F, 0.5F, 0.5F);
                 GL11.glRotatef(rot, 0, 9, 0);
@@ -50,7 +53,7 @@ public class TileEntityCultivateRenderer extends TileEntitySpecialRenderer {
                 GL11.glPopMatrix();
             } else if (tileentity.getDNAType() == 2) {
                 GL11.glPushMatrix();
-                GL11.glTranslatef(0, 0.5F, 0);
+                GL11.glTranslatef(0, 0.5F + bob, 0);
                 GL11.glPushMatrix();
                 GL11.glScalef(0.5F, 0.5F, 0.5F);
                 GL11.glRotatef(rot, 0, 9, 0);
@@ -60,7 +63,7 @@ public class TileEntityCultivateRenderer extends TileEntitySpecialRenderer {
                 GL11.glPopMatrix();
             } else {
                 GL11.glPushMatrix();
-                GL11.glTranslatef(0, 0.5F, 0);
+                GL11.glTranslatef(0, 0.5F + bob, 0);
                 GL11.glPushMatrix();
                 GL11.glScalef(0.5F, 0.5F, 0.5F);
                 GL11.glRotatef(rot, 0, 9, 0);
