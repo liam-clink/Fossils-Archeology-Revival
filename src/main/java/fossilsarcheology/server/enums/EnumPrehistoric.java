@@ -283,8 +283,12 @@ public enum EnumPrehistoric {
 	public static Item getEgg(Item i0) {
 		for (int i = 0; i < values().length; i++) {
 			if (values()[i].type == EnumMobType.DINOSAUR) {
-
 				if (values()[i].foodItem == i0 || values()[i].DNAItem == i0) {
+					return values()[i].eggItem;
+				}
+			}
+			if (values()[i].type == EnumMobType.FISH) {
+				if (values()[i].DNAItem == i0) {
 					return values()[i].eggItem;
 				}
 			}
