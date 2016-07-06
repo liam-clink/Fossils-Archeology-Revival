@@ -496,6 +496,9 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
 			this.motionY *= 0;
 			this.motionZ *= 0;
 		}
+		if(this.getOwner() != null && this.getOwnerDisplayName().equals("")){
+		this.setOwnerDisplayName(this.getOwner().getCommandSenderName());	
+		}
 		if (this.getHunger() > this.getMaxHunger()) {
 			this.setHunger(this.getMaxHunger());
 		}
