@@ -4,6 +4,7 @@ import java.util.Random;
 
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemDoor;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import fossilsarcheology.Revival;
@@ -672,7 +673,6 @@ public class TarSiteWorldGen extends WorldGenerator {
 		world.setBlock(x + 6, y + 3, z + 4, Blocks.wool, 0, 3);
 		world.setBlock(x + 2, y + 3, z + 5, Blocks.fence, 0, 3);
 		world.setBlock(x + 3, y + 3, z + 5, Blocks.wool, 0, 3);
-		world.setBlock(x + 4, y + 3, z + 5, Blocks.wooden_door, 3, 0);
 		world.setBlock(x + 5, y + 3, z + 5, Blocks.wool, 0, 3);
 		world.setBlock(x + 6, y + 3, z + 5, Blocks.fence, 0, 3);
 		world.setBlock(x + 3, y + 3, z + 7, Blocks.cobblestone_wall, 0, 3);
@@ -709,7 +709,6 @@ public class TarSiteWorldGen extends WorldGenerator {
 		world.setBlock(x + 5, y + 4, z + 4, Blocks.fence, 0, 3);
 		world.setBlock(x + 6, y + 4, z + 4, Blocks.wool, 0, 3);
 		world.setBlock(x + 3, y + 4, z + 5, Blocks.wool, 0, 3);
-		world.setBlock(x + 4, y + 4, z + 5, Blocks.wooden_door, 8, 0);
 		EntityVillager villager = new EntityVillager(world);
 		villager.setPosition(x + 4.5D, y + 3.5D, z + 5.5D);
 		if(!world.isRemote){
@@ -741,6 +740,8 @@ public class TarSiteWorldGen extends WorldGenerator {
 		world.setBlock(x + 4, y + 6, z + 2, Blocks.wool, 0, 3);
 		world.setBlock(x + 4, y + 6, z + 3, Blocks.wool, 0, 3);
 		world.setBlock(x + 4, y + 6, z + 4, Blocks.wool, 0, 3);
+		ItemDoor.placeDoorBlock(world, x + 4, y + 3, z + 5, 3, Blocks.wooden_door);
+		ItemDoor.placeDoorBlock(world, x + 4, y + 4, z + 5, 3, Blocks.wooden_door);
 		return true;
 
 	}
