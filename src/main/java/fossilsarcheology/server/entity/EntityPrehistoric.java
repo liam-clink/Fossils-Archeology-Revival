@@ -159,6 +159,7 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
 		this.dataWatcher.addObject(23, (byte) 0);
 		this.dataWatcher.addObject(24, 0);
 		this.dataWatcher.addObject(25, 0);
+		this.dataWatcher.addObject(26, "");
 	}
 
 	@Override
@@ -178,6 +179,15 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
 		compound.setInteger("TicksSincePlay", this.ticksTillPlay);
 		compound.setInteger("TicksSinceMate", this.ticksTillMate);
 		compound.setByte("Order", (byte) this.currentOrder.ordinal());
+		compound.setString("OwnerDisplayName", this.getOwnerDisplayName());
+	}
+
+	public String getOwnerDisplayName() {
+		return this.dataWatcher.getWatchableObjectString(26);
+	}
+
+	public void setOwnerDisplayName(String displayName) {
+		this.dataWatcher.updateObject(26, displayName);
 	}
 
 	@Override
@@ -207,6 +217,14 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
 		this.ticksTillPlay = compound.getInteger("TicksSincePlay");
 		this.ticksTillMate = compound.getInteger("TicksSinceMate");
 		this.currentOrder = EnumOrderType.values()[compound.getByte("Order")];
+		String s = "";
+		if (compound.hasKey("Owner", 8)) {
+			s = compound.getString("Owner");
+			this.setOwnerDisplayName(s);
+		} else {
+			this.setOwnerDisplayName(compound.getString("OwnerDisplayName"));
+		}
+
 	}
 
 	public AxisAlignedBB getAttackBounds() {

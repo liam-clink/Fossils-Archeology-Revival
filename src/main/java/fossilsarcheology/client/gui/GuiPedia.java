@@ -415,10 +415,10 @@ public class GuiPedia extends GuiContainer {
 				printStringXY(s1, wordLength / 2, 160, 157, 126, 103);
 			}
 			{
-				String name = (dino.isTamed() && dino.getOwner() != null && dino.getOwner() instanceof EntityPlayer) ? ((EntityPlayer) dino.getOwner()).getDisplayName() : "";
+				String name = (dino.isTamed() && !dino.getOwnerDisplayName().equals("")) ? dino.getOwnerDisplayName() : "";
 				String s1 = StatCollector.translateToLocal("pedia.untame");
 				String s2 = StatCollector.translateToLocal("pedia.owner") + " " + name;
-				printStringXY(dino.isTamed() ? s2 : s1, wordLength / 2, 170, 157, 126, 103);
+				printStringXY(!dino.getOwnerDisplayName().equals("") ? s2 : s1, wordLength / 2, 170, 157, 126, 103);
 			}
 			{
 				ScaledResolution scaledResolution = new ScaledResolution(mc, mc.displayWidth, mc.displayHeight);
