@@ -49,7 +49,7 @@ public class EntityMosasaurus extends EntityPrehistoricSwimming {
 		this.hasBabyTexture = false;
 		this.setActualSize(1.5F, 0.6F);
 		minSize = 0.6F;
-		maxSize = 2.1F;
+		maxSize = 4.1F;
 		teenAge = 5;
 		developsResistance = true;
 		breaksBlocks = true;

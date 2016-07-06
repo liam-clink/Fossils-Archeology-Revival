@@ -17,7 +17,6 @@ public class TarSiteWorldGen extends WorldGenerator {
 		return true;
 
 	}
-
 	public boolean generate_r0(World world, Random rand, int x, int y, int z) {
 		world.setBlock(x + 0, y + 0, z + 0, Blocks.dirt, 0, 3);
 		world.setBlock(x + 1, y + 0, z + 0, Blocks.dirt, 0, 3);
@@ -741,9 +740,8 @@ public class TarSiteWorldGen extends WorldGenerator {
 		world.setBlock(x + 4, y + 6, z + 3, Blocks.wool, 0, 3);
 		world.setBlock(x + 4, y + 6, z + 4, Blocks.wool, 0, 3);
 		ItemDoor.placeDoorBlock(world, x + 4, y + 3, z + 5, 3, Blocks.wooden_door);
-		ItemDoor.placeDoorBlock(world, x + 4, y + 4, z + 5, 3, Blocks.wooden_door);
+		//ItemDoor.placeDoorBlock(world, x + 4, y + 4, z + 5, 3, Blocks.wooden_door);
 		return true;
-
 	}
 
 }

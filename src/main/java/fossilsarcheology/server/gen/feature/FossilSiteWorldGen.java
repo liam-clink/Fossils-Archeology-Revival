@@ -847,7 +847,6 @@ public class FossilSiteWorldGen extends WorldGenerator {
 		world.setBlock(x + 4, y + 7, z + 10, Blocks.wool, 0, 3);
 		world.setBlock(x + 3, y + 7, z + 9, Blocks.wool, 0, 3);
 		ItemDoor.placeDoorBlock(world, x + 2, y + 3, z + 5, 3, Blocks.wooden_door);
-		ItemDoor.placeDoorBlock(world, x + 2, y + 4, z + 5, 3, Blocks.wooden_door);
 		world.setBlock(x + 8, y + 4, z + 16, FABlockRegistry.INSTANCE.skullLantern, 0, 3);
 		return true;
 
