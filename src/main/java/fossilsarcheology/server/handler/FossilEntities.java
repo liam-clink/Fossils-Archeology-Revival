@@ -63,7 +63,7 @@ public class FossilEntities {
 		BiomeGenBase[] rivers = BiomeDictionary.getBiomesForType(Type.RIVER); 
 		BiomeGenBase[] oceans = BiomeDictionary.getBiomesForType(Type.OCEAN); 
 		SpawnListEntry sturgeon = new SpawnListEntry(EntitySturgeon.class, 20, 1, 1); 
-		SpawnListEntry alligatorgar = new SpawnListEntry(EntityAlligatorGar.class, 20, 1, 1); 
+		SpawnListEntry alligatorgar = new SpawnListEntry(EntityAlligatorGar.class, 40, 1, 1); 
 		SpawnListEntry coelacanth = new SpawnListEntry(EntityCoelacanth.class, 20, 1, 1); 
 		SpawnListEntry nautilus = new SpawnListEntry(EntityNautilus.class, 4, 1, 1);
 		if(Revival.CONFIG.spawnSturgeon){
