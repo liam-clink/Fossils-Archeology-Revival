@@ -418,7 +418,7 @@ public class GuiPedia extends GuiContainer {
 				String name = dino.getOwnerDisplayName();
 				String s1 = StatCollector.translateToLocal("pedia.untame");
 				String s2 = StatCollector.translateToLocal("pedia.owner") + " " + name;
-				printStringXY(dino.getOwnerDisplayName() != null ? s2 : s1, wordLength / 2, 170, 157, 126, 103);
+				printStringXY(!dino.getOwnerDisplayName().equals("") ? s2 : s1, wordLength / 2, 170, 157, 126, 103);
 			}
 			{
 				ScaledResolution scaledResolution = new ScaledResolution(mc, mc.displayWidth, mc.displayHeight);
