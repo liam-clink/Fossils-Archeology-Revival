@@ -61,7 +61,7 @@ public class EntityTriceratops extends EntityPrehistoric {
         breaksBlocks = true;
         this.ridingY = 0.93F;
         this.ridingXZ = -0.05F;
-        this.pediaScale = 45;
+        this.pediaScale = 55;
     }
 
     @Override

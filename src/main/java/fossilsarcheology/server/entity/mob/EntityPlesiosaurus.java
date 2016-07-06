@@ -116,7 +116,7 @@ public class EntityPlesiosaurus extends EntityPrehistoricSwimming {
     @Override
     public WaterAbility aiWaterAbilityType() {
 
-        return WaterAbility.IGNOREANDFISH;
+        return WaterAbility.ATTACK;
     }
 
     @Override

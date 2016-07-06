@@ -22,13 +22,11 @@ public abstract class EntityPrehistoricSwimming extends EntityPrehistoric {
 		this.getNavigator().setAvoidsWater(false);
 		this.hasBabyTexture = false;
 	}
-	
 
 	@Override
 	protected String getLivingSound() {
 		return this.isAmphibious ? super.getLivingSound() : this.isInWater() ? super.getLivingSound() + "_inside" : super.getLivingSound() + "_outside";
 	}
-	
 
 	@Override
 	protected void applyEntityAttributes() {
@@ -58,6 +56,10 @@ public abstract class EntityPrehistoricSwimming extends EntityPrehistoric {
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
 		swimAround();
+		if ((this.isSitting() || this.isSleeping()) && this.isInWater()) {
+			this.setSitting(false);
+			this.setSleeping(false);
+		}
 	}
 
 	private void swimAround() {
@@ -94,21 +96,21 @@ public abstract class EntityPrehistoricSwimming extends EntityPrehistoric {
 	}
 
 	public void moveEntityWithHeading(float x, float z) {
-			if(this.isAmphibious){
-				if(this.isInWater()){
-					moveEntityWithHeadingWater(x, z);
-				}else{
-					super.moveEntityWithHeading(x, z);
-				}
-			}else{
+		if (this.isAmphibious) {
+			if (this.isInWater()) {
 				moveEntityWithHeadingWater(x, z);
+			} else {
+				super.moveEntityWithHeading(x, z);
 			}
+		} else {
+			moveEntityWithHeadingWater(x, z);
+		}
 	}
 
 	public void moveEntityWithHeadingWater(float x, float z) {
 		double d0;
 		float f6;
-		
+
 		if (!worldObj.isRemote) {
 			float f4;
 			float f5;
@@ -191,7 +193,6 @@ public abstract class EntityPrehistoricSwimming extends EntityPrehistoric {
 		this.limbSwing += this.limbSwingAmount;
 	}
 
-	
 	public Vec3 getPosition() {
 		return Vec3.createVectorHelper(this.posX, this.posY, this.posZ);
 	}
