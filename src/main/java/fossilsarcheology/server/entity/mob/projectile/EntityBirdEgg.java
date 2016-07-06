@@ -74,7 +74,10 @@ public class EntityBirdEgg extends EntityThrowable {
 		if (type != EnumPrehistoric.Chicken) {
 			EntityPrehistoric mob = (EntityPrehistoric) type.invokeClass(worldObj);
 			if (!worldObj.isRemote && mob != null) {
-				mob.setAgeInDays(1);
+				mob.setAgeInDays(0);
+				if(this.getThrower() != null){
+					mob.func_152115_b(this.getThrower().getUniqueID().toString());
+				}
 				mob.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, 0.0F);
 				this.worldObj.spawnEntityInWorld(mob);
 			}
