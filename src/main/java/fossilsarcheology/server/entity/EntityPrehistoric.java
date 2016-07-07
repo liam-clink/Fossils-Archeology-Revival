@@ -1222,8 +1222,7 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
 					}
 
 					if (itemstack.getItem() == FAItemRegistry.INSTANCE.whip && this.aiTameType() != EnumPrehistoricAI.Taming.NONE && this.isAdult() && !this.worldObj.isRemote) {
-						System.out.println("nice");
-if (this.isTamed() && func_152114_e(player) && this.canBeRidden()) {
+						if (this.isTamed() && func_152114_e(player) && this.canBeRidden()) {
 							if (this.getRidingPlayer() == null) {
 								Revival.NETWORK_WRAPPER.sendToAll(new MessageFoodParticles(getEntityId(), FABlockRegistry.INSTANCE.volcanicRock));
 								this.setOrder(EnumOrderType.WANDER);
@@ -1335,11 +1334,10 @@ if (this.isTamed() && func_152114_e(player) && this.canBeRidden()) {
 			return "fossil:textures/model/" + type.toString().toLowerCase() + "_0/" + toggle + type.toString().toLowerCase() + gender + toggleList + sleeping + ".png";
 		}
 	}
-	
-    public boolean func_152114_e(EntityLivingBase entity)
-    {
-        return this.getOwnerDisplayName().equals(entity.getCommandSenderName());
-    }
+
+	public boolean func_152114_e(EntityLivingBase entity) {
+		return this.getOwnerDisplayName().equals(entity.getCommandSenderName());
+	}
 
 	public boolean isActuallyWeak() {
 		return (this.aiTameType() == Taming.BLUEGEM || this.aiTameType() == Taming.GEM) && this.isWeak();
@@ -1432,12 +1430,11 @@ if (this.isTamed() && func_152114_e(player) && this.canBeRidden()) {
 
 	}
 
-    public void func_152115_b(String name)
-    {
-    	this.setOwnerDisplayName(name);
-        this.dataWatcher.updateObject(17, name);
-    }
-    
+	public void func_152115_b(String name) {
+		this.setOwnerDisplayName(name);
+		this.dataWatcher.updateObject(17, name);
+	}
+
 	@Override
 	public void knockBack(Entity entity, float f, double x, double z) {
 		if (entity != null && entity instanceof EntityPrehistoric) {
