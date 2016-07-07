@@ -212,6 +212,6 @@ public class EntityMosasaurus extends EntityPrehistoricSwimming {
 	
 	@Override
 	public boolean canBeRidden() {
-		return false;
+		return true;
 	}
 }

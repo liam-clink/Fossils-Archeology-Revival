@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
 import net.ilexiconn.llibrary.client.model.tools.ChainBuffer;
 import net.ilexiconn.llibrary.server.animation.Animation;
@@ -496,8 +497,8 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
 			this.motionY *= 0;
 			this.motionZ *= 0;
 		}
-		if(this.getOwner() != null && this.getOwnerDisplayName().equals("")){
-		this.setOwnerDisplayName(this.getOwner().getCommandSenderName());	
+		if (this.getOwner() != null && this.getOwnerDisplayName().equals("")) {
+			this.setOwnerDisplayName(this.getOwner().getCommandSenderName());
 		}
 		if (this.getHunger() > this.getMaxHunger()) {
 			this.setHunger(this.getMaxHunger());
@@ -613,6 +614,10 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
 				this.flockObj.onUpdate();
 			}
 		}
+	}
+
+	public EntityLivingBase getOwner() {
+		return this.worldObj.getPlayerEntityByName(this.getOwnerDisplayName());
 	}
 
 	public boolean isBreedingItem(ItemStack stack) {
@@ -1124,7 +1129,7 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
 							this.setTamed(true);
 							setPathToEntity(null);
 							setAttackTarget(null);
-							this.func_152115_b(player.getUniqueID().toString());
+							this.func_152115_b(player.getCommandSenderName());
 							--itemstack.stackSize;
 							if (itemstack.stackSize <= 0) {
 								player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
@@ -1153,7 +1158,7 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
 							Revival.NETWORK_WRAPPER.sendToAll(new MessageFoodParticles(getEntityId(), Item.getIdFromItem(FAItemRegistry.INSTANCE.chickenEssence)));
 							this.setAgeInDays(this.getAgeInDays() + 1);
 							this.setHunger(1 + (new Random()).nextInt(this.getHunger()));
-							this.func_152115_b(player.getDisplayName());
+							this.func_152115_b(player.getCommandSenderName());
 							return true;
 						}
 					}
@@ -1186,7 +1191,7 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
 							if (this.aiTameType() == EnumPrehistoricAI.Taming.FEEDING) {
 								if (!this.isTamed() && this.type.isTameable() && (new Random()).nextInt(10) == 1) {
 									this.setTamed(true);
-									this.func_152115_b(player.getUniqueID().toString());
+									this.func_152115_b(player.getCommandSenderName());
 									this.worldObj.setEntityState(this, (byte) 35);
 								}
 							}
@@ -1217,7 +1222,8 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
 					}
 
 					if (itemstack.getItem() == FAItemRegistry.INSTANCE.whip && this.aiTameType() != EnumPrehistoricAI.Taming.NONE && this.isAdult() && !this.worldObj.isRemote) {
-						if (this.isTamed() && func_152114_e(player) && this.canBeRidden()) {
+						System.out.println("nice");
+if (this.isTamed() && func_152114_e(player) && this.canBeRidden()) {
 							if (this.getRidingPlayer() == null) {
 								Revival.NETWORK_WRAPPER.sendToAll(new MessageFoodParticles(getEntityId(), FABlockRegistry.INSTANCE.volcanicRock));
 								this.setOrder(EnumOrderType.WANDER);
@@ -1237,7 +1243,7 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
 								this.setMood(this.getMood() - 25);
 								this.setTamed(true);
 								Revival.NETWORK_WRAPPER.sendToAll(new MessageFoodParticles(getEntityId(), Item.getIdFromItem(Items.gold_ingot)));
-								this.func_152115_b(player.getUniqueID().toString());
+								this.func_152115_b(player.getCommandSenderName());
 							}
 						}
 						this.setSitting(false);
@@ -1246,28 +1252,15 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
 						// this.currentOrder = EnumOrderType.FreeMove;
 						// setRidingPlayer(player);
 					}
-
-					if (this.getOrderItem() != null && itemstack.getItem() == this.getOrderItem() && this.isTamed() && func_152114_e(player) && !player.isRiding()) {
-						// THIS DINOS ITEM TO BE CONTROLLED WITH
+					if (this.getOrderItem() != null && itemstack.getItem() == this.getOrderItem() && this.isTamed() && this.getOwnerDisplayName().equals(player.getCommandSenderName()) && !player.isRiding()) {
 						if (!this.worldObj.isRemote) {
 							this.isJumping = false;
 							this.setPathToEntity(null);
 							this.currentOrder = EnumOrderType.values()[(this.currentOrder.ordinal() + 1) % 3];
-
 							this.sendOrderMessage(this.currentOrder);
-
-							if (this.currentOrder == EnumOrderType.STAY) {
-								this.getNavigator().clearPathEntity();
-								this.setPathToEntity(null);
-								this.setSitting(true);
-							} else {
-								this.setSitting(false);
-							}
 						}
-
 						return true;
 					}
-
 				}
 			}
 		}
@@ -1292,7 +1285,8 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
 
 	private void sendOrderMessage(EnumOrderType var1) {
 		String S = StatCollector.translateToLocal(LocalizationStrings.ORDER_HEAD) + StatCollector.translateToLocal("order." + var1.toString().toLowerCase());
-		Revival.messagePlayer(S, (EntityPlayer) this.getOwner());
+		Revival.messagePlayer(S, (EntityPlayer) this.worldObj.getPlayerEntityByName(this.getOwnerDisplayName()));
+
 	}
 
 	public void nudgeEntity(EntityPlayer player) {
@@ -1341,6 +1335,11 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
 			return "fossil:textures/model/" + type.toString().toLowerCase() + "_0/" + toggle + type.toString().toLowerCase() + gender + toggleList + sleeping + ".png";
 		}
 	}
+	
+    public boolean func_152114_e(EntityLivingBase entity)
+    {
+        return this.getOwnerDisplayName().equals(entity.getCommandSenderName());
+    }
 
 	public boolean isActuallyWeak() {
 		return (this.aiTameType() == Taming.BLUEGEM || this.aiTameType() == Taming.GEM) && this.isWeak();
@@ -1433,6 +1432,12 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
 
 	}
 
+    public void func_152115_b(String name)
+    {
+    	this.setOwnerDisplayName(name);
+        this.dataWatcher.updateObject(17, name);
+    }
+    
 	@Override
 	public void knockBack(Entity entity, float f, double x, double z) {
 		if (entity != null && entity instanceof EntityPrehistoric) {

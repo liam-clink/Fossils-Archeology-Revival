@@ -152,7 +152,8 @@ public class EntityDinosaurEgg extends EntityLiving implements IEntityAdditional
 					if (prehistoricEntity.type.isTameable() && player != null) {
 						if (prehistoricEntity.type != EnumPrehistoric.Tyrannosaurus && prehistoricEntity.type != EnumPrehistoric.Allosaurus && prehistoricEntity.type != EnumPrehistoric.Sarcosuchus) {
 							prehistoricEntity.setTamed(true);
-							prehistoricEntity.func_152115_b(player.getUniqueID().toString());
+							prehistoricEntity.func_152115_b(player.getCommandSenderName().toString());
+							prehistoricEntity.setOwnerDisplayName(player.getCommandSenderName().toString());
 							prehistoricEntity.currentOrder = EnumOrderType.WANDER;
 							prehistoricEntity.setHealth((float) prehistoricEntity.baseHealth);
 

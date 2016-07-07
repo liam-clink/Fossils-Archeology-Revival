@@ -36,6 +36,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ChatComponentText;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
+
 import org.apache.logging.log4j.Level;
 
 @Mod(modid = Revival.MODID, name = "Fossils and Archeology Revival", version = Revival.VERSION, dependencies = "required-after:llibrary@[" + Revival.LLIBRARY_VERSION + ",)")
@@ -63,6 +64,8 @@ public class Revival {
     public static void messagePlayer(String message, EntityPlayer player) {
         if (player != null) {
             player.addChatMessage(new ChatComponentText(message));
+    		System.out.println(player);
+
         }
     }
 

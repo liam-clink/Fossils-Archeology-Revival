@@ -148,7 +148,6 @@ public class EntityVelociraptor extends EntityPrehistoric {
 
     @Override
     public Item getOrderItem() {
-
         return Items.bone;
     }
 

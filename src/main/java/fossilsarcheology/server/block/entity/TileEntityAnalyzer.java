@@ -499,13 +499,21 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
 					if (stackInSlot != null) {
 						if (stackInSlot.isItemEqual(itemstack) && stackInSlot.stackSize + itemstack.stackSize < 64) {
 							stackInSlot.stackSize += itemstack.stackSize;
-							this.analyzerItemStacks[this.RawIndex].stackSize--;
+							if(this.analyzerItemStacks[this.RawIndex].stackSize > 1){
+								this.analyzerItemStacks[this.RawIndex].stackSize--;
+							}else{
+								this.analyzerItemStacks[this.RawIndex] = null;
+							}
 							break;
 						}
 					}
 					else if (stackInSlot == null) {
 						this.analyzerItemStacks[slots] = itemstack;
-						this.analyzerItemStacks[this.RawIndex].stackSize--;
+						if(this.analyzerItemStacks[this.RawIndex].stackSize > 1){
+							this.analyzerItemStacks[this.RawIndex].stackSize--;
+						}else{
+							this.analyzerItemStacks[this.RawIndex] = null;
+						}
 						break;
 					}
 				}
