@@ -89,10 +89,12 @@ public class DinoAIRiding extends EntityAIBase {
 						if (!prehistoric.shouldDismountInWater(rider) && prehistoric.isInWater()) {
 							if (Math.abs(look.yCoord) > 0.4 && prehistoric instanceof EntityPrehistoricSwimming) {
 								prehistoric.motionY = Math.max(-0.15, Math.min(0.15, look.yCoord));
+							} else {
+								prehistoric.motionY = 0.4D;
 							}
-							prehistoric.motionX = (double)(-MathHelper.sin(rider.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(rider.rotationPitch / 180.0F * (float)Math.PI));
-							prehistoric.motionZ = (double)(MathHelper.cos(rider.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(rider.rotationPitch / 180.0F * (float)Math.PI));
-						}else{
+							prehistoric.motionX = (double) (-MathHelper.sin(rider.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(rider.rotationPitch / 180.0F * (float) Math.PI));
+							prehistoric.motionZ = (double) (MathHelper.cos(rider.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(rider.rotationPitch / 180.0F * (float) Math.PI));
+						} else {
 							prehistoric.getMoveHelper().setMoveTo(prehistoric.posX + look.xCoord, prehistoric.posY, prehistoric.posZ + look.zCoord, speed);
 						}
 					}
