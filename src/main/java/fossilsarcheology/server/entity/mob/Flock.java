@@ -51,7 +51,7 @@ public class Flock {
             if (member != null && flockLeader != null && this.flockPathNavigate != null && this.flockPathNavigate.getPath() != null) {
                 if (member.getNavigator().noPath() && member != this.flockLeader) {
                 	PathEntity path = this.flockLeader.getNavigator().getPath();
-                    member.getNavigator().setPath(this.flockPathNavigate.getPathToXYZ(path.getFinalPathPoint().xCoord + generateVarience(4, -4), path.getFinalPathPoint().yCoord + generateVarience(4, -4), path.getFinalPathPoint().zCoord + generateVarience(4, -4)), 1);
+                    member.getNavigator().setPath(this.flockPathNavigate.getPathToXYZ(path.getFinalPathPoint().xCoord + generateVarience(6, -6), path.getFinalPathPoint().yCoord + generateVarience(6, -6), path.getFinalPathPoint().zCoord + generateVarience(6, -6)), 1);
                 }
             }
         }
@@ -60,13 +60,10 @@ public class Flock {
             flockPathNavigate = flockLeader.getNavigator();
         }
         if (flockLeader != null) {
-            if (findNewMember(flockLeader.worldObj, flockLeader.boundingBox.expand(5, 5, 5), flockLeader) != null) {
-                if (flockLeader.getRNG().nextInt(20) == 0) {
+                if (!flockLeader.isMovementBlocked() && flockLeader.getNavigator().noPath()) {
                     Vec3 vec3 = RandomPositionGenerator.findRandomTargetBlockAwayFrom(flockLeader, 32, 7, Vec3.createVectorHelper(flockLeader.posX, flockLeader.posY, flockLeader.posZ));
-                    this.flockPathEntity = this.flockPathNavigate.getPathToXYZ(vec3.xCoord, vec3.yCoord, vec3.zCoord);
-                    this.flockPathNavigate.setPath(this.flockPathEntity, 0.7);
+                    this.flockLeader.getNavigator().setPath(this.flockPathNavigate.getPathToXYZ(vec3.xCoord, vec3.yCoord, vec3.zCoord), 1);
                 }
-            }
         }
     }
 

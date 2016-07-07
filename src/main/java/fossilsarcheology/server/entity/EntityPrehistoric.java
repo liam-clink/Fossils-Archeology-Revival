@@ -1625,16 +1625,6 @@ if (this.isTamed() && func_152114_e(player) && this.canBeRidden()) {
 		}
 	}
 
-	public void eatBlock(int destX, int destY, int destZ) {
-		Block block = worldObj.getBlock(destX, destY, destZ);
-		if (FoodMappings.INSTANCE.getBlockFoodAmount(block, type.diet) != 0) {
-			this.heal(Math.round(FoodMappings.INSTANCE.getBlockFoodAmount(block, type.diet) / 10));
-			this.setHunger(this.getHunger() + FoodMappings.INSTANCE.getBlockFoodAmount(block, type.diet));
-			doFoodEffect(Item.getItemFromBlock(block));
-			Revival.NETWORK_WRAPPER.sendToAll(new MessageFoodParticles(getEntityId(), block));
-		}
-	}
-
 	public String getTempermentString() {
 		String s = null;
 		if (this.aiResponseType() == EnumPrehistoricAI.Response.AGRESSIVE || this.aiResponseType() == EnumPrehistoricAI.Response.WATERAGRESSIVE) {

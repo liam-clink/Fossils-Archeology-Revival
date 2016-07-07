@@ -220,7 +220,7 @@ public class DinoAIWaterFeeder extends EntityAIBase {
                     // destX, (int) destY, (int) destZ)));
                     // this.dinosaur.increaseHunger(this.dinosaur.selfType.FoodBlockList.getBlockFood(Item.getItemFromBlock(this.dinosaur.worldObj.getBlock((int)
                     // destX, (int) destY, (int) destZ))));
-                    this.dinosaur.eatBlock((int) destX, (int) destY, (int) destZ);
+                    //this.dinosaur.eatBlock((int) destX, (int) destY, (int) destZ);
                     this.dinosaur.worldObj.setBlock((int) destX, (int) destY, (int) destZ, Blocks.air, 0, 2);
                     endTask();
                 }
