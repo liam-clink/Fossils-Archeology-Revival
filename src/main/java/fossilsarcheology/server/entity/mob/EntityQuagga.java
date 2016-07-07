@@ -51,7 +51,7 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic {
     private static final String[] horseArmorShortName = new String[]{"", "meo", "goo", "dio"};
     private static final String[] horseArmorTextures = new String[]{null, "textures/entity/horse/armor/horse_armor_iron.png", "textures/entity/horse/armor/horse_armor_gold.png", "textures/entity/horse/armor/horse_armor_diamond.png"};
     private static final int[] armorValues = new int[]{0, 5, 7, 11};
-    private static final String[] horseTextures = new String[]{"fossil:textures/mob/Quagga_Brown.png"};
+    private static final String[] horseTextures = new String[]{"fossil:textures/model/quagga_0/quagga.png"};
     public int timer1;
     public int field_110279_bq;
     public InventoryBasic quaggaChest;
