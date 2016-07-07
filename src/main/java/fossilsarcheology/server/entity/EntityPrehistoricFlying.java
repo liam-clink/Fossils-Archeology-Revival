@@ -1,6 +1,7 @@
 package fossilsarcheology.server.entity;
 
 import fossilsarcheology.server.enums.EnumPrehistoric;
+import fossilsarcheology.server.enums.EnumPrehistoricAI;
 import net.minecraft.block.material.Material;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChunkCoordinates;
@@ -79,12 +80,23 @@ public abstract class EntityPrehistoricFlying extends EntityPrehistoric {
 		if (!this.isFlying() && !this.isMovementBlocked() && rand.nextInt(400) == 0 && !this.worldObj.isRemote && this.isAdult() && this.riddenByEntity == null && this.onGround) {
 			this.setFlying(true);
 		}
+		if(ticksFlying > 80 && this.onGround){
+			this.setFlying(false);	
+		}
 		if (this.isFlying() && getEntityToAttack() == null) {
 			flyAround();
 			ticksFlying++;
 		} else if (getEntityToAttack() != null) {
 			flyTowardsTarget();
 		}
+	}
+	
+	public boolean canSleep() {
+		if(super.canSleep() && this.isFlying() && this.onGround){
+			this.setFlying(false);
+			return super.canSleep();
+		}
+		return super.canSleep();
 	}
 
 	public void setFlying(boolean flying) {
