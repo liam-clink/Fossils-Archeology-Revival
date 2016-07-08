@@ -38,7 +38,7 @@ public class EntityLiopleurodon extends EntityPrehistoricSwimming {
         this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
         this.targetTasks.addTask(2, new DinoAIHunt(this, 20, false));
 		this.hasBabyTexture = false;
-		this.setActualSize(1.5F, 0.5F);
+		this.setActualSize(2.25F, 0.7F);
 		minSize = 0.8F;
 		maxSize = 1.8F;
 		teenAge = 6;
@@ -154,7 +154,7 @@ public class EntityLiopleurodon extends EntityPrehistoricSwimming {
 						this.setAnimation(ATTACK_ANIMATION);
 					}
 					if (this.getAnimation() == ATTACK_ANIMATION && this.getAnimationTick() > 5) {
-						this.getAttackTarget().attackEntityFrom(DamageSource.causeMobDamage(this), (float) this.getAttributeMap().getAttributeInstance(SharedMonsterAttributes.maxHealth).getAttributeValue());
+						this.getAttackTarget().attackEntityFrom(DamageSource.causeMobDamage(this), (float) this.getAttributeMap().getAttributeInstance(SharedMonsterAttributes.attackDamage).getBaseValue());
 					}
 					this.attackEntityAsMob(this.getAttackTarget());
 				} else {
