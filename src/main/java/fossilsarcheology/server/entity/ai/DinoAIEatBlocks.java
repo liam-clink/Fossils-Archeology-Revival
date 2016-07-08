@@ -36,14 +36,9 @@ public class DinoAIEatBlocks extends EntityAIBase {
 		for (int x = (int) (prehistoric.posX) - (radius / 2); x < (int) (prehistoric.posX) + (radius / 2); x++) {
 			for (int y = (int) (prehistoric.posY) - (radius / 2); y < (int) (prehistoric.posY) + (radius / 2); y++) {
 				for (int z = (int) (prehistoric.posZ) - (radius / 2); z < (int) (prehistoric.posZ) + (radius / 2); z++) {
-					ChunkCoordinates block = new ChunkCoordinates(x, y, z);
-					Revival.PROXY.spawnPacketHeartParticles(prehistoric.worldObj, x, y, z, 0, 0, 0);
-					if (FoodMappings.INSTANCE.getBlockFoodAmount(prehistoric.worldObj.getBlock(block.posX, block.posY, block.posZ), prehistoric.type.diet) > 0) {
-						Revival.PROXY.spawnBubbleParticles(prehistoric.worldObj, block.posX, block.posY, block.posZ, 0, 0, 0);
-						targetBlock = block;
+					if (FoodMappings.INSTANCE.getBlockFoodAmount(prehistoric.worldObj.getBlock(x, y, z), prehistoric.type.diet) > 0) {
+						targetBlock = new ChunkCoordinates(x, y, z);
 						return true;
-						//	
-					//	return true;
 					}
 				}
 			}
