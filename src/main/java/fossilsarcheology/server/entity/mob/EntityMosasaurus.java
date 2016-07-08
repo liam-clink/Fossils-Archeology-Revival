@@ -11,6 +11,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import fossilsarcheology.server.entity.EntityPrehistoricSwimming;
+import fossilsarcheology.server.entity.EntityToyBase;
 import fossilsarcheology.server.entity.ai.DinoAIHunt;
 import fossilsarcheology.server.entity.ai.DinoAILookIdle;
 import fossilsarcheology.server.entity.ai.DinoAIRiding;
@@ -179,6 +180,9 @@ public class EntityMosasaurus extends EntityPrehistoricSwimming {
 		}
 		if (this.riddenByEntity != null && riddenByEntity instanceof EntityLivingBase) {
 			if (this.getAnimationTick() > 45) {
+				if(riddenByEntity instanceof EntityToyBase){
+					((EntityToyBase) riddenByEntity).dismountEntity(this);
+				}
 				this.riddenByEntity.attackEntityFrom(DamageSource.causeMobDamage(this), ((EntityLivingBase) this.riddenByEntity).getMaxHealth());
 				this.onKillEntity((EntityLivingBase) this.riddenByEntity);
 				this.setAttackTarget(null);

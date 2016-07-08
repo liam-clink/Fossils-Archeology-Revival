@@ -15,6 +15,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import fossilsarcheology.server.entity.EntityPrehistoricSwimming;
+import fossilsarcheology.server.entity.EntityToyBase;
 import fossilsarcheology.server.entity.ai.DinoAIAttackOnCollide;
 import fossilsarcheology.server.entity.ai.DinoAIFeeder;
 import fossilsarcheology.server.entity.ai.DinoAIFollowOwner;
@@ -168,6 +169,9 @@ public class EntitySarcosuchus extends EntityPrehistoricSwimming {
 		if (this.riddenByEntity != null && riddenByEntity instanceof EntityLivingBase && !this.func_152114_e(((EntityLivingBase) this.riddenByEntity))) {
 			if (this.getAnimationTick() % 20 == 0 && this.riddenByEntity != null) {
 				this.riddenByEntity.attackEntityFrom(DamageSource.drown, 10);
+				if(riddenByEntity instanceof EntityToyBase){
+					((EntityToyBase) riddenByEntity).dismountEntity(this);
+				}
 				if (riddenByEntity.isDead) {
 					this.onKillEntity((EntityLivingBase) this.riddenByEntity);
 				}
