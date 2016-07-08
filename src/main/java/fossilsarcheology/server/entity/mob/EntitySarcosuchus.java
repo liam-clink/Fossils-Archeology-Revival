@@ -1,6 +1,7 @@
 package fossilsarcheology.server.entity.mob;
 
 import net.ilexiconn.llibrary.server.animation.Animation;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -14,6 +15,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.IFluidBlock;
 import fossilsarcheology.server.entity.EntityPrehistoricSwimming;
 import fossilsarcheology.server.entity.EntityToyBase;
 import fossilsarcheology.server.entity.ai.DinoAIAttackOnCollide;
@@ -170,7 +172,7 @@ public class EntitySarcosuchus extends EntityPrehistoricSwimming {
 			if (this.getAnimationTick() % 20 == 0 && this.riddenByEntity != null) {
 				this.riddenByEntity.attackEntityFrom(DamageSource.drown, 10);
 
-				if(riddenByEntity instanceof EntityToyBase){
+				if (riddenByEntity instanceof EntityToyBase) {
 					((EntityToyBase) riddenByEntity).dismountEntity(this);
 				}
 				if (riddenByEntity.isDead) {
@@ -203,7 +205,7 @@ public class EntitySarcosuchus extends EntityPrehistoricSwimming {
 			if (sitProgress != 0)
 				sitProgress = sleepProgress = 0F;
 		}
-		if(this.isSwimming() && (this.isSitting() || this.isSleeping())){
+		if (this.isSwimming() && (this.isSitting() || this.isSleeping())) {
 			this.setSitting(false);
 			this.setSleeping(false);
 		}
@@ -225,10 +227,10 @@ public class EntitySarcosuchus extends EntityPrehistoricSwimming {
 				}
 			}
 		}
-		if (this.isInsideOfMaterial(Material.water)) {
+		if (this.isInWaterMaterial()) {
 			this.setSwimming(true);
-		}else{
-			this.setSwimming(false);	
+		} else {
+			this.setSwimming(false);
 		}
 	}
 

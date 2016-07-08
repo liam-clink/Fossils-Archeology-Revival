@@ -37,6 +37,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.IFluidBlock;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -1613,6 +1614,28 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
 			worldObj.spawnParticle("iconcrack_" + Item.getIdFromItem(item) + "_0", f, f1, f2, motionX, motionY, motionZ);
 		}
 	}
+	
+	public boolean isInWaterMaterial() {
+		double d0 = this.posY;
+		int i = MathHelper.floor_double(this.posX);
+		int j = MathHelper.floor_float((float) MathHelper.floor_double(d0));
+		int k = MathHelper.floor_double(this.posZ);
+		Block block = this.worldObj.getBlock(i, j, k);
+		if (block.getMaterial() == Material.water) {
+			double filled = 1.0f;
+			if (block instanceof IFluidBlock) {
+				filled = ((IFluidBlock) block).getFilledPercentage(worldObj, i, j, k);
+			}
+			if (filled < 0) {
+				filled *= -1;
+				return d0 > (double) (j + (1 - filled));
+			} else {
+				return d0 < (double) (j + filled);
+			}
+		} else {
+			return false;
+		}
+	}
 
 	public void eatItem(ItemStack stack) {
 		if (stack != null && stack.stackSize > 0 && stack.getItem() != null) {
@@ -1690,6 +1713,7 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
 	public void updateRiderPosition() {
 		if ((this.ridingY != 0 || this.ridingXZ != 0) && this.func_152114_e(this.getRidingPlayer()) && this.getAttackTarget() != this.getRidingPlayer()) {
 			rotationYaw = renderYawOffset;
+			rotationYaw = riddenByEntity.rotationYaw;
 			float radius = ridingXZ * (0.7F * getAgeScale()) * -3;
 			float angle = (0.01745329251F * this.renderYawOffset);
 			double extraX = (double) (radius * MathHelper.sin((float) (Math.PI + angle)));

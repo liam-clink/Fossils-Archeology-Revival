@@ -44,8 +44,8 @@ public class EntitySpinosaurus extends EntityPrehistoricSwimming {
 		this.getNavigator().setAvoidsWater(false);
 		this.tasks.addTask(1, this.aiSit);
 		this.tasks.addTask(2, new DinoAIWaterFindTarget(this, true));
+        this.tasks.addTask(3, new DinoAIRiding(this, 1.5D));
         this.tasks.addTask(3, new DinoAIAttackOnCollide(this, 1.5D, false));
-        this.tasks.addTask(4, new DinoAIRiding(this, 1.5D));
 		this.tasks.addTask(4, new DinoAIWaterFeeder(this, 16));
 		this.tasks.addTask(4, new DinoAIFeeder(this, 16));
         this.tasks.addTask(5, new DinoAIFollowOwner(this, 1.0D, 10.0F, 2.0F));
@@ -233,7 +233,7 @@ public class EntitySpinosaurus extends EntityPrehistoricSwimming {
 				}
 			}
 		}
-		if (this.isInsideOfMaterial(Material.water)) {
+		if (this.isInWaterMaterial()) {
 			this.setSwimming(true);
 		}else{
 			this.setSwimming(false);	
