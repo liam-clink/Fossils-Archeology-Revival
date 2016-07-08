@@ -227,6 +227,8 @@ public class EntitySarcosuchus extends EntityPrehistoricSwimming {
 		}
 		if (this.isInsideOfMaterial(Material.water)) {
 			this.setSwimming(true);
+		}else{
+			this.setSwimming(false);	
 		}
 	}
 

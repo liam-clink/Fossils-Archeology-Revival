@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
-import java.util.UUID;
 
 import net.ilexiconn.llibrary.client.model.tools.ChainBuffer;
 import net.ilexiconn.llibrary.server.animation.Animation;
@@ -46,6 +45,7 @@ import fossilsarcheology.api.EnumDiet;
 import fossilsarcheology.api.FoodMappings;
 import fossilsarcheology.server.block.FABlockRegistry;
 import fossilsarcheology.server.block.entity.TileEntityFeeder;
+import fossilsarcheology.server.entity.mob.EntitySpinosaurus;
 import fossilsarcheology.server.entity.mob.Flock;
 import fossilsarcheology.server.enums.EnumAnimation;
 import fossilsarcheology.server.enums.EnumDinoBones;
@@ -1336,7 +1336,11 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
 	}
 
 	public boolean func_152114_e(EntityLivingBase entity) {
-		return this.getOwnerDisplayName().equals(entity.getCommandSenderName());
+		if(entity != null){
+			String s = entity.getCommandSenderName();
+			return s != null && this.getOwnerDisplayName() != null && this.getOwnerDisplayName().equals(s);	
+		}
+		return false;
 	}
 
 	public boolean isActuallyWeak() {
@@ -1692,7 +1696,11 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
 			double extraZ = (double) (radius * MathHelper.cos(angle));
 			double extraY = ridingY * (getAgeScale());
 			super.updateRiderPosition();
-			riddenByEntity.setPosition(this.posX + extraX, this.posY + extraY, this.posZ + extraZ);
+			float spinosaurusAddition = 0;
+			if(this instanceof EntitySpinosaurus){
+				spinosaurusAddition = -(((EntitySpinosaurus)this).swimProgress * 0.1F);
+			}
+			riddenByEntity.setPosition(this.posX + extraX, this.posY + extraY + spinosaurusAddition, this.posZ + extraZ);
 			return;
 		}
 		super.updateRiderPosition();
