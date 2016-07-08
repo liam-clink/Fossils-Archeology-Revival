@@ -9,6 +9,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
 import fossilsarcheology.server.entity.EntityPrehistoricFlying;
+import fossilsarcheology.server.entity.ai.DinoAIAttackOnCollide;
 import fossilsarcheology.server.entity.ai.DinoAIFeeder;
 import fossilsarcheology.server.entity.ai.DinoAIFindAirTarget;
 import fossilsarcheology.server.entity.ai.DinoAIFollowOwner;
@@ -39,6 +40,7 @@ public class EntityPterosaur extends EntityPrehistoricFlying {
         this.tasks.addTask(1, new EntityAISwimming(this));
         this.tasks.addTask(2, this.aiSit);
         this.tasks.addTask(3, new DinoAIFindAirTarget(this));
+		this.tasks.addTask(3, new DinoAIAttackOnCollide(this, 1.5D, false));
         this.tasks.addTask(5, new DinoAILeapAtTarget(this));
         this.tasks.addTask(6, new DinoAIFollowOwner(this, 1.0D, 10.0F, 2.0F));
         this.tasks.addTask(7, new DinoAIFeeder(this, 16));
