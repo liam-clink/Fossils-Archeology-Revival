@@ -178,7 +178,7 @@ public class EntitySpinosaurus extends EntityPrehistoricSwimming {
 				if(riddenByEntity instanceof EntityToyBase){
 					((EntityToyBase) riddenByEntity).dismountEntity(this);
 				}
-				this.riddenByEntity.attackEntityFrom(DamageSource.causeMobDamage(this), ((EntityLivingBase) this.riddenByEntity).getMaxHealth());
+				this.riddenByEntity.attackEntityFrom(DamageSource.causeMobDamage(this), Math.max(((EntityLivingBase) this.riddenByEntity).getMaxHealth(), 100));
 				this.onKillEntity((EntityLivingBase) this.riddenByEntity);
 			}
 			riddenByEntity.setPosition(this.posX, this.posY + this.getMountedYOffset() + riddenByEntity.getYOffset(), this.posZ);
