@@ -52,7 +52,7 @@ public class EntityTriceratops extends EntityPrehistoric {
         this.targetTasks.addTask(4, new DinoAIHunt(this, 200, false));
         this.hasFeatherToggle = true;
         this.featherToggle = !Revival.CONFIG.quilledTriceratops;
-        this.setActualSize(0.8F, 0.6F);
+        this.setActualSize(1.1F, 0.6F);
         this.nearByMobsAllowed = 7;
         minSize = 1F;
         maxSize = 8F;
