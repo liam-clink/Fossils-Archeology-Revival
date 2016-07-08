@@ -179,7 +179,7 @@ public class EntityMosasaurus extends EntityPrehistoricSwimming {
 			return;
 		}
 		if (this.riddenByEntity != null && riddenByEntity instanceof EntityLivingBase) {
-			if (this.getAnimationTick() > 45) {
+			if((this.getAnimationTick() > 55 || this.getAnimation() == NO_ANIMATION)){
 				if(riddenByEntity instanceof EntityToyBase){
 					((EntityToyBase) riddenByEntity).dismountEntity(this);
 				}
