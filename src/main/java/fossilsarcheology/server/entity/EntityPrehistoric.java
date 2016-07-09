@@ -1337,9 +1337,9 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
 	}
 
 	public boolean func_152114_e(EntityLivingBase entity) {
-		if(entity != null){
+		if (entity != null) {
 			String s = entity.getCommandSenderName();
-			return s != null && this.getOwnerDisplayName() != null && this.getOwnerDisplayName().equals(s);	
+			return s != null && this.getOwnerDisplayName() != null && this.getOwnerDisplayName().equals(s);
 		}
 		return false;
 	}
@@ -1591,6 +1591,7 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
 	}
 
 	public void doFoodEffect(Item item) {
+		this.playSound("random.eat", this.getSoundVolume(), this.getSoundPitch());
 		if (item != null) {
 			if (item instanceof ItemBlock) {
 				spawnItemParticle(item, true);
@@ -1598,23 +1599,42 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
 				spawnItemParticle(item, false);
 			}
 		}
-		this.worldObj.playSoundAtEntity(this, "random.eat", this.getSoundVolume(), this.getSoundPitch());
+	}
+	
+	public void doFoodEffect() {
+		this.playSound("random.eat", this.getSoundVolume(), this.getSoundPitch());
+		switch(this.type.diet){
+		case HERBIVORE:
+			spawnItemParticle(Items.wheat_seeds, false);
+			break;
+		case OMNIVORE:
+			spawnItemParticle(Items.bread, false);
+			break;
+		case PISCIVORE:
+			spawnItemParticle(Items.fish, false);
+			break;
+		default:
+			spawnItemParticle(Items.beef, false);
+			break;
+		}
 	}
 
 	public void spawnItemParticle(Item item, boolean itemBlock) {
-		double motionX = rand.nextGaussian() * 0.07D;
-		double motionY = rand.nextGaussian() * 0.07D;
-		double motionZ = rand.nextGaussian() * 0.07D;
-		float f = (float) (getRNG().nextFloat() * (this.boundingBox.maxX - this.boundingBox.minX) + this.boundingBox.minX);
-		float f1 = (float) (getRNG().nextFloat() * (this.boundingBox.maxY - this.boundingBox.minY) + this.boundingBox.minY);
-		float f2 = (float) (getRNG().nextFloat() * (this.boundingBox.maxZ - this.boundingBox.minZ) + this.boundingBox.minZ);
-		if (itemBlock && item instanceof ItemBlock) {
-			worldObj.spawnParticle("blockcrack_" + Block.getIdFromBlock(((ItemBlock) item).field_150939_a) + "_0", f, f1, f2, motionX, motionY, motionZ);
-		} else {
-			worldObj.spawnParticle("iconcrack_" + Item.getIdFromItem(item) + "_0", f, f1, f2, motionX, motionY, motionZ);
+		if (!worldObj.isRemote) {
+			double motionX = rand.nextGaussian() * 0.07D;
+			double motionY = rand.nextGaussian() * 0.07D;
+			double motionZ = rand.nextGaussian() * 0.07D;
+			float f = (float) (getRNG().nextFloat() * (this.boundingBox.maxX - this.boundingBox.minX) + this.boundingBox.minX);
+			float f1 = (float) (getRNG().nextFloat() * (this.boundingBox.maxY - this.boundingBox.minY) + this.boundingBox.minY);
+			float f2 = (float) (getRNG().nextFloat() * (this.boundingBox.maxZ - this.boundingBox.minZ) + this.boundingBox.minZ);
+			if (itemBlock && item instanceof ItemBlock) {
+				Revival.NETWORK_WRAPPER.sendToAll(new MessageFoodParticles(this.getEntityId(), Block.getIdFromBlock(((ItemBlock) item).field_150939_a)));
+			} else {
+				Revival.NETWORK_WRAPPER.sendToAll(new MessageFoodParticles(this.getEntityId(), Item.getIdFromItem(item)));
+			}
 		}
 	}
-	
+
 	public boolean isInWaterMaterial() {
 		double d0 = this.posY;
 		int i = MathHelper.floor_double(this.posX);
@@ -1721,8 +1741,8 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
 			double extraY = ridingY * (getAgeScale());
 			super.updateRiderPosition();
 			float spinosaurusAddition = 0;
-			if(this instanceof EntitySpinosaurus){
-				spinosaurusAddition = -(((EntitySpinosaurus)this).swimProgress * 0.1F);
+			if (this instanceof EntitySpinosaurus) {
+				spinosaurusAddition = -(((EntitySpinosaurus) this).swimProgress * 0.1F);
 			}
 			riddenByEntity.setPosition(this.posX + extraX, this.posY + extraY + spinosaurusAddition, this.posZ + extraZ);
 			return;
@@ -1757,4 +1777,9 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
 	protected String getDeathSound() {
 		return "fossil:" + this.type.name().toLowerCase() + "_death";
 	}
+	
+	public boolean isAquatic(){
+		return this instanceof EntityPrehistoricSwimming;
+	}
+	
 }

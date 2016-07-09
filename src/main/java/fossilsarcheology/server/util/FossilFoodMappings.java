@@ -57,6 +57,7 @@ public class FossilFoodMappings {
         FoodMappings.INSTANCE.addPlant(Items.wheat, 13);
         FoodMappings.INSTANCE.addPlant(Items.melon, 10);
         FoodMappings.INSTANCE.addPlant(Items.apple, 20);
+        FoodMappings.INSTANCE.addPlant(Items.potato, 35);
         FoodMappings.INSTANCE.addPlant(Items.baked_potato, 35);
         FoodMappings.INSTANCE.addPlant(Items.cake, 50);
         FoodMappings.INSTANCE.addPlant(Items.carrot, 15);

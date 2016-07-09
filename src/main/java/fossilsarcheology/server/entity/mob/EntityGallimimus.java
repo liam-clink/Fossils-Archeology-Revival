@@ -17,7 +17,8 @@ import fossilsarcheology.Revival;
 import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.entity.ai.DinoAIAttackOnCollide;
 import fossilsarcheology.server.entity.ai.DinoAIEatBlocks;
-import fossilsarcheology.server.entity.ai.DinoAIFeeder;
+import fossilsarcheology.server.entity.ai.DinoAIEatFeeders;
+import fossilsarcheology.server.entity.ai.DinoAIEatItems;
 import fossilsarcheology.server.entity.ai.DinoAIFollowOwner;
 import fossilsarcheology.server.entity.ai.DinoAIHunt;
 import fossilsarcheology.server.entity.ai.DinoAILookIdle;
@@ -36,6 +37,8 @@ public class EntityGallimimus extends EntityPrehistoric {
         this.tasks.addTask(1, new EntityAISwimming(this));
         this.tasks.addTask(2, this.aiSit);
         this.tasks.addTask(3, new DinoAIEatBlocks(this, 1));
+        this.tasks.addTask(3, new DinoAIEatFeeders(this, 1));
+        this.tasks.addTask(3, new DinoAIEatItems(this, 1));
         this.tasks.addTask(4, new DinoAIWander(this, 1.0D));
         this.tasks.addTask(5, new DinoAIRiding(this, 2F));
         this.tasks.addTask(6, new EntityAIPanic(this, 1.25D));

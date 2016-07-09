@@ -1,7 +1,6 @@
 package fossilsarcheology.server.entity.mob;
 
 import net.ilexiconn.llibrary.server.animation.Animation;
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -17,14 +16,14 @@ import net.minecraft.world.World;
 import fossilsarcheology.server.entity.EntityPrehistoricSwimming;
 import fossilsarcheology.server.entity.EntityToyBase;
 import fossilsarcheology.server.entity.ai.DinoAIAttackOnCollide;
-import fossilsarcheology.server.entity.ai.DinoAIFeeder;
+import fossilsarcheology.server.entity.ai.DinoAIEatFeeders;
+import fossilsarcheology.server.entity.ai.DinoAIEatItems;
 import fossilsarcheology.server.entity.ai.DinoAIFollowOwner;
 import fossilsarcheology.server.entity.ai.DinoAIHunt;
 import fossilsarcheology.server.entity.ai.DinoAILookIdle;
 import fossilsarcheology.server.entity.ai.DinoAIRiding;
 import fossilsarcheology.server.entity.ai.DinoAIWander;
 import fossilsarcheology.server.entity.ai.DinoAIWatchClosest;
-import fossilsarcheology.server.entity.ai.DinoAIWaterFeeder;
 import fossilsarcheology.server.entity.ai.DinoAIWaterFindTarget;
 import fossilsarcheology.server.enums.EnumPrehistoric;
 import fossilsarcheology.server.enums.EnumPrehistoricAI;
@@ -46,8 +45,8 @@ public class EntitySpinosaurus extends EntityPrehistoricSwimming {
 		this.tasks.addTask(2, new DinoAIWaterFindTarget(this, true));
         this.tasks.addTask(3, new DinoAIRiding(this, 1.5D));
         this.tasks.addTask(3, new DinoAIAttackOnCollide(this, 1.5D, false));
-		this.tasks.addTask(4, new DinoAIWaterFeeder(this, 16));
-		this.tasks.addTask(4, new DinoAIFeeder(this, 16));
+        this.tasks.addTask(4, new DinoAIEatFeeders(this, 1));
+        this.tasks.addTask(4, new DinoAIEatItems(this, 1));
         this.tasks.addTask(5, new DinoAIFollowOwner(this, 1.0D, 10.0F, 2.0F));
         this.tasks.addTask(6, new DinoAIWander(this, 1.0D));
 		this.tasks.addTask(7, new DinoAIWatchClosest(this, EntityPlayer.class, 8.0F));

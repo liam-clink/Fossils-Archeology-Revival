@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -24,7 +25,6 @@ import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.passive.EntitySheep;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -74,7 +74,8 @@ public class GuiPedia extends GuiContainer {
 	private RenderItem itemRender;
 	private float mouseX;
 	private float mouseY;
-
+	private FoodSorter sorter;
+	
 	public GuiPedia() {
 		super(new PediaContainer());
 		left = 0;
@@ -82,7 +83,7 @@ public class GuiPedia extends GuiContainer {
 		items = 0;
 		xSize = 390;
 		ySize = 300;
-
+		sorter = new FoodSorter();
 	}
 
 	/**
@@ -583,9 +584,7 @@ public class GuiPedia extends GuiContainer {
 			}
 			Map<Item, Integer> foodMap = FoodMappings.INSTANCE.getFoodRenderList(dino.type.diet);
 			List<Item> keys = Collections.list(Collections.enumeration(foodMap.keySet()));
-			// keys.sort((item1, item2) ->
-			// Integer.compare(Item.getIdFromItem((Item) item1),
-			// Item.getIdFromItem((Item) item2)));
+			Collections.sort(keys, this.sorter);
 			Item[] keyArray = keys.toArray(new Item[0]);
 			for (Item item : keyArray) {
 				if (items < 64 && !(item instanceof ItemBlock)) {
@@ -801,5 +800,22 @@ public class GuiPedia extends GuiContainer {
 		this.triggerButtons(button);
 		this.initGui();
 		this.updateScreen();
+	}
+	
+	public class FoodSorter implements Comparator {
+
+		public FoodSorter() {
+		}
+
+		public int compareFoods(Item var1, Item var2) {
+			double var3 = Item.getIdFromItem(var1);
+			double var5 =  Item.getIdFromItem(var2);
+			return var3 < var5 ? -1 : (var3 > var5 ? 1 : 0);
+		}
+
+		@Override
+		public int compare(Object var1, Object var2) {
+			return this.compareFoods((Item) var1, (Item) var2);
+		}
 	}
 }

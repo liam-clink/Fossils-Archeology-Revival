@@ -182,7 +182,6 @@ public enum FABlockRegistry {
         osmunda = new BlockFossilPlant("plants/plant_osmunda", 1).setBlockName("plant_osmunda").setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
         florissantia = new BlockFossilPlant("plants/plant_florissantia", 1).setBlockName("plant_florissantia").setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
         ephedra = new BlockFossilPlant("plants/plant_ephedra", 1).setBlockName("plant_ephedra").setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
-
         try {
             for (Field f : FABlockRegistry.class.getDeclaredFields()) {
                 Object obj = f.get(this);

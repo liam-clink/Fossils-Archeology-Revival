@@ -5,23 +5,22 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.item.Item;
 import net.minecraft.util.ChunkCoordinates;
-import net.minecraft.util.Vec3;
-import fossilsarcheology.api.FoodMappings;
+import fossilsarcheology.server.block.BlockFeeder;
+import fossilsarcheology.server.block.entity.TileEntityFeeder;
 import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.entity.EntityPrehistoricSwimming;
 
-public class DinoAIEatBlocks extends EntityAIBase {
+public class DinoAIEatFeeders extends EntityAIBase {
 	private ChunkCoordinates targetBlock;
 	private EntityPrehistoric prehistoric;
 	private double speed;
 	private BlockSorter targetSorter;
+	private int feedingTicks;
 
-	public DinoAIEatBlocks(EntityPrehistoric prehistoric, double speed) {
+	public DinoAIEatFeeders(EntityPrehistoric prehistoric, double speed) {
 		super();
 		this.prehistoric = prehistoric;
 		this.speed = speed;
@@ -46,8 +45,11 @@ public class DinoAIEatBlocks extends EntityAIBase {
 		for (int x = (int) (prehistoric.posX) - (radius / 2); x < (int) (prehistoric.posX) + (radius / 2); x++) {
 			for (int y = (int) (prehistoric.posY) - (radius / 2); y < (int) (prehistoric.posY) + (radius / 2); y++) {
 				for (int z = (int) (prehistoric.posZ) - (radius / 2); z < (int) (prehistoric.posZ) + (radius / 2); z++) {
-					if (FoodMappings.INSTANCE.getBlockFoodAmount(prehistoric.worldObj.getBlock(x, y, z), prehistoric.type.diet) > 0) {
-						allBlocks.add(new ChunkCoordinates(x, y, z));
+					if (prehistoric.worldObj.getBlock(x, y, z) instanceof BlockFeeder && prehistoric.worldObj.getTileEntity(x, y, z) != null && prehistoric.worldObj.getTileEntity(x, y, z) instanceof TileEntityFeeder) {
+						TileEntityFeeder feeder = (TileEntityFeeder) prehistoric.worldObj.getTileEntity(x, y, z);
+						if (!feeder.isEmpty(prehistoric.type)) {
+							allBlocks.add(new ChunkCoordinates(x, y, z));
+						}
 					}
 				}
 			}
@@ -73,7 +75,10 @@ public class DinoAIEatBlocks extends EntityAIBase {
 		if (prehistoric.isMovementBlocked()) {
 			return false;
 		}
-		return true;
+		if (prehistoric.worldObj.getBlock(targetBlock.posX, targetBlock.posY, targetBlock.posZ) instanceof BlockFeeder && prehistoric.worldObj.getTileEntity(targetBlock.posX, targetBlock.posY, targetBlock.posZ) != null && prehistoric.worldObj.getTileEntity(targetBlock.posX, targetBlock.posY, targetBlock.posZ) instanceof TileEntityFeeder) {
+			return true;
+		}
+		return false;
 	}
 
 	@Override
@@ -84,17 +89,20 @@ public class DinoAIEatBlocks extends EntityAIBase {
 	@Override
 	public void updateTask() {
 		if (targetBlock != null) {
-			Block block = prehistoric.worldObj.getBlock(this.targetBlock.posX, this.targetBlock.posY, this.targetBlock.posZ);
-			if (FoodMappings.INSTANCE.getBlockFoodAmount(block, prehistoric.type.diet) > 0) {
+			if (prehistoric.worldObj.getBlock(targetBlock.posX, targetBlock.posY, targetBlock.posZ) instanceof BlockFeeder && prehistoric.worldObj.getTileEntity(targetBlock.posX, targetBlock.posY, targetBlock.posZ) != null && prehistoric.worldObj.getTileEntity(targetBlock.posX, targetBlock.posY, targetBlock.posZ) instanceof TileEntityFeeder) {
+				TileEntityFeeder feeder = (TileEntityFeeder) prehistoric.worldObj.getTileEntity(targetBlock.posX, targetBlock.posY, targetBlock.posZ);
 				double d0 = prehistoric.getDistance(this.targetBlock.posX, this.targetBlock.posY, this.targetBlock.posZ);
 				if (d0 * d0 < 6) {
-					prehistoric.setHunger(Math.min(100, prehistoric.getHunger() + FoodMappings.INSTANCE.getBlockFoodAmount(block, prehistoric.type.diet)));
-					prehistoric.setHealth(Math.min(prehistoric.getMaxHealth(), (int) (prehistoric.getHealth() + FoodMappings.INSTANCE.getBlockFoodAmount(block, prehistoric.type.diet) / 10)));
-					// prehistoric.doFoodEffect(Item.getItemFromBlock(block));
-					prehistoric.playSound("random.eat", 1, 1);
-					prehistoric.worldObj.func_147480_a(this.targetBlock.posX, this.targetBlock.posY, this.targetBlock.posZ, false);
-					targetBlock = null;
-					resetTask();
+					if (feedingTicks < 30 && !feeder.isEmpty(prehistoric.type)) {
+						feedingTicks++;
+						feeder.feedDinosaur(prehistoric);
+						prehistoric.setHealth(Math.min(prehistoric.getMaxHealth(), (int) (prehistoric.getHealth() + feedingTicks / 4)));
+						prehistoric.doFoodEffect();
+					} else {
+						feedingTicks = 0;
+						targetBlock = null;
+						resetTask();
+					}
 					return;
 				} else {
 						if (this.prehistoric.isAquatic()) {

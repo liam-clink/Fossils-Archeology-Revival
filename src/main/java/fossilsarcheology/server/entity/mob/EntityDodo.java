@@ -13,7 +13,8 @@ import net.minecraft.world.World;
 import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.entity.ai.DinoAIAttackOnCollide;
 import fossilsarcheology.server.entity.ai.DinoAIEatBlocks;
-import fossilsarcheology.server.entity.ai.DinoAIFeeder;
+import fossilsarcheology.server.entity.ai.DinoAIEatFeeders;
+import fossilsarcheology.server.entity.ai.DinoAIEatItems;
 import fossilsarcheology.server.entity.ai.DinoAIFollowOwner;
 import fossilsarcheology.server.entity.ai.DinoAIHunt;
 import fossilsarcheology.server.entity.ai.DinoAILookIdle;
@@ -36,6 +37,8 @@ public class EntityDodo extends EntityPrehistoric {
         this.tasks.addTask(5, new DinoAIAttackOnCollide(this, 1.0D, false));
         this.tasks.addTask(6, new DinoAIFollowOwner(this, 1.0D, 10.0F, 2.0F));
         this.tasks.addTask(7, new DinoAIEatBlocks(this, 1));
+        this.tasks.addTask(7, new DinoAIEatFeeders(this, 1));
+        this.tasks.addTask(7, new DinoAIEatItems(this, 1));
         this.tasks.addTask(8, new DinoAIWander(this, 1.0D));
         this.tasks.addTask(9, new DinoAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(9, new DinoAILookIdle(this));
