@@ -212,7 +212,7 @@ public class ModelBrachiosaurus extends ModelPrehistoric {
         ModelUtils.faceTargetMod(Neck5, f3, f4, 0.16F);
 
         float speed = 0.1F;
-        float speed2 = 0.3F;
+        float speed2 = 0.45F;
         float degree = 0.5F;
         {
             float sitProgress = ((EntityPrehistoric) (entity)).sitProgress;
@@ -222,14 +222,14 @@ public class ModelBrachiosaurus extends ModelPrehistoric {
             this.bob(LowerBody, speed, degree * 0.5F, false, entity.ticksExisted, 1);
             this.walk(UpperBody, speed, degree * 0.05F, true, 0F, 0F, entity.ticksExisted, 1);
             this.walk(MidBody, speed, degree * 0.05F, true, 0F, 0F, entity.ticksExisted, 1);
-            this.walk(FrontThighLeft, speed2, degree * 0.25F, true, 0F, 0.2F, f, f1);
-            this.walk(FrontThighRight, speed2, degree * 0.25F, false, 0F, -0.2F, f, f1);
-            this.walk(BackThighLeft, speed2, degree * 0.25F, false, 0F, -0.2F, f, f1);
-            this.walk(BackThighRight, speed2, degree * 0.25F, true, 0F, 0.2F, f, f1);
-            this.walk(FrontLegLeft, speed2, degree * 0.2F, true, 0F, 0.2F, f, f1);
-            this.walk(FrontLegRight, speed2, degree * 0.2F, false, 0F, -0.2F, f, f1);
-            this.walk(BackLegLeft, speed2, degree * 0.2F, false, 0F, 0.2F, f, f1);
-            this.walk(BackLegRight, speed2, degree * 0.2F, true, 0F, -0.2F, f, f1);
+            this.walk(FrontThighLeft, speed2, degree * 0.35F, true, 0F, 0.2F, f, f1);
+            this.walk(FrontThighRight, speed2, degree * 0.35F, false, 0F, -0.2F, f, f1);
+            this.walk(BackThighLeft, speed2, degree * 0.35F, false, 0F, -0.2F, f, f1);
+            this.walk(BackThighRight, speed2, degree * 0.35F, true, 0F, 0.2F, f, f1);
+            this.walk(FrontLegLeft, speed2, degree * 0.3F, true, 0F, 0.2F, f, f1);
+            this.walk(FrontLegRight, speed2, degree * 0.3F, false, 0F, -0.2F, f, f1);
+            this.walk(BackLegLeft, speed2, degree * 0.3F, false, 0F, 0.2F, f, f1);
+            this.walk(BackLegRight, speed2, degree * 0.3F, true, 0F, -0.2F, f, f1);
             sitAnimationRotation(Neck3, sitProgress, -((float) Math.toRadians(2.0D)), 0, 0);
             sitAnimationRotation(BackLegLeft, sitProgress, (float) Math.toRadians(58.0D), 0, 0);
             sitAnimationRotation(Neck2, sitProgress, -((float) Math.toRadians(5.22D)), 0, 0);
