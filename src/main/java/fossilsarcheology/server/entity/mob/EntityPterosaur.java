@@ -59,7 +59,7 @@ public class EntityPterosaur extends EntityPrehistoricFlying {
         minSize = 0.3F;
         maxSize = 1.2F;
         teenAge = 4;
-        pediaScale = 25;
+        pediaScale = 45;
     }
 
     @Override
