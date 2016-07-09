@@ -40,7 +40,7 @@ import fossilsarcheology.server.enums.EnumPrehistoricAI.WaterAbility;
 public class EntityBrachiosaurus extends EntityPrehistoric {
 
     public EntityBrachiosaurus(World world) {
-        super(world, EnumPrehistoric.Brachiosaurus, 2, 46, 20, 200, 0.2, 0.4);
+        super(world, EnumPrehistoric.Brachiosaurus, 2, 46, 20, 200, 0.3, 0.45);
         this.getNavigator().setAvoidsWater(true);
         this.getNavigator().setCanSwim(true);
         this.tasks.addTask(1, new EntityAISwimming(this));
