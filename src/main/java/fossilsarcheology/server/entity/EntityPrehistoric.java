@@ -553,7 +553,7 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
             this.setSitting(false);
             ticksSitted = 0;
         }
-        if (!worldObj.isRemote && !this.isInWater() && this.riddenByEntity == null && !this.isActuallyWeak() && this.canSleep() && (this.getAnimation() == NO_ANIMATION || this.getAnimation() == SPEAK_ANIMATION)) {
+        if (!worldObj.isRemote && !this.isInWater() && this.riddenByEntity == null && !this.isActuallyWeak() && this.canSleep() &&  this.getRNG().nextInt(100) == 1 && this.getAttackTarget() == null && (this.getAnimation() == NO_ANIMATION || this.getAnimation() == SPEAK_ANIMATION)) {
             this.setSitting(false);
             this.setSleeping(true);
             ticksSlept = 0;
