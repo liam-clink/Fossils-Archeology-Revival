@@ -1345,7 +1345,7 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
 	}
 
 	public boolean isActuallyWeak() {
-		return (this.aiTameType() == Taming.BLUEGEM || this.aiTameType() == Taming.GEM) && this.isWeak();
+		return (this.aiTameType() == Taming.BLUEGEM || this.aiTameType() == Taming.GEM) ? this.isWeak() : false;
 	}
 
 	public int getTailSegments() {
