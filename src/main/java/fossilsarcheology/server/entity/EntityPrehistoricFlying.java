@@ -3,6 +3,7 @@ package fossilsarcheology.server.entity;
 import fossilsarcheology.server.enums.EnumPrehistoric;
 import fossilsarcheology.server.enums.EnumPrehistoricAI;
 import net.minecraft.block.material.Material;
+import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.MathHelper;
@@ -65,7 +66,7 @@ public abstract class EntityPrehistoricFlying extends EntityPrehistoric {
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
 		boolean flying = isFlying();
-		if (!this.onGround && this.motionY < 0.0D) {
+		if (this.motionY < 0.0D && !this.isFlying()) {
 			this.motionY *= 0.6D;
 		}
 		if (flying && flyProgress < 20.0F) {
@@ -80,7 +81,7 @@ public abstract class EntityPrehistoricFlying extends EntityPrehistoric {
 		if (!this.isFlying() && !this.isMovementBlocked() && rand.nextInt(400) == 0 && !this.worldObj.isRemote && this.isAdult() && this.riddenByEntity == null && this.onGround) {
 			this.setFlying(true);
 		}
-		if(ticksFlying > 80 && this.onGround){
+		if(ticksFlying > 120 && this.onGround){
 			this.setFlying(false);	
 		}
 		if (this.isFlying() && getEntityToAttack() == null) {
@@ -88,6 +89,9 @@ public abstract class EntityPrehistoricFlying extends EntityPrehistoric {
 			ticksFlying++;
 		} else if (getEntityToAttack() != null) {
 			flyTowardsTarget();
+		}
+		if(this.currentTarget != null && this.getBlockUnder() == Blocks.air && !this.isFlying() && this.isAdult()){
+			this.setFlying(true);
 		}
 	}
 	
