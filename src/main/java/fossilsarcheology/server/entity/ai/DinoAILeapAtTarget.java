@@ -44,6 +44,7 @@ public class DinoAILeapAtTarget extends EntityAIBase {
         if (dino.getAnimation() != dino.ATTACK_ANIMATION) {
             dino.setAnimation(dino.ATTACK_ANIMATION);
         }
+        dino.faceEntity(this.leapTarget, 100.0F, 100.0F);
     }
 
 }

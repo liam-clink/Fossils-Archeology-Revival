@@ -169,10 +169,10 @@ public class EntityCompsognathus extends EntityPrehistoric {
             double d0 = this.getAttackTarget().posX - this.posX;
             double d1 = this.getAttackTarget().posZ - this.posZ;
             float f = MathHelper.sqrt_double(d0 * d0 + d1 * d1);
-            this.motionX += d0 / (double) f * 0.4D * 0.800000011920929D + this.motionX * 0.20000000298023224D;
-            this.motionZ += d1 / (double) f * 0.4D * 0.800000011920929D + this.motionZ * 0.20000000298023224D;
+            this.motionX += d0 / (double) f * 0.4D * 0.800000011920929D + this.motionX * 0.40000000298023224D;
+            this.motionZ += d1 / (double) f * 0.4D * 0.800000011920929D + this.motionZ * 0.40000000298023224D;
             this.getLookHelper().setLookPositionWithEntity(this.getAttackTarget(), 10, 12);
-            this.motionY = 0.3;
+            this.motionY = 0.4;
         }
     }
 
