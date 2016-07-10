@@ -186,10 +186,15 @@ public class EntityMosasaurus extends EntityPrehistoricSwimming {
 			if((this.getAnimationTick() > 55 || this.getAnimation() == NO_ANIMATION)){
 				if(riddenByEntity instanceof EntityToyBase){
 					((EntityToyBase) riddenByEntity).dismountEntity(this);
+					this.setAttackTarget(null);
+					this.doPlayBonus(((EntityToyBase) riddenByEntity).toyBonus);
+					riddenByEntity.setPosition(posX, posY, posZ);
+					riddenByEntity = null;
+					return;
+				}else{
+					this.riddenByEntity.attackEntityFrom(DamageSource.causeMobDamage(this), Math.max(((EntityLivingBase) this.riddenByEntity).getMaxHealth(), 100));
+					this.onKillEntity((EntityLivingBase) this.riddenByEntity);
 				}
-				this.riddenByEntity.attackEntityFrom(DamageSource.causeMobDamage(this),  Math.max(((EntityLivingBase) this.riddenByEntity).getMaxHealth(), 100));
-				this.onKillEntity((EntityLivingBase) this.riddenByEntity);
-				this.setAttackTarget(null);
 			}
 			
 			float modTick_1 = 5 * MathHelper.sin((float) (Math.PI + (this.getAnimationTick() * 0.275F)));

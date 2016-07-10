@@ -176,9 +176,15 @@ public class EntitySpinosaurus extends EntityPrehistoricSwimming {
 			if((this.getAnimationTick() > 55 || this.getAnimation() == NO_ANIMATION) && this.riddenByEntity != null){
 				if(riddenByEntity instanceof EntityToyBase){
 					((EntityToyBase) riddenByEntity).dismountEntity(this);
+					this.setAttackTarget(null);
+					this.doPlayBonus(((EntityToyBase) riddenByEntity).toyBonus);
+					riddenByEntity.setPosition(posX, posY, posZ);
+					riddenByEntity = null;
+					return;
+				}else{
+					this.riddenByEntity.attackEntityFrom(DamageSource.causeMobDamage(this), Math.max(((EntityLivingBase) this.riddenByEntity).getMaxHealth(), 100));
+					this.onKillEntity((EntityLivingBase) this.riddenByEntity);
 				}
-				this.riddenByEntity.attackEntityFrom(DamageSource.causeMobDamage(this), Math.max(((EntityLivingBase) this.riddenByEntity).getMaxHealth(), 100));
-				this.onKillEntity((EntityLivingBase) this.riddenByEntity);
 			}
 			riddenByEntity.setPosition(this.posX, this.posY + this.getMountedYOffset() + riddenByEntity.getYOffset(), this.posZ);
 			float modTick_0 = this.getAnimationTick() - 15;
