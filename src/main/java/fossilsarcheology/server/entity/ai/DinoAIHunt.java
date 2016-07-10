@@ -10,11 +10,9 @@ import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAITarget;
 import net.minecraft.entity.player.EntityPlayer;
-import fossilsarcheology.api.EnumDiet;
-import fossilsarcheology.api.FoodMappings;
 import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.entity.EntityToyBase;
-import fossilsarcheology.server.enums.EnumPrehistoricAI.Response;
+import fossilsarcheology.api.FoodMappings;
 import fossilsarcheology.server.enums.EnumPrehistoricMood;
 
 public class DinoAIHunt extends EntityAITarget {
@@ -60,8 +58,14 @@ public class DinoAIHunt extends EntityAITarget {
 					if (targetEntity instanceof EntityPlayer && ((EntityPlayer) targetEntity).capabilities.isCreativeMode) {
 						return false;
 					}
-					if (targetEntity instanceof EntityPlayer && (prehistoric.getMoodFace() == EnumPrehistoricMood.ANGRY || prehistoric.getMoodFace() == EnumPrehistoricMood.SAD)) {
-						return !((EntityPlayer) targetEntity).capabilities.isCreativeMode;
+					if (targetEntity instanceof EntityPlayer) {
+						if(prehistoric.getMood() < 0 && prehistoric.getMoodFace() != EnumPrehistoricMood.CALM){
+							return !((EntityPlayer) targetEntity).capabilities.isCreativeMode;
+						}else if(prehistoric.getMood() > 25 && prehistoric.getMoodFace() != EnumPrehistoricMood.CALM){
+							return false;
+						}else if(prehistoric.getMoodFace() == EnumPrehistoricMood.CALM){
+							return !prehistoric.func_152114_e(targetEntity) && prehistoric.canDinoHunt(targetEntity, true);
+						}
 					}
 					if (FoodMappings.INSTANCE.getEntityFoodAmount(this.targetEntity.getClass(), prehistoric.type.diet) > 0) {
 						return !prehistoric.func_152114_e(targetEntity) && prehistoric.canDinoHunt(targetEntity, true);
