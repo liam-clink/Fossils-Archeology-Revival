@@ -58,6 +58,7 @@ public class EntityMosasaurus extends EntityPrehistoricSwimming {
 		breaksBlocks = true;
 		hasBabyTexture = false;
 		pediaScale = 30;
+		this.ridingY = 0.8F;
 	}
 
 	@Override
@@ -153,6 +154,7 @@ public class EntityMosasaurus extends EntityPrehistoricSwimming {
 	@Override
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
+
 		if (this.getAttackTarget() != null) {
 	        if (getAttackBounds().intersectsWith(this.getAttackTarget().boundingBox)) {
 				if (!this.isEntitySmallerThan(this.getAttackTarget(), 2F * (this.getAgeScale() / this.maxSize))) {

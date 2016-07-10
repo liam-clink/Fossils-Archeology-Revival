@@ -54,7 +54,7 @@ public class EntityGastornis extends EntityPrehistoric {
         this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
         this.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
-        this.targetTasks.addTask(4, new DinoAIHunt(this, 200, false));
+        this.targetTasks.addTask(4, new DinoAIHunt(this, 20, false));
         this.setActualSize(1.4F, 2.5F);
         this.pediaScale = 22F;
         this.nearByMobsAllowed = 3;

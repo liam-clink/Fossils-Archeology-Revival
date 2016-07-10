@@ -46,7 +46,7 @@ public class EntityConfuciusornis extends EntityPrehistoricFlying {
         this.tasks.addTask(8, new DinoAIWander(this, 1.0D));
         this.tasks.addTask(9, new DinoAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(9, new DinoAILookIdle(this));
-        this.targetTasks.addTask(4, new DinoAIHunt(this, 200, false));
+        this.targetTasks.addTask(4, new DinoAIHunt(this, 20, false));
         this.setActualSize(0.7F, 0.8F);
         minSize = 0.3F;
         maxSize = 0.8F;

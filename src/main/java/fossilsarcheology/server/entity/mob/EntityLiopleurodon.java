@@ -48,6 +48,7 @@ public class EntityLiopleurodon extends EntityPrehistoricSwimming {
 		breaksBlocks = false;
 		hasBabyTexture = false;
 		pediaScale = 30;
+		this.ridingY = 1.3F;
 	}
 
 	@Override

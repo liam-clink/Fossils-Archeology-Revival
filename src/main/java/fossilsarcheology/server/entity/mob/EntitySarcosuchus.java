@@ -60,7 +60,7 @@ public class EntitySarcosuchus extends EntityPrehistoricSwimming {
 		developsResistance = true;
 		breaksBlocks = true;
 		this.hasBabyTexture = true;
-		this.ridingY = 1.5F;
+		this.ridingY = 1.2F;
 		this.pediaScale = 30;
 	}
 

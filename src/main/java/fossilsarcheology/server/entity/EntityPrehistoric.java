@@ -1700,12 +1700,12 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
     }
 
     public double getMountedYOffset() {
-        return (double) this.height * 0.75D;
+        return 0;
     }
 
     @Override
     public void updateRiderPosition() {
-        if ((this.ridingY != 0 || this.ridingXZ != 0) && this.func_152114_e(this.getRidingPlayer()) && this.getAttackTarget() != this.getRidingPlayer()) {
+        if (this.func_152114_e(this.getRidingPlayer()) && this.getAttackTarget() != this.getRidingPlayer()) {
             rotationYaw = renderYawOffset;
             rotationYaw = riddenByEntity.rotationYaw;
             float radius = ridingXZ * (0.7F * getAgeScale()) * -3;
@@ -1713,7 +1713,6 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
             double extraX = (double) (radius * MathHelper.sin((float) (Math.PI + angle)));
             double extraZ = (double) (radius * MathHelper.cos(angle));
             double extraY = ridingY * (getAgeScale());
-            super.updateRiderPosition();
             float spinosaurusAddition = 0;
             if (this instanceof EntitySpinosaurus) {
                 spinosaurusAddition = -(((EntitySpinosaurus) this).swimProgress * 0.1F);

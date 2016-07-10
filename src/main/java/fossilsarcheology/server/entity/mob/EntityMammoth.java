@@ -60,7 +60,7 @@ public class EntityMammoth extends EntityPrehistoric implements IShearable {
 		this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
 		this.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));
 		this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
-		this.targetTasks.addTask(4, new DinoAIHunt(this, 200, false));
+		this.targetTasks.addTask(4, new DinoAIHunt(this, 20, false));
 		this.setActualSize(0.7F, 0.7F);
 		this.pediaScale = 60F;
 		minSize = 1.3F;

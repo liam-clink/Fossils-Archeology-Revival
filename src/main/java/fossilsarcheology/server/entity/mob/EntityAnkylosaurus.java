@@ -39,7 +39,7 @@ import fossilsarcheology.server.enums.EnumPrehistoricAI.WaterAbility;
 public class EntityAnkylosaurus extends EntityPrehistoric {
 
     public EntityAnkylosaurus(World world) {
-        super(world, EnumPrehistoric.Ankylosaurus, 2, 9, 25, 70, 0.15, 0.25);
+        super(world, EnumPrehistoric.Ankylosaurus, 2, 9, 25, 70, 0.25, 0.45);
         this.getNavigator().setAvoidsWater(true);
         this.getNavigator().setCanSwim(true);
         this.tasks.addTask(1, new EntityAISwimming(this));
@@ -56,7 +56,7 @@ public class EntityAnkylosaurus extends EntityPrehistoric {
         this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
         this.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
-        this.targetTasks.addTask(4, new DinoAIHunt(this, 200, false));
+        this.targetTasks.addTask(4, new DinoAIHunt(this, 20, false));
         this.setActualSize(1.7F, 1.0F);
         this.nearByMobsAllowed = 6;
         minSize = 1.0F;

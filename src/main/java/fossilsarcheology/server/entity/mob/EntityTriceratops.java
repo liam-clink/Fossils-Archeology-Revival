@@ -53,7 +53,7 @@ public class EntityTriceratops extends EntityPrehistoric {
         this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
         this.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
-        this.targetTasks.addTask(4, new DinoAIHunt(this, 200, false));
+        this.targetTasks.addTask(4, new DinoAIHunt(this, 20, false));
         this.hasFeatherToggle = true;
         this.featherToggle = !Revival.CONFIG.quilledTriceratops;
         this.setActualSize(1.1F, 0.6F);
@@ -63,7 +63,7 @@ public class EntityTriceratops extends EntityPrehistoric {
         teenAge = 5;
         developsResistance = true;
         breaksBlocks = true;
-        this.ridingY = 0.93F;
+        this.ridingY = 0.73F;
         this.ridingXZ = -0.05F;
         this.pediaScale = 55;
     }
