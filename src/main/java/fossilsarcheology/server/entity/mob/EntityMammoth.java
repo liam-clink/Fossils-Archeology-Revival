@@ -61,7 +61,7 @@ public class EntityMammoth extends EntityPrehistoric implements IShearable {
 		this.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));
 		this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
 		this.targetTasks.addTask(4, new DinoAIHunt(this, 20, false));
-		this.setActualSize(0.7F, 0.7F);
+		this.setActualSize(1.2F, 0.7F);
 		this.pediaScale = 60F;
 		minSize = 1.3F;
 		maxSize = 5F;
@@ -155,6 +155,9 @@ public class EntityMammoth extends EntityPrehistoric implements IShearable {
 		if (!this.isPotionActive(Potion.weakness) && this.worldObj.getBiomeGenForCoords(i, k).getFloatTemperature(i, j, k) > 1.0 && !this.isSheared()) {
 			this.addPotionEffect(BIOME_EFFECT);
 		}
+        if (this.getAnimation() == ATTACK_ANIMATION && this.getAnimationTick() == 17 && this.getAttackTarget() != null) {
+            this.attackEntityAsMob(this.getAttackTarget());
+        }
 		super.onLivingUpdate();
 	}
 
@@ -235,13 +238,12 @@ public class EntityMammoth extends EntityPrehistoric implements IShearable {
 
 	@Override
 	public boolean attackEntityAsMob(Entity entity) {
-		if (this.getAttackBounds().intersectsWith(entity.boundingBox)) {
+		if (this.getAttackBounds().expand(3.0F, 3.0F, 3.0F).intersectsWith(entity.boundingBox)) {
 			if (this.getAnimation() == NO_ANIMATION) {
 				this.setAnimation(ATTACK_ANIMATION);
 				return false;
 			}
-
-			if (this.getAnimation() == ATTACK_ANIMATION && this.getAnimationTick() == 20) {
+			if (this.getAnimation() == ATTACK_ANIMATION && this.getAnimationTick() == 17) {
 				IAttributeInstance iattributeinstance = this.getEntityAttribute(SharedMonsterAttributes.attackDamage);
 				boolean flag = entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) iattributeinstance.getAttributeValue());
 				if (entity.ridingEntity != null) {

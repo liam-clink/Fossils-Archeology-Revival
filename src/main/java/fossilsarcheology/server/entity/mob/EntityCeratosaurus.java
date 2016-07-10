@@ -175,12 +175,7 @@ public class EntityCeratosaurus extends EntityPrehistoric {
                         entity.mountEntity(null);
                     }
                 }
-                entity.motionY += 0.4000000059604645D;
-                double d0 = this.getAttackTarget().posX - this.posX;
-                double d1 = this.getAttackTarget().posZ - this.posZ;
-                float f = MathHelper.sqrt_double(d0 * d0 + d1 * d1);
-                entity.addVelocity(-MathHelper.sin(this.rotationYaw * (float) Math.PI / 180.0F) * (0.1F * this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).getAttributeValue() / 2), 0.0D, MathHelper.cos(this.rotationYaw * (float) Math.PI / 180.0F) * (0.1F * this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).getAttributeValue() / 2));
-                entity.isAirBorne = false;
+                entity.motionY += 0.1000000059604645D;
                 return flag;
             }
         }
