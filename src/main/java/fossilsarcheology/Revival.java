@@ -43,7 +43,7 @@ import org.apache.logging.log4j.Level;
 public class Revival {
     public static final String MODID = "fossil";
     public static final ModState STATE = ModState.RELEASE;
-    public static final String VERSION = "7.3.0-develop";
+    public static final String VERSION = "7.3.0";
     public static final String LLIBRARY_VERSION = "1.4.0";
 
     @SidedProxy(clientSide = "fossilsarcheology.client.ClientProxy", serverSide = "fossilsarcheology.server.ServerProxy")
