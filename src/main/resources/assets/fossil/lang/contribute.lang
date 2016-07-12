@@ -15,3 +15,16 @@ Pull requests for translations directly to any of the github repos will be autom
 
 
 - Fossils Revival Team
+
+entity.fossil.Dryosaurus.name=Dryosaurus
+item.dnaDryosaurus.name=Dryosaurus DNA
+item.eggDryosaurus.name=Dryosaurus Egg
+item.rawDryosaurus.name=Raw Dryosaurus
+item.cookedDryosaurus.name=Cooked Dryosaurus
+item.skull.Dryosaurus.name=Dryosaurus Skull
+item.dinoRibCage.Dryosaurus.name=Dryosaurus Rib Cage
+item.claw.Dryosaurus.name=Dryosaurus Tooth
+item.armBone.Dryosaurus.name=Dryosaurus Arm Bone
+item.vertebrae.Dryosaurus.name=Dryosaurus Vertebrae
+item.legBone.Dryosaurus.name=Dryosaurus Leg Bone
+item.foot.Dryosaurus.name=Dryosaurus Foot

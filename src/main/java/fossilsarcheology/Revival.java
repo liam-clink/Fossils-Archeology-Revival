@@ -43,7 +43,7 @@ import org.apache.logging.log4j.Level;
 public class Revival {
     public static final String MODID = "fossil";
     public static final ModState STATE = ModState.RELEASE;
-    public static final String VERSION = "7.3.0";
+    public static final String VERSION = "7.3.1";
     public static final String LLIBRARY_VERSION = "1.4.0";
 
     @SidedProxy(clientSide = "fossilsarcheology.client.ClientProxy", serverSide = "fossilsarcheology.server.ServerProxy")
@@ -65,7 +65,6 @@ public class Revival {
         if (player != null) {
             player.addChatMessage(new ChatComponentText(message));
     		System.out.println(player);
-
         }
     }
 
@@ -86,7 +85,6 @@ public class Revival {
         FAItemRegistry.INSTANCE.init();
         FABiomeRegistry.INSTANCE.init();
         FAEnchantmentRegistry.INSTANCE.init();
-
         EnumPrehistoric.init();
         FossilOreDictionary.oreRegistration();
         FossilFoodMappings.init();
