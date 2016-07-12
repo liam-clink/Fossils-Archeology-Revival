@@ -163,8 +163,6 @@ public class FossilFoodMappings {
         FoodMappings.INSTANCE.addFish(EntityCoelacanth.class, 20);
         FoodMappings.INSTANCE.addFish(EntitySturgeon.class, 20);
         FoodMappings.INSTANCE.addFish(EntityAlligatorGar.class, 20);
-
-        
         FoodMappings.INSTANCE.removeItemMapping(EnumPrehistoric.Horse.embryoItem, EnumDiet.CARNIVORE_EGG);
     }
 }
