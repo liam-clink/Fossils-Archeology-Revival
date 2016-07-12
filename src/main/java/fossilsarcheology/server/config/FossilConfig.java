@@ -66,17 +66,19 @@ public class FossilConfig {
     public boolean customMainMenu = true;
 
     @ConfigEntry(category = "dinosaurs")
-    public boolean featheredTRex = false;
+    public boolean featheredTRex = true;
     @ConfigEntry(category = "dinosaurs")
-    public boolean featheredDeinonychus = false;
+    public boolean featheredDeinonychus = true;
     @ConfigEntry(category = "dinosaurs")
-    public boolean featheredGallimimus = false;
+    public boolean featheredGallimimus = true;
     @ConfigEntry(category = "dinosaurs")
-    public boolean featheredCompsognathus = false;
+    public boolean featheredCompsognathus = true;
     @ConfigEntry(category = "dinosaurs")
     public boolean quilledTriceratops = true;
     @ConfigEntry(category = "dinosaurs")
-    public boolean featheredVelociraptor = false;
+    public boolean featheredVelociraptor = true;
+    @ConfigEntry(category = "dinosaurs")
+    public boolean featheredTherizinosaurus = true;
     @ConfigEntry(category = "dinosaurs")
     public boolean eggsLikeChickens = false;
     @ConfigEntry(category = "ids")

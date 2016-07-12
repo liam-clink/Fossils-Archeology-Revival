@@ -48,6 +48,7 @@ import fossilsarcheology.server.entity.mob.EntitySmilodon;
 import fossilsarcheology.server.entity.mob.EntitySpinosaurus;
 import fossilsarcheology.server.entity.mob.EntityStegosaurus;
 import fossilsarcheology.server.entity.mob.EntitySturgeon;
+import fossilsarcheology.server.entity.mob.EntityTherizinosaurus;
 import fossilsarcheology.server.entity.mob.EntityTitanis;
 import fossilsarcheology.server.entity.mob.EntityTriceratops;
 import fossilsarcheology.server.entity.mob.EntityTyrannosaurus;
@@ -148,8 +149,11 @@ public enum EnumPrehistoric {
 		 EnumTimePeriod.MESOZOIC, EnumDiet.CARNIVORE, I.MODEL | I.TAME
 			 | I.RIDE | I.CARNIVORE, true, 0XB4B4A7, 0X776446, 0.6F),
     Dryosaurus(
-		 EntityDryosaurus.class, EnumMobType.DINOSAUR,
-		 EnumTimePeriod.MESOZOIC, EnumDiet.HERBIVORE, I.MODEL | I.TAME | I.HERBIVORE, true, 0X704C26, 0XC5C09A, 0.6F),
+	       EntityDryosaurus.class, EnumMobType.DINOSAUR,
+	       EnumTimePeriod.MESOZOIC, EnumDiet.HERBIVORE, I.MODEL | I.TAME | I.HERBIVORE, true, 0X704C26, 0XC5C09A, 0.6F),
+    Therizinosaurus(
+		    EntityTherizinosaurus.class, EnumMobType.DINOSAUR,
+		    EnumTimePeriod.MESOZOIC, EnumDiet.HERBIVORE, I.MODEL | I.TAME | I.HERBIVORE, true, 0X704C26, 0XC5C09A, 0.6F),
     Confuciusornis(
 		   EntityConfuciusornis.class, EnumMobType.BIRD,
 		   EnumTimePeriod.MESOZOIC, EnumDiet.HERBIVORE, I.TAME | I.HERBIVORE,

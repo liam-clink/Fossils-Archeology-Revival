@@ -26,6 +26,7 @@ import fossilsarcheology.server.entity.mob.EntityConfuciusornis;
 import fossilsarcheology.server.entity.mob.EntityDeinonychus;
 import fossilsarcheology.server.entity.mob.EntityDilophosaurus;
 import fossilsarcheology.server.entity.mob.EntityDodo;
+import fossilsarcheology.server.entity.mob.EntityDryosaurus;
 import fossilsarcheology.server.entity.mob.EntityElasmotherium;
 import fossilsarcheology.server.entity.mob.EntityGallimimus;
 import fossilsarcheology.server.entity.mob.EntityKelenken;
@@ -41,6 +42,7 @@ import fossilsarcheology.server.entity.mob.EntitySarcosuchus;
 import fossilsarcheology.server.entity.mob.EntitySpinosaurus;
 import fossilsarcheology.server.entity.mob.EntityStegosaurus;
 import fossilsarcheology.server.entity.mob.EntitySturgeon;
+import fossilsarcheology.server.entity.mob.EntityTherizinosaurus;
 import fossilsarcheology.server.entity.mob.EntityTitanis;
 import fossilsarcheology.server.entity.mob.EntityTriceratops;
 import fossilsarcheology.server.entity.mob.EntityTyrannosaurus;
@@ -155,8 +157,9 @@ public class FossilFoodMappings {
         FoodMappings.INSTANCE.addMeat(EntityMammoth.class, 100);
         FoodMappings.INSTANCE.addMeat(EntityElasmotherium.class, 80);
         FoodMappings.INSTANCE.addMeat(EntityConfuciusornis.class, 15);
-        FoodMappings.INSTANCE.addMeat(EntityCeratosaurus.class, 25);
-
+        FoodMappings.INSTANCE.addMeat(EntityCeratosaurus.class, 50);
+        FoodMappings.INSTANCE.addMeat(EntityDryosaurus.class, 25);
+        FoodMappings.INSTANCE.addMeat(EntityTherizinosaurus.class, 125);
         FoodMappings.INSTANCE.addFish(EntityCoelacanth.class, 20);
         FoodMappings.INSTANCE.addFish(EntitySturgeon.class, 20);
         FoodMappings.INSTANCE.addFish(EntityAlligatorGar.class, 20);
