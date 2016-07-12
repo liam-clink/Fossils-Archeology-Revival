@@ -149,7 +149,7 @@ public enum EnumPrehistoric {
 			 | I.RIDE | I.CARNIVORE, true, 0XB4B4A7, 0X776446, 0.6F),
     Dryosaurus(
 		 EntityDryosaurus.class, EnumMobType.DINOSAUR,
-		 EnumTimePeriod.MESOZOIC, EnumDiet.HERBIVORE, I.MODEL | I.TAME | I.HERBIVORE, true, 0XB4B4A7, 0X776446, 0.6F),
+		 EnumTimePeriod.MESOZOIC, EnumDiet.HERBIVORE, I.MODEL | I.TAME | I.HERBIVORE, true, 0X704C26, 0XC5C09A, 0.6F),
     Confuciusornis(
 		   EntityConfuciusornis.class, EnumMobType.BIRD,
 		   EnumTimePeriod.MESOZOIC, EnumDiet.HERBIVORE, I.TAME | I.HERBIVORE,
