@@ -183,7 +183,7 @@ public class EntityTherizinosaurus extends EntityPrehistoric {
                         entity.mountEntity(null);
                     }
                 }
-                knockbackEntity(entity, 1.5F, 0.2F);
+                entity.motionY += 0.1000000059604645D;
                 return flag;
             }
         }
