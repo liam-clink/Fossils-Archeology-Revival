@@ -15,6 +15,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
+import java.util.Random;
+
 public class DinoEggItem extends Item {
 	public static final int TypeCount = EnumPrehistoric.values().length;
 	private EnumPrehistoric dino;
@@ -51,6 +53,7 @@ public class DinoEggItem extends Item {
 					if (prehistoric.aiTameType() == EnumPrehistoricAI.Taming.IMPRINTING) {
 						prehistoric.setTamed(true);
 						prehistoric.setAgeInDays(1);
+						prehistoric.setGender(new Random().nextInt(1));
 						prehistoric.func_152115_b(world.getClosestPlayerToEntity(prehistoric, 10).getDisplayName());
 					}
 				}
