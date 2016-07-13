@@ -24,9 +24,8 @@ import java.util.Random;
 
 public class TileEntityAnalyzer extends TileEntity implements IInventory, ISidedInventory {
 
-	private static final int[] slots_top = new int[] {}; // input
-	private static final int[] slots_bottom = new int[] { 10, 11, 12 }; // output
-	private static final int[] slots_sides = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8 };// fuel
+	private static final int[] slots_top = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8 }; // input
+	private static final int[] slots_bottom = new int[] { 9, 10, 11, 12 }; // output
 	public int analyzerBurnTime = 0;
 	public int currentItemBurnTime = 100;
 	public int analyzerCookTime = 0;
@@ -531,13 +530,6 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
 		return this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord) == this && player.getDistanceSq((double) this.xCoord + 0.5D, (double) this.yCoord + 0.5D, (double) this.zCoord + 0.5D) <= 64.0D;
 	}
 
-	public void openChest() {
-
-	}
-
-	public void closeChest() {
-	}
-
 	/*
 	 * Returns true if automation is allowed to insert the given stack (ignoring
 	 * stack size) into the given slot.
@@ -574,7 +566,7 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
 
 	@Override
 	public int[] getAccessibleSlotsFromSide(int par1) {
-		return par1 == 0 ? slots_bottom : (par1 == 1 ? slots_top : slots_sides);
+		return par1 == 1 ? slots_top : slots_bottom;
 	}
 
 	/*
