@@ -185,10 +185,11 @@ public class TileEntityFeeder extends TileEntity implements IInventory, ISidedIn
     @Override
     public boolean isItemValidForSlot(int i, ItemStack stack) {
         if (stack != null && stack.getItem() != null) {
-            if (i == 1) {
-                return FoodMappings.INSTANCE.getItemFoodAmount(stack.getItem(), EnumDiet.CARNIVORE_EGG) != 0;
-            } else {
-                return FoodMappings.INSTANCE.getItemFoodAmount(stack.getItem(), EnumDiet.HERBIVORE) != 0;
+            if(FoodMappings.INSTANCE.getItemFoodAmount(stack.getItem(), EnumDiet.CARNIVORE_EGG) != 0 && i == 0) {
+                return true;
+            }
+            else if(FoodMappings.INSTANCE.getItemFoodAmount(stack.getItem(), EnumDiet.HERBIVORE) != 0 && i == 1) {
+                return true;
             }
         }
         return false;
