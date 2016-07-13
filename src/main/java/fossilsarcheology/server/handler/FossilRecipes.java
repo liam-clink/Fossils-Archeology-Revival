@@ -35,11 +35,7 @@ public class FossilRecipes {
         GameRegistry.addRecipe(new ItemStack(FABlockRegistry.INSTANCE.obsidianSpikes, 4), "A A", "A A", 'A', Blocks.obsidian);
         GameRegistry.addRecipe(new ItemStack(FAItemRegistry.INSTANCE.skullStick, 1), "X", "Y", 'X', FABlockRegistry.INSTANCE.blockSkull, 'Y', Items.stick);
         GameRegistry.addRecipe(new ItemStack(FABlockRegistry.INSTANCE.drum, 1), "ZZZ", "XYX", "XXX", 'X', Blocks.planks, 'Y', Items.redstone, 'Z', Items.leather);
-        // GameRegistry.addRecipe(new
-        // ItemStack(FABlockRegistry.INSTANCE.feederActive, 1), new
-        // Object[]{"XYX", "ZAB", "BBB", 'X', Items.iron_ingot, 'Y',
-        // Blocks.glass, 'Z', Blocks.stone_button, 'A', Items.bucket, 'B',
-        // Blocks.stone});
+        GameRegistry.addRecipe(new ItemStack(FABlockRegistry.INSTANCE.feederActive, 1), new Object[]{"XYX", "ZAB", "BBB", 'X', Items.iron_ingot, 'Y', Blocks.glass, 'Z', Blocks.stone_button, 'A', Items.bucket, 'B', Blocks.stone});
         GameRegistry.addShapelessRecipe(new ItemStack(FAItemRegistry.INSTANCE.gemAxe), Items.golden_axe, FAItemRegistry.INSTANCE.gem);
         GameRegistry.addShapelessRecipe(new ItemStack(FAItemRegistry.INSTANCE.gemAxe), Items.diamond_axe, FAItemRegistry.INSTANCE.gem);
         GameRegistry.addShapelessRecipe(new ItemStack(FAItemRegistry.INSTANCE.gemPickaxe), Items.golden_pickaxe, FAItemRegistry.INSTANCE.gem);
