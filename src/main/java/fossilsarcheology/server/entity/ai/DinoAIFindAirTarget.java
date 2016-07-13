@@ -31,6 +31,11 @@ public class DinoAIFindAirTarget extends EntityAIBase {
 			prehistoric.currentTarget = null;
 		}
 
+		if (!prehistoric.isFlying() && !prehistoric.onGround) {
+			prehistoric.currentTarget = null;
+			return false;
+		}
+
 		if (prehistoric.currentTarget != null) {
 			return false;
 		} else {
