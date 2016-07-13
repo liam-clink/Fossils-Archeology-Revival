@@ -203,7 +203,7 @@ public class EntityMosasaurus extends EntityPrehistoricSwimming {
 			float angle = (0.01745329251F * this.renderYawOffset) + 3.15F + (modTick_1 * 1.75F) * 0.05F;
 			double extraX = (double) (radius * MathHelper.sin((float) (Math.PI + angle)));
 			double extraZ = (double) (radius * MathHelper.cos(angle));
-			double extraY = -0.15F * (getAgeScale());
+			double extraY = 0.05F * (getAgeScale());
 			riddenByEntity.setPosition(this.posX + extraX, this.posY + extraY, this.posZ + extraZ);
 		}
 	}

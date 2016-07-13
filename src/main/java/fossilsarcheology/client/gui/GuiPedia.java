@@ -82,7 +82,7 @@ public class GuiPedia extends GuiContainer {
 		right = 0;
 		items = 0;
 		xSize = 390;
-		ySize = 300;
+		ySize = 245;
 		sorter = new FoodSorter();
 	}
 
@@ -94,8 +94,8 @@ public class GuiPedia extends GuiContainer {
 		buttonList.clear();
 		int centerX = (this.width - this.xGui) / 2;
 		int centerY = (this.height - this.yGui) / 2;
-		this.buttonList.add(this.buttonNextPage = new FossilGuiPage(0, centerX + 350, centerY + 210, true, bookPages));
-		this.buttonList.add(this.buttonPreviousPage = new FossilGuiPage(1, centerX + 7, centerY + 210, false, bookPages));
+		this.buttonList.add(this.buttonNextPage = new FossilGuiPage(0, centerX + 350, centerY + 240, true, bookPages));
+		this.buttonList.add(this.buttonPreviousPage = new FossilGuiPage(1, centerX + 7, centerY + 240, false, bookPages));
 		this.itemRender = new RenderItem();
 		addButtonByPage(bookPages);
 		super.initGui();
@@ -681,8 +681,8 @@ public class GuiPedia extends GuiContainer {
 	}
 
 	public void addButtonByPage(int page) {
-		int centerX = (this.width - this.xGui) / 2;
-		int centerY = (this.height - this.yGui) / 2;
+		int centerX = (this.width - this.xSize) / 2;
+		int centerY = (this.height - this.ySize) / 2;
 
 		if (page == 0) {
 			this.buttonList.add(this.buttonIcon = new FossilGuiButton(2, centerX + 35, centerY + 55, 0));
