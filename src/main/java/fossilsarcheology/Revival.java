@@ -62,7 +62,6 @@ public class Revival {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        System.out.println(Revival.CONFIG.biomeIDTreasure);
         MinecraftForge.EVENT_BUS.register(new FossilBonemealEvent());
         MinecraftForge.EVENT_BUS.register(new EventPlayer());
         VillagerRegistry.instance().registerVillageTradeHandler(CONFIG.villagerId, new FossilTradeHandler());
