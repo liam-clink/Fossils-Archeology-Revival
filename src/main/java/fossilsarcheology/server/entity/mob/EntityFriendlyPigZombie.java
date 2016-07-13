@@ -5,15 +5,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
-import net.minecraft.entity.ai.EntityAIFollowOwner;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIOwnerHurtByTarget;
-import net.minecraft.entity.ai.EntityAIOwnerHurtTarget;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.passive.EntityWolf;
@@ -22,10 +14,10 @@ import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-import fossilsarcheology.Revival;
 
 public class EntityFriendlyPigZombie extends EntityTameable {
     private static final ItemStack defaultHeldItem = new ItemStack(Items.golden_sword, 1);
@@ -155,7 +147,7 @@ public class EntityFriendlyPigZombie extends EntityTameable {
 
     public void sendMessageToOwner(String words) {
         if (this.getOwner() instanceof EntityPlayer) {
-            Revival.messagePlayer(StatCollector.translateToLocal(words), (EntityPlayer) this.getOwner());
+            ((EntityPlayer) this.getOwner()).addChatMessage(new ChatComponentText(StatCollector.translateToLocal(words)));
         }
 
     }

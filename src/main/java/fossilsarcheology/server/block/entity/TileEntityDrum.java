@@ -1,6 +1,5 @@
 package fossilsarcheology.server.block.entity;
 
-import fossilsarcheology.Revival;
 import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.entity.mob.EntityTyrannosaurus;
 import fossilsarcheology.server.enums.EnumOrderType;
@@ -13,6 +12,7 @@ import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.StatCollector;
 
 import java.util.List;
@@ -86,7 +86,7 @@ public class TileEntityDrum extends TileEntity {
         // - 1*/)));
         // String var2 = Revival.GetLangTextByKey("Drum.Head");
         // String var3 = this.GetOrderString();
-        Revival.messagePlayer(StatCollector.translateToLocal(LocalizationStrings.DRUM_TRIGGER) + StatCollector.translateToLocal("order." + this.Order.toString()), player);
+        player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal(LocalizationStrings.DRUM_TRIGGER) + StatCollector.translateToLocal("order." + this.Order.toString())));
         this.markDirty();
     }
 
@@ -108,7 +108,7 @@ public class TileEntityDrum extends TileEntity {
         {
             for (int i = 0; i < EnumPrehistoric.values().length; ++i) {
                 if (EnumPrehistoric.values()[i].orderItem != null && EnumPrehistoric.values()[i].orderItem == item) {
-                    Revival.messagePlayer(StatCollector.translateToLocal(LocalizationStrings.DRUM_ORDERING) + StatCollector.translateToLocal("fossil.entity." + EnumPrehistoric.values()[i].toString()) + ": " + StatCollector.translateToLocal("order." + this.Order.toString()), var2);
+                    var2.addChatMessage(new ChatComponentText(StatCollector.translateToLocal(LocalizationStrings.DRUM_ORDERING) + StatCollector.translateToLocal("fossil.entity." + EnumPrehistoric.values()[i].toString()) + ": " + StatCollector.translateToLocal("order." + this.Order.toString())));
                 }
             } // Output: Ordering Triceratops: Stay
 
@@ -123,7 +123,7 @@ public class TileEntityDrum extends TileEntity {
             }
 
         } else {
-            Revival.messagePlayer(StatCollector.translateToLocal(LocalizationStrings.DRUM_TREX + String.valueOf(this.Order.ordinal() + 1)), var2);
+            var2.addChatMessage(new ChatComponentText(StatCollector.translateToLocal(LocalizationStrings.DRUM_TREX + String.valueOf(this.Order.ordinal() + 1))));
             List list = this.worldObj.getEntitiesWithinAABB(EntityTyrannosaurus.class, AxisAlignedBB.getBoundingBox((double) this.xCoord, (double) this.yCoord, (double) this.zCoord, (double) this.xCoord + 1.0D, (double) this.yCoord + 1.0D, (double) this.zCoord + 1.0D).expand(50.0D, 4.0D, 50.0D));
 
             for (Object aList : list) {

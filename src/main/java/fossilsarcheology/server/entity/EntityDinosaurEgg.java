@@ -17,6 +17,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
@@ -51,7 +52,7 @@ public class EntityDinosaurEgg extends EntityLiving implements IEntityAdditional
 
 	protected void entityInit() {
 		super.entityInit();
-		if (Revival.enableDebugging()) {
+		if (Revival.RELEASE_TYPE.enableDebugging()) {
 			this.hatchTime = 1000;
 		} else {
 			this.hatchTime = 3000;
@@ -180,11 +181,13 @@ public class EntityDinosaurEgg extends EntityLiving implements IEntityAdditional
 				if (this.worldObj.getCollidingBoundingBoxes(entity, ((EntityLiving) entity).boundingBox).size() == 0 && (!this.worldObj.isAnyLiquid(((EntityLiving) entity).boundingBox) || this.selfType == EnumPrehistoric.Mosasaurus || this.selfType == EnumPrehistoric.Liopleurodon)) {
 					this.worldObj.spawnEntityInWorld(entity);
 					if (player != null) {
-						Revival.messagePlayer(StatCollector.translateToLocal(LocalizationStrings.DINOEGG_HATCHED), player);
+						player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal(LocalizationStrings.DINOEGG_HATCHED)));
 					}
 					this.setDead();
 				} else {
-					Revival.messagePlayer(StatCollector.translateToLocal(LocalizationStrings.DINOEGG_NOSPACE), player);
+					if (player != null) {
+						player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal(LocalizationStrings.DINOEGG_NOSPACE)));
+					}
 					this.setBirthTick(this.getBirthTick() - 500);
 				}
 			}

@@ -282,7 +282,7 @@ public class TileEntitySifter extends TileEntity implements IInventory, ISidedIn
 
                     ) {
                 if (randomloot < 80) {
-                    if (Revival.enableDebugging()) {
+                    if (Revival.RELEASE_TYPE.enableDebugging()) {
                         Revival.printDebug("Sifter no result: " + randomloot);
                     }
                     if (random < 75) {
@@ -291,7 +291,7 @@ public class TileEntitySifter extends TileEntity implements IInventory, ISidedIn
                         result = this.sifterItemStacks[this.SpaceIndex];
                     }
                 } else {
-                    if (Revival.enableDebugging()) {
+                    if (Revival.RELEASE_TYPE.enableDebugging()) {
                         Revival.printDebug("Sifter successful loot: " + randomloot);
                     }
                     if (random < 0.4) {

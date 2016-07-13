@@ -1,6 +1,5 @@
 package fossilsarcheology.server.item;
 
-import fossilsarcheology.Revival;
 import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.entity.mob.EntityPlesiosaurus;
 import fossilsarcheology.server.enums.EnumOrderType;
@@ -10,6 +9,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
@@ -71,7 +71,7 @@ public class MagicConchItem extends Item {
         // Revival.ShowMessage(var10 + var9 + var11 + " " + var13 + var12,
         // var3);
         if (!var3.worldObj.isRemote) {
-            Revival.messagePlayer("Try asking again.", var3);
+            var3.addChatMessage(new ChatComponentText("Try asking again."));
         }
         return var1;
     }

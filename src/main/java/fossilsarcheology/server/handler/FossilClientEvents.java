@@ -1,12 +1,17 @@
 package fossilsarcheology.server.handler;
 
-import fossilsarcheology.server.block.FABlockRegistry;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import fossilsarcheology.Revival;
+import fossilsarcheology.server.block.FABlockRegistry;
+import fossilsarcheology.server.util.ReleaseType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderBlockOverlayEvent;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import org.lwjgl.opengl.GL11;
 
 public class FossilClientEvents {
@@ -38,6 +43,13 @@ public class FossilClientEvents {
             GL11.glPopMatrix();
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
             GL11.glDisable(GL11.GL_BLEND);
+        }
+    }
+
+    @SubscribeEvent
+    public void onJoinWorld(EntityJoinWorldEvent event) {
+        if (Revival.RELEASE_TYPE == ReleaseType.DEVELOP && event.entity == Minecraft.getMinecraft().thePlayer) {
+            Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.BOLD.toString() + EnumChatFormatting.RED.toString() + "You're running a development build of F/A: Revival"));
         }
     }
 }

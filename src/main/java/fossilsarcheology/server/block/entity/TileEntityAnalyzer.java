@@ -1,7 +1,14 @@
 package fossilsarcheology.server.block.entity;
 
-import java.util.Random;
-
+import fossilsarcheology.Revival;
+import fossilsarcheology.server.block.BlockAnalyzer;
+import fossilsarcheology.server.block.FABlockRegistry;
+import fossilsarcheology.server.enums.EnumDinoBones;
+import fossilsarcheology.server.enums.EnumPrehistoric;
+import fossilsarcheology.server.handler.FossilAchievementHandler;
+import fossilsarcheology.server.handler.LocalizationStrings;
+import fossilsarcheology.server.item.DinosaurBoneItem;
+import fossilsarcheology.server.item.FAItemRegistry;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -12,15 +19,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
-import fossilsarcheology.Revival;
-import fossilsarcheology.server.block.BlockAnalyzer;
-import fossilsarcheology.server.block.FABlockRegistry;
-import fossilsarcheology.server.enums.EnumDinoBones;
-import fossilsarcheology.server.enums.EnumPrehistoric;
-import fossilsarcheology.server.handler.FossilAchievementHandler;
-import fossilsarcheology.server.handler.LocalizationStrings;
-import fossilsarcheology.server.item.DinosaurBoneItem;
-import fossilsarcheology.server.item.FAItemRegistry;
+
+import java.util.Random;
 
 public class TileEntityAnalyzer extends TileEntity implements IInventory, ISidedInventory {
 
@@ -303,7 +303,7 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
 
 			if (this.analyzerItemStacks[this.RawIndex].getItem() instanceof DinosaurBoneItem) {
 
-				if (!Revival.enableDebugging()) {
+				if (!Revival.RELEASE_TYPE.enableDebugging()) {
 					if (rand > -1 && rand <= 30) {
 						itemstack = new ItemStack(Items.dye, 3, 15);
 					}
@@ -321,7 +321,7 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
 			}
 			if (this.analyzerItemStacks[this.RawIndex].getItem() == FAItemRegistry.INSTANCE.biofossil) {
 
-				if (!Revival.enableDebugging()) {
+				if (!Revival.RELEASE_TYPE.enableDebugging()) {
 					if (rand > -1 && rand <= 50) {
 						itemstack = new ItemStack(Items.dye, 3, 15);
 					}
