@@ -1504,7 +1504,6 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
             if (prehistoric.ticksTillMate == 0) {
                 this.getNavigator().tryMoveToEntityLiving(prehistoric, 1);
                 double distance = (double) (this.width * 8.0F * this.width * 8.0F + prehistoric.width);
-
                 if (this.getDistanceSq(prehistoric.posX, prehistoric.boundingBox.minY, prehistoric.posZ) <= distance && prehistoric.onGround && this.onGround) {
                     prehistoric.procreate(this);
                     this.ticksTillMate = this.rand.nextInt(6000) + 6000;
@@ -1536,7 +1535,7 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
         if (hatchling != null && !worldObj.isRemote) {
             this.entityToAttack = null;
             mob.entityToAttack = null;
-            hatchling.setPositionAndRotation(this.posX, this.posY + 1, this.posZ, this.rotationYaw, 0);
+            hatchling.setPositionAndRotation(mob.posX, mob.posY + 1, mob.posZ, mob.rotationYaw, 0);
             if (hatchling instanceof EntityDinosaurEgg) {
                 Revival.NETWORK_WRAPPER.sendToAll(new MessageUpdateEgg(hatchling.getEntityId(), this.type.ordinal()));
             } else {
