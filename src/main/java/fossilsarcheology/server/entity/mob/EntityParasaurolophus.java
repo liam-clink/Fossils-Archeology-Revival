@@ -70,6 +70,7 @@ public class EntityParasaurolophus extends EntityPrehistoric {
         developsResistance = true;
         breaksBlocks = true;
         this.pediaScale = 30F;
+        this.ridingY = 2;
     }
 
     public int getSpeakLength() {
@@ -280,6 +281,6 @@ public class EntityParasaurolophus extends EntityPrehistoric {
 
     @Override
     public boolean canBeRidden() {
-        return false;
+        return true;
     }
 }
