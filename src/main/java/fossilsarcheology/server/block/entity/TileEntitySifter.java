@@ -20,7 +20,6 @@ import java.util.Random;
 
 public class TileEntitySifter extends TileEntity implements IInventory, ISidedInventory {
 
-    private static final int[] slots_sides = new int[]{}; // input
     private static final int[] slots_bottom = new int[]{1, 2, 3, 4, 5}; // output
     private static final int[] slots_top = new int[]{0};// fuel
     public int sifterBurnTime = 0;
@@ -386,7 +385,7 @@ public class TileEntitySifter extends TileEntity implements IInventory, ISidedIn
      */
     @Override
     public int[] getAccessibleSlotsFromSide(int par1) {
-        return par1 == 0 ? slots_bottom : (par1 == 1 ? slots_top : slots_sides);
+        return par1 == 1 ? slots_top : slots_bottom;
     }
 
     /**
