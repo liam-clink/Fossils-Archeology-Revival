@@ -243,7 +243,7 @@ public class ModelParasaurolophus extends ModelPrehistoric {
         ModelUtils.faceTargetMod(neck1, f3, f4, 0.33F);
         EntityParasaurolophus dino = ((EntityParasaurolophus) entity);
         float speed = 0.05F;
-        float speed2 = 0.5F;
+        float speed2 = 0.75F;
         float degree = 0.5F;
         {
             float sitProgress = dino.sitProgress;
