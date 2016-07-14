@@ -79,7 +79,7 @@ public class FossilAchievementHandler {
 		firstDino = new Achievement("achievement.firstDino", "firstDino", 6, -4, new ItemStack(FAItemRegistry.INSTANCE.skull, 1, 0), dinoEgg).registerStat().setSpecial();
 		theKing = new Achievement("achievement.theKing", "theKing", 8, -5, new ItemStack(FAItemRegistry.INSTANCE.skull, 1, 2), firstDino).registerStat().setSpecial();
 		usurper = new Achievement("achievement.usurper", "usurper", 8, -3, new ItemStack(FAItemRegistry.INSTANCE.skull, 1, EnumDinoBones.Spinosaurus.ordinal()), (Achievement) firstDino).registerStat().setSpecial();
-		squire = new Achievement("achievement.squire", "squire", 7, -1, new ItemStack(FAItemRegistry.INSTANCE.skull, 1, 17), firstDino).registerStat();
+		squire = new Achievement("achievement.squire", "squire", 7, -1, new ItemStack(FAItemRegistry.INSTANCE.skull, 1, EnumDinoBones.Allosaurus.ordinal()), firstDino).registerStat();
 		shear = new Achievement("achievement.shear", "shear", 6, -6, new ItemStack(Blocks.wool, 1, 12), mammalEmbryo).registerStat();
 		deadDodo = new Achievement("achievement.deadDodo", "deadDodo", 4, 0, new ItemStack(FAItemRegistry.INSTANCE.skull, 1, EnumDinoBones.Dodo.ordinal()), birdEgg).registerStat();
 		trexKill = new Achievement("achievement.trexKill", "trexKill", 8, -7, new ItemStack(FAItemRegistry.INSTANCE.toothDagger), theKing).registerStat();
