@@ -183,18 +183,19 @@ public class ModelAllosaurus extends ModelPrehistoric {
 		animator.setAnimation(allosaurus.SPEAK_ANIMATION);
         animator.startKeyframe(10);
         ModelUtils.rotate(animator, lowerJaw, 25, 0, 0);
-        animator.endKeyframe();
+		ModelUtils.rotate(animator, head, -25, 0, 0);
+		ModelUtils.rotate(animator, neck, 20, 0, 0);
+		animator.endKeyframe();
         animator.resetKeyframe(10);
 		animator.setAnimation(allosaurus.ATTACK_ANIMATION);
 		animator.startKeyframe(10);
-		ModelUtils.rotate(animator, neck, -31, 0, 0);
-		ModelUtils.rotate(animator, head, -40, 0, 0);
+		ModelUtils.rotate(animator, neck, -15, 0, 0);
+		ModelUtils.rotate(animator, head, -20, 0, 0);
 		ModelUtils.rotate(animator, lowerJaw, 60, 0, 0);
 		animator.endKeyframe();
 		animator.startKeyframe(5);
 		ModelUtils.rotate(animator, neck, 6, 0, 0);
 		ModelUtils.rotate(animator, head, -14, 0, 0);
-		ModelUtils.rotate(animator, lowerJaw, 50, 0, 0);
 		animator.endKeyframe();
 		animator.resetKeyframe(10);
 	}
