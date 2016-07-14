@@ -235,7 +235,7 @@ public class TileEntityCultivate extends TileEntity implements IInventory, ISide
 		boolean var2 = false;
 		int cookValue;
 
-		if (Revival.enableDebugging()) {
+		if (Revival.RELEASE_TYPE.enableDebugging()) {
 			cookValue = 300;
 		} else {
 

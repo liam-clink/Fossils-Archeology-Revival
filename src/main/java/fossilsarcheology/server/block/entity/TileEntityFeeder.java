@@ -16,8 +16,7 @@ import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityFeeder extends TileEntity implements IInventory, ISidedInventory {
 
-    private static final int[] slots_carn = new int[]{0};
-    private static final int[] slots_herb = new int[]{1};
+    private static final int[] slots_all = new int[]{0, 1};
     public int currentMeat = 0;
     public int maxMeat = 10000;
     public int currentPlant = 0;
@@ -28,7 +27,7 @@ public class TileEntityFeeder extends TileEntity implements IInventory, ISidedIn
 
     @Override
     public int[] getAccessibleSlotsFromSide(int i) {
-        return i == 1 ? slots_herb : slots_carn;
+        return slots_all;
     }
 
     @Override
@@ -185,10 +184,10 @@ public class TileEntityFeeder extends TileEntity implements IInventory, ISidedIn
     @Override
     public boolean isItemValidForSlot(int i, ItemStack stack) {
         if (stack != null && stack.getItem() != null) {
-            if (i == 1) {
-                return FoodMappings.INSTANCE.getItemFoodAmount(stack.getItem(), EnumDiet.CARNIVORE_EGG) != 0;
-            } else {
-                return FoodMappings.INSTANCE.getItemFoodAmount(stack.getItem(), EnumDiet.HERBIVORE) != 0;
+            if(FoodMappings.INSTANCE.getItemFoodAmount(stack.getItem(), EnumDiet.HERBIVORE) != 0 && i == 1) {
+                return true;
+            }else if(FoodMappings.INSTANCE.getItemFoodAmount(stack.getItem(), EnumDiet.CARNIVORE_EGG) != 0 && i == 0){
+                return true;
             }
         }
         return false;

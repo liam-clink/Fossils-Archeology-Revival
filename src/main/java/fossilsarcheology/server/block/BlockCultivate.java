@@ -26,6 +26,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
@@ -281,7 +282,7 @@ public class BlockCultivate extends BlockContainer {
             // Metres
             {
                 P.addStat(FossilAchievementHandler.failuresaurus, 1);
-                Revival.messagePlayer(var6, P);
+                P.addChatMessage(new ChatComponentText(var6));
             }
         }
 

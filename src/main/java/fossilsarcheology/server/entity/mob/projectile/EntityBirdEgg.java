@@ -10,6 +10,8 @@ import net.minecraft.world.World;
 import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.enums.EnumPrehistoric;
 
+import java.util.Random;
+
 public class EntityBirdEgg extends EntityThrowable {
 	public Item item;
 	EnumPrehistoric type;
@@ -81,6 +83,7 @@ public class EntityBirdEgg extends EntityThrowable {
 				if(worldObj.getClosestPlayerToEntity(mob, 5) != null){
 					mob.func_152115_b(worldObj.getClosestPlayerToEntity(mob, 5).getUniqueID().toString());
 				}
+				mob.setGender(new Random().nextInt(1));
 			}
 		} else {
 			EntityChicken mob = new EntityChicken(worldObj);

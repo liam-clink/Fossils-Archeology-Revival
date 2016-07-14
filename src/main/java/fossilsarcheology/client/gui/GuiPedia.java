@@ -12,8 +12,8 @@ import java.util.Map;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.ScaledResolution;
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderItem;
@@ -25,6 +25,8 @@ import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.passive.EntitySheep;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -56,7 +58,7 @@ import fossilsarcheology.server.entity.mob.EntityQuagga;
 import fossilsarcheology.server.enums.EnumPrehistoric;
 
 @SideOnly(Side.CLIENT)
-public class GuiPedia extends GuiContainer {
+public class GuiPedia extends GuiScreen {
 	private static final ResourceLocation background_image = new ResourceLocation("fossil:textures/gui/Dinopedia.png");
 	private static final ResourceLocation moods = new ResourceLocation("fossil:textures/gui/dinopedia_mood.png");
 	public int xGui = 390;
@@ -75,14 +77,18 @@ public class GuiPedia extends GuiContainer {
 	private float mouseX;
 	private float mouseY;
 	private FoodSorter sorter;
-	
+	protected int xSize = 176;
+	protected int ySize = 166;
+	protected int guiLeft;
+	protected int guiTop;
+
 	public GuiPedia() {
-		super(new PediaContainer());
+		super();
 		left = 0;
 		right = 0;
 		items = 0;
 		xSize = 390;
-		ySize = 300;
+		ySize = 245;
 		sorter = new FoodSorter();
 	}
 
@@ -92,13 +98,22 @@ public class GuiPedia extends GuiContainer {
 	@Override
 	public void initGui() {
 		buttonList.clear();
+		this.guiLeft = (this.width - this.xSize) / 2;
+		this.guiTop = (this.height - this.ySize) / 2;
 		int centerX = (this.width - this.xGui) / 2;
 		int centerY = (this.height - this.yGui) / 2;
-		this.buttonList.add(this.buttonNextPage = new FossilGuiPage(0, centerX + 350, centerY + 210, true, bookPages));
-		this.buttonList.add(this.buttonPreviousPage = new FossilGuiPage(1, centerX + 7, centerY + 210, false, bookPages));
+		this.buttonList.add(this.buttonNextPage = new FossilGuiPage(0, centerX + 350, centerY + 240, true, bookPages));
+		this.buttonList.add(this.buttonPreviousPage = new FossilGuiPage(1, centerX + 7, centerY + 240, false, bookPages));
 		this.itemRender = new RenderItem();
 		addButtonByPage(bookPages);
 		super.initGui();
+	}
+
+	public void updateScreen(){
+		super.updateScreen();
+		if (!this.mc.thePlayer.isEntityAlive() || this.mc.thePlayer.isDead){
+			this.mc.thePlayer.closeScreen();
+		}
 	}
 
 	/*
@@ -221,7 +236,36 @@ public class GuiPedia extends GuiContainer {
 
 	}
 
-	@Override
+	public void drawScreen(int p_73863_1_, int p_73863_2_, float p_73863_3_)
+	{
+		this.drawDefaultBackground();
+		int k = this.guiLeft;
+		int l = this.guiTop;
+		this.drawGuiContainerBackgroundLayer(p_73863_3_, p_73863_1_, p_73863_2_);
+		GL11.glDisable(GL12.GL_RESCALE_NORMAL);
+		RenderHelper.disableStandardItemLighting();
+		GL11.glDisable(GL11.GL_LIGHTING);
+		GL11.glDisable(GL11.GL_DEPTH_TEST);
+		super.drawScreen(p_73863_1_, p_73863_2_, p_73863_3_);
+		RenderHelper.enableGUIStandardItemLighting();
+		GL11.glPushMatrix();
+		GL11.glTranslatef((float)k, (float)l, 0.0F);
+		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+		GL11.glEnable(GL12.GL_RESCALE_NORMAL);
+		short short1 = 240;
+		short short2 = 240;
+		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float)short1 / 1.0F, (float)short2 / 1.0F);
+		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+		GL11.glDisable(GL11.GL_LIGHTING);
+		this.drawGuiContainerForegroundLayer(p_73863_1_, p_73863_2_);
+		GL11.glEnable(GL11.GL_LIGHTING);
+		InventoryPlayer inventoryplayer = this.mc.thePlayer.inventory;
+		GL11.glPopMatrix();
+		GL11.glEnable(GL11.GL_LIGHTING);
+		GL11.glEnable(GL11.GL_DEPTH_TEST);
+		RenderHelper.enableStandardItemLighting();
+	}
+
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
 		if (Revival.toPedia instanceof EntityPrehistoric || Revival.toPedia instanceof EntityFishBase || Revival.toPedia instanceof EntityQuagga) {
 			this.buttonNextPage.enabled = true;
@@ -601,7 +645,6 @@ public class GuiPedia extends GuiContainer {
 
 	}
 
-	@Override
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		mc.getTextureManager().bindTexture(background_image);
@@ -681,8 +724,8 @@ public class GuiPedia extends GuiContainer {
 	}
 
 	public void addButtonByPage(int page) {
-		int centerX = (this.width - this.xGui) / 2;
-		int centerY = (this.height - this.yGui) / 2;
+		int centerX = (this.width - this.xSize) / 2;
+		int centerY = (this.height - this.ySize) / 2;
 
 		if (page == 0) {
 			this.buttonList.add(this.buttonIcon = new FossilGuiButton(2, centerX + 35, centerY + 55, 0));

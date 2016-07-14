@@ -25,7 +25,7 @@ public class FossilGuiHandler implements IGuiHandler {
             case 3:
                 return new WorktableContainer(player.inventory, tileEntity);
             case 4:
-                return new PediaContainer();
+                return null;
             case 5:
                 return new TimeMachineContainer(player.inventory, (TileEntityTimeMachine) tileEntity);
             case 6:

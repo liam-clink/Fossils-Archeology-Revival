@@ -128,13 +128,13 @@ public abstract class EntityPrehistoricSwimming extends EntityPrehistoric {
 			} else {
 				float f2 = 0.91F;
 
-				if (this.onGround) {
+				if (this.onGround && !this.isInWater()) {
 					f2 = this.worldObj.getBlock(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.boundingBox.minY) - 1, MathHelper.floor_double(this.posZ)).slipperiness * 0.91F;
 				}
 
 				float f3 = 0.16277136F / (f2 * f2 * f2);
 
-				if (this.onGround) {
+				if (this.onGround && !this.isInWater()) {
 					f4 = this.getAIMoveSpeed() * f3;
 				} else {
 					f4 = this.jumpMovementFactor;
@@ -143,7 +143,7 @@ public abstract class EntityPrehistoricSwimming extends EntityPrehistoric {
 				this.moveFlying(x, z, f4);
 				f2 = 0.91F;
 
-				if (this.onGround) {
+				if (this.onGround && !this.isInWater()) {
 					f2 = this.worldObj.getBlock(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.boundingBox.minY) - 1, MathHelper.floor_double(this.posZ)).slipperiness * 0.91F;
 				}
 

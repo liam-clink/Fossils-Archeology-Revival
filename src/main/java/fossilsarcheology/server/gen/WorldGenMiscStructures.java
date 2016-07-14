@@ -23,13 +23,11 @@ public class WorldGenMiscStructures implements IWorldGenerator {
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
 		random.setSeed(world.getSeed() * chunkX * chunkZ);
 		if (Revival.CONFIG.generateHellShips) {
-			BiomeGenBase biome = world.getWorldChunkManager().getBiomeGenAt(chunkX * 16, chunkZ * 16);
-			if (BiomeDictionary.isBiomeOfType(biome, Type.NETHER)) {
-				if (random.nextInt(48) == 0) {
-					int Xcoord1 = chunkX * 16 + random.nextInt(16);
-					int Ycoord1 = 31;
-					int Zcoord1 = chunkZ * 16 + random.nextInt(16);
-
+			if (random.nextInt(100) == 0) {
+				int Xcoord1 = chunkX * 16 + random.nextInt(16);
+				int Zcoord1 = chunkZ * 16 + random.nextInt(16);
+				int Ycoord1 = 32;
+				if (world.provider.isHellWorld && world.getBlock(Xcoord1, 31, Zcoord1) == Blocks.lava) {
 					new HellBoatWorldGen().generate(world, random, Xcoord1, Ycoord1, Zcoord1);
 				}
 			}

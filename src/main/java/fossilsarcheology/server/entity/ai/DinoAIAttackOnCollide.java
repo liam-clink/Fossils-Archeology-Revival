@@ -5,8 +5,10 @@ import fossilsarcheology.server.entity.EntityToyBase;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.util.MathHelper;
+import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
 public class DinoAIAttackOnCollide extends EntityAIBase {
@@ -37,6 +39,8 @@ public class DinoAIAttackOnCollide extends EntityAIBase {
         } else if (this.dino.isMovementBlocked()) {
             return false;
         } else if (this.classTarget != null && !this.classTarget.isAssignableFrom(entitylivingbase.getClass())) {
+            return false;
+        }else if(dino.worldObj.difficultySetting == EnumDifficulty.PEACEFUL && entitylivingbase instanceof EntityPlayer){
             return false;
         } else {
             this.entityPathEntity = this.dino.getNavigator().getPathToEntityLiving(entitylivingbase);

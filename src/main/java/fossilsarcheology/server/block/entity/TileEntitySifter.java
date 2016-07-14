@@ -20,7 +20,6 @@ import java.util.Random;
 
 public class TileEntitySifter extends TileEntity implements IInventory, ISidedInventory {
 
-    private static final int[] slots_sides = new int[]{}; // input
     private static final int[] slots_bottom = new int[]{1, 2, 3, 4, 5}; // output
     private static final int[] slots_top = new int[]{0};// fuel
     public int sifterBurnTime = 0;
@@ -282,7 +281,7 @@ public class TileEntitySifter extends TileEntity implements IInventory, ISidedIn
 
                     ) {
                 if (randomloot < 80) {
-                    if (Revival.enableDebugging()) {
+                    if (Revival.RELEASE_TYPE.enableDebugging()) {
                         Revival.printDebug("Sifter no result: " + randomloot);
                     }
                     if (random < 75) {
@@ -291,7 +290,7 @@ public class TileEntitySifter extends TileEntity implements IInventory, ISidedIn
                         result = this.sifterItemStacks[this.SpaceIndex];
                     }
                 } else {
-                    if (Revival.enableDebugging()) {
+                    if (Revival.RELEASE_TYPE.enableDebugging()) {
                         Revival.printDebug("Sifter successful loot: " + randomloot);
                     }
                     if (random < 0.4) {
@@ -327,20 +326,30 @@ public class TileEntitySifter extends TileEntity implements IInventory, ISidedIn
                     }
                 }
             }
-            if (result != null) {
-                if (result.stackSize != 0 && this.sifterItemStacks[this.SpaceIndex] == null) {
-                    this.sifterItemStacks[this.SpaceIndex] = result.copy();
-                } else if (this.sifterItemStacks[this.SpaceIndex].isItemEqual(result)) {
-                    sifterItemStacks[this.SpaceIndex].stackSize += result.stackSize;
+                if (result != null) {
+                    for (int slots = 9; slots < 13; slots++) {
+                        ItemStack stackInSlot = this.sifterItemStacks[slots];
+                        if (stackInSlot != null) {
+                            if (stackInSlot.isItemEqual(result) && stackInSlot.stackSize + result.stackSize < 64) {
+                                stackInSlot.stackSize += result.stackSize;
+                                if (this.sifterItemStacks[this.RawIndex].stackSize > 1) {
+                                    this.sifterItemStacks[this.RawIndex].stackSize--;
+                                } else {
+                                    this.sifterItemStacks[this.RawIndex] = null;
+                                }
+                                break;
+                            }
+                        } else if (stackInSlot == null) {
+                            this.sifterItemStacks[slots] = result;
+                            if (this.sifterItemStacks[this.RawIndex].stackSize > 1) {
+                                this.sifterItemStacks[this.RawIndex].stackSize--;
+                            } else {
+                                this.sifterItemStacks[this.RawIndex] = null;
+                            }
+                            break;
+                     }
                 }
             }
-
-            --this.sifterItemStacks[0].stackSize;
-
-            if (this.sifterItemStacks[0].stackSize <= 0) {
-                this.sifterItemStacks[0] = null;
-            }
-
         }
     }
 
@@ -386,7 +395,7 @@ public class TileEntitySifter extends TileEntity implements IInventory, ISidedIn
      */
     @Override
     public int[] getAccessibleSlotsFromSide(int par1) {
-        return par1 == 0 ? slots_bottom : (par1 == 1 ? slots_top : slots_sides);
+        return par1 == 1 ? slots_top : slots_bottom;
     }
 
     /**

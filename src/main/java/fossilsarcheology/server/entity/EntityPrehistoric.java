@@ -164,7 +164,7 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
         compound.setBoolean("MoodNoPlants", this.mood_noplants);
         compound.setInteger("TicksSincePlay", this.ticksTillPlay);
         compound.setInteger("TicksSinceMate", this.ticksTillMate);
-        compound.setByte("Order", (byte) this.currentOrder.ordinal());
+        compound.setByte("currentOrder", (byte) this.currentOrder.ordinal());
         compound.setString("OwnerDisplayName", this.getOwnerDisplayName());
     }
 
@@ -553,7 +553,7 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
             this.setSitting(false);
             ticksSitted = 0;
         }
-        if (!worldObj.isRemote && !this.isInWater() && this.riddenByEntity == null && !this.isActuallyWeak() && this.canSleep() &&  this.getRNG().nextInt(100) == 1 && this.getAttackTarget() == null && (this.getAnimation() == NO_ANIMATION || this.getAnimation() == SPEAK_ANIMATION)) {
+        if (!worldObj.isRemote && !this.isInWater() && this.riddenByEntity == null && !this.isActuallyWeak() && this.canSleep() && this.getRNG().nextInt(100) == 1 && this.getAttackTarget() == null && (this.getAnimation() == NO_ANIMATION || this.getAnimation() == SPEAK_ANIMATION)) {
             this.setSitting(false);
             this.setSleeping(true);
             ticksSlept = 0;
@@ -638,32 +638,38 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
         boolean sitting = isSitting();
         if (sitting && sitProgress < 20.0F) {
             sitProgress += 0.5F;
-            if (sleepProgress != 0)
+            if (sleepProgress != 0) {
                 sleepProgress = 0F;
+            }
         } else if (!sitting && sitProgress > 0.0F) {
             sitProgress -= 0.5F;
-            if (sleepProgress != 0)
+            if (sleepProgress != 0) {
                 sleepProgress = 0F;
+            }
         }
         boolean sleeping = isSleeping();
         if (sleeping && sleepProgress < 20.0F) {
             sleepProgress += 0.5F;
-            if (sitProgress != 0)
+            if (sitProgress != 0) {
                 sitProgress = 0F;
+            }
         } else if (!sleeping && sleepProgress > 0.0F) {
             sleepProgress -= 0.5F;
-            if (sitProgress != 0)
+            if (sitProgress != 0) {
                 sitProgress = 0F;
+            }
         }
         boolean climbing = this.aiClimbType() == EnumPrehistoricAI.Climbing.ARTHROPOD && (this.isBesideClimbableBlock() && !this.onGround);
         if (climbing && climbProgress < 20.0F) {
             climbProgress += 1F;
-            if (sitProgress != 0)
+            if (sitProgress != 0) {
                 sitProgress = 0F;
+            }
         } else if (!climbing && climbProgress > 0.0F) {
             climbProgress -= 1F;
-            if (sitProgress != 0)
+            if (sitProgress != 0) {
                 sitProgress = 0F;
+            }
         }
         boolean weak = this.isActuallyWeak();
         if (weak && weakProgress < 20.0F) {
@@ -896,7 +902,7 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
             String Status1 = StatCollector.translateToLocal(("status." + var1.toString() + ".head"));
             String Dino = this.type.toString();
             String Status2 = StatCollector.translateToLocal("status." + var1.toString());
-            Revival.messagePlayer(Status1 + Dino + Status2, (EntityPlayer) this.getOwner());
+            ((EntityPlayer) this.getOwner()).addChatMessage(new ChatComponentText(Status1 + Dino + Status2));
         }
     }
 
@@ -904,8 +910,9 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
     public boolean isOnLadder() {
         if (this.aiMovingType() == EnumPrehistoricAI.Moving.AQUATIC || this.aiMovingType() == EnumPrehistoricAI.Moving.SEMIAQUATIC) {
             return false;
-        } else
+        } else {
             return this.aiClimbType() == EnumPrehistoricAI.Climbing.ARTHROPOD && this.isBesideClimbableBlock();
+        }
     }
 
     public boolean isAngry() {
@@ -994,18 +1001,23 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
 
     @Override
     public boolean attackEntityFrom(DamageSource dmg, float i) {
+
         if (i > 0 && this.isSkeleton()) {
-            this.playSound("mob.skeleton.hurt", 0.8F, 1);
-            if (!worldObj.isRemote) {
-                if (this.type.timeperiod == EnumTimePeriod.CENOZOIC) {
-                    this.dropItem(FAItemRegistry.INSTANCE.tarfossil, 1);
-                } else {
-                    this.dropItem(FAItemRegistry.INSTANCE.biofossil, 1);
+            if (dmg == DamageSource.inWall) {
+                return false;
+            } else {
+                this.playSound("mob.skeleton.hurt", 0.8F, 1);
+                if (!worldObj.isRemote) {
+                    if (this.type.timeperiod == EnumTimePeriod.CENOZOIC) {
+                        this.dropItem(FAItemRegistry.INSTANCE.tarfossil, 1);
+                    } else {
+                        this.dropItem(FAItemRegistry.INSTANCE.biofossil, 1);
+                    }
+                    this.entityDropItem(new ItemStack(Items.bone, Math.min(this.getAgeInDays(), this.getAdultAge()), 1), 1);
                 }
-                this.entityDropItem(new ItemStack(Items.bone, Math.min(this.getAgeInDays(), this.getAdultAge()), 1), 1);
+                this.setDead();
+                return false;
             }
-            this.setDead();
-            return false;
         }
         if (this.getLastAttacker() instanceof EntityPlayer) {
             if (this.getOwner() == this.getLastAttacker()) {
@@ -1019,8 +1031,9 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
             this.setSitting(false);
             this.setSleeping(false);
         }
-        if (dmg.getEntity() != null)
+        if (dmg.getEntity() != null) {
             this.setMood(this.getMood() - 5);
+        }
         if (this.getHurtSound() != null) {
             if (this.getAnimation() != null) {
                 if (this.getAnimation() == NO_ANIMATION && worldObj.isRemote) {
@@ -1139,7 +1152,7 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
                     }
 
                     if (!this.worldObj.isRemote) {
-                        Revival.messagePlayer(StatCollector.translateToLocal(LocalizationStrings.STATUS_ESSENCE_FAIL), player);
+                        player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal(LocalizationStrings.STATUS_ESSENCE_FAIL)));
                     }
 
                     return false;
@@ -1150,8 +1163,9 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
                         if (this.getMaxHunger() > this.getHunger() || this.getHealth() > this.getMaxHealth() && Revival.CONFIG.healingDinos) {
 
                             this.setHunger(this.getHunger() + FoodMappings.INSTANCE.getItemFoodAmount(itemstack.getItem(), this.type.diet));
-                            if (!worldObj.isRemote)
+                            if (!worldObj.isRemote) {
                                 this.eatItem(itemstack);
+                            }
                             if (Revival.CONFIG.healingDinos) {
                                 this.heal(3);
                             }
@@ -1213,7 +1227,7 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
                             this.setMood(this.getMood() - 1);
                             Revival.NETWORK_WRAPPER.sendToAll(new MessageFoodParticles(getEntityId(), FABlockRegistry.INSTANCE.volcanicRock));
                             if (getRNG().nextInt(5) == 0) {
-                                Revival.messagePlayer(StatCollector.translateToLocal("prehistoric.autotame") + this.getCommandSenderName() + StatCollector.translateToLocal("prehistoric.period"), player);
+                                player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("prehistoric.autotame") + this.getCommandSenderName() + StatCollector.translateToLocal("prehistoric.period")));
                                 this.setMood(this.getMood() - 25);
                                 this.setTamed(true);
                                 Revival.NETWORK_WRAPPER.sendToAll(new MessageFoodParticles(getEntityId(), Item.getIdFromItem(Items.gold_ingot)));
@@ -1259,8 +1273,7 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
 
     private void sendOrderMessage(EnumOrderType var1) {
         String S = StatCollector.translateToLocal(LocalizationStrings.ORDER_HEAD) + StatCollector.translateToLocal("order." + var1.toString().toLowerCase());
-        Revival.messagePlayer(S, (EntityPlayer) this.worldObj.getPlayerEntityByName(this.getOwnerDisplayName()));
-
+        this.worldObj.getPlayerEntityByName(this.getOwnerDisplayName()).addChatMessage(new ChatComponentText(S));
     }
 
     public void nudgeEntity(EntityPlayer player) {
@@ -1295,17 +1308,17 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
             return "fossil:textures/model/" + type.toString().toLowerCase() + "_0/" + type.toString().toLowerCase() + "_skeleton.png";
         }
         if (this.hasBabyTexture) {
-            String toggle = this.hasFeatherToggle ? !this.featherToggle ? "feathered/" : "scaled/" : "";
+            String toggle = this.hasFeatherToggle ? this.featherToggle ? "feathered/" : "scaled/" : "";
             boolean isBaby = this.isChild() && this.hasBabyTexture;
             String gender = this.hasTeenTexture ? this.isTeen() ? "_teen" : isBaby ? "_baby" : this.getGender() == 0 ? "_female" : "_male" : this.isChild() ? "_baby" : this.getGender() == 0 ? "_female" : "_male";
             String sleeping = !this.isSleeping() ? this.isActuallyWeak() ? "_sleeping" : "" : "_sleeping";
-            String toggleList = this.hasFeatherToggle ? !this.featherToggle ? "_feathered" : "_scaled" : "";
+            String toggleList = this.hasFeatherToggle ? this.featherToggle ? "_feathered" : "_scaled" : "";
             return "fossil:textures/model/" + type.toString().toLowerCase() + "_0/" + toggle + type.toString().toLowerCase() + gender + toggleList + sleeping + ".png";
         } else {
-            String toggle = this.hasFeatherToggle ? !this.featherToggle ? "feathered/" : "scaled/" : "";
+            String toggle = this.hasFeatherToggle ? this.featherToggle ? "feathered/" : "scaled/" : "";
             String gender = this.getGender() == 0 ? "_female" : "_male";
             String sleeping = !this.isSleeping() ? this.isActuallyWeak() ? "_sleeping" : "" : "_sleeping";
-            String toggleList = this.hasFeatherToggle ? !this.featherToggle ? "_feathered" : "_scaled" : "";
+            String toggleList = this.hasFeatherToggle ? this.featherToggle ? "_feathered" : "_scaled" : "";
             return "fossil:textures/model/" + type.toString().toLowerCase() + "_0/" + toggle + type.toString().toLowerCase() + gender + toggleList + sleeping + ".png";
         }
     }
@@ -1491,7 +1504,6 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
             if (prehistoric.ticksTillMate == 0) {
                 this.getNavigator().tryMoveToEntityLiving(prehistoric, 1);
                 double distance = (double) (this.width * 8.0F * this.width * 8.0F + prehistoric.width);
-
                 if (this.getDistanceSq(prehistoric.posX, prehistoric.boundingBox.minY, prehistoric.posZ) <= distance && prehistoric.onGround && this.onGround) {
                     prehistoric.procreate(this);
                     this.ticksTillMate = this.rand.nextInt(6000) + 6000;
@@ -1516,13 +1528,14 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
             Revival.PROXY.spawnPacketHeartParticles(mob.worldObj, (float) (mob.posX + (mob.rand.nextFloat() * mob.width * 2.0F) - mob.width), (float) (mob.posY + 0.5D + (mob.rand.nextFloat() * mob.height)), (float) (mob.posZ + (mob.rand.nextFloat() * mob.width * 2.0F) - mob.width), dd, dd1, dd2);
 
         }
-        if (this.rand.nextInt(15) == 0)
+        if (this.rand.nextInt(15) == 0) {
             this.playSound("fossil:music.mating", 1, 1);
+        }
         Entity hatchling = this.createEgg(mob);
         if (hatchling != null && !worldObj.isRemote) {
             this.entityToAttack = null;
             mob.entityToAttack = null;
-            hatchling.setPositionAndRotation(this.posX, this.posY + 1, this.posZ, this.rotationYaw, 0);
+            hatchling.setPositionAndRotation(mob.posX, mob.posY + 1, mob.posZ, mob.rotationYaw, 0);
             if (hatchling instanceof EntityDinosaurEgg) {
                 Revival.NETWORK_WRAPPER.sendToAll(new MessageUpdateEgg(hatchling.getEntityId(), this.type.ordinal()));
             } else {

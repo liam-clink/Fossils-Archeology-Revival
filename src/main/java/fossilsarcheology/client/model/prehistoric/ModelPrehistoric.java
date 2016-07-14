@@ -32,9 +32,9 @@ public abstract class ModelPrehistoric extends AdvancedModelBase {
     }
     
     public void sitAnimationRotationPrev(AdvancedModelRenderer modelRenderer, float sitProgress, float rotX, float rotY, float rotZ) {
-        modelRenderer.rotateAngleX += sitProgress * (rotX - modelRenderer.defaultRotationX) / 25.0F;
-        modelRenderer.rotateAngleY += sitProgress * (rotY - modelRenderer.defaultRotationY) / 25.0F;
-        modelRenderer.rotateAngleZ += sitProgress * (rotZ - modelRenderer.defaultRotationZ) / 25.0F;
+        modelRenderer.rotateAngleX += sitProgress * (rotX - modelRenderer.defaultRotationX) / 20.0F;
+        modelRenderer.rotateAngleY += sitProgress * (rotY - modelRenderer.defaultRotationY) / 20.0F;
+        modelRenderer.rotateAngleZ += sitProgress * (rotZ - modelRenderer.defaultRotationZ) / 20.0F;
     }
 
     public void sitAnimationPos(AdvancedModelRenderer modelRenderer, float sitProgress, float x, float y, float z) {

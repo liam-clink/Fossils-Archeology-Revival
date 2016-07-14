@@ -14,6 +14,7 @@ import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.entity.EntityToyBase;
 import fossilsarcheology.api.FoodMappings;
 import fossilsarcheology.server.enums.EnumPrehistoricMood;
+import net.minecraft.world.EnumDifficulty;
 
 public class DinoAIHunt extends EntityAITarget {
 	private final int targetTicks;
@@ -59,6 +60,9 @@ public class DinoAIHunt extends EntityAITarget {
 						return false;
 					}
 					if (targetEntity instanceof EntityPlayer) {
+						if(taskOwner.worldObj.difficultySetting == EnumDifficulty.PEACEFUL){
+							return false;
+						}
 						if(prehistoric.getMood() < 0 && prehistoric.getMoodFace() != EnumPrehistoricMood.CALM){
 							return !((EntityPlayer) targetEntity).capabilities.isCreativeMode;
 						}else if(prehistoric.getMood() > 25 && prehistoric.getMoodFace() != EnumPrehistoricMood.CALM){

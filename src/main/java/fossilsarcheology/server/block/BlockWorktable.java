@@ -32,7 +32,8 @@ public class BlockWorktable extends BlockContainer {
     private IIcon Side1;
 
     public BlockWorktable(boolean isActive) {
-        super(Material.rock);
+        super(Material.wood);
+        setHarvestLevel("axe", 0);
         setHardness(2.5F);
         setStepSound(Block.soundTypeWood);
         this.isActive = isActive;

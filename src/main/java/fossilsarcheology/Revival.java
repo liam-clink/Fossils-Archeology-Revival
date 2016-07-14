@@ -12,7 +12,6 @@ import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import fossilsarcheology.client.render.tileentity.RenderFeeder;
-import fossilsarcheology.server.ModState;
 import fossilsarcheology.server.ServerProxy;
 import fossilsarcheology.server.biome.FABiomeRegistry;
 import fossilsarcheology.server.block.FABlockRegistry;
@@ -30,20 +29,18 @@ import fossilsarcheology.server.handler.*;
 import fossilsarcheology.server.item.FAItemRegistry;
 import fossilsarcheology.server.message.*;
 import fossilsarcheology.server.util.FossilFoodMappings;
+import fossilsarcheology.server.util.ReleaseType;
 import net.ilexiconn.llibrary.server.config.Config;
 import net.ilexiconn.llibrary.server.network.NetworkWrapper;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.ChatComponentText;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
-
 import org.apache.logging.log4j.Level;
 
 @Mod(modid = Revival.MODID, name = "Fossils and Archeology Revival", version = Revival.VERSION, dependencies = "required-after:llibrary@[" + Revival.LLIBRARY_VERSION + ",)")
 public class Revival {
     public static final String MODID = "fossil";
-    public static final ModState STATE = ModState.RELEASE;
-    public static final String VERSION = "7.3.0";
+    public static final String VERSION = "7.3.1-develop";
+    public static final ReleaseType RELEASE_TYPE = ReleaseType.parseVersion(Revival.VERSION);
     public static final String LLIBRARY_VERSION = "1.4.0";
 
     @SidedProxy(clientSide = "fossilsarcheology.client.ClientProxy", serverSide = "fossilsarcheology.server.ServerProxy")
@@ -57,20 +54,8 @@ public class Revival {
 
     public static Object toPedia;
 
-    public static boolean enableDebugging() {
-        return STATE == ModState.DEV;
-    }
-
-    public static void messagePlayer(String message, EntityPlayer player) {
-        if (player != null) {
-            player.addChatMessage(new ChatComponentText(message));
-    		System.out.println(player);
-
-        }
-    }
-
     public static void printDebug(String message) {
-        if (enableDebugging()) {
+        if (Revival.RELEASE_TYPE.enableDebugging()) {
             FMLLog.log(Revival.MODID, Level.INFO, message);
         }
     }
@@ -86,7 +71,6 @@ public class Revival {
         FAItemRegistry.INSTANCE.init();
         FABiomeRegistry.INSTANCE.init();
         FAEnchantmentRegistry.INSTANCE.init();
-
         EnumPrehistoric.init();
         FossilOreDictionary.oreRegistration();
         FossilFoodMappings.init();
@@ -141,7 +125,5 @@ public class Revival {
         MinecraftForge.EVENT_BUS.register(new FossilToolEvent());
         MinecraftForge.EVENT_BUS.register(new FossilLivingEvent());
         MinecraftForge.EVENT_BUS.register(new FossilInteractEvent());
-
-        FMLCommonHandler.instance().bus().register(new FossilConnectionEvent());
     }
 }
