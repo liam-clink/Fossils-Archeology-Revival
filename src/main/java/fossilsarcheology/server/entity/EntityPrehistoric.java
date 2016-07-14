@@ -1504,7 +1504,7 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
             if (prehistoric.ticksTillMate == 0) {
                 this.getNavigator().tryMoveToEntityLiving(prehistoric, 1);
                 double distance = (double) (this.width * 8.0F * this.width * 8.0F + prehistoric.width);
-                if (this.getDistanceSq(prehistoric.posX, prehistoric.boundingBox.minY, prehistoric.posZ) <= distance && prehistoric.onGround && this.onGround) {
+                if (this.getDistanceSq(prehistoric.posX, prehistoric.boundingBox.minY, prehistoric.posZ) <= distance && prehistoric.onGround && this.onGround && this.isAdult() && prehistoric.isAdult()) {
                     prehistoric.procreate(this);
                     this.ticksTillMate = this.rand.nextInt(6000) + 6000;
                     prehistoric.ticksTillMate = this.rand.nextInt(12000) + 24000;
