@@ -62,7 +62,7 @@ public class EntityParasaurolophus extends EntityPrehistoric {
         this.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
         this.targetTasks.addTask(4, new DinoAIHunt(this, 20, false));
-        this.setActualSize(1.1F, 1.6F);
+        this.setActualSize(1.6F, 1.2F);
         this.nearByMobsAllowed = 6;
         minSize = 0.6F;
         maxSize = 2.5F;
