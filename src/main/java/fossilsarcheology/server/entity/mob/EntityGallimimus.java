@@ -184,8 +184,7 @@ public class EntityGallimimus extends EntityPrehistoric {
                         entity.mountEntity(null);
                     }
                 }
-                entity.motionY += (0.2000000059604645D / 2);
-                knockbackEntity(entity, 0.5F, 0.1F);
+                entity.motionY += (0.1000000059604645D / 2);
             }
         }
         return false;
