@@ -506,6 +506,11 @@ public enum EnumPrehistoric {
 		    return values()[i].embryoItem;
 		}
 	    }
+		if (values()[i].type == EnumMobType.VANILLA) {
+			if (values()[i].DNAItem == i0) {
+				return values()[i].embryoItem;
+			}
+		}
 	}
 
 	return null;
