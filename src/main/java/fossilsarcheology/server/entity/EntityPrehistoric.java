@@ -450,7 +450,7 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
     }
 
     public boolean canSleep() {
-        return !(!this.onGround && ticksExisted % 20 != 0) && !this.isInWater() && (this.aiActivityType() == EnumPrehistoricAI.Activity.DIURINAL && !this.isDaytime() || this.aiActivityType() == EnumPrehistoricAI.Activity.NOCTURNAL && this.isDaytime() && !this.worldObj.canBlockSeeTheSky(MathHelper.floor_double(this.posX), (int) this.boundingBox.minY, MathHelper.floor_double(this.posZ)) || this.aiActivityType() == EnumPrehistoricAI.Activity.BOTH);
+        return !(!this.onGround && ticksExisted % 20 != 0) && !this.isInWater() && (this.aiActivityType() == EnumPrehistoricAI.Activity.DIURINAL && !this.isDaytime() || this.aiActivityType() == EnumPrehistoricAI.Activity.NOCTURNAL && this.isDaytime() && !this.worldObj.canBlockSeeTheSky(MathHelper.floor_double(this.posX), (int) this.boundingBox.minY, MathHelper.floor_double(this.posZ)) || this.aiActivityType() == EnumPrehistoricAI.Activity.BOTH && this.getRNG().nextInt(600) == 0);
     }
 
     public boolean isDaytime() {
