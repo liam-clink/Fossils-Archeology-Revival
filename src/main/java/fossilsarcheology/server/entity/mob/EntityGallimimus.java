@@ -1,6 +1,7 @@
 package fossilsarcheology.server.entity.mob;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAIOwnerHurtByTarget;
@@ -190,8 +191,12 @@ public class EntityGallimimus extends EntityPrehistoric {
         return false;
     }
 
+    @Override
+    public boolean func_142018_a(EntityLivingBase entity, EntityLivingBase thisMobsOwner) {
+        return super.func_142018_a(entity, thisMobsOwner) && isEntitySmallerThan(entity, 0.6F);
+    }
     public boolean canDinoHunt(Entity target, boolean hunger) {
-        return target.width <= 0.6D && super.canDinoHunt(target, hunger);
+        return isEntitySmallerThan(target, 0.6F) && super.canDinoHunt(target, hunger);
     }
     
     public int getMaxHunger() {

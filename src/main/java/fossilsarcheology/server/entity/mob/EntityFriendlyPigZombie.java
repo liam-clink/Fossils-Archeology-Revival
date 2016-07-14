@@ -47,11 +47,6 @@ public class EntityFriendlyPigZombie extends EntityTameable {
     }
 
     @Override
-    public void onLivingUpdate() {
-        super.onLivingUpdate();
-    }
-
-    @Override
     public void onKillEntity(EntityLivingBase entity) {
         super.onKillEntity(entity);
         sendMessageToOwner("pigman.kill");
@@ -73,9 +68,6 @@ public class EntityFriendlyPigZombie extends EntityTameable {
         compound.setBoolean("Angry", this.isAngry());
     }
 
-    /**
-     * (abstract) Protected helper method to read subclass entity data from NBT.
-     */
     @Override
     public void readEntityFromNBT(NBTTagCompound compound) {
         super.readEntityFromNBT(compound);
@@ -149,7 +141,6 @@ public class EntityFriendlyPigZombie extends EntityTameable {
         if (this.getOwner() instanceof EntityPlayer) {
             ((EntityPlayer) this.getOwner()).addChatMessage(new ChatComponentText(StatCollector.translateToLocal(words)));
         }
-
     }
 
     @Override
@@ -157,7 +148,6 @@ public class EntityFriendlyPigZombie extends EntityTameable {
 
         if (entity instanceof EntityWolf) {
             EntityWolf entitywolf = (EntityWolf) entity;
-
             if (entitywolf.isTamed() && entitywolf.getOwner() == thisMobsOwner) {
                 return false;
             }
