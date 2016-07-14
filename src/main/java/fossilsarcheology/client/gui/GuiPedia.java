@@ -712,25 +712,14 @@ public class GuiPedia extends GuiContainer {
 		GL11.glTranslatef((float) posX, (float) posY, 50.0F);
 		scaleValue -= scaleValue * 0.25F;
 		if (mob instanceof EntityPrehistoric) {
-			GL11.glScalef((float) -(scaleValue), -(float) scaleValue, (float) scaleValue);
+			GL11.glScalef((float) -scaleValue, -(float) scaleValue, (float) scaleValue);
 		} else {
-			GL11.glScalef((float) (scaleValue), (float) scaleValue, (float) scaleValue);
-
+			GL11.glScalef((float) scaleValue, (float) scaleValue, (float) scaleValue);
 		}
-		float f2 = 0;
-		float f3 = 0;
-		float f4 = 0;
-		float f5 = 0;
-		float f6 = 0;
 		GL11.glRotatef(-90.0F, 0.0F, 1.0F, 0.0F);
 		RenderHelper.enableStandardItemLighting();
 		GL11.glRotatef(-135.0F, 0.0F, 0.0F, 0.0F);
 		GL11.glRotatef(-((float) Math.atan((double) (renderPitch / 40.0F))) * 20.0F, 1.0F, 0.0F, 0.0F);
-		mob.renderYawOffset = (float) Math.atan((double) (renderYaw / 40.0F)) * 20.0F;
-		mob.rotationYaw = (float) Math.atan((double) (renderYaw / 40.0F)) * 40.0F;
-		mob.rotationPitch = -((float) Math.atan((double) (renderPitch / 40.0F))) * 20.0F;
-		mob.rotationYawHead = mob.rotationYaw;
-		mob.prevRotationYawHead = mob.rotationYaw;
 		GL11.glTranslatef(0.0F, mob.yOffset, 0.0F);
 		RenderManager.instance.playerViewY = 180.0F;
 		if (mob instanceof EntityPrehistoric) {
@@ -739,11 +728,6 @@ public class GuiPedia extends GuiContainer {
 		}
 		GL11.glRotatef(-45.0F, 0.0F, 1.0F, -0.1F);
 		RenderManager.instance.renderEntityWithPosYaw(mob, 0.0D, 0.0D, 0.0D, 0.0F, 0F);
-		mob.renderYawOffset = f2;
-		mob.rotationYaw = f3;
-		mob.rotationPitch = f4;
-		mob.prevRotationYawHead = f5;
-		mob.rotationYawHead = f6;
 		GL11.glDisable(GL11.GL_DEPTH_TEST);
 
 		GL11.glPopMatrix();

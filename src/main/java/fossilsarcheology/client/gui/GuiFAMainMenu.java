@@ -95,7 +95,7 @@ public class GuiFAMainMenu extends GuiMainMenu {
         for (int i = 0; i < this.layerTextures.length; i++) {
             ResourceLocation layerTexture = this.layerTextures[i];
             this.mc.getTextureManager().bindTexture(layerTexture);
-            drawTexturedModalRect(0, 0, (i == 1 ? backAdd : frontAdd) + (layerTick / (float) (this.layerTextures.length - i)) + partialTicks / (float) (i + 1) + 2048 * i / 4.0F, 0, this.width, this.height, 2048 / (this.layerTextures.length - i) * (this.height / 128.0F), this.height, this.zLevel);
+            drawTexturedModalRect(0, 0, (i == 1 ? backAdd : frontAdd) + ((layerTick + partialTicks) / (float) (this.layerTextures.length - i)) + (float) (i + 1) + 2048 * i / 4.0F, 0, this.width, this.height, 2048 / (this.layerTextures.length - i) * (this.height / 128.0F), this.height, this.zLevel);
         }
 
         super.drawScreen(mouseX, mouseY, partialTicks);
