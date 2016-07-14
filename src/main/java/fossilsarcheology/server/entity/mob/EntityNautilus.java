@@ -7,6 +7,7 @@ import net.minecraft.command.IEntitySelector;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
@@ -101,8 +102,8 @@ public class EntityNautilus extends EntityFishBase {
     }
 
     @Override
-    protected Item getDropItem() {
-        return FAItemRegistry.INSTANCE.emptyShell;
+    protected void dropFewItems(boolean burning, int i) {
+        this.dropItem(FAItemRegistry.INSTANCE.emptyShell, 1);
     }
 
     public boolean isThereNearbyMobs() {
