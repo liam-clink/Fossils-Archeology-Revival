@@ -326,20 +326,30 @@ public class TileEntitySifter extends TileEntity implements IInventory, ISidedIn
                     }
                 }
             }
-            if (result != null) {
-                if (result.stackSize != 0 && this.sifterItemStacks[this.SpaceIndex] == null) {
-                    this.sifterItemStacks[this.SpaceIndex] = result.copy();
-                } else if (this.sifterItemStacks[this.SpaceIndex].isItemEqual(result)) {
-                    sifterItemStacks[this.SpaceIndex].stackSize += result.stackSize;
+                if (result != null) {
+                    for (int slots = 9; slots < 13; slots++) {
+                        ItemStack stackInSlot = this.sifterItemStacks[slots];
+                        if (stackInSlot != null) {
+                            if (stackInSlot.isItemEqual(result) && stackInSlot.stackSize + result.stackSize < 64) {
+                                stackInSlot.stackSize += result.stackSize;
+                                if (this.sifterItemStacks[this.RawIndex].stackSize > 1) {
+                                    this.sifterItemStacks[this.RawIndex].stackSize--;
+                                } else {
+                                    this.sifterItemStacks[this.RawIndex] = null;
+                                }
+                                break;
+                            }
+                        } else if (stackInSlot == null) {
+                            this.sifterItemStacks[slots] = result;
+                            if (this.sifterItemStacks[this.RawIndex].stackSize > 1) {
+                                this.sifterItemStacks[this.RawIndex].stackSize--;
+                            } else {
+                                this.sifterItemStacks[this.RawIndex] = null;
+                            }
+                            break;
+                     }
                 }
             }
-
-            --this.sifterItemStacks[0].stackSize;
-
-            if (this.sifterItemStacks[0].stackSize <= 0) {
-                this.sifterItemStacks[0] = null;
-            }
-
         }
     }
 
