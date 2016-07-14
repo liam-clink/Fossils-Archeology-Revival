@@ -7,6 +7,7 @@ import fossilsarcheology.server.enums.EnumDinoBones;
 import fossilsarcheology.server.enums.EnumPrehistoric;
 import fossilsarcheology.server.handler.FossilAchievementHandler;
 import fossilsarcheology.server.handler.LocalizationStrings;
+import fossilsarcheology.server.item.BirdEggItem;
 import fossilsarcheology.server.item.DinoEggItem;
 import fossilsarcheology.server.item.DinosaurBoneItem;
 import fossilsarcheology.server.item.FAItemRegistry;
@@ -319,7 +320,7 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
 					itemstack = new ItemStack(EnumPrehistoric.getRandomMezoic().DNAItem, 1);
 				}
 			}
-			if (this.analyzerItemStacks[this.RawIndex].getItem() instanceof DinoEggItem) {
+			if (this.analyzerItemStacks[this.RawIndex].getItem() instanceof DinoEggItem || this.analyzerItemStacks[this.RawIndex].getItem() instanceof BirdEggItem) {
 				if (!Revival.RELEASE_TYPE.enableDebugging()) {
 					if (rand > -1 && rand <= 50) {
 						itemstack = new ItemStack(Items.dye, new Random().nextInt(2) + 1, 15);
