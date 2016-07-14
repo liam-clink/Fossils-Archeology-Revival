@@ -7,6 +7,7 @@ import fossilsarcheology.server.enums.EnumDinoBones;
 import fossilsarcheology.server.enums.EnumPrehistoric;
 import fossilsarcheology.server.handler.FossilAchievementHandler;
 import fossilsarcheology.server.handler.LocalizationStrings;
+import fossilsarcheology.server.item.DinoEggItem;
 import fossilsarcheology.server.item.DinosaurBoneItem;
 import fossilsarcheology.server.item.FAItemRegistry;
 import net.minecraft.entity.player.EntityPlayer;
@@ -313,6 +314,18 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
 
 					if (rand > 65) {
 						itemstack = new ItemStack(EnumDinoBones.from(EnumDinoBones.values()[this.analyzerItemStacks[this.RawIndex].getItemDamage()]).DNAItem, 1);
+					}
+				} else {
+					itemstack = new ItemStack(EnumPrehistoric.getRandomMezoic().DNAItem, 1);
+				}
+			}
+			if (this.analyzerItemStacks[this.RawIndex].getItem() instanceof DinoEggItem) {
+				if (!Revival.RELEASE_TYPE.enableDebugging()) {
+					if (rand > -1 && rand <= 50) {
+						itemstack = new ItemStack(Items.dye, new Random().nextInt(2) + 1, 15);
+					}
+					if (rand > 50) {
+						itemstack = new ItemStack(EnumPrehistoric.getDNA(this.analyzerItemStacks[this.RawIndex].getItem()));
 					}
 				} else {
 					itemstack = new ItemStack(EnumPrehistoric.getRandomMezoic().DNAItem, 1);
