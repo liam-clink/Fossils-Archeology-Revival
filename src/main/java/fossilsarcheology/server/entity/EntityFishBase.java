@@ -113,6 +113,9 @@ public abstract class EntityFishBase extends EntityTameable {
     @Override
     public void onUpdate() {
         super.onUpdate();
+        if(this.height != 1F){
+            this.height = 1F;
+        }
         swimAround();
         Revival.PROXY.calculateChainBuffer(this);
         if (this.isInWater() && this.getClosestMate() != null && this.getGrowingAge() == 0 && this.getClosestMate().getGrowingAge() == 0 && !this.worldObj.isRemote) {
@@ -154,6 +157,10 @@ public abstract class EntityFishBase extends EntityTameable {
         return this instanceof EntityNautilus && ((EntityNautilus) this).isInShell();
     }
 
+    public boolean isInWater(){
+        return this.inWater || this.isChild() & this.isInsideOfMaterial(Material.water);
+    }
+
     public void moveEntityWithHeading(float x, float z) {
         double d0;
         float f6;
@@ -175,13 +182,13 @@ public abstract class EntityFishBase extends EntityTameable {
             } else {
                 float f2 = 0.91F;
 
-                if (this.onGround) {
+                if (this.onGround && !this.isChild()) {
                     f2 = this.worldObj.getBlock(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.boundingBox.minY) - 1, MathHelper.floor_double(this.posZ)).slipperiness * 0.91F;
                 }
 
                 float f3 = 0.16277136F / (f2 * f2 * f2);
 
-                if (this.onGround) {
+                if (this.onGround && !this.isChild()) {
                     f4 = this.getAIMoveSpeed() * f3;
                 } else {
                     f4 = this.jumpMovementFactor;
@@ -190,7 +197,7 @@ public abstract class EntityFishBase extends EntityTameable {
                 this.moveFlying(x, z, f4);
                 f2 = 0.91F;
 
-                if (this.onGround) {
+                if (this.onGround && !this.isChild()) {
                     f2 = this.worldObj.getBlock(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.boundingBox.minY) - 1, MathHelper.floor_double(this.posZ)).slipperiness * 0.91F;
                 }
 

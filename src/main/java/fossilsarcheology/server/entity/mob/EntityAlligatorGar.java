@@ -7,7 +7,7 @@ import fossilsarcheology.server.enums.EnumPrehistoric;
 public class EntityAlligatorGar extends EntityFishBase {
     public EntityAlligatorGar(World par1World) {
         super(par1World, EnumPrehistoric.Alligator_Gar);
-        this.setSize(1.9F, 1F);
+        this.setSize(1.9F, 1.2F);
     }
 
     @Override
