@@ -212,9 +212,10 @@ public class ModelParasaurolophus extends ModelPrehistoric {
         animator.resetKeyframe(10);
         animator.setAnimation(prehistoric.ATTACK_ANIMATION);
         animator.startKeyframe(5);
-        animator.move(neck1, 0, -2.5F, 0);
+        animator.move(neck1, 0, -1F, 0);
+        animator.move(neck2, 0, -1.5F, 0);
         ModelUtils.rotate(animator, neck1, 28, 0, 0);
-        ModelUtils.rotate(animator, headPivot, 66, 0, 0);
+        ModelUtils.rotate(animator, headPivot, 15, 0, 0);
         ModelUtils.rotate(animator, neck2, 28, 0, 0);
         animator.endKeyframe();
         animator.setStaticKeyframe(5);

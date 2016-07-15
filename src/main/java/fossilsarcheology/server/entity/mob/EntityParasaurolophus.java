@@ -42,14 +42,15 @@ public class EntityParasaurolophus extends EntityPrehistoric {
 
     private boolean isStanding;
     public float standProgress;
+    private int standTicks;
 
     public EntityParasaurolophus(World world) {
-        super(world, EnumPrehistoric.Parasaurolophus, 2, 17, 25, 70, 0.25, 0.35);
+        super(world, EnumPrehistoric.Parasaurolophus, 2, 17, 25, 70, 0.25, 0.4);
         this.getNavigator().setAvoidsWater(true);
         this.getNavigator().setCanSwim(true);
         this.tasks.addTask(1, new EntityAISwimming(this));
         this.tasks.addTask(2, this.aiSit);
-        this.tasks.addTask(3, new DinoAIRiding(this, 1.0F));
+        this.tasks.addTask(3, new DinoAIRiding(this, 1.5F));
         this.tasks.addTask(3, new DinoAIAttackOnCollide(this, 1.0D, false));
         this.tasks.addTask(4, new DinoAIFollowOwner(this, 1.0D, 10.0F, 2.0F));
         this.tasks.addTask(5, new DinoAIEatBlocks(this, 1));
@@ -214,7 +215,7 @@ public class EntityParasaurolophus extends EntityPrehistoric {
 
     @Override
     public int getTailSegments() {
-        return 4;
+        return 3;
     }
 
     @Override
@@ -243,19 +244,25 @@ public class EntityParasaurolophus extends EntityPrehistoric {
     @Override
     public void onLivingUpdate() {
         super.onLivingUpdate();
+
         boolean standing = this.isStanding();
         if (standing && standProgress < 20.0F) {
             standProgress += 0.5F;
         } else if (!standing && standProgress > 0.0F) {
             standProgress -= 0.5F;
         }
+        if(standing){
+            standTicks++;
+        }else if(!standing && standTicks != 0){
+            standTicks = 0;
+        }
         if (this.getAnimation() == ATTACK_ANIMATION && (this.getAnimationTick() >= 12 && this.getAnimationTick() <= 14) && this.getAttackTarget() != null) {
             this.attackEntityAsMob(this.getAttackTarget());
         }
-        if(!this.worldObj.isRemote && !this.isMovementBlocked() && !this.isStanding() && this.getRNG().nextInt(100) == 0){
+        if(!this.worldObj.isRemote && !this.isMovementBlocked() && !this.isStanding() && this.getRNG().nextInt(100) == 0 && standTicks == 0){
             this.setStanding(true);
         }
-        if(!this.worldObj.isRemote && this.isStanding() && this.getRNG().nextInt(800) == 0){
+        if(!this.worldObj.isRemote && this.isStanding() && this.getRNG().nextInt(800) == 0 && standTicks > 800){
             this.setStanding(false);
         }
     }

@@ -327,7 +327,7 @@ public class TileEntitySifter extends TileEntity implements IInventory, ISidedIn
                 }
             }
                 if (result != null) {
-                    for (int slots = 9; slots < 13; slots++) {
+                    for (int slots = 1; slots < 5; slots++) {
                         ItemStack stackInSlot = this.sifterItemStacks[slots];
                         if (stackInSlot != null) {
                             if (stackInSlot.isItemEqual(result) && stackInSlot.stackSize + result.stackSize < 64) {
