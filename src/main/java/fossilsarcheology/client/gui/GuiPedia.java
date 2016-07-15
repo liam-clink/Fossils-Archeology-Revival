@@ -271,7 +271,7 @@ public class GuiPedia extends GuiScreen {
 			this.buttonNextPage.enabled = true;
 		}
 		if (bookPages == 0) {
-			if (Revival.toPedia instanceof EntityPregnantHorse) {
+			if (Revival.toPedia instanceof EntityPregnantHorse && ((EntityPregnantHorse)Revival.toPedia).EmbryoProgress < 10000) {
 				EntityHorse entity = ((EntityPregnantHorse)Revival.toPedia).horse;
 				String s1 = StatCollector.translateToLocal(entity.getCommandSenderName());
 				String s2 = StatCollector.translateToLocal("prehistoric.pregnant");
@@ -281,7 +281,7 @@ public class GuiPedia extends GuiScreen {
 				GL11.glScalef(1.5F, 1.5F, 1.5F);
 				printStringXY(s2 + StatCollector.translateToLocal(entity.getCommandSenderName()), (-this.fontRendererObj.getStringWidth(s2 + s1) / 2) + 65, 60, 66, 48, 36);
 			}
-			if (Revival.toPedia instanceof EntityPregnantCow) {
+			if (Revival.toPedia instanceof EntityPregnantCow && ((EntityPregnantCow)Revival.toPedia).EmbryoProgress < 10000) {
 				EntityCow entity = ((EntityPregnantCow)Revival.toPedia).cow;
 				String s1 = StatCollector.translateToLocal(entity.getCommandSenderName());
 				String s2 = StatCollector.translateToLocal("prehistoric.pregnant");
@@ -291,7 +291,7 @@ public class GuiPedia extends GuiScreen {
 				GL11.glScalef(1.5F, 1.5F, 1.5F);
 				printStringXY(s2 + StatCollector.translateToLocal(entity.getCommandSenderName()), (-this.fontRendererObj.getStringWidth(s2 + s1) / 2) + 65, 60, 66, 48, 36);
 			}
-			if (Revival.toPedia instanceof EntityPregnantSheep) {
+			if (Revival.toPedia instanceof EntityPregnantSheep && ((EntityPregnantSheep)Revival.toPedia).EmbryoProgress < 10000) {
 				EntitySheep entity = ((EntityPregnantSheep)Revival.toPedia).sheep;
 				String s1 = StatCollector.translateToLocal(entity.getCommandSenderName());
 				String s2 = StatCollector.translateToLocal("prehistoric.pregnant");
@@ -301,7 +301,7 @@ public class GuiPedia extends GuiScreen {
 				GL11.glScalef(1.5F, 1.5F, 1.5F);
 				printStringXY(s2 + StatCollector.translateToLocal(entity.getCommandSenderName()), (-this.fontRendererObj.getStringWidth(s2 + s1) / 2) + 65, 60, 66, 48, 36);
 			}
-			if (Revival.toPedia instanceof EntityPregnantPig) {
+			if (Revival.toPedia instanceof EntityPregnantPig && ((EntityPregnantPig)Revival.toPedia).EmbryoProgress < 10000) {
 				EntityPig entity = ((EntityPregnantPig)Revival.toPedia).pig;
 				String s1 = StatCollector.translateToLocal(entity.getCommandSenderName());
 				String s2 = StatCollector.translateToLocal("prehistoric.pregnant");
