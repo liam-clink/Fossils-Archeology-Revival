@@ -145,7 +145,7 @@ public class ModelPlesiosaurus extends ModelPrehistoric {
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
         animator.setAnimation(prehistoric.SPEAK_ANIMATION);
         animator.startKeyframe(10);
-        ModelUtils.rotate(animator, lowerJaw, 29, 0, 0);
+        ModelUtils.rotate(animator, bottomJawBase, 29, 0, 0);
         animator.endKeyframe();
         animator.resetKeyframe(10);
 		animator.setAnimation(prehistoric.FISH_ANIMATION);
@@ -157,7 +157,7 @@ public class ModelPlesiosaurus extends ModelPrehistoric {
 		ModelUtils.rotate(animator, neck5, 0, 15F, 0);
 		ModelUtils.rotate(animator, neck6, 0, 15F, 0);
 		ModelUtils.rotate(animator, head, 0, 15F, 0);
-		ModelUtils.rotate(animator, lowerJaw, -15, 0, 0);
+		ModelUtils.rotate(animator, bottomJawBase, -15, 0, 0);
 		animator.endKeyframe();
 		animator.startKeyframe(10);
 		ModelUtils.rotate(animator, neck1, 0, -15F, 0);
@@ -167,7 +167,7 @@ public class ModelPlesiosaurus extends ModelPrehistoric {
 		ModelUtils.rotate(animator, neck5, 0, -15F, 0);
 		ModelUtils.rotate(animator, neck6, 0, -15F, 0);
 		ModelUtils.rotate(animator, head, 0, -15F, 0);
-		ModelUtils.rotate(animator, lowerJaw, -15, 0, 0);
+		ModelUtils.rotate(animator, bottomJawBase, -15, 0, 0);
 		animator.endKeyframe();
 		animator.startKeyframe(10);
 		ModelUtils.rotate(animator, neck1, 0, 15F, 0);
@@ -177,7 +177,7 @@ public class ModelPlesiosaurus extends ModelPrehistoric {
 		ModelUtils.rotate(animator, neck5, 0, 15F, 0);
 		ModelUtils.rotate(animator, neck6, 0, 15F, 0);
 		ModelUtils.rotate(animator, head, 0, 15F, 0);
-		ModelUtils.rotate(animator, lowerJaw, -15, 0, 0);
+		ModelUtils.rotate(animator, bottomJawBase, -15, 0, 0);
 		animator.endKeyframe();
 		animator.resetKeyframe(10);
     }
