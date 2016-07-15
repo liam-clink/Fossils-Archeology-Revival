@@ -75,6 +75,14 @@ public class EntityFriendlyPigZombie extends EntityTameable {
     }
 
     @Override
+    public void setDead() {
+        if (!this.worldObj.isRemote && isTamed() && getHealth() > 0) {
+            return;
+        }
+        super.setDead();
+    }
+
+    @Override
     public boolean attackEntityFrom(DamageSource damage, float f) {
         if (this.isEntityInvulnerable()) {
             return false;
