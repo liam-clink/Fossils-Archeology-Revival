@@ -45,7 +45,7 @@ public class EntityParasaurolophus extends EntityPrehistoric {
     private int standTicks;
 
     public EntityParasaurolophus(World world) {
-        super(world, EnumPrehistoric.Parasaurolophus, 2, 17, 25, 70, 0.25, 0.4);
+        super(world, EnumPrehistoric.Parasaurolophus, 2, 17, 25, 70, 0.25, 0.5);
         this.getNavigator().setAvoidsWater(true);
         this.getNavigator().setCanSwim(true);
         this.tasks.addTask(1, new EntityAISwimming(this));

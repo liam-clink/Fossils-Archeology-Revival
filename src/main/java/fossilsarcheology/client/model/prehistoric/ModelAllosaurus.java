@@ -268,7 +268,7 @@ public class ModelAllosaurus extends ModelPrehistoric {
 		{
 			float sitProgress = ((EntityPrehistoric) (entity)).weakProgress;
 			sitAnimationRotationPrev(rightLowerLeg, sitProgress, -((float) Math.toRadians(60.0D)), 0, 0);
-			sitAnimationRotationPrev(head, sitProgress, (float) Math.toRadians(5.22D), -((float) Math.toRadians(7.83D)), -((float) Math.toRadians(44.35D)));
+			sitAnimationRotationPrev(headPivot, sitProgress, (float) Math.toRadians(5.22D), -((float) Math.toRadians(7.83D)), -((float) Math.toRadians(44.35D)));
 			sitAnimationRotationPrev(rightUpperArm, sitProgress, (float) Math.toRadians(9.23D), -((float) Math.toRadians(7.83D)), (float) Math.toRadians(23.48D));
 			sitAnimationRotationPrev(leftLowerLeg, sitProgress, -((float) Math.toRadians(60.0D)), 0, 0);
 			sitAnimationRotationPrev(neck, sitProgress, (float) Math.toRadians(15.65D), 0, -((float) Math.toRadians(7.83D)));

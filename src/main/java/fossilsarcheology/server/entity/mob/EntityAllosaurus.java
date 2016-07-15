@@ -48,7 +48,7 @@ public class EntityAllosaurus extends EntityPrehistoric {
         this.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
         this.targetTasks.addTask(4, new DinoAIHunt(this, 20, false));
-        this.setActualSize(1.4F, 1.3F);
+        this.setActualSize(1.1F, 0.9F);
         this.pediaScale = 35F;
         this.nearByMobsAllowed = 5;
         minSize = 0.55F;
