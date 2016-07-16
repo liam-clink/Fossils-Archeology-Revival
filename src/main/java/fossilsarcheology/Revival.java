@@ -39,9 +39,9 @@ import org.apache.logging.log4j.Level;
 @Mod(modid = Revival.MODID, name = "Fossils and Archeology Revival", version = Revival.VERSION, dependencies = "required-after:llibrary@[" + Revival.LLIBRARY_VERSION + ",)", guiFactory = "fossilsarcheology.client.gui.RevivalGUIFactory")
 public class Revival {
     public static final String MODID = "fossil";
-    public static final String VERSION = "7.3.1-develop";
+    public static final String VERSION = "7.3.1";
     public static final ReleaseType RELEASE_TYPE = ReleaseType.parseVersion(Revival.VERSION);
-    public static final String LLIBRARY_VERSION = "1.4.0";
+    public static final String LLIBRARY_VERSION = "1.4.1";
 
     @SidedProxy(clientSide = "fossilsarcheology.client.ClientProxy", serverSide = "fossilsarcheology.server.ServerProxy")
     public static ServerProxy PROXY;
