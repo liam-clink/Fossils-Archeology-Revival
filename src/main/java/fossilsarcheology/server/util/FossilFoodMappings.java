@@ -137,6 +137,7 @@ public class FossilFoodMappings {
         FoodMappings.INSTANCE.removeItemMapping(EnumPrehistoric.Horse.embryoItem, EnumDiet.CARNIVORE_EGG);
 
         FoodMappings.INSTANCE.addFish("listAllfishraw", 30);
+        FoodMappings.INSTANCE.addPlant("cropYuzu", 20);
 
     }
 }
