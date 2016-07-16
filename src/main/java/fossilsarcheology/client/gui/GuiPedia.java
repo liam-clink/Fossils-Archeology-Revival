@@ -256,7 +256,7 @@ public class GuiPedia extends GuiScreen {
             this.buttonNextPage.enabled = true;
         }
         if (bookPages == 0) {
-            if (Revival.toPedia instanceof EntityPregnantHorse && ((EntityPregnantHorse) Revival.toPedia).EmbryoProgress < 10000) {
+            if (Revival.toPedia instanceof EntityPregnantHorse && ((EntityPregnantHorse) Revival.toPedia).EmbryoProgress < 9999 && ((EntityPregnantHorse) Revival.toPedia).Embryo != null) {
                 EntityHorse entity = ((EntityPregnantHorse) Revival.toPedia).horse;
                 String s1 = StatCollector.translateToLocal(entity.getCommandSenderName());
                 String s2 = StatCollector.translateToLocal("prehistoric.pregnant");
@@ -265,8 +265,10 @@ public class GuiPedia extends GuiScreen {
                 printStringXY(s3, (-this.fontRendererObj.getStringWidth(s3) / 2) + 100, 110, 157, 126, 103);
                 GL11.glScalef(1.5F, 1.5F, 1.5F);
                 printStringXY(s2 + StatCollector.translateToLocal(entity.getCommandSenderName()), (-this.fontRendererObj.getStringWidth(s2 + s1) / 2) + 65, 60, 66, 48, 36);
+            }else{
+                Minecraft.getMinecraft().displayCrashReport(null);
             }
-            if (Revival.toPedia instanceof EntityPregnantCow && ((EntityPregnantCow) Revival.toPedia).EmbryoProgress < 10000) {
+            if (Revival.toPedia instanceof EntityPregnantCow && ((EntityPregnantCow) Revival.toPedia).EmbryoProgress < 9999  && ((EntityPregnantCow) Revival.toPedia).Embryo != null) {
                 EntityCow entity = ((EntityPregnantCow) Revival.toPedia).cow;
                 String s1 = StatCollector.translateToLocal(entity.getCommandSenderName());
                 String s2 = StatCollector.translateToLocal("prehistoric.pregnant");
@@ -275,8 +277,10 @@ public class GuiPedia extends GuiScreen {
                 printStringXY(s3, (-this.fontRendererObj.getStringWidth(s3) / 2) + 100, 110, 157, 126, 103);
                 GL11.glScalef(1.5F, 1.5F, 1.5F);
                 printStringXY(s2 + StatCollector.translateToLocal(entity.getCommandSenderName()), (-this.fontRendererObj.getStringWidth(s2 + s1) / 2) + 65, 60, 66, 48, 36);
+            }else{
+                Minecraft.getMinecraft().displayCrashReport(null);
             }
-            if (Revival.toPedia instanceof EntityPregnantSheep && ((EntityPregnantSheep) Revival.toPedia).EmbryoProgress < 10000) {
+            if (Revival.toPedia instanceof EntityPregnantSheep && ((EntityPregnantSheep) Revival.toPedia).EmbryoProgress < 9999 && ((EntityPregnantSheep) Revival.toPedia).Embryo != null) {
                 EntitySheep entity = ((EntityPregnantSheep) Revival.toPedia).sheep;
                 String s1 = StatCollector.translateToLocal(entity.getCommandSenderName());
                 String s2 = StatCollector.translateToLocal("prehistoric.pregnant");
@@ -285,8 +289,10 @@ public class GuiPedia extends GuiScreen {
                 printStringXY(s3, (-this.fontRendererObj.getStringWidth(s3) / 2) + 100, 110, 157, 126, 103);
                 GL11.glScalef(1.5F, 1.5F, 1.5F);
                 printStringXY(s2 + StatCollector.translateToLocal(entity.getCommandSenderName()), (-this.fontRendererObj.getStringWidth(s2 + s1) / 2) + 65, 60, 66, 48, 36);
+            }else{
+                Minecraft.getMinecraft().displayCrashReport(null);
             }
-            if (Revival.toPedia instanceof EntityPregnantPig && ((EntityPregnantPig) Revival.toPedia).EmbryoProgress < 10000) {
+            if (Revival.toPedia instanceof EntityPregnantPig && ((EntityPregnantPig) Revival.toPedia).EmbryoProgress < 9999 && ((EntityPregnantPig) Revival.toPedia).Embryo != null) {
                 EntityPig entity = ((EntityPregnantPig) Revival.toPedia).pig;
                 String s1 = StatCollector.translateToLocal(entity.getCommandSenderName());
                 String s2 = StatCollector.translateToLocal("prehistoric.pregnant");
@@ -295,6 +301,8 @@ public class GuiPedia extends GuiScreen {
                 printStringXY(s3, (-this.fontRendererObj.getStringWidth(s3) / 2) + 100, 110, 157, 126, 103);
                 GL11.glScalef(1.5F, 1.5F, 1.5F);
                 printStringXY(s2 + StatCollector.translateToLocal(entity.getCommandSenderName()), (-this.fontRendererObj.getStringWidth(s2 + s1) / 2) + 65, 60, 66, 48, 36);
+            }else{
+                Minecraft.getMinecraft().displayCrashReport(null);
             }
 
             if (Revival.toPedia instanceof EntityLivingBase) {
