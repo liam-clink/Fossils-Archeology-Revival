@@ -136,11 +136,16 @@ public class FossilFoodMappings {
         FoodMappings.INSTANCE.addFish(EntityAlligatorGar.class, 20);
         FoodMappings.INSTANCE.removeItemMapping(EnumPrehistoric.Horse.embryoItem, EnumDiet.CARNIVORE_EGG);
 
-        FoodMappings.INSTANCE.addFish("listAllfishraw", 30);
+        FoodMappings.INSTANCE.addFish("listAllfishraw", 5);
+        FoodMappings.INSTANCE.addFish("foodOctopuscooked", 30);
         FoodMappings.INSTANCE.addFish("listAllfishcooked", 45);
         FoodMappings.INSTANCE.addFish("foodCalamariraw", 30);
         FoodMappings.INSTANCE.addFish("foodCalamaricooked", 45);
         FoodMappings.INSTANCE.addFish("foodClamraw", 15);
+        FoodMappings.INSTANCE.addFish("foodCrabraw", 10);
+        FoodMappings.INSTANCE.addFish("foodCrabcooked", 15);
+        FoodMappings.INSTANCE.addFish("foodShrimpcooked", 13);
+        FoodMappings.INSTANCE.addFish("foodSnailcooked", 10);
         FoodMappings.INSTANCE.addFish("foodClamcooked", 22);
         FoodMappings.INSTANCE.addFish("foodCookedClam", 22);
         FoodMappings.INSTANCE.addFish("cookingClam", 15);
@@ -149,7 +154,7 @@ public class FossilFoodMappings {
         FoodMappings.INSTANCE.addPlant("listAllveggie", 15);
         FoodMappings.INSTANCE.addPlant("listAllrootveggie", 15);
         FoodMappings.INSTANCE.addPlant("listAllgreenveggie", 15);
-	 FoodMappings.INSTANCE.addPlant("listAllmushroom", 15);
+        FoodMappings.INSTANCE.addPlant("listAllmushroom", 15);
         FoodMappings.INSTANCE.addPlant("listAllberry", 7);
         FoodMappings.INSTANCE.addPlant("cropCamellia", 5);
         FoodMappings.INSTANCE.addPlant("cropCassis", 7);
@@ -181,6 +186,10 @@ public class FossilFoodMappings {
         FoodMappings.INSTANCE.addMeat("listAllmeatcooked", 60);
         FoodMappings.INSTANCE.addMeat("listAllmeatraw", 40);
         FoodMappings.INSTANCE.addMeat("foodOffal", 10);
+        FoodMappings.INSTANCE.addMeat("foodTurtleraw", 25);
+        FoodMappings.INSTANCE.addMeat("foodTurtlecooked", 40);
+        FoodMappings.INSTANCE.addMeat("foodFrograw", 15);
+        FoodMappings.INSTANCE.addMeat("foodFrogcooked", 25);
         FoodMappings.INSTANCE.addEgg("listAllegg", 7);
         FoodMappings.INSTANCE.addEgg("bakingEgg", 7);
     }
