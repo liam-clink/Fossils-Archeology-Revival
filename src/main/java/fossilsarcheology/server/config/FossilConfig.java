@@ -39,9 +39,6 @@ public class FossilConfig {
     public boolean spawnAlligatorGar = true;
     @ConfigEntry(category = "entity spawning")
     public boolean spawnNautilus = true;
-    
-    @ConfigEntry
-    public boolean allowFlying = false;
     @ConfigEntry
     public boolean healingDinos = true;
     @ConfigEntry
@@ -52,10 +49,6 @@ public class FossilConfig {
     public boolean skullOverlay = true;
     @ConfigEntry
     public boolean loginMessage = true;
-    @ConfigEntry
-    public boolean anuSpawn = false;
-    @ConfigEntry
-    public boolean anuAllowedOverworld = false;
     @ConfigEntry
     public boolean allowTableEnchantments = true;
     @ConfigEntry
@@ -89,7 +82,6 @@ public class FossilConfig {
     public int dimensionIDDarknessLair = -23;
     @ConfigEntry(category = "ids")
     public int dimensionIDTreasure = -34;
-
     @ConfigEntry(category = "ids")
     public int enchantmentIDArcheology = 91;
     @ConfigEntry(category = "ids")

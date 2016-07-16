@@ -631,7 +631,7 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
             this.updateAbilities();
         }
 
-        if (this.getAgeInTicks() % 1200 == 0 && this.getHunger() > 0) {
+        if (this.getAgeInTicks() % 1200 == 0 && this.getHunger() > 0 && Revival.CONFIG.starvingDinos) {
             this.setHunger(this.getHunger() - 1);
         }
 
