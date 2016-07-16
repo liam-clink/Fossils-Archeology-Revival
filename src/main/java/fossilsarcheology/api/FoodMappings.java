@@ -4,7 +4,11 @@ import com.google.common.collect.Maps;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
 
+import java.util.List;
 import java.util.Map;
 
 public enum FoodMappings {
@@ -486,6 +490,18 @@ public enum FoodMappings {
     }
 
     /**
+     * Adds all ore dictionary registries to all the carnivore mappings.
+     * @param ore_dictionary_name The ore dictionary registry name being registered.
+     * @param food The amount of food points for the object.
+     */
+    public void addMeat(String ore_dictionary_name, int food) {
+        this.addOreDictionary(ore_dictionary_name, food, EnumDiet.CARNIVORE);
+        this.addOreDictionary(ore_dictionary_name, food, EnumDiet.CARNIVORE_EGG);
+        this.addOreDictionary(ore_dictionary_name, food, EnumDiet.OMNIVORE);
+        this.addOreDictionary(ore_dictionary_name, food, EnumDiet.PISCCARNIVORE);
+    }
+
+    /**
      * Adds a item, block, or entity class to all the herbivore mappings.
      *
      * @param entity The entity class being registered.
@@ -516,6 +532,16 @@ public enum FoodMappings {
     public void addPlant(Item item, int food) {
         this.addToItemMappings(item, food, EnumDiet.HERBIVORE);
         this.addToItemMappings(item, food, EnumDiet.OMNIVORE);
+    }
+
+    /**
+     * Adds all ore dictionary registries to all the herbivore mappings.
+     * @param ore_dictionary_name The ore dictionary registry name being registered.
+     * @param food The amount of food points for the object.
+     */
+    public void addPlant(String ore_dictionary_name, int food) {
+        this.addOreDictionary(ore_dictionary_name, food, EnumDiet.HERBIVORE);
+        this.addOreDictionary(ore_dictionary_name, food, EnumDiet.OMNIVORE);
     }
 
     /**
@@ -552,6 +578,16 @@ public enum FoodMappings {
     }
 
     /**
+     * Adds all ore dictionary registries to all the piscivore mappings.
+     * @param ore_dictionary_name The ore dictionary registry name being registered.
+     * @param food The amount of food points for the object.
+     */
+    public void addFish(String ore_dictionary_name, int food) {
+        this.addOreDictionary(ore_dictionary_name, food, EnumDiet.PISCCARNIVORE);
+        this.addOreDictionary(ore_dictionary_name, food, EnumDiet.PISCIVORE);
+    }
+
+    /**
      * Adds a item, block, or entity class to all the egg eating mappings.
      *
      * @param entity The entity class being registered.
@@ -582,5 +618,29 @@ public enum FoodMappings {
     public void addEgg(Item item, int food) {
         this.addToItemMappings(item, food, EnumDiet.CARNIVORE_EGG);
         this.addToItemMappings(item, food, EnumDiet.OMNIVORE);
+    }
+
+    /**
+     * Adds all ore dictionary registries to all the egg eating mappings.
+     * @param ore_dictionary_name The ore dictionary registry name being registered.
+     * @param food The amount of food points for the object.
+     */
+    public void addEgg(String ore_dictionary_name, int food) {
+        this.addOreDictionary(ore_dictionary_name, food, EnumDiet.CARNIVORE_EGG);
+        this.addOreDictionary(ore_dictionary_name, food, EnumDiet.OMNIVORE);
+    }
+
+
+    private void addOreDictionary(String dict_name, int food_value, EnumDiet diet){
+        List<ItemStack> stacks = OreDictionary.getOres(dict_name);
+        for(ItemStack stack : stacks){
+            if(stack != null && stack.getItem() != null){
+                if(stack.getItem() instanceof ItemBlock){
+                    this.addToBlockMappings(((ItemBlock)stack.getItem()).field_150939_a, food_value, diet, true);
+                }else {
+                    this.addToItemMappings(stack.getItem(), food_value, diet);
+                }
+            }
+        }
     }
 }

@@ -20,6 +20,7 @@ import fossilsarcheology.server.enums.EnumMobType;
 import fossilsarcheology.server.enums.EnumPrehistoric;
 import fossilsarcheology.server.enums.EnumTimePeriod;
 import fossilsarcheology.server.item.FAItemRegistry;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class FossilFoodMappings {
 
@@ -134,5 +135,8 @@ public class FossilFoodMappings {
         FoodMappings.INSTANCE.addFish(EntitySturgeon.class, 20);
         FoodMappings.INSTANCE.addFish(EntityAlligatorGar.class, 20);
         FoodMappings.INSTANCE.removeItemMapping(EnumPrehistoric.Horse.embryoItem, EnumDiet.CARNIVORE_EGG);
+
+        FoodMappings.INSTANCE.addFish("listAllfishraw", 30);
+
     }
 }
