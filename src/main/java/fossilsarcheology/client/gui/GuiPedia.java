@@ -266,7 +266,7 @@ public class GuiPedia extends GuiScreen {
                 GL11.glScalef(1.5F, 1.5F, 1.5F);
                 printStringXY(s2 + StatCollector.translateToLocal(entity.getCommandSenderName()), (-this.fontRendererObj.getStringWidth(s2 + s1) / 2) + 65, 60, 66, 48, 36);
             }else{
-                Minecraft.getMinecraft().displayCrashReport(null);
+                Minecraft.getMinecraft().displayGuiScreen(null);
             }
             if (Revival.toPedia instanceof EntityPregnantCow && ((EntityPregnantCow) Revival.toPedia).EmbryoProgress < 9999  && ((EntityPregnantCow) Revival.toPedia).Embryo != null) {
                 EntityCow entity = ((EntityPregnantCow) Revival.toPedia).cow;
@@ -278,7 +278,7 @@ public class GuiPedia extends GuiScreen {
                 GL11.glScalef(1.5F, 1.5F, 1.5F);
                 printStringXY(s2 + StatCollector.translateToLocal(entity.getCommandSenderName()), (-this.fontRendererObj.getStringWidth(s2 + s1) / 2) + 65, 60, 66, 48, 36);
             }else{
-                Minecraft.getMinecraft().displayCrashReport(null);
+                Minecraft.getMinecraft().displayGuiScreen(null);
             }
             if (Revival.toPedia instanceof EntityPregnantSheep && ((EntityPregnantSheep) Revival.toPedia).EmbryoProgress < 9999 && ((EntityPregnantSheep) Revival.toPedia).Embryo != null) {
                 EntitySheep entity = ((EntityPregnantSheep) Revival.toPedia).sheep;
@@ -290,7 +290,7 @@ public class GuiPedia extends GuiScreen {
                 GL11.glScalef(1.5F, 1.5F, 1.5F);
                 printStringXY(s2 + StatCollector.translateToLocal(entity.getCommandSenderName()), (-this.fontRendererObj.getStringWidth(s2 + s1) / 2) + 65, 60, 66, 48, 36);
             }else{
-                Minecraft.getMinecraft().displayCrashReport(null);
+                Minecraft.getMinecraft().displayGuiScreen(null);
             }
             if (Revival.toPedia instanceof EntityPregnantPig && ((EntityPregnantPig) Revival.toPedia).EmbryoProgress < 9999 && ((EntityPregnantPig) Revival.toPedia).Embryo != null) {
                 EntityPig entity = ((EntityPregnantPig) Revival.toPedia).pig;
@@ -302,7 +302,7 @@ public class GuiPedia extends GuiScreen {
                 GL11.glScalef(1.5F, 1.5F, 1.5F);
                 printStringXY(s2 + StatCollector.translateToLocal(entity.getCommandSenderName()), (-this.fontRendererObj.getStringWidth(s2 + s1) / 2) + 65, 60, 66, 48, 36);
             }else{
-                Minecraft.getMinecraft().displayCrashReport(null);
+                Minecraft.getMinecraft().displayGuiScreen(null);
             }
 
             if (Revival.toPedia instanceof EntityLivingBase) {
