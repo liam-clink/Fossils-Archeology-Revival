@@ -138,8 +138,18 @@ public class FossilFoodMappings {
 
         FoodMappings.INSTANCE.addFish("listAllfishraw", 30);
         FoodMappings.INSTANCE.addFish("listAllfishcooked", 45);
+        FoodMappings.INSTANCE.addFish("foodCalamariraw", 30);
+        FoodMappings.INSTANCE.addFish("foodCalamaricooked", 45);
+        FoodMappings.INSTANCE.addFish("foodClamraw", 15);
+        FoodMappings.INSTANCE.addFish("foodClamcooked", 22);
+        FoodMappings.INSTANCE.addFish("foodCookedClam", 22);
+        FoodMappings.INSTANCE.addFish("cookingClam", 15);
         FoodMappings.INSTANCE.addPlant("cropYuzu", 20);
         FoodMappings.INSTANCE.addPlant("listAllfruit", 20);
+        FoodMappings.INSTANCE.addPlant("listAllveggie", 15);
+        FoodMappings.INSTANCE.addPlant("listAllrootveggie", 15);
+        FoodMappings.INSTANCE.addPlant("listAllgreenveggie", 15);
+	 FoodMappings.INSTANCE.addPlant("listAllmushroom", 15);
         FoodMappings.INSTANCE.addPlant("listAllberry", 7);
         FoodMappings.INSTANCE.addPlant("cropCamellia", 5);
         FoodMappings.INSTANCE.addPlant("cropCassis", 7);
@@ -147,8 +157,31 @@ public class FossilFoodMappings {
         FoodMappings.INSTANCE.addPlant("treeSapling", 15);
         FoodMappings.INSTANCE.addPlant("listAllgrain", 10);
         FoodMappings.INSTANCE.addPlant("cropRice", 10);
+        FoodMappings.INSTANCE.addPlant("cropCorn", 10);
+        FoodMappings.INSTANCE.addPlant("listAllnut", 15);
+        FoodMappings.INSTANCE.addPlant("listAllseed", 5);
+        FoodMappings.INSTANCE.addPlant("cropCoconut", 20);
+        FoodMappings.INSTANCE.addPlant("listAllherb", 10);
+        FoodMappings.INSTANCE.addPlant("listAllspice", 10);
+        FoodMappings.INSTANCE.addPlant("cropEdibleroot", 7);
+        FoodMappings.INSTANCE.addPlant("cropSesame", 5);
+        FoodMappings.INSTANCE.addPlant("listAllpepper", 5);
+        FoodMappings.INSTANCE.addPlant("cropAvocado", 20);
+        FoodMappings.INSTANCE.addPlant("cropDurian", 25);
+        FoodMappings.INSTANCE.addPlant("cropTea", 10);
+        FoodMappings.INSTANCE.addPlant("cropSpiceleaf", 10);
+        FoodMappings.INSTANCE.addPlant("cropCurryleaf", 10);
+        FoodMappings.INSTANCE.addPlant("cropCoffee", 5);
+        FoodMappings.INSTANCE.addPlant("cropNutmeg", 7);
+        FoodMappings.INSTANCE.addPlant("cropCoffee", 5);
+        FoodMappings.INSTANCE.addPlant("cropCinnamon", 5);
+        FoodMappings.INSTANCE.addPlant("cropVanillabean", 5);
+        FoodMappings.INSTANCE.addPlant("cropMaplesyrup", 5);
+        FoodMappings.INSTANCE.addPlant("dropHoney", 7);
         FoodMappings.INSTANCE.addMeat("listAllmeatcooked", 60);
         FoodMappings.INSTANCE.addMeat("listAllmeatraw", 40);
-
+        FoodMappings.INSTANCE.addMeat("foodOffal", 10);
+        FoodMappings.INSTANCE.addEgg("listAllegg", 7);
+        FoodMappings.INSTANCE.addEgg("bakingEgg", 7);
     }
 }
