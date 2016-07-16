@@ -191,6 +191,5 @@ public class FossilFoodMappings {
         FoodMappings.INSTANCE.addMeat("foodFrograw", 15);
         FoodMappings.INSTANCE.addMeat("foodFrogcooked", 25);
         FoodMappings.INSTANCE.addEgg("listAllegg", 7);
-        FoodMappings.INSTANCE.addEgg("bakingEgg", 7);
     }
 }
