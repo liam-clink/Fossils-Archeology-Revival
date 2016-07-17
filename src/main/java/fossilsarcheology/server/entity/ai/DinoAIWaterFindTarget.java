@@ -59,7 +59,7 @@ public class DinoAIWaterFindTarget extends EntityAIBase {
 
 	public Vec3 findWaterTarget() {
 		Random random = this.prehistoric.getRNG();
-		if (prehistoric.isTamed() && prehistoric.currentOrder == EnumOrderType.FOLLOW) {
+		if (prehistoric.isTamed() && prehistoric.currentOrder == EnumOrderType.FOLLOW && prehistoric.getOwner() != null) {
 			ChunkCoordinates blockpos1 = new ChunkCoordinates((int) prehistoric.getOwner().posX, (int) prehistoric.getOwner().posY, (int) prehistoric.getOwner().posZ);
 			if (canGoToBlock(blockpos1.posX, blockpos1.posY, blockpos1.posZ)) {
 				return Vec3.createVectorHelper(blockpos1.posX, blockpos1.posY, blockpos1.posZ);
