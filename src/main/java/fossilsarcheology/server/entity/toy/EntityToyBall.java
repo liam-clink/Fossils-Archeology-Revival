@@ -65,7 +65,7 @@ public class EntityToyBall extends EntityToyBase {
 
     public void onUpdate() {
         super.onUpdate();
-        if (this.motionX > 0 || this.motionZ < 0 || this.motionZ > 0 || this.motionZ < 0) {
+        if ((this.motionX > 0 || this.motionZ < 0 || this.motionZ > 0 || this.motionZ < 0) && worldObj.isRemote) {
             rollValue++;
             Revival.NETWORK_WRAPPER.sendToAll(new MessageRollBall(this.getEntityId(), this.rollValue));
         }
