@@ -633,12 +633,14 @@ public enum FoodMappings {
 
     private void addOreDictionary(String dict_name, int food_value, EnumDiet diet){
         List<ItemStack> stacks = OreDictionary.getOres(dict_name);
-        for(ItemStack stack : stacks){
-            if(stack != null && stack.getItem() != null){
-                if(stack.getItem() instanceof ItemBlock){
-                    this.addToBlockMappings(((ItemBlock)stack.getItem()).field_150939_a, food_value, diet, true);
-                }else {
-                    this.addToItemMappings(stack.getItem(), food_value, diet);
+        if(!stacks.isEmpty()) {
+            for (ItemStack stack : stacks) {
+                if (stack != null && stack.getItem() != null) {
+                    if (stack.getItem() instanceof ItemBlock) {
+                        this.addToBlockMappings(((ItemBlock) stack.getItem()).field_150939_a, food_value, diet, true);
+                    } else {
+                        this.addToItemMappings(stack.getItem(), food_value, diet);
+                    }
                 }
             }
         }
