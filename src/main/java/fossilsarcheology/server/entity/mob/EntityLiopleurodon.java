@@ -28,7 +28,7 @@ public class EntityLiopleurodon extends EntityPrehistoricSwimming {
 	public static Animation SHAKE_ANIMATION = Animation.create(50);
 
 	public EntityLiopleurodon(World world) {
-		super(world, EnumPrehistoric.Liopleurodon, 2, 12, 10, 45, 0.3, 0.4);
+		super(world, EnumPrehistoric.Liopleurodon, 2, 12, 10, 45, 0.1, 0.1);
         this.getNavigator().setAvoidsWater(false);
         this.tasks.addTask(1, this.aiSit);
         this.tasks.addTask(2, new DinoAIWaterFindTarget(this, false));

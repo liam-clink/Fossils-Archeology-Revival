@@ -38,7 +38,7 @@ public class EntityMosasaurus extends EntityPrehistoricSwimming {
 	public static Animation SHAKE_ANIMATION = Animation.create(50);
 
 	public EntityMosasaurus(World world) {
-		super(world, EnumPrehistoric.Mosasaurus, 2, 9, 12, 70, 0.3, 0.35);
+		super(world, EnumPrehistoric.Mosasaurus, 2, 9, 12, 70, 0.1, 0.1);
 		this.getNavigator().setAvoidsWater(false);
 		this.tasks.addTask(1, this.aiSit);
 		this.tasks.addTask(2, new DinoAIWaterFindTarget(this, false));

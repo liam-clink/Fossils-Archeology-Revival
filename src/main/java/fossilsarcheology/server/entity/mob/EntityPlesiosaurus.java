@@ -30,7 +30,7 @@ import fossilsarcheology.server.item.FAItemRegistry;
 public class EntityPlesiosaurus extends EntityPrehistoricSwimming {
 
     public EntityPlesiosaurus(World world) {
-        super(world, EnumPrehistoric.Plesiosaur, 2, 12, 10, 30, 0.2, 0.3);
+        super(world, EnumPrehistoric.Plesiosaur, 2, 12, 10, 30, 0.1, 0.1);
         this.getNavigator().setAvoidsWater(false);
         FISH_ANIMATION = Animation.create(40);
         this.tasks.addTask(1, this.aiSit);
