@@ -265,7 +265,7 @@ public class GuiPedia extends GuiScreen {
                 printStringXY(s3, (-this.fontRendererObj.getStringWidth(s3) / 2) + 100, 110, 157, 126, 103);
                 GL11.glScalef(1.5F, 1.5F, 1.5F);
                 printStringXY(s2 + StatCollector.translateToLocal(entity.getCommandSenderName()), (-this.fontRendererObj.getStringWidth(s2 + s1) / 2) + 65, 60, 66, 48, 36);
-            }else{
+            }else if (Revival.toPedia instanceof EntityPregnantHorse){
                 Minecraft.getMinecraft().displayGuiScreen(null);
             }
             if (Revival.toPedia instanceof EntityPregnantCow && ((EntityPregnantCow) Revival.toPedia).EmbryoProgress < 9999  && ((EntityPregnantCow) Revival.toPedia).Embryo != null) {
@@ -277,7 +277,7 @@ public class GuiPedia extends GuiScreen {
                 printStringXY(s3, (-this.fontRendererObj.getStringWidth(s3) / 2) + 100, 110, 157, 126, 103);
                 GL11.glScalef(1.5F, 1.5F, 1.5F);
                 printStringXY(s2 + StatCollector.translateToLocal(entity.getCommandSenderName()), (-this.fontRendererObj.getStringWidth(s2 + s1) / 2) + 65, 60, 66, 48, 36);
-            }else{
+            }else if (Revival.toPedia instanceof EntityPregnantCow){
                 Minecraft.getMinecraft().displayGuiScreen(null);
             }
             if (Revival.toPedia instanceof EntityPregnantSheep && ((EntityPregnantSheep) Revival.toPedia).EmbryoProgress < 9999 && ((EntityPregnantSheep) Revival.toPedia).Embryo != null) {
@@ -289,7 +289,7 @@ public class GuiPedia extends GuiScreen {
                 printStringXY(s3, (-this.fontRendererObj.getStringWidth(s3) / 2) + 100, 110, 157, 126, 103);
                 GL11.glScalef(1.5F, 1.5F, 1.5F);
                 printStringXY(s2 + StatCollector.translateToLocal(entity.getCommandSenderName()), (-this.fontRendererObj.getStringWidth(s2 + s1) / 2) + 65, 60, 66, 48, 36);
-            }else{
+            }else if (Revival.toPedia instanceof EntityPregnantSheep){
                 Minecraft.getMinecraft().displayGuiScreen(null);
             }
             if (Revival.toPedia instanceof EntityPregnantPig && ((EntityPregnantPig) Revival.toPedia).EmbryoProgress < 9999 && ((EntityPregnantPig) Revival.toPedia).Embryo != null) {
@@ -301,7 +301,7 @@ public class GuiPedia extends GuiScreen {
                 printStringXY(s3, (-this.fontRendererObj.getStringWidth(s3) / 2) + 100, 110, 157, 126, 103);
                 GL11.glScalef(1.5F, 1.5F, 1.5F);
                 printStringXY(s2 + StatCollector.translateToLocal(entity.getCommandSenderName()), (-this.fontRendererObj.getStringWidth(s2 + s1) / 2) + 65, 60, 66, 48, 36);
-            }else{
+            }else if (Revival.toPedia instanceof EntityPregnantPig){
                 Minecraft.getMinecraft().displayGuiScreen(null);
             }
 
