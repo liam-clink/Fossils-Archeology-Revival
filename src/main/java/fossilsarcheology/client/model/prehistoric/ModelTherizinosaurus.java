@@ -255,6 +255,9 @@ public class ModelTherizinosaurus extends ModelPrehistoric {
 	AdvancedModelRenderer[] neckParts = { this.neck, this.head };
 	AdvancedModelRenderer[] leftArmParts = { this.leftUpperArm, this.leftLowerArm };
 	AdvancedModelRenderer[] rightArmParts = { this.rightUpperArm, this.rightLowerArm };
+		if (((EntityPrehistoric) entity).isSkeleton()) {
+			return;
+		}
 	EntityTherizinosaurus dino = (EntityTherizinosaurus) entity;
         head.rotateAngleZ += (f3 / (180f / (float) Math.PI)) * 0.5F;
         head.rotateAngleX += (f4 / (180f / (float) Math.PI)) * 0.5F;
