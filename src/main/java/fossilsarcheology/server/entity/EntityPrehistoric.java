@@ -507,14 +507,14 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
         if (ticksTillMate == 0 && this.getGender() == 1) {
             this.mate();
         }
-        if (!this.arePlantsNearby(16) && !mood_noplants) {
+        if (!this.arePlantsNearby(16) && !mood_noplants && this.ticksExisted % 1200 == 0) {
             boolean inital_mood_noplants = mood_noplants;
             this.mood_noplants = true;
             if (mood_noplants != inital_mood_noplants) {
                 this.setMood(this.getMood() - 50);
             }
         }
-        if (this.arePlantsNearby(16)) {
+        if (this.arePlantsNearby(16) && this.ticksExisted % 1200 == 0) {
             boolean inital_mood_noplants = mood_noplants;
             this.mood_noplants = false;
             if (mood_noplants != inital_mood_noplants) {
@@ -522,14 +522,14 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
             }
         }
 
-        if (this.isThereNearbyTypes() && !mood_nospace) {
+        if (this.isThereNearbyTypes() && !mood_nospace && this.ticksExisted % 1200 == 0) {
             boolean inital_mood_nospace = mood_nospace;
             this.mood_nospace = true;
             if (mood_nospace != inital_mood_nospace) {
                 this.setMood(this.getMood() - 50);
             }
         }
-        if (!this.isThereNearbyTypes()) {
+        if (!this.isThereNearbyTypes() && this.ticksExisted % 1200 == 0) {
             boolean inital_mood_nospace = mood_nospace;
             this.mood_nospace = false;
             if (mood_nospace != inital_mood_nospace) {
