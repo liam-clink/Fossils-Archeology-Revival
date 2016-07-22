@@ -164,7 +164,7 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
         compound.setBoolean("MoodNoPlants", this.mood_noplants);
         compound.setInteger("TicksSincePlay", this.ticksTillPlay);
         compound.setInteger("TicksSinceMate", this.ticksTillMate);
-        compound.setByte("currentOrder", (byte) this.currentOrder.ordinal());
+        compound.setByte("Order", (byte) this.currentOrder.ordinal());
         compound.setString("OwnerDisplayName", this.getOwnerDisplayName());
     }
 
@@ -988,7 +988,6 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
     @Override
     public void setSitting(boolean sitting) {
         super.setSitting(sitting);
-
         if (!worldObj.isRemote) {
             this.isSitting = sitting;
         }
@@ -1001,7 +1000,6 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
 
     @Override
     public boolean attackEntityFrom(DamageSource dmg, float i) {
-
         if (i > 0 && this.isSkeleton()) {
             if (dmg == DamageSource.inWall) {
                 return false;
