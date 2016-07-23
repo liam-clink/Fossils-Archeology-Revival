@@ -50,10 +50,10 @@ public class DinoEggItem extends Item {
 				}
 				if (egg instanceof EntityPrehistoric) {
 					EntityPrehistoric prehistoric = (EntityPrehistoric) egg;
+					prehistoric.setAgeInDays(1);
+					prehistoric.setGender(new Random().nextInt(2));
 					if (prehistoric.aiTameType() == EnumPrehistoricAI.Taming.IMPRINTING) {
 						prehistoric.setTamed(true);
-						prehistoric.setAgeInDays(1);
-						prehistoric.setGender(new Random().nextInt(1));
 						prehistoric.func_152115_b(world.getClosestPlayerToEntity(prehistoric, 10).getDisplayName());
 					}
 				}
