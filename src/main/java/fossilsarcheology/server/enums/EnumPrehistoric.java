@@ -125,7 +125,7 @@ public enum EnumPrehistoric {
 			EnumTimePeriod.MESOZOIC, EnumDiet.HERBIVORE, I.MODEL | I.TAME | I.HERBIVORE, true, 0X7E8E30, 0X4C5438, 1F),
     Confuciusornis(
 		   EntityConfuciusornis.class, EnumMobType.BIRD,
-		   EnumTimePeriod.MESOZOIC, EnumDiet.HERBIVORE, I.TAME | I.HERBIVORE,
+		   EnumTimePeriod.MESOZOIC, EnumDiet.PISCIVORE, I.TAME | I.CARNIVORE,
 		   true, 0XDAE5E9, 0X8B8B8D),
     Dodo(EntityDodo.class, EnumMobType.BIRD,
 	 EnumTimePeriod.CENOZOIC, EnumDiet.HERBIVORE, I.TAME | I.HERBIVORE,
