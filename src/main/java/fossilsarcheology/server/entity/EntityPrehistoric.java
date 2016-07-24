@@ -1500,7 +1500,7 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
                 }
             }
         }
-        if (!listOfFemales.isEmpty() && this.ticksTillMate == 0) {
+        if (!listOfFemales.isEmpty() && this.ticksTillMate == 0 && Revival.CONFIG.allowBreeding) {
             EntityPrehistoric prehistoric = listOfFemales.get(0);
             if (prehistoric.ticksTillMate == 0) {
                 this.getNavigator().tryMoveToEntityLiving(prehistoric, 1);
