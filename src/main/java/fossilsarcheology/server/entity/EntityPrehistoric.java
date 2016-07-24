@@ -561,6 +561,16 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
                 ticksSlept = 0;
             }
 
+            if(this.isSleeping() && ticksExisted % 15 == 0){
+                System.out.println("spaning");
+                    Random rand = new Random();
+                    double motionY = rand.nextGaussian() * 0.07D;
+                    float f = (float) (rand.nextFloat() * (this.boundingBox.maxX - this.boundingBox.minX) + this.boundingBox.minX);
+                    float f1 = (float) (rand.nextFloat() * (this.boundingBox.maxY - this.boundingBox.minY) + this.boundingBox.minY);
+                    float f2 = (float) (rand.nextFloat() * (this.boundingBox.maxZ - this.boundingBox.minZ) + this.boundingBox.minZ);
+                    Revival.PROXY.spawnSleepParticles(this.worldObj, f, f1, f2, 0, motionY, 0);
+            }
+
             if (this.currentOrder == EnumOrderType.STAY && !this.isSitting() && !this.isActuallyWeak()) {
                 this.setSitting(true);
                 this.setSleeping(false);
