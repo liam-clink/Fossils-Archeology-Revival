@@ -40,7 +40,6 @@ public class Flock {
         flockPosX = creator.posX;
         flockPosY = creator.posY;
         flockPosZ = creator.posZ;
-
     }
 
     public void onUpdate() {
@@ -60,10 +59,12 @@ public class Flock {
             flockPathNavigate = flockLeader.getNavigator();
         }
         if (flockLeader != null) {
-                if (!flockLeader.isMovementBlocked() && flockLeader.getNavigator().noPath()) {
-                    Vec3 vec3 = RandomPositionGenerator.findRandomTargetBlockAwayFrom(flockLeader, 32, 7, Vec3.createVectorHelper(flockLeader.posX, flockLeader.posY, flockLeader.posZ));
+            if (!flockLeader.isMovementBlocked() && flockLeader.getNavigator().noPath() && flockLeader.ticksExisted % 20 == 0) {
+                Vec3 vec3 = RandomPositionGenerator.findRandomTargetBlockAwayFrom(flockLeader, 32, 7, Vec3.createVectorHelper(flockLeader.posX, flockLeader.posY, flockLeader.posZ));
+                if (vec3 != null) {
                     this.flockLeader.getNavigator().setPath(this.flockPathNavigate.getPathToXYZ(vec3.xCoord, vec3.yCoord, vec3.zCoord), 1);
                 }
+            }
         }
     }
 
@@ -93,6 +94,5 @@ public class Flock {
 
     public void disband() {
         flockMembers.clear();
-
     }
 }

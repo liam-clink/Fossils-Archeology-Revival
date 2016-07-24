@@ -464,128 +464,129 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
 
     @Override
     public void onLivingUpdate() {
-        super.onLivingUpdate();
-        if (this.isSkeleton()) {
+        if (!this.isSkeleton()) {
+            super.onLivingUpdate();
+            if (this.getOwner() != null && this.getOwnerDisplayName().equals("")) {
+                this.setOwnerDisplayName(this.getOwner().getCommandSenderName());
+            }
+            if (this.getHunger() > this.getMaxHunger()) {
+                this.setHunger(this.getMaxHunger());
+            }
+            if (this.getMood() > 100) {
+                this.setMood(100);
+            }
+            if (this.getMood() < -100) {
+                this.setMood(-100);
+            }
+            if (this.ticksTillPlay > 0) {
+                this.ticksTillPlay--;
+            }
+            if (this.ticksTillMate > 0) {
+                this.ticksTillMate--;
+            }
+            if (this.getRidingPlayer() != null) {
+                this.stepHeight = 1;
+            }
+            int blockX = MathHelper.floor_double(this.posX);
+            int blockY = MathHelper.floor_double(this.boundingBox.minY) - 1;
+            int blockZ = MathHelper.floor_double(this.posZ);
+            if (this.getBlockUnder() == FABlockRegistry.INSTANCE.bubbleMachine && this.worldObj.isBlockIndirectlyGettingPowered(blockX, blockY, blockZ) && this.ticksTillPlay == 0) {
+                this.jump();
+                for (int i = 0; i < 1; ++i) {
+                    double dd = this.getRNG().nextGaussian() * 0.02D;
+                    double dd1 = this.getRNG().nextGaussian() * 0.02D;
+                    double dd2 = this.getRNG().nextGaussian() * 0.02D;
+                    Revival.PROXY.spawnPacketHeartParticles(this.worldObj, (float) (this.posX + (this.getRNG().nextFloat() * this.width * 2.0F) - this.width), (float) (this.posY + 0.5D + (this.getRNG().nextFloat() * this.height)), (float) (this.posZ + (this.getRNG().nextFloat() * this.width * 2.0F) - this.width), dd, dd1, dd2);
+                }
+                this.doPlayBonus(15);
+            }
+            if (ticksTillMate == 0 && this.getGender() == 1) {
+                this.mate();
+            }
+            if (!this.arePlantsNearby(16) && !mood_noplants && this.ticksExisted % 1200 == 0) {
+                boolean inital_mood_noplants = mood_noplants;
+                this.mood_noplants = true;
+                if (mood_noplants != inital_mood_noplants) {
+                    this.setMood(this.getMood() - 50);
+                }
+            }
+            if (this.arePlantsNearby(16) && this.ticksExisted % 1200 == 0) {
+                boolean inital_mood_noplants = mood_noplants;
+                this.mood_noplants = false;
+                if (mood_noplants != inital_mood_noplants) {
+                    this.setMood(this.getMood() + 50);
+                }
+            }
+
+            if (this.isThereNearbyTypes() && !mood_nospace && this.ticksExisted % 1200 == 0) {
+                boolean inital_mood_nospace = mood_nospace;
+                this.mood_nospace = true;
+                if (mood_nospace != inital_mood_nospace) {
+                    this.setMood(this.getMood() - 50);
+                }
+            }
+            if (!this.isThereNearbyTypes() && this.ticksExisted % 1200 == 0) {
+                boolean inital_mood_nospace = mood_nospace;
+                this.mood_nospace = false;
+                if (mood_nospace != inital_mood_nospace) {
+                    this.setMood(this.getMood() + 50);
+                }
+            }
+
+            if (this.isSitting()) {
+                ticksSitted++;
+            }
+            if (this.isSleeping()) {
+                ticksSlept++;
+            }
+
+            if (!worldObj.isRemote && !this.isInWater() && this.riddenByEntity == null && !this.isSitting() && this.getRNG().nextInt(100) == 1 && !this.isRiding() && (this.getAnimation() == NO_ANIMATION || this.getAnimation() == SPEAK_ANIMATION) && !this.isSleeping()) {
+                this.setSitting(true);
+                ticksSitted = 0;
+            }
+
+            if (!worldObj.isRemote && !this.isInWater() && (this.isSitting() && ticksSitted > 100 && this.getRNG().nextInt(100) == 1 || this.getAttackTarget() != null) && !this.isSleeping()) {
+                this.setSitting(false);
+                ticksSitted = 0;
+            }
+            if (!worldObj.isRemote && !this.isInWater() && this.riddenByEntity == null && !this.isActuallyWeak() && this.canSleep() && this.getRNG().nextInt(100) == 1 && this.getAttackTarget() == null && (this.getAnimation() == NO_ANIMATION || this.getAnimation() == SPEAK_ANIMATION)) {
+                this.setSitting(false);
+                this.setSleeping(true);
+                ticksSlept = 0;
+            }
+
+            if (!worldObj.isRemote && (!this.canSleep() || this.isActuallyWeak() || (this.isSleeping() && ticksSlept > 200 && this.getRNG().nextInt(1000) == 1 || this.getAttackTarget() != null || this.isInWater()))) {
+                this.setSitting(false);
+                this.setSleeping(false);
+                ticksSlept = 0;
+            }
+
+            if (this.currentOrder == EnumOrderType.STAY && !this.isSitting() && !this.isActuallyWeak()) {
+                this.setSitting(true);
+                this.setSleeping(false);
+            }
+
+            if (breaksBlocks) {
+                this.breakBlock(5);
+            }
+
+            if (this.doesFlock() && flockObj == null) {
+                if (this.getNearbyFlock() != null) {
+                    this.getNearbyFlock().flockMembers.add(this);
+                } else {
+                    flockObj = new Flock();
+                    flockObj.createFlock(this);
+                }
+            }
+            if (this.flockObj != null) {
+                if (this == flockObj.flockLeader) {
+                    this.flockObj.onUpdate();
+                }
+            }
+        } else {
             this.motionX *= 0;
             this.motionY *= 0;
             this.motionZ *= 0;
-        }
-        if (this.getOwner() != null && this.getOwnerDisplayName().equals("")) {
-            this.setOwnerDisplayName(this.getOwner().getCommandSenderName());
-        }
-        if (this.getHunger() > this.getMaxHunger()) {
-            this.setHunger(this.getMaxHunger());
-        }
-        if (this.getMood() > 100) {
-            this.setMood(100);
-        }
-        if (this.getMood() < -100) {
-            this.setMood(-100);
-        }
-        if (this.ticksTillPlay > 0) {
-            this.ticksTillPlay--;
-        }
-        if (this.ticksTillMate > 0) {
-            this.ticksTillMate--;
-        }
-        if (this.getRidingPlayer() != null) {
-            this.stepHeight = 1;
-        }
-        int blockX = MathHelper.floor_double(this.posX);
-        int blockY = MathHelper.floor_double(this.boundingBox.minY) - 1;
-        int blockZ = MathHelper.floor_double(this.posZ);
-        if (this.getBlockUnder() == FABlockRegistry.INSTANCE.bubbleMachine && this.worldObj.isBlockIndirectlyGettingPowered(blockX, blockY, blockZ) && this.ticksTillPlay == 0) {
-            this.jump();
-            for (int i = 0; i < 1; ++i) {
-                double dd = this.getRNG().nextGaussian() * 0.02D;
-                double dd1 = this.getRNG().nextGaussian() * 0.02D;
-                double dd2 = this.getRNG().nextGaussian() * 0.02D;
-                Revival.PROXY.spawnPacketHeartParticles(this.worldObj, (float) (this.posX + (this.getRNG().nextFloat() * this.width * 2.0F) - this.width), (float) (this.posY + 0.5D + (this.getRNG().nextFloat() * this.height)), (float) (this.posZ + (this.getRNG().nextFloat() * this.width * 2.0F) - this.width), dd, dd1, dd2);
-            }
-            this.doPlayBonus(15);
-        }
-        if (ticksTillMate == 0 && this.getGender() == 1) {
-            this.mate();
-        }
-        if (!this.arePlantsNearby(16) && !mood_noplants && this.ticksExisted % 1200 == 0) {
-            boolean inital_mood_noplants = mood_noplants;
-            this.mood_noplants = true;
-            if (mood_noplants != inital_mood_noplants) {
-                this.setMood(this.getMood() - 50);
-            }
-        }
-        if (this.arePlantsNearby(16) && this.ticksExisted % 1200 == 0) {
-            boolean inital_mood_noplants = mood_noplants;
-            this.mood_noplants = false;
-            if (mood_noplants != inital_mood_noplants) {
-                this.setMood(this.getMood() + 50);
-            }
-        }
-
-        if (this.isThereNearbyTypes() && !mood_nospace && this.ticksExisted % 1200 == 0) {
-            boolean inital_mood_nospace = mood_nospace;
-            this.mood_nospace = true;
-            if (mood_nospace != inital_mood_nospace) {
-                this.setMood(this.getMood() - 50);
-            }
-        }
-        if (!this.isThereNearbyTypes() && this.ticksExisted % 1200 == 0) {
-            boolean inital_mood_nospace = mood_nospace;
-            this.mood_nospace = false;
-            if (mood_nospace != inital_mood_nospace) {
-                this.setMood(this.getMood() + 50);
-            }
-        }
-
-        if (this.isSitting()) {
-            ticksSitted++;
-        }
-        if (this.isSleeping()) {
-            ticksSlept++;
-        }
-
-        if (!worldObj.isRemote && !this.isInWater() && this.riddenByEntity == null && !this.isSitting() && this.getRNG().nextInt(100) == 1 && !this.isRiding() && (this.getAnimation() == NO_ANIMATION || this.getAnimation() == SPEAK_ANIMATION) && !this.isSleeping()) {
-            this.setSitting(true);
-            ticksSitted = 0;
-        }
-
-        if (!worldObj.isRemote && !this.isInWater() && (this.isSitting() && ticksSitted > 100 && this.getRNG().nextInt(100) == 1 || this.getAttackTarget() != null) && !this.isSleeping()) {
-            this.setSitting(false);
-            ticksSitted = 0;
-        }
-        if (!worldObj.isRemote && !this.isInWater() && this.riddenByEntity == null && !this.isActuallyWeak() && this.canSleep() && this.getRNG().nextInt(100) == 1 && this.getAttackTarget() == null && (this.getAnimation() == NO_ANIMATION || this.getAnimation() == SPEAK_ANIMATION)) {
-            this.setSitting(false);
-            this.setSleeping(true);
-            ticksSlept = 0;
-        }
-
-        if (!worldObj.isRemote && (!this.canSleep() || this.isActuallyWeak() || (this.isSleeping() && ticksSlept > 200 && this.getRNG().nextInt(1000) == 1 || this.getAttackTarget() != null || this.isInWater()))) {
-            this.setSitting(false);
-            this.setSleeping(false);
-            ticksSlept = 0;
-        }
-
-        if (this.currentOrder == EnumOrderType.STAY && !this.isSitting() && !this.isActuallyWeak()) {
-            this.setSitting(true);
-            this.setSleeping(false);
-        }
-
-        if (breaksBlocks) {
-            this.breakBlock(5);
-        }
-
-        if (this.doesFlock() && flockObj == null) {
-            if (this.getNearbyFlock() != null) {
-                this.getNearbyFlock().flockMembers.add(this);
-            } else {
-                flockObj = new Flock();
-                flockObj.createFlock(this);
-            }
-        }
-        if (this.flockObj != null) {
-            if (this == flockObj.flockLeader) {
-                this.flockObj.onUpdate();
-            }
         }
     }
 
@@ -626,70 +627,72 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
     @Override
     public void onUpdate() {
         super.onUpdate();
-        this.setAgeinTicks(this.getAgeInTicks() + 1);
-        if (this.getAgeInTicks() % 24000 == 0) {
-            this.updateAbilities();
-        }
+        if (!this.isSkeleton()) {
+            this.setAgeinTicks(this.getAgeInTicks() + 1);
+            if (this.getAgeInTicks() % 24000 == 0) {
+                this.updateAbilities();
+            }
 
-        if (this.getAgeInTicks() % 1200 == 0 && this.getHunger() > 0 && Revival.CONFIG.starvingDinos) {
-            this.setHunger(this.getHunger() - 1);
-        }
+            if (this.getAgeInTicks() % 1200 == 0 && this.getHunger() > 0 && Revival.CONFIG.starvingDinos) {
+                this.setHunger(this.getHunger() - 1);
+            }
 
-        boolean sitting = isSitting();
-        if (sitting && sitProgress < 20.0F) {
-            sitProgress += 0.5F;
-            if (sleepProgress != 0) {
+            boolean sitting = isSitting();
+            if (sitting && sitProgress < 20.0F) {
+                sitProgress += 0.5F;
+                if (sleepProgress != 0) {
+                    sleepProgress = 0F;
+                }
+            } else if (!sitting && sitProgress > 0.0F) {
+                sitProgress -= 0.5F;
+                if (sleepProgress != 0) {
+                    sleepProgress = 0F;
+                }
+            }
+            boolean sleeping = isSleeping();
+            if (sleeping && sleepProgress < 20.0F) {
+                sleepProgress += 0.5F;
+                if (sitProgress != 0) {
+                    sitProgress = 0F;
+                }
+            } else if (!sleeping && sleepProgress > 0.0F) {
+                sleepProgress -= 0.5F;
+                if (sitProgress != 0) {
+                    sitProgress = 0F;
+                }
+            }
+            boolean climbing = this.aiClimbType() == EnumPrehistoricAI.Climbing.ARTHROPOD && (this.isBesideClimbableBlock() && !this.onGround);
+            if (climbing && climbProgress < 20.0F) {
+                climbProgress += 1F;
+                if (sitProgress != 0) {
+                    sitProgress = 0F;
+                }
+            } else if (!climbing && climbProgress > 0.0F) {
+                climbProgress -= 1F;
+                if (sitProgress != 0) {
+                    sitProgress = 0F;
+                }
+            }
+            boolean weak = this.isActuallyWeak();
+            if (weak && weakProgress < 20.0F) {
+                weakProgress += 0.5F;
+                sitProgress = 0F;
+                sleepProgress = 0F;
+            } else if (!weak && weakProgress > 0.0F) {
+                weakProgress -= 0.5F;
+                sitProgress = 0F;
                 sleepProgress = 0F;
             }
-        } else if (!sitting && sitProgress > 0.0F) {
-            sitProgress -= 0.5F;
-            if (sleepProgress != 0) {
-                sleepProgress = 0F;
+            if (!this.worldObj.isRemote) {
+                if (this.aiClimbType() == EnumPrehistoricAI.Climbing.ARTHROPOD) {
+                    this.setBesideClimbableBlock(this.isCollidedHorizontally);
+                } else {
+                    this.setBesideClimbableBlock(false);
+                }
             }
+            Revival.PROXY.calculateChainBuffer(this);
+            AnimationHandler.INSTANCE.updateAnimations(this);
         }
-        boolean sleeping = isSleeping();
-        if (sleeping && sleepProgress < 20.0F) {
-            sleepProgress += 0.5F;
-            if (sitProgress != 0) {
-                sitProgress = 0F;
-            }
-        } else if (!sleeping && sleepProgress > 0.0F) {
-            sleepProgress -= 0.5F;
-            if (sitProgress != 0) {
-                sitProgress = 0F;
-            }
-        }
-        boolean climbing = this.aiClimbType() == EnumPrehistoricAI.Climbing.ARTHROPOD && (this.isBesideClimbableBlock() && !this.onGround);
-        if (climbing && climbProgress < 20.0F) {
-            climbProgress += 1F;
-            if (sitProgress != 0) {
-                sitProgress = 0F;
-            }
-        } else if (!climbing && climbProgress > 0.0F) {
-            climbProgress -= 1F;
-            if (sitProgress != 0) {
-                sitProgress = 0F;
-            }
-        }
-        boolean weak = this.isActuallyWeak();
-        if (weak && weakProgress < 20.0F) {
-            weakProgress += 0.5F;
-            sitProgress = 0F;
-            sleepProgress = 0F;
-        } else if (!weak && weakProgress > 0.0F) {
-            weakProgress -= 0.5F;
-            sitProgress = 0F;
-            sleepProgress = 0F;
-        }
-        if (!this.worldObj.isRemote) {
-            if (this.aiClimbType() == EnumPrehistoricAI.Climbing.ARTHROPOD) {
-                this.setBesideClimbableBlock(this.isCollidedHorizontally);
-            } else {
-                this.setBesideClimbableBlock(false);
-            }
-        }
-        Revival.PROXY.calculateChainBuffer(this);
-        AnimationHandler.INSTANCE.updateAnimations(this);
     }
 
     @Override
