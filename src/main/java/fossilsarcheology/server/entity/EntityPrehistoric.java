@@ -650,48 +650,26 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
             boolean sitting = isSitting();
             if (sitting && sitProgress < 20.0F) {
                 sitProgress += 0.5F;
-                if (sleepProgress != 0) {
-                    sleepProgress = 0F;
-                }
             } else if (!sitting && sitProgress > 0.0F) {
                 sitProgress -= 0.5F;
-                if (sleepProgress != 0) {
-                    sleepProgress = 0F;
-                }
             }
             boolean sleeping = isSleeping();
             if (sleeping && sleepProgress < 20.0F) {
                 sleepProgress += 0.5F;
-                if (sitProgress != 0) {
-                    sitProgress = 0F;
-                }
             } else if (!sleeping && sleepProgress > 0.0F) {
                 sleepProgress -= 0.5F;
-                if (sitProgress != 0) {
-                    sitProgress = 0F;
-                }
             }
             boolean climbing = this.aiClimbType() == EnumPrehistoricAI.Climbing.ARTHROPOD && (this.isBesideClimbableBlock() && !this.onGround);
             if (climbing && climbProgress < 20.0F) {
                 climbProgress += 1F;
-                if (sitProgress != 0) {
-                    sitProgress = 0F;
-                }
             } else if (!climbing && climbProgress > 0.0F) {
                 climbProgress -= 1F;
-                if (sitProgress != 0) {
-                    sitProgress = 0F;
-                }
             }
             boolean weak = this.isActuallyWeak();
             if (weak && weakProgress < 20.0F) {
                 weakProgress += 0.5F;
-                sitProgress = 0F;
-                sleepProgress = 0F;
             } else if (!weak && weakProgress > 0.0F) {
                 weakProgress -= 0.5F;
-                sitProgress = 0F;
-                sleepProgress = 0F;
             }
             if (!this.worldObj.isRemote) {
                 if (this.aiClimbType() == EnumPrehistoricAI.Climbing.ARTHROPOD) {
