@@ -561,8 +561,7 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
                 ticksSlept = 0;
             }
 
-            if(this.isSleeping() && ticksExisted % 15 == 0){
-                System.out.println("spaning");
+            if(this.isSleeping() && ticksExisted % 60 == 0){
                     Random rand = new Random();
                     double motionY = rand.nextGaussian() * 0.07D;
                     float f = (float) (rand.nextFloat() * (this.boundingBox.maxX - this.boundingBox.minX) + this.boundingBox.minX);

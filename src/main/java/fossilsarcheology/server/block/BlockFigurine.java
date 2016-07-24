@@ -7,6 +7,7 @@ import fossilsarcheology.server.handler.LocalizationStrings;
 import fossilsarcheology.server.item.block.FigurineBlockItem;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -26,6 +27,7 @@ public class BlockFigurine extends BlockContainer implements IBlockItem {
     public static final String[] shortname = {"figurine_steve_pristine", "figurine_skeleton_pristine", "figurine_zombie_pristine", "figurine_pigzombie_pristine", "figurine_enderman_pristine", "figurine_steve_damaged", "figurine_skeleton_damaged", "figurine_zombie_damaged", "figurine_pigzombie_damaged", "figurine_enderman_damaged", "figurine_steve_broken", "figurine_skeleton_broken", "figurine_zombie_broken", "figurine_pigzombie_broken", "figurine_enderman_broken", "figurine_mysterious",};
 
     private IIcon[] icons;
+    private int getMeta;
 
     public BlockFigurine() {
         super(Material.wood);
@@ -72,19 +74,25 @@ public class BlockFigurine extends BlockContainer implements IBlockItem {
     }
 
     @Override
+    public void breakBlock(World world, int x, int y, int z, Block oldBlock, int oldMeta) {
+        this.getMeta = getDamageValue(world, x, y, z);
+        super.breakBlock(world, x, y, z, oldBlock, oldMeta);
+    }
+
+    @Override
     public TileEntity createNewTileEntity(World world, int par2) {
         return new TileEntityFigurine();
     }
 
     @Override
-    public int getDamageValue(World par1World, int par2, int par3, int par4) {
-        TileEntity tileentity = par1World.getTileEntity(par2, par3, par4);
-        return tileentity != null && tileentity instanceof TileEntityFigurine ? ((TileEntityFigurine) tileentity).getFigurineType() : super.getDamageValue(par1World, par2, par3, par4);
+    public int getDamageValue(World world, int x, int y, int z) {
+        TileEntity tileentity = world.getTileEntity(x, y, z);
+        return tileentity != null && tileentity instanceof TileEntityFigurine ? ((TileEntityFigurine) tileentity).getFigurineType() : super.getDamageValue(world, x, y, z);
     }
 
     @Override
     public int damageDropped(int meta) {
-        return meta;
+        return this.getMeta;
     }
 
     @Override
