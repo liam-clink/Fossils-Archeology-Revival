@@ -1,6 +1,7 @@
 package fossilsarcheology.client;
 
 import fossilsarcheology.client.model.prehistoric.*;
+import fossilsarcheology.client.render.particle.SleepFX;
 import fossilsarcheology.server.entity.mob.*;
 import net.ilexiconn.llibrary.client.lang.LanguageHandler;
 import net.minecraft.block.Block;
@@ -256,6 +257,10 @@ public class ClientProxy extends ServerProxy {
 
     public void spawnBubbleParticles(World world, float f, float f1, float f2, double motionX, double motionY, double motionZ) {
         Minecraft.getMinecraft().effectRenderer.addEffect(new BubbleFX(world, f, f1, f2, motionX, motionY, motionZ));
+    }
+
+    public void spawnSleepParticles(World world, float f, float f1, float f2, double motionX, double motionY, double motionZ) {
+            Minecraft.getMinecraft().effectRenderer.addEffect(new SleepFX(world, f, f1, f2, motionX, motionY, motionZ));
     }
 
     public void spawnPacketHeartParticles(World world, float f, float f1, float f2, double motionX, double motionY, double motionZ) {

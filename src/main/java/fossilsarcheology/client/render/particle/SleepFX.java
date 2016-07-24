@@ -19,7 +19,7 @@ public class SleepFX extends EntityFX {
     float smokeParticleScale;
 
     public SleepFX(World world, double x, double y, double z, double ix, double iy, double iz) {
-        this(world, x, y, z, ix, iy, iz, 1.0F);
+        this(world, x, y, z, ix, iy, iz, 2.0F);
     }
 
     public SleepFX(World world, double x, double y, double z, double ix, double iy, double iz, float i) {
@@ -45,7 +45,7 @@ public class SleepFX extends EntityFX {
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         FMLClientHandler.instance().getClient().renderEngine.bindTexture(textures);
-        float sizeFactor = 0.1F * particleScale;
+        float sizeFactor = 0.1F * particleScale  *  (Math.max(0, particleMaxAge - this.particleAge)) * 0.02F;
         float var13 = (float) (prevPosX + (posX - prevPosX) * par2 - EntityFX.interpPosX);
         float var14 = (float) (prevPosY + (posY - prevPosY) * par2 - EntityFX.interpPosY);
         float var15 = (float) (prevPosZ + (posZ - prevPosZ) * par2 - EntityFX.interpPosZ);

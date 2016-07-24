@@ -78,4 +78,7 @@ public class ServerProxy {
 
     public void spawnPacketBlockParticles(World world, float f, float f1, float f2, double motionX, double motionY, double motionZ, Block block) {
     }
+
+    public void spawnSleepParticles(World world, float f, float f1, float f2, double motionX, double motionY, double motionZ) {
+    }
 }

@@ -74,6 +74,8 @@ public class FossilConfig {
     public boolean featheredTherizinosaurus = true;
     @ConfigEntry(category = "dinosaurs")
     public boolean eggsLikeChickens = false;
+    @ConfigEntry(category = "dinosaurs")
+    public boolean sleepingParticles = true;
     @ConfigEntry(category = "ids")
     public int biomeIDDarknessLair = 128;
     @ConfigEntry(category = "ids")

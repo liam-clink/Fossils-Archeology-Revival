@@ -561,6 +561,16 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
                 ticksSlept = 0;
             }
 
+            if(this.isSleeping() && ticksExisted % 15 == 0){
+                System.out.println("spaning");
+                    Random rand = new Random();
+                    double motionY = rand.nextGaussian() * 0.07D;
+                    float f = (float) (rand.nextFloat() * (this.boundingBox.maxX - this.boundingBox.minX) + this.boundingBox.minX);
+                    float f1 = (float) (rand.nextFloat() * (this.boundingBox.maxY - this.boundingBox.minY) + this.boundingBox.minY);
+                    float f2 = (float) (rand.nextFloat() * (this.boundingBox.maxZ - this.boundingBox.minZ) + this.boundingBox.minZ);
+                    Revival.PROXY.spawnSleepParticles(this.worldObj, f, f1, f2, 0, motionY, 0);
+            }
+
             if (this.currentOrder == EnumOrderType.STAY && !this.isSitting() && !this.isActuallyWeak()) {
                 this.setSitting(true);
                 this.setSleeping(false);
@@ -640,48 +650,26 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
             boolean sitting = isSitting();
             if (sitting && sitProgress < 20.0F) {
                 sitProgress += 0.5F;
-                if (sleepProgress != 0) {
-                    sleepProgress = 0F;
-                }
             } else if (!sitting && sitProgress > 0.0F) {
                 sitProgress -= 0.5F;
-                if (sleepProgress != 0) {
-                    sleepProgress = 0F;
-                }
             }
             boolean sleeping = isSleeping();
             if (sleeping && sleepProgress < 20.0F) {
                 sleepProgress += 0.5F;
-                if (sitProgress != 0) {
-                    sitProgress = 0F;
-                }
             } else if (!sleeping && sleepProgress > 0.0F) {
                 sleepProgress -= 0.5F;
-                if (sitProgress != 0) {
-                    sitProgress = 0F;
-                }
             }
             boolean climbing = this.aiClimbType() == EnumPrehistoricAI.Climbing.ARTHROPOD && (this.isBesideClimbableBlock() && !this.onGround);
             if (climbing && climbProgress < 20.0F) {
                 climbProgress += 1F;
-                if (sitProgress != 0) {
-                    sitProgress = 0F;
-                }
             } else if (!climbing && climbProgress > 0.0F) {
                 climbProgress -= 1F;
-                if (sitProgress != 0) {
-                    sitProgress = 0F;
-                }
             }
             boolean weak = this.isActuallyWeak();
             if (weak && weakProgress < 20.0F) {
                 weakProgress += 0.5F;
-                sitProgress = 0F;
-                sleepProgress = 0F;
             } else if (!weak && weakProgress > 0.0F) {
                 weakProgress -= 0.5F;
-                sitProgress = 0F;
-                sleepProgress = 0F;
             }
             if (!this.worldObj.isRemote) {
                 if (this.aiClimbType() == EnumPrehistoricAI.Climbing.ARTHROPOD) {
@@ -1500,7 +1488,7 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
                 }
             }
         }
-        if (!listOfFemales.isEmpty() && this.ticksTillMate == 0) {
+        if (!listOfFemales.isEmpty() && this.ticksTillMate == 0 && Revival.CONFIG.allowBreeding) {
             EntityPrehistoric prehistoric = listOfFemales.get(0);
             if (prehistoric.ticksTillMate == 0) {
                 this.getNavigator().tryMoveToEntityLiving(prehistoric, 1);
