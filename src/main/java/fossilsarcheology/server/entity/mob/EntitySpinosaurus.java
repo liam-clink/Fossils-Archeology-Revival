@@ -63,7 +63,7 @@ public class EntitySpinosaurus extends EntityPrehistoricSwimming {
         this.hasBabyTexture = true;
 		this.ridingY = 1.21F;
 		this.ridingXZ = -0.3F;
-        this.pediaScale = 26F;
+        this.pediaScale = 40F;
     }
 
     @Override
