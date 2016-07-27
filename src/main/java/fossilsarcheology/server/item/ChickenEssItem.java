@@ -24,6 +24,12 @@ public class ChickenEssItem extends ForgeFoodItem {
     }
 
     @Override
+    public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player)
+    {
+        return itemStack;
+    }
+
+    @Override
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean i) {
         list.add("Feed this to your dinosaurs to make them grow!");
