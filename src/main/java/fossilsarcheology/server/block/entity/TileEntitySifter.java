@@ -326,28 +326,34 @@ public class TileEntitySifter extends TileEntity implements IInventory, ISidedIn
                     }
                 }
             }
-                if (result != null) {
-                    for (int slots = 1; slots < 5; slots++) {
-                        ItemStack stackInSlot = this.sifterItemStacks[slots];
-                        if (stackInSlot != null) {
-                            if (stackInSlot.isItemEqual(result) && stackInSlot.stackSize + result.stackSize < 64) {
-                                stackInSlot.stackSize += result.stackSize;
-                                if (this.sifterItemStacks[this.RawIndex].stackSize > 1) {
-                                    this.sifterItemStacks[this.RawIndex].stackSize--;
-                                } else {
-                                    this.sifterItemStacks[this.RawIndex] = null;
-                                }
-                                break;
-                            }
-                        } else if (stackInSlot == null) {
-                            this.sifterItemStacks[slots] = result;
+            if (result != null) {
+                for (int slots = 1; slots < 5; slots++) {
+                    ItemStack stackInSlot = this.sifterItemStacks[slots];
+                    if (stackInSlot != null) {
+                        if (stackInSlot.isItemEqual(result) && stackInSlot.stackSize + result.stackSize < 64) {
+                            stackInSlot.stackSize += result.stackSize;
                             if (this.sifterItemStacks[this.RawIndex].stackSize > 1) {
                                 this.sifterItemStacks[this.RawIndex].stackSize--;
                             } else {
                                 this.sifterItemStacks[this.RawIndex] = null;
                             }
                             break;
-                     }
+                        }
+                    } else if (stackInSlot == null) {
+                        this.sifterItemStacks[slots] = result;
+                        if (this.sifterItemStacks[this.RawIndex].stackSize > 1) {
+                            this.sifterItemStacks[this.RawIndex].stackSize--;
+                        } else {
+                            this.sifterItemStacks[this.RawIndex] = null;
+                        }
+                        break;
+                    }
+                }
+            } else {
+                if (this.sifterItemStacks[this.RawIndex].stackSize > 1) {
+                    this.sifterItemStacks[this.RawIndex].stackSize--;
+                } else {
+                    this.sifterItemStacks[this.RawIndex] = null;
                 }
             }
         }
