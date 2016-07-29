@@ -1147,11 +1147,11 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
                     return false;
                 }
 
-                if (FoodMappings.INSTANCE.getItemFoodAmount(itemstack.getItem(), this.type.diet) != 0) {
+                if (FoodMappings.INSTANCE.getItemFoodAmount(itemstack, this.type.diet) != 0) {
                     if (!player.worldObj.isRemote) {
                         if (this.getMaxHunger() > this.getHunger() || this.getHealth() > this.getMaxHealth() && Revival.CONFIG.healingDinos) {
 
-                            this.setHunger(this.getHunger() + FoodMappings.INSTANCE.getItemFoodAmount(itemstack.getItem(), this.type.diet));
+                            this.setHunger(this.getHunger() + FoodMappings.INSTANCE.getItemFoodAmount(itemstack, this.type.diet));
                             if (!worldObj.isRemote) {
                                 this.eatItem(itemstack);
                             }
@@ -1635,11 +1635,11 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
 
     public void eatItem(ItemStack stack) {
         if (stack != null && stack.stackSize > 0 && stack.getItem() != null) {
-            if (FoodMappings.INSTANCE.getItemFoodAmount(stack.getItem(), type.diet) != 0) {
+            if (FoodMappings.INSTANCE.getItemFoodAmount(stack, type.diet) != 0) {
                 this.setMood(this.getMood() + 5);
                 doFoodEffect(stack.getItem());
                 Revival.NETWORK_WRAPPER.sendToAll(new MessageFoodParticles(getEntityId(), Item.getIdFromItem(stack.getItem())));
-                this.setHunger(this.getHunger() + FoodMappings.INSTANCE.getItemFoodAmount(stack.getItem(), type.diet));
+                this.setHunger(this.getHunger() + FoodMappings.INSTANCE.getItemFoodAmount(stack, type.diet));
                 stack.stackSize--;
             }
         }

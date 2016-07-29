@@ -183,10 +183,10 @@ public class TileEntityFeeder extends TileEntity implements IInventory, ISidedIn
 
     @Override
     public boolean isItemValidForSlot(int i, ItemStack stack) {
-        if (stack != null && stack.getItem() != null) {
-            if(FoodMappings.INSTANCE.getItemFoodAmount(stack.getItem(), EnumDiet.HERBIVORE) != 0 && i == 1) {
+        if (stack != null && stack != null) {
+            if(FoodMappings.INSTANCE.getItemFoodAmount(stack, EnumDiet.HERBIVORE) != 0 && i == 1) {
                 return true;
-            }else if(FoodMappings.INSTANCE.getItemFoodAmount(stack.getItem(), EnumDiet.CARNIVORE_EGG) != 0 && i == 0){
+            }else if(FoodMappings.INSTANCE.getItemFoodAmount(stack, EnumDiet.CARNIVORE_EGG) != 0 && i == 0){
                 return true;
             }
         }
@@ -239,7 +239,7 @@ public class TileEntityFeeder extends TileEntity implements IInventory, ISidedIn
             if (this.feederItemStacks[0] != null && this.feederItemStacks[0].getItem() != null) {
                 {
                     if (this.currentMeat < this.maxMeat) {
-                        int carnivoreValue = FoodMappings.INSTANCE.getItemFoodAmount(this.feederItemStacks[0].getItem(), EnumDiet.CARNIVORE_EGG);
+                        int carnivoreValue = FoodMappings.INSTANCE.getItemFoodAmount(this.feederItemStacks[0], EnumDiet.CARNIVORE_EGG);
                         if (carnivoreValue != 0) {
                             int foodLeft = this.maxMeat - this.currentMeat;
                             if (carnivoreValue > foodLeft) {
@@ -259,7 +259,7 @@ public class TileEntityFeeder extends TileEntity implements IInventory, ISidedIn
             if (this.feederItemStacks[1] != null && this.feederItemStacks[1].getItem() != null) {
                 {
                     if (this.currentPlant < this.maxPlant) {
-                        int herbivoreValue = FoodMappings.INSTANCE.getItemFoodAmount(this.feederItemStacks[1].getItem(), EnumDiet.HERBIVORE);
+                        int herbivoreValue = FoodMappings.INSTANCE.getItemFoodAmount(this.feederItemStacks[1], EnumDiet.HERBIVORE);
                         if (herbivoreValue != 0) {
                             int foodLeft = this.maxPlant - this.currentPlant;
                             if (herbivoreValue > foodLeft) {

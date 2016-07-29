@@ -14,6 +14,7 @@ import fossilsarcheology.server.enums.EnumPrehistoric;
 import net.ilexiconn.llibrary.LLibrary;
 import net.ilexiconn.llibrary.client.util.ClientUtils;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.ScaledResolution;
@@ -78,9 +79,6 @@ public class GuiPedia extends GuiScreen {
         sorter = new FoodSorter();
     }
 
-    /**
-     * Adds the buttons (and other controls) to the screen in question.
-     */
     @Override
     public void initGui() {
         buttonList.clear();
@@ -102,38 +100,16 @@ public class GuiPedia extends GuiScreen {
         }
     }
 
-    /*
-     * Resets the y-offset for left and right side
-     */
     public void reset() {
         this.left = 0;
         this.right = 0;
         this.items = 0;
     }
 
-    /**
-     * Print a String to left or Right, starting with line 0
-     */
-    public void printStringLR(String string, boolean left0, int line) {
-        this.fontRendererObj.drawString(string, 70 + (left0 ? 0 : 81), 12 * (line + 1), 4210752);
-    }
-
-    public void printStringLR(String string, boolean left0, int line, int r, int g, int b) {
-        int col = (r << 16) | (g << 8) | b;
-        this.fontRendererObj.drawString(string, 70 + (left0 ? 0 : 81), 12 * (line + 1), col);
-    }
-
-    /**
-     * Add a String to the left or right side, starting with 0
-     */
     public void addStringLR(String string, boolean left0) {
         this.fontRendererObj.drawString(string, 30 + (left0 ? 0 : 121), 12 * ((left0 ? this.left++ : this.right++) + 1), 4210752);
     }
 
-    /**
-     * Add a String to the left or right side, starting with 0 Also set the
-     * offset for margin position. Useful when using odd sized text.
-     */
     public void addStringLR(String string, int marginOffset, boolean left0) {
         this.fontRendererObj.drawString(string, 30 + (left0 ? marginOffset : 121 + marginOffset), 12 * ((left0 ? this.left++ : this.right++) + 1), 0X9D7E67);
     }
@@ -143,28 +119,13 @@ public class GuiPedia extends GuiScreen {
         this.fontRendererObj.drawString(string, 30 + (left0 ? 0 : 121), 12 * ((left0 ? this.left++ : this.right++) + 1), col);
     }
 
-    /**
-     * Print a String to X,Y
-     */
-    public void printStringXY(String string, int x, int y) {
-        this.fontRendererObj.drawString(string, x, y, 4210752);
-    }
-
     public void printStringXY(String str0, int x0, int y0, int r, int g, int b) {
         int col = (r << 16) | (g << 8) | b;
         this.fontRendererObj.drawString(str0, x0, y0, col);
     }
 
-    /**
-     * Print a Symbol at X,Y with zoom factor zoom: x*16 pixels. 0 means 8,-1
-     * means 4
-     */
-    public void printItemXY(Item item, int x, int y) {
-        this.printItemXY(item, x, y, 100);
-    }
-
-    public boolean printItemXY(Item item, int x, int y, int zoom) {
-        if (item instanceof ItemBlock) {
+    public boolean printItemXY(ItemStack item, int x, int y, int zoom) {
+        if (item.getItem() instanceof ItemBlock) {
 
         } else {
             ScaledResolution scaledResolution = new ScaledResolution(mc, mc.displayWidth, mc.displayHeight);
@@ -191,17 +152,17 @@ public class GuiPedia extends GuiScreen {
 
             GL11.glDisable(GL11.GL_LIGHTING);
             this.mc.getTextureManager().bindTexture(TextureMap.locationItemsTexture);
-            if (item != null) {
-                IIcon icon = item.getIconFromDamage(0);
+            if (item != null && item.getItem() != null) {
                 GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-                if (icon != null) {
+                if (item.getIconIndex() != null) {
+                    IIcon icon = item.getIconIndex();
                     this.drawTexturedModelRectFromIcon(x, y, icon, drawSize, drawSize);
                 }
                 GL11.glEnable(GL11.GL_LIGHTING);
                 if (mouseX > x && mouseX < x + drawSize) {
                     if (mouseY > y && mouseY < y + drawSize) {
                         List<String> text = new ArrayList<String>();
-                        String s1 = (new ItemStack(item)).getDisplayName();
+                        String s1 = item.getDisplayName();
                         text.add(s1);
                         this.drawHoveringText(text, (-this.fontRendererObj.getStringWidth(s1) / 2) + 280, 222, fontRendererObj);
                     }
@@ -212,7 +173,7 @@ public class GuiPedia extends GuiScreen {
         return false;
     }
 
-    public void addMiniItem(Item item) {
+    public void addMiniItem(ItemStack item) {
         if (this.printItemXY(item, 230 + 16 * (items % 8), 70 + 16 * (items / 8), 1)) {
             items++;
         }
@@ -619,12 +580,12 @@ public class GuiPedia extends GuiScreen {
                     }
                 }
             }
-            Map<Item, Integer> foodMap = FoodMappings.INSTANCE.getFoodRenderList(dino.type.diet);
-            List<Item> keys = Collections.list(Collections.enumeration(foodMap.keySet()));
+            Map<ItemStack, Integer> foodMap = FoodMappings.INSTANCE.getFoodRenderList(dino.type.diet);
+            List<ItemStack> keys = Collections.list(Collections.enumeration(foodMap.keySet()));
             Collections.sort(keys, this.sorter);
-            Item[] keyArray = keys.toArray(new Item[0]);
-            for (Item item : keyArray) {
-                if (items < 64 && !(item instanceof ItemBlock)) {
+            ItemStack[] keyArray = keys.toArray(new ItemStack[0]);
+            for (ItemStack item : keyArray) {
+                if (items < 64) {
                     addMiniItem(item);
                 }
             }
@@ -834,15 +795,20 @@ public class GuiPedia extends GuiScreen {
         public FoodSorter() {
         }
 
-        public int compareFoods(Item var1, Item var2) {
-            double var3 = Item.getIdFromItem(var1);
-            double var5 = Item.getIdFromItem(var2);
+        public int compareFoods(ItemStack var1, ItemStack var2) {
+            double var3 = Item.getIdFromItem(var1.getItem());
+            double var5 = Item.getIdFromItem(var2.getItem());
+            if(var3 == var5 && var1.getItem() != null && var2.getItem() != null){
+                double var6 = var1.getItemDamage();
+                double var7 = var2.getItemDamage();
+                return var6 < var7 ? -1 : (var6 > var7 ? 1 : 0);
+            }
             return var3 < var5 ? -1 : (var3 > var5 ? 1 : 0);
         }
 
         @Override
         public int compare(Object var1, Object var2) {
-            return this.compareFoods((Item) var1, (Item) var2);
+            return this.compareFoods((ItemStack) var1, (ItemStack) var2);
         }
     }
 }

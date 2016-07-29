@@ -91,7 +91,7 @@ public class DinoAIEatItems extends EntityAIBase {
 
 			EntityItem entityItem1 = (EntityItem) iterateNearbyItems.next();
 			if (entityItem1.getEntityItem() != null && entityItem1.getEntityItem().getItem() != null)
-				if ((FoodMappings.INSTANCE.getItemFoodAmount(entityItem1.getEntityItem().getItem(), prehistoric.type.diet) != 0) && this.prehistoric.getDistanceSqToEntity(entityItem1) < range) {
+				if ((FoodMappings.INSTANCE.getItemFoodAmount(entityItem1.getEntityItem(), prehistoric.type.diet) != 0) && this.prehistoric.getDistanceSqToEntity(entityItem1) < range) {
 					entityItem = entityItem1;
 				}
 		}

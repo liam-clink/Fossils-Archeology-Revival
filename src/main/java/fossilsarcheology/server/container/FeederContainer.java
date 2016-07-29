@@ -101,14 +101,14 @@ public class FeederContainer extends Container {
             // inventory
             {
                 // if it can be smelted, place in the input slots
-                if (FoodMappings.INSTANCE.getItemFoodAmount(itemstack1.getItem(), EnumDiet.CARNIVORE_EGG) != 0) {
+                if (FoodMappings.INSTANCE.getItemFoodAmount(itemstack1, EnumDiet.CARNIVORE_EGG) != 0) {
                     // try to place in either Input slot; add 1 to final input
                     // slot because mergeItemStack uses < index
                     if (!this.mergeItemStack(itemstack1, 0, 1, false)) {
                         return null;
                     }
                 }
-                if (FoodMappings.INSTANCE.getItemFoodAmount(itemstack1.getItem(), EnumDiet.HERBIVORE) != 0) {
+                if (FoodMappings.INSTANCE.getItemFoodAmount(itemstack1, EnumDiet.HERBIVORE) != 0) {
                     // try to place in either Input slot; add 1 to final input
                     // slot because mergeItemStack uses < index
                     if (!this.mergeItemStack(itemstack1, 1, 2, false)) {
