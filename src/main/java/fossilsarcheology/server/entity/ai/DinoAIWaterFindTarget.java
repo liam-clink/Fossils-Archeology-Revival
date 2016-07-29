@@ -1,5 +1,7 @@
 package fossilsarcheology.server.entity.ai;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.material.Material;
@@ -65,13 +67,19 @@ public class DinoAIWaterFindTarget extends EntityAIBase {
 				return Vec3.createVectorHelper(blockpos1.posX, blockpos1.posY, blockpos1.posZ);
 			}
 		}
-
 		if (prehistoric.getAttackTarget() == null) {
-			for (int i = 0; i < 10; ++i) {
-				ChunkCoordinates blockpos1 = new ChunkCoordinates((int) this.prehistoric.posX + ((4 + random.nextInt(10)) * (random.nextBoolean() ? -1 : 1)), (int) this.prehistoric.posY + (prehistoric.onGround ? 1 + random.nextInt(6) : (random.nextInt(6) * (random.nextBoolean() ? -1 : 1))), (int) this.prehistoric.posZ + ((4 + random.nextInt(10)) * (random.nextBoolean() ? -1 : 1)));
-				if (canGoToBlock(blockpos1.posX, blockpos1.posY, blockpos1.posZ)) {
-					return Vec3.createVectorHelper(blockpos1.posX, blockpos1.posY, blockpos1.posZ);
+			List<Vec3> water = new ArrayList<Vec3>();
+			for(int x = (int)prehistoric.posX - 5; x < (int)prehistoric.posX + 5; x++){
+				for(int y = (int)prehistoric.posY - 5; y < (int)prehistoric.posY + 5; y++){
+					for(int z = (int)prehistoric.posZ - 5; z < (int)prehistoric.posZ + 5; z++){
+						if(prehistoric.isDirectPathBetweenPoints(prehistoric.getPosition(), Vec3.createVectorHelper(x, y, z))) {
+							water.add(Vec3.createVectorHelper(x, y, z));
+						}
+					}
 				}
+			}
+			if(!water.isEmpty()){
+				return water.get(prehistoric.getRNG().nextInt(water.size()));
 			}
 		} else {
 			ChunkCoordinates blockpos1 = new ChunkCoordinates((int) prehistoric.getAttackTarget().posX, (int) prehistoric.getAttackTarget().posY, (int) prehistoric.getAttackTarget().posZ);

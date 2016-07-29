@@ -120,6 +120,12 @@ public enum EnumPrehistoric {
     Therizinosaurus(
 		    EntityTherizinosaurus.class, EnumMobType.DINOSAUR,
 		    EnumTimePeriod.MESOZOIC, EnumDiet.HERBIVORE, I.MODEL | I.TAME | I.HERBIVORE, true, 0X322212, 0XCA9C72, 0.8F),
+	Icthyosaurus(
+			EntityIcthyosaurus.class, EnumMobType.DINOSAUR,
+			EnumTimePeriod.MESOZOIC, EnumDiet.PISCIVORE, I.MODEL | I.TAME, true, 0XC2B092, 0X3E3D3C, 0.8F),
+	Henodus(
+			EntityHenodus.class, EnumMobType.DINOSAUR,
+			EnumTimePeriod.MESOZOIC, EnumDiet.HERBIVORE, I.MODEL | I.TAME, true, 0X9C8060, 0X43281A, 0.5F),
 	Parasaurolophus(
 			EntityParasaurolophus.class, EnumMobType.DINOSAUR,
 			EnumTimePeriod.MESOZOIC, EnumDiet.HERBIVORE, I.MODEL | I.TAME | I.HERBIVORE, true, 0X7E8E30, 0X4C5438, 1F),
@@ -740,30 +746,11 @@ public enum EnumPrehistoric {
     }
 
     public boolean isAquatic() {
-	return this == Plesiosaur || this == Mosasaurus || this == Liopleurodon;
-    }
-
-    /**
-     * sets the breeding time, the aging time and the hungry-level Hungry level
-     * h:below h*MaxHunger, the dinos starts looking for food, below
-     * (1-h)*Maxhunger, the dino is starving
-     */
-    private void setExperience(float E0, float EInc) {
-	if (E0 > 0) {
-	    this.Exp0 = E0;
-	}
-
-	if (EInc > 0) {
-	    this.ExpInc = EInc;
-	}
+		return this == Plesiosaur || this == Mosasaurus || this == Liopleurodon || this == Icthyosaurus;
     }
 
     public Class getDinoClass() {
 	return this.dinoClass;
-    }
-
-    public boolean isModelable() {
-	return (this.Flags & I.MODEL) != 0;
     }
 
     public boolean isTameable() {
@@ -771,16 +758,7 @@ public enum EnumPrehistoric {
     }
 
     public boolean isRideable() {
-	return (this.Flags & I.RIDE) != 0;
-    }
-
-    public boolean canCarryItems() {
-	return (this.Flags & I.CARRY) != 0;
-    }
-
-    public boolean useFeeder() {
-	return this.diet != EnumDiet.NONE && this.diet != EnumDiet.INSECTIVORE
-		&& this.diet != EnumDiet.PISCIVORE;
+		return (this.Flags & I.RIDE) != 0;
     }
 
     public boolean isHerbivore() {
@@ -794,16 +772,10 @@ public enum EnumPrehistoric {
 
 interface I {
     int NOTHING = 0;
-
-    int NO_FEEDER = 0;// Bits 0+1: Dinos Can't use Feeder at all
     int HERBIVORE = 1;// Bit 0: Dino can use Herbivore Part of Feeder
     int CARNIVORE = 2;// Bit 1: Dino can use Carnivore Part of Feeder
     int HERB_CARN = 3;// Bits 0+1: Dinos can use Herbivore and Carnivore Part of
-    // Feeder
-
     int MODEL = 1 << 2; // Bit 2: Dino is Modelable
     int TAME = 1 << 3; // Bit 3: Dino is Tameable
     int RIDE = 1 << 4; // Bit 4: Dino is Rideable
-    int CARRY = 1 << 5; // Bit 5: Dino can Carry Items
-
 }

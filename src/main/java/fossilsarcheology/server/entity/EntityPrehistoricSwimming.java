@@ -127,7 +127,9 @@ public abstract class EntityPrehistoricSwimming extends EntityPrehistoric {
 				this.motionZ *= (double) f4;
 			} else {
 				float f2 = 0.91F;
-
+				if (this.onGround && this.isInWater()) {
+					this.jump();
+				}
 				if (this.onGround && !this.isInWater()) {
 					f2 = this.worldObj.getBlock(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.boundingBox.minY) - 1, MathHelper.floor_double(this.posZ)).slipperiness * 0.91F;
 				}
