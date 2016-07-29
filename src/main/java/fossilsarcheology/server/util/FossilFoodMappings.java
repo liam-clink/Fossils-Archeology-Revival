@@ -55,6 +55,7 @@ public class FossilFoodMappings {
         FoodMappings.INSTANCE.addPlant(Blocks.reeds, 15);
         FoodMappings.INSTANCE.addPlant(Blocks.sapling, 15);
         FoodMappings.INSTANCE.addPlant(Blocks.tallgrass, 5);
+        FoodMappings.INSTANCE.addPlant(Blocks.waterlily, 15);
         FoodMappings.INSTANCE.addPlant(FABlockRegistry.INSTANCE.ferns, 55);
         FoodMappings.INSTANCE.addPlant(FABlockRegistry.INSTANCE.palmLeaves, 40);
         
