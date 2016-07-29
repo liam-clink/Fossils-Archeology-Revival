@@ -12,7 +12,6 @@ import fossilsarcheology.server.enums.EnumPrehistoric;
 
 public abstract class EntityPrehistoricSwimming extends EntityPrehistoric {
 
-	public boolean movesOnLand;
 	public ChunkCoordinates currentTarget;
 	protected boolean isAmphibious;
 	public Animation FISH_ANIMATION;
@@ -110,11 +109,9 @@ public abstract class EntityPrehistoricSwimming extends EntityPrehistoric {
 	public void moveEntityWithHeadingWater(float x, float z) {
 		double d0;
 		float f6;
-
 		if (!worldObj.isRemote) {
 			float f4;
 			float f5;
-
 			if (this.isInWater()) {
 				d0 = this.posY;
 				f4 = 0.8F;
@@ -133,22 +130,17 @@ public abstract class EntityPrehistoricSwimming extends EntityPrehistoric {
 				if (this.onGround && !this.isInWater()) {
 					f2 = this.worldObj.getBlock(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.boundingBox.minY) - 1, MathHelper.floor_double(this.posZ)).slipperiness * 0.91F;
 				}
-
 				float f3 = 0.16277136F / (f2 * f2 * f2);
-
 				if (this.onGround && !this.isInWater()) {
 					f4 = this.getAIMoveSpeed() * f3;
 				} else {
 					f4 = this.jumpMovementFactor;
 				}
-
 				this.moveFlying(x, z, f4);
 				f2 = 0.91F;
-
 				if (this.onGround && !this.isInWater()) {
 					f2 = this.worldObj.getBlock(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.boundingBox.minY) - 1, MathHelper.floor_double(this.posZ)).slipperiness * 0.91F;
 				}
-
 				if (this.isOnLadder()) {
 					f5 = 0.15F;
 					this.motionX = MathHelper.clamp_double(this.motionX, (double) (-f5), (double) f5);
@@ -159,13 +151,10 @@ public abstract class EntityPrehistoricSwimming extends EntityPrehistoric {
 						this.motionY = -0.15D;
 					}
 				}
-
 				this.moveEntity(this.motionX, this.motionY, this.motionZ);
-
 				if (this.isCollidedHorizontally && this.isOnLadder()) {
 					this.motionY = 0.2D;
 				}
-
 				if (this.worldObj.isRemote && (!this.worldObj.blockExists((int) this.posX, 0, (int) this.posZ)) || !this.worldObj.getChunkFromBlockCoords((int) this.posX, (int) this.posZ).isChunkLoaded) {
 					if (this.posY > 0.0D) {
 						this.motionY = -0.1D;
@@ -175,7 +164,6 @@ public abstract class EntityPrehistoricSwimming extends EntityPrehistoric {
 				} else {
 					this.motionY -= 0.08D;
 				}
-
 				this.motionY *= 0.9800000190734863D;
 				this.motionX *= (double) f2;
 				this.motionZ *= (double) f2;

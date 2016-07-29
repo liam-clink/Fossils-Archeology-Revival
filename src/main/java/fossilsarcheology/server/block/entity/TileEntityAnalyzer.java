@@ -303,8 +303,6 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
 			int var3;
 
 			if (this.analyzerItemStacks[this.RawIndex].getItem() instanceof DinosaurBoneItem) {
-
-				if (!Revival.RELEASE_TYPE.enableDebugging()) {
 					if (rand > -1 && rand <= 30) {
 						itemstack = new ItemStack(Items.dye, 3, 15);
 					}
@@ -316,9 +314,6 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
 					if (rand > 65) {
 						itemstack = new ItemStack(EnumDinoBones.from(EnumDinoBones.values()[this.analyzerItemStacks[this.RawIndex].getItemDamage()]).DNAItem, 1);
 					}
-				} else {
-					itemstack = new ItemStack(EnumPrehistoric.getRandomMezoic().DNAItem, 1);
-				}
 			}
 			if (this.analyzerItemStacks[this.RawIndex].getItem() instanceof DinoEggItem || this.analyzerItemStacks[this.RawIndex].getItem() instanceof BirdEggItem) {
 				if (!Revival.RELEASE_TYPE.enableDebugging()) {
