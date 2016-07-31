@@ -990,7 +990,7 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
 
     @Override
     public boolean attackEntityFrom(DamageSource dmg, float i) {
-        if (i > 0 && this.isSkeleton()) {
+        if (this.isSkeleton()) {
             if (dmg == DamageSource.inWall) {
                 return false;
             } else {
