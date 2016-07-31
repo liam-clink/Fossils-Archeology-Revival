@@ -1,12 +1,16 @@
 package fossilsarcheology.server.entity.mob;
 
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAIOwnerHurtByTarget;
 import net.minecraft.entity.ai.EntityAIOwnerHurtTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import fossilsarcheology.server.entity.EntityPrehistoricFlying;
 import fossilsarcheology.server.entity.ai.DinoAIEatBlocks;
@@ -149,4 +153,34 @@ public class EntityConfuciusornis extends EntityPrehistoricFlying {
 	public boolean canBeRidden() {
 		return false;
 	}
+
+    @Override
+    public void onLivingUpdate() {
+        super.onLivingUpdate();
+        if (this.getAnimation() == ATTACK_ANIMATION && this.getAnimationTick() == 12 && this.getAttackTarget() != null) {
+            this.attackEntityAsMob(this.getAttackTarget());
+        }
+    }
+
+    @Override
+    public boolean attackEntityAsMob(Entity entity) {
+        if (this.getAttackBounds().intersectsWith(entity.boundingBox)) {
+            if (this.getAnimation() == NO_ANIMATION) {
+                this.setAnimation(ATTACK_ANIMATION);
+                return false;
+            }
+            if (this.getAnimation() == ATTACK_ANIMATION && this.getAnimationTick() == 12) {
+                IAttributeInstance iattributeinstance = this.getEntityAttribute(SharedMonsterAttributes.attackDamage);
+                boolean flag = entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) iattributeinstance.getAttributeValue());
+                if (entity.ridingEntity != null) {
+                    if (entity.ridingEntity == this) {
+                        entity.mountEntity(null);
+                    }
+                }
+                entity.motionY += 0.1000000059604645D;
+                return flag;
+            }
+        }
+        return false;
+    }
 }

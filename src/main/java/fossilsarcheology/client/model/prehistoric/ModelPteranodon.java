@@ -170,12 +170,11 @@ public class ModelPteranodon extends ModelPrehistoric {
         animator.startKeyframe(10);
         ModelUtils.rotate(animator, Neck1, -41, 0, 0);
         ModelUtils.rotate(animator, Head, 57, 0, 0);
-        ModelUtils.rotate(animator, Jaw, 15, 0, 0);
+        ModelUtils.rotate(animator, Jaw, 20, 0, 0);
         animator.endKeyframe();
         animator.startKeyframe(5);
         ModelUtils.rotate(animator, Neck1, 6, 0, 0);
         ModelUtils.rotate(animator, Head, -14, 0, 0);
-        ModelUtils.rotate(animator, Jaw, -15, 0, 0);
         animator.endKeyframe();
         animator.resetKeyframe(10);
     }
