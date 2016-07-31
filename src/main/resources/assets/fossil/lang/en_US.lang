@@ -946,7 +946,6 @@ item.armBone.Parasaurolophus.name=Parasaurolophus Arm Bone
 item.vertebrae.Parasaurolophus.name=Parasaurolophus Vertebrae
 item.legBone.Parasaurolophus.name=Parasaurolophus Leg Bone
 item.foot.Parasaurolophus.name=Parasaurolophus Foot
-
 entity.fossil.Icthyosaurus.name=Ichthyosaurus
 item.dnaIcthyosaurus.name=Ichthyosaurus DNA
 item.eggIcthyosaurus.name=Ichthyosaurus Sac
@@ -959,7 +958,6 @@ item.armBone.Icthyosaurus.name=Ichthyosaurus Arm Bone
 item.vertebrae.Icthyosaurus.name=Ichthyosaurus Vertebrae
 item.legBone.Icthyosaurus.name=Ichthyosaurus Leg Bone
 item.foot.Icthyosaurus.name=Ichthyosaurus Foot
-
 entity.fossil.Henodus.name=Henodus
 item.dnaHenodus.name=Henodus DNA
 item.eggHenodus.name=Henodus Egg
