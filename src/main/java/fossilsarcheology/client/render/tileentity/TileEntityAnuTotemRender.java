@@ -2,60 +2,38 @@ package fossilsarcheology.client.render.tileentity;
 
 import fossilsarcheology.client.model.ModelAnuTotem;
 import fossilsarcheology.server.block.entity.TileEntityAnuTotem;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
-public class TileEntityAnuTotemRender extends TileEntitySpecialRenderer {
-
-    public static final ResourceLocation texture = new ResourceLocation("fossil:textures/blocks/anuTotem.png");
-    private ModelAnuTotem modelBlock;
-
-    public TileEntityAnuTotemRender() {
-        this.modelBlock = new ModelAnuTotem();
-
-    }
-
-    public void renderAnuAt(TileEntityAnuTotem tileentity, double x, double y, double z, float f) {
-        int i1 = 0;
-        if (tileentity.hasWorldObj()) {
-            i1 = tileentity.getBlockMetadata();
-        }
-        short short1 = 0;
-        if (i1 == 2) {
-
-            short1 = 360;
-        }
-
-        if (i1 == 3) {
-            short1 = 180;
-        }
-
-        if (i1 == 4) {
-            short1 = 90;
-        }
-
-        if (i1 == 5) {
-            short1 = -90;
-        }
-
-        GL11.glPushMatrix();
-        GL11.glTranslatef(0f, 0f, 0f);
-        GL11.glTranslated((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
-        GL11.glRotatef(180, 0F, 0F, 1F);
-        GL11.glRotatef((float) short1 * -1F, 0.0F, 1.0F, 0.0F);
-        GL11.glPushMatrix();
-        this.bindTexture(texture);
-        this.modelBlock.renderBlock(0.0625F);
-        GL11.glPopMatrix();
-        GL11.glPopMatrix();
-    }
+public class TileEntityAnuTotemRender extends TileEntitySpecialRenderer<TileEntityAnuTotem> {
+    private static final ResourceLocation TEXTURE = new ResourceLocation("fossil:textures/blocks/anuTotem.png");
+    private static final ModelAnuTotem MODEL = new ModelAnuTotem();
 
     @Override
-    public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f) {
-        this.renderAnuAt((TileEntityAnuTotem) tileentity, x, y, z, f);
+    public void renderTileEntityAt(TileEntityAnuTotem tile, double x, double y, double z, float partialTicks, int breakProgress) {
+        int metadata = 0;
+        if (tile.hasWorldObj()) {
+            metadata = tile.getBlockMetadata();
+        }
+        short rotation = 0;
+        if (metadata == 2) {
+            rotation = 360;
+        } else if (metadata == 3) {
+            rotation = 180;
+        } else if (metadata == 4) {
+            rotation = 90;
+        } else if (metadata == 5) {
+            rotation = -90;
+        }
+        GlStateManager.pushMatrix();
+        GlStateManager.translate(0f, 0f, 0f);
+        GlStateManager.translate(x + 0.5F, y + 1.5F, z + 0.5F);
+        GlStateManager.rotate(180, 0F, 0F, 1F);
+        GlStateManager.rotate(rotation, 0.0F, -1.0F, 0.0F);
+        this.bindTexture(TEXTURE);
+        MODEL.renderBlock(0.0625F);
+        GlStateManager.popMatrix();
     }
 }
-
-//

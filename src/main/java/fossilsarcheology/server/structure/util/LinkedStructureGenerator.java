@@ -1,7 +1,7 @@
 package fossilsarcheology.server.structure.util;
 
-import fossilsarcheology.server.structure.StructureGenerator;
 import com.google.common.collect.Lists;
+import fossilsarcheology.server.structure.StructureGenerator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
@@ -72,33 +72,33 @@ public class LinkedStructureGenerator {
     /**
      * Adds structure to list with offset from base structure location
      */
-    public void addStructureWithOffset(Structure structure, int x, int y, int z) {
-        addStructureWithOffsetAndRotation(structure, x, y, z, 0);
+    public void addStructureWithOffset(Structure structure, BlockPos pos) {
+        addStructureWithOffsetAndRotation(structure, pos, 0);
     }
 
     /**
      * Adds structure with offset and individual rotation
      */
-    public void addStructureWithOffsetAndRotation(Structure structure, int x, int y, int z, int rot) {
+    public void addStructureWithOffsetAndRotation(Structure structure, BlockPos pos, int rot) {
         structures.add(structure);
-        addOffset(x, y, z);
+        addOffset(pos);
         rots.add((byte) (rot % 4));
     }
 
-    private void addOffset(int x, int y, int z) {
-        offsets.add(new int[]{-z, y, x});
+    private void addOffset(BlockPos pos) {
+        offsets.add(new int[] { -z, y, x });
     }
 
     /**
      * Sets the offset values for the last structure added; x and z are switched
      * to maintain +x moves forward, +z to right and -z to left relationships
      */
-    public void setLastOffset(int x, int y, int z) {
+    public void setLastOffset(BlockPos pos) {
         if (!structures.isEmpty()) {
             if (offsets.size() < structures.size()) {
-                addOffset(x, y, z);
+                addOffset(pos);
             } else {
-                offsets.set(offsets.size() - 1, new int[]{-z, y, x});
+                offsets.set(offsets.size() - 1, new int[] { -z, y, x });
             }
         }
     }
@@ -116,8 +116,8 @@ public class LinkedStructureGenerator {
      * Generates all linked structures with overall orientation determined by
      * first structure
      */
-    public void generateLinkedStructures(World world, Random random, int x, int y, int z) {
-        generateLinkedStructures(null, world, random, x, y, z);
+    public void generateLinkedStructures(World world, Random random, BlockPos pos) {
+        generateLinkedStructures(null, world, random, pos);
     }
 
     /**
@@ -125,7 +125,7 @@ public class LinkedStructureGenerator {
      * player's facing or, if player is null, by the first structure's default
      * facing
      */
-    public void generateLinkedStructures(EntityPlayer player, World world, Random random, int x, int y, int z) {
+    public void generateLinkedStructures(EntityPlayer player, World world, Random random, BlockPos pos) {
         int i = 0;
         if (structures.size() != offsets.size() || structures.size() != rots.size()) {
             System.err.println("Structure List and Offset List are not the same size, aborting generation.");

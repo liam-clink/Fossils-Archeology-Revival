@@ -1,5 +1,17 @@
 package fossilsarcheology.server.entity.mob;
 
+import fossilsarcheology.server.entity.EntityPrehistoric;
+import fossilsarcheology.server.entity.ai.DinoAIAttackOnCollide;
+import fossilsarcheology.server.entity.ai.DinoAIEatFeeders;
+import fossilsarcheology.server.entity.ai.DinoAIEatItems;
+import fossilsarcheology.server.entity.ai.DinoAIFollowOwner;
+import fossilsarcheology.server.entity.ai.DinoAIHunt;
+import fossilsarcheology.server.entity.ai.DinoAILookIdle;
+import fossilsarcheology.server.entity.ai.DinoAIRiding;
+import fossilsarcheology.server.entity.ai.DinoAIWander;
+import fossilsarcheology.server.entity.ai.DinoAIWatchClosest;
+import fossilsarcheology.server.enums.EnumPrehistoricAI;
+import fossilsarcheology.server.enums.PrehistoricEntityType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
@@ -11,25 +23,12 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import fossilsarcheology.server.entity.EntityPrehistoric;
-import fossilsarcheology.server.entity.ai.DinoAIAttackOnCollide;
-import fossilsarcheology.server.entity.ai.DinoAIEatFeeders;
-import fossilsarcheology.server.entity.ai.DinoAIEatItems;
-import fossilsarcheology.server.entity.ai.DinoAIFollowOwner;
-import fossilsarcheology.server.entity.ai.DinoAIHunt;
-import fossilsarcheology.server.entity.ai.DinoAILookIdle;
-import fossilsarcheology.server.entity.ai.DinoAIRiding;
-import fossilsarcheology.server.entity.ai.DinoAIWander;
-import fossilsarcheology.server.entity.ai.DinoAIWatchClosest;
-import fossilsarcheology.server.enums.EnumPrehistoric;
-import fossilsarcheology.server.enums.EnumPrehistoricAI;
 
 public class EntityCeratosaurus extends EntityPrehistoric {
 
     public EntityCeratosaurus(World world) {
-        super(world, EnumPrehistoric.Ceratosaurus, 1, 10, 8, 50, 0.2, 0.35);
+        super(world, PrehistoricEntityType.CERATOSAURUS, 1, 10, 8, 50, 0.2, 0.35);
         this.getNavigator().setAvoidsWater(true);
         this.getNavigator().setCanSwim(true);
         this.tasks.addTask(1, new EntityAISwimming(this));
@@ -54,7 +53,7 @@ public class EntityCeratosaurus extends EntityPrehistoric {
         teenAge = 5;
         developsResistance = true;
         breaksBlocks = true;
-		this.ridingY = 1.8F;
+        this.ridingY = 1.8F;
     }
 
     @Override
@@ -185,9 +184,9 @@ public class EntityCeratosaurus extends EntityPrehistoric {
     public int getMaxHunger() {
         return 100;
     }
-    
-	@Override
-	public boolean canBeRidden() {
-		return true;
-	}
+
+    @Override
+    public boolean canBeRidden() {
+        return true;
+    }
 }

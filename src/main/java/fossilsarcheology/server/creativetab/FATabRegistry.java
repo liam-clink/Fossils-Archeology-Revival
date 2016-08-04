@@ -5,11 +5,11 @@ import net.minecraft.creativetab.CreativeTabs;
 public enum FATabRegistry {
     INSTANCE;
 
-    public CreativeTabs tabFBlocks;
-    public CreativeTabs tabFItems;
+    public CreativeTabs BLOCKS;
+    public CreativeTabs ITEMS;
 
     public void init() {
-        tabFBlocks = new TabFBlocks("Fossil Blocks");
-        tabFItems = new TabFItems("Fossil Items");
+        BLOCKS = new BLOCKS("Fossil Blocks");
+        ITEMS = new TabFItems("Fossil Items");
     }
 }

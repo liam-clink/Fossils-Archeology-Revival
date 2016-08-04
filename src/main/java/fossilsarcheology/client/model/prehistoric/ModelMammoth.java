@@ -1,11 +1,10 @@
 package fossilsarcheology.client.model.prehistoric;
 
+import fossilsarcheology.server.entity.EntityPrehistoric;
 import net.ilexiconn.llibrary.client.model.ModelAnimator;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
 import net.minecraft.entity.Entity;
-import fossilsarcheology.server.entity.EntityPrehistoric;
-import fossilsarcheology.server.entity.mob.EntityMammoth;
 
 public class ModelMammoth extends ModelPrehistoric {
     public AdvancedModelRenderer leftFrontLeg;
@@ -233,12 +232,12 @@ public class ModelMammoth extends ModelPrehistoric {
 
     @Override
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
-        AdvancedModelRenderer[] tailParts = {this.Tail};
-        AdvancedModelRenderer[] neckParts = {this.neck, this.head};
-        AdvancedModelRenderer[] trunkParts = {this.nose2, this.nose3, this.nose4};
-		if(((EntityPrehistoric) entity).isSkeleton()){
-			return;
-		}
+        AdvancedModelRenderer[] tailParts = { this.Tail };
+        AdvancedModelRenderer[] neckParts = { this.neck, this.head };
+        AdvancedModelRenderer[] trunkParts = { this.nose2, this.nose3, this.nose4 };
+        if (((EntityPrehistoric) entity).isSkeleton()) {
+            return;
+        }
         ModelUtils.faceTargetMod(neck, f3, f4, 0.5F);
         ModelUtils.faceTargetMod(head, f3, f4, 0.5F);
         float speed = 0.1F;

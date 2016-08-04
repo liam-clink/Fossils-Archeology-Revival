@@ -1,7 +1,6 @@
 package fossilsarcheology.client.model.prehistoric;
 
 import fossilsarcheology.server.entity.EntityPrehistoric;
-import fossilsarcheology.server.entity.mob.EntityDilophosaurus;
 import fossilsarcheology.server.entity.mob.EntityGallimimus;
 import net.ilexiconn.llibrary.client.model.ModelAnimator;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
@@ -219,13 +218,13 @@ public class ModelGallimimus extends ModelPrehistoric {
 
     @Override
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
-        AdvancedModelRenderer[] tailParts = {this.tail1, this.tail2, this.tail3};
-        AdvancedModelRenderer[] neckParts = {this.neck, this.head};
-        AdvancedModelRenderer[] leftArmParts = {this.leftUpperArm, this.leftLowerArm};
-        AdvancedModelRenderer[] rightArmParts = {this.rightUpperArm, this.rightLowerArm};
-		if(((EntityPrehistoric) entity).isSkeleton()){
-			return;
-		}
+        AdvancedModelRenderer[] tailParts = { this.tail1, this.tail2, this.tail3 };
+        AdvancedModelRenderer[] neckParts = { this.neck, this.head };
+        AdvancedModelRenderer[] leftArmParts = { this.leftUpperArm, this.leftLowerArm };
+        AdvancedModelRenderer[] rightArmParts = { this.rightUpperArm, this.rightLowerArm };
+        if (((EntityPrehistoric) entity).isSkeleton()) {
+            return;
+        }
         ModelUtils.faceTargetMod(neck, f3, f4, 0.5F);
         ModelUtils.faceTargetMod(head, f3, f4, 0.5F);
 
@@ -282,12 +281,12 @@ public class ModelGallimimus extends ModelPrehistoric {
         this.chainSwing(tailParts, speed2, degree * 0.25F, -3, f, f1);
         this.chainWave(neckParts, speed, degree * 0.05F, 3, entity.ticksExisted, 1);
         this.chainWave(neckParts, speed, degree * 0.15F, 3, f, f1);
-		this.walk(leftThigh, speed2, 0.6F, false, 0F, 0.4F, f, f1);
-		this.walk(leftLeg, speed2, 0.2F, false, 0F, -0.6F, f, f1);
-		this.walk(leftFoot, speed2, -0.6F, true, 2.5F, -0.4F, f, f1);
-		this.walk(rightThigh, speed2, 0.6F, true, 0F, -0.4F, f, f1);
-		this.walk(rightLeg, speed2, 0.2F, true, 0F, 0.6F, f, f1);
-		this.walk(rightFoot, speed2, -0.6F, false, 2.5F, 0.4F, f, f1);
+        this.walk(leftThigh, speed2, 0.6F, false, 0F, 0.4F, f, f1);
+        this.walk(leftLeg, speed2, 0.2F, false, 0F, -0.6F, f, f1);
+        this.walk(leftFoot, speed2, -0.6F, true, 2.5F, -0.4F, f, f1);
+        this.walk(rightThigh, speed2, 0.6F, true, 0F, -0.4F, f, f1);
+        this.walk(rightLeg, speed2, 0.2F, true, 0F, 0.6F, f, f1);
+        this.walk(rightFoot, speed2, -0.6F, false, 2.5F, 0.4F, f, f1);
         this.chainWave(neckParts, speed2, degree * 0.5F, 4, f, f1);
         this.chainWave(tailParts, speed2, degree * 0.3F, -4, f, f1);
         ((EntityPrehistoric) entity).chainBuffer.applyChainSwingBuffer((ModelRenderer[]) tailParts);

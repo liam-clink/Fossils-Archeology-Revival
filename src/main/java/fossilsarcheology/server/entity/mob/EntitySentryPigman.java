@@ -5,7 +5,6 @@ import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIMoveTowardsTarget;
@@ -45,7 +44,7 @@ public class EntitySentryPigman extends EntityMob {
     @Override
     protected void entityInit() {
         super.entityInit();
-        this.dataWatcher.addObject(13, (byte) 0);
+        this.dataManager.register(13, (byte) 0);
     }
 
     /**

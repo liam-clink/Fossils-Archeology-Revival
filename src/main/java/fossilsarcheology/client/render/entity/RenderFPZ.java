@@ -2,13 +2,12 @@ package fossilsarcheology.client.render.entity;
 
 import fossilsarcheology.client.model.ModelFPZ;
 import fossilsarcheology.server.entity.mob.EntityFriendlyPigZombie;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.entity.RenderBiped;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
-import org.lwjgl.opengl.GL11;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderFPZ extends RenderBiped {
@@ -20,7 +19,7 @@ public class RenderFPZ extends RenderBiped {
 
     protected void scalePigman(EntityFriendlyPigZombie par1EntitySkeleton, float par2) {
         if (par1EntitySkeleton.isSitting())
-            GL11.glTranslatef(0F, 0.4F, 0F);
+            GlStateManager.translate(0F, 0.4F, 0F);
     }
 
     @Override

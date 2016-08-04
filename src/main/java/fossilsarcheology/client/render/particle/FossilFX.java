@@ -36,7 +36,7 @@ public class FossilFX {
             // use when you call spawn
             // particle
             {
-                var21 = new FliesFX(theWorld, par2, par4, par6, (float) par8, (float) par10, (float) par12, size);
+                var21 = new FliesParicle(theWorld, par2, par4, par6, (float) par8, (float) par10, (float) par12, size);
             } else if (particleName.equals("tarBubble"))// if the name of the
             // particle to be
             // spawned equals test

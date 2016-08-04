@@ -1,14 +1,14 @@
 package fossilsarcheology.client.render.particle;
 
-import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.client.FMLClientHandler;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
@@ -19,11 +19,11 @@ public class SleepFX extends EntityFX {
     float smokeParticleScale;
 
     public SleepFX(World world, double x, double y, double z, double ix, double iy, double iz) {
-        this(world, x, y, z, ix, iy, iz, 2.0F);
+        this(world, pos, ix, iy, iz, 1.0F);
     }
 
     public SleepFX(World world, double x, double y, double z, double ix, double iy, double iz, float i) {
-        super(world, x, y, z, 0.0D, 0.0D, 0.0D);
+        super(world, pos, 0.0D, 0.0D, 0.0D);
         this.motionX *= 0.10000000149011612D;
         this.motionY *= 0.10000000149011612D;
         this.motionZ *= 0.10000000149011612D;
@@ -39,13 +39,13 @@ public class SleepFX extends EntityFX {
     @Override
     public void renderParticle(Tessellator tessellator, float par2, float par3, float par4, float par5, float par6, float par7) {
         tessellator.draw();
-        GL11.glPushMatrix();
+        GlStateManager.pushMatrix();
         GL11.glDepthMask(false);
         GL11.glEnable(3042);
-        GL11.glEnable(GL11.GL_BLEND);
+        GlStateManager.enableBlend();
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         FMLClientHandler.instance().getClient().renderEngine.bindTexture(textures);
-        float sizeFactor = 0.1F * particleScale  *  (Math.max(0, particleMaxAge - this.particleAge)) * 0.02F;
+        float sizeFactor = 0.1F * particleScale;
         float var13 = (float) (prevPosX + (posX - prevPosX) * par2 - EntityFX.interpPosX);
         float var14 = (float) (prevPosY + (posY - prevPosY) * par2 - EntityFX.interpPosY);
         float var15 = (float) (prevPosZ + (posZ - prevPosZ) * par2 - EntityFX.interpPosZ);
@@ -60,7 +60,7 @@ public class SleepFX extends EntityFX {
         GL11.glDisable(3042);
         GL11.glDepthMask(true);
         GL11.glDisable(GL11.GL_BLEND);
-        GL11.glPopMatrix();
+        GlStateManager.popMatrix();
         FMLClientHandler.instance().getClient().renderEngine.bindTexture(particles);
         tessellator.startDrawingQuads();
     }

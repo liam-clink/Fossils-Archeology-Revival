@@ -132,7 +132,7 @@ public class Structure {
      * and you want the door to spawn in front of the player, or if your
      * structure should always be spawned in the air, etc.
      */
-    public final void setStructureOffset(int x, int y, int z) {
+    public final void setStructureOffset(BlockPos pos) {
         offsetX = x;
         offsetZ = z;
         offsetY = y;

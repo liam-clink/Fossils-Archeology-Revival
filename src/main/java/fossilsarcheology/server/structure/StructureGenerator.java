@@ -2,6 +2,7 @@ package fossilsarcheology.server.structure;
 
 import fossilsarcheology.server.structure.util.StructureGeneratorBase;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class StructureGenerator extends StructureGeneratorBase {
@@ -27,7 +28,7 @@ public class StructureGenerator extends StructureGeneratorBase {
     }
 
     @Override
-    public void onCustomBlockAdded(World world, int x, int y, int z, int fakeID, int customData1, int customData2) {
+    public void onCustomBlockAdded(World world, BlockPos pos, int fakeID, int customData1, int customData2) {
 
     }
 }

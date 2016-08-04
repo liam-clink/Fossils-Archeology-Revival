@@ -1,23 +1,23 @@
 package fossilsarcheology.server.entity.mob;
 
+import fossilsarcheology.Revival;
+import fossilsarcheology.client.gui.PediaGUI;
+import fossilsarcheology.server.entity.IViviparous;
+import fossilsarcheology.server.enums.PrehistoricEntityType;
+import fossilsarcheology.server.handler.LocalizationStrings;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
-import fossilsarcheology.Revival;
-import fossilsarcheology.client.gui.GuiPedia;
-import fossilsarcheology.server.entity.IViviparous;
-import fossilsarcheology.server.enums.EnumPrehistoric;
-import fossilsarcheology.server.handler.LocalizationStrings;
 
 public class EntityPregnantHorse implements IViviparous, IExtendedEntityProperties {
     public final static String PREGNANT_HORSE_PROP = "EntityPregnantHorse";
     public final EntityHorse horse;
 
     public int EmbryoProgress;
-    public EnumPrehistoric Embryo;
+    public PrehistoricEntityType Embryo;
     private World worldObj;
 
     public EntityPregnantHorse(EntityHorse horse) {
@@ -75,7 +75,7 @@ public class EntityPregnantHorse implements IViviparous, IExtendedEntityProperti
         }
 
         if (compound.hasKey("Inside")) {
-            this.Embryo = EnumPrehistoric.values()[properties.getByte("Inside")];
+            this.Embryo = PrehistoricEntityType.values()[properties.getByte("Inside")];
         }
     }
 
@@ -84,7 +84,7 @@ public class EntityPregnantHorse implements IViviparous, IExtendedEntityProperti
     }
 
     @Override
-    public void setEmbryo(EnumPrehistoric animalType) {
+    public void setEmbryo(PrehistoricEntityType animalType) {
         this.Embryo = animalType;
     }
 
@@ -93,19 +93,19 @@ public class EntityPregnantHorse implements IViviparous, IExtendedEntityProperti
     }
 
     @Override
-    public void showPedia(GuiPedia p0) {
+    public void showPedia(PediaGUI p0) {
         if (this.Embryo != null) {
             int quot = (int) Math.floor(((float) this.EmbryoProgress / (float) this.Embryo.growTime * 100.0F));
 
             p0.reset();
-            p0.addStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_EMBRYO_INSIDE), false);
-            p0.addStringLR(StatCollector.translateToLocal("pedia.embryo." + this.Embryo.toString()), false, 40, 90, 245);
-            p0.addStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_EMBRYO_GROWING), false);
+            p0.addStringLR(I18n.translateToLocal(LocalizationStrings.PEDIA_EMBRYO_INSIDE), false);
+            p0.addStringLR(I18n.translateToLocal("pedia.embryo." + this.Embryo.toString()), false, 40, 90, 245);
+            p0.addStringLR(I18n.translateToLocal(LocalizationStrings.PEDIA_EMBRYO_GROWING), false);
             p0.addStringLR(String.valueOf(quot) + "/100", false);
         } else {
             p0.reset();
-            p0.addStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_EMBRYO_INSIDE), false);
-            p0.addStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_EMBRYO_GROWING), false);
+            p0.addStringLR(I18n.translateToLocal(LocalizationStrings.PEDIA_EMBRYO_INSIDE), false);
+            p0.addStringLR(I18n.translateToLocal(LocalizationStrings.PEDIA_EMBRYO_GROWING), false);
         }
     }
 

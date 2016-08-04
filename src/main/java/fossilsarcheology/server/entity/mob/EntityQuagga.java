@@ -1,5 +1,9 @@
 package fossilsarcheology.server.entity.mob;
 
+import fossilsarcheology.Revival;
+import fossilsarcheology.client.gui.PediaGUI;
+import fossilsarcheology.server.entity.ai.QuaggaAITaming;
+import fossilsarcheology.server.item.FAItemRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
@@ -7,7 +11,6 @@ import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIAvoidEntity;
 import net.minecraft.entity.ai.EntityAIFollowParent;
 import net.minecraft.entity.ai.EntityAILookIdle;
@@ -33,25 +36,21 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.I18n;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import fossilsarcheology.Revival;
-import fossilsarcheology.client.gui.GuiPedia;
-import fossilsarcheology.server.entity.ai.QuaggaAITaming;
-import fossilsarcheology.server.item.FAItemRegistry;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntityQuagga extends EntityAnimal implements IInvBasic {
     protected static final ResourceLocation pediaheart = new ResourceLocation("fossil:textures/gui/PediaHeart.png");
     private static final IAttribute horseJumpStrength = (new RangedAttribute("horse.jumpStrength", 0.7D, 0.0D, 2.0D)).setDescription("Jump Strength").setShouldWatch(true);
-    private static final String[] horseArmorShortName = new String[]{"", "meo", "goo", "dio"};
-    private static final String[] horseArmorTextures = new String[]{null, "textures/entity/horse/armor/horse_armor_iron.png", "textures/entity/horse/armor/horse_armor_gold.png", "textures/entity/horse/armor/horse_armor_diamond.png"};
-    private static final int[] armorValues = new int[]{0, 5, 7, 11};
-    private static final String[] horseTextures = new String[]{"fossil:textures/model/quagga_0/quagga.png"};
+    private static final String[] horseArmorShortName = new String[] { "", "meo", "goo", "dio" };
+    private static final String[] horseArmorTextures = new String[] { null, "textures/entity/horse/armor/horse_armor_iron.png", "textures/entity/horse/armor/horse_armor_gold.png", "textures/entity/horse/armor/horse_armor_diamond.png" };
+    private static final int[] armorValues = new int[] { 0, 5, 7, 11 };
+    private static final String[] horseTextures = new String[] { "fossil:textures/model/quagga_0/quagga.png" };
     public int timer1;
     public int field_110279_bq;
     public InventoryBasic quaggaChest;
@@ -104,9 +103,9 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic {
     @Override
     protected void entityInit() {
         super.entityInit();
-        this.dataWatcher.addObject(16, 0);
-        this.dataWatcher.addObject(21, String.valueOf(""));
-        this.dataWatcher.addObject(22, 0);
+        this.dataManager.register(16, 0);
+        this.dataManager.register(21, String.valueOf(""));
+        this.dataManager.register(22, 0);
     }
 
     private void setPedia() {
@@ -120,21 +119,21 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic {
         if (this.hasCustomNameTag()) {
             return this.getCustomNameTag();
         } else {
-            return StatCollector.translateToLocal("entity.fossil.Quagga.name");
+            return I18n.translateToLocal("entity.fossil.Quagga.name");
         }
     }
 
     private boolean getHorseWatchableBoolean(int par1) {
-        return (this.dataWatcher.getWatchableObjectInt(16) & par1) != 0;
+        return (this.dataManager.getWatchableObjectInt(16) & par1) != 0;
     }
 
     private void setHorseWatchableBoolean(int par1, boolean par2) {
-        int j = this.dataWatcher.getWatchableObjectInt(16);
+        int j = this.dataManager.getWatchableObjectInt(16);
 
         if (par2) {
-            this.dataWatcher.updateObject(16, j | par1);
+            this.dataManager.updateObject(16, j | par1);
         } else {
-            this.dataWatcher.updateObject(16, j & ~par1);
+            this.dataManager.updateObject(16, j & ~par1);
         }
     }
 
@@ -151,11 +150,11 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic {
     }
 
     public String getOwnerName() {
-        return this.dataWatcher.getWatchableObjectString(21);
+        return this.dataManager.getWatchableObjectString(21);
     }
 
     public void setOwnerName(String par1Str) {
-        this.dataWatcher.updateObject(21, par1Str);
+        this.dataManager.updateObject(21, par1Str);
     }
 
     public float getHorseSize() {
@@ -241,7 +240,7 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic {
     }
 
     public int horseArmor() {
-        return this.dataWatcher.getWatchableObjectInt(22);
+        return this.dataManager.getWatchableObjectInt(22);
     }
 
     /**
@@ -288,7 +287,7 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic {
     }
 
     public void setHorseArmor(int par1) {
-        this.dataWatcher.updateObject(22, par1);
+        this.dataManager.updateObject(22, par1);
         this.func_110230_cF();
     }
 
@@ -511,11 +510,11 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic {
     }
 
     /**
-     * Plays step sound at given x, y, z for the entity
+     * Plays step sound at given pos for the entity
      */
     // playStepSound
     @Override
-    protected void func_145780_a(int x, int y, int z, Block block) {
+    protected void func_145780_a(BlockPos pos, Block block) {
         Block.SoundType soundtype = block.stepSound;
 
         if (this.worldObj.getBlock(x, y + 1, z) == Blocks.snow_layer) {
@@ -828,8 +827,8 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic {
     public void onUpdate() {
         super.onUpdate();
 
-        if (this.worldObj.isRemote && this.dataWatcher.hasChanges()) {
-            this.dataWatcher.func_111144_e();
+        if (this.worldObj.isRemote && this.dataManager.hasChanges()) {
+            this.dataManager.func_111144_e();
             this.func_110230_cF();
         }
 
@@ -1294,10 +1293,10 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic {
     }
 
     @SideOnly(Side.CLIENT)
-    public void showPedia(GuiPedia p0) {
+    public void showPedia(PediaGUI p0) {
     }
 
     @SideOnly(Side.CLIENT)
-    public void showPedia2(GuiPedia p0) {
+    public void showPedia2(PediaGUI p0) {
     }
 }

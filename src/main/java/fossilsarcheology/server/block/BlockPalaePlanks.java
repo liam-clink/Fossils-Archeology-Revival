@@ -11,9 +11,9 @@ public class BlockPalaePlanks extends Block {
         super(Material.wood);
         setHardness(2.0F);
         setResistance(5.0F);
-        setStepSound(Block.soundTypeWood);
-        setBlockName(LocalizationStrings.PALAE_PLANKS_NAME);
-        this.setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
+        setSoundType(Block.soundTypeWood);
+        setUnlocalizedName(LocalizationStrings.PALAE_PLANKS_NAME);
+        this.setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
     }
 
     @Override

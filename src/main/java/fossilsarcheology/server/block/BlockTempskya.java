@@ -1,7 +1,5 @@
 package fossilsarcheology.server.block;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -14,6 +12,8 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Random;
 
@@ -28,7 +28,7 @@ public class BlockTempskya extends BlockBush {
     public BlockTempskya() {
         super(Material.plants);
         this.setHardness(0);
-        this.setStepSound(soundTypeGrass);
+        this.setSoundType(soundTypeGrass);
         float f = 0.375F;
         float f1 = 0.625F;
         float f2 = 0.375F;
@@ -38,29 +38,29 @@ public class BlockTempskya extends BlockBush {
     }
 
     @Override
-    public boolean canBlockStay(World world, int x, int y, int z) {
-        if (world.getBlock(x, y, z) != this) {
-            return super.canBlockStay(world, x, y, z);
+    public boolean canBlockStay(World world, BlockPos pos) {
+        if (world.getBlock(pos) != this) {
+            return super.canBlockStay(world, pos);
         }
 
-        int l = world.getBlockMetadata(x, y, z);
+        int l = world.getBlockMetadata(pos);
 
         if (l == 0) {
-            return super.canBlockStay(world, x, y, z);
+            return super.canBlockStay(world, pos);
         } else {
             return world.getBlock(x, y - 1, z) == this;
         }
     }
 
     @Override
-    protected void checkAndDropBlock(World w, int x, int y, int z) {
-        if (!this.canBlockStay(w, x, y, z)) {
-            int l = w.getBlockMetadata(x, y, z);
+    protected void checkAndDropBlock(World w, BlockPos pos) {
+        if (!this.canBlockStay(w, pos)) {
+            int l = w.getBlockMetadata(pos);
 
             if (l == 0) {
-                this.dropBlockAsItem(w, x, y, z, l, 0);
+                this.dropBlockAsItem(w, pos, l, 0);
             }
-            w.setBlock(x, y, z, Blocks.air, 0, 3);
+            w.setBlock(pos, Blocks.air, 0, 3);
         }
     }
 
@@ -75,29 +75,29 @@ public class BlockTempskya extends BlockBush {
     }
 
     @Override
-    public void harvestBlock(World world, EntityPlayer entity, int x, int y, int z, int i) {
+    public void harvestBlock(World world, EntityPlayer entity, BlockPos pos, int i) {
         if (i == 0) {
-            super.harvestBlock(world, entity, x, y, z, i);
+            super.harvestBlock(world, entity, pos, i);
         }
     }
 
-    public void makeTempskya(World world, int x, int y, int z) {
-        world.setBlock(x, y, z, this, 0, 2);
+    public void makeTempskya(World world, BlockPos pos) {
+        world.setBlock(pos, this, 0, 2);
         world.setBlock(x, y + 1, z, this, 1, 2);
         world.setBlock(x, y + 2, z, this, 2, 2);
         world.setBlock(x, y + 3, z, this, 3, 2);
     }
 
     @Override
-    public boolean canPlaceBlockAt(World world, int x, int y, int z) {
-        return !(world.getBlock(x, y, z) != Blocks.air && world.getBlock(x, y + 1, z) != Blocks.air && world.getBlock(x, y + 2, z) != Blocks.air && world.getBlock(x, y + 3, z) != Blocks.air) && super.canPlaceBlockAt(world, x, y, z);
+    public boolean canPlaceBlockAt(World world, BlockPos pos) {
+        return !(world.getBlock(pos) != Blocks.air && world.getBlock(x, y + 1, z) != Blocks.air && world.getBlock(x, y + 2, z) != Blocks.air && world.getBlock(x, y + 3, z) != Blocks.air) && super.canPlaceBlockAt(world, pos);
 
     }
 
     @Override
-    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack i) {
-        makeTempskya(world, x, y, z);
-        super.onBlockPlacedBy(world, x, y, z, entity, i);
+    public void onBlockPlacedBy(World world, BlockPos pos, EntityLivingBase entity, ItemStack i) {
+        makeTempskya(world, pos);
+        super.onBlockPlacedBy(world, pos, entity, i);
     }
 
     @Override
@@ -136,7 +136,7 @@ public class BlockTempskya extends BlockBush {
     }
 
     @Override
-    public boolean isLadder(IBlockAccess world, int x, int y, int z, EntityLivingBase entity) {
+    public boolean isLadder(IBlockAccess world, BlockPos pos, EntityLivingBase entity) {
         return true;
     }
 }

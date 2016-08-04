@@ -4,8 +4,6 @@ import fossilsarcheology.server.block.entity.TileEntityAnuTotem;
 import fossilsarcheology.server.creativetab.FATabRegistry;
 import fossilsarcheology.server.handler.LocalizationStrings;
 import fossilsarcheology.server.item.block.AnuStatueBlockItem;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -14,9 +12,11 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockAnuStatue extends BlockContainer implements IBlockItem {
     private int counter = 0;
@@ -24,11 +24,11 @@ public class BlockAnuStatue extends BlockContainer implements IBlockItem {
     public BlockAnuStatue() {
         super(Material.rock);
         this.setBlockBounds(0F, 0.0F, 0F, 1F, 1.9F, 1);
-        this.setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
+        this.setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
         this.setTickRandomly(true);
         this.setBlockUnbreakable();
         this.setResistance(60000000.0F);
-        setBlockName(LocalizationStrings.BLOCK_ANU_NAME);
+        setUnlocalizedName(LocalizationStrings.BLOCK_ANU_NAME);
     }
 
     @SideOnly(Side.CLIENT)
@@ -38,7 +38,7 @@ public class BlockAnuStatue extends BlockContainer implements IBlockItem {
     }
 
     @Override
-    public void onNeighborBlockChange(World world, int x, int y, int z, Block blk) {
+    public void onNeighborBlockChange(World world, BlockPos pos, Block blk) {
 
     }
 
@@ -48,12 +48,12 @@ public class BlockAnuStatue extends BlockContainer implements IBlockItem {
     }
 
     @Override
-    public int isProvidingWeakPower(IBlockAccess world, int x, int y, int z, int i) {
+    public int isProvidingWeakPower(IBlockAccess world, BlockPos pos, int i) {
         return 15;
     }
 
     @Override
-    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack) {
+    public void onBlockPlacedBy(World world, BlockPos pos, EntityLivingBase entity, ItemStack stack) {
         byte b0 = 0;
         int l = MathHelper.floor_double((double) (entity.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
 
@@ -73,11 +73,11 @@ public class BlockAnuStatue extends BlockContainer implements IBlockItem {
             b0 = 4;
         }
 
-        world.setBlockMetadataWithNotify(x, y, z, b0, 2);
+        world.setBlockMetadataWithNotify(pos, b0, 2);
 
-        world.markBlockForUpdate(x, y, z);
+        world.markBlockForUpdate(pos);
 
-        super.onBlockPlacedBy(world, x, y, z, entity, stack);
+        super.onBlockPlacedBy(world, pos, entity, stack);
     }
 
     @Override

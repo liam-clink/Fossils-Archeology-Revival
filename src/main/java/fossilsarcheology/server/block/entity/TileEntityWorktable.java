@@ -16,9 +16,9 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 public class TileEntityWorktable extends TileEntity implements IInventory, ISidedInventory {
 
-    private static final int[] slots_top = new int[]{}; // input
-    private static final int[] slots_bottom = new int[]{}; // output
-    private static final int[] slots_sides = new int[]{};// fuel
+    private static final int[] slots_top = new int[] {}; // input
+    private static final int[] slots_bottom = new int[] {}; // output
+    private static final int[] slots_sides = new int[] {};// fuel
     public int furnaceBurnTime = 0;
     public int currentItemBurnTime = 0;
     public int furnaceCookTime = 0;

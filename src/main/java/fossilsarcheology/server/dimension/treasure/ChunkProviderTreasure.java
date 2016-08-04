@@ -1,15 +1,15 @@
 package fossilsarcheology.server.dimension.treasure;
 
-import cpw.mods.fml.common.eventhandler.Event.Result;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.IProgressUpdate;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.ChunkPosition;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
@@ -19,6 +19,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.ChunkProviderEvent;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import net.minecraftforge.event.terraingen.TerrainGen;
+import net.minecraftforge.fml.common.eventhandler.Event.Result;
 
 import java.util.List;
 import java.util.Random;
@@ -39,10 +40,7 @@ public class ChunkProviderTreasure implements IChunkProvider {
     private NoiseGeneratorOctaves noiseGen3;
     private World endWorld;
     private double[] densities;
-    /**
-     * The biomes that are used to generate the chunk
-     */
-    private BiomeGenBase[] biomesForGeneration;
+    private Biome[] biomesForGeneration;
 
     public ChunkProviderTreasure(World p_i2007_1_, long p_i2007_2_) {
         this.endWorld = p_i2007_1_;
@@ -53,7 +51,7 @@ public class ChunkProviderTreasure implements IChunkProvider {
         this.noiseGen4 = new NoiseGeneratorOctaves(this.endRNG, 10);
         this.noiseGen5 = new NoiseGeneratorOctaves(this.endRNG, 16);
 
-        NoiseGenerator[] noiseGens = {noiseGen1, noiseGen2, noiseGen3, noiseGen4, noiseGen5};
+        NoiseGenerator[] noiseGens = { noiseGen1, noiseGen2, noiseGen3, noiseGen4, noiseGen5 };
         noiseGens = TerrainGen.getModdedNoiseGenerators(p_i2007_1_, this.endRNG, noiseGens);
         this.noiseGen1 = (NoiseGeneratorOctaves) noiseGens[0];
         this.noiseGen2 = (NoiseGeneratorOctaves) noiseGens[1];

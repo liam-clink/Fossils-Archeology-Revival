@@ -2,16 +2,16 @@ package fossilsarcheology.server.item;
 
 import fossilsarcheology.server.creativetab.FATabRegistry;
 import fossilsarcheology.server.handler.LocalizationStrings;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.Item;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class DominicanAmberItem extends Item {
 
     public DominicanAmberItem() {
         setUnlocalizedName(LocalizationStrings.DOMINICAN_AMBER_NAME);
-        setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
+        setCreativeTab(FATabRegistry.INSTANCE.ITEMS);
     }
 
     @Override

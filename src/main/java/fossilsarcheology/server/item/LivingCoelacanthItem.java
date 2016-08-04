@@ -2,9 +2,7 @@ package fossilsarcheology.server.item;
 
 import fossilsarcheology.Revival;
 import fossilsarcheology.server.entity.mob.EntityCoelacanth;
-import fossilsarcheology.server.enums.EnumPrehistoric;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import fossilsarcheology.server.enums.PrehistoricEntityType;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -12,15 +10,16 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.*;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
 public class LivingCoelacanthItem extends Item {
-    public static final int TypeCount = EnumPrehistoric.values().length;
-    public static final String[] names = new String[]{"first", "second", "third"};
+    public static final int TypeCount = PrehistoricEntityType.values().length;
+    public static final String[] names = new String[] { "first", "second", "third" };
     private int DinoType;
     @SideOnly(Side.CLIENT)
     private IIcon[] icons;
@@ -106,7 +105,7 @@ public class LivingCoelacanthItem extends Item {
         double var7 = var3.prevPosX + (var3.posX - var3.prevPosX) * (double) var4;
         double var9 = var3.prevPosY + (var3.posY - var3.prevPosY) * (double) var4 + 1.62D - (double) var3.yOffset;
         double var11 = var3.prevPosZ + (var3.posZ - var3.prevPosZ) * (double) var4;
-        Vec3 var13 = Vec3.createVectorHelper(var7, var9, var11);
+        Vec3d var13 = new Vec3d(var7, var9, var11);
         float var14 = MathHelper.cos(-var6 * 0.017453292F - (float) Math.PI);
         float var15 = MathHelper.sin(-var6 * 0.017453292F - (float) Math.PI);
         float var16 = -MathHelper.cos(-var5 * 0.017453292F);
@@ -114,13 +113,13 @@ public class LivingCoelacanthItem extends Item {
         float var18 = var15 * var16;
         float var19 = var14 * var16;
         double var20 = 5.0D;
-        Vec3 var22 = var13.addVector((double) var18 * var20, (double) var17 * var20, (double) var19 * var20);
+        Vec3d var22 = var13.addVector((double) var18 * var20, (double) var17 * var20, (double) var19 * var20);
         MovingObjectPosition var23 = this.getMovingObjectPositionFromPlayer(var2, var3, true);
 
         if (var23 == null) {
             return var1;
         } else {
-            Vec3 var24 = var3.getLook(var4);
+            Vec3d var24 = var3.getLook(var4);
             boolean var25 = false;
             float var26 = 1.0F;
             List var27 = var2.getEntitiesWithinAABBExcludingEntity(var3, var3.boundingBox.addCoord(var24.xCoord * var20, var24.yCoord * var20, var24.zCoord * var20).expand((double) var26, (double) var26, (double) var26));

@@ -207,7 +207,7 @@ public class TileEntityAncientChest extends TileEntity {
 
     public void closeInventory() {
         /*
-		 * if (this.getBlockType() instanceof BlockChest) {
+         * if (this.getBlockType() instanceof BlockChest) {
 		 * --this.numPlayersUsing; this.worldObj.addBlockEvent(this.xCoord,
 		 * this.yCoord, this.zCoord, this.getBlockType(), 1,
 		 * this.numPlayersUsing);

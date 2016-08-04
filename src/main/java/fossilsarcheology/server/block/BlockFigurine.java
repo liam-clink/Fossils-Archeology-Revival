@@ -5,9 +5,6 @@ import fossilsarcheology.server.block.entity.TileEntityFigurine;
 import fossilsarcheology.server.creativetab.FATabRegistry;
 import fossilsarcheology.server.handler.LocalizationStrings;
 import fossilsarcheology.server.item.block.FigurineBlockItem;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -18,22 +15,23 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
 public class BlockFigurine extends BlockContainer implements IBlockItem {
-    public static final String[] shortname = {"figurine_steve_pristine", "figurine_skeleton_pristine", "figurine_zombie_pristine", "figurine_pigzombie_pristine", "figurine_enderman_pristine", "figurine_steve_damaged", "figurine_skeleton_damaged", "figurine_zombie_damaged", "figurine_pigzombie_damaged", "figurine_enderman_damaged", "figurine_steve_broken", "figurine_skeleton_broken", "figurine_zombie_broken", "figurine_pigzombie_broken", "figurine_enderman_broken", "figurine_mysterious",};
+    public static final String[] shortname = { "figurine_steve_pristine", "figurine_skeleton_pristine", "figurine_zombie_pristine", "figurine_pigzombie_pristine", "figurine_enderman_pristine", "figurine_steve_damaged", "figurine_skeleton_damaged", "figurine_zombie_damaged", "figurine_pigzombie_damaged", "figurine_enderman_damaged", "figurine_steve_broken", "figurine_skeleton_broken", "figurine_zombie_broken", "figurine_pigzombie_broken", "figurine_enderman_broken", "figurine_mysterious", };
 
     private IIcon[] icons;
-    private int getMeta;
 
     public BlockFigurine() {
         super(Material.wood);
         setBlockBounds(0.25f, 0f, 0.25f, 0.75f, 0.5f, 0.75f);
-        setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
-        setBlockName(LocalizationStrings.FIGURINE_NAME);
+        setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
+        setUnlocalizedName(LocalizationStrings.FIGURINE_NAME);
     }
 
     @Override
@@ -74,25 +72,19 @@ public class BlockFigurine extends BlockContainer implements IBlockItem {
     }
 
     @Override
-    public void breakBlock(World world, int x, int y, int z, Block oldBlock, int oldMeta) {
-        this.getMeta = getDamageValue(world, x, y, z);
-        super.breakBlock(world, x, y, z, oldBlock, oldMeta);
-    }
-
-    @Override
     public TileEntity createNewTileEntity(World world, int par2) {
         return new TileEntityFigurine();
     }
 
     @Override
-    public int getDamageValue(World world, int x, int y, int z) {
-        TileEntity tileentity = world.getTileEntity(x, y, z);
-        return tileentity != null && tileentity instanceof TileEntityFigurine ? ((TileEntityFigurine) tileentity).getFigurineType() : super.getDamageValue(world, x, y, z);
+    public int getDamageValue(World par1World, int par2, int par3, int par4) {
+        TileEntity tileentity = par1World.getTileEntity(par2, par3, par4);
+        return tileentity != null && tileentity instanceof TileEntityFigurine ? ((TileEntityFigurine) tileentity).getFigurineType() : super.getDamageValue(par1World, par2, par3, par4);
     }
 
     @Override
     public int damageDropped(int meta) {
-        return this.getMeta;
+        return meta;
     }
 
     @Override

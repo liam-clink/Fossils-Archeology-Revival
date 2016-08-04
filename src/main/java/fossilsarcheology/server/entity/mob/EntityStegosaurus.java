@@ -1,5 +1,17 @@
 package fossilsarcheology.server.entity.mob;
 
+import fossilsarcheology.server.entity.EntityPrehistoric;
+import fossilsarcheology.server.entity.ai.DinoAIAttackOnCollide;
+import fossilsarcheology.server.entity.ai.DinoAIEatBlocks;
+import fossilsarcheology.server.entity.ai.DinoAIEatFeeders;
+import fossilsarcheology.server.entity.ai.DinoAIEatItems;
+import fossilsarcheology.server.entity.ai.DinoAIFollowOwner;
+import fossilsarcheology.server.entity.ai.DinoAIHunt;
+import fossilsarcheology.server.entity.ai.DinoAILookIdle;
+import fossilsarcheology.server.entity.ai.DinoAIWander;
+import fossilsarcheology.server.entity.ai.DinoAIWatchClosest;
+import fossilsarcheology.server.enums.EnumPrehistoricAI;
+import fossilsarcheology.server.enums.PrehistoricEntityType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
@@ -12,23 +24,11 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
-import fossilsarcheology.server.entity.EntityPrehistoric;
-import fossilsarcheology.server.entity.ai.DinoAIAttackOnCollide;
-import fossilsarcheology.server.entity.ai.DinoAIEatBlocks;
-import fossilsarcheology.server.entity.ai.DinoAIEatFeeders;
-import fossilsarcheology.server.entity.ai.DinoAIEatItems;
-import fossilsarcheology.server.entity.ai.DinoAIFollowOwner;
-import fossilsarcheology.server.entity.ai.DinoAIHunt;
-import fossilsarcheology.server.entity.ai.DinoAILookIdle;
-import fossilsarcheology.server.entity.ai.DinoAIWander;
-import fossilsarcheology.server.entity.ai.DinoAIWatchClosest;
-import fossilsarcheology.server.enums.EnumPrehistoric;
-import fossilsarcheology.server.enums.EnumPrehistoricAI;
 
 public class EntityStegosaurus extends EntityPrehistoric {
 
     public EntityStegosaurus(World world) {
-        super(world, EnumPrehistoric.Stegosaurus, 2, 9, 12, 66, 0.25, 0.3);
+        super(world, PrehistoricEntityType.STEGOSAURUS, 2, 9, 12, 66, 0.25, 0.3);
         this.getNavigator().setAvoidsWater(true);
         this.getNavigator().setCanSwim(true);
         this.tasks.addTask(1, new EntityAISwimming(this));
@@ -182,13 +182,13 @@ public class EntityStegosaurus extends EntityPrehistoric {
         }
         return false;
     }
-    
-	public int getMaxHunger() {
-		return 175;
-	}
-	
-	@Override
-	public boolean canBeRidden() {
-		return false;
-	}
+
+    public int getMaxHunger() {
+        return 175;
+    }
+
+    @Override
+    public boolean canBeRidden() {
+        return false;
+    }
 }

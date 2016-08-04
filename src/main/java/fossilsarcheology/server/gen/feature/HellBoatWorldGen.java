@@ -16,15 +16,15 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 import java.util.Random;
 
 public class HellBoatWorldGen extends WorldGenerator {
-    protected static final WeightedRandomChestContent[] field_111019_a = new WeightedRandomChestContent[]{new WeightedRandomChestContent(Item.getItemFromBlock(FABlockRegistry.INSTANCE.ancientGlass), 0, 2, 5, 25), new WeightedRandomChestContent(FAItemRegistry.INSTANCE.relic, 0, 1, 2, 76), new WeightedRandomChestContent(FAItemRegistry.INSTANCE.ancientSword, 0, 1, 3, 15), new WeightedRandomChestContent(Item.getItemFromBlock(FABlockRegistry.INSTANCE.blockSkull), 0, 1, 2, 60), new WeightedRandomChestContent(Item.getItemFromBlock(FABlockRegistry.INSTANCE.skullLantern), 0, 1, 2, 45), new WeightedRandomChestContent(Item.getItemFromBlock(FABlockRegistry.INSTANCE.drum), 0, 1, 1, 28), new WeightedRandomChestContent(FAItemRegistry.INSTANCE.potteryShards, 0, 1, 3, 70), new WeightedRandomChestContent(FAItemRegistry.INSTANCE.goldjavelin, 0, 1, 1, 33), new WeightedRandomChestContent(FAItemRegistry.INSTANCE.ironjavelin, 0, 1, 1, 46), new WeightedRandomChestContent(FAItemRegistry.INSTANCE.stoneboard, 0, 1, 3, 25), new WeightedRandomChestContent(Items.bone, 0, 1, 3, 85), new WeightedRandomChestContent(Items.emerald, 0, 1, 3, 25), new WeightedRandomChestContent(Items.flint, 0, 1, 3, 35), new WeightedRandomChestContent(Items.blaze_rod, 0, 1, 3, 30), new WeightedRandomChestContent(Items.ghast_tear, 0, 1, 2, 25), new WeightedRandomChestContent(Item.getItemFromBlock(Blocks.bookshelf), 0, 1, 5, 35), new WeightedRandomChestContent(Item.getItemFromBlock(Blocks.glowstone), 0, 1, 4, 35), new WeightedRandomChestContent(Item.getItemFromBlock(Blocks.obsidian), 0, 1, 6, 25), new WeightedRandomChestContent(Items.netherbrick, 0, 1, 12, 65), new WeightedRandomChestContent(Item.getItemFromBlock(Blocks.tnt), 0, 1, 6, 25)};
+    protected static final WeightedRandomChestContent[] field_111019_a = new WeightedRandomChestContent[] { new WeightedRandomChestContent(Item.getItemFromBlock(FABlockRegistry.INSTANCE.ancientGlass), 0, 2, 5, 25), new WeightedRandomChestContent(FAItemRegistry.INSTANCE.relic, 0, 1, 2, 76), new WeightedRandomChestContent(FAItemRegistry.INSTANCE.ancientSword, 0, 1, 3, 15), new WeightedRandomChestContent(Item.getItemFromBlock(FABlockRegistry.INSTANCE.blockSkull), 0, 1, 2, 60), new WeightedRandomChestContent(Item.getItemFromBlock(FABlockRegistry.INSTANCE.skullLantern), 0, 1, 2, 45), new WeightedRandomChestContent(Item.getItemFromBlock(FABlockRegistry.INSTANCE.drum), 0, 1, 1, 28), new WeightedRandomChestContent(FAItemRegistry.INSTANCE.potteryShards, 0, 1, 3, 70), new WeightedRandomChestContent(FAItemRegistry.INSTANCE.goldjavelin, 0, 1, 1, 33), new WeightedRandomChestContent(FAItemRegistry.INSTANCE.ironjavelin, 0, 1, 1, 46), new WeightedRandomChestContent(FAItemRegistry.INSTANCE.stoneboard, 0, 1, 3, 25), new WeightedRandomChestContent(Items.bone, 0, 1, 3, 85), new WeightedRandomChestContent(Items.emerald, 0, 1, 3, 25), new WeightedRandomChestContent(Items.flint, 0, 1, 3, 35), new WeightedRandomChestContent(Items.blaze_rod, 0, 1, 3, 30), new WeightedRandomChestContent(Items.ghast_tear, 0, 1, 2, 25), new WeightedRandomChestContent(Item.getItemFromBlock(Blocks.bookshelf), 0, 1, 5, 35), new WeightedRandomChestContent(Item.getItemFromBlock(Blocks.glowstone), 0, 1, 4, 35), new WeightedRandomChestContent(Item.getItemFromBlock(Blocks.obsidian), 0, 1, 6, 25), new WeightedRandomChestContent(Items.netherbrick, 0, 1, 12, 65), new WeightedRandomChestContent(Item.getItemFromBlock(Blocks.tnt), 0, 1, 6, 25) };
 
     protected Block[] GetValidSpawnBlocks() {
-        return new Block[]{Blocks.lava,};
+        return new Block[] { Blocks.lava, };
     }
 
-    public boolean LocationIsValidSpawn(World world, int x, int y, int z) {
+    public boolean LocationIsValidSpawn(World world, BlockPos pos) {
         int distanceToAir = 0;
-        Block checkBlock = world.getBlock(x, y, z);
+        Block checkBlock = world.getBlock(pos);
 
         while (checkBlock != Blocks.air) {
             distanceToAir++;
@@ -37,7 +37,7 @@ public class HellBoatWorldGen extends WorldGenerator {
 
         y += distanceToAir - 1;
 
-        Block block = world.getBlock(x, y, z);
+        Block block = world.getBlock(pos);
         Block blockAbove = world.getBlock(x, y + 1, z);
         Block blockBelow = world.getBlock(x, y - 1, z);
 
@@ -57,13 +57,13 @@ public class HellBoatWorldGen extends WorldGenerator {
     }
 
     @Override
-    public boolean generate(World world, Random rand, int x, int y, int z) {
-        generate_r0(world, rand, x, y, z);
+    public boolean generate(World world, Random rand, BlockPos pos) {
+        generate_r0(world, rand, pos);
         return true;
 
     }
 
-    public boolean generate_r0(World world, Random rand, int x, int y, int z) {
+    public boolean generate_r0(World world, Random rand, BlockPos pos) {
         if (!LocationIsValidSpawn(world, x + 16, y, z + 5)) {
             return false;
         }
@@ -1067,12 +1067,12 @@ public class HellBoatWorldGen extends WorldGenerator {
         world.setBlock(x + 15, y + 21, z + 6, Blocks.nether_brick_fence, 0, 3);
         world.setBlock(x + 16, y + 21, z + 6, Blocks.nether_brick_fence, 0, 3);
 
-        generate_r02_last(world, rand, x, y, z);
+        generate_r02_last(world, rand, pos);
         return true;
 
     }
 
-    public boolean generate_r02_last(World world, Random rand, int x, int y, int z) {
+    public boolean generate_r02_last(World world, Random rand, BlockPos pos) {
 
         world.setBlock(x + 2, y + 2, z + 4, Blocks.redstone_torch, 1, 3);
         world.setBlock(x + 2, y + 2, z + 6, Blocks.redstone_torch, 1, 3);

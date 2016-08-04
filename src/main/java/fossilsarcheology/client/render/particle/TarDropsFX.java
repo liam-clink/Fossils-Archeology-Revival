@@ -1,12 +1,12 @@
 package fossilsarcheology.client.render.particle;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.particle.EntityFX;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class TarDropsFX extends EntityFX {
@@ -14,7 +14,7 @@ public class TarDropsFX extends EntityFX {
     private int bobTimer;
 
     public TarDropsFX(World world, double x, double y, double z) {
-        super(world, x, y, z, 0.0D, 0.0D, 0.0D);
+        super(world, pos, 0.0D, 0.0D, 0.0D);
         this.motionX = this.motionY = this.motionZ = 0.0D;
         this.particleRed = 0.13F;
         this.particleGreen = 0.13F;

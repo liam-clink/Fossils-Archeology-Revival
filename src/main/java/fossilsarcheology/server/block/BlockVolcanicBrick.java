@@ -11,9 +11,9 @@ public class BlockVolcanicBrick extends Block {
         super(Material.rock);
         setHardness(3.0F);
         setResistance(5.0F);
-        setStepSound(Block.soundTypeStone);
-        setBlockName(LocalizationStrings.VOLCANIC_BRICK_NAME);
-        setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
+        setSoundType(Block.soundTypeStone);
+        setUnlocalizedName(LocalizationStrings.VOLCANIC_BRICK_NAME);
+        setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
     }
 
     @Override

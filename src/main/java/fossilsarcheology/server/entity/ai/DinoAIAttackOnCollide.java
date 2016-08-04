@@ -3,12 +3,9 @@ package fossilsarcheology.server.entity.ai;
 import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.entity.EntityToyBase;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.pathfinding.PathEntity;
-import net.minecraft.util.MathHelper;
-import net.minecraft.world.EnumDifficulty;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 public class DinoAIAttackOnCollide extends EntityAIBase {
@@ -40,8 +37,6 @@ public class DinoAIAttackOnCollide extends EntityAIBase {
             return false;
         } else if (this.classTarget != null && !this.classTarget.isAssignableFrom(entitylivingbase.getClass())) {
             return false;
-        }else if(dino.worldObj.difficultySetting == EnumDifficulty.PEACEFUL && entitylivingbase instanceof EntityPlayer){
-            return false;
         } else {
             this.entityPathEntity = this.dino.getNavigator().getPathToEntityLiving(entitylivingbase);
             return this.entityPathEntity != null;
@@ -56,7 +51,7 @@ public class DinoAIAttackOnCollide extends EntityAIBase {
 
     @Override
     public void startExecuting() {
-        if(this.dino.riddenByEntity == null){
+        if (this.dino.riddenByEntity == null) {
             this.dino.getNavigator().setPath(this.entityPathEntity, speed);
         }
     }
@@ -73,7 +68,7 @@ public class DinoAIAttackOnCollide extends EntityAIBase {
             dino.setAttackTarget(null);
             return;
         }
-        if(this.dino.riddenByEntity == null){
+        if (this.dino.riddenByEntity == null) {
             this.dino.getNavigator().tryMoveToEntityLiving(target, speed);
         }
         this.attackTick = Math.max(this.attackTick - 1, 0);

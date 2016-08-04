@@ -2,15 +2,14 @@ package fossilsarcheology.server.handler;
 
 import fossilsarcheology.Revival;
 import fossilsarcheology.server.entity.FossilPlayerProperites;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.I18n;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class EventPlayer {
     @SubscribeEvent
@@ -33,7 +32,7 @@ public class EventPlayer {
     @SubscribeEvent
     public void onBreakBlock(BlockEvent.BreakEvent event) {
         if (event.world.provider.dimensionId == Revival.CONFIG.dimensionIDDarknessLair && event.block != Blocks.obsidian && !FossilPlayerProperites.get(event.getPlayer()).isKilledAnu()) {
-            event.getPlayer().addChatMessage(new ChatComponentText(StatCollector.translateToLocal("anu.breakblock")));
+            Revival.messagePlayer(I18n.translateToLocal("anu.breakblock"), event.getPlayer());
             event.setCanceled(true);
         }
     }

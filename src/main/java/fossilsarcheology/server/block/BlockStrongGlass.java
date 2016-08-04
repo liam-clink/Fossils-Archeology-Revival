@@ -2,27 +2,27 @@ package fossilsarcheology.server.block;
 
 import fossilsarcheology.Revival;
 import fossilsarcheology.server.creativetab.FATabRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockStrongGlass extends Block {
 
     public IIcon[] textures = new IIcon[47];
 
-    public int[] textureRefByID = {0, 0, 6, 6, 0, 0, 6, 6, 3, 3, 19, 15, 3, 3, 19, 15, 1, 1, 18, 18, 1, 1, 13, 13, 2, 2, 23, 31, 2, 2, 27, 14, 0, 0, 6, 6, 0, 0, 6, 6, 3, 3, 19, 15, 3, 3, 19, 15, 1, 1, 18, 18, 1, 1, 13, 13, 2, 2, 23, 31, 2, 2, 27, 14, 4, 4, 5, 5, 4, 4, 5, 5, 17, 17, 22, 26, 17, 17, 22, 26, 16, 16, 20, 20, 16, 16, 28, 28, 21, 21, 46, 42, 21, 21, 43, 38, 4, 4, 5, 5, 4, 4, 5, 5, 9, 9, 30, 12, 9, 9, 30, 12, 16, 16, 20, 20, 16, 16, 28, 28, 25, 25, 45, 37, 25, 25, 40, 32, 0, 0, 6, 6, 0, 0, 6, 6, 3, 3, 19, 15, 3, 3, 19, 15, 1, 1, 18, 18, 1, 1, 13, 13, 2, 2, 23, 31, 2, 2, 27, 14, 0, 0, 6, 6, 0, 0, 6, 6, 3, 3, 19, 15, 3, 3, 19, 15, 1, 1, 18, 18, 1, 1, 13, 13, 2, 2, 23, 31, 2, 2, 27, 14, 4, 4, 5, 5, 4, 4, 5, 5, 17, 17, 22, 26, 17, 17, 22, 26, 7, 7, 24, 24, 7, 7, 10, 10, 29, 29, 44, 41, 29, 29, 39, 33, 4, 4, 5, 5, 4, 4, 5, 5, 9, 9, 30, 12, 9, 9, 30, 12, 7, 7, 24, 24, 7, 7, 10, 10, 8, 8, 36, 35, 8, 8, 34, 11};
+    public int[] textureRefByID = { 0, 0, 6, 6, 0, 0, 6, 6, 3, 3, 19, 15, 3, 3, 19, 15, 1, 1, 18, 18, 1, 1, 13, 13, 2, 2, 23, 31, 2, 2, 27, 14, 0, 0, 6, 6, 0, 0, 6, 6, 3, 3, 19, 15, 3, 3, 19, 15, 1, 1, 18, 18, 1, 1, 13, 13, 2, 2, 23, 31, 2, 2, 27, 14, 4, 4, 5, 5, 4, 4, 5, 5, 17, 17, 22, 26, 17, 17, 22, 26, 16, 16, 20, 20, 16, 16, 28, 28, 21, 21, 46, 42, 21, 21, 43, 38, 4, 4, 5, 5, 4, 4, 5, 5, 9, 9, 30, 12, 9, 9, 30, 12, 16, 16, 20, 20, 16, 16, 28, 28, 25, 25, 45, 37, 25, 25, 40, 32, 0, 0, 6, 6, 0, 0, 6, 6, 3, 3, 19, 15, 3, 3, 19, 15, 1, 1, 18, 18, 1, 1, 13, 13, 2, 2, 23, 31, 2, 2, 27, 14, 0, 0, 6, 6, 0, 0, 6, 6, 3, 3, 19, 15, 3, 3, 19, 15, 1, 1, 18, 18, 1, 1, 13, 13, 2, 2, 23, 31, 2, 2, 27, 14, 4, 4, 5, 5, 4, 4, 5, 5, 17, 17, 22, 26, 17, 17, 22, 26, 7, 7, 24, 24, 7, 7, 10, 10, 29, 29, 44, 41, 29, 29, 39, 33, 4, 4, 5, 5, 4, 4, 5, 5, 9, 9, 30, 12, 9, 9, 30, 12, 7, 7, 24, 24, 7, 7, 10, 10, 8, 8, 36, 35, 8, 8, 34, 11 };
 
     public BlockStrongGlass(Material material) {
         super(material);
         this.setLightOpacity(1);
-        this.setBlockName("strongGlass");
+        this.setUnlocalizedName("strongGlass");
         this.setHardness(3F);
         this.setResistance(25F);
-        this.setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
+        this.setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
     }
 
     @Override
@@ -62,17 +62,17 @@ public class BlockStrongGlass extends Block {
     }
 
     @Override
-    public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
+    public IIcon getIcon(IBlockAccess world, BlockPos pos, int side) {
         boolean[] bitMatrix = new boolean[8];
 
         if (side == 0 || side == 1) {
             bitMatrix[0] = world.getBlock(x - 1, y, z - 1) == this;
-            bitMatrix[1] = world.getBlock(x, y, z - 1) == this;
+            bitMatrix[1] = world.getBlock(pos - 1) == this;
             bitMatrix[2] = world.getBlock(x + 1, y, z - 1) == this;
             bitMatrix[3] = world.getBlock(x - 1, y, z) == this;
             bitMatrix[4] = world.getBlock(x + 1, y, z) == this;
             bitMatrix[5] = world.getBlock(x - 1, y, z + 1) == this;
-            bitMatrix[6] = world.getBlock(x, y, z + 1) == this;
+            bitMatrix[6] = world.getBlock(pos + 1) == this;
             bitMatrix[7] = world.getBlock(x + 1, y, z + 1) == this;
         }
         if (side == 2 || side == 3) {
@@ -89,8 +89,8 @@ public class BlockStrongGlass extends Block {
             bitMatrix[0] = world.getBlock(x, y + 1, z + (side == 5 ? 1 : -1)) == this;
             bitMatrix[1] = world.getBlock(x, y + 1, z) == this;
             bitMatrix[2] = world.getBlock(x, y + 1, z + (side == 4 ? 1 : -1)) == this;
-            bitMatrix[3] = world.getBlock(x, y, z + (side == 5 ? 1 : -1)) == this;
-            bitMatrix[4] = world.getBlock(x, y, z + (side == 4 ? 1 : -1)) == this;
+            bitMatrix[3] = world.getBlock(pos + (side == 5 ? 1 : -1)) == this;
+            bitMatrix[4] = world.getBlock(pos + (side == 4 ? 1 : -1)) == this;
             bitMatrix[5] = world.getBlock(x, y - 1, z + (side == 5 ? 1 : -1)) == this;
             bitMatrix[6] = world.getBlock(x, y - 1, z) == this;
             bitMatrix[7] = world.getBlock(x, y - 1, z + (side == 4 ? 1 : -1)) == this;

@@ -27,8 +27,8 @@ public class GenHelper {
      *
      * @return true if entire itemstack was added
      */
-    public static boolean addItemToTileInventory(World world, ItemStack itemstack, int x, int y, int z) {
-        TileEntity tile = world.getTileEntity(x, y, z);
+    public static boolean addItemToTileInventory(World world, ItemStack itemstack, BlockPos pos) {
+        TileEntity tile = world.getTileEntity(pos);
         if (tile == null || !(tile instanceof IInventory)) {
             System.err.println("Tile Entity at " + x + "/" + y + "/" + z + " is " + (tile != null ? "not an IInventory" : "null"));
             return false;
@@ -75,7 +75,7 @@ public class GenHelper {
      *
      * @return false if no suitable location found
      */
-    public static boolean setEntityInStructure(World world, Entity entity, int x, int y, int z) {
+    public static boolean setEntityInStructure(World world, Entity entity, BlockPos pos) {
         if (entity == null) {
             return false;
         }
@@ -83,19 +83,19 @@ public class GenHelper {
         int i = 0;
         int iMax = (entity.width > 1f ? 16 : 4);
 
-        world.setBlockToAir(x, y, z);
+        world.setBlockToAir(pos);
 
-        entity.setLocationAndAngles(x, y, z, 0f, 0f);
+        entity.setLocationAndAngles(pos, 0f, 0f);
 
         while (entity.isEntityInsideOpaqueBlock() && i < iMax) {
             if (i == 4 && entity.isEntityInsideOpaqueBlock() && entity.width > 1f) {
-                entity.setLocationAndAngles(x, y, z, 90f, 0f);
+                entity.setLocationAndAngles(pos, 90f, 0f);
                 System.out.println("Large entity; rotating 90 degrees");
             } else if (i == 8 && entity.isEntityInsideOpaqueBlock() && entity.width > 1f) {
-                entity.setLocationAndAngles(x, y, z, 180f, 0f);
+                entity.setLocationAndAngles(pos, 180f, 0f);
                 System.out.println("Large entity; rotating 180 degrees");
             } else if (i == 12 && entity.isEntityInsideOpaqueBlock() && entity.width > 1f) {
-                entity.setLocationAndAngles(x, y, z, 270f, 0f);
+                entity.setLocationAndAngles(pos, 270f, 0f);
                 System.out.println("Large entity; rotating 270 degrees");
             }
 
@@ -133,12 +133,12 @@ public class GenHelper {
      * @return true if entity spawned without collision (entity will still spawn
      * if false, but may be in a wall)
      */
-    public static boolean spawnEntityInStructure(World world, Entity entity, int x, int y, int z) {
+    public static boolean spawnEntityInStructure(World world, Entity entity, BlockPos pos) {
         if (world.isRemote || entity == null) {
             return false;
         }
 
-        boolean collided = setEntityInStructure(world, entity, x, y, z);
+        boolean collided = setEntityInStructure(world, entity, pos);
         world.spawnEntityInWorld(entity);
         System.out.println("Spawned entity at " + entity.posX + "/" + entity.posY + "/" + entity.posZ);
         return collided;
@@ -148,7 +148,7 @@ public class GenHelper {
      * Returns an AxisAlignedBB suitable for a hanging entity at x/y/z facing
      * direction
      */
-    public static AxisAlignedBB getHangingEntityAxisAligned(int x, int y, int z, int direction) {
+    public static AxisAlignedBB getHangingEntityAxisAligned(BlockPos pos, int direction) {
         double minX = x, minZ = z, maxX = minX, maxZ = minZ;
         switch (direction) {
             case 2: // frame facing NORTH
@@ -191,24 +191,24 @@ public class GenHelper {
      * it can be stored in a local variable for later use.
      *
      * @param hanging Must be an instance of ItemHangingEntity, such as
-     *                Item.painting
+     * Item.painting
      * @return Returns direction for further processing such as for ItemFrames,
      * or -1 if no entity set
      */
-    public static int setHangingEntity(World world, ItemStack hanging, int x, int y, int z) {
+    public static int setHangingEntity(World world, ItemStack hanging, BlockPos pos) {
         if (hanging.getItem() == null || !(hanging.getItem() instanceof ItemHangingEntity)) {
             return -1;
         }
 
-        if (world.getBlockMetadata(x, y, z) < 1 || world.getBlockMetadata(x, y, z) > 5) {
-            System.err.println("Hanging entity has invalid metadata of " + world.getBlockMetadata(x, y, z) + ". Valid values are 1,2,3,4");
+        if (world.getBlockMetadata(pos) < 1 || world.getBlockMetadata(pos) > 5) {
+            System.err.println("Hanging entity has invalid metadata of " + world.getBlockMetadata(pos) + ". Valid values are 1,2,3,4");
             return -1;
         }
 
-        int[] metaToFacing = {5, 4, 3, 2};
-        int direction = metaToFacing[world.getBlockMetadata(x, y, z) - 1];
+        int[] metaToFacing = { 5, 4, 3, 2 };
+        int direction = metaToFacing[world.getBlockMetadata(pos) - 1];
 
-        world.setBlockToAir(x, y, z);
+        world.setBlockToAir(pos);
         switch (direction) {
             case 2:
                 ++z;
@@ -233,19 +233,19 @@ public class GenHelper {
      *
      * @param direction Use the value returned from the setHangingEntity method
      */
-    public static void setItemFrameStack(World world, ItemStack itemstack, int x, int y, int z, int direction) {
-        setItemFrameStack(world, itemstack, x, y, z, direction, 0);
+    public static void setItemFrameStack(World world, ItemStack itemstack, BlockPos pos, int direction) {
+        setItemFrameStack(world, itemstack, pos, direction, 0);
     }
 
     /**
      * Set's the itemstack contained in ItemFrame at x/y/z with specified
      * rotation.
      *
-     * @param direction    Use the value returned from the setHangingEntity method
+     * @param direction Use the value returned from the setHangingEntity method
      * @param itemRotation 0,1,2,3 starting at default and rotating 90 degrees clockwise
      */
-    public static void setItemFrameStack(World world, ItemStack itemstack, int x, int y, int z, int direction, int itemRotation) {
-        List<EntityItemFrame> frames = world.getEntitiesWithinAABB(EntityItemFrame.class, getHangingEntityAxisAligned(x, y, z, direction));
+    public static void setItemFrameStack(World world, ItemStack itemstack, BlockPos pos, int direction, int itemRotation) {
+        List<EntityItemFrame> frames = world.getEntitiesWithinAABB(EntityItemFrame.class, getHangingEntityAxisAligned(pos, direction));
         if (frames != null && !frames.isEmpty()) {
             for (EntityItemFrame frame : frames) {
                 frame.setDisplayedItem(itemstack);
@@ -261,8 +261,8 @@ public class GenHelper {
      * @param direction Use the value returned from the setHangingEntity method
      * @return false if 'name' didn't match any EnumArt values.
      */
-    public static boolean setPaintingArt(World world, String name, int x, int y, int z, int direction) {
-        List<EntityPainting> paintings = world.getEntitiesWithinAABB(EntityPainting.class, getHangingEntityAxisAligned(x, y, z, direction));
+    public static boolean setPaintingArt(World world, String name, BlockPos pos, int direction) {
+        List<EntityPainting> paintings = world.getEntitiesWithinAABB(EntityPainting.class, getHangingEntityAxisAligned(pos, direction));
         if (paintings != null && !paintings.isEmpty() && name.length() > 0) {
             for (EntityPainting toEdit : paintings) {
                 EnumArt[] aenumart = EnumArt.values();
@@ -284,11 +284,11 @@ public class GenHelper {
      * Text of more than 15 characters per line will be truncated automatically.
      *
      * @param text A String array of no more than 4 elements; additional elements
-     *             will be ignored
+     * will be ignored
      * @return false if no sign tile entity was found at x/y/z
      */
-    public static boolean setSignText(World world, String[] text, int x, int y, int z) {
-        TileEntitySign sign = (world.getTileEntity(x, y, z) instanceof TileEntitySign ? (TileEntitySign) world.getTileEntity(x, y, z) : null);
+    public static boolean setSignText(World world, String[] text, BlockPos pos) {
+        TileEntitySign sign = (world.getTileEntity(pos) instanceof TileEntitySign ? (TileEntitySign) world.getTileEntity(pos) : null);
         if (sign != null) {
             for (int i = 0; i < sign.signText.length && i < text.length; ++i) {
                 if (text[i] == null) {
@@ -312,8 +312,8 @@ public class GenHelper {
      * Method to set skulls not requiring extra rotation data (i.e. wall-mounted
      * skulls whose rotation is determined by metadata)
      */
-    public static boolean setSkullData(World world, String name, int type, int x, int y, int z) {
-        return setSkullData(world, name, type, -1, x, y, z);
+    public static boolean setSkullData(World world, String name, int type, BlockPos pos) {
+        return setSkullData(world, name, type, -1, pos);
     }
 
     /**
@@ -321,13 +321,13 @@ public class GenHelper {
      *
      * @param name Must be a valid player username
      * @param type Type of skull: 0 Skeleton, 1 Wither Skeleton, 2 Zombie, 3
-     *             Human, 4 Creeper
-     * @param rot  Sets the rotation for the skull if positive value is used
+     * Human, 4 Creeper
+     * @param rot Sets the rotation for the skull if positive value is used
      * @return false if errors were encountered (i.e. incorrect tile entity at
      * x/y/z)
      */
-    public static boolean setSkullData(World world, String name, int type, int rot, int x, int y, int z) {
-        TileEntitySkull skull = (world.getTileEntity(x, y, z) instanceof TileEntitySkull ? (TileEntitySkull) world.getTileEntity(x, y, z) : null);
+    public static boolean setSkullData(World world, String name, int type, int rot, BlockPos pos) {
+        TileEntitySkull skull = (world.getTileEntity(pos) instanceof TileEntitySkull ? (TileEntitySkull) world.getTileEntity(pos) : null);
 
         if (skull != null) {
             if (type > 4 || type < 0) {
@@ -362,8 +362,8 @@ public class GenHelper {
      * structure to make sure everything is oriented how you thought it was.
      *
      * @param rotations The number of rotations to apply
-     * @param block     The block being rotated
-     * @param origMeta  The block's original metadata value
+     * @param block The block being rotated
+     * @param origMeta The block's original metadata value
      */
     public static int getMetadata(int rotations, Block block, int origMeta) {
         if (BlockRotationData.getBlockRotationType(block) == null) {
@@ -468,18 +468,18 @@ public class GenHelper {
      * is automatically determined by the block when placed via the onBlockAdded
      * method.
      */
-    public static void setMetadata(World world, int x, int y, int z, int origMeta) {
-        Block block = world.getBlock(x, y, z);
+    public static void setMetadata(World world, BlockPos pos, int origMeta) {
+        Block block = world.getBlock(pos);
         if (BlockRotationData.getBlockRotationType(block) == null) {
             return;
         }
 
         switch (BlockRotationData.getBlockRotationType(block)) {
             case PISTON_CONTAINER:
-                world.setBlockMetadataWithNotify(x, y, z, origMeta, 2);
+                world.setBlockMetadataWithNotify(pos, origMeta, 2);
                 break;
             case RAIL:
-                world.setBlockMetadataWithNotify(x, y, z, origMeta, 2);
+                world.setBlockMetadataWithNotify(pos, origMeta, 2);
                 break;
             default:
                 break;

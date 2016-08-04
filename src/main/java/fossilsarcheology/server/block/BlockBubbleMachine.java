@@ -2,8 +2,6 @@ package fossilsarcheology.server.block;
 
 import fossilsarcheology.Revival;
 import fossilsarcheology.server.creativetab.FATabRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -11,8 +9,10 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Random;
 
@@ -29,10 +29,10 @@ public class BlockBubbleMachine extends Block {
 
     protected BlockBubbleMachine() {
         super(Material.iron);
-        this.setStepSound(Block.soundTypeMetal);
+        this.setSoundType(Block.soundTypeMetal);
         this.setHardness(3.0F);
-        this.setBlockName("bubbleMachine");
-        this.setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
+        this.setUnlocalizedName("bubbleMachine");
+        this.setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
     }
 
     @Override
@@ -59,13 +59,13 @@ public class BlockBubbleMachine extends Block {
     }
 
     @SideOnly(Side.CLIENT)
-    public void randomDisplayTick(World world, int x, int y, int z, Random rand) {
+    public void randomDisplayTick(World world, BlockPos pos, Random rand) {
 
-        super.randomDisplayTick(world, x, y, z, rand);
-        if (world.isBlockIndirectlyGettingPowered(x, y, z)) {
+        super.randomDisplayTick(world, pos, rand);
+        if (world.isBlockIndirectlyGettingPowered(pos)) {
             world.playSound((double) x + 0.5D, (double) y + 0.5D, (double) z + 0.5D, "random.pop", 0.5F, rand.nextFloat() * 0.7F + 0.4F, false);
 
-            switch (world.getBlockMetadata(x, y, z)) {
+            switch (world.getBlockMetadata(pos)) {
                 case 2:
                     Revival.PROXY.spawnBubbleParticles(world, x + rand.nextFloat(), y + rand.nextFloat(), z, 0, 0.1, 0);
                     Revival.PROXY.spawnBubbleParticles(world, x + rand.nextFloat(), y + rand.nextFloat(), z, 0, 0.1, 0);
@@ -95,23 +95,23 @@ public class BlockBubbleMachine extends Block {
     }
 
     @Override
-    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase placer, ItemStack stack) {
+    public void onBlockPlacedBy(World world, BlockPos pos, EntityLivingBase placer, ItemStack stack) {
         int rotate = MathHelper.floor_double((double) (placer.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
 
         if (rotate == 0) {
-            world.setBlockMetadataWithNotify(x, y, z, 2, 2);
+            world.setBlockMetadataWithNotify(pos, 2, 2);
         }
 
         if (rotate == 1) {
-            world.setBlockMetadataWithNotify(x, y, z, 5, 2);
+            world.setBlockMetadataWithNotify(pos, 5, 2);
         }
 
         if (rotate == 2) {
-            world.setBlockMetadataWithNotify(x, y, z, 3, 2);
+            world.setBlockMetadataWithNotify(pos, 3, 2);
         }
 
         if (rotate == 3) {
-            world.setBlockMetadataWithNotify(x, y, z, 4, 2);
+            world.setBlockMetadataWithNotify(pos, 4, 2);
         }
     }
 }

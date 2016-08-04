@@ -212,13 +212,13 @@ public class ModelCompsognathus extends ModelPrehistoric {
 
     @Override
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
-        AdvancedModelRenderer[] tailParts = {this.tail1, this.tail2};
-        AdvancedModelRenderer[] neckParts = {this.neck, this.head};
-        AdvancedModelRenderer[] leftArmParts = {this.LeftUpperArm, this.LeftLowerArm};
-        AdvancedModelRenderer[] rightArmParts = {this.RightUpperArm, this.RightLowerArm};
-		if(((EntityPrehistoric) entity).isSkeleton()){
-			return;
-		}
+        AdvancedModelRenderer[] tailParts = { this.tail1, this.tail2 };
+        AdvancedModelRenderer[] neckParts = { this.neck, this.head };
+        AdvancedModelRenderer[] leftArmParts = { this.LeftUpperArm, this.LeftLowerArm };
+        AdvancedModelRenderer[] rightArmParts = { this.RightUpperArm, this.RightLowerArm };
+        if (((EntityPrehistoric) entity).isSkeleton()) {
+            return;
+        }
         ModelUtils.faceTargetMod(neck, f3, f4, 0.5F);
         ModelUtils.faceTargetMod(head, f3, f4, 0.5F);
 
@@ -269,11 +269,11 @@ public class ModelCompsognathus extends ModelPrehistoric {
         }
         this.bob(body, speed, degree * 0.7F, false, entity.ticksExisted, 1);
         this.walk(LeftUpperLeg, speed2, 0.6F, false, 0F, 0.4F, f, f1);
-		this.walk(LeftLowerLeg, speed2, 0.2F, false, 0F, -0.6F, f, f1);
-		this.walk(LeftFoot, speed2, -0.6F, true, 2.5F, -0.4F, f, f1);
-		this.walk(RightUpperLeg, speed2, 0.6F, true, 0F, -0.4F, f, f1);
-		this.walk(RightLowerLeg, speed2, 0.2F, true, 0F, 0.6F, f, f1);
-		this.walk(RightFoot, speed2, -0.6F, false, 2.5F, 0.4F, f, f1);
+        this.walk(LeftLowerLeg, speed2, 0.2F, false, 0F, -0.6F, f, f1);
+        this.walk(LeftFoot, speed2, -0.6F, true, 2.5F, -0.4F, f, f1);
+        this.walk(RightUpperLeg, speed2, 0.6F, true, 0F, -0.4F, f, f1);
+        this.walk(RightLowerLeg, speed2, 0.2F, true, 0F, 0.6F, f, f1);
+        this.walk(RightFoot, speed2, -0.6F, false, 2.5F, 0.4F, f, f1);
         this.chainWave(tailParts, speed, degree * 0.05F, -3, entity.ticksExisted, 1);
         this.chainWave(leftArmParts, speed, degree * 0.15F, -3, entity.ticksExisted, 1);
         this.chainWave(rightArmParts, speed, degree * 0.15F, -3, entity.ticksExisted, 1);

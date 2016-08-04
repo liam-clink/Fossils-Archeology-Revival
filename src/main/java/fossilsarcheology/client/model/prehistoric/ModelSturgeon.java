@@ -115,7 +115,7 @@ public class ModelSturgeon extends AdvancedModelBase {
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
         this.resetToDefaultPose();
         this.MiddleTailFin.setScale(1.1F, 1.1F, 1.1F);
-        AdvancedModelRenderer[] tailParts = {this.Tail, this.Tail2, this.MiddleTailFin};
+        AdvancedModelRenderer[] tailParts = { this.Tail, this.Tail2, this.MiddleTailFin };
         float speed = 0.4F;
         this.chainWave(tailParts, speed, 0.05F, -3, entity.ticksExisted, 1);
         this.chainSwing(tailParts, speed, 0.5F, -3, entity.ticksExisted, 1);

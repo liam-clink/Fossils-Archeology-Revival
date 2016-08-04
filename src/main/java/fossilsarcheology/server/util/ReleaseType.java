@@ -4,7 +4,7 @@ public enum ReleaseType {
     DEVELOP {
         @Override
         public String getBranding() {
-            return "DEV";
+            return "DEV BUILD";
         }
 
         @Override
@@ -12,10 +12,10 @@ public enum ReleaseType {
             return true;
         }
     },
-    RELEASE_CANDIDATE {
+    BETA {
         @Override
         public String getBranding() {
-            return "RC";
+            return "PRE-RELEASE";
         }
     },
     RELEASE {
@@ -34,8 +34,8 @@ public enum ReleaseType {
     public static ReleaseType parseVersion(String version) {
         if (version.endsWith("-develop")) {
             return DEVELOP;
-        } else if (version.contains("-rc")) {
-            return RELEASE_CANDIDATE;
+        } else if (version.contains("-pre")) {
+            return BETA;
         } else {
             return RELEASE;
         }

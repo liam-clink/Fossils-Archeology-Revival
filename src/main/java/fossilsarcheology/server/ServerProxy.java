@@ -1,8 +1,9 @@
 package fossilsarcheology.server;
 
-import java.util.Random;
-
-import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
+import fossilsarcheology.server.block.FABlockRegistry;
+import fossilsarcheology.server.entity.EntityFishBase;
+import fossilsarcheology.server.entity.EntityPrehistoric;
+import fossilsarcheology.server.item.FAItemRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.item.Item;
@@ -10,10 +11,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ChestGenHooks;
-import fossilsarcheology.server.block.FABlockRegistry;
-import fossilsarcheology.server.entity.EntityFishBase;
-import fossilsarcheology.server.entity.EntityPrehistoric;
-import fossilsarcheology.server.item.FAItemRegistry;
+
+import java.util.Random;
 
 public class ServerProxy {
     public void init() {
@@ -65,7 +64,7 @@ public class ServerProxy {
     public void calculateChainBuffer(EntityFishBase entity) {
 
     }
-   
+
 
     public void spawnBubbleParticles(World world, float f, float f1, float f2, double motionX, double motionY, double motionZ) {
     }
@@ -77,8 +76,5 @@ public class ServerProxy {
     }
 
     public void spawnPacketBlockParticles(World world, float f, float f1, float f2, double motionX, double motionY, double motionZ, Block block) {
-    }
-
-    public void spawnSleepParticles(World world, float f, float f1, float f2, double motionX, double motionY, double motionZ) {
     }
 }

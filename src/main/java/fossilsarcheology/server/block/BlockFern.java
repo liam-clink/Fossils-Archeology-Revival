@@ -2,39 +2,34 @@ package fossilsarcheology.server.block;
 
 import fossilsarcheology.server.handler.LocalizationStrings;
 import fossilsarcheology.server.item.FAItemRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
-import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.ColorizerGrass;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Random;
 
 public class BlockFern extends BlockBush {
-    public static IIcon[] fernPics = new IIcon[13];
-
     public BlockFern() {
-        super(Material.plants);
+        super(Material.PLANTS);
         this.setTickRandomly(true);
         float var3 = 0.5F;
         this.setBlockBounds(0.5F - var3, 0.0F, 0.5F - var3, 0.5F + var3, 0.25F, 0.5F + var3);
         this.disableStats();
-        this.setBlockName(LocalizationStrings.FERN_BLOCK_NAME);
+        this.setUnlocalizedName(LocalizationStrings.FERN_BLOCK_NAME);
         this.setHardness(0.0F);
-        this.setStepSound(Block.soundTypeGrass);
-        this.setCreativeTab(null);
+        this.setSoundType(SoundType.PLANT);
 
-        // this.setCreativeTab(Revival.tabFBlocks);
+        // this.setCreativeTab(Revival.BLOCKS);
         // this.setRequiresSelfNotify();
     }
 
@@ -46,31 +41,6 @@ public class BlockFern extends BlockBush {
         }
 
         return false;
-    }
-
-    /*
-     * public BlockFern(int var1, int var2, boolean lev0) { this(var1, var2); }
-     */
-    @Override
-    @SideOnly(Side.CLIENT)
-    /**
-     * When this method is called, your block should register all the icons it needs with the given IIconRegister. This
-     * is the only chance you get to register icons.
-     */
-    public void registerBlockIcons(IIconRegister par1IIconRegister) {
-        fernPics[0] = par1IIconRegister.registerIcon("fossil:Fern_1S1");
-        fernPics[1] = par1IIconRegister.registerIcon("fossil:Fern_1S2");
-        fernPics[2] = par1IIconRegister.registerIcon("fossil:Fern_1S3");
-        fernPics[3] = par1IIconRegister.registerIcon("fossil:Fern_1S4");
-        fernPics[4] = par1IIconRegister.registerIcon("fossil:Fern_1S5");
-        fernPics[5] = par1IIconRegister.registerIcon("fossil:Fern_1S6");
-        fernPics[6] = par1IIconRegister.registerIcon("fossil:Fern_1S7");
-        fernPics[7] = par1IIconRegister.registerIcon("fossil:Fern_1S8");
-        fernPics[8] = par1IIconRegister.registerIcon("fossil:Fern_2S1");
-        fernPics[9] = par1IIconRegister.registerIcon("fossil:Fern_2S2");
-        fernPics[10] = par1IIconRegister.registerIcon("fossil:Fern_2S3");
-        fernPics[11] = par1IIconRegister.registerIcon("fossil:Fern_2S4");
-        fernPics[12] = par1IIconRegister.registerIcon("fossil:Fern_2S5");
     }
 
     @Override
@@ -125,7 +95,7 @@ public class BlockFern extends BlockBush {
             }
 
 			/*
-			 * else if (!this.lv2 && var5.nextInt(100) < 5) {
+             * else if (!this.lv2 && var5.nextInt(100) < 5) {
 			 * this.breakBlock(var1, var2, var3, var4, this.blockID, var6); }
 			 */
         }
@@ -290,7 +260,7 @@ public class BlockFern extends BlockBush {
     }
 
     @Override
-    public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z, EntityPlayer player) {
+    public ItemStack getPickBlock(MovingObjectPosition target, World world, BlockPos pos, EntityPlayer player) {
         return new ItemStack(FAItemRegistry.INSTANCE.fernSeed);
     }
 
@@ -314,7 +284,7 @@ public class BlockFern extends BlockBush {
     }
 
     @Override
-    public int colorMultiplier(IBlockAccess world, int x, int y, int z) {
-        return world.getBiomeGenForCoords(x, z).getBiomeFoliageColor(x, y, z);
+    public int colorMultiplier(IBlockAccess world, BlockPos pos) {
+        return world.getBiomeGenForCoords(x, z).getBiomeFoliageColor(pos);
     }
 }

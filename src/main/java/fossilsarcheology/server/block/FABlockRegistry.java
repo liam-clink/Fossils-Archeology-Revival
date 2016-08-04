@@ -1,15 +1,18 @@
 package fossilsarcheology.server.block;
 
 import com.google.common.collect.Lists;
-import cpw.mods.fml.common.registry.GameRegistry;
+import fossilsarcheology.Revival;
 import fossilsarcheology.server.block.sound.FossilSoundType;
 import fossilsarcheology.server.creativetab.FATabRegistry;
 import fossilsarcheology.server.handler.LocalizationStrings;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import java.lang.reflect.Field;
 import java.util.List;
@@ -21,10 +24,10 @@ public enum FABlockRegistry {
     public Block blockFossil;
     public Block blockSkull;
     public Block skullLantern;
-    public Block blockanalyzerIdle;
-    public Block blockanalyzerActive;
-    public Block blockcultivateIdle;
-    public Block blockcultivateActive;
+    public Block analyzerIdle;
+    public Block analyzerActive;
+    public Block CULTIVATE_IDLE;
+    public Block CULTIVATE_ACTIVE;
     public Block blockSlimeTrail;
     public Block blockworktableIdle;
     public Block blockworktableActive;
@@ -101,19 +104,19 @@ public enum FABlockRegistry {
     public FossilSoundType soundTypeSlime = new FossilSoundType(1.0F, 1.0F);
 
     public void init() {
-        tar_material = new MaterialTar(MapColor.blackColor);
+        tar_material = new MaterialTar(MapColor.BLACK);
         tar_fluid = new FluidTar("tar").setBlock(tar);
         FluidRegistry.registerFluid(tar_fluid);
         skullLantern = new BlockFossilSkull(true).setLightLevel(1F);
-        blockanalyzerIdle = new BlockAnalyzer(false);
-        blockanalyzerActive = new BlockAnalyzer(true);
-        blockcultivateIdle = new BlockCultivate(false);
-        blockcultivateActive = new BlockCultivate(true);
-        blockSlimeTrail = new BlockSlimeTrail().setHardness(0.3F).setBlockTextureName("fossil:Slime_Trail").setStepSound(soundTypeSlime).setBlockName(LocalizationStrings.BLOCK_SLIME_TRAIL_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
+        analyzerIdle = new BlockAnalyzer(false);
+        analyzerActive = new BlockAnalyzer(true);
+        CULTIVATE_IDLE = new BlockCultivate(false);
+        CULTIVATE_ACTIVE = new BlockCultivate(true);
+        blockSlimeTrail = new BlockSlimeTrail().setHardness(0.3F).setUnlocalizedName(LocalizationStrings.BLOCK_SLIME_TRAIL_NAME).setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
         blockworktableIdle = new BlockWorktable(false);
         blockworktableActive = new BlockWorktable(true);
         denseSand = new BlockDenseSand();
-        strongGlass = new BlockStrongGlass(Material.glass);
+        strongGlass = new BlockStrongGlass(Material.GLASS);
         feederIdle = new BlockFeeder(false);
         feederActive = new BlockFeeder(true);
         blockTimeMachine = new BlockTimeMachine();
@@ -129,7 +132,7 @@ public enum FABlockRegistry {
         palaePlanks = new BlockPalaePlanks();
         palaeDoubleSlab = new BlockPalaeSlab(true);
         palaeSingleSlab = new BlockPalaeSlab(false);
-        palaeStairs = new BlockFossilStairs(palaePlanks, 0).setBlockName(LocalizationStrings.PALAE_STAIRS_NAME);
+        palaeStairs = new BlockFossilStairs(palaePlanks, 0).setUnlocalizedName(LocalizationStrings.PALAE_STAIRS_NAME);
         volcanicAsh = new BlockVolcanicAsh();
         volcanicRock = new BlockVolcanicRock();
         volcanicBrick = new BlockVolcanicBrick();
@@ -139,24 +142,24 @@ public enum FABlockRegistry {
         ancientStonebrick = new BlockAncientStonebrick();
         ancientWood = new BlockAncientWood();
         ancientWoodPillar = new BlockAncientWoodPillar();
-        ancientGlass = new BlockAncientGlass(Material.glass);
+        ancientGlass = new BlockAncientGlass(Material.GLASS);
         ancientWoodPlate = new BlockAncientWoodPlate();
-        ancientWoodStairs = new BlockFossilStairs(ancientWood, 0).setBlockName(LocalizationStrings.ANCIENT_WOOD_STAIRS_NAME);
+        ancientWoodStairs = new BlockFossilStairs(ancientWood, 0).setUnlocalizedName(LocalizationStrings.ANCIENT_WOOD_STAIRS_NAME);
         ancientWoodDoubleSlab = new BlockAncientWoodSlab(true);
         ancientWoodSingleSlab = new BlockAncientWoodSlab(false);
-        ancientStoneStairs = new BlockFossilStairs(ancientStone, 0).setBlockName(LocalizationStrings.ANCIENT_STONE_STAIRS_NAME);
+        ancientStoneStairs = new BlockFossilStairs(ancientStone, 0).setUnlocalizedName(LocalizationStrings.ANCIENT_STONE_STAIRS_NAME);
         ancientStoneDoubleSlab = new BlockAncientStoneSlab(true);
         ancientStoneSingleSlab = new BlockAncientStoneSlab(false);
-        obsidianSpikes = new BlockSpikes().setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks).setHardness(50.0F).setResistance(2000.0F).setStepSound(Block.soundTypePiston).setBlockName("obsidianSpikes").setBlockTextureName("fossil:obsidianSpikes");
+        obsidianSpikes = new BlockSpikes().setCreativeTab(FATabRegistry.INSTANCE.BLOCKS).setHardness(50.0F).setResistance(2000.0F).setUnlocalizedName("obsidianSpikes").setBlockTextureName("fossil:obsidianSpikes");
         figurineBlock = new BlockFigurine();
         anuTotem = new BlockAnuStatue();
         anuPortal = new BlockAnuPortal();
         homePortal = new BlockHomePortal();
         anubiteStatue = new BlockAnubiteStatue();
-        ancientChest = new BlockAncientChest().setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
+        ancientChest = new BlockAncientChest().setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
         blockSifterIdle = new BlockSifter(false);
         blockSifterActive = new BlockSifter(true);
-        volcanicStairs = new BlockFossilStairs(volcanicBrick, 0).setBlockName(LocalizationStrings.VOLCANIC_STAIRS);
+        volcanicStairs = new BlockFossilStairs(volcanicBrick, 0).setUnlocalizedName(LocalizationStrings.VOLCANIC_STAIRS);
         volcanicDoubleSlab = new BlockVolcanicSlab(true);
         volcanicSingleSlab = new BlockVolcanicSlab(false);
         bubbleMachine = new BlockBubbleMachine();
@@ -164,50 +167,49 @@ public enum FABlockRegistry {
         vaseAmphoraBlock = new BlockVaseAmphora();
         vaseKylixBlock = new BlockVaseKylix();
         sarcophagus = new BlockSarcophagus();
-        dillhoffia = new BlockFossilPlant("plants/plant_dillhoffia", 1).setBlockName("plant_dillhoffia").setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
-        sarracina = new BlockFossilTallPlant("plants/plant_sarracina").setBlockName("plant_sarracina").setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
-        cephalotaxus = new BlockFossilPlant("plants/plant_cephalotaxus", 1).setBlockName("plant_cephalotaxus").setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
-        licopodiophyta = new BlockFossilPlant("plants/plant_licopodiophyta", 1).setBlockName("plant_licopodiophyta").setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
-        paleopanax = new BlockFossilTallPlant("plants/plant_paleopanax").setBlockName("plant_paleopanax").setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
-        zamites = new BlockFossilPlant("plants/plant_zamites", 1).setBlockName("plant_zamites").setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
-        bennettitales_small = new BlockFossilPlant("plants/plant_bennettitales_small", 1).setBlockName("plant_bennettitales_small").setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
-        bennettitales_large = new BlockFossilTallPlant("plants/plant_bennettitales_large").setBlockName("plant_bennettitales_large").setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
-        welwitschia = new BlockFossilPlant("plants/plant_welwitschia", 1).setBlockName("plant_welwitschia").setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
-        horsetail_small = new BlockFossilPlant("plants/plant_horsetail_small", 1).setBlockName("plant_horsetail_small").setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
-        horsetail_large = new BlockFossilTallPlant("plants/plant_horsetail_large").setBlockName("plant_horsetail_large").setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
-        mutantPlant = new BlockFossilTallPlant("plants/plant_mutant").setBlockName("plant_mutant").setLightLevel(0.4F).setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
-        vaccinium = new BlockFossilPlant("plants/plant_vaccinium", 1).setBlockName("plant_vaccinium").setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
-        tempskya = new BlockTempskya().setBlockTextureName("fossil:plants/plant_tempskya_1").setBlockName("plant_tempskya").setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
-        crataegus = new BlockFossilTallPlant("plants/plant_crataegus").setBlockName("plant_crataegus").setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
-        osmunda = new BlockFossilPlant("plants/plant_osmunda", 1).setBlockName("plant_osmunda").setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
-        florissantia = new BlockFossilPlant("plants/plant_florissantia", 1).setBlockName("plant_florissantia").setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
-        ephedra = new BlockFossilPlant("plants/plant_ephedra", 1).setBlockName("plant_ephedra").setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
+        dillhoffia = new BlockFossilPlant("plants/plant_dillhoffia", 1).setUnlocalizedName("plant_dillhoffia").setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
+        sarracina = new BlockFossilTallPlant("plants/plant_sarracina").setUnlocalizedName("plant_sarracina").setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
+        cephalotaxus = new BlockFossilPlant("plants/plant_cephalotaxus", 1).setUnlocalizedName("plant_cephalotaxus").setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
+        licopodiophyta = new BlockFossilPlant("plants/plant_licopodiophyta", 1).setUnlocalizedName("plant_licopodiophyta").setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
+        paleopanax = new BlockFossilTallPlant("plants/plant_paleopanax").setUnlocalizedName("plant_paleopanax").setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
+        zamites = new BlockFossilPlant("plants/plant_zamites", 1).setUnlocalizedName("plant_zamites").setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
+        bennettitales_small = new BlockFossilPlant("plants/plant_bennettitales_small", 1).setUnlocalizedName("plant_bennettitales_small").setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
+        bennettitales_large = new BlockFossilTallPlant("plants/plant_bennettitales_large").setUnlocalizedName("plant_bennettitales_large").setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
+        welwitschia = new BlockFossilPlant("plants/plant_welwitschia", 1).setUnlocalizedName("plant_welwitschia").setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
+        horsetail_small = new BlockFossilPlant("plants/plant_horsetail_small", 1).setUnlocalizedName("plant_horsetail_small").setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
+        horsetail_large = new BlockFossilTallPlant("plants/plant_horsetail_large").setUnlocalizedName("plant_horsetail_large").setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
+        mutantPlant = new BlockFossilTallPlant("plants/plant_mutant").setUnlocalizedName("plant_mutant").setLightLevel(0.4F).setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
+        vaccinium = new BlockFossilPlant("plants/plant_vaccinium", 1).setUnlocalizedName("plant_vaccinium").setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
+        tempskya = new BlockTempskya().setBlockTextureName("fossil:plants/plant_tempskya_1").setUnlocalizedName("plant_tempskya").setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
+        crataegus = new BlockFossilTallPlant("plants/plant_crataegus").setUnlocalizedName("plant_crataegus").setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
+        osmunda = new BlockFossilPlant("plants/plant_osmunda", 1).setUnlocalizedName("plant_osmunda").setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
+        florissantia = new BlockFossilPlant("plants/plant_florissantia", 1).setUnlocalizedName("plant_florissantia").setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
+        ephedra = new BlockFossilPlant("plants/plant_ephedra", 1).setUnlocalizedName("plant_ephedra").setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
         try {
-            for (Field f : FABlockRegistry.class.getDeclaredFields()) {
-                Object obj = f.get(this);
-                list.add(f.getName());
-                if (obj instanceof Block) {
-                    registerBlock((Block) obj);
-                } else if (obj instanceof Block[]) {
-                    for (Block block : (Block[]) obj) {
+            for (Field field : FABlockRegistry.class.getDeclaredFields()) {
+                Object object = field.get(this);
+                list.add(field.getName());
+                if (object instanceof Block) {
+                    registerBlock((Block) object);
+                } else if (object instanceof Block[]) {
+                    for (Block block : (Block[]) object) {
                         registerBlock(block);
                     }
                 }
             }
-        } catch (IllegalAccessException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void registerBlock(Block block) {
-        String name = block.getUnlocalizedName();
-        String[] strings = name.split("\\.");
-        name = strings[strings.length - 1];
-
+    public void registerBlock(Block block) throws Exception {
+        String[] split = block.getUnlocalizedName().split("\\.");
+        ResourceLocation identifier = new ResourceLocation(Revival.MODID, split[split.length - 1]);
         if (block instanceof IBlockItem) {
-            GameRegistry.registerBlock(block, ((IBlockItem) block).getItemBlockClass(), name);
+            GameRegistry.register(((IBlockItem) block).getItemBlockClass().getConstructor(Block.class).newInstance(block), identifier);
         } else {
-            GameRegistry.registerBlock(block, name);
+            GameRegistry.register(new ItemBlock(block));
         }
+        GameRegistry.register(block, identifier);
     }
 }

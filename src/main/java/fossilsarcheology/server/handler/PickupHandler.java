@@ -1,11 +1,11 @@
 package fossilsarcheology.server.handler;
 
 import fossilsarcheology.server.block.FABlockRegistry;
-import fossilsarcheology.server.enums.EnumPrehistoric;
+import fossilsarcheology.server.enums.PrehistoricEntityType;
 import fossilsarcheology.server.item.FAItemRegistry;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.PlayerEvent;
 import net.minecraft.item.Item;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
 public class PickupHandler {
     @SubscribeEvent
@@ -20,7 +20,7 @@ public class PickupHandler {
     public void notifyPickup(PlayerEvent.ItemSmeltedEvent event) {
 
         // Analyzer Achievements
-        if (EnumPrehistoric.isDNA(event.smelting.getItem())) {
+        if (PrehistoricEntityType.isDNA(event.smelting.getItem())) {
             event.player.addStat(FossilAchievementHandler.dinoDna, 1);
         }
         if (event.smelting.getItem() == FAItemRegistry.INSTANCE.stoneboard) {
@@ -34,14 +34,14 @@ public class PickupHandler {
         }
 
         // Cultivator Achievements
-        if (EnumPrehistoric.isDinoEgg(event.smelting.getItem())) {
+        if (PrehistoricEntityType.isDinoEgg(event.smelting.getItem())) {
             event.player.addStat(FossilAchievementHandler.dinoEgg, 1);
         }
-        if (EnumPrehistoric.isEmbryo(event.smelting.getItem())) {
+        if (PrehistoricEntityType.isEmbryo(event.smelting.getItem())) {
             event.player.addStat(FossilAchievementHandler.mammalEmbryo, 1);
         }
 
-        if (EnumPrehistoric.isBestBirdEgg(event.smelting.getItem())) {
+        if (PrehistoricEntityType.isBestBirdEgg(event.smelting.getItem())) {
             event.player.addStat(FossilAchievementHandler.birdEgg, 1);
         }
 

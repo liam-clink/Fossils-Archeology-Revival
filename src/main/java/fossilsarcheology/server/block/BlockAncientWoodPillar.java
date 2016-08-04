@@ -2,8 +2,6 @@ package fossilsarcheology.server.block;
 
 import fossilsarcheology.server.creativetab.FATabRegistry;
 import fossilsarcheology.server.handler.LocalizationStrings;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -11,6 +9,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Random;
 
@@ -20,9 +20,9 @@ public class BlockAncientWoodPillar extends Block {
 
     public BlockAncientWoodPillar() {
         super(Material.wood);
-        setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
+        setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
         setHardness(2.0F);
-        setBlockName(LocalizationStrings.ANCIENT_WOOD_PILLAR_NAME);
+        setUnlocalizedName(LocalizationStrings.ANCIENT_WOOD_PILLAR_NAME);
     }
 
     public static int limitToValidMetadata(int meta) {
@@ -64,11 +64,11 @@ public class BlockAncientWoodPillar extends Block {
     }
 
     /**
-     * Called when a block is placed using its ItemBlock. Args: World, X, Y, Z,
+     * Called when a block is placed using its ItemBlock. Args: World, pos,
      * side, hitX, hitY, hitZ, block metadata
      */
     @Override
-    public int onBlockPlaced(World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int metadata) {
+    public int onBlockPlaced(World world, BlockPos pos, int side, float hitX, float hitY, float hitZ, int metadata) {
         int validMeta = metadata & 3;
         byte modifier = 0;
 
@@ -106,11 +106,11 @@ public class BlockAncientWoodPillar extends Block {
         return new ItemStack(this, 1, limitToValidMetadata(var1));
     }
 
-    public boolean canSustainLeaves(World world, int x, int y, int z) {
+    public boolean canSustainLeaves(World world, BlockPos pos) {
         return true;
     }
 
-    public boolean isWood(World world, int x, int y, int z) {
+    public boolean isWood(World world, BlockPos pos) {
         return true;
     }
 }

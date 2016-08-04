@@ -2,8 +2,6 @@ package fossilsarcheology.server.block;
 
 import fossilsarcheology.server.creativetab.FATabRegistry;
 import fossilsarcheology.server.handler.LocalizationStrings;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.material.Material;
@@ -12,12 +10,14 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 import java.util.Random;
 
 public class BlockVolcanicSlab extends BlockSlab {
-    public static final String[] blockStepTypes = {"volcanicBrick"};
+    public static final String[] blockStepTypes = { "volcanicBrick" };
     private IIcon theIcon;
 
     public BlockVolcanicSlab(boolean doubleSlabbed) {
@@ -26,12 +26,12 @@ public class BlockVolcanicSlab extends BlockSlab {
         this.useNeighborBrightness = true;
         setHardness(1.4F);
         setResistance(7.5F);
-        setStepSound(Block.soundTypeStone);
+        setSoundType(Block.soundTypeStone);
         if (doubleSlabbed) {
-            setBlockName(LocalizationStrings.VOLCANIC_DOUBLESLAB_NAME);
+            setUnlocalizedName(LocalizationStrings.VOLCANIC_DOUBLESLAB_NAME);
         } else {
-            setBlockName(LocalizationStrings.VOLCANIC_SINGLESLAB_NAME);
-            setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
+            setUnlocalizedName(LocalizationStrings.VOLCANIC_SINGLESLAB_NAME);
+            setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
         }
     }
 

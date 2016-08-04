@@ -1,7 +1,6 @@
 package fossilsarcheology.client.model.prehistoric;
 
 import fossilsarcheology.server.entity.EntityPrehistoric;
-import fossilsarcheology.server.entity.mob.EntityAnkylosaurus;
 import net.ilexiconn.llibrary.client.model.ModelAnimator;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
@@ -186,10 +185,10 @@ public class ModelAnkylosaurus extends ModelPrehistoric {
         this.resetToDefaultPose();
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
         animator.setAnimation(prehistoric.SPEAK_ANIMATION);
-		animator.startKeyframe(10);
-		ModelUtils.rotate(animator, Mouth_1, -30, 0, 0);
-		animator.endKeyframe();
-		animator.resetKeyframe(10);
+        animator.startKeyframe(10);
+        ModelUtils.rotate(animator, Mouth_1, -30, 0, 0);
+        animator.endKeyframe();
+        animator.resetKeyframe(10);
         animator.setAnimation(prehistoric.ATTACK_ANIMATION);
         animator.startKeyframe(5);
         ModelUtils.rotate(animator, Body, 0, 15, 0);
@@ -212,11 +211,11 @@ public class ModelAnkylosaurus extends ModelPrehistoric {
 
     @Override
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
-        AdvancedModelRenderer[] tailParts = {this.Tail1, this.Tail2, this.Tail3, this.TailClub};
-        AdvancedModelRenderer[] neckParts = {this.Neck, this.Head};
-		if(((EntityPrehistoric) entity).isSkeleton()){
-			return;
-		}
+        AdvancedModelRenderer[] tailParts = { this.Tail1, this.Tail2, this.Tail3, this.TailClub };
+        AdvancedModelRenderer[] neckParts = { this.Neck, this.Head };
+        if (((EntityPrehistoric) entity).isSkeleton()) {
+            return;
+        }
         ModelUtils.faceTargetMod(Head, f3, f4, 0.5F);
         ModelUtils.faceTargetMod(Neck, f3, f4, 0.5F);
         float speed = 0.1F;

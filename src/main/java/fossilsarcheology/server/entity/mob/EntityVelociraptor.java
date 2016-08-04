@@ -1,5 +1,18 @@
 package fossilsarcheology.server.entity.mob;
 
+import fossilsarcheology.Revival;
+import fossilsarcheology.server.entity.EntityPrehistoric;
+import fossilsarcheology.server.entity.EntityToyBase;
+import fossilsarcheology.server.entity.ai.DinoAIEatFeeders;
+import fossilsarcheology.server.entity.ai.DinoAIEatItems;
+import fossilsarcheology.server.entity.ai.DinoAIFollowOwner;
+import fossilsarcheology.server.entity.ai.DinoAIHunt;
+import fossilsarcheology.server.entity.ai.DinoAILeapAtTarget;
+import fossilsarcheology.server.entity.ai.DinoAILookIdle;
+import fossilsarcheology.server.entity.ai.DinoAIWander;
+import fossilsarcheology.server.entity.ai.DinoAIWatchClosest;
+import fossilsarcheology.server.enums.EnumPrehistoricAI;
+import fossilsarcheology.server.enums.PrehistoricEntityType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIFleeSun;
@@ -13,26 +26,13 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-import fossilsarcheology.Revival;
-import fossilsarcheology.server.entity.EntityPrehistoric;
-import fossilsarcheology.server.entity.EntityToyBase;
-import fossilsarcheology.server.entity.ai.DinoAIEatFeeders;
-import fossilsarcheology.server.entity.ai.DinoAIEatItems;
-import fossilsarcheology.server.entity.ai.DinoAIFollowOwner;
-import fossilsarcheology.server.entity.ai.DinoAIHunt;
-import fossilsarcheology.server.entity.ai.DinoAILeapAtTarget;
-import fossilsarcheology.server.entity.ai.DinoAILookIdle;
-import fossilsarcheology.server.entity.ai.DinoAIWander;
-import fossilsarcheology.server.entity.ai.DinoAIWatchClosest;
-import fossilsarcheology.server.enums.EnumPrehistoric;
-import fossilsarcheology.server.enums.EnumPrehistoricAI;
 
 public class EntityVelociraptor extends EntityPrehistoric {
 
     public EntityVelociraptor(World world) {
-        super(world, EnumPrehistoric.Velociraptor, 1, 4, 4, 22, 0.25, 0.3);
+        super(world, PrehistoricEntityType.VELOCIRAPTOR, 1, 4, 4, 22, 0.25, 0.3);
         this.getNavigator().setAvoidsWater(true);
         this.getNavigator().setCanSwim(true);
         this.getNavigator().setAvoidSun(true);
@@ -194,13 +194,13 @@ public class EntityVelociraptor extends EntityPrehistoric {
     public int getTailSegments() {
         return 3;
     }
-    
-	public int getMaxHunger() {
-		return 75;
-	}
-	
-	@Override
-	public boolean canBeRidden() {
-		return false;
-	}
+
+    public int getMaxHunger() {
+        return 75;
+    }
+
+    @Override
+    public boolean canBeRidden() {
+        return false;
+    }
 }

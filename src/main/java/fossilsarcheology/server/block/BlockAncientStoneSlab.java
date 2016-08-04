@@ -2,44 +2,40 @@ package fossilsarcheology.server.block;
 
 import fossilsarcheology.server.creativetab.FATabRegistry;
 import fossilsarcheology.server.handler.LocalizationStrings;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 import java.util.Random;
 
 public class BlockAncientStoneSlab extends BlockSlab {
-    public static final String[] blockStepTypes = {"ancientStone"};
+    public static final String[] blockStepTypes = { "ancientStone" };
     private IIcon icon;
 
     public BlockAncientStoneSlab(boolean doubleSlabbed) {
-        super(doubleSlabbed, Material.rock);
+        super(doubleSlabbed, Material.ROCK);
         this.setLightOpacity(0);
         this.useNeighborBrightness = true;
         setHardness(1.4F);
         setResistance(7.5F);
-        setStepSound(Block.soundTypeWood);
+        setSoundType(SoundType.WOOD);
         if (doubleSlabbed) {
-            setBlockName(LocalizationStrings.ANCIENT_STONE_DOUBLESLAB_NAME);
+            setUnlocalizedName(LocalizationStrings.ANCIENT_STONE_DOUBLESLAB_NAME);
         } else {
-            setBlockName(LocalizationStrings.ANCIENT_STONE_SINGLESLAB_NAME);
-            setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
+            setUnlocalizedName(LocalizationStrings.ANCIENT_STONE_SINGLESLAB_NAME);
+            setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
         }
-    }
-
-    @Override
-    public void registerBlockIcons(IIconRegister iconRegister) {
-        this.blockIcon = iconRegister.registerIcon("fossil:Ancient_Stonebricks");
-        this.icon = iconRegister.registerIcon("fossil:Ancient_Stonebricks");
     }
 
     @Override
@@ -54,7 +50,7 @@ public class BlockAncientStoneSlab extends BlockSlab {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public Item getItem(World world, int x, int y, int z) {
+    public Item getItem(World world, BlockPos pos) {
         return Item.getItemFromBlock(this);
     }
 

@@ -1,10 +1,10 @@
 package fossilsarcheology.server.item;
 
-import fossilsarcheology.server.enums.EnumPrehistoric;
+import fossilsarcheology.server.enums.PrehistoricEntityType;
 import net.minecraft.item.Item;
 
 public class AncientEggItem extends Item {
-    public static final int TypeCount = EnumPrehistoric.values().length;
+    public static final int TypeCount = PrehistoricEntityType.values().length;
     private int DinoType;
 
     public AncientEggItem(int DinoType0) {

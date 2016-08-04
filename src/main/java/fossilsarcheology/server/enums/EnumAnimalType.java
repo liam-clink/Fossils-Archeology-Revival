@@ -3,15 +3,15 @@ package fossilsarcheology.server.enums;
 import fossilsarcheology.Revival;
 
 public enum EnumAnimalType {
-    Pig(3000), Sheep(3000), Cow(3000), Chicken(1000), Smilodon(4500), Mammoth(6000), Horse(3500), Quagga(4000), Elasmotherium(5000),;
+    PIG(3000), SHEEP(3000), COW(3000), CHICKEN(1000), SMILODON(4500), MAMMOTH(6000), HORSE(3500), QUAGGA(4000), ELASMOTHERIUM(5000),;
 
-    public int GrowTime;
+    public int growTime;
 
     EnumAnimalType(int grow0) {
         if (Revival.RELEASE_TYPE.enableDebugging()) {
-            GrowTime = 100;
+            growTime = 100;
         } else {
-            GrowTime = grow0;
+            growTime = grow0;
         }
     }
 }

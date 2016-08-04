@@ -1,5 +1,26 @@
 package fossilsarcheology.server.entity.mob;
 
+import fossilsarcheology.server.entity.EntityPrehistoric;
+import fossilsarcheology.server.entity.ai.DinoAIAttackOnCollide;
+import fossilsarcheology.server.entity.ai.DinoAIEatFeeders;
+import fossilsarcheology.server.entity.ai.DinoAIEatItems;
+import fossilsarcheology.server.entity.ai.DinoAIFollowOwner;
+import fossilsarcheology.server.entity.ai.DinoAIHunt;
+import fossilsarcheology.server.entity.ai.DinoAILookIdle;
+import fossilsarcheology.server.entity.ai.DinoAIWander;
+import fossilsarcheology.server.entity.ai.DinoAIWatchClosest;
+import fossilsarcheology.server.enums.EnumPrehistoricAI.Activity;
+import fossilsarcheology.server.enums.EnumPrehistoricAI.Attacking;
+import fossilsarcheology.server.enums.EnumPrehistoricAI.Climbing;
+import fossilsarcheology.server.enums.EnumPrehistoricAI.Following;
+import fossilsarcheology.server.enums.EnumPrehistoricAI.Jumping;
+import fossilsarcheology.server.enums.EnumPrehistoricAI.Moving;
+import fossilsarcheology.server.enums.EnumPrehistoricAI.Response;
+import fossilsarcheology.server.enums.EnumPrehistoricAI.Stalking;
+import fossilsarcheology.server.enums.EnumPrehistoricAI.Taming;
+import fossilsarcheology.server.enums.EnumPrehistoricAI.Untaming;
+import fossilsarcheology.server.enums.EnumPrehistoricAI.WaterAbility;
+import fossilsarcheology.server.enums.PrehistoricEntityType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
@@ -12,32 +33,11 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
-import fossilsarcheology.server.entity.EntityPrehistoric;
-import fossilsarcheology.server.entity.ai.DinoAIAttackOnCollide;
-import fossilsarcheology.server.entity.ai.DinoAIEatFeeders;
-import fossilsarcheology.server.entity.ai.DinoAIEatItems;
-import fossilsarcheology.server.entity.ai.DinoAIFollowOwner;
-import fossilsarcheology.server.entity.ai.DinoAIHunt;
-import fossilsarcheology.server.entity.ai.DinoAILookIdle;
-import fossilsarcheology.server.entity.ai.DinoAIWander;
-import fossilsarcheology.server.entity.ai.DinoAIWatchClosest;
-import fossilsarcheology.server.enums.EnumPrehistoric;
-import fossilsarcheology.server.enums.EnumPrehistoricAI.Activity;
-import fossilsarcheology.server.enums.EnumPrehistoricAI.Attacking;
-import fossilsarcheology.server.enums.EnumPrehistoricAI.Climbing;
-import fossilsarcheology.server.enums.EnumPrehistoricAI.Following;
-import fossilsarcheology.server.enums.EnumPrehistoricAI.Jumping;
-import fossilsarcheology.server.enums.EnumPrehistoricAI.Moving;
-import fossilsarcheology.server.enums.EnumPrehistoricAI.Response;
-import fossilsarcheology.server.enums.EnumPrehistoricAI.Stalking;
-import fossilsarcheology.server.enums.EnumPrehistoricAI.Taming;
-import fossilsarcheology.server.enums.EnumPrehistoricAI.Untaming;
-import fossilsarcheology.server.enums.EnumPrehistoricAI.WaterAbility;
 
 public class EntityPhorusrhacos extends EntityPrehistoric {
 
     public EntityPhorusrhacos(World world) {
-        super(world, EnumPrehistoric.Phorusrhacos, 1, 5, 10, 38, 0.25, 0.35);
+        super(world, PrehistoricEntityType.PHORUSRHACOS, 1, 5, 10, 38, 0.25, 0.35);
         this.getNavigator().setAvoidsWater(true);
         this.getNavigator().setCanSwim(true);
         this.tasks.addTask(1, new EntityAISwimming(this));
@@ -186,32 +186,32 @@ public class EntityPhorusrhacos extends EntityPrehistoric {
         return false;
     }
 
-	public int getMaxHunger() {
-		return 75;
-	}
-	
-	@Override
-	protected String getLivingSound() {
-		return "fossil:terror_bird_living";
-	}
+    public int getMaxHunger() {
+        return 75;
+    }
 
-	@Override
-	protected String getHurtSound() {
-		return "fossil:terror_bird_hurt";
-	}
+    @Override
+    protected String getLivingSound() {
+        return "fossil:terror_bird_living";
+    }
 
-	@Override
-	protected String getDeathSound() {
-		return "fossil:terror_bird_death";
-	}
+    @Override
+    protected String getHurtSound() {
+        return "fossil:terror_bird_hurt";
+    }
 
-	@Override
-	public float getSoundPitch(){
-		return super.getSoundPitch();
-	}
-	
-	@Override
-	public boolean canBeRidden() {
-		return false;
-	}
+    @Override
+    protected String getDeathSound() {
+        return "fossil:terror_bird_death";
+    }
+
+    @Override
+    public float getSoundPitch() {
+        return super.getSoundPitch();
+    }
+
+    @Override
+    public boolean canBeRidden() {
+        return false;
+    }
 }

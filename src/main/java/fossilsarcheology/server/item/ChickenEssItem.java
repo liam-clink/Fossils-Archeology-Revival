@@ -1,18 +1,18 @@
 package fossilsarcheology.server.item;
 
 import fossilsarcheology.server.item.forge.ForgeFoodItem;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
 public class ChickenEssItem extends ForgeFoodItem {
     public ChickenEssItem(int var2, float var3, boolean var4, String textname) {
-        super(var2, var3, var4, textname);
+        super(var2, var3, var4);
     }
 
     @Override
@@ -21,12 +21,6 @@ public class ChickenEssItem extends ForgeFoodItem {
             var3.inventory.addItemStackToInventory(new ItemStack(Items.glass_bottle));
         }
         // return super.onFoodEaten(var1, var2, var3);
-    }
-
-    @Override
-    public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player)
-    {
-        return itemStack;
     }
 
     @Override

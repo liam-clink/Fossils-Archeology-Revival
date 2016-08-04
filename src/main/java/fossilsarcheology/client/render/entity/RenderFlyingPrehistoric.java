@@ -19,10 +19,10 @@ public class RenderFlyingPrehistoric extends RenderPrehistoric {
     @Override
     protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2) {
         /*
-		 * if (par1EntityLivingBase.isChild()) { GL11.glScalef(0.3F, 0.3F,
+         * if (par1EntityLivingBase.isChild()) { GlStateManager.scale(0.3F, 0.3F,
 		 * 0.3F); super.preRenderCallback(par1EntityLivingBase, par2);
 		 * 
-		 * } else { GL11.glScalef(0.6F, 0.6F, 0.6F);
+		 * } else { GlStateManager.scale(0.6F, 0.6F, 0.6F);
 		 * super.preRenderCallback(par1EntityLivingBase, par2); }
 		 */
 

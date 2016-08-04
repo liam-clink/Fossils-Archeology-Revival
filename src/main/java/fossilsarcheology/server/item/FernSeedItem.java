@@ -20,7 +20,7 @@ public class FernSeedItem extends Item {
         super();
         this.matchingBlockID = ferns;
         this.setUnlocalizedName(LocalizationStrings.FERNSEED_NAME);
-        this.setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
+        this.setCreativeTab(FATabRegistry.INSTANCE.ITEMS);
     }
 
     /**

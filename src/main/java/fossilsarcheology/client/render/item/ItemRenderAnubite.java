@@ -28,20 +28,20 @@ public class ItemRenderAnubite implements IItemRenderer {
     @Override
     public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
         if (type == IItemRenderer.ItemRenderType.ENTITY) {
-            GL11.glTranslatef(-0.5F, 0.0F, -0.5F);
+            GlStateManager.translate(-0.5F, 0.0F, -0.5F);
         }
         if (type == IItemRenderer.ItemRenderType.INVENTORY) {
-            GL11.glTranslatef(0, -1F, 0);
-            GL11.glScalef(0.6F, 0.6F, 0.6F);
-            GL11.glRotatef(-180F, 0, 1, 0);
+            GlStateManager.translate(0, -1F, 0);
+            GlStateManager.scale(0.6F, 0.6F, 0.6F);
+            GlStateManager.rotate(-180F, 0, 1, 0);
         }
         float rot = 0;
-        GL11.glPushMatrix();
+        GlStateManager.pushMatrix();
         GL11.glPushAttrib(GL11.GL_ENABLE_BIT);
         GL11.glEnable(GL11.GL_ALPHA_TEST);
         this.render.renderTileEntityAt(this.entity, 0.0D, 0.0D, 0.0D, 0.0F);
         GL11.glPopAttrib();
-        GL11.glPopMatrix();
+        GlStateManager.popMatrix();
 
     }
 }

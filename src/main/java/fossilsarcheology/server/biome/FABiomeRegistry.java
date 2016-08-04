@@ -1,19 +1,18 @@
 package fossilsarcheology.server.biome;
 
-import fossilsarcheology.Revival;
 import fossilsarcheology.server.handler.LocalizationStrings;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.StatCollector;
-import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.util.text.translation.I18n;
+import net.minecraft.world.biome.Biome;
 
 public enum FABiomeRegistry {
     INSTANCE;
 
-    public BiomeGenBase anuBiome;
-    public BiomeGenBase treasureBiome;
+    public Biome anuBiome;
+    public Biome treasureBiome;
 
     public void init() {
-        anuBiome = new FossilsBiome(Revival.CONFIG.biomeIDDarknessLair, Blocks.netherrack, Blocks.netherrack, true, 0, 0).setDisableRain().setBiomeName(LocalizationStrings.BIOME_ANU).setTemperatureRainfall(0.8F, 0F).setHeight(new BiomeGenBase.Height(0F, 0F));
-        treasureBiome = new FossilsBiome(Revival.CONFIG.biomeIDTreasure, Blocks.air, Blocks.air, true, 1, 0).setDisableRain().setBiomeName(StatCollector.translateToLocal("biome.treasure.name")).setTemperatureRainfall(0.8F, 0F).setHeight(new BiomeGenBase.Height(0F, 0F));
+        anuBiome = new FossilsBiome(new Biome.BiomeProperties(LocalizationStrings.BIOME_ANU).setRainDisabled().setRainfall(0.0F).setTemperature(0.8F).setHeightVariation(0.0F).setBaseHeight(0.0F), Blocks.NETHERRACK.getDefaultState(), Blocks.NETHERRACK.getDefaultState(), true, 0, 0);
+        treasureBiome = new FossilsBiome(new Biome.BiomeProperties(I18n.translateToLocal("biome.treasure.name")).setRainDisabled().setRainfall(0.0F).setTemperature(0.8F).setHeightVariation(0.0F).setBaseHeight(0.0F), Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), true, 1, 0);
     }
 }

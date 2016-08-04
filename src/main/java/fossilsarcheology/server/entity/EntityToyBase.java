@@ -20,11 +20,11 @@ public abstract class EntityToyBase extends EntityLiving {
     protected boolean isAIEnabled() {
         return true;
     }
-    
-	@Override
-	protected boolean canDespawn() {
-		return false;
-	}
+
+    @Override
+    protected boolean canDespawn() {
+        return false;
+    }
 
     public boolean attackEntityFrom(DamageSource dmg, float f) {
         if (dmg.getEntity() != null) {

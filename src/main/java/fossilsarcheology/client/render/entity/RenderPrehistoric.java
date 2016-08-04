@@ -8,8 +8,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 
-import org.lwjgl.opengl.GL11;
-
 public class RenderPrehistoric extends RenderLiving {
 
     public RenderPrehistoric(ModelBase model) {
@@ -29,8 +27,8 @@ public class RenderPrehistoric extends RenderLiving {
     @Override
     protected void preRenderCallback(EntityLivingBase entity, float f) {
         EntityPrehistoric dino = (EntityPrehistoric) entity;
-        GL11.glScalef(dino.getAgeScale(), dino.getAgeScale(), dino.getAgeScale());
-        GL11.glScalef(dino.getGender() == 1 ? dino.getMaleSize() : 1, dino.getGender() == 1 ? dino.getMaleSize() : 1, dino.getGender() == 1 ? dino.getMaleSize() : 1);
+        GlStateManager.scale(dino.getAgeScale(), dino.getAgeScale(), dino.getAgeScale());
+        GlStateManager.scale(dino.getGender() == 1 ? dino.getMaleSize() : 1, dino.getGender() == 1 ? dino.getMaleSize() : 1, dino.getGender() == 1 ? dino.getMaleSize() : 1);
 
     }
 

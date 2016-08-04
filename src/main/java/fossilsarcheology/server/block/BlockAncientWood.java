@@ -9,9 +9,9 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 public class BlockAncientWood extends Block {
     public BlockAncientWood() {
         super(Material.wood);
-        this.setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
+        this.setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
         setHardness(2.0F);
-        setBlockName(LocalizationStrings.ANCIENT_WOOD_NAME);
+        setUnlocalizedName(LocalizationStrings.ANCIENT_WOOD_NAME);
     }
 
     @Override

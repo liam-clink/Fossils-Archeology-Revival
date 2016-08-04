@@ -1,10 +1,11 @@
 package fossilsarcheology.server.entity.mob;
 
+import fossilsarcheology.server.entity.ai.AnubiteAINearestAttackableTarget;
+import fossilsarcheology.server.item.FAItemRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIMoveTowardsTarget;
@@ -17,13 +18,10 @@ import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.Vec3;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.EnderTeleportEvent;
-import fossilsarcheology.server.entity.ai.AnubiteAINearestAttackableTarget;
-import fossilsarcheology.server.item.FAItemRegistry;
 
 public class EntityAnubite extends EntityMob {
 
@@ -104,7 +102,7 @@ public class EntityAnubite extends EntityMob {
      * Teleport the enderman to another entity
      */
     protected boolean teleportToEntity(Entity p_70816_1_) {
-        Vec3 vec3 = Vec3.createVectorHelper(this.posX - p_70816_1_.posX, this.boundingBox.minY + (double) (this.height / 2.0F) - p_70816_1_.posY + (double) p_70816_1_.getEyeHeight(), this.posZ - p_70816_1_.posZ);
+        Vec3d vec3 = new Vec3d(this.posX - p_70816_1_.posX, this.boundingBox.minY + (double) (this.height / 2.0F) - p_70816_1_.posY + (double) p_70816_1_.getEyeHeight(), this.posZ - p_70816_1_.posZ);
         vec3 = vec3.normalize();
         double d0 = 16.0D;
         double d1 = this.posX + (this.rand.nextDouble() - 0.5D) * 8.0D - vec3.xCoord * d0;

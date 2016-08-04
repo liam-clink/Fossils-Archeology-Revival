@@ -2,11 +2,11 @@ package fossilsarcheology.server.item;
 
 import fossilsarcheology.Revival;
 import fossilsarcheology.server.creativetab.FATabRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.ItemRecord;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class FossilRecordItem extends ItemRecord {
 
@@ -21,7 +21,7 @@ public class FossilRecordItem extends ItemRecord {
         this.recordName = string;
         this.maxStackSize = 1;
         this.texture = texture;
-        setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
+        setCreativeTab(FATabRegistry.INSTANCE.ITEMS);
     }
 
     @Override

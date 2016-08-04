@@ -4,23 +4,19 @@ import com.google.common.collect.Maps;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.OreDictionary;
 
-import java.util.List;
 import java.util.Map;
 
 public enum FoodMappings {
     INSTANCE;
 
-    private Map<ItemStack, Integer> carnivoreItemDiet;
-    private Map<ItemStack, Integer> herbivoreItemDiet;
-    private Map<ItemStack, Integer> omnivoreItemDiet;
-    private Map<ItemStack, Integer> piscivoreItemDiet;
-    private Map<ItemStack, Integer> carnivoreEggItemDiet;
-    private Map<ItemStack, Integer> insectivoreItemDiet;
-    private Map<ItemStack, Integer> pisccarnivoreItemDiet;
+    private Map<Item, Integer> carnivoreItemDiet;
+    private Map<Item, Integer> herbivoreItemDiet;
+    private Map<Item, Integer> omnivoreItemDiet;
+    private Map<Item, Integer> piscivoreItemDiet;
+    private Map<Item, Integer> carnivoreEggItemDiet;
+    private Map<Item, Integer> insectivoreItemDiet;
+    private Map<Item, Integer> pisccarnivoreItemDiet;
     private Map<Block, Integer> carnivoreBlockDiet;
     private Map<Block, Integer> herbivoreBlockDiet;
     private Map<Block, Integer> omnivoreBlockDiet;
@@ -43,7 +39,7 @@ public enum FoodMappings {
      * @param food The amount of food points for the item.
      * @param diet The specific diet to add the item to.
      */
-    public void addToItemMappings(ItemStack item, int food, EnumDiet diet) {
+    public void addToItemMappings(Item item, int food, Diet diet) {
         if (item != null) {
             switch (diet) {
                 case CARNIVORE:
@@ -114,7 +110,7 @@ public enum FoodMappings {
      * @param item The item to find.
      * @param diet The specific diet to find the item from.
      */
-    public int getItemFoodAmount(ItemStack item, EnumDiet diet) {
+    public int getItemFoodAmount(Item item, Diet diet) {
         switch (diet) {
             case CARNIVORE:
                 if (carnivoreItemDiet != null && carnivoreItemDiet.containsKey(item)) {
@@ -160,12 +156,12 @@ public enum FoodMappings {
     /**
      * Add an block to a specific diet. Usually only for herbivores and omnivores.
      *
-     * @param block        The block to be added as Food.
-     * @param food         The amount of food points for the block.
-     * @param diet         The specific diet to add the block to.
+     * @param block The block to be added as Food.
+     * @param food The amount of food points for the block.
+     * @param diet The specific diet to add the block to.
      * @param registerItem Register the block's item as food or not. Usually true, but false for technical blocks like wheat.
      */
-    public void addToBlockMappings(Block block, int food, EnumDiet diet, boolean registerItem) {
+    public void addToBlockMappings(Block block, int food, Diet diet, boolean registerItem) {
         switch (diet) {
             case CARNIVORE:
                 if (carnivoreBlockDiet == null) {
@@ -227,7 +223,7 @@ public enum FoodMappings {
                 break;
         }
         if (registerItem) {
-            addToItemMappings(new ItemStack(Item.getItemFromBlock(block)), food, diet);
+            addToItemMappings(Item.getItemFromBlock(block), food, diet);
         }
     }
 
@@ -235,9 +231,9 @@ public enum FoodMappings {
      * Get the amount of food points from a block in the mapping.
      *
      * @param block The block to find.
-     * @param diet  The specific diet to find the block from.
+     * @param diet The specific diet to find the block from.
      */
-    public int getBlockFoodAmount(Block block, EnumDiet diet) {
+    public int getBlockFoodAmount(Block block, Diet diet) {
         switch (diet) {
             case CARNIVORE:
                 if (carnivoreBlockDiet != null && carnivoreBlockDiet.containsKey(block)) {
@@ -281,7 +277,7 @@ public enum FoodMappings {
     }
 
 
-    public void addToEntityMappings(Class<? extends Entity> entity, int food, EnumDiet diet) {
+    public void addToEntityMappings(Class<? extends Entity> entity, int food, Diet diet) {
         switch (diet) {
             case CARNIVORE:
                 if (carnivoreEntityDiet == null) {
@@ -348,9 +344,9 @@ public enum FoodMappings {
      * Add an entity to a specific diet. Usually only for carnivores and omnivores.
      *
      * @param entity The entity class to be added as Food.
-     * @param diet   The specific diet to add the entity to.
+     * @param diet The specific diet to add the entity to.
      */
-    public int getEntityFoodAmount(Class<? extends Entity> entity, EnumDiet diet) {
+    public int getEntityFoodAmount(Class<? extends Entity> entity, Diet diet) {
         switch (diet) {
             case CARNIVORE:
                 if (carnivoreEntityDiet != null && carnivoreEntityDiet.containsKey(entity)) {
@@ -398,7 +394,7 @@ public enum FoodMappings {
      *
      * @param diet The specific diet to show.
      */
-    public Map<ItemStack, Integer> getFoodRenderList(EnumDiet diet) {
+    public Map<Item, Integer> getFoodRenderList(Diet diet) {
         switch (diet) {
             case CARNIVORE:
                 if (carnivoreItemDiet == null) {
@@ -445,7 +441,7 @@ public enum FoodMappings {
      *
      * @param diet The specific diet to show.
      */
-    public void removeItemMapping(ItemStack item, EnumDiet diet) {
+    public void removeItemMapping(Item item, Diet diet) {
         this.getFoodRenderList(diet).remove(item);
     }
 
@@ -453,13 +449,13 @@ public enum FoodMappings {
      * Adds a item, block, or entity class to all the carnivore mappings.
      *
      * @param entity The entity class being registered.
-     * @param food   The amount of food points for the object.
+     * @param food The amount of food points for the object.
      */
     public void addMeat(Class<? extends Entity> entity, int food) {
-        this.addToEntityMappings(entity, food, EnumDiet.CARNIVORE);
-        this.addToEntityMappings(entity, food, EnumDiet.CARNIVORE_EGG);
-        this.addToEntityMappings(entity, food, EnumDiet.OMNIVORE);
-        this.addToEntityMappings(entity, food, EnumDiet.PISCCARNIVORE);
+        this.addToEntityMappings(entity, food, Diet.CARNIVORE);
+        this.addToEntityMappings(entity, food, Diet.CARNIVORE_EGG);
+        this.addToEntityMappings(entity, food, Diet.OMNIVORE);
+        this.addToEntityMappings(entity, food, Diet.PISCCARNIVORE);
 
     }
 
@@ -467,13 +463,13 @@ public enum FoodMappings {
      * Adds a item, block, or entity class to all the carnivore mappings.
      *
      * @param block The block being registered.
-     * @param food  The amount of food points for the object.
+     * @param food The amount of food points for the object.
      */
     public void addMeat(Block block, int food) {
-        this.addToBlockMappings(block, food, EnumDiet.CARNIVORE, true);
-        this.addToBlockMappings(block, food, EnumDiet.CARNIVORE_EGG, true);
-        this.addToBlockMappings(block, food, EnumDiet.OMNIVORE, true);
-        this.addToBlockMappings(block, food, EnumDiet.PISCCARNIVORE, true);
+        this.addToBlockMappings(block, food, Diet.CARNIVORE, true);
+        this.addToBlockMappings(block, food, Diet.CARNIVORE_EGG, true);
+        this.addToBlockMappings(block, food, Diet.OMNIVORE, true);
+        this.addToBlockMappings(block, food, Diet.PISCCARNIVORE, true);
     }
 
     /**
@@ -482,45 +478,33 @@ public enum FoodMappings {
      * @param item The item being registered.
      * @param food The amount of food points for the object.
      */
-    public void addMeat(ItemStack item, int food) {
-        this.addToItemMappings(item, food, EnumDiet.CARNIVORE);
-        this.addToItemMappings(item, food, EnumDiet.CARNIVORE_EGG);
-        this.addToItemMappings(item, food, EnumDiet.OMNIVORE);
-        this.addToItemMappings(item, food, EnumDiet.PISCCARNIVORE);
-    }
-
-    /**
-     * Adds all ore dictionary registries to all the carnivore mappings.
-     * @param ore_dictionary_name The ore dictionary registry name being registered.
-     * @param food The amount of food points for the object.
-     */
-    public void addMeat(String ore_dictionary_name, int food) {
-        this.addOreDictionary(ore_dictionary_name, food, EnumDiet.CARNIVORE);
-        this.addOreDictionary(ore_dictionary_name, food, EnumDiet.CARNIVORE_EGG);
-        this.addOreDictionary(ore_dictionary_name, food, EnumDiet.OMNIVORE);
-        this.addOreDictionary(ore_dictionary_name, food, EnumDiet.PISCCARNIVORE);
+    public void addMeat(Item item, int food) {
+        this.addToItemMappings(item, food, Diet.CARNIVORE);
+        this.addToItemMappings(item, food, Diet.CARNIVORE_EGG);
+        this.addToItemMappings(item, food, Diet.OMNIVORE);
+        this.addToItemMappings(item, food, Diet.PISCCARNIVORE);
     }
 
     /**
      * Adds a item, block, or entity class to all the herbivore mappings.
      *
      * @param entity The entity class being registered.
-     * @param food   The amount of food points for the object.
+     * @param food The amount of food points for the object.
      */
     public void addPlant(Class<? extends Entity> entity, int food) {
-        this.addToEntityMappings(entity, food, EnumDiet.HERBIVORE);
-        this.addToEntityMappings(entity, food, EnumDiet.OMNIVORE);
+        this.addToEntityMappings(entity, food, Diet.HERBIVORE);
+        this.addToEntityMappings(entity, food, Diet.OMNIVORE);
     }
 
     /**
      * Adds a item, block, or entity class to all the herbivore mappings.
      *
      * @param block The block being registered.
-     * @param food  The amount of food points for the object.
+     * @param food The amount of food points for the object.
      */
     public void addPlant(Block block, int food) {
-        this.addToBlockMappings(block, food, EnumDiet.HERBIVORE, true);
-        this.addToBlockMappings(block, food, EnumDiet.OMNIVORE, true);
+        this.addToBlockMappings(block, food, Diet.HERBIVORE, true);
+        this.addToBlockMappings(block, food, Diet.OMNIVORE, true);
     }
 
     /**
@@ -529,41 +513,31 @@ public enum FoodMappings {
      * @param item The item being registered.
      * @param food The amount of food points for the object.
      */
-    public void addPlant(ItemStack item, int food) {
-        this.addToItemMappings(item, food, EnumDiet.HERBIVORE);
-        this.addToItemMappings(item, food, EnumDiet.OMNIVORE);
-    }
-
-    /**
-     * Adds all ore dictionary registries to all the herbivore mappings.
-     * @param ore_dictionary_name The ore dictionary registry name being registered.
-     * @param food The amount of food points for the object.
-     */
-    public void addPlant(String ore_dictionary_name, int food) {
-        this.addOreDictionary(ore_dictionary_name, food, EnumDiet.HERBIVORE);
-        this.addOreDictionary(ore_dictionary_name, food, EnumDiet.OMNIVORE);
+    public void addPlant(Item item, int food) {
+        this.addToItemMappings(item, food, Diet.HERBIVORE);
+        this.addToItemMappings(item, food, Diet.OMNIVORE);
     }
 
     /**
      * Adds a item, block, or entity class to all the piscivore mappings.
      *
      * @param entity The entity class being registered.
-     * @param food   The amount of food points for the object.
+     * @param food The amount of food points for the object.
      */
     public void addFish(Class<? extends Entity> entity, int food) {
-        this.addToEntityMappings(entity, food, EnumDiet.PISCCARNIVORE);
-        this.addToEntityMappings(entity, food, EnumDiet.PISCIVORE);
+        this.addToEntityMappings(entity, food, Diet.PISCCARNIVORE);
+        this.addToEntityMappings(entity, food, Diet.PISCIVORE);
     }
 
     /**
      * Adds a item, block, or entity class to all the piscivore mappings.
      *
      * @param block The block being registered.
-     * @param food  The amount of food points for the object.
+     * @param food The amount of food points for the object.
      */
     public void addFish(Block block, int food) {
-        this.addToBlockMappings(block, food, EnumDiet.PISCCARNIVORE, true);
-        this.addToBlockMappings(block, food, EnumDiet.PISCIVORE, true);
+        this.addToBlockMappings(block, food, Diet.PISCCARNIVORE, true);
+        this.addToBlockMappings(block, food, Diet.PISCIVORE, true);
     }
 
     /**
@@ -572,41 +546,31 @@ public enum FoodMappings {
      * @param item The item being registered.
      * @param food The amount of food points for the object.
      */
-    public void addFish(ItemStack item, int food) {
-        this.addToItemMappings(item, food, EnumDiet.PISCCARNIVORE);
-        this.addToItemMappings(item, food, EnumDiet.PISCIVORE);
-    }
-
-    /**
-     * Adds all ore dictionary registries to all the piscivore mappings.
-     * @param ore_dictionary_name The ore dictionary registry name being registered.
-     * @param food The amount of food points for the object.
-     */
-    public void addFish(String ore_dictionary_name, int food) {
-        this.addOreDictionary(ore_dictionary_name, food, EnumDiet.PISCCARNIVORE);
-        this.addOreDictionary(ore_dictionary_name, food, EnumDiet.PISCIVORE);
+    public void addFish(Item item, int food) {
+        this.addToItemMappings(item, food, Diet.PISCCARNIVORE);
+        this.addToItemMappings(item, food, Diet.PISCIVORE);
     }
 
     /**
      * Adds a item, block, or entity class to all the egg eating mappings.
      *
      * @param entity The entity class being registered.
-     * @param food   The amount of food points for the object.
+     * @param food The amount of food points for the object.
      */
     public void addEgg(Class<? extends Entity> entity, int food) {
-        this.addToEntityMappings(entity, food, EnumDiet.CARNIVORE_EGG);
-        this.addToEntityMappings(entity, food, EnumDiet.OMNIVORE);
+        this.addToEntityMappings(entity, food, Diet.CARNIVORE_EGG);
+        this.addToEntityMappings(entity, food, Diet.OMNIVORE);
     }
 
     /**
      * Adds a item, block, or entity class to all the egg eating mappings.
      *
      * @param block The block being registered.
-     * @param food  The amount of food points for the object.
+     * @param food The amount of food points for the object.
      */
     public void addEgg(Block block, int food) {
-        this.addToBlockMappings(block, food, EnumDiet.CARNIVORE_EGG, true);
-        this.addToBlockMappings(block, food, EnumDiet.OMNIVORE, true);
+        this.addToBlockMappings(block, food, Diet.CARNIVORE_EGG, true);
+        this.addToBlockMappings(block, food, Diet.OMNIVORE, true);
     }
 
     /**
@@ -615,34 +579,8 @@ public enum FoodMappings {
      * @param item The item being registered.
      * @param food The amount of food points for the object.
      */
-    public void addEgg(ItemStack item, int food) {
-        this.addToItemMappings(item, food, EnumDiet.CARNIVORE_EGG);
-        this.addToItemMappings(item, food, EnumDiet.OMNIVORE);
-    }
-
-    /**
-     * Adds all ore dictionary registries to all the egg eating mappings.
-     * @param ore_dictionary_name The ore dictionary registry name being registered.
-     * @param food The amount of food points for the object.
-     */
-    public void addEgg(String ore_dictionary_name, int food) {
-        this.addOreDictionary(ore_dictionary_name, food, EnumDiet.CARNIVORE_EGG);
-        this.addOreDictionary(ore_dictionary_name, food, EnumDiet.OMNIVORE);
-    }
-
-
-    private void addOreDictionary(String dict_name, int food_value, EnumDiet diet){
-        List<ItemStack> stacks = OreDictionary.getOres(dict_name);
-        if(!stacks.isEmpty()) {
-            for (ItemStack stack : stacks) {
-                if (stack != null && stack.getItem() != null) {
-                    if (stack.getItem() instanceof ItemBlock) {
-                        this.addToBlockMappings(((ItemBlock) stack.getItem()).field_150939_a, food_value, diet, true);
-                    } else {
-                        this.addToItemMappings(stack, food_value, diet);
-                    }
-                }
-            }
-        }
+    public void addEgg(Item item, int food) {
+        this.addToItemMappings(item, food, Diet.CARNIVORE_EGG);
+        this.addToItemMappings(item, food, Diet.OMNIVORE);
     }
 }

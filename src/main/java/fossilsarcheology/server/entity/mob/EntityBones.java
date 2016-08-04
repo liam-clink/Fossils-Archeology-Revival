@@ -1,5 +1,6 @@
 package fossilsarcheology.server.entity.mob;
 
+import fossilsarcheology.server.block.FABlockRegistry;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -16,9 +17,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-import fossilsarcheology.server.block.FABlockRegistry;
 
 public class EntityBones extends EntityMob {
     private static final ItemStack defaultHeldItem = null;

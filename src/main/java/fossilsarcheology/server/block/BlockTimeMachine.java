@@ -27,9 +27,9 @@ public class BlockTimeMachine extends BlockContainer {
         this.setLightOpacity(0);
         this.setLightLevel(0.9375F);
         this.setHardness(0.3F);
-        this.setStepSound(Block.soundTypeGlass);
-        this.setBlockName(LocalizationStrings.BLOCK_TIMEMACHINE_NAME);
-        this.setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
+        this.setSoundType(Block.soundTypeGlass);
+        this.setUnlocalizedName(LocalizationStrings.BLOCK_TIMEMACHINE_NAME);
+        this.setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
     }
 
 	/*
@@ -39,9 +39,9 @@ public class BlockTimeMachine extends BlockContainer {
 
     /**
      * Retrieves the block texture to use based on the display side. Args:
-     * iBlockAccess, x, y, z, side
+     * iBlockAccess, pos, side
      */
-	/*
+    /*
 	 * public int getBlockTexture(IBlockAccess var1, int var2, int var3, int
 	 * var4, int var5) { return var5 == 1 ? 0 : (var5 == 0 ? 1 : 16 + (var5 <= 3
 	 * ? 0 : 1)); }

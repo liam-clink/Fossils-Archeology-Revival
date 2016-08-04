@@ -1,5 +1,17 @@
 package fossilsarcheology.server.entity.mob;
 
+import fossilsarcheology.server.entity.EntityPrehistoric;
+import fossilsarcheology.server.entity.ai.DinoAIAttackOnCollide;
+import fossilsarcheology.server.entity.ai.DinoAIEatFeeders;
+import fossilsarcheology.server.entity.ai.DinoAIEatItems;
+import fossilsarcheology.server.entity.ai.DinoAIFollowOwner;
+import fossilsarcheology.server.entity.ai.DinoAIHunt;
+import fossilsarcheology.server.entity.ai.DinoAILookIdle;
+import fossilsarcheology.server.entity.ai.DinoAIRiding;
+import fossilsarcheology.server.entity.ai.DinoAIWander;
+import fossilsarcheology.server.entity.ai.DinoAIWatchClosest;
+import fossilsarcheology.server.enums.EnumPrehistoricAI;
+import fossilsarcheology.server.enums.PrehistoricEntityType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
@@ -12,28 +24,16 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
-import fossilsarcheology.server.entity.EntityPrehistoric;
-import fossilsarcheology.server.entity.ai.DinoAIAttackOnCollide;
-import fossilsarcheology.server.entity.ai.DinoAIEatFeeders;
-import fossilsarcheology.server.entity.ai.DinoAIEatItems;
-import fossilsarcheology.server.entity.ai.DinoAIFollowOwner;
-import fossilsarcheology.server.entity.ai.DinoAIHunt;
-import fossilsarcheology.server.entity.ai.DinoAILookIdle;
-import fossilsarcheology.server.entity.ai.DinoAIRiding;
-import fossilsarcheology.server.entity.ai.DinoAIWander;
-import fossilsarcheology.server.entity.ai.DinoAIWatchClosest;
-import fossilsarcheology.server.enums.EnumPrehistoric;
-import fossilsarcheology.server.enums.EnumPrehistoricAI;
 
 public class EntityDilophosaurus extends EntityPrehistoric {
 
     public EntityDilophosaurus(World world) {
-        super(world, EnumPrehistoric.Dilophosaurus, 1, 8, 8, 40, 0.25, 0.35);
+        super(world, PrehistoricEntityType.DILOPHOSAURUS, 1, 8, 8, 40, 0.25, 0.35);
         this.getNavigator().setAvoidsWater(true);
         this.getNavigator().setCanSwim(true);
         this.tasks.addTask(1, new EntityAISwimming(this));
         this.tasks.addTask(2, this.aiSit);
-        this.tasks.addTask(3, new DinoAIRiding(this, 1.5F));
+        this.tasks.addTask(3, new DinoAIRiding(this, 2.0F));
         this.tasks.addTask(4, new DinoAIAttackOnCollide(this, 1.5D, false));
         this.tasks.addTask(5, new DinoAIFollowOwner(this, 1.0D, 10.0F, 2.0F));
         this.tasks.addTask(6, new DinoAIEatFeeders(this, 1));
@@ -181,9 +181,9 @@ public class EntityDilophosaurus extends EntityPrehistoric {
     public int getMaxHunger() {
         return 100;
     }
-    
-	@Override
-	public boolean canBeRidden() {
-		return true;
-	}
+
+    @Override
+    public boolean canBeRidden() {
+        return true;
+    }
 }

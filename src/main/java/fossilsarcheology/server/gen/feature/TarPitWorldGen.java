@@ -16,15 +16,15 @@ public class TarPitWorldGen extends WorldGenerator {
     }
 
     @Override
-    public boolean generate(World world, Random random, int x, int y, int z) {
+    public boolean generate(World world, Random random, BlockPos pos) {
         x -= 8;
-        Block block = world.getBlock(x, y, z);
+        Block block = world.getBlock(pos);
 
         if (block != Blocks.grass) {
             return false;
         }
 
-        for (z -= 8; y > 5 && world.isAirBlock(x, y, z); y--) {
+        for (z -= 8; y > 5 && world.isAirBlock(pos); y--) {
         }
 
         if (y <= 4) {

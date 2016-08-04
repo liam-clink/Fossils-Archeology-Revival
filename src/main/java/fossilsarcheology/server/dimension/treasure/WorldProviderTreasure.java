@@ -2,24 +2,25 @@ package fossilsarcheology.server.dimension.treasure;
 
 import fossilsarcheology.Revival;
 import fossilsarcheology.server.biome.FABiomeRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import fossilsarcheology.server.dimension.FADimensionHandler;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.util.ChunkCoordinates;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.Vec3;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProvider;
-import net.minecraft.world.biome.WorldChunkManagerHell;
-import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraft.world.biome.BiomeProviderSingle;
+import net.minecraft.world.chunk.IChunkGenerator;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class WorldProviderTreasure extends WorldProvider {
     @Override
-    public void registerWorldChunkManager() {
-        this.worldChunkMgr = new WorldChunkManagerHell(FABiomeRegistry.INSTANCE.treasureBiome, 0);
-        this.dimensionId = Revival.CONFIG.dimensionIDTreasure;
+    public void createBiomeProvider() {
+        this.biomeProvider = new BiomeProviderSingle(FABiomeRegistry.INSTANCE.treasureBiome);
+        this.setDimension(Revival.CONFIG.dimensionIDTreasure);
         this.hasNoSky = true;
         this.isHellWorld = true;
-
     }
 
     @Override
@@ -34,25 +35,22 @@ public class WorldProviderTreasure extends WorldProvider {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public Vec3 getFogColor(float p_76562_1_, float p_76562_2_) {
+    public Vec3d getFogColor(float p_76562_1_, float p_76562_2_) {
         int i = 10518688;
         float f2 = MathHelper.cos(p_76562_1_ * (float) Math.PI * 2.0F) * 2.0F + 0.5F;
-
         if (f2 < 0.0F) {
             f2 = 0.0F;
         }
-
         if (f2 > 1.0F) {
             f2 = 1.0F;
         }
-
-        float f3 = (float) (i >> 16 & 255) / 255.0F;
-        float f4 = (float) (i >> 8 & 255) / 255.0F;
-        float f5 = (float) (i & 255) / 255.0F;
-        f3 *= f2 * 0.0F + 0.15F;
-        f4 *= f2 * 0.0F + 0.15F;
-        f5 *= f2 * 0.0F + 0.15F;
-        return Vec3.createVectorHelper((double) f3, (double) f4, (double) f5);
+        float red = (float) (i >> 16 & 255) / 255.0F;
+        float green = (float) (i >> 8 & 255) / 255.0F;
+        float blue = (float) (i & 255) / 255.0F;
+        red *= f2 * 0.0F + 0.15F;
+        green *= f2 * 0.0F + 0.15F;
+        blue *= f2 * 0.0F + 0.15F;
+        return new Vec3d(red, green, blue);
     }
 
     @Override
@@ -66,31 +64,19 @@ public class WorldProviderTreasure extends WorldProvider {
         return false;
     }
 
-    /**
-     * Creates the light to brightness table
-     */
     @Override
     protected void generateLightBrightnessTable() {
         float f = 0.1F;
-
         for (int i = 0; i <= 15; ++i) {
             float f1 = 1.0F - (float) i / 15.0F;
             this.lightBrightnessTable[i] = (1.0F - f1) / (f1 * 3.0F + 1.0F) * (1.0F - f) + f;
         }
     }
 
-    /**
-     * Returns array with sunrise/sunset colors
-     */
     @Override
     @SideOnly(Side.CLIENT)
     public float[] calcSunriseSunsetColors(float p_76560_1_, float p_76560_2_) {
         return null;
-    }
-
-    @Override
-    public String getDimensionName() {
-        return "the Ancient Treasure Room";
     }
 
     @Override
@@ -99,7 +85,7 @@ public class WorldProviderTreasure extends WorldProvider {
     }
 
     @Override
-    public IChunkProvider createChunkGenerator() {
+    public IChunkGenerator createChunkGenerator() {
         return new ChunkProviderTreasure(worldObj, 0);
     }
 
@@ -109,21 +95,14 @@ public class WorldProviderTreasure extends WorldProvider {
         return 8.0F;
     }
 
-    /**
-     * Will check if the x, z position specified is alright to be set as the map
-     * spawn point
-     */
     @Override
-    public boolean canCoordinateBeSpawn(int x, int y) {
-        return this.worldObj.getTopBlock(x, y).getMaterial().blocksMovement();
+    public boolean canCoordinateBeSpawn(int x, int z) {
+        return this.worldObj.getBlockState(this.worldObj.getHeight(new BlockPos(x, 0, z))).getMaterial().blocksMovement();
     }
 
-    /**
-     * Gets the hard-coded portal location to use when entering this dimension.
-     */
     @Override
-    public ChunkCoordinates getEntrancePortalLocation() {
-        return new ChunkCoordinates(0, 50, 0);
+    public BlockPos getSpawnCoordinate() {
+        return new BlockPos(0, 50, 0);
     }
 
     @Override
@@ -131,9 +110,6 @@ public class WorldProviderTreasure extends WorldProvider {
         return 50;
     }
 
-    /**
-     * Returns true if the given X,Z coordinate should show environmental fog.
-     */
     @Override
     @SideOnly(Side.CLIENT)
     public boolean doesXZShowFog(int p_76568_1_, int p_76568_2_) {
@@ -143,5 +119,10 @@ public class WorldProviderTreasure extends WorldProvider {
     @Override
     public int getRespawnDimension(EntityPlayerMP player) {
         return 0;
+    }
+
+    @Override
+    public DimensionType getDimensionType() {
+        return FADimensionHandler.TREASURE;
     }
 }

@@ -4,13 +4,13 @@ import fossilsarcheology.client.model.ModelVaseAmphora;
 import fossilsarcheology.client.model.ModelVaseKylix;
 import fossilsarcheology.client.model.ModelVaseVolute;
 import fossilsarcheology.server.block.entity.TileEntityVase;
-import cpw.mods.fml.client.FMLClientHandler;
 import net.minecraft.block.Block;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.client.FMLClientHandler;
 import org.lwjgl.opengl.GL11;
 
 public class TileEntityVaseRenderer extends TileEntitySpecialRenderer {
@@ -48,25 +48,25 @@ public class TileEntityVaseRenderer extends TileEntitySpecialRenderer {
     // renders entity in world
     public void renderTileEntityFigurineAt(TileEntityVase te, double x, double y, double z, float scale) {
         // push matrix tells the renderer to start doing something
-        GL11.glPushMatrix();
+        GlStateManager.pushMatrix();
         // this sets the initial location
-        GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
+        GlStateManager.translate((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
         // this rotates your block otherwise will render upside down
-        GL11.glPushMatrix();
-        GL11.glRotatef(180F, 1.0F, 0.0F, 1.0F);
+        GlStateManager.pushMatrix();
+        GlStateManager.rotate(180F, 1.0F, 0.0F, 1.0F);
         rotateBlock(te.getWorldObj(), te.xCoord, te.yCoord, te.zCoord, te.blockType, te.getVaseTypeMeta(), te.getVaseType());
-        GL11.glPopMatrix();
-        GL11.glPopMatrix();
+        GlStateManager.popMatrix();
+        GlStateManager.popMatrix();
     }
 
     // rotates block
-    private void rotateBlock(World world, int x, int y, int z, Block block, int meta, int vaseType) {
+    private void rotateBlock(World world, BlockPos pos, Block block, int meta, int vaseType) {
         if (world != null) {
-            int dir = world.getBlockMetadata(x, y, z);
-            GL11.glPushMatrix();
+            int dir = world.getBlockMetadata(pos);
+            GlStateManager.pushMatrix();
             // this line rotates renderer
-            GL11.glRotatef(dir * (90), 0F, 1F, 0F);
-            GL11.glScalef(1F, 1F, 1F);
+            GlStateManager.rotate(dir * (90), 0F, 1F, 0F);
+            GlStateManager.scale(1F, 1F, 1F);
 
             switch (vaseType) {
                 case 0:
@@ -156,13 +156,13 @@ public class TileEntityVaseRenderer extends TileEntitySpecialRenderer {
             // renders the model
             // this.model.render((Entity) null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F,
             // 0.0625F);
-            GL11.glPopMatrix();
+            GlStateManager.popMatrix();
         } else {
-            GL11.glPushMatrix();
-            GL11.glRotatef(0F, 0F, 1F, 0F);
+            GlStateManager.pushMatrix();
+            GlStateManager.rotate(0F, 0F, 1F, 0F);
             FMLClientHandler.instance().getClient().renderEngine.bindTexture(damaged_volute);
             this.proxyVase.render(null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
-            GL11.glPopMatrix();
+            GlStateManager.popMatrix();
         }
     }
 

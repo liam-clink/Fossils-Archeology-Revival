@@ -1,5 +1,7 @@
 package fossilsarcheology.server.entity.mob;
 
+import fossilsarcheology.server.block.FABlockRegistry;
+import fossilsarcheology.server.item.FAItemRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntitySlime;
@@ -8,10 +10,8 @@ import net.minecraft.item.Item;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-import fossilsarcheology.server.block.FABlockRegistry;
-import fossilsarcheology.server.item.FAItemRegistry;
 
 public class EntityTarSlime extends EntitySlime {
 

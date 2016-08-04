@@ -1,8 +1,6 @@
 package fossilsarcheology.server.block;
 
 import fossilsarcheology.client.render.particle.FossilFX;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.block.IGrowable;
@@ -16,10 +14,12 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.IIcon;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 import java.util.Random;
@@ -34,7 +34,7 @@ public class BlockFossilTallPlant extends BlockDoublePlant implements IGrowable,
     public BlockFossilTallPlant(String string) {
         super();
         this.setHardness(0.0F);
-        this.setStepSound(soundTypeGrass);
+        this.setSoundType(soundTypeGrass);
         this.textureName = string;
     }
 
@@ -83,7 +83,7 @@ public class BlockFossilTallPlant extends BlockDoublePlant implements IGrowable,
      * z
      */
     @Override
-    public void setBlockBoundsBasedOnState(IBlockAccess a, int x, int y, int z) {
+    public void setBlockBoundsBasedOnState(IBlockAccess a, BlockPos pos) {
         this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
     }
 
@@ -95,30 +95,30 @@ public class BlockFossilTallPlant extends BlockDoublePlant implements IGrowable,
 
     /**
      * Checks to see if its valid to put this block at the specified
-     * coordinates. Args: world, x, y, z
+     * coordinates. Args: world, pos
      */
     @Override
-    public boolean canPlaceBlockAt(World w, int x, int y, int z) {
-        return super.canPlaceBlockAt(w, x, y, z) && w.isAirBlock(x, y + 1, z);
+    public boolean canPlaceBlockAt(World w, BlockPos pos) {
+        return super.canPlaceBlockAt(w, pos) && w.isAirBlock(x, y + 1, z);
     }
 
     /**
      * checks if the block can stay, if not drop as item
      */
     @Override
-    protected void checkAndDropBlock(World w, int x, int y, int z) {
-        if (!this.canBlockStay(w, x, y, z)) {
-            int l = w.getBlockMetadata(x, y, z);
+    protected void checkAndDropBlock(World w, BlockPos pos) {
+        if (!this.canBlockStay(w, pos)) {
+            int l = w.getBlockMetadata(pos);
 
             if (!func_149887_c(l)) {
-                this.dropBlockAsItem(w, x, y, z, l, 0);
+                this.dropBlockAsItem(w, pos, l, 0);
 
                 if (w.getBlock(x, y + 1, z) == this) {
                     w.setBlock(x, y + 1, z, Blocks.air, 0, 2);
                 }
             }
 
-            w.setBlock(x, y, z, Blocks.air, 0, 2);
+            w.setBlock(pos, Blocks.air, 0, 2);
         }
     }
 
@@ -127,9 +127,9 @@ public class BlockFossilTallPlant extends BlockDoublePlant implements IGrowable,
      * gets checked often with plants.
      */
     @Override
-    public boolean canBlockStay(World world, int x, int y, int z) {
-        if (world.getBlock(x, y, z) != this) {
-            return super.canBlockStay(world, x, y, z); // Forge: This function
+    public boolean canBlockStay(World world, BlockPos pos) {
+        if (world.getBlock(pos) != this) {
+            return super.canBlockStay(world, pos); // Forge: This function
             // is called during world
             // gen and placement,
             // before this block is
@@ -137,8 +137,8 @@ public class BlockFossilTallPlant extends BlockDoublePlant implements IGrowable,
             // 'here' then assume
             // it's the pre-check.
         }
-        int l = world.getBlockMetadata(x, y, z);
-        return func_149887_c(l) ? world.getBlock(x, y - 1, z) == this : world.getBlock(x, y + 1, z) == this && super.canBlockStay(world, x, y, z);
+        int l = world.getBlockMetadata(pos);
+        return func_149887_c(l) ? world.getBlock(x, y - 1, z) == this : world.getBlock(x, y + 1, z) == this && super.canBlockStay(world, pos);
     }
 
     @Override
@@ -182,16 +182,16 @@ public class BlockFossilTallPlant extends BlockDoublePlant implements IGrowable,
      */
     @Override
     @SideOnly(Side.CLIENT)
-    public int colorMultiplier(IBlockAccess a, int x, int y, int z) {
-        int l = this.func_149885_e(a, x, y, z);
-        return l != 2 && l != 3 ? 16777215 : a.getBiomeGenForCoords(x, z).getBiomeGrassColor(x, y, z);
+    public int colorMultiplier(IBlockAccess a, BlockPos pos) {
+        int l = this.func_149885_e(a, pos);
+        return l != 2 && l != 3 ? 16777215 : a.getBiomeGenForCoords(x, z).getBiomeGrassColor(pos);
     }
 
     /**
      * Called when the block is placed in the world.
      */
     @Override
-    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack i) {
+    public void onBlockPlacedBy(World world, BlockPos pos, EntityLivingBase entity, ItemStack i) {
         int l = ((MathHelper.floor_double((double) (entity.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3) + 2) % 4;
         world.setBlock(x, y + 1, z, this, 8 | l, 2);
     }
@@ -202,9 +202,9 @@ public class BlockFossilTallPlant extends BlockDoublePlant implements IGrowable,
      * subtype/damage.
      */
     @Override
-    public void harvestBlock(World world, EntityPlayer entity, int x, int y, int z, int i) {
-        if (world.isRemote || entity.getCurrentEquippedItem() == null || entity.getCurrentEquippedItem().getItem() != Items.shears || func_149887_c(i) || !this.func_149886_b(world, x, y, z, i, entity)) {
-            super.harvestBlock(world, entity, x, y, z, i);
+    public void harvestBlock(World world, EntityPlayer entity, BlockPos pos, int i) {
+        if (world.isRemote || entity.getCurrentEquippedItem() == null || entity.getCurrentEquippedItem().getItem() != Items.shears || func_149887_c(i) || !this.func_149886_b(world, pos, i, entity)) {
+            super.harvestBlock(world, entity, pos, i);
         }
     }
 
@@ -212,7 +212,7 @@ public class BlockFossilTallPlant extends BlockDoublePlant implements IGrowable,
      * Called when the block is attempted to be harvested
      */
     @Override
-    public void onBlockHarvested(World world, int x, int y, int z, int i, EntityPlayer f) {
+    public void onBlockHarvested(World world, BlockPos pos, int i, EntityPlayer f) {
         if (func_149887_c(i)) {
             if (world.getBlock(x, y - 1, z) == this) {
                 if (!f.capabilities.isCreativeMode) {
@@ -223,7 +223,7 @@ public class BlockFossilTallPlant extends BlockDoublePlant implements IGrowable,
                         world.func_147480_a(x, y - 1, z, true);
                     } else {
                         if (!world.isRemote && f.getCurrentEquippedItem() != null && f.getCurrentEquippedItem().getItem() == Items.shears) {
-                            this.func_149886_b(world, x, y, z, i1, f);
+                            this.func_149886_b(world, pos, i1, f);
                         }
 
                         world.setBlockToAir(x, y - 1, z);
@@ -236,7 +236,7 @@ public class BlockFossilTallPlant extends BlockDoublePlant implements IGrowable,
             world.setBlock(x, y + 1, z, Blocks.air, 0, 2);
         }
 
-        super.onBlockHarvested(world, x, y, z, i, f);
+        super.onBlockHarvested(world, pos, i, f);
     }
 
     private boolean func_149886_b(World world, int x, int z, int y, int i, EntityPlayer p_149886_6_) {
@@ -258,7 +258,7 @@ public class BlockFossilTallPlant extends BlockDoublePlant implements IGrowable,
     }
 
     @Override
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int var6, float var7, float var8, float var9) {
+    public boolean onBlockActivated(World world, BlockPos pos, EntityPlayer player, int var6, float var7, float var8, float var9) {
         ItemStack itemstack = player.getCurrentEquippedItem();
         if (itemstack != null) {
             if (itemstack.getItem() != null) {
@@ -310,20 +310,20 @@ public class BlockFossilTallPlant extends BlockDoublePlant implements IGrowable,
     }
 
     @Override
-    public boolean func_149851_a(World world, int x, int y, int z, boolean isActive) {
-        int l = this.func_149885_e(world, x, y, z);
+    public boolean func_149851_a(World world, BlockPos pos, boolean isActive) {
+        int l = this.func_149885_e(world, pos);
         return l != 2 && l != 3;
     }
 
     @Override
-    public boolean func_149852_a(World world, Random rand, int x, int y, int z) {
+    public boolean func_149852_a(World world, Random rand, BlockPos pos) {
         return true;
     }
 
     @Override
-    public void func_149853_b(World world, Random rand, int x, int y, int z) {
-        int l = this.func_149885_e(world, x, y, z);
-        this.dropBlockAsItem(world, x, y, z, new ItemStack(this, 1, l));
+    public void func_149853_b(World world, Random rand, BlockPos pos) {
+        int l = this.func_149885_e(world, pos);
+        this.dropBlockAsItem(world, pos, new ItemStack(this, 1, l));
     }
 
 }

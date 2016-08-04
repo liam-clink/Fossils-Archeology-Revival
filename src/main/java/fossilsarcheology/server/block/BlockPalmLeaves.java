@@ -3,31 +3,30 @@ package fossilsarcheology.server.block;
 import fossilsarcheology.Revival;
 import fossilsarcheology.server.creativetab.FATabRegistry;
 import fossilsarcheology.server.handler.LocalizationStrings;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.Item;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ColorizerFoliage;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Random;
 
 public class BlockPalmLeaves extends BlockLeaves {
-    public static final String[][] TEXTURES = new String[][]{{"leaves_palaeoraphe"}, {"leaves_palaeoraphe_fast"}};
+    public static final String[][] TEXTURES = new String[][] { { "leaves_palaeoraphe" }, { "leaves_palaeoraphe_fast" } };
     private IIcon[][] icons = new IIcon[2][];
 
     private byte[] adjacentTreeBlocks;
 
     public BlockPalmLeaves() {
         super();
-        this.setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
+        this.setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
         this.setResistance(1.0F);
-        this.setBlockName(LocalizationStrings.PALAE_LEAVES_NAME);
+        this.setUnlocalizedName(LocalizationStrings.PALAE_LEAVES_NAME);
     }
 
     @Override
@@ -39,8 +38,8 @@ public class BlockPalmLeaves extends BlockLeaves {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public int colorMultiplier(IBlockAccess world, int x, int y, int z) {
-        int meta = world.getBlockMetadata(x, y, z);
+    public int colorMultiplier(IBlockAccess world, BlockPos pos) {
+        int meta = world.getBlockMetadata(pos);
         int type = this.getType(meta);
         if (type == 1) {
             return ColorizerFoliage.getFoliageColorPine();
@@ -52,7 +51,7 @@ public class BlockPalmLeaves extends BlockLeaves {
             int blue = 0;
             for (int zOffset = -1; zOffset <= 1; ++zOffset) {
                 for (int xOffset = -1; xOffset <= 1; ++xOffset) {
-                    int biomeColor = world.getBiomeGenForCoords(x + xOffset, z + zOffset).getBiomeFoliageColor(x, y, z);
+                    int biomeColor = world.getBiomeGenForCoords(x + xOffset, z + zOffset).getBiomeFoliageColor(pos);
                     red += (biomeColor & 0xFF0000) >> 16;
                     green += (biomeColor & 0xFF00) >> 8;
                     blue += biomeColor & 0xFF;
@@ -96,9 +95,9 @@ public class BlockPalmLeaves extends BlockLeaves {
     }
 
     @Override
-    public void updateTick(World world, int x, int y, int z, Random rand) {
+    public void updateTick(World world, BlockPos pos, Random rand) {
         if (!world.isRemote) {
-            int meta = world.getBlockMetadata(x, y, z);
+            int meta = world.getBlockMetadata(pos);
             if ((meta & 8) != 0 && (meta & 4) == 0) {
                 byte scanArea = 4;
                 int i = scanArea + 1;
@@ -147,16 +146,16 @@ public class BlockPalmLeaves extends BlockLeaves {
                     }
                 }
                 if (this.adjacentTreeBlocks[center * sizeSquared + center * size + center] >= 0) {
-                    world.setBlockMetadataWithNotify(x, y, z, meta & -9, 4);
+                    world.setBlockMetadataWithNotify(pos, meta & -9, 4);
                 } else {
-                    this.removeLeaves(world, x, y, z);
+                    this.removeLeaves(world, pos);
                 }
             }
         }
     }
 
-    private void removeLeaves(World world, int x, int y, int z) {
-        this.dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
-        world.setBlockToAir(x, y, z);
+    private void removeLeaves(World world, BlockPos pos) {
+        this.dropBlockAsItem(world, pos, world.getBlockMetadata(pos), 0);
+        world.setBlockToAir(pos);
     }
 }

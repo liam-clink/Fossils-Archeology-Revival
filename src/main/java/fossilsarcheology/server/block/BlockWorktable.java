@@ -4,12 +4,10 @@ import fossilsarcheology.Revival;
 import fossilsarcheology.server.block.entity.TileEntityWorktable;
 import fossilsarcheology.server.creativetab.FATabRegistry;
 import fossilsarcheology.server.handler.LocalizationStrings;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,9 +15,10 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IIcon;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Random;
 
@@ -32,43 +31,42 @@ public class BlockWorktable extends BlockContainer {
     private IIcon Side1;
 
     public BlockWorktable(boolean isActive) {
-        super(Material.wood);
-        setHarvestLevel("axe", 0);
+        super(Material.ROCK);
         setHardness(2.5F);
-        setStepSound(Block.soundTypeWood);
+        setSoundType(SoundType.WOOD);
         this.isActive = isActive;
         if (isActive) {
-            setBlockName(LocalizationStrings.BLOCK_WORKTABLE_ACTIVE_NAME);
+            setUnlocalizedName(LocalizationStrings.BLOCK_WORKTABLE_ACTIVE_NAME);
         } else {
-            setBlockName(LocalizationStrings.BLOCK_WORKTABLE_IDLE_NAME);
-            setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
+            setUnlocalizedName(LocalizationStrings.BLOCK_WORKTABLE_IDLE_NAME);
+            setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
         }
         // this.blockIndexInTexture = 45;
     }
 
-    public static void updateFurnaceBlockState(boolean active, World world, int x, int y, int z) {
-        int meta = world.getBlockMetadata(x, y, z);
-        TileEntity tileentity = world.getTileEntity(x, y, z);
+    public static void updateFurnaceBlockState(boolean active, World world, BlockPos pos) {
+        int meta = world.getBlockMetadata(pos);
+        TileEntity tileentity = world.getTileEntity(pos);
         keepFurnaceInventory = true;
 
         if (active) {
-            world.setBlock(x, y, z, FABlockRegistry.INSTANCE.blockworktableActive);
+            world.setBlockState(pos, FABlockRegistry.INSTANCE.blockworktableActive.getDefaultState());
         } else {
-            world.setBlock(x, y, z, FABlockRegistry.INSTANCE.blockworktableIdle);
+            world.setBlockState(pos, FABlockRegistry.INSTANCE.blockworktableIdle.getDefaultState());
         }
 
         keepFurnaceInventory = false;
-        world.setBlockMetadataWithNotify(x, y, z, meta, 2);
+        world.setBlockMetadataWithNotify(pos, meta, 2);
 
         if (tileentity != null) {
             tileentity.validate();
-            world.setTileEntity(x, y, z, tileentity);
+            world.setTileEntity(pos, tileentity);
         }
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public Item getItem(World world, int x, int y, int z) {
+    public Item getItem(World world, BlockPos pos) {
         return Item.getItemFromBlock(FABlockRegistry.INSTANCE.blockworktableIdle);
     }
 
@@ -81,21 +79,21 @@ public class BlockWorktable extends BlockContainer {
     }
 
     /**
-     * Called whenever the block is added into the world. Args: world, x, y, z
+     * Called whenever the block is added into the world. Args: world, pos
      */
     @Override
-    public void onBlockAdded(World world, int x, int y, int z) {
-        super.onBlockAdded(world, x, y, z);
-        this.setDefaultDirection(world, x, y, z);
+    public void onBlockAdded(World world, BlockPos pos) {
+        super.onBlockAdded(world, pos);
+        this.setDefaultDirection(world, pos);
     }
 
     /**
      * set a blocks direction
      */
-    private void setDefaultDirection(World world, int x, int y, int z) {
+    private void setDefaultDirection(World world, BlockPos pos) {
         if (!world.isRemote) {
-            Block block = world.getBlock(x, y, z - 1);
-            Block block1 = world.getBlock(x, y, z + 1);
+            Block block = world.getBlock(pos - 1);
+            Block block1 = world.getBlock(pos + 1);
             Block block2 = world.getBlock(x - 1, y, z);
             Block block3 = world.getBlock(x + 1, y, z);
             byte b0 = 3;
@@ -116,7 +114,7 @@ public class BlockWorktable extends BlockContainer {
                 b0 = 4;
             }
 
-            world.setBlockMetadataWithNotify(x, y, z, b0, 2);
+            world.setBlockMetadataWithNotify(pos, b0, 2);
         }
     }
 
@@ -202,9 +200,9 @@ public class BlockWorktable extends BlockContainer {
      * update, as appropriate
      */
     @Override
-    public void breakBlock(World world, int x, int y, int z, Block block, int var6) {
+    public void breakBlock(World world, BlockPos pos, Block block, int var6) {
         if (!keepFurnaceInventory) {
-            TileEntityWorktable tileentity = (TileEntityWorktable) world.getTileEntity(x, y, z);
+            TileEntityWorktable tileentity = (TileEntityWorktable) world.getTileEntity(pos);
 
             if (tileentity != null) {
                 for (int i = 0; i < tileentity.getSizeInventory(); ++i) {
@@ -240,6 +238,6 @@ public class BlockWorktable extends BlockContainer {
             }
         }
 
-        super.breakBlock(world, x, y, z, block, var6);
+        super.breakBlock(world, pos, block, var6);
     }
 }

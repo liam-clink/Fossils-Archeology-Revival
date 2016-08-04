@@ -1,23 +1,22 @@
 package fossilsarcheology.server.entity.mob;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
+import fossilsarcheology.server.entity.EntityPrehistoric;
+import fossilsarcheology.server.enums.PrehistoricEntityType;
 import net.minecraft.entity.ai.RandomPositionGenerator;
 import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-import fossilsarcheology.server.entity.EntityPrehistoric;
-import fossilsarcheology.server.enums.EnumPrehistoric;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class Flock {
     public float flockYaw;
     public List<EntityPrehistoric> flockMembers = new ArrayList<EntityPrehistoric>();
     public EntityPrehistoric flockLeader;
-    public EnumPrehistoric type;
+    public PrehistoricEntityType type;
     private double flockPosX;
     private double flockPosY;
     private double flockPosZ;
@@ -40,6 +39,7 @@ public class Flock {
         flockPosX = creator.posX;
         flockPosY = creator.posY;
         flockPosZ = creator.posZ;
+
     }
 
     public void onUpdate() {
@@ -49,7 +49,7 @@ public class Flock {
         for (EntityPrehistoric member : flockMembers) {
             if (member != null && flockLeader != null && this.flockPathNavigate != null && this.flockPathNavigate.getPath() != null) {
                 if (member.getNavigator().noPath() && member != this.flockLeader) {
-                	PathEntity path = this.flockLeader.getNavigator().getPath();
+                    PathEntity path = this.flockLeader.getNavigator().getPath();
                     member.getNavigator().setPath(this.flockPathNavigate.getPathToXYZ(path.getFinalPathPoint().xCoord + generateVarience(6, -6), path.getFinalPathPoint().yCoord + generateVarience(6, -6), path.getFinalPathPoint().zCoord + generateVarience(6, -6)), 1);
                 }
             }
@@ -59,11 +59,9 @@ public class Flock {
             flockPathNavigate = flockLeader.getNavigator();
         }
         if (flockLeader != null) {
-            if (!flockLeader.isMovementBlocked() && flockLeader.getNavigator().noPath() && flockLeader.ticksExisted % 20 == 0) {
-                Vec3 vec3 = RandomPositionGenerator.findRandomTargetBlockAwayFrom(flockLeader, 32, 7, Vec3.createVectorHelper(flockLeader.posX, flockLeader.posY, flockLeader.posZ));
-                if (vec3 != null) {
-                    this.flockLeader.getNavigator().setPath(this.flockPathNavigate.getPathToXYZ(vec3.xCoord, vec3.yCoord, vec3.zCoord), 1);
-                }
+            if (!flockLeader.isMovementBlocked() && flockLeader.getNavigator().noPath()) {
+                Vec3d vec3 = RandomPositionGenerator.findRandomTargetBlockAwayFrom(flockLeader, 32, 7, new Vec3d(flockLeader.posX, flockLeader.posY, flockLeader.posZ));
+                this.flockLeader.getNavigator().setPath(this.flockPathNavigate.getPathToXYZ(vec3.xCoord, vec3.yCoord, vec3.zCoord), 1);
             }
         }
     }
@@ -94,5 +92,6 @@ public class Flock {
 
     public void disband() {
         flockMembers.clear();
+
     }
 }

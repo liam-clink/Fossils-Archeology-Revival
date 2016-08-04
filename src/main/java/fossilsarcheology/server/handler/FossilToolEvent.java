@@ -3,15 +3,14 @@ package fossilsarcheology.server.handler;
 import fossilsarcheology.server.block.FABlockRegistry;
 import fossilsarcheology.server.enchantment.FAEnchantmentRegistry;
 import fossilsarcheology.server.item.FAItemRegistry;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class FossilToolEvent {
-
     private int paleontologyBonus;
     private int archeologyBonus;
 
@@ -20,20 +19,19 @@ public class FossilToolEvent {
 
     @SubscribeEvent
     public void onHarvestBlocks(BlockEvent.HarvestDropsEvent event) {
-        Block block = event.block;
+        Block block = event.getWorld().getBlockState(event.getPos()).getBlock();
+        EntityPlayer player = event.getHarvester();
 
-        EntityPlayer player = event.harvester;
         if (player != null) {
-            paleontologyBonus = EnchantmentHelper.getEnchantmentLevel(FAEnchantmentRegistry.INSTANCE.paleontology.effectId, event.harvester.inventory.getCurrentItem());
-            archeologyBonus = EnchantmentHelper.getEnchantmentLevel(FAEnchantmentRegistry.INSTANCE.archeology.effectId, event.harvester.inventory.getCurrentItem());
+            paleontologyBonus = EnchantmentHelper.getEnchantmentLevel(FAEnchantmentRegistry.INSTANCE.paleontology, player.inventory.getCurrentItem());
+            archeologyBonus = EnchantmentHelper.getEnchantmentLevel(FAEnchantmentRegistry.INSTANCE.archeology, player.inventory.getCurrentItem());
 
-            if (event.harvester.inventory.getCurrentItem() == null) {
+            if (player.inventory.getCurrentItem() == null) {
                 return;
             } else {
                 if (paleontologyBonus > 0) {
                     hasPaleontologyBonus = true;
                 }
-
                 if (archeologyBonus > 0) {
                     hasArcheologyBonus = true;
                 }
@@ -45,24 +43,24 @@ public class FossilToolEvent {
                     switch (paleontologyBonus) {
                         case 1:
                             if (player.worldObj.rand.nextFloat() < 0.70) {
-                                event.drops.remove(0);
-                                event.drops.add(new ItemStack(FAItemRegistry.INSTANCE.biofossil, 1));
+                                event.getDrops().remove(0);
+                                event.getDrops().add(new ItemStack(FAItemRegistry.INSTANCE.biofossil, 1));
                                 break;
                             } else {
                                 break;
                             }
                         case 2:
                             if (player.worldObj.rand.nextFloat() < 0.80) {
-                                event.drops.remove(0);
-                                event.drops.add(new ItemStack(FAItemRegistry.INSTANCE.biofossil, 1));
+                                event.getDrops().remove(0);
+                                event.getDrops().add(new ItemStack(FAItemRegistry.INSTANCE.biofossil, 1));
                                 break;
                             } else {
                                 break;
                             }
                         case 3:
                             if (player.worldObj.rand.nextFloat() < 0.90) {
-                                event.drops.remove(0);
-                                event.drops.add(new ItemStack(FAItemRegistry.INSTANCE.biofossil, 1));
+                                event.getDrops().remove(0);
+                                event.getDrops().add(new ItemStack(FAItemRegistry.INSTANCE.biofossil, 1));
                                 break;
                             } else {
                                 break;
@@ -70,31 +68,30 @@ public class FossilToolEvent {
                         default:
                             break;
                     }
-
                 }
 
                 if (block == FABlockRegistry.INSTANCE.blockPermafrost) {
                     switch (paleontologyBonus) {
                         case 1:
                             if (player.worldObj.rand.nextFloat() < 0.50) {
-                                event.drops.remove(0);
-                                event.drops.add(new ItemStack(FAItemRegistry.INSTANCE.icedMeat, 1));
+                                event.getDrops().remove(0);
+                                event.getDrops().add(new ItemStack(FAItemRegistry.INSTANCE.icedMeat, 1));
                                 break;
                             } else {
                                 break;
                             }
                         case 2:
                             if (player.worldObj.rand.nextFloat() < 0.70) {
-                                event.drops.remove(0);
-                                event.drops.add(new ItemStack(FAItemRegistry.INSTANCE.icedMeat, 1));
+                                event.getDrops().remove(0);
+                                event.getDrops().add(new ItemStack(FAItemRegistry.INSTANCE.icedMeat, 1));
                                 break;
                             } else {
                                 break;
                             }
                         case 3:
                             if (player.worldObj.rand.nextFloat() < 0.90) {
-                                event.drops.remove(0);
-                                event.drops.add(new ItemStack(FAItemRegistry.INSTANCE.icedMeat, 1));
+                                event.getDrops().remove(0);
+                                event.getDrops().add(new ItemStack(FAItemRegistry.INSTANCE.icedMeat, 1));
                                 break;
                             } else {
                                 break;
@@ -107,35 +104,34 @@ public class FossilToolEvent {
 
             // Handle archeology bonus
             if (hasArcheologyBonus) {
-
-                float rand = player.worldObj.rand.nextInt(1000);
+                int rand = player.worldObj.rand.nextInt(1000);
 
                 if (block == FABlockRegistry.INSTANCE.blockFossil) {
                     switch (archeologyBonus) {
                         case 1:
                             if (rand < 500) {
-                                event.drops.remove(0);
-                                event.drops.add(new ItemStack(FAItemRegistry.INSTANCE.relic, 1));
+                                event.getDrops().remove(0);
+                                event.getDrops().add(new ItemStack(FAItemRegistry.INSTANCE.relic, 1));
                                 break;
                             } else {
                                 break;
                             }
                         case 2:
                             if (rand < 700) {
-                                event.drops.remove(0);
-                                event.drops.add(new ItemStack(FAItemRegistry.INSTANCE.relic, 1));
+                                event.getDrops().remove(0);
+                                event.getDrops().add(new ItemStack(FAItemRegistry.INSTANCE.relic, 1));
                                 break;
                             } else {
                                 break;
                             }
                         case 3:
                             if (rand < 900) {
-                                event.drops.remove(0);
-                                event.drops.add(new ItemStack(FAItemRegistry.INSTANCE.relic, 1));
+                                event.getDrops().remove(0);
+                                event.getDrops().add(new ItemStack(FAItemRegistry.INSTANCE.relic, 1));
                                 break;
                             } else if (rand < 904) {
-                                event.drops.remove(0);
-                                event.drops.add(new ItemStack(FAItemRegistry.INSTANCE.gem, 1));
+                                event.getDrops().remove(0);
+                                event.getDrops().add(new ItemStack(FAItemRegistry.INSTANCE.gem, 1));
                                 break;
                             } else {
                                 break;

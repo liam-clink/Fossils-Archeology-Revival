@@ -132,11 +132,11 @@ public class ModelAnubite extends ModelBiped {
         body.render(f5);
         rightleg.render(f5);
         leftleg.render(f5);
-        GL11.glPushMatrix();
+        GlStateManager.pushMatrix();
         GL11.glDisable(GL11.GL_CULL_FACE);
         rightarm.render(f5);
         GL11.glEnable(GL11.GL_CULL_FACE);
-        GL11.glPopMatrix();
+        GlStateManager.popMatrix();
         leftarm.render(f5);
     }
 

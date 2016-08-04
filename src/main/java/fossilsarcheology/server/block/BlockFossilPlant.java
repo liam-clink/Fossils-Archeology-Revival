@@ -8,7 +8,7 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 import java.util.Random;
@@ -23,35 +23,34 @@ public class BlockFossilPlant extends BlockBush {
         this.setHardness(0);
         this.textureName = texture;
         this.renderType = renderType;
-        this.setStepSound(soundTypeGrass);
+        this.setSoundType(soundTypeGrass);
     }
 
     @Override
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int var6, float var7, float var8, float var9) {
+    public boolean onBlockActivated(World world, BlockPos pos, EntityPlayer player, int var6, float var7, float var8, float var9) {
         ItemStack itemstack = player.getCurrentEquippedItem();
         if (this == FABlockRegistry.INSTANCE.bennettitales_small) {
-            this.grow(FABlockRegistry.INSTANCE.bennettitales_large, itemstack, world, x, y, z, player);
+            this.grow(FABlockRegistry.INSTANCE.bennettitales_large, itemstack, world, pos, player);
             return true;
-        }
-        else if (this == FABlockRegistry.INSTANCE.horsetail_small) {
-            this.grow(FABlockRegistry.INSTANCE.horsetail_large, itemstack, world, x, y, z, player);
+        } else if (this == FABlockRegistry.INSTANCE.horsetail_small) {
+            this.grow(FABlockRegistry.INSTANCE.horsetail_large, itemstack, world, pos, player);
             return true;
         }
         return false;
     }
 
-    public void grow(Block plantBlock, ItemStack itemstack, World world, int x, int y, int z, EntityPlayer player) {
+    public void grow(Block plantBlock, ItemStack itemstack, World world, BlockPos pos, EntityPlayer player) {
         if (itemstack != null) {
             if (itemstack.getItem() != null) {
                 if (itemstack.getItem() == Items.dye) {
                     if (itemstack.getItemDamage() == 15) {
                         Random rand = new Random();
                         world.spawnParticle("happyVillager", x + (rand.nextDouble() - 0.5D), y + rand.nextDouble(), z + (rand.nextDouble() - 0.5D), 0.0D, 0.0D, 0.0D);
-                        world.playAuxSFX(2005, x, y, z, 0);
+                        world.playAuxSFX(2005, pos, 0);
                         int l = ((MathHelper.floor_double((double) (1 * 4.0F / 360.0F) + 0.5D) & 3) + 2) % 4;
-                        world.setBlock(x, y, z, plantBlock);
+                        world.setBlock(pos, plantBlock);
                         world.setBlock(x, y + 1, z, plantBlock, 8 | l, 2);
-                        // world.setBlockMetadataWithNotify(x, y, z, 1, 3);
+                        // world.setBlockMetadataWithNotify(pos, 1, 3);
 
                         if (!player.capabilities.isCreativeMode) {
                             --itemstack.stackSize;

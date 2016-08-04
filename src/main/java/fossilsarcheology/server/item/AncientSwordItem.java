@@ -10,7 +10,6 @@ import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
-import net.minecraft.world.EnumDifficulty;
 
 import java.util.Random;
 
@@ -34,21 +33,22 @@ public class AncientSwordItem extends ItemSword {
         if (player instanceof EntityPlayer) {
             if (player != null && this.checkHelmet((EntityPlayer) player)) {
                 if (targetentity != null && (targetentity instanceof EntityPig || targetentity instanceof EntityPigZombie)) {
-                    EntityFriendlyPigZombie fpz = new EntityFriendlyPigZombie(targetentity.worldObj);
-                    fpz.setLocationAndAngles(targetentity.posX, targetentity.posY, targetentity.posZ, targetentity.rotationYaw, targetentity.rotationPitch);
-                    if (!targetentity.worldObj.isRemote) {
-                        targetentity.worldObj.spawnEntityInWorld(fpz);
-                    }
-                    fpz.setTamed(true);
-                    if (player instanceof EntityPlayer) {
-                        EntityPlayer playerUUID = (EntityPlayer) player;
-                        fpz.func_152115_b(playerUUID.getUniqueID().toString());
-                        fpz.sendMessageToOwner("pigman.summon");
-                    }
-                    targetentity.worldObj.spawnEntityInWorld(fpz);
-                    targetentity.setDead();
-                    targetentity.worldObj.spawnEntityInWorld(new EntityLightningBolt(targetentity.worldObj, targetentity.posX, targetentity.posY, targetentity.posZ));
 
+                    if (!targetentity.worldObj.isRemote) {
+                        EntityFriendlyPigZombie fpz = new EntityFriendlyPigZombie(targetentity.worldObj);
+                        fpz.setLocationAndAngles(targetentity.posX, targetentity.posY, targetentity.posZ, targetentity.rotationYaw, targetentity.rotationPitch);
+                        targetentity.worldObj.spawnEntityInWorld(fpz);
+                        if (player instanceof EntityPlayer) {
+                            EntityPlayer playerUUID = (EntityPlayer) player;
+                            fpz.func_152115_b(playerUUID.getUniqueID().toString());
+                            fpz.sendMessageToOwner("pigman.summon");
+                        }
+                        System.out.println(fpz.getOwner());
+                        fpz.setTamed(true);
+                        targetentity.worldObj.spawnEntityInWorld(fpz);
+                        targetentity.setDead();
+                        targetentity.worldObj.spawnEntityInWorld(new EntityLightningBolt(targetentity.worldObj, targetentity.posX, targetentity.posY, targetentity.posZ));
+                    }
                 } else {
                     if (targetentity != null && (new Random()).nextInt(5) == 0) {
                         targetentity.worldObj.addWeatherEffect(new EntityAnuLightning(targetentity.worldObj, targetentity.posX, targetentity.posY, targetentity.posZ));

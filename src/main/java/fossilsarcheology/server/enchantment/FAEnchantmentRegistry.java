@@ -1,8 +1,7 @@
 package fossilsarcheology.server.enchantment;
 
-import fossilsarcheology.Revival;
 import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnumEnchantmentType;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 public enum FAEnchantmentRegistry {
     INSTANCE;
@@ -11,7 +10,9 @@ public enum FAEnchantmentRegistry {
     public Enchantment archeology;
 
     public void init() {
-        paleontology = new PaleontologyEnchantment(Revival.CONFIG.enchantmentIDPaleontology, 2, EnumEnchantmentType.digger);
-        archeology = new ArcheologyEnchantment(Revival.CONFIG.enchantmentIDArcheology, 2, EnumEnchantmentType.digger);
+        this.paleontology = new PaleontologyEnchantment();
+        ForgeRegistries.ENCHANTMENTS.register(this.paleontology);
+        this.archeology = new ArcheologyEnchantment();
+        ForgeRegistries.ENCHANTMENTS.register(this.archeology);
     }
 }

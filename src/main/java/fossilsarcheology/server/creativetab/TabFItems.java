@@ -2,10 +2,10 @@ package fossilsarcheology.server.creativetab;
 
 import fossilsarcheology.server.handler.LocalizationStrings;
 import fossilsarcheology.server.item.FAItemRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class TabFItems extends CreativeTabs {
     public TabFItems(String par2Str) {

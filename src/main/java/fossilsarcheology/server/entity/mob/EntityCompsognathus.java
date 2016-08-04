@@ -1,5 +1,17 @@
 package fossilsarcheology.server.entity.mob;
 
+import fossilsarcheology.Revival;
+import fossilsarcheology.server.entity.EntityPrehistoric;
+import fossilsarcheology.server.entity.ai.DinoAIEatFeeders;
+import fossilsarcheology.server.entity.ai.DinoAIEatItems;
+import fossilsarcheology.server.entity.ai.DinoAIFollowOwner;
+import fossilsarcheology.server.entity.ai.DinoAIHunt;
+import fossilsarcheology.server.entity.ai.DinoAILeapAtTarget;
+import fossilsarcheology.server.entity.ai.DinoAILookIdle;
+import fossilsarcheology.server.entity.ai.DinoAIWander;
+import fossilsarcheology.server.entity.ai.DinoAIWatchClosest;
+import fossilsarcheology.server.enums.EnumPrehistoricAI;
+import fossilsarcheology.server.enums.PrehistoricEntityType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIFleeSun;
@@ -13,25 +25,13 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-import fossilsarcheology.Revival;
-import fossilsarcheology.server.entity.EntityPrehistoric;
-import fossilsarcheology.server.entity.ai.DinoAIEatFeeders;
-import fossilsarcheology.server.entity.ai.DinoAIEatItems;
-import fossilsarcheology.server.entity.ai.DinoAIFollowOwner;
-import fossilsarcheology.server.entity.ai.DinoAIHunt;
-import fossilsarcheology.server.entity.ai.DinoAILeapAtTarget;
-import fossilsarcheology.server.entity.ai.DinoAILookIdle;
-import fossilsarcheology.server.entity.ai.DinoAIWander;
-import fossilsarcheology.server.entity.ai.DinoAIWatchClosest;
-import fossilsarcheology.server.enums.EnumPrehistoric;
-import fossilsarcheology.server.enums.EnumPrehistoricAI;
 
 public class EntityCompsognathus extends EntityPrehistoric {
 
     public EntityCompsognathus(World world) {
-        super(world, EnumPrehistoric.Compsognathus, 1, 1, 4, 12, 0.25, 0.4);
+        super(world, PrehistoricEntityType.COMPSOGNATHUS, 1, 1, 4, 12, 0.25, 0.4);
         this.getNavigator().setAvoidsWater(true);
         this.getNavigator().setCanSwim(true);
         this.getNavigator().setAvoidSun(true);
@@ -191,13 +191,13 @@ public class EntityCompsognathus extends EntityPrehistoric {
             }
         }
     }
-    
+
     public int getMaxHunger() {
         return 50;
     }
-    
-	@Override
-	public boolean canBeRidden() {
-		return false;
-	}
+
+    @Override
+    public boolean canBeRidden() {
+        return false;
+    }
 }

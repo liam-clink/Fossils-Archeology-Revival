@@ -11,9 +11,9 @@ public class BlockVolcanicAsh extends Block {
         super(Material.cloth);
         this.blockParticleGravity = -0.15F;
         setHardness(0.2F);
-        setStepSound(Block.soundTypeGrass);
-        setBlockName(LocalizationStrings.VOLCANIC_ASH_NAME);
-        setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
+        setSoundType(Block.soundTypeGrass);
+        setUnlocalizedName(LocalizationStrings.VOLCANIC_ASH_NAME);
+        setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
     }
 
     @Override

@@ -1,23 +1,22 @@
 package fossilsarcheology.server.entity.mob;
 
-import java.util.Collections;
-import java.util.List;
-
+import fossilsarcheology.Revival;
+import fossilsarcheology.server.entity.EntityFishBase;
+import fossilsarcheology.server.entity.EntityPrehistoric;
+import fossilsarcheology.server.enums.PrehistoricEntityType;
+import fossilsarcheology.server.item.FAItemRegistry;
+import fossilsarcheology.server.message.MessageUpdateNautilus;
 import net.minecraft.command.IEntitySelector;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
-import fossilsarcheology.Revival;
-import fossilsarcheology.server.entity.EntityFishBase;
-import fossilsarcheology.server.entity.EntityPrehistoric;
-import fossilsarcheology.server.enums.EnumPrehistoric;
-import fossilsarcheology.server.item.FAItemRegistry;
-import fossilsarcheology.server.message.MessageUpdateNautilus;
+
+import java.util.Collections;
+import java.util.List;
 
 public class EntityNautilus extends EntityFishBase {
 
@@ -27,14 +26,14 @@ public class EntityNautilus extends EntityFishBase {
     public int ticksToShell;
 
     public EntityNautilus(World world) {
-        super(world, EnumPrehistoric.Nautilus);
+        super(world, PrehistoricEntityType.NAUTILUS);
         this.setSize(0.8F, 1F);
     }
 
     @Override
     protected void entityInit() {
         super.entityInit();
-        this.dataWatcher.addObject(SHELL_INDEX, (byte) 0);
+        this.dataManager.register(SHELL_INDEX, (byte) 0);
     }
 
     @Override
@@ -52,12 +51,12 @@ public class EntityNautilus extends EntityFishBase {
     }
 
     public void setInShell(boolean inShell) {
-        byte b0 = this.dataWatcher.getWatchableObjectByte(SHELL_INDEX);
+        byte b0 = this.dataManager.getWatchableObjectByte(SHELL_INDEX);
 
         if (inShell) {
-            this.dataWatcher.updateObject(SHELL_INDEX, (byte) (b0 | 1));
+            this.dataManager.updateObject(SHELL_INDEX, (byte) (b0 | 1));
         } else {
-            this.dataWatcher.updateObject(SHELL_INDEX, (byte) (b0 & -2));
+            this.dataManager.updateObject(SHELL_INDEX, (byte) (b0 & -2));
         }
 
         if (!worldObj.isRemote) {
@@ -67,7 +66,7 @@ public class EntityNautilus extends EntityFishBase {
 
     public boolean isInShell() {
         if (worldObj.isRemote) {
-            boolean isInShell = (this.dataWatcher.getWatchableObjectByte(SHELL_INDEX) & 1) != 0;
+            boolean isInShell = (this.dataManager.getWatchableObjectByte(SHELL_INDEX) & 1) != 0;
             this.isInShell = isInShell;
             return isInShell;
         }
@@ -102,8 +101,8 @@ public class EntityNautilus extends EntityFishBase {
     }
 
     @Override
-    protected void dropFewItems(boolean burning, int i) {
-        this.dropItem(FAItemRegistry.INSTANCE.emptyShell, 1);
+    protected Item getDropItem() {
+        return FAItemRegistry.INSTANCE.emptyShell;
     }
 
     public boolean isThereNearbyMobs() {
@@ -144,9 +143,9 @@ public class EntityNautilus extends EntityFishBase {
     public boolean attackEntityFrom(DamageSource dmg, float f) {
         if (f > 0 && this.isInShell() && dmg.getEntity() != null) {
             this.playSound("random.break", 1, this.getRNG().nextFloat() + 0.8F);
-        	if(this.ridingEntity != null){
+            if (this.ridingEntity != null) {
                 return super.attackEntityFrom(dmg, f);
-        	}
+            }
             return false;
         }
         if (!this.isInShell()) {

@@ -3,8 +3,6 @@ package fossilsarcheology.server.block;
 import fossilsarcheology.server.block.entity.TileEntityDrum;
 import fossilsarcheology.server.creativetab.FATabRegistry;
 import fossilsarcheology.server.handler.LocalizationStrings;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -12,6 +10,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockDrum extends BlockContainer {
     IIcon Top1;
@@ -21,9 +21,9 @@ public class BlockDrum extends BlockContainer {
 
     public BlockDrum() {
         super(Material.wood);
-        this.setBlockName(LocalizationStrings.DRUM_NAME);
+        this.setUnlocalizedName(LocalizationStrings.DRUM_NAME);
         this.setHardness(0.8F);
-        this.setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
+        this.setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
     }
 
 	/*
@@ -35,7 +35,7 @@ public class BlockDrum extends BlockContainer {
      * From the specified side and block metadata retrieves the blocks texture.
      * Args: side, metadata
      */
-	/*
+    /*
 	 * public int getBlockTextureFromSideAndMetadata(int var1, int var2) { if
 	 * (var1 != 1 && var1 != 0) { return 4; } else { switch (var2) { case 0:
 	 * default: return 1;
@@ -87,7 +87,7 @@ public class BlockDrum extends BlockContainer {
 
 	/*
 	 * Lets the block know when one of its neighbor changes. Doesn't know which
-	 * neighbor changed (coordinates passed are their own) Args: x, y, z,
+	 * neighbor changed (coordinates passed are their own) Args: pos,
 	 * neighbor blockID
 	 */
 	/*
@@ -108,18 +108,18 @@ public class BlockDrum extends BlockContainer {
      * Called upon block activation (right click on the block.)
      */
     @Override
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int var6, float var7, float var8, float var9) {
+    public boolean onBlockActivated(World world, BlockPos pos, EntityPlayer player, int var6, float var7, float var8, float var9) {
         if (!world.isRemote) {
-            TileEntityDrum tileEntity = (TileEntityDrum) world.getTileEntity(x, y, z);
+            TileEntityDrum tileEntity = (TileEntityDrum) world.getTileEntity(pos);
             tileEntity.TriggerOrder(player);
-            world.setBlockMetadataWithNotify(x, y, z, tileEntity.Order.ordinal(), var6);
+            world.setBlockMetadataWithNotify(pos, tileEntity.Order.ordinal(), var6);
         }
 
         return true;
     }
 
     /**
-     * Called when the block is clicked by a player. Args: x, y, z, entityPlayer
+     * Called when the block is clicked by a player. Args: pos, entityPlayer
      */
     @Override
     public void onBlockClicked(World var1, int var2, int var3, int var4, EntityPlayer var5) {

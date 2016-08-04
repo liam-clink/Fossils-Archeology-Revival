@@ -5,43 +5,34 @@ import fossilsarcheology.server.handler.LocalizationStrings;
 import fossilsarcheology.server.item.FAItemRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import java.util.Random;
 
 public class BlockAmberOre extends Block {
     public BlockAmberOre() {
-        super(Material.rock);
-        this.setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
+        super(Material.ROCK);
+        this.setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
         setHardness(3.0F);
-        setBlockName(LocalizationStrings.AMBER_ORE_NAME);
+        setUnlocalizedName(LocalizationStrings.AMBER_ORE_NAME);
     }
 
-    /**
-     * Returns the ID of the items to drop on destruction.
-     */
     @Override
-    public Item getItemDropped(int var1, Random rand, int var3) {
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
         return this == FABlockRegistry.INSTANCE.amberOre ? FAItemRegistry.INSTANCE.amber : Item.getItemFromBlock(this);
     }
 
-    /**
-     * Returns the quantity of items to drop on block destruction.
-     */
     @Override
-    public int quantityDropped(Random par1Random) {
-        return this == FABlockRegistry.INSTANCE.amberOre ? 2 + par1Random.nextInt(2) : 1;
+    public int quantityDropped(Random random) {
+        return this == FABlockRegistry.INSTANCE.amberOre ? 2 + random.nextInt(2) : 1;
     }
 
-    /**
-     * Returns the usual quantity dropped by the block plus a bonus of 1 to 'i'
-     * (inclusive).
-     */
     @Override
     public int quantityDroppedWithBonus(int bonus, Random rand) {
-        if (bonus > 0 && Item.getItemFromBlock(this) != this.getItemDropped(0, rand, bonus)) {
+        if (bonus > 0 && Item.getItemFromBlock(this) != this.getItemDropped(this.getDefaultState(), rand, bonus)) {
             int quantityMultiplier = rand.nextInt(bonus + 1) - 1;
 
             if (quantityMultiplier < 0) {
@@ -54,36 +45,21 @@ public class BlockAmberOre extends Block {
         }
     }
 
-    /**
-     * Drops the block items with a specified chance of dropping the specified
-     * items
-     */
     @Override
-    public void dropBlockAsItemWithChance(World world, int x, int y, int z, int par5, float par6, int par7) {
-        super.dropBlockAsItemWithChance(world, x, y, z, par5, par6, par7);
+    public void dropBlockAsItemWithChance(World world, BlockPos pos, IBlockState state, float chance, int fortune) {
+        super.dropBlockAsItemWithChance(world, pos, state, chance, fortune);
 
-        if (this.getItemDropped(par5, world.rand, par7) != Item.getItemFromBlock(this)) {
-            int j1 = 0;
-
+        if (this.getItemDropped(state, world.rand, fortune) != Item.getItemFromBlock(this)) {
+            int amount = 0;
             if (this == FABlockRegistry.INSTANCE.amberOre) {
-                j1 = 1;
+                amount = 1;
             }
-
-            this.dropXpOnBlockBreak(world, x, y, z, j1);
+            this.dropXpOnBlockBreak(world, pos, amount);
         }
     }
 
-    /**
-     * Determines the damage on the item the block drops. Used in cloth and
-     * wood.
-     */
     @Override
-    public int damageDropped(int damage) {
+    public int damageDropped(IBlockState state) {
         return this == FABlockRegistry.INSTANCE.amberOre ? 4 : 0;
-    }
-
-    @Override
-    public void registerBlockIcons(IIconRegister iconRegistry) {
-        this.blockIcon = iconRegistry.registerIcon("fossil:Amber_Ore");
     }
 }

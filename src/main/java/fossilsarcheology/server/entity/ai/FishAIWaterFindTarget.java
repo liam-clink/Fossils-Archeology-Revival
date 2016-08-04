@@ -1,14 +1,13 @@
 package fossilsarcheology.server.entity.ai;
 
+import fossilsarcheology.server.entity.EntityFishBase;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.util.ChunkCoordinates;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 import java.util.Random;
-
-import fossilsarcheology.server.entity.EntityFishBase;
 
 public class FishAIWaterFindTarget extends EntityAIBase {
     private EntityFishBase mob;

@@ -2,8 +2,6 @@ package fossilsarcheology.server.block;
 
 import fossilsarcheology.server.creativetab.FATabRegistry;
 import fossilsarcheology.server.handler.LocalizationStrings;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -12,6 +10,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Random;
 
@@ -21,11 +21,11 @@ public class BlockPalmLog extends Block {
 
     public BlockPalmLog() {
         super(Material.wood);
-        this.setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
-        this.setStepSound(Block.soundTypeWood);
+        this.setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
+        this.setSoundType(Block.soundTypeWood);
         this.setHardness(1.4F);
         this.setResistance(1.0F);
-        this.setBlockName(LocalizationStrings.PALAE_LOG_NAME);
+        this.setUnlocalizedName(LocalizationStrings.PALAE_LOG_NAME);
     }
 
     public static int validateMeta(int meta) {
@@ -60,7 +60,7 @@ public class BlockPalmLog extends Block {
     }
 
     @Override
-    public void breakBlock(World world, int x, int y, int z, Block oldBlock, int oldMeta) {
+    public void breakBlock(World world, BlockPos pos, Block oldBlock, int oldMeta) {
         byte scanArea = 4;
         int i = scanArea + 1;
         if (world.checkChunksExist(x - i, y - i, z - i, x + i, y + i, z + i)) {
@@ -81,7 +81,7 @@ public class BlockPalmLog extends Block {
     }
 
     @Override
-    public int onBlockPlaced(World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int meta) {
+    public int onBlockPlaced(World world, BlockPos pos, int side, float hitX, float hitY, float hitZ, int meta) {
         int var10 = meta & 3;
         byte var11 = 0;
         switch (side) {
@@ -111,12 +111,12 @@ public class BlockPalmLog extends Block {
     }
 
     @Override
-    public boolean canSustainLeaves(IBlockAccess world, int x, int y, int z) {
+    public boolean canSustainLeaves(IBlockAccess world, BlockPos pos) {
         return true;
     }
 
     @Override
-    public boolean isWood(IBlockAccess world, int x, int y, int z) {
+    public boolean isWood(IBlockAccess world, BlockPos pos) {
         return true;
     }
 }

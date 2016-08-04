@@ -11,23 +11,22 @@ import net.minecraft.world.World;
 import java.util.List;
 
 public class ItemToyBall extends Item {
-    private static final String[] balls = ItemDye.field_150923_a;
+    private static final String[] colors = ItemDye.DYE_COLORS;
 
     public ItemToyBall() {
         setMaxDamage(0);
         setHasSubtypes(true);
-        this.setTextureName("dye_powder_gray");
     }
 
     @Override
     public void getSubItems(Item item, CreativeTabs creativeTabs, List list) {
-        for (int i = 0; i < balls.length; ++i) {
+        for (int i = 0; i < colors.length; ++i) {
             list.add(new ItemStack(item, 1, i));
         }
     }
 
     @Override
-    public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int i, float a, float b, float c) {
+    public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, int i, float a, float b, float c) {
         EntityToyBall ball = new EntityToyBall(world);
         ball.setColor(stack.getItemDamage());
         ball.setLocationAndAngles(x + 0.5, y + 1, z + 0.5, 0, 0);
@@ -41,10 +40,10 @@ public class ItemToyBall extends Item {
     @Override
     public String getUnlocalizedName(ItemStack itemStack) {
         int meta = itemStack.getItemDamage();
-        if (meta < 0 || meta >= balls.length) {
+        if (meta < 0 || meta >= colors.length) {
             meta = 0;
         }
 
-        return super.getUnlocalizedName() + "." + balls[meta];
+        return super.getUnlocalizedName() + "." + colors[meta];
     }
 }

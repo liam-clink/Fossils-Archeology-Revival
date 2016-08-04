@@ -23,7 +23,7 @@ public class HellMushroomWorldGen extends WorldGenerator {
     }
 
     @Override
-    public boolean generate(World world, Random rand, int x, int y, int z) {
+    public boolean generate(World world, Random rand, BlockPos pos) {
         int mushroomType = rand.nextInt(2);
 
         if (this.mushroomType >= 0) {

@@ -1,12 +1,12 @@
 package fossilsarcheology.client.render.tileentity;
 
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
-import cpw.mods.fml.client.registry.RenderingRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
-import org.lwjgl.opengl.GL11;
+import net.minecraftforge.fml.client.registry.ISimpleBlockRenderingHandler;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
 
 public class RenderFeeder implements ISimpleBlockRenderingHandler {
     public static final RenderFeeder INSTANCE = new RenderFeeder();
@@ -23,8 +23,8 @@ public class RenderFeeder implements ISimpleBlockRenderingHandler {
         Tessellator tessellator = Tessellator.instance;
         block.setBlockBoundsForItemRender();
         renderer.setRenderBoundsFromBlock(block);
-        GL11.glRotatef(90.0F, 0.0F, 1.0F, 0.0F);
-        GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
+        GlStateManager.rotate(90.0F, 0.0F, 1.0F, 0.0F);
+        GlStateManager.translate(-0.5F, -0.5F, -0.5F);
         tessellator.startDrawingQuads();
         tessellator.setNormal(0.0F, -1.0F, 0.0F);
         renderer.renderFaceYNeg(block, 0.0D, 0.0D, 0.0D, renderer.getBlockIconFromSideAndMetadata(block, 0, meta));
@@ -49,12 +49,12 @@ public class RenderFeeder implements ISimpleBlockRenderingHandler {
         tessellator.setNormal(1.0F, 0.0F, 0.0F);
         renderer.renderFaceXPos(block, 0.0D, 0.0D, 0.0D, renderer.getBlockIconFromSideAndMetadata(block, 5, meta));
         tessellator.draw();
-        GL11.glTranslatef(0.5F, 0.5F, 0.5F);
+        GlStateManager.translate(0.5F, 0.5F, 0.5F);
     }
 
     @Override
-    public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
-        int direction = renderer.blockAccess.getBlockMetadata(x, y, z) & 3;
+    public boolean renderWorldBlock(IBlockAccess world, BlockPos pos, Block block, int modelId, RenderBlocks renderer) {
+        int direction = renderer.blockAccess.getBlockMetadata(pos) & 3;
 
         if (direction > 0) {
             renderer.uvRotateTop = direction - 1;
@@ -62,7 +62,7 @@ public class RenderFeeder implements ISimpleBlockRenderingHandler {
             renderer.uvRotateTop = 3;
         }
 
-        boolean flag = renderer.renderStandardBlock(block, x, y, z);
+        boolean flag = renderer.renderStandardBlock(block, pos);
         renderer.uvRotateTop = 0;
         return flag;
     }

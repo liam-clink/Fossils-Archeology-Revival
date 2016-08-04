@@ -1,11 +1,19 @@
 package fossilsarcheology.server.entity.mob;
 
+import fossilsarcheology.Revival;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.*;
+import net.minecraft.entity.ai.EntityAIFollowOwner;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAIOwnerHurtByTarget;
+import net.minecraft.entity.ai.EntityAIOwnerHurtTarget;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.passive.EntityWolf;
@@ -14,9 +22,8 @@ import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.I18n;
 import net.minecraft.world.World;
 
 public class EntityFriendlyPigZombie extends EntityTameable {
@@ -43,7 +50,12 @@ public class EntityFriendlyPigZombie extends EntityTameable {
     @Override
     protected void entityInit() {
         super.entityInit();
-        this.dataWatcher.addObject(19, (byte) 0);
+        this.dataManager.register(19, (byte) 0);
+    }
+
+    @Override
+    public void onLivingUpdate() {
+        super.onLivingUpdate();
     }
 
     @Override
@@ -68,18 +80,13 @@ public class EntityFriendlyPigZombie extends EntityTameable {
         compound.setBoolean("Angry", this.isAngry());
     }
 
+    /**
+     * (abstract) Protected helper method to read subclass entity data from NBT.
+     */
     @Override
     public void readEntityFromNBT(NBTTagCompound compound) {
         super.readEntityFromNBT(compound);
         this.setAngry(compound.getBoolean("Angry"));
-    }
-
-    @Override
-    public void setDead() {
-        if (!this.worldObj.isRemote && isTamed() && getHealth() > 0) {
-            return;
-        }
-        super.setDead();
     }
 
     @Override
@@ -131,24 +138,25 @@ public class EntityFriendlyPigZombie extends EntityTameable {
     }
 
     public boolean isAngry() {
-        return (this.dataWatcher.getWatchableObjectByte(16) & 2) != 0;
+        return (this.dataManager.getWatchableObjectByte(16) & 2) != 0;
     }
 
     public void setAngry(boolean b) {
 
-        byte b0 = this.dataWatcher.getWatchableObjectByte(16);
+        byte b0 = this.dataManager.getWatchableObjectByte(16);
 
         if (b) {
-            this.dataWatcher.updateObject(16, (byte) (b0 | 2));
+            this.dataManager.updateObject(16, (byte) (b0 | 2));
         } else {
-            this.dataWatcher.updateObject(16, (byte) (b0 & -3));
+            this.dataManager.updateObject(16, (byte) (b0 & -3));
         }
     }
 
     public void sendMessageToOwner(String words) {
         if (this.getOwner() instanceof EntityPlayer) {
-            ((EntityPlayer) this.getOwner()).addChatMessage(new ChatComponentText(StatCollector.translateToLocal(words)));
+            Revival.messagePlayer(I18n.translateToLocal(words), (EntityPlayer) this.getOwner());
         }
+
     }
 
     @Override
@@ -156,6 +164,7 @@ public class EntityFriendlyPigZombie extends EntityTameable {
 
         if (entity instanceof EntityWolf) {
             EntityWolf entitywolf = (EntityWolf) entity;
+
             if (entitywolf.isTamed() && entitywolf.getOwner() == thisMobsOwner) {
                 return false;
             }

@@ -1,11 +1,8 @@
 package fossilsarcheology.server.container;
 
-import fossilsarcheology.server.block.entity.TileEntityFeeder;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import fossilsarcheology.api.EnumDiet;
+import fossilsarcheology.api.Diet;
 import fossilsarcheology.api.FoodMappings;
+import fossilsarcheology.server.block.entity.TileEntityFeeder;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
@@ -13,6 +10,8 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class FeederContainer extends Container {
     public static final int CARN_INPUT = 0, HERB_INPUT = 1;
@@ -101,14 +100,14 @@ public class FeederContainer extends Container {
             // inventory
             {
                 // if it can be smelted, place in the input slots
-                if (FoodMappings.INSTANCE.getItemFoodAmount(itemstack1, EnumDiet.CARNIVORE_EGG) != 0) {
+                if (FoodMappings.INSTANCE.getItemFoodAmount(itemstack1.getItem(), Diet.CARNIVORE_EGG) != 0) {
                     // try to place in either Input slot; add 1 to final input
                     // slot because mergeItemStack uses < index
                     if (!this.mergeItemStack(itemstack1, 0, 1, false)) {
                         return null;
                     }
                 }
-                if (FoodMappings.INSTANCE.getItemFoodAmount(itemstack1, EnumDiet.HERBIVORE) != 0) {
+                if (FoodMappings.INSTANCE.getItemFoodAmount(itemstack1.getItem(), Diet.HERBIVORE) != 0) {
                     // try to place in either Input slot; add 1 to final input
                     // slot because mergeItemStack uses < index
                     if (!this.mergeItemStack(itemstack1, 1, 2, false)) {

@@ -1,7 +1,5 @@
 package fossilsarcheology.server.block;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
@@ -12,6 +10,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 import java.util.Random;
@@ -21,7 +21,7 @@ public class BlockHomePortal extends Block {
     public BlockHomePortal() {
         super(Material.portal);
         this.setResistance(60000000.0F);
-        setBlockName("home_portal");
+        setUnlocalizedName("home_portal");
 
     }
 
@@ -31,7 +31,7 @@ public class BlockHomePortal extends Block {
     }
 
     @Override
-    public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB bb, List list, Entity entity) {
+    public void addCollisionBoxesToList(World world, BlockPos pos, AxisAlignedBB bb, List list, Entity entity) {
     }
 
     @Override
@@ -67,8 +67,8 @@ public class BlockHomePortal extends Block {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void randomDisplayTick(World world, int x, int y, int z, Random rand) {
-        super.randomDisplayTick(world, x, y, z, rand);
+    public void randomDisplayTick(World world, BlockPos pos, Random rand) {
+        super.randomDisplayTick(world, pos, rand);
 
         if (rand.nextInt(100) == 0) {
             world.playSound((double) x + 0.5D, (double) y + 0.5D, (double) z + 0.5D, "portal.portal", 1.5F, rand.nextFloat() * 0.4F + 0.8F, false);

@@ -16,18 +16,18 @@ public class StoneBoardItem extends Item {
     public StoneBoardItem() {
         this.setCreativeTab(CreativeTabs.tabDecorations);
         setUnlocalizedName(LocalizationStrings.TABLET_NAME);
-        setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
+        setCreativeTab(FATabRegistry.INSTANCE.ITEMS);
     }
 
     @Override
-    public boolean onItemUse(ItemStack var1, EntityPlayer var2, World world, int x, int y, int z, int direction, float par8, float par9, float par10) {
+    public boolean onItemUse(ItemStack var1, EntityPlayer var2, World world, BlockPos pos, int direction, float par8, float par9, float par10) {
         if (direction == 0 || direction == 1) {
             return false;
         } else {
             int var11 = Direction.facingToDirection[direction];
-            EntityStoneboard var12 = new EntityStoneboard(world, x, y, z, var11);
+            EntityStoneboard var12 = new EntityStoneboard(world, pos, var11);
 
-            if (!var2.canPlayerEdit(x, y, z, direction, var1)) {
+            if (!var2.canPlayerEdit(pos, direction, var1)) {
                 return false;
             } else {
                 if (var12 != null && var12.onValidSurface()) {

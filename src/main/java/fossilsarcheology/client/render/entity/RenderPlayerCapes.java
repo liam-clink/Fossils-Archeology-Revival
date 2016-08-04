@@ -1,12 +1,13 @@
 package fossilsarcheology.client.render.entity;
 
 import com.mojang.authlib.minecraft.MinecraftProfileTexture;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.entity.AbstractClientPlayer;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderPlayerEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.UUID;
 
@@ -17,24 +18,22 @@ public class RenderPlayerCapes {
      * Renders the cape on the player if they are in the array
 	 */
 
-    public UUID[] devuuid = new UUID[]{
-	/* tyranno66 */UUID.fromString("04e6d7f5-b587-4e4f-8ce0-b210d368a79e"),
+    public UUID[] devuuid = new UUID[] {
+    /* tyranno66 */UUID.fromString("04e6d7f5-b587-4e4f-8ce0-b210d368a79e"),
 	/* Raptorfarian */UUID.fromString("0ed918c8-d612-4360-b711-cd415671356f"),
 	/* 4f6f3b */UUID.fromString("0248b8a4-7fab-4d6f-8a22-8a51534fd53f"),
 	/* Bluestreak52 */UUID.fromString("5468a8f2-84d6-46e2-b58c-f9d576b67544"),
 	/* Robberto08 */UUID.fromString("05b14ce7-0ff1-4b8e-9ef8-d98502e9bf07"),
 	/* Alexthe666 */UUID.fromString("71363abe-fd03-49c9-940d-aae8b8209b7c"),
-	/* NanoTyrano */UUID.fromString("d4c29faf-82bc-4d34-bda0-cb850595595a"),
-    	/* iLexiconn */UUID.fromString("40e85e42-21f6-46b6-b5b3-6aeb07f3e3fd"),
-    	/* Gegy */UUID.fromString("c3ed4d52-fb4f-4964-ba1b-9cda2453741e")};
-    public UUID[] contributoruuid = new UUID[]{
+	/* NanoTyrano */UUID.fromString("d4c29faf-82bc-4d34-bda0-cb850595595a") };
+    public UUID[] contributoruuid = new UUID[] {
 	/* JTGhawk137 */UUID.fromString("54201149-1f1f-498b-98ca-50f66951a68f"),
 	/* cyborx25 */UUID.fromString("c1637beb-4336-42f2-ad0b-a7188cf13042"),
 	/* ExDragonith */UUID.fromString("a7970406-e0ac-446b-8fe0-d42c94b594ea"),
 	/* duckdude173 */UUID.fromString("12bde8ed-cfe9-49ac-af14-71762a3f49db"),
 	/* whitejoshman */UUID.fromString("28bcc73a-2726-49e8-ac1b-f02dbbb0c83b"),
 	/* Shadowbeast007 */UUID.fromString("df3d1115-6601-4346-a063-f1254bf5a069"),
-	/* MicroJunk */UUID.fromString("d1c57f9a-069b-46af-b9ee-44ab0fce1d80")};
+	/* MicroJunk */UUID.fromString("d1c57f9a-069b-46af-b9ee-44ab0fce1d80") };
 
 	/*
 	 * @SubscribeEvent public void playerRender(RenderPlayerEvent.Specials.Pre
@@ -45,7 +44,7 @@ public class RenderPlayerCapes {
 	 * 
 	 * double x = e.entityPlayer.posX; double y = e.entityPlayer.posY; double z
 	 * = e.entityPlayer.posZ; float yaw = e.entityPlayer.rotationYaw;
-	 * RenderFollowers.doRender(e.entityPlayer, x, y, z, yaw, 0.0625F); /* float
+	 * RenderFollowers.doRender(e.entityPlayer, pos, yaw, 0.0625F); /* float
 	 * tick = 0; float unknown = 0.0625F; float f2 =
 	 * this.interpolateRotation(e.entityPlayer.prevRenderYawOffset,
 	 * e.entityPlayer.renderYawOffset, unknown); float f3 =
@@ -70,78 +69,80 @@ public class RenderPlayerCapes {
 	 * e.entityPlayer.prevRotationPitch) * unknown;
 	 * 
 	 * if (e.entityPlayer instanceof AbstractClientPlayer) {
-	 * RenderHelper.disableStandardItemLighting(); GL11.glPushMatrix();
+	 * RenderHelper.disableStandardItemLighting(); GlStateManager.pushMatrix();
 	 * //Alexthe666 if(e.entityPlayer.getUniqueID().equals(alexID)){
-	 * GL11.glPushMatrix(); GL11.glScalef(0.03F, 0.03F, 0.03F);
+	 * GlStateManager.pushMatrix(); GlStateManager.scale(0.03F, 0.03F, 0.03F);
 	 * 
-	 * GL11.glRotatef(180F, 1, 0, 0); GL11.glRotatef(tick, 0, 0.5F, 0);
-	 * GL11.glTranslatef(0, -30F, 0); GL11.glPushMatrix();
+	 * GlStateManager.rotate(180F, 1, 0, 0); GlStateManager.rotate(tick, 0, 0.5F, 0);
+	 * GlStateManager.translate(0, -30F, 0); GlStateManager.pushMatrix();
 	 * FMLClientHandler.instance
 	 * ().getClient().getTextureManager().bindTexture(new
 	 * ResourceLocation("fossil:textures/mob/Dilophosaurus/Dilophosaurus_Adult.png"
 	 * )); model_Alexthe666_1.renderFollower(0.625F, f3 - f2, f13);
-	 * GL11.glPopMatrix(); GL11.glPopMatrix();
+	 * GlStateManager.popMatrix(); GlStateManager.popMatrix();
 	 * 
-	 * } if(e.entityPlayer.getUniqueID().equals(redID)){ GL11.glPushMatrix();
-	 * GL11.glScalef(0.03F, 0.03F, 0.03F); GL11.glRotatef(180F, 1, 0, 0);
-	 * GL11.glRotatef(tick, 0, 0.5F, 0); GL11.glTranslatef(0, -30F, 0);
-	 * GL11.glPushMatrix();
+	 * } if(e.entityPlayer.getUniqueID().equals(redID)){ GlStateManager.pushMatrix();
+	 * GlStateManager.scale(0.03F, 0.03F, 0.03F); GlStateManager.rotate(180F, 1, 0, 0);
+	 * GlStateManager.rotate(tick, 0, 0.5F, 0); GlStateManager.translate(0, -30F, 0);
+	 * GlStateManager.pushMatrix();
 	 * FMLClientHandler.instance().getClient().getTextureManager
 	 * ().bindTexture(new
 	 * ResourceLocation("fossil:textures/mob/Spinosaurus_Adult.png"));
-	 * model_Bluestreak52.renderFollower(0.625F); GL11.glPopMatrix();
-	 * GL11.glPopMatrix();
+	 * model_Bluestreak52.renderFollower(0.625F); GlStateManager.popMatrix();
+	 * GlStateManager.popMatrix();
 	 * 
 	 * } if(e.entityPlayer.getUniqueID().equals(tyrannoID)){
-	 * GL11.glPushMatrix(); GL11.glScalef(0.03F, 0.03F, 0.03F);
-	 * GL11.glRotatef(180F, 1, 0, 0); GL11.glRotatef(tick, 0, 0.5F, 0);
-	 * GL11.glTranslatef(0, -30F, 0); GL11.glPushMatrix();
+	 * GlStateManager.pushMatrix(); GlStateManager.scale(0.03F, 0.03F, 0.03F);
+	 * GlStateManager.rotate(180F, 1, 0, 0); GlStateManager.rotate(tick, 0, 0.5F, 0);
+	 * GlStateManager.translate(0, -30F, 0); GlStateManager.pushMatrix();
 	 * FMLClientHandler.instance
 	 * ().getClient().getTextureManager().bindTexture(new ResourceLocation(
 	 * "fossil:textures/mob/TRex/feathered/Feathered_TRex_Adult.png"));
-	 * model_tyranno66.renderFollower(0.625F); GL11.glPopMatrix();
-	 * GL11.glPopMatrix();
+	 * model_tyranno66.renderFollower(0.625F); GlStateManager.popMatrix();
+	 * GlStateManager.popMatrix();
 	 * 
-	 * } if(e.entityPlayer.getUniqueID().equals(raptorID)){ GL11.glPushMatrix();
-	 * GL11.glScalef(0.03F, 0.03F, 0.03F); GL11.glRotatef(180F, 1, 0, 0);
-	 * GL11.glRotatef(tick, 0, 0.5F, 0); GL11.glTranslatef(0, -30F, 0);
-	 * GL11.glPushMatrix();
+	 * } if(e.entityPlayer.getUniqueID().equals(raptorID)){ GlStateManager.pushMatrix();
+	 * GlStateManager.scale(0.03F, 0.03F, 0.03F); GlStateManager.rotate(180F, 1, 0, 0);
+	 * GlStateManager.rotate(tick, 0, 0.5F, 0); GlStateManager.translate(0, -30F, 0);
+	 * GlStateManager.pushMatrix();
 	 * FMLClientHandler.instance().getClient().getTextureManager
 	 * ().bindTexture(new ResourceLocation(
 	 * "fossil:textures/mob/Deinonychus/feathered/Feathered_Deinonychus_Grey_Adult.png"
-	 * )); model_Raptorfarian.renderFollower(0.625F); GL11.glPopMatrix();
-	 * GL11.glPopMatrix();
+	 * )); model_Raptorfarian.renderFollower(0.625F); GlStateManager.popMatrix();
+	 * GlStateManager.popMatrix();
 	 * 
-	 * } if(e.entityPlayer.getUniqueID().equals(robbID)){ GL11.glPushMatrix();
-	 * GL11.glScalef(0.03F, 0.03F, 0.03F); GL11.glRotatef(180F, 1, 0, 0);
-	 * GL11.glRotatef(tick, 0, 0.5F, 0); GL11.glTranslatef(0, -30F, 0);
-	 * GL11.glPushMatrix();
+	 * } if(e.entityPlayer.getUniqueID().equals(robbID)){ GlStateManager.pushMatrix();
+	 * GlStateManager.scale(0.03F, 0.03F, 0.03F); GlStateManager.rotate(180F, 1, 0, 0);
+	 * GlStateManager.rotate(tick, 0, 0.5F, 0); GlStateManager.translate(0, -30F, 0);
+	 * GlStateManager.pushMatrix();
 	 * FMLClientHandler.instance().getClient().getTextureManager
 	 * ().bindTexture(new
 	 * ResourceLocation("fossil:textures/mob/Brachiosaurus.png"));
-	 * model_Robberto08.renderFollower(0.625F); GL11.glPopMatrix();
-	 * GL11.glPopMatrix();
+	 * model_Robberto08.renderFollower(0.625F); GlStateManager.popMatrix();
+	 * GlStateManager.popMatrix();
 	 * 
-	 * } if(e.entityPlayer.getUniqueID().equals(nanoID)){ GL11.glPushMatrix();
-	 * GL11.glScalef(0.03F, 0.03F, 0.03F); GL11.glRotatef(180F, 1, 0, 0);
-	 * GL11.glRotatef(tick, 0, 0.5F, 0); GL11.glTranslatef(0, -30F, 0);
-	 * GL11.glPushMatrix();
+	 * } if(e.entityPlayer.getUniqueID().equals(nanoID)){ GlStateManager.pushMatrix();
+	 * GlStateManager.scale(0.03F, 0.03F, 0.03F); GlStateManager.rotate(180F, 1, 0, 0);
+	 * GlStateManager.rotate(tick, 0, 0.5F, 0); GlStateManager.translate(0, -30F, 0);
+	 * GlStateManager.pushMatrix();
 	 * FMLClientHandler.instance().getClient().getTextureManager
 	 * ().bindTexture(new ResourceLocation("fossil:textures/mob/Nautilus.png"));
-	 * model_NanoTyrano.renderFollower(0.625F); GL11.glPopMatrix();
-	 * GL11.glPopMatrix();
+	 * model_NanoTyrano.renderFollower(0.625F); GlStateManager.popMatrix();
+	 * GlStateManager.popMatrix();
 	 * 
-	 * } GL11.glPopMatrix(); RenderHelper.enableStandardItemLighting(); } } }
+	 * } GlStateManager.popMatrix(); RenderHelper.enableStandardItemLighting(); } } }
 	 */
 
     @SubscribeEvent
-    public void playerRender(RenderPlayerEvent.Pre e) {
+    public void playerRender(RenderPlayerEvent.Pre event) {
         float tick = (float) (720.0 * (System.currentTimeMillis() & 0x3FFFL) / 0x3FFFL);
 
-        if (e.entityPlayer instanceof AbstractClientPlayer && isDeveloper(e.entityPlayer.getUniqueID())) {
-            ((AbstractClientPlayer) e.entityPlayer).func_152121_a(MinecraftProfileTexture.Type.CAPE, new ResourceLocation("fossil", "textures/FossilCape.png"));
-        } else if (e.entityPlayer instanceof AbstractClientPlayer && isContributor(e.entityPlayer.getUniqueID())) {
-            ((AbstractClientPlayer) e.entityPlayer).func_152121_a(MinecraftProfileTexture.Type.CAPE, new ResourceLocation("fossil", "textures/ContributorCape.png"));
+        EntityPlayer player = event.getEntityPlayer();
+        
+        if (player instanceof AbstractClientPlayer && isDeveloper(player.getUniqueID())) {
+            ((AbstractClientPlayer) player).func_152121_a(MinecraftProfileTexture.Type.CAPE, new ResourceLocation("fossil", "textures/FossilCape.png"));
+        } else if (player instanceof AbstractClientPlayer && isContributor(player.getUniqueID())) {
+            ((AbstractClientPlayer) player).func_152121_a(MinecraftProfileTexture.Type.CAPE, new ResourceLocation("fossil", "textures/ContributorCape.png"));
         }
     }
 
@@ -162,9 +163,9 @@ public class RenderPlayerCapes {
 	 * The array where all the UUIDs of the players are stored
 	 */
 
-    public boolean isDeveloper(UUID userid) {
+    public boolean isDeveloper(UUID uuid) {
         for (UUID uuid1 : devuuid) {
-            if (userid.equals(uuid1)) {
+            if (uuid.equals(uuid1)) {
                 return true;
             }
         }

@@ -145,50 +145,50 @@ public class ModelPlesiosaurus extends ModelPrehistoric {
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
         animator.setAnimation(prehistoric.SPEAK_ANIMATION);
         animator.startKeyframe(10);
-        ModelUtils.rotate(animator, bottomJawBase, 29, 0, 0);
+        ModelUtils.rotate(animator, lowerJaw, 29, 0, 0);
         animator.endKeyframe();
         animator.resetKeyframe(10);
-		animator.setAnimation(prehistoric.FISH_ANIMATION);
-		animator.startKeyframe(10);
-		ModelUtils.rotate(animator, neck1, 0, 15F, 0);
-		ModelUtils.rotate(animator, neck2, 0, 15F, 0);
-		ModelUtils.rotate(animator, neck3, 0, 15F, 0);
-		ModelUtils.rotate(animator, neck4, 0, 15F, 0);
-		ModelUtils.rotate(animator, neck5, 0, 15F, 0);
-		ModelUtils.rotate(animator, neck6, 0, 15F, 0);
-		ModelUtils.rotate(animator, head, 0, 15F, 0);
-		ModelUtils.rotate(animator, bottomJawBase, -15, 0, 0);
-		animator.endKeyframe();
-		animator.startKeyframe(10);
-		ModelUtils.rotate(animator, neck1, 0, -15F, 0);
-		ModelUtils.rotate(animator, neck2, 0, -15F, 0);
-		ModelUtils.rotate(animator, neck3, 0, -15F, 0);
-		ModelUtils.rotate(animator, neck4, 0, -15F, 0);
-		ModelUtils.rotate(animator, neck5, 0, -15F, 0);
-		ModelUtils.rotate(animator, neck6, 0, -15F, 0);
-		ModelUtils.rotate(animator, head, 0, -15F, 0);
-		ModelUtils.rotate(animator, bottomJawBase, -15, 0, 0);
-		animator.endKeyframe();
-		animator.startKeyframe(10);
-		ModelUtils.rotate(animator, neck1, 0, 15F, 0);
-		ModelUtils.rotate(animator, neck2, 0, 15F, 0);
-		ModelUtils.rotate(animator, neck3, 0, 15F, 0);
-		ModelUtils.rotate(animator, neck4, 0, 15F, 0);
-		ModelUtils.rotate(animator, neck5, 0, 15F, 0);
-		ModelUtils.rotate(animator, neck6, 0, 15F, 0);
-		ModelUtils.rotate(animator, head, 0, 15F, 0);
-		ModelUtils.rotate(animator, bottomJawBase, -15, 0, 0);
-		animator.endKeyframe();
-		animator.resetKeyframe(10);
+        animator.setAnimation(prehistoric.FISH_ANIMATION);
+        animator.startKeyframe(10);
+        ModelUtils.rotate(animator, neck1, 0, 15F, 0);
+        ModelUtils.rotate(animator, neck2, 0, 15F, 0);
+        ModelUtils.rotate(animator, neck3, 0, 15F, 0);
+        ModelUtils.rotate(animator, neck4, 0, 15F, 0);
+        ModelUtils.rotate(animator, neck5, 0, 15F, 0);
+        ModelUtils.rotate(animator, neck6, 0, 15F, 0);
+        ModelUtils.rotate(animator, head, 0, 15F, 0);
+        ModelUtils.rotate(animator, lowerJaw, -15, 0, 0);
+        animator.endKeyframe();
+        animator.startKeyframe(10);
+        ModelUtils.rotate(animator, neck1, 0, -15F, 0);
+        ModelUtils.rotate(animator, neck2, 0, -15F, 0);
+        ModelUtils.rotate(animator, neck3, 0, -15F, 0);
+        ModelUtils.rotate(animator, neck4, 0, -15F, 0);
+        ModelUtils.rotate(animator, neck5, 0, -15F, 0);
+        ModelUtils.rotate(animator, neck6, 0, -15F, 0);
+        ModelUtils.rotate(animator, head, 0, -15F, 0);
+        ModelUtils.rotate(animator, lowerJaw, -15, 0, 0);
+        animator.endKeyframe();
+        animator.startKeyframe(10);
+        ModelUtils.rotate(animator, neck1, 0, 15F, 0);
+        ModelUtils.rotate(animator, neck2, 0, 15F, 0);
+        ModelUtils.rotate(animator, neck3, 0, 15F, 0);
+        ModelUtils.rotate(animator, neck4, 0, 15F, 0);
+        ModelUtils.rotate(animator, neck5, 0, 15F, 0);
+        ModelUtils.rotate(animator, neck6, 0, 15F, 0);
+        ModelUtils.rotate(animator, head, 0, 15F, 0);
+        ModelUtils.rotate(animator, lowerJaw, -15, 0, 0);
+        animator.endKeyframe();
+        animator.resetKeyframe(10);
     }
 
     @Override
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
-        AdvancedModelRenderer[] tailParts = {this.tail1, this.tail2, this.tail3};
-        AdvancedModelRenderer[] neckParts = {this.neck1, this.neck2, this.neck3, this.neck4, this.neck5, this.neck5, this.head};
-		if(((EntityPrehistoric) entity).isSkeleton()){
-			return;
-		}
+        AdvancedModelRenderer[] tailParts = { this.tail1, this.tail2, this.tail3 };
+        AdvancedModelRenderer[] neckParts = { this.neck1, this.neck2, this.neck3, this.neck4, this.neck5, this.neck5, this.head };
+        if (((EntityPrehistoric) entity).isSkeleton()) {
+            return;
+        }
         ModelUtils.faceTargetMod(neck1, f3, f4, 0.14F);
         ModelUtils.faceTargetMod(neck2, f3, f4, 0.14F);
         ModelUtils.faceTargetMod(neck3, f3, f4, 0.14F);

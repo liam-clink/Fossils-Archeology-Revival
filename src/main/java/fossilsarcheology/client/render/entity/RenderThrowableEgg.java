@@ -1,7 +1,5 @@
 package fossilsarcheology.client.render.entity;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.texture.TextureMap;
@@ -12,6 +10,8 @@ import net.minecraft.item.ItemPotion;
 import net.minecraft.potion.PotionHelper;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
@@ -42,10 +42,10 @@ public class RenderThrowableEgg extends Render {
         IIcon iicon = this.item.getIconFromDamage(this.damage);
 
         if (iicon != null) {
-            GL11.glPushMatrix();
-            GL11.glTranslatef((float) d1, (float) d2, (float) d3);
+            GlStateManager.pushMatrix();
+            GlStateManager.translate((float) d1, (float) d2, (float) d3);
             GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-            GL11.glScalef(0.5F, 0.5F, 0.5F);
+            GlStateManager.scale(0.5F, 0.5F, 0.5F);
             this.bindEntityTexture(entity);
             Tessellator tessellator = Tessellator.instance;
 
@@ -54,16 +54,16 @@ public class RenderThrowableEgg extends Render {
                 float f2 = (float) (i >> 16 & 255) / 255.0F;
                 float f3 = (float) (i >> 8 & 255) / 255.0F;
                 float f4 = (float) (i & 255) / 255.0F;
-                GL11.glColor3f(f2, f3, f4);
-                GL11.glPushMatrix();
+                GlStateManager.color(f2, f3, f4);
+                GlStateManager.pushMatrix();
                 this.func_77026_a(tessellator, ItemPotion.func_94589_d("overlay"));
-                GL11.glPopMatrix();
-                GL11.glColor3f(1.0F, 1.0F, 1.0F);
+                GlStateManager.popMatrix();
+                GlStateManager.color(1.0F, 1.0F, 1.0F);
             }
 
             this.func_77026_a(tessellator, iicon);
             GL11.glDisable(GL12.GL_RESCALE_NORMAL);
-            GL11.glPopMatrix();
+            GlStateManager.popMatrix();
         }
     }
 
@@ -84,8 +84,8 @@ public class RenderThrowableEgg extends Render {
         float f4 = 1.0F;
         float f5 = 0.5F;
         float f6 = 0.25F;
-        GL11.glRotatef(180.0F - this.renderManager.playerViewY, 0.0F, 1.0F, 0.0F);
-        GL11.glRotatef(-this.renderManager.playerViewX, 1.0F, 0.0F, 0.0F);
+        GlStateManager.rotate(180.0F - this.renderManager.playerViewY, 0.0F, 1.0F, 0.0F);
+        GlStateManager.rotate(-this.renderManager.playerViewX, 1.0F, 0.0F, 0.0F);
         tessellator.startDrawingQuads();
         tessellator.setNormal(0.0F, 1.0F, 0.0F);
         tessellator.addVertexWithUV((double) (0.0F - f5), (double) (0.0F - f6), 0.0D, (double) f, (double) f3);

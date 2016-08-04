@@ -1,13 +1,13 @@
 package fossilsarcheology.server.entity.mob;
 
-import net.minecraft.world.World;
 import fossilsarcheology.server.entity.EntityFishBase;
-import fossilsarcheology.server.enums.EnumPrehistoric;
+import fossilsarcheology.server.enums.PrehistoricEntityType;
+import net.minecraft.world.World;
 
 public class EntityAlligatorGar extends EntityFishBase {
     public EntityAlligatorGar(World par1World) {
-        super(par1World, EnumPrehistoric.Alligator_Gar);
-        this.setSize(1.9F, 1.2F);
+        super(par1World, PrehistoricEntityType.ALLIGATOR_GAR);
+        this.setSize(1.9F, 1F);
     }
 
     @Override

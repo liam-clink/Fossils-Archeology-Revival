@@ -10,7 +10,7 @@ import java.util.Random;
 public class AncientChestWorldGen extends WorldGenerator {
 
     @Override
-    public boolean generate(World world, Random rand, int x, int y, int z) {
+    public boolean generate(World world, Random rand, BlockPos pos) {
         world.setBlock(x, y + -2, z, Blocks.bedrock, 0, 3);
         world.setBlock(x + 1, y + -2, z, Blocks.bedrock, 0, 3);
         world.setBlock(x + 2, y + -2, z, Blocks.bedrock, 0, 3);
@@ -231,7 +231,7 @@ public class AncientChestWorldGen extends WorldGenerator {
         world.setBlock(x + 8, y + -1, z + 9, Blocks.bedrock, 0, 3);
         world.setBlock(x + 9, y + -1, z + 9, Blocks.bedrock, 0, 3);
         world.setBlock(x + 10, y + -1, z + 9, Blocks.bedrock, 0, 3);
-        world.setBlock(x, y, z, Blocks.bedrock, 0, 3);
+        world.setBlock(pos, Blocks.bedrock, 0, 3);
         world.setBlock(x + 1, y, z, Blocks.bedrock, 0, 3);
         world.setBlock(x + 2, y, z, Blocks.bedrock, 0, 3);
         world.setBlock(x + 3, y, z, Blocks.bedrock, 0, 3);
@@ -242,7 +242,7 @@ public class AncientChestWorldGen extends WorldGenerator {
         world.setBlock(x + 8, y, z, Blocks.bedrock, 0, 3);
         world.setBlock(x + 9, y, z, Blocks.bedrock, 0, 3);
         world.setBlock(x + 10, y, z, Blocks.bedrock, 0, 3);
-        world.setBlock(x, y, z + 1, Blocks.bedrock, 0, 3);
+        world.setBlock(pos + 1, Blocks.bedrock, 0, 3);
         world.setBlock(x + 1, y, z + 1, Blocks.stonebrick, 3, 3);
         world.setBlock(x + 2, y, z + 1, Blocks.stonebrick, 3, 3);
         world.setBlock(x + 3, y, z + 1, Blocks.stonebrick, 3, 3);
@@ -253,24 +253,24 @@ public class AncientChestWorldGen extends WorldGenerator {
         world.setBlock(x + 8, y, z + 1, Blocks.stonebrick, 3, 3);
         world.setBlock(x + 9, y, z + 1, Blocks.stonebrick, 3, 3);
         world.setBlock(x + 10, y, z + 1, Blocks.bedrock, 0, 3);
-        world.setBlock(x, y, z + 2, Blocks.bedrock, 0, 3);
+        world.setBlock(pos + 2, Blocks.bedrock, 0, 3);
         world.setBlock(x + 1, y, z + 2, Blocks.stonebrick, 3, 3);
         world.setBlock(x + 5, y, z + 2, FABlockRegistry.INSTANCE.ancientChest, 3, 3);
         world.setBlock(x + 9, y, z + 2, Blocks.stonebrick, 3, 3);
         world.setBlock(x + 10, y, z + 2, Blocks.bedrock, 0, 3);
-        world.setBlock(x, y, z + 3, Blocks.bedrock, 0, 3);
+        world.setBlock(pos + 3, Blocks.bedrock, 0, 3);
         world.setBlock(x + 1, y, z + 3, Blocks.stonebrick, 3, 3);
         world.setBlock(x + 9, y, z + 3, Blocks.stonebrick, 3, 3);
         world.setBlock(x + 10, y, z + 3, Blocks.bedrock, 0, 3);
-        world.setBlock(x, y, z + 4, Blocks.bedrock, 0, 3);
+        world.setBlock(pos + 4, Blocks.bedrock, 0, 3);
         world.setBlock(x + 1, y, z + 4, Blocks.stonebrick, 3, 3);
         world.setBlock(x + 9, y, z + 4, Blocks.stonebrick, 3, 3);
         world.setBlock(x + 10, y, z + 4, Blocks.bedrock, 0, 3);
-        world.setBlock(x, y, z + 5, Blocks.bedrock, 0, 3);
+        world.setBlock(pos + 5, Blocks.bedrock, 0, 3);
         world.setBlock(x + 1, y, z + 5, Blocks.stonebrick, 3, 3);
         world.setBlock(x + 9, y, z + 5, Blocks.stonebrick, 3, 3);
         world.setBlock(x + 10, y, z + 5, Blocks.bedrock, 0, 3);
-        world.setBlock(x, y, z + 6, Blocks.bedrock, 0, 3);
+        world.setBlock(pos + 6, Blocks.bedrock, 0, 3);
         world.setBlock(x + 1, y, z + 6, Blocks.stonebrick, 3, 3);
         world.setBlock(x + 3, y, z + 6, Blocks.stone_brick_stairs, 2, 3);
         world.setBlock(x + 4, y, z + 6, Blocks.stone_brick_stairs, 2, 3);
@@ -279,7 +279,7 @@ public class AncientChestWorldGen extends WorldGenerator {
         world.setBlock(x + 7, y, z + 6, Blocks.stone_brick_stairs, 2, 3);
         world.setBlock(x + 9, y, z + 6, Blocks.stonebrick, 3, 3);
         world.setBlock(x + 10, y, z + 6, Blocks.bedrock, 0, 3);
-        world.setBlock(x, y, z + 7, Blocks.bedrock, 0, 3);
+        world.setBlock(pos + 7, Blocks.bedrock, 0, 3);
         world.setBlock(x + 1, y, z + 7, Blocks.stonebrick, 3, 3);
         world.setBlock(x + 3, y, z + 7, Blocks.stone_brick_stairs, 0, 3);
         world.setBlock(x + 4, y, z + 7, Blocks.stonebrick, 3, 3);
@@ -288,7 +288,7 @@ public class AncientChestWorldGen extends WorldGenerator {
         world.setBlock(x + 7, y, z + 7, Blocks.stone_brick_stairs, 1, 3);
         world.setBlock(x + 9, y, z + 7, Blocks.stonebrick, 3, 3);
         world.setBlock(x + 10, y, z + 7, Blocks.bedrock, 0, 3);
-        world.setBlock(x, y, z + 8, Blocks.bedrock, 0, 3);
+        world.setBlock(pos + 8, Blocks.bedrock, 0, 3);
         world.setBlock(x + 1, y, z + 8, Blocks.stonebrick, 3, 3);
         world.setBlock(x + 2, y, z + 8, Blocks.stonebrick, 3, 3);
         world.setBlock(x + 3, y, z + 8, Blocks.stonebrick, 3, 3);
@@ -299,7 +299,7 @@ public class AncientChestWorldGen extends WorldGenerator {
         world.setBlock(x + 8, y, z + 8, Blocks.stonebrick, 3, 3);
         world.setBlock(x + 9, y, z + 8, Blocks.stonebrick, 3, 3);
         world.setBlock(x + 10, y, z + 8, Blocks.bedrock, 0, 3);
-        world.setBlock(x, y, z + 9, Blocks.bedrock, 0, 3);
+        world.setBlock(pos + 9, Blocks.bedrock, 0, 3);
         world.setBlock(x + 1, y, z + 9, Blocks.bedrock, 0, 3);
         world.setBlock(x + 2, y, z + 9, Blocks.bedrock, 0, 3);
         world.setBlock(x + 3, y, z + 9, Blocks.bedrock, 0, 3);
@@ -942,12 +942,12 @@ public class AncientChestWorldGen extends WorldGenerator {
         world.setBlock(x + 9, y + 8, z + 9, Blocks.bedrock, 0, 3);
         world.setBlock(x + 10, y + 8, z + 9, Blocks.bedrock, 0, 3);
 
-        generate_r02_last(world, rand, x, y, z);
+        generate_r02_last(world, rand, pos);
         return true;
 
     }
 
-    public boolean generate_r02_last(World world, Random rand, int x, int y, int z) {
+    public boolean generate_r02_last(World world, Random rand, BlockPos pos) {
 
         world.setBlock(x + 3, y + 2, z + 2, Blocks.redstone_torch, 3, 3);
         world.setBlock(x + 7, y + 2, z + 2, Blocks.redstone_torch, 3, 3);

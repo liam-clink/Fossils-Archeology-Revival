@@ -2,15 +2,13 @@ package fossilsarcheology.server.block;
 
 import fossilsarcheology.server.creativetab.FATabRegistry;
 import fossilsarcheology.server.handler.LocalizationStrings;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Random;
 
@@ -18,28 +16,20 @@ public class BlockAncientWoodPlate extends Block {
     public BlockAncientWoodPlate() {
         super(Material.wood);
         setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.125F, 1.0F);
-        setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
+        setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
         setHardness(0.6F);
-        setBlockName(LocalizationStrings.ANCIENT_WOOD_PLATE_NAME);
+        setUnlocalizedName(LocalizationStrings.ANCIENT_WOOD_PLATE_NAME);
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    /**
-     * When this method is called, your block should register all the icons it needs with the given IconRegister. This
-     * is the only chance you get to register icons.
-     */
     public void registerBlockIcons(IIconRegister iconRegister) {
         this.blockIcon = iconRegister.registerIcon("fossil:Ancient_Wood_Plates");
     }
 
-    /**
-     * Returns a bounding box from the pool of bounding boxes (this means this
-     * box can change after the pool has been cleared to be reused)
-     */
     @Override
-    public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {
-        int meta = world.getBlockMetadata(x, y, z) & 7;
+    public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, BlockPos pos) {
+        int meta = world.getBlockMetadata(pos) & 7;
         float f = 0.125F;
         return AxisAlignedBB.getBoundingBox((double) x + this.minX, (double) y + this.minY, (double) z + this.minZ, (double) x + this.maxX, (double) ((float) y + (float) meta * f), (double) z + this.maxZ);
     }
@@ -65,27 +55,27 @@ public class BlockAncientWoodPlate extends Block {
 
     /**
      * Checks to see if its valid to put this block at the specified
-     * coordinates. Args: world, x, y, z
+     * coordinates. Args: world, pos
      */
     @Override
-    public boolean canPlaceBlockAt(World world, int x, int y, int z) {
-        return super.canPlaceBlockAt(world, x, y, z) && this.canBlockStay(world, x, y, z);
+    public boolean canPlaceBlockAt(World world, BlockPos pos) {
+        return super.canPlaceBlockAt(world, pos) && this.canBlockStay(world, pos);
     }
 
     /**
      * Lets the block know when one of its neighbor changes. Doesn't know which
-     * neighbor changed (coordinates passed are their own) Args: x, y, z,
+     * neighbor changed (coordinates passed are their own) Args: pos,
      * neighbor blockID
      */
     @Override
-    public void onNeighborBlockChange(World world, int x, int y, int z, Block block) {
-        this.func_111046_k(world, x, y, z);
+    public void onNeighborBlockChange(World world, BlockPos pos, Block block) {
+        this.func_111046_k(world, pos);
     }
 
-    private boolean func_111046_k(World world, int x, int y, int z) {
-        if (!this.canBlockStay(world, x, y, z)) {
-            this.dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
-            world.setBlockToAir(x, y, z);
+    private boolean func_111046_k(World world, BlockPos pos) {
+        if (!this.canBlockStay(world, pos)) {
+            this.dropBlockAsItem(world, pos, world.getBlockMetadata(pos), 0);
+            world.setBlockToAir(pos);
             return false;
         } else {
             return true;
@@ -98,9 +88,9 @@ public class BlockAncientWoodPlate extends Block {
      * subtype/damage.
      */
     @Override
-    public void harvestBlock(World world, EntityPlayer player, int x, int y, int z, int meta) {
-        super.harvestBlock(world, player, x, y, z, meta);
-        world.setBlockToAir(x, y, z);
+    public void harvestBlock(World world, EntityPlayer player, BlockPos pos, int meta) {
+        super.harvestBlock(world, player, pos, meta);
+        world.setBlockToAir(pos);
     }
 
     /**
@@ -115,9 +105,9 @@ public class BlockAncientWoodPlate extends Block {
     @SideOnly(Side.CLIENT)
     /**
      * Returns true if the given side of this block type should be rendered, if the adjacent block is at the given
-     * coordinates.  Args: blockAccess, x, y, z, side
+     * coordinates.  Args: blockAccess, pos, side
      */
-    public boolean shouldSideBeRendered(IBlockAccess world, int x, int y, int z, int side) {
-        return side == 1 || super.shouldSideBeRendered(world, x, y, z, side);
+    public boolean shouldSideBeRendered(IBlockAccess world, BlockPos pos, int side) {
+        return side == 1 || super.shouldSideBeRendered(world, pos, side);
     }
 }

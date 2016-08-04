@@ -25,14 +25,14 @@ public class BlockPermafrost extends BlockBreakable {
         this.setHarvestLevel("shovel", 2);
         setHardness(0.5F);
         setLightOpacity(3);
-        setStepSound(Block.soundTypeGrass);
-        setBlockName(LocalizationStrings.BLOCK_PERMAFROST_NAME);
-        setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
+        setSoundType(Block.soundTypeGrass);
+        setUnlocalizedName(LocalizationStrings.BLOCK_PERMAFROST_NAME);
+        setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
     }
 
     @Override
-    public void harvestBlock(World world, EntityPlayer player, int x, int y, int z, int i) {
-        super.harvestBlock(world, player, x, y, z, i);
+    public void harvestBlock(World world, EntityPlayer player, BlockPos pos, int i) {
+        super.harvestBlock(world, player, pos, i);
         player.triggerAchievement(FossilAchievementHandler.firstFossil);
     }
 

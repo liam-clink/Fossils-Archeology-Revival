@@ -120,8 +120,8 @@ public class ModelDodo extends ModelPrehistoric {
 
     @Override
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
-        AdvancedModelRenderer[] tailParts = {this.tail};
-        AdvancedModelRenderer[] neckParts = {this.neck, this.head};
+        AdvancedModelRenderer[] tailParts = { this.tail };
+        AdvancedModelRenderer[] neckParts = { this.neck, this.head };
         EntityDodo dodo = (EntityDodo) entity;
         if (this.isChild) {
             this.head.setScale(1.5F, 1.5F, 1.5F);
@@ -135,9 +135,9 @@ public class ModelDodo extends ModelPrehistoric {
             this.beakUpper.rotationPointZ = -4F;
             this.beakLower.rotationPointZ = -4F;
         }
-		if(((EntityPrehistoric) entity).isSkeleton()){
-			return;
-		}
+        if (((EntityPrehistoric) entity).isSkeleton()) {
+            return;
+        }
         float speed = 0.9F;
         float speed2 = 0.1F;
         ModelUtils.faceTargetMod(head, f3, f4, 1F);
@@ -178,6 +178,6 @@ public class ModelDodo extends ModelPrehistoric {
 
         }
 
-       
+
     }
 }

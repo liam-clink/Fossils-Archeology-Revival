@@ -1,9 +1,9 @@
 package fossilsarcheology.client.model.prehistoric;
 
-import cpw.mods.fml.relauncher.ReflectionHelper;
 import net.ilexiconn.llibrary.client.model.ModelAnimator;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
 public class ModelUtils {
 
@@ -63,7 +63,7 @@ public class ModelUtils {
     private static float getField(AdvancedModelRenderer box, String name) {
         float f = 0;
         try {
-            f = ReflectionHelper.findField(AdvancedModelRenderer.class, new String[]{name, name}).getFloat(box);
+            f = ReflectionHelper.findField(AdvancedModelRenderer.class, new String[] { name, name }).getFloat(box);
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {

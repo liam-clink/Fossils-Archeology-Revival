@@ -1,17 +1,5 @@
 package fossilsarcheology.server.entity.mob;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAIOwnerHurtByTarget;
-import net.minecraft.entity.ai.EntityAIOwnerHurtTarget;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.attributes.IAttributeInstance;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.util.DamageSource;
-import net.minecraft.world.World;
 import fossilsarcheology.Revival;
 import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.entity.ai.DinoAIAttackOnCollide;
@@ -24,8 +12,20 @@ import fossilsarcheology.server.entity.ai.DinoAILookIdle;
 import fossilsarcheology.server.entity.ai.DinoAIRiding;
 import fossilsarcheology.server.entity.ai.DinoAIWander;
 import fossilsarcheology.server.entity.ai.DinoAIWatchClosest;
-import fossilsarcheology.server.enums.EnumPrehistoric;
 import fossilsarcheology.server.enums.EnumPrehistoricAI;
+import fossilsarcheology.server.enums.PrehistoricEntityType;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAIOwnerHurtByTarget;
+import net.minecraft.entity.ai.EntityAIOwnerHurtTarget;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.attributes.IAttributeInstance;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.util.DamageSource;
+import net.minecraft.world.World;
 
 public class EntityTriceratops extends EntityPrehistoric {
     public static final double baseDamage = 1;
@@ -36,7 +36,7 @@ public class EntityTriceratops extends EntityPrehistoric {
     public static final double maxSpeed = 0.35D;
 
     public EntityTriceratops(World world) {
-        super(world, EnumPrehistoric.Triceratops, 1, 9, 12, 64, 0.2, 0.35);
+        super(world, PrehistoricEntityType.TRICERATOPS, 1, 9, 12, 64, 0.2, 0.35);
         this.getNavigator().setAvoidsWater(true);
         this.getNavigator().setCanSwim(true);
         this.tasks.addTask(1, new EntityAISwimming(this));
@@ -46,7 +46,7 @@ public class EntityTriceratops extends EntityPrehistoric {
         this.tasks.addTask(4, new DinoAIFollowOwner(this, 1.0D, 10.0F, 2.0F));
         this.tasks.addTask(5, new DinoAIEatBlocks(this, 1));
         this.tasks.addTask(5, new DinoAIEatFeeders(this, 1));
-        this.tasks.addTask(5, new DinoAIEatItems(this, 1)); 
+        this.tasks.addTask(5, new DinoAIEatItems(this, 1));
         this.tasks.addTask(6, new DinoAIWander(this, 1.0D));
         this.tasks.addTask(7, new DinoAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(7, new DinoAILookIdle(this));
@@ -59,7 +59,7 @@ public class EntityTriceratops extends EntityPrehistoric {
         this.setActualSize(1.1F, 0.6F);
         this.nearByMobsAllowed = 7;
         minSize = 1F;
-        maxSize = 6F;
+        maxSize = 8F;
         teenAge = 5;
         developsResistance = true;
         breaksBlocks = true;
@@ -193,13 +193,13 @@ public class EntityTriceratops extends EntityPrehistoric {
         }
         return false;
     }
-    
-	public int getMaxHunger() {
-		return 175;
-	}
-	
-	@Override
-	public boolean canBeRidden() {
-		return true;
-	}
+
+    public int getMaxHunger() {
+        return 175;
+    }
+
+    @Override
+    public boolean canBeRidden() {
+        return true;
+    }
 }

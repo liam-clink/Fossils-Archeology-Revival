@@ -1,10 +1,10 @@
 package fossilsarcheology.server.entity;
 
-import fossilsarcheology.client.gui.GuiPedia;
-import fossilsarcheology.server.enums.EnumPrehistoric;
+import fossilsarcheology.client.gui.PediaGUI;
+import fossilsarcheology.server.enums.PrehistoricEntityType;
 
 public interface IViviparous {
-    void showPedia(GuiPedia var1);
+    void showPedia(PediaGUI var1);
 
-    void setEmbryo(EnumPrehistoric var1);
+    void setEmbryo(PrehistoricEntityType var1);
 }

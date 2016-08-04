@@ -5,7 +5,7 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.MathHelper;
 import org.lwjgl.opengl.GL11;
 
 public class ModelQuagga extends ModelBase {
@@ -222,9 +222,9 @@ public class ModelQuagga extends ModelBase {
         }
 
         if (!flag) {
-            GL11.glPushMatrix();
-            GL11.glScalef(f7, 0.5F + f7 * 0.5F, f7);
-            GL11.glTranslatef(0.0F, 0.95F * (1.0F - f7), 0.0F);
+            GlStateManager.pushMatrix();
+            GlStateManager.scale(f7, 0.5F + f7 * 0.5F, f7);
+            GlStateManager.translate(0.0F, 0.95F * (1.0F - f7), 0.0F);
         }
 
         this.backLeftLeg.render(par7);
@@ -241,10 +241,10 @@ public class ModelQuagga extends ModelBase {
         this.frontRightHoof.render(par7);
 
         if (!flag) {
-            GL11.glPopMatrix();
-            GL11.glPushMatrix();
-            GL11.glScalef(f7, f7, f7);
-            GL11.glTranslatef(0.0F, 1.35F * (1.0F - f7), 0.0F);
+            GlStateManager.popMatrix();
+            GlStateManager.pushMatrix();
+            GlStateManager.scale(f7, f7, f7);
+            GlStateManager.translate(0.0F, 1.35F * (1.0F - f7), 0.0F);
         }
 
         this.body.render(par7);
@@ -255,15 +255,15 @@ public class ModelQuagga extends ModelBase {
         this.mane.render(par7);
 
         if (!flag) {
-            GL11.glPopMatrix();
-            GL11.glPushMatrix();
+            GlStateManager.popMatrix();
+            GlStateManager.pushMatrix();
             float f8 = 0.5F + f7 * f7 * 0.5F;
-            GL11.glScalef(f8, f8, f8);
+            GlStateManager.scale(f8, f8, f8);
 
             if (f6 <= 0.0F) {
-                GL11.glTranslatef(0.0F, 1.35F * (1.0F - f7), 0.0F);
+                GlStateManager.translate(0.0F, 1.35F * (1.0F - f7), 0.0F);
             } else {
-                GL11.glTranslatef(0.0F, 0.9F * (1.0F - f7) * f6 + 1.35F * (1.0F - f7) * (1.0F - f6), 0.15F * (1.0F - f7) * f6);
+                GlStateManager.translate(0.0F, 0.9F * (1.0F - f7) * f6 + 1.35F * (1.0F - f7) * (1.0F - f6), 0.15F * (1.0F - f7) * f6);
             }
         }
 
@@ -273,7 +273,7 @@ public class ModelQuagga extends ModelBase {
         this.head.render(par7);
 
         if (!flag) {
-            GL11.glPopMatrix();
+            GlStateManager.popMatrix();
         }
 
         if (flag2) {

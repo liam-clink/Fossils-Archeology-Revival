@@ -2,212 +2,167 @@ package fossilsarcheology.server.block;
 
 import fossilsarcheology.server.block.entity.TileEntityAncientChest;
 import fossilsarcheology.server.item.FAItemRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
+import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.properties.PropertyDirection;
+import net.minecraft.block.state.BlockStateContainer;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.EnumBlockRenderType;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.Mirror;
+import net.minecraft.util.Rotation;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import java.util.Random;
 
-import static net.minecraftforge.common.util.ForgeDirection.DOWN;
-
 public class BlockAncientChest extends BlockContainer {
+    public static final PropertyDirection FACING = BlockHorizontal.FACING;
+    private static final AxisAlignedBB BOUNDS = new AxisAlignedBB(0.0625F, 0.0F, 0.0625F, 0.9375F, 0.875F, 0.9375F);
+
     private final Random rand = new Random();
 
     public BlockAncientChest() {
-        super(Material.wood);
-        this.setBlockBounds(0.0625F, 0.0F, 0.0625F, 0.9375F, 0.875F, 0.9375F);
-        this.setBlockName("ancientChest");
+        super(Material.WOOD);
+        this.setUnlocalizedName("ancientChest");
+        this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
     }
 
-    /**
-     * Is this block (a) opaque and (b) a full 1m cube? This determines whether
-     * or not to render the shared face of two adjacent blocks and also whether
-     * the player can attach torches, redstone wire, etc to this block.
-     */
     @Override
-    public boolean isOpaqueCube() {
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+        return BOUNDS;
+    }
+
+    @Override
+    public boolean isOpaqueCube(IBlockState state) {
         return false;
     }
 
-    /**
-     * If this block doesn't render as an ordinary block it will return False
-     * (examples: signs, buttons, stairs, etc)
-     */
     @Override
-    public boolean renderAsNormalBlock() {
+    public boolean isFullCube(IBlockState state) {
         return false;
     }
 
-    /**
-     * The type of render function that is called for this block
-     */
     @Override
-    public int getRenderType() {
-        return 22;
+    public EnumBlockRenderType getRenderType(IBlockState state) {
+        return EnumBlockRenderType.ENTITYBLOCK_ANIMATED;
     }
 
-    /**
-     * Updates the blocks bounds based on its current state. Args: world, x, y,
-     * z
-     */
     @Override
-    public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z) {
-        this.setBlockBounds(0.0625F, 0.0F, 0.0625F, 0.9375F, 0.875F, 0.9375F);
+    public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+        world.setBlockState(pos, state.withProperty(FACING, placer.getHorizontalFacing().getOpposite()), 2);
     }
 
-    /**
-     * Called when the block is placed in the world.
-     */
     @Override
-    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase placer, ItemStack stack) {
-
-        byte facing = 0;
-        int rotation = MathHelper.floor_double((double) (placer.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
-
-        if (rotation == 0) {
-            facing = 2;
-        }
-
-        if (rotation == 1) {
-            facing = 5;
-        }
-
-        if (rotation == 2) {
-            facing = 3;
-        }
-
-        if (rotation == 3) {
-            facing = 4;
-        }
-        world.setBlockMetadataWithNotify(x, y, z, facing, 2);
-        world.markBlockForUpdate(x, y, z);
-    }
-
-    /**
-     * Lets the block know when one of its neighbor changes. Doesn't know which
-     * neighbor changed (coordinates passed are their own) Args: x, y, z,
-     * neighbor Block
-     */
-    @Override
-    public void onNeighborBlockChange(World world, int x, int y, int z, Block block) {
-        super.onNeighborBlockChange(world, x, y, z, block);
-        TileEntityAncientChest tile = (TileEntityAncientChest) world.getTileEntity(x, y, z);
-
+    public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block) {
+        super.neighborChanged(state, world, pos, block);
+        TileEntityAncientChest tile = (TileEntityAncientChest) world.getTileEntity(pos);
         if (tile != null) {
             tile.updateContainingBlockInfo();
         }
     }
 
     @Override
-    public void breakBlock(World world, int x, int y, int z, Block block, int i) {
-        TileEntityAncientChest tile = (TileEntityAncientChest) world.getTileEntity(x, y, z);
-
+    public void breakBlock(World world, BlockPos pos, IBlockState state) {
+        TileEntityAncientChest tile = (TileEntityAncientChest) world.getTileEntity(pos);
         if (tile != null) {
             for (int slot = 0; slot < tile.getSizeInventory(); ++slot) {
                 ItemStack stack = tile.getStackInSlot(slot);
-
                 if (stack != null) {
                     float offsetX = this.rand.nextFloat() * 0.8F + 0.1F;
                     float offsetY = this.rand.nextFloat() * 0.8F + 0.1F;
-                    EntityItem itemEntity;
-
-                    for (float offsetZ = this.rand.nextFloat() * 0.8F + 0.1F; stack.stackSize > 0; world.spawnEntityInWorld(itemEntity)) {
+                    EntityItem entity;
+                    for (float offsetZ = this.rand.nextFloat() * 0.8F + 0.1F; stack.stackSize > 0; world.spawnEntityInWorld(entity)) {
                         int sizeRemoval = this.rand.nextInt(21) + 10;
-
                         if (sizeRemoval > stack.stackSize) {
                             sizeRemoval = stack.stackSize;
                         }
-
                         stack.stackSize -= sizeRemoval;
-                        itemEntity = new EntityItem(world, (double) ((float) x + offsetX), (double) ((float) y + offsetY), (double) ((float) z + offsetZ), new ItemStack(stack.getItem(), sizeRemoval, stack.getItemDamage()));
+                        entity = new EntityItem(world, pos.getX() + offsetX, pos.getY() + offsetY, pos.getZ() + offsetZ, new ItemStack(stack.getItem(), sizeRemoval, stack.getItemDamage()));
                         float motionMultiplier = 0.05F;
-                        itemEntity.motionX = (double) ((float) this.rand.nextGaussian() * motionMultiplier);
-                        itemEntity.motionY = (double) ((float) this.rand.nextGaussian() * motionMultiplier + 0.2F);
-                        itemEntity.motionZ = (double) ((float) this.rand.nextGaussian() * motionMultiplier);
-
+                        entity.motionX = (double) ((float) this.rand.nextGaussian() * motionMultiplier);
+                        entity.motionY = (double) ((float) this.rand.nextGaussian() * motionMultiplier + 0.2F);
+                        entity.motionZ = (double) ((float) this.rand.nextGaussian() * motionMultiplier);
                         if (stack.hasTagCompound()) {
-                            itemEntity.getEntityItem().setTagCompound((NBTTagCompound) stack.getTagCompound().copy());
+                            entity.getEntityItem().setTagCompound(stack.getTagCompound().copy());
                         }
                     }
                 }
             }
-
-            world.func_147453_f(x, y, z, block);
         }
-
-        super.breakBlock(world, x, y, z, block, i);
+        super.breakBlock(world, pos, state);
     }
 
-    /**
-     * Called upon block activation (right click on the block.)
-     */
     @Override
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int i, float f, float f1, float f2) {
-        TileEntityAncientChest tile = (TileEntityAncientChest) world.getTileEntity(x, y, z);
-        if (tile.chestState == 0) {
-            if (player.getHeldItem() != null) {
-                if (player.getHeldItem().getItem() != null) {
-                    if (player.getHeldItem().getItem() == FAItemRegistry.INSTANCE.ancientKey) {
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
+        TileEntityAncientChest tile = (TileEntityAncientChest) world.getTileEntity(pos);
+        if (tile != null) {
+            if (tile.chestState == 0) {
+                if (heldItem != null) {
+                    if (heldItem.getItem() == FAItemRegistry.INSTANCE.ancientKey) {
                         tile.setChestState(1);
-                        world.markBlockForUpdate(x, y, z);
+                        world.markBlockForUpdate(pos);
                         if (!player.capabilities.isCreativeMode) {
-                            --player.getHeldItem().stackSize;
+                            heldItem.stackSize--;
                         }
-
-                        if (player.getHeldItem().stackSize <= 0) {
+                        if (heldItem.stackSize <= 0) {
                             player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
                         }
-
                     }
                 }
+            } else if (tile.chestState == 1) {
+                tile.setChestState(2);
+                world.markBlockForUpdate(pos);
+                tile.chestLidCounter = 1;
+                world.playSound(null, pos.getX(), pos.getY() + 0.5D, pos.getZ(), SoundEvents.BLOCK_CHEST_OPEN, SoundCategory.BLOCKS, 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
             }
-        } else if (tile.chestState == 1) {
-            tile.setChestState(2);
-            world.markBlockForUpdate(x, y, z);
-            tile.chestLidCounter = 1;
-            world.playSoundEffect(x, (double) y + 0.5D, z, "random.chestopen", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
-
         }
         return true;
     }
 
-    public IInventory invActivated(World world, int x, int y, int z) {
-        Object object = world.getTileEntity(x, y, z);
-
-        if (object == null) {
-            return null;
-        } else if (world.isSideSolid(x, y + 1, z, DOWN)) {
-            return null;
-        } else {
-            return (IInventory) object;
-        }
-    }
-
-    /**
-     * Returns a new instance of a block's tile entity class. Called on placing
-     * the block.
-     */
     @Override
-    public TileEntity createNewTileEntity(World world, int p_149915_2_) {
+    public TileEntity createNewTileEntity(World world, int metadata) {
         return new TileEntityAncientChest();
     }
 
     @Override
-    @SideOnly(Side.CLIENT)
-    public void registerBlockIcons(IIconRegister iconRegister) {
-        this.blockIcon = iconRegister.registerIcon("fossil:AncientChestSquare");
+    public IBlockState getStateFromMeta(int meta) {
+        EnumFacing facing = EnumFacing.getFront(meta);
+        if (facing.getAxis() == EnumFacing.Axis.Y) {
+            facing = EnumFacing.NORTH;
+        }
+        return this.getDefaultState().withProperty(FACING, facing);
+    }
+
+    @Override
+    public int getMetaFromState(IBlockState state) {
+        return state.getValue(FACING).getIndex();
+    }
+
+    @Override
+    public IBlockState withRotation(IBlockState state, Rotation rotation) {
+        return state.withProperty(FACING, rotation.rotate(state.getValue(FACING)));
+    }
+
+    @Override
+    public IBlockState withMirror(IBlockState state, Mirror mirror) {
+        return state.withRotation(mirror.toRotation(state.getValue(FACING)));
+    }
+
+    @Override
+    protected BlockStateContainer createBlockState() {
+        return new BlockStateContainer(this, FACING);
     }
 }

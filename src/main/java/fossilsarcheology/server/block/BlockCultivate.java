@@ -6,11 +6,11 @@ import fossilsarcheology.server.creativetab.FATabRegistry;
 import fossilsarcheology.server.entity.mob.EntityFailuresaurus;
 import fossilsarcheology.server.handler.FossilAchievementHandler;
 import fossilsarcheology.server.handler.LocalizationStrings;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -26,68 +26,64 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Random;
 
 public class BlockCultivate extends BlockContainer {
-    private static boolean keepFurnaceInventory = false;
+    private static boolean keepInventory = false;
     private final boolean isActive;
     // private final String VAT = "Vat.";
     // private final String ERR_OUTBREAK = "Err.OutBreak";
     private Random rand = new Random();
 
     public BlockCultivate(boolean isActive) {
-        super(Material.glass);
+        super(Material.GLASS);
         setLightLevel(0.9375F);
         setHardness(0.3F);
-        setStepSound(Block.soundTypeGlass);
+        setSoundType(SoundType.GLASS);
         this.isActive = isActive;
         if (isActive) {
-            setBlockName(LocalizationStrings.BLOCK_CULTIVATE_ACTIVE_NAME);
+            setUnlocalizedName(LocalizationStrings.BLOCK_CULTIVATE_ACTIVE_NAME);
         } else {
-            setBlockName(LocalizationStrings.BLOCK_CULTIVATE_IDLE_NAME);
-            setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
+            setUnlocalizedName(LocalizationStrings.BLOCK_CULTIVATE_IDLE_NAME);
+            setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
         }
     }
 
-    public static void updateFurnaceBlockState(boolean isActive, World world, int x, int y, int z) {
-        int meta = world.getBlockMetadata(x, y, z);
-        TileEntity tile = world.getTileEntity(x, y, z);
-        keepFurnaceInventory = true;
-
+    public static void updateState(boolean isActive, World world, BlockPos pos) {
+        int meta = world.getBlockMetadata(pos);
+        TileEntity tile = world.getTileEntity(pos);
+        keepInventory = true;
         if (isActive) {
-            world.setBlock(x, y, z, FABlockRegistry.INSTANCE.blockcultivateActive);
+            world.setBlockState(pos, FABlockRegistry.INSTANCE.CULTIVATE_ACTIVE.getDefaultState());
         } else {
-            world.setBlock(x, y, z, FABlockRegistry.INSTANCE.blockcultivateIdle);
+            world.setBlockState(pos, FABlockRegistry.INSTANCE.CULTIVATE_IDLE.getDefaultState());
         }
-
-        keepFurnaceInventory = false;
-        world.setBlockMetadataWithNotify(x, y, z, meta, 2);
+        keepInventory = false;
+        world.setBlockMetadataWithNotify(pos, meta, 2);
         tile.validate();
-        world.setTileEntity(x, y, z, tile);
+        world.setTileEntity(pos, tile);
     }
 
     @Override
-    public void onBlockDestroyedByPlayer(World world, int x, int y, int z, int i) {
-        this.returnDNA(world, x, y, z);
-        super.onBlockDestroyedByPlayer(world, x, y, z, i);
+    public void onBlockDestroyedByPlayer(World world, BlockPos pos, int i) {
+        this.returnDNA(world, pos);
+        super.onBlockDestroyedByPlayer(world, pos, i);
     }
 
     @Override
     public Item getItemDropped(int par1, Random rand, int par2) {
-        return Item.getItemFromBlock(FABlockRegistry.INSTANCE.blockcultivateIdle);
+        return Item.getItemFromBlock(FABlockRegistry.INSTANCE.CULTIVATE_IDLE);
     }
 
-    /**
-     * Called whenever the block is added into the world. Args: world, x, y, z
-     */
     @Override
-    public void onBlockAdded(World world, int x, int y, int z) {
-        super.onBlockAdded(world, x, y, z);
-        this.setDefaultDirection(world, x, y, z);
+    public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
+        super.onBlockAdded(world, pos, state);
+        this.setDefaultDirection(world, pos);
     }
 
     @Override
@@ -110,108 +106,53 @@ public class BlockCultivate extends BlockContainer {
         return 1;
     }
 
-    /**
-     * set a blocks direction
-     */
-    private void setDefaultDirection(World world, int x, int y, int z) {
+    private void setDefaultDirection(World world, BlockPos pos) {
         if (!world.isRemote) {
-            Block block = world.getBlock(x, y, z - 1);
-            Block block1 = world.getBlock(x, y, z + 1);
-            Block block2 = world.getBlock(x - 1, y, z);
-            Block block3 = world.getBlock(x + 1, y, z);
-            byte b0 = 3;
-
+            Block block = world.getBlockState(pos.add(0, 0, -1));
+            Block block1 = world.getBlockState(pos.add(0, 0, 1));
+            Block block2 = world.getBlockState(pos.add(-1, 0, 0));
+            Block block3 = world.getBlockState(pos.add(1, 0, 0));
+            byte rotation = 3;
             if (block.func_149730_j() && !block1.func_149730_j()) {
-                b0 = 3;
+                rotation = 3;
             }
-
             if (block1.func_149730_j() && !block.func_149730_j()) {
-                b0 = 2;
+                rotation = 2;
             }
-
             if (block2.func_149730_j() && !block3.func_149730_j()) {
-                b0 = 5;
+                rotation = 5;
             }
-
             if (block3.func_149730_j() && !block2.func_149730_j()) {
-                b0 = 4;
+                rotation = 4;
             }
-
-            world.setBlockMetadataWithNotify(x, y, z, b0, 2);
+            world.setBlockMetadataWithNotify(pos, rotation, 2);
         }
     }
 
-    /**
-     * When this method is called, your block should register all the icons it
-     * needs with the given IconRegister. This is the only chance you get to
-     * register icons.
-     */
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerBlockIcons(IIconRegister iconRegister) {
-        this.blockIcon = iconRegister.registerIcon("fossil:Culture_Top");
-    }
-
-    /**
-     * Returns the block texture based on the side being looked at. Args: side
-     */
-    /*
-	 * public int getBlockTextureFromSide(int var1) { return var1 == 1 ? 36 :
-	 * (var1 == 0 ? 36 : (var1 == 3 ? 20 : 20)); }
-	 */
-    @Override
-    @SideOnly(Side.CLIENT)
-    /**
-     * A randomly called display update to be able to add particles or other items for display
-     */
-    public void randomDisplayTick(World world, int x, int y, int z, Random rand) {
+    public void randomDisplayTick(World world, BlockPos pos, Random rand) {
         world.spawnParticle("suspended", (double) ((float) x + rand.nextFloat()), (double) ((float) y + rand.nextFloat()), (double) ((float) z + rand.nextFloat()), 0.0D, 0.0D, 0.0D);
     }
 
-    /**
-     * Called upon block activation (right click on the block.)
-     */
     @Override
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(World world, BlockPos pos, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
         if (world.isRemote) {
             return true;
         } else {
-            player.openGui(Revival.INSTANCE, 1, world, x, y, z);
+            player.openGui(Revival.INSTANCE, 1, world, pos);
             return true;
         }
     }
 
-    /**
-     * Returns a new instance of a block's tile entity class. Called on placing
-     * the block.
-     */
     @Override
     public TileEntity createNewTileEntity(World world, int par2) {
         return new TileEntityCultivate();
     }
 
-    /**
-     * Called when the block is placed in the world.
-     */
-	/*
-	 * public void onBlockPlacedBy(World var1, int var2, int var3, int var4,
-	 * EntityLiving var5) {This Block doesnt care for directions!
-	 * super.onBlockPlacedBy(par1World, par2, par3, par4, par5EntityLiving,
-	 * par6ItemStack) int var6 =
-	 * MathHelper.floor_double((double)(var5.rotationYaw * 4.0F / 360.0F) +
-	 * 0.5D) & 3;
-	 * 
-	 * if (var6 == 0)var1.setBlockMetadataWithNotify(var2, var3, var4, 2,2);
-	 * 
-	 * if (var6 == 1)var1.setBlockMetadataWithNotify(var2, var3, var4, 5,2);
-	 * 
-	 * if (var6 == 2)var1.setBlockMetadataWithNotify(var2, var3, var4, 3,2);
-	 * 
-	 * if (var6 == 3)var1.setBlockMetadataWithNotify(var2, var3, var4, 4,2); }
-	 */
-    private void returnDNA(World world, int x, int y, int z) {
-        if (!keepFurnaceInventory) {
-            TileEntityCultivate tile = (TileEntityCultivate) world.getTileEntity(x, y, z);
+    private void returnDNA(World world, BlockPos pos) {
+        if (!keepInventory) {
+            TileEntityCultivate tile = (TileEntityCultivate) world.getTileEntity(pos);
             if (tile != null) {
                 ItemStack stack = tile.getStackInSlot(0);
 
@@ -231,7 +172,7 @@ public class BlockCultivate extends BlockContainer {
                         EntityItem entityItem = new EntityItem(world, (double) ((float) x + xOffset), (double) ((float) y + yOffset), (double) ((float) z + zOffset), new ItemStack(stack.getItem(), rand, stack.getItemDamage()));
 
                         if (stack.hasTagCompound()) {
-                            entityItem.getEntityItem().setTagCompound((NBTTagCompound) stack.getTagCompound().copy());
+                            entityItem.getEntityItem().setTagCompound(stack.getTagCompound().copy());
                         }
 
                         float offset = 0.05F;
@@ -245,8 +186,8 @@ public class BlockCultivate extends BlockContainer {
         }
     }
 
-    private void returnIron(World world, int x, int y, int z) {
-        ItemStack stack = new ItemStack(Items.iron_ingot, 3);
+    private void returnIron(World world, BlockPos pos) {
+        ItemStack stack = new ItemStack(Items.IRON_INGOT, 3);
         float offsetX = this.rand.nextFloat() * 0.8F + 0.1F;
         float offsetY = this.rand.nextFloat() * 0.8F + 0.1F;
         float offsetZ = this.rand.nextFloat() * 0.8F + 0.1F;
@@ -259,18 +200,18 @@ public class BlockCultivate extends BlockContainer {
             }
 
             stack.stackSize -= stackDecay;
-            EntityItem item = new EntityItem(world, (double) ((float) x + offsetX), (double) ((float) y + offsetY), (double) ((float) z + offsetZ), new ItemStack(stack.getItem(), stackDecay, stack.getItemDamage()));
-            float motionMutlipler = 0.05F;
-            item.motionX = (double) ((float) this.rand.nextGaussian() * motionMutlipler);
-            item.motionY = (double) ((float) this.rand.nextGaussian() * motionMutlipler + 0.2F);
-            item.motionZ = (double) ((float) this.rand.nextGaussian() * motionMutlipler);
+            EntityItem item = new EntityItem(world, (double) ((float) pos.getX() + offsetX), (double) ((float) pos.getY() + offsetY), (double) ((float) pos.getZ() + offsetZ), new ItemStack(stack.getItem(), stackDecay, stack.getItemDamage()));
+            float motionMultiplier = 0.05F;
+            item.motionX = (double) ((float) this.rand.nextGaussian() * motionMultiplier);
+            item.motionY = (double) ((float) this.rand.nextGaussian() * motionMultiplier + 0.2F);
+            item.motionZ = (double) ((float) this.rand.nextGaussian() * motionMultiplier);
             world.spawnEntityInWorld(item);
         }
     }
 
-    public void onBlockRemovalLost(World world, int x, int y, int z, boolean isActive) {
-        keepFurnaceInventory = false;
-        String var6 = StatCollector.translateToLocal(LocalizationStrings.CULTIVATE_OUTBREAK);
+    public void onBlockRemovalLost(World world, BlockPos pos, boolean isActive) {
+        keepInventory = false;
+        String var6 = I18n.translateToLocal(LocalizationStrings.CULTIVATE_OUTBREAK);
 
         for (int var7 = 0; var7 < world.playerEntities.size(); ++var7) {
             EntityPlayer P = (EntityPlayer) world.playerEntities.get(var7);
@@ -282,27 +223,27 @@ public class BlockCultivate extends BlockContainer {
             // Metres
             {
                 P.addStat(FossilAchievementHandler.failuresaurus, 1);
-                P.addChatMessage(new ChatComponentText(var6));
+                Revival.messagePlayer(var6, P);
             }
         }
 
-        this.returnIron(world, x, y, z);
-        this.returnDNA(world, x, y, z);
+        this.returnIron(world, pos);
+        this.returnDNA(world, pos);
         if (!world.isRemote) {
             if (isActive) {
-                TileEntityCultivate tileentity = (TileEntityCultivate) world.getTileEntity(x, y, z);
+                TileEntityCultivate tileentity = (TileEntityCultivate) world.getTileEntity(pos);
                 if (tileentity != null) {
 
                     if (tileentity.getDNAType() == 2 || tileentity.getDNAType() == 3) {
-                        world.playAuxSFX(2001, x, y, z, Block.getIdFromBlock(Blocks.glass));
+                        world.playAuxSFX(2001, pos, Block.getIdFromBlock(Blocks.glass));
                         world.setBlock(x, y + 1, z, FABlockRegistry.INSTANCE.mutantPlant);
                         world.setBlock(x, y + 2, z, FABlockRegistry.INSTANCE.mutantPlant, 8, 3);
-                        world.setBlock(x, y, z, Blocks.dirt);
+                        world.setBlock(pos, Blocks.dirt);
 
                     } else {
                         Object creature = null;
-                        world.playAuxSFX(2001, x, y, z, Block.getIdFromBlock(Blocks.glass));
-                        world.setBlock(x, y, z, Blocks.water);
+                        world.playAuxSFX(2001, pos, Block.getIdFromBlock(Blocks.glass));
+                        world.setBlock(pos, Blocks.water);
 
                         if (world.isRemote) {
                             return;
@@ -326,7 +267,7 @@ public class BlockCultivate extends BlockContainer {
                         ((EntityLiving) creature).setLocationAndAngles((double) x, (double) y, (double) z, world.rand.nextFloat() * 360.0F, 0.0F);
                         world.spawnEntityInWorld((Entity) creature);
                     }
-                    world.removeTileEntity(x, y, z);
+                    world.removeTileEntity(pos);
                 }
 
             }
@@ -338,9 +279,9 @@ public class BlockCultivate extends BlockContainer {
      * update, as appropriate
      */
     @Override
-    public void breakBlock(World world, int x, int y, int z, Block block, int var6) {
-        if (!keepFurnaceInventory) {
-            TileEntityCultivate tileentity = (TileEntityCultivate) world.getTileEntity(x, y, z);
+    public void breakBlock(World world, BlockPos pos, Block block, int var6) {
+        if (!keepInventory) {
+            TileEntityCultivate tileentity = (TileEntityCultivate) world.getTileEntity(pos);
 
             if (tileentity != null) {
                 for (int i = 0; i < tileentity.getSizeInventory(); ++i) {
@@ -376,7 +317,7 @@ public class BlockCultivate extends BlockContainer {
             }
         }
 
-        super.breakBlock(world, x, y, z, block, var6);
+        super.breakBlock(world, pos, block, var6);
     }
 
     /**
@@ -401,8 +342,8 @@ public class BlockCultivate extends BlockContainer {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public Item getItem(World world, int x, int y, int z) {
+    public Item getItem(World world, BlockPos pos) {
 
-        return Item.getItemFromBlock(FABlockRegistry.INSTANCE.blockcultivateActive);
+        return Item.getItemFromBlock(FABlockRegistry.INSTANCE.CULTIVATE_ACTIVE);
     }
 }

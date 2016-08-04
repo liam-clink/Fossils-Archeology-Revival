@@ -1,7 +1,6 @@
 package fossilsarcheology.client.model.prehistoric;
 
 import fossilsarcheology.server.entity.EntityPrehistoric;
-import fossilsarcheology.server.entity.mob.EntityElasmotherium;
 import net.ilexiconn.llibrary.client.model.ModelAnimator;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
@@ -167,28 +166,28 @@ public class ModelElasmotherium extends ModelPrehistoric {
 
     @Override
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
-        AdvancedModelRenderer[] tailParts = {this.tail};
-        AdvancedModelRenderer[] neckParts = {this.neck, this.head};
-		if(((EntityPrehistoric) entity).isSkeleton()){
-			return;
-		}
+        AdvancedModelRenderer[] tailParts = { this.tail };
+        AdvancedModelRenderer[] neckParts = { this.neck, this.head };
+        if (((EntityPrehistoric) entity).isSkeleton()) {
+            return;
+        }
         ModelUtils.faceTargetMod(head, f3, f4, 1);
         float speed = 0.1F;
-        float speed2 = 0.9F;
+        float speed2 = 1.1F;
         this.chainWave(tailParts, speed, 0.05F, -3, entity.ticksExisted, 1);
         this.chainSwing(tailParts, speed, 0.15F, -2, entity.ticksExisted, 1);
         this.chainWave(neckParts, speed, 0.15F, 3, entity.ticksExisted, 1);
         this.bob(middleBody, speed, 0.3F, false, entity.ticksExisted, 1);
         this.walk(lowerBody, speed, 0.05F, true, 0F, 0F, entity.ticksExisted, 1);
         this.walk(upperBody, speed, 0.05F, true, 0F, 0F, entity.ticksExisted, 1);
-        this.walk(leftFrontThigh, speed2, 0.4F, true, 0F, 0, f, f1);
-        this.walk(rightFrontThigh, speed2, 0.4F, false, 0F, 0, f, f1);
-        this.walk(leftHindThigh, speed2, 0.4F, false, 0F, 0, f, f1);
-        this.walk(rightHindThigh, speed2, 0.4F, true, 0F, 0, f, f1);
-        this.walk(leftFrontLeg, speed2, 0.2F, true, 0F, 0.4F, f, f1);
-        this.walk(rightFrontLeg, speed2, 0.2F, false, 0F, -0.4F, f, f1);
-        this.walk(leftHindLeg, speed2, 0.2F, false, 0F, 0.4F, f, f1);
-        this.walk(rightHindLeg, speed2, 0.2F, true, 0F, -0.4F, f, f1);
+        this.walk(leftFrontThigh, speed2, 0.8F, true, 0F, -0.4F, f, f1);
+        this.walk(rightFrontThigh, speed2, 0.8F, false, 0F, -0.4F, f, f1);
+        this.walk(leftHindThigh, speed2, 0.8F, false, 0F, 0.4F, f, f1);
+        this.walk(rightHindThigh, speed2, 0.8F, true, 0F, 0.4F, f, f1);
+        this.walk(leftFrontLeg, speed2, 0.6F, true, 0F, 0.4F, f, f1);
+        this.walk(rightFrontLeg, speed2, 0.6F, false, 0F, 0.4F, f, f1);
+        this.walk(leftHindLeg, speed2, 0.6F, false, 0F, 0.4F, f, f1);
+        this.walk(rightHindLeg, speed2, 0.6F, true, 0F, 0.4F, f, f1);
         {
             float sitProgress = ((EntityPrehistoric) (entity)).sitProgress;
             sitAnimationRotation(upperBody, sitProgress, (float) Math.toRadians(26.09D), 0, 0);

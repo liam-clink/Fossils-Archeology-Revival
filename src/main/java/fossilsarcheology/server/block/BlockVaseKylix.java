@@ -5,8 +5,6 @@ import fossilsarcheology.server.block.entity.TileEntityVase;
 import fossilsarcheology.server.creativetab.FATabRegistry;
 import fossilsarcheology.server.handler.LocalizationStrings;
 import fossilsarcheology.server.item.block.VaseKylixBlockItem;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -20,22 +18,24 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
 public class BlockVaseKylix extends BlockContainer implements IBlockItem {
-    public static final String[] shortname = {"damaged_kylix", "restored_kylix", "redFigure_kylix", "blackFigure_kylix", "porcelain_kylix",};
+    public static final String[] shortname = { "damaged_kylix", "restored_kylix", "redFigure_kylix", "blackFigure_kylix", "porcelain_kylix", };
 
     private IIcon[] icons;
     private int getMeta;
 
     public BlockVaseKylix() {
         super(Material.clay);
-        setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
-        setBlockName(LocalizationStrings.VASE_KYLIX);
+        setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
+        setUnlocalizedName(LocalizationStrings.VASE_KYLIX);
     }
 
     @Override
@@ -122,9 +122,9 @@ public class BlockVaseKylix extends BlockContainer implements IBlockItem {
     }
 
     @Override
-    public void breakBlock(World world, int x, int y, int z, Block oldBlock, int oldMeta) {
-        this.getMeta = getDamageValue(world, x, y, z);
-        super.breakBlock(world, x, y, z, oldBlock, oldMeta);
+    public void breakBlock(World world, BlockPos pos, Block oldBlock, int oldMeta) {
+        this.getMeta = getDamageValue(world, pos);
+        super.breakBlock(world, pos, oldBlock, oldMeta);
     }
 
     /**

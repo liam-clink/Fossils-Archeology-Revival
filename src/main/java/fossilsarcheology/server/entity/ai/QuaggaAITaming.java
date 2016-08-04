@@ -4,7 +4,6 @@ import fossilsarcheology.server.entity.mob.EntityQuagga;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.RandomPositionGenerator;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.Vec3;
 
 public class QuaggaAITaming extends EntityAIBase {
     private EntityQuagga horseHost;
@@ -25,7 +24,7 @@ public class QuaggaAITaming extends EntityAIBase {
     @Override
     public boolean shouldExecute() {
         if (!this.horseHost.isTame() && this.horseHost.riddenByEntity != null) {
-            Vec3 vec3 = RandomPositionGenerator.findRandomTarget(this.horseHost, 5, 4);
+            Vec3d vec3 = RandomPositionGenerator.findRandomTarget(this.horseHost, 5, 4);
 
             if (vec3 == null) {
                 return false;

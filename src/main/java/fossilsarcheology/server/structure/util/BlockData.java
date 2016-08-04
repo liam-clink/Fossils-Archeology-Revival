@@ -1,9 +1,11 @@
 package fossilsarcheology.server.structure.util;
 
+import net.minecraft.util.math.BlockPos;
+
 public class BlockData {
     private final int posX, posY, posZ, blockId, metadata, customData1, customData2;
 
-    public BlockData(int x, int y, int z, int id, int meta, int data1, int data2) {
+    public BlockData(BlockPos pos, int id, int meta, int data1, int data2) {
         posX = x;
         posY = y;
         posZ = z;

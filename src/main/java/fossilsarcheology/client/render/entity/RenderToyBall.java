@@ -8,7 +8,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.util.ResourceLocation;
-import org.lwjgl.opengl.GL11;
 
 public class RenderToyBall extends RenderLiving {
 
@@ -18,7 +17,7 @@ public class RenderToyBall extends RenderLiving {
 
     protected void preRenderCallback(EntityLivingBase living, float f) {
         int i = BlockColored.func_150032_b(((EntityToyBall) living).getColor());
-        GL11.glColor3f(EntitySheep.fleeceColorTable[i][0], EntitySheep.fleeceColorTable[i][1], EntitySheep.fleeceColorTable[i][2]);
+        GlStateManager.color(EntitySheep.fleeceColorTable[i][0], EntitySheep.fleeceColorTable[i][1], EntitySheep.fleeceColorTable[i][2]);
     }
 
     @Override

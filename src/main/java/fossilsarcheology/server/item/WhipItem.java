@@ -1,13 +1,13 @@
 package fossilsarcheology.server.item;
 
 import fossilsarcheology.server.entity.EntityPrehistoric;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemCarrotOnAStick;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class WhipItem extends ItemCarrotOnAStick {
     public WhipItem() {
@@ -49,7 +49,7 @@ public class WhipItem extends ItemCarrotOnAStick {
             player.ridingEntity.playSound("fossil:whip", 1.0F, 1.0F);
         } else {
             /*
-			 * if (!W.isRemote) { W.spawnEntityInWorld(new
+             * if (!W.isRemote) { W.spawnEntityInWorld(new
 			 * EntityWhipAttachment(W, P)); }
 			 */
             player.swingItem();

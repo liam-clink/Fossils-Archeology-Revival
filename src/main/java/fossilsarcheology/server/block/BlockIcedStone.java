@@ -18,9 +18,9 @@ public class BlockIcedStone extends Block {
         this.setHarvestLevel("pickaxe", 1);
         setHardness(1.5F);
         setResistance(10.0F);
-        setStepSound(Block.soundTypeStone);
-        setBlockName(LocalizationStrings.BLOCK_ICEDSTONE_NAME);
-        setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
+        setSoundType(Block.soundTypeStone);
+        setUnlocalizedName(LocalizationStrings.BLOCK_ICEDSTONE_NAME);
+        setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
     }
 
     /**
@@ -64,7 +64,7 @@ public class BlockIcedStone extends Block {
 
     /**
      * Lets the block know when one of its neighbor changes. Doesn't know which
-     * neighbor changed (coordinates passed are their own) Args: x, y, z,
+     * neighbor changed (coordinates passed are their own) Args: pos,
      * neighbor blockID
      */
     public void onNeighborBlockChange(World var1, int var2, int var3, int var4, int var5) {
@@ -93,7 +93,7 @@ public class BlockIcedStone extends Block {
      * Args: side, metadata
      */
     /*
-	 * public int getBlockTextureFromSideAndMetadata(int var1, int var2) {
+     * public int getBlockTextureFromSideAndMetadata(int var1, int var2) {
 	 * return var2 == 1 ? this.blockIndexInTexture : this.blockIndexInTexture +
 	 * 1; }
 	 */

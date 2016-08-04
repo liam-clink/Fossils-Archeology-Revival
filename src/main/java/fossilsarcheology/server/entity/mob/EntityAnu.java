@@ -9,8 +9,18 @@ import fossilsarcheology.server.entity.ai.AnuAIFireballAttack;
 import fossilsarcheology.server.gen.feature.SpikesBlockWorldGen;
 import fossilsarcheology.server.handler.FossilAchievementHandler;
 import fossilsarcheology.server.item.FAItemRegistry;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.IEntityLivingData;
+import net.minecraft.entity.IRangedAttackMob;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.boss.IBossDisplayData;
 import net.minecraft.entity.monster.EntityBlaze;
 import net.minecraft.entity.monster.EntityGhast;
@@ -24,7 +34,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.*;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -119,7 +129,7 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
                                 if (itemstack.getItem() == FAItemRegistry.INSTANCE.ancientSword) {
 
                                     if (!this.worldObj.isRemote) {
-                                        ((EntityPlayer) targetEntity).addChatMessage(new ChatComponentText(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.mySword")));
+                                        Revival.messagePlayer(I18n.translateToLocal("entity.fossil.PigBoss.name") + ": " + I18n.translateToLocal("anuSpeaker.mySword"), (EntityPlayer) targetEntity);
                                     }
 
                                     return super.attackEntityFrom(damageSource, var2);
@@ -128,7 +138,7 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
                                 if (itemstack.getItem() != FAItemRegistry.INSTANCE.ancientSword && itemstack.getItem() instanceof ItemSword) {
 
                                     if (!this.worldObj.isRemote) {
-                                        ((EntityPlayer) targetEntity).addChatMessage(new ChatComponentText(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.draw")));
+                                        Revival.messagePlayer(I18n.translateToLocal("entity.fossil.PigBoss.name") + ": " + I18n.translateToLocal("anuSpeaker.draw"), (EntityPlayer) targetEntity);
                                     }
 
                                     return super.attackEntityFrom(damageSource, var2);
@@ -136,7 +146,7 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
 
                                 if (damageSource.damageType.equals("arrow")) {
                                     if (!this.worldObj.isRemote) {
-                                        ((EntityPlayer) targetEntity).addChatMessage(new ChatComponentText(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.coward")));
+                                        Revival.messagePlayer(I18n.translateToLocal("entity.fossil.PigBoss.name") + ": " + I18n.translateToLocal("anuSpeaker.coward"), (EntityPlayer) targetEntity);
                                     }
 
                                     return super.attackEntityFrom(damageSource, var2);
@@ -169,9 +179,9 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
 
         if (entityplayer != null && this.canEntityBeSeen(entityplayer)) {
             if (this.getRNG().nextInt(1) == 0) {
-                entityplayer.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.hello")));
+                Revival.messagePlayer(I18n.translateToLocal("entity.fossil.PigBoss.name") + ": " + I18n.translateToLocal("anuSpeaker.hello"), entityplayer);
             } else {
-                entityplayer.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.fewBeaten")));
+                Revival.messagePlayer(I18n.translateToLocal("entity.fossil.PigBoss.name") + ": " + I18n.translateToLocal("anuSpeaker.fewBeaten"), entityplayer);
             }
 
             super.findPlayerToAttack();
@@ -200,10 +210,7 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
             this.worldObj.spawnEntityInWorld(entity);
         }
         entity.setHealth(0F);
-        EntityPlayer player = this.worldObj.getClosestPlayerToEntity(this, 50);
-        if (player != null) {
-            player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.no")));
-        }
+        Revival.messagePlayer(I18n.translateToLocal("entity.fossil.PigBoss.name") + ": " + I18n.translateToLocal("anuSpeaker.no"), this.worldObj.getClosestPlayerToEntity(this, 50));
         super.onDeath(dmg);
     }
 
@@ -329,26 +336,16 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
                 }
             }
             if (spawnPigmenChoice == 0) {
-                EntityPlayer player = this.worldObj.getClosestPlayerToEntity(this, 50);
-                if (player != null) {
-                    player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.trans")));
-                }
-
+                Revival.messagePlayer(I18n.translateToLocal("entity.fossil.PigBoss.name") + ": " + I18n.translateToLocal("anuSpeaker.trans"), this.worldObj.getClosestPlayerToEntity(this, 50));
                 this.spawnMobs(new EntitySentryPigman(worldObj));
             }
             if (spawnWitherChoice == 0) {
                 this.spawnMobs(new EntitySkeleton(worldObj));
-                EntityPlayer player = this.worldObj.getClosestPlayerToEntity(this, 50);
-                if (player != null) {
-                    player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.archers")));
-                }
+                Revival.messagePlayer(I18n.translateToLocal("entity.fossil.PigBoss.name") + ": " + I18n.translateToLocal("anuSpeaker.archers"), this.worldObj.getClosestPlayerToEntity(this, 50));
             }
             if (spawnBlazeChoice == 0) {
                 this.spawnMobs(new EntityBlaze(worldObj));
-                EntityPlayer player = this.worldObj.getClosestPlayerToEntity(this, 50);
-                if (player != null) {
-                    player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.blaze")));
-                }
+                Revival.messagePlayer(I18n.translateToLocal("entity.fossil.PigBoss.name") + ": " + I18n.translateToLocal("anuSpeaker.blaze"), this.worldObj.getClosestPlayerToEntity(this, 50));
             }
         }
     }
@@ -383,7 +380,7 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
         flyTowardsTarget();
     }
 
-    private void generateDefenseHutP2(int x, int y, int z) {
+    private void generateDefenseHutP2(BlockPos pos) {
         this.worldObj.setBlock(x - 3, y, z, Blocks.obsidian.setHardness(3));
         this.worldObj.setBlock(x - 3, y, z + 1, Blocks.obsidian.setHardness(3));
         this.worldObj.setBlock(x - 3, y, z + 2, Blocks.obsidian.setHardness(3));
@@ -394,19 +391,19 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
         this.worldObj.setBlock(x + 3, y, z + 2, Blocks.obsidian.setHardness(3));
         this.worldObj.setBlock(x + 3, y, z - 1, Blocks.obsidian.setHardness(3));
         this.worldObj.setBlock(x + 3, y, z - 2, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x, y, z + 3, Blocks.obsidian.setHardness(3));
+        this.worldObj.setBlock(pos + 3, Blocks.obsidian.setHardness(3));
         this.worldObj.setBlock(x + 1, y, z + 3, Blocks.obsidian.setHardness(3));
         this.worldObj.setBlock(x + 2, y, z + 3, Blocks.obsidian.setHardness(3));
         this.worldObj.setBlock(x - 1, y, z + 3, Blocks.obsidian.setHardness(3));
         this.worldObj.setBlock(x - 2, y, z + 3, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x, y, z - 3, Blocks.obsidian.setHardness(3));
+        this.worldObj.setBlock(pos - 3, Blocks.obsidian.setHardness(3));
         this.worldObj.setBlock(x + 1, y, z - 3, Blocks.obsidian.setHardness(3));
         this.worldObj.setBlock(x + 2, y, z - 3, Blocks.obsidian.setHardness(3));
         this.worldObj.setBlock(x - 1, y, z - 3, Blocks.obsidian.setHardness(3));
         this.worldObj.setBlock(x - 2, y, z - 3, Blocks.obsidian.setHardness(3));
     }
 
-    private void generateDefenseHutP1(int x, int y, int z) {
+    private void generateDefenseHutP1(BlockPos pos) {
         this.worldObj.setBlock(x, y - 1, z, Blocks.obsidian.setHardness(3));
         this.worldObj.setBlock(x + 1, y - 1, z, Blocks.obsidian.setHardness(3));
         this.worldObj.setBlock(x + 2, y - 1, z, Blocks.obsidian.setHardness(3));
@@ -452,21 +449,21 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
 
         if (entityplayer != null) {
             if (this.getRNG().nextInt(1) == 0) {
-                entityplayer.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.hello")));
+                Revival.messagePlayer(I18n.translateToLocal("entity.fossil.PigBoss.name") + ": " + I18n.translateToLocal("anuSpeaker.hello"), entityplayer);
             } else {
-                entityplayer.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.fewBeaten")));
+                Revival.messagePlayer(I18n.translateToLocal("entity.fossil.PigBoss.name") + ": " + I18n.translateToLocal("anuSpeaker.fewBeaten"), entityplayer);
             }
         }
     }
 
     // 0 == melee, 1 == flight/ranged, 2 == defense
     public int getAttackMode() {
-        return this.dataWatcher.getWatchableObjectByte(19);
+        return this.dataManager.getWatchableObjectByte(19);
     }
 
     // 0 == melee, 1 == flight/ranged, 2 == defense
     public void setAttackMode(int i) {
-        this.dataWatcher.updateObject(19, (byte) i);
+        this.dataManager.updateObject(19, (byte) i);
     }
 
     /**
@@ -490,7 +487,7 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
     @Override
     protected void entityInit() {
         super.entityInit();
-        this.dataWatcher.addObject(19, (byte) 0);
+        this.dataManager.register(19, (byte) 0);
     }
 
     @Override
@@ -514,7 +511,7 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
         EntityLargeFireball entitylargefireball = new EntityLargeFireball(this.worldObj, this, d5, d6, d7);
         entitylargefireball.field_92057_e = 2;
         double d8 = 4.0D;
-        Vec3 vec3 = this.getLook(1.0F);
+        Vec3d vec3 = this.getLook(1.0F);
         entitylargefireball.posX = this.posX + vec3.xCoord * d8;
         entitylargefireball.posY = this.posY + (double) (this.height / 2.0F) + 0.5D;
         entitylargefireball.posZ = this.posZ + vec3.zCoord * d8;

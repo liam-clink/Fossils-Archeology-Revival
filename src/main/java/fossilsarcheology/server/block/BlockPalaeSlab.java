@@ -2,8 +2,6 @@ package fossilsarcheology.server.block;
 
 import fossilsarcheology.server.creativetab.FATabRegistry;
 import fossilsarcheology.server.handler.LocalizationStrings;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.material.Material;
@@ -14,12 +12,14 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 import java.util.Random;
 
 public class BlockPalaeSlab extends BlockSlab {
-    public static final String[] woodType = {"palae"};
+    public static final String[] woodType = { "palae" };
 
     public BlockPalaeSlab(boolean doubleSlabbed) {
         super(doubleSlabbed, Material.wood);
@@ -27,18 +27,18 @@ public class BlockPalaeSlab extends BlockSlab {
         this.useNeighborBrightness = true;
         this.setHardness(1.4F);
         this.setResistance(7.5F);
-        this.setStepSound(Block.soundTypeWood);
+        this.setSoundType(Block.soundTypeWood);
         if (doubleSlabbed) {
-            setBlockName(LocalizationStrings.PALAE_DOUBLESLAB_NAME);
+            setUnlocalizedName(LocalizationStrings.PALAE_DOUBLESLAB_NAME);
         } else {
-            setBlockName(LocalizationStrings.PALAE_SINGLESLAB_NAME);
-            setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
+            setUnlocalizedName(LocalizationStrings.PALAE_SINGLESLAB_NAME);
+            setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
         }
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public Item getItem(World world, int x, int y, int z) {
+    public Item getItem(World world, BlockPos pos) {
         return Item.getItemFromBlock(this);
     }
 

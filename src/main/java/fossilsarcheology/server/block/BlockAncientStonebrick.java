@@ -9,9 +9,9 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 public class BlockAncientStonebrick extends Block {
     public BlockAncientStonebrick() {
         super(Material.rock);
-        this.setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
+        this.setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
         setHardness(1.5F);
-        setBlockName(LocalizationStrings.ANCIENT_STONE_BRICK_NAME);
+        setUnlocalizedName(LocalizationStrings.ANCIENT_STONE_BRICK_NAME);
     }
 
     /**

@@ -34,7 +34,7 @@ public class EnumPrehistoricAI {
     }
 
     public enum Activity {
-        DIURINAL, NOCTURNAL, BOTH, NOSLEEP;
+        DIURINAL, NOCTURNAL, BOTH, NOSLEEP
     }
 
     public enum Attacking {

@@ -2,7 +2,9 @@ package fossilsarcheology.server.gen;
 
 import fossilsarcheology.server.block.FABlockRegistry;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
@@ -13,61 +15,64 @@ public class WorldGenPalaeoraphe extends WorldGenerator {
     }
 
     @Override
-    public boolean generate(World var1, Random var2, int var3, int var4, int var5) {
-        Block j1 = var1.getBlock(var3, var4 - 1, var5);
+    public boolean generate(World world, Random random, BlockPos position) {
+        Block ground = world.getBlockState(position.down()).getBlock();
 
-        if (j1 != Blocks.grass && j1 != Blocks.dirt || var4 >= 128 - 12 - 1) {
+        if (ground != Blocks.GRASS && ground != Blocks.DIRT || position.getY() >= 128 - 12 - 1) {
             return false;
         }
 
         // int deltaY = 5;
-        int deltaY = var2.nextInt(10);
+        int deltaY = random.nextInt(10);
 
-        for (int y = (var4 - 1) + 1; y <= var4 + 10 + deltaY; y++) {
-            var1.setBlock(var3, y, var5, FABlockRegistry.INSTANCE.palmLog);
+        for (int logY = 0; logY <= deltaY + 10; logY++) {
+            world.setBlockState(position.up(logY), FABlockRegistry.INSTANCE.palmLog.getDefaultState());
         }
 
-        var4 = var4 - 5 + deltaY;
-        var1.setBlock(var3, var4 + 16, var5, FABlockRegistry.INSTANCE.palmLeaves, 8, 2);
-        var1.setBlock(var3 + 1, var4 + 15, var5, FABlockRegistry.INSTANCE.palmLeaves, 8, 2);
-        var1.setBlock(var3 + 2, var4 + 15, var5, FABlockRegistry.INSTANCE.palmLeaves, 8, 2);
-        var1.setBlock(var3 + 3, var4 + 15, var5, FABlockRegistry.INSTANCE.palmLeaves, 8, 2);
-        var1.setBlock(var3 + 4, var4 + 15, var5, FABlockRegistry.INSTANCE.palmLeaves, 8, 2);
-        var1.setBlock(var3 + 5, var4 + 14, var5, FABlockRegistry.INSTANCE.palmLeaves, 8, 2);
-        var1.setBlock(var3, var4 + 15, var5 + 1, FABlockRegistry.INSTANCE.palmLeaves, 8, 2);
-        var1.setBlock(var3, var4 + 15, var5 + 2, FABlockRegistry.INSTANCE.palmLeaves, 8, 2);
-        var1.setBlock(var3, var4 + 15, var5 + 3, FABlockRegistry.INSTANCE.palmLeaves, 8, 2);
-        var1.setBlock(var3, var4 + 15, var5 + 4, FABlockRegistry.INSTANCE.palmLeaves, 8, 2);
-        var1.setBlock(var3, var4 + 14, var5 + 5, FABlockRegistry.INSTANCE.palmLeaves, 8, 2);
-        var1.setBlock(var3 - 1, var4 + 15, var5, FABlockRegistry.INSTANCE.palmLeaves, 8, 2);
-        var1.setBlock(var3 - 2, var4 + 15, var5, FABlockRegistry.INSTANCE.palmLeaves, 8, 2);
-        var1.setBlock(var3 - 3, var4 + 15, var5, FABlockRegistry.INSTANCE.palmLeaves, 8, 2);
-        var1.setBlock(var3 - 4, var4 + 15, var5, FABlockRegistry.INSTANCE.palmLeaves, 8, 2);
-        var1.setBlock(var3 - 5, var4 + 14, var5, FABlockRegistry.INSTANCE.palmLeaves, 8, 2);
-        var1.setBlock(var3, var4 + 15, var5 - 1, FABlockRegistry.INSTANCE.palmLeaves, 8, 2);
-        var1.setBlock(var3, var4 + 15, var5 - 2, FABlockRegistry.INSTANCE.palmLeaves, 8, 2);
-        var1.setBlock(var3, var4 + 15, var5 - 3, FABlockRegistry.INSTANCE.palmLeaves, 8, 2);
-        var1.setBlock(var3, var4 + 15, var5 - 4, FABlockRegistry.INSTANCE.palmLeaves, 8, 2);
-        var1.setBlock(var3, var4 + 14, var5 - 5, FABlockRegistry.INSTANCE.palmLeaves, 8, 2);
-        var1.setBlock(var3 + 1, var4 + 15, var5 + 1, FABlockRegistry.INSTANCE.palmLeaves, 8, 2);
-        var1.setBlock(var3 + 1, var4 + 15, var5 - 1, FABlockRegistry.INSTANCE.palmLeaves, 8, 2);
-        var1.setBlock(var3 - 1, var4 + 15, var5 + 1, FABlockRegistry.INSTANCE.palmLeaves, 8, 2);
-        var1.setBlock(var3 - 1, var4 + 15, var5 - 1, FABlockRegistry.INSTANCE.palmLeaves, 8, 2);
-        var1.setBlock(var3 + 2, var4 + 15, var5 + 2, FABlockRegistry.INSTANCE.palmLeaves, 8, 2);
-        var1.setBlock(var3 + 2, var4 + 15, var5 - 2, FABlockRegistry.INSTANCE.palmLeaves, 8, 2);
-        var1.setBlock(var3 - 2, var4 + 15, var5 + 2, FABlockRegistry.INSTANCE.palmLeaves, 8, 2);
-        var1.setBlock(var3 - 2, var4 + 15, var5 - 2, FABlockRegistry.INSTANCE.palmLeaves, 8, 2);
-        var1.setBlock(var3 + 3, var4 + 14, var5 + 3, FABlockRegistry.INSTANCE.palmLeaves, 8, 2);
-        var1.setBlock(var3 + 3, var4 + 14, var5 - 3, FABlockRegistry.INSTANCE.palmLeaves, 8, 2);
-        var1.setBlock(var3 - 3, var4 + 14, var5 + 3, FABlockRegistry.INSTANCE.palmLeaves, 8, 2);
-        var1.setBlock(var3 - 3, var4 + 14, var5 - 3, FABlockRegistry.INSTANCE.palmLeaves, 8, 2);
+        position = position.up(deltaY - 5);
+
+        IBlockState leaves = FABlockRegistry.INSTANCE.palmLeaves.getDefaultState();
+
+        world.setBlockState(position.add(0, 16, 0), leaves, 2);
+        world.setBlockState(position.add(1, 15, 0), leaves, 2);
+        world.setBlockState(position.add(2, 15, 0), leaves, 2);
+        world.setBlockState(position.add(3, 15, 0), leaves, 2);
+        world.setBlockState(position.add(4, 15, 0), leaves, 2);
+        world.setBlockState(position.add(5, 14, 0), leaves, 2);
+        world.setBlockState(position.add(0, 15, 1), leaves, 2);
+        world.setBlockState(position.add(0, 15, 2), leaves, 2);
+        world.setBlockState(position.add(0, 15, 3), leaves, 2);
+        world.setBlockState(position.add(0, 15, 4), leaves, 2);
+        world.setBlockState(position.add(0, 14, 5), leaves, 2);
+        world.setBlockState(position.add(-1, 15, 0), leaves, 2);
+        world.setBlockState(position.add(-2, 15, 0), leaves, 2);
+        world.setBlockState(position.add(-3, 15, 0), leaves, 2);
+        world.setBlockState(position.add(-4, 15, 0), leaves, 2);
+        world.setBlockState(position.add(-5, 14, 0), leaves, 2);
+        world.setBlockState(position.add(0, 15, -1), leaves, 2);
+        world.setBlockState(position.add(0, 15, -2), leaves, 2);
+        world.setBlockState(position.add(0, 15, -3), leaves, 2);
+        world.setBlockState(position.add(0, 15, -4), leaves, 2);
+        world.setBlockState(position.add(0, 14, -5), leaves, 2);
+        world.setBlockState(position.add(1, 15, 1), leaves, 2);
+        world.setBlockState(position.add(1, 15, -1), leaves, 2);
+        world.setBlockState(position.add(-1, 15, 1), leaves, 2);
+        world.setBlockState(position.add(-1, 15, -1), leaves, 2);
+        world.setBlockState(position.add(2, 15, 2), leaves, 2);
+        world.setBlockState(position.add(2, 15, -2), leaves, 2);
+        world.setBlockState(position.add(-2, 15, 2), leaves, 2);
+        world.setBlockState(position.add(-2, 15, -2), leaves, 2);
+        world.setBlockState(position.add(3, 14, 3), leaves, 2);
+        world.setBlockState(position.add(3, 14, -3), leaves, 2);
+        world.setBlockState(position.add(-3, 14, 3), leaves, 2);
+        world.setBlockState(position.add(-3, 14, -3), leaves, 2);
         /*
-		 * var1.setBlockAndMetadata(var3 + 6, var4 + 14, var5,
-		 * Revival.palmLeaves, 8, 2, 0); var1.setBlockAndMetadata(var3, var4 +
-		 * 13, var5 + 6, Revival.palmLeaves, 8, 2, 0);
-		 * var1.setBlockAndMetadata(var3 - 6, var4 + 13, var5,
-		 * Revival.palmLeaves, 8, 2, 0); var1.setBlockAndMetadata(var3, var4 +
-		 * 13, var5 - 6, Revival.palmLeaves, 8, 2, 0);
+         * world.setBlockAndMetadata(x + 6, y + 14, z,
+		 * Revival.palmLeaves, 2, 0); world.setBlockAndMetadata(x, y +
+		 * 13, z + 6, Revival.palmLeaves, 2, 0);
+		 * world.setBlockAndMetadata(x - 6, y + 13, z,
+		 * Revival.palmLeaves, 2, 0); world.setBlockAndMetadata(x, y +
+		 * 13, z - 6, Revival.palmLeaves, 2, 0);
 		 */
         return true;
     }

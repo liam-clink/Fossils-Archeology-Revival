@@ -7,8 +7,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 
-import org.lwjgl.opengl.GL11;
-
 public class RenderFish extends RenderLiving {
 
     public RenderFish(ModelBase model) {
@@ -28,7 +26,7 @@ public class RenderFish extends RenderLiving {
     @Override
     protected void preRenderCallback(EntityLivingBase entity, float f) {
         if (entity.isChild()) {
-            GL11.glScalef(0.5F, 0.5F, 0.5F);
+            GlStateManager.scale(0.5F, 0.5F, 0.5F);
         }
     }
 

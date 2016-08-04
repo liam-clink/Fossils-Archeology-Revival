@@ -4,8 +4,6 @@ import fossilsarcheology.Revival;
 import fossilsarcheology.server.block.entity.TileEntitySifter;
 import fossilsarcheology.server.creativetab.FATabRegistry;
 import fossilsarcheology.server.handler.LocalizationStrings;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -21,6 +19,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Random;
 
@@ -39,12 +39,12 @@ public class BlockSifter extends BlockContainer {
         super(Material.wood);
         this.isActive = isActive;
         setHardness(3.0F);
-        setStepSound(Block.soundTypeMetal);
+        setSoundType(Block.soundTypeMetal);
         if (isActive) {
-            setBlockName(LocalizationStrings.BLOCK_SIFTER_ACTIVE);
+            setUnlocalizedName(LocalizationStrings.BLOCK_SIFTER_ACTIVE);
         } else {
-            setBlockName(LocalizationStrings.BLOCK_SIFTER_IDLE);
-            setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
+            setUnlocalizedName(LocalizationStrings.BLOCK_SIFTER_IDLE);
+            setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
         }
     }
 
@@ -52,42 +52,42 @@ public class BlockSifter extends BlockContainer {
      * Update which block ID the furnace is using depending on whether or not it
      * is burning
      */
-    public static void updateFurnaceBlockState(boolean isActive, World world, int x, int y, int z) {
-        int l = world.getBlockMetadata(x, y, z);
-        TileEntity tileentity = world.getTileEntity(x, y, z);
+    public static void updateFurnaceBlockState(boolean isActive, World world, BlockPos pos) {
+        int l = world.getBlockMetadata(pos);
+        TileEntity tileentity = world.getTileEntity(pos);
         keepFurnaceInventory = true;
 
         if (isActive) {
-            world.setBlock(x, y, z, FABlockRegistry.INSTANCE.blockSifterActive);
+            world.setBlock(pos, FABlockRegistry.INSTANCE.blockSifterActive);
         } else {
-            world.setBlock(x, y, z, FABlockRegistry.INSTANCE.blockSifterIdle);
+            world.setBlock(pos, FABlockRegistry.INSTANCE.blockSifterIdle);
         }
 
         keepFurnaceInventory = false;
-        world.setBlockMetadataWithNotify(x, y, z, l, 2);
+        world.setBlockMetadataWithNotify(pos, l, 2);
 
         if (tileentity != null) {
             tileentity.validate();
-            world.setTileEntity(x, y, z, tileentity);
+            world.setTileEntity(pos, tileentity);
         }
     }
 
     /**
-     * Called whenever the block is added into the world. Args: world, x, y, z
+     * Called whenever the block is added into the world. Args: world, pos
      */
     @Override
-    public void onBlockAdded(World world, int x, int y, int z) {
-        super.onBlockAdded(world, x, y, z);
-        this.setDefaultDirection(world, x, y, z);
+    public void onBlockAdded(World world, BlockPos pos) {
+        super.onBlockAdded(world, pos);
+        this.setDefaultDirection(world, pos);
     }
 
     /**
      * set a blocks direction
      */
-    private void setDefaultDirection(World world, int x, int y, int z) {
+    private void setDefaultDirection(World world, BlockPos pos) {
         if (!world.isRemote) {
-            Block block = world.getBlock(x, y, z - 1);
-            Block block1 = world.getBlock(x, y, z + 1);
+            Block block = world.getBlock(pos - 1);
+            Block block1 = world.getBlock(pos + 1);
             Block block2 = world.getBlock(x - 1, y, z);
             Block block3 = world.getBlock(x + 1, y, z);
             byte b0 = 3;
@@ -108,7 +108,7 @@ public class BlockSifter extends BlockContainer {
                 b0 = 4;
             }
 
-            world.setBlockMetadataWithNotify(x, y, z, b0, 2);
+            world.setBlockMetadataWithNotify(pos, b0, 2);
         }
     }
 
@@ -138,7 +138,7 @@ public class BlockSifter extends BlockContainer {
      * Returns the block texture based on the side being looked at. Args: side
      */
     /*
-	 * public int getBlockTextureFromSide(int var1) { return var1 == 1 ? 36 :
+     * public int getBlockTextureFromSide(int var1) { return var1 == 1 ? 36 :
 	 * (var1 == 0 ? 36 : (var1 == 3 ? 20 : 20)); }
 	 */
     @Override
@@ -190,7 +190,7 @@ public class BlockSifter extends BlockContainer {
 	 * 
 	 * if (var6 == 3)var1.setBlockMetadataWithNotify(var2, var3, var4, 4,2); }
 	 */
-    private void ReturnIron(World world, int x, int y, int z) {
+    private void ReturnIron(World world, BlockPos pos) {
         ItemStack itemstack = new ItemStack(Items.iron_ingot, 3);
         float var6 = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
         float var7 = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
@@ -218,9 +218,9 @@ public class BlockSifter extends BlockContainer {
      * update, as appropriate
      */
     @Override
-    public void breakBlock(World world, int x, int y, int z, Block block, int var6) {
+    public void breakBlock(World world, BlockPos pos, Block block, int var6) {
         if (!keepFurnaceInventory) {
-            TileEntitySifter tileentity = (TileEntitySifter) world.getTileEntity(x, y, z);
+            TileEntitySifter tileentity = (TileEntitySifter) world.getTileEntity(pos);
 
             if (tileentity != null) {
                 for (int i = 0; i < tileentity.getSizeInventory(); ++i) {
@@ -253,11 +253,11 @@ public class BlockSifter extends BlockContainer {
                         }
                     }
                 }
-                world.func_147453_f(x, y, z, block);
+                world.func_147453_f(pos, block);
             }
         }
 
-        super.breakBlock(world, x, y, z, block, var6);
+        super.breakBlock(world, pos, block, var6);
     }
 
     /**
@@ -285,7 +285,7 @@ public class BlockSifter extends BlockContainer {
     /**
      * only called by clickMiddleMouseButton , and passed to inventory.setCurrentItem (along with isCreative)
      */
-    public Item getItem(World world, int x, int y, int z) {
+    public Item getItem(World world, BlockPos pos) {
         return Item.getItemFromBlock(FABlockRegistry.INSTANCE.blockSifterIdle);
     }
 }

@@ -236,7 +236,7 @@ public class ModelDeinonychus extends ModelPrehistoric {
 
     public void animate(IAnimatedEntity entity, float f, float f1, float f2, float f3, float f4, float f5) {
         EntityDeinonychus deinonychus = (EntityDeinonychus) entity;
-        AdvancedModelRenderer[] neckParts = {this.neck, this.head};
+        AdvancedModelRenderer[] neckParts = { this.neck, this.head };
         animator.update(entity);
         blockMovement(f, f1, f2, f3, f4, f5, (Entity) entity);
         this.resetToDefaultPose();
@@ -246,7 +246,7 @@ public class ModelDeinonychus extends ModelPrehistoric {
         animator.move(lowerJaw, 0, 0, 0.5F);
         ModelUtils.rotate(animator, lowerJaw, 30, 0, 0);
         animator.endKeyframe();
-        animator.resetKeyframe(10);       
+        animator.resetKeyframe(10);
         animator.setAnimation(deinonychus.ATTACK_ANIMATION);
         animator.startKeyframe(15);
         animator.move(leftThigh, 0, 3.2F, -0.5F);
@@ -282,13 +282,13 @@ public class ModelDeinonychus extends ModelPrehistoric {
 
     @Override
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
-        AdvancedModelRenderer[] tailParts = {this.tail1, this.tail2, this.tail3};
-        AdvancedModelRenderer[] neckParts = {this.neck, this.head};
-        AdvancedModelRenderer[] leftArmParts = {this.leftUpperArm, this.leftLowerArm};
-        AdvancedModelRenderer[] rightArmParts = {this.rightUpperArm, this.rightLowerArm};
-		if(((EntityPrehistoric) entity).isSkeleton()){
-			return;
-		}
+        AdvancedModelRenderer[] tailParts = { this.tail1, this.tail2, this.tail3 };
+        AdvancedModelRenderer[] neckParts = { this.neck, this.head };
+        AdvancedModelRenderer[] leftArmParts = { this.leftUpperArm, this.leftLowerArm };
+        AdvancedModelRenderer[] rightArmParts = { this.rightUpperArm, this.rightLowerArm };
+        if (((EntityPrehistoric) entity).isSkeleton()) {
+            return;
+        }
         ModelUtils.faceTargetMod(neck, f3, f4, 0.5F);
         ModelUtils.faceTargetMod(head, f3, f4, 0.5F);
         float speed = 0.1F;
@@ -385,12 +385,12 @@ public class ModelDeinonychus extends ModelPrehistoric {
         this.chainSwing(tailParts, speed2, degree * 0.25F, -3, f, f1);
         this.chainWave(neckParts, speed, degree * 0.15F, 3, entity.ticksExisted, 1);
 
-		this.walk(leftThigh, speed2, 0.6F, false, 0F, 0.4F, f, f1);
-		this.walk(leftLeg, speed2, 0.2F, false, 0F, -0.6F, f, f1);
-		this.walk(leftFoot, speed2, -0.6F, true, 2.5F, -0.4F, f, f1);
-		this.walk(rightThigh, speed2, 0.6F, true, 0F, -0.4F, f, f1);
-		this.walk(rightLeg, speed2, 0.2F, true, 0F, 0.6F, f, f1);
-		this.walk(rightFoot, speed2, -0.6F, false, 2.5F, 0.4F, f, f1);
+        this.walk(leftThigh, speed2, 0.6F, false, 0F, 0.4F, f, f1);
+        this.walk(leftLeg, speed2, 0.2F, false, 0F, -0.6F, f, f1);
+        this.walk(leftFoot, speed2, -0.6F, true, 2.5F, -0.4F, f, f1);
+        this.walk(rightThigh, speed2, 0.6F, true, 0F, -0.4F, f, f1);
+        this.walk(rightLeg, speed2, 0.2F, true, 0F, 0.6F, f, f1);
+        this.walk(rightFoot, speed2, -0.6F, false, 2.5F, 0.4F, f, f1);
         this.chainWave(neckParts, speed2, degree * 0.5F, 3, f, f1);
         this.chainWave(tailParts, speed2, degree * 0.3F, -4, f, f1);
 

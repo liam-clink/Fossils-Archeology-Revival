@@ -2,8 +2,6 @@ package fossilsarcheology.server.item;
 
 import fossilsarcheology.Revival;
 import fossilsarcheology.server.creativetab.FATabRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
@@ -11,11 +9,13 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class AncientHelmetItem extends ItemArmor {
     public AncientHelmetItem(ArmorMaterial par2ArmorMaterial, int par3, int par4) {
         super(par2ArmorMaterial, par3, par4);
-        this.setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
+        this.setCreativeTab(FATabRegistry.INSTANCE.ITEMS);
     }
 
     @Override

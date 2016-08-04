@@ -1,5 +1,28 @@
 package fossilsarcheology.server.entity.mob;
 
+import fossilsarcheology.server.entity.EntityPrehistoric;
+import fossilsarcheology.server.entity.ai.DinoAIAttackOnCollide;
+import fossilsarcheology.server.entity.ai.DinoAIEatBlocks;
+import fossilsarcheology.server.entity.ai.DinoAIEatFeeders;
+import fossilsarcheology.server.entity.ai.DinoAIEatItems;
+import fossilsarcheology.server.entity.ai.DinoAIFollowOwner;
+import fossilsarcheology.server.entity.ai.DinoAIHunt;
+import fossilsarcheology.server.entity.ai.DinoAILookIdle;
+import fossilsarcheology.server.entity.ai.DinoAIRiding;
+import fossilsarcheology.server.entity.ai.DinoAIWander;
+import fossilsarcheology.server.entity.ai.DinoAIWatchClosest;
+import fossilsarcheology.server.enums.EnumPrehistoricAI.Activity;
+import fossilsarcheology.server.enums.EnumPrehistoricAI.Attacking;
+import fossilsarcheology.server.enums.EnumPrehistoricAI.Climbing;
+import fossilsarcheology.server.enums.EnumPrehistoricAI.Following;
+import fossilsarcheology.server.enums.EnumPrehistoricAI.Jumping;
+import fossilsarcheology.server.enums.EnumPrehistoricAI.Moving;
+import fossilsarcheology.server.enums.EnumPrehistoricAI.Response;
+import fossilsarcheology.server.enums.EnumPrehistoricAI.Stalking;
+import fossilsarcheology.server.enums.EnumPrehistoricAI.Taming;
+import fossilsarcheology.server.enums.EnumPrehistoricAI.Untaming;
+import fossilsarcheology.server.enums.EnumPrehistoricAI.WaterAbility;
+import fossilsarcheology.server.enums.PrehistoricEntityType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
@@ -12,34 +35,11 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
-import fossilsarcheology.server.entity.EntityPrehistoric;
-import fossilsarcheology.server.entity.ai.DinoAIAttackOnCollide;
-import fossilsarcheology.server.entity.ai.DinoAIEatBlocks;
-import fossilsarcheology.server.entity.ai.DinoAIEatFeeders;
-import fossilsarcheology.server.entity.ai.DinoAIEatItems;
-import fossilsarcheology.server.entity.ai.DinoAIFollowOwner;
-import fossilsarcheology.server.entity.ai.DinoAIHunt;
-import fossilsarcheology.server.entity.ai.DinoAILookIdle;
-import fossilsarcheology.server.entity.ai.DinoAIRiding;
-import fossilsarcheology.server.entity.ai.DinoAIWander;
-import fossilsarcheology.server.entity.ai.DinoAIWatchClosest;
-import fossilsarcheology.server.enums.EnumPrehistoric;
-import fossilsarcheology.server.enums.EnumPrehistoricAI.Activity;
-import fossilsarcheology.server.enums.EnumPrehistoricAI.Attacking;
-import fossilsarcheology.server.enums.EnumPrehistoricAI.Climbing;
-import fossilsarcheology.server.enums.EnumPrehistoricAI.Following;
-import fossilsarcheology.server.enums.EnumPrehistoricAI.Jumping;
-import fossilsarcheology.server.enums.EnumPrehistoricAI.Moving;
-import fossilsarcheology.server.enums.EnumPrehistoricAI.Response;
-import fossilsarcheology.server.enums.EnumPrehistoricAI.Stalking;
-import fossilsarcheology.server.enums.EnumPrehistoricAI.Taming;
-import fossilsarcheology.server.enums.EnumPrehistoricAI.Untaming;
-import fossilsarcheology.server.enums.EnumPrehistoricAI.WaterAbility;
 
 public class EntityAnkylosaurus extends EntityPrehistoric {
 
     public EntityAnkylosaurus(World world) {
-        super(world, EnumPrehistoric.Ankylosaurus, 2, 9, 25, 70, 0.25, 0.45);
+        super(world, PrehistoricEntityType.ANKYLOSAURUS, 2, 9, 25, 70, 0.25, 0.45);
         this.getNavigator().setAvoidsWater(true);
         this.getNavigator().setCanSwim(true);
         this.tasks.addTask(1, new EntityAISwimming(this));
@@ -59,8 +59,8 @@ public class EntityAnkylosaurus extends EntityPrehistoric {
         this.targetTasks.addTask(4, new DinoAIHunt(this, 20, false));
         this.setActualSize(1.7F, 1.0F);
         this.nearByMobsAllowed = 6;
-        minSize = 0.5F;
-        maxSize = 2.0F;
+        minSize = 1.0F;
+        maxSize = 3.0F;
         teenAge = 5;
         developsResistance = true;
         breaksBlocks = true;
@@ -189,13 +189,13 @@ public class EntityAnkylosaurus extends EntityPrehistoric {
         }
         return false;
     }
-    
+
     public int getMaxHunger() {
         return 175;
     }
-    
-	@Override
-	public boolean canBeRidden() {
-		return true;
-	}
+
+    @Override
+    public boolean canBeRidden() {
+        return true;
+    }
 }

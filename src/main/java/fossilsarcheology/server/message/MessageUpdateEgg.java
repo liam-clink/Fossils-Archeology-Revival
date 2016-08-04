@@ -1,16 +1,16 @@
 package fossilsarcheology.server.message;
 
 import fossilsarcheology.server.entity.EntityDinosaurEgg;
-import fossilsarcheology.server.enums.EnumPrehistoric;
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import fossilsarcheology.server.enums.PrehistoricEntityType;
 import io.netty.buffer.ByteBuf;
 import net.ilexiconn.llibrary.server.network.AbstractMessage;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.server.MinecraftServer;
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class MessageUpdateEgg extends AbstractMessage<MessageUpdateEgg> {
 
@@ -32,7 +32,7 @@ public class MessageUpdateEgg extends AbstractMessage<MessageUpdateEgg> {
 
         if (entity instanceof EntityDinosaurEgg) {
             EntityDinosaurEgg egg = (EntityDinosaurEgg) entity;
-            egg.selfType = EnumPrehistoric.values()[message.ordinal];
+            egg.selfType = PrehistoricEntityType.values()[message.ordinal];
         }
     }
 

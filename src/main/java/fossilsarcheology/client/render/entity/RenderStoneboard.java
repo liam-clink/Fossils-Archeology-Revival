@@ -13,17 +13,17 @@ public class RenderStoneboard extends Render {
 
     public void func_158_a(EntityStoneboard entitystoneboard, double var2, double var4, double var6, float var8, float var9) {
         if (entitystoneboard.art != null) {
-            GL11.glPushMatrix();
-            GL11.glTranslatef((float) var2, (float) var4, (float) var6);
-            GL11.glRotatef(var8, 0.0F, 1.0F, 0.0F);
+            GlStateManager.pushMatrix();
+            GlStateManager.translate((float) var2, (float) var4, (float) var6);
+            GlStateManager.rotate(var8, 0.0F, 1.0F, 0.0F);
             GL11.glEnable(GL12.GL_RESCALE_NORMAL);
             this.renderManager.renderEngine.bindTexture(new ResourceLocation("fossil:textures/Stone_Boards.png"));
             EnumStoneboard var10 = entitystoneboard.art;
             float var11 = 0.0625F;
-            GL11.glScalef(var11, var11, var11);
+            GlStateManager.scale(var11, var11, var11);
             this.func_159_a(entitystoneboard, var10.sizeX, var10.sizeY, var10.offsetX, var10.offsetY);
             GL11.glDisable(GL12.GL_RESCALE_NORMAL);
-            GL11.glPopMatrix();
+            GlStateManager.popMatrix();
         }
     }
 
@@ -95,7 +95,7 @@ public class RenderStoneboard extends Render {
 
     private void func_160_a(EntityStoneboard var1, float var2, float var3) {
         /*
-		 * int var4 = MathHelper.floor_double(var1.posX); int var5 =
+         * int var4 = MathHelper.floor_double(var1.posX); int var5 =
 		 * MathHelper.floor_double(var1.posY + (double)(var3 / 16.0F)); int var6
 		 * = MathHelper.floor_double(var1.posZ);
 		 * 
@@ -111,7 +111,7 @@ public class RenderStoneboard extends Render {
 		 * if (var1.direction == 3) { var6 = MathHelper.floor_double(var1.posZ +
 		 * (double)(var2 / 16.0F)); }
 		 */
-        GL11.glColor3f(1.0F, 1.0F, 1.0F);
+        GlStateManager.color(1.0F, 1.0F, 1.0F);
     }
 
     /**

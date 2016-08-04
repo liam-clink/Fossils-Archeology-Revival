@@ -1,8 +1,8 @@
 package fossilsarcheology.server.handler;
 
 import fossilsarcheology.server.block.FABlockRegistry;
-import fossilsarcheology.server.enums.EnumMobType;
-import fossilsarcheology.server.enums.EnumPrehistoric;
+import fossilsarcheology.server.enums.MobType;
+import fossilsarcheology.server.enums.PrehistoricEntityType;
 import fossilsarcheology.server.item.FAItemRegistry;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
@@ -34,6 +34,7 @@ public class FossilOreDictionary {
         OreDictionary.registerOre("skull", new ItemStack(FABlockRegistry.INSTANCE.blockSkull));
         OreDictionary.registerOre("denseSand", new ItemStack(FABlockRegistry.INSTANCE.denseSand));
         OreDictionary.registerOre("skullLantern", new ItemStack(FABlockRegistry.INSTANCE.skullLantern));
+        OreDictionary.registerOre("chest", new ItemStack(FABlockRegistry.INSTANCE.ancientChest));
         OreDictionary.registerOre("stoneAncient", new ItemStack(FABlockRegistry.INSTANCE.ancientStone));
         OreDictionary.registerOre("stoneAncientBrick", new ItemStack(FABlockRegistry.INSTANCE.ancientStonebrick));
         OreDictionary.registerOre("stone", new ItemStack(FABlockRegistry.INSTANCE.ancientStone));
@@ -70,12 +71,12 @@ public class FossilOreDictionary {
         OreDictionary.registerOre("dinosaurVertebrae", new ItemStack(FAItemRegistry.INSTANCE.vertebrae, 1, OreDictionary.WILDCARD_VALUE));
         OreDictionary.registerOre("dinosaurRibCage", new ItemStack(FAItemRegistry.INSTANCE.dinoRibCage, 1, OreDictionary.WILDCARD_VALUE));
 
-        for (EnumPrehistoric prehistoric : EnumPrehistoric.values()) {
+        for (PrehistoricEntityType prehistoric : PrehistoricEntityType.values()) {
             if (prehistoric.eggItem != null) {
                 OreDictionary.registerOre("listAllegg", prehistoric.eggItem);
                 OreDictionary.registerOre("objectEgg", prehistoric.eggItem);
                 OreDictionary.registerOre("bakingEgg", prehistoric.eggItem);
-                if (prehistoric.type == EnumMobType.FISH) {
+                if (prehistoric.mobType == MobType.FISH) {
                     OreDictionary.registerOre("foodRoe", prehistoric.eggItem);
                     OreDictionary.registerOre("foodCaviar", prehistoric.eggItem);
                 }
@@ -87,7 +88,7 @@ public class FossilOreDictionary {
                 OreDictionary.registerOre("listAllmeatcooked", prehistoric.cookedFoodItem);
             }
         }
-        OreDictionary.registerOre("foodCalamariraw", EnumPrehistoric.Nautilus.fishItem);
+        OreDictionary.registerOre("foodCalamariraw", PrehistoricEntityType.NAUTILUS.fishItem);
         OreDictionary.registerOre("foodCalamaricooked", FAItemRegistry.INSTANCE.sjl);
 
     }

@@ -7,7 +7,7 @@ import net.minecraft.world.World;
 import java.util.Random;
 
 public class AnuCastlePiece09 {
-    public static boolean generate_r059(World world, Random rand, int x, int y, int z) {
+    public static boolean generate_r059(World world, Random rand, BlockPos pos) {
 
         world.setBlock(x + 18, y + 6, z + 109, Blocks.nether_brick, 0, 3);
         world.setBlock(x + 19, y + 6, z + 109, Blocks.stonebrick, 0, 3);
@@ -1510,12 +1510,12 @@ public class AnuCastlePiece09 {
         world.setBlock(x + 92, y + 7, z + 18, Blocks.nether_brick, 0, 3);
         world.setBlock(x + 93, y + 7, z + 18, Blocks.nether_brick, 0, 3);
 
-        generate_r060(world, rand, x, y, z);
+        generate_r060(world, rand, pos);
         return true;
 
     }
 
-    public static boolean generate_r060(World world, Random rand, int x, int y, int z) {
+    public static boolean generate_r060(World world, Random rand, BlockPos pos) {
 
         world.setBlock(x + 94, y + 7, z + 18, Blocks.stonebrick, 0, 3);
         world.setBlock(x + 95, y + 7, z + 18, Blocks.nether_brick, 0, 3);
@@ -3017,11 +3017,11 @@ public class AnuCastlePiece09 {
         world.setBlock(x + 131, y + 7, z + 80, Blocks.nether_brick_stairs, 4, 3);
         world.setBlock(x + 132, y + 7, z + 80, Blocks.nether_brick, 0, 3);
 
-        generate_r061(world, rand, x, y, z);
+        generate_r061(world, rand, pos);
         return true;
     }
 
-    public static boolean generate_r061(World world, Random rand, int x, int y, int z) {
+    public static boolean generate_r061(World world, Random rand, BlockPos pos) {
 
         world.setBlock(x + 133, y + 7, z + 80, Blocks.nether_brick, 0, 3);
         world.setBlock(x + 134, y + 7, z + 80, Blocks.nether_brick, 0, 3);
@@ -4521,12 +4521,12 @@ public class AnuCastlePiece09 {
         world.setBlock(x + 82, y + 7, z + 134, Blocks.stone_brick_stairs, 5, 3);
         world.setBlock(x + 86, y + 7, z + 134, Blocks.stone_brick_stairs, 4, 3);
 
-        generate_r062(world, rand, x, y, z);
+        generate_r062(world, rand, pos);
         return true;
 
     }
 
-    public static boolean generate_r062(World world, Random rand, int x, int y, int z) {
+    public static boolean generate_r062(World world, Random rand, BlockPos pos) {
 
         world.setBlock(x + 87, y + 7, z + 134, Blocks.stonebrick, 0, 3);
         world.setBlock(x + 88, y + 7, z + 134, Blocks.nether_brick, 0, 3);
@@ -6029,12 +6029,12 @@ public class AnuCastlePiece09 {
         world.setBlock(x + 135, y + 8, z + 34, Blocks.nether_brick, 0, 3);
         world.setBlock(x + 4, y + 8, z + 35, Blocks.stone_brick_stairs, 6, 3);
 
-        generate_r063(world, rand, x, y, z);
+        generate_r063(world, rand, pos);
         return true;
 
     }
 
-    public static boolean generate_r063(World world, Random rand, int x, int y, int z) {
+    public static boolean generate_r063(World world, Random rand, BlockPos pos) {
 
         world.setBlock(x + 5, y + 8, z + 35, Blocks.nether_brick, 0, 3);
         world.setBlock(x + 18, y + 8, z + 35, Blocks.nether_brick, 0, 3);
@@ -7537,12 +7537,12 @@ public class AnuCastlePiece09 {
         world.setBlock(x + 10, y + 8, z + 93, Blocks.nether_brick, 0, 3);
         world.setBlock(x + 18, y + 8, z + 93, Blocks.nether_brick, 0, 3);
 
-        generate_r064(world, rand, x, y, z);
+        generate_r064(world, rand, pos);
         return true;
 
     }
 
-    public static boolean generate_r064(World world, Random rand, int x, int y, int z) {
+    public static boolean generate_r064(World world, Random rand, BlockPos pos) {
 
         world.setBlock(x + 38, y + 8, z + 93, Blocks.nether_brick, 0, 3);
         world.setBlock(x + 46, y + 8, z + 93, Blocks.stone_brick_stairs, 0, 3);
@@ -9045,7 +9045,7 @@ public class AnuCastlePiece09 {
         world.setBlock(x + 51, y + 8, z + 135, Blocks.stone_slab, 14, 3);
         world.setBlock(x + 52, y + 8, z + 135, Blocks.nether_brick, 0, 3);
 
-        AnuCastlePiece11.generate_r065(world, rand, x, y, z);
+        AnuCastlePiece11.generate_r065(world, rand, pos);
         return true;
 
     }

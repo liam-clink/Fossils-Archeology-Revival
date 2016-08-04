@@ -1,7 +1,7 @@
 package fossilsarcheology.client.model.prehistoric;
 
-import fossilsarcheology.server.entity.EntityPrehistoricFlying;
 import fossilsarcheology.server.entity.EntityPrehistoric;
+import fossilsarcheology.server.entity.EntityPrehistoricFlying;
 import fossilsarcheology.server.entity.mob.EntityPterosaur;
 import net.ilexiconn.llibrary.client.model.ModelAnimator;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
@@ -163,30 +163,31 @@ public class ModelPteranodon extends ModelPrehistoric {
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
         animator.setAnimation(pterosaur.SPEAK_ANIMATION);
         animator.startKeyframe(10);
-        ModelUtils.rotate(animator, Jaw, 40, 0, 0);
+        ModelUtils.rotate(animator, Beak1, 40, 0, 0);
         animator.endKeyframe();
         animator.resetKeyframe(10);
         animator.setAnimation(pterosaur.ATTACK_ANIMATION);
         animator.startKeyframe(10);
         ModelUtils.rotate(animator, Neck1, -41, 0, 0);
         ModelUtils.rotate(animator, Head, 57, 0, 0);
-        ModelUtils.rotate(animator, Jaw, 20, 0, 0);
+        ModelUtils.rotate(animator, Jaw, 15, 0, 0);
         animator.endKeyframe();
         animator.startKeyframe(5);
         ModelUtils.rotate(animator, Neck1, 6, 0, 0);
         ModelUtils.rotate(animator, Head, -14, 0, 0);
+        ModelUtils.rotate(animator, Jaw, -15, 0, 0);
         animator.endKeyframe();
         animator.resetKeyframe(10);
     }
 
     @Override
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
-        AdvancedModelRenderer[] neckParts = {this.Neck1, this.Neck2, this.Head};
-        AdvancedModelRenderer[] rightWingParts = {this.WingR1, this.WingR1Child_1};
-        AdvancedModelRenderer[] leftWingParts = {this.WingL1, this.WingL1Child_1};
-		if(((EntityPrehistoric) entity).isSkeleton()){
-			return;
-		}
+        AdvancedModelRenderer[] neckParts = { this.Neck1, this.Neck2, this.Head };
+        AdvancedModelRenderer[] rightWingParts = { this.WingR1, this.WingR1Child_1 };
+        AdvancedModelRenderer[] leftWingParts = { this.WingL1, this.WingL1Child_1 };
+        if (((EntityPrehistoric) entity).isSkeleton()) {
+            return;
+        }
         ModelUtils.faceTargetMod(Neck1, f3, f4, 0.3F);
         ModelUtils.faceTargetMod(Neck2, f3, f4, 0.3F);
         ModelUtils.faceTargetMod(Head, f3, f4, 0.3F);

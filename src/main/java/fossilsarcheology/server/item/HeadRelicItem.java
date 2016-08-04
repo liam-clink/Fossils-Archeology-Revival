@@ -2,8 +2,6 @@ package fossilsarcheology.server.item;
 
 import fossilsarcheology.Revival;
 import fossilsarcheology.client.model.armor.ModelHeadbandRoman;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -13,12 +11,14 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
 public class HeadRelicItem extends ItemArmor {
-    public static final String[] headbandItemNames = new String[]{"broken", "roman"};
+    public static final String[] headbandItemNames = new String[] { "broken", "roman" };
     ModelBiped headband = new ModelHeadbandRoman();
     @SideOnly(Side.CLIENT)
     private IIcon[] headbandIcons;

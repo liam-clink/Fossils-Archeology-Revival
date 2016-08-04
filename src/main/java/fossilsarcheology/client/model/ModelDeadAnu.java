@@ -3,6 +3,7 @@ package fossilsarcheology.client.model;
 import fossilsarcheology.server.entity.mob.EntityAnuDead;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import org.lwjgl.opengl.GL11;
 
@@ -78,16 +79,16 @@ public class ModelDeadAnu extends ModelBase {
     @Override
     public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
         float alpha;
-        GL11.glPushMatrix();
-        GL11.glTranslatef(0, 1.4F, 0.6F);
-        GL11.glRotatef(-90, 1, 0, 0);
+        GlStateManager.pushMatrix();
+        GlStateManager.translate(0, 1.4F, 0.6F);
+        GlStateManager.rotate(-90, 1, 0, 0);
         if (entity instanceof EntityAnuDead) {
             if (((EntityAnuDead) entity).deathTicks > 40) {
                 alpha = 1 - (((((EntityAnuDead) entity).deathTicks - 40) / 9) * 0.01F);
-                GL11.glColor4f(1.0F, 1.0F, 1.0F, alpha);
+                GlStateManager.color(1.0F, 1.0F, 1.0F, alpha);
             }
         }
-        GL11.glEnable(GL11.GL_BLEND);
+        GlStateManager.enableBlend();
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         this.field_78115_e.render(f5);
         this.field_78112_f.render(f5);
@@ -96,7 +97,7 @@ public class ModelDeadAnu extends ModelBase {
         this.field_78124_i.render(f5);
         this.Head.render(f5);
         GL11.glDisable(GL11.GL_BLEND);
-        GL11.glPopMatrix();
+        GlStateManager.popMatrix();
 
     }
 

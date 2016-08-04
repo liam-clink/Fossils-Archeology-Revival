@@ -1,15 +1,5 @@
 package fossilsarcheology.server.entity.mob;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIPanic;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.attributes.IAttributeInstance;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.util.DamageSource;
-import net.minecraft.world.World;
 import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.entity.ai.DinoAIAttackOnCollide;
 import fossilsarcheology.server.entity.ai.DinoAIEatBlocks;
@@ -20,14 +10,24 @@ import fossilsarcheology.server.entity.ai.DinoAIHunt;
 import fossilsarcheology.server.entity.ai.DinoAILookIdle;
 import fossilsarcheology.server.entity.ai.DinoAIWander;
 import fossilsarcheology.server.entity.ai.DinoAIWatchClosest;
-import fossilsarcheology.server.enums.EnumPrehistoric;
 import fossilsarcheology.server.enums.EnumPrehistoricAI;
+import fossilsarcheology.server.enums.PrehistoricEntityType;
 import fossilsarcheology.server.handler.FossilAchievementHandler;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIPanic;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.attributes.IAttributeInstance;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.util.DamageSource;
+import net.minecraft.world.World;
 
 public class EntityDodo extends EntityPrehistoric {
 
     public EntityDodo(World world) {
-        super(world, EnumPrehistoric.Dodo, 1, 1, 4, 10, 0.2, 0.25);
+        super(world, PrehistoricEntityType.DODO, 1, 1, 4, 10, 0.2, 0.25);
         this.teenAge = 3;
         this.getNavigator().setAvoidsWater(true);
         this.getNavigator().setCanSwim(true);
@@ -138,7 +138,7 @@ public class EntityDodo extends EntityPrehistoric {
     public Item getOrderItem() {
         return Items.stick;
     }
-    
+
     @Override
     public boolean isChild() {
         return !this.isSkeleton() && super.isChild();
@@ -182,16 +182,16 @@ public class EntityDodo extends EntityPrehistoric {
     public int getMaxHunger() {
         return 50;
     }
-    
-	public void onDeath(DamageSource source) {
-		if (source.getEntity() != null && source.getEntity() instanceof EntityPlayer) {
-			((EntityPlayer) source.getEntity()).triggerAchievement(FossilAchievementHandler.deadDodo);
-		}
-		super.onDeath(source);
-	}
-    
-	@Override
-	public boolean canBeRidden() {
-		return false;
-	}
+
+    public void onDeath(DamageSource source) {
+        if (source.getEntity() != null && source.getEntity() instanceof EntityPlayer) {
+            ((EntityPlayer) source.getEntity()).triggerAchievement(FossilAchievementHandler.deadDodo);
+        }
+        super.onDeath(source);
+    }
+
+    @Override
+    public boolean canBeRidden() {
+        return false;
+    }
 }

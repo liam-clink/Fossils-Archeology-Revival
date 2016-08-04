@@ -1,9 +1,7 @@
 package fossilsarcheology.client.render.entity;
 
-import fossilsarcheology.server.entity.mob.EntityQuagga;
 import com.google.common.collect.Maps;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import fossilsarcheology.server.entity.mob.EntityQuagga;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
@@ -11,7 +9,8 @@ import net.minecraft.client.renderer.texture.LayeredTexture;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
-import org.lwjgl.opengl.GL11;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Map;
 
@@ -26,7 +25,7 @@ public class RenderQuagga extends RenderLiving {
 
     protected void scale(EntityQuagga par1EntityQuagga, float par2) {
         float f1 = 1.0F;
-        GL11.glScalef(f1, f1, f1);
+        GlStateManager.scale(f1, f1, f1);
         super.preRenderCallback(par1EntityQuagga, par2);
     }
 

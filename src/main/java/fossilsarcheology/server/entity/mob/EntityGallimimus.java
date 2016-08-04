@@ -1,19 +1,5 @@
 package fossilsarcheology.server.entity.mob;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAIOwnerHurtByTarget;
-import net.minecraft.entity.ai.EntityAIOwnerHurtTarget;
-import net.minecraft.entity.ai.EntityAIPanic;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.attributes.IAttributeInstance;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.util.DamageSource;
-import net.minecraft.world.World;
 import fossilsarcheology.Revival;
 import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.entity.ai.DinoAIAttackOnCollide;
@@ -26,13 +12,26 @@ import fossilsarcheology.server.entity.ai.DinoAILookIdle;
 import fossilsarcheology.server.entity.ai.DinoAIRiding;
 import fossilsarcheology.server.entity.ai.DinoAIWander;
 import fossilsarcheology.server.entity.ai.DinoAIWatchClosest;
-import fossilsarcheology.server.enums.EnumPrehistoric;
 import fossilsarcheology.server.enums.EnumPrehistoricAI;
+import fossilsarcheology.server.enums.PrehistoricEntityType;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAIOwnerHurtByTarget;
+import net.minecraft.entity.ai.EntityAIOwnerHurtTarget;
+import net.minecraft.entity.ai.EntityAIPanic;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.attributes.IAttributeInstance;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.util.DamageSource;
+import net.minecraft.world.World;
 
 public class EntityGallimimus extends EntityPrehistoric {
 
     public EntityGallimimus(World world) {
-        super(world, EnumPrehistoric.Gallimimus, 1, 3, 8, 40, 0.25, 0.4);
+        super(world, PrehistoricEntityType.GALLIMIMUS, 1, 3, 8, 40, 0.25, 0.4);
         this.getNavigator().setAvoidsWater(true);
         this.getNavigator().setCanSwim(true);
         this.tasks.addTask(1, new EntityAISwimming(this));
@@ -162,8 +161,8 @@ public class EntityGallimimus extends EntityPrehistoric {
     @Override
     public void onLivingUpdate() {
         super.onLivingUpdate();
-        if(this.getRidingPlayer() != null){
-        	this.stepHeight = 2;
+        if (this.getRidingPlayer() != null) {
+            this.stepHeight = 2;
         }
         if (this.getAnimation() == ATTACK_ANIMATION && (this.getAnimationTick() >= 10 && this.getAnimationTick() <= 13) && this.getAttackTarget() != null) {
             this.attackEntityAsMob(this.getAttackTarget());
@@ -185,26 +184,23 @@ public class EntityGallimimus extends EntityPrehistoric {
                         entity.mountEntity(null);
                     }
                 }
-                entity.motionY += (0.1000000059604645D / 2);
+                entity.motionY += (0.2000000059604645D / 2);
+                knockbackEntity(entity, 0.5F, 0.1F);
             }
         }
         return false;
     }
 
-    @Override
-    public boolean func_142018_a(EntityLivingBase entity, EntityLivingBase thisMobsOwner) {
-        return super.func_142018_a(entity, thisMobsOwner) && isEntitySmallerThan(entity, 0.6F);
-    }
     public boolean canDinoHunt(Entity target, boolean hunger) {
-        return isEntitySmallerThan(target, 0.6F) && super.canDinoHunt(target, hunger);
+        return target.width <= 0.6D && super.canDinoHunt(target, hunger);
     }
-    
+
     public int getMaxHunger() {
         return 100;
     }
-    
-	@Override
-	public boolean canBeRidden() {
-		return true;
-	}
+
+    @Override
+    public boolean canBeRidden() {
+        return true;
+    }
 }

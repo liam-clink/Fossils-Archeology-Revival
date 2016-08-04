@@ -1,12 +1,12 @@
 package fossilsarcheology.server.item.block;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.I18n;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ public class Teir2BlockItem extends ItemBlock {
     @Override
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
-        list.add(StatCollector.translateToLocal("tile.cultureVat.teir2"));
+        list.add(I18n.translateToLocal("tile.cultureVat.teir2"));
 
     }
 }

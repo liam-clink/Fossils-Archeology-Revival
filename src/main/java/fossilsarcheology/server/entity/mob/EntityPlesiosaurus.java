@@ -1,10 +1,5 @@
 package fossilsarcheology.server.entity.mob;
 
-import net.ilexiconn.llibrary.server.animation.Animation;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.world.World;
 import fossilsarcheology.server.entity.EntityPrehistoricSwimming;
 import fossilsarcheology.server.entity.ai.DinoAIEatFeeders;
 import fossilsarcheology.server.entity.ai.DinoAIEatItems;
@@ -13,7 +8,6 @@ import fossilsarcheology.server.entity.ai.DinoAILookIdle;
 import fossilsarcheology.server.entity.ai.DinoAIMakeFish;
 import fossilsarcheology.server.entity.ai.DinoAIWatchClosest;
 import fossilsarcheology.server.entity.ai.DinoAIWaterFindTarget;
-import fossilsarcheology.server.enums.EnumPrehistoric;
 import fossilsarcheology.server.enums.EnumPrehistoricAI.Activity;
 import fossilsarcheology.server.enums.EnumPrehistoricAI.Attacking;
 import fossilsarcheology.server.enums.EnumPrehistoricAI.Climbing;
@@ -25,12 +19,18 @@ import fossilsarcheology.server.enums.EnumPrehistoricAI.Stalking;
 import fossilsarcheology.server.enums.EnumPrehistoricAI.Taming;
 import fossilsarcheology.server.enums.EnumPrehistoricAI.Untaming;
 import fossilsarcheology.server.enums.EnumPrehistoricAI.WaterAbility;
+import fossilsarcheology.server.enums.PrehistoricEntityType;
 import fossilsarcheology.server.item.FAItemRegistry;
+import net.ilexiconn.llibrary.server.animation.Animation;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.world.World;
 
 public class EntityPlesiosaurus extends EntityPrehistoricSwimming {
 
     public EntityPlesiosaurus(World world) {
-        super(world, EnumPrehistoric.Plesiosaur, 2, 12, 10, 30, 0.1, 0.1);
+        super(world, PrehistoricEntityType.PLESIOSAUR, 2, 12, 10, 30, 0.2, 0.3);
         this.getNavigator().setAvoidsWater(false);
         FISH_ANIMATION = Animation.create(40);
         this.tasks.addTask(1, this.aiSit);
@@ -139,9 +139,9 @@ public class EntityPlesiosaurus extends EntityPrehistoricSwimming {
     }
 
     public String getTexture() {
-    	if(isSkeleton()){
-    		return "fossil:textures/model/plesiosaurus_0/" + "plesiosaurus_skeleton.png";
-    	}
+        if (isSkeleton()) {
+            return "fossil:textures/model/plesiosaurus_0/" + "plesiosaurus_skeleton.png";
+        }
         String toggle = this.hasFeatherToggle ? !this.featherToggle ? "feathered/" : "scaled/" : "";
         String gender = this.getGender() == 0 ? "_female" : "_male";
         String sleeping = !this.isSleeping() ? "" : "_sleeping";
@@ -154,17 +154,17 @@ public class EntityPlesiosaurus extends EntityPrehistoricSwimming {
         return 2;
     }
 
-	public int getMaxHunger() {
-		return 125;
-	}
-	
-	@Override
-	public Animation[] getAnimations() {
-		return new Animation[] { SPEAK_ANIMATION, ATTACK_ANIMATION, FISH_ANIMATION };
-	}
+    public int getMaxHunger() {
+        return 125;
+    }
 
-	@Override
-	public boolean canBeRidden() {
-		return false;
-	}
+    @Override
+    public Animation[] getAnimations() {
+        return new Animation[] { SPEAK_ANIMATION, ATTACK_ANIMATION, FISH_ANIMATION };
+    }
+
+    @Override
+    public boolean canBeRidden() {
+        return false;
+    }
 }

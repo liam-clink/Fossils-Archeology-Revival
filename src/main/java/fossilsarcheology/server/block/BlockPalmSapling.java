@@ -14,17 +14,17 @@ import net.minecraft.world.World;
 import java.util.Random;
 
 public class BlockPalmSapling extends BlockBush implements IGrowable {
-    public static final String[] WOOD_TYPES = new String[]{"palmSapling"};
+    public static final String[] WOOD_TYPES = new String[] { "palmSapling" };
 
     public BlockPalmSapling() {
         super();
         float f = 0.4F;
         setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, f * 2.0F, 0.5F + f);
-        this.setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
-        this.setStepSound(Block.soundTypeGrass);
+        this.setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
+        this.setSoundType(Block.soundTypeGrass);
         this.setHardness(0.2F);
         this.setResistance(1F);
-        this.setBlockName(LocalizationStrings.PALAE_SAP_NAME);
+        this.setUnlocalizedName(LocalizationStrings.PALAE_SAP_NAME);
     }
 
     /**
@@ -61,7 +61,7 @@ public class BlockPalmSapling extends BlockBush implements IGrowable {
         }
     }
 
-    public boolean canGenerate(World world, int x, int y, int z) {
+    public boolean canGenerate(World world, BlockPos pos) {
         int i;
         for (i = 0; i < 13; i++) {
             if (world.getBlock(x, y + i, z).isOpaqueCube()) {

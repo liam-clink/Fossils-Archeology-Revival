@@ -16,7 +16,7 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 import java.util.Random;
 
 public class AnuCastleWorldGen extends WorldGenerator {
-    protected static final WeightedRandomChestContent[] treasure = new WeightedRandomChestContent[]{new WeightedRandomChestContent(Item.getItemFromBlock(FABlockRegistry.INSTANCE.ancientGlass), 0, 2, 5, 25), new WeightedRandomChestContent(FAItemRegistry.INSTANCE.relic, 0, 1, 2, 76), new WeightedRandomChestContent(FAItemRegistry.INSTANCE.ancientSword, 0, 1, 3, 15), new WeightedRandomChestContent(Item.getItemFromBlock(FABlockRegistry.INSTANCE.blockSkull), 0, 1, 2, 70), new WeightedRandomChestContent(Item.getItemFromBlock(FABlockRegistry.INSTANCE.skullLantern), 0, 1, 2, 55), new WeightedRandomChestContent(Item.getItemFromBlock(FABlockRegistry.INSTANCE.drum), 0, 1, 1, 38), new WeightedRandomChestContent(FAItemRegistry.INSTANCE.potteryShards, 0, 1, 3, 80), new WeightedRandomChestContent(FAItemRegistry.INSTANCE.goldjavelin, 0, 1, 1, 33), new WeightedRandomChestContent(FAItemRegistry.INSTANCE.ironjavelin, 0, 1, 1, 56), new WeightedRandomChestContent(FAItemRegistry.INSTANCE.stoneboard, 0, 1, 3, 75), new WeightedRandomChestContent(Items.bone, 0, 1, 3, 85), new WeightedRandomChestContent(Items.emerald, 0, 1, 3, 25), new WeightedRandomChestContent(Items.flint, 0, 1, 3, 55), new WeightedRandomChestContent(Items.blaze_rod, 0, 1, 3, 10), new WeightedRandomChestContent(Items.ghast_tear, 0, 1, 2, 15), new WeightedRandomChestContent(Items.golden_carrot, 0, 1, 2, 25), new WeightedRandomChestContent(Item.getItemFromBlock(Blocks.bookshelf), 0, 1, 5, 55), new WeightedRandomChestContent(Item.getItemFromBlock(Blocks.glowstone), 0, 1, 4, 65), new WeightedRandomChestContent(Item.getItemFromBlock(Blocks.obsidian), 0, 1, 6, 55), new WeightedRandomChestContent(Items.netherbrick, 0, 1, 12, 65), new WeightedRandomChestContent(FAItemRegistry.INSTANCE.recordNano_Anu, 0, 1, 1, 6), new WeightedRandomChestContent(Items.netherbrick, 0, 1, 12, 65),
+    protected static final WeightedRandomChestContent[] treasure = new WeightedRandomChestContent[] { new WeightedRandomChestContent(Item.getItemFromBlock(FABlockRegistry.INSTANCE.ancientGlass), 0, 2, 5, 25), new WeightedRandomChestContent(FAItemRegistry.INSTANCE.relic, 0, 1, 2, 76), new WeightedRandomChestContent(FAItemRegistry.INSTANCE.ancientSword, 0, 1, 3, 15), new WeightedRandomChestContent(Item.getItemFromBlock(FABlockRegistry.INSTANCE.blockSkull), 0, 1, 2, 70), new WeightedRandomChestContent(Item.getItemFromBlock(FABlockRegistry.INSTANCE.skullLantern), 0, 1, 2, 55), new WeightedRandomChestContent(Item.getItemFromBlock(FABlockRegistry.INSTANCE.drum), 0, 1, 1, 38), new WeightedRandomChestContent(FAItemRegistry.INSTANCE.potteryShards, 0, 1, 3, 80), new WeightedRandomChestContent(FAItemRegistry.INSTANCE.goldjavelin, 0, 1, 1, 33), new WeightedRandomChestContent(FAItemRegistry.INSTANCE.ironjavelin, 0, 1, 1, 56), new WeightedRandomChestContent(FAItemRegistry.INSTANCE.stoneboard, 0, 1, 3, 75), new WeightedRandomChestContent(Items.bone, 0, 1, 3, 85), new WeightedRandomChestContent(Items.emerald, 0, 1, 3, 25), new WeightedRandomChestContent(Items.flint, 0, 1, 3, 55), new WeightedRandomChestContent(Items.blaze_rod, 0, 1, 3, 10), new WeightedRandomChestContent(Items.ghast_tear, 0, 1, 2, 15), new WeightedRandomChestContent(Items.golden_carrot, 0, 1, 2, 25), new WeightedRandomChestContent(Item.getItemFromBlock(Blocks.bookshelf), 0, 1, 5, 55), new WeightedRandomChestContent(Item.getItemFromBlock(Blocks.glowstone), 0, 1, 4, 65), new WeightedRandomChestContent(Item.getItemFromBlock(Blocks.obsidian), 0, 1, 6, 55), new WeightedRandomChestContent(Items.netherbrick, 0, 1, 12, 65), new WeightedRandomChestContent(FAItemRegistry.INSTANCE.recordNano_Anu, 0, 1, 1, 6), new WeightedRandomChestContent(Items.netherbrick, 0, 1, 12, 65),
 
             new WeightedRandomChestContent(Item.getItemFromBlock(Blocks.tnt), 0, 1, 6, 45),
             new WeightedRandomChestContent(FAItemRegistry.INSTANCE.recordNano_Scarab, 0, 1, 1, 6),
@@ -25,19 +25,19 @@ public class AnuCastleWorldGen extends WorldGenerator {
     };
 
     protected Block[] GetValidSpawnBlocks() {
-        return new Block[]{Blocks.netherrack,};
+        return new Block[] { Blocks.netherrack, };
     }
 
     @Override
-    public boolean generate(World world, Random rand, int x, int y, int z) {
-        generate_r0(world, rand, x, y, z);
-        generateChests(world, rand, x, y, z);
-        generateSpecial(world, rand, x, y, z);
+    public boolean generate(World world, Random rand, BlockPos pos) {
+        generate_r0(world, rand, pos);
+        generateChests(world, rand, pos);
+        generateSpecial(world, rand, pos);
         return true;
 
     }
 
-    public void generateChests(World world, Random rand, int x, int y, int z) {
+    public void generateChests(World world, Random rand, BlockPos pos) {
         chestWithLoot(x + 24, y + 3, z + 51, false, world, rand, treasure, 6 + rand.nextInt(6));
         chestWithLoot(x + 24, y + 3, z + 53, false, world, rand, treasure, 6 + rand.nextInt(6));
         chestWithLoot(x + 32, y + 3, z + 53, false, world, rand, treasure, 6 + rand.nextInt(6));
@@ -137,7 +137,7 @@ public class AnuCastleWorldGen extends WorldGenerator {
         chestWithLoot(x + 121, y + 23, z + 28, false, world, rand, treasure, 6 + rand.nextInt(6));
     }
 
-    public void generateSpecial(World world, Random rand, int x, int y, int z) {
+    public void generateSpecial(World world, Random rand, BlockPos pos) {
 
         ItemDoor.placeDoorBlock(world, x + 65, y + 13, z + 18, 3, Blocks.iron_door);
         ItemDoor.placeDoorBlock(world, x + 75, y + 13, z + 18, 3, Blocks.iron_door);
@@ -168,7 +168,7 @@ public class AnuCastleWorldGen extends WorldGenerator {
         }
     }
 
-    public boolean generate_r0(World world, Random rand, int x, int y, int z) {
+    public boolean generate_r0(World world, Random rand, BlockPos pos) {
         world.setBlock(x, y + -1, z, Blocks.netherrack, 0, 3);
         world.setBlock(x + 1, y + -1, z, Blocks.netherrack, 0, 3);
         world.setBlock(x + 2, y + -1, z, Blocks.netherrack, 0, 3);
@@ -1670,7 +1670,7 @@ public class AnuCastleWorldGen extends WorldGenerator {
         world.setBlock(x + 88, y + -1, z + 10, Blocks.netherrack, 0, 3);
         world.setBlock(x + 89, y + -1, z + 10, Blocks.netherrack, 0, 3);
 
-        AnuCastlePiece01.generate_r02(world, rand, x, y, z);
+        AnuCastlePiece01.generate_r02(world, rand, pos);
         return true;
 
     }

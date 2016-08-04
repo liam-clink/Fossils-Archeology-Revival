@@ -2,27 +2,25 @@ package fossilsarcheology.server.item;
 
 import fossilsarcheology.server.creativetab.FATabRegistry;
 import fossilsarcheology.server.entity.EntityPrehistoric;
-import fossilsarcheology.server.enums.EnumPrehistoric;
+import fossilsarcheology.server.enums.PrehistoricEntityType;
 import fossilsarcheology.server.handler.LocalizationStrings;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
-import net.minecraft.util.Vec3;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 public class ItemBioFossil extends Item {
-	private boolean tar_fossil;
-	
+    private boolean tar_fossil;
+
     public ItemBioFossil(boolean tar_fossil) {
         maxStackSize = 64;
         setMaxDamage(0);
         this.tar_fossil = tar_fossil;
         setUnlocalizedName(tar_fossil ? "tar_fossil" : LocalizationStrings.BIO_FOSSIL_NAME);
-        setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
+        setCreativeTab(FATabRegistry.INSTANCE.ITEMS);
     }
 
     @Override
@@ -34,11 +32,11 @@ public class ItemBioFossil extends Item {
         if (var3.isRemote) {
             return true;
         } else {
-            Class var11 = EnumPrehistoric.getRandomBioFossil(tar_fossil).getDinoClass();
+            Class var11 = PrehistoricEntityType.getRandomBioFossil(tar_fossil).getEntity();
             EntityPrehistoric var12;
 
             try {
-                var12 = (EntityPrehistoric) var11.getConstructor(new Class[]{World.class}).newInstance(var3);
+                var12 = (EntityPrehistoric) var11.getConstructor(new Class[] { World.class }).newInstance(var3);
             } catch (Throwable var14) {
                 var14.printStackTrace();
                 return false;
@@ -66,7 +64,7 @@ public class ItemBioFossil extends Item {
         double var7 = var3.prevPosX + (var3.posX - var3.prevPosX) * (double) var4;
         double var9 = var3.prevPosY + (var3.posY - var3.prevPosY) * (double) var4 + 1.62D - (double) var3.yOffset;
         double var11 = var3.prevPosZ + (var3.posZ - var3.prevPosZ) * (double) var4;
-        Vec3 var13 = Vec3.createVectorHelper(var7, var9, var11);
+        Vec3d var13 = new Vec3d(var7, var9, var11);
         float var14 = MathHelper.cos(-var6 * 0.017453292F - (float) Math.PI);
         float var15 = MathHelper.sin(-var6 * 0.017453292F - (float) Math.PI);
         float var16 = -MathHelper.cos(-var5 * 0.017453292F);
@@ -74,7 +72,7 @@ public class ItemBioFossil extends Item {
         float var18 = var15 * var16;
         float var19 = var14 * var16;
         double var20 = 5.0D;
-        Vec3 var22 = var13.addVector((double) var18 * var20, (double) var17 * var20, (double) var19 * var20);
+        Vec3d var22 = var13.addVector((double) var18 * var20, (double) var17 * var20, (double) var19 * var20);
         MovingObjectPosition var23 = this.getMovingObjectPositionFromPlayer(var2, var3, true);
 
         if (var23 == null) {

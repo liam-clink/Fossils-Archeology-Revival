@@ -4,107 +4,98 @@ import fossilsarcheology.server.entity.mob.EntityPregnantCow;
 import fossilsarcheology.server.entity.mob.EntityPregnantHorse;
 import fossilsarcheology.server.entity.mob.EntityPregnantPig;
 import fossilsarcheology.server.entity.mob.EntityPregnantSheep;
-import fossilsarcheology.server.enums.EnumPrehistoric;
+import fossilsarcheology.server.enums.PrehistoricEntityType;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.passive.*;
+import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.entity.passive.EntityCow;
+import net.minecraft.entity.passive.EntityHorse;
+import net.minecraft.entity.passive.EntityPig;
+import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumParticleTypes;
 
 import java.util.Random;
 
 public class MammalEmbryoItem extends Item {
-	int AnimalType;
-	private EnumPrehistoric embryo;
-	private Random rand;
+    private PrehistoricEntityType type;
+    private Random rand;
 
-	public MammalEmbryoItem(int AnimalType0) {
-		super();
-		this.setMaxDamage(0);
-		this.maxStackSize = 64;
-		this.AnimalType = AnimalType0;
-		this.rand = new Random();
-	}
+    public MammalEmbryoItem(PrehistoricEntityType type) {
+        super();
+        this.setMaxDamage(0);
+        this.maxStackSize = 64;
+        this.type = type;
+        this.rand = new Random();
+    }
 
-	public static EnumPrehistoric getEmbryo(int var0) {
-		return EnumPrehistoric.values()[var0];
-	}
+    @Override
+    public boolean itemInteractionForEntity(ItemStack itemstack, EntityPlayer player, EntityLivingBase entity) {
+        if (entity instanceof EntityAnimal && ((EntityAnimal) entity).getGrowingAge() == 0) {
+            if (entity instanceof EntityPig) {
+                EntityPregnantPig props = EntityPregnantPig.get(((EntityPig) entity));
+                if (props.embryo != null) {
+                    return false;
+                }
+                if (type != null) {
+                    props.setEmbryo(type);
+                    if (!player.capabilities.isCreativeMode) {
+                        itemstack.stackSize--;
+                    }
+                } else {
+                    return false;
+                }
+            } else if (entity instanceof EntityCow) {
+                EntityPregnantCow props = EntityPregnantCow.get(((EntityCow) entity));
+                if (props.embryo != null) {
+                    return false;
+                }
+                if (type != null) {
+                    props.setEmbryo(type);
+                    if (!player.capabilities.isCreativeMode) {
+                        itemstack.stackSize--;
+                    }
+                } else {
+                    return false;
+                }
+            } else if (entity instanceof EntitySheep) {
+                EntityPregnantSheep props = EntityPregnantSheep.get(((EntitySheep) entity));
+                if (props.embryo != null) {
+                    return false;
+                }
+                if (type != null) {
+                    props.setEmbryo(type);
+                    if (!player.capabilities.isCreativeMode) {
+                        itemstack.stackSize--;
+                    }
+                } else {
+                    return false;
+                }
+            } else if (entity instanceof EntityHorse) {
+                EntityHorse horse = (EntityHorse) entity;
+                EntityPregnantHorse props = EntityPregnantHorse.get(horse);
+                if (horse.getHorseVariant() != 0 || props.Embryo != null) {
+                    return false;
+                }
+                if (type != null) {
+                    props.setEmbryo(type);
+                    if (!player.capabilities.isCreativeMode) {
+                        itemstack.stackSize--;
+                    }
+                } else {
+                    return false;
+                }
+            }
 
-	/**
-	 * dye sheep, place saddles, etc ...
-	 */
-	@Override
-	public boolean itemInteractionForEntity(ItemStack itemstack, EntityPlayer player, EntityLivingBase thisEntity) {
-		embryo = getEmbryo(AnimalType);
+            for (int i = 0; i < 7; i++) {
+                entity.worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, entity.posX + this.rand.nextFloat() * entity.width * 2.0F - entity.width, entity.posY + 0.5D + (this.rand.nextFloat() * entity.height), entity.posZ + (this.rand.nextFloat() * entity.width * 2.0F) - entity.width, this.rand.nextGaussian() * 0.02D, this.rand.nextGaussian() * 0.02D, this.rand.nextGaussian() * 0.02D);
+            }
 
-		if (thisEntity instanceof EntityAnimal && ((EntityAnimal) thisEntity).getGrowingAge() == 0) {
-			Object pregnantEntity = null;
+            return true;
+        }
 
-			if (thisEntity instanceof EntityPig) {
-				EntityPregnantPig props = EntityPregnantPig.get(((EntityPig) thisEntity));
-				if (props.Embryo != null) {
-					return false;
-				}
-				if (embryo != null) {
-					props.setEmbryo(embryo);
-					if (!player.capabilities.isCreativeMode) {
-						itemstack.stackSize--;
-					}
-				} else {
-					return false;
-				}
-			} else if (thisEntity instanceof EntityCow) {
-				EntityPregnantCow props = EntityPregnantCow.get(((EntityCow) thisEntity));
-				if (props.Embryo != null) {
-					return false;
-				}
-				if (embryo != null) {
-					props.setEmbryo(embryo);
-					if (!player.capabilities.isCreativeMode) {
-						itemstack.stackSize--;
-					}
-				} else {
-					return false;
-				}
-			} else if (thisEntity instanceof EntitySheep) {
-				EntityPregnantSheep props = EntityPregnantSheep.get(((EntitySheep) thisEntity));
-				if (props.Embryo != null) {
-					return false;
-				}
-				if (embryo != null) {
-					props.setEmbryo(embryo);
-					if (!player.capabilities.isCreativeMode) {
-						itemstack.stackSize--;
-					}
-				} else {
-					return false;
-				}
-			} else if (thisEntity instanceof EntityHorse) {
-				EntityPregnantHorse props = EntityPregnantHorse.get(((EntityHorse) thisEntity));
-				if (((EntityHorse) thisEntity).getHorseType() != 0 || props.Embryo != null) {
-					return false;
-				}
-				if (embryo != null) {
-					props.setEmbryo(embryo);
-					if (!player.capabilities.isCreativeMode) {
-						itemstack.stackSize--;
-					}
-				} else {
-					return false;
-				}
-			}
-
-			for (int var3 = 0; var3 < 7; ++var3) {
-				double var4 = this.rand.nextGaussian() * 0.02D;
-				double var6 = this.rand.nextGaussian() * 0.02D;
-				double var8 = this.rand.nextGaussian() * 0.02D;
-				thisEntity.worldObj.spawnParticle("smoke", thisEntity.posX + (double) (this.rand.nextFloat() * thisEntity.width * 2.0F) - (double) thisEntity.width, thisEntity.posY + 0.5D + (double) (this.rand.nextFloat() * thisEntity.height), thisEntity.posZ + (double) (this.rand.nextFloat() * thisEntity.width * 2.0F) - (double) thisEntity.width, var4, var6, var8);
-			}
-
-			return true;
-		}
-
-		return false;
-	}
+        return false;
+    }
 
 }

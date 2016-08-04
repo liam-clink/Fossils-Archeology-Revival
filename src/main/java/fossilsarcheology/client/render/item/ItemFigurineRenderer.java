@@ -7,10 +7,9 @@ import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
-import org.lwjgl.opengl.GL11;
 
-import static org.lwjgl.opengl.GL11.glPopMatrix;
-import static org.lwjgl.opengl.GL11.glPushMatrix;
+import static org.lwjgl.opengl.GlStateManager.popMatrix;
+import static org.lwjgl.opengl.GlStateManager.pushMatrix;
 
 public class ItemFigurineRenderer implements IItemRenderer {
     // the model texture of our block
@@ -58,9 +57,9 @@ public class ItemFigurineRenderer implements IItemRenderer {
     public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
         int meta = item.getItemDamage();
         glPushMatrix();
-        GL11.glTranslatef(0.0F, 2.3F, 0.7F);
-        GL11.glRotatef(-180.0F, 0F, 0F, 1F);
-        GL11.glRotatef(-80.0F, 0F, 1F, 0F);
+        GlStateManager.translate(0.0F, 2.3F, 0.7F);
+        GlStateManager.rotate(-180.0F, 0F, 0F, 1F);
+        GlStateManager.rotate(-80.0F, 0F, 1F, 0F);
 
         switch (meta) {
             case 0:

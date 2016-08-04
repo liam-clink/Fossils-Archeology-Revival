@@ -2,7 +2,7 @@ package fossilsarcheology.server.gen.structure;
 
 import fossilsarcheology.Revival;
 import fossilsarcheology.server.block.FABlockRegistry;
-import fossilsarcheology.server.enums.EnumPrehistoric;
+import fossilsarcheology.server.enums.PrehistoricEntityType;
 import fossilsarcheology.server.gen.structure.shipwreck.ShipWreck1;
 import fossilsarcheology.server.gen.structure.shipwreck.ShipWreck2;
 import fossilsarcheology.server.gen.structure.shipwreck.ShipWreck3;
@@ -105,8 +105,8 @@ public class FossilWaterStructureGenerator extends StructureGeneratorBase {
      * Allows the use of block ids greater than 4096 as custom 'hooks' to
      * trigger onCustomBlockAdded
      *
-     * @param fakeID      Identifier for your 'event'. Absolute value must be greater
-     *                    than 4096
+     * @param fakeID Identifier for your 'event'. Absolute value must be greater
+     * than 4096
      * @param customData1 Custom data may be used to subtype events for given fakeID
      * @return Returns the real id of the block to spawn in the world; must be
      * <= 4096
@@ -157,11 +157,11 @@ public class FossilWaterStructureGenerator extends StructureGeneratorBase {
         }
     }
 
-    private EnumPrehistoric getDinosaur() {
-        EnumPrehistoric[] var1 = EnumPrehistoric.values();
+    private PrehistoricEntityType getDinosaur() {
+        PrehistoricEntityType[] var1 = PrehistoricEntityType.values();
         int var2 = var1.length;
         Random var4 = new Random();
-        EnumPrehistoric enumDinosaur;
+        PrehistoricEntityType enumDinosaur;
         enumDinosaur = var1[var4.nextInt(var2)];
         return enumDinosaur;
     }
@@ -170,12 +170,12 @@ public class FossilWaterStructureGenerator extends StructureGeneratorBase {
      * A custom 'hook' to allow setting of tile entities, spawning entities,
      * etc.
      *
-     * @param fakeID      The custom identifier used to distinguish between types
+     * @param fakeID The custom identifier used to distinguish between types
      * @param customData1 Custom data used to subtype events for given fakeID
      * @param customData2 Additional custom data
      */
     @Override
-    public void onCustomBlockAdded(World world, int x, int y, int z, int fakeID, int customData1, int customData2) {
+    public void onCustomBlockAdded(World world, BlockPos pos, int fakeID, int customData1, int customData2) {
         if (!value_set) {
             // if using this method, this should only be done once per
             // structure, preferably with a better method
@@ -185,7 +185,7 @@ public class FossilWaterStructureGenerator extends StructureGeneratorBase {
             value_set = true;
         }
 
-        int meta = world.getBlockMetadata(x, y, z);
+        int meta = world.getBlockMetadata(pos);
 
         switch (fakeID) {
             case ShipWreckUtil.CUSTOM_CHEST:
@@ -201,19 +201,19 @@ public class FossilWaterStructureGenerator extends StructureGeneratorBase {
                         int loot = rand.nextInt(100);
 
                         if (loot < 20) {
-                            addItemToTileInventory(world, new ItemStack(Items.leather, rand.nextInt(20) + 1), x, y, z);
+                            addItemToTileInventory(world, new ItemStack(Items.leather, rand.nextInt(20) + 1), pos);
                         } else if (loot < 40) {
-                            addItemToTileInventory(world, new ItemStack(Items.golden_sword, rand.nextInt(2) + 1), x, y, z);
+                            addItemToTileInventory(world, new ItemStack(Items.golden_sword, rand.nextInt(2) + 1), pos);
                         } else if (loot < 50) {
-                            addItemToTileInventory(world, new ItemStack(Items.compass, 1), x, y, z);
+                            addItemToTileInventory(world, new ItemStack(Items.compass, 1), pos);
                         } else if (loot < 60) {
-                            addItemToTileInventory(world, (new ItemStack(Item.getItemFromBlock(FABlockRegistry.INSTANCE.figurineBlock), rand.nextInt(2) + 1, rand.nextInt(15))), x, y, z);
+                            addItemToTileInventory(world, (new ItemStack(Item.getItemFromBlock(FABlockRegistry.INSTANCE.figurineBlock), rand.nextInt(2) + 1, rand.nextInt(15))), pos);
                         } else if (loot < 80) {
-                            addItemToTileInventory(world, new ItemStack(Items.gold_nugget, rand.nextInt(32) + 1), x, y, z);
+                            addItemToTileInventory(world, new ItemStack(Items.gold_nugget, rand.nextInt(32) + 1), pos);
                         } else if (loot < 90) {
-                            addItemToTileInventory(world, new ItemStack(FAItemRegistry.INSTANCE.ironjavelin, rand.nextInt(16) + 1), x, y, z);
+                            addItemToTileInventory(world, new ItemStack(FAItemRegistry.INSTANCE.ironjavelin, rand.nextInt(16) + 1), pos);
                         } else if (loot < 101) {
-                            addItemToTileInventory(world, new ItemStack(Items.name_tag, rand.nextInt(2) + 1), x, y, z);
+                            addItemToTileInventory(world, new ItemStack(Items.name_tag, rand.nextInt(2) + 1), pos);
                         }
 
                     }
@@ -225,19 +225,19 @@ public class FossilWaterStructureGenerator extends StructureGeneratorBase {
                         int loot = (int) (Math.random() * 100);
 
                         if (loot < 20) {
-                            addItemToTileInventory(world, new ItemStack(Items.leather, rand.nextInt(6) + 1), x, y, z);
+                            addItemToTileInventory(world, new ItemStack(Items.leather, rand.nextInt(6) + 1), pos);
                         } else if (loot < 40) {
-                            addItemToTileInventory(world, new ItemStack(Items.book, rand.nextInt(2) + 1), x, y, z);
+                            addItemToTileInventory(world, new ItemStack(Items.book, rand.nextInt(2) + 1), pos);
                         } else if (loot < 60) {
-                            addItemToTileInventory(world, new ItemStack(Items.fishing_rod, rand.nextInt(1) + 1), x, y, z);
+                            addItemToTileInventory(world, new ItemStack(Items.fishing_rod, rand.nextInt(1) + 1), pos);
                         } else if (loot < 70) {
-                            addItemToTileInventory(world, new ItemStack(Items.gunpowder, rand.nextInt(10) + 1), x, y, z);
+                            addItemToTileInventory(world, new ItemStack(Items.gunpowder, rand.nextInt(10) + 1), pos);
                         } else if (loot < 85) {
-                            addItemToTileInventory(world, new ItemStack(FAItemRegistry.INSTANCE.woodjavelin, rand.nextInt(8) + 1), x, y, z);
+                            addItemToTileInventory(world, new ItemStack(FAItemRegistry.INSTANCE.woodjavelin, rand.nextInt(8) + 1), pos);
                         } else if (loot < 95) {
-                            addItemToTileInventory(world, new ItemStack(Items.iron_sword, rand.nextInt(1) + 1), x, y, z);
+                            addItemToTileInventory(world, new ItemStack(Items.iron_sword, rand.nextInt(1) + 1), pos);
                         } else {
-                            addItemToTileInventory(world, new ItemStack(Items.iron_ingot, rand.nextInt(8) + 1), x, y, z);
+                            addItemToTileInventory(world, new ItemStack(Items.iron_ingot, rand.nextInt(8) + 1), pos);
                         }
                     }
                 }
@@ -255,7 +255,7 @@ public class FossilWaterStructureGenerator extends StructureGeneratorBase {
 
                 while (addmore) {
                     // Here we use customData as the itemID to place
-                    addmore = addItemToTileInventory(world, new ItemStack(Item.getItemById(customData1), 64, 0), x, y, z);
+                    addmore = addItemToTileInventory(world, new ItemStack(Item.getItemById(customData1), 64, 0), pos);
                 }
 
                 break;
@@ -285,12 +285,12 @@ public class FossilWaterStructureGenerator extends StructureGeneratorBase {
                 }
 
                 // Use this easy method to add text to the sign's tile entity:
-                setSignText(world, text, x, y, z);
+                setSignText(world, text, pos);
                 break;
 
             case ShipWreckUtil.CUSTOM_SKULL:
                 // Easily set the skull type or player name if you know it:
-                setSkullData(world, customData1, x, y, z);
+                setSkullData(world, customData1, pos);
                 break;
 
             case ShipWreckUtil.ITEM_FRAME:
@@ -301,23 +301,23 @@ public class FossilWaterStructureGenerator extends StructureGeneratorBase {
                 // rotation)
                 // You need to store the returned facing from setHangingEntity to
                 // use later methods
-                int facing = setHangingEntity(world, frame, x, y, z);
+                int facing = setHangingEntity(world, frame, pos);
                 // Use this method for default rotation:
-                setItemFrameStack(world, new ItemStack(Item.getItemById(customData1), 1, 0), x, y, z, facing);
+                setItemFrameStack(world, new ItemStack(Item.getItemById(customData1), 1, 0), pos, facing);
                 // or this one if you want to specify rotation:
-                // setItemFrameStack(world, x, y, z, facing, new
+                // setItemFrameStack(world, pos, facing, new
                 // ItemStack(customData,1,0),2);
                 break;
 
             case ShipWreckUtil.PAINTING:
                 ItemStack painting = new ItemStack(Items.painting);
-                facing = setHangingEntity(world, painting, x, y, z);
+                facing = setHangingEntity(world, painting, pos);
                 // choose painting you want based on custom data; look at EnumArt
                 // for painting names
                 String custom = (customData1 == 1 ? "Aztec" : "Bomb");
                 // use following method to set painting and update client
                 // automatically
-                setPaintingArt(world, custom, x, y, z, facing);
+                setPaintingArt(world, custom, pos, facing);
                 break;
 
             case ShipWreckUtil.RANDOM_HOLE:
@@ -327,7 +327,7 @@ public class FossilWaterStructureGenerator extends StructureGeneratorBase {
                 // then remove only hole blocks with that value, allowing for custom
                 // patterns
                 // if (random_hole == customData2)
-                // world.setBlockToAir(x, y, z);
+                // world.setBlockToAir(pos);
 
                 // another way that doesn't use customData2 would be to use
                 // world.rand.nextFloat()
@@ -336,7 +336,7 @@ public class FossilWaterStructureGenerator extends StructureGeneratorBase {
                 // this way is nice because we don't need to set customData2 for all
                 // these blocks
                 if (world.rand.nextFloat() < 0.25F) {
-                    world.setBlockToAir(x, y, z);
+                    world.setBlockToAir(pos);
                 }
 
                 break;
@@ -347,7 +347,7 @@ public class FossilWaterStructureGenerator extends StructureGeneratorBase {
                 // Entity X = new EntityHorse(world);
                 // ((EntityHorse) X).func_110235_q(1026);
                 // Now use the preset method to avoid spawning in walls
-                spawnEntityInStructure(world, bob, x, y, z);
+                spawnEntityInStructure(world, bob, pos);
                 break;
 
             default:

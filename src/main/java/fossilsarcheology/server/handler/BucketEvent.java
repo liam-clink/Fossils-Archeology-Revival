@@ -1,17 +1,15 @@
 package fossilsarcheology.server.handler;
 
-import cpw.mods.fml.common.eventhandler.Event.Result;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
+import net.minecraftforge.fml.common.eventhandler.Event.Result;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
 public class BucketEvent {
 
@@ -38,7 +36,7 @@ public class BucketEvent {
         Block block = world.getBlock(pos.blockX, pos.blockY, pos.blockZ);
         Item bucket = buckets.get(block);
         if (bucket != null && world.getBlockMetadata(pos.blockX, pos.blockY, pos.blockZ) == 0) {
-             world.playSoundEffect(pos.blockX, pos.blockY, pos.blockZ, "dig.sand", 1, 1);
+            world.playSoundEffect(pos.blockX, pos.blockY, pos.blockZ, "dig.sand", 1, 1);
             world.setBlockToAir(pos.blockX, pos.blockY, pos.blockZ);
             return new ItemStack(bucket);
         } else {

@@ -4,7 +4,7 @@ import fossilsarcheology.server.entity.mob.EntityAnu;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.MathHelper;
 
 /**
  * ModelPigBoss - Either Mojang or a mod author Created using Tabula 4.1.1

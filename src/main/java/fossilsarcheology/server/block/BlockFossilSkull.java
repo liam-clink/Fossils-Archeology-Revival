@@ -1,16 +1,16 @@
 package fossilsarcheology.server.block;
 
 import fossilsarcheology.server.creativetab.FATabRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.BlockDirectional;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockFossilSkull extends BlockDirectional {
     private boolean isActive;
@@ -23,8 +23,8 @@ public class BlockFossilSkull extends BlockDirectional {
         super(Material.rock);
         this.setTickRandomly(true);
         this.isActive = isActive;
-        this.setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
-        this.setBlockName(isActive ? "skullLantern" : "skullBlock");
+        this.setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
+        this.setUnlocalizedName(isActive ? "skullLantern" : "skullBlock");
     }
 
     @Override
@@ -34,9 +34,9 @@ public class BlockFossilSkull extends BlockDirectional {
     }
 
     @Override
-    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack) {
+    public void onBlockPlacedBy(World world, BlockPos pos, EntityLivingBase entity, ItemStack stack) {
         int l = MathHelper.floor_double((double) (entity.rotationYaw * 4.0F / 360.0F) + 2.5D) & 3;
-        world.setBlockMetadataWithNotify(x, y, z, l, 2);
+        world.setBlockMetadataWithNotify(pos, l, 2);
     }
 
     @Override

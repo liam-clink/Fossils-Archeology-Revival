@@ -1,5 +1,18 @@
 package fossilsarcheology.server.entity.mob;
 
+import fossilsarcheology.server.entity.EntityPrehistoric;
+import fossilsarcheology.server.entity.ai.DinoAIAttackOnCollide;
+import fossilsarcheology.server.entity.ai.DinoAIEatFeeders;
+import fossilsarcheology.server.entity.ai.DinoAIEatItems;
+import fossilsarcheology.server.entity.ai.DinoAIFollowOwner;
+import fossilsarcheology.server.entity.ai.DinoAIHunt;
+import fossilsarcheology.server.entity.ai.DinoAILookIdle;
+import fossilsarcheology.server.entity.ai.DinoAIRiding;
+import fossilsarcheology.server.entity.ai.DinoAIWander;
+import fossilsarcheology.server.entity.ai.DinoAIWatchClosest;
+import fossilsarcheology.server.enums.EnumPrehistoricAI;
+import fossilsarcheology.server.enums.PrehistoricEntityType;
+import fossilsarcheology.server.handler.FossilAchievementHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
@@ -11,27 +24,13 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-import fossilsarcheology.server.entity.EntityPrehistoric;
-import fossilsarcheology.server.entity.ai.DinoAIAttackOnCollide;
-import fossilsarcheology.server.entity.ai.DinoAIEatBlocks;
-import fossilsarcheology.server.entity.ai.DinoAIEatFeeders;
-import fossilsarcheology.server.entity.ai.DinoAIEatItems;
-import fossilsarcheology.server.entity.ai.DinoAIFollowOwner;
-import fossilsarcheology.server.entity.ai.DinoAIHunt;
-import fossilsarcheology.server.entity.ai.DinoAILookIdle;
-import fossilsarcheology.server.entity.ai.DinoAIRiding;
-import fossilsarcheology.server.entity.ai.DinoAIWander;
-import fossilsarcheology.server.entity.ai.DinoAIWatchClosest;
-import fossilsarcheology.server.enums.EnumPrehistoric;
-import fossilsarcheology.server.enums.EnumPrehistoricAI;
-import fossilsarcheology.server.handler.FossilAchievementHandler;
 
 public class EntityAllosaurus extends EntityPrehistoric {
 
     public EntityAllosaurus(World world) {
-        super(world, EnumPrehistoric.Allosaurus, 2, 11, 10, 58, 0.25, 0.42);
+        super(world, PrehistoricEntityType.ALLOSAURUS, 2, 11, 10, 58, 0.25, 0.42);
         this.getNavigator().setAvoidsWater(true);
         this.getNavigator().setCanSwim(true);
         this.tasks.addTask(1, new EntityAISwimming(this));
@@ -48,7 +47,7 @@ public class EntityAllosaurus extends EntityPrehistoric {
         this.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
         this.targetTasks.addTask(4, new DinoAIHunt(this, 20, false));
-        this.setActualSize(1.1F, 0.9F);
+        this.setActualSize(1.4F, 1.3F);
         this.pediaScale = 35F;
         this.nearByMobsAllowed = 5;
         minSize = 0.55F;
@@ -170,20 +169,24 @@ public class EntityAllosaurus extends EntityPrehistoric {
                         entity.mountEntity(null);
                     }
                 }
-                entity.motionY += 0.1000000059604645D;
+                entity.motionY += 0.4000000059604645D;
+                double d0 = this.getAttackTarget().posX - this.posX;
+                double d1 = this.getAttackTarget().posZ - this.posZ;
+                float f = MathHelper.sqrt_double(d0 * d0 + d1 * d1);
+                entity.addVelocity(-MathHelper.sin(this.rotationYaw * (float) Math.PI / 180.0F) * (0.1F * this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).getAttributeValue() / 2), 0.0D, MathHelper.cos(this.rotationYaw * (float) Math.PI / 180.0F) * (0.1F * this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).getAttributeValue() / 2));
                 entity.isAirBorne = false;
                 return flag;
             }
         }
         return false;
     }
-    
+
     public int getMaxHunger() {
         return 125;
     }
 
-	@Override
-	public boolean canBeRidden() {
-		return true;
-	}
+    @Override
+    public boolean canBeRidden() {
+        return true;
+    }
 }

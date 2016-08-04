@@ -1,8 +1,6 @@
 package fossilsarcheology.client.model.prehistoric;
 
 import fossilsarcheology.server.entity.EntityPrehistoric;
-import fossilsarcheology.server.entity.mob.EntityDodo;
-import fossilsarcheology.server.entity.mob.EntityTitanis;
 import net.ilexiconn.llibrary.client.model.ModelAnimator;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
@@ -177,11 +175,11 @@ public class ModelTerrorBird extends ModelPrehistoric {
     @Override
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
         neck_1.setScale(1.01F, 1.01F, 1.01F);
-        AdvancedModelRenderer[] neckParts = {this.neck, this.neck_1, this.head};
-        AdvancedModelRenderer[] tailParts = {this.lowerBody, this.tail1, this.tail2};
-		if(((EntityPrehistoric) entity).isSkeleton()){
-			return;
-		}
+        AdvancedModelRenderer[] neckParts = { this.neck, this.neck_1, this.head };
+        AdvancedModelRenderer[] tailParts = { this.lowerBody, this.tail1, this.tail2 };
+        if (((EntityPrehistoric) entity).isSkeleton()) {
+            return;
+        }
         ModelUtils.faceTargetMod(neck, f3, f4, 0.5F);
         ModelUtils.faceTargetMod(head, f3, f4, 0.5F);
         float speed = 0.1F;
@@ -189,12 +187,12 @@ public class ModelTerrorBird extends ModelPrehistoric {
         float degree = 0.5F;
         this.bob(upperBody, speed, degree * 0.4F, false, entity.ticksExisted, 1);
 
-		this.walk(leftThigh, speed2, 0.6F, false, 0F, 0.4F, f, f1);
-		this.walk(leftLeg, speed2, 0.2F, false, 0F, -0.6F, f, f1);
-		this.walk(leftFoot, speed2, -0.6F, true, 2.5F, -0.4F, f, f1);
-		this.walk(rightThigh, speed2, 0.6F, true, 0F, -0.4F, f, f1);
-		this.walk(rightLeg, speed2, 0.2F, true, 0F, 0.6F, f, f1);
-		this.walk(rightFoot, speed2, -0.6F, false, 2.5F, 0.4F, f, f1);
+        this.walk(leftThigh, speed2, 0.6F, false, 0F, 0.4F, f, f1);
+        this.walk(leftLeg, speed2, 0.2F, false, 0F, -0.6F, f, f1);
+        this.walk(leftFoot, speed2, -0.6F, true, 2.5F, -0.4F, f, f1);
+        this.walk(rightThigh, speed2, 0.6F, true, 0F, -0.4F, f, f1);
+        this.walk(rightLeg, speed2, 0.2F, true, 0F, 0.6F, f, f1);
+        this.walk(rightFoot, speed2, -0.6F, false, 2.5F, 0.4F, f, f1);
         this.chainWave(neckParts, speed2, degree * 0.3F, 4, f, f1);
         if (((EntityPrehistoric) (entity)).isSleeping()) {
             this.walk(upperBody, speed, degree * 0.05F, false, 0, 0, entity.ticksExisted, 1);

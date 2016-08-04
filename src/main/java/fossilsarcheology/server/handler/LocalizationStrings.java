@@ -1,6 +1,6 @@
 package fossilsarcheology.server.handler;
 
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.I18n;
 
 public class LocalizationStrings {
     // Enchantments
@@ -257,7 +257,7 @@ public class LocalizationStrings {
     public static final String FOSSILRECORD2_NAME = "record_jp_theme";
     public static final String BLOCK_ANU_NAME = "anu_block";
     public static final String BLOCK_ANU_PORTAL_NAME = "anu_portal";
-    public static final String BIOME_ANU = StatCollector.translateToLocal("biome.anu.name");
+    public static final String BIOME_ANU = I18n.translateToLocal("biome.anu.name");
     public static String MAMMOTH_MEAT = "mammothMeat";
     public static String MAMMOTH_MEAT_COOKED = "mammothMeatCooked";
     public static String FAILURESAURUS_FLESH_NAME = "failuresaurusFlesh";

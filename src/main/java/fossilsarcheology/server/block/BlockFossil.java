@@ -27,9 +27,9 @@ public class BlockFossil extends BlockStone {
         super();
         this.setHardness(3.0F);
         this.setResistance(5.0F);
-        this.setStepSound(Block.soundTypeStone);
-        this.setBlockName(LocalizationStrings.BLOCK_FOSSIL_NAME);
-        this.setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
+        this.setSoundType(Block.soundTypeStone);
+        this.setUnlocalizedName(LocalizationStrings.BLOCK_FOSSIL_NAME);
+        this.setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
         this.setHarvestLevel("pickaxe", 2);
         randomMeta = 0;
     }
@@ -140,13 +140,13 @@ public class BlockFossil extends BlockStone {
     }
 
     @Override
-    public void harvestBlock(World world, EntityPlayer player, int x, int y, int z, int i) {
-        super.harvestBlock(world, player, x, y, z, i);
+    public void harvestBlock(World world, EntityPlayer player, BlockPos pos, int i) {
+        super.harvestBlock(world, player, pos, i);
         player.triggerAchievement(FossilAchievementHandler.firstFossil);
     }
 
     @Override
-    public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
+    public ArrayList<ItemStack> getDrops(World world, BlockPos pos, int metadata, int fortune) {
         ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
 
         int count = quantityDropped(metadata, fortune, world.rand);

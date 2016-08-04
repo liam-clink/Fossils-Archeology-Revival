@@ -2,12 +2,12 @@ package fossilsarcheology.client.render.tileentity;
 
 import fossilsarcheology.client.model.ModelTNClock;
 import fossilsarcheology.server.block.entity.TileEntityTimeMachine;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
 import java.util.Calendar;
@@ -24,10 +24,10 @@ public class RenderTNClock extends TileEntitySpecialRenderer {
     private Calendar TimeCheck;
 
     public void renderTileEntityEnchantmentTableAt(TileEntityTimeMachine var1, double var2, double var4, double var6, float var8) {
-        GL11.glPushMatrix();
-        GL11.glTranslatef((float) var2 + 0.5F, (float) var4 + 0.75F, (float) var6 + 0.5F);
+        GlStateManager.pushMatrix();
+        GlStateManager.translate((float) var2 + 0.5F, (float) var4 + 0.75F, (float) var6 + 0.5F);
         float var9 = (float) var1.field_40068_a + var8;
-        GL11.glTranslatef(0.0F, 0.5F + MathHelper.sin(var9 * 0.1F) * 0.01F, 0.0F);
+        GlStateManager.translate(0.0F, 0.5F + MathHelper.sin(var9 * 0.1F) * 0.01F, 0.0F);
         float var10;
 
         for (var10 = var1.CurrectFacingAngle - var1.SendingCurrentFacing; var10 >= (float) Math.PI; var10 -= ((float) Math.PI * 2F)) {
@@ -38,8 +38,8 @@ public class RenderTNClock extends TileEntitySpecialRenderer {
         }
 
         float var11 = var1.SendingCurrentFacing + var10 * var8;
-        GL11.glRotatef(-var11 * 180.0F / (float) Math.PI, 0.0F, 1.0F, 0.0F);
-        GL11.glRotatef(180.0F, 0.0F, 0.0F, 1.0F);
+        GlStateManager.rotate(-var11 * 180.0F / (float) Math.PI, 0.0F, 1.0F, 0.0F);
+        GlStateManager.rotate(180.0F, 0.0F, 0.0F, 1.0F);
         this.bindTexture(loc);
         float var12 = 0.0F;
         float var13 = 0.0F;
@@ -79,7 +79,7 @@ public class RenderTNClock extends TileEntitySpecialRenderer {
         if (var1.isClockInPlace()) {
             this.MainModel.render(null, var9, 0.5F, var13, var14, 0.0F, 0.0625F);
         }
-        GL11.glPopMatrix();
+        GlStateManager.popMatrix();
     }
 
     private void showProgress(ModelTNClock var1, TileEntityTimeMachine var2) {

@@ -1,31 +1,40 @@
 package fossilsarcheology.client;
 
-import fossilsarcheology.client.model.prehistoric.*;
-import fossilsarcheology.client.render.particle.SleepFX;
-import fossilsarcheology.server.entity.mob.*;
-import net.ilexiconn.llibrary.client.lang.LanguageHandler;
-import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.audio.ISound;
-import net.minecraft.client.audio.PositionedSoundRecord;
-import net.minecraft.client.model.ModelBiped;
-import net.minecraft.client.particle.EntityBlockDustFX;
-import net.minecraft.client.particle.EntityBreakingFX;
-import net.minecraft.client.particle.EntityFX;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.item.Item;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
-import net.minecraftforge.client.MinecraftForgeClient;
-import net.minecraftforge.common.MinecraftForge;
-import cpw.mods.fml.client.registry.ClientRegistry;
-import cpw.mods.fml.client.registry.RenderingRegistry;
-import cpw.mods.fml.common.registry.VillagerRegistry;
 import fossilsarcheology.Revival;
 import fossilsarcheology.client.model.ModelDeadAnu;
 import fossilsarcheology.client.model.ModelFailuresaurus;
 import fossilsarcheology.client.model.ModelPigBoss;
 import fossilsarcheology.client.model.armor.ModelAncientHelmet;
+import fossilsarcheology.client.model.prehistoric.ModelAlligatorGar;
+import fossilsarcheology.client.model.prehistoric.ModelAllosaurus;
+import fossilsarcheology.client.model.prehistoric.ModelAnkylosaurus;
+import fossilsarcheology.client.model.prehistoric.ModelBrachiosaurus;
+import fossilsarcheology.client.model.prehistoric.ModelCeratosaurus;
+import fossilsarcheology.client.model.prehistoric.ModelCoelacanth;
+import fossilsarcheology.client.model.prehistoric.ModelCompsognathus;
+import fossilsarcheology.client.model.prehistoric.ModelConfuciusornis;
+import fossilsarcheology.client.model.prehistoric.ModelDeinonychus;
+import fossilsarcheology.client.model.prehistoric.ModelDilophosaurus;
+import fossilsarcheology.client.model.prehistoric.ModelDodo;
+import fossilsarcheology.client.model.prehistoric.ModelElasmotherium;
+import fossilsarcheology.client.model.prehistoric.ModelGallimimus;
+import fossilsarcheology.client.model.prehistoric.ModelLiopleurodon;
+import fossilsarcheology.client.model.prehistoric.ModelMammoth;
+import fossilsarcheology.client.model.prehistoric.ModelMosasaurus;
+import fossilsarcheology.client.model.prehistoric.ModelNautilus;
+import fossilsarcheology.client.model.prehistoric.ModelPachycephalosaurus;
+import fossilsarcheology.client.model.prehistoric.ModelPlesiosaurus;
+import fossilsarcheology.client.model.prehistoric.ModelPteranodon;
+import fossilsarcheology.client.model.prehistoric.ModelQuagga;
+import fossilsarcheology.client.model.prehistoric.ModelSarcosuchus;
+import fossilsarcheology.client.model.prehistoric.ModelSmilodon;
+import fossilsarcheology.client.model.prehistoric.ModelSpinosaurus;
+import fossilsarcheology.client.model.prehistoric.ModelStegosaurus;
+import fossilsarcheology.client.model.prehistoric.ModelSturgeon;
+import fossilsarcheology.client.model.prehistoric.ModelTerrorBird;
+import fossilsarcheology.client.model.prehistoric.ModelTriceratops;
+import fossilsarcheology.client.model.prehistoric.ModelTyrannosaurus;
+import fossilsarcheology.client.model.prehistoric.ModelVelociraptor;
 import fossilsarcheology.client.render.entity.RenderAnuEffect;
 import fossilsarcheology.client.render.entity.RenderAnubite;
 import fossilsarcheology.client.render.entity.RenderBirdEgg;
@@ -86,6 +95,47 @@ import fossilsarcheology.server.entity.EntityDinosaurEgg;
 import fossilsarcheology.server.entity.EntityFishBase;
 import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.entity.EntityStoneboard;
+import fossilsarcheology.server.entity.mob.EntityAlligatorGar;
+import fossilsarcheology.server.entity.mob.EntityAllosaurus;
+import fossilsarcheology.server.entity.mob.EntityAnkylosaurus;
+import fossilsarcheology.server.entity.mob.EntityAnu;
+import fossilsarcheology.server.entity.mob.EntityAnuDead;
+import fossilsarcheology.server.entity.mob.EntityAnubite;
+import fossilsarcheology.server.entity.mob.EntityBones;
+import fossilsarcheology.server.entity.mob.EntityBrachiosaurus;
+import fossilsarcheology.server.entity.mob.EntityCeratosaurus;
+import fossilsarcheology.server.entity.mob.EntityCoelacanth;
+import fossilsarcheology.server.entity.mob.EntityCompsognathus;
+import fossilsarcheology.server.entity.mob.EntityConfuciusornis;
+import fossilsarcheology.server.entity.mob.EntityDeinonychus;
+import fossilsarcheology.server.entity.mob.EntityDilophosaurus;
+import fossilsarcheology.server.entity.mob.EntityDodo;
+import fossilsarcheology.server.entity.mob.EntityElasmotherium;
+import fossilsarcheology.server.entity.mob.EntityFailuresaurus;
+import fossilsarcheology.server.entity.mob.EntityFriendlyPigZombie;
+import fossilsarcheology.server.entity.mob.EntityGallimimus;
+import fossilsarcheology.server.entity.mob.EntityGastornis;
+import fossilsarcheology.server.entity.mob.EntityKelenken;
+import fossilsarcheology.server.entity.mob.EntityLiopleurodon;
+import fossilsarcheology.server.entity.mob.EntityMammoth;
+import fossilsarcheology.server.entity.mob.EntityMosasaurus;
+import fossilsarcheology.server.entity.mob.EntityNautilus;
+import fossilsarcheology.server.entity.mob.EntityPachycephalosaurus;
+import fossilsarcheology.server.entity.mob.EntityPhorusrhacos;
+import fossilsarcheology.server.entity.mob.EntityPlesiosaurus;
+import fossilsarcheology.server.entity.mob.EntityPterosaur;
+import fossilsarcheology.server.entity.mob.EntityQuagga;
+import fossilsarcheology.server.entity.mob.EntitySarcosuchus;
+import fossilsarcheology.server.entity.mob.EntitySentryPigman;
+import fossilsarcheology.server.entity.mob.EntitySmilodon;
+import fossilsarcheology.server.entity.mob.EntitySpinosaurus;
+import fossilsarcheology.server.entity.mob.EntityStegosaurus;
+import fossilsarcheology.server.entity.mob.EntitySturgeon;
+import fossilsarcheology.server.entity.mob.EntityTarSlime;
+import fossilsarcheology.server.entity.mob.EntityTitanis;
+import fossilsarcheology.server.entity.mob.EntityTriceratops;
+import fossilsarcheology.server.entity.mob.EntityTyrannosaurus;
+import fossilsarcheology.server.entity.mob.EntityVelociraptor;
 import fossilsarcheology.server.entity.mob.projectile.EntityAncientJavelin;
 import fossilsarcheology.server.entity.mob.projectile.EntityBirdEgg;
 import fossilsarcheology.server.entity.mob.projectile.EntityJavelin;
@@ -96,15 +146,28 @@ import fossilsarcheology.server.handler.EventNewMenu;
 import fossilsarcheology.server.handler.EventOverlay;
 import fossilsarcheology.server.handler.FossilClientEvents;
 import fossilsarcheology.server.item.FAItemRegistry;
+import net.ilexiconn.llibrary.client.lang.LanguageHandler;
+import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.particle.Particle;
+import net.minecraft.client.particle.ParticleBlockDust;
+import net.minecraft.client.particle.ParticleBreaking;
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
+import net.minecraftforge.client.MinecraftForgeClient;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
 
 public class ClientProxy extends ServerProxy {
-
-    private static final ModelAncientHelmet helmetModel = new ModelAncientHelmet(1.0f);
+    private static final ModelAncientHelmet ANCIENT_HELMET_MODEL = new ModelAncientHelmet(1.0f);
 
     @Override
     public void init() {
         super.init();
-        VillagerRegistry.instance().registerVillagerSkin(Revival.CONFIG.villagerId, new ResourceLocation("fossil:textures/model/Archaeologist.png"));
         RenderingRegistry.registerEntityRenderingHandler(EntityTriceratops.class, new RenderPrehistoric(new ModelTriceratops()));
         RenderingRegistry.registerEntityRenderingHandler(EntityVelociraptor.class, new RenderPrehistoric(new ModelVelociraptor()));
         RenderingRegistry.registerEntityRenderingHandler(EntityTyrannosaurus.class, new RenderPrehistoric(new ModelTyrannosaurus()));
@@ -132,11 +195,6 @@ public class ClientProxy extends ServerProxy {
         RenderingRegistry.registerEntityRenderingHandler(EntityElasmotherium.class, new RenderPrehistoric(new ModelElasmotherium()));
         RenderingRegistry.registerEntityRenderingHandler(EntityCeratosaurus.class, new RenderPrehistoric(new ModelCeratosaurus()));
         RenderingRegistry.registerEntityRenderingHandler(EntityConfuciusornis.class, new RenderPrehistoric(new ModelConfuciusornis()));
-        RenderingRegistry.registerEntityRenderingHandler(EntityDryosaurus.class, new RenderPrehistoric(new ModelDryosaurus()));
-        RenderingRegistry.registerEntityRenderingHandler(EntityTherizinosaurus.class, new RenderPrehistoric(new ModelTherizinosaurus()));
-        RenderingRegistry.registerEntityRenderingHandler(EntityParasaurolophus.class, new RenderPrehistoric(new ModelParasaurolophus()));
-        RenderingRegistry.registerEntityRenderingHandler(EntityIcthyosaurus.class, new RenderPrehistoric(new ModelIcthyosaurus()));
-        RenderingRegistry.registerEntityRenderingHandler(EntityHenodus.class, new RenderPrehistoric(new ModelHenodus()));
         RenderingRegistry.registerEntityRenderingHandler(EntityGastornis.class, new RenderPrehistoric(new ModelTerrorBird()));
         RenderingRegistry.registerEntityRenderingHandler(EntityKelenken.class, new RenderPrehistoric(new ModelTerrorBird()));
         RenderingRegistry.registerEntityRenderingHandler(EntityPhorusrhacos.class, new RenderPrehistoric(new ModelTerrorBird()));
@@ -171,16 +229,14 @@ public class ClientProxy extends ServerProxy {
 
         RenderingRegistry.registerBlockHandler(RenderFeeder.feederRenderID, new RenderFeeder());
 
-        VillagerRegistry.instance().registerVillagerSkin(10, new ResourceLocation("fossil:textures/model/Archaeologist.png"));
-
         if (Revival.CONFIG.skullOverlay) {
             MinecraftForge.EVENT_BUS.register(new EventOverlay(Minecraft.getMinecraft()));
         }
 
         TileEntitySpecialRenderer cultivate = new TileEntityCultivateRenderer();
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCultivate.class, cultivate);
-        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(FABlockRegistry.INSTANCE.blockcultivateActive), new ItemRenderTileEntity(cultivate, new TileEntityCultivate()));
-        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(FABlockRegistry.INSTANCE.blockcultivateIdle), new ItemRenderTileEntity(cultivate, new TileEntityCultivate()));
+        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(FABlockRegistry.INSTANCE.CULTIVATE_ACTIVE), new ItemRenderTileEntity(cultivate, new TileEntityCultivate()));
+        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(FABlockRegistry.INSTANCE.CULTIVATE_IDLE), new ItemRenderTileEntity(cultivate, new TileEntityCultivate()));
 
         TileEntitySpecialRenderer ancChest = new TileEntityAncientChestRender();
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAncientChest.class, ancChest);
@@ -217,29 +273,17 @@ public class ClientProxy extends ServerProxy {
     public ModelBiped getArmorModel(int id) {
         switch (id) {
             case 0:
-                return helmetModel;
+                return ANCIENT_HELMET_MODEL;
             default:
                 break;
         }
 
-        return helmetModel;
-    }
-
-    @Override
-    public void playSound(String soundName) {
-        Minecraft.getMinecraft().getSoundHandler().playSound(PositionedSoundRecord.func_147673_a(new ResourceLocation(soundName)));
-    }
-
-    @Override
-    public void stopSound(String soundName) {
-        ISound sound = PositionedSoundRecord.func_147673_a(new ResourceLocation(soundName));
-        if (Minecraft.getMinecraft().getSoundHandler().isSoundPlaying(sound))
-            Minecraft.getMinecraft().getSoundHandler().stopSound(sound);
+        return ANCIENT_HELMET_MODEL;
     }
 
     @Override
     public void spawnAnuParticle(World world, double posX, double posY, double posZ) {
-        EntityFX particle1 = new DeathOrbFX(world, posX, posY, posZ, 0, 0, 0);
+        Particle particle1 = new DeathOrbFX(world, posX, posY, posZ, 0, 0, 0);
         Minecraft.getMinecraft().effectRenderer.addEffect(particle1);
     }
 
@@ -259,19 +303,15 @@ public class ClientProxy extends ServerProxy {
         Minecraft.getMinecraft().effectRenderer.addEffect(new BubbleFX(world, f, f1, f2, motionX, motionY, motionZ));
     }
 
-    public void spawnSleepParticles(World world, float f, float f1, float f2, double motionX, double motionY, double motionZ) {
-            Minecraft.getMinecraft().effectRenderer.addEffect(new SleepFX(world, f, f1, f2, motionX, motionY, motionZ));
-    }
-
     public void spawnPacketHeartParticles(World world, float f, float f1, float f2, double motionX, double motionY, double motionZ) {
         Minecraft.getMinecraft().effectRenderer.addEffect(new HeartFX(world, f, f1, f2, motionX, motionY, motionZ));
     }
 
     public void spawnPacketItemParticles(World world, float f, float f1, float f2, double motionX, double motionY, double motionZ, Item item) {
-        Minecraft.getMinecraft().effectRenderer.addEffect(new EntityBreakingFX(world, f, f1, f2, motionX, motionY, motionZ, item, 0));
+        Minecraft.getMinecraft().effectRenderer.addEffect(new ParticleBreaking(world, f, f1, f2, motionX, motionY, motionZ, item, 0));
     }
 
     public void spawnPacketBlockParticles(World world, float f, float f1, float f2, double motionX, double motionY, double motionZ, Block block) {
-        Minecraft.getMinecraft().effectRenderer.addEffect(new EntityBlockDustFX(world, f, f1, f2, motionX, motionY, motionZ, block, 0));
+        Minecraft.getMinecraft().effectRenderer.addEffect(new ParticleBlockDust(world, f, f1, f2, motionX, motionY, motionZ, block, 0));
     }
 }

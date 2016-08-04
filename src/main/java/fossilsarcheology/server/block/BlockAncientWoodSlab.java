@@ -2,8 +2,6 @@ package fossilsarcheology.server.block;
 
 import fossilsarcheology.server.creativetab.FATabRegistry;
 import fossilsarcheology.server.handler.LocalizationStrings;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.material.Material;
@@ -14,12 +12,14 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 import java.util.Random;
 
 public class BlockAncientWoodSlab extends BlockSlab {
-    public static final String[] woodType = {"ancientWood"};
+    public static final String[] woodType = { "ancientWood" };
 
     public BlockAncientWoodSlab(boolean doubleSlabbed) {
         super(doubleSlabbed, Material.wood);
@@ -27,18 +27,18 @@ public class BlockAncientWoodSlab extends BlockSlab {
         useNeighborBrightness = true;
         setHardness(1.4F);
         setResistance(7.5F);
-        setStepSound(Block.soundTypeWood);
+        setSoundType(Block.soundTypeWood);
         if (doubleSlabbed) {
-            setBlockName(LocalizationStrings.ANCIENT_WOOD_DOUBLESLAB_NAME);
+            setUnlocalizedName(LocalizationStrings.ANCIENT_WOOD_DOUBLESLAB_NAME);
         } else {
-            setBlockName(LocalizationStrings.ANCIENT_WOOD_SINGLESLAB_NAME);
-            setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
+            setUnlocalizedName(LocalizationStrings.ANCIENT_WOOD_SINGLESLAB_NAME);
+            setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
         }
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public Item getItem(World world, int x, int y, int z) {
+    public Item getItem(World world, BlockPos pos) {
         return Item.getItemFromBlock(this);
     }
 
@@ -52,14 +52,14 @@ public class BlockAncientWoodSlab extends BlockSlab {
         return Item.getItemFromBlock(FABlockRegistry.INSTANCE.ancientWoodSingleSlab);
     }
 
-    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving placer) {
+    public void onBlockPlacedBy(World world, BlockPos pos, EntityLiving placer) {
         if (world.getBlock(x, y - 1, z) == FABlockRegistry.INSTANCE.ancientWoodSingleSlab) {
-            world.setBlock(x, y, z, Blocks.air, 0, 2);
+            world.setBlock(pos, Blocks.air, 0, 2);
             world.setBlock(x, y - 1, z, FABlockRegistry.INSTANCE.ancientWoodDoubleSlab);
         }
 
         if (world.getBlock(x, y + 1, z) == FABlockRegistry.INSTANCE.ancientWoodSingleSlab) {
-            world.setBlock(x, y, z, Blocks.air, 0, 2);
+            world.setBlock(pos, Blocks.air, 0, 2);
             world.setBlock(x, y + 1, z, FABlockRegistry.INSTANCE.ancientWoodDoubleSlab);
         }
     }

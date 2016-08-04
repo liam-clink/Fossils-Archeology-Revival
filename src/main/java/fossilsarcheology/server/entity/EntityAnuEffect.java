@@ -7,11 +7,11 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 public class EntityAnuEffect extends EntityLiving {
-
     public boolean slowed;
     public int deathTicks;
     private Entity target;
@@ -25,26 +25,23 @@ public class EntityAnuEffect extends EntityLiving {
     }
 
     public int getAnuRotation() {
-        return this.dataWatcher.getWatchableObjectByte(18);
+        return this.dataManager.getWatchableObjectByte(18);
     }
 
     public void setAnuRotation(float par1) {
-        this.dataWatcher.updateObject(18, (byte) par1);
+        this.dataManager.updateObject(18, (byte) par1);
     }
 
     @Override
-    public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {
-        super.writeEntityToNBT(par1NBTTagCompound);
-        par1NBTTagCompound.setInteger("AnuRotation", this.getAnuRotation());
+    public void writeEntityToNBT(NBTTagCompound compound) {
+        super.writeEntityToNBT(compound);
+        compound.setInteger("AnuRotation", this.getAnuRotation());
     }
 
-    /**
-     * (abstract) Protected helper method to read subclass entity data from NBT.
-     */
     @Override
-    public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {
-        super.readEntityFromNBT(par1NBTTagCompound);
-        this.setAnuRotation(par1NBTTagCompound.getInteger("AnuRotation"));
+    public void readEntityFromNBT(NBTTagCompound compound) {
+        super.readEntityFromNBT(compound);
+        this.setAnuRotation(compound.getInteger("AnuRotation"));
     }
 
     @Override
@@ -57,8 +54,8 @@ public class EntityAnuEffect extends EntityLiving {
     @Override
     protected void entityInit() {
         super.entityInit();
-        this.dataWatcher.addObject(16, (byte) 0);
-        this.dataWatcher.addObject(18, (byte) 0);
+        this.dataManager.register(16, (byte) 0);
+        this.dataManager.register(18, (byte) 0);
     }
 
     public void playSummonSong() {
@@ -68,12 +65,9 @@ public class EntityAnuEffect extends EntityLiving {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(20.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20.0D);
     }
 
-    /**
-     * handles entity death timer, experience orb and particle creation
-     */
     @Override
     protected void onDeathUpdate() {
         ++this.deathTicks;
@@ -117,42 +111,27 @@ public class EntityAnuEffect extends EntityLiving {
                 this.worldObj.spawnEntityInWorld(new EntityXPOrb(this.worldObj, this.posX, this.posY, this.posZ, j));
             }
 
-            this.createEnderPortal(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY), MathHelper.floor_double(this.posZ));
+            this.createPortal(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY), MathHelper.floor_double(this.posZ));
             this.setDead();
         }
     }
 
-    /**
-     * Creates the ender portal leading back to the normal world after defeating
-     * the enderdragon.
-     */
-    private void createEnderPortal(int x, int y, int z) {
-        worldObj.setBlock(x, y, z, FABlockRegistry.INSTANCE.anuPortal);
-        worldObj.setBlock(x, y + 1, z, FABlockRegistry.INSTANCE.anuPortal);
-        worldObj.setBlock(x, y + 2, z, Blocks.obsidian);
-        worldObj.setBlock(x, y - 1, z, Blocks.obsidian);
+    private void createPortal(BlockPos pos) {
+        worldObj.setBlockState(pos, FABlockRegistry.INSTANCE.anuPortal.getDefaultState());
+        worldObj.setBlockState(pos.up(), FABlockRegistry.INSTANCE.anuPortal.getDefaultState());
+        worldObj.setBlockState(pos.up(2), Blocks.OBSIDIAN.getDefaultState());
+        worldObj.setBlockState(pos.down(), Blocks.OBSIDIAN.getDefaultState());
     }
 
-    /**
-     * Makes the entity despawn if requirements are reached
-     */
     @Override
     protected void despawnEntity() {
-
     }
 
-    /**
-     * Returns true if other Entities should be prevented from moving through
-     * this Entity.
-     */
     @Override
     public boolean canBeCollidedWith() {
         return false;
     }
 
-    /**
-     * Returns the volume for the sounds this mob makes.
-     */
     @Override
     protected float getSoundVolume() {
         return 5.0F;

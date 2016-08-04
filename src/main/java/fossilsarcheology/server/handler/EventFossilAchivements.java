@@ -2,18 +2,18 @@ package fossilsarcheology.server.handler;
 
 import fossilsarcheology.server.block.FABlockRegistry;
 import fossilsarcheology.server.item.FAItemRegistry;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.PlayerEvent;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
 public class EventFossilAchivements {
     @SubscribeEvent
     public void onCraftEvent(PlayerEvent.ItemCraftedEvent event) {
         EntityPlayer player = event.player;
-        if (event.crafting.getItem() == Item.getItemFromBlock(FABlockRegistry.INSTANCE.blockanalyzerIdle)) {
+        if (event.crafting.getItem() == Item.getItemFromBlock(FABlockRegistry.INSTANCE.analyzerIdle)) {
             player.addStat(FossilAchievementHandler.analyzer, 1);
-        } else if (event.crafting.getItem() == Item.getItemFromBlock(FABlockRegistry.INSTANCE.blockcultivateIdle)) {
+        } else if (event.crafting.getItem() == Item.getItemFromBlock(FABlockRegistry.INSTANCE.CULTIVATE_IDLE)) {
             player.addStat(FossilAchievementHandler.cultivate, 1);
         } else if (event.crafting.getItem() == Item.getItemFromBlock(FABlockRegistry.INSTANCE.blockSifterIdle)) {
             player.addStat(FossilAchievementHandler.sifter, 1);

@@ -102,8 +102,8 @@ public class BlockRotationData {
      * Maps a block to a specified rotation type. Allows custom blocks to rotate
      * with structure.
      *
-     * @param block        a valid block
-     * @param rotationType types predefined by enumerated type ROTATION
+     * @param block a valid block
+     * @param rotationType types predefined by enumerated type Rotation
      * @return false if a rotation type has already been specified for the given
      * block
      */
@@ -115,10 +115,10 @@ public class BlockRotationData {
      * Maps a block to a specified rotation type. Allows custom blocks to rotate
      * with structure.
      *
-     * @param block        a valid block
-     * @param rotationType types predefined by enumerated type ROTATION
-     * @param override     if true, will override the previously set rotation data for
-     *                     specified block
+     * @param block a valid block
+     * @param rotationType types predefined by enumerated type Rotation
+     * @param override if true, will override the previously set rotation data for
+     * specified block
      * @return false if a rotation type has already been specified for the given
      * block
      */

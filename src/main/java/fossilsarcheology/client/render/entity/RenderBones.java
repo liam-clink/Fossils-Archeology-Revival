@@ -2,14 +2,13 @@ package fossilsarcheology.client.render.entity;
 
 import fossilsarcheology.client.model.ModelBones;
 import fossilsarcheology.server.entity.mob.EntityBones;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.entity.RenderBiped;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
-import org.lwjgl.opengl.GL11;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderBones extends RenderBiped {
@@ -23,13 +22,13 @@ public class RenderBones extends RenderBiped {
     protected void scaleSkeleton(EntityBones par1EntitySkeleton, float par2) {
         // if (par1EntitySkeleton.getSkeletonType() == 1)
         // {
-        GL11.glScalef(1.2F, 1.2F, 1.2F);
+        GlStateManager.scale(1.2F, 1.2F, 1.2F);
         // }
     }
 
     @Override
     protected void func_82422_c() {
-        GL11.glTranslatef(0.09375F, 0.1875F, 0.0F);
+        GlStateManager.translate(0.09375F, 0.1875F, 0.0F);
     }
 
     protected ResourceLocation func_110860_a(EntityBones par1EntitySkeleton) {

@@ -1,17 +1,17 @@
 package fossilsarcheology.server.item;
 
 import fossilsarcheology.server.entity.mob.projectile.EntityBirdEgg;
-import fossilsarcheology.server.enums.EnumPrehistoric;
+import fossilsarcheology.server.enums.PrehistoricEntityType;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 public class BirdEggItem extends Item {
-    EnumPrehistoric creature;
+    PrehistoricEntityType creature;
     boolean cultivated;
 
-    public BirdEggItem(EnumPrehistoric creature, boolean cultivated) {
+    public BirdEggItem(PrehistoricEntityType creature, boolean cultivated) {
         super();
         this.creature = creature;
         this.cultivated = cultivated;

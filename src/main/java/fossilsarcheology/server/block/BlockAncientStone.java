@@ -10,8 +10,8 @@ public class BlockAncientStone extends Block {
     public BlockAncientStone() {
         super(Material.rock);
         setHardness(1.5F);
-        setBlockName(LocalizationStrings.ANCIENT_STONE_NAME);
-        setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
+        setUnlocalizedName(LocalizationStrings.ANCIENT_STONE_NAME);
+        setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
     }
 
     /**

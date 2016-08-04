@@ -1,29 +1,29 @@
 package fossilsarcheology.server.entity.mob;
 
+import fossilsarcheology.Revival;
+import fossilsarcheology.client.gui.PediaGUI;
+import fossilsarcheology.server.entity.IViviparous;
+import fossilsarcheology.server.enums.PrehistoricEntityType;
+import fossilsarcheology.server.handler.LocalizationStrings;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
-import fossilsarcheology.Revival;
-import fossilsarcheology.client.gui.GuiPedia;
-import fossilsarcheology.server.entity.IViviparous;
-import fossilsarcheology.server.enums.EnumPrehistoric;
-import fossilsarcheology.server.handler.LocalizationStrings;
 
 public class EntityPregnantPig implements IViviparous, IExtendedEntityProperties {
     public final static String PREGNANT_PIG_PROP = "EntityPregnantPig";
     public final EntityPig pig;
 
     public int EmbryoProgress;
-    public EnumPrehistoric Embryo;
+    public PrehistoricEntityType embryo;
     private World worldObj;
 
     public EntityPregnantPig(EntityPig pig) {
         this.pig = pig;
         this.EmbryoProgress = 0;
-        this.Embryo = null;
+        this.embryo = null;
     }
 
     // Register properties.
@@ -45,8 +45,8 @@ public class EntityPregnantPig implements IViviparous, IExtendedEntityProperties
 
         // We only have 2 variables currently; save them both to the new tag
         properties.setInteger("EmbryoProgress", this.EmbryoProgress);
-        if (this.Embryo != null) {
-            properties.setByte("Inside", (byte) this.Embryo.ordinal());
+        if (this.embryo != null) {
+            properties.setByte("Inside", (byte) this.embryo.ordinal());
         }
 
 		/*
@@ -74,7 +74,7 @@ public class EntityPregnantPig implements IViviparous, IExtendedEntityProperties
         }
 
         if (compound.hasKey("Inside")) {
-            this.Embryo = EnumPrehistoric.values()[properties.getByte("Inside")];
+            this.embryo = PrehistoricEntityType.values()[properties.getByte("Inside")];
         }
     }
 
@@ -83,8 +83,8 @@ public class EntityPregnantPig implements IViviparous, IExtendedEntityProperties
     }
 
     @Override
-    public void setEmbryo(EnumPrehistoric animalType) {
-        this.Embryo = animalType;
+    public void setEmbryo(PrehistoricEntityType animalType) {
+        this.embryo = animalType;
     }
 
     public void setPedia() {
@@ -92,19 +92,19 @@ public class EntityPregnantPig implements IViviparous, IExtendedEntityProperties
     }
 
     @Override
-    public void showPedia(GuiPedia p0) {
-        if (this.Embryo != null) {
-            int quot = (int) Math.floor(((float) this.EmbryoProgress / (float) this.Embryo.growTime * 100.0F));
+    public void showPedia(PediaGUI p0) {
+        if (this.embryo != null) {
+            int quot = (int) Math.floor(((float) this.EmbryoProgress / (float) this.embryo.growTime * 100.0F));
 
             p0.reset();
-            p0.addStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_EMBRYO_INSIDE), false);
-            p0.addStringLR(StatCollector.translateToLocal("pedia.embryo." + this.Embryo.toString()), false, 40, 90, 245);
-            p0.addStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_EMBRYO_GROWING), false);
+            p0.addStringLR(I18n.translateToLocal(LocalizationStrings.PEDIA_EMBRYO_INSIDE), false);
+            p0.addStringLR(I18n.translateToLocal("pedia.embryo." + this.embryo.toString()), false, 40, 90, 245);
+            p0.addStringLR(I18n.translateToLocal(LocalizationStrings.PEDIA_EMBRYO_GROWING), false);
             p0.addStringLR(String.valueOf(quot) + "/100", false);
         } else {
             p0.reset();
-            p0.addStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_EMBRYO_INSIDE), false);
-            p0.addStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_EMBRYO_GROWING), false);
+            p0.addStringLR(I18n.translateToLocal(LocalizationStrings.PEDIA_EMBRYO_INSIDE), false);
+            p0.addStringLR(I18n.translateToLocal(LocalizationStrings.PEDIA_EMBRYO_GROWING), false);
         }
     }
 

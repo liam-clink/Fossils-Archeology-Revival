@@ -10,7 +10,7 @@ public class BlockLimestone extends Block {
     public BlockLimestone(Material material) {
         super(Material.rock);
         setHardness(0.3F);
-        setBlockName(LocalizationStrings.BLOCK_LIMESTONE_NAME);
+        setUnlocalizedName(LocalizationStrings.BLOCK_LIMESTONE_NAME);
     }
 
     @Override

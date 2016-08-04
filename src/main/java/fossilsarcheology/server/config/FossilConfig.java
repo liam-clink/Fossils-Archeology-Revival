@@ -1,7 +1,7 @@
 package fossilsarcheology.server.config;
 
-import cpw.mods.fml.relauncher.Side;
 import net.ilexiconn.llibrary.server.config.ConfigEntry;
+import net.minecraftforge.fml.relauncher.Side;
 
 public class FossilConfig {
     @ConfigEntry(category = "generation")
@@ -29,7 +29,7 @@ public class FossilConfig {
     @ConfigEntry(category = "generation")
     public boolean generateFossilSites = true;
     @ConfigEntry(category = "generation")
-    public int[] oreGenerationDimensions = {0};
+    public int[] oreGenerationDimensions = { 0 };
 
     @ConfigEntry(category = "entity spawning")
     public boolean spawnCoelacanth = true;
@@ -39,6 +39,9 @@ public class FossilConfig {
     public boolean spawnAlligatorGar = true;
     @ConfigEntry(category = "entity spawning")
     public boolean spawnNautilus = true;
+
+    @ConfigEntry
+    public boolean allowFlying = false;
     @ConfigEntry
     public boolean healingDinos = true;
     @ConfigEntry
@@ -50,6 +53,10 @@ public class FossilConfig {
     @ConfigEntry
     public boolean loginMessage = true;
     @ConfigEntry
+    public boolean anuSpawn = false;
+    @ConfigEntry
+    public boolean anuAllowedOverworld = false;
+    @ConfigEntry
     public boolean allowTableEnchantments = true;
     @ConfigEntry
     public boolean allowBookEnchantments = true;
@@ -59,31 +66,24 @@ public class FossilConfig {
     public boolean customMainMenu = true;
 
     @ConfigEntry(category = "dinosaurs")
-    public boolean featheredTRex = true;
+    public boolean featheredTRex = false;
     @ConfigEntry(category = "dinosaurs")
-    public boolean featheredDeinonychus = true;
+    public boolean featheredDeinonychus = false;
     @ConfigEntry(category = "dinosaurs")
-    public boolean featheredGallimimus = true;
+    public boolean featheredGallimimus = false;
     @ConfigEntry(category = "dinosaurs")
-    public boolean featheredCompsognathus = true;
+    public boolean featheredCompsognathus = false;
     @ConfigEntry(category = "dinosaurs")
     public boolean quilledTriceratops = true;
     @ConfigEntry(category = "dinosaurs")
-    public boolean featheredVelociraptor = true;
-    @ConfigEntry(category = "dinosaurs")
-    public boolean featheredTherizinosaurus = true;
+    public boolean featheredVelociraptor = false;
     @ConfigEntry(category = "dinosaurs")
     public boolean eggsLikeChickens = false;
-    @ConfigEntry(category = "dinosaurs")
-    public boolean sleepingParticles = true;
-    @ConfigEntry(category = "ids")
-    public int biomeIDDarknessLair = 128;
-    @ConfigEntry(category = "ids")
-    public int biomeIDTreasure = 127;
     @ConfigEntry(category = "ids")
     public int dimensionIDDarknessLair = -23;
     @ConfigEntry(category = "ids")
     public int dimensionIDTreasure = -34;
+
     @ConfigEntry(category = "ids")
     public int enchantmentIDArcheology = 91;
     @ConfigEntry(category = "ids")

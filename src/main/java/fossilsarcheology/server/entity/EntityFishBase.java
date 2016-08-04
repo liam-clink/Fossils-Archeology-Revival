@@ -3,11 +3,8 @@ package fossilsarcheology.server.entity;
 import fossilsarcheology.Revival;
 import fossilsarcheology.server.entity.ai.FishAIWaterFindTarget;
 import fossilsarcheology.server.entity.mob.EntityNautilus;
-import fossilsarcheology.server.enums.EnumPrehistoric;
+import fossilsarcheology.server.enums.PrehistoricEntityType;
 import fossilsarcheology.server.item.FAItemRegistry;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.ilexiconn.llibrary.client.model.tools.ChainBuffer;
 import net.minecraft.block.material.Material;
 import net.minecraft.command.IEntitySelector;
@@ -25,20 +22,23 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Collections;
 import java.util.List;
 
 public abstract class EntityFishBase extends EntityTameable {
 
-    public EnumPrehistoric selfType;
+    public PrehistoricEntityType selfType;
     public ChunkCoordinates currentTarget;
     @SideOnly(Side.CLIENT)
     public ChainBuffer chainBuffer;
 
-    public EntityFishBase(World par1World, EnumPrehistoric selfType) {
+    public EntityFishBase(World par1World, PrehistoricEntityType selfType) {
         super(par1World);
         this.tasks.addTask(1, new FishAIWaterFindTarget(this, 0));
         this.tasks.addTask(2, new EntityAILookIdle(this));
@@ -113,9 +113,6 @@ public abstract class EntityFishBase extends EntityTameable {
     @Override
     public void onUpdate() {
         super.onUpdate();
-        if(this.height != 1F){
-            this.height = 1F;
-        }
         swimAround();
         Revival.PROXY.calculateChainBuffer(this);
         if (this.isInWater() && this.getClosestMate() != null && this.getGrowingAge() == 0 && this.getClosestMate().getGrowingAge() == 0 && !this.worldObj.isRemote) {
@@ -157,10 +154,6 @@ public abstract class EntityFishBase extends EntityTameable {
         return this instanceof EntityNautilus && ((EntityNautilus) this).isInShell();
     }
 
-    public boolean isInWater(){
-        return this.inWater || this.isChild() & this.isInsideOfMaterial(Material.water);
-    }
-
     public void moveEntityWithHeading(float x, float z) {
         double d0;
         float f6;
@@ -182,13 +175,13 @@ public abstract class EntityFishBase extends EntityTameable {
             } else {
                 float f2 = 0.91F;
 
-                if (this.onGround && !this.isChild()) {
+                if (this.onGround) {
                     f2 = this.worldObj.getBlock(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.boundingBox.minY) - 1, MathHelper.floor_double(this.posZ)).slipperiness * 0.91F;
                 }
 
                 float f3 = 0.16277136F / (f2 * f2 * f2);
 
-                if (this.onGround && !this.isChild()) {
+                if (this.onGround) {
                     f4 = this.getAIMoveSpeed() * f3;
                 } else {
                     f4 = this.jumpMovementFactor;
@@ -197,7 +190,7 @@ public abstract class EntityFishBase extends EntityTameable {
                 this.moveFlying(x, z, f4);
                 f2 = 0.91F;
 
-                if (this.onGround && !this.isChild()) {
+                if (this.onGround) {
                     f2 = this.worldObj.getBlock(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.boundingBox.minY) - 1, MathHelper.floor_double(this.posZ)).slipperiness * 0.91F;
                 }
 

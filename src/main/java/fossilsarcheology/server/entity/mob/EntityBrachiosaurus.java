@@ -1,5 +1,28 @@
 package fossilsarcheology.server.entity.mob;
 
+import fossilsarcheology.server.entity.EntityPrehistoric;
+import fossilsarcheology.server.entity.ai.DinoAIAttackOnCollide;
+import fossilsarcheology.server.entity.ai.DinoAIEatBlocks;
+import fossilsarcheology.server.entity.ai.DinoAIEatFeeders;
+import fossilsarcheology.server.entity.ai.DinoAIEatItems;
+import fossilsarcheology.server.entity.ai.DinoAIFollowOwner;
+import fossilsarcheology.server.entity.ai.DinoAIHunt;
+import fossilsarcheology.server.entity.ai.DinoAILookIdle;
+import fossilsarcheology.server.entity.ai.DinoAIRiding;
+import fossilsarcheology.server.entity.ai.DinoAIWander;
+import fossilsarcheology.server.entity.ai.DinoAIWatchClosest;
+import fossilsarcheology.server.enums.EnumPrehistoricAI.Activity;
+import fossilsarcheology.server.enums.EnumPrehistoricAI.Attacking;
+import fossilsarcheology.server.enums.EnumPrehistoricAI.Climbing;
+import fossilsarcheology.server.enums.EnumPrehistoricAI.Following;
+import fossilsarcheology.server.enums.EnumPrehistoricAI.Jumping;
+import fossilsarcheology.server.enums.EnumPrehistoricAI.Moving;
+import fossilsarcheology.server.enums.EnumPrehistoricAI.Response;
+import fossilsarcheology.server.enums.EnumPrehistoricAI.Stalking;
+import fossilsarcheology.server.enums.EnumPrehistoricAI.Taming;
+import fossilsarcheology.server.enums.EnumPrehistoricAI.Untaming;
+import fossilsarcheology.server.enums.EnumPrehistoricAI.WaterAbility;
+import fossilsarcheology.server.enums.PrehistoricEntityType;
 import net.ilexiconn.llibrary.server.animation.Animation;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -13,34 +36,11 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
-import fossilsarcheology.server.entity.EntityPrehistoric;
-import fossilsarcheology.server.entity.ai.DinoAIAttackOnCollide;
-import fossilsarcheology.server.entity.ai.DinoAIEatBlocks;
-import fossilsarcheology.server.entity.ai.DinoAIEatFeeders;
-import fossilsarcheology.server.entity.ai.DinoAIEatItems;
-import fossilsarcheology.server.entity.ai.DinoAIFollowOwner;
-import fossilsarcheology.server.entity.ai.DinoAIHunt;
-import fossilsarcheology.server.entity.ai.DinoAILookIdle;
-import fossilsarcheology.server.entity.ai.DinoAIRiding;
-import fossilsarcheology.server.entity.ai.DinoAIWander;
-import fossilsarcheology.server.entity.ai.DinoAIWatchClosest;
-import fossilsarcheology.server.enums.EnumPrehistoric;
-import fossilsarcheology.server.enums.EnumPrehistoricAI.Activity;
-import fossilsarcheology.server.enums.EnumPrehistoricAI.Attacking;
-import fossilsarcheology.server.enums.EnumPrehistoricAI.Climbing;
-import fossilsarcheology.server.enums.EnumPrehistoricAI.Following;
-import fossilsarcheology.server.enums.EnumPrehistoricAI.Jumping;
-import fossilsarcheology.server.enums.EnumPrehistoricAI.Moving;
-import fossilsarcheology.server.enums.EnumPrehistoricAI.Response;
-import fossilsarcheology.server.enums.EnumPrehistoricAI.Stalking;
-import fossilsarcheology.server.enums.EnumPrehistoricAI.Taming;
-import fossilsarcheology.server.enums.EnumPrehistoricAI.Untaming;
-import fossilsarcheology.server.enums.EnumPrehistoricAI.WaterAbility;
 
 public class EntityBrachiosaurus extends EntityPrehistoric {
 
     public EntityBrachiosaurus(World world) {
-        super(world, EnumPrehistoric.Brachiosaurus, 2, 46, 20, 200, 0.3, 0.45);
+        super(world, PrehistoricEntityType.BRACHIOSAURUS, 2, 46, 20, 200, 0.3, 0.45);
         this.getNavigator().setAvoidsWater(true);
         this.getNavigator().setCanSwim(true);
         this.tasks.addTask(1, new EntityAISwimming(this));
@@ -67,7 +67,7 @@ public class EntityBrachiosaurus extends EntityPrehistoric {
         breaksBlocks = true;
         this.ridingY = 1.5F;
         this.ridingXZ = -0.2F;
-		ATTACK_ANIMATION = Animation.create(30);
+        ATTACK_ANIMATION = Animation.create(30);
         this.pediaScale = 35F;
     }
 
@@ -178,31 +178,31 @@ public class EntityBrachiosaurus extends EntityPrehistoric {
 
     @Override
     public boolean attackEntityAsMob(Entity entity) {
-            if (this.getAnimation() != ATTACK_ANIMATION) {
-                this.setAnimation(ATTACK_ANIMATION);
-                return false;
-            }
-            if (this.getAnimation() == ATTACK_ANIMATION && this.getAnimationTick() > 19) {
-                IAttributeInstance iattributeinstance = this.getEntityAttribute(SharedMonsterAttributes.attackDamage);
-                boolean flag = entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) iattributeinstance.getAttributeValue());
-                if (entity.ridingEntity != null) {
-                    if (entity.ridingEntity == this) {
-                        entity.mountEntity(null);
-                    }
+        if (this.getAnimation() != ATTACK_ANIMATION) {
+            this.setAnimation(ATTACK_ANIMATION);
+            return false;
+        }
+        if (this.getAnimation() == ATTACK_ANIMATION && this.getAnimationTick() > 19) {
+            IAttributeInstance iattributeinstance = this.getEntityAttribute(SharedMonsterAttributes.attackDamage);
+            boolean flag = entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) iattributeinstance.getAttributeValue());
+            if (entity.ridingEntity != null) {
+                if (entity.ridingEntity == this) {
+                    entity.mountEntity(null);
                 }
-                entity.motionY -= 0.4000000059604645D;
-                knockbackEntity(entity, -2F, -0.1F);
-                return flag;
             }
+            entity.motionY -= 0.4000000059604645D;
+            knockbackEntity(entity, -2F, -0.1F);
+            return flag;
+        }
         return false;
     }
 
     public int getMaxHunger() {
         return 250;
     }
-    
-	@Override
-	public boolean canBeRidden() {
-		return true;
-	}
+
+    @Override
+    public boolean canBeRidden() {
+        return true;
+    }
 }

@@ -4,12 +4,13 @@ import fossilsarcheology.Revival;
 import fossilsarcheology.server.block.entity.TileEntityAnalyzer;
 import fossilsarcheology.server.creativetab.FATabRegistry;
 import fossilsarcheology.server.handler.LocalizationStrings;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
+import net.minecraft.block.BlockHorizontal;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.properties.PropertyDirection;
+import net.minecraft.block.state.BlockStateContainer;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,268 +18,196 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IIcon;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.EnumBlockRenderType;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.Mirror;
+import net.minecraft.util.Rotation;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Random;
 
 public class BlockAnalyzer extends BlockContainer {
-    private static boolean keepFurnaceInventory = false;
-    private final boolean isActive;
+    public static final PropertyDirection FACING = BlockHorizontal.FACING;
+
+    private static boolean keepInventory = false;
+
     private Random rand = new Random();
-    @SideOnly(Side.CLIENT)
-    private IIcon top;
-    @SideOnly(Side.CLIENT)
-    private IIcon front;
 
     public BlockAnalyzer(boolean isActive) {
-        super(Material.iron);
+        super(Material.IRON);
         setHardness(3.0F);
-        setStepSound(Block.soundTypeMetal);
-        this.isActive = isActive;
+        setSoundType(SoundType.METAL);
         if (isActive) {
             setLightLevel(0.9375F);
-            setBlockName(LocalizationStrings.BLOCK_ANALYZER_ACTIVE_NAME);
+            setUnlocalizedName(LocalizationStrings.BLOCK_ANALYZER_ACTIVE_NAME);
         } else {
-            setBlockName(LocalizationStrings.BLOCK_ANALYZER_IDLE_NAME);
-            setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
+            setUnlocalizedName(LocalizationStrings.BLOCK_ANALYZER_IDLE_NAME);
+            setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
         }
-        // this.blockIndexInTexture = 45;
+        this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
     }
 
-    /**
-     * Update which block ID the furnace is using depending on whether or not it
-     * is burning
-     */
-    public static void updateFurnaceBlockState(boolean isActive, World world, int x, int y, int z) {
-        int meta = world.getBlockMetadata(x, y, z);
-        TileEntity tileentity = world.getTileEntity(x, y, z);
-        keepFurnaceInventory = true;
+    public static void updateState(boolean isActive, World world, BlockPos pos) {
+        TileEntity tile = world.getTileEntity(pos);
+
+        keepInventory = true;
 
         if (isActive) {
-            world.setBlock(x, y, z, FABlockRegistry.INSTANCE.blockanalyzerActive);
+            world.setBlockState(pos, FABlockRegistry.INSTANCE.analyzerActive.getDefaultState());
         } else {
-            world.setBlock(x, y, z, FABlockRegistry.INSTANCE.blockanalyzerIdle);
+            world.setBlockState(pos, FABlockRegistry.INSTANCE.analyzerIdle.getDefaultState());
         }
 
-        keepFurnaceInventory = false;
-        world.setBlockMetadataWithNotify(x, y, z, meta, 2);
+        keepInventory = false;
 
-        if (tileentity != null) {
-            tileentity.validate();
-            world.setTileEntity(x, y, z, tileentity);
+        if (tile != null) {
+            tile.validate();
+            world.setTileEntity(pos, tile);
         }
     }
 
-    /*
-     * public String getTextureFile() { return
-     * "/fossil/textures/Fos_terrian.png"; }
-     */
     @Override
-    public int getRenderType() {
-        return 2303;
+    public EnumBlockRenderType getRenderType(IBlockState state) {
+        return EnumBlockRenderType.MODEL;
     }
 
-    /**
-     * Returns the ID of the items to drop on destruction.
-     */
     @Override
-    public Item getItemDropped(int var1, Random rand, int var3) {
-        return Item.getItemFromBlock(FABlockRegistry.INSTANCE.blockanalyzerIdle);
+    public Item getItemDropped(IBlockState state, Random random, int fortune) {
+        return Item.getItemFromBlock(FABlockRegistry.INSTANCE.analyzerIdle);
     }
 
-    /**
-     * Called whenever the block is added into the world. Args: world, x, y, z
-     */
     @Override
-    public void onBlockAdded(World world, int x, int y, int z) {
-        super.onBlockAdded(world, x, y, z);
-        this.setDefaultDirection(world, x, y, z);
+    public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
+        super.onBlockAdded(world, pos, state);
+        this.setDefaultFacing(world, pos, state);
     }
 
-    /**
-     * set a blocks direction
-     */
-    private void setDefaultDirection(World world, int x, int y, int z) {
+    private void setDefaultFacing(World world, BlockPos pos, IBlockState state) {
         if (!world.isRemote) {
-            Block block = world.getBlock(x, y, z - 1);
-            Block block1 = world.getBlock(x, y, z + 1);
-            Block block2 = world.getBlock(x - 1, y, z);
-            Block block3 = world.getBlock(x + 1, y, z);
-            byte b0 = 3;
-
-            if (block.func_149730_j() && !block1.func_149730_j()) {
-                b0 = 3;
+            IBlockState north = world.getBlockState(pos.north());
+            IBlockState south = world.getBlockState(pos.south());
+            IBlockState west = world.getBlockState(pos.west());
+            IBlockState east = world.getBlockState(pos.east());
+            EnumFacing facing = state.getValue(FACING);
+            if (facing == EnumFacing.NORTH && north.isFullBlock() && !south.isFullBlock()) {
+                facing = EnumFacing.SOUTH;
+            } else if (facing == EnumFacing.SOUTH && south.isFullBlock() && !north.isFullBlock()) {
+                facing = EnumFacing.NORTH;
+            } else if (facing == EnumFacing.WEST && west.isFullBlock() && !east.isFullBlock()) {
+                facing = EnumFacing.EAST;
+            } else if (facing == EnumFacing.EAST && east.isFullBlock() && !west.isFullBlock()) {
+                facing = EnumFacing.WEST;
             }
-
-            if (block1.func_149730_j() && !block.func_149730_j()) {
-                b0 = 2;
-            }
-
-            if (block2.func_149730_j() && !block3.func_149730_j()) {
-                b0 = 5;
-            }
-
-            if (block3.func_149730_j() && !block2.func_149730_j()) {
-                b0 = 4;
-            }
-
-            world.setBlockMetadataWithNotify(x, y, z, b0, 2);
+            world.setBlockState(pos, state.withProperty(FACING, facing), 2);
         }
     }
 
-    /**
-     * When this method is called, your block should register all the icons it
-     * needs with the given IconRegister. This is the only chance you get to
-     * register icons.
-     */
     @Override
-    @SideOnly(Side.CLIENT)
-    public void registerBlockIcons(IIconRegister iconRegister) {
-        this.blockIcon = iconRegister.registerIcon("fossil:Analyser_Sides");
-        this.top = iconRegister.registerIcon("fossil:Analyser_Top");
-        this.front = this.isActive ? iconRegister.registerIcon("fossil:Analyser_Front_Active") : iconRegister.registerIcon("fossil:Analyser_Front_Idle");
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
+        if (!world.isRemote) {
+            player.openGui(Revival.INSTANCE, 0, world, pos.getX(), pos.getY(), pos.getZ());
+        }
+        return true;
     }
 
-    /**
-     * From the specified side and block metadata retrieves the blocks texture.
-     * Args: side, metadata
-     */
-    @Override
-    public IIcon getIcon(int side, int metadata) {
-        return side == 1 ? this.top : (side == 0 ? this.blockIcon : (side != metadata ? this.blockIcon : this.front));
-
-        // return side == 1 ? this.top : ((side == metadata && side != 0) ||
-        // (metadata
-        // == 3 && side == 0) ? this.front : this.blockIcon);
-    }
-
-    /**
-     * Called upon block activation (right click on the block.)
-     */
-    @Override
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
-        if (world.isRemote) {
-            return true;
-        } else {
-            player.openGui(Revival.INSTANCE, 0, world, x, y, z);
-            return true;
-        }
-    }
-
-    /**
-     * Called when the block is placed in the world.
-     */
-    @Override
-    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase placer, ItemStack stack) {
-        int rotate = MathHelper.floor_double((double) (placer.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
-
-        if (rotate == 0) {
-            world.setBlockMetadataWithNotify(x, y, z, 2, 2);
-        }
-
-        if (rotate == 1) {
-            world.setBlockMetadataWithNotify(x, y, z, 5, 2);
-        }
-
-        if (rotate == 2) {
-            world.setBlockMetadataWithNotify(x, y, z, 3, 2);
-        }
-
-        if (rotate == 3) {
-            world.setBlockMetadataWithNotify(x, y, z, 4, 2);
-        }
-
+    public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+        world.setBlockState(pos, state.withProperty(FACING, placer.getHorizontalFacing().getOpposite()), 2);
         if (stack.hasDisplayName()) {
-            ((TileEntityAnalyzer) world.getTileEntity(x, y, z)).setGuiDisplayName(stack.getDisplayName());
+            TileEntity tile = world.getTileEntity(pos);
+            if (tile instanceof TileEntityAnalyzer) {
+                ((TileEntityAnalyzer) tile).setGuiDisplayName(stack.getDisplayName());
+            }
         }
     }
 
-    /**
-     * ejects contained items into the world, and notifies neighbours of an
-     * update, as appropriate
-     */
     @Override
-    public void breakBlock(World world, int x, int y, int z, Block block, int var6) {
-        if (!keepFurnaceInventory) {
-            TileEntityAnalyzer tileentity = (TileEntityAnalyzer) world.getTileEntity(x, y, z);
+    public void breakBlock(World world, BlockPos pos, IBlockState state) {
+        if (!keepInventory) {
+            TileEntityAnalyzer tile = (TileEntityAnalyzer) world.getTileEntity(pos);
 
-            if (tileentity != null) {
-                for (int i = 0; i < tileentity.getSizeInventory(); ++i) {
-                    ItemStack itemstack = tileentity.getStackInSlot(i);
-
-                    if (itemstack != null) {
+            if (tile != null) {
+                for (int i = 0; i < tile.getSizeInventory(); ++i) {
+                    ItemStack stack = tile.getStackInSlot(i);
+                    if (stack != null) {
                         float xOffset = this.rand.nextFloat() * 0.8F + 0.1F;
                         float yOffset = this.rand.nextFloat() * 0.8F + 0.1F;
                         float zOffset = this.rand.nextFloat() * 0.8F + 0.1F;
-
-                        while (itemstack.stackSize > 0) {
+                        while (stack.stackSize > 0) {
                             int rand = this.rand.nextInt(21) + 10;
-
-                            if (rand > itemstack.stackSize) {
-                                rand = itemstack.stackSize;
+                            if (rand > stack.stackSize) {
+                                rand = stack.stackSize;
                             }
-
-                            itemstack.stackSize -= rand;
-                            EntityItem entityItem = new EntityItem(world, (double) ((float) x + xOffset), (double) ((float) y + yOffset), (double) ((float) z + zOffset), new ItemStack(itemstack.getItem(), rand, itemstack.getItemDamage()));
-
-                            if (itemstack.hasTagCompound()) {
-                                entityItem.getEntityItem().setTagCompound((NBTTagCompound) itemstack.getTagCompound().copy());
+                            stack.stackSize -= rand;
+                            EntityItem entity = new EntityItem(world, pos.getX() + xOffset, pos.getY() + yOffset, pos.getZ() + zOffset, new ItemStack(stack.getItem(), rand, stack.getItemDamage()));
+                            if (stack.hasTagCompound()) {
+                                entity.getEntityItem().setTagCompound(stack.getTagCompound().copy());
                             }
-
                             float offset = 0.05F;
-                            entityItem.motionX = (double) ((float) this.rand.nextGaussian() * offset);
-                            entityItem.motionY = (double) ((float) this.rand.nextGaussian() * offset + 0.2F);
-                            entityItem.motionZ = (double) ((float) this.rand.nextGaussian() * offset);
-                            world.spawnEntityInWorld(entityItem);
+                            entity.motionX = this.rand.nextGaussian() * offset;
+                            entity.motionY = this.rand.nextGaussian() * offset + 0.2F;
+                            entity.motionZ = this.rand.nextGaussian() * offset;
+                            world.spawnEntityInWorld(entity);
                         }
                     }
                 }
             }
         }
-
-        super.breakBlock(world, x, y, z, block, var6);
+        super.breakBlock(world, pos, state);
     }
 
-    /**
-     * Returns a new instance of a block's tile entity class. Called on placing
-     * the block.
-     */
     @Override
-    public TileEntity createNewTileEntity(World world, int par2) {
+    public TileEntity createNewTileEntity(World world, int metadata) {
         return new TileEntityAnalyzer();
     }
 
-    /**
-     * If this returns true, then comparators facing away from this block will
-     * use the value from getComparatorInputOverride instead of the actual
-     * redstone signal strength.
-     */
     @Override
-    public boolean hasComparatorInputOverride() {
+    public boolean hasComparatorInputOverride(IBlockState state) {
         return true;
     }
 
-    /**
-     * If hasComparatorInputOverride returns true, the return value from this is
-     * used instead of the redstone signal strength when this block inputs to a
-     * comparator.
-     */
     @Override
-    public int getComparatorInputOverride(World par1World, int par2, int par3, int par4, int par5) {
-        return Container.calcRedstoneFromInventory((IInventory) par1World.getTileEntity(par2, par3, par4));
+    public int getComparatorInputOverride(IBlockState state, World world, BlockPos pos) {
+        return Container.calcRedstoneFromInventory((IInventory) world.getTileEntity(pos));
     }
 
-    /**
-     * only called by clickMiddleMouseButton , and passed to
-     * inventory.setCurrentItem (along with isCreative)
-     */
     @Override
     @SideOnly(Side.CLIENT)
-    public Item getItem(World world, int x, int y, int z) {
-        return Item.getItemFromBlock(FABlockRegistry.INSTANCE.blockanalyzerIdle);
+    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
+        return new ItemStack(FABlockRegistry.INSTANCE.analyzerIdle);
+    }
+
+    @Override
+    public IBlockState getStateFromMeta(int meta) {
+        EnumFacing facing = EnumFacing.getFront(meta);
+        if (facing.getAxis() == EnumFacing.Axis.Y) {
+            facing = EnumFacing.NORTH;
+        }
+        return this.getDefaultState().withProperty(FACING, facing);
+    }
+
+    @Override
+    public int getMetaFromState(IBlockState state) {
+        return state.getValue(FACING).getIndex();
+    }
+
+    @Override
+    public IBlockState withRotation(IBlockState state, Rotation rotation) {
+        return state.withProperty(FACING, rotation.rotate(state.getValue(FACING)));
+    }
+
+    @Override
+    public IBlockState withMirror(IBlockState state, Mirror mirror) {
+        return state.withRotation(mirror.toRotation(state.getValue(FACING)));
+    }
+
+    @Override
+    protected BlockStateContainer createBlockState() {
+        return new BlockStateContainer(this, FACING);
     }
 }

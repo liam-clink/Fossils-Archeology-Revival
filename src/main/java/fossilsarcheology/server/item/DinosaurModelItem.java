@@ -2,20 +2,18 @@ package fossilsarcheology.server.item;
 
 import fossilsarcheology.Revival;
 import fossilsarcheology.server.entity.EntityPrehistoric;
-import fossilsarcheology.server.enums.EnumPrehistoric;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import fossilsarcheology.server.enums.PrehistoricEntityType;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
-import net.minecraft.util.Vec3;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
@@ -31,7 +29,7 @@ public class DinosaurModelItem extends Item {
 
     @Override
     public String getUnlocalizedName(ItemStack itemstack) {
-        return getUnlocalizedName() + "." + EnumPrehistoric.values()[itemstack.getItemDamage()].name();
+        return getUnlocalizedName() + "." + PrehistoricEntityType.values()[itemstack.getItemDamage()].name();
     }
 
     @Override
@@ -43,12 +41,12 @@ public class DinosaurModelItem extends Item {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister icon) {
-        icons = new IIcon[EnumPrehistoric.values().length];
+        icons = new IIcon[PrehistoricEntityType.values().length];
 
         for (int i = 0; i < icons.length; i++) {
             if (i != 4) // Silly Nautilus, bones are for dinosaurs.
             {
-                icons[i] = icon.registerIcon(Revival.MODID + ":" + "dinosaur_bones/models/" + EnumPrehistoric.values()[i] + "_model");
+                icons[i] = icon.registerIcon(Revival.MODID + ":" + "dinosaur_bones/models/" + PrehistoricEntityType.values()[i] + "_model");
             }
         }
     }
@@ -81,11 +79,11 @@ public class DinosaurModelItem extends Item {
         if (var3.isRemote) {
             return true;
         } else {
-            Class var11 = EnumPrehistoric.values()[var1.getItemDamage()].getDinoClass();
+            Class var11 = PrehistoricEntityType.values()[var1.getItemDamage()].getEntity();
             EntityPrehistoric var12;
 
             try {
-                var12 = (EntityPrehistoric) var11.getConstructor(new Class[]{World.class}).newInstance(var3);
+                var12 = (EntityPrehistoric) var11.getConstructor(new Class[] { World.class }).newInstance(var3);
             } catch (Throwable var14) {
                 var14.printStackTrace();
                 return false;
@@ -117,7 +115,7 @@ public class DinosaurModelItem extends Item {
         double x = player.prevPosX + (player.posX - player.prevPosX) * (double) var4;
         double y = player.prevPosY + (player.posY - player.prevPosY) * (double) var4 + 1.62D - (double) player.yOffset;
         double z = player.prevPosZ + (player.posZ - player.prevPosZ) * (double) var4;
-        Vec3 var13 = Vec3.createVectorHelper(x, y, z);
+        Vec3d var13 = new Vec3d(pos);
         float var14 = MathHelper.cos(-var6 * 0.017453292F - (float) Math.PI);
         float var15 = MathHelper.sin(-var6 * 0.017453292F - (float) Math.PI);
         float var16 = -MathHelper.cos(-var5 * 0.017453292F);
@@ -125,7 +123,7 @@ public class DinosaurModelItem extends Item {
         float var18 = var15 * var16;
         float var19 = var14 * var16;
         double var20 = 5.0D;
-        Vec3 var22 = var13.addVector((double) var18 * var20, (double) var17 * var20, (double) var19 * var20);
+        Vec3d var22 = var13.addVector((double) var18 * var20, (double) var17 * var20, (double) var19 * var20);
         MovingObjectPosition var23 = this.getMovingObjectPositionFromPlayer(world, player, true);
 
         if (var23 == null) {

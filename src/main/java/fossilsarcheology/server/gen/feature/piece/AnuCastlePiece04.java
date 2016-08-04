@@ -7,7 +7,7 @@ import net.minecraft.world.World;
 import java.util.Random;
 
 public class AnuCastlePiece04 {
-    public static boolean generate_r019(World world, Random rand, int x, int y, int z) {
+    public static boolean generate_r019(World world, Random rand, BlockPos pos) {
 
         world.setBlock(x + 24, y, z + 56, Blocks.netherrack, 0, 3);
         world.setBlock(x + 25, y, z + 56, Blocks.netherrack, 0, 3);
@@ -1510,12 +1510,12 @@ public class AnuCastlePiece04 {
         world.setBlock(x + 37, y, z + 67, Blocks.netherrack, 0, 3);
         world.setBlock(x + 38, y, z + 67, Blocks.netherrack, 0, 3);
 
-        generate_r020(world, rand, x, y, z);
+        generate_r020(world, rand, pos);
         return true;
 
     }
 
-    public static boolean generate_r020(World world, Random rand, int x, int y, int z) {
+    public static boolean generate_r020(World world, Random rand, BlockPos pos) {
 
         world.setBlock(x + 39, y, z + 67, Blocks.netherrack, 0, 3);
         world.setBlock(x + 40, y, z + 67, Blocks.netherrack, 0, 3);
@@ -3018,12 +3018,12 @@ public class AnuCastlePiece04 {
         world.setBlock(x + 46, y, z + 78, Blocks.netherrack, 0, 3);
         world.setBlock(x + 47, y, z + 78, Blocks.netherrack, 0, 3);
 
-        generate_r021(world, rand, x, y, z);
+        generate_r021(world, rand, pos);
         return true;
 
     }
 
-    public static boolean generate_r021(World world, Random rand, int x, int y, int z) {
+    public static boolean generate_r021(World world, Random rand, BlockPos pos) {
 
         world.setBlock(x + 48, y, z + 78, Blocks.netherrack, 0, 3);
         world.setBlock(x + 49, y, z + 78, Blocks.netherrack, 0, 3);
@@ -4526,12 +4526,12 @@ public class AnuCastlePiece04 {
         world.setBlock(x + 62, y, z + 89, Blocks.netherrack, 0, 3);
         world.setBlock(x + 63, y, z + 89, Blocks.netherrack, 0, 3);
 
-        generate_r022(world, rand, x, y, z);
+        generate_r022(world, rand, pos);
         return true;
 
     }
 
-    public static boolean generate_r022(World world, Random rand, int x, int y, int z) {
+    public static boolean generate_r022(World world, Random rand, BlockPos pos) {
 
         world.setBlock(x + 64, y, z + 89, Blocks.netherrack, 0, 3);
         world.setBlock(x + 65, y, z + 89, Blocks.netherrack, 0, 3);
@@ -6034,12 +6034,12 @@ public class AnuCastlePiece04 {
         world.setBlock(x + 76, y, z + 100, Blocks.netherrack, 0, 3);
         world.setBlock(x + 77, y, z + 100, Blocks.netherrack, 0, 3);
 
-        generate_r023(world, rand, x, y, z);
+        generate_r023(world, rand, pos);
         return true;
 
     }
 
-    public static boolean generate_r023(World world, Random rand, int x, int y, int z) {
+    public static boolean generate_r023(World world, Random rand, BlockPos pos) {
 
         world.setBlock(x + 78, y, z + 100, Blocks.netherrack, 0, 3);
         world.setBlock(x + 79, y, z + 100, Blocks.netherrack, 0, 3);
@@ -7542,12 +7542,12 @@ public class AnuCastlePiece04 {
         world.setBlock(x + 105, y, z + 111, Blocks.netherrack, 0, 3);
         world.setBlock(x + 106, y, z + 111, Blocks.netherrack, 0, 3);
 
-        generate_r024(world, rand, x, y, z);
+        generate_r024(world, rand, pos);
         return true;
 
     }
 
-    public static boolean generate_r024(World world, Random rand, int x, int y, int z) {
+    public static boolean generate_r024(World world, Random rand, BlockPos pos) {
 
         world.setBlock(x + 107, y, z + 111, Blocks.netherrack, 0, 3);
         world.setBlock(x + 108, y, z + 111, Blocks.netherrack, 0, 3);
@@ -9050,12 +9050,12 @@ public class AnuCastlePiece04 {
         world.setBlock(x + 8, y, z + 123, Blocks.netherrack, 0, 3);
         world.setBlock(x + 9, y, z + 123, Blocks.netherrack, 0, 3);
 
-        generate_r025(world, rand, x, y, z);
+        generate_r025(world, rand, pos);
         return true;
 
     }
 
-    public static boolean generate_r025(World world, Random rand, int x, int y, int z) {
+    public static boolean generate_r025(World world, Random rand, BlockPos pos) {
 
         world.setBlock(x + 10, y, z + 123, Blocks.netherrack, 0, 3);
         world.setBlock(x + 11, y, z + 123, Blocks.netherrack, 0, 3);
@@ -10558,7 +10558,7 @@ public class AnuCastlePiece04 {
         world.setBlock(x + 23, y, z + 134, Blocks.netherrack, 0, 3);
         world.setBlock(x + 24, y, z + 134, Blocks.netherrack, 0, 3);
 
-        AnuCastlePiece05.generate_r026(world, rand, x, y, z);
+        AnuCastlePiece05.generate_r026(world, rand, pos);
         return true;
 
     }

@@ -1,11 +1,11 @@
 package fossilsarcheology.server.block.entity;
 
+import fossilsarcheology.api.Diet;
+import fossilsarcheology.api.FoodMappings;
 import fossilsarcheology.server.block.BlockFeeder;
 import fossilsarcheology.server.entity.EntityPrehistoric;
-import fossilsarcheology.server.enums.EnumPrehistoric;
+import fossilsarcheology.server.enums.PrehistoricEntityType;
 import fossilsarcheology.server.handler.LocalizationStrings;
-import fossilsarcheology.api.EnumDiet;
-import fossilsarcheology.api.FoodMappings;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
@@ -16,7 +16,8 @@ import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityFeeder extends TileEntity implements IInventory, ISidedInventory {
 
-    private static final int[] slots_all = new int[]{0, 1};
+    private static final int[] slots_carn = new int[] { 0 };
+    private static final int[] slots_herb = new int[] { 1 };
     public int currentMeat = 0;
     public int maxMeat = 10000;
     public int currentPlant = 0;
@@ -27,7 +28,7 @@ public class TileEntityFeeder extends TileEntity implements IInventory, ISidedIn
 
     @Override
     public int[] getAccessibleSlotsFromSide(int i) {
-        return slots_all;
+        return i == 1 ? slots_herb : slots_carn;
     }
 
     @Override
@@ -183,39 +184,39 @@ public class TileEntityFeeder extends TileEntity implements IInventory, ISidedIn
 
     @Override
     public boolean isItemValidForSlot(int i, ItemStack stack) {
-        if (stack != null && stack != null) {
-            if(FoodMappings.INSTANCE.getItemFoodAmount(stack, EnumDiet.HERBIVORE) != 0 && i == 1) {
-                return true;
-            }else if(FoodMappings.INSTANCE.getItemFoodAmount(stack, EnumDiet.CARNIVORE_EGG) != 0 && i == 0){
-                return true;
+        if (stack != null && stack.getItem() != null) {
+            if (i == 1) {
+                return FoodMappings.INSTANCE.getItemFoodAmount(stack.getItem(), Diet.CARNIVORE_EGG) != 0;
+            } else {
+                return FoodMappings.INSTANCE.getItemFoodAmount(stack.getItem(), Diet.HERBIVORE) != 0;
             }
         }
         return false;
     }
 
-    public boolean isEmpty(EnumPrehistoric type) {
-        if (type.diet == EnumDiet.CARNIVORE || type.diet == EnumDiet.CARNIVORE_EGG || type.diet == EnumDiet.PISCCARNIVORE) {
+    public boolean isEmpty(PrehistoricEntityType type) {
+        if (type.diet == Diet.CARNIVORE || type.diet == Diet.CARNIVORE_EGG || type.diet == Diet.PISCCARNIVORE) {
             return currentMeat == 0;
         }
-        if (type.diet == EnumDiet.HERBIVORE) {
+        if (type.diet == Diet.HERBIVORE) {
             return currentPlant == 0;
         }
-        return type.diet != EnumDiet.OMNIVORE || currentMeat == 0 && currentPlant == 0;
+        return type.diet != Diet.OMNIVORE || currentMeat == 0 && currentPlant == 0;
     }
 
     public int feedDinosaur(EntityPrehistoric mob) {
         int feedamount = 0;
 
         if (!this.isEmpty(mob.type)) {
-            if (mob.type.diet == EnumDiet.CARNIVORE || mob.type.diet == EnumDiet.CARNIVORE_EGG || mob.type.diet == EnumDiet.PISCCARNIVORE) {
+            if (mob.type.diet == Diet.CARNIVORE || mob.type.diet == Diet.CARNIVORE_EGG || mob.type.diet == Diet.PISCCARNIVORE) {
                 currentMeat--;
                 feedamount++;
             }
-            if (mob.type.diet == EnumDiet.HERBIVORE) {
+            if (mob.type.diet == Diet.HERBIVORE) {
                 currentPlant--;
                 feedamount++;
             }
-            if (mob.type.diet == EnumDiet.OMNIVORE) {
+            if (mob.type.diet == Diet.OMNIVORE) {
                 if (currentMeat == 0 && currentPlant != 0) {
                     currentPlant--;
                     feedamount++;
@@ -239,7 +240,7 @@ public class TileEntityFeeder extends TileEntity implements IInventory, ISidedIn
             if (this.feederItemStacks[0] != null && this.feederItemStacks[0].getItem() != null) {
                 {
                     if (this.currentMeat < this.maxMeat) {
-                        int carnivoreValue = FoodMappings.INSTANCE.getItemFoodAmount(this.feederItemStacks[0], EnumDiet.CARNIVORE_EGG);
+                        int carnivoreValue = FoodMappings.INSTANCE.getItemFoodAmount(this.feederItemStacks[0].getItem(), Diet.CARNIVORE_EGG);
                         if (carnivoreValue != 0) {
                             int foodLeft = this.maxMeat - this.currentMeat;
                             if (carnivoreValue > foodLeft) {
@@ -259,7 +260,7 @@ public class TileEntityFeeder extends TileEntity implements IInventory, ISidedIn
             if (this.feederItemStacks[1] != null && this.feederItemStacks[1].getItem() != null) {
                 {
                     if (this.currentPlant < this.maxPlant) {
-                        int herbivoreValue = FoodMappings.INSTANCE.getItemFoodAmount(this.feederItemStacks[1], EnumDiet.HERBIVORE);
+                        int herbivoreValue = FoodMappings.INSTANCE.getItemFoodAmount(this.feederItemStacks[1].getItem(), Diet.HERBIVORE);
                         if (herbivoreValue != 0) {
                             int foodLeft = this.maxPlant - this.currentPlant;
                             if (herbivoreValue > foodLeft) {

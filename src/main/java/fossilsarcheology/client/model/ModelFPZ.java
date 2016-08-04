@@ -3,7 +3,7 @@ package fossilsarcheology.client.model;
 import fossilsarcheology.server.entity.mob.EntityFriendlyPigZombie;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.MathHelper;
 
 public class ModelFPZ extends ModelBiped {
 
