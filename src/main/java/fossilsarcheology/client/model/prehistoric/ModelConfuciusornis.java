@@ -187,6 +187,17 @@ public class ModelConfuciusornis extends ModelPrehistoric {
         ModelUtils.rotate(animator, lowerBeak, 29, 0, 0);
         animator.endKeyframe();
         animator.resetKeyframe(10);
+		animator.setAnimation(prehistoric.ATTACK_ANIMATION);
+		animator.startKeyframe(10);
+		ModelUtils.rotate(animator, neck, -41, 0, 0);
+		ModelUtils.rotate(animator, head, 57, 0, 0);
+		ModelUtils.rotate(animator, lowerBeak, 20, 0, 0);
+		animator.endKeyframe();
+		animator.startKeyframe(5);
+		ModelUtils.rotate(animator, neck, 6, 0, 0);
+		ModelUtils.rotate(animator, head, -14, 0, 0);
+		animator.endKeyframe();
+		animator.resetKeyframe(10);
 	}
 
 	@Override
