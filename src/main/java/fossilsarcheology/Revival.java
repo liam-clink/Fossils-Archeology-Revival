@@ -39,7 +39,7 @@ import org.apache.logging.log4j.Level;
 @Mod(modid = Revival.MODID, name = "Fossils and Archeology Revival", version = Revival.VERSION, dependencies = "required-after:llibrary@[" + Revival.LLIBRARY_VERSION + ",)")
 public class Revival {
     public static final String MODID = "fossil";
-    public static final String VERSION = "7.3.2-develop";
+    public static final String VERSION = "7.3.2";
     public static final ReleaseType RELEASE_TYPE = ReleaseType.parseVersion(Revival.VERSION);
     public static final String LLIBRARY_VERSION = "1.5.1";
 
