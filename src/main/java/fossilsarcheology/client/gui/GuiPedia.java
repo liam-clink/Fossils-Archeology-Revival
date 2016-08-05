@@ -14,7 +14,6 @@ import fossilsarcheology.server.enums.EnumPrehistoric;
 import net.ilexiconn.llibrary.LLibrary;
 import net.ilexiconn.llibrary.client.util.ClientUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.ScaledResolution;
@@ -217,11 +216,11 @@ public class GuiPedia extends GuiScreen {
             this.buttonNextPage.enabled = true;
         }
         if (bookPages == 0) {
-            if (Revival.toPedia instanceof EntityPregnantHorse && ((EntityPregnantHorse) Revival.toPedia).EmbryoProgress < 9999 && ((EntityPregnantHorse) Revival.toPedia).Embryo != null) {
+            if (Revival.toPedia instanceof EntityPregnantHorse && ((EntityPregnantHorse) Revival.toPedia).embryoProgress < 9999 && ((EntityPregnantHorse) Revival.toPedia).embryo != null) {
                 EntityHorse entity = ((EntityPregnantHorse) Revival.toPedia).horse;
                 String s1 = StatCollector.translateToLocal(entity.getCommandSenderName());
                 String s2 = StatCollector.translateToLocal("prehistoric.pregnant");
-                int quot = (int) Math.floor(((float) ((EntityPregnantHorse) Revival.toPedia).EmbryoProgress / (float) ((EntityPregnantHorse) Revival.toPedia).Embryo.growTime * 100.0F));
+                int quot = (int) Math.floor(((float) ((EntityPregnantHorse) Revival.toPedia).embryoProgress / (float) ((EntityPregnantHorse) Revival.toPedia).embryo.growTime * 100.0F));
                 String s3 = StatCollector.translateToLocal("prehistoric.pregnantTime") + String.valueOf(quot) + "%";
                 printStringXY(s3, (-this.fontRendererObj.getStringWidth(s3) / 2) + 100, 110, 157, 126, 103);
                 GL11.glScalef(1.5F, 1.5F, 1.5F);
@@ -229,11 +228,11 @@ public class GuiPedia extends GuiScreen {
             }else if (Revival.toPedia instanceof EntityPregnantHorse){
                 Minecraft.getMinecraft().displayGuiScreen(null);
             }
-            if (Revival.toPedia instanceof EntityPregnantCow && ((EntityPregnantCow) Revival.toPedia).EmbryoProgress < 9999  && ((EntityPregnantCow) Revival.toPedia).Embryo != null) {
+            if (Revival.toPedia instanceof EntityPregnantCow && ((EntityPregnantCow) Revival.toPedia).embryoProgress < 9999  && ((EntityPregnantCow) Revival.toPedia).embryo != null) {
                 EntityCow entity = ((EntityPregnantCow) Revival.toPedia).cow;
                 String s1 = StatCollector.translateToLocal(entity.getCommandSenderName());
                 String s2 = StatCollector.translateToLocal("prehistoric.pregnant");
-                int quot = (int) Math.floor(((float) ((EntityPregnantCow) Revival.toPedia).EmbryoProgress / (float) ((EntityPregnantCow) Revival.toPedia).Embryo.growTime * 100.0F));
+                int quot = (int) Math.floor(((float) ((EntityPregnantCow) Revival.toPedia).embryoProgress / (float) ((EntityPregnantCow) Revival.toPedia).embryo.growTime * 100.0F));
                 String s3 = StatCollector.translateToLocal("prehistoric.pregnantTime") + String.valueOf(quot) + "%";
                 printStringXY(s3, (-this.fontRendererObj.getStringWidth(s3) / 2) + 100, 110, 157, 126, 103);
                 GL11.glScalef(1.5F, 1.5F, 1.5F);
@@ -241,11 +240,11 @@ public class GuiPedia extends GuiScreen {
             }else if (Revival.toPedia instanceof EntityPregnantCow){
                 Minecraft.getMinecraft().displayGuiScreen(null);
             }
-            if (Revival.toPedia instanceof EntityPregnantSheep && ((EntityPregnantSheep) Revival.toPedia).EmbryoProgress < 9999 && ((EntityPregnantSheep) Revival.toPedia).Embryo != null) {
+            if (Revival.toPedia instanceof EntityPregnantSheep && ((EntityPregnantSheep) Revival.toPedia).embryoProgress < 9999 && ((EntityPregnantSheep) Revival.toPedia).embryo != null) {
                 EntitySheep entity = ((EntityPregnantSheep) Revival.toPedia).sheep;
                 String s1 = StatCollector.translateToLocal(entity.getCommandSenderName());
                 String s2 = StatCollector.translateToLocal("prehistoric.pregnant");
-                int quot = (int) Math.floor(((float) ((EntityPregnantSheep) Revival.toPedia).EmbryoProgress / (float) ((EntityPregnantSheep) Revival.toPedia).Embryo.growTime * 100.0F));
+                int quot = (int) Math.floor(((float) ((EntityPregnantSheep) Revival.toPedia).embryoProgress / (float) ((EntityPregnantSheep) Revival.toPedia).embryo.growTime * 100.0F));
                 String s3 = StatCollector.translateToLocal("prehistoric.pregnantTime") + String.valueOf(quot) + "%";
                 printStringXY(s3, (-this.fontRendererObj.getStringWidth(s3) / 2) + 100, 110, 157, 126, 103);
                 GL11.glScalef(1.5F, 1.5F, 1.5F);
@@ -253,11 +252,11 @@ public class GuiPedia extends GuiScreen {
             }else if (Revival.toPedia instanceof EntityPregnantSheep){
                 Minecraft.getMinecraft().displayGuiScreen(null);
             }
-            if (Revival.toPedia instanceof EntityPregnantPig && ((EntityPregnantPig) Revival.toPedia).EmbryoProgress < 9999 && ((EntityPregnantPig) Revival.toPedia).Embryo != null) {
+            if (Revival.toPedia instanceof EntityPregnantPig && ((EntityPregnantPig) Revival.toPedia).embryoProgress < 9999 && ((EntityPregnantPig) Revival.toPedia).embryo != null) {
                 EntityPig entity = ((EntityPregnantPig) Revival.toPedia).pig;
                 String s1 = StatCollector.translateToLocal(entity.getCommandSenderName());
                 String s2 = StatCollector.translateToLocal("prehistoric.pregnant");
-                int quot = (int) Math.floor(((float) ((EntityPregnantPig) Revival.toPedia).EmbryoProgress / (float) ((EntityPregnantPig) Revival.toPedia).Embryo.growTime * 100.0F));
+                int quot = (int) Math.floor(((float) ((EntityPregnantPig) Revival.toPedia).embryoProgress / (float) ((EntityPregnantPig) Revival.toPedia).embryo.growTime * 100.0F));
                 String s3 = StatCollector.translateToLocal("prehistoric.pregnantTime") + String.valueOf(quot) + "%";
                 printStringXY(s3, (-this.fontRendererObj.getStringWidth(s3) / 2) + 100, 110, 157, 126, 103);
                 GL11.glScalef(1.5F, 1.5F, 1.5F);

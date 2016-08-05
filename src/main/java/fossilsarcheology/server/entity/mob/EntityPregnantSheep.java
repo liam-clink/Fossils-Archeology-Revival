@@ -16,65 +16,38 @@ public class EntityPregnantSheep implements IViviparous, IExtendedEntityProperti
     public final static String PREGNANT_SHEEP_PROP = "EntityPregnantSheep";
     public final EntitySheep sheep;
 
-    public int EmbryoProgress;
-    public EnumPrehistoric Embryo;
-    private World worldObj;
+    public int embryoProgress;
+    public EnumPrehistoric embryo;
 
     public EntityPregnantSheep(EntitySheep sheep) {
         this.sheep = sheep;
-        this.EmbryoProgress = 0;
-        this.Embryo = null;
+        this.embryoProgress = 0;
+        this.embryo = null;
     }
 
-    // Register properties.
     public static final void register(EntitySheep entity) {
         entity.registerExtendedProperties(EntityPregnantSheep.PREGNANT_SHEEP_PROP, new EntityPregnantSheep(entity));
     }
 
-    // Return EntityPregnant* properties for Vanilla entity mobs.
     public static final EntityPregnantSheep get(EntitySheep entity) {
         return (EntityPregnantSheep) entity.getExtendedProperties(PREGNANT_SHEEP_PROP);
     }
 
-    // Save any custom data that needs saving here
     @Override
     public void saveNBTData(NBTTagCompound compound) {
-        // We need to create a new tag compound that will save everything for
-        // our Extended Properties
-        NBTTagCompound properties = new NBTTagCompound();
-
-        // We only have 2 variables currently; save them both to the new tag
-        properties.setInteger("EmbryoProgress", this.EmbryoProgress);
-        if (this.Embryo != null) {
-            properties.setByte("Inside", (byte) this.Embryo.ordinal());
+        compound.setInteger("EmbryoProgress", this.embryoProgress);
+        if (this.embryo != null) {
+            compound.setByte("Inside", (byte) this.embryo.ordinal());
         }
-
-		/*
-         * Now add our custom tag to the player's tag with a unique name (our
-		 * property's name). This will allow you to save multiple types of
-		 * properties and distinguish between them. If you only have one type,
-		 * it isn't as important, but it will still avoid conflicts between your
-		 * tag names and vanilla tag names. For instance, if you add some
-		 * "Items" tag, that will conflict with vanilla. Not good. So just use a
-		 * unique tag name.
-		 */
-        compound.setTag(PREGNANT_SHEEP_PROP, properties);
     }
 
-    // Load whatever data you saved
     @Override
     public void loadNBTData(NBTTagCompound compound) {
-        // Here we fetch the unique tag compound we set for this class of
-        // Extended Properties
-        NBTTagCompound properties = (NBTTagCompound) compound.getTag(PREGNANT_SHEEP_PROP);
-        // Get our data from the custom tag compound
-
         if (compound.hasKey("EmbryoProgress")) {
-            this.EmbryoProgress = properties.getInteger("EmbryoProgress");
+            this.embryoProgress = compound.getInteger("EmbryoProgress");
         }
-
         if (compound.hasKey("Inside")) {
-            this.Embryo = EnumPrehistoric.values()[properties.getByte("Inside")];
+            this.embryo = EnumPrehistoric.values()[compound.getByte("Inside")];
         }
     }
 
@@ -84,7 +57,7 @@ public class EntityPregnantSheep implements IViviparous, IExtendedEntityProperti
 
     @Override
     public void setEmbryo(EnumPrehistoric animalType) {
-        this.Embryo = animalType;
+        this.embryo = animalType;
     }
 
     public void setPedia() {
@@ -92,19 +65,18 @@ public class EntityPregnantSheep implements IViviparous, IExtendedEntityProperti
     }
 
     @Override
-    public void showPedia(GuiPedia p0) {
-        if (this.Embryo != null) {
-            int quot = (int) Math.floor(((float) this.EmbryoProgress / (float) this.Embryo.growTime * 100.0F));
-
-            p0.reset();
-            p0.addStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_EMBRYO_INSIDE), false);
-            p0.addStringLR(StatCollector.translateToLocal("pedia.embryo." + this.Embryo.toString()), false, 40, 90, 245);
-            p0.addStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_EMBRYO_GROWING), false);
-            p0.addStringLR(String.valueOf(quot) + "/100", false);
+    public void showPedia(GuiPedia pedia) {
+        if (this.embryo != null) {
+            int progress = (int) Math.floor(((float) this.embryoProgress / (float) this.embryo.growTime * 100.0F));
+            pedia.reset();
+            pedia.addStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_EMBRYO_INSIDE), false);
+            pedia.addStringLR(StatCollector.translateToLocal("pedia.embryo." + this.embryo.toString()), false, 40, 90, 245);
+            pedia.addStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_EMBRYO_GROWING), false);
+            pedia.addStringLR(String.valueOf(progress) + "/100", false);
         } else {
-            p0.reset();
-            p0.addStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_EMBRYO_INSIDE), false);
-            p0.addStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_EMBRYO_GROWING), false);
+            pedia.reset();
+            pedia.addStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_EMBRYO_INSIDE), false);
+            pedia.addStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_EMBRYO_GROWING), false);
         }
     }
 

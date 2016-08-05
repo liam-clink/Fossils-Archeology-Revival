@@ -47,7 +47,7 @@ public class Revival {
     public static ServerProxy PROXY;
     @Instance(MODID)
     public static Revival INSTANCE;
-    @NetworkWrapper({MessageFoodParticles.class, MessageSetDay.class, MessageJavelinType.class, MessageRollBall.class, MessageHappyParticles.class, MessageUpdateEgg.class, MessageUpdateNautilus.class})
+    @NetworkWrapper({MessageFoodParticles.class, MessageSetDay.class, MessageJavelinType.class, MessageRollBall.class, MessageHappyParticles.class, MessageUpdateEgg.class, MessageUpdateNautilus.class, MessageSyncEmbryo.class})
     public static SimpleNetworkWrapper NETWORK_WRAPPER;
     @Config
     public static FossilConfig CONFIG;

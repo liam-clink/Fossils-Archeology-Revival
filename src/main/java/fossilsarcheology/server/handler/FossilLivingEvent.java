@@ -92,16 +92,16 @@ public class FossilLivingEvent {
 		if (event.entityLiving instanceof EntityHorse) {
 			EntityPregnantHorse props = EntityPregnantHorse.get((EntityHorse) event.entityLiving);
 
-			if (props.Embryo != null) {
+			if (props.embryo != null) {
 
-				++props.EmbryoProgress;
+				++props.embryoProgress;
 				this.getClass();
 
-				if (props.EmbryoProgress >= props.Embryo.growTime) // var10000
+				if (props.embryoProgress >= props.embryo.growTime) // var10000
 				// == 3000)
 				{
-					GrowEntity(props.Embryo, event);
-					props.EmbryoProgress = 0;
+					GrowEntity(props.embryo, event);
+					props.embryoProgress = 0;
 					props.setEmbryo(null);
 				}
 			}
@@ -110,16 +110,16 @@ public class FossilLivingEvent {
 		if (event.entityLiving instanceof EntityCow) {
 			EntityPregnantCow props = EntityPregnantCow.get((EntityCow) event.entityLiving);
 
-			if (props.Embryo != null) {
+			if (props.embryo != null) {
 
-				++props.EmbryoProgress;
+				++props.embryoProgress;
 				this.getClass();
 
-				if (props.EmbryoProgress >= props.Embryo.growTime) // var10000
+				if (props.embryoProgress >= props.embryo.growTime) // var10000
 				// == 3000)
 				{
-					GrowEntity(props.Embryo, event);
-					props.EmbryoProgress = 0;
+					GrowEntity(props.embryo, event);
+					props.embryoProgress = 0;
 					props.setEmbryo(null);
 				}
 			}
@@ -128,15 +128,15 @@ public class FossilLivingEvent {
 		if (event.entityLiving instanceof EntityPig) {
 			EntityPregnantPig props = EntityPregnantPig.get((EntityPig) event.entityLiving);
 
-			if (props.Embryo != null) {
-				++props.EmbryoProgress;
+			if (props.embryo != null) {
+				++props.embryoProgress;
 				this.getClass();
 
-				if (props.EmbryoProgress >= props.Embryo.growTime) // var10000
+				if (props.embryoProgress >= props.embryo.growTime) // var10000
 				// == 3000)
 				{
-					GrowEntity(props.Embryo, event);
-					props.EmbryoProgress = 0;
+					GrowEntity(props.embryo, event);
+					props.embryoProgress = 0;
 					props.setEmbryo(null);
 				}
 			}
@@ -145,15 +145,15 @@ public class FossilLivingEvent {
 		if (event.entityLiving instanceof EntitySheep) {
 			EntityPregnantSheep props = EntityPregnantSheep.get((EntitySheep) event.entityLiving);
 
-			if (props.Embryo != null) {
-				++props.EmbryoProgress;
+			if (props.embryo != null) {
+				++props.embryoProgress;
 				this.getClass();
 
-				if (props.EmbryoProgress >= props.Embryo.growTime) // var10000
+				if (props.embryoProgress >= props.embryo.growTime) // var10000
 				// == 3000)
 				{
-					GrowEntity(props.Embryo, event);
-					props.EmbryoProgress = 0;
+					GrowEntity(props.embryo, event);
+					props.embryoProgress = 0;
 					props.setEmbryo(null);
 				}
 			}

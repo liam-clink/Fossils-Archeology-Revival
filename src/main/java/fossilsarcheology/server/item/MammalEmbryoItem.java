@@ -14,91 +14,87 @@ import net.minecraft.item.ItemStack;
 import java.util.Random;
 
 public class MammalEmbryoItem extends Item {
-	int AnimalType;
+	private int type;
 	private EnumPrehistoric embryo;
 	private Random rand;
 
-	public MammalEmbryoItem(int AnimalType0) {
+	public MammalEmbryoItem(int type) {
 		super();
 		this.setMaxDamage(0);
 		this.maxStackSize = 64;
-		this.AnimalType = AnimalType0;
+		this.type = type;
 		this.rand = new Random();
 	}
 
-	public static EnumPrehistoric getEmbryo(int var0) {
-		return EnumPrehistoric.values()[var0];
+	public static EnumPrehistoric getEmbryo(int type) {
+		return EnumPrehistoric.values()[type];
 	}
 
-	/**
-	 * dye sheep, place saddles, etc ...
-	 */
 	@Override
-	public boolean itemInteractionForEntity(ItemStack itemstack, EntityPlayer player, EntityLivingBase thisEntity) {
-		embryo = getEmbryo(AnimalType);
+	public boolean itemInteractionForEntity(ItemStack stack, EntityPlayer player, EntityLivingBase entity) {
+		embryo = getEmbryo(type);
+		if (entity instanceof EntityAnimal && ((EntityAnimal) entity).getGrowingAge() == 0) {
+			if (!player.worldObj.isRemote) {
+                if (entity instanceof EntityPig) {
+                    EntityPregnantPig props = EntityPregnantPig.get(((EntityPig) entity));
+                    if (props.embryo != null) {
+                        return false;
+                    }
+                    if (embryo != null) {
+                        props.setEmbryo(embryo);
+                        if (!player.capabilities.isCreativeMode) {
+                            stack.stackSize--;
+                        }
+                    } else {
+                        return false;
+                    }
+                } else if (entity instanceof EntityCow) {
+                    EntityPregnantCow props = EntityPregnantCow.get(((EntityCow) entity));
+                    if (props.embryo != null) {
+                        return false;
+                    }
+                    if (embryo != null) {
+                        props.setEmbryo(embryo);
+                        if (!player.capabilities.isCreativeMode) {
+                            stack.stackSize--;
+                        }
+                    } else {
+                        return false;
+                    }
+                } else if (entity instanceof EntitySheep) {
+                    EntityPregnantSheep props = EntityPregnantSheep.get(((EntitySheep) entity));
+                    if (props.embryo != null) {
+                        return false;
+                    }
+                    if (embryo != null) {
+                        props.setEmbryo(embryo);
+                        if (!player.capabilities.isCreativeMode) {
+                            stack.stackSize--;
+                        }
+                    } else {
+                        return false;
+                    }
+                } else if (entity instanceof EntityHorse) {
+                    EntityPregnantHorse props = EntityPregnantHorse.get(((EntityHorse) entity));
+                    if (((EntityHorse) entity).getHorseType() != 0 || props.embryo != null) {
+                        return false;
+                    }
+                    if (embryo != null) {
+                        props.setEmbryo(embryo);
+                        if (!player.capabilities.isCreativeMode) {
+                            stack.stackSize--;
+                        }
+                    } else {
+                        return false;
+                    }
+                }
+            }
 
-		if (thisEntity instanceof EntityAnimal && ((EntityAnimal) thisEntity).getGrowingAge() == 0) {
-			Object pregnantEntity = null;
-
-			if (thisEntity instanceof EntityPig) {
-				EntityPregnantPig props = EntityPregnantPig.get(((EntityPig) thisEntity));
-				if (props.Embryo != null) {
-					return false;
-				}
-				if (embryo != null) {
-					props.setEmbryo(embryo);
-					if (!player.capabilities.isCreativeMode) {
-						itemstack.stackSize--;
-					}
-				} else {
-					return false;
-				}
-			} else if (thisEntity instanceof EntityCow) {
-				EntityPregnantCow props = EntityPregnantCow.get(((EntityCow) thisEntity));
-				if (props.Embryo != null) {
-					return false;
-				}
-				if (embryo != null) {
-					props.setEmbryo(embryo);
-					if (!player.capabilities.isCreativeMode) {
-						itemstack.stackSize--;
-					}
-				} else {
-					return false;
-				}
-			} else if (thisEntity instanceof EntitySheep) {
-				EntityPregnantSheep props = EntityPregnantSheep.get(((EntitySheep) thisEntity));
-				if (props.Embryo != null) {
-					return false;
-				}
-				if (embryo != null) {
-					props.setEmbryo(embryo);
-					if (!player.capabilities.isCreativeMode) {
-						itemstack.stackSize--;
-					}
-				} else {
-					return false;
-				}
-			} else if (thisEntity instanceof EntityHorse) {
-				EntityPregnantHorse props = EntityPregnantHorse.get(((EntityHorse) thisEntity));
-				if (((EntityHorse) thisEntity).getHorseType() != 0 || props.Embryo != null) {
-					return false;
-				}
-				if (embryo != null) {
-					props.setEmbryo(embryo);
-					if (!player.capabilities.isCreativeMode) {
-						itemstack.stackSize--;
-					}
-				} else {
-					return false;
-				}
-			}
-
-			for (int var3 = 0; var3 < 7; ++var3) {
-				double var4 = this.rand.nextGaussian() * 0.02D;
-				double var6 = this.rand.nextGaussian() * 0.02D;
-				double var8 = this.rand.nextGaussian() * 0.02D;
-				thisEntity.worldObj.spawnParticle("smoke", thisEntity.posX + (double) (this.rand.nextFloat() * thisEntity.width * 2.0F) - (double) thisEntity.width, thisEntity.posY + 0.5D + (double) (this.rand.nextFloat() * thisEntity.height), thisEntity.posZ + (double) (this.rand.nextFloat() * thisEntity.width * 2.0F) - (double) thisEntity.width, var4, var6, var8);
+			for (int i = 0; i < 7; ++i) {
+				double velX = this.rand.nextGaussian() * 0.02D;
+				double velY = this.rand.nextGaussian() * 0.02D;
+				double velZ = this.rand.nextGaussian() * 0.02D;
+				entity.worldObj.spawnParticle("smoke", entity.posX + (double) (this.rand.nextFloat() * entity.width * 2.0F) - (double) entity.width, entity.posY + 0.5D + (double) (this.rand.nextFloat() * entity.height), entity.posZ + (double) (this.rand.nextFloat() * entity.width * 2.0F) - (double) entity.width, velX, velY, velZ);
 			}
 
 			return true;
