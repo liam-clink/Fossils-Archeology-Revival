@@ -8,6 +8,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -117,39 +118,88 @@ public enum FoodMappings {
     public int getItemFoodAmount(ItemStack item, EnumDiet diet) {
         switch (diet) {
             case CARNIVORE:
-                if (carnivoreItemDiet != null && carnivoreItemDiet.containsKey(item)) {
-                    return carnivoreItemDiet.get(item);
+                if (carnivoreItemDiet != null) {
+                    Iterator it = carnivoreItemDiet.entrySet().iterator();
+                    while (it.hasNext()) {
+                        Map.Entry pair = (Map.Entry)it.next();
+                        ItemStack compareStack = (ItemStack)pair.getKey();
+                        if(item.isItemEqual(compareStack)){
+                            return carnivoreItemDiet.get(compareStack);
+                        }
+                    }
                 }
                 break;
             case HERBIVORE:
-                if (herbivoreItemDiet != null && herbivoreItemDiet.containsKey(item)) {
-                    return herbivoreItemDiet.get(item);
+                if (herbivoreItemDiet != null) {
+                    Iterator it = herbivoreItemDiet.entrySet().iterator();
+                    while (it.hasNext()) {
+                        Map.Entry pair = (Map.Entry)it.next();
+                        ItemStack compareStack = (ItemStack)pair.getKey();
+                        if(item.isItemEqual(compareStack)){
+                            return herbivoreItemDiet.get(compareStack);
+                        }
+                    }
                 }
                 break;
             case OMNIVORE:
-                if (omnivoreItemDiet != null && omnivoreItemDiet.containsKey(item)) {
-                    return omnivoreItemDiet.get(item);
+                if (omnivoreItemDiet != null) {
+                    Iterator it = omnivoreItemDiet.entrySet().iterator();
+                    while (it.hasNext()) {
+                        Map.Entry pair = (Map.Entry)it.next();
+                        ItemStack compareStack = (ItemStack)pair.getKey();
+                        if(item.isItemEqual(compareStack)){
+                            return omnivoreItemDiet.get(compareStack);
+                        }
+                    }
                 }
                 break;
             case PISCIVORE:
-                if (piscivoreItemDiet != null && piscivoreItemDiet.containsKey(item)) {
-                    return piscivoreItemDiet.get(item);
+                if (piscivoreItemDiet != null) {
+                    Iterator it = piscivoreItemDiet.entrySet().iterator();
+                    while (it.hasNext()) {
+                        Map.Entry pair = (Map.Entry)it.next();
+                        ItemStack compareStack = (ItemStack)pair.getKey();
+                        if(item.isItemEqual(compareStack)){
+                            return piscivoreItemDiet.get(compareStack);
+                        }
+                    }
                 }
                 break;
             case CARNIVORE_EGG:
-                if (carnivoreEggItemDiet != null && carnivoreEggItemDiet.containsKey(item)) {
-                    return carnivoreEggItemDiet.get(item);
+                if (carnivoreEggItemDiet != null) {
+                    Iterator it = carnivoreEggItemDiet.entrySet().iterator();
+                    while (it.hasNext()) {
+                        Map.Entry pair = (Map.Entry)it.next();
+                        ItemStack compareStack = (ItemStack)pair.getKey();
+                        if(item.isItemEqual(compareStack)){
+                            return carnivoreEggItemDiet.get(compareStack);
+                        }
+                    }
                 }
                 break;
             case INSECTIVORE:
-                if (insectivoreItemDiet != null && insectivoreItemDiet.containsKey(item)) {
-                    return insectivoreItemDiet.get(item);
+                if (insectivoreItemDiet != null) {
+                    Iterator it = insectivoreItemDiet.entrySet().iterator();
+                    while (it.hasNext()) {
+                        Map.Entry pair = (Map.Entry)it.next();
+                        ItemStack compareStack = (ItemStack)pair.getKey();
+                        if(item.isItemEqual(compareStack)){
+                            return insectivoreItemDiet.get(compareStack);
+                        }
+                    }
                 }
                 break;
             case PISCCARNIVORE:
-                if (pisccarnivoreItemDiet != null && pisccarnivoreItemDiet.containsKey(item)) {
-                    return pisccarnivoreItemDiet.get(item);
+                if (piscivoreItemDiet != null) {
+                Iterator it = piscivoreItemDiet.entrySet().iterator();
+                while (it.hasNext()) {
+                    Map.Entry pair = (Map.Entry)it.next();
+                    ItemStack compareStack = (ItemStack)pair.getKey();
+                    if(item.isItemEqual(compareStack)){
+                        return piscivoreItemDiet.get(compareStack);
+                    }
                 }
+            }
                 break;
             default:
                 return 0;
