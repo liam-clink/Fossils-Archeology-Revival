@@ -3,6 +3,7 @@ package fossilsarcheology.server.handler;
 import java.util.Random;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityChicken;
@@ -100,7 +101,7 @@ public class FossilLivingEvent {
 				if (props.embryoProgress >= props.embryo.growTime) // var10000
 				// == 3000)
 				{
-					GrowEntity(props.embryo, event);
+					growEntity(props.embryo, event);
 					props.embryoProgress = 0;
 					props.setEmbryo(null);
 				}
@@ -118,7 +119,7 @@ public class FossilLivingEvent {
 				if (props.embryoProgress >= props.embryo.growTime) // var10000
 				// == 3000)
 				{
-					GrowEntity(props.embryo, event);
+					growEntity(props.embryo, event);
 					props.embryoProgress = 0;
 					props.setEmbryo(null);
 				}
@@ -135,7 +136,7 @@ public class FossilLivingEvent {
 				if (props.embryoProgress >= props.embryo.growTime) // var10000
 				// == 3000)
 				{
-					GrowEntity(props.embryo, event);
+					growEntity(props.embryo, event);
 					props.embryoProgress = 0;
 					props.setEmbryo(null);
 				}
@@ -152,7 +153,7 @@ public class FossilLivingEvent {
 				if (props.embryoProgress >= props.embryo.growTime) // var10000
 				// == 3000)
 				{
-					GrowEntity(props.embryo, event);
+					growEntity(props.embryo, event);
 					props.embryoProgress = 0;
 					props.setEmbryo(null);
 				}
@@ -160,104 +161,99 @@ public class FossilLivingEvent {
 		}
 	}
 
-	public void GrowEntity(EnumPrehistoric embryo, LivingUpdateEvent event) {
+	public void growEntity(EnumPrehistoric embryo, LivingUpdateEvent event) {
 		float rnd = new Random().nextInt(100);
-		Object birthEntity;
-		switch (embryo) {
+		Entity birthEntity;
+        EntityLivingBase entity = event.entityLiving;
+        switch (embryo) {
 		case Pig:
-			birthEntity = new EntityPig(event.entityLiving.worldObj);
+			birthEntity = new EntityPig(entity.worldObj);
 			break;
-
 		case Sheep:
-			birthEntity = new EntitySheep(event.entityLiving.worldObj);
+			birthEntity = new EntitySheep(entity.worldObj);
 			break;
-
 		case Cow:
-			birthEntity = new EntityCow(event.entityLiving.worldObj);
+			birthEntity = new EntityCow(entity.worldObj);
 			break;
-
 		case Chicken:
-			birthEntity = new EntityChicken(event.entityLiving.worldObj);
+			birthEntity = new EntityChicken(entity.worldObj);
 			break;
-
 		case Horse:
-			if (event.entityLiving instanceof EntityHorse) {
+			if (entity instanceof EntityHorse) {
 				if (rnd < 5) {
-					birthEntity = new EntityHorse(event.entityLiving.worldObj);
+					birthEntity = new EntityHorse(entity.worldObj);
 					((EntityHorse) birthEntity).setHorseType(3);
-					if (((EntityHorse) event.entityLiving).func_152119_ch() != null) {
-						((EntityHorse) birthEntity).func_152120_b(((EntityHorse) event.entityLiving).func_152119_ch());
+					if (((EntityHorse) entity).func_152119_ch() != null) {
+						((EntityHorse) birthEntity).func_152120_b(((EntityHorse) entity).func_152119_ch());
 						((EntityHorse) birthEntity).setHorseTamed(true);
 					}
 					break;
 				} else if (rnd < 10) {
-					birthEntity = new EntityHorse(event.entityLiving.worldObj);
+					birthEntity = new EntityHorse(entity.worldObj);
 					((EntityHorse) birthEntity).setHorseType(4);
-					if (((EntityHorse) event.entityLiving).func_152119_ch() != null) {
-						((EntityHorse) birthEntity).func_152120_b(((EntityHorse) event.entityLiving).func_152119_ch());
+					if (((EntityHorse) entity).func_152119_ch() != null) {
+						((EntityHorse) birthEntity).func_152120_b(((EntityHorse) entity).func_152119_ch());
 						((EntityHorse) birthEntity).setHorseTamed(true);
 					}
 					break;
 				} else {
-					birthEntity = ((EntityHorse) event.entityLiving).createChild(new EntityHorse(event.entityLiving.worldObj));
+					birthEntity = ((EntityHorse) entity).createChild(new EntityHorse(entity.worldObj));
 				}
 			} else {
-				EntityHorse entityHorse = new EntityHorse(event.entityLiving.worldObj);
-				birthEntity = entityHorse.createChild(new EntityHorse(event.entityLiving.worldObj));
+				EntityHorse entityHorse = new EntityHorse(entity.worldObj);
+				birthEntity = entityHorse.createChild(new EntityHorse(entity.worldObj));
 			}
 			break;
-
 		case Smilodon:
-			birthEntity = new EntitySmilodon(event.entityLiving.worldObj);
-			if (event.entityLiving.worldObj.getClosestPlayerToEntity(event.entityLiving, 15) != null) {
+			birthEntity = new EntitySmilodon(entity.worldObj);
+			if (entity.worldObj.getClosestPlayerToEntity(entity, 15) != null) {
 				((EntitySmilodon) birthEntity).setTamed(true);
-				((EntitySmilodon) birthEntity).func_152115_b(event.entityLiving.worldObj.getClosestPlayerToEntity(event.entityLiving, 15).getCommandSenderName());
+				((EntitySmilodon) birthEntity).func_152115_b(entity.worldObj.getClosestPlayerToEntity(entity, 15).getCommandSenderName());
 			}
 			break;
-
 		case Mammoth:
-			birthEntity = (new EntityMammoth(event.entityLiving.worldObj));
-			((EntityPrehistoric) birthEntity).func_152114_e(event.entityLiving.worldObj.getClosestPlayerToEntity(((EntityPrehistoric) birthEntity), 8));
-			if (event.entityLiving.worldObj.getClosestPlayerToEntity(event.entityLiving, 15) != null) {
+			birthEntity = (new EntityMammoth(entity.worldObj));
+			((EntityPrehistoric) birthEntity).func_152114_e(entity.worldObj.getClosestPlayerToEntity(((EntityPrehistoric) birthEntity), 8));
+			if (entity.worldObj.getClosestPlayerToEntity(entity, 15) != null) {
 				((EntityPrehistoric) birthEntity).setTamed(true);
-				((EntityPrehistoric) birthEntity).func_152115_b(event.entityLiving.worldObj.getClosestPlayerToEntity(event.entityLiving, 15).getCommandSenderName());
+				((EntityPrehistoric) birthEntity).func_152115_b(entity.worldObj.getClosestPlayerToEntity(entity, 15).getCommandSenderName());
 			}
 			break;
-
 		case Elasmotherium:
-			birthEntity = (new EntityElasmotherium(event.entityLiving.worldObj));
-			if (event.entityLiving.worldObj.getClosestPlayerToEntity(event.entityLiving, 15) != null) {
+			birthEntity = (new EntityElasmotherium(entity.worldObj));
+			if (entity.worldObj.getClosestPlayerToEntity(entity, 15) != null) {
 				((EntityPrehistoric) birthEntity).setTamed(true);
-				((EntityPrehistoric) birthEntity).func_152115_b(event.entityLiving.worldObj.getClosestPlayerToEntity(event.entityLiving, 15).getCommandSenderName());
+				((EntityPrehistoric) birthEntity).func_152115_b(entity.worldObj.getClosestPlayerToEntity(entity, 15).getCommandSenderName());
 			}
 			break;
-
 		case Quagga:
-			birthEntity = new EntityQuagga(event.entityLiving.worldObj);
+			birthEntity = new EntityQuagga(entity.worldObj);
 
-			int d0 = (int) (event.entityLiving.getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue() + ((EntityQuagga) birthEntity).getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue() + (int) ((EntityQuagga) birthEntity).randomHealthStat());
+			int d0 = (int) (entity.getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue() + ((EntityQuagga) birthEntity).getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue() + (int) ((EntityQuagga) birthEntity).randomHealthStat());
 			((EntityQuagga) birthEntity).getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(d0 / 3.0D);
-			double d2 = event.entityLiving.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getBaseValue() + ((EntityQuagga) birthEntity).getEntityAttribute(SharedMonsterAttributes.movementSpeed).getBaseValue() + ((EntityQuagga) birthEntity).randomSpeedStat();
+			double d2 = entity.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getBaseValue() + ((EntityQuagga) birthEntity).getEntityAttribute(SharedMonsterAttributes.movementSpeed).getBaseValue() + ((EntityQuagga) birthEntity).randomSpeedStat();
 			((EntityQuagga) birthEntity).getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(d2 / 3.0D);
 			break;
 
 		default:
-			birthEntity = new EntityPig(event.entityLiving.worldObj);
+			birthEntity = new EntityPig(entity.worldObj);
 		}
-		if (!(birthEntity instanceof EntityPrehistoric)) {
+		if (!(birthEntity instanceof EntityPrehistoric) && birthEntity instanceof EntityAnimal) {
 			((EntityAnimal) birthEntity).setGrowingAge(-24000);
+		} else if (birthEntity instanceof EntityPrehistoric) {
+            ((EntityPrehistoric) birthEntity).setGender(new Random().nextInt(2));
 		}
-		((EntityAnimal) birthEntity).setLocationAndAngles(event.entityLiving.posX, event.entityLiving.posY, event.entityLiving.posZ, event.entityLiving.rotationYaw, event.entityLiving.rotationPitch);
+		birthEntity.setLocationAndAngles(entity.posX, entity.posY, entity.posZ, entity.rotationYaw, entity.rotationPitch);
 
 		for (int var3 = 0; var3 < 7; ++var3) {
 			double var4 = this.rand.nextGaussian() * 0.02D;
 			double var6 = this.rand.nextGaussian() * 0.02D;
 			double var8 = this.rand.nextGaussian() * 0.02D;
-			event.entityLiving.worldObj.spawnParticle("heart", event.entityLiving.posX + (double) (this.rand.nextFloat() * event.entityLiving.width * 2.0F) - (double) event.entityLiving.width, event.entityLiving.posY + 0.5D + (double) (this.rand.nextFloat() * event.entityLiving.height), event.entityLiving.posZ + (double) (this.rand.nextFloat() * event.entityLiving.width * 2.0F) - (double) event.entityLiving.width, var4, var6, var8);
+			entity.worldObj.spawnParticle("heart", entity.posX + (double) (this.rand.nextFloat() * entity.width * 2.0F) - (double) entity.width, entity.posY + 0.5D + (double) (this.rand.nextFloat() * entity.height), entity.posZ + (double) (this.rand.nextFloat() * entity.width * 2.0F) - (double) entity.width, var4, var6, var8);
 		}
 
-		if (!event.entityLiving.worldObj.isRemote) {
-			event.entityLiving.worldObj.spawnEntityInWorld((Entity) birthEntity);
+		if (!entity.worldObj.isRemote) {
+			entity.worldObj.spawnEntityInWorld(birthEntity);
 		}
 	}
 
