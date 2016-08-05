@@ -797,7 +797,7 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
             baby = new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, new ItemStack(this.type.birdEggItem));
         }
         if (this.type.type == EnumMobType.DINOSAUR) {
-            if (Revival.CONFIG.eggsLikeChickens) {
+            if (Revival.CONFIG.eggsLikeChickens || this.type.isAquatic()) {
                 baby = new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, new ItemStack(this.type.eggItem));
             } else {
                 baby = new EntityDinosaurEgg(this.worldObj, this.type);
