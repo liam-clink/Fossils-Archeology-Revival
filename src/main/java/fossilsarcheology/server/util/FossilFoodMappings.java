@@ -267,7 +267,7 @@ public class FossilFoodMappings {
         FoodMappings.INSTANCE.addPlant("immersedYellowFlag", 8);
         FoodMappings.INSTANCE.addPlant("immersedEuropeanBurReed", 7);
         FoodMappings.INSTANCE.addPlant("immersedSimplestemBurReed", 8);
-        FoodMappings.INSTANCE.addPlant("immersedSofstemBulrush", 7);
+        FoodMappings.INSTANCE.addPlant("immersedSoftstemBulrush", 7);
         FoodMappings.INSTANCE.addPlant("immersedWaterMannagrass", 8);
         FoodMappings.INSTANCE.addPlant("flowerThistle", 6);
         FoodMappings.INSTANCE.addPlant("cropVine", 6);
