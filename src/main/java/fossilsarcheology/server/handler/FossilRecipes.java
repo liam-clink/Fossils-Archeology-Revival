@@ -20,8 +20,8 @@ public class FossilRecipes {
         GameRegistry.addRecipe(new ItemStack(Items.dye, 5, 15), "X", 'X', FABlockRegistry.INSTANCE.blockSkull);
         GameRegistry.addRecipe(new ItemStack(Items.dye, 5, 15), "X", 'X', FABlockRegistry.INSTANCE.skullLantern);
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(FABlockRegistry.INSTANCE.blockanalyzerIdle, 1), "XYX", "XWX", 'X', "ingotIron", 'Y', "artifact", 'W', "fossil"));
-        GameRegistry.addRecipe(new ItemStack(FABlockRegistry.INSTANCE.blockworktableIdle, 1), "X", "Y", 'X', Items.paper, 'Y', Blocks.crafting_table);
-        GameRegistry.addRecipe(new ItemStack(FABlockRegistry.INSTANCE.blockSifterIdle, 1), "XYX", "YZY", "YXY", 'X', Items.string, 'Y', Blocks.planks, 'Z', Blocks.iron_bars);
+        GameRegistry.addRecipe(new ShapelessOreRecipe(FABlockRegistry.INSTANCE.blockworktableIdle, 1), "X", "Y", 'X', Items.paper, 'Y', "craftingTableWood");
+        GameRegistry.addRecipe(new ShapedOreRecipe(FABlockRegistry.INSTANCE.blockSifterIdle, 1), "XYX", "YZY", "YXY", 'X', Items.string, 'Y', "plankWood", 'Z', Blocks.iron_bars);
         // GameRegistry.addRecipe(new
         // ItemStack(FABlockRegistry.INSTANCE.ancientWoodPlate, 3), new
         // Object[]{"XX", 'X', FABlockRegistry.INSTANCE.ancientWood});
@@ -34,7 +34,7 @@ public class FossilRecipes {
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.cake, 1), "MMM", "SES", "WWW", 'M', Items.milk_bucket, 'S', Items.sugar, 'W', Items.wheat, 'E', "foodEgg"));
         GameRegistry.addRecipe(new ItemStack(FABlockRegistry.INSTANCE.obsidianSpikes, 4), "A A", "A A", 'A', Blocks.obsidian);
         GameRegistry.addRecipe(new ItemStack(FAItemRegistry.INSTANCE.skullStick, 1), "X", "Y", 'X', FABlockRegistry.INSTANCE.blockSkull, 'Y', Items.stick);
-        GameRegistry.addRecipe(new ItemStack(FABlockRegistry.INSTANCE.drum, 1), "ZZZ", "XYX", "XXX", 'X', Blocks.planks, 'Y', Items.redstone, 'Z', Items.leather);
+        GameRegistry.addRecipe(new ShapedOreRecipe(FABlockRegistry.INSTANCE.drum, 1), "ZZZ", "XYX", "XXX", 'X', "plankWood", 'Y', Items.redstone, 'Z', Items.leather);
         GameRegistry.addRecipe(new ItemStack(FABlockRegistry.INSTANCE.feederActive, 1), new Object[]{"XYX", "ZAB", "BBB", 'X', Items.iron_ingot, 'Y', Blocks.glass, 'Z', Blocks.stone_button, 'A', Items.bucket, 'B', Blocks.stone});
         GameRegistry.addShapelessRecipe(new ItemStack(FAItemRegistry.INSTANCE.gemAxe), Items.golden_axe, FAItemRegistry.INSTANCE.gem);
         GameRegistry.addShapelessRecipe(new ItemStack(FAItemRegistry.INSTANCE.gemAxe), Items.diamond_axe, FAItemRegistry.INSTANCE.gem);
