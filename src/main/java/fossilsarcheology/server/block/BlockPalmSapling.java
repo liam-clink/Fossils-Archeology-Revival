@@ -9,6 +9,7 @@ import net.minecraft.block.IGrowable;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import java.util.Random;
@@ -71,7 +72,7 @@ public class BlockPalmSapling extends BlockBush implements IGrowable {
         return false;
     }
 
-    public void generateTree(World world, int i, int j, int k, Random random) {
+    public void generateTree(World world, BlockPos pos, Random random) {
         WorldGenPalaeoraphe w0 = new WorldGenPalaeoraphe();
         Block j1 = world.getBlock(i, j - 1, k);
 

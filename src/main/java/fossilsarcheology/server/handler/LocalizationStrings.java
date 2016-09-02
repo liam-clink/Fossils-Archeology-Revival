@@ -1,6 +1,6 @@
 package fossilsarcheology.server.handler;
 
-import net.minecraft.util.I18n;
+import net.minecraft.util.text.translation.I18n;
 
 public class LocalizationStrings {
     // Enchantments

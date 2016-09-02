@@ -9,8 +9,8 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class EventNewMenu {
     @SubscribeEvent
     public void onGuiOpened(GuiOpenEvent event) {
-        if (Revival.CONFIG.customMainMenu && event.gui instanceof GuiMainMenu && !(event.gui instanceof FAMainMenuGUI)) {
-            event.gui = new FAMainMenuGUI();
+        if (Revival.CONFIG.customMainMenu && event.getGui() instanceof GuiMainMenu && !(event.getGui() instanceof FAMainMenuGUI)) {
+            event.setGui(new FAMainMenuGUI());
         }
     }
 }

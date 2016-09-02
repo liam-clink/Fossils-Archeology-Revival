@@ -10,102 +10,71 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class SifterRecipies {
-    private static final SifterRecipies smeltingBase = new SifterRecipies();
+public enum  SifterRecipies {
+    INSTANCE;
 
-    /**
-     * The list of smelting results.
-     */
-    private Map smeltingList = new HashMap();
-    private Map experienceList = new HashMap();
-    private HashMap<List<Integer>, ItemStack> metaSmeltingList = new HashMap<List<Integer>, ItemStack>();
-    private HashMap<List<Integer>, Float> metaExperience = new HashMap<List<Integer>, Float>();
+    private Map<Item, ItemStack> recipes = new HashMap<>();
+    private Map<ItemStack, Float> experienceAmounts = new HashMap<>();
+    private Map<List<Integer>, ItemStack> metaRecipes = new HashMap<>();
+    private Map<List<Integer>, Float> metaExperience = new HashMap<>();
 
-    private SifterRecipies() {
-        this.addSmelting(Item.getItemFromBlock(Blocks.sand), new ItemStack(Items.iron_ingot), 0.7F);
-        this.addSmelting(Item.getItemFromBlock(Blocks.gravel), new ItemStack(Items.iron_ingot), 0.7F);
-        this.addSmelting(Item.getItemFromBlock(Blocks.clay), new ItemStack(Items.gold_ingot), 1.0F);
-        this.addSmelting(Items.clay_ball, new ItemStack(Items.gold_ingot), 1.0F);
+    SifterRecipies() {
+        this.addRecipe(Item.getItemFromBlock(Blocks.SAND), new ItemStack(Items.IRON_INGOT), 0.7F);
+        this.addRecipe(Item.getItemFromBlock(Blocks.GRAVEL), new ItemStack(Items.IRON_INGOT), 0.7F);
+        this.addRecipe(Item.getItemFromBlock(Blocks.CLAY), new ItemStack(Items.GOLD_INGOT), 1.0F);
+        this.addRecipe(Items.CLAY_BALL, new ItemStack(Items.GOLD_INGOT), 1.0F);
     }
 
-    /**
-     * Used to call methods addSmelting and getSmeltingResult.
-     */
-    public static final SifterRecipies smelting() {
-        return smeltingBase;
-    }
-
-    /**
-     * Adds a smelting recipe.
-     */
-    public void addSmelting(Item par1, ItemStack par2ItemStack, float par3) {
-        this.smeltingList.put(par1, par2ItemStack);
-        this.experienceList.put(par2ItemStack, par3);
-    }
-
-    /**
-     * Returns the smelting result of an item. Deprecated in favor of a metadata
-     * sensitive version
-     */
-    @Deprecated
-    public ItemStack getSmeltingResult(int par1) {
-        return (ItemStack) this.smeltingList.get(par1);
-    }
-
-    public Map getSmeltingList() {
-        return this.smeltingList;
+    public void addRecipe(Item input, ItemStack output, float experience) {
+        this.recipes.put(input, output);
+        this.experienceAmounts.put(output, experience);
     }
 
     @Deprecated
-    // In favor of ItemStack sensitive version
+    public ItemStack getSiftResult(int par1) {
+        return this.recipes.get(par1);
+    }
+
+    public Map<Item, ItemStack> getRecipes() {
+        return this.recipes;
+    }
+
+    @Deprecated
     public float getExperience(int par1) {
-        return this.experienceList.containsKey(par1) ? (Float) this.experienceList.get(par1) : 0.0F;
+        return this.experienceAmounts.containsKey(par1) ? (Float) this.experienceAmounts.get(par1) : 0.0F;
     }
 
-    /**
-     * A metadata sensitive version of adding a furnace recipe.
-     */
-    public void addSmelting(Item itemID, int metadata, ItemStack itemstack, float experience) {
-        metaSmeltingList.put(Arrays.asList(Item.getIdFromItem(itemID), metadata), itemstack);
+    public void addRecipe(Item itemID, int metadata, ItemStack itemstack, float experience) {
+        metaRecipes.put(Arrays.asList(Item.getIdFromItem(itemID), metadata), itemstack);
         metaExperience.put(Arrays.asList(Item.getIdFromItem(itemstack.getItem()), itemstack.getItemDamage()), experience);
     }
 
-    /**
-     * Used to get the resulting ItemStack form a source ItemStack
-     *
-     * @param item The Source ItemStack
-     * @return The result ItemStack
-     */
-    public ItemStack getSmeltingResult(ItemStack item) {
+    public ItemStack getSiftResult(ItemStack item) {
         if (item == null) {
             return null;
         }
-        ItemStack ret = metaSmeltingList.get(Arrays.asList(item, item.getItemDamage()));
+        ItemStack ret = metaRecipes.get(Arrays.asList(item, item.getItemDamage()));
         if (ret != null) {
             return ret;
         }
-        return (ItemStack) smeltingList.get(item);
+        return recipes.get(item);
     }
 
-    /**
-     * Grabs the amount of base experience for this item to give when pulled
-     * from the furnace slot.
-     */
-    public float getExperience(ItemStack itemstack) {
-        if (itemstack == null || itemstack.getItem() == null) {
+    public float getExperience(ItemStack stack) {
+        if (stack == null || stack.getItem() == null) {
             return 0;
         }
-        float ret = itemstack.getItem().getSmeltingExperience(itemstack);
-        if (ret < 0 && metaExperience.containsKey(Arrays.asList(itemstack, itemstack.getItemDamage()))) {
-            ret = metaExperience.get(Arrays.asList(itemstack, itemstack.getItemDamage()));
+        float ret = stack.getItem().getSmeltingExperience(stack);
+        if (ret < 0 && metaExperience.containsKey(Arrays.asList(stack, stack.getItemDamage()))) {
+            ret = metaExperience.get(Arrays.asList(stack, stack.getItemDamage()));
         }
-        if (ret < 0 && experienceList.containsKey(itemstack)) {
-            ret = (Float) experienceList.get(itemstack);
+        if (ret < 0 && experienceAmounts.containsKey(stack)) {
+            ret = experienceAmounts.get(stack);
         }
         return (ret < 0 ? 0 : ret);
     }
 
-    public Map<List<Integer>, ItemStack> getMetaSmeltingList() {
-        return metaSmeltingList;
+    public Map<List<Integer>, ItemStack> getMetaRecipes() {
+        return metaRecipes;
     }
 }

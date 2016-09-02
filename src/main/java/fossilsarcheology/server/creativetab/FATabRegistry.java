@@ -9,7 +9,7 @@ public enum FATabRegistry {
     public CreativeTabs ITEMS;
 
     public void init() {
-        BLOCKS = new BLOCKS("Fossil Blocks");
+        BLOCKS = new TabFBlocks("Fossil Blocks");
         ITEMS = new TabFItems("Fossil Items");
     }
 }

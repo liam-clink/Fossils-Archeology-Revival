@@ -9,9 +9,9 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class FossilBonemealEvent {
     @SubscribeEvent
     public void onUseBonemeal(BonemealEvent event) {
-        if (event.block == FABlockRegistry.INSTANCE.palmSap) {
-            if (!event.world.isRemote) {
-                ((BlockPalmSapling) FABlockRegistry.INSTANCE.palmSap).generateTree(event.world, event.x, event.y, event.z, event.world.rand);
+        if (event.getBlock() == FABlockRegistry.INSTANCE.palmSap) {
+            if (!event.getWorld().isRemote) {
+                ((BlockPalmSapling) FABlockRegistry.INSTANCE.palmSap).generateTree(event.getWorld(), event.getPos(), event.getWorld().rand);
                 event.setResult(Event.Result.ALLOW);
             }
         }

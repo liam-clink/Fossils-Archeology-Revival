@@ -5,7 +5,7 @@ import fossilsarcheology.api.FoodMappings;
 import fossilsarcheology.server.block.entity.TileEntityFeeder;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
-import net.minecraft.inventory.ICrafting;
+import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
@@ -19,127 +19,93 @@ public class FeederContainer extends Container {
     int lastMeatValue = 0;
     private TileEntityFeeder feeder;
 
-    public FeederContainer(IInventory var1, TileEntity var2) {
-        this.feeder = (TileEntityFeeder) var2;
+    public FeederContainer(IInventory inventory, TileEntity tile) {
+        this.feeder = (TileEntityFeeder) tile;
         this.addSlotToContainer(new Slot(this.feeder, 0, 60, 62));
         this.addSlotToContainer(new Slot(this.feeder, 1, 104, 62));
-        int var3;
-
-        for (var3 = 0; var3 < 3; ++var3) {
-            for (int var4 = 0; var4 < 9; ++var4) {
-                this.addSlotToContainer(new Slot(var1, var4 + var3 * 9 + 9, 8 + var4 * 18, 84 + var3 * 18));
+        for (int vertical = 0; vertical < 3; ++vertical) {
+            for (int horizontal = 0; horizontal < 9; ++horizontal) {
+                this.addSlotToContainer(new Slot(inventory, horizontal + vertical * 9 + 9, 8 + horizontal * 18, 84 + vertical * 18));
             }
         }
-
-        for (var3 = 0; var3 < 9; ++var3) {
-            this.addSlotToContainer(new Slot(var1, var3, 8 + var3 * 18, 142));
+        for (int horizontal = 0; horizontal < 9; ++horizontal) {
+            this.addSlotToContainer(new Slot(inventory, horizontal, 8 + horizontal * 18, 142));
         }
     }
 
     @Override
-    public void addCraftingToCrafters(ICrafting var1) {
-        super.addCraftingToCrafters(var1);
-        var1.sendProgressBarUpdate(this, 0, this.feeder.currentPlant);
-        var1.sendProgressBarUpdate(this, 1, this.feeder.currentMeat);
+    public void addListener(IContainerListener listener) {
+        super.addListener(listener);
+        listener.sendProgressBarUpdate(this, 0, this.feeder.currentPlant);
+        listener.sendProgressBarUpdate(this, 1, this.feeder.currentMeat);
     }
 
-    /**
-     * Updates crafting matrix; called from onCraftMatrixChanged. Args: none
-     */
     @Override
     public void detectAndSendChanges() {
         super.detectAndSendChanges();
-
-        for (Object crafter : this.crafters) {
-            ICrafting var2 = (ICrafting) crafter;
-
+        for (IContainerListener listener : this.listeners) {
             if (this.lastVegValue != this.feeder.currentPlant) {
-                var2.sendProgressBarUpdate(this, 0, this.feeder.currentPlant);
+                listener.sendProgressBarUpdate(this, 0, this.feeder.currentPlant);
             }
-
             if (this.lastMeatValue != this.feeder.currentMeat) {
-                var2.sendProgressBarUpdate(this, 1, this.feeder.currentMeat);
+                listener.sendProgressBarUpdate(this, 1, this.feeder.currentMeat);
             }
         }
-
         this.lastVegValue = this.feeder.currentPlant;
         this.lastMeatValue = this.feeder.currentMeat;
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void updateProgressBar(int var1, int var2) {
-        if (var1 == 0) {
-            this.feeder.currentPlant = var2;
+    public void updateProgressBar(int key, int value) {
+        if (key == 0) {
+            this.feeder.currentPlant = value;
         }
-
-        if (var1 == 1) {
-            this.feeder.currentMeat = var2;
+        if (key == 1) {
+            this.feeder.currentMeat = value;
         }
     }
 
     @Override
-    public boolean canInteractWith(EntityPlayer var1) {
-        return this.feeder.isUseableByPlayer(var1);
+    public boolean canInteractWith(EntityPlayer player) {
+        return this.feeder.isUseableByPlayer(player);
     }
 
-    /**
-     * Called when a player shift-clicks on a slot. You must override this or
-     * you will crash when someone does that.
-     */
     @Override
-    public ItemStack transferStackInSlot(EntityPlayer player, int getSlot) {
-        ItemStack itemstack = null;
-        Slot slot = (Slot) this.inventorySlots.get(getSlot);
+    public ItemStack transferStackInSlot(EntityPlayer player, int index) {
+        ItemStack stack = null;
+        Slot slot = this.inventorySlots.get(index);
         if (slot != null && slot.getHasStack()) {
-            ItemStack itemstack1 = slot.getStack();
-            itemstack = itemstack1.copy();
-            // itemstack is in player inventory, try to place in appropriate
-            // furnace slot
-            if (getSlot > HERB_INPUT) // if it's not in the INPUT and in player
-            // inventory
-            {
-                // if it can be smelted, place in the input slots
-                if (FoodMappings.INSTANCE.getItemFoodAmount(itemstack1.getItem(), Diet.CARNIVORE_EGG) != 0) {
-                    // try to place in either Input slot; add 1 to final input
-                    // slot because mergeItemStack uses < index
-                    if (!this.mergeItemStack(itemstack1, 0, 1, false)) {
+            ItemStack newStack = slot.getStack();
+            stack = newStack.copy();
+            if (index > HERB_INPUT) {
+                if (FoodMappings.INSTANCE.getItemFoodAmount(newStack.getItem(), Diet.CARNIVORE_EGG) != 0) {
+                    if (!this.mergeItemStack(newStack, 0, 1, false)) {
                         return null;
                     }
                 }
-                if (FoodMappings.INSTANCE.getItemFoodAmount(itemstack1.getItem(), Diet.HERBIVORE) != 0) {
-                    // try to place in either Input slot; add 1 to final input
-                    // slot because mergeItemStack uses < index
-                    if (!this.mergeItemStack(itemstack1, 1, 2, false)) {
+                if (FoodMappings.INSTANCE.getItemFoodAmount(newStack.getItem(), Diet.HERBIVORE) != 0) {
+                    if (!this.mergeItemStack(newStack, 1, 2, false)) {
                         return null;
                     }
                 }
-            }
-            // item in player's inventory, but not in action bar
-            else if (getSlot >= HERB_INPUT + 1 && getSlot < HERB_INPUT + 28) {
-                // place in action bar
-                if (!this.mergeItemStack(itemstack1, HERB_INPUT + 28, HERB_INPUT + 37, false)) {
+            } else if (index >= HERB_INPUT + 1 && index < HERB_INPUT + 28) {
+                if (!this.mergeItemStack(newStack, HERB_INPUT + 28, HERB_INPUT + 37, false)) {
                     return null;
                 }
-            }
-            // item in action bar - place in player inventory
-            else if (getSlot >= HERB_INPUT + 28 && getSlot < HERB_INPUT + 37 && !this.mergeItemStack(itemstack1, HERB_INPUT + 1, HERB_INPUT + 28, false)) {
+            } else if (index >= HERB_INPUT + 28 && index < HERB_INPUT + 37 && !this.mergeItemStack(newStack, HERB_INPUT + 1, HERB_INPUT + 28, false)) {
                 return null;
             }
-
-            if (itemstack1.stackSize == 0) {
+            if (newStack.stackSize == 0) {
                 slot.putStack(null);
             } else {
                 slot.onSlotChanged();
             }
-
-            if (itemstack1.stackSize == itemstack.stackSize) {
+            if (newStack.stackSize == stack.stackSize) {
                 return null;
             }
-
-            slot.onPickupFromSlot(player, itemstack1);
+            slot.onPickupFromSlot(player, newStack);
         }
-
-        return itemstack;
+        return stack;
     }
 }
