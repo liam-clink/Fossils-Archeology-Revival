@@ -2,15 +2,16 @@ package fossilsarcheology.server.block;
 
 import fossilsarcheology.server.creativetab.FATabRegistry;
 import fossilsarcheology.server.handler.LocalizationStrings;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -20,57 +21,52 @@ import java.util.List;
 import java.util.Random;
 
 public class BlockAncientStoneSlab extends BlockSlab {
-    public static final String[] blockStepTypes = { "ancientStone" };
-    private IIcon icon;
+    public static final String[] STEP_TYPES = { "ancientStone" };
+
+    private boolean doubleSlabbed;
 
     public BlockAncientStoneSlab(boolean doubleSlabbed) {
-        super(doubleSlabbed, Material.ROCK);
+        super(Material.ROCK);
+        this.doubleSlabbed = doubleSlabbed;
         this.setLightOpacity(0);
         this.useNeighborBrightness = true;
-        setHardness(1.4F);
-        setResistance(7.5F);
-        setSoundType(SoundType.WOOD);
+        this.setHardness(1.4F);
+        this.setResistance(7.5F);
+        this.setSoundType(SoundType.WOOD);
         if (doubleSlabbed) {
-            setUnlocalizedName(LocalizationStrings.ANCIENT_STONE_DOUBLESLAB_NAME);
+            this.setUnlocalizedName(LocalizationStrings.ANCIENT_STONE_DOUBLESLAB_NAME);
         } else {
-            setUnlocalizedName(LocalizationStrings.ANCIENT_STONE_SINGLESLAB_NAME);
-            setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
+            this.setUnlocalizedName(LocalizationStrings.ANCIENT_STONE_SINGLESLAB_NAME);
+            this.setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
         }
     }
 
     @Override
-    public Item getItemDropped(int var1, Random rand, int var3) {
+    public IBlockState onBlockPlaced(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
+        IBlockState state = super.onBlockPlaced(world, pos, facing, hitX, hitY, hitZ, meta, placer).withProperty(HALF, BlockSlab.EnumBlockHalf.BOTTOM);
+        if (!this.isDouble()) {
+            if ((facing == EnumFacing.UP || (double) hitY <= 0.5D) && facing != EnumFacing.DOWN) {
+                return state;
+            } else {
+                return state.withProperty(HALF, BlockSlab.EnumBlockHalf.TOP);
+            }
+        }
+        return state;
+    }
+
+    @Override
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
         return Item.getItemFromBlock(FABlockRegistry.INSTANCE.ancientStoneSingleSlab);
     }
 
     @Override
-    protected ItemStack createStackedBlock(int meta) {
-        return new ItemStack(FABlockRegistry.INSTANCE.ancientStoneSingleSlab, 2, meta & 7);
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public Item getItem(World world, BlockPos pos) {
-        return Item.getItemFromBlock(this);
-    }
-
-    /**
-     * Returns the slab block name with step type.
-     */
-    // 1.6.4 - getFullSlabName
-    @Override
-    public String func_150002_b(int meta) {
-        if (meta < 0 || meta >= blockStepTypes.length) {
+    public String getUnlocalizedName(int meta) {
+        if (meta < 0 || meta >= STEP_TYPES.length) {
             meta = 0;
         }
-
-        return super.getUnlocalizedName() + "." + blockStepTypes[meta];
+        return super.getUnlocalizedName() + "." + STEP_TYPES[meta];
     }
 
-    /**
-     * returns a list of blocks with the same ID, but different meta (eg: wood
-     * returns 4 blocks)
-     */
     @Override
     @SideOnly(Side.CLIENT)
     public void getSubBlocks(Item item, CreativeTabs tab, List subBlocks) {
@@ -79,4 +75,18 @@ public class BlockAncientStoneSlab extends BlockSlab {
         }
     }
 
+    @Override
+    public boolean isDouble() {
+        return this.doubleSlabbed;
+    }
+
+    @Override
+    public IProperty<?> getVariantProperty() {
+        return null;
+    }
+
+    @Override
+    public Comparable<?> getTypeForItem(ItemStack stack) {
+        return null;
+    }
 }

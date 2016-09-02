@@ -1,0 +1,46 @@
+package fossilsarcheology.client.gui;
+
+import fossilsarcheology.server.block.entity.TileEntityWorktable;
+import fossilsarcheology.server.container.WorktableContainer;
+import fossilsarcheology.server.handler.LocalizationStrings;
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+@SideOnly(Side.CLIENT)
+public class WorktableGUI extends GuiContainer {
+    private static final ResourceLocation TEXTURE = new ResourceLocation("fossil:textures/gui/Workbench.png");
+    private TileEntityWorktable tile;
+
+    public WorktableGUI(InventoryPlayer playerInventory, TileEntity tile) {
+        super(new WorktableContainer(playerInventory, tile));
+        this.tile = (TileEntityWorktable) tile;
+    }
+
+    @Override
+    protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
+        this.fontRendererObj.drawString(LocalizationStrings.BLOCK_WORKTABLE_IDLE_NAME, 30, 6, 4210752);
+        this.fontRendererObj.drawString(I18n.format("container.inventory"), 8, this.ySize - 96 + 2, 4210752);
+    }
+
+    @Override
+    protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
+        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+        mc.getTextureManager().bindTexture(TEXTURE);
+        int centerX = (this.width - this.xSize) / 2;
+        int centerY = (this.height - this.ySize) / 2;
+        this.drawTexturedModalRect(centerX, centerY, 0, 0, this.xSize, this.ySize);
+        int progress;
+        if (this.tile.isBurning()) {
+            progress = this.tile.getBurnTimeRemainingScaled(12);
+            this.drawTexturedModalRect(centerX + 82, centerY + 36 + 12 - progress, 176, 12 - progress, 14, progress + 2);
+        }
+        progress = this.tile.getCookProgressScaled(24);
+        this.drawTexturedModalRect(centerX + 79, centerY + 18, 176, 14, progress + 1, 16);
+    }
+}

@@ -25,7 +25,6 @@ import java.util.List;
 import java.util.Random;
 
 public class ChunkProviderTreasure implements IChunkProvider {
-    private static final String __OBFID = "CL_00000397";
     public NoiseGeneratorOctaves noiseGen4;
     public NoiseGeneratorOctaves noiseGen5;
     double[] noiseData1;
@@ -60,7 +59,7 @@ public class ChunkProviderTreasure implements IChunkProvider {
         this.noiseGen5 = (NoiseGeneratorOctaves) noiseGens[4];
     }
 
-    public void func_147420_a(int p_147420_1_, int p_147420_2_, Block[] p_147420_3_, BiomeGenBase[] p_147420_4_) {
+    public void func_147420_a(int p_147420_1_, int p_147420_2_, Block[] p_147420_3_, Biome[] biomes) {
         byte b0 = 2;
         int k = b0 + 1;
         byte b1 = 33;
@@ -137,8 +136,8 @@ public class ChunkProviderTreasure implements IChunkProvider {
             for (int l = 0; l < 16; ++l) {
                 byte b0 = 1;
                 int i1 = -1;
-                Block block = Blocks.end_stone;
-                Block block1 = Blocks.end_stone;
+                Block block = Blocks.END_STONE;
+                Block block1 = Blocks.END_STONE;
 
                 for (int j1 = 127; j1 >= 0; --j1) {
                     int k1 = (l * 16 + k) * 128 + j1;

@@ -11,19 +11,19 @@ public class ModelFPZ extends ModelBiped {
         this(0.0F, false);
     }
 
-    protected ModelFPZ(float par1, float par2, int par3, int par4) {
-        super(par1, par2, par3, par4);
+    protected ModelFPZ(float scale, float height, int textureWidth, int textureHeight) {
+        super(scale, height, textureWidth, textureHeight);
     }
 
-    public ModelFPZ(float par1, boolean par2) {
-        super(par1, 0.0F, 64, par2 ? 32 : 64);
+    public ModelFPZ(float scale, boolean tallTexture) {
+        super(scale, 0.0F, 64, tallTexture ? 32 : 64);
     }
 
     @Override
-    public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
-        super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-        float f6 = MathHelper.sin(this.onGround * (float) Math.PI);
-        float f7 = MathHelper.sin((1.0F - (1.0F - this.onGround) * (1.0F - this.onGround)) * (float) Math.PI);
+    public void setRotationAngles(float limbSwing, float limbSwingAmount, float age, float yaw, float pitch, float scale, Entity entity) {
+        super.setRotationAngles(limbSwing, limbSwingAmount, age, yaw, pitch, scale, entity);
+        float f6 = MathHelper.sin(this.swingProgress * (float) Math.PI);
+        float f7 = MathHelper.sin((1.0F - (1.0F - this.swingProgress) * (1.0F - this.swingProgress)) * (float) Math.PI);
         this.bipedRightArm.rotateAngleZ = 0.0F;
         this.bipedLeftArm.rotateAngleZ = 0.0F;
         this.bipedRightArm.rotateAngleY = -(0.1F - f6 * 0.6F);
@@ -32,10 +32,10 @@ public class ModelFPZ extends ModelBiped {
         this.bipedLeftArm.rotateAngleX = -((float) Math.PI / 2F);
         this.bipedRightArm.rotateAngleX -= f6 * 1.2F - f7 * 0.4F;
         this.bipedLeftArm.rotateAngleX -= f6 * 1.2F - f7 * 0.4F;
-        this.bipedRightArm.rotateAngleZ += MathHelper.cos(f2 * 0.09F) * 0.05F + 0.05F;
-        this.bipedLeftArm.rotateAngleZ -= MathHelper.cos(f2 * 0.09F) * 0.05F + 0.05F;
-        this.bipedRightArm.rotateAngleX += MathHelper.sin(f2 * 0.067F) * 0.05F;
-        this.bipedLeftArm.rotateAngleX -= MathHelper.sin(f2 * 0.067F) * 0.05F;
+        this.bipedRightArm.rotateAngleZ += MathHelper.cos(age * 0.09F) * 0.05F + 0.05F;
+        this.bipedLeftArm.rotateAngleZ -= MathHelper.cos(age * 0.09F) * 0.05F + 0.05F;
+        this.bipedRightArm.rotateAngleX += MathHelper.sin(age * 0.067F) * 0.05F;
+        this.bipedLeftArm.rotateAngleX -= MathHelper.sin(age * 0.067F) * 0.05F;
         if (((EntityFriendlyPigZombie) entity).isSitting()) {
             this.bipedRightLeg.rotateAngleX = -((float) Math.PI * 2F / 5F);
             this.bipedLeftLeg.rotateAngleX = -((float) Math.PI * 2F / 5F);

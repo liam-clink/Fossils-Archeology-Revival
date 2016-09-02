@@ -4,18 +4,12 @@ import fossilsarcheology.server.creativetab.FATabRegistry;
 import fossilsarcheology.server.handler.LocalizationStrings;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
 
 public class BlockAncientWood extends Block {
     public BlockAncientWood() {
-        super(Material.wood);
+        super(Material.WOOD);
         this.setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
-        setHardness(2.0F);
-        setUnlocalizedName(LocalizationStrings.ANCIENT_WOOD_NAME);
-    }
-
-    @Override
-    public void registerBlockIcons(IIconRegister iconRegister) {
-        this.blockIcon = iconRegister.registerIcon("fossil:Ancient_Wood");
+        this.setHardness(2.0F);
+        this.setUnlocalizedName(LocalizationStrings.ANCIENT_WOOD_NAME);
     }
 }

@@ -8,7 +8,7 @@ import fossilsarcheology.server.item.block.VaseVoluteBlockItem;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,8 +16,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -27,7 +27,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.List;
 
 public class BlockVaseVolute extends BlockContainer implements IBlockItem {
-    public static final String[] shortname = { "damaged_volute", "restored_volute", "redFigure_volute", "blackFigure_volute", "porcelain_volute", };
+    public static final String[] NAMES = { "damaged_volute", "restored_volute", "redFigure_volute", "blackFigure_volute", "porcelain_volute", };
 
     private IIcon[] icons;
     private int getMeta;
@@ -40,18 +40,12 @@ public class BlockVaseVolute extends BlockContainer implements IBlockItem {
 
     @Override
     @SideOnly(Side.CLIENT)
-    /**
-     * returns a list of items with the same ID, but different meta (eg: dye returns 16 items)
-     */
-    public void getSubBlocks(Item par1, CreativeTabs creativetabs, List list) {
-        for (int j = 0; j < shortname.length; ++j) {
-            list.add(new ItemStack(par1, 1, j));
+    public void getSubBlocks(Item item, CreativeTabs tab, List subBlocks) {
+        for (int i = 0; i < NAMES.length; ++i) {
+            subBlocks.add(new ItemStack(item, 1, i));
         }
     }
 
-    /**
-     * The type of render function that is called for this block
-     */
     @Override
     public int getRenderType() {
         return -1;
@@ -62,38 +56,21 @@ public class BlockVaseVolute extends BlockContainer implements IBlockItem {
         return false;
     }
 
-    /**
-     * Is this block (a) opaque and (b) a full 1m cube? This determines whether
-     * or not to render the shared face of two adjacent blocks and also whether
-     * the player can attach torches, redstone wire, etc to this block.
-     */
     @Override
-    public boolean isOpaqueCube() {
+    public boolean isOpaqueCube(IBlockState state) {
         return false;
     }
 
-    /**
-     * If this block doesn't render as an ordinary block it will return False
-     * (examples: signs, buttons, stairs, etc)
-     */
     @Override
     public boolean renderAsNormalBlock() {
         return false;
     }
 
-    /**
-     * Updates the blocks bounds based on its current state. Args: world, x, y,
-     * z
-     */
     @Override
     public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4) {
         this.setBlockBounds(0.1F, 0.0F, 0.1F, 0.9F, 0.9F, 0.9F);
     }
 
-    /**
-     * Returns a bounding box from the pool of bounding boxes (this means this
-     * box can change after the pool has been cleared to be reused)
-     */
     @Override
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4) {
         this.setBlockBoundsBasedOnState(par1World, par2, par3, par4);
@@ -119,28 +96,16 @@ public class BlockVaseVolute extends BlockContainer implements IBlockItem {
         super.breakBlock(world, pos, oldBlock, oldMeta);
     }
 
-    /**
-     * Returns a new instance of a block's tile entity class. Called on placing
-     * the block.
-     */
     @Override
-    public TileEntity createNewTileEntity(World par1World, int par2) {
+    public TileEntity createNewTileEntity(World world, int par2) {
         return new TileEntityVase();
     }
 
-    /**
-     * Get the block's damage value (for use with pick block).
-     */
     @Override
-    public int getDamageValue(World par1World, int par2, int par3, int par4) {
-        TileEntity tileentity = par1World.getTileEntity(par2, par3, par4);
-        return tileentity != null && tileentity instanceof TileEntityVase ? ((TileEntityVase) tileentity).getVaseTypeMeta() : super.getDamageValue(par1World, par2, par3, par4);
+    public int getDamageValue(World world, BlockPos pos) {
+        TileEntity tile = world.getTileEntity(pos);
+        return tile != null && tile instanceof TileEntityVase ? ((TileEntityVase) tile).getVaseTypeMeta() : super.getDamageValue(world, par2, par3, par4);
     }
-
-    /**
-     * Determines the damage on the item the block drops. Used in cloth and
-     * wood.
-     */
 
     @Override
     public int damageDropped(int meta) {
@@ -149,9 +114,6 @@ public class BlockVaseVolute extends BlockContainer implements IBlockItem {
 
     @Override
     @SideOnly(Side.CLIENT)
-    /**
-     * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
-     */
     public IIcon getIcon(int side, int meta) {
         return icons[meta];
     }
@@ -159,9 +121,9 @@ public class BlockVaseVolute extends BlockContainer implements IBlockItem {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister iconregister) {
-        icons = new IIcon[shortname.length];
+        icons = new IIcon[NAMES.length];
 
-        for (int i = 0; i < shortname.length; ++i) {
+        for (int i = 0; i < NAMES.length; ++i) {
             icons[i] = iconregister.registerIcon(Revival.MODID + ":vases/icons/" + "vase_icon_volute_" + i);
         }
     }

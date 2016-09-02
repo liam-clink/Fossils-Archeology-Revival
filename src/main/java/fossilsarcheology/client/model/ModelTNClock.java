@@ -2,6 +2,7 @@ package fossilsarcheology.client.model;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 import org.lwjgl.opengl.GL11;
@@ -59,7 +60,6 @@ public class ModelTNClock extends ModelBase {
     }
 
     public void renderItem(float var7, float worldTime) {
-
         this.axie.render(var7);
         this.C.render(var7);
         GlStateManager.pushMatrix();
@@ -84,21 +84,18 @@ public class ModelTNClock extends ModelBase {
         GlStateManager.popMatrix();
     }
 
-    /**
-     * Sets the models various rotation angles then renders the model.
-     */
     @Override
-    public void render(Entity var1, float var2, float var3, float var4, float var5, float var6, float var7) {
-        super.render(var1, var2, var3, var4, var5, var6, var7);
-        this.setRotationAngles(var2, var3, var4, var5, var6, var7, var1);
-        this.H.render(var7);
-        this.M.render(var7);
-        this.axie.render(var7);
-        this.C.render(var7);
-        this.C2.render(var7);
-        this.C3.render(var7);
-        this.C21.render(var7);
-        this.C31.render(var7);
+    public void render(Entity entity, float limbSwing, float limbSwingAmount, float age, float yaw, float pitch, float scale) {
+        super.render(entity, limbSwing, limbSwingAmount, age, yaw, pitch, scale);
+        this.setRotationAngles(limbSwing, limbSwingAmount, age, yaw, pitch, scale, entity);
+        this.H.render(scale);
+        this.M.render(scale);
+        this.axie.render(scale);
+        this.C.render(scale);
+        this.C2.render(scale);
+        this.C3.render(scale);
+        this.C21.render(scale);
+        this.C31.render(scale);
     }
 
     public void EdgeRotate(float var1, float var2, float var3, float var4, float var5, float var6) {
@@ -133,7 +130,6 @@ public class ModelTNClock extends ModelBase {
         } else {
             this.H.rotateAngleZ = (float) ((double) var1 - (Math.PI * 2D));
         }
-
         if ((double) var2 <= Math.PI) {
             this.M.rotateAngleZ = var2;
         } else {
@@ -141,9 +137,9 @@ public class ModelTNClock extends ModelBase {
         }
     }
 
-    private void setRotation(ModelRenderer var1, float var2, float var3, float var4) {
-        var1.rotateAngleX = var2;
-        var1.rotateAngleY = var3;
-        var1.rotateAngleZ = var4;
+    private void setRotation(ModelRenderer modelRenderer, float x, float y, float z) {
+        modelRenderer.rotateAngleX = x;
+        modelRenderer.rotateAngleY = y;
+        modelRenderer.rotateAngleZ = z;
     }
 }

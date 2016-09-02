@@ -34,11 +34,9 @@ public class BlockAmberOre extends Block {
     public int quantityDroppedWithBonus(int bonus, Random rand) {
         if (bonus > 0 && Item.getItemFromBlock(this) != this.getItemDropped(this.getDefaultState(), rand, bonus)) {
             int quantityMultiplier = rand.nextInt(bonus + 1) - 1;
-
             if (quantityMultiplier < 0) {
                 quantityMultiplier = 0;
             }
-
             return this.quantityDropped(rand) * (quantityMultiplier + 1);
         } else {
             return this.quantityDropped(rand);

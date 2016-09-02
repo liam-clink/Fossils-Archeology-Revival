@@ -2,10 +2,10 @@ package fossilsarcheology.client.model;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import org.lwjgl.opengl.GL11;
 
 public class ModelCultureVat extends ModelBase {
-    // fields
     ModelRenderer main;
     ModelRenderer bottom;
     ModelRenderer opening;

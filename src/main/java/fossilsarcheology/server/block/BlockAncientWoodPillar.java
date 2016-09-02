@@ -4,10 +4,12 @@ import fossilsarcheology.server.creativetab.FATabRegistry;
 import fossilsarcheology.server.handler.LocalizationStrings;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -15,14 +17,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.Random;
 
 public class BlockAncientWoodPillar extends Block {
-    @SideOnly(Side.CLIENT)
-    private IIcon top;
-
     public BlockAncientWoodPillar() {
-        super(Material.wood);
-        setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
-        setHardness(2.0F);
-        setUnlocalizedName(LocalizationStrings.ANCIENT_WOOD_PILLAR_NAME);
+        super(Material.WOOD);
+        this.setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
+        this.setHardness(2.0F);
+        this.setUnlocalizedName(LocalizationStrings.ANCIENT_WOOD_PILLAR_NAME);
     }
 
     public static int limitToValidMetadata(int meta) {
@@ -30,43 +29,15 @@ public class BlockAncientWoodPillar extends Block {
     }
 
     @Override
-    public void registerBlockIcons(IIconRegister iconRegister) {
-        this.blockIcon = iconRegister.registerIcon("fossil:Ancient_Wood_Pillar"); // adding
-        // in
-        // a
-        // texture,
-        // 1.5.1
-        // style!
-        this.top = iconRegister.registerIcon("fossil:Ancient_Wood_Pillar_Top");
-    }
-
-    // this sets the amount droped when broken.
-    @Override
     public int quantityDropped(Random rand) {
         return 1;
     }
 
-    // this tells the game what to drop if the block is brocken with an
-    // explosion. an example of this would be creeper explosions
-    // making stone drop cobblestone.
     @Override
-    public Item getItemDropped(int var1, Random rand, int var3) {
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
         return Item.getItemFromBlock(FABlockRegistry.INSTANCE.ancientWoodPillar);
     }
 
-    /**
-     * From the specified side and block metadata retrieves the blocks texture.
-     * Args: side, metadata
-     */
-    @Override
-    public IIcon getIcon(int side, int meta) {
-        return ((meta & 12) == 0 && side < 2) || ((meta & 12) == 8 && side > 1 && side < 4) || ((meta & 12) == 4 && side > 3) ? this.top : this.blockIcon;
-    }
-
-    /**
-     * Called when a block is placed using its ItemBlock. Args: World, pos,
-     * side, hitX, hitY, hitZ, block metadata
-     */
     @Override
     public int onBlockPlaced(World world, BlockPos pos, int side, float hitX, float hitY, float hitZ, int metadata) {
         int validMeta = metadata & 3;
@@ -95,12 +66,6 @@ public class BlockAncientWoodPillar extends Block {
         return meta & 3;
     }
 
-    /**
-     * Returns an item stack containing a single instance of the current block
-     * type. 'i' is the block's subtype/damage and is ignored for blocks which
-     * do not support subtypes. Blocks which cannot be harvested should return
-     * null.
-     */
     @Override
     protected ItemStack createStackedBlock(int var1) {
         return new ItemStack(this, 1, limitToValidMetadata(var1));

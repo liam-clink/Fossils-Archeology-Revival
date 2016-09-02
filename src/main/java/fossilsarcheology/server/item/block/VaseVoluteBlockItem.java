@@ -2,18 +2,18 @@ package fossilsarcheology.server.item.block;
 
 import fossilsarcheology.server.block.BlockVaseVolute;
 import net.minecraft.block.Block;
-import net.minecraft.item.ItemBlockWithMetadata;
+import net.minecraft.item.ItemBlockSpecial;
 import net.minecraft.item.ItemStack;
 
-public class VaseVoluteBlockItem extends ItemBlockWithMetadata {
+public class VaseVoluteBlockItem extends ItemBlockSpecial {
     public VaseVoluteBlockItem(Block block) {
-        super(block, block);
-        setHasSubtypes(true);
+        super(block);
+        this.setHasSubtypes(true);
     }
 
     @Override
     public String getUnlocalizedName(ItemStack itemstack) {
-        return getUnlocalizedName() + "." + BlockVaseVolute.shortname[itemstack.getItemDamage()];
+        return getUnlocalizedName() + "." + BlockVaseVolute.NAMES[itemstack.getItemDamage()];
     }
 
     @Override

@@ -113,7 +113,7 @@ public class BlockAncientChest extends BlockContainer {
                 if (heldItem != null) {
                     if (heldItem.getItem() == FAItemRegistry.INSTANCE.ancientKey) {
                         tile.setChestState(1);
-                        world.markBlockForUpdate(pos);
+                        world.markChunkDirty(pos, tile);
                         if (!player.capabilities.isCreativeMode) {
                             heldItem.stackSize--;
                         }
@@ -124,7 +124,7 @@ public class BlockAncientChest extends BlockContainer {
                 }
             } else if (tile.chestState == 1) {
                 tile.setChestState(2);
-                world.markBlockForUpdate(pos);
+                world.markChunkDirty(pos, tile);
                 tile.chestLidCounter = 1;
                 world.playSound(null, pos.getX(), pos.getY() + 0.5D, pos.getZ(), SoundEvents.BLOCK_CHEST_OPEN, SoundCategory.BLOCKS, 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
             }

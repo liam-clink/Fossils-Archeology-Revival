@@ -19,499 +19,373 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ITickable;
 
+import javax.annotation.Nullable;
 import java.util.Random;
 
-public class TileEntityAnalyzer extends TileEntity implements IInventory, ISidedInventory {
-
-    private static final int[] slots_top = new int[] {}; // input
-    private static final int[] slots_bottom = new int[] { 10, 11, 12 }; // output
-    private static final int[] slots_sides = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8 };// fuel
+public class TileEntityAnalyzer extends TileEntity implements IInventory, ISidedInventory, ITickable {
+    private static final int[] SLOTS_TOP = new int[] {}; // input
+    private static final int[] SLOTS_BOTTOM = new int[] { 10, 11, 12 }; // output
+    private static final int[] SLOTS_SIDES = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8 };// fuel
     public int analyzerBurnTime = 0;
     public int currentItemBurnTime = 100;
     public int analyzerCookTime = 0;
     private String customName;
-    private ItemStack[] analyzerItemStacks;
-    private int RawIndex = -1;
-    private int SpaceIndex = -1;
+    private ItemStack[] slots;
+    private int rawIndex = -1;
+    private int spaceIndex = -1;
 
     public TileEntityAnalyzer() {
-        analyzerItemStacks = new ItemStack[13];
+        slots = new ItemStack[13];
     }
 
     private static int getItemBurnTime(ItemStack var1) {
         return 100;
     }
 
-    /**
-     * Return true if item is a fuel source (getItemBurnTime() > 0).
-     */
     public static boolean isItemFuel(ItemStack par0ItemStack) {
         return getItemBurnTime(par0ItemStack) > 0;
     }
 
-    /**
-     * Returns the number of slots in the inventory.
-     */
     @Override
     public int getSizeInventory() {
-        return this.analyzerItemStacks.length;
+        return this.slots.length;
     }
 
-    /**
-     * Returns the stack in slot i
-     */
     @Override
-    public ItemStack getStackInSlot(int var1) {
-        return this.analyzerItemStacks[var1];
+    public ItemStack getStackInSlot(int slot) {
+        return this.slots[slot];
     }
 
-    /**
-     * Removes from an inventory slot (first arg) up to a specified number
-     * (second arg) of items and returns them in a new stack.
-     */
     @Override
-    public ItemStack decrStackSize(int var1, int var2) {
-        if (this.analyzerItemStacks[var1] != null) {
-            ItemStack var3;
-
-            if (this.analyzerItemStacks[var1].stackSize <= var2) {
-                var3 = this.analyzerItemStacks[var1];
-                this.analyzerItemStacks[var1] = null;
-                return var3;
+    public ItemStack decrStackSize(int slot, int amount) {
+        if (this.slots[slot] != null) {
+            ItemStack stack;
+            if (this.slots[slot].stackSize <= amount) {
+                stack = this.slots[slot];
+                this.slots[slot] = null;
+                return stack;
             } else {
-                var3 = this.analyzerItemStacks[var1].splitStack(var2);
-
-                if (this.analyzerItemStacks[var1].stackSize == 0) {
-                    this.analyzerItemStacks[var1] = null;
+                stack = this.slots[slot].splitStack(amount);
+                if (this.slots[slot].stackSize == 0) {
+                    this.slots[slot] = null;
                 }
-
-                return var3;
+                return stack;
             }
         } else {
             return null;
         }
     }
 
-    /**
-     * Sets the given item stack to the specified slot in the inventory (can be
-     * crafting or armor sections).
-     */
+    @Nullable
     @Override
-    public void setInventorySlotContents(int var1, ItemStack var2) {
-        this.analyzerItemStacks[var1] = var2;
+    public ItemStack removeStackFromSlot(int index) {
+        return null;
+    }
 
-        if (var2 != null && var2.stackSize > this.getInventoryStackLimit()) {
-            var2.stackSize = this.getInventoryStackLimit();
+    @Override
+    public void setInventorySlotContents(int slot, ItemStack stack) {
+        this.slots[slot] = stack;
+        if (stack != null && stack.stackSize > this.getInventoryStackLimit()) {
+            stack.stackSize = this.getInventoryStackLimit();
         }
     }
 
-    @Override
-    public String getInventoryName() {
-        return this.hasCustomInventoryName() ? this.customName : "tile." + LocalizationStrings.BLOCK_ANALYZER_IDLE_NAME + ".name";
-    }
-
-    @Override
-    public boolean hasCustomInventoryName() {
-        return this.customName != null && this.customName.length() > 0;
-    }
-
-    /**
-     * Sets the custom display name to use when opening a GUI linked to this
-     * tile entity.
-     */
     public void setGuiDisplayName(String par1Str) {
         this.customName = par1Str;
     }
 
-    /**
-     * Reads a tile entity from NBT.
-     */
     @Override
-    public void readFromNBT(NBTTagCompound var1) {
-        super.readFromNBT(var1);
-        NBTTagList var2 = var1.getTagList("Items", 10);
-        this.analyzerItemStacks = new ItemStack[this.getSizeInventory()];
-
-        for (int var3 = 0; var3 < var2.tagCount(); ++var3) {
-            NBTTagCompound var4 = var2.getCompoundTagAt(var3);
-            byte var5 = var4.getByte("Slot");
-
-            if (var5 >= 0 && var5 < this.analyzerItemStacks.length) {
-                this.analyzerItemStacks[var5] = ItemStack.loadItemStackFromNBT(var4);
+    public void readFromNBT(NBTTagCompound compound) {
+        super.readFromNBT(compound);
+        NBTTagList itemsList = compound.getTagList("Items", 10);
+        this.slots = new ItemStack[this.getSizeInventory()];
+        for (int i = 0; i < itemsList.tagCount(); ++i) {
+            NBTTagCompound itemTag = itemsList.getCompoundTagAt(i);
+            byte slot = itemTag.getByte("Slot");
+            if (slot >= 0 && slot < this.slots.length) {
+                this.slots[slot] = ItemStack.loadItemStackFromNBT(itemTag);
             }
         }
-
-        this.analyzerBurnTime = var1.getShort("BurnTime");
-        this.analyzerCookTime = var1.getShort("CookTime");
+        this.analyzerBurnTime = compound.getShort("BurnTime");
+        this.analyzerCookTime = compound.getShort("CookTime");
         this.currentItemBurnTime = 100;
-
-        if (var1.hasKey("CustomName")) {
-            this.customName = var1.getString("CustomName");
+        if (compound.hasKey("CustomName")) {
+            this.customName = compound.getString("CustomName");
         }
     }
 
-    /**
-     * Writes a tile entity to NBT.
-     */
     @Override
-    public void writeToNBT(NBTTagCompound var1) {
-        super.writeToNBT(var1);
-        var1.setShort("BurnTime", (short) this.analyzerBurnTime);
-        var1.setShort("CookTime", (short) this.analyzerCookTime);
-        NBTTagList var2 = new NBTTagList();
-
-        for (int var3 = 0; var3 < this.analyzerItemStacks.length; ++var3) {
-            if (this.analyzerItemStacks[var3] != null) {
-                NBTTagCompound var4 = new NBTTagCompound();
-                var4.setByte("Slot", (byte) var3);
-                this.analyzerItemStacks[var3].writeToNBT(var4);
-                var2.appendTag(var4);
+    public NBTTagCompound writeToNBT(NBTTagCompound compound) {
+        compound = super.writeToNBT(compound);
+        compound.setShort("BurnTime", (short) this.analyzerBurnTime);
+        compound.setShort("CookTime", (short) this.analyzerCookTime);
+        NBTTagList itemList = new NBTTagList();
+        for (int i = 0; i < this.slots.length; ++i) {
+            if (this.slots[i] != null) {
+                NBTTagCompound itemTag = new NBTTagCompound();
+                itemTag.setByte("Slot", (byte) i);
+                this.slots[i].writeToNBT(itemTag);
+                itemList.appendTag(itemTag);
             }
         }
-
-        if (this.hasCustomInventoryName()) {
-            var1.setString("CustomName", this.customName);
+        if (this.hasCustomName()) {
+            compound.setString("CustomName", this.customName);
         }
-
-        var1.setTag("Items", var2);
+        compound.setTag("Items", itemList);
+        return compound;
     }
 
-    /**
-     * Returns the maximum stack size for a inventory slot. Seems to always be
-     * 64, possibly will be extended. *Isn't this more of a set than a get?*
-     */
     @Override
     public int getInventoryStackLimit() {
         return 64;
     }
 
-    public int getAnalyzeProgressScaled(int var1) {
-        return this.analyzerCookTime * var1 / 200;
+    public int getAnalyzeProgressScaled(int scale) {
+        return this.analyzerCookTime * scale / 200;
     }
 
-    public int getBurnTimeRemainingScaled(int var1) {
-        if (this.currentItemBurnTime == 0) {
-            this.currentItemBurnTime = 100;
-        }
-
-        return this.analyzerBurnTime * var1 / this.currentItemBurnTime;
-    }
-
-    public boolean isBurning() {
+    public boolean isAnalyzing() {
         return this.analyzerBurnTime > 0;
     }
 
-    /**
-     * Allows the entity to update its state. Overridden in most subclasses,
-     * e.g. the mob spawner uses this to count ticks and creates a new spawn
-     * inside its implementation.
-     */
     @Override
-    public void updateEntity() {
-        int slots;
-        for (int var7 = 0; var7 < worldObj.playerEntities.size(); ++var7) {
-            EntityPlayer P = (EntityPlayer) worldObj.playerEntities.get(var7);
-
-            if (Math.pow(this.xCoord - P.posX, 2D) + Math.pow(this.yCoord - P.posY, 2D) + Math.pow(this.zCoord - P.posZ, 2D) < 40) {
-                for (slots = 12; slots > 8; --slots) {
-                    if (this.analyzerItemStacks[slots] != null) {
-                        if (this.analyzerItemStacks[slots].getItem() != null) {
-                            if (this.analyzerItemStacks[slots].getItem() == FAItemRegistry.INSTANCE.stoneboard) {
-                                P.addStat(FossilAchievementHandler.tablet, 1);
-                            }
+    public void update() {
+        for (EntityPlayer player : this.worldObj.playerEntities) {
+            if (this.getDistanceSq(player.posX, player.posY, player.posZ) < 40) {
+                for (int slot = 12; slot > 8; --slot) {
+                    ItemStack stack = this.slots[slot];
+                    if (stack != null) {
+                        if (stack.getItem() == FAItemRegistry.INSTANCE.stoneboard) {
+                            player.addStat(FossilAchievementHandler.tablet, 1);
                         }
                     }
-
                 }
             }
         }
-        boolean var1 = this.analyzerBurnTime > 0;
-        boolean var2 = false;
-
+        boolean burning = this.analyzerBurnTime > 0;
+        boolean dirty = false;
         if (this.analyzerBurnTime > 0) {
             --this.analyzerBurnTime;
         }
-
         if (!this.worldObj.isRemote) {
-            if (this.analyzerBurnTime == 0 && this.canSmelt()) {
+            if (this.analyzerBurnTime == 0 && this.canAnalyze()) {
                 this.currentItemBurnTime = this.analyzerBurnTime = 100;
-
                 if (this.analyzerBurnTime > 0) {
-                    var2 = true;
+                    dirty = true;
                 }
             }
-
-            if (this.isBurning() && this.canSmelt()) {
+            if (this.isAnalyzing() && this.canAnalyze()) {
                 ++this.analyzerCookTime;
-
                 if (this.analyzerCookTime == 200) {
                     this.analyzerCookTime = 0;
-                    this.smeltItem();
-                    var2 = true;
+                    this.analyzeItem();
+                    dirty = true;
                 }
             } else {
                 this.analyzerCookTime = 0;
             }
-
-            if (var1 != this.analyzerBurnTime > 0) {
-                var2 = true;
-                BlockAnalyzer.updateState(this.analyzerBurnTime > 0, this.worldObj, this.xCoord, this.yCoord, this.zCoord);
+            if (burning != this.analyzerBurnTime > 0) {
+                dirty = true;
+                BlockAnalyzer.updateState(this.analyzerBurnTime > 0, this.worldObj, this.pos);
             }
         }
-
-        if (var2) {
+        if (dirty) {
             this.markDirty();
         }
     }
 
-    private boolean canSmelt() {
-        this.SpaceIndex = -1;
-        this.RawIndex = -1;
-        int var1;
-
-        for (var1 = 0; var1 < 9; ++var1) {
-            if (this.analyzerItemStacks[var1] != null) {
-                Item var2 = this.analyzerItemStacks[var1].getItem();
-
-                if (PrehistoricEntityType.isFoodItem(this.analyzerItemStacks[var1].getItem()) || (var2 instanceof DinosaurBoneItem) || (var2 == FAItemRegistry.INSTANCE.biofossil) || (var2 == FAItemRegistry.INSTANCE.tarfossil) || (var2 == FAItemRegistry.INSTANCE.tardrop) || (var2 == FAItemRegistry.INSTANCE.failuresaurusFlesh) || (var2 == FAItemRegistry.INSTANCE.relic) || (var2 == Items.porkchop) || (var2 == Items.beef) || (var2 == Items.egg) || (var2 == Items.chicken) || (var2 == Item.getItemFromBlock(Blocks.wool)) || (var2 == FAItemRegistry.INSTANCE.icedMeat) || (var2 == Items.leather) || (var2 == FAItemRegistry.INSTANCE.brokenSapling)) {
-                    this.RawIndex = var1;
+    private boolean canAnalyze() {
+        this.spaceIndex = -1;
+        this.rawIndex = -1;
+        for (int slot = 0; slot < 9; ++slot) {
+            if (this.slots[slot] != null) {
+                Item item = this.slots[slot].getItem();
+                if (PrehistoricEntityType.isFoodItem(this.slots[slot].getItem()) || (item instanceof DinosaurBoneItem) || (item == FAItemRegistry.INSTANCE.biofossil) || (item == FAItemRegistry.INSTANCE.tarfossil) || (item == FAItemRegistry.INSTANCE.tardrop) || (item == FAItemRegistry.INSTANCE.failuresaurusFlesh) || (item == FAItemRegistry.INSTANCE.relic) || (item == Items.PORKCHOP) || (item == Items.BEEF) || (item == Items.EGG) || (item == Items.CHICKEN) || (item == Item.getItemFromBlock(Blocks.WOOL)) || (item == FAItemRegistry.INSTANCE.icedMeat) || (item == Items.LEATHER) || (item == FAItemRegistry.INSTANCE.brokenSapling)) {
+                    this.rawIndex = slot;
                     break;
                 }
             }
         }
-
-        if (this.RawIndex == -1) {
+        if (this.rawIndex == -1) {
             return false;
         } else {
-            for (var1 = 12; var1 > 8; --var1) {
-                if (this.analyzerItemStacks[var1] == null) {
-                    this.SpaceIndex = var1;
+            for (int slot = 12; slot > 8; --slot) {
+                if (this.slots[slot] == null) {
+                    this.spaceIndex = slot;
                     break;
                 }
             }
-
-            return this.SpaceIndex != -1 && this.RawIndex != -1;
+            return this.spaceIndex != -1 && this.rawIndex != -1;
         }
     }
 
-    public void smeltItem() {
-        if (this.canSmelt()) {
-            ItemStack itemstack = null;
-            int rand = new Random().nextInt(100);
-            int var3;
+    public void analyzeItem() {
+        if (this.canAnalyze()) {
+            ItemStack output = null;
+            int rand = this.worldObj.rand.nextInt(100);
+            Item rawItem = this.slots[this.rawIndex].getItem();
 
-            if (this.analyzerItemStacks[this.RawIndex].getItem() instanceof DinosaurBoneItem) {
-
-                if (!Revival.enableDebugging()) {
+            if (rawItem instanceof DinosaurBoneItem) {
+                if (!Revival.RELEASE_TYPE.enableDebugging()) {
                     if (rand > -1 && rand <= 30) {
-                        itemstack = new ItemStack(Items.dye, 3, 15);
+                        output = new ItemStack(Items.DYE, 3, 15);
                     }
-
                     if (rand > 30 && rand <= 65) {
-                        itemstack = new ItemStack(Items.bone, 3);
+                        output = new ItemStack(Items.BONE, 3);
                     }
-
                     if (rand > 65) {
-                        itemstack = new ItemStack(EnumDinoBones.from(EnumDinoBones.values()[this.analyzerItemStacks[this.RawIndex].getItemDamage()]).dnaItem, 1);
+                        output = new ItemStack(EnumDinoBones.from(EnumDinoBones.values()[this.slots[this.rawIndex].getItemDamage()]).dnaItem, 1);
                     }
                 } else {
-                    itemstack = new ItemStack(PrehistoricEntityType.getRandomMezoic().dnaItem, 1);
+                    output = new ItemStack(PrehistoricEntityType.getRandomMezoic().dnaItem, 1);
                 }
-            }
-            if (this.analyzerItemStacks[this.RawIndex].getItem() == FAItemRegistry.INSTANCE.biofossil) {
-
-                if (!Revival.enableDebugging()) {
+            } else if (rawItem == FAItemRegistry.INSTANCE.biofossil) {
+                if (!Revival.RELEASE_TYPE.enableDebugging()) {
                     if (rand > -1 && rand <= 50) {
-                        itemstack = new ItemStack(Items.dye, 3, 15);
+                        output = new ItemStack(Items.DYE, 3, 15);
                     }
-
                     if (rand > 50 && rand <= 85) {
-                        itemstack = new ItemStack(Blocks.sand, 1 + new Random().nextInt(2));
+                        output = new ItemStack(Blocks.SAND, 1 + new Random().nextInt(2));
                     }
-
                     if (rand > 85) {
-                        itemstack = new ItemStack(PrehistoricEntityType.getRandomMezoic().dnaItem, 1);
+                        output = new ItemStack(PrehistoricEntityType.getRandomMezoic().dnaItem, 1);
                     }
                 } else {
-                    itemstack = new ItemStack(PrehistoricEntityType.getRandomMezoic().dnaItem, 1);
+                    output = new ItemStack(PrehistoricEntityType.getRandomMezoic().dnaItem, 1);
                 }
-            }
-            if (this.analyzerItemStacks[this.RawIndex].getItem() == FAItemRegistry.INSTANCE.tarfossil) {
-
+            } else if (rawItem == FAItemRegistry.INSTANCE.tarfossil) {
                 if (rand > -1 && rand <= 50) {
-                    itemstack = new ItemStack(Items.dye, 3, 15);
+                    output = new ItemStack(Items.DYE, 3, 15);
                 }
-
                 if (rand > 50 && rand <= 80) {
-                    itemstack = new ItemStack(FABlockRegistry.INSTANCE.volcanicRock, 1);
+                    output = new ItemStack(FABlockRegistry.INSTANCE.volcanicRock, 1);
                 }
-
                 if (rand > 80 && rand <= 75) {
-                    itemstack = new ItemStack(Blocks.obsidian, 1);
+                    output = new ItemStack(Blocks.OBSIDIAN, 1);
                 }
                 if (rand > 75) {
-                    itemstack = new ItemStack(PrehistoricEntityType.getRandomCenozoic().dnaItem, 1);
+                    output = new ItemStack(PrehistoricEntityType.getRandomCenozoic().dnaItem, 1);
                 }
-
-            }
-            if (this.analyzerItemStacks[this.RawIndex].getItem() == FAItemRegistry.INSTANCE.tardrop) {
-
+            } else if (rawItem == FAItemRegistry.INSTANCE.tardrop) {
                 if (rand >= 0 && rand <= 40) {
-                    itemstack = new ItemStack(Items.coal, new Random().nextInt(2) + 1, new Random().nextInt(1));
+                    output = new ItemStack(Items.COAL, new Random().nextInt(2) + 1, new Random().nextInt(1));
                 }
                 if (rand > 40 && rand <= 85) {
-                    itemstack = new ItemStack(FAItemRegistry.INSTANCE.tarfossil, 1);
+                    output = new ItemStack(FAItemRegistry.INSTANCE.tarfossil, 1);
                 }
-
                 if (rand > 85) {
-                    itemstack = new ItemStack(FABlockRegistry.INSTANCE.volcanicRock, 1);
+                    output = new ItemStack(FABlockRegistry.INSTANCE.volcanicRock, 1);
                 }
-
-            }
-            if (this.analyzerItemStacks[this.RawIndex].getItem() == FAItemRegistry.INSTANCE.brokenSapling) {
+            } else if (rawItem == FAItemRegistry.INSTANCE.brokenSapling) {
                 if (rand > 0) {
-                    itemstack = new ItemStack(Blocks.sand, 1 + new Random().nextInt(1), 0);
+                    output = new ItemStack(Blocks.SAND, 1 + new Random().nextInt(1), 0);
                 }
                 if (rand > 35 && rand <= 65) {
-                    itemstack = new ItemStack(Items.coal, 1, 0);
+                    output = new ItemStack(Items.COAL, 1, 0);
                 }
                 if (rand > 65 && rand <= 75) {
-                    itemstack = new ItemStack(FAItemRegistry.INSTANCE.palaeSaplingFossil, 1, 0);
+                    output = new ItemStack(FAItemRegistry.INSTANCE.palaeSaplingFossil, 1, 0);
                 }
                 if (rand > 75 && rand <= 85) {
-                    itemstack = new ItemStack(Items.dye, 1, 2);
+                    output = new ItemStack(Items.DYE, 1, 2);
                 }
                 if (rand > 85) {
-                    itemstack = new ItemStack(FAItemRegistry.INSTANCE.fossilSeed, 1, new Random().nextInt(14));
+                    output = new ItemStack(FAItemRegistry.INSTANCE.fossilSeed, 1, new Random().nextInt(14));
                 }
-
-            }
-
-            if (this.analyzerItemStacks[this.RawIndex].getItem() == Item.getItemFromBlock(Blocks.wool)) {
+            } else if (rawItem == Item.getItemFromBlock(Blocks.WOOL)) {
                 if ((new Random()).nextInt(50) <= 30) {
-                    itemstack = new ItemStack(Items.string, 4);
+                    output = new ItemStack(Items.STRING, 4);
                 } else {
-                    itemstack = new ItemStack(PrehistoricEntityType.SHEEP.dnaItem, 1);
+                    output = new ItemStack(PrehistoricEntityType.SHEEP.dnaItem, 1);
                 }
-            }
-
-			/*
-             * if (this.analyzerItemStacks[this.RawIndex].getItem() ==
-			 * Revival.rawDinoMeat) { itemstack = new ItemStack(Revival.dna, 4,
-			 * this.analyzerItemStacks[this.RawIndex].getItemDamage()); }
-			 */
-
-            if (PrehistoricEntityType.getDNA(this.analyzerItemStacks[this.RawIndex].getItem()) != null) {
-                itemstack = new ItemStack(PrehistoricEntityType.getDNA(this.analyzerItemStacks[this.RawIndex].getItem()), 1);
-            }
-
-            if (this.analyzerItemStacks[this.RawIndex].getItem() == Items.porkchop) {
-                itemstack = new ItemStack(PrehistoricEntityType.PIG.dnaItem, 2);
-            }
-
-            if (this.analyzerItemStacks[this.RawIndex].getItem() == Items.beef) {
-                itemstack = new ItemStack(PrehistoricEntityType.COW.dnaItem, 2);
-            }
-            if (this.analyzerItemStacks[this.RawIndex].getItem() == FAItemRegistry.INSTANCE.failuresaurusFlesh) {
-                int randChoice = new Random().nextInt(3);
+            } else if (PrehistoricEntityType.getDNA(rawItem) != null) {
+                output = new ItemStack(PrehistoricEntityType.getDNA(rawItem), 1);
+            } else if (rawItem == Items.PORKCHOP) {
+                output = new ItemStack(PrehistoricEntityType.PIG.dnaItem, 2);
+            } else if (rawItem == Items.BEEF) {
+                output = new ItemStack(PrehistoricEntityType.COW.dnaItem, 2);
+            } else if (rawItem == FAItemRegistry.INSTANCE.failuresaurusFlesh) {
+                int randChoice = this.worldObj.rand.nextInt(3);
                 if (randChoice == 0) {
-                    itemstack = new ItemStack(Items.rotten_flesh, 1);
+                    output = new ItemStack(Items.ROTTEN_FLESH, 1);
                 } else {
-
-                    itemstack = new ItemStack(PrehistoricEntityType.getRandom().dnaItem, 1);
+                    output = new ItemStack(PrehistoricEntityType.getRandom().dnaItem, 1);
                 }
-            }
-
-            if (this.analyzerItemStacks[this.RawIndex].getItem() == Items.leather) {
+            } else if (rawItem == Items.LEATHER) {
                 if (new Random().nextInt(10) > 3) {
-                    itemstack = new ItemStack(PrehistoricEntityType.COW.dnaItem, 1);
+                    output = new ItemStack(PrehistoricEntityType.COW.dnaItem, 1);
                 } else {
-                    itemstack = new ItemStack(PrehistoricEntityType.HORSE.dnaItem, 1);
+                    output = new ItemStack(PrehistoricEntityType.HORSE.dnaItem, 1);
                 }
-            }
-
-            if (this.analyzerItemStacks[this.RawIndex].getItem() == Items.egg) {
-                itemstack = new ItemStack(PrehistoricEntityType.CHICKEN.dnaItem, 1);
-            }
-
-            if (this.analyzerItemStacks[this.RawIndex].getItem() == Items.chicken) {
-                itemstack = new ItemStack(PrehistoricEntityType.CHICKEN.dnaItem, 1);
-            }
-
-            if (this.analyzerItemStacks[this.RawIndex].getItem() == FAItemRegistry.INSTANCE.icedMeat) {
-
+            } else if (rawItem == Items.EGG) {
+                output = new ItemStack(PrehistoricEntityType.CHICKEN.dnaItem, 1);
+            } else if (rawItem == Items.CHICKEN) {
+                output = new ItemStack(PrehistoricEntityType.CHICKEN.dnaItem, 1);
+            } else if (rawItem == FAItemRegistry.INSTANCE.icedMeat) {
                 if (rand >= 15) {
-                    itemstack = new ItemStack(Items.chicken, 1);
+                    output = new ItemStack(Items.CHICKEN, 1);
                 }
-
                 if (rand >= 15 && rand < 30) {
-                    itemstack = new ItemStack(Items.chicken, 1);
+                    output = new ItemStack(Items.CHICKEN, 1);
                 }
-
                 if (rand >= 30 && rand < 45) {
-                    itemstack = new ItemStack(Items.porkchop, 1);
+                    output = new ItemStack(Items.PORKCHOP, 1);
                 }
-
                 if (rand >= 45 && rand < 65) {
-                    itemstack = new ItemStack(PrehistoricEntityType.getRandomCenozoic().dnaItem);
+                    output = new ItemStack(PrehistoricEntityType.getRandomCenozoic().dnaItem);
                 }
                 if (rand >= 65 && rand < 85) {
-                    itemstack = new ItemStack(FAItemRegistry.INSTANCE.tarfossil);
+                    output = new ItemStack(FAItemRegistry.INSTANCE.tarfossil);
                 }
-                if (itemstack == null) {
-                    itemstack = new ItemStack(Items.beef);
+                if (output == null) {
+                    output = new ItemStack(Items.BEEF);
                 }
-            }
-
-            if (this.analyzerItemStacks[this.RawIndex].getItem() == FAItemRegistry.INSTANCE.relic) {
+            } else if (rawItem == FAItemRegistry.INSTANCE.relic) {
                 if (rand <= 40) {
-                    itemstack = new ItemStack(Blocks.gravel, 1 + new Random().nextInt(2));
+                    output = new ItemStack(Blocks.GRAVEL, 1 + this.worldObj.rand.nextInt(2));
                 }
-
                 if (rand > 40 && rand <= 70) {
-                    itemstack = new ItemStack(FAItemRegistry.INSTANCE.stoneboard, 1);
+                    output = new ItemStack(FAItemRegistry.INSTANCE.stoneboard, 1);
                 }
-
                 if (rand > 70 && rand <= 88) {
-                    itemstack = new ItemStack(Items.flint, 1 + new Random().nextInt(1));
+                    output = new ItemStack(Items.FLINT, 1 + this.worldObj.rand.nextInt(1));
                 }
-
                 if (rand > 88 && rand <= 92) {
-                    itemstack = new ItemStack(FAItemRegistry.INSTANCE.potteryShards, 1);
+                    output = new ItemStack(FAItemRegistry.INSTANCE.potteryShards, 1);
                 }
-
                 if (rand > 92 && rand <= 96) {
-                    if (new Random().nextFloat() < 0.7) {
-                        itemstack = new ItemStack(FABlockRegistry.INSTANCE.figurineBlock, 1, new Random().nextInt(5) + 10);
+                    if (this.worldObj.rand.nextFloat() < 0.7) {
+                        output = new ItemStack(FABlockRegistry.INSTANCE.figurineBlock, 1, this.worldObj.rand.nextInt(5) + 10);
                     } else {
-                        itemstack = new ItemStack(FABlockRegistry.INSTANCE.figurineBlock, 1, new Random().nextInt(5) + 5);
+                        output = new ItemStack(FABlockRegistry.INSTANCE.figurineBlock, 1, this.worldObj.rand.nextInt(5) + 5);
                     }
                 }
-
                 if (rand > 96) {
-                    itemstack = new ItemStack(FAItemRegistry.INSTANCE.brokenSword, 1);
+                    output = new ItemStack(FAItemRegistry.INSTANCE.brokenSword, 1);
                 }
             }
-            if (itemstack != null) {
-                for (int slots = 9; slots < 13; slots++) {
-                    ItemStack stackInSlot = this.analyzerItemStacks[slots];
-                    if (stackInSlot != null) {
-                        if (stackInSlot.isItemEqual(itemstack) && stackInSlot.stackSize + itemstack.stackSize < 64) {
-                            stackInSlot.stackSize += itemstack.stackSize;
-                            if (this.analyzerItemStacks[this.RawIndex].stackSize > 1) {
-                                this.analyzerItemStacks[this.RawIndex].stackSize--;
+            if (output != null) {
+                for (int slot = 9; slot < 13; slot++) {
+                    ItemStack stack = this.slots[slot];
+                    if (stack != null) {
+                        if (stack.isItemEqual(output) && stack.stackSize + output.stackSize < 64) {
+                            stack.stackSize += output.stackSize;
+                            if (this.slots[this.rawIndex].stackSize > 1) {
+                                this.slots[this.rawIndex].stackSize--;
                             } else {
-                                this.analyzerItemStacks[this.RawIndex] = null;
+                                this.slots[this.rawIndex] = null;
                             }
                             break;
                         }
-                    } else if (stackInSlot == null) {
-                        this.analyzerItemStacks[slots] = itemstack;
-                        if (this.analyzerItemStacks[this.RawIndex].stackSize > 1) {
-                            this.analyzerItemStacks[this.RawIndex].stackSize--;
+                    } else if (stack == null) {
+                        this.slots[slot] = output;
+                        if (this.slots[this.rawIndex].stackSize > 1) {
+                            this.slots[this.rawIndex].stackSize--;
                         } else {
-                            this.analyzerItemStacks[this.RawIndex] = null;
+                            this.slots[this.rawIndex] = null;
                         }
                         break;
                     }
@@ -520,109 +394,75 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
         }
     }
 
-    /**
-     * Do not make give this method the name canInteractWith because it clashes
-     * with Container
-     */
-
     @Override
     public boolean isUseableByPlayer(EntityPlayer player) {
-        return this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord) == this && player.getDistanceSq((double) this.xCoord + 0.5D, (double) this.yCoord + 0.5D, (double) this.zCoord + 0.5D) <= 64.0D;
-    }
-
-    public void openChest() {
-
-    }
-
-    public void closeChest() {
-    }
-
-	/*
-	 * Returns true if automation is allowed to insert the given stack (ignoring
-	 * stack size) into the given slot.
-	 */
-
-    public boolean isStackValidForSlot(int par1, ItemStack par2ItemStack) {
-        return par1 <= 8 && (par1 >= 8 || isItemFuel(par2ItemStack));
-    }
-
-    /*
-     * When some containers are closed they call this on each slot, then drop
-     * whatever it returns as an EntityItem - like when you close a workbench
-     * GUI.
-     */
-    @Override
-    public ItemStack getStackInSlotOnClosing(int var1) {
-        return null;
-    }
-
-	/*
-	 * Returns true if automation is allowed to insert the given stack (ignoring
-	 * stack size) into the given slot.
-	 */
-
-    @Override
-    public boolean isItemValidForSlot(int par1, ItemStack par2ItemStack) {
-        return par1 != 2 && (par1 != 1 || isItemFuel(par2ItemStack));
-    }
-
-	/*
-	 * Returns an array containing the indices of the slots that can be accessed
-	 * by automation on the given side of this block.
-	 */
-
-    @Override
-    public int[] getAccessibleSlotsFromSide(int par1) {
-        return par1 == 0 ? slots_bottom : (par1 == 1 ? slots_top : slots_sides);
-    }
-
-	/*
-	 * Returns true if automation can insert the given item in the given slot
-	 * from the given side. Args: Slot, item, side
-	 */
-
-    @Override
-    public boolean canInsertItem(int par1, ItemStack par2ItemStack, int par3) {
-        return this.isItemValidForSlot(par1, par2ItemStack);
-    }
-
-	/*
-	 * Returns true if automation can extract the given item in the given slot
-	 * from the given side. Args: Slot, item, side
-	 */
-
-    @Override
-    public boolean canExtractItem(int par1, ItemStack itemstack, int par3) {
-        return par3 != 0 || par1 != 1;
+        return this.worldObj.getTileEntity(this.pos) == this && player.getDistanceSq(this.pos.getX() + 0.5D, this.pos.getY() + 0.5D, this.pos.getZ() + 0.5D) <= 64.0D;
     }
 
     @Override
-    public void openInventory() {
-        int slots;
-        for (int var7 = 0; var7 < worldObj.playerEntities.size(); ++var7) {
-            EntityPlayer P = (EntityPlayer) worldObj.playerEntities.get(var7);
+    public boolean isItemValidForSlot(int slot, ItemStack stack) {
+        return slot != 2 && (slot != 1 || isItemFuel(stack));
+    }
 
-            if (Math.pow(this.xCoord - P.posX, 2D) + Math.pow(this.yCoord - P.posY, 2D) + Math.pow(this.zCoord - P.posZ, 2D) < 40) {
-                for (slots = 12; slots > 8; --slots) {
-                    if (this.analyzerItemStacks[slots] != null) {
-                        if (this.analyzerItemStacks[slots].getItem() != null) {
-                            if (this.analyzerItemStacks[slots].getItem() == FAItemRegistry.INSTANCE.stoneboard) {
-                                P.addStat(FossilAchievementHandler.tablet, 1);
-                            }
-                            // if
-                            // (Revival.isDNA(this.analyzerItemStacks[slots].getItem()))
-                            // {
-                            // P.addStat(FossilAchievementHandler.dinoDna, 1);
-                            // }
-                        }
-                    }
+    @Override
+    public int getField(int id) {
+        return 0;
+    }
 
+    @Override
+    public void setField(int id, int value) {
+
+    }
+
+    @Override
+    public int getFieldCount() {
+        return 0;
+    }
+
+    @Override
+    public void clear() {
+        for (int i = 0; i < this.slots.length; i++) {
+            this.slots[0] = null;
+        }
+    }
+
+    @Override
+    public void openInventory(EntityPlayer player) {
+        for (int slots = 12; slots > 8; --slots) {
+            if (this.slots[slots] != null) {
+                if (this.slots[slots].getItem() == FAItemRegistry.INSTANCE.stoneboard) {
+                    player.addStat(FossilAchievementHandler.tablet, 1);
                 }
             }
         }
     }
 
     @Override
-    public void closeInventory() {
+    public void closeInventory(EntityPlayer player) {
+    }
+
+    @Override
+    public int[] getSlotsForFace(EnumFacing side) {
+        return side == EnumFacing.DOWN ? SLOTS_BOTTOM : (side == EnumFacing.UP ? SLOTS_TOP : SLOTS_SIDES);
+    }
+
+    @Override
+    public boolean canInsertItem(int index, ItemStack stack, EnumFacing direction) {
+        return this.isItemValidForSlot(index, stack);
+    }
+
+    @Override
+    public boolean canExtractItem(int index, ItemStack stack, EnumFacing direction) {
+        return direction != EnumFacing.DOWN || index != 1;
+    }
+
+    @Override
+    public String getName() {
+        return this.hasCustomName() ? this.customName : "tile." + LocalizationStrings.BLOCK_ANALYZER_IDLE_NAME + ".name";
+    }
+
+    @Override
+    public boolean hasCustomName() {
+        return this.customName != null && this.customName.length() > 0;
     }
 }
