@@ -20,7 +20,7 @@ public class FossilRecipes {
         GameRegistry.addRecipe(new ItemStack(Items.dye, 5, 15), "X", 'X', FABlockRegistry.INSTANCE.blockSkull);
         GameRegistry.addRecipe(new ItemStack(Items.dye, 5, 15), "X", 'X', FABlockRegistry.INSTANCE.skullLantern);
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(FABlockRegistry.INSTANCE.blockanalyzerIdle, 1), "XYX", "XWX", 'X', "ingotIron", 'Y', "artifact", 'W', "fossil"));
-        GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(FABlockRegistry.INSTANCE.blockworktableIdle, 1), "X", "Y", 'X', Items.paper, 'Y', "craftingTableWood"));
+        GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(FABlockRegistry.INSTANCE.blockworktableIdle, 1), Items.paper, "craftingTableWood"));
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(FABlockRegistry.INSTANCE.blockSifterIdle, 1), "XYX", "YZY", "YXY", 'X', Items.string, 'Y', "plankWood", 'Z', Blocks.iron_bars));
         // GameRegistry.addRecipe(new
         // ItemStack(FABlockRegistry.INSTANCE.ancientWoodPlate, 3), new
