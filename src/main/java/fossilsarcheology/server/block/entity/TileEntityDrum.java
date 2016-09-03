@@ -28,13 +28,13 @@ public class TileEntityDrum extends TileEntity {
      * "Middle"; final String TAIL = "Tail"; final String TREXMSG = "Msg.TRex.";
      * final String DINO = "Dino.";
      */
-    public EnumOrderType Order;
+    public EnumOrderType order;
 
     // public byte note;
     // public boolean previousRedstoneState;
 
     public TileEntityDrum() {
-        this.Order = EnumOrderType.STAY;
+        this.order = EnumOrderType.STAY;
         // this.note = 0;
         // this.previousRedstoneState = false;
     }
@@ -45,7 +45,7 @@ public class TileEntityDrum extends TileEntity {
     @Override
     public void writeToNBT(NBTTagCompound var1) {
         super.writeToNBT(var1);
-        var1.setByte("Order", (byte) this.Order.ordinal());// Revival.EnumToInt(this.Order));
+        var1.setByte("Order", (byte) this.order.ordinal());// Revival.EnumToInt(this.Order));
     }
 
     /**
@@ -54,7 +54,7 @@ public class TileEntityDrum extends TileEntity {
     @Override
     public void readFromNBT(NBTTagCompound var1) {
         super.readFromNBT(var1);
-        this.Order = EnumOrderType.values()[var1.getByte("Order")];
+        this.order = EnumOrderType.values()[var1.getByte("Order")];
     }
 
 	/*
@@ -79,18 +79,18 @@ public class TileEntityDrum extends TileEntity {
 	 * Revival.GetLangTextByKey("Order." + this.Order.toString()); }
 	 */
 
-    public void TriggerOrder(EntityPlayer player) {
-        this.Order = this.Order.Next();
+    public void triggerOrder(EntityPlayer player) {
+        this.order = this.order.Next();
         this.worldObj.playSoundEffect((double) this.xCoord, (double) this.yCoord, (double) this.zCoord, "fossil:drum_single", 8.0F, 1.0F);// (float)Math.pow(2.0D,
         // (double)(this.Order.ordinal()/*.ToInt()
         // - 1*/)));
         // String var2 = Revival.GetLangTextByKey("Drum.Head");
         // String var3 = this.GetOrderString();
-        Revival.messagePlayer(I18n.translateToLocal(LocalizationStrings.DRUM_TRIGGER) + I18n.translateToLocal("order." + this.Order.toString()), player);
+        Revival.messagePlayer(I18n.translateToLocal(LocalizationStrings.DRUM_TRIGGER) + I18n.translateToLocal("order." + this.order.toString()), player);
         this.markDirty();
     }
 
-    public boolean SendOrder(Item item, EntityPlayer var2) {
+    public boolean sendOrder(Item item, EntityPlayer var2) {
         // var2.itemID == this.ItemToControl.itemID && this.isTamed() &&
         // var1.username.equalsIgnoreCase(this.getOwnerName())
 		/*
@@ -108,7 +108,7 @@ public class TileEntityDrum extends TileEntity {
         {
             for (int i = 0; i < PrehistoricEntityType.values().length; ++i) {
                 if (PrehistoricEntityType.values()[i].orderItem != null && PrehistoricEntityType.values()[i].orderItem == item) {
-                    Revival.messagePlayer(I18n.translateToLocal(LocalizationStrings.DRUM_ORDERING) + I18n.translateToLocal("fossil.entity." + PrehistoricEntityType.values()[i].toString()) + ": " + I18n.translateToLocal("order." + this.Order.toString()), var2);
+                    Revival.messagePlayer(I18n.translateToLocal(LocalizationStrings.DRUM_ORDERING) + I18n.translateToLocal("fossil.entity." + PrehistoricEntityType.values()[i].toString()) + ": " + I18n.translateToLocal("order." + this.order.toString()), var2);
                 }
             } // Output: Ordering Triceratops: Stay
 
@@ -118,12 +118,12 @@ public class TileEntityDrum extends TileEntity {
                 Entity var3 = (Entity) aList;
                 EntityPrehistoric var4 = (EntityPrehistoric) var3;
                 if (item == var4.type.orderItem && var4.isTamed() && var2.getCommandSenderName().equalsIgnoreCase(var4.getCommandSenderName())) {
-                    var4.setOrder(this.Order);
+                    var4.setOrder(this.order);
                 }
             }
 
         } else {
-            Revival.messagePlayer(I18n.translateToLocal(LocalizationStrings.DRUM_TREX + String.valueOf(this.Order.ordinal() + 1)), var2);
+            Revival.messagePlayer(I18n.translateToLocal(LocalizationStrings.DRUM_TREX + String.valueOf(this.order.ordinal() + 1)), var2);
             List list = this.worldObj.getEntitiesWithinAABB(EntityTyrannosaurus.class, AxisAlignedBB.getBoundingBox((double) this.xCoord, (double) this.yCoord, (double) this.zCoord, (double) this.xCoord + 1.0D, (double) this.yCoord + 1.0D, (double) this.zCoord + 1.0D).expand(50.0D, 4.0D, 50.0D));
 
             for (Object aList : list) {

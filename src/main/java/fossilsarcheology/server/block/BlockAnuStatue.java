@@ -4,100 +4,78 @@ import fossilsarcheology.server.block.entity.TileEntityAnuTotem;
 import fossilsarcheology.server.creativetab.FATabRegistry;
 import fossilsarcheology.server.handler.LocalizationStrings;
 import fossilsarcheology.server.item.block.AnuStatueBlockItem;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
+import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.properties.PropertyDirection;
+import net.minecraft.block.state.BlockStateContainer;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.EnumBlockRenderType;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockAnuStatue extends BlockContainer implements IBlockItem {
-    private int counter = 0;
+    private static final AxisAlignedBB BOUNDS = new AxisAlignedBB(0.0F, 0.0F, 0.0F, 1.0F, 1.9F, 1.0F);
+    private static final PropertyDirection FACING = BlockHorizontal.FACING;
 
     public BlockAnuStatue() {
-        super(Material.rock);
-        this.setBlockBounds(0F, 0.0F, 0F, 1F, 1.9F, 1);
+        super(Material.ROCK);
         this.setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
         this.setTickRandomly(true);
         this.setBlockUnbreakable();
         this.setResistance(60000000.0F);
-        setUnlocalizedName(LocalizationStrings.BLOCK_ANU_NAME);
-    }
-
-    @SideOnly(Side.CLIENT)
-    @Override
-    public void registerBlockIcons(IIconRegister iconRegister) {
-        this.blockIcon = iconRegister.registerIcon("bedrock");
+        this.setUnlocalizedName(LocalizationStrings.BLOCK_ANU_NAME);
     }
 
     @Override
-    public void onNeighborBlockChange(World world, BlockPos pos, Block blk) {
-
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+        return BOUNDS;
     }
 
     @Override
-    public boolean canProvidePower() {
+    public boolean canProvidePower(IBlockState state) {
         return true;
     }
 
     @Override
-    public int isProvidingWeakPower(IBlockAccess world, BlockPos pos, int i) {
+    public int getWeakPower(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing side) {
         return 15;
     }
 
     @Override
-    public void onBlockPlacedBy(World world, BlockPos pos, EntityLivingBase entity, ItemStack stack) {
-        byte b0 = 0;
-        int l = MathHelper.floor_double((double) (entity.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
-
-        if (l == 0) {
-            b0 = 2;
-        }
-
-        if (l == 1) {
-            b0 = 5;
-        }
-
-        if (l == 2) {
-            b0 = 3;
-        }
-
-        if (l == 3) {
-            b0 = 4;
-        }
-
-        world.setBlockMetadataWithNotify(pos, b0, 2);
-
-        world.markBlockForUpdate(pos);
-
-        super.onBlockPlacedBy(world, pos, entity, stack);
+    public int getStrongPower(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing side) {
+        return 15;
     }
 
     @Override
-    public int getRenderType() {
-        return -93;
+    public IBlockState onBlockPlaced(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase entity) {
+        return super.onBlockPlaced(world, pos, facing, hitX, hitY, hitZ, meta, entity).withProperty(FACING, EnumFacing.fromAngle(entity.rotationYaw));
     }
 
     @Override
-    public boolean isOpaqueCube() {
+    public EnumBlockRenderType getRenderType(IBlockState state) {
+        return EnumBlockRenderType.MODEL;
+    }
+
+    @Override
+    public boolean isOpaqueCube(IBlockState state) {
         return false;
     }
 
     @Override
-    public boolean renderAsNormalBlock() {
-        return false;
-    }
-
-    @Override
-    public TileEntity createNewTileEntity(World world, int i) {
+    public TileEntity createNewTileEntity(World world, int metadata) {
         return new TileEntityAnuTotem();
+    }
+
+    @Override
+    protected BlockStateContainer createBlockState() {
+        return new BlockStateContainer(this, FACING);
     }
 
     @Override

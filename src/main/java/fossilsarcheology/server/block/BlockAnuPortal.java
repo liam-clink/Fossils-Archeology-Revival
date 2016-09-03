@@ -5,14 +5,17 @@ import fossilsarcheology.server.handler.AnuTeleporter;
 import fossilsarcheology.server.handler.LocalizationStrings;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.particle.EntityFX;
-import net.minecraft.client.particle.EntityPortalFX;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.client.particle.Particle;
+import net.minecraft.client.particle.ParticlePortal;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
-import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -22,34 +25,29 @@ import java.util.Random;
 
 public class BlockAnuPortal extends Block {
     public BlockAnuPortal() {
-        super(Material.portal);
+        super(Material.PORTAL);
         this.setResistance(60000000.0F);
         this.setHardness(60000000.0F);
-        setUnlocalizedName(LocalizationStrings.BLOCK_ANU_PORTAL_NAME);
+        this.setUnlocalizedName(LocalizationStrings.BLOCK_ANU_PORTAL_NAME);
     }
 
     @Override
-    public boolean isOpaqueCube() {
+    public boolean isOpaqueCube(IBlockState state) {
         return false;
     }
 
     @Override
-    public void addCollisionBoxesToList(World world, BlockPos pos, AxisAlignedBB bb, List list, Entity entity) {
+    public void addCollisionBoxToList(IBlockState state, World world, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, Entity entity) {
     }
 
-    public Item getItemDropped(int quantity, Random rand, int meta) {
+    @Override
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
         return null;
     }
 
-    @SideOnly(Side.CLIENT)
     @Override
-    public void registerBlockIcons(IIconRegister iconRegister) {
-        this.blockIcon = iconRegister.registerIcon("portal");
-    }
-
-    @Override
-    public void onEntityCollidedWithBlock(World world, BlockPos pos, Entity entity) {
-        if ((entity.ridingEntity == null) && (entity.riddenByEntity == null) && (entity instanceof EntityPlayerMP)) {
+    public void onEntityCollidedWithBlock(World world, BlockPos pos, IBlockState state, Entity entity) {
+        if ((entity.getRidingEntity() == null) && (entity.getPassengers().size() == 0) && (entity instanceof EntityPlayerMP)) {
             EntityPlayerMP thePlayer = (EntityPlayerMP) entity;
             if (thePlayer.timeUntilPortal > 0) {
                 thePlayer.timeUntilPortal = 10;
@@ -65,23 +63,26 @@ public class BlockAnuPortal extends Block {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void randomDisplayTick(World world, BlockPos pos, Random rand) {
-        super.randomDisplayTick(world, pos, rand);
+    public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand) {
+        super.randomDisplayTick(state, world, pos, rand);
         if (rand.nextInt(100) == 0) {
-            world.playSound((double) x + 0.5D, (double) y + 0.5D, (double) z + 0.5D, "portal.portal", 1.5F, rand.nextFloat() * 0.4F + 0.8F, false);
+            world.playSound(null, pos, SoundEvents.BLOCK_PORTAL_AMBIENT, SoundCategory.AMBIENT, 1.5F, rand.nextFloat() * 0.4F + 0.8F);
         }
-        for (int l = x - 2; l <= x + 2; ++l) {
-            for (int i1 = z - 2; i1 <= z + 2; ++i1) {
-                if (l > x - 2 && l < x + 2 && i1 == z - 1) {
-                    i1 = z + 2;
+        int blockX = pos.getX();
+        int blockY = pos.getY();
+        int blockZ = pos.getZ();
+        for (int x = blockX - 2; x <= blockX + 2; ++x) {
+            for (int z = blockZ - 2; z <= blockZ + 2; ++z) {
+                if (x > blockX - 2 && x < blockX + 2 && z == blockZ - 1) {
+                    z = blockZ + 2;
                 }
                 if (rand.nextInt(16) == 0) {
-                    for (int j1 = y; j1 <= y + 1; ++j1) {
-                        if (!world.isAirBlock((l - x) / 2 + x, j1, (i1 - z) / 2 + z)) {
+                    for (int y = blockY; y <= blockY + 1; ++y) {
+                        if (!world.isAirBlock(new BlockPos((x - blockX) / 2 + blockX, y, (z - blockZ) / 2 + blockZ))) {
                             break;
                         }
-                        EntityFX particle1 = new EntityPortalFX(world, (double) x + 0.5D, (double) y + 0.5D, (double) z + 0.5D, (double) ((float) (l - x) + rand.nextFloat()) - 0.5D, (double) ((float) (j1 - y) - rand.nextFloat() - 1.0F), (double) ((float) (i1 - z) + rand.nextFloat()) - 0.5D);
-                        Minecraft.getMinecraft().effectRenderer.addEffect(particle1);
+                        Particle particle = new ParticlePortal.Factory().getEntityFX(0, world, blockX + 0.5D, blockY + 0.5D, blockZ + 0.5D, ((x - blockX) + rand.nextFloat()) - 0.5D, ((y - blockY) - rand.nextFloat() - 1.0F), ((z - blockZ) + rand.nextFloat()) - 0.5D);
+                        Minecraft.getMinecraft().effectRenderer.addEffect(particle);
                     }
                 }
             }

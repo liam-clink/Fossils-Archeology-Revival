@@ -3,13 +3,18 @@ package fossilsarcheology.server.block;
 import fossilsarcheology.Revival;
 import fossilsarcheology.server.creativetab.FATabRegistry;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockHorizontal;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.properties.PropertyDirection;
+import net.minecraft.block.state.BlockStateContainer;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -17,74 +22,49 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.Random;
 
 public class BlockBubbleMachine extends Block {
+    private static final PropertyDirection FACING = BlockHorizontal.FACING;
 
-    @SideOnly(Side.CLIENT)
-    private IIcon top;
-    @SideOnly(Side.CLIENT)
-    private IIcon front;
-    @SideOnly(Side.CLIENT)
-    private IIcon back;
-    @SideOnly(Side.CLIENT)
-    private IIcon bottom;
-
-    protected BlockBubbleMachine() {
-        super(Material.iron);
-        this.setSoundType(Block.soundTypeMetal);
+    public BlockBubbleMachine() {
+        super(Material.IRON);
+        this.setSoundType(SoundType.METAL);
         this.setHardness(3.0F);
         this.setUnlocalizedName("bubbleMachine");
         this.setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
     }
 
     @Override
-    public Item getItemDropped(int var1, Random rand, int var3) {
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
         return Item.getItemFromBlock(FABlockRegistry.INSTANCE.bubbleMachine);
     }
 
-    @Override
     @SideOnly(Side.CLIENT)
-    public void registerBlockIcons(IIconRegister iconRegister) {
-        this.blockIcon = iconRegister.registerIcon("fossil:bubble_blower_side");
-        this.top = iconRegister.registerIcon("fossil:bubble_blower_top");
-        this.front = iconRegister.registerIcon("fossil:bubble_blower_front");
-        this.back = iconRegister.registerIcon("fossil:bubble_blower_back");
-        this.bottom = iconRegister.registerIcon("fossil:bubble_blower_bottom");
-    }
-
-    @Override
-    public IIcon getIcon(int side, int metadata) {
-        if (metadata == 0 && side == 3) {
-            return this.front;
-        }
-        return side == 1 ? this.top : (side == 0 ? this.bottom : (side != metadata ? this.back : this.front));
-    }
-
-    @SideOnly(Side.CLIENT)
-    public void randomDisplayTick(World world, BlockPos pos, Random rand) {
-
-        super.randomDisplayTick(world, pos, rand);
-        if (world.isBlockIndirectlyGettingPowered(pos)) {
-            world.playSound((double) x + 0.5D, (double) y + 0.5D, (double) z + 0.5D, "random.pop", 0.5F, rand.nextFloat() * 0.7F + 0.4F, false);
-
-            switch (world.getBlockMetadata(pos)) {
-                case 2:
+    public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand) {
+        super.randomDisplayTick(state, world, pos, rand);
+        int x = pos.getX();
+        int y = pos.getY();
+        int z = pos.getZ();
+        if (world.isBlockIndirectlyGettingPowered(pos) > 0) {
+            world.playSound(null, pos, SoundEvents.BLOCK_LAVA_POP, SoundCategory.BLOCKS, 0.5F, rand.nextFloat() * 0.7F + 0.4F);
+            switch (state.getValue(FACING)) {
+                case SOUTH:
                     Revival.PROXY.spawnBubbleParticles(world, x + rand.nextFloat(), y + rand.nextFloat(), z, 0, 0.1, 0);
                     Revival.PROXY.spawnBubbleParticles(world, x + rand.nextFloat(), y + rand.nextFloat(), z, 0, 0.1, 0);
                     Revival.PROXY.spawnBubbleParticles(world, x + rand.nextFloat(), y + rand.nextFloat(), z, 0, 0.1, 0);
                     Revival.PROXY.spawnBubbleParticles(world, x + rand.nextFloat(), y + rand.nextFloat(), z, 0, 0.1, 0);
                     break;
-                case 3:
+                case NORTH:
                     Revival.PROXY.spawnBubbleParticles(world, x + rand.nextFloat(), y + rand.nextFloat(), z + 1.1F, 0, 0.1, 0);
                     Revival.PROXY.spawnBubbleParticles(world, x + rand.nextFloat(), y + rand.nextFloat(), z + 1.1F, 0, 0.1, 0);
                     Revival.PROXY.spawnBubbleParticles(world, x + rand.nextFloat(), y + rand.nextFloat(), z + 1.1F, 0, 0.1, 0);
                     Revival.PROXY.spawnBubbleParticles(world, x + rand.nextFloat(), y + rand.nextFloat(), z + 1.1F, 0, 0.1, 0);
                     break;
-                case 4:
+                case EAST:
                     Revival.PROXY.spawnBubbleParticles(world, x, y + rand.nextFloat(), z + rand.nextFloat(), 0, 0.1, 0);
                     Revival.PROXY.spawnBubbleParticles(world, x, y + rand.nextFloat(), z + rand.nextFloat(), 0, 0.1, 0);
                     Revival.PROXY.spawnBubbleParticles(world, x, y + rand.nextFloat(), z + rand.nextFloat(), 0, 0.1, 0);
                     Revival.PROXY.spawnBubbleParticles(world, x, y + rand.nextFloat(), z + rand.nextFloat(), 0, 0.1, 0);
                     break;
-                case 5:
+                case WEST:
                     Revival.PROXY.spawnBubbleParticles(world, x + 1.1F, y + rand.nextFloat(), z + rand.nextFloat(), 0, 0.1, 0);
                     Revival.PROXY.spawnBubbleParticles(world, x + 1.1F, y + rand.nextFloat(), z + rand.nextFloat(), 0, 0.1, 0);
                     Revival.PROXY.spawnBubbleParticles(world, x + 1.1F, y + rand.nextFloat(), z + rand.nextFloat(), 0, 0.1, 0);
@@ -95,23 +75,12 @@ public class BlockBubbleMachine extends Block {
     }
 
     @Override
-    public void onBlockPlacedBy(World world, BlockPos pos, EntityLivingBase placer, ItemStack stack) {
-        int rotate = MathHelper.floor_double((double) (placer.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+    public IBlockState onBlockPlaced(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase entity) {
+        return super.onBlockPlaced(world, pos, facing, hitX, hitY, hitZ, meta, entity).withProperty(FACING, EnumFacing.fromAngle(entity.rotationYaw));
+    }
 
-        if (rotate == 0) {
-            world.setBlockMetadataWithNotify(pos, 2, 2);
-        }
-
-        if (rotate == 1) {
-            world.setBlockMetadataWithNotify(pos, 5, 2);
-        }
-
-        if (rotate == 2) {
-            world.setBlockMetadataWithNotify(pos, 3, 2);
-        }
-
-        if (rotate == 3) {
-            world.setBlockMetadataWithNotify(pos, 4, 2);
-        }
+    @Override
+    protected BlockStateContainer createBlockState() {
+        return new BlockStateContainer(this, FACING);
     }
 }

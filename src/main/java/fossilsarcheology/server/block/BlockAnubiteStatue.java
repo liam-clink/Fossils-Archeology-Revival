@@ -5,101 +5,93 @@ import fossilsarcheology.server.creativetab.FATabRegistry;
 import fossilsarcheology.server.entity.mob.EntityAnubite;
 import fossilsarcheology.server.item.block.AnubiteStatueBlockItem;
 import net.minecraft.block.BlockContainer;
+import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.properties.PropertyDirection;
+import net.minecraft.block.state.BlockStateContainer;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.EnumBlockRenderType;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockAnubiteStatue extends BlockContainer implements IBlockItem {
-    private int counter = 0;
+    private static final AxisAlignedBB BOUNDS = new AxisAlignedBB(0.0F, 0.0F, 0.0F, 1.0F, 2.0F, 1.0F);
+    private static final PropertyDirection FACING = BlockHorizontal.FACING;
 
     public BlockAnubiteStatue() {
-        super(Material.rock);
-        this.setBlockBounds(0F, 0.0F, 0F, 1F, 2F, 1);
+        super(Material.ROCK);
         this.setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
         this.setTickRandomly(true);
         this.setBlockUnbreakable();
         this.setResistance(60000000.0F);
-        setUnlocalizedName("AnubiteStatue");
+        this.setUnlocalizedName("AnubiteStatue");
     }
 
     @Override
-    public boolean onBlockActivated(World world, BlockPos pos, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
-        world.newExplosion(null, x + 0.5F, y, z + 0.5, 5F, true, true);
-        EntityAnubite newMob = new EntityAnubite(world);
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+        return BOUNDS;
+    }
+
+    @Override
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
+        world.newExplosion(null, pos.getX() + 0.5F, pos.getY(), pos.getZ() + 0.5F, 5F, true, true);
+        EntityAnubite anubite = new EntityAnubite(world);
         if (!world.isRemote) {
-            newMob.setLocationAndAngles(x + 0.5, y, z + 0.5, 0, 0);
-            world.spawnEntityInWorld(newMob);
+            anubite.setLocationAndAngles(pos.getX() + 0.5F, pos.getY(), pos.getZ() + 0.5F, 0, 0);
+            world.spawnEntityInWorld(anubite);
             world.removeTileEntity(pos);
-            world.setBlock(pos, Blocks.air);
+            world.setBlockState(pos, Blocks.AIR.getDefaultState());
         }
         return true;
     }
 
-    @SideOnly(Side.CLIENT)
     @Override
-    public void registerBlockIcons(IIconRegister iconRegister) {
-        this.blockIcon = iconRegister.registerIcon("nether_brick");
+    public IBlockState onBlockPlaced(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase entity) {
+        return super.onBlockPlaced(world, pos, facing, hitX, hitY, hitZ, meta, entity).withProperty(FACING, EnumFacing.fromAngle(entity.rotationYaw));
     }
 
     @Override
-    public void onBlockPlacedBy(World world, BlockPos pos, EntityLivingBase entity, ItemStack stack) {
-        byte b0 = 0;
-        int l = MathHelper.floor_double((double) (entity.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
-
-        if (l == 0) {
-            b0 = 2;
-        }
-
-        if (l == 1) {
-            b0 = 5;
-        }
-
-        if (l == 2) {
-            b0 = 3;
-        }
-
-        if (l == 3) {
-            b0 = 4;
-        }
-
-        world.setBlockMetadataWithNotify(pos, b0, 2);
-
-        world.markBlockForUpdate(pos);
-
-        super.onBlockPlacedBy(world, pos, entity, stack);
+    public EnumBlockRenderType getRenderType(IBlockState state) {
+        return EnumBlockRenderType.MODEL;
     }
 
     @Override
-    public int getRenderType() {
-        return -94;
-    }
-
-    @Override
-    public boolean isOpaqueCube() {
+    public boolean isOpaqueCube(IBlockState state) {
         return false;
     }
 
     @Override
-    public boolean renderAsNormalBlock() {
-        return false;
-    }
-
-    @Override
-    public TileEntity createNewTileEntity(World world, int i) {
+    public TileEntity createNewTileEntity(World world, int metadata) {
         return new TileEntityAnubiteStatue();
     }
 
     @Override
     public Class<? extends ItemBlock> getItemBlockClass() {
         return AnubiteStatueBlockItem.class;
+    }
+
+    @Override
+    protected BlockStateContainer createBlockState() {
+        return new BlockStateContainer(this, FACING);
+    }
+
+    @Override
+    public IBlockState getStateFromMeta(int meta) {
+        return this.getDefaultState().withProperty(FACING, EnumFacing.values()[meta]);
+    }
+
+    @Override
+    public int getMetaFromState(IBlockState state) {
+        return state.getValue(FACING).ordinal();
     }
 }

@@ -5,139 +5,47 @@ import fossilsarcheology.server.creativetab.FATabRegistry;
 import fossilsarcheology.server.handler.LocalizationStrings;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockDrum extends BlockContainer {
-    IIcon Top1;
-    IIcon Top2;
-    IIcon Top3;
-    IIcon Bottom;
-
     public BlockDrum() {
-        super(Material.wood);
+        super(Material.WOOD);
         this.setUnlocalizedName(LocalizationStrings.DRUM_NAME);
         this.setHardness(0.8F);
         this.setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
     }
 
-	/*
-     * public String getTextureFile() { return
-	 * "/fossil/textures/Fos_terrian.png"; }
-	 */
-
-    /**
-     * From the specified side and block metadata retrieves the blocks texture.
-     * Args: side, metadata
-     */
-    /*
-	 * public int getBlockTextureFromSideAndMetadata(int var1, int var2) { if
-	 * (var1 != 1 && var1 != 0) { return 4; } else { switch (var2) { case 0:
-	 * default: return 1;
-	 * 
-	 * case 1: return 2;
-	 * 
-	 * case 2: return 3; } } }
-	 */
     @Override
-    @SideOnly(Side.CLIENT)
-    /**
-     * When this method is called, your block should register all the icons it needs with the given IIconRegister. This
-     * is the only chance you get to register icons.
-     */
-    public void registerBlockIcons(IIconRegister par1IIconRegister) {
-        this.blockIcon = par1IIconRegister.registerIcon("fossil:Drum_Side");
-        this.Top1 = par1IIconRegister.registerIcon("fossil:Drum_Top1");
-        this.Top2 = par1IIconRegister.registerIcon("fossil:Drum_Top2");
-        this.Top3 = par1IIconRegister.registerIcon("fossil:Drum_Top3");
-        this.Bottom = par1IIconRegister.registerIcon("fossil:Drum_Bottom");
-    }
-
-    /**
-     * From the specified side and block metadata retrieves the blocks texture.
-     * Args: side, metadata
-     */
-    @Override
-    public IIcon getIcon(int par1, int par2) {
-        if (par1 != 1 && par1 != 0) {
-            return blockIcon;
-        } else {
-            if (par1 == 0) {
-                return Bottom;
-            }
-
-            switch (par2) {
-                case 0:
-                default:
-                    return Top1;
-
-                case 1:
-                    return Top2;
-
-                case 2:
-                    return Top3;
-            }
-        }
-    }
-
-	/*
-	 * Lets the block know when one of its neighbor changes. Doesn't know which
-	 * neighbor changed (coordinates passed are their own) Args: pos,
-	 * neighbor blockID
-	 */
-	/*
-	 * public void onNeighborBlockChange(World var1, int var2, int var3, int
-	 * var4, int var5) {//plays a sound when powered....what for, this does
-	 * nothing.....but keep the code... if (var5 > 0 &&
-	 * Block.blocksList[var5].canProvidePower()) { boolean var6 =
-	 * var1.isBlockGettingPowered(var2, var3, var4); TileEntityDrum var7 =
-	 * (TileEntityDrum)var1.getTileEntity(var2, var3, var4);
-	 * 
-	 * if (var7.previousRedstoneState != var6) { if (var6) {
-	 * var7.triggerNote(var1, var2, var3, var4); }
-	 * 
-	 * var7.previousRedstoneState = var6; } } }
-	 */
-
-    /**
-     * Called upon block activation (right click on the block.)
-     */
-    @Override
-    public boolean onBlockActivated(World world, BlockPos pos, EntityPlayer player, int var6, float var7, float var8, float var9) {
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
         if (!world.isRemote) {
             TileEntityDrum tileEntity = (TileEntityDrum) world.getTileEntity(pos);
-            tileEntity.TriggerOrder(player);
-            world.setBlockMetadataWithNotify(pos, tileEntity.Order.ordinal(), var6);
+            tileEntity.triggerOrder(player);
+            world.setBlockMetadataWithNotify(pos, tileEntity.order.ordinal(), side);
         }
-
         return true;
     }
 
-    /**
-     * Called when the block is clicked by a player. Args: pos, entityPlayer
-     */
     @Override
-    public void onBlockClicked(World var1, int var2, int var3, int var4, EntityPlayer var5) {
-        if (!var1.isRemote) {
-            TileEntityDrum var6 = (TileEntityDrum) var1.getTileEntity(var2, var3, var4);
-
-            if (var5.inventory.getCurrentItem() != null) {
-                var6.SendOrder(var5.inventory.getCurrentItem().getItem(), var5);
+    public void onBlockClicked(World world, BlockPos pos, EntityPlayer player) {
+        if (!world.isRemote) {
+            TileEntityDrum tile = (TileEntityDrum) world.getTileEntity(pos);
+            if (player.inventory.getCurrentItem() != null) {
+                tile.sendOrder(player.inventory.getCurrentItem().getItem(), player);
             }
         }
     }
 
-    /**
-     * Returns a new instance of a block's tile entity class. Called on placing
-     * the block.
-     */
     @Override
-    public TileEntity createNewTileEntity(World var1, int var2) {
+    public TileEntity createNewTileEntity(World world, int var2) {
         return new TileEntityDrum();
     }
 }

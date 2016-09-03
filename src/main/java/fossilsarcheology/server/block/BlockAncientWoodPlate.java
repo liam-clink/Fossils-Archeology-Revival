@@ -4,77 +4,60 @@ import fossilsarcheology.server.creativetab.FATabRegistry;
 import fossilsarcheology.server.handler.LocalizationStrings;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.PropertyInteger;
+import net.minecraft.block.state.BlockStateContainer;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
 import java.util.Random;
 
 public class BlockAncientWoodPlate extends Block {
+    public static final AxisAlignedBB[] BOUNDS = new AxisAlignedBB[] {
+            new AxisAlignedBB(0.0F, 0.0F, 0.0F, 1.0F, 1.0F * 0.125F, 0.0F),
+            new AxisAlignedBB(0.0F, 0.0F, 0.0F, 1.0F, 2.0F * 0.125F, 0.0F),
+            new AxisAlignedBB(0.0F, 0.0F, 0.0F, 1.0F, 3.0F * 0.125F, 0.0F),
+            new AxisAlignedBB(0.0F, 0.0F, 0.0F, 1.0F, 4.0F * 0.125F, 0.0F),
+            new AxisAlignedBB(0.0F, 0.0F, 0.0F, 1.0F, 5.0F * 0.125F, 0.0F),
+            new AxisAlignedBB(0.0F, 0.0F, 0.0F, 1.0F, 6.0F * 0.125F, 0.0F),
+            new AxisAlignedBB(0.0F, 0.0F, 0.0F, 1.0F, 7.0F * 0.125F, 0.0F)
+    };
+    public static final PropertyInteger HEIGHT = PropertyInteger.create("height", 0, BOUNDS.length);
+
     public BlockAncientWoodPlate() {
-        super(Material.wood);
-        setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.125F, 1.0F);
-        setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
-        setHardness(0.6F);
-        setUnlocalizedName(LocalizationStrings.ANCIENT_WOOD_PLATE_NAME);
+        super(Material.WOOD);
+        this.setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
+        this.setHardness(0.6F);
+        this.setUnlocalizedName(LocalizationStrings.ANCIENT_WOOD_PLATE_NAME);
     }
 
     @Override
-    @SideOnly(Side.CLIENT)
-    public void registerBlockIcons(IIconRegister iconRegister) {
-        this.blockIcon = iconRegister.registerIcon("fossil:Ancient_Wood_Plates");
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+        return BOUNDS[state.getValue(HEIGHT) & BOUNDS.length];
     }
 
     @Override
-    public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, BlockPos pos) {
-        int meta = world.getBlockMetadata(pos) & 7;
-        float f = 0.125F;
-        return AxisAlignedBB.getBoundingBox((double) x + this.minX, (double) y + this.minY, (double) z + this.minZ, (double) x + this.maxX, (double) ((float) y + (float) meta * f), (double) z + this.maxZ);
-    }
-
-    /**
-     * Is this block (a) opaque and (b) a full 1m cube? This determines whether
-     * or not to render the shared face of two adjacent blocks and also whether
-     * the player can attach torches, redstone wire, etc to this block.
-     */
-    @Override
-    public boolean isOpaqueCube() {
+    public boolean isOpaqueCube(IBlockState state) {
         return false;
     }
 
-    /**
-     * If this block doesn't render as an ordinary block it will return False
-     * (examples: signs, buttons, stairs, etc)
-     */
     @Override
-    public boolean renderAsNormalBlock() {
-        return false;
+    public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block) {
+        this.onNeighbourChange(world, pos);
     }
 
-    /**
-     * Checks to see if its valid to put this block at the specified
-     * coordinates. Args: world, pos
-     */
-    @Override
-    public boolean canPlaceBlockAt(World world, BlockPos pos) {
-        return super.canPlaceBlockAt(world, pos) && this.canBlockStay(world, pos);
-    }
-
-    /**
-     * Lets the block know when one of its neighbor changes. Doesn't know which
-     * neighbor changed (coordinates passed are their own) Args: pos,
-     * neighbor blockID
-     */
-    @Override
-    public void onNeighborBlockChange(World world, BlockPos pos, Block block) {
-        this.func_111046_k(world, pos);
-    }
-
-    private boolean func_111046_k(World world, BlockPos pos) {
-        if (!this.canBlockStay(world, pos)) {
-            this.dropBlockAsItem(world, pos, world.getBlockMetadata(pos), 0);
+    private boolean onNeighbourChange(World world, BlockPos pos) {
+        if (!this.canPlaceBlockAt(world, pos)) {
+            this.dropBlockAsItem(world, pos, world.getBlockState(pos), 0);
             world.setBlockToAir(pos);
             return false;
         } else {
@@ -82,20 +65,12 @@ public class BlockAncientWoodPlate extends Block {
         }
     }
 
-    /**
-     * Called when the player destroys a block with an item that can harvest it.
-     * (i, j, k) are the coordinates of the block and l is the block's
-     * subtype/damage.
-     */
     @Override
-    public void harvestBlock(World world, EntityPlayer player, BlockPos pos, int meta) {
-        super.harvestBlock(world, player, pos, meta);
+    public void harvestBlock(World world, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity tile, @Nullable ItemStack stack) {
+        super.harvestBlock(world, player, pos, state, tile, stack);
         world.setBlockToAir(pos);
     }
 
-    /**
-     * Returns the quantity of items to drop on block destruction.
-     */
     @Override
     public int quantityDropped(Random rand) {
         return 1;
@@ -103,11 +78,22 @@ public class BlockAncientWoodPlate extends Block {
 
     @Override
     @SideOnly(Side.CLIENT)
-    /**
-     * Returns true if the given side of this block type should be rendered, if the adjacent block is at the given
-     * coordinates.  Args: blockAccess, pos, side
-     */
-    public boolean shouldSideBeRendered(IBlockAccess world, BlockPos pos, int side) {
-        return side == 1 || super.shouldSideBeRendered(world, pos, side);
+    public boolean shouldSideBeRendered(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing side) {
+        return side == EnumFacing.UP || super.shouldSideBeRendered(state, world, pos, side);
+    }
+
+    @Override
+    public IBlockState getStateFromMeta(int meta) {
+        return this.getDefaultState().withProperty(HEIGHT, meta);
+    }
+
+    @Override
+    public int getMetaFromState(IBlockState state) {
+        return state.getValue(HEIGHT);
+    }
+
+    @Override
+    protected BlockStateContainer createBlockState() {
+        return new BlockStateContainer(this, HEIGHT);
     }
 }

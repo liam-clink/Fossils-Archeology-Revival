@@ -9,6 +9,6 @@ public class BlockDillhoffiaFlower extends BlockBush {
     public BlockDillhoffiaFlower(Material material) {
         super(material);
         this.setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
-        setUnlocalizedName(LocalizationStrings.BLOCK_DILLHOFFIA_NAME);
+        this.setUnlocalizedName(LocalizationStrings.BLOCK_DILLHOFFIA_NAME);
     }
 }
