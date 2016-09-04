@@ -37,7 +37,7 @@ public class SifterGUI extends GuiContainer {
         this.drawTexturedModalRect(centerX, centerY, 0, 0, this.xSize, this.ySize);
         int siftTimeRemaining;
 
-        if (this.tile.isBurning()) {
+        if (this.tile.isSifting()) {
             siftTimeRemaining = this.tile.getSiftTimeRemainingScaled(12);
             // this.drawTexturedRect(centerX + 70, centerY + 44 -
             // siftTimeRemaining, 176, 12 - siftTimeRemaining, 14,

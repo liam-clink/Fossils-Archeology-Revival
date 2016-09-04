@@ -3,10 +3,12 @@ package fossilsarcheology.server.block;
 import fossilsarcheology.server.creativetab.FATabRegistry;
 import fossilsarcheology.server.handler.LocalizationStrings;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 
@@ -14,97 +16,54 @@ import java.util.Random;
 
 public class BlockIcedStone extends Block {
     public BlockIcedStone() {
-        super(Material.rock);
+        super(Material.ROCK);
         this.setHarvestLevel("pickaxe", 1);
-        setHardness(1.5F);
-        setResistance(10.0F);
-        setSoundType(Block.soundTypeStone);
-        setUnlocalizedName(LocalizationStrings.BLOCK_ICEDSTONE_NAME);
-        setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
+        this.setHardness(1.5F);
+        this.setResistance(10.0F);
+        this.setSoundType(SoundType.STONE);
+        this.setUnlocalizedName(LocalizationStrings.BLOCK_ICEDSTONE_NAME);
+        this.setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
     }
 
-    /**
-     * Returns the ID of the items to drop on destruction.
-     */
     @Override
-    public Item getItemDropped(int var1, Random var2, int var3) {
-        return Item.getItemFromBlock(Blocks.cobblestone);
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+        return Item.getItemFromBlock(Blocks.COBBLESTONE);
     }
 
-    /**
-     * Ticks the block if it's been scheduled
-     */
     @Override
-    public void updateTick(World var1, int var2, int var3, int var4, Random var5) {
-        if (var1.getSavedLightValue(EnumSkyBlock.Block, var2, var3, var4) <= 11 - this.lightOpacity && (!var1.canBlockSeeTheSky(var2, var3 + 1, var4) || !var1.isDaytime())) {
-            int var6 = 0;
+    public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) {
+        this.spread(world, pos);
+    }
 
-            while (var6 < 20) {
-                int var7 = (new Random()).nextInt(3) - 1;
-                int var8 = (new Random()).nextInt(3) - 1;
-                int var9 = (new Random()).nextInt(3) - 1;
+    @Override
+    public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block) {
+        this.spread(world, pos);
+    }
 
-                if (var1.getBlock(var2 + var7, var3 + var8, var4 + var9) != Blocks.flowing_water && var1.getBlock(var2 + var7, var3 + var8, var4 + var9) != Blocks.water) {
-                    if (var1.getBlock(var2 + var7, var3 + var8, var4 + var9) != Blocks.flowing_lava && var1.getBlock(var2 + var7, var3 + var8, var4 + var9) != Blocks.lava && var1.getBlock(var2 + var7, var3 + var8, var4 + var9) != Blocks.fire) {
-                        ++var6;
+    private void spread(World world, BlockPos pos) {
+        if (world.getLightFor(EnumSkyBlock.BLOCK, pos) <= 11 - this.lightOpacity && (!world.canBlockSeeSky(pos.up()) || !world.isDaytime())) {
+            Random random = new Random();
+            int runs = 0;
+            while (runs < 20) {
+                int offsetX = random.nextInt(3) - 1;
+                int offsetY = random.nextInt(3) - 1;
+                int offsetZ = random.nextInt(3) - 1;
+                BlockPos offsetPos = pos.add(offsetX, offsetY, offsetZ);
+                IBlockState offsetState = world.getBlockState(offsetPos);
+                Block offsetBlock = offsetState.getBlock();
+                if (offsetBlock != Blocks.FLOWING_WATER && offsetBlock != Blocks.WATER) {
+                    if (offsetBlock != Blocks.FLOWING_LAVA && offsetBlock != Blocks.LAVA && offsetBlock != Blocks.FIRE) {
+                        ++runs;
                         continue;
                     }
-
-                    var1.setBlock(var2, var3, var4, Blocks.stone);
+                    world.setBlockState(pos, Blocks.STONE.getDefaultState());
                     return;
                 }
-
-                var1.setBlock(var2 + var7, var3 + var8, var4 + var9, Blocks.ice);
+                world.setBlockState(offsetPos, Blocks.ICE.getDefaultState());
                 return;
             }
         } else {
-            var1.setBlock(var2, var3, var4, Blocks.stone);
+            world.setBlockState(pos, Blocks.STONE.getDefaultState());
         }
-    }
-
-    /**
-     * Lets the block know when one of its neighbor changes. Doesn't know which
-     * neighbor changed (coordinates passed are their own) Args: pos,
-     * neighbor blockID
-     */
-    public void onNeighborBlockChange(World var1, int var2, int var3, int var4, int var5) {
-        if (var1.getSavedLightValue(EnumSkyBlock.Block, var2, var3, var4) <= 11 - this.lightOpacity && (!var1.canBlockSeeTheSky(var2, var3 + 1, var4) || !var1.isDaytime())) {
-            for (int var6 = -1; var6 <= 1; ++var6) {
-                for (int var7 = -1; var7 <= 1; ++var7) {
-                    for (int var8 = -1; var8 <= 1; ++var8) {
-                        if (var1.getBlock(var2 + var6, var3 + var7, var4 + var8) == Blocks.flowing_water || var1.getBlock(var2 + var6, var3 + var7, var4 + var8) == Blocks.water) {
-                            var1.setBlock(var2 + var6, var3 + var7, var4 + var8, Blocks.ice);
-                        }
-
-                        if (var1.getBlock(var2 + var6, var3 + var7, var4 + var8) == Blocks.flowing_lava || var1.getBlock(var2 + var6, var3 + var7, var4 + var8) == Blocks.lava || var1.getBlock(var2 + var6, var3 + var7, var4 + var8) == Blocks.fire) {
-                            var1.setBlock(var2, var3, var4, Blocks.stone);
-                            return;
-                        }
-                    }
-                }
-            }
-        } else {
-            var1.setBlock(var2, var3, var4, Blocks.stone);
-        }
-    }
-
-    /**
-     * From the specified side and block metadata retrieves the blocks texture.
-     * Args: side, metadata
-     */
-    /*
-     * public int getBlockTextureFromSideAndMetadata(int var1, int var2) {
-	 * return var2 == 1 ? this.blockIndexInTexture : this.blockIndexInTexture +
-	 * 1; }
-	 */
-
-    /**
-     * When this method is called, your block should register all the icons it
-     * needs with the given IconRegister. This is the only chance you get to
-     * register icons.
-     */
-    @Override
-    public void registerBlockIcons(IIconRegister par1IconRegister) {
-        this.blockIcon = par1IconRegister.registerIcon("fossil:Iced_Stone");
     }
 }

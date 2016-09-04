@@ -4,20 +4,23 @@ import fossilsarcheology.Revival;
 import fossilsarcheology.server.block.entity.TileEntitySifter;
 import fossilsarcheology.server.creativetab.FATabRegistry;
 import fossilsarcheology.server.handler.LocalizationStrings;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
+import net.minecraft.block.BlockHorizontal;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.properties.PropertyDirection;
+import net.minecraft.block.state.BlockStateContainer;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -25,267 +28,151 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.Random;
 
 public class BlockSifter extends BlockContainer {
-    private static boolean keepFurnaceInventory = false;
+    public static final PropertyDirection FACING = BlockHorizontal.FACING;
+
+    private static boolean keepInventory = false;
     private final boolean isActive;
-    // private final String VAT = "Vat.";
-    // private final String ERR_OUTBREAK = "Err.OutBreak";
-    private Random furnaceRand = new Random();
-    @SideOnly(Side.CLIENT)
-    private IIcon Top;
-    @SideOnly(Side.CLIENT)
-    private IIcon Bottom;
+    private Random random = new Random();
 
     public BlockSifter(boolean isActive) {
-        super(Material.wood);
+        super(Material.WOOD);
         this.isActive = isActive;
-        setHardness(3.0F);
-        setSoundType(Block.soundTypeMetal);
+        this.setHardness(3.0F);
+        this.setSoundType(SoundType.METAL);
+        this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
         if (isActive) {
-            setUnlocalizedName(LocalizationStrings.BLOCK_SIFTER_ACTIVE);
+            this.setUnlocalizedName(LocalizationStrings.BLOCK_SIFTER_ACTIVE);
         } else {
-            setUnlocalizedName(LocalizationStrings.BLOCK_SIFTER_IDLE);
-            setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
+            this.setUnlocalizedName(LocalizationStrings.BLOCK_SIFTER_IDLE);
+            this.setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
         }
     }
 
-    /**
-     * Update which block ID the furnace is using depending on whether or not it
-     * is burning
-     */
-    public static void updateFurnaceBlockState(boolean isActive, World world, BlockPos pos) {
-        int l = world.getBlockMetadata(pos);
-        TileEntity tileentity = world.getTileEntity(pos);
-        keepFurnaceInventory = true;
-
-        if (isActive) {
-            world.setBlock(pos, FABlockRegistry.INSTANCE.blockSifterActive);
+    public static void setState(boolean active, World world, BlockPos pos) {
+        IBlockState state = world.getBlockState(pos);
+        TileEntity tile = world.getTileEntity(pos);
+        keepInventory = true;
+        if (active) {
+            world.setBlockState(pos, FABlockRegistry.INSTANCE.blockSifterActive.getDefaultState().withProperty(FACING, state.getValue(FACING)), 3);
+            world.setBlockState(pos, FABlockRegistry.INSTANCE.blockSifterActive.getDefaultState().withProperty(FACING, state.getValue(FACING)), 3);
         } else {
-            world.setBlock(pos, FABlockRegistry.INSTANCE.blockSifterIdle);
+            world.setBlockState(pos, FABlockRegistry.INSTANCE.blockSifterIdle.getDefaultState().withProperty(FACING, state.getValue(FACING)), 3);
+            world.setBlockState(pos, FABlockRegistry.INSTANCE.blockSifterIdle.getDefaultState().withProperty(FACING, state.getValue(FACING)), 3);
         }
-
-        keepFurnaceInventory = false;
-        world.setBlockMetadataWithNotify(pos, l, 2);
-
-        if (tileentity != null) {
-            tileentity.validate();
-            world.setTileEntity(pos, tileentity);
+        keepInventory = false;
+        if (tile != null) {
+            tile.validate();
+            world.setTileEntity(pos, tile);
         }
     }
 
-    /**
-     * Called whenever the block is added into the world. Args: world, pos
-     */
     @Override
-    public void onBlockAdded(World world, BlockPos pos) {
-        super.onBlockAdded(world, pos);
+    public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
+        super.onBlockAdded(world, pos, state);
         this.setDefaultDirection(world, pos);
     }
 
-    /**
-     * set a blocks direction
-     */
     private void setDefaultDirection(World world, BlockPos pos) {
         if (!world.isRemote) {
-            Block block = world.getBlock(pos - 1);
-            Block block1 = world.getBlock(pos + 1);
-            Block block2 = world.getBlock(x - 1, y, z);
-            Block block3 = world.getBlock(x + 1, y, z);
-            byte b0 = 3;
-
-            if (block.func_149730_j() && !block1.func_149730_j()) {
-                b0 = 3;
+            IBlockState state = world.getBlockState(pos);
+            IBlockState north = world.getBlockState(pos.north());
+            IBlockState south = world.getBlockState(pos.south());
+            IBlockState west = world.getBlockState(pos.west());
+            IBlockState east = world.getBlockState(pos.east());
+            EnumFacing direction = state.getValue(FACING);
+            if (direction == EnumFacing.NORTH && north.isFullBlock() && !south.isFullBlock()) {
+                direction = EnumFacing.SOUTH;
+            } else if (direction == EnumFacing.SOUTH && south.isFullBlock() && !north.isFullBlock()) {
+                direction = EnumFacing.NORTH;
+            } else if (direction == EnumFacing.WEST && west.isFullBlock() && !east.isFullBlock()) {
+                direction = EnumFacing.EAST;
+            } else if (direction == EnumFacing.EAST && east.isFullBlock() && !west.isFullBlock()) {
+                direction = EnumFacing.WEST;
             }
-
-            if (block1.func_149730_j() && !block.func_149730_j()) {
-                b0 = 2;
-            }
-
-            if (block2.func_149730_j() && !block3.func_149730_j()) {
-                b0 = 5;
-            }
-
-            if (block3.func_149730_j() && !block2.func_149730_j()) {
-                b0 = 4;
-            }
-
-            world.setBlockMetadataWithNotify(pos, b0, 2);
+            world.setBlockState(pos, state.withProperty(FACING, direction), 2);
         }
     }
 
-    /**
-     * When this method is called, your block should register all the icons it
-     * needs with the given IconRegister. This is the only chance you get to
-     * register icons.
-     */
     @Override
-    @SideOnly(Side.CLIENT)
-    public void registerBlockIcons(IIconRegister par1IconRegister) {
-        this.blockIcon = par1IconRegister.registerIcon("fossil:SifterSides");
-        this.Bottom = par1IconRegister.registerIcon("fossil:SifterBottom");
-        this.Top = this.isActive ? par1IconRegister.registerIcon("fossil:SifterTopActive") : par1IconRegister.registerIcon("fossil:SifterTop");
-    }
-
-    /**
-     * From the specified side and block metadata retrieves the blocks texture.
-     * Args: side, metadata
-     */
-    @Override
-    public IIcon getIcon(int par1, int par2) {
-        return par1 == 1 ? this.Top : (par1 != 0 ? this.blockIcon : this.Bottom);
-    }
-
-    /**
-     * Returns the block texture based on the side being looked at. Args: side
-     */
-    /*
-     * public int getBlockTextureFromSide(int var1) { return var1 == 1 ? 36 :
-	 * (var1 == 0 ? 36 : (var1 == 3 ? 20 : 20)); }
-	 */
-    @Override
-    @SideOnly(Side.CLIENT)
-    /**
-     * A randomly called display update to be able to add particles or other items for display
-     */
-    public void randomDisplayTick(World var1, int var2, int var3, int var4, Random var5) {
-    }
-
-    /**
-     * Called upon block activation (right click on the block.)
-     */
-    @Override
-    public boolean onBlockActivated(World var1, int var2, int var3, int var4, EntityPlayer var5, int var6, float var7, float var8, float var9) {
-        if (var1.isRemote) {
-            return true;
-        } else {
-            var5.openGui(Revival.INSTANCE, 7, var1, var2, var3, var4);
-            return true;
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
+        if (!world.isRemote) {
+            player.openGui(Revival.INSTANCE, 7, world, pos.getX(), pos.getY(), pos.getZ());
         }
+        return true;
     }
 
-    /**
-     * Returns a new instance of a block's tile entity class. Called on placing
-     * the block.
-     */
     @Override
-    public TileEntity createNewTileEntity(World world, int par2) {
+    public TileEntity createNewTileEntity(World world, int meta) {
         return new TileEntitySifter();
     }
 
-    /**
-     * Called when the block is placed in the world.
-     */
-	/*
-	 * public void onBlockPlacedBy(World var1, int var2, int var3, int var4,
-	 * EntityLiving var5) {This Block doesnt care for directions!
-	 * super.onBlockPlacedBy(par1World, par2, par3, par4, par5EntityLiving,
-	 * par6ItemStack) int var6 =
-	 * MathHelper.floor_double((double)(var5.rotationYaw * 4.0F / 360.0F) +
-	 * 0.5D) & 3;
-	 * 
-	 * if (var6 == 0)var1.setBlockMetadataWithNotify(var2, var3, var4, 2,2);
-	 * 
-	 * if (var6 == 1)var1.setBlockMetadataWithNotify(var2, var3, var4, 5,2);
-	 * 
-	 * if (var6 == 2)var1.setBlockMetadataWithNotify(var2, var3, var4, 3,2);
-	 * 
-	 * if (var6 == 3)var1.setBlockMetadataWithNotify(var2, var3, var4, 4,2); }
-	 */
-    private void ReturnIron(World world, BlockPos pos) {
-        ItemStack itemstack = new ItemStack(Items.iron_ingot, 3);
-        float var6 = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
-        float var7 = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
-        float var8 = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
-
-        while (itemstack.stackSize > 0) {
-            int var9 = this.furnaceRand.nextInt(21) + 10;
-
-            if (var9 > itemstack.stackSize) {
-                var9 = itemstack.stackSize;
-            }
-
-            itemstack.stackSize -= var9;
-            EntityItem world0 = new EntityItem(world, (double) ((float) x + var6), (double) ((float) y + var7), (double) ((float) z + var8), new ItemStack(itemstack.getItem(), var9, itemstack.getItemDamage()));
-            float world1 = 0.05F;
-            world0.motionX = (double) ((float) this.furnaceRand.nextGaussian() * world1);
-            world0.motionY = (double) ((float) this.furnaceRand.nextGaussian() * world1 + 0.2F);
-            world0.motionZ = (double) ((float) this.furnaceRand.nextGaussian() * world1);
-            world.spawnEntityInWorld(world0);
-        }
-    }
-
-    /**
-     * ejects contained items into the world, and notifies neighbours of an
-     * update, as appropriate
-     */
     @Override
-    public void breakBlock(World world, BlockPos pos, Block block, int var6) {
-        if (!keepFurnaceInventory) {
-            TileEntitySifter tileentity = (TileEntitySifter) world.getTileEntity(pos);
-
-            if (tileentity != null) {
-                for (int i = 0; i < tileentity.getSizeInventory(); ++i) {
-                    ItemStack itemstack = tileentity.getStackInSlot(i);
-
-                    if (itemstack != null) {
-                        float xOffset = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
-                        float yOffset = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
-                        float zOffset = this.furnaceRand.nextFloat() * 0.8F + 0.1F;
-
-                        while (itemstack.stackSize > 0) {
-                            int rand = this.furnaceRand.nextInt(21) + 10;
-
-                            if (rand > itemstack.stackSize) {
-                                rand = itemstack.stackSize;
+    public void breakBlock(World world, BlockPos pos, IBlockState state) {
+        if (!keepInventory) {
+            TileEntitySifter tile = (TileEntitySifter) world.getTileEntity(pos);
+            if (tile != null) {
+                for (int i = 0; i < tile.getSizeInventory(); ++i) {
+                    ItemStack stack = tile.getStackInSlot(i);
+                    if (stack != null) {
+                        float xOffset = this.random.nextFloat() * 0.8F + 0.1F;
+                        float yOffset = this.random.nextFloat() * 0.8F + 0.1F;
+                        float zOffset = this.random.nextFloat() * 0.8F + 0.1F;
+                        while (stack.stackSize > 0) {
+                            int rand = this.random.nextInt(21) + 10;
+                            if (rand > stack.stackSize) {
+                                rand = stack.stackSize;
                             }
-
-                            itemstack.stackSize -= rand;
-                            EntityItem entityItem = new EntityItem(world, (double) ((float) x + xOffset), (double) ((float) y + yOffset), (double) ((float) z + zOffset), new ItemStack(itemstack.getItem(), rand, itemstack.getItemDamage()));
-
-                            if (itemstack.hasTagCompound()) {
-                                entityItem.getEntityItem().setTagCompound((NBTTagCompound) itemstack.getTagCompound().copy());
+                            stack.stackSize -= rand;
+                            EntityItem entityItem = new EntityItem(world, pos.getX() + xOffset, pos.getY() + yOffset, pos.getZ() + zOffset, new ItemStack(stack.getItem(), rand, stack.getItemDamage()));
+                            if (stack.hasTagCompound()) {
+                                entityItem.getEntityItem().setTagCompound(stack.getTagCompound().copy());
                             }
-
                             float offset = 0.05F;
-                            entityItem.motionX = (double) ((float) this.furnaceRand.nextGaussian() * offset);
-                            entityItem.motionY = (double) ((float) this.furnaceRand.nextGaussian() * offset + 0.2F);
-                            entityItem.motionZ = (double) ((float) this.furnaceRand.nextGaussian() * offset);
+                            entityItem.motionX = (this.random.nextGaussian() * offset);
+                            entityItem.motionY = (this.random.nextGaussian() * offset + 0.2F);
+                            entityItem.motionZ = (this.random.nextGaussian() * offset);
                             world.spawnEntityInWorld(entityItem);
                         }
                     }
                 }
-                world.func_147453_f(pos, block);
             }
         }
-
-        super.breakBlock(world, pos, block, var6);
+        super.breakBlock(world, pos, state);
     }
 
-    /**
-     * If this returns true, then comparators facing away from this block will
-     * use the value from getComparatorInputOverride instead of the actual
-     * redstone signal strength.
-     */
     @Override
-    public boolean hasComparatorInputOverride() {
+    public boolean hasComparatorInputOverride(IBlockState state) {
         return true;
     }
 
-    /**
-     * If hasComparatorInputOverride returns true, the return value from this is
-     * used instead of the redstone signal strength when this block inputs to a
-     * comparator.
-     */
     @Override
-    public int getComparatorInputOverride(World par1World, int par2, int par3, int par4, int par5) {
-        return Container.calcRedstoneFromInventory((IInventory) par1World.getTileEntity(par2, par3, par4));
+    public int getComparatorInputOverride(IBlockState blockState, World world, BlockPos pos) {
+        return Container.calcRedstoneFromInventory((IInventory) world.getTileEntity(pos));
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    /**
-     * only called by clickMiddleMouseButton , and passed to inventory.setCurrentItem (along with isCreative)
-     */
-    public Item getItem(World world, BlockPos pos) {
-        return Item.getItemFromBlock(FABlockRegistry.INSTANCE.blockSifterIdle);
+    public ItemStack getItem(World world, BlockPos pos, IBlockState state) {
+        return new ItemStack(FABlockRegistry.INSTANCE.blockSifterIdle);
+    }
+
+    @Override
+    public IBlockState onBlockPlaced(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase entity) {
+        return super.onBlockPlaced(world, pos, facing, hitX, hitY, hitZ, meta, entity).withProperty(FACING, EnumFacing.fromAngle(entity.rotationYaw));
+    }
+
+    @Override
+    protected BlockStateContainer createBlockState() {
+        return new BlockStateContainer(this, FACING);
+    }
+
+    @Override
+    public IBlockState getStateFromMeta(int meta) {
+        return this.getDefaultState().withProperty(FACING, EnumFacing.values()[meta]);
+    }
+
+    @Override
+    public int getMetaFromState(IBlockState state) {
+        return state.getValue(FACING).ordinal();
     }
 }

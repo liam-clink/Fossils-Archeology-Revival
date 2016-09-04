@@ -3,11 +3,14 @@ package fossilsarcheology.server.block;
 import fossilsarcheology.server.creativetab.FATabRegistry;
 import fossilsarcheology.server.handler.LocalizationStrings;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -16,37 +19,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.Random;
 
 public class BlockPalmLog extends Block {
-    @SideOnly(Side.CLIENT)
-    private IIcon top;
-
     public BlockPalmLog() {
-        super(Material.wood);
+        super(Material.WOOD);
         this.setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
-        this.setSoundType(Block.soundTypeWood);
+        this.setSoundType(SoundType.WOOD);
         this.setHardness(1.4F);
         this.setResistance(1.0F);
         this.setUnlocalizedName(LocalizationStrings.PALAE_LOG_NAME);
-    }
-
-    public static int validateMeta(int meta) {
-        return meta & 3;
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void registerBlockIcons(IIconRegister iconRegister) {
-        this.blockIcon = iconRegister.registerIcon("fossil:Palae_Log");
-        this.top = iconRegister.registerIcon("fossil:Palae_Log_Top");
-    }
-
-    @Override
-    public IIcon getIcon(int side, int meta) {
-        return ((meta & 12) == 0 && side < 2) || ((meta & 12) == 8 && side > 1 && side < 4) || ((meta & 12) == 4 && side > 3) ? this.top : this.blockIcon;
-    }
-
-    @Override
-    public int getRenderType() {
-        return 31;
     }
 
     @Override
@@ -55,7 +34,7 @@ public class BlockPalmLog extends Block {
     }
 
     @Override
-    public Item getItemDropped(int par1, Random rand, int par3) {
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
         return Item.getItemFromBlock(FABlockRegistry.INSTANCE.palmLog);
     }
 

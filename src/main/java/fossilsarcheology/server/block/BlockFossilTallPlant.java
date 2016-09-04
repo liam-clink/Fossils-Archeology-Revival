@@ -4,6 +4,8 @@ import fossilsarcheology.client.render.particle.FossilFX;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.block.IGrowable;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
@@ -14,6 +16,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -26,15 +29,11 @@ import java.util.Random;
 
 public class BlockFossilTallPlant extends BlockDoublePlant implements IGrowable, IShearable {
     public String textureName;
-    @SideOnly(Side.CLIENT)
-    private IIcon[] doublePlantBottomIcons;
-    @SideOnly(Side.CLIENT)
-    private IIcon[] doublePlantTopIcons;
 
     public BlockFossilTallPlant(String string) {
         super();
         this.setHardness(0.0F);
-        this.setSoundType(soundTypeGrass);
+        this.setSoundType(SoundType.PLANT);
         this.textureName = string;
     }
 
@@ -46,17 +45,9 @@ public class BlockFossilTallPlant extends BlockDoublePlant implements IGrowable,
         return i & 7;
     }
 
-    /**
-     * The type of render function that is called for this block
-     */
-    @Override
-    public int getRenderType() {
-        return 40;
-    }
-
     @Override
     @SideOnly(Side.CLIENT)
-    public void randomDisplayTick(World world, int i, int j, int k, Random random) {
+    public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random random) {
         if (this == FABlockRegistry.INSTANCE.mutantPlant) {
             if (world.getBlockMetadata(i, j, k) != 0) {
                 int l = ((MathHelper.floor_double((double) (1 * 4.0F / 360.0F) + 0.5D) & 3) + 2) % 4;
@@ -74,17 +65,7 @@ public class BlockFossilTallPlant extends BlockDoublePlant implements IGrowable,
                 FossilFX.spawnParticle("flies", i, j + 0.5, k + 0.5, 0.0D, 1.5D, 0.0D, 4);
                 FossilFX.spawnParticle("flies", i + 0.3, j + 0.5, k + 0.9, 0.0D, 1.5D, 0.0D, 4);
             }
-
         }
-    }
-
-    /**
-     * Updates the blocks bounds based on its current state. Args: world, x, y,
-     * z
-     */
-    @Override
-    public void setBlockBoundsBasedOnState(IBlockAccess a, BlockPos pos) {
-        this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
     }
 
     @Override
@@ -93,32 +74,28 @@ public class BlockFossilTallPlant extends BlockDoublePlant implements IGrowable,
         return !func_149887_c(l) ? l & 7 : a.getBlockMetadata(x, z - 1, i) & 7;
     }
 
-    /**
-     * Checks to see if its valid to put this block at the specified
-     * coordinates. Args: world, pos
-     */
     @Override
-    public boolean canPlaceBlockAt(World w, BlockPos pos) {
-        return super.canPlaceBlockAt(w, pos) && w.isAirBlock(x, y + 1, z);
+    public boolean canPlaceBlockAt(World world, BlockPos pos) {
+        return super.canPlaceBlockAt(world, pos) && world.isAirBlock(pos.up());
     }
 
     /**
      * checks if the block can stay, if not drop as item
      */
     @Override
-    protected void checkAndDropBlock(World w, BlockPos pos) {
-        if (!this.canBlockStay(w, pos)) {
-            int l = w.getBlockMetadata(pos);
+    protected void checkAndDropBlock(World world, BlockPos pos) {
+        if (!this.canBlockStay(world, pos)) {
+            int l = world.getBlockMetadata(pos);
 
             if (!func_149887_c(l)) {
-                this.dropBlockAsItem(w, pos, l, 0);
+                this.dropBlockAsItem(world, pos, l, 0);
 
-                if (w.getBlock(x, y + 1, z) == this) {
-                    w.setBlock(x, y + 1, z, Blocks.air, 0, 2);
+                if (world.getBlock(x, y + 1, z) == this) {
+                    world.setBlock(x, y + 1, z, Blocks.air, 0, 2);
                 }
             }
 
-            w.setBlock(pos, Blocks.air, 0, 2);
+            world.setBlock(pos, Blocks.air, 0, 2);
         }
     }
 

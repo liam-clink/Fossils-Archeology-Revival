@@ -82,4 +82,14 @@ public class BlockAnuStatue extends BlockContainer implements IBlockItem {
     public Class<? extends ItemBlock> getItemBlockClass() {
         return AnuStatueBlockItem.class;
     }
+
+    @Override
+    public IBlockState getStateFromMeta(int meta) {
+        return this.getDefaultState().withProperty(FACING, EnumFacing.values()[meta]);
+    }
+
+    @Override
+    public int getMetaFromState(IBlockState state) {
+        return state.getValue(FACING).ordinal();
+    }
 }

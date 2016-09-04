@@ -1,84 +1,65 @@
 package fossilsarcheology.server.block;
 
-import fossilsarcheology.Revival;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
+import net.minecraft.block.BlockDoublePlant;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import java.util.Random;
 
 public class BlockFossilPlant extends BlockBush {
-
     public String textureName;
-    private int renderType;
 
-    public BlockFossilPlant(String texture, int renderType) {
-        super(Material.plants);
+    public BlockFossilPlant(String texture) {
+        super(Material.PLANTS);
         this.setHardness(0);
         this.textureName = texture;
-        this.renderType = renderType;
-        this.setSoundType(soundTypeGrass);
+        this.setSoundType(SoundType.PLANT);
     }
 
     @Override
-    public boolean onBlockActivated(World world, BlockPos pos, EntityPlayer player, int var6, float var7, float var8, float var9) {
-        ItemStack itemstack = player.getCurrentEquippedItem();
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack stack, EnumFacing side, float hitX, float hitY, float hitZ) {
         if (this == FABlockRegistry.INSTANCE.bennettitales_small) {
-            this.grow(FABlockRegistry.INSTANCE.bennettitales_large, itemstack, world, pos, player);
+            this.grow(FABlockRegistry.INSTANCE.bennettitales_large.getDefaultState(), stack, world, pos, player);
             return true;
         } else if (this == FABlockRegistry.INSTANCE.horsetail_small) {
-            this.grow(FABlockRegistry.INSTANCE.horsetail_large, itemstack, world, pos, player);
+            this.grow(FABlockRegistry.INSTANCE.horsetail_large.getDefaultState(), stack, world, pos, player);
             return true;
         }
         return false;
     }
 
-    public void grow(Block plantBlock, ItemStack itemstack, World world, BlockPos pos, EntityPlayer player) {
-        if (itemstack != null) {
-            if (itemstack.getItem() != null) {
-                if (itemstack.getItem() == Items.dye) {
-                    if (itemstack.getItemDamage() == 15) {
-                        Random rand = new Random();
-                        world.spawnParticle("happyVillager", x + (rand.nextDouble() - 0.5D), y + rand.nextDouble(), z + (rand.nextDouble() - 0.5D), 0.0D, 0.0D, 0.0D);
-                        world.playAuxSFX(2005, pos, 0);
-                        int l = ((MathHelper.floor_double((double) (1 * 4.0F / 360.0F) + 0.5D) & 3) + 2) % 4;
-                        world.setBlock(pos, plantBlock);
-                        world.setBlock(x, y + 1, z, plantBlock, 8 | l, 2);
-                        // world.setBlockMetadataWithNotify(pos, 1, 3);
-
-                        if (!player.capabilities.isCreativeMode) {
-                            --itemstack.stackSize;
-                        }
-                        if (itemstack.stackSize <= 0) {
-                            player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
-                        }
+    public void grow(IBlockState plantBlock, ItemStack stack, World world, BlockPos pos, EntityPlayer player) {
+        if (stack != null) {
+            if (stack.getItem() == Items.DYE) {
+                if (stack.getItemDamage() == 15) {
+                    Random rand = new Random();
+                    world.spawnParticle(EnumParticleTypes.VILLAGER_HAPPY, pos.getX() + (rand.nextDouble() - 0.5D), pos.getY() + rand.nextDouble(), pos.getZ() + (rand.nextDouble() - 0.5D), 0.0D, 0.0D, 0.0D);
+                    world.playEvent(2005, pos, 0);
+                    world.setBlockState(pos, plantBlock);
+                    world.setBlockState(pos.up(), plantBlock.withProperty(BlockDoublePlant.HALF, BlockDoublePlant.EnumBlockHalf.UPPER));
+                    if (!player.capabilities.isCreativeMode) {
+                        --stack.stackSize;
+                    }
+                    if (stack.stackSize <= 0) {
+                        player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
                     }
                 }
             }
         }
     }
 
-    /**
-     * Returns the quantity of items to drop on block destruction.
-     */
     @Override
     public int quantityDropped(Random var1) {
         return 1;
-    }
-
-    @Override
-    public void registerBlockIcons(IIconRegister par1IIconRegister) {
-        this.blockIcon = par1IIconRegister.registerIcon(Revival.MODID + ":" + textureName);
-    }
-
-    @Override
-    public int getRenderType() {
-        return this.renderType;
     }
 }

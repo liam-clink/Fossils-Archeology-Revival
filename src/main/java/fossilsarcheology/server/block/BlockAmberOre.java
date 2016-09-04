@@ -16,8 +16,8 @@ public class BlockAmberOre extends Block {
     public BlockAmberOre() {
         super(Material.ROCK);
         this.setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
-        setHardness(3.0F);
-        setUnlocalizedName(LocalizationStrings.AMBER_ORE_NAME);
+        this.setHardness(3.0F);
+        this.setUnlocalizedName(LocalizationStrings.AMBER_ORE_NAME);
     }
 
     @Override
@@ -46,7 +46,6 @@ public class BlockAmberOre extends Block {
     @Override
     public void dropBlockAsItemWithChance(World world, BlockPos pos, IBlockState state, float chance, int fortune) {
         super.dropBlockAsItemWithChance(world, pos, state, chance, fortune);
-
         if (this.getItemDropped(state, world.rand, fortune) != Item.getItemFromBlock(this)) {
             int amount = 0;
             if (this == FABlockRegistry.INSTANCE.amberOre) {

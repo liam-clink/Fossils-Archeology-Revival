@@ -1,22 +1,25 @@
 package fossilsarcheology.server.block;
 
-import fossilsarcheology.Revival;
 import fossilsarcheology.server.creativetab.FATabRegistry;
 import fossilsarcheology.server.enums.EnumDinoBones;
 import fossilsarcheology.server.handler.FossilAchievementHandler;
 import fossilsarcheology.server.handler.LocalizationStrings;
 import fossilsarcheology.server.item.FAItemRegistry;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockStone;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class BlockFossil extends BlockStone {
@@ -27,25 +30,20 @@ public class BlockFossil extends BlockStone {
         super();
         this.setHardness(3.0F);
         this.setResistance(5.0F);
-        this.setSoundType(Block.soundTypeStone);
+        this.setSoundType(SoundType.STONE);
         this.setUnlocalizedName(LocalizationStrings.BLOCK_FOSSIL_NAME);
         this.setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
         this.setHarvestLevel("pickaxe", 2);
-        randomMeta = 0;
+        this.randomMeta = 0;
     }
 
-    /**
-     * Returns the ID of the items to drop on destruction.
-     */
     @Override
-    public Item getItemDropped(int var1, Random var2, int var3) {
-        int i = (new Random()).nextInt(1100);
-
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+        int i = rand.nextInt(1100);
         if (i < 1) {
             this.randomMeta = 0;
             return FAItemRegistry.INSTANCE.gem;
         }
-
         if (i < 6) {
             this.randomMeta = 0;
             return FAItemRegistry.INSTANCE.brokenSword;
@@ -55,7 +53,6 @@ public class BlockFossil extends BlockStone {
             this.randomMeta = 0;
             return FAItemRegistry.INSTANCE.brokenhelmet;
         }
-
         if (i < 13) {
             int dropRandom = rand.nextInt(EnumDinoBones.values().length);
             if (dropRandom != 4) {
@@ -63,7 +60,6 @@ public class BlockFossil extends BlockStone {
             }
             return FAItemRegistry.INSTANCE.legBone;
         }
-
         if (i < 15) {
             int dropRandom = rand.nextInt(EnumDinoBones.values().length);
             if (dropRandom != 4) {
@@ -129,38 +125,34 @@ public class BlockFossil extends BlockStone {
 
         if (i < 900) {
             this.randomMeta = 0;
-            return Items.bone;
+            return Items.BONE;
         }
         if (i < 1200) {
             this.randomMeta = 0;
             return FAItemRegistry.INSTANCE.brokenSapling;
         }
+
         this.randomMeta = 0;
-        return Item.getItemFromBlock(Blocks.cobblestone);
+        return Item.getItemFromBlock(Blocks.COBBLESTONE);
     }
 
     @Override
-    public void harvestBlock(World world, EntityPlayer player, BlockPos pos, int i) {
-        super.harvestBlock(world, player, pos, i);
-        player.triggerAchievement(FossilAchievementHandler.firstFossil);
+    public void harvestBlock(World world, EntityPlayer player, BlockPos pos, IBlockState state, TileEntity tile, ItemStack stack) {
+        super.harvestBlock(world, player, pos, state, tile, stack);
+        player.addStat(FossilAchievementHandler.firstFossil);
     }
 
     @Override
-    public ArrayList<ItemStack> getDrops(World world, BlockPos pos, int metadata, int fortune) {
-        ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
-
-        int count = quantityDropped(metadata, fortune, world.rand);
+    public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
+        ArrayList<ItemStack> drops = new ArrayList<>();
+        Random random = new Random();
+        int count = quantityDropped(state, fortune, random);
         for (int i = 0; i < count; i++) {
-            Item item = getItemDropped(metadata, world.rand, fortune);
+            Item item = getItemDropped(state, random, fortune);
             if (item != null) {
-                ret.add(new ItemStack(item, 1, randomMeta));
+                drops.add(new ItemStack(item, 1, randomMeta));
             }
         }
-        return ret;
-    }
-
-    @Override
-    public void registerBlockIcons(IIconRegister par1IIconRegister) {
-        this.blockIcon = par1IIconRegister.registerIcon(Revival.MODID + ":" + "Fossil");
+        return drops;
     }
 }

@@ -167,24 +167,24 @@ public enum FABlockRegistry {
         vaseAmphoraBlock = new BlockVaseAmphora();
         vaseKylixBlock = new BlockVaseKylix();
         sarcophagus = new BlockSarcophagus();
-        dillhoffia = new BlockFossilPlant("plants/plant_dillhoffia", 1).setUnlocalizedName("plant_dillhoffia").setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
+        dillhoffia = new BlockFossilPlant("plants/plant_dillhoffia").setUnlocalizedName("plant_dillhoffia").setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
         sarracina = new BlockFossilTallPlant("plants/plant_sarracina").setUnlocalizedName("plant_sarracina").setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
-        cephalotaxus = new BlockFossilPlant("plants/plant_cephalotaxus", 1).setUnlocalizedName("plant_cephalotaxus").setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
-        licopodiophyta = new BlockFossilPlant("plants/plant_licopodiophyta", 1).setUnlocalizedName("plant_licopodiophyta").setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
+        cephalotaxus = new BlockFossilPlant("plants/plant_cephalotaxus").setUnlocalizedName("plant_cephalotaxus").setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
+        licopodiophyta = new BlockFossilPlant("plants/plant_licopodiophyta").setUnlocalizedName("plant_licopodiophyta").setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
         paleopanax = new BlockFossilTallPlant("plants/plant_paleopanax").setUnlocalizedName("plant_paleopanax").setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
-        zamites = new BlockFossilPlant("plants/plant_zamites", 1).setUnlocalizedName("plant_zamites").setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
-        bennettitales_small = new BlockFossilPlant("plants/plant_bennettitales_small", 1).setUnlocalizedName("plant_bennettitales_small").setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
+        zamites = new BlockFossilPlant("plants/plant_zamites").setUnlocalizedName("plant_zamites").setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
+        bennettitales_small = new BlockFossilPlant("plants/plant_bennettitales_small").setUnlocalizedName("plant_bennettitales_small").setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
         bennettitales_large = new BlockFossilTallPlant("plants/plant_bennettitales_large").setUnlocalizedName("plant_bennettitales_large").setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
-        welwitschia = new BlockFossilPlant("plants/plant_welwitschia", 1).setUnlocalizedName("plant_welwitschia").setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
-        horsetail_small = new BlockFossilPlant("plants/plant_horsetail_small", 1).setUnlocalizedName("plant_horsetail_small").setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
+        welwitschia = new BlockFossilPlant("plants/plant_welwitschia").setUnlocalizedName("plant_welwitschia").setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
+        horsetail_small = new BlockFossilPlant("plants/plant_horsetail_small").setUnlocalizedName("plant_horsetail_small").setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
         horsetail_large = new BlockFossilTallPlant("plants/plant_horsetail_large").setUnlocalizedName("plant_horsetail_large").setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
         mutantPlant = new BlockFossilTallPlant("plants/plant_mutant").setUnlocalizedName("plant_mutant").setLightLevel(0.4F).setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
-        vaccinium = new BlockFossilPlant("plants/plant_vaccinium", 1).setUnlocalizedName("plant_vaccinium").setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
+        vaccinium = new BlockFossilPlant("plants/plant_vaccinium").setUnlocalizedName("plant_vaccinium").setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
         tempskya = new BlockTempskya().setBlockTextureName("fossil:plants/plant_tempskya_1").setUnlocalizedName("plant_tempskya").setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
         crataegus = new BlockFossilTallPlant("plants/plant_crataegus").setUnlocalizedName("plant_crataegus").setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
-        osmunda = new BlockFossilPlant("plants/plant_osmunda", 1).setUnlocalizedName("plant_osmunda").setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
-        florissantia = new BlockFossilPlant("plants/plant_florissantia", 1).setUnlocalizedName("plant_florissantia").setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
-        ephedra = new BlockFossilPlant("plants/plant_ephedra", 1).setUnlocalizedName("plant_ephedra").setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
+        osmunda = new BlockFossilPlant("plants/plant_osmunda").setUnlocalizedName("plant_osmunda").setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
+        florissantia = new BlockFossilPlant("plants/plant_florissantia").setUnlocalizedName("plant_florissantia").setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
+        ephedra = new BlockFossilPlant("plants/plant_ephedra").setUnlocalizedName("plant_ephedra").setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
         try {
             for (Field field : FABlockRegistry.class.getDeclaredFields()) {
                 Object object = field.get(this);

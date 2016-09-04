@@ -8,9 +8,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ITickable;
 import net.minecraft.util.SoundCategory;
 
-public class TileEntityAncientChest extends TileEntity {
+public class TileEntityAncientChest extends TileEntity implements ITickable {
     public float lidAngle;
     public float prevLidAngle;
     public int numPlayersUsing;
@@ -106,7 +107,6 @@ public class TileEntityAncientChest extends TileEntity {
 
     @Override
     public void update() {
-        super.update();
         ++this.ticksSinceSync;
         float angleChange;
         if (this.chestState != 3) {
@@ -193,16 +193,6 @@ public class TileEntityAncientChest extends TileEntity {
     }
 
     public void closeInventory() {
-        /*
-         * if (this.getBlockType() instanceof BlockChest) {
-		 * --this.numPlayersUsing; this.worldObj.addBlockEvent(this.xCoord,
-		 * this.yCoord, this.zCoord, this.getBlockType(), 1,
-		 * this.numPlayersUsing);
-		 * this.worldObj.notifyBlocksOfNeighborChange(this.xCoord, this.yCoord,
-		 * this.zCoord, this.getBlockType());
-		 * this.worldObj.notifyBlocksOfNeighborChange(this.xCoord, this.yCoord -
-		 * 1, this.zCoord, this.getBlockType()); }
-		 */
     }
 
     /**

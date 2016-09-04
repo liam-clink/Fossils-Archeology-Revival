@@ -14,6 +14,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -61,28 +62,13 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
 
     @Override
     public ItemStack decrStackSize(int slot, int amount) {
-        if (this.slots[slot] != null) {
-            ItemStack stack;
-            if (this.slots[slot].stackSize <= amount) {
-                stack = this.slots[slot];
-                this.slots[slot] = null;
-                return stack;
-            } else {
-                stack = this.slots[slot].splitStack(amount);
-                if (this.slots[slot].stackSize == 0) {
-                    this.slots[slot] = null;
-                }
-                return stack;
-            }
-        } else {
-            return null;
-        }
+        return ItemStackHelper.getAndSplit(this.slots, slot, amount);
     }
 
     @Nullable
     @Override
     public ItemStack removeStackFromSlot(int index) {
-        return null;
+        return ItemStackHelper.getAndRemove(this.slots, index);
     }
 
     @Override

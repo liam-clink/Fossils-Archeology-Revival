@@ -83,4 +83,14 @@ public class BlockBubbleMachine extends Block {
     protected BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, FACING);
     }
+
+    @Override
+    public IBlockState getStateFromMeta(int meta) {
+        return this.getDefaultState().withProperty(FACING, EnumFacing.values()[meta]);
+    }
+
+    @Override
+    public int getMetaFromState(IBlockState state) {
+        return state.getValue(FACING).ordinal();
+    }
 }

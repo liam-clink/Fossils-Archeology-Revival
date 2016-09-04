@@ -3,21 +3,16 @@ package fossilsarcheology.server.block;
 import fossilsarcheology.server.creativetab.FATabRegistry;
 import fossilsarcheology.server.handler.LocalizationStrings;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
 
 public class BlockPalaePlanks extends Block {
     public BlockPalaePlanks() {
-        super(Material.wood);
-        setHardness(2.0F);
-        setResistance(5.0F);
-        setSoundType(Block.soundTypeWood);
-        setUnlocalizedName(LocalizationStrings.PALAE_PLANKS_NAME);
+        super(Material.WOOD);
+        this.setHardness(2.0F);
+        this.setResistance(5.0F);
+        this.setSoundType(SoundType.WOOD);
+        this.setUnlocalizedName(LocalizationStrings.PALAE_PLANKS_NAME);
         this.setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
-    }
-
-    @Override
-    public void registerBlockIcons(IIconRegister par1IconRegister) {
-        this.blockIcon = par1IconRegister.registerIcon("fossil:Palae_Planks");
     }
 }

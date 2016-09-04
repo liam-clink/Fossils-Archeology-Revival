@@ -5,113 +5,95 @@ import fossilsarcheology.server.creativetab.FATabRegistry;
 import fossilsarcheology.server.handler.FossilAchievementHandler;
 import fossilsarcheology.server.item.FAItemRegistry;
 import net.minecraft.block.BlockContainer;
+import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.properties.PropertyDirection;
+import net.minecraft.block.state.BlockStateContainer;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockSarcophagus extends BlockContainer {
+    private static final AxisAlignedBB BOUNDS = new AxisAlignedBB(0.0F, 0.0F, 0.0F, 1.0F, 1.9F, 1.0F);
+    private static final PropertyDirection FACING = BlockHorizontal.FACING;
 
     public BlockSarcophagus() {
-        super(Material.rock);
-        this.setBlockBounds(0F, 0.0F, 0F, 1F, 1.9F, 1);
+        super(Material.ROCK);
         this.setCreativeTab(FATabRegistry.INSTANCE.BLOCKS);
         this.setTickRandomly(true);
         this.setBlockUnbreakable();
         this.setResistance(60000000.0F);
-        setUnlocalizedName("sarcophagus");
-
-    }
-
-    @SideOnly(Side.CLIENT)
-    @Override
-    public void registerBlockIcons(IIconRegister iconregister) {
-        this.blockIcon = iconregister.registerIcon("fossil:sarcophagus");
+        this.setUnlocalizedName("sarcophagus");
     }
 
     @Override
-    public void onBlockPlacedBy(World world, BlockPos pos, EntityLivingBase entity, ItemStack stack) {
-        byte b0 = 0;
-        int l = MathHelper.floor_double((double) (entity.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
-
-        if (l == 0) {
-            b0 = 2;
-        }
-
-        if (l == 1) {
-            b0 = 5;
-        }
-
-        if (l == 2) {
-            b0 = 3;
-        }
-
-        if (l == 3) {
-            b0 = 4;
-        }
-
-        world.setBlockMetadataWithNotify(pos, b0, 2);
-
-        world.markBlockForUpdate(pos);
-
-        super.onBlockPlacedBy(world, pos, entity, stack);
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+        return BOUNDS;
     }
 
     @Override
-    public int getRenderType() {
-        return -91;
+    public IBlockState onBlockPlaced(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase entity) {
+        return super.onBlockPlaced(world, pos, facing, hitX, hitY, hitZ, meta, entity).withProperty(FACING, EnumFacing.fromAngle(entity.rotationYaw));
     }
 
     @Override
-    public boolean onBlockActivated(World world, BlockPos pos, EntityPlayer player, int i, float f, float f1, float f2) {
-        TileEntitySarcophagus chest = (TileEntitySarcophagus) world.getTileEntity(pos);
-        if (chest.chestState == 0) {
-            if (player.getHeldItem() != null) {
-                if (player.getHeldItem().getItem() != null) {
-                    if (player.getHeldItem().getItem() == FAItemRegistry.INSTANCE.gem) {
-                        chest.setChestState(1);
-                        world.markBlockForUpdate(pos);
-                        player.addStat(FossilAchievementHandler.anuAttack, 1);
-
-                        if (!player.capabilities.isCreativeMode) {
-                            --player.getHeldItem().stackSize;
-                        }
-
-                        if (player.getHeldItem().stackSize <= 0) {
-                            player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
-                        }
-
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
+        TileEntitySarcophagus tile = (TileEntitySarcophagus) world.getTileEntity(pos);
+        if (tile.chestState == 0) {
+            if (heldItem != null) {
+                if (heldItem.getItem() == FAItemRegistry.INSTANCE.gem) {
+                    tile.setChestState(1);
+                    world.markChunkDirty(pos, tile);
+                    player.addStat(FossilAchievementHandler.anuAttack, 1);
+                    if (!player.capabilities.isCreativeMode) {
+                        --heldItem.stackSize;
+                    }
+                    if (heldItem.stackSize <= 0) {
+                        player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
                     }
                 }
             }
-        } else if (chest.chestState == 1) {
-            chest.setChestState(2);
-            world.markBlockForUpdate(pos);
-            chest.chestLidCounter = 1;
-            world.playSoundEffect(x, (double) y + 0.5D, z, "random.chestopen", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
-
+        } else if (tile.chestState == 1) {
+            tile.setChestState(2);
+            world.markChunkDirty(pos, tile);
+            tile.chestLidCounter = 1;
+            world.playSound(pos.getX(), pos.getY() + 0.5D, pos.getZ(), SoundEvents.BLOCK_CHEST_OPEN, SoundCategory.BLOCKS, 0.5F, world.rand.nextFloat() * 0.1F + 0.9F, false);
         }
         return true;
     }
 
     @Override
-    public boolean isOpaqueCube() {
+    protected BlockStateContainer createBlockState() {
+        return new BlockStateContainer(this, FACING);
+    }
+
+    @Override
+    public boolean isOpaqueCube(IBlockState state) {
         return false;
     }
 
     @Override
-    public boolean renderAsNormalBlock() {
-        return false;
-    }
-
-    @Override
-    public TileEntity createNewTileEntity(World world, int i) {
+    public TileEntity createNewTileEntity(World world, int meta) {
         return new TileEntitySarcophagus();
+    }
+
+    @Override
+    public IBlockState getStateFromMeta(int meta) {
+        return this.getDefaultState().withProperty(FACING, EnumFacing.values()[meta]);
+    }
+
+    @Override
+    public int getMetaFromState(IBlockState state) {
+        return state.getValue(FACING).ordinal();
     }
 }
