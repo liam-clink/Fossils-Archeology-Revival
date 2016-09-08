@@ -9,6 +9,7 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
@@ -35,8 +36,8 @@ public class EntityStoneboard extends Entity implements IEntityAdditionalSpawnDa
         this.setSize(0.5F, 0.5F);
     }
 
-    public EntityStoneboard(World var1, int var2, int var3, int var4, int var5) {
-        this(var1);
+    public EntityStoneboard(World world, BlockPos pos, int var5) {
+        this(world);
         this.xPosition = var2;
         this.yPosition = var3;
         this.zPosition = var4;

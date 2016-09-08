@@ -71,7 +71,6 @@ import java.util.List;
 import java.util.Random;
 
 public abstract class EntityPrehistoric extends EntityTameable implements IPrehistoricAI, IAnimatedEntity {
-
     public Animation SPEAK_ANIMATION;
     public Animation ATTACK_ANIMATION;
     public float minSize;
@@ -200,10 +199,10 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.30000001192092896D);
-        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(20);
-        this.getAttributeMap().registerAttribute(SharedMonsterAttributes.attackDamage);
-        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(1D);
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.30000001192092896D);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20);
+        this.getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1D);
     }
 
     @Override
@@ -224,10 +223,10 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
         this.ticksTillPlay = compound.getInteger("TicksSincePlay");
         this.ticksTillMate = compound.getInteger("TicksSinceMate");
         this.currentOrder = OrderType.values()[compound.getByte("Order")];
-        String s = "";
+        String owner;
         if (compound.hasKey("Owner", 8)) {
-            s = compound.getString("Owner");
-            this.setOwnerDisplayName(s);
+            owner = compound.getString("Owner");
+            this.setOwnerDisplayName(owner);
         } else {
             this.setOwnerDisplayName(compound.getString("OwnerDisplayName"));
         }

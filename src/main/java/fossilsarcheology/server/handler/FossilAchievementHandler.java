@@ -74,13 +74,13 @@ public class FossilAchievementHandler {
         scarabTools = new Achievement("achievement.scarabTools", "scarabTools", 0, 4, new ItemStack(FAItemRegistry.INSTANCE.gemSword), scarab).registerStat();
         blueScarab = new Achievement("achievement.blueScarab", "blueScarab", -2, 2, new ItemStack(FAItemRegistry.INSTANCE.gem_blue), scarab).registerStat();
         key = new Achievement("achievement.key", "key", 2, 7, new ItemStack(FAItemRegistry.INSTANCE.ancientKey), anuDead).registerStat();
-        wtf = new Achievement("achievement.inTreasure", "inTreasure", 4, 7, new ItemStack(Blocks.stonebrick), key).registerStat();
+        wtf = new Achievement("achievement.inTreasure", "inTreasure", 4, 7, new ItemStack(Blocks.STONEBRICK), key).registerStat();
         clock = new Achievement("achievement.clock", "clock", 6, 7, new ItemStack(FAItemRegistry.INSTANCE.ancientClock), wtf).registerStat();
         firstDino = new Achievement("achievement.firstDino", "firstDino", 6, -4, new ItemStack(FAItemRegistry.INSTANCE.skull, 1, 0), dinoEgg).registerStat().setSpecial();
         theKing = new Achievement("achievement.theKing", "theKing", 8, -5, new ItemStack(FAItemRegistry.INSTANCE.skull, 1, 2), firstDino).registerStat().setSpecial();
-        usurper = new Achievement("achievement.usurper", "usurper", 8, -3, new ItemStack(FAItemRegistry.INSTANCE.skull, 1, EnumDinoBones.Spinosaurus.ordinal()), (Achievement) firstDino).registerStat().setSpecial();
+        usurper = new Achievement("achievement.usurper", "usurper", 8, -3, new ItemStack(FAItemRegistry.INSTANCE.skull, 1, EnumDinoBones.Spinosaurus.ordinal()), firstDino).registerStat().setSpecial();
         squire = new Achievement("achievement.squire", "squire", 7, -1, new ItemStack(FAItemRegistry.INSTANCE.skull, 1, 17), firstDino).registerStat();
-        shear = new Achievement("achievement.shear", "shear", 6, -6, new ItemStack(Blocks.wool, 1, 12), mammalEmbryo).registerStat();
+        shear = new Achievement("achievement.shear", "shear", 6, -6, new ItemStack(Blocks.WOOL, 1, 12), mammalEmbryo).registerStat();
         deadDodo = new Achievement("achievement.deadDodo", "deadDodo", 4, 0, new ItemStack(FAItemRegistry.INSTANCE.skull, 1, EnumDinoBones.Dodo.ordinal()), birdEgg).registerStat();
         trexKill = new Achievement("achievement.trexKill", "trexKill", 8, -7, new ItemStack(FAItemRegistry.INSTANCE.toothDagger), theKing).registerStat();
         AchievementPage.registerAchievementPage(new AchievementPage("Fossils and Archeology", firstFossil, analyzer, tablet, dinoDna, cultivate, dinoEgg, mammalEmbryo, birdEgg, sifter, fossilSeeds, failuresaurus, failuresaurusAnalyzer, findAnuTotem, anuPortal, anubiteEncounter, anuAttack, anuDead, arcWorkbench, fixedSword, fixedHelmet, fixedVase, dinopedia, scarab, scarabTools, blueScarab, key, wtf, clock, firstDino, theKing, usurper, squire, shear, deadDodo, trexKill));

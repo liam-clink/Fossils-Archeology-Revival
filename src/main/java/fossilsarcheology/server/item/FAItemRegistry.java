@@ -146,9 +146,9 @@ public enum FAItemRegistry {
         brokenSapling = new Item().setUnlocalizedName(LocalizationStrings.BROKEN_SAPLING_NAME).setCreativeTab(FATabRegistry.INSTANCE.ITEMS);
         failuresaurusFlesh = new Item().setUnlocalizedName(LocalizationStrings.FAILURESAURUS_FLESH_NAME).setCreativeTab(FATabRegistry.INSTANCE.ITEMS);
         potteryShards = new Item().setUnlocalizedName(LocalizationStrings.POTTERY_SHARDS).setCreativeTab(FATabRegistry.INSTANCE.ITEMS);
-        skullHelmet = new SkullHelmetItem(bone, 3, 0).setUnlocalizedName(LocalizationStrings.SKULL_HELMET_NAME).setCreativeTab(FATabRegistry.INSTANCE.ITEMS);
-        ribCage = new RibCageItem(bone, 3, 1).setUnlocalizedName(LocalizationStrings.RIBCAGE_NAME).setCreativeTab(FATabRegistry.INSTANCE.ITEMS);
-        femurs = new FemursItem(bone, 3, 2).setUnlocalizedName(LocalizationStrings.FEMURS_NAME).setCreativeTab(FATabRegistry.INSTANCE.ITEMS);
+        skullHelmet = new SkullHelmetItem(bone, 3, EntityEquipmentSlot.HEAD).setUnlocalizedName(LocalizationStrings.SKULL_HELMET_NAME).setCreativeTab(FATabRegistry.INSTANCE.ITEMS);
+        ribCage = new RibCageItem(bone, 3, EntityEquipmentSlot.CHEST).setUnlocalizedName(LocalizationStrings.RIBCAGE_NAME).setCreativeTab(FATabRegistry.INSTANCE.ITEMS);
+        femurs = new FemursItem(bone, 3, EntityEquipmentSlot.LEGS).setUnlocalizedName(LocalizationStrings.FEMURS_NAME).setCreativeTab(FATabRegistry.INSTANCE.ITEMS);
         feet = new FeetItem(bone, 3, EntityEquipmentSlot.FEET).setUnlocalizedName(LocalizationStrings.FEET_NAME).setCreativeTab(FATabRegistry.INSTANCE.ITEMS);
         cookedChickenSoup = new Item().setUnlocalizedName(LocalizationStrings.COOKED_CHICKEN_SOUP_NAME).setMaxStackSize(1).setContainerItem(Items.BUCKET).setCreativeTab(FATabRegistry.INSTANCE.ITEMS);
         rawChickenSoup = new Item().setUnlocalizedName(LocalizationStrings.RAW_CHICKEN_SOUP_NAME).setMaxStackSize(1).setContainerItem(Items.BUCKET).setCreativeTab(FATabRegistry.INSTANCE.ITEMS);

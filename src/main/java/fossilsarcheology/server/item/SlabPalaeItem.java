@@ -6,8 +6,7 @@ import net.minecraft.block.BlockSlab;
 import net.minecraft.item.ItemSlab;
 
 public class SlabPalaeItem extends ItemSlab {
-
     public SlabPalaeItem(Block block) {
-        super(block, (BlockSlab) FABlockRegistry.INSTANCE.palaeSingleSlab, (BlockSlab) FABlockRegistry.INSTANCE.palaeDoubleSlab, false);
+        super(block, (BlockSlab) FABlockRegistry.INSTANCE.palaeSingleSlab, (BlockSlab) FABlockRegistry.INSTANCE.palaeDoubleSlab);
     }
 }

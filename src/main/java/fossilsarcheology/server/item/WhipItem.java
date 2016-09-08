@@ -1,10 +1,12 @@
 package fossilsarcheology.server.item;
 
 import fossilsarcheology.server.entity.EntityPrehistoric;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemCarrotOnAStick;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -18,49 +20,26 @@ public class WhipItem extends ItemCarrotOnAStick {
 
     @Override
     @SideOnly(Side.CLIENT)
-    /**
-     * Returns True is the item is renderer in full 3D when hold.
-     */
     public boolean isFull3D() {
         return true;
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    /**
-     * Returns true if this item should be rotated by 180 degrees around the Y axis when being held in an entities
-     * hands.
-     */
     public boolean shouldRotateAroundWhenRendering() {
         return true;
     }
 
-    /**
-     * Called whenever this item is equipped and the right mouse button is
-     * pressed. Args: itemStack, world, entityPlayer
-     */
     @Override
-    public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer player) {
-        if (player.isRiding() && player.ridingEntity instanceof EntityPrehistoric) {
-            EntityPrehistoric dinosaur = (EntityPrehistoric) player.ridingEntity;
-            // dinosaur.onWhipRightClick();
-            itemstack.damageItem(1, player);
-            player.swingItem();
-            player.ridingEntity.playSound("fossil:whip", 1.0F, 1.0F);
+    public ActionResult<ItemStack> onItemRightClick(ItemStack stack, World world, EntityPlayer player, EnumHand hand) {
+        if (player.isRiding() && player.getRidingEntity() instanceof EntityPrehistoric) {
+            stack.damageItem(1, player);
+            player.swingArm(hand);
+            player.getRidingEntity().playSound("fossil:whip", 1.0F, 1.0F);
         } else {
-            /*
-             * if (!W.isRemote) { W.spawnEntityInWorld(new
-			 * EntityWhipAttachment(W, P)); }
-			 */
-            player.swingItem();
-            world.playSoundAtEntity(player, "fossil:whip", 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 0.8F));
+            player.swingArm(hand);
+            player.playSound("fossil:whip", 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 0.8F));
         }
-
-        return itemstack;
-    }
-
-    @Override
-    public void registerIcons(IIconRegister iconRegister) {
-        this.itemIcon = iconRegister.registerIcon("fossil:Whip");
+        return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
     }
 }

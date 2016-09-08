@@ -14,6 +14,7 @@ import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 
 import java.util.Random;
@@ -25,13 +26,12 @@ public class MammalEmbryoItem extends Item {
     public MammalEmbryoItem(PrehistoricEntityType type) {
         super();
         this.setMaxDamage(0);
-        this.maxStackSize = 64;
         this.type = type;
         this.rand = new Random();
     }
 
     @Override
-    public boolean itemInteractionForEntity(ItemStack itemstack, EntityPlayer player, EntityLivingBase entity) {
+    public boolean itemInteractionForEntity(ItemStack stack, EntityPlayer player, EntityLivingBase entity, EnumHand hand) {
         if (entity instanceof EntityAnimal && ((EntityAnimal) entity).getGrowingAge() == 0) {
             if (entity instanceof EntityPig) {
                 EntityPregnantPig props = EntityPregnantPig.get(((EntityPig) entity));
@@ -41,7 +41,7 @@ public class MammalEmbryoItem extends Item {
                 if (type != null) {
                     props.setEmbryo(type);
                     if (!player.capabilities.isCreativeMode) {
-                        itemstack.stackSize--;
+                        stack.stackSize--;
                     }
                 } else {
                     return false;
@@ -54,7 +54,7 @@ public class MammalEmbryoItem extends Item {
                 if (type != null) {
                     props.setEmbryo(type);
                     if (!player.capabilities.isCreativeMode) {
-                        itemstack.stackSize--;
+                        stack.stackSize--;
                     }
                 } else {
                     return false;
@@ -67,7 +67,7 @@ public class MammalEmbryoItem extends Item {
                 if (type != null) {
                     props.setEmbryo(type);
                     if (!player.capabilities.isCreativeMode) {
-                        itemstack.stackSize--;
+                        stack.stackSize--;
                     }
                 } else {
                     return false;
@@ -81,21 +81,17 @@ public class MammalEmbryoItem extends Item {
                 if (type != null) {
                     props.setEmbryo(type);
                     if (!player.capabilities.isCreativeMode) {
-                        itemstack.stackSize--;
+                        stack.stackSize--;
                     }
                 } else {
                     return false;
                 }
             }
-
             for (int i = 0; i < 7; i++) {
                 entity.worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, entity.posX + this.rand.nextFloat() * entity.width * 2.0F - entity.width, entity.posY + 0.5D + (this.rand.nextFloat() * entity.height), entity.posZ + (this.rand.nextFloat() * entity.width * 2.0F) - entity.width, this.rand.nextGaussian() * 0.02D, this.rand.nextGaussian() * 0.02D, this.rand.nextGaussian() * 0.02D);
             }
-
             return true;
         }
-
         return false;
     }
-
 }
