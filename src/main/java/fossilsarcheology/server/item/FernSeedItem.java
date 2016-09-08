@@ -35,7 +35,7 @@ public class FernSeedItem extends Item {
         } else {
             Block var11 = var3.getBlock(var4, var5, var6);
 
-            if (var11 == Blocks.grass && var3.isAirBlock(var4, var5 + 1, var6) && BlockFern.CheckUnderTree(var3, var4, var5, var6)) {
+            if (var11 == Blocks.grass && var3.isAirBlock(var4, var5 + 1, var6) && BlockFern.checkUnderTree(var3, var4, var5, var6)) {
                 var3.setBlock(var4, var5 + 1, var6, this.matchingBlockID);
                 var3.setBlockMetadataWithNotify(var4, var5 + 1, var6, (new Random()).nextInt(2) * 8, 2);
                 --var1.stackSize;

@@ -6,46 +6,52 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ColorizerGrass;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Random;
 
 public class BlockFern extends BlockBush {
+    private static final AxisAlignedBB BOUNDS = new AxisAlignedBB(0.0F, 0.0F, 0.0F, 1.0F, 0.25F, 1.0F);
+
     public BlockFern() {
         super(Material.PLANTS);
         this.setTickRandomly(true);
-        float var3 = 0.5F;
-        this.setBlockBounds(0.5F - var3, 0.0F, 0.5F - var3, 0.5F + var3, 0.25F, 0.5F + var3);
         this.disableStats();
         this.setUnlocalizedName(LocalizationStrings.FERN_BLOCK_NAME);
         this.setHardness(0.0F);
         this.setSoundType(SoundType.PLANT);
-
-        // this.setCreativeTab(Revival.BLOCKS);
-        // this.setRequiresSelfNotify();
     }
 
-    public static boolean CheckUnderTree(World var0, int var1, int var2, int var3) {
-        for (int var4 = var2; var4 <= 128; ++var4) {
-            if (var0.getBlock(var1, var4, var3).getMaterial() == Material.leaves) {
+    public static boolean checkUnderTree(World world, BlockPos pos) {
+        for (int y = pos.getY(); y <= 128; ++y) {
+            if (world.getBlockState(pos.up(y)).getMaterial() == Material.LEAVES) {
                 return true;
             }
         }
-
         return false;
     }
 
     @Override
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+        return BOUNDS;
+    }
+
+    @Override
     protected boolean canPlaceBlockOn(Block block) {
-        return block == Blocks.grass;
+        return block == Blocks.GRASS;
     }
 
     @Override
@@ -53,7 +59,7 @@ public class BlockFern extends BlockBush {
         super.updateTick(var1, var2, var3, var4, var5);
         int var6 = var1.getBlockMetadata(var2, var3, var4);
 
-        if (CheckUnderTree(var1, var2, var3, var4) && this.Cangrow(var6)) {
+        if (checkUnderTree(var1, var2, var3, var4) && this.Cangrow(var6)) {
             // only the low ones grow and update the upper ones!
             if (var5.nextInt(10) > 1) {
                 ++var6;// let it grow
@@ -106,7 +112,7 @@ public class BlockFern extends BlockBush {
             for (int var8 = -1; var8 <= 1; ++var8) {
                 for (int var9 = -1; var9 <= 1; ++var9) {
                     for (int var10 = -1; var10 <= 1; ++var10) {
-                        if ((var8 != 0 || var10 != 0 || var9 != 0) && var1.getBlock(var2 + var8, var9 + var3 - 1, var4 + var10) == Blocks.grass && (var1.isAirBlock(var2 + var8, var9 + var3, var4 + var10) || var1.getBlock(var2 + var8, var9 + var3, var4 + var10) == Blocks.tallgrass) && CheckUnderTree(var1, var2 + var8, var9 + var3, var4 + var10) && (new Random()).nextInt(10) <= 9) {
+                        if ((var8 != 0 || var10 != 0 || var9 != 0) && var1.getBlock(var2 + var8, var9 + var3 - 1, var4 + var10) == Blocks.grass && (var1.isAirBlock(var2 + var8, var9 + var3, var4 + var10) || var1.getBlock(var2 + var8, var9 + var3, var4 + var10) == Blocks.tallgrass) && checkUnderTree(var1, var2 + var8, var9 + var3, var4 + var10) && (new Random()).nextInt(10) <= 9) {
                             var1.setBlock(var2 + var8, var9 + var3, var4 + var10, FABlockRegistry.INSTANCE.ferns);
                             var1.setBlockMetadataWithNotify(var2 + var8, var9 + var3, var4 + var10, 8 * this.CheckSubType(var6), 2);
                         }
@@ -163,31 +169,11 @@ public class BlockFern extends BlockBush {
         return var5;
     }
 
-    /**
-     * From the specified side and block metadata retrieves the blocks texture.
-     * Args: side, metadata
-     */
-    @Override
-    public IIcon getIcon(int var1, int var2) {
-        if (var2 < 0 || var2 >= fernPics.length) {
-            var2 = 0;
-        }
-
-        return fernPics[var2];
-    }
-
-    /**
-     * Drops the block items with a specified chance of dropping the specified
-     * items
-     */
     @Override
     public void dropBlockAsItemWithChance(World var1, int var2, int var3, int var4, int var5, float var6, int var7) {
         super.dropBlockAsItemWithChance(var1, var2, var3, var4, var5, var6, var7);
     }
 
-    /**
-     * Returns the ID of the items to drop on destruction.
-     */
     @Override
     public Item getItemDropped(int var1, Random var2, int var3) {
         if (var2.nextInt(4) == 0) {
@@ -216,7 +202,7 @@ public class BlockFern extends BlockBush {
             return var1.getBlock(var2, var3 - 1, var4) == FABlockRegistry.INSTANCE.ferns; // fernblock
             // below
         } else {
-            var5 = var1.getBlock(var2, var3 - 1, var4) == Blocks.grass && CheckUnderTree(var1, var2, var3, var4);// on
+            var5 = var1.getBlock(var2, var3 - 1, var4) == Blocks.grass && checkUnderTree(var1, var2, var3, var4);// on
             // grass,
             // under
             // tree

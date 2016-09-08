@@ -21,8 +21,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class BlockAnuStatue extends BlockContainer implements IBlockItem {
+    public static final PropertyDirection FACING = BlockHorizontal.FACING;
     private static final AxisAlignedBB BOUNDS = new AxisAlignedBB(0.0F, 0.0F, 0.0F, 1.0F, 1.9F, 1.0F);
-    private static final PropertyDirection FACING = BlockHorizontal.FACING;
 
     public BlockAnuStatue() {
         super(Material.ROCK);

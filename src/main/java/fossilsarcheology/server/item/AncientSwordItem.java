@@ -2,7 +2,6 @@ package fossilsarcheology.server.item;
 
 import fossilsarcheology.server.entity.EntityAnuLightning;
 import fossilsarcheology.server.entity.mob.EntityFriendlyPigZombie;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.monster.EntityPigZombie;
@@ -10,8 +9,6 @@ import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
-
-import java.util.Random;
 
 public class AncientSwordItem extends ItemSword {
     public AncientSwordItem(ToolMaterial var2) {
@@ -24,56 +21,39 @@ public class AncientSwordItem extends ItemSword {
         this(ToolMaterial.IRON);
     }
 
-    /**
-     * Current implementations of this method in child classes do not use the
-     * entry argument beside ev. They just raise the damage on the stack.
-     */
     @Override
-    public boolean hitEntity(ItemStack par1ItemStack, EntityLivingBase targetentity, EntityLivingBase player) {
-        if (player instanceof EntityPlayer) {
-            if (player != null && this.checkHelmet((EntityPlayer) player)) {
-                if (targetentity != null && (targetentity instanceof EntityPig || targetentity instanceof EntityPigZombie)) {
-
-                    if (!targetentity.worldObj.isRemote) {
-                        EntityFriendlyPigZombie fpz = new EntityFriendlyPigZombie(targetentity.worldObj);
-                        fpz.setLocationAndAngles(targetentity.posX, targetentity.posY, targetentity.posZ, targetentity.rotationYaw, targetentity.rotationPitch);
-                        targetentity.worldObj.spawnEntityInWorld(fpz);
-                        if (player instanceof EntityPlayer) {
-                            EntityPlayer playerUUID = (EntityPlayer) player;
-                            fpz.func_152115_b(playerUUID.getUniqueID().toString());
-                            fpz.sendMessageToOwner("pigman.summon");
-                        }
-                        System.out.println(fpz.getOwner());
-                        fpz.setTamed(true);
-                        targetentity.worldObj.spawnEntityInWorld(fpz);
-                        targetentity.setDead();
-                        targetentity.worldObj.spawnEntityInWorld(new EntityLightningBolt(targetentity.worldObj, targetentity.posX, targetentity.posY, targetentity.posZ));
+    public boolean hitEntity(ItemStack stack, EntityLivingBase attacked, EntityLivingBase attacker) {
+        if (attacker instanceof EntityPlayer) {
+            EntityPlayer player = (EntityPlayer) attacker;
+            if (this.checkHelmet(player)) {
+                if (attacked != null && (attacked instanceof EntityPig || attacked instanceof EntityPigZombie)) {
+                    if (!attacked.worldObj.isRemote) {
+                        EntityFriendlyPigZombie friendlyPigZombie = new EntityFriendlyPigZombie(attacked.worldObj);
+                        friendlyPigZombie.setLocationAndAngles(attacked.posX, attacked.posY, attacked.posZ, attacked.rotationYaw, attacked.rotationPitch);
+                        attacked.worldObj.spawnEntityInWorld(friendlyPigZombie);
+                        friendlyPigZombie.setOwnerId(player.getUniqueID());
+                        friendlyPigZombie.sendMessageToOwner("pigman.summon");
+                        friendlyPigZombie.setTamed(true);
+                        attacked.worldObj.spawnEntityInWorld(friendlyPigZombie);
+                        attacked.setDead();
+                        attacked.worldObj.spawnEntityInWorld(new EntityLightningBolt(attacked.worldObj, attacked.posX, attacked.posY, attacked.posZ, false));
                     }
-                } else {
-                    if (targetentity != null && (new Random()).nextInt(5) == 0) {
-                        targetentity.worldObj.addWeatherEffect(new EntityAnuLightning(targetentity.worldObj, targetentity.posX, targetentity.posY, targetentity.posZ));
-                    }
-
+                } else if (attacked != null && attacked.worldObj.rand.nextInt(5) == 0) {
+                    attacked.worldObj.addWeatherEffect(new EntityAnuLightning(attacked.worldObj, attacked.posX, attacked.posY, attacked.posZ));
                 }
             }
-
-            par1ItemStack.damageItem(1, player);
+            stack.damageItem(1, attacker);
         }
         return true;
     }
 
     private boolean checkHelmet(EntityPlayer player) {
         ItemStack item = player.inventory.armorInventory[3];
-        if (item != null && item.getItem() != null) {
+        if (item != null) {
             if (item.getItem() == FAItemRegistry.INSTANCE.ancienthelmet) {
                 return true;
             }
         }
         return false;
-    }
-
-    @Override
-    public void registerIcons(IIconRegister iconRegister) {
-        itemIcon = iconRegister.registerIcon("fossil:Ancient_Sword");
     }
 }

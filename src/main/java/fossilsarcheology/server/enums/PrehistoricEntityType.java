@@ -560,7 +560,7 @@ public enum PrehistoricEntityType {
         }
     }
 
-    public Class getEntity() {
+    public Class<? extends Entity> getEntity() {
         return this.entity;
     }
 

@@ -6,17 +6,18 @@ import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.enums.PrehistoricAI;
 import fossilsarcheology.server.enums.PrehistoricEntityType;
 import fossilsarcheology.server.message.MessageUpdateEgg;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class DinoEggItem extends Item {
-    public static final int TypeCount = PrehistoricEntityType.values().length;
+    public static final int TYPE_COUNT = PrehistoricEntityType.values().length;
     private PrehistoricEntityType dino;
 
     public DinoEggItem(PrehistoricEntityType dino) {
@@ -27,50 +28,45 @@ public class DinoEggItem extends Item {
         this.dino = dino;
     }
 
-    public static boolean spawnCreature(World world, PrehistoricEntityType prehistoricEnum, double x, double y, double z) {
-        Object egg;
-        if (!prehistoricEnum.isAquatic()) {
-            egg = new EntityDinosaurEgg(world, prehistoricEnum);
-            ((Entity) egg).setLocationAndAngles(x, y + 1.0F, z, world.rand.nextFloat() * 360.0F, 0.0F);
+    @Override
+    public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        boolean success = this.spawnEgg(world, dino, pos.getX() + 0.5F, pos.getY(), pos.getZ() + 0.5F);
+        if (success && !player.capabilities.isCreativeMode) {
+            --stack.stackSize;
+        }
+        return success ? EnumActionResult.SUCCESS : EnumActionResult.FAIL;
+    }
+
+    private boolean spawnEgg(World world, PrehistoricEntityType type, double x, double y, double z) {
+        Entity egg;
+        if (!type.isAquatic()) {
+            egg = new EntityDinosaurEgg(world, type);
+            egg.setLocationAndAngles(x, y + 1.0F, z, world.rand.nextFloat() * 360.0F, 0.0F);
             if (!world.isRemote) {
-                world.spawnEntityInWorld((Entity) egg);
+                world.spawnEntityInWorld(egg);
             }
-            ((EntityDinosaurEgg) egg).selfType = prehistoricEnum;
-            if (!world.isRemote)
-                Revival.NETWORK_WRAPPER.sendToAll(new MessageUpdateEgg(((EntityDinosaurEgg) egg).getEntityId(), prehistoricEnum.ordinal()));
+            ((EntityDinosaurEgg) egg).selfType = type;
+            if (!world.isRemote) {
+                Revival.NETWORK_WRAPPER.sendToAll(new MessageUpdateEgg(egg.getEntityId(), type.ordinal()));
+            }
             return true;
         } else {
-            egg = prehistoricEnum.invokeClass(world);
+            egg = type.invokeClass(world);
             if (egg != null) {
-                ((Entity) egg).setLocationAndAngles(x, y + 1, z, world.rand.nextFloat() * 360.0F, 0.0F);
+                egg.setLocationAndAngles(x, y + 1, z, world.rand.nextFloat() * 360.0F, 0.0F);
                 if (!world.isRemote) {
-                    world.spawnEntityInWorld((Entity) egg);
+                    world.spawnEntityInWorld(egg);
                 }
                 if (egg instanceof EntityPrehistoric) {
                     EntityPrehistoric prehistoric = (EntityPrehistoric) egg;
                     if (prehistoric.getTameType() == PrehistoricAI.Taming.IMPRINTING) {
                         prehistoric.setTamed(true);
                         prehistoric.setAgeInDays(1);
-                        prehistoric.setOwnerName(world.getClosestPlayerToEntity(prehistoric, 10).getDisplayName());
+                        prehistoric.setOwnerName(world.getClosestPlayerToEntity(prehistoric, 10).getName());
                     }
                 }
             }
         }
         return egg != null;
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void registerIcons(IIconRegister iicon) {
-        this.itemIcon = iicon.registerIcon("fossil:prehistoric/dinoEggs/" + dino.name() + "_Egg");
-    }
-
-    @Override
-    public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, int i, float f, float f1, float f2) {
-        boolean b = spawnCreature(world, dino, (double) ((float) x + 0.5F), (double) ((float) y), (double) ((float) z + 0.5F));
-        if (b && !player.capabilities.isCreativeMode) {
-            --stack.stackSize;
-        }
-        return b;
     }
 }

@@ -4,27 +4,27 @@ import fossilsarcheology.server.entity.toy.EntityToyScratchingPost;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class ItemToyScratchingPost extends Item {
-
-    public ItemToyScratchingPost() {
-        super();
-        this.setTextureName("dye_powder_gray");
-    }
-
     @Override
-    public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, int side, float hitX, float hitY, float hitZ) {
-        if (side == 1 && world.isAirBlock(x, y + 1, z) && world.isAirBlock(x, y + 2, z)) {
+    public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        if (facing == EnumFacing.UP && world.isAirBlock(pos.up()) && world.isAirBlock(pos.up(2))) {
             EntityToyScratchingPost ball = new EntityToyScratchingPost(world);
-            ball.setLocationAndAngles(x + 0.5, y + 1, z + 0.5, 0, 0);
-            if (!world.isRemote)
+            ball.setLocationAndAngles(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, 0, 0);
+            if (!world.isRemote) {
                 world.spawnEntityInWorld(ball);
+            }
             ball.rotationYaw = player.rotationYawHead;
-            if (!player.capabilities.isCreativeMode)
+            if (!player.capabilities.isCreativeMode) {
                 --stack.stackSize;
-            return true;
+            }
+            return EnumActionResult.SUCCESS;
         }
-        return false;
+        return EnumActionResult.PASS;
     }
 }
