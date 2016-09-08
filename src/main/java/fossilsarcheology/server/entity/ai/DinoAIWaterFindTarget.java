@@ -1,7 +1,7 @@
 package fossilsarcheology.server.entity.ai;
 
 import fossilsarcheology.server.entity.EntityPrehistoricSwimming;
-import fossilsarcheology.server.enums.EnumOrderType;
+import fossilsarcheology.server.enums.OrderType;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.util.ChunkCoordinates;
@@ -58,7 +58,7 @@ public class DinoAIWaterFindTarget extends EntityAIBase {
 
     public Vec3d findWaterTarget() {
         Random random = this.prehistoric.getRNG();
-        if (prehistoric.isTamed() && prehistoric.currentOrder == EnumOrderType.FOLLOW) {
+        if (prehistoric.isTamed() && prehistoric.currentOrder == OrderType.FOLLOW) {
             ChunkCoordinates blockpos1 = new ChunkCoordinates((int) prehistoric.getOwner().posX, (int) prehistoric.getOwner().posY, (int) prehistoric.getOwner().posZ);
             if (canGoToBlock(blockpos1.posX, blockpos1.posY, blockpos1.posZ)) {
                 return new Vec3d(blockpos1.posX, blockpos1.posY, blockpos1.posZ);

@@ -9,17 +9,17 @@ import fossilsarcheology.server.entity.ai.DinoAIHunt;
 import fossilsarcheology.server.entity.ai.DinoAILookIdle;
 import fossilsarcheology.server.entity.ai.DinoAIWander;
 import fossilsarcheology.server.entity.ai.DinoAIWatchClosest;
-import fossilsarcheology.server.enums.EnumPrehistoricAI.Activity;
-import fossilsarcheology.server.enums.EnumPrehistoricAI.Attacking;
-import fossilsarcheology.server.enums.EnumPrehistoricAI.Climbing;
-import fossilsarcheology.server.enums.EnumPrehistoricAI.Following;
-import fossilsarcheology.server.enums.EnumPrehistoricAI.Jumping;
-import fossilsarcheology.server.enums.EnumPrehistoricAI.Moving;
-import fossilsarcheology.server.enums.EnumPrehistoricAI.Response;
-import fossilsarcheology.server.enums.EnumPrehistoricAI.Stalking;
-import fossilsarcheology.server.enums.EnumPrehistoricAI.Taming;
-import fossilsarcheology.server.enums.EnumPrehistoricAI.Untaming;
-import fossilsarcheology.server.enums.EnumPrehistoricAI.WaterAbility;
+import fossilsarcheology.server.enums.PrehistoricAI.Activity;
+import fossilsarcheology.server.enums.PrehistoricAI.Attacking;
+import fossilsarcheology.server.enums.PrehistoricAI.Climbing;
+import fossilsarcheology.server.enums.PrehistoricAI.Following;
+import fossilsarcheology.server.enums.PrehistoricAI.Jumping;
+import fossilsarcheology.server.enums.PrehistoricAI.Moving;
+import fossilsarcheology.server.enums.PrehistoricAI.Response;
+import fossilsarcheology.server.enums.PrehistoricAI.Stalking;
+import fossilsarcheology.server.enums.PrehistoricAI.Taming;
+import fossilsarcheology.server.enums.PrehistoricAI.Untaming;
+import fossilsarcheology.server.enums.PrehistoricAI.WaterAbility;
 import fossilsarcheology.server.enums.PrehistoricEntityType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -73,67 +73,67 @@ public class EntityTitanis extends EntityPrehistoric {
     }
 
     @Override
-    public Activity aiActivityType() {
+    public Activity getActivityType() {
 
         return Activity.DIURINAL;
     }
 
     @Override
-    public Attacking aiAttackType() {
+    public Attacking getAttackType() {
 
         return Attacking.STOMP;
     }
 
     @Override
-    public Climbing aiClimbType() {
+    public Climbing getClimbType() {
 
         return Climbing.NONE;
     }
 
     @Override
-    public Following aiFollowType() {
+    public Following getFollowType() {
 
         return Following.AGRESSIVE;
     }
 
     @Override
-    public Jumping aiJumpType() {
+    public Jumping getJumpType() {
 
         return Jumping.BASIC;
     }
 
     @Override
-    public Response aiResponseType() {
+    public Response getResponseType() {
 
         return Response.TERITORIAL;
     }
 
     @Override
-    public Stalking aiStalkType() {
+    public Stalking getStalkType() {
 
         return Stalking.NONE;
     }
 
     @Override
-    public Taming aiTameType() {
+    public Taming getTameType() {
 
         return Taming.IMPRINTING;
     }
 
     @Override
-    public Untaming aiUntameType() {
+    public Untaming getUntameType() {
 
         return Untaming.STARVE;
     }
 
     @Override
-    public Moving aiMovingType() {
+    public Moving getMoveType() {
 
         return Moving.WALK;
     }
 
     @Override
-    public WaterAbility aiWaterAbilityType() {
+    public WaterAbility getWaterAbilityType() {
 
         return WaterAbility.NONE;
     }

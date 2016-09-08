@@ -12,7 +12,7 @@ import fossilsarcheology.server.entity.ai.DinoAIRiding;
 import fossilsarcheology.server.entity.ai.DinoAIWander;
 import fossilsarcheology.server.entity.ai.DinoAIWatchClosest;
 import fossilsarcheology.server.entity.ai.DinoAIWaterFindTarget;
-import fossilsarcheology.server.enums.EnumPrehistoricAI;
+import fossilsarcheology.server.enums.PrehistoricAI;
 import fossilsarcheology.server.enums.PrehistoricEntityType;
 import fossilsarcheology.server.item.FAItemRegistry;
 import net.ilexiconn.llibrary.server.animation.Animation;
@@ -71,69 +71,69 @@ public class EntitySpinosaurus extends EntityPrehistoricSwimming {
     }
 
     @Override
-    public EnumPrehistoricAI.Activity aiActivityType() {
+    public PrehistoricAI.Activity getActivityType() {
 
-        return EnumPrehistoricAI.Activity.DIURINAL;
+        return PrehistoricAI.Activity.DIURINAL;
     }
 
     @Override
-    public EnumPrehistoricAI.Attacking aiAttackType() {
+    public PrehistoricAI.Attacking getAttackType() {
 
-        return EnumPrehistoricAI.Attacking.DROWN;
+        return PrehistoricAI.Attacking.DROWN;
     }
 
     @Override
-    public EnumPrehistoricAI.Climbing aiClimbType() {
+    public PrehistoricAI.Climbing getClimbType() {
 
-        return EnumPrehistoricAI.Climbing.NONE;
+        return PrehistoricAI.Climbing.NONE;
     }
 
     @Override
-    public EnumPrehistoricAI.Following aiFollowType() {
+    public PrehistoricAI.Following getFollowType() {
 
-        return EnumPrehistoricAI.Following.AGRESSIVE;
+        return PrehistoricAI.Following.AGRESSIVE;
     }
 
     @Override
-    public EnumPrehistoricAI.Jumping aiJumpType() {
+    public PrehistoricAI.Jumping getJumpType() {
 
-        return EnumPrehistoricAI.Jumping.BASIC;
+        return PrehistoricAI.Jumping.BASIC;
     }
 
     @Override
-    public EnumPrehistoricAI.Response aiResponseType() {
+    public PrehistoricAI.Response getResponseType() {
 
-        return EnumPrehistoricAI.Response.AGRESSIVE;
+        return PrehistoricAI.Response.AGRESSIVE;
     }
 
     @Override
-    public EnumPrehistoricAI.Stalking aiStalkType() {
+    public PrehistoricAI.Stalking getStalkType() {
 
-        return EnumPrehistoricAI.Stalking.NONE;
+        return PrehistoricAI.Stalking.NONE;
     }
 
     @Override
-    public EnumPrehistoricAI.Taming aiTameType() {
+    public PrehistoricAI.Taming getTameType() {
 
-        return EnumPrehistoricAI.Taming.BLUEGEM;
+        return PrehistoricAI.Taming.BLUEGEM;
     }
 
     @Override
-    public EnumPrehistoricAI.Untaming aiUntameType() {
+    public PrehistoricAI.Untaming getUntameType() {
 
-        return EnumPrehistoricAI.Untaming.NONE;
+        return PrehistoricAI.Untaming.NONE;
     }
 
     @Override
-    public EnumPrehistoricAI.Moving aiMovingType() {
+    public PrehistoricAI.Moving getMoveType() {
 
-        return EnumPrehistoricAI.Moving.SEMIAQUATIC;
+        return PrehistoricAI.Moving.SEMIAQUATIC;
     }
 
     @Override
-    public EnumPrehistoricAI.WaterAbility aiWaterAbilityType() {
+    public PrehistoricAI.WaterAbility getWaterAbilityType() {
 
-        return EnumPrehistoricAI.WaterAbility.ATTACK;
+        return PrehistoricAI.WaterAbility.ATTACK;
     }
 
     @Override
@@ -168,7 +168,7 @@ public class EntitySpinosaurus extends EntityPrehistoricSwimming {
 
     @Override
     public void updateRiderPosition() {
-        if (this.getRidingPlayer() != null && this.func_152114_e(this.getRidingPlayer())) {
+        if (this.getRidingPlayer() != null && this.isOwnerName(this.getRidingPlayer())) {
             super.updateRiderPosition();
             return;
         }

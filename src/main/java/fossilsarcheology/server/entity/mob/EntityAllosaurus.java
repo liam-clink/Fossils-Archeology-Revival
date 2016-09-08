@@ -10,7 +10,7 @@ import fossilsarcheology.server.entity.ai.DinoAILookIdle;
 import fossilsarcheology.server.entity.ai.DinoAIRiding;
 import fossilsarcheology.server.entity.ai.DinoAIWander;
 import fossilsarcheology.server.entity.ai.DinoAIWatchClosest;
-import fossilsarcheology.server.enums.EnumPrehistoricAI;
+import fossilsarcheology.server.enums.PrehistoricAI;
 import fossilsarcheology.server.enums.PrehistoricEntityType;
 import fossilsarcheology.server.handler.FossilAchievementHandler;
 import net.minecraft.entity.Entity;
@@ -73,58 +73,58 @@ public class EntityAllosaurus extends EntityPrehistoric {
     }
 
     @Override
-    public EnumPrehistoricAI.Activity aiActivityType() {
-        return EnumPrehistoricAI.Activity.DIURINAL;
+    public PrehistoricAI.Activity getActivityType() {
+        return PrehistoricAI.Activity.DIURINAL;
     }
 
     @Override
-    public EnumPrehistoricAI.Attacking aiAttackType() {
-        return EnumPrehistoricAI.Attacking.BASIC;
+    public PrehistoricAI.Attacking getAttackType() {
+        return PrehistoricAI.Attacking.BASIC;
     }
 
     @Override
-    public EnumPrehistoricAI.Climbing aiClimbType() {
-        return EnumPrehistoricAI.Climbing.NONE;
+    public PrehistoricAI.Climbing getClimbType() {
+        return PrehistoricAI.Climbing.NONE;
     }
 
     @Override
-    public EnumPrehistoricAI.Following aiFollowType() {
-        return EnumPrehistoricAI.Following.NONE;
+    public PrehistoricAI.Following getFollowType() {
+        return PrehistoricAI.Following.NONE;
     }
 
     @Override
-    public EnumPrehistoricAI.Jumping aiJumpType() {
-        return EnumPrehistoricAI.Jumping.BASIC;
+    public PrehistoricAI.Jumping getJumpType() {
+        return PrehistoricAI.Jumping.BASIC;
     }
 
     @Override
-    public EnumPrehistoricAI.Response aiResponseType() {
-        return EnumPrehistoricAI.Response.TERITORIAL;
+    public PrehistoricAI.Response getResponseType() {
+        return PrehistoricAI.Response.TERITORIAL;
     }
 
     @Override
-    public EnumPrehistoricAI.Stalking aiStalkType() {
-        return EnumPrehistoricAI.Stalking.NONE;
+    public PrehistoricAI.Stalking getStalkType() {
+        return PrehistoricAI.Stalking.NONE;
     }
 
     @Override
-    public EnumPrehistoricAI.Taming aiTameType() {
-        return EnumPrehistoricAI.Taming.GEM;
+    public PrehistoricAI.Taming getTameType() {
+        return PrehistoricAI.Taming.GEM;
     }
 
     @Override
-    public EnumPrehistoricAI.Untaming aiUntameType() {
-        return EnumPrehistoricAI.Untaming.ATTACK;
+    public PrehistoricAI.Untaming getUntameType() {
+        return PrehistoricAI.Untaming.ATTACK;
     }
 
     @Override
-    public EnumPrehistoricAI.Moving aiMovingType() {
-        return EnumPrehistoricAI.Moving.WALK;
+    public PrehistoricAI.Moving getMoveType() {
+        return PrehistoricAI.Moving.WALK;
     }
 
     @Override
-    public EnumPrehistoricAI.WaterAbility aiWaterAbilityType() {
-        return EnumPrehistoricAI.WaterAbility.NONE;
+    public PrehistoricAI.WaterAbility getWaterAbilityType() {
+        return PrehistoricAI.WaterAbility.NONE;
     }
 
     @Override

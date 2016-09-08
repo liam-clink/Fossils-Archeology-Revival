@@ -9,17 +9,17 @@ import fossilsarcheology.server.entity.ai.DinoAILookIdle;
 import fossilsarcheology.server.entity.ai.DinoAIRiding;
 import fossilsarcheology.server.entity.ai.DinoAIWatchClosest;
 import fossilsarcheology.server.entity.ai.DinoAIWaterFindTarget;
-import fossilsarcheology.server.enums.EnumPrehistoricAI.Activity;
-import fossilsarcheology.server.enums.EnumPrehistoricAI.Attacking;
-import fossilsarcheology.server.enums.EnumPrehistoricAI.Climbing;
-import fossilsarcheology.server.enums.EnumPrehistoricAI.Following;
-import fossilsarcheology.server.enums.EnumPrehistoricAI.Jumping;
-import fossilsarcheology.server.enums.EnumPrehistoricAI.Moving;
-import fossilsarcheology.server.enums.EnumPrehistoricAI.Response;
-import fossilsarcheology.server.enums.EnumPrehistoricAI.Stalking;
-import fossilsarcheology.server.enums.EnumPrehistoricAI.Taming;
-import fossilsarcheology.server.enums.EnumPrehistoricAI.Untaming;
-import fossilsarcheology.server.enums.EnumPrehistoricAI.WaterAbility;
+import fossilsarcheology.server.enums.PrehistoricAI.Activity;
+import fossilsarcheology.server.enums.PrehistoricAI.Attacking;
+import fossilsarcheology.server.enums.PrehistoricAI.Climbing;
+import fossilsarcheology.server.enums.PrehistoricAI.Following;
+import fossilsarcheology.server.enums.PrehistoricAI.Jumping;
+import fossilsarcheology.server.enums.PrehistoricAI.Moving;
+import fossilsarcheology.server.enums.PrehistoricAI.Response;
+import fossilsarcheology.server.enums.PrehistoricAI.Stalking;
+import fossilsarcheology.server.enums.PrehistoricAI.Taming;
+import fossilsarcheology.server.enums.PrehistoricAI.Untaming;
+import fossilsarcheology.server.enums.PrehistoricAI.WaterAbility;
 import fossilsarcheology.server.enums.PrehistoricEntityType;
 import fossilsarcheology.server.item.FAItemRegistry;
 import net.ilexiconn.llibrary.server.animation.Animation;
@@ -66,67 +66,67 @@ public class EntityMosasaurus extends EntityPrehistoricSwimming {
     }
 
     @Override
-    public Activity aiActivityType() {
+    public Activity getActivityType() {
 
         return Activity.DIURINAL;
     }
 
     @Override
-    public Attacking aiAttackType() {
+    public Attacking getAttackType() {
 
         return Attacking.DROWN;
     }
 
     @Override
-    public Climbing aiClimbType() {
+    public Climbing getClimbType() {
 
         return Climbing.NONE;
     }
 
     @Override
-    public Following aiFollowType() {
+    public Following getFollowType() {
 
         return Following.AGRESSIVE;
     }
 
     @Override
-    public Jumping aiJumpType() {
+    public Jumping getJumpType() {
 
         return Jumping.BASIC;
     }
 
     @Override
-    public Response aiResponseType() {
+    public Response getResponseType() {
 
         return Response.AGRESSIVE;
     }
 
     @Override
-    public Stalking aiStalkType() {
+    public Stalking getStalkType() {
 
         return Stalking.NONE;
     }
 
     @Override
-    public Taming aiTameType() {
+    public Taming getTameType() {
 
         return Taming.BLUEGEM;
     }
 
     @Override
-    public Untaming aiUntameType() {
+    public Untaming getUntameType() {
 
         return Untaming.NONE;
     }
 
     @Override
-    public Moving aiMovingType() {
+    public Moving getMoveType() {
 
         return Moving.AQUATIC;
     }
 
     @Override
-    public WaterAbility aiWaterAbilityType() {
+    public WaterAbility getWaterAbilityType() {
 
         return WaterAbility.ATTACK;
     }
@@ -179,7 +179,7 @@ public class EntityMosasaurus extends EntityPrehistoricSwimming {
 
     @Override
     public void updateRiderPosition() {
-        if (this.getRidingPlayer() != null && this.func_152114_e(this.getRidingPlayer())) {
+        if (this.getRidingPlayer() != null && this.isOwnerName(this.getRidingPlayer())) {
             super.updateRiderPosition();
             return;
         }

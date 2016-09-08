@@ -426,14 +426,14 @@ public class PediaGUI extends GuiContainer {
                 final int height = scaledResolution.getScaledHeight();
                 final int mouseX = (Mouse.getX() * width / mc.displayWidth) - guiLeft;
                 final int mouseY = (height - Mouse.getY() * height / mc.displayHeight - 1) - guiTop;
-                String s1 = I18n.translateToLocal("pedia.activity") + " " + I18n.translateToLocal("pedia.activity." + dino.aiActivityType().toString().toLowerCase());
+                String s1 = I18n.translateToLocal("pedia.activity") + " " + I18n.translateToLocal("pedia.activity." + dino.getActivityType().toString().toLowerCase());
                 int x = wordLength / 2;
                 int y = 200;
                 printStringXY(s1, x, y, 157, 126, 103);
                 if (mouseX > x && mouseX < x + this.fontRendererObj.getStringWidth(s1)) {
                     if (mouseY > y && mouseY < y + 10) {
                         List<String> text = new ArrayList<String>();
-                        text.add(I18n.translateToLocal(I18n.translateToLocal("pedia.activity." + dino.aiActivityType().toString().toLowerCase() + ".desc")));
+                        text.add(I18n.translateToLocal(I18n.translateToLocal("pedia.activity." + dino.getActivityType().toString().toLowerCase() + ".desc")));
                         GlStateManager.pushMatrix();
                         this.drawHoveringText(text, mouseX, mouseY, fontRendererObj);
                         GlStateManager.popMatrix();

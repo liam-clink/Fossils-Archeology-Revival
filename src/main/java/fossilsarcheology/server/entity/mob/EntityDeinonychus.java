@@ -12,7 +12,7 @@ import fossilsarcheology.server.entity.ai.DinoAILookIdle;
 import fossilsarcheology.server.entity.ai.DinoAIRiding;
 import fossilsarcheology.server.entity.ai.DinoAIWander;
 import fossilsarcheology.server.entity.ai.DinoAIWatchClosest;
-import fossilsarcheology.server.enums.EnumPrehistoricAI;
+import fossilsarcheology.server.enums.PrehistoricAI;
 import fossilsarcheology.server.enums.PrehistoricEntityType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -75,69 +75,69 @@ public class EntityDeinonychus extends EntityPrehistoric {
     }
 
     @Override
-    public EnumPrehistoricAI.Activity aiActivityType() {
+    public PrehistoricAI.Activity getActivityType() {
 
-        return EnumPrehistoricAI.Activity.NOCTURNAL;
+        return PrehistoricAI.Activity.NOCTURNAL;
     }
 
     @Override
-    public EnumPrehistoricAI.Attacking aiAttackType() {
+    public PrehistoricAI.Attacking getAttackType() {
 
-        return EnumPrehistoricAI.Attacking.JUMP;
+        return PrehistoricAI.Attacking.JUMP;
     }
 
     @Override
-    public EnumPrehistoricAI.Climbing aiClimbType() {
+    public PrehistoricAI.Climbing getClimbType() {
 
-        return EnumPrehistoricAI.Climbing.ARTHROPOD;
+        return PrehistoricAI.Climbing.ARTHROPOD;
     }
 
     @Override
-    public EnumPrehistoricAI.Following aiFollowType() {
+    public PrehistoricAI.Following getFollowType() {
 
-        return EnumPrehistoricAI.Following.AGRESSIVE;
+        return PrehistoricAI.Following.AGRESSIVE;
     }
 
     @Override
-    public EnumPrehistoricAI.Jumping aiJumpType() {
+    public PrehistoricAI.Jumping getJumpType() {
 
-        return EnumPrehistoricAI.Jumping.TWOBLOCKS;
+        return PrehistoricAI.Jumping.TWOBLOCKS;
     }
 
     @Override
-    public EnumPrehistoricAI.Response aiResponseType() {
+    public PrehistoricAI.Response getResponseType() {
 
-        return EnumPrehistoricAI.Response.TERITORIAL;
+        return PrehistoricAI.Response.TERITORIAL;
     }
 
     @Override
-    public EnumPrehistoricAI.Stalking aiStalkType() {
+    public PrehistoricAI.Stalking getStalkType() {
 
-        return EnumPrehistoricAI.Stalking.STEALTH;
+        return PrehistoricAI.Stalking.STEALTH;
     }
 
     @Override
-    public EnumPrehistoricAI.Taming aiTameType() {
+    public PrehistoricAI.Taming getTameType() {
 
-        return EnumPrehistoricAI.Taming.IMPRINTING;
+        return PrehistoricAI.Taming.IMPRINTING;
     }
 
     @Override
-    public EnumPrehistoricAI.Untaming aiUntameType() {
+    public PrehistoricAI.Untaming getUntameType() {
 
-        return EnumPrehistoricAI.Untaming.ATTACK;
+        return PrehistoricAI.Untaming.ATTACK;
     }
 
     @Override
-    public EnumPrehistoricAI.Moving aiMovingType() {
+    public PrehistoricAI.Moving getMoveType() {
 
-        return EnumPrehistoricAI.Moving.WALK;
+        return PrehistoricAI.Moving.WALK;
     }
 
     @Override
-    public EnumPrehistoricAI.WaterAbility aiWaterAbilityType() {
+    public PrehistoricAI.WaterAbility getWaterAbilityType() {
 
-        return EnumPrehistoricAI.WaterAbility.NONE;
+        return PrehistoricAI.WaterAbility.NONE;
     }
 
     @Override
@@ -200,7 +200,7 @@ public class EntityDeinonychus extends EntityPrehistoric {
     }
 
     @Override
-    public boolean attackEntityFrom(DamageSource dmg, float i) {
+    public boolean attackEntityFrom(DamageSource source, float amount) {
         if (this.ridingEntity != null) {
             if (this.getLastAttacker() != null) {
                 if (this.getLastAttacker() == this.ridingEntity) {
@@ -210,7 +210,7 @@ public class EntityDeinonychus extends EntityPrehistoric {
                 }
             }
         }
-        return super.attackEntityFrom(dmg, i);
+        return super.attackEntityFrom(source, amount);
     }
 
     public int getMaxHunger() {

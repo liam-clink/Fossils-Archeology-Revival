@@ -3,7 +3,7 @@ package fossilsarcheology.server.block.entity;
 import fossilsarcheology.Revival;
 import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.entity.mob.EntityTyrannosaurus;
-import fossilsarcheology.server.enums.EnumOrderType;
+import fossilsarcheology.server.enums.OrderType;
 import fossilsarcheology.server.enums.PrehistoricEntityType;
 import fossilsarcheology.server.handler.LocalizationStrings;
 import fossilsarcheology.server.item.FAItemRegistry;
@@ -28,13 +28,13 @@ public class TileEntityDrum extends TileEntity {
      * "Middle"; final String TAIL = "Tail"; final String TREXMSG = "Msg.TRex.";
      * final String DINO = "Dino.";
      */
-    public EnumOrderType order;
+    public OrderType order;
 
     // public byte note;
     // public boolean previousRedstoneState;
 
     public TileEntityDrum() {
-        this.order = EnumOrderType.STAY;
+        this.order = OrderType.STAY;
         // this.note = 0;
         // this.previousRedstoneState = false;
     }
@@ -54,7 +54,7 @@ public class TileEntityDrum extends TileEntity {
     @Override
     public void readFromNBT(NBTTagCompound var1) {
         super.readFromNBT(var1);
-        this.order = EnumOrderType.values()[var1.getByte("Order")];
+        this.order = OrderType.values()[var1.getByte("Order")];
     }
 
 	/*

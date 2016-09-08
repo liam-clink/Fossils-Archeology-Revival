@@ -1,7 +1,7 @@
 package fossilsarcheology.server.entity.ai;
 
 import fossilsarcheology.server.entity.EntityPrehistoric;
-import fossilsarcheology.server.enums.EnumOrderType;
+import fossilsarcheology.server.enums.OrderType;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.pathfinding.PathNavigate;
@@ -37,7 +37,7 @@ public class DinoAIFollowOwner extends EntityAIBase {
 
         if (entitylivingbase == null) {
             return false;
-        } else if (this.prehistoric.currentOrder != EnumOrderType.FOLLOW) {
+        } else if (this.prehistoric.currentOrder != OrderType.FOLLOW) {
             return false;
         } else if (this.prehistoric.getDistanceSqToEntity(entitylivingbase) < (double) (this.minDist * this.minDist)) {
             return false;

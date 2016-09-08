@@ -3,7 +3,7 @@ package fossilsarcheology.server.item;
 import fossilsarcheology.Revival;
 import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.entity.mob.EntityPlesiosaurus;
-import fossilsarcheology.server.enums.EnumOrderType;
+import fossilsarcheology.server.enums.OrderType;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -34,7 +34,7 @@ public class MagicConchItem extends Item {
     // public String getItemNameIS(ItemStack var1)
     // {
     // String var2 = "MagicConch";
-    // String var3 = EnumOrderType.values()[var1.getItemDamage()].toString();
+    // String var3 = OrderType.values()[var1.getItemDamage()].toString();
     // return "MagicConch" + var3;
     // }
 
@@ -62,12 +62,12 @@ public class MagicConchItem extends Item {
             EntityPrehistoric var17 = (EntityPrehistoric) var16;
 
             if (var17.isTamed()) {
-                var17.setOrder(EnumOrderType.values()[var1.getItemDamage()]);
+                var17.setOrder(OrderType.values()[var1.getItemDamage()]);
                 var2.spawnParticle("note", var16.posX, var16.posY + 1.2D, var16.posZ, 0.0D, 0.0D, 0.0D);
             }
         }
 
-        var13 = I18n.translateToLocal("order." + EnumOrderType.values()[var1.getItemDamage()].toString());
+        var13 = I18n.translateToLocal("order." + OrderType.values()[var1.getItemDamage()].toString());
         // Revival.ShowMessage(var10 + var9 + var11 + " " + var13 + var12,
         // var3);
         if (!var3.worldObj.isRemote) {

@@ -1,7 +1,7 @@
 package fossilsarcheology.server.entity;
 
 import fossilsarcheology.Revival;
-import fossilsarcheology.server.enums.EnumOrderType;
+import fossilsarcheology.server.enums.OrderType;
 import fossilsarcheology.server.enums.PrehistoricEntityType;
 import fossilsarcheology.server.handler.FossilAchievementHandler;
 import fossilsarcheology.server.handler.LocalizationStrings;
@@ -152,9 +152,9 @@ public class EntityDinosaurEgg extends EntityLiving implements IEntityAdditional
                     if (prehistoricEntity.type.isTameable() && player != null) {
                         if (prehistoricEntity.type != PrehistoricEntityType.TYRANNOSAURUS && prehistoricEntity.type != PrehistoricEntityType.ALLOSAURUS && prehistoricEntity.type != PrehistoricEntityType.SARCOSUCHUS) {
                             prehistoricEntity.setTamed(true);
-                            prehistoricEntity.func_152115_b(player.getCommandSenderName().toString());
+                            prehistoricEntity.setOwnerName(player.getCommandSenderName().toString());
                             prehistoricEntity.setOwnerDisplayName(player.getCommandSenderName().toString());
-                            prehistoricEntity.currentOrder = EnumOrderType.WANDER;
+                            prehistoricEntity.currentOrder = OrderType.WANDER;
                             prehistoricEntity.setHealth((float) prehistoricEntity.baseHealth);
 
                         }

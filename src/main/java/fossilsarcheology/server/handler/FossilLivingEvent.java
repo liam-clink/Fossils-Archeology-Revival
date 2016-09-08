@@ -211,16 +211,16 @@ public class FossilLivingEvent {
                 birthEntity = new EntitySmilodon(event.entityLiving.worldObj);
                 if (event.entityLiving.worldObj.getClosestPlayerToEntity(event.entityLiving, 15) != null) {
                     ((EntitySmilodon) birthEntity).setTamed(true);
-                    ((EntitySmilodon) birthEntity).func_152115_b(event.entityLiving.worldObj.getClosestPlayerToEntity(event.entityLiving, 15).getCommandSenderName());
+                    ((EntitySmilodon) birthEntity).setOwnerName(event.entityLiving.worldObj.getClosestPlayerToEntity(event.entityLiving, 15).getCommandSenderName());
                 }
                 break;
 
             case MAMMOTH:
                 birthEntity = (new EntityMammoth(event.entityLiving.worldObj));
-                ((EntityPrehistoric) birthEntity).func_152114_e(event.entityLiving.worldObj.getClosestPlayerToEntity(((EntityPrehistoric) birthEntity), 8));
+                ((EntityPrehistoric) birthEntity).isOwnerName(event.entityLiving.worldObj.getClosestPlayerToEntity(((EntityPrehistoric) birthEntity), 8));
                 if (event.entityLiving.worldObj.getClosestPlayerToEntity(event.entityLiving, 15) != null) {
                     ((EntityPrehistoric) birthEntity).setTamed(true);
-                    ((EntityPrehistoric) birthEntity).func_152115_b(event.entityLiving.worldObj.getClosestPlayerToEntity(event.entityLiving, 15).getCommandSenderName());
+                    ((EntityPrehistoric) birthEntity).setOwnerName(event.entityLiving.worldObj.getClosestPlayerToEntity(event.entityLiving, 15).getCommandSenderName());
                 }
                 break;
 
@@ -228,7 +228,7 @@ public class FossilLivingEvent {
                 birthEntity = (new EntityElasmotherium(event.entityLiving.worldObj));
                 if (event.entityLiving.worldObj.getClosestPlayerToEntity(event.entityLiving, 15) != null) {
                     ((EntityPrehistoric) birthEntity).setTamed(true);
-                    ((EntityPrehistoric) birthEntity).func_152115_b(event.entityLiving.worldObj.getClosestPlayerToEntity(event.entityLiving, 15).getCommandSenderName());
+                    ((EntityPrehistoric) birthEntity).setOwnerName(event.entityLiving.worldObj.getClosestPlayerToEntity(event.entityLiving, 15).getCommandSenderName());
                 }
                 break;
 

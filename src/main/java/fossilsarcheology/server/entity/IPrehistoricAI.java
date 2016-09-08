@@ -1,27 +1,27 @@
 package fossilsarcheology.server.entity;
 
-import fossilsarcheology.server.enums.EnumPrehistoricAI;
+import fossilsarcheology.server.enums.PrehistoricAI;
 
 public interface IPrehistoricAI {
-    EnumPrehistoricAI.Moving aiMovingType();
+    PrehistoricAI.Moving getMoveType();
 
-    EnumPrehistoricAI.Activity aiActivityType();
+    PrehistoricAI.Activity getActivityType();
 
-    EnumPrehistoricAI.Attacking aiAttackType();
+    PrehistoricAI.Attacking getAttackType();
 
-    EnumPrehistoricAI.Climbing aiClimbType();
+    PrehistoricAI.Climbing getClimbType();
 
-    EnumPrehistoricAI.Following aiFollowType();
+    PrehistoricAI.Following getFollowType();
 
-    EnumPrehistoricAI.Jumping aiJumpType();
+    PrehistoricAI.Jumping getJumpType();
 
-    EnumPrehistoricAI.Response aiResponseType();
+    PrehistoricAI.Response getResponseType();
 
-    EnumPrehistoricAI.Stalking aiStalkType();
+    PrehistoricAI.Stalking getStalkType();
 
-    EnumPrehistoricAI.Taming aiTameType();
+    PrehistoricAI.Taming getTameType();
 
-    EnumPrehistoricAI.Untaming aiUntameType();
+    PrehistoricAI.Untaming getUntameType();
 
-    EnumPrehistoricAI.WaterAbility aiWaterAbilityType();
+    PrehistoricAI.WaterAbility getWaterAbilityType();
 }

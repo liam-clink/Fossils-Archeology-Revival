@@ -3,7 +3,7 @@ package fossilsarcheology.server.item;
 import fossilsarcheology.Revival;
 import fossilsarcheology.server.entity.EntityDinosaurEgg;
 import fossilsarcheology.server.entity.EntityPrehistoric;
-import fossilsarcheology.server.enums.EnumPrehistoricAI;
+import fossilsarcheology.server.enums.PrehistoricAI;
 import fossilsarcheology.server.enums.PrehistoricEntityType;
 import fossilsarcheology.server.message.MessageUpdateEgg;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -48,10 +48,10 @@ public class DinoEggItem extends Item {
                 }
                 if (egg instanceof EntityPrehistoric) {
                     EntityPrehistoric prehistoric = (EntityPrehistoric) egg;
-                    if (prehistoric.aiTameType() == EnumPrehistoricAI.Taming.IMPRINTING) {
+                    if (prehistoric.getTameType() == PrehistoricAI.Taming.IMPRINTING) {
                         prehistoric.setTamed(true);
                         prehistoric.setAgeInDays(1);
-                        prehistoric.func_152115_b(world.getClosestPlayerToEntity(prehistoric, 10).getDisplayName());
+                        prehistoric.setOwnerName(world.getClosestPlayerToEntity(prehistoric, 10).getDisplayName());
                     }
                 }
             }

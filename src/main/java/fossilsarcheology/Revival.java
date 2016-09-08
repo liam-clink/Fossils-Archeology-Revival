@@ -52,6 +52,9 @@ import fossilsarcheology.server.message.MessageUpdateNautilus;
 import fossilsarcheology.server.util.FossilFoodMappings;
 import fossilsarcheology.server.util.ReleaseType;
 import fossilsarcheology.server.villager.ArcheaologistProfession;
+import net.ilexiconn.llibrary.server.config.Config;
+import net.ilexiconn.llibrary.server.network.NetworkWrapper;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.FMLLog;
@@ -86,7 +89,6 @@ public class Revival {
         if (player != null) {
             player.addChatMessage(new TextComponentString(message));
             System.out.println(player);
-
         }
     }
 

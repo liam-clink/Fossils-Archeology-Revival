@@ -3,12 +3,13 @@ package fossilsarcheology.server.entity.mob;
 import fossilsarcheology.Revival;
 import fossilsarcheology.server.entity.EntityAnuLightning;
 import fossilsarcheology.server.entity.FossilPlayerProperites;
-import fossilsarcheology.server.entity.ai.AnuAIAttackOnCollide;
+import fossilsarcheology.server.entity.ai.AnuAIMelee;
 import fossilsarcheology.server.entity.ai.AnuAIAvoidEntity;
 import fossilsarcheology.server.entity.ai.AnuAIFireballAttack;
 import fossilsarcheology.server.gen.feature.SpikesBlockWorldGen;
 import fossilsarcheology.server.handler.FossilAchievementHandler;
 import fossilsarcheology.server.item.FAItemRegistry;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -21,42 +22,55 @@ import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.boss.IBossDisplayData;
 import net.minecraft.entity.monster.EntityBlaze;
 import net.minecraft.entity.monster.EntityGhast;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntitySkeleton;
+import net.minecraft.entity.monster.SkeletonType;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.entity.projectile.EntityLargeFireball;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.text.translation.I18n;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
-import java.util.List;
+import javax.annotation.Nullable;
 
 public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAttackMob {
+    private static final DataParameter<Byte> ATTACK_MODE = EntityDataManager.createKey(EntityAnu.class, DataSerializers.BYTE);
 
-    public int allHealth = 600;
-    public int middleHealth = 400;
-    public int finalHealth = 200;
-    // length of song in ticks
-    public int songLength = 4041;
+    public static final int TOTAL_HEALTH = 600;
+    public static final int MIDDLE_HEALTH = 400;
+    public static final int FINAL_HEALTH = 200;
+    public static final int SONG_LENGTH = 4041;
+
     public int songCounter = 0;
     public boolean isFlying;
-    private AnuAIAvoidEntity aiFear = new AnuAIAvoidEntity(this, EntityPlayer.class, 5.0F, 0.8D, 1.33D);
-    private AnuAIAttackOnCollide aiAttackOnCollide = new AnuAIAttackOnCollide(this, EntityPlayer.class, 1.2D, false);
+    private AnuAIAvoidEntity aiFear = new AnuAIAvoidEntity<>(this, EntityPlayer.class, 5.0F, 0.8D, 1.33D);
+    private AnuAIMelee aiAttackOnCollide = new AnuAIMelee(this, 1.2D, false);
     private AnuAIFireballAttack aiFireballAttack = new AnuAIFireballAttack(this, 1.0D, 10, 20, 15.0F);
-    private ChunkCoordinates currentTarget;
+    private BlockPos currentTarget;
 
     public EntityAnu(World world) {
         super(world);
         this.setSize(1F, 1.8F);
-        this.getNavigator().setBreakDoors(true);
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(5, new EntityAIWander(this, 1.0D));
         this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityLivingBase.class, 8.0F));
@@ -66,106 +80,92 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
         this.tasks.addTask(5, aiFireballAttack);
         this.tasks.addTask(5, aiAttackOnCollide);
         this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, false, true));
         this.isImmuneToFire = true;
         this.experienceValue = 50;
     }
 
     public void setFlying(boolean state) {
-        isFlying = state;
+        this.isFlying = state;
     }
 
     @Override
-    public boolean isAIEnabled() {
-        return true;
+    public boolean isAIDisabled() {
+        return false;
     }
 
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(40.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(600D);
-        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.35D);
+        this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(40.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(600D);
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.35D);
     }
 
     @Override
-    protected String getLivingSound() {
-        if (this.getAttackMode() == 0) {
+    protected SoundEvent getAmbientSound() {
+        if (this.getAttackMode() == AttackMode.MELEE) {
             return "fossil:anu_living_healthy";
-        } else if (this.getAttackMode() == 1) {
+        } else if (this.getAttackMode() == AttackMode.RANGED_FLIGHT) {
             return "fossil:anu_living_middle";
         }
         return "fossil:anu_living_middle";
     }
 
     @Override
-    protected String getHurtSound() {
-        return "random.break";
+    protected SoundEvent getHurtSound() {
+        return SoundEvents.ENTITY_ITEM_BREAK;
     }
 
     @Override
-    protected String getDeathSound() {
-        return "mob.irongolem.death";
+    protected SoundEvent getDeathSound() {
+        return SoundEvents.ENTITY_IRONGOLEM_DEATH;
     }
 
     @Override
-    public boolean attackEntityFrom(DamageSource damageSource, float var2) {
-        Entity targetEntity = damageSource.getEntity();
-
-        AxisAlignedBB chatDistance = this.boundingBox.expand(30.0D, 30.0D, 30.0D);
-        List playerList = this.worldObj.getEntitiesWithinAABB(EntityPlayer.class, chatDistance);
-
+    public boolean attackEntityFrom(DamageSource source, float damage) {
+        Entity targetEntity = source.getEntity();
         if (targetEntity instanceof EntityGhast) {
             return false;
         } else {
             if (targetEntity instanceof EntityPlayer) {
-
                 if (this.getRNG().nextInt(10) == 0) {
-                    if (var2 != 0) {
-                        ItemStack itemstack = ((EntityPlayer) targetEntity).inventory.getCurrentItem();
+                    if (damage > 0.0F) {
+                        ItemStack heldItem = ((EntityPlayer) targetEntity).inventory.getCurrentItem();
+                        if (heldItem != null) {
+                            if (heldItem.getItem() == FAItemRegistry.INSTANCE.ancientSword) {
 
-                        if (itemstack != null) {
-                            if (itemstack.getItem() != null) {
-                                if (itemstack.getItem() == FAItemRegistry.INSTANCE.ancientSword) {
-
-                                    if (!this.worldObj.isRemote) {
-                                        Revival.messagePlayer(I18n.translateToLocal("entity.fossil.PigBoss.name") + ": " + I18n.translateToLocal("anuSpeaker.mySword"), (EntityPlayer) targetEntity);
-                                    }
-
-                                    return super.attackEntityFrom(damageSource, var2);
+                                if (!this.worldObj.isRemote) {
+                                    Revival.messagePlayer(I18n.translateToLocal("entity.fossil.PigBoss.name") + ": " + I18n.translateToLocal("anuSpeaker.mySword"), (EntityPlayer) targetEntity);
                                 }
 
-                                if (itemstack.getItem() != FAItemRegistry.INSTANCE.ancientSword && itemstack.getItem() instanceof ItemSword) {
+                                return super.attackEntityFrom(source, damage);
+                            }
 
-                                    if (!this.worldObj.isRemote) {
-                                        Revival.messagePlayer(I18n.translateToLocal("entity.fossil.PigBoss.name") + ": " + I18n.translateToLocal("anuSpeaker.draw"), (EntityPlayer) targetEntity);
-                                    }
-
-                                    return super.attackEntityFrom(damageSource, var2);
+                            if (heldItem.getItem() != FAItemRegistry.INSTANCE.ancientSword && heldItem.getItem() instanceof ItemSword) {
+                                if (!this.worldObj.isRemote) {
+                                    Revival.messagePlayer(I18n.translateToLocal("entity.fossil.PigBoss.name") + ": " + I18n.translateToLocal("anuSpeaker.draw"), (EntityPlayer) targetEntity);
                                 }
+                                return super.attackEntityFrom(source, damage);
+                            }
 
-                                if (damageSource.damageType.equals("arrow")) {
-                                    if (!this.worldObj.isRemote) {
-                                        Revival.messagePlayer(I18n.translateToLocal("entity.fossil.PigBoss.name") + ": " + I18n.translateToLocal("anuSpeaker.coward"), (EntityPlayer) targetEntity);
-                                    }
-
-                                    return super.attackEntityFrom(damageSource, var2);
-                                } else {
-
+                            if (source.damageType.equals("arrow")) {
+                                if (!this.worldObj.isRemote) {
+                                    Revival.messagePlayer(I18n.translateToLocal("entity.fossil.PigBoss.name") + ": " + I18n.translateToLocal("anuSpeaker.coward"), (EntityPlayer) targetEntity);
                                 }
+                                return super.attackEntityFrom(source, damage);
                             }
                         }
                     }
                 }
             }
         }
-
-        return super.attackEntityFrom(damageSource, var2);
+        return super.attackEntityFrom(source, damage);
     }
 
     @Override
     public void updateAITasks() {
-        if (this.getAttackMode() == 2 || this.getAttackMode() == 1) {
+        if (this.getAttackMode() == AttackMode.DEFENSE || this.getAttackMode() == AttackMode.RANGED_FLIGHT) {
             if (this.ticksExisted % 20 == 0) {
                 this.heal(2.0F);
             }
@@ -175,33 +175,28 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
 
     @Override
     protected Entity findPlayerToAttack() {
-        EntityPlayer entityplayer = this.worldObj.getClosestVulnerablePlayerToEntity(this, 16.0D);
-
-        if (entityplayer != null && this.canEntityBeSeen(entityplayer)) {
+        EntityPlayer player = this.worldObj.getNearestPlayerNotCreative(this, 16.0D);
+        if (player != null && this.canEntityBeSeen(player)) {
             if (this.getRNG().nextInt(1) == 0) {
-                Revival.messagePlayer(I18n.translateToLocal("entity.fossil.PigBoss.name") + ": " + I18n.translateToLocal("anuSpeaker.hello"), entityplayer);
+                Revival.messagePlayer(I18n.translateToLocal("entity.fossil.PigBoss.name") + ": " + I18n.translateToLocal("anuSpeaker.hello"), player);
             } else {
-                Revival.messagePlayer(I18n.translateToLocal("entity.fossil.PigBoss.name") + ": " + I18n.translateToLocal("anuSpeaker.fewBeaten"), entityplayer);
+                Revival.messagePlayer(I18n.translateToLocal("entity.fossil.PigBoss.name") + ": " + I18n.translateToLocal("anuSpeaker.fewBeaten"), player);
             }
-
             super.findPlayerToAttack();
-            return entityplayer;
+            return player;
         }
-
         return null;
     }
 
     @Override
-    public void onDeath(DamageSource dmg) {
-        if (dmg.getSourceOfDamage() instanceof EntityArrow || dmg.getEntity() instanceof EntityPlayer) {
-            EntityPlayer entityplayer = (EntityPlayer) dmg.getEntity();
-            onKillEntity(entityplayer);
-
-            double d0 = entityplayer.posX - this.posX;
-            double d1 = entityplayer.posZ - this.posZ;
-
-            if (d0 * d0 + d1 * d1 >= 2500.0D) {
-                entityplayer.triggerAchievement(FossilAchievementHandler.anuDead);
+    public void onDeath(DamageSource source) {
+        if (source.getSourceOfDamage() instanceof EntityArrow || source.getEntity() instanceof EntityPlayer) {
+            EntityPlayer player = (EntityPlayer) source.getEntity();
+            this.onKillEntity(player);
+            double deltaX = player.posX - this.posX;
+            double deltaZ = player.posZ - this.posZ;
+            if (deltaX * deltaX + deltaZ * deltaZ >= 2500.0D) {
+                player.addStat(FossilAchievementHandler.anuDead);
             }
         }
         EntityAnuDead entity = new EntityAnuDead(this.worldObj);
@@ -209,25 +204,17 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
             entity.setLocationAndAngles(this.posX + this.getRNG().nextInt(4), this.posY, this.posZ + this.getRNG().nextInt(4), this.rotationYaw, this.rotationPitch);
             this.worldObj.spawnEntityInWorld(entity);
         }
-        entity.setHealth(0F);
+        entity.setHealth(0.0F);
         Revival.messagePlayer(I18n.translateToLocal("entity.fossil.PigBoss.name") + ": " + I18n.translateToLocal("anuSpeaker.no"), this.worldObj.getClosestPlayerToEntity(this, 50));
-        super.onDeath(dmg);
+        super.onDeath(source);
     }
 
-    /**
-     * Called when the mob is falling. Calculates and applies fall damage.
-     */
     @Override
-    protected void fall(float i) {
+    public void fall(float distance, float damageMultiplier) {
     }
 
-    /**
-     * Takes in the distance the entity has fallen this tick and whether its on
-     * the ground to update the fall distance and deal fall damage if landing on
-     * the ground. Args: distanceFallenThisTick, onGround
-     */
     @Override
-    protected void updateFallState(double x, boolean y) {
+    protected void updateFallState(double y, boolean onGround, IBlockState state, BlockPos pos) {
     }
 
     @Override
@@ -243,28 +230,26 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
             entity.setLocationAndAngles(this.posX + this.getRNG().nextInt(4), this.posY, this.posZ + this.getRNG().nextInt(4), this.rotationYaw, this.rotationPitch);
             this.worldObj.spawnEntityInWorld(entity);
             if (entity instanceof EntitySkeleton) {
-                ((EntitySkeleton) entity).setSkeletonType(1);
-                entity.setCurrentItemOrArmor(0, new ItemStack(Items.bow));
-
+                ((EntitySkeleton) entity).func_189768_a(SkeletonType.WITHER);
+                entity.setHeldItem(EnumHand.MAIN_HAND, new ItemStack(Items.BOW));
             }
             if (entity instanceof EntitySentryPigman) {
-                entity.setCurrentItemOrArmor(0, new ItemStack(Items.iron_sword));
+                entity.setHeldItem(EnumHand.MAIN_HAND, new ItemStack(Items.IRON_SWORD));
             }
-
         }
     }
 
     @Override
-    protected void dropFewItems(boolean par1, int par2) {
+    protected void dropFewItems(boolean wasRecentlyHit, int lootingModifier) {
         this.dropItem(FAItemRegistry.INSTANCE.ancientKey, 1);
     }
 
     @Override
     public void onLivingUpdate() {
-        if (songCounter < songLength) {
+        if (songCounter < SONG_LENGTH) {
             songCounter++;
         }
-        if (songCounter == songLength - 1) {
+        if (songCounter == SONG_LENGTH - 1) {
             songCounter = 0;
         }
         if (songCounter == 1) {
@@ -279,60 +264,55 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
             }
         }
         super.onLivingUpdate();
-        if (this.getAttackMode() == 1 && !this.onGround && this.motionY < 0.0D) {
+        if (this.getAttackMode() == AttackMode.RANGED_FLIGHT && !this.onGround && this.motionY < 0.0D) {
             this.motionY *= 0.6D;
         }
-        if (this.getAttackMode() == 1) {
+        if (this.getAttackMode() == AttackMode.RANGED_FLIGHT) {
             if (!worldObj.isRemote) {
                 setFlying(true);
                 if (!this.checkGround()) {
                     flyAround();
-                } else {
                 }
-                if (getEntityToAttack() != null) {
-                    currentTarget = new ChunkCoordinates((int) getEntityToAttack().posX + rand.nextInt(20) - rand.nextInt(10), (int) ((int) getEntityToAttack().posY + getEntityToAttack().getEyeHeight()) + rand.nextInt(20) - rand.nextInt(10), (int) getEntityToAttack().posZ + rand.nextInt(40) - rand.nextInt(10));
+                if (this.getAttackTarget() != null) {
+                    currentTarget = new BlockPos((int) getAttackTarget().posX + rand.nextInt(20) - rand.nextInt(10), (int) ((int) getAttackTarget().posY + getAttackTarget().getEyeHeight()) + rand.nextInt(20) - rand.nextInt(10), (int) getAttackTarget().posZ + rand.nextInt(40) - rand.nextInt(10));
                     setFlying(false);
                     flyTowardsTarget();
                 }
             }
         }
-        if (this.getHealth() < middleHealth && this.getAttackMode() != 1) {
-            this.setAttackMode(1);
+        if (this.getHealth() < MIDDLE_HEALTH && this.getAttackMode() != AttackMode.RANGED_FLIGHT) {
+            this.setAttackMode(AttackMode.RANGED_FLIGHT);
         }
-        if (this.getHealth() < finalHealth && this.getAttackMode() != 2) {
-            this.setAttackMode(2);
-
+        if (this.getHealth() < FINAL_HEALTH && this.getAttackMode() != AttackMode.DEFENSE) {
+            this.setAttackMode(AttackMode.DEFENSE);
         }
-        if (this.getAttackMode() == 1) {
-
+        if (this.getAttackMode() == AttackMode.RANGED_FLIGHT) {
             for (int i = 0; i < 2; ++i) {
-                this.worldObj.spawnParticle("smoke", this.posX + (this.rand.nextDouble() - 0.5D) * (double) this.width, this.posY + this.rand.nextDouble() * (double) this.height, this.posZ + (this.rand.nextDouble() - 0.5D) * (double) this.width, 0.0D, 0.0D, 0.0D);
+                this.worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, this.posX + (this.rand.nextDouble() - 0.5D) * (double) this.width, this.posY + this.rand.nextDouble() * (double) this.height, this.posZ + (this.rand.nextDouble() - 0.5D) * (double) this.width, 0.0D, 0.0D, 0.0D);
             }
         }
-        if (this.getAttackMode() == 2) {
+        if (this.getAttackMode() == AttackMode.DEFENSE) {
             for (int i = 0; i < 2; ++i) {
-                this.worldObj.spawnParticle("dripLava", this.posX + (this.rand.nextDouble() - 0.5D) * (double) this.width, this.posY + this.rand.nextDouble() * (double) this.height, this.posZ + (this.rand.nextDouble() - 0.5D) * (double) this.width, 0.0D, 0.0D, 0.0D);
+                this.worldObj.spawnParticle(EnumParticleTypes.DRIP_LAVA, this.posX + (this.rand.nextDouble() - 0.5D) * (double) this.width, this.posY + this.rand.nextDouble() * (double) this.height, this.posZ + (this.rand.nextDouble() - 0.5D) * (double) this.width, 0.0D, 0.0D, 0.0D);
             }
-        }
-        if (this.getAttackMode() == 2) {
-            int spikechoice = this.getRNG().nextInt(250);
-            int defensechoice = this.getRNG().nextInt(500);
+            int spikeChoice = this.getRNG().nextInt(250);
+            int defenseChoice = this.getRNG().nextInt(500);
             int spawnPigmenChoice = this.getRNG().nextInt(250);
             int spawnWitherChoice = this.getRNG().nextInt(350);
             int spawnBlazeChoice = this.getRNG().nextInt(300);
-
-            if (spikechoice == 0) {
-                this.playSound("dig.stone", 1, 1);
-                new SpikesBlockWorldGen().generate(worldObj, this.getRNG(), (int) this.posX, (int) this.posY, (int) this.posZ);
+            if (spikeChoice == 0) {
+                this.playSound(SoundEvents.BLOCK_STONE_BREAK, 1, 1);
+                new SpikesBlockWorldGen().generate(this.worldObj, this.getRNG(), this.getPosition());
             }
-            if (defensechoice == 0) {
-                this.playSound("dig.stone", 1, 1);
+            if (defenseChoice == 0) {
+                this.playSound(SoundEvents.BLOCK_STONE_BREAK, 1, 1);
                 if (!worldObj.isRemote) {
-                    this.generateDefenseHutP1((int) this.posX, (int) this.posY, (int) this.posZ);
-                    this.generateDefenseHutP2((int) this.posX, (int) this.posY, (int) this.posZ);
-                    this.generateDefenseHutP2((int) this.posX, (int) this.posY + 1, (int) this.posZ);
-                    this.generateDefenseHutP2((int) this.posX, (int) this.posY + 2, (int) this.posZ);
-                    this.generateDefenseHutP1((int) this.posX, (int) this.posY + 4, (int) this.posZ);
+                    BlockPos position = this.getPosition();
+                    this.generateDefenseHutP1(position);
+                    this.generateDefenseHutP2(position);
+                    this.generateDefenseHutP2(position.up());
+                    this.generateDefenseHutP2(position.up(2));
+                    this.generateDefenseHutP1(position.up(4));
                 }
             }
             if (spawnPigmenChoice == 0) {
@@ -352,142 +332,132 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
 
     public void flyTowardsTarget() {
         if (currentTarget != null) {
-            double targetX = currentTarget.posX + 0.5D - posX;
-            double targetY = currentTarget.posY + 1D - posY;
-            double targetZ = currentTarget.posZ + 0.5D - posZ;
+            double targetX = currentTarget.getX() + 0.5D - posX;
+            double targetY = currentTarget.getY() + 1D - posY;
+            double targetZ = currentTarget.getZ() + 0.5D - posZ;
             motionX += (Math.signum(targetX) * 0.5D - motionX) * 0.10000000149011612D;
             motionY += (Math.signum(targetY) * 0.699999988079071D - motionY) * 0.10000000149011612D;
             motionZ += (Math.signum(targetZ) * 0.5D - motionZ) * 0.10000000149011612D;
             float angle = (float) (Math.atan2(motionZ, motionX) * 180.0D / Math.PI) - 90.0F;
-            float rotation = MathHelper.wrapAngleTo180_float(angle - rotationYaw);
+            float rotation = MathHelper.wrapDegrees(angle - rotationYaw);
             moveForward = 0.5F;
             rotationYaw += rotation;
         }
-
     }
 
     public void flyAround() {
         if (currentTarget != null) {
-            if (!worldObj.isAirBlock(currentTarget.posX, currentTarget.posY, currentTarget.posZ) || currentTarget.posY < 1) {
+            if (!worldObj.isAirBlock(currentTarget) || currentTarget.getY() < 1) {
                 currentTarget = null;
             }
         }
-
-        if (currentTarget == null || rand.nextInt(30) == 0 || currentTarget.getDistanceSquared((int) posX, (int) posY, (int) posZ) < 10F) {
-            currentTarget = new ChunkCoordinates((int) posX + rand.nextInt(20) - rand.nextInt(10), (int) posY + rand.nextInt(30) - 2, (int) posZ + rand.nextInt(20) - rand.nextInt(10));
+        if (currentTarget == null || rand.nextInt(30) == 0 || currentTarget.getDistance((int) posX, (int) posY, (int) posZ) < 10F) {
+            currentTarget = new BlockPos((int) posX + rand.nextInt(20) - rand.nextInt(10), (int) posY + rand.nextInt(30) - 2, (int) posZ + rand.nextInt(20) - rand.nextInt(10));
         }
-
         flyTowardsTarget();
     }
 
     private void generateDefenseHutP2(BlockPos pos) {
-        this.worldObj.setBlock(x - 3, y, z, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x - 3, y, z + 1, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x - 3, y, z + 2, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x - 3, y, z - 1, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x - 3, y, z - 2, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x + 3, y, z, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x + 3, y, z + 1, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x + 3, y, z + 2, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x + 3, y, z - 1, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x + 3, y, z - 2, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(pos + 3, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x + 1, y, z + 3, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x + 2, y, z + 3, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x - 1, y, z + 3, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x - 2, y, z + 3, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(pos - 3, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x + 1, y, z - 3, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x + 2, y, z - 3, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x - 1, y, z - 3, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x - 2, y, z - 3, Blocks.obsidian.setHardness(3));
+        IBlockState state = Blocks.OBSIDIAN.setHardness(3).getDefaultState();
+        this.worldObj.setBlockState(pos.add(-3, 0, 0), state);
+        this.worldObj.setBlockState(x - 3, y, z + 1, state);
+        this.worldObj.setBlockState(x - 3, y, z + 2, state);
+        this.worldObj.setBlockState(x - 3, y, z - 1, state);
+        this.worldObj.setBlockState(x - 3, y, z - 2, state);
+        this.worldObj.setBlockState(x + 3, y, z, state);
+        this.worldObj.setBlockState(x + 3, y, z + 1, state);
+        this.worldObj.setBlockState(x + 3, y, z + 2, state);
+        this.worldObj.setBlockState(x + 3, y, z - 1, state);
+        this.worldObj.setBlockState(x + 3, y, z - 2, state);
+        this.worldObj.setBlockState(pos.add(0, 0, 3), state);
+        this.worldObj.setBlockState(x + 1, y, z + 3, state);
+        this.worldObj.setBlockState(x + 2, y, z + 3, state);
+        this.worldObj.setBlockState(x - 1, y, z + 3, state);
+        this.worldObj.setBlockState(x - 2, y, z + 3, state);
+        this.worldObj.setBlockState(pos.add(0, 0, -3), state);
+        this.worldObj.setBlockState(x + 1, y, z - 3, state);
+        this.worldObj.setBlockState(x + 2, y, z - 3, state);
+        this.worldObj.setBlockState(x - 1, y, z - 3, state);
+        this.worldObj.setBlockState(x - 2, y, z - 3, state);
     }
 
     private void generateDefenseHutP1(BlockPos pos) {
-        this.worldObj.setBlock(x, y - 1, z, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x + 1, y - 1, z, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x + 2, y - 1, z, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x - 1, y - 1, z, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x - 2, y - 1, z, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x, y - 1, z + 1, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x + 1, y - 1, z + 1, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x + 2, y - 1, z + 1, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x - 1, y - 1, z + 1, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x - 2, y - 1, z + 1, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x, y - 1, z + 2, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x + 1, y - 1, z + 2, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x + 2, y - 1, z + 2, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x - 1, y - 1, z + 2, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x - 2, y - 1, z + 2, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x, y - 1, z - 1, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x + 1, y - 1, z - 1, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x + 2, y - 1, z - 1, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x - 1, y - 1, z - 1, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x - 2, y - 1, z - 1, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x, y - 1, z - 2, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x + 1, y - 1, z - 2, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x + 2, y - 1, z - 2, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x - 1, y - 1, z - 2, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x - 2, y - 1, z - 2, Blocks.obsidian.setHardness(3));
-
+        IBlockState state = Blocks.OBSIDIAN.setHardness(3).getDefaultState();
+        this.worldObj.setBlockState(x, y - 1, z, state);
+        this.worldObj.setBlockState(x + 1, y - 1, z, state);
+        this.worldObj.setBlockState(x + 2, y - 1, z, state);
+        this.worldObj.setBlockState(x - 1, y - 1, z, state);
+        this.worldObj.setBlockState(x - 2, y - 1, z, state);
+        this.worldObj.setBlockState(x, y - 1, z + 1, state);
+        this.worldObj.setBlockState(x + 1, y - 1, z + 1, state);
+        this.worldObj.setBlockState(x + 2, y - 1, z + 1, state);
+        this.worldObj.setBlockState(x - 1, y - 1, z + 1, state);
+        this.worldObj.setBlockState(x - 2, y - 1, z + 1, state);
+        this.worldObj.setBlockState(x, y - 1, z + 2, state);
+        this.worldObj.setBlockState(x + 1, y - 1, z + 2, state);
+        this.worldObj.setBlockState(x + 2, y - 1, z + 2, state);
+        this.worldObj.setBlockState(x - 1, y - 1, z + 2, state);
+        this.worldObj.setBlockState(x - 2, y - 1, z + 2, state);
+        this.worldObj.setBlockState(x, y - 1, z - 1, state);
+        this.worldObj.setBlockState(x + 1, y - 1, z - 1, state);
+        this.worldObj.setBlockState(x + 2, y - 1, z - 1, state);
+        this.worldObj.setBlockState(x - 1, y - 1, z - 1, state);
+        this.worldObj.setBlockState(x - 2, y - 1, z - 1, state);
+        this.worldObj.setBlockState(x, y - 1, z - 2, state);
+        this.worldObj.setBlockState(x + 1, y - 1, z - 2, state);
+        this.worldObj.setBlockState(x + 2, y - 1, z - 2, state);
+        this.worldObj.setBlockState(x - 1, y - 1, z - 2, state);
+        this.worldObj.setBlockState(x - 2, y - 1, z - 2, state);
     }
 
     public boolean checkGround() {
-        return !this.onGround && this.worldObj.isAirBlock((int) this.posX, (int) this.posY - 1, (int) this.posZ);
+        return !this.onGround && this.worldObj.isAirBlock(this.getPosition().down());
     }
 
+    @Nullable
     @Override
-    public ItemStack getHeldItem() {
+    public ItemStack getHeldItem(EnumHand hand) {
         return new ItemStack(FAItemRegistry.INSTANCE.ancientSword);
     }
 
     public void initializeMob() {
-        this.setAttackMode(0);
-        this.setCurrentItemOrArmor(0, new ItemStack(FAItemRegistry.INSTANCE.ancientSword));
+        this.setAttackMode(AttackMode.MELEE);
+        this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(FAItemRegistry.INSTANCE.ancientSword));
         this.enchantEquipment();
-        EntityPlayer entityplayer = this.worldObj.getClosestPlayer(posX, posY, posZ, 100F);
-
-        if (entityplayer != null) {
+        EntityPlayer player = this.worldObj.getClosestPlayer(posX, posY, posZ, 100F, false);
+        if (player != null) {
             if (this.getRNG().nextInt(1) == 0) {
-                Revival.messagePlayer(I18n.translateToLocal("entity.fossil.PigBoss.name") + ": " + I18n.translateToLocal("anuSpeaker.hello"), entityplayer);
+                Revival.messagePlayer(I18n.translateToLocal("entity.fossil.PigBoss.name") + ": " + I18n.translateToLocal("anuSpeaker.hello"), player);
             } else {
-                Revival.messagePlayer(I18n.translateToLocal("entity.fossil.PigBoss.name") + ": " + I18n.translateToLocal("anuSpeaker.fewBeaten"), entityplayer);
+                Revival.messagePlayer(I18n.translateToLocal("entity.fossil.PigBoss.name") + ": " + I18n.translateToLocal("anuSpeaker.fewBeaten"), player);
             }
         }
     }
 
-    // 0 == melee, 1 == flight/ranged, 2 == defense
-    public int getAttackMode() {
-        return this.dataManager.getWatchableObjectByte(19);
+    public AttackMode getAttackMode() {
+        return AttackMode.values()[this.dataManager.get(ATTACK_MODE)];
     }
 
-    // 0 == melee, 1 == flight/ranged, 2 == defense
-    public void setAttackMode(int i) {
-        this.dataManager.updateObject(19, (byte) i);
+    public void setAttackMode(AttackMode attackMode) {
+        this.dataManager.set(ATTACK_MODE, (byte) attackMode.ordinal());
     }
 
-    /**
-     * (abstract) Protected helper method to read subclass entity data from NBT.
-     */
     @Override
-    public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {
-        super.writeEntityToNBT(par1NBTTagCompound);
-        par1NBTTagCompound.setInteger("AttackMode", this.getAttackMode());
+    public void writeEntityToNBT(NBTTagCompound compound) {
+        super.writeEntityToNBT(compound);
+        compound.setByte("AttackMode", (byte) this.getAttackMode().ordinal());
     }
 
-    /**
-     * (abstract) Protected helper method to read subclass entity data from NBT.
-     */
     @Override
-    public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {
-        super.readEntityFromNBT(par1NBTTagCompound);
-        this.setAttackMode(par1NBTTagCompound.getInteger("AttackMode"));
+    public void readEntityFromNBT(NBTTagCompound compound) {
+        super.readEntityFromNBT(compound);
+        this.setAttackMode(AttackMode.values()[compound.getByte("AttackMode")]);
     }
 
     @Override
     protected void entityInit() {
         super.entityInit();
-        this.dataManager.register(19, (byte) 0);
+        this.dataManager.register(ATTACK_MODE, (byte) 0);
     }
 
     @Override
@@ -495,27 +465,28 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
         return false;
     }
 
+    @Nullable
     @Override
-    public IEntityLivingData onSpawnWithEgg(IEntityLivingData par1EntityLivingData) {
-        par1EntityLivingData = super.onSpawnWithEgg(par1EntityLivingData);
+    public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, IEntityLivingData data) {
+        data = super.onInitialSpawn(difficulty, data);
         this.initializeMob();
-        return par1EntityLivingData;
+        return data;
     }
 
     @Override
     public void attackEntityWithRangedAttack(EntityLivingBase entity, float y) {
-        double d5 = entity.posX - this.posX;
-        double d6 = entity.boundingBox.minY + (double) (entity.height / 2.0F) - (this.posY + (double) (this.height / 2.0F));
-        double d7 = entity.posZ - this.posZ;
-        this.worldObj.playAuxSFXAtEntity(null, 1008, (int) this.posX, (int) this.posY, (int) this.posZ, 0);
-        EntityLargeFireball entitylargefireball = new EntityLargeFireball(this.worldObj, this, d5, d6, d7);
-        entitylargefireball.field_92057_e = 2;
-        double d8 = 4.0D;
-        Vec3d vec3 = this.getLook(1.0F);
-        entitylargefireball.posX = this.posX + vec3.xCoord * d8;
-        entitylargefireball.posY = this.posY + (double) (this.height / 2.0F) + 0.5D;
-        entitylargefireball.posZ = this.posZ + vec3.zCoord * d8;
-        this.worldObj.spawnEntityInWorld(entitylargefireball);
+        double deltaX = entity.posX - this.posX;
+        double deltaY = entity.getEntityBoundingBox().minY + (double) (entity.height / 2.0F) - (this.posY + (double) (this.height / 2.0F));
+        double deltaZ = entity.posZ - this.posZ;
+        this.worldObj.playEvent(null, 1008, this.getPosition(), 0);
+        EntityLargeFireball fireball = new EntityLargeFireball(this.worldObj, this, deltaX, deltaY, deltaZ);
+        fireball.explosionPower = 2;
+        double offset = 4.0D;
+        Vec3d look = this.getLook(1.0F);
+        fireball.posX = this.posX + look.xCoord * offset;
+        fireball.posY = this.posY + (double) (this.height / 2.0F) + 0.5D;
+        fireball.posZ = this.posZ + look.zCoord * offset;
+        this.worldObj.spawnEntityInWorld(fireball);
     }
 
     @Override
@@ -526,4 +497,9 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
         }
     }
 
+    public enum AttackMode {
+        MELEE,
+        RANGED_FLIGHT,
+        DEFENSE
+    }
 }

@@ -1,25 +1,22 @@
 package fossilsarcheology.server.gen.feature;
 
 import fossilsarcheology.server.block.FABlockRegistry;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 import java.util.Random;
 
 public class SpikesBlockWorldGen extends WorldGenerator {
-
     @Override
-    public boolean generate(World p_76484_1_, Random p_76484_2_, int p_76484_3_, int p_76484_4_, int p_76484_5_) {
-        for (int l = 0; l < 64; ++l) {
-            int i1 = p_76484_3_ + p_76484_2_.nextInt(8) - p_76484_2_.nextInt(8);
-            int j1 = p_76484_4_ + p_76484_2_.nextInt(4) - p_76484_2_.nextInt(4);
-            int k1 = p_76484_5_ + p_76484_2_.nextInt(8) - p_76484_2_.nextInt(8);
-
-            if (p_76484_1_.isAirBlock(i1, j1, k1) && p_76484_1_.getBlock(i1, j1 - 1, k1).isOpaqueCube() && FABlockRegistry.INSTANCE.obsidianSpikes.canPlaceBlockAt(p_76484_1_, i1, j1, k1)) {
-                p_76484_1_.setBlock(i1, j1, k1, FABlockRegistry.INSTANCE.obsidianSpikes, p_76484_2_.nextInt(4), 2);
+    public boolean generate(World world, Random rand, BlockPos position) {
+        BlockPos.MutableBlockPos spike = new BlockPos.MutableBlockPos();
+        for (int i = 0; i < 64; ++i) {
+            spike.setPos(position.getX() + rand.nextInt(8) - rand.nextInt(8), position.getY() + rand.nextInt(4) - rand.nextInt(4), position.getZ() + rand.nextInt(8) - rand.nextInt(8));
+            if (world.isAirBlock(spike) && world.getBlockState(spike.down()).isOpaqueCube() && FABlockRegistry.INSTANCE.obsidianSpikes.canPlaceBlockAt(world, spike)) {
+                world.setBlockState(spike, FABlockRegistry.INSTANCE.obsidianSpikes.getDefaultState());
             }
         }
-
         return true;
     }
 }

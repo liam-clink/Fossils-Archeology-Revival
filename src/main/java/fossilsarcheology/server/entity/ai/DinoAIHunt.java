@@ -3,7 +3,7 @@ package fossilsarcheology.server.entity.ai;
 import fossilsarcheology.api.FoodMappings;
 import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.entity.EntityToyBase;
-import fossilsarcheology.server.enums.EnumPrehistoricMood;
+import fossilsarcheology.server.enums.PrehistoricMood;
 import net.minecraft.command.IEntitySelector;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
@@ -59,16 +59,16 @@ public class DinoAIHunt extends EntityAITarget {
                         return false;
                     }
                     if (targetEntity instanceof EntityPlayer) {
-                        if (prehistoric.getMood() < 0 && prehistoric.getMoodFace() != EnumPrehistoricMood.CALM) {
+                        if (prehistoric.getMood() < 0 && prehistoric.getMoodFace() != PrehistoricMood.CALM) {
                             return !((EntityPlayer) targetEntity).capabilities.isCreativeMode;
-                        } else if (prehistoric.getMood() > 25 && prehistoric.getMoodFace() != EnumPrehistoricMood.CALM) {
+                        } else if (prehistoric.getMood() > 25 && prehistoric.getMoodFace() != PrehistoricMood.CALM) {
                             return false;
-                        } else if (prehistoric.getMoodFace() == EnumPrehistoricMood.CALM) {
-                            return !prehistoric.func_152114_e(targetEntity) && prehistoric.canDinoHunt(targetEntity, true);
+                        } else if (prehistoric.getMoodFace() == PrehistoricMood.CALM) {
+                            return !prehistoric.isOwnerName(targetEntity) && prehistoric.canDinoHunt(targetEntity, true);
                         }
                     }
                     if (FoodMappings.INSTANCE.getEntityFoodAmount(this.targetEntity.getClass(), prehistoric.type.diet) > 0) {
-                        return !prehistoric.func_152114_e(targetEntity) && prehistoric.canDinoHunt(targetEntity, true);
+                        return !prehistoric.isOwnerName(targetEntity) && prehistoric.canDinoHunt(targetEntity, true);
                     }
                     if (targetEntity instanceof EntityToyBase && prehistoric.ticksTillPlay == 0) {
                         return true;

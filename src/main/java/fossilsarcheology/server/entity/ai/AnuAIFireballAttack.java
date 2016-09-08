@@ -1,18 +1,18 @@
 package fossilsarcheology.server.entity.ai;
 
 import fossilsarcheology.server.entity.mob.EntityAnu;
-import net.minecraft.entity.ai.EntityAIArrowAttack;
+import net.minecraft.entity.ai.EntityAIAttackRanged;
 
-public class AnuAIFireballAttack extends EntityAIArrowAttack {
-    private EntityAnu theEntity;
+public class AnuAIFireballAttack extends EntityAIAttackRanged {
+    private EntityAnu entity;
 
-    public AnuAIFireballAttack(EntityAnu anu, double entityMoveSpeed, int timedeductor, int maxRangedAttackTime, float sqDistance) {
-        super(anu, entityMoveSpeed, timedeductor, maxRangedAttackTime, sqDistance);
-        theEntity = anu;
+    public AnuAIFireballAttack(EntityAnu entity, double speed, int delay, int maxAttackTime, float maxDistance) {
+        super(entity, speed, delay, maxAttackTime, maxDistance);
+        this.entity = entity;
     }
 
     @Override
     public boolean shouldExecute() {
-        return theEntity.getAttackMode() == 1 && super.shouldExecute();
+        return this.entity.getAttackMode() == EntityAnu.AttackMode.RANGED_FLIGHT && super.shouldExecute();
     }
 }

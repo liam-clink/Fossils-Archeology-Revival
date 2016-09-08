@@ -78,7 +78,7 @@ public class EntityBirdEgg extends EntityThrowable {
                 this.worldObj.spawnEntityInWorld(mob);
                 mob.setTamed(true);
                 if (worldObj.getClosestPlayerToEntity(mob, 5) != null) {
-                    mob.func_152115_b(worldObj.getClosestPlayerToEntity(mob, 5).getUniqueID().toString());
+                    mob.setOwnerName(worldObj.getClosestPlayerToEntity(mob, 5).getUniqueID().toString());
                 }
             }
         } else {

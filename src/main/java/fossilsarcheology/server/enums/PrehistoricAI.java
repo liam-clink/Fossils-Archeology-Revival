@@ -1,6 +1,6 @@
 package fossilsarcheology.server.enums;
 
-public class EnumPrehistoricAI {
+public class PrehistoricAI {
     public enum Moving {
         WALK, FLIGHT, AQUATIC, SEMIAQUATIC, WALKANDGLIDE
     }

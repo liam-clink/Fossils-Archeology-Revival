@@ -1,19 +1,20 @@
 package fossilsarcheology.server.entity.ai;
 
 import fossilsarcheology.server.entity.mob.EntityAnu;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.EntityAIAvoidEntity;
 
-public class AnuAIAvoidEntity extends EntityAIAvoidEntity {
-    private EntityAnu theEntity;
+public class AnuAIAvoidEntity<T extends Entity> extends EntityAIAvoidEntity<T> {
+    private EntityAnu entity;
 
-    public AnuAIAvoidEntity(EntityAnu p_i1616_1_, Class p_i1616_2_, float p_i1616_3_, double p_i1616_4_, double p_i1616_6_) {
-        super(p_i1616_1_, p_i1616_2_, p_i1616_3_, p_i1616_4_, p_i1616_6_);
-        theEntity = p_i1616_1_;
+    public AnuAIAvoidEntity(EntityAnu entity, Class<T> avoid, float distance, double farSpeed, double nearSpeed) {
+        super(entity, avoid, distance, farSpeed, nearSpeed);
+        this.entity = entity;
     }
 
     @Override
     public boolean shouldExecute() {
-        return theEntity.getAttackMode() == 2 && super.shouldExecute();
+        return this.entity.getAttackMode() == EntityAnu.AttackMode.DEFENSE && super.shouldExecute();
     }
 
 }
