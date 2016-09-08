@@ -1,6 +1,7 @@
 package fossilsarcheology.server.block;
 
 import net.minecraft.block.BlockBush;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
@@ -26,9 +27,9 @@ public class BlockTempskya extends BlockBush {
     private IIcon tex3;
 
     public BlockTempskya() {
-        super(Material.plants);
+        super(Material.PLANTS);
         this.setHardness(0);
-        this.setSoundType(soundTypeGrass);
+        this.setSoundType(SoundType.PLANT);
         float f = 0.375F;
         float f1 = 0.625F;
         float f2 = 0.375F;

@@ -7,6 +7,7 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -28,8 +29,8 @@ public class EntityAnuEffect extends EntityLiving {
         return this.dataManager.getWatchableObjectByte(18);
     }
 
-    public void setAnuRotation(float par1) {
-        this.dataManager.updateObject(18, (byte) par1);
+    public void setAnuRotation(EnumFacing rotation) {
+        this.dataManager.updateObject(18, (byte) rotation);
     }
 
     @Override

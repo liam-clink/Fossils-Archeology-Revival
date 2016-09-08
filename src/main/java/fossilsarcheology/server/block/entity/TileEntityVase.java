@@ -13,28 +13,24 @@ public class TileEntityVase extends TileEntity {
     private int vaseRotation;
 
     @Override
-    public void writeToNBT(NBTTagCompound compound) {
-        super.writeToNBT(compound);
+    public NBTTagCompound writeToNBT(NBTTagCompound compound) {
+        compound = super.writeToNBT(compound);
         compound.setByte("VaseType", (byte) (this.vaseType & 255));
         compound.setByte("VaseTypeMeta", (byte) (this.vaseTypeMeta & 255));
         compound.setByte("Rot", (byte) (this.vaseRotation & 255));
+        return compound;
     }
 
     @Override
-    public boolean canUpdate() {
-        return false;
+    public void readFromNBT(NBTTagCompound compound) {
+        super.readFromNBT(compound);
+        this.vaseType = compound.getByte("VaseType");
+        this.vaseRotation = compound.getByte("Rot");
+        this.vaseTypeMeta = compound.getByte("VaseTypeMeta");
     }
 
     @Override
-    public void readFromNBT(NBTTagCompound par1NBTTagCompound) {
-        super.readFromNBT(par1NBTTagCompound);
-        this.vaseType = par1NBTTagCompound.getByte("VaseType");
-        this.vaseRotation = par1NBTTagCompound.getByte("Rot");
-        this.vaseTypeMeta = par1NBTTagCompound.getByte("VaseTypeMeta");
-    }
-
-    @Override
-    public SPacketUpdateTileEntity getDescriptionPacket() {
+    public SPacketUpdateTileEntity getUpdatePacket() {
         NBTTagCompound nbttagcompound = new NBTTagCompound();
         this.writeToNBT(nbttagcompound);
         return new SPacketUpdateTileEntity(this.getPos(), 0, nbttagcompound);
@@ -66,7 +62,7 @@ public class TileEntityVase extends TileEntity {
     }
 
     @SideOnly(Side.CLIENT)
-    public int func_82119_b() {
+    public int getRotation() {
         return this.vaseRotation;
     }
 }

@@ -136,35 +136,25 @@ public class TileEntityAncientChest extends TileEntity implements ITickable {
             this.numPlayersUsing = 0;
             angleChange = 5.0F;
         }
-
         this.prevLidAngle = this.lidAngle;
         angleChange = 0.1F;
-
         if (this.numPlayersUsing > 0 && this.lidAngle == 0.0F) {
             this.worldObj.playSound(null, this.pos, SoundEvents.BLOCK_CHEST_OPEN, SoundCategory.BLOCKS, 0.5F, this.worldObj.rand.nextFloat() * 0.1F + 0.9F);
         }
-
         if (this.numPlayersUsing == 0 && this.lidAngle > 0.0F || this.numPlayersUsing > 0 && this.lidAngle < 1.0F) {
             float prevAngle = this.lidAngle;
-
             if (this.numPlayersUsing > 0) {
                 this.lidAngle += angleChange;
             } else {
                 this.lidAngle -= angleChange;
             }
-
             if (this.lidAngle > 1.0F) {
                 this.lidAngle = 1.0F;
             }
-
-            float f2 = 0.5F;
-
-            if (this.lidAngle < f2 && prevAngle >= f2) {
-                d2 = (double) this.xCoord + 0.5D;
-                double d0 = (double) this.zCoord + 0.5D;
-                this.worldObj.playSoundEffect(d2, (double) this.yCoord + 0.5D, d0, "random.chestclosed", 0.5F, this.worldObj.rand.nextFloat() * 0.1F + 0.9F);
+            float closeAngle = 0.5F;
+            if (this.lidAngle < closeAngle && prevAngle >= closeAngle) {
+                this.worldObj.playSound(null, this.pos, SoundEvents.BLOCK_CHEST_CLOSE, SoundCategory.BLOCKS, 0.5F, this.worldObj.rand.nextFloat() * 0.1F + 0.9F);
             }
-
             if (this.lidAngle < 0.0F) {
                 this.lidAngle = 0.0F;
             }
@@ -185,27 +175,19 @@ public class TileEntityAncientChest extends TileEntity implements ITickable {
         if (this.numPlayersUsing < 0) {
             this.numPlayersUsing = 0;
         }
-
         ++this.numPlayersUsing;
-        this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType(), 1, this.numPlayersUsing);
-        this.worldObj.notifyBlocksOfNeighborChange(this.xCoord, this.yCoord, this.zCoord, this.getBlockType());
-        this.worldObj.notifyBlocksOfNeighborChange(this.xCoord, this.yCoord - 1, this.zCoord, this.getBlockType());
+        this.worldObj.addBlockEvent(this.pos, this.getBlockType(), 1, this.numPlayersUsing);
+        this.worldObj.notifyNeighborsOfStateChange(this.pos, this.getBlockType());
+        this.worldObj.notifyNeighborsOfStateChange(this.pos.down(), this.getBlockType());
     }
 
-    public void closeInventory() {
+    public void closeInventory(EntityPlayer player) {
     }
 
-    /**
-     * Returns true if automation is allowed to insert the given stack (ignoring
-     * stack size) into the given slot.
-     */
-    public boolean isItemValidForSlot(int p_94041_1_, ItemStack p_94041_2_) {
+    public boolean isItemValidForSlot(int index, ItemStack stack) {
         return true;
     }
 
-    /**
-     * invalidates a tile entity
-     */
     @Override
     public void invalidate() {
         super.invalidate();

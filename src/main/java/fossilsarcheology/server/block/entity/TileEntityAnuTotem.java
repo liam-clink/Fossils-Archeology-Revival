@@ -1,54 +1,53 @@
 package fossilsarcheology.server.block.entity;
 
+import fossilsarcheology.server.block.BlockAnubiteStatue;
 import fossilsarcheology.server.block.FABlockRegistry;
 import fossilsarcheology.server.entity.EntityAnuEffect;
 import fossilsarcheology.server.handler.FossilAchievementHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ITickable;
+import net.minecraft.util.math.BlockPos;
 
-public class TileEntityAnuTotem extends TileEntity {
-
+public class TileEntityAnuTotem extends TileEntity implements ITickable {
     @Override
-    public void updateEntity() {
-        for (int var7 = 0; var7 < worldObj.playerEntities.size(); ++var7) {
-            EntityPlayer P = (EntityPlayer) worldObj.playerEntities.get(var7);
-
-            if (Math.pow(this.xCoord - P.posX, 2D) + Math.pow(this.yCoord - P.posY, 2D) + Math.pow(this.zCoord - P.posZ, 2D) < 40) {
-                P.addStat(FossilAchievementHandler.findAnuTotem, 1);
+    public void update() {
+        for (EntityPlayer player : worldObj.playerEntities) {
+            if (this.getDistanceSq(player.posX, player.posY, player.posZ) < 40) {
+                player.addStat(FossilAchievementHandler.findAnuTotem, 1);
             }
         }
-
-        if (worldObj.getBlock(this.xCoord - 1, yCoord, zCoord - 1) == FABlockRegistry.INSTANCE.figurineBlock && worldObj.getBlock(xCoord + 1, yCoord, zCoord - 1) == FABlockRegistry.INSTANCE.figurineBlock && worldObj.getBlock(xCoord + 1, yCoord, zCoord + 1) == FABlockRegistry.INSTANCE.figurineBlock && worldObj.getBlock(xCoord - 1, yCoord, zCoord + 1) == FABlockRegistry.INSTANCE.figurineBlock && worldObj.getBlock(xCoord - 1, yCoord, zCoord) == Blocks.redstone_wire && worldObj.getBlock(xCoord + 1, yCoord, zCoord) == Blocks.redstone_wire && worldObj.getBlock(xCoord, yCoord, zCoord - 1) == Blocks.redstone_wire && worldObj.getBlock(xCoord, yCoord, zCoord + 1) == Blocks.redstone_wire) {
-            for (int var7 = 0; var7 < worldObj.playerEntities.size(); ++var7) {
-                EntityPlayer P = (EntityPlayer) worldObj.playerEntities.get(var7);
-
-                if (Math.pow(this.xCoord - P.posX, 2D) + Math.pow(this.yCoord - P.posY, 2D) + Math.pow(this.zCoord - P.posZ, 2D) < 90) {
-                    P.addStat(FossilAchievementHandler.anuPortal, 1);
+        boolean hasRequirements = true;
+        for (EnumFacing direction : EnumFacing.HORIZONTALS) {
+            if (this.worldObj.getBlockState(this.pos.offset(direction)).getBlock() != Blocks.REDSTONE_WIRE || this.worldObj.getBlockState(this.pos.offset(direction).offset(direction.rotateY())).getBlock() != FABlockRegistry.INSTANCE.figurineBlock) {
+                hasRequirements = false;
+                break;
+            }
+        }
+        if (hasRequirements) {
+            for (EntityPlayer player : worldObj.playerEntities) {
+                if (this.getDistanceSq(player.posX, player.posY, player.posZ) < 90) {
+                    player.addStat(FossilAchievementHandler.anuPortal, 1);
                 }
             }
-            worldObj.newExplosion(null, xCoord + 0.5F, yCoord, zCoord + 0.5, 5F, true, true);
+            worldObj.newExplosion(null, pos.getX() + 0.5F, pos.getY(), pos.getZ() + 0.5, 5F, true, true);
             EntityAnuEffect newMob = new EntityAnuEffect(worldObj);
             if (!worldObj.isRemote) {
-                newMob.setLocationAndAngles(xCoord + 0.5, yCoord, zCoord + 0.5, 0, 0);
-
+                newMob.setLocationAndAngles(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, 0, 0);
                 worldObj.spawnEntityInWorld(newMob);
             }
-            newMob.setAnuRotation(worldObj.getBlockMetadata(xCoord, yCoord, zCoord));
+            newMob.setAnuRotation(worldObj.getBlockState(pos).getValue(BlockAnubiteStatue.FACING));
             newMob.playSummonSong();
             newMob.setHealth(0);
-            worldObj.setBlockToAir(xCoord - 1, yCoord, zCoord);
-            worldObj.setBlockToAir(xCoord + 1, yCoord, zCoord);
-            worldObj.setBlockToAir(xCoord, yCoord, zCoord - 1);
-            worldObj.setBlockToAir(xCoord, yCoord, zCoord + 1);
-            worldObj.setBlockToAir(xCoord - 1, yCoord, zCoord - 1);
-            worldObj.setBlockToAir(xCoord + 1, yCoord, zCoord + 1);
-            worldObj.setBlockToAir(xCoord - 1, yCoord, zCoord + 1);
-            worldObj.setBlockToAir(xCoord + 1, yCoord, zCoord - 1);
-            worldObj.setBlockToAir(xCoord, yCoord, zCoord);
-            worldObj.setBlockToAir(xCoord, yCoord + 1, zCoord);
-
+            for (EnumFacing direction : EnumFacing.HORIZONTALS) {
+                BlockPos redstonePos = this.pos.offset(direction);
+                BlockPos figurinePos = redstonePos.offset(direction.rotateY());
+                this.worldObj.setBlockToAir(redstonePos);
+                this.worldObj.setBlockToAir(figurinePos);
+            }
+            this.worldObj.setBlockToAir(this.pos);
         }
-        super.updateEntity();
     }
 }

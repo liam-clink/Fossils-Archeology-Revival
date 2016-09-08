@@ -13,12 +13,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ITickable;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import java.util.Random;
 
-public class TileEntityTimeMachine extends TileEntity implements IInventory, ISidedInventory {
+public class TileEntityTimeMachine extends TileEntity implements IInventory, ISidedInventory, ITickable {
     private static Random field_40064_r = new Random();
     public final float RndRound = ((float) Math.PI * 2F);
     public final int MAX_CHARGED = 1000;
@@ -53,14 +54,8 @@ public class TileEntityTimeMachine extends TileEntity implements IInventory, ISi
         return false;
     }
 
-    /**
-     * Allows the entity to update its state. Overridden in most subclasses,
-     * e.g. the mob spawner uses this to count ticks and creates a new spawn
-     * inside its implementation.
-     */
     @Override
-    public void updateEntity() {
-        super.updateEntity();
+    public void update() {
         this.UpdateClock();
         if (this.chargeLevel != 0) {
             if (!this.isClockInPlace()) {

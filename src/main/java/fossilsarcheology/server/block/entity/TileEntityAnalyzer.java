@@ -65,7 +65,6 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
         return ItemStackHelper.getAndSplit(this.slots, slot, amount);
     }
 
-    @Nullable
     @Override
     public ItemStack removeStackFromSlot(int index) {
         return ItemStackHelper.getAndRemove(this.slots, index);

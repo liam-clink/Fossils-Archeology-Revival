@@ -21,11 +21,6 @@ public class TileEntityFigurine extends TileEntity {
     }
 
     @Override
-    public boolean canUpdate() {
-        return false;
-    }
-
-    @Override
     public void readFromNBT(NBTTagCompound compound) {
         super.readFromNBT(compound);
         this.figurineType = compound.getByte("FigurineType");

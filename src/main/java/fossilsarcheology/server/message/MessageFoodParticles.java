@@ -11,6 +11,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -45,51 +46,34 @@ public class MessageFoodParticles extends AbstractMessage<MessageFoodParticles> 
     @SideOnly(Side.CLIENT)
     public void onClientReceived(Minecraft client, MessageFoodParticles message, EntityPlayer player, MessageContext messageContext) {
         Entity entity = player.worldObj.getEntityByID(message.dinosaurID);
-
         if (entity instanceof EntityPrehistoric) {
             EntityPrehistoric prehistoric = (EntityPrehistoric) entity;
             if (message.foodItemID == 0 && message.blockItemID == 0) {
+                Item item = Items.BEEF;
                 switch (prehistoric.type.diet) {
                     case HERBIVORE:
-                        spawnItemParticle(prehistoric, Items.reeds);
-                        spawnItemParticle(prehistoric, Items.reeds);
-                        spawnItemParticle(prehistoric, Items.reeds);
-                        spawnItemParticle(prehistoric, Items.reeds);
+                        item = Items.REEDS;
                         break;
                     case OMNIVORE:
-                        spawnItemParticle(prehistoric, Items.bread);
-                        spawnItemParticle(prehistoric, Items.bread);
-                        spawnItemParticle(prehistoric, Items.bread);
-                        spawnItemParticle(prehistoric, Items.bread);
+                        item = Items.BREAD;
                         break;
-                    default:
-                        spawnItemParticle(prehistoric, Items.beef);
-                        spawnItemParticle(prehistoric, Items.beef);
-                        spawnItemParticle(prehistoric, Items.beef);
-                        spawnItemParticle(prehistoric, Items.beef);
-                        break;
-
+                }
+                for (int i = 0; i < 4; i++) {
+                    spawnItemParticle(prehistoric, item);
                 }
             } else {
-                if (message.foodItemID != 0) {
-                    spawnItemParticle(prehistoric, Item.getItemById(message.foodItemID));
-                    spawnItemParticle(prehistoric, Item.getItemById(message.foodItemID));
-                    spawnItemParticle(prehistoric, Item.getItemById(message.foodItemID));
-                    spawnItemParticle(prehistoric, Item.getItemById(message.foodItemID));
-                }
                 if (message.blockItemID != 0) {
-                    spawnBlockParticle(prehistoric, Block.getBlockById(message.blockItemID));
-                    spawnBlockParticle(prehistoric, Block.getBlockById(message.blockItemID));
-                    spawnBlockParticle(prehistoric, Block.getBlockById(message.blockItemID));
-                    spawnBlockParticle(prehistoric, Block.getBlockById(message.blockItemID));
-                    spawnBlockParticle(prehistoric, Block.getBlockById(message.blockItemID));
-                    spawnBlockParticle(prehistoric, Block.getBlockById(message.blockItemID));
-                    spawnBlockParticle(prehistoric, Block.getBlockById(message.blockItemID));
-                    spawnBlockParticle(prehistoric, Block.getBlockById(message.blockItemID));
-
+                    Block food = Block.getBlockById(message.blockItemID);
+                    for (int i = 0; i < 8; i++) {
+                        spawnBlockParticle(prehistoric, food);
+                    }
+                } else {
+                    Item food = Item.getItemById(message.foodItemID);
+                    for (int i = 0; i < 4; i++) {
+                        spawnItemParticle(prehistoric, food);
+                    }
                 }
             }
-
         }
     }
 
@@ -98,9 +82,10 @@ public class MessageFoodParticles extends AbstractMessage<MessageFoodParticles> 
         double motionX = rand.nextGaussian() * 0.07D;
         double motionY = rand.nextGaussian() * 0.07D;
         double motionZ = rand.nextGaussian() * 0.07D;
-        float f = (float) (rand.nextFloat() * (entity.boundingBox.maxX - entity.boundingBox.minX) + entity.boundingBox.minX);
-        float f1 = (float) (rand.nextFloat() * (entity.boundingBox.maxY - entity.boundingBox.minY) + entity.boundingBox.minY);
-        float f2 = (float) (rand.nextFloat() * (entity.boundingBox.maxZ - entity.boundingBox.minZ) + entity.boundingBox.minZ);
+        AxisAlignedBB bounds = entity.getEntityBoundingBox();
+        float f = (float) (rand.nextFloat() * (bounds.maxX - bounds.minX) + bounds.minX);
+        float f1 = (float) (rand.nextFloat() * (bounds.maxY - bounds.minY) + bounds.minY);
+        float f2 = (float) (rand.nextFloat() * (bounds.maxZ - bounds.minZ) + bounds.minZ);
         Revival.PROXY.spawnPacketItemParticles(entity.worldObj, f, f1, f2, motionX, motionY, motionZ, item);
     }
 
@@ -109,16 +94,15 @@ public class MessageFoodParticles extends AbstractMessage<MessageFoodParticles> 
         double motionX = rand.nextGaussian() * 0.07D;
         double motionY = rand.nextGaussian() * 0.07D;
         double motionZ = rand.nextGaussian() * 0.07D;
-        float f = (float) (rand.nextFloat() * (entity.boundingBox.maxX - entity.boundingBox.minX) + entity.boundingBox.minX);
-        float f1 = (float) (rand.nextFloat() * (entity.boundingBox.maxY - entity.boundingBox.minY) + entity.boundingBox.minY);
-        float f2 = (float) (rand.nextFloat() * (entity.boundingBox.maxZ - entity.boundingBox.minZ) + entity.boundingBox.minZ);
+        AxisAlignedBB bounds = entity.getEntityBoundingBox();
+        float f = (float) (rand.nextFloat() * (bounds.maxX - bounds.minX) + bounds.minX);
+        float f1 = (float) (rand.nextFloat() * (bounds.maxY - bounds.minY) + bounds.minY);
+        float f2 = (float) (rand.nextFloat() * (bounds.maxZ - bounds.minZ) + bounds.minZ);
         Revival.PROXY.spawnPacketBlockParticles(entity.worldObj, f, f1, f2, motionX, motionY, motionZ, block);
-
     }
 
     @Override
     public void onServerReceived(MinecraftServer server, MessageFoodParticles message, EntityPlayer player, MessageContext messageContext) {
-
     }
 
     @Override
@@ -126,7 +110,6 @@ public class MessageFoodParticles extends AbstractMessage<MessageFoodParticles> 
         dinosaurID = buf.readInt();
         foodItemID = buf.readInt();
         blockItemID = buf.readInt();
-
     }
 
     @Override
@@ -134,6 +117,5 @@ public class MessageFoodParticles extends AbstractMessage<MessageFoodParticles> 
         buf.writeInt(dinosaurID);
         buf.writeInt(foodItemID);
         buf.writeInt(blockItemID);
-
     }
 }

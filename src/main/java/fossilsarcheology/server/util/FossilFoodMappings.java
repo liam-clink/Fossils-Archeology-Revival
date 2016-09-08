@@ -53,67 +53,67 @@ import net.minecraft.init.Items;
 public class FossilFoodMappings {
 
     public static void init() {
-        FoodMappings.INSTANCE.addPlant(Items.reeds, 15);
-        FoodMappings.INSTANCE.addPlant(Items.wheat, 13);
-        FoodMappings.INSTANCE.addPlant(Items.melon, 10);
-        FoodMappings.INSTANCE.addPlant(Items.apple, 20);
-        FoodMappings.INSTANCE.addPlant(Items.potato, 35);
-        FoodMappings.INSTANCE.addPlant(Items.baked_potato, 35);
-        FoodMappings.INSTANCE.addPlant(Items.cake, 50);
-        FoodMappings.INSTANCE.addPlant(Items.carrot, 15);
-        FoodMappings.INSTANCE.addPlant(Items.cookie, 10);
-        FoodMappings.INSTANCE.addPlant(Items.pumpkin_pie, 25);
-        FoodMappings.INSTANCE.addPlant(Items.sugar, 7);
-        FoodMappings.INSTANCE.addPlant(Items.bread, 25);
-        FoodMappings.INSTANCE.addPlant(Items.wheat_seeds, 5);
-        FoodMappings.INSTANCE.addPlant(Items.melon_seeds, 5);
-        FoodMappings.INSTANCE.addPlant(Items.pumpkin_seeds, 5);
-        FoodMappings.INSTANCE.addPlant(Blocks.cake, 35);
-        FoodMappings.INSTANCE.addPlant(Blocks.carrots, 20);
-        FoodMappings.INSTANCE.addPlant(Blocks.wheat, 10);
-        FoodMappings.INSTANCE.addPlant(Blocks.leaves, 20);
-        FoodMappings.INSTANCE.addPlant(Blocks.melon_block, 65);
-        FoodMappings.INSTANCE.addPlant(Blocks.brown_mushroom, 15);
-        FoodMappings.INSTANCE.addPlant(Blocks.red_mushroom, 15);
-        FoodMappings.INSTANCE.addPlant(Blocks.red_flower, 5);
-        FoodMappings.INSTANCE.addPlant(Blocks.yellow_flower, 5);
-        FoodMappings.INSTANCE.addPlant(Blocks.potatoes, 25);
-        FoodMappings.INSTANCE.addPlant(Blocks.pumpkin, 30);
-        FoodMappings.INSTANCE.addPlant(Blocks.reeds, 15);
-        FoodMappings.INSTANCE.addPlant(Blocks.sapling, 15);
-        FoodMappings.INSTANCE.addPlant(Blocks.tallgrass, 5);
+        FoodMappings.INSTANCE.addPlant(Items.REEDS, 15);
+        FoodMappings.INSTANCE.addPlant(Items.WHEAT, 13);
+        FoodMappings.INSTANCE.addPlant(Items.MELON, 10);
+        FoodMappings.INSTANCE.addPlant(Items.APPLE, 20);
+        FoodMappings.INSTANCE.addPlant(Items.POTATO, 35);
+        FoodMappings.INSTANCE.addPlant(Items.BAKED_POTATO, 35);
+        FoodMappings.INSTANCE.addPlant(Items.CAKE, 50);
+        FoodMappings.INSTANCE.addPlant(Items.CARROT, 15);
+        FoodMappings.INSTANCE.addPlant(Items.COOKIE, 10);
+        FoodMappings.INSTANCE.addPlant(Items.PUMPKIN_PIE, 25);
+        FoodMappings.INSTANCE.addPlant(Items.SUGAR, 7);
+        FoodMappings.INSTANCE.addPlant(Items.BREAD, 25);
+        FoodMappings.INSTANCE.addPlant(Items.WHEAT_SEEDS, 5);
+        FoodMappings.INSTANCE.addPlant(Items.MELON_SEEDS, 5);
+        FoodMappings.INSTANCE.addPlant(Items.PUMPKIN_SEEDS, 5);
+        FoodMappings.INSTANCE.addPlant(Blocks.CAKE, 35);
+        FoodMappings.INSTANCE.addPlant(Blocks.CARROTS, 20);
+        FoodMappings.INSTANCE.addPlant(Blocks.WHEAT, 10);
+        FoodMappings.INSTANCE.addPlant(Blocks.LEAVES, 20);
+        FoodMappings.INSTANCE.addPlant(Blocks.MELON_BLOCK, 65);
+        FoodMappings.INSTANCE.addPlant(Blocks.BROWN_MUSHROOM, 15);
+        FoodMappings.INSTANCE.addPlant(Blocks.RED_MUSHROOM, 15);
+        FoodMappings.INSTANCE.addPlant(Blocks.RED_FLOWER, 5);
+        FoodMappings.INSTANCE.addPlant(Blocks.YELLOW_FLOWER, 5);
+        FoodMappings.INSTANCE.addPlant(Blocks.POTATOES, 25);
+        FoodMappings.INSTANCE.addPlant(Blocks.PUMPKIN, 30);
+        FoodMappings.INSTANCE.addPlant(Blocks.REEDS, 15);
+        FoodMappings.INSTANCE.addPlant(Blocks.SAPLING, 15);
+        FoodMappings.INSTANCE.addPlant(Blocks.TALLGRASS, 5);
         FoodMappings.INSTANCE.addPlant(FABlockRegistry.INSTANCE.ferns, 55);
         FoodMappings.INSTANCE.addPlant(FABlockRegistry.INSTANCE.palmLeaves, 40);
 
-        FoodMappings.INSTANCE.addFish(Items.fish, 30);
-        FoodMappings.INSTANCE.addFish(Items.cooked_fished, 45);
+        FoodMappings.INSTANCE.addFish(Items.FISH, 30);
+        FoodMappings.INSTANCE.addFish(Items.COOKED_FISH, 45);
         FoodMappings.INSTANCE.addFish(FAItemRegistry.INSTANCE.sjl, 65);
 
-        FoodMappings.INSTANCE.addMeat(Items.cooked_beef, 60);
-        FoodMappings.INSTANCE.addMeat(Items.beef, 40);
-        FoodMappings.INSTANCE.addMeat(Items.cooked_chicken, 15);
-        FoodMappings.INSTANCE.addMeat(Items.chicken, 10);
-        FoodMappings.INSTANCE.addMeat(Items.porkchop, 35);
-        FoodMappings.INSTANCE.addMeat(Items.cooked_porkchop, 55);
+        FoodMappings.INSTANCE.addMeat(Items.COOKED_BEEF, 60);
+        FoodMappings.INSTANCE.addMeat(Items.BEEF, 40);
+        FoodMappings.INSTANCE.addMeat(Items.COOKED_CHICKEN, 15);
+        FoodMappings.INSTANCE.addMeat(Items.CHICKEN, 10);
+        FoodMappings.INSTANCE.addMeat(Items.PORKCHOP, 35);
+        FoodMappings.INSTANCE.addMeat(Items.COOKED_PORKCHOP, 55);
         FoodMappings.INSTANCE.addMeat(FAItemRegistry.INSTANCE.failuresaurusFlesh, 15);
 
-        FoodMappings.INSTANCE.addEgg(Items.egg, 7);
+        FoodMappings.INSTANCE.addEgg(Items.EGG, 7);
 
-        for (int i = 0; i < PrehistoricEntityType.values().length; i++) {
-            if (PrehistoricEntityType.values()[i].timePeriod != TimePeriod.CURRENT) {
-                if (PrehistoricEntityType.values()[i].mobType != MobType.FISH) {
-                    FoodMappings.INSTANCE.addMeat(PrehistoricEntityType.values()[i].foodItem, 35);
-                    FoodMappings.INSTANCE.addMeat(PrehistoricEntityType.values()[i].cookedFoodItem, 7);
+        for (PrehistoricEntityType type : PrehistoricEntityType.values()) {
+            if (type.timePeriod != TimePeriod.CURRENT) {
+                if (type.mobType != MobType.FISH) {
+                    FoodMappings.INSTANCE.addMeat(type.foodItem, 35);
+                    FoodMappings.INSTANCE.addMeat(type.cookedFoodItem, 7);
                 } else {
-                    FoodMappings.INSTANCE.addFish(PrehistoricEntityType.values()[i].eggItem, 35);
-                    FoodMappings.INSTANCE.addFish(PrehistoricEntityType.values()[i].fishItem, 35);
-                    FoodMappings.INSTANCE.addFish(PrehistoricEntityType.values()[i].cookedFoodItem, 75);
+                    FoodMappings.INSTANCE.addFish(type.eggItem, 35);
+                    FoodMappings.INSTANCE.addFish(type.fishItem, 35);
+                    FoodMappings.INSTANCE.addFish(type.cookedFoodItem, 75);
                 }
             }
-            if (PrehistoricEntityType.values()[i].mobType == MobType.BIRD || PrehistoricEntityType.values()[i].mobType == MobType.CHICKEN) {
-                FoodMappings.INSTANCE.addEgg(PrehistoricEntityType.values()[i].bestBirdEggItem, 15);
-                if (PrehistoricEntityType.values()[i].mobType != MobType.CHICKEN) {
-                    FoodMappings.INSTANCE.addEgg(PrehistoricEntityType.values()[i].birdEggItem, 10);
+            if (type.mobType == MobType.BIRD || type.mobType == MobType.CHICKEN) {
+                FoodMappings.INSTANCE.addEgg(type.bestBirdEggItem, 15);
+                if (type.mobType != MobType.CHICKEN) {
+                    FoodMappings.INSTANCE.addEgg(type.birdEggItem, 10);
                 }
             }
         }

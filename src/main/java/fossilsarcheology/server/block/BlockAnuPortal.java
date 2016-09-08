@@ -48,15 +48,15 @@ public class BlockAnuPortal extends Block {
     @Override
     public void onEntityCollidedWithBlock(World world, BlockPos pos, IBlockState state, Entity entity) {
         if ((entity.getRidingEntity() == null) && (entity.getPassengers().size() == 0) && (entity instanceof EntityPlayerMP)) {
-            EntityPlayerMP thePlayer = (EntityPlayerMP) entity;
-            if (thePlayer.timeUntilPortal > 0) {
-                thePlayer.timeUntilPortal = 10;
-            } else if (thePlayer.dimension != Revival.CONFIG.dimensionIDDarknessLair) {
-                thePlayer.timeUntilPortal = 10;
-                thePlayer.mcServer.getConfigurationManager().transferPlayerToDimension(thePlayer, Revival.CONFIG.dimensionIDDarknessLair, new AnuTeleporter(thePlayer.mcServer.worldServerForDimension(Revival.CONFIG.dimensionIDDarknessLair)));
+            EntityPlayerMP player = (EntityPlayerMP) entity;
+            if (player.timeUntilPortal > 0) {
+                player.timeUntilPortal = 10;
+            } else if (player.dimension != Revival.CONFIG.dimensionIDDarknessLair) {
+                player.timeUntilPortal = 10;
+                player.mcServer.getConfigurationManager().transferPlayerToDimension(player, Revival.CONFIG.dimensionIDDarknessLair, new AnuTeleporter(player.mcServer.worldServerForDimension(Revival.CONFIG.dimensionIDDarknessLair)));
             } else {
-                thePlayer.timeUntilPortal = 10;
-                thePlayer.mcServer.getConfigurationManager().transferPlayerToDimension(thePlayer, 0, new AnuTeleporter(thePlayer.mcServer.worldServerForDimension(0)));
+                player.timeUntilPortal = 10;
+                player.mcServer.getConfigurationManager().transferPlayerToDimension(player, 0, new AnuTeleporter(player.mcServer.worldServerForDimension(0)));
             }
         }
     }

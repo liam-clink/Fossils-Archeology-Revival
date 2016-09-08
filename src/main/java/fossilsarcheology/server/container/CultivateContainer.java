@@ -4,184 +4,123 @@ import fossilsarcheology.server.block.entity.TileEntityCultivate;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
-import net.minecraft.inventory.ICrafting;
+import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.Slot;
-import net.minecraft.inventory.SlotFurnace;
+import net.minecraft.inventory.SlotFurnaceOutput;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 
 public class CultivateContainer extends Container {
     public static final int INPUT_END = 0, FUEL = 1, OUTPUT_END = 2;
-    private TileEntityCultivate furnace;
+    private TileEntityCultivate cultivate;
     private int cookTime = 0;
     private int burnTime = 0;
     private int itemBurnTime = 0;
     private int dna = 0;
 
-    public CultivateContainer(InventoryPlayer var1, TileEntity var2) {
-        this.furnace = (TileEntityCultivate) var2;
-        this.addSlotToContainer(new Slot(this.furnace, 0, 49, 20)); // input
-        this.addSlotToContainer(new Slot(this.furnace, 1, 81, 54)); // fuel
-        this.addSlotToContainer(new SlotFurnace(var1.player, this.furnace, 2, 116, 21)); // output
-        int var3;
-
-        // inventory
-        for (var3 = 0; var3 < 3; ++var3) {
-            for (int var4 = 0; var4 < 9; ++var4) {
-                this.addSlotToContainer(new Slot(var1, var4 + var3 * 9 + 9, 8 + var4 * 18, 84 + var3 * 18));
+    public CultivateContainer(InventoryPlayer playerInventory, TileEntity tile) {
+        this.cultivate = (TileEntityCultivate) tile;
+        this.addSlotToContainer(new Slot(this.cultivate, 0, 49, 20)); // input
+        this.addSlotToContainer(new Slot(this.cultivate, 1, 81, 54)); // fuel
+        this.addSlotToContainer(new SlotFurnaceOutput(playerInventory.player, this.cultivate, 2, 116, 21)); // output
+        for (int column = 0; column < 3; ++column) {
+            for (int row = 0; row < 9; ++row) {
+                this.addSlotToContainer(new Slot(playerInventory, row + column * 9 + 9, 8 + row * 18, 84 + column * 18));
             }
         }
-
-        // hotbar
-        for (var3 = 0; var3 < 9; ++var3) {
-            this.addSlotToContainer(new Slot(var1, var3, 8 + var3 * 18, 142));
+        for (int row = 0; row < 9; ++row) {
+            this.addSlotToContainer(new Slot(playerInventory, row, 8 + row * 18, 142));
         }
     }
 
     @Override
-    public void addCraftingToCrafters(ICrafting var1) {
-        super.addCraftingToCrafters(var1);
-        var1.sendProgressBarUpdate(this, 0, this.furnace.furnaceCookTime);
-        var1.sendProgressBarUpdate(this, 1, this.furnace.furnaceBurnTime);
-        var1.sendProgressBarUpdate(this, 2, this.furnace.currentItemBurnTime);
-        var1.sendProgressBarUpdate(this, 3, this.furnace.getDNAType());
+    public void addListener(IContainerListener listener) {
+        super.addListener(listener);
+        listener.sendProgressBarUpdate(this, 0, this.cultivate.cultivateTime);
+        listener.sendProgressBarUpdate(this, 1, this.cultivate.cultivatePowerTime);
+        listener.sendProgressBarUpdate(this, 2, this.cultivate.currentCultivateTime);
+        listener.sendProgressBarUpdate(this, 3, this.cultivate.getDNAType());
     }
 
-    /**
-     * Updates crafting matrix; called from onCraftMatrixChanged. Args: none
-     */
     @Override
     public void detectAndSendChanges() {
         super.detectAndSendChanges();
 
-        for (int var1 = 0; var1 < this.crafters.size(); ++var1) {
-            ICrafting var2 = (ICrafting) this.crafters.get(var1);
-
-            if (this.cookTime != this.furnace.furnaceCookTime) {
-                var2.sendProgressBarUpdate(this, 0, this.furnace.furnaceCookTime);
+        for (IContainerListener listener : this.listeners) {
+            if (this.cookTime != this.cultivate.cultivateTime) {
+                listener.sendProgressBarUpdate(this, 0, this.cultivate.cultivateTime);
             }
-
-            if (this.burnTime != this.furnace.furnaceBurnTime) {
-                var2.sendProgressBarUpdate(this, 1, this.furnace.furnaceBurnTime);
+            if (this.burnTime != this.cultivate.cultivatePowerTime) {
+                listener.sendProgressBarUpdate(this, 1, this.cultivate.cultivatePowerTime);
             }
-
-            if (this.itemBurnTime != this.furnace.currentItemBurnTime) {
-                var2.sendProgressBarUpdate(this, 2, this.furnace.currentItemBurnTime);
+            if (this.itemBurnTime != this.cultivate.currentCultivateTime) {
+                listener.sendProgressBarUpdate(this, 2, this.cultivate.currentCultivateTime);
             }
-
-            if (this.dna != this.furnace.getDNAType()) {
-                var2.sendProgressBarUpdate(this, 3, this.furnace.getDNAType());
+            if (this.dna != this.cultivate.getDNAType()) {
+                listener.sendProgressBarUpdate(this, 3, this.cultivate.getDNAType());
             }
         }
-
-        this.cookTime = this.furnace.furnaceCookTime;
-        this.burnTime = this.furnace.furnaceBurnTime;
-        this.itemBurnTime = this.furnace.currentItemBurnTime;
-        this.dna = this.furnace.getDNAType();
+        this.cookTime = this.cultivate.cultivateTime;
+        this.burnTime = this.cultivate.cultivatePowerTime;
+        this.itemBurnTime = this.cultivate.currentCultivateTime;
+        this.dna = this.cultivate.getDNAType();
     }
 
     @Override
-    public void updateProgressBar(int var1, int var2) {
-        if (var1 == 0) {
-            this.furnace.furnaceCookTime = var2;
-        }
-
-        if (var1 == 1) {
-            this.furnace.furnaceBurnTime = var2;
-        }
-
-        if (var1 == 2) {
-            this.furnace.currentItemBurnTime = var2;
+    public void updateProgressBar(int key, int value) {
+        switch (key) {
+            case 0:
+                this.cultivate.cultivateTime = value;
+                break;
+            case 1:
+                this.cultivate.cultivatePowerTime = value;
+                break;
+            case 2:
+                this.cultivate.currentCultivateTime = value;
+                break;
         }
     }
 
     @Override
     public boolean canInteractWith(EntityPlayer var1) {
-        return this.furnace.isUseableByPlayer(var1);
+        return this.cultivate.isUseableByPlayer(var1);
     }
 
-    /**
-     * Called when a player shift-clicks on a slot. You must override this or
-     * you will crash when someone does that.
-     */
     @Override
-    public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2) {
-        ItemStack itemstack = null;
-        Slot slot = (Slot) this.inventorySlots.get(par2);
-
+    public ItemStack transferStackInSlot(EntityPlayer player, int index) {
+        ItemStack transfer = null;
+        Slot slot = this.inventorySlots.get(index);
         if (slot != null && slot.getHasStack()) {
-            ItemStack itemstack1 = slot.getStack();
-            itemstack = itemstack1.copy();
-
-            if (par2 > INPUT_END && par2 < OUTPUT_END + 1 && par2 != FUEL) // If
-            // slot
-            // is
-            // equal
-            // toOutput.
-            {
-                // Place INTO inventory, only check output.
-                if (!this.mergeItemStack(itemstack1, OUTPUT_END + 1, OUTPUT_END + 36 + 1, true)) // 13
-                // is
-                // first
-                // slot
-                // after
-                // the
-                // outputs,
-                // 49
-                // is
-                // last
-                // inventory
-                // slot
-                {
+            ItemStack stack = slot.getStack();
+            transfer = stack.copy();
+            if (index > INPUT_END && index < OUTPUT_END + 1 && index != FUEL) {
+                if (!this.mergeItemStack(stack, OUTPUT_END + 1, OUTPUT_END + 36 + 1, true)) {
                     return null;
                 }
-
-                slot.onSlotChange(itemstack1, itemstack);
-            }
-            // itemstack is in player inventory, try to place in appropriate
-            // furnace slot
-            else if (par2 > INPUT_END + 1) // if it's not in the INPUT
-            {
-                // if it can be smelted, place in the input slots
-                if (itemstack1 != null) {
-                    // try to place in either Input slot; add 1 to final input
-                    // slot because mergeItemStack uses < index
-                    if (!this.mergeItemStack(itemstack1, 0, INPUT_END + 1, false)) {
-                        return null;
-                    }
-                }
-            }
-            // item in player's inventory, but not in action bar
-            else if (par2 >= OUTPUT_END + 1 && par2 < OUTPUT_END + 28) {
-                // place in action bar
-                if (!this.mergeItemStack(itemstack1, OUTPUT_END + 28, OUTPUT_END + 37, false)) {
+                slot.onSlotChange(stack, transfer);
+            } else if (index > INPUT_END + 1) {
+                if (stack != null && !this.mergeItemStack(stack, 0, INPUT_END + 1, false)) {
                     return null;
                 }
-            }
-            // item in action bar - place in player inventory
-            else if (par2 >= OUTPUT_END + 28 && par2 < OUTPUT_END + 37 && !this.mergeItemStack(itemstack1, OUTPUT_END + 1, OUTPUT_END + 28, false)) {
+            } else if (index >= OUTPUT_END + 1 && index < OUTPUT_END + 28) {
+                if (!this.mergeItemStack(stack, OUTPUT_END + 28, OUTPUT_END + 37, false)) {
+                    return null;
+                }
+            } else if (index >= OUTPUT_END + 28 && index < OUTPUT_END + 37 && !this.mergeItemStack(stack, OUTPUT_END + 1, OUTPUT_END + 28, false)) {
+                return null;
+            } else if (!this.mergeItemStack(stack, OUTPUT_END + 1, OUTPUT_END + 37, false)) {
                 return null;
             }
-
-            // In one of the output slots; try to place in player inventory /
-            // action bar
-            else if (!this.mergeItemStack(itemstack1, OUTPUT_END + 1, OUTPUT_END + 37, false)) {
-                return null;
-            }
-
-            if (itemstack1.stackSize == 0) {
+            if (stack.stackSize == 0) {
                 slot.putStack(null);
             } else {
                 slot.onSlotChanged();
             }
-
-            if (itemstack1.stackSize == itemstack.stackSize) {
+            if (stack.stackSize == transfer.stackSize) {
                 return null;
             }
-
-            slot.onPickupFromSlot(par1EntityPlayer, itemstack1);
+            slot.onPickupFromSlot(player, stack);
         }
-
-        return itemstack;
+        return transfer;
     }
 }
