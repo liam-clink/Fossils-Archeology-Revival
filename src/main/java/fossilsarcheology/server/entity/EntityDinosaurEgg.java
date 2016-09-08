@@ -51,7 +51,7 @@ public class EntityDinosaurEgg extends EntityLiving implements IEntityAdditional
 
     protected void entityInit() {
         super.entityInit();
-        if (Revival.enableDebugging()) {
+        if (Revival.RELEASE_TYPE.enableDebugging()) {
             this.hatchTime = 1000;
         } else {
             this.hatchTime = 3000;
@@ -61,11 +61,7 @@ public class EntityDinosaurEgg extends EntityLiving implements IEntityAdditional
 
     public EntityDinosaurEgg(World world, PrehistoricEntityType prehistoric, EntityPrehistoric entity) {
         this(world, prehistoric);
-        this.parentOwner = entity.getCommandSenderName();
-    }
-
-    protected boolean isAIEnabled() {
-        return true;
+        this.parentOwner = entity.getName();
     }
 
     public EntityDinosaurEgg(World world, double x, double y, double z, PrehistoricEntityType prehistoric) {
@@ -77,6 +73,11 @@ public class EntityDinosaurEgg extends EntityLiving implements IEntityAdditional
         this.prevPosX = x;
         this.prevPosY = y;
         this.prevPosZ = z;
+    }
+
+    @Override
+    public boolean isAIDisabled() {
+        return true;
     }
 
     public String getTexture() {

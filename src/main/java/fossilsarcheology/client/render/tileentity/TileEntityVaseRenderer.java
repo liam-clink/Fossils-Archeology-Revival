@@ -6,9 +6,11 @@ import fossilsarcheology.client.model.ModelVaseVolute;
 import fossilsarcheology.server.block.entity.TileEntityVase;
 import net.minecraft.block.Block;
 import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import org.lwjgl.opengl.GL11;
@@ -54,7 +56,7 @@ public class TileEntityVaseRenderer extends TileEntitySpecialRenderer {
         // this rotates your block otherwise will render upside down
         GlStateManager.pushMatrix();
         GlStateManager.rotate(180F, 1.0F, 0.0F, 1.0F);
-        rotateBlock(te.getWorldObj(), te.xCoord, te.yCoord, te.zCoord, te.blockType, te.getVaseTypeMeta(), te.getVaseType());
+        rotateBlock(te.getWorld(), te.xCoord, te.yCoord, te.zCoord, te.blockType, te.getVaseTypeMeta(), te.getVaseType());
         GlStateManager.popMatrix();
         GlStateManager.popMatrix();
     }
