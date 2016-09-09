@@ -209,10 +209,10 @@ public class EntitySarcosuchus extends EntityPrehistoricSwimming {
         if (this.getAttackTarget() != null) {
             if (getAttackBounds().intersectsWith(this.getAttackTarget().boundingBox)) {
                 if (!this.isInWater()) {
-                    if (this.getAnimation() != ATTACK_ANIMATION) {
-                        this.setAnimation(ATTACK_ANIMATION);
+                    if (this.getAnimation() != attackAnimation) {
+                        this.setAnimation(attackAnimation);
                     }
-                    if (this.getAnimation() == ATTACK_ANIMATION && this.getAnimationTick() > 5) {
+                    if (this.getAnimation() == attackAnimation && this.getAnimationTick() > 5) {
                         this.getAttackTarget().attackEntityFrom(DamageSource.causeMobDamage(this), (float) this.getAttributeMap().getAttributeInstance(SharedMonsterAttributes.attackDamage).getAttributeValue());
                     }
                     this.attackEntityAsMob(this.getAttackTarget());
@@ -245,7 +245,7 @@ public class EntitySarcosuchus extends EntityPrehistoricSwimming {
 
     @Override
     public Animation[] getAnimations() {
-        return new Animation[] { SPEAK_ANIMATION, ATTACK_ANIMATION, ROLL_ANIMATION };
+        return new Animation[] { speakAnimation, attackAnimation, ROLL_ANIMATION };
     }
 
     @Override

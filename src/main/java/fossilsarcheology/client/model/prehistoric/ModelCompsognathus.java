@@ -172,12 +172,12 @@ public class ModelCompsognathus extends ModelPrehistoric {
         blockMovement(f, f1, f2, f3, f4, f5, (Entity) entity);
         this.resetToDefaultPose();
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
-        animator.setAnimation(compsognathus.SPEAK_ANIMATION);
+        animator.setAnimation(compsognathus.speakAnimation);
         animator.startKeyframe(10);
         ModelUtils.rotate(animator, headFront_1, 29, 0, 0);
         animator.endKeyframe();
         animator.resetKeyframe(10);
-        animator.setAnimation(compsognathus.ATTACK_ANIMATION);
+        animator.setAnimation(compsognathus.attackAnimation);
         animator.startKeyframe(15);
         animator.move(LeftUpperLeg, 0, 1F, -0.5F);
         animator.move(RightUpperLeg, 0, 1F, -0.5F);

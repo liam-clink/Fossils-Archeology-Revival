@@ -236,7 +236,7 @@ public class ModelVelociraptor extends ModelPrehistoric {
         blockMovement(f, f1, f2, f3, f4, f5, (Entity) entity);
         this.resetToDefaultPose();
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
-        animator.setAnimation(prehistoric.SPEAK_ANIMATION);
+        animator.setAnimation(prehistoric.speakAnimation);
         animator.startKeyframe(10);
         ModelUtils.rotate(animator, neck, 15, 0, 0);
         ModelUtils.rotate(animator, head, -20, 0, 0);
@@ -244,7 +244,7 @@ public class ModelVelociraptor extends ModelPrehistoric {
         ;
         animator.endKeyframe();
         animator.resetKeyframe(10);
-        animator.setAnimation(prehistoric.ATTACK_ANIMATION);
+        animator.setAnimation(prehistoric.attackAnimation);
         animator.startKeyframe(10);
         animator.move(leftThigh, 0, 3.2F, -0.5F);
         animator.move(rightThigh, 0, 3.2F, -0.5F);
@@ -396,7 +396,7 @@ public class ModelVelociraptor extends ModelPrehistoric {
         this.chainWave(neckParts, speed2, degree * 0.5F, 4, f, f1);
         this.chainWave(tailParts, speed2, degree * 0.3F, -4, f, f1);
 
-        if (((EntityVelociraptor) entity).getAnimation() != ((EntityVelociraptor) entity).ATTACK_ANIMATION && ((EntityVelociraptor) entity).ridingEntity != null) {
+        if (((EntityVelociraptor) entity).getAnimation() != ((EntityVelociraptor) entity).attackAnimation && ((EntityVelociraptor) entity).ridingEntity != null) {
             ModelUtils.setRotateAngleAlt(lowerBody, -15, 0, 0);
             ModelUtils.setRotateAngleAlt(leftLeg, 20, 0, 0);
             ModelUtils.setRotateAngleAlt(leftFoot, -20, 0, 0);

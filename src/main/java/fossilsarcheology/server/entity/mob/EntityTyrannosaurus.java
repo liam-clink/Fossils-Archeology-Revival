@@ -77,7 +77,7 @@ public class EntityTyrannosaurus extends EntityPrehistoric {
     @Override
     public void onLivingUpdate() {
         super.onLivingUpdate();
-        if (this.getAnimation() == ATTACK_ANIMATION && this.getAnimationTick() == 12 && this.getAttackTarget() != null) {
+        if (this.getAnimation() == attackAnimation && this.getAnimationTick() == 12 && this.getAttackTarget() != null) {
             this.attackEntityAsMob(this.getAttackTarget());
         }
     }
@@ -86,10 +86,10 @@ public class EntityTyrannosaurus extends EntityPrehistoric {
     public boolean attackEntityAsMob(Entity entity) {
         if (getAttackBounds().intersectsWith(entity.boundingBox)) {
             if (this.getAnimation() == NO_ANIMATION) {
-                this.setAnimation(ATTACK_ANIMATION);
+                this.setAnimation(attackAnimation);
                 return false;
             }
-            if (this.getAnimation() == ATTACK_ANIMATION && this.getAnimationTick() == 12) {
+            if (this.getAnimation() == attackAnimation && this.getAnimationTick() == 12) {
                 IAttributeInstance attackDamage = this.getEntityAttribute(SharedMonsterAttributes.attackDamage);
                 boolean hurt = entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) attackDamage.getAttributeValue());
                 if (entity.ridingEntity != null) {
@@ -212,7 +212,7 @@ public class EntityTyrannosaurus extends EntityPrehistoric {
 
     @Override
     public Animation[] getAnimations() {
-        return new Animation[] { SPEAK_ANIMATION, ATTACK_ANIMATION, ROAR_ANIMATION };
+        return new Animation[] { speakAnimation, attackAnimation, ROAR_ANIMATION };
     }
 
     @Override

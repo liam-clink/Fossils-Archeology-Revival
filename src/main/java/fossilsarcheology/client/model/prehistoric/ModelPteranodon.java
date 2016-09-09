@@ -161,12 +161,12 @@ public class ModelPteranodon extends ModelPrehistoric {
         blockMovement(f, f1, f2, f3, f4, f5, (Entity) entity);
         this.resetToDefaultPose();
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
-        animator.setAnimation(pterosaur.SPEAK_ANIMATION);
+        animator.setAnimation(pterosaur.speakAnimation);
         animator.startKeyframe(10);
         ModelUtils.rotate(animator, Beak1, 40, 0, 0);
         animator.endKeyframe();
         animator.resetKeyframe(10);
-        animator.setAnimation(pterosaur.ATTACK_ANIMATION);
+        animator.setAnimation(pterosaur.attackAnimation);
         animator.startKeyframe(10);
         ModelUtils.rotate(animator, Neck1, -41, 0, 0);
         ModelUtils.rotate(animator, Head, 57, 0, 0);

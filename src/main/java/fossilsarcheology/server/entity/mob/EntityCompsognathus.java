@@ -165,7 +165,7 @@ public class EntityCompsognathus extends EntityPrehistoric {
     @Override
     public void onLivingUpdate() {
         super.onLivingUpdate();
-        if (this.getAttackTarget() != null && this.getAnimation() == ATTACK_ANIMATION && (this.getAnimationTick() <= 20 && this.getAnimationTick() >= 17) && this.onGround) {
+        if (this.getAttackTarget() != null && this.getAnimation() == attackAnimation && (this.getAnimationTick() <= 20 && this.getAnimationTick() >= 17) && this.onGround) {
             double d0 = this.getAttackTarget().posX - this.posX;
             double d1 = this.getAttackTarget().posZ - this.posZ;
             float f = MathHelper.sqrt_double(d0 * d0 + d1 * d1);
@@ -185,7 +185,7 @@ public class EntityCompsognathus extends EntityPrehistoric {
     public void applyEntityCollision(Entity entity) {
         super.applyEntityCollision(entity);
         if (this.getAttackTarget() != null) {
-            if (this.getAttackTarget() == entity && this.getAnimation() == ATTACK_ANIMATION && !onGround && this.ridingEntity != entity) {
+            if (this.getAttackTarget() == entity && this.getAnimation() == attackAnimation && !onGround && this.ridingEntity != entity) {
                 IAttributeInstance iattributeinstance = this.getEntityAttribute(SharedMonsterAttributes.attackDamage);
                 this.getAttackTarget().attackEntityFrom(DamageSource.causeMobDamage(this), (float) iattributeinstance.getAttributeValue());
             }

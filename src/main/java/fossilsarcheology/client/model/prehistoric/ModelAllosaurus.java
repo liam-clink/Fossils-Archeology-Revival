@@ -180,12 +180,12 @@ public class ModelAllosaurus extends ModelPrehistoric {
         blockMovement(f, f1, f2, f3, f4, f5, (Entity) entity);
         this.resetToDefaultPose();
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
-        animator.setAnimation(allosaurus.SPEAK_ANIMATION);
+        animator.setAnimation(allosaurus.speakAnimation);
         animator.startKeyframe(10);
         ModelUtils.rotate(animator, lowerJaw, 25, 0, 0);
         animator.endKeyframe();
         animator.resetKeyframe(10);
-        animator.setAnimation(allosaurus.ATTACK_ANIMATION);
+        animator.setAnimation(allosaurus.attackAnimation);
         animator.startKeyframe(10);
         ModelUtils.rotate(animator, neck, -31, 0, 0);
         ModelUtils.rotate(animator, head, -40, 0, 0);

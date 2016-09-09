@@ -188,13 +188,13 @@ public class ModelGallimimus extends ModelPrehistoric {
         blockMovement(f, f1, f2, f3, f4, f5, (Entity) entity);
         this.resetToDefaultPose();
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
-        animator.setAnimation(gallimimus.SPEAK_ANIMATION);
+        animator.setAnimation(gallimimus.speakAnimation);
         animator.startKeyframe(10);
         animator.move(lowerJaw, 0, 0, 0.5F);
         ModelUtils.rotate(animator, lowerJaw, 30, 0, 0);
         animator.endKeyframe();
         animator.resetKeyframe(10);
-        animator.setAnimation(gallimimus.ATTACK_ANIMATION);
+        animator.setAnimation(gallimimus.attackAnimation);
         animator.startKeyframe(10);
         ModelUtils.rotate(animator, neck, -36, 0, 0);
         ModelUtils.rotate(animator, head, 47, 0, 0);

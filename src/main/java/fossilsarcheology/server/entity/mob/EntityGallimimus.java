@@ -164,7 +164,7 @@ public class EntityGallimimus extends EntityPrehistoric {
         if (this.getRidingPlayer() != null) {
             this.stepHeight = 2;
         }
-        if (this.getAnimation() == ATTACK_ANIMATION && (this.getAnimationTick() >= 10 && this.getAnimationTick() <= 13) && this.getAttackTarget() != null) {
+        if (this.getAnimation() == attackAnimation && (this.getAnimationTick() >= 10 && this.getAnimationTick() <= 13) && this.getAttackTarget() != null) {
             this.attackEntityAsMob(this.getAttackTarget());
         }
     }
@@ -173,10 +173,10 @@ public class EntityGallimimus extends EntityPrehistoric {
     public boolean attackEntityAsMob(Entity entity) {
         if (this.getAttackBounds().intersectsWith(entity.boundingBox)) {
             if (this.getAnimation() == NO_ANIMATION) {
-                this.setAnimation(ATTACK_ANIMATION);
+                this.setAnimation(attackAnimation);
                 return false;
             }
-            if (this.getAnimation() == ATTACK_ANIMATION && (this.getAnimationTick() >= 10 && this.getAnimationTick() <= 13)) {
+            if (this.getAnimation() == attackAnimation && (this.getAnimationTick() >= 10 && this.getAnimationTick() <= 13)) {
                 IAttributeInstance iattributeinstance = this.getEntityAttribute(SharedMonsterAttributes.attackDamage);
                 boolean flag = entity.attackEntityFrom(DamageSource.generic, (float) iattributeinstance.getAttributeValue());
                 if (entity.ridingEntity != null) {

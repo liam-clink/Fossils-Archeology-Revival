@@ -160,7 +160,7 @@ public class EntityPlesiosaurus extends EntityPrehistoricSwimming {
 
     @Override
     public Animation[] getAnimations() {
-        return new Animation[] { SPEAK_ANIMATION, ATTACK_ANIMATION, FISH_ANIMATION };
+        return new Animation[] { speakAnimation, attackAnimation, FISH_ANIMATION };
     }
 
     @Override

@@ -224,10 +224,10 @@ public class EntitySpinosaurus extends EntityPrehistoricSwimming {
             if (getAttackBounds().intersectsWith(this.getAttackTarget().boundingBox)) {
                 this.attackEntityAsMob(this.getAttackTarget());
                 if (!this.isEntitySmallerThan(this.getAttackTarget(), 2F * (this.getAgeScale() / this.maxSize))) {
-                    if (this.getAnimation() != ATTACK_ANIMATION) {
-                        this.setAnimation(ATTACK_ANIMATION);
+                    if (this.getAnimation() != attackAnimation) {
+                        this.setAnimation(attackAnimation);
                     }
-                    if (this.getAnimation() == ATTACK_ANIMATION && this.getAnimationTick() > 10) {
+                    if (this.getAnimation() == attackAnimation && this.getAnimationTick() > 10) {
                         this.getAttackTarget().attackEntityFrom(DamageSource.causeMobDamage(this), (float) this.getAttributeMap().getAttributeInstance(SharedMonsterAttributes.maxHealth).getAttributeValue());
                     }
                 } else {
@@ -304,7 +304,7 @@ public class EntitySpinosaurus extends EntityPrehistoricSwimming {
 
     @Override
     public Animation[] getAnimations() {
-        return new Animation[] { SPEAK_ANIMATION, ATTACK_ANIMATION, SHAKE_ANIMATION, FISH_ANIMATION };
+        return new Animation[] { speakAnimation, attackAnimation, SHAKE_ANIMATION, FISH_ANIMATION };
     }
 
     @Override

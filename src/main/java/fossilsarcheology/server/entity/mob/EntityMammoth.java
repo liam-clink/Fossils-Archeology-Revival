@@ -155,7 +155,7 @@ public class EntityMammoth extends EntityPrehistoric implements IShearable {
         if (!this.isPotionActive(Potion.weakness) && this.worldObj.getBiomeGenForCoords(i, k).getFloatTemperature(i, j, k) > 1.0 && !this.isSheared()) {
             this.addPotionEffect(BIOME_EFFECT);
         }
-        if (this.getAnimation() == ATTACK_ANIMATION && this.getAnimationTick() == 17 && this.getAttackTarget() != null) {
+        if (this.getAnimation() == attackAnimation && this.getAnimationTick() == 17 && this.getAttackTarget() != null) {
             this.attackEntityAsMob(this.getAttackTarget());
         }
         super.onLivingUpdate();
@@ -240,10 +240,10 @@ public class EntityMammoth extends EntityPrehistoric implements IShearable {
     public boolean attackEntityAsMob(Entity entity) {
         if (this.getAttackBounds().expand(3.0F, 3.0F, 3.0F).intersectsWith(entity.boundingBox)) {
             if (this.getAnimation() == NO_ANIMATION) {
-                this.setAnimation(ATTACK_ANIMATION);
+                this.setAnimation(attackAnimation);
                 return false;
             }
-            if (this.getAnimation() == ATTACK_ANIMATION && this.getAnimationTick() == 17) {
+            if (this.getAnimation() == attackAnimation && this.getAnimationTick() == 17) {
                 IAttributeInstance iattributeinstance = this.getEntityAttribute(SharedMonsterAttributes.attackDamage);
                 boolean flag = entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) iattributeinstance.getAttributeValue());
                 if (entity.ridingEntity != null) {

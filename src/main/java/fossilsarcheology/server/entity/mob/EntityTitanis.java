@@ -161,7 +161,7 @@ public class EntityTitanis extends EntityPrehistoric {
     @Override
     public void onLivingUpdate() {
         super.onLivingUpdate();
-        if (this.getAnimation() == ATTACK_ANIMATION && this.getAnimationTick() == 15 && this.getAttackTarget() != null) {
+        if (this.getAnimation() == attackAnimation && this.getAnimationTick() == 15 && this.getAttackTarget() != null) {
             this.attackEntityAsMob(this.getAttackTarget());
         }
     }
@@ -170,10 +170,10 @@ public class EntityTitanis extends EntityPrehistoric {
     public boolean attackEntityAsMob(Entity entity) {
         if (this.getAttackBounds().intersectsWith(entity.boundingBox)) {
             if (this.getAnimation() == NO_ANIMATION) {
-                this.setAnimation(ATTACK_ANIMATION);
+                this.setAnimation(attackAnimation);
                 return false;
             }
-            if (this.getAnimation() == ATTACK_ANIMATION && this.getAnimationTick() == 15) {
+            if (this.getAnimation() == attackAnimation && this.getAnimationTick() == 15) {
                 IAttributeInstance iattributeinstance = this.getEntityAttribute(SharedMonsterAttributes.attackDamage);
                 boolean flag = entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) iattributeinstance.getAttributeValue());
                 if (entity.ridingEntity != null) {

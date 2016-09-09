@@ -166,7 +166,7 @@ public class EntityTriceratops extends EntityPrehistoric {
     @Override
     public void onLivingUpdate() {
         super.onLivingUpdate();
-        if (this.getAnimation() == ATTACK_ANIMATION && this.getAnimationTick() == 12 && this.getAttackTarget() != null) {
+        if (this.getAnimation() == attackAnimation && this.getAnimationTick() == 12 && this.getAttackTarget() != null) {
             this.attackEntityAsMob(this.getAttackTarget());
         }
     }
@@ -174,12 +174,12 @@ public class EntityTriceratops extends EntityPrehistoric {
     @Override
     public boolean attackEntityAsMob(Entity entity) {
         if (this.getAttackBounds().intersectsWith(entity.boundingBox)) {
-            if (this.getAnimation() != ATTACK_ANIMATION) {
-                this.setAnimation(ATTACK_ANIMATION);
+            if (this.getAnimation() != attackAnimation) {
+                this.setAnimation(attackAnimation);
                 return false;
             }
 
-            if (this.getAnimation() == ATTACK_ANIMATION && this.getAnimationTick() == 12) {
+            if (this.getAnimation() == attackAnimation && this.getAnimationTick() == 12) {
                 IAttributeInstance attackDamage = this.getEntityAttribute(SharedMonsterAttributes.attackDamage);
                 boolean flag = entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) attackDamage.getAttributeValue());
                 if (entity.ridingEntity != null) {

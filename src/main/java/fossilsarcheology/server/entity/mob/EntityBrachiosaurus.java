@@ -67,7 +67,7 @@ public class EntityBrachiosaurus extends EntityPrehistoric {
         breaksBlocks = true;
         this.ridingY = 1.5F;
         this.ridingXZ = -0.2F;
-        ATTACK_ANIMATION = Animation.create(30);
+        attackAnimation = Animation.create(30);
         this.pediaScale = 35F;
     }
 
@@ -171,18 +171,18 @@ public class EntityBrachiosaurus extends EntityPrehistoric {
     @Override
     public void onLivingUpdate() {
         super.onLivingUpdate();
-        if (this.getAnimation() == ATTACK_ANIMATION && this.getAnimationTick() > 19 && this.getAttackTarget() != null && this.getAttackBounds().intersectsWith(this.getAttackTarget().boundingBox)) {
+        if (this.getAnimation() == attackAnimation && this.getAnimationTick() > 19 && this.getAttackTarget() != null && this.getAttackBounds().intersectsWith(this.getAttackTarget().boundingBox)) {
             this.attackEntityAsMob(this.getAttackTarget());
         }
     }
 
     @Override
     public boolean attackEntityAsMob(Entity entity) {
-        if (this.getAnimation() != ATTACK_ANIMATION) {
-            this.setAnimation(ATTACK_ANIMATION);
+        if (this.getAnimation() != attackAnimation) {
+            this.setAnimation(attackAnimation);
             return false;
         }
-        if (this.getAnimation() == ATTACK_ANIMATION && this.getAnimationTick() > 19) {
+        if (this.getAnimation() == attackAnimation && this.getAnimationTick() > 19) {
             IAttributeInstance iattributeinstance = this.getEntityAttribute(SharedMonsterAttributes.attackDamage);
             boolean flag = entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) iattributeinstance.getAttributeValue());
             if (entity.ridingEntity != null) {

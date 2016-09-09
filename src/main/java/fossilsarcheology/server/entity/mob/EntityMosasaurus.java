@@ -159,10 +159,10 @@ public class EntityMosasaurus extends EntityPrehistoricSwimming {
         if (this.getAttackTarget() != null) {
             if (getAttackBounds().intersectsWith(this.getAttackTarget().boundingBox)) {
                 if (!this.isEntitySmallerThan(this.getAttackTarget(), 2F * (this.getAgeScale() / this.maxSize))) {
-                    if (this.getAnimation() != ATTACK_ANIMATION) {
-                        this.setAnimation(ATTACK_ANIMATION);
+                    if (this.getAnimation() != attackAnimation) {
+                        this.setAnimation(attackAnimation);
                     }
-                    if (this.getAnimation() == ATTACK_ANIMATION && this.getAnimationTick() > 5) {
+                    if (this.getAnimation() == attackAnimation && this.getAnimationTick() > 5) {
                         this.getAttackTarget().attackEntityFrom(DamageSource.causeMobDamage(this), (float) this.getAttributeMap().getAttributeInstance(SharedMonsterAttributes.maxHealth).getAttributeValue());
                     }
                     this.attackEntityAsMob(this.getAttackTarget());
@@ -221,7 +221,7 @@ public class EntityMosasaurus extends EntityPrehistoricSwimming {
 
     @Override
     public Animation[] getAnimations() {
-        return new Animation[] { SPEAK_ANIMATION, ATTACK_ANIMATION, SHAKE_ANIMATION };
+        return new Animation[] { speakAnimation, attackAnimation, SHAKE_ANIMATION };
     }
 
     @Override

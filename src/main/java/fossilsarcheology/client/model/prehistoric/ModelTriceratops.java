@@ -198,12 +198,12 @@ public class ModelTriceratops extends ModelPrehistoric {
         blockMovement(f, f1, f2, f3, f4, f5, (Entity) entity);
         this.resetToDefaultPose();
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
-        animator.setAnimation(prehistoric.SPEAK_ANIMATION);
+        animator.setAnimation(prehistoric.speakAnimation);
         animator.startKeyframe(10);
         ModelUtils.rotate(animator, beakbottom, 24, 0, 0);
         animator.endKeyframe();
         animator.resetKeyframe(10);
-        animator.setAnimation(prehistoric.ATTACK_ANIMATION);
+        animator.setAnimation(prehistoric.attackAnimation);
         animator.startKeyframe(5);
         ModelUtils.rotate(animator, head, 30, 0, 0);
         ModelUtils.rotate(animator, neck, 25, 0, 0);

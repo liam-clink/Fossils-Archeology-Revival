@@ -153,10 +153,10 @@ public class EntityLiopleurodon extends EntityPrehistoricSwimming {
         if (this.getAttackTarget() != null) {
             if (getAttackBounds().intersectsWith(this.getAttackTarget().boundingBox)) {
                 if (!this.isEntitySmallerThan(this.getAttackTarget(), 1.6F * (this.getAgeScale() / this.maxSize))) {
-                    if (this.getAnimation() != ATTACK_ANIMATION) {
-                        this.setAnimation(ATTACK_ANIMATION);
+                    if (this.getAnimation() != attackAnimation) {
+                        this.setAnimation(attackAnimation);
                     }
-                    if (this.getAnimation() == ATTACK_ANIMATION && this.getAnimationTick() > 5) {
+                    if (this.getAnimation() == attackAnimation && this.getAnimationTick() > 5) {
                         this.getAttackTarget().attackEntityFrom(DamageSource.causeMobDamage(this), (float) this.getAttributeMap().getAttributeInstance(SharedMonsterAttributes.attackDamage).getBaseValue());
                     }
                     this.attackEntityAsMob(this.getAttackTarget());

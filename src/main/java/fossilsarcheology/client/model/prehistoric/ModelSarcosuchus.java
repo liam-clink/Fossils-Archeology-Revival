@@ -217,13 +217,13 @@ public class ModelSarcosuchus extends ModelPrehistoric {
         animator.update(entity);
         this.resetToDefaultPose();
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
-        animator.setAnimation(sarcosuchus.SPEAK_ANIMATION);
+        animator.setAnimation(sarcosuchus.speakAnimation);
         animator.startKeyframe(10);
         ModelUtils.rotate(animator, head, -15, 0, 0);
         ModelUtils.rotate(animator, LowerJaw, 25, 0, 0);
         animator.endKeyframe();
         animator.resetKeyframe(10);
-        animator.setAnimation(sarcosuchus.ATTACK_ANIMATION);
+        animator.setAnimation(sarcosuchus.attackAnimation);
         animator.startKeyframe(5);
         ModelUtils.rotate(animator, head, -31F, 0, 0);
         ModelUtils.rotate(animator, LowerJaw, 44F, 0, 0);

@@ -199,7 +199,7 @@ public class ModelMammoth extends ModelPrehistoric {
         blockMovement(f, f1, f2, f3, f4, f5, (Entity) entity);
         this.resetToDefaultPose();
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
-        animator.setAnimation(prehistoric.SPEAK_ANIMATION);
+        animator.setAnimation(prehistoric.speakAnimation);
         animator.startKeyframe(20);
         ModelUtils.rotate(animator, head, -25, 0, 0);
         ModelUtils.rotate(animator, bottomjaw, 45, 0, 0);
@@ -208,7 +208,7 @@ public class ModelMammoth extends ModelPrehistoric {
         ModelUtils.rotate(animator, nose4, -35, 0, 0);
         animator.endKeyframe();
         animator.resetKeyframe(15);
-        animator.setAnimation(prehistoric.ATTACK_ANIMATION);
+        animator.setAnimation(prehistoric.attackAnimation);
         animator.startKeyframe(5);
         ModelUtils.rotate(animator, neck, 0, 20, 0);
         ModelUtils.rotate(animator, head, 0, 5, 10);

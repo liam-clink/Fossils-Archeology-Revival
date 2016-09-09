@@ -235,7 +235,7 @@ public class ModelSpinosaurus extends ModelPrehistoric {
         blockMovement(f, f1, f2, f3, f4, f5, (Entity) entity);
         this.resetToDefaultPose();
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
-        animator.setAnimation(spinosaurus.SPEAK_ANIMATION);
+        animator.setAnimation(spinosaurus.speakAnimation);
         animator.startKeyframe(10);
         ModelUtils.rotate(animator, lowerJaw, 20, 0, 0);
         animator.endKeyframe();
@@ -268,7 +268,7 @@ public class ModelSpinosaurus extends ModelPrehistoric {
         ModelUtils.rotate(animator, lowerJaw, 21F, 0, 0);
         animator.endKeyframe();
         animator.resetKeyframe(10);
-        animator.setAnimation(spinosaurus.ATTACK_ANIMATION);
+        animator.setAnimation(spinosaurus.attackAnimation);
         animator.startKeyframe(10);
         ModelUtils.rotate(animator, neck, -36, 0, 0);
         ModelUtils.rotate(animator, head, 46, 0, 0);

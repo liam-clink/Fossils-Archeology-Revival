@@ -384,10 +384,10 @@ public class PediaGUI extends GuiContainer {
                 printStringXY(s1, wordLength / 2, 160, 157, 126, 103);
             }
             {
-                String name = dino.getOwnerDisplayName();
+                String name = dino.getOwnerName();
                 String s1 = I18n.translateToLocal("pedia.untame");
                 String s2 = I18n.translateToLocal("pedia.owner") + " " + name;
-                printStringXY(!dino.getOwnerDisplayName().equals("") ? s2 : s1, wordLength / 2, 170, 157, 126, 103);
+                printStringXY(!dino.getOwnerName().equals("") ? s2 : s1, wordLength / 2, 170, 157, 126, 103);
             }
             {
                 ScaledResolution scaledResolution = new ScaledResolution(mc);

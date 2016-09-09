@@ -175,12 +175,12 @@ public class ModelPachycephalosaurus extends ModelPrehistoric {
         blockMovement(f, f1, f2, f3, f4, f5, (Entity) entity);
         this.resetToDefaultPose();
         setRotationAngles(f, f1, f2, f3, f4, f5, (Entity) entity);
-        animator.setAnimation(pachycephalosaurus.SPEAK_ANIMATION);
+        animator.setAnimation(pachycephalosaurus.speakAnimation);
         animator.startKeyframe(10);
         ModelUtils.rotate(animator, beaklower, 30, 0, 0);
         animator.endKeyframe();
         animator.resetKeyframe(10);
-        animator.setAnimation(pachycephalosaurus.ATTACK_ANIMATION);
+        animator.setAnimation(pachycephalosaurus.attackAnimation);
         animator.startKeyframe(5);
         animator.move(lowerBody, 0, 5, -2);
         ModelUtils.rotate(animator, lowerBody, 20, 0, 0);
