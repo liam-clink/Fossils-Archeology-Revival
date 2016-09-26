@@ -28,6 +28,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeDictionary;
@@ -53,7 +54,7 @@ public class FossilStructureGenerator extends StructureGeneratorBase {
             structure.addBlockArray(Academy4.blockArrayAcademy);
             structure.addBlockArray(Academy5.blockArrayAcademy);
             structure.addBlockArray(Academy6.blockArrayAcademy);
-            structure.setStructureOffset(0, -1, 0);
+            structure.setStructureOffset(new BlockPos(0, -1, 0));
             structures.add(structure);
         }
 
@@ -62,7 +63,7 @@ public class FossilStructureGenerator extends StructureGeneratorBase {
             structure.addBlockArray(Temple1.blockArrayTemple);
             structure.addBlockArray(Temple2.blockArrayTemple);
             structure.addBlockArray(Temple3.blockArrayTemple);
-            structure.setStructureOffset(0, -1, 0);
+            structure.setStructureOffset(new BlockPos(0, -1, 0));
             structures.add(structure);
         }
 

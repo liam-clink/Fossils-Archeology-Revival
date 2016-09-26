@@ -2,6 +2,7 @@ package fossilsarcheology.server.gen.feature.piece;
 
 import fossilsarcheology.server.block.FABlockRegistry;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import java.util.Random;

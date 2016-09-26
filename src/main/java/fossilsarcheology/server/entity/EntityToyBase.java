@@ -5,10 +5,10 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
 public abstract class EntityToyBase extends EntityLiving {
-
     public int toyBonus;
 
     public EntityToyBase(World world, int toyBonus) {
@@ -17,7 +17,8 @@ public abstract class EntityToyBase extends EntityLiving {
 
     }
 
-    protected boolean isAIEnabled() {
+    @Override
+    public boolean isAIDisabled() {
         return true;
     }
 
@@ -51,6 +52,6 @@ public abstract class EntityToyBase extends EntityLiving {
 
     protected abstract ItemStack getItem();
 
-    protected abstract String getAttackNoise();
+    protected abstract SoundEvent getAttackNoise();
 
 }

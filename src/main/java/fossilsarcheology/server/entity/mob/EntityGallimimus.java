@@ -36,9 +36,9 @@ public class EntityGallimimus extends EntityPrehistoric {
         this.getNavigator().setCanSwim(true);
         this.tasks.addTask(1, new EntityAISwimming(this));
         this.tasks.addTask(2, this.aiSit);
-        this.tasks.addTask(3, new DinoAIEatBlocks(this, 1));
-        this.tasks.addTask(3, new DinoAIEatFeeders(this, 1));
-        this.tasks.addTask(3, new DinoAIEatItems(this, 1));
+        this.tasks.addTask(3, new DinoAIEatBlocks(this));
+        this.tasks.addTask(3, new DinoAIEatFeeders(this));
+        this.tasks.addTask(3, new DinoAIEatItems(this));
         this.tasks.addTask(4, new DinoAIWander(this, 1.0D));
         this.tasks.addTask(5, new DinoAIRiding(this, 2F));
         this.tasks.addTask(6, new EntityAIPanic(this, 1.25D));

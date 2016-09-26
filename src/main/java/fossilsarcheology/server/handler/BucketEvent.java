@@ -1,8 +1,10 @@
 package fossilsarcheology.server.handler;
 
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
@@ -23,7 +25,7 @@ public class BucketEvent {
 
     @SubscribeEvent
     public void onBucketFill(FillBucketEvent event) {
-        ItemStack result = fillCustomBucket(event.getWorld(), event.getTarget());
+        ItemStack result = this.fillCustomBucket(event.getWorld(), event.getTarget());
         if (result == null) {
             return;
         }
@@ -35,7 +37,7 @@ public class BucketEvent {
         IBlockState state = world.getBlockState(rayTrace.getBlockPos());
         Item bucket = this.buckets.get(state);
         if (bucket != null && world.getBlockMetadata(rayTrace.blockX, rayTrace.blockY, rayTrace.blockZ) == 0) {
-            world.playSoundEffect(rayTrace.getBlockPos(), "dig.sand", 1, 1);
+            world.playSound(null, rayTrace.getBlockPos(), SoundEvents.BLOCK_SAND_HIT, SoundCategory.BLOCKS, 1.0F, 1.0F);
             world.setBlockToAir(rayTrace.getBlockPos());
             return new ItemStack(bucket);
         } else {

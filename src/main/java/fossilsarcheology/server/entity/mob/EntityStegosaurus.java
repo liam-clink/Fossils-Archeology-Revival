@@ -35,9 +35,9 @@ public class EntityStegosaurus extends EntityPrehistoric {
         this.tasks.addTask(2, this.aiSit);
         this.tasks.addTask(3, new DinoAIAttackOnCollide(this, 1.5D, false));
         this.tasks.addTask(4, new DinoAIFollowOwner(this, 1.0D, 10.0F, 2.0F));
-        this.tasks.addTask(5, new DinoAIEatBlocks(this, 1));
-        this.tasks.addTask(5, new DinoAIEatFeeders(this, 1));
-        this.tasks.addTask(5, new DinoAIEatItems(this, 1));
+        this.tasks.addTask(5, new DinoAIEatBlocks(this));
+        this.tasks.addTask(5, new DinoAIEatFeeders(this));
+        this.tasks.addTask(5, new DinoAIEatItems(this));
         this.tasks.addTask(6, new DinoAIWander(this, 1.0D));
         this.tasks.addTask(7, new DinoAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(7, new DinoAILookIdle(this));

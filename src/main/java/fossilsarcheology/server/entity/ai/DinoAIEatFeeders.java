@@ -4,9 +4,11 @@ import fossilsarcheology.server.block.BlockFeeder;
 import fossilsarcheology.server.block.entity.TileEntityFeeder;
 import fossilsarcheology.server.entity.EntityPrehistoric;
 import fossilsarcheology.server.entity.EntityPrehistoricSwimming;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.util.ChunkCoordinates;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.math.BlockPos;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -14,41 +16,41 @@ import java.util.Comparator;
 import java.util.List;
 
 public class DinoAIEatFeeders extends EntityAIBase {
-    private ChunkCoordinates targetBlock;
+    private BlockPos targetBlock;
     private EntityPrehistoric prehistoric;
-    private double speed;
     private BlockSorter targetSorter;
     private int feedingTicks;
 
-    public DinoAIEatFeeders(EntityPrehistoric prehistoric, double speed) {
+    public DinoAIEatFeeders(EntityPrehistoric prehistoric) {
         super();
         this.prehistoric = prehistoric;
-        this.speed = speed;
         this.targetSorter = new BlockSorter(this, prehistoric);
         this.setMutexBits(1);
     }
 
     @Override
     public boolean shouldExecute() {
-
-        if (prehistoric.getHunger() >= prehistoric.getMaxHunger()) {
+        if (this.prehistoric.getHunger() >= this.prehistoric.getMaxHunger()) {
             return false;
         }
-        if (prehistoric.isMovementBlocked()) {
+        if (this.prehistoric.isMovementBlocked()) {
             return false;
         }
-        if (prehistoric.getRNG().nextInt(1) != 0) {
+        if (this.prehistoric.getRNG().nextInt(1) != 0) {
             return false;
         }
+        List<BlockPos> allBlocks = new ArrayList<>();
         int radius = 16;
-        List<ChunkCoordinates> allBlocks = new ArrayList<ChunkCoordinates>();
-        for (int x = (int) (prehistoric.posX) - (radius / 2); x < (int) (prehistoric.posX) + (radius / 2); x++) {
-            for (int y = (int) (prehistoric.posY) - (radius / 2); y < (int) (prehistoric.posY) + (radius / 2); y++) {
-                for (int z = (int) (prehistoric.posZ) - (radius / 2); z < (int) (prehistoric.posZ) + (radius / 2); z++) {
-                    if (prehistoric.worldObj.getBlock(pos) instanceof BlockFeeder && prehistoric.worldObj.getTileEntity(pos) != null && prehistoric.worldObj.getTileEntity(pos) instanceof TileEntityFeeder) {
-                        TileEntityFeeder feeder = (TileEntityFeeder) prehistoric.worldObj.getTileEntity(pos);
-                        if (!feeder.isEmpty(prehistoric.type)) {
-                            allBlocks.add(new ChunkCoordinates(pos));
+        BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
+        for (int x = (int) (this.prehistoric.posX) - (radius / 2); x < (int) (this.prehistoric.posX) + (radius / 2); x++) {
+            for (int y = (int) (this.prehistoric.posY) - (radius / 2); y < (int) (this.prehistoric.posY) + (radius / 2); y++) {
+                for (int z = (int) (this.prehistoric.posZ) - (radius / 2); z < (int) (this.prehistoric.posZ) + (radius / 2); z++) {
+                    pos.setPos(x, y, z);
+                    IBlockState state = this.prehistoric.worldObj.getBlockState(pos);
+                    TileEntity tile = this.prehistoric.worldObj.getTileEntity(pos);
+                    if (state.getBlock() instanceof BlockFeeder && tile instanceof TileEntityFeeder) {
+                        if (!((TileEntityFeeder) tile).isEmpty(this.prehistoric.type)) {
+                            allBlocks.add(pos);
                         }
                     }
                 }
@@ -64,21 +66,7 @@ public class DinoAIEatFeeders extends EntityAIBase {
 
     @Override
     public boolean continueExecuting() {
-        if (targetBlock == null) {
-            return false;
-        }
-        if (prehistoric.getHunger() >= prehistoric.getMaxHunger()) {
-
-            return false;
-        }
-
-        if (prehistoric.isMovementBlocked()) {
-            return false;
-        }
-        if (prehistoric.worldObj.getBlock(targetBlock.posX, targetBlock.posY, targetBlock.posZ) instanceof BlockFeeder && prehistoric.worldObj.getTileEntity(targetBlock.posX, targetBlock.posY, targetBlock.posZ) != null && prehistoric.worldObj.getTileEntity(targetBlock.posX, targetBlock.posY, targetBlock.posZ) instanceof TileEntityFeeder) {
-            return true;
-        }
-        return false;
+        return this.targetBlock != null && this.prehistoric.getHunger() < this.prehistoric.getMaxHunger() && !this.prehistoric.isMovementBlocked() && this.prehistoric.worldObj.getBlockState(this.targetBlock).getBlock() instanceof BlockFeeder && this.prehistoric.worldObj.getTileEntity(this.targetBlock) instanceof TileEntityFeeder;
     }
 
     @Override
@@ -88,28 +76,27 @@ public class DinoAIEatFeeders extends EntityAIBase {
 
     @Override
     public void updateTask() {
-        if (targetBlock != null) {
-            if (prehistoric.worldObj.getBlock(targetBlock.posX, targetBlock.posY, targetBlock.posZ) instanceof BlockFeeder && prehistoric.worldObj.getTileEntity(targetBlock.posX, targetBlock.posY, targetBlock.posZ) != null && prehistoric.worldObj.getTileEntity(targetBlock.posX, targetBlock.posY, targetBlock.posZ) instanceof TileEntityFeeder) {
-                TileEntityFeeder feeder = (TileEntityFeeder) prehistoric.worldObj.getTileEntity(targetBlock.posX, targetBlock.posY, targetBlock.posZ);
-                double d0 = prehistoric.getDistance(this.targetBlock.posX, this.targetBlock.posY, this.targetBlock.posZ);
-                if (d0 * d0 < 6) {
-                    if (feedingTicks < 30 && !feeder.isEmpty(prehistoric.type)) {
-                        feedingTicks++;
-                        feeder.feedDinosaur(prehistoric);
-                        prehistoric.setHealth(Math.min(prehistoric.getMaxHealth(), (int) (prehistoric.getHealth() + feedingTicks / 4)));
-                        prehistoric.doFoodEffect();
+        if (this.targetBlock != null) {
+            if (this.prehistoric.worldObj.getBlockState(this.targetBlock).getBlock() instanceof BlockFeeder && this.prehistoric.worldObj.getTileEntity(this.targetBlock) instanceof TileEntityFeeder) {
+                TileEntityFeeder feeder = (TileEntityFeeder) this.prehistoric.worldObj.getTileEntity(this.targetBlock);
+                double distance = this.prehistoric.getDistanceSq(this.targetBlock);
+                if (distance < 6) {
+                    if (this.feedingTicks < 30 && !feeder.isEmpty(this.prehistoric.type)) {
+                        this.feedingTicks++;
+                        feeder.feedDinosaur(this.prehistoric);
+                        this.prehistoric.setHealth(Math.min(this.prehistoric.getMaxHealth(), (int) (this.prehistoric.getHealth() + this.feedingTicks / 4)));
+                        this.prehistoric.doFoodEffect();
                     } else {
-                        feedingTicks = 0;
-                        targetBlock = null;
-                        resetTask();
+                        this.feedingTicks = 0;
+                        this.targetBlock = null;
+                        this.resetTask();
                     }
-                    return;
                 } else {
                     if (this.prehistoric.isAquatic()) {
-                        ((EntityPrehistoricSwimming) prehistoric).currentTarget = new ChunkCoordinates((int) this.targetBlock.posX, (int) this.targetBlock.posY, (int) this.targetBlock.posZ);
+                        ((EntityPrehistoricSwimming) this.prehistoric).currentTarget = this.targetBlock;
                     } else {
-                        if (prehistoric.getNavigator().noPath()) {
-                            this.prehistoric.getNavigator().tryMoveToXYZ(this.targetBlock.posX, this.targetBlock.posY, this.targetBlock.posZ, 1D);
+                        if (this.prehistoric.getNavigator().noPath()) {
+                            this.prehistoric.getNavigator().tryMoveToXYZ(this.targetBlock.getX(), this.targetBlock.getY(), this.targetBlock.getZ(), 1D);
                         }
                     }
                 }
@@ -117,7 +104,7 @@ public class DinoAIEatFeeders extends EntityAIBase {
         }
     }
 
-    public class BlockSorter implements Comparator {
+    public class BlockSorter implements Comparator<BlockPos> {
         final EntityAIBase ai;
         private Entity entity;
 
@@ -126,22 +113,11 @@ public class DinoAIEatFeeders extends EntityAIBase {
             this.entity = entity;
         }
 
-        public int compareBlocks(ChunkCoordinates var1, ChunkCoordinates var2) {
-            double var3 = this.getDistanceSqToVec(var1);
-            double var5 = this.getDistanceSqToVec(var2);
-            return var3 < var5 ? -1 : (var3 > var5 ? 1 : 0);
-        }
-
         @Override
-        public int compare(Object var1, Object var2) {
-            return this.compareBlocks((ChunkCoordinates) var1, (ChunkCoordinates) var2);
-        }
-
-        public double getDistanceSqToVec(ChunkCoordinates vec3) {
-            double d0 = entity.posX - vec3.posX;
-            double d1 = entity.posY - vec3.posY;
-            double d2 = entity.posZ - vec3.posZ;
-            return d0 * d0 + d1 * d1 + d2 * d2;
+        public int compare(BlockPos pos1, BlockPos pos2) {
+            double distance1 = this.entity.getDistanceSq(pos1);
+            double distance2 = this.entity.getDistanceSq(pos2);
+            return distance1 < distance2 ? -1 : (distance1 > distance2 ? 1 : 0);
         }
     }
 }

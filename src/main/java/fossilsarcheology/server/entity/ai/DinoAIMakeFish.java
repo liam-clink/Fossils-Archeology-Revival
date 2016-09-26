@@ -18,31 +18,15 @@ public class DinoAIMakeFish extends EntityAIBase {
 
     @Override
     public boolean shouldExecute() {
-        if (!this.dinosaur.isHungry()) {
-            return false;
-        }
-        if (this.dinosaur.getRNG().nextInt(205) != 0) {
-            return false;
-        }
-        if (!this.dinosaur.isInWater()) {
-            return false;
-        }
-        if (this.dinosaur.FISH_ANIMATION == null) {
-            return false;
-        }
-        return true;
+        return this.dinosaur.isHungry() && this.dinosaur.getRNG().nextInt(205) == 0 && this.dinosaur.isInWater() && this.dinosaur.FISH_ANIMATION != null;
     }
 
+    @Override
     public boolean continueExecuting() {
-        if (!this.dinosaur.isHungry()) {
-            return false;
-        }
-        if (!this.dinosaur.isInWater()) {
-            return false;
-        }
-        return true;
+        return this.dinosaur.isHungry() && this.dinosaur.isInWater();
     }
 
+    @Override
     public void startExecuting() {
         if (this.dinosaur.isInWater()) {
             if (this.dinosaur.getAnimation() != this.dinosaur.FISH_ANIMATION) {
@@ -51,13 +35,13 @@ public class DinoAIMakeFish extends EntityAIBase {
         }
     }
 
+    @Override
     public void updateTask() {
         if (this.dinosaur.getAnimation() == this.dinosaur.FISH_ANIMATION) {
             if (this.dinosaur.getAnimationTick() == 20) {
-                ItemStack stack2 = new ItemStack(Items.fish, 1 + this.dinosaur.getRNG().nextInt(2), this.dinosaur.getRNG().nextInt(2));
+                ItemStack stack2 = new ItemStack(Items.FISH, 1 + this.dinosaur.getRNG().nextInt(2), this.dinosaur.getRNG().nextInt(2));
                 this.dinosaur.entityDropItem(stack2, 1);
-                resetTask();
-                return;
+                this.resetTask();
             }
         }
     }

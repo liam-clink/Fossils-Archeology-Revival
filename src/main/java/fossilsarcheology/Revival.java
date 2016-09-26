@@ -27,7 +27,7 @@ import fossilsarcheology.server.gen.WorldGenMiscStructures;
 import fossilsarcheology.server.gen.WorldGeneratorPalaeoraphe;
 import fossilsarcheology.server.gen.structure.AcademyGenerator;
 import fossilsarcheology.server.gen.structure.ShipWreckGenerator;
-import fossilsarcheology.server.handler.EventFossilAchivements;
+import fossilsarcheology.server.handler.EventFossilAchievements;
 import fossilsarcheology.server.handler.EventPlayer;
 import fossilsarcheology.server.handler.FossilAchievementHandler;
 import fossilsarcheology.server.handler.FossilBonemealEvent;
@@ -154,7 +154,7 @@ public class Revival {
         FossilRecipes.addRecipe();
 
         MinecraftForge.EVENT_BUS.register(new PickupHandler());
-        MinecraftForge.EVENT_BUS.register(new EventFossilAchivements());
+        MinecraftForge.EVENT_BUS.register(new EventFossilAchievements());
 
         PROXY.registerChestLoot();
         FossilAchievementHandler.loadAchievements();

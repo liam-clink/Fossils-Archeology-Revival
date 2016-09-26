@@ -6,7 +6,8 @@ import fossilsarcheology.server.entity.EntityPrehistoricSwimming;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.util.ChunkCoordinates;
+import net.minecraft.init.SoundEvents;
+import net.minecraft.util.math.BlockPos;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -14,15 +15,13 @@ import java.util.Comparator;
 import java.util.List;
 
 public class DinoAIEatBlocks extends EntityAIBase {
-    private ChunkCoordinates targetBlock;
+    private BlockPos targetBlock;
     private EntityPrehistoric prehistoric;
-    private double speed;
     private BlockSorter targetSorter;
 
-    public DinoAIEatBlocks(EntityPrehistoric prehistoric, double speed) {
+    public DinoAIEatBlocks(EntityPrehistoric prehistoric) {
         super();
         this.prehistoric = prehistoric;
-        this.speed = speed;
         this.targetSorter = new BlockSorter(this, prehistoric);
         this.setMutexBits(1);
     }
@@ -30,22 +29,24 @@ public class DinoAIEatBlocks extends EntityAIBase {
     @Override
     public boolean shouldExecute() {
 
-        if (prehistoric.getHunger() >= prehistoric.getMaxHunger()) {
+        if (this.prehistoric.getHunger() >= this.prehistoric.getMaxHunger()) {
             return false;
         }
-        if (prehistoric.isMovementBlocked()) {
+        if (this.prehistoric.isMovementBlocked()) {
             return false;
         }
-        if (prehistoric.getRNG().nextInt(1) != 0) {
+        if (this.prehistoric.getRNG().nextInt(1) != 0) {
             return false;
         }
         int radius = 16;
-        List<ChunkCoordinates> allBlocks = new ArrayList<ChunkCoordinates>();
-        for (int x = (int) (prehistoric.posX) - (radius / 2); x < (int) (prehistoric.posX) + (radius / 2); x++) {
-            for (int y = (int) (prehistoric.posY) - (radius / 2); y < (int) (prehistoric.posY) + (radius / 2); y++) {
-                for (int z = (int) (prehistoric.posZ) - (radius / 2); z < (int) (prehistoric.posZ) + (radius / 2); z++) {
-                    if (FoodMappings.INSTANCE.getBlockFoodAmount(prehistoric.worldObj.getBlock(pos), prehistoric.type.diet) > 0) {
-                        allBlocks.add(new ChunkCoordinates(pos));
+        List<BlockPos> allBlocks = new ArrayList<>();
+        BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
+        for (int x = (int) (this.prehistoric.posX) - (radius / 2); x < (int) (this.prehistoric.posX) + (radius / 2); x++) {
+            for (int y = (int) (this.prehistoric.posY) - (radius / 2); y < (int) (this.prehistoric.posY) + (radius / 2); y++) {
+                for (int z = (int) (this.prehistoric.posZ) - (radius / 2); z < (int) (this.prehistoric.posZ) + (radius / 2); z++) {
+                    pos.setPos(x, y, z);
+                    if (FoodMappings.INSTANCE.getBlockFoodAmount(this.prehistoric.worldObj.getBlockState(pos).getBlock(), this.prehistoric.type.diet) > 0) {
+                        allBlocks.add(pos);
                     }
                 }
             }
@@ -60,18 +61,7 @@ public class DinoAIEatBlocks extends EntityAIBase {
 
     @Override
     public boolean continueExecuting() {
-        if (targetBlock == null) {
-            return false;
-        }
-        if (prehistoric.getHunger() >= prehistoric.getMaxHunger()) {
-
-            return false;
-        }
-
-        if (prehistoric.isMovementBlocked()) {
-            return false;
-        }
-        return true;
+        return this.targetBlock != null && this.prehistoric.getHunger() < this.prehistoric.getMaxHunger() && !this.prehistoric.isMovementBlocked();
     }
 
     @Override
@@ -81,25 +71,23 @@ public class DinoAIEatBlocks extends EntityAIBase {
 
     @Override
     public void updateTask() {
-        if (targetBlock != null) {
-            Block block = prehistoric.worldObj.getBlock(this.targetBlock.posX, this.targetBlock.posY, this.targetBlock.posZ);
-            if (FoodMappings.INSTANCE.getBlockFoodAmount(block, prehistoric.type.diet) > 0) {
-                double d0 = prehistoric.getDistance(this.targetBlock.posX, this.targetBlock.posY, this.targetBlock.posZ);
-                if (d0 * d0 < 6) {
-                    prehistoric.setHunger(Math.min(100, prehistoric.getHunger() + FoodMappings.INSTANCE.getBlockFoodAmount(block, prehistoric.type.diet)));
-                    prehistoric.setHealth(Math.min(prehistoric.getMaxHealth(), (int) (prehistoric.getHealth() + FoodMappings.INSTANCE.getBlockFoodAmount(block, prehistoric.type.diet) / 10)));
-                    // prehistoric.doFoodEffect(Item.getItemFromBlock(block));
-                    prehistoric.playSound("random.eat", 1, 1);
-                    prehistoric.worldObj.func_147480_a(this.targetBlock.posX, this.targetBlock.posY, this.targetBlock.posZ, false);
-                    targetBlock = null;
-                    resetTask();
-                    return;
+        if (this.targetBlock != null) {
+            Block block = this.prehistoric.worldObj.getBlockState(this.targetBlock).getBlock();
+            if (FoodMappings.INSTANCE.getBlockFoodAmount(block, this.prehistoric.type.diet) > 0) {
+                double distance = this.prehistoric.getDistanceSq(this.targetBlock);
+                if (distance < 6) {
+                    this.prehistoric.setHunger(Math.min(100, this.prehistoric.getHunger() + FoodMappings.INSTANCE.getBlockFoodAmount(block, this.prehistoric.type.diet)));
+                    this.prehistoric.setHealth(Math.min(this.prehistoric.getMaxHealth(), (int) (this.prehistoric.getHealth() + FoodMappings.INSTANCE.getBlockFoodAmount(block, this.prehistoric.type.diet) / 10)));
+                    this.prehistoric.playSound(SoundEvents.ENTITY_GENERIC_EAT, 1, 1);
+                    this.prehistoric.worldObj.destroyBlock(this.targetBlock, false);
+                    this.targetBlock = null;
+                    this.resetTask();
                 } else {
                     if (this.prehistoric.isAquatic()) {
-                        ((EntityPrehistoricSwimming) prehistoric).currentTarget = new ChunkCoordinates((int) this.targetBlock.posX, (int) this.targetBlock.posY, (int) this.targetBlock.posZ);
+                        ((EntityPrehistoricSwimming) this.prehistoric).currentTarget = this.targetBlock;
                     } else {
-                        if (prehistoric.getNavigator().noPath()) {
-                            this.prehistoric.getNavigator().tryMoveToXYZ(this.targetBlock.posX, this.targetBlock.posY, this.targetBlock.posZ, 1D);
+                        if (this.prehistoric.getNavigator().noPath()) {
+                            this.prehistoric.getNavigator().tryMoveToXYZ(this.targetBlock.getX(), this.targetBlock.getY(), this.targetBlock.getZ(), 1D);
                         }
                     }
                 }
@@ -107,7 +95,7 @@ public class DinoAIEatBlocks extends EntityAIBase {
         }
     }
 
-    public class BlockSorter implements Comparator {
+    public class BlockSorter implements Comparator<BlockPos> {
         final EntityAIBase ai;
         private Entity entity;
 
@@ -116,22 +104,11 @@ public class DinoAIEatBlocks extends EntityAIBase {
             this.entity = entity;
         }
 
-        public int compareBlocks(ChunkCoordinates var1, ChunkCoordinates var2) {
-            double var3 = this.getDistanceSqToVec(var1);
-            double var5 = this.getDistanceSqToVec(var2);
-            return var3 < var5 ? -1 : (var3 > var5 ? 1 : 0);
-        }
-
         @Override
-        public int compare(Object var1, Object var2) {
-            return this.compareBlocks((ChunkCoordinates) var1, (ChunkCoordinates) var2);
-        }
-
-        public double getDistanceSqToVec(ChunkCoordinates vec3) {
-            double d0 = entity.posX - vec3.posX;
-            double d1 = entity.posY - vec3.posY;
-            double d2 = entity.posZ - vec3.posZ;
-            return d0 * d0 + d1 * d1 + d2 * d2;
+        public int compare(BlockPos pos1, BlockPos pos2) {
+            double distance1 = this.entity.getDistanceSq(pos1);
+            double distance2 = this.entity.getDistanceSq(pos2);
+            return distance1 < distance2 ? -1 : (distance1 > distance2 ? 1 : 0);
         }
     }
 }

@@ -43,59 +43,59 @@ public enum FoodMappings {
         if (item != null) {
             switch (diet) {
                 case CARNIVORE:
-                    if (carnivoreItemDiet == null) {
-                        carnivoreItemDiet = Maps.newHashMap();
+                    if (this.carnivoreItemDiet == null) {
+                        this.carnivoreItemDiet = Maps.newHashMap();
                     }
-                    if (!carnivoreItemDiet.containsKey(item)) {
-                        carnivoreItemDiet.put(item, food);
+                    if (!this.carnivoreItemDiet.containsKey(item)) {
+                        this.carnivoreItemDiet.put(item, food);
                     }
                     break;
                 case HERBIVORE:
-                    if (herbivoreItemDiet == null) {
-                        herbivoreItemDiet = Maps.newHashMap();
+                    if (this.herbivoreItemDiet == null) {
+                        this.herbivoreItemDiet = Maps.newHashMap();
                     }
-                    if (!herbivoreItemDiet.containsKey(item)) {
-                        herbivoreItemDiet.put(item, food);
+                    if (!this.herbivoreItemDiet.containsKey(item)) {
+                        this.herbivoreItemDiet.put(item, food);
                     }
                     break;
                 case OMNIVORE:
-                    if (omnivoreItemDiet == null) {
-                        omnivoreItemDiet = Maps.newHashMap();
+                    if (this.omnivoreItemDiet == null) {
+                        this.omnivoreItemDiet = Maps.newHashMap();
                     }
-                    if (!omnivoreItemDiet.containsKey(item)) {
-                        omnivoreItemDiet.put(item, food);
+                    if (!this.omnivoreItemDiet.containsKey(item)) {
+                        this.omnivoreItemDiet.put(item, food);
                     }
                     break;
                 case PISCIVORE:
-                    if (piscivoreItemDiet == null) {
-                        piscivoreItemDiet = Maps.newHashMap();
+                    if (this.piscivoreItemDiet == null) {
+                        this.piscivoreItemDiet = Maps.newHashMap();
                     }
-                    if (!piscivoreItemDiet.containsKey(item)) {
-                        piscivoreItemDiet.put(item, food);
+                    if (!this.piscivoreItemDiet.containsKey(item)) {
+                        this.piscivoreItemDiet.put(item, food);
                     }
                     break;
                 case CARNIVORE_EGG:
-                    if (carnivoreEggItemDiet == null) {
-                        carnivoreEggItemDiet = Maps.newHashMap();
+                    if (this.carnivoreEggItemDiet == null) {
+                        this.carnivoreEggItemDiet = Maps.newHashMap();
                     }
-                    if (!carnivoreEggItemDiet.containsKey(item)) {
-                        carnivoreEggItemDiet.put(item, food);
+                    if (!this.carnivoreEggItemDiet.containsKey(item)) {
+                        this.carnivoreEggItemDiet.put(item, food);
                     }
                     break;
                 case INSECTIVORE:
-                    if (insectivoreItemDiet == null) {
-                        insectivoreItemDiet = Maps.newHashMap();
+                    if (this.insectivoreItemDiet == null) {
+                        this.insectivoreItemDiet = Maps.newHashMap();
                     }
-                    if (!insectivoreItemDiet.containsKey(item)) {
-                        insectivoreItemDiet.put(item, food);
+                    if (!this.insectivoreItemDiet.containsKey(item)) {
+                        this.insectivoreItemDiet.put(item, food);
                     }
                     break;
                 case PISCCARNIVORE:
-                    if (pisccarnivoreItemDiet == null) {
-                        pisccarnivoreItemDiet = Maps.newHashMap();
+                    if (this.pisccarnivoreItemDiet == null) {
+                        this.pisccarnivoreItemDiet = Maps.newHashMap();
                     }
-                    if (!pisccarnivoreItemDiet.containsKey(item)) {
-                        pisccarnivoreItemDiet.put(item, food);
+                    if (!this.pisccarnivoreItemDiet.containsKey(item)) {
+                        this.pisccarnivoreItemDiet.put(item, food);
                     }
                     break;
                 default:
@@ -113,38 +113,38 @@ public enum FoodMappings {
     public int getItemFoodAmount(Item item, Diet diet) {
         switch (diet) {
             case CARNIVORE:
-                if (carnivoreItemDiet != null && carnivoreItemDiet.containsKey(item)) {
-                    return carnivoreItemDiet.get(item);
+                if (this.carnivoreItemDiet != null && this.carnivoreItemDiet.containsKey(item)) {
+                    return this.carnivoreItemDiet.get(item);
                 }
                 break;
             case HERBIVORE:
-                if (herbivoreItemDiet != null && herbivoreItemDiet.containsKey(item)) {
-                    return herbivoreItemDiet.get(item);
+                if (this.herbivoreItemDiet != null && this.herbivoreItemDiet.containsKey(item)) {
+                    return this.herbivoreItemDiet.get(item);
                 }
                 break;
             case OMNIVORE:
-                if (omnivoreItemDiet != null && omnivoreItemDiet.containsKey(item)) {
-                    return omnivoreItemDiet.get(item);
+                if (this.omnivoreItemDiet != null && this.omnivoreItemDiet.containsKey(item)) {
+                    return this.omnivoreItemDiet.get(item);
                 }
                 break;
             case PISCIVORE:
-                if (piscivoreItemDiet != null && piscivoreItemDiet.containsKey(item)) {
-                    return piscivoreItemDiet.get(item);
+                if (this.piscivoreItemDiet != null && this.piscivoreItemDiet.containsKey(item)) {
+                    return this.piscivoreItemDiet.get(item);
                 }
                 break;
             case CARNIVORE_EGG:
-                if (carnivoreEggItemDiet != null && carnivoreEggItemDiet.containsKey(item)) {
-                    return carnivoreEggItemDiet.get(item);
+                if (this.carnivoreEggItemDiet != null && this.carnivoreEggItemDiet.containsKey(item)) {
+                    return this.carnivoreEggItemDiet.get(item);
                 }
                 break;
             case INSECTIVORE:
-                if (insectivoreItemDiet != null && insectivoreItemDiet.containsKey(item)) {
-                    return insectivoreItemDiet.get(item);
+                if (this.insectivoreItemDiet != null && this.insectivoreItemDiet.containsKey(item)) {
+                    return this.insectivoreItemDiet.get(item);
                 }
                 break;
             case PISCCARNIVORE:
-                if (pisccarnivoreItemDiet != null && pisccarnivoreItemDiet.containsKey(item)) {
-                    return pisccarnivoreItemDiet.get(item);
+                if (this.pisccarnivoreItemDiet != null && this.pisccarnivoreItemDiet.containsKey(item)) {
+                    return this.pisccarnivoreItemDiet.get(item);
                 }
                 break;
             default:
@@ -164,66 +164,66 @@ public enum FoodMappings {
     public void addToBlockMappings(Block block, int food, Diet diet, boolean registerItem) {
         switch (diet) {
             case CARNIVORE:
-                if (carnivoreBlockDiet == null) {
-                    carnivoreBlockDiet = Maps.newHashMap();
+                if (this.carnivoreBlockDiet == null) {
+                    this.carnivoreBlockDiet = Maps.newHashMap();
                 }
-                if (!carnivoreBlockDiet.containsKey(block)) {
-                    carnivoreBlockDiet.put(block, food);
+                if (!this.carnivoreBlockDiet.containsKey(block)) {
+                    this.carnivoreBlockDiet.put(block, food);
                 }
                 break;
             case HERBIVORE:
-                if (herbivoreBlockDiet == null) {
-                    herbivoreBlockDiet = Maps.newHashMap();
+                if (this.herbivoreBlockDiet == null) {
+                    this.herbivoreBlockDiet = Maps.newHashMap();
                 }
-                if (!herbivoreBlockDiet.containsKey(block)) {
-                    herbivoreBlockDiet.put(block, food);
+                if (!this.herbivoreBlockDiet.containsKey(block)) {
+                    this.herbivoreBlockDiet.put(block, food);
                 }
                 break;
             case OMNIVORE:
-                if (omnivoreBlockDiet == null) {
-                    omnivoreBlockDiet = Maps.newHashMap();
+                if (this.omnivoreBlockDiet == null) {
+                    this.omnivoreBlockDiet = Maps.newHashMap();
                 }
-                if (!omnivoreBlockDiet.containsKey(block)) {
-                    omnivoreBlockDiet.put(block, food);
+                if (!this.omnivoreBlockDiet.containsKey(block)) {
+                    this.omnivoreBlockDiet.put(block, food);
                 }
                 break;
             case PISCIVORE:
-                if (piscivoreBlockDiet == null) {
-                    piscivoreBlockDiet = Maps.newHashMap();
+                if (this.piscivoreBlockDiet == null) {
+                    this.piscivoreBlockDiet = Maps.newHashMap();
                 }
-                if (!piscivoreBlockDiet.containsKey(block)) {
-                    piscivoreBlockDiet.put(block, food);
+                if (!this.piscivoreBlockDiet.containsKey(block)) {
+                    this.piscivoreBlockDiet.put(block, food);
                 }
                 break;
             case CARNIVORE_EGG:
-                if (carnivoreEggBlockDiet == null) {
-                    carnivoreEggBlockDiet = Maps.newHashMap();
+                if (this.carnivoreEggBlockDiet == null) {
+                    this.carnivoreEggBlockDiet = Maps.newHashMap();
                 }
-                if (!carnivoreEggBlockDiet.containsKey(block)) {
-                    carnivoreEggBlockDiet.put(block, food);
+                if (!this.carnivoreEggBlockDiet.containsKey(block)) {
+                    this.carnivoreEggBlockDiet.put(block, food);
                 }
                 break;
             case INSECTIVORE:
-                if (insectivoreBlockDiet == null) {
-                    insectivoreBlockDiet = Maps.newHashMap();
+                if (this.insectivoreBlockDiet == null) {
+                    this.insectivoreBlockDiet = Maps.newHashMap();
                 }
-                if (!insectivoreBlockDiet.containsKey(block)) {
-                    insectivoreBlockDiet.put(block, food);
+                if (!this.insectivoreBlockDiet.containsKey(block)) {
+                    this.insectivoreBlockDiet.put(block, food);
                 }
                 break;
             case PISCCARNIVORE:
-                if (pisccarnivoreBlockDiet == null) {
-                    pisccarnivoreBlockDiet = Maps.newHashMap();
+                if (this.pisccarnivoreBlockDiet == null) {
+                    this.pisccarnivoreBlockDiet = Maps.newHashMap();
                 }
-                if (!pisccarnivoreBlockDiet.containsKey(block)) {
-                    pisccarnivoreBlockDiet.put(block, food);
+                if (!this.pisccarnivoreBlockDiet.containsKey(block)) {
+                    this.pisccarnivoreBlockDiet.put(block, food);
                 }
                 break;
             default:
                 break;
         }
         if (registerItem) {
-            addToItemMappings(Item.getItemFromBlock(block), food, diet);
+            this.addToItemMappings(Item.getItemFromBlock(block), food, diet);
         }
     }
 
@@ -236,38 +236,38 @@ public enum FoodMappings {
     public int getBlockFoodAmount(Block block, Diet diet) {
         switch (diet) {
             case CARNIVORE:
-                if (carnivoreBlockDiet != null && carnivoreBlockDiet.containsKey(block)) {
-                    return carnivoreBlockDiet.get(block);
+                if (this.carnivoreBlockDiet != null && this.carnivoreBlockDiet.containsKey(block)) {
+                    return this.carnivoreBlockDiet.get(block);
                 }
                 break;
             case HERBIVORE:
-                if (herbivoreBlockDiet != null && herbivoreBlockDiet.containsKey(block)) {
-                    return herbivoreBlockDiet.get(block);
+                if (this.herbivoreBlockDiet != null && this.herbivoreBlockDiet.containsKey(block)) {
+                    return this.herbivoreBlockDiet.get(block);
                 }
                 break;
             case OMNIVORE:
-                if (omnivoreBlockDiet != null && omnivoreBlockDiet.containsKey(block)) {
-                    return omnivoreBlockDiet.get(block);
+                if (this.omnivoreBlockDiet != null && this.omnivoreBlockDiet.containsKey(block)) {
+                    return this.omnivoreBlockDiet.get(block);
                 }
                 break;
             case PISCIVORE:
-                if (piscivoreBlockDiet != null && piscivoreBlockDiet.containsKey(block)) {
-                    return piscivoreBlockDiet.get(block);
+                if (this.piscivoreBlockDiet != null && this.piscivoreBlockDiet.containsKey(block)) {
+                    return this.piscivoreBlockDiet.get(block);
                 }
                 break;
             case CARNIVORE_EGG:
-                if (carnivoreEggBlockDiet != null && carnivoreEggBlockDiet.containsKey(block)) {
-                    return carnivoreEggBlockDiet.get(block);
+                if (this.carnivoreEggBlockDiet != null && this.carnivoreEggBlockDiet.containsKey(block)) {
+                    return this.carnivoreEggBlockDiet.get(block);
                 }
                 break;
             case INSECTIVORE:
-                if (insectivoreBlockDiet != null && insectivoreBlockDiet.containsKey(block)) {
-                    return insectivoreBlockDiet.get(block);
+                if (this.insectivoreBlockDiet != null && this.insectivoreBlockDiet.containsKey(block)) {
+                    return this.insectivoreBlockDiet.get(block);
                 }
                 break;
             case PISCCARNIVORE:
-                if (pisccarnivoreBlockDiet != null && pisccarnivoreBlockDiet.containsKey(block)) {
-                    return pisccarnivoreBlockDiet.get(block);
+                if (this.pisccarnivoreBlockDiet != null && this.pisccarnivoreBlockDiet.containsKey(block)) {
+                    return this.pisccarnivoreBlockDiet.get(block);
                 }
                 break;
             default:
@@ -280,59 +280,59 @@ public enum FoodMappings {
     public void addToEntityMappings(Class<? extends Entity> entity, int food, Diet diet) {
         switch (diet) {
             case CARNIVORE:
-                if (carnivoreEntityDiet == null) {
-                    carnivoreEntityDiet = Maps.newHashMap();
+                if (this.carnivoreEntityDiet == null) {
+                    this.carnivoreEntityDiet = Maps.newHashMap();
                 }
-                if (!carnivoreEntityDiet.containsKey(entity)) {
-                    carnivoreEntityDiet.put(entity, food);
+                if (!this.carnivoreEntityDiet.containsKey(entity)) {
+                    this.carnivoreEntityDiet.put(entity, food);
                 }
                 break;
             case HERBIVORE:
-                if (herbivoreEntityDiet == null) {
-                    herbivoreEntityDiet = Maps.newHashMap();
+                if (this.herbivoreEntityDiet == null) {
+                    this.herbivoreEntityDiet = Maps.newHashMap();
                 }
-                if (!herbivoreEntityDiet.containsKey(entity)) {
-                    herbivoreEntityDiet.put(entity, food);
+                if (!this.herbivoreEntityDiet.containsKey(entity)) {
+                    this.herbivoreEntityDiet.put(entity, food);
                 }
                 break;
             case OMNIVORE:
-                if (omnivoreEntityDiet == null) {
-                    omnivoreEntityDiet = Maps.newHashMap();
+                if (this.omnivoreEntityDiet == null) {
+                    this.omnivoreEntityDiet = Maps.newHashMap();
                 }
-                if (!omnivoreEntityDiet.containsKey(entity)) {
-                    omnivoreEntityDiet.put(entity, food);
+                if (!this.omnivoreEntityDiet.containsKey(entity)) {
+                    this.omnivoreEntityDiet.put(entity, food);
                 }
                 break;
             case PISCIVORE:
-                if (piscivoreEntityDiet == null) {
-                    piscivoreEntityDiet = Maps.newHashMap();
+                if (this.piscivoreEntityDiet == null) {
+                    this.piscivoreEntityDiet = Maps.newHashMap();
                 }
-                if (!piscivoreEntityDiet.containsKey(entity)) {
-                    piscivoreEntityDiet.put(entity, food);
+                if (!this.piscivoreEntityDiet.containsKey(entity)) {
+                    this.piscivoreEntityDiet.put(entity, food);
                 }
                 break;
             case CARNIVORE_EGG:
-                if (carnivore_eggEntityDiet == null) {
-                    carnivore_eggEntityDiet = Maps.newHashMap();
+                if (this.carnivore_eggEntityDiet == null) {
+                    this.carnivore_eggEntityDiet = Maps.newHashMap();
                 }
-                if (!carnivore_eggEntityDiet.containsKey(entity)) {
-                    carnivore_eggEntityDiet.put(entity, food);
+                if (!this.carnivore_eggEntityDiet.containsKey(entity)) {
+                    this.carnivore_eggEntityDiet.put(entity, food);
                 }
                 break;
             case INSECTIVORE:
-                if (insectivoreEntityDiet == null) {
-                    insectivoreEntityDiet = Maps.newHashMap();
+                if (this.insectivoreEntityDiet == null) {
+                    this.insectivoreEntityDiet = Maps.newHashMap();
                 }
-                if (!insectivoreEntityDiet.containsKey(entity)) {
-                    insectivoreEntityDiet.put(entity, food);
+                if (!this.insectivoreEntityDiet.containsKey(entity)) {
+                    this.insectivoreEntityDiet.put(entity, food);
                 }
                 break;
             case PISCCARNIVORE:
-                if (pisccarnivoreEntityDiet == null) {
-                    pisccarnivoreEntityDiet = Maps.newHashMap();
+                if (this.pisccarnivoreEntityDiet == null) {
+                    this.pisccarnivoreEntityDiet = Maps.newHashMap();
                 }
-                if (!pisccarnivoreEntityDiet.containsKey(entity)) {
-                    pisccarnivoreEntityDiet.put(entity, food);
+                if (!this.pisccarnivoreEntityDiet.containsKey(entity)) {
+                    this.pisccarnivoreEntityDiet.put(entity, food);
                 }
                 break;
             default:
@@ -349,38 +349,38 @@ public enum FoodMappings {
     public int getEntityFoodAmount(Class<? extends Entity> entity, Diet diet) {
         switch (diet) {
             case CARNIVORE:
-                if (carnivoreEntityDiet != null && carnivoreEntityDiet.containsKey(entity)) {
-                    return carnivoreEntityDiet.get(entity);
+                if (this.carnivoreEntityDiet != null && this.carnivoreEntityDiet.containsKey(entity)) {
+                    return this.carnivoreEntityDiet.get(entity);
                 }
                 break;
             case HERBIVORE:
-                if (herbivoreEntityDiet != null && herbivoreEntityDiet.containsKey(entity)) {
-                    return herbivoreEntityDiet.get(entity);
+                if (this.herbivoreEntityDiet != null && this.herbivoreEntityDiet.containsKey(entity)) {
+                    return this.herbivoreEntityDiet.get(entity);
                 }
                 break;
             case OMNIVORE:
-                if (omnivoreEntityDiet != null && omnivoreEntityDiet.containsKey(entity)) {
-                    return omnivoreEntityDiet.get(entity);
+                if (this.omnivoreEntityDiet != null && this.omnivoreEntityDiet.containsKey(entity)) {
+                    return this.omnivoreEntityDiet.get(entity);
                 }
                 break;
             case PISCIVORE:
-                if (piscivoreEntityDiet != null && piscivoreEntityDiet.containsKey(entity)) {
-                    return piscivoreEntityDiet.get(entity);
+                if (this.piscivoreEntityDiet != null && this.piscivoreEntityDiet.containsKey(entity)) {
+                    return this.piscivoreEntityDiet.get(entity);
                 }
                 break;
             case CARNIVORE_EGG:
-                if (carnivore_eggEntityDiet != null && carnivore_eggEntityDiet.containsKey(entity)) {
-                    return carnivore_eggEntityDiet.get(entity);
+                if (this.carnivore_eggEntityDiet != null && this.carnivore_eggEntityDiet.containsKey(entity)) {
+                    return this.carnivore_eggEntityDiet.get(entity);
                 }
                 break;
             case INSECTIVORE:
-                if (insectivoreEntityDiet != null && insectivoreEntityDiet.containsKey(entity)) {
-                    return insectivoreEntityDiet.get(entity);
+                if (this.insectivoreEntityDiet != null && this.insectivoreEntityDiet.containsKey(entity)) {
+                    return this.insectivoreEntityDiet.get(entity);
                 }
                 break;
             case PISCCARNIVORE:
-                if (pisccarnivoreEntityDiet != null && pisccarnivoreEntityDiet.containsKey(entity)) {
-                    return pisccarnivoreEntityDiet.get(entity);
+                if (this.pisccarnivoreEntityDiet != null && this.pisccarnivoreEntityDiet.containsKey(entity)) {
+                    return this.pisccarnivoreEntityDiet.get(entity);
                 }
                 break;
             default:
@@ -397,42 +397,42 @@ public enum FoodMappings {
     public Map<Item, Integer> getFoodRenderList(Diet diet) {
         switch (diet) {
             case CARNIVORE:
-                if (carnivoreItemDiet == null) {
-                    carnivoreItemDiet = Maps.newHashMap();
+                if (this.carnivoreItemDiet == null) {
+                    this.carnivoreItemDiet = Maps.newHashMap();
                 }
-                return carnivoreItemDiet;
+                return this.carnivoreItemDiet;
             case HERBIVORE:
-                if (herbivoreItemDiet == null) {
-                    herbivoreItemDiet = Maps.newHashMap();
+                if (this.herbivoreItemDiet == null) {
+                    this.herbivoreItemDiet = Maps.newHashMap();
                 }
-                return herbivoreItemDiet;
+                return this.herbivoreItemDiet;
             case OMNIVORE:
-                if (omnivoreItemDiet == null) {
-                    omnivoreItemDiet = Maps.newHashMap();
+                if (this.omnivoreItemDiet == null) {
+                    this.omnivoreItemDiet = Maps.newHashMap();
                 }
-                return omnivoreItemDiet;
+                return this.omnivoreItemDiet;
             case PISCIVORE:
-                if (piscivoreItemDiet == null) {
-                    piscivoreItemDiet = Maps.newHashMap();
+                if (this.piscivoreItemDiet == null) {
+                    this.piscivoreItemDiet = Maps.newHashMap();
                 }
-                return piscivoreItemDiet;
+                return this.piscivoreItemDiet;
             case CARNIVORE_EGG:
-                if (carnivoreEggItemDiet == null) {
-                    carnivoreEggItemDiet = Maps.newHashMap();
+                if (this.carnivoreEggItemDiet == null) {
+                    this.carnivoreEggItemDiet = Maps.newHashMap();
                 }
-                return carnivoreEggItemDiet;
+                return this.carnivoreEggItemDiet;
             case INSECTIVORE:
-                if (insectivoreItemDiet == null) {
-                    insectivoreItemDiet = Maps.newHashMap();
+                if (this.insectivoreItemDiet == null) {
+                    this.insectivoreItemDiet = Maps.newHashMap();
                 }
-                return insectivoreItemDiet;
+                return this.insectivoreItemDiet;
             case PISCCARNIVORE:
-                if (pisccarnivoreItemDiet == null) {
-                    pisccarnivoreItemDiet = Maps.newHashMap();
+                if (this.pisccarnivoreItemDiet == null) {
+                    this.pisccarnivoreItemDiet = Maps.newHashMap();
                 }
-                return pisccarnivoreItemDiet;
+                return this.pisccarnivoreItemDiet;
             default:
-                return carnivoreItemDiet;
+                return this.carnivoreItemDiet;
         }
     }
 

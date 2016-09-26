@@ -1,37 +1,27 @@
 package fossilsarcheology.server.handler;
 
 import fossilsarcheology.Revival;
-import fossilsarcheology.server.entity.FossilPlayerProperites;
+import fossilsarcheology.server.entity.FossilPlayerProperties;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.I18n;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
-import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class EventPlayer {
     @SubscribeEvent
-    public void onClonePlayer(PlayerEvent.Clone event) {
-        NBTTagCompound compound = new NBTTagCompound();
-        FossilPlayerProperites.get(event.original).saveNBTData(compound);
-        FossilPlayerProperites.get(event.entityPlayer).loadNBTData(compound);
-    }
-
-    @SubscribeEvent
     public void onEntityConstructing(EntityConstructing event) {
-        if (event.entity instanceof EntityPlayer && FossilPlayerProperites.get((EntityPlayer) event.entity) == null) {
-            FossilPlayerProperites.register((EntityPlayer) event.entity);
-        }
-        if (event.entity instanceof EntityPlayer && event.entity.getExtendedProperties(FossilPlayerProperites.EXT_PROP_NAME) == null) {
-            event.entity.registerExtendedProperties(FossilPlayerProperites.EXT_PROP_NAME, new FossilPlayerProperites((EntityPlayer) event.entity));
+        Entity entity = event.getEntity();
+        if (entity instanceof EntityPlayer) {
+            FossilPlayerProperties.register((EntityPlayer) entity);
         }
     }
 
     @SubscribeEvent
     public void onBreakBlock(BlockEvent.BreakEvent event) {
-        if (event.world.provider.dimensionId == Revival.CONFIG.dimensionIDDarknessLair && event.block != Blocks.obsidian && !FossilPlayerProperites.get(event.getPlayer()).isKilledAnu()) {
+        if (event.getWorld().provider.getDimension() == Revival.CONFIG.dimensionIDDarknessLair && event.getState().getBlock() != Blocks.OBSIDIAN && !FossilPlayerProperties.get(event.getPlayer()).isKilledAnu()) {
             Revival.messagePlayer(I18n.translateToLocal("anu.breakblock"), event.getPlayer());
             event.setCanceled(true);
         }

@@ -4,32 +4,34 @@ import fossilsarcheology.server.enums.PrehistoricEntityType;
 import net.ilexiconn.llibrary.server.animation.Animation;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.util.ChunkCoordinates;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 public abstract class EntityPrehistoricSwimming extends EntityPrehistoric {
-
     public boolean movesOnLand;
-    public ChunkCoordinates currentTarget;
+    public BlockPos currentTarget;
     protected boolean isAmphibious;
     public Animation FISH_ANIMATION;
 
     public EntityPrehistoricSwimming(World world, PrehistoricEntityType type, double baseDamage, double maxDamage, double baseHealth, double maxHealth, double baseSpeed, double maxSpeed) {
         super(world, type, baseDamage, maxDamage, baseHealth, maxHealth, baseSpeed, maxSpeed);
-        this.getNavigator().setAvoidsWater(false);
+        this.setPathPriority(PathNodeType.WATER, 0.0F);
         this.hasBabyTexture = false;
     }
 
     @Override
-    protected String getLivingSound() {
-        return this.isAmphibious ? super.getLivingSound() : this.isInWater() ? super.getLivingSound() + "_inside" : super.getLivingSound() + "_outside";
+    protected SoundEvent getAmbientSound() {
+        return this.isAmphibious ? super.getAmbientSound() : this.isInWater() ? super.getAmbientSound() + "_inside" : super.getAmbientSound() + "_outside";
     }
 
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.25D);
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
     }
 
     public boolean isDirectPathBetweenPoints(Vec3d vec1, Vec3d vec2) {
@@ -37,6 +39,7 @@ public abstract class EntityPrehistoricSwimming extends EntityPrehistoric {
         return movingobjectposition == null || movingobjectposition.typeOfHit != MovingObjectPosition.MovingObjectType.BLOCK;
     }
 
+    @Override
     public boolean canBreatheUnderwater() {
         return true;
     }
@@ -51,9 +54,10 @@ public abstract class EntityPrehistoricSwimming extends EntityPrehistoric {
         return false;
     }
 
+    @Override
     public void onLivingUpdate() {
         super.onLivingUpdate();
-        swimAround();
+        this.swimAround();
         if ((this.isSitting() || this.isSleeping()) && this.isInWater()) {
             this.setSitting(false);
             this.setSleeping(false);
@@ -61,47 +65,48 @@ public abstract class EntityPrehistoricSwimming extends EntityPrehistoric {
     }
 
     private void swimAround() {
-        if (currentTarget != null) {
-            if (!isDirectPathBetweenPoints(this.getPosition(), new Vec3d(currentTarget.posX, currentTarget.posY, currentTarget.posZ))) {
-                currentTarget = null;
+        if (this.currentTarget != null) {
+            if (!this.isDirectPathBetweenPoints(this.getPosition(), new Vec3d(this.currentTarget.posX, this.currentTarget.posY, this.currentTarget.posZ))) {
+                this.currentTarget = null;
             }
-            if (!isTargetInWater() || this.getDistance(currentTarget.posX, currentTarget.posY, currentTarget.posZ) < 1.78F) {
-                currentTarget = null;
+            if (!this.isTargetInWater() || this.getDistance(this.currentTarget.posX, this.currentTarget.posY, this.currentTarget.posZ) < 1.78F) {
+                this.currentTarget = null;
             }
-            swimTowardsTarget();
+            this.swimTowardsTarget();
         }
     }
 
     public void swimTowardsTarget() {
-        if (currentTarget != null && isTargetInWater() && this.inWater) {
-            double targetX = currentTarget.posX + 0.5D - posX;
-            double targetY = currentTarget.posY + 1D - posY;
-            double targetZ = currentTarget.posZ + 0.5D - posZ;
-            motionX += (Math.signum(targetX) * 0.5D - motionX) * 0.100000000372529 * getSwimSpeed() * (this.isAdult() ? 1 : 0.5F);
-            motionY += (Math.signum(targetY) * 0.5D - motionY) * 0.100000000372529 * getSwimSpeed();
-            motionZ += (Math.signum(targetZ) * 0.5D - motionZ) * 0.100000000372529 * getSwimSpeed() * (this.isAdult() ? 1 : 0.5F);
-            float angle = (float) (Math.atan2(motionZ, motionX) * 180.0D / Math.PI) - 90.0F;
-            float rotation = MathHelper.wrapAngleTo180_float(angle - rotationYaw);
-            moveForward = 0.5F;
-            rotationYaw += rotation;
+        if (this.currentTarget != null && this.isTargetInWater() && this.inWater) {
+            double targetX = this.currentTarget.posX + 0.5D - this.posX;
+            double targetY = this.currentTarget.posY + 1D - this.posY;
+            double targetZ = this.currentTarget.posZ + 0.5D - this.posZ;
+            this.motionX += (Math.signum(targetX) * 0.5D - this.motionX) * 0.100000000372529 * this.getSwimSpeed() * (this.isAdult() ? 1 : 0.5F);
+            this.motionY += (Math.signum(targetY) * 0.5D - this.motionY) * 0.100000000372529 * this.getSwimSpeed();
+            this.motionZ += (Math.signum(targetZ) * 0.5D - this.motionZ) * 0.100000000372529 * this.getSwimSpeed() * (this.isAdult() ? 1 : 0.5F);
+            float angle = (float) (Math.atan2(this.motionZ, this.motionX) * 180.0D / Math.PI) - 90.0F;
+            float rotation = MathHelper.wrapAngleTo180_float(angle - this.rotationYaw);
+            this.moveForward = 0.5F;
+            this.rotationYaw += rotation;
         }
     }
 
     protected abstract double getSwimSpeed();
 
     protected boolean isTargetInWater() {
-        return currentTarget != null && (worldObj.getBlock(currentTarget.posX, currentTarget.posY, currentTarget.posZ).getMaterial() == Material.water && worldObj.getBlock(currentTarget.posX, currentTarget.posY + 1, currentTarget.posZ).getMaterial() == Material.water);
+        return this.currentTarget != null && (this.worldObj.getBlock(this.currentTarget.posX, this.currentTarget.posY, this.currentTarget.posZ).getMaterial() == Material.water && this.worldObj.getBlock(this.currentTarget.posX, this.currentTarget.posY + 1, this.currentTarget.posZ).getMaterial() == Material.water);
     }
 
+    @Override
     public void moveEntityWithHeading(float x, float z) {
         if (this.isAmphibious) {
             if (this.isInWater()) {
-                moveEntityWithHeadingWater(x, z);
+                this.moveEntityWithHeadingWater(x, z);
             } else {
                 super.moveEntityWithHeading(x, z);
             }
         } else {
-            moveEntityWithHeadingWater(x, z);
+            this.moveEntityWithHeadingWater(x, z);
         }
     }
 
@@ -109,7 +114,7 @@ public abstract class EntityPrehistoricSwimming extends EntityPrehistoric {
         double d0;
         float f6;
 
-        if (!worldObj.isRemote) {
+        if (!this.worldObj.isRemote) {
             float f4;
             float f5;
 
@@ -191,6 +196,7 @@ public abstract class EntityPrehistoricSwimming extends EntityPrehistoric {
         this.limbSwing += this.limbSwingAmount;
     }
 
+    @Override
     public Vec3d getPosition() {
         return new Vec3d(this.posX, this.posY, this.posZ);
     }

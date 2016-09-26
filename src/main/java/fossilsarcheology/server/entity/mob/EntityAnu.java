@@ -2,7 +2,7 @@ package fossilsarcheology.server.entity.mob;
 
 import fossilsarcheology.Revival;
 import fossilsarcheology.server.entity.EntityAnuLightning;
-import fossilsarcheology.server.entity.FossilPlayerProperites;
+import fossilsarcheology.server.entity.FossilPlayerProperties;
 import fossilsarcheology.server.entity.ai.AnuAIMelee;
 import fossilsarcheology.server.entity.ai.AnuAIAvoidEntity;
 import fossilsarcheology.server.entity.ai.AnuAIFireballAttack;
@@ -493,7 +493,7 @@ public class EntityAnu extends EntityMob implements IBossDisplayData, IRangedAtt
     public void onKillEntity(EntityLivingBase entity) {
         if (entity instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) entity;
-            FossilPlayerProperites.get(player).setKilledAnu(true);
+            FossilPlayerProperties.get(player).setKilledAnu(true);
         }
     }
 
