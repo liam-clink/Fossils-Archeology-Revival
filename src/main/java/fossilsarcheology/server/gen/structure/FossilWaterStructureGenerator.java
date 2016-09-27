@@ -47,33 +47,33 @@ public class FossilWaterStructureGenerator extends StructureGeneratorBase {
 
 		/*
          * Structure structure = new Structure("Hut");
-		 * structure.addBlockArray(StructureArrays.blockArrayNPCHut);
+		 * structure.addBlockLayer(StructureArrays.blockArrayNPCHut);
 		 * structure.setFacing(StructureGeneratorBase.EAST); // has a buffer
 		 * layer on the bottom in case no ground; spawn at y-1 for ground level
 		 * structure.setStructureOffset(0, -1, 0); structures.add(structure);
 		 * 
 		 * structure = new Structure("Blacksmith");
-		 * structure.addBlockArray(StructureArrays.blockArrayNPCBlackSmith);
+		 * structure.addBlockLayer(StructureArrays.blockArrayNPCBlackSmith);
 		 * structure.setFacing(StructureGeneratorBase.NORTH);
 		 * structures.add(structure);
 		 * 
 		 * structure = new Structure("Viking Shop");
-		 * structure.addBlockArray(StructureArrays.blockArrayShop);
+		 * structure.addBlockLayer(StructureArrays.blockArrayShop);
 		 * structure.setFacing(StructureGeneratorBase.WEST);
 		 * structures.add(structure);
 		 * 
 		 * structure = new Structure("Redstone Dungeon");
-		 * structure.addBlockArray(StructureArrays.blockArrayRedstone);
+		 * structure.addBlockLayer(StructureArrays.blockArrayRedstone);
 		 * //structure.setFacing(StructureGeneratorBase.EAST);
 		 * structures.add(structure);
 		 * 
 		 * structure = new Structure("Offset Test");
-		 * structure.addBlockArray(StructureArrays.blockArraySpawnTest); /*
-		 * structure.addBlockArray(StructureArrays.blockArrayOffsetTest1);
-		 * structure.addBlockArray(StructureArrays.blockArrayOffsetTest2);
-		 * structure.addBlockArray(StructureArrays.blockArrayOffsetTest2);
-		 * structure.addBlockArray(StructureArrays.blockArrayOffsetTest2);
-		 * structure.addBlockArray(StructureArrays.blockArrayOffsetTest1);
+		 * structure.addBlockLayer(StructureArrays.blockArraySpawnTest); /*
+		 * structure.addBlockLayer(StructureArrays.blockArrayOffsetTest1);
+		 * structure.addBlockLayer(StructureArrays.blockArrayOffsetTest2);
+		 * structure.addBlockLayer(StructureArrays.blockArrayOffsetTest2);
+		 * structure.addBlockLayer(StructureArrays.blockArrayOffsetTest2);
+		 * structure.addBlockLayer(StructureArrays.blockArrayOffsetTest1);
 		 */
         // structure.setFacing(StructureGeneratorBase.NORTH);
         // structures.add(structure);
@@ -191,7 +191,7 @@ public class FossilWaterStructureGenerator extends StructureGeneratorBase {
             case ShipWreckUtil.CUSTOM_CHEST:
                 Random rand = new Random();
 
-                // Using the pre-made method addItemToTileInventory adds items to
+                // Using the pre-made method addItemToInventory adds items to
                 // the first slot available
 
                 // Here we use customData to subtype custom_chest:
@@ -201,19 +201,19 @@ public class FossilWaterStructureGenerator extends StructureGeneratorBase {
                         int loot = rand.nextInt(100);
 
                         if (loot < 20) {
-                            addItemToTileInventory(world, new ItemStack(Items.leather, rand.nextInt(20) + 1), pos);
+                            addItemToInventory(world, new ItemStack(Items.leather, rand.nextInt(20) + 1), pos);
                         } else if (loot < 40) {
-                            addItemToTileInventory(world, new ItemStack(Items.golden_sword, rand.nextInt(2) + 1), pos);
+                            addItemToInventory(world, new ItemStack(Items.golden_sword, rand.nextInt(2) + 1), pos);
                         } else if (loot < 50) {
-                            addItemToTileInventory(world, new ItemStack(Items.compass, 1), pos);
+                            addItemToInventory(world, new ItemStack(Items.compass, 1), pos);
                         } else if (loot < 60) {
-                            addItemToTileInventory(world, (new ItemStack(Item.getItemFromBlock(FABlockRegistry.INSTANCE.figurineBlock), rand.nextInt(2) + 1, rand.nextInt(15))), pos);
+                            addItemToInventory(world, (new ItemStack(Item.getItemFromBlock(FABlockRegistry.INSTANCE.figurineBlock), rand.nextInt(2) + 1, rand.nextInt(15))), pos);
                         } else if (loot < 80) {
-                            addItemToTileInventory(world, new ItemStack(Items.gold_nugget, rand.nextInt(32) + 1), pos);
+                            addItemToInventory(world, new ItemStack(Items.gold_nugget, rand.nextInt(32) + 1), pos);
                         } else if (loot < 90) {
-                            addItemToTileInventory(world, new ItemStack(FAItemRegistry.INSTANCE.ironjavelin, rand.nextInt(16) + 1), pos);
+                            addItemToInventory(world, new ItemStack(FAItemRegistry.INSTANCE.ironjavelin, rand.nextInt(16) + 1), pos);
                         } else if (loot < 101) {
-                            addItemToTileInventory(world, new ItemStack(Items.name_tag, rand.nextInt(2) + 1), pos);
+                            addItemToInventory(world, new ItemStack(Items.name_tag, rand.nextInt(2) + 1), pos);
                         }
 
                     }
@@ -225,19 +225,19 @@ public class FossilWaterStructureGenerator extends StructureGeneratorBase {
                         int loot = (int) (Math.random() * 100);
 
                         if (loot < 20) {
-                            addItemToTileInventory(world, new ItemStack(Items.leather, rand.nextInt(6) + 1), pos);
+                            addItemToInventory(world, new ItemStack(Items.leather, rand.nextInt(6) + 1), pos);
                         } else if (loot < 40) {
-                            addItemToTileInventory(world, new ItemStack(Items.book, rand.nextInt(2) + 1), pos);
+                            addItemToInventory(world, new ItemStack(Items.book, rand.nextInt(2) + 1), pos);
                         } else if (loot < 60) {
-                            addItemToTileInventory(world, new ItemStack(Items.fishing_rod, rand.nextInt(1) + 1), pos);
+                            addItemToInventory(world, new ItemStack(Items.fishing_rod, rand.nextInt(1) + 1), pos);
                         } else if (loot < 70) {
-                            addItemToTileInventory(world, new ItemStack(Items.gunpowder, rand.nextInt(10) + 1), pos);
+                            addItemToInventory(world, new ItemStack(Items.gunpowder, rand.nextInt(10) + 1), pos);
                         } else if (loot < 85) {
-                            addItemToTileInventory(world, new ItemStack(FAItemRegistry.INSTANCE.woodjavelin, rand.nextInt(8) + 1), pos);
+                            addItemToInventory(world, new ItemStack(FAItemRegistry.INSTANCE.woodjavelin, rand.nextInt(8) + 1), pos);
                         } else if (loot < 95) {
-                            addItemToTileInventory(world, new ItemStack(Items.iron_sword, rand.nextInt(1) + 1), pos);
+                            addItemToInventory(world, new ItemStack(Items.iron_sword, rand.nextInt(1) + 1), pos);
                         } else {
-                            addItemToTileInventory(world, new ItemStack(Items.iron_ingot, rand.nextInt(8) + 1), pos);
+                            addItemToInventory(world, new ItemStack(Items.iron_ingot, rand.nextInt(8) + 1), pos);
                         }
                     }
                 }
@@ -245,7 +245,7 @@ public class FossilWaterStructureGenerator extends StructureGeneratorBase {
                 break;
 
             case ShipWreckUtil.CUSTOM_DISPENSER:
-                // We're going to take advantage of addItemToTileInventory's return
+                // We're going to take advantage of addItemToInventory's return
                 // value to fill
                 // the container to the brim; note that this way is better than the
                 // for loop from
@@ -255,7 +255,7 @@ public class FossilWaterStructureGenerator extends StructureGeneratorBase {
 
                 while (addmore) {
                     // Here we use customData as the itemID to place
-                    addmore = addItemToTileInventory(world, new ItemStack(Item.getItemById(customData1), 64, 0), pos);
+                    addmore = addItemToInventory(world, new ItemStack(Item.getItemById(customData1), 64, 0), pos);
                 }
 
                 break;

@@ -3,161 +3,100 @@ package fossilsarcheology.server.structure.util;
 import com.google.common.collect.Lists;
 import fossilsarcheology.server.structure.StructureGenerator;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import java.util.List;
 import java.util.Random;
 
 public class LinkedStructureGenerator {
-    /**
-     * Constant index values for offset arrays
-     */
-    private static final byte X = 0, Y = 1, Z = 2;
-    /**
-     * List of structures to be generated
-     */
     private final List<Structure> structures = Lists.newLinkedList();
 
-    /**
-     * Individual offsets for each structure
-     */
-    private final List<int[]> offsets = Lists.newLinkedList();
+    private final List<BlockPos> offsets = Lists.newLinkedList();
 
-    /**
-     * Individual rotation for each structure
-     */
-    private final List<Byte> rots = Lists.newLinkedList();
-    /**
-     * StructureGenerator that defines how custom hooks are handled
-     */
-    private StructureGeneratorBase gen = null;
-    /**
-     * Overall rotation for entire structure complex
-     */
-    private int rotation = 0;
+    private final List<Byte> rotations = Lists.newLinkedList();
+    private StructureGeneratorBase generator = null;
+    private EnumFacing rotation = EnumFacing.NORTH;
 
-    public LinkedStructureGenerator() {
-
-    }
-
-    /**
-     * Specifies which 'StructureGenerator' class to use for generation, which
-     * in turn determines how custom hooks are handled
-     */
     public <T extends StructureGeneratorBase> void setGenerator(T generator) {
-        gen = generator;
+        this.generator = generator;
     }
 
-    /**
-     * Increments rotation for all linked structures
-     */
     public void rotateStructures() {
-        rotation = ++rotation % 4;
+        this.rotation = this.rotation.rotateY();
     }
 
-    /**
-     * Sets base rotation for all linked structures
-     */
-    public void setRotation(int rot) {
-        rotation = rot % 4;
+    public void setRotation(EnumFacing rotation) {
+        this.rotation = rotation;
     }
 
-    /**
-     * Adds structure to list with no offset
-     */
     public void addStructure(Structure structure) {
-        addStructureWithOffset(structure, 0, 0, 0);
+        this.addStructureWithOffset(structure, BlockPos.ORIGIN);
     }
 
-    /**
-     * Adds structure to list with offset from base structure location
-     */
     public void addStructureWithOffset(Structure structure, BlockPos pos) {
-        addStructureWithOffsetAndRotation(structure, pos, 0);
+        this.addStructureWithOffsetAndRotation(structure, pos, EnumFacing.NORTH);
     }
 
-    /**
-     * Adds structure with offset and individual rotation
-     */
-    public void addStructureWithOffsetAndRotation(Structure structure, BlockPos pos, int rot) {
-        structures.add(structure);
-        addOffset(pos);
-        rots.add((byte) (rot % 4));
+    public void addStructureWithOffsetAndRotation(Structure structure, BlockPos pos, EnumFacing rotation) {
+        this.structures.add(structure);
+        this.addOffset(pos);
+        this.rotations.add((byte) rotation.getHorizontalIndex());
     }
 
-    private void addOffset(BlockPos pos) {
-        offsets.add(new int[] { -z, y, x });
+    private void addOffset(BlockPos offset) {
+        this.offsets.add(StructureHelper.getRotatedPosition(offset));
     }
 
-    /**
-     * Sets the offset values for the last structure added; x and z are switched
-     * to maintain +x moves forward, +z to right and -z to left relationships
-     */
     public void setLastOffset(BlockPos pos) {
-        if (!structures.isEmpty()) {
-            if (offsets.size() < structures.size()) {
-                addOffset(pos);
+        if (!this.structures.isEmpty()) {
+            if (this.offsets.size() < this.structures.size()) {
+                this.addOffset(pos);
             } else {
-                offsets.set(offsets.size() - 1, new int[] { -z, y, x });
+                this.offsets.set(this.offsets.size() - 1, StructureHelper.getRotatedPosition(pos));
             }
         }
     }
 
-    /**
-     * Sets the individual rotation value for the last structure added
-     */
-    public void setLastRotation(int rot) {
-        if (!rots.isEmpty()) {
-            rots.set(rots.size() - 1, (byte) (rot % 4));
+    public void setLastRotation(int rotation) {
+        if (!this.rotations.isEmpty()) {
+            this.rotations.set(this.rotations.size() - 1, (byte) (rotation % 4));
         }
     }
 
-    /**
-     * Generates all linked structures with overall orientation determined by
-     * first structure
-     */
     public void generateLinkedStructures(World world, Random random, BlockPos pos) {
-        generateLinkedStructures(null, world, random, pos);
+        this.generateLinkedStructures(null, world, random, pos);
     }
 
-    /**
-     * Generates all linked structures with overall orientation determined by
-     * player's facing or, if player is null, by the first structure's default
-     * facing
-     */
     public void generateLinkedStructures(EntityPlayer player, World world, Random random, BlockPos pos) {
         int i = 0;
-        if (structures.size() != offsets.size() || structures.size() != rots.size()) {
+        if (this.structures.size() != this.offsets.size() || this.structures.size() != this.rotations.size()) {
             System.err.println("Structure List and Offset List are not the same size, aborting generation.");
             return;
         }
-        if (gen == null) {
-            gen = new StructureGenerator();
+        if (this.generator == null) {
+            this.generator = new StructureGenerator();
         }
         if (player != null) {
-            gen.setPlayerFacing(player);
+            this.generator.setPlayerFacing(player);
         }
-        setOffsetFromRotation(player != null ? gen.getPlayerFacing() : -1);
-        for (Structure structure : structures) {
-            int[] offset = offsets.get(i);
-            gen.setStructureWithRotation(structure, rotation + rots.get(i));
-            gen.generate(world, random, x + offset[X], y + offset[Y] + structure.getOffsetY(), z + offset[Z]);
+        this.setOffsetFromRotation(player != null ? this.generator.getPlayerFacing() : null);
+        for (Structure structure : this.structures) {
+            BlockPos offset = this.offsets.get(i);
+            this.generator.setStructureWithRotation(structure, (this.rotation.getHorizontalIndex() + this.rotations.get(i)) % 4);
+            this.generator.generate(world, random, pos.add(offset).up(structure.getOffsetY()));
             ++i;
         }
     }
 
-    /**
-     * Adjusts offsetX and offsetZ amounts to compensate for player facing or,
-     * if player was null (facing < 0), for number of manual rotations
-     */
-    private void setOffsetFromRotation(int facing) {
-        int x, z;
-        for (int[] offset : offsets) {
-            for (int i = 0; i < (facing > 0 ? facing : 0); ++i) {
-                x = -offset[Z];
-                z = offset[X];
-                offset[X] = x;
-                offset[Z] = z;
+    private void setOffsetFromRotation(EnumFacing facing) {
+        if (facing != null) {
+            for (int i = 0; i < this.offsets.size(); i++) {
+                BlockPos offset = this.offsets.get(i);
+                for (int rotation = 0; rotation < facing.getHorizontalIndex(); ++rotation) {
+                    this.offsets.set(i, StructureHelper.getRotatedPosition(offset));
+                }
             }
         }
     }

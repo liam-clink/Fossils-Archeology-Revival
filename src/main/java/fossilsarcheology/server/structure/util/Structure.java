@@ -1,140 +1,68 @@
 package fossilsarcheology.server.structure.util;
 
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
+
 import java.util.LinkedList;
 import java.util.List;
 
 public class Structure {
-    /**
-     * The name of this structure
-     */
     public final String name;
 
-    /**
-     * The List of all blockArray layers necessary to complete the structure
-     */
-    private final List<int[][][][]> blockArrayList = new LinkedList();
+    private final List<Object[][][][]> blockArrayList = new LinkedList<>();
 
-    /**
-     * Stores the direction this structure faces. Default is EAST.
-     */
-    private int facing = StructureGeneratorBase.EAST;
+    private EnumFacing facing = EnumFacing.EAST;
+    private BlockPos offset = BlockPos.ORIGIN;
 
-    /**
-     * Stores default amount to offset structure's location in the world.
-     */
-    private int offsetX = 0, offsetY = 0, offsetZ = 0;
-
-    /**
-     * Constructor for unnamed structures
-     */
     public Structure() {
-        name = "";
+        this.name = "";
     }
 
-    /**
-     * Constructor for named structures
-     */
-    public Structure(String n) {
-        name = n;
+    public Structure(String name) {
+        this.name = name;
     }
 
-    /**
-     * Returns the blockArray List for this structure
-     */
-    public final List<int[][][][]> blockArrayList() {
-        return blockArrayList;
+    public final List<Object[][][][]> blockArrayList() {
+        return this.blockArrayList;
     }
 
-    /**
-     * Returns the structure's default facing
-     */
-    public final int getFacing() {
-        return facing;
+    public final EnumFacing getFacing() {
+        return this.facing;
     }
 
-    /**
-     * Sets the default direction the structure is facing. This side will always
-     * face the player unless you manually rotate the structure with the
-     * rotateStructureFacing() method.
-     */
-    public final void setFacing(int f) {
-        facing = f;
+    public final void setFacing(EnumFacing facing) {
+        this.facing = facing;
     }
 
-    /**
-     * Adds a block array 'layer' to the list to be generated
-     */
-    public final void addBlockArray(int blocks[][][][]) {
-        blockArrayList.add(blocks);
+    public final void addBlockArray(Object blocks[][][][]) {
+        this.blockArrayList.add(blocks);
     }
 
-    /**
-     * Adds all elements contained in the parameter list to the structure
-     */
-    public final void addBlockArrayList(List<int[][][][]> list) {
-        blockArrayList.addAll(list);
+    public final void addBlockArrayList(List<Object[][][][]> blocks) {
+        this.blockArrayList.addAll(blocks);
     }
 
-    /**
-     * Returns lowest structure layer's width along the x axis or 0 if no
-     * structure has been added
-     */
-    public final int getWidthX() {
-        return blockArrayList.size() > 0 ? blockArrayList.get(0)[0].length : 0;
+    public final int getSizeX() {
+        return this.blockArrayList.size() > 0 ? this.blockArrayList.get(0)[0].length : 0;
     }
 
-    /**
-     * Returns lowest structure layer's width along the z axis or 0 if no
-     * structure has been set
-     */
-    public final int getWidthZ() {
-        return blockArrayList != null ? blockArrayList.get(0)[0][0].length : 0;
+    public final int getSizeZ() {
+        return this.blockArrayList != null ? this.blockArrayList.get(0)[0][0].length : 0;
     }
 
-    /**
-     * Returns structure's total height
-     */
     public final int getHeight() {
-        int sum = 0;
-        for (int[][][][] blockArray : blockArrayList) {
-            sum += blockArray.length;
+        int height = 0;
+        for (Object[][][][] blockArray : this.blockArrayList) {
+            height += blockArray.length;
         }
-
-        return sum;
+        return height;
     }
 
-    /**
-     * Returns the structure's offset for the x axis
-     */
-    public final int getOffsetX() {
-        return offsetX;
+    public final BlockPos getOffset() {
+        return this.offset;
     }
 
-    /**
-     * Returns the structure's offset for the y axis
-     */
-    public final int getOffsetY() {
-        return offsetY;
-    }
-
-    /**
-     * Returns the structure's offset for the z axis
-     */
-    public final int getOffsetZ() {
-        return offsetZ;
-    }
-
-    /**
-     * This is how much the structure should be offset from default; i.e. sets
-     * the values that should be passed in to
-     * StructureGeneratorBase.setDefaultOffset. Used, for example, if your
-     * structure's front door is not in the center, but a few blocks to the left
-     * and you want the door to spawn in front of the player, or if your
-     * structure should always be spawned in the air, etc.
-     */
-    public final void setStructureOffset(BlockPos pos) {
-        offsetX = x;
-        offsetZ = z;
-        offsetY = y;
+    public final void setStructureOffset(BlockPos offset) {
+        this.offset = offset;
     }
 }

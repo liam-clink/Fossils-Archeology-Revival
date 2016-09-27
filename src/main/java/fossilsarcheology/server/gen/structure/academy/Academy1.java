@@ -1,11 +1,12 @@
 package fossilsarcheology.server.gen.structure.academy;
 
 import fossilsarcheology.server.block.FABlockRegistry;
+import fossilsarcheology.server.structure.util.StructureHelper;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 
 public class Academy1 {
-    public static final int[][][][] blockArrayAcademy = {
+    public static final Object[][][][] BLOCK_DATA = {
             // This is where all the pos values go (i, j, k). They are broke
             // down by
             // layer. This is how the array works building from x to z and by
@@ -588,7 +589,7 @@ public class Academy1 {
             {}, // {Block.getIdFromBlock(Blocks.tallgrass), 1},
             {}, {}, {}, // {Block.getIdFromBlock(Blocks.brown_mushroom)},
             { Block.getIdFromBlock(Blocks.stonebrick), 1 }, { 0 }, // {Block.getIdFromBlock(Blocks.brown_mushroom)},
-            { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { Block.getIdFromBlock(Blocks.stone_slab), 5 }, { AcademyUtil.BIOME_BLOCK, 0, 2, 0 }, { AcademyUtil.BIOME_BLOCK, 0, 2, 0 }, { AcademyUtil.BIOME_BLOCK, 0, 2, 0 }, { AcademyUtil.BIOME_BLOCK, 0, 2, 0 }, { AcademyUtil.BIOME_BLOCK, 0, 2, 0 }, { AcademyUtil.CUSTOM_CHEST, 5, AcademyUtil.COMMON_LOOT_F1 }, { 0 }, { AcademyUtil.CUSTOM_CHEST, 5, AcademyUtil.COMMON_LOOT_F1 }, { AcademyUtil.BIOME_BLOCK, 0, 1, 1 }, { AcademyUtil.BIOME_BLOCK, 0, 1, 1 }, {}, // {Block.getIdFromBlock(Blocks.tallgrass),
+            { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { Block.getIdFromBlock(Blocks.stone_slab), 5 }, { AcademyUtil.BIOME_BLOCK, 0, 2, 0 }, { AcademyUtil.BIOME_BLOCK, 0, 2, 0 }, { AcademyUtil.BIOME_BLOCK, 0, 2, 0 }, { AcademyUtil.BIOME_BLOCK, 0, 2, 0 }, { AcademyUtil.BIOME_BLOCK, 0, 2, 0 }, { AcademyUtil.CHEST, StructureHelper.wrapIntegers(AcademyUtil.COMMON_LOOT_F1) }, { 0 }, { AcademyUtil.CUSTOM_CHEST, 5, AcademyUtil.COMMON_LOOT_F1 }, { AcademyUtil.BIOME_BLOCK, 0, 1, 1 }, { AcademyUtil.BIOME_BLOCK, 0, 1, 1 }, {}, // {Block.getIdFromBlock(Blocks.tallgrass),
             // 1},
     }, {
             // x = 4

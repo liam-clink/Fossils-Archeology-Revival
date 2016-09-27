@@ -19,7 +19,7 @@ public class Temple3 {
     public static final int INVERT_TOWARDS = 6;
     public static final int INVERT_AWAY = 7;
 
-    public static final int[][][][] blockArrayTemple = { { // y = 11
+    public static final int[][][][] BLOCK_DATA = { { // y = 11
             { // x = 2
                     {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {} }, { // x
             // =

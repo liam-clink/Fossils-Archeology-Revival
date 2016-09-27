@@ -27,75 +27,67 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeDictionary;
 
 import java.util.List;
 import java.util.Random;
 
 public class FossilStructureGenerator extends StructureGeneratorBase {
-    /**
-     * List storing all structures currently available
-     */
     public static final List<Structure> structures = Lists.newArrayList();
 
-    /**
-     * Add all structures to the Structure List
-     */
     static {
         Structure structure = new Structure("Academy");
         if (Revival.CONFIG.generateAcademy) {
-            structure.addBlockArray(Academy1.blockArrayAcademy);
-            structure.addBlockArray(Academy2.blockArrayAcademy);
-            structure.addBlockArray(Academy3.blockArrayAcademy);
-            structure.addBlockArray(Academy4.blockArrayAcademy);
-            structure.addBlockArray(Academy5.blockArrayAcademy);
-            structure.addBlockArray(Academy6.blockArrayAcademy);
+            structure.addBlockArray(Academy1.BLOCK_DATA);
+            structure.addBlockArray(Academy2.BLOCK_DATA);
+            structure.addBlockArray(Academy3.BLOCK_DATA);
+            structure.addBlockArray(Academy4.BLOCK_DATA);
+            structure.addBlockArray(Academy5.BLOCK_DATA);
+            structure.addBlockArray(Academy6.BLOCK_DATA);
             structure.setStructureOffset(new BlockPos(0, -1, 0));
             structures.add(structure);
         }
 
         structure = new Structure("Temple");
         if (Revival.CONFIG.generateTemple) {
-            structure.addBlockArray(Temple1.blockArrayTemple);
-            structure.addBlockArray(Temple2.blockArrayTemple);
-            structure.addBlockArray(Temple3.blockArrayTemple);
+            structure.addBlockArray(Temple1.BLOCK_DATA);
+            structure.addBlockArray(Temple2.BLOCK_DATA);
+            structure.addBlockArray(Temple3.BLOCK_DATA);
             structure.setStructureOffset(new BlockPos(0, -1, 0));
             structures.add(structure);
         }
 
 		/*
          * Structure structure = new Structure("Hut");
-		 * structure.addBlockArray(StructureArrays.blockArrayNPCHut);
+		 * structure.addBlockLayer(StructureArrays.blockArrayNPCHut);
 		 * structure.setFacing(StructureGeneratorBase.EAST); // has a buffer
 		 * layer on the bottom in case no ground; spawn at y-1 for ground level
 		 * structure.setStructureOffset(0, -1, 0); structures.add(structure);
 		 * 
 		 * structure = new Structure("Blacksmith");
-		 * structure.addBlockArray(StructureArrays.blockArrayNPCBlackSmith);
+		 * structure.addBlockLayer(StructureArrays.blockArrayNPCBlackSmith);
 		 * structure.setFacing(StructureGeneratorBase.NORTH);
 		 * structures.add(structure);
 		 * 
 		 * structure = new Structure("Viking Shop");
-		 * structure.addBlockArray(StructureArrays.blockArrayShop);
+		 * structure.addBlockLayer(StructureArrays.blockArrayShop);
 		 * structure.setFacing(StructureGeneratorBase.WEST);
 		 * structures.add(structure);
 		 * 
 		 * structure = new Structure("Redstone Dungeon");
-		 * structure.addBlockArray(StructureArrays.blockArrayRedstone);
+		 * structure.addBlockLayer(StructureArrays.blockArrayRedstone);
 		 * //structure.setFacing(StructureGeneratorBase.EAST);
 		 * structures.add(structure);
 		 * 
 		 * structure = new Structure("Offset Test");
-		 * structure.addBlockArray(StructureArrays.blockArraySpawnTest); /*
-		 * structure.addBlockArray(StructureArrays.blockArrayOffsetTest1);
-		 * structure.addBlockArray(StructureArrays.blockArrayOffsetTest2);
-		 * structure.addBlockArray(StructureArrays.blockArrayOffsetTest2);
-		 * structure.addBlockArray(StructureArrays.blockArrayOffsetTest2);
-		 * structure.addBlockArray(StructureArrays.blockArrayOffsetTest1);
+		 * structure.addBlockLayer(StructureArrays.blockArraySpawnTest); /*
+		 * structure.addBlockLayer(StructureArrays.blockArrayOffsetTest1);
+		 * structure.addBlockLayer(StructureArrays.blockArrayOffsetTest2);
+		 * structure.addBlockLayer(StructureArrays.blockArrayOffsetTest2);
+		 * structure.addBlockLayer(StructureArrays.blockArrayOffsetTest2);
+		 * structure.addBlockLayer(StructureArrays.blockArrayOffsetTest1);
 		 */
         // structure.setFacing(StructureGeneratorBase.NORTH);
         // structures.add(structure);
@@ -183,20 +175,20 @@ public class FossilStructureGenerator extends StructureGeneratorBase {
      */
     @Override
     public void onCustomBlockAdded(World world, BlockPos pos, int fakeID, int customData1, int customData2) {
-        if (!value_set) {
+        if (!this.value_set) {
             // if using this method, this should only be done once per
             // structure, preferably with a better method
             // sets one value of RANDOM_HOLE to remove from the structure,
             // allowing for patterns
-            random_hole = world.rand.nextInt(5);
-            value_set = true;
+            this.random_hole = world.rand.nextInt(5);
+            this.value_set = true;
         }
 
         switch (fakeID) {
             case AcademyUtil.CUSTOM_CHEST:
                 Random rand = new Random();
 
-                // Using the pre-made method addItemToTileInventory adds items to
+                // Using the pre-made method addItemToInventory adds items to
                 // the first slot available
 
                 // Here we use customData to subtype custom_chest:
@@ -214,9 +206,9 @@ public class FossilStructureGenerator extends StructureGeneratorBase {
                         int loot = (int) (Math.random() * 100);
 
                         if (loot < 80) {
-                            addItemToTileInventory(world, new ItemStack(i0, rand.nextInt(4) + 1), pos);
+                            addItemToInventory(world, new ItemStack(i0, rand.nextInt(4) + 1), pos);
                         } else {
-                            addItemToTileInventory(world, new ItemStack(i0, 1), pos);
+                            addItemToInventory(world, new ItemStack(i0, 1), pos);
                         }
                     }
                 }
@@ -227,21 +219,21 @@ public class FossilStructureGenerator extends StructureGeneratorBase {
                         int loot = rand.nextInt(100);
 
                         if (loot < 30) {
-                            addItemToTileInventory(world, new ItemStack(Items.paper, rand.nextInt(22)), pos);
+                            addItemToInventory(world, new ItemStack(Items.paper, rand.nextInt(22)), pos);
                         } else if (loot < 40) {
-                            addItemToTileInventory(world, new ItemStack(Items.book, rand.nextInt(12)), pos);
+                            addItemToInventory(world, new ItemStack(Items.book, rand.nextInt(12)), pos);
                         } else if (loot < 50) {
-                            addItemToTileInventory(world, new ItemStack(Items.bone, rand.nextInt(22)), pos);
+                            addItemToInventory(world, new ItemStack(Items.bone, rand.nextInt(22)), pos);
                         } else if (loot < 60) {
-                            addItemToTileInventory(world, new ItemStack(Items.writable_book, rand.nextInt(5)), pos);
+                            addItemToInventory(world, new ItemStack(Items.writable_book, rand.nextInt(5)), pos);
                         } else if (loot < 75) {
-                            addItemToTileInventory(world, new ItemStack(FAItemRegistry.INSTANCE.biofossil, rand.nextInt(22)), pos);
+                            addItemToInventory(world, new ItemStack(FAItemRegistry.INSTANCE.biofossil, rand.nextInt(22)), pos);
                         } else if (loot < 85) {
-                            addItemToTileInventory(world, new ItemStack(FAItemRegistry.INSTANCE.woodjavelin, rand.nextInt(16)), pos);
+                            addItemToInventory(world, new ItemStack(FAItemRegistry.INSTANCE.woodjavelin, rand.nextInt(16)), pos);
                         } else if (loot < 95) {
-                            addItemToTileInventory(world, new ItemStack(FAItemRegistry.INSTANCE.stonejavelin, rand.nextInt(16)), pos);
+                            addItemToInventory(world, new ItemStack(FAItemRegistry.INSTANCE.stonejavelin, rand.nextInt(16)), pos);
                         } else if (loot < 101) {
-                            addItemToTileInventory(world, new ItemStack(FABlockRegistry.INSTANCE.drum, 1), pos);
+                            addItemToInventory(world, new ItemStack(FABlockRegistry.INSTANCE.drum, 1), pos);
                         }
                     }
                 }
@@ -251,11 +243,11 @@ public class FossilStructureGenerator extends StructureGeneratorBase {
                         int i = (new Random()).nextInt(10);
 
                         if (i < 3) {
-                            addItemToTileInventory(world, new ItemStack(FAItemRegistry.INSTANCE.dinoPedia, rand.nextInt(1) + 1), pos);
+                            addItemToInventory(world, new ItemStack(FAItemRegistry.INSTANCE.dinoPedia, rand.nextInt(1) + 1), pos);
                         } else if (i < 7) {
-                            addItemToTileInventory(world, new ItemStack(FAItemRegistry.INSTANCE.relic, rand.nextInt(9) + 1), pos);
+                            addItemToInventory(world, new ItemStack(FAItemRegistry.INSTANCE.relic, rand.nextInt(9) + 1), pos);
                         } else {
-                            addItemToTileInventory(world, new ItemStack(FAItemRegistry.INSTANCE.potteryShards, rand.nextInt(9) + 1), pos);
+                            addItemToInventory(world, new ItemStack(FAItemRegistry.INSTANCE.potteryShards, rand.nextInt(9) + 1), pos);
                         }
                     }
                 }
@@ -266,15 +258,15 @@ public class FossilStructureGenerator extends StructureGeneratorBase {
                         int loot = rand.nextInt(100);
 
                         if (loot < 40) {
-                            addItemToTileInventory(world, new ItemStack(Items.paper, rand.nextInt(22)), pos);
+                            addItemToInventory(world, new ItemStack(Items.paper, rand.nextInt(22)), pos);
                         } else if (loot < 60) {
-                            addItemToTileInventory(world, new ItemStack(Items.dye, 0, rand.nextInt(10)), pos);
+                            addItemToInventory(world, new ItemStack(Items.dye, 0, rand.nextInt(10)), pos);
                         } else if (loot < 80) {
-                            addItemToTileInventory(world, new ItemStack(Items.string, rand.nextInt(10)), pos);
+                            addItemToInventory(world, new ItemStack(Items.string, rand.nextInt(10)), pos);
                         } else if (loot < 90) {
-                            addItemToTileInventory(world, new ItemStack(Items.compass, rand.nextInt(2)), pos);
+                            addItemToInventory(world, new ItemStack(Items.compass, rand.nextInt(2)), pos);
                         } else if (loot < 101) {
-                            addItemToTileInventory(world, new ItemStack(Items.map, rand.nextInt(5)), pos);
+                            addItemToInventory(world, new ItemStack(Items.map, rand.nextInt(5)), pos);
                         }
                     }
                 }
@@ -285,19 +277,19 @@ public class FossilStructureGenerator extends StructureGeneratorBase {
                         int loot = rand.nextInt(100);
 
                         if (loot < 20) {
-                            addItemToTileInventory(world, new ItemStack(FABlockRegistry.INSTANCE.ancientGlass, rand.nextInt(10)), pos);
+                            addItemToInventory(world, new ItemStack(FABlockRegistry.INSTANCE.ancientGlass, rand.nextInt(10)), pos);
                         } else if (loot < 40) {
-                            addItemToTileInventory(world, new ItemStack(FABlockRegistry.INSTANCE.ancientWood, rand.nextInt(15)), pos);
+                            addItemToInventory(world, new ItemStack(FABlockRegistry.INSTANCE.ancientWood, rand.nextInt(15)), pos);
                         } else if (loot < 50) {
-                            addItemToTileInventory(world, new ItemStack(FAItemRegistry.INSTANCE.whip, 1), pos);
+                            addItemToInventory(world, new ItemStack(FAItemRegistry.INSTANCE.whip, 1), pos);
                         } else if (loot < 60) {
-                            addItemToTileInventory(world, (new ItemStack(Item.getItemFromBlock(FABlockRegistry.INSTANCE.figurineBlock), rand.nextInt(2), rand.nextInt(15))), pos);
+                            addItemToInventory(world, (new ItemStack(Item.getItemFromBlock(FABlockRegistry.INSTANCE.figurineBlock), rand.nextInt(2), rand.nextInt(15))), pos);
                         } else if (loot < 80) {
-                            addItemToTileInventory(world, new ItemStack(Items.iron_ingot, rand.nextInt(15)), pos);
+                            addItemToInventory(world, new ItemStack(Items.iron_ingot, rand.nextInt(15)), pos);
                         } else if (loot < 90) {
-                            addItemToTileInventory(world, new ItemStack(FAItemRegistry.INSTANCE.fossilrecordBones, 1), pos);
+                            addItemToInventory(world, new ItemStack(FAItemRegistry.INSTANCE.fossilrecordBones, 1), pos);
                         } else if (loot < 101) {
-                            addItemToTileInventory(world, new ItemStack(Items.name_tag, rand.nextInt(2)), pos);
+                            addItemToInventory(world, new ItemStack(Items.name_tag, rand.nextInt(2)), pos);
                         }
 
                     }
@@ -309,17 +301,17 @@ public class FossilStructureGenerator extends StructureGeneratorBase {
                         int loot = rand.nextInt(100);
 
                         if (loot < 40) {
-                            addItemToTileInventory(world, new ItemStack(Items.gold_nugget, rand.nextInt(16) + 12), pos);
+                            addItemToInventory(world, new ItemStack(Items.gold_nugget, rand.nextInt(16) + 12), pos);
                         } else if (loot < 50) {
-                            addItemToTileInventory(world, new ItemStack(FAItemRegistry.INSTANCE.goldjavelin, rand.nextInt(10) + 1), pos);
+                            addItemToInventory(world, new ItemStack(FAItemRegistry.INSTANCE.goldjavelin, rand.nextInt(10) + 1), pos);
                         } else if (loot < 60) {
-                            addItemToTileInventory(world, (new ItemStack(Item.getItemFromBlock(FABlockRegistry.INSTANCE.figurineBlock), rand.nextInt(2), rand.nextInt(15))), pos);
+                            addItemToInventory(world, (new ItemStack(Item.getItemFromBlock(FABlockRegistry.INSTANCE.figurineBlock), rand.nextInt(2), rand.nextInt(15))), pos);
                         } else if (loot < 80) {
-                            addItemToTileInventory(world, new ItemStack(Items.gold_ingot, rand.nextInt(5) + 1), pos);
+                            addItemToInventory(world, new ItemStack(Items.gold_ingot, rand.nextInt(5) + 1), pos);
                         } else if (loot < 90) {
-                            addItemToTileInventory(world, new ItemStack(FAItemRegistry.INSTANCE.fossilrecordBones, 1), pos);
+                            addItemToInventory(world, new ItemStack(FAItemRegistry.INSTANCE.fossilrecordBones, 1), pos);
                         } else if (loot < 101) {
-                            addItemToTileInventory(world, new ItemStack(Items.name_tag, rand.nextInt(2)), pos);
+                            addItemToInventory(world, new ItemStack(Items.name_tag, rand.nextInt(2)), pos);
                         }
 
                     }
@@ -329,15 +321,15 @@ public class FossilStructureGenerator extends StructureGeneratorBase {
                     int loot = rand.nextInt(100);
 
                     if (loot < 90) {
-                        addItemToTileInventory(world, new ItemStack(FAItemRegistry.INSTANCE.goldjavelin, rand.nextInt(11) + 1), pos);
-                        addItemToTileInventory(world, new ItemStack(Items.emerald, rand.nextInt(5)), pos);
+                        addItemToInventory(world, new ItemStack(FAItemRegistry.INSTANCE.goldjavelin, rand.nextInt(11) + 1), pos);
+                        addItemToInventory(world, new ItemStack(Items.emerald, rand.nextInt(5)), pos);
 
                     } else {
-                        addItemToTileInventory(world, new ItemStack(FAItemRegistry.INSTANCE.goldjavelin, rand.nextInt(10) + 3), pos);
-                        addItemToTileInventory(world, new ItemStack(FAItemRegistry.INSTANCE.diamondjavelin, rand.nextInt(10) + 1), pos);
-                        addItemToTileInventory(world, new ItemStack(FAItemRegistry.INSTANCE.relic, rand.nextInt(20)), pos);
-                        addItemToTileInventory(world, new ItemStack(FAItemRegistry.INSTANCE.skullStick, rand.nextInt(1)), pos);
-                        addItemToTileInventory(world, new ItemStack(Items.emerald, rand.nextInt(5) + 3), pos);
+                        addItemToInventory(world, new ItemStack(FAItemRegistry.INSTANCE.goldjavelin, rand.nextInt(10) + 3), pos);
+                        addItemToInventory(world, new ItemStack(FAItemRegistry.INSTANCE.diamondjavelin, rand.nextInt(10) + 1), pos);
+                        addItemToInventory(world, new ItemStack(FAItemRegistry.INSTANCE.relic, rand.nextInt(20)), pos);
+                        addItemToInventory(world, new ItemStack(FAItemRegistry.INSTANCE.skullStick, rand.nextInt(1)), pos);
+                        addItemToInventory(world, new ItemStack(Items.emerald, rand.nextInt(5) + 3), pos);
 
                     }
                 }

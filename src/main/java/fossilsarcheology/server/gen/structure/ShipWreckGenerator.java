@@ -50,8 +50,8 @@ public class ShipWreckGenerator implements IWorldGenerator {
             Revival.printDebug("Gen: Shipwreck Spawn at " + position.getX() + ", " + position.getY() + ", " + position.getZ());
         }
 
-        int widthX = ((Structure) FossilWaterStructureGenerator.structures.get(structure)).getWidthX();
-        int widthZ = ((Structure) FossilWaterStructureGenerator.structures.get(structure)).getWidthZ();
+        int widthX = ((Structure) FossilWaterStructureGenerator.structures.get(structure)).getSizeX();
+        int widthZ = ((Structure) FossilWaterStructureGenerator.structures.get(structure)).getSizeZ();
         int height = ((Structure) FossilWaterStructureGenerator.structures.get(structure)).getHeight();
         // Set structure and random facing, then generate; no offset needed here
         gen.setStructure((Structure) FossilWaterStructureGenerator.structures.get(structure));

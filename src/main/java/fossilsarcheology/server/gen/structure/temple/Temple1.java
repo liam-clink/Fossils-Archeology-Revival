@@ -19,7 +19,7 @@ public class Temple1 {
     public static final int INVERT_TOWARDS = 6;
     public static final int INVERT_AWAY = 7;
     // {TempleUtil.CUSTOM_RELIC, 0, 2, 0},
-    public static final int[][][][] blockArrayTemple = { { // y = 1
+    public static final int[][][][] BLOCK_DATA = { { // y = 1
             { // x = 1
                     {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {} }, { // x
             // =

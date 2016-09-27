@@ -24,7 +24,7 @@ public class AcademyGenerator implements IWorldGenerator {
                 // quite a lot of structures
                 if (random.nextInt(999) < 1) // This doesn't seem to actually corellate with anything.
                 {
-                    generateStructure(world, random, chunkX * 16, chunkZ * 16);
+                    this.generateStructure(world, random, chunkX * 16, chunkZ * 16);
                     break;
                 } else {
                     break;
@@ -63,8 +63,8 @@ public class AcademyGenerator implements IWorldGenerator {
             Revival.printDebug("Gen: Academy Spawn at " + position.getX() + ", " + position.getY() + ", " + position.getZ());
         }
 
-        int widthX = FossilStructureGenerator.structures.get(structure).getWidthX();
-        int widthZ = FossilStructureGenerator.structures.get(structure).getWidthZ();
+        int widthX = FossilStructureGenerator.structures.get(structure).getSizeX();
+        int widthZ = FossilStructureGenerator.structures.get(structure).getSizeZ();
         int height = FossilStructureGenerator.structures.get(structure).getHeight();
         // Set structure and random facing, then generate; no offset needed here
         generator.setStructure(FossilStructureGenerator.structures.get(structure));

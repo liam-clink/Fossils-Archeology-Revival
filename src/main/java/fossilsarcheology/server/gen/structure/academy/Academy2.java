@@ -5,7 +5,7 @@ import net.minecraft.init.Blocks;
 
 public class Academy2 {
 
-    public static final int[][][][] blockArrayAcademy = {
+    public static final int[][][][] BLOCK_DATA = {
             // This is where all the pos values go (i, j, k). They are broke
             // down by
             // layer. This is how the array works building from x to z and by
