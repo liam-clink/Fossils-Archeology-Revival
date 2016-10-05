@@ -15,6 +15,9 @@ public class FAItemRegistry {
     public static final BioFossilItem BIOFOSSIL = new BioFossilItem(false);
     public static final BioFossilItem TAR_FOSSIL = new BioFossilItem(true);
 
+    public static final BasicItem AMBER = new BasicItem("amber");
+    public static final BasicItem DOMINICAN_AMBER = new BasicItem("dominican_amber");
+
     public static void register() {
         try {
             for (Field f : FAItemRegistry.class.getDeclaredFields()) {
@@ -32,9 +35,10 @@ public class FAItemRegistry {
         }
     }
 
-    public static void registerItem(Item item) {
+    public static Item registerItem(Item item) {
         String name = item.getUnlocalizedName().substring("item.".length());
         GameRegistry.register(item, new ResourceLocation(Revival.MODID, name));
         ITEMS.add(item);
+        return item;
     }
 }
