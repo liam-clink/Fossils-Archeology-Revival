@@ -1,103 +1,696 @@
 {
-    "tyrannosaurus_roar": {"category": "neutral","sounds": ["prehistoric/tyrannosaurus_roar"]},
-    "allosaurus_death": {"category": "neutral","sounds": ["prehistoric/allosaurus_death1"]},
-    "allosaurus_hurt": {"category": "neutral","sounds": ["prehistoric/allosaurus_hurt1"]},
-    "allosaurus_living": {"category": "neutral","sounds": ["prehistoric/allosaurus_living1", "prehistoric/allosaurus_living2"]},
-    "ankylosaurus_death": {"category": "neutral","sounds": ["prehistoric/ankylosaurus_death"]},
-    "ankylosaurus_hurt": {"category": "neutral","sounds": ["prehistoric/ankylosaurus_hurt1", "prehistoric/ankylosaurus_hurt2"]},
-    "ankylosaurus_living": {"category": "neutral","sounds": ["prehistoric/ankylosaurus_living1", "prehistoric/ankylosaurus_living2", "prehistoric/ankylosaurus_living3"]},
-    "brachiosaurus_death": {"category": "neutral","sounds": ["prehistoric/brachiosaurus_death1"]},
-    "brachiosaurus_hurt": {"category": "neutral","sounds": ["prehistoric/brachiosaurus_hurt1"]},
-    "brachiosaurus_living": {"category": "neutral","sounds": ["prehistoric/brachiosaurus_living1", "prehistoric/brachiosaurus_living2"]},
-    "compsognathus_living": {"category": "neutral","sounds": ["prehistoric/compsognathus_living1", "prehistoric/compsognathus_living2"]},
-    "compsognathus_death": {"category": "neutral","sounds": ["prehistoric/compsognathus_death"]},
-    "compsognathus_hurt": {"category": "neutral","sounds": ["prehistoric/compsognathus_hurt"]},
-    "confuciusornis_death": {"category": "neutral","sounds": ["prehistoric/confuciusornis_death1", "prehistoric/confuciusornis_death2"]},
-    "confuciusornis_hurt": {"category": "neutral","sounds": ["prehistoric/confuciusornis_hurt1", "prehistoric/confuciusornis_hurt2"]},
-    "confuciusornis_living": {"category": "neutral","sounds": ["prehistoric/confuciusornis_living1", "prehistoric/confuciusornis_living2", "prehistoric/confuciusornis_living3", "prehistoric/confuciusornis_living4", "prehistoric/confuciusornis_living5"]},
-    "deinonychus_death": {"category": "neutral","sounds": ["prehistoric/deinonychus_death"]},
-    "deinonychus_hurt": {"category": "neutral","sounds": ["prehistoric/deinonychus_hurt"]},
-    "deinonychus_living": {"category": "neutral","sounds": ["prehistoric/deinonychus_living1", "prehistoric/deinonychus_living2", "prehistoric/deinonychus_living3"]},
-    "dilophosaurus_call": {"category": "neutral","sounds": ["prehistoric/dilophosaurus_call1", "prehistoric/dilophosaurus_call2"]},
-    "dilophosaurus_death": {"category": "neutral","sounds": ["prehistoric/dilophosaurus_death"]},
-    "dilophosaurus_hurt": {"category": "neutral","sounds": ["prehistoric/dilophosaurus_hurt"]},
-    "dilophosaurus_living": {"category": "neutral","sounds": ["prehistoric/dilophosaurus_living"]},
-    "dodo_death": {"category": "neutral","sounds": ["prehistoric/dodo_death1"]},
-    "dodo_hurt": {"category": "neutral","sounds": ["prehistoric/dodo_hurt1"]},
-    "dodo_living": {"category": "neutral","sounds": ["prehistoric/dodo_living1", "prehistoric/dodo_living2"]},
-    "elasmotherium_living": {"category": "neutral","sounds": ["prehistoric/elasmotherium_living1"]},
-    "elasmotherium_hurt": {"category": "neutral","sounds": ["prehistoric/elasmotherium_hurt1"]},
-    "elasmotherium_death": {"category": "neutral","sounds": ["prehistoric/elasmotherium_death1"]},
-    "gallimimus_death": {"category": "neutral","sounds": ["prehistoric/gallimimus_death"]},
-    "gallimimus_hurt": {"category": "neutral","sounds": ["prehistoric/gallimimus_hurt"]},
-    "gallimimus_living": {"category": "neutral","sounds": ["prehistoric/gallimimus_living"]},
-    "liopleurodon_attack": {"category": "neutral","sounds": ["prehistoric/mosasaurus_attack1"]},
-    "liopleurodon_death": {"category": "neutral","sounds": ["prehistoric/mosasaurus_death1", "prehistoric/mosasaurus_death2"]},
-    "liopleurodon_hurt": {"category": "neutral","sounds": ["prehistoric/mosasaurus_hurt"]},
-    "liopleurodon_living_inside": {"category": "neutral","sounds": ["prehistoric/mosasaurus_living1", "prehistoric/mosasaurus_living2"]},
-    "liopleurodon_living_outside": {"category": "neutral","sounds": ["prehistoric/mosasaurus_outside1", "prehistoric/mosasaurus_outside2", "prehistoric/mosasaurus_outside3", "prehistoric/mosasaurus_outside4"]}, 
-    "mammoth_death": {"category": "neutral","sounds": ["prehistoric/mammoth_death"]},
-    "mammoth_hurt": {"category": "neutral","sounds": ["prehistoric/mammoth_hurt"]},
-    "mammoth_living": {"category": "neutral","sounds": ["prehistoric/mammoth_living"]},
-    "mosasaurus_attack": {"category": "neutral","sounds": ["prehistoric/mosasaurus_attack1"]},
-    "mosasaurus_death": {"category": "neutral","sounds": ["prehistoric/mosasaurus_death1", "prehistoric/mosasaurus_death2"]},
-    "mosasaurus_hurt": {"category": "neutral","sounds": ["prehistoric/mosasaurus_hurt"]},
-    "mosasaurus_living_inside": {"category": "neutral","sounds": ["prehistoric/mosasaurus_living1", "prehistoric/mosasaurus_living2"]},
-    "mosasaurus_living_outside": {"category": "neutral","sounds": ["prehistoric/mosasaurus_outside1", "prehistoric/mosasaurus_outside2", "prehistoric/mosasaurus_outside3", "prehistoric/mosasaurus_outside4"]},
-    "pachycephalosaurus_death": {"category": "neutral","sounds": ["prehistoric/pachycephalosaurus_death"]},
-    "pachycephalosaurus_hurt": {"category": "neutral","sounds": ["prehistoric/pachycephalosaurus_hurt1", "prehistoric/pachycephalosaurus_hurt2"]},
-    "pachycephalosaurus_living": {"category": "neutral","sounds": ["prehistoric/pachycephalosaurus_living1", "prehistoric/pachycephalosaurus_living2", "prehistoric/pachycephalosaurus_living3"]},
-    "plesiosaur_hurt": {"category": "neutral","sounds": ["prehistoric/plesiosaur_hurt"]},
-    "plesiosaur_death": {"category": "neutral","sounds": ["prehistoric/plesiosaur_hurt"]},
-    "plesiosaur_living_outside": {"category": "neutral","sounds": ["prehistoric/plesiosaur_living"]},
-    "plesiosaur_living_inside": {"category": "neutral","sounds": ["prehistoric/plesiosaur_living"]},
-    "pterosaur_hurt": {"category": "neutral","sounds": ["prehistoric/pterosaurus_hurt"]},
-    "pterosaur_death": {"category": "neutral","sounds": ["prehistoric/pterosaurus_hurt"]},
-    "sarcosuchus_living": {"category": "neutral","sounds": ["prehistoric/sarcosuchus_living1", "prehistoric/sarcosuchus_living2", "prehistoric/sarcosuchus_living3", "prehistoric/sarcosuchus_living4"]},
-    "sarcosuchus_hurt": {"category": "neutral","sounds": ["prehistoric/sarcosuchus_hurt1", "prehistoric/sarcosuchus_hurt2"]},
-    "sarcosuchus_death": {"category": "neutral","sounds": ["prehistoric/sarcosuchus_hurt1", "prehistoric/sarcosuchus_hurt2"]},
-    "sarcosuchus_baby_living": {"category": "neutral","sounds": ["prehistoric/sarcosuchus_baby_living1", "prehistoric/sarcosuchus_baby_living2", "prehistoric/sarcosuchus_baby_living3", "prehistoric/sarcosuchus_baby_living4"]},
-    "pterosaur_living": {"category": "neutral","sounds": ["prehistoric/pterosaurus_living1", "prehistoric/pterosaurus_living2"]},
-    "smilodon_hurt": {"category": "neutral","sounds": ["prehistoric/smilodon_hurt"]},
-    "smilodon_death": {"category": "neutral","sounds": ["prehistoric/smilodon_death"]},
-    "smilodon_living": {"category": "neutral","sounds": ["prehistoric/smilodon_living1", "prehistoric/smilodon_living2", "prehistoric/smilodon_living3"]},
-    "spinosaurus_death": {"category": "neutral","sounds": ["prehistoric/spinosaurus_death"]},
-    "spinosaurus_hurt": {"category": "neutral","sounds": ["prehistoric/spinosaurus_hurt"]},
-    "spinosaurus_living": {"category": "neutral","sounds": ["prehistoric/spinosaurus_living1", "prehistoric/spinosaurus_living2"]},
-    "spinosaurus_scream": {"category": "neutral","sounds": ["prehistoric/spinosaurus_scream"]},
-    "stegosaurus_death": {"category": "neutral","sounds": ["prehistoric/stegosaurus_death"]},
-    "stegosaurus_hurt": {"category": "neutral","sounds": ["prehistoric/stegosaurus_hurt"]},
-    "stegosaurus_living": {"category": "neutral","sounds": ["prehistoric/stegosaurus_living1", "prehistoric/stegosaurus_living2", "prehistoric/stegosaurus_living3"]},
-    "terror_bird_death": {"category": "neutral","sounds": ["prehistoric/terror_bird_death"]},
-    "terror_bird_hurt": {"category": "neutral","sounds": ["prehistoric/terror_bird_hurt"]},
-    "terror_bird_living": {"category": "neutral","sounds": ["prehistoric/terror_bird_living"]},
-    "terror_bird_attack": {"category": "neutral","sounds": ["prehistoric/terror_bird_attack"]},
-    "tyrannosaurus_death": {"category": "neutral","sounds": ["prehistoric/trex_death1", "prehistoric/trex_death2"]},
-    "tyrannosaurus_hurt": {"category": "neutral","sounds": ["prehistoric/trex_hurt"]},
-    "tyrannosaurus_living": {"category": "neutral","sounds": ["prehistoric/trex_living1", "prehistoric/trex_living2", "prehistoric/trex_living3"]},
-    "tyrannosaurus_scream": {"category": "neutral","sounds": ["prehistoric/trex_scream1", "prehistoric/trex_scream2", "prehistoric/trex_scream3"]},
-    "tyrannosaurus_weak": {"category": "neutral","sounds": ["prehistoric/trex_weak"]},
-    "triceratops_death": {"category": "neutral","sounds": ["prehistoric/triceratops_death"]},
-    "triceratops_hurt": {"category": "neutral","sounds": ["prehistoric/triceratops_hurt"]},
-    "triceratops_living": {"category": "neutral","sounds": ["prehistoric/triceratops_living1", "prehistoric/triceratops_living2", "prehistoric/triceratops_living3"]},
-    "ceratosaurus_death": {"category": "neutral","sounds": ["prehistoric/ceratosaurus_death1"]},
-    "ceratosaurus_hurt": {"category": "neutral","sounds": ["prehistoric/ceratosaurus_hurt1", "prehistoric/ceratosaurus_hurt2"]},
-    "ceratosaurus_living": {"category": "neutral","sounds": ["prehistoric/ceratosaurus_living1", "prehistoric/ceratosaurus_living2", "prehistoric/ceratosaurus_living3"]},
-    "velociraptor_death": {"category": "neutral","sounds": ["prehistoric/velociraptor_death1"]},
-    "velociraptor_hurt": {"category": "neutral","sounds": ["prehistoric/velociraptor_hurt1", "prehistoric/velociraptor_hurt2"]},
-    "velociraptor_living": {"category": "neutral","sounds": ["prehistoric/velociraptor_living1", "prehistoric/velociraptor_living2", "prehistoric/velociraptor_living3", "prehistoric/velociraptor_living4", "prehistoric/velociraptor_living5", "prehistoric/velociraptor_living6"]},
-	"drum_single": {"category": "block","sounds": ["drum_single"]},
-	"drum_triple": {"category": "block","sounds": ["drum_triple"]},
-	"tar": {"category": "block","sounds": ["tar"]},
-	"whip": {"category": "player","sounds": ["whip1"]},
-	"anuTotem": {"category": "player","sounds": ["anuTotem"]},
-	"record_bones_disc": {"category": "record","sounds": [{"name": "record_bones","stream": true}]},
-	"music.discovery": {"category": "record","sounds": [{"name": "music_discovery","stream": true}]},
-	"music.scarab": {"category": "record","sounds": [{"name": "music_scarab","stream": true}]},
-	"music.first_dinosaur": {"category": "record","sounds": [{"name": "music_first_dinosaur","stream": true}]},
-    "music.anu": {"category": "record","sounds": [{"name": "music_anu","stream": true}]},
-    "music.mating": {"category": "neutral","sounds": [{"name": "music_mating_0", "stream": true}, {"name": "music_mating_1", "stream": true}, {"name": "music_mating_2", "stream": true}]},	
-	"anu_living_healthy": {"category": "neutral","sounds": ["anu_living_stage1_0", "anu_living_stage1_1", "anu_living_stage1_2", "anu_living_stage1_3"]},
-	"anu_living_middle": {"category": "neutral","sounds": ["anu_living_stage2_0"]},
-	"anu_death_effect": {"category": "neutral","sounds": ["anu_death_effect"]}
+  "tyrannosaurus_roar": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/tyrannosaurus_roar"
+    ]
+  },
+  "allosaurus_death": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/allosaurus_death1"
+    ]
+  },
+  "allosaurus_hurt": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/allosaurus_hurt1"
+    ]
+  },
+  "allosaurus_living": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/allosaurus_living1",
+      "fossil:prehistoric/allosaurus_living2"
+    ]
+  },
+  "ankylosaurus_death": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/ankylosaurus_death"
+    ]
+  },
+  "ankylosaurus_hurt": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/ankylosaurus_hurt1",
+      "fossil:prehistoric/ankylosaurus_hurt2"
+    ]
+  },
+  "ankylosaurus_living": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/ankylosaurus_living1",
+      "fossil:prehistoric/ankylosaurus_living2",
+      "fossil:prehistoric/ankylosaurus_living3"
+    ]
+  },
+  "brachiosaurus_death": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/brachiosaurus_death1"
+    ]
+  },
+  "brachiosaurus_hurt": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/brachiosaurus_hurt1"
+    ]
+  },
+  "brachiosaurus_living": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/brachiosaurus_living1",
+      "fossil:prehistoric/brachiosaurus_living2"
+    ]
+  },
+  "compsognathus_living": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/compsognathus_living1",
+      "fossil:prehistoric/compsognathus_living2"
+    ]
+  },
+  "compsognathus_death": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/compsognathus_death"
+    ]
+  },
+  "compsognathus_hurt": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/compsognathus_hurt"
+    ]
+  },
+  "confuciusornis_death": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/confuciusornis_death1",
+      "fossil:prehistoric/confuciusornis_death2"
+    ]
+  },
+  "confuciusornis_hurt": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/confuciusornis_hurt1",
+      "fossil:prehistoric/confuciusornis_hurt2"
+    ]
+  },
+  "confuciusornis_living": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/confuciusornis_living1",
+      "fossil:prehistoric/confuciusornis_living2",
+      "fossil:prehistoric/confuciusornis_living3",
+      "fossil:prehistoric/confuciusornis_living4",
+      "fossil:prehistoric/confuciusornis_living5"
+    ]
+  },
+  "deinonychus_death": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/deinonychus_death"
+    ]
+  },
+  "deinonychus_hurt": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/deinonychus_hurt"
+    ]
+  },
+  "deinonychus_living": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/deinonychus_living1",
+      "fossil:prehistoric/deinonychus_living2",
+      "fossil:prehistoric/deinonychus_living3"
+    ]
+  },
+  "dilophosaurus_call": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/dilophosaurus_call1",
+      "fossil:prehistoric/dilophosaurus_call2"
+    ]
+  },
+  "dilophosaurus_death": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/dilophosaurus_death"
+    ]
+  },
+  "dilophosaurus_hurt": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/dilophosaurus_hurt"
+    ]
+  },
+  "dilophosaurus_living": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/dilophosaurus_living"
+    ]
+  },
+  "dodo_death": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/dodo_death1"
+    ]
+  },
+  "dodo_hurt": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/dodo_hurt1"
+    ]
+  },
+  "dodo_living": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/dodo_living1",
+      "fossil:prehistoric/dodo_living2"
+    ]
+  },
+  "elasmotherium_living": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/elasmotherium_living1"
+    ]
+  },
+  "elasmotherium_hurt": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/elasmotherium_hurt1"
+    ]
+  },
+  "elasmotherium_death": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/elasmotherium_death1"
+    ]
+  },
+  "gallimimus_death": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/gallimimus_death"
+    ]
+  },
+  "gallimimus_hurt": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/gallimimus_hurt"
+    ]
+  },
+  "gallimimus_living": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/gallimimus_living"
+    ]
+  },
+  "liopleurodon_attack": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/mosasaurus_attack1"
+    ]
+  },
+  "liopleurodon_death": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/mosasaurus_death1",
+      "fossil:prehistoric/mosasaurus_death2"
+    ]
+  },
+  "liopleurodon_hurt": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/mosasaurus_hurt"
+    ]
+  },
+  "liopleurodon_living_inside": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/mosasaurus_living1",
+      "fossil:prehistoric/mosasaurus_living2"
+    ]
+  },
+  "liopleurodon_living_outside": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/mosasaurus_outside1",
+      "fossil:prehistoric/mosasaurus_outside2",
+      "fossil:prehistoric/mosasaurus_outside3",
+      "fossil:prehistoric/mosasaurus_outside4"
+    ]
+  },
+  "mammoth_death": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/mammoth_death"
+    ]
+  },
+  "mammoth_hurt": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/mammoth_hurt"
+    ]
+  },
+  "mammoth_living": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/mammoth_living"
+    ]
+  },
+  "mosasaurus_attack": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/mosasaurus_attack1"
+    ]
+  },
+  "mosasaurus_death": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/mosasaurus_death1",
+      "fossil:prehistoric/mosasaurus_death2"
+    ]
+  },
+  "mosasaurus_hurt": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/mosasaurus_hurt"
+    ]
+  },
+  "mosasaurus_living_inside": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/mosasaurus_living1",
+      "fossil:prehistoric/mosasaurus_living2"
+    ]
+  },
+  "mosasaurus_living_outside": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/mosasaurus_outside1",
+      "fossil:prehistoric/mosasaurus_outside2",
+      "fossil:prehistoric/mosasaurus_outside3",
+      "fossil:prehistoric/mosasaurus_outside4"
+    ]
+  },
+  "pachycephalosaurus_death": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/pachycephalosaurus_death"
+    ]
+  },
+  "pachycephalosaurus_hurt": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/pachycephalosaurus_hurt1",
+      "fossil:prehistoric/pachycephalosaurus_hurt2"
+    ]
+  },
+  "pachycephalosaurus_living": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/pachycephalosaurus_living1",
+      "fossil:prehistoric/pachycephalosaurus_living2",
+      "fossil:prehistoric/pachycephalosaurus_living3"
+    ]
+  },
+  "plesiosaur_hurt": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/plesiosaur_hurt"
+    ]
+  },
+  "plesiosaur_death": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/plesiosaur_hurt"
+    ]
+  },
+  "plesiosaur_living_outside": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/plesiosaur_living"
+    ]
+  },
+  "plesiosaur_living_inside": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/plesiosaur_living"
+    ]
+  },
+  "pterosaur_hurt": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/pterosaurus_hurt"
+    ]
+  },
+  "pterosaur_death": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/pterosaurus_hurt"
+    ]
+  },
+  "sarcosuchus_living": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/sarcosuchus_living1",
+      "fossil:prehistoric/sarcosuchus_living2",
+      "fossil:prehistoric/sarcosuchus_living3",
+      "fossil:prehistoric/sarcosuchus_living4"
+    ]
+  },
+  "sarcosuchus_hurt": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/sarcosuchus_hurt1",
+      "fossil:prehistoric/sarcosuchus_hurt2"
+    ]
+  },
+  "sarcosuchus_death": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/sarcosuchus_hurt1",
+      "fossil:prehistoric/sarcosuchus_hurt2"
+    ]
+  },
+  "sarcosuchus_baby_living": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/sarcosuchus_baby_living1",
+      "fossil:prehistoric/sarcosuchus_baby_living2",
+      "fossil:prehistoric/sarcosuchus_baby_living3",
+      "fossil:prehistoric/sarcosuchus_baby_living4"
+    ]
+  },
+  "pterosaur_living": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/pterosaurus_living1",
+      "fossil:prehistoric/pterosaurus_living2"
+    ]
+  },
+  "smilodon_hurt": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/smilodon_hurt"
+    ]
+  },
+  "smilodon_death": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/smilodon_death"
+    ]
+  },
+  "smilodon_living": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/smilodon_living1",
+      "fossil:prehistoric/smilodon_living2",
+      "fossil:prehistoric/smilodon_living3"
+    ]
+  },
+  "spinosaurus_death": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/spinosaurus_death"
+    ]
+  },
+  "spinosaurus_hurt": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/spinosaurus_hurt"
+    ]
+  },
+  "spinosaurus_living": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/spinosaurus_living1",
+      "fossil:prehistoric/spinosaurus_living2"
+    ]
+  },
+  "spinosaurus_scream": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/spinosaurus_scream"
+    ]
+  },
+  "stegosaurus_death": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/stegosaurus_death"
+    ]
+  },
+  "stegosaurus_hurt": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/stegosaurus_hurt"
+    ]
+  },
+  "stegosaurus_living": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/stegosaurus_living1",
+      "fossil:prehistoric/stegosaurus_living2",
+      "fossil:prehistoric/stegosaurus_living3"
+    ]
+  },
+  "terror_bird_death": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/terror_bird_death"
+    ]
+  },
+  "terror_bird_hurt": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/terror_bird_hurt"
+    ]
+  },
+  "terror_bird_living": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/terror_bird_living"
+    ]
+  },
+  "terror_bird_attack": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/terror_bird_attack"
+    ]
+  },
+  "tyrannosaurus_death": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/trex_death1",
+      "fossil:prehistoric/trex_death2"
+    ]
+  },
+  "tyrannosaurus_hurt": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/trex_hurt"
+    ]
+  },
+  "tyrannosaurus_living": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/trex_living1",
+      "fossil:prehistoric/trex_living2",
+      "fossil:prehistoric/trex_living3"
+    ]
+  },
+  "tyrannosaurus_scream": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/trex_scream1",
+      "fossil:prehistoric/trex_scream2",
+      "fossil:prehistoric/trex_scream3"
+    ]
+  },
+  "tyrannosaurus_weak": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/trex_weak"
+    ]
+  },
+  "triceratops_death": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/triceratops_death"
+    ]
+  },
+  "triceratops_hurt": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/triceratops_hurt"
+    ]
+  },
+  "triceratops_living": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/triceratops_living1",
+      "fossil:prehistoric/triceratops_living2",
+      "fossil:prehistoric/triceratops_living3"
+    ]
+  },
+  "ceratosaurus_death": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/ceratosaurus_death1"
+    ]
+  },
+  "ceratosaurus_hurt": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/ceratosaurus_hurt1",
+      "fossil:prehistoric/ceratosaurus_hurt2"
+    ]
+  },
+  "ceratosaurus_living": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/ceratosaurus_living1",
+      "fossil:prehistoric/ceratosaurus_living2",
+      "fossil:prehistoric/ceratosaurus_living3"
+    ]
+  },
+  "velociraptor_death": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/velociraptor_death1"
+    ]
+  },
+  "velociraptor_hurt": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/velociraptor_hurt1",
+      "fossil:prehistoric/velociraptor_hurt2"
+    ]
+  },
+  "velociraptor_living": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/velociraptor_living1",
+      "fossil:prehistoric/velociraptor_living2",
+      "fossil:prehistoric/velociraptor_living3",
+      "fossil:prehistoric/velociraptor_living4",
+      "fossil:prehistoric/velociraptor_living5",
+      "fossil:prehistoric/velociraptor_living6"
+    ]
+  },
+  "drum_single": {
+    "category": "block",
+    "sounds": [
+      "fossil:drum_single"
+    ]
+  },
+  "drum_triple": {
+    "category": "block",
+    "sounds": [
+      "fossil:drum_triple"
+    ]
+  },
+  "tar": {
+    "category": "block",
+    "sounds": [
+      "fossil:tar"
+    ]
+  },
+  "whip": {
+    "category": "player",
+    "sounds": [
+      "fossil:whip1"
+    ]
+  },
+  "anuTotem": {
+    "category": "player",
+    "sounds": [
+      "fossil:anuTotem"
+    ]
+  },
+  "record_bones_disc": {
+    "category": "record",
+    "sounds": [
+      {
+        "name": "fossil:record_bones",
+        "stream": true
+      }
+    ]
+  },
+  "music.discovery": {
+    "category": "record",
+    "sounds": [
+      {
+        "name": "fossil:music_discovery",
+        "stream": true
+      }
+    ]
+  },
+  "music.scarab": {
+    "category": "record",
+    "sounds": [
+      {
+        "name": "fossil:music_scarab",
+        "stream": true
+      }
+    ]
+  },
+  "music.first_dinosaur": {
+    "category": "record",
+    "sounds": [
+      {
+        "name": "fossil:music_first_dinosaur",
+        "stream": true
+      }
+    ]
+  },
+  "music.anu": {
+    "category": "record",
+    "sounds": [
+      {
+        "name": "fossil:music_anu",
+        "stream": true
+      }
+    ]
+  },
+  "music.mating": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "fossil:music_mating_0",
+        "stream": true
+      },
+      {
+        "name": "fossil:music_mating_1",
+        "stream": true
+      },
+      {
+        "name": "fossil:music_mating_2",
+        "stream": true
+      }
+    ]
+  },
+  "anu_living_healthy": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:anu_living_stage1_0",
+      "fossil:anu_living_stage1_1",
+      "fossil:anu_living_stage1_2",
+      "fossil:anu_living_stage1_3"
+    ]
+  },
+  "anu_living_middle": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:anu_living_stage2_0"
+    ]
+  },
+  "anu_death_effect": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:anu_death_effect"
+    ]
+  }
 }
