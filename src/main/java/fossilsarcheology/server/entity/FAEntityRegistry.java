@@ -3,6 +3,8 @@ package fossilsarcheology.server.entity;
 import fossilsarcheology.Revival;
 import fossilsarcheology.server.entity.prehistoric.MobType;
 import fossilsarcheology.server.entity.prehistoric.PrehistoricEntityType;
+import fossilsarcheology.server.entity.projectile.AncientJavelinEntity;
+import fossilsarcheology.server.entity.projectile.JavelinEntity;
 import net.minecraft.entity.Entity;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 
@@ -14,9 +16,15 @@ public class FAEntityRegistry {
                 registerSpawnable(type.getEntity(), type.name(), id + 200, type.primaryEggColor, type.secondaryEggColor);
             }
         }
+        registerEntity(JavelinEntity.class, "javelin", 0);
+        registerEntity(AncientJavelinEntity.class, "ancient_javelin", 1);
+    }
+
+    public static void registerEntity(Class<? extends Entity> entityClass, String name, int entityId) {
+        EntityRegistry.registerModEntity(entityClass, name, entityId, Revival.INSTANCE, 64, 1, true);
     }
 
     public static void registerSpawnable(Class<? extends Entity> entityClass, String name, int entityId, int mainColor, int subColor) {
-        EntityRegistry.registerModEntity(entityClass, name, entityId, Revival.INSTANCE, 512, 3, true, mainColor, subColor);
+        EntityRegistry.registerModEntity(entityClass, name, entityId, Revival.INSTANCE, 512, 1, true, mainColor, subColor);
     }
 }

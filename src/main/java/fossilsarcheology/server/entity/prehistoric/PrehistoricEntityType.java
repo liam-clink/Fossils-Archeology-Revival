@@ -96,7 +96,7 @@ public enum PrehistoricEntityType {
     public static void register() {
         for (PrehistoricEntityType type : PrehistoricEntityType.values()) {
             MobType mobType = type.mobType;
-            String resourceName = type.resourceName;
+            String resourceName = type.resourceName; //TODO Create base item class for PrehistoricEntityType related items
             type.dnaItem = FAItemRegistry.registerItem(new DNAItem().setUnlocalizedName("dna_" + resourceName).setCreativeTab(FATabRegistry.ITEMS));
             if (mobType == MobType.FISH) {
                 type.eggItem = new FishItem(type, true);

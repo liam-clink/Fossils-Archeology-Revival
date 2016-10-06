@@ -18,6 +18,14 @@ public class FAItemRegistry {
     public static final BasicItem AMBER = new BasicItem("amber");
     public static final BasicItem DOMINICAN_AMBER = new BasicItem("dominican_amber");
 
+    public static final JavelinItem WOODEN_JAVELIN = new JavelinItem(Item.ToolMaterial.WOOD, "wooden_javelin", false);
+    public static final JavelinItem STONE_JAVELIN = new JavelinItem(Item.ToolMaterial.STONE, "stone_javelin", false);
+    public static final JavelinItem IRON_JAVELIN = new JavelinItem(Item.ToolMaterial.IRON, "iron_javelin", false);
+    public static final JavelinItem GOLD_JAVELIN = new JavelinItem(Item.ToolMaterial.GOLD, "gold_javelin", false);
+    public static final JavelinItem DIAMOND_JAVELIN = new JavelinItem(Item.ToolMaterial.DIAMOND, "diamond_javelin", false);
+
+    public static final JavelinItem ANCIENT_JAVELIN = new JavelinItem(null, "ancient_javelin", true);
+
     public static void register() {
         try {
             for (Field f : FAItemRegistry.class.getDeclaredFields()) {

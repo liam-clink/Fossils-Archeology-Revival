@@ -11,6 +11,13 @@ item.tar_fossil.name=Tar Fossil
 item.amber.name=Amber
 item.dominican_amber.name=Dominican Amber
 
+item.ancient_javelin.name=Ancient Javelin
+item.diamond_javelin.name=Diamond Javelin
+item.gold_javelin.name=Golden Javelin
+item.iron_javelin.name=Iron Javelin
+item.stone_javelin.name=Stone Javelin
+item.wooden_javelin.name=Wooden Javelin
+
 # Items - DNA
 
 item.dna_pig.name=Pig DNA
