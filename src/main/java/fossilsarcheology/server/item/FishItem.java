@@ -3,7 +3,6 @@ package fossilsarcheology.server.item;
 import fossilsarcheology.server.api.DefaultRenderedItem;
 import fossilsarcheology.server.entity.prehistoric.PrehistoricEntityType;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
@@ -11,16 +10,14 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class FishItem extends Item implements DefaultRenderedItem {
-    private PrehistoricEntityType prehistoric;
+public class FishItem extends PrehistoricEntityItem implements DefaultRenderedItem {
     public boolean isEggs;
 
-    public FishItem(PrehistoricEntityType prehistoric, boolean isEggs) {
-        super();
+    public FishItem(PrehistoricEntityType type, boolean isEggs) {
+        super(isEggs ? "egg" : "fish", type);
         this.setHasSubtypes(true);
         this.setMaxDamage(0);
         this.maxStackSize = 1;
-        this.prehistoric = prehistoric;
         this.isEggs = isEggs;
     }
 

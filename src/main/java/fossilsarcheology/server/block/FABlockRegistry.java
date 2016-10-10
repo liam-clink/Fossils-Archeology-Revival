@@ -14,6 +14,7 @@ public class FABlockRegistry {
     public static final List<Block> BLOCKS = new ArrayList<>();
 
     public static final FossilBlock FOSSIL = new FossilBlock();
+    public static final AmberOreBlock AMBER_ORE = new AmberOreBlock();
 
     public static void register() {
         try {

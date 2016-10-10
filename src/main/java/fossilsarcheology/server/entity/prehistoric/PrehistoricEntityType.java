@@ -96,29 +96,22 @@ public enum PrehistoricEntityType {
     public static void register() {
         for (PrehistoricEntityType type : PrehistoricEntityType.values()) {
             MobType mobType = type.mobType;
-            String resourceName = type.resourceName; //TODO Create base item class for PrehistoricEntityType related items
-            type.dnaItem = FAItemRegistry.registerItem(new DNAItem().setUnlocalizedName("dna_" + resourceName).setCreativeTab(FATabRegistry.ITEMS));
+            String resourceName = type.resourceName;
+            type.dnaItem = new DNAItem(type);
             if (mobType == MobType.FISH) {
                 type.eggItem = new FishItem(type, true);
-                type.fishItem = FAItemRegistry.registerItem(new FishItem(type, false).setUnlocalizedName("fish_" + resourceName).setCreativeTab(FATabRegistry.ITEMS));
+                type.fishItem = new FishItem(type, false);
             } else if (mobType == MobType.DINOSAUR) {
                 type.eggItem = new DinoEggItem(type);
             }
-            if (type.eggItem != null) {
-                type.eggItem.setUnlocalizedName("egg_" + resourceName).setCreativeTab(FATabRegistry.ITEMS);
-                FAItemRegistry.registerItem(type.eggItem);
-            }
             if (mobType == MobType.MAMMAL || mobType == MobType.VANILLA) {
-                type.embryoItem = new MammalEmbryoItem(type).setUnlocalizedName("embryo_" + resourceName).setCreativeTab(FATabRegistry.ITEMS);
-                FAItemRegistry.registerItem(type.embryoItem);
+                type.embryoItem = new MammalEmbryoItem(type);
             }
             if (mobType == MobType.BIRD || mobType == MobType.CHICKEN) {
                 if (mobType == MobType.BIRD) {
-                    type.birdEggItem = new BirdEggItem(type, false).setUnlocalizedName("egg_" + resourceName).setCreativeTab(FATabRegistry.ITEMS);
-                    FAItemRegistry.registerItem(type.birdEggItem);
+                    type.birdEggItem = new BirdEggItem(type, false);
                 }
-                type.bestBirdEggItem = new BirdEggItem(type, true).setUnlocalizedName("egg_cultivated_" + resourceName).setCreativeTab(FATabRegistry.ITEMS);
-                FAItemRegistry.registerItem(type.bestBirdEggItem);
+                type.bestBirdEggItem = new BirdEggItem(type, true);
             }
             if (type.timePeriod != TimePeriod.CURRENT) {
                 if (type.mobType != MobType.FISH) {
@@ -133,9 +126,9 @@ public enum PrehistoricEntityType {
         }
     }
 
-    public static boolean isDNA(Item i0) {
-        for (int i = 0; i < values().length; i++) {
-            if (values()[i].dnaItem == i0) {
+    public static boolean isDNA(Item item) {
+        for (PrehistoricEntityType entity : PrehistoricEntityType.values()) {
+            if (entity.dnaItem == item) {
                 return true;
             }
         }

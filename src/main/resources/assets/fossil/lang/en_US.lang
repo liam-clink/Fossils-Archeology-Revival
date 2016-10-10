@@ -7,6 +7,7 @@ itemGroup.fossils_blocks=Fossils Revival Blocks
 
 item.biofossil.name=Biofossil
 item.tar_fossil.name=Tar Fossil
+item.plant_fossil.name=Plant Fossil
 
 item.amber.name=Amber
 item.dominican_amber.name=Dominican Amber
@@ -17,6 +18,12 @@ item.gold_javelin.name=Golden Javelin
 item.iron_javelin.name=Iron Javelin
 item.stone_javelin.name=Stone Javelin
 item.wooden_javelin.name=Wooden Javelin
+
+item.scarab_gem.name=Scarab Gem
+item.aquatic_scarab_gem.name=Aquatic Scarab Gem
+
+item.relic_scrap.name=Relic Scrap
+item.pottery_shard.name=Pottery Shard
 
 # Items - DNA
 
@@ -38,3 +45,4 @@ item.egg_cultivated_chicken.name=Cultivated Chicken Egg
 # Blocks
 
 tile.fossil.name=Fossil
+tile.amber_ore.name=Amber Ore

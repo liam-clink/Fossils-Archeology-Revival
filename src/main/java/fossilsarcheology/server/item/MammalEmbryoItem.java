@@ -4,21 +4,14 @@ import fossilsarcheology.server.api.DefaultRenderedItem;
 import fossilsarcheology.server.entity.prehistoric.PrehistoricEntityType;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
 
-import java.util.Random;
-
-public class MammalEmbryoItem extends Item implements DefaultRenderedItem {
-    private PrehistoricEntityType type;
-    private Random rand;
-
+public class MammalEmbryoItem extends PrehistoricEntityItem implements DefaultRenderedItem {
     public MammalEmbryoItem(PrehistoricEntityType type) {
-        super();
+        super("embryo", type);
         this.setMaxDamage(0);
         this.type = type;
-        this.rand = new Random();
     }
 
     @Override

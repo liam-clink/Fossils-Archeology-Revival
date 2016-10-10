@@ -18,6 +18,14 @@ public class FAItemRegistry {
     public static final BasicItem AMBER = new BasicItem("amber");
     public static final BasicItem DOMINICAN_AMBER = new BasicItem("dominican_amber");
 
+    public static final BasicItem SCARAB_GEM = new BasicItem("scarab_gem");
+    public static final BasicItem AQUATIC_SCARAB_GEM = new BasicItem("aquatic_scarab_gem");
+
+    public static final BasicItem RELIC_SCRAP = new BasicItem("relic_scrap");
+    public static final BasicItem POTTERY_SHARD = new BasicItem("pottery_shard");
+
+    public static final BasicItem PLANT_FOSSIL = new BasicItem("plant_fossil");
+
     public static final JavelinItem WOODEN_JAVELIN = new JavelinItem(Item.ToolMaterial.WOOD, "wooden_javelin", false);
     public static final JavelinItem STONE_JAVELIN = new JavelinItem(Item.ToolMaterial.STONE, "stone_javelin", false);
     public static final JavelinItem IRON_JAVELIN = new JavelinItem(Item.ToolMaterial.IRON, "iron_javelin", false);

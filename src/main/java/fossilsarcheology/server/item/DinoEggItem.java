@@ -3,7 +3,6 @@ package fossilsarcheology.server.item;
 import fossilsarcheology.server.api.DefaultRenderedItem;
 import fossilsarcheology.server.entity.prehistoric.PrehistoricEntityType;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
@@ -11,20 +10,17 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class DinoEggItem extends Item implements DefaultRenderedItem {
-    private PrehistoricEntityType dinosaur;
-
-    public DinoEggItem(PrehistoricEntityType dinosaur) {
-        super();
+public class DinoEggItem extends PrehistoricEntityItem implements DefaultRenderedItem {
+    public DinoEggItem(PrehistoricEntityType type) {
+        super("egg", type);
         this.setHasSubtypes(true);
         this.setMaxDamage(0);
         this.maxStackSize = 1;
-        this.dinosaur = dinosaur;
     }
 
     @Override
     public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        boolean success = this.spawnEgg(world, this.dinosaur, pos.getX() + 0.5F, pos.getY(), pos.getZ() + 0.5F);
+        boolean success = this.spawnEgg(world, this.type, pos.getX() + 0.5F, pos.getY(), pos.getZ() + 0.5F);
         if (success && !player.capabilities.isCreativeMode) {
             --stack.stackSize;
         }
