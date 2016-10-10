@@ -1,6 +1,7 @@
 package fossilsarcheology.server.block;
 
 import fossilsarcheology.Revival;
+import fossilsarcheology.server.api.BlockEntity;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.ResourceLocation;
@@ -15,6 +16,9 @@ public class FABlockRegistry {
 
     public static final FossilBlock FOSSIL = new FossilBlock();
     public static final AmberOreBlock AMBER_ORE = new AmberOreBlock();
+
+    public static final AnalyzerBlock ANALYZER = new AnalyzerBlock(false);
+    public static final AnalyzerBlock ANALYZER_ACTIVE = new AnalyzerBlock(true);
 
     public static void register() {
         try {
@@ -39,5 +43,8 @@ public class FABlockRegistry {
         GameRegistry.register(block, identifier);
         GameRegistry.register(new ItemBlock(block), identifier);
         BLOCKS.add(block);
+        if (block instanceof BlockEntity) {
+            GameRegistry.registerTileEntity(((BlockEntity) block).getEntity(), Revival.MODID + "." + name);
+        }
     }
 }
