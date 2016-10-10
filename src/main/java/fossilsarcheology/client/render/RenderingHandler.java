@@ -2,9 +2,11 @@ package fossilsarcheology.client.render;
 
 import fossilsarcheology.Revival;
 import fossilsarcheology.client.render.entity.JavelinRenderer;
+import fossilsarcheology.client.render.entity.StoneTabletRenderer;
 import fossilsarcheology.server.api.DefaultRenderedItem;
 import fossilsarcheology.server.api.IgnoreRenderProperty;
 import fossilsarcheology.server.block.FABlockRegistry;
+import fossilsarcheology.server.entity.StoneTabletEntity;
 import fossilsarcheology.server.entity.projectile.AncientJavelinEntity;
 import fossilsarcheology.server.entity.projectile.JavelinEntity;
 import fossilsarcheology.server.item.FAItemRegistry;
@@ -35,6 +37,7 @@ public class RenderingHandler {
 
         RenderingRegistry.registerEntityRenderingHandler(JavelinEntity.class, JavelinRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(AncientJavelinEntity.class, JavelinRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(StoneTabletEntity.class, StoneTabletRenderer::new);
     }
 
     public void onInit() {

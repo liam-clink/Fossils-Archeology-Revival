@@ -23,6 +23,7 @@ item.scarab_gem.name=Scarab Gem
 item.aquatic_scarab_gem.name=Aquatic Scarab Gem
 
 item.relic_scrap.name=Relic Scrap
+item.stone_tablet.name=Stone Tablet
 item.pottery_shard.name=Pottery Shard
 
 # Items - DNA
@@ -46,3 +47,5 @@ item.egg_cultivated_chicken.name=Cultivated Chicken Egg
 
 tile.fossil.name=Fossil
 tile.amber_ore.name=Amber Ore
+
+# Entities
