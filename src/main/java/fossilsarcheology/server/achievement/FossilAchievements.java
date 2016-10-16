@@ -38,10 +38,10 @@ public class FossilAchievements {
     public static final Achievement CLOCK = new Achievement("achievement.clock", "clock", 6, 7, new ItemStack(FAItemRegistry.ancientClock), WTF).registerStat();
     public static final Achievement FIRST_DINO = new Achievement("achievement.firstDino", "firstDino", 6, -4, new ItemStack(FAItemRegistry.skull, 1, 0), DINO_EGG).registerStat().setSpecial();
     public static final Achievement THE_KING = new Achievement("achievement.theKing", "theKing", 8, -5, new ItemStack(FAItemRegistry.skull, 1, 2), FIRST_DINO).registerStat().setSpecial();
-    public static final Achievement USURPER = new Achievement("achievement.usurper", "usurper", 8, -3, new ItemStack(FAItemRegistry.skull, 1, EnumDinoBones.Spinosaurus.ordinal()), FIRST_DINO).registerStat().setSpecial();
-    public static final Achievement SQUIRE = new Achievement("achievement.squire", "squire", 7, -1, new ItemStack(FAItemRegistry.skull, 1, EnumDinoBones.Allosaurus.ordinal()), FIRST_DINO).registerStat();
+    public static final Achievement USURPER = new Achievement("achievement.usurper", "usurper", 8, -3, new ItemStack(FAItemRegistry.skull, 1, DinosaurBoneType.Spinosaurus.ordinal()), FIRST_DINO).registerStat().setSpecial();
+    public static final Achievement SQUIRE = new Achievement("achievement.squire", "squire", 7, -1, new ItemStack(FAItemRegistry.skull, 1, DinosaurBoneType.Allosaurus.ordinal()), FIRST_DINO).registerStat();
     public static final Achievement SHEAR = new Achievement("achievement.shear", "shear", 6, -6, new ItemStack(Blocks.wool, 1, 12), MAMMAL_EMBRYO).registerStat();
-    public static final Achievement DEAD_DODO = new Achievement("achievement.deadDodo", "deadDodo", 4, 0, new ItemStack(FAItemRegistry.skull, 1, EnumDinoBones.Dodo.ordinal()), BIRD_EGG).registerStat();
+    public static final Achievement DEAD_DODO = new Achievement("achievement.deadDodo", "deadDodo", 4, 0, new ItemStack(FAItemRegistry.skull, 1, DinosaurBoneType.Dodo.ordinal()), BIRD_EGG).registerStat();
     public static final Achievement TREX_KILL = new Achievement("achievement.trexKill", "trexKill", 8, -7, new ItemStack(FAItemRegistry.toothDagger), THE_KING).registerStat();
 */
     public static final AchievementPage PAGE = new AchievementPage("Fossils and Archeology", FIRST_FOSSIL, ANALYZER, TABLET /*DINO_DNA, CULTIVATE, DINO_EGG, MAMMAL_EMBRYO, BIRD_EGG, SIFTER, FOSSIL_SEEDS, FAILURESAURUS, FAILURESAURUS_ANALYZER, FIND_ANU_TOTEM, ANU_PORTAL, ANUBITE_ENCOUNTER, ANU_ATTACK, ANU_DEAD, ARC_WORKBENCH, FIXED_SWORD, FIXED_HELMET, FIXED_VASE, DINOPEDIA, SCARAB, SCARAB_TOOLS, BLUE_SCARAB, KEY, WTF, CLOCK, FIRST_DINO, THE_KING, USURPER, SQUIRE, SHEAR, DEAD_DODO, TREX_KILL*/);

@@ -26,6 +26,14 @@ item.relic_scrap.name=Relic Scrap
 item.stone_tablet.name=Stone Tablet
 item.pottery_shard.name=Pottery Shard
 
+item.bone_arm_bone.name=%s Arm Bone
+item.bone_skull.name=%s Skull
+item.bone_leg_bone.name=%s Leg Bone
+item.bone_foot.name=%s Foot
+item.bone_vertebrae.name=%s Vertebrae
+item.bone_ribcage.name=%s Ribcage
+item.bone_unique_item.name=%s Unique Bone
+
 # Items - DNA
 
 item.dna_pig.name=Pig DNA
@@ -51,3 +59,38 @@ tile.amber_ore.name=Amber Ore
 tile.analyzer.name=Analyzer
 
 # Entities
+
+entity.fossil.allosaurus.name=Allosaurus
+entity.fossil.ankylosaurus.name=Ankylosaurus
+entity.fossil.brachiosaurus.name=Brachiosaurus
+entity.fossil.ceratosaurus.name=Ceratosaurus
+entity.fossil.compsognathus.name=Compsognathus
+entity.fossil.confuciusornis.name=Confuciusornis
+entity.fossil.deinonychus.name=Deinonychus
+entity.fossil.dilophosaurus.name=Dilophosaurus
+entity.fossil.dodo.name=Dodo
+entity.fossil.dryosaurus.name=Dryosaurus
+entity.fossil.elasmotherium.name=Elasmotherium
+entity.fossil.gallimimus.name=Gallimimus
+entity.fossil.gastornis.name=Gastornis
+entity.fossil.henodus.name=Henodus
+entity.fossil.icthyosaurus.name=Icthyosaurus
+entity.fossil.kelenken.name=Kelenken
+entity.fossil.liopleurodon.name=Liopleurodon
+entity.fossil.mammoth.name=Mammoth
+entity.fossil.mosasaurus.name=Mosasaurus
+entity.fossil.pachycephalosaurus.name=Pachycephalosaurus
+entity.fossil.parasaurolophus.name=Parasaurolophus
+entity.fossil.phorusrhacos.name=Phorusrhacos
+entity.fossil.plesiosaur.name=Plesiosaur
+entity.fossil.pterosaur.name=Pterosaur
+entity.fossil.quagga.name=Quagga
+entity.fossil.sarcosuchus.name=Sarcosuchus
+entity.fossil.smilodon.name=Smilodon
+entity.fossil.spinosaurus.name=Spinosaurus
+entity.fossil.stegosaurus.name=Stegosaurus
+entity.fossil.therizinosaurus.name=Therizinosaurus
+entity.fossil.titanis.name=Titanis
+entity.fossil.triceratops.name=Triceratops
+entity.fossil.tyrannosaurus.name=Tyrannosaurus
+entity.fossil.velociraptor.name=Velociraptor

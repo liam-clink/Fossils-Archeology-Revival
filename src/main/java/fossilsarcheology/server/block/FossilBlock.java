@@ -47,43 +47,43 @@ public class FossilBlock extends Block implements DefaultRenderedItem {
             this.randomMeta = 0;
             return FAItemRegistry.brokenhelmet;
         } else if (i < 13) {
-            int dropRandom = rand.nextInt(EnumDinoBones.values().length);
+            int dropRandom = rand.nextInt(DinosaurBoneType.values().length);
             if (dropRandom != 4) {
                 this.randomMeta = dropRandom;
             }
             return FAItemRegistry.legBone;
         } else if (i < 15) {
-            int dropRandom = rand.nextInt(EnumDinoBones.values().length);
+            int dropRandom = rand.nextInt(DinosaurBoneType.values().length);
             if (dropRandom != 4) {
                 this.randomMeta = dropRandom;
             }
             return FAItemRegistry.skull;
         } else if (i < 17) {
-            int dropRandom = rand.nextInt(EnumDinoBones.values().length);
+            int dropRandom = rand.nextInt(DinosaurBoneType.values().length);
             if (dropRandom != 4) {
                 this.randomMeta = dropRandom;
             }
             return FAItemRegistry.claw;
         } else if (i < 19) {
-            int dropRandom = rand.nextInt(EnumDinoBones.values().length);
+            int dropRandom = rand.nextInt(DinosaurBoneType.values().length);
             if (dropRandom != 4) {
                 this.randomMeta = dropRandom;
             }
             return FAItemRegistry.foot;
         } else if (i < 21) {
-            int dropRandom = rand.nextInt(EnumDinoBones.values().length);
+            int dropRandom = rand.nextInt(DinosaurBoneType.values().length);
             if (dropRandom != 4) {
                 this.randomMeta = dropRandom;
             }
             return FAItemRegistry.vertebrae;
         } else if (i < 23) {
-            int dropRandom = rand.nextInt(EnumDinoBones.values().length);
+            int dropRandom = rand.nextInt(DinosaurBoneType.values().length);
             if (dropRandom != 4) {
                 this.randomMeta = dropRandom;
             }
             return FAItemRegistry.armBone;
         } else if (i < 25) {
-            int dropRandom = rand.nextInt(EnumDinoBones.values().length);
+            int dropRandom = rand.nextInt(DinosaurBoneType.values().length);
             if (dropRandom != 4) {
                 this.randomMeta = dropRandom;
             }

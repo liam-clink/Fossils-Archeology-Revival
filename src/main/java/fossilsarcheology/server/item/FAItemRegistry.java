@@ -36,6 +36,14 @@ public class FAItemRegistry {
 
     public static final JavelinItem ANCIENT_JAVELIN = new JavelinItem(null, "ancient_javelin", true);
 
+    public static final DinosaurBoneItem LEG_BONE = new DinosaurBoneItem("leg_bone");
+    public static final DinosaurBoneItem UNIQUE_ITEM = new DinosaurBoneItem("unique_item");
+    public static final DinosaurBoneItem FOOT = new DinosaurBoneItem("foot");
+    public static final DinosaurBoneItem SKULL = new DinosaurBoneItem("skull");
+    public static final DinosaurBoneItem ARM_BONE = new DinosaurBoneItem("arm_bone");
+    public static final DinosaurBoneItem RIBCAGE = new DinosaurBoneItem("ribcage");
+    public static final DinosaurBoneItem VERTEBRAE = new DinosaurBoneItem("vertebrae");
+
     public static void register() {
         try {
             for (Field f : FAItemRegistry.class.getDeclaredFields()) {

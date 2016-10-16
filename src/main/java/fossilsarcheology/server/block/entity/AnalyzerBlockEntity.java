@@ -5,7 +5,9 @@ import fossilsarcheology.server.achievement.FossilAchievements;
 import fossilsarcheology.server.block.AnalyzerBlock;
 import fossilsarcheology.server.entity.prehistoric.PrehistoricEntityType;
 import fossilsarcheology.server.entity.prehistoric.TimePeriod;
+import fossilsarcheology.server.item.DinosaurBoneItem;
 import fossilsarcheology.server.item.FAItemRegistry;
+import fossilsarcheology.server.item.variant.DinosaurBoneType;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -184,7 +186,7 @@ public class AnalyzerBlockEntity extends TileEntity implements IInventory, ISide
         for (int slot = 0; slot < 9; ++slot) {
             if (this.slots[slot] != null) {
                 Item item = this.slots[slot].getItem();
-                if (PrehistoricEntityType.isFoodItem(this.slots[slot].getItem())/* || (item instanceof DinosaurBoneItem)*/ || (item == FAItemRegistry.BIOFOSSIL) || (item == FAItemRegistry.TAR_FOSSIL) || /*(item == FAItemRegistry.TAR_DROP) || (item == FAItemRegistry.FAILURESAURUS_FLESH) || */ (item == FAItemRegistry.RELIC_SCRAP) || (item == Items.PORKCHOP) || (item == Items.BEEF) || (item == Items.EGG) || (item == Items.CHICKEN) || (item == Item.getItemFromBlock(Blocks.WOOL)) || /*(item == FAItemRegistry.ICED_MEAT) || */ (item == Items.LEATHER) || (item == FAItemRegistry.PLANT_FOSSIL)) {
+                if (PrehistoricEntityType.isFoodItem(this.slots[slot].getItem()) || (item instanceof DinosaurBoneItem) || (item == FAItemRegistry.BIOFOSSIL) || (item == FAItemRegistry.TAR_FOSSIL) || /*(item == FAItemRegistry.TAR_DROP) || (item == FAItemRegistry.FAILURESAURUS_FLESH) || */ (item == FAItemRegistry.RELIC_SCRAP) || (item == Items.PORKCHOP) || (item == Items.BEEF) || (item == Items.EGG) || (item == Items.CHICKEN) || (item == Item.getItemFromBlock(Blocks.WOOL)) || /*(item == FAItemRegistry.ICED_MEAT) || */ (item == Items.LEATHER) || (item == FAItemRegistry.PLANT_FOSSIL)) {
                     this.rawIndex = slot;
                     break;
                 }
@@ -209,7 +211,7 @@ public class AnalyzerBlockEntity extends TileEntity implements IInventory, ISide
             Random random = this.worldObj.rand;
             int rand = random.nextInt(100);
             Item rawItem = this.slots[this.rawIndex].getItem();
-            /*if (rawItem instanceof DinosaurBoneItem) {
+            if (rawItem instanceof DinosaurBoneItem) {
                 if (!Revival.RELEASE_TYPE.enableDebugging()) {
                     if (rand > -1 && rand <= 30) {
                         output = new ItemStack(Items.DYE, 3, 15);
@@ -218,12 +220,12 @@ public class AnalyzerBlockEntity extends TileEntity implements IInventory, ISide
                         output = new ItemStack(Items.BONE, 3);
                     }
                     if (rand > 65) {
-                        output = new ItemStack(DinosaurBoneType.from(DinosaurBoneType.values()[this.slots[this.rawIndex].getItemDamage()]).dnaItem, 1);
+                        output = new ItemStack(DinosaurBoneType.getEntity(DinosaurBoneType.values()[this.slots[this.rawIndex].getItemDamage()]).dnaItem, 1);
                     }
                 } else {
                     output = new ItemStack(PrehistoricEntityType.getRandomTimePeriod(random, TimePeriod.MESOZOIC).dnaItem, 1);
                 }
-            } else*/ if (rawItem == FAItemRegistry.BIOFOSSIL) {
+            } else if (rawItem == FAItemRegistry.BIOFOSSIL) {
                 if (!Revival.RELEASE_TYPE.enableDebugging()) {
                     if (rand > -1 && rand <= 50) {
                         output = new ItemStack(Items.DYE, 3, 15);
