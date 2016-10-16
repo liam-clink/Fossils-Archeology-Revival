@@ -55,6 +55,7 @@ item.egg_cultivated_chicken.name=Cultivated Chicken Egg
 
 tile.fossil.name=Fossil
 tile.amber_ore.name=Amber Ore
+tile.permafrost.name=Permafrost
 
 tile.analyzer.name=Analyzer
 

@@ -20,6 +20,8 @@ public class FABlockRegistry {
     public static final AnalyzerBlock ANALYZER = new AnalyzerBlock(false);
     public static final AnalyzerBlock ANALYZER_ACTIVE = new AnalyzerBlock(true);
 
+    public static final PermafrostBlock PERMAFROST = new PermafrostBlock();
+
     public static void register() {
         try {
             for (Field f : FABlockRegistry.class.getDeclaredFields()) {
