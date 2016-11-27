@@ -1,15 +1,15 @@
 package fossilsarcheology.server.block;
 
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
+
 import fossilsarcheology.Revival;
 import fossilsarcheology.server.api.BlockEntity;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
 
 public class FABlockRegistry {
     public static final List<Block> BLOCKS = new ArrayList<>();
@@ -21,6 +21,11 @@ public class FABlockRegistry {
     public static final AnalyzerBlock ANALYZER_ACTIVE = new AnalyzerBlock(true);
 
     public static final PermafrostBlock PERMAFROST = new PermafrostBlock();
+    
+    public static final DenseSandBlock DENSE_SAND = new DenseSandBlock();
+    
+    public static final AncientStoneBlock ANCIENT_STONE = new AncientStoneBlock();
+    public static final AncientStonebrickBlock ANCIENT_STONE_BRICK = new AncientStonebrickBlock();
 
     public static void register() {
         try {

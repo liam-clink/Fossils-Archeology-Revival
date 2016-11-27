@@ -56,6 +56,9 @@ item.egg_cultivated_chicken.name=Cultivated Chicken Egg
 tile.fossil.name=Fossil
 tile.amber_ore.name=Amber Ore
 tile.permafrost.name=Permafrost
+tile.dense_sand.name=Dense Sand
+tile.ancient_stone.name=Ancient Stone
+tile.ancient_stone_brick.name=Anicnet Stonebrick
 
 tile.analyzer.name=Analyzer
 

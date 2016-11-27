@@ -18,3 +18,5 @@ eclipse/
 build/
 .classpath
 .project
+setup.bat
+libs/llibrary-1.7.2-1.10.2-dev.jar
