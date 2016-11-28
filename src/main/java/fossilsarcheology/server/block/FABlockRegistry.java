@@ -26,6 +26,10 @@ public class FABlockRegistry {
     
     public static final AncientStoneBlock ANCIENT_STONE = new AncientStoneBlock();
     public static final AncientStonebrickBlock ANCIENT_STONE_BRICK = new AncientStonebrickBlock();
+    
+    public static final LimestoneBlock LIMESTONE = new LimestoneBlock();
+    
+    	
 
     public static void register() {
         try {
