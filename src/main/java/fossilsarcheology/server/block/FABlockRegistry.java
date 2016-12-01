@@ -1,4 +1,4 @@
-package fossilsarcheology.server.block;
+	package fossilsarcheology.server.block;
 
 import fossilsarcheology.Revival;
 import fossilsarcheology.server.api.BlockEntity;
@@ -26,6 +26,10 @@ public class FABlockRegistry {
     
     public static final AncientStoneBlock ANCIENT_STONE = new AncientStoneBlock();
     public static final AncientStonebrickBlock ANCIENT_STONE_BRICK = new AncientStonebrickBlock();
+    
+    public static final VolcanicAshBlock VOLCANIC_ASH = new VolcanicAshBlock();
+    public static final VolcanicAshBlock VOLCANIC_BRICK = new VolcanicAshBlock();
+    public static final VolcanicAshBlock VOLCANIC_ROCK = new VolcanicAshBlock();
 
     public static void register() {
         try {
