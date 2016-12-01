@@ -39,7 +39,7 @@ repositories {
     mavenCentral()
     maven {
         name = "ilexiconn"
-        url = "http://maven.ilexiconn.net/"
+        url = "http://maven.mcmoddev.com/"
     }
 }
 
