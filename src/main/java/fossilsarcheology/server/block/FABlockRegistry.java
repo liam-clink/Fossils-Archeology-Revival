@@ -27,9 +27,9 @@ public class FABlockRegistry {
     public static final AncientStoneBlock ANCIENT_STONE = new AncientStoneBlock();
     public static final AncientStonebrickBlock ANCIENT_STONE_BRICK = new AncientStonebrickBlock();
     
-    public static final VolcanicAshBlock VOLCANIC_ASH = new VolcanicAshBlock();
-    public static final VolcanicAshBlock VOLCANIC_BRICK = new VolcanicAshBlock();
-    public static final VolcanicAshBlock VOLCANIC_ROCK = new VolcanicAshBlock();
+    public static final VolcanicAshBlock VOLCANIC_ASH = new VolcanicAshBlock("ash");
+    public static final VolcanicAshBlock VOLCANIC_BRICK = new VolcanicAshBlock("brick");
+    public static final VolcanicAshBlock VOLCANIC_ROCK = new VolcanicAshBlock("rock");
 
     public static void register() {
         try {
