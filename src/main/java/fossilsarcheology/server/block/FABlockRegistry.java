@@ -1,15 +1,15 @@
 	package fossilsarcheology.server.block;
 
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
+
 import fossilsarcheology.Revival;
 import fossilsarcheology.server.api.BlockEntity;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
 
 public class FABlockRegistry {
     public static final List<Block> BLOCKS = new ArrayList<>();
@@ -30,6 +30,8 @@ public class FABlockRegistry {
     public static final VolcanicAshBlock VOLCANIC_ASH = new VolcanicAshBlock("ash");
     public static final VolcanicAshBlock VOLCANIC_BRICK = new VolcanicAshBlock("brick");
     public static final VolcanicAshBlock VOLCANIC_ROCK = new VolcanicAshBlock("rock");
+    
+    public static final DillhoffiaFlowerBlock DILLHOFFIA_FLOWER = new DillhoffiaFlowerBlock();
 
     public static void register() {
         try {

@@ -1,7 +1,9 @@
 package fossilsarcheology;
 
 import fossilsarcheology.server.ServerProxy;
+import fossilsarcheology.server.config.FossilConfig;
 import fossilsarcheology.server.util.ReleaseType;
+import net.ilexiconn.llibrary.server.config.Config;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -21,6 +23,9 @@ public class Revival {
 
     @SidedProxy(clientSide = "fossilsarcheology.client.ClientProxy", serverSide = "fossilsarcheology.server.ServerProxy")
     public static ServerProxy PROXY;
+    
+    @Config
+    public static FossilConfig CONFIG;
 
     @Mod.Instance(MODID)
     public static Revival INSTANCE;
