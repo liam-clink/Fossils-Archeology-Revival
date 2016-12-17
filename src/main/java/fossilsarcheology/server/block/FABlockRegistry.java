@@ -32,7 +32,8 @@ public class FABlockRegistry {
     public static final VolcanicAshBlock VOLCANIC_ROCK = new VolcanicAshBlock("rock");
     
     public static final DillhoffiaFlowerBlock DILLHOFFIA_FLOWER = new DillhoffiaFlowerBlock();
-
+    public static final SarraceniaFlowerBlock SARRACENIA_FLOWER = new SarraceniaFlowerBlock();
+    
     public static void register() {
         try {
             for (Field f : FABlockRegistry.class.getDeclaredFields()) {

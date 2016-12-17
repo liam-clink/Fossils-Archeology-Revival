@@ -1,6 +1,6 @@
 {
     "parent": "block/cross",
     "textures": {
-        "cross": "fossil:blocks/plants/dillhoffia"
+        "cross": "fossil:blocks/plants/sarracenia_top"
     }
 }
