@@ -29,6 +29,7 @@ public class Revival {
 
     @Mod.Instance(MODID)
     public static Revival INSTANCE;
+    public static Object PEDIA_OBJECT;
 
     public static void debug(String message) {
         if (RELEASE_TYPE.enableDebugging()) {

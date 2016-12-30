@@ -14,6 +14,7 @@ public class FAItemRegistry {
 
     public static final BioFossilItem BIOFOSSIL = new BioFossilItem(false);
     public static final BioFossilItem TAR_FOSSIL = new BioFossilItem(true);
+    public static final BasicItem DINOPEDIA = new BasicItem("dinopedia");
 
     public static final BasicItem AMBER = new BasicItem("amber");
     public static final BasicItem DOMINICAN_AMBER = new BasicItem("dominican_amber");

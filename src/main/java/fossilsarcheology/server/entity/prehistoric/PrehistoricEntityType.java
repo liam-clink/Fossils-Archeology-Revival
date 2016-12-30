@@ -28,7 +28,10 @@ public enum PrehistoricEntityType {
     COW(EntityCow.class, MobType.VANILLA, TimePeriod.CURRENT, Diet.HERBIVORE, Parameter.NOTHING, 0, 0),
     SHEEP(EntitySheep.class, MobType.VANILLA, TimePeriod.CURRENT, Diet.HERBIVORE, Parameter.NOTHING, 0, 0),
     HORSE(EntityHorse.class, MobType.VANILLA, TimePeriod.CURRENT, Diet.HERBIVORE, Parameter.NOTHING, 0, 0),
-    CHICKEN(EntityChicken.class, MobType.CHICKEN, TimePeriod.CURRENT, Diet.HERBIVORE, Parameter.NOTHING, 0, 0);
+    CHICKEN(EntityChicken.class, MobType.CHICKEN, TimePeriod.CURRENT, Diet.HERBIVORE, Parameter.NOTHING, 0, 0),
+    NAUTILUS(EntityNautilus.class, MobType.FISH, TimePeriod.MESOZOIC, Diet.NONE, Parameter.NOTHING, 0XC55F47, 0XF5F5F5),
+
+    ;
 
     private float sizeBaby = 1;
     private float sizeTeen = 1;
@@ -272,7 +275,7 @@ public enum PrehistoricEntityType {
                 mesozoic.add(entity);
             }
         }
-        int index = random.nextInt(mesozoic.size());
+        int index = mesozoic.size() < 1 ? 0: random.nextInt(mesozoic.size());
         return mesozoic.get(index);
     }
 

@@ -4,6 +4,7 @@ import fossilsarcheology.client.gui.AnalyzerGUI;
 import fossilsarcheology.client.render.RenderingHandler;
 import fossilsarcheology.server.ServerProxy;
 import fossilsarcheology.server.block.entity.AnalyzerBlockEntity;
+import fossilsarcheology.server.entity.EntityFishBase;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
@@ -29,6 +30,10 @@ public class ClientProxy extends ServerProxy {
     public void onPostInit() {
         super.onPostInit();
         RENDER_HANDLER.onPostInit();
+    }
+
+    public void calculateChainBuffer(EntityFishBase entity) {
+        entity.chainBuffer.calculateChainSwingBuffer(70, 10, 4, entity);
     }
 
     @Override

@@ -6,6 +6,7 @@ import fossilsarcheology.server.achievement.FossilAchievements;
 import fossilsarcheology.server.block.FABlockRegistry;
 import fossilsarcheology.server.block.entity.AnalyzerBlockEntity;
 import fossilsarcheology.server.container.AnalyzerContainer;
+import fossilsarcheology.server.entity.EntityFishBase;
 import fossilsarcheology.server.entity.FAEntityRegistry;
 import fossilsarcheology.server.entity.prehistoric.PrehistoricEntityType;
 import fossilsarcheology.server.item.FAItemRegistry;
@@ -34,6 +35,10 @@ public class ServerProxy implements IGuiHandler {
     }
 
     public void onInit() {
+
+    }
+
+    public void calculateChainBuffer(EntityFishBase entity) {
 
     }
 
