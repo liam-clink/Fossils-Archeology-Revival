@@ -13,7 +13,7 @@ public class FAEntityRegistry {
         for (int id = 0; id < PrehistoricEntityType.values().length; id++) {
             PrehistoricEntityType type = PrehistoricEntityType.values()[id];
             if (type.mobType != MobType.CHICKEN && type.mobType != MobType.VANILLA) {
-                registerSpawnable(type.getEntity(), type.name(), id + 200, type.primaryEggColor, type.secondaryEggColor);
+                registerSpawnable(type.getEntity(), type.name().toLowerCase(), id + 200, type.primaryEggColor, type.secondaryEggColor);
             }
         }
         registerEntity(JavelinEntity.class, "javelin", 0);

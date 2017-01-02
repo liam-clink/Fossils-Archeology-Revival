@@ -21,6 +21,7 @@ public class FAItemRegistry {
 
     public static final BasicItem SCARAB_GEM = new BasicItem("scarab_gem");
     public static final BasicItem AQUATIC_SCARAB_GEM = new BasicItem("aquatic_scarab_gem");
+    public static final BasicItem SHELL = new BasicItem("shell");
 
     public static final BasicItem RELIC_SCRAP = new BasicItem("relic_scrap");
     public static final BasicItem POTTERY_SHARD = new BasicItem("pottery_shard");
