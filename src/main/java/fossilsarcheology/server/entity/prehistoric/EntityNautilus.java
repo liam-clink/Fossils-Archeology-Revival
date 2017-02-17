@@ -2,6 +2,8 @@ package fossilsarcheology.server.entity.prehistoric;
 
 import java.util.Collections;
 import java.util.List;
+
+import fossilsarcheology.server.entity.ai.FishAIWaterFindTarget;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;

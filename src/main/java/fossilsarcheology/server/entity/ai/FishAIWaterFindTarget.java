@@ -1,87 +1,71 @@
 package fossilsarcheology.server.entity.ai;
 
+import fossilsarcheology.server.entity.EntityFishBase;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.pathfinding.Path;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.World;
+import net.minecraft.util.math.Vec3d;
 
-import java.util.Random;
-
-import fossilsarcheology.server.entity.EntityFishBase;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FishAIWaterFindTarget extends EntityAIBase {
     private EntityFishBase mob;
-    private double shelterX;
-    private double shelterY;
-    private double shelterZ;
-    private double movementSpeed;
-    private World theWorld;
 
-    public FishAIWaterFindTarget(EntityFishBase mob, double speed) {
+    public FishAIWaterFindTarget(EntityFishBase mob) {
         this.mob = mob;
-        this.movementSpeed = speed;
-        this.theWorld = mob.worldObj;
         this.setMutexBits(1);
     }
 
+    @Override
     public boolean shouldExecute() {
-        if (!mob.isDirectPathBetweenPoints(new BlockPos(MathHelper.floor_double(mob.posX), MathHelper.floor_double(mob.posY), MathHelper.floor_double(mob.posZ)), new BlockPos(MathHelper.floor_double(shelterX), MathHelper.floor_double(shelterY), MathHelper.floor_double(shelterZ)))) {
-            mob.currentTarget = null;
-        }
-
-        if (mob.currentTarget != null && mob.getDistance(mob.currentTarget.getX(), mob.currentTarget.getY(), mob.currentTarget.getZ()) < 10F) {
+        if (!this.mob.isInsideOfMaterial(Material.WATER)) {
             return false;
-        } else {
-            BlockPos vec3 = this.findWaterTarget();
-
-            if (vec3 == null) {
-                return false;
-            } else {
-                this.shelterX = vec3.getX();
-                this.shelterY = vec3.getY();
-                this.shelterZ = vec3.getZ();
-                return true;
-            }
         }
-    }
-
-    public boolean continueExecuting() {
-        return mob.currentTarget != null;
-    }
-
-    public void startExecuting() {
-        this.mob.currentTarget = new BlockPos((int) shelterX, (int) shelterY, (int) shelterZ);
-    }
-
-    public BlockPos findWaterTarget() {
-        if (mob.getAttackTarget() == null || !mob.getPassengers().isEmpty() && mob.getAttackTarget() != null) {
-            Random random = this.mob.getRNG();
-            mob.setAttackTarget(null);
-            BlockPos chunkCoordinates = getCoords();
-            for (int i = 0; i < 10; ++i) {
-                BlockPos coords = new BlockPos(chunkCoordinates.getX() + random.nextInt(20) - 10, chunkCoordinates.getY() + random.nextInt(6) - 3, chunkCoordinates.getZ() + random.nextInt(20) - 10);
-                if (mob.worldObj.getBlockState(new BlockPos(coords.getX(), coords.getY(), coords.getZ())).getMaterial() == Material.WATER) {
-                    return coords;
+        if (this.mob.getRNG().nextFloat() < 0.5F) {
+            Path path = this.mob.getNavigator().getPath();
+            if (!this.mob.getNavigator().noPath() && !this.mob.isDirectPathBetweenPoints(this.mob.getPositionVector(), new Vec3d(path.getFinalPathPoint().xCoord, path.getFinalPathPoint().yCoord, path.getFinalPathPoint().zCoord))) {
+                this.mob.getNavigator().clearPathEntity();
+            }
+            if (this.mob.getNavigator().noPath()) {
+                Vec3d vec3 = this.findWaterTarget();
+                if (vec3 != null) {
+                    this.mob.getNavigator().tryMoveToXYZ(vec3.xCoord, vec3.yCoord, vec3.zCoord, 1.0);
+                    return true;
                 }
             }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean continueExecuting() {
+        return false;
+    }
+
+    public Vec3d findWaterTarget() {
+        if (this.mob.getAttackTarget() == null) {
+            List<Vec3d> water = new ArrayList<>();
+            for (int x = (int) this.mob.posX - 5; x < (int) this.mob.posX + 5; x++) {
+                for (int y = (int) this.mob.posY - 3; y < (int) this.mob.posY + 3; y++) {
+                    for (int z = (int) this.mob.posZ - 5; z < (int) this.mob.posZ + 5; z++) {
+                        if (this.mob.isDirectPathBetweenPoints(this.mob.getPositionVector(), new Vec3d(x, y, z))) {
+                            water.add(new Vec3d(x, y, z));
+                        }
+                    }
+                }
+            }
+            if (!water.isEmpty()) {
+                return water.get(this.mob.getRNG().nextInt(water.size()));
+            }
         } else {
-            Random random = this.mob.getRNG();
-            BlockPos coords = getCoords();
-            if (mob.worldObj.getBlockState(new BlockPos(coords.getX(), coords.getY(), coords.getZ())).getMaterial() == Material.WATER) {
-                return coords;
+            BlockPos blockpos1;
+            blockpos1 = new BlockPos(this.mob.getAttackTarget());
+            if (this.mob.worldObj.getBlockState(blockpos1).getMaterial() == Material.WATER) {
+                return new Vec3d((double) blockpos1.getX(), (double) blockpos1.getY(), (double) blockpos1.getZ());
             }
         }
-
         return null;
     }
-
-    public BlockPos getCoords() {
-        int i = MathHelper.floor_double(mob.posX);
-        int j = MathHelper.floor_double(mob.posY);
-        int k = MathHelper.floor_double(mob.posZ);
-        boolean b = mob.worldObj.getBlockState(new BlockPos(i, j + 1, k)).getMaterial() == Material.WATER;
-        return new BlockPos((int) this.mob.posX, (int) this.mob.getEntityBoundingBox().minY, (int) this.mob.posZ);
-    }
-
 }
