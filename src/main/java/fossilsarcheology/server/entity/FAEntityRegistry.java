@@ -26,6 +26,6 @@ public class FAEntityRegistry {
     }
 
     public static void registerSpawnable(Class<? extends Entity> entityClass, String name, int id, int mainColor, int subColor) {
-        EntityRegistry.registerModEntity(entityClass, name, id, Revival.INSTANCE, 512, 1, true, mainColor, subColor);
+        EntityRegistry.registerModEntity(entityClass, name, id, Revival.INSTANCE, 64, 1, true, mainColor, subColor);
     }
 }
