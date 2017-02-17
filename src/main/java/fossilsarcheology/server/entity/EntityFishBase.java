@@ -350,7 +350,7 @@ public abstract class EntityFishBase extends EntityTameable {
                 distanceY /= distance;
                 float angle = (float) (Math.atan2(distanceZ, distanceX) * 180.0D / Math.PI) - 90.0F;
                 this.swimmingEntity.rotationYaw = this.limitAngle(this.swimmingEntity.rotationYaw, angle, 30.0F);
-                this.swimmingEntity.setAIMoveSpeed((float)swimmingEntity.getSwimSpeed());
+                this.swimmingEntity.setAIMoveSpeed((float)swimmingEntity.getSwimSpeed() * 0.5F);
                 this.swimmingEntity.motionY += (double) this.swimmingEntity.getAIMoveSpeed() * distanceY * 0.1D;
             } else {
                 this.swimmingEntity.setAIMoveSpeed(0.0F);
