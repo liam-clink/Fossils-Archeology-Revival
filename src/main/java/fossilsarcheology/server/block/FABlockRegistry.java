@@ -23,7 +23,8 @@ public class FABlockRegistry {
     public static final PermafrostBlock PERMAFROST = new PermafrostBlock();
     
     public static final DenseSandBlock DENSE_SAND = new DenseSandBlock();
-    
+    public static final SlimeTrailBlock SLIME_TRAIL = new SlimeTrailBlock();
+
     public static final AncientStoneBlock ANCIENT_STONE = new AncientStoneBlock();
     public static final AncientStonebrickBlock ANCIENT_STONE_BRICK = new AncientStonebrickBlock();
     

@@ -30,7 +30,6 @@ public class JavelinRenderer extends Render<JavelinEntity> {
         this.bindEntityTexture(entity);
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
         GlStateManager.pushMatrix();
-        GlStateManager.disableLighting();
         GlStateManager.translate(x, y, z);
         GlStateManager.rotate(entity.prevRotationYaw + (entity.rotationYaw - entity.prevRotationYaw) * partialTicks - 90.0F, 0.0F, 1.0F, 0.0F);
         GlStateManager.rotate(entity.prevRotationPitch + (entity.rotationPitch - entity.prevRotationPitch) * partialTicks, 0.0F, 0.0F, 1.0F);
@@ -42,7 +41,7 @@ public class JavelinRenderer extends Render<JavelinEntity> {
             GlStateManager.rotate(-MathHelper.sin(shake * 3.0F) * shake, 0.0F, 0.0F, 1.0F);
         }
         GlStateManager.rotate(45.0F, 1.0F, 0.0F, 0.0F);
-        GlStateManager.scale(0.075F, 0.075F, 0.075F);
+        GlStateManager.scale(0.1F, 0.1F, 0.1F);
         GlStateManager.translate(-4.0F, 0.0F, 0.0F);
         if (this.renderOutlines) {
             GlStateManager.enableColorMaterial();
@@ -77,7 +76,6 @@ public class JavelinRenderer extends Render<JavelinEntity> {
             GlStateManager.disableColorMaterial();
         }
         GlStateManager.disableRescaleNormal();
-        GlStateManager.enableLighting();
         GlStateManager.popMatrix();
         super.doRender(entity, x, y, z, yaw, partialTicks);
     }

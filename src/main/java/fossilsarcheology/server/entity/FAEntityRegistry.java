@@ -1,6 +1,7 @@
 package fossilsarcheology.server.entity;
 
 import fossilsarcheology.Revival;
+import fossilsarcheology.server.entity.monster.EntityFailuresaurus;
 import fossilsarcheology.server.entity.prehistoric.MobType;
 import fossilsarcheology.server.entity.prehistoric.PrehistoricEntityType;
 import fossilsarcheology.server.entity.projectile.AncientJavelinEntity;
@@ -19,6 +20,8 @@ public class FAEntityRegistry {
         registerEntity(JavelinEntity.class, "javelin", 0);
         registerEntity(AncientJavelinEntity.class, "ancient_javelin", 1);
         registerEntity(StoneTabletEntity.class, "stone_tablet", 2);
+        registerSpawnable(EntityFailuresaurus.class, "Failuresaurus", 5, 0x61ffbd, 0xf4eee6);
+
     }
 
     public static void registerEntity(Class<? extends Entity> entityClass, String name, int id) {

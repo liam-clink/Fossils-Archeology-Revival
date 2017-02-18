@@ -1,11 +1,9 @@
 package fossilsarcheology.client.render;
 
 import fossilsarcheology.Revival;
-import fossilsarcheology.client.model.ModelAlligatorGar;
-import fossilsarcheology.client.model.ModelCoelacanth;
-import fossilsarcheology.client.model.ModelNautilus;
-import fossilsarcheology.client.model.ModelSturgeon;
+import fossilsarcheology.client.model.*;
 import fossilsarcheology.client.render.entity.JavelinRenderer;
+import fossilsarcheology.client.render.entity.RenderFailuresaurus;
 import fossilsarcheology.client.render.entity.RenderFish;
 import fossilsarcheology.client.render.entity.StoneTabletRenderer;
 import fossilsarcheology.server.api.DefaultRenderedItem;
@@ -13,6 +11,7 @@ import fossilsarcheology.server.api.IgnoreRenderProperty;
 import fossilsarcheology.server.api.SubtypeRenderedItem;
 import fossilsarcheology.server.block.FABlockRegistry;
 import fossilsarcheology.server.entity.StoneTabletEntity;
+import fossilsarcheology.server.entity.monster.EntityFailuresaurus;
 import fossilsarcheology.server.entity.prehistoric.EntityAlligatorGar;
 import fossilsarcheology.server.entity.prehistoric.EntityCoelacanth;
 import fossilsarcheology.server.entity.prehistoric.EntityNautilus;
@@ -65,13 +64,14 @@ public class RenderingHandler {
     }
 
     public void onInit() {
-        RenderingRegistry.registerEntityRenderingHandler(JavelinEntity.class, JavelinRenderer::new);
-        RenderingRegistry.registerEntityRenderingHandler(AncientJavelinEntity.class, JavelinRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(JavelinEntity.class, new JavelinRenderer(MINECRAFT.getRenderManager()));
+        RenderingRegistry.registerEntityRenderingHandler(AncientJavelinEntity.class, new JavelinRenderer(MINECRAFT.getRenderManager()));
         RenderingRegistry.registerEntityRenderingHandler(StoneTabletEntity.class, StoneTabletRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityNautilus.class, new RenderFish(new ModelNautilus(), MINECRAFT.getRenderManager()));
         RenderingRegistry.registerEntityRenderingHandler(EntityCoelacanth.class, new RenderFish(new ModelCoelacanth(), MINECRAFT.getRenderManager()));
         RenderingRegistry.registerEntityRenderingHandler(EntityAlligatorGar.class, new RenderFish(new ModelAlligatorGar(), MINECRAFT.getRenderManager()));
         RenderingRegistry.registerEntityRenderingHandler(EntitySturgeon.class, new RenderFish(new ModelSturgeon(), MINECRAFT.getRenderManager()));
+        RenderingRegistry.registerEntityRenderingHandler(EntityFailuresaurus.class, new RenderFailuresaurus(new ModelFailuresaurus(), MINECRAFT.getRenderManager()));
 
     }
 
