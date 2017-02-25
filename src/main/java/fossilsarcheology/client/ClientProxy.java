@@ -1,6 +1,7 @@
 package fossilsarcheology.client;
 
 import fossilsarcheology.client.gui.AnalyzerGUI;
+import fossilsarcheology.client.particle.BubbleFX;
 import fossilsarcheology.client.render.RenderingHandler;
 import fossilsarcheology.server.ServerProxy;
 import fossilsarcheology.server.block.entity.AnalyzerBlockEntity;
@@ -43,5 +44,9 @@ public class ClientProxy extends ServerProxy {
             return new AnalyzerGUI(player.inventory, (AnalyzerBlockEntity) world.getTileEntity(pos));
         }
         return null;
+    }
+
+    public void spawnBubbleParticles(World world, float f, float f1, float f2, double motionX, double motionY, double motionZ) {
+        Minecraft.getMinecraft().effectRenderer.addEffect(new BubbleFX(world, f, f1, f2, motionX, motionY, motionZ));
     }
 }

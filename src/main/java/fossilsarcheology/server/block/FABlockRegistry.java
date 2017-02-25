@@ -1,15 +1,15 @@
 	package fossilsarcheology.server.block;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
-
 import fossilsarcheology.Revival;
 import fossilsarcheology.server.api.BlockEntity;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FABlockRegistry {
     public static final List<Block> BLOCKS = new ArrayList<>();
@@ -19,6 +19,7 @@ public class FABlockRegistry {
 
     public static final AnalyzerBlock ANALYZER = new AnalyzerBlock(false);
     public static final AnalyzerBlock ANALYZER_ACTIVE = new AnalyzerBlock(true);
+    public static final BubbleBlowerBlock BUBBLE_MACHINE = new BubbleBlowerBlock();
 
     public static final PermafrostBlock PERMAFROST = new PermafrostBlock();
     
@@ -34,7 +35,7 @@ public class FABlockRegistry {
     
     public static final DillhoffiaFlowerBlock DILLHOFFIA_FLOWER = new DillhoffiaFlowerBlock();
     public static final SarraceniaFlowerBlock SARRACENIA_FLOWER = new SarraceniaFlowerBlock();
-    
+
     public static void register() {
         try {
             for (Field f : FABlockRegistry.class.getDeclaredFields()) {
