@@ -7,6 +7,10 @@ import fossilsarcheology.server.entity.EntityDinosaurEgg;
 import fossilsarcheology.server.item.FAItemRegistry;
 import fossilsarcheology.server.item.variant.DinosaurBoneType;
 import fossilsarcheology.server.localization.Localizations;
+import fossilsarcheology.server.message.MessageFoodParticles;
+import fossilsarcheology.server.message.MessageHappyParticles;
+import fossilsarcheology.server.message.MessageSetDay;
+import fossilsarcheology.server.message.MessageUpdateEgg;
 import fossilsarcheology.server.util.FoodMappings;
 import net.ilexiconn.llibrary.client.model.tools.ChainBuffer;
 import net.ilexiconn.llibrary.server.animation.Animation;
@@ -441,7 +445,7 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
                         }
                     }
 
-                    if (this.posY + dy >= 0 && this.posY + dy <= this.worldObj.getHeight() && this.worldObj.getBlockState(new BlockPos(x, y, z)).getBlock() == FABlockRegistry.bubbleMachine && this.worldObj.isBlockIndirectlyGettingPowered(new BlockPos(x, y, z))) {
+                    if (this.posY + dy >= 0 && this.posY + dy <= this.worldObj.getHeight() && this.worldObj.getBlockState(new BlockPos(x, y, z)).getBlock() == FABlockRegistry.BUBBLE_MACHINE && this.worldObj.isBlockIndirectlyGettingPowered(new BlockPos(x, y, z))) {
                         switch (type) {
                             case 0:
                                 return x;
@@ -507,7 +511,7 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
         int blockX = MathHelper.floor_double(this.posX);
         int blockY = MathHelper.floor_double(this.getEntityBoundingBox().minY) - 1;
         int blockZ = MathHelper.floor_double(this.posZ);
-        if (this.getBlockUnder() == FABlockRegistry.bubbleMachine && this.worldObj.isBlockIndirectlyGettingPowered(new BlockPos(blockX, blockY, blockZ)) && this.ticksTillPlay == 0) {
+        if (this.getBlockUnder() == FABlockRegistry.BUBBLE_MACHINE && this.worldObj.isBlockIndirectlyGettingPowered(new BlockPos(blockX, blockY, blockZ)) && this.ticksTillPlay == 0) {
             this.jump();
             for (int i = 0; i < 1; ++i) {
                 double dd = this.getRNG().nextGaussian() * 0.02D;
@@ -1329,15 +1333,6 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
         return 3;
     }
 
-    @Override
-    public void updateRidden() {
-        super.updateRidden();
-        if (this.getControllingPassenger() != null) {
-            if (this.getControllingPassenger() instanceof EntityPlayer) {
-                this.setPosition(posX, posY - ((EntityPlayer) this.getControllingPassenger()).getYOffset(), posZ);
-            }
-        }
-    }
 
     private double getSpeed() {
         return 0.4D;
@@ -1596,7 +1591,7 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
         int j = MathHelper.floor_float((float) MathHelper.floor_double(d0));
         int k = MathHelper.floor_double(this.posZ);
         IBlockState blockState = this.worldObj.getBlockState(new BlockPos(i, j, k));
-        if (blockState.getMaterial() == Material.water) {
+        if (blockState.getMaterial() == Material.WATER) {
             double filled = 1.0f;
             if (blockState.getBlock() instanceof IFluidBlock) {
                 filled = ((IFluidBlock) blockState.getBlock()).getFilledPercentage(worldObj, new BlockPos(i, j, k));
@@ -1686,6 +1681,11 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
 
     @Override
     public void updateRidden() {
+        if (this.getControllingPassenger() != null) {
+            if (this.getControllingPassenger() instanceof EntityPlayer) {
+                this.setPosition(posX, posY - ((EntityPlayer) this.getControllingPassenger()).getYOffset(), posZ);
+            }
+        }
         if (this.func_152114_e(this.getRidingPlayer()) && this.getAttackTarget() != this.getRidingPlayer()) {
             rotationYaw = renderYawOffset;
             rotationYaw = this.getRidingPlayer().rotationYaw;

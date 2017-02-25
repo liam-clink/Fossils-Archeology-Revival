@@ -2,10 +2,12 @@ package fossilsarcheology.server.entity;
 
 import fossilsarcheology.Revival;
 import fossilsarcheology.server.achievement.FossilAchievements;
+import fossilsarcheology.server.entity.prehistoric.EntityPrehistoric;
+import fossilsarcheology.server.entity.prehistoric.OrderType;
 import fossilsarcheology.server.entity.prehistoric.PrehistoricEntityType;
 import fossilsarcheology.server.item.FAItemRegistry;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.block.Block;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityItem;
@@ -23,6 +25,7 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -70,7 +73,7 @@ public class EntityDinosaurEgg extends EntityLiving implements IEntityAdditional
 
     public EntityDinosaurEgg(World world, PrehistoricEntityType prehistoric, EntityPrehistoric entity) {
         this(world, prehistoric);
-        this.parentOwner = entity.getCommandSenderName();
+        this.parentOwner = entity.getDisplayName().toString();
     }
 
     protected boolean isAIEnabled() {
@@ -154,16 +157,16 @@ public class EntityDinosaurEgg extends EntityLiving implements IEntityAdditional
                     }
                     EntityPrehistoric prehistoricEntity = (EntityPrehistoric) entity;
                     if (prehistoricEntity.type.isTameable() && player != null) {
-                        if (prehistoricEntity.type != PrehistoricEntityType.Tyrannosaurus && prehistoricEntity.type != PrehistoricEntityType.Allosaurus && prehistoricEntity.type != PrehistoricEntityType.Sarcosuchus) {
+                        if (prehistoricEntity.type != PrehistoricEntityType.TYRANNOSAURUS && prehistoricEntity.type != PrehistoricEntityType.Allosaurus && prehistoricEntity.type != PrehistoricEntityType.Sarcosuchus) {
                             prehistoricEntity.setTamed(true);
-                            prehistoricEntity.func_152115_b(player.getCommandSenderName().toString());
-                            prehistoricEntity.setOwnerDisplayName(player.getCommandSenderName().toString());
-                            prehistoricEntity.currentOrder = EnumOrderType.WANDER;
+                            prehistoricEntity.func_152115_b(player.getDisplayName().toString());
+                            prehistoricEntity.setOwnerDisplayName(player.getDisplayName().toString());
+                            prehistoricEntity.currentOrder = OrderType.WANDER;
                             prehistoricEntity.setHealth((float) prehistoricEntity.baseHealth);
 
                         }
                     }
-                    prehistoricEntity.onSpawnWithEgg(null);
+                    prehistoricEntity.onInitialSpawn(null,null);
                     prehistoricEntity.setAgeInDays(0);
                     prehistoricEntity.updateAbilities();
 
@@ -183,8 +186,8 @@ public class EntityDinosaurEgg extends EntityLiving implements IEntityAdditional
                 }
                 this.worldObj.spawnEntityInWorld(entity);
                 if (player != null) {
-                   // player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal(LocalizationStrings.DINOEGG_HATCHED)));
-                }
+                   player.addChatMessage(new TextComponentString(I18n.format("dinoegg.hatched")));
+            }
                 this.setDead();
 
             }

@@ -19,6 +19,7 @@ public class FAItemRegistry {
 
     public static final BasicItem AMBER = new BasicItem("amber");
     public static final BasicItem DOMINICAN_AMBER = new BasicItem("dominican_amber");
+    public static final BasicItem CHICKEN_ESSENCE = new BasicItem("chicken_essence");
 
     public static final BasicItem SCARAB_GEM = new BasicItem("scarab_gem");
     public static final BasicItem AQUATIC_SCARAB_GEM = new BasicItem("aquatic_scarab_gem");
@@ -30,6 +31,7 @@ public class FAItemRegistry {
     public static final BasicItem PLANT_FOSSIL = new BasicItem("plant_fossil");
 
     public static final StoneTabletItem STONE_TABLET = new StoneTabletItem();
+    public static final WhipItem WHIP = new WhipItem();
 
     public static final JavelinItem WOODEN_JAVELIN = new JavelinItem(Item.ToolMaterial.WOOD, "wooden_javelin", false);
     public static final JavelinItem STONE_JAVELIN = new JavelinItem(Item.ToolMaterial.STONE, "stone_javelin", false);

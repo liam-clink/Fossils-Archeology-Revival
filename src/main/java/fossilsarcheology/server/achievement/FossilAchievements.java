@@ -10,6 +10,7 @@ public class FossilAchievements {
     public static final Achievement FIRST_FOSSIL = new Achievement("achievement.firstFossil", "firstFossil", 0, 0, new ItemStack(FAItemRegistry.BIOFOSSIL), null).registerStat();
     public static final Achievement ANALYZER = new Achievement("achievement.analyzer", "analyzer", 0, -2, new ItemStack(FABlockRegistry.ANALYZER_ACTIVE), FIRST_FOSSIL).registerStat();
     public static final Achievement TABLET = new Achievement("achievement.tablet", "tablet", -2, -2, new ItemStack(FAItemRegistry.STONE_TABLET), ANALYZER).registerStat();
+    public static final Achievement FIRST_DINO = new Achievement("achievement.firstDino", "firstDino", 6, -4, new ItemStack(FAItemRegistry.SKULL, 1, 0), null).registerStat().setSpecial();
 /*
     public static final Achievement DINO_DNA = new Achievement("achievement.dinoDna", "dinoDna", 0, -4, new ItemStack(PrehistoricEntityType.TYRANNOSAURUS.dnaItem), ANALYZER).registerStat().setSpecial();
     public static final Achievement CULTIVATE = new Achievement("achievement.cultivate", "cultivate", 2, -4, new ItemStack(FABlockRegistry.CULTIVATE_ACTIVE), DINO_DNA).registerStat();
@@ -44,7 +45,7 @@ public class FossilAchievements {
     public static final Achievement DEAD_DODO = new Achievement("achievement.deadDodo", "deadDodo", 4, 0, new ItemStack(FAItemRegistry.skull, 1, DinosaurBoneType.Dodo.ordinal()), BIRD_EGG).registerStat();
     public static final Achievement TREX_KILL = new Achievement("achievement.trexKill", "trexKill", 8, -7, new ItemStack(FAItemRegistry.toothDagger), THE_KING).registerStat();
 */
-    public static final AchievementPage PAGE = new AchievementPage("Fossils and Archeology", FIRST_FOSSIL, ANALYZER, TABLET /*DINO_DNA, CULTIVATE, DINO_EGG, MAMMAL_EMBRYO, BIRD_EGG, SIFTER, FOSSIL_SEEDS, FAILURESAURUS, FAILURESAURUS_ANALYZER, FIND_ANU_TOTEM, ANU_PORTAL, ANUBITE_ENCOUNTER, ANU_ATTACK, ANU_DEAD, ARC_WORKBENCH, FIXED_SWORD, FIXED_HELMET, FIXED_VASE, DINOPEDIA, SCARAB, SCARAB_TOOLS, BLUE_SCARAB, KEY, WTF, CLOCK, FIRST_DINO, THE_KING, USURPER, SQUIRE, SHEAR, DEAD_DODO, TREX_KILL*/);
+    public static final AchievementPage PAGE = new AchievementPage("Fossils and Archeology", FIRST_FOSSIL, ANALYZER, TABLET, FIRST_DINO /*DINO_DNA, CULTIVATE, DINO_EGG, MAMMAL_EMBRYO, BIRD_EGG, SIFTER, FOSSIL_SEEDS, FAILURESAURUS, FAILURESAURUS_ANALYZER, FIND_ANU_TOTEM, ANU_PORTAL, ANUBITE_ENCOUNTER, ANU_ATTACK, ANU_DEAD, ARC_WORKBENCH, FIXED_SWORD, FIXED_HELMET, FIXED_VASE, DINOPEDIA, SCARAB, SCARAB_TOOLS, BLUE_SCARAB, KEY, WTF, CLOCK, FIRST_DINO, THE_KING, USURPER, SQUIRE, SHEAR, DEAD_DODO, TREX_KILL*/);
 
     public static void register() {
         AchievementPage.registerAchievementPage(PAGE);
