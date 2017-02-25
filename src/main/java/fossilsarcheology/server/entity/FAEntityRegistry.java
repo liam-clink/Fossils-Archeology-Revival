@@ -21,6 +21,7 @@ public class FAEntityRegistry {
         registerEntity(AncientJavelinEntity.class, "ancient_javelin", 1);
         registerEntity(StoneTabletEntity.class, "stone_tablet", 2);
         registerSpawnable(EntityFailuresaurus.class, "Failuresaurus", 5, 0x61ffbd, 0xf4eee6);
+        registerEntity(EntityDinosaurEgg.class, "DinoEgg", 8);
 
     }
 
