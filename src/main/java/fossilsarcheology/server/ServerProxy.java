@@ -8,6 +8,7 @@ import fossilsarcheology.server.block.entity.AnalyzerBlockEntity;
 import fossilsarcheology.server.container.AnalyzerContainer;
 import fossilsarcheology.server.entity.EntityFishBase;
 import fossilsarcheology.server.entity.FAEntityRegistry;
+import fossilsarcheology.server.entity.prehistoric.EntityPrehistoric;
 import fossilsarcheology.server.entity.prehistoric.PrehistoricEntityType;
 import fossilsarcheology.server.item.FAItemRegistry;
 import net.minecraft.entity.player.EntityPlayer;
@@ -39,6 +40,10 @@ public class ServerProxy implements IGuiHandler {
     }
 
     public void calculateChainBuffer(EntityFishBase entity) {
+
+    }
+
+    public void calculateChainBuffer(EntityPrehistoric entity) {
 
     }
 
