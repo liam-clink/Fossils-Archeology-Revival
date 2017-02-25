@@ -434,7 +434,7 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
                     int x = MathHelper.floor_double(this.posX + ds);
                     int y = MathHelper.floor_double(this.posY + dy);
                     int z = MathHelper.floor_double(this.posZ - r);
-                    if (this.posY + dy >= 0 && this.posY + dy <= this.worldObj.getHeight() && this.worldObj.getBlockState(new BlockPos(x, y, z)).getBlock() == FABlockRegistry.bubbleMachine && this.worldObj.isBlockIndirectlyGettingPowered(new BlockPos(x, y, z))) {
+                    if (this.posY + dy >= 0 && this.posY + dy <= this.worldObj.getHeight() && this.worldObj.getBlockState(new BlockPos(x, y, z)).getBlock() == FABlockRegistry.BUBBLE_MACHINE && this.worldObj.isBlockIndirectlyGettingPowered(new BlockPos(x, y, z))) {
                         switch (type) {
                             case 0:
                                 return x;
@@ -781,7 +781,7 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
                         for (int c = (int) Math.round(this.getEntityBoundingBox().minZ) - 1; c <= (int) Math.round(this.getEntityBoundingBox().maxZ) + 1; c++) {
                             IBlockState state = worldObj.getBlockState(new BlockPos(a, b, c));
                             Block block = state.getBlock();
-                            if (!(block instanceof BlockBush) && !(block instanceof BlockLiquid) && block != Blocks.BEDROCK && block != FABlockRegistry.ancientGlass && block != FABlockRegistry.strongGlass && state.getBlockHardness(worldObj, new BlockPos(a, b, c)) < hardness) {
+                            if (!(block instanceof BlockBush) && !(block instanceof BlockLiquid) && block != Blocks.BEDROCK && block != FABlockRegistry.ANCIENT_GLASS && block != FABlockRegistry.STRONG_GLASS && state.getBlockHardness(worldObj, new BlockPos(a, b, c)) < hardness) {
                                 this.motionX *= 0.6D;
                                 this.motionZ *= 0.6D;
                                 if (block != Blocks.AIR) {
@@ -1103,7 +1103,7 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
 
             if (itemstack != null) {
                 if (itemstack.getItem() != null) {
-                    if ((this.aiTameType() == PrehistoricEntityTypeAI.Taming.GEM && itemstack.getItem() == FAItemRegistry.INSTANCE.gem) || (this.aiTameType() == PrehistoricEntityTypeAI.Taming.BLUEGEM && itemstack.getItem() == FAItemRegistry.INSTANCE.gem_blue)) {
+                    if ((this.aiTameType() == PrehistoricEntityTypeAI.Taming.GEM && itemstack.getItem() == FAItemRegistry.INSTANCE.gem) || (this.aiTameType() == PrehistoricEntityTypeAI.Taming.BLUEGEM && itemstack.getItem() == FAItemRegistry.AQUATIC_SCARAB_GEM)) {
                         if (!this.isTamed() && !this.func_152114_e(player) && this.isActuallyWeak()) {
                             this.triggerTamingAcheivement(player);
                             this.heal(200);
