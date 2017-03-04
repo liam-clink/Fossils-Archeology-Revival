@@ -6,6 +6,7 @@ import fossilsarcheology.server.block.FABlockRegistry;
 import fossilsarcheology.server.block.IDinoUnbreakable;
 import fossilsarcheology.server.block.entity.TileEntityFeeder;
 import fossilsarcheology.server.entity.EntityDinosaurEgg;
+import fossilsarcheology.server.entity.utility.EntityToyBase;
 import fossilsarcheology.server.item.FAItemRegistry;
 import fossilsarcheology.server.item.variant.DinosaurBoneType;
 import fossilsarcheology.server.localization.Localizations;
@@ -1697,9 +1698,10 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
             double extraZ = (double) (radius * MathHelper.cos(angle));
             double extraY = ridingY * (getAgeScale());
             float spinosaurusAddition = 0;
-            if (this instanceof EntitySpinosaurus) {
+            //TODO
+           /* if (this instanceof EntitySpinosaurus) {
                 spinosaurusAddition = -(((EntitySpinosaurus) this).swimProgress * 0.1F);
-            }
+            }*/
             this.getRidingPlayer().setPosition(this.posX + extraX, this.posY + extraY + spinosaurusAddition, this.posZ + extraZ);
             return;
         }

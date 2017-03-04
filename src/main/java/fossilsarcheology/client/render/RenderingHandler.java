@@ -2,10 +2,7 @@ package fossilsarcheology.client.render;
 
 import fossilsarcheology.Revival;
 import fossilsarcheology.client.model.*;
-import fossilsarcheology.client.render.entity.JavelinRenderer;
-import fossilsarcheology.client.render.entity.RenderFailuresaurus;
-import fossilsarcheology.client.render.entity.RenderFish;
-import fossilsarcheology.client.render.entity.StoneTabletRenderer;
+import fossilsarcheology.client.render.entity.*;
 import fossilsarcheology.server.api.DefaultRenderedItem;
 import fossilsarcheology.server.api.IgnoreRenderProperty;
 import fossilsarcheology.server.api.SubtypeRenderedItem;
@@ -18,6 +15,7 @@ import fossilsarcheology.server.entity.prehistoric.EntityNautilus;
 import fossilsarcheology.server.entity.prehistoric.EntitySturgeon;
 import fossilsarcheology.server.entity.projectile.AncientJavelinEntity;
 import fossilsarcheology.server.entity.projectile.JavelinEntity;
+import fossilsarcheology.server.entity.utility.EntityToyBall;
 import fossilsarcheology.server.item.FAItemRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
@@ -72,7 +70,7 @@ public class RenderingHandler {
         RenderingRegistry.registerEntityRenderingHandler(EntityAlligatorGar.class, new RenderFish(new ModelAlligatorGar(), MINECRAFT.getRenderManager()));
         RenderingRegistry.registerEntityRenderingHandler(EntitySturgeon.class, new RenderFish(new ModelSturgeon(), MINECRAFT.getRenderManager()));
         RenderingRegistry.registerEntityRenderingHandler(EntityFailuresaurus.class, new RenderFailuresaurus(new ModelFailuresaurus(), MINECRAFT.getRenderManager()));
-
+        RenderingRegistry.registerEntityRenderingHandler(EntityToyBall.class, new RenderToyBall(MINECRAFT.getRenderManager()));
     }
 
     public void onPostInit() {

@@ -2,10 +2,7 @@ package fossilsarcheology;
 
 import fossilsarcheology.server.ServerProxy;
 import fossilsarcheology.server.config.FossilConfig;
-import fossilsarcheology.server.message.MessageFoodParticles;
-import fossilsarcheology.server.message.MessageHappyParticles;
-import fossilsarcheology.server.message.MessageSetDay;
-import fossilsarcheology.server.message.MessageUpdateEgg;
+import fossilsarcheology.server.message.*;
 import fossilsarcheology.server.util.ReleaseType;
 import net.ilexiconn.llibrary.server.config.Config;
 import net.ilexiconn.llibrary.server.network.NetworkWrapper;
@@ -29,7 +26,7 @@ public class Revival {
 
     @SidedProxy(clientSide = "fossilsarcheology.client.ClientProxy", serverSide = "fossilsarcheology.server.ServerProxy")
     public static ServerProxy PROXY;
-    @NetworkWrapper({MessageFoodParticles.class, MessageSetDay.class, MessageHappyParticles.class, MessageUpdateEgg.class})
+    @NetworkWrapper({MessageFoodParticles.class, MessageSetDay.class, MessageHappyParticles.class, MessageUpdateEgg.class, MessageRollBall.class})
     public static SimpleNetworkWrapper NETWORK_WRAPPER;
     @Config
     public static FossilConfig CONFIG;
