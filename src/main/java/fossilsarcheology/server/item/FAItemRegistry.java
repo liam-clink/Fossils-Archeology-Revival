@@ -33,6 +33,8 @@ public class FAItemRegistry {
     public static final StoneTabletItem STONE_TABLET = new StoneTabletItem();
     public static final WhipItem WHIP = new WhipItem();
     public static final ToyBallItem TOY_BALL = new ToyBallItem();
+    public static final ToyScratchingPost TOY_SCRATCHING_POST = new ToyScratchingPost();
+    public static final ToyTetheredLog TOY_TETHERED_LOG = new ToyTetheredLog();
 
     public static final JavelinItem WOODEN_JAVELIN = new JavelinItem(Item.ToolMaterial.WOOD, "wooden_javelin", false);
     public static final JavelinItem STONE_JAVELIN = new JavelinItem(Item.ToolMaterial.STONE, "stone_javelin", false);

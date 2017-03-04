@@ -1,6 +1,7 @@
 package fossilsarcheology.server.item;
 
 import fossilsarcheology.server.entity.utility.EntityToyBall;
+import fossilsarcheology.server.tab.FATabRegistry;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumDyeColor;
@@ -22,6 +23,8 @@ public class ToyBallItem extends Item {
         this.setHasSubtypes(true);
         this.setMaxDamage(0);
         this.setCreativeTab(CreativeTabs.MATERIALS);
+        this.setUnlocalizedName("toyBall");
+        this.setCreativeTab(FATabRegistry.ITEMS);
     }
 
     public String getUnlocalizedName(ItemStack stack) {

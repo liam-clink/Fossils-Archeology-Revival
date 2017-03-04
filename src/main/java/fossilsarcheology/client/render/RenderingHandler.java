@@ -16,6 +16,7 @@ import fossilsarcheology.server.entity.prehistoric.EntitySturgeon;
 import fossilsarcheology.server.entity.projectile.AncientJavelinEntity;
 import fossilsarcheology.server.entity.projectile.JavelinEntity;
 import fossilsarcheology.server.entity.utility.EntityToyBall;
+import fossilsarcheology.server.entity.utility.EntityToyScratchingPost;
 import fossilsarcheology.server.item.FAItemRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
@@ -71,6 +72,7 @@ public class RenderingHandler {
         RenderingRegistry.registerEntityRenderingHandler(EntitySturgeon.class, new RenderFish(new ModelSturgeon(), MINECRAFT.getRenderManager()));
         RenderingRegistry.registerEntityRenderingHandler(EntityFailuresaurus.class, new RenderFailuresaurus(new ModelFailuresaurus(), MINECRAFT.getRenderManager()));
         RenderingRegistry.registerEntityRenderingHandler(EntityToyBall.class, new RenderToyBall(MINECRAFT.getRenderManager()));
+        RenderingRegistry.registerEntityRenderingHandler(EntityToyScratchingPost.class, new RenderToyScratchingPost(MINECRAFT.getRenderManager()));
     }
 
     public void onPostInit() {
