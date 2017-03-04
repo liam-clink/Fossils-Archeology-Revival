@@ -1,19 +1,10 @@
 package fossilsarcheology.server.entity.prehistoric;
 
-import fossilsarcheology.server.item.BirdEggItem;
-import fossilsarcheology.server.item.DNAItem;
-import fossilsarcheology.server.item.DinoEggItem;
-import fossilsarcheology.server.item.FAItemRegistry;
-import fossilsarcheology.server.item.FishItem;
-import fossilsarcheology.server.item.MammalEmbryoItem;
+import fossilsarcheology.server.item.*;
 import fossilsarcheology.server.tab.FATabRegistry;
 import io.netty.util.internal.ThreadLocalRandom;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.passive.EntityChicken;
-import net.minecraft.entity.passive.EntityCow;
-import net.minecraft.entity.passive.EntityHorse;
-import net.minecraft.entity.passive.EntityPig;
-import net.minecraft.entity.passive.EntitySheep;
+import net.minecraft.entity.passive.*;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 import net.minecraft.world.World;
@@ -33,7 +24,7 @@ public enum PrehistoricEntityType {
     COELACANTH(EntityCoelacanth.class, MobType.FISH, TimePeriod.MESOZOIC, Diet.NONE, Parameter.NOTHING, 0X363941, 0X9BA1A9),
     ALLIGATOR_GAR(EntityAlligatorGar.class, MobType.FISH, TimePeriod.MESOZOIC, Diet.NONE, Parameter.NOTHING, 0X43462A, 0XAF4231),
     STURGEON(EntitySturgeon.class, MobType.FISH, TimePeriod.MESOZOIC, Diet.NONE, Parameter.NOTHING, 0X655D5B, 0XE6E3E3),
-    TRICERATOPS(EntityTriceratops.class, MobType.DINOSAUR, TimePeriod.MESOZOIC, Diet.HERBIVORE, Parameter.MODEL | Parameter.TAME | Parameter.RIDE | Parameter.HERBIVORE, true, 0X64352D, 0X251A17, 0.8F);
+    TRICERATOPS(EntityTriceratops.class, MobType.DINOSAUR, TimePeriod.MESOZOIC, Diet.HERBIVORE, Parameter.MODEL | Parameter.TAME | Parameter.RIDE | Parameter.HERBIVORE, 0X64352D, 0X251A17, 0.8F);
     private float sizeBaby = 1;
     private float sizeTeen = 1;
     private float sizeAdult = 1;
@@ -86,7 +77,7 @@ public enum PrehistoricEntityType {
         this.friendlyName = this.name().toUpperCase(Locale.ENGLISH).substring(0, 1) + this.resourceName.substring(1);
     }
 
-    PrehistoricEntityType(Class entity, MobType mobType, TimePeriod period, Diet diet, int parameters, int primaryEggColor, int secondaryEggColor, float eggScale) {
+    PrehistoricEntityType(Class<? extends Entity> entity, MobType mobType, TimePeriod period, Diet diet, int parameters, int primaryEggColor, int secondaryEggColor, float eggScale) {
         this.entity = entity;
         this.mobType = mobType;
         this.timePeriod = period;
@@ -95,6 +86,8 @@ public enum PrehistoricEntityType {
         this.primaryEggColor = primaryEggColor;
         this.secondaryEggColor = secondaryEggColor;
         this.eggScale = eggScale;
+        this.resourceName = this.name().toLowerCase(Locale.ENGLISH);
+        this.friendlyName = this.name().toUpperCase(Locale.ENGLISH).substring(0, 1) + this.resourceName.substring(1);
     }
 
     public static void register() {

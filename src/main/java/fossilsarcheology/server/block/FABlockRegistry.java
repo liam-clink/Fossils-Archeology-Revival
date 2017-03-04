@@ -20,6 +20,7 @@ public class FABlockRegistry {
     public static final AnalyzerBlock ANALYZER = new AnalyzerBlock(false);
     public static final AnalyzerBlock ANALYZER_ACTIVE = new AnalyzerBlock(true);
     public static final BubbleBlowerBlock BUBBLE_MACHINE = new BubbleBlowerBlock();
+    public static final FeederBlock FEEDER = new FeederBlock();
 
     public static final PermafrostBlock PERMAFROST = new PermafrostBlock();
     

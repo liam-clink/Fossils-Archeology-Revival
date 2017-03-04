@@ -28,7 +28,7 @@ import java.util.Random;
 public class BubbleBlowerBlock extends Block {
     public static final PropertyDirection FACING = BlockHorizontal.FACING;
 
-    public BubbleBlowerBlock(String type) {
+    public BubbleBlowerBlock() {
         super(Material.IRON);
         this.setHardness(3.0F);
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));

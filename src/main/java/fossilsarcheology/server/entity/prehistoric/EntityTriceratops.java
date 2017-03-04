@@ -1,7 +1,7 @@
-package fossilsarcheology.server.entity.mob;
+package fossilsarcheology.server.entity.prehistoric;
 
 import fossilsarcheology.server.entity.prehistoric.EntityPrehistoric;
-import fossilsarcheology.server.entity.prehistoric.PrehistoricAI;
+import fossilsarcheology.server.entity.prehistoric.PrehistoricEntityTypeAI;
 import fossilsarcheology.server.entity.prehistoric.PrehistoricEntityType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -28,7 +28,7 @@ import fossilsarcheology.server.entity.ai.DinoAIRiding;
 import fossilsarcheology.server.entity.ai.DinoAIWander;
 import fossilsarcheology.server.entity.ai.DinoAIWatchClosest;
 import fossilsarcheology.server.enums.EnumPrehistoric;
-import fossilsarcheology.server.enums.PrehistoricAI;
+import fossilsarcheology.server.enums.PrehistoricEntityTypeAI;
 
 public class EntityTriceratops extends EntityPrehistoric {
     public static final double baseDamage = 1;
@@ -39,7 +39,7 @@ public class EntityTriceratops extends EntityPrehistoric {
     public static final double maxSpeed = 0.35D;
 
     public EntityTriceratops(World world) {
-        super(world, PrehistoricEntityType.Triceratops, 1, 9, 12, 64, 0.2, 0.35);
+        super(world, PrehistoricEntityType.TRICERATOPS, 1, 9, 12, 64, 0.2, 0.35);
         this.getNavigator().setAvoidsWater(true);
         this.getNavigator().setCanSwim(true);
         this.tasks.addTask(1, new EntityAISwimming(this));
@@ -81,69 +81,69 @@ public class EntityTriceratops extends EntityPrehistoric {
     }
 
     @Override
-    public PrehistoricAI.Activity aiActivityType() {
+    public PrehistoricEntityTypeAI.Activity aiActivityType() {
 
-        return PrehistoricAI.Activity.DIURINAL;
+        return PrehistoricEntityTypeAI.Activity.DIURINAL;
     }
 
     @Override
-    public PrehistoricAI.Attacking aiAttackType() {
+    public PrehistoricEntityTypeAI.Attacking aiAttackType() {
 
-        return PrehistoricAI.Attacking.KNOCKUP;
+        return PrehistoricEntityTypeAI.Attacking.KNOCKUP;
     }
 
     @Override
-    public PrehistoricAI.Climbing aiClimbType() {
+    public PrehistoricEntityTypeAI.Climbing aiClimbType() {
 
-        return PrehistoricAI.Climbing.NONE;
+        return PrehistoricEntityTypeAI.Climbing.NONE;
     }
 
     @Override
-    public PrehistoricAI.Following aiFollowType() {
+    public PrehistoricEntityTypeAI.Following aiFollowType() {
 
-        return PrehistoricAI.Following.NORMAL;
+        return PrehistoricEntityTypeAI.Following.NORMAL;
     }
 
     @Override
-    public PrehistoricAI.Jumping aiJumpType() {
+    public PrehistoricEntityTypeAI.Jumping aiJumpType() {
 
-        return PrehistoricAI.Jumping.BASIC;
+        return PrehistoricEntityTypeAI.Jumping.BASIC;
     }
 
     @Override
-    public PrehistoricAI.Response aiResponseType() {
+    public PrehistoricEntityTypeAI.Response aiResponseType() {
 
-        return this.isChild() ? PrehistoricAI.Response.SCARED : PrehistoricAI.Response.TERITORIAL;
+        return this.isChild() ? PrehistoricEntityTypeAI.Response.SCARED : PrehistoricEntityTypeAI.Response.TERITORIAL;
     }
 
     @Override
-    public PrehistoricAI.Stalking aiStalkType() {
+    public PrehistoricEntityTypeAI.Stalking aiStalkType() {
 
-        return PrehistoricAI.Stalking.NONE;
+        return PrehistoricEntityTypeAI.Stalking.NONE;
     }
 
     @Override
-    public PrehistoricAI.Taming aiTameType() {
+    public PrehistoricEntityTypeAI.Taming aiTameType() {
 
-        return PrehistoricAI.Taming.IMPRINTING;
+        return PrehistoricEntityTypeAI.Taming.IMPRINTING;
     }
 
     @Override
-    public PrehistoricAI.Untaming aiUntameType() {
+    public PrehistoricEntityTypeAI.Untaming aiUntameType() {
 
-        return PrehistoricAI.Untaming.STARVE;
+        return PrehistoricEntityTypeAI.Untaming.STARVE;
     }
 
     @Override
-    public PrehistoricAI.Moving aiMovingType() {
+    public PrehistoricEntityTypeAI.Moving aiMovingType() {
 
-        return PrehistoricAI.Moving.WALK;
+        return PrehistoricEntityTypeAI.Moving.WALK;
     }
 
     @Override
-    public PrehistoricAI.WaterAbility aiWaterAbilityType() {
+    public PrehistoricEntityTypeAI.WaterAbility aiWaterAbilityType() {
 
-        return PrehistoricAI.WaterAbility.NONE;
+        return PrehistoricEntityTypeAI.WaterAbility.NONE;
     }
 
     @Override
@@ -176,18 +176,18 @@ public class EntityTriceratops extends EntityPrehistoric {
 
     @Override
     public boolean attackEntityAsMob(Entity entity) {
-        if (this.getAttackBounds().intersectsWith(entity.boundingBox)) {
+        if (this.getAttackBounds().intersectsWith(entity.getEntityBoundingBox())) {
             if (this.getAnimation() != ATTACK_ANIMATION) {
                 this.setAnimation(ATTACK_ANIMATION);
                 return false;
             }
 
             if (this.getAnimation() == ATTACK_ANIMATION && this.getAnimationTick() == 12) {
-                IAttributeInstance attackDamage = this.getEntityAttribute(SharedMonsterAttributes.attackDamage);
+                IAttributeInstance attackDamage = this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
                 boolean flag = entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) attackDamage.getAttributeValue());
-                if (entity.ridingEntity != null) {
-                    if (entity.ridingEntity == this) {
-                        entity.mountEntity(null);
+                if (entity.getControllingPassenger() != null) {
+                    if (entity.getControllingPassenger() == this) {
+                        entity.dismountRidingEntity();
                     }
                 }
                 // entity.motionY += 0.4000000059604645D;

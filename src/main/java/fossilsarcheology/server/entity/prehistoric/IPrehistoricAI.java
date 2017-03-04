@@ -1,25 +1,25 @@
 package fossilsarcheology.server.entity.prehistoric;
 
 public interface IPrehistoricAI {
-    PrehistoricAI.Moving getMoveType();
+    PrehistoricEntityTypeAI.Moving getMoveType();
 
-    PrehistoricAI.Activity getActivityType();
+    PrehistoricEntityTypeAI.Activity getActivityType();
 
-    PrehistoricAI.Attacking getAttackType();
+    PrehistoricEntityTypeAI.Attacking getAttackType();
 
-    PrehistoricAI.Climbing getClimbType();
+    PrehistoricEntityTypeAI.Climbing getClimbType();
 
-    PrehistoricAI.Following getFollowType();
+    PrehistoricEntityTypeAI.Following getFollowType();
 
-    PrehistoricAI.Jumping getJumpType();
+    PrehistoricEntityTypeAI.Jumping getJumpType();
 
-    PrehistoricAI.Response getResponseType();
+    PrehistoricEntityTypeAI.Response getResponseType();
 
-    PrehistoricAI.Stalking getStalkType();
+    PrehistoricEntityTypeAI.Stalking getStalkType();
 
-    PrehistoricAI.Taming getTameType();
+    PrehistoricEntityTypeAI.Taming getTameType();
 
-    PrehistoricAI.Untaming getUntameType();
+    PrehistoricEntityTypeAI.Untaming getUntameType();
 
-    PrehistoricAI.WaterAbility getWaterAbilityType();
+    PrehistoricEntityTypeAI.WaterAbility getWaterAbilityType();
 }
