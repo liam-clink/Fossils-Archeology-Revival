@@ -1,25 +1,22 @@
 package fossilsarcheology.server.entity.ai;
 
+import fossilsarcheology.server.entity.prehistoric.EntityPrehistoric;
+import fossilsarcheology.server.entity.prehistoric.PrehistoricMoodType;
+import fossilsarcheology.server.entity.utility.EntityToyBase;
+import fossilsarcheology.server.util.FoodMappings;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityCreature;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.world.EnumDifficulty;
+
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import net.minecraft.command.IEntitySelector;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityCreature;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.ai.EntityAITarget;
-import net.minecraft.entity.player.EntityPlayer;
-import fossilsarcheology.server.entity.EntityPrehistoric;
-import fossilsarcheology.server.entity.EntityToyBase;
-import fossilsarcheology.api.FoodMappings;
-import fossilsarcheology.server.enums.EnumPrehistoricMood;
-import net.minecraft.world.EnumDifficulty;
-
-public class DinoAIHunt extends EntityAITarget {
+public class DinoAIHunt extends EntityAINearestAttackableTarget {
     private final int targetTicks;
-    private final DinoAIHunt.Sorter theNearestAttackableTargetSorter;
-    private final IEntitySelector targetEntitySelector;
     private EntityLivingBase targetEntity;
 
     public DinoAIHunt(EntityCreature prehistoric, int ticks, boolean sight) {
@@ -27,20 +24,12 @@ public class DinoAIHunt extends EntityAITarget {
     }
 
     public DinoAIHunt(EntityCreature prehistoric, int ticks, boolean sight, boolean nearby) {
-        this(prehistoric, ticks, sight, nearby, (IEntitySelector) null);
+        super(prehistoric, EntityLivingBase.class, ticks, sight, nearby, null);
+        this.targetTicks = ticks;
+        this.setMutexBits(1);
+
     }
 
-    public DinoAIHunt(EntityCreature prehistoric, int ticks, boolean sight, boolean nearby, final IEntitySelector selector) {
-        super(prehistoric, sight, nearby);
-        this.targetTicks = ticks;
-        this.theNearestAttackableTargetSorter = new DinoAIHunt.Sorter(prehistoric);
-        this.setMutexBits(1);
-        this.targetEntitySelector = new IEntitySelector() {
-            public boolean isEntityApplicable(Entity target) {
-                return !(target instanceof EntityLivingBase) ? false : (selector != null && !selector.isEntityApplicable(target) ? false : DinoAIHunt.this.isSuitableTarget((EntityLivingBase) target, false));
-            }
-        };
-    }
 
     public boolean shouldExecute() {
 
@@ -48,7 +37,7 @@ public class DinoAIHunt extends EntityAITarget {
             return false;
         } else {
             double d0 = this.getTargetDistance();
-            List list = this.taskOwner.worldObj.selectEntitiesWithinAABB(EntityLivingBase.class, this.taskOwner.boundingBox.expand(d0, 4.0D, d0), this.targetEntitySelector);
+            List<EntityLivingBase> list = this.taskOwner.worldObj.<EntityLivingBase>getEntitiesWithinAABB(this.targetClass, this.getTargetableArea(this.getTargetDistance()), this.targetEntitySelector);
             Collections.sort(list, this.theNearestAttackableTargetSorter);
             if (list.isEmpty()) {
                 return false;
@@ -60,14 +49,14 @@ public class DinoAIHunt extends EntityAITarget {
                         return false;
                     }
                     if (targetEntity instanceof EntityPlayer) {
-                        if(taskOwner.worldObj.difficultySetting == EnumDifficulty.PEACEFUL){
+                        if(taskOwner.worldObj.getDifficulty() == EnumDifficulty.PEACEFUL){
                             return false;
                         }
-                        if(prehistoric.getMood() < 0 && prehistoric.getMoodFace() != EnumPrehistoricMood.CALM){
+                        if(prehistoric.getMood() < 0 && prehistoric.getMoodFace() != PrehistoricMoodType.CALM){
                             return !((EntityPlayer) targetEntity).capabilities.isCreativeMode;
-                        }else if(prehistoric.getMood() > 25 && prehistoric.getMoodFace() != EnumPrehistoricMood.CALM){
+                        }else if(prehistoric.getMood() > 25 && prehistoric.getMoodFace() != PrehistoricMoodType.CALM){
                             return false;
-                        }else if(prehistoric.getMoodFace() == EnumPrehistoricMood.CALM){
+                        }else if(prehistoric.getMoodFace() == PrehistoricMoodType.CALM){
                             return !prehistoric.func_152114_e(targetEntity) && prehistoric.canDinoHunt(targetEntity, true);
                         }
                     }

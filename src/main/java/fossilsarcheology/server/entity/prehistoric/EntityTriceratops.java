@@ -1,8 +1,5 @@
 package fossilsarcheology.server.entity.prehistoric;
 
-import fossilsarcheology.server.entity.prehistoric.EntityPrehistoric;
-import fossilsarcheology.server.entity.prehistoric.PrehistoricEntityTypeAI;
-import fossilsarcheology.server.entity.prehistoric.PrehistoricEntityType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
@@ -16,19 +13,8 @@ import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import fossilsarcheology.Revival;
-import fossilsarcheology.server.entity.EntityPrehistoric;
-import fossilsarcheology.server.entity.ai.DinoAIAttackOnCollide;
-import fossilsarcheology.server.entity.ai.DinoAIEatBlocks;
-import fossilsarcheology.server.entity.ai.DinoAIEatFeeders;
-import fossilsarcheology.server.entity.ai.DinoAIEatItems;
-import fossilsarcheology.server.entity.ai.DinoAIFollowOwner;
 import fossilsarcheology.server.entity.ai.DinoAIHunt;
-import fossilsarcheology.server.entity.ai.DinoAILookIdle;
-import fossilsarcheology.server.entity.ai.DinoAIRiding;
-import fossilsarcheology.server.entity.ai.DinoAIWander;
-import fossilsarcheology.server.entity.ai.DinoAIWatchClosest;
-import fossilsarcheology.server.enums.EnumPrehistoric;
-import fossilsarcheology.server.enums.PrehistoricEntityTypeAI;
+
 
 public class EntityTriceratops extends EntityPrehistoric {
     public static final double baseDamage = 1;
@@ -40,8 +26,6 @@ public class EntityTriceratops extends EntityPrehistoric {
 
     public EntityTriceratops(World world) {
         super(world, PrehistoricEntityType.TRICERATOPS, 1, 9, 12, 64, 0.2, 0.35);
-        this.getNavigator().setAvoidsWater(true);
-        this.getNavigator().setCanSwim(true);
         this.tasks.addTask(1, new EntityAISwimming(this));
         this.tasks.addTask(2, this.aiSit);
         this.tasks.addTask(3, new DinoAIRiding(this, 1.0F));
@@ -153,7 +137,7 @@ public class EntityTriceratops extends EntityPrehistoric {
 
     @Override
     public Item getOrderItem() {
-        return Items.stick;
+        return Items.STICK;
     }
 
     @Override
