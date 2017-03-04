@@ -1,6 +1,8 @@
 package fossilsarcheology.server.block;
 
 
+import fossilsarcheology.Revival;
+import fossilsarcheology.server.ServerProxy;
 import fossilsarcheology.server.block.entity.TileEntityFeeder;
 import fossilsarcheology.server.tab.FATabRegistry;
 import net.minecraft.block.BlockContainer;
@@ -13,9 +15,11 @@ import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
@@ -41,6 +45,15 @@ public class FeederBlock extends BlockContainer{
         GameRegistry.registerTileEntity(TileEntityFeeder.class, "Feeder");
 
     }
+
+    @Override
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
+        if (!world.isRemote) {
+            player.openGui(Revival.INSTANCE, ServerProxy.GUI_FEEDER, world, pos.getX(), pos.getY(), pos.getZ());
+        }
+        return true;
+    }
+
 
     public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
         this.setDefaultFacing(worldIn, pos, state);

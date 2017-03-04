@@ -6,6 +6,7 @@ import fossilsarcheology.server.achievement.FossilAchievements;
 import fossilsarcheology.server.block.FABlockRegistry;
 import fossilsarcheology.server.block.entity.AnalyzerBlockEntity;
 import fossilsarcheology.server.container.AnalyzerContainer;
+import fossilsarcheology.server.container.FeederContainer;
 import fossilsarcheology.server.entity.EntityFishBase;
 import fossilsarcheology.server.entity.FAEntityRegistry;
 import fossilsarcheology.server.entity.prehistoric.EntityPrehistoric;
@@ -21,6 +22,7 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 public class ServerProxy implements IGuiHandler {
     public static final int GUI_ANALYZER = 0;
+    public static final int GUI_FEEDER = 0;
 
     public void onPreInit() {
         NetworkRegistry.INSTANCE.registerGuiHandler(Revival.INSTANCE, this);
@@ -58,6 +60,9 @@ public class ServerProxy implements IGuiHandler {
         BlockPos pos = new BlockPos(x, y, z);
         if (id == GUI_ANALYZER) {
             return new AnalyzerContainer(player.inventory, (AnalyzerBlockEntity) world.getTileEntity(pos));
+        }
+        if (id == GUI_FEEDER) {
+            return new FeederContainer(player.inventory, (AnalyzerBlockEntity) world.getTileEntity(pos));
         }
         return null;
     }
