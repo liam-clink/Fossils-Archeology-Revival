@@ -1,6 +1,10 @@
 package fossilsarcheology.server.entity.prehistoric;
 
+import com.google.common.base.Predicate;
+import fossilsarcheology.Revival;
+import fossilsarcheology.server.entity.ai.*;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAIOwnerHurtByTarget;
@@ -12,8 +16,8 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
-import fossilsarcheology.Revival;
-import fossilsarcheology.server.entity.ai.DinoAIHunt;
+
+import javax.annotation.Nullable;
 
 
 public class EntityTriceratops extends EntityPrehistoric {
@@ -40,7 +44,12 @@ public class EntityTriceratops extends EntityPrehistoric {
         this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
         this.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
-        this.targetTasks.addTask(4, new DinoAIHunt(this, 20, false));
+        this.targetTasks.addTask(4, new DinoAIHunt(this, EntityLivingBase.class, false, new Predicate<Entity>() {
+            @Override
+            public boolean apply(@Nullable Entity entity) {
+                return entity instanceof EntityLivingBase;
+            }
+        }));
         this.hasFeatherToggle = true;
         this.featherToggle = !Revival.CONFIG.quilledTriceratops;
         this.setActualSize(1.1F, 0.6F);
