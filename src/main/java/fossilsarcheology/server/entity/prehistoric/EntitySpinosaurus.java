@@ -1,6 +1,7 @@
 package fossilsarcheology.server.entity.prehistoric;
 
 import com.google.common.base.Predicate;
+import fossilsarcheology.client.sound.FASoundRegistry;
 import fossilsarcheology.server.entity.ai.*;
 import fossilsarcheology.server.entity.utility.EntityToyBase;
 import fossilsarcheology.server.item.FAItemRegistry;
@@ -18,6 +19,7 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
@@ -305,5 +307,20 @@ public class EntitySpinosaurus extends EntityPrehistoricSwimming {
     public boolean canBeRidden() {
         // TODO Auto-generated method stub
         return true;
+    }
+
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return FASoundRegistry.SPINOSAURUS_LIVING;
+    }
+
+    @Override
+    protected SoundEvent getHurtSound() {
+        return FASoundRegistry.SPINOSAURUS_HURT;
+    }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return FASoundRegistry.SPINOSAURUS_DEATH;
     }
 }
