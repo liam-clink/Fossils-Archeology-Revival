@@ -46,7 +46,11 @@ public enum PrehistoricEntityType {
     THERIZINOSAURUS(EntityTherizinosaurus.class, MobType.DINOSAUR, TimePeriod.MESOZOIC, Diet.HERBIVORE, Parameter.MODEL | Parameter.TAME | Parameter.HERBIVORE, 0X322212, 0XCA9C72, 0.8F),
     PARASAUROLOPHUS(EntityParasaurolophus.class, MobType.DINOSAUR, TimePeriod.MESOZOIC, Diet.HERBIVORE, Parameter.MODEL | Parameter.TAME | Parameter.HERBIVORE, 0X7E8E30, 0X4C5438, 1F),
     CONFUCIUSORNIS(EntityConfuciusornis.class, MobType.BIRD, TimePeriod.MESOZOIC, Diet.HERBIVORE, Parameter.TAME | Parameter.HERBIVORE, 0XDAE5E9, 0X8B8B8D),
-    ;
+    DODO(EntityDodo.class, MobType.BIRD, TimePeriod.CENOZOIC, Diet.HERBIVORE, Parameter.TAME | Parameter.HERBIVORE, 0X655751, 0XBEA47B),
+    GASTORNIS(EntityGastornis.class, MobType.BIRD, TimePeriod.CENOZOIC, Diet.HERBIVORE, Parameter.TAME, 0X346C5E, 0XC8C8C8),
+    KELEKEN(EntityKelenken.class, MobType.BIRD, TimePeriod.CENOZOIC, Diet.CARNIVORE, Parameter.TAME, 0X392F24, 0XF2EBD5),
+    PHORUSRHACOS(EntityPhorusrhacos.class, MobType.BIRD, TimePeriod.CENOZOIC, Diet.CARNIVORE, Parameter.TAME, 0X5F4E3E, 0XD4D4D4),
+    TITIANIS(EntityTitanis.class, MobType.BIRD, TimePeriod.CENOZOIC, Diet.CARNIVORE, Parameter.TAME, 0X484848, 0XEFEFEF),;
     private float sizeBaby = 1;
     private float sizeTeen = 1;
     private float sizeAdult = 1;

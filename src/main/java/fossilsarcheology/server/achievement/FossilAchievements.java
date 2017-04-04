@@ -1,6 +1,7 @@
 package fossilsarcheology.server.achievement;
 
 import fossilsarcheology.server.block.FABlockRegistry;
+import fossilsarcheology.server.entity.prehistoric.PrehistoricEntityType;
 import fossilsarcheology.server.item.FAItemRegistry;
 import fossilsarcheology.server.item.variant.DinosaurBoneType;
 import net.minecraft.item.ItemStack;
@@ -16,6 +17,9 @@ public class FossilAchievements {
     public static final Achievement THE_KING = new Achievement("achievement.theKing", "theKing", 8, -5, new ItemStack(FAItemRegistry.SKULL, 1, 2), FIRST_DINO).registerStat().setSpecial();
     public static final Achievement TREX_KILL = new Achievement("achievement.trexKill", "trexKill", 8, -7, new ItemStack(FAItemRegistry.TOOTH_DAGGER), THE_KING).registerStat();
     public static final Achievement SQUIRE = new Achievement("achievement.squire", "squire", 7, -1, new ItemStack(FAItemRegistry.SKULL, 1, DinosaurBoneType.ALLOSAURUS.ordinal()), FIRST_DINO).registerStat();
+    public static final Achievement BIRD_EGG = new Achievement("achievement.birdEgg", "birdEgg", 4, -2, new ItemStack(PrehistoricEntityType.CONFUCIUSORNIS.bestBirdEggItem),/* CULTIVATE*/ null).registerStat();
+    public static final Achievement DEAD_DODO = new Achievement("achievement.deadDodo", "deadDodo", 4, 0, new ItemStack(FAItemRegistry.SKULL, 1, DinosaurBoneType.DODO.ordinal()), BIRD_EGG).registerStat();
+    //public static final Achievement CULTIVATE = new Achievement("achievement.cultivate", "cultivate", 2, -4, new ItemStack(FABlockRegistry.), DINO_DNA).registerStat();
 
     /*
     public static final Achievement DINO_DNA = new Achievement("achievement.dinoDna", "dinoDna", 0, -4, new ItemStack(PrehistoricEntityType.TYRANNOSAURUS.dnaItem), ANALYZER).registerStat().setSpecial();
