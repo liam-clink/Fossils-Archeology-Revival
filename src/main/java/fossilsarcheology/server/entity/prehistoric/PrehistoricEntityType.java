@@ -26,8 +26,10 @@ public enum PrehistoricEntityType {
     STURGEON(EntitySturgeon.class, MobType.FISH, TimePeriod.MESOZOIC, Diet.NONE, Parameter.NOTHING, 0X655D5B, 0XE6E3E3),
     TRICERATOPS(EntityTriceratops.class, MobType.DINOSAUR, TimePeriod.MESOZOIC, Diet.HERBIVORE, Parameter.MODEL | Parameter.TAME | Parameter.RIDE | Parameter.HERBIVORE, 0X64352D, 0X251A17, 0.8F),
     VELOCIRAPTOR(EntityVelociraptor.class, MobType.DINOSAUR, TimePeriod.MESOZOIC, Diet.CARNIVORE_EGG, Parameter.TAME| Parameter.CARNIVORE, 0X4A0D04, 0XC9C9C9, 0.5F),
-    TYRANNOSAURUS(EntityTyrannosaurus.class, MobType.DINOSAUR, TimePeriod.MESOZOIC, Diet.CARNIVORE, Parameter.MODEL | Parameter.TAME | Parameter.RIDE | Parameter.CARNIVORE, 0X9D8A74, 0X4C3116, 0.9F)
-
+    TYRANNOSAURUS(EntityTyrannosaurus.class, MobType.DINOSAUR, TimePeriod.MESOZOIC, Diet.CARNIVORE, Parameter.MODEL | Parameter.TAME | Parameter.RIDE | Parameter.CARNIVORE, 0X9D8A74, 0X4C3116, 0.9F),
+    PTEROSAUR(EntityPterosaur.class, MobType.DINOSAUR, TimePeriod.MESOZOIC, Diet.PISCIVORE, Parameter.MODEL | Parameter.TAME| Parameter.CARNIVORE, 0XD6D6D6, 0X3B3B3B, 0.4F),
+    PLESIOSAUR(EntityPlesiosaurus.class, MobType.DINOSAUR, TimePeriod.MESOZOIC, Diet.PISCIVORE, Parameter.MODEL | Parameter.TAME | Parameter.RIDE | Parameter.CARNIVORE, 0XE4A86E, 0XE17920),
+    MOSASAURUS(EntityMosasaurus.class, MobType.DINOSAUR, TimePeriod.MESOZOIC, Diet.PISCCARNIVORE, Parameter.MODEL | Parameter.CARNIVORE, 0X888D90, 0X3A4C52),
     ;
     private float sizeBaby = 1;
     private float sizeTeen = 1;
