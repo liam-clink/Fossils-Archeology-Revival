@@ -45,7 +45,7 @@ public class MessageFoodParticles extends AbstractMessage<MessageFoodParticles> 
     @Override
     @SideOnly(Side.CLIENT)
     public void onClientReceived(Minecraft client, MessageFoodParticles message, EntityPlayer player, MessageContext messageContext) {
-        Entity entity = player.worldObj.getEntityByID(message.dinosaurID);
+        Entity entity = player.world.getEntityByID(message.dinosaurID);
 
         if (entity instanceof EntityPrehistoric) {
             EntityPrehistoric prehistoric = (EntityPrehistoric) entity;
@@ -102,7 +102,7 @@ public class MessageFoodParticles extends AbstractMessage<MessageFoodParticles> 
         float f = (float) (rand.nextFloat() * (entity.getEntityBoundingBox().maxX - entity.getEntityBoundingBox().minX) + entity.getEntityBoundingBox().minX);
         float f1 = (float) (rand.nextFloat() * (entity.getEntityBoundingBox().maxY - entity.getEntityBoundingBox().minY) + entity.getEntityBoundingBox().minY);
         float f2 = (float) (rand.nextFloat() * (entity.getEntityBoundingBox().maxZ - entity.getEntityBoundingBox().minZ) + entity.getEntityBoundingBox().minZ);
-        Revival.PROXY.spawnPacketItemParticles(entity.worldObj, f, f1, f2, motionX, motionY, motionZ, item);
+        Revival.PROXY.spawnPacketItemParticles(entity.world, f, f1, f2, motionX, motionY, motionZ, item);
     }
 
     public static final void spawnBlockParticle(Entity entity, Block block) {
@@ -113,7 +113,7 @@ public class MessageFoodParticles extends AbstractMessage<MessageFoodParticles> 
         float f = (float) (rand.nextFloat() * (entity.getEntityBoundingBox().maxX - entity.getEntityBoundingBox().minX) + entity.getEntityBoundingBox().minX);
         float f1 = (float) (rand.nextFloat() * (entity.getEntityBoundingBox().maxY - entity.getEntityBoundingBox().minY) + entity.getEntityBoundingBox().minY);
         float f2 = (float) (rand.nextFloat() * (entity.getEntityBoundingBox().maxZ - entity.getEntityBoundingBox().minZ) + entity.getEntityBoundingBox().minZ);
-        Revival.PROXY.spawnPacketBlockParticles(entity.worldObj, f, f1, f2, motionX, motionY, motionZ, block);
+        Revival.PROXY.spawnPacketBlockParticles(entity.world, f, f1, f2, motionX, motionY, motionZ, block);
 
     }
 

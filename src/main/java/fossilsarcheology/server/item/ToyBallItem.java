@@ -37,7 +37,7 @@ public class ToyBallItem extends Item {
         ball.setColor(stack.getItemDamage());
         ball.setLocationAndAngles(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, 0, 0);
         if (!worldIn.isRemote)
-            worldIn.spawnEntityInWorld(ball);
+            worldIn.spawnEntity(ball);
         --stack.stackSize;
         return EnumActionResult.SUCCESS;
     }

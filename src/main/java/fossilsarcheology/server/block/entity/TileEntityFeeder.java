@@ -171,8 +171,8 @@ public class TileEntityFeeder extends TileEntity implements IInventory, ISidedIn
     }
 
     @Override
-    public boolean isUseableByPlayer(EntityPlayer player) {
-        return this.worldObj.getTileEntity(this.pos) == this && player.getDistanceSq((double) this.pos.getX() + 0.5D, (double) this.pos.getY() + 0.5D, (double) this.pos.getZ() + 0.5D) <= 64.0D;
+    public boolean isUsableByPlayer(EntityPlayer player) {
+        return this.world.getTileEntity(this.pos) == this && player.getDistanceSq((double) this.pos.getX() + 0.5D, (double) this.pos.getY() + 0.5D, (double) this.pos.getZ() + 0.5D) <= 64.0D;
     }
 
     @Override
@@ -237,7 +237,7 @@ public class TileEntityFeeder extends TileEntity implements IInventory, ISidedIn
                     feedamount++;
                 }
             }
-            FeederBlock.updateFeederBlockState(this.currentPlant > 0, this.currentMeat > 0, this.worldObj, this.pos);
+            FeederBlock.updateFeederBlockState(this.currentPlant > 0, this.currentMeat > 0, this.world, this.pos);
         }
         mob.setHunger(mob.getHunger() + feedamount);
         return feedamount;
@@ -282,12 +282,12 @@ public class TileEntityFeeder extends TileEntity implements IInventory, ISidedIn
                             if (carnivoreValue > foodLeft) {
                                 this.currentMeat = this.maxMeat;
                                 this.decrStackSize(0, 1);
-                                FeederBlock.updateFeederBlockState(this.currentPlant > 0, this.currentMeat > 0, this.worldObj, this.pos);
+                                FeederBlock.updateFeederBlockState(this.currentPlant > 0, this.currentMeat > 0, this.world, this.pos);
 
                             } else {
                                 this.currentMeat += carnivoreValue;
                                 this.decrStackSize(0, 1);
-                                FeederBlock.updateFeederBlockState(this.currentPlant > 0, this.currentMeat > 0, this.worldObj, this.pos);
+                                FeederBlock.updateFeederBlockState(this.currentPlant > 0, this.currentMeat > 0, this.world, this.pos);
                             }
                         }
                     }
@@ -302,11 +302,11 @@ public class TileEntityFeeder extends TileEntity implements IInventory, ISidedIn
                             if (herbivoreValue > foodLeft) {
                                 this.currentPlant = this.maxPlant;
                                 this.decrStackSize(1, 1);
-                                FeederBlock.updateFeederBlockState(this.currentPlant > 0, this.currentMeat > 0, this.worldObj, this.pos);
+                                FeederBlock.updateFeederBlockState(this.currentPlant > 0, this.currentMeat > 0, this.world, this.pos);
                             } else {
                                 this.currentPlant += herbivoreValue;
                                 this.decrStackSize(1, 1);
-                                FeederBlock.updateFeederBlockState(this.currentPlant > 0, this.currentMeat > 0, this.worldObj, this.pos);
+                                FeederBlock.updateFeederBlockState(this.currentPlant > 0, this.currentMeat > 0, this.world, this.pos);
                             }
                         }
                     }

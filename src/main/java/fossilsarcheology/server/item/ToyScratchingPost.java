@@ -22,7 +22,7 @@ public class ToyScratchingPost extends Item {
                 EntityToyScratchingPost ball = new EntityToyScratchingPost(worldIn);
                 ball.setLocationAndAngles(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, 0, 0);
                 if (!worldIn.isRemote)
-                    worldIn.spawnEntityInWorld(ball);
+                    worldIn.spawnEntity(ball);
                 ball.rotationYaw = playerIn.rotationYawHead;
                 if (!playerIn.capabilities.isCreativeMode)
                     --stack.stackSize;

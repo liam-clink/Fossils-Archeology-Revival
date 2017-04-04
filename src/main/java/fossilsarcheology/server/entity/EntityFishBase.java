@@ -1,6 +1,5 @@
 package fossilsarcheology.server.entity;
 
-import com.google.common.base.Predicate;
 import fossilsarcheology.Revival;
 import fossilsarcheology.server.entity.ai.FishAIWaterFindTarget;
 import fossilsarcheology.server.entity.prehistoric.EntityNautilus;
@@ -25,7 +24,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathNavigateSwimmer;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.EntitySelectors;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -114,10 +112,10 @@ public abstract class EntityFishBase extends EntityTameable {
             this.height = 1F;
         }
         Revival.PROXY.calculateChainBuffer(this);
-        if (this.isInWater() && this.getClosestMate() != null && this.getGrowingAge() == 0 && this.getClosestMate().getGrowingAge() == 0 && !this.worldObj.isRemote) {
+        if (this.isInWater() && this.getClosestMate() != null && this.getGrowingAge() == 0 && this.getClosestMate().getGrowingAge() == 0 && !this.world.isRemote) {
             this.setGrowingAge(12000);
             this.getClosestMate().setGrowingAge(12000);
-            this.worldObj.spawnEntityInWorld(new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, new ItemStack(this.selfType.eggItem)));
+            this.world.spawnEntity(new EntityItem(this.world, this.posX, this.posY, this.posZ, new ItemStack(this.selfType.eggItem)));
         }
     }
 
@@ -129,7 +127,7 @@ public abstract class EntityFishBase extends EntityTameable {
 
     public EntityFishBase getClosestMate() {
         EntityAINearestAttackableTarget.Sorter theNearestAttackableTargetSorter = new EntityAINearestAttackableTarget.Sorter(this);
-        List<EntityFishBase> list = worldObj.getEntitiesWithinAABB(EntityFishBase.class, this.getEntityBoundingBox().expand(2.0D, 2.0D, 2.0D), null);
+        List<EntityFishBase> list = world.getEntitiesWithinAABB(EntityFishBase.class, this.getEntityBoundingBox().expand(2.0D, 2.0D, 2.0D), null);
         Collections.sort(list, theNearestAttackableTargetSorter);
 
         if (list.isEmpty()) {
@@ -152,7 +150,7 @@ public abstract class EntityFishBase extends EntityTameable {
     }
 
     protected boolean isTargetInWater() {
-        return currentTarget != null && (worldObj.getBlockState(new BlockPos(currentTarget.getX(), currentTarget.getY(), currentTarget.getZ())).getMaterial() == Material.WATER && worldObj.getBlockState(new BlockPos(currentTarget.getX(), currentTarget.getY() + 1, currentTarget.getZ())).getMaterial() == Material.WATER);
+        return currentTarget != null && (world.getBlockState(new BlockPos(currentTarget.getX(), currentTarget.getY(), currentTarget.getZ())).getMaterial() == Material.WATER && world.getBlockState(new BlockPos(currentTarget.getX(), currentTarget.getY() + 1, currentTarget.getZ())).getMaterial() == Material.WATER);
     }
 
     @Override
@@ -160,7 +158,7 @@ public abstract class EntityFishBase extends EntityTameable {
 
         if (stack != null && FMLCommonHandler.instance().getSide().isClient() && stack.getItem() == FAItemRegistry.DINOPEDIA) {
             this.setPedia();
-            player.openGui(Revival.INSTANCE, 4, this.worldObj, (int) this.posX, (int) this.posY, (int) this.posZ);
+            player.openGui(Revival.INSTANCE, 4, this.world, (int) this.posX, (int) this.posY, (int) this.posZ);
             return true;
         }
         if (this.isInsideNautilusShell()) {
@@ -176,7 +174,7 @@ public abstract class EntityFishBase extends EntityTameable {
             ItemStack var3 = new ItemStack(this.selfType.fishItem, 1);
 
             if (player.inventory.addItemStackToInventory(var3)) {
-                if (!this.worldObj.isRemote) {
+                if (!this.world.isRemote) {
                     this.playSound(SoundEvents.ENTITY_ITEM_PICKUP, 1, this.getRNG().nextFloat() + 0.8F);
                     this.setDead();
                 }
@@ -193,7 +191,7 @@ public abstract class EntityFishBase extends EntityTameable {
     }
 
     public boolean getCanSpawnHere() {
-        return this.worldObj.checkNoEntityCollision(this.getEntityBoundingBox());
+        return this.world.checkNoEntityCollision(this.getEntityBoundingBox());
     }
 
     public int getTalkInterval() {
@@ -205,7 +203,7 @@ public abstract class EntityFishBase extends EntityTameable {
     }
 
     protected int getExperiencePoints(EntityPlayer player) {
-        return 1 + this.worldObj.rand.nextInt(3);
+        return 1 + this.world.rand.nextInt(3);
     }
 
     public void onEntityUpdate() {
@@ -242,7 +240,7 @@ public abstract class EntityFishBase extends EntityTameable {
     }
 
     public boolean isDirectPathBetweenPoints(Vec3d vec1, Vec3d vec2) {
-        RayTraceResult movingobjectposition = this.worldObj.rayTraceBlocks(vec1, new Vec3d(vec2.xCoord, vec2.yCoord + (double) this.height * 0.5D, vec2.zCoord), false, true, false);
+        RayTraceResult movingobjectposition = this.world.rayTraceBlocks(vec1, new Vec3d(vec2.xCoord, vec2.yCoord + (double) this.height * 0.5D, vec2.zCoord), false, true, false);
         return movingobjectposition == null || movingobjectposition.typeOfHit != RayTraceResult.Type.BLOCK;
     }
 
@@ -269,7 +267,7 @@ public abstract class EntityFishBase extends EntityTameable {
                 if (d0 > 0.0F) {
                     f4 += (0.54600006F - f4) * d0 / 3.0F;
                 }
-                this.moveEntity(this.motionX, this.motionY, this.motionZ);
+                this.move(this.motionX, this.motionY, this.motionZ);
                 this.motionX *= (double) f4;
                 this.motionX *= 0.900000011920929D;
                 this.motionY *= 0.900000011920929D;
@@ -281,7 +279,7 @@ public abstract class EntityFishBase extends EntityTameable {
                     this.onGround = false;
                 }
                 if (this.onGround) {
-                    f2 = this.worldObj.getBlockState(new BlockPos(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.getEntityBoundingBox().minY) - 1, MathHelper.floor_double(this.posZ))).getBlock().slipperiness * 0.91F;
+                    f2 = this.world.getBlockState(new BlockPos(MathHelper.floor(this.posX), MathHelper.floor(this.getEntityBoundingBox().minY) - 1, MathHelper.floor(this.posZ))).getBlock().slipperiness * 0.91F;
                 }
                 float f3 = 0.16277136F / (f2 * f2 * f2);
                 if (this.onGround) {
@@ -289,25 +287,25 @@ public abstract class EntityFishBase extends EntityTameable {
                 } else {
                     f4 = this.jumpMovementFactor;
                 }
-                this.moveEntity(strafe, forward, f4);
+                this.move(strafe, forward, f4);
                 f2 = 0.91F;
                 if (this.onGround) {
-                    f2 = this.worldObj.getBlockState(new BlockPos(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.getEntityBoundingBox().minY) - 1, MathHelper.floor_double(this.posZ))).getBlock().slipperiness * 0.91F;
+                    f2 = this.world.getBlockState(new BlockPos(MathHelper.floor(this.posX), MathHelper.floor(this.getEntityBoundingBox().minY) - 1, MathHelper.floor(this.posZ))).getBlock().slipperiness * 0.91F;
                 }
                 if (this.isOnLadder()) {
                         f5 = 0.15F;
-                        this.motionX = MathHelper.clamp_double(this.motionX, (double) (-f5), (double) f5);
-                        this.motionZ = MathHelper.clamp_double(this.motionZ, (double) (-f5), (double) f5);
+                        this.motionX = MathHelper.clamp(this.motionX, (double) (-f5), (double) f5);
+                        this.motionZ = MathHelper.clamp(this.motionZ, (double) (-f5), (double) f5);
                         this.fallDistance = 0.0F;
                         if (this.motionY < -0.15D) {
                             this.motionY = -0.15D;
                         }
                     }
-                    this.moveEntity(this.isInsideNautilusShell()? 0 : this.motionX, this.motionY, this.motionZ);
+                    this.move(this.isInsideNautilusShell()? 0 : this.motionX, this.motionY, this.motionZ);
                     if (this.isCollidedHorizontally && this.isOnLadder()) {
                         this.motionY = 0.2D;
                     }
-                    if (this.worldObj.isRemote && (!this.worldObj.isBlockLoaded(new BlockPos((int) this.posX, 0, (int) this.posZ)) || !this.worldObj.getChunkFromBlockCoords(new BlockPos((int) this.posX, 0, (int) this.posZ)).isLoaded())) {
+                    if (this.world.isRemote && (!this.world.isBlockLoaded(new BlockPos((int) this.posX, 0, (int) this.posZ)) || !this.world.getChunkFromBlockCoords(new BlockPos((int) this.posX, 0, (int) this.posZ)).isLoaded())) {
                         if (this.posY > 0.0D) {
                             this.motionY = -0.1D;
                         } else {
@@ -324,7 +322,7 @@ public abstract class EntityFishBase extends EntityTameable {
         this.prevLimbSwingAmount = this.limbSwingAmount;
         double deltaX = this.posX - this.prevPosX;
         double deltaZ = this.posZ - this.prevPosZ;
-        float delta = MathHelper.sqrt_double(deltaX * deltaX + deltaZ * deltaZ) * 4.0F;
+        float delta = MathHelper.sqrt(deltaX * deltaX + deltaZ * deltaZ) * 4.0F;
         if (delta > 1.0F) {
             delta = 1.0F;
         }
@@ -346,7 +344,7 @@ public abstract class EntityFishBase extends EntityTameable {
                 double distanceY = this.posY - this.swimmingEntity.posY;
                 double distanceZ = this.posZ - this.swimmingEntity.posZ;
                 double distance = Math.abs(distanceX * distanceX + distanceY * distanceY + distanceZ * distanceZ);
-                distance = (double) MathHelper.sqrt_double(distance);
+                distance = (double) MathHelper.sqrt(distance);
                 distanceY /= distance;
                 float angle = (float) (Math.atan2(distanceZ, distanceX) * 180.0D / Math.PI) - 90.0F;
                 this.swimmingEntity.rotationYaw = this.limitAngle(this.swimmingEntity.rotationYaw, angle, 30.0F);

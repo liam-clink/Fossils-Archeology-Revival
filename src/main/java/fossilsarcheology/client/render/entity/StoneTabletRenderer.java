@@ -69,20 +69,20 @@ public class StoneTabletRenderer extends Render<StoneTabletEntity> {
     }
 
     private void setLightmap(StoneTabletEntity entity, float centerX, float centerY) {
-        int x = MathHelper.floor_double(entity.posX);
-        int y = MathHelper.floor_double(entity.posY + (centerY / 16.0F));
-        int z = MathHelper.floor_double(entity.posZ);
+        int x = MathHelper.floor(entity.posX);
+        int y = MathHelper.floor(entity.posY + (centerY / 16.0F));
+        int z = MathHelper.floor(entity.posZ);
         EnumFacing facing = entity.facingDirection;
         if (facing == EnumFacing.NORTH) {
-            x = MathHelper.floor_double(entity.posX + (centerX / 16.0F));
+            x = MathHelper.floor(entity.posX + (centerX / 16.0F));
         } else if (facing == EnumFacing.WEST) {
-            z = MathHelper.floor_double(entity.posZ - (centerX / 16.0F));
+            z = MathHelper.floor(entity.posZ - (centerX / 16.0F));
         } else if (facing == EnumFacing.SOUTH) {
-            x = MathHelper.floor_double(entity.posX - (centerX / 16.0F));
+            x = MathHelper.floor(entity.posX - (centerX / 16.0F));
         } else if (facing == EnumFacing.EAST) {
-            z = MathHelper.floor_double(entity.posZ + (centerX / 16.0F));
+            z = MathHelper.floor(entity.posZ + (centerX / 16.0F));
         }
-        int combinedLight = this.renderManager.worldObj.getCombinedLight(new BlockPos(x, y, z), 0);
+        int combinedLight = this.renderManager.world.getCombinedLight(new BlockPos(x, y, z), 0);
         OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, combinedLight % 65536, combinedLight / 65536);
         GlStateManager.color(1.0F, 1.0F, 1.0F);
     }

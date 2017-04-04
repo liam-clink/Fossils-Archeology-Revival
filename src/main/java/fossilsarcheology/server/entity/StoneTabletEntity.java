@@ -86,7 +86,7 @@ public class StoneTabletEntity extends EntityHanging implements IEntityAdditiona
 
     @Override
     public void onBroken(Entity brokenEntity) {
-        if (this.worldObj.getGameRules().getBoolean("doEntityDrops")) {
+        if (this.world.getGameRules().getBoolean("doEntityDrops")) {
             this.playSound(SoundEvents.BLOCK_STONE_PLACE, 1.0F, 1.0F);
             if (brokenEntity instanceof EntityPlayer) {
                 EntityPlayer player = (EntityPlayer) brokenEntity;

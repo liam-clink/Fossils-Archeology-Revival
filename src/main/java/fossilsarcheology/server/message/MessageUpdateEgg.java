@@ -28,7 +28,7 @@ public class MessageUpdateEgg extends AbstractMessage<MessageUpdateEgg> {
     @Override
     @SideOnly(Side.CLIENT)
     public void onClientReceived(Minecraft client, MessageUpdateEgg message, EntityPlayer player, MessageContext messageContext) {
-        Entity entity = player.worldObj.getEntityByID(message.dinosaurID);
+        Entity entity = player.world.getEntityByID(message.dinosaurID);
 
         if (entity instanceof EntityDinosaurEgg) {
             EntityDinosaurEgg egg = (EntityDinosaurEgg) entity;

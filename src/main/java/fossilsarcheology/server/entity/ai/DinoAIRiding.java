@@ -10,9 +10,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 
-/**
- * Created by alexr_000 on 3/11/2017.
- */
 public class DinoAIRiding extends EntityAIBase {
     private static final float PLAYER_SPEED = 0.98f;
     private final double speed;

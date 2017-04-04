@@ -27,7 +27,7 @@ public class MessageRollBall extends AbstractMessage<MessageRollBall> {
     @Override
     @SideOnly(Side.CLIENT)
     public void onClientReceived(Minecraft client, MessageRollBall message, EntityPlayer player, MessageContext messageContext) {
-        Entity entity = player.worldObj.getEntityByID(message.ballID);
+        Entity entity = player.world.getEntityByID(message.ballID);
         if (entity instanceof EntityToyBall) {
             EntityToyBall ball = (EntityToyBall) entity;
             ball.rollValue = message.rollTicks;

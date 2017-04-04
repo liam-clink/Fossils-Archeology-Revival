@@ -27,7 +27,7 @@ public class MessageSetDay extends AbstractMessage<MessageSetDay> {
     @Override
     @SideOnly(Side.CLIENT)
     public void onClientReceived(Minecraft client, MessageSetDay message, EntityPlayer player, MessageContext messageContext) {
-        Entity entity = player.worldObj.getEntityByID(message.dinosaurID);
+        Entity entity = player.world.getEntityByID(message.dinosaurID);
 
         if (entity instanceof EntityPrehistoric) {
             EntityPrehistoric prehistoric = (EntityPrehistoric) entity;

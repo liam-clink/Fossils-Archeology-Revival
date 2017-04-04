@@ -39,7 +39,7 @@ public class AncientJavelinEntity extends JavelinEntity {
     public void onUpdate() {
         if (this.inGround && !this.lightning) {
             if (this.rand.nextInt(100) < 30) {
-                this.worldObj.addWeatherEffect(new EntityLightningBolt(this.worldObj, this.posX, this.posY, this.posZ, false));
+                this.world.addWeatherEffect(new EntityLightningBolt(this.world, this.posX, this.posY, this.posZ, false));
             }
             this.lightning = true;
         }

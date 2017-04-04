@@ -28,7 +28,7 @@ public class DinoAIHunt<T extends EntityLivingBase> extends EntityAINearestAttac
                         return false;
                     }
                     if (targetEntity instanceof EntityPlayer) {
-                        if(taskOwner.worldObj.getDifficulty() == EnumDifficulty.PEACEFUL){
+                        if(taskOwner.world.getDifficulty() == EnumDifficulty.PEACEFUL){
                             return false;
                         }
                         if(prehistoric.getMood() < 0 && prehistoric.getMoodFace() != PrehistoricMoodType.CALM){

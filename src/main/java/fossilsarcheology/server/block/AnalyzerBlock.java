@@ -148,7 +148,7 @@ public class AnalyzerBlock extends BlockContainer implements DefaultRenderedItem
                             entity.motionX = world.rand.nextGaussian() * offset;
                             entity.motionY = world.rand.nextGaussian() * offset + 0.2F;
                             entity.motionZ = world.rand.nextGaussian() * offset;
-                            world.spawnEntityInWorld(entity);
+                            world.spawnEntity(entity);
                         }
                     }
                 }

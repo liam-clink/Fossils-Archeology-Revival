@@ -1,29 +1,24 @@
 package fossilsarcheology.server.entity.monster;
 
-import net.minecraft.block.SoundType;
+import fossilsarcheology.server.block.FABlockRegistry;
+import fossilsarcheology.server.item.FAItemRegistry;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.pathfinding.PathNavigateClimber;
-import net.minecraft.stats.AchievementList;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-import fossilsarcheology.server.block.FABlockRegistry;
-import fossilsarcheology.server.item.FAItemRegistry;
 
 public class EntityFailuresaurus extends EntityMob {
 
@@ -53,7 +48,7 @@ public class EntityFailuresaurus extends EntityMob {
         super.entityInit();
         this.dataManager.register(CLIMBING, Byte.valueOf((byte)0));
         this.dataManager.register(VARIANT, 0);
-        this.setSkin(this.worldObj.rand.nextInt(3));
+        this.setSkin(this.world.rand.nextInt(3));
     }
 
     protected void applyEntityAttributes() {
@@ -76,7 +71,7 @@ public class EntityFailuresaurus extends EntityMob {
     public void onUpdate() {
         super.onUpdate();
 
-        if (!this.worldObj.isRemote) {
+        if (!this.world.isRemote) {
             this.setBesideClimbableBlock(this.isCollidedHorizontally);
         }
     }
@@ -132,11 +127,11 @@ public class EntityFailuresaurus extends EntityMob {
     public void onLivingUpdate() {
         super.onLivingUpdate();
         for (int l = 0; l < 4; ++l) {
-            int i = MathHelper.floor_double(this.posX + (double) ((float) (l % 2 * 2 - 1) * 0.25F));
-            int j = MathHelper.floor_double(this.posY);
-            int k = MathHelper.floor_double(this.posZ + (double) ((float) (l / 2 % 2 * 2 - 1) * 0.25F));
-            if (this.worldObj.getBlockState(new BlockPos(i, j, k)).getMaterial() == Material.AIR && FABlockRegistry.SLIME_TRAIL.canPlaceBlockAt(this.worldObj, new BlockPos(i, j, k))) {
-                this.worldObj.setBlockState(new BlockPos(i, j, k), FABlockRegistry.SLIME_TRAIL.getDefaultState());
+            int i = MathHelper.floor(this.posX + (double) ((float) (l % 2 * 2 - 1) * 0.25F));
+            int j = MathHelper.floor(this.posY);
+            int k = MathHelper.floor(this.posZ + (double) ((float) (l / 2 % 2 * 2 - 1) * 0.25F));
+            if (this.world.getBlockState(new BlockPos(i, j, k)).getMaterial() == Material.AIR && FABlockRegistry.SLIME_TRAIL.canPlaceBlockAt(this.world, new BlockPos(i, j, k))) {
+                this.world.setBlockState(new BlockPos(i, j, k), FABlockRegistry.SLIME_TRAIL.getDefaultState());
             }
         }
     }

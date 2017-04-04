@@ -138,7 +138,7 @@ public class AnalyzerBlockEntity extends TileEntity implements IInventory, ISide
 
     @Override
     public void update() {
-        for (EntityPlayer player : this.worldObj.playerEntities) {
+        for (EntityPlayer player : this.world.playerEntities) {
             if (this.getDistanceSq(player.posX, player.posY, player.posZ) < 40) {
                 for (int slot = 12; slot > 8; --slot) {
                     ItemStack stack = this.slots[slot];
@@ -155,7 +155,7 @@ public class AnalyzerBlockEntity extends TileEntity implements IInventory, ISide
         if (this.analyzeFuelTime > 0) {
             --this.analyzeFuelTime;
         }
-        if (!this.worldObj.isRemote) {
+        if (!this.world.isRemote) {
             if (this.analyzeFuelTime == 0 && this.canAnalyze()) {
                 this.currentFuelTime = this.analyzeFuelTime = 100;
                 dirty = true;
@@ -172,7 +172,7 @@ public class AnalyzerBlockEntity extends TileEntity implements IInventory, ISide
             }
             if (fueled != this.analyzeFuelTime > 0) {
                 dirty = true;
-                AnalyzerBlock.setState(this.analyzeFuelTime > 0, this.worldObj, this.pos);
+                AnalyzerBlock.setState(this.analyzeFuelTime > 0, this.world, this.pos);
             }
         }
         if (dirty) {
@@ -208,7 +208,7 @@ public class AnalyzerBlockEntity extends TileEntity implements IInventory, ISide
     public void analyzeItem() {
         if (this.canAnalyze()) {
             ItemStack output = null;
-            Random random = this.worldObj.rand;
+            Random random = this.world.rand;
             int rand = random.nextInt(100);
             Item rawItem = this.slots[this.rawIndex].getItem();
             if (rawItem instanceof DinosaurBoneItem) {
@@ -378,8 +378,8 @@ public class AnalyzerBlockEntity extends TileEntity implements IInventory, ISide
     }
 
     @Override
-    public boolean isUseableByPlayer(EntityPlayer player) {
-        return this.worldObj.getTileEntity(this.pos) == this && player.getDistanceSq(this.pos.getX() + 0.5D, this.pos.getY() + 0.5D, this.pos.getZ() + 0.5D) <= 64.0D;
+    public boolean isUsableByPlayer(EntityPlayer player) {
+        return this.world.getTileEntity(this.pos) == this && player.getDistanceSq(this.pos.getX() + 0.5D, this.pos.getY() + 0.5D, this.pos.getZ() + 0.5D) <= 64.0D;
     }
 
     @Override

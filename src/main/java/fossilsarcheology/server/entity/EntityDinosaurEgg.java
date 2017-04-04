@@ -135,12 +135,12 @@ public class EntityDinosaurEgg extends EntityLiving implements IEntityAdditional
 
     private void tickHatching() {
         float brightness = this.getBrightness(1.0F);
-        EntityPlayer player = this.worldObj.getClosestPlayerToEntity(this, 16.0D);
+        EntityPlayer player = this.world.getClosestPlayerToEntity(this, 16.0D);
         if ((double) brightness >= 0.5D && !this.inWater) {
             lastBirthTick = this.getBirthTick();
             this.setBirthTick(this.getBirthTick() + 1);
         } else {
-            Biome biome = this.worldObj.getBiome(new BlockPos(this));
+            Biome biome = this.world.getBiome(new BlockPos(this));
             float temperature = biome.getTemperature();
             if ((temperature <= 0.15F && brightness < 0.5) || this.inWater) {
                 this.setBirthTick(this.getBirthTick() - 1);
@@ -148,7 +148,7 @@ public class EntityDinosaurEgg extends EntityLiving implements IEntityAdditional
         }
         if (this.getBirthTick() >= this.totalHatchTime) {
 
-            Entity entity = this.selfType.invokeClass(this.worldObj);
+            Entity entity = this.selfType.invokeClass(this.world);
             if (entity != null) {
                 if (entity instanceof EntityPrehistoric) {
                     if (player != null) {
@@ -178,15 +178,15 @@ public class EntityDinosaurEgg extends EntityLiving implements IEntityAdditional
                     float f = (float) (getRNG().nextFloat() * (this.getEntityBoundingBox().maxX - this.getEntityBoundingBox().minX) + this.getEntityBoundingBox().minX);
                     float f1 = (float) (getRNG().nextFloat() * (this.getEntityBoundingBox().maxY - this.getEntityBoundingBox().minY) + this.getEntityBoundingBox().minY);
                     float f2 = (float) (getRNG().nextFloat() * (this.getEntityBoundingBox().maxZ - this.getEntityBoundingBox().minZ) + this.getEntityBoundingBox().minZ);
-                    this.worldObj.spawnParticle(EnumParticleTypes.ITEM_CRACK, this.posX + ((double)this.rand.nextFloat() - 0.5D) * (double)this.width, this.getEntityBoundingBox().minY + 0.1D, this.posZ + ((double)this.rand.nextFloat() - 0.5D) * (double)this.width, 4.0D * ((double)this.rand.nextFloat() - 0.5D), 0.5D, ((double)this.rand.nextFloat() - 0.5D) * 4.0D, new int[] {Item.getIdFromItem(this.selfType.eggItem)});
+                    this.world.spawnParticle(EnumParticleTypes.ITEM_CRACK, this.posX + ((double)this.rand.nextFloat() - 0.5D) * (double)this.width, this.getEntityBoundingBox().minY + 0.1D, this.posZ + ((double)this.rand.nextFloat() - 0.5D) * (double)this.width, 4.0D * ((double)this.rand.nextFloat() - 0.5D), 0.5D, ((double)this.rand.nextFloat() - 0.5D) * 4.0D, new int[] {Item.getIdFromItem(this.selfType.eggItem)});
                 }
-                entity.setLocationAndAngles((double) ((int) Math.floor(this.posX)), (double) ((int) Math.floor(this.posY) + 1), (double) ((int) Math.floor(this.posZ)), this.worldObj.rand.nextFloat() * 360.0F, 0.0F);
-                if (this.worldObj.isRemote) {
+                entity.setLocationAndAngles((double) ((int) Math.floor(this.posX)), (double) ((int) Math.floor(this.posY) + 1), (double) ((int) Math.floor(this.posZ)), this.world.rand.nextFloat() * 360.0F, 0.0F);
+                if (this.world.isRemote) {
                     return;
                 }
-                this.worldObj.spawnEntityInWorld(entity);
+                this.world.spawnEntity(entity);
                 if (player != null) {
-                   player.addChatMessage(new TextComponentString(I18n.format("dinoegg.hatched")));
+                   player.sendStatusMessage(new TextComponentString(I18n.format("dinoegg.hatched")));
             }
                 this.setDead();
 
@@ -210,11 +210,11 @@ public class EntityDinosaurEgg extends EntityLiving implements IEntityAdditional
 
     @Override
     public boolean attackEntityFrom(DamageSource source, float damage) {
-        if (damage > 0 && !this.worldObj.isRemote) {
+        if (damage > 0 && !this.world.isRemote) {
             Item item = this.selfType.eggItem;
             ItemStack stack = new ItemStack(item, 1, 1);
-            this.worldObj.spawnEntityInWorld(new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, stack));
-            this.worldObj.playSound(null,new BlockPos(this), SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.NEUTRAL, 0.2F, ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
+            this.world.spawnEntity(new EntityItem(this.world, this.posX, this.posY, this.posZ, stack));
+            this.world.playSound(null,new BlockPos(this), SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.NEUTRAL, 0.2F, ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
             this.setDead();
         }
         return super.attackEntityFrom(source, damage);
@@ -228,14 +228,14 @@ public class EntityDinosaurEgg extends EntityLiving implements IEntityAdditional
             ItemStack eggstack = new ItemStack(item);
             if (!player.capabilities.isCreativeMode) {
                 if (player.inventory.addItemStackToInventory(eggstack)) {
-                    this.worldObj.playSound(null,new BlockPos(this), SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.NEUTRAL, 0.2F, ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
+                    this.world.playSound(null,new BlockPos(this), SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.NEUTRAL, 0.2F, ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
                 }
             }
             this.setDead();
             return true;
         } else if (FMLCommonHandler.instance().getSide().isClient() && itemstack.getItem() == FAItemRegistry.DINOPEDIA) {
             this.setPedia();
-            player.openGui(Revival.INSTANCE, 4, worldObj, (int) posX, (int) posY, (int) posZ);
+            player.openGui(Revival.INSTANCE, 4, world, (int) posX, (int) posY, (int) posZ);
             return true;
         }
         return false;

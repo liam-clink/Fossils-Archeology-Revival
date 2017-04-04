@@ -51,13 +51,13 @@ public class FeederGUI extends GuiContainer {
         short lightY = 240;
         OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float) lightX / 1.0F, (float) lightY / 1.0F);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        InventoryPlayer playerInventory = this.mc.thePlayer.inventory;
+        InventoryPlayer playerInventory = this.mc.player.inventory;
 
         if (playerInventory.getItemStack() != null) {
             GL11.glTranslatef(0.0F, 0.0F, 32.0F);
             this.zLevel = 200.0F;
             itemRender.zLevel = 200.0F;
-            itemRender.renderItemAndEffectIntoGUI(this.mc.thePlayer, playerInventory.getItemStack(), mouseX - left - 8, mouseY - top - 8);
+            itemRender.renderItemAndEffectIntoGUI(this.mc.player, playerInventory.getItemStack(), mouseX - left - 8, mouseY - top - 8);
             itemRender.renderItemOverlayIntoGUI(this.fontRendererObj, playerInventory.getItemStack(), mouseX - left - 8, mouseY - top - 8, "");
             this.zLevel = 0.0F;
             itemRender.zLevel = 0.0F;

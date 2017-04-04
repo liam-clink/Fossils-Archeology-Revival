@@ -25,7 +25,7 @@ public class DinoAIFollowOwner extends EntityAIBase {
 
     public DinoAIFollowOwner(EntityPrehistoric prehistoric, double speed, float minDist, float maxDist) {
         this.prehistoric = prehistoric;
-        this.theWorld = prehistoric.worldObj;
+        this.theWorld = prehistoric.world;
         this.speed = speed;
         this.petPathfinder = prehistoric.getNavigator();
         this.minDist = minDist;
@@ -88,9 +88,9 @@ public class DinoAIFollowOwner extends EntityAIBase {
                 if (!this.petPathfinder.tryMoveToEntityLiving(this.theOwner, this.speed)) {
                     if (!this.prehistoric.getLeashed()) {
                         if (this.prehistoric.getDistanceSqToEntity(this.theOwner) >= 144.0D) {
-                            int i = MathHelper.floor_double(this.theOwner.posX) - 2;
-                            int j = MathHelper.floor_double(this.theOwner.posZ) - 2;
-                            int k = MathHelper.floor_double(this.theOwner.getEntityBoundingBox().minY);
+                            int i = MathHelper.floor(this.theOwner.posX) - 2;
+                            int j = MathHelper.floor(this.theOwner.posZ) - 2;
+                            int k = MathHelper.floor(this.theOwner.getEntityBoundingBox().minY);
 
                             for (int l = 0; l <= 4; ++l) {
                                 for (int i1 = 0; i1 <= 4; ++i1) {

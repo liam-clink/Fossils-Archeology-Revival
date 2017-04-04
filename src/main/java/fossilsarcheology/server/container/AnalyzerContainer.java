@@ -33,6 +33,6 @@ public class AnalyzerContainer extends SyncedFieldContainer {
 
     @Override
     public boolean canInteractWith(EntityPlayer player) {
-        return this.analyzer.isUseableByPlayer(player);
+        return this.analyzer.isUsableByPlayer(player);
     }
 }

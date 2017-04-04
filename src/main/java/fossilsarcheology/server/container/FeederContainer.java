@@ -35,7 +35,7 @@ public class FeederContainer extends SyncedFieldContainer{
 
     @Override
     public boolean canInteractWith(EntityPlayer player) {
-        return this.feeder.isUseableByPlayer(player);
+        return this.feeder.isUsableByPlayer(player);
     }
 
     @Override

@@ -27,7 +27,7 @@ public class StoneTabletItem extends Item implements DefaultRenderedItem {
             if (entity.onValidSurface()) {
                 if (!world.isRemote) {
                     entity.playPlaceSound();
-                    world.spawnEntityInWorld(entity);
+                    world.spawnEntity(entity);
                 }
                 --stack.stackSize;
             }

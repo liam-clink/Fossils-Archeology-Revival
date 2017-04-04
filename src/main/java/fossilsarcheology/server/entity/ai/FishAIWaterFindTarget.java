@@ -62,7 +62,7 @@ public class FishAIWaterFindTarget extends EntityAIBase {
         } else {
             BlockPos blockpos1;
             blockpos1 = new BlockPos(this.mob.getAttackTarget());
-            if (this.mob.worldObj.getBlockState(blockpos1).getMaterial() == Material.WATER) {
+            if (this.mob.world.getBlockState(blockpos1).getMaterial() == Material.WATER) {
                 return new Vec3d((double) blockpos1.getX(), (double) blockpos1.getY(), (double) blockpos1.getZ());
             }
         }

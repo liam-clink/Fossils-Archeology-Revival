@@ -29,7 +29,7 @@ public class MessageHappyParticles extends AbstractMessage<MessageHappyParticles
     @Override
     @SideOnly(Side.CLIENT)
     public void onClientReceived(Minecraft client, MessageHappyParticles message, EntityPlayer player, MessageContext messageContext) {
-        Entity entity = player.worldObj.getEntityByID(message.dinosaurID);
+        Entity entity = player.world.getEntityByID(message.dinosaurID);
 
         if (entity instanceof EntityPrehistoric) {
             EntityPrehistoric prehistoric = (EntityPrehistoric) entity;
@@ -45,7 +45,7 @@ public class MessageHappyParticles extends AbstractMessage<MessageHappyParticles
         float f = (float) (rand.nextFloat() * (entity.getEntityBoundingBox().maxX - entity.getEntityBoundingBox().minX) + entity.getEntityBoundingBox().minX);
         float f1 = (float) (rand.nextFloat() * (entity.getEntityBoundingBox().maxY - entity.getEntityBoundingBox().minY) + entity.getEntityBoundingBox().minY);
         float f2 = (float) (rand.nextFloat() * (entity.getEntityBoundingBox().maxZ - entity.getEntityBoundingBox().minZ) + entity.getEntityBoundingBox().minZ);
-        Revival.PROXY.spawnPacketHeartParticles(entity.worldObj, f, f1, f2, motionX, motionY, motionZ);
+        Revival.PROXY.spawnPacketHeartParticles(entity.world, f, f1, f2, motionX, motionY, motionZ);
 
     }
 
