@@ -40,7 +40,7 @@ public class EntityMammoth extends EntityPrehistoric implements IShearable {
     private static final DataParameter<Boolean> SHEARED = EntityDataManager.<Boolean>createKey(EntityMammoth.class, DataSerializers.BOOLEAN);
 
     public EntityMammoth(World world) {
-        super(world, PrehistoricEntityType.Mammoth, 2, 12, 10, 66, 0.2, 0.3);
+        super(world, PrehistoricEntityType.MAMMOTH, 2, 12, 10, 66, 0.2, 0.3);
         this.tasks.addTask(1, new EntityAISwimming(this));
         this.tasks.addTask(2, this.aiSit);
         this.tasks.addTask(3, new DinoAIRiding(this, 1.0F));

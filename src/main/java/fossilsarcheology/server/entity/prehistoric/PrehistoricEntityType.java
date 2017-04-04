@@ -51,10 +51,10 @@ public enum PrehistoricEntityType {
     KELEKEN(EntityKelenken.class, MobType.BIRD, TimePeriod.CENOZOIC, Diet.CARNIVORE, Parameter.TAME, 0X392F24, 0XF2EBD5),
     PHORUSRHACOS(EntityPhorusrhacos.class, MobType.BIRD, TimePeriod.CENOZOIC, Diet.CARNIVORE, Parameter.TAME, 0X5F4E3E, 0XD4D4D4),
     TITIANIS(EntityTitanis.class, MobType.BIRD, TimePeriod.CENOZOIC, Diet.CARNIVORE, Parameter.TAME, 0X484848, 0XEFEFEF),
-    Mammoth(EntityMammoth.class, MobType.MAMMAL, TimePeriod.CENOZOIC, Diet.HERBIVORE, Parameter.TAME | Parameter.RIDE | Parameter.HERBIVORE, 0X3D2E19, 0X24170B),
-    Smilodon(EntitySmilodon.class, MobType.MAMMAL, TimePeriod.CENOZOIC, Diet.CARNIVORE, Parameter.TAME | Parameter.CARNIVORE, 0XB88C64, 0XECDFCE),
-    Quagga(EntityQuagga.class, MobType.MAMMAL, TimePeriod.CENOZOIC, Diet.HERBIVORE, Parameter.TAME | Parameter.RIDE | Parameter.HERBIVORE, 0X763C24, 0XD3B9AB),
-    Elasmotherium(EntityElasmotherium.class, MobType.MAMMAL, TimePeriod.CENOZOIC, Diet.HERBIVORE, Parameter.TAME | Parameter.RIDE | Parameter.HERBIVORE, 0X6B321B, 0X666666);
+    MAMMOTH(EntityMammoth.class, MobType.MAMMAL, TimePeriod.CENOZOIC, Diet.HERBIVORE, Parameter.TAME | Parameter.RIDE | Parameter.HERBIVORE, 0X3D2E19, 0X24170B),
+    SMILODON(EntitySmilodon.class, MobType.MAMMAL, TimePeriod.CENOZOIC, Diet.CARNIVORE, Parameter.TAME | Parameter.CARNIVORE, 0XB88C64, 0XECDFCE),
+    QUAGGA(EntityQuagga.class, MobType.MAMMAL, TimePeriod.CENOZOIC, Diet.HERBIVORE, Parameter.TAME | Parameter.RIDE | Parameter.HERBIVORE, 0X763C24, 0XD3B9AB),
+    ELASMOTHERIUM(EntityElasmotherium.class, MobType.MAMMAL, TimePeriod.CENOZOIC, Diet.HERBIVORE, Parameter.TAME | Parameter.RIDE | Parameter.HERBIVORE, 0X6B321B, 0X666666);
     private float sizeBaby = 1;
     private float sizeTeen = 1;
     private float sizeAdult = 1;
