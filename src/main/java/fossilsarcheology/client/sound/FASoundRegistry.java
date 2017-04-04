@@ -69,8 +69,10 @@ public class FASoundRegistry {
 
     public static final SoundEvent MOSASAURUS_DEATH = create("mosasaurus_death");
     public static final SoundEvent MOSASAURUS_HURT = create("mosasaurus_hurt");
+
     public static final SoundEvent MOSASAURUS_LIVING = create("mosasaurus_living");
     public static final SoundEvent MOSASAURUS_ATTACK = create("mosasaurus_attack");
+
     public static final SoundEvent MOSASAURUS_LIVING_INSIDE = create("mosasaurus_living_inside");
     public static final SoundEvent MOSASAURUS_LIVING_OUTSIDE = create("mosasaurus_living_outside");
 
@@ -87,6 +89,10 @@ public class FASoundRegistry {
     public static final SoundEvent PTEROSAUR_DEATH = create("pterosaur_death");
     public static final SoundEvent PTEROSAUR_HURT = create("pterosaur_hurt");
     public static final SoundEvent PTEROSAUR_LIVING = create("pterosaur_living");
+
+    public static final SoundEvent PARASAUROLOPHUS_DEATH = create("parasaurolophus_death");
+    public static final SoundEvent PARASAUROLOPHUS_HURT = create("parasaurolophus_hurt");
+    public static final SoundEvent PARASAUROLOPHUS_LIVING = create("parasaurolophus_living");
 
     public static final SoundEvent SARCOSUCHUS_DEATH = create("sarcosuchus_death");
     public static final SoundEvent SARCOSUCHUS_HURT = create("sarcosuchus_hurt");
@@ -114,6 +120,10 @@ public class FASoundRegistry {
     public static final SoundEvent TRICERATOPS_HURT = create("triceratops_hurt");
     public static final SoundEvent TRICERATOPS_DEATH = create("triceratops_death");
     public static final SoundEvent TRICERATOPS_LIVING = create("triceratops_living");
+
+    public static final SoundEvent THERIZINOSAURUS_HURT = create("therizinosaurus_hurt");
+    public static final SoundEvent THERIZINOSAURUS_DEATH = create("therizinosaurus_death");
+    public static final SoundEvent THERIZINOSAURUS_LIVING = create("therizinosaurus_living");
 
     public static final SoundEvent CERATOSAURUS_HURT = create("ceratosaurus_hurt");
     public static final SoundEvent CERATOSAURUS_DEATH = create("ceratosaurus_death");
