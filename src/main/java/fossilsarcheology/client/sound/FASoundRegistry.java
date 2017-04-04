@@ -45,6 +45,10 @@ public class FASoundRegistry {
     public static final SoundEvent DODO_HURT = create("dodo_hurt");
     public static final SoundEvent DODO_LIVING = create("dodo_living");
 
+    public static final SoundEvent DRYOSAURUS_DEATH = create("dryosaurus_death");
+    public static final SoundEvent DRYOSAURUS_HURT = create("dryosaurus_hurt");
+    public static final SoundEvent DRYOSAURUS_LIVING = create("dryosaurus_living");
+
     public static final SoundEvent ELASMOTHERIUM_DEATH = create("elasmotherium_death");
     public static final SoundEvent ELASMOTHERIUM_HURT = create("elasmotherium_hurt");
     public static final SoundEvent ELASMOTHERIUM_LIVING = create("elasmotherium_living");

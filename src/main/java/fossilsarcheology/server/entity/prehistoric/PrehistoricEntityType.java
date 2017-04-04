@@ -40,6 +40,9 @@ public enum PrehistoricEntityType {
     GALLIMIMUS(EntityGallimimus.class, MobType.DINOSAUR, TimePeriod.MESOZOIC, Diet.OMNIVORE, Parameter.MODEL | Parameter.TAME | Parameter.RIDE | Parameter.HERB_CARN, 0X66412B, 0X5E2518, 0.5F),
     LIOPLEURODON(EntityLiopleurodon.class, MobType.DINOSAUR, TimePeriod.MESOZOIC, Diet.PISCCARNIVORE, Parameter.MODEL | Parameter.CARNIVORE, 0XBFC7C2, 0X1D211E),
     ALLOSAURUS(EntityAllosaurus.class, MobType.DINOSAUR, TimePeriod.MESOZOIC, Diet.CARNIVORE, Parameter.MODEL | Parameter.TAME | Parameter.RIDE | Parameter.CARNIVORE, 0X907B6C, 0X5F422D, 0.8F),
+    SARCOSUCHUS(EntitySarcosuchus.class, MobType.DINOSAUR, TimePeriod.MESOZOIC, Diet.PISCCARNIVORE, Parameter.TAME | Parameter.CARNIVORE, 0X4B4929, 0X8D8C65, 0.7F),
+    CERATOSAURUS(EntityCeratosaurus.class, MobType.DINOSAUR, TimePeriod.MESOZOIC, Diet.CARNIVORE, Parameter.MODEL | Parameter.TAME | Parameter.RIDE | Parameter.CARNIVORE, 0XB4B4A7, 0X776446, 0.6F),
+    DRYOSAURUS(EntityDryosaurus.class, MobType.DINOSAUR, TimePeriod.MESOZOIC, Diet.HERBIVORE, Parameter.MODEL | Parameter.TAME | Parameter.HERBIVORE, 0X704C26, 0XC5C09A, 0.6F),
     ;
     private float sizeBaby = 1;
     private float sizeTeen = 1;
