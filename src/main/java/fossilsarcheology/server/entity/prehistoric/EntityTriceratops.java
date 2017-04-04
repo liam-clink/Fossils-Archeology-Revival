@@ -2,6 +2,7 @@ package fossilsarcheology.server.entity.prehistoric;
 
 import com.google.common.base.Predicate;
 import fossilsarcheology.Revival;
+import fossilsarcheology.client.sound.FASoundRegistry;
 import fossilsarcheology.server.entity.ai.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -15,6 +16,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
@@ -192,6 +194,21 @@ public class EntityTriceratops extends EntityPrehistoric {
 
     public int getMaxHunger() {
         return 175;
+    }
+
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return FASoundRegistry.TRICERATOPS_LIVING;
+    }
+
+    @Override
+    protected SoundEvent getHurtSound() {
+        return FASoundRegistry.TRICERATOPS_HURT;
+    }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return FASoundRegistry.TRICERATOPS_DEATH;
     }
 
     @Override

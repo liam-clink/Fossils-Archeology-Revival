@@ -1,7 +1,6 @@
 package fossilsarcheology.server.entity.ai;
 
 import fossilsarcheology.server.entity.prehistoric.EntityPrehistoric;
-import fossilsarcheology.server.entity.prehistoric.EntityPrehistoricSwimming;
 import fossilsarcheology.server.util.FoodMappings;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -97,12 +96,8 @@ public class DinoAIEatBlocks extends EntityAIBase {
                     resetTask();
                     return;
                 } else {
-                    if (this.prehistoric.isAquatic()) {
-                        ((EntityPrehistoricSwimming) prehistoric).currentTarget = this.targetBlock;
-                    } else {
-                        if (prehistoric.getNavigator().noPath()) {
-                            this.prehistoric.getNavigator().tryMoveToXYZ(this.targetBlock.getX(), this.targetBlock.getY(), this.targetBlock.getZ(), 1D);
-                        }
+                    if (prehistoric.getNavigator().noPath()) {
+                        this.prehistoric.getNavigator().tryMoveToXYZ(this.targetBlock.getX() + 0.5D, this.targetBlock.getY(), this.targetBlock.getZ() + 0.5D, 1D);
                     }
                 }
             }

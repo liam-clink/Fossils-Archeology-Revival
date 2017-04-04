@@ -11,7 +11,11 @@ public class FossilAchievements {
     public static final Achievement ANALYZER = new Achievement("achievement.analyzer", "analyzer", 0, -2, new ItemStack(FABlockRegistry.ANALYZER_ACTIVE), FIRST_FOSSIL).registerStat();
     public static final Achievement TABLET = new Achievement("achievement.tablet", "tablet", -2, -2, new ItemStack(FAItemRegistry.STONE_TABLET), ANALYZER).registerStat();
     public static final Achievement FIRST_DINO = new Achievement("achievement.firstDino", "firstDino", 6, -4, new ItemStack(FAItemRegistry.SKULL, 1, 0), null).registerStat().setSpecial();
-/*
+
+    public static final Achievement THE_KING = new Achievement("achievement.theKing", "theKing", 8, -5, new ItemStack(FAItemRegistry.SKULL, 1, 2), FIRST_DINO).registerStat().setSpecial();
+    public static final Achievement TREX_KILL = new Achievement("achievement.trexKill", "trexKill", 8, -7, new ItemStack(FAItemRegistry.TOOTH_DAGGER), THE_KING).registerStat();
+
+    /*
     public static final Achievement DINO_DNA = new Achievement("achievement.dinoDna", "dinoDna", 0, -4, new ItemStack(PrehistoricEntityType.TYRANNOSAURUS.dnaItem), ANALYZER).registerStat().setSpecial();
     public static final Achievement CULTIVATE = new Achievement("achievement.cultivate", "cultivate", 2, -4, new ItemStack(FABlockRegistry.CULTIVATE_ACTIVE), DINO_DNA).registerStat();
     public static final Achievement DINO_EGG = new Achievement("achievement.dinoEgg", "dinoEgg", 4, -4, new ItemStack(PrehistoricEntityType.TYRANNOSAURUS.eggItem), CULTIVATE).registerStat();
@@ -38,7 +42,6 @@ public class FossilAchievements {
     public static final Achievement WTF = new Achievement("achievement.inTreasure", "inTreasure", 4, 7, new ItemStack(Blocks.stonebrick), KEY).registerStat();
     public static final Achievement CLOCK = new Achievement("achievement.clock", "clock", 6, 7, new ItemStack(FAItemRegistry.ancientClock), WTF).registerStat();
     public static final Achievement FIRST_DINO = new Achievement("achievement.firstDino", "firstDino", 6, -4, new ItemStack(FAItemRegistry.skull, 1, 0), DINO_EGG).registerStat().setSpecial();
-    public static final Achievement THE_KING = new Achievement("achievement.theKing", "theKing", 8, -5, new ItemStack(FAItemRegistry.skull, 1, 2), FIRST_DINO).registerStat().setSpecial();
     public static final Achievement USURPER = new Achievement("achievement.usurper", "usurper", 8, -3, new ItemStack(FAItemRegistry.skull, 1, DinosaurBoneType.Spinosaurus.ordinal()), FIRST_DINO).registerStat().setSpecial();
     public static final Achievement SQUIRE = new Achievement("achievement.squire", "squire", 7, -1, new ItemStack(FAItemRegistry.skull, 1, DinosaurBoneType.Allosaurus.ordinal()), FIRST_DINO).registerStat();
     public static final Achievement SHEAR = new Achievement("achievement.shear", "shear", 6, -6, new ItemStack(Blocks.wool, 1, 12), MAMMAL_EMBRYO).registerStat();

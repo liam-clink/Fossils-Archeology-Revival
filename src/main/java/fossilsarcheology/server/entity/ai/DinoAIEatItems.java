@@ -1,12 +1,10 @@
 package fossilsarcheology.server.entity.ai;
 
 import fossilsarcheology.server.entity.prehistoric.EntityPrehistoric;
-import fossilsarcheology.server.entity.prehistoric.EntityPrehistoricSwimming;
 import fossilsarcheology.server.util.FoodMappings;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.util.math.BlockPos;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -66,12 +64,7 @@ public class DinoAIEatItems extends EntityAIBase {
     public void updateTask() {
         double distance = Math.sqrt(Math.pow(this.prehistoric.posX - this.targetItem.posX, 2.0D) + Math.pow(this.prehistoric.posZ - this.targetItem.posZ, 2.0D));
         if (distance < 16) {
-            if(this.prehistoric.isAquatic()){
-                ((EntityPrehistoricSwimming)prehistoric).currentTarget = new BlockPos((int)this.targetItem.posX, (int)this.targetItem.posY, (int) this.targetItem.posZ);
-            }else{
                 this.prehistoric.getNavigator().tryMoveToXYZ(this.targetItem.posX, this.targetItem.posY, this.targetItem.posZ, 1D);
-            }
-
             if (distance < 2.5D) {
                 if (this.targetItem != null) {
                     this.prehistoric.eatItem(this.targetItem.getEntityItem());

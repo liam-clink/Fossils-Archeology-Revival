@@ -3,7 +3,6 @@ package fossilsarcheology.server.entity.ai;
 import fossilsarcheology.server.block.FeederBlock;
 import fossilsarcheology.server.block.entity.TileEntityFeeder;
 import fossilsarcheology.server.entity.prehistoric.EntityPrehistoric;
-import fossilsarcheology.server.entity.prehistoric.EntityPrehistoricSwimming;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.util.math.BlockPos;
@@ -105,12 +104,8 @@ public class DinoAIEatFeeders extends EntityAIBase {
                     }
                     return;
                 } else {
-                    if (this.prehistoric.isAquatic()) {
-                        ((EntityPrehistoricSwimming) prehistoric).currentTarget = this.targetBlock;
-                    } else {
-                        if (prehistoric.getNavigator().noPath()) {
-                            this.prehistoric.getNavigator().tryMoveToXYZ(this.targetBlock.getX() + 0.5D, this.targetBlock.getY(), this.targetBlock.getZ() + 0.5D, 1D);
-                        }
+                    if (prehistoric.getNavigator().noPath()) {
+                        this.prehistoric.getNavigator().tryMoveToXYZ(this.targetBlock.getX() + 0.5D, this.targetBlock.getY(), this.targetBlock.getZ() + 0.5D, 1D);
                     }
                 }
             }

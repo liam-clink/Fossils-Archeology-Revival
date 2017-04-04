@@ -29,6 +29,8 @@ public class FAItemRegistry {
     public static final BasicItem POTTERY_SHARD = new BasicItem("pottery_shard");
 
     public static final BasicItem PLANT_FOSSIL = new BasicItem("plant_fossil");
+    public static final BasicItem SKULL_STICK = new BasicItem("skull_stick");
+    public static final BasicItem TOOTH_DAGGER = new BasicItem("tooth_dagger");//TODO
 
     public static final StoneTabletItem STONE_TABLET = new StoneTabletItem();
     public static final WhipItem WHIP = new WhipItem();
