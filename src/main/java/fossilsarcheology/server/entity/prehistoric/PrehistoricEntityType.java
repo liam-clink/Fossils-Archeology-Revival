@@ -30,6 +30,9 @@ public enum PrehistoricEntityType {
     PTEROSAUR(EntityPterosaur.class, MobType.DINOSAUR, TimePeriod.MESOZOIC, Diet.PISCIVORE, Parameter.MODEL | Parameter.TAME| Parameter.CARNIVORE, 0XD6D6D6, 0X3B3B3B, 0.4F),
     PLESIOSAUR(EntityPlesiosaurus.class, MobType.DINOSAUR, TimePeriod.MESOZOIC, Diet.PISCIVORE, Parameter.MODEL | Parameter.TAME | Parameter.RIDE | Parameter.CARNIVORE, 0XE4A86E, 0XE17920),
     MOSASAURUS(EntityMosasaurus.class, MobType.DINOSAUR, TimePeriod.MESOZOIC, Diet.PISCCARNIVORE, Parameter.MODEL | Parameter.CARNIVORE, 0X888D90, 0X3A4C52),
+    STEGOSAURUS(EntityStegosaurus.class, MobType.DINOSAUR, TimePeriod.MESOZOIC, Diet.HERBIVORE, Parameter.MODEL | Parameter.TAME | Parameter.HERBIVORE, 0X9C8138, 0X651817, 0.7F),
+    DILOPHOSAURUS(EntityDilophosaurus.class, MobType.DINOSAUR, TimePeriod.MESOZOIC, Diet.CARNIVORE, Parameter.TAME | Parameter.CARNIVORE, 0X4E5931, 0XF25314, 0.5F),
+    BRACHIOSAURUS(EntityBrachiosaurus.class, MobType.DINOSAUR, TimePeriod.MESOZOIC, Diet.HERBIVORE, Parameter.MODEL | Parameter.TAME | Parameter.RIDE | Parameter.HERBIVORE, 0X52523E, 0X222114),
     ;
     private float sizeBaby = 1;
     private float sizeTeen = 1;
