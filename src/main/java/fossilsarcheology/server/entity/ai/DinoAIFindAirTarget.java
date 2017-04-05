@@ -25,7 +25,7 @@ public class DinoAIFindAirTarget extends EntityAIBase {
         if (!prehistoric.isAdult()) {
             return false;
         }
-        if (prehistoric.isDirectPathBetweenPoints(new Vec3d(prehistoric.getPosition().getX(), prehistoric.getPosition().getY(), prehistoric.getPosition().getZ()), new Vec3d(target.getX(), target.getY(), target.getZ()))) {
+        if (target!= null && !prehistoric.isDirectPathBetweenPoints(new Vec3d(prehistoric.getPosition().getX(), prehistoric.getPosition().getY(), prehistoric.getPosition().getZ()), new Vec3d(target.getX(), target.getY(), target.getZ()))) {
             prehistoric.currentTarget = null;
         }
 

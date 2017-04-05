@@ -34,6 +34,7 @@ public enum PrehistoricEntityType {
     DILOPHOSAURUS(EntityDilophosaurus.class, MobType.DINOSAUR, TimePeriod.MESOZOIC, Diet.CARNIVORE, Parameter.TAME | Parameter.CARNIVORE, 0X4E5931, 0XF25314, 0.5F),
     BRACHIOSAURUS(EntityBrachiosaurus.class, MobType.DINOSAUR, TimePeriod.MESOZOIC, Diet.HERBIVORE, Parameter.MODEL | Parameter.TAME | Parameter.RIDE | Parameter.HERBIVORE, 0X52523E, 0X222114),
     SPINOSAURUS(EntitySpinosaurus.class, MobType.DINOSAUR, TimePeriod.MESOZOIC, Diet.PISCCARNIVORE, Parameter.MODEL | Parameter.CARNIVORE, 0X84512A, 0X562F20, 0.8F),
+    COMPSOGNATHUS(EntityCompsognathus.class, MobType.DINOSAUR, TimePeriod.MESOZOIC, Diet.CARNIVORE, Parameter.MODEL | Parameter.TAME | Parameter.CARNIVORE, 0XCBC7C4, 0X3A312C, 0.2F),
     ANKYLOSAURUS(EntityAnkylosaurus.class, MobType.DINOSAUR, TimePeriod.MESOZOIC, Diet.HERBIVORE, Parameter.MODEL | Parameter.TAME | Parameter.RIDE | Parameter.HERBIVORE, 0X8A5B49, 0X211B13, 0.7F),
     PACHYCEPHALOSAURUS(EntityPachycephalosaurus.class, MobType.DINOSAUR, TimePeriod.MESOZOIC, Diet.HERBIVORE, Parameter.TAME | Parameter.HERBIVORE, 0XB6A989, 0X7D5E3A, 0.6F),
     DEINONYCHUS(EntityDeinonychus.class, MobType.DINOSAUR, TimePeriod.MESOZOIC, Diet.CARNIVORE_EGG, Parameter.MODEL | Parameter.TAME | Parameter.CARNIVORE, 0X2B2424, 0XC8C8C8, 0.6F),

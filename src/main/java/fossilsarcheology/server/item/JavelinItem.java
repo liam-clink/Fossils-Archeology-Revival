@@ -81,7 +81,7 @@ public class JavelinItem extends Item implements DefaultRenderedItem {
                 javelin.pickupStatus = EntityArrow.PickupStatus.ALLOWED;
             }
             if (!world.isRemote) {
-                world.spawnEntityInWorld(javelin);
+                world.spawnEntity(javelin);
             }
         }
     }

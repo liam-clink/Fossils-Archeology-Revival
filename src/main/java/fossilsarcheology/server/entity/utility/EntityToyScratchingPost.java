@@ -33,18 +33,18 @@ public class EntityToyScratchingPost extends EntityToyBase {
         this.motionX *= 0;
         this.motionZ *= 0;
         if (!isOnBlock()) {
-            if (!this.worldObj.isRemote)
-                this.worldObj.spawnEntityInWorld(new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, this.getItem()));
+            if (!this.world.isRemote)
+                this.world.spawnEntity(new EntityItem(this.world, this.posX, this.posY, this.posZ, this.getItem()));
             this.setDead();
             this.playSound(getAttackNoise(), 1, 1);
         }
     }
 
     public boolean isOnBlock() {
-        int blockX = MathHelper.floor_double(this.posX);
-        int blockY = MathHelper.floor_double(this.posY) - 1;
-        int blockZ = MathHelper.floor_double(this.posZ);
-        return !this.worldObj.isAirBlock(new BlockPos(blockX, blockY, blockZ));
+        int blockX = MathHelper.floor(this.posX);
+        int blockY = MathHelper.floor(this.posY) - 1;
+        int blockZ = MathHelper.floor(this.posZ);
+        return !this.world.isAirBlock(new BlockPos(blockX, blockY, blockZ));
     }
 
     public AxisAlignedBB getCollisionBox(Entity entity) {

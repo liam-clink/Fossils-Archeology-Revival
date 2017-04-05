@@ -1,25 +1,21 @@
 package fossilsarcheology.server.entity.prehistoric;
 
-import java.util.Collections;
-import java.util.List;
-
-import fossilsarcheology.server.entity.ai.FishAIWaterFindTarget;
+import fossilsarcheology.server.entity.EntityFishBase;
+import fossilsarcheology.server.item.FAItemRegistry;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
-import fossilsarcheology.Revival;
-import fossilsarcheology.server.entity.EntityFishBase;
-import fossilsarcheology.server.item.FAItemRegistry;
+
+import java.util.Collections;
+import java.util.List;
 
 public class EntityNautilus extends EntityFishBase {
 
@@ -54,13 +50,13 @@ public class EntityNautilus extends EntityFishBase {
 
     public void setInShell(boolean inShell) {
         this.dataManager.set(ISINSHELL, inShell);
-        if (!worldObj.isRemote) {
+        if (!world.isRemote) {
             this.isInShell = inShell;
         }
     }
 
     public boolean isInShell() {
-        if (worldObj.isRemote) {
+        if (world.isRemote) {
             boolean isSleeping = this.dataManager.get(ISINSHELL);
             this.isInShell = isSleeping;
             return isSleeping;
@@ -80,7 +76,7 @@ public class EntityNautilus extends EntityFishBase {
         if (ticksToShell > 0) {
             ticksToShell--;
         }
-        if (!this.worldObj.isRemote) {
+        if (!this.world.isRemote) {
             if (isThereNearbyMobs() && this.ticksToShell == 0 || !this.isInWater() && this.onGround && this.ticksToShell == 0) {
                 if (!this.isInShell()) {
                     this.setInShell(true);
@@ -103,7 +99,7 @@ public class EntityNautilus extends EntityFishBase {
     public boolean isThereNearbyMobs() {
         Entity targetEntity;
         EntityAINearestAttackableTarget.Sorter theNearestAttackableTargetSorter = new EntityAINearestAttackableTarget.Sorter(this);
-        List<EntityLivingBase> list = worldObj.getEntitiesWithinAABB(EntityLivingBase.class, this.getEntityBoundingBox().expand(2.0D, 2.0D, 2.0D), null);
+        List<EntityLivingBase> list = world.getEntitiesWithinAABB(EntityLivingBase.class, this.getEntityBoundingBox().expand(2.0D, 2.0D, 2.0D), null);
         Collections.sort(list, theNearestAttackableTargetSorter);
 
         if (list.isEmpty()) {

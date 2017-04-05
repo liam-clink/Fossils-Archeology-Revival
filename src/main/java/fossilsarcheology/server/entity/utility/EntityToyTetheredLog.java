@@ -37,18 +37,18 @@ public class EntityToyTetheredLog extends EntityToyBase implements IAnimatedEnti
 	this.motionY *= 0;
 	this.motionZ *= 0;
 	if (!isAttachedToBlock()) {
-	    if (!this.worldObj.isRemote)
-		this.worldObj.spawnEntityInWorld(new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, this.getItem()));
+	    if (!this.world.isRemote)
+		this.world.spawnEntity(new EntityItem(this.world, this.posX, this.posY, this.posZ, this.getItem()));
 	    this.setDead();
 	    this.playSound(getAttackNoise(), 1, 1);
 	}
     }
 
     public boolean isAttachedToBlock() {
-	int blockX = MathHelper.floor_double(this.posX);
-	int blockY = MathHelper.floor_double(this.posY) + 2;
-	int blockZ = MathHelper.floor_double(this.posZ);
-	return !this.worldObj.isAirBlock(new BlockPos(blockX, blockY, blockZ));
+	int blockX = MathHelper.floor(this.posX);
+	int blockY = MathHelper.floor(this.posY) + 2;
+	int blockZ = MathHelper.floor(this.posZ);
+	return !this.world.isAirBlock(new BlockPos(blockX, blockY, blockZ));
     }
 
     public AxisAlignedBB getCollisionBox(Entity entity) {
@@ -68,7 +68,7 @@ public class EntityToyTetheredLog extends EntityToyBase implements IAnimatedEnti
     public boolean attackEntityFrom(DamageSource dmg, float f) {
 	if (dmg.getEntity() != null)
 	    this.rotationYaw = dmg.getEntity().rotationYaw;
-	if (this.getAnimation() == NO_ANIMATION && !worldObj.isRemote) {
+	if (this.getAnimation() == NO_ANIMATION && !world.isRemote) {
 	    this.setAnimation(KNOCKBACK_ANIMATION);
 	}
 	return super.attackEntityFrom(dmg, f);

@@ -85,8 +85,8 @@ public class EntityToyBall extends EntityToyBase {
         if (dmg.getEntity() != null) {
             if (dmg.getEntity() instanceof EntityPlayer) {
                 this.playSound(getAttackNoise(), 1, this.getSoundPitch());
-                if (!this.worldObj.isRemote)
-                    this.worldObj.spawnEntityInWorld(new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, this.getItem()));
+                if (!this.world.isRemote)
+                    this.world.spawnEntity(new EntityItem(this.world, this.posX, this.posY, this.posZ, this.getItem()));
                 this.setDead();
                 return true;
             }

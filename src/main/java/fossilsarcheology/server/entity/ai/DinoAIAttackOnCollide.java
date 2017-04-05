@@ -22,7 +22,7 @@ public class DinoAIAttackOnCollide extends EntityAIBase {
 
     public DinoAIAttackOnCollide(EntityPrehistoric entityNewPrehistoric, double speed, boolean par4) {
         this.dino = entityNewPrehistoric;
-        this.worldObj = entityNewPrehistoric.worldObj;
+        this.worldObj = entityNewPrehistoric.world;
         this.speed = speed;
         this.field_75437_f = par4;
         this.setMutexBits(3);
@@ -40,7 +40,7 @@ public class DinoAIAttackOnCollide extends EntityAIBase {
             return false;
         } else if (this.classTarget != null && !this.classTarget.isAssignableFrom(entitylivingbase.getClass())) {
             return false;
-        } else if (dino.worldObj.getDifficulty() == EnumDifficulty.PEACEFUL && entitylivingbase instanceof EntityPlayer) {
+        } else if (dino.world.getDifficulty() == EnumDifficulty.PEACEFUL && entitylivingbase instanceof EntityPlayer) {
             return false;
         } else {
             this.entityPathEntity = this.dino.getNavigator().getPathToEntityLiving(entitylivingbase);

@@ -27,6 +27,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAISit;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
@@ -89,7 +90,7 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
     private Animation currentAnimation;
     private int animTick;
     @SideOnly(Side.CLIENT)
-    private ChainBuffer chainBuffer;
+    public ChainBuffer chainBuffer;
     public float pediaScale;
     public boolean mood_nospace;
     public boolean mood_noplants;
@@ -122,6 +123,7 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
 
     public EntityPrehistoric(World world, PrehistoricEntityType type, double baseDamage, double maxDamage, double baseHealth, double maxHealth, double baseSpeed, double maxSpeed) {
         super(world);
+        this.aiSit = new EntityAISit(this);
         this.setHunger(this.getMaxHunger() / 2);
         this.setScale(this.getAgeScale());
         SPEAK_ANIMATION = Animation.create(this.getSpeakLength());
@@ -168,6 +170,7 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
         this.dataManager.register(SUBSPECIES, 0);
         this.dataManager.register(GENDER, 0);
         this.dataManager.register(SLEEPING, false);
+        this.dataManager.register(CLIMBING, (byte)0);
         this.dataManager.register(MOOD, 0);
         this.dataManager.register(SITTING, false);
         this.dataManager.register(OWNERDISPLAYNAME, "");
@@ -207,7 +210,7 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.30000001192092896D);
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20);
-        this.getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_SPEED);
+        this.getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1D);
     }
 
