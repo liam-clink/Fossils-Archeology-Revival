@@ -84,4 +84,7 @@ public class ServerProxy implements IGuiHandler {
 
     public void spawnBubbleParticles(World world, float f, float f1, float f2, double motionX, double motionY, double motionZ) {
     }
+
+    public void spawnAnuParticle(World world, double posX, double posY, double posZ) {
+    }
 }
