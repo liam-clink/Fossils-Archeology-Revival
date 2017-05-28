@@ -2,7 +2,6 @@ package fossilsarcheology.server.block;
 
 import fossilsarcheology.Revival;
 import fossilsarcheology.server.dimension.AnuTeleporter;
-import fossilsarcheology.server.tab.FATabRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -30,7 +29,6 @@ public class AnuPortalBlock extends Block {
         this.setHardness(60000000.0F);
         this.setSoundType(SoundType.GROUND);
         this.setUnlocalizedName("anu_portal");
-        this.setCreativeTab(FATabRegistry.BLOCKS);
     }
 
     @Override
