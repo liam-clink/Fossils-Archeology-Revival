@@ -15,6 +15,7 @@ import fossilsarcheology.server.item.FAItemRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
@@ -86,5 +87,11 @@ public class ServerProxy implements IGuiHandler {
     }
 
     public void spawnAnuParticle(World world, double posX, double posY, double posZ) {
+    }
+
+    public void playSound(SoundEvent sound) {
+    }
+
+    public void stopSound(SoundEvent sound) {
     }
 }

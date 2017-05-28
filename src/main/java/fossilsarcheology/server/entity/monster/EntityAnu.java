@@ -1,34 +1,34 @@
 package fossilsarcheology.server.entity.monster;
 
 import fossilsarcheology.Revival;
-import fossilsarcheology.server.entity.EntityAnuLightning;
-import fossilsarcheology.server.entity.FossilPlayerProperites;
+import fossilsarcheology.client.sound.FASoundRegistry;
+import fossilsarcheology.server.achievement.FossilAchievements;
 import fossilsarcheology.server.entity.ai.AnuAIAttackOnCollide;
 import fossilsarcheology.server.entity.ai.AnuAIAvoidEntity;
 import fossilsarcheology.server.entity.ai.AnuAIFireballAttack;
-import fossilsarcheology.server.entity.monster.EntitySentryPigman;
 import fossilsarcheology.server.entity.utility.EntityAnuDead;
-import fossilsarcheology.server.gen.feature.SpikesBlockWorldGen;
-import fossilsarcheology.server.handler.FossilAchievementHandler;
 import fossilsarcheology.server.item.FAItemRegistry;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
-import net.minecraft.entity.boss.IBossDisplayData;
-import net.minecraft.entity.monster.EntityBlaze;
-import net.minecraft.entity.monster.EntityGhast;
-import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.monster.EntitySkeleton;
+import net.minecraft.entity.monster.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.entity.projectile.EntityLargeFireball;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -45,12 +45,11 @@ public class EntityAnu extends EntityMob implements IRangedAttackMob {
     private AnuAIAvoidEntity aiFear = new AnuAIAvoidEntity(this, EntityPlayer.class, 5.0F, 0.8D, 1.33D);
     private AnuAIAttackOnCollide aiAttackOnCollide = new AnuAIAttackOnCollide(this, EntityPlayer.class, 1.2D, false);
     private AnuAIFireballAttack aiFireballAttack = new AnuAIFireballAttack(this, 1.0D, 10, 20, 15.0F);
-    private ChunkCoordinates currentTarget;
+    private BlockPos currentTarget;
 
     public EntityAnu(World world) {
         super(world);
         this.setSize(1F, 1.8F);
-        this.getNavigator().setBreakDoors(true);
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(5, new EntityAIWander(this, 1.0D));
         this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityLivingBase.class, 8.0F));
@@ -60,7 +59,7 @@ public class EntityAnu extends EntityMob implements IRangedAttackMob {
         this.tasks.addTask(5, aiFireballAttack);
         this.tasks.addTask(5, aiAttackOnCollide);
         this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
         this.isImmuneToFire = true;
         this.experienceValue = 50;
     }
@@ -70,44 +69,43 @@ public class EntityAnu extends EntityMob implements IRangedAttackMob {
     }
 
     @Override
-    public boolean isAIEnabled() {
-        return true;
+    public boolean isAIDisabled() {
+        return false;
     }
 
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(40.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(600D);
-        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.35D);
+        this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(40.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(600D);
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.35D);
     }
 
     @Override
-    protected String getLivingSound() {
+    protected SoundEvent getAmbientSound() {
         if (this.getAttackMode() == 0) {
-            return "fossil:anu_living_healthy";
-        } else if (this.getAttackMode() == 1) {
-            return "fossil:anu_living_middle";
+            return FASoundRegistry.ANU_LIVING_HEALTH;
+        } else{
+            return FASoundRegistry.ANU_LIVING_MIDDLE;
         }
-        return "fossil:anu_living_middle";
     }
 
     @Override
-    protected String getHurtSound() {
-        return "random.break";
+    protected SoundEvent getHurtSound() {
+        return SoundEvents.ENTITY_ITEM_BREAK;
     }
 
     @Override
-    protected String getDeathSound() {
-        return "mob.irongolem.death";
+    protected SoundEvent getDeathSound() {
+        return SoundEvents.ENTITY_IRONGOLEM_DEATH;
     }
 
     @Override
     public boolean attackEntityFrom(DamageSource damageSource, float var2) {
         Entity targetEntity = damageSource.getEntity();
 
-        AxisAlignedBB chatDistance = this.boundingBox.expand(30.0D, 30.0D, 30.0D);
-        List playerList = this.worldObj.getEntitiesWithinAABB(EntityPlayer.class, chatDistance);
+        AxisAlignedBB chatDistance = this.getEntityBoundingBox().expand(30.0D, 30.0D, 30.0D);
+        List playerList = this.world.getEntitiesWithinAABB(EntityPlayer.class, chatDistance);
 
         if (targetEntity instanceof EntityGhast) {
             return false;
@@ -120,27 +118,27 @@ public class EntityAnu extends EntityMob implements IRangedAttackMob {
 
                         if (itemstack != null) {
                             if (itemstack.getItem() != null) {
-                                if (itemstack.getItem() == FAItemRegistry.INSTANCE.ancientSword) {
+                                if (itemstack.getItem() == FAItemRegistry.ANCIENT_SWORD) {
 
-                                    if (!this.worldObj.isRemote) {
-                                        ((EntityPlayer) targetEntity).addChatMessage(new ChatComponentText(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.mySword")));
+                                    if (!this.world.isRemote) {
+                                        ((EntityPlayer) targetEntity).sendStatusMessage(new TextComponentString(I18n.format("entity.fossil.PigBoss.name") + ": " + I18n.format("anuSpeaker.mySword")));
                                     }
 
                                     return super.attackEntityFrom(damageSource, var2);
                                 }
 
-                                if (itemstack.getItem() != FAItemRegistry.INSTANCE.ancientSword && itemstack.getItem() instanceof ItemSword) {
+                                if (itemstack.getItem() != FAItemRegistry.ANCIENT_SWORD && itemstack.getItem() instanceof ItemSword) {
 
-                                    if (!this.worldObj.isRemote) {
-                                        ((EntityPlayer) targetEntity).addChatMessage(new ChatComponentText(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.draw")));
+                                    if (!this.world.isRemote) {
+                                        ((EntityPlayer) targetEntity).sendStatusMessage(new TextComponentString(I18n.format("entity.fossil.PigBoss.name") + ": " + I18n.format("anuSpeaker.draw")));
                                     }
 
                                     return super.attackEntityFrom(damageSource, var2);
                                 }
 
                                 if (damageSource.damageType.equals("arrow")) {
-                                    if (!this.worldObj.isRemote) {
-                                        ((EntityPlayer) targetEntity).addChatMessage(new ChatComponentText(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.coward")));
+                                    if (!this.world.isRemote) {
+                                        ((EntityPlayer) targetEntity).sendStatusMessage(new TextComponentString(I18n.format("entity.fossil.PigBoss.name") + ": " + I18n.format("anuSpeaker.coward")));
                                     }
 
                                     return super.attackEntityFrom(damageSource, var2);
@@ -167,18 +165,17 @@ public class EntityAnu extends EntityMob implements IRangedAttackMob {
         super.updateAITasks();
     }
 
-    @Override
     protected Entity findPlayerToAttack() {
-        EntityPlayer entityplayer = this.worldObj.getClosestVulnerablePlayerToEntity(this, 16.0D);
+        EntityPlayer entityplayer = this.world.getClosestPlayerToEntity(this, 16.0D);
 
         if (entityplayer != null && this.canEntityBeSeen(entityplayer)) {
             if (this.getRNG().nextInt(1) == 0) {
-                entityplayer.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.hello")));
+                entityplayer.sendStatusMessage(new TextComponentString(I18n.format("entity.fossil.PigBoss.name") + ": " + I18n.format("anuSpeaker.hello")));
             } else {
-                entityplayer.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.fewBeaten")));
+                entityplayer.sendStatusMessage(new TextComponentString(I18n.format("entity.fossil.PigBoss.name") + ": " + I18n.format("anuSpeaker.fewBeaten")));
             }
 
-            super.findPlayerToAttack();
+           // super.findPlayerToAttack();
             return entityplayer;
         }
 
@@ -195,57 +192,43 @@ public class EntityAnu extends EntityMob implements IRangedAttackMob {
             double d1 = entityplayer.posZ - this.posZ;
 
             if (d0 * d0 + d1 * d1 >= 2500.0D) {
-                entityplayer.triggerAchievement(FossilAchievementHandler.anuDead);
+                entityplayer.addStat(FossilAchievements.ANU_DEAD);
             }
         }
-        EntityAnuDead entity = new EntityAnuDead(this.worldObj);
-        if (!this.worldObj.isRemote) {
+        EntityAnuDead entity = new EntityAnuDead(this.world);
+        if (!this.world.isRemote) {
             entity.setLocationAndAngles(this.posX + this.getRNG().nextInt(4), this.posY, this.posZ + this.getRNG().nextInt(4), this.rotationYaw, this.rotationPitch);
-            this.worldObj.spawnEntityInWorld(entity);
+            this.world.spawnEntity(entity);
         }
         entity.setHealth(0F);
-        EntityPlayer player = this.worldObj.getClosestPlayerToEntity(this, 50);
+        EntityPlayer player = this.world.getClosestPlayerToEntity(this, 50);
         if (player != null) {
-            player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.no")));
+            player.sendStatusMessage(new TextComponentString(I18n.format("entity.fossil.PigBoss.name") + ": " + I18n.format("anuSpeaker.no")));
         }
         super.onDeath(dmg);
     }
 
-    /**
-     * Called when the mob is falling. Calculates and applies fall damage.
-     */
-    @Override
-    protected void fall(float i) {
-    }
-
-    /**
-     * Takes in the distance the entity has fallen this tick and whether its on
-     * the ground to update the fall distance and deal fall damage if landing on
-     * the ground. Args: distanceFallenThisTick, onGround
-     */
-    @Override
-    protected void updateFallState(double x, boolean y) {
+    public void fall(float distance, float damageMultiplier) {
     }
 
     @Override
     public boolean attackEntityAsMob(Entity entity) {
         if (this.getRNG().nextInt(4) == 0) {
-            this.worldObj.addWeatherEffect(new EntityAnuLightning(this.worldObj, entity.posX, entity.posY, entity.posZ));
+            this.world.addWeatherEffect(new EntityAnuLightning(this.world, entity.posX, entity.posY, entity.posZ));
         }
         return super.attackEntityAsMob(entity);
     }
 
     public void spawnMobs(EntityLiving entity) {
-        if (!this.worldObj.isRemote) {
+        if (!this.world.isRemote) {
             entity.setLocationAndAngles(this.posX + this.getRNG().nextInt(4), this.posY, this.posZ + this.getRNG().nextInt(4), this.rotationYaw, this.rotationPitch);
-            this.worldObj.spawnEntityInWorld(entity);
+            this.world.spawnEntity(entity);
             if (entity instanceof EntitySkeleton) {
-                ((EntitySkeleton) entity).setSkeletonType(1);
-                entity.setCurrentItemOrArmor(0, new ItemStack(Items.bow));
-
+                ((EntitySkeleton) entity).setSkeletonType(SkeletonType.WITHER);
+                this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(Items.BOW));
             }
             if (entity instanceof EntitySentryPigman) {
-                entity.setCurrentItemOrArmor(0, new ItemStack(Items.iron_sword));
+                this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(Items.IRON_SWORD));
             }
 
         }
@@ -253,7 +236,7 @@ public class EntityAnu extends EntityMob implements IRangedAttackMob {
 
     @Override
     protected void dropFewItems(boolean par1, int par2) {
-        this.dropItem(FAItemRegistry.INSTANCE.ancientKey, 1);
+        this.dropItem(FAItemRegistry.ANCIENT_KEY, 1);
     }
 
     @Override
@@ -265,14 +248,14 @@ public class EntityAnu extends EntityMob implements IRangedAttackMob {
             songCounter = 0;
         }
         if (songCounter == 1) {
-            Revival.PROXY.playSound("fossil:music.anu");
+            Revival.PROXY.playSound(FASoundRegistry.MUSIC_ANU);
         }
         if (this.isDead) {
-            Revival.PROXY.stopSound("fossil:music.anu");
+            Revival.PROXY.stopSound(FASoundRegistry.MUSIC_ANU);
         }
         if (this.attackingPlayer != null) {
             if (this.attackingPlayer.isDead) {
-                Revival.PROXY.stopSound("fossil:music.anu");
+                Revival.PROXY.stopSound(FASoundRegistry.MUSIC_ANU);
             }
         }
         super.onLivingUpdate();
@@ -280,14 +263,13 @@ public class EntityAnu extends EntityMob implements IRangedAttackMob {
             this.motionY *= 0.6D;
         }
         if (this.getAttackMode() == 1) {
-            if (!worldObj.isRemote) {
+            if (!world.isRemote) {
                 setFlying(true);
                 if (!this.checkGround()) {
                     flyAround();
-                } else {
                 }
-                if (getEntityToAttack() != null) {
-                    currentTarget = new ChunkCoordinates((int) getEntityToAttack().posX + rand.nextInt(20) - rand.nextInt(10), (int) ((int) getEntityToAttack().posY + getEntityToAttack().getEyeHeight()) + rand.nextInt(20) - rand.nextInt(10), (int) getEntityToAttack().posZ + rand.nextInt(40) - rand.nextInt(10));
+                if (getAttackTarget() != null) {
+                    currentTarget = new BlockPos((int) getAttackTarget().posX + rand.nextInt(20) - rand.nextInt(10), (int) ((int) getAttackTarget().posY + getAttackTarget().getEyeHeight()) + rand.nextInt(20) - rand.nextInt(10), (int) getAttackTarget().posZ + rand.nextInt(40) - rand.nextInt(10));
                     setFlying(false);
                     flyTowardsTarget();
                 }
@@ -303,12 +285,12 @@ public class EntityAnu extends EntityMob implements IRangedAttackMob {
         if (this.getAttackMode() == 1) {
 
             for (int i = 0; i < 2; ++i) {
-                this.worldObj.spawnParticle("smoke", this.posX + (this.rand.nextDouble() - 0.5D) * (double) this.width, this.posY + this.rand.nextDouble() * (double) this.height, this.posZ + (this.rand.nextDouble() - 0.5D) * (double) this.width, 0.0D, 0.0D, 0.0D);
+                this.world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, this.posX + (this.rand.nextDouble() - 0.5D) * (double) this.width, this.posY + this.rand.nextDouble() * (double) this.height, this.posZ + (this.rand.nextDouble() - 0.5D) * (double) this.width, 0.0D, 0.0D, 0.0D, new int[0]);
             }
         }
         if (this.getAttackMode() == 2) {
             for (int i = 0; i < 2; ++i) {
-                this.worldObj.spawnParticle("dripLava", this.posX + (this.rand.nextDouble() - 0.5D) * (double) this.width, this.posY + this.rand.nextDouble() * (double) this.height, this.posZ + (this.rand.nextDouble() - 0.5D) * (double) this.width, 0.0D, 0.0D, 0.0D);
+                this.world.spawnParticle(EnumParticleTypes.DRIP_LAVA, this.posX + (this.rand.nextDouble() - 0.5D) * (double) this.width, this.posY + this.rand.nextDouble() * (double) this.height, this.posZ + (this.rand.nextDouble() - 0.5D) * (double) this.width, 0.0D, 0.0D, 0.0D, new int[0]);
             }
         }
         if (this.getAttackMode() == 2) {
@@ -319,12 +301,12 @@ public class EntityAnu extends EntityMob implements IRangedAttackMob {
             int spawnBlazeChoice = this.getRNG().nextInt(300);
 
             if (spikechoice == 0) {
-                this.playSound("dig.stone", 1, 1);
-                new SpikesBlockWorldGen().generate(worldObj, this.getRNG(), (int) this.posX, (int) this.posY, (int) this.posZ);
+                this.playSound(SoundEvents.BLOCK_STONE_HIT, 1, 1);
+                new SpikesBlockWorldGen().generate(world, this.getRNG(), (int) this.posX, (int) this.posY, (int) this.posZ);
             }
             if (defensechoice == 0) {
-                this.playSound("dig.stone", 1, 1);
-                if (!worldObj.isRemote) {
+                this.playSound(SoundEvents.BLOCK_STONE_HIT, 1, 1);
+                if (!world.isRemote) {
                     this.generateDefenseHutP1((int) this.posX, (int) this.posY, (int) this.posZ);
                     this.generateDefenseHutP2((int) this.posX, (int) this.posY, (int) this.posZ);
                     this.generateDefenseHutP2((int) this.posX, (int) this.posY + 1, (int) this.posZ);
@@ -333,23 +315,23 @@ public class EntityAnu extends EntityMob implements IRangedAttackMob {
                 }
             }
             if (spawnPigmenChoice == 0) {
-                EntityPlayer player = this.worldObj.getClosestPlayerToEntity(this, 50);
+                EntityPlayer player = this.world.getClosestPlayerToEntity(this, 50);
                 if (player != null) {
                     player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.trans")));
                 }
 
-                this.spawnMobs(new EntitySentryPigman(worldObj));
+                this.spawnMobs(new EntitySentryPigman(world));
             }
             if (spawnWitherChoice == 0) {
-                this.spawnMobs(new EntitySkeleton(worldObj));
-                EntityPlayer player = this.worldObj.getClosestPlayerToEntity(this, 50);
+                this.spawnMobs(new EntitySkeleton(world));
+                EntityPlayer player = this.world.getClosestPlayerToEntity(this, 50);
                 if (player != null) {
                     player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.archers")));
                 }
             }
             if (spawnBlazeChoice == 0) {
-                this.spawnMobs(new EntityBlaze(worldObj));
-                EntityPlayer player = this.worldObj.getClosestPlayerToEntity(this, 50);
+                this.spawnMobs(new EntityBlaze(world));
+                EntityPlayer player = this.world.getClosestPlayerToEntity(this, 50);
                 if (player != null) {
                     player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.blaze")));
                 }
@@ -375,7 +357,7 @@ public class EntityAnu extends EntityMob implements IRangedAttackMob {
 
     public void flyAround() {
         if (currentTarget != null) {
-            if (!worldObj.isAirBlock(currentTarget.posX, currentTarget.posY, currentTarget.posZ) || currentTarget.posY < 1) {
+            if (!world.isAirBlock(currentTarget.posX, currentTarget.posY, currentTarget.posZ) || currentTarget.posY < 1) {
                 currentTarget = null;
             }
         }
@@ -388,59 +370,59 @@ public class EntityAnu extends EntityMob implements IRangedAttackMob {
     }
 
     private void generateDefenseHutP2(int x, int y, int z) {
-        this.worldObj.setBlock(x - 3, y, z, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x - 3, y, z + 1, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x - 3, y, z + 2, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x - 3, y, z - 1, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x - 3, y, z - 2, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x + 3, y, z, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x + 3, y, z + 1, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x + 3, y, z + 2, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x + 3, y, z - 1, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x + 3, y, z - 2, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x, y, z + 3, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x + 1, y, z + 3, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x + 2, y, z + 3, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x - 1, y, z + 3, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x - 2, y, z + 3, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x, y, z - 3, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x + 1, y, z - 3, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x + 2, y, z - 3, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x - 1, y, z - 3, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x - 2, y, z - 3, Blocks.obsidian.setHardness(3));
+        this.world.setBlock(x - 3, y, z, Blocks.obsidian.setHardness(3));
+        this.world.setBlock(x - 3, y, z + 1, Blocks.obsidian.setHardness(3));
+        this.world.setBlock(x - 3, y, z + 2, Blocks.obsidian.setHardness(3));
+        this.world.setBlock(x - 3, y, z - 1, Blocks.obsidian.setHardness(3));
+        this.world.setBlock(x - 3, y, z - 2, Blocks.obsidian.setHardness(3));
+        this.world.setBlock(x + 3, y, z, Blocks.obsidian.setHardness(3));
+        this.world.setBlock(x + 3, y, z + 1, Blocks.obsidian.setHardness(3));
+        this.world.setBlock(x + 3, y, z + 2, Blocks.obsidian.setHardness(3));
+        this.world.setBlock(x + 3, y, z - 1, Blocks.obsidian.setHardness(3));
+        this.world.setBlock(x + 3, y, z - 2, Blocks.obsidian.setHardness(3));
+        this.world.setBlock(x, y, z + 3, Blocks.obsidian.setHardness(3));
+        this.world.setBlock(x + 1, y, z + 3, Blocks.obsidian.setHardness(3));
+        this.world.setBlock(x + 2, y, z + 3, Blocks.obsidian.setHardness(3));
+        this.world.setBlock(x - 1, y, z + 3, Blocks.obsidian.setHardness(3));
+        this.world.setBlock(x - 2, y, z + 3, Blocks.obsidian.setHardness(3));
+        this.world.setBlock(x, y, z - 3, Blocks.obsidian.setHardness(3));
+        this.world.setBlock(x + 1, y, z - 3, Blocks.obsidian.setHardness(3));
+        this.world.setBlock(x + 2, y, z - 3, Blocks.obsidian.setHardness(3));
+        this.world.setBlock(x - 1, y, z - 3, Blocks.obsidian.setHardness(3));
+        this.world.setBlock(x - 2, y, z - 3, Blocks.obsidian.setHardness(3));
     }
 
     private void generateDefenseHutP1(int x, int y, int z) {
-        this.worldObj.setBlock(x, y - 1, z, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x + 1, y - 1, z, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x + 2, y - 1, z, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x - 1, y - 1, z, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x - 2, y - 1, z, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x, y - 1, z + 1, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x + 1, y - 1, z + 1, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x + 2, y - 1, z + 1, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x - 1, y - 1, z + 1, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x - 2, y - 1, z + 1, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x, y - 1, z + 2, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x + 1, y - 1, z + 2, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x + 2, y - 1, z + 2, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x - 1, y - 1, z + 2, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x - 2, y - 1, z + 2, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x, y - 1, z - 1, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x + 1, y - 1, z - 1, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x + 2, y - 1, z - 1, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x - 1, y - 1, z - 1, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x - 2, y - 1, z - 1, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x, y - 1, z - 2, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x + 1, y - 1, z - 2, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x + 2, y - 1, z - 2, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x - 1, y - 1, z - 2, Blocks.obsidian.setHardness(3));
-        this.worldObj.setBlock(x - 2, y - 1, z - 2, Blocks.obsidian.setHardness(3));
+        this.world.setBlock(x, y - 1, z, Blocks.obsidian.setHardness(3));
+        this.world.setBlock(x + 1, y - 1, z, Blocks.obsidian.setHardness(3));
+        this.world.setBlock(x + 2, y - 1, z, Blocks.obsidian.setHardness(3));
+        this.world.setBlock(x - 1, y - 1, z, Blocks.obsidian.setHardness(3));
+        this.world.setBlock(x - 2, y - 1, z, Blocks.obsidian.setHardness(3));
+        this.world.setBlock(x, y - 1, z + 1, Blocks.obsidian.setHardness(3));
+        this.world.setBlock(x + 1, y - 1, z + 1, Blocks.obsidian.setHardness(3));
+        this.world.setBlock(x + 2, y - 1, z + 1, Blocks.obsidian.setHardness(3));
+        this.world.setBlock(x - 1, y - 1, z + 1, Blocks.obsidian.setHardness(3));
+        this.world.setBlock(x - 2, y - 1, z + 1, Blocks.obsidian.setHardness(3));
+        this.world.setBlock(x, y - 1, z + 2, Blocks.obsidian.setHardness(3));
+        this.world.setBlock(x + 1, y - 1, z + 2, Blocks.obsidian.setHardness(3));
+        this.world.setBlock(x + 2, y - 1, z + 2, Blocks.obsidian.setHardness(3));
+        this.world.setBlock(x - 1, y - 1, z + 2, Blocks.obsidian.setHardness(3));
+        this.world.setBlock(x - 2, y - 1, z + 2, Blocks.obsidian.setHardness(3));
+        this.world.setBlock(x, y - 1, z - 1, Blocks.obsidian.setHardness(3));
+        this.world.setBlock(x + 1, y - 1, z - 1, Blocks.obsidian.setHardness(3));
+        this.world.setBlock(x + 2, y - 1, z - 1, Blocks.obsidian.setHardness(3));
+        this.world.setBlock(x - 1, y - 1, z - 1, Blocks.obsidian.setHardness(3));
+        this.world.setBlock(x - 2, y - 1, z - 1, Blocks.obsidian.setHardness(3));
+        this.world.setBlock(x, y - 1, z - 2, Blocks.obsidian.setHardness(3));
+        this.world.setBlock(x + 1, y - 1, z - 2, Blocks.obsidian.setHardness(3));
+        this.world.setBlock(x + 2, y - 1, z - 2, Blocks.obsidian.setHardness(3));
+        this.world.setBlock(x - 1, y - 1, z - 2, Blocks.obsidian.setHardness(3));
+        this.world.setBlock(x - 2, y - 1, z - 2, Blocks.obsidian.setHardness(3));
 
     }
 
     public boolean checkGround() {
-        return !this.onGround && this.worldObj.isAirBlock((int) this.posX, (int) this.posY - 1, (int) this.posZ);
+        return !this.onGround && this.world.isAirBlock((int) this.posX, (int) this.posY - 1, (int) this.posZ);
     }
 
     @Override
@@ -452,7 +434,7 @@ public class EntityAnu extends EntityMob implements IRangedAttackMob {
         this.setAttackMode(0);
         this.setCurrentItemOrArmor(0, new ItemStack(FAItemRegistry.INSTANCE.ancientSword));
         this.enchantEquipment();
-        EntityPlayer entityplayer = this.worldObj.getClosestPlayer(posX, posY, posZ, 100F);
+        EntityPlayer entityplayer = this.world.getClosestPlayer(posX, posY, posZ, 100F);
 
         if (entityplayer != null) {
             if (this.getRNG().nextInt(1) == 0) {
@@ -514,15 +496,15 @@ public class EntityAnu extends EntityMob implements IRangedAttackMob {
         double d5 = entity.posX - this.posX;
         double d6 = entity.boundingBox.minY + (double) (entity.height / 2.0F) - (this.posY + (double) (this.height / 2.0F));
         double d7 = entity.posZ - this.posZ;
-        this.worldObj.playAuxSFXAtEntity(null, 1008, (int) this.posX, (int) this.posY, (int) this.posZ, 0);
-        EntityLargeFireball entitylargefireball = new EntityLargeFireball(this.worldObj, this, d5, d6, d7);
+        this.world.playAuxSFXAtEntity(null, 1008, (int) this.posX, (int) this.posY, (int) this.posZ, 0);
+        EntityLargeFireball entitylargefireball = new EntityLargeFireball(this.world, this, d5, d6, d7);
         entitylargefireball.field_92057_e = 2;
         double d8 = 4.0D;
         Vec3 vec3 = this.getLook(1.0F);
         entitylargefireball.posX = this.posX + vec3.xCoord * d8;
         entitylargefireball.posY = this.posY + (double) (this.height / 2.0F) + 0.5D;
         entitylargefireball.posZ = this.posZ + vec3.zCoord * d8;
-        this.worldObj.spawnEntityInWorld(entitylargefireball);
+        this.world.spawnEntityInWorld(entitylargefireball);
     }
 
     @Override
