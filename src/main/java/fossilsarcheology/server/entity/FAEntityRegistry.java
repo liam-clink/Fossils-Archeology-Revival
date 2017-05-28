@@ -1,10 +1,7 @@
 package fossilsarcheology.server.entity;
 
 import fossilsarcheology.Revival;
-import fossilsarcheology.server.entity.monster.EntityFailuresaurus;
-import fossilsarcheology.server.entity.monster.EntityFriendlyPigZombie;
-import fossilsarcheology.server.entity.monster.EntitySentryPigman;
-import fossilsarcheology.server.entity.monster.EntityTarSlime;
+import fossilsarcheology.server.entity.monster.*;
 import fossilsarcheology.server.entity.prehistoric.*;
 import fossilsarcheology.server.entity.projectile.AncientJavelinEntity;
 import fossilsarcheology.server.entity.projectile.JavelinEntity;

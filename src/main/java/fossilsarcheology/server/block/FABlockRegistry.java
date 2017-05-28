@@ -3,6 +3,7 @@
 import fossilsarcheology.Revival;
 import fossilsarcheology.server.api.BlockEntity;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -38,6 +39,7 @@ public class FABlockRegistry {
     public static final SarraceniaFlowerBlock SARRACENIA_FLOWER = new SarraceniaFlowerBlock();
     public static final AnuPortalBlock ANU_PORTAL = new AnuPortalBlock();
     public static final AnuStatueBlock ANU_STATUE = new AnuStatueBlock();
+    public static final Block FIGURINE = new Block(Material.AIR);//TODO later
 
     public static void register() {
         try {

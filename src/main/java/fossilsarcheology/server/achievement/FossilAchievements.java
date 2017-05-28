@@ -4,6 +4,7 @@ import fossilsarcheology.server.block.FABlockRegistry;
 import fossilsarcheology.server.entity.prehistoric.PrehistoricEntityType;
 import fossilsarcheology.server.item.FAItemRegistry;
 import fossilsarcheology.server.item.variant.DinosaurBoneType;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
 import net.minecraftforge.common.AchievementPage;
@@ -20,6 +21,9 @@ public class FossilAchievements {
     public static final Achievement BIRD_EGG = new Achievement("achievement.birdEgg", "birdEgg", 4, -2, new ItemStack(PrehistoricEntityType.CONFUCIUSORNIS.bestBirdEggItem),/* CULTIVATE*/ null).registerStat();
     public static final Achievement DEAD_DODO = new Achievement("achievement.deadDodo", "deadDodo", 4, 0, new ItemStack(FAItemRegistry.SKULL, 1, DinosaurBoneType.DODO.ordinal()), BIRD_EGG).registerStat();
     //public static final Achievement CULTIVATE = new Achievement("achievement.cultivate", "cultivate", 2, -4, new ItemStack(FABlockRegistry.), DINO_DNA).registerStat();
+    public static final Achievement WTF = new Achievement("achievement.inTreasure", "inTreasure", 4, 7, new ItemStack(Blocks.STONEBRICK), null /*KEY*/).registerStat();
+    public static final Achievement ANU_TOTEM = new Achievement("achievement.findAnuTotem", "findAnuTotem", -6, 6, new ItemStack(FABlockRegistry.ANU_STATUE), null).registerStat();
+    public static final Achievement ANU_PORTAL = new Achievement("achievement.anuPortal", "anuPortal", -4, 5, new ItemStack(FABlockRegistry.ANU_PORTAL), ANU_TOTEM).registerStat();
 
     /*
     public static final Achievement DINO_DNA = new Achievement("achievement.dinoDna", "dinoDna", 0, -4, new ItemStack(PrehistoricEntityType.TYRANNOSAURUS.dnaItem), ANALYZER).registerStat().setSpecial();
