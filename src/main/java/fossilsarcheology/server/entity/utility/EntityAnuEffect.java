@@ -129,8 +129,8 @@ public class EntityAnuEffect extends EntityLiving {
      * the enderdragon.
      */
     private void createEnderPortal(int x, int y, int z) {
-        world.setBlockState(new BlockPos(x, y, z), FABlockRegistry.ANU_PORTAL);
-        world.setBlockState(new BlockPos(x, y + 1, z), FABlockRegistry.ANU_PORTAL);
+        world.setBlockState(new BlockPos(x, y, z), FABlockRegistry.ANU_PORTAL.getDefaultState());
+        world.setBlockState(new BlockPos(x, y + 1, z), FABlockRegistry.ANU_PORTAL.getDefaultState());
         world.setBlockState(new BlockPos(x, y + 2, z), Blocks.OBSIDIAN.getDefaultState());
         world.setBlockState(new BlockPos(x, y - 1, z), Blocks.OBSIDIAN.getDefaultState());
     }

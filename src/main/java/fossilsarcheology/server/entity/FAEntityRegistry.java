@@ -35,7 +35,7 @@ public class FAEntityRegistry {
         registerSpawnable(EntityTarSlime.class, "TarSlime", 16, 0X222222, 0x0B0B0B);
         registerSpawnable(EntitySentryPigman.class, "SentryPigman", 18, 15373203, 0XD0A750);
 
-        registerSpawnable(EntityAnubite.class, "Anubite", 14, 0X2E1E14, 0X601200);
+        registerSpawnable(EntityAnubite.class, "Anubite", 39, 0X2E1E14, 0X601200);
         registerSpawnable(EntityAnu.class, "PigBoss", 17, 0X0F0F0F, 0XF72D00);
 
         EntityRegistry.registerModEntity(EntityToyBall.class, "ToyBall", 103, Revival.INSTANCE, 80, 3, true);

@@ -36,6 +36,7 @@ public class FABlockRegistry {
     
     public static final DillhoffiaFlowerBlock DILLHOFFIA_FLOWER = new DillhoffiaFlowerBlock();
     public static final SarraceniaFlowerBlock SARRACENIA_FLOWER = new SarraceniaFlowerBlock();
+    public static final AnuPortalBlock ANU_PORTAL = new AnuPortalBlock();
 
     public static void register() {
         try {
