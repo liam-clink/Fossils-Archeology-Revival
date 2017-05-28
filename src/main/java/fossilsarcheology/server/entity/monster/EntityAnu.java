@@ -22,13 +22,18 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -317,7 +322,7 @@ public class EntityAnu extends EntityMob implements IRangedAttackMob {
             if (spawnPigmenChoice == 0) {
                 EntityPlayer player = this.world.getClosestPlayerToEntity(this, 50);
                 if (player != null) {
-                    player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.trans")));
+                    player.sendStatusMessage(new TextComponentString(I18n.format("entity.fossil.PigBoss.name") + ": " + I18n.format("anuSpeaker.trans")));
                 }
 
                 this.spawnMobs(new EntitySentryPigman(world));
@@ -326,14 +331,14 @@ public class EntityAnu extends EntityMob implements IRangedAttackMob {
                 this.spawnMobs(new EntitySkeleton(world));
                 EntityPlayer player = this.world.getClosestPlayerToEntity(this, 50);
                 if (player != null) {
-                    player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.archers")));
+                    player.sendStatusMessage(new TextComponentString(I18n.format("entity.fossil.PigBoss.name") + ": " + I18n.format("anuSpeaker.archers")));
                 }
             }
             if (spawnBlazeChoice == 0) {
                 this.spawnMobs(new EntityBlaze(world));
                 EntityPlayer player = this.world.getClosestPlayerToEntity(this, 50);
                 if (player != null) {
-                    player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.blaze")));
+                    player.sendStatusMessage(new TextComponentString(I18n.format("entity.fossil.PigBoss.name") + ": " + I18n.format("anuSpeaker.blaze")));
                 }
             }
         }
@@ -341,14 +346,14 @@ public class EntityAnu extends EntityMob implements IRangedAttackMob {
 
     public void flyTowardsTarget() {
         if (currentTarget != null) {
-            double targetX = currentTarget.posX + 0.5D - posX;
-            double targetY = currentTarget.posY + 1D - posY;
-            double targetZ = currentTarget.posZ + 0.5D - posZ;
+            double targetX = currentTarget.getX() + 0.5D - posX;
+            double targetY = currentTarget.getY() + 1D - posY;
+            double targetZ = currentTarget.getZ() + 0.5D - posZ;
             motionX += (Math.signum(targetX) * 0.5D - motionX) * 0.10000000149011612D;
             motionY += (Math.signum(targetY) * 0.699999988079071D - motionY) * 0.10000000149011612D;
             motionZ += (Math.signum(targetZ) * 0.5D - motionZ) * 0.10000000149011612D;
             float angle = (float) (Math.atan2(motionZ, motionX) * 180.0D / Math.PI) - 90.0F;
-            float rotation = MathHelper.wrapAngleTo180_float(angle - rotationYaw);
+            float rotation = MathHelper.wrapDegrees(angle - rotationYaw);
             moveForward = 0.5F;
             rotationYaw += rotation;
         }
@@ -357,116 +362,111 @@ public class EntityAnu extends EntityMob implements IRangedAttackMob {
 
     public void flyAround() {
         if (currentTarget != null) {
-            if (!world.isAirBlock(currentTarget.posX, currentTarget.posY, currentTarget.posZ) || currentTarget.posY < 1) {
+            if (!world.isAirBlock(new BlockPos(currentTarget.getX(), currentTarget.getY(), currentTarget.getZ())) || currentTarget.getY() < 1) {
                 currentTarget = null;
             }
         }
 
-        if (currentTarget == null || rand.nextInt(30) == 0 || currentTarget.getDistanceSquared((int) posX, (int) posY, (int) posZ) < 10F) {
-            currentTarget = new ChunkCoordinates((int) posX + rand.nextInt(20) - rand.nextInt(10), (int) posY + rand.nextInt(30) - 2, (int) posZ + rand.nextInt(20) - rand.nextInt(10));
+        if (currentTarget == null || rand.nextInt(30) == 0 || currentTarget.getDistance((int) posX, (int) posY, (int) posZ) < 10F) {
+            currentTarget = new BlockPos((int) posX + rand.nextInt(20) - rand.nextInt(10), (int) posY + rand.nextInt(30) - 2, (int) posZ + rand.nextInt(20) - rand.nextInt(10));
         }
 
         flyTowardsTarget();
     }
 
     private void generateDefenseHutP2(int x, int y, int z) {
-        this.world.setBlock(x - 3, y, z, Blocks.obsidian.setHardness(3));
-        this.world.setBlock(x - 3, y, z + 1, Blocks.obsidian.setHardness(3));
-        this.world.setBlock(x - 3, y, z + 2, Blocks.obsidian.setHardness(3));
-        this.world.setBlock(x - 3, y, z - 1, Blocks.obsidian.setHardness(3));
-        this.world.setBlock(x - 3, y, z - 2, Blocks.obsidian.setHardness(3));
-        this.world.setBlock(x + 3, y, z, Blocks.obsidian.setHardness(3));
-        this.world.setBlock(x + 3, y, z + 1, Blocks.obsidian.setHardness(3));
-        this.world.setBlock(x + 3, y, z + 2, Blocks.obsidian.setHardness(3));
-        this.world.setBlock(x + 3, y, z - 1, Blocks.obsidian.setHardness(3));
-        this.world.setBlock(x + 3, y, z - 2, Blocks.obsidian.setHardness(3));
-        this.world.setBlock(x, y, z + 3, Blocks.obsidian.setHardness(3));
-        this.world.setBlock(x + 1, y, z + 3, Blocks.obsidian.setHardness(3));
-        this.world.setBlock(x + 2, y, z + 3, Blocks.obsidian.setHardness(3));
-        this.world.setBlock(x - 1, y, z + 3, Blocks.obsidian.setHardness(3));
-        this.world.setBlock(x - 2, y, z + 3, Blocks.obsidian.setHardness(3));
-        this.world.setBlock(x, y, z - 3, Blocks.obsidian.setHardness(3));
-        this.world.setBlock(x + 1, y, z - 3, Blocks.obsidian.setHardness(3));
-        this.world.setBlock(x + 2, y, z - 3, Blocks.obsidian.setHardness(3));
-        this.world.setBlock(x - 1, y, z - 3, Blocks.obsidian.setHardness(3));
-        this.world.setBlock(x - 2, y, z - 3, Blocks.obsidian.setHardness(3));
+        this.world.setBlockState(new BlockPos(x - 3, y, z), Blocks.OBSIDIAN.getDefaultState());
+        this.world.setBlockState(new BlockPos(x - 3, y, z + 1), Blocks.OBSIDIAN.getDefaultState());
+        this.world.setBlockState(new BlockPos(x - 3, y, z + 2), Blocks.OBSIDIAN.getDefaultState());
+        this.world.setBlockState(new BlockPos(x - 3, y, z - 1), Blocks.OBSIDIAN.getDefaultState());
+        this.world.setBlockState(new BlockPos(x - 3, y, z - 2), Blocks.OBSIDIAN.getDefaultState());
+        this.world.setBlockState(new BlockPos(x + 3, y, z), Blocks.OBSIDIAN.getDefaultState());
+        this.world.setBlockState(new BlockPos(x + 3, y, z + 1), Blocks.OBSIDIAN.getDefaultState());
+        this.world.setBlockState(new BlockPos(x + 3, y, z + 2), Blocks.OBSIDIAN.getDefaultState());
+        this.world.setBlockState(new BlockPos(x + 3, y, z - 1), Blocks.OBSIDIAN.getDefaultState());
+        this.world.setBlockState(new BlockPos(x + 3, y, z - 2), Blocks.OBSIDIAN.getDefaultState());
+        this.world.setBlockState(new BlockPos(x, y, z + 3), Blocks.OBSIDIAN.getDefaultState());
+        this.world.setBlockState(new BlockPos(x + 1, y, z + 3), Blocks.OBSIDIAN.getDefaultState());
+        this.world.setBlockState(new BlockPos(x + 2, y, z + 3), Blocks.OBSIDIAN.getDefaultState());
+        this.world.setBlockState(new BlockPos(x - 1, y, z + 3), Blocks.OBSIDIAN.getDefaultState());
+        this.world.setBlockState(new BlockPos(x - 2, y, z + 3), Blocks.OBSIDIAN.getDefaultState());
+        this.world.setBlockState(new BlockPos(x, y, z - 3), Blocks.OBSIDIAN.getDefaultState());
+        this.world.setBlockState(new BlockPos(x + 1, y, z - 3), Blocks.OBSIDIAN.getDefaultState());
+        this.world.setBlockState(new BlockPos(x + 2, y, z - 3), Blocks.OBSIDIAN.getDefaultState());
+        this.world.setBlockState(new BlockPos(x - 1, y, z - 3), Blocks.OBSIDIAN.getDefaultState());
+        this.world.setBlockState(new BlockPos(x - 2, y, z - 3), Blocks.OBSIDIAN.getDefaultState());
     }
 
     private void generateDefenseHutP1(int x, int y, int z) {
-        this.world.setBlock(x, y - 1, z, Blocks.obsidian.setHardness(3));
-        this.world.setBlock(x + 1, y - 1, z, Blocks.obsidian.setHardness(3));
-        this.world.setBlock(x + 2, y - 1, z, Blocks.obsidian.setHardness(3));
-        this.world.setBlock(x - 1, y - 1, z, Blocks.obsidian.setHardness(3));
-        this.world.setBlock(x - 2, y - 1, z, Blocks.obsidian.setHardness(3));
-        this.world.setBlock(x, y - 1, z + 1, Blocks.obsidian.setHardness(3));
-        this.world.setBlock(x + 1, y - 1, z + 1, Blocks.obsidian.setHardness(3));
-        this.world.setBlock(x + 2, y - 1, z + 1, Blocks.obsidian.setHardness(3));
-        this.world.setBlock(x - 1, y - 1, z + 1, Blocks.obsidian.setHardness(3));
-        this.world.setBlock(x - 2, y - 1, z + 1, Blocks.obsidian.setHardness(3));
-        this.world.setBlock(x, y - 1, z + 2, Blocks.obsidian.setHardness(3));
-        this.world.setBlock(x + 1, y - 1, z + 2, Blocks.obsidian.setHardness(3));
-        this.world.setBlock(x + 2, y - 1, z + 2, Blocks.obsidian.setHardness(3));
-        this.world.setBlock(x - 1, y - 1, z + 2, Blocks.obsidian.setHardness(3));
-        this.world.setBlock(x - 2, y - 1, z + 2, Blocks.obsidian.setHardness(3));
-        this.world.setBlock(x, y - 1, z - 1, Blocks.obsidian.setHardness(3));
-        this.world.setBlock(x + 1, y - 1, z - 1, Blocks.obsidian.setHardness(3));
-        this.world.setBlock(x + 2, y - 1, z - 1, Blocks.obsidian.setHardness(3));
-        this.world.setBlock(x - 1, y - 1, z - 1, Blocks.obsidian.setHardness(3));
-        this.world.setBlock(x - 2, y - 1, z - 1, Blocks.obsidian.setHardness(3));
-        this.world.setBlock(x, y - 1, z - 2, Blocks.obsidian.setHardness(3));
-        this.world.setBlock(x + 1, y - 1, z - 2, Blocks.obsidian.setHardness(3));
-        this.world.setBlock(x + 2, y - 1, z - 2, Blocks.obsidian.setHardness(3));
-        this.world.setBlock(x - 1, y - 1, z - 2, Blocks.obsidian.setHardness(3));
-        this.world.setBlock(x - 2, y - 1, z - 2, Blocks.obsidian.setHardness(3));
+        this.world.setBlockState(new BlockPos(x, y - 1, z), Blocks.OBSIDIAN.getDefaultState());
+        this.world.setBlockState(new BlockPos(x + 1, y - 1, z), Blocks.OBSIDIAN.getDefaultState());
+        this.world.setBlockState(new BlockPos(x + 2, y - 1, z), Blocks.OBSIDIAN.getDefaultState());
+        this.world.setBlockState(new BlockPos(x - 1, y - 1, z), Blocks.OBSIDIAN.getDefaultState());
+        this.world.setBlockState(new BlockPos(x - 2, y - 1, z), Blocks.OBSIDIAN.getDefaultState());
+        this.world.setBlockState(new BlockPos(x, y - 1, z + 1), Blocks.OBSIDIAN.getDefaultState());
+        this.world.setBlockState(new BlockPos(x + 1, y - 1, z + 1), Blocks.OBSIDIAN.getDefaultState());
+        this.world.setBlockState(new BlockPos(x + 2, y - 1, z + 1), Blocks.OBSIDIAN.getDefaultState());
+        this.world.setBlockState(new BlockPos(x - 1, y - 1, z + 1), Blocks.OBSIDIAN.getDefaultState());
+        this.world.setBlockState(new BlockPos(x - 2, y - 1, z + 1), Blocks.OBSIDIAN.getDefaultState());
+        this.world.setBlockState(new BlockPos(x, y - 1, z + 2), Blocks.OBSIDIAN.getDefaultState());
+        this.world.setBlockState(new BlockPos(x + 1, y - 1, z + 2), Blocks.OBSIDIAN.getDefaultState());
+        this.world.setBlockState(new BlockPos(x + 2, y - 1, z + 2), Blocks.OBSIDIAN.getDefaultState());
+        this.world.setBlockState(new BlockPos(x - 1, y - 1, z + 2), Blocks.OBSIDIAN.getDefaultState());
+        this.world.setBlockState(new BlockPos(x - 2, y - 1, z + 2), Blocks.OBSIDIAN.getDefaultState());
+        this.world.setBlockState(new BlockPos(x, y - 1, z - 1), Blocks.OBSIDIAN.getDefaultState());
+        this.world.setBlockState(new BlockPos(x + 1, y - 1, z - 1), Blocks.OBSIDIAN.getDefaultState());
+        this.world.setBlockState(new BlockPos(x + 2, y - 1, z - 1), Blocks.OBSIDIAN.getDefaultState());
+        this.world.setBlockState(new BlockPos(x - 1, y - 1, z - 1), Blocks.OBSIDIAN.getDefaultState());
+        this.world.setBlockState(new BlockPos(x - 2, y - 1, z - 1), Blocks.OBSIDIAN.getDefaultState());
+        this.world.setBlockState(new BlockPos(x, y - 1, z - 2), Blocks.OBSIDIAN.getDefaultState());
+        this.world.setBlockState(new BlockPos(x + 1, y - 1, z - 2), Blocks.OBSIDIAN.getDefaultState());
+        this.world.setBlockState(new BlockPos(x + 2, y - 1, z - 2), Blocks.OBSIDIAN.getDefaultState());
+        this.world.setBlockState(new BlockPos(x - 1, y - 1, z - 2), Blocks.OBSIDIAN.getDefaultState());
+        this.world.setBlockState(new BlockPos(x - 2, y - 1, z - 2), Blocks.OBSIDIAN.getDefaultState());
 
     }
 
     public boolean checkGround() {
-        return !this.onGround && this.world.isAirBlock((int) this.posX, (int) this.posY - 1, (int) this.posZ);
+        return !this.onGround && this.world.isAirBlock(new BlockPos((int) this.posX, (int) this.posY - 1, (int) this.posZ));
     }
 
-    @Override
-    public ItemStack getHeldItem() {
-        return new ItemStack(FAItemRegistry.INSTANCE.ancientSword);
+    protected void setEquipmentBasedOnDifficulty(DifficultyInstance difficulty)
+    {
+        super.setEquipmentBasedOnDifficulty(difficulty);
+        this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(FAItemRegistry.ANCIENT_SWORD));
     }
 
     public void initializeMob() {
         this.setAttackMode(0);
-        this.setCurrentItemOrArmor(0, new ItemStack(FAItemRegistry.INSTANCE.ancientSword));
-        this.enchantEquipment();
-        EntityPlayer entityplayer = this.world.getClosestPlayer(posX, posY, posZ, 100F);
+        this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(FAItemRegistry.ANCIENT_SWORD));
+        EntityPlayer entityplayer = this.world.getClosestPlayer(posX, posY, posZ, 100F, false);
 
         if (entityplayer != null) {
             if (this.getRNG().nextInt(1) == 0) {
-                entityplayer.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.hello")));
+                entityplayer.sendStatusMessage(new TextComponentString(I18n.format("entity.fossil.PigBoss.name") + ": " + I18n.format("anuSpeaker.hello")));
             } else {
-                entityplayer.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("entity.fossil.PigBoss.name") + ": " + StatCollector.translateToLocal("anuSpeaker.fewBeaten")));
+                entityplayer.sendStatusMessage(new TextComponentString(I18n.format("entity.fossil.PigBoss.name") + ": " + I18n.format("anuSpeaker.fewBeaten")));
             }
         }
     }
+    private static final DataParameter<Integer> ATTACK_MODE = EntityDataManager.<Integer>createKey(EntityAnu.class, DataSerializers.VARINT);
 
     // 0 == melee, 1 == flight/ranged, 2 == defense
     public int getAttackMode() {
-        return this.dataWatcher.getWatchableObjectByte(19);
+        return this.dataManager.get(ATTACK_MODE);
     }
 
     // 0 == melee, 1 == flight/ranged, 2 == defense
     public void setAttackMode(int i) {
-        this.dataWatcher.updateObject(19, (byte) i);
+        this.dataManager.set(ATTACK_MODE, i);
     }
 
-    /**
-     * (abstract) Protected helper method to read subclass entity data from NBT.
-     */
     @Override
     public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {
         super.writeEntityToNBT(par1NBTTagCompound);
         par1NBTTagCompound.setInteger("AttackMode", this.getAttackMode());
     }
 
-    /**
-     * (abstract) Protected helper method to read subclass entity data from NBT.
-     */
     @Override
     public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {
         super.readEntityFromNBT(par1NBTTagCompound);
@@ -476,7 +476,7 @@ public class EntityAnu extends EntityMob implements IRangedAttackMob {
     @Override
     protected void entityInit() {
         super.entityInit();
-        this.dataWatcher.addObject(19, (byte) 0);
+        this.dataManager.register(ATTACK_MODE, 0);
     }
 
     @Override
@@ -485,8 +485,8 @@ public class EntityAnu extends EntityMob implements IRangedAttackMob {
     }
 
     @Override
-    public IEntityLivingData onSpawnWithEgg(IEntityLivingData par1EntityLivingData) {
-        par1EntityLivingData = super.onSpawnWithEgg(par1EntityLivingData);
+    public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, IEntityLivingData par1EntityLivingData) {
+        par1EntityLivingData = super.onInitialSpawn(difficulty, par1EntityLivingData);
         this.initializeMob();
         return par1EntityLivingData;
     }
@@ -494,24 +494,24 @@ public class EntityAnu extends EntityMob implements IRangedAttackMob {
     @Override
     public void attackEntityWithRangedAttack(EntityLivingBase entity, float y) {
         double d5 = entity.posX - this.posX;
-        double d6 = entity.boundingBox.minY + (double) (entity.height / 2.0F) - (this.posY + (double) (this.height / 2.0F));
+        double d6 = entity.getEntityBoundingBox().minY + (double) (entity.height / 2.0F) - (this.posY + (double) (this.height / 2.0F));
         double d7 = entity.posZ - this.posZ;
-        this.world.playAuxSFXAtEntity(null, 1008, (int) this.posX, (int) this.posY, (int) this.posZ, 0);
+        this.playSound(SoundEvents.ENTITY_GHAST_SHOOT, 1, 1);
         EntityLargeFireball entitylargefireball = new EntityLargeFireball(this.world, this, d5, d6, d7);
-        entitylargefireball.field_92057_e = 2;
+        entitylargefireball.explosionPower = 2;
         double d8 = 4.0D;
-        Vec3 vec3 = this.getLook(1.0F);
+        Vec3d vec3 = this.getLook(1.0F);
         entitylargefireball.posX = this.posX + vec3.xCoord * d8;
         entitylargefireball.posY = this.posY + (double) (this.height / 2.0F) + 0.5D;
         entitylargefireball.posZ = this.posZ + vec3.zCoord * d8;
-        this.world.spawnEntityInWorld(entitylargefireball);
+        this.world.spawnEntity(entitylargefireball);
     }
 
     @Override
     public void onKillEntity(EntityLivingBase entity) {
         if (entity instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) entity;
-            FossilPlayerProperites.get(player).setKilledAnu(true);
+            FossilPlayerProperites.get(player).setKilledAnu(true);//TODO
         }
     }
 
