@@ -4,6 +4,7 @@ import fossilsarcheology.Revival;
 import fossilsarcheology.server.entity.monster.*;
 import fossilsarcheology.server.entity.prehistoric.*;
 import fossilsarcheology.server.entity.projectile.AncientJavelinEntity;
+import fossilsarcheology.server.entity.projectile.EntityBirdEgg;
 import fossilsarcheology.server.entity.projectile.JavelinEntity;
 import fossilsarcheology.server.entity.utility.*;
 import net.minecraft.entity.Entity;
@@ -25,6 +26,7 @@ public class FAEntityRegistry {
         registerEntity(StoneTabletEntity.class, "stone_tablet", 2);
         registerSpawnable(EntityFailuresaurus.class, "Failuresaurus", 5, 0x61ffbd, 0xf4eee6);
         registerEntity(EntityDinosaurEgg.class, "DinoEgg", 8);
+        registerEntity(EntityBirdEgg.class, "DinoEgg", 9);
 
         EntityRegistry.registerModEntity(EntityFriendlyPigZombie.class, "FriendlyPigZombie", 12, Revival.INSTANCE, 80, 3, true);
         EntityRegistry.registerModEntity(EntityAnuEffect.class, "AnuEffect", 13, Revival.INSTANCE, 80, 3, true);

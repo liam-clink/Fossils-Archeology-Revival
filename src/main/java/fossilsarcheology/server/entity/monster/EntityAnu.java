@@ -86,6 +86,10 @@ public class EntityAnu extends EntityMob implements IRangedAttackMob {
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.35D);
     }
 
+    public boolean isNonBoss() {
+        return false;
+    }
+
     @Override
     protected SoundEvent getAmbientSound() {
         if (this.getAttackMode() == 0) {
