@@ -69,7 +69,7 @@ public class FAItemRegistry {
     public static final JavelinItem ANCIENT_JAVELIN = new JavelinItem(null, "ancient_javelin", true);
     public static final BasicItem BROKEN_SWORD = new BasicItem("broken_sword");
     public static final BasicItem BROKEN_HELMET = new BasicItem("broken_helmet");
-    public static final IcedMeatItem ICED_MEAT = new BasicSwordItem(ICED_MEAT_MATERIAL, "iced_meat");
+    public static final BasicSwordItem ICED_MEAT = new BasicSwordItem(ICED_MEAT_MATERIAL, "iced_meat");
     public static final BasicItem BROKEN_SAPLING = new BasicItem("broken_sapling");
     public static final FossilSeedsItem FOSSIL_SEED = new FossilSeedsItem(true);
     public static final BasicItem FOSSIL_SEED_FERN = new BasicItem("fossilSeed_fern");
@@ -78,10 +78,10 @@ public class FAItemRegistry {
     public static final FernSeedItem FERN_SEED = new FernSeedItem();
     public static final ItemBucket TAR_BUCKET = new ItemBucket(FABlockRegistry.TAR).setUnlocalizedName("tar_bucket").setContainerItem(Items.BUCKET).setCreativeTab(FATabRegistry.ITEMS);
     public static final BasicItem TARDROP = new BasicItem("tardrop");
-    public static final FossilRecordItem FOSSIL_RECORD_BONES = new FossilRecordItem("record_bones_desc", FASoundRegistry.RECORD_BONES);
-    public static final FossilRecordItem FOSSIL_RECORD_NANO_ANU = new FossilRecordItem("music.anu", FASoundRegistry.RECORD_BONES);
-    public static final FossilRecordItem FOSSIL_RECORD_NANO_SCARAB = new FossilRecordItem("music.scarab", FASoundRegistry.RECORD_BONES);
-    public static final FossilRecordItem FOSSIL_RECORD_NANO_DISCOVERING = new FossilRecordItem("music.discovery", FASoundRegistry.RECORD_BONES);
+    public static final FossilRecordItem FOSSIL_RECORD_BONES = new FossilRecordItem("record_bones_desc", FASoundRegistry.RECORD_BONES, "record_bones_disc");
+    public static final FossilRecordItem FOSSIL_RECORD_NANO_ANU = new FossilRecordItem("music.anu", FASoundRegistry.MUSIC_ANU, "music.anu");
+    public static final FossilRecordItem FOSSIL_RECORD_NANO_SCARAB = new FossilRecordItem("music.scarab", FASoundRegistry.MUSIC_SCARAB, "music.scarab");
+    public static final FossilRecordItem FOSSIL_RECORD_NANO_DISCOVERING = new FossilRecordItem("music.discovery", FASoundRegistry.RECORD_BONES, "music.discovery");
     public static final DinosaurBoneItem LEG_BONE = new DinosaurBoneItem("leg_bone");
     public static final DinosaurBoneItem UNIQUE_ITEM = new DinosaurBoneItem("unique_item");
     public static final DinosaurBoneItem FOOT = new DinosaurBoneItem("foot");
