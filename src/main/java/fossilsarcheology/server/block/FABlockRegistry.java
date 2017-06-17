@@ -10,7 +10,6 @@
     import net.minecraftforge.fluids.Fluid;
     import net.minecraftforge.fluids.FluidRegistry;
     import net.minecraftforge.fml.common.registry.GameRegistry;
-
     import java.lang.reflect.Field;
     import java.util.ArrayList;
     import java.util.List;
@@ -33,7 +32,7 @@ public class FABlockRegistry {
     public static final BubbleBlowerBlock BUBBLE_MACHINE = new BubbleBlowerBlock();
     public static final FeederBlock FEEDER = new FeederBlock();
     public static final PermafrostBlock PERMAFROST = new PermafrostBlock();
-    public static final IcedStoneBlock ICED_STONE = new IcedStonetBlock();
+    public static final IcedStoneBlock ICED_STONE = new IcedStoneBlock();
     public static final DenseSandBlock DENSE_SAND = new DenseSandBlock();
     public static final StrongGlassBlock STRONG_GLASS = new StrongGlassBlock();
     public static final AncientGlassBlock ANCIENT_GLASS = new AncientGlassBlock();
