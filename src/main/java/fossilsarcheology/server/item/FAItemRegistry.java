@@ -6,9 +6,12 @@ import fossilsarcheology.server.block.FABlockRegistry;
 import fossilsarcheology.server.tab.FATabRegistry;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemBucket;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import java.lang.reflect.Field;
@@ -17,6 +20,10 @@ import java.util.List;
 
 public class FAItemRegistry {
     public static final List<Item> ITEMS = new ArrayList<>();
+    public static final ItemArmor.ArmorMaterial BONE = EnumHelper.addArmorMaterial("Bone", "fossil:armor_bone", 25, new int[]{2, 7, 6, 2}, 15, SoundEvents.ITEM_ARMOR_EQUIP_CHAIN, 0F);
+    public static final Item.ToolMaterial SCARAB_MATERIAL = EnumHelper.addToolMaterial("Scarab", 3, 1861, 8.0F, 4.0F, 25);
+    public static final Item.ToolMaterial TOOTH_DAGGER_MATERIAL = EnumHelper.addToolMaterial("toothDagger", 3, 250, 70.0F, 1.5F, 25);
+    public static final Item.ToolMaterial ICED_MEAT_MATERIAL = EnumHelper.addToolMaterial("IcedMeat", 1, 3, 1.0F, 3.5F, 10);
 
     public static final BioFossilItem BIOFOSSIL = new BioFossilItem(false);
     public static final BioFossilItem TAR_FOSSIL = new BioFossilItem(true);
@@ -27,15 +34,15 @@ public class FAItemRegistry {
     public static final BasicItem CHICKEN_ESSENCE = new BasicItem("chicken_essence");
     public static final BasicItem SCARAB_GEM = new BasicItem("scarab_gem");
     public static final BasicItem AQUATIC_SCARAB_GEM = new BasicItem("aquatic_scarab_gem");
-    public static final BasicAxeItem SCARAB_AXE = new BasicAxeItem("scarab_axe");
-    public static final BasicPickaxeItem SCARAB_PICKAXE = new BasicPickaxeItem("scarab_pickaxe");
-    public static final BasicSwordItem SCARAB_SWORD = new BasicSwordItem("scarab_sword");
-    public static final BasicHoeItem SCARAB_HOE = new BasicHoeItem("scarab_hoe");
-    public static final BasicShovelItem SCARAB_SHOVEL = new BasicShovelItem("scarab_shovel");
-    public static final BasicHelmetItem SKULL_HELMET = new BasicHelmetItem("skull_helmet");
-    public static final BasicChestplateItem RIBCAGE_CHESTPLATE = new BasicChestplateItem("skull_helmet");
-    public static final BasicLeggingsItem SHIN_LEGGINGS = new BasicLeggingsItem("shin_leggings");
-    public static final BasicBootsItem FEET_BOOTS = new BasicBootsItem("feet_boots");
+    public static final BasicAxeItem SCARAB_AXE = new BasicAxeItem(SCARAB_MATERIAL, "scarab_axe");
+    public static final BasicPickaxeItem SCARAB_PICKAXE = new BasicPickaxeItem(SCARAB_MATERIAL, "scarab_pickaxe");
+    public static final BasicSwordItem SCARAB_SWORD = new BasicSwordItem(SCARAB_MATERIAL, "scarab_sword");
+    public static final BasicHoeItem SCARAB_HOE = new BasicHoeItem(SCARAB_MATERIAL, "scarab_hoe");
+    public static final BasicShovelItem SCARAB_SHOVEL = new BasicShovelItem(SCARAB_MATERIAL, "scarab_shovel");
+    public static final BasicArmorItem SKULL_HELMET = new BasicArmorItem(BONE, 0, EntityEquipmentSlot.HEAD, "skull_helmet");
+    public static final BasicArmorItem RIBCAGE_CHESTPLATE = new BasicArmorItem(BONE, 1, EntityEquipmentSlot.CHEST, "skull_helmet");
+    public static final BasicArmorItem SHIN_LEGGINGS = new BasicArmorItem(BONE, 2, EntityEquipmentSlot.LEGS, "shin_leggings");
+    public static final BasicArmorItem FEET_BOOTS = new BasicArmorItem(BONE, 3, EntityEquipmentSlot.FEET, "feet_boots");
     public static final BasicItem ANCIENT_KEY = new BasicItem("ancient_key");
     public static final BasicItem ANCIENT_CLOCK = new BasicItem("ancient_clock");
     public static final BasicItem SHELL = new BasicItem("shell");
@@ -48,7 +55,7 @@ public class FAItemRegistry {
     public static final BasicItem POTTERY_SHARD = new BasicItem("pottery_shard");
     public static final BasicItem PLANT_FOSSIL = new BasicItem("plant_fossil");
     public static final BasicItem SKULL_STICK = new BasicItem("skull_stick");
-    public static final BasicItem TOOTH_DAGGER = new BasicItem("tooth_dagger");//TODO
+    public static final BasicSwordItem TOOTH_DAGGER = new BasicSwordItem(TOOTH_DAGGER_MATERIAL, "tooth_dagger");
     public static final StoneTabletItem STONE_TABLET = new StoneTabletItem();
     public static final WhipItem WHIP = new WhipItem();
     public static final ToyBallItem TOY_BALL = new ToyBallItem();
@@ -62,7 +69,7 @@ public class FAItemRegistry {
     public static final JavelinItem ANCIENT_JAVELIN = new JavelinItem(null, "ancient_javelin", true);
     public static final BasicItem BROKEN_SWORD = new BasicItem("broken_sword");
     public static final BasicItem BROKEN_HELMET = new BasicItem("broken_helmet");
-    public static final IcedMeatItem ICED_MEAT = new IcedMeatItem();
+    public static final IcedMeatItem ICED_MEAT = new BasicSwordItem(ICED_MEAT_MATERIAL, "iced_meat");
     public static final BasicItem BROKEN_SAPLING = new BasicItem("broken_sapling");
     public static final FossilSeedsItem FOSSIL_SEED = new FossilSeedsItem(true);
     public static final BasicItem FOSSIL_SEED_FERN = new BasicItem("fossilSeed_fern");
