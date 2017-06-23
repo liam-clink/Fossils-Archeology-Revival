@@ -73,8 +73,8 @@ public class FABlockRegistry {
     public static final AncientWoodBlock ANCIENT_WOOD = new AncientWoodBlock();
     public static final AncientWoodPlateBlock ANCIENT_WOOD_PLATE = new AncientWoodPlateBlock();
     public static final FossilStairsBlock ANCIENT_WOOD_STAIRS = new FossilStairsBlock(ANCIENT_WOOD.getDefaultState());
-    public static final AncientWoodSlabBlock ANCIENT_WOOD_DOUBLESLAB = new AncientWoodSlabBlock(true);
-    public static final AncientWoodSlabBlock ANCIENT_WOOD_SINGLESLAB = new AncientWoodSlabBlock(false);
+    public static final FossilSlabBlock ANCIENT_WOOD_DOUBLESLAB = new AncientWoodSlabBlock.Double("ancientWoodSlab", 1.4F, 7.5F, SoundType.WOOD);
+    public static final FossilSlabBlock ANCIENT_WOOD_SINGLESLAB = new AncientWoodSlabBlock.Half("ancientWoodSlab", 1.4F, 7.5F, SoundType.WOOD);
     public static final ObsidianSpikesBlock OBSIDIAN_SPIKES = new ObsidianSpikesBlock();
     public static final FernsBlock FERNS = new FernsBlock();
     public static final DillhoffiaFlowerBlock DILLHOFFIA_FLOWER = new DillhoffiaFlowerBlock();
