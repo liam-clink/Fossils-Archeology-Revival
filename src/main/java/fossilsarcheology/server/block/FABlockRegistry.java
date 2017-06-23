@@ -3,6 +3,7 @@
     import fossilsarcheology.Revival;
     import fossilsarcheology.server.api.BlockEntity;
     import net.minecraft.block.Block;
+    import net.minecraft.block.SoundType;
     import net.minecraft.block.material.MapColor;
     import net.minecraft.block.material.Material;
     import net.minecraft.item.ItemBlock;
@@ -10,6 +11,7 @@
     import net.minecraftforge.fluids.Fluid;
     import net.minecraftforge.fluids.FluidRegistry;
     import net.minecraftforge.fml.common.registry.GameRegistry;
+
     import java.lang.reflect.Field;
     import java.util.ArrayList;
     import java.util.List;
@@ -40,14 +42,14 @@ public class FABlockRegistry {
     public static final AncientStoneBlock ANCIENT_STONE = new AncientStoneBlock();
     public static final AncientStonebrickBlock ANCIENT_STONE_BRICK = new AncientStonebrickBlock();
     public static final FossilStairsBlock ANCIENT_STONE_STAIRS = new FossilStairsBlock(ANCIENT_STONE.getDefaultState());
-    public static final AncientStoneSlabBlock ANCIENT_STONE_DOUBLESLAB = new AncientStoneSlabBlock(true);
-    public static final AncientStoneSlabBlock ANCIENT_STONE_SINGLESLAB = new AncientStoneSlabBlock(false);
+    public static final FossilSlabBlock ANCIENT_STONE_SINGLESLAB = new AncientStoneSlabBlock.Double("ancientStoneSlab", 1.7F, 7.5F, SoundType.STONE);
+    public static final FossilSlabBlock ANCIENT_STONE_DOUBLESLAB = new AncientStoneSlabBlock.Half("ancientStoneSlab", 1.7F, 7.5F, SoundType.STONE);
     public static final VolcanicAshBlock VOLCANIC_ASH = new VolcanicAshBlock("ash");
     public static final VolcanicAshBlock VOLCANIC_BRICK = new VolcanicAshBlock("brick");
     public static final VolcanicAshBlock VOLCANIC_ROCK = new VolcanicAshBlock("rock");
     public static final FossilStairsBlock VOLCANIC_STAIRS = new FossilStairsBlock(VOLCANIC_BRICK.getDefaultState());
-    public static final VolcanicSlabBlock VOLCANIC_DOUBLESLAB = new VolcanicSlabBlock(true);
-    public static final VolcanicSlabBlock VOLCANIC_SINGLESLAB = new VolcanicSlabBlock(false);
+    public static final FossilSlabBlock VOLCANIC_DOUBLESLAB = new VolcanicSlabBlock.Double("volcanicSlab", 1.4F, 7.5F, SoundType.STONE);
+    public static final FossilSlabBlock VOLCANIC_SINGLESLAB = new VolcanicSlabBlock.Half("volcanicSlab", 1.4F, 7.5F, SoundType.STONE);
     public static final AnuPortalBlock ANU_PORTAL = new AnuPortalBlock();
     public static final AnuStatueBlock ANU_STATUE = new AnuStatueBlock();
     public static final HomePortalBlock HOME_PORTAL = new HomePortalBlock();
@@ -65,8 +67,8 @@ public class FABlockRegistry {
     public static final PalmLeavesBlock PALM_LEAVES = new PalmLeavesBlock();
     public static final PalmSaplingBlock PALM_SAPLING = new PalmSaplingBlock();
     public static final PalmPlanksBlock PALM_PLANKS = new PalmPlanksBlock();
-    public static final PalmPlanksSlabBlock PALM_PLANKS_DOUBLESLAB = new PalmPlanksSlabBlock(true);
-    public static final PalmPlanksSlabBlock PALM_PLANKS_SINGLESLAB = new PalmPlanksSlabBlock(false);
+    public static final FossilSlabBlock PALM_PLANKS_DOUBLESLAB = new PalmPlanksSlabBlock.Double("palaeorapheSlab", 1.4F, 7.5F, SoundType.WOOD);
+    public static final FossilSlabBlock PALM_PLANKS_SINGLESLAB = new PalmPlanksSlabBlock.Half("palaeorapheSlab", 1.4F, 7.5F, SoundType.WOOD);
     public static final FossilStairsBlock PALM_PLANKS_STAIRS = new FossilStairsBlock(PALM_PLANKS.getDefaultState());
     public static final AncientWoodBlock ANCIENT_WOOD = new AncientWoodBlock();
     public static final AncientWoodPlateBlock ANCIENT_WOOD_PLATE = new AncientWoodPlateBlock();
