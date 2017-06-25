@@ -56,7 +56,7 @@ public class FABlockRegistry {
     public static final AnubiteStatueBlock ANUBITE_STATUE = new AnubiteStatueBlock();
     public static final AncientChestBlock ANCIENT_CHEST = new AncientChestBlock();
     public static final SarcophagusBlock SARCOPHAGUS = new SarcophagusBlock();
-    public static final Block FIGURINE = new Block(Material.AIR);//TODO later
+    public static final BlockFigurine FIGURINE = new BlockFigurine();
     public static final AmphoraVaseBlock AMPHORA_VASE = new AmphoraVaseBlock();
     public static final KylixVaseBlock KYLIX_VASE = new KylixVaseBlock();
     public static final VoluteVaseBlock VOLUTE_VASE = new VoluteVaseBlock();
