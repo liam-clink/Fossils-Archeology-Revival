@@ -2,7 +2,6 @@ package fossilsarcheology.server.dimension;
 
 import fossilsarcheology.Revival;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -27,20 +26,13 @@ public class AnuTeleporter extends Teleporter {
     }
 
     public void placeInPortal(Entity entity) {
-
-        entity.setLocationAndAngles((double) -74, (double) 63, (double) -115, entity.rotationYaw, 0.0F);
-
-        int i = MathHelper.floor(entity.posX);
-        int j = MathHelper.floor(entity.posY) - 1;
-        int k = MathHelper.floor(entity.posZ);
-        byte b0 = 1;
-        byte b1 = 0;
-        if (worldServerInstance.provider.getDimension() == Revival.CONFIG.dimensionIDTreasure) {
-            if (entity instanceof EntityPlayer) {
-            }
-        }
         if (worldServerInstance.provider.getDimension() == Revival.CONFIG.dimensionIDDarknessLair) {
-
+            entity.setLocationAndAngles((double) -74, (double) 63, (double) -115, entity.rotationYaw, 0.0F);
+            int i = MathHelper.floor(entity.posX);
+            int j = MathHelper.floor(entity.posY) - 1;
+            int k = MathHelper.floor(entity.posZ);
+            byte b0 = 1;
+            byte b1 = 0;
             for (int l = -2; l <= 2; ++l) {
                 for (int i1 = -2; i1 <= 2; ++i1) {
                     for (int j1 = -1; j1 < 3; ++j1) {

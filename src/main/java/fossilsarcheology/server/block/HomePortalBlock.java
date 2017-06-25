@@ -1,6 +1,5 @@
 package fossilsarcheology.server.block;
 
-import fossilsarcheology.Revival;
 import fossilsarcheology.server.dimension.AnuTeleporter;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -22,13 +21,13 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 
-public class AnuPortalBlock extends Block {
-    public AnuPortalBlock() {
+public class HomePortalBlock extends Block{
+    public HomePortalBlock() {
         super(Material.PORTAL);
         this.setResistance(60000000.0F);
         this.setHardness(60000000.0F);
         this.setSoundType(SoundType.GLASS);
-        this.setUnlocalizedName("anu_portal");
+        this.setUnlocalizedName("home_portal");
     }
 
     @Override
@@ -49,10 +48,7 @@ public class AnuPortalBlock extends Block {
             EntityPlayerMP thePlayer = (EntityPlayerMP) entity;
             if (thePlayer.timeUntilPortal > 0) {
                 thePlayer.timeUntilPortal = 10;
-            } else if (thePlayer.dimension != Revival.CONFIG.dimensionIDDarknessLair) {
-                thePlayer.timeUntilPortal = 10;
-                thePlayer.mcServer.getPlayerList().transferPlayerToDimension(thePlayer, Revival.CONFIG.dimensionIDDarknessLair, new AnuTeleporter(thePlayer.mcServer.worldServerForDimension(Revival.CONFIG.dimensionIDDarknessLair)));
-            } else {
+            } else if (thePlayer.dimension != 0) {
                 thePlayer.timeUntilPortal = 10;
                 thePlayer.mcServer.getPlayerList().transferPlayerToDimension(thePlayer, 0, new AnuTeleporter(thePlayer.mcServer.worldServerForDimension(0)));
             }
@@ -84,4 +80,5 @@ public class AnuPortalBlock extends Block {
             }
         }
     }
+
 }
