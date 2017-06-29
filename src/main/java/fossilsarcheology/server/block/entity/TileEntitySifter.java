@@ -140,7 +140,7 @@ public class TileEntitySifter extends TileEntity implements IInventory, ISidedIn
 
     @Override
     public boolean isUsableByPlayer(EntityPlayer player) {
-        return false;
+        return true;
     }
 
     @Override

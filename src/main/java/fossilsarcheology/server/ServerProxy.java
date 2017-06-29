@@ -26,6 +26,7 @@ public class ServerProxy implements IGuiHandler {
     public static final int GUI_FEEDER = 2;
     public static final int GUI_WORKTABLE = 3;
     public static final int GUI_SIFTER = 4;
+    public static final int GUI_TIME_MACHINE = 5;
 
     public void onPreInit() {
         NetworkRegistry.INSTANCE.registerGuiHandler(Revival.INSTANCE, this);
@@ -75,6 +76,9 @@ public class ServerProxy implements IGuiHandler {
         }
         if (id == GUI_SIFTER) {
             return new SifterContainer(player.inventory, (TileEntitySifter) world.getTileEntity(pos));
+        }
+        if (id == GUI_TIME_MACHINE) {
+            return new TimeMachineContainer(player.inventory, (TileEntityTimeMachine) world.getTileEntity(pos));
         }
         return null;
     }

@@ -55,6 +55,9 @@ public class ClientProxy extends ServerProxy {
         if (id == GUI_SIFTER) {
             return new SifterGUI(player.inventory, (TileEntitySifter) world.getTileEntity(pos));
         }
+        if (id == GUI_TIME_MACHINE) {
+            return new TimeMachineGUI(player.inventory, (TileEntityTimeMachine) world.getTileEntity(pos));
+        }
         return null;
     }
 
