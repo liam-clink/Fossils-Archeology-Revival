@@ -52,9 +52,9 @@ public class CultivateBlock extends BlockContainer implements DefaultRenderedIte
         this.setHardness(0.3F);
         this.setSoundType(SoundType.GLASS);
         if (isActive) {
-            this.setUnlocalizedName("analyzer_active");
+            this.setUnlocalizedName("cultivate_active");
         } else {
-            this.setUnlocalizedName("analyzer");
+            this.setUnlocalizedName("cultivate");
             this.setCreativeTab(FATabRegistry.BLOCKS);
         }
     }

@@ -25,6 +25,7 @@ public class ServerProxy implements IGuiHandler {
     public static final int GUI_ANALYZER = 0;
     public static final int GUI_CULTIVATE = 1;
     public static final int GUI_FEEDER = 2;
+    public static final int GUI_WORKTABLE = 3;
 
     public void onPreInit() {
         NetworkRegistry.INSTANCE.registerGuiHandler(Revival.INSTANCE, this);
