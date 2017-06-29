@@ -78,7 +78,7 @@ public class FAItemRegistry {
     public static final BasicItem PALAE_SAPLING_FOSSIL = new BasicItem("fossilSapling_palae");
     public static final FossilSeedsItem SEED = new FossilSeedsItem(false);
     public static final FernSeedItem FERN_SEED = new FernSeedItem();
-    public static final ItemBucket TAR_BUCKET = new ItemBucket(FABlockRegistry.TAR).setUnlocalizedName("tar_bucket").setContainerItem(Items.BUCKET).setCreativeTab(FATabRegistry.ITEMS);
+    public static final Item TAR_BUCKET = new ItemBucket(FABlockRegistry.TAR).setUnlocalizedName("tar_bucket").setContainerItem(Items.BUCKET).setCreativeTab(FATabRegistry.ITEMS);
     public static final BasicItem TARDROP = new BasicItem("tardrop");
     public static final FossilRecordItem FOSSIL_RECORD_BONES = new FossilRecordItem("record_bones_desc", FASoundRegistry.RECORD_BONES, "record_bones_disc");
     public static final FossilRecordItem FOSSIL_RECORD_NANO_ANU = new FossilRecordItem("music.anu", FASoundRegistry.MUSIC_ANU, "music.anu");
