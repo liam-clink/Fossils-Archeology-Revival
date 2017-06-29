@@ -1,5 +1,6 @@
 package fossilsarcheology.server.block;
 
+import fossilsarcheology.server.api.DefaultRenderedItem;
 import fossilsarcheology.server.tab.FATabRegistry;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
@@ -14,7 +15,7 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class PalmSaplingBlock extends BlockBush implements IGrowable {
+public class PalmSaplingBlock extends BlockBush implements DefaultRenderedItem, IGrowable {
     public static final PropertyInteger STAGE = PropertyInteger.create("stage", 0, 1);
     protected static final AxisAlignedBB SAPLING_AABB = new AxisAlignedBB(0.09999999403953552D, 0.0D, 0.09999999403953552D, 0.8999999761581421D, 0.800000011920929D, 0.8999999761581421D);
 

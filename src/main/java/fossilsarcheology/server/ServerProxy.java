@@ -23,7 +23,8 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 public class ServerProxy implements IGuiHandler {
     public static final int GUI_ANALYZER = 0;
-    public static final int GUI_FEEDER = 0;
+    public static final int GUI_CULTIVATE = 1;
+    public static final int GUI_FEEDER = 2;
 
     public void onPreInit() {
         NetworkRegistry.INSTANCE.registerGuiHandler(Revival.INSTANCE, this);

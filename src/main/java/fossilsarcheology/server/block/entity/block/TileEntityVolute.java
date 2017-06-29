@@ -1,4 +1,4 @@
-package fossilsarcheology.server.block.entity;
+package fossilsarcheology.server.block.entity.block;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;

@@ -1,5 +1,6 @@
 package fossilsarcheology.server.block;
 
+import fossilsarcheology.server.api.DefaultRenderedItem;
 import fossilsarcheology.server.tab.FATabRegistry;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;
@@ -13,7 +14,7 @@ import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class SkullBlock extends BlockHorizontal {
+public class SkullBlock extends BlockHorizontal implements DefaultRenderedItem {
     private boolean isActive;
 
     public SkullBlock(boolean isActive) {

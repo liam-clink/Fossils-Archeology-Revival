@@ -1,5 +1,6 @@
 package fossilsarcheology.server.block;
 
+import fossilsarcheology.server.api.DefaultRenderedItem;
 import fossilsarcheology.server.block.entity.TileEntityAmphora;
 import fossilsarcheology.server.tab.FATabRegistry;
 import net.minecraft.block.Block;
@@ -25,7 +26,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-public class AmphoraVaseBlock extends BlockContainer implements IBlockItem{
+public class AmphoraVaseBlock extends BlockContainer implements DefaultRenderedItem, IBlockItem{
     public static final PropertyEnum<AmphoraVaseBlock.EnumType> VARIANT = PropertyEnum.<AmphoraVaseBlock.EnumType>create("variant", AmphoraVaseBlock.EnumType.class);
 
     protected AmphoraVaseBlock() {

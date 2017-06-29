@@ -1,5 +1,6 @@
 package fossilsarcheology.server.block;
 
+import fossilsarcheology.server.api.DefaultRenderedItem;
 import fossilsarcheology.server.block.entity.TileEntityAncientChest;
 import fossilsarcheology.server.item.FAItemRegistry;
 import fossilsarcheology.server.tab.FATabRegistry;
@@ -23,7 +24,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class AncientChestBlock extends BlockContainer {
+public class AncientChestBlock extends BlockContainer implements DefaultRenderedItem {
 
     public static final PropertyDirection FACING = BlockHorizontal.FACING;
     protected static final AxisAlignedBB NORTH_CHEST_AABB = new AxisAlignedBB(0.0625D, 0.0D, 0.0D, 0.9375D, 0.875D, 0.9375D);

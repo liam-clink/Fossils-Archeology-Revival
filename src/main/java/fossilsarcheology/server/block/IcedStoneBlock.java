@@ -1,5 +1,6 @@
 package fossilsarcheology.server.block;
 
+import fossilsarcheology.server.api.DefaultRenderedItem;
 import fossilsarcheology.server.tab.FATabRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -13,7 +14,7 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class IcedStoneBlock extends Block {
+public class IcedStoneBlock extends Block implements DefaultRenderedItem {
     public IcedStoneBlock() {
         super(Material.ROCK);
         this.setHarvestLevel("pickaxe", 1);

@@ -1,5 +1,6 @@
 package fossilsarcheology.server.block;
 
+import fossilsarcheology.server.api.DefaultRenderedItem;
 import fossilsarcheology.server.tab.FATabRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
@@ -21,7 +22,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class PalmLeavesBlock extends BlockLeaves {
+public class PalmLeavesBlock extends BlockLeaves implements DefaultRenderedItem {
     private byte[] adjacentTreeBlocks;
 
     public PalmLeavesBlock() {

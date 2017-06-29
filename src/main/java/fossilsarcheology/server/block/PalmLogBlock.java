@@ -1,5 +1,6 @@
 package fossilsarcheology.server.block;
 
+import fossilsarcheology.server.api.DefaultRenderedItem;
 import fossilsarcheology.server.tab.FATabRegistry;
 import net.minecraft.block.BlockRotatedPillar;
 import net.minecraft.block.SoundType;
@@ -8,7 +9,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class PalmLogBlock extends BlockRotatedPillar{
+public class PalmLogBlock extends BlockRotatedPillar implements DefaultRenderedItem {
     protected PalmLogBlock() {
         super(Material.WOOD);
         this.setCreativeTab(FATabRegistry.BLOCKS);

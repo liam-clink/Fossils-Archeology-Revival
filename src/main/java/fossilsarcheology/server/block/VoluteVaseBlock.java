@@ -1,6 +1,7 @@
 package fossilsarcheology.server.block;
 
-import fossilsarcheology.server.block.entity.TileEntityVolute;
+import fossilsarcheology.server.api.DefaultRenderedItem;
+import fossilsarcheology.server.block.entity.block.TileEntityVolute;
 import fossilsarcheology.server.tab.FATabRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -25,7 +26,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-public class VoluteVaseBlock extends BlockContainer implements IBlockItem {
+public class VoluteVaseBlock extends BlockContainer implements DefaultRenderedItem, IBlockItem {
 
     public static final PropertyEnum<VoluteVaseBlock.EnumType> VARIANT = PropertyEnum.<VoluteVaseBlock.EnumType>create("variant", VoluteVaseBlock.EnumType.class);
 

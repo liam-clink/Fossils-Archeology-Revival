@@ -1,5 +1,6 @@
 package fossilsarcheology.server.block;
 
+import fossilsarcheology.server.api.DefaultRenderedItem;
 import fossilsarcheology.server.block.entity.TileEntityKylix;
 import fossilsarcheology.server.tab.FATabRegistry;
 import net.minecraft.block.Block;
@@ -25,7 +26,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-public class KylixVaseBlock extends BlockContainer implements IBlockItem {
+public class KylixVaseBlock extends BlockContainer implements DefaultRenderedItem, IBlockItem {
 
     public static final PropertyEnum<KylixVaseBlock.EnumType> VARIANT = PropertyEnum.<KylixVaseBlock.EnumType>create("variant", KylixVaseBlock.EnumType.class);
 

@@ -1,5 +1,6 @@
 package fossilsarcheology.server.block;
 
+import fossilsarcheology.server.api.DefaultRenderedItem;
 import fossilsarcheology.server.tab.FATabRegistry;
 import net.minecraft.block.BlockBreakable;
 import net.minecraft.block.SoundType;
@@ -9,7 +10,7 @@ import net.minecraft.util.BlockRenderLayer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class AncientGlassBlock extends BlockBreakable {
+public class AncientGlassBlock extends BlockBreakable implements DefaultRenderedItem {
 
     public AncientGlassBlock() {
         super(Material.GLASS, true);

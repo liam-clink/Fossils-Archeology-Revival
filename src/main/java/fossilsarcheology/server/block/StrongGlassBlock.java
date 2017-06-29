@@ -1,5 +1,6 @@
 package fossilsarcheology.server.block;
 
+import fossilsarcheology.server.api.DefaultRenderedItem;
 import fossilsarcheology.server.tab.FATabRegistry;
 import net.minecraft.block.BlockBreakable;
 import net.minecraft.block.material.Material;
@@ -8,7 +9,7 @@ import net.minecraft.util.BlockRenderLayer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class StrongGlassBlock extends BlockBreakable {
+public class StrongGlassBlock extends BlockBreakable implements DefaultRenderedItem {
 
     public StrongGlassBlock() {
         super(Material.GLASS, true);

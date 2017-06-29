@@ -1,10 +1,11 @@
 package fossilsarcheology.server.block;
 
+import fossilsarcheology.server.api.DefaultRenderedItem;
 import fossilsarcheology.server.tab.FATabRegistry;
 import net.minecraft.block.BlockStairs;
 import net.minecraft.block.state.IBlockState;
 
-public class FossilStairsBlock extends BlockStairs {
+public class FossilStairsBlock extends BlockStairs implements DefaultRenderedItem {
 
     protected FossilStairsBlock(IBlockState modelState) {
         super(modelState);

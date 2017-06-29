@@ -1,5 +1,6 @@
 package fossilsarcheology.server.block;
 
+import fossilsarcheology.server.api.DefaultRenderedItem;
 import fossilsarcheology.server.block.entity.TileEntitySarcophagus;
 import fossilsarcheology.server.item.FAItemRegistry;
 import fossilsarcheology.server.tab.FATabRegistry;
@@ -24,7 +25,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 
-public class SarcophagusBlock extends BlockContainer {
+public class SarcophagusBlock extends BlockContainer implements DefaultRenderedItem {
     public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
 
     public SarcophagusBlock() {

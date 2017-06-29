@@ -1,5 +1,6 @@
 package fossilsarcheology.server.block;
 
+import fossilsarcheology.server.api.DefaultRenderedItem;
 import fossilsarcheology.server.tab.FATabRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
@@ -18,7 +19,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class FossilSlabBlock extends BlockSlab {
+public class FossilSlabBlock extends BlockSlab implements DefaultRenderedItem {
 
     public static final PropertyEnum<FossilSlabBlock.Variant> VARIANT = PropertyEnum.<FossilSlabBlock.Variant>create("variant", FossilSlabBlock.Variant.class);
     private Block baseBlock;

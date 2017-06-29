@@ -1,5 +1,6 @@
 package fossilsarcheology.server.block;
 
+import fossilsarcheology.server.api.DefaultRenderedItem;
 import fossilsarcheology.server.dimension.AnuTeleporter;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -21,7 +22,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 
-public class HomePortalBlock extends Block{
+public class HomePortalBlock extends Block implements DefaultRenderedItem {
     public HomePortalBlock() {
         super(Material.PORTAL);
         this.setResistance(60000000.0F);

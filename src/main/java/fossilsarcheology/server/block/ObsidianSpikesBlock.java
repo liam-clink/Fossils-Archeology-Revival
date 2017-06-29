@@ -1,5 +1,6 @@
 package fossilsarcheology.server.block;
 
+import fossilsarcheology.server.api.DefaultRenderedItem;
 import fossilsarcheology.server.entity.monster.EntityAnu;
 import fossilsarcheology.server.tab.FATabRegistry;
 import net.minecraft.block.Block;
@@ -18,7 +19,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ObsidianSpikesBlock extends Block {
+public class ObsidianSpikesBlock extends Block implements DefaultRenderedItem {
 
     protected static final AxisAlignedBB SPIKES_AABB = new AxisAlignedBB(0.0F, 0.0F, 0.0F, 1.0F, 0.5F, 1.0F);
 
