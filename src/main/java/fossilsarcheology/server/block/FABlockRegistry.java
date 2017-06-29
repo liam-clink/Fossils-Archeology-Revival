@@ -6,8 +6,10 @@
     import net.minecraft.block.SoundType;
     import net.minecraft.block.material.MapColor;
     import net.minecraft.block.material.Material;
+    import net.minecraft.entity.Entity;
     import net.minecraft.item.ItemBlock;
     import net.minecraft.util.ResourceLocation;
+    import net.minecraft.world.World;
     import net.minecraftforge.fluids.Fluid;
     import net.minecraftforge.fluids.FluidRegistry;
     import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -123,7 +125,20 @@ public class FABlockRegistry {
         String name = block.getUnlocalizedName().substring("tile.".length());
         ResourceLocation identifier = new ResourceLocation(Revival.MODID, name);
         GameRegistry.register(block, identifier);
-        GameRegistry.register(new ItemBlock(block), identifier);
+        if(block instanceof IBlockItem){
+            ItemBlock itemBlock = new ItemBlock(block);
+            if (IBlockItem.class.isAssignableFrom(((IBlockItem)block).getItemBlockClass())) {
+                try {
+                    itemBlock = ((IBlockItem)block).getItemBlockClass().getDeclaredConstructor(World.class).newInstance(block);
+                } catch (ReflectiveOperationException e) {
+                    e.printStackTrace();
+                }
+            }
+            GameRegistry.register(itemBlock, identifier);
+
+        }else{
+            GameRegistry.register(new ItemBlock(block), identifier);
+        }
         BLOCKS.add(block);
         if (block instanceof BlockEntity) {
             GameRegistry.registerTileEntity(((BlockEntity) block).getEntity(), Revival.MODID + "." + name);
