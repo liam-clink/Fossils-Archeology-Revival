@@ -69,6 +69,8 @@ public class FAItemRegistry {
     public static final JavelinItem ANCIENT_JAVELIN = new JavelinItem(null, "ancient_javelin", true);
     public static final BasicItem BROKEN_SWORD = new BasicItem("broken_sword");
     public static final BasicItem BROKEN_HELMET = new BasicItem("broken_helmet");
+    public static final AncientSwordItem ANCIENT_SWORD = new AncientSwordItem();
+    public static final AncientHelmetItem ANCIENT_HELMET = new AncientHelmetItem();
     public static final BasicSwordItem ICED_MEAT = new BasicSwordItem(ICED_MEAT_MATERIAL, "iced_meat");
     public static final BasicItem BROKEN_SAPLING = new BasicItem("broken_sapling");
     public static final FossilSeedsItem FOSSIL_SEED = new FossilSeedsItem(true);

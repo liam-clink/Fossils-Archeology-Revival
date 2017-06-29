@@ -328,22 +328,59 @@ public class TileEntityCultivate extends TileEntity implements IInventory, ISide
 
     @Override
     public int getField(int id) {
+        switch (id) {
+            case 0:
+                return this.furnaceCookTime;
+            case 1:
+                return this.furnaceBurnTime;
+            case 2:
+                return this.currentItemBurnTime;
+            case 3:
+                return getDNAType();
+            default:
+                return 0;
+        }
+    }
+
+    public int getDNAType() {
+        if (this.getStackInSlot(0) != null) {
+            if (this.getStackInSlot(0).getItem() != null) {
+                if (this.getStackInSlot(0).getItem() == PrehistoricEntityType.COELACANTH.dnaItem || this.getStackInSlot(0).getItem() == PrehistoricEntityType.STURGEON.dnaItem || this.getStackInSlot(0).getItem() == PrehistoricEntityType.ALLIGATOR_GAR.dnaItem) {
+                    return 1;
+                }
+                if (this.getStackInSlot(0).getItem() == FAItemRegistry.FOSSIL_SEED_FERN || this.getStackInSlot(0).getItem() == FAItemRegistry.PALAE_SAPLING_FOSSIL || this.getStackInSlot(0).getItem() == FAItemRegistry.FOSSIL_SEED) {
+                    return 2;
+                }
+            }
+        }
         return 0;
     }
 
     @Override
     public void setField(int id, int value) {
-
+        switch (id) {
+            case 0:
+                this.furnaceCookTime = value;
+                break;
+            case 1:
+                this.furnaceBurnTime = value;
+                break;
+            case 2:
+                this.currentItemBurnTime = value;
+                break;
+        }
     }
 
     @Override
     public int getFieldCount() {
-        return 0;
+        return 4;
     }
 
     @Override
     public void clear() {
-
+        for (int i = 0; i < this.cultivateItemStacks.length; i++) {
+            this.cultivateItemStacks[0] = null;
+        }
     }
 
     @Override

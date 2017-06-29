@@ -4,9 +4,8 @@ import fossilsarcheology.Revival;
 import fossilsarcheology.client.sound.FASoundRegistry;
 import fossilsarcheology.server.achievement.FossilAchievements;
 import fossilsarcheology.server.block.FABlockRegistry;
-import fossilsarcheology.server.block.entity.AnalyzerBlockEntity;
-import fossilsarcheology.server.container.AnalyzerContainer;
-import fossilsarcheology.server.container.FeederContainer;
+import fossilsarcheology.server.block.entity.*;
+import fossilsarcheology.server.container.*;
 import fossilsarcheology.server.entity.EntityFishBase;
 import fossilsarcheology.server.entity.FAEntityRegistry;
 import fossilsarcheology.server.entity.prehistoric.EntityPrehistoric;
@@ -26,6 +25,7 @@ public class ServerProxy implements IGuiHandler {
     public static final int GUI_CULTIVATE = 1;
     public static final int GUI_FEEDER = 2;
     public static final int GUI_WORKTABLE = 3;
+    public static final int GUI_SIFTER = 4;
 
     public void onPreInit() {
         NetworkRegistry.INSTANCE.registerGuiHandler(Revival.INSTANCE, this);
@@ -64,8 +64,17 @@ public class ServerProxy implements IGuiHandler {
         if (id == GUI_ANALYZER) {
             return new AnalyzerContainer(player.inventory, (AnalyzerBlockEntity) world.getTileEntity(pos));
         }
+        if (id == GUI_CULTIVATE) {
+            return new CultivateContainer(player.inventory, (TileEntityCultivate) world.getTileEntity(pos));
+        }
         if (id == GUI_FEEDER) {
-            return new FeederContainer(player.inventory, (AnalyzerBlockEntity) world.getTileEntity(pos));
+            return new FeederContainer(player.inventory, (TileEntityFeeder) world.getTileEntity(pos));
+        }
+        if (id == GUI_WORKTABLE) {
+            return new WorktableContainer(player.inventory, (TileEntityWorktable) world.getTileEntity(pos));
+        }
+        if (id == GUI_SIFTER) {
+            return new SifterContainer(player.inventory, (TileEntitySifter) world.getTileEntity(pos));
         }
         return null;
     }

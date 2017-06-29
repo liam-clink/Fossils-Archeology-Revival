@@ -1,10 +1,10 @@
 package fossilsarcheology.client;
 
-import fossilsarcheology.client.gui.AnalyzerGUI;
+import fossilsarcheology.client.gui.*;
 import fossilsarcheology.client.particle.BubbleFX;
 import fossilsarcheology.client.render.RenderingHandler;
 import fossilsarcheology.server.ServerProxy;
-import fossilsarcheology.server.block.entity.AnalyzerBlockEntity;
+import fossilsarcheology.server.block.entity.*;
 import fossilsarcheology.server.entity.EntityFishBase;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
@@ -42,6 +42,18 @@ public class ClientProxy extends ServerProxy {
         BlockPos pos = new BlockPos(x, y, z);
         if (id == GUI_ANALYZER) {
             return new AnalyzerGUI(player.inventory, (AnalyzerBlockEntity) world.getTileEntity(pos));
+        }
+        if (id == GUI_CULTIVATE) {
+            return new CultivateGUI(player.inventory, (TileEntityCultivate) world.getTileEntity(pos));
+        }
+        if (id == GUI_FEEDER) {
+            return new FeederGUI(player.inventory, (TileEntityFeeder) world.getTileEntity(pos));
+        }
+        if (id == GUI_WORKTABLE) {
+            return new WorktableGUI(player.inventory, (TileEntityWorktable) world.getTileEntity(pos));
+        }
+        if (id == GUI_SIFTER) {
+            return new SifterGUI(player.inventory, (TileEntitySifter) world.getTileEntity(pos));
         }
         return null;
     }
