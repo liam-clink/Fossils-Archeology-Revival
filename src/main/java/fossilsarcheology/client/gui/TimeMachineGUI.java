@@ -8,14 +8,14 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
-public class GuiTimeMachine extends GuiContainer {
+public class TimeMachineGUI extends GuiContainer {
     private static final ResourceLocation loc = new ResourceLocation("fossil:textures/gui/Timemachine.png");
     final int SQR_WIDTH = 34;
     final int SQR_HEIGHT = 13;
     final int SQR_POSX = 131;
     private TileEntityTimeMachine timeMachineInstance;
 
-    public GuiTimeMachine(InventoryPlayer playerInventory, TileEntityTimeMachine tile) {
+    public TimeMachineGUI(InventoryPlayer playerInventory, TileEntityTimeMachine tile) {
         super(new TimeMachineContainer(playerInventory, tile));
         this.timeMachineInstance = tile;
         this.ySize = 188;

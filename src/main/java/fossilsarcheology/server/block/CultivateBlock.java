@@ -8,7 +8,6 @@ import fossilsarcheology.server.api.DefaultRenderedItem;
 import fossilsarcheology.server.block.entity.TileEntityCultivate;
 import fossilsarcheology.server.entity.monster.EntityFailuresaurus;
 import fossilsarcheology.server.tab.FATabRegistry;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -77,7 +76,7 @@ public class CultivateBlock extends BlockContainer implements DefaultRenderedIte
         this.returnDNA(world, pos);
         if (!world.isRemote) {
             if (isActive) {
-                TileEntityCultivate tileentity = (TileEntityCultivate) world.getTileEntity(x, y, z);
+                TileEntityCultivate tileentity = (TileEntityCultivate) world.getTileEntity(pos);
                 if (tileentity != null) {
 
                     if (tileentity.getDNAType() == 2 || tileentity.getDNAType() == 3) {
@@ -110,7 +109,7 @@ public class CultivateBlock extends BlockContainer implements DefaultRenderedIte
                             ((EntityFailuresaurus) creature).setSkin(new Random().nextInt(3));
                         }
 
-                        ((EntityLiving) creature).setLocationAndAngles((double) x, (double) y, (double) z, world.rand.nextFloat() * 360.0F, 0.0F);
+                        ((EntityLiving) creature).setLocationAndAngles((double) pos.getX() + 0.5, (double) pos.getY() + 0.5, (double) pos.getZ() + 0.5, world.rand.nextFloat() * 360.0F, 0.0F);
                         world.spawnEntity((Entity) creature);
                     }
                     world.removeTileEntity(pos);

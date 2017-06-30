@@ -93,8 +93,8 @@ public class KylixVaseBlock extends BlockContainer implements DefaultRenderedIte
     {
         DAMAGED_KYLIX(0, "damaged_kylix"),
         RESTORED_KYLIX(1, "restored_kylix"),
-        REDFIGURE_KYLIX(2, "redFigure_kylix"),
-        BLACKFIGURE_KYLIX(3, "blackFigure_kylix"),
+        REDFIGURE_KYLIX(2, "redfigure_kylix"),
+        BLACKFIGURE_KYLIX(3, "blackfigure_kylix"),
         PORCELAIN_KYLIX(4, "porcelain_kylix");
 
         private static final KylixVaseBlock.EnumType[] META_LOOKUP = new KylixVaseBlock.EnumType[values().length];

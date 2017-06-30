@@ -1,25 +1,21 @@
 	package fossilsarcheology.server.block;
 
     import fossilsarcheology.Revival;
-    import fossilsarcheology.server.api.BlockEntity;
-    import net.minecraft.block.Block;
-    import net.minecraft.block.SoundType;
-    import net.minecraft.block.material.MapColor;
-    import net.minecraft.block.material.Material;
-    import net.minecraft.entity.Entity;
-    import net.minecraft.item.ItemBlock;
-    import net.minecraft.util.ResourceLocation;
-    import net.minecraft.world.World;
-    import net.minecraftforge.fluids.Fluid;
-    import net.minecraftforge.fluids.FluidRegistry;
-    import net.minecraftforge.fml.common.registry.GameRegistry;
+import fossilsarcheology.server.api.BlockEntity;
+import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
-    import java.lang.reflect.Field;
-    import java.util.ArrayList;
-    import java.util.List;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FABlockRegistry {
     public static final List<Block> BLOCKS = new ArrayList<>();
+
 
     public static final FossilBlock FOSSIL = new FossilBlock();
     public static final AmberOreBlock AMBER_ORE = new AmberOreBlock();
@@ -43,13 +39,13 @@ public class FABlockRegistry {
     public static final SlimeTrailBlock SLIME_TRAIL = new SlimeTrailBlock();
     public static final AncientStoneBlock ANCIENT_STONE = new AncientStoneBlock();
     public static final AncientStonebrickBlock ANCIENT_STONE_BRICK = new AncientStonebrickBlock();
-    public static final FossilStairsBlock ANCIENT_STONE_STAIRS = new FossilStairsBlock(ANCIENT_STONE.getDefaultState());
+    public static final FossilStairsBlock ANCIENT_STONE_STAIRS = new FossilStairsBlock(ANCIENT_STONE.getDefaultState(), "ancientStoneStairs");
     public static final FossilSlabBlock ANCIENT_STONE_SINGLESLAB = new AncientStoneSlabBlock.Double("ancientStoneSlab", 1.7F, 7.5F, SoundType.STONE);
     public static final FossilSlabBlock ANCIENT_STONE_DOUBLESLAB = new AncientStoneSlabBlock.Half("ancientStoneSlab", 1.7F, 7.5F, SoundType.STONE);
     public static final VolcanicAshBlock VOLCANIC_ASH = new VolcanicAshBlock("ash");
     public static final VolcanicAshBlock VOLCANIC_BRICK = new VolcanicAshBlock("brick");
     public static final VolcanicAshBlock VOLCANIC_ROCK = new VolcanicAshBlock("rock");
-    public static final FossilStairsBlock VOLCANIC_STAIRS = new FossilStairsBlock(VOLCANIC_BRICK.getDefaultState());
+    public static final FossilStairsBlock VOLCANIC_STAIRS = new FossilStairsBlock(VOLCANIC_BRICK.getDefaultState(), "volcanicStairs");
     public static final FossilSlabBlock VOLCANIC_DOUBLESLAB = new VolcanicSlabBlock.Double("volcanicSlab", 1.4F, 7.5F, SoundType.STONE);
     public static final FossilSlabBlock VOLCANIC_SINGLESLAB = new VolcanicSlabBlock.Half("volcanicSlab", 1.4F, 7.5F, SoundType.STONE);
     public static final AnuPortalBlock ANU_PORTAL = new AnuPortalBlock();
@@ -71,40 +67,36 @@ public class FABlockRegistry {
     public static final PalmPlanksBlock PALM_PLANKS = new PalmPlanksBlock();
     public static final FossilSlabBlock PALM_PLANKS_DOUBLESLAB = new PalmPlanksSlabBlock.Double("palaeorapheSlab", 1.4F, 7.5F, SoundType.WOOD);
     public static final FossilSlabBlock PALM_PLANKS_SINGLESLAB = new PalmPlanksSlabBlock.Half("palaeorapheSlab", 1.4F, 7.5F, SoundType.WOOD);
-    public static final FossilStairsBlock PALM_PLANKS_STAIRS = new FossilStairsBlock(PALM_PLANKS.getDefaultState());
+    public static final FossilStairsBlock PALM_PLANKS_STAIRS = new FossilStairsBlock(PALM_PLANKS.getDefaultState(), "palmStairs");
     public static final AncientWoodBlock ANCIENT_WOOD = new AncientWoodBlock();
     public static final AncientWoodPlateBlock ANCIENT_WOOD_PLATE = new AncientWoodPlateBlock();
-    public static final FossilStairsBlock ANCIENT_WOOD_STAIRS = new FossilStairsBlock(ANCIENT_WOOD.getDefaultState());
+    public static final FossilStairsBlock ANCIENT_WOOD_STAIRS = new FossilStairsBlock(ANCIENT_WOOD.getDefaultState(), "ancientWoodStairs");
     public static final FossilSlabBlock ANCIENT_WOOD_DOUBLESLAB = new AncientWoodSlabBlock.Double("ancientWoodSlab", 1.4F, 7.5F, SoundType.WOOD);
     public static final FossilSlabBlock ANCIENT_WOOD_SINGLESLAB = new AncientWoodSlabBlock.Half("ancientWoodSlab", 1.4F, 7.5F, SoundType.WOOD);
     public static final ObsidianSpikesBlock OBSIDIAN_SPIKES = new ObsidianSpikesBlock();
     public static final FernsBlock FERNS = new FernsBlock();
     public static final DillhoffiaFlowerBlock DILLHOFFIA_FLOWER = new DillhoffiaFlowerBlock();
     public static final SarraceniaFlowerBlock SARRACENIA_FLOWER = new SarraceniaFlowerBlock();
-    public static final CephalotaxusFlowerBlock CEPHALOTAXUS_FLOWER = new CephalotaxusFlowerBlock();
-    public static final LicopodiophytaFlowerBlock LICOPODIOPHYTA_FLOWER = new LicopodiophytaFlowerBlock();
-    public static final PaleopanaxFlowerBlock PALEOPANAX_FLOWER = new PaleopanaxFlowerBlock();
-    public static final ZamitesFlowerBlock ZAMITES_FLOWER = new ZamitesFlowerBlock();
-    public static final BennettitalesSmallFlowerBlock BENNETTITALES_SMALL_FLOWER = new BennettitalesSmallFlowerBlock();
-    public static final BennettitalesLargeFlowerBlock BENNETTITALES_LARGE_FLOWER = new BennettitalesLargeFlowerBlock();
-    public static final WelwitschiaFlowerBlock WELWITSCHIA_FLOWER = new WelwitschiaFlowerBlock();
-    public static final HorsetailSmallFlowerBlock HORSETAIL_SMALL_FLOWER = new HorsetailSmallFlowerBlock();
-    public static final HorsetailLargeFlowerBlock HORSETAIL_LARGE_FLOWER = new HorsetailLargeFlowerBlock();
-    public static final MutantFlowerBlock MUTANT_FLOWER = new MutantFlowerBlock();
+    public static final ShortFlowerBlock CEPHALOTAXUS_FLOWER = new ShortFlowerBlock("cephalotaxus");
+    public static final ShortFlowerBlock LICOPODIOPHYTA_FLOWER = new ShortFlowerBlock("licopodiophyta");
+    public static final TallFlowerBlock PALEOPANAX_FLOWER = new TallFlowerBlock("paleopanax");
+    public static final ShortFlowerBlock ZAMITES_FLOWER = new ShortFlowerBlock("zamites");
+    public static final ShortFlowerBlock BENNETTITALES_SMALL_FLOWER = new ShortFlowerBlock("bennettitales_small");
+    public static final TallFlowerBlock BENNETTITALES_LARGE_FLOWER = new TallFlowerBlock("bennettitales_large");
+    public static final ShortFlowerBlock WELWITSCHIA_FLOWER = new ShortFlowerBlock("welwitschia");
+    public static final ShortFlowerBlock HORSETAIL_SMALL_FLOWER = new ShortFlowerBlock("horsetail_small");
+    public static final TallFlowerBlock HORSETAIL_LARGE_FLOWER = new TallFlowerBlock("horsetail_large");
+    public static final TallFlowerBlock MUTANT_FLOWER = new TallFlowerBlock("mutant_plant");
     public static final TempskyaBlock TEMPSKYA_FLOWER = new TempskyaBlock();
-    public static final VacciniumFlowerBlock VACCINIUM_FLOWER = new VacciniumFlowerBlock();
-    public static final OsmundaFlowerBlock OSMUNDA_FLOWER = new OsmundaFlowerBlock();
-    public static final CrataegusFlowerBlock CRATAEGUS_FLOWER = new CrataegusFlowerBlock();
-    public static final FlorissantiaFlowerBlock FLORISSANTIA_FLOWER = new FlorissantiaFlowerBlock();
-    public static final EphendraFlowerBlock EPENDRA_FLOWER = new EphendraFlowerBlock();
-    public static final Fluid TAR_FLUID = new Fluid("tar", new ResourceLocation("fossil", "blocks/tar"), new ResourceLocation("fossil", "blocks/tar"));
-    public static final Material TAR_MATERIAL = new MaterialTar();
+    public static final ShortFlowerBlock VACCINIUM_FLOWER = new ShortFlowerBlock("vaccinium");
+    public static final ShortFlowerBlock OSMUNDA_FLOWER = new ShortFlowerBlock("osmunda");
+    public static final TallFlowerBlock CRATAEGUS_FLOWER = new TallFlowerBlock("crataegus");
+    public static final ShortFlowerBlock FLORISSANTIA_FLOWER = new ShortFlowerBlock("florissantia");
+    public static final ShortFlowerBlock EPENDRA_FLOWER = new ShortFlowerBlock("ependra");
+
 
 
     public static void register() {
-        FluidRegistry.registerFluid(TAR_FLUID);
-        FluidRegistry.addBucketForFluid(TAR_FLUID);
-
         try {
             for (Field f : FABlockRegistry.class.getDeclaredFields()) {
                 Object obj = f.get(null);

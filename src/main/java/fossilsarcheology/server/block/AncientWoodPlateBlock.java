@@ -2,7 +2,6 @@ package fossilsarcheology.server.block;
 
 import fossilsarcheology.server.tab.FATabRegistry;
 import net.minecraft.block.Block;
-import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.BlockRenderLayer;
@@ -17,8 +16,8 @@ public class AncientWoodPlateBlock extends Block{
 
     protected static final AxisAlignedBB PLATE_AABB = new AxisAlignedBB(0.0F, 0.0F, 0.0F, 1.0F, 0.125F, 1.0F);
 
-    public AncientWoodPlateBlock(Material blockMaterialIn, MapColor blockMapColorIn) {
-        super(blockMaterialIn, blockMapColorIn);
+    public AncientWoodPlateBlock() {
+        super(Material.WOOD);
         setCreativeTab(FATabRegistry.BLOCKS);
         setHardness(0.6F);
         setUnlocalizedName("ancientWoodPlate");

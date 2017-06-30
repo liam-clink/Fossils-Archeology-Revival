@@ -1,6 +1,7 @@
 package fossilsarcheology.client;
 
 import fossilsarcheology.client.gui.*;
+import fossilsarcheology.client.model.ModelAncientHelmet;
 import fossilsarcheology.client.particle.BubbleFX;
 import fossilsarcheology.client.render.RenderingHandler;
 import fossilsarcheology.server.ServerProxy;
@@ -64,4 +65,11 @@ public class ClientProxy extends ServerProxy {
     public void spawnBubbleParticles(World world, float f, float f1, float f2, double motionX, double motionY, double motionZ) {
         Minecraft.getMinecraft().effectRenderer.addEffect(new BubbleFX(world, f, f1, f2, motionX, motionY, motionZ));
     }
+
+    private static final ModelAncientHelmet helmetModel = new ModelAncientHelmet(1.0f);
+
+    public net.minecraft.client.model.ModelBiped getArmorModel(int id) {
+        return id == 0 ? helmetModel : null;
+    }
+
 }

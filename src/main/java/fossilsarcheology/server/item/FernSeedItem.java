@@ -1,6 +1,7 @@
 package fossilsarcheology.server.item;
 
 import fossilsarcheology.server.block.FABlockRegistry;
+import fossilsarcheology.server.block.FernsBlock;
 import fossilsarcheology.server.tab.FATabRegistry;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -27,7 +28,7 @@ public class FernSeedItem extends Item {
     @Override
     public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ){
         if (player.canPlayerEdit(pos, facing, stack) && player.canPlayerEdit(pos.up(), facing, stack)) {
-            if (canPlant(world.getBlockState(pos)) && world.isAirBlock(pos.up()) && BlockPrehistoricFern.checkUnderTree(world, pos)) {
+            if (canPlant(world.getBlockState(pos)) && world.isAirBlock(pos.up()) && FernsBlock.checkUnderTree(world, pos)) {
                 if(this.placePlantBlock(stack, world, pos.getX(), pos.getY(), pos.getZ(), new Random())){
                     world.playSound(player, pos, FABlockRegistry.DILLHOFFIA_FLOWER.getSoundType().getBreakSound(), SoundCategory.BLOCKS, 1F, new Random().nextFloat() * 0.1F + 0.8F);
                 }

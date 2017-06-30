@@ -6,8 +6,12 @@ import fossilsarcheology.server.achievement.FossilAchievements;
 import fossilsarcheology.server.entity.ai.AnuAIAttackOnCollide;
 import fossilsarcheology.server.entity.ai.AnuAIAvoidEntity;
 import fossilsarcheology.server.entity.ai.AnuAIFireballAttack;
+import fossilsarcheology.server.entity.utility.EntityAncientLightning;
 import fossilsarcheology.server.entity.utility.EntityAnuDead;
+import fossilsarcheology.server.entity.utility.FossilsPlayerProperties;
 import fossilsarcheology.server.item.FAItemRegistry;
+import fossilsarcheology.server.structure.SpikesBlockWorldGen;
+import net.ilexiconn.llibrary.server.entity.EntityPropertiesHandler;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
@@ -223,7 +227,7 @@ public class EntityAnu extends EntityMob implements IRangedAttackMob {
     @Override
     public boolean attackEntityAsMob(Entity entity) {
         if (this.getRNG().nextInt(4) == 0) {
-            this.world.addWeatherEffect(new EntityAnuLightning(this.world, entity.posX, entity.posY, entity.posZ));
+            this.world.addWeatherEffect(new EntityAncientLightning(this.world, entity.posX, entity.posY, entity.posZ));
         }
         return super.attackEntityAsMob(entity);
     }
@@ -311,7 +315,7 @@ public class EntityAnu extends EntityMob implements IRangedAttackMob {
 
             if (spikechoice == 0) {
                 this.playSound(SoundEvents.BLOCK_STONE_HIT, 1, 1);
-                new SpikesBlockWorldGen().generate(world, this.getRNG(), (int) this.posX, (int) this.posY, (int) this.posZ);
+                new SpikesBlockWorldGen().generate(world, this.getRNG(), this.getPosition());
             }
             if (defensechoice == 0) {
                 this.playSound(SoundEvents.BLOCK_STONE_HIT, 1, 1);
@@ -515,7 +519,8 @@ public class EntityAnu extends EntityMob implements IRangedAttackMob {
     public void onKillEntity(EntityLivingBase entity) {
         if (entity instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) entity;
-            FossilPlayerProperites.get(player).setKilledAnu(true);//TODO
+            FossilsPlayerProperties properties = EntityPropertiesHandler.INSTANCE.getProperties(player, FossilsPlayerProperties.class);
+            properties.killedAnu = true;
         }
     }
 

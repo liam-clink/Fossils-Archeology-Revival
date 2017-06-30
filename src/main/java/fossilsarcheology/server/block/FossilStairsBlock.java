@@ -7,10 +7,11 @@ import net.minecraft.block.state.IBlockState;
 
 public class FossilStairsBlock extends BlockStairs implements DefaultRenderedItem {
 
-    protected FossilStairsBlock(IBlockState modelState) {
+    protected FossilStairsBlock(IBlockState modelState, String name) {
         super(modelState);
         this.setLightOpacity(0);
         this.setCreativeTab(FATabRegistry.BLOCKS);
+        this.setUnlocalizedName(name);
     }
 
     @Override

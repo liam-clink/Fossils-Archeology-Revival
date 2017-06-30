@@ -8,7 +8,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import java.util.Set;
 
@@ -21,7 +20,6 @@ public class BasicAxeItem extends ItemTool {
         this.attackSpeed = -3;
         this.setUnlocalizedName(name);
         this.setCreativeTab(FATabRegistry.ITEMS);
-        GameRegistry.register(this);
     }
 
     @Override

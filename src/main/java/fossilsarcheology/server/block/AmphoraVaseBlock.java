@@ -35,6 +35,7 @@ public class AmphoraVaseBlock extends BlockContainer implements DefaultRenderedI
         this.setUnlocalizedName("vaseAmphora");
         this.setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, EnumType.DAMAGED_AMPHORA));
     }
+
     public int damageDropped(IBlockState state) {
         return ((AmphoraVaseBlock.EnumType)state.getValue(VARIANT)).getMetadata();
     }
@@ -91,8 +92,8 @@ public class AmphoraVaseBlock extends BlockContainer implements DefaultRenderedI
     {
         DAMAGED_AMPHORA(0, "damaged_amphora"),
         RESTORED_AMPHORA(1, "restored_amphora"),
-        REDFIGURE_AMPHORA(2, "redFigure_amphora"),
-        BLACKFIGURE_AMPHORA(3, "blackFigure_amphora"),
+        REDFIGURE_AMPHORA(2, "redfigure_amphora"),
+        BLACKFIGURE_AMPHORA(3, "blackfigure_amphora"),
         PORCELAIN_AMPHORA(4, "porcelain_amphora");
 
         private static final AmphoraVaseBlock.EnumType[] META_LOOKUP = new AmphoraVaseBlock.EnumType[values().length];

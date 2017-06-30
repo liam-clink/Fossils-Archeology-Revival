@@ -169,7 +169,6 @@ public class EntityAnubite extends EntityMob {
         }
 
         public void startExecuting() {
-            this.aggroTime = 5;
             this.teleportTime = 0;
         }
 

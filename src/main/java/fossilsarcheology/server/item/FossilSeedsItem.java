@@ -1,6 +1,7 @@
 package fossilsarcheology.server.item;
 
 import fossilsarcheology.server.block.FABlockRegistry;
+import fossilsarcheology.server.block.TempskyaBlock;
 import fossilsarcheology.server.tab.FATabRegistry;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
@@ -26,6 +27,7 @@ public class FossilSeedsItem extends Item {
         this.setHasSubtypes(true);
         this.isFossil = isFossil;
         this.setCreativeTab(FATabRegistry.ITEMS);
+        this.setUnlocalizedName(isFossil ? "fossilSeed" : "seed");
     }
 
     @Override
@@ -88,8 +90,11 @@ public class FossilSeedsItem extends Item {
                 world.setBlockState(new BlockPos(x, y + 1, z), FABlockRegistry.HORSETAIL_SMALL_FLOWER.getDefaultState());
                 return true;
             case 9:
-                if(((TempskyaBlock)FABlockRegistry.TEMPSKYA_FLOWER).canPlaceBlockAt(world, x, y + 1, z)){
-                    ((TempskyaBlock)FABlockRegistry.TEMPSKYA_FLOWER).makeTempskya(world, x, y + 1, z);
+                if(((TempskyaBlock)FABlockRegistry.TEMPSKYA_FLOWER).canPlaceBlockAt(world, new BlockPos(x, y + 1, z))){
+                    world.setBlockState(new BlockPos(x, y + 1, z), FABlockRegistry.TEMPSKYA_FLOWER.getDefaultState().withProperty(TempskyaBlock.LAYER, 0), 2);
+                    world.setBlockState(new BlockPos(x, y + 2, z), FABlockRegistry.TEMPSKYA_FLOWER.getDefaultState().withProperty(TempskyaBlock.LAYER, 1), 2);
+                    world.setBlockState(new BlockPos(x, y + 3, z), FABlockRegistry.TEMPSKYA_FLOWER.getDefaultState().withProperty(TempskyaBlock.LAYER, 2), 2);
+                    world.setBlockState(new BlockPos(x, y + 4, z), FABlockRegistry.TEMPSKYA_FLOWER.getDefaultState().withProperty(TempskyaBlock.LAYER, 3), 2);
                     return true;
                 }
             case 10:

@@ -1,6 +1,5 @@
 package fossilsarcheology.server.container;
 
-import fossilsarcheology.server.achievement.FossilAchievements;
 import fossilsarcheology.server.block.entity.TileEntityTimeMachine;
 import fossilsarcheology.server.item.FAItemRegistry;
 import net.minecraft.entity.player.EntityPlayer;
@@ -43,7 +42,7 @@ public class TimeMachineContainer extends Container {
             if (slot.getStack() != null) {
                 if (slot.getStack().getItem() != null) {
                     if (slot.getStack().getItem() == FAItemRegistry.ANCIENT_CLOCK) {
-                        par1EntityPlayer.addStat(FossilAchievements.TIME_MACHINE, 1);
+                      //  par1EntityPlayer.addStat(FossilAchievements.TIME_MACHINE, 1);
                     }
                 }
             }

@@ -4,6 +4,7 @@ import fossilsarcheology.Revival;
 import fossilsarcheology.client.sound.FASoundRegistry;
 import fossilsarcheology.server.achievement.FossilAchievements;
 import fossilsarcheology.server.block.FABlockRegistry;
+import fossilsarcheology.server.block.FAFluidRegistry;
 import fossilsarcheology.server.block.entity.*;
 import fossilsarcheology.server.container.*;
 import fossilsarcheology.server.entity.EntityFishBase;
@@ -32,9 +33,9 @@ public class ServerProxy implements IGuiHandler {
         NetworkRegistry.INSTANCE.registerGuiHandler(Revival.INSTANCE, this);
 
         FASoundRegistry.register();
-
-        FAItemRegistry.register();
+        FAFluidRegistry.register();
         FABlockRegistry.register();
+        FAItemRegistry.register();
 
         FAEntityRegistry.register();
 
@@ -108,5 +109,9 @@ public class ServerProxy implements IGuiHandler {
     }
 
     public void stopSound(SoundEvent sound) {
+    }
+
+    public net.minecraft.client.model.ModelBiped getArmorModel(int id) {
+        return null;
     }
 }

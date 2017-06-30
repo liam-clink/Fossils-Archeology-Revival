@@ -151,7 +151,7 @@ public class FernsBlock extends BlockBush {
     }
 
     public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState().withProperty(TYPE, Integer.valueOf(meta / 8)).withProperty(GROWTH, Integer.valueOf((meta > 7 ? meta : meta - 8)));
+        return this.getDefaultState().withProperty(TYPE, Integer.valueOf(meta / 8)).withProperty(GROWTH, Integer.valueOf((meta < 8 ? meta : meta - 8)));
     }
 
     public int getMetaFromState(IBlockState state) {

@@ -7,7 +7,6 @@ import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
-import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
@@ -87,7 +86,7 @@ public class EntityTarSlime extends EntitySlime {
 
     @Override
     protected Item getDropItem() {
-        return FAItemRegistry.TAR_DROP;
+        return FAItemRegistry.TARDROP;
     }
 
     @Override

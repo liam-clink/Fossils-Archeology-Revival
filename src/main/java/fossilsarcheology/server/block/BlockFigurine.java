@@ -20,7 +20,6 @@ import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -28,14 +27,12 @@ import java.util.List;
 
 public class BlockFigurine extends BlockContainer implements IBlockItem {
     public static final PropertyEnum<BlockFigurine.EnumType> VARIANT = PropertyEnum.<BlockFigurine.EnumType>create("variant", BlockFigurine.EnumType.class);
-    public Item itemBlock;
 
     protected BlockFigurine() {
         super(Material.ROCK);
         this.setCreativeTab(FATabRegistry.BLOCKS);
         this.setUnlocalizedName("figurine");
         this.setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, EnumType.FIGURINE_STEVE_PRISTINE));
-        GameRegistry.register(itemBlock = (new ItemBlock(this).setRegistryName(this.getRegistryName())));
 
     }
 

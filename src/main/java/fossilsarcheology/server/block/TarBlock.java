@@ -20,8 +20,9 @@ import javax.annotation.Nullable;
 
 public class TarBlock extends BlockFluidClassic {
     public TarBlock() {
-        super(FABlockRegistry.TAR_FLUID, FABlockRegistry.TAR_MATERIAL);
+        super(FAFluidRegistry.TAR_FLUID, FAFluidRegistry.TAR_MATERIAL);
         this.setLightOpacity(1);
+        this.setUnlocalizedName("tar");
     }
 
     @Override

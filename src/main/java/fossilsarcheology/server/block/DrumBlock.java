@@ -1,6 +1,7 @@
 package fossilsarcheology.server.block;
 
 import fossilsarcheology.client.sound.FASoundRegistry;
+import fossilsarcheology.server.tab.FATabRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -28,7 +29,7 @@ public class DrumBlock extends Block{
         this.setTickRandomly(true);
         this.setUnlocalizedName("drum");
         this.setSoundType(SoundType.WOOD);
-
+        this.setCreativeTab(FATabRegistry.BLOCKS);
     }
 
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, @Nullable ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {

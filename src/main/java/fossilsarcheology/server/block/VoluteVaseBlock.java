@@ -93,8 +93,8 @@ public class VoluteVaseBlock extends BlockContainer implements DefaultRenderedIt
     {
         DAMAGED_VOLUTE(0, "damaged_volute"),
         RESTORED_VOLUTE(1, "restored_volute"),
-        REDFIGURE_VOLUTE(2, "redFigure_volute"),
-        BLACKFIGURE_VOLUTE(3, "blackFigure_volute"),
+        REDFIGURE_VOLUTE(2, "redfigure_volute"),
+        BLACKFIGURE_VOLUTE(3, "blackfigure_volute"),
         PORCELAIN_VOLUTE(4, "porcelain_volute");
 
         private static final VoluteVaseBlock.EnumType[] META_LOOKUP = new VoluteVaseBlock.EnumType[values().length];

@@ -40,13 +40,13 @@ public class FAItemRegistry {
     public static final BasicHoeItem SCARAB_HOE = new BasicHoeItem(SCARAB_MATERIAL, "scarab_hoe");
     public static final BasicShovelItem SCARAB_SHOVEL = new BasicShovelItem(SCARAB_MATERIAL, "scarab_shovel");
     public static final BasicArmorItem SKULL_HELMET = new BasicArmorItem(BONE, 0, EntityEquipmentSlot.HEAD, "skull_helmet");
-    public static final BasicArmorItem RIBCAGE_CHESTPLATE = new BasicArmorItem(BONE, 1, EntityEquipmentSlot.CHEST, "skull_helmet");
+    public static final BasicArmorItem RIBCAGE_CHESTPLATE = new BasicArmorItem(BONE, 1, EntityEquipmentSlot.CHEST, "skull_chestplate");
     public static final BasicArmorItem SHIN_LEGGINGS = new BasicArmorItem(BONE, 2, EntityEquipmentSlot.LEGS, "shin_leggings");
     public static final BasicArmorItem FEET_BOOTS = new BasicArmorItem(BONE, 3, EntityEquipmentSlot.FEET, "feet_boots");
     public static final BasicItem ANCIENT_KEY = new BasicItem("ancient_key");
     public static final BasicItem ANCIENT_CLOCK = new BasicItem("ancient_clock");
     public static final BasicItem SHELL = new BasicItem("shell");
-    public static final BasicFoodItem SJL = new BasicFoodItem(8, 2, false, "shell");
+    public static final BasicFoodItem SJL = new BasicFoodItem(8, 2, false, "sjl");
     public static final BasicItem MAGIC_CONCH = new BasicItem("magic_conch");
     public static final BasicFoodItem RAW_CHICKEN_SOUP = new BasicFoodItem(4, 2, false, "raw_chicken_soup");
     public static final BasicFoodItem COOKED_CHICKEN_SOUP = new BasicFoodItem(8, 2, false, "cooked_chicken_soup");
