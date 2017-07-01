@@ -11,6 +11,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 
 public class ClientProxy extends ServerProxy {
     public static final Minecraft MINECRAFT = Minecraft.getMinecraft();
@@ -25,6 +26,7 @@ public class ClientProxy extends ServerProxy {
     @Override
     public void onInit() {
         super.onInit();
+        MinecraftForge.EVENT_BUS.register(new FAMainMenuGUI());
         RENDER_HANDLER.onInit();
     }
 
