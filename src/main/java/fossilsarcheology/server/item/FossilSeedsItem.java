@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Random;
 
 public class FossilSeedsItem extends Item {
-    private static final String[] fossilSeeds = new String[]{"dillhoffia", "sarracina", "cephalotaxus", "licopodiophyta", "paleopanax", "zamites", "bennettitales", "welwitschia", "horsetail", "tempskya", "vaccinium", "osmunda", "crataegus", "florissantia", "ephedra"};
+    public static final String[] fossilSeeds = new String[]{"dillhoffia", "sarracina", "cephalotaxus", "licopodiophyta", "paleopanax", "zamites", "bennettitales", "welwitschia", "horsetail", "tempskya", "vaccinium", "osmunda", "crataegus", "florissantia", "ephedra"};
     public boolean isFossil;
 
     public FossilSeedsItem(boolean isFossil) {

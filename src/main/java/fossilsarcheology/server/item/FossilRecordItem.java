@@ -1,12 +1,13 @@
 package fossilsarcheology.server.item;
 
 import fossilsarcheology.Revival;
+import fossilsarcheology.server.api.DefaultRenderedItem;
 import fossilsarcheology.server.tab.FATabRegistry;
 import net.minecraft.item.ItemRecord;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 
-public class FossilRecordItem extends ItemRecord {
+public class FossilRecordItem extends ItemRecord implements DefaultRenderedItem {
 
     public final String recordName;
 

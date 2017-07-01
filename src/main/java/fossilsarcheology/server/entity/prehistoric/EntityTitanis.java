@@ -32,7 +32,7 @@ import javax.annotation.Nullable;
 public class EntityTitanis extends EntityPrehistoric {
 
     public EntityTitanis(World world) {
-        super(world, PrehistoricEntityType.TITIANIS, 1, 4, 10, 36, 0.25, 0.36);
+        super(world, PrehistoricEntityType.TITANIS, 1, 4, 10, 36, 0.25, 0.36);
         this.tasks.addTask(1, new EntityAISwimming(this));
         this.tasks.addTask(2, this.aiSit);
         this.tasks.addTask(4, new DinoAIAttackOnCollide(this, 2.0D, false));

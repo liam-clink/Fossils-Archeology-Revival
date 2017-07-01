@@ -1,6 +1,7 @@
 package fossilsarcheology.server.item;
 
 import fossilsarcheology.Revival;
+import fossilsarcheology.server.api.DefaultRenderedItem;
 import fossilsarcheology.server.tab.FATabRegistry;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -9,7 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class AncientHelmetItem extends ItemArmor{
+public class AncientHelmetItem extends ItemArmor implements DefaultRenderedItem {
     public AncientHelmetItem() {
         super(ArmorMaterial.IRON, 0, EntityEquipmentSlot.HEAD);
         this.setCreativeTab(FATabRegistry.ITEMS);

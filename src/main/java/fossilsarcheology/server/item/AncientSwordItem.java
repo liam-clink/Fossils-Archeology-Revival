@@ -1,5 +1,6 @@
 package fossilsarcheology.server.item;
 
+import fossilsarcheology.server.api.DefaultRenderedItem;
 import fossilsarcheology.server.entity.monster.EntityFriendlyPigZombie;
 import fossilsarcheology.server.entity.utility.EntityAncientLightning;
 import fossilsarcheology.server.tab.FATabRegistry;
@@ -13,7 +14,7 @@ import net.minecraft.item.ItemSword;
 
 import java.util.Random;
 
-public class AncientSwordItem extends ItemSword{
+public class AncientSwordItem extends ItemSword implements DefaultRenderedItem {
 
     public AncientSwordItem() {
         super(ToolMaterial.IRON);

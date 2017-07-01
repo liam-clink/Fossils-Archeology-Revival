@@ -18,6 +18,7 @@ import fossilsarcheology.server.entity.utility.EntityAnuEffect;
 import fossilsarcheology.server.entity.utility.EntityToyBall;
 import fossilsarcheology.server.entity.utility.EntityToyScratchingPost;
 import fossilsarcheology.server.item.FAItemRegistry;
+import fossilsarcheology.server.item.FossilSeedsItem;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.client.Minecraft;
@@ -36,13 +37,17 @@ public class RenderingHandler {
     private static final Minecraft MINECRAFT = Minecraft.getMinecraft();
 
     public void onPreInit() {
+        for(int i = 0; i < FossilSeedsItem.fossilSeeds.length; i++){
+            this.registerItemRenderer(FAItemRegistry.FOSSIL_SEED, i, "fossilseed_" + FossilSeedsItem.fossilSeeds[i], "inventory");
+            this.registerItemRenderer(FAItemRegistry.SEED, i, "seed_" + FossilSeedsItem.fossilSeeds[i], "inventory");
+        }
+
         for (Block block : FABlockRegistry.BLOCKS) {
             if (block instanceof IgnoreRenderProperty) {
                 IProperty<?>[] ignoredProperties = ((IgnoreRenderProperty) block).getIgnoredProperties();
                 ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(ignoredProperties).build());
             }
         }
-
 
         for (Block block : FABlockRegistry.BLOCKS) {
             if (block instanceof DefaultRenderedItem) {

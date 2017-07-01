@@ -80,10 +80,10 @@ public class FAItemRegistry {
     public static final FernSeedItem FERN_SEED = new FernSeedItem();
     public static final Item TAR_BUCKET = new ItemBucket(FABlockRegistry.TAR).setUnlocalizedName("tar_bucket").setContainerItem(Items.BUCKET).setCreativeTab(FATabRegistry.ITEMS);
     public static final BasicItem TARDROP = new BasicItem("tardrop");
-    public static final FossilRecordItem FOSSIL_RECORD_BONES = new FossilRecordItem("record_bones_desc", FASoundRegistry.RECORD_BONES, "record_bones_disc");
-    public static final FossilRecordItem FOSSIL_RECORD_NANO_ANU = new FossilRecordItem("music.anu", FASoundRegistry.MUSIC_ANU, "music.anu");
-    public static final FossilRecordItem FOSSIL_RECORD_NANO_SCARAB = new FossilRecordItem("music.scarab", FASoundRegistry.MUSIC_SCARAB, "music.scarab");
-    public static final FossilRecordItem FOSSIL_RECORD_NANO_DISCOVERING = new FossilRecordItem("music.discovery", FASoundRegistry.RECORD_BONES, "music.discovery");
+    public static final FossilRecordItem FOSSIL_RECORD_BONES = new FossilRecordItem("record_bones_desc", FASoundRegistry.RECORD_BONES, "record_bones");
+    public static final FossilRecordItem FOSSIL_RECORD_NANO_ANU = new FossilRecordItem("music.anu", FASoundRegistry.MUSIC_ANU, "record_anu");
+    public static final FossilRecordItem FOSSIL_RECORD_NANO_SCARAB = new FossilRecordItem("music.scarab", FASoundRegistry.MUSIC_SCARAB, "record_scarab");
+    public static final FossilRecordItem FOSSIL_RECORD_NANO_DISCOVERING = new FossilRecordItem("music.discovery", FASoundRegistry.RECORD_BONES, "record_discovering");
     public static final DinosaurBoneItem LEG_BONE = new DinosaurBoneItem("leg_bone");
     public static final DinosaurBoneItem UNIQUE_ITEM = new DinosaurBoneItem("unique_item");
     public static final DinosaurBoneItem FOOT = new DinosaurBoneItem("foot");
