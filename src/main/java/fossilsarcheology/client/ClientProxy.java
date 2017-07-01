@@ -7,6 +7,7 @@ import fossilsarcheology.client.render.RenderingHandler;
 import fossilsarcheology.server.ServerProxy;
 import fossilsarcheology.server.block.entity.*;
 import fossilsarcheology.server.entity.EntityFishBase;
+import fossilsarcheology.server.event.FossilMainMenuEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
@@ -26,7 +27,7 @@ public class ClientProxy extends ServerProxy {
     @Override
     public void onInit() {
         super.onInit();
-        MinecraftForge.EVENT_BUS.register(new FAMainMenuGUI());
+        MinecraftForge.EVENT_BUS.register(new FossilMainMenuEvent());
         RENDER_HANDLER.onInit();
     }
 

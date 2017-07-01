@@ -101,13 +101,13 @@ public class FAMainMenuGUI extends GuiMainMenu {
             ResourceLocation layerTexture = this.layerTextures[i];
             this.mc.getTextureManager().bindTexture(layerTexture);
             drawTexturedModalRect(0, 0, (i == 1 ? this.backAdd : this.frontAdd) + ((this.layerTick + partialTicks) / (float) (this.layerTextures.length - i)) + (float) (i + 1) + 2048 * i / 4.0F, 0, this.width, this.height, 2048 / (this.layerTextures.length - i) * (this.height / 128.0F), this.height, this.zLevel);
-            Gui.drawRect(0, 0, this.width, this.height, 0x50000000);
+           // Gui.drawRect(0, 0, this.width, this.height, 0x50000000);
             GL11.glEnable(GL11.GL_TEXTURE_2D);
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
             GL11.glEnable(GL11.GL_BLEND);
         }
 
-        this.fontRendererObj.drawStringWithShadow(ChatFormatting.RED + Revival.RELEASE_TYPE.getBranding(), 2, this.height - 10, 0xFFFFFFFF);
+        this.fontRendererObj.drawStringWithShadow("Fossils & Archeology Revival " + ChatFormatting.RED + Revival.RELEASE_TYPE.getBranding(), 2, this.height - 10, 0xFFFFFFFF);
 
         GL11.glPushMatrix();
         GL11.glTranslatef(0.0F, MathHelper.sin(((float) this.layerTick + partialTicks) / 16.0F) * 4.0F, 0.0F);
