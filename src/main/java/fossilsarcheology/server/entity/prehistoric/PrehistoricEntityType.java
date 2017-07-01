@@ -143,13 +143,13 @@ public enum PrehistoricEntityType {
             }
             if (type.timePeriod != TimePeriod.CURRENT) {
                 if (type.mobType != MobType.FISH) {
-                    type.foodItem = new ItemFood(3, 0.3F, true).setUnlocalizedName("raw_" + resourceName).setCreativeTab(FATabRegistry.ITEMS);
+                    type.foodItem = new ItemFood(3, 0.3F, true).setUnlocalizedName(resourceName + "_meat").setCreativeTab(FATabRegistry.ITEMS);
                     FAItemRegistry.registerItem(type.foodItem);
                 }
-//                if (type != NAUTILUS) { TODO
-                type.cookedFoodItem = new ItemFood(8, 0.8F, true).setUnlocalizedName("cooked_" + resourceName).setCreativeTab(FATabRegistry.ITEMS);
+                if (type != NAUTILUS) {
+                type.cookedFoodItem = new ItemFood(8, 0.8F, true).setUnlocalizedName(resourceName + "_cooked").setCreativeTab(FATabRegistry.ITEMS);
                 FAItemRegistry.registerItem(type.cookedFoodItem);
-//                }
+            }
             }
         }
     }

@@ -9,7 +9,7 @@ import net.minecraft.util.EnumHand;
 
 public class MammalEmbryoItem extends PrehistoricEntityItem implements DefaultRenderedItem {
     public MammalEmbryoItem(PrehistoricEntityType type) {
-        super("embryo", type);
+        super("syringe", type);
         this.setMaxDamage(0);
         this.type = type;
     }

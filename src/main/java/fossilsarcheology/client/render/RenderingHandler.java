@@ -24,6 +24,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemFood;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
@@ -51,6 +52,7 @@ public class RenderingHandler {
 
         for (Item item : FAItemRegistry.ITEMS) {
             String name = item.getUnlocalizedName().substring("item.".length());
+
             if (item instanceof DefaultRenderedItem) {
                 this.registerItemRenderer(item, ((DefaultRenderedItem) item).getResource(name), "inventory");
             } else if (item instanceof SubtypeRenderedItem) {
@@ -59,6 +61,9 @@ public class RenderingHandler {
                 for (int metadata : subtypes) {
                     this.registerItemRenderer(item, metadata, subtypeItem.getResource(name, metadata), "inventory");
                 }
+            }else if (item instanceof ItemFood){
+                this.registerItemRenderer(item, name, "inventory");
+                this.registerItemRenderer(item, name, "inventory");
             }
         }
     }
