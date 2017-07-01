@@ -42,7 +42,7 @@ public class RenderingHandler {
 
         this.registerItemRenderer(FAItemRegistry.TAR_BUCKET, "tar_bucket", "inventory");
 
-        for(int i = 0; i < EnumDyeColor.values().length; i++){
+        for(int i = 0; i < 16; i++){
             this.registerItemRenderer(FAItemRegistry.TOY_BALL, i, "toyball_" + EnumDyeColor.byDyeDamage(i).getName(), "inventory");
         }
 
