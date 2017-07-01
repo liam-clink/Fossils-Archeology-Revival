@@ -27,7 +27,7 @@ public class FossilSeedsItem extends Item {
         this.setHasSubtypes(true);
         this.isFossil = isFossil;
         this.setCreativeTab(FATabRegistry.ITEMS);
-        this.setUnlocalizedName(isFossil ? "fossilSeed" : "seed");
+        this.setUnlocalizedName(isFossil ? "fossilseed" : "seed");
     }
 
     @Override
@@ -124,6 +124,6 @@ public class FossilSeedsItem extends Item {
             meta = 0;
         }
 
-        return super.getUnlocalizedName() + "." + fossilSeeds[meta];
+        return super.getUnlocalizedName() + "_" + fossilSeeds[meta];
     }
 }

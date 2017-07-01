@@ -49,7 +49,7 @@ public enum PrehistoricEntityType {
     CONFUCIUSORNIS(EntityConfuciusornis.class, MobType.BIRD, TimePeriod.MESOZOIC, Diet.HERBIVORE, Parameter.TAME | Parameter.HERBIVORE, 0XDAE5E9, 0X8B8B8D),
     DODO(EntityDodo.class, MobType.BIRD, TimePeriod.CENOZOIC, Diet.HERBIVORE, Parameter.TAME | Parameter.HERBIVORE, 0X655751, 0XBEA47B),
     GASTORNIS(EntityGastornis.class, MobType.BIRD, TimePeriod.CENOZOIC, Diet.HERBIVORE, Parameter.TAME, 0X346C5E, 0XC8C8C8),
-    KELEKEN(EntityKelenken.class, MobType.BIRD, TimePeriod.CENOZOIC, Diet.CARNIVORE, Parameter.TAME, 0X392F24, 0XF2EBD5),
+    KELENKEN(EntityKelenken.class, MobType.BIRD, TimePeriod.CENOZOIC, Diet.CARNIVORE, Parameter.TAME, 0X392F24, 0XF2EBD5),
     PHORUSRHACOS(EntityPhorusrhacos.class, MobType.BIRD, TimePeriod.CENOZOIC, Diet.CARNIVORE, Parameter.TAME, 0X5F4E3E, 0XD4D4D4),
     TITIANIS(EntityTitanis.class, MobType.BIRD, TimePeriod.CENOZOIC, Diet.CARNIVORE, Parameter.TAME, 0X484848, 0XEFEFEF),
     MAMMOTH(EntityMammoth.class, MobType.MAMMAL, TimePeriod.CENOZOIC, Diet.HERBIVORE, Parameter.TAME | Parameter.RIDE | Parameter.HERBIVORE, 0X3D2E19, 0X24170B),

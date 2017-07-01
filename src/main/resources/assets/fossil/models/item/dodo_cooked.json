@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "fossil:items/cookedFooddodo_cooked"
+    "layer0": "fossil:items/cookedFood/dodo_cooked"
   }
 }

@@ -9,6 +9,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
 public class FossilAchivementEvents {
+
     @SubscribeEvent
     public void onCraftEvent(PlayerEvent.ItemCraftedEvent event) {
         EntityPlayer player = event.player;

@@ -24,7 +24,7 @@ import javax.annotation.Nullable;
 public class EntityKelenken extends EntityPrehistoric {
 
     public EntityKelenken(World world) {
-        super(world, PrehistoricEntityType.KELEKEN, 1, 6, 10, 40, 0.25, 0.35);
+        super(world, PrehistoricEntityType.KELENKEN, 1, 6, 10, 40, 0.25, 0.35);
         this.tasks.addTask(1, new EntityAISwimming(this));
         this.tasks.addTask(2, this.aiSit);
         this.tasks.addTask(3, new DinoAIRiding(this, 1.0F));
