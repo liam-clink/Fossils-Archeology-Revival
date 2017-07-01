@@ -1,5 +1,6 @@
 package fossilsarcheology.server.item;
 
+import fossilsarcheology.server.api.DefaultRenderedItem;
 import fossilsarcheology.server.block.FABlockRegistry;
 import fossilsarcheology.server.block.FernsBlock;
 import fossilsarcheology.server.tab.FATabRegistry;
@@ -16,7 +17,7 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class FernSeedItem extends Item {
+public class FernSeedItem extends Item implements DefaultRenderedItem{
 
     public FernSeedItem() {
         super();

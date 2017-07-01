@@ -23,7 +23,7 @@ public class ToyBallItem extends Item {
         this.setHasSubtypes(true);
         this.setMaxDamage(0);
         this.setCreativeTab(CreativeTabs.MATERIALS);
-        this.setUnlocalizedName("toyBall");
+        this.setUnlocalizedName("toyball");
         this.setCreativeTab(FATabRegistry.ITEMS);
     }
 

@@ -1,5 +1,6 @@
 package fossilsarcheology.server.item;
 
+import fossilsarcheology.server.api.DefaultRenderedItem;
 import fossilsarcheology.server.entity.utility.EntityToyTetheredLog;
 import fossilsarcheology.server.tab.FATabRegistry;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,10 +12,10 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class ToyTetheredLog extends Item{
+public class ToyTetheredLog extends Item implements DefaultRenderedItem {
 
     public ToyTetheredLog() {
-        this.setUnlocalizedName("toyTetheredLog");
+        this.setUnlocalizedName("toytetheredlog");
         this.setCreativeTab(FATabRegistry.ITEMS);
     }
 

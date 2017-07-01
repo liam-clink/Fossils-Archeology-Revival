@@ -254,7 +254,7 @@ public class TileEntitySifter extends TileEntity implements IInventory, ISidedIn
                     if (random < 0.4) {
                         result = new ItemStack(FAItemRegistry.DOMINICAN_AMBER, 1);
                     } else if (random < 15) {
-                        result = new ItemStack(FAItemRegistry.BROKEN_SAPLING, 1);
+                        result = new ItemStack(FAItemRegistry.PALAE_SAPLING_FOSSIL, 1);
                     } else if (random < 30) {
                         result = new ItemStack(Items.POTATO, 1);
                     } else if (random < 40) {
@@ -271,7 +271,7 @@ public class TileEntitySifter extends TileEntity implements IInventory, ISidedIn
                         int i = (new Random()).nextInt(15);
                         Item i0;
                         if (i == 0) {
-                            i0 = FAItemRegistry.BROKEN_SAPLING;
+                            i0 = FAItemRegistry.PALAE_SAPLING_FOSSIL;
                         } else {
                             i0 = FAItemRegistry.BIOFOSSIL;
                         }

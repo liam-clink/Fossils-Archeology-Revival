@@ -1,5 +1,6 @@
 package fossilsarcheology.server.item;
 
+import fossilsarcheology.server.api.DefaultRenderedItem;
 import fossilsarcheology.server.entity.utility.EntityToyScratchingPost;
 import fossilsarcheology.server.tab.FATabRegistry;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,10 +12,10 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class ToyScratchingPost extends Item {
+public class ToyScratchingPost extends Item implements DefaultRenderedItem {
 
     public ToyScratchingPost() {
-        this.setUnlocalizedName("toyScratchingPost");
+        this.setUnlocalizedName("toyscratchingpost");
         this.setCreativeTab(FATabRegistry.ITEMS);
     }
         public EnumActionResult onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {

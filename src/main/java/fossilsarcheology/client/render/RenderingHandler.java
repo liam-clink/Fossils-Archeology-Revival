@@ -24,6 +24,7 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMap;
+import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 import net.minecraft.util.ResourceLocation;
@@ -36,7 +37,15 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class RenderingHandler {
     private static final Minecraft MINECRAFT = Minecraft.getMinecraft();
 
+
     public void onPreInit() {
+
+        this.registerItemRenderer(FAItemRegistry.TAR_BUCKET, "tar_bucket", "inventory");
+
+        for(int i = 0; i < EnumDyeColor.values().length; i++){
+            this.registerItemRenderer(FAItemRegistry.TOY_BALL, i, "toyball_" + EnumDyeColor.byDyeDamage(i).getName(), "inventory");
+        }
+
         for(int i = 0; i < FossilSeedsItem.fossilSeeds.length; i++){
             this.registerItemRenderer(FAItemRegistry.FOSSIL_SEED, i, "fossilseed_" + FossilSeedsItem.fossilSeeds[i], "inventory");
             this.registerItemRenderer(FAItemRegistry.SEED, i, "seed_" + FossilSeedsItem.fossilSeeds[i], "inventory");

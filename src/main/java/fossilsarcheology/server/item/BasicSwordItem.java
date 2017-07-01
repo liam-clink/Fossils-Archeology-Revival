@@ -10,6 +10,9 @@ public class BasicSwordItem extends ItemSword implements DefaultRenderedItem {
         super(toolmaterial);
         this.setUnlocalizedName(name);
         this.setCreativeTab(FATabRegistry.ITEMS);
+        if(toolmaterial == FAItemRegistry.ICED_MEAT_MATERIAL){
+            this.setMaxDamage(4);
+        }
     }
 
 }

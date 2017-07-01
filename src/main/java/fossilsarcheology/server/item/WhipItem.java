@@ -1,6 +1,7 @@
 package fossilsarcheology.server.item;
 
 
+import fossilsarcheology.server.api.DefaultRenderedItem;
 import fossilsarcheology.server.entity.prehistoric.EntityPrehistoric;
 import fossilsarcheology.server.tab.FATabRegistry;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,7 +14,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class WhipItem extends ItemCarrotOnAStick {
+public class WhipItem extends ItemCarrotOnAStick implements DefaultRenderedItem {
     public WhipItem() {
         super();
         this.setMaxDamage(100);
