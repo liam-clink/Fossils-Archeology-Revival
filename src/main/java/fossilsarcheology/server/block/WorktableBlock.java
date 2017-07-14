@@ -21,10 +21,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.Mirror;
-import net.minecraft.util.Rotation;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
@@ -46,9 +43,9 @@ public class WorktableBlock extends BlockContainer implements DefaultRenderedIte
         this.setSoundType(SoundType.WOOD);
         this.isActive = isActive;
         if (isActive) {
-            setUnlocalizedName("workbenchActive");
+            setUnlocalizedName("worktableActive");
         } else {
-            setUnlocalizedName("workbench");
+            setUnlocalizedName("worktable");
             setCreativeTab(FATabRegistry.BLOCKS);
         }
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
@@ -191,6 +188,11 @@ public class WorktableBlock extends BlockContainer implements DefaultRenderedIte
     @Override
     public IBlockState withMirror(IBlockState state, Mirror mirror) {
         return state.withRotation(mirror.toRotation(state.getValue(FACING)));
+    }
+
+    @Override
+    public EnumBlockRenderType getRenderType(IBlockState state) {
+        return EnumBlockRenderType.MODEL;
     }
 
     @Override

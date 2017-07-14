@@ -3,6 +3,7 @@ package fossilsarcheology.server.block;
 
 import fossilsarcheology.Revival;
 import fossilsarcheology.server.ServerProxy;
+import fossilsarcheology.server.api.DefaultRenderedItem;
 import fossilsarcheology.server.block.entity.TileEntityFeeder;
 import fossilsarcheology.server.tab.FATabRegistry;
 import net.minecraft.block.BlockContainer;
@@ -18,15 +19,12 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.Mirror;
-import net.minecraft.util.Rotation;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-public class FeederBlock extends BlockContainer{
+public class FeederBlock extends BlockContainer implements DefaultRenderedItem {
     public static final PropertyDirection FACING = BlockHorizontal.FACING;
     public static final PropertyInteger FOOD = PropertyInteger.create("food", 0, 3);
     private static final int NO_BIT = 0;
@@ -44,6 +42,11 @@ public class FeederBlock extends BlockContainer{
         this.setHardness(3);
         GameRegistry.registerTileEntity(TileEntityFeeder.class, "Feeder");
 
+    }
+
+    @Override
+    public EnumBlockRenderType getRenderType(IBlockState state) {
+        return EnumBlockRenderType.MODEL;
     }
 
     @Override
@@ -120,16 +123,17 @@ public class FeederBlock extends BlockContainer{
     public IBlockState getStateFromMeta(int meta){
         EnumFacing enumfacing = EnumFacing.getFront(meta);
 
-        if (enumfacing.getAxis() == EnumFacing.Axis.Y) {
+        if (enumfacing.getAxis() == EnumFacing.Axis.Y)
+        {
             enumfacing = EnumFacing.NORTH;
         }
 
-        return this.getDefaultState().withProperty(FACING, EnumFacing.getFront(meta & 5)).withProperty(FOOD, meta & 8);
+        return this.getDefaultState().withProperty(FACING, enumfacing).withProperty(FOOD, meta % 6);
     }
 
     public int getMetaFromState(IBlockState state) {
         int i =((EnumFacing)state.getValue(FACING)).getIndex();
-        return i |= 5;
+        return i |= 3;
     }
 
     public IBlockState withRotation(IBlockState state, Rotation rot) {
