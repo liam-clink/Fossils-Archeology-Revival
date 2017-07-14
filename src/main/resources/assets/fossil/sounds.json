@@ -580,6 +580,122 @@
       "fossil:prehistoric/velociraptor_living6"
     ]
   },
+  "dryosaurus_death": {
+  "category": "neutral",
+  "sounds": [
+    "fossil:prehistoric/dryosaurus_death1",
+    "fossil:prehistoric/dryosaurus_death2"
+  ]
+},
+  "dryosaurus_hurt": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/dryosaurus_hurt1",
+      "fossil:prehistoric/dryosaurus_hurt2"
+    ]
+  },
+  "dryosaurus_living": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/dryosaurus_living1",
+      "fossil:prehistoric/dryosaurus_living2"
+    ]
+  },
+  "henodus_death": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/henodus_death1",
+      "fossil:prehistoric/henodus_death2"
+    ]
+  },
+  "henodus_hurt": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/henodus_hurt1",
+      "fossil:prehistoric/henodus_hurt2"
+    ]
+  },
+  "henodus_living": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/henodus_living1",
+      "fossil:prehistoric/henodus_living2"
+    ]
+  },
+  "icthyosaurus_death": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/icthyosaurus_hurt1"
+    ]
+  },
+  "icthyosaurus_hurt": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/icthyosaurus_hurt1"
+    ]
+  },
+  "icthyosaurus_living": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/icthyosaurus_living1",
+      "fossil:prehistoric/icthyosaurus_living2"
+    ]
+  },
+  "icthyosaurus_outside": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/icthyosaurus_outside1",
+      "fossil:prehistoric/icthyosaurus_outside2"
+    ]
+  },
+  "parasaurolophus_death": {
+  "category": "neutral",
+  "sounds": [
+    "fossil:prehistoric/parasaurolophus_death1",
+    "fossil:prehistoric/parasaurolophus_death2"
+  ]
+},
+  "parasaurolophus_hurt": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/parasaurolophus_hurt1",
+      "fossil:prehistoric/parasaurolophus_hurt2",
+      "fossil:prehistoric/parasaurolophus_hurt3"
+
+    ]
+  },
+  "parasaurolophus_living": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/parasaurolophus_living1",
+      "fossil:prehistoric/parasaurolophus_living2",
+      "fossil:prehistoric/parasaurolophus_living3",
+      "fossil:prehistoric/parasaurolophus_living4",
+      "fossil:prehistoric/parasaurolophus_living5"
+    ]
+  },
+  "therizinosaurus_death": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/therizinosaurus_death1",
+      "fossil:prehistoric/therizinosaurus_death2"
+    ]
+  },
+  "therizinosaurus_hurt": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/therizinosaurus_hurt1",
+      "fossil:prehistoric/therizinosaurus_hurt2"
+    ]
+  },
+  "therizinosaurus_living": {
+    "category": "neutral",
+    "sounds": [
+      "fossil:prehistoric/therizinosaurus_living1",
+      "fossil:prehistoric/therizinosaurus_living2",
+      "fossil:prehistoric/therizinosaurus_living3"
+    ]
+  },
   "drum_single": {
     "category": "block",
     "sounds": [

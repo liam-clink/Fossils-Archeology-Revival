@@ -133,6 +133,15 @@ public class FASoundRegistry {
     public static final SoundEvent VELOCIRAPTOR_DEATH = create("velociraptor_death");
     public static final SoundEvent VELOCIRAPTOR_LIVING = create("velociraptor_living");
 
+    public static final SoundEvent HENODUS_HURT = create("henodus_hurt");
+    public static final SoundEvent HENODUS_DEATH = create("henodus_death");
+    public static final SoundEvent HENODUS_LIVING = create("henodus_living");
+
+    public static final SoundEvent ICTHYOSAURUS_HURT = create("icthyosaurus_hurt");
+    public static final SoundEvent ICTHYOSAURUS_DEATH = create("icthyosaurus_death");
+    public static final SoundEvent ICTHYOSAURUS_LIVING = create("icthyosaurus_living");
+    public static final SoundEvent ICTHYOSAURUS_OUTSIDE = create("icthyosaurus_outside");
+
     public static final SoundEvent ANU_LIVING_HEALTH = create("anu_living_healthy");
     public static final SoundEvent ANU_LIVING_MIDDLE = create("anu_living_middle");
     public static final SoundEvent ANU_DEATH_EFFECT = create("anu_death_effect");

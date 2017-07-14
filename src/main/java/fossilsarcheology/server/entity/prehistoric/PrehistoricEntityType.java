@@ -46,6 +46,8 @@ public enum PrehistoricEntityType {
     DRYOSAURUS(EntityDryosaurus.class, MobType.DINOSAUR, TimePeriod.MESOZOIC, Diet.HERBIVORE, Parameter.MODEL | Parameter.TAME | Parameter.HERBIVORE, 0X704C26, 0XC5C09A, 0.6F),
     THERIZINOSAURUS(EntityTherizinosaurus.class, MobType.DINOSAUR, TimePeriod.MESOZOIC, Diet.HERBIVORE, Parameter.MODEL | Parameter.TAME | Parameter.HERBIVORE, 0X322212, 0XCA9C72, 0.8F),
     PARASAUROLOPHUS(EntityParasaurolophus.class, MobType.DINOSAUR, TimePeriod.MESOZOIC, Diet.HERBIVORE, Parameter.MODEL | Parameter.TAME | Parameter.HERBIVORE, 0X7E8E30, 0X4C5438, 1F),
+    HENODUS(EntityHenodus.class, MobType.DINOSAUR, TimePeriod.MESOZOIC, Diet.HERBIVORE, Parameter.TAME | Parameter.HERBIVORE, 0X613C27, 0X9C8060),
+    ICTHYOSAURUS(EntityIcthyosaurus.class, MobType.DINOSAUR, TimePeriod.MESOZOIC, Diet.PISCIVORE, Parameter.TAME | Parameter.CARNIVORE, 0X2A2632, 0XCEC296),
     CONFUCIUSORNIS(EntityConfuciusornis.class, MobType.BIRD, TimePeriod.MESOZOIC, Diet.HERBIVORE, Parameter.TAME | Parameter.HERBIVORE, 0XDAE5E9, 0X8B8B8D),
     DODO(EntityDodo.class, MobType.BIRD, TimePeriod.CENOZOIC, Diet.HERBIVORE, Parameter.TAME | Parameter.HERBIVORE, 0X655751, 0XBEA47B),
     GASTORNIS(EntityGastornis.class, MobType.BIRD, TimePeriod.CENOZOIC, Diet.HERBIVORE, Parameter.TAME, 0X346C5E, 0XC8C8C8),
