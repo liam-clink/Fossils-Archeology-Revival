@@ -274,6 +274,9 @@ public class CultivateBlock extends BlockContainer implements DefaultRenderedIte
         return BlockRenderLayer.TRANSLUCENT;
     }
 
+    public boolean isOpaqueCube(IBlockState state) {
+        return false;
+    }
 
     @Override
     public Class<? extends TileEntity> getEntity() {
