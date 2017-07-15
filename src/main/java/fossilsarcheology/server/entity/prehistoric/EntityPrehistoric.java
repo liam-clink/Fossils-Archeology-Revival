@@ -226,12 +226,13 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
         this.setSleeping(compound.getBoolean("Sleeping"));
         this.setSitting(compound.getBoolean("Sitting"));
         this.setMood(compound.getInteger("Mood"));
-        this.setOrder(OrderType.values()[compound.getByte("currentOrder")]);
+        if (compound.hasKey("currentOrder")) {
+            this.setOrder(OrderType.values()[compound.getByte("currentOrder")]);
+        }
         this.mood_nospace = compound.getBoolean("MoodNoSpace");
         this.mood_noplants = compound.getBoolean("MoodNoPlants");
         this.ticksTillPlay = compound.getInteger("TicksSincePlay");
         this.ticksTillMate = compound.getInteger("TicksSinceMate");
-        this.currentOrder = OrderType.values()[compound.getByte("Order")];
         String s = "";
         if (compound.hasKey("Owner", 8)) {
             s = compound.getString("Owner");
