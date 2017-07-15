@@ -40,8 +40,8 @@ public class FABlockRegistry {
     public static final AncientStoneBlock ANCIENT_STONE = new AncientStoneBlock();
     public static final AncientStonebrickBlock ANCIENT_STONE_BRICK = new AncientStonebrickBlock();
     public static final FossilStairsBlock ANCIENT_STONE_STAIRS = new FossilStairsBlock(ANCIENT_STONE.getDefaultState(), "ancientStoneStairs");
-    public static final FossilSlabBlock ANCIENT_STONE_SINGLESLAB = new AncientStoneSlabBlock.Double("ancientStoneSlab", 1.7F, 7.5F, SoundType.STONE);
-    public static final FossilSlabBlock ANCIENT_STONE_DOUBLESLAB = new AncientStoneSlabBlock.Half("ancientStoneSlab", 1.7F, 7.5F, SoundType.STONE);
+    public static final FossilSlabBlock ANCIENT_STONE_SINGLESLAB = new AncientStoneSlabBlock.Half("ancientStoneSlab", 1.7F, 7.5F, SoundType.STONE);
+    public static final FossilSlabBlock ANCIENT_STONE_DOUBLESLAB = new AncientStoneSlabBlock.Double("ancientStoneSlab", 1.7F, 7.5F, SoundType.STONE);
     public static final VolcanicAshBlock VOLCANIC_ASH = new VolcanicAshBlock("ash");
     public static final VolcanicAshBlock VOLCANIC_BRICK = new VolcanicAshBlock("brick");
     public static final VolcanicAshBlock VOLCANIC_ROCK = new VolcanicAshBlock("rock");
@@ -128,7 +128,11 @@ public class FABlockRegistry {
             }
             GameRegistry.register(itemBlock, identifier);
 
-        }else{
+        }else if(block instanceof ISlabItem){
+            ItemBlock itemBlock = ((ISlabItem)block).getItemBlock();
+            GameRegistry.register(itemBlock, identifier);
+        }
+        else{
             GameRegistry.register(new ItemBlock(block), identifier);
         }
         BLOCKS.add(block);

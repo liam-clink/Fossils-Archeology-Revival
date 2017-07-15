@@ -12,7 +12,6 @@ import fossilsarcheology.server.item.variant.DinosaurBoneType;
 import fossilsarcheology.server.localization.Localizations;
 import fossilsarcheology.server.message.MessageFoodParticles;
 import fossilsarcheology.server.message.MessageHappyParticles;
-import fossilsarcheology.server.message.MessageSetDay;
 import fossilsarcheology.server.message.MessageUpdateEgg;
 import fossilsarcheology.server.util.FoodMappings;
 import net.ilexiconn.llibrary.client.model.tools.ChainBuffer;
@@ -478,12 +477,7 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
     }
 
     public boolean isDaytime() {
-        if (world.isRemote) {
-            return isDaytime;
-        } else {
-            Revival.NETWORK_WRAPPER.sendToAll(new MessageSetDay(this.getEntityId(), this.world.isDaytime()));
-            return this.world.isDaytime();
-        }
+        return this.world.isDaytime();
     }
 
     @Override

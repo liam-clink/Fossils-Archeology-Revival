@@ -154,7 +154,7 @@ public class EntityDeinonychus extends EntityPrehistoric {
         super.onLivingUpdate();
         if (this.getAttackTarget() != null && this.getRidingEntity() != null) {
             if (this.getRidingEntity() == this.getAttackTarget() && this.ticksExisted % 20 == 0) {
-                IAttributeInstance iattributeinstance = this.getEntityAttribute(SharedMonsterAttributes.ATTACK_SPEED);
+                IAttributeInstance iattributeinstance = this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
                 this.getAttackTarget().attackEntityFrom(DamageSource.causeMobDamage(this), (float) iattributeinstance.getAttributeValue());
             }
         }
