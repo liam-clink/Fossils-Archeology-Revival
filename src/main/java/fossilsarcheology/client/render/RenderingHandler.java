@@ -3,12 +3,14 @@ package fossilsarcheology.client.render;
 import fossilsarcheology.Revival;
 import fossilsarcheology.client.model.*;
 import fossilsarcheology.client.render.entity.*;
+import fossilsarcheology.client.render.tile.TileEntityAncientChestRender;
 import fossilsarcheology.client.render.tile.TileEntityAnuStatueRender;
 import fossilsarcheology.client.render.tile.TileEntityAnubiteStatueRender;
 import fossilsarcheology.server.api.DefaultRenderedItem;
 import fossilsarcheology.server.api.IgnoreRenderProperty;
 import fossilsarcheology.server.api.SubtypeRenderedItem;
 import fossilsarcheology.server.block.FABlockRegistry;
+import fossilsarcheology.server.block.entity.TileEntityAncientChest;
 import fossilsarcheology.server.block.entity.TileEntityAnuStatue;
 import fossilsarcheology.server.block.entity.TileEntityAnubiteStatue;
 import fossilsarcheology.server.entity.StoneTabletEntity;
@@ -144,7 +146,8 @@ public class RenderingHandler {
         ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(FABlockRegistry.ANU_STATUE), 0, TileEntityAnuStatue.class);
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAnubiteStatue.class, new TileEntityAnubiteStatueRender());
         ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(FABlockRegistry.ANUBITE_STATUE), 0, TileEntityAnubiteStatue.class);
-
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAncientChest.class, new TileEntityAncientChestRender());
+        ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(FABlockRegistry.ANCIENT_CHEST), 0, TileEntityAncientChest.class);
 
     }
 

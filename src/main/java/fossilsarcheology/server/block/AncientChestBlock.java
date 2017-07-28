@@ -1,5 +1,6 @@
 package fossilsarcheology.server.block;
 
+import fossilsarcheology.server.api.BlockEntity;
 import fossilsarcheology.server.api.DefaultRenderedItem;
 import fossilsarcheology.server.block.entity.TileEntityAncientChest;
 import fossilsarcheology.server.item.FAItemRegistry;
@@ -24,7 +25,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class AncientChestBlock extends BlockContainer implements DefaultRenderedItem {
+public class AncientChestBlock extends BlockContainer implements DefaultRenderedItem, BlockEntity {
 
     public static final PropertyDirection FACING = BlockHorizontal.FACING;
     protected static final AxisAlignedBB NORTH_CHEST_AABB = new AxisAlignedBB(0.0625D, 0.0D, 0.0D, 0.9375D, 0.875D, 0.9375D);
@@ -37,7 +38,7 @@ public class AncientChestBlock extends BlockContainer implements DefaultRendered
         super(Material.WOOD);
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
         this.setCreativeTab(FATabRegistry.BLOCKS);
-        this.setUnlocalizedName("ancientChest");
+        this.setUnlocalizedName("ancient_chest");
     }
 
     public boolean isOpaqueCube(IBlockState state) {
@@ -108,5 +109,10 @@ public class AncientChestBlock extends BlockContainer implements DefaultRendered
     @Override
     public TileEntity createNewTileEntity(World worldIn, int meta) {
         return new TileEntityAncientChest();
+    }
+
+    @Override
+    public Class<? extends TileEntity> getEntity() {
+        return TileEntityAncientChest.class;
     }
 }

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "normal": {
+      "model": "fossil:anu_statue"
+    },
+    "inventory": {
+      "model": "fossil:ancient_chest"
+    }
+  }
+}
