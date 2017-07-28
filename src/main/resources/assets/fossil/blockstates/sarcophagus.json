@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "normal": {
+      "model": "fossil:sarcophagus"
+    },
+    "inventory": {
+      "model": "fossil:sarcophagus"
+    }
+  }
+}

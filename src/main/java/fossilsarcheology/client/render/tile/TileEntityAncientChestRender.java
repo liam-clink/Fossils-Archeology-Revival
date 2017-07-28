@@ -1,19 +1,19 @@
 package fossilsarcheology.client.render.tile;
 
-import fossilsarcheology.server.block.AnubiteStatueBlock;
+import fossilsarcheology.server.block.AncientChestBlock;
 import fossilsarcheology.server.block.entity.TileEntityAncientChest;
 import fossilsarcheology.server.item.FAItemRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelChest;
+import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 public class TileEntityAncientChestRender extends TileEntitySpecialRenderer<TileEntityAncientChest> {
     private static final ResourceLocation texture = new ResourceLocation("fossil:textures/model/ancient_chest.png");
-    private static final EntityItem key = new EntityItem(Minecraft.getMinecraft().world, 0D, 0D, 0D, new ItemStack(FAItemRegistry.ANCIENT_KEY));
+    private static final ItemStack key = new ItemStack(FAItemRegistry.ANCIENT_KEY);
     private static final ModelChest model = new ModelChest();
 
     public TileEntityAncientChestRender() {
@@ -23,7 +23,7 @@ public class TileEntityAncientChestRender extends TileEntitySpecialRenderer<Tile
         short short1 = 0;
         int i = 0;
         if (tileentity != null && tileentity.hasWorld()) {
-             i = tileentity.getBlockType().getStateFromMeta(tileentity.getBlockMetadata()).getValue(AnubiteStatueBlock.FACING).getHorizontalIndex();
+             i = tileentity.getBlockType().getStateFromMeta(tileentity.getBlockMetadata()).getValue(AncientChestBlock.FACING).getHorizontalIndex();
             switch(i){
                 case 0:
                     short1 = 180;
@@ -68,49 +68,45 @@ public class TileEntityAncientChestRender extends TileEntitySpecialRenderer<Tile
         if (i == 2) {
             GL11.glPushMatrix();
             float scale = 1F;
-            key.hoverStart = 0.0F;
             GL11.glTranslatef((float) x + 0.5F, (float) y + 0.45F, (float) z - 0.3F);
             GL11.glRotatef((float) 180, 0.0F, 1.0F, 0.0F);
             GL11.glRotatef(90, 0F, 1F, 0F);
             GL11.glRotatef(45, 0F, 0F, -1F);
             GL11.glScalef(scale, scale, scale);
-            Minecraft.getMinecraft().getRenderManager().renderEntityStatic(key, 0.0F, false);
+            Minecraft.getMinecraft().getRenderItem().renderItem(key, ItemCameraTransforms.TransformType.FIXED);
             GL11.glPopMatrix();
         }
         if (i == 3) {
             GL11.glPushMatrix();
             float scale = 1F;
-            key.hoverStart = 0.0F;
             GL11.glTranslatef((float) x + 0.5F, (float) y + 0.45F, (float) z + 1.3F);
             GL11.glRotatef(90, 0F, 1F, 0F);
             GL11.glRotatef(45, 0F, 0F, -1F);
             GL11.glScalef(scale, scale, scale);
-            Minecraft.getMinecraft().getRenderManager().renderEntityStatic(key, 0.0F, false);
+            Minecraft.getMinecraft().getRenderItem().renderItem(key, ItemCameraTransforms.TransformType.FIXED);
             GL11.glPopMatrix();
         }
         if (i == 4) {
             GL11.glPushMatrix();
             float scale = 1F;
-            key.hoverStart = 0.0F;
             GL11.glTranslatef((float) x - 0.3F, (float) y + 0.45F, (float) z + 0.5F);
             GL11.glRotatef((float) -90, 0.0F, 1.0F, 0.0F);
             GL11.glRotatef(90, 0F, 1F, 0F);
             GL11.glRotatef(45, 0F, 0F, -1F);
             GL11.glScalef(scale, scale, scale);
-            Minecraft.getMinecraft().getRenderManager().renderEntityStatic(key, 0.0F, false);
+            Minecraft.getMinecraft().getRenderItem().renderItem(key, ItemCameraTransforms.TransformType.FIXED);
             GL11.glPopMatrix();
 
         }
         if (i == 5) {
             GL11.glPushMatrix();
             float scale = 1F;
-            key.hoverStart = 0.0F;
             GL11.glTranslatef((float) x + 1.3F, (float) y + 0.45F, (float) z + 0.5F);
             GL11.glRotatef((float) 90, 0.0F, 1.0F, 0.0F);
             GL11.glRotatef(90, 0F, 1F, 0F);
             GL11.glRotatef(45, 0F, 0F, -1F);
             GL11.glScalef(scale, scale, scale);
-            Minecraft.getMinecraft().getRenderManager().renderEntityStatic(key, 0.0F, false);
+            Minecraft.getMinecraft().getRenderItem().renderItem(key, ItemCameraTransforms.TransformType.FIXED);
             GL11.glPopMatrix();
         }
 

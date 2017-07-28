@@ -1,7 +1,7 @@
 package fossilsarcheology.client.render.tile;
 
 import fossilsarcheology.client.model.ModelAnuTotem;
-import fossilsarcheology.server.block.AnubiteStatueBlock;
+import fossilsarcheology.server.block.AnuStatueBlock;
 import fossilsarcheology.server.block.entity.TileEntityAnuStatue;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.ResourceLocation;
@@ -19,7 +19,7 @@ public class TileEntityAnuStatueRender extends TileEntitySpecialRenderer<TileEnt
     public void renderTileEntityAt(TileEntityAnuStatue tileentity, double x, double y, double z, float f, int destroy) {
         short short1 = 0;
         if (tileentity != null && tileentity.hasWorld()) {
-            int i  = tileentity.getBlockType().getStateFromMeta(tileentity.getBlockMetadata()).getValue(AnubiteStatueBlock.FACING).getHorizontalIndex();
+            int i  = tileentity.getBlockType().getStateFromMeta(tileentity.getBlockMetadata()).getValue(AnuStatueBlock.FACING).getHorizontalIndex();
             switch(i){
                 case 0:
                     short1 = 180;

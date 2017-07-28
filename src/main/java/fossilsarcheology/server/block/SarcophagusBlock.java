@@ -1,5 +1,6 @@
 package fossilsarcheology.server.block;
 
+import fossilsarcheology.server.api.BlockEntity;
 import fossilsarcheology.server.api.DefaultRenderedItem;
 import fossilsarcheology.server.block.entity.TileEntitySarcophagus;
 import fossilsarcheology.server.item.FAItemRegistry;
@@ -20,12 +21,10 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 
-public class SarcophagusBlock extends BlockContainer implements DefaultRenderedItem {
+public class SarcophagusBlock extends BlockContainer implements DefaultRenderedItem, BlockEntity {
     public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
 
     public SarcophagusBlock() {
@@ -70,15 +69,17 @@ public class SarcophagusBlock extends BlockContainer implements DefaultRenderedI
         return super.getStateForPlacement(worldIn, pos, facing, hitX, hitY, hitZ, meta, placer).withProperty(FACING, placer.getHorizontalFacing().getOpposite());
     }
 
-    @Override
-    @SideOnly(Side.CLIENT)
     public BlockRenderLayer getBlockLayer() {
-        return BlockRenderLayer.CUTOUT;
+        return BlockRenderLayer.TRANSLUCENT;
+    }
+
+    public boolean isOpaqueCube(IBlockState state) {
+        return false;
     }
 
     @Override
     public EnumBlockRenderType getRenderType(IBlockState state) {
-        return EnumBlockRenderType.MODEL;
+        return EnumBlockRenderType.ENTITYBLOCK_ANIMATED;
     }
 
     @Override
@@ -104,5 +105,10 @@ public class SarcophagusBlock extends BlockContainer implements DefaultRenderedI
     @Override
     public TileEntity createNewTileEntity(World worldIn, int meta) {
         return new TileEntitySarcophagus();
+    }
+
+    @Override
+    public Class<? extends TileEntity> getEntity() {
+        return TileEntitySarcophagus.class;
     }
 }
