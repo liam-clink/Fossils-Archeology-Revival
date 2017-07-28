@@ -3,10 +3,14 @@ package fossilsarcheology.client.render;
 import fossilsarcheology.Revival;
 import fossilsarcheology.client.model.*;
 import fossilsarcheology.client.render.entity.*;
+import fossilsarcheology.client.render.tile.TileEntityAnuStatueRender;
+import fossilsarcheology.client.render.tile.TileEntityAnubiteStatueRender;
 import fossilsarcheology.server.api.DefaultRenderedItem;
 import fossilsarcheology.server.api.IgnoreRenderProperty;
 import fossilsarcheology.server.api.SubtypeRenderedItem;
 import fossilsarcheology.server.block.FABlockRegistry;
+import fossilsarcheology.server.block.entity.TileEntityAnuStatue;
+import fossilsarcheology.server.block.entity.TileEntityAnubiteStatue;
 import fossilsarcheology.server.entity.StoneTabletEntity;
 import fossilsarcheology.server.entity.monster.*;
 import fossilsarcheology.server.entity.prehistoric.*;
@@ -28,7 +32,9 @@ import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -133,6 +139,12 @@ public class RenderingHandler {
         RenderingRegistry.registerEntityRenderingHandler(EntityTitanis.class, new RenderPrehistoric(new ModelTerrorBird()));
         RenderingRegistry.registerEntityRenderingHandler(EntityHenodus.class, new RenderPrehistoric(new ModelHenodus()));
         RenderingRegistry.registerEntityRenderingHandler(EntityIcthyosaurus.class, new RenderPrehistoric(new ModelIcthyosaurus()));
+
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAnuStatue.class, new TileEntityAnuStatueRender());
+        ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(FABlockRegistry.ANU_STATUE), 0, TileEntityAnuStatue.class);
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAnubiteStatue.class, new TileEntityAnubiteStatueRender());
+        ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(FABlockRegistry.ANUBITE_STATUE), 0, TileEntityAnubiteStatue.class);
+
 
     }
 

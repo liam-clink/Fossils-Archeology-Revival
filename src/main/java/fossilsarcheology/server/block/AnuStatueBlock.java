@@ -1,6 +1,9 @@
 package fossilsarcheology.server.block;
 
+import fossilsarcheology.server.api.BlockEntity;
+import fossilsarcheology.server.api.DefaultRenderedItem;
 import fossilsarcheology.server.block.entity.TileEntityAnuStatue;
+import fossilsarcheology.server.block.entity.TileEntityAnubiteStatue;
 import fossilsarcheology.server.entity.monster.EntityAnubite;
 import fossilsarcheology.server.tab.FATabRegistry;
 import net.minecraft.block.BlockContainer;
@@ -27,7 +30,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 
-public class AnuStatueBlock extends BlockContainer {
+public class AnuStatueBlock extends BlockContainer implements DefaultRenderedItem, BlockEntity {
     public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
 
     public AnuStatueBlock() {
@@ -98,11 +101,21 @@ public class AnuStatueBlock extends BlockContainer {
 
     @Override
     public EnumBlockRenderType getRenderType(IBlockState state) {
-        return EnumBlockRenderType.MODEL;
+        return EnumBlockRenderType.ENTITYBLOCK_ANIMATED;
+    }
+
+    public boolean isOpaqueCube(IBlockState state) {
+        return false;
     }
 
     @Override
     public TileEntity createNewTileEntity(World world, int meta) {
         return new TileEntityAnuStatue();
     }
+
+    @Override
+    public Class<? extends TileEntity> getEntity() {
+        return TileEntityAnubiteStatue.class;
+    }
+
 }

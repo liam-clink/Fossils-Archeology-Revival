@@ -1,5 +1,7 @@
 package fossilsarcheology.server.block;
 
+import fossilsarcheology.server.api.BlockEntity;
+import fossilsarcheology.server.api.DefaultRenderedItem;
 import fossilsarcheology.server.block.entity.TileEntityAnubiteStatue;
 import fossilsarcheology.server.tab.FATabRegistry;
 import net.minecraft.block.BlockContainer;
@@ -20,7 +22,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class AnubiteStatueBlock extends BlockContainer {
+public class AnubiteStatueBlock extends BlockContainer implements DefaultRenderedItem, BlockEntity {
     public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
 
     protected AnubiteStatueBlock() {
@@ -29,7 +31,7 @@ public class AnubiteStatueBlock extends BlockContainer {
         this.setTickRandomly(true);
         this.setBlockUnbreakable();
         this.setResistance(60000000.0F);
-        this.setUnlocalizedName("anubiteStatue");
+        this.setUnlocalizedName("anubite_statue");
     }
 
     public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
@@ -44,7 +46,7 @@ public class AnubiteStatueBlock extends BlockContainer {
 
     @Override
     public EnumBlockRenderType getRenderType(IBlockState state) {
-        return EnumBlockRenderType.MODEL;
+        return EnumBlockRenderType.ENTITYBLOCK_ANIMATED;
     }
 
     @Override
@@ -67,8 +69,17 @@ public class AnubiteStatueBlock extends BlockContainer {
         return new AxisAlignedBB(0F, 0.0F, 0F, 1F, 1.9F, 1);
     }
 
+    public boolean isOpaqueCube(IBlockState state) {
+        return false;
+    }
+
     @Override
     public TileEntity createNewTileEntity(World worldIn, int meta) {
         return new TileEntityAnubiteStatue();
+    }
+
+    @Override
+    public Class<? extends TileEntity> getEntity() {
+        return TileEntityAnubiteStatue.class;
     }
 }
