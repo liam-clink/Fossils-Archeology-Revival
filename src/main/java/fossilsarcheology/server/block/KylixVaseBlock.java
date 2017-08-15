@@ -1,6 +1,6 @@
 package fossilsarcheology.server.block;
 
-import fossilsarcheology.server.api.DefaultRenderedItem;
+import fossilsarcheology.server.api.BlockEntity;
 import fossilsarcheology.server.block.entity.TileEntityKylix;
 import fossilsarcheology.server.tab.FATabRegistry;
 import net.minecraft.block.Block;
@@ -17,6 +17,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -26,7 +28,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-public class KylixVaseBlock extends BlockContainer implements DefaultRenderedItem, IBlockItem {
+public class KylixVaseBlock extends BlockContainer implements BlockEntity, IBlockItem {
 
     public static final PropertyEnum<KylixVaseBlock.EnumType> VARIANT = PropertyEnum.<KylixVaseBlock.EnumType>create("variant", KylixVaseBlock.EnumType.class);
 
@@ -50,9 +52,23 @@ public class KylixVaseBlock extends BlockContainer implements DefaultRenderedIte
 
     @SideOnly(Side.CLIENT)
     public void getSubBlocks(Item itemIn, CreativeTabs tab, List<ItemStack> list) {
-        for (BlockPlanks.EnumType blockplanks$enumtype : BlockPlanks.EnumType.values()) {
-            list.add(new ItemStack(itemIn, 1, blockplanks$enumtype.getMetadata()));
+        for (KylixVaseBlock.EnumType type : KylixVaseBlock.EnumType.values()) {
+            list.add(new ItemStack(itemIn, 1, type.getMetadata()));
         }
+    }
+
+    @SideOnly(Side.CLIENT)
+    public BlockRenderLayer getBlockLayer() {
+        return BlockRenderLayer.CUTOUT;
+    }
+
+    @Override
+    public EnumBlockRenderType getRenderType(IBlockState state) {
+        return EnumBlockRenderType.ENTITYBLOCK_ANIMATED;
+    }
+
+    public boolean isOpaqueCube(IBlockState state) {
+        return false;
     }
 
     public IBlockState getStateFromMeta(int meta) {
@@ -70,6 +86,11 @@ public class KylixVaseBlock extends BlockContainer implements DefaultRenderedIte
     @Override
     public Class<? extends ItemBlock> getItemBlockClass() {
         return KylixBlockItem.class;
+    }
+
+    @Override
+    public Class<? extends TileEntity> getEntity() {
+        return TileEntityKylix.class;
     }
 
 

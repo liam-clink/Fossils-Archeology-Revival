@@ -9,6 +9,7 @@ import fossilsarcheology.server.api.IgnoreRenderProperty;
 import fossilsarcheology.server.api.SubtypeRenderedItem;
 import fossilsarcheology.server.block.FABlockRegistry;
 import fossilsarcheology.server.block.entity.*;
+import fossilsarcheology.server.block.entity.block.TileEntityVolute;
 import fossilsarcheology.server.entity.StoneTabletEntity;
 import fossilsarcheology.server.entity.monster.*;
 import fossilsarcheology.server.entity.prehistoric.*;
@@ -57,6 +58,13 @@ public class RenderingHandler {
         for(int i = 0; i < FossilSeedsItem.fossilSeeds.length; i++){
             this.registerItemRenderer(FAItemRegistry.FOSSIL_SEED, i, "fossilseed_" + FossilSeedsItem.fossilSeeds[i], "inventory");
             this.registerItemRenderer(FAItemRegistry.SEED, i, "seed_" + FossilSeedsItem.fossilSeeds[i], "inventory");
+        }
+
+        for(int i = 0; i < 5; i++){
+            this.registerItemRenderer(Item.getItemFromBlock(FABlockRegistry.AMPHORA_VASE), i, "vase_amphora_" + i, "inventory");
+            this.registerItemRenderer(Item.getItemFromBlock(FABlockRegistry.KYLIX_VASE), i, "vase_kylix_" + i, "inventory");
+            this.registerItemRenderer(Item.getItemFromBlock(FABlockRegistry.VOLUTE_VASE), i, "vase_volute_" + i, "inventory");
+
         }
 
         for (Block block : FABlockRegistry.BLOCKS) {
@@ -151,6 +159,10 @@ public class RenderingHandler {
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySarcophagus.class, new TileEntitySarcophagusRender());
         ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(FABlockRegistry.SARCOPHAGUS), 0, TileEntitySarcophagus.class);
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFigurine.class, new TileEntityFigurineRender());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAmphora.class, new TileEntityVaseRenderer(0));
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityVolute.class, new TileEntityVaseRenderer(1));
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityKylix.class, new TileEntityVaseRenderer(2));
+
     }
 
     public void onPostInit() {

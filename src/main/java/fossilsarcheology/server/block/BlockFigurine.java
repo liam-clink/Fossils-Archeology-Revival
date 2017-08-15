@@ -5,7 +5,6 @@ import fossilsarcheology.server.block.entity.TileEntityFigurine;
 import fossilsarcheology.server.tab.FATabRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
-import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
@@ -58,8 +57,8 @@ public class BlockFigurine extends BlockContainer implements IBlockItem, BlockEn
 
     @SideOnly(Side.CLIENT)
     public void getSubBlocks(Item itemIn, CreativeTabs tab, List<ItemStack> list) {
-        for (BlockPlanks.EnumType blockplanks$enumtype : BlockPlanks.EnumType.values()) {
-            list.add(new ItemStack(itemIn, 1, blockplanks$enumtype.getMetadata()));
+        for (BlockFigurine.EnumType types : BlockFigurine.EnumType.values()) {
+            list.add(new ItemStack(itemIn, 1, types.getMetadata()));
         }
     }
 

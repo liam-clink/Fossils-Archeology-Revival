@@ -12,18 +12,17 @@ public class TileEntityVolute extends TileEntity {
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound par1NBTTagCompound) {
         super.writeToNBT(par1NBTTagCompound);
-        par1NBTTagCompound.setByte("VaseType", (byte) (this.vaseType & 255));
-        par1NBTTagCompound.setByte("Rot", (byte) (this.vaseRotation & 255));
+        par1NBTTagCompound.setInteger("VaseType", (byte) (this.vaseType));
+        par1NBTTagCompound.setInteger("Rot", (byte) (this.vaseRotation));
         return par1NBTTagCompound;
     }
 
     @Override
     public void readFromNBT(NBTTagCompound par1NBTTagCompound) {
         super.readFromNBT(par1NBTTagCompound);
-        this.vaseType = par1NBTTagCompound.getByte("VaseType");
-        this.vaseRotation = par1NBTTagCompound.getByte("Rot");
+        this.vaseType = par1NBTTagCompound.getInteger("VaseType");
+        this.vaseRotation = par1NBTTagCompound.getInteger("Rot");
     }
-
     @Override
     public void onDataPacket(NetworkManager netManager, net.minecraft.network.play.server.SPacketUpdateTileEntity packet) {
         readFromNBT(packet.getNbtCompound());
@@ -31,6 +30,10 @@ public class TileEntityVolute extends TileEntity {
 
     public int getVaseType() {
         return this.vaseType;
+    }
+
+    public int getVaseRotation() {
+        return this.vaseRotation;
     }
 
     public void setVaseType(int par1) {

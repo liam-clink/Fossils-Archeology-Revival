@@ -1,11 +1,10 @@
 package fossilsarcheology.server.block;
 
-import fossilsarcheology.server.api.DefaultRenderedItem;
+import fossilsarcheology.server.api.BlockEntity;
 import fossilsarcheology.server.block.entity.block.TileEntityVolute;
 import fossilsarcheology.server.tab.FATabRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
-import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
@@ -17,6 +16,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -26,7 +27,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-public class VoluteVaseBlock extends BlockContainer implements DefaultRenderedItem, IBlockItem {
+public class VoluteVaseBlock extends BlockContainer implements BlockEntity, IBlockItem {
 
     public static final PropertyEnum<VoluteVaseBlock.EnumType> VARIANT = PropertyEnum.<VoluteVaseBlock.EnumType>create("variant", VoluteVaseBlock.EnumType.class);
 
@@ -41,6 +42,19 @@ public class VoluteVaseBlock extends BlockContainer implements DefaultRenderedIt
         return ((VoluteVaseBlock.EnumType)state.getValue(VARIANT)).getMetadata();
     }
 
+    @SideOnly(Side.CLIENT)
+    public BlockRenderLayer getBlockLayer() {
+        return BlockRenderLayer.CUTOUT;
+    }
+
+    @Override
+    public EnumBlockRenderType getRenderType(IBlockState state) {
+        return EnumBlockRenderType.ENTITYBLOCK_ANIMATED;
+    }
+
+    public boolean isOpaqueCube(IBlockState state) {
+        return false;
+    }
     public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
         int l = MathHelper.floor((double) (placer.rotationYaw * 4.0F / 360.0F) + 1.5D) & 3;
         TileEntity tileentity = worldIn.getTileEntity(pos);
@@ -50,8 +64,8 @@ public class VoluteVaseBlock extends BlockContainer implements DefaultRenderedIt
 
     @SideOnly(Side.CLIENT)
     public void getSubBlocks(Item itemIn, CreativeTabs tab, List<ItemStack> list) {
-        for (BlockPlanks.EnumType blockplanks$enumtype : BlockPlanks.EnumType.values()) {
-            list.add(new ItemStack(itemIn, 1, blockplanks$enumtype.getMetadata()));
+        for (VoluteVaseBlock.EnumType type : VoluteVaseBlock.EnumType.values()) {
+            list.add(new ItemStack(itemIn, 1, type.getMetadata()));
         }
     }
 
@@ -84,6 +98,10 @@ public class VoluteVaseBlock extends BlockContainer implements DefaultRenderedIt
         }
     }
 
+    @Override
+    public Class<? extends TileEntity> getEntity() {
+        return TileEntityVolute.class;
+    }
     @Override
     public TileEntity createNewTileEntity(World worldIn, int meta) {
         return new TileEntityVolute();

@@ -1,11 +1,10 @@
 package fossilsarcheology.server.block;
 
-import fossilsarcheology.server.api.DefaultRenderedItem;
+import fossilsarcheology.server.api.BlockEntity;
 import fossilsarcheology.server.block.entity.TileEntityAmphora;
 import fossilsarcheology.server.tab.FATabRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
-import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
@@ -17,6 +16,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -26,7 +27,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-public class AmphoraVaseBlock extends BlockContainer implements DefaultRenderedItem, IBlockItem{
+public class AmphoraVaseBlock extends BlockContainer implements BlockEntity, IBlockItem{
     public static final PropertyEnum<AmphoraVaseBlock.EnumType> VARIANT = PropertyEnum.<AmphoraVaseBlock.EnumType>create("variant", AmphoraVaseBlock.EnumType.class);
 
     protected AmphoraVaseBlock() {
@@ -49,8 +50,8 @@ public class AmphoraVaseBlock extends BlockContainer implements DefaultRenderedI
 
     @SideOnly(Side.CLIENT)
     public void getSubBlocks(Item itemIn, CreativeTabs tab, List<ItemStack> list) {
-        for (BlockPlanks.EnumType blockplanks$enumtype : BlockPlanks.EnumType.values()) {
-            list.add(new ItemStack(itemIn, 1, blockplanks$enumtype.getMetadata()));
+        for (AmphoraVaseBlock.EnumType type : AmphoraVaseBlock.EnumType.values()) {
+            list.add(new ItemStack(itemIn, 1, type.getMetadata()));
         }
     }
 
@@ -71,6 +72,10 @@ public class AmphoraVaseBlock extends BlockContainer implements DefaultRenderedI
         return AmphoraBlockItem.class;
     }
 
+    @Override
+    public Class<? extends TileEntity> getEntity() {
+        return TileEntityAmphora.class;
+    }
 
     class AmphoraBlockItem extends ItemBlock {
         public AmphoraBlockItem(Block block) {
@@ -81,6 +86,20 @@ public class AmphoraVaseBlock extends BlockContainer implements DefaultRenderedI
         public String getUnlocalizedName(ItemStack itemstack) {
             return getUnlocalizedName() + "." + EnumType.byMetadata(itemstack.getItemDamage()).getName();
         }
+    }
+
+    @SideOnly(Side.CLIENT)
+    public BlockRenderLayer getBlockLayer() {
+        return BlockRenderLayer.CUTOUT;
+    }
+
+    @Override
+    public EnumBlockRenderType getRenderType(IBlockState state) {
+        return EnumBlockRenderType.ENTITYBLOCK_ANIMATED;
+    }
+
+    public boolean isOpaqueCube(IBlockState state) {
+        return false;
     }
 
     @Override

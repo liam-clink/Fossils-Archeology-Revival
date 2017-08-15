@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "normal": {
+      "model": "fossil:vase"
+    },
+    "inventory": {
+      "model": "fossil:vase_volute_0"
+    }
+  }
+}
