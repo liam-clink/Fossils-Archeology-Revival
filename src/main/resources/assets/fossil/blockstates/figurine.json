@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "normal": {
+      "model": "fossil:figurine"
+    },
+    "inventory": {
+      "model": "fossil:figurine_0"
+    }
+  }
+}

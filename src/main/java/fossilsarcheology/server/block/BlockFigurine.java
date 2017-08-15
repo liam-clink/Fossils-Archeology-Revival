@@ -1,5 +1,6 @@
 package fossilsarcheology.server.block;
 
+import fossilsarcheology.server.api.BlockEntity;
 import fossilsarcheology.server.block.entity.TileEntityFigurine;
 import fossilsarcheology.server.tab.FATabRegistry;
 import net.minecraft.block.Block;
@@ -16,24 +17,32 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-public class BlockFigurine extends BlockContainer implements IBlockItem {
+public class BlockFigurine extends BlockContainer implements IBlockItem, BlockEntity {
     public static final PropertyEnum<BlockFigurine.EnumType> VARIANT = PropertyEnum.<BlockFigurine.EnumType>create("variant", BlockFigurine.EnumType.class);
-
+    public static final AxisAlignedBB AABB = new AxisAlignedBB(0.25f, 0f, 0.25f, 0.75f, 0.5f, 0.75f);
     protected BlockFigurine() {
         super(Material.ROCK);
         this.setCreativeTab(FATabRegistry.BLOCKS);
         this.setUnlocalizedName("figurine");
         this.setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, EnumType.FIGURINE_STEVE_PRISTINE));
 
+    }
+
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+        return AABB;
     }
 
     public int damageDropped(IBlockState state) {
@@ -54,6 +63,21 @@ public class BlockFigurine extends BlockContainer implements IBlockItem {
         }
     }
 
+    @Override
+    @SideOnly(Side.CLIENT)
+    public BlockRenderLayer getBlockLayer() {
+        return BlockRenderLayer.CUTOUT;
+    }
+
+    @Override
+    public EnumBlockRenderType getRenderType(IBlockState state) {
+        return EnumBlockRenderType.ENTITYBLOCK_ANIMATED;
+    }
+
+    public boolean isOpaqueCube(IBlockState state) {
+        return false;
+    }
+
     public IBlockState getStateFromMeta(int meta) {
         return this.getDefaultState().withProperty(VARIANT, BlockFigurine.EnumType.byMetadata(meta));
     }
@@ -68,6 +92,11 @@ public class BlockFigurine extends BlockContainer implements IBlockItem {
     @Override
     public TileEntity createNewTileEntity(World worldIn, int meta) {
         return new TileEntityFigurine();
+    }
+
+    @Override
+    public Class<? extends TileEntity> getEntity() {
+        return TileEntityFigurine.class;
     }
 
     public static enum EnumType implements IStringSerializable

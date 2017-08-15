@@ -41,5 +41,9 @@ public class TileEntityFigurine extends TileEntity {
         this.figurineRotation = par1;
     }
 
+    public int getFigurineRotation(){
+        return this.figurineRotation;
+    }
+
 
 }

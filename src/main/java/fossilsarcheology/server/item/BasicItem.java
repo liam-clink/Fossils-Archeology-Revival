@@ -8,6 +8,6 @@ public class BasicItem extends Item implements DefaultRenderedItem {
     public BasicItem(String name) {
         super();
         this.setUnlocalizedName(name);
-        this.setCreativeTab(FATabRegistry.ITEMS);
-    }
+    this.setCreativeTab(FATabRegistry.ITEMS);
+}
 }

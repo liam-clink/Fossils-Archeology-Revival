@@ -3,18 +3,12 @@ package fossilsarcheology.client.render;
 import fossilsarcheology.Revival;
 import fossilsarcheology.client.model.*;
 import fossilsarcheology.client.render.entity.*;
-import fossilsarcheology.client.render.tile.TileEntityAncientChestRender;
-import fossilsarcheology.client.render.tile.TileEntityAnuStatueRender;
-import fossilsarcheology.client.render.tile.TileEntityAnubiteStatueRender;
-import fossilsarcheology.client.render.tile.TileEntitySarcophagusRender;
+import fossilsarcheology.client.render.tile.*;
 import fossilsarcheology.server.api.DefaultRenderedItem;
 import fossilsarcheology.server.api.IgnoreRenderProperty;
 import fossilsarcheology.server.api.SubtypeRenderedItem;
 import fossilsarcheology.server.block.FABlockRegistry;
-import fossilsarcheology.server.block.entity.TileEntityAncientChest;
-import fossilsarcheology.server.block.entity.TileEntityAnuStatue;
-import fossilsarcheology.server.block.entity.TileEntityAnubiteStatue;
-import fossilsarcheology.server.block.entity.TileEntitySarcophagus;
+import fossilsarcheology.server.block.entity.*;
 import fossilsarcheology.server.entity.StoneTabletEntity;
 import fossilsarcheology.server.entity.monster.*;
 import fossilsarcheology.server.entity.prehistoric.*;
@@ -54,6 +48,10 @@ public class RenderingHandler {
 
         for(int i = 0; i < 16; i++){
             this.registerItemRenderer(FAItemRegistry.TOY_BALL, i, "toyball_" + EnumDyeColor.byDyeDamage(i).getName(), "inventory");
+        }
+
+        for(int i = 0; i < 16; i++){
+            this.registerItemRenderer(Item.getItemFromBlock(FABlockRegistry.FIGURINE), i, "figurine_" + i, "inventory");
         }
 
         for(int i = 0; i < FossilSeedsItem.fossilSeeds.length; i++){
@@ -152,7 +150,7 @@ public class RenderingHandler {
         ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(FABlockRegistry.ANCIENT_CHEST), 0, TileEntityAncientChest.class);
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySarcophagus.class, new TileEntitySarcophagusRender());
         ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(FABlockRegistry.SARCOPHAGUS), 0, TileEntitySarcophagus.class);
-
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFigurine.class, new TileEntityFigurineRender());
     }
 
     public void onPostInit() {
