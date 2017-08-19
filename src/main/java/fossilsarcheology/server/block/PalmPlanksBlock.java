@@ -13,7 +13,7 @@ public class PalmPlanksBlock extends Block implements DefaultRenderedItem {
         setHardness(2.0F);
         setResistance(5.0F);
         setSoundType(SoundType.WOOD);
-        setUnlocalizedName("palaeoraphePlanks");
+        setUnlocalizedName("palm_planks");
         this.setCreativeTab(FATabRegistry.BLOCKS);
     }
 

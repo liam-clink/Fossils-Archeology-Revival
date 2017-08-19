@@ -31,7 +31,7 @@ public class ObsidianSpikesBlock extends Block implements DefaultRenderedItem {
         this.setHardness(50.0F);
         this.setResistance(2000.0F);
         this.setSoundType(SoundType.STONE);
-        this.setUnlocalizedName("obsidianSpikes");
+        this.setUnlocalizedName("obsidian_spikes");
     }
 
     @Override
@@ -45,6 +45,11 @@ public class ObsidianSpikesBlock extends Block implements DefaultRenderedItem {
     }
 
     public boolean isFullCube(IBlockState state) {
+        return false;
+    }
+
+    @Override
+    public boolean isOpaqueCube(IBlockState state) {
         return false;
     }
 

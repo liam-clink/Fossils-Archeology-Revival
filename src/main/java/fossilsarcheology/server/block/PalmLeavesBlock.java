@@ -29,7 +29,7 @@ public class PalmLeavesBlock extends BlockLeaves implements DefaultRenderedItem 
         super();
         this.setCreativeTab(FATabRegistry.BLOCKS);
         this.setResistance(1.0F);
-        this.setUnlocalizedName("palaeorapheLeaves");
+        this.setUnlocalizedName("palm_leaves");
     }
 
     @Override

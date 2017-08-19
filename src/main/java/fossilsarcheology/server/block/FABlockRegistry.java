@@ -62,12 +62,13 @@ public class FABlockRegistry {
     public static final DrumBlock DRUM = new DrumBlock();
     public static final TarBlock TAR = new TarBlock();
     public static final ObsidianSpikesBlock OBSIDIAN_SPIKES = new ObsidianSpikesBlock();
+
     public static final PalmLogBlock PALM_LOG = new PalmLogBlock();
     public static final PalmLeavesBlock PALM_LEAVES = new PalmLeavesBlock();
     public static final PalmSaplingBlock PALM_SAPLING = new PalmSaplingBlock();
     public static final PalmPlanksBlock PALM_PLANKS = new PalmPlanksBlock();
-    public static final FossilSlabBlock PALM_PLANKS_DOUBLESLAB = new PalmPlanksSlabBlock.Double("palaeorapheSlab", 1.4F, 7.5F, SoundType.WOOD);
-    public static final FossilSlabBlock PALM_PLANKS_SINGLESLAB = new PalmPlanksSlabBlock.Half("palaeorapheSlab", 1.4F, 7.5F, SoundType.WOOD);
+    public static final FossilSlabBlock PALM_PLANKS_DOUBLESLAB = new PalmPlanksSlabBlock.Double("palmPlanksSlab", 1.4F, 7.5F, SoundType.WOOD);
+    public static final FossilSlabBlock PALM_PLANKS_SINGLESLAB = new PalmPlanksSlabBlock.Half("palmPlanksSlab", 1.4F, 7.5F, SoundType.WOOD);
     public static final FossilStairsBlock PALM_PLANKS_STAIRS = new FossilStairsBlock(PALM_PLANKS.getDefaultState(), "palmStairs");
     public static final AncientWoodBlock ANCIENT_WOOD = new AncientWoodBlock();
     public static final AncientWoodPlateBlock ANCIENT_WOOD_PLATE = new AncientWoodPlateBlock();

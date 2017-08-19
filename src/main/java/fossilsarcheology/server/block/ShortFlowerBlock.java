@@ -1,5 +1,6 @@
 package fossilsarcheology.server.block;
 
+import fossilsarcheology.server.api.DefaultRenderedItem;
 import fossilsarcheology.server.tab.FATabRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
@@ -20,7 +21,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class ShortFlowerBlock extends BlockBush{
+public class ShortFlowerBlock extends BlockBush implements DefaultRenderedItem{
 
     public ShortFlowerBlock(String name) {
         super(Material.PLANTS);

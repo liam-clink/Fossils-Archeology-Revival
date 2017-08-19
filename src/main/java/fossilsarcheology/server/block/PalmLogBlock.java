@@ -16,7 +16,7 @@ public class PalmLogBlock extends BlockRotatedPillar implements DefaultRenderedI
         this.setSoundType(SoundType.WOOD);
         this.setHardness(1.4F);
         this.setResistance(1.0F);
-        this.setUnlocalizedName("palaeorapheLog");
+        this.setUnlocalizedName("palm_log");
     }
 
     @Override

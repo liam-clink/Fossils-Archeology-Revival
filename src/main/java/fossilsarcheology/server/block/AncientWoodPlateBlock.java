@@ -1,5 +1,6 @@
 package fossilsarcheology.server.block;
 
+import fossilsarcheology.server.api.DefaultRenderedItem;
 import fossilsarcheology.server.tab.FATabRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -12,7 +13,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class AncientWoodPlateBlock extends Block{
+public class AncientWoodPlateBlock extends Block implements DefaultRenderedItem {
 
     protected static final AxisAlignedBB PLATE_AABB = new AxisAlignedBB(0.0F, 0.0F, 0.0F, 1.0F, 0.125F, 1.0F);
 

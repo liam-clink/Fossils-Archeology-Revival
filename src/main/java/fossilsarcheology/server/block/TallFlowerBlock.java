@@ -1,5 +1,6 @@
 package fossilsarcheology.server.block;
 
+import fossilsarcheology.server.api.DefaultRenderedItem;
 import fossilsarcheology.server.tab.FATabRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
@@ -23,7 +24,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Random;
 
-public class TallFlowerBlock extends BlockBush implements IGrowable {
+public class TallFlowerBlock extends BlockBush implements DefaultRenderedItem, IGrowable {
 
     public static final PropertyEnum<TallFlowerBlock.EnumBlockHalf> HALF = PropertyEnum.create("half", TallFlowerBlock.EnumBlockHalf.class);
 

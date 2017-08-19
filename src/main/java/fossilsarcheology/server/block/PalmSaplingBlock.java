@@ -25,7 +25,7 @@ public class PalmSaplingBlock extends BlockBush implements DefaultRenderedItem, 
         this.setSoundType(SoundType.PLANT);
         this.setHardness(0.2F);
         this.setResistance(1F);
-        this.setUnlocalizedName("palaeorapheSapling");
+        this.setUnlocalizedName("palm_sapling");
         this.setDefaultState(this.blockState.getBaseState().withProperty(STAGE, 0));
 
     }
