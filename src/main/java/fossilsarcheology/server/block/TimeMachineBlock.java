@@ -1,29 +1,29 @@
 package fossilsarcheology.server.block;
 
         import fossilsarcheology.Revival;
-        import fossilsarcheology.server.ServerProxy;
-        import fossilsarcheology.server.api.BlockEntity;
-        import fossilsarcheology.server.api.DefaultRenderedItem;
-        import fossilsarcheology.server.block.entity.TileEntitySifter;
-        import fossilsarcheology.server.block.entity.TileEntityTimeMachine;
-        import fossilsarcheology.server.tab.FATabRegistry;
-        import net.minecraft.block.BlockContainer;
-        import net.minecraft.block.SoundType;
-        import net.minecraft.block.material.Material;
-        import net.minecraft.block.state.IBlockState;
-        import net.minecraft.entity.item.EntityItem;
-        import net.minecraft.entity.player.EntityPlayer;
-        import net.minecraft.item.ItemStack;
-        import net.minecraft.tileentity.TileEntity;
-        import net.minecraft.util.BlockRenderLayer;
+import fossilsarcheology.server.ServerProxy;
+import fossilsarcheology.server.api.BlockEntity;
+import fossilsarcheology.server.api.DefaultRenderedItem;
+import fossilsarcheology.server.block.entity.TileEntityTimeMachine;
+import fossilsarcheology.server.tab.FATabRegistry;
+import net.minecraft.block.BlockContainer;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockRenderLayer;
+        import net.minecraft.util.EnumBlockRenderType;
         import net.minecraft.util.EnumFacing;
-        import net.minecraft.util.EnumHand;
-        import net.minecraft.util.math.AxisAlignedBB;
-        import net.minecraft.util.math.BlockPos;
-        import net.minecraft.world.IBlockAccess;
-        import net.minecraft.world.World;
-        import net.minecraftforge.fml.relauncher.Side;
-        import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class TimeMachineBlock extends BlockContainer implements DefaultRenderedItem, BlockEntity {
     public static final AxisAlignedBB QUARTER_BLOCK_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.75D, 1.0D);
@@ -34,13 +34,18 @@ public class TimeMachineBlock extends BlockContainer implements DefaultRenderedI
         this.setLightLevel(0.9375F);
         this.setHardness(0.3F);
         this.setSoundType(SoundType.GLASS);
-        this.setUnlocalizedName("timeMachine");
+        this.setUnlocalizedName("time_machine");
         this.setCreativeTab(FATabRegistry.BLOCKS);
     }
 
     public boolean isFullCube(IBlockState state) {
         return false;
     }
+
+    public EnumBlockRenderType getRenderType(IBlockState state) {
+        return EnumBlockRenderType.MODEL;
+    }
+
 
     @Override
     public boolean isOpaqueCube(IBlockState state) {

@@ -1,6 +1,7 @@
 package fossilsarcheology.server.block;
 
 import fossilsarcheology.client.sound.FASoundRegistry;
+import fossilsarcheology.server.api.DefaultRenderedItem;
 import fossilsarcheology.server.tab.FATabRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -19,7 +20,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class DrumBlock extends Block{
+public class DrumBlock extends Block implements DefaultRenderedItem {
 
     public static final PropertyInteger DRUMS = PropertyInteger.create("drums", 0, 2);
 

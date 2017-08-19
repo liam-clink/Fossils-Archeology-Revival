@@ -29,10 +29,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-public class BlockFigurine extends BlockContainer implements IBlockItem, BlockEntity {
-    public static final PropertyEnum<BlockFigurine.EnumType> VARIANT = PropertyEnum.<BlockFigurine.EnumType>create("variant", BlockFigurine.EnumType.class);
+public class FigurineBlock extends BlockContainer implements IBlockItem, BlockEntity {
+    public static final PropertyEnum<FigurineBlock.EnumType> VARIANT = PropertyEnum.<FigurineBlock.EnumType>create("variant", FigurineBlock.EnumType.class);
     public static final AxisAlignedBB AABB = new AxisAlignedBB(0.25f, 0f, 0.25f, 0.75f, 0.5f, 0.75f);
-    protected BlockFigurine() {
+    protected FigurineBlock() {
         super(Material.ROCK);
         this.setCreativeTab(FATabRegistry.BLOCKS);
         this.setUnlocalizedName("figurine");
@@ -45,7 +45,7 @@ public class BlockFigurine extends BlockContainer implements IBlockItem, BlockEn
     }
 
     public int damageDropped(IBlockState state) {
-        return ((BlockFigurine.EnumType)state.getValue(VARIANT)).getMetadata();
+        return ((FigurineBlock.EnumType)state.getValue(VARIANT)).getMetadata();
     }
 
     public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
@@ -57,7 +57,7 @@ public class BlockFigurine extends BlockContainer implements IBlockItem, BlockEn
 
     @SideOnly(Side.CLIENT)
     public void getSubBlocks(Item itemIn, CreativeTabs tab, List<ItemStack> list) {
-        for (BlockFigurine.EnumType types : BlockFigurine.EnumType.values()) {
+        for (FigurineBlock.EnumType types : FigurineBlock.EnumType.values()) {
             list.add(new ItemStack(itemIn, 1, types.getMetadata()));
         }
     }
@@ -78,11 +78,11 @@ public class BlockFigurine extends BlockContainer implements IBlockItem, BlockEn
     }
 
     public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState().withProperty(VARIANT, BlockFigurine.EnumType.byMetadata(meta));
+        return this.getDefaultState().withProperty(VARIANT, FigurineBlock.EnumType.byMetadata(meta));
     }
 
     public int getMetaFromState(IBlockState state) {
-        return ((BlockFigurine.EnumType)state.getValue(VARIANT)).getMetadata();
+        return ((FigurineBlock.EnumType)state.getValue(VARIANT)).getMetadata();
     }
 
     protected BlockStateContainer createBlockState() {
@@ -98,8 +98,7 @@ public class BlockFigurine extends BlockContainer implements IBlockItem, BlockEn
         return TileEntityFigurine.class;
     }
 
-    public static enum EnumType implements IStringSerializable
-    {
+    public static enum EnumType implements IStringSerializable {
         FIGURINE_STEVE_PRISTINE(0, "figurine_steve_pristine"),
         FIGURINE_SKELETON_PRISTINE(1, "figurine_skeleton_pristine"),
         FIGURINE_ZOMBIE_PRISTINE(2, "figurine_zombie_pristine"),
@@ -117,7 +116,7 @@ public class BlockFigurine extends BlockContainer implements IBlockItem, BlockEn
         FIGURINE_ENDERMAN_BROKEN(14, "figurine_enderman_broken"),
         FIGURINE_MYSTERIOUS(15, "figurine_mysterious");
 
-        private static final BlockFigurine.EnumType[] META_LOOKUP = new BlockFigurine.EnumType[values().length];
+        private static final FigurineBlock.EnumType[] META_LOOKUP = new FigurineBlock.EnumType[values().length];
         private final int meta;
         private final String name;
         private final String unlocalizedName;
@@ -141,7 +140,7 @@ public class BlockFigurine extends BlockContainer implements IBlockItem, BlockEn
             return this.name;
         }
 
-        public static BlockFigurine.EnumType byMetadata(int meta) {
+        public static FigurineBlock.EnumType byMetadata(int meta) {
             if (meta < 0 || meta >= META_LOOKUP.length) {
                 meta = 0;
             }
@@ -158,7 +157,7 @@ public class BlockFigurine extends BlockContainer implements IBlockItem, BlockEn
         }
 
         static {
-            for (BlockFigurine.EnumType blockplanks$enumtype : values()) {
+            for (FigurineBlock.EnumType blockplanks$enumtype : values()) {
                 META_LOOKUP[blockplanks$enumtype.getMetadata()] = blockplanks$enumtype;
             }
         }

@@ -54,13 +54,14 @@ public class FABlockRegistry {
     public static final AnubiteStatueBlock ANUBITE_STATUE = new AnubiteStatueBlock();
     public static final AncientChestBlock ANCIENT_CHEST = new AncientChestBlock();
     public static final SarcophagusBlock SARCOPHAGUS = new SarcophagusBlock();
-    public static final BlockFigurine FIGURINE = new BlockFigurine();
+    public static final FigurineBlock FIGURINE = new FigurineBlock();
     public static final AmphoraVaseBlock AMPHORA_VASE = new AmphoraVaseBlock();
     public static final KylixVaseBlock KYLIX_VASE = new KylixVaseBlock();
     public static final VoluteVaseBlock VOLUTE_VASE = new VoluteVaseBlock();
     public static final TimeMachineBlock TIME_MACHINE = new TimeMachineBlock();
     public static final DrumBlock DRUM = new DrumBlock();
     public static final TarBlock TAR = new TarBlock();
+    public static final ObsidianSpikesBlock OBSIDIAN_SPIKES = new ObsidianSpikesBlock();
     public static final PalmLogBlock PALM_LOG = new PalmLogBlock();
     public static final PalmLeavesBlock PALM_LEAVES = new PalmLeavesBlock();
     public static final PalmSaplingBlock PALM_SAPLING = new PalmSaplingBlock();
@@ -73,7 +74,6 @@ public class FABlockRegistry {
     public static final FossilStairsBlock ANCIENT_WOOD_STAIRS = new FossilStairsBlock(ANCIENT_WOOD.getDefaultState(), "ancientWoodStairs");
     public static final FossilSlabBlock ANCIENT_WOOD_DOUBLESLAB = new AncientWoodSlabBlock.Double("ancientWoodSlab", 1.4F, 7.5F, SoundType.WOOD);
     public static final FossilSlabBlock ANCIENT_WOOD_SINGLESLAB = new AncientWoodSlabBlock.Half("ancientWoodSlab", 1.4F, 7.5F, SoundType.WOOD);
-    public static final ObsidianSpikesBlock OBSIDIAN_SPIKES = new ObsidianSpikesBlock();
     public static final FernsBlock FERNS = new FernsBlock();
     public static final DillhoffiaFlowerBlock DILLHOFFIA_FLOWER = new DillhoffiaFlowerBlock();
     public static final SarraceniaFlowerBlock SARRACENIA_FLOWER = new SarraceniaFlowerBlock();
