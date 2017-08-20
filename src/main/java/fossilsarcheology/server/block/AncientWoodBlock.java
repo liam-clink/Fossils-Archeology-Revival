@@ -12,6 +12,6 @@ public class AncientWoodBlock extends Block implements DefaultRenderedItem {
         this.setCreativeTab(FATabRegistry.BLOCKS);
         setHardness(2.0F);
         setSoundType(SoundType.WOOD);
-        setUnlocalizedName("ancientWood");
+        setUnlocalizedName("ancient_wood");
     }
 }

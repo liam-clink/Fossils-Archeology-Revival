@@ -62,7 +62,6 @@ public class FABlockRegistry {
     public static final DrumBlock DRUM = new DrumBlock();
     public static final TarBlock TAR = new TarBlock();
     public static final ObsidianSpikesBlock OBSIDIAN_SPIKES = new ObsidianSpikesBlock();
-
     public static final PalmLogBlock PALM_LOG = new PalmLogBlock();
     public static final PalmLeavesBlock PALM_LEAVES = new PalmLeavesBlock();
     public static final PalmSaplingBlock PALM_SAPLING = new PalmSaplingBlock();
@@ -70,11 +69,14 @@ public class FABlockRegistry {
     public static final FossilSlabBlock PALM_PLANKS_DOUBLESLAB = new PalmPlanksSlabBlock.Double("palmPlanksSlab", 1.4F, 7.5F, SoundType.WOOD);
     public static final FossilSlabBlock PALM_PLANKS_SINGLESLAB = new PalmPlanksSlabBlock.Half("palmPlanksSlab", 1.4F, 7.5F, SoundType.WOOD);
     public static final FossilStairsBlock PALM_PLANKS_STAIRS = new FossilStairsBlock(PALM_PLANKS.getDefaultState(), "palmStairs");
+
     public static final AncientWoodBlock ANCIENT_WOOD = new AncientWoodBlock();
+    public static final AncientWoodPillarBlock ANCIENT_WOOD_PILLAR = new AncientWoodPillarBlock();
     public static final AncientWoodPlateBlock ANCIENT_WOOD_PLATE = new AncientWoodPlateBlock();
-    public static final FossilStairsBlock ANCIENT_WOOD_STAIRS = new FossilStairsBlock(ANCIENT_WOOD.getDefaultState(), "ancientWoodStairs");
+    public static final FossilStairsBlock ANCIENT_WOOD_STAIRS = new FossilStairsBlock(ANCIENT_WOOD.getDefaultState(), "ancient_wood_stairs");
     public static final FossilSlabBlock ANCIENT_WOOD_DOUBLESLAB = new AncientWoodSlabBlock.Double("ancientWoodSlab", 1.4F, 7.5F, SoundType.WOOD);
     public static final FossilSlabBlock ANCIENT_WOOD_SINGLESLAB = new AncientWoodSlabBlock.Half("ancientWoodSlab", 1.4F, 7.5F, SoundType.WOOD);
+
     public static final FernsBlock FERNS = new FernsBlock();
     public static final DillhoffiaFlowerBlock DILLHOFFIA_FLOWER = new DillhoffiaFlowerBlock();
     public static final SarraceniaFlowerBlock SARRACENIA_FLOWER = new SarraceniaFlowerBlock();

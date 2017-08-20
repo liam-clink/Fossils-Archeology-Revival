@@ -21,7 +21,7 @@ public class AncientWoodPlateBlock extends Block implements DefaultRenderedItem 
         super(Material.WOOD);
         setCreativeTab(FATabRegistry.BLOCKS);
         setHardness(0.6F);
-        setUnlocalizedName("ancientWoodPlate");
+        setUnlocalizedName("ancient_wood_plate");
     }
 
     public boolean isFullCube(IBlockState state) {
