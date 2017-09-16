@@ -1,13 +1,17 @@
 package fossilsarcheology.server.block;
 
+import fossilsarcheology.server.achievement.FossilAchievements;
 import fossilsarcheology.server.api.DefaultRenderedItem;
 import fossilsarcheology.server.item.FAItemRegistry;
+import fossilsarcheology.server.item.variant.DinosaurBoneType;
 import fossilsarcheology.server.tab.FATabRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -35,84 +39,83 @@ public class FossilBlock extends Block implements DefaultRenderedItem {
 
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-/*
         int i = rand.nextInt(1100);
         if (i < 1) {
             this.randomMeta = 0;
-            return FAItemRegistry.GEM;
+            return FAItemRegistry.SCARAB_GEM;
         } else if (i < 6) {
             this.randomMeta = 0;
-            return FAItemRegistry.brokenSword;
+            return FAItemRegistry.BROKEN_SWORD;
         } else if (i < 11) {
             this.randomMeta = 0;
-            return FAItemRegistry.brokenhelmet;
+            return FAItemRegistry.BROKEN_HELMET;
         } else if (i < 13) {
             int dropRandom = rand.nextInt(DinosaurBoneType.values().length);
             if (dropRandom != 4) {
                 this.randomMeta = dropRandom;
             }
-            return FAItemRegistry.legBone;
+            return FAItemRegistry.LEG_BONE;
         } else if (i < 15) {
             int dropRandom = rand.nextInt(DinosaurBoneType.values().length);
             if (dropRandom != 4) {
                 this.randomMeta = dropRandom;
             }
-            return FAItemRegistry.skull;
+            return FAItemRegistry.SKULL;
         } else if (i < 17) {
             int dropRandom = rand.nextInt(DinosaurBoneType.values().length);
             if (dropRandom != 4) {
                 this.randomMeta = dropRandom;
             }
-            return FAItemRegistry.claw;
+            return FAItemRegistry.UNIQUE_ITEM;
         } else if (i < 19) {
             int dropRandom = rand.nextInt(DinosaurBoneType.values().length);
             if (dropRandom != 4) {
                 this.randomMeta = dropRandom;
             }
-            return FAItemRegistry.foot;
+            return FAItemRegistry.FOOT;
         } else if (i < 21) {
             int dropRandom = rand.nextInt(DinosaurBoneType.values().length);
             if (dropRandom != 4) {
                 this.randomMeta = dropRandom;
             }
-            return FAItemRegistry.vertebrae;
+            return FAItemRegistry.VERTEBRAE;
         } else if (i < 23) {
             int dropRandom = rand.nextInt(DinosaurBoneType.values().length);
             if (dropRandom != 4) {
                 this.randomMeta = dropRandom;
             }
-            return FAItemRegistry.armBone;
+            return FAItemRegistry.ARM_BONE;
         } else if (i < 25) {
             int dropRandom = rand.nextInt(DinosaurBoneType.values().length);
             if (dropRandom != 4) {
                 this.randomMeta = dropRandom;
             }
-            return FAItemRegistry.dinoRibCage;
+            return FAItemRegistry.RIBCAGE;
         } else if (i < 50) {
             this.randomMeta = 0;
-            return Item.getItemFromBlock(FABlockRegistry.INSTANCE.blockSkull);
+            return Item.getItemFromBlock(FABlockRegistry.SKULL_BLOCK);
         } else if (i < 350) {
-*/
+
         this.randomMeta = 0;
         return FAItemRegistry.BIOFOSSIL;
-/*        } else if (i < 550) {
+       } else if (i < 550) {
             this.randomMeta = 0;
-            return FAItemRegistry.relic;
+            return FAItemRegistry.RELIC_SCRAP;
         } else if (i < 900) {
             this.randomMeta = 0;
             return Items.BONE;
         } else if (i < 1200) {
             this.randomMeta = 0;
-            return FAItemRegistry.brokenSapling;
+            return FAItemRegistry.PALAE_SAPLING_FOSSIL;
         }
         this.randomMeta = 0;
-        return Item.getItemFromBlock(Blocks.COBBLESTONE);*/
+        return Item.getItemFromBlock(Blocks.COBBLESTONE);
     }
 
     @Override
     public void harvestBlock(World world, EntityPlayer player, BlockPos pos, IBlockState state, TileEntity tile, ItemStack stack) {
         super.harvestBlock(world, player, pos, state, tile, stack);
-//        player.addStat(FossilAchievementHandler.FIRST_FOSSIL); TODO
+        player.addStat(FossilAchievements.FIRST_FOSSIL);
     }
 
     @Override

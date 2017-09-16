@@ -2,6 +2,7 @@ package fossilsarcheology.server.block;
 
 import fossilsarcheology.server.achievement.FossilAchievements;
 import fossilsarcheology.server.api.DefaultRenderedItem;
+import fossilsarcheology.server.item.FAItemRegistry;
 import fossilsarcheology.server.tab.FATabRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBreakable;
@@ -80,16 +81,13 @@ public class PermafrostBlock extends BlockBreakable implements DefaultRenderedIt
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
         int selection = rand.nextInt(20000);
         if (selection >= 0 && selection < 4000) {
-//            return FAItemRegistry.FERN_SEED; TODO
-            return Items.BOOK;
+           return FAItemRegistry.FERN_SEED;
         } else {
             if (selection >= 4000 && selection < 8000) {
-//                return Item.getItemFromBlock(FABlockRegistry.SKULL);
-                return Items.BOOK;
+               return Item.getItemFromBlock(FABlockRegistry.SKULL_BLOCK);
             } else {
                 if (selection >= 8000 && selection < 12000) {
-//                    return FAItemRegistry.ICED_MEAT;
-                    return Items.BOOK;
+                    return FAItemRegistry.ICED_MEAT;
                 } else {
                     if (selection >= 12000 && selection < 16000) {
                         return Items.BONE;

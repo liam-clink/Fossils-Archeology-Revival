@@ -1,0 +1,7 @@
+{
+  "parent": "block/crop",
+  "textures": {
+    "crop": "fossil:blocks/fern_2s5",
+    "particle": "fossil:blocks/fern_2s5"
+  }
+}

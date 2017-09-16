@@ -1,5 +1,6 @@
 package fossilsarcheology.server.block;
 
+import fossilsarcheology.server.api.DefaultRenderedItem;
 import fossilsarcheology.server.item.FAItemRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
@@ -21,7 +22,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Random;
 
-public class FernsBlock extends BlockBush {
+public class FernsBlock extends BlockBush implements DefaultRenderedItem {
 
     protected static final AxisAlignedBB FERN_AABB = new AxisAlignedBB(0.0F, 0.0F, 0.0F, 1.0F, 0.25F, 1.0F);
     public static final PropertyInteger GROWTH = PropertyInteger.create("growth", 0, 7);
