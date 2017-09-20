@@ -13,6 +13,7 @@ import fossilsarcheology.server.entity.prehistoric.EntityPrehistoric;
 import fossilsarcheology.server.entity.prehistoric.PrehistoricEntityType;
 import fossilsarcheology.server.event.FossilAchivementEvents;
 import fossilsarcheology.server.item.FAItemRegistry;
+import fossilsarcheology.server.recipe.FARecipeRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -38,7 +39,7 @@ public class ServerProxy implements IGuiHandler {
         FAFluidRegistry.register();
         FABlockRegistry.register();
         FAItemRegistry.register();
-
+        FARecipeRegistry.register();
         FAEntityRegistry.register();
 
         PrehistoricEntityType.register();

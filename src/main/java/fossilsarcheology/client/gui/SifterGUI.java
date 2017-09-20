@@ -13,7 +13,7 @@ import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class SifterGUI extends GuiContainer {
-    private static final ResourceLocation furnaceGuiTextures = new ResourceLocation(Revival.MODID + ":" + "textures/gui/Sifter.png");
+    private static final ResourceLocation furnaceGuiTextures = new ResourceLocation(Revival.MODID + ":" + "textures/gui/sifter.png");
     private TileEntitySifter sifterInventory;
 
     public SifterGUI(InventoryPlayer playerInventory, TileEntitySifter sifterInventory) {

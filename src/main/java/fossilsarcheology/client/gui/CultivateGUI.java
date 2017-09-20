@@ -9,7 +9,7 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 public class CultivateGUI extends GuiContainer {
-    private static final ResourceLocation loc = new ResourceLocation("fossil:textures/gui/Cultivate.png");
+    private static final ResourceLocation loc = new ResourceLocation("fossil:textures/gui/cultivate.png");
     private TileEntityCultivate cultivateInventory;
 
     public CultivateGUI(InventoryPlayer playerInventory, TileEntityCultivate tile) {

@@ -9,7 +9,7 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 public class TimeMachineGUI extends GuiContainer {
-    private static final ResourceLocation loc = new ResourceLocation("fossil:textures/gui/Timemachine.png");
+    private static final ResourceLocation loc = new ResourceLocation("fossil:textures/gui/time_machine.png");
     final int SQR_WIDTH = 34;
     final int SQR_HEIGHT = 13;
     final int SQR_POSX = 131;

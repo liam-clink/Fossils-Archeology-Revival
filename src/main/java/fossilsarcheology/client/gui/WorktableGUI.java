@@ -9,7 +9,7 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 public class WorktableGUI extends GuiContainer {
-    private static final ResourceLocation loc = new ResourceLocation("fossil:textures/gui/Workbench.png");
+    private static final ResourceLocation loc = new ResourceLocation("fossil:textures/gui/workbench.png");
     private TileEntityWorktable tile;
 
     public WorktableGUI(InventoryPlayer playerInventory, TileEntityWorktable tile) {
