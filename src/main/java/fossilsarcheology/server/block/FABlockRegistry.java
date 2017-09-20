@@ -79,7 +79,7 @@ public class FABlockRegistry {
 
     public static final FernsBlock FERNS = new FernsBlock();
     public static final DillhoffiaFlowerBlock DILLHOFFIA_FLOWER = new DillhoffiaFlowerBlock();
-    public static final SarraceniaFlowerBlock SARRACENIA_FLOWER = new SarraceniaFlowerBlock();
+    public static final TallFlowerBlock SARRACENIA_FLOWER = new TallFlowerBlock("sarracenia");
     public static final ShortFlowerBlock CEPHALOTAXUS_FLOWER = new ShortFlowerBlock("cephalotaxus");
     public static final ShortFlowerBlock LICOPODIOPHYTA_FLOWER = new ShortFlowerBlock("licopodiophyta");
     public static final TallFlowerBlock PALEOPANAX_FLOWER = new TallFlowerBlock("paleopanax");

@@ -1,5 +1,6 @@
 package fossilsarcheology.server.block;
 
+import fossilsarcheology.server.api.DefaultRenderedItem;
 import fossilsarcheology.server.tab.FATabRegistry;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.SoundType;
@@ -17,7 +18,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class TempskyaBlock extends BlockBush {
+public class TempskyaBlock extends BlockBush implements DefaultRenderedItem {
 
     public static final PropertyInteger LAYER = PropertyInteger.create("layer", 0, 3);
 
