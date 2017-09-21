@@ -8,7 +8,7 @@ import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
-public class FossilAchivementEvents {
+public class FossilCraftingEvent {
 
     @SubscribeEvent
     public void onCraftEvent(PlayerEvent.ItemCraftedEvent event) {

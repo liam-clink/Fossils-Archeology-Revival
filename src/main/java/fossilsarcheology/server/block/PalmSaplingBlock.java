@@ -53,7 +53,7 @@ public class PalmSaplingBlock extends BlockBush implements DefaultRenderedItem, 
         }
     }
 
-    private void generateTree(World world, BlockPos pos, Random rand) {
+    public void generateTree(World world, BlockPos pos, Random rand) {
    //TODO
     }
 

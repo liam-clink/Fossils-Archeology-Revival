@@ -11,7 +11,9 @@ import fossilsarcheology.server.entity.EntityFishBase;
 import fossilsarcheology.server.entity.FAEntityRegistry;
 import fossilsarcheology.server.entity.prehistoric.EntityPrehistoric;
 import fossilsarcheology.server.entity.prehistoric.PrehistoricEntityType;
-import fossilsarcheology.server.event.FossilAchivementEvents;
+import fossilsarcheology.server.event.FossilBonemealEvent;
+import fossilsarcheology.server.event.FossilCraftingEvent;
+import fossilsarcheology.server.event.FossilPickupItemEvent;
 import fossilsarcheology.server.item.FAItemRegistry;
 import fossilsarcheology.server.recipe.FAOreDictRegistry;
 import fossilsarcheology.server.recipe.FARecipeRegistry;
@@ -50,7 +52,10 @@ public class ServerProxy implements IGuiHandler {
     }
 
     public void onInit() {
-        MinecraftForge.EVENT_BUS.register(new FossilAchivementEvents());
+        MinecraftForge.EVENT_BUS.register(new FossilCraftingEvent());
+        MinecraftForge.EVENT_BUS.register(new FossilPickupItemEvent());
+        MinecraftForge.EVENT_BUS.register(new FossilBonemealEvent());
+
     }
 
     public void calculateChainBuffer(EntityFishBase entity) {
