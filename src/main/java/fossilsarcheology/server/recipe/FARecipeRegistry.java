@@ -16,8 +16,6 @@ public class FARecipeRegistry {
 
     public static String[] dyes = {"Black", "Red", "Green", "Brown", "Blue", "Purple", "Cyan", "LightGray", "Gray", "Pink", "Lime", "Yellow", "LightBlue", "Magenta", "Orange", "White"};
 
-//TODO: paleo planks registered as plankWood
-
     public static void register() {
         GameRegistry.addRecipe(new ItemStack(FABlockRegistry.SKULL_LANTERN, 1), "X", "Y", 'X', FABlockRegistry.SKULL_BLOCK, 'Y', Blocks.TORCH);
         GameRegistry.addRecipe(new ItemStack(Items.DYE, 5, 15), "X", 'X', FABlockRegistry.SKULL_BLOCK);

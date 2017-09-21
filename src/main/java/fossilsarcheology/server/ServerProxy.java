@@ -37,17 +37,13 @@ public class ServerProxy implements IGuiHandler {
 
     public void onPreInit() {
         NetworkRegistry.INSTANCE.registerGuiHandler(Revival.INSTANCE, this);
-
         FASoundRegistry.register();
         FAFluidRegistry.register();
         FABlockRegistry.register();
         FAItemRegistry.register();
-        FARecipeRegistry.register();
-        FAOreDictRegistry.register();
         FAEntityRegistry.register();
-
+        FAOreDictRegistry.register();
         PrehistoricEntityType.register();
-
         FossilAchievements.register();
     }
 
@@ -55,7 +51,7 @@ public class ServerProxy implements IGuiHandler {
         MinecraftForge.EVENT_BUS.register(new FossilCraftingEvent());
         MinecraftForge.EVENT_BUS.register(new FossilPickupItemEvent());
         MinecraftForge.EVENT_BUS.register(new FossilBonemealEvent());
-
+        FARecipeRegistry.register();
     }
 
     public void calculateChainBuffer(EntityFishBase entity) {
