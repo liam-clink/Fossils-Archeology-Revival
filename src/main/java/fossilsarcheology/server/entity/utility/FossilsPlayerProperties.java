@@ -4,7 +4,7 @@ import net.ilexiconn.llibrary.server.entity.EntityProperties;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 
-public class FossilsPlayerProperties extends EntityProperties {
+public class FossilsPlayerProperties extends EntityProperties<EntityPlayer> {
 
     public boolean killedAnu;
 
@@ -25,7 +25,7 @@ public class FossilsPlayerProperties extends EntityProperties {
 
     @Override
     public String getID() {
-        return "Fossils";
+        return "Fossils - Player Tracker";
     }
 
     @Override

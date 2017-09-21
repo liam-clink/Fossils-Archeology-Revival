@@ -1,11 +1,11 @@
 package fossilsarcheology.server.entity.prehistoric;
 
 
-import net.minecraft.entity.Entity;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.world.World;
 
-public class EntityQuagga extends Entity {
+public class EntityQuagga extends EntityHorse {
 
     public EntityQuagga(World par1World) {
         super(par1World);
@@ -13,17 +13,12 @@ public class EntityQuagga extends Entity {
     }
 
     @Override
+    public EntityAgeable createChild(EntityAgeable ageable) {
+        return null;
+    }
+
+    @Override
     protected void entityInit() {
-
-    }
-
-    @Override
-    protected void readEntityFromNBT(NBTTagCompound compound) {
-
-    }
-
-    @Override
-    protected void writeEntityToNBT(NBTTagCompound compound) {
 
     }
 

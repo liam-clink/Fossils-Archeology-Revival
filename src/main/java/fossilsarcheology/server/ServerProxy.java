@@ -13,6 +13,7 @@ import fossilsarcheology.server.entity.prehistoric.EntityPrehistoric;
 import fossilsarcheology.server.entity.prehistoric.PrehistoricEntityType;
 import fossilsarcheology.server.event.FossilBonemealEvent;
 import fossilsarcheology.server.event.FossilCraftingEvent;
+import fossilsarcheology.server.event.FossilLivingEvent;
 import fossilsarcheology.server.event.FossilPickupItemEvent;
 import fossilsarcheology.server.item.FAItemRegistry;
 import fossilsarcheology.server.recipe.FAOreDictRegistry;
@@ -51,6 +52,7 @@ public class ServerProxy implements IGuiHandler {
         MinecraftForge.EVENT_BUS.register(new FossilCraftingEvent());
         MinecraftForge.EVENT_BUS.register(new FossilPickupItemEvent());
         MinecraftForge.EVENT_BUS.register(new FossilBonemealEvent());
+        MinecraftForge.EVENT_BUS.register(new FossilLivingEvent());
         FARecipeRegistry.register();
     }
 
