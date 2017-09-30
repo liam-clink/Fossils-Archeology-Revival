@@ -19,6 +19,7 @@ import fossilsarcheology.server.item.FAItemRegistry;
 import fossilsarcheology.server.recipe.FAOreDictRegistry;
 import fossilsarcheology.server.recipe.FARecipeRegistry;
 import fossilsarcheology.server.util.FossilFoodMappings;
+import fossilsarcheology.server.world.FAWorldRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -49,6 +50,9 @@ public class ServerProxy implements IGuiHandler {
         PrehistoricEntityType.register();
         FossilFoodMappings.register();
         FossilAchievements.register();
+        FAWorldRegistry.register();
+
+
     }
 
     public void onInit() {
