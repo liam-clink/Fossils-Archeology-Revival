@@ -158,7 +158,7 @@ public abstract class EntityFishBase extends EntityTameable {
 
         if (stack != null && FMLCommonHandler.instance().getSide().isClient() && stack.getItem() == FAItemRegistry.DINOPEDIA) {
             this.setPedia();
-            player.openGui(Revival.INSTANCE, 4, this.world, (int) this.posX, (int) this.posY, (int) this.posZ);
+            player.openGui(Revival.INSTANCE, 6, this.world, (int) this.posX, (int) this.posY, (int) this.posZ);
             return true;
         }
         if (this.isInsideNautilusShell()) {

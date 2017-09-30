@@ -18,6 +18,7 @@ import fossilsarcheology.server.event.FossilPickupItemEvent;
 import fossilsarcheology.server.item.FAItemRegistry;
 import fossilsarcheology.server.recipe.FAOreDictRegistry;
 import fossilsarcheology.server.recipe.FARecipeRegistry;
+import fossilsarcheology.server.util.FossilFoodMappings;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -35,6 +36,7 @@ public class ServerProxy implements IGuiHandler {
     public static final int GUI_WORKTABLE = 3;
     public static final int GUI_SIFTER = 4;
     public static final int GUI_TIME_MACHINE = 5;
+    public static final int GUI_DINOPEDIA = 6;
 
     public void onPreInit() {
         NetworkRegistry.INSTANCE.registerGuiHandler(Revival.INSTANCE, this);
@@ -45,6 +47,7 @@ public class ServerProxy implements IGuiHandler {
         FAEntityRegistry.register();
         FAOreDictRegistry.register();
         PrehistoricEntityType.register();
+        FossilFoodMappings.register();
         FossilAchievements.register();
     }
 

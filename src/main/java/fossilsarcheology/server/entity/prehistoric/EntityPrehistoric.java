@@ -1202,7 +1202,7 @@ public abstract class EntityPrehistoric extends EntityTameable implements IPrehi
 
                     if (FMLCommonHandler.instance().getSide().isClient() && itemstack.getItem() == FAItemRegistry.DINOPEDIA) {
                         this.setPedia();
-                        player.openGui(Revival.INSTANCE, 4, this.world, (int) this.posX, (int) this.posY, (int) this.posZ);
+                        player.openGui(Revival.INSTANCE, 6, this.world, (int) this.posX, (int) this.posY, (int) this.posZ);
                         return true;
                     }
 

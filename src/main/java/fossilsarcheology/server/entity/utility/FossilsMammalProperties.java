@@ -14,7 +14,7 @@ public class FossilsMammalProperties extends EntityProperties<EntityAnimal> {
     @Override
     public void saveNBTData(NBTTagCompound compound) {
         compound.setBoolean("Pregnant", isPregnant);
-        compound.setInteger("Embryo", embryo.ordinal());
+        compound.setInteger("Embryo", embryo == null ? 0 : embryo.ordinal());
         compound.setInteger("EmbryoProgress", embryoProgress);
 
     }

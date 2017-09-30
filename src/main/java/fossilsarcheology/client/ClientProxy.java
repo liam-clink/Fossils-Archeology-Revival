@@ -1,6 +1,7 @@
 package fossilsarcheology.client;
 
 import fossilsarcheology.client.gui.*;
+import fossilsarcheology.client.gui.dinopedia.GuiPedia;
 import fossilsarcheology.client.model.ModelAncientHelmet;
 import fossilsarcheology.client.particle.BubbleFX;
 import fossilsarcheology.client.render.RenderingHandler;
@@ -65,6 +66,9 @@ public class ClientProxy extends ServerProxy {
         }
         if (id == GUI_TIME_MACHINE) {
             return new TimeMachineGUI(player.inventory, (TileEntityTimeMachine) world.getTileEntity(pos));
+        }
+        if (id == GUI_DINOPEDIA) {
+            return new GuiPedia();
         }
         return null;
     }

@@ -44,7 +44,7 @@ public class FossilLivingEvent {
 			FossilsMammalProperties properties = EntityPropertiesHandler.INSTANCE.getProperties(event.getEntityLiving(), FossilsMammalProperties.class);
 			if ((event.getEntity() instanceof EntityHorse || event.getEntity() instanceof EntityCow || event.getEntity() instanceof EntityPig || event.getEntity() instanceof EntitySheep || event.getEntity() instanceof EntityRabbit) && properties != null && properties.isPregnant) {
 				Revival.PEDIA_OBJECT = event.getEntity();
-				event.getEntityPlayer().openGui(Revival.INSTANCE, 4, event.getWorld(), (int) event.getPos().getX(), (int)  event.getPos().getY(), (int)  event.getPos().getZ());
+				event.getEntityPlayer().openGui(Revival.INSTANCE, 6, event.getWorld(), (int) event.getPos().getX(), (int)  event.getPos().getY(), (int)  event.getPos().getZ());
 			}
 		}
 	}

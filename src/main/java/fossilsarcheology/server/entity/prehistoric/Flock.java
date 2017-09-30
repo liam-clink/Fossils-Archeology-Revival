@@ -60,6 +60,9 @@ public class Flock {
         if (flockLeader != null) {
             if (!flockLeader.isMovementBlocked() && flockLeader.getNavigator().noPath()) {
                 Vec3d vec3 = RandomPositionGenerator.findRandomTargetBlockAwayFrom(flockLeader, 32, 7, new Vec3d(flockLeader.posX, flockLeader.posY, flockLeader.posZ));
+                if (flockPathNavigate == null) {
+                    flockPathNavigate = flockLeader.getNavigator();
+                }
                 this.flockLeader.getNavigator().setPath(this.flockPathNavigate.getPathToXYZ(vec3.xCoord, vec3.yCoord, vec3.zCoord), 1);
             }
         }

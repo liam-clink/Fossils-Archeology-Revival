@@ -31,7 +31,7 @@ public class RenderPrehistoric extends RenderLiving {
         EntityPrehistoric dino = (EntityPrehistoric) entity;
         GL11.glScalef(dino.getAgeScale(), dino.getAgeScale(), dino.getAgeScale());
         GL11.glScalef(dino.getGender() == 1 ? dino.getMaleSize() : 1, dino.getGender() == 1 ? dino.getMaleSize() : 1, dino.getGender() == 1 ? dino.getMaleSize() : 1);
-
+        this.shadowSize = dino.width * 0.45F;
     }
 
     public RenderManager getRenderManager() {

@@ -1,17 +1,10 @@
 package fossilsarcheology.server.util;
 
-import fossilsarcheology.server.entity.prehistoric.Diet;
-import fossilsarcheology.server.entity.prehistoric.MobType;
-import fossilsarcheology.server.entity.prehistoric.PrehistoricEntityType;
-import fossilsarcheology.server.entity.prehistoric.TimePeriod;
+import fossilsarcheology.server.block.FABlockRegistry;
+import fossilsarcheology.server.entity.prehistoric.*;
+import fossilsarcheology.server.item.FAItemRegistry;
 import net.minecraft.entity.monster.EntityZombie;
-import net.minecraft.entity.passive.EntityChicken;
-import net.minecraft.entity.passive.EntityCow;
-import net.minecraft.entity.passive.EntityHorse;
-import net.minecraft.entity.passive.EntityPig;
-import net.minecraft.entity.passive.EntitySheep;
-import net.minecraft.entity.passive.EntitySquid;
-import net.minecraft.entity.passive.EntityVillager;
+import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
@@ -20,7 +13,7 @@ import net.minecraft.item.ItemStack;
 
 public class FossilFoodMappings {
 
-    public static void init() {
+    public static void register() {
         FoodMappings.INSTANCE.addPlant(new ItemStack(Items.REEDS), 15);
         FoodMappings.INSTANCE.addPlant(new ItemStack(Items.WHEAT), 13);
         FoodMappings.INSTANCE.addPlant(new ItemStack(Items.MELON), 10);
@@ -51,8 +44,8 @@ public class FossilFoodMappings {
         FoodMappings.INSTANCE.addPlant(Blocks.SAPLING, 15);
         FoodMappings.INSTANCE.addPlant(Blocks.TALLGRASS, 5);
         FoodMappings.INSTANCE.addPlant(Blocks.WATERLILY, 15);
-//        FoodMappings.INSTANCE.addPlant(FABlockRegistry.FERNS, 55);
-//        FoodMappings.INSTANCE.addPlant(FABlockRegistry.PALMLEAVES, 40);
+        FoodMappings.INSTANCE.addPlant(FABlockRegistry.FERNS, 55);
+        FoodMappings.INSTANCE.addPlant(FABlockRegistry.PALM_LEAVES, 40);
         
         FoodMappings.INSTANCE.addFish(new ItemStack(Items.FISH), 30);
         FoodMappings.INSTANCE.addFish(new ItemStack(Items.FISH, 1, 1), 30);
@@ -60,7 +53,7 @@ public class FossilFoodMappings {
         FoodMappings.INSTANCE.addFish(new ItemStack(Items.FISH, 1, 3), 30);
         FoodMappings.INSTANCE.addFish(new ItemStack(Items.COOKED_FISH), 45);
         FoodMappings.INSTANCE.addFish(new ItemStack(Items.COOKED_FISH, 1, 1), 45);
-//        FoodMappings.INSTANCE.addFish(new ItemStack(FAItemRegistry.SJL), 65);
+        FoodMappings.INSTANCE.addFish(new ItemStack(FAItemRegistry.SJL), 65);
 
         FoodMappings.INSTANCE.addMeat(new ItemStack(Items.COOKED_BEEF), 60);
         FoodMappings.INSTANCE.addMeat(new ItemStack(Items.BEEF), 40);
@@ -68,7 +61,7 @@ public class FossilFoodMappings {
         FoodMappings.INSTANCE.addMeat(new ItemStack(Items.CHICKEN), 10);
         FoodMappings.INSTANCE.addMeat(new ItemStack(Items.PORKCHOP), 35);
         FoodMappings.INSTANCE.addMeat(new ItemStack(Items.COOKED_PORKCHOP), 55);
-//        FoodMappings.INSTANCE.addMeat(new ItemStack(FAItemRegistry.FAILURESAURUSFLESH), 15);
+        FoodMappings.INSTANCE.addMeat(new ItemStack(FAItemRegistry.FAILURESAURUS_FLESH), 15);
 
         FoodMappings.INSTANCE.addEgg(new ItemStack(Items.EGG), 7);
 
@@ -102,7 +95,7 @@ public class FossilFoodMappings {
         FoodMappings.INSTANCE.addMeat(EntityPig.class, 20);
         FoodMappings.INSTANCE.addMeat(EntitySheep.class, 35);
         FoodMappings.INSTANCE.addMeat(EntitySquid.class, 30);
-        /*FoodMappings.INSTANCE.addMeat(EntityNautilus.class, 100); TODO
+        FoodMappings.INSTANCE.addMeat(EntityNautilus.class, 100);
         FoodMappings.INSTANCE.addMeat(EntityTriceratops.class, 120);
         FoodMappings.INSTANCE.addMeat(EntityVelociraptor.class, 20);
         FoodMappings.INSTANCE.addMeat(EntityTyrannosaurus.class, 120);
@@ -135,9 +128,8 @@ public class FossilFoodMappings {
         FoodMappings.INSTANCE.addMeat(EntityParasaurolophus.class, 150);
         FoodMappings.INSTANCE.addFish(EntityCoelacanth.class, 20);
         FoodMappings.INSTANCE.addFish(EntitySturgeon.class, 20);
-        FoodMappings.INSTANCE.addFish(EntityAlligatorGar.class, 20);*/
+        FoodMappings.INSTANCE.addFish(EntityAlligatorGar.class, 20);
         FoodMappings.INSTANCE.removeItemMapping(new ItemStack(PrehistoricEntityType.HORSE.embryoItem), Diet.CARNIVORE_EGG);
-
         FoodMappings.INSTANCE.addFish("listAllfishraw", 5);
         FoodMappings.INSTANCE.addFish("foodOctopuscooked", 30);
         FoodMappings.INSTANCE.addFish("listAllfishcooked", 45);
