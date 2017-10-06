@@ -35,13 +35,6 @@ public class RenderPigBoss extends RenderLiving {
         }
     }
 
-    protected int shouldRenderPass(EntityLivingBase entity, int i, float q) {
-        if (((EntityAnu) entity).getAttackMode() == 2) {
-
-        }
-        return -1;
-    }
-
     @Override
     protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2) {
         this.preRenderScale((EntityAnu) par1EntityLivingBase, par2);

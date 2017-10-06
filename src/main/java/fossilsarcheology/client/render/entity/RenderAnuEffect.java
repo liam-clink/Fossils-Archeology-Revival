@@ -3,11 +3,8 @@ package fossilsarcheology.client.render.entity;
 import fossilsarcheology.client.model.ModelAnuTotem;
 import fossilsarcheology.client.render.entity.layer.LayerAnuEffect;
 import fossilsarcheology.server.entity.utility.EntityAnuEffect;
-import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
@@ -15,8 +12,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
-public class RenderAnuEffect extends RenderLiving {
-    private static final ResourceLocation explodingTexture = new ResourceLocation("fossil:textures/blocks/anuTotemExploding.png");
+public class RenderAnuEffect extends RenderLiving<EntityAnuEffect> {
+    private static final ResourceLocation explodingTexture = new ResourceLocation("fossil:textures/model/anu_statue_explosion.png");
     private static final ResourceLocation texture = new ResourceLocation("fossil:textures/blocks/anuTotem.png");
     protected ModelAnuTotem modelAnuTotem;
 
@@ -26,7 +23,7 @@ public class RenderAnuEffect extends RenderLiving {
         this.addLayer(new LayerAnuEffect());
     }
 
-    protected void rotateCorpse(EntityAnuEffect entity, float x, float y, float z) {
+    protected void applyRotations(EntityAnuEffect entity, float x, float y, float z) {
         float f3 = 0;
         float f4 = 0;
         GL11.glRotatef(-f3, 0.0F, 1.0F, 0.0F);
@@ -45,9 +42,6 @@ public class RenderAnuEffect extends RenderLiving {
         }
     }
 
-    /**
-     * Renders the model in RenderLiving
-     */
     protected void renderModel(EntityAnuEffect entity, float x, float y, float z, float i, float j, float u) {
         int i1 = 0;
         if (entity.world != null) {
@@ -93,6 +87,7 @@ public class RenderAnuEffect extends RenderLiving {
         this.mainModel.render(entity, x, y, z, i, j, u);
 
         if (entity.hurtTime > 0) {
+            GL11.glPushMatrix();
             GL11.glDepthFunc(GL11.GL_EQUAL);
             GL11.glDisable(GL11.GL_TEXTURE_2D);
             GL11.glEnable(GL11.GL_BLEND);
@@ -104,49 +99,10 @@ public class RenderAnuEffect extends RenderLiving {
             GL11.glDisable(GL11.GL_BLEND);
             GL11.glDepthFunc(GL11.GL_LEQUAL);
             GL11.glPopMatrix();
-
         }
     }
 
     protected ResourceLocation getEntityTexture(EntityAnuEffect entity) {
         return texture;
-    }
-
-    protected int shouldRenderPass(EntityAnuEffect entity, int x, float i) {
-        if (x == 1) {
-            GL11.glDepthFunc(GL11.GL_LEQUAL);
-        }
-
-        if (x != 0) {
-            return -1;
-        } else {
-            GL11.glEnable(GL11.GL_BLEND);
-            GL11.glDisable(GL11.GL_ALPHA_TEST);
-            GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE);
-            GL11.glDisable(GL11.GL_LIGHTING);
-            GL11.glDepthFunc(GL11.GL_EQUAL);
-            char c0 = 61680;
-            int j = c0 % 65536;
-            int k = c0 / 65536;
-            OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float) j / 1.0F, (float) k / 1.0F);
-            GL11.glEnable(GL11.GL_LIGHTING);
-            GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-            return 1;
-        }
-    }
-
-    @Override
-    protected void renderModel(EntityLivingBase entity, float x, float y, float z, float i, float j, float u) {
-        this.renderModel((EntityAnuEffect) entity, x, y, z, i, j, u);
-    }
-
-    @Override
-    protected ResourceLocation getEntityTexture(Entity entity) {
-        return this.getEntityTexture((EntityAnuEffect) entity);
-    }
-
-    @Override
-    public void doRender(Entity entity, double x, double y, double z, float i, float j) {
-        this.doRender((EntityAnuEffect) entity, x, y, z, i, j);
     }
 }
