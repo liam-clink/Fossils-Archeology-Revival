@@ -3,6 +3,7 @@ package fossilsarcheology.server.event;
 
 import fossilsarcheology.Revival;
 import fossilsarcheology.client.sound.FASoundRegistry;
+import fossilsarcheology.server.ServerProxy;
 import fossilsarcheology.server.achievement.FossilAchievements;
 import fossilsarcheology.server.entity.prehistoric.*;
 import fossilsarcheology.server.entity.utility.FossilsMammalProperties;
@@ -15,7 +16,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.passive.*;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.event.entity.living.LivingEvent;
@@ -39,12 +39,11 @@ public class FossilLivingEvent {
 
 	@SubscribeEvent
 	public void entityInteractEvent(PlayerInteractEvent.EntityInteract event) {
-		ItemStack stack = event.getEntityPlayer().getHeldItem(event.getHand());
-		if(stack != null && stack.getItem() != null && stack.getItem() == FAItemRegistry.DINOPEDIA && event.getEntity() instanceof EntityAnimal){
-			FossilsMammalProperties properties = EntityPropertiesHandler.INSTANCE.getProperties(event.getEntityLiving(), FossilsMammalProperties.class);
-			if ((event.getEntity() instanceof EntityHorse || event.getEntity() instanceof EntityCow || event.getEntity() instanceof EntityPig || event.getEntity() instanceof EntitySheep || event.getEntity() instanceof EntityRabbit) && properties != null && properties.isPregnant) {
-				Revival.PEDIA_OBJECT = event.getEntity();
-				event.getEntityPlayer().openGui(Revival.INSTANCE, 6, event.getWorld(), (int) event.getPos().getX(), (int)  event.getPos().getY(), (int)  event.getPos().getZ());
+		if(event.getItemStack() != null && event.getItemStack().getItem() != null && event.getItemStack().getItem() == FAItemRegistry.DINOPEDIA && event.getTarget() instanceof EntityAnimal){
+			FossilsMammalProperties properties = EntityPropertiesHandler.INSTANCE.getProperties(event.getTarget(), FossilsMammalProperties.class);
+			if ((event.getTarget() instanceof EntityHorse || event.getTarget() instanceof EntityCow || event.getTarget() instanceof EntityPig || event.getTarget() instanceof EntitySheep || event.getTarget() instanceof EntityRabbit) && properties != null && properties.isPregnant) {
+				Revival.PEDIA_OBJECT = event.getTarget();
+				event.getEntityPlayer().openGui(Revival.INSTANCE, ServerProxy.GUI_DINOPEDIA, event.getWorld(), (int) event.getPos().getX(), (int)  event.getPos().getY(), (int)  event.getPos().getZ());
 			}
 		}
 	}

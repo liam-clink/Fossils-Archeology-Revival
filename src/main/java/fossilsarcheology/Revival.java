@@ -50,8 +50,7 @@ public class Revival {
 
     @Mod.EventHandler
     public void onInit(FMLInitializationEvent event) {
-        EntityPropertiesHandler.INSTANCE.registerProperties(FossilsPlayerProperties.class);
-        EntityPropertiesHandler.INSTANCE.registerProperties(FossilsMammalProperties.class);
+
         PROXY.onInit();
     }
 

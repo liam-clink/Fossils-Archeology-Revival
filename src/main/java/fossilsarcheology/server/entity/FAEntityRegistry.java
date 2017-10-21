@@ -7,6 +7,7 @@ import fossilsarcheology.server.entity.projectile.AncientJavelinEntity;
 import fossilsarcheology.server.entity.projectile.EntityBirdEgg;
 import fossilsarcheology.server.entity.projectile.JavelinEntity;
 import fossilsarcheology.server.entity.utility.*;
+import net.ilexiconn.llibrary.server.entity.EntityPropertiesHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.world.biome.Biome;
@@ -15,6 +16,9 @@ import net.minecraftforge.fml.common.registry.EntityRegistry;
 
 public class FAEntityRegistry {
     public static void register() {
+        EntityPropertiesHandler.INSTANCE.registerProperties(FossilsPlayerProperties.class);
+        EntityPropertiesHandler.INSTANCE.registerProperties(FossilsMammalProperties.class);
+
         for (int id = 0; id < PrehistoricEntityType.values().length; id++) {
             PrehistoricEntityType type = PrehistoricEntityType.values()[id];
             if (type.mobType != MobType.CHICKEN && type.mobType != MobType.VANILLA) {

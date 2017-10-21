@@ -63,7 +63,9 @@ public class Flock {
                 if (flockPathNavigate == null) {
                     flockPathNavigate = flockLeader.getNavigator();
                 }
-                this.flockLeader.getNavigator().setPath(this.flockPathNavigate.getPathToXYZ(vec3.xCoord, vec3.yCoord, vec3.zCoord), 1);
+                if(flockLeader.getNavigator() != null && vec3 != null){
+                    this.flockLeader.getNavigator().setPath(this.flockPathNavigate.getPathToXYZ(vec3.xCoord, vec3.yCoord, vec3.zCoord), 1);
+                }
             }
         }
     }
