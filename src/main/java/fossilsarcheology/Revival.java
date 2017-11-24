@@ -50,7 +50,6 @@ public class Revival {
 
     @Mod.EventHandler
     public void onInit(FMLInitializationEvent event) {
-
         PROXY.onInit();
     }
 

@@ -19,6 +19,7 @@ import fossilsarcheology.server.item.FAItemRegistry;
 import fossilsarcheology.server.recipe.FAOreDictRegistry;
 import fossilsarcheology.server.recipe.FARecipeRegistry;
 import fossilsarcheology.server.util.FossilFoodMappings;
+import fossilsarcheology.server.world.FAWorldGenerator;
 import fossilsarcheology.server.world.FAWorldRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -61,6 +62,7 @@ public class ServerProxy implements IGuiHandler {
         MinecraftForge.EVENT_BUS.register(new FossilBonemealEvent());
         MinecraftForge.EVENT_BUS.register(new FossilLivingEvent());
         FARecipeRegistry.register();
+        MinecraftForge.TERRAIN_GEN_BUS.register(new FAWorldGenerator());
     }
 
     public void calculateChainBuffer(EntityFishBase entity) {
