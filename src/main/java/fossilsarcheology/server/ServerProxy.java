@@ -1,84 +1,284 @@
 package fossilsarcheology.server;
 
-import java.util.Random;
-
-import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
-import net.minecraft.block.Block;
-import net.minecraft.client.model.ModelBiped;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.WeightedRandomChestContent;
-import net.minecraft.world.World;
-import net.minecraftforge.common.ChestGenHooks;
+import fossilsarcheology.Revival;
+import fossilsarcheology.client.sound.FASoundRegistry;
 import fossilsarcheology.server.block.FABlockRegistry;
+import fossilsarcheology.server.block.FAFluidRegistry;
+import fossilsarcheology.server.block.IBlockItem;
+import fossilsarcheology.server.block.ISlabItem;
+import fossilsarcheology.server.block.entity.*;
+import fossilsarcheology.server.container.*;
 import fossilsarcheology.server.entity.EntityFishBase;
-import fossilsarcheology.server.entity.EntityPrehistoric;
+import fossilsarcheology.server.entity.FAEntityRegistry;
+import fossilsarcheology.server.entity.FAVillagerRegistry;
+import fossilsarcheology.server.entity.prehistoric.EntityPrehistoric;
+import fossilsarcheology.server.entity.prehistoric.MobType;
+import fossilsarcheology.server.entity.prehistoric.PrehistoricEntityType;
+import fossilsarcheology.server.entity.projectile.EntityBirdEgg;
+import fossilsarcheology.server.event.FossilBonemealEvent;
+import fossilsarcheology.server.event.FossilCraftingEvent;
+import fossilsarcheology.server.event.FossilLivingEvent;
+import fossilsarcheology.server.event.FossilPickupItemEvent;
 import fossilsarcheology.server.item.FAItemRegistry;
+import fossilsarcheology.server.recipe.FAOreDictRegistry;
+import fossilsarcheology.server.util.FossilFoodMappings;
+import fossilsarcheology.server.world.FAWorldGenerator;
+import fossilsarcheology.server.world.FAWorldRegistry;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockDispenser;
+import net.minecraft.dispenser.BehaviorProjectileDispense;
+import net.minecraft.dispenser.IPosition;
+import net.minecraft.entity.IProjectile;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
+import net.minecraftforge.common.BiomeDictionary;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.network.IGuiHandler;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.registry.VillagerRegistry;
 
-public class ServerProxy {
-    public void init() {
+import java.lang.reflect.Field;
+
+@Mod.EventBusSubscriber
+public class ServerProxy implements IGuiHandler {
+    public static final int GUI_ANALYZER = 0;
+    public static final int GUI_CULTIVATE = 1;
+    public static final int GUI_FEEDER = 2;
+    public static final int GUI_WORKTABLE = 3;
+    public static final int GUI_SIFTER = 4;
+    public static final int GUI_TIME_MACHINE = 5;
+    public static final int GUI_DINOPEDIA = 6;
+
+    @SubscribeEvent
+    public static void registerVillagers(RegistryEvent.Register<VillagerRegistry.VillagerProfession> event) {
+        event.getRegistry().register(FAVillagerRegistry.ARCHEOLOGIST_PROFESSION);
+    }
+
+    @SuppressWarnings("deprecation")
+    @SubscribeEvent
+    public static void registerBlocks(RegistryEvent.Register<Block> event) {
+        try {
+            for (Field f : FABlockRegistry.class.getDeclaredFields()) {
+                Object obj = f.get(null);
+                if (obj instanceof Block) {
+                    FABlockRegistry.registerBlock(event, (Block) obj);
+                } else if (obj instanceof Block[]) {
+                    for (Block block : (Block[]) obj) {
+                        FABlockRegistry.registerBlock(event, block);
+                    }
+                }
+            }
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+
+        GameRegistry.registerTileEntity(TileEntityCultivate.class, "fossil:cultivate");
+        GameRegistry.registerTileEntity(TileEntityFeeder.class, "fossil:feeder");
+        GameRegistry.registerTileEntity(TileEntityWorktable.class, "fossil:archeology_workbench");
+        GameRegistry.registerTileEntity(AnalyzerBlockEntity.class, "fossil:analyzer");
+        GameRegistry.registerTileEntity(TileEntityAncientChest.class, "fossil:ancient_chest");
+        GameRegistry.registerTileEntity(TileEntityAnubiteStatue.class, "fossil:anubite");
+        GameRegistry.registerTileEntity(TileEntityAnuStatue.class, "fossil:anu_statue");
+        GameRegistry.registerTileEntity(TileEntityFigurine.class, "fossil:figurine");
+        GameRegistry.registerTileEntity(TileEntityKylix.class, "fossil:kylix");
+        GameRegistry.registerTileEntity(TileEntitySarcophagus.class, "fossil:sarcophagus");
+        GameRegistry.registerTileEntity(TileEntitySifter.class, "fossil:sifter");
+        GameRegistry.registerTileEntity(TileEntityAmphora.class, "fossil:amphora");
+        GameRegistry.registerTileEntity(TileEntityTimeMachine.class, "fossil:time_machine");
+        GameRegistry.registerTileEntity(TileEntityVolute.class, "fossil:volute");
+    }
+
+    @SubscribeEvent
+    public static void registerItems(RegistryEvent.Register<Item> event) {
+        try {
+            for (Field f : FAItemRegistry.class.getDeclaredFields()) {
+                Object obj = f.get(null);
+                if (obj instanceof Item) {
+                    FAItemRegistry.registerItem(event, (Item) obj);
+                } else if (obj instanceof Item[]) {
+                    for (Item item : (Item[]) obj) {
+                        FAItemRegistry.registerItem(event, item);
+                    }
+                }
+            }
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
+            for (Field f : FABlockRegistry.class.getDeclaredFields()) {
+                Object obj = f.get(null);
+                if (obj instanceof Block) {
+                    registerItemBlocks((Block) obj, event);
+                } else if (obj instanceof Block[]) {
+                    for (Block block : (Block[]) obj) {
+                        registerItemBlocks(block, event);
+                    }
+                }
+            }
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+
+        PrehistoricEntityType.register(event);
+    }
+
+    private static void registerItemBlocks(Block block, RegistryEvent.Register<Item> event) {
+        if (block instanceof IBlockItem) {
+            ItemBlock itemBlock = ((IBlockItem) block).getItemBlock(block);
+            String name = itemBlock.getTranslationKey().substring("item.".length());
+            itemBlock.setRegistryName(new ResourceLocation(Revival.MODID, name));
+            event.getRegistry().register(itemBlock);
+        } else if (block instanceof ISlabItem) {
+            ItemBlock itemBlock = ((ISlabItem) block).getItemBlock();
+            String name = itemBlock.getTranslationKey().substring("item.".length());
+            itemBlock.setRegistryName(new ResourceLocation(Revival.MODID, name));
+            event.getRegistry().register(itemBlock);
+        } else {
+            ItemBlock itemBlock = new ItemBlock(block);
+            String name = itemBlock.getTranslationKey().substring("item.".length());
+            itemBlock.setRegistryName(new ResourceLocation(Revival.MODID, name));
+            event.getRegistry().register(itemBlock);
+        }
+    }
+
+    @SubscribeEvent
+    public static void registerSoundEvents(RegistryEvent.Register<SoundEvent> event) {
+        try {
+            for (Field f : FASoundRegistry.class.getDeclaredFields()) {
+                Object obj = f.get(null);
+                if (obj instanceof SoundEvent) {
+                    event.getRegistry().register((SoundEvent) obj);
+                }
+            }
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @SubscribeEvent
+    public static void registerBiome(RegistryEvent.Register<Biome> event) {
+        event.getRegistry().register(FAWorldRegistry.ANU_BIOME.setRegistryName("Lair of Darkness"));
+        event.getRegistry().register(FAWorldRegistry.TREASURE_BIOME.setRegistryName("Treasure"));
+        BiomeDictionary.addTypes(FAWorldRegistry.ANU_BIOME, BiomeDictionary.Type.NETHER, BiomeDictionary.Type.VOID, BiomeDictionary.Type.SPOOKY);
+        BiomeDictionary.addTypes(FAWorldRegistry.TREASURE_BIOME, BiomeDictionary.Type.VOID);
 
     }
 
-    public ModelBiped getArmorModel(int id) {
-        return null;
+    public void onPreInit() {
+        NetworkRegistry.INSTANCE.registerGuiHandler(Revival.INSTANCE, this);
+        FAFluidRegistry.register();
+        FAEntityRegistry.register();
+        FAWorldRegistry.register();
     }
 
-    public void registerChestLoot() {
-        ChestGenHooks.getInfo(ChestGenHooks.DUNGEON_CHEST).addItem(new WeightedRandomChestContent((new ItemStack(FABlockRegistry.INSTANCE.figurineBlock, 1, new Random().nextInt(16))), 1, 1, 5));
-        ChestGenHooks.getInfo(ChestGenHooks.DUNGEON_CHEST).addItem(new WeightedRandomChestContent(new ItemStack(FAItemRegistry.INSTANCE.gem), 1, 1, 1));
-        ChestGenHooks.getInfo(ChestGenHooks.VILLAGE_BLACKSMITH).addItem(new WeightedRandomChestContent(new ItemStack(FAItemRegistry.INSTANCE.whip), 1, 1, 50));
-        ChestGenHooks.getInfo(ChestGenHooks.VILLAGE_BLACKSMITH).addItem(new WeightedRandomChestContent(new ItemStack(FAItemRegistry.INSTANCE.ironjavelin), 1, 1, 25));
-        ChestGenHooks.getInfo(ChestGenHooks.MINESHAFT_CORRIDOR).addItem(new WeightedRandomChestContent(new ItemStack(FAItemRegistry.INSTANCE.biofossil), 3, 9, 10));
-        ChestGenHooks.getInfo(ChestGenHooks.MINESHAFT_CORRIDOR).addItem(new WeightedRandomChestContent(new ItemStack(FAItemRegistry.INSTANCE.relic), 3, 9, 10));
-        ChestGenHooks.getInfo(ChestGenHooks.BONUS_CHEST).addItem(new WeightedRandomChestContent(new ItemStack(FAItemRegistry.INSTANCE.biofossil), 3, 12, 40));
-        ChestGenHooks.getInfo(ChestGenHooks.BONUS_CHEST).addItem(new WeightedRandomChestContent(new ItemStack(FAItemRegistry.INSTANCE.relic), 3, 12, 40));
-        ChestGenHooks.getInfo(ChestGenHooks.DUNGEON_CHEST).addItem(new WeightedRandomChestContent(new ItemStack(FAItemRegistry.INSTANCE.fossilrecordBones), 1, 1, 5));
-        ChestGenHooks.getInfo(ChestGenHooks.DUNGEON_CHEST).addItem(new WeightedRandomChestContent(new ItemStack(FAItemRegistry.INSTANCE.fossilrecordBones), 1, 1, 5));
-        ChestGenHooks.getInfo(ChestGenHooks.DUNGEON_CHEST).addItem(new WeightedRandomChestContent(new ItemStack(FAItemRegistry.INSTANCE.fossilrecordBones), 1, 1, 5));
-        ChestGenHooks.getInfo(ChestGenHooks.DUNGEON_CHEST).addItem(new WeightedRandomChestContent(new ItemStack(FAItemRegistry.INSTANCE.recordNano_Discovering), 1, 1, 5));
-        ChestGenHooks.getInfo(ChestGenHooks.DUNGEON_CHEST).addItem(new WeightedRandomChestContent(new ItemStack(FAItemRegistry.INSTANCE.recordNano_Discovering), 1, 1, 5));
-        ChestGenHooks.getInfo(ChestGenHooks.DUNGEON_CHEST).addItem(new WeightedRandomChestContent(new ItemStack(FAItemRegistry.INSTANCE.recordNano_Discovering), 1, 1, 5));
-        ChestGenHooks.getInfo(ChestGenHooks.DUNGEON_CHEST).addItem(new WeightedRandomChestContent(new ItemStack(FAItemRegistry.INSTANCE.recordNano_Scarab), 1, 1, 5));
-        ChestGenHooks.getInfo(ChestGenHooks.DUNGEON_CHEST).addItem(new WeightedRandomChestContent(new ItemStack(FAItemRegistry.INSTANCE.recordNano_Scarab), 1, 1, 5));
-        ChestGenHooks.getInfo(ChestGenHooks.DUNGEON_CHEST).addItem(new WeightedRandomChestContent(new ItemStack(FAItemRegistry.INSTANCE.recordNano_Scarab), 1, 1, 5));
-    }
-
-    public void playSound(String soundName) {
-
-    }
-
-    public void stopSound(String soundName) {
-
-    }
-
-    public void spawnAnuParticle(World world, double posX, double posY, double posZ) {
-    }
-
-    public void animate(int animateID) {
-    }
-
-    public void calculateChainBuffer(EntityPrehistoric entity) {
+    public void onInit() {
+        FAOreDictRegistry.register();
+        MinecraftForge.EVENT_BUS.register(new FossilCraftingEvent());
+        MinecraftForge.EVENT_BUS.register(new FossilPickupItemEvent());
+        MinecraftForge.EVENT_BUS.register(new FossilBonemealEvent());
+        MinecraftForge.EVENT_BUS.register(new FossilLivingEvent());
+        GameRegistry.registerWorldGenerator(new FAWorldGenerator(), 0);
 
     }
 
     public void calculateChainBuffer(EntityFishBase entity) {
 
     }
-   
+
+    public void calculateChainBuffer(EntityPrehistoric entity) {
+
+    }
+
+    public void onPostInit() {
+        for(PrehistoricEntityType prehistoric : PrehistoricEntityType.values()){
+            if(prehistoric.mobType == MobType.BIRD){
+                BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(prehistoric.birdEggItem, new BehaviorProjectileDispense() {
+                    protected IProjectile getProjectileEntity(World worldIn, IPosition position, ItemStack stackIn) {
+                        EntityBirdEgg egg = new EntityBirdEgg(false, worldIn, position.getX(), position.getY(), position.getZ());
+                        egg.setEnumType(prehistoric);
+                        return egg;
+                    }
+                });
+                BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(prehistoric.bestBirdEggItem, new BehaviorProjectileDispense() {
+                    protected IProjectile getProjectileEntity(World worldIn, IPosition position, ItemStack stackIn) {
+                        EntityBirdEgg egg = new EntityBirdEgg(true, worldIn, position.getX(), position.getY(), position.getZ());
+                        egg.setEnumType(prehistoric);
+                        return egg;
+                    }
+                });
+            }
+        }
+        FossilFoodMappings.register();
+        FAVillagerRegistry.register();
+
+    }
+
+    @Override
+    public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
+        BlockPos pos = new BlockPos(x, y, z);
+        TileEntity entity = world.getTileEntity(pos);
+        if (id == GUI_ANALYZER && entity instanceof AnalyzerBlockEntity) {
+            return new AnalyzerContainer(player.inventory, (AnalyzerBlockEntity) entity);
+        }
+        if (id == GUI_CULTIVATE && entity instanceof TileEntityCultivate) {
+            return new CultivateContainer(player.inventory, (TileEntityCultivate) entity);
+        }
+        if (id == GUI_FEEDER && entity instanceof TileEntityFeeder) {
+            return new FeederContainer(player.inventory, (TileEntityFeeder) entity);
+        }
+        if (id == GUI_WORKTABLE && entity instanceof TileEntityWorktable) {
+            return new WorktableContainer(player.inventory, (TileEntityWorktable) entity);
+        }
+        if (id == GUI_SIFTER && entity instanceof TileEntitySifter) {
+            return new SifterContainer(player.inventory, (TileEntitySifter) entity);
+        }
+        if (id == GUI_TIME_MACHINE && entity instanceof TileEntityTimeMachine) {
+            return new TimeMachineContainer(player.inventory, (TileEntityTimeMachine) entity);
+        }
+        return null;
+    }
+
+    @Override
+    public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
+        return null;
+    }
+
+    public void spawnPacketItemParticles(World worldObj, float f, float f1, float f2, double motionX, double motionY, double motionZ, Item item) {
+
+    }
+
+    public void spawnPacketBlockParticles(World worldObj, float f, float f1, float f2, double motionX, double motionY, double motionZ, Block block) {
+    }
+
+    public void spawnPacketHeartParticles(World worldObj, float f, float f1, float f2, double motionX, double motionY, double motionZ) {
+    }
 
     public void spawnBubbleParticles(World world, float f, float f1, float f2, double motionX, double motionY, double motionZ) {
     }
 
-    public void spawnPacketHeartParticles(World world, float f, float f1, float f2, double motionX, double motionY, double motionZ) {
+    public void spawnAnuParticle(World world, double posX, double posY, double posZ) {
     }
 
-    public void spawnPacketItemParticles(World world, float f, float f1, float f2, double motionX, double motionY, double motionZ, Item item) {
+    public void playSound(SoundEvent sound) {
     }
 
-    public void spawnPacketBlockParticles(World world, float f, float f1, float f2, double motionX, double motionY, double motionZ, Block block) {
+    public void stopSound(SoundEvent sound) {
     }
 
-    public void spawnSleepParticles(World world, float f, float f1, float f2, double motionX, double motionY, double motionZ) {
+    public Object getArmorModel(int id) {
+        return null;
     }
 }

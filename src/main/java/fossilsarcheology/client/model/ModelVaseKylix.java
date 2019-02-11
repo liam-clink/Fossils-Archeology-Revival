@@ -1,96 +1,91 @@
 package fossilsarcheology.client.model;
 
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.entity.Entity;
 
-public class ModelVaseKylix extends ModelBase {
-    // fields
-    ModelRenderer Base;
-    ModelRenderer Body;
-    ModelRenderer Neck;
-    ModelRenderer RightLip;
-    ModelRenderer LeftLip;
-    ModelRenderer FrontLip;
-    ModelRenderer BackLip;
-    ModelRenderer NubbinL;
-    ModelRenderer NubbinR;
+public class ModelVaseKylix extends ModelBlockBase {
+    final ModelRenderer Base;
+    final ModelRenderer Body;
+    final ModelRenderer Neck;
+    final ModelRenderer RightLip;
+    final ModelRenderer LeftLip;
+    final ModelRenderer FrontLip;
+    final ModelRenderer BackLip;
+    final ModelRenderer NubbinL;
+    final ModelRenderer NubbinR;
 
     public ModelVaseKylix() {
-        textureWidth = 32;
-        textureHeight = 32;
+        this.textureWidth = 32;
+        this.textureHeight = 32;
 
-        Base = new ModelRenderer(this, 0, 27);
-        Base.addBox(-2F, 0F, -2F, 4, 1, 4);
-        Base.setRotationPoint(0F, 23F, 0F);
-        Base.setTextureSize(32, 32);
-        Base.mirror = true;
-        setRotation(Base, 0F, 0F, 0F);
-        Body = new ModelRenderer(this, 0, 19);
-        Body.addBox(-1F, 0F, -1F, 2, 5, 2);
-        Body.setRotationPoint(0F, 18F, 0F);
-        Body.setTextureSize(32, 32);
-        Body.mirror = true;
-        setRotation(Body, 0F, 0F, 0F);
-        Neck = new ModelRenderer(this, 0, 9);
-        Neck.addBox(-4F, 0F, -4F, 8, 1, 8);
-        Neck.setRotationPoint(0F, 17F, 0F);
-        Neck.setTextureSize(32, 32);
-        Neck.mirror = true;
-        setRotation(Neck, 0F, 0F, 0F);
-        RightLip = new ModelRenderer(this, 0, 0);
-        RightLip.addBox(0F, 0F, -4F, 1, 1, 8);
-        RightLip.setRotationPoint(3F, 16F, 0F);
-        RightLip.setTextureSize(32, 32);
-        RightLip.mirror = true;
-        setRotation(RightLip, 0F, 0F, 0F);
-        RightLip.mirror = false;
-        LeftLip = new ModelRenderer(this, 0, 0);
-        LeftLip.addBox(-1F, 0F, -4F, 1, 1, 8);
-        LeftLip.setRotationPoint(-3F, 16F, 0F);
-        LeftLip.setTextureSize(32, 32);
-        LeftLip.mirror = true;
-        setRotation(LeftLip, 0F, 0F, 0F);
-        FrontLip = new ModelRenderer(this, 11, 0);
-        FrontLip.addBox(-3F, 0F, -1F, 6, 1, 1);
-        FrontLip.setRotationPoint(0F, 16F, -3F);
-        FrontLip.setTextureSize(32, 32);
-        FrontLip.mirror = true;
-        setRotation(FrontLip, 0F, 0F, 0F);
-        BackLip = new ModelRenderer(this, 11, 0);
-        BackLip.addBox(-3F, 0F, 0F, 6, 1, 1);
-        BackLip.setRotationPoint(0F, 16F, 3F);
-        BackLip.setTextureSize(32, 32);
-        BackLip.mirror = true;
-        setRotation(BackLip, 0F, 0F, 0F);
-        NubbinL = new ModelRenderer(this, 0, 0);
-        NubbinL.addBox(-1F, 0F, -1F, 2, 1, 2);
-        NubbinL.setRotationPoint(4F, 16F, 0F);
-        NubbinL.setTextureSize(32, 32);
-        NubbinL.mirror = true;
-        setRotation(NubbinL, 0F, 0F, -0.5402259F);
-        NubbinR = new ModelRenderer(this, 0, 0);
-        NubbinR.addBox(-2F, 0.5F, -1F, 2, 1, 2);
-        NubbinR.setRotationPoint(-3F, 16F, 0F);
-        NubbinR.setTextureSize(32, 32);
-        NubbinR.mirror = true;
-        setRotation(NubbinR, 0F, 0F, 0.5402318F);
-        NubbinR.mirror = false;
+        this.Base = new ModelRenderer(this, 0, 27);
+        this.Base.addBox(-2F, 0F, -2F, 4, 1, 4);
+        this.Base.setRotationPoint(0F, 23F, 0F);
+        this.Base.setTextureSize(32, 32);
+        this.Base.mirror = true;
+        this.setRotation(this.Base, 0F, 0F, 0F);
+        this.Body = new ModelRenderer(this, 0, 19);
+        this.Body.addBox(-1F, 0F, -1F, 2, 5, 2);
+        this.Body.setRotationPoint(0F, 18F, 0F);
+        this.Body.setTextureSize(32, 32);
+        this.Body.mirror = true;
+        this.setRotation(this.Body, 0F, 0F, 0F);
+        this.Neck = new ModelRenderer(this, 0, 9);
+        this.Neck.addBox(-4F, 0F, -4F, 8, 1, 8);
+        this.Neck.setRotationPoint(0F, 17F, 0F);
+        this.Neck.setTextureSize(32, 32);
+        this.Neck.mirror = true;
+        this.setRotation(this.Neck, 0F, 0F, 0F);
+        this.RightLip = new ModelRenderer(this, 0, 0);
+        this.RightLip.addBox(0F, 0F, -4F, 1, 1, 8);
+        this.RightLip.setRotationPoint(3F, 16F, 0F);
+        this.RightLip.setTextureSize(32, 32);
+        this.RightLip.mirror = true;
+        this.setRotation(this.RightLip, 0F, 0F, 0F);
+        this.RightLip.mirror = false;
+        this.LeftLip = new ModelRenderer(this, 0, 0);
+        this.LeftLip.addBox(-1F, 0F, -4F, 1, 1, 8);
+        this.LeftLip.setRotationPoint(-3F, 16F, 0F);
+        this.LeftLip.setTextureSize(32, 32);
+        this.LeftLip.mirror = true;
+        this.setRotation(this.LeftLip, 0F, 0F, 0F);
+        this.FrontLip = new ModelRenderer(this, 11, 0);
+        this.FrontLip.addBox(-3F, 0F, -1F, 6, 1, 1);
+        this.FrontLip.setRotationPoint(0F, 16F, -3F);
+        this.FrontLip.setTextureSize(32, 32);
+        this.FrontLip.mirror = true;
+        this.setRotation(this.FrontLip, 0F, 0F, 0F);
+        this.BackLip = new ModelRenderer(this, 11, 0);
+        this.BackLip.addBox(-3F, 0F, 0F, 6, 1, 1);
+        this.BackLip.setRotationPoint(0F, 16F, 3F);
+        this.BackLip.setTextureSize(32, 32);
+        this.BackLip.mirror = true;
+        this.setRotation(this.BackLip, 0F, 0F, 0F);
+        this.NubbinL = new ModelRenderer(this, 0, 0);
+        this.NubbinL.addBox(-1F, 0F, -1F, 2, 1, 2);
+        this.NubbinL.setRotationPoint(4F, 16F, 0F);
+        this.NubbinL.setTextureSize(32, 32);
+        this.NubbinL.mirror = true;
+        this.setRotation(this.NubbinL, 0F, 0F, -0.5402259F);
+        this.NubbinR = new ModelRenderer(this, 0, 0);
+        this.NubbinR.addBox(-2F, 0.5F, -1F, 2, 1, 2);
+        this.NubbinR.setRotationPoint(-3F, 16F, 0F);
+        this.NubbinR.setTextureSize(32, 32);
+        this.NubbinR.mirror = true;
+        this.setRotation(this.NubbinR, 0F, 0F, 0.5402318F);
+        this.NubbinR.mirror = false;
     }
 
     @Override
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
-        super.render(entity, f, f1, f2, f3, f4, f5);
-        setRotationAngles(f, f1, f2, f3, f4, f5);
-        Base.render(f5);
-        Body.render(f5);
-        Neck.render(f5);
-        RightLip.render(f5);
-        LeftLip.render(f5);
-        FrontLip.render(f5);
-        BackLip.render(f5);
-        NubbinL.render(f5);
-        NubbinR.render(f5);
+    public void render(float scale) {
+        this.Base.render(scale);
+        this.Body.render(scale);
+        this.Neck.render(scale);
+        this.RightLip.render(scale);
+        this.LeftLip.render(scale);
+        this.FrontLip.render(scale);
+        this.BackLip.render(scale);
+        this.NubbinL.render(scale);
+        this.NubbinR.render(scale);
     }
 
     private void setRotation(ModelRenderer model, float x, float y, float z) {
@@ -98,8 +93,4 @@ public class ModelVaseKylix extends ModelBase {
         model.rotateAngleY = y;
         model.rotateAngleZ = z;
     }
-
-    public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5) {
-    }
-
 }

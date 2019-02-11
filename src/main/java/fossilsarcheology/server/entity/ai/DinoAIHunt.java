@@ -1,112 +1,63 @@
 package fossilsarcheology.server.entity.ai;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-
-import net.minecraft.command.IEntitySelector;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityCreature;
+import fossilsarcheology.server.entity.FoodHelper;
+import fossilsarcheology.server.entity.prehistoric.*;
+import fossilsarcheology.server.entity.utility.EntityToyBase;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.ai.EntityAITarget;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.player.EntityPlayer;
-import fossilsarcheology.server.entity.EntityPrehistoric;
-import fossilsarcheology.server.entity.EntityToyBase;
-import fossilsarcheology.api.FoodMappings;
-import fossilsarcheology.server.enums.EnumPrehistoricMood;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.EnumDifficulty;
 
-public class DinoAIHunt extends EntityAITarget {
-	private final int targetTicks;
-	private final DinoAIHunt.Sorter theNearestAttackableTargetSorter;
-	private final IEntitySelector targetEntitySelector;
-	private EntityLivingBase targetEntity;
+import java.util.function.Predicate;
 
-	public DinoAIHunt(EntityCreature prehistoric, int ticks, boolean sight) {
-		this(prehistoric, ticks, sight, false);
+public class DinoAIHunt<T extends EntityLivingBase> extends EntityAINearestAttackableTarget<T> {
+	private final EntityPrehistoric dino;
+
+	public DinoAIHunt(EntityPrehistoric entityIn, Class<T> classTarget, boolean checkSight, Predicate<? super T> targetSelector) {
+		super(entityIn, classTarget, 0, checkSight, true, targetSelector::test);
+		this.dino = entityIn;
 	}
 
-	public DinoAIHunt(EntityCreature prehistoric, int ticks, boolean sight, boolean nearby) {
-		this(prehistoric, ticks, sight, nearby, (IEntitySelector) null);
-	}
-
-	public DinoAIHunt(EntityCreature prehistoric, int ticks, boolean sight, boolean nearby, final IEntitySelector selector) {
-		super(prehistoric, sight, nearby);
-		this.targetTicks = ticks;
-		this.theNearestAttackableTargetSorter = new DinoAIHunt.Sorter(prehistoric);
-		this.setMutexBits(1);
-		this.targetEntitySelector = new IEntitySelector() {
-			public boolean isEntityApplicable(Entity target) {
-				return !(target instanceof EntityLivingBase) ? false : (selector != null && !selector.isEntityApplicable(target) ? false : DinoAIHunt.this.isSuitableTarget((EntityLivingBase) target, false));
-			}
-		};
-	}
-
+	@Override
 	public boolean shouldExecute() {
-
-		if (this.targetTicks > 0 && this.taskOwner.getRNG().nextInt(this.targetTicks) != 0) {
+		if (this.dino.isBeingRidden() || this.dino.isMovementBlocked()) {
 			return false;
-		} else {
-			double d0 = this.getTargetDistance();
-			List list = this.taskOwner.worldObj.selectEntitiesWithinAABB(EntityLivingBase.class, this.taskOwner.boundingBox.expand(d0, 4.0D, d0), this.targetEntitySelector);
-			Collections.sort(list, this.theNearestAttackableTargetSorter);
-			if (list.isEmpty()) {
-				return false;
-			} else {
-				this.targetEntity = (EntityLivingBase) list.get(0);
-				if (this.taskOwner instanceof EntityPrehistoric) {
+		}
+		if (super.shouldExecute() && this.targetEntity != null && !this.targetEntity.getClass().equals(this.dino.getClass())) {
+			if (this.dino.width * dino.getTargetScale() >= this.targetEntity.width) {
+				if (this.taskOwner instanceof EntityPrehistoric && !((EntityPrehistoric) this.taskOwner).isMovementBlocked()) {
 					EntityPrehistoric prehistoric = (EntityPrehistoric) this.taskOwner;
-					if (targetEntity instanceof EntityPlayer && ((EntityPlayer) targetEntity).capabilities.isCreativeMode) {
+					if (targetEntity instanceof EntityPlayer && ((EntityPlayer) targetEntity).isCreative()) {
 						return false;
 					}
 					if (targetEntity instanceof EntityPlayer) {
-						if(taskOwner.worldObj.difficultySetting == EnumDifficulty.PEACEFUL){
+						if (taskOwner.world.getDifficulty() == EnumDifficulty.PEACEFUL) {
 							return false;
 						}
-						if(prehistoric.getMood() < 0 && prehistoric.getMoodFace() != EnumPrehistoricMood.CALM){
-							return !((EntityPlayer) targetEntity).capabilities.isCreativeMode;
-						}else if(prehistoric.getMood() > 25 && prehistoric.getMoodFace() != EnumPrehistoricMood.CALM){
+						if (prehistoric.getMoodFace() == PrehistoricMoodType.ANGRY) {
+							return true;
+						} else if (prehistoric.getMood() > 25 && prehistoric.getMoodFace() != PrehistoricMoodType.CALM) {
 							return false;
-						}else if(prehistoric.getMoodFace() == EnumPrehistoricMood.CALM){
-							return !prehistoric.func_152114_e(targetEntity) && prehistoric.canDinoHunt(targetEntity, true);
+						} else if (prehistoric.getMoodFace() == PrehistoricMoodType.CALM) {
+							return !prehistoric.isOwner(targetEntity) && prehistoric.canDinoHunt(targetEntity, true);
 						}
 					}
-					if (FoodMappings.INSTANCE.getEntityFoodAmount(this.targetEntity.getClass(), prehistoric.type.diet) > 0) {
-						return !prehistoric.func_152114_e(targetEntity) && prehistoric.canDinoHunt(targetEntity, true);
+
+					if (FoodHelper.getMobFoodPoints(targetEntity, dino.type.diet) > 0 || dino.aiResponseType() == PrehistoricEntityTypeAI.Response.AGRESSIVE) {
+						return !prehistoric.isOwner(targetEntity) && prehistoric.canDinoHunt(targetEntity, true);
 					}
-					if (targetEntity instanceof EntityToyBase && prehistoric.ticksTillPlay == 0) {
+					if (targetEntity instanceof EntityToyBase && prehistoric.ticksTillPlay == 0 && prehistoric.getMood() < 100) {
 						return true;
 					}
-					if (prehistoric.isMovementBlocked() || !prehistoric.canDinoHunt(targetEntity, true)) {
-						return false;
-					}
-
 				}
-				return true;
 			}
 		}
+		return false;
 	}
 
-	public void startExecuting() {
-		this.taskOwner.setAttackTarget(this.targetEntity);
-		super.startExecuting();
-	}
-
-	public static class Sorter implements Comparator {
-		private final Entity theEntity;
-
-		public Sorter(Entity entity) {
-			this.theEntity = entity;
-		}
-
-		public int compare(Entity entity, Entity entity1) {
-			double d0 = this.theEntity.getDistanceSqToEntity(entity);
-			double d1 = this.theEntity.getDistanceSqToEntity(entity1);
-			return d0 < d1 ? -1 : (d0 > d1 ? 1 : 0);
-		}
-
-		public int compare(Object entity, Object entity1) {
-			return this.compare((Entity) entity, (Entity) entity1);
-		}
+	@Override
+	protected AxisAlignedBB getTargetableArea(double targetDistance){
+		return this.taskOwner.getEntityBoundingBox().grow(targetDistance, (dino instanceof EntityPrehistoricSwimming || dino instanceof EntityPrehistoricFlying) ? targetDistance : 4.0D, targetDistance);
 	}
 }

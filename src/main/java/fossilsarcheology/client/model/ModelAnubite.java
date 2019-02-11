@@ -2,22 +2,21 @@ package fossilsarcheology.client.model;
 
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
-import org.lwjgl.opengl.GL11;
 
 public class ModelAnubite extends ModelBiped {
-    public int heldItemRight;
-    // fields
-    ModelRenderer WolfHead;
-    ModelRenderer Nose;
-    ModelRenderer Ear1;
-    ModelRenderer Ear2;
-    ModelRenderer body;
-    ModelRenderer rightleg;
-    ModelRenderer leftleg;
-    ModelRenderer rightarm;
-    ModelRenderer leftarm;
-    ModelRenderer sword;
+
+    final ModelRenderer WolfHead;
+    final ModelRenderer Nose;
+    final ModelRenderer Ear1;
+    final ModelRenderer Ear2;
+    final ModelRenderer body;
+    final ModelRenderer rightleg;
+    final ModelRenderer leftleg;
+    final ModelRenderer rightarm;
+    final ModelRenderer leftarm;
+    final ModelRenderer sword;
 
     public ModelAnubite() {
         textureWidth = 128;
@@ -106,10 +105,10 @@ public class ModelAnubite extends ModelBiped {
     }
 
     @Override
-    public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
-        super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-        this.WolfHead.rotateAngleY = f3 / (180F / (float) Math.PI);
-        this.WolfHead.rotateAngleX = f4 / (180F / (float) Math.PI);
+    public void setRotationAngles(float limbSwing, float limbSwingAmount, float age, float headYaw, float headPitch, float scale, Entity entity) {
+        super.setRotationAngles(limbSwing, limbSwingAmount, age, headYaw, headPitch, scale, entity);
+        this.WolfHead.rotateAngleY = headYaw / (180F / (float) Math.PI);
+        this.WolfHead.rotateAngleX = headPitch / (180F / (float) Math.PI);
         this.Nose.rotateAngleY = this.WolfHead.rotateAngleY;
         this.Nose.rotateAngleX = this.WolfHead.rotateAngleX;
         this.Ear1.rotateAngleY = this.WolfHead.rotateAngleY;
@@ -124,20 +123,19 @@ public class ModelAnubite extends ModelBiped {
         this.leftleg.rotateAngleX = this.bipedLeftLeg.rotateAngleX;
     }
 
-    public void renderBlock(float f5) {
-        WolfHead.render(f5);
-        Nose.render(f5);
-        Ear1.render(f5);
-        Ear2.render(f5);
-        body.render(f5);
-        rightleg.render(f5);
-        leftleg.render(f5);
-        GL11.glPushMatrix();
-        GL11.glDisable(GL11.GL_CULL_FACE);
-        rightarm.render(f5);
-        GL11.glEnable(GL11.GL_CULL_FACE);
-        GL11.glPopMatrix();
-        leftarm.render(f5);
+    public void renderBlock(float scale) {
+        WolfHead.render(scale);
+        Nose.render(scale);
+        Ear1.render(scale);
+        Ear2.render(scale);
+        body.render(scale);
+        rightleg.render(scale);
+        leftleg.render(scale);
+        GlStateManager.pushMatrix();
+        GlStateManager.disableCull();
+        rightarm.render(scale);
+        GlStateManager.enableCull();
+        GlStateManager.popMatrix();
+        leftarm.render(scale);
     }
-
 }

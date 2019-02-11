@@ -1,0 +1,20 @@
+{
+  "modifier": "archeologist",
+  "text": [
+    {
+      "text": "Attaching a relic scrap to your tool makes it better suited to mine more artifacts, relics, and treasures from Fossil blocks. Who could have guessed?"
+    },
+    {
+      "text": "\n"
+    }
+  ],
+  "effects": [
+    "Increases the chance of ancient equipment, relics and scarab gems from Fossil Blocks",
+    "Adding more fossils only uses one modifier",
+    "Not compatible with Paleontologist"
+  ],
+  "demoTool": [
+    "tconstruct:pickaxe",
+    "tconstruct:hammer"
+  ]
+}

@@ -1,148 +1,119 @@
 package fossilsarcheology.server.entity.ai;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-
+import fossilsarcheology.server.entity.prehistoric.EntityPrehistoric;
+import fossilsarcheology.server.util.FoodMappings;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.item.Item;
-import net.minecraft.util.ChunkCoordinates;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.Vec3;
-import fossilsarcheology.api.FoodMappings;
-import fossilsarcheology.server.entity.EntityPrehistoric;
-import fossilsarcheology.server.entity.EntityPrehistoricSwimming;
+import net.minecraft.init.SoundEvents;
+import net.minecraft.util.math.BlockPos;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
 public class DinoAIEatBlocks extends EntityAIBase {
-    private ChunkCoordinates targetBlock;
-    private EntityPrehistoric prehistoric;
-    private double speed;
-    private BlockSorter targetSorter;
+    private static final int RADIUS = 8;
 
-    public DinoAIEatBlocks(EntityPrehistoric prehistoric, double speed) {
-	super();
-	this.prehistoric = prehistoric;
-	this.speed = speed;
-	this.targetSorter = new BlockSorter(this, prehistoric);
-	this.setMutexBits(1);
+    private final EntityPrehistoric entity;
+    private final BlockSorter targetSorter;
+    private BlockPos targetBlock;
+
+    public DinoAIEatBlocks(EntityPrehistoric entity) {
+        super();
+        this.entity = entity;
+        this.targetSorter = new BlockSorter();
+        this.setMutexBits(0);
     }
 
     @Override
     public boolean shouldExecute() {
+        if(entity.shouldWander){
+            return false;
+        }
+        if (this.entity.getHunger() >= this.entity.getMaxHunger() * 0.75F) {
+            return false;
+        }
+        if (this.entity.isMovementBlocked()) {
+            return false;
+        }
+        resetTarget();
+        if(targetBlock != null) {
+            this.entity.shouldWander = false;
+        }
+        return true;
+    }
 
-	if (prehistoric.getHunger() >= prehistoric.getMaxHunger()) {
-	    return false;
-	}
-	if (prehistoric.isMovementBlocked()) {
-	    return false;
-	}
-	if (prehistoric.getRNG().nextInt(1) != 0) {
-	    return false;
-	}
-	int radius = 16;
-	List<ChunkCoordinates> allBlocks = new ArrayList<ChunkCoordinates>();
-	for (int x = (int) (prehistoric.posX) - (radius / 2); x < (int) (prehistoric.posX) + (radius / 2); x++) {
-	    for (int y = (int) (prehistoric.posY) - (radius / 2); y < (int) (prehistoric.posY) + (radius / 2); y++) {
-		for (int z = (int) (prehistoric.posZ) - (radius / 2); z < (int) (prehistoric.posZ) + (radius / 2); z++) {
-		    if (FoodMappings.INSTANCE.getBlockFoodAmount(prehistoric.worldObj.getBlock(x, y, z), prehistoric.type.diet) > 0) {
-			allBlocks.add(new ChunkCoordinates(x, y, z));
-		    }
-		}
-	    }
-	}
-	if (allBlocks.isEmpty()) {
-	    return false;
-	}
-	Collections.sort(allBlocks, this.targetSorter);
-	this.targetBlock = allBlocks.get(0);
-	return true;
+    private void resetTarget(){
+        List<BlockPos> allBlocks = new ArrayList<>();
+        for (BlockPos pos : BlockPos.getAllInBox(this.entity.getPosition().add(-RADIUS, -RADIUS, -RADIUS), this.entity.getPosition().add(RADIUS, RADIUS, RADIUS))) {
+            if (FoodMappings.INSTANCE.getBlockFoodAmount(this.entity.world.getBlockState(pos).getBlock(), this.entity.type.diet) > 0 && this.entity.rayTraceFeeder(pos, true) && canReachBlock(entity, pos)) {
+                allBlocks.add(pos);
+            }
+        }
+        if (!allBlocks.isEmpty()) {
+            allBlocks.sort(this.targetSorter);
+            this.targetBlock = allBlocks.get(0);
+        }
     }
 
     @Override
-    public boolean continueExecuting() {
-	if (targetBlock == null) {
-	    return false;
-	}
-	if (prehistoric.getHunger() >= prehistoric.getMaxHunger()) {
-
-	    return false;
-	}
-
-	if (prehistoric.isMovementBlocked()) {
-	    return false;
-	}
-	return true;
+    public boolean shouldContinueExecuting() {
+        if (this.entity.getHunger() >= this.entity.getMaxHunger() * 0.75F) {
+            return false;
+        }
+        return !this.entity.isMovementBlocked() && !entity.shouldWander && targetBlock != null;
     }
 
-    @Override
-    public void startExecuting() {
-	super.startExecuting();
+    public void resetTask(){
+        resetTarget();
+        if (this.entity.getHunger() >= this.entity.getMaxHunger() * 0.75F) {
+            this.entity.shouldWander = true;
+        }
     }
 
     @Override
     public void updateTask() {
-	if (targetBlock != null) {
-	    Block block = prehistoric.worldObj.getBlock(this.targetBlock.posX, this.targetBlock.posY, this.targetBlock.posZ);
-	    if (FoodMappings.INSTANCE.getBlockFoodAmount(block, prehistoric.type.diet) > 0) {
-		double d0 = this.getDistance(this.targetBlock.posX, this.targetBlock.posY, this.targetBlock.posZ);
-		if (d0 * d0 < 6) {
-		    prehistoric.setHunger(Math.min(prehistoric.getMaxHunger(), prehistoric.getHunger() + FoodMappings.INSTANCE.getBlockFoodAmount(block, prehistoric.type.diet)));
-		    prehistoric.setHealth(Math.min(prehistoric.getMaxHealth(), (int) (prehistoric.getHealth() + FoodMappings.INSTANCE.getBlockFoodAmount(block, prehistoric.type.diet) / 10)));
-		    // prehistoric.doFoodEffect(Item.getItemFromBlock(block));
-		    prehistoric.playSound("random.eat", 1, 1);
-		    prehistoric.worldObj.func_147480_a(this.targetBlock.posX, this.targetBlock.posY, this.targetBlock.posZ, false);
-		    targetBlock = null;
-		    resetTask();
-		    return;
-		} else {
-		    if (this.prehistoric.isAquatic()) {
-			((EntityPrehistoricSwimming) prehistoric).currentTarget = new ChunkCoordinates((int) this.targetBlock.posX, (int) this.targetBlock.posY, (int) this.targetBlock.posZ);
-		    } else {
-			if (prehistoric.getNavigator().noPath()) {
-			    this.prehistoric.getNavigator().tryMoveToXYZ(this.targetBlock.posX, this.targetBlock.posY, this.targetBlock.posZ, 1D);
-			}
-		    }
-		}
-	    }
-	}
+        if (this.targetBlock != null) {
+            this.entity.getNavigator().tryMoveToXYZ(this.targetBlock.getX() + 0.5D, this.targetBlock.getY(), this.targetBlock.getZ() + 0.5D, 1D);
+            Block block = this.entity.world.getBlockState(this.targetBlock).getBlock();
+            if (FoodMappings.INSTANCE.getBlockFoodAmount(block, this.entity.type.diet) > 0) {
+                double distance = this.getDistance(this.targetBlock);
+                if (distance < Math.max(this.entity.getEntityBoundingBox().getAverageEdgeLength() * 2, 1.5F)) {
+                    this.entity.setHunger(Math.min(this.entity.getMaxHunger(), this.entity.getHunger() + FoodMappings.INSTANCE.getBlockFoodAmount(block, this.entity.type.diet)));
+                    this.entity.setHealth(Math.min(this.entity.getMaxHealth(), (int) (this.entity.getHealth() + FoodMappings.INSTANCE.getBlockFoodAmount(block, this.entity.type.diet) / 10)));
+                    this.entity.playSound(SoundEvents.ENTITY_GENERIC_EAT, 1, 1);
+                    this.entity.world.destroyBlock(this.targetBlock, false);
+                    this.targetBlock = null;
+                    this.resetTask();
+                    return;
+                }
+                if(!this.entity.rayTraceFeeder(targetBlock, true) || FoodMappings.INSTANCE.getBlockFoodAmount(this.entity.world.getBlockState(targetBlock).getBlock(), this.entity.type.diet) == 0 || !canReachBlock(this.entity, targetBlock)){
+                    this.targetBlock = null;
+                    this.resetTask();
+                }
+
+            }
+        }
     }
 
-    public double getDistance(double x, double y, double z)
-    {
-	double d3 = prehistoric.posX - x;
-	double d4 = prehistoric.posY + prehistoric.getEyeHeight() - y;
-	double d5 = prehistoric.posZ - z;
-	return (double) MathHelper.sqrt_double(d3 * d3 + d4 * d4 + d5 * d5);
+    private double getDistance(BlockPos pos) {
+        double deltaX = this.entity.posX - (pos.getX() + 0.5);
+        double deltaY = this.entity.posY + this.entity.getEyeHeight() - (pos.getY() + 0.5);
+        double deltaZ = this.entity.posZ - (pos.getZ() + 0.5);
+        return deltaX * deltaX + deltaY * deltaY + deltaZ * deltaZ;
     }
 
-    public class BlockSorter implements Comparator {
-	final EntityAIBase ai;
-	private Entity entity;
+    public class BlockSorter implements Comparator<BlockPos> {
+        @Override
+        public int compare(BlockPos pos1, BlockPos pos2) {
+            double distance1 = DinoAIEatBlocks.this.getDistance(pos1);
+            double distance2 = DinoAIEatBlocks.this.getDistance(pos2);
+            return Double.compare(distance1, distance2);
+        }
+    }
 
-	public BlockSorter(EntityAIBase ai, Entity entity) {
-	    this.ai = ai;
-	    this.entity = entity;
-	}
-
-	public int compareBlocks(ChunkCoordinates var1, ChunkCoordinates var2) {
-	    double var3 = this.getDistanceSqToVec(var1);
-	    double var5 = this.getDistanceSqToVec(var2);
-	    return var3 < var5 ? -1 : (var3 > var5 ? 1 : 0);
-	}
-
-	@Override
-	public int compare(Object var1, Object var2) {
-	    return this.compareBlocks((ChunkCoordinates) var1, (ChunkCoordinates) var2);
-	}
-
-	public double getDistanceSqToVec(ChunkCoordinates vec3) {
-	    double d0 = entity.posX - vec3.posX;
-	    double d1 = entity.posY + entity.getEyeHeight() - vec3.posY;
-	    double d2 = entity.posZ - vec3.posZ;
-	    return d0 * d0 + d1 * d1 + d2 * d2;
-	}
+    public boolean canReachBlock(Entity entity, BlockPos leafBlock){
+        return entity.posY + entity.height >= leafBlock.getY();
     }
 }

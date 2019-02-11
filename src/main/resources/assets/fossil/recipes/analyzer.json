@@ -1,0 +1,26 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "XYX",
+    "XZX"
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:iron_ingot",
+      "data": 0
+    },
+    "Y": {
+      "item": "fossil:biofossil",
+      "data": 0
+    },
+    "Z": {
+      "item": "fossil:relic_scrap",
+      "data": 0
+    }
+  },
+  "result": {
+    "item": "fossil:analyzer",
+    "data": 0,
+    "count": 1
+  }
+}

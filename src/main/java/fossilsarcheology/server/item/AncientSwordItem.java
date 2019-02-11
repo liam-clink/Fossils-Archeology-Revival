@@ -1,79 +1,56 @@
 package fossilsarcheology.server.item;
 
-import fossilsarcheology.server.entity.EntityAnuLightning;
-import fossilsarcheology.server.entity.mob.EntityFriendlyPigZombie;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import fossilsarcheology.server.api.DefaultRenderedItem;
+import fossilsarcheology.server.entity.monster.EntityFriendlyPigZombie;
+import fossilsarcheology.server.entity.utility.EntityAncientLightning;
+import fossilsarcheology.server.tab.FATabRegistry;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.monster.EntityPigZombie;
 import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
-import net.minecraft.world.EnumDifficulty;
 
 import java.util.Random;
 
-public class AncientSwordItem extends ItemSword {
-    public AncientSwordItem(ToolMaterial var2) {
-        super(var2);
-        this.maxStackSize = 1;
-        this.setMaxDamage(250);
-    }
+public class AncientSwordItem extends ItemSword implements DefaultRenderedItem {
 
     public AncientSwordItem() {
-        this(ToolMaterial.IRON);
+        super(ToolMaterial.IRON);
+        this.maxStackSize = 1;
+        this.setMaxDamage(250);
+        this.setCreativeTab(FATabRegistry.ITEMS);
+        this.setTranslationKey("ancient_sword");
     }
 
-    /**
-     * Current implementations of this method in child classes do not use the
-     * entry argument beside ev. They just raise the damage on the stack.
-     */
     @Override
-    public boolean hitEntity(ItemStack par1ItemStack, EntityLivingBase targetentity, EntityLivingBase player) {
+    public boolean hitEntity(ItemStack heldItem, EntityLivingBase targetEntity, EntityLivingBase player) {
         if (player instanceof EntityPlayer) {
-            if (player != null && this.checkHelmet((EntityPlayer) player)) {
-                if (targetentity != null && (targetentity instanceof EntityPig || targetentity instanceof EntityPigZombie)) {
-                    EntityFriendlyPigZombie fpz = new EntityFriendlyPigZombie(targetentity.worldObj);
-                    fpz.setLocationAndAngles(targetentity.posX, targetentity.posY, targetentity.posZ, targetentity.rotationYaw, targetentity.rotationPitch);
-                    if (!targetentity.worldObj.isRemote) {
-                        targetentity.worldObj.spawnEntityInWorld(fpz);
+            if (this.checkHelmet((EntityPlayer) player)) {
+                if (targetEntity instanceof EntityPig || targetEntity instanceof EntityPigZombie) {
+                    EntityFriendlyPigZombie fpz = new EntityFriendlyPigZombie(targetEntity.world);
+                    fpz.setLocationAndAngles(targetEntity.posX, targetEntity.posY, targetEntity.posZ, targetEntity.rotationYaw, targetEntity.rotationPitch);
+                    fpz.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(Items.GOLDEN_SWORD));
+                    if (!targetEntity.world.isRemote) {
+                        targetEntity.world.spawnEntity(fpz);
                     }
-                    fpz.setTamed(true);
-                    if (player instanceof EntityPlayer) {
-                        EntityPlayer playerUUID = (EntityPlayer) player;
-                        fpz.func_152115_b(playerUUID.getUniqueID().toString());
-                        fpz.sendMessageToOwner("pigman.summon");
-                    }
-                    targetentity.worldObj.spawnEntityInWorld(fpz);
-                    targetentity.setDead();
-                    targetentity.worldObj.spawnEntityInWorld(new EntityLightningBolt(targetentity.worldObj, targetentity.posX, targetentity.posY, targetentity.posZ));
-
-                } else {
-                    if (targetentity != null && (new Random()).nextInt(5) == 0) {
-                        targetentity.worldObj.addWeatherEffect(new EntityAnuLightning(targetentity.worldObj, targetentity.posX, targetentity.posY, targetentity.posZ));
-                    }
-
+                    fpz.setTamedBy((EntityPlayer) player);
+                    fpz.sendMessageToOwner("pigman.summon");
+                    targetEntity.setDead();
+                    targetEntity.world.spawnEntity(new EntityLightningBolt(targetEntity.world, targetEntity.posX, targetEntity.posY, targetEntity.posZ, true));
+                } else if (targetEntity != null && (new Random()).nextInt(5) == 0) {
+                    targetEntity.world.addWeatherEffect(new EntityAncientLightning(targetEntity.world, targetEntity.posX, targetEntity.posY, targetEntity.posZ));
                 }
             }
-
-            par1ItemStack.damageItem(1, player);
+            heldItem.damageItem(1, player);
         }
         return true;
     }
 
     private boolean checkHelmet(EntityPlayer player) {
-        ItemStack item = player.inventory.armorInventory[3];
-        if (item != null && item.getItem() != null) {
-            if (item.getItem() == FAItemRegistry.INSTANCE.ancienthelmet) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public void registerIcons(IIconRegister iconRegister) {
-        itemIcon = iconRegister.registerIcon("fossil:Ancient_Sword");
+        return player.getItemStackFromSlot(EntityEquipmentSlot.HEAD).getItem() == FAItemRegistry.ANCIENT_HELMET;
     }
 }

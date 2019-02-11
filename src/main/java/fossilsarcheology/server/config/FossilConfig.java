@@ -1,8 +1,8 @@
 package fossilsarcheology.server.config;
 
-import cpw.mods.fml.relauncher.Side;
 import net.ilexiconn.llibrary.server.config.ConfigEntry;
 
+@SuppressWarnings("deprecation")
 public class FossilConfig {
     @ConfigEntry(category = "generation")
     public boolean generatePalaeoraphe = false;
@@ -10,8 +10,6 @@ public class FossilConfig {
     public boolean generateHellShips = true;
     @ConfigEntry(category = "generation")
     public boolean generateAcademy = true;
-    @ConfigEntry(category = "generation")
-    public boolean generateShips = true;
     @ConfigEntry(category = "generation")
     public boolean generateTemple = true;
     @ConfigEntry(category = "generation")
@@ -29,8 +27,21 @@ public class FossilConfig {
     @ConfigEntry(category = "generation")
     public boolean generateFossilSites = true;
     @ConfigEntry(category = "generation")
-    public int[] oreGenerationDimensions = {0};
-
+    public int[] oreGenerationDimensions = { 0 };
+    @ConfigEntry(category = "generation")
+    public int generateHellShipRarity = 100;
+    @ConfigEntry(category = "generation")
+    public int generateTarSiteRarity = 700;
+    @ConfigEntry(category = "generation")
+    public int generateFossilSiteRarity = 700;
+    @ConfigEntry(category = "generation")
+    public int generateMoaiRarity = 400;
+    @ConfigEntry(category = "generation")
+    public int generateWeaponShopRarity = 40;
+    @ConfigEntry(category = "generation")
+    public int generateTempleRarity = 90;
+    @ConfigEntry(category = "generation")
+    public int generateAcademyRarity = 500;
     @ConfigEntry(category = "entity spawning")
     public boolean spawnCoelacanth = true;
     @ConfigEntry(category = "entity spawning")
@@ -46,20 +57,10 @@ public class FossilConfig {
     @ConfigEntry
     public boolean dinoBlockBreaking = true;
     @ConfigEntry
-    public boolean skullOverlay = true;
-    @ConfigEntry
-    public boolean loginMessage = true;
-    @ConfigEntry
-    public boolean allowTableEnchantments = true;
-    @ConfigEntry
-    public boolean allowBookEnchantments = true;
-    @ConfigEntry
-    public boolean allowBreeding = true;
-    @ConfigEntry(side = Side.CLIENT, category = "client")
+    public boolean dinoEatModdedMobs = true;
+    @ConfigEntry(category = "client")
     public boolean customMainMenu = true;
 
-    @ConfigEntry(category = "dinosaurs")
-    public boolean featheredTRex = true;
     @ConfigEntry(category = "dinosaurs")
     public boolean featheredDeinonychus = true;
     @ConfigEntry(category = "dinosaurs")
@@ -67,15 +68,17 @@ public class FossilConfig {
     @ConfigEntry(category = "dinosaurs")
     public boolean featheredCompsognathus = true;
     @ConfigEntry(category = "dinosaurs")
-    public boolean quilledTriceratops = true;
+    public boolean quilledTriceratops = false;
     @ConfigEntry(category = "dinosaurs")
     public boolean featheredVelociraptor = true;
     @ConfigEntry(category = "dinosaurs")
     public boolean featheredTherizinosaurus = true;
     @ConfigEntry(category = "dinosaurs")
+    public boolean featheredDryosaurus = false;
+    @ConfigEntry(category = "dinosaurs")
     public boolean eggsLikeChickens = false;
     @ConfigEntry(category = "dinosaurs")
-    public boolean sleepingParticles = true;
+    public int flyingTargetMaxHeight = 128;
     @ConfigEntry(category = "ids")
     public int biomeIDDarknessLair = 128;
     @ConfigEntry(category = "ids")
@@ -90,4 +93,6 @@ public class FossilConfig {
     public int enchantmentIDPaleontology = 90;
     @ConfigEntry(category = "ids")
     public int villagerId = 303;
+    @ConfigEntry(category = "generation")
+    public boolean logCascadingWorldGen = false;
 }

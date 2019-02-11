@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "stage=0": {
+      "model": "fossil:palm_sapling"
+    },
+    "stage=1": {
+      "model": "fossil:palm_sapling"
+    }
+  }
+}

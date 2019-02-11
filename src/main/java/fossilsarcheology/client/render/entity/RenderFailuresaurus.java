@@ -1,36 +1,31 @@
 package fossilsarcheology.client.render.entity;
 
-import fossilsarcheology.server.entity.mob.EntityFailuresaurus;
+import fossilsarcheology.Revival;
+import fossilsarcheology.server.entity.monster.EntityFailuresaurus;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.entity.Entity;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 
-public class RenderFailuresaurus extends RenderLiving {
-    private static final ResourceLocation failuresaurus_default = new ResourceLocation("fossil:textures/model/failuresaurus_0/failuresaurus_0.png");
-    private static final ResourceLocation failuresaurus_creepy = new ResourceLocation("fossil:textures/model/failuresaurus_0/failuresaurus_1.png");
-    private static final ResourceLocation failuresaurus_cute = new ResourceLocation("fossil:textures/model/failuresaurus_0/failuresaurus_2.png");
+public class RenderFailuresaurus extends RenderLiving<EntityFailuresaurus> {
+	private static final ResourceLocation failuresaurus_default = new ResourceLocation(Revival.MODID, "textures/model/failuresaurus_0/failuresaurus_0.png");
+	private static final ResourceLocation failuresaurus_creepy = new ResourceLocation(Revival.MODID, "textures/model/failuresaurus_0/failuresaurus_1.png");
+	private static final ResourceLocation failuresaurus_cute = new ResourceLocation(Revival.MODID, "textures/model/failuresaurus_0/failuresaurus_2.png");
 
-    public RenderFailuresaurus(ModelBase var1, float var2) {
-        super(var1, var2);
-    }
+	public RenderFailuresaurus(ModelBase model, RenderManager renderer) {
+		super(renderer, model, 0.3F);
+	}
 
-    protected ResourceLocation getResourceLocation(EntityFailuresaurus entity) {
-        switch (entity.getSkin()) {
-            case 0:
-            default:
-                return failuresaurus_default;
-
-            case 1:
-                return failuresaurus_creepy;
-
-            case 2:
-                return failuresaurus_cute;
-        }
-    }
-
-    @Override
-    protected ResourceLocation getEntityTexture(Entity entity) {
-        return this.getResourceLocation((EntityFailuresaurus) entity);
-    }
+	@Override
+	protected ResourceLocation getEntityTexture(EntityFailuresaurus entity) {
+		switch (entity.getSkin()) {
+			case 0:
+			default:
+				return failuresaurus_default;
+			case 1:
+				return failuresaurus_creepy;
+			case 2:
+				return failuresaurus_cute;
+		}
+	}
 }

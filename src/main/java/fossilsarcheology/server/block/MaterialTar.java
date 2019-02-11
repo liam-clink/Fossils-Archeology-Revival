@@ -5,19 +5,20 @@ import net.minecraft.block.material.Material;
 
 public class MaterialTar extends Material {
 
-    public MaterialTar(MapColor color) {
-        super(color);
-        setNoPushMobility();
-    }
+	public MaterialTar() {
+		super(MapColor.BLACK);
+		setNoPushMobility();
+		setReplaceable();
+	}
 
-    @Override
-    public boolean isLiquid() {
-        return true;
-    }
+	@Override
+	public boolean isLiquid() {
+		return true;
+	}
 
-    @Override
-    public boolean isSolid() {
-        return false;
-    }
+	@Override
+	public boolean isSolid() {
+		return false;
+	}
 
 }

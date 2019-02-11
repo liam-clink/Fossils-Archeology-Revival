@@ -1,129 +1,89 @@
 package fossilsarcheology;
 
-import cpw.mods.fml.client.registry.RenderingRegistry;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.FMLLog;
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.VillagerRegistry;
-import fossilsarcheology.client.render.tileentity.RenderFeeder;
 import fossilsarcheology.server.ServerProxy;
-import fossilsarcheology.server.biome.FABiomeRegistry;
 import fossilsarcheology.server.block.FABlockRegistry;
-import fossilsarcheology.server.block.entity.*;
+import fossilsarcheology.server.compat.thaumcraft.ThaumcraftCompatBridge;
+import fossilsarcheology.server.compat.tinkers.TinkersCompatBridge;
 import fossilsarcheology.server.config.FossilConfig;
-import fossilsarcheology.server.creativetab.FATabRegistry;
-import fossilsarcheology.server.dimension.anu.WorldProviderAnu;
-import fossilsarcheology.server.dimension.treasure.WorldProviderTreasure;
-import fossilsarcheology.server.enchantment.FAEnchantmentRegistry;
-import fossilsarcheology.server.enums.EnumPrehistoric;
-import fossilsarcheology.server.gen.*;
-import fossilsarcheology.server.gen.structure.AcademyGenerator;
-import fossilsarcheology.server.gen.structure.ShipWreckGenerator;
-import fossilsarcheology.server.handler.*;
-import fossilsarcheology.server.item.FAItemRegistry;
+import fossilsarcheology.server.entity.prehistoric.PrehistoricEntityType;
+import fossilsarcheology.server.lib.LibDependencies;
+import fossilsarcheology.server.loot.CustomizeToDinosaur;
 import fossilsarcheology.server.message.*;
-import fossilsarcheology.server.util.FossilFoodMappings;
 import fossilsarcheology.server.util.ReleaseType;
 import net.ilexiconn.llibrary.server.config.Config;
 import net.ilexiconn.llibrary.server.network.NetworkWrapper;
-import net.minecraftforge.common.DimensionManager;
-import net.minecraftforge.common.MinecraftForge;
-import org.apache.logging.log4j.Level;
+import net.minecraft.world.storage.loot.functions.LootFunctionManager;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.SidedProxy;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-@Mod(modid = Revival.MODID, name = "Fossils and Archeology Revival", version = Revival.VERSION, dependencies = "required-after:llibrary@[" + Revival.LLIBRARY_VERSION + ",)")
+@Mod(modid = Revival.MODID, name = "Fossils and Archeology Revival", version = Revival.VERSION, acceptedMinecraftVersions = "[1.12,1.12.2]", dependencies = LibDependencies.DEPENDENCIES)
+
 public class Revival {
-    public static final String MODID = "fossil";
-    public static final String VERSION = "7.3.2";
-    public static final ReleaseType RELEASE_TYPE = ReleaseType.parseVersion(Revival.VERSION);
-    public static final String LLIBRARY_VERSION = "1.5.1";
+	public static final String MODID = "fossil";
+	public static final String VERSION = "8.0.0";
+	public static final ReleaseType RELEASE_TYPE = ReleaseType.parseVersion(VERSION);
+	public static final String LLIBRARY_VERSION = "1.7.17";
 
-    @SidedProxy(clientSide = "fossilsarcheology.client.ClientProxy", serverSide = "fossilsarcheology.server.ServerProxy")
-    public static ServerProxy PROXY;
-    @Instance(MODID)
-    public static Revival INSTANCE;
-    @NetworkWrapper({MessageFoodParticles.class, MessageSetDay.class, MessageJavelinType.class, MessageRollBall.class, MessageHappyParticles.class, MessageUpdateEgg.class, MessageUpdateNautilus.class, MessageSyncEmbryo.class})
-    public static SimpleNetworkWrapper NETWORK_WRAPPER;
-    @Config
-    public static FossilConfig CONFIG;
+	public static final Logger LOGGER = LogManager.getLogger("fossils");
 
-    public static Object toPedia;
+	@SidedProxy(clientSide = "fossilsarcheology.client.ClientProxy", serverSide = "fossilsarcheology.server.ServerProxy")
+	public static ServerProxy PROXY;
+	@NetworkWrapper({MessageFoodParticles.class, MessageSetDay.class, MessageHappyParticles.class, MessageUpdateEgg.class, MessageRollBall.class, MessageUpdateFeeder.class})
+	public static SimpleNetworkWrapper NETWORK_WRAPPER;
+	@Config
+	public static FossilConfig CONFIG;
 
-    public static void printDebug(String message) {
-        if (Revival.RELEASE_TYPE.enableDebugging()) {
-            FMLLog.log(Revival.MODID, Level.INFO, message);
-        }
-    }
+	@Mod.Instance(MODID)
+	public static Revival INSTANCE;
+	public static Object PEDIA_OBJECT;
 
-    @Mod.EventHandler
-    public void preInit(FMLPreInitializationEvent event) {
-        MinecraftForge.EVENT_BUS.register(new FossilBonemealEvent());
-        MinecraftForge.EVENT_BUS.register(new EventPlayer());
-        VillagerRegistry.instance().registerVillageTradeHandler(CONFIG.villagerId, new FossilTradeHandler());
-        VillagerRegistry.instance().registerVillagerId(CONFIG.villagerId);
-        FATabRegistry.INSTANCE.init();
-        FABlockRegistry.INSTANCE.init();
-        FAItemRegistry.INSTANCE.init();
-        FABiomeRegistry.INSTANCE.init();
-        FAEnchantmentRegistry.INSTANCE.init();
-        EnumPrehistoric.init();
-        FossilOreDictionary.oreRegistration();
-        FossilFoodMappings.init();
-        DimensionManager.registerProviderType(Revival.CONFIG.dimensionIDDarknessLair, WorldProviderAnu.class, false);
-        DimensionManager.registerDimension(Revival.CONFIG.dimensionIDDarknessLair, Revival.CONFIG.dimensionIDDarknessLair);
-        DimensionManager.registerProviderType(Revival.CONFIG.dimensionIDTreasure, WorldProviderTreasure.class, false);
-        DimensionManager.registerDimension(Revival.CONFIG.dimensionIDTreasure, Revival.CONFIG.dimensionIDTreasure);
+	static {
+		FluidRegistry.enableUniversalBucket();
+	}
 
-        FossilEntities.registerEntities();
-        GameRegistry.registerWorldGenerator(new FossilGenerator(), 0);
+	public static void debug(String message) {
+		if (RELEASE_TYPE.enableDebugging()) {
+			LOGGER.debug(message);
+		}
+	}
 
-        if (Revival.CONFIG.generatePalaeoraphe) {
-            GameRegistry.registerWorldGenerator(new WorldGeneratorPalaeoraphe(), 0);
-        }
-        if (Revival.CONFIG.generateAcademy) {
-            GameRegistry.registerWorldGenerator(new AcademyGenerator(), 0);
-        }
-        if (Revival.CONFIG.generateShips) {
-            GameRegistry.registerWorldGenerator(new ShipWreckGenerator(), 0);
-        }
+	@Mod.EventHandler
+	public void onPreInit(FMLPreInitializationEvent event) {
+		PROXY.onPreInit();
+		ThaumcraftCompatBridge.loadThaumcraftCompat();
+		TinkersCompatBridge.loadTinkersCompat();
+		LOGGER.info("Archaean horizon");
+		LOGGER.info("The first sunrise");
+		LOGGER.info("On a pristine Gaea");
+		LOGGER.info("Opus perfectum");
+		LOGGER.info("Somewhere there, us sleeping");
+		}
 
-        GameRegistry.registerWorldGenerator(new WorldGenMiscStructures(), 0);
+	@Mod.EventHandler
+	public void onInit(FMLInitializationEvent event) {
+		PROXY.onInit();
+		LootFunctionManager.registerFunction(new CustomizeToDinosaur.Serializer());
+		FABlockRegistry.init();
+		LOGGER.info("After a billion years");
+		LOGGER.info("The show is still here");
+		LOGGER.info("Not a single one of your fathers died young");
+		LOGGER.info("The handy travelers out of Africa");
+		LOGGER.info("Little Lucy of the Afar");
+		LOGGER.info("Cheese Touch");
 
-        GameRegistry.registerWorldGenerator(new TarGenerator(), 0);
-        GameRegistry.registerWorldGenerator(new VolcanicRockGenerator(), 13);
+	}
 
-        NetworkRegistry.INSTANCE.registerGuiHandler(this, new FossilGuiHandler());
+	@Mod.EventHandler
+	public void onPostInit(FMLPostInitializationEvent event) {
+		PROXY.onPostInit();
+		TinkersCompatBridge.loadTinkersPostInitCompat();
 
-        GameRegistry.registerTileEntity(TileEntityCultivate.class, LocalizationStrings.BLOCK_CULTIVATE_IDLE_NAME);
-        GameRegistry.registerTileEntity(TileEntityAnalyzer.class, LocalizationStrings.BLOCK_ANALYZER_IDLE_NAME);
-        GameRegistry.registerTileEntity(TileEntityWorktable.class, LocalizationStrings.BLOCK_WORKTABLE_IDLE_NAME);
-        GameRegistry.registerTileEntity(TileEntityDrum.class, LocalizationStrings.DRUM_NAME);
-        GameRegistry.registerTileEntity(TileEntityTimeMachine.class, LocalizationStrings.BLOCK_TIMEMACHINE_NAME);
-        GameRegistry.registerTileEntity(TileEntitySifter.class, LocalizationStrings.BLOCK_SIFTER_IDLE);
-        GameRegistry.registerTileEntity(TileEntityFigurine.class, "figurineType");
-        GameRegistry.registerTileEntity(TileEntityVase.class, "vaseType");
-        GameRegistry.registerTileEntity(TileEntityAnuTotem.class, LocalizationStrings.BLOCK_ANU_NAME);
-        GameRegistry.registerTileEntity(TileEntityAnubiteStatue.class, "Anubite_Statue");
-        GameRegistry.registerTileEntity(TileEntityAncientChest.class, "Ancient_Chest");
-        GameRegistry.registerTileEntity(TileEntitySarcophagus.class, "sarcophagus");
-
-        RenderingRegistry.registerBlockHandler(2303, RenderFeeder.INSTANCE);
-        PROXY.init();
-
-        FossilRecipes.addRecipe();
-
-        FMLCommonHandler.instance().bus().register(new PickupHandler());
-        FMLCommonHandler.instance().bus().register(new EventFossilAchivements());
-
-        PROXY.registerChestLoot();
-        FossilAchievementHandler.loadAchievements();
-        MinecraftForge.EVENT_BUS.register(new FossilToolEvent());
-        MinecraftForge.EVENT_BUS.register(new FossilLivingEvent());
-        MinecraftForge.EVENT_BUS.register(new FossilInteractEvent());
-    }
+	}
 }

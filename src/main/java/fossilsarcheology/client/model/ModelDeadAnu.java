@@ -1,27 +1,24 @@
 package fossilsarcheology.client.model;
 
-import fossilsarcheology.server.entity.mob.EntityAnuDead;
+import fossilsarcheology.server.entity.utility.EntityAnuDead;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
-import org.lwjgl.opengl.GL11;
 
-/**
- * ModelPigBoss - Either Mojang or a mod author Created using Tabula 4.1.1
- */
 public class ModelDeadAnu extends ModelBase {
-    public ModelRenderer field_78112_f;
-    public ModelRenderer field_78124_i;
-    public ModelRenderer Head;
-    public ModelRenderer field_78115_e;
-    public ModelRenderer field_78113_g;
-    public ModelRenderer field_78123_h;
-    public ModelRenderer Mouth;
-    public ModelRenderer field_78114_d;
-    public ModelRenderer Hornleft;
-    public ModelRenderer HornLeft;
-    public ModelRenderer LeftTusk;
-    public ModelRenderer RightTusk;
+    public final ModelRenderer field_78112_f;
+    public final ModelRenderer field_78124_i;
+    public final ModelRenderer Head;
+    public final ModelRenderer field_78115_e;
+    public final ModelRenderer field_78113_g;
+    public final ModelRenderer field_78123_h;
+    public final ModelRenderer Mouth;
+    public final ModelRenderer field_78114_d;
+    public final ModelRenderer Hornleft;
+    public final ModelRenderer HornLeft;
+    public final ModelRenderer LeftTusk;
+    public final ModelRenderer RightTusk;
 
     public ModelDeadAnu() {
         this.textureWidth = 64;
@@ -76,33 +73,28 @@ public class ModelDeadAnu extends ModelBase {
     }
 
     @Override
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
-        float alpha;
-        GL11.glPushMatrix();
-        GL11.glTranslatef(0, 1.4F, 0.6F);
-        GL11.glRotatef(-90, 1, 0, 0);
+    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float scale) {
+        GlStateManager.pushMatrix();
+        GlStateManager.translate(0, 1.4F, 0.6F);
+        GlStateManager.rotate(-90, 1, 0, 0);
         if (entity instanceof EntityAnuDead) {
             if (((EntityAnuDead) entity).deathTicks > 40) {
-                alpha = 1 - (((((EntityAnuDead) entity).deathTicks - 40) / 9) * 0.01F);
-                GL11.glColor4f(1.0F, 1.0F, 1.0F, alpha);
+                float alpha = 1 - (((((EntityAnuDead) entity).deathTicks - 40) / 60) * 0.01F);
+                GlStateManager.color(1.0F, 1.0F, 1.0F, alpha);
             }
         }
-        GL11.glEnable(GL11.GL_BLEND);
-        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-        this.field_78115_e.render(f5);
-        this.field_78112_f.render(f5);
-        this.field_78113_g.render(f5);
-        this.field_78123_h.render(f5);
-        this.field_78124_i.render(f5);
-        this.Head.render(f5);
-        GL11.glDisable(GL11.GL_BLEND);
-        GL11.glPopMatrix();
-
+        GlStateManager.enableBlend();
+        GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+        this.field_78115_e.render(scale);
+        this.field_78112_f.render(scale);
+        this.field_78113_g.render(scale);
+        this.field_78123_h.render(scale);
+        this.field_78124_i.render(scale);
+        this.Head.render(scale);
+        GlStateManager.disableBlend();
+        GlStateManager.popMatrix();
     }
 
-    /**
-     * This is a helper function from Tabula to set the rotation of model parts
-     */
     public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
         modelRenderer.rotateAngleX = x;
         modelRenderer.rotateAngleY = y;

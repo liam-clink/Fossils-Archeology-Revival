@@ -1,19 +1,19 @@
 package fossilsarcheology.client.render.entity;
 
-import fossilsarcheology.client.model.ModelTarSlime;
-import fossilsarcheology.client.model.ModelTarSlimeOuter;
+import fossilsarcheology.Revival;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.RenderSlime;
 import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.util.ResourceLocation;
 
 public class RenderTarSlime extends RenderSlime {
 
-    public RenderTarSlime() {
-        super(new ModelTarSlime(), new ModelTarSlimeOuter(), 0.3F);
-    }
+	public RenderTarSlime(RenderManager rendermanager) {
+		super(rendermanager);
+	}
 
-    @Override
-    protected ResourceLocation getEntityTexture(EntitySlime entity) {
-        return new ResourceLocation("fossil:textures/model/tar_slime.png");
-    }
+	@Override
+	protected ResourceLocation getEntityTexture(EntitySlime entity) {
+		return new ResourceLocation(Revival.MODID, "textures/model/tar_slime.png");
+	}
 }

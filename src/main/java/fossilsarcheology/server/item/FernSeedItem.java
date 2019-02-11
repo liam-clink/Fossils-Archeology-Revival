@@ -1,53 +1,57 @@
 package fossilsarcheology.server.item;
 
-import fossilsarcheology.server.block.BlockFern;
-import fossilsarcheology.server.creativetab.FATabRegistry;
-import fossilsarcheology.server.handler.LocalizationStrings;
-import net.minecraft.block.Block;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import fossilsarcheology.server.api.DefaultRenderedItem;
+import fossilsarcheology.server.block.FABlockRegistry;
+import fossilsarcheology.server.block.FernsBlock;
+import fossilsarcheology.server.tab.FATabRegistry;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class FernSeedItem extends Item {
-    private Block matchingBlockID;
+public class FernSeedItem extends Item implements DefaultRenderedItem {
 
-    public FernSeedItem(Block ferns) {
-        super();
-        this.matchingBlockID = ferns;
-        this.setUnlocalizedName(LocalizationStrings.FERNSEED_NAME);
-        this.setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
-    }
+	public FernSeedItem() {
+		super();
+		this.setHasSubtypes(true);
+		this.setCreativeTab(FATabRegistry.ITEMS);
+		this.setTranslationKey("fern_seed");
+	}
 
-    /**
-     * Callback for item usage. If the item does something special on right
-     * clicking, he will have one of those. Return True if something happen and
-     * false if it don't. This is for ITEMS, not BLOCKS
-     */
-    @Override
-    public boolean onItemUse(ItemStack var1, EntityPlayer var2, World var3, int var4, int var5, int var6, int var7, float var8, float var9, float var10) {
-        if (var7 != 1) {
-            return true;
-        } else {
-            Block var11 = var3.getBlock(var4, var5, var6);
+	@SuppressWarnings("deprecation")
+	@Override
+	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		ItemStack stack = player.getHeldItem(hand);
+		if (player.canPlayerEdit(pos, facing, stack) && player.canPlayerEdit(pos.up(), facing, stack)) {
+			if (canPlant(world.getBlockState(pos)) && world.isAirBlock(pos.up()) && FernsBlock.checkUnderTree(world, pos)) {
+				if (this.placePlantBlock(stack, world, pos.getX(), pos.getY(), pos.getZ(), new Random())) {
+					world.playSound(player, pos, FABlockRegistry.DILLHOFFIA_FLOWER.getSoundType().getBreakSound(), SoundCategory.BLOCKS, 1F, new Random().nextFloat() * 0.1F + 0.8F);
+				}
+				stack.shrink(1);
+				return EnumActionResult.SUCCESS;
+			} else {
+				return EnumActionResult.PASS;
+			}
+		} else {
+			return EnumActionResult.PASS;
+		}
+	}
 
-            if (var11 == Blocks.grass && var3.isAirBlock(var4, var5 + 1, var6) && BlockFern.CheckUnderTree(var3, var4, var5, var6)) {
-                var3.setBlock(var4, var5 + 1, var6, this.matchingBlockID);
-                var3.setBlockMetadataWithNotify(var4, var5 + 1, var6, (new Random()).nextInt(2) * 8, 2);
-                --var1.stackSize;
-                return true;
-            } else {
-                return false;
-            }
-        }
-    }
+	private boolean placePlantBlock(ItemStack stack, World world, int x, int y, int z, Random rand) {
+		world.setBlockState(new BlockPos(x, y + 1, z), FABlockRegistry.FERNS.getDefaultState());
+		return true;
+	}
 
-    @Override
-    public void registerIcons(IIconRegister IIconRegister) {
-        itemIcon = IIconRegister.registerIcon("fossil:Fern_Seeds");
-    }
+	public boolean canPlant(IBlockState state) {
+		return FernsBlock.canGrowOn(state);
+	}
+
 }

@@ -1,19 +1,19 @@
 package fossilsarcheology.server.entity.ai;
 
-import fossilsarcheology.server.entity.mob.EntityAnu;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import fossilsarcheology.server.entity.monster.EntityAnu;
+import net.minecraft.entity.ai.EntityAIAttackMelee;
 
-public class AnuAIAttackOnCollide extends EntityAIAttackOnCollide {
-    private EntityAnu theEntity;
+public class AnuAIAttackOnCollide extends EntityAIAttackMelee {
+	private final EntityAnu theEntity;
 
-    public AnuAIAttackOnCollide(EntityAnu p_i1616_1_, Class p_i1616_2_, double p_i1616_4_, boolean p_i1616_6_) {
-        super(p_i1616_1_, p_i1616_2_, p_i1616_4_, p_i1616_6_);
-        theEntity = p_i1616_1_;
-    }
+	public AnuAIAttackOnCollide(EntityAnu anu, Class clazz, double d, boolean foref) {
+		super(anu, d, foref);
+		theEntity = anu;
+	}
 
-    @Override
-    public boolean shouldExecute() {
-        return theEntity.getAttackMode() == 0 && super.shouldExecute();
-    }
+	@Override
+	public boolean shouldExecute() {
+		return theEntity.getAttackMode() == 0 && super.shouldExecute();
+	}
 
 }

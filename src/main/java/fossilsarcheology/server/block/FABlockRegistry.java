@@ -1,213 +1,218 @@
 package fossilsarcheology.server.block;
 
-import com.google.common.collect.Lists;
-import cpw.mods.fml.common.registry.GameRegistry;
-import fossilsarcheology.server.block.sound.FossilSoundType;
-import fossilsarcheology.server.creativetab.FATabRegistry;
-import fossilsarcheology.server.handler.LocalizationStrings;
+import fossilsarcheology.Revival;
+import fossilsarcheology.server.recipe.FARecipeRegistry;
 import net.minecraft.block.Block;
-import net.minecraft.block.material.MapColor;
-import net.minecraft.block.material.Material;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraft.block.SoundType;
+import net.minecraft.init.Blocks;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
-import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.List;
 
-public enum FABlockRegistry {
-    INSTANCE;
+public class FABlockRegistry {
+	public static final List<Block> BLOCKS = new ArrayList<>();
 
-    public List<String> list = Lists.newArrayList();
-    public Block blockFossil;
-    public Block blockSkull;
-    public Block skullLantern;
-    public Block blockanalyzerIdle;
-    public Block blockanalyzerActive;
-    public Block blockcultivateIdle;
-    public Block blockcultivateActive;
-    public Block blockSlimeTrail;
-    public Block blockworktableIdle;
-    public Block blockworktableActive;
-    public Block feederIdle;
-    public Block feederActive;
-    public Block denseSand;
-    public Block strongGlass;
-    public Block blockTimeMachine;
-    public Block drum;
-    public Block blockPermafrost;
-    public Block blockIcedStone;
-    public Block volcanicAsh;
-    public Block volcanicRock;
-    public Block tar;
-    public Block palmLog;
-    public Block palmLeaves;
-    public Block palmSap;
-    public Block palaePlanks;
-    public Block palaeSingleSlab;
-    public Block palaeDoubleSlab;
-    public Block palaeStairs;
-    public Block ancientWood;
-    public Block ancientWoodPillar;
-    public Block ancientWoodPlate;
-    public Block ancientWoodStairs;
-    public Block ancientWoodSingleSlab;
-    public Block ancientWoodDoubleSlab;
-    public Block volcanicBrick;
-    public Block amberOre;
-    public Block ancientStone;
-    public Block ancientStonebrick;
-    public Block ancientGlass;
-    public Block ancientStoneStairs;
-    public Block ancientStoneSingleSlab;
-    public Block ancientStoneDoubleSlab;
-    public Block obsidianSpikes;
-    public Block figurineBlock;
-    public Block anuTotem;
-    public Block anuPortal;
-    public Block homePortal;
-    public Block anubiteStatue;
-    public Block ancientChest;
-    public Block blockSifterIdle;
-    public Block blockSifterActive;
-    public Block volcanicStairs;
-    public Block volcanicSingleSlab;
-    public Block volcanicDoubleSlab;
-    public Block bubbleMachine;
-    public Block vaseAmphoraBlock;
-    public Block vaseKylixBlock;
-    public Block vaseVoluteBlock;
-    public Block sarcophagus;
-    public Block ferns;
-    public Block dillhoffia;
-    public Block sarracina;
-    public Block cephalotaxus;
-    public Block licopodiophyta;
-    public Block paleopanax;
-    public Block zamites;
-    public Block bennettitales_small;
-    public Block bennettitales_large;
-    public Block welwitschia;
-    public Block horsetail_small;
-    public Block horsetail_large;
-    public Block mutantPlant;
-    public Block tempskya;
-    public Block vaccinium;
-    public Block osmunda;
-    public Block crataegus;
-    public Block florissantia;
-    public Block ephedra;
-    public Fluid tar_fluid;
-    public Material tar_material;
-    public FossilSoundType soundTypeSlime = new FossilSoundType(1.0F, 1.0F);
+	@GameRegistry.ObjectHolder(Revival.MODID + ":fossil")
+	public static final FossilBlock FOSSIL = new FossilBlock();
+	@GameRegistry.ObjectHolder(Revival.MODID + ":amber_ore")
+	public static final AmberOreBlock AMBER_ORE = new AmberOreBlock();
+	@GameRegistry.ObjectHolder(Revival.MODID + ":skull")
+	public static final SkullBlock SKULL_BLOCK = new SkullBlock(false);
+	@GameRegistry.ObjectHolder(Revival.MODID + ":skull_lantern")
+	public static final SkullBlock SKULL_LANTERN = new SkullBlock(true);
+	@GameRegistry.ObjectHolder(Revival.MODID + ":culture_vat_idle")
+	public static final CultivateBlock CULTIVATE_IDLE = new CultivateBlock(false);
+	@GameRegistry.ObjectHolder(Revival.MODID + ":culture_vat_active")
+	public static final CultivateBlock CULTIVATE_ACTIVEE = new CultivateBlock(true);
+	@GameRegistry.ObjectHolder(Revival.MODID + ":worktable_idle")
+	public static final WorktableBlock WORKTABLE_IDLE = new WorktableBlock(false);
+	@GameRegistry.ObjectHolder(Revival.MODID + ":worktable_active")
+	public static final WorktableBlock WORKTABLE_ACTIVE = new WorktableBlock(true);
+	@GameRegistry.ObjectHolder(Revival.MODID + ":sifter_idle")
+	public static final SifterBlock SIFTER_IDLE = new SifterBlock(false);
+	@GameRegistry.ObjectHolder(Revival.MODID + ":sifter_active")
+	public static final SifterBlock SIFTER_ACTIVE = new SifterBlock(true);
+	@GameRegistry.ObjectHolder(Revival.MODID + ":analyzer_idle")
+	public static final AnalyzerBlock ANALYZER = new AnalyzerBlock(false);
+	@GameRegistry.ObjectHolder(Revival.MODID + ":analyzer_active")
+	public static final AnalyzerBlock ANALYZER_ACTIVE = new AnalyzerBlock(true);
+	@GameRegistry.ObjectHolder(Revival.MODID + ":bubble_machine")
+	public static final BubbleBlowerBlock BUBBLE_MACHINE = new BubbleBlowerBlock();
+	@GameRegistry.ObjectHolder(Revival.MODID + ":feeder")
+	public static final FeederBlock FEEDER = new FeederBlock();
+	@GameRegistry.ObjectHolder(Revival.MODID + ":permafrost")
+	public static final PermafrostBlock PERMAFROST = new PermafrostBlock();
+	@GameRegistry.ObjectHolder(Revival.MODID + ":iced_stone")
+	public static final IcedStoneBlock ICED_STONE = new IcedStoneBlock();
+	@GameRegistry.ObjectHolder(Revival.MODID + ":dense_sand")
+	public static final DenseSandBlock DENSE_SAND = new DenseSandBlock();
+	@GameRegistry.ObjectHolder(Revival.MODID + ":strong_glass")
+	public static final StrongGlassBlock STRONG_GLASS = new StrongGlassBlock();
+	@GameRegistry.ObjectHolder(Revival.MODID + ":ancient_glass")
+	public static final AncientGlassBlock ANCIENT_GLASS = new AncientGlassBlock();
+	@GameRegistry.ObjectHolder(Revival.MODID + ":slime_trail")
+	public static final SlimeTrailBlock SLIME_TRAIL = new SlimeTrailBlock();
+	@GameRegistry.ObjectHolder(Revival.MODID + ":ancient_stone")
+	public static final AncientStoneBlock ANCIENT_STONE = new AncientStoneBlock();
+	@GameRegistry.ObjectHolder(Revival.MODID + ":ancient_stone_bricks")
+	public static final AncientStonebrickBlock ANCIENT_STONE_BRICK = new AncientStonebrickBlock();
+	@GameRegistry.ObjectHolder(Revival.MODID + ":ancient_stone_stairs")
+	public static final FossilStairsBlock ANCIENT_STONE_STAIRS = new FossilStairsBlock(ANCIENT_STONE.getDefaultState(), "ancient_stone_stairs");
+	@GameRegistry.ObjectHolder(Revival.MODID + ":ancient_stone_slab")
+	public static final FossilSlabBlock ANCIENT_STONE_SINGLESLAB = new AncientStoneSlabBlock.Half("ancient_stone_slab", 1.7F, 7.5F, SoundType.STONE);
+	@GameRegistry.ObjectHolder(Revival.MODID + ":ancient_stone_double_slab")
+	public static final FossilSlabBlock ANCIENT_STONE_DOUBLESLAB = new AncientStoneSlabBlock.Double("ancient_stone_slab", 1.7F, 7.5F, SoundType.STONE);
+	@GameRegistry.ObjectHolder(Revival.MODID + ":volcanic_ash")
+	public static final VolcanicAshBlock VOLCANIC_ASH = new VolcanicAshBlock("ash");
+	@GameRegistry.ObjectHolder(Revival.MODID + ":volcanic_brick")
+	public static final VolcanicAshBlock VOLCANIC_BRICK = new VolcanicAshBlock("brick");
+	@GameRegistry.ObjectHolder(Revival.MODID + ":volcanic_rock")
+	public static final VolcanicAshBlock VOLCANIC_ROCK = new VolcanicAshBlock("rock");
+	@GameRegistry.ObjectHolder(Revival.MODID + ":volcanic_stairs")
+	public static final FossilStairsBlock VOLCANIC_STAIRS = new FossilStairsBlock(VOLCANIC_BRICK.getDefaultState(), "volcanic_stairs");
+	@GameRegistry.ObjectHolder(Revival.MODID + ":volcanic_double_slab")
+	public static final FossilSlabBlock VOLCANIC_DOUBLESLAB = new VolcanicSlabBlock.Double("volcanic_slab", 1.4F, 7.5F, SoundType.STONE);
+	@GameRegistry.ObjectHolder(Revival.MODID + ":volcanic_slab")
+	public static final FossilSlabBlock VOLCANIC_SINGLESLAB = new VolcanicSlabBlock.Half("volcanic_slab", 1.4F, 7.5F, SoundType.STONE);
+	@GameRegistry.ObjectHolder(Revival.MODID + ":anu_portal")
+	public static final AnuPortalBlock ANU_PORTAL = new AnuPortalBlock();
+	@GameRegistry.ObjectHolder(Revival.MODID + ":anu_statue")
+	public static final AnuStatueBlock ANU_STATUE = new AnuStatueBlock();
+	@GameRegistry.ObjectHolder(Revival.MODID + ":home_portal")
+	public static final HomePortalBlock HOME_PORTAL = new HomePortalBlock();
+	@GameRegistry.ObjectHolder(Revival.MODID + ":anubite_statue")
+	public static final AnubiteStatueBlock ANUBITE_STATUE = new AnubiteStatueBlock();
+	@GameRegistry.ObjectHolder(Revival.MODID + ":ancient_chest")
+	public static final AncientChestBlock ANCIENT_CHEST = new AncientChestBlock();
+	@GameRegistry.ObjectHolder(Revival.MODID + ":sarcophagus")
+	public static final SarcophagusBlock SARCOPHAGUS = new SarcophagusBlock();
+	@GameRegistry.ObjectHolder(Revival.MODID + ":figurine")
+	public static final FigurineBlock FIGURINE = new FigurineBlock();
+	@GameRegistry.ObjectHolder(Revival.MODID + ":amphora_vase")
+	public static final AmphoraVaseBlock AMPHORA_VASE = new AmphoraVaseBlock();
+	@GameRegistry.ObjectHolder(Revival.MODID + ":kylix_vase")
+	public static final KylixVaseBlock KYLIX_VASE = new KylixVaseBlock();
+	@GameRegistry.ObjectHolder(Revival.MODID + ":volute_vase")
+	public static final VoluteVaseBlock VOLUTE_VASE = new VoluteVaseBlock();
+	@GameRegistry.ObjectHolder(Revival.MODID + ":time_machine")
+	public static final TimeMachineBlock TIME_MACHINE = new TimeMachineBlock();
+	@GameRegistry.ObjectHolder(Revival.MODID + ":drum")
+	public static final DrumBlock DRUM = new DrumBlock();
+	@GameRegistry.ObjectHolder(Revival.MODID + ":tar")
+	public static final TarBlock TAR = new TarBlock();
+	@GameRegistry.ObjectHolder(Revival.MODID + ":obsidian_spikes")
+	public static final ObsidianSpikesBlock OBSIDIAN_SPIKES = new ObsidianSpikesBlock();
 
-    public void init() {
-        tar_material = new MaterialTar(MapColor.blackColor);
-        tar_fluid = new FluidTar("tar").setBlock(tar);
-        FluidRegistry.registerFluid(tar_fluid);
-        skullLantern = new BlockFossilSkull(true).setLightLevel(1F);
-        blockanalyzerIdle = new BlockAnalyzer(false);
-        blockanalyzerActive = new BlockAnalyzer(true);
-        blockcultivateIdle = new BlockCultivate(false);
-        blockcultivateActive = new BlockCultivate(true);
-        blockSlimeTrail = new BlockSlimeTrail().setHardness(0.3F).setBlockTextureName("fossil:Slime_Trail").setStepSound(soundTypeSlime).setBlockName(LocalizationStrings.BLOCK_SLIME_TRAIL_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
-        blockworktableIdle = new BlockWorktable(false);
-        blockworktableActive = new BlockWorktable(true);
-        denseSand = new BlockDenseSand();
-        strongGlass = new BlockStrongGlass(Material.glass);
-        feederIdle = new BlockFeeder(false);
-        feederActive = new BlockFeeder(true);
-        blockTimeMachine = new BlockTimeMachine();
-        ferns = new BlockFern();
-        drum = new BlockDrum();
-        blockPermafrost = new BlockPermafrost();
-        blockIcedStone = new BlockIcedStone();
-        blockFossil = new BlockFossil();
-        blockSkull = new BlockFossilSkull(false);
-        palmLog = new BlockPalmLog();
-        palmLeaves = new BlockPalmLeaves();
-        palmSap = new BlockPalmSapling();
-        palaePlanks = new BlockPalaePlanks();
-        palaeDoubleSlab = new BlockPalaeSlab(true);
-        palaeSingleSlab = new BlockPalaeSlab(false);
-        palaeStairs = new BlockFossilStairs(palaePlanks, 0).setBlockName(LocalizationStrings.PALAE_STAIRS_NAME);
-        volcanicAsh = new BlockVolcanicAsh();
-        volcanicRock = new BlockVolcanicRock();
-        volcanicBrick = new BlockVolcanicBrick();
-        tar = new BlockTar();
-        amberOre = new BlockAmberOre();
-        ancientStone = new BlockAncientStone();
-        ancientStonebrick = new BlockAncientStonebrick();
-        ancientWood = new BlockAncientWood();
-        ancientWoodPillar = new BlockAncientWoodPillar();
-        ancientGlass = new BlockAncientGlass(Material.glass);
-        ancientWoodPlate = new BlockAncientWoodPlate();
-        ancientWoodStairs = new BlockFossilStairs(ancientWood, 0).setBlockName(LocalizationStrings.ANCIENT_WOOD_STAIRS_NAME);
-        ancientWoodDoubleSlab = new BlockAncientWoodSlab(true);
-        ancientWoodSingleSlab = new BlockAncientWoodSlab(false);
-        ancientStoneStairs = new BlockFossilStairs(ancientStone, 0).setBlockName(LocalizationStrings.ANCIENT_STONE_STAIRS_NAME);
-        ancientStoneDoubleSlab = new BlockAncientStoneSlab(true);
-        ancientStoneSingleSlab = new BlockAncientStoneSlab(false);
-        obsidianSpikes = new BlockSpikes().setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks).setHardness(50.0F).setResistance(2000.0F).setStepSound(Block.soundTypePiston).setBlockName("obsidianSpikes").setBlockTextureName("fossil:obsidianSpikes");
-        figurineBlock = new BlockFigurine();
-        anuTotem = new BlockAnuStatue();
-        anuPortal = new BlockAnuPortal();
-        homePortal = new BlockHomePortal();
-        anubiteStatue = new BlockAnubiteStatue();
-        ancientChest = new BlockAncientChest().setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
-        blockSifterIdle = new BlockSifter(false);
-        blockSifterActive = new BlockSifter(true);
-        volcanicStairs = new BlockFossilStairs(volcanicBrick, 0).setBlockName(LocalizationStrings.VOLCANIC_STAIRS);
-        volcanicDoubleSlab = new BlockVolcanicSlab(true);
-        volcanicSingleSlab = new BlockVolcanicSlab(false);
-        bubbleMachine = new BlockBubbleMachine();
-        vaseVoluteBlock = new BlockVaseVolute();
-        vaseAmphoraBlock = new BlockVaseAmphora();
-        vaseKylixBlock = new BlockVaseKylix();
-        sarcophagus = new BlockSarcophagus();
-        dillhoffia = new BlockFossilPlant("plants/plant_dillhoffia", 1).setBlockName("plant_dillhoffia").setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
-        sarracina = new BlockFossilTallPlant("plants/plant_sarracina").setBlockName("plant_sarracina").setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
-        cephalotaxus = new BlockFossilPlant("plants/plant_cephalotaxus", 1).setBlockName("plant_cephalotaxus").setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
-        licopodiophyta = new BlockFossilPlant("plants/plant_licopodiophyta", 1).setBlockName("plant_licopodiophyta").setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
-        paleopanax = new BlockFossilTallPlant("plants/plant_paleopanax").setBlockName("plant_paleopanax").setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
-        zamites = new BlockFossilPlant("plants/plant_zamites", 1).setBlockName("plant_zamites").setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
-        bennettitales_small = new BlockFossilPlant("plants/plant_bennettitales_small", 1).setBlockName("plant_bennettitales_small").setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
-        bennettitales_large = new BlockFossilTallPlant("plants/plant_bennettitales_large").setBlockName("plant_bennettitales_large").setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
-        welwitschia = new BlockFossilPlant("plants/plant_welwitschia", 1).setBlockName("plant_welwitschia").setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
-        horsetail_small = new BlockFossilPlant("plants/plant_horsetail_small", 1).setBlockName("plant_horsetail_small").setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
-        horsetail_large = new BlockFossilTallPlant("plants/plant_horsetail_large").setBlockName("plant_horsetail_large").setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
-        mutantPlant = new BlockFossilTallPlant("plants/plant_mutant").setBlockName("plant_mutant").setLightLevel(0.4F).setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
-        vaccinium = new BlockFossilPlant("plants/plant_vaccinium", 1).setBlockName("plant_vaccinium").setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
-        tempskya = new BlockTempskya().setBlockTextureName("fossil:plants/plant_tempskya_1").setBlockName("plant_tempskya").setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
-        crataegus = new BlockFossilTallPlant("plants/plant_crataegus").setBlockName("plant_crataegus").setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
-        osmunda = new BlockFossilPlant("plants/plant_osmunda", 1).setBlockName("plant_osmunda").setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
-        florissantia = new BlockFossilPlant("plants/plant_florissantia", 1).setBlockName("plant_florissantia").setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
-        ephedra = new BlockFossilPlant("plants/plant_ephedra", 1).setBlockName("plant_ephedra").setCreativeTab(FATabRegistry.INSTANCE.tabFBlocks);
-        try {
-            for (Field f : FABlockRegistry.class.getDeclaredFields()) {
-                Object obj = f.get(this);
-                list.add(f.getName());
-                if (obj instanceof Block) {
-                    registerBlock((Block) obj);
-                } else if (obj instanceof Block[]) {
-                    for (Block block : (Block[]) obj) {
-                        registerBlock(block);
-                    }
-                }
-            }
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
-        }
-    }
+	@GameRegistry.ObjectHolder(Revival.MODID + ":palm_log")
+	public static final PalmLogBlock PALM_LOG = new PalmLogBlock();
+	@GameRegistry.ObjectHolder(Revival.MODID + ":palm_leaves")
+	public static final PalmLeavesBlock PALM_LEAVES = new PalmLeavesBlock();
+	@GameRegistry.ObjectHolder(Revival.MODID + ":palm_sapling")
+	public static final PalmSaplingBlock PALM_SAPLING = new PalmSaplingBlock();
+	@GameRegistry.ObjectHolder(Revival.MODID + ":palm_planks")
+	public static final PalmPlanksBlock PALM_PLANKS = new PalmPlanksBlock();
+	@GameRegistry.ObjectHolder(Revival.MODID + ":palm_planks_double_slab")
+	public static final FossilSlabBlock PALM_PLANKS_DOUBLESLAB = new PalmPlanksSlabBlock.Double("palm_planks_slab", 1.4F, 7.5F, SoundType.WOOD);
+	@GameRegistry.ObjectHolder(Revival.MODID + ":palm_planks_slab")
+	public static final FossilSlabBlock PALM_PLANKS_SINGLESLAB = new PalmPlanksSlabBlock.Half("palm_planks_slab", 1.4F, 7.5F, SoundType.WOOD);
+	@GameRegistry.ObjectHolder(Revival.MODID + ":palm_planks_stairs")
+	public static final FossilStairsBlock PALM_PLANKS_STAIRS = new FossilStairsBlock(PALM_PLANKS.getDefaultState(), "palm_stairs");
+	@GameRegistry.ObjectHolder(Revival.MODID + ":palm_fence")
+	public static final FossilFenceBlock PALM_FENCE = new FossilFenceBlock(PALM_PLANKS.getDefaultState(), "palm_fence");
+	@GameRegistry.ObjectHolder(Revival.MODID + ":palm_fence_gate")
+	public static final FossilFenceGateBlock PALM_FENCE_GATE = new FossilFenceGateBlock("palm_fence_gate");
+	@GameRegistry.ObjectHolder(Revival.MODID + ":palm_door")
+	public static final FossilDoorBlock PALM_DOOR = new FossilDoorBlock(PALM_PLANKS.getDefaultState(), "palm_door");
+	@GameRegistry.ObjectHolder(Revival.MODID + ":palm_trapdoor")
+	public static final FossilTrapdoorBlock PALM_TRAPDOOR = new FossilTrapdoorBlock(PALM_PLANKS.getDefaultState(), "palm_trapdoor");
 
-    public void registerBlock(Block block) {
-        String name = block.getUnlocalizedName();
-        String[] strings = name.split("\\.");
-        name = strings[strings.length - 1];
+	@GameRegistry.ObjectHolder(Revival.MODID + ":ancient_wood")
+	public static final AncientWoodBlock ANCIENT_WOOD = new AncientWoodBlock();
+	@GameRegistry.ObjectHolder(Revival.MODID + ":ancient_wood_pillar")
+	public static final AncientWoodPillarBlock ANCIENT_WOOD_PILLAR = new AncientWoodPillarBlock();
+	@GameRegistry.ObjectHolder(Revival.MODID + ":ancient_wood_plate")
+	public static final AncientWoodPlateBlock ANCIENT_WOOD_PLATE = new AncientWoodPlateBlock();
+	@GameRegistry.ObjectHolder(Revival.MODID + ":ancient_wood_stairs")
+	public static final FossilStairsBlock ANCIENT_WOOD_STAIRS = new FossilStairsBlock(ANCIENT_WOOD.getDefaultState(), "ancient_wood_stairs");
+	@GameRegistry.ObjectHolder(Revival.MODID + ":ancient_wood_double_slab")
+	public static final FossilSlabBlock ANCIENT_WOOD_DOUBLESLAB = new AncientWoodSlabBlock.Double("ancient_wood_slab", 1.4F, 7.5F, SoundType.WOOD);
+	@GameRegistry.ObjectHolder(Revival.MODID + ":ancient_wood_slab")
+	public static final FossilSlabBlock ANCIENT_WOOD_SINGLESLAB = new AncientWoodSlabBlock.Half("ancient_wood_slab", 1.4F, 7.5F, SoundType.WOOD);
 
-        if (block instanceof IBlockItem) {
-            GameRegistry.registerBlock(block, ((IBlockItem) block).getItemBlockClass(), name);
-        } else {
-            GameRegistry.registerBlock(block, name);
-        }
-    }
+	@GameRegistry.ObjectHolder(Revival.MODID + ":ferns")
+	public static final FernsBlock FERNS = new FernsBlock();
+	@GameRegistry.ObjectHolder(Revival.MODID + ":dillhoffia")
+	public static final DillhoffiaFlowerBlock DILLHOFFIA_FLOWER = new DillhoffiaFlowerBlock();
+	@GameRegistry.ObjectHolder(Revival.MODID + ":sarracenia")
+	public static final TallFlowerBlock SARRACENIA_FLOWER = new TallFlowerBlock("sarracenia");
+	@GameRegistry.ObjectHolder(Revival.MODID + ":cephalotaxus")
+	public static final ShortFlowerBlock CEPHALOTAXUS_FLOWER = new ShortFlowerBlock("cephalotaxus");
+	@GameRegistry.ObjectHolder(Revival.MODID + ":licopodiophyta")
+	public static final ShortFlowerBlock LICOPODIOPHYTA_FLOWER = new ShortFlowerBlock("licopodiophyta");
+	@GameRegistry.ObjectHolder(Revival.MODID + ":paleopanax")
+	public static final TallFlowerBlock PALEOPANAX_FLOWER = new TallFlowerBlock("paleopanax");
+	@GameRegistry.ObjectHolder(Revival.MODID + ":zamites")
+	public static final ShortFlowerBlock ZAMITES_FLOWER = new ShortFlowerBlock("zamites");
+	@GameRegistry.ObjectHolder(Revival.MODID + ":bennettitales_small")
+	public static final ShortFlowerBlock BENNETTITALES_SMALL_FLOWER = new ShortFlowerBlock("bennettitales_small");
+	@GameRegistry.ObjectHolder(Revival.MODID + ":bennettitales_large")
+	public static final TallFlowerBlock BENNETTITALES_LARGE_FLOWER = new TallFlowerBlock("bennettitales_large");
+	@GameRegistry.ObjectHolder(Revival.MODID + ":welwitschia")
+	public static final ShortFlowerBlock WELWITSCHIA_FLOWER = new ShortFlowerBlock("welwitschia");
+	@GameRegistry.ObjectHolder(Revival.MODID + ":horsetail_small")
+	public static final ShortFlowerBlock HORSETAIL_SMALL_FLOWER = new ShortFlowerBlock("horsetail_small");
+	@GameRegistry.ObjectHolder(Revival.MODID + ":horsetail_large")
+	public static final TallFlowerBlock HORSETAIL_LARGE_FLOWER = new TallFlowerBlock("horsetail_large");
+	@GameRegistry.ObjectHolder(Revival.MODID + ":mutant_plant")
+	public static final TallFlowerBlock MUTANT_FLOWER = new TallFlowerBlock("mutant_plant");
+	@GameRegistry.ObjectHolder(Revival.MODID + ":tempskya")
+	public static final TempskyaBlock TEMPSKYA_FLOWER = new TempskyaBlock();
+	@GameRegistry.ObjectHolder(Revival.MODID + ":vaccinium")
+	public static final ShortFlowerBlock VACCINIUM_FLOWER = new ShortFlowerBlock("vaccinium");
+	@GameRegistry.ObjectHolder(Revival.MODID + ":osmunda")
+	public static final ShortFlowerBlock OSMUNDA_FLOWER = new ShortFlowerBlock("osmunda");
+	@GameRegistry.ObjectHolder(Revival.MODID + ":crataegus")
+	public static final TallFlowerBlock CRATAEGUS_FLOWER = new TallFlowerBlock("crataegus");
+	@GameRegistry.ObjectHolder(Revival.MODID + ":florissantia")
+	public static final ShortFlowerBlock FLORISSANTIA_FLOWER = new ShortFlowerBlock("florissantia");
+	@GameRegistry.ObjectHolder(Revival.MODID + ":ependra")
+	public static final ShortFlowerBlock EPENDRA_FLOWER = new ShortFlowerBlock("ependra");
+	@GameRegistry.ObjectHolder(Revival.MODID + ":fake_obsidian")
+	public static final FakeObsidianBlock FAKE_OBSIDIAN = new FakeObsidianBlock();
+
+
+	public static void init() {
+		FARecipeRegistry.blocks();
+		Blocks.FIRE.setFireInfo(PALM_LOG, 5, 5);
+		Blocks.FIRE.setFireInfo(PALM_SAPLING, 15, 15);
+		Blocks.FIRE.setFireInfo(PALM_LEAVES, 30, 60);
+		Blocks.FIRE.setFireInfo(TAR, 300, 5);
+		Blocks.FIRE.setFireInfo(PALM_PLANKS, 5, 20);
+		Blocks.FIRE.setFireInfo(PALM_PLANKS_SINGLESLAB, 5, 20);
+		Blocks.FIRE.setFireInfo(PALM_PLANKS_DOUBLESLAB, 5, 20);
+		Blocks.FIRE.setFireInfo(PALM_PLANKS_STAIRS, 5, 20);
+		Blocks.FIRE.setFireInfo(PALM_FENCE, 5, 20);
+		Blocks.FIRE.setFireInfo(PALM_FENCE_GATE, 5, 20);
+		Blocks.FIRE.setFireInfo(ANCIENT_WOOD, 5, 20);
+		Blocks.FIRE.setFireInfo(ANCIENT_WOOD_PILLAR, 5, 20);
+		Blocks.FIRE.setFireInfo(ANCIENT_WOOD_SINGLESLAB, 5, 20);
+		Blocks.FIRE.setFireInfo(ANCIENT_WOOD_DOUBLESLAB, 5, 20);
+		Blocks.FIRE.setFireInfo(ANCIENT_STONE_STAIRS, 5, 20);
+
+	}
+
+
+	public static void registerBlock(RegistryEvent.Register<Block> event, Block block) {
+		String name = block.getTranslationKey().substring("tile.".length());
+		if (block.getRegistryName() == null) {
+			ResourceLocation identifier = new ResourceLocation(Revival.MODID, name);
+			block.setRegistryName(identifier);
+		}
+		event.getRegistry().register(block);
+		BLOCKS.add(block);
+
+	}
 }

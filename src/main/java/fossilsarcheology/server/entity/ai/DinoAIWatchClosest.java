@@ -1,17 +1,18 @@
 package fossilsarcheology.server.entity.ai;
 
-import fossilsarcheology.server.entity.EntityPrehistoric;
+
+import fossilsarcheology.server.entity.prehistoric.EntityPrehistoric;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.player.EntityPlayer;
 
 public class DinoAIWatchClosest extends EntityAIBase {
-	private EntityPrehistoric prehsitoric;
 	protected Entity closestEntity;
-	private float maxDistanceForPlayer;
+	private final EntityPrehistoric prehsitoric;
+	private final float maxDistanceForPlayer;
 	private int lookTime;
-	private float chance;
-	private Class watchedClass;
+	private final float chance;
+	private final Class watchedClass;
 
 	public DinoAIWatchClosest(EntityPrehistoric prehsitoric, Class watchedClass, float distance) {
 		this.prehsitoric = prehsitoric;
@@ -29,7 +30,8 @@ public class DinoAIWatchClosest extends EntityAIBase {
 		this.setMutexBits(2);
 	}
 
-	public boolean shouldExecute() {
+	@Override
+    public boolean shouldExecute() {
 		if (this.prehsitoric.isSleeping()) {
 			return false;
 		}
@@ -42,28 +44,32 @@ public class DinoAIWatchClosest extends EntityAIBase {
 			}
 
 			if (this.watchedClass == EntityPlayer.class) {
-				this.closestEntity = this.prehsitoric.worldObj.getClosestPlayerToEntity(this.prehsitoric, (double) this.maxDistanceForPlayer);
+				this.closestEntity = this.prehsitoric.world.getClosestPlayerToEntity(this.prehsitoric, (double) this.maxDistanceForPlayer);
 			} else {
-				this.closestEntity = this.prehsitoric.worldObj.findNearestEntityWithinAABB(this.watchedClass, this.prehsitoric.boundingBox.expand((double) this.maxDistanceForPlayer, 3.0D, (double) this.maxDistanceForPlayer), this.prehsitoric);
+				this.closestEntity = this.prehsitoric.world.findNearestEntityWithinAABB(this.watchedClass, this.prehsitoric.getEntityBoundingBox().expand((double) this.maxDistanceForPlayer, 3.0D, (double) this.maxDistanceForPlayer), this.prehsitoric);
 			}
 
 			return this.closestEntity != null;
 		}
 	}
 
-	public boolean continueExecuting() {
-		return !this.closestEntity.isEntityAlive() ? false : (this.prehsitoric.getDistanceSqToEntity(this.closestEntity) > (double) (this.maxDistanceForPlayer * this.maxDistanceForPlayer) ? false : this.lookTime > 0);
+	@Override
+    public boolean shouldContinueExecuting() {
+		return this.closestEntity.isEntityAlive() && (!(this.prehsitoric.getDistanceSq(this.closestEntity) > (double) (this.maxDistanceForPlayer * this.maxDistanceForPlayer)) && this.lookTime > 0);
 	}
 
-	public void startExecuting() {
+	@Override
+    public void startExecuting() {
 		this.lookTime = 40 + this.prehsitoric.getRNG().nextInt(40);
 	}
 
-	public void resetTask() {
+	@Override
+    public void resetTask() {
 		this.closestEntity = null;
 	}
 
-	public void updateTask() {
+	@Override
+    public void updateTask() {
 		this.prehsitoric.getLookHelper().setLookPosition(this.closestEntity.posX, this.closestEntity.posY + (double) this.closestEntity.getEyeHeight(), this.closestEntity.posZ, 10.0F, (float) this.prehsitoric.getVerticalFaceSpeed());
 		--this.lookTime;
 	}

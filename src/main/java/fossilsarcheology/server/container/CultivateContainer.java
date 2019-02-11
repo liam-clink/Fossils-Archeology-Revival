@@ -1,187 +1,89 @@
 package fossilsarcheology.server.container;
 
 import fossilsarcheology.server.block.entity.TileEntityCultivate;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
-import net.minecraft.inventory.SlotFurnace;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
 
-public class CultivateContainer extends Container {
-	public static final int INPUT_END = 0, FUEL = 1, OUTPUT_END = 2;
-	private TileEntityCultivate furnace;
-	private int cookTime = 0;
-	private int burnTime = 0;
-	private int itemBurnTime = 0;
-	private int dna = 0;
+public class CultivateContainer extends BlockEntityContainer {
+    private static final int FUEL_TIME_ID = 0;
+    private static final int TOTAL_FUEL_TIME_ID = 1;
+    private static final int CULTIVATE_TIME_ID = 2;
+    private static final int DNA_TYPE_ID = 3;
 
-	public CultivateContainer(InventoryPlayer var1, TileEntity var2) {
-		this.furnace = (TileEntityCultivate) var2;
-		this.addSlotToContainer(new Slot(this.furnace, 0, 49, 20)); // input
-		this.addSlotToContainer(new Slot(this.furnace, 1, 81, 54)); // fuel
-		this.addSlotToContainer(new SlotFurnace(var1.player, this.furnace, 2, 116, 21)); // output
-		int var3;
+    private final TileEntityCultivate entity;
 
-		// inventory
-		for (var3 = 0; var3 < 3; ++var3) {
-			for (int var4 = 0; var4 < 9; ++var4) {
-				this.addSlotToContainer(new Slot(var1, var4 + var3 * 9 + 9, 8 + var4 * 18, 84 + var3 * 18));
-			}
-		}
+    public int fuelTime;
+    public int totalFuelTime;
+    public int cultivationTime;
+    public int dnaType;
 
-		// hotbar
-		for (var3 = 0; var3 < 9; ++var3) {
-			this.addSlotToContainer(new Slot(var1, var3, 8 + var3 * 18, 142));
-		}
-	}
+    public CultivateContainer(InventoryPlayer playerInventory, TileEntityCultivate entity) {
+        super(entity);
+        this.entity = entity;
 
-	@Override
-	public void addCraftingToCrafters(ICrafting var1) {
-		super.addCraftingToCrafters(var1);
-		var1.sendProgressBarUpdate(this, 0, this.furnace.furnaceCookTime);
-		var1.sendProgressBarUpdate(this, 1, this.furnace.furnaceBurnTime);
-		var1.sendProgressBarUpdate(this, 2, this.furnace.currentItemBurnTime);
-		var1.sendProgressBarUpdate(this, 3, this.furnace.getDNAType());
-	}
+        IItemHandler itemHandler = entity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+        if (itemHandler == null) {
+            return;
+        }
 
-	/**
-	 * Updates crafting matrix; called from onCraftMatrixChanged. Args: none
-	 */
-	@Override
-	public void detectAndSendChanges() {
-		super.detectAndSendChanges();
+        this.addSlotToContainer(new SlotItemHandlerPredicate(itemHandler, 0, 49, 20, stack -> !TileEntityCultivate.getCultivationOutput(stack).isEmpty()));
+        this.addSlotToContainer(new SlotItemHandlerPredicate(itemHandler, 1, 81, 54, stack -> TileEntityCultivate.getItemFuelTime(stack) > 0));
+        this.addSlotToContainer(new SlotItemHandlerPredicate(itemHandler, 2, 116, 21, stack -> false));
 
-		for (int var1 = 0; var1 < this.crafters.size(); ++var1) {
-			ICrafting var2 = (ICrafting) this.crafters.get(var1);
+        for (int column = 0; column < 3; ++column) {
+            for (int row = 0; row < 9; ++row) {
+                this.addSlotToContainer(new Slot(playerInventory, row + column * 9 + 9, 8 + row * 18, 84 + column * 18));
+            }
+        }
 
-			if (this.cookTime != this.furnace.furnaceCookTime) {
-				var2.sendProgressBarUpdate(this, 0, this.furnace.furnaceCookTime);
-			}
+        for (int column = 0; column < 9; ++column) {
+            this.addSlotToContainer(new Slot(playerInventory, column, 8 + column * 18, 142));
+        }
+    }
 
-			if (this.burnTime != this.furnace.furnaceBurnTime) {
-				var2.sendProgressBarUpdate(this, 1, this.furnace.furnaceBurnTime);
-			}
+    @Override
+    public void detectAndSendChanges() {
+        int newFuelTime = this.entity.fuelTime;
+        int newTotalFuelTime = this.entity.totalFuelTime;
+        int newCultivationTime = this.entity.cultivationTime;
+        int newDnaType = this.entity.getDNAType();
+        if (newFuelTime != this.fuelTime) {
+            this.listeners.forEach(listener -> listener.sendWindowProperty(this, FUEL_TIME_ID, newFuelTime));
+            this.fuelTime = newFuelTime;
+        }
+        if (newTotalFuelTime != this.totalFuelTime) {
+            this.listeners.forEach(listener -> listener.sendWindowProperty(this, TOTAL_FUEL_TIME_ID, newTotalFuelTime));
+            this.totalFuelTime = newTotalFuelTime;
+        }
+        if (newCultivationTime != this.cultivationTime) {
+            this.listeners.forEach(listener -> listener.sendWindowProperty(this, CULTIVATE_TIME_ID, newCultivationTime));
+            this.cultivationTime = newCultivationTime;
+        }
+        if (newDnaType != this.dnaType) {
+            this.listeners.forEach(listener -> listener.sendWindowProperty(this, DNA_TYPE_ID, newDnaType));
+            this.dnaType = newDnaType;
+        }
+        super.detectAndSendChanges();
+    }
 
-			if (this.itemBurnTime != this.furnace.currentItemBurnTime) {
-				var2.sendProgressBarUpdate(this, 2, this.furnace.currentItemBurnTime);
-			}
-
-			if (this.dna != this.furnace.getDNAType()) {
-				var2.sendProgressBarUpdate(this, 3, this.furnace.getDNAType());
-			}
-		}
-
-		this.cookTime = this.furnace.furnaceCookTime;
-		this.burnTime = this.furnace.furnaceBurnTime;
-		this.itemBurnTime = this.furnace.currentItemBurnTime;
-		this.dna = this.furnace.getDNAType();
-	}
-
-	@Override
-	public void updateProgressBar(int var1, int var2) {
-		if (var1 == 0) {
-			this.furnace.furnaceCookTime = var2;
-		}
-
-		if (var1 == 1) {
-			this.furnace.furnaceBurnTime = var2;
-		}
-
-		if (var1 == 2) {
-			this.furnace.currentItemBurnTime = var2;
-		}
-	}
-
-	@Override
-	public boolean canInteractWith(EntityPlayer var1) {
-		return this.furnace.isUseableByPlayer(var1);
-	}
-
-	/**
-	 * Called when a player shift-clicks on a slot. You must override this or
-	 * you will crash when someone does that.
-	 */
-	@Override
-	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2) {
-		ItemStack itemstack = null;
-		Slot slot = (Slot) this.inventorySlots.get(par2);
-
-		if (slot != null && slot.getHasStack()) {
-			ItemStack itemstack1 = slot.getStack();
-			itemstack = itemstack1.copy();
-
-			if (par2 > INPUT_END && par2 < OUTPUT_END + 1 && par2 != FUEL) // If
-			// slot
-			// is
-			// equal
-			// toOutput.
-			{
-				// Place INTO inventory, only check output.
-				if (!this.mergeItemStack(itemstack1, OUTPUT_END + 1, OUTPUT_END + 36 + 1, true)) // 13
-				// is
-				// first
-				// slot
-				// after
-				// the
-				// outputs,
-				// 49
-				// is
-				// last
-				// inventory
-				// slot
-				{
-					return null;
-				}
-
-				slot.onSlotChange(itemstack1, itemstack);
-			}
-			// itemstack is in player inventory, try to place in appropriate
-			// furnace slot
-			else if (par2 > INPUT_END + 1) // if it's not in the INPUT
-			{
-				// if it can be smelted, place in the input slots
-				if (itemstack1 != null) {
-					// try to place in either Input slot; add 1 to final input
-					// slot because mergeItemStack uses < index
-					if (!this.mergeItemStack(itemstack1, 0, INPUT_END + 1, false)) {
-						return null;
-					}
-				}
-			}
-			// item in player's inventory, but not in action bar
-			else if (par2 >= OUTPUT_END + 1 && par2 < OUTPUT_END + 28) {
-				// place in action bar
-				if (!this.mergeItemStack(itemstack1, OUTPUT_END + 28, OUTPUT_END + 37, false)) {
-					return null;
-				}
-			}
-			// item in action bar - place in player inventory
-			else if (par2 >= OUTPUT_END + 28 && par2 < OUTPUT_END + 37 && !this.mergeItemStack(itemstack1, OUTPUT_END + 1, OUTPUT_END + 28, false)) {
-				return null;
-			}
-
-			// In one of the output slots; try to place in player inventory /
-			// action bar
-			else if (!this.mergeItemStack(itemstack1, OUTPUT_END + 1, OUTPUT_END + 37, false)) {
-				return null;
-			}
-
-			if (itemstack1.stackSize == 0) {
-				slot.putStack(null);
-			} else {
-				slot.onSlotChanged();
-			}
-
-			if (itemstack1.stackSize == itemstack.stackSize) {
-				return null;
-			}
-
-			slot.onPickupFromSlot(par1EntityPlayer, itemstack1);
-		}
-
-		return itemstack;
-	}
+    @Override
+    public void updateProgressBar(int id, int data) {
+        super.updateProgressBar(id, data);
+        switch (id) {
+            case FUEL_TIME_ID:
+                this.fuelTime = data;
+                break;
+            case TOTAL_FUEL_TIME_ID:
+                this.totalFuelTime = data;
+                break;
+            case CULTIVATE_TIME_ID:
+                this.cultivationTime = data;
+                break;
+            case DNA_TYPE_ID:
+                this.dnaType = data;
+                break;
+        }
+    }
 }

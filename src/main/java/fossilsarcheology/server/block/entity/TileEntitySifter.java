@@ -1,176 +1,151 @@
 package fossilsarcheology.server.block.entity;
 
-import fossilsarcheology.Revival;
-import fossilsarcheology.server.block.BlockSifter;
-import fossilsarcheology.server.block.FABlockRegistry;
-import fossilsarcheology.server.handler.LocalizationStrings;
+import fossilsarcheology.server.block.SifterBlock;
 import fossilsarcheology.server.item.FAItemRegistry;
+import net.minecraft.block.BlockConcretePowder;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
-import net.minecraft.item.Item;
+import net.minecraft.inventory.ItemStackHelper;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ITickable;
+import net.minecraft.util.NonNullList;
 
+import javax.annotation.Nullable;
 import java.util.Random;
 
-public class TileEntitySifter extends TileEntity implements IInventory, ISidedInventory {
+public class TileEntitySifter extends TileEntity implements IInventory, ISidedInventory, ITickable {
 
-    private static final int[] slots_bottom = new int[]{1, 2, 3, 4, 5}; // output
-    private static final int[] slots_top = new int[]{0};// fuel
+    private static final int[] slots_bottom = new int[] { 1, 2, 3, 4, 5 }; // output
+    private static final int[] slots_top = new int[] { 0 };// fuel
     public int sifterBurnTime = 0;
     public int currentItemBurnTime = 0;
     public int sifterCookTime = 0;
     private String customName;
-    private ItemStack[] sifterItemStacks;
-    private int RawIndex = -1;
-    private int SpaceIndex = -1;
+    private NonNullList<ItemStack> stacks = NonNullList.withSize(6, ItemStack.EMPTY);
+    private int rawIndex = -1;
+    private int spaceIndex = -1;
 
-    public TileEntitySifter() {
-        sifterItemStacks = new ItemStack[6];
-    }
-
-    private static int getItemBurnTime(ItemStack var1) {
+    private static int getItemBurnTime(ItemStack stack) {
         return 100;
     }
 
-    /**
-     * Return true if item is a fuel source (getItemBurnTime() > 0).
-     */
-    public static boolean isItemFuel(ItemStack par0ItemStack) {
-        return getItemBurnTime(par0ItemStack) > 0;
+    public static boolean isItemFuel(ItemStack stack) {
+        return getItemBurnTime(stack) > 0;
     }
 
-    /**
-     * Returns the number of slots in the inventory.
-     */
     @Override
     public int getSizeInventory() {
-        return this.sifterItemStacks.length;
+        return this.stacks.size();
     }
 
-    /**
-     * Returns the stack in slot i
-     */
     @Override
-    public ItemStack getStackInSlot(int var1) {
-        return this.sifterItemStacks[var1];
+    public boolean isEmpty() {
+        for (ItemStack stack : this.stacks) {
+            if (!stack.isEmpty()) {
+                return false;
+            }
+        }
+        return true;
     }
 
-    /**
-     * Removes from an inventory slot (first arg) up to a specified number
-     * (second arg) of items and returns them in a new stack.
-     */
     @Override
-    public ItemStack decrStackSize(int var1, int var2) {
-        if (this.sifterItemStacks[var1] != null) {
-            ItemStack var3;
+    public ItemStack getStackInSlot(int slot) {
+        return this.stacks.get(slot);
+    }
 
-            if (this.sifterItemStacks[var1].stackSize <= var2) {
-                var3 = this.sifterItemStacks[var1];
-                this.sifterItemStacks[var1] = null;
+    @Override
+    public ItemStack decrStackSize(int slot, int count) {
+        if (!this.stacks.get(slot).isEmpty()) {
+            if (this.stacks.get(slot).getCount() <= count) {
+                ItemStack var3 = this.stacks.get(slot);
+                this.stacks.set(slot, ItemStack.EMPTY);
                 return var3;
             } else {
-                var3 = this.sifterItemStacks[var1].splitStack(var2);
-
-                if (this.sifterItemStacks[var1].stackSize == 0) {
-                    this.sifterItemStacks[var1] = null;
+                ItemStack var3 = this.stacks.get(slot).splitStack(count);
+                if (this.stacks.get(slot).getCount() == 0) {
+                    this.stacks.set(slot, ItemStack.EMPTY);
                 }
-
                 return var3;
             }
-        } else {
-            return null;
+        }
+        return ItemStack.EMPTY;
+    }
+
+    @Nullable
+    @Override
+    public ItemStack removeStackFromSlot(int index) {
+        return ItemStackHelper.getAndRemove(this.stacks, index);
+    }
+
+    @Override
+    public void setInventorySlotContents(int slot, ItemStack stack) {
+        this.stacks.set(slot, stack);
+        if (!stack.isEmpty() && stack.getCount() > this.getInventoryStackLimit()) {
+            stack.setCount(this.getInventoryStackLimit());
         }
     }
 
-    /**
-     * Sets the given item stack to the specified slot in the inventory (can be
-     * crafting or armor sections).
-     */
-    @Override
-    public void setInventorySlotContents(int var1, ItemStack var2) {
-        this.sifterItemStacks[var1] = var2;
-
-        if (var2 != null && var2.stackSize > this.getInventoryStackLimit()) {
-            var2.stackSize = this.getInventoryStackLimit();
-        }
-    }
-
-    @Override
-    public String getInventoryName() {
-        return this.hasCustomInventoryName() ? this.customName : "tile." + LocalizationStrings.BLOCK_SIFTER_IDLE + ".name";
-    }
-
-    @Override
-    public boolean hasCustomInventoryName() {
-        return this.customName != null && this.customName.length() > 0;
-    }
-
-    /**
-     * Reads a tile entity from NBT.
-     */
     @Override
     public void readFromNBT(NBTTagCompound var1) {
         super.readFromNBT(var1);
-        NBTTagList var2 = var1.getTagList("Items", 10);
-        this.sifterItemStacks = new ItemStack[this.getSizeInventory()];
-
-        for (int var3 = 0; var3 < var2.tagCount(); ++var3) {
-            NBTTagCompound var4 = var2.getCompoundTagAt(var3);
-            byte var5 = var4.getByte("Slot");
-
-            if (var5 >= 0 && var5 < this.sifterItemStacks.length) {
-                this.sifterItemStacks[var5] = ItemStack.loadItemStackFromNBT(var4);
-            }
-        }
+        this.stacks = NonNullList.withSize(this.getSizeInventory(), ItemStack.EMPTY);
+        ItemStackHelper.loadAllItems(var1, this.stacks);
 
         this.sifterBurnTime = var1.getShort("BurnTime");
         this.sifterCookTime = var1.getShort("CookTime");
         this.currentItemBurnTime = 100;
-
-        if (var1.hasKey("CustomName")) {
-            this.customName = var1.getString("CustomName");
-        }
     }
 
-    /**
-     * Writes a tile entity to NBT.
-     */
     @Override
-    public void writeToNBT(NBTTagCompound var1) {
+    public NBTTagCompound writeToNBT(NBTTagCompound var1) {
         super.writeToNBT(var1);
         var1.setShort("BurnTime", (short) this.sifterBurnTime);
         var1.setShort("CookTime", (short) this.sifterCookTime);
-        NBTTagList var2 = new NBTTagList();
-
-        for (int var3 = 0; var3 < this.sifterItemStacks.length; ++var3) {
-            if (this.sifterItemStacks[var3] != null) {
-                NBTTagCompound var4 = new NBTTagCompound();
-                var4.setByte("Slot", (byte) var3);
-                this.sifterItemStacks[var3].writeToNBT(var4);
-                var2.appendTag(var4);
-            }
-        }
-
-        if (this.hasCustomInventoryName()) {
-            var1.setString("CustomName", this.customName);
-        }
-
-        var1.setTag("Items", var2);
+        ItemStackHelper.saveAllItems(var1, this.stacks);
+        return var1;
     }
 
-    /**
-     * Returns the maximum stack size for a inventory slot. Seems to always be
-     * 64, possibly will be extended. *Isn't this more of a set than a get?*
-     */
+    @Override
+    public SPacketUpdateTileEntity getUpdatePacket() {
+        NBTTagCompound tag = new NBTTagCompound();
+        this.writeToNBT(tag);
+        return new SPacketUpdateTileEntity(pos, 1, tag);
+    }
+
+    @Override
+    public void onDataPacket(NetworkManager netManager, net.minecraft.network.play.server.SPacketUpdateTileEntity packet) {
+        readFromNBT(packet.getNbtCompound());
+    }
+
     @Override
     public int getInventoryStackLimit() {
         return 64;
+    }
+
+    @Override
+    public boolean isUsableByPlayer(EntityPlayer player) {
+        return true;
+    }
+
+    @Override
+    public void openInventory(EntityPlayer player) {
+
+    }
+
+    @Override
+    public void closeInventory(EntityPlayer player) {
+
     }
 
     public int getSiftProgressScaled(int var1) {
@@ -189,24 +164,15 @@ public class TileEntitySifter extends TileEntity implements IInventory, ISidedIn
         return this.sifterBurnTime > 0;
     }
 
-	/*
-     * Where the items that they player can receive are added
-	 */
-
-    /**
-     * Allows the entity to update its state. Overridden in most subclasses,
-     * e.g. the mob spawner uses this to count ticks and creates a new spawn
-     * inside its implementation.
-     */
     @Override
-    public void updateEntity() {
+    public void update() {
         boolean var1 = this.sifterBurnTime > 0;
         boolean var2 = false;
         if (this.sifterBurnTime > 0) {
             --this.sifterBurnTime;
         }
 
-        if (!this.worldObj.isRemote) {
+        if (!this.world.isRemote) {
             if (this.sifterBurnTime == 0 && this.canSmelt()) {
                 this.currentItemBurnTime = this.sifterBurnTime = 100;
 
@@ -229,7 +195,7 @@ public class TileEntitySifter extends TileEntity implements IInventory, ISidedIn
 
             if (var1 != this.sifterBurnTime > 0) {
                 var2 = true;
-                BlockSifter.updateFurnaceBlockState(this.sifterBurnTime > 0, this.worldObj, this.xCoord, this.yCoord, this.zCoord);
+                SifterBlock.setState(this.sifterBurnTime > 0, this.world, this.pos);
             }
         }
 
@@ -239,198 +205,174 @@ public class TileEntitySifter extends TileEntity implements IInventory, ISidedIn
     }
 
     private boolean canSmelt() {
-        this.SpaceIndex = -1;
-        this.RawIndex = -1;
-        int var1;
-
-        for (var1 = 0; var1 < 1; ++var1) {
-            if (this.sifterItemStacks[var1] != null) {
-                Item input = this.sifterItemStacks[var1].getItem();
-
-                ItemStack itemstack = this.sifterItemStacks[var1];
-
-                if ((input == Item.getItemFromBlock(Blocks.sand)) || (input == Item.getItemFromBlock(Blocks.dirt)) || (input == Item.getItemFromBlock(Blocks.gravel)) || (input == Item.getItemFromBlock(Blocks.clay)) || (input == Item.getItemFromBlock(FABlockRegistry.INSTANCE.volcanicAsh))) {
-                    this.RawIndex = var1;
+        this.spaceIndex = -1;
+        this.rawIndex = -1;
+        for (int var1 = 0; var1 < 1; ++var1) {
+            if (!this.stacks.get(var1).isEmpty()) {
+                EnumSiftType siftType = getSiftTypeFromStack(this.stacks.get(var1));
+                if (siftType != EnumSiftType.NONE) {
+                    this.rawIndex = var1;
                     break;
                 }
             }
         }
-
-        if (this.RawIndex == -1) {
+        if (this.rawIndex == -1) {
             return false;
         } else {
-            for (var1 = 5; var1 > 0; --var1) {
-                if (this.sifterItemStacks[var1] == null) {
-                    this.SpaceIndex = var1;
+            for (int var1 = 5; var1 > 0; --var1) {
+                if (this.stacks.get(var1).isEmpty()) {
+                    this.spaceIndex = var1;
                     break;
                 }
             }
-
-            return this.SpaceIndex != -1 && this.RawIndex != -1;
+            return this.spaceIndex != -1 && this.rawIndex != -1;
         }
     }
 
     public void smeltItem() {
         if (this.canSmelt()) {
-            ItemStack result = null;
+            ItemStack result = ItemStack.EMPTY;
             int randomloot = (new Random()).nextInt(100);
             double random = (new Random()).nextInt(100);
             int var3;
-
-            if (this.sifterItemStacks[this.RawIndex].getItem() == Item.getItemFromBlock(Blocks.sand) || this.sifterItemStacks[this.RawIndex].getItem() == Item.getItemFromBlock(Blocks.dirt) || this.sifterItemStacks[this.RawIndex].getItem() == Item.getItemFromBlock(Blocks.gravel) || this.sifterItemStacks[this.RawIndex].getItem() == Item.getItemFromBlock(Blocks.clay) || this.sifterItemStacks[this.RawIndex].getItem() == Item.getItemFromBlock(FABlockRegistry.INSTANCE.volcanicAsh)
-
-                    ) {
+            EnumSiftType siftType = getSiftTypeFromStack(this.stacks.get(this.rawIndex));
+            if (siftType != EnumSiftType.GROUND) {
                 if (randomloot < 80) {
-                    if (Revival.RELEASE_TYPE.enableDebugging()) {
-                        Revival.printDebug("Sifter no result: " + randomloot);
-                    }
                     if (random < 75) {
-                        result = null;
+                        result = ItemStack.EMPTY;
                     } else {
-                        result = this.sifterItemStacks[this.SpaceIndex];
+                        result = this.stacks.get(this.spaceIndex);
                     }
                 } else {
-                    if (Revival.RELEASE_TYPE.enableDebugging()) {
-                        Revival.printDebug("Sifter successful loot: " + randomloot);
-                    }
-                    if (random < 0.4) {
-                        result = new ItemStack(FAItemRegistry.INSTANCE.DominicanAmber, 1);
+                    if (random < 1) {
+                        result = new ItemStack(FAItemRegistry.DOMINICAN_AMBER, 1);
                     } else if (random < 15) {
-                        result = new ItemStack(FAItemRegistry.INSTANCE.brokenSapling, 1);
+                        result = new ItemStack(FAItemRegistry.PLANT_FOSSIL, 1);
                     } else if (random < 30) {
-                        result = new ItemStack(Items.potato, 1);
+                        result = new ItemStack(Items.POTATO, 1);
                     } else if (random < 40) {
-                        result = new ItemStack(Items.carrot, 1);
+                        result = new ItemStack(Items.CARROT, 1);
                     } else if (random < 60) {
-                        result = new ItemStack(Items.dye, 1, 15);
+                        result = new ItemStack(Items.DYE, 1, 15);
                     } else if (random < 80) {
-                        result = new ItemStack(Blocks.sand, 1);
+                        result = new ItemStack(Blocks.SAND, 1);
                     } else if (random < 90) {
-                        result = new ItemStack(FAItemRegistry.INSTANCE.fernSeed, 2);
+                        result = new ItemStack(FAItemRegistry.FERN_SEED, 2);
                     } else if (random < 95) {
-                        result = new ItemStack(FAItemRegistry.INSTANCE.potteryShards, 3);
+                        result = new ItemStack(FAItemRegistry.POTTERY_SHARD, 3);
                     } else if (random <= 100) {
-                        int i = (new Random()).nextInt(15);
-                        // for
-                        // the
-                        // sapling
-                        Item i0 = null;
-
-                        if (i == 0) {
-                            i0 = FAItemRegistry.INSTANCE.brokenSapling;
-                        } else {
-                            i0 = FAItemRegistry.INSTANCE.biofossil;
-                        }
-
-                        result = new ItemStack(i0, 1);
+                        result = new ItemStack(FAItemRegistry.BIOFOSSIL, 1);
                     }
                 }
             }
-            if (result != null) {
-                for (int slots = 1; slots < 5; slots++) {
-                    ItemStack stackInSlot = this.sifterItemStacks[slots];
-                    if (stackInSlot != null) {
-                        if (stackInSlot.isItemEqual(result) && stackInSlot.stackSize + result.stackSize < 64) {
-                            stackInSlot.stackSize += result.stackSize;
-                            if (this.sifterItemStacks[this.RawIndex].stackSize > 1) {
-                                this.sifterItemStacks[this.RawIndex].stackSize--;
-                            } else {
-                                this.sifterItemStacks[this.RawIndex] = null;
-                            }
-                            break;
-                        }
-                    } else if (stackInSlot == null) {
-                        this.sifterItemStacks[slots] = result;
-                        if (this.sifterItemStacks[this.RawIndex].stackSize > 1) {
-                            this.sifterItemStacks[this.RawIndex].stackSize--;
+            for (int slots = 1; slots < 5; slots++) {
+                ItemStack stackInSlot = this.stacks.get(slots);
+                if (!stackInSlot.isEmpty()) {
+                    if (stackInSlot.isItemEqual(result) && stackInSlot.getCount() + result.getCount() < 64) {
+                        stackInSlot.grow(result.getCount());
+                        if (this.stacks.get(this.rawIndex).getCount() > 1) {
+                            this.stacks.get(this.rawIndex).shrink(1);
                         } else {
-                            this.sifterItemStacks[this.RawIndex] = null;
+                            this.stacks.set(this.rawIndex, ItemStack.EMPTY);
                         }
                         break;
                     }
-                }
-            } else {
-                if (this.sifterItemStacks[this.RawIndex].stackSize > 1) {
-                    this.sifterItemStacks[this.RawIndex].stackSize--;
-                } else {
-                    this.sifterItemStacks[this.RawIndex] = null;
+                } else if (stackInSlot.isEmpty()) {
+                    this.stacks.set(slots, result);
+                    this.stacks.get(this.rawIndex).shrink(1);
+                    break;
                 }
             }
         }
     }
 
-    /**
-     * Do not make give this method the name canInteractWith because it clashes
-     * with Container
-     */
-    @Override
-    public boolean isUseableByPlayer(EntityPlayer var1) {
-        return this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord) == this && var1.getDistanceSq((double) this.xCoord + 0.5D, (double) this.yCoord + 0.5D, (double) this.zCoord + 0.5D) <= 64.0D;
-    }
-
-    /**
-     * Returns true if automation is allowed to insert the given stack (ignoring
-     * stack size) into the given slot.
-     */
     public boolean isStackValidForSlot(int par1, ItemStack par2ItemStack) {
         return par1 <= 8 && (par1 >= 8 || isItemFuel(par2ItemStack));
     }
 
-    /**
-     * When some containers are closed they call this on each slot, then drop
-     * whatever it returns as an EntityItem - like when you close a workbench
-     * GUI.
-     */
-    @Override
-    public ItemStack getStackInSlotOnClosing(int var1) {
-        return null;
-    }
-
-    /**
-     * Returns true if automation is allowed to insert the given stack (ignoring
-     * stack size) into the given slot.
-     */
     @Override
     public boolean isItemValidForSlot(int par1, ItemStack par2ItemStack) {
         return par1 == 0 && isItemFuel(par2ItemStack);
     }
 
-    /**
-     * Returns an array containing the indices of the slots that can be accessed
-     * by automation on the given side of this block.
-     */
     @Override
-    public int[] getAccessibleSlotsFromSide(int par1) {
-        return par1 == 1 ? slots_top : slots_bottom;
-    }
-
-    /**
-     * Returns true if automation can insert the given item in the given slot
-     * from the given side. Args: Slot, item, side
-     */
-    @Override
-    public boolean canInsertItem(int par1, ItemStack par2ItemStack, int par3) {
-        return this.isItemValidForSlot(par1, par2ItemStack);
-    }
-
-    /**
-     * Returns true if automation can extract the given item in the given slot
-     * from the given side. Args: Slot, item, side
-     */
-    @Override
-    public boolean canExtractItem(int par1, ItemStack par2ItemStack, int par3) {
-        return par3 != 0 || par1 != 1 || par2ItemStack.getItem() == Items.bucket;
+    public int getField(int id) {
+        switch (id) {
+            case 0:
+                return this.sifterCookTime;
+            case 1:
+                return this.sifterBurnTime;
+            case 2:
+                return this.currentItemBurnTime;
+            default:
+                return 0;
+        }
     }
 
     @Override
-    public void openInventory() {
-        // TODO Auto-generated method stub
-
+    public void setField(int id, int value) {
+        switch (id) {
+            case 0:
+                this.sifterCookTime = value;
+                break;
+            case 1:
+                this.sifterBurnTime = value;
+                break;
+            case 2:
+                this.currentItemBurnTime = value;
+                break;
+        }
     }
 
     @Override
-    public void closeInventory() {
-        // TODO Auto-generated method stub
+    public int getFieldCount() {
+        return 3;
+    }
 
+    @Override
+    public void clear() {
+        this.stacks.clear();
+    }
+
+    @Override
+    public int[] getSlotsForFace(EnumFacing side) {
+        return side == EnumFacing.UP ? slots_top : slots_bottom;
+    }
+
+    @Override
+    public boolean canInsertItem(int index, ItemStack itemStackIn, EnumFacing direction) {
+        return this.isItemValidForSlot(index, itemStackIn);
+    }
+
+    @Override
+    public boolean canExtractItem(int index, ItemStack stack, EnumFacing direction) {
+        return direction != EnumFacing.UP || index != 1 || stack.getItem() == Items.BUCKET;
+    }
+
+    @Override
+    public String getName() {
+        return "tile.sifter.name";
+    }
+
+    @Override
+    public boolean hasCustomName() {
+        return false;
+    }
+
+    public enum EnumSiftType{
+        NONE, GROUND, SAND;
+    }
+
+    public static EnumSiftType getSiftTypeFromStack(ItemStack stack){
+        if(stack.getItem() instanceof ItemBlock){
+            IBlockState block = ((ItemBlock) stack.getItem()).getBlock().getDefaultState();
+            if(block.getMaterial() == Material.SAND && !(block.getBlock() instanceof BlockConcretePowder)){
+                return EnumSiftType.SAND;
+            }
+            if(block.getMaterial() == Material.GROUND){
+                return EnumSiftType.GROUND;
+            }
+        }
+        return EnumSiftType.NONE;
     }
 }

@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "normal": {
+      "model": "fossil:amber_ore"
+    }
+  }
+}

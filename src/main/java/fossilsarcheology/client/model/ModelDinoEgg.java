@@ -6,10 +6,10 @@ import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.minecraft.entity.Entity;
 
 public class ModelDinoEgg extends AdvancedModelBase {
-	public AdvancedModelRenderer Egg1;
-	public AdvancedModelRenderer Egg2;
-	public AdvancedModelRenderer Egg3;
-	public AdvancedModelRenderer Egg4;
+	public final AdvancedModelRenderer Egg1;
+	public final AdvancedModelRenderer Egg2;
+	public final AdvancedModelRenderer Egg3;
+	public final AdvancedModelRenderer Egg4;
 
 	public ModelDinoEgg() {
 		this.textureWidth = 64;
@@ -38,9 +38,10 @@ public class ModelDinoEgg extends AdvancedModelBase {
 		this.Egg1.render(f5);
 	}
 
-	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
+	@Override
+    public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
 		this.resetToDefaultPose();
-		if(((EntityDinosaurEgg)entity).getBirthTick() > ((EntityDinosaurEgg)entity).totalHatchTime * 0.9F){
+		if (((EntityDinosaurEgg) entity).getBirthTick() > ((EntityDinosaurEgg) entity).totalHatchTime * 0.9F) {
 			this.swing(Egg1, 0.3F, 0.5F, false, 0.25F, 0, entity.ticksExisted, 1);
 			this.flap(Egg1, 0.3F, 0.5F, true, 0.25F, 0, entity.ticksExisted, 1);
 			this.bob(Egg1, 0.3F, 0.9F, true, entity.ticksExisted, 1);

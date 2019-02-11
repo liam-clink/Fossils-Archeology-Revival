@@ -1,28 +1,48 @@
 package fossilsarcheology.client.render.entity;
 
+import fossilsarcheology.Revival;
 import fossilsarcheology.client.model.ModelToyBall;
-import fossilsarcheology.server.entity.toy.EntityToyBall;
-import net.minecraft.block.BlockColored;
+import fossilsarcheology.server.entity.utility.EntityToyBall;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.passive.EntitySheep;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
-import org.lwjgl.opengl.GL11;
 
-public class RenderToyBall extends RenderLiving {
+public class RenderToyBall extends RenderLiving<EntityToyBall> {
 
-    public RenderToyBall() {
-        super(new ModelToyBall(), 0.3F);
-    }
+	private static final ResourceLocation TEXTURE = new ResourceLocation(Revival.MODID, "textures/model/toy/ball.png");
 
-    protected void preRenderCallback(EntityLivingBase living, float f) {
-        int i = BlockColored.func_150032_b(((EntityToyBall) living).getColor());
-        GL11.glColor3f(EntitySheep.fleeceColorTable[i][0], EntitySheep.fleeceColorTable[i][1], EntitySheep.fleeceColorTable[i][2]);
-    }
+	private static final float[][] COLORS = new float[][]{
+			{1.0F, 1.0F, 1.0F},
+			{0.85F, 0.5F, 0.2F},
+			{0.7F, 0.3F, 0.85F},
+			{0.4F, 0.6F, 0.85F},
+			{0.9F, 0.9F, 0.2F},
+			{0.5F, 0.8F, 0.1F},
+			{0.95F, 0.5F, 0.65F},
+			{0.3F, 0.3F, 0.3F},
+			{0.6F, 0.6F, 0.6F},
+			{0.3F, 0.5F, 0.6F},
+			{0.5F, 0.25F, 0.7F},
+			{0.2F, 0.3F, 0.7F},
+			{0.4F, 0.3F, 0.2F},
+			{0.4F, 0.5F, 0.2F},
+			{0.6F, 0.2F, 0.2F},
+			{0.1F, 0.1F, 0.1F}
+	};
 
-    @Override
-    protected ResourceLocation getEntityTexture(Entity entity) {
-        return new ResourceLocation("fossil:textures/model/toy/ball.png");
-    }
+	public RenderToyBall(RenderManager manager) {
+		super(manager, new ModelToyBall(), 0.3F);
+	}
+
+	@Override
+	protected void preRenderCallback(EntityToyBall ball, float f) {
+		int color = ~ball.getColor() & 15;
+		GlStateManager.color(COLORS[color][0], COLORS[color][1], COLORS[color][2]);
+	}
+
+	@Override
+	protected ResourceLocation getEntityTexture(EntityToyBall entity) {
+		return TEXTURE;
+	}
 }

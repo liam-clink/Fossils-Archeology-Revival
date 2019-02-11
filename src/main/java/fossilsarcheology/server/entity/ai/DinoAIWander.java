@@ -1,52 +1,93 @@
 package fossilsarcheology.server.entity.ai;
 
-import fossilsarcheology.server.entity.EntityPrehistoric;
+import javax.annotation.Nullable;
+
+import fossilsarcheology.server.entity.prehistoric.EntityPrehistoric;
+import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.RandomPositionGenerator;
-import net.minecraft.util.Vec3;
+import net.minecraft.util.math.Vec3d;
 
 public class DinoAIWander extends EntityAIBase {
-	private EntityPrehistoric prehistoric;
-	private double xPosition;
-	private double yPosition;
-	private double zPosition;
-	private double speed;
+    protected final EntityPrehistoric entity;
+    protected double x;
+    protected double y;
+    protected double z;
+    protected final double speed;
+    protected int executionChance;
+    protected boolean mustUpdate;
 
-	public DinoAIWander(EntityPrehistoric prehistoric, double speed) {
-		this.prehistoric = prehistoric;
-		this.speed = speed;
-		this.setMutexBits(1);
-	}
+    public DinoAIWander(EntityPrehistoric creatureIn, double speedIn) {
+        this(creatureIn, speedIn, 30);
+    }
 
-	public boolean shouldExecute() {
-		if (this.prehistoric.isMovementBlocked()) {
-			return false;
-		}
-		if (this.prehistoric.getAge() >= 100) {
-			return false;
-		} else if (this.prehistoric.getRNG().nextInt(120) != 0) {
-			return false;
-		} else {
-			Vec3 vec3 = RandomPositionGenerator.findRandomTarget(
-					this.prehistoric, 10, 7);
+    public DinoAIWander(EntityPrehistoric creatureIn, double speedIn, int chance) {
+        this.entity = creatureIn;
+        this.speed = speedIn;
+        this.executionChance = chance;
+        this.setMutexBits(1);
+    }
 
-			if (vec3 == null) {
-				return false;
-			} else {
-				this.xPosition = vec3.xCoord;
-				this.yPosition = vec3.yCoord;
-				this.zPosition = vec3.zCoord;
-				return true;
-			}
-		}
-	}
+    /**
+     * Returns whether the EntityAIBase should begin execution.
+     */
+    public boolean shouldExecute() {
+        if(!entity.shouldWander || entity.isMovementBlocked()){
+            return false;
+        }
+        if (!this.mustUpdate) {
+            if (this.entity.getIdleTime() >= 100) {
+                return false;
+            }
 
-	public boolean continueExecuting() {
-		return !this.prehistoric.getNavigator().noPath();
-	}
+            if (this.entity.getRNG().nextInt(this.executionChance) != 0) {
+                return false;
+            }
+        }
 
-	public void startExecuting() {
-		this.prehistoric.getNavigator().tryMoveToXYZ(this.xPosition,
-				this.yPosition, this.zPosition, this.speed);
-	}
+        Vec3d vec3d = this.getPosition();
+
+        if (vec3d == null) {
+            return false;
+        } else {
+            this.x = vec3d.x;
+            this.y = vec3d.y;
+            this.z = vec3d.z;
+            this.mustUpdate = false;
+            return true;
+        }
+    }
+
+    @Nullable
+    protected Vec3d getPosition() {
+        return RandomPositionGenerator.findRandomTarget(this.entity, 10, 7);
+    }
+
+    /**
+     * Returns whether an in-progress EntityAIBase should continue executing
+     */
+    public boolean shouldContinueExecuting() {
+        return !this.entity.getNavigator().noPath();
+    }
+
+    /**
+     * Execute a one shot task or start executing a continuous task
+     */
+    public void startExecuting() {
+        this.entity.getNavigator().tryMoveToXYZ(this.x, this.y, this.z, this.speed);
+    }
+
+    /**
+     * Makes task to bypass chance
+     */
+    public void makeUpdate() {
+        this.mustUpdate = true;
+    }
+
+    /**
+     * Changes task random possibility for execution
+     */
+    public void setExecutionChance(int newchance) {
+        this.executionChance = newchance;
+    }
 }

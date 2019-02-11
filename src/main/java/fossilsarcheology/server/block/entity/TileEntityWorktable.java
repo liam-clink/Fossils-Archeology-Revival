@@ -1,170 +1,139 @@
 package fossilsarcheology.server.block.entity;
 
-import fossilsarcheology.server.block.BlockWorktable;
 import fossilsarcheology.server.block.FABlockRegistry;
-import fossilsarcheology.server.handler.LocalizationStrings;
+import fossilsarcheology.server.block.VaseBlock;
+import fossilsarcheology.server.block.WorktableBlock;
 import fossilsarcheology.server.item.FAItemRegistry;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ITickable;
+import net.minecraft.util.NonNullList;
 
-public class TileEntityWorktable extends TileEntity implements IInventory, ISidedInventory {
+import javax.annotation.Nullable;
 
-    private static final int[] slots_top = new int[]{}; // input
-    private static final int[] slots_bottom = new int[]{}; // output
-    private static final int[] slots_sides = new int[]{};// fuel
+public class TileEntityWorktable extends TileEntity implements IInventory, ISidedInventory, ITickable {
+    private static final int[] slots_top = new int[] {1}; // input
+    private static final int[] slots_bottom = new int[] {2}; // output
+    private static final int[] slots_sides = new int[] {0};// fuel
     public int furnaceBurnTime = 0;
     public int currentItemBurnTime = 0;
     public int furnaceCookTime = 0;
-    private ItemStack[] furnaceItemStacks = new ItemStack[3];
+    private NonNullList<ItemStack> stacks = NonNullList.withSize(3, ItemStack.EMPTY);
     private String customName;
 
-    /**
-     * Returns the number of slots in the inventory.
-     */
     @Override
     public int getSizeInventory() {
-        return this.furnaceItemStacks.length;
+        return this.stacks.size();
     }
 
-    /**
-     * Returns the stack in slot i
-     */
+    @Override
+    public boolean isEmpty() {
+        for (ItemStack itemstack : this.stacks) {
+            if (!itemstack.isEmpty()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     @Override
     public ItemStack getStackInSlot(int var1) {
-        return this.furnaceItemStacks[var1];
+        return this.stacks.get(var1);
     }
 
-    /**
-     * Removes from an inventory slot (first arg) up to a specified number
-     * (second arg) of items and returns them in a new stack.
-     */
+    @Nullable
     @Override
-    public ItemStack decrStackSize(int var1, int var2) {
-        if (this.furnaceItemStacks[var1] != null) {
-            ItemStack var3;
-
-            if (this.furnaceItemStacks[var1].stackSize <= var2) {
-                var3 = this.furnaceItemStacks[var1];
-                this.furnaceItemStacks[var1] = null;
-                return var3;
-            } else {
-                var3 = this.furnaceItemStacks[var1].splitStack(var2);
-
-                if (this.furnaceItemStacks[var1].stackSize == 0) {
-                    this.furnaceItemStacks[var1] = null;
-                }
-
-                return var3;
-            }
-        } else {
-            return null;
-        }
+    public ItemStack decrStackSize(int slot, int amount) {
+        return ItemStackHelper.getAndSplit(this.stacks, slot, amount);
     }
 
-    /**
-     * Sets the given item stack to the specified slot in the inventory (can be
-     * crafting or armor sections).
-     */
-    @Override
-    public void setInventorySlotContents(int var1, ItemStack var2) {
-        this.furnaceItemStacks[var1] = var2;
-
-        if (var2 != null && var2.stackSize > this.getInventoryStackLimit()) {
-            var2.stackSize = this.getInventoryStackLimit();
-        }
-    }
-
-    /**
-     * Returns the name of the inventory.
-     */
-    public String getInvName() {
-        return this.isInvNameLocalized() ? this.customName : "tile." + LocalizationStrings.BLOCK_ANALYZER_IDLE_NAME + ".name";
-    }
-
-    /**
-     * If this returns false, the inventory name will be used as an unlocalized
-     * name, and translated into the player's language. Otherwise it will be
-     * used directly.
-     */
-    public boolean isInvNameLocalized() {
-        return this.customName != null && this.customName.length() > 0;
-    }
-
-    /**
-     * Sets the custom display name to use when opening a GUI linked to this
-     * tile entity.
-     */
-    public void setGuiDisplayName(String par1Str) {
-        this.customName = par1Str;
-    }
-
-    /**
-     * Reads a tile entity from NBT.
-     */
     @Override
     public void readFromNBT(NBTTagCompound var1) {
         super.readFromNBT(var1);
-        NBTTagList var2 = var1.getTagList("Items", 10);
-        this.furnaceItemStacks = new ItemStack[this.getSizeInventory()];
-
-        for (int var3 = 0; var3 < var2.tagCount(); ++var3) {
-            NBTTagCompound var4 = var2.getCompoundTagAt(var3);
-            byte var5 = var4.getByte("Slot");
-
-            if (var5 >= 0 && var5 < this.furnaceItemStacks.length) {
-                this.furnaceItemStacks[var5] = ItemStack.loadItemStackFromNBT(var4);
-            }
-        }
+        this.stacks = NonNullList.withSize(this.getSizeInventory(), ItemStack.EMPTY);
+        ItemStackHelper.loadAllItems(var1, this.stacks);
 
         this.furnaceBurnTime = var1.getShort("BurnTime");
         this.furnaceCookTime = var1.getShort("CookTime");
-        this.currentItemBurnTime = this.getItemBurnTime(this.furnaceItemStacks[1]);
+        this.currentItemBurnTime = this.getItemBurnTime(this.stacks.get(1));
 
         if (var1.hasKey("CustomName")) {
             this.customName = var1.getString("CustomName");
         }
     }
 
-    /**
-     * Writes a tile entity to NBT.
-     */
-    @Override
-    public void writeToNBT(NBTTagCompound var1) {
-        super.writeToNBT(var1);
-        var1.setShort("BurnTime", (short) this.furnaceBurnTime);
-        var1.setShort("CookTime", (short) this.furnaceCookTime);
-        NBTTagList var2 = new NBTTagList();
-
-        for (int var3 = 0; var3 < this.furnaceItemStacks.length; ++var3) {
-            if (this.furnaceItemStacks[var3] != null) {
-                NBTTagCompound var4 = new NBTTagCompound();
-                var4.setByte("Slot", (byte) var3);
-                this.furnaceItemStacks[var3].writeToNBT(var4);
-                var2.appendTag(var4);
-            }
-        }
-
-        if (this.isInvNameLocalized()) {
-            var1.setString("CustomName", this.customName);
-        }
-
-        var1.setTag("Items", var2);
-    }
-
-    /**
-     * Returns the maximum stack size for a inventory slot. Seems to always be
-     * 64, possibly will be extended. *Isn't this more of a set than a get?*
-     */
     @Override
     public int getInventoryStackLimit() {
         return 64;
+    }
+
+    @Override
+    public boolean isUsableByPlayer(EntityPlayer player) {
+        return true;
+    }
+
+    @Override
+    public void openInventory(EntityPlayer player) {
+
+    }
+
+    @Override
+    public void closeInventory(EntityPlayer player) {
+
+    }
+
+    @Override
+    public boolean isItemValidForSlot(int index, ItemStack stack) {
+        return true;
+    }
+
+    @Override
+    public int getField(int id) {
+        switch (id) {
+            case 0:
+                return this.furnaceCookTime;
+            case 1:
+                return this.furnaceBurnTime;
+            case 2:
+                return this.currentItemBurnTime;
+            default:
+                return 0;
+        }
+    }
+
+    @Override
+    public void setField(int id, int value) {
+        switch (id) {
+            case 0:
+                this.furnaceCookTime = value;
+                break;
+            case 1:
+                this.furnaceBurnTime = value;
+                break;
+            case 2:
+                this.currentItemBurnTime = value;
+                break;
+        }
+    }
+
+    @Override
+    public int getFieldCount() {
+        return 3;
+    }
+
+    @Override
+    public void clear() {
+        this.stacks.clear();
     }
 
     public int getCookProgressScaled(int var1) {
@@ -179,17 +148,24 @@ public class TileEntityWorktable extends TileEntity implements IInventory, ISide
         return this.furnaceBurnTime * var1 / this.currentItemBurnTime;
     }
 
-    public boolean isBurning() {
-        return this.furnaceBurnTime > 0;
+    private int timeToSmelt() {
+        if (this.stacks.get(0).isEmpty()) {
+            return 3000;
+        }
+
+        if (this.stacks.get(0).getItem() == FAItemRegistry.BROKEN_HELMET) {
+            return 3000;
+        }
+
+        if (this.stacks.get(0).getItem() == FAItemRegistry.BROKEN_SWORD) {
+            return 3000;
+        }
+
+        return 300;
     }
 
-    /**
-     * Allows the entity to update its state. Overridden in most subclasses,
-     * e.g. the mob spawner uses this to count ticks and creates a new spawn
-     * inside its implementation.
-     */
     @Override
-    public void updateEntity() {
+    public void update() {
         boolean var1 = this.furnaceBurnTime > 0;
         boolean var2 = false;
 
@@ -197,22 +173,22 @@ public class TileEntityWorktable extends TileEntity implements IInventory, ISide
             --this.furnaceBurnTime;
         }
 
-        if (!this.worldObj.isRemote) {
+        if (!this.world.isRemote) {
             if (this.furnaceBurnTime == 0 && this.canSmelt()) {
-                this.currentItemBurnTime = this.furnaceBurnTime = this.getItemBurnTime(this.furnaceItemStacks[1]);
+                this.currentItemBurnTime = this.furnaceBurnTime = this.getItemBurnTime(this.stacks.get(1));
 
                 if (this.furnaceBurnTime > 0) {
                     var2 = true;
 
-                    if (this.furnaceItemStacks[1] != null) {
-                        if (this.furnaceItemStacks[1].getItem().hasContainerItem(null)) {
-                            this.furnaceItemStacks[1] = new ItemStack(this.furnaceItemStacks[1].getItem().getContainerItem());
+                    if (!this.stacks.get(1).isEmpty()) {
+                        if (this.stacks.get(1).getItem().hasContainerItem(null)) {
+                            this.stacks.set(1, new ItemStack(this.stacks.get(1).getItem().getContainerItem()));
                         } else {
-                            --this.furnaceItemStacks[1].stackSize;
+                            this.stacks.get(1).shrink(1);
                         }
 
-                        if (this.furnaceItemStacks[1].stackSize == 0) {
-                            this.furnaceItemStacks[1] = null;
+                        if (this.stacks.get(1).getCount() == 0) {
+                            this.stacks.set(1, ItemStack.EMPTY);
                         }
                     }
                 }
@@ -232,7 +208,7 @@ public class TileEntityWorktable extends TileEntity implements IInventory, ISide
 
             if (var1 != this.furnaceBurnTime > 0) {
                 var2 = true;
-                BlockWorktable.updateFurnaceBlockState(this.furnaceBurnTime > 0, this.worldObj, this.xCoord, this.yCoord, this.zCoord);
+                WorktableBlock.setState(this.furnaceBurnTime > 0, this.world, pos);
             }
         }
 
@@ -241,107 +217,47 @@ public class TileEntityWorktable extends TileEntity implements IInventory, ISide
         }
     }
 
-    private boolean canSmelt() {
-        if (this.furnaceItemStacks[0] == null) {
-            return false;
-        } else {
-            // ItemStack var1 =
-            // this.CheckSmelt(this.furnaceItemStacks[0].getItem());
-            ItemStack var1 = this.CheckSmelt(this.furnaceItemStacks[0]);
-            return var1 != null && (this.furnaceItemStacks[2] == null || (this.furnaceItemStacks[2].isItemEqual(var1) && (this.furnaceItemStacks[2].stackSize < this.getInventoryStackLimit() && this.furnaceItemStacks[2].stackSize < this.furnaceItemStacks[2].getMaxStackSize() || this.furnaceItemStacks[2].stackSize < var1.getMaxStackSize())));
-        }
+    public boolean isBurning() {
+        return this.furnaceBurnTime > 0;
     }
 
-    public void smeltItem() {
-        if (this.canSmelt()) {
-            ItemStack var1 = this.CheckSmelt(this.furnaceItemStacks[0]);
-
-            if (this.furnaceItemStacks[2] == null) {
-                if (var1 != null) {
-                    this.furnaceItemStacks[2] = var1.copy();
-                }
-            } else if (this.furnaceItemStacks[2] == var1) {
-                this.furnaceItemStacks[2].stackSize += var1.stackSize;
-            }
-
-            if (this.furnaceItemStacks[0].getItem().hasContainerItem(null)) {
-                this.furnaceItemStacks[0] = new ItemStack(this.furnaceItemStacks[0].getItem().getContainerItem());
-            } else {
-                --this.furnaceItemStacks[0].stackSize;
-            }
-
-            if (this.furnaceItemStacks[0].stackSize <= 0) {
-                this.furnaceItemStacks[0] = null;
-            }
-        }
-    }
-
-    private int getItemBurnTime(ItemStack itemstack) {
-        if (itemstack == null) {
-            return 0;
-        } else {
-            Item var2 = itemstack.getItem();
-            return var2 == FAItemRegistry.INSTANCE.relic ? 300 : 0;
-        }
-    }
-
-    /**
-     * Do not make give this method the name canInteractWith because it clashes
-     * with Container
-     */
-    @Override
-    public boolean isUseableByPlayer(EntityPlayer var1) {
-        return this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord) == this && var1.getDistanceSq((double) this.xCoord + 0.5D, (double) this.yCoord + 0.5D, (double) this.zCoord + 0.5D) <= 64.0D;
-    }
-
-	/*
-     * private ItemStack CheckSmelt(int var1) { return var1 ==
-	 * Revival.brokenSword ? new ItemStack(Revival.ancientSword) : (var1 ==
-	 * Revival.brokenhelmet ? new ItemStack(Revival.ancienthelmet) : (var1 ==
-	 * Revival.gemAxe ? new ItemStack(Revival.gemAxe) : (var1 ==
-	 * Revival.gemPickaxe ? new ItemStack(Revival.gemPickaxe) : (var1 ==
-	 * Revival.gemSword ? new ItemStack(Revival.gemSword) : (var1 ==
-	 * Revival.gemHoe ? new ItemStack(Revival.gemHoe) : (var1 ==
-	 * Revival.gemShovel ? new ItemStack(Revival.gemShovel) : null)))))); }
-	 */
-
-    private ItemStack CheckSmelt(ItemStack itemstack) {
+    private ItemStack checkSmelt(ItemStack itemstack) {
         ItemStack output = null;
 
-        if (itemstack.getItem() == FAItemRegistry.INSTANCE.brokenSword) {
-            return new ItemStack(FAItemRegistry.INSTANCE.ancientSword);
+        if (itemstack.getItem() == FAItemRegistry.BROKEN_SWORD) {
+            return new ItemStack(FAItemRegistry.ANCIENT_SWORD);
         }
 
-        if (itemstack.getItem() == FAItemRegistry.INSTANCE.brokenhelmet) {
-            return new ItemStack(FAItemRegistry.INSTANCE.ancienthelmet);
+        if (itemstack.getItem() == FAItemRegistry.BROKEN_HELMET) {
+            return new ItemStack(FAItemRegistry.ANCIENT_HELMET);
         }
 
-        if (itemstack.getItem() == FAItemRegistry.INSTANCE.ancientSword) {
-            output = new ItemStack(FAItemRegistry.INSTANCE.ancientSword);
+        if (itemstack.getItem() == FAItemRegistry.ANCIENT_SWORD) {
+            output = new ItemStack(FAItemRegistry.ANCIENT_SWORD);
         }
 
-        if (itemstack.getItem() == FAItemRegistry.INSTANCE.ancienthelmet) {
-            output = new ItemStack(FAItemRegistry.INSTANCE.ancienthelmet);
+        if (itemstack.getItem() == FAItemRegistry.ANCIENT_HELMET) {
+            output = new ItemStack(FAItemRegistry.ANCIENT_HELMET);
         }
 
-        if (itemstack.getItem() == FAItemRegistry.INSTANCE.gemAxe) {
-            output = new ItemStack(FAItemRegistry.INSTANCE.gemAxe);
+        if (itemstack.getItem() == FAItemRegistry.SCARAB_AXE) {
+            output = new ItemStack(FAItemRegistry.SCARAB_AXE);
         }
 
-        if (itemstack.getItem() == FAItemRegistry.INSTANCE.gemPickaxe) {
-            output = new ItemStack(FAItemRegistry.INSTANCE.gemPickaxe);
+        if (itemstack.getItem() == FAItemRegistry.SCARAB_PICKAXE) {
+            output = new ItemStack(FAItemRegistry.SCARAB_PICKAXE);
         }
 
-        if (itemstack.getItem() == FAItemRegistry.INSTANCE.gemSword) {
-            output = new ItemStack(FAItemRegistry.INSTANCE.gemSword);
+        if (itemstack.getItem() == FAItemRegistry.SCARAB_SWORD) {
+            output = new ItemStack(FAItemRegistry.SCARAB_SWORD);
         }
 
-        if (itemstack.getItem() == FAItemRegistry.INSTANCE.gemHoe) {
-            output = new ItemStack(FAItemRegistry.INSTANCE.gemHoe);
+        if (itemstack.getItem() == FAItemRegistry.SCARAB_HOE) {
+            output = new ItemStack(FAItemRegistry.SCARAB_HOE);
         }
 
-        if (itemstack.getItem() == FAItemRegistry.INSTANCE.gemShovel) {
-            output = new ItemStack(FAItemRegistry.INSTANCE.gemShovel);
+        if (itemstack.getItem() == FAItemRegistry.SCARAB_SHOVEL) {
+            output = new ItemStack(FAItemRegistry.SCARAB_SHOVEL);
         }
 
         if (output != null) {
@@ -354,24 +270,24 @@ public class TileEntityWorktable extends TileEntity implements IInventory, ISide
             return output;
         }
 
-        if (itemstack.getItem() == FAItemRegistry.INSTANCE.woodjavelin) {
-            output = new ItemStack(FAItemRegistry.INSTANCE.woodjavelin, 1);
+        if (itemstack.getItem() == FAItemRegistry.WOODEN_JAVELIN) {
+            output = new ItemStack(FAItemRegistry.WOODEN_JAVELIN, 1);
         }
 
-        if (itemstack.getItem() == FAItemRegistry.INSTANCE.stonejavelin) {
-            output = new ItemStack(FAItemRegistry.INSTANCE.stonejavelin, 1);
+        if (itemstack.getItem() == FAItemRegistry.STONE_JAVELIN) {
+            output = new ItemStack(FAItemRegistry.STONE_JAVELIN, 1);
         }
 
-        if (itemstack.getItem() == FAItemRegistry.INSTANCE.ironjavelin) {
-            output = new ItemStack(FAItemRegistry.INSTANCE.ironjavelin, 1);
+        if (itemstack.getItem() == FAItemRegistry.IRON_JAVELIN) {
+            output = new ItemStack(FAItemRegistry.IRON_JAVELIN, 1);
         }
 
-        if (itemstack.getItem() == FAItemRegistry.INSTANCE.goldjavelin) {
-            output = new ItemStack(FAItemRegistry.INSTANCE.goldjavelin, 1);
+        if (itemstack.getItem() == FAItemRegistry.GOLD_JAVELIN) {
+            output = new ItemStack(FAItemRegistry.GOLD_JAVELIN, 1);
         }
 
-        if (itemstack.getItem() == FAItemRegistry.INSTANCE.diamondjavelin) {
-            output = new ItemStack(FAItemRegistry.INSTANCE.diamondjavelin, 1);
+        if (itemstack.getItem() == FAItemRegistry.DIAMOND_JAVELIN) {
+            output = new ItemStack(FAItemRegistry.DIAMOND_JAVELIN, 1);
         }
 
         if (output != null) {
@@ -384,8 +300,8 @@ public class TileEntityWorktable extends TileEntity implements IInventory, ISide
             return output;
         }
 
-        if (itemstack.getItem() == FAItemRegistry.INSTANCE.ancientJavelin) {
-            output = new ItemStack(FAItemRegistry.INSTANCE.ancientJavelin, 1);
+        if (itemstack.getItem() == FAItemRegistry.ANCIENT_JAVELIN) {
+            output = new ItemStack(FAItemRegistry.ANCIENT_JAVELIN, 1);
 
             if (itemstack.getItemDamage() > 3) {
                 output.setItemDamage(itemstack.getItemDamage() - 3);
@@ -396,108 +312,132 @@ public class TileEntityWorktable extends TileEntity implements IInventory, ISide
             return output;
         }
 
-        if (itemstack.getItem() == new ItemStack(FABlockRegistry.INSTANCE.vaseKylixBlock).getItem() && itemstack.getItemDamage() == 0) {
-            output = new ItemStack(FABlockRegistry.INSTANCE.vaseKylixBlock, itemstack.stackSize, 1);
+        if (itemstack.getItem() == new ItemStack(FABlockRegistry.KYLIX_VASE).getItem() && itemstack.getItemDamage() == 0) {
+            output = new ItemStack(FABlockRegistry.KYLIX_VASE, 1, 1);
             return output;
         }
 
-        if (itemstack.getItem() == new ItemStack(FABlockRegistry.INSTANCE.vaseAmphoraBlock).getItem() && itemstack.getItemDamage() == 0) {
-            output = new ItemStack(FABlockRegistry.INSTANCE.vaseAmphoraBlock, itemstack.stackSize, 1);
+        if (itemstack.getItem() == new ItemStack(FABlockRegistry.AMPHORA_VASE).getItem() && itemstack.getItemDamage() == 0) {
+            output = new ItemStack(FABlockRegistry.AMPHORA_VASE, 1, 1);
             return output;
         }
 
-        if (itemstack.getItem() == new ItemStack(FABlockRegistry.INSTANCE.vaseVoluteBlock).getItem() && itemstack.getItemDamage() == 0) {
-            output = new ItemStack(FABlockRegistry.INSTANCE.vaseVoluteBlock, itemstack.stackSize, 1);
+        if (itemstack.getItem() == new ItemStack(FABlockRegistry.VOLUTE_VASE).getItem() && itemstack.getItemDamage() == 0) {
+            output = new ItemStack(FABlockRegistry.VOLUTE_VASE, 1, 1);
             return output;
         }
 
         return null;
     }
 
-    private int timeToSmelt() {
-        if (this.furnaceItemStacks[0] == null) {
-            return 3000;
+    public void smeltItem() {
+        if (this.canSmelt()) {
+            ItemStack var1 = this.checkSmelt(this.stacks.get(0));
+
+            if (this.stacks.get(2).isEmpty()) {
+                if (var1 != null) {
+                    this.stacks.set(2, var1.copy());
+                }
+            } else if (this.stacks.get(2).getItem() == var1.getItem()) {
+                this.stacks.get(2).grow(var1.getCount());
+            }
+
+            if (this.stacks.get(0).getItem().hasContainerItem(ItemStack.EMPTY)) {
+                this.stacks.set(0, new ItemStack(this.stacks.get(0).getItem().getContainerItem()));
+            } else {
+                this.stacks.get(0).shrink(1);
+            }
+
+            if (this.stacks.get(0).getCount() <= 0) {
+                this.stacks.set(0, ItemStack.EMPTY);
+            }
         }
+    }
 
-        if (this.furnaceItemStacks[0].getItem() == FAItemRegistry.INSTANCE.brokenSword) {
-            return 3000;
+    private boolean canSmelt() {
+        if (this.stacks.get(0).isEmpty()) {
+            return false;
+        } else {
+            // ItemStack var1 =
+            // this.CheckSmelt(this.stacks.get(0).getItem());
+            ItemStack var1 = this.checkSmelt(this.stacks.get(0));
+            return var1 != null && !var1.isEmpty() && (this.stacks.get(2).isEmpty() || (this.stacks.get(2).isItemEqual(var1) && (this.stacks.get(2).getCount() < this.getInventoryStackLimit() && this.stacks.get(2).getCount() < this.stacks.get(2).getMaxStackSize() || this.stacks.get(2).getCount() < var1.getMaxStackSize())));
         }
+    }
 
-        if (this.furnaceItemStacks[0].getItem() == FAItemRegistry.INSTANCE.brokenhelmet) {
-            return 3000;
+    private int getItemBurnTime(ItemStack itemstack) {
+        if (itemstack.isEmpty()) {
+            return 0;
+        } else {
+            Item var2 = itemstack.getItem();
+            if(this.stacks.get(0).getItem() instanceof VaseBlock.VaseItemBlock){
+                return var2 == FAItemRegistry.POTTERY_SHARD ? 300 : 0;
+            }
+            return var2 == FAItemRegistry.RELIC_SCRAP ? 300 : 0;
         }
-
-        return 300;
-    }
-
-    public void openChest() {
-    }
-
-    public void closeChest() {
-    }
-
-    public int getSizeInventorySide(ForgeDirection var1) {
-        return 1;
-    }
-
-    public int getStartInventorySide(ForgeDirection var1) {
-        return var1 == ForgeDirection.DOWN ? 1 : (var1 == ForgeDirection.UP ? 0 : 2);
-    }
-
-    /**
-     * When some containers are closed they call this on each slot, then drop
-     * whatever it returns as an EntityItem - like when you close a workbench
-     * GUI.
-     */
-    @Override
-    public ItemStack getStackInSlotOnClosing(int var1) {
-        return null;
     }
 
     @Override
-    public int[] getAccessibleSlotsFromSide(int var1) {
-        return slots_top;
+    public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
+        super.writeToNBT(nbt);
+        nbt.setShort("BurnTime", (short) this.furnaceBurnTime);
+        nbt.setShort("CookTime", (short) this.furnaceCookTime);
+        ItemStackHelper.saveAllItems(nbt, this.stacks);
+
+        if (this.customName != null) {
+            nbt.setString("CustomName", this.customName);
+        }
+        return nbt;
     }
 
     @Override
-    public boolean canInsertItem(int i, ItemStack itemstack, int j) {
-        // TODO Auto-generated method stub
-        return false;
+    public ItemStack removeStackFromSlot(int index) {
+        return ItemStackHelper.getAndRemove(this.stacks, index);
     }
 
     @Override
-    public boolean canExtractItem(int i, ItemStack itemstack, int j) {
-        // TODO Auto-generated method stub
-        return false;
+    public void setInventorySlotContents(int index, ItemStack stack) {
+        this.stacks.set(index, stack);
+
+        if (!stack.isEmpty() && stack.getCount() > this.getInventoryStackLimit()) {
+            stack.setCount(this.getInventoryStackLimit());
+        }
     }
 
     @Override
-    public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-        // TODO Auto-generated method stub
-        return false;
+    public int[] getSlotsForFace(EnumFacing side) {
+        return side == EnumFacing.DOWN ? slots_bottom : (side == EnumFacing.UP ? slots_sides : slots_top);
     }
 
     @Override
-    public String getInventoryName() {
-        // TODO Auto-generated method stub
-        return null;
+    public boolean canInsertItem(int index, ItemStack stack, EnumFacing direction) {
+        return this.isItemValidForSlot(index, stack);
     }
 
     @Override
-    public boolean hasCustomInventoryName() {
-        // TODO Auto-generated method stub
-        return false;
+    public boolean canExtractItem(int index, ItemStack stack, EnumFacing direction) {
+        return direction != EnumFacing.DOWN || index != 1 || stack.getItem() == Items.BUCKET;
     }
 
     @Override
-    public void openInventory() {
-        // TODO Auto-generated method stub
-
+    public String getName() {
+        return this.customName != null ? this.customName : "tile.worktable.name";
     }
 
     @Override
-    public void closeInventory() {
-        // TODO Auto-generated method stub
+    public boolean hasCustomName() {
+        return this.customName != null && this.customName.length() > 0;
+    }
 
+    @Override
+    public SPacketUpdateTileEntity getUpdatePacket() {
+        NBTTagCompound tag = new NBTTagCompound();
+        this.writeToNBT(tag);
+        return new SPacketUpdateTileEntity(pos, 1, tag);
+    }
+
+    @Override
+    public void onDataPacket(NetworkManager netManager, SPacketUpdateTileEntity packet) {
+        readFromNBT(packet.getNbtCompound());
     }
 }

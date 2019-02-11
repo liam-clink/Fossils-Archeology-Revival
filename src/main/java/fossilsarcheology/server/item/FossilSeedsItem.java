@@ -1,140 +1,130 @@
 package fossilsarcheology.server.item;
 
-import java.util.List;
-import java.util.Random;
-
-import net.minecraft.client.renderer.texture.IIconRegister;
+import fossilsarcheology.server.block.FABlockRegistry;
+import fossilsarcheology.server.block.TallFlowerBlock;
+import fossilsarcheology.server.block.TempskyaBlock;
+import fossilsarcheology.server.tab.FATabRegistry;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.*;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import fossilsarcheology.server.block.BlockTempskya;
-import fossilsarcheology.server.block.FABlockRegistry;
+import java.util.Random;
 
-public class FossilSeedsItem extends Item
+public class FossilSeedsItem extends Item {
+	public static final String[] fossilSeeds = new String[]{"dillhoffia", "sarracina", "cephalotaxus", "licopodiophyta", "paleopanax", "zamites", "bennettitales", "welwitschia", "horsetail", "tempskya", "vaccinium", "osmunda", "crataegus", "florissantia", "ephedra"};
+	public final boolean isFossil;
 
-{
-    private static final String[] fossilSeeds = new String[]{"dillhoffia", "sarracina", "cephalotaxus", "licopodiophyta", "paleopanax", "zamites", "bennettitales", "welwitschia", "horsetail", "tempskya", "vaccinium", "osmunda", "crataegus", "florissantia", "ephedra"};
-    public boolean isFossil;
-    private IIcon[] textures;
+	public FossilSeedsItem(boolean isFossil) {
+		super();
+		this.setHasSubtypes(true);
+		this.isFossil = isFossil;
+		this.setCreativeTab(FATabRegistry.ITEMS);
+		this.setTranslationKey(isFossil ? "fossilseed" : "seed");
+	}
 
-    public FossilSeedsItem(boolean isFossil) {
-        super();
-        this.setHasSubtypes(true);
-        this.isFossil = isFossil;
-    }
+	@Override
+	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> list) {
+		if (this.isInCreativeTab(tab)) {
+			for (int i = 0; i < fossilSeeds.length; ++i) {
+				list.add(new ItemStack(this, 1, i));
+			}
+		}
+	}
 
-    @Override
-    public void getSubItems(Item item, CreativeTabs creativeTabs, List list) {
-        for (int i = 0; i < fossilSeeds.length; ++i) {
-            list.add(new ItemStack(item, 1, i));
-        }
-    }
+	@SuppressWarnings("deprecation")
+	@Override
+	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		ItemStack stack = player.getHeldItem(hand);
+		if (!isFossil && player.canPlayerEdit(pos, facing, stack) && player.canPlayerEdit(pos.up(), facing, stack)) {
+			if (canPlant(world.getBlockState(pos)) && world.isAirBlock(pos.up()) && (world.getBlockState(pos).getBlock() != FABlockRegistry.WELWITSCHIA_FLOWER)) {
+				if (this.placePlantBlock(stack, world, pos.getX(), pos.getY(), pos.getZ(), new Random())) {
+					world.playSound(player, pos, FABlockRegistry.DILLHOFFIA_FLOWER.getSoundType().getBreakSound(), SoundCategory.BLOCKS, 1F, new Random().nextFloat() * 0.1F + 0.8F);
+				}
+				stack.shrink(1);
+				return EnumActionResult.SUCCESS;
+			} else {
+				return EnumActionResult.PASS;
+			}
+		} else {
+			return EnumActionResult.PASS;
+		}
+	}
 
-    @Override
-    public void registerIcons(IIconRegister iconRegister) {
-        textures = new IIcon[fossilSeeds.length];
-        for (int i = 0; i < fossilSeeds.length; ++i) {
-            if (isFossil) {
-                textures[i] = iconRegister.registerIcon("fossil:" + "plants/fossilSeed_" + fossilSeeds[i]);
-            } else {
-                textures[i] = iconRegister.registerIcon("fossil:" + "plants/seed_" + fossilSeeds[i]);
-            }
-        }
-    }
+	public boolean canPlant(IBlockState state) {
+		return state.getBlock() == net.minecraft.init.Blocks.GRASS || state.getBlock() == net.minecraft.init.Blocks.DIRT || state.getBlock() == net.minecraft.init.Blocks.FARMLAND;
+	}
 
-    @Override
-    public IIcon getIconFromDamage(int meta) {
-        if (meta < 0 || meta >= textures.length) {
-            meta = 0;
-        }
-        return textures[meta];
-    }
+	private boolean placePlantBlock(ItemStack stack, World world, int x, int y, int z, Random rand) {
+		switch (stack.getItemDamage()) {
+			case 0:
+				world.setBlockState(new BlockPos(x, y + 1, z), FABlockRegistry.DILLHOFFIA_FLOWER.getDefaultState());
+				return true;
+			case 1:
+				world.setBlockState(new BlockPos(x, y + 1, z), FABlockRegistry.SARRACENIA_FLOWER.getDefaultState());
+				world.setBlockState(new BlockPos(x, y + 2, z), FABlockRegistry.SARRACENIA_FLOWER.getDefaultState().withProperty(TallFlowerBlock.HALF, TallFlowerBlock.EnumBlockHalf.UPPER));
+				return true;
+			case 2:
+				world.setBlockState(new BlockPos(x, y + 1, z), FABlockRegistry.CEPHALOTAXUS_FLOWER.getDefaultState());
+				return true;
+			case 3:
+				world.setBlockState(new BlockPos(x, y + 1, z), FABlockRegistry.LICOPODIOPHYTA_FLOWER.getDefaultState());
+				return true;
+			case 4:
+				world.setBlockState(new BlockPos(x, y + 1, z), FABlockRegistry.PALEOPANAX_FLOWER.getDefaultState());
+				world.setBlockState(new BlockPos(x, y + 2, z), FABlockRegistry.PALEOPANAX_FLOWER.getDefaultState().withProperty(TallFlowerBlock.HALF, TallFlowerBlock.EnumBlockHalf.UPPER));
+				return true;
+			case 5:
+				world.setBlockState(new BlockPos(x, y + 1, z), FABlockRegistry.ZAMITES_FLOWER.getDefaultState());
+				return true;
+			case 6:
+				world.setBlockState(new BlockPos(x, y + 1, z), FABlockRegistry.BENNETTITALES_SMALL_FLOWER.getDefaultState());
+				return true;
+			case 7:
+				world.setBlockState(new BlockPos(x, y + 1, z), FABlockRegistry.WELWITSCHIA_FLOWER.getDefaultState());
+				return true;
+			case 8:
+				world.setBlockState(new BlockPos(x, y + 1, z), FABlockRegistry.HORSETAIL_SMALL_FLOWER.getDefaultState());
+				return true;
+			case 9:
+				if (FABlockRegistry.TEMPSKYA_FLOWER.canPlaceBlockAt(world, new BlockPos(x, y + 1, z))) {
+					world.setBlockState(new BlockPos(x, y + 1, z), FABlockRegistry.TEMPSKYA_FLOWER.getDefaultState().withProperty(TempskyaBlock.LAYER, 0), 2);
+					world.setBlockState(new BlockPos(x, y + 2, z), FABlockRegistry.TEMPSKYA_FLOWER.getDefaultState().withProperty(TempskyaBlock.LAYER, 1), 2);
+					world.setBlockState(new BlockPos(x, y + 3, z), FABlockRegistry.TEMPSKYA_FLOWER.getDefaultState().withProperty(TempskyaBlock.LAYER, 2), 2);
+					world.setBlockState(new BlockPos(x, y + 4, z), FABlockRegistry.TEMPSKYA_FLOWER.getDefaultState().withProperty(TempskyaBlock.LAYER, 3), 2);
+					return true;
+				}
+			case 10:
+				world.setBlockState(new BlockPos(x, y + 1, z), FABlockRegistry.VACCINIUM_FLOWER.getDefaultState());
+				return true;
+			case 11:
+				world.setBlockState(new BlockPos(x, y + 1, z), FABlockRegistry.OSMUNDA_FLOWER.getDefaultState());
+				return true;
+			case 12:
+				world.setBlockState(new BlockPos(x, y + 1, z), FABlockRegistry.CRATAEGUS_FLOWER.getDefaultState());
+				world.setBlockState(new BlockPos(x, y + 2, z), FABlockRegistry.CRATAEGUS_FLOWER.getDefaultState().withProperty(TallFlowerBlock.HALF, TallFlowerBlock.EnumBlockHalf.UPPER));
+				return true;
+			case 13:
+				world.setBlockState(new BlockPos(x, y + 1, z), FABlockRegistry.FLORISSANTIA_FLOWER.getDefaultState());
+				return true;
+			case 14:
+				world.setBlockState(new BlockPos(x, y + 1, z), FABlockRegistry.EPENDRA_FLOWER.getDefaultState());
+				return true;
+		}
+		return false;
+	}
 
-    @Override
-    public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int i, float a, float b, float c) {
-        if (!isFossil && player.canPlayerEdit(x, y, z, i, stack) && player.canPlayerEdit(x, y + 1, z, i, stack)) {
-            if (Blocks.sapling.canBlockStay(world, x, y, z) && world.isAirBlock(x, y + 1, z) && world.getBlock(x, y, z) != FABlockRegistry.INSTANCE.welwitschia) {
-                if(this.placePlantBlock(stack, world, x, y, z, new Random())){
-                    world.playSound((double) x + 0.5D, (double) y + 0.5D, (double) z + 0.5D, FABlockRegistry.INSTANCE.dillhoffia.stepSound.getBreakSound(), 1F, new Random().nextFloat() * 0.1F + 0.8F, false);
-                }
-                --stack.stackSize;
-                return true;
-            } else {
-                return false;
-            }
-        } else {
-            return false;
-        }
-    }
+	@Override
+	public String getTranslationKey(ItemStack itemStack) {
+		int meta = itemStack.getItemDamage();
+		if (meta < 0 || meta >= fossilSeeds.length) {
+			meta = 0;
+		}
 
-    private boolean placePlantBlock(ItemStack stack, World world, int x, int y, int z, Random rand) {
-        switch (stack.getItemDamage()) {
-            case 0:
-                world.setBlock(x, y + 1, z, FABlockRegistry.INSTANCE.dillhoffia);
-               return true;
-            case 1:
-                world.setBlock(x, y + 1, z, FABlockRegistry.INSTANCE.sarracina);
-                world.setBlock(x, y + 2, z, FABlockRegistry.INSTANCE.sarracina, 8, 3);
-               return true;
-            case 2:
-                world.setBlock(x, y + 1, z, FABlockRegistry.INSTANCE.cephalotaxus);
-               return true;
-            case 3:
-                world.setBlock(x, y + 1, z, FABlockRegistry.INSTANCE.licopodiophyta);
-               return true;
-            case 4:
-                world.setBlock(x, y + 1, z, FABlockRegistry.INSTANCE.paleopanax);
-                world.setBlock(x, y + 2, z, FABlockRegistry.INSTANCE.paleopanax, 8, 3);
-               return true;
-            case 5:
-                world.setBlock(x, y + 1, z, FABlockRegistry.INSTANCE.zamites);
-               return true;
-            case 6:
-                world.setBlock(x, y + 1, z, FABlockRegistry.INSTANCE.bennettitales_small);
-               return true;
-            case 7:
-                world.setBlock(x, y + 1, z, FABlockRegistry.INSTANCE.welwitschia);
-               return true;
-            case 8:
-                world.setBlock(x, y + 1, z, FABlockRegistry.INSTANCE.horsetail_small);
-                return true;
-            case 9:
-                if(((BlockTempskya)FABlockRegistry.INSTANCE.tempskya).canPlaceBlockAt(world, x, y + 1, z)){
-                	((BlockTempskya)FABlockRegistry.INSTANCE.tempskya).makeTempskya(world, x, y + 1, z);
-                	return true;
-                }
-            case 10:
-                world.setBlock(x, y + 1, z, FABlockRegistry.INSTANCE.vaccinium);
-                return true;
-            case 11:
-                world.setBlock(x, y + 1, z, FABlockRegistry.INSTANCE.osmunda);
-                return true;
-            case 12:
-                world.setBlock(x, y + 1, z, FABlockRegistry.INSTANCE.crataegus);
-                world.setBlock(x, y + 2, z, FABlockRegistry.INSTANCE.crataegus, 8, 3);
-                return true;
-            case 13:
-                world.setBlock(x, y + 1, z, FABlockRegistry.INSTANCE.florissantia);
-                return true;
-            case 14:
-                world.setBlock(x, y + 1, z, FABlockRegistry.INSTANCE.ephedra);
-                return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getUnlocalizedName(ItemStack itemStack) {
-        int meta = itemStack.getItemDamage();
-        if (meta < 0 || meta >= fossilSeeds.length) {
-            meta = 0;
-        }
-
-        return super.getUnlocalizedName() + "." + fossilSeeds[meta];
-    }
+		return super.getTranslationKey() + "_" + fossilSeeds[meta];
+	}
 }

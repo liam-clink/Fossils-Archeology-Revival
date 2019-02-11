@@ -1,0 +1,7 @@
+{
+  "parent": "block/door_top_rh",
+  "textures": {
+    "bottom": "fossil:blocks/palm_door_bottom",
+    "top": "fossil:blocks/palm_door_top"
+  }
+}

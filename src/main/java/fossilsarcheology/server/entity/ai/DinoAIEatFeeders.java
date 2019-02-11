@@ -1,147 +1,134 @@
 package fossilsarcheology.server.entity.ai;
 
+import fossilsarcheology.server.block.entity.TileEntityFeeder;
+import fossilsarcheology.server.entity.prehistoric.EntityPrehistoric;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.math.BlockPos;
+
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.util.ChunkCoordinates;
-import fossilsarcheology.server.block.BlockFeeder;
-import fossilsarcheology.server.block.entity.TileEntityFeeder;
-import fossilsarcheology.server.entity.EntityPrehistoric;
-import fossilsarcheology.server.entity.EntityPrehistoricSwimming;
-
 public class DinoAIEatFeeders extends EntityAIBase {
-	private ChunkCoordinates targetBlock;
-	private EntityPrehistoric prehistoric;
-	private double speed;
-	private BlockSorter targetSorter;
-	private int feedingTicks;
+    private static final int RADIUS = 8;
 
-	public DinoAIEatFeeders(EntityPrehistoric prehistoric, double speed) {
-		super();
-		this.prehistoric = prehistoric;
-		this.speed = speed;
-		this.targetSorter = new BlockSorter(this, prehistoric);
-		this.setMutexBits(1);
-	}
+    private BlockPos targetBlock = null;
+    private final EntityPrehistoric entity;
+    private final BlockSorter targetSorter;
+    private int feedingTicks;
 
-	@Override
-	public boolean shouldExecute() {
+    public DinoAIEatFeeders(EntityPrehistoric entity) {
+        super();
+        this.entity = entity;
+        this.targetSorter = new BlockSorter(entity);
+        this.setMutexBits(0);
+    }
 
-		if (prehistoric.getHunger() >= prehistoric.getMaxHunger()) {
-			return false;
-		}
-		if (prehistoric.isMovementBlocked()) {
-			return false;
-		}
-		if (prehistoric.getRNG().nextInt(1) != 0) {
-			return false;
-		}
-		int radius = 16;
-		List<ChunkCoordinates> allBlocks = new ArrayList<ChunkCoordinates>();
-		for (int x = (int) (prehistoric.posX) - (radius / 2); x < (int) (prehistoric.posX) + (radius / 2); x++) {
-			for (int y = (int) (prehistoric.posY) - (radius / 2); y < (int) (prehistoric.posY) + (radius / 2); y++) {
-				for (int z = (int) (prehistoric.posZ) - (radius / 2); z < (int) (prehistoric.posZ) + (radius / 2); z++) {
-					if (prehistoric.worldObj.getBlock(x, y, z) instanceof BlockFeeder && prehistoric.worldObj.getTileEntity(x, y, z) != null && prehistoric.worldObj.getTileEntity(x, y, z) instanceof TileEntityFeeder) {
-						TileEntityFeeder feeder = (TileEntityFeeder) prehistoric.worldObj.getTileEntity(x, y, z);
-						if (!feeder.isEmpty(prehistoric.type)) {
-							allBlocks.add(new ChunkCoordinates(x, y, z));
-						}
-					}
-				}
-			}
-		}
-		if (allBlocks.isEmpty()) {
-			return false;
-		}
-		Collections.sort(allBlocks, this.targetSorter);
-		this.targetBlock = allBlocks.get(0);
-		return true;
-	}
+    @Override
+    public boolean shouldExecute() {
+        if (this.entity.getHunger() >= this.entity.getMaxHunger()) {
+            return false;
+        }
+        if (this.entity.isMovementBlocked()) {
+            return false;
+        }
+        resetTarget();
+        if(targetBlock != null){
+            this.entity.shouldWander = false;
+        }
+        return true;
+    }
 
-	@Override
-	public boolean continueExecuting() {
-		if (targetBlock == null) {
-			return false;
-		}
-		if (prehistoric.getHunger() >= prehistoric.getMaxHunger()) {
+    private void resetTarget() {
+        List<BlockPos> allBlocks = new ArrayList<>();
+        for (BlockPos pos : BlockPos.getAllInBox(this.entity.getPosition().add(-RADIUS, -RADIUS, -RADIUS), this.entity.getPosition().add(RADIUS, RADIUS, RADIUS))) {
+            TileEntity entity = this.entity.world.getTileEntity(pos);
+            if (entity instanceof TileEntityFeeder) {
+                TileEntityFeeder feeder = (TileEntityFeeder) entity;
+                if (!feeder.isEmpty(this.entity.type) && this.entity.rayTraceFeeder(pos, false)) {
+                    allBlocks.add(pos);
 
-			return false;
-		}
+                }
+            }
+        }
+        if (!allBlocks.isEmpty()) {
+            allBlocks.sort(this.targetSorter);
+            this.targetBlock = allBlocks.get(0);
+        }
+    }
 
-		if (prehistoric.isMovementBlocked()) {
-			return false;
-		}
-		if (prehistoric.worldObj.getBlock(targetBlock.posX, targetBlock.posY, targetBlock.posZ) instanceof BlockFeeder && prehistoric.worldObj.getTileEntity(targetBlock.posX, targetBlock.posY, targetBlock.posZ) != null && prehistoric.worldObj.getTileEntity(targetBlock.posX, targetBlock.posY, targetBlock.posZ) instanceof TileEntityFeeder) {
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean shouldContinueExecuting() {
+        if (this.entity.getHunger() >= this.entity.getMaxHunger() * 0.75F) {
+            return false;
+        }
+        return !this.entity.isMovementBlocked() && !entity.shouldWander && targetBlock != null;
+    }
 
-	@Override
-	public void startExecuting() {
-		super.startExecuting();
-	}
+    public void resetTask(){
+        resetTarget();
+        if (this.entity.getHunger() >= this.entity.getMaxHunger() * 0.75F) {
+            this.entity.shouldWander = true;
+        }
+    }
 
-	@Override
-	public void updateTask() {
-		if (targetBlock != null) {
-			if (prehistoric.worldObj.getBlock(targetBlock.posX, targetBlock.posY, targetBlock.posZ) instanceof BlockFeeder && prehistoric.worldObj.getTileEntity(targetBlock.posX, targetBlock.posY, targetBlock.posZ) != null && prehistoric.worldObj.getTileEntity(targetBlock.posX, targetBlock.posY, targetBlock.posZ) instanceof TileEntityFeeder) {
-				TileEntityFeeder feeder = (TileEntityFeeder) prehistoric.worldObj.getTileEntity(targetBlock.posX, targetBlock.posY, targetBlock.posZ);
-				double d0 = prehistoric.getDistance(this.targetBlock.posX, this.targetBlock.posY, this.targetBlock.posZ);
-				if (d0 * d0 < 6) {
-					if (feedingTicks < 30 && !feeder.isEmpty(prehistoric.type)) {
-						feedingTicks++;
-						feeder.feedDinosaur(prehistoric);
-						prehistoric.setHealth(Math.min(prehistoric.getMaxHealth(), (int) (prehistoric.getHealth() + feedingTicks / 4)));
-						prehistoric.doFoodEffect();
-					} else {
-						feedingTicks = 0;
-						targetBlock = null;
-						resetTask();
-					}
-					return;
-				} else {
-						if (this.prehistoric.isAquatic()) {
-							((EntityPrehistoricSwimming) prehistoric).currentTarget = new ChunkCoordinates((int) this.targetBlock.posX, (int) this.targetBlock.posY, (int) this.targetBlock.posZ);
-						} else {
-							if (prehistoric.getNavigator().noPath()) {
-							this.prehistoric.getNavigator().tryMoveToXYZ(this.targetBlock.posX, this.targetBlock.posY, this.targetBlock.posZ, 1D);
-						}
-					}
-				}
-			}
-		}
-	}
+    @Override
+    public void updateTask() {
+        if (this.targetBlock != null) {
+            TileEntity entity = this.entity.world.getTileEntity(this.targetBlock);
+            this.entity.getNavigator().tryMoveToXYZ(this.targetBlock.getX() + 0.5D, this.targetBlock.getY(), this.targetBlock.getZ() + 0.5D, 1D);
+            if (entity instanceof TileEntityFeeder) {
+                TileEntityFeeder feeder = (TileEntityFeeder) entity;
+                double distance = this.entity.getDistance(this.targetBlock.getX(), this.targetBlock.getY(), this.targetBlock.getZ());
+                if (distance < Math.max(this.entity.getEntityBoundingBox().getAverageEdgeLength() * 2, 1.5F)) {
+                    if (this.feedingTicks < 30 && !feeder.isEmpty(this.entity.type)) {
+                        this.feedingTicks++;
+                        feeder.feedDinosaur(this.entity);
+                        this.entity.setHealth(Math.min(this.entity.getMaxHealth(), (int) (this.entity.getHealth() + this.feedingTicks / 4)));
+                        this.entity.doFoodEffect();
+                    } else {
+                        this.feedingTicks = 0;
+                        this.targetBlock = null;
+                        this.resetTask();
+                        return;
+                    }
+                } else {
+                    this.feedingTicks = 0;
+                    this.targetBlock = null;
+                    this.resetTask();
+                    return;
+                }
+            }
+            if (!this.entity.rayTraceFeeder(targetBlock, false)) {
+                this.targetBlock = null;
+                this.resetTask();
+                return;
+            }
 
-	public class BlockSorter implements Comparator {
-		final EntityAIBase ai;
-		private Entity entity;
+        }
+    }
 
-		public BlockSorter(EntityAIBase ai, Entity entity) {
-			this.ai = ai;
-			this.entity = entity;
-		}
+    public class BlockSorter implements Comparator<BlockPos> {
+        private final Entity entity;
 
-		public int compareBlocks(ChunkCoordinates var1, ChunkCoordinates var2) {
-			double var3 = this.getDistanceSqToVec(var1);
-			double var5 = this.getDistanceSqToVec(var2);
-			return var3 < var5 ? -1 : (var3 > var5 ? 1 : 0);
-		}
+        public BlockSorter(Entity entity) {
+            this.entity = entity;
+        }
 
-		@Override
-		public int compare(Object var1, Object var2) {
-			return this.compareBlocks((ChunkCoordinates) var1, (ChunkCoordinates) var2);
-		}
+        @Override
+        public int compare(BlockPos pos1, BlockPos pos2) {
+            double distance1 = this.getDistance(pos1);
+            double distance2 = this.getDistance(pos2);
+            return Double.compare(distance1, distance2);
+        }
 
-		public double getDistanceSqToVec(ChunkCoordinates vec3) {
-			double d0 = entity.posX - vec3.posX;
-			double d1 = entity.posY - vec3.posY;
-			double d2 = entity.posZ - vec3.posZ;
-			return d0 * d0 + d1 * d1 + d2 * d2;
-		}
-	}
+        private double getDistance(BlockPos pos) {
+            double deltaX = this.entity.posX - (pos.getX() + 0.5);
+            double deltaY = this.entity.posY + this.entity.getEyeHeight() - (pos.getY() + 0.5);
+            double deltaZ = this.entity.posZ - (pos.getZ() + 0.5);
+            return deltaX * deltaX + deltaY * deltaY + deltaZ * deltaZ;
+        }
+    }
 }

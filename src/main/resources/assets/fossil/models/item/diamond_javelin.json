@@ -1,0 +1,6 @@
+{
+  "parent": "fossil:item/javelin",
+  "textures": {
+    "layer0": "fossil:items/weapon/diamond_javelin"
+  }
+}

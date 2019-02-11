@@ -1,27 +1,31 @@
 package fossilsarcheology.server.entity.ai;
 
-import fossilsarcheology.server.entity.EntityPrehistoric;
+import fossilsarcheology.server.entity.prehistoric.EntityPrehistoric;
+import fossilsarcheology.server.entity.prehistoric.EntityPrehistoricSwimming;
+import fossilsarcheology.server.entity.prehistoric.OrderType;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.pathfinding.PathNavigate;
-import net.minecraft.util.MathHelper;
+import net.minecraft.pathfinding.PathNodeType;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-import fossilsarcheology.server.enums.EnumOrderType;
 
 public class DinoAIFollowOwner extends EntityAIBase {
-	private EntityPrehistoric prehistoric;
+	final World theWorld;
+	final float maxDist;
+	final float minDist;
+	private final EntityPrehistoric prehistoric;
 	private EntityLivingBase theOwner;
-	World theWorld;
-	private double speed;
-	private PathNavigate petPathfinder;
+	private final double speed;
+	private final PathNavigate petPathfinder;
 	private int counter;
-	float maxDist;
-	float minDist;
-	private boolean avoidsWater;
 
-	public DinoAIFollowOwner(EntityPrehistoric prehistoric, double speed, float minDist, float maxDist) {
+    public DinoAIFollowOwner(EntityPrehistoric prehistoric, double speed, float minDist, float maxDist) {
 		this.prehistoric = prehistoric;
-		this.theWorld = prehistoric.worldObj;
+		this.theWorld = prehistoric.world;
 		this.speed = speed;
 		this.petPathfinder = prehistoric.getNavigator();
 		this.minDist = minDist;
@@ -32,14 +36,17 @@ public class DinoAIFollowOwner extends EntityAIBase {
 	/**
 	 * Returns whether the EntityAIBase should begin execution.
 	 */
-	public boolean shouldExecute() {
+	@Override
+    public boolean shouldExecute() {
 		EntityLivingBase entitylivingbase = this.prehistoric.getOwner();
 
 		if (entitylivingbase == null) {
 			return false;
-		} else if (this.prehistoric.currentOrder != EnumOrderType.FOLLOW) {
+		} else if (this.prehistoric.currentOrder != OrderType.FOLLOW) {
 			return false;
-		} else if (this.prehistoric.getDistanceSqToEntity(entitylivingbase) < (double) (this.minDist * this.minDist)) {
+		} else if (entitylivingbase.isRidingOrBeingRiddenBy(this.prehistoric)) {
+			return false;
+		} else if (this.prehistoric.getDistanceSq(entitylivingbase) < (double) (this.minDist * this.minDist)) {
 			return false;
 		} else {
 			this.theOwner = entitylivingbase;
@@ -47,14 +54,16 @@ public class DinoAIFollowOwner extends EntityAIBase {
 		}
 	}
 
-	public boolean continueExecuting() {
-		return !this.petPathfinder.noPath() && this.prehistoric.getDistanceSqToEntity(this.theOwner) > (double) (this.maxDist * this.maxDist) && !this.prehistoric.isSitting();
+	@Override
+    public boolean shouldContinueExecuting() {
+		return !this.petPathfinder.noPath() && this.prehistoric.getDistanceSq(this.theOwner) > (double) (this.maxDist * this.maxDist) && !this.prehistoric.isSitting();
 	}
 
-	public void startExecuting() {
+	@Override
+    public void startExecuting() {
 		this.counter = 0;
-		this.avoidsWater = this.prehistoric.getNavigator().getAvoidsWater();
-		this.prehistoric.getNavigator().setAvoidsWater(false);
+        boolean avoidsWater = this.prehistoric.getPathPriority(PathNodeType.WATER) == 0;
+		this.prehistoric.setPathPriority(PathNodeType.WATER, 0.0F);
 		if (this.prehistoric.isSitting()) {
 			this.prehistoric.setSitting(false);
 		}
@@ -63,33 +72,49 @@ public class DinoAIFollowOwner extends EntityAIBase {
 		}
 	}
 
-	public void resetTask() {
+	@Override
+    public void resetTask() {
 		this.theOwner = null;
-		this.petPathfinder.clearPathEntity();
-		this.prehistoric.getNavigator().setAvoidsWater(this.avoidsWater);
+		this.petPathfinder.clearPath();
+		this.prehistoric.setPathPriority(PathNodeType.WATER, 0.0F);
 	}
 
-	public void updateTask() {
+	private boolean isEmptyBlock(BlockPos pos) {
+		IBlockState iblockstate = this.theWorld.getBlockState(pos);
+		return iblockstate.getMaterial() == Material.AIR || !iblockstate.isFullCube();
+	}
+
+	@Override
+    public void updateTask() {
 		this.prehistoric.getLookHelper().setLookPositionWithEntity(this.theOwner, 10.0F, (float) this.prehistoric.getVerticalFaceSpeed());
 
 		if (!this.prehistoric.isSitting()) {
 			if (--this.counter <= 0) {
 				this.counter = 10;
-
-				if (!this.petPathfinder.tryMoveToEntityLiving(this.theOwner, this.speed)) {
+				boolean move = this.prehistoric instanceof EntityPrehistoricSwimming ? this.prehistoric.getNavigator().tryMoveToXYZ(this.theOwner.posX, this.theOwner.posY, this.theOwner.posZ, 1.0) : this.petPathfinder.tryMoveToEntityLiving(this.theOwner, this.speed);
+				if (!move) {
 					if (!this.prehistoric.getLeashed()) {
-						if (this.prehistoric.getDistanceSqToEntity(this.theOwner) >= 144.0D) {
-							int i = MathHelper.floor_double(this.theOwner.posX) - 2;
-							int j = MathHelper.floor_double(this.theOwner.posZ) - 2;
-							int k = MathHelper.floor_double(this.theOwner.boundingBox.minY);
+						if (this.prehistoric.getDistanceSq(this.theOwner) >= 144.0D) {
+							int i = MathHelper.floor(this.theOwner.posX) - 2;
+							int j = MathHelper.floor(this.theOwner.posZ) - 2;
+							int k = MathHelper.floor(this.theOwner.getEntityBoundingBox().minY);
 
 							for (int l = 0; l <= 4; ++l) {
 								for (int i1 = 0; i1 <= 4; ++i1) {
-									if ((l < 1 || i1 < 1 || l > 3 || i1 > 3) && World.doesBlockHaveSolidTopSurface(this.theWorld, i + l, k - 1, j + i1) && !this.theWorld.getBlock(i + l, k, j + i1).isNormalCube() && !this.theWorld.getBlock(i + l, k + 1, j + i1).isNormalCube()) {
-										this.prehistoric.setLocationAndAngles((double) ((float) (i + l) + 0.5F), (double) k, (double) ((float) (j + i1) + 0.5F), this.prehistoric.rotationYaw, this.prehistoric.rotationPitch);
-										this.petPathfinder.clearPathEntity();
-										return;
+									if(this.prehistoric instanceof EntityPrehistoricSwimming){
+										if ((l < 1 || i1 < 1 || l > 3 || i1 > 3) && (this.theWorld.getBlockState(new BlockPos(i + l, k - 1, j + i1)).isOpaqueCube() || this.theWorld.getBlockState(new BlockPos(i + l, k - 1, j + i1)).getMaterial() == Material.WATER) && this.isEmptyBlock(new BlockPos(i + l, k, j + i1)) && this.isEmptyBlock(new BlockPos(i + l, k + 1, j + i1))) {
+											this.prehistoric.setLocationAndAngles((double) ((float) (i + l) + 0.5F), (double) k, (double) ((float) (j + i1) + 0.5F), this.prehistoric.rotationYaw, this.prehistoric.rotationPitch);
+											this.petPathfinder.clearPath();
+											return;
+										}
+									}else{
+										if ((l < 1 || i1 < 1 || l > 3 || i1 > 3) && this.theWorld.getBlockState(new BlockPos(i + l, k - 1, j + i1)).isOpaqueCube() && this.isEmptyBlock(new BlockPos(i + l, k, j + i1)) && this.isEmptyBlock(new BlockPos(i + l, k + 1, j + i1))) {
+											this.prehistoric.setLocationAndAngles((double) ((float) (i + l) + 0.5F), (double) k, (double) ((float) (j + i1) + 0.5F), this.prehistoric.rotationYaw, this.prehistoric.rotationPitch);
+											this.petPathfinder.clearPath();
+											return;
+										}
 									}
+
 								}
 							}
 						}

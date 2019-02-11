@@ -1,44 +1,44 @@
 package fossilsarcheology.client.render.entity;
 
-import fossilsarcheology.server.entity.EntityPrehistoric;
+import com.google.common.collect.Maps;
+import fossilsarcheology.server.entity.prehistoric.EntityPrehistoric;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 
-import org.lwjgl.opengl.GL11;
+import java.util.Map;
 
-public class RenderPrehistoric extends RenderLiving {
+public class RenderPrehistoric extends RenderLiving<EntityPrehistoric> {
+
+    private static final Map<String, ResourceLocation> LAYERED_LOCATION_CACHE = Maps.<String, ResourceLocation>newHashMap();
 
     public RenderPrehistoric(ModelBase model) {
-        super(model, 0.3F);
+        super(Minecraft.getMinecraft().getRenderManager(), model, 0.3F);
     }
 
     @Override
-    protected ResourceLocation getEntityTexture(Entity entity) {
-        if (entity instanceof EntityPrehistoric) {
-            EntityPrehistoric prehistoric = (EntityPrehistoric) entity;
-            return new ResourceLocation(prehistoric.getTexture());
-        } else {
-            return null;
+    protected ResourceLocation getEntityTexture(EntityPrehistoric entity) {
+        String s = entity.getTexture();
+        ResourceLocation resourcelocation = LAYERED_LOCATION_CACHE.get(s);
+        if (resourcelocation == null) {
+            resourcelocation = new ResourceLocation(s);
+            LAYERED_LOCATION_CACHE.put(s, resourcelocation);
         }
+        return resourcelocation;
     }
 
     @Override
-    protected void preRenderCallback(EntityLivingBase entity, float f) {
-        EntityPrehistoric dino = (EntityPrehistoric) entity;
-        GL11.glScalef(dino.getAgeScale(), dino.getAgeScale(), dino.getAgeScale());
-        GL11.glScalef(dino.getGender() == 1 ? dino.getMaleSize() : 1, dino.getGender() == 1 ? dino.getMaleSize() : 1, dino.getGender() == 1 ? dino.getMaleSize() : 1);
-
+    protected void preRenderCallback(EntityPrehistoric entity, float f) {
+        float scale = entity.getGender() == 1 ? entity.getMaleSize() * entity.getAgeScale() : 1 * entity.getAgeScale();
+        GlStateManager.scale(scale, scale, scale);
+        this.shadowSize = entity.width * 0.45F;
     }
 
-    public void superRenderEquippedItems(EntityLivingBase entity, float i) {
-        super.renderEquippedItems(entity, i);
+    @Override
+    protected float getDeathMaxRotation(EntityPrehistoric entity){
+        return entity.getDeathRotation();
     }
 
-    public RenderManager getRenderManager() {
-        return this.renderManager;
-    }
 }

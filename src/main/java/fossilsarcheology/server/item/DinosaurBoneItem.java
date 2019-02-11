@@ -1,57 +1,62 @@
 package fossilsarcheology.server.item;
 
-import fossilsarcheology.Revival;
-import fossilsarcheology.server.creativetab.FATabRegistry;
-import fossilsarcheology.server.enums.EnumDinoBones;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import fossilsarcheology.server.api.SubtypeRenderedItem;
+import fossilsarcheology.server.item.variant.DinosaurBoneType;
+import fossilsarcheology.server.tab.FATabRegistry;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.translation.I18n;
 
-import java.util.List;
+public class DinosaurBoneItem extends Item implements SubtypeRenderedItem {
+	private final String type;
 
-public class DinosaurBoneItem extends Item {
+	public DinosaurBoneItem(String type) {
+		super();
+		this.setMaxDamage(0);
+		this.setCreativeTab(FATabRegistry.ITEMS);
+		this.setHasSubtypes(true);
+		this.setTranslationKey("bone_" + type);
+		this.type = type;
+	}
 
-    public IIcon[] icons = new IIcon[EnumDinoBones.values().length];
-    String itemType;
+	@SuppressWarnings("deprecation")
+	@Override
+	public String getItemStackDisplayName(ItemStack stack) {
+		if (stack.getItemDamage() >= 0 && stack.getItemDamage() < DinosaurBoneType.values().length) {
+			DinosaurBoneType type = DinosaurBoneType.values()[stack.getItemDamage()];
+			if (this == FAItemRegistry.UNIQUE_ITEM) {
+				return I18n.translateToLocal(I18n.translateToLocal("item.bone_unique_item." + type.getResourceName() + ".name"));
+			} else {
+				return I18n.translateToLocalFormatted(this.getUnlocalizedNameInefficiently(stack) + ".name", I18n.translateToLocal("entity.fossil." + type.getResourceName() + ".name"));
+			}
+		}
+		return super.getItemStackDisplayName(stack);
+	}
 
-    public DinosaurBoneItem(String _itemType) {
-        super();
-        this.itemType = _itemType;
-        setMaxDamage(0);
+	@Override
+	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> list) {
+		if (this.isInCreativeTab(tab)) {
+			for (int meta = 0; meta < DinosaurBoneType.values().length; meta++) {
+				list.add(new ItemStack(this, 1, meta));
+			}
+		}
+	}
 
-        this.setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
-        setHasSubtypes(true);
-    }
+	@Override
+	public int[] getUsedSubtypes() {
+		int[] usedSubtypes = new int[DinosaurBoneType.values().length];
+		for (int i = 0; i < usedSubtypes.length; i++) {
+			usedSubtypes[i] = i;
+		}
+		return usedSubtypes;
+	}
 
-    @Override
-    public String getUnlocalizedName(ItemStack itemstack) {
-        return getUnlocalizedName() + "." + EnumDinoBones.values()[itemstack.getItemDamage()].name();
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public IIcon getIconFromDamage(int damage) {
-        return icons[damage];
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void registerIcons(IIconRegister icon) {
-        for (int i = 0; i < icons.length; i++) {
-            icons[i] = icon.registerIcon(Revival.MODID + ":" + "dinosaur_bones/" + this.itemType + "/" + EnumDinoBones.values()[i] + "_" + this.itemType);
-        }
-    }
-
-    @Override
-    public void getSubItems(Item item, CreativeTabs tab, List list) {
-        for (int i = 0; i < icons.length; i++) {
-            ItemStack itemstack = new ItemStack(item, 1, i);
-            list.add(itemstack);
-        }
-    }
-
+	@Override
+	public String getResource(ResourceLocation name, int metadata) {
+		DinosaurBoneType type = DinosaurBoneType.values()[metadata];
+		return "bones/" + type.getResourceName() + "/" + this.type;
+	}
 }

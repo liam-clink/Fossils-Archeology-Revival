@@ -1,198 +1,108 @@
 package fossilsarcheology.server.item;
 
+import fossilsarcheology.Revival;
+import fossilsarcheology.client.sound.FASoundRegistry;
 import fossilsarcheology.server.block.FABlockRegistry;
-import fossilsarcheology.server.creativetab.FATabRegistry;
-import fossilsarcheology.server.entity.mob.projectile.BehaviorJavelinDispense;
-import fossilsarcheology.server.handler.BucketEvent;
-import fossilsarcheology.server.handler.LocalizationStrings;
-import cpw.mods.fml.common.registry.GameRegistry;
-import fossilsarcheology.server.item.forge.*;
-import net.minecraft.block.BlockDispenser;
-import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
-import net.minecraft.item.ItemBucket;
-import net.minecraft.item.ItemStack;
-import net.minecraft.server.MinecraftServer;
-import net.minecraftforge.common.MinecraftForge;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.EnumHelper;
-import net.minecraftforge.fluids.FluidContainerRegistry;
-import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.event.RegistryEvent;
 
-import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 
-public enum FAItemRegistry {
-    INSTANCE;
+public class FAItemRegistry {
+	public static final List<Item> ITEMS = new ArrayList<>();
+	public static final ItemArmor.ArmorMaterial ANCIENT_HELMET_MATERIAL = EnumHelper.addArmorMaterial("AncientHelmet", "fossil:armor_ancient_helmet", 15, new int[]{2, 5, 6, 2}, 9, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F);
+	public static final ItemArmor.ArmorMaterial BONE = EnumHelper.addArmorMaterial("Bone", "fossil:armor_bone", 25, new int[]{2, 7, 6, 2}, 15, SoundEvents.ITEM_ARMOR_EQUIP_CHAIN, 0F);
+	public static final Item.ToolMaterial SCARAB_MATERIAL = EnumHelper.addToolMaterial("Scarab", 3, 1861, 8.0F, 4.0F, 25);
+	public static final Item.ToolMaterial TOOTH_DAGGER_MATERIAL = EnumHelper.addToolMaterial("toothDagger", 3, 250, 70.0F, 1.5F, 25);
+	public static final Item.ToolMaterial ICED_MEAT_MATERIAL = EnumHelper.addToolMaterial("IcedMeat", 1, 2, 1.0F, 3.5F, 10);
 
-    public ItemArmor.ArmorMaterial bone = EnumHelper.addArmorMaterial("Bone", 25, new int[]{2, 7, 6, 2}, 15);
-    public Item.ToolMaterial scarab = EnumHelper.addToolMaterial("Scarab", 3, 1861, 8.0F, 4.0F, 25);
-    public Item.ToolMaterial toothDaggerMaterial = EnumHelper.addToolMaterial("toothDagger", 3, 250, 70.0F, 1.5F, 25);
+	public static final BioFossilItem BIOFOSSIL = new BioFossilItem(false);
+	public static final BioFossilItem TAR_FOSSIL = new BioFossilItem(true);
+	public static final BasicItem DINOPEDIA = new BasicItem("dinopedia");
+	public static final BasicItem FAILURESAURUS_FLESH = new BasicItem("failuresaurus_flesh");
+	public static final BasicItem AMBER = new BasicItem("amber");
+	public static final BasicItem DOMINICAN_AMBER = new BasicItem("dominican_amber");
+	public static final BasicItem CHICKEN_ESSENCE = new BasicItem("chicken_essence");
+	public static final BasicItem SCARAB_GEM = new BasicItem("scarab_gem");
+	public static final BasicItem AQUATIC_SCARAB_GEM = new BasicItem("aquatic_scarab_gem");
+	public static final BasicAxeItem SCARAB_AXE = new BasicAxeItem(SCARAB_MATERIAL, "scarab_axe");
+	public static final BasicPickaxeItem SCARAB_PICKAXE = new BasicPickaxeItem(SCARAB_MATERIAL, "scarab_pickaxe");
+	public static final BasicSwordItem SCARAB_SWORD = new BasicSwordItem(SCARAB_MATERIAL, "scarab_sword");
+	public static final BasicHoeItem SCARAB_HOE = new BasicHoeItem(SCARAB_MATERIAL, "scarab_hoe");
+	public static final BasicShovelItem SCARAB_SHOVEL = new BasicShovelItem(SCARAB_MATERIAL, "scarab_shovel");
+	public static final BasicArmorItem SKULL_HELMET = new BasicArmorItem(BONE, 0, EntityEquipmentSlot.HEAD, "skull_helmet");
+	public static final BasicArmorItem RIBCAGE_CHESTPLATE = new BasicArmorItem(BONE, 1, EntityEquipmentSlot.CHEST, "skull_chestplate");
+	public static final BasicArmorItem SHIN_LEGGINGS = new BasicArmorItem(BONE, 2, EntityEquipmentSlot.LEGS, "shin_leggings");
+	public static final BasicArmorItem FEET_BOOTS = new BasicArmorItem(BONE, 3, EntityEquipmentSlot.FEET, "feet_boots");
+	public static final BasicItem ANCIENT_KEY = new BasicItem("ancient_key");
+	public static final BasicItem ANCIENT_CLOCK = new BasicItem("ancient_clock");
+	public static final BasicItem SHELL = new BasicItem("shell");
+	public static final BasicFoodItem SJL = new BasicFoodItem(8, 2, false, "sjl");
+	public static final BasicItem MAGIC_CONCH = new BasicItem("magic_conch");
+	public static final BasicFoodItem RAW_CHICKEN_SOUP = new BasicFoodItem(4, 2, false, "raw_chicken_soup");
+	public static final BasicFoodItem COOKED_CHICKEN_SOUP = new BasicFoodItem(8, 2, false, "cooked_chicken_soup");
+	public static final BasicFoodItem COOKED_EGG = new BasicFoodItem(4, 2, false, "cooked_egg");
+	public static final BasicItem RELIC_SCRAP = new BasicItem("relic_scrap");
+	public static final BasicItem POTTERY_SHARD = new BasicItem("pottery_shard");
+	public static final BasicItem PLANT_FOSSIL = new BasicItem("plant_fossil");
+	public static final BasicItem SKULL_STICK = new BasicItem("skull_stick");
+	public static final BasicSwordItem TOOTH_DAGGER = new BasicSwordItem(TOOTH_DAGGER_MATERIAL, "tooth_dagger");
+	public static final StoneTabletItem STONE_TABLET = new StoneTabletItem();
+	public static final WhipItem WHIP = new WhipItem();
+	public static final ToyBallItem TOY_BALL = new ToyBallItem();
+	public static final ToyScratchingPost TOY_SCRATCHING_POST = new ToyScratchingPost();
+	public static final ToyTetheredLog TOY_TETHERED_LOG = new ToyTetheredLog();
+	public static final JavelinItem WOODEN_JAVELIN = new JavelinItem(Item.ToolMaterial.WOOD, "wooden_javelin", false);
+	public static final JavelinItem STONE_JAVELIN = new JavelinItem(Item.ToolMaterial.STONE, "stone_javelin", false);
+	public static final JavelinItem IRON_JAVELIN = new JavelinItem(Item.ToolMaterial.IRON, "iron_javelin", false);
+	public static final JavelinItem GOLD_JAVELIN = new JavelinItem(Item.ToolMaterial.GOLD, "gold_javelin", false);
+	public static final JavelinItem DIAMOND_JAVELIN = new JavelinItem(Item.ToolMaterial.DIAMOND, "diamond_javelin", false);
+	public static final JavelinItem ANCIENT_JAVELIN = new JavelinItem(null, "ancient_javelin", true);
+	public static final BasicItem BROKEN_SWORD = new BasicItem("broken_sword");
+	public static final BasicItem BROKEN_HELMET = new BasicItem("broken_helmet");
+	public static final AncientSwordItem ANCIENT_SWORD = new AncientSwordItem();
+	public static final AncientHelmetItem ANCIENT_HELMET = new AncientHelmetItem();
+	public static final BasicSwordItem ICED_MEAT = new ItemFrozenMeat();
+	public static final FossilSeedsItem FOSSIL_SEED = new FossilSeedsItem(true);
+	public static final BasicItem FOSSIL_SEED_FERN = new BasicItem("fossil_seed_fern");
+	public static final BasicItem PALAE_SAPLING_FOSSIL = new BasicItem("fossil_sapling_palae");
+	public static final FossilSeedsItem SEED = new FossilSeedsItem(false);
+	public static final FernSeedItem FERN_SEED = new FernSeedItem();
+	//public static final Item TAR_BUCKET = new ItemBucket(FABlockRegistry.TAR).setTranslationKey("tar_bucket").setContainerItem(Items.BUCKET).setCreativeTab(FATabRegistry.ITEMS);
+	public static final BasicItem TARDROP = new BasicItem("tardrop");
+	public static final FossilRecordItem FOSSIL_RECORD_BONES = new FossilRecordItem("record_bones_desc", FASoundRegistry.RECORD_BONES, "record_bones");
+	public static final FossilRecordItem FOSSIL_RECORD_NANO_ANU = new FossilRecordItem("music.anu", FASoundRegistry.MUSIC_ANU, "record_anu");
+	public static final FossilRecordItem FOSSIL_RECORD_NANO_SCARAB = new FossilRecordItem("music.scarab", FASoundRegistry.MUSIC_SCARAB, "record_scarab");
+	public static final FossilRecordItem FOSSIL_RECORD_NANO_DISCOVERING = new FossilRecordItem("music.discovery", FASoundRegistry.MUSIC_DISCOVERY, "record_discovering");
+	public static final DinosaurBoneItem LEG_BONE = new DinosaurBoneItem("leg_bone");
+	public static final DinosaurBoneItem UNIQUE_ITEM = new DinosaurBoneItem("unique_item");
+	public static final DinosaurBoneItem FOOT = new DinosaurBoneItem("foot");
+	public static final DinosaurBoneItem SKULL = new DinosaurBoneItem("skull");
+	public static final DinosaurBoneItem ARM_BONE = new DinosaurBoneItem("arm_bone");
+	public static final DinosaurBoneItem RIBCAGE = new DinosaurBoneItem("ribcage");
+	public static final DinosaurBoneItem VERTEBRAE = new DinosaurBoneItem("vertebrae");
+	public static final ItemFossilDoor PALM_DOOR_ITEM = new ItemFossilDoor(FABlockRegistry.PALM_DOOR, "palm_door_item");
 
-    public Item biofossil;
-    public Item tarfossil;
-    public Item relic;
-    public Item stoneboard;
-    public Item brokenSword;
-    public Item ancientSword;
-    public Item brokenhelmet;
-    public Item ancienthelmet;
-    public Item potteryShards;
-    public Item skullStick;
-    public Item icedMeat;
-    public Item brokenSapling;
-    public Item fossilSeed;
-    public Item fossilSeed_fern;
-    public Item palaeSaplingFossil;
-    public Item seed;
-    public Item fernSeed;
-    public Item dinoPedia;
-    public Item archNotebook;
-    public Item whip;
-    public Item failuresaurusFlesh;
-    public Item tar_bucket;
-    public Item tardrop;
-    public Item emptyShell;
-    public Item sjl;
-    public Item magicConch;
-    public Item rawChickenSoup;
-    public Item cookedChickenSoup;
-    public Item chickenEssence;
-    public Item cookedEgg;
-    public Item amber;
-    public Item DominicanAmber;
-    public Item gem;
-    public Item gemAxe;
-    public Item gemPickaxe;
-    public Item gemSword;
-    public Item gemHoe;
-    public Item gemShovel;
-    public Item gem_blue;
-    public Item skullHelmet;
-    public Item ribCage;
-    public Item femurs;
-    public Item feet;
-    public Item ancientKey;
-    public Item ancientClock;
-    public Item toothDagger;
-    public Item woodjavelin;
-    public Item stonejavelin;
-    public Item ironjavelin;
-    public Item goldjavelin;
-    public Item diamondjavelin;
-    public Item ancientJavelin;
-    public Item toyBall;
-    public Item toyTetheredLog;
-    public Item toyScratchingPost;
-    public Item fossilrecordBones;
-    public Item recordNano_Anu;
-    public Item recordNano_Scarab;
-    public Item recordNano_Discovering;
-    public Item skull;
-    public Item dinoRibCage;
-    public Item claw;
-    public Item armBone;
-    public Item vertebrae;
-    public Item legBone;
-    public Item foot;
-    public Item dinosaurModels;
+	public static Item registerItem(RegistryEvent.Register<Item> event, Item item) {
+		String name = item.getTranslationKey().substring("item.".length());
+		item.setRegistryName(new ResourceLocation(Revival.MODID, name));
+		event.getRegistry().register(item);
+		ITEMS.add(item);
+		return item;
+	}
 
-    public void init() {
-        biofossil = new ItemBioFossil(false);
-        tarfossil = new ItemBioFossil(true);
-        DominicanAmber = new DominicanAmberItem();
-        gem_blue = new AquaticScarabGemItem().setUnlocalizedName("AquaticScarabGem");
-        relic = new ForgeItemItem("Relic_Scrap").setUnlocalizedName(LocalizationStrings.RELIC_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
-        stoneboard = new StoneBoardItem();
-        ancientSword = new AncientSwordItem().setUnlocalizedName(LocalizationStrings.ANCIENT_SWORD_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
-        brokenSword = new ForgeItemItem("Broken_Ancient_Sword").setMaxStackSize(1).setUnlocalizedName(LocalizationStrings.BROKEN_SWORD_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
-        fernSeed = new FernSeedItem(FABlockRegistry.INSTANCE.ferns);
-        ancienthelmet = new AncientHelmetItem(ItemArmor.ArmorMaterial.IRON, 3, 0).setUnlocalizedName(LocalizationStrings.ANCIENT_HELMET_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
-        brokenhelmet = new ForgeItemItem("Broken_Ancient_Helm").setMaxStackSize(1).setUnlocalizedName(LocalizationStrings.BROKEN_HELMET_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
-        skullStick = new ForgeItemItem("Skull_Stick").setUnlocalizedName(LocalizationStrings.SKULL_STICK_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
-        gem = new ForgeItemItem("Scarab_Gem").setUnlocalizedName(LocalizationStrings.SCARAB_GEM_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
-        gemAxe = new ForgeAxeItem(scarab, "Gem_Axe").setUnlocalizedName(LocalizationStrings.SCARAB_AXE_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
-        gemPickaxe = new ForgePickaxeItem(scarab, "Gem_Pickaxe").setUnlocalizedName(LocalizationStrings.SCARAB_PICKAXE_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
-        gemSword = new ForgeSwordItem(scarab, "Gem_Sword").setUnlocalizedName(LocalizationStrings.SCARAB_SWORD_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
-        gemHoe = new ForgeHoeItem(scarab, "Gem_Hoe").setUnlocalizedName(LocalizationStrings.SCARAB_HOE_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
-        gemShovel = new ForgeShovelItem(scarab, "Gem_Shovel").setUnlocalizedName(LocalizationStrings.SCARAB_SHOVEL_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
-        dinoPedia = new ForgeItemItem("Dinopedia").setUnlocalizedName(LocalizationStrings.DINOPEDIA_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
-        emptyShell = new ForgeItemItem("Empty_Shell").setUnlocalizedName(LocalizationStrings.EMPTY_SHELL_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
-        magicConch = new MagicConchItem().setUnlocalizedName(LocalizationStrings.MAGIC_CONCH_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
-        icedMeat = new IcedMeatItem(Item.ToolMaterial.EMERALD).setUnlocalizedName(LocalizationStrings.ICED_MEAT_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
-        amber = new AmberItem().setUnlocalizedName(LocalizationStrings.AMBER_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
-        woodjavelin = new JavelinItem(Item.ToolMaterial.WOOD, "Wooden_Javelin").setUnlocalizedName(LocalizationStrings.WOOD_JAVELIN_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
-        stonejavelin = new JavelinItem(Item.ToolMaterial.STONE, "Stone_Javelin").setUnlocalizedName(LocalizationStrings.STONE_JAVELIN_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
-        ironjavelin = new JavelinItem(Item.ToolMaterial.IRON, "Iron_Javelin").setUnlocalizedName(LocalizationStrings.IRON_JAVELIN_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
-        goldjavelin = new JavelinItem(Item.ToolMaterial.GOLD, "Gold_Javelin").setUnlocalizedName(LocalizationStrings.GOLD_JAVELIN_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
-        diamondjavelin = new JavelinItem(Item.ToolMaterial.EMERALD, "Diamond_Javelin").setUnlocalizedName(LocalizationStrings.DIAMOND_JAVELIN_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
-        ancientJavelin = new JavelinItem(scarab, "Ancient_Javelin").setUnlocalizedName(LocalizationStrings.ANCIENT_JAVELIN_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
-        toothDagger = new ToothDaggerItem(toothDaggerMaterial).setTextureName("fossil:toothDagger").setUnlocalizedName("toothDagger").setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
-        whip = new WhipItem().setUnlocalizedName(LocalizationStrings.WHIP_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
-        legBone = new DinosaurBoneItem("legBone").setUnlocalizedName(LocalizationStrings.LEGBONE_NAME);
-        claw = new DinosaurBoneItem("uniqueItem").setUnlocalizedName(LocalizationStrings.CLAW_NAME);
-        foot = new DinosaurBoneItem("foot").setUnlocalizedName(LocalizationStrings.FOOT_NAME);
-        skull = new DinosaurBoneItem("skull").setUnlocalizedName(LocalizationStrings.SKULL_NAME);
-        armBone = new DinosaurBoneItem("armBone").setUnlocalizedName(LocalizationStrings.ARM_BONE_NAME);
-        dinoRibCage = new DinosaurBoneItem("dinoRibCage").setUnlocalizedName(LocalizationStrings.DINO_RIB_CAGE_NAME);
-        vertebrae = new DinosaurBoneItem("vertebrae").setUnlocalizedName(LocalizationStrings.VERTEBRAE_NAME);
-        brokenSapling = new ForgeItemItem("fossilPlant").setUnlocalizedName(LocalizationStrings.BROKEN_SAPLING_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
-        failuresaurusFlesh = new ForgeItemItem("flesh").setUnlocalizedName(LocalizationStrings.FAILURESAURUS_FLESH_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
-        potteryShards = new ForgeItemItem("PotteryShard").setUnlocalizedName(LocalizationStrings.POTTERY_SHARDS).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
-        skullHelmet = new SkullHelmetItem(bone, 3, 0).setUnlocalizedName(LocalizationStrings.SKULL_HELMET_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
-        ribCage = new RibCageItem(bone, 3, 1).setUnlocalizedName(LocalizationStrings.RIBCAGE_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
-        femurs = new FemursItem(bone, 3, 2).setUnlocalizedName(LocalizationStrings.FEMURS_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
-        feet = new FeetItem(bone, 3, 3).setUnlocalizedName(LocalizationStrings.FEET_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
-        cookedChickenSoup = new ForgeItemItem("Cooked_Chicken_Soup").setUnlocalizedName(LocalizationStrings.COOKED_CHICKEN_SOUP_NAME).setMaxStackSize(1).setContainerItem(Items.bucket).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
-        rawChickenSoup = new ForgeItemItem("Raw_Chicken_Soup").setUnlocalizedName(LocalizationStrings.RAW_CHICKEN_SOUP_NAME).setMaxStackSize(1).setContainerItem(Items.bucket).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
-        chickenEssence = new ChickenEssItem(10, 0.0F, false, "Essence_Of_Chicken").setUnlocalizedName(LocalizationStrings.EOC_NAME).setContainerItem(Items.glass_bottle).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
-        cookedEgg = new ForgeFoodItem(4, 2.0F, false, "cooked_egg").setUnlocalizedName("cooked_egg").setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
-        sjl = new ForgeFoodItem(8, 2.0F, false, "Sio_Chiu_Le").setUnlocalizedName(LocalizationStrings.SJL_NAME).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
-        fossilrecordBones = new FossilRecordItem(LocalizationStrings.RECORD_BONES_NAME, "fossil:record_bones").setUnlocalizedName(LocalizationStrings.FOSSIL_RECORD_NAME);
-        recordNano_Anu = new FossilRecordItem(LocalizationStrings.FOSSIL_RECORD_NANO_ANU, "fossil:record_anu").setUnlocalizedName(LocalizationStrings.RECORD_BONES_NAME);
-        recordNano_Scarab = new FossilRecordItem("music.scarab", "fossil:record_scarab").setUnlocalizedName("record_scarab");
-        recordNano_Discovering = new FossilRecordItem("music.discovery", "fossil:record_discovering").setUnlocalizedName("record_discovery");
-        fossilSeed_fern = new ForgeItemItem("plants/fossilSeed_fern").setUnlocalizedName("fossilSeed_fern").setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
-        fossilSeed = new FossilSeedsItem(true).setUnlocalizedName("fossilSeed").setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
-        seed = new FossilSeedsItem(false).setUnlocalizedName("seed").setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
-        palaeSaplingFossil = new ForgeItemItem("Palae_Fossil").setUnlocalizedName("fossilSapling_palae").setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
-        ancientKey = new Item().setTextureName("fossil:Ancient_Key").setUnlocalizedName("ancientKey").setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
-        ancientClock = new Item().setTextureName("gold_ingot").setUnlocalizedName("ancientClock").setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
-        tardrop = new ForgeItemItem("tardrop").setUnlocalizedName("tardrop").setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
-        tar_bucket = new ItemBucket(FABlockRegistry.INSTANCE.tar).setUnlocalizedName("tar_bucket").setTextureName("fossil:bucket_tar").setContainerItem(Items.bucket).setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
-        toyBall = new ItemToyBall().setUnlocalizedName("toyBall").setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
-        toyTetheredLog = new ItemToyTetheredLog().setUnlocalizedName("toyTetheredLog").setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
-        toyScratchingPost = new ItemToyScratchingPost().setUnlocalizedName("toyScratchingPost").setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
-        FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluidStack("tar", FluidContainerRegistry.BUCKET_VOLUME), new ItemStack(tar_bucket), new ItemStack(Items.bucket));
-        BucketEvent.INSTANCE.buckets.put(FABlockRegistry.INSTANCE.tar, tar_bucket);
-        MinecraftForge.EVENT_BUS.register(BucketEvent.INSTANCE);
-        BlockDispenser.dispenseBehaviorRegistry.putObject(ancientJavelin, new BehaviorJavelinDispense(MinecraftServer.getServer(), -1));
-        BlockDispenser.dispenseBehaviorRegistry.putObject(woodjavelin, new BehaviorJavelinDispense(MinecraftServer.getServer(), 0));
-        BlockDispenser.dispenseBehaviorRegistry.putObject(stonejavelin, new BehaviorJavelinDispense(MinecraftServer.getServer(), 1));
-        BlockDispenser.dispenseBehaviorRegistry.putObject(ironjavelin, new BehaviorJavelinDispense(MinecraftServer.getServer(), 2));
-        BlockDispenser.dispenseBehaviorRegistry.putObject(diamondjavelin, new BehaviorJavelinDispense(MinecraftServer.getServer(), 3));
-        BlockDispenser.dispenseBehaviorRegistry.putObject(goldjavelin, new BehaviorJavelinDispense(MinecraftServer.getServer(), 4));
 
-        try {
-            for (Field f : getClass().getDeclaredFields()) {
-                Object obj = f.get(this);
-                if (obj instanceof Item) {
-                    registerItem((Item) obj);
-                } else if (obj instanceof Item[]) {
-                    for (Item item : (Item[]) obj) {
-                        registerItem(item);
-                    }
-                }
-            }
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
-    public void registerItem(Item item) {
-        String name = item.getUnlocalizedName();
-        String[] strings = name.split("\\.");
-        name = strings[strings.length - 1];
-
-        GameRegistry.registerItem(item, name);
-    }
+	public static Item registerItem(RegistryEvent.Register<Item> event, Item item, String registryName) {
+		item.setRegistryName(new ResourceLocation(Revival.MODID, registryName));
+		event.getRegistry().register(item);
+		ITEMS.add(item);
+		return item;
+	}
 }

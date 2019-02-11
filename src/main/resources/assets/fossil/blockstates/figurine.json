@@ -1,0 +1,11 @@
+{
+  "variants": {
+    "normal": {
+      "model": "fossil:figurine",
+      "y": -90
+    },
+    "inventory": {
+      "model": "fossil:figurine_0"
+    }
+  }
+}

@@ -1,15 +1,14 @@
 package fossilsarcheology.client.model;
 
-import fossilsarcheology.client.model.prehistoric.ModelUtils;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelBase;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.minecraft.entity.Entity;
 
 public class ModelFailuresaurus extends AdvancedModelBase {
-	public AdvancedModelRenderer neck;
-	public AdvancedModelRenderer floorbody;
-	public AdvancedModelRenderer mainbody;
-	public AdvancedModelRenderer head;
+	public final AdvancedModelRenderer neck;
+	public final AdvancedModelRenderer floorbody;
+	public final AdvancedModelRenderer mainbody;
+	public final AdvancedModelRenderer head;
 
 	public ModelFailuresaurus() {
 		this.textureWidth = 64;
@@ -27,7 +26,7 @@ public class ModelFailuresaurus extends AdvancedModelBase {
 		this.floorbody.setRotationPoint(0, 23.0F, 0);
 		this.floorbody.addBox(-5.0F, 0.0F, -7.0F, 10, 1, 14, 0.0F);
 		this.neck.addChild(this.head);
-        this.updateDefaultPose();
+		this.updateDefaultPose();
 	}
 
 	@Override
@@ -38,13 +37,15 @@ public class ModelFailuresaurus extends AdvancedModelBase {
 		this.floorbody.render(f5);
 	}
 
-	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
+	@Override
+    public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
 		this.resetToDefaultPose();
-        float bob = (float) (Math.sin(f * 0.025) * f1 * 0.025 - f1 * 1);
-        float bob2 = (float) (Math.sin(f * 0.025) * f1 * 0.025 - f1 * 1);
-        this.mainbody.setScale(1, 1, 1 - bob);
-        this.floorbody.setScale(1, 1, 1 - bob2);
-        ModelUtils.faceTargetMod(head, f3, f4, 1);
+		float bob = (float) (Math.sin(f * 0.025) * f1 * 0.025 - f1 * 1);
+		float bob2 = (float) (Math.sin(f * 0.025) * f1 * 0.025 - f1 * 1);
+		this.mainbody.setScale(1, 1, 1 - bob);
+		this.floorbody.setScale(1, 1, 1 - bob2);
+		head.rotateAngleY += f3 / (180F / (float) Math.PI);
+		head.rotateAngleX += f4 / (180F / (float) Math.PI);
 	}
 
 }

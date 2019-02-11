@@ -1,44 +1,21 @@
 package fossilsarcheology.server.item;
 
-import fossilsarcheology.Revival;
-import fossilsarcheology.server.creativetab.FATabRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import fossilsarcheology.server.api.DefaultRenderedItem;
+import fossilsarcheology.server.tab.FATabRegistry;
 import net.minecraft.item.ItemRecord;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 
-public class FossilRecordItem extends ItemRecord {
+public class FossilRecordItem extends ItemRecord implements DefaultRenderedItem {
 
-    /**
-     * The name of the record.
-     */
-    public final String recordName;
-    public final String texture;
+	public final String recordName;
 
-    public FossilRecordItem(String string, String texture) {
-        super(string);
-        this.recordName = string;
-        this.maxStackSize = 1;
-        this.texture = texture;
-        setCreativeTab(FATabRegistry.INSTANCE.tabFItems);
-    }
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void registerIcons(IIconRegister reg) {
-        this.itemIcon = reg.registerIcon(texture);
-    }
+	public FossilRecordItem(String string, SoundEvent sound, String name) {
+		super(name, sound);
+		this.recordName = string;
+		this.maxStackSize = 1;
+		setCreativeTab(FATabRegistry.ITEMS);
+		this.setTranslationKey(name);
 
-    /**
-     * Retrieves the resource location of the sound to play for this record.
-     *
-     * @param name The name of the record to play
-     * @return The resource location for the audio, null to use default.
-     */
-    @Override
-    public ResourceLocation getRecordResource(String name) {
-        return new ResourceLocation(Revival.MODID + ":" + this.recordName);
-    }
-
+	}
 }
