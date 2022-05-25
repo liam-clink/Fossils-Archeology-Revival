@@ -174,7 +174,6 @@ public class EntityMosasaurus extends EntityPrehistoricSwimming {
     @Override
     public void onLivingUpdate() {
         super.onLivingUpdate();
-        this.setHunger(1);
         if (this.getAttackTarget() != null) {
             if (canReachPrey()) {
                 this.attackEntityAsMob(this.getAttackTarget());
