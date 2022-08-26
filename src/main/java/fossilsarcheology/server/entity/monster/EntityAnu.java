@@ -320,18 +320,21 @@ public class EntityAnu extends EntityMob implements IRangedAttackMob {
             int spawnWitherChoice = this.getRNG().nextInt(350);
             int spawnBlazeChoice = this.getRNG().nextInt(300);
 
-            if (spikechoice == 0) {
-                this.playSound(SoundEvents.BLOCK_STONE_HIT, 1, 1);
-                new SpikesBlockWorldGen().generate(world, this.getRNG(), this.getPosition());
-            }
-            if (defensechoice == 0) {
-                this.playSound(SoundEvents.BLOCK_STONE_HIT, 1, 1);
-                if (!world.isRemote) {
-                    this.generateDefenseHutP1((int) this.posX, (int) this.posY, (int) this.posZ);
-                    this.generateDefenseHutP2((int) this.posX, (int) this.posY, (int) this.posZ);
-                    this.generateDefenseHutP2((int) this.posX, (int) this.posY + 1, (int) this.posZ);
-                    this.generateDefenseHutP2((int) this.posX, (int) this.posY + 2, (int) this.posZ);
-                    this.generateDefenseHutP1((int) this.posX, (int) this.posY + 4, (int) this.posZ);
+            if (Revival.CONFIG_OPTIONS.anuBlockPlacing) {
+
+                if (spikechoice == 0) {
+                    this.playSound(SoundEvents.BLOCK_STONE_HIT, 1, 1);
+                    new SpikesBlockWorldGen().generate(world, this.getRNG(), this.getPosition());
+                }
+                if (defensechoice == 0) {
+                    this.playSound(SoundEvents.BLOCK_STONE_HIT, 1, 1);
+                    if (!world.isRemote) {
+                        this.generateDefenseHutP1((int) this.posX, (int) this.posY, (int) this.posZ);
+                        this.generateDefenseHutP2((int) this.posX, (int) this.posY, (int) this.posZ);
+                        this.generateDefenseHutP2((int) this.posX, (int) this.posY + 1, (int) this.posZ);
+                        this.generateDefenseHutP2((int) this.posX, (int) this.posY + 2, (int) this.posZ);
+                        this.generateDefenseHutP1((int) this.posX, (int) this.posY + 4, (int) this.posZ);
+                    }
                 }
             }
             if (spawnPigmenChoice == 0) {

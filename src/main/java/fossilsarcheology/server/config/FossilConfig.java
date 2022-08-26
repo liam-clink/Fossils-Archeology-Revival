@@ -69,6 +69,7 @@ public class FossilConfig {
     public boolean intensivePathfinding = false;
     public boolean spawnVolcanoes = true;
     public int volcanoSpawnChance = 1;
+    public boolean anuBlockPlacing = true;
 
     public void init(Configuration config) {
         this.generatePrehistoricTrees = config.getBoolean("Generate Prehistoric Trees", "all", false, "True if Palaeoraphe, Calamites, Sigillaria, etc. Trees are to generate naturally");
@@ -137,5 +138,6 @@ public class FossilConfig {
         this.intensivePathfinding = config.getBoolean("Intensive Pathfinding", "all", false, "True if dinosaurs should use more expensive and accurate pathfinding techniques");
         this.spawnVolcanoes = config.getBoolean("Generate Volcano Biomes", "all", true, "Whether to generate volcano biomes or not");
         this.volcanoSpawnChance = config.getInt("Volcano Spawn Weight", "all", 1, 0, 10000, "Volcano Spawn Weight. Higher number = more common");
+        this.anuBlockPlacing = config.getBoolean("Anu block placing", "all", true, "True if Anu should be able to place blocks");
     }
 }
