@@ -29,8 +29,8 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 
@@ -42,7 +42,7 @@ public class Revival {
     public static final ReleaseType RELEASE_TYPE = ReleaseType.parseVersion(VERSION);
     public static final String LLIBRARY_VERSION = "1.7.17";
 
-    public static final Logger LOGGER = LoggerFactory.getLogger("fossils");
+    public static final Logger LOGGER = LogManager.getLogger("fossils");
 
     @SidedProxy(clientSide = "fossilsarcheology.client.ClientProxy", serverSide = "fossilsarcheology.server.ServerProxy")
     public static ServerProxy PROXY;
