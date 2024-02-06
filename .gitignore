@@ -1,3 +1,6 @@
+# vscode
+.vscode
+
 # eclipse
 bin
 *.launch
